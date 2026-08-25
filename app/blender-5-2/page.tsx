@@ -223,7 +223,7 @@ export default function Blender52Page() {
     <main className="b52-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="Blender 5.2 研究导航"><Link href="/">技术基线</Link><a href="#depth">介入深度</a><a href="#matrix-52">技术域</a><a href="#roadmap">路线图</a><a href="#sources">证据</a></nav>
+        <nav aria-label="Blender 5.2 研究导航"><Link href="/">技术基线</Link><a href="#matrix-52">技术域</a><a href="#roadmap">路线图</a><Link className="route-tab cost-route" href="/cost-model">成本模型</Link></nav>
         <span className="edition active-edition">Blender 5.2</span>
       </header>
 
