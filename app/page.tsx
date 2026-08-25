@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 type Status = 'ready' | 'partial' | 'research' | 'blocked';
 
 const statusMeta: Record<Status, { label: string; score: string }> = {
@@ -224,7 +226,7 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="#top" aria-label="返回顶部"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></a>
         <nav aria-label="研究导航">
-          <a href="#pipeline">技术链</a><a href="#matrix">成熟度</a><a href="#architecture">架构</a><a href="#evidence">证据</a>
+          <a href="#pipeline">技术链</a><a href="#matrix">成熟度</a><a href="#architecture">架构</a><a href="#evidence">证据</a><Link className="route-tab" href="/blender-5-2">Blender 5.2</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>
