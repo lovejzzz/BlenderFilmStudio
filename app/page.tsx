@@ -226,7 +226,7 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="#top" aria-label="返回顶部"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></a>
         <nav aria-label="研究导航">
-          <a href="#pipeline">技术链</a><a href="#matrix">成熟度</a><a href="#architecture">架构</a><Link className="route-tab" href="/blender-5-2">Blender 5.2</Link><Link className="route-tab cost-route" href="/cost-model">成本模型</Link>
+          <a href="#pipeline">技术链</a><a href="#matrix">成熟度</a><Link className="route-tab" href="/blender-5-2">Blender 5.2</Link><Link className="route-tab cost-route" href="/cost-model">成本</Link><Link className="route-tab agenda-route" href="/research-agenda">研究路线</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>

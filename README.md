@@ -11,16 +11,18 @@ Researching a reproducible **AI → structured 3D scene → Blender → cinema m
 - Standard: primary sources first; demonstrations are not treated as production readiness
 - Core verdict: Blender rendering and scene control are mature; production-ready character creation, cinematic performance, complex contact, and general single-image world reconstruction are not yet end-to-end solved
 
-The public report contains the full maturity matrix, current evidence, recommended architecture, and first experiment. A second research tab audits Blender 5.2 LTS across 18 film-production control domains. A third tab models the economics of a subscription-first Codex CLI + Blender workflow, including API, rendering, hardware, assets, labor, and rework.
+The public report contains the full maturity matrix, current evidence, recommended architecture, and first experiment. A second research tab audits Blender 5.2 LTS across 18 film-production control domains. A third tab models production economics. A fourth converts the remaining unknowns into ten research gaps, six benchmark shots, four evidence layers, and an 18-week falsification protocol.
 
 ## Research records
 
 - [`research/2026-08-25-baseline.md`](research/2026-08-25-baseline.md) — concise, reviewable snapshot
 - [`research/2026-08-25-blender-5.2-intervention-map.md`](research/2026-08-25-blender-5.2-intervention-map.md) — Blender 5.2 control-surface audit
 - [`research/2026-08-25-cost-model.md`](research/2026-08-25-cost-model.md) — subscription/API/rendering cost model and measurement schema
+- [`research/2026-08-25-research-gaps-and-experiment-roadmap.md`](research/2026-08-25-research-gaps-and-experiment-roadmap.md) — prioritized gaps, benchmark suite, pass gates, and falsification plan
 - [`app/page.tsx`](app/page.tsx) — complete evidence-linked report content
 - [`app/blender-5-2/page.tsx`](app/blender-5-2/page.tsx) — Blender 5.2 intervention tab
 - [`app/cost-model/page.tsx`](app/cost-model/page.tsx) — production economics tab
+- [`app/research-agenda/page.tsx`](app/research-agenda/page.tsx) — research agenda and experimental protocol
 
 ## Local preview
 
