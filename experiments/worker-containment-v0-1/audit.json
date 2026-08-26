@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "bfs.workerContainmentIndependentAudit.v0.1",
+  "experimentId": "B37",
+  "analysis": {
+    "schemaVersion": "bfs.workerContainmentAnalysis.v0.1",
+    "decision": "DEPRECATED_SBPL_CANARY_SUPPORT_WITH_ENV_COUNTEREXAMPLE",
+    "passed": true,
+    "failures": [],
+    "gates": {
+      "exactCells": true,
+      "uniquePositiveBlenderProcessIds": true,
+      "zeroExitCodes": true,
+      "reports": true,
+      "runtimeIdentity": true,
+      "cleanPreflight": true,
+      "baselineCanariesSucceed": true,
+      "sbplCapabilityBlocks": true,
+      "allowedWorkerWrites": true,
+      "inheritedFakeSecretCounterexample": true,
+      "sanitizedFakeSecret": true,
+      "loopbackReceiptBinding": true
+    }
+  },
+  "attacks": [
+    {
+      "id": "SANDBOX_OUTSIDE_READ_SUCCESS",
+      "passed": true,
+      "observedDecision": "SBPL_BOUNDARY_NOT_USABLE",
+      "failures": [
+        "SBPL_CAPABILITY_BLOCKS"
+      ]
+    },
+    {
+      "id": "SANDBOX_OUTSIDE_WRITE_SUCCESS",
+      "passed": true,
+      "observedDecision": "SBPL_BOUNDARY_NOT_USABLE",
+      "failures": [
+        "SBPL_CAPABILITY_BLOCKS"
+      ]
+    },
+    {
+      "id": "SANDBOX_LOOPBACK_SUCCESS",
+      "passed": true,
+      "observedDecision": "SBPL_BOUNDARY_NOT_USABLE",
+      "failures": [
+        "SBPL_CAPABILITY_BLOCKS"
+      ]
+    },
+    {
+      "id": "SANDBOX_CHILD_EXEC_SUCCESS",
+      "passed": true,
+      "observedDecision": "SBPL_BOUNDARY_NOT_USABLE",
+      "failures": [
+        "SBPL_CAPABILITY_BLOCKS"
+      ]
+    },
+    {
+      "id": "MISSING_ALLOWED_WORKER_WRITE",
+      "passed": true,
+      "observedDecision": "BASELINE_INVALID",
+      "failures": [
+        "BASELINE_CANARIES",
+        "ALLOWED_WORKER_WRITES"
+      ]
+    },
+    {
+      "id": "MISSING_INHERITED_ENV_COUNTEREXAMPLE",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "INHERITED_ENV_COUNTEREXAMPLE"
+      ]
+    },
+    {
+      "id": "SANITIZED_SECRET_VISIBLE",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "SANITIZED_ENV"
+      ]
+    },
+    {
+      "id": "DUPLICATE_BLENDER_PID",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "UNIQUE_POSITIVE_PIDS"
+      ]
+    },
+    {
+      "id": "SANDBOX_LOOPBACK_RECEIPT",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "LOOPBACK_RECEIPTS"
+      ]
+    }
+  ],
+  "passed": true
+}
