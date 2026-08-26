@@ -1,0 +1,135 @@
+{
+  "documentType": "BFS_REPEATED_FRAME_MODE_SWITCH_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "When frame 38 is rendered repeatedly without changing frame or scene inside one initialized Blender process, can one PID switch between the two decoded RGB modes established by B27?",
+  "evidenceBasis": {
+    "b27ResultsSha256": "0d35e9f7b940a6588ec604674ebf493ce68f183b8506178b1447b4dba791a353",
+    "b27VariantAnalysisSha256": "7fb942e14387881fcd42737b7b99606b5022b8b418958f56c437b5ecb77c4596",
+    "b27SpecSha256": "2b0a9f5ec9168fdb7589c4a69366ca58c2dd79c52cf3a17030c45eecd7b7b8a2",
+    "b27Decision": "FAILURE_REPRODUCED_NO_SIGNIFICANT_HISTORY_ASSOCIATION",
+    "b27Observation": "B27 produced only two decoded RGB hashes across 24 fresh processes; both modes occurred in HISTORY and DIRECT, and the alternate mode was decoded-pixel equal to B25-A frame 38."
+  },
+  "knownModes": {
+    "REFERENCE": {
+      "decodedRgbSha256": "c13638222371dcf3acf00354097e5955f48d630115f23ebe9e32147dae8bf308",
+      "anchorUri": "public/frame-history-isolation-v0-1/b25-reference-frame-0038-B.png",
+      "anchorContainerSha256": "85e773b2be2a4d98f7a1144ed84bc338c6f5a76bd79c6a27f13638fa02e8c8f0"
+    },
+    "ALTERNATE": {
+      "decodedRgbSha256": "6e9685c17234e93a75e8735166dc1c314ffaaff339bd3613088a44ae1db0feaf",
+      "anchorUri": "public/frame-history-isolation-v0-1/b27-alternate-frame-0038-D02.png",
+      "anchorContainerSha256": "2bbacb7c15d98a62e6614230620a739652ebcc158b8451d3a64f82e0693b9596"
+    }
+  },
+  "design": {
+    "type": "twelve fresh persistent processes with repeated same-frame render calls",
+    "processOrder": ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12"],
+    "processes": 12,
+    "targetFrame": 38,
+    "renderCallsPerProcess": 12,
+    "renderCalls": 144,
+    "outputFiles": 144,
+    "withinProcessAdjacentTransitions": 132,
+    "selectedBeforeAnyB28Render": true,
+    "frameSetRule": "Set frame 38 once before the first render. Do not change scene frame or reload the blend between the twelve calls.",
+    "renderRule": "Call bpy.ops.render.render(write_still=True) twelve times and write render-01.png through render-12.png."
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "motionBlur": false,
+    "format": "PNG8_RGBA",
+    "colorDomain": "ACES 2 SDR display output"
+  },
+  "primaryEndpoint": {
+    "name": "withinPidKnownModeSwitch",
+    "unit": "one persistent Blender PID",
+    "definition": "A PID switches when its twelve decoded RGB hashes include both frozen REFERENCE and ALTERNATE modes.",
+    "supportThresholdProcesses": 2,
+    "whyTwo": "Require recurrence in at least two independent PIDs before promoting per-render switching support.",
+    "novelModeRule": "Any decoded RGB hash outside the two frozen modes is preserved and takes the MODE_SPACE_EXPANDED decision; it is not silently coerced to either known mode.",
+    "noOptionalStopping": true
+  },
+  "secondaryEndpoints": [
+    "known-mode frequency by render-call ordinal",
+    "known-mode frequency by PID",
+    "adjacent mode-transition count and direction by PID",
+    "first-render mode compared descriptively with B27 DIRECT",
+    "container SHA and render time for every call",
+    "number and frequency of novel decoded RGB hashes"
+  ],
+  "executionContract": {
+    "formalRendererClassifierAndRunnerMustNotExistAtFreeze": true,
+    "reuseFrozenConfigurator": true,
+    "eachReplicateMustUseOneUniqueFreshProcess": true,
+    "eachProcessMustSetFrame38OnceBeforeRendering": true,
+    "eachProcessMustRenderExactlyTwelveTimesWithoutFrameOrSceneChange": true,
+    "everyRenderCallMustWriteAndHashOnePNG": true,
+    "mustNotSaveSourceBlend": true,
+    "allSourcePlanStructureRuntimeModeAnchorAndToolIdentitiesMustBeExact": true,
+    "recordProcessOrderPidsCallOrderOutputHashesModeHashesAndBindings": true,
+    "knownModesSampleSizeThresholdAndDecisionRulesMustNotChangeAfterExecution": true,
+    "workOutputsRemainLocalButEvidenceAndResultAreCommitted": true,
+    "humanReviewMustRemainPending": true
+  },
+  "decisionRule": {
+    "MODE_SPACE_EXPANDED": "The valid experiment observes one or more decoded RGB hashes outside the two frozen modes.",
+    "WITHIN_PID_MODE_SWITCH_SUPPORT": "No novel modes occur and at least two unique PIDs contain both frozen known modes.",
+    "SINGLE_PID_SWITCH_INCONCLUSIVE": "No novel modes occur and exactly one PID contains both known modes.",
+    "PROCESS_LOCK_SUPPORT": "No PID switches, no novel modes occur, and each known mode is locked within at least two distinct PIDs.",
+    "BETWEEN_PID_SPLIT_INCONCLUSIVE": "No PID switches or novel modes occur, both known modes occur, but at least one mode appears in fewer than two PIDs.",
+    "MODE_NOT_REPRODUCED": "No PID switches or novel modes occur and only one frozen mode appears across all 144 renders.",
+    "INVALID_EXPERIMENT": "Any identity, source, control, process, call-order, output, layout, classification, binding, decision-contract or attack gate fails."
+  },
+  "requiredNegativeCases": [
+    "B28 spec identity mismatch",
+    "B27 result identity mismatch",
+    "B27 variant-analysis identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "plan or structure identity mismatch",
+    "configurator identity mismatch",
+    "renderer identity mismatch",
+    "classifier identity mismatch",
+    "runner identity mismatch",
+    "REFERENCE anchor container or decoded RGB mismatch",
+    "ALTERNATE anchor container or decoded RGB mismatch",
+    "source state or fixed control mismatch",
+    "process order mismatch",
+    "PID uniqueness or process binding mismatch",
+    "frame-set, render-call or call-order mismatch",
+    "PNG layout mismatch",
+    "missing or mutated output",
+    "classification, manifest or file-hash binding mismatch",
+    "known-mode, sample-size, switch-threshold or decision-rule mutation",
+    "human-review status is not pending"
+  ],
+  "explicitNonClaims": [
+    "Within-PID switching would locate recurrence at the render-invocation boundary or below; it would not identify a specific Eevee, Metal, rasterization, TAA or GPU-scheduling mechanism.",
+    "Process-lock support would not prove all initialization state is deterministic or generalize beyond this frame, scene, build, backend and machine.",
+    "The two known modes came from B27 post-hoc localization but are frozen before B28; a novel mode is valid evidence, not an invalid sample.",
+    "Twelve processes by twelve calls is a fixed mechanistic probe, not a population probability estimate or equivalence study.",
+    "Decoded RGB identity and mode switching do not determine visibility, temporal perception or cinematic quality.",
+    "PNG8 review output is not the EXR master, and human review remains a separate PENDING gate."
+  ]
+}
