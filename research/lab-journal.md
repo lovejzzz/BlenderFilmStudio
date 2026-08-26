@@ -537,6 +537,30 @@ Verdict: `STATIC_ONLY_ENVELOPE_FAIL`. The temporal sub-gate passed every held-ou
 
 Artifacts: `experiments/temporal-residual-derivation-v0-1/results.json`, `experiments/temporal-residual-holdout-v0-1/results.json`, `experiments/temporal-residual-holdout-v0-1/evidence/`, `research/2026-08-26-b25-temporal-residual-holdout-protocol.md` and `research/2026-08-26-b25-temporal-residual-holdout-result.md`.
 
+## J-024 · Lossless blinded temporal-review package
+
+Type: live pre-registration, carrier experiment and interface audit, 2026-08-26.
+
+B26 separates three layers that had previously been easy to conflate: playback-carrier integrity, observer-interface validity and actual human perception. The frozen protocol follows the current ITU-R BT.500-15 boundary: normally at least 15 observers, fewer explicitly informal, and people directly involved in development excluded from the formal sample. The balanced BFS target is 18 independent valid observers, with the six A/B/C permutations repeated three times.
+
+Ordinary lossy H.264 was rejected as a formal carrier because compression could exceed the Blender residual being studied. An exploratory A-only lossless VP9 test first exposed an RGBA-versus-RGB comparator layout error; RGB was accepted only after verifying every source alpha sample was exactly opaque.
+
+Formal package observation:
+
+- A/B/C were independently encoded as VP9 Profile 1 `gbrp`, 960×540, 24 fps, six seconds, no audio;
+- all three decoded to 144/144 exact RGB source frames, maximum error 0 and zero changed RGB pixels;
+- carrier sizes were 27,496,119 / 27,510,630 / 27,492,939 bytes;
+- 18 observer sessions were generated, with six permutations repeated exactly three times;
+- observer-visible files use only `CLIP-01/02/03`; mappings remain sealed in git-ignored local work;
+- overall salted mapping commitment: `540cc4c76193fc460945968e6919e5684d8a45fee58c5f8dcbcdfdee15a4379b`;
+- 20/20 package attacks reached their intended reason.
+
+A real in-app-browser audit found all three videos at ready state 4, 960×540 and six seconds, with no native controls or mapping tokens. One automated interface playback advanced only the 0/2→1/2 counter and left ratings disabled; the page was reloaded without creating a response.
+
+Verdict: package `CARRIER_AND_INTERFACE_READY`; human status `PENDING`, formal responses 0, pilot responses 0. The owner may use OBS-01 only as an interface pilot and may not enter the formal N. Independent recruitment can proceed while B27 isolates the frame-38 history boundary.
+
+Artifacts: `experiments/blind-temporal-review-v0-1/results.json`, `experiments/blind-temporal-review-v0-1/evidence/`, `research/2026-08-26-b26-blind-temporal-review-protocol.md` and `research/2026-08-26-b26-blind-temporal-review-package-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:
