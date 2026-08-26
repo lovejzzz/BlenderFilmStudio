@@ -153,7 +153,7 @@ export default function ResearchAgendaPage() {
     <main className="agenda-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><a href="#benchmark">基准</a><a href="#protocol">实验</a></nav>
+        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><a href="#protocol">实验</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link></nav>
         <span className="edition agenda-edition">Agenda 01</span>
       </header>
 

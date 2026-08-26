@@ -1,0 +1,59 @@
+{
+  "documentType": "BFS_OUTPUT_SPEC",
+  "id": "BFS_RESEARCH_MASTER_0_1",
+  "specVersion": "0.1.0",
+  "status": "experimental",
+  "purpose": "Reproducible scene-linear research master; not a DCI distribution package",
+  "picture": {
+    "width": 3840,
+    "height": 2160,
+    "pixelAspectRatio": 1.0,
+    "frameRate": { "numerator": 24, "denominator": 1 },
+    "shutterAngleDegrees": 180,
+    "frameNumberPadding": 6
+  },
+  "color": {
+    "sceneLinearEncoding": "ACEScg",
+    "ocioPolicy": "PIN_EXACT_CONFIG_AND_HASH_BEFORE_PHASE_1",
+    "ocioConfigUri": null,
+    "ocioConfigSha256": null,
+    "displayTransforms": [
+      {
+        "id": "REVIEW_SDR",
+        "target": "Rec.709 / 100 nit calibrated review",
+        "transform": "ACES 2 Output Transform",
+        "status": "pending-calibration"
+      },
+      {
+        "id": "REVIEW_CINEMA",
+        "target": "DCI theatrical reference conditions",
+        "transform": "ACES 2 Output Transform",
+        "status": "pending-calibration"
+      }
+    ]
+  },
+  "master": {
+    "container": "OpenEXR multi-layer image sequence",
+    "pixelType": "HALF",
+    "compression": "ZIP_LOSSLESS",
+    "alpha": "PREMULTIPLIED",
+    "requiredPasses": ["Combined", "Alpha", "Depth", "Normal", "Vector", "Cryptomatte"],
+    "requiredAttributes": ["chromaticities", "framesPerSecond", "timeCode", "owner", "comments"]
+  },
+  "acceptance": {
+    "exactFrameCount": true,
+    "rejectNaNOrInfinity": true,
+    "rejectMissingChannels": true,
+    "requirePerFrameSha256": true,
+    "requireSceneManifest": true,
+    "requireRenderTelemetry": true,
+    "pixelTolerance": "DEVICE_CLASS_POLICY_REQUIRED",
+    "humanReview": "REQUIRED"
+  },
+  "explicitNonClaims": [
+    "This specification does not create a DCP.",
+    "This specification does not prove DCI compliance.",
+    "ACEScg encoding alone does not guarantee correct display.",
+    "OpenEXR bit depth alone does not guarantee cinematic quality."
+  ]
+}

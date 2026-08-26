@@ -1,0 +1,117 @@
+{
+  "suite": "BFS_SCENE_SPEC_0_1",
+  "base": {
+    "specVersion": "0.1.0",
+    "shot": {
+      "id": "SHOT_001",
+      "title": "B02 Interior Dolly",
+      "frameStart": 1,
+      "frameEnd": 144,
+      "frameRate": { "numerator": 24, "denominator": 1 },
+      "unitScaleMeters": 1,
+      "seed": 240825,
+      "activeCamera": "CAM_MAIN"
+    },
+    "assets": [
+      {
+        "id": "SET_ROOM",
+        "kind": "SET",
+        "uri": "assets/sets/interior-room.blend",
+        "version": "0.1.0",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "license": "CC0-1.0",
+        "transform": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] },
+        "visible": true
+      },
+      {
+        "id": "PROP_CHAIR",
+        "kind": "PROP",
+        "uri": "library/props/chair.blend",
+        "version": "1.0.0",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "license": "CC-BY-4.0",
+        "transform": { "locationM": [0.7, 0.2, 0], "rotationEulerDeg": [0, 0, -18], "scale": [1, 1, 1] },
+        "visible": true
+      }
+    ],
+    "actors": [],
+    "cameras": [
+      {
+        "id": "CAM_MAIN",
+        "lensMm": 50,
+        "sensorWidthMm": 36,
+        "apertureFStop": 2.8,
+        "focusDistanceM": 3.2,
+        "shutterAngleDeg": 180,
+        "transform": { "locationM": [-3.8, -4.2, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1] }
+      }
+    ],
+    "lights": [
+      {
+        "id": "KEY_WINDOW",
+        "type": "AREA",
+        "colorLinear": [1, 0.72, 0.48],
+        "energy": 1450,
+        "sizeM": 2.4,
+        "transform": { "locationM": [-1.8, 0.9, 2.5], "rotationEulerDeg": [62, 0, -90], "scale": [1, 1, 1] }
+      }
+    ],
+    "world": { "backgroundLinear": [0.015, 0.02, 0.03], "strength": 0.25 },
+    "events": [],
+    "render": {
+      "outputProfile": "BFS_RESEARCH_MASTER_0_1",
+      "previewEngine": "BLENDER_EEVEE_NEXT",
+      "finalEngine": "CYCLES",
+      "resolution": { "width": 3840, "height": 2160, "percentage": 100 },
+      "samplesPreview": 32,
+      "samplesFinal": 512,
+      "denoise": true,
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "pixelType": "HALF_16",
+      "compression": "ZIP_LOSSLESS",
+      "passes": ["Combined", "Alpha", "Depth", "Normal", "Vector", "Cryptomatte"],
+      "outputRoot": "renders/SHOT_001/"
+    },
+    "security": {
+      "networkAccess": false,
+      "arbitraryPython": false,
+      "allowedAssetRoots": ["assets/", "library/"],
+      "allowedOperations": ["READ_MANIFEST", "IMPORT_ASSET", "CREATE_CAMERA", "CREATE_LIGHT", "SET_TRANSFORM", "SET_RENDER", "RENDER_PREVIEW", "RENDER_FINAL"]
+    },
+    "provenance": {
+      "briefId": "BRIEF_INTERIOR_DOLLY",
+      "createdBy": "BFS research fixture",
+      "createdAtUtc": "2026-08-25T18:00:00Z",
+      "sources": [
+        {
+          "uri": "research/briefs/B02.md",
+          "role": "BRIEF",
+          "license": "PROJECT-INTERNAL",
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      ]
+    }
+  },
+  "cases": [
+    { "id": "V01_BASE_B02", "expectedValid": true, "mutations": [] },
+    { "id": "V02_TITLE_VARIANT", "expectedValid": true, "mutations": [{ "op": "set", "path": "/shot/title", "value": "B01 Material Still Life" }] },
+    { "id": "V03_LENS_VARIANT", "expectedValid": true, "mutations": [{ "op": "set", "path": "/cameras/0/lensMm", "value": 85 }] },
+    { "id": "V04_APPEND_PROP", "expectedValid": true, "mutations": [{ "op": "append", "path": "/assets", "value": { "id": "PROP_TABLE", "kind": "PROP", "uri": "library/props/table.blend", "version": "1.2.0", "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", "license": "CC0-1.0", "transform": { "locationM": [1, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] }, "visible": true } }] },
+    { "id": "V05_APPEND_FILL", "expectedValid": true, "mutations": [{ "op": "append", "path": "/lights", "value": { "id": "FILL_SOFT", "type": "AREA", "colorLinear": [0.25, 0.38, 0.7], "energy": 240, "sizeM": 3, "transform": { "locationM": [2, -1, 2], "rotationEulerDeg": [45, 0, 90], "scale": [1, 1, 1] } } }] },
+    { "id": "V06_VALID_ACTOR", "expectedValid": true, "mutations": [{ "op": "append", "path": "/assets", "value": { "id": "CHAR_LEAD", "kind": "CHARACTER", "uri": "assets/characters/lead.blend", "version": "0.1.0", "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "license": "PROJECT-OWNED", "transform": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] }, "visible": true } }, { "op": "append", "path": "/actors", "value": { "id": "ACTOR_LEAD", "assetRef": "CHAR_LEAD", "rigProfile": "BFS_HUMANOID_0_1", "identityLock": true } }] },
+    { "id": "V07_VALID_CONTACT", "expectedValid": true, "mutations": [{ "op": "append", "path": "/events", "value": { "id": "CONTACT_CHAIR", "type": "CONTACT", "frame": 72, "subjects": ["PROP_CHAIR"] } }] },
+    { "id": "V08_SHIFTED_RANGE", "expectedValid": true, "mutations": [{ "op": "set", "path": "/shot/frameStart", "value": 1001 }, { "op": "set", "path": "/shot/frameEnd", "value": 1144 }, { "op": "append", "path": "/events", "value": { "id": "CUE_ACTION", "type": "CUE", "frame": 1050, "subjects": ["PROP_CHAIR"] } }] },
+    { "id": "V09_WORLD_VARIANT", "expectedValid": true, "mutations": [{ "op": "set", "path": "/world/strength", "value": 0.05 }] },
+    { "id": "V10_DENOISE_OFF", "expectedValid": true, "mutations": [{ "op": "set", "path": "/render/denoise", "value": false }, { "op": "set", "path": "/render/samplesFinal", "value": 2048 }] },
+    { "id": "I01_UNKNOWN_ROOT_FIELD", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/unapproved", "value": true }] },
+    { "id": "I02_WRONG_SPEC_VERSION", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/specVersion", "value": "0.2.0" }] },
+    { "id": "I03_REVERSED_FRAME_RANGE", "expectedValid": false, "expectedCode": "SEM_FRAME_RANGE", "mutations": [{ "op": "set", "path": "/shot/frameStart", "value": 145 }, { "op": "set", "path": "/shot/frameEnd", "value": 1 }] },
+    { "id": "I04_DUPLICATE_ID", "expectedValid": false, "expectedCode": "SEM_DUPLICATE_ID", "mutations": [{ "op": "append", "path": "/assets", "value": { "id": "PROP_CHAIR", "kind": "PROP", "uri": "library/props/duplicate.blend", "version": "1.0.0", "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "license": "CC0-1.0", "transform": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] }, "visible": true } }] },
+    { "id": "I05_MISSING_ACTIVE_CAMERA", "expectedValid": false, "expectedCode": "SEM_ACTIVE_CAMERA", "mutations": [{ "op": "set", "path": "/shot/activeCamera", "value": "CAM_MISSING" }] },
+    { "id": "I06_PATH_TRAVERSAL", "expectedValid": false, "expectedCode": "SEC_PATH_TRAVERSAL", "mutations": [{ "op": "set", "path": "/assets/0/uri", "value": "../secrets/private.blend" }] },
+    { "id": "I07_NETWORK_ENABLED", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/security/networkAccess", "value": true }] },
+    { "id": "I08_MISSING_LICENSE", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "delete", "path": "/assets/0/license" }] },
+    { "id": "I09_EVENT_OUTSIDE_RANGE", "expectedValid": false, "expectedCode": "SEM_EVENT_FRAME", "mutations": [{ "op": "append", "path": "/events", "value": { "id": "CUE_TOO_LATE", "type": "CUE", "frame": 999, "subjects": ["PROP_CHAIR"] } }] },
+    { "id": "I10_ACTOR_USES_PROP", "expectedValid": false, "expectedCode": "SEM_ACTOR_ASSET", "mutations": [{ "op": "append", "path": "/actors", "value": { "id": "ACTOR_BAD", "assetRef": "PROP_CHAIR", "rigProfile": "BFS_HUMANOID_0_1", "identityLock": true } }] }
+  ]
+}

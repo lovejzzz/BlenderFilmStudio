@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json",
+  "title": "Blender Film Studio SceneSpec v0.1",
+  "description": "Restricted, versioned contract compiled deterministically into a Blender shot scene.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["specVersion", "shot", "assets", "actors", "cameras", "lights", "world", "events", "render", "security", "provenance"],
+  "properties": {
+    "specVersion": { "const": "0.1.0" },
+    "shot": { "$ref": "#/$defs/shot" },
+    "assets": { "type": "array", "items": { "$ref": "#/$defs/asset" }, "maxItems": 256 },
+    "actors": { "type": "array", "items": { "$ref": "#/$defs/actor" }, "maxItems": 32 },
+    "cameras": { "type": "array", "items": { "$ref": "#/$defs/camera" }, "minItems": 1, "maxItems": 16 },
+    "lights": { "type": "array", "items": { "$ref": "#/$defs/light" }, "maxItems": 128 },
+    "world": { "$ref": "#/$defs/world" },
+    "events": { "type": "array", "items": { "$ref": "#/$defs/event" }, "maxItems": 512 },
+    "render": { "$ref": "#/$defs/render" },
+    "security": { "$ref": "#/$defs/security" },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,63}$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "vector3": {
+      "type": "array",
+      "items": { "type": "number", "minimum": -1000000, "maximum": 1000000 },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "color3": {
+      "type": "array",
+      "items": { "type": "number", "minimum": 0, "maximum": 100000 },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "transform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locationM", "rotationEulerDeg", "scale"],
+      "properties": {
+        "locationM": { "$ref": "#/$defs/vector3" },
+        "rotationEulerDeg": { "$ref": "#/$defs/vector3" },
+        "scale": {
+          "type": "array",
+          "items": { "type": "number", "exclusiveMinimum": 0, "maximum": 10000 },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "frameRate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numerator", "denominator"],
+      "properties": {
+        "numerator": { "const": 24 },
+        "denominator": { "const": 1 }
+      }
+    },
+    "shot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "frameStart", "frameEnd", "frameRate", "unitScaleMeters", "seed", "activeCamera"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^SHOT_[0-9]{3,6}$" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "frameStart": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "frameEnd": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "frameRate": { "$ref": "#/$defs/frameRate" },
+        "unitScaleMeters": { "const": 1 },
+        "seed": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+        "activeCamera": { "$ref": "#/$defs/id" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "uri", "version", "sha256", "license", "transform", "visible"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["SET", "PROP", "CHARACTER", "MATERIAL", "VOLUME"] },
+        "uri": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "license": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "transform": { "$ref": "#/$defs/transform" },
+        "visible": { "type": "boolean" }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "assetRef", "rigProfile", "identityLock"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "assetRef": { "$ref": "#/$defs/id" },
+        "rigProfile": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "identityLock": { "const": true }
+      }
+    },
+    "camera": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "lensMm", "sensorWidthMm", "apertureFStop", "focusDistanceM", "shutterAngleDeg", "transform"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "lensMm": { "type": "number", "minimum": 8, "maximum": 500 },
+        "sensorWidthMm": { "type": "number", "minimum": 3, "maximum": 100 },
+        "apertureFStop": { "type": "number", "minimum": 0.5, "maximum": 64 },
+        "focusDistanceM": { "type": "number", "exclusiveMinimum": 0, "maximum": 100000 },
+        "shutterAngleDeg": { "type": "number", "minimum": 0, "maximum": 360 },
+        "transform": { "$ref": "#/$defs/transform" }
+      }
+    },
+    "light": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "colorLinear", "energy", "sizeM", "transform"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "enum": ["AREA", "SUN", "POINT", "SPOT"] },
+        "colorLinear": { "$ref": "#/$defs/color3" },
+        "energy": { "type": "number", "minimum": 0, "maximum": 1000000000 },
+        "sizeM": { "type": "number", "exclusiveMinimum": 0, "maximum": 100000 },
+        "transform": { "$ref": "#/$defs/transform" }
+      }
+    },
+    "world": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backgroundLinear", "strength"],
+      "properties": {
+        "backgroundLinear": { "$ref": "#/$defs/color3" },
+        "strength": { "type": "number", "minimum": 0, "maximum": 100000 }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "frame", "subjects"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "enum": ["CONTACT", "GAZE", "DIALOGUE", "CUE"] },
+        "frame": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "subjects": { "type": "array", "items": { "$ref": "#/$defs/id" }, "minItems": 1, "maxItems": 8, "uniqueItems": true }
+      }
+    },
+    "render": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outputProfile", "previewEngine", "finalEngine", "resolution", "samplesPreview", "samplesFinal", "denoise", "fileFormat", "pixelType", "compression", "passes", "outputRoot"],
+      "properties": {
+        "outputProfile": { "const": "BFS_RESEARCH_MASTER_0_1" },
+        "previewEngine": { "const": "BLENDER_EEVEE_NEXT" },
+        "finalEngine": { "const": "CYCLES" },
+        "resolution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height", "percentage"],
+          "properties": {
+            "width": { "const": 3840 },
+            "height": { "const": 2160 },
+            "percentage": { "const": 100 }
+          }
+        },
+        "samplesPreview": { "type": "integer", "minimum": 1, "maximum": 256 },
+        "samplesFinal": { "type": "integer", "minimum": 16, "maximum": 65536 },
+        "denoise": { "type": "boolean" },
+        "fileFormat": { "const": "OPEN_EXR_MULTILAYER" },
+        "pixelType": { "const": "HALF_16" },
+        "compression": { "const": "ZIP_LOSSLESS" },
+        "passes": {
+          "type": "array",
+          "items": { "enum": ["Combined", "Alpha", "Depth", "Normal", "Vector", "Cryptomatte", "Diffuse", "Glossy", "Emission", "Shadow"] },
+          "uniqueItems": true,
+          "allOf": [
+            { "contains": { "const": "Combined" } },
+            { "contains": { "const": "Alpha" } },
+            { "contains": { "const": "Depth" } },
+            { "contains": { "const": "Normal" } },
+            { "contains": { "const": "Vector" } },
+            { "contains": { "const": "Cryptomatte" } }
+          ]
+        },
+        "outputRoot": { "type": "string", "minLength": 1, "maxLength": 256 }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["networkAccess", "arbitraryPython", "allowedAssetRoots", "allowedOperations"],
+      "properties": {
+        "networkAccess": { "const": false },
+        "arbitraryPython": { "const": false },
+        "allowedAssetRoots": {
+          "type": "array",
+          "items": { "enum": ["assets/", "library/"] },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "allowedOperations": {
+          "type": "array",
+          "items": { "enum": ["READ_MANIFEST", "IMPORT_ASSET", "CREATE_CAMERA", "CREATE_LIGHT", "SET_TRANSFORM", "SET_RENDER", "RENDER_PREVIEW", "RENDER_FINAL"] },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "provenanceSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["uri", "role", "license", "sha256"],
+      "properties": {
+        "uri": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "role": { "enum": ["BRIEF", "REFERENCE", "ASSET", "MOTION", "AUDIO"] },
+        "license": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["briefId", "createdBy", "createdAtUtc", "sources"],
+      "properties": {
+        "briefId": { "type": "string", "pattern": "^BRIEF_[A-Z0-9_]{3,64}$" },
+        "createdBy": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "createdAtUtc": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$" },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/provenanceSource" }, "minItems": 1, "maxItems": 256 }
+      }
+    }
+  }
+}
