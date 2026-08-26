@@ -245,6 +245,21 @@ Protocol: `research/2026-08-26-b17-eevee-sampling-factorial-protocol.md`.
 
 Status at freeze: B17 configurator and runner do not exist; no B17 frames have been rendered. The sample-1 ReviewRenderSpec differs from the frozen sample-32 spec at exactly `proxy.renderSamples` and has SHA-256 `0d5857e2…c2dd`.
 
+Formal execution observation:
+
+- eight clean Blender processes rendered 1,152 frames in the frozen order;
+- S01-D0: 144/144 decoded exact, max error 0, failed pixels 0;
+- S01-D1: 144/144 decoded exact, max error 0, failed pixels 0;
+- S32-D0: 132/144 decoded exact, 88 failed pixels, max error `0.003921598196029663`;
+- S32-D1: 126/144 decoded exact, 113 failed pixels, max error `0.003921583294868469`;
+- all four cells remained 0/144 PNG-byte exact;
+- 12/12 negative cases reached the frozen reason;
+- source `.blend`, Blender, renderer, comparator, ReviewRenderSpecs and OCIO identities remained fixed.
+
+Verdict: `SAMPLING_CAUSAL_SUPPORT`. Reducing Eevee render samples from 32 to 1 restored strict decoded-pixel equality under both dither levels, while both fresh 32-sample controls remained non-exact. The one-sample images are visibly noisy, so this locates a causal factor but is not a production-quality solution. It does not identify a Blender internal race or generalize beyond this profile.
+
+Artifacts: `experiments/eevee-sampling-factorial-v0-1/results.json`, `experiments/eevee-sampling-factorial-v0-1/evidence/` and `research/2026-08-26-b17-eevee-sampling-factorial-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:

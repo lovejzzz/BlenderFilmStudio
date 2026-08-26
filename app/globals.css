@@ -1507,6 +1507,27 @@ footer > a { justify-self: end; color: var(--acid); font-size: 11px; }
 @media (max-width: 800px) { .contact-review-action { grid-template-columns: 1fr; }.contact-review-action a { justify-self: start; } }
 @media (max-width: 620px) { .contact-hero h1 { font-size: clamp(44px,13vw,64px); }.contact-stats,.contact-checks { grid-template-columns: 1fr; }.contact-stats article:nth-child(n),.contact-checks article:nth-child(n) { border-left: 0; border-top: 1px solid currentColor; }.contact-stats article:first-child,.contact-checks article:first-child { border-top: 0; }.contact-nonclaim { grid-template-columns: 1fr; }.contact-before-after { grid-template-columns: 1fr; }.contact-before-after > i { height: 40px; border: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); transform: rotate(90deg); }.contact-negative-list li { grid-template-columns: 55px 1fr; }.contact-negative-list small { grid-column: 2; padding-bottom: 16px; } }
 
+/* B17 Eevee sampling factorial */
+.factorial-page { --contact-mint: #b8ff64; --contact-orange: #ff7957; }
+.factorial-matrix { margin-top: 66px; display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--ink); }
+.factorial-matrix article { min-height: 245px; padding: 22px; border-left: 1px solid var(--ink); display: flex; flex-direction: column; }
+.factorial-matrix article:first-child { border-left: 0; }
+.factorial-matrix span { font: 700 10px var(--font-geist-mono); letter-spacing: .08em; }
+.factorial-matrix strong { margin-top: auto; font: 520 clamp(30px,3.3vw,49px) var(--font-geist-mono); letter-spacing: -.075em; }
+.factorial-matrix b { margin-top: 12px; font-size: 12px; }
+.factorial-matrix small { margin-top: 7px; font: 550 9px var(--font-geist-mono); }
+.factorial-exact { background: #c9f884; color: #14240d; }
+.factorial-nonexact { background: #ff9878; color: #3e170d; }
+.factorial-gallery { margin-top: 66px; display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; border: 1px solid #45514e; background: #45514e; }
+.factorial-gallery figure { margin: 0; background: #080b0c; }
+.factorial-gallery img { width: 100%; height: auto; display: block; }
+.factorial-gallery figcaption { min-height: 105px; padding: 20px; display: flex; flex-direction: column; }
+.factorial-gallery span { color: var(--contact-mint); font: 650 9px var(--font-geist-mono); }
+.factorial-gallery b { margin-top: auto; }
+.factorial-gallery small { margin-top: 6px; color: #84908d; }
+@media (max-width: 900px) { .factorial-matrix { grid-template-columns: repeat(2,1fr); }.factorial-matrix article:nth-child(3) { border-left: 0; }.factorial-matrix article:nth-child(n+3) { border-top: 1px solid var(--ink); } }
+@media (max-width: 700px) { .factorial-matrix,.factorial-gallery { grid-template-columns: 1fr; }.factorial-matrix article:nth-child(n) { border-left: 0; border-top: 1px solid var(--ink); }.factorial-matrix article:first-child { border-top: 0; } }
+
 /* B14 receipt-bound review dailies */
 .dailies-page { --contact-mint: #b8ff64; --contact-orange: #ff8a62; }
 .dailies-screen,.dailies-cost { background: var(--contact-night); color: white; }

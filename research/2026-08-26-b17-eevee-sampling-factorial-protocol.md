@@ -2,7 +2,7 @@
 
 Date frozen: 2026-08-26, before implementing the B17 configurator/runner and before rendering any B17 sequence.
 
-Status: **PRE-REGISTERED / NOT EXECUTED**
+Status: **EXECUTED / SAMPLING_CAUSAL_SUPPORT**
 
 ## Evidence-supported question
 
@@ -77,3 +77,8 @@ At least twelve disposable negative cases must reach stable reasons for: factori
 - two sequence replicates per cell do not estimate a general mismatch probability;
 - output containers may remain byte-different even when decoded pixels are exact.
 
+## Execution result
+
+All eight fresh Blender runs completed and all 12/12 attacks reached their frozen reasons. S01-D0 and S01-D1 were both 144/144 decoded-pixel exact with zero failed pixels and zero maximum error. S32-D0 was 132/144 exact with 88 failed pixels; S32-D1 was 126/144 exact with 113 failed pixels. Both 32-sample cells retained an approximately one-code-value maximum error.
+
+The frozen decision is `SAMPLING_CAUSAL_SUPPORT`. The visibly noisy sample-1 output is diagnostic evidence, not an acceptable quality setting or a production fix.

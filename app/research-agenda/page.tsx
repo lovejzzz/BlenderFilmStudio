@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>继续隔离 Eevee sample count 与求值顺序。</h3><p>B16 证明 dither=0 仍有 69 个一-code-value 微差；43、91、93、110、111、114 等帧重复出现。下一步控制采样或并行度，在看结果前冻结门槛；完整样片人审继续独立。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>测 Eevee sample count 的剂量响应。</h3><p>B17 的 2×2 实验显示 sample=1 在两种 dither 下均 144/144 exact，而 sample=32 两组均非 exact；但单采样画面明显更噪。下一步预注册 1/2/4/8/16/32 samples，寻找确定性边界，再隔离求值调度。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/dither-isolation-v0-1">查看最新因果隔离证据 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/eevee-sampling-factorial-v0-1">查看最新采样因果证据 →</Link></footer>
     </main>
   );
 }
