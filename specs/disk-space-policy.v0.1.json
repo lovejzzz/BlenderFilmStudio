@@ -1,0 +1,29 @@
+{
+  "documentType": "BFS_DISK_SPACE_POLICY",
+  "version": "0.1.0",
+  "status": "ACTIVE",
+  "scope": [
+    "npm experiment:* commands",
+    "npm derive:* commands",
+    "restricted Blender compile",
+    "compiler preview rendering"
+  ],
+  "gate": {
+    "minimumReserveGiB": 100,
+    "defaultProjectedWriteGiB": 20,
+    "acceptWhen": "availableGiB - projectedWriteGiB >= minimumReserveGiB",
+    "blockedExitCode": 75
+  },
+  "retention": {
+    "automaticDeletion": false,
+    "rawEvidenceMayBeDeletedAutomatically": false,
+    "cleanupRequiresExactTargetsAndExplicitApproval": true
+  },
+  "operatingRules": [
+    "Use one stable origin for browser applications that cache local models; a changed host or port creates independent origin storage.",
+    "Declare a larger BFS_PROJECTED_WRITE_GIB value when a preregistered experiment can exceed 20 GiB.",
+    "Changing BFS_DISK_RESERVE_GIB is an explicit policy override and must not be inferred from urgency.",
+    "A blocked guard is an expected safety result, not an experiment failure.",
+    "Preserve tracked evidence and unresolved blind-study material until its retention decision is recorded."
+  ]
+}

@@ -50,6 +50,17 @@ npm run experiment:compiler
 npm run render:compiler-previews
 ```
 
+## Disk safety gate
+
+Render and experiment commands stop before launching when projected writes would leave less than 100 GiB free. The default projection is 20 GiB, and the guard never deletes files automatically.
+
+```bash
+npm run preflight:disk
+npm run test:disk-guard
+```
+
+For a preregistered job with a larger output estimate, set `BFS_PROJECTED_WRITE_GIB` to that estimate. Lowering `BFS_DISK_RESERVE_GIB` is an explicit policy override, not a cleanup mechanism. The machine-readable contract is [`specs/disk-space-policy.v0.1.json`](specs/disk-space-policy.v0.1.json).
+
 ## Research policy
 
 Each update should state its snapshot date, distinguish capability from reliability, link to primary evidence where possible, and record licensing or reproducibility constraints.
