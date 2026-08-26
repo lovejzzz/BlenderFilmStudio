@@ -166,6 +166,81 @@
         "type": "AREA"
       }
     ],
+    "outputSpec": {
+      "acceptance": {
+        "exactFrameCount": true,
+        "humanReview": "REQUIRED",
+        "pixelTolerance": "DEVICE_CLASS_POLICY_REQUIRED",
+        "rejectMissingChannels": true,
+        "rejectNaNOrInfinity": true,
+        "requirePerFrameSha256": true,
+        "requireRenderTelemetry": true,
+        "requireSceneManifest": true
+      },
+      "canonicalSha256": "0cfe3be32e15e2d71547281bae532172b895297e98f356335137ace9df0dfce3",
+      "color": {
+        "displayTransforms": [
+          {
+            "display": "sRGB - Display",
+            "id": "REVIEW_SDR",
+            "status": "configured-display-calibration-pending",
+            "target": "sRGB display / SDR 100 nit review",
+            "transform": "ACES 2 Output Transform",
+            "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+          },
+          {
+            "display": null,
+            "id": "REVIEW_CINEMA",
+            "status": "pending-calibration",
+            "target": "DCI theatrical reference conditions",
+            "transform": "ACES 2 Output Transform",
+            "view": null
+          }
+        ],
+        "ocioConfigName": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+        "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "ocioConfigUri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "ocioPolicy": "PINNED_EXACT_CONFIG_AND_HASH",
+        "openColorIOVersion": "2.5.0",
+        "sceneLinearEncoding": "ACEScg",
+        "sceneLinearRole": "ACEScg",
+        "verifiedOcioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+      },
+      "id": "BFS_RESEARCH_MASTER_0_1",
+      "master": {
+        "alpha": "PREMULTIPLIED",
+        "compression": "ZIP_LOSSLESS",
+        "container": "OpenEXR multi-layer image sequence",
+        "pixelType": "HALF",
+        "requiredAttributes": [
+          "chromaticities",
+          "framesPerSecond",
+          "timeCode",
+          "owner",
+          "comments"
+        ],
+        "requiredPasses": [
+          "Combined",
+          "Alpha",
+          "Depth",
+          "Normal",
+          "Vector",
+          "Cryptomatte"
+        ]
+      },
+      "picture": {
+        "frameNumberPadding": 6,
+        "frameRate": {
+          "denominator": 1,
+          "numerator": 24
+        },
+        "height": 2160,
+        "pixelAspectRatio": 1,
+        "shutterAngleDegrees": 180,
+        "width": 3840
+      },
+      "specVersion": "0.1.0"
+    },
     "outputs": {
       "blend": "renders/SHOT_102scene.blend",
       "manifest": "renders/SHOT_102scene.manifest.json",
@@ -255,6 +330,6 @@
       "strength": 0.25
     }
   },
-  "planHash": "b7def711819a1e2aa0d4d77093e974ba2684101e2894c4bbd39fd12a3f8dada6",
+  "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
   "planVersion": "0.1.0"
 }

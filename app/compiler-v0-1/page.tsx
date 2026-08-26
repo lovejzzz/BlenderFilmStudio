@@ -21,11 +21,11 @@ export const metadata: Metadata = {
 
 const results = [
   {
-    id: 'B01', title: '材质静物', shot: 'SHOT_101', plan: '85ed32b6…2499e', structure: '18d807d4…d6fe',
+    id: 'B01', title: '材质静物', shot: 'SHOT_101', plan: '316114f1…3eaf', structure: 'c699fc27…7f0b',
     verdict: 'PASS', detail: '皮革、金属、玻璃、肤色卡、双灯与 58mm 摄影机。',
   },
   {
-    id: 'B02', title: '室内 Dolly', shot: 'SHOT_102', plan: 'b7def711…dada6', structure: 'd0bc5ffe…52a1f',
+    id: 'B02', title: '室内 Dolly', shot: 'SHOT_102', plan: 'a9022bf6…6687', structure: '025c6fa5…856d',
     verdict: 'PASS', detail: '144 帧、24fps、摄影机线性关键帧、室内集合、道具与窗光。',
   },
 ];
@@ -36,7 +36,7 @@ const findings = [
   ['F03', 'EXR 是两阶段设置', 'Blender 5.2 需先把 media_type 设为 MULTI_LAYER_IMAGE，才允许 OPEN_EXR_MULTILAYER；旧式单字段赋值会失败。'],
   ['F04', 'Action 旧 API 已删除', 'Blender 5.2 不再提供 action.fcurves；编译器改用 Action Slot → Channelbag → F-Curves，并在 manifest 中记录插值。'],
   ['F05', '.blend 字节不稳定', '相同计划的两个 .blend SHA-256 不同，但规范化结构、关键帧、资产与渲染设置的结构哈希相同。'],
-  ['F06', 'ACES 尚不能宣称完成', 'OutputSpec 声明 ACEScg，但尚未锁定 OCIO config 与哈希；manifest 主动写入警告，不把声明当成校准。'],
+  ['F06', 'ACES 2 配置已锁定', 'cg-config-v4.0.0 / ACES 2.0 已按文件与 SHA-256 固定；物理审片显示校准仍是独立的未完成项。'],
 ];
 
 const references = [
@@ -60,20 +60,20 @@ export default function CompilerV01Page() {
     <main className="compiler-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="编译实验导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/research-agenda">研究路线</Link><Link href="/spec-v0-1">规格 v0.1</Link><a href="#results">结果</a><a href="#evidence">证据</a></nav>
+        <nav aria-label="编译实验导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/research-agenda">研究路线</Link><Link href="/spec-v0-1">规格 v0.1</Link><Link href="/pixel-v0-1">像素实验</Link><a href="#results">结果</a></nav>
         <span className="edition compiler-edition">Compiler 0.1</span>
       </header>
 
       <section className="compiler-hero">
         <div className="compiler-grid" aria-hidden="true" />
         <div className="compiler-hero-copy"><p className="eyebrow"><span /> NATIVE BLENDER 5.2.0 LTS · EXECUTED</p><h1>从<span>可拒绝合同</span><br />进入<span>可复现场景。</span></h1><p>这不是架构图。B01 与 B02 已经由同一条 SceneSpec → BuildPlan → Blender 编译链各执行两次，并留下场景 manifest、结构哈希、篡改测试和真实预览。</p></div>
-        <div className="compiler-proof"><header><span>experiment:compiler</span><b>ALL STRUCTURAL CHECKS PASSED</b></header><code>B01 · 18d807d4…d6fe</code><code>B02 · d0bc5ffe…52a1f</code><code>TAMPERED PLAN · REJECTED × 2</code><small>.blend bytes differ · structure matches</small></div>
+        <div className="compiler-proof"><header><span>experiment:compiler</span><b>ALL STRUCTURAL CHECKS PASSED</b></header><code>B01 · c699fc27…7f0b</code><code>B02 · 025c6fa5…856d</code><code>TAMPERED PLAN · REJECTED × 2</code><small>.blend bytes differ · structure matches</small></div>
         <div className="compiler-stats"><article><strong>2</strong><span>基准镜头</span><small>B01 + B02</small></article><article><strong>4</strong><span>净构建</span><small>每镜头两次</small></article><article><strong>2/2</strong><span>结构一致</span><small>SHA-256 manifest</small></article><article><strong>4</strong><span>真实预览</span><small>Blender EEVEE</small></article></div>
       </section>
 
       <section className="section compiler-verdict">
         <div className="section-index">00 / 实验结论</div>
-        <div className="compiler-verdict-grid"><div><p className="eyebrow dark"><span /> PROVEN, WITH LIMITS</p><h2>最小“电影编译器”<br />已经<span>运行。</span></h2></div><div><b>可以确认</b><p>同一受限计划能在 Blender 5.2 中复建相同的资产拓扑、对象参数、摄影机关键帧与渲染设置。</p><b>仍然不能确认</b><p>像素跨设备一致、ACEScg 校准正确、最终画面达到电影级，或人物表演问题已经解决。</p></div></div>
+        <div className="compiler-verdict-grid"><div><p className="eyebrow dark"><span /> PROVEN, WITH LIMITS</p><h2>最小“电影编译器”<br />已经<span>运行。</span></h2></div><div><b>可以确认</b><p>同一受限计划能在 Blender 5.2 中复建相同的资产拓扑、对象参数、摄影机关键帧与渲染设置。</p><b>后续证据</b><p>同机 4K EXR 像素实验已通过；跨设备一致性、物理显示校准、人物表演与电影审美仍未证明。</p></div></div>
         <div className="compiler-acceptance"><span>ACCEPTANCE UNIT</span><b>canonical scene structure</b><p>不是 `.blend` 文件字节，也不是一张看起来相似的截图。</p></div>
       </section>
 
@@ -104,10 +104,10 @@ export default function CompilerV01Page() {
       </section>
 
       <section className="section compiler-next">
-        <div className="section-index light">05 / 下一证据层</div>
-        <div className="compiler-heading"><div><p className="eyebrow"><span /> PIXEL CONTRACT</p><h2>结构已经通过，<br />下一步审判<span>像素。</span></h2></div><p>先锁定可校验的 OCIO 配置，再输出真正的 4K Multi-layer EXR。每张图必须检查通道、有限值、元数据、帧数、哈希，并对两次渲染执行像素差异。</p></div>
-        <div className="pixel-gates"><article><span>G01</span><b>Pin OCIO</b><p>配置文件、版本、SHA-256 与 display/view。</p></article><article><span>G02</span><b>Render EXR</b><p>B01 单帧；B02 起点、中点、终点。</p></article><article><span>G03</span><b>Inspect</b><p>AOV、通道类型、NaN/Inf、chromaticities 与 fps。</p></article><article><span>G04</span><b>Compare</b><p>同设备精确/阈值差异，再设计跨 GPU 容差。</p></article></div>
-        <div className="compiler-nonclaim"><b>当前边界</b><p>v0.1 证明的是受限数据能够可复现地构建 Blender 场景；它没有证明最终像素可复现，更没有证明“影院级”已经达成。</p></div>
+        <div className="section-index light">05 / 后续证据层 · 已执行</div>
+        <div className="compiler-heading"><div><p className="eyebrow"><span /> PIXEL CONTRACT · PASS</p><h2>结构之后，<br />像素也接受了<span>审判。</span></h2></div><p>固定 ACES 2 配置后，B01 与 B02 四个代表帧各执行两次 4K/512spp Cycles CPU 渲染。所有 multipart EXR 解码后逐像素零误差。</p></div>
+        <div className="pixel-gates"><article><span>G01 · PASS</span><b>Pin OCIO</b><p>配置、版本、SHA-256 与 display/view 已锁定。</p></article><article><span>G02 · PASS</span><b>Render EXR</b><p>4 帧 × 2 次真实 4K Multi-layer EXR。</p></article><article><span>G03 · PASS*</span><b>Inspect</b><p>Pass 与有限值通过；原生元数据由 mastering 补齐。</p></article><article><span>G04 · PASS</span><b>Compare</b><p>8 个 parts 全部 max error = 0。</p></article></div>
+        <div className="compiler-nonclaim"><b>进入 PixelSpec</b><p><Link href="/pixel-v0-1">查看 8 次 4K 渲染、EXR 通道、逐像素差异、mastering 与成本实测 →</Link></p></div>
       </section>
 
       <section className="section compiler-sources">
@@ -117,7 +117,7 @@ export default function CompilerV01Page() {
         <ol className="references compiler-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Compiler Experiment v0.1</b></div><p>Native Blender 5.2.0 LTS · B01/B02 structural proof</p><Link href="/spec-v0-1">返回规格合同 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Compiler Experiment v0.1</b></div><p>Native Blender 5.2.0 LTS · B01/B02 structural proof</p><Link href="/pixel-v0-1">进入像素实验 →</Link></footer>
     </main>
   );
 }

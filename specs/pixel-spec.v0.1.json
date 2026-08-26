@@ -1,0 +1,53 @@
+{
+  "documentType": "BFS_PIXEL_SPEC",
+  "specVersion": "0.1.0",
+  "status": "experimental",
+  "purpose": "Test same-machine repeatability and master-file conformance for selected Blender 5.2 Cycles frames",
+  "environment": {
+    "blenderVersion": "5.2.0",
+    "renderEngine": "CYCLES",
+    "device": "CPU",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "samples": 512,
+    "animatedSeed": false
+  },
+  "color": {
+    "sceneLinearEncoding": "ACEScg",
+    "ocioConfigName": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+    "ocioConfigUri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+    "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+  },
+  "image": {
+    "width": 3840,
+    "height": 2160,
+    "container": "OPEN_EXR_MULTILAYER",
+    "pixelType": "HALF",
+    "compression": "ZIP_LOSSLESS",
+    "requiredPasses": ["Combined", "Alpha", "Depth", "Normal", "Vector", "Cryptomatte"],
+    "requiredAttributes": ["chromaticities", "framesPerSecond", "timeCode", "owner", "comments"]
+  },
+  "samples": [
+    { "benchmark": "B01", "frame": 1 },
+    { "benchmark": "B02", "frame": 1 },
+    { "benchmark": "B02", "frame": 72 },
+    { "benchmark": "B02", "frame": 144 }
+  ],
+  "repetitions": 2,
+  "acceptance": {
+    "exactResolution": true,
+    "rejectNaNOrInfinity": true,
+    "rejectMissingPasses": true,
+    "reportMissingAttributes": true,
+    "requirePerFileSha256": true,
+    "sameMachinePixelMaxAbsoluteError": 0.0,
+    "sameMachinePixelFailureCount": 0,
+    "humanReview": "REQUIRED"
+  },
+  "explicitNonClaims": [
+    "Same-machine repeatability does not prove cross-device or cross-platform reproducibility.",
+    "Passing numerical checks does not prove cinematic quality.",
+    "The selected frames do not prove temporal stability for every frame of a shot.",
+    "This experiment does not establish DCI compliance or create a DCP."
+  ]
+}

@@ -85,7 +85,7 @@ export default function SpecV01Page() {
     <main className="spec-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="规格导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><Link href="/research-agenda">研究路线</Link><Link className="compiler-route" href="/compiler-v0-1">编译实验</Link><a href="#tests">测试</a></nav>
+        <nav aria-label="规格导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><Link href="/research-agenda">研究路线</Link><Link className="compiler-route" href="/compiler-v0-1">编译实验</Link><Link href="/pixel-v0-1">像素实验</Link><a href="#tests">测试</a></nav>
         <span className="edition spec-edition">Spec 0.1</span>
       </header>
 
@@ -140,7 +140,7 @@ export default function SpecV01Page() {
         <div className="section-index">06 / 未冻结问题</div>
         <div className="spec-heading dark-heading"><div><p className="eyebrow dark"><span /> OPEN DECISIONS</p><h2>v0.1 有意保持小，<br />不假装解决全部电影语义。</h2></div><p>这些问题不阻止第一轮 B01/B02 编译实验，却会阻止角色、跨机渲染或正式交付。每项必须用实验升级，而不是凭设计文档升级。</p></div>
         <div className="unresolved-grid">{unresolved.map(([id, title, detail]) => <article key={id}><span>{id}</span><h3>{title}</h3><p>{detail}</p></article>)}</div>
-        <div className="next-compiler"><span>COMPLETED MILESTONE</span><div><h3>SceneSpec → immutable BuildPlan → Blender 5.2</h3><p>B01/B02 已完成双净构建、结构哈希比较和篡改拒绝。<Link href="/compiler-v0-1">查看编译实验与真实预览 →</Link> 下一步冻结 OCIO 并建立 EXR 像素合同。</p></div></div>
+        <div className="next-compiler"><span>COMPLETED MILESTONES</span><div><h3>SceneSpec → BuildPlan → Blender → 4K EXR</h3><p>B01/B02 双净构建已经通过；固定 ACES 2 后的 4 个代表帧也完成双渲染与逐像素比较。<Link href="/pixel-v0-1">查看 PixelSpec、mastering 与成本实测 →</Link></p></div></div>
       </section>
 
       <section className="section spec-sources" id="sources">
@@ -150,7 +150,7 @@ export default function SpecV01Page() {
         <ol className="references spec-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>SceneSpec v0.1</b></div><p>Executable artifact · Experimental · 22/22 fixtures passing</p><Link href="/compiler-v0-1">进入编译实验 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>SceneSpec v0.1</b></div><p>Executable artifact · Experimental · 22/22 fixtures passing</p><Link href="/pixel-v0-1">进入像素实验 →</Link></footer>
     </main>
   );
 }

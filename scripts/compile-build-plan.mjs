@@ -5,6 +5,7 @@ import { canonicalJson, canonicalize, readJson, repositoryRoot, sha256, validate
 
 const COMPILER_VERSION = '0.1.0';
 const TARGET_BLENDER = '5.2.0';
+const outputSpecPath = resolve(repositoryRoot, 'specs/output-spec.v0.1.json');
 
 function repoRelative(absolutePath) {
   return relative(repositoryRoot, absolutePath).split(sep).join('/');
@@ -102,6 +103,18 @@ export async function compileBuildPlan(inputPath) {
   }
 
   const normalizedDocument = normalizeDocument(document);
+  const outputSpec = await readJson(outputSpecPath);
+  if (outputSpec.id !== normalizedDocument.render.outputProfile) {
+    throw new Error(`Output profile ${normalizedDocument.render.outputProfile} does not match ${outputSpec.id}`);
+  }
+  const ocioConfigPath = resolve(repositoryRoot, outputSpec.color.ocioConfigUri);
+  assertBelowRepository(ocioConfigPath, 'OCIO config');
+  const ocioConfigSha256 = await digestFile(ocioConfigPath).catch(() => {
+    throw new Error(`Pinned OCIO config is missing: ${outputSpec.color.ocioConfigUri}`);
+  });
+  if (ocioConfigSha256 !== outputSpec.color.ocioConfigSha256) {
+    throw new Error(`OCIO config hash mismatch: expected ${outputSpec.color.ocioConfigSha256}, received ${ocioConfigSha256}`);
+  }
   const verifiedAssets = await resolveAssets(normalizedDocument);
   const verifiedSources = await verifyLocalSources(normalizedDocument);
   const authorizedOperations = requireOperations(normalizedDocument);
@@ -128,6 +141,15 @@ export async function compileBuildPlan(inputPath) {
     world: normalizedDocument.world,
     events: normalizedDocument.events,
     render: normalizedDocument.render,
+    outputSpec: {
+      id: outputSpec.id,
+      specVersion: outputSpec.specVersion,
+      canonicalSha256: sha256(canonicalJson(outputSpec)),
+      picture: outputSpec.picture,
+      color: { ...outputSpec.color, verifiedOcioConfigSha256: ocioConfigSha256 },
+      master: outputSpec.master,
+      acceptance: outputSpec.acceptance,
+    },
     security: {
       networkAccess: false,
       arbitraryPython: false,

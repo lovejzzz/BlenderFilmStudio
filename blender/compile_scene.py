@@ -15,6 +15,7 @@ import time
 from pathlib import Path
 
 import bpy
+import PyOpenColorIO as ocio
 from bpy_extras import anim_utils
 
 
@@ -160,7 +161,7 @@ def configure_world(scene: bpy.types.Scene, world_spec: dict) -> None:
     scene.world = world
 
 
-def configure_render(scene: bpy.types.Scene, render_spec: dict, active_camera: dict, artifact_root: Path) -> list[str]:
+def configure_render(scene: bpy.types.Scene, render_spec: dict, output_spec: dict, active_camera: dict, artifact_root: Path) -> list[str]:
     warnings = []
     scene.render.engine = render_spec["finalEngine"]
     scene.render.resolution_x = render_spec["resolution"]["width"]
@@ -175,6 +176,11 @@ def configure_render(scene: bpy.types.Scene, render_spec: dict, active_camera: d
     scene.render.motion_blur_shutter = active_camera["shutterAngleDeg"] / 360.0
     scene.render.motion_blur_position = "CENTER"
     scene.cycles.samples = render_spec["samplesFinal"]
+    scene.cycles.seed = int(scene.get("bfs_shot_seed", 0))
+    scene.cycles.use_animated_seed = False
+    scene.cycles.device = "CPU"
+    scene.render.threads_mode = "FIXED"
+    scene.render.threads = 8
 
     view_layer = scene.view_layers[0]
     view_layer.name = "BFS_MASTER"
@@ -186,10 +192,23 @@ def configure_render(scene: bpy.types.Scene, render_spec: dict, active_camera: d
     if hasattr(view_layer, "cycles"):
         view_layer.cycles.use_denoising = render_spec["denoise"]
 
+    color_spec = output_spec["color"]
+    current_config = ocio.GetCurrentConfig()
+    current_name = current_config.getName()
+    current_scene_linear = current_config.getRoleColorSpace(ocio.ROLE_SCENE_LINEAR)
+    if current_name != color_spec["ocioConfigName"]:
+        raise RuntimeError(f"OCIO config mismatch: expected {color_spec['ocioConfigName']}, received {current_name}")
+    if current_scene_linear != color_spec["sceneLinearRole"]:
+        raise RuntimeError(f"OCIO scene-linear role mismatch: expected {color_spec['sceneLinearRole']}, received {current_scene_linear}")
+    review = next(item for item in color_spec["displayTransforms"] if item["id"] == "REVIEW_SDR")
+    scene.display_settings.display_device = review["display"]
+    scene.view_settings.view_transform = review["view"]
     scene["bfs_output_profile"] = render_spec["outputProfile"]
-    scene["bfs_declared_encoding"] = "ACEScg"
-    scene["bfs_ocio_status"] = "UNRESOLVED_CONFIG_HASH"
-    warnings.append("OutputSpec declares ACEScg, but v0.1 has no pinned OCIO configuration hash; no calibrated ACES claim is made.")
+    scene["bfs_declared_encoding"] = color_spec["sceneLinearEncoding"]
+    scene["bfs_ocio_config"] = current_name
+    scene["bfs_ocio_sha256"] = color_spec["verifiedOcioConfigSha256"]
+    scene["bfs_ocio_status"] = "PINNED_AND_VERIFIED"
+    warnings.append("ACES 2 OCIO config is pinned and verified; the physical review display is not yet calibrated by this experiment.")
     return warnings
 
 
@@ -301,6 +320,16 @@ def build_structure(scene: bpy.types.Scene, wrapper: dict, asset_collections: di
             "colorDepth": scene.render.image_settings.color_depth,
             "exrCodec": scene.render.image_settings.exr_codec,
             "cyclesSamples": scene.cycles.samples,
+            "cyclesSeed": scene.cycles.seed,
+            "cyclesAnimatedSeed": scene.cycles.use_animated_seed,
+            "cyclesDevice": scene.cycles.device,
+            "threadsMode": scene.render.threads_mode,
+            "threads": scene.render.threads,
+            "ocioConfig": scene["bfs_ocio_config"],
+            "ocioConfigSha256": scene["bfs_ocio_sha256"],
+            "sceneLinearRole": scene["bfs_declared_encoding"],
+            "display": scene.display_settings.display_device,
+            "view": scene.view_settings.view_transform,
         },
     }
 
@@ -328,6 +357,7 @@ def main() -> None:
     scene.unit_settings.scale_length = plan["shot"]["unitScaleMeters"]
     scene["bfs_plan_hash"] = wrapper["planHash"]
     scene["bfs_scene_spec_hash"] = plan["source"]["canonicalSha256"]
+    scene["bfs_shot_seed"] = plan["shot"]["seed"]
 
     asset_collections = {}
     for asset in plan["assets"]:
@@ -339,7 +369,7 @@ def main() -> None:
         create_light(managed, light)
     configure_world(scene, plan["world"])
     scene.camera = camera_objects[plan["shot"]["activeCamera"]]
-    warnings = configure_render(scene, plan["render"], next(camera for camera in plan["cameras"] if camera["id"] == plan["shot"]["activeCamera"]), artifact_root)
+    warnings = configure_render(scene, plan["render"], plan["outputSpec"], next(camera for camera in plan["cameras"] if camera["id"] == plan["shot"]["activeCamera"]), artifact_root)
 
     structure = build_structure(scene, wrapper, asset_collections, camera_objects)
     structure_hash = sha256_bytes(canonical_json(structure).encode("utf-8"))

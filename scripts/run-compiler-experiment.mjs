@@ -9,6 +9,8 @@ const plansRoot = resolve(experimentRoot, 'plans');
 const evidenceRoot = resolve(experimentRoot, 'evidence');
 const runsRoot = resolve(experimentRoot, 'runs');
 const blenderScript = resolve(repositoryRoot, 'blender/compile_scene.py');
+const ocioConfig = resolve(repositoryRoot, 'color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio');
+const blenderEnvironment = { ...process.env, OCIO: ocioConfig };
 
 async function findBlender() {
   const candidates = [
@@ -26,9 +28,9 @@ async function findBlender() {
   throw new Error('Blender executable not found; set BLENDER_BIN');
 }
 
-function runProcess(command, args, { expectSuccess = true } = {}) {
+function runProcess(command, args, { expectSuccess = true, env = process.env } = {}) {
   return new Promise((resolvePromise, reject) => {
-    const child = spawn(command, args, { cwd: repositoryRoot, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(command, args, { cwd: repositoryRoot, env, stdio: ['ignore', 'pipe', 'pipe'] });
     let stdout = '';
     let stderr = '';
     child.stdout.on('data', chunk => { stdout += chunk; });
@@ -66,7 +68,7 @@ async function compileRun(blender, benchmark, label, planPath) {
     '--plan', planPath,
     '--repository-root', repositoryRoot,
     '--output-dir', outputDir,
-  ]);
+  ], { env: blenderEnvironment });
   const manifest = await readJson(resolve(outputDir, 'scene.manifest.json'));
   const blendBytes = await readFile(resolve(outputDir, 'scene.blend'));
   const evidencePath = resolve(evidenceRoot, `${benchmark}-${label}.manifest.json`);
@@ -92,7 +94,7 @@ async function verifyTamperRejected(blender, benchmark, plan) {
     '--plan', tamperedPath,
     '--repository-root', repositoryRoot,
     '--output-dir', resolve(runsRoot, benchmark, 'tampered-output'),
-  ], { expectSuccess: false });
+  ], { expectSuccess: false, env: blenderEnvironment });
   return result.code !== 0 && `${result.stdout}\n${result.stderr}`.includes('BuildPlan hash mismatch');
 }
 
@@ -136,7 +138,7 @@ async function main() {
     explicitNonClaims: [
       'No final pixels were rendered in this structural experiment.',
       'Binary .blend byte identity is recorded but is not the acceptance criterion.',
-      'ACEScg is declared by OutputSpec but remains uncalibrated until an OCIO configuration and hash are pinned.',
+      'The ACES 2 OCIO config is pinned; physical display calibration and pixel reproducibility are outside this structural experiment.',
     ],
   };
   await writeFile(resolve(experimentRoot, 'results.json'), `${JSON.stringify(report, null, 2)}\n`);

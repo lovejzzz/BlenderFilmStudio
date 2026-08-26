@@ -89,7 +89,7 @@ export default function CostModelPage() {
     <main className="cost-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="成本研究导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><a href="#economics">成本栈</a><Link className="route-tab agenda-route" href="/research-agenda">研究路线</Link><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link></nav>
+        <nav aria-label="成本研究导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><a href="#economics">成本栈</a><Link className="route-tab agenda-route" href="/research-agenda">研究路线</Link><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link></nav>
         <span className="edition cost-edition">Cost 01</span>
       </header>
 
@@ -164,8 +164,15 @@ export default function CostModelPage() {
         </div>
       </section>
 
+      <section className="section cost-measured">
+        <div className="section-index light">05 / 真实渲染基线</div>
+        <div className="cost-section-heading"><div><p className="eyebrow"><span /> MEASURED · NOT ESTIMATED</p><h2>免费的是许可，<br />不是<span>机器时间。</span></h2></div><p>PixelSpec v0.1 在同一台 darwin-arm64 工作站上完成 8 次 Blender 5.2 Cycles CPU 终稿渲染：3840×2160、512 samples、固定 8 线程、ACES 2、multipart HALF EXR。</p></div>
+        <div className="measured-bench"><article><strong>2,621 s</strong><span>8 次正式渲染</span><small>43 分 41 秒</small></article><article><strong>327.65 s</strong><span>平均每帧</span><small>5 分 28 秒</small></article><article><strong>2.18 h</strong><span>每秒成片</span><small>24 帧串行换算</small></article><article><strong>140 MB</strong><span>平均每帧 EXR</span><small>约 3.36 GB / 成片秒</small></article></div>
+        <div className="measured-warning"><b>这是下限，不是电影报价</b><p>B01/B02 是简单基准场景；英雄角色、毛发、体积、复杂间接光、更多 AOV 与更高采样都会改变吞吐。另一方面，GPU、分帧并行、降噪策略和分层验收可以显著降低时间。</p><Link href="/pixel-v0-1">查看原始像素与 EXR 证据 →</Link></div>
+      </section>
+
       <section className="section cost-scenarios">
-        <div className="section-index light">05 / 条件与情景</div>
+        <div className="section-index light">06 / 条件与情景</div>
         <div className="cost-section-heading"><div><p className="eyebrow"><span /> WHEN IS IT “ALMOST SUBSCRIPTION ONLY”?</p><h2>只有六个条件<br />同时成立。</h2></div><p>这不是否定最初设想，而是把它变成可以验证的假设。只要任一条件变化，就切换相应成本模型。</p></div>
         <div className="condition-grid">
           <article><span>01</span><b>已有可用 GPU 工作站</b><p>不发生新增硬件现金支出。</p></article><article><span>02</span><b>全部本地渲染</b><p>不使用云 GPU 和大额出站流量。</p></article><article><span>03</span><b>资产已拥有或免费</b><p>没有临时购买、扫描和外包建模。</p></article><article><span>04</span><b>人工暂不计价</b><p>研究者时间被视为研发投入而非镜头成本。</p></article><article><span>05</span><b>Codex 未超过额度</b><p>不加购 credits，也不切换到 API 计费。</p></article><article><span>06</span><b>不接可选生成 API</b><p>不额外调用图像、3D、动作、声音或视频模型。</p></article>
@@ -174,16 +181,16 @@ export default function CostModelPage() {
       </section>
 
       <section className="section cost-levers">
-        <div className="section-index">06 / 降本路线</div>
+        <div className="section-index">07 / 降本路线</div>
         <div className="cost-section-heading dark-heading"><div><p className="eyebrow dark"><span /> OPTIMIZATION ORDER</p><h2>先减少失败，<br />再减少单价。</h2></div><p>把每个优化动作与测量指标绑定。低价模型如果导致更多返工，可能反而提高“每个最终采用秒”的成本。</p></div>
         <div className="lever-grid">{levers.map(([id, title, detail]) => <article key={id}><span>{id}</span><h3>{title}</h3><p>{detail}</p></article>)}</div>
         <div className="instrumentation"><span>每个镜头最少记录</span><div>{['Codex 模式与模型', '输入 / 缓存 / 输出 Token', '构建与渲染小时', '功耗与设备', '资产复用次数', '失败原因与重试', '人工分钟', '最终采用秒'].map(item => <b key={item}>{item}</b>)}</div></div>
       </section>
 
       <section className="section cost-method" id="sources">
-        <div className="section-index light">07 / 方法与证据</div>
+        <div className="section-index light">08 / 方法与证据</div>
         <div className="cost-section-heading"><div><p className="eyebrow"><span /> EVIDENCE POLICY</p><h2>价格会变，<br />公式应该稳定。</h2></div><p>本页所有价格以 2026-08-25 为截点，优先引用官方资料。具体订阅额度会随任务、模型、上下文、推理强度和工具调用变化；发布前应再次核价。</p></div>
-        <div className="method-cautions"><article><b>事实</b><p>Blender 许可为零、Codex 的两种认证路径、公开套餐/API 价格。</p></article><article><b>工程判断</b><p>推荐的模型路由、资产摊销方式、成本栈与降本顺序。</p></article><article><b>待实验</b><p>真实镜头的 Token、渲染能耗、首次接受率与资产复用收益。</p></article></div>
+        <div className="method-cautions"><article><b>事实</b><p>Blender 许可为零、Codex 的两种认证路径、公开套餐/API 价格，以及 PixelSpec 的 CPU 时间与 EXR 体积。</p></article><article><b>工程判断</b><p>推荐的模型路由、资产摊销方式、成本栈与降本顺序。</p></article><article><b>待实验</b><p>真实镜头的 Token、渲染能耗、GPU 吞吐、首次接受率与资产复用收益。</p></article></div>
         <ol className="references cost-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
         <div className="license-note"><b>许可提醒</b><p>Blender 本身可免费用于商业作品，作品版权归创作者；但如果未来分发依赖 <code>bpy</code> 的 Blender 插件，应单独审查 GPL 合规。免费使用与可任意闭源分发插件不是同一件事。</p></div>
       </section>

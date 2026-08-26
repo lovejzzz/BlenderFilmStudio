@@ -29,8 +29,8 @@ const gaps: {
   {
     id: 'G01', title: '“影院级”目标规格', type: 'definition', priority: 'P0',
     question: '我们究竟要交付给什么显示设备、色彩管线和母版容器？',
-    known: 'Blender 可输出 scene-linear OpenEXR、AOV 与高动态范围；ACES 2.0 和 DCI 1.5 提供可引用的输出与影院边界。',
-    missing: '分辨率、帧率、快门、动态范围、噪声、色域、母版和审片条件仍未锁定；“电影感”目前不可测。',
+    known: 'OutputSpec 已锁 4K、24fps、HALF multipart EXR 与 ACES 2 OCIO 文件哈希；mastering 已验证标准属性写回不改变像素。',
+    missing: '物理审片显示校准、影院输出路径、动态范围/噪声阈值与“电影感”盲评协议仍未完成。',
     artifact: 'OutputSpec v0.1 + Review Environment',
     gate: '同一 EXR 在两个受控显示路径中得到可解释、一致的输出。',
   },
@@ -45,16 +45,16 @@ const gaps: {
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: '场景结构、依赖和显式参数可以哈希；Blender 支持后台命令行构建与渲染。',
-    missing: 'GPU、驱动、并行求解、去噪、浮点与模拟缓存可能造成差异，不能先假设逐像素完全相同。',
+    known: 'B01/B02 结构双净构建一致；同机 CPU 固定环境的 4 个 4K 代表帧双渲染均逐像素零误差。',
+    missing: '跨 GPU、驱动、OS、补丁版本、角色求值与模拟缓存的容差边界仍未知。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
   },
   {
     id: 'G04', title: '代表性基准镜头组', type: 'experiment', priority: 'P0',
     question: '一个六秒室内镜头能否代表整条电影制作链？',
-    known: '单个 golden shot 足以验证最短闭环，却不能暴露近景皮肤、接触、毛发、体积和大场景问题。',
-    missing: '缺少固定资产、固定输入、固定参考、失败注入和跨版本运行的公开小型基准集。',
+    known: 'B01/B02 已包含固定 SceneSpec、资产哈希、BuildPlan、结构/像素报告与成本遥测。',
+    missing: 'B03–B06 尚未实现，近景皮肤、接触、毛发、模拟恢复、体积与大场景仍无实证。',
     artifact: 'BFS Benchmark v0.1 · 6 Shots',
     gate: '六类镜头均能一键构建、失败、恢复、出具结构/像素/成本报告。',
   },
@@ -101,8 +101,8 @@ const gaps: {
   {
     id: 'G10', title: '对照实验与真实经济性', type: 'experiment', priority: 'P0',
     question: '与人工 Blender、视频生成和传统混合流程相比，何时真的更便宜？',
-    known: '已经建立完整成本栈和“每个最终采用秒”公式。',
-    missing: '缺少相同 brief、相同验收标准、相同最终秒数下的 Token、人工、渲染、重试和资产摊销实测。',
+    known: '已经建立完整成本栈；简单 4K/512spp CPU 基准实测平均 327.65 秒/帧、约 140 MB/帧。',
+    missing: '仍缺相同 brief 的三路对照，以及 Token、人工、功耗、GPU、重试和资产摊销的完整实测。',
     artifact: 'Three-arm Cost Study + Raw Telemetry',
     gate: '预注册假设后公开原始记录；不以生成秒数代替最终采用秒。',
   },
@@ -153,7 +153,7 @@ export default function ResearchAgendaPage() {
     <main className="agenda-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link></nav>
+        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link></nav>
         <span className="edition agenda-edition">Agenda 01</span>
       </header>
 
@@ -196,12 +196,12 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>冻结 OCIO，建立 PixelSpec v0.1。</h3><p>SceneSpec、22 个正反样例和 B01/B02 双净构建已经通过。下一步输出真实 4K Multi-layer EXR，检查通道、有限值、元数据与两次渲染差异，再定义跨 GPU 容差。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>建立 B03 ActorSpec 与表演分层。</h3><p>SceneSpec、双净构建、固定 ACES 2、4K PixelSpec 和 EXR mastering 已通过。下一步冻结角色身份、骨骼、身体、面部、视线、呼吸与接触的分层合同，再用近景对白和全身拿取镜头挑战它。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
         <div className="section-index light">05 / 现在做什么</div>
-        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>OutputSpec v0.1</li><li>SceneSpec v0.1</li><li>B01 / B02 基准包</li><li>结构与 EXR Validator</li><li>Token / 渲染 / 人工遥测</li><li>受限工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>ActorSpec 与表演分层</li><li>接触和脚滑指标</li><li>跨 GPU 容差</li><li>资产来源与 C2PA 映射</li><li>ACES 2 审片路径</li><li>人工盲评设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
+        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>ActorSpec v0.1</li><li>B03 / B04 基准包</li><li>身体 / 面部 / 视线分层</li><li>接触与脚滑 Validator</li><li>Token / 渲染 / 人工遥测</li><li>受限角色工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>人工盲评设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
       </section>
 
       <section className="section agenda-method" id="sources">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-25 · Negative results are evidence</p><Link href="/">返回技术基线 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/pixel-v0-1">查看最新像素证据 →</Link></footer>
     </main>
   );
 }
