@@ -1,0 +1,280 @@
+{
+  "documentType": "BFS_B25_TEMPORAL_RESIDUAL_HOLDOUT_RESULT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T12:46:55.428Z",
+  "decision": "STATIC_ONLY_ENVELOPE_FAIL",
+  "validExperiment": true,
+  "humanReview": {
+    "status": "PENDING",
+    "claim": "Automation cannot determine visibility, flicker perception or cinematic quality."
+  },
+  "design": {
+    "type": "three fresh Blender processes, each rendering frames 1 through 144 sequentially",
+    "processOrder": [
+      "A",
+      "B",
+      "C"
+    ],
+    "processes": 3,
+    "renderCalls": 432,
+    "outputFiles": 432,
+    "staticPairComparisons": 432,
+    "temporalTransitionComparisons": 429,
+    "sameProcessHistoryWithinEachSequence": true,
+    "freshProcessBoundaryBetweenReplicates": true
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "rendererSha256": "b969e267db7b73eb7b6f8ea17abf09b2e129b9fce2e706fec950c5bb5e5eda5c",
+    "b25SpecSha256": "b94c70418d1453162c4eb07ee54912358212f6e3bee7ef0c30e2f78a0f214368",
+    "derivationResultSha256": "c3db4e48c1b8d149691f211b1eaaeae96f1ded1bf31d1f80e2030211ab38ad89",
+    "b24ResultsSha256": "585741f255b54bbb46910612053b91b56d8a38c3e8e9e649166740d945f83191",
+    "comparatorSha256": "d0f9e31b9c29400d6524ab9d0963bebb988465f4cfa058a5e6521d664c242ddc",
+    "runnerSha256": "baa6ab005496deafbc83b5855ea05f87e6da6a4646cf176f2249185d3f0e7c65"
+  },
+  "envelopes": {
+    "static": {
+      "maximumAbsoluteErrorAtMost": 0.003922,
+      "rmsErrorAtMost": 0.0000152587890625,
+      "zeroThresholdFailurePixelsAtMost": 16
+    },
+    "temporal": {
+      "definition": "T_t = (A_t - B_t) - (A_(t-1) - B_(t-1)) over decoded RGB",
+      "maximumAbsoluteResidualDeltaAtMost": 0.00784313725490196,
+      "rmsResidualDeltaAtMost": 0.000030517578125,
+      "changedPixelsAtMost": 64
+    }
+  },
+  "processLedger": {
+    "documentType": "BFS_B25_PROCESS_LEDGER",
+    "version": "0.1.0",
+    "b25SpecSha256": "b94c70418d1453162c4eb07ee54912358212f6e3bee7ef0c30e2f78a0f214368",
+    "processes": [
+      {
+        "replicate": "A",
+        "processId": 84684,
+        "manifestHash": "0ea1d6fbdfccc5447766a8049ef4bf2df5ec37cb3c8445c70b12ea16f1559f64"
+      },
+      {
+        "replicate": "B",
+        "processId": 86173,
+        "manifestHash": "031da58fb2aa2d71e8be8acb302c5a02cc8be71d8151f2e3920723b88fbf9242"
+      },
+      {
+        "replicate": "C",
+        "processId": 87449,
+        "manifestHash": "e042fffe4ceca876d514b48c7a278c2e4a619e3ee0719a24da1ca239e9121bf4"
+      }
+    ],
+    "ledgerHash": "8cca7bd77c05da41cb450304e0eabcf5221cd31e3d8baf1cc17ed6aaa16e72b6"
+  },
+  "pairResults": {
+    "A-B": {
+      "staticEnvelopePassFrames": 143,
+      "decodedPixelExactFrames": 133,
+      "temporalEnvelopePassTransitions": 143,
+      "temporalExactTransitions": 121,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "maximumRmsError": 0.000013060542585672345,
+      "maximumFailurePixels": 17,
+      "maximumAbsoluteResidualDelta": 0.003921598196029663,
+      "maximumRmsResidualDelta": 0.000015081015555200999,
+      "maximumChangedPixels": 17,
+      "bindingHash": "219d1b01c50de8ac318bcf8c6f7e96c82fd5724dd92799b782f7cea2e2d7f46a"
+    },
+    "A-C": {
+      "staticEnvelopePassFrames": 143,
+      "decodedPixelExactFrames": 131,
+      "temporalEnvelopePassTransitions": 143,
+      "temporalExactTransitions": 117,
+      "maximumAbsoluteError": 0.003921583294868469,
+      "maximumRmsError": 0.000013060542585672345,
+      "maximumFailurePixels": 17,
+      "maximumAbsoluteResidualDelta": 0.003921583294868469,
+      "maximumRmsResidualDelta": 0.000015081015555200999,
+      "maximumChangedPixels": 17,
+      "bindingHash": "f8317fece2a15be348bb7c4e4fdcfa2da810a77fdbcf93d3fb79006bce98d12b"
+    },
+    "B-C": {
+      "staticEnvelopePassFrames": 144,
+      "decodedPixelExactFrames": 130,
+      "temporalEnvelopePassTransitions": 143,
+      "temporalExactTransitions": 116,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "maximumRmsError": 0.0000090322082898702,
+      "maximumFailurePixels": 10,
+      "maximumAbsoluteResidualDelta": 0.003921598196029663,
+      "maximumRmsResidualDelta": 0.000011338056058290351,
+      "maximumChangedPixels": 10,
+      "bindingHash": "4c4df01a9046ca95e21c2168bf2d336c66ba10f93da9a2febe4ec49e3d183bb7"
+    }
+  },
+  "aggregate": {
+    "uniqueRenderProcesses": 3,
+    "renderedFrames": 432,
+    "staticEnvelopePassFrames": 430,
+    "staticPairComparisons": 432,
+    "temporalEnvelopePassTransitions": 429,
+    "temporalTransitionComparisons": 429,
+    "decodedPixelExactFrames": 394,
+    "temporalExactTransitions": 354,
+    "maximumAbsoluteError": 0.003921598196029663,
+    "maximumRmsError": 0.000013060542585672345,
+    "maximumFailurePixels": 17,
+    "maximumAbsoluteResidualDelta": 0.003921598196029663,
+    "maximumRmsResidualDelta": 0.000015081015555200999,
+    "maximumChangedPixels": 17
+  },
+  "attacks": [
+    {
+      "id": "N_B25_SPEC_SHA",
+      "expectedReason": "B25_SPEC_SHA",
+      "observedReason": "B25_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_DERIVATION_SHA",
+      "expectedReason": "DERIVATION_SHA",
+      "observedReason": "DERIVATION_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B24_RESULT_SHA",
+      "expectedReason": "B24_RESULT_SHA",
+      "observedReason": "B24_RESULT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SPEC_SHA",
+      "expectedReason": "REVIEW_SPEC_SHA",
+      "observedReason": "REVIEW_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER_SHA",
+      "expectedReason": "BLENDER_SHA",
+      "observedReason": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO_SHA",
+      "expectedReason": "OCIO_SHA",
+      "observedReason": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE_SHA",
+      "expectedReason": "SCENE_SHA",
+      "observedReason": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PLAN_STRUCTURE",
+      "expectedReason": "PLAN_OR_STRUCTURE_HASH",
+      "observedReason": "PLAN_OR_STRUCTURE_HASH",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR_SHA",
+      "expectedReason": "CONFIGURATOR_SHA",
+      "observedReason": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER_SHA",
+      "expectedReason": "RENDERER_SHA",
+      "observedReason": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_COMPARATOR_SHA",
+      "expectedReason": "COMPARATOR_SHA",
+      "observedReason": "COMPARATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SOURCE_CONTROLS",
+      "expectedReason": "SOURCE_OR_FIXED_CONTROLS",
+      "observedReason": "SOURCE_OR_FIXED_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_PROCESS_BINDING",
+      "expectedReason": "PROCESS_REPLICATE_BINDING",
+      "observedReason": "PROCESS_REPLICATE_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FRAME_ORDER_COUNT",
+      "expectedReason": "FRAME_ORDER_OR_COUNT",
+      "observedReason": "FRAME_ORDER_OR_COUNT",
+      "pass": true
+    },
+    {
+      "id": "N_PNG_LAYOUT",
+      "expectedReason": "PNG_LAYOUT",
+      "observedReason": "PNG_LAYOUT",
+      "pass": true
+    },
+    {
+      "id": "N_OUTPUT_HASH",
+      "expectedReason": "MISSING_OR_MUTATED_OUTPUT",
+      "observedReason": "MISSING_OR_MUTATED_OUTPUT",
+      "pass": true
+    },
+    {
+      "id": "N_COMPARISON_BINDING",
+      "expectedReason": "COMPARISON_BINDING",
+      "observedReason": "COMPARISON_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_ENVELOPE_MUTATION",
+      "expectedReason": "ENVELOPE_MUTATION",
+      "observedReason": "ENVELOPE_MUTATION",
+      "pass": true
+    },
+    {
+      "id": "N_HUMAN_STATUS",
+      "expectedReason": "HUMAN_REVIEW_STATUS",
+      "observedReason": "HUMAN_REVIEW_STATUS",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "ledger": "experiments/temporal-residual-holdout-v0-1/evidence/process-ledger.json",
+    "manifests": {
+      "A": "experiments/temporal-residual-holdout-v0-1/evidence/A.manifest.json",
+      "B": "experiments/temporal-residual-holdout-v0-1/evidence/B.manifest.json",
+      "C": "experiments/temporal-residual-holdout-v0-1/evidence/C.manifest.json"
+    },
+    "comparisons": {
+      "A-B": {
+        "comparison": "experiments/temporal-residual-holdout-v0-1/evidence/A-B.comparison.json",
+        "binding": "experiments/temporal-residual-holdout-v0-1/evidence/A-B.binding.json"
+      },
+      "A-C": {
+        "comparison": "experiments/temporal-residual-holdout-v0-1/evidence/A-C.comparison.json",
+        "binding": "experiments/temporal-residual-holdout-v0-1/evidence/A-C.binding.json"
+      },
+      "B-C": {
+        "comparison": "experiments/temporal-residual-holdout-v0-1/evidence/B-C.comparison.json",
+        "binding": "experiments/temporal-residual-holdout-v0-1/evidence/B-C.binding.json"
+      }
+    }
+  },
+  "nonClaims": [
+    "Passing validates one numerical temporal residual envelope for one held-out scene/profile/machine/build; it does not establish a universal Blender tolerance.",
+    "The metric isolates frame-to-frame change in cross-run disagreement but is not proof that a viewer cannot see flicker or other temporal artifacts.",
+    "This is not a bitwise determinism claim; PNG container hashes and some decoded pixels may differ.",
+    "The review proxy is PNG8 at 960x540 without motion blur, not a scene-linear master or final cinema delivery.",
+    "Human subjective review remains pending and must record anonymization, player, display and viewing conditions.",
+    "Nothing generalizes to Cycles, another GPU/backend, another machine, another scene, longer shots or different temporal effects."
+  ]
+}
