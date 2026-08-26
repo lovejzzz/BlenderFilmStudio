@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "bfs.autoexecBoundaryIndependentAudit.v0.1",
+  "experimentId": "B36",
+  "observedSourceSha256": "6fa01e9bcd8058d80cd4773926731cee06dc309e35499a69b2df594301f19a18",
+  "sourceMatchesRecordedPreAndPost": true,
+  "analysis": {
+    "schemaVersion": "bfs.autoexecBoundaryAnalysis.v0.1",
+    "decision": "REGISTERED_TEXT_AUTOEXEC_FLAG_BOUNDARY_SUPPORT",
+    "passed": true,
+    "failures": [],
+    "gates": {
+      "exactCells": true,
+      "uniquePositiveProcessIds": true,
+      "zeroExitCodes": true,
+      "trustedProbeReports": true,
+      "runtimeIdentity": true,
+      "registeredText": true,
+      "markerAbsentBeforeEveryLaunch": true,
+      "enabledMarkers": true,
+      "enabledMarkerTokenExact": true,
+      "enabledMarkerPidEqualsProbePid": true,
+      "disabledMarkersAbsent": true,
+      "factoryDefaultMarkersAbsent": true,
+      "sourceBlendByteUnchanged": true
+    }
+  },
+  "attacks": [
+    {
+      "id": "UNEXPECTED_DISABLE_MARKER",
+      "passed": true,
+      "observedDecision": "AUTOEXEC_DISABLE_INSUFFICIENT",
+      "failures": [
+        "DISABLED_MARKER_ABSENCE"
+      ]
+    },
+    {
+      "id": "UNEXPECTED_FACTORY_DEFAULT_MARKER",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "FACTORY_DEFAULT_MARKER_ABSENCE"
+      ]
+    },
+    {
+      "id": "MISSING_ENABLE_MARKER",
+      "passed": true,
+      "observedDecision": "IDENTITY_OR_DESIGN_INVALID",
+      "failures": [
+        "ENABLED_MARKERS",
+        "ENABLED_MARKER_TOKEN",
+        "ENABLED_MARKER_PID"
+      ]
+    },
+    {
+      "id": "WRONG_CANARY_TOKEN",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "ENABLED_MARKER_TOKEN"
+      ]
+    },
+    {
+      "id": "MARKER_PID_MISMATCH",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "ENABLED_MARKER_PID"
+      ]
+    },
+    {
+      "id": "DUPLICATE_PROCESS_PID",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "UNIQUE_POSITIVE_PIDS",
+        "ENABLED_MARKER_PID"
+      ]
+    },
+    {
+      "id": "SOURCE_BLEND_SHA_MUTATION",
+      "passed": true,
+      "observedDecision": "RUN_INVALID",
+      "failures": [
+        "SOURCE_BLEND_SHA"
+      ]
+    }
+  ],
+  "passed": true
+}
