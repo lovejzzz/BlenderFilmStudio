@@ -7,7 +7,7 @@
 
 B32/B32.1 在已暴露的 derivation frames 37、72、103 上看到：Q4 保持 exact A/B 并恢复大量 CENTER 的 edge-reference 误差，Q8 又以约 2× Q4 成本将 mean edge error 降低约 24.2%。本次正式 holdout 检验这条 1× NATURAL、4× Q4、8× Q8 成本—质量曲线能否外推到新 frame。
 
-主协议是 `specs/quadrature-cost-holdout-spec.v0.1.json`，SHA-256 为 `5503bca51c5f6aac1f8f26c86f2714bef83db8de11a85514a8968d0b52c73e64`。本文与 spec 在正式 renderer、analyzer、runner 或输出存在前提交。
+主协议是 `specs/quadrature-cost-holdout-spec.v0.1.json`。首次提交后、在任何正式 tooling/output 存在前，spec 又补入了 Q4/Q8 derivation 的精确 evidence hashes，防止正式运行暗中换用探索证据。补入后的最终 spec SHA-256 为 `e2a66a170df8b83d79883e292fc82ddc961a9d2326831ec9237a0d641ac0b51d`。本文与 spec 仍早于正式 renderer、analyzer、runner 和所有输出。
 
 ## 冻结实验
 
