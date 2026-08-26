@@ -2,7 +2,7 @@
 
 Date: 2026-08-26
 
-Status: contract validator executed; Blender benchmark not yet run
+Status: contract validator and standalone Blender IK spike executed; formal compiler benchmark not yet run
 
 ## Why B04 is insufficient
 
@@ -46,7 +46,7 @@ The v0.1 JSON Schema and semantic validator accept the frozen `B05.grasp.json` f
 - Fixture SHA-256: `0f7dbc3cfaca98c2dff6d2cb575fb41a19a846233fa18f25e645f74190fa1360`
 - Self-test report SHA-256: `91bedb2fa64b3d105d9850af75ab1c011354bb687e1927e7d3b190da437d6121`
 
-This only proves that the contract rejects these structural errors. No B05 armature, IK solve, contact geometry, transport or render has been executed yet.
+This proves that the contract rejects these structural errors. A later standalone Blender 5.2 spike also executed the minimum armature, IK solve, contact-spacing proxy, transport and render path; see `2026-08-26-b05-ik-feasibility-result.md`. That spike is not the formal GraspSpec → immutable BuildPlan benchmark.
 
 ## Planned B05 benchmark
 

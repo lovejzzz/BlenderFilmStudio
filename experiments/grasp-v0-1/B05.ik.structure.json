@@ -1,0 +1,387 @@
+{
+  "documentType": "BFS_B05_IK_STRUCTURE",
+  "blender": "5.2.0 LTS",
+  "objects": [
+    {
+      "name": "B05_CARRIER",
+      "type": "EMPTY",
+      "parent": null,
+      "parentType": "OBJECT",
+      "parentBone": ""
+    },
+    {
+      "name": "B05_GRIPPER",
+      "type": "ARMATURE",
+      "parent": "B05_CARRIER",
+      "parentType": "OBJECT",
+      "parentBone": ""
+    },
+    {
+      "name": "PROP_BODY",
+      "type": "MESH",
+      "parent": "B05_CARRIER",
+      "parentType": "OBJECT",
+      "parentBone": ""
+    },
+    {
+      "name": "SEGMENT_INDEX_1",
+      "type": "MESH",
+      "parent": "B05_GRIPPER",
+      "parentType": "BONE",
+      "parentBone": "index.1"
+    },
+    {
+      "name": "SEGMENT_INDEX_2",
+      "type": "MESH",
+      "parent": "B05_GRIPPER",
+      "parentType": "BONE",
+      "parentBone": "index.2"
+    },
+    {
+      "name": "SEGMENT_THUMB_1",
+      "type": "MESH",
+      "parent": "B05_GRIPPER",
+      "parentType": "BONE",
+      "parentBone": "thumb.1"
+    },
+    {
+      "name": "SEGMENT_THUMB_2",
+      "type": "MESH",
+      "parent": "B05_GRIPPER",
+      "parentType": "BONE",
+      "parentBone": "thumb.2"
+    },
+    {
+      "name": "TARGET_INDEX",
+      "type": "EMPTY",
+      "parent": "B05_CARRIER",
+      "parentType": "OBJECT",
+      "parentBone": ""
+    },
+    {
+      "name": "TARGET_THUMB",
+      "type": "EMPTY",
+      "parent": "B05_CARRIER",
+      "parentType": "OBJECT",
+      "parentBone": ""
+    },
+    {
+      "name": "TIP_INDEX",
+      "type": "MESH",
+      "parent": "B05_GRIPPER",
+      "parentType": "BONE",
+      "parentBone": "index.2"
+    },
+    {
+      "name": "TIP_THUMB",
+      "type": "MESH",
+      "parent": "B05_GRIPPER",
+      "parentType": "BONE",
+      "parentBone": "thumb.2"
+    }
+  ],
+  "bones": [
+    {
+      "name": "index.1",
+      "ikMinZ": 0.0,
+      "ikMaxZ": 1.570796370506,
+      "ikStretch": 0.0,
+      "constraints": []
+    },
+    {
+      "name": "index.2",
+      "ikMinZ": 0.0,
+      "ikMaxZ": 1.658062815666,
+      "ikStretch": 0.0,
+      "constraints": [
+        {
+          "name": "IK_INDEX",
+          "type": "IK",
+          "target": "TARGET_INDEX",
+          "chainCount": 2,
+          "useStretch": false
+        }
+      ]
+    },
+    {
+      "name": "thumb.1",
+      "ikMinZ": -0.174532920122,
+      "ikMaxZ": 1.134464025497,
+      "ikStretch": 0.0,
+      "constraints": []
+    },
+    {
+      "name": "thumb.2",
+      "ikMinZ": 0.0,
+      "ikMaxZ": 1.308996915817,
+      "ikStretch": 0.0,
+      "constraints": [
+        {
+          "name": "IK_THUMB",
+          "type": "IK",
+          "target": "TARGET_THUMB",
+          "chainCount": 2,
+          "useStretch": false
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "name": "B05_CARRIERAction",
+      "slots": [
+        "OBB05_CARRIER"
+      ],
+      "curves": [
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 0,
+          "keys": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              49.0,
+              0.0
+            ],
+            [
+              108.0,
+              0.0
+            ],
+            [
+              120.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 1,
+          "keys": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              49.0,
+              0.0
+            ],
+            [
+              108.0,
+              0.0
+            ],
+            [
+              120.0,
+              0.0
+            ]
+          ]
+        },
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 2,
+          "keys": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              49.0,
+              0.0
+            ],
+            [
+              108.0,
+              0.300000012
+            ],
+            [
+              120.0,
+              0.300000012
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TARGET_INDEXAction",
+      "slots": [
+        "OBTARGET_INDEX"
+      ],
+      "curves": [
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 0,
+          "keys": [
+            [
+              1.0,
+              0.039999999
+            ],
+            [
+              36.0,
+              0.039999999
+            ],
+            [
+              48.0,
+              0.061000001
+            ],
+            [
+              108.0,
+              0.061000001
+            ],
+            [
+              120.0,
+              0.039999999
+            ]
+          ]
+        },
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 1,
+          "keys": [
+            [
+              1.0,
+              0.050000001
+            ],
+            [
+              36.0,
+              0.050000001
+            ],
+            [
+              48.0,
+              0.0
+            ],
+            [
+              108.0,
+              0.0
+            ],
+            [
+              120.0,
+              0.050000001
+            ]
+          ]
+        },
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 2,
+          "keys": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              36.0,
+              0.0
+            ],
+            [
+              48.0,
+              0.0
+            ],
+            [
+              108.0,
+              0.0
+            ],
+            [
+              120.0,
+              0.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TARGET_THUMBAction",
+      "slots": [
+        "OBTARGET_THUMB"
+      ],
+      "curves": [
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 0,
+          "keys": [
+            [
+              1.0,
+              -0.039999999
+            ],
+            [
+              36.0,
+              -0.039999999
+            ],
+            [
+              48.0,
+              -0.061000001
+            ],
+            [
+              108.0,
+              -0.061000001
+            ],
+            [
+              120.0,
+              -0.039999999
+            ]
+          ]
+        },
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 1,
+          "keys": [
+            [
+              1.0,
+              -0.050000001
+            ],
+            [
+              36.0,
+              -0.050000001
+            ],
+            [
+              48.0,
+              0.0
+            ],
+            [
+              108.0,
+              0.0
+            ],
+            [
+              120.0,
+              -0.050000001
+            ]
+          ]
+        },
+        {
+          "slotHandle": 929201142,
+          "path": "location",
+          "index": 2,
+          "keys": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              36.0,
+              0.0
+            ],
+            [
+              48.0,
+              0.0
+            ],
+            [
+              108.0,
+              0.0
+            ],
+            [
+              120.0,
+              0.0
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "structureSha256": "86ae7ec3287cbe57c3dce23e7d448b379108cf2cfec12959066998ab58d23385"
+}
