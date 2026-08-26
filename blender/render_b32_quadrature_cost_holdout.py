@@ -72,7 +72,11 @@ def main() -> None:
     review = json.loads(args.review_spec.read_text(encoding="utf-8"))
     receipt = json.loads(args.receipt.read_text(encoding="utf-8"))
     require_equal(spec["documentType"], "BFS_QUADRATURE_COST_HOLDOUT_SPEC", "holdout spec type")
-    require_equal(spec["status"], "PREREGISTERED_BEFORE_FORMAL_TOOLING_OR_OUTPUTS", "holdout spec status")
+    if spec["status"] not in {
+        "PREREGISTERED_BEFORE_FORMAL_TOOLING_OR_OUTPUTS",
+        "PREREGISTERED_BEFORE_V02_TOOLING_OR_OUTPUTS",
+    }:
+        raise RuntimeError(f"holdout spec status mismatch: {spec['status']!r}")
     require_equal(review["documentType"], "BFS_REVIEW_RENDER_SPEC", "review spec type")
 
     scene = bpy.context.scene
@@ -152,7 +156,7 @@ def main() -> None:
 
     report = {
         "documentType": "BFS_B32_QUADRATURE_COST_HOLDOUT_RENDER",
-        "version": "0.1.0",
+        "version": spec["version"],
         "holdoutSpecSha256": sha256_file(args.holdout_spec),
         "replicateId": f"{args.cell}_{args.replicate}",
         "cell": args.cell,

@@ -5,10 +5,15 @@ import { relative, resolve, sep } from 'node:path';
 import { repositoryRoot } from './lib/scene-spec.mjs';
 import { sha256Canonical, sha256File } from './lib/receipt-format.mjs';
 
-const experimentRoot = resolve(repositoryRoot, 'experiments/quadrature-cost-holdout-v0-1');
+const useV02 = process.argv.includes('--v02');
+const experimentRoot = resolve(repositoryRoot, useV02
+  ? 'experiments/quadrature-cost-holdout-v0-2'
+  : 'experiments/quadrature-cost-holdout-v0-1');
 const evidenceRoot = resolve(experimentRoot, 'evidence');
 const workRoot = resolve(experimentRoot, 'work');
-const specPath = resolve(repositoryRoot, 'specs/quadrature-cost-holdout-spec.v0.1.json');
+const specPath = resolve(repositoryRoot, useV02
+  ? 'specs/quadrature-cost-holdout-spec.v0.2.json'
+  : 'specs/quadrature-cost-holdout-spec.v0.1.json');
 const reviewPath = resolve(repositoryRoot, 'specs/review-render-spec.v0.1.json');
 const configurator = resolve(repositoryRoot, 'blender/configure_eevee_threads.py');
 const renderer = resolve(repositoryRoot, 'blender/render_b32_quadrature_cost_holdout.py');
@@ -22,6 +27,9 @@ const q8ResultPath = resolve(repositoryRoot, 'experiments/stratified8-derivation
 const q8AnalysisPath = resolve(repositoryRoot, 'experiments/stratified8-derivation-v0-1/analysis.json');
 const q8ProtocolPath = resolve(repositoryRoot, 'research/2026-08-26-b32-stratified8-derivation-protocol.md');
 const q8ResultNotePath = resolve(repositoryRoot, 'research/2026-08-26-b32-stratified8-derivation-result.md');
+const invalidV01ResultPath = resolve(repositoryRoot, 'experiments/quadrature-cost-holdout-v0-1/results.json');
+const invalidV01DiagnosticPath = resolve(repositoryRoot, 'experiments/quadrature-cost-holdout-v0-1/evidence/edge-mask-tie-diagnostic.json');
+const invalidV01ResearchPath = resolve(repositoryRoot, 'research/2026-08-26-b32-quadrature-cost-holdout-invalid-attempt.md');
 const serialize = value => `${JSON.stringify(value, null, 2)}\n`;
 const repoUri = path => relative(repositoryRoot, path).split(sep).join('/');
 
@@ -69,7 +77,10 @@ await mkdir(workRoot, { recursive: true });
 
 const spec = JSON.parse(await readFile(specPath, 'utf8'));
 const specSha = await sha256File(specPath);
-if (specSha !== 'e2a66a170df8b83d79883e292fc82ddc961a9d2326831ec9237a0d641ac0b51d') {
+const expectedSpecSha = useV02
+  ? '4f56bde9d9037bbeb2e508d4d5880c0141c625bb20d37aea439812a1599b3b21'
+  : 'e2a66a170df8b83d79883e292fc82ddc961a9d2326831ec9237a0d641ac0b51d';
+if (specSha !== expectedSpecSha) {
   throw new Error('B32 holdout spec changed after preregistration');
 }
 const review = JSON.parse(await readFile(reviewPath, 'utf8'));
@@ -84,12 +95,22 @@ const fixedInputs = [
   [scenePath, spec.source.sceneBlendSha256, 'scene'],
   [q4ResultPath, spec.evidenceBasis.quadrature4ResultsSha256, 'Q4 result'],
   [q4AnalysisPath, spec.evidenceBasis.quadrature4AnalysisSha256, 'Q4 analysis'],
-  [q4ResearchPath, spec.evidenceBasis.quadrature4ResearchSha256, 'Q4 research'],
   [q8ResultPath, spec.evidenceBasis.stratified8ResultsSha256, 'Q8 result'],
   [q8AnalysisPath, spec.evidenceBasis.stratified8AnalysisSha256, 'Q8 analysis'],
-  [q8ProtocolPath, spec.evidenceBasis.stratified8ProtocolSha256, 'Q8 protocol'],
-  [q8ResultNotePath, spec.evidenceBasis.stratified8ResultNoteSha256, 'Q8 result note'],
 ];
+if (useV02) {
+  fixedInputs.push(
+    [invalidV01ResultPath, spec.evidenceBasis.invalidV01ResultSha256, 'invalid v0.1 result'],
+    [invalidV01DiagnosticPath, spec.evidenceBasis.invalidV01TieDiagnosticSha256, 'invalid v0.1 diagnostic'],
+    [invalidV01ResearchPath, spec.evidenceBasis.invalidV01ResearchSha256, 'invalid v0.1 research'],
+  );
+} else {
+  fixedInputs.push(
+    [q4ResearchPath, spec.evidenceBasis.quadrature4ResearchSha256, 'Q4 research'],
+    [q8ProtocolPath, spec.evidenceBasis.stratified8ProtocolSha256, 'Q8 protocol'],
+    [q8ResultNotePath, spec.evidenceBasis.stratified8ResultNoteSha256, 'Q8 result note'],
+  );
+}
 for (const [path, expected, label] of fixedInputs) {
   if (await sha256File(path) !== expected) throw new Error(`${label} frozen SHA mismatch`);
 }
@@ -99,6 +120,12 @@ const q8Analysis = JSON.parse(await readFile(q8AnalysisPath, 'utf8'));
 if (q4Result.status !== spec.evidenceBasis.quadrature4Status) throw new Error('Q4 status mismatch');
 if (q8Result.status !== spec.evidenceBasis.stratified8Status) throw new Error('Q8 status mismatch');
 if (q8Analysis.decision !== spec.evidenceBasis.stratified8Decision) throw new Error('Q8 decision mismatch');
+if (useV02) {
+  const invalidV01 = JSON.parse(await readFile(invalidV01ResultPath, 'utf8'));
+  if (invalidV01.decision !== spec.evidenceBasis.invalidV01Decision || invalidV01.validExperiment !== false) {
+    throw new Error('invalid v0.1 evidence decision mismatch');
+  }
+}
 
 const tools = {
   configuratorSha256: await sha256File(configurator),
@@ -136,7 +163,7 @@ for (const replicateId of frozenSchedule) {
   const threads = JSON.parse(await readFile(threadPath, 'utf8'));
   const manifestBody = {
     documentType: 'BFS_B32_QUADRATURE_COST_RENDER_MANIFEST',
-    version: '0.1.0',
+    version: spec.version,
     holdoutSpecSha256: specSha,
     replicateId, cell, replicate, processId: launched.processId,
     totalRenderSeconds: report.totalRenderSeconds,
@@ -159,7 +186,7 @@ for (const replicateId of frozenSchedule) {
 
 const ledgerBody = {
   documentType: 'BFS_B32_QUADRATURE_COST_PROCESS_LEDGER',
-  version: '0.1.0',
+  version: spec.version,
   holdoutSpecSha256: specSha,
   processes: frozenSchedule.map((replicateId, orderIndex) => {
     const item = records.get(replicateId);
@@ -178,7 +205,7 @@ const ledgerPath = resolve(evidenceRoot, 'process-ledger.json');
 await writeFile(ledgerPath, serialize(ledger));
 const indexBody = {
   documentType: 'BFS_B32_QUADRATURE_COST_ANALYSIS_INDEX',
-  version: '0.1.0',
+  version: spec.version,
   holdoutSpecSha256: specSha,
   processes: frozenSchedule.map(replicateId => {
     const item = records.get(replicateId);
@@ -210,7 +237,7 @@ const contractHash = sha256Canonical({
 });
 const bindingBody = {
   documentType: 'BFS_B32_QUADRATURE_COST_ANALYSIS_BINDING',
-  version: '0.1.0',
+  version: spec.version,
   holdoutSpecSha256: specSha,
   indexSha256: await sha256File(indexPath),
   analysisSha256: await sha256File(analysisPath),
@@ -230,6 +257,7 @@ async function validate(overrides = {}) {
     specSha,
     q4ResultSha: spec.evidenceBasis.quadrature4ResultsSha256,
     q8ResultSha: spec.evidenceBasis.stratified8ResultsSha256,
+    invalidV01ResultSha: useV02 ? spec.evidenceBasis.invalidV01ResultSha256 : null,
     reviewSha: spec.source.reviewSpecSha256,
     blenderSha: spec.runtime.blenderBinarySha256,
     ocioSha: spec.runtime.ocioSha256,
@@ -251,6 +279,7 @@ async function validate(overrides = {}) {
     analysisSha: await sha256File(analysisPath),
     contractHash,
     q8Gate: spec.gates.q8ToNaturalEdgeMaximumEveryFrame,
+    maskRule: spec.analysis.edgeMaskRule,
     decision: analysis.decision,
     q8Mean: analysis.summary.q8ToNaturalEdgeMean,
     ...overrides,
@@ -258,6 +287,7 @@ async function validate(overrides = {}) {
   if (await sha256File(specPath) !== expected.specSha) return 'SPEC_SHA';
   if (await sha256File(q4ResultPath) !== expected.q4ResultSha) return 'Q4_EVIDENCE';
   if (await sha256File(q8ResultPath) !== expected.q8ResultSha) return 'Q8_EVIDENCE';
+  if (useV02 && await sha256File(invalidV01ResultPath) !== expected.invalidV01ResultSha) return 'INVALID_V01_EVIDENCE';
   if (await sha256File(reviewPath) !== expected.reviewSha) return 'REVIEW_SHA';
   if (await sha256File(blender) !== expected.blenderSha) return 'BLENDER_SHA';
   if (await sha256File(ocioPath) !== expected.ocioSha) return 'OCIO_SHA';
@@ -298,6 +328,7 @@ async function validate(overrides = {}) {
       || binding.indexSha256 !== expected.indexSha || binding.analysisSha256 !== expected.analysisSha
       || analysis.indexSha256 !== expected.indexSha) return 'ANALYSIS_BINDING';
   if (binding.contractHash !== expected.contractHash) return 'CONTRACT_HASH';
+  if (spec.analysis.edgeMaskRule !== expected.maskRule) return 'FROZEN_MASK_RULE';
   if (spec.gates.q8ToNaturalEdgeMaximumEveryFrame !== expected.q8Gate) return 'FROZEN_GATE';
   if (analysis.decision !== expected.decision) return 'DECISION_TAMPER';
   if (analysis.summary.q8ToNaturalEdgeMean !== expected.q8Mean) return 'METRIC_TAMPER';
@@ -314,6 +345,7 @@ const attack = async (id, expected, overrides) => {
 await attack('N_SPEC_SHA', 'SPEC_SHA', { specSha: '0'.repeat(64) });
 await attack('N_Q4_EVIDENCE', 'Q4_EVIDENCE', { q4ResultSha: '0'.repeat(64) });
 await attack('N_Q8_EVIDENCE', 'Q8_EVIDENCE', { q8ResultSha: '0'.repeat(64) });
+if (useV02) await attack('N_INVALID_V01_EVIDENCE', 'INVALID_V01_EVIDENCE', { invalidV01ResultSha: '0'.repeat(64) });
 await attack('N_REVIEW_SHA', 'REVIEW_SHA', { reviewSha: '0'.repeat(64) });
 await attack('N_BLENDER_SHA', 'BLENDER_SHA', { blenderSha: '0'.repeat(64) });
 await attack('N_OCIO_SHA', 'OCIO_SHA', { ocioSha: '0'.repeat(64) });
@@ -336,11 +368,13 @@ const swapped = [...frozenSchedule]; [swapped[0], swapped[1]] = [swapped[1], swa
 await attack('N_SCHEDULE', 'SCHEDULE', { schedule: swapped });
 await attack('N_PID_BINDING', 'PID_BINDING', { uniqueProcesses: 27 });
 await attack('N_RENDER_COUNT', 'RENDER_COUNT', { renderCalls: 111 });
-await attack('N_FRAME_ORDER', 'FRAME_ORDER', { frames: [22, 59, 97, 135] });
+const changedFrames = [...spec.design.frames]; changedFrames[changedFrames.length - 1] -= 1;
+await attack('N_FRAME_ORDER', 'FRAME_ORDER', { frames: changedFrames });
 await attack('N_OUTPUT_HASH', 'OUTPUT_HASH', { firstOutputSha: '0'.repeat(64) });
 await attack('N_EXR_LAYOUT', 'EXR_LAYOUT', { width: 961 });
 await attack('N_ANALYSIS_BINDING', 'ANALYSIS_BINDING', { indexSha: '0'.repeat(64) });
 await attack('N_CONTRACT_HASH', 'CONTRACT_HASH', { contractHash: '0'.repeat(64) });
+await attack('N_FROZEN_MASK_RULE', 'FROZEN_MASK_RULE', { maskRule: 'tampered top-k rule' });
 await attack('N_FROZEN_GATE', 'FROZEN_GATE', { q8Gate: 1.11 });
 await attack('N_DECISION_TAMPER', 'DECISION_TAMPER', { decision: 'TAMPERED' });
 await attack('N_METRIC_TAMPER', 'METRIC_TAMPER', { q8Mean: -1 });
@@ -371,7 +405,7 @@ const validExperiment = attacksPass && uniqueProcesses === spec.design.totalProc
 const decision = validExperiment ? analysis.decision : 'IDENTITY_OR_DESIGN_INVALID';
 const result = {
   documentType: 'BFS_B32_QUADRATURE_COST_HOLDOUT_RESULT',
-  version: '0.1.0',
+  version: spec.version,
   executedAtUtc: new Date().toISOString(),
   decision,
   independentDecision: analysis.decision,

@@ -71,7 +71,7 @@ def metrics(candidate: np.ndarray, reference: np.ndarray, mask: np.ndarray | Non
     }
 
 
-def edge_mask(reference: np.ndarray) -> tuple[np.ndarray, float]:
+def edge_mask(reference: np.ndarray, analysis_contract: dict[str, Any]) -> tuple[np.ndarray, dict[str, Any]]:
     gx = np.zeros(reference.shape[:2], dtype=np.float64)
     gy = np.zeros(reference.shape[:2], dtype=np.float64)
     dx = reference[:, 2:, :] - reference[:, :-2, :]
@@ -79,8 +79,30 @@ def edge_mask(reference: np.ndarray) -> tuple[np.ndarray, float]:
     gx[:, 1:-1] = np.sqrt(np.sum(dx * dx, axis=2)) * 0.5
     gy[1:-1, :] = np.sqrt(np.sum(dy * dy, axis=2)) * 0.5
     magnitude = np.sqrt(gx * gx + gy * gy)
+    target = analysis_contract["edgeMaskExpectedPixelsPerFrame"]
+    if analysis_contract.get("edgeMaskTieBreak") == "flattened pixel index ascending":
+        flat = magnitude.reshape(-1)
+        indices = np.arange(flat.size, dtype=np.int64)
+        selected = np.lexsort((indices, -flat))[:target]
+        mask_flat = np.zeros(flat.size, dtype=bool)
+        mask_flat[selected] = True
+        mask = mask_flat.reshape(magnitude.shape)
+        boundary = float(flat[selected[-1]])
+        metadata = {
+            "rule": "exact top-k: magnitude descending, flattened index ascending",
+            "boundaryMagnitude": boundary,
+            "valuesGreaterThanBoundary": int(np.count_nonzero(flat > boundary)),
+            "valuesEqualToBoundary": int(np.count_nonzero(flat == boundary)),
+            "selectedValuesEqualToBoundary": int(np.count_nonzero(flat[selected] == boundary)),
+        }
+        return mask, metadata
     threshold = float(np.quantile(magnitude, 0.95))
-    return magnitude >= threshold, threshold
+    return magnitude >= threshold, {
+        "rule": "legacy quantile 0.95 plus greater-than-or-equal",
+        "boundaryMagnitude": threshold,
+        "valuesGreaterThanBoundary": int(np.count_nonzero(magnitude > threshold)),
+        "valuesEqualToBoundary": int(np.count_nonzero(magnitude == threshold)),
+    }
 
 
 def method_metrics(replicates: list[np.ndarray], reference: np.ndarray, mask: np.ndarray) -> dict[str, Any]:
@@ -138,7 +160,7 @@ def main() -> None:
         ref_a = arrays["REFERENCE1024_A"][frame]
         ref_b = arrays["REFERENCE1024_B"][frame]
         reference = (ref_a + ref_b) * 0.5
-        mask, threshold = edge_mask(reference)
+        mask, mask_metadata = edge_mask(reference, spec["analysis"])
         edge_pixels = int(np.count_nonzero(mask))
         if edge_pixels != spec["analysis"]["edgeMaskExpectedPixelsPerFrame"]:
             raise RuntimeError(f"Frame {frame} edge pixel count mismatch")
@@ -164,7 +186,7 @@ def main() -> None:
         natural_global = methods["NATURAL32"]["globalRmseMean"]
         frame_results.append({
             "frame": frame,
-            "edgeThreshold": threshold,
+            "edgeSelection": mask_metadata,
             "edgePixels": edge_pixels,
             "referenceAgreement": {
                 "global": metrics(ref_a, ref_b),
@@ -216,7 +238,7 @@ def main() -> None:
     }
     result = {
         "documentType": "BFS_B32_QUADRATURE_COST_HOLDOUT_ANALYSIS",
-        "version": "0.1.0",
+        "version": spec["version"],
         "holdoutSpecSha256": sha256_file(args.spec),
         "indexSha256": sha256_file(args.index),
         "decoder": f"OpenImageIO {oiio.VERSION_STRING}",
