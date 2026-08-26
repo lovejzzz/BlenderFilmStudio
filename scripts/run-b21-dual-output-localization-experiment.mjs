@@ -62,8 +62,8 @@ async function validateRun({ record, identities, expectedSpecSha, expectedB20Sha
   if (report.source.sceneBlendSha256 !== identities.sceneBlendSha256 || report.savedSourceBlend !== false) return 'SOURCE_BLEND';
   if (report.cameraAndTimelineInvariant !== true) return 'CAMERA_TIMELINE_INVARIANT';
   const exr = report.outputs.EXR32_SCENE_LINEAR, png = report.outputs.PNG8_DISPLAY;
-  if (JSON.stringify(exr.decoded) !== JSON.stringify({ width: 960, height: 540, channels: ['R', 'G', 'B', 'A'], pixelFormat: expectedExrFormat })) return 'EXR_LAYOUT';
-  if (JSON.stringify(png.decoded) !== JSON.stringify({ width: 960, height: 540, channels: ['R', 'G', 'B', 'A'], pixelFormat: expectedPngFormat })) return 'PNG_LAYOUT';
+  if (exr.decoded.width !== 960 || exr.decoded.height !== 540 || JSON.stringify(exr.decoded.channels) !== JSON.stringify(['R', 'G', 'B', 'A']) || exr.decoded.pixelFormat !== expectedExrFormat) return 'EXR_LAYOUT';
+  if (png.decoded.width !== 960 || png.decoded.height !== 540 || JSON.stringify(png.decoded.channels) !== JSON.stringify(['R', 'G', 'B', 'A']) || png.decoded.pixelFormat !== expectedPngFormat) return 'PNG_LAYOUT';
   for (const output of [exr, png]) if (await sha256File(resolve(record.outputDir, output.name)) !== output.sha256) return 'OUTPUT_SHA';
   return 'OK';
 }
