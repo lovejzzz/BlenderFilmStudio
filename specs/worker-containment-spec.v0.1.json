@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "bfs.workerContainment.v0.1",
+  "experimentId": "B37",
+  "status": "PREREGISTERED_BEFORE_TOOLING_OR_OUTPUT",
+  "runtime": {
+    "osProduct": "macOS",
+    "osVersion": "26.5.1",
+    "osBuild": "25F80",
+    "sandboxExec": "/usr/bin/sandbox-exec",
+    "sandboxExecSha256": "8857d087219f0f39d3e3c163e5d0a0aed690cc22f34b50c7eee3d74f93e69688",
+    "sandboxExecStatus": "DEPRECATED_BY_SYSTEM_MAN_PAGE",
+    "blender": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderHasAppSandboxEntitlement": false,
+    "timeoutSecondsPerProcess": 60
+  },
+  "controlledCanaries": {
+    "allPathsRemainInside": "experiments/worker-containment-v0-1/work",
+    "network": "one loopback TCP server bound to 127.0.0.1 only",
+    "secret": "BFS_B37_NONSECRET_ENV_CANARY_V1",
+    "child": "/usr/bin/touch creates a marker inside the worker root",
+    "outsideBoundary": "a sibling control directory inside the ignored run root",
+    "externalNetworkForbidden": true,
+    "realSecretsForbidden": true
+  },
+  "sandboxProfile": {
+    "base": "allow default",
+    "denies": [
+      "network*",
+      "file-read* for the sibling control directory",
+      "file-write* for the sibling control directory",
+      "process-exec except the initial exact Blender binary"
+    ],
+    "productionSupportClaim": false
+  },
+  "cells": [
+    {"id": "UNSANDBOXED_A", "sandbox": false, "sanitizeFakeSecret": false},
+    {"id": "UNSANDBOXED_B", "sandbox": false, "sanitizeFakeSecret": false},
+    {"id": "SBPL_INHERITED_A", "sandbox": true, "sanitizeFakeSecret": false},
+    {"id": "SBPL_INHERITED_B", "sandbox": true, "sanitizeFakeSecret": false},
+    {"id": "SBPL_SANITIZED_A", "sandbox": true, "sanitizeFakeSecret": true},
+    {"id": "SBPL_SANITIZED_B", "sandbox": true, "sanitizeFakeSecret": true}
+  ],
+  "frozenExpectedOutcomes": {
+    "UNSANDBOXED": {
+      "allowedWrite": true,
+      "outsideRead": true,
+      "outsideWrite": true,
+      "loopbackConnect": true,
+      "childExec": true,
+      "fakeSecretVisible": true
+    },
+    "SBPL_INHERITED": {
+      "allowedWrite": true,
+      "outsideRead": false,
+      "outsideWrite": false,
+      "loopbackConnect": false,
+      "childExec": false,
+      "fakeSecretVisible": true
+    },
+    "SBPL_SANITIZED": {
+      "allowedWrite": true,
+      "outsideRead": false,
+      "outsideWrite": false,
+      "loopbackConnect": false,
+      "childExec": false,
+      "fakeSecretVisible": false
+    }
+  },
+  "frozenGates": {
+    "uniquePositiveBlenderProcessIds": 6,
+    "zeroExitCodes": 6,
+    "reports": 6,
+    "baselineCanariesSucceed": "12/12 across two UNSANDBOXED cells",
+    "sbplCapabilityBlocks": "16/16 across four sandboxed cells for outside read/write, loopback and child exec",
+    "allowedWorkerWrites": "6/6",
+    "inheritedFakeSecretCounterexample": "2/2 visible under SBPL_INHERITED",
+    "sanitizedFakeSecret": "0/2 visible under SBPL_SANITIZED",
+    "loopbackReceiptBinding": "exact nonce only for the two UNSANDBOXED cells"
+  },
+  "frozenAnalyzerAttacks": [
+    "sandboxed outside-read success",
+    "sandboxed outside-write success",
+    "sandboxed loopback success",
+    "sandboxed child-exec success",
+    "missing allowed worker write",
+    "missing inherited-env counterexample",
+    "fake secret visible after sanitized launch",
+    "duplicate Blender PID",
+    "loopback receipt for a sandboxed nonce"
+  ],
+  "decisionRules": {
+    "supportWithCounterexample": "all frozen gates and all nine attacks pass",
+    "sbplNotUsable": "Blender cannot complete trusted probe under the frozen profile or any frozen capability block fails",
+    "baselineInvalid": "an UNSANDBOXED canary does not demonstrate all six capabilities",
+    "runInvalid": "runtime identity, PID, process, report, nonce or preflight gate fails"
+  },
+  "nonClaims": [
+    "No supported production macOS sandbox claim",
+    "No claim that deprecated sandbox-exec will remain available or stable",
+    "No parser-memory-safety, GPU or denial-of-service isolation claim",
+    "No external-network or real-secret access is attempted",
+    "No code signing or Blender app modification",
+    "No claim that environment sanitization alone contains a compromised process"
+  ]
+}
