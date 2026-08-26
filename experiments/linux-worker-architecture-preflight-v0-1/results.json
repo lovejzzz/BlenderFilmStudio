@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "bfs.linuxWorkerArchitecturePreflightEvidence.v0.1",
+  "experimentId": "B39",
+  "status": "READ_ONLY_PREFLIGHT_COMPLETE_NO_RUNTIME_OPERATION",
+  "preregistration": {
+    "commit": "59b7344b020ae98a7cdf2a6868b0a6c0365bf141",
+    "specSha256": "06645fda0af4778f487893a9a1881fa749d06e4774559bf975034ec49140e30f"
+  },
+  "toolFreezeCommit": "10bcf1348093809929d6fb891ac310a083143f23",
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b39-linux-worker-architecture-preflight.mjs",
+      "sha256": "b0a807f6cef665f4ff3268003b43a7d3c2439fd017e8cdccd8f6161f5f653ade"
+    },
+    "library": {
+      "uri": "scripts/lib/b39-linux-worker-architecture-preflight.mjs",
+      "sha256": "9daceafdd38d66fe305e041a3d565866d9a1d59a118b7cb95c577d6bba7df0ee"
+    },
+    "audit": {
+      "uri": "scripts/audit-b39-linux-worker-architecture-preflight.mjs",
+      "sha256": "dc20c82009cba7783cd8e2e94a70ea17c0c7d14709a6664fe7d4df0153839b83"
+    }
+  },
+  "sources": {
+    "releaseIndexUrl": "https://download.blender.org/release/Blender5.2/",
+    "checksumUrl": "https://download.blender.org/release/Blender5.2/blender-5.2.0.sha256"
+  },
+  "probeTrace": [
+    "HOST_UNAME",
+    "COLIMA_STATUS",
+    "DOCKER_SERVER_VERSION",
+    "DOCKER_ARCH_SECURITY",
+    "DOCKER_EXISTING_IMAGE_INSPECT",
+    "BLENDER_RELEASE_INDEX_HTTPS",
+    "BLENDER_SHA256_MANIFEST_HTTPS",
+    "HOST_STATFS"
+  ],
+  "runtimeOperationsExecuted": [],
+  "observations": {
+    "officialArtifacts": {
+      "x64": {
+        "filename": "blender-5.2.0-linux-x64.tar.xz",
+        "indexOccurrences": 2,
+        "checksumOccurrences": 1,
+        "sha256": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48",
+        "bytes": 384441228
+      },
+      "arm64": {
+        "filename": "blender-5.2.0-linux-arm64.tar.xz",
+        "indexOccurrences": 0,
+        "checksumOccurrences": 0,
+        "sha256": null,
+        "bytes": null
+      }
+    },
+    "host": {
+      "hostArchitecture": "arm64",
+      "colima": {
+        "driver": "macOS Virtualization.Framework",
+        "architecture": "aarch64",
+        "runtime": "docker",
+        "mountType": "virtiofs",
+        "cpu": 4,
+        "memoryBytes": 6442450944
+      },
+      "docker": {
+        "serverVersion": "29.5.2",
+        "architecture": "aarch64",
+        "securityOptions": [
+          "name=apparmor",
+          "name=seccomp,profile=builtin",
+          "name=cgroupns"
+        ]
+      },
+      "existingImages": [
+        {
+          "repoTags": [
+            "alpine:3.20"
+          ],
+          "architecture": "arm64",
+          "os": "linux",
+          "id": "sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc"
+        },
+        {
+          "repoTags": [
+            "debian:bookworm-slim"
+          ],
+          "architecture": "arm64",
+          "os": "linux",
+          "id": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171"
+        }
+      ]
+    },
+    "diskAdmission": {
+      "schemaVersion": "bfs.linuxWorkerDiskAdmission.v0.1",
+      "availableBytes": "19703353344",
+      "projectedWriteBytes": "21474836480",
+      "minimumReserveBytes": "107374182400",
+      "freeAfterProjectedBytes": "-1771483136",
+      "status": "BLOCKED",
+      "reasons": [
+        "DISK_RESERVE"
+      ]
+    },
+    "futureRuntime": {
+      "experimentId": "B40",
+      "state": "PENDING_SEPARATE_PREREGISTRATION",
+      "workerImageDigest": "PENDING_BUILD_AND_HASH_AFTER_DISK_ADMISSION"
+    }
+  },
+  "routes": {
+    "schemaVersion": "bfs.linuxWorkerRouteDecision.v0.1",
+    "nativeArm64": {
+      "platform": "linux/arm64",
+      "decision": "REJECTED_NO_OFFICIAL_ARTIFACT",
+      "officialArtifactAvailable": false
+    },
+    "x64Emulated": {
+      "platform": "linux/amd64",
+      "executionClass": "EXPERIMENT_ONLY_BEST_EFFORT_EMULATION",
+      "decision": "REJECTED_ARTIFACT_OR_HOST_IDENTITY",
+      "officialArtifactIdentityValid": false,
+      "hostArchitectureIdentityValid": true,
+      "requiredSecurityOptionsPresent": true,
+      "workerImageDigestPinned": false
+    }
+  },
+  "evidenceHash": "62e117aae7286ca6bc20bcd9ca0560e7fed72c42cbc68392b79d6e8ab2d62b28",
+  "analysis": {
+    "schemaVersion": "bfs.linuxWorkerArchitecturePreflightAnalysis.v0.1",
+    "passed": false,
+    "failures": [
+      "X64_INDEX_IDENTITY",
+      "EMULATED_ROUTE_DECISION"
+    ],
+    "decision": "X64_INDEX_IDENTITY"
+  },
+  "attacks": [],
+  "attacksPassed": false,
+  "verdict": "X64_INDEX_IDENTITY",
+  "nonClaims": [
+    "B39 does not launch Blender, create or run a container, build or pull an image, or download the Blender archive",
+    "Absence from the official 5.2.0 release index is not a claim that Blender cannot be compiled from source for Linux arm64",
+    "The x64 artifact being identifiable does not prove it runs correctly under Colima emulation",
+    "Docker security options being present does not prove containment against kernel, daemon, parser, GPU or denial-of-service vulnerabilities",
+    "No Eevee, EGL, software rasterizer, Cycles, performance, determinism or output-equivalence claim",
+    "No production backend selection or promotion claim",
+    "No disk-reserve override and no automatic cleanup"
+  ]
+}
