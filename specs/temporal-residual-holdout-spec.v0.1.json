@@ -1,0 +1,126 @@
+{
+  "documentType": "BFS_TEMPORAL_RESIDUAL_HOLDOUT_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "Do three newly rendered complete sequences stay inside both the previously validated static PNG8 envelope and the independently derived temporal cross-run residual envelope?",
+  "evidenceBasis": {
+    "derivationResultSha256": "c3db4e48c1b8d149691f211b1eaaeae96f1ded1bf31d1f80e2030211ab38ad89",
+    "derivationStatus": "DERIVATION_ONLY_NOT_VALIDATION",
+    "derivationPairCount": 4,
+    "derivationTransitionCount": 572,
+    "b24ResultsSha256": "585741f255b54bbb46910612053b91b56d8a38c3e8e9e649166740d945f83191",
+    "b24Decision": "PRODUCTION_REPEATABILITY_ENVELOPE_SUPPORT"
+  },
+  "holdout": {
+    "type": "three new complete continuous-sequence renders",
+    "replicates": ["A", "B", "C"],
+    "replicatePairs": ["A-B", "A-C", "B-C"],
+    "frameStart": 1,
+    "frameEnd": 144,
+    "framesPerReplicate": 144,
+    "transitionsPerPair": 143,
+    "selectedBeforeAnyB25Render": true,
+    "overlapWithDerivationOutputFiles": false
+  },
+  "design": {
+    "type": "three fresh Blender processes, each rendering frames 1 through 144 sequentially",
+    "processOrder": ["A", "B", "C"],
+    "processes": 3,
+    "renderCalls": 432,
+    "outputFiles": 432,
+    "staticPairComparisons": 432,
+    "temporalTransitionComparisons": 429,
+    "sameProcessHistoryWithinEachSequence": true,
+    "freshProcessBoundaryBetweenReplicates": true
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "rendererSha256": "b969e267db7b73eb7b6f8ea17abf09b2e129b9fce2e706fec950c5bb5e5eda5c"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "motionBlur": false,
+    "format": "PNG8_RGBA",
+    "colorDomain": "ACES 2 SDR display output"
+  },
+  "frozenStaticEnvelope": {
+    "maximumAbsoluteErrorAtMost": 0.003922,
+    "rmsErrorAtMost": 0.0000152587890625,
+    "zeroThresholdFailurePixelsAtMost": 16
+  },
+  "frozenTemporalEnvelope": {
+    "definition": "T_t = (A_t - B_t) - (A_(t-1) - B_(t-1)) over decoded RGB",
+    "maximumAbsoluteResidualDeltaAtMost": 0.00784313725490196,
+    "rmsResidualDeltaAtMost": 0.000030517578125,
+    "changedPixelsAtMost": 64
+  },
+  "executionContract": {
+    "formalComparatorAndRunnerMustNotExistAtFreeze": true,
+    "reuseFrozenConfiguratorAndRenderer": true,
+    "eachReplicateMustUseOneUniqueFreshProcess": true,
+    "eachProcessMustRenderExactly144FramesInAscendingOrder": true,
+    "mustNotSaveSourceBlend": true,
+    "allSourcePlanStructureRuntimeAndToolIdentitiesMustBeExact": true,
+    "recordAllOutputHashesMetricsComparisonBindingsAndProcessIds": true,
+    "thresholdsMustNotChangeAfterHoldoutExecution": true,
+    "humanReviewMustRemainPending": true
+  },
+  "validationGate": {
+    "provenanceAndStructure": "All three renders pass exact identity, source, plan, structure, control, process, frame-count, layout, order and output-hash gates.",
+    "static": "All 432 frame pairs pass all three frozen B24 PNG8 numeric ceilings.",
+    "temporal": "All 429 adjacent-frame residual transitions pass all three frozen B25 temporal numeric ceilings.",
+    "noAggregateAveraging": true,
+    "noThresholdRevision": true
+  },
+  "decisionRule": {
+    "TEMPORAL_RESIDUAL_ENVELOPE_SUPPORT": "Static passes 432/432, temporal passes 429/429 and every provenance gate passes.",
+    "TEMPORAL_ONLY_ENVELOPE_FAIL": "Static passes 432/432 while one or more temporal transitions fail, with a valid experiment.",
+    "STATIC_AND_TEMPORAL_ENVELOPE_FAIL": "Both the static and temporal envelopes have one or more failures, with a valid experiment.",
+    "STATIC_ONLY_ENVELOPE_FAIL": "Temporal passes 429/429 while one or more static frame pairs fail, with a valid experiment.",
+    "INVALID_EXPERIMENT": "Any derivation, B24, identity, source-state, process, control, count, layout, file, metric, binding, envelope or attack gate fails."
+  },
+  "requiredNegativeCases": [
+    "B25 spec identity mismatch",
+    "derivation artifact identity mismatch",
+    "B24 result identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "plan or structure identity mismatch",
+    "configurator identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "source thread state or requested fixed controls mismatch",
+    "replicate process binding or PID uniqueness mismatch",
+    "frame order or render count mismatch",
+    "PNG layout mismatch",
+    "missing or mutated output",
+    "comparison loses manifest or file hash binding",
+    "static or temporal envelope mutation",
+    "human-review status is not pending"
+  ],
+  "explicitNonClaims": [
+    "Passing validates one numerical temporal residual envelope for one held-out scene/profile/machine/build; it does not establish a universal Blender tolerance.",
+    "The metric isolates frame-to-frame change in cross-run disagreement but is not proof that a viewer cannot see flicker or other temporal artifacts.",
+    "This is not a bitwise determinism claim; PNG container hashes and some decoded pixels may differ.",
+    "The review proxy is PNG8 at 960x540 without motion blur, not a scene-linear master or final cinema delivery.",
+    "Human subjective review remains pending and must record anonymization, player, display and viewing conditions.",
+    "Nothing generalizes to Cycles, another GPU/backend, another machine, another scene, longer shots or different temporal effects."
+  ]
+}
