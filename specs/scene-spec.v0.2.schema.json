@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.2.schema.json",
+  "title": "Blender Film Studio SceneSpec v0.2",
+  "description": "SceneSpec v0.1 plus verified ActorSpec references and scene-owned target sockets.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["specVersion", "shot", "assets", "actors", "targets", "cameras", "lights", "world", "events", "render", "security", "provenance"],
+  "properties": {
+    "specVersion": { "const": "0.2.0" },
+    "shot": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/shot" },
+    "assets": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/asset" }, "maxItems": 256 },
+    "actors": { "type": "array", "items": { "$ref": "#/$defs/actor" }, "maxItems": 32 },
+    "targets": { "type": "array", "items": { "$ref": "#/$defs/target" }, "maxItems": 256 },
+    "cameras": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/camera" }, "minItems": 1, "maxItems": 16 },
+    "lights": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/light" }, "maxItems": 128 },
+    "world": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/world" },
+    "events": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/event" }, "maxItems": 512 },
+    "render": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/render" },
+    "security": { "$ref": "#/$defs/security" },
+    "provenance": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/provenance" }
+  },
+  "$defs": {
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "assetRef", "rigProfile", "identityLock", "actorSpecUri", "actorSpecSha256"],
+      "properties": {
+        "id": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "assetRef": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "rigProfile": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "identityLock": { "const": true },
+        "actorSpecUri": { "type": "string", "pattern": "^specs/[A-Za-z0-9._/-]+\\.actor\\.json$", "maxLength": 512 },
+        "actorSpecSha256": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/sha256" }
+      }
+    },
+    "targetSocket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "transform"],
+      "properties": {
+        "id": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "transform": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/transform" }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "sockets"],
+      "properties": {
+        "id": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "kind": { "enum": ["ACTOR_PROXY", "PROP_PROXY", "SURFACE"] },
+        "sockets": { "type": "array", "items": { "$ref": "#/$defs/targetSocket" }, "minItems": 1, "maxItems": 64 }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["networkAccess", "arbitraryPython", "allowedAssetRoots", "allowedOperations"],
+      "properties": {
+        "networkAccess": { "const": false },
+        "arbitraryPython": { "const": false },
+        "allowedAssetRoots": { "type": "array", "items": { "enum": ["assets/", "library/", "motion/"] }, "minItems": 1, "uniqueItems": true },
+        "allowedOperations": {
+          "type": "array",
+          "items": { "enum": ["READ_MANIFEST", "IMPORT_ASSET", "IMPORT_ACTOR_SPEC", "IMPORT_ACTION", "CREATE_CAMERA", "CREATE_LIGHT", "CREATE_TARGET", "SET_TRANSFORM", "APPLY_PERFORMANCE", "SET_RENDER", "RENDER_PREVIEW", "RENDER_FINAL"] },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

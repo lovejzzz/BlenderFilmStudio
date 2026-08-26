@@ -17,9 +17,10 @@ from pathlib import Path
 import bpy
 import PyOpenColorIO as ocio
 from bpy_extras import anim_utils
+from mathutils import Euler, Matrix, Vector
 
 
-COMPILER_VERSION = "0.1.0"
+SUPPORTED_COMPILER_VERSIONS = {"0.1.0", "0.2.0"}
 
 
 def canonical_json(value: object) -> str:
@@ -52,15 +53,17 @@ def resolve_below(root: Path, candidate: Path, label: str) -> Path:
 
 def load_verified_plan(plan_path: Path) -> dict:
     wrapper = json.loads(plan_path.read_text(encoding="utf-8"))
-    if wrapper.get("documentType") != "BFS_BUILD_PLAN" or wrapper.get("planVersion") != "0.1.0":
+    if wrapper.get("documentType") != "BFS_BUILD_PLAN" or wrapper.get("planVersion") not in {"0.1.0", "0.2.0"}:
         raise RuntimeError("Unsupported BuildPlan document or version")
     actual_hash = sha256_bytes(canonical_json(wrapper["plan"]).encode("utf-8"))
     if actual_hash != wrapper.get("planHash"):
         raise RuntimeError(f"BuildPlan hash mismatch: expected {wrapper.get('planHash')}, received {actual_hash}")
     if tuple(bpy.app.version[:3]) != (5, 2, 0):
         raise RuntimeError(f"Blender 5.2.0 is required, received {bpy.app.version_string}")
-    if wrapper["plan"]["compiler"]["version"] != COMPILER_VERSION:
+    if wrapper["plan"]["compiler"]["version"] not in SUPPORTED_COMPILER_VERSIONS:
         raise RuntimeError("Compiler version does not match BuildPlan")
+    if wrapper["plan"]["compiler"]["version"] != wrapper["planVersion"]:
+        raise RuntimeError("BuildPlan wrapper and compiler versions disagree")
     return wrapper
 
 
@@ -85,7 +88,7 @@ def apply_transform(obj: bpy.types.Object, transform: dict) -> None:
     obj.scale = transform["scale"]
 
 
-def append_asset(root: Path, managed: bpy.types.Collection, asset: dict) -> bpy.types.Object:
+def append_asset(root: Path, managed: bpy.types.Collection, asset: dict) -> tuple[bpy.types.Object, bpy.types.Collection]:
     asset_path = resolve_below(root, Path(asset["uri"]), f"Asset {asset['id']}")
     actual_hash = sha256_file(asset_path)
     if actual_hash != asset["verifiedSha256"] or actual_hash != asset["sha256"]:
@@ -97,15 +100,122 @@ def append_asset(root: Path, managed: bpy.types.Collection, asset: dict) -> bpy.
     imported = target.collections[0]
     if imported is None:
         raise RuntimeError(f"Blender could not append collection {asset['id']}")
-    instance = bpy.data.objects.new(asset["id"], None)
-    instance.instance_type = "COLLECTION"
-    instance.instance_collection = imported
-    instance.hide_render = not asset["visible"]
-    instance["bfs_asset_sha256"] = actual_hash
-    instance["bfs_asset_version"] = asset["version"]
-    apply_transform(instance, asset["transform"])
-    managed.objects.link(instance)
-    return instance
+    root_object = bpy.data.objects.new(asset["id"], None)
+    root_object.hide_render = not asset["visible"]
+    root_object["bfs_asset_sha256"] = actual_hash
+    root_object["bfs_asset_version"] = asset["version"]
+    apply_transform(root_object, asset["transform"])
+    managed.objects.link(root_object)
+    if asset["kind"] == "CHARACTER":
+        managed.children.link(imported)
+        for obj in imported.all_objects:
+            if obj.parent is None:
+                obj.parent = root_object
+        root_object["bfs_character_collection"] = imported.name
+    else:
+        root_object.instance_type = "COLLECTION"
+        root_object.instance_collection = imported
+    return root_object, imported
+
+
+def create_targets(managed: bpy.types.Collection, target_specs: list[dict]) -> dict[tuple[str, str], bpy.types.Object]:
+    targets = {}
+    for target in target_specs:
+        for socket in target["sockets"]:
+            obj = bpy.data.objects.new(f"{target['id']}__{socket['id']}", None)
+            obj.empty_display_type = "SPHERE"
+            obj.empty_display_size = 0.06
+            obj["bfs_target_id"] = target["id"]
+            obj["bfs_target_kind"] = target["kind"]
+            obj["bfs_socket_id"] = socket["id"]
+            apply_transform(obj, socket["transform"])
+            managed.objects.link(obj)
+            targets[(target["id"], socket["id"])] = obj
+    return targets
+
+
+def set_interpolation(animation_data, interpolation_by_frame: dict[int, str]) -> None:
+    if not animation_data or not animation_data.action:
+        return
+    channelbag = anim_utils.animdata_get_channelbag_for_assigned_slot(animation_data)
+    if not channelbag:
+        return
+    for curve in channelbag.fcurves:
+        for point in curve.keyframe_points:
+            point.interpolation = interpolation_by_frame.get(round(point.co.x), "BEZIER")
+
+
+def apply_actor_performance(
+    repository_root: Path,
+    actor: dict,
+    asset_root: bpy.types.Object,
+    asset_collection: bpy.types.Collection,
+    targets: dict[tuple[str, str], bpy.types.Object],
+) -> dict:
+    actor_spec = actor["actorSpec"]
+    objects = {obj.name: obj for obj in asset_collection.all_objects}
+    rig = objects[actor_spec["rig"]["armatureObject"]]
+    actions = []
+    for action_spec in actor_spec["performance"]["bodyActions"]:
+        action_path = resolve_below(repository_root, Path(action_spec["uri"]), f"Actor action {action_spec['id']}")
+        actual_hash = sha256_file(action_path)
+        if actual_hash != action_spec["sha256"] or actual_hash != action_spec["verifiedSha256"]:
+            raise RuntimeError(f"Actor action hash mismatch during Blender compile: {action_spec['id']}")
+        with bpy.data.libraries.load(str(action_path), link=False) as (source, target):
+            if action_spec["actionName"] not in source.actions:
+                raise RuntimeError(f"Actor action {action_spec['actionName']} is missing from {action_spec['uri']}")
+            target.actions = [action_spec["actionName"]]
+        action = target.actions[0]
+        actions.append(action)
+    if actions:
+        animation_data = rig.animation_data_create()
+        animation_data.action = actions[0]
+        animation_data.action_slot = actions[0].slots[0]
+
+    shape_mesh = objects[actor_spec["deformation"]["shapeKeyMesh"]]
+    shape_keys = shape_mesh.data.shape_keys
+    channel_map = {item["id"]: item for item in actor_spec["deformation"]["shapeChannels"]}
+    interpolation = {}
+    for curve in actor_spec["performance"]["facialCurves"]:
+        key_block = shape_keys.key_blocks[channel_map[curve["channel"]]["targetKey"]]
+        for key in curve["keys"]:
+            key_block.value = key["value"]
+            key_block.keyframe_insert(data_path="value", frame=key["frame"], group="BFS_FACE")
+            interpolation[key["frame"]] = key["interpolation"]
+    set_interpolation(shape_keys.animation_data, interpolation)
+
+    gaze_target = objects["GAZE_TARGET"]
+    bpy.context.view_layer.update()
+    actor_inverse = asset_root.matrix_world.inverted()
+    gaze_bindings = []
+    for key in actor_spec["performance"]["gazeKeys"]:
+        external = targets[(key["targetRef"], key["targetSocket"])]
+        gaze_target.location = actor_inverse @ external.matrix_world.translation
+        gaze_target.keyframe_insert(data_path="location", frame=key["frame"], group="BFS_GAZE_TARGET")
+        gaze_bindings.append({"frame": key["frame"], "target": key["targetRef"], "socket": key["targetSocket"]})
+
+    rig["bfs_actor_id"] = actor["id"]
+    rig["bfs_actor_spec_sha256"] = actor["verifiedActorSpecSha256"]
+    rig["bfs_actor_identity_sha256"] = asset_collection.get("bfs_identity_sha256", "")
+    structure = {
+        "id": actor["id"],
+        "assetRef": actor["assetRef"],
+        "actorSpecSha256": actor["verifiedActorSpecSha256"],
+        "actorSpecCanonicalSha256": actor["actorSpecCanonicalSha256"],
+        "identitySha256": asset_collection.get("bfs_identity_sha256", ""),
+        "actions": [
+            {"id": spec["id"], "name": spec["actionName"], "sha256": spec["verifiedSha256"]}
+            for spec in actor_spec["performance"]["bodyActions"]
+        ],
+        "gazeBindings": gaze_bindings,
+        "contactBindings": [
+            {"id": item["id"], "effectorSocket": item["effectorSocket"], "target": item["targetRef"], "targetSocket": item["targetSocket"], "frameStart": item["frameStart"], "frameEnd": item["frameEnd"]}
+            for item in actor_spec["performance"]["contacts"]
+        ],
+        "bodyAnimation": animation_structure(rig),
+        "facialAnimation": animation_structure(shape_keys),
+        "gazeAnimation": animation_structure(gaze_target),
+    }
 
 
 def create_camera(managed: bpy.types.Collection, camera_spec: dict) -> bpy.types.Object:
@@ -276,7 +386,14 @@ def animation_structure(obj: bpy.types.Object) -> list[dict]:
     return result
 
 
-def build_structure(scene: bpy.types.Scene, wrapper: dict, asset_collections: dict[str, bpy.types.Collection], camera_objects: dict[str, bpy.types.Object]) -> dict:
+def build_structure(
+    scene: bpy.types.Scene,
+    wrapper: dict,
+    asset_collections: dict[str, bpy.types.Collection],
+    camera_objects: dict[str, bpy.types.Object],
+    target_objects: dict[tuple[str, str], bpy.types.Object],
+    actor_reports: list[dict],
+) -> dict:
     plan = wrapper["plan"]
     managed = bpy.data.collections["BFS_SHOT"]
     managed_objects = []
@@ -303,7 +420,7 @@ def build_structure(scene: bpy.types.Scene, wrapper: dict, asset_collections: di
         managed_objects.append(record)
 
     return {
-        "compilerVersion": COMPILER_VERSION,
+        "compilerVersion": plan["compiler"]["version"],
         "blender": {"version": bpy.app.version_string, "buildHash": bpy.app.build_hash.decode("ascii")},
         "planHash": wrapper["planHash"],
         "shot": plan["shot"],
@@ -332,6 +449,19 @@ def build_structure(scene: bpy.types.Scene, wrapper: dict, asset_collections: di
             "view": scene.view_settings.view_transform,
         },
     }
+    if wrapper["planVersion"] == "0.2.0":
+        structure["targets"] = [
+            {
+                "target": target_id,
+                "socket": socket_id,
+                "location": rounded(obj.location),
+                "rotationEuler": rounded(obj.rotation_euler),
+                "scale": rounded(obj.scale),
+            }
+            for (target_id, socket_id), obj in sorted(target_objects.items())
+        ]
+        structure["actors"] = actor_reports
+    return structure
 
 
 def main() -> None:
@@ -360,18 +490,32 @@ def main() -> None:
     scene["bfs_shot_seed"] = plan["shot"]["seed"]
 
     asset_collections = {}
+    asset_roots = {}
     for asset in plan["assets"]:
-        instance = append_asset(repository_root, managed, asset)
-        asset_collections[asset["id"]] = instance.instance_collection
+        root_object, imported_collection = append_asset(repository_root, managed, asset)
+        asset_roots[asset["id"]] = root_object
+        asset_collections[asset["id"]] = imported_collection
 
+    target_objects = create_targets(managed, plan.get("targets", []))
     camera_objects = {camera["id"]: create_camera(managed, camera) for camera in plan["cameras"]}
     for light in plan["lights"]:
         create_light(managed, light)
     configure_world(scene, plan["world"])
     scene.camera = camera_objects[plan["shot"]["activeCamera"]]
+    actor_reports = [
+        apply_actor_performance(
+            repository_root,
+            actor,
+            asset_roots[actor["assetRef"]],
+            asset_collections[actor["assetRef"]],
+            target_objects,
+        )
+        for actor in plan["actors"]
+        if "actorSpec" in actor
+    ]
     warnings = configure_render(scene, plan["render"], plan["outputSpec"], next(camera for camera in plan["cameras"] if camera["id"] == plan["shot"]["activeCamera"]), artifact_root)
 
-    structure = build_structure(scene, wrapper, asset_collections, camera_objects)
+    structure = build_structure(scene, wrapper, asset_collections, camera_objects, target_objects, actor_reports)
     structure_hash = sha256_bytes(canonical_json(structure).encode("utf-8"))
     blend_path = artifact_root / "scene.blend"
     save_result = bpy.ops.wm.save_as_mainfile(filepath=str(blend_path), check_existing=False, compress=True, relative_remap=True)

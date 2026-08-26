@@ -122,6 +122,43 @@ The actor generator was run twice with the same Blender build and the same outpu
 
 Therefore a Blender library file is not treated as its own canonical semantic identity. ActorSpec pins the exact chosen binary for immutable builds, while regeneration equivalence is evaluated with normalized rest-pose, topology, Shape Key, motion, and aggregate identity hashes.
 
+## SceneSpec v0.2 integration
+
+SceneSpec v0.1 remains frozen. A new v0.2 contract adds:
+
+- exact ActorSpec URI and SHA-256 on each scene actor;
+- scene-owned target sockets for gaze and contact;
+- explicit `IMPORT_ACTOR_SPEC`, `IMPORT_ACTION`, `CREATE_TARGET`, and `APPLY_PERFORMANCE` permissions;
+- BuildPlan-side ActorSpec validation, actor/asset cross-checks, action hash verification, shot-range agreement, and target resolution;
+- Blender-side direct character import, Action/Shape Key application, target creation, and compiled-scene evaluation.
+
+B03 was compiled twice from the same BuildPlan:
+
+- BuildPlan SHA-256: `56417f40ffa6f0514cddb78ae0b484f6a4820d9d397ebb0edca4b28a4b1c22cd`
+- run A structure SHA-256: `b17608123d5e5d09fb7ccbc8c72c113be462654a11e43595a5aa07a6145ae0c8`
+- run B structure SHA-256: `b17608123d5e5d09fb7ccbc8c72c113be462654a11e43595a5aa07a6145ae0c8`
+- structure equality: **true**
+- raw `.blend` SHA equality: **false**
+
+The compiled `.blend` then passed five scene-level checks:
+
+| Check | Result | Measurement |
+| --- | --- | --- |
+| BuildPlan binding | PASS | Scene custom hash equals BuildPlan hash |
+| Character asset binding | PASS | Exact chosen asset SHA preserved |
+| Facial targets | PASS | 9/9 authored values; max error `0.0` |
+| Scene-relative gaze | PASS | Two targets, two eyes; max error `0.0°` |
+| Scene-relative foot contact | PASS | 144 frame samples; max position error `4.4×10⁻⁸ m`, rotation error `0.0°`, slip `0.0 m` |
+
+Four negative cases were rejected:
+
+1. Duplicate target socket at semantic validation.
+2. ActorSpec hash tampering before BuildPlan generation.
+3. Missing scene gaze target during actor/scene cross-validation.
+4. Missing `APPLY_PERFORMANCE` authorization during required-operation analysis.
+
+This closes the B03 **control and measurement** loop. It still does not prove visual contact, because a target socket can agree numerically while the surrounding meshes intersect, float, or look implausible.
+
 ## What is now technically supported
 
 - A bounded character contract can describe and validate a project-owned rig, deformation channels, performance layers, sockets, and asset provenance.
@@ -162,6 +199,11 @@ Embed ActorSpec into SceneSpec and compile B03 as a close-up with scene-owned ga
 - `experiments/actor-v0-1/results.json`
 - `experiments/actor-v0-1/performance-evaluation.json`
 - `experiments/actor-v0-1/regeneration.json`
+- `specs/scene-spec.v0.2.schema.json`
+- `specs/benchmarks/B03.scene.json`
+- `experiments/actor-v0-1/B03.build-plan.json`
+- `experiments/actor-v0-1/B03.integration-results.json`
+- `experiments/actor-v0-1/B03.scene-evaluation.json`
 
 ## Primary references
 

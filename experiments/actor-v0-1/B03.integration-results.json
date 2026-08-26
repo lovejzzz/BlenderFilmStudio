@@ -1,0 +1,134 @@
+{
+  "documentType": "BFS_SCENE_V02_EXPERIMENT",
+  "experimentVersion": "0.1.0",
+  "executedAtUtc": "2026-08-26T04:34:40.917Z",
+  "environment": {
+    "blender": "5.2.0 LTS",
+    "platform": "darwin-arm64",
+    "node": "v26.5.0"
+  },
+  "sceneSpec": {
+    "version": "0.2.0",
+    "valid": true,
+    "shot": "SHOT_103"
+  },
+  "buildPlan": {
+    "version": "0.2.0",
+    "hash": "56417f40ffa6f0514cddb78ae0b484f6a4820d9d397ebb0edca4b28a4b1c22cd"
+  },
+  "cleanBuilds": {
+    "structureHashes": [
+      "b17608123d5e5d09fb7ccbc8c72c113be462654a11e43595a5aa07a6145ae0c8",
+      "b17608123d5e5d09fb7ccbc8c72c113be462654a11e43595a5aa07a6145ae0c8"
+    ],
+    "structureHashesEqual": true,
+    "blendSha256": [
+      "ab452804f7e16a1004dc431b612564f48e6c4ac217820a6710c8c36aa16b5be7",
+      "cd4f628b9f9d08755a5c5e4e6af741bf093f25e258052d786317ed9f6ec0bc89"
+    ],
+    "blendSha256Equal": false
+  },
+  "evaluation": {
+    "allChecksPassed": true,
+    "checks": [
+      {
+        "detail": "56417f40ffa6f0514cddb78ae0b484f6a4820d9d397ebb0edca4b28a4b1c22cd",
+        "id": "C01_PLAN_BOUND",
+        "passed": true
+      },
+      {
+        "detail": "10feb54a274ea6601f18379ee01964fbfda02d8cc0360b0efe3df3908ef4378f",
+        "id": "C02_ACTOR_ASSET_BOUND",
+        "passed": true
+      },
+      {
+        "detail": {
+          "authoredKeys": 9,
+          "maximumAbsoluteError": 0
+        },
+        "id": "C03_FACE_TARGETS",
+        "passed": true
+      },
+      {
+        "detail": {
+          "maximumDeg": 0,
+          "thresholdDeg": 2
+        },
+        "id": "C04_SCENE_GAZE",
+        "passed": true
+      },
+      {
+        "detail": [
+          {
+            "frameEnd": 72,
+            "frameStart": 1,
+            "id": "LEFT_FOOT_PLANT",
+            "maximumPositionErrorM": 4.4e-8,
+            "maximumRotationErrorDeg": 0,
+            "maximumSocketSlipM": 0,
+            "passed": true,
+            "positionToleranceM": 0.01,
+            "rotationToleranceDeg": 3,
+            "sampleCount": 72,
+            "slipToleranceM": 0.01,
+            "target": "SET_FLOOR_L",
+            "targetSocket": "FLOOR"
+          },
+          {
+            "frameEnd": 144,
+            "frameStart": 73,
+            "id": "RIGHT_FOOT_PLANT",
+            "maximumPositionErrorM": 4.4e-8,
+            "maximumRotationErrorDeg": 0,
+            "maximumSocketSlipM": 0,
+            "passed": true,
+            "positionToleranceM": 0.01,
+            "rotationToleranceDeg": 3,
+            "sampleCount": 72,
+            "slipToleranceM": 0.01,
+            "target": "SET_FLOOR_R",
+            "targetSocket": "FLOOR"
+          }
+        ],
+        "id": "C05_SCENE_CONTACT",
+        "passed": true
+      }
+    ]
+  },
+  "negativeTests": [
+    {
+      "id": "N01_DUPLICATE_TARGET_SOCKET",
+      "schemaValid": false,
+      "rejected": true,
+      "expectedText": "SEM_DUPLICATE_TARGET_SOCKET",
+      "error": "SEM_DUPLICATE_TARGET_SOCKET"
+    },
+    {
+      "id": "N02_ACTOR_SPEC_HASH",
+      "schemaValid": true,
+      "rejected": true,
+      "expectedText": "ActorSpec ACTOR_LEAD hash mismatch",
+      "error": "ActorSpec ACTOR_LEAD hash mismatch: expected aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, received 4299388ff7ed9ac4642c43ccd75a42635f31973595f888803b662c3df5899a33"
+    },
+    {
+      "id": "N03_MISSING_GAZE_TARGET",
+      "schemaValid": true,
+      "rejected": true,
+      "expectedText": "gaze target PROP_MARK.GAZE_MARK is missing",
+      "error": "Actor ACTOR_LEAD gaze target PROP_MARK.GAZE_MARK is missing from SceneSpec targets"
+    },
+    {
+      "id": "N04_MISSING_OPERATION",
+      "schemaValid": true,
+      "rejected": true,
+      "expectedText": "does not authorize required operations: APPLY_PERFORMANCE",
+      "error": "SceneSpec does not authorize required operations: APPLY_PERFORMANCE"
+    }
+  ],
+  "allAcceptanceChecksPassed": true,
+  "explicitNonClaims": [
+    "Target-relative socket agreement does not prove mesh collision or visually plausible contact.",
+    "The B03 technical mannequin is not a photoreal human benchmark.",
+    "No human acting or facial-readability review has been performed."
+  ]
+}

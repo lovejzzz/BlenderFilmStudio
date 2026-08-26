@@ -1424,3 +1424,36 @@ footer > a { justify-self: end; color: var(--acid); font-size: 11px; }
   .measured-bench article:nth-child(n) { border-left: 0; border-top: 1px solid #525248; }
   .measured-bench article:first-child { border-top: 0; }
 }
+
+/* ActorSpec v0.1 — SceneSpec v0.2 integration */
+.actor-integration { background: var(--actor-coral); }
+.integration-stats { margin-top: 66px; display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--ink); }
+.integration-stats article { min-height: 220px; padding: 22px; border-left: 1px solid var(--ink); display: flex; flex-direction: column; }
+.integration-stats article:first-child { border-left: 0; }
+.integration-stats strong { margin-top: auto; font: 520 clamp(28px,3.6vw,52px) var(--font-geist-mono); letter-spacing: -.07em; }
+.integration-stats span { margin-top: 12px; font-weight: 650; }
+.integration-stats small { margin-top: 7px; color: #703226; }
+.integration-plan { margin-top: 32px; padding: 20px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+.integration-plan span { font: 650 9px var(--font-geist-mono); }
+.integration-plan code { margin-right: auto; font-size: 10px; }
+.integration-plan b { padding: 7px 10px; border: 1px solid var(--ink); font: 650 9px var(--font-geist-mono); }
+.integration-flow { margin-top: 42px; display: grid; grid-template-columns: 1fr 30px 1fr 30px 1fr 30px 1fr; }
+.integration-flow article { min-height: 190px; padding: 20px; border: 1px solid var(--ink); display: flex; flex-direction: column; }
+.integration-flow article span { font: 650 9px var(--font-geist-mono); }
+.integration-flow article b { margin-top: auto; font-size: 18px; }
+.integration-flow article small { margin-top: 7px; color: #6f3025; }
+.integration-flow i { display: grid; place-items: center; font-style: normal; }
+
+@media (max-width: 800px) {
+  .integration-stats { grid-template-columns: repeat(2,1fr); }
+  .integration-stats article:nth-child(3) { border-left: 0; border-top: 1px solid var(--ink); }
+  .integration-stats article:nth-child(4) { border-top: 1px solid var(--ink); }
+  .integration-flow { grid-template-columns: 1fr; }
+  .integration-flow i { height: 28px; transform: rotate(90deg); }
+}
+
+@media (max-width: 620px) {
+  .integration-stats { grid-template-columns: 1fr; }
+  .integration-stats article:nth-child(n) { border-left: 0; border-top: 1px solid var(--ink); }
+  .integration-stats article:first-child { border-top: 0; }
+}

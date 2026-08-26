@@ -10,7 +10,7 @@ from pathlib import Path
 
 import bpy
 from bpy_extras import anim_utils
-from mathutils import Vector
+from mathutils import Euler, Matrix, Vector
 
 
 def parse_args() -> argparse.Namespace:
@@ -161,17 +161,30 @@ def main() -> None:
         socket = socket_specs[contact["effectorSocket"]]
         bone = rig.pose.bones[semantic_bones[socket["boneSemantic"]]]
         positions = []
+        rotations = []
+        offset = socket["offset"]
+        offset_matrix = Matrix.LocRotScale(
+            Vector(offset["locationM"]),
+            Euler(tuple(math.radians(value) for value in offset["rotationEulerDeg"])),
+            Vector(offset["scale"]),
+        )
         for frame in range(contact["frameStart"], contact["frameEnd"] + 1):
             scene.frame_set(frame)
             bpy.context.view_layer.update()
-            matrix = rig.matrix_world @ bone.matrix
-            positions.append(matrix @ Vector(socket["offset"]["locationM"]))
+            matrix = rig.matrix_world @ bone.matrix @ offset_matrix
+            positions.append(matrix.translation.copy())
+            rotations.append(matrix.to_quaternion())
         origin = positions[0]
         max_slip = max((position - origin).length for position in positions)
+        rotation_origin = rotations[0]
+        max_rotation_slip = max(math.degrees(rotation_origin.rotation_difference(rotation).angle) for rotation in rotations)
         contact_metrics.append({
             "id": contact["id"],
             "sampleCount": len(positions),
+            "socketOriginWorldM": rounded(origin),
+            "socketOriginWorldEulerDeg": rounded([math.degrees(value) for value in rotation_origin.to_euler()]),
             "maxSocketSlipM": round(max_slip, 9),
+            "maxSocketRotationSlipDeg": round(max_rotation_slip, 9),
             "thresholdM": spec["acceptance"]["maxFootSlipM"],
             "passesSlipThreshold": max_slip <= spec["acceptance"]["maxFootSlipM"],
             "externalTargetErrorMeasured": False,

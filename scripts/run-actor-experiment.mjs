@@ -125,7 +125,7 @@ async function main() {
     explicitNonClaims: [
       'The B03 technical mannequin is not a photoreal human.',
       'A conforming rig does not prove natural acting, facial fidelity, or mesh-level contact.',
-      'External gaze and contact targets are not validated until ActorSpec is embedded in a SceneSpec benchmark.',
+      'This isolated asset audit does not validate external targets; B03 SceneSpec v0.2 performs that separate scene-level evaluation.',
     ],
   };
   await writeFile(resolve(experimentRoot, 'results.json'), `${JSON.stringify(report, null, 2)}\n`);
