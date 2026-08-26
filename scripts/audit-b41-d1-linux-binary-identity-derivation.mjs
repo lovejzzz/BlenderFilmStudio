@@ -1,0 +1,31 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { repositoryRoot } from './lib/scene-spec.mjs';
+import { sha256File } from './lib/receipt-format.mjs';
+import { analyzeB41D1Evidence, buildB41D1Attacks, readB41D1Spec } from './lib/b41-d1-linux-binary-identity-derivation.mjs';
+
+const root = resolve(repositoryRoot, 'experiments/linux-amd64-blender-binary-identity-derivation-v0-1');
+const result = JSON.parse(await readFile(resolve(root, 'results.json'), 'utf8'));
+const spec = await readB41D1Spec();
+const analysis = analyzeB41D1Evidence(result, spec);
+const observedToolHashes = Object.fromEntries(await Promise.all(Object.entries(result.tools).map(async ([key, item]) => [key, await sha256File(resolve(repositoryRoot, item.uri))])));
+const toolsMatch = Object.entries(observedToolHashes).every(([key, digest]) => digest === result.tools[key].sha256);
+const replayedAttacks = buildB41D1Attacks(result, spec);
+const attacksMatch = JSON.stringify(replayedAttacks) === JSON.stringify(result.attacks);
+const attackCountExact = replayedAttacks.length === spec.acceptance.attacks.length;
+const attacksPass = replayedAttacks.every(item => item.passed);
+const audit = {
+  schemaVersion: 'bfs.linuxAmd64BlenderBinaryIdentityDerivationIndependentAudit.v0.1',
+  experimentId: 'B41-D1',
+  analysis,
+  observedToolHashes,
+  toolsMatch,
+  replayedAttacks,
+  attacksMatch,
+  attackCountExact,
+  attacksPass,
+  passed: analysis.passed && toolsMatch && attacksMatch && attackCountExact && attacksPass,
+};
+await writeFile(resolve(root, 'audit.json'), `${JSON.stringify(audit, null, 2)}\n`);
+process.stdout.write(`BFS_B41_D1_AUDIT ${audit.passed ? 'PASS' : 'FAIL'} tools=${toolsMatch ? 'MATCH' : 'MISMATCH'} attacks=${replayedAttacks.filter(item => item.passed).length}/${replayedAttacks.length}\n`);
+if (!audit.passed) process.exitCode = 1;
