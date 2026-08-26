@@ -45,7 +45,7 @@ const gaps: {
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: 'B30 的 CENTER 干预 144/144 strict exact；B31 确认单点边缘参考误差代价。B32/B33 正式支持 Q4/Q8 静态成本—质量曲线与 Q8 连续时间 proxy。B34 用 13 PID / 1,872 EXR 生成三条 144/144 RGB-exact carrier；随后 public-hash attack 通过 SHA join 解盲 18/18 session，正式人类收集因此在开始前停止。',
+    known: 'B30 的 CENTER 干预 144/144 strict exact；B31 确认单点边缘参考误差代价。B32/B33 正式支持 Q4/Q8 静态成本—质量曲线与 Q8 连续时间 proxy。B34 的 public-hash attack 解盲 18/18 session并停止采集。B35 随后完成 13 PID / 1,872 render 的 52 mm 新 realization、3,226 项敏感 registry 与 0 public match delayed-disclosure package。',
     missing: '静态与连续帧 scene-linear proxy 已确认；仍缺可见 edge flicker、motion blur、独立人类感知、完整镜头成本，以及跨场景、GPU、驱动、OS 与补丁版本证据。正式 holdout 的 global Q8/Q4 max 0.7386 距 0.75 门仅 0.0114，需作为复制攻击重点。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>不要分发 B34；建立 delayed-disclosure 新 realization。</h3><p>B34 的公开 method→carrier SHA 与 observer CLIP→SHA 可关联，18/18 session 无需 sealed mapping 即被解盲。下一协议必须重新生成视觉内容；收集前公开的只有 protocol、非解盲工具身份和 opaque package commitment。所有 method-labelled output、carrier、decoded-frame 与 pixel hash 必须等 18 份 response 全部锁定后再披露。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>部署 B35 公开面，再对最终 commit 重跑 leak gate。</h3><p>B35 新 realization 与 private package 已经通过真实 Blender、lossless carrier、独立 audit 和 sensitive-value injection attack；公开 commitment 自身与 3,226 个 registry values 匹配 0。页面部署会改变公开树，因此 collection 仍未开放。下一门是最终 deploy commit 的 same-state scan，再进行不计入样本的真实浏览器 pilot。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/human-quadrature-review-v0-1">查看 B34 公开解盲反例 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/delayed-disclosure-review-v0-2">查看 B35 延迟披露包 →</Link></footer>
     </main>
   );
 }
