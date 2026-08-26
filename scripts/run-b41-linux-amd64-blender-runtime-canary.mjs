@@ -11,17 +11,28 @@ import {
   B41_PREREG_COMMIT, B41_SPEC_SHA256, analyzeB41Evidence, expectedB41Argv, expectedB41Environment,
   hashB41Evidence, readB41Spec,
 } from './lib/b41-linux-amd64-blender-runtime-canary.mjs';
+import {
+  B41_C1_PREREG_COMMIT, B41_C1_SPEC_SHA256, analyzeB41C1Evidence, normalizeB41DockerArchitecture, readB41C1Spec,
+} from './lib/b41-c1-docker-architecture-correction.mjs';
 
 const spec = await readB41Spec();
-const experimentRoot = resolve(repositoryRoot, 'experiments/linux-amd64-blender-runtime-canary-v0-1');
+const correctionMode = process.argv.includes('--c1');
+const correctionSpec = correctionMode ? await readB41C1Spec() : null;
+const experimentRoot = resolve(repositoryRoot, correctionMode
+  ? 'experiments/linux-amd64-blender-runtime-canary-v0-2'
+  : 'experiments/linux-amd64-blender-runtime-canary-v0-1');
 const successRoot = resolve(experimentRoot, 'success');
 const timeoutRoot = resolve(experimentRoot, 'timeout');
 const dockerfilePath = resolve(repositoryRoot, 'worker/b41/Dockerfile');
 const runtimeCanaryPath = resolve(repositoryRoot, 'fixtures/b41/runtime-canary.py');
 const timeoutCanaryPath = resolve(repositoryRoot, 'fixtures/b41/timeout-canary.py');
-const libraryPath = resolve(repositoryRoot, 'scripts/lib/b41-linux-amd64-blender-runtime-canary.mjs');
+const libraryPath = resolve(repositoryRoot, correctionMode
+  ? 'scripts/lib/b41-c1-docker-architecture-correction.mjs'
+  : 'scripts/lib/b41-linux-amd64-blender-runtime-canary.mjs');
 const runnerPath = resolve(repositoryRoot, 'scripts/run-b41-linux-amd64-blender-runtime-canary.mjs');
-const auditPath = resolve(repositoryRoot, 'scripts/audit-b41-linux-amd64-blender-runtime-canary.mjs');
+const auditPath = resolve(repositoryRoot, correctionMode
+  ? 'scripts/audit-b41-c1-docker-architecture-correction.mjs'
+  : 'scripts/audit-b41-linux-amd64-blender-runtime-canary.mjs');
 const dockerBase = ['--host', spec.runtime.dockerHost];
 const experimentNames = ['bfs-b41-success-01', 'bfs-b41-timeout-01'];
 const operations = [];
@@ -121,14 +132,20 @@ async function runTimedContainer({ name, args, wallTimeMs, graceMs }) {
   };
 }
 
-if (spawnSync('git', ['merge-base', '--is-ancestor', B41_PREREG_COMMIT, 'HEAD'], { cwd: repositoryRoot }).status !== 0) throw new Error('B41 preregistration is not an ancestor');
+const preregistrationCommit = correctionMode ? B41_C1_PREREG_COMMIT : B41_PREREG_COMMIT;
+const preregistrationSpecSha256 = correctionMode ? B41_C1_SPEC_SHA256 : B41_SPEC_SHA256;
+if (spawnSync('git', ['merge-base', '--is-ancestor', preregistrationCommit, 'HEAD'], { cwd: repositoryRoot }).status !== 0) throw new Error('B41 preregistration is not an ancestor');
 const toolFreezeCommit = probe('git', ['rev-parse', 'HEAD'], 'tool freeze identity');
 if (probe('git', ['status', '--porcelain', '--untracked-files=no'], 'tracked status') !== '') throw new Error('B41 tracked worktree must be clean');
 if (process.version !== spec.runtime.nodeVersion || process.execPath !== spec.runtime.nodeBinary) throw new Error('B41 Node identity differs');
 const nodeBinarySha256 = await sha256File(process.execPath);
 if (nodeBinarySha256 !== spec.runtime.nodeBinarySha256) throw new Error('B41 Node SHA differs');
 const dockerIdentity = JSON.parse(probe('docker', [...dockerBase, 'version', '--format', '{{json .Server}}'], 'Docker server identity'));
-if (dockerIdentity.Arch !== spec.runtime.dockerServerArchitecture) throw new Error('B41 Docker server architecture differs');
+const rawDockerArchitecture = dockerIdentity.Arch;
+const canonicalDockerArchitecture = correctionMode
+  ? normalizeB41DockerArchitecture(rawDockerArchitecture, correctionSpec)
+  : rawDockerArchitecture;
+if (canonicalDockerArchitecture !== spec.runtime.dockerServerArchitecture) throw new Error('B41 Docker server architecture differs');
 for (const name of experimentNames) {
   const existing = spawnSync('docker', [...dockerBase, 'container', 'inspect', name], { encoding: 'utf8' });
   if (existing.status === 0) throw new Error(`B41 container name already exists: ${name}`);
@@ -231,10 +248,19 @@ operations.push('DOCKER_RUNNING_CONTAINER_CHECK');
 const runningNames = probe('docker', [...dockerBase, 'ps', '--format', '{{.Names}}'], 'B41 post-run container check').split('\n').filter(Boolean);
 const experimentContainersRunningAfter = runningNames.filter(name => experimentNames.includes(name)).length;
 const evidence = {
-  schemaVersion: 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.1', experimentId: 'B41',
+  schemaVersion: correctionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.2' : 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.1',
+  experimentId: correctionMode ? 'B41-C1' : 'B41',
   status: 'REAL_LINUX_AMD64_BLENDER_RUNTIME_AND_TIMEOUT_CANARY',
-  preregistration: { commit: B41_PREREG_COMMIT, specSha256: B41_SPEC_SHA256 }, ancestry, toolFreezeCommit,
-  runtime: { nodeVersion: process.version, nodeBinary: process.execPath, nodeBinarySha256, dockerHost: spec.runtime.dockerHost, dockerServerVersion: dockerIdentity.Version, dockerServerArchitecture: dockerIdentity.Arch },
+  preregistration: { commit: preregistrationCommit, specSha256: preregistrationSpecSha256 },
+  ...(correctionMode ? { architectureCorrection: {
+    parentSpecSha256: correctionSpec.parent.specSha256,
+    parentPreregistrationCommit: correctionSpec.parent.preregistrationCommit,
+    parentToolFreezeCommit: correctionSpec.parent.toolFreezeCommit,
+    rawDockerArchitecture, canonicalDockerArchitecture,
+    changedImplementationExact: correctionSpec.changedImplementationExact,
+  } } : {}),
+  ancestry, toolFreezeCommit,
+  runtime: { nodeVersion: process.version, nodeBinary: process.execPath, nodeBinarySha256, dockerHost: spec.runtime.dockerHost, dockerServerVersion: dockerIdentity.Version, dockerServerArchitecture: canonicalDockerArchitecture },
   tools: {
     runner: { uri: 'scripts/run-b41-linux-amd64-blender-runtime-canary.mjs', sha256: await sha256File(runnerPath) },
     library: { uri: 'scripts/lib/b41-linux-amd64-blender-runtime-canary.mjs', sha256: await sha256File(libraryPath) },
@@ -248,8 +274,11 @@ const evidence = {
   success, timeout, cleanup: { experimentContainersRunningAfter, temporaryBuildRootRemoved }, errors,
 };
 evidence.evidenceHash = hashB41Evidence(evidence);
-const analysis = analyzeB41Evidence(evidence, spec);
-const result = { ...evidence, analysis, verdict: analysis.passed ? spec.acceptedVerdict : 'LINUX_AMD64_BLENDER_5_2_CANARY_FAILED', nonClaims: spec.nonClaims };
+const analysis = correctionMode
+  ? analyzeB41C1Evidence(evidence, correctionSpec, spec)
+  : analyzeB41Evidence(evidence, spec);
+const acceptedVerdict = correctionMode ? correctionSpec.acceptedVerdict : spec.acceptedVerdict;
+const result = { ...evidence, analysis, verdict: analysis.passed ? acceptedVerdict : 'LINUX_AMD64_BLENDER_5_2_CANARY_FAILED', nonClaims: correctionMode ? [...spec.nonClaims, ...correctionSpec.nonClaims] : spec.nonClaims };
 await writeFile(resolve(experimentRoot, 'results.json'), `${JSON.stringify(result, null, 2)}\n`);
-process.stdout.write(`BFS_B41_RESULT verdict=${result.verdict} build=${image.buildExitCode} success=${success.exitCode ?? 'NA'} timeout=${timeout.outcome ?? 'NA'} failures=${analysis.failures.join(',') || 'none'}\n`);
+process.stdout.write(`BFS_${correctionMode ? 'B41_C1' : 'B41'}_RESULT verdict=${result.verdict} build=${image.buildExitCode} success=${success.exitCode ?? 'NA'} timeout=${timeout.outcome ?? 'NA'} failures=${analysis.failures.join(',') || 'none'}\n`);
 if (!analysis.passed) process.exitCode = 1;
