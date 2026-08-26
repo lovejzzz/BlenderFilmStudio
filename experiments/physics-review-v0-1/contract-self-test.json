@@ -1,0 +1,99 @@
+{
+  "documentType": "BFS_B09_REVIEW_CONTRACT_SELF_TEST",
+  "version": "0.1.0",
+  "schema": "specs/human-review-response.v0.4.schema.json",
+  "cases": [
+    {
+      "id": "P01_VALID",
+      "expectedValid": true,
+      "observedValid": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "N01_CLIP_HASH",
+      "expectedValid": false,
+      "observedValid": false,
+      "pass": true,
+      "errors": [
+        {
+          "path": "/clipSha256",
+          "message": "must be equal to constant"
+        }
+      ]
+    },
+    {
+      "id": "N02_DOCUMENT_TYPE",
+      "expectedValid": false,
+      "observedValid": false,
+      "pass": true,
+      "errors": [
+        {
+          "path": "/documentType",
+          "message": "must be equal to constant"
+        }
+      ]
+    },
+    {
+      "id": "N03_WATCHED_FALSE",
+      "expectedValid": false,
+      "observedValid": false,
+      "pass": true,
+      "errors": [
+        {
+          "path": "/watchedTwice",
+          "message": "must be equal to constant"
+        }
+      ]
+    },
+    {
+      "id": "N04_SCORE_RANGE",
+      "expectedValid": false,
+      "observedValid": false,
+      "pass": true,
+      "errors": [
+        {
+          "path": "/answers/releasePlausibility",
+          "message": "must be <= 5"
+        }
+      ]
+    },
+    {
+      "id": "N05_EXTRA_ANSWER",
+      "expectedValid": false,
+      "observedValid": false,
+      "pass": true,
+      "errors": [
+        {
+          "path": "/answers",
+          "message": "must NOT have additional properties"
+        }
+      ]
+    },
+    {
+      "id": "N06_PRIVACY",
+      "expectedValid": false,
+      "observedValid": false,
+      "pass": true,
+      "errors": [
+        {
+          "path": "/privacy/personalDataRequested",
+          "message": "must be equal to constant"
+        }
+      ]
+    },
+    {
+      "id": "N07_MISSING_VERDICT",
+      "expectedValid": false,
+      "observedValid": false,
+      "pass": true,
+      "errors": [
+        {
+          "path": "/answers",
+          "message": "must have required property 'overallAcceptance'"
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

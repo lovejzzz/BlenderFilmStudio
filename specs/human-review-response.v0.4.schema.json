@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/human-review-response.v0.4.schema.json",
+  "title": "BFS B09 Source Physics Human Review Response v0.4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentType", "protocolVersion", "clipId", "clipSha256", "reviewerCode", "submittedAtUtc", "watchedTwice", "answers", "privacy"],
+  "properties": {
+    "documentType": { "const": "BFS_B09_SOURCE_PHYSICS_REVIEW_RESPONSE" },
+    "protocolVersion": { "const": "0.4.0" },
+    "clipId": { "const": "CLIP_P84R" },
+    "clipSha256": { "const": "244974d7be08107e9b88ab855a05fbfdeda486f52d66076fd29581305fe35041" },
+    "reviewerCode": { "type": "string", "pattern": "^[A-Za-z0-9_-]{3,24}$" },
+    "submittedAtUtc": { "type": "string", "format": "date-time" },
+    "watchedTwice": { "const": true },
+    "answers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["twoSidedSupport", "transportSynchronization", "releasePlausibility", "visibleInterpenetration", "visiblePop", "overallAcceptance", "note"],
+      "properties": {
+        "twoSidedSupport": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "transportSynchronization": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "releasePlausibility": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "visibleInterpenetration": { "enum": ["YES", "NO", "UNSURE"] },
+        "visiblePop": { "enum": ["YES", "NO", "UNSURE"] },
+        "overallAcceptance": { "enum": ["PASS", "FAIL", "UNSURE"] },
+        "note": { "type": "string", "maxLength": 500 }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transmitted", "personalDataRequested"],
+      "properties": { "transmitted": { "const": false }, "personalDataRequested": { "const": false } }
+    }
+  }
+}
