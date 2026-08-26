@@ -1053,6 +1053,20 @@ Status: `REJECTED_REPLAY_DIAGNOSTIC_GAP`. B40-R2 may change only replay snapshot
 
 Artifacts: `experiments/worker-host-capacity-readmission-v0-1/attempt-1-results.json`, `experiments/worker-host-capacity-readmission-v0-1/attempt-1-audit.json` and `research/2026-08-26-b40-r1-replay-diagnostic-failure.md`.
 
+## J-058 · B40-R2 replay-stable host admission after intervention
+
+Type: preregistered narrow replay correction and independently audited capacity re-admission, 2026-08-26.
+
+B40-R2 changed no policy, probe, expected capacity state, attack or runtime boundary. It canonicalized the tested evidence before analysis and stored separate evidence, analysis and attack-vector replay booleans inside the hashed receipt.
+
+The host exposed `139029028864` bytes available and `117554192384` bytes after the frozen 20 GiB projection, above the 100 GiB reserve. Colima exposed `12513595392` bytes memory, six CPUs, zero swap and enabled `qemu-x86_64` with `/usr/bin/qemu-x86_64` plus `POCF`. `/var/lib/docker` exposed `14767869952` bytes available and Docker reported zero running containers.
+
+All seven gates were accepted with no blocked reasons. Sixteen of sixteen attacks produced their expected primary failure, all three replay diagnostics were true, and the independent audit reproduced the analysis and exact attack vector.
+
+Verdict: `WORKER_HOST_CAPACITY_ACCEPTED_REPLAY_STABLE`. The host is eligible only for a separately preregistered B41 linux/amd64 Blender 5.2 canary; no runtime claim was made here.
+
+Artifacts: `experiments/worker-host-capacity-readmission-v0-2/results.json`, `experiments/worker-host-capacity-readmission-v0-2/audit.json` and `research/2026-08-26-b40-r2-worker-host-capacity-readmission-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
