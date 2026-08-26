@@ -983,6 +983,18 @@ The attempt stays immutable. B40-C1 must bind its hashes and change only the exa
 
 Artifacts: `experiments/worker-host-capacity-admission-v0-1/results.json`, `experiments/worker-host-capacity-admission-v0-1/audit.json` and `research/2026-08-26-b40-worker-host-capacity-admission-invalid-result.md`.
 
+## J-052 · B40-C1 in-memory aliasing breaks independent replay
+
+Type: preregistered parser correction, rejected by serialization-stability audit, 2026-08-26.
+
+B40-C1 correctly parsed `flags: POCF`, accepted the emulator gate and reproduced four capacity blockers. Its in-memory runner reported 14/14 attacks. The independent audit nevertheless failed exact replay at the fabricated-emulator attack.
+
+The classifier had stored the same emulator object under both observation and decision. In-memory mutation changed both references; JSON round-trip broke the alias, so the audit additionally detected `CAPACITY_DECISION`. All candidates were rejected, but the failure vector was not reproducible and `recordedAttacksMatch=false`.
+
+Status: `REJECTED_IN_MEMORY_ALIASING`. B40-C2 must value-copy gate records and freeze pre/post-JSON attack-vector equality. No runtime operation occurred.
+
+Artifacts: `experiments/worker-host-capacity-admission-v0-2/results.json`, `experiments/worker-host-capacity-admission-v0-2/audit.json` and `research/2026-08-26-b40-c1-aliasing-audit-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
