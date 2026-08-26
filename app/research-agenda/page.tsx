@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>增加 samples 1 与 2 的独立重复深度。</h3><p>B18 的 exact 向量是 F,T,F,F,F,F，否定了简单单调阈值；最大误差却随采样大致从 30/7/4/2/1 code 下降。下一步预注册多序列比较图、置信区间和停止规则，区分真实可靠性与幸运 A/B。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>隔离顺序渲染的进程 / 帧历史。</h3><p>B19 证明关闭 Fast GI、TAA reprojection 或两者都关仍非 exact。B15–B19 都在同一 Blender 进程顺序跑 144 帧；下一步对高复发 sentinel frames 比较同进程重复与每帧新进程，固定比较图与停止规则。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/eevee-sampling-dose-response-v0-1">查看最新剂量响应证据 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/eevee-gi-reprojection-factorial-v0-1">查看最新双因子反证 →</Link></footer>
     </main>
   );
 }

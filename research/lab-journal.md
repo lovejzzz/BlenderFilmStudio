@@ -322,6 +322,21 @@ Protocol: `research/2026-08-26-b19-gi-reprojection-factorial-protocol.md`.
 
 Status at freeze: no B19 configurator, runner or render exists.
 
+Formal execution observation:
+
+- eight clean Blender processes rendered 1,152 frames in the frozen order;
+- on/on: 131/144 exact, 97 failed pixels;
+- GI off/reprojection on: 135/144 exact, 50 failed pixels;
+- GI on/reprojection off: 133/144 exact, 96 failed pixels;
+- both off: 131/144 exact, 73 failed pixels;
+- every cell retained approximately one 8-bit code maximum error;
+- 14/14 attacks reached the frozen reason;
+- all source, tool and OCIO identities remained fixed.
+
+Verdict: `NO_SUFFICIENT_INTERVENTION`. Disabling Fast GI or TAA reprojection separately or together does not restore strict pixel equality. The smaller failed-pixel count in one cell is not promoted as improvement from one stochastic pair. The next isolation boundary is process/frame-history state versus fresh-process rendering.
+
+Artifacts: `experiments/eevee-gi-reprojection-factorial-v0-1/results.json`, `experiments/eevee-gi-reprojection-factorial-v0-1/evidence/` and `research/2026-08-26-b19-gi-reprojection-factorial-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:

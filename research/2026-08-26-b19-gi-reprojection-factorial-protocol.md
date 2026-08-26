@@ -2,7 +2,7 @@
 
 Date frozen: 2026-08-26, before implementing the B19 configurator/runner and before rendering any B19 frame.
 
-Status: **PRE-REGISTERED / NOT EXECUTED**
+Status: **EXECUTED / NO_SUFFICIENT_INTERVENTION**
 
 ## Evidence-supported candidates
 
@@ -56,3 +56,8 @@ At least 14 negative cases cover five identities, fixed dither, both factor obse
 
 An exact disabled cell locates a causal control under this profile but does not identify an internal race or make the disabled look acceptable. Two runs per cell do not estimate reliability. Nothing extends to Cycles, EXR, another machine or another Blender version.
 
+## Execution result
+
+All eight clean Blender runs completed and 14/14 attacks reached their frozen reasons. G1-R1, G0-R1, G1-R0 and G0-R0 reached 131/135/133/131 exact frames of 144 respectively; all four had nonzero failed pixels and approximately one-code-value maximum error.
+
+The frozen decision is `NO_SUFFICIENT_INTERVENTION`. Neither Fast GI nor TAA reprojection, alone or jointly disabled, restored strict decoded-pixel reproducibility.
