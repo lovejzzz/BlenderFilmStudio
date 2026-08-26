@@ -5,10 +5,12 @@ import { canonicalJson, canonicalize, readJson, repositoryRoot, sha256, validate
 import { validateSceneSpecV02 } from './lib/scene-spec-v02.mjs';
 import { validateSceneSpecV03 } from './lib/scene-spec-v03.mjs';
 import { validateSceneSpecV04 } from './lib/scene-spec-v04.mjs';
+import { validateSceneSpecV05 } from './lib/scene-spec-v05.mjs';
 import { validateActorSpec } from './lib/actor-spec.mjs';
 import { validateGraspSpec } from './lib/grasp-spec.mjs';
+import { validateTrajectorySpec } from './lib/trajectory-spec.mjs';
 
-const COMPILER_VERSIONS = { '0.1.0': '0.1.0', '0.2.0': '0.2.0', '0.3.0': '0.3.0', '0.4.0': '0.4.1' };
+const COMPILER_VERSIONS = { '0.1.0': '0.1.0', '0.2.0': '0.2.0', '0.3.0': '0.3.0', '0.4.0': '0.4.1', '0.5.0': '0.5.0' };
 const TARGET_BLENDER = '5.2.0';
 const outputSpecPath = resolve(repositoryRoot, 'specs/output-spec.v0.1.json');
 
@@ -34,7 +36,7 @@ function requireOperations(document) {
   if (document.cameras.length > 0) required.add('CREATE_CAMERA');
   if (document.lights.length > 0) required.add('CREATE_LIGHT');
   if ((document.targets ?? []).length > 0) required.add('CREATE_TARGET');
-  if (document.actors.length > 0 && ['0.2.0', '0.3.0', '0.4.0'].includes(document.specVersion)) {
+  if (document.actors.length > 0 && ['0.2.0', '0.3.0', '0.4.0', '0.5.0'].includes(document.specVersion)) {
     required.add('IMPORT_ACTOR_SPEC');
     required.add('IMPORT_ACTION');
     required.add('APPLY_PERFORMANCE');
@@ -42,6 +44,7 @@ function requireOperations(document) {
   if ((document.attachments ?? []).length > 0) required.add('CREATE_CONSTRAINT');
   if ((document.geometryEvaluations ?? []).length > 0) required.add('EVALUATE_GEOMETRY');
   if ((document.grasps ?? []).length > 0) required.add('CREATE_GRASP');
+  if ((document.trajectories ?? []).length > 0) required.add('CREATE_TRAJECTORY_REPLAY');
   if (document.assets.length + document.cameras.length + document.lights.length > 0) required.add('SET_TRANSFORM');
   const missing = [...required].filter(operation => !requested.has(operation));
   if (missing.length > 0) throw new Error(`SceneSpec does not authorize required operations: ${missing.join(', ')}`);
@@ -69,7 +72,7 @@ async function resolveAssets(document) {
 }
 
 async function resolveActors(document, assets) {
-  if (!['0.2.0', '0.3.0', '0.4.0'].includes(document.specVersion)) return sortById(document.actors);
+  if (!['0.2.0', '0.3.0', '0.4.0', '0.5.0'].includes(document.specVersion)) return sortById(document.actors);
   const assetMap = new Map(assets.map(asset => [asset.id, asset]));
   const targetSockets = new Map((document.targets ?? []).map(target => [target.id, new Set(target.sockets.map(socket => socket.id))]));
   const actors = [];
@@ -130,7 +133,7 @@ async function resolveActors(document, assets) {
 }
 
 async function resolveGrasps(document, assets) {
-  if (document.specVersion !== '0.4.0') return [];
+  if (!['0.4.0', '0.5.0'].includes(document.specVersion)) return [];
   const assetMap = new Map(assets.map(asset => [asset.id, asset]));
   const grasps = [];
   for (const binding of sortById(document.grasps)) {
@@ -158,6 +161,59 @@ async function resolveGrasps(document, assets) {
     });
   }
   return grasps;
+}
+
+async function resolveTrajectories(document, assets) {
+  if (document.specVersion !== '0.5.0') return [];
+  const assetMap = new Map(assets.map(asset => [asset.id, asset]));
+  const trajectories = [];
+  for (const binding of sortById(document.trajectories)) {
+    const trajectoryPath = resolve(repositoryRoot, binding.trajectorySpecUri);
+    assertBelowRepository(trajectoryPath, `TrajectorySpec ${binding.id}`);
+    const bytes = await readFile(trajectoryPath).catch(() => { throw new Error(`TrajectorySpec ${binding.id} is missing: ${binding.trajectorySpecUri}`); });
+    const actualSha256 = sha256(bytes);
+    if (actualSha256 !== binding.trajectorySpecSha256) throw new Error(`TrajectorySpec ${binding.id} hash mismatch: expected ${binding.trajectorySpecSha256}, received ${actualSha256}`);
+    const trajectorySpec = JSON.parse(bytes.toString('utf8'));
+    const validation = validateTrajectorySpec(trajectorySpec);
+    if (!validation.valid) {
+      const details = validation.errors.map(error => `${error.code} ${error.path}: ${error.message}`).join('\n');
+      throw new Error(`TrajectorySpec ${binding.id} validation failed:\n${details}`);
+    }
+    if (trajectorySpec.id !== binding.id || trajectorySpec.targetObject !== binding.objectRef) throw new Error(`TrajectorySpec ${binding.id} identity or target does not match SceneSpec binding`);
+    const asset = assetMap.get(binding.assetRef);
+    if (!asset || asset.kind !== 'PROP') throw new Error(`TrajectorySpec ${binding.id} does not reference a verified PROP asset`);
+    if (trajectorySpec.frameStart !== document.shot.frameStart || trajectorySpec.frameEnd !== document.shot.frameEnd
+      || trajectorySpec.frameRate.numerator !== document.shot.frameRate.numerator || trajectorySpec.frameRate.denominator !== document.shot.frameRate.denominator) {
+      throw new Error(`TrajectorySpec ${binding.id} range or frame rate does not match the shot`);
+    }
+    const evaluationPath = resolve(repositoryRoot, trajectorySpec.source.evaluationUri);
+    assertBelowRepository(evaluationPath, `TrajectorySpec source ${binding.id}`);
+    const evaluationBytes = await readFile(evaluationPath).catch(() => { throw new Error(`TrajectorySpec source evaluation is missing: ${trajectorySpec.source.evaluationUri}`); });
+    const evaluationSha256 = sha256(evaluationBytes);
+    if (evaluationSha256 !== trajectorySpec.source.evaluationSha256) throw new Error(`TrajectorySpec ${binding.id} source evaluation hash mismatch: expected ${trajectorySpec.source.evaluationSha256}, received ${evaluationSha256}`);
+    const sourceEvaluation = JSON.parse(evaluationBytes.toString('utf8'));
+    if (sourceEvaluation.passed !== true || !Array.isArray(sourceEvaluation.trajectory) || sourceEvaluation.trajectory.length !== trajectorySpec.samples.length) {
+      throw new Error(`TrajectorySpec ${binding.id} source evaluation is not an individually passing solve with a complete trajectory`);
+    }
+    for (let index = 0; index < trajectorySpec.samples.length; index += 1) {
+      const sample = trajectorySpec.samples[index];
+      const source = sourceEvaluation.trajectory[index];
+      if (sample.frame !== source.frame
+        || canonicalJson(sample.locationM) !== canonicalJson(source.propCentreWorldM)
+        || canonicalJson(sample.rotationQuaternionWxyz) !== canonicalJson(source.propRotationQuaternion)) {
+        throw new Error(`TrajectorySpec ${binding.id} sample ${sample.frame} does not match the pinned source evaluation`);
+      }
+    }
+    trajectories.push({
+      ...binding,
+      trajectorySpecUri: repoRelative(trajectoryPath),
+      verifiedTrajectorySpecSha256: actualSha256,
+      trajectorySpecCanonicalSha256: sha256(canonicalJson(trajectorySpec)),
+      verifiedSourceEvaluationSha256: evaluationSha256,
+      trajectorySpec: canonicalize(trajectorySpec),
+    });
+  }
+  return trajectories;
 }
 
 async function verifyLocalSources(document) {
@@ -198,6 +254,7 @@ function normalizeDocument(document) {
   }));
   if (normalized.geometryEvaluations) normalized.geometryEvaluations = sortById(normalized.geometryEvaluations);
   if (normalized.grasps) normalized.grasps = sortById(normalized.grasps).map(grasp => ({ ...grasp, transportKeys: [...grasp.transportKeys].sort((left, right) => left.frame - right.frame) }));
+  if (normalized.trajectories) normalized.trajectories = sortById(normalized.trajectories);
   normalized.render.passes = [...normalized.render.passes].sort();
   normalized.security.allowedAssetRoots = [...normalized.security.allowedAssetRoots].sort();
   normalized.security.allowedOperations = [...normalized.security.allowedOperations].sort();
@@ -209,8 +266,9 @@ export async function compileBuildPlan(inputPath) {
   const absoluteInputPath = resolve(process.cwd(), inputPath);
   assertBelowRepository(absoluteInputPath, 'SceneSpec');
   const document = await readJson(absoluteInputPath);
-  const validator = document.specVersion === '0.4.0'
-    ? validateSceneSpecV04
+  const validator = document.specVersion === '0.5.0'
+    ? validateSceneSpecV05
+    : document.specVersion === '0.4.0' ? validateSceneSpecV04
     : document.specVersion === '0.3.0' ? validateSceneSpecV03
     : document.specVersion === '0.2.0' ? validateSceneSpecV02 : validateSceneSpec;
   const validation = validator(document);
@@ -237,6 +295,7 @@ export async function compileBuildPlan(inputPath) {
   const verifiedAssets = await resolveAssets(normalizedDocument);
   const verifiedActors = await resolveActors(normalizedDocument, verifiedAssets);
   const verifiedGrasps = await resolveGrasps(normalizedDocument, verifiedAssets);
+  const verifiedTrajectories = await resolveTrajectories(normalizedDocument, verifiedAssets);
   const verifiedSources = await verifyLocalSources(normalizedDocument);
   const authorizedOperations = requireOperations(normalizedDocument);
   const outputRoot = resolve(repositoryRoot, normalizedDocument.render.outputRoot);
@@ -261,6 +320,7 @@ export async function compileBuildPlan(inputPath) {
     ...(normalizedDocument.attachments ? { attachments: normalizedDocument.attachments } : {}),
     ...(normalizedDocument.geometryEvaluations ? { geometryEvaluations: normalizedDocument.geometryEvaluations } : {}),
     ...(normalizedDocument.grasps ? { grasps: verifiedGrasps } : {}),
+    ...(normalizedDocument.trajectories ? { trajectories: verifiedTrajectories } : {}),
     cameras: normalizedDocument.cameras,
     lights: normalizedDocument.lights,
     world: normalizedDocument.world,

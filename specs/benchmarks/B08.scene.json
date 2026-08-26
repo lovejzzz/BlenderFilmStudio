@@ -1,0 +1,224 @@
+{
+  "specVersion": "0.5.0",
+  "shot": {
+    "id": "SHOT_108",
+    "title": "B08 Immutable Compiled Trajectory",
+    "frameStart": 1,
+    "frameEnd": 132,
+    "frameRate": {
+      "numerator": 24,
+      "denominator": 1
+    },
+    "unitScaleMeters": 1,
+    "seed": 24082608,
+    "activeCamera": "CAM_B08"
+  },
+  "assets": [
+    {
+      "id": "PROP_B08",
+      "kind": "PROP",
+      "uri": "library/props/B08-prop.blend",
+      "version": "0.1.0",
+      "sha256": "4871051747ed03dcbe73829d010183cf1046b5ab7912d46ad05f2adb42d2e8e7",
+      "license": "PROJECT-OWNED",
+      "transform": {
+        "locationM": [
+          0,
+          0,
+          0
+        ],
+        "rotationEulerDeg": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "visible": true
+    }
+  ],
+  "actors": [],
+  "targets": [],
+  "attachments": [],
+  "geometryEvaluations": [],
+  "grasps": [],
+  "trajectories": [
+    {
+      "id": "TRAJECTORY_B07_CANONICAL",
+      "trajectorySpecUri": "specs/benchmarks/B07.trajectory.json",
+      "trajectorySpecSha256": "c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146",
+      "assetRef": "PROP_B08",
+      "objectRef": "B06_PROP",
+      "applicationMode": "BAKED_WORLD_TRANSFORM",
+      "disablePhysics": true
+    }
+  ],
+  "cameras": [
+    {
+      "id": "CAM_B08",
+      "lensMm": 50,
+      "sensorWidthMm": 36,
+      "apertureFStop": 8,
+      "focusDistanceM": 3,
+      "shutterAngleDeg": 180,
+      "transform": {
+        "locationM": [
+          1.8,
+          -4.5,
+          1.2
+        ],
+        "rotationEulerDeg": [
+          76,
+          0,
+          22
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "lights": [
+    {
+      "id": "KEY_B08",
+      "type": "AREA",
+      "colorLinear": [
+        1,
+        0.74,
+        0.55
+      ],
+      "energy": 700,
+      "sizeM": 1.1,
+      "transform": {
+        "locationM": [
+          1.2,
+          -1.5,
+          2
+        ],
+        "rotationEulerDeg": [
+          25,
+          0,
+          35
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "FILL_B08",
+      "type": "AREA",
+      "colorLinear": [
+        0.38,
+        0.58,
+        1
+      ],
+      "energy": 420,
+      "sizeM": 1.2,
+      "transform": {
+        "locationM": [
+          -1.2,
+          -1,
+          1
+        ],
+        "rotationEulerDeg": [
+          50,
+          0,
+          -55
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "world": {
+    "backgroundLinear": [
+      0.004,
+      0.008,
+      0.018
+    ],
+    "strength": 0.12
+  },
+  "events": [],
+  "render": {
+    "outputProfile": "BFS_RESEARCH_MASTER_0_1",
+    "previewEngine": "BLENDER_EEVEE",
+    "finalEngine": "CYCLES",
+    "resolution": {
+      "width": 3840,
+      "height": 2160,
+      "percentage": 100
+    },
+    "samplesPreview": 32,
+    "samplesFinal": 128,
+    "denoise": true,
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "pixelType": "HALF_16",
+    "compression": "ZIP_LOSSLESS",
+    "passes": [
+      "Combined",
+      "Alpha",
+      "Depth",
+      "Normal",
+      "Vector",
+      "Cryptomatte"
+    ],
+    "outputRoot": "renders/SHOT_108/"
+  },
+  "security": {
+    "networkAccess": false,
+    "arbitraryPython": false,
+    "allowedAssetRoots": [
+      "assets/",
+      "library/",
+      "motion/"
+    ],
+    "allowedOperations": [
+      "READ_MANIFEST",
+      "IMPORT_ASSET",
+      "CREATE_CAMERA",
+      "CREATE_LIGHT",
+      "CREATE_TRAJECTORY_REPLAY",
+      "SET_TRANSFORM",
+      "SET_RENDER",
+      "RENDER_PREVIEW",
+      "RENDER_FINAL"
+    ]
+  },
+  "provenance": {
+    "briefId": "BRIEF_B08_COMPILED_TRAJECTORY",
+    "createdBy": "BFS SceneSpec v0.5 compiler experiment",
+    "createdAtUtc": "2026-08-26T23:00:00Z",
+    "sources": [
+      {
+        "uri": "specs/benchmarks/B07.trajectory.json",
+        "role": "REFERENCE",
+        "license": "PROJECT-INTERNAL",
+        "sha256": "c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146"
+      },
+      {
+        "uri": "experiments/trajectory-v0-1/results.json",
+        "role": "REFERENCE",
+        "license": "PROJECT-INTERNAL",
+        "sha256": "6a57b0f7635f427371726bb8f73bc6d5bd448576ae2965429fcbb89e58bed039"
+      },
+      {
+        "uri": "experiments/trajectory-v0-2/asset-generation.json",
+        "role": "ASSET",
+        "license": "PROJECT-INTERNAL",
+        "sha256": "a4884c6deb77f74d2a9156509e7858ece9b1aba80061af5270f3dd4155b9bd3a"
+      }
+    ]
+  }
+}

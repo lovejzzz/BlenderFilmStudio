@@ -12,18 +12,64 @@ import json
 import math
 import sys
 import time
+from decimal import Decimal
 from pathlib import Path
 
 import bpy
 import PyOpenColorIO as ocio
 from bpy_extras import anim_utils
-from mathutils import Euler, Matrix, Vector
+from mathutils import Euler, Matrix, Quaternion, Vector
 
 
-SUPPORTED_COMPILER_VERSIONS = {"0.1.0", "0.2.0", "0.3.0", "0.4.0", "0.4.1"}
+SUPPORTED_COMPILER_VERSIONS = {"0.1.0", "0.2.0", "0.3.0", "0.4.0", "0.4.1", "0.5.0"}
+
+
+def javascript_number(value: float) -> str:
+    """Serialize a finite Python float with JSON.stringify number thresholds."""
+    if not math.isfinite(value):
+        raise ValueError("Canonical JSON cannot encode a non-finite number")
+    if value == 0:
+        return "0"
+    absolute = abs(value)
+    source = repr(value).lower()
+    if 1e-6 <= absolute < 1e21:
+        if "e" in source:
+            fixed = format(Decimal(source), "f")
+            return fixed.rstrip("0").rstrip(".") if "." in fixed else fixed
+        return source[:-2] if source.endswith(".0") else source
+    if "e" not in source:
+        source = format(value, ".15e")
+        mantissa, exponent = source.split("e")
+        mantissa = mantissa.rstrip("0").rstrip(".")
+    else:
+        mantissa, exponent = source.split("e")
+    exponent_value = int(exponent)
+    sign = "+" if exponent_value >= 0 else "-"
+    return f"{mantissa}e{sign}{abs(exponent_value)}"
+
+
+def javascript_canonical_json(value: object) -> str:
+    if value is None:
+        return "null"
+    if value is True:
+        return "true"
+    if value is False:
+        return "false"
+    if isinstance(value, str):
+        return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+    if isinstance(value, int):
+        return str(value)
+    if isinstance(value, float):
+        return javascript_number(value)
+    if isinstance(value, list):
+        return "[" + ",".join(javascript_canonical_json(item) for item in value) + "]"
+    if isinstance(value, dict):
+        return "{" + ",".join(f"{javascript_canonical_json(key)}:{javascript_canonical_json(value[key])}" for key in sorted(value)) + "}"
+    raise TypeError(f"Unsupported canonical JSON value: {type(value).__name__}")
 
 
 def canonical_json(value: object) -> str:
+    """Preserve the v0.1–v0.4 structural-hash representation."""
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
@@ -53,9 +99,9 @@ def resolve_below(root: Path, candidate: Path, label: str) -> Path:
 
 def load_verified_plan(plan_path: Path) -> dict:
     wrapper = json.loads(plan_path.read_text(encoding="utf-8"))
-    if wrapper.get("documentType") != "BFS_BUILD_PLAN" or wrapper.get("planVersion") not in {"0.1.0", "0.2.0", "0.3.0", "0.4.0", "0.4.1"}:
+    if wrapper.get("documentType") != "BFS_BUILD_PLAN" or wrapper.get("planVersion") not in SUPPORTED_COMPILER_VERSIONS:
         raise RuntimeError("Unsupported BuildPlan document or version")
-    actual_hash = sha256_bytes(canonical_json(wrapper["plan"]).encode("utf-8"))
+    actual_hash = sha256_bytes(javascript_canonical_json(wrapper["plan"]).encode("utf-8"))
     if actual_hash != wrapper.get("planHash"):
         raise RuntimeError(f"BuildPlan hash mismatch: expected {wrapper.get('planHash')}, received {actual_hash}")
     if tuple(bpy.app.version[:3]) != (5, 2, 0):
@@ -459,6 +505,62 @@ def create_grasps(
     return reports
 
 
+def create_trajectories(
+    scene: bpy.types.Scene,
+    trajectory_bindings: list[dict],
+    asset_collections: dict[str, bpy.types.Collection],
+) -> list[dict]:
+    reports = []
+    for binding in trajectory_bindings:
+        objects = {obj.name: obj for obj in asset_collections[binding["assetRef"]].all_objects}
+        target = objects.get(binding["objectRef"])
+        if target is None:
+            raise RuntimeError(f"Trajectory target object is missing: {binding['assetRef']}.{binding['objectRef']}")
+        if target.rigid_body is not None:
+            raise RuntimeError(f"Trajectory target has a pre-existing rigid body: {target.name}")
+        if len(target.constraints) > 0:
+            raise RuntimeError(f"Trajectory target has pre-existing constraints: {target.name}")
+        if target.animation_data is not None:
+            raise RuntimeError(f"Trajectory target has pre-existing animation or drivers: {target.name}")
+        spec = binding["trajectorySpec"]
+        if binding["applicationMode"] != "BAKED_WORLD_TRANSFORM" or binding["disablePhysics"] is not True or spec["space"] != "WORLD":
+            raise RuntimeError(f"Unsupported trajectory application mode: {binding['id']}")
+        target.rotation_mode = "QUATERNION"
+        target["bfs_trajectory_id"] = binding["id"]
+        target["bfs_trajectory_sha256"] = binding["verifiedTrajectorySpecSha256"]
+        target["bfs_source_evaluation_sha256"] = binding["verifiedSourceEvaluationSha256"]
+        target["bfs_selection_status"] = spec["selectionStatus"]
+        for sample in spec["samples"]:
+            scene.frame_set(sample["frame"])
+            rotation = Quaternion(sample["rotationQuaternionWxyz"])
+            rotation.normalize()
+            desired_world = Matrix.Translation(Vector(sample["locationM"])) @ rotation.to_matrix().to_4x4()
+            local = target.parent.matrix_world.inverted_safe() @ desired_world if target.parent else desired_world
+            location, local_rotation, local_scale = local.decompose()
+            if max(abs(value - 1.0) for value in local_scale) > 1e-6:
+                raise RuntimeError(f"Trajectory parent introduces scale at frame {sample['frame']}: {target.name}")
+            target.location = location
+            target.rotation_quaternion = local_rotation
+            target.scale = local_scale
+            target.keyframe_insert(data_path="location", frame=sample["frame"], group="BFS_TRAJECTORY_REPLAY")
+            target.keyframe_insert(data_path="rotation_quaternion", frame=sample["frame"], group="BFS_TRAJECTORY_REPLAY")
+        set_interpolation(target.animation_data, {sample["frame"]: "LINEAR" for sample in spec["samples"]})
+        reports.append({
+            "id": binding["id"],
+            "assetRef": binding["assetRef"],
+            "objectRef": binding["objectRef"],
+            "applicationMode": binding["applicationMode"],
+            "disablePhysics": binding["disablePhysics"],
+            "trajectorySpecSha256": binding["verifiedTrajectorySpecSha256"],
+            "sourceEvaluationSha256": binding["verifiedSourceEvaluationSha256"],
+            "selectionStatus": spec["selectionStatus"],
+            "samples": len(spec["samples"]),
+            "animation": animation_structure(target),
+        })
+    scene.frame_set(scene.frame_start)
+    return reports
+
+
 def create_camera(managed: bpy.types.Collection, camera_spec: dict) -> bpy.types.Object:
     camera = bpy.data.cameras.new(f"{camera_spec['id']}_DATA")
     camera.lens = camera_spec["lensMm"]
@@ -636,6 +738,7 @@ def build_structure(
     actor_reports: list[dict],
     attachment_reports: list[dict],
     grasp_reports: list[dict],
+    trajectory_reports: list[dict],
 ) -> dict:
     plan = wrapper["plan"]
     managed = bpy.data.collections["BFS_SHOT"]
@@ -692,7 +795,7 @@ def build_structure(
             "view": scene.view_settings.view_transform,
         },
     }
-    if wrapper["planVersion"] in {"0.2.0", "0.3.0", "0.4.0", "0.4.1"}:
+    if wrapper["planVersion"] in {"0.2.0", "0.3.0", "0.4.0", "0.4.1", "0.5.0"}:
         structure["targets"] = [
             {
                 "target": target_id,
@@ -706,11 +809,13 @@ def build_structure(
             for (target_id, socket_id), obj in sorted(target_objects.items())
         ]
         structure["actors"] = actor_reports
-    if wrapper["planVersion"] in {"0.3.0", "0.4.0", "0.4.1"}:
+    if wrapper["planVersion"] in {"0.3.0", "0.4.0", "0.4.1", "0.5.0"}:
         structure["attachments"] = attachment_reports
         structure["geometryEvaluations"] = wrapper["plan"].get("geometryEvaluations", [])
-    if wrapper["planVersion"] in {"0.4.0", "0.4.1"}:
+    if wrapper["planVersion"] in {"0.4.0", "0.4.1", "0.5.0"}:
         structure["grasps"] = grasp_reports
+    if wrapper["planVersion"] == "0.5.0":
+        structure["trajectories"] = trajectory_reports
     return structure
 
 
@@ -742,7 +847,7 @@ def main() -> None:
     asset_collections = {}
     asset_roots = {}
     for asset in plan["assets"]:
-        root_object, imported_collection = append_asset(repository_root, managed, asset, direct_import=wrapper["planVersion"] in {"0.3.0", "0.4.0", "0.4.1"})
+        root_object, imported_collection = append_asset(repository_root, managed, asset, direct_import=wrapper["planVersion"] in {"0.3.0", "0.4.0", "0.4.1", "0.5.0"})
         asset_roots[asset["id"]] = root_object
         asset_collections[asset["id"]] = imported_collection
 
@@ -765,9 +870,10 @@ def main() -> None:
     ]
     attachment_reports = create_attachments(scene, plan.get("attachments", []), plan["actors"], asset_roots, asset_collections)
     grasp_reports = create_grasps(scene, managed, plan.get("grasps", []), asset_roots, asset_collections)
+    trajectory_reports = create_trajectories(scene, plan.get("trajectories", []), asset_collections)
     warnings = configure_render(scene, plan["render"], plan["outputSpec"], next(camera for camera in plan["cameras"] if camera["id"] == plan["shot"]["activeCamera"]), artifact_root)
 
-    structure = build_structure(scene, wrapper, asset_collections, camera_objects, target_objects, actor_reports, attachment_reports, grasp_reports)
+    structure = build_structure(scene, wrapper, asset_collections, camera_objects, target_objects, actor_reports, attachment_reports, grasp_reports, trajectory_reports)
     structure_hash = sha256_bytes(canonical_json(structure).encode("utf-8"))
     blend_path = artifact_root / "scene.blend"
     save_result = bpy.ops.wm.save_as_mainfile(filepath=str(blend_path), check_existing=False, compress=True, relative_remap=True)

@@ -43,4 +43,4 @@ B07 demonstrates the engineering distinction exposed by B06:
 
 This does not make the source Bullet solve deterministic. It does not prove the chosen candidate is physically correct, visually acceptable, or approved by a human. The artifact intentionally carries `TECHNICAL_CANONICAL_CANDIDATE_NOT_HUMAN_APPROVED` so deterministic replay cannot launder an unapproved source into an approved result.
 
-Formal completion still requires immutable BuildPlan integration plus visual and authentic human approval of the source solve.
+The immutable BuildPlan integration was subsequently completed by B08 (`research/2026-08-26-b08-trajectory-compiler-result.md`). Formal B07 remains false only because visual and authentic human approval of the source solve is still pending.

@@ -1,0 +1,200 @@
+{
+  "documentType": "BFS_B08_TRAJECTORY_COMPILER_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T07:10:12.997Z",
+  "environment": {
+    "blender": "5.2.0 LTS",
+    "buildHash": "fbe6228777e7",
+    "platform": "darwin-arm64",
+    "node": "v26.5.0"
+  },
+  "buildPlan": {
+    "uri": "experiments/trajectory-v0-2/B08.build-plan.json",
+    "planHash": "7a4bccb640130db2dbf5c315907f81d5462605b6939b00a9df672c362d544dd9",
+    "deterministic": true,
+    "compilerVersion": "0.5.0"
+  },
+  "trajectory": {
+    "uri": "specs/benchmarks/B07.trajectory.json",
+    "sha256": "c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146",
+    "sourceEvaluationSha256": "90dee5925b528454e90b84d1bef66519224f9ab8e409cf814b3161c9d3dbe4bd",
+    "selectionStatus": "TECHNICAL_CANONICAL_CANDIDATE_NOT_HUMAN_APPROVED"
+  },
+  "cleanBuilds": {
+    "runs": [
+      {
+        "label": "positive-a",
+        "structureHash": "46898404f12905d9fb1c31b7a3694a41b1d951cb688a15654a4dae084fe3077d",
+        "blendSha256": "6eb32227c5c1aca7db81cc74a72a415110d4ee962dc080280041c1434e564b7d"
+      },
+      {
+        "label": "positive-b",
+        "structureHash": "46898404f12905d9fb1c31b7a3694a41b1d951cb688a15654a4dae084fe3077d",
+        "blendSha256": "8f24a91b66ee8b8aefa7e02e962e1be83b88e6d7513904505d455c9c4c87766c"
+      }
+    ],
+    "structureHashesEqual": true,
+    "blendSha256Equal": false,
+    "evaluationReportsEqual": true
+  },
+  "evaluation": {
+    "passed": true,
+    "measurements": {
+      "evaluatedFrames": 132,
+      "maximumPositionErrorM": 0,
+      "maximumRotationErrorDeg": 0
+    },
+    "checks": [
+      {
+        "id": "B08_C01_PLAN_PIN",
+        "observed": "7a4bccb640130db2dbf5c315907f81d5462605b6939b00a9df672c362d544dd9",
+        "pass": true,
+        "threshold": "7a4bccb640130db2dbf5c315907f81d5462605b6939b00a9df672c362d544dd9"
+      },
+      {
+        "id": "B08_C02_TRAJECTORY_PIN",
+        "observed": "c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146",
+        "pass": true,
+        "threshold": "c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146"
+      },
+      {
+        "id": "B08_C03_SOURCE_PIN",
+        "observed": "90dee5925b528454e90b84d1bef66519224f9ab8e409cf814b3161c9d3dbe4bd",
+        "pass": true,
+        "threshold": "90dee5925b528454e90b84d1bef66519224f9ab8e409cf814b3161c9d3dbe4bd"
+      },
+      {
+        "id": "B08_C04_POSITION_REPLAY",
+        "observed": 0,
+        "pass": true,
+        "threshold": 1e-7
+      },
+      {
+        "id": "B08_C05_ROTATION_REPLAY",
+        "observed": 0,
+        "pass": true,
+        "threshold": 0.00001
+      },
+      {
+        "id": "B08_C06_NO_RUNTIME_SHORTCUT",
+        "observed": {
+          "constraints": 0,
+          "drivers": 0,
+          "rigidBody": false
+        },
+        "pass": true,
+        "threshold": "no rigid body, constraints, or drivers"
+      },
+      {
+        "id": "B08_C07_AUTHORED_KEYS",
+        "observed": {
+          "curves": 7,
+          "interpolations": [
+            "LINEAR"
+          ],
+          "keyCounts": [
+            132,
+            132,
+            132,
+            132,
+            132,
+            132,
+            132
+          ],
+          "paths": [
+            "location",
+            "rotation_quaternion"
+          ]
+        },
+        "pass": true,
+        "threshold": "7 transform curves × 132 LINEAR keys"
+      },
+      {
+        "id": "B08_C08_STATUS_PRESERVED",
+        "observed": "TECHNICAL_CANONICAL_CANDIDATE_NOT_HUMAN_APPROVED",
+        "pass": true,
+        "threshold": "TECHNICAL_CANONICAL_CANDIDATE_NOT_HUMAN_APPROVED"
+      }
+    ]
+  },
+  "negativeTests": [
+    {
+      "id": "N01_TRAJECTORY_HASH",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "TrajectorySpec TRAJECTORY_B07_CANONICAL hash mismatch",
+      "observed": "TrajectorySpec TRAJECTORY_B07_CANONICAL hash mismatch: expected 0000000000000000000000000000000000000000000000000000000000000000, received c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146"
+    },
+    {
+      "id": "N02_SOURCE_HASH",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "source evaluation hash mismatch",
+      "observed": "TrajectorySpec TRAJECTORY_B07_CANONICAL source evaluation hash mismatch: expected 0000000000000000000000000000000000000000000000000000000000000000, received 90dee5925b528454e90b84d1bef66519224f9ab8e409cf814b3161c9d3dbe4bd"
+    },
+    {
+      "id": "N03_MISSING_AUTHORITY",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "does not authorize required operations: CREATE_TRAJECTORY_REPLAY",
+      "observed": "SceneSpec does not authorize required operations: CREATE_TRAJECTORY_REPLAY"
+    },
+    {
+      "id": "N04_TARGET_MISMATCH",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "identity or target does not match SceneSpec binding",
+      "observed": "TrajectorySpec TRAJECTORY_B07_CANONICAL identity or target does not match SceneSpec binding"
+    },
+    {
+      "id": "N05_MISSING_TARGET",
+      "layer": "BLENDER_COMPILE",
+      "rejected": true,
+      "expected": "Trajectory target object is missing",
+      "observed": "BFS_COMPILE_ERROR Trajectory target object is missing: PROP_B08.B06_PROP"
+    },
+    {
+      "id": "N06_MISSING_SAMPLE",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "TrajectorySpec TRAJECTORY_B07_CANONICAL validation failed",
+      "observed": "TrajectorySpec TRAJECTORY_B07_CANONICAL validation failed:"
+    },
+    {
+      "id": "N07_KEY_MUTATION",
+      "layer": "RUNTIME_EVALUATION",
+      "rejected": true,
+      "expected": "B08_C04_POSITION_REPLAY=false with non-zero exit",
+      "observed": {
+        "id": "B08_C04_POSITION_REPLAY",
+        "observed": 0.009999999874,
+        "pass": false,
+        "threshold": 1e-7
+      }
+    },
+    {
+      "id": "N08_RIGID_BODY",
+      "layer": "RUNTIME_EVALUATION",
+      "rejected": true,
+      "expected": "B08_C06_NO_RUNTIME_SHORTCUT=false with non-zero exit",
+      "observed": {
+        "id": "B08_C06_NO_RUNTIME_SHORTCUT",
+        "observed": {
+          "constraints": 0,
+          "drivers": 0,
+          "rigidBody": true
+        },
+        "pass": false,
+        "threshold": "no rigid body, constraints, or drivers"
+      }
+    }
+  ],
+  "allAutomatedChecksPassed": true,
+  "formalB08Complete": true,
+  "sourceSolveHumanApproved": false,
+  "remainingDependency": "source-solve visual and authentic human approval",
+  "explicitNonClaims": [
+    "Compiled replay does not validate or make deterministic the source Bullet solve.",
+    "The source trajectory remains a technical candidate without human approval."
+  ]
+}
