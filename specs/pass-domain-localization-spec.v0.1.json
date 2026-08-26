@@ -1,0 +1,175 @@
+{
+  "documentType": "BFS_PASS_DOMAIN_LOCALIZATION_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "Across fresh Blender processes with repeated frame-38 renders, does every recurrence of the frozen ALTERNATE PNG mode couple to the pilot-derived Combined-float and BACK_WALL/FLOOR CryptoObject00 coverage modes while closest-sample Depth, Normal and Position remain exact?",
+  "evidenceBasis": {
+    "b28ResultsSha256": "72445273fd15dbd6f091aa6830da682b9bee4f12abd30140e46c634c7a1d4e09",
+    "b28Decision": "WITHIN_PID_MODE_SWITCH_SUPPORT",
+    "pilotReportSha256": "959bde374db3af7276f4db75d73d78717d1a35505213571dcb458ab056359794",
+    "pilotAnalysisSha256": "17a3ecb6b826480533f93d1446e399fc0cd1dbd8244aba0a9a46e5517e20bbc2",
+    "pilotRendererSha256": "db9674f971e064d1905beff1dd8a2cb8efcd26237da3a30e767659509e390941",
+    "pilotAnalyzerSha256": "28d2a098ad386e5de0d521a11e2ff042f615de3104dbac796dd628b350c541ae",
+    "pilotStatus": "EXPLORATORY_DERIVATION_ONLY_NOT_CONFIRMATION",
+    "pilotObservation": "One PID produced eleven REFERENCE and one ALTERNATE PNG. The ALTERNATE call coupled to a second Combined-float hash and a second CryptoObject00 hash localized to seven BACK_WALL/FLOOR coverage pixels; Depth, Normal and Position stayed exact. A separate call-1 Vector transient did not couple to Combined."
+  },
+  "sourceCodeEvidence": [
+    {
+      "uri": "https://github.com/blender/blender/blob/blender-v5.2-release/source/blender/draw/engines/eevee/eevee_engine.cc",
+      "sha256": "01e7991923d2c3def6f4d1d96ad0c90bbb4c820182cccfb3be81964469143bb4",
+      "observation": "Each image render creates and later deletes a new Eevee Instance."
+    },
+    {
+      "uri": "https://github.com/blender/blender/blob/blender-v5.2-release/source/blender/draw/engines/eevee/eevee_sampling.cc",
+      "sha256": "014f3b2f6aa3c2b49e7b98d604aba9e8f518cd3a51acfaef6d18efc3a156d403",
+      "observation": "Image-render sample dimensions are generated from sample-index Halton sequences."
+    },
+    {
+      "uri": "https://github.com/blender/blender/blob/blender-v5.2-release/source/blender/draw/engines/eevee/eevee_instance.cc",
+      "sha256": "efd65d80f96a325ad2fa2b8a08cdb5fc99ea70d8d7ec76313e162a84215513a8",
+      "observation": "Metal and Vulkan execute GPU_flush and GPU_render_step between render samples."
+    }
+  ],
+  "design": {
+    "type": "twelve fresh persistent processes with twelve repeated same-frame renders and two saves per Render Result",
+    "processOrder": ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09", "P10", "P11", "P12"],
+    "processes": 12,
+    "targetFrame": 38,
+    "renderCallsPerProcess": 12,
+    "renderCalls": 144,
+    "savesPerRender": 2,
+    "saves": 288,
+    "pngFiles": 144,
+    "multilayerExrFiles": 144,
+    "selectedBeforeAnyFormalB29Render": true,
+    "frameSetRule": "Set frame 38 once before the first render and do not change it between calls.",
+    "renderRule": "Render once with write_still false, then save PNG8 and EXR32 multilayer from the same Render Result without re-rendering."
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "motionBlur": false,
+    "pngFormat": "PNG8_RGBA_ACES2_SDR",
+    "exrFormat": "OPEN_EXR_MULTILAYER_RGBA32_ZIP",
+    "passes": ["Combined", "Depth", "Normal", "Position", "Vector", "CryptoObject00", "CryptoObject01", "CryptoObject02"],
+    "cryptomatteDepth": 6
+  },
+  "knownHashes": {
+    "pngDecodedRgb": {
+      "REFERENCE": "c13638222371dcf3acf00354097e5955f48d630115f23ebe9e32147dae8bf308",
+      "ALTERNATE": "6e9685c17234e93a75e8735166dc1c314ffaaff339bd3613088a44ae1db0feaf"
+    },
+    "BFS_MASTER.Combined": {
+      "REFERENCE": "a6e84cdfbf3e84c45f9e333f075c503179fccb5279dd14263bcfc3ea2d4bc79b",
+      "ALTERNATE": "622a892c473308a8dc010d3f6b0487133754cfecab4fa3372000d22c1d8cbb20"
+    },
+    "BFS_MASTER.CryptoObject00": {
+      "REFERENCE": "0bba9e9c7be2e1a56a2874c197fdeddbbb4397e950624f266740b13af9312d44",
+      "ALTERNATE": "e0998fe2d4beb9a7deeeb0e185e982200dd40a94cd1dd6af2256e5464f3f78cc"
+    },
+    "stableClosestSamplePasses": {
+      "BFS_MASTER.Depth": "a12c78d77c5e6896c2410804d94bc02afbb52a7f01b4c684ddba60a0ea3be5e5",
+      "BFS_MASTER.Normal": "3256f66f6b763a7c8ce2a830817f8e2c65463f6ce130d26cc2cc656a0ffcbe2c",
+      "BFS_MASTER.Position": "8f9afe070b85bb3f481c8c5ddacb570f221bad6d92899567008edb9056252e3d"
+    },
+    "secondaryPasses": {
+      "BFS_MASTER.CryptoObject01": "39ff3ea042bb0dd2e5268d03630304023148e9d8d2e48e513e95c3b0e972d55e",
+      "BFS_MASTER.CryptoObject02": "788ae0147bdf979a6575938ca2d7d4403788588f7be2010f03776c968fd1ab49",
+      "BFS_MASTER.Vector_CALL_1": "fd4c8783c06590757a59b15b56e6bea895da4efcd7c8a2a96e74175dac54e1a3",
+      "BFS_MASTER.Vector_CALL_2_TO_12": "852c46408072d478773ba017715da2c14c416420e8ee3f46e6a3864f1ccfc78a"
+    }
+  },
+  "primaryEndpoint": {
+    "name": "coverageCoupledPassLocalization",
+    "unit": "one independent Blender PID",
+    "coupledReferenceDefinition": "A render is COUPLED_REFERENCE when PNG decoded RGB, Combined float and CryptoObject00 float all match their frozen REFERENCE hashes and Depth/Normal/Position match their stable hashes.",
+    "coupledAlternateDefinition": "A render is COUPLED_ALTERNATE when PNG decoded RGB, Combined float and CryptoObject00 float all match their frozen ALTERNATE hashes and Depth/Normal/Position match their stable hashes.",
+    "supportingProcessDefinition": "A PID supports localization when it contains at least one COUPLED_REFERENCE and at least one COUPLED_ALTERNATE render.",
+    "supportThresholdProcesses": 2,
+    "novelHashRule": "Any primary-domain hash outside the frozen sets is retained and takes PASS_SPACE_EXPANDED; it is never coerced.",
+    "decouplingRule": "Any known primary hashes forming a tuple other than the two frozen coupled tuples takes DECOUPLED_PASS_PATTERN.",
+    "dataPassRule": "Any Depth, Normal or Position hash outside its frozen stable hash takes CLOSEST_SAMPLE_PASS_VARIATION.",
+    "noOptionalStopping": true
+  },
+  "secondaryEndpoints": [
+    "frequency of COUPLED_REFERENCE and COUPLED_ALTERNATE by PID and call ordinal",
+    "whether Vector call 1 matches the frozen first-call hash and calls 2-12 match the frozen steady hash",
+    "whether CryptoObject01 and CryptoObject02 remain at their frozen stable hashes",
+    "Combined and CryptoObject00 numeric difference pixels, bounding boxes and maximum absolute error",
+    "BACK_WALL and FLOOR cryptomatte IDs and coverage weights at changed pixels",
+    "PNG and EXR container hashes and render/save times for every call"
+  ],
+  "decisionRule": {
+    "PASS_SPACE_EXPANDED": "The valid experiment observes a primary-domain decoded hash outside the frozen hash sets.",
+    "CLOSEST_SAMPLE_PASS_VARIATION": "No novel primary hash occurs, but Depth, Normal or Position departs from its frozen stable hash.",
+    "DECOUPLED_PASS_PATTERN": "No novel or closest-sample variant occurs, but known PNG, Combined and CryptoObject00 hashes form a tuple outside COUPLED_REFERENCE and COUPLED_ALTERNATE.",
+    "COVERAGE_COUPLED_LOCALIZATION_SUPPORT": "No prior failure occurs and at least two independent PIDs contain both coupled modes.",
+    "SINGLE_PID_COUPLING_INCONCLUSIVE": "No prior failure occurs and exactly one PID contains both coupled modes.",
+    "ALTERNATE_NOT_REPRODUCED": "No prior failure occurs and no PID contains a COUPLED_ALTERNATE render.",
+    "INVALID_EXPERIMENT": "Any identity, source, control, pass, process, call, save, output, layout, binding, contract, attack or human-status gate fails."
+  },
+  "executionContract": {
+    "formalRendererClassifierAndRunnerMustNotExistAtFreeze": true,
+    "exploratoryPilotMustRemainLabeledDerivationOnly": true,
+    "eachReplicateMustUseOneUniqueFreshProcess": true,
+    "eachProcessMustSetFrame38OnceAndRenderExactlyTwelveTimes": true,
+    "eachRenderMustProducePngAndMultilayerExrFromTheSameRenderResult": true,
+    "mustNotSaveSourceBlend": true,
+    "allIdentitiesPassSettingsHashesAndBindingsMustBeExact": true,
+    "sampleSizeHashSetsThresholdAndDecisionRulesMustNotChangeAfterExecution": true,
+    "workOutputsRemainLocalButEvidenceAndResultsAreCommitted": true,
+    "humanReviewMustRemainPending": true
+  },
+  "requiredNegativeCases": [
+    "B29 spec identity mismatch",
+    "B28 result identity mismatch",
+    "pilot report identity mismatch",
+    "pilot analysis identity mismatch",
+    "pilot tool identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "plan or structure identity mismatch",
+    "configurator identity mismatch",
+    "formal renderer identity mismatch",
+    "formal classifier identity mismatch",
+    "formal runner identity mismatch",
+    "source state or fixed control mismatch",
+    "enabled pass or cryptomatte setting mismatch",
+    "process order mismatch",
+    "PID uniqueness or binding mismatch",
+    "frame-set, render-call or call-order mismatch",
+    "one-render-two-save binding mismatch",
+    "PNG or EXR layout mismatch",
+    "missing or mutated output",
+    "classification, manifest or file-hash binding mismatch",
+    "hash-set, sample-size, threshold or decision-rule mutation",
+    "human-review status is not pending"
+  ],
+  "explicitNonClaims": [
+    "Coupled localization would not prove that film resampling, rasterization, Metal, TAA or GPU scheduling is the causal mechanism.",
+    "Stable closest-sample passes would not prove geometry processing is globally deterministic; they test only these outputs at this frame and profile.",
+    "Enabling diagnostic passes may affect execution or mode frequency, so B29 tests the frozen pass-enabled profile rather than silently generalizing B28 rates.",
+    "Cryptomatte coverage weights are diagnostic data, not calibrated perceptual visibility or cinematic-quality scores.",
+    "The Vector first-call transient is a separate secondary pattern and does not establish the primary Combined/Crypto mechanism.",
+    "Twelve processes by twelve calls is a fixed mechanistic probe, not an equivalence study or universal Blender probability estimate.",
+    "Human review remains PENDING and cannot be replaced by machine pass identity."
+  ]
+}
