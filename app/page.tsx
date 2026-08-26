@@ -230,6 +230,7 @@ export default function Home() {
           <Link className="route-tab" href="/repeated-frame-mode-switch-v0-1">同 PID 模式</Link>
           <Link className="route-tab" href="/pass-domain-localization-v0-1">Pass 域定位</Link>
           <Link className="route-tab" href="/fixed-jitter-intervention-v0-1">固定抖动干预</Link>
+          <Link className="route-tab" href="/sampling-quality-holdout-v0-1">采样质量代价</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>
