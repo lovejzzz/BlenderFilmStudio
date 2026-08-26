@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "bfs.linuxWorkerArchitecturePreflight.v0.1",
+  "experimentId": "B39",
+  "status": "PREREGISTERED_BEFORE_TOOLING_OR_OUTPUT",
+  "question": "On this Apple-Silicon host, is there a native official Blender 5.2 Linux worker route, and if not, is an x64-emulated disposable worker sufficiently identified to deserve a later runtime canary without being mislabeled as production containment?",
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+    "osProduct": "macOS",
+    "osVersion": "26.5.1",
+    "osBuild": "25F80",
+    "hostArchitecture": "arm64"
+  },
+  "officialArtifactSource": {
+    "release": "5.2.0 LTS",
+    "releaseDate": "2026-07-14",
+    "releaseIndexUrl": "https://download.blender.org/release/Blender5.2/",
+    "checksumUrl": "https://download.blender.org/release/Blender5.2/blender-5.2.0.sha256",
+    "linuxX64": {
+      "filename": "blender-5.2.0-linux-x64.tar.xz",
+      "bytes": 384441228,
+      "sha256": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48",
+      "platform": "linux/amd64"
+    },
+    "linuxArm64ExpectedFilename": "blender-5.2.0-linux-arm64.tar.xz",
+    "linuxArm64ExpectedPlatform": "linux/arm64",
+    "frozenObservation": "NO_OFFICIAL_LINUX_ARM64_ARTIFACT_LISTED"
+  },
+  "candidateHost": {
+    "colimaDriver": "macOS Virtualization.Framework",
+    "colimaArchitecture": "aarch64",
+    "colimaRuntime": "docker",
+    "colimaMountType": "virtiofs",
+    "colimaCpu": 4,
+    "colimaMemoryBytes": 6442450944,
+    "dockerServerVersion": "29.5.2",
+    "dockerArchitecture": "aarch64",
+    "requiredSecurityOptions": [
+      "name=apparmor",
+      "name=seccomp,profile=builtin",
+      "name=cgroupns"
+    ]
+  },
+  "allowedProbeOperationsExact": [
+    "uname -m",
+    "colima status --json",
+    "docker version --format SERVER_VERSION",
+    "docker info --format ARCHITECTURE_AND_SECURITY_OPTIONS",
+    "docker image inspect EXISTING_BASE_IMAGES_ONLY",
+    "HTTPS_GET_OFFICIAL_RELEASE_INDEX",
+    "HTTPS_GET_OFFICIAL_SHA256_MANIFEST",
+    "statfs REPOSITORY_ROOT"
+  ],
+  "forbiddenRuntimeOperations": [
+    "docker run",
+    "docker create",
+    "docker build",
+    "docker pull",
+    "docker exec",
+    "docker compose",
+    "containerd run",
+    "nerdctl run",
+    "Blender launch",
+    "artifact download",
+    "disk reserve override",
+    "automatic cleanup"
+  ],
+  "routes": {
+    "officialNativeArm64": {
+      "platform": "linux/arm64",
+      "requiresOfficialArtifact": true,
+      "acceptWhen": "official release index lists the exact frozen Linux arm64 filename and checksum manifest binds it to a SHA-256",
+      "expectedDecision": "REJECTED_NO_OFFICIAL_ARTIFACT"
+    },
+    "officialX64Emulated": {
+      "platform": "linux/amd64",
+      "requiresOfficialArtifact": true,
+      "requiresExactSha256": true,
+      "executionClass": "EXPERIMENT_ONLY_BEST_EFFORT_EMULATION",
+      "acceptForLaterCanaryWhen": "official x64 filename, byte count and SHA-256 match; host and Docker architectures match the frozen ARM64 identity; disk admission is ACCEPTED; a separately built worker image is digest pinned",
+      "expectedDecisionBeforeRuntime": "IDENTIFIED_BUT_RUNTIME_BLOCKED"
+    }
+  },
+  "futureRuntimeCanary": {
+    "experimentId": "B40",
+    "mustBeSeparatelyPreregistered": true,
+    "platform": "linux/amd64",
+    "workerImageDigest": "PENDING_BUILD_AND_HASH_AFTER_DISK_ADMISSION",
+    "minimumChecks": [
+      "Blender reports exactly 5.2.0",
+      "Blender executable bytes match the official x64 artifact provenance chain",
+      "factory startup, disable-autoexec and offline-mode remain active",
+      "read-only input write canary fails",
+      "only the output mount accepts writes",
+      "network canary fails",
+      "parent environment canary is absent",
+      "effective UID and GID are non-root",
+      "capability set is empty",
+      "PID, memory, CPU and wall-time breach receipts are captured",
+      "timeout reaches SIGKILL after the frozen grace period when SIGTERM is ignored",
+      "failed, timed-out or cancelled outputs are never promotable",
+      "a real minimal Blender compile or render receipt is produced"
+    ]
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": 107374182400,
+    "projectedRuntimeWriteBytes": 21474836480,
+    "acceptWhen": "availableBytes - projectedRuntimeWriteBytes >= minimumReserveBytes",
+    "expectedCurrentStatus": "BLOCKED"
+  },
+  "frozenPositiveGates": {
+    "officialIndexFetched": true,
+    "officialChecksumManifestFetched": true,
+    "x64FilenameListedExactlyOnce": true,
+    "x64ByteCountMatches": true,
+    "x64Sha256Matches": true,
+    "arm64FilenameListed": false,
+    "hostArchitectureMatches": true,
+    "colimaArchitectureMatches": true,
+    "dockerArchitectureMatches": true,
+    "requiredSecurityOptionsPresent": true,
+    "nativeRouteDecision": "REJECTED_NO_OFFICIAL_ARTIFACT",
+    "emulatedRouteDecision": "IDENTIFIED_BUT_RUNTIME_BLOCKED",
+    "hostRuntimeAdmission": "BLOCKED",
+    "runtimeOperationsExecuted": 0
+  },
+  "frozenAnalyzerAttacks": [
+    "fabricate an official Linux arm64 artifact",
+    "change the official x64 filename",
+    "change the official x64 byte count",
+    "change the official x64 SHA-256",
+    "label linux/amd64 as native arm64",
+    "promote best-effort emulation to production",
+    "change the observed host architecture",
+    "change the observed Colima architecture",
+    "change the observed Docker architecture",
+    "remove a required Docker security option",
+    "mark below-reserve disk admission accepted",
+    "claim that a container or Blender process executed",
+    "insert a forbidden runtime operation",
+    "materialize an unpinned worker image",
+    "mark B40 complete before a separate preregistration"
+  ],
+  "failurePrecedence": [
+    "SOURCE_OR_RUNTIME_IDENTITY_INVALID",
+    "OFFICIAL_ARTIFACT_EVIDENCE_INVALID",
+    "HOST_ARCHITECTURE_EVIDENCE_INVALID",
+    "PROBE_BOUNDARY_VIOLATED",
+    "DISK_ADMISSION_INVALID",
+    "ROUTE_DECISION_INVALID"
+  ],
+  "decisionRules": {
+    "architecturePreflightSupportRuntimeBlocked": "all frozen gates and all 15 attacks pass; native route is rejected; emulated route is identified but the real host remains below disk reserve; runtime operations executed equals zero",
+    "nativeOfficialRouteAvailable": "the exact frozen official Linux arm64 filename is present and bound by the official checksum manifest; this outcome contradicts the preregistered current observation and requires a new protocol",
+    "runInvalid": "runtime, spec, preregistration ancestry, source identity, probe allowlist, attack count or evidence self-hash differs"
+  },
+  "nonClaims": [
+    "B39 does not launch Blender, create or run a container, build or pull an image, or download the Blender archive",
+    "Absence from the official 5.2.0 release index is not a claim that Blender cannot be compiled from source for Linux arm64",
+    "The x64 artifact being identifiable does not prove it runs correctly under Colima emulation",
+    "Docker security options being present does not prove containment against kernel, daemon, parser, GPU or denial-of-service vulnerabilities",
+    "No Eevee, EGL, software rasterizer, Cycles, performance, determinism or output-equivalence claim",
+    "No production backend selection or promotion claim",
+    "No disk-reserve override and no automatic cleanup"
+  ]
+}
