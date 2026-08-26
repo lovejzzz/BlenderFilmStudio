@@ -1,0 +1,451 @@
+{
+  "documentType": "BFS_B12_RESOURCE_BUDGET_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T09:15:41.290Z",
+  "environment": {
+    "platform": "darwin-arm64",
+    "node": "v26.5.0"
+  },
+  "profile": {
+    "uri": "specs/restricted-compile-budget.v0.1.json",
+    "sha256": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe",
+    "value": {
+      "documentType": "BFS_RESTRICTED_COMPILE_BUDGET",
+      "version": "0.1.0",
+      "scope": "BLENDER_SCENE_COMPILE_ONLY",
+      "wallTimeMs": 30000,
+      "maxRssBytes": 2147483648,
+      "maxLogBytes": 2097152,
+      "maxOutputFiles": 32,
+      "maxOutputBytes": 134217728,
+      "sampleIntervalMs": 100,
+      "nonClaims": [
+        "kernel hard memory limit",
+        "descendant process RSS accounting",
+        "GPU VRAM containment",
+        "network isolation",
+        "final frame render budget"
+      ]
+    }
+  },
+  "negativeTests": [
+    {
+      "id": "N_TIMEOUT",
+      "expectedReason": "WALL_TIME",
+      "pass": true,
+      "result": {
+        "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+        "version": "0.1.0",
+        "outcome": "BUDGET_EXCEEDED",
+        "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+        "args": [
+          "--background",
+          "--factory-startup",
+          "--disable-autoexec",
+          "--python-expr",
+          "import time; time.sleep(2)"
+        ],
+        "budgets": {
+          "wallTimeMs": 250,
+          "maxRssBytes": 2147483648,
+          "maxLogBytes": 2097152,
+          "maxOutputFiles": 64,
+          "maxOutputBytes": 134217728,
+          "sampleIntervalMs": 50
+        },
+        "metrics": {
+          "elapsedMs": 262,
+          "peakSampledRssBytes": 146735104,
+          "logBytes": 0,
+          "output": {
+            "fileCount": 0,
+            "bytes": 0,
+            "symlinkCount": 0
+          }
+        },
+        "breach": {
+          "reason": "WALL_TIME",
+          "observed": 259,
+          "limit": 250
+        },
+        "child": {
+          "exitCode": null,
+          "signal": "SIGTERM",
+          "spawnError": null
+        },
+        "termination": {
+          "requested": true,
+          "awaited": true
+        },
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "outputPreview": "",
+        "outputPreviewTruncated": false
+      }
+    },
+    {
+      "id": "N_LOG_BYTES",
+      "expectedReason": "LOG_BYTES",
+      "pass": true,
+      "result": {
+        "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+        "version": "0.1.0",
+        "outcome": "BUDGET_EXCEEDED",
+        "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+        "args": [
+          "--background",
+          "--factory-startup",
+          "--disable-autoexec",
+          "--python-expr",
+          "import time; print('X' * 262144); time.sleep(2)"
+        ],
+        "budgets": {
+          "wallTimeMs": 5000,
+          "maxRssBytes": 2147483648,
+          "maxLogBytes": 8192,
+          "maxOutputFiles": 64,
+          "maxOutputBytes": 134217728,
+          "sampleIntervalMs": 50
+        },
+        "metrics": {
+          "elapsedMs": 503,
+          "peakSampledRssBytes": 227459072,
+          "logBytes": 131072,
+          "output": {
+            "fileCount": 0,
+            "bytes": 0,
+            "symlinkCount": 0
+          }
+        },
+        "breach": {
+          "reason": "LOG_BYTES",
+          "observed": 65536,
+          "limit": 8192
+        },
+        "child": {
+          "exitCode": null,
+          "signal": "SIGTERM",
+          "spawnError": null
+        },
+        "termination": {
+          "requested": true,
+          "awaited": true
+        },
+        "logSha256": "aaf05d2d304ac814a30bda351adb768a0c46e1a1f2edf734eb34d73230d381e9",
+        "outputPreview": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "outputPreviewTruncated": true
+      }
+    },
+    {
+      "id": "N_OUTPUT_FILES",
+      "expectedReason": "OUTPUT_FILES",
+      "pass": true,
+      "result": {
+        "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+        "version": "0.1.0",
+        "outcome": "BUDGET_EXCEEDED",
+        "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "args": [
+          "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/fixtures/b12-resource-worker.mjs",
+          "--",
+          "--mode",
+          "OUTPUT_FILES",
+          "--output",
+          "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/resource-budget-v0-1/work/N_OUTPUT_FILES"
+        ],
+        "budgets": {
+          "wallTimeMs": 5000,
+          "maxRssBytes": 2147483648,
+          "maxLogBytes": 2097152,
+          "maxOutputFiles": 4,
+          "maxOutputBytes": 134217728,
+          "sampleIntervalMs": 50
+        },
+        "metrics": {
+          "elapsedMs": 58,
+          "peakSampledRssBytes": 47120384,
+          "logBytes": 0,
+          "output": {
+            "fileCount": 12,
+            "bytes": 12,
+            "symlinkCount": 0
+          }
+        },
+        "breach": {
+          "reason": "OUTPUT_FILES",
+          "observed": 12,
+          "limit": 4
+        },
+        "child": {
+          "exitCode": null,
+          "signal": "SIGTERM",
+          "spawnError": null
+        },
+        "termination": {
+          "requested": true,
+          "awaited": true
+        },
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "outputPreview": "",
+        "outputPreviewTruncated": false
+      }
+    },
+    {
+      "id": "N_OUTPUT_BYTES",
+      "expectedReason": "OUTPUT_BYTES",
+      "pass": true,
+      "result": {
+        "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+        "version": "0.1.0",
+        "outcome": "BUDGET_EXCEEDED",
+        "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "args": [
+          "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/fixtures/b12-resource-worker.mjs",
+          "--",
+          "--mode",
+          "OUTPUT_BYTES",
+          "--output",
+          "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/resource-budget-v0-1/work/N_OUTPUT_BYTES"
+        ],
+        "budgets": {
+          "wallTimeMs": 5000,
+          "maxRssBytes": 2147483648,
+          "maxLogBytes": 2097152,
+          "maxOutputFiles": 64,
+          "maxOutputBytes": 65536,
+          "sampleIntervalMs": 50
+        },
+        "metrics": {
+          "elapsedMs": 58,
+          "peakSampledRssBytes": 47054848,
+          "logBytes": 0,
+          "output": {
+            "fileCount": 1,
+            "bytes": 262144,
+            "symlinkCount": 0
+          }
+        },
+        "breach": {
+          "reason": "OUTPUT_BYTES",
+          "observed": 262144,
+          "limit": 65536
+        },
+        "child": {
+          "exitCode": null,
+          "signal": "SIGTERM",
+          "spawnError": null
+        },
+        "termination": {
+          "requested": true,
+          "awaited": true
+        },
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "outputPreview": "",
+        "outputPreviewTruncated": false
+      }
+    },
+    {
+      "id": "N_RSS",
+      "expectedReason": "RSS_BYTES",
+      "pass": true,
+      "result": {
+        "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+        "version": "0.1.0",
+        "outcome": "BUDGET_EXCEEDED",
+        "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "args": [
+          "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/fixtures/b12-resource-worker.mjs",
+          "--",
+          "--mode",
+          "RSS",
+          "--output",
+          "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/resource-budget-v0-1/work/N_RSS"
+        ],
+        "budgets": {
+          "wallTimeMs": 5000,
+          "maxRssBytes": 50331648,
+          "maxLogBytes": 2097152,
+          "maxOutputFiles": 64,
+          "maxOutputBytes": 134217728,
+          "sampleIntervalMs": 50
+        },
+        "metrics": {
+          "elapsedMs": 59,
+          "peakSampledRssBytes": 183369728,
+          "logBytes": 20,
+          "output": {
+            "fileCount": 0,
+            "bytes": 0,
+            "symlinkCount": 0
+          }
+        },
+        "breach": {
+          "reason": "RSS_BYTES",
+          "observed": 183369728,
+          "limit": 50331648
+        },
+        "child": {
+          "exitCode": null,
+          "signal": "SIGTERM",
+          "spawnError": null
+        },
+        "termination": {
+          "requested": true,
+          "awaited": true
+        },
+        "logSha256": "95e89ec276c3d5e0cc7f9c1184b6f40fb836d243dba41e901e782e1dad4fe48d",
+        "outputPreview": "allocated 134217728\n",
+        "outputPreviewTruncated": false
+      }
+    },
+    {
+      "id": "N_NONZERO_EXIT",
+      "expectedReason": "CHILD_FAILED",
+      "pass": true,
+      "result": {
+        "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+        "version": "0.1.0",
+        "outcome": "CHILD_FAILED",
+        "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "args": [
+          "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/fixtures/b12-resource-worker.mjs",
+          "--",
+          "--mode",
+          "NONZERO_EXIT",
+          "--output",
+          "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/resource-budget-v0-1/work/N_NONZERO_EXIT"
+        ],
+        "budgets": {
+          "wallTimeMs": 5000,
+          "maxRssBytes": 2147483648,
+          "maxLogBytes": 2097152,
+          "maxOutputFiles": 64,
+          "maxOutputBytes": 134217728,
+          "sampleIntervalMs": 50
+        },
+        "metrics": {
+          "elapsedMs": 40,
+          "peakSampledRssBytes": 442368,
+          "logBytes": 28,
+          "output": {
+            "fileCount": 0,
+            "bytes": 0,
+            "symlinkCount": 0
+          }
+        },
+        "breach": null,
+        "child": {
+          "exitCode": 7,
+          "signal": null,
+          "spawnError": null
+        },
+        "termination": {
+          "requested": false,
+          "awaited": true
+        },
+        "logSha256": "1f07919df11ed41509da61b88755b5e2ba6a66b92215692e3b417c7d1f8152c3",
+        "outputPreview": "intentional fixture failure\n",
+        "outputPreviewTruncated": false
+      }
+    }
+  ],
+  "positiveControl": {
+    "pass": true,
+    "cliExitCode": 0,
+    "cliOutput": "BFS_RESTRICTED_COMPILE PASS WITHIN_BUDGET\n",
+    "expectedStructureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+    "observedStructureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+    "result": {
+      "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+      "version": "0.1.0",
+      "outcome": "PASS",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "args": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_scene.py",
+        "--",
+        "--plan",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/compiler-v0-1/plans/B01.build-plan.json",
+        "--repository-root",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/resource-budget-v0-1/work/B01-positive"
+      ],
+      "budgets": {
+        "documentType": "BFS_RESTRICTED_COMPILE_BUDGET",
+        "version": "0.1.0",
+        "scope": "BLENDER_SCENE_COMPILE_ONLY",
+        "wallTimeMs": 30000,
+        "maxRssBytes": 2147483648,
+        "maxLogBytes": 2097152,
+        "maxOutputFiles": 32,
+        "maxOutputBytes": 134217728,
+        "sampleIntervalMs": 100,
+        "nonClaims": [
+          "kernel hard memory limit",
+          "descendant process RSS accounting",
+          "GPU VRAM containment",
+          "network isolation",
+          "final frame render budget"
+        ]
+      },
+      "metrics": {
+        "elapsedMs": 555,
+        "peakSampledRssBytes": 253476864,
+        "logBytes": 1109,
+        "output": {
+          "fileCount": 2,
+          "bytes": 124975,
+          "symlinkCount": 0
+        }
+      },
+      "breach": null,
+      "child": {
+        "exitCode": 0,
+        "signal": null,
+        "spawnError": null
+      },
+      "termination": {
+        "requested": false,
+        "awaited": true
+      },
+      "logSha256": "72eaa66d35dd1731bffac882ec0a5e177a7e06695cf84d8b209fb585e629b430",
+      "outputPreview": "00:00.006  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.067  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.067  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.067  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.067  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.067  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nInfo: Saved as \"scene.blend\"\nBFS_COMPILE_OK SHOT_101 316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/resource-budget-v0-1/work/B01-positive/scene.manifest.json\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n",
+      "outputPreviewTruncated": false,
+      "budgetProfile": {
+        "uri": "specs/restricted-compile-budget.v0.1.json",
+        "sha256": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe"
+      }
+    }
+  },
+  "pathSecurityRegression": {
+    "pass": true,
+    "tests": [
+      {
+        "id": "REPORT_ESCAPE",
+        "pass": true,
+        "observed": "BFS_RESTRICTED_COMPILE_ERROR Restricted compile report must resolve below the repository root",
+        "externalTargetExists": false
+      },
+      {
+        "id": "OUTPUT_ESCAPE",
+        "pass": true,
+        "observed": "BFS_RESTRICTED_COMPILE_ERROR Restricted compile output must resolve below the repository root",
+        "externalTargetExists": false
+      },
+      {
+        "id": "PLAN_SYMLINK",
+        "pass": true,
+        "observed": "BFS_RESTRICTED_COMPILE_ERROR BuildPlan must not traverse symbolic links",
+        "externalTargetExists": false
+      }
+    ]
+  },
+  "allNegativeTestsPassed": true,
+  "formalB12Complete": true,
+  "nonClaimsPreserved": true
+}
