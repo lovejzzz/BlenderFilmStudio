@@ -1,0 +1,1264 @@
+{
+  "documentType": "BFS_B29_PASS_DOMAIN_LOCALIZATION_RESULT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T14:24:49.647Z",
+  "decision": "DECOUPLED_PASS_PATTERN",
+  "independentDecision": "DECOUPLED_PASS_PATTERN",
+  "validExperiment": true,
+  "humanReview": {
+    "status": "PENDING",
+    "claim": "Pass identity cannot determine visibility or cinematic quality."
+  },
+  "question": "Across fresh Blender processes with repeated frame-38 renders, does every recurrence of the frozen ALTERNATE PNG mode couple to the pilot-derived Combined-float and BACK_WALL/FLOOR CryptoObject00 coverage modes while closest-sample Depth, Normal and Position remain exact?",
+  "design": {
+    "type": "twelve fresh persistent processes with twelve repeated same-frame renders and two saves per Render Result",
+    "processOrder": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12"
+    ],
+    "processes": 12,
+    "targetFrame": 38,
+    "renderCallsPerProcess": 12,
+    "renderCalls": 144,
+    "savesPerRender": 2,
+    "saves": 288,
+    "pngFiles": 144,
+    "multilayerExrFiles": 144,
+    "selectedBeforeAnyFormalB29Render": true,
+    "frameSetRule": "Set frame 38 once before the first render and do not change it between calls.",
+    "renderRule": "Render once with write_still false, then save PNG8 and EXR32 multilayer from the same Render Result without re-rendering."
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "b29SpecSha256": "38a3d32dc8ce4e85e3403685c3b727f68fa48a71f517e576dfaea2c643c555d9",
+    "b28ResultsSha256": "72445273fd15dbd6f091aa6830da682b9bee4f12abd30140e46c634c7a1d4e09",
+    "b28Decision": "WITHIN_PID_MODE_SWITCH_SUPPORT",
+    "pilotReportSha256": "959bde374db3af7276f4db75d73d78717d1a35505213571dcb458ab056359794",
+    "pilotAnalysisSha256": "17a3ecb6b826480533f93d1446e399fc0cd1dbd8244aba0a9a46e5517e20bbc2",
+    "pilotRendererSha256": "db9674f971e064d1905beff1dd8a2cb8efcd26237da3a30e767659509e390941",
+    "pilotAnalyzerSha256": "28d2a098ad386e5de0d521a11e2ff042f615de3104dbac796dd628b350c541ae",
+    "pilotStatus": "EXPLORATORY_DERIVATION_ONLY_NOT_CONFIRMATION",
+    "pilotObservation": "One PID produced eleven REFERENCE and one ALTERNATE PNG. The ALTERNATE call coupled to a second Combined-float hash and a second CryptoObject00 hash localized to seven BACK_WALL/FLOOR coverage pixels; Depth, Normal and Position stayed exact. A separate call-1 Vector transient did not couple to Combined.",
+    "rendererSha256": "7572a4354f98ec378dd5f17bbe38f245f5819c9bc1fee9f35e2ab1f4fdd5ffc0",
+    "classifierSha256": "ec547cce1c3e9e2831d7ed86e26e66f02570c30ffb38e8d3dc8cdd22c4acebeb",
+    "runnerSha256": "5fde74439d7049b1df428e95b96ed5b4b73d3e293765ecbf5fb79925cb869811"
+  },
+  "primary": {
+    "endpoint": "coverageCoupledPassLocalization",
+    "supportThresholdProcesses": 2,
+    "supportingProcessCount": 10,
+    "supportingProcesses": [
+      "P01",
+      "P02",
+      "P03",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P10",
+      "P11",
+      "P12"
+    ]
+  },
+  "summary": {
+    "categoryCounts": {
+      "COUPLED_ALTERNATE": 38,
+      "COUPLED_REFERENCE": 103,
+      "DECOUPLED_PASS_PATTERN": 3
+    },
+    "novelPrimaryHashes": [],
+    "processes": 12,
+    "renders": 144
+  },
+  "ordinalCategoryCounts": [
+    {
+      "callOrdinal": 1,
+      "counts": {
+        "COUPLED_ALTERNATE": 5,
+        "COUPLED_REFERENCE": 7
+      }
+    },
+    {
+      "callOrdinal": 2,
+      "counts": {
+        "COUPLED_ALTERNATE": 3,
+        "COUPLED_REFERENCE": 9
+      }
+    },
+    {
+      "callOrdinal": 3,
+      "counts": {
+        "COUPLED_ALTERNATE": 3,
+        "COUPLED_REFERENCE": 9
+      }
+    },
+    {
+      "callOrdinal": 4,
+      "counts": {
+        "COUPLED_ALTERNATE": 2,
+        "COUPLED_REFERENCE": 9,
+        "DECOUPLED_PASS_PATTERN": 1
+      }
+    },
+    {
+      "callOrdinal": 5,
+      "counts": {
+        "COUPLED_ALTERNATE": 2,
+        "COUPLED_REFERENCE": 9,
+        "DECOUPLED_PASS_PATTERN": 1
+      }
+    },
+    {
+      "callOrdinal": 6,
+      "counts": {
+        "COUPLED_ALTERNATE": 3,
+        "COUPLED_REFERENCE": 9
+      }
+    },
+    {
+      "callOrdinal": 7,
+      "counts": {
+        "COUPLED_ALTERNATE": 1,
+        "COUPLED_REFERENCE": 11
+      }
+    },
+    {
+      "callOrdinal": 8,
+      "counts": {
+        "COUPLED_ALTERNATE": 2,
+        "COUPLED_REFERENCE": 9,
+        "DECOUPLED_PASS_PATTERN": 1
+      }
+    },
+    {
+      "callOrdinal": 9,
+      "counts": {
+        "COUPLED_ALTERNATE": 3,
+        "COUPLED_REFERENCE": 9
+      }
+    },
+    {
+      "callOrdinal": 10,
+      "counts": {
+        "COUPLED_ALTERNATE": 4,
+        "COUPLED_REFERENCE": 8
+      }
+    },
+    {
+      "callOrdinal": 11,
+      "counts": {
+        "COUPLED_ALTERNATE": 3,
+        "COUPLED_REFERENCE": 9
+      }
+    },
+    {
+      "callOrdinal": 12,
+      "counts": {
+        "COUPLED_ALTERNATE": 7,
+        "COUPLED_REFERENCE": 5
+      }
+    }
+  ],
+  "numericReferenceToAlternate": {
+    "BFS_MASTER.Combined": {
+      "boundingBox": {
+        "xMax": 272,
+        "xMin": 267,
+        "yMax": 117,
+        "yMin": 112
+      },
+      "changedPixels": 26,
+      "changedValues": 72,
+      "maxAbsoluteError": 0.00390625,
+      "rmsError": 0.000007905014078177478
+    },
+    "BFS_MASTER.CryptoObject00": {
+      "boundingBox": {
+        "xMax": 270,
+        "xMin": 268,
+        "yMax": 115,
+        "yMin": 113
+      },
+      "changedPixels": 7,
+      "changedValues": 14,
+      "maxAbsoluteError": 0.014651358127593994,
+      "rmsError": 0.000018936400586447832
+    }
+  },
+  "cryptoObject00Localization": [
+    {
+      "alternate": [
+        {
+          "coverage": 0.9970967173576355,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.005293348804116249,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "reference": [
+        {
+          "coverage": 0.9965373873710632,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.005886739585548639,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "x": 269,
+      "y": 113
+    },
+    {
+      "alternate": [
+        {
+          "coverage": 0.9914183616638184,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.011820082552731037,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "reference": [
+        {
+          "coverage": 0.9909475445747375,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.01241856999695301,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "x": 270,
+      "y": 113
+    },
+    {
+      "alternate": [
+        {
+          "coverage": 0.7532100081443787,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.2467903345823288,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "reference": [
+        {
+          "coverage": 0.7531396150588989,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.24686075747013092,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "x": 268,
+      "y": 114
+    },
+    {
+      "alternate": [
+        {
+          "coverage": 0.6432040929794312,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.3567962646484375,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "reference": [
+        {
+          "coverage": 0.6285527348518372,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.37144744396209717,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "x": 269,
+      "y": 114
+    },
+    {
+      "alternate": [
+        {
+          "coverage": 0.5231978297233582,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.4768024682998657,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "reference": [
+        {
+          "coverage": 0.5108642578125,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        },
+        {
+          "coverage": 0.4891360104084015,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        }
+      ],
+      "x": 270,
+      "y": 114
+    },
+    {
+      "alternate": [
+        {
+          "coverage": 0.9775121808052063,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        },
+        {
+          "coverage": 0.027222106233239174,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        }
+      ],
+      "reference": [
+        {
+          "coverage": 0.9790640473365784,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        },
+        {
+          "coverage": 0.02541060373187065,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        }
+      ],
+      "x": 269,
+      "y": 115
+    },
+    {
+      "alternate": [
+        {
+          "coverage": 0.9894625544548035,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        },
+        {
+          "coverage": 0.015899403020739555,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        }
+      ],
+      "reference": [
+        {
+          "coverage": 0.9907689094543457,
+          "idHex": "d3249e06",
+          "object": "FLOOR"
+        },
+        {
+          "coverage": 0.014732003211975098,
+          "idHex": "0f749ae0",
+          "object": "BACK_WALL"
+        }
+      ],
+      "x": 270,
+      "y": 115
+    }
+  ],
+  "secondary": {
+    "cryptoObject01And02Stable": [
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P01"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P02"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P03"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P04"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P05"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P06"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P07"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P08"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P09"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P10"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P11"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P12"
+      }
+    ],
+    "vectorFirstCallPattern": [
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P01"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P02"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P03"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P04"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P05"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P06"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P07"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P08"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P09"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P10"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P11"
+      },
+      {
+        "frozenPatternMatch": true,
+        "replicate": "P12"
+      }
+    ]
+  },
+  "processes": [
+    {
+      "replicate": "P01",
+      "processId": 53626,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 2,
+        "COUPLED_REFERENCE": 9,
+        "DECOUPLED_PASS_PATTERN": 1
+      },
+      "sequence": [
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "DECOUPLED_PASS_PATTERN",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE"
+      ]
+    },
+    {
+      "replicate": "P02",
+      "processId": 53819,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 2,
+        "COUPLED_REFERENCE": 10
+      },
+      "sequence": [
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE"
+      ]
+    },
+    {
+      "replicate": "P03",
+      "processId": 53980,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 4,
+        "COUPLED_REFERENCE": 7,
+        "DECOUPLED_PASS_PATTERN": 1
+      },
+      "sequence": [
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "DECOUPLED_PASS_PATTERN",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE"
+      ]
+    },
+    {
+      "replicate": "P04",
+      "processId": 54138,
+      "supportingProcess": false,
+      "categoryCounts": {
+        "COUPLED_REFERENCE": 11,
+        "DECOUPLED_PASS_PATTERN": 1
+      },
+      "sequence": [
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "DECOUPLED_PASS_PATTERN",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE"
+      ]
+    },
+    {
+      "replicate": "P05",
+      "processId": 54296,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 4,
+        "COUPLED_REFERENCE": 8
+      },
+      "sequence": [
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE"
+      ]
+    },
+    {
+      "replicate": "P06",
+      "processId": 54451,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 3,
+        "COUPLED_REFERENCE": 9
+      },
+      "sequence": [
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE"
+      ]
+    },
+    {
+      "replicate": "P07",
+      "processId": 54609,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 4,
+        "COUPLED_REFERENCE": 8
+      },
+      "sequence": [
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE"
+      ]
+    },
+    {
+      "replicate": "P08",
+      "processId": 54764,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 7,
+        "COUPLED_REFERENCE": 5
+      },
+      "sequence": [
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE"
+      ]
+    },
+    {
+      "replicate": "P09",
+      "processId": 54921,
+      "supportingProcess": false,
+      "categoryCounts": {
+        "COUPLED_REFERENCE": 12
+      },
+      "sequence": [
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE"
+      ]
+    },
+    {
+      "replicate": "P10",
+      "processId": 55193,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 3,
+        "COUPLED_REFERENCE": 9
+      },
+      "sequence": [
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE"
+      ]
+    },
+    {
+      "replicate": "P11",
+      "processId": 55398,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 2,
+        "COUPLED_REFERENCE": 10
+      },
+      "sequence": [
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE"
+      ]
+    },
+    {
+      "replicate": "P12",
+      "processId": 55557,
+      "supportingProcess": true,
+      "categoryCounts": {
+        "COUPLED_ALTERNATE": 7,
+        "COUPLED_REFERENCE": 5
+      },
+      "sequence": [
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_REFERENCE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE",
+        "COUPLED_ALTERNATE"
+      ]
+    }
+  ],
+  "aggregate": {
+    "uniqueRenderProcesses": 12,
+    "renderProcesses": 12,
+    "renderCalls": 144,
+    "saves": 288,
+    "pngFiles": 144,
+    "multilayerExrFiles": 144,
+    "attacksPassed": 25,
+    "attacksTotal": 25
+  },
+  "processLedger": [
+    {
+      "orderIndex": 0,
+      "replicate": "P01",
+      "processId": 53626,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "6cbb76af30291615c930c0685ad7fbb7872cb187b384988d1b3a3d473235914c",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "ddbbbc7f5c6ca1763f5b3ae9f5742767c552aac370daa07491e5dd621089794b"
+    },
+    {
+      "orderIndex": 1,
+      "replicate": "P02",
+      "processId": 53819,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "4b983e65faa8815f4f071bb9f9b441d5b2fa70be76e10dcf781bea51ba6e84fd",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "f3b2d31dee34f17206676cfc0a4ca21016338e1d536832edf75303c62c77889a"
+    },
+    {
+      "orderIndex": 2,
+      "replicate": "P03",
+      "processId": 53980,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "0a1b674abf17f7f7089d565795dbf0e8c2771e7375cc676b709f749fcab6dd29",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "2d5bb0d1ae72eb23fc3811ef90e00af953bd00d16b1582dc2604463890720de6"
+    },
+    {
+      "orderIndex": 3,
+      "replicate": "P04",
+      "processId": 54138,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "872caa40d826afbeeaa6a8d66929744f69e7b31ef225189bb66ec18f4ce5d331",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "966e5f6ff6b0f44d6b3cc20127ecb1d95d06ad4c5607202d2d2c4c9d76eec69a"
+    },
+    {
+      "orderIndex": 4,
+      "replicate": "P05",
+      "processId": 54296,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "da7e6407403f7f825eadd2bf77bdfb8e5867fc39baf25dfbe9a1c7b23813473e",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "368487f6708bb482d4da16d31812a93b9705fd4986d45a972f3e22335234f20c"
+    },
+    {
+      "orderIndex": 5,
+      "replicate": "P06",
+      "processId": 54451,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "67738ed13635608ac8a180b258ee5b3f30f1080c42d49a2e00a7919bdb4fbd07",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "c51309f7919d4ec3530e1d45b061f177feed427bdea2fb4df8a031588ad20ec8"
+    },
+    {
+      "orderIndex": 6,
+      "replicate": "P07",
+      "processId": 54609,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "df8c1981f853a40db40d765bbe423117a7ccec79740ed550d4bae0c82269b73b",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "9490ac4ee5006ea0517fbc2484cd73d3561d246ba630bfa711e859cfde607622"
+    },
+    {
+      "orderIndex": 7,
+      "replicate": "P08",
+      "processId": 54764,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "43cca92d2f31c02e7073f3a3580eb93c8895cc3efc23a437fa4f8d0b3d1d55a4",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "e2071c91ca2601823854e71a9ad78a77bab9e17045f9cd3f42ae14f9a8934235"
+    },
+    {
+      "orderIndex": 8,
+      "replicate": "P09",
+      "processId": 54921,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "101128ce3d3e1d6b9f35d488f26cf5706d29fe83844e2bb02ff6ca02cd698989",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "09f5b4f6e581bed34492e3cd0f59fdf4c5eea527667eb0d50f42ebd1ca353354"
+    },
+    {
+      "orderIndex": 9,
+      "replicate": "P10",
+      "processId": 55193,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "3af6e4423ba17c2c4a3b277f721aced31dc2acbdbeb5628ee1305d30c440e9e9",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "79957fb1f699a74b97aebed24549ea2645a606914aee088fbeafef861cc17825"
+    },
+    {
+      "orderIndex": 10,
+      "replicate": "P11",
+      "processId": 55398,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "02dbef6bbe18ca46a9cd80e0e9564c0b8b665fbd9954f754ef7905f440aed431",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "b20350571032c0439b45dd69da3f449294c3e1ca2e357a260ce4c74ab66658d4"
+    },
+    {
+      "orderIndex": 11,
+      "replicate": "P12",
+      "processId": 55557,
+      "renderCalls": 12,
+      "saves": 24,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "55e8024ad58374515c524aee0ff7fbeae9a2d690bc8a811fa591e68ff87caaed",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "ecaecd113ef99ffd3b4e4a2c2ce48ac62b161e529b90536c4eebc3f4909c86ca"
+    }
+  ],
+  "attacks": [
+    {
+      "id": "N_B29_SPEC_IDENTITY",
+      "expected": "B29_SPEC_SHA",
+      "observed": "B29_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B28_RESULT_IDENTITY",
+      "expected": "B28_RESULT_SHA",
+      "observed": "B28_RESULT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PILOT_REPORT_IDENTITY",
+      "expected": "PILOT_REPORT_SHA",
+      "observed": "PILOT_REPORT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PILOT_ANALYSIS_IDENTITY",
+      "expected": "PILOT_ANALYSIS_SHA",
+      "observed": "PILOT_ANALYSIS_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PILOT_TOOL_IDENTITY",
+      "expected": "PILOT_TOOL_SHA",
+      "observed": "PILOT_TOOL_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SPEC_IDENTITY",
+      "expected": "REVIEW_SPEC_SHA",
+      "observed": "REVIEW_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER_IDENTITY",
+      "expected": "BLENDER_SHA",
+      "observed": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO_IDENTITY",
+      "expected": "OCIO_SHA",
+      "observed": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE_IDENTITY",
+      "expected": "SCENE_SHA",
+      "observed": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PLAN_STRUCTURE",
+      "expected": "PLAN_STRUCTURE",
+      "observed": "PLAN_STRUCTURE",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR_IDENTITY",
+      "expected": "CONFIGURATOR_SHA",
+      "observed": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER_IDENTITY",
+      "expected": "RENDERER_SHA",
+      "observed": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_CLASSIFIER_IDENTITY",
+      "expected": "CLASSIFIER_SHA",
+      "observed": "CLASSIFIER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RUNNER_IDENTITY",
+      "expected": "RUNNER_SHA",
+      "observed": "RUNNER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SOURCE_CONTROLS",
+      "expected": "SOURCE_CONTROLS",
+      "observed": "SOURCE_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_PASS_SETTINGS",
+      "expected": "PASS_SETTINGS",
+      "observed": "PASS_SETTINGS",
+      "pass": true
+    },
+    {
+      "id": "N_PROCESS_ORDER",
+      "expected": "PROCESS_ORDER",
+      "observed": "PROCESS_ORDER",
+      "pass": true
+    },
+    {
+      "id": "N_PID_BINDING",
+      "expected": "PID_BINDING",
+      "observed": "PID_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FRAME_CALL_ORDER",
+      "expected": "FRAME_CALL_ORDER",
+      "observed": "FRAME_CALL_ORDER",
+      "pass": true
+    },
+    {
+      "id": "N_ONE_RENDER_TWO_SAVE",
+      "expected": "ONE_RENDER_TWO_SAVE",
+      "observed": "ONE_RENDER_TWO_SAVE",
+      "pass": true
+    },
+    {
+      "id": "N_OUTPUT_LAYOUT",
+      "expected": "OUTPUT_LAYOUT",
+      "observed": "OUTPUT_LAYOUT",
+      "pass": true
+    },
+    {
+      "id": "N_OUTPUT_BINDING",
+      "expected": "OUTPUT_BINDING",
+      "observed": "OUTPUT_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_CLASSIFICATION_BINDING",
+      "expected": "CLASSIFICATION_BINDING",
+      "observed": "CLASSIFICATION_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FROZEN_CONTRACT",
+      "expected": "FROZEN_CONTRACT",
+      "observed": "FROZEN_CONTRACT",
+      "pass": true
+    },
+    {
+      "id": "N_HUMAN_REVIEW",
+      "expected": "HUMAN_REVIEW",
+      "observed": "HUMAN_REVIEW",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "processLedger": "experiments/pass-domain-localization-v0-1/evidence/process-ledger.json",
+    "classificationIndex": "experiments/pass-domain-localization-v0-1/evidence/classification-index.json",
+    "classification": "experiments/pass-domain-localization-v0-1/evidence/pass-classification.json",
+    "binding": "experiments/pass-domain-localization-v0-1/evidence/classification-binding.json",
+    "manifests": {
+      "P01": "experiments/pass-domain-localization-v0-1/evidence/P01.manifest.json",
+      "P02": "experiments/pass-domain-localization-v0-1/evidence/P02.manifest.json",
+      "P03": "experiments/pass-domain-localization-v0-1/evidence/P03.manifest.json",
+      "P04": "experiments/pass-domain-localization-v0-1/evidence/P04.manifest.json",
+      "P05": "experiments/pass-domain-localization-v0-1/evidence/P05.manifest.json",
+      "P06": "experiments/pass-domain-localization-v0-1/evidence/P06.manifest.json",
+      "P07": "experiments/pass-domain-localization-v0-1/evidence/P07.manifest.json",
+      "P08": "experiments/pass-domain-localization-v0-1/evidence/P08.manifest.json",
+      "P09": "experiments/pass-domain-localization-v0-1/evidence/P09.manifest.json",
+      "P10": "experiments/pass-domain-localization-v0-1/evidence/P10.manifest.json",
+      "P11": "experiments/pass-domain-localization-v0-1/evidence/P11.manifest.json",
+      "P12": "experiments/pass-domain-localization-v0-1/evidence/P12.manifest.json"
+    }
+  },
+  "nonClaims": [
+    "Coupled localization would not prove that film resampling, rasterization, Metal, TAA or GPU scheduling is the causal mechanism.",
+    "Stable closest-sample passes would not prove geometry processing is globally deterministic; they test only these outputs at this frame and profile.",
+    "Enabling diagnostic passes may affect execution or mode frequency, so B29 tests the frozen pass-enabled profile rather than silently generalizing B28 rates.",
+    "Cryptomatte coverage weights are diagnostic data, not calibrated perceptual visibility or cinematic-quality scores.",
+    "The Vector first-call transient is a separate secondary pattern and does not establish the primary Combined/Crypto mechanism.",
+    "Twelve processes by twelve calls is a fixed mechanistic probe, not an equivalence study or universal Blender probability estimate.",
+    "Human review remains PENDING and cannot be replaced by machine pass identity."
+  ]
+}
