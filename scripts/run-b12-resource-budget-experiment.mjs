@@ -60,7 +60,8 @@ negativeTests.push({ id: 'N_NONZERO_EXIT', expectedReason: 'CHILD_FAILED', pass:
 
 const positiveOutput = await makeOutput('B01-positive');
 const positiveReport = resolve(workRoot, 'B01-positive.budget.json');
-const positiveCli = await runCommand(process.execPath, [restrictedCli, '--plan', plan, '--output-dir', positiveOutput, '--report', positiveReport]);
+const positiveReceipt = resolve(workRoot, 'B01-positive.receipt.json');
+const positiveCli = await runCommand(process.execPath, [restrictedCli, '--plan', plan, '--output-dir', positiveOutput, '--report', positiveReport, '--receipt', positiveReceipt]);
 const positive = JSON.parse(await readFile(positiveReport, 'utf8'));
 const manifest = positive.outcome === 'PASS' ? JSON.parse(await readFile(resolve(positiveOutput, 'scene.manifest.json'), 'utf8')) : null;
 const expectedStructure = 'c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b';
@@ -69,11 +70,12 @@ const uniqueEscape = `${process.pid}-${Date.now()}`;
 const escapedReport = `/tmp/bfs-b12-report-escape-${uniqueEscape}.json`;
 const escapedOutput = `/tmp/bfs-b12-output-escape-${uniqueEscape}`;
 const safeRegressionReport = resolve(workRoot, 'path-regression.report.json');
-const reportEscapeCli = await runCommand(process.execPath, [restrictedCli, '--plan', plan, '--output-dir', resolve(workRoot, 'REPORT_ESCAPE-output'), '--report', escapedReport]);
-const outputEscapeCli = await runCommand(process.execPath, [restrictedCli, '--plan', plan, '--output-dir', escapedOutput, '--report', safeRegressionReport]);
+const safeRegressionReceipt = resolve(workRoot, 'path-regression.receipt.json');
+const reportEscapeCli = await runCommand(process.execPath, [restrictedCli, '--plan', plan, '--output-dir', resolve(workRoot, 'REPORT_ESCAPE-output'), '--report', escapedReport, '--receipt', safeRegressionReceipt]);
+const outputEscapeCli = await runCommand(process.execPath, [restrictedCli, '--plan', plan, '--output-dir', escapedOutput, '--report', safeRegressionReport, '--receipt', safeRegressionReceipt]);
 const planSymlink = resolve(workRoot, 'B01-plan-symlink.json');
 await symlink(plan, planSymlink);
-const planSymlinkCli = await runCommand(process.execPath, [restrictedCli, '--plan', planSymlink, '--output-dir', resolve(workRoot, 'PLAN_SYMLINK-output'), '--report', safeRegressionReport]);
+const planSymlinkCli = await runCommand(process.execPath, [restrictedCli, '--plan', planSymlink, '--output-dir', resolve(workRoot, 'PLAN_SYMLINK-output'), '--report', safeRegressionReport, '--receipt', safeRegressionReceipt]);
 const escapedReportExists = await access(escapedReport, constants.F_OK).then(() => true).catch(() => false);
 const escapedOutputExists = await access(escapedOutput, constants.F_OK).then(() => true).catch(() => false);
 const pathSecurityTests = [

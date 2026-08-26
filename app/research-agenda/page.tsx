@@ -85,8 +85,8 @@ const gaps: {
   {
     id: 'G08', title: '代理执行安全', type: 'governance', priority: 'P0',
     question: 'Codex / MCP 可以修改什么，如何防止任意代码、越权读写和供应链污染？',
-    known: 'B10 关闭路径逃逸；B11 关闭已声明 Blender 求值结构；B12 对墙钟、根进程 RSS、日志、输出文件/字节建立软 watchdog，6/6 反例终止且 B01 结构不变。',
-    missing: '解析器漏洞、子进程总内存、GPU/网络/系统调用、OS 进程隔离、包供应链、签名审批、dry-run、回滚和完整 MCP 工具授权仍未实现。',
+    known: 'B10–B12 覆盖路径、资产求值结构与软资源预算；B13 用 receipt 绑定 plan、工具源、Blender/Node binary、profile、OCIO、manifest、规范结构与 .blend，10+2 攻击通过。',
+    missing: 'receipt 尚未签名或远程证明；解析器漏洞、子进程总内存、GPU/网络/系统调用、OS 隔离、包供应链、签名审批、dry-run、回滚和完整 MCP 授权仍未实现。',
     artifact: 'Restricted Tool Gateway + Threat Model',
     gate: '攻击样例不能越出工作目录、联网、读取秘密或绕过批准修改制作资产。',
   },
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/resource-budget-v0-1">查看最新资源证据 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/compile-receipt-v0-1">查看最新收据证据 →</Link></footer>
     </main>
   );
 }

@@ -942,7 +942,12 @@ def main() -> None:
     warnings = configure_render(scene, plan["render"], plan["outputSpec"], next(camera for camera in plan["cameras"] if camera["id"] == plan["shot"]["activeCamera"]), artifact_root)
 
     structure = build_structure(scene, wrapper, asset_collections, camera_objects, target_objects, actor_reports, attachment_reports, grasp_reports, trajectory_reports)
-    structure_hash = sha256_bytes(canonical_json(structure).encode("utf-8"))
+    structure_canonical_bytes = canonical_json(structure).encode("utf-8")
+    structure_hash = sha256_bytes(structure_canonical_bytes)
+    structure_canonical_path = artifact_root / "scene.structure.canonical.json"
+    structure_canonical_path.write_bytes(structure_canonical_bytes)
+    scene["bfs_structure_hash"] = structure_hash
+    scene["bfs_manifest_version"] = "0.2.0"
     blend_path = artifact_root / "scene.blend"
     save_result = bpy.ops.wm.save_as_mainfile(filepath=str(blend_path), check_existing=False, compress=True, relative_remap=True)
     if "FINISHED" not in save_result:
@@ -950,8 +955,26 @@ def main() -> None:
 
     manifest = {
         "documentType": "BFS_SCENE_MANIFEST",
-        "manifestVersion": "0.1.0",
+        "manifestVersion": "0.2.0",
+        "execution": {
+            "planHash": wrapper["planHash"],
+            "planVersion": wrapper["planVersion"],
+            "sourceSceneCanonicalSha256": plan["source"]["canonicalSha256"],
+            "compiler": plan["compiler"],
+            "blender": {
+                "version": bpy.app.version_string,
+                "buildHash": bpy.app.build_hash.decode("utf-8") if isinstance(bpy.app.build_hash, bytes) else str(bpy.app.build_hash),
+                "buildBranch": bpy.app.build_branch.decode("utf-8") if isinstance(bpy.app.build_branch, bytes) else str(bpy.app.build_branch),
+                "buildPlatform": bpy.app.build_platform.decode("utf-8") if isinstance(bpy.app.build_platform, bytes) else str(bpy.app.build_platform),
+            },
+            "ocioConfigSha256": scene["bfs_ocio_sha256"],
+        },
         "structureHash": structure_hash,
+        "structureCanonical": {
+            "uri": "scene.structure.canonical.json",
+            "sha256": structure_hash,
+            "bytes": len(structure_canonical_bytes),
+        },
         "structure": structure,
         "warnings": warnings,
         "telemetry": {

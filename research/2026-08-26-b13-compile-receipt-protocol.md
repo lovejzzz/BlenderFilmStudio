@@ -79,3 +79,12 @@ Formal B13 is true only if all positive requirements and 10/10 negative cases pa
 - Receipt verification does not replace human review of cinematic or physical quality.
 
 Signature, transparency-log or remote-attestation work must be a later, separately falsified layer.
+
+## Post-freeze execution notes
+
+Two implementation failures exposed requirements not visible at freeze time:
+
+- Python preserves JSON numeric lexemes such as `0.0`, while Node parsing and serialization emits `0`. Blender now writes the exact `scene.structure.canonical.json` bytes; receipt verification hashes that artifact and checks parsed deep equality.
+- Reusing an output directory made Blender create an unbound `scene.blend1` backup. The restricted CLI now requires an empty output directory.
+
+Two supplementary, separately labelled cases were added: `S_STRUCTURE_CANONICAL_SHA` and `S_DIRTY_OUTPUT`. They do not replace or renumber the 10 frozen negative cases.

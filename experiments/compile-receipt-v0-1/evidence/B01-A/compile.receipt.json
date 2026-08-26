@@ -1,0 +1,120 @@
+{
+  "documentType": "BFS_COMPILE_RECEIPT",
+  "version": "0.1.0",
+  "createdAtUtc": "2026-08-26T09:34:41.919Z",
+  "executionIdentity": {
+    "buildPlan": {
+      "uri": "experiments/compiler-v0-1/plans/B01.build-plan.json",
+      "sha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+      "bytes": 7345,
+      "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+      "planVersion": "0.1.0",
+      "sourceSceneCanonicalSha256": "10d8ef02fbe71c0b44ca6fc93a25f7952cff605b31d40fc04f9c6029ee7119b0",
+      "shotId": "SHOT_101"
+    },
+    "tools": {
+      "sceneCompiler": {
+        "uri": "blender/compile_scene.py",
+        "sha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240",
+        "bytes": 51286
+      },
+      "restrictedCli": {
+        "uri": "scripts/run-restricted-blender-compile.mjs",
+        "sha256": "4cd49d91e7f396f04876b8fcb14ac3a10ff19fbba11309cae1cdc6911740b2af",
+        "bytes": 5757
+      },
+      "budgetSupervisor": {
+        "uri": "scripts/lib/budgeted-process.mjs",
+        "sha256": "0c4cc332139d7e11bd33dccb0c340a3947851907fc02ab68b57be5275ec5ec40",
+        "bytes": 6203
+      },
+      "receiptGenerator": {
+        "uri": "scripts/lib/compile-receipt.mjs",
+        "sha256": "6fbe9a2394acbc0712ac73451db2602ec1aed8d23e49dde87bb124be2c07de95",
+        "bytes": 8203
+      },
+      "receiptFormat": {
+        "uri": "scripts/lib/receipt-format.mjs",
+        "sha256": "a7b3be629daf5ebc50b023eea367a4e525ca66b58acafb8b23107cb6bdb4aebc",
+        "bytes": 1251
+      }
+    },
+    "configuration": {
+      "budgetProfile": {
+        "uri": "specs/restricted-compile-budget.v0.1.json",
+        "sha256": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe",
+        "bytes": 457
+      },
+      "ocio": {
+        "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "bytes": 32807
+      }
+    },
+    "runtime": {
+      "blender": {
+        "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+        "bytes": 183237520,
+        "version": "Blender 5.2.0 LTS",
+        "buildHash": "fbe6228777e7",
+        "buildBranch": "blender-v5.2-release",
+        "buildPlatform": "Darwin",
+        "buildType": "Release",
+        "binaryName": "Blender"
+      },
+      "node": {
+        "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+        "bytes": 50320,
+        "version": "v26.5.0",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "binaryName": "node"
+      }
+    }
+  },
+  "run": {
+    "budgetReport": {
+      "uri": "experiments/compile-receipt-v0-1/evidence/B01-A/budget.report.json",
+      "sha256": "5c8d9bd73ffe44a872a91c2e920899ae0dbd44dad3df67d42eb6bb5d8c13d9f6",
+      "bytes": 3101,
+      "outcome": "PASS",
+      "metrics": {
+        "elapsedMs": 612,
+        "peakSampledRssBytes": 230195200,
+        "logBytes": 1106,
+        "output": {
+          "fileCount": 3,
+          "bytes": 129020,
+          "symlinkCount": 0
+        }
+      }
+    },
+    "sceneManifest": {
+      "uri": "experiments/compile-receipt-v0-1/evidence/B01-A/scene.manifest.json",
+      "sha256": "95f0626afc231f64b375d9500755205fdb21aec5c29dc010aa6a27c540b83165",
+      "bytes": 8182,
+      "manifestVersion": "0.2.0",
+      "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+      "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b"
+    },
+    "sceneStructureCanonical": {
+      "uri": "experiments/compile-receipt-v0-1/evidence/B01-A/scene.structure.canonical.json",
+      "sha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+      "bytes": 3130,
+      "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b"
+    },
+    "sceneBlend": {
+      "uri": "experiments/compile-receipt-v0-1/evidence/B01-A/scene.blend",
+      "sha256": "df516f9fae137503e76572ec22310f8460bda0b9fc047a24bfb9540b4703a434",
+      "bytes": 117708
+    }
+  },
+  "claims": {
+    "exactArtifactBinding": true,
+    "semanticStructureBinding": true,
+    "signed": false,
+    "remotelyAttested": false
+  },
+  "executionIdentityHash": "798a90068c5d8c29394a15d304aacc215c4eff08af82d37edd4e416eb52563b8",
+  "receiptHash": "85da35ed63375b6f6b792474f617c90c2130a69a538d1ef2e7978db56683f77f"
+}

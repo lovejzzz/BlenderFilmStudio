@@ -29,14 +29,16 @@ The pre-watchdog unbudgeted B01 baseline used approximately `0.54 s`, reached `2
 
 The final restricted CLI run passed with:
 
-- elapsed time: `555 ms`;
-- peak sampled root-process RSS: `253,476,864 B`;
+- elapsed time: `568 ms`;
+- peak sampled root-process RSS: `253,837,312 B`;
 - combined log: `1,109 B`;
-- output: two files, `124,975 B`;
+- output: three files, `129,032 B`;
 - CLI exit code: `0`;
 - structure SHA-256: `c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b`.
 
 The few-byte `.blend` size variation is not a determinism gate. The published semantic structure hash is unchanged.
+
+This final regression was executed after B13 introduced `scene.structure.canonical.json`; the third output file is the exact Blender/Python canonical structure byte stream used for cross-language receipt verification.
 
 ## Negative matrix
 

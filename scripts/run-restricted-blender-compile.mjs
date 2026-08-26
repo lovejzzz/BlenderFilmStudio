@@ -1,10 +1,11 @@
-import { access, mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, readdir, realpath, writeFile } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { repositoryRoot } from './lib/scene-spec.mjs';
 import { runBudgetedProcess } from './lib/budgeted-process.mjs';
+import { createCompileReceipt } from './lib/compile-receipt.mjs';
 
 const profilePath = resolve(repositoryRoot, 'specs/restricted-compile-budget.v0.1.json');
 const repositoryRealRoot = await realpath(repositoryRoot);
@@ -62,6 +63,11 @@ export async function runRestrictedCompile({ plan, outputDir }) {
   const trustedPlan = await assertTrustedExistingPath(resolve(plan), 'BuildPlan');
   const trustedOutput = resolve(outputDir);
   await assertTrustedOutputPath(trustedOutput, 'Restricted compile output');
+  const existingEntries = await readdir(trustedOutput).catch(error => {
+    if (error?.code === 'ENOENT') return [];
+    throw error;
+  });
+  if (existingEntries.length > 0) throw new Error(`Restricted compile output must be empty: found ${existingEntries.sort().join(', ')}`);
   await mkdir(trustedOutput, { recursive: true });
   const result = await runBudgetedProcess({
     command: blender,
@@ -77,12 +83,21 @@ async function main() {
   const plan = option('--plan');
   const outputDir = option('--output-dir');
   const report = option('--report');
-  if (!plan || !outputDir || !report) throw new Error('Usage: --plan FILE --output-dir DIR --report FILE');
+  const receipt = option('--receipt');
+  if (!plan || !outputDir || !report || !receipt) throw new Error('Usage: --plan FILE --output-dir DIR --report FILE --receipt FILE');
   const trustedReport = resolve(report);
+  const trustedReceipt = resolve(receipt);
   await assertTrustedOutputPath(trustedReport, 'Restricted compile report');
+  await assertTrustedOutputPath(trustedReceipt, 'CompileReceipt output');
+  if (trustedReport === trustedReceipt) throw new Error('Restricted compile report and CompileReceipt output must be different files');
   const result = await runRestrictedCompile({ plan, outputDir });
   await writeFile(trustedReport, `${JSON.stringify(result, null, 2)}\n`);
-  process.stdout.write(`BFS_RESTRICTED_COMPILE ${result.outcome} ${result.breach?.reason ?? 'WITHIN_BUDGET'}\n`);
+  let compileReceipt = null;
+  if (result.outcome === 'PASS') {
+    compileReceipt = await createCompileReceipt({ planPath: resolve(plan), outputDir: resolve(outputDir), budgetReportPath: trustedReport, budgetResult: result });
+    await writeFile(trustedReceipt, `${JSON.stringify(compileReceipt, null, 2)}\n`);
+  }
+  process.stdout.write(`BFS_RESTRICTED_COMPILE ${result.outcome} ${result.breach?.reason ?? 'WITHIN_BUDGET'}${compileReceipt ? ` ${compileReceipt.receiptHash}` : ''}\n`);
   if (result.outcome !== 'PASS') process.exitCode = 1;
 }
 
