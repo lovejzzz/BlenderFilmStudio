@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityReadmissionIndependentAudit.v0.1",
+  "experimentId": "B40-R1",
+  "analysis": {
+    "schemaVersion": "bfs.workerHostCapacityReadmissionAnalysis.v0.1",
+    "passed": false,
+    "failures": [
+      "REPLAY_RESULT_RECORDED"
+    ],
+    "decision": "REPLAY_RESULT_RECORDED"
+  },
+  "attacks": [
+    {
+      "name": "lower the host disk reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower the projected host write",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower host free space without recomputing the decision",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "HOST_DISK_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower host free space and recompute the decision",
+      "expectedFailure": "HOST_DISK_GATE",
+      "observedFailures": [
+        "HOST_DISK_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower VM memory without recomputing the decision",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "VM_MEMORY_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower VM memory and recompute the decision",
+      "expectedFailure": "VM_MEMORY_GATE",
+      "observedFailures": [
+        "VM_MEMORY_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower VM CPUs without recomputing the decision",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "VM_CPU_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower VM CPUs and recompute the decision",
+      "expectedFailure": "VM_CPU_GATE",
+      "observedFailures": [
+        "VM_CPU_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower Docker free space without recomputing the decision",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "DOCKER_STORAGE_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower Docker free space and recompute the decision",
+      "expectedFailure": "DOCKER_STORAGE_GATE",
+      "observedFailures": [
+        "DOCKER_STORAGE_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "add a running container and recompute the decision",
+      "expectedFailure": "COMPETING_CONTAINERS_GATE",
+      "observedFailures": [
+        "COMPETING_CONTAINERS_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "add nonzero swap and recompute the decision",
+      "expectedFailure": "VM_SWAP_GATE",
+      "observedFailures": [
+        "VM_SWAP_GATE",
+        "OVERALL_GATE",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fabricate the x64 emulator registration",
+      "expectedFailure": "EMULATOR_REGISTRATION",
+      "observedFailures": [
+        "EMULATOR_REGISTRATION",
+        "CAPACITY_DECISION",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the B40-C5 evidence hash",
+      "expectedFailure": "ANCESTRY_IDENTITY",
+      "observedFailures": [
+        "ANCESTRY_IDENTITY",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "claim a runtime operation executed",
+      "expectedFailure": "RUNTIME_OPERATION_BOUNDARY",
+      "observedFailures": [
+        "RUNTIME_OPERATION_BOUNDARY",
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark replay failed after hashing",
+      "expectedFailure": "REPLAY_RESULT_RECORDED",
+      "observedFailures": [
+        "REPLAY_RESULT_RECORDED"
+      ],
+      "passed": true
+    }
+  ],
+  "roundTripAnalysisEqual": true,
+  "roundTripAttackVectorEqual": true,
+  "recordedAttacksMatch": false,
+  "passed": false
+}

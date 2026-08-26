@@ -1039,6 +1039,20 @@ Verdict: `WORKER_HOST_CAPACITY_BLOCKED_REPLAY_STABLE`. B41 requires external dis
 
 Artifacts: `experiments/worker-host-capacity-admission-v0-6/results.json`, `experiments/worker-host-capacity-admission-v0-6/audit.json` and `research/2026-08-26-b40-c5-worker-host-capacity-result.md`.
 
+## J-057 · Authorized cleanup, Colima expansion and rejected B40-R1 replay
+
+Type: external-state intervention plus preregistered post-intervention re-admission, rejected replay result, 2026-08-26.
+
+The user explicitly authorized cleanup and Colima expansion, then explicitly added LTX model data to the deletion scope. Six exact non-symlink paths were removed: CourseMapper cache, npm cache, LTXDesktop application support, and three LTX updater/cache directories. Personal video, Blender experiment data and GPT Bot Pilots were not touched. Host free space increased from about 20 GiB to 129 GiB and utilization fell from 98% to 86%; the removed data is not locally recoverable but was classified as re-downloadable cache/model content.
+
+With no running containers, the existing default Colima profile was stopped and resized without deleting it. It restarted under Apple Virtualization Framework as aarch64/Docker with 6 CPU, 12 GiB configured memory and a 20 GiB disk. Direct checks reported six online CPUs, `12513595392` bytes Docker-visible memory, zero swap and `14767869952` bytes free on `/var/lib/docker`.
+
+B40-R1 then measured all seven unchanged capacity gates as accepted and produced the 16/16 expected attack rejections. It nevertheless reported replay failure before persistence. The runner set the hashed replay field to false, emitted `WORKER_HOST_CAPACITY_READMISSION_FAILED`, and the independent audit failed at `REPLAY_RESULT_RECORDED`. The original tool did not preserve a component-level replay delta, so the transient mismatch cannot be reconstructed from the persisted receipt.
+
+Status: `REJECTED_REPLAY_DIAGNOSTIC_GAP`. B40-R2 may change only replay snapshotting, canonical comparison and component-level diagnostics. No container or Blender runtime operation occurred.
+
+Artifacts: `experiments/worker-host-capacity-readmission-v0-1/attempt-1-results.json`, `experiments/worker-host-capacity-readmission-v0-1/attempt-1-audit.json` and `research/2026-08-26-b40-r1-replay-diagnostic-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
