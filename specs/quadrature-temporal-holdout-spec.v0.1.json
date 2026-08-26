@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "documentType": "BFS_QUADRATURE_TEMPORAL_HOLDOUT_SPEC",
+  "version": "0.1.0",
+  "experimentId": "B33-QT-HOLDOUT-v0.1",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOLING_OR_OUTPUTS",
+  "question": "On a disjoint eight-frame sequence, does deterministic Q8 remain near NATURAL32 in scene-linear temporal-error delta while retaining a substantial advantage over deterministic Q4?",
+  "source": {
+    "reviewSpecUri": "specs/review-render-spec.v0.1.json",
+    "reviewSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+  },
+  "evidenceBasis": {
+    "derivationSpecSha256": "5630ed7cc9a43f9f195292296923ff7864625bad6b0dbad4a7eb7b7eeb4ab594",
+    "derivationResultSha256": "78f71f8ae38f8e5ed07dd21611e995a5be4a1870b2bf2ea4316c35c709b720ff",
+    "derivationAnalysisSha256": "e79518fdb53e24371444cdbd80057bbd5e4d092f68fa6ab193f5ef345a982c40",
+    "derivationResearchSha256": "477036a0e71d0e4c8aa955d6b7ae29115d022819729db4354ab93bd679d93c3b",
+    "derivationDecision": "TEMPORAL_DERIVATION_USABLE_FOR_THRESHOLD_FREEZE",
+    "derivationStatus": "EXPLORATORY_DERIVATION_ONLY_NOT_CONFIRMATION"
+  },
+  "runtime": {
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderBinarySha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "engine": "BLENDER_EEVEE",
+    "resolution": [960, 540],
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "motionBlur": false,
+    "dither": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "output": "OPEN_EXR RGBA 32-bit float ZIP"
+  },
+  "design": {
+    "frames": [74, 75, 76, 77, 78, 79, 80, 81],
+    "derivationFramesExcluded": [121, 122, 123, 124, 125, 126, 127, 128],
+    "priorSingleFrameQualityFramesExcluded": [10, 22, 31, 37, 38, 44, 59, 67, 72, 86, 97, 103, 109, 120, 136, 143],
+    "sequenceSemantics": "each cell-replicate launches one fresh Blender process and renders all frames in ascending order inside that process",
+    "natural32": {
+      "samples": 32,
+      "replicates": ["A", "B"],
+      "processes": 2,
+      "renderCalls": 16
+    },
+    "reference1024": {
+      "samples": 1024,
+      "replicates": ["A", "B"],
+      "processes": 2,
+      "renderCalls": 16,
+      "role": "pixelwise-mean reference proxy, not truth"
+    },
+    "quadrature4": {
+      "samplesPerComponent": 32,
+      "points": [[-0.25, -0.25], [-0.25, 0.25], [0.25, -0.25], [0.25, 0.25]],
+      "weights": [0.25, 0.25, 0.25, 0.25],
+      "replicates": ["A", "B"],
+      "processes": 8,
+      "renderCalls": 64
+    },
+    "stratified8": {
+      "samplesPerComponent": 32,
+      "points": [
+        [-0.375, -0.375], [-0.375, 0.125], [-0.125, -0.125], [-0.125, 0.375],
+        [0.125, -0.375], [0.125, 0.125], [0.375, -0.125], [0.375, 0.375]
+      ],
+      "weights": [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
+      "replicates": ["A", "B"],
+      "processes": 16,
+      "renderCalls": 128
+    },
+    "totalProcesses": 28,
+    "totalRenderCalls": 224,
+    "allProcessesMustBeUnique": true,
+    "allOutputsMustBeNew": true,
+    "compositeDomain": "scene-linear RGB"
+  },
+  "analysis": {
+    "referenceAtFrame": "pixelwise mean of REFERENCE1024_A and REFERENCE1024_B",
+    "methodErrorAtFrame": "candidate RGB minus reference RGB",
+    "temporalErrorDelta": "(candidate_t - reference_t) - (candidate_t-1 - reference_t-1)",
+    "spatialEdgeMagnitude": "RGB Euclidean central-difference gradient magnitude on the reference",
+    "spatialEdgeMaskRule": "For both endpoints select exact top 25,920 pixels by magnitude descending then flattened C-row-major index ascending; use their union for the transition.",
+    "motionMagnitude": "RGB Euclidean magnitude of reference_t minus reference_t-1",
+    "motionMaskRule": "Select exact top 25,920 pixels by magnitude descending then flattened C-row-major index ascending.",
+    "topKPixels": 25920,
+    "topKFraction": 0.05,
+    "domains": ["global", "spatialEdgeUnion", "referenceMotionTopK"],
+    "metrics": [
+      "RMSE and maximum absolute temporal error delta per transition and method replicate",
+      "mean replicate RMSE for NATURAL32, Q4 and Q8",
+      "Q4/NATURAL, Q8/NATURAL and Q8/Q4 RMSE ratios in every domain",
+      "REFERENCE1024 A/B temporal residual delta divided by NATURAL32 temporal error-delta mean",
+      "Q4 and Q8 composite A/B exactness per frame and transition",
+      "observed Blender render seconds by cell"
+    ]
+  },
+  "derivationEnvelope": {
+    "q8ToNaturalMaximum": {
+      "global": 0.834362798515899,
+      "spatialEdgeUnion": 0.942484027372143,
+      "referenceMotionTopK": 0.9884720923584172
+    },
+    "q8ToQ4MaximumAcrossAllDomains": 0.5802999711494552,
+    "q8ToQ4LargestDomainMean": 0.5703584328795792,
+    "maximumReferenceReliabilityRatio": 0.007945478828544808
+  },
+  "gates": {
+    "referenceReliabilityRatioMaximumEveryTransitionEveryDomain": 0.05,
+    "q4CompositeABRmseExactEveryFrame": 0.0,
+    "q8CompositeABRmseExactEveryFrame": 0.0,
+    "q4TemporalABRmseExactEveryTransition": 0.0,
+    "q8TemporalABRmseExactEveryTransition": 0.0,
+    "allRatioDenominatorsMustBeFiniteAndPositive": true,
+    "q8ToNaturalMaximumEveryTransition": {
+      "global": 1.0,
+      "spatialEdgeUnion": 1.1,
+      "referenceMotionTopK": 1.1
+    },
+    "q8ToQ4MaximumEveryTransitionEveryDomain": 0.75,
+    "q8ToQ4MeanMaximumEveryDomain": 0.65
+  },
+  "thresholdRationale": {
+    "q8ToNatural": "Frozen round ceilings retain approximately 11-20 percent multiplicative headroom above the domain-specific derivation maxima.",
+    "q8ToQ4EveryTransition": "0.75 retains approximately 29 percent headroom above the derivation maximum of 0.58030.",
+    "q8ToQ4DomainMean": "0.65 retains approximately 14 percent headroom above the largest derivation domain mean of 0.57036.",
+    "q4": "Q4 is measured but has no near-natural gate because the derivation itself observed a material temporal-proxy deficit."
+  },
+  "componentVerdicts": {
+    "reference": ["REFERENCE_RELIABLE", "REFERENCE_UNRELIABLE"],
+    "repeatability": ["Q4_Q8_TEMPORAL_EXACT_REPEATABILITY_SUPPORT", "ENSEMBLE_TEMPORAL_REPEATABILITY_FAILURE"],
+    "q8NearNatural": ["Q8_NEAR_NATURAL_TEMPORAL_PROXY_SUPPORT", "Q8_NEAR_NATURAL_TEMPORAL_PROXY_FAILURE"],
+    "q8Dominance": ["Q8_OVER_Q4_TEMPORAL_DOMINANCE_SUPPORT", "Q8_OVER_Q4_TEMPORAL_DOMINANCE_FAILURE"]
+  },
+  "overallDecision": {
+    "allPositive": "Q8_TEMPORAL_PROXY_HOLDOUT_SUPPORT",
+    "otherwise": "TEMPORAL_PROXY_PARTIAL_OR_FAILURE",
+    "failurePrecedence": [
+      "IDENTITY_OR_DESIGN_INVALID",
+      "REFERENCE_UNRELIABLE",
+      "ENSEMBLE_TEMPORAL_REPEATABILITY_FAILURE",
+      "Q8_NEAR_NATURAL_TEMPORAL_PROXY_FAILURE",
+      "Q8_OVER_Q4_TEMPORAL_DOMINANCE_FAILURE"
+    ]
+  },
+  "attacksRequired": [
+    "wrong spec or derivation evidence-basis hash",
+    "wrong scene, Blender or OCIO identity",
+    "changed frame interval, point set, weights, samples or threads",
+    "missing or duplicate process IDs",
+    "out-of-order, missing or hash-mismatched EXR output",
+    "non-empty work or evidence directory at start",
+    "changed exact-top-k or tie-break rule",
+    "changed reference reliability or repeatability gate",
+    "changed Q8/NATURAL gate",
+    "changed Q8/Q4 gate",
+    "tampered analysis binding",
+    "tampered component or overall decision"
+  ],
+  "nonClaims": [
+    "The dual REFERENCE1024 mean is a reference proxy, not ground truth.",
+    "A temporal-error proxy pass is not proof that flicker is invisible or that motion is cinematic.",
+    "Motion blur is disabled and this holdout covers one scene, eight frames, one Blender build and one machine.",
+    "The experiment does not establish human preference, display-dependent visibility or delivery-codec behavior.",
+    "Q4 has no formal near-natural gate; its measurements remain descriptive.",
+    "Passing does not prove the eight-point layout or equal weights are optimal."
+  ]
+}
