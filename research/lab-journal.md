@@ -694,6 +694,27 @@ Status: `EXPLORATORY_DERIVATION_ONLY_NOT_CONFIRMATION`. No perceptual, temporal,
 
 Artifacts: `experiments/sampling-quality-derivation-v0-1/results.json`, `experiments/sampling-quality-derivation-v0-1/analysis.json` and `research/2026-08-26-b31-sampling-quality-derivation.md`.
 
+## J-032 · Formal fixed-jitter edge-reference cost holdout
+
+Type: pre-registered formal real-Blender quality-proxy holdout, 2026-08-26.
+
+B31 froze four unseen frames, six fresh cell/replicate PIDs, a dual NATURAL1024 reference proxy, top-5-percent RGB-gradient edge masks, a 5% reference reliability ceiling and an all-frame CENTER/NATURAL edge RMSE ratio gate of 1.5 before formal tools or outputs existed.
+
+Formal observation:
+
+- six unique PIDs, 24 EXR32 renders and 23/23 attacks;
+- reference reliability ratios `0`, `0.00045276`, `0`, `0.00055488`, all below `0.05`;
+- CENTER/NATURAL edge RMSE ratios `2.8636`, `2.3717`, `2.1693`, `2.4743`;
+- 4/4 frames exceeded 1.5 and no frame reversed below 1.0;
+- global ratios `1.4005–1.5581`; non-edge ratios `1.0767–1.0907`;
+- CENTER32 A/B float exact on every frame.
+
+Verdict: `EDGE_REFERENCE_COST_SUPPORT`. A fresh factory-startup analyzer rerun reproduced the accepted analysis byte-for-byte. This confirms a scene-linear high-gradient reference-error cost on the frozen holdout, not a calibrated visible-quality multiplier.
+
+The engineering implication is that single-point CENTER should not become a production default merely because it is stable. The next candidate is a deterministic multi-jitter ensemble: several stable fixed-offset renders averaged in scene-linear space, explicitly trading 4×/8× render cost for restored subpixel coverage. It must receive its own derivation, holdout, temporal and human gates.
+
+Artifacts: `experiments/sampling-quality-holdout-v0-1/results.json`, `experiments/sampling-quality-holdout-v0-1/evidence/` and `research/2026-08-26-b31-sampling-quality-holdout-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:

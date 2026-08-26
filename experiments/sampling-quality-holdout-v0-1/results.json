@@ -1,0 +1,932 @@
+{
+  "documentType": "BFS_B31_SAMPLING_QUALITY_HOLDOUT_RESULT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T15:05:43.128Z",
+  "decision": "EDGE_REFERENCE_COST_SUPPORT",
+  "independentDecision": "EDGE_REFERENCE_COST_SUPPORT",
+  "validExperiment": true,
+  "question": "On four unseen frames, does CENTER32 increase scene-linear edge-reference RMSE to at least 1.5 times NATURAL32 on every frame, against a reliable dual independent NATURAL1024 reference proxy?",
+  "design": {
+    "type": "six fresh Blender processes rendering four unseen holdout frames",
+    "holdoutFrames": [
+      10,
+      44,
+      86,
+      120
+    ],
+    "frameSelectionRule": "Selected before formal output; disjoint from B31 derivation frames and B30 frame 38.",
+    "schedule": [
+      "NATURAL32_A",
+      "CENTER32_A",
+      "REFERENCE1024_A",
+      "NATURAL32_B",
+      "CENTER32_B",
+      "REFERENCE1024_B"
+    ],
+    "cells": {
+      "NATURAL32": {
+        "processes": 2,
+        "samples": 32,
+        "overridePixelJitterSample": null
+      },
+      "CENTER32": {
+        "processes": 2,
+        "samples": 32,
+        "overridePixelJitterSample": [
+          0,
+          0
+        ]
+      },
+      "REFERENCE1024": {
+        "processes": 2,
+        "samples": 1024,
+        "overridePixelJitterSample": null
+      }
+    },
+    "processes": 6,
+    "renderCallsPerProcess": 4,
+    "renderCalls": 24,
+    "outputFiles": 24,
+    "selectedBeforeAnyFormalB31Render": true
+  },
+  "humanReview": {
+    "status": "PENDING",
+    "claim": "Scene-linear edge-reference error does not determine perceived aliasing or cinematic quality."
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "b31SpecSha256": "e73d824cf2a1f35efb35584363205a612e624f4c9fe0d481b240dec9cddf6b55",
+    "b30ResultsSha256": "a25be579e1bc4c958962141a32e1b5e50c6cf32a3e352dad5c0d1d71e354e73f",
+    "derivationResultsSha256": "a775834339deccf86d6fa536e2cf97a639f63b8ef2474de647e088231fbcda64",
+    "derivationAnalysisSha256": "b7466732975b7a400e5152b1c734898e5666423df6337e743b2972cecdb206cf",
+    "rendererSha256": "cb5f45723cc3f3ce9239ac9ad7ff5766faaf07fa57f29a1248de5944a279ebed",
+    "analyzerSha256": "6ccd52d027dee50fcb10bd3a413375e8916b7493938f0a733fe7f6f0d37db5e2",
+    "runnerSha256": "042dfe767cc1fc1059106a0f2a1b74e71be0b7641f5aab40037449f17bbbe06b"
+  },
+  "primary": {
+    "referenceProxyReliable": true,
+    "decision": "EDGE_REFERENCE_COST_SUPPORT",
+    "threshold": 1.5,
+    "frames": [
+      {
+        "frame": 10,
+        "referenceReliabilityRatio": 0,
+        "centerToNaturalEdgeRmse": 2.863620267319597
+      },
+      {
+        "frame": 44,
+        "referenceReliabilityRatio": 0.00045275659922594356,
+        "centerToNaturalEdgeRmse": 2.371737554815941
+      },
+      {
+        "frame": 86,
+        "referenceReliabilityRatio": 0,
+        "centerToNaturalEdgeRmse": 2.1692764912336533
+      },
+      {
+        "frame": 120,
+        "referenceReliabilityRatio": 0.000554878413639602,
+        "centerToNaturalEdgeRmse": 2.4742887521123156
+      }
+    ]
+  },
+  "summary": {
+    "framesAtOrAboveCostThreshold": 4,
+    "holdoutFrames": 4,
+    "maximumEdgeCostRatio": 2.863620267319597,
+    "meanEdgeCostRatio": 2.4697307663703767,
+    "minimumEdgeCostRatio": 2.1692764912336533,
+    "reliableFrames": 4
+  },
+  "frames": [
+    {
+      "edgePixels": 25920,
+      "edgeThreshold": 0.016610336788709344,
+      "frame": 10,
+      "methods": {
+        "CENTER32": {
+          "edgeRmseMean": 0.025504858520836726,
+          "globalRmseMean": 0.007372786502192036,
+          "nonEdgeRmseMean": 0.0047939754295870576,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.012071018724284545,
+                "maximumAbsoluteError": 0.30029296875,
+                "rmse": 0.025504858520836726,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0018068900311925284,
+                "maximumAbsoluteError": 0.30029296875,
+                "rmse": 0.007372786502192036,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0012666727315561064,
+                "maximumAbsoluteError": 0.119140625,
+                "rmse": 0.0047939754295870576,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.012071018724284545,
+                "maximumAbsoluteError": 0.30029296875,
+                "rmse": 0.025504858520836726,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0018068900311925284,
+                "maximumAbsoluteError": 0.30029296875,
+                "rmse": 0.007372786502192036,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0012666727315561064,
+                "maximumAbsoluteError": 0.119140625,
+                "rmse": 0.0047939754295870576,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "NATURAL32": {
+          "edgeRmseMean": 0.008906508594000754,
+          "globalRmseMean": 0.004731970483786865,
+          "nonEdgeRmseMean": 0.004403975462423722,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.004775568168349717,
+                "maximumAbsoluteError": 0.10400390625,
+                "rmse": 0.008907064856668772,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0012504671146104365,
+                "maximumAbsoluteError": 0.1123046875,
+                "rmse": 0.0047320228336298125,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.001064935480203106,
+                "maximumAbsoluteError": 0.1123046875,
+                "rmse": 0.004403975462423722,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.00477460585994485,
+                "maximumAbsoluteError": 0.10400390625,
+                "rmse": 0.008905952331332736,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0012504189991901931,
+                "maximumAbsoluteError": 0.1123046875,
+                "rmse": 0.004731918133943917,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.001064935480203106,
+                "maximumAbsoluteError": 0.1123046875,
+                "rmse": 0.004403975462423722,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 5.486570758584105e-8,
+            "maximumAbsoluteError": 0.0068359375,
+            "rmse": 0.000013974287599809958,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "centerToNaturalEdgeRmse": 2.863620267319597,
+        "centerToNaturalGlobalRmse": 1.5580795627219972,
+        "centerToNaturalNonEdgeRmse": 1.088556344260079
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 0,
+          "maximumAbsoluteError": 0,
+          "rmse": 0,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 0,
+          "maximumAbsoluteError": 0,
+          "rmse": 0,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeThreshold": 0.012960751117616973,
+      "frame": 44,
+      "methods": {
+        "CENTER32": {
+          "edgeRmseMean": 0.028364784412855462,
+          "globalRmseMean": 0.008042530138530483,
+          "nonEdgeRmseMean": 0.005073589126133877,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.015120322174496121,
+                "maximumAbsoluteError": 0.341552734375,
+                "rmse": 0.028364784412855462,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.002145016587074892,
+                "maximumAbsoluteError": 0.341552734375,
+                "rmse": 0.008042530138530483,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0014621057666843011,
+                "maximumAbsoluteError": 0.14501953125,
+                "rmse": 0.005073589126133877,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.015120322174496121,
+                "maximumAbsoluteError": 0.341552734375,
+                "rmse": 0.028364784412855462,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.002145016587074892,
+                "maximumAbsoluteError": 0.341552734375,
+                "rmse": 0.008042530138530483,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0014621057666843011,
+                "maximumAbsoluteError": 0.14501953125,
+                "rmse": 0.005073589126133877,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "NATURAL32": {
+          "edgeRmseMean": 0.011959495415190115,
+          "globalRmseMean": 0.005314493016428075,
+          "nonEdgeRmseMean": 0.004711951153839968,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.007147515678601991,
+                "maximumAbsoluteError": 0.1103515625,
+                "rmse": 0.011959495415190115,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.001530896403171398,
+                "maximumAbsoluteError": 0.1162109375,
+                "rmse": 0.005314493016428075,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0012352848623592616,
+                "maximumAbsoluteError": 0.1162109375,
+                "rmse": 0.004711951153839968,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.007147515678601991,
+                "maximumAbsoluteError": 0.1103515625,
+                "rmse": 0.011959495415190115,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.001530896403171398,
+                "maximumAbsoluteError": 0.1162109375,
+                "rmse": 0.005314493016428075,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0012352848623592616,
+                "maximumAbsoluteError": 0.1162109375,
+                "rmse": 0.004711951153839968,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "centerToNaturalEdgeRmse": 2.371737554815941,
+        "centerToNaturalGlobalRmse": 1.5133202948370699,
+        "centerToNaturalNonEdgeRmse": 1.0767490919338571
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 6.436320489326132e-8,
+          "maximumAbsoluteError": 0.0009765625,
+          "rmse": 0.0000054147404726397406,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 2.205617143293467e-8,
+          "maximumAbsoluteError": 0.0029296875,
+          "rmse": 0.0000054191624745793805,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0.00045275659922594356
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeThreshold": 0.013933331190232892,
+      "frame": 86,
+      "methods": {
+        "CENTER32": {
+          "edgeRmseMean": 0.02866781387209699,
+          "globalRmseMean": 0.008778764138661112,
+          "nonEdgeRmseMean": 0.006153691420344682,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.016090676912064415,
+                "maximumAbsoluteError": 0.3408203125,
+                "rmse": 0.02866781387209699,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0027091118239571527,
+                "maximumAbsoluteError": 0.3408203125,
+                "rmse": 0.008778764138661112,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0020048189245830865,
+                "maximumAbsoluteError": 0.1376953125,
+                "rmse": 0.006153691420344682,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.016090676912064415,
+                "maximumAbsoluteError": 0.3408203125,
+                "rmse": 0.02866781387209699,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0027091118239571527,
+                "maximumAbsoluteError": 0.3408203125,
+                "rmse": 0.008778764138661112,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0020048189245830865,
+                "maximumAbsoluteError": 0.1376953125,
+                "rmse": 0.006153691420344682,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "NATURAL32": {
+          "edgeRmseMean": 0.013215380329777046,
+          "globalRmseMean": 0.006268511704686787,
+          "nonEdgeRmseMean": 0.005671899814344429,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.00809852679570516,
+                "maximumAbsoluteError": 0.11279296875,
+                "rmse": 0.013215380329777046,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0020539424878089027,
+                "maximumAbsoluteError": 0.1494140625,
+                "rmse": 0.006268511704686787,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0017358064716038364,
+                "maximumAbsoluteError": 0.1494140625,
+                "rmse": 0.005671899814344429,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.00809852679570516,
+                "maximumAbsoluteError": 0.11279296875,
+                "rmse": 0.013215380329777046,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0020539424878089027,
+                "maximumAbsoluteError": 0.1494140625,
+                "rmse": 0.006268511704686787,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0017358064716038364,
+                "maximumAbsoluteError": 0.1494140625,
+                "rmse": 0.005671899814344429,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "centerToNaturalEdgeRmse": 2.1692764912336533,
+        "centerToNaturalGlobalRmse": 1.4004542947726302,
+        "centerToNaturalNonEdgeRmse": 1.0849436029849797
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 0,
+          "maximumAbsoluteError": 0,
+          "rmse": 0,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 0,
+          "maximumAbsoluteError": 0,
+          "rmse": 0,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeThreshold": 0.015579720541243734,
+      "frame": 120,
+      "methods": {
+        "CENTER32": {
+          "edgeRmseMean": 0.03591648985194172,
+          "globalRmseMean": 0.010850499116958132,
+          "nonEdgeRmseMean": 0.0074856788830319956,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.01871954286049423,
+                "maximumAbsoluteError": 0.478515625,
+                "rmse": 0.03591648985194172,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003539878036750197,
+                "maximumAbsoluteError": 0.478515625,
+                "rmse": 0.010850499116958132,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0027409483091847217,
+                "maximumAbsoluteError": 0.166015625,
+                "rmse": 0.0074856788830319956,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.01871954286049423,
+                "maximumAbsoluteError": 0.478515625,
+                "rmse": 0.03591648985194172,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003539878036750197,
+                "maximumAbsoluteError": 0.478515625,
+                "rmse": 0.010850499116958132,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0027409483091847217,
+                "maximumAbsoluteError": 0.166015625,
+                "rmse": 0.0074856788830319956,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "NATURAL32": {
+          "edgeRmseMean": 0.014515884543095301,
+          "globalRmseMean": 0.007435219105402696,
+          "nonEdgeRmseMean": 0.006863092592910638,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.008904800518059437,
+                "maximumAbsoluteError": 0.12548828125,
+                "rmse": 0.014515884543095301,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0027439658484831758,
+                "maximumAbsoluteError": 0.173828125,
+                "rmse": 0.007435219105402696,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0024197113921896884,
+                "maximumAbsoluteError": 0.173828125,
+                "rmse": 0.006863092592910638,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.008904800518059437,
+                "maximumAbsoluteError": 0.12548828125,
+                "rmse": 0.014515884543095301,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0027439658484831758,
+                "maximumAbsoluteError": 0.173828125,
+                "rmse": 0.007435219105402696,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0024197113921896884,
+                "maximumAbsoluteError": 0.173828125,
+                "rmse": 0.006863092592910638,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "centerToNaturalEdgeRmse": 2.4742887521123156,
+        "centerToNaturalGlobalRmse": 1.4593381799702139,
+        "centerToNaturalNonEdgeRmse": 1.0907151232032728
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 2.0152747385786393e-7,
+          "maximumAbsoluteError": 0.00048828125,
+          "rmse": 0.00000805455098784834,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 1.0076373692893197e-8,
+          "maximumAbsoluteError": 0.00048828125,
+          "rmse": 0.0000018010523537066972,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0.000554878413639602
+      }
+    }
+  ],
+  "aggregate": {
+    "uniqueProcesses": 6,
+    "renderProcesses": 6,
+    "renderCalls": 24,
+    "outputFiles": 24,
+    "totalRenderSeconds": 29.381863,
+    "attacksPassed": 23,
+    "attacksTotal": 23
+  },
+  "processLedger": [
+    {
+      "orderIndex": 0,
+      "replicateId": "NATURAL32_A",
+      "cell": "NATURAL32",
+      "replicate": "A",
+      "processId": 52193,
+      "frames": [
+        10,
+        44,
+        86,
+        120
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "9c39a256a677e7b619aae9bd74591b0061886dac0941bdfd63cffbb31519b38d",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "a0e7d54eb4fef081b460a32d56bfc300b0b78722f39df4a1b0fbd23f5bc0d4c2"
+    },
+    {
+      "orderIndex": 1,
+      "replicateId": "CENTER32_A",
+      "cell": "CENTER32",
+      "replicate": "A",
+      "processId": 52194,
+      "frames": [
+        10,
+        44,
+        86,
+        120
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "bf9ecf9c9d267197665d8fc09ae703916aa939f67874f73d1da0a4db049b744d",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "0c5e97249c9c65eb88635fa1519ed735777cd7a7c8e348b17d2acf7b7449335c"
+    },
+    {
+      "orderIndex": 2,
+      "replicateId": "REFERENCE1024_A",
+      "cell": "REFERENCE1024",
+      "replicate": "A",
+      "processId": 52199,
+      "frames": [
+        10,
+        44,
+        86,
+        120
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "73d843aead2e9fc6e1c89f15dc19fc9945c15e0801b002e066d7f9edca63e0d7",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "8cc9b324a63f578c513799cbe8ae530ea9ab3a3b666023ce777b294650402204"
+    },
+    {
+      "orderIndex": 3,
+      "replicateId": "NATURAL32_B",
+      "cell": "NATURAL32",
+      "replicate": "B",
+      "processId": 52208,
+      "frames": [
+        10,
+        44,
+        86,
+        120
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "e19a46351715b002a8fbca57cef20b288648df802b7604d6651bcef53f20f859",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "f236f70589a28072cd3493ee7a3c4b52ff9721541b7e148b8fb866efc1c0cb7c"
+    },
+    {
+      "orderIndex": 4,
+      "replicateId": "CENTER32_B",
+      "cell": "CENTER32",
+      "replicate": "B",
+      "processId": 52213,
+      "frames": [
+        10,
+        44,
+        86,
+        120
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "3a32a9aaa5a5761d94152d703faa50ff1d02e66607b5ee083a5cf0117fd560d6",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "83a155dae152279dd0dbf27a8fa5c537efd8824cd7fe7183206b1bf365e9b816"
+    },
+    {
+      "orderIndex": 5,
+      "replicateId": "REFERENCE1024_B",
+      "cell": "REFERENCE1024",
+      "replicate": "B",
+      "processId": 52214,
+      "frames": [
+        10,
+        44,
+        86,
+        120
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "9d909f3fd8cda9163278ee314eff5b735918bf8170e4fda055123421bc62d2be",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "9d5e27cc01c4dcfd0071aea3b3cacffe60b9f29c989fcbdd74ae7ca220c3021b"
+    }
+  ],
+  "attacks": [
+    {
+      "id": "N_B31_SPEC_IDENTITY",
+      "expected": "B31_SPEC_SHA",
+      "observed": "B31_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B30_IDENTITY",
+      "expected": "B30_IDENTITY",
+      "observed": "B30_IDENTITY",
+      "pass": true
+    },
+    {
+      "id": "N_DERIVATION_IDENTITY",
+      "expected": "DERIVATION_IDENTITY",
+      "observed": "DERIVATION_IDENTITY",
+      "pass": true
+    },
+    {
+      "id": "N_DERIVATION_TOOLS",
+      "expected": "DERIVATION_TOOLS",
+      "observed": "DERIVATION_TOOLS",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SPEC",
+      "expected": "REVIEW_SPEC_SHA",
+      "observed": "REVIEW_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER",
+      "expected": "BLENDER_SHA",
+      "observed": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO",
+      "expected": "OCIO_SHA",
+      "observed": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE",
+      "expected": "SCENE_SHA",
+      "observed": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PLAN_STRUCTURE",
+      "expected": "PLAN_STRUCTURE",
+      "observed": "PLAN_STRUCTURE",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR",
+      "expected": "CONFIGURATOR_SHA",
+      "observed": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER",
+      "expected": "RENDERER_SHA",
+      "observed": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_ANALYZER",
+      "expected": "ANALYZER_SHA",
+      "observed": "ANALYZER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RUNNER",
+      "expected": "RUNNER_SHA",
+      "observed": "RUNNER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SOURCE_CONTROLS",
+      "expected": "SOURCE_CONTROLS",
+      "observed": "SOURCE_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_CELL_CONTROLS",
+      "expected": "CELL_CONTROLS",
+      "observed": "CELL_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_SCHEDULE",
+      "expected": "SCHEDULE",
+      "observed": "SCHEDULE",
+      "pass": true
+    },
+    {
+      "id": "N_PID_BINDING",
+      "expected": "PID_BINDING",
+      "observed": "PID_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FRAME_RENDER_ORDER",
+      "expected": "FRAME_RENDER_ORDER",
+      "observed": "FRAME_RENDER_ORDER",
+      "pass": true
+    },
+    {
+      "id": "N_EXR_LAYOUT_FINITE",
+      "expected": "EXR_LAYOUT_FINITE",
+      "observed": "EXR_LAYOUT_FINITE",
+      "pass": true
+    },
+    {
+      "id": "N_OUTPUT_BINDING",
+      "expected": "OUTPUT_BINDING",
+      "observed": "OUTPUT_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_ANALYSIS_BINDING",
+      "expected": "ANALYSIS_BINDING",
+      "observed": "ANALYSIS_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FROZEN_CONTRACT",
+      "expected": "FROZEN_CONTRACT",
+      "observed": "FROZEN_CONTRACT",
+      "pass": true
+    },
+    {
+      "id": "N_HUMAN_REVIEW",
+      "expected": "HUMAN_REVIEW",
+      "observed": "HUMAN_REVIEW",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "processLedger": "experiments/sampling-quality-holdout-v0-1/evidence/process-ledger.json",
+    "analysisIndex": "experiments/sampling-quality-holdout-v0-1/evidence/analysis-index.json",
+    "analysis": "experiments/sampling-quality-holdout-v0-1/evidence/quality-analysis.json",
+    "binding": "experiments/sampling-quality-holdout-v0-1/evidence/analysis-binding.json",
+    "manifests": {
+      "NATURAL32_A": "experiments/sampling-quality-holdout-v0-1/evidence/NATURAL32_A.manifest.json",
+      "CENTER32_A": "experiments/sampling-quality-holdout-v0-1/evidence/CENTER32_A.manifest.json",
+      "REFERENCE1024_A": "experiments/sampling-quality-holdout-v0-1/evidence/REFERENCE1024_A.manifest.json",
+      "NATURAL32_B": "experiments/sampling-quality-holdout-v0-1/evidence/NATURAL32_B.manifest.json",
+      "CENTER32_B": "experiments/sampling-quality-holdout-v0-1/evidence/CENTER32_B.manifest.json",
+      "REFERENCE1024_B": "experiments/sampling-quality-holdout-v0-1/evidence/REFERENCE1024_B.manifest.json"
+    }
+  },
+  "nonClaims": [
+    "A dual NATURAL1024 mean is a stable reference proxy in derivation, not ground truth or a spatially supersampled reference.",
+    "Larger scene-linear edge-reference RMSE does not by itself prove visible aliasing, worse perceived sharpness or lower cinematic quality.",
+    "The top-5-percent gradient ROI is a frozen numerical edge proxy, not a semantic object boundary or calibrated contrast-sensitivity model.",
+    "Four holdout frames test this animated scene at fixed times; they do not establish a universal Blender, Eevee, GPU or content bound.",
+    "CENTER stability and edge-reference cost may coexist; neither endpoint cancels the other.",
+    "Human review and temporal playback remain PENDING separate gates."
+  ]
+}
