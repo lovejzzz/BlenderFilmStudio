@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/human-review-response.v0.1.schema.json",
+  "title": "BFS B04 Human Review Response v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentType", "protocolVersion", "clipId", "reviewerCode", "submittedAtUtc", "watchedTwice", "answers", "privacy"],
+  "properties": {
+    "documentType": { "const": "BFS_HUMAN_REVIEW_RESPONSE" },
+    "protocolVersion": { "const": "0.1.0" },
+    "clipId": { "const": "CLIP_A17F" },
+    "reviewerCode": { "type": "string", "pattern": "^[A-Za-z0-9_-]{3,24}$" },
+    "submittedAtUtc": { "type": "string", "format": "date-time" },
+    "watchedTwice": { "const": true },
+    "answers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approachNaturalness", "supportReadability", "distractingIntersection", "visiblePop", "weightCoherence", "overallAcceptance", "note"],
+      "properties": {
+        "approachNaturalness": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "supportReadability": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "distractingIntersection": { "enum": ["YES", "NO", "UNSURE"] },
+        "visiblePop": { "enum": ["YES", "NO", "UNSURE"] },
+        "weightCoherence": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "overallAcceptance": { "enum": ["PASS", "FAIL", "UNSURE"] },
+        "note": { "type": "string", "maxLength": 500 }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transmitted", "personalDataRequested"],
+      "properties": {
+        "transmitted": { "const": false },
+        "personalDataRequested": { "const": false }
+      }
+    }
+  }
+}

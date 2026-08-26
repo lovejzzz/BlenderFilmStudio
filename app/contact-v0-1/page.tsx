@@ -96,6 +96,7 @@ export default function ContactV01Page() {
         <div className="section-index">06 / 当前停止门槛</div>
         <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> EXPERIMENT COMPLETE = FALSE</p><h2>自动化完成。<br /><span>研究尚未完成。</span></h2></div><p>预注册要求机器通过与人类盲审同时成立。当前预览已经足以提示抓取视觉仍不自然，因此不能把 B04 写成“可信接触已解决”。下一步应建立可重复的人类审查表，并升级手指/接触表示。</p></div>
         <div className="contact-gates"><article><span>DONE</span><b>合同 / 哈希 / 双构建</b></article><article><span>DONE</span><b>10 项求值 / 8 个反例</b></article><article className="pending"><span>PENDING</span><b>盲化人类审查</b></article><article className="blocked"><span>NOT PROVEN</span><b>可信手指抓握与重量感</b></article></div>
+        <div className="contact-review-action"><div><span>INDEPENDENT REVIEW · NO METRICS</span><b>如果你尚未看过本页数据，可以参加 CLIP_A17F 盲审。</b><p>独立页面只显示 6 秒视频和固定问题，答案下载为本地 JSON，不会上传个人信息。</p></div><Link href="/review-b04">打开盲审页面 →</Link></div>
         <div className="contact-artifacts"><a href={`${repo}research/2026-08-26-b04-contact-benchmark-protocol.md`}><span>PROTOCOL</span><b>预注册实验协议 ↗</b></a><a href={`${repo}specs/scene-spec.v0.3.schema.json`}><span>CONTRACT</span><b>SceneSpec v0.3 Schema ↗</b></a><a href={`${repo}experiments/contact-v0-1/results.json`}><span>RAW RESULT</span><b>实验结果与反例 ↗</b></a><a href={`${repo}experiments/contact-v0-1/B04.contact-evaluation.json`}><span>144 FRAMES</span><b>逐帧求值记录 ↗</b></a></div>
       </section>
 
