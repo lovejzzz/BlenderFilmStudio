@@ -388,6 +388,20 @@ Protocol: `research/2026-08-26-b21-dual-output-localization-protocol.md`.
 
 Status at freeze: the formal B21 renderer, comparator and runner do not exist; no B21 frame has been rendered. Direct `Image.pixels` access remains explicitly excluded.
 
+Three candidates were rejected before the accepted run. Two incorrectly required `Render Result.has_data=true` before the first save; the second also disproved a tentative filepath explanation. The third produced correct files but a Node validator compared serialized object key order instead of fields. All three stopped without an accepted result; the frozen gates did not change.
+
+Formal execution observation:
+
+- 36 unique Blender PIDs made exactly 36 render calls and 72 saves;
+- EXR32 scene-linear: 21/36 decoded pairs exact, 328 failed pixels, maximum error `0.00634765625` linear units;
+- PNG8 display output: 21/36 exact, 94 failed pixels, maximum error approximately one code value;
+- all 36 EXR exact/non-exact pair labels matched the corresponding PNG labels;
+- 21/21 attacks reached their frozen reason.
+
+Verdict: `PRE_PNG_VARIATION_SUPPORT`. Variation is already present at the scene-linear float EXR boundary; the ACES display transform / PNG8 output path is not its sufficient origin. High bit depth preserves more differences but does not create determinism. The next causal candidate is the exposed fixed render-thread count, with an explicit caveat that Eevee GPU evaluation may not obey it.
+
+Artifacts: `experiments/dual-output-localization-v0-1/results.json`, `experiments/dual-output-localization-v0-1/evidence/` and `research/2026-08-26-b21-dual-output-localization-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:
