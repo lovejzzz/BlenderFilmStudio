@@ -1,0 +1,158 @@
+{
+  "documentType": "BFS_B07_TRAJECTORY_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T06:54:11.972Z",
+  "environment": {
+    "blender": "5.2.0 LTS",
+    "platform": "darwin-arm64",
+    "node": "v26.5.0"
+  },
+  "trajectory": {
+    "uri": "specs/benchmarks/B07.trajectory.json",
+    "sha256": "c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146",
+    "selectionStatus": "TECHNICAL_CANONICAL_CANDIDATE_NOT_HUMAN_APPROVED",
+    "source": {
+      "experiment": "B06_PHYSICS_V0_1",
+      "structureSha256": "e18e4d1d15f9f97890354ce5807f4bdce6ed9c74b507e17c8df0c77d14fdfb6e",
+      "evaluationUri": "experiments/physics-v0-1/B06.final-evaluation.json",
+      "evaluationSha256": "90dee5925b528454e90b84d1bef66519224f9ab8e409cf814b3161c9d3dbe4bd"
+    }
+  },
+  "cleanBuilds": {
+    "runs": [
+      {
+        "label": "positive-a",
+        "structureHash": "0d41d623726acc6f77a84705c683381bd2b0b86e45c5d49e8b96e9974aae1b15",
+        "blendSha256": "127e8e9d680c7baaf82fcc0d169c135782133299ffe87e070c3e57d1e89f1ec8"
+      },
+      {
+        "label": "positive-b",
+        "structureHash": "0d41d623726acc6f77a84705c683381bd2b0b86e45c5d49e8b96e9974aae1b15",
+        "blendSha256": "d079585f20259a8538ca2ea3800652109eefccbeafe15add3b779a8774fec27d"
+      }
+    ],
+    "structureHashesEqual": true,
+    "blendSha256Equal": false
+  },
+  "evaluation": {
+    "passed": true,
+    "measurements": {
+      "maximumPositionErrorM": 0,
+      "maximumRotationErrorDeg": 0
+    },
+    "checks": [
+      {
+        "id": "B07_C01_PINNED_SHA",
+        "pass": true,
+        "observed": "c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146",
+        "threshold": "c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146"
+      },
+      {
+        "id": "B07_C02_POSITION_REPLAY",
+        "pass": true,
+        "observed": 0,
+        "threshold": 1e-7
+      },
+      {
+        "id": "B07_C03_ROTATION_REPLAY",
+        "pass": true,
+        "observed": 0,
+        "threshold": 0.00001
+      },
+      {
+        "id": "B07_C04_NO_PHYSICS_SHORTCUT",
+        "pass": true,
+        "observed": {
+          "rigidBody": false,
+          "parent": null,
+          "constraints": 0,
+          "drivers": 0
+        },
+        "threshold": "physics-disabled independent replay"
+      }
+    ]
+  },
+  "negativeTests": [
+    {
+      "id": "N01_WRONG_FILE_HASH",
+      "layer": "REPLAY_BUILD",
+      "rejected": true,
+      "expected": "Trajectory hash mismatch",
+      "observed": "BFS_B07_REPLAY_BUILD_ERROR Trajectory hash mismatch: expected 0000000000000000000000000000000000000000000000000000000000000000, received c4efaf29535ca926a5e07014d50d1d4be2007fd5075b148687cb2e81e3caf146"
+    },
+    {
+      "id": "N02_MISSING_SAMPLE",
+      "layer": "REPLAY_BUILD",
+      "rejected": true,
+      "expected": "cover frames 1-132 exactly once",
+      "observed": "BFS_B07_REPLAY_BUILD_ERROR Trajectory samples must cover frames 1-132 exactly once in order"
+    },
+    {
+      "id": "N03_DUPLICATE_FRAME",
+      "layer": "REPLAY_BUILD",
+      "rejected": true,
+      "expected": "cover frames 1-132 exactly once",
+      "observed": "BFS_B07_REPLAY_BUILD_ERROR Trajectory samples must cover frames 1-132 exactly once in order"
+    },
+    {
+      "id": "N04_BAD_QUATERNION",
+      "layer": "REPLAY_BUILD",
+      "rejected": true,
+      "expected": "quaternion is not normalized",
+      "observed": "BFS_B07_REPLAY_BUILD_ERROR Trajectory quaternion is not normalized at frame 61"
+    },
+    {
+      "id": "N05_SOURCE_HASH_MISMATCH",
+      "layer": "REPLAY_BUILD",
+      "rejected": true,
+      "expected": "source evaluation hash mismatch",
+      "observed": "BFS_B07_REPLAY_BUILD_ERROR Trajectory source evaluation hash mismatch"
+    },
+    {
+      "id": "N06_RIGID_BODY_SHORTCUT",
+      "layer": "REPLAY_EVALUATION",
+      "rejected": true,
+      "expected": "B07_C04_NO_PHYSICS_SHORTCUT=false",
+      "observed": {
+        "id": "B07_C04_NO_PHYSICS_SHORTCUT",
+        "pass": false,
+        "observed": {
+          "rigidBody": true,
+          "parent": null,
+          "constraints": 0,
+          "drivers": 0
+        },
+        "threshold": "physics-disabled independent replay"
+      }
+    },
+    {
+      "id": "N07_KEY_MUTATION",
+      "layer": "REPLAY_EVALUATION",
+      "rejected": true,
+      "expected": "B07_C02_POSITION_REPLAY=false",
+      "observed": {
+        "id": "B07_C02_POSITION_REPLAY",
+        "pass": false,
+        "observed": 0.099999994226,
+        "threshold": 1e-7
+      }
+    },
+    {
+      "id": "N08_UNDECLARED_TARGET",
+      "layer": "REPLAY_BUILD",
+      "rejected": true,
+      "expected": "Undeclared trajectory target or space",
+      "observed": "BFS_B07_REPLAY_BUILD_ERROR Undeclared trajectory target or space"
+    }
+  ],
+  "allAutomatedChecksPassed": true,
+  "formalB07Complete": false,
+  "remainingGates": [
+    "immutable BuildPlan integration",
+    "source-solve visual and authentic human approval"
+  ],
+  "explicitNonClaims": [
+    "Exact replay does not validate or make deterministic the source Bullet solve.",
+    "The source trajectory remains a technical candidate without human approval."
+  ]
+}
