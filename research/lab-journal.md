@@ -1103,8 +1103,6 @@ A read-only probe found buildx `v0.34.1` inside the Colima VM. Status: `REJECTED
 
 Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-3/` and `research/2026-08-26-b41-c2-legacy-builder-platform-failure.md`.
 
-## Active goal experimental contract
-
 ## J-062 · B41-C3 proves amd64 transport and falsifies cross-platform binary identity
 
 Type: preregistered build-transport correction, valid pre-runtime rejection with failed frozen audit, 2026-08-26.
@@ -1118,6 +1116,8 @@ The frozen independent audit matched all tool hashes but reported artifact misma
 Next: preregister a read-only Linux binary identity derivation from the already authenticated official archive, then bind that derived identity in a narrow runtime correction. The B38 macOS identity remains unchanged.
 
 Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-4/` and `research/2026-08-26-b41-c3-linux-binary-identity-failure.md`.
+
+## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
 

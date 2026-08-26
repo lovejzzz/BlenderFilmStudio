@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityDerivation.v0.1",
+  "experimentId": "B41-D1",
+  "status": "PREREGISTERED_BEFORE_DERIVATION_TOOLING_OR_OUTPUT",
+  "question": "What is the SHA-256 identity of the Blender executable member inside the already authenticated official Blender 5.2.0 Linux x64 archive?",
+  "parent": {
+    "b41C3SpecSha256": "d8f3ebca7c181bdced580f3bd588825a246fc80dcd94a352dc536738e3adad9f",
+    "b41C3PreregistrationCommit": "5ceb0e79b9b4afcc96fccd55212394334ca71a77",
+    "b41C3ToolFreezeCommit": "fac9ab8493ce4dedbec5bf282c24f53b3f3d52cf",
+    "failedResultSha256": "52030d29021274d5f2ca3444d0d52273ce6faff02661d51483b02cd69119aae6",
+    "failedAuditSha256": "9a7f8bab1b4ae74a7672494db57baa1994a48807b3bfec615dae35ad954d06b1",
+    "failure": "REJECTED_CROSS_PLATFORM_BINARY_IDENTITY_AND_AUDIT_PRE_RUNTIME_ASSUMPTION"
+  },
+  "artifact": {
+    "url": "https://download.blender.org/release/Blender5.2/blender-5.2.0-linux-x64.tar.xz",
+    "filename": "blender-5.2.0-linux-x64.tar.xz",
+    "bytes": 384441228,
+    "sha256": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48",
+    "member": "blender-5.2.0-linux-x64/blender"
+  },
+  "derivation": {
+    "hostMethod": "Stream the exact member through host bsdtar into Node SHA-256 while recording its first 64 bytes and byte count",
+    "guestMethod": "Stream the same exact member through GNU tar inside the existing Colima guest into sha256sum and wc -c",
+    "requiredAgreement": ["sha256", "bytes"],
+    "requiredElf": {
+      "magicHex": "7f454c46",
+      "class": "ELF64",
+      "endianness": "little",
+      "machine": "x86-64",
+      "machineCode": 62
+    },
+    "invokeExecutable": false,
+    "dockerBuild": false,
+    "containerRun": false
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "21474836480"
+  },
+  "acceptance": {
+    "archiveIdentityExact": true,
+    "memberAppearsExactlyOnce": true,
+    "hostGuestDerivationsAgree": true,
+    "executableSha256Pattern": "^[a-f0-9]{64}$",
+    "executableBytesPositive": true,
+    "elfIdentityExact": true,
+    "temporaryArchiveRemoved": true,
+    "runtimeOperationsExecutedExact": ["ARCHIVE_DOWNLOAD", "HOST_MEMBER_STREAM", "COLIMA_GUEST_MEMBER_STREAM"],
+    "attacks": [
+      {"id": "archive-sha", "expectedFailure": "ARCHIVE_IDENTITY"},
+      {"id": "archive-bytes", "expectedFailure": "ARCHIVE_IDENTITY"},
+      {"id": "member-cardinality", "expectedFailure": "MEMBER_IDENTITY"},
+      {"id": "guest-hash", "expectedFailure": "DERIVATION_AGREEMENT"},
+      {"id": "guest-bytes", "expectedFailure": "DERIVATION_AGREEMENT"},
+      {"id": "elf-machine", "expectedFailure": "ELF_IDENTITY"},
+      {"id": "temp-retained", "expectedFailure": "CLEANUP_BOUNDARY"},
+      {"id": "runtime-op", "expectedFailure": "OPERATION_BOUNDARY"}
+    ]
+  },
+  "acceptedVerdict": "LINUX_AMD64_BLENDER_EXECUTABLE_IDENTITY_DERIVED",
+  "nonClaims": [
+    "B41-D1 derives identity and does not execute Blender",
+    "An ELF x86-64 identity does not prove runtime compatibility, rendering or containment",
+    "The derived Linux identity does not replace historical macOS Blender identities",
+    "A later preregistered correction must bind the derived value before any runtime claim"
+  ]
+}
