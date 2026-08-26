@@ -1105,6 +1105,20 @@ Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-3/` and `research/
 
 ## Active goal experimental contract
 
+## J-062 · B41-C3 proves amd64 transport and falsifies cross-platform binary identity
+
+Type: preregistered build-transport correction, valid pre-runtime rejection with failed frozen audit, 2026-08-26.
+
+Colima guest buildx `v0.34.1` and BuildKit `v0.30.0` executed the same Dockerfile as `linux/amd64`. The apt trace now installed `:amd64` packages, and the official `384441228`-byte archive passed its frozen SHA-256 check inside the build.
+
+The next check compared the extracted Linux executable with `60ba7a9b…129f2`, which is the local macOS Blender executable identity inherited from B38. The check correctly failed. No final image, container or Blender process existed, so neither runtime canary ran.
+
+The frozen independent audit matched all tool hashes but reported artifact mismatch because it requires PNG and `.blend` objects even for a build-stage rejection. That audit remains failed. Status: `REJECTED_CROSS_PLATFORM_BINARY_IDENTITY_AND_AUDIT_PRE_RUNTIME_ASSUMPTION`.
+
+Next: preregister a read-only Linux binary identity derivation from the already authenticated official archive, then bind that derived identity in a narrow runtime correction. The B38 macOS identity remains unchanged.
+
+Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-4/` and `research/2026-08-26-b41-c3-linux-binary-identity-failure.md`.
+
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
 
 1. preregister the falsifiable question, variables, controls, thresholds and rejection conditions before creating the tested tool or output;
