@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "bfs.linuxWorkerArchitecturePreflightIndependentAudit.v0.2",
+  "experimentId": "B39-C1",
+  "analysis": {
+    "schemaVersion": "bfs.linuxWorkerArchitecturePreflightAnalysis.v0.2",
+    "passed": true,
+    "failures": [],
+    "decision": "ARCHITECTURE_PREFLIGHT_CORRECTION_SUPPORT_RUNTIME_BLOCKED"
+  },
+  "attacks": [
+    {
+      "name": "restore the rejected raw occurrence assumption",
+      "expectedFailure": "X64_CORRECTED_IDENTITY",
+      "observedFailures": [
+        "X64_CORRECTED_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "remove the unique exact href target",
+      "expectedFailure": "X64_CORRECTED_IDENTITY",
+      "observedFailures": [
+        "X64_CORRECTED_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fabricate an official Linux arm64 href target",
+      "expectedFailure": "ARM64_ARTIFACT_ABSENCE",
+      "observedFailures": [
+        "ARM64_ARTIFACT_ABSENCE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the official x64 byte count",
+      "expectedFailure": "X64_CORRECTED_IDENTITY",
+      "observedFailures": [
+        "X64_CORRECTED_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the official x64 SHA-256",
+      "expectedFailure": "X64_CORRECTED_IDENTITY",
+      "observedFailures": [
+        "X64_CORRECTED_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "label linux/amd64 as native arm64",
+      "expectedFailure": "ROUTE_DECISION",
+      "observedFailures": [
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "promote best-effort emulation to production",
+      "expectedFailure": "ROUTE_DECISION",
+      "observedFailures": [
+        "ROUTE_DECISION",
+        "X64_ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the observed host architecture",
+      "expectedFailure": "HOST_ARCHITECTURE",
+      "observedFailures": [
+        "HOST_ARCHITECTURE",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the observed Colima architecture",
+      "expectedFailure": "COLIMA_IDENTITY",
+      "observedFailures": [
+        "COLIMA_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the observed Docker architecture",
+      "expectedFailure": "DOCKER_IDENTITY",
+      "observedFailures": [
+        "DOCKER_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "remove a required Docker security option",
+      "expectedFailure": "DOCKER_SECURITY_OPTIONS",
+      "observedFailures": [
+        "DOCKER_SECURITY_OPTIONS",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark below-reserve disk admission accepted",
+      "expectedFailure": "DISK_ADMISSION_DECISION",
+      "observedFailures": [
+        "DISK_ADMISSION_DECISION",
+        "DISK_ADMISSION_EXPECTED_STATE",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "claim that a runtime operation executed",
+      "expectedFailure": "RUNTIME_OPERATION_BOUNDARY",
+      "observedFailures": [
+        "RUNTIME_OPERATION_BOUNDARY"
+      ],
+      "passed": true
+    },
+    {
+      "name": "materialize an unpinned worker image",
+      "expectedFailure": "FUTURE_RUNTIME_STATE",
+      "observedFailures": [
+        "FUTURE_RUNTIME_STATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark B40 complete before separate preregistration",
+      "expectedFailure": "FUTURE_RUNTIME_STATE",
+      "observedFailures": [
+        "FUTURE_RUNTIME_STATE"
+      ],
+      "passed": true
+    }
+  ],
+  "recordedAttacksMatch": true,
+  "passed": true
+}

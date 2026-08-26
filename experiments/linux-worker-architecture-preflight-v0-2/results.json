@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "bfs.linuxWorkerArchitecturePreflightEvidence.v0.2",
+  "experimentId": "B39-C1",
+  "status": "CORRECTED_READ_ONLY_PREFLIGHT_COMPLETE_NO_RUNTIME_OPERATION",
+  "preregistration": {
+    "commit": "9c4260d527736f9ac5301d12d226b9be6bb080ce",
+    "specSha256": "775ba7436c385cf5175fc3d1e792f25d164dd50d91ff2166f4a3cc30aef4595e"
+  },
+  "correctionFrom": {
+    "experimentId": "B39",
+    "verdict": "X64_INDEX_IDENTITY",
+    "resultSha256": "b4e709f565427fe96478c29bf9ca21c2ea93d7d1e5fb45828f498d6e71728e73",
+    "auditSha256": "16b081cf56731bbc2f99e817ec9d64440244718caf6cf6ec99846472e674c2b5",
+    "changedAssumptionExact": "Replace x64 raw filename occurrences == 1 with raw filename occurrences == 2 and exact href target occurrences == 1",
+    "unchangedGateCount": 14,
+    "parentResultObservedSha256": "b4e709f565427fe96478c29bf9ca21c2ea93d7d1e5fb45828f498d6e71728e73",
+    "parentAuditObservedSha256": "16b081cf56731bbc2f99e817ec9d64440244718caf6cf6ec99846472e674c2b5"
+  },
+  "toolFreezeCommit": "57daa34a510fb83167c5c9cda98cee65f4538091",
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b39-c1-index-parser-correction.mjs",
+      "sha256": "9a20c78d0d12f8f6ce7e5a94af9235d7a9c613dd17a0f43519b0288b52fa0e7e"
+    },
+    "library": {
+      "uri": "scripts/lib/b39-c1-index-parser-correction.mjs",
+      "sha256": "ed9162b904417d188a9311c7e7bfce74c387f7667d078aaafca761f80ff5d6fd"
+    },
+    "audit": {
+      "uri": "scripts/audit-b39-c1-index-parser-correction.mjs",
+      "sha256": "d7a04b3c4d9a2a59f9870b01cc1a259adcdabbabb5cfc453ba61b63b921e4337"
+    }
+  },
+  "sources": {
+    "releaseIndexUrl": "https://download.blender.org/release/Blender5.2/",
+    "checksumUrl": "https://download.blender.org/release/Blender5.2/blender-5.2.0.sha256"
+  },
+  "probeTrace": [
+    "HOST_UNAME",
+    "COLIMA_STATUS",
+    "DOCKER_SERVER_VERSION",
+    "DOCKER_ARCH_SECURITY",
+    "DOCKER_EXISTING_IMAGE_INSPECT",
+    "BLENDER_RELEASE_INDEX_HTTPS",
+    "BLENDER_SHA256_MANIFEST_HTTPS",
+    "HOST_STATFS"
+  ],
+  "runtimeOperationsExecuted": [],
+  "observations": {
+    "officialArtifacts": {
+      "x64": {
+        "filename": "blender-5.2.0-linux-x64.tar.xz",
+        "platform": "linux/amd64",
+        "rawFilenameOccurrences": 2,
+        "exactHrefTargetOccurrences": 1,
+        "checksumOccurrences": 1,
+        "bytes": 384441228,
+        "sha256": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48"
+      },
+      "arm64": {
+        "filename": "blender-5.2.0-linux-arm64.tar.xz",
+        "platform": "linux/arm64",
+        "rawFilenameOccurrences": 0,
+        "exactHrefTargetOccurrences": 0,
+        "checksumOccurrences": 0,
+        "bytes": null,
+        "sha256": null
+      }
+    },
+    "host": {
+      "hostArchitecture": "arm64",
+      "colima": {
+        "driver": "macOS Virtualization.Framework",
+        "architecture": "aarch64"
+      },
+      "docker": {
+        "serverVersion": "29.5.2",
+        "architecture": "aarch64",
+        "securityOptions": [
+          "name=apparmor",
+          "name=seccomp,profile=builtin",
+          "name=cgroupns"
+        ]
+      },
+      "existingImages": [
+        {
+          "repoTags": [
+            "alpine:3.20"
+          ],
+          "architecture": "arm64",
+          "os": "linux",
+          "id": "sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc"
+        },
+        {
+          "repoTags": [
+            "debian:bookworm-slim"
+          ],
+          "architecture": "arm64",
+          "os": "linux",
+          "id": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171"
+        }
+      ]
+    },
+    "diskAdmission": {
+      "schemaVersion": "bfs.linuxWorkerDiskAdmission.v0.1",
+      "availableBytes": "19705393152",
+      "projectedWriteBytes": "21474836480",
+      "minimumReserveBytes": "107374182400",
+      "freeAfterProjectedBytes": "-1769443328",
+      "status": "BLOCKED",
+      "reasons": [
+        "DISK_RESERVE"
+      ]
+    },
+    "futureRuntime": {
+      "experimentId": "B40",
+      "state": "PENDING_SEPARATE_PREREGISTRATION",
+      "workerImageDigest": "PENDING_BUILD_AND_HASH_AFTER_DISK_ADMISSION"
+    }
+  },
+  "routes": {
+    "schemaVersion": "bfs.linuxWorkerRouteDecision.v0.2",
+    "nativeArm64": {
+      "platform": "linux/arm64",
+      "decision": "REJECTED_NO_OFFICIAL_ARTIFACT",
+      "officialArtifactAvailable": false
+    },
+    "x64Emulated": {
+      "platform": "linux/amd64",
+      "executionClass": "EXPERIMENT_ONLY_BEST_EFFORT_EMULATION",
+      "decision": "IDENTIFIED_BUT_RUNTIME_BLOCKED",
+      "officialArtifactIdentityValid": true,
+      "hostArchitectureIdentityValid": true,
+      "workerImageDigestPinned": false
+    }
+  },
+  "evidenceHash": "f5cdd05127eb295f0b980d333e6f2422f1e082e4aeccacf47ace91dd8c238f78",
+  "analysis": {
+    "schemaVersion": "bfs.linuxWorkerArchitecturePreflightAnalysis.v0.2",
+    "passed": true,
+    "failures": [],
+    "decision": "ARCHITECTURE_PREFLIGHT_CORRECTION_SUPPORT_RUNTIME_BLOCKED"
+  },
+  "attacks": [
+    {
+      "name": "restore the rejected raw occurrence assumption",
+      "expectedFailure": "X64_CORRECTED_IDENTITY",
+      "observedFailures": [
+        "X64_CORRECTED_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "remove the unique exact href target",
+      "expectedFailure": "X64_CORRECTED_IDENTITY",
+      "observedFailures": [
+        "X64_CORRECTED_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fabricate an official Linux arm64 href target",
+      "expectedFailure": "ARM64_ARTIFACT_ABSENCE",
+      "observedFailures": [
+        "ARM64_ARTIFACT_ABSENCE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the official x64 byte count",
+      "expectedFailure": "X64_CORRECTED_IDENTITY",
+      "observedFailures": [
+        "X64_CORRECTED_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the official x64 SHA-256",
+      "expectedFailure": "X64_CORRECTED_IDENTITY",
+      "observedFailures": [
+        "X64_CORRECTED_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "label linux/amd64 as native arm64",
+      "expectedFailure": "ROUTE_DECISION",
+      "observedFailures": [
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "promote best-effort emulation to production",
+      "expectedFailure": "ROUTE_DECISION",
+      "observedFailures": [
+        "ROUTE_DECISION",
+        "X64_ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the observed host architecture",
+      "expectedFailure": "HOST_ARCHITECTURE",
+      "observedFailures": [
+        "HOST_ARCHITECTURE",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the observed Colima architecture",
+      "expectedFailure": "COLIMA_IDENTITY",
+      "observedFailures": [
+        "COLIMA_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change the observed Docker architecture",
+      "expectedFailure": "DOCKER_IDENTITY",
+      "observedFailures": [
+        "DOCKER_IDENTITY",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "remove a required Docker security option",
+      "expectedFailure": "DOCKER_SECURITY_OPTIONS",
+      "observedFailures": [
+        "DOCKER_SECURITY_OPTIONS",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark below-reserve disk admission accepted",
+      "expectedFailure": "DISK_ADMISSION_DECISION",
+      "observedFailures": [
+        "DISK_ADMISSION_DECISION",
+        "DISK_ADMISSION_EXPECTED_STATE",
+        "ROUTE_DECISION"
+      ],
+      "passed": true
+    },
+    {
+      "name": "claim that a runtime operation executed",
+      "expectedFailure": "RUNTIME_OPERATION_BOUNDARY",
+      "observedFailures": [
+        "RUNTIME_OPERATION_BOUNDARY"
+      ],
+      "passed": true
+    },
+    {
+      "name": "materialize an unpinned worker image",
+      "expectedFailure": "FUTURE_RUNTIME_STATE",
+      "observedFailures": [
+        "FUTURE_RUNTIME_STATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark B40 complete before separate preregistration",
+      "expectedFailure": "FUTURE_RUNTIME_STATE",
+      "observedFailures": [
+        "FUTURE_RUNTIME_STATE"
+      ],
+      "passed": true
+    }
+  ],
+  "attacksPassed": true,
+  "verdict": "ARCHITECTURE_PREFLIGHT_CORRECTION_SUPPORT_RUNTIME_BLOCKED",
+  "nonClaims": [
+    "B39-C1 changes only the rejected directory-index cardinality model",
+    "No Blender archive download, Blender launch, container create/run/build/pull/exec or disk override",
+    "No claim that source-building Blender for Linux arm64 is impossible",
+    "No x64 emulation compatibility, Eevee/EGL, render, performance, containment or production claim",
+    "B40 remains pending and requires a separate preregistration after disk admission"
+  ]
+}
