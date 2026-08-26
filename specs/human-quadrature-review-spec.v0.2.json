@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "documentType": "BFS_HUMAN_QUADRATURE_REVIEW_SPEC",
+  "version": "0.2.0",
+  "experimentId": "B35-DELAYED-DISCLOSURE-HUMAN-Q8-v0.2",
+  "status": "PREREGISTERED_BEFORE_B35_TOOLING_OUTPUTS_OR_RESPONSES",
+  "question": "Under recorded remote viewing conditions, do 18 independent observers show a directional temporal-stability preference between a new six-second STRATIFIED8 realization and NATURAL32, with QUADRATURE4 retained as a diagnostic method, when all method-linkable visual identities remain under delayed disclosure until collection closes?",
+  "evidenceClasses": {
+    "measuredFact": "machine-measured render, package, hash, playback and response-chain evidence",
+    "inference": "a conclusion that follows only under the frozen design and recorded conditions",
+    "subjectiveJudgment": "an observation supplied by an eligible independent human, never by a synthetic fixture or developer pilot",
+    "unknown": "anything not measured or not identifiable under this design"
+  },
+  "standardsBasis": {
+    "primary": {
+      "name": "ITU-R BT.500-15",
+      "statusChecked": "in force (Main) on 2026-08-26",
+      "url": "https://www.itu.int/rec/R-REC-BT.500-15-202305-I/en"
+    },
+    "scope": "remote controlled-record study informed by BT.500; not represented as a calibrated BT.500 laboratory implementation"
+  },
+  "supersededPackage": {
+    "experimentId": "B34-HUMAN-Q8-v0.1",
+    "specSha256": "4afcb29f9d47671d4696d0b6d57f5d7e0c5fde4f08bee1e414040ed480257ba2",
+    "publicHashAttackSha256": "5aa4f88367c383038283c4961e1e7c6545b4aeecef20983328b521002b4077df",
+    "observedAttack": "public method-to-carrier hashes joined to observer CLIP-to-carrier hashes and recovered all three methods in 18/18 sessions",
+    "disposition": "DO_NOT_COLLECT_FORMAL_HUMAN_RESPONSES_FROM_B34_PUBLIC_EVIDENCE_STATE",
+    "b35Rule": "no B34 visual output, carrier, decoded frame, display frame, mapping or session may be reused"
+  },
+  "source": {
+    "reviewSpecUri": "specs/review-render-spec.v0.1.json",
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+  },
+  "newVisualRealization": {
+    "intervention": "after opening the byte-bound source scene in each fresh process and before any render, require the active camera lens to equal 50.0 mm, then set it to 52.0 mm in memory without saving the source .blend",
+    "sharedAcrossMethods": true,
+    "cameraTransformUnchanged": true,
+    "timelineUnchanged": true,
+    "expectedOriginalLensMm": 50.0,
+    "intervenedLensMm": 52.0,
+    "sourceBlendMustRemainByteExact": true,
+    "distinctnessGate": "every B35 method display sequence and carrier must differ from its B34 counterpart; any equality invalidates the package",
+    "reason": "create a visually new but method-symmetric realization whose output identities cannot join to B34's already-public method-labelled hashes"
+  },
+  "runtime": {
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderBinarySha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "ffmpegVersion": "8.1.2",
+    "ffmpegSha256": "1332dc2de372bade9a8a63da0d6cdfab9de97fcefbae707bcc0b0506e1203327",
+    "ffprobeVersion": "8.1.2",
+    "ffprobeSha256": "4322275c1c2ac6ba15c695b288788bc1204e75211b3d5c030e5812c82a6dff73",
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "motionBlur": false,
+    "dither": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true
+  },
+  "renderDesign": {
+    "frames": { "start": 1, "end": 144, "count": 144, "fps": 24, "durationSeconds": 6 },
+    "resolution": [960, 540],
+    "output": "OPEN_EXR RGBA 32-bit float ZIP",
+    "schedule": [
+      "NATURAL32",
+      "Q4_1", "Q4_2", "Q4_3", "Q4_4",
+      "Q8_1", "Q8_2", "Q8_3", "Q8_4", "Q8_5", "Q8_6", "Q8_7", "Q8_8"
+    ],
+    "natural32": { "samples": 32, "jitter": null, "processes": 1, "renderCalls": 144 },
+    "quadrature4": {
+      "samplesPerComponent": 32,
+      "points": [[-0.25, -0.25], [-0.25, 0.25], [0.25, -0.25], [0.25, 0.25]],
+      "weights": [0.25, 0.25, 0.25, 0.25],
+      "processes": 4,
+      "renderCalls": 576
+    },
+    "stratified8": {
+      "samplesPerComponent": 32,
+      "points": [
+        [-0.375, -0.375], [-0.375, 0.125], [-0.125, -0.125], [-0.125, 0.375],
+        [0.125, -0.375], [0.125, 0.125], [0.375, -0.125], [0.375, 0.375]
+      ],
+      "weights": [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
+      "processes": 8,
+      "renderCalls": 1152
+    },
+    "totalProcesses": 13,
+    "totalRenderCalls": 1872,
+    "allProcessesMustBeUnique": true,
+    "allOutputsMustBeNew": true,
+    "compositeDomain": "scene-linear RGB",
+    "realizationScope": "one frozen intervened six-second realization per method; no universal or cross-machine claim"
+  },
+  "displayTransform": {
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "look": "None",
+    "exposure": 0,
+    "gamma": 1,
+    "output": "PNG RGBA 8-bit",
+    "dither": 0.0,
+    "method": "write scene-linear composites, load them in frozen Blender/OCIO, and save_render through the pinned display/view settings"
+  },
+  "carrier": {
+    "container": "WebM",
+    "codec": "VP9",
+    "profile": "Profile 1",
+    "pixelFormat": "gbrp",
+    "lossless": true,
+    "audio": false,
+    "frameRate": 24,
+    "acceptance": "decode all 144 frames to RGB and require 144/144 exact display-PNG pixels, maximum error 0 and zero changed RGB pixels",
+    "visibleFileNames": ["CLIP-01.webm", "CLIP-02.webm", "CLIP-03.webm"]
+  },
+  "resourceGate": {
+    "minimumFreeBytesBeforeRender": 8589934592,
+    "workDirectoriesMustStartEmpty": true,
+    "b34Cleanup": "B34 ignored raw work may be removed only after its committed evidence, superseding attack and exact deletion scope are recorded; it remains regenerable from the frozen commits",
+    "b35Retention": "retain all private source, composite, carrier, decoded and session artifacts until collection closes and delayed-disclosure evidence is committed"
+  },
+  "delayedDisclosure": {
+    "collectionState": "OPEN only after package validation and precollection leak audit pass",
+    "privateUntilClose": [
+      "all B35 method-labelled source/output/carrier/decoded/display hashes",
+      "all B35 method-labelled filenames or manifests",
+      "all mappings, salts and unblinding keys",
+      "all observer CLIP-to-carrier hashes and session packages",
+      "accepted responses and ledgers while collection remains open"
+    ],
+    "publicBeforeClose": [
+      "this preregistered spec and protocol",
+      "tool source and tool hashes only when they contain no output identity",
+      "a salted whole-package commitment that cannot be joined to a method or CLIP",
+      "a leak-audit summary containing counts and a commitment to the private sensitive-hash registry, never the hashes themselves"
+    ],
+    "wholePackageCommitment": "SHA-256 over canonical private package manifest plus an independent random 32-byte salt retained privately until close",
+    "sensitiveHashRegistry": "canonical private set of every B35 output, carrier, decoded-frame, display-frame and mapping identity; publish only a salted commitment to this registry",
+    "trackedTreeLeakGate": "before opening collection and before accepting every response, scan the complete git-tracked tree and public site build for every registry value; require zero matches outside the opaque salted commitments",
+    "observerPackageGate": "scan every distributed session for underlying method labels, other-session identifiers, source paths, public-repository links and unblinding material; require zero findings",
+    "closeRule": "close only after 18 valid balanced responses are hash-locked, or freeze ABORTED_NO_FORMAL_RESULT; after an abort, collection cannot resume",
+    "revealRule": "method-labelled hashes, mapping, salt and analysis may be disclosed only after close is durably recorded",
+    "breachRule": "any method-to-CLIP join available before close invalidates the study as BLINDING_BREACH_INVALID_STUDY"
+  },
+  "observerDesign": {
+    "formalTargetValidIndependentObservers": 18,
+    "formalMinimumValidIndependentObservers": 15,
+    "permutationCount": 6,
+    "balanceAtTarget": "each method-order permutation appears exactly three times",
+    "developerOwnerPilotClassification": "INTERFACE_PILOT_ONLY",
+    "directDevelopersExcluded": true,
+    "primaryComparison": "STRATIFIED8 versus NATURAL32 temporal stability",
+    "diagnosticMethod": "QUADRATURE4",
+    "singleClipScale": ["NONE", "BARELY_VISIBLE", "MILD", "OBVIOUS", "SEVERE"],
+    "pairwiseChoices": ["LEFT_MORE_STABLE", "INDISTINGUISHABLE", "RIGHT_MORE_STABLE"],
+    "playsPerClip": 2,
+    "playbackRate": 1.0,
+    "pauseSeekLoopAllowed": false,
+    "operatorBlinding": "participant-blind; the package process must not print mappings or sensitive hashes, but no independent key escrow is claimed, so operator double-blinding remains unknown"
+  },
+  "viewingValidity": {
+    "studyClass": "REMOTE_CONTROLLED_RECORD_NOT_CALIBRATED_LAB",
+    "minimumDisplayNativeResolution": [1920, 1080],
+    "displayRefreshRateMustBeIntegerMultipleOfFps": true,
+    "acceptedRefreshRatesHz": [48, 72, 96, 120, 144, 240],
+    "browserZoomPercent": 100,
+    "requiredCssVideoSize": [960, 540],
+    "recommendedViewingDistance": "approximately three displayed-picture heights",
+    "ambient": "dim and stable; record description",
+    "videoPlaybackQualityDroppedFramesMaximum": 0,
+    "privacy": "collect anonymous IDs and categorical screening/conditions only; no names, email addresses or raw health details"
+  },
+  "responseChain": {
+    "observerOutput": "one immutable canonical-hashed JSON response",
+    "validator": "bind response to spec, session commitment, CLIP-labelled carrier hashes, complete fields and playback telemetry without requiring public method identities",
+    "acceptedLedger": "append accepted anonymous response hashes in private ignored storage; never overwrite",
+    "preAcceptLeakAudit": "rerun and pass the public-state leak gate immediately before each response is accepted",
+    "formalAnalyzer": "unavailable until collection is closed; may emit a formal outcome only for 18 valid independent responses in the frozen balanced schedule",
+    "responseTiming": "a response timestamp and hash lock must precede the close record and any unblinding disclosure"
+  },
+  "formalDecision": {
+    "invalidPackageOrResponse": "INVALID_REVIEW",
+    "blindingBreach": "BLINDING_BREACH_INVALID_STUDY",
+    "zeroValidResponses": "HUMAN_REVIEW_PENDING",
+    "oneToFourteenValidIndependentResponses": "INFORMAL_REVIEW_ONLY",
+    "fifteenToSeventeenValidIndependentResponses": "FORMAL_REVIEW_INCOMPLETE",
+    "q8PreferenceSupport": "At least 14 of all 18 valid observers directionally choose Q8 as more stable than NATURAL32, and the count rating Q8 MILD-or-worse is not greater than the NATURAL32 count.",
+    "naturalPreferenceSupport": "At least 14 of all 18 valid observers directionally choose NATURAL32 as more stable than Q8, and the count rating NATURAL32 MILD-or-worse is not greater than the Q8 count.",
+    "noDirectionalDifference": "At least 14 of all 18 choose INDISTINGUISHABLE for Q8 versus NATURAL32 and no more than two observers rate either primary method MILD-or-worse.",
+    "q8PreferenceLabel": "Q8_TEMPORAL_PREFERENCE_SUPPORT",
+    "naturalPreferenceLabel": "NATURAL_TEMPORAL_PREFERENCE_SUPPORT",
+    "noDirectionalDifferenceLabel": "NO_DIRECTIONAL_DIFFERENCE_OBSERVED_UNDER_TEST_CONDITIONS",
+    "otherwise": "OBSERVER_DISAGREEMENT",
+    "q4Rule": "Q4 results are secondary descriptive observations and cannot change the primary decision."
+  },
+  "attacksRequired": [
+    "reuse any B34 visual identity or fail the 50.0-to-52.0-mm intervention",
+    "wrong spec, source scene, Blender, OCIO, FFmpeg or FFprobe identity",
+    "changed frame range, point set, weights, samples, threads or process schedule",
+    "missing/duplicate process, EXR, composite, display frame, decoded frame or session",
+    "non-empty work directory or insufficient free-space preflight",
+    "carrier metadata or RGB-exact roundtrip mismatch",
+    "publish or track any B35 sensitive registry value before close",
+    "join public evidence to observer CLIP identities",
+    "embed method labels, mapping, source paths or public-repository links in an observer package",
+    "alter the public tree after leak audit without rerunning the gate",
+    "accept a response without a same-state pre-accept leak audit",
+    "unblind or disclose before 18 valid balanced responses are locked or abort is frozen",
+    "developer, owner, synthetic fixture, duplicate observer or duplicate session counted as independent",
+    "response mutation, binding mismatch, invalid viewing record or dropped frame",
+    "formal decision below 18 valid balanced responses",
+    "Q4 secondary result changes the primary outcome"
+  ],
+  "falsification": {
+    "package": "any frozen identity, process, distinctness, exactness, resource, attack or leak gate failure prevents collection",
+    "blinding": "any public or distributed pre-close method-to-CLIP join invalidates the study",
+    "humanHypothesis": "the directional Q8 hypothesis is not supported unless its exact 14-of-18 gate and severity condition pass",
+    "cinematicClaim": "no outcome in this experiment can establish general photorealism or cinematic quality"
+  },
+  "nonClaims": [
+    "Package generation, carrier integrity, leak scanning and interface automation are not human observations.",
+    "The remote study is informed by ITU-R BT.500-15 but is not a calibrated BT.500 laboratory implementation.",
+    "Participant blinding does not prove independent operator double-blinding.",
+    "One 52 mm six-second realization does not establish whole-sequence, cross-shot or cross-machine behavior.",
+    "Motion blur is disabled; the study does not validate motion-blur quality.",
+    "A preference or no-difference result applies only to these carriers, observers and recorded viewing conditions.",
+    "Temporal-stability preference is not a judgment of acting, narrative, composition, photorealism or general cinematic merit.",
+    "The study does not validate 4K projection, another scene, another engine, a delivery codec or the optimality of the Q8 point set."
+  ]
+}
