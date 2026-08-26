@@ -310,6 +310,18 @@ This is an inventory, not a causal result. It makes Fast GI and TAA reprojection
 
 Artifacts: `experiments/eevee-control-inventory-v0-1/results.json` and `research/2026-08-26-eevee-control-inventory.md`.
 
+## J-013 · Fast GI × TAA reprojection factorial freeze
+
+Type: live pre-experiment freeze, 2026-08-26.
+
+The accepted real-Blender control inventory narrowed the enabled candidates to Fast GI sampling and TAA temporal reprojection. B19 therefore freezes a 2×2 on/off factorial at 32 samples and dither 0, with two complete 144-frame runs per cell and a fresh on/on baseline.
+
+Seven outcome labels distinguish Fast GI support, reprojection support, joint-disable support, either-disable support, no sufficient intervention, baseline/mixed instability and invalid execution. Fourteen negative cases are fixed before the configurator or runner exists.
+
+Protocol: `research/2026-08-26-b19-gi-reprojection-factorial-protocol.md`.
+
+Status at freeze: no B19 configurator, runner or render exists.
+
 ## Journal rule for future work
 
 Every promoted result must record:

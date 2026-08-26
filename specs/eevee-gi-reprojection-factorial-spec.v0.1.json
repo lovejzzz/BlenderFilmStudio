@@ -1,0 +1,110 @@
+{
+  "documentType": "BFS_EEVEE_GI_REPROJECTION_FACTORIAL_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "At 32 Eevee samples and dither 0, do Fast GI and/or TAA temporal reprojection determine complete-sequence decoded-pixel reproducibility?",
+  "evidenceBasis": {
+    "b18ResultsSha256": "335f4edf3b5aa8982310601a7cebdeaf80ed74349542ffe88b80b0193daff9b8",
+    "b18Decision": "NON_MONOTONIC_OR_UNSTABLE",
+    "b18Samples32": { "decodedPixelExactFrames": 133, "failedPixels": 67, "maximumAbsoluteError": 0.003921598196029663 },
+    "controlInventorySha256": "abab0692823d13741ab9ff77fd67b904bcbc32b9b41d1f99af8c47a5068b1115",
+    "observedSourceControls": {
+      "useFastGi": true,
+      "fastGiRayCount": 2,
+      "fastGiStepCount": 8,
+      "useTaaReprojection": true,
+      "lightUseShadowJitter": false,
+      "useRaytracing": false
+    }
+  },
+  "design": {
+    "type": "2x2 full factorial with two clean complete-sequence replicates per cell",
+    "factors": {
+      "useFastGi": [true, false],
+      "useTaaReprojection": [true, false]
+    },
+    "cells": [
+      { "id": "G1-R1", "useFastGi": true, "useTaaReprojection": true, "runs": ["G1-R1-A", "G1-R1-B"] },
+      { "id": "G0-R1", "useFastGi": false, "useTaaReprojection": true, "runs": ["G0-R1-A", "G0-R1-B"] },
+      { "id": "G1-R0", "useFastGi": true, "useTaaReprojection": false, "runs": ["G1-R0-A", "G1-R0-B"] },
+      { "id": "G0-R0", "useFastGi": false, "useTaaReprojection": false, "runs": ["G0-R0-A", "G0-R0-B"] }
+    ],
+    "runOrder": ["G1-R1-A", "G0-R0-A", "G0-R1-A", "G1-R0-A", "G1-R0-B", "G0-R1-B", "G0-R0-B", "G1-R1-B"],
+    "runOrderFrozenBeforeExecution": true
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "rendererSha256": "b969e267db7b73eb7b6f8ea17abf09b2e129b9fce2e706fec950c5bb5e5eda5c",
+    "comparatorSha256": "cd770959a1e92c5df66d86d376870d4a961347276a637514e3bb37da1e697b4e",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "width": 960,
+    "height": 540,
+    "frameStart": 1,
+    "frameEnd": 144,
+    "frameCountPerRun": 144,
+    "totalRuns": 8,
+    "totalRenderedFrames": 1152,
+    "fps": 24,
+    "imageFormat": "PNG",
+    "colorDepth": "8",
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "motionBlur": false,
+    "sourceSceneDitherIntensity": 1.0,
+    "sourceUseFastGi": true,
+    "sourceUseTaaReprojection": true
+  },
+  "interventionContract": {
+    "sameConfiguratorForAllCells": true,
+    "verifySourceStateBeforeEveryRun": true,
+    "setDitherToZeroInEveryRun": true,
+    "setBothFactorValuesInEveryRun": true,
+    "mustNotSaveSourceBlend": true,
+    "rendererMustObserve32Samples": true
+  },
+  "primaryGatePerCell": {
+    "decodedPixelExactFrames": 144,
+    "maximumAbsoluteError": 0.0,
+    "totalFailurePixels": 0
+  },
+  "decisionRule": {
+    "FAST_GI_CAUSAL_SUPPORT": "Both Fast-GI-off cells are exact and both Fast-GI-on cells are non-exact, independent of reprojection, with a valid experiment.",
+    "REPROJECTION_CAUSAL_SUPPORT": "Both reprojection-off cells are exact and both reprojection-on cells are non-exact, independent of Fast GI, with a valid experiment.",
+    "JOINT_DISABLE_SUPPORT": "Only the Fast-GI-off/reprojection-off cell is exact while the other three are non-exact, with a valid experiment.",
+    "EITHER_DISABLE_SUPPORT": "The on/on baseline is non-exact and all three cells that disable at least one factor are exact, with a valid experiment.",
+    "NO_SUFFICIENT_INTERVENTION": "All four cells are non-exact with a valid experiment.",
+    "BASELINE_UNSTABLE_OR_MIXED": "The fresh on/on baseline is exact or the exactness pattern matches none of the frozen causal forms, with a valid experiment.",
+    "INVALID_EXPERIMENT": "Any identity, intervention, invariant, sequence/comparison binding or attack gate fails."
+  },
+  "requiredNegativeCases": [
+    "factorial spec identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "configurator identity mismatch",
+    "dither differs from fixed zero",
+    "observed Fast GI differs from cell",
+    "observed TAA reprojection differs from cell",
+    "observed renderSamples differs from 32",
+    "A and B directories alias",
+    "missing frame",
+    "extra frame",
+    "mutated frame bytes",
+    "comparison artifact not bound to both sequence hashes"
+  ],
+  "explicitNonClaims": [
+    "An exact disabled cell would not prove a specific Blender source-level race or random-number mechanism.",
+    "Disabling Fast GI or temporal reprojection may change lighting, noise, ghosting and artistic quality and is not automatically a production recommendation.",
+    "Two runs per cell can falsify exact determinism but cannot estimate mismatch probability.",
+    "No perceptual tolerance is selected and near-equality remains non-exact.",
+    "The result applies only to this Blender 5.2 Eevee PNG8 same-machine profile, not Cycles EXR masters or other devices.",
+    "A mixed pattern is not simplified after execution into the nearest favorable causal story."
+  ]
+}
