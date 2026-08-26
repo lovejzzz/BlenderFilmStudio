@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityReadmission.v0.1",
+  "experimentId": "B40-R1",
+  "status": "PREREGISTERED_AFTER_AUTHORIZED_INTERVENTION_BEFORE_EXPERIMENT_TOOLING",
+  "question": "After the explicitly authorized cache/model cleanup and Colima resize, does a fresh zero-runtime probe satisfy every unchanged B40 host-capacity gate and remain stable under persistence, replay and adversarial mutation?",
+  "epistemicStatus": {
+    "blinded": false,
+    "knownBeforePreregistration": [
+      "The user explicitly authorized cache cleanup and Colima expansion, then separately authorized deletion of LTX models",
+      "CourseMapper cache, npm cache, LTXDesktop data and LTX updater caches were removed from six exact non-symlink paths",
+      "A manual post-change check reported substantially more host free space and a running 6 CPU / 12 GiB / 20 GiB Colima profile"
+    ],
+    "notAcceptedAsEvidence": "Manual checks motivated this confirmatory re-admission but are not substituted for the frozen runner, persisted receipt, replay or independent audit."
+  },
+  "ancestry": {
+    "baseAdmissionSpecSha256": "fd21c27801a83f542a4aaa498fbc61867b3116509bb6e43769d83873146850ca",
+    "b40C5ResultSha256": "8b3ac036deeb3fd283cb77e1d9c9a05deb22957449ef7905a4e219c9fca85100",
+    "b40C5AuditSha256": "e62019953c59c639fdf119a7f0e4962a1d3cfb70243a3fad04ecf12f84fbb868"
+  },
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+    "hostArchitecture": "arm64"
+  },
+  "policyInheritance": {
+    "source": "specs/worker-host-capacity-admission.v0.1.json",
+    "sourceSha256": "fd21c27801a83f542a4aaa498fbc61867b3116509bb6e43769d83873146850ca",
+    "rule": "Reuse frozenWorkerCeilingsFromB38 and capacityPolicy byte-for-value; a state intervention may not weaken a gate."
+  },
+  "probeTraceExact": [
+    "HOST_STATFS",
+    "COLIMA_STATUS",
+    "COLIMA_CONFIG_READ",
+    "VM_MEMINFO_READ",
+    "VM_CPU_READ",
+    "VM_DOCKER_DF_READ",
+    "VM_BINFMT_READ",
+    "DOCKER_RUNNING_CONTAINER_COUNT",
+    "ANCESTRY_FILE_HASHES"
+  ],
+  "forbiddenOperations": [
+    "colima start",
+    "colima stop",
+    "colima restart",
+    "colima delete",
+    "colima configuration mutation",
+    "docker run",
+    "docker create",
+    "docker build",
+    "docker pull",
+    "docker exec",
+    "docker prune",
+    "container or image deletion",
+    "Blender launch",
+    "Blender archive download",
+    "disk cleanup or reserve override"
+  ],
+  "expectedCurrentGates": {
+    "hostDisk": "ACCEPTED",
+    "vmMemory": "ACCEPTED",
+    "vmCpu": "ACCEPTED",
+    "dockerStorage": "ACCEPTED",
+    "vmSwap": "ACCEPTED",
+    "x64Emulator": "ACCEPTED",
+    "competingContainers": "ACCEPTED",
+    "overall": "ACCEPTED",
+    "blockedReasonsExact": [],
+    "runtimeOperationsExecuted": 0
+  },
+  "frozenAnalyzerAttacks": [
+    "lower the host disk reserve",
+    "lower the projected host write",
+    "lower host free space without recomputing the decision",
+    "lower host free space and recompute the decision",
+    "lower VM memory without recomputing the decision",
+    "lower VM memory and recompute the decision",
+    "lower VM CPUs without recomputing the decision",
+    "lower VM CPUs and recompute the decision",
+    "lower Docker free space without recomputing the decision",
+    "lower Docker free space and recompute the decision",
+    "add a running container and recompute the decision",
+    "add nonzero swap and recompute the decision",
+    "fabricate the x64 emulator registration",
+    "change the B40-C5 evidence hash",
+    "claim a runtime operation executed",
+    "mark replay failed after hashing"
+  ],
+  "decisionRules": {
+    "accepted": "Every unchanged B40 gate is ACCEPTED, reasons are empty, runtime operations are empty, evidence self-hash and JSON replay are stable, and all 16 attacks are detected by the expected gate.",
+    "blocked": "One or more genuine capacity gates fail; retain the exact reasons and do not preregister B41.",
+    "invalid": "Preregistration, ancestry, runtime, tool identity, policy, probe trace, evidence hash, replay, expected-state assertion or attack contract differs."
+  },
+  "acceptedVerdict": "WORKER_HOST_CAPACITY_ACCEPTED_REPLAY_STABLE",
+  "nonClaims": [
+    "B40-R1 is a confirmatory post-intervention re-admission, not a blinded experiment",
+    "B40-R1 performs no container or Blender runtime operation",
+    "Passing capacity gates does not prove Blender compatibility, rendering correctness, performance or output equivalence",
+    "An enabled qemu-x86_64 registration is necessary for the planned experimental route but is not sufficient proof of linux/amd64 Blender support",
+    "B41 still requires separate preregistration and may fail without weakening this result"
+  ]
+}
