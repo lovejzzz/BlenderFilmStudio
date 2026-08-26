@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "bfs.workerLaunchContract.v0.1",
+  "experimentId": "B38",
+  "status": "PREREGISTERED_BEFORE_TOOLING_OR_OUTPUT",
+  "question": "Can a trusted, backend-agnostic compiler turn a frozen worker request into one canonical fail-closed launch plan, with no inherited environment, no shell, mandatory Blender safety flags, one read-only input mount, one writable output mount, bounded resources, disk admission, and non-promotable failure receipts?",
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+    "osProduct": "macOS",
+    "osVersion": "26.5.1",
+    "osBuild": "25F80",
+    "architecture": "arm64"
+  },
+  "contract": {
+    "backend": "UNBOUND_CONTRACT_ONLY",
+    "shell": false,
+    "blenderExecutable": "/opt/bfs/blender/blender",
+    "blenderExecutableSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "requiredBlenderArgvPrefix": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--offline-mode"
+    ],
+    "requiredPythonFailureArgs": [
+      "--python-exit-code",
+      "1"
+    ],
+    "forbiddenBlenderArgs": [
+      "--enable-autoexec",
+      "--online-mode",
+      "--python-use-system-env",
+      "--python-expr",
+      "--python-console"
+    ],
+    "environmentKeysExact": [
+      "BFS_INPUT_ROOT",
+      "BFS_JOB_ID",
+      "BFS_OUTPUT_ROOT",
+      "BFS_REPORT_PATH",
+      "BLENDER_USER_CONFIG",
+      "BLENDER_USER_SCRIPTS",
+      "HOME",
+      "LANG",
+      "LC_ALL",
+      "OCIO",
+      "TMPDIR"
+    ],
+    "environmentValues": {
+      "BFS_INPUT_ROOT": "/inputs",
+      "BFS_OUTPUT_ROOT": "/outputs",
+      "BLENDER_USER_CONFIG": "/work/blender-config",
+      "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+      "HOME": "/work/home",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "OCIO": "/inputs/ocio/config.ocio",
+      "TMPDIR": "/work/tmp"
+    },
+    "mounts": [
+      {
+        "id": "INPUTS",
+        "target": "/inputs",
+        "readOnly": true,
+        "required": true
+      },
+      {
+        "id": "OUTPUTS",
+        "target": "/outputs",
+        "readOnly": false,
+        "required": true
+      }
+    ],
+    "ephemeralPaths": [
+      "/tmp",
+      "/work"
+    ],
+    "containerCandidatePolicy": {
+      "imageReferenceRequiresDigest": true,
+      "pull": "never",
+      "removeAfterExit": true,
+      "rootFilesystemReadOnly": true,
+      "network": "none",
+      "privileged": false,
+      "user": "65532:65532",
+      "capDrop": [
+        "ALL"
+      ],
+      "capAdd": [],
+      "noNewPrivileges": true,
+      "pidsLimit": 256,
+      "memoryBytes": 8589934592,
+      "cpus": 4,
+      "shmBytes": 1073741824
+    },
+    "diskAdmission": {
+      "minimumReserveBytes": 107374182400,
+      "defaultProjectedWriteBytes": 21474836480,
+      "acceptWhen": "availableBytes - projectedWriteBytes >= minimumReserveBytes"
+    },
+    "recovery": {
+      "wallTimeMs": 30000,
+      "terminateSignal": "SIGTERM",
+      "terminateGraceMs": 5000,
+      "forceSignal": "SIGKILL",
+      "automaticRetry": false,
+      "retryRequiresNewAttemptId": true,
+      "retryRequiresNewEmptyOutputRoot": true,
+      "failedOrTimedOutOutputPromotable": false
+    }
+  },
+  "frozenPositiveGates": {
+    "acceptedRequests": 3,
+    "canonicalReorderPairs": 3,
+    "identicalRequestHashesAcrossReorder": 3,
+    "identicalPlanHashesAcrossReorder": 3,
+    "exactEnvironmentKeySets": 3,
+    "parentFakeSecretAbsent": 3,
+    "exactArgvContracts": 3,
+    "exactMountContracts": 3,
+    "exactCandidatePolicies": 3,
+    "successReceiptPromotable": true,
+    "nonzeroReceiptPromotable": false,
+    "timeoutReceiptPromotable": false,
+    "cancelledReceiptPromotable": false,
+    "dirtyOutputAdmission": "BLOCKED",
+    "belowReserveAdmission": "BLOCKED"
+  },
+  "frozenAnalyzerAttacks": [
+    "inherited fake secret added to environment",
+    "required environment key removed",
+    "environment path changed outside frozen roots",
+    "shell changed to true",
+    "Blender executable identity changed",
+    "disable-autoexec removed",
+    "enable-autoexec injected",
+    "offline-mode removed",
+    "online-mode injected",
+    "python exit code changed to zero",
+    "image tag used without digest",
+    "pull policy changed from never",
+    "input mount made writable",
+    "second writable host mount added",
+    "Docker socket mount added",
+    "network changed from none",
+    "privileged changed to true",
+    "capability added",
+    "no-new-privileges removed",
+    "root user selected",
+    "read-only root filesystem removed",
+    "PID, memory or CPU limit removed",
+    "below-reserve admission marked accepted",
+    "timeout receipt marked promotable",
+    "plan self-hash changed"
+  ],
+  "decisionRules": {
+    "contractLogicSupportOnly": "all positive gates and all 25 frozen attacks pass",
+    "environmentContractFailed": "any parent-only key is inherited or the exact environment differs",
+    "launchContractFailed": "argv, shell, executable, mount, candidate policy, disk admission or recovery state differs",
+    "runInvalid": "runtime identity, preregistration ancestry, fixture count, canonical hash or attack count differs"
+  },
+  "nonClaims": [
+    "No Blender process or container is launched by B38",
+    "No Linux Blender image, GPU passthrough or render compatibility claim",
+    "No Docker, Colima, Linux namespace, seccomp, cgroup or VM containment claim",
+    "No claim that a container alone is a security boundary against every kernel or daemon vulnerability",
+    "No claim that environment sanitization, disable-autoexec or offline-mode contains a compromised parser",
+    "No production worker backend has been selected",
+    "No automatic cleanup or disk-reserve override is permitted"
+  ]
+}
