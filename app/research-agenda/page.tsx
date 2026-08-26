@@ -45,8 +45,8 @@ const gaps: {
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: 'B01/B02 结构与选定 Cycles 像素复现通过；B06 证伪 Bullet；B07/B08 锁定轨迹零误差；B14 完成 144 帧；B15 证伪 Eevee exact；B16 又证伪“输出 dither 是充分原因”。',
-    missing: 'Eevee 微差的采样/求值来源、预注册感知容差、跨 GPU、驱动、OS、补丁版本、角色求值、渲染噪声与模拟缓存边界仍未知。',
+    known: 'B01/B02 结构与选定 Cycles 像素复现通过；B06 证伪 Bullet；B07/B08 锁定轨迹零误差；B15 证伪 Eevee exact；B27 排除连续帧历史；B28 在 12/12 PID 内复现双模式切换。',
+    missing: 'Eevee 微差已定位到 render invocation 或更低层，但具体 Metal/Eevee/TAA/rasterization 机制、感知影响、跨 GPU、驱动、OS 与补丁版本仍未知。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
   },
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>同一 PID 重复 frame 38，同时继续独立观察者招募。</h3><p>B27 已完成 24 个新进程和 468 次 render：HISTORY 2/12、DIRECT 3/12，p≈1，否证连续历史是充分解释。所有失败都落入与 B25-A 相同的第二 exact mode。下一实验冻结两个 mode SHA，在多个持久 PID 内重复同帧 render，区分 process initialization 与 per-render recurrence；B26 human gate 仍为 0/18。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>干预 render invocation 以下的状态，同时继续独立观察者招募。</h3><p>B28 已完成 12 个新进程、144 次同帧 render：12/12 PID 内出现两个冻结 mode，42/132 个相邻调用切换，排除进程初始化是充分 mode-locking 边界。下一机器实验应预注册 context reset、temporal state 或更低层开关的干预，不得用 B28 同时选阈值和确认效应；B26 human gate 仍为 0/18。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/frame-history-isolation-v0-1">查看最新 frame-history 结果 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/repeated-frame-mode-switch-v0-1">查看最新 same-PID 结果 →</Link></footer>
     </main>
   );
 }
