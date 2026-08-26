@@ -1077,6 +1077,20 @@ Status: `NO_RESULT_DOCKER_ARCHITECTURE_ALIAS_CRASH`. B41-C1 may map Docker API `
 
 Artifact: `research/2026-08-26-b41-docker-architecture-alias-crash.md`.
 
+## J-060 · B41-C1 archive verified; build CLI and receipt rejected
+
+Type: preregistered architecture correction, failed image build and invalid receipt tooling, 2026-08-26.
+
+B41-C1 passed disk admission, normalized raw Docker `arm64` to canonical `aarch64`, and downloaded the official Blender archive. The observed `384441228` bytes and SHA-256 `96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48` matched exactly.
+
+The Docker CLI selected its legacy builder and rejected the BuildKit-only `--progress` flag with exit 125 before reading the Dockerfile. No image, container or Blender process was created. The temporary archive/build root was removed.
+
+The failure receipt independently exposed three tool defects: self-hash projection included `evidenceHash`; locale path sorting disagreed with the frozen bytewise OCIO manifest; and correction hashes were attached to parent tool URIs. Status: `REJECTED_BUILD_CLI_AND_RECEIPT_TOOLING`.
+
+B41-C2 may change only those four proven defects. Artifact identity, disk gate, image specification, isolation, render, timeout, decision and non-claim boundaries remain frozen.
+
+Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-2/` and `research/2026-08-26-b41-c1-build-cli-and-receipt-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
