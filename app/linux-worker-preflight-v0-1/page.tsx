@@ -40,6 +40,6 @@ export default function LinuxWorkerPreflightPage() {
 
     <section className="section contact-contract"><div className="section-index">05 / PRIMARY SOURCES</div><div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span/> OFFICIAL SOURCES ONLY</p><h2>Artifact identity 来自发布者。<br/><span>Emulation 风险来自 runtime 文档。</span></h2></div><p>索引与 checksum 在实验时重新获取，但没有下载 384 MB archive。Docker 对 Apple Silicon 上 Intel image 的说明被用作风险分类，不作为兼容性证明。</p></div><div className="contact-artifacts"><a href="https://download.blender.org/release/Blender5.2/"><span>BLENDER INDEX</span><b>5.2 official artifacts ↗</b></a><a href="https://download.blender.org/release/Blender5.2/blender-5.2.0.sha256"><span>BLENDER SHA-256</span><b>publisher manifest ↗</b></a><a href="https://www.blender.org/releases/5-2/"><span>BLENDER 5.2 LTS</span><b>release · supported to 2028 ↗</b></a><a href="https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/known-issues/"><span>DOCKER</span><b>Apple Silicon emulation limits ↗</b></a></div></section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B39 Linux Worker Preflight</b></div><p>failure retained · correction preregistered · runtime operations 0</p><Link href="/worker-launch-contract-v0-1">回看 B38 启动合同 →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B39 Linux Worker Preflight</b></div><p>failure retained · correction preregistered · runtime operations 0</p><Link href="/worker-host-capacity-v0-1">继续 B40 容量准入 →</Link></footer>
   </main>;
 }

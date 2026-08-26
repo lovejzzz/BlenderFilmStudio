@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityIndependentAudit.v0.6",
+  "experimentId": "B40-C5",
+  "analysis": {
+    "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.6",
+    "passed": true,
+    "failures": [],
+    "c4Analysis": {
+      "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.5",
+      "passed": true,
+      "failures": [],
+      "c2Analysis": {
+        "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.3",
+        "passed": true,
+        "failures": [],
+        "baseAnalysis": {
+          "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.1",
+          "passed": true,
+          "failures": [],
+          "decision": "WORKER_HOST_CAPACITY_BLOCKED"
+        },
+        "roundTripBaseAnalysis": {
+          "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.1",
+          "passed": true,
+          "failures": [],
+          "decision": "WORKER_HOST_CAPACITY_BLOCKED"
+        },
+        "decision": "WORKER_HOST_CAPACITY_BLOCKED_SERIALIZATION_STABLE"
+      },
+      "decision": "WORKER_HOST_CAPACITY_BLOCKED_REPLAY_STABLE"
+    },
+    "decision": "WORKER_HOST_CAPACITY_BLOCKED_REPLAY_STABLE"
+  },
+  "attacks": [
+    {
+      "name": "lower the host disk reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower the projected host write",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "remove the infrastructure memory reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark six-GiB VM memory accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "remove the infrastructure CPU reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark four-CPU VM capacity accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower the Docker storage safety floor",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark below-floor Docker storage accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "hide a running competing container",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "CONTAINER_GATE",
+        "OVERALL_GATE",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "accept nonzero VM swap",
+      "expectedFailure": "VM_SWAP_GATE",
+      "observedFailures": [
+        "VM_SWAP_GATE",
+        "OVERALL_GATE",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fabricate the x64 emulator registration",
+      "expectedFailure": "EMULATOR_REGISTRATION",
+      "observedFailures": [
+        "EMULATOR_REGISTRATION",
+        "CAPACITY_DECISION",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change an ancestry evidence hash",
+      "expectedFailure": "ANCESTRY_IDENTITY",
+      "observedFailures": [
+        "ANCESTRY_IDENTITY",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "claim a runtime operation executed",
+      "expectedFailure": "RUNTIME_OPERATION_BOUNDARY",
+      "observedFailures": [
+        "RUNTIME_OPERATION_BOUNDARY",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark overall admission accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "BASE_ANALYSIS"
+      ],
+      "passed": true
+    }
+  ],
+  "roundTripAnalysisEqual": true,
+  "roundTripAttackVectorEqual": true,
+  "recordedAttacksMatch": true,
+  "passed": true
+}

@@ -1027,6 +1027,18 @@ Status: `REJECTED_RESULT_FIELD_OUTSIDE_HASH`. B40-C5 must place the replay resul
 
 Artifacts: `experiments/worker-host-capacity-admission-v0-5/results.json`, `experiments/worker-host-capacity-admission-v0-5/audit.json` and `research/2026-08-26-b40-c4-result-field-hash-failure.md`.
 
+## J-056 · B40-C5 replay-stable blocked host admission
+
+Type: preregistered result-field correction and independently replayed capacity admission, 2026-08-26.
+
+B40-C5 placed the replay result inside hashed evidence before attacks. It reproduced four exact blockers: host disk reserve, VM memory, VM CPU and Docker storage. Actual values were about 19.67 GB host-free, 6.20 GB VM `MemTotal`, four CPUs and 4.64 GB Docker-free versus frozen admission requirements of 100 GiB after a 20 GiB projection, 10 GiB VM memory, five CPUs and 8 GiB Docker-free.
+
+Zero swap, zero running containers and enabled `qemu-x86_64` with `POCF` flags passed. Fourteen of fourteen primary attack reasons survived JSON round-trip and independent audit exactly. Runtime operations remained zero.
+
+Verdict: `WORKER_HOST_CAPACITY_BLOCKED_REPLAY_STABLE`. B41 requires external disk/Colima/Docker capacity changes, a clean admission rerun and separate preregistration.
+
+Artifacts: `experiments/worker-host-capacity-admission-v0-6/results.json`, `experiments/worker-host-capacity-admission-v0-6/audit.json` and `research/2026-08-26-b40-c5-worker-host-capacity-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
