@@ -120,6 +120,14 @@ def main() -> None:
     controls = {"renderSamples": scene.eevee.taa_render_samples, "ditherIntensity": scene.render.dither_intensity, "useFastGi": scene.eevee.use_fast_gi, "useTaaReprojection": scene.eevee.use_taa_reprojection}
     require_equal(controls, {"renderSamples": 32, "ditherIntensity": 0.0, "useFastGi": True, "useTaaReprojection": True}, "fixed controls")
 
+    name = f"frame-{args.frame:04d}"
+    png_path, exr_path = args.output_dir / f"{name}.png", args.output_dir / f"{name}.exr"
+    scene.render.filepath = str(png_path.resolve())
+    scene.render.image_settings.media_type = "IMAGE"
+    scene.render.image_settings.file_format = "PNG"
+    scene.render.image_settings.color_mode = "RGBA"
+    scene.render.image_settings.color_depth = "8"
+
     started = time.perf_counter()
     render_operator_call_count = 0
     result = bpy.ops.render.render(write_still=False)
@@ -130,13 +138,7 @@ def main() -> None:
     if render_result is None or not render_result.has_data:
         raise RuntimeError("Render Result unavailable")
 
-    name = f"frame-{args.frame:04d}"
-    png_path, exr_path = args.output_dir / f"{name}.png", args.output_dir / f"{name}.exr"
     save_count = 0
-    scene.render.image_settings.media_type = "IMAGE"
-    scene.render.image_settings.file_format = "PNG"
-    scene.render.image_settings.color_mode = "RGBA"
-    scene.render.image_settings.color_depth = "8"
     render_result.save_render(str(png_path.resolve()), scene=scene)
     save_count += 1
     png_settings = {"fileFormat": "PNG", "colorMode": "RGBA", "colorDepth": "8", "display": scene.display_settings.display_device, "view": scene.view_settings.view_transform}
