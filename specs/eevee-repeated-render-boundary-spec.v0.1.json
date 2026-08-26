@@ -1,0 +1,116 @@
+{
+  "documentType": "BFS_EEVEE_REPEATED_RENDER_BOUNDARY_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "At fixed Eevee T08 and scene-linear EXR32, does strict variation recur between repeated renders of the same frame inside one initialized Blender process, or only across process initialization?",
+  "evidenceBasis": {
+    "b22ResultsSha256": "3212b38e5e6ff6af23906d85e8c17d8ef97d88e1715694a45173442e15b36c46",
+    "b22Decision": "THREAD_COUNT_NOT_SUFFICIENT",
+    "b22T08ExactPairs": 22,
+    "b22T08TotalPairs": 36,
+    "sentinelFramesCarriedForward": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144]
+  },
+  "design": {
+    "type": "same-frame repeated-render versus fresh-process boundary with three process replicates",
+    "cells": [
+      { "id": "PERSIST", "processesPerSentinel": 3, "replicates": ["A", "B", "C"], "rendersPerProcess": 3, "renderOrdinals": [1, 2, 3] },
+      { "id": "FRESH", "processesPerSentinel": 3, "replicates": ["A", "B", "C"], "rendersPerProcess": 1, "renderOrdinals": [1] }
+    ],
+    "sentinelFrames": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144],
+    "blockOrderPerFrame": ["PERSIST-A", "FRESH-A", "PERSIST-B", "FRESH-B", "PERSIST-C", "FRESH-C"],
+    "frameOrder": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144],
+    "runOrderFrozenBeforeExecution": true,
+    "processes": 72,
+    "renderCalls": 144,
+    "savedExrs": 144,
+    "withinPersistentPairsPerProcess": ["R1-R2", "R1-R3", "R2-R3"],
+    "withinPersistentDecodedComparisons": 108,
+    "persistentCrossProcessPairsPerOrdinal": ["A-B", "A-C", "B-C"],
+    "persistentCrossProcessDecodedComparisons": 108,
+    "freshCrossProcessPairs": ["A-B", "A-C", "B-C"],
+    "freshCrossProcessDecodedComparisons": 36
+  },
+  "output": {
+    "id": "EXR32_SCENE_LINEAR",
+    "format": "OPEN_EXR",
+    "channels": ["R", "G", "B", "A"],
+    "colorDepthBits": 32,
+    "pixelType": "float",
+    "codec": "ZIP",
+    "colorDomain": "scene-linear ACEScg"
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "motionBlur": false
+  },
+  "executionContract": {
+    "formalRendererComparatorAndRunnerMustNotExistAtFreeze": true,
+    "samePostFreezeRendererForBothCells": true,
+    "persistentProcessMustRenderTheSameFrameThreeTimesWithoutReloadingTheBlend": true,
+    "freshProcessMustRenderTheFrameExactlyOnce": true,
+    "oneNewBlenderProcessPerSentinelReplicateAndCell": true,
+    "saveOneRgba32FloatExrPerRenderCall": true,
+    "mustNotSaveSourceBlend": true,
+    "recordProcessIdRenderOrdinalAndAllControlsForEveryOutput": true,
+    "recordAllToolHashesAndBindAllComparisons": true
+  },
+  "exactGate": {
+    "perDecodedExrPair": { "maximumAbsoluteError": 0.0, "failurePixels": 0 },
+    "withinPersistent": "All 108 same-process repeated-render comparisons must be exact.",
+    "persistentCrossProcess": "All 108 same-ordinal cross-process comparisons must be exact.",
+    "freshCrossProcess": "All 36 fresh-process comparisons must be exact.",
+    "noPostHocTolerance": true
+  },
+  "decisionRule": {
+    "PROCESS_INITIALIZATION_BOUNDARY_SUPPORT": "Within-PERSIST is exact 108/108 while both PERSIST cross-process and FRESH cross-process gates are non-exact, with a valid experiment.",
+    "PER_RENDER_VARIATION_SUPPORT": "Within-PERSIST is non-exact, with a valid experiment, regardless of the two cross-process gates.",
+    "VARIATION_NOT_REPRODUCED": "All three gates are exact, with a valid experiment.",
+    "MIXED_CROSS_PROCESS_PATTERN": "Within-PERSIST is exact but the PERSIST and FRESH cross-process exactness gates disagree, with a valid experiment.",
+    "INVALID_EXPERIMENT": "Any identity, source-state, intervention, process, call-count, EXR layout, image, binding, count or attack gate fails."
+  },
+  "requiredNegativeCases": [
+    "B23 spec identity mismatch",
+    "B22 result identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "configurator identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "source thread mode/count mismatch",
+    "requested fixed controls mismatch",
+    "cell or process-replicate binding mismatch",
+    "PERSIST render count differs from three",
+    "FRESH render count differs from one",
+    "render ordinals or same-frame invariant mismatch",
+    "process IDs are not unique across the 72 planned processes",
+    "EXR is not 960x540 RGBA float",
+    "missing or mutated EXR",
+    "within-process comparison loses PID/output binding",
+    "cross-process comparison loses both manifest/file bindings"
+  ],
+  "explicitNonClaims": [
+    "A stable same-process result would support an initialization boundary under this profile but would not identify a driver, shader-cache, allocator or source-level mechanism.",
+    "A non-exact same-process result would locate recurrence at each render invocation or later; it would not by itself prove a race.",
+    "Three repeated renders and three process replicates falsify strict determinism but do not estimate mismatch probability.",
+    "The PERSIST cell intentionally holds the frame constant and therefore does not measure prior-frame temporal history.",
+    "No perceptual tolerance is selected and near-equality remains non-exact.",
+    "Nothing generalizes to Cycles, another GPU/backend, another machine or another scene."
+  ]
+}

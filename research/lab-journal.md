@@ -440,6 +440,18 @@ The next protocol should compare repeated renders of the same twelve sentinels i
 
 Status: hypothesis selected; protocol not yet frozen.
 
+## J-019 · Same-process repeated-render protocol freeze
+
+Type: live pre-experiment freeze, 2026-08-26.
+
+B23 turns the J-018 hypothesis into a three-gate experiment. For every one of the twelve carried sentinels and A/B/C process replicate, a PERSIST process renders the same held frame three consecutive times without reloading the blend; an interleaved FRESH process renders it once. The frozen design totals 72 Blender processes, 144 render calls and 144 float EXRs.
+
+Within-PERSIST contributes 108 same-PID comparisons. PERSIST cross-process contributes 108 same-ordinal comparisons, and FRESH contributes 36 cross-process comparisons. Five outcome labels distinguish process-initialization support, per-render recurrence, failure to reproduce, a mixed cross-process pattern and invalid execution. Twenty negative categories are fixed before any formal B23 renderer, comparator or runner exists.
+
+Protocol: `research/2026-08-26-b23-eevee-repeated-render-boundary-protocol.md`.
+
+Status at freeze: the B22 configurator is reused by frozen hash; no B23 renderer, comparator, runner or output exists.
+
 ## Journal rule for future work
 
 Every promoted result must record:
