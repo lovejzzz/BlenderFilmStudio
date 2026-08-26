@@ -274,6 +274,21 @@ Protocol: `research/2026-08-26-b18-eevee-sampling-dose-response-protocol.md`.
 
 Status at freeze: no B18 runner or B18 render exists.
 
+Formal execution observation:
+
+- 12 clean Blender processes rendered 1,728 frames in the frozen order;
+- exactness vector for samples `[1,2,4,8,16,32]`: `[F,T,F,F,F,F]`;
+- exact frames: `143,144,140,137,137,133` of 144;
+- failed pixels: `6,0,54,76,58,67`;
+- maximum errors: approximately `30,0,7,4,2,1` eight-bit code values;
+- every PNG pair remained byte-non-identical despite the decoded-exact sample-2 cell;
+- 13/13 attacks reached their frozen reasons;
+- source `.blend` and all frozen tool/config identities remained unchanged.
+
+Verdict: `NON_MONOTONIC_OR_UNSTABLE`. Sample 1 failed to replicate B17 exactness, sample 2 happened to be exact, and higher levels were non-exact. The simple deterministic-threshold hypothesis is not supported. The inverse-like maximum-error ladder is consistent with sample averaging, but does not prove an internal mechanism. The next experiment needs more independent replicates at samples 1 and 2, not a favorable setting chosen from one pair.
+
+Artifacts: `experiments/eevee-sampling-dose-response-v0-1/results.json`, `experiments/eevee-sampling-dose-response-v0-1/evidence/` and `research/2026-08-26-b18-eevee-sampling-dose-response-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:

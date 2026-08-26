@@ -2,7 +2,7 @@
 
 Date frozen: 2026-08-26, before implementing the B18 runner and before rendering any B18 frame.
 
-Status: **PRE-REGISTERED / NOT EXECUTED**
+Status: **EXECUTED / NON_MONOTONIC_OR_UNSTABLE**
 
 ## Evidence-supported question
 
@@ -48,3 +48,8 @@ Each comparison must bind both exact sequence hashes and all per-frame A/B hashe
 
 A monotonic boundary narrows the next experiment but does not identify Blender source code or guarantee unsampled integer levels. An `ONLY_SINGLE_SAMPLE_EXACT` result would make exactness unusable as the current production invariant because sample 1 is visibly noisy; the next intervention would target evaluation/scheduling while preserving samples. Two runs per level do not estimate a mismatch probability, and no result extends to Cycles, EXR, another device or another Blender version.
 
+## Execution result
+
+All 12 clean Blender runs completed and 13/13 attacks reached their frozen reasons. The exactness vector was `[false,true,false,false,false,false]`: sample 1 reached 143/144 exact frames, sample 2 reached 144/144, and samples 4/8/16/32 reached 140/137/137/133 respectively. The frozen decision is `NON_MONOTONIC_OR_UNSTABLE`.
+
+The maximum errors at samples 1/4/8/16/32 were approximately 30/7/4/2/1 eight-bit code values. This is compatible with stochastic contributions being averaged, but it is not source-level mechanism proof. B18 does not promote sample 2 as deterministic from one A/B pair.
