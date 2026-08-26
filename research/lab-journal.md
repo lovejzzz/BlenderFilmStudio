@@ -1017,6 +1017,16 @@ B40-C4 may change only the identity source to the frozen C2 library constants. N
 
 Artifact: `research/2026-08-26-b40-c3-no-result-tool-crash.md`.
 
+## J-055 · B40-C4 replay passes but final field escapes evidence hash
+
+Type: preregistered identity correction, rejected persisted self-hash, 2026-08-26.
+
+B40-C4 reached four exact blockers, 14/14 attacks and replay PASS. Audit attack vectors matched, but the runner had added `replayPassed=true` only after evidence hashing. The persisted file therefore contained an unhashed decision field, and audit correctly failed `IDENTITY_EVIDENCE_SELF_HASH`.
+
+Status: `REJECTED_RESULT_FIELD_OUTSIDE_HASH`. B40-C5 must place the replay result inside evidence before hashing and attacks. No runtime operation occurred.
+
+Artifacts: `experiments/worker-host-capacity-admission-v0-5/results.json`, `experiments/worker-host-capacity-admission-v0-5/audit.json` and `research/2026-08-26-b40-c4-result-field-hash-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
