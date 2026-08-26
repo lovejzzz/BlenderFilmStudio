@@ -1091,6 +1091,18 @@ B41-C2 may change only those four proven defects. Artifact identity, disk gate, 
 
 Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-2/` and `research/2026-08-26-b41-c1-build-cli-and-receipt-failure.md`.
 
+## J-061 · B41-C2 receipt valid; legacy builder produces ARM64 layers
+
+Type: preregistered tooling correction, valid failed build receipt, 2026-08-26.
+
+B41-C2 corrected the unsupported progress flag, self-hash projection, OCIO byte ordering and correction tool URIs. Official archive identity, OCIO identity, tool hashes and evidence hash all passed.
+
+The legacy Docker builder then executed the nominal `linux/amd64` Dockerfile using ARM64 packages. Its apt trace contained `:arm64`, and Docker rejected the intermediate image because it did not provide the requested amd64 platform. Build exit was one; no final image, container or Blender process existed.
+
+A read-only probe found buildx `v0.34.1` inside the Colima VM. Status: `REJECTED_LEGACY_BUILDER_PLATFORM_MISMATCH`. B41-C3 may change only the build transport to guest buildx with `--platform linux/amd64 --load`.
+
+Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-3/` and `research/2026-08-26-b41-c2-legacy-builder-platform-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
