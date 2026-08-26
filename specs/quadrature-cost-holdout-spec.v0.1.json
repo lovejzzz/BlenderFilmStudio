@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "documentType": "BFS_QUADRATURE_COST_HOLDOUT_SPEC",
+  "version": "0.1.0",
+  "experimentId": "B32-QC-HOLDOUT-v0.1",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOLING_OR_OUTPUTS",
+  "question": "Do deterministic Q4 and Q8 scene-linear jitter ensembles reproduce a stable cost-quality curve on new frames?",
+  "source": {
+    "reviewSpecUri": "specs/review-render-spec.v0.1.json",
+    "reviewSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+  },
+  "runtime": {
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderBinarySha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "engine": "BLENDER_EEVEE",
+    "resolution": [
+      960,
+      540
+    ],
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "motionBlur": false,
+    "dither": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "output": "OPEN_EXR RGBA 32-bit float ZIP"
+  },
+  "design": {
+    "frames": [
+      22,
+      59,
+      97,
+      136
+    ],
+    "framesExcludedFromPriorQualityWork": [
+      10,
+      37,
+      38,
+      44,
+      72,
+      86,
+      103,
+      120
+    ],
+    "natural32": {
+      "samples": 32,
+      "replicates": [
+        "A",
+        "B"
+      ],
+      "processes": 2,
+      "renderCalls": 8
+    },
+    "reference1024": {
+      "samples": 1024,
+      "replicates": [
+        "A",
+        "B"
+      ],
+      "processes": 2,
+      "renderCalls": 8,
+      "role": "pixelwise-mean reference proxy, not truth"
+    },
+    "quadrature4": {
+      "samplesPerComponent": 32,
+      "points": [
+        [-0.25, -0.25],
+        [-0.25, 0.25],
+        [0.25, -0.25],
+        [0.25, 0.25]
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "replicates": [
+        "A",
+        "B"
+      ],
+      "processes": 8,
+      "renderCalls": 32
+    },
+    "stratified8": {
+      "samplesPerComponent": 32,
+      "points": [
+        [-0.375, -0.375],
+        [-0.375, 0.125],
+        [-0.125, -0.125],
+        [-0.125, 0.375],
+        [0.125, -0.375],
+        [0.125, 0.125],
+        [0.375, -0.125],
+        [0.375, 0.375]
+      ],
+      "weights": [
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "replicates": [
+        "A",
+        "B"
+      ],
+      "processes": 16,
+      "renderCalls": 64
+    },
+    "totalProcesses": 28,
+    "totalRenderCalls": 112,
+    "allProcessesMustBeUnique": true,
+    "compositeDomain": "scene-linear RGB"
+  },
+  "analysis": {
+    "reference": "pixelwise mean of REFERENCE1024_A and REFERENCE1024_B",
+    "edgeMask": "top 5 percent of RGB Euclidean central-difference magnitude in the per-frame reference mean",
+    "edgeMaskExpectedPixelsPerFrame": 25920,
+    "metrics": [
+      "reference A/B edge RMSE divided by mean NATURAL32 edge RMSE",
+      "Q4 and Q8 A/B scene-linear RMSE",
+      "Q4/NATURAL, Q8/NATURAL and Q8/Q4 edge RMSE ratios",
+      "Q4/NATURAL and Q8/NATURAL global RMSE ratios",
+      "observed Blender render seconds by cell"
+    ]
+  },
+  "gates": {
+    "referenceReliabilityRatioMaximumEveryFrame": 0.05,
+    "q4ABRmseExactEveryFrame": 0.0,
+    "q8ABRmseExactEveryFrame": 0.0,
+    "q4ToNaturalEdgeMaximumEveryFrame": 1.4,
+    "q8ToNaturalEdgeMaximumEveryFrame": 1.1,
+    "q8ToQ4EdgeMaximumEveryFrame": 1.0,
+    "q8ToQ4EdgeMeanMaximum": 0.9
+  },
+  "componentVerdicts": {
+    "reference": [
+      "REFERENCE_RELIABLE",
+      "REFERENCE_UNRELIABLE"
+    ],
+    "repeatability": [
+      "Q4_Q8_EXACT_REPEATABILITY_SUPPORT",
+      "ENSEMBLE_REPEATABILITY_FAILURE"
+    ],
+    "q4": [
+      "Q4_COST_POINT_SUPPORT",
+      "Q4_QUALITY_GENERALIZATION_FAILURE"
+    ],
+    "q8": [
+      "Q8_NEAR_NATURAL_PROXY_SUPPORT",
+      "Q8_NEAR_NATURAL_GENERALIZATION_FAILURE"
+    ],
+    "dominance": [
+      "Q8_OVER_Q4_DOMINANCE_SUPPORT",
+      "Q8_OVER_Q4_DOMINANCE_FAILURE"
+    ]
+  },
+  "overallDecision": {
+    "allPositive": "COST_QUALITY_CURVE_SUPPORT",
+    "otherwise": "COST_QUALITY_CURVE_PARTIAL_OR_FAILURE",
+    "failurePrecedence": [
+      "IDENTITY_OR_DESIGN_INVALID",
+      "REFERENCE_UNRELIABLE",
+      "ENSEMBLE_REPEATABILITY_FAILURE",
+      "Q4_QUALITY_GENERALIZATION_FAILURE",
+      "Q8_NEAR_NATURAL_GENERALIZATION_FAILURE",
+      "Q8_OVER_Q4_DOMINANCE_FAILURE"
+    ]
+  },
+  "attacksRequired": [
+    "wrong spec hash",
+    "wrong scene, Blender or OCIO identity",
+    "changed frames, points, weights, samples or threads",
+    "missing or duplicate process IDs",
+    "missing report, output or hash mismatch",
+    "non-empty output directory",
+    "tampered reference reliability, candidate metric or decision"
+  ],
+  "nonClaims": [
+    "The dual NATURAL1024 mean is a reference proxy, not ground truth.",
+    "A numerical proxy ratio is not a calibrated visible-quality ratio.",
+    "The holdout does not establish temporal, motion-blur, human-review or cinematic acceptability.",
+    "Observed render seconds are machine-local measurements, not a universal monetary cost.",
+    "Passing Q8 does not prove the eight-point layout or equal weights are optimal."
+  ]
+}
