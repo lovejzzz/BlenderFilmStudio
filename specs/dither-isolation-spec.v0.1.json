@@ -1,0 +1,60 @@
+{
+  "documentType": "BFS_DITHER_ISOLATION_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "Does disabling Blender 5.2 output dithering restore exact decoded-pixel reproducibility for the complete B02 Eevee review proxy?",
+  "baseline": {
+    "experiment": "B15",
+    "ditherIntensity": 1.0,
+    "frameCount": 144,
+    "containerExactFrames": 0,
+    "decodedPixelExactFrames": 127,
+    "failedPixels": 114,
+    "maximumAbsoluteError": 0.003921583294868469
+  },
+  "intervention": {
+    "id": "DITHER_ZERO",
+    "ditherIntensity": 0.0,
+    "application": "Set bpy.context.scene.render.dither_intensity in memory before invoking the frozen B14 renderer",
+    "cleanRuns": ["D0-A", "D0-B"]
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "rendererSha256": "b969e267db7b73eb7b6f8ea17abf09b2e129b9fce2e706fec950c5bb5e5eda5c",
+    "comparatorSha256": "cd770959a1e92c5df66d86d376870d4a961347276a637514e3bb37da1e697b4e",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "samples": 32,
+    "width": 960,
+    "height": 540,
+    "frameStart": 1,
+    "frameEnd": 144,
+    "fps": 24,
+    "imageFormat": "PNG",
+    "colorDepth": "8",
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "motionBlur": false
+  },
+  "primaryGate": {
+    "decodedPixelExactFrames": 144,
+    "maximumAbsoluteError": 0.0,
+    "totalFailurePixels": 0
+  },
+  "decisionRule": {
+    "CAUSAL_SUPPORT_DITHER": "D0 A/B passes exact decoded pixels and all controls/attacks pass, while frozen B15 baseline remains non-exact",
+    "DITHER_NOT_SUFFICIENT": "D0 A/B contains any decoded pixel difference with a valid experiment",
+    "INVALID_EXPERIMENT": "Any identity, control, invariant or attack gate fails"
+  },
+  "explicitNonClaims": [
+    "A dither-zero exact result would show that dither is necessary for the observed B15 variation under this profile; it would not prove every Blender nondeterminism source is eliminated.",
+    "Disabling dither may increase visible banding and is not automatically the preferred artistic review setting.",
+    "The experiment does not select a perceptual tolerance.",
+    "Eevee 8-bit proxy behavior is not Cycles EXR master behavior.",
+    "Same-machine evidence is not cross-device evidence."
+  ]
+}

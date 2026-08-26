@@ -204,6 +204,20 @@ Verdict: `FORMAL EXACT FALSIFIED`. No perceptual tolerance was pre-registered, s
 
 Artifacts: `experiments/review-proxy-repro-v0-1/results.json`, `experiments/review-proxy-repro-v0-1/evidence/` and `research/2026-08-26-b15-review-proxy-repro-result.md`.
 
+## J-009 · Output-dither causal isolation freeze
+
+Type: live pre-experiment audit, 2026-08-26.
+
+B15's maximum difference was approximately one 8-bit code value. A real Blender query of the exact B02 `.blend` reported `scene.render.dither_intensity = 1.0`; the frozen B14 renderer leaves that value untouched. This makes output dithering the next evidence-supported candidate.
+
+Hypothesis: setting only dither intensity to zero before the exact frozen renderer runs will restore 144/144 decoded pixel equality across two new complete sequences.
+
+Exact success remains max error zero and zero failed pixels. No tolerance will be chosen after execution. A dither-zero exact result supports a causal factor but does not prove disabling dither is artistically preferable or eliminate every other source of nondeterminism.
+
+Protocol: `research/2026-08-26-b16-dither-isolation-protocol.md`.
+
+Status at freeze: configurator and runner do not exist; D0-A and D0-B have not started.
+
 ## Journal rule for future work
 
 Every promoted result must record:
