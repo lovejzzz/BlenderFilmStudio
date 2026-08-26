@@ -232,6 +232,7 @@ export default function Home() {
           <Link className="route-tab" href="/fixed-jitter-intervention-v0-1">固定抖动干预</Link>
           <Link className="route-tab" href="/sampling-quality-holdout-v0-1">采样质量代价</Link>
           <Link className="route-tab" href="/quadrature-cost-holdout-v0-2">多抖动成本曲线</Link>
+          <Link className="route-tab" href="/quadrature-temporal-holdout-v0-1">Q8 连续时间门</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>
