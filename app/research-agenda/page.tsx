@@ -45,8 +45,8 @@ const gaps: {
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: 'B15 证伪 Eevee exact；B27 排除连续帧历史；B28 在 12/12 PID 内复现双模式切换；B29 确认 PNG×Combined 一致和 data-pass 稳定，同时发现 3 个 Crypto-only 解耦反例。',
-    missing: '事件已定位到 render invocation 以下且涉及 wall/floor coverage，但 coverage 不是 Combined alternate 的充分条件；具体 filter/raster/Metal 机制、感知影响、跨 GPU、驱动、OS 与补丁版本仍未知。',
+    known: 'B15 证伪 Eevee exact；B28 在 12/12 PID 内复现双模式切换；B29 发现 3 个 Crypto-only 解耦反例；B30 的 CENTER 干预在 12/12 PID、144/144 renders 严格一致，而 NATURAL 10/12 PID 切换。',
+    missing: 'CENTER 是本 profile 的充分稳定性干预，但改变全幅约 13.18 万像素且联动多个 sample dimensions；静态/时序采样质量、感知影响、跨 GPU、驱动、OS 与补丁版本仍未知。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
   },
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>用 fixed filter jitter 做机制 probe，同时继续独立观察者招募。</h3><p>B29 的 144 次 multilayer render 得到 103 coupled reference、38 coupled alternate 与 3 个 Crypto-only 解耦反例；Depth/Normal/Position 全部 exact。下一步先 derive Blender hidden `override_pixel_jitter_sample` 的候选值，再预注册 natural Halton × fixed jitter 对照。它会改变 AA 目标，只能验证机制，不得冒充生产修复；B26 human gate 仍为 0/18。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>把稳定性收益与采样质量代价分开验证。</h3><p>B30 已按预注册完成 24 PID、288 次 render：CENTER 144/144 strict exact，NATURAL 在 10/12 PID 内切换。但 CENTER 相对自然参考改变 131,779 个全幅像素。下一步先在未使用的 derivation frames 建立高 sample / spatial reference 与边缘 ROI，再冻结静态 aliasing、scene-linear error 和 temporal residual holdout；B26 human gate 仍为 0/18。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/pass-domain-localization-v0-1">查看最新 pass-domain 反例 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/fixed-jitter-intervention-v0-1">查看最新 fixed-jitter 干预 →</Link></footer>
     </main>
   );
 }
