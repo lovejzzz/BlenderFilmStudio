@@ -45,7 +45,7 @@ const gaps: {
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: 'B30 的 CENTER 干预 144/144 strict exact；B31 确认单点边缘参考误差代价。B32 正式支持 Q4/Q8 静态成本—质量曲线。B33 又以两个不相交八帧区间、56 个 Blender PID 与 448 个 EXR 完成时间派生和 holdout：Q8 motion mean 0.9497×、max 1.0397×，time 7.996×。',
+    known: 'B30 的 CENTER 干预 144/144 strict exact；B31 确认单点边缘参考误差代价。B32/B33 正式支持 Q4/Q8 静态成本—质量曲线与 Q8 连续时间 proxy。B34 又用 13 PID / 1,872 EXR 生成三条 144/144 RGB-exact carrier、18 个平衡 session 与正式 response chain；但独立观察者仍为 0/18。',
     missing: '静态与连续帧 scene-linear proxy 已确认；仍缺可见 edge flicker、motion blur、独立人类感知、完整镜头成本，以及跨场景、GPU、驱动、OS 与补丁版本证据。正式 holdout 的 global Q8/Q4 max 0.7386 距 0.75 门仅 0.0114，需作为复制攻击重点。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>停止让 analyzer 冒充观众，完成独立盲评。</h3><p>B33 已用 28 个正式新 PID、224 EXR 和三个 temporal-error 域完成连续帧 proxy holdout；最弱 transition 也被原样保留。下一协议应生成匿名、随机化 NATURAL/Q4/Q8 片段，冻结显示、播放器、观看距离、问题措辞与排除条件，由独立人类提交结果；现有 B26 human gate 仍为 0/18。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>载体已经完成；现在只接受真实独立 response。</h3><p>B34 已生成匿名 NATURAL/Q4/Q8 六秒片段、六种顺序各三份 session、逐次 dropped-frame telemetry、immutable response、append-only ledger 与 18 人正式分析门。开发者 pilot 保持排除。下一步是由研究协调者分发 sealed observer package，收满 18 名有效非开发者；不足 18 人不得运行正式方向判定。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/quadrature-temporal-holdout-v0-1">查看 B33 连续时间门 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/human-quadrature-review-v0-1">查看 B34 独立盲评包 →</Link></footer>
     </main>
   );
 }
