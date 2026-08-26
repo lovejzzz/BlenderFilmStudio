@@ -36,7 +36,7 @@ export function analyzeB36(record) {
     'TRUSTED_PROBE_REPORTS',
   );
   const runtimeIdentity = requireGate(
-    cells.length === 6 && cells.every(cell => cell.report?.blenderVersion === '5.2.0' && cell.report?.blenderBuildHash === 'fbe6228777e7'),
+    cells.length === 6 && cells.every(cell => cell.report?.blenderVersion === '5.2.0 LTS' && cell.report?.blenderBuildHash === 'fbe6228777e7'),
     'RUNTIME_IDENTITY',
   );
   const registeredText = requireGate(
