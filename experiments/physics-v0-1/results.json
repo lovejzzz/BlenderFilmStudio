@@ -1,0 +1,359 @@
+{
+  "documentType": "BFS_B06_PHYSICS_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T06:46:27.121Z",
+  "environment": {
+    "blender": "5.2.0 LTS",
+    "platform": "darwin-arm64",
+    "node": "v26.5.0"
+  },
+  "cleanBuilds": {
+    "runs": [
+      {
+        "label": "positive-a",
+        "structureHash": "e18e4d1d15f9f97890354ce5807f4bdce6ed9c74b507e17c8df0c77d14fdfb6e",
+        "blendSha256": "5721cb1a6ead14c9ba4713aa1467e92a124ff4c78366a58f328a41a492a6139f",
+        "passed": true,
+        "measurements": {
+          "verticalTransportM": 0.300012082,
+          "maximumHoldMidpointDriftM": 0.000898925,
+          "holdRotationChangeDeg": 0.309010138,
+          "maximumCentreAxisEscapeM": 0.000709679,
+          "releaseFallM": 2.909608796,
+          "maximumCollisionMarginM": 0.0002,
+          "maximumColliderStepM": 0.006500005
+        }
+      },
+      {
+        "label": "positive-b",
+        "structureHash": "e18e4d1d15f9f97890354ce5807f4bdce6ed9c74b507e17c8df0c77d14fdfb6e",
+        "blendSha256": "255403e3627cc798a53b300ea9bb339505523855c92275f968c9f27e80102cb0",
+        "passed": true,
+        "measurements": {
+          "verticalTransportM": 0.300047371,
+          "maximumHoldMidpointDriftM": 0.000910519,
+          "holdRotationChangeDeg": 0.158258738,
+          "maximumCentreAxisEscapeM": 0.000709679,
+          "releaseFallM": 2.915924743,
+          "maximumCollisionMarginM": 0.0002,
+          "maximumColliderStepM": 0.006500005
+        }
+      }
+    ],
+    "structureHashesEqual": true,
+    "blendSha256Equal": false,
+    "trajectoryMaximumDivergenceM": 0.1068249893162695,
+    "trajectoryMaximumDivergenceFrame": 132,
+    "trajectoryDivergenceWindows": {
+      "closure": {
+        "maximumM": 0,
+        "frame": 0
+      },
+      "hold": {
+        "maximumM": 0.00037030627282426637,
+        "frame": 49
+      },
+      "release": {
+        "maximumM": 0.1068249893162695,
+        "frame": 132
+      }
+    },
+    "trajectoryReproducible": false
+  },
+  "firstRunFalsification": {
+    "evaluation": "experiments/physics-v0-1/B06.evaluation.json",
+    "cause": "2 mm initial overlap and narrow equal-depth faces injected energy and allowed immediate edge escape.",
+    "observed": {
+      "verticalTransportM": -14.601222029,
+      "maximumHoldMidpointDriftM": 15.941267728,
+      "holdRotationChangeDeg": 162.96157903
+    }
+  },
+  "intermediateReproducibilityFailure": {
+    "cause": "A floor impact after release produced chaotic trajectory divergence despite identical structures and two individually passing trajectories.",
+    "maximumTrajectoryDivergenceM": 0.138790659,
+    "correction": "The floor was moved outside the observation window and declared damping was increased; the protocol thresholds were unchanged."
+  },
+  "evaluation": {
+    "passed": true,
+    "measurements": {
+      "verticalTransportM": 0.300012082,
+      "maximumHoldMidpointDriftM": 0.000898925,
+      "holdRotationChangeDeg": 0.309010138,
+      "maximumCentreAxisEscapeM": 0.000709679,
+      "releaseFallM": 2.909608796,
+      "maximumCollisionMarginM": 0.0002,
+      "maximumColliderStepM": 0.006500005
+    },
+    "checks": [
+      {
+        "id": "B06_C01_NO_SHORTCUT",
+        "pass": true,
+        "observed": {
+          "parent": null,
+          "constraints": [],
+          "rigidBodyConstraintObjects": [],
+          "drivers": 0,
+          "transformAnimationPaths": []
+        },
+        "threshold": "none"
+      },
+      {
+        "id": "B06_C02_PROP_DYNAMIC",
+        "pass": true,
+        "observed": [
+          false
+        ],
+        "threshold": [
+          false
+        ]
+      },
+      {
+        "id": "B06_C03_INDEPENDENT_COLLIDERS",
+        "pass": true,
+        "observed": {
+          "leftAction": "B06_LEFTAction",
+          "rightAction": "B06_RIGHTAction"
+        },
+        "threshold": "distinct animation actions"
+      },
+      {
+        "id": "B06_C04_VERTICAL_TRANSPORT",
+        "pass": true,
+        "observed": 0.300012082,
+        "threshold": ">=0.25m"
+      },
+      {
+        "id": "B06_C05_HOLD_MIDPOINT_DRIFT",
+        "pass": true,
+        "observed": 0.000898925,
+        "threshold": "<=0.03m"
+      },
+      {
+        "id": "B06_C06_HOLD_ROTATION",
+        "pass": true,
+        "observed": 0.309010138,
+        "threshold": "<=10deg"
+      },
+      {
+        "id": "B06_C07_BETWEEN_COLLIDERS",
+        "pass": true,
+        "observed": 0.000709679,
+        "threshold": "<=0.02m centre-axis escape"
+      },
+      {
+        "id": "B06_C08_RELEASE_FALL",
+        "pass": true,
+        "observed": 2.909608796,
+        "threshold": ">=0.03m by frame132"
+      },
+      {
+        "id": "B06_C09_SOLVER_BUDGET",
+        "pass": true,
+        "observed": {
+          "substepsPerFrame": 240,
+          "solverIterations": 40
+        },
+        "threshold": {
+          "substepsPerFrame": 240,
+          "solverIterations": 40
+        }
+      },
+      {
+        "id": "B06_C10_COLLISION_MARGIN",
+        "pass": true,
+        "observed": 0.0002,
+        "threshold": "<=0.001m declared contact gap"
+      },
+      {
+        "id": "B06_C11_COLLIDER_STEP",
+        "pass": true,
+        "observed": 0.006500005,
+        "threshold": "<=0.01m per frame"
+      }
+    ]
+  },
+  "negativeTests": [
+    {
+      "id": "N01_ZERO_FRICTION",
+      "expectedCheck": "B06_C04_VERTICAL_TRANSPORT",
+      "rejected": true,
+      "observed": {
+        "id": "B06_C04_VERTICAL_TRANSPORT",
+        "pass": false,
+        "observed": -4.93163615,
+        "threshold": ">=0.25m"
+      },
+      "allFailedChecks": [
+        "B06_C04_VERTICAL_TRANSPORT",
+        "B06_C05_HOLD_MIDPOINT_DRIFT",
+        "B06_C06_HOLD_ROTATION",
+        "B06_C07_BETWEEN_COLLIDERS",
+        "B06_C08_RELEASE_FALL"
+      ]
+    },
+    {
+      "id": "N02_ONE_COLLIDER",
+      "expectedCheck": "B06_C04_VERTICAL_TRANSPORT",
+      "rejected": true,
+      "observed": {
+        "id": "B06_C04_VERTICAL_TRANSPORT",
+        "pass": false,
+        "observed": -4.91199464,
+        "threshold": ">=0.25m"
+      },
+      "allFailedChecks": [
+        "B06_C04_VERTICAL_TRANSPORT",
+        "B06_C05_HOLD_MIDPOINT_DRIFT",
+        "B06_C06_HOLD_ROTATION",
+        "B06_C07_BETWEEN_COLLIDERS",
+        "B06_C08_RELEASE_FALL"
+      ]
+    },
+    {
+      "id": "N03_INSUFFICIENT_CLOSURE",
+      "expectedCheck": "B06_C04_VERTICAL_TRANSPORT",
+      "rejected": true,
+      "observed": {
+        "id": "B06_C04_VERTICAL_TRANSPORT",
+        "pass": false,
+        "observed": -4.911636169,
+        "threshold": ">=0.25m"
+      },
+      "allFailedChecks": [
+        "B06_C04_VERTICAL_TRANSPORT",
+        "B06_C05_HOLD_MIDPOINT_DRIFT",
+        "B06_C08_RELEASE_FALL"
+      ]
+    },
+    {
+      "id": "N04_PROP_KINEMATIC",
+      "expectedCheck": "B06_C02_PROP_DYNAMIC",
+      "rejected": true,
+      "observed": {
+        "id": "B06_C02_PROP_DYNAMIC",
+        "pass": false,
+        "observed": [
+          true
+        ],
+        "threshold": [
+          false
+        ]
+      },
+      "allFailedChecks": [
+        "B06_C02_PROP_DYNAMIC",
+        "B06_C04_VERTICAL_TRANSPORT",
+        "B06_C05_HOLD_MIDPOINT_DRIFT",
+        "B06_C08_RELEASE_FALL"
+      ]
+    },
+    {
+      "id": "N05_FORBIDDEN_PARENT",
+      "expectedCheck": "B06_C01_NO_SHORTCUT",
+      "rejected": true,
+      "observed": {
+        "id": "B06_C01_NO_SHORTCUT",
+        "pass": false,
+        "observed": {
+          "parent": "B06_LEFT",
+          "constraints": [],
+          "rigidBodyConstraintObjects": [],
+          "drivers": 0,
+          "transformAnimationPaths": []
+        },
+        "threshold": "none"
+      },
+      "allFailedChecks": [
+        "B06_C01_NO_SHORTCUT"
+      ]
+    },
+    {
+      "id": "N06_FAST_TRANSPORT",
+      "expectedCheck": "B06_C11_COLLIDER_STEP",
+      "rejected": true,
+      "observed": {
+        "id": "B06_C11_COLLIDER_STEP",
+        "pass": false,
+        "observed": 3.000000042,
+        "threshold": "<=0.01m per frame"
+      },
+      "allFailedChecks": [
+        "B06_C11_COLLIDER_STEP"
+      ]
+    },
+    {
+      "id": "N07_LARGE_MARGIN",
+      "expectedCheck": "B06_C10_COLLISION_MARGIN",
+      "rejected": true,
+      "observed": {
+        "id": "B06_C10_COLLISION_MARGIN",
+        "pass": false,
+        "observed": 0.005,
+        "threshold": "<=0.001m declared contact gap"
+      },
+      "allFailedChecks": [
+        "B06_C10_COLLISION_MARGIN"
+      ]
+    },
+    {
+      "id": "N08_LOW_SUBSTEPS",
+      "expectedCheck": "B06_C09_SOLVER_BUDGET",
+      "rejected": true,
+      "observed": {
+        "id": "B06_C09_SOLVER_BUDGET",
+        "pass": false,
+        "observed": {
+          "substepsPerFrame": 30,
+          "solverIterations": 40
+        },
+        "threshold": {
+          "substepsPerFrame": 240,
+          "solverIterations": 40
+        }
+      },
+      "allFailedChecks": [
+        "B06_C09_SOLVER_BUDGET"
+      ]
+    }
+  ],
+  "allAutomatedChecksPassed": false,
+  "formalB06Complete": false,
+  "remainingGates": [
+    "PhysicsSpec/SceneSpec/immutable BuildPlan integration",
+    "active-camera visibility",
+    "authentic independent human review"
+  ],
+  "explicitNonClaims": [
+    "This Bullet rigid-body spike does not establish human grasp realism, force closure, measured friction, skin deformation, pressure, tendon force, or generalization.",
+    "A passing trajectory would be specific to the declared geometry, solver budget, time step, margin, friction, and motion profile."
+  ],
+  "repeatedReproducibilityAudit": {
+    "independentRuns": 10,
+    "pairwiseComparisons": 45,
+    "maximumFullTrajectoryDivergence": {
+      "maximumM": 0.1068249893162695,
+      "frame": 132,
+      "pair": [
+        "run-01",
+        "run-02"
+      ]
+    },
+    "maximumHoldDivergence": {
+      "maximumM": 0.00037030627282426637,
+      "frame": 49,
+      "pair": [
+        "run-01",
+        "run-02"
+      ]
+    },
+    "maximumReleaseDivergence": {
+      "maximumM": 0.1068249893162695,
+      "frame": 132,
+      "pair": [
+        "run-01",
+        "run-02"
+      ]
+    },
+    "reproducibilityGatePassed": false
+  }
+}
