@@ -1,0 +1,1721 @@
+{
+  "documentType": "BFS_B32_QUADRATURE_COST_HOLDOUT_RESULT",
+  "version": "0.2.0",
+  "executedAtUtc": "2026-08-26T15:45:06.862Z",
+  "decision": "COST_QUALITY_CURVE_SUPPORT",
+  "independentDecision": "COST_QUALITY_CURVE_SUPPORT",
+  "validExperiment": true,
+  "question": "Do deterministic Q4 and Q8 scene-linear jitter ensembles reproduce a stable cost-quality curve on a second set of new frames under an exact top-k edge-mask contract?",
+  "design": {
+    "frames": [
+      31,
+      67,
+      109,
+      143
+    ],
+    "framesExcludedFromPriorQualityWork": [
+      10,
+      22,
+      37,
+      38,
+      44,
+      59,
+      72,
+      86,
+      97,
+      103,
+      120,
+      136
+    ],
+    "natural32": {
+      "samples": 32,
+      "replicates": [
+        "A",
+        "B"
+      ],
+      "processes": 2,
+      "renderCalls": 8
+    },
+    "reference1024": {
+      "samples": 1024,
+      "replicates": [
+        "A",
+        "B"
+      ],
+      "processes": 2,
+      "renderCalls": 8,
+      "role": "pixelwise-mean reference proxy, not truth"
+    },
+    "quadrature4": {
+      "samplesPerComponent": 32,
+      "points": [
+        [
+          -0.25,
+          -0.25
+        ],
+        [
+          -0.25,
+          0.25
+        ],
+        [
+          0.25,
+          -0.25
+        ],
+        [
+          0.25,
+          0.25
+        ]
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "replicates": [
+        "A",
+        "B"
+      ],
+      "processes": 8,
+      "renderCalls": 32
+    },
+    "stratified8": {
+      "samplesPerComponent": 32,
+      "points": [
+        [
+          -0.375,
+          -0.375
+        ],
+        [
+          -0.375,
+          0.125
+        ],
+        [
+          -0.125,
+          -0.125
+        ],
+        [
+          -0.125,
+          0.375
+        ],
+        [
+          0.125,
+          -0.375
+        ],
+        [
+          0.125,
+          0.125
+        ],
+        [
+          0.375,
+          -0.125
+        ],
+        [
+          0.375,
+          0.375
+        ]
+      ],
+      "weights": [
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125
+      ],
+      "replicates": [
+        "A",
+        "B"
+      ],
+      "processes": 16,
+      "renderCalls": 64
+    },
+    "totalProcesses": 28,
+    "totalRenderCalls": 112,
+    "allProcessesMustBeUnique": true,
+    "compositeDomain": "scene-linear RGB"
+  },
+  "identities": {
+    "reviewSpecUri": "specs/review-render-spec.v0.1.json",
+    "reviewSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderBinarySha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "engine": "BLENDER_EEVEE",
+    "resolution": [
+      960,
+      540
+    ],
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "motionBlur": false,
+    "dither": 0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "output": "OPEN_EXR RGBA 32-bit float ZIP",
+    "holdoutSpecSha256": "4f56bde9d9037bbeb2e508d4d5880c0141c625bb20d37aea439812a1599b3b21",
+    "evidenceBasis": {
+      "quadrature4ResultsSha256": "79b020ff26eb389447c2642e41c6ad4a40370f57074ddf5362f9b0595da45bae",
+      "quadrature4AnalysisSha256": "5f49a5ad88374a0421375d3d4bedb7ea3eb9dd3b38f725df653bf2ce49a9e0cb",
+      "quadrature4Status": "EXPLORATORY_DERIVATION_ONLY_NOT_CONFIRMATION",
+      "stratified8ResultsSha256": "518b4381656a8bd6fa5602523966a0da2ff69d25c6246be0836d0bb35ffc3c5a",
+      "stratified8AnalysisSha256": "d4b9f35f3afad6fb9714119335ee55329de3f1207c84a0afa464deeccbd51469",
+      "stratified8Decision": "PROMOTE_Q4_Q8_COST_CURVE_NEAR_NATURAL",
+      "stratified8Status": "EXPLORATORY_DERIVATION_ONLY_NOT_CONFIRMATION",
+      "invalidV01ResultSha256": "7455bfa65783596ab922f01520812feb5cfbfa08abeb1d769a753e2259f813a8",
+      "invalidV01TieDiagnosticSha256": "722759c3b5084fe786c08eb0c348fcc0ee6a351a60250e086aeace5c0f4f4d80",
+      "invalidV01ResearchSha256": "d955c7804fbfb1a4a025d2b076a76c52445fb745128f1ae44067c33ca7e08b31",
+      "invalidV01Decision": "IDENTITY_OR_DESIGN_INVALID"
+    },
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "rendererSha256": "72391b713b3c021d0d313b0e9aef8a0f2780aa73fe2aaa377409349d091a6193",
+    "analyzerSha256": "a8d9c8c4c4b5a14c4c6307cde69c222f0ee7622cf82690924d8a20bf544d97fd",
+    "runnerSha256": "52617c3c52b8ac3c4d69d586d7086bb01379e481b9e582b8e5f256bc59c09388"
+  },
+  "componentVerdicts": {
+    "dominance": "Q8_OVER_Q4_DOMINANCE_SUPPORT",
+    "q4": "Q4_COST_POINT_SUPPORT",
+    "q8": "Q8_NEAR_NATURAL_PROXY_SUPPORT",
+    "reference": "REFERENCE_RELIABLE",
+    "repeatability": "Q4_Q8_EXACT_REPEATABILITY_SUPPORT"
+  },
+  "summary": {
+    "dominanceFramesPassing": 4,
+    "holdoutFrames": 4,
+    "maximumQ4ToNaturalEdge": 1.3009657290609316,
+    "maximumQ8ToNaturalEdge": 0.9574345896562179,
+    "maximumReferenceReliabilityRatio": 0.0005276818053014747,
+    "q4FramesPassing": 4,
+    "q4ToNaturalEdgeMean": 1.2705887746276285,
+    "q8FramesPassing": 4,
+    "q8ToNaturalEdgeMean": 0.9510231933405789,
+    "q8ToQ4EdgeMean": 0.7486800844095065,
+    "reliableFrames": 4
+  },
+  "cost": {
+    "q4ToNaturalRenderTimeRatio": 4.065094168840138,
+    "q8ToNaturalRenderTimeRatio": 8.14248962433036,
+    "q8ToQ4RenderTimeRatio": 2.003026076676003,
+    "renderSeconds": {
+      "NATURAL32": 1.49147,
+      "QUADRATURE4": 6.062966,
+      "REFERENCE1024": 28.260856,
+      "STRATIFIED8": 12.144279000000001
+    },
+    "scope": "Blender render timers only; excludes orchestration, I/O and compositing overhead"
+  },
+  "frames": [
+    {
+      "edgePixels": 25920,
+      "edgeSelection": {
+        "boundaryMagnitude": 0.012867855422953552,
+        "rule": "exact top-k: magnitude descending, flattened index ascending",
+        "selectedValuesEqualToBoundary": 1,
+        "valuesEqualToBoundary": 1,
+        "valuesGreaterThanBoundary": 25919
+      },
+      "frame": 31,
+      "methods": {
+        "NATURAL32": {
+          "edgeRmseMean": 0.011488471150344959,
+          "globalRmseMean": 0.005079363515795612,
+          "nonEdgeRmseMean": 0.004495692120121935,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.006838334268993802,
+                "maximumAbsoluteError": 0.1015625,
+                "rmse": 0.011488471150344959,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0014084507396191727,
+                "maximumAbsoluteError": 0.1015625,
+                "rmse": 0.005079363515795612,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011226673959678765,
+                "maximumAbsoluteError": 0.09765625,
+                "rmse": 0.004495692120121935,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.006838334268993802,
+                "maximumAbsoluteError": 0.1015625,
+                "rmse": 0.011488471150344959,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0014084507396191727,
+                "maximumAbsoluteError": 0.1015625,
+                "rmse": 0.005079363515795612,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011226673959678765,
+                "maximumAbsoluteError": 0.09765625,
+                "rmse": 0.004495692120121935,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "QUADRATURE4": {
+          "edgeRmseMean": 0.014399410151875895,
+          "globalRmseMean": 0.00533581637495697,
+          "nonEdgeRmseMean": 0.004365388479868673,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.008182877118204847,
+                "maximumAbsoluteError": 0.155517578125,
+                "rmse": 0.014399410151875895,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0015473190051170044,
+                "maximumAbsoluteError": 0.155517578125,
+                "rmse": 0.00533581637495697,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011980791044281704,
+                "maximumAbsoluteError": 0.100341796875,
+                "rmse": 0.004365388479868673,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.008182877118204847,
+                "maximumAbsoluteError": 0.155517578125,
+                "rmse": 0.014399410151875895,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0015473190051170044,
+                "maximumAbsoluteError": 0.155517578125,
+                "rmse": 0.00533581637495697,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011980791044281704,
+                "maximumAbsoluteError": 0.100341796875,
+                "rmse": 0.004365388479868673,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "STRATIFIED8": {
+          "edgeRmseMean": 0.01085464636077374,
+          "globalRmseMean": 0.004809475447229369,
+          "nonEdgeRmseMean": 0.004259958820733663,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.0064013334428086694,
+                "maximumAbsoluteError": 0.0848388671875,
+                "rmse": 0.01085464636077374,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0014271530699092173,
+                "maximumAbsoluteError": 0.0924072265625,
+                "rmse": 0.004809475447229369,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011653541029145093,
+                "maximumAbsoluteError": 0.0924072265625,
+                "rmse": 0.004259958820733663,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.0064013334428086694,
+                "maximumAbsoluteError": 0.0848388671875,
+                "rmse": 0.01085464636077374,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0014271530699092173,
+                "maximumAbsoluteError": 0.0924072265625,
+                "rmse": 0.004809475447229369,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011653541029145093,
+                "maximumAbsoluteError": 0.0924072265625,
+                "rmse": 0.004259958820733663,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "q4ToNaturalEdgeRmse": 1.2533791453568242,
+        "q4ToNaturalGlobalRmse": 1.05048917218936,
+        "q8ToNaturalEdgeRmse": 0.9448294919944864,
+        "q8ToNaturalGlobalRmse": 0.9468657701448311,
+        "q8ToQ4EdgeRmse": 0.7538257641310149
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 1.5698342656893005e-8,
+          "maximumAbsoluteError": 0.00048828125,
+          "rmse": 0.0000021445567899362383,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 7.849171328446502e-10,
+          "maximumAbsoluteError": 0.00048828125,
+          "rmse": 4.795374763906166e-7,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0.00018667033775611168
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeSelection": {
+        "boundaryMagnitude": 0.013315995169040883,
+        "rule": "exact top-k: magnitude descending, flattened index ascending",
+        "selectedValuesEqualToBoundary": 1,
+        "valuesEqualToBoundary": 1,
+        "valuesGreaterThanBoundary": 25919
+      },
+      "frame": 67,
+      "methods": {
+        "NATURAL32": {
+          "edgeRmseMean": 0.012572852781689155,
+          "globalRmseMean": 0.005749078170325274,
+          "nonEdgeRmseMean": 0.0051450608359156266,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.007640776074962851,
+                "maximumAbsoluteError": 0.10546875,
+                "rmse": 0.012572852781689155,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0017770134458326018,
+                "maximumAbsoluteError": 0.1318359375,
+                "rmse": 0.005749078170325274,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0014683943600889045,
+                "maximumAbsoluteError": 0.1318359375,
+                "rmse": 0.0051450608359156266,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.007640776074962851,
+                "maximumAbsoluteError": 0.10546875,
+                "rmse": 0.012572852781689155,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0017770134458326018,
+                "maximumAbsoluteError": 0.1318359375,
+                "rmse": 0.005749078170325274,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0014683943600889045,
+                "maximumAbsoluteError": 0.1318359375,
+                "rmse": 0.0051450608359156266,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "QUADRATURE4": {
+          "edgeRmseMean": 0.01566104401155147,
+          "globalRmseMean": 0.006012277519743493,
+          "nonEdgeRmseMean": 0.005014092350862124,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.009099697790763996,
+                "maximumAbsoluteError": 0.1805419921875,
+                "rmse": 0.01566104401155147,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0019165624717993992,
+                "maximumAbsoluteError": 0.1805419921875,
+                "rmse": 0.006012277519743493,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0015385027181696834,
+                "maximumAbsoluteError": 0.1201171875,
+                "rmse": 0.005014092350862124,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.009099697790763996,
+                "maximumAbsoluteError": 0.1805419921875,
+                "rmse": 0.01566104401155147,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0019165624717993992,
+                "maximumAbsoluteError": 0.1805419921875,
+                "rmse": 0.006012277519743493,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0015385027181696834,
+                "maximumAbsoluteError": 0.1201171875,
+                "rmse": 0.005014092350862124,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "STRATIFIED8": {
+          "edgeRmseMean": 0.011971909887453416,
+          "globalRmseMean": 0.005477011395237841,
+          "nonEdgeRmseMean": 0.004902343425224514,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.0072783680763018966,
+                "maximumAbsoluteError": 0.09735107421875,
+                "rmse": 0.011971909887453416,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0017894526528110229,
+                "maximumAbsoluteError": 0.1240234375,
+                "rmse": 0.005477011395237841,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0015005623673641348,
+                "maximumAbsoluteError": 0.1240234375,
+                "rmse": 0.004902343425224514,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.0072783680763018966,
+                "maximumAbsoluteError": 0.09735107421875,
+                "rmse": 0.011971909887453416,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0017894526528110229,
+                "maximumAbsoluteError": 0.1240234375,
+                "rmse": 0.005477011395237841,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0015005623673641348,
+                "maximumAbsoluteError": 0.1240234375,
+                "rmse": 0.004902343425224514,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "q4ToNaturalEdgeRmse": 1.2456237485226818,
+        "q4ToNaturalGlobalRmse": 1.0457811394488878,
+        "q8ToNaturalEdgeRmse": 0.9522031392023503,
+        "q8ToNaturalGlobalRmse": 0.9526764522890389,
+        "q8ToQ4EdgeRmse": 0.7644388125480666
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 0,
+          "maximumAbsoluteError": 0,
+          "rmse": 0,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 0,
+          "maximumAbsoluteError": 0,
+          "rmse": 0,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeSelection": {
+        "boundaryMagnitude": 0.014879064213081232,
+        "rule": "exact top-k: magnitude descending, flattened index ascending",
+        "selectedValuesEqualToBoundary": 1,
+        "valuesEqualToBoundary": 2,
+        "valuesGreaterThanBoundary": 25919
+      },
+      "frame": 109,
+      "methods": {
+        "NATURAL32": {
+          "edgeRmseMean": 0.014078137242336764,
+          "globalRmseMean": 0.006996601882884419,
+          "nonEdgeRmseMean": 0.00641074266958684,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.008631111981937424,
+                "maximumAbsoluteError": 0.115234375,
+                "rmse": 0.014078137242336764,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0024909533603201185,
+                "maximumAbsoluteError": 0.1513671875,
+                "rmse": 0.006996601882884419,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.002167787117077103,
+                "maximumAbsoluteError": 0.1513671875,
+                "rmse": 0.00641074266958684,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.008631111981937424,
+                "maximumAbsoluteError": 0.115234375,
+                "rmse": 0.014078137242336764,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0024909533603201185,
+                "maximumAbsoluteError": 0.1513671875,
+                "rmse": 0.006996601882884419,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.002167787117077103,
+                "maximumAbsoluteError": 0.1513671875,
+                "rmse": 0.00641074266958684,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "QUADRATURE4": {
+          "edgeRmseMean": 0.018053612800792086,
+          "globalRmseMean": 0.007296346904310848,
+          "nonEdgeRmseMean": 0.0062357231792648845,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.010458144159228713,
+                "maximumAbsoluteError": 0.21044921875,
+                "rmse": 0.018053612800792086,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0026220998946776606,
+                "maximumAbsoluteError": 0.21044921875,
+                "rmse": 0.007296346904310848,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0022096765123328682,
+                "maximumAbsoluteError": 0.143310546875,
+                "rmse": 0.0062357231792648845,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.010458144159228713,
+                "maximumAbsoluteError": 0.21044921875,
+                "rmse": 0.018053612800792086,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0026220998946776606,
+                "maximumAbsoluteError": 0.21044921875,
+                "rmse": 0.007296346904310848,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0022096765123328682,
+                "maximumAbsoluteError": 0.143310546875,
+                "rmse": 0.0062357231792648845,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "STRATIFIED8": {
+          "edgeRmseMean": 0.013368958857055259,
+          "globalRmseMean": 0.006634782665780622,
+          "nonEdgeRmseMean": 0.006077039443335373,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.008180987902384236,
+                "maximumAbsoluteError": 0.11279296875,
+                "rmse": 0.013368958857055259,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0024561396216659388,
+                "maximumAbsoluteError": 0.13818359375,
+                "rmse": 0.006634782665780622,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0021548318174176074,
+                "maximumAbsoluteError": 0.13818359375,
+                "rmse": 0.006077039443335373,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.008180987902384236,
+                "maximumAbsoluteError": 0.11279296875,
+                "rmse": 0.013368958857055259,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0024561396216659388,
+                "maximumAbsoluteError": 0.13818359375,
+                "rmse": 0.006634782665780622,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0021548318174176074,
+                "maximumAbsoluteError": 0.13818359375,
+                "rmse": 0.006077039443335373,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "q4ToNaturalEdgeRmse": 1.282386475570077,
+        "q4ToNaturalGlobalRmse": 1.0428415145586154,
+        "q8ToNaturalEdgeRmse": 0.9496255525092613,
+        "q8ToNaturalGlobalRmse": 0.9482864363071872,
+        "q8ToQ4EdgeRmse": 0.7405143227879967
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 0,
+          "maximumAbsoluteError": 0,
+          "rmse": 0,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 0,
+          "maximumAbsoluteError": 0,
+          "rmse": 0,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeSelection": {
+        "boundaryMagnitude": 0.016686167831681527,
+        "rule": "exact top-k: magnitude descending, flattened index ascending",
+        "selectedValuesEqualToBoundary": 2,
+        "valuesEqualToBoundary": 2,
+        "valuesGreaterThanBoundary": 25918
+      },
+      "frame": 143,
+      "methods": {
+        "NATURAL32": {
+          "edgeRmseMean": 0.0154088191571157,
+          "globalRmseMean": 0.008284144785861524,
+          "nonEdgeRmseMean": 0.007729333697863504,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.009508036610520916,
+                "maximumAbsoluteError": 0.1162109375,
+                "rmse": 0.0154088191571157,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0033265041593661523,
+                "maximumAbsoluteError": 0.138671875,
+                "rmse": 0.008284144785861524,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0030011603461474806,
+                "maximumAbsoluteError": 0.138671875,
+                "rmse": 0.007729333697863504,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.009508036610520916,
+                "maximumAbsoluteError": 0.1162109375,
+                "rmse": 0.0154088191571157,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0033265041593661523,
+                "maximumAbsoluteError": 0.138671875,
+                "rmse": 0.008284144785861524,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0030011603461474806,
+                "maximumAbsoluteError": 0.138671875,
+                "rmse": 0.007729333697863504,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "QUADRATURE4": {
+          "edgeRmseMean": 0.020046345648705076,
+          "globalRmseMean": 0.008574616652310267,
+          "nonEdgeRmseMean": 0.007499561533899565,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.011575431030228305,
+                "maximumAbsoluteError": 0.2542724609375,
+                "rmse": 0.020046345648705076,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003435155149288629,
+                "maximumAbsoluteError": 0.2542724609375,
+                "rmse": 0.008574616652310267,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0030067195766075934,
+                "maximumAbsoluteError": 0.123291015625,
+                "rmse": 0.007499561533899565,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.011575431030228305,
+                "maximumAbsoluteError": 0.2542724609375,
+                "rmse": 0.020046345648705076,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003435155149288629,
+                "maximumAbsoluteError": 0.2542724609375,
+                "rmse": 0.008574616652310267,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0030067195766075934,
+                "maximumAbsoluteError": 0.123291015625,
+                "rmse": 0.007499561533899565,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        },
+        "STRATIFIED8": {
+          "edgeRmseMean": 0.014752936446779939,
+          "globalRmseMean": 0.007858189706115563,
+          "nonEdgeRmseMean": 0.007317512430871732,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.009104988383658138,
+                "maximumAbsoluteError": 0.128936767578125,
+                "rmse": 0.014752936446779939,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003244671920935313,
+                "maximumAbsoluteError": 0.128936767578125,
+                "rmse": 0.007858189706115563,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0029362342123709535,
+                "maximumAbsoluteError": 0.1251220703125,
+                "rmse": 0.007317512430871732,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.009104988383658138,
+                "maximumAbsoluteError": 0.128936767578125,
+                "rmse": 0.014752936446779939,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003244671920935313,
+                "maximumAbsoluteError": 0.128936767578125,
+                "rmse": 0.007858189706115563,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0029362342123709535,
+                "maximumAbsoluteError": 0.1251220703125,
+                "rmse": 0.007317512430871732,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0,
+            "maximumAbsoluteError": 0,
+            "rmse": 0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "q4ToNaturalEdgeRmse": 1.3009657290609316,
+        "q4ToNaturalGlobalRmse": 1.0350635912284498,
+        "q8ToNaturalEdgeRmse": 0.9574345896562179,
+        "q8ToNaturalGlobalRmse": 0.948581888564655,
+        "q8ToQ4EdgeRmse": 0.735941438170948
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 8.948055314429013e-8,
+          "maximumAbsoluteError": 0.0009765625,
+          "rmse": 0.00000813095351039076,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 4.474027657214506e-9,
+          "maximumAbsoluteError": 0.0009765625,
+          "rmse": 0.0000018181364771124283,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0.0005276818053014747
+      }
+    }
+  ],
+  "aggregate": {
+    "uniqueProcesses": 28,
+    "renderProcesses": 28,
+    "renderCalls": 112,
+    "outputFiles": 112,
+    "totalRenderSeconds": 47.959571,
+    "attacksPassed": 29,
+    "attacksTotal": 29
+  },
+  "processLedger": [
+    {
+      "orderIndex": 0,
+      "replicateId": "NATURAL32_A",
+      "cell": "NATURAL32",
+      "replicate": "A",
+      "processId": 52587,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "789e08ad27f356eb4c35b6391936ae6e9c28d8598ba14d98b66c25b5b0c61bb8",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "ff412e0de3136436e9d72698e5883d3fd42c583f66840a81ad844e5dd6ca9506"
+    },
+    {
+      "orderIndex": 1,
+      "replicateId": "NATURAL32_B",
+      "cell": "NATURAL32",
+      "replicate": "B",
+      "processId": 52653,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "d78d8ec9780b4fee7b50b10b5ce650d96ce8df15ec7a0f7e8ac723e91a619959",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "b596d6f9dc173219aa0c2f10a5616774a0d8b22901780fd9f0d5b061143f0f5e"
+    },
+    {
+      "orderIndex": 2,
+      "replicateId": "REFERENCE1024_A",
+      "cell": "REFERENCE1024",
+      "replicate": "A",
+      "processId": 52722,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "3cbc04b887a8b6cc9f8065d0abc61796600bdd849eae522508d58c191800a6c0",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "d64e8b12e3a00f55f83da0ef8ca006db200c6f57b418eae2e4f082363d2b7ccd"
+    },
+    {
+      "orderIndex": 3,
+      "replicateId": "REFERENCE1024_B",
+      "cell": "REFERENCE1024",
+      "replicate": "B",
+      "processId": 53548,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "f125711063ce0390ddcd62647929d952a76f24e41c83a80649201775cc399003",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "19e956be1b935ab5c7a3e82d91a9fd8f39c5056ce6f1ccbf081476a70ed27afc"
+    },
+    {
+      "orderIndex": 4,
+      "replicateId": "Q4_1_A",
+      "cell": "Q4_1",
+      "replicate": "A",
+      "processId": 54273,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "f78754f26ad99f507703af16d10494ceb317093a88f78eb5d1d1c9ed633ef370",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "d6b94f64dac554204f5f2c520aa8992a1ce0a1a031cfb8f23d287b410b33e293"
+    },
+    {
+      "orderIndex": 5,
+      "replicateId": "Q4_2_A",
+      "cell": "Q4_2",
+      "replicate": "A",
+      "processId": 54344,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "71108ed8ed19fa6458f8f6f0f94d9e7b77407d98399eeb74056f9f355e72cd4c",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "4b11c9dc3af921daa939e65c3df43c89e157dda11a2b944661554b445e3c93e6"
+    },
+    {
+      "orderIndex": 6,
+      "replicateId": "Q4_3_A",
+      "cell": "Q4_3",
+      "replicate": "A",
+      "processId": 54410,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "099717ef9f3b36d6b71bab5253be0d3915f1ef3a6933090b4a17e3dd3430aa66",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "601299c6795b4e652eeebaae6a41d367827eabfd1f73932ae87f13f28e048bea"
+    },
+    {
+      "orderIndex": 7,
+      "replicateId": "Q4_4_A",
+      "cell": "Q4_4",
+      "replicate": "A",
+      "processId": 54475,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "fad8367e9d672ad81197b0ccac057fdd7851736b67f962947618aa57185f3c32",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "b9f15bd4818d6948537d6956e7968cadbdd26516e922f5dca2ec7d7982184454"
+    },
+    {
+      "orderIndex": 8,
+      "replicateId": "Q4_1_B",
+      "cell": "Q4_1",
+      "replicate": "B",
+      "processId": 54540,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "793579dab5e4deed61e824532b5d396dadb6bf74fdf6115ec2cd2ffc66d99300",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "64fec1f59f9c763572e01310975b87006b2d1da96cde85261a07468b4dcdf4b4"
+    },
+    {
+      "orderIndex": 9,
+      "replicateId": "Q4_2_B",
+      "cell": "Q4_2",
+      "replicate": "B",
+      "processId": 54607,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "f3246015d4ea4e90753e0358ac04285bfa1432eb4b613019655faf5d6e9cf00f",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "29a06850171bddc9a9fc4dab11b4736052d0b2a32fef285e79f52a3a26afb846"
+    },
+    {
+      "orderIndex": 10,
+      "replicateId": "Q4_3_B",
+      "cell": "Q4_3",
+      "replicate": "B",
+      "processId": 54678,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "96cecf3e0d266368044f4c1c318023d5b78b6ce4bc13ed46c8664e619278d8f5",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "a180be6bdf37771d3d3b44093dbc020f0c2f28aff13276d45df55a642c026eab"
+    },
+    {
+      "orderIndex": 11,
+      "replicateId": "Q4_4_B",
+      "cell": "Q4_4",
+      "replicate": "B",
+      "processId": 54743,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "aa551609592e7a34b4bc5ff5ac49aa2fc67ad4d9d9e9274a0e8156674bb16a7c",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "8499e0e264064e89edf6330b0d45acb5f09bca66303c22f977b88afdfa284e03"
+    },
+    {
+      "orderIndex": 12,
+      "replicateId": "Q8_1_A",
+      "cell": "Q8_1",
+      "replicate": "A",
+      "processId": 54811,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "f0cc31bb13ea139c7bb0b329121b3f555f15dac71eb1e177103ba97eed0312c3",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "69909b15b9f9809f013803ddacc24cb8ff0bbc18f761c632b57770242dbfbccb"
+    },
+    {
+      "orderIndex": 13,
+      "replicateId": "Q8_2_A",
+      "cell": "Q8_2",
+      "replicate": "A",
+      "processId": 54878,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "ecad79ffc9ed7314749b6e9902aff2c69b9e622452c84e6dda7ba993c38f2157",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "00f1cca1343a68591cc51d2b372c8bd491b1127d66743df0fd8a1ce507b8c245"
+    },
+    {
+      "orderIndex": 14,
+      "replicateId": "Q8_3_A",
+      "cell": "Q8_3",
+      "replicate": "A",
+      "processId": 54942,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "12d5b5edb2a055294a2d22040b03da3ddb06451396687c4af41f5081e7519858",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "f18ebfe3042ae9f825256a0b2d54d6546e3068f79e28979a10128b5874e89216"
+    },
+    {
+      "orderIndex": 15,
+      "replicateId": "Q8_4_A",
+      "cell": "Q8_4",
+      "replicate": "A",
+      "processId": 55008,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "92466f6bac3158cf0a5c02ad28ea885b7b220f671b696846e8340de3a57650e4",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "cda633b794fdb77ca5372a9cc976864fdfb62db95daf4a3cfa5dcb4b62269f58"
+    },
+    {
+      "orderIndex": 16,
+      "replicateId": "Q8_5_A",
+      "cell": "Q8_5",
+      "replicate": "A",
+      "processId": 55126,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "3436fb739e41a73473040253d89c5a383c65c4687ffbd92319b4d15c50cdf52d",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "ef3d5f4a996c31f7a59e79ffcade0e77fb2a183ee79c6b0f627b1b10bcd33ad9"
+    },
+    {
+      "orderIndex": 17,
+      "replicateId": "Q8_6_A",
+      "cell": "Q8_6",
+      "replicate": "A",
+      "processId": 55222,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "ffa8664bda175e6fd5e5eba6e70f54ba13cf7eedb56ca9cb421f2a36f2e01ed9",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "0b16489c8b8abf2ee1de57dd8ff3d59966c50a29aaa3e9031d63d4c4229ec756"
+    },
+    {
+      "orderIndex": 18,
+      "replicateId": "Q8_7_A",
+      "cell": "Q8_7",
+      "replicate": "A",
+      "processId": 55289,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "60d85aaba6a19a53ed03746f1db947e5b86f2b3a70bb0a0ca69aa4ae79353623",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "ed55f72c50207c093605d7395643626e96bbf417e46cfb5afd2930c9722d332d"
+    },
+    {
+      "orderIndex": 19,
+      "replicateId": "Q8_8_A",
+      "cell": "Q8_8",
+      "replicate": "A",
+      "processId": 55354,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "43e85995aa67da1948798fef06efa33cad798d2926bd0024a1929668c7856ec7",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "80785575c987351541b37052fa728662134cd0c1013b65b029f8501bb8beb6c1"
+    },
+    {
+      "orderIndex": 20,
+      "replicateId": "Q8_1_B",
+      "cell": "Q8_1",
+      "replicate": "B",
+      "processId": 55424,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "4a129f7d39010bd83a20fc3047e78fa659ac88cdb6b4ab61f22216ae1c0a0501",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "dfcb30bb96cfe0429acd563c632d267e93fafa0932b3741a407e3f7855a8ee27"
+    },
+    {
+      "orderIndex": 21,
+      "replicateId": "Q8_2_B",
+      "cell": "Q8_2",
+      "replicate": "B",
+      "processId": 55492,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "722fff52ee4ae679fbed7e442fac6e48624dbd7780568050e636c3298b19372d",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "670339bfa870a88ce93b201b90debb9c13b48bff7617cad1864152cc2eef47f6"
+    },
+    {
+      "orderIndex": 22,
+      "replicateId": "Q8_3_B",
+      "cell": "Q8_3",
+      "replicate": "B",
+      "processId": 55580,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "c8a059445c692515a823a52416a201fb01f72f77c83b38b9944982e2856e72cd",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "e2582cc6fea5baf3cc74d59128c5931e39aa697aee3e3f71c247b64e0b625873"
+    },
+    {
+      "orderIndex": 23,
+      "replicateId": "Q8_4_B",
+      "cell": "Q8_4",
+      "replicate": "B",
+      "processId": 55645,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "8fd35025e6646b282b1178cebb7eb03b6ea623953ff64f94e554136fdbdb5c31",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "aa10a2dfc06168b21d9d14657daaee3d4d824a06513e70febbab19e331b15ae4"
+    },
+    {
+      "orderIndex": 24,
+      "replicateId": "Q8_5_B",
+      "cell": "Q8_5",
+      "replicate": "B",
+      "processId": 55717,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "abb85d19321254f5af213f40a020427fb730106ade37c23dd6e3e552fd8dabb3",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "67b911cb21d3a71331629238c15ca7cb300b858e29b8bf9b17f02d679460b245"
+    },
+    {
+      "orderIndex": 25,
+      "replicateId": "Q8_6_B",
+      "cell": "Q8_6",
+      "replicate": "B",
+      "processId": 55781,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "ad2ad36336b5eadda6ecf98300f3922422c02204228753d2640f3995e38453c1",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "2580b200a56e41bb8f24899e2427a966babeff72ecc58bcc5e78e2e376a36575"
+    },
+    {
+      "orderIndex": 26,
+      "replicateId": "Q8_7_B",
+      "cell": "Q8_7",
+      "replicate": "B",
+      "processId": 55846,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "dc9e3161fd2b626487c50b871cf51495d53387f8a200a2d36d90b9358d91876a",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "e7858d97f71035049dd339db7851cccac1a101a183eea88835f121079268eab6"
+    },
+    {
+      "orderIndex": 27,
+      "replicateId": "Q8_8_B",
+      "cell": "Q8_8",
+      "replicate": "B",
+      "processId": 55913,
+      "frames": [
+        31,
+        67,
+        109,
+        143
+      ],
+      "renderCalls": 4,
+      "renderReportSha256": "32834507d2a9a69b3c5d1742011089184dad355b8e4ce6dac1d34ad3389025c8",
+      "threadReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "0341d317aab6de55facdeffa308223a7dd4a626f021556c46ed245e84f4d5b52"
+    }
+  ],
+  "attacks": [
+    {
+      "id": "N_SPEC_SHA",
+      "expected": "SPEC_SHA",
+      "observed": "SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_Q4_EVIDENCE",
+      "expected": "Q4_EVIDENCE",
+      "observed": "Q4_EVIDENCE",
+      "pass": true
+    },
+    {
+      "id": "N_Q8_EVIDENCE",
+      "expected": "Q8_EVIDENCE",
+      "observed": "Q8_EVIDENCE",
+      "pass": true
+    },
+    {
+      "id": "N_INVALID_V01_EVIDENCE",
+      "expected": "INVALID_V01_EVIDENCE",
+      "observed": "INVALID_V01_EVIDENCE",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SHA",
+      "expected": "REVIEW_SHA",
+      "observed": "REVIEW_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER_SHA",
+      "expected": "BLENDER_SHA",
+      "observed": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO_SHA",
+      "expected": "OCIO_SHA",
+      "observed": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE_SHA",
+      "expected": "SCENE_SHA",
+      "observed": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PLAN_STRUCTURE",
+      "expected": "PLAN_STRUCTURE",
+      "observed": "PLAN_STRUCTURE",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR_SHA",
+      "expected": "CONFIGURATOR_SHA",
+      "observed": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER_SHA",
+      "expected": "RENDERER_SHA",
+      "observed": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_ANALYZER_SHA",
+      "expected": "ANALYZER_SHA",
+      "observed": "ANALYZER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RUNNER_SHA",
+      "expected": "RUNNER_SHA",
+      "observed": "RUNNER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SOURCE_CONTROLS",
+      "expected": "SOURCE_CONTROLS",
+      "observed": "SOURCE_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_CELL_SAMPLES",
+      "expected": "CELL_CONTROLS",
+      "observed": "CELL_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_CELL_POINT",
+      "expected": "CELL_CONTROLS",
+      "observed": "CELL_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_SCHEDULE",
+      "expected": "SCHEDULE",
+      "observed": "SCHEDULE",
+      "pass": true
+    },
+    {
+      "id": "N_PID_BINDING",
+      "expected": "PID_BINDING",
+      "observed": "PID_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_RENDER_COUNT",
+      "expected": "RENDER_COUNT",
+      "observed": "RENDER_COUNT",
+      "pass": true
+    },
+    {
+      "id": "N_FRAME_ORDER",
+      "expected": "FRAME_ORDER",
+      "observed": "FRAME_ORDER",
+      "pass": true
+    },
+    {
+      "id": "N_OUTPUT_HASH",
+      "expected": "OUTPUT_HASH",
+      "observed": "OUTPUT_HASH",
+      "pass": true
+    },
+    {
+      "id": "N_EXR_LAYOUT",
+      "expected": "EXR_LAYOUT",
+      "observed": "EXR_LAYOUT",
+      "pass": true
+    },
+    {
+      "id": "N_ANALYSIS_BINDING",
+      "expected": "ANALYSIS_BINDING",
+      "observed": "ANALYSIS_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_CONTRACT_HASH",
+      "expected": "CONTRACT_HASH",
+      "observed": "CONTRACT_HASH",
+      "pass": true
+    },
+    {
+      "id": "N_FROZEN_MASK_RULE",
+      "expected": "FROZEN_MASK_RULE",
+      "observed": "FROZEN_MASK_RULE",
+      "pass": true
+    },
+    {
+      "id": "N_FROZEN_GATE",
+      "expected": "FROZEN_GATE",
+      "observed": "FROZEN_GATE",
+      "pass": true
+    },
+    {
+      "id": "N_DECISION_TAMPER",
+      "expected": "DECISION_TAMPER",
+      "observed": "DECISION_TAMPER",
+      "pass": true
+    },
+    {
+      "id": "N_METRIC_TAMPER",
+      "expected": "METRIC_TAMPER",
+      "observed": "METRIC_TAMPER",
+      "pass": true
+    },
+    {
+      "id": "N_NONEMPTY_OUTPUT",
+      "expected": "REJECTED_NONEMPTY_OUTPUT",
+      "observed": "B32 holdout output directory must be empty",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "processLedger": "experiments/quadrature-cost-holdout-v0-2/evidence/process-ledger.json",
+    "analysisIndex": "experiments/quadrature-cost-holdout-v0-2/evidence/analysis-index.json",
+    "analysis": "experiments/quadrature-cost-holdout-v0-2/evidence/quality-analysis.json",
+    "binding": "experiments/quadrature-cost-holdout-v0-2/evidence/analysis-binding.json",
+    "manifests": {
+      "NATURAL32_A": "experiments/quadrature-cost-holdout-v0-2/evidence/NATURAL32_A.manifest.json",
+      "NATURAL32_B": "experiments/quadrature-cost-holdout-v0-2/evidence/NATURAL32_B.manifest.json",
+      "REFERENCE1024_A": "experiments/quadrature-cost-holdout-v0-2/evidence/REFERENCE1024_A.manifest.json",
+      "REFERENCE1024_B": "experiments/quadrature-cost-holdout-v0-2/evidence/REFERENCE1024_B.manifest.json",
+      "Q4_1_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q4_1_A.manifest.json",
+      "Q4_2_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q4_2_A.manifest.json",
+      "Q4_3_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q4_3_A.manifest.json",
+      "Q4_4_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q4_4_A.manifest.json",
+      "Q4_1_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q4_1_B.manifest.json",
+      "Q4_2_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q4_2_B.manifest.json",
+      "Q4_3_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q4_3_B.manifest.json",
+      "Q4_4_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q4_4_B.manifest.json",
+      "Q8_1_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_1_A.manifest.json",
+      "Q8_2_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_2_A.manifest.json",
+      "Q8_3_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_3_A.manifest.json",
+      "Q8_4_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_4_A.manifest.json",
+      "Q8_5_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_5_A.manifest.json",
+      "Q8_6_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_6_A.manifest.json",
+      "Q8_7_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_7_A.manifest.json",
+      "Q8_8_A": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_8_A.manifest.json",
+      "Q8_1_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_1_B.manifest.json",
+      "Q8_2_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_2_B.manifest.json",
+      "Q8_3_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_3_B.manifest.json",
+      "Q8_4_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_4_B.manifest.json",
+      "Q8_5_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_5_B.manifest.json",
+      "Q8_6_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_6_B.manifest.json",
+      "Q8_7_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_7_B.manifest.json",
+      "Q8_8_B": "experiments/quadrature-cost-holdout-v0-2/evidence/Q8_8_B.manifest.json"
+    }
+  },
+  "nonClaims": [
+    "The dual NATURAL1024 mean is a reference proxy, not ground truth.",
+    "A numerical proxy ratio is not a calibrated visible-quality ratio.",
+    "The holdout does not establish temporal, motion-blur, human-review or cinematic acceptability.",
+    "Observed render seconds are machine-local measurements, not a universal monetary cost.",
+    "Passing Q8 does not prove the eight-point layout or equal weights are optimal."
+  ]
+}

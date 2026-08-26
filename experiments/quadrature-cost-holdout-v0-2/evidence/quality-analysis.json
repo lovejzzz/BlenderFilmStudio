@@ -1,0 +1,870 @@
+{
+  "componentVerdicts": {
+    "dominance": "Q8_OVER_Q4_DOMINANCE_SUPPORT",
+    "q4": "Q4_COST_POINT_SUPPORT",
+    "q8": "Q8_NEAR_NATURAL_PROXY_SUPPORT",
+    "reference": "REFERENCE_RELIABLE",
+    "repeatability": "Q4_Q8_EXACT_REPEATABILITY_SUPPORT"
+  },
+  "cost": {
+    "q4ToNaturalRenderTimeRatio": 4.065094168840138,
+    "q8ToNaturalRenderTimeRatio": 8.14248962433036,
+    "q8ToQ4RenderTimeRatio": 2.003026076676003,
+    "renderSeconds": {
+      "NATURAL32": 1.49147,
+      "QUADRATURE4": 6.062966,
+      "REFERENCE1024": 28.260856,
+      "STRATIFIED8": 12.144279000000001
+    },
+    "scope": "Blender render timers only; excludes orchestration, I/O and compositing overhead"
+  },
+  "decision": "COST_QUALITY_CURVE_SUPPORT",
+  "decoder": "OpenImageIO 3.1.13.1",
+  "documentType": "BFS_B32_QUADRATURE_COST_HOLDOUT_ANALYSIS",
+  "frames": [
+    {
+      "edgePixels": 25920,
+      "edgeSelection": {
+        "boundaryMagnitude": 0.012867855422953552,
+        "rule": "exact top-k: magnitude descending, flattened index ascending",
+        "selectedValuesEqualToBoundary": 1,
+        "valuesEqualToBoundary": 1,
+        "valuesGreaterThanBoundary": 25919
+      },
+      "frame": 31,
+      "methods": {
+        "NATURAL32": {
+          "edgeRmseMean": 0.011488471150344959,
+          "globalRmseMean": 0.005079363515795612,
+          "nonEdgeRmseMean": 0.004495692120121935,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.006838334268993802,
+                "maximumAbsoluteError": 0.1015625,
+                "rmse": 0.011488471150344959,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0014084507396191727,
+                "maximumAbsoluteError": 0.1015625,
+                "rmse": 0.005079363515795612,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011226673959678765,
+                "maximumAbsoluteError": 0.09765625,
+                "rmse": 0.004495692120121935,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.006838334268993802,
+                "maximumAbsoluteError": 0.1015625,
+                "rmse": 0.011488471150344959,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0014084507396191727,
+                "maximumAbsoluteError": 0.1015625,
+                "rmse": 0.005079363515795612,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011226673959678765,
+                "maximumAbsoluteError": 0.09765625,
+                "rmse": 0.004495692120121935,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        },
+        "QUADRATURE4": {
+          "edgeRmseMean": 0.014399410151875895,
+          "globalRmseMean": 0.00533581637495697,
+          "nonEdgeRmseMean": 0.004365388479868673,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.008182877118204847,
+                "maximumAbsoluteError": 0.155517578125,
+                "rmse": 0.014399410151875895,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0015473190051170044,
+                "maximumAbsoluteError": 0.155517578125,
+                "rmse": 0.00533581637495697,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011980791044281704,
+                "maximumAbsoluteError": 0.100341796875,
+                "rmse": 0.004365388479868673,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.008182877118204847,
+                "maximumAbsoluteError": 0.155517578125,
+                "rmse": 0.014399410151875895,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0015473190051170044,
+                "maximumAbsoluteError": 0.155517578125,
+                "rmse": 0.00533581637495697,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011980791044281704,
+                "maximumAbsoluteError": 0.100341796875,
+                "rmse": 0.004365388479868673,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        },
+        "STRATIFIED8": {
+          "edgeRmseMean": 0.01085464636077374,
+          "globalRmseMean": 0.004809475447229369,
+          "nonEdgeRmseMean": 0.004259958820733663,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.0064013334428086694,
+                "maximumAbsoluteError": 0.0848388671875,
+                "rmse": 0.01085464636077374,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0014271530699092173,
+                "maximumAbsoluteError": 0.0924072265625,
+                "rmse": 0.004809475447229369,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011653541029145093,
+                "maximumAbsoluteError": 0.0924072265625,
+                "rmse": 0.004259958820733663,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.0064013334428086694,
+                "maximumAbsoluteError": 0.0848388671875,
+                "rmse": 0.01085464636077374,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0014271530699092173,
+                "maximumAbsoluteError": 0.0924072265625,
+                "rmse": 0.004809475447229369,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0011653541029145093,
+                "maximumAbsoluteError": 0.0924072265625,
+                "rmse": 0.004259958820733663,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "q4ToNaturalEdgeRmse": 1.2533791453568242,
+        "q4ToNaturalGlobalRmse": 1.05048917218936,
+        "q8ToNaturalEdgeRmse": 0.9448294919944864,
+        "q8ToNaturalGlobalRmse": 0.9468657701448311,
+        "q8ToQ4EdgeRmse": 0.7538257641310149
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 1.5698342656893005e-08,
+          "maximumAbsoluteError": 0.00048828125,
+          "rmse": 2.1445567899362383e-06,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 7.849171328446502e-10,
+          "maximumAbsoluteError": 0.00048828125,
+          "rmse": 4.795374763906166e-07,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0.00018667033775611168
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeSelection": {
+        "boundaryMagnitude": 0.013315995169040883,
+        "rule": "exact top-k: magnitude descending, flattened index ascending",
+        "selectedValuesEqualToBoundary": 1,
+        "valuesEqualToBoundary": 1,
+        "valuesGreaterThanBoundary": 25919
+      },
+      "frame": 67,
+      "methods": {
+        "NATURAL32": {
+          "edgeRmseMean": 0.012572852781689155,
+          "globalRmseMean": 0.005749078170325274,
+          "nonEdgeRmseMean": 0.0051450608359156266,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.007640776074962851,
+                "maximumAbsoluteError": 0.10546875,
+                "rmse": 0.012572852781689155,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0017770134458326018,
+                "maximumAbsoluteError": 0.1318359375,
+                "rmse": 0.005749078170325274,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0014683943600889045,
+                "maximumAbsoluteError": 0.1318359375,
+                "rmse": 0.0051450608359156266,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.007640776074962851,
+                "maximumAbsoluteError": 0.10546875,
+                "rmse": 0.012572852781689155,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0017770134458326018,
+                "maximumAbsoluteError": 0.1318359375,
+                "rmse": 0.005749078170325274,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0014683943600889045,
+                "maximumAbsoluteError": 0.1318359375,
+                "rmse": 0.0051450608359156266,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        },
+        "QUADRATURE4": {
+          "edgeRmseMean": 0.01566104401155147,
+          "globalRmseMean": 0.006012277519743493,
+          "nonEdgeRmseMean": 0.005014092350862124,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.009099697790763996,
+                "maximumAbsoluteError": 0.1805419921875,
+                "rmse": 0.01566104401155147,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0019165624717993992,
+                "maximumAbsoluteError": 0.1805419921875,
+                "rmse": 0.006012277519743493,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0015385027181696834,
+                "maximumAbsoluteError": 0.1201171875,
+                "rmse": 0.005014092350862124,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.009099697790763996,
+                "maximumAbsoluteError": 0.1805419921875,
+                "rmse": 0.01566104401155147,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0019165624717993992,
+                "maximumAbsoluteError": 0.1805419921875,
+                "rmse": 0.006012277519743493,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0015385027181696834,
+                "maximumAbsoluteError": 0.1201171875,
+                "rmse": 0.005014092350862124,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        },
+        "STRATIFIED8": {
+          "edgeRmseMean": 0.011971909887453416,
+          "globalRmseMean": 0.005477011395237841,
+          "nonEdgeRmseMean": 0.004902343425224514,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.0072783680763018966,
+                "maximumAbsoluteError": 0.09735107421875,
+                "rmse": 0.011971909887453416,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0017894526528110229,
+                "maximumAbsoluteError": 0.1240234375,
+                "rmse": 0.005477011395237841,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0015005623673641348,
+                "maximumAbsoluteError": 0.1240234375,
+                "rmse": 0.004902343425224514,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.0072783680763018966,
+                "maximumAbsoluteError": 0.09735107421875,
+                "rmse": 0.011971909887453416,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0017894526528110229,
+                "maximumAbsoluteError": 0.1240234375,
+                "rmse": 0.005477011395237841,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0015005623673641348,
+                "maximumAbsoluteError": 0.1240234375,
+                "rmse": 0.004902343425224514,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "q4ToNaturalEdgeRmse": 1.2456237485226818,
+        "q4ToNaturalGlobalRmse": 1.0457811394488878,
+        "q8ToNaturalEdgeRmse": 0.9522031392023503,
+        "q8ToNaturalGlobalRmse": 0.9526764522890389,
+        "q8ToQ4EdgeRmse": 0.7644388125480666
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 0.0,
+          "maximumAbsoluteError": 0.0,
+          "rmse": 0.0,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 0.0,
+          "maximumAbsoluteError": 0.0,
+          "rmse": 0.0,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0.0
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeSelection": {
+        "boundaryMagnitude": 0.014879064213081232,
+        "rule": "exact top-k: magnitude descending, flattened index ascending",
+        "selectedValuesEqualToBoundary": 1,
+        "valuesEqualToBoundary": 2,
+        "valuesGreaterThanBoundary": 25919
+      },
+      "frame": 109,
+      "methods": {
+        "NATURAL32": {
+          "edgeRmseMean": 0.014078137242336764,
+          "globalRmseMean": 0.006996601882884419,
+          "nonEdgeRmseMean": 0.00641074266958684,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.008631111981937424,
+                "maximumAbsoluteError": 0.115234375,
+                "rmse": 0.014078137242336764,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0024909533603201185,
+                "maximumAbsoluteError": 0.1513671875,
+                "rmse": 0.006996601882884419,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.002167787117077103,
+                "maximumAbsoluteError": 0.1513671875,
+                "rmse": 0.00641074266958684,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.008631111981937424,
+                "maximumAbsoluteError": 0.115234375,
+                "rmse": 0.014078137242336764,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0024909533603201185,
+                "maximumAbsoluteError": 0.1513671875,
+                "rmse": 0.006996601882884419,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.002167787117077103,
+                "maximumAbsoluteError": 0.1513671875,
+                "rmse": 0.00641074266958684,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        },
+        "QUADRATURE4": {
+          "edgeRmseMean": 0.018053612800792086,
+          "globalRmseMean": 0.007296346904310848,
+          "nonEdgeRmseMean": 0.0062357231792648845,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.010458144159228713,
+                "maximumAbsoluteError": 0.21044921875,
+                "rmse": 0.018053612800792086,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0026220998946776606,
+                "maximumAbsoluteError": 0.21044921875,
+                "rmse": 0.007296346904310848,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0022096765123328682,
+                "maximumAbsoluteError": 0.143310546875,
+                "rmse": 0.0062357231792648845,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.010458144159228713,
+                "maximumAbsoluteError": 0.21044921875,
+                "rmse": 0.018053612800792086,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0026220998946776606,
+                "maximumAbsoluteError": 0.21044921875,
+                "rmse": 0.007296346904310848,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0022096765123328682,
+                "maximumAbsoluteError": 0.143310546875,
+                "rmse": 0.0062357231792648845,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        },
+        "STRATIFIED8": {
+          "edgeRmseMean": 0.013368958857055259,
+          "globalRmseMean": 0.006634782665780622,
+          "nonEdgeRmseMean": 0.006077039443335373,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.008180987902384236,
+                "maximumAbsoluteError": 0.11279296875,
+                "rmse": 0.013368958857055259,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0024561396216659388,
+                "maximumAbsoluteError": 0.13818359375,
+                "rmse": 0.006634782665780622,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0021548318174176074,
+                "maximumAbsoluteError": 0.13818359375,
+                "rmse": 0.006077039443335373,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.008180987902384236,
+                "maximumAbsoluteError": 0.11279296875,
+                "rmse": 0.013368958857055259,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0024561396216659388,
+                "maximumAbsoluteError": 0.13818359375,
+                "rmse": 0.006634782665780622,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0021548318174176074,
+                "maximumAbsoluteError": 0.13818359375,
+                "rmse": 0.006077039443335373,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "q4ToNaturalEdgeRmse": 1.282386475570077,
+        "q4ToNaturalGlobalRmse": 1.0428415145586154,
+        "q8ToNaturalEdgeRmse": 0.9496255525092613,
+        "q8ToNaturalGlobalRmse": 0.9482864363071872,
+        "q8ToQ4EdgeRmse": 0.7405143227879967
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 0.0,
+          "maximumAbsoluteError": 0.0,
+          "rmse": 0.0,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 0.0,
+          "maximumAbsoluteError": 0.0,
+          "rmse": 0.0,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0.0
+      }
+    },
+    {
+      "edgePixels": 25920,
+      "edgeSelection": {
+        "boundaryMagnitude": 0.016686167831681527,
+        "rule": "exact top-k: magnitude descending, flattened index ascending",
+        "selectedValuesEqualToBoundary": 2,
+        "valuesEqualToBoundary": 2,
+        "valuesGreaterThanBoundary": 25918
+      },
+      "frame": 143,
+      "methods": {
+        "NATURAL32": {
+          "edgeRmseMean": 0.0154088191571157,
+          "globalRmseMean": 0.008284144785861524,
+          "nonEdgeRmseMean": 0.007729333697863504,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.009508036610520916,
+                "maximumAbsoluteError": 0.1162109375,
+                "rmse": 0.0154088191571157,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0033265041593661523,
+                "maximumAbsoluteError": 0.138671875,
+                "rmse": 0.008284144785861524,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0030011603461474806,
+                "maximumAbsoluteError": 0.138671875,
+                "rmse": 0.007729333697863504,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.009508036610520916,
+                "maximumAbsoluteError": 0.1162109375,
+                "rmse": 0.0154088191571157,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.0033265041593661523,
+                "maximumAbsoluteError": 0.138671875,
+                "rmse": 0.008284144785861524,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0030011603461474806,
+                "maximumAbsoluteError": 0.138671875,
+                "rmse": 0.007729333697863504,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        },
+        "QUADRATURE4": {
+          "edgeRmseMean": 0.020046345648705076,
+          "globalRmseMean": 0.008574616652310267,
+          "nonEdgeRmseMean": 0.007499561533899565,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.011575431030228305,
+                "maximumAbsoluteError": 0.2542724609375,
+                "rmse": 0.020046345648705076,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003435155149288629,
+                "maximumAbsoluteError": 0.2542724609375,
+                "rmse": 0.008574616652310267,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0030067195766075934,
+                "maximumAbsoluteError": 0.123291015625,
+                "rmse": 0.007499561533899565,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.011575431030228305,
+                "maximumAbsoluteError": 0.2542724609375,
+                "rmse": 0.020046345648705076,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003435155149288629,
+                "maximumAbsoluteError": 0.2542724609375,
+                "rmse": 0.008574616652310267,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0030067195766075934,
+                "maximumAbsoluteError": 0.123291015625,
+                "rmse": 0.007499561533899565,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        },
+        "STRATIFIED8": {
+          "edgeRmseMean": 0.014752936446779939,
+          "globalRmseMean": 0.007858189706115563,
+          "nonEdgeRmseMean": 0.007317512430871732,
+          "replicates": [
+            {
+              "edge": {
+                "mae": 0.009104988383658138,
+                "maximumAbsoluteError": 0.128936767578125,
+                "rmse": 0.014752936446779939,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003244671920935313,
+                "maximumAbsoluteError": 0.128936767578125,
+                "rmse": 0.007858189706115563,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0029362342123709535,
+                "maximumAbsoluteError": 0.1251220703125,
+                "rmse": 0.007317512430871732,
+                "sampledPixels": 492480
+              },
+              "replicate": "A"
+            },
+            {
+              "edge": {
+                "mae": 0.009104988383658138,
+                "maximumAbsoluteError": 0.128936767578125,
+                "rmse": 0.014752936446779939,
+                "sampledPixels": 25920
+              },
+              "global": {
+                "mae": 0.003244671920935313,
+                "maximumAbsoluteError": 0.128936767578125,
+                "rmse": 0.007858189706115563,
+                "sampledPixels": 518400
+              },
+              "nonEdge": {
+                "mae": 0.0029362342123709535,
+                "maximumAbsoluteError": 0.1251220703125,
+                "rmse": 0.007317512430871732,
+                "sampledPixels": 492480
+              },
+              "replicate": "B"
+            }
+          ],
+          "withinMethodAB": {
+            "mae": 0.0,
+            "maximumAbsoluteError": 0.0,
+            "rmse": 0.0,
+            "sampledPixels": 518400
+          }
+        }
+      },
+      "ratios": {
+        "q4ToNaturalEdgeRmse": 1.3009657290609316,
+        "q4ToNaturalGlobalRmse": 1.0350635912284498,
+        "q8ToNaturalEdgeRmse": 0.9574345896562179,
+        "q8ToNaturalGlobalRmse": 0.948581888564655,
+        "q8ToQ4EdgeRmse": 0.735941438170948
+      },
+      "referenceAgreement": {
+        "edge": {
+          "mae": 8.948055314429013e-08,
+          "maximumAbsoluteError": 0.0009765625,
+          "rmse": 8.13095351039076e-06,
+          "sampledPixels": 25920
+        },
+        "global": {
+          "mae": 4.474027657214506e-09,
+          "maximumAbsoluteError": 0.0009765625,
+          "rmse": 1.8181364771124283e-06,
+          "sampledPixels": 518400
+        },
+        "reliabilityRatio": 0.0005276818053014747
+      }
+    }
+  ],
+  "gates": {
+    "q4ABRmseExactEveryFrame": 0.0,
+    "q4ToNaturalEdgeMaximumEveryFrame": 1.4,
+    "q8ABRmseExactEveryFrame": 0.0,
+    "q8ToNaturalEdgeMaximumEveryFrame": 1.1,
+    "q8ToQ4EdgeMaximumEveryFrame": 1.0,
+    "q8ToQ4EdgeMeanMaximum": 0.9,
+    "referenceReliabilityRatioMaximumEveryFrame": 0.05
+  },
+  "holdoutSpecSha256": "4f56bde9d9037bbeb2e508d4d5880c0141c625bb20d37aea439812a1599b3b21",
+  "indexSha256": "ef4d2f09ae697a3d59eca35ac0896ddcb54cb07639cbc7d5d22832954a5f5828",
+  "layout": {
+    "channels": [
+      "R",
+      "G",
+      "B",
+      "A"
+    ],
+    "height": 540,
+    "pixelFormat": "float",
+    "width": 960
+  },
+  "nonClaims": [
+    "The dual NATURAL1024 mean is a reference proxy, not ground truth.",
+    "A numerical proxy ratio is not a calibrated visible-quality ratio.",
+    "The holdout does not establish temporal, motion-blur, human-review or cinematic acceptability.",
+    "Observed render seconds are machine-local measurements, not a universal monetary cost.",
+    "Passing Q8 does not prove the eight-point layout or equal weights are optimal."
+  ],
+  "summary": {
+    "dominanceFramesPassing": 4,
+    "holdoutFrames": 4,
+    "maximumQ4ToNaturalEdge": 1.3009657290609316,
+    "maximumQ8ToNaturalEdge": 0.9574345896562179,
+    "maximumReferenceReliabilityRatio": 0.0005276818053014747,
+    "q4FramesPassing": 4,
+    "q4ToNaturalEdgeMean": 1.2705887746276285,
+    "q8FramesPassing": 4,
+    "q8ToNaturalEdgeMean": 0.9510231933405789,
+    "q8ToQ4EdgeMean": 0.7486800844095065,
+    "reliableFrames": 4
+  },
+  "valid": true,
+  "version": "0.2.0"
+}
