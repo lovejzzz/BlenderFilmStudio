@@ -452,6 +452,30 @@ Protocol: `research/2026-08-26-b23-eevee-repeated-render-boundary-protocol.md`.
 
 Status at freeze: the B22 configurator is reused by frozen hash; no B23 renderer, comparator, runner or output exists.
 
+Formal execution observation:
+
+- all 72 planned Blender processes had unique observed PIDs;
+- PERSIST made three same-frame render calls per PID and FRESH made one, totaling 144 RGBA32 EXRs;
+- WITHIN_PERSIST: 59/108 exact, 3,630 failed pixels, maximum error `0.00634765625`;
+- PERSIST_CROSS: 64/108 exact, 974 failed pixels, maximum error `0.00634765625`;
+- FRESH_CROSS: 25/36 exact, 300 failed pixels, maximum error `0.005615234375`;
+- frame 5 contributed 2,704 within-process failed pixels, while frame 114 was 9/9 exact;
+- 20/20 attacks reached their frozen reason.
+
+Verdict: `PER_RENDER_VARIATION_SUPPORT`. Strict float variation recurs between renders inside one initialized Blender process while the frame remains fixed. Process initialization is therefore not a sufficient origin. The result does not identify a race, GPU scheduling mechanism or perceptual defect.
+
+Artifacts: `experiments/eevee-repeated-render-boundary-v0-1/results.json`, `experiments/eevee-repeated-render-boundary-v0-1/evidence/` and `research/2026-08-26-b23-eevee-repeated-render-boundary-result.md`.
+
+## J-020 · Split exact provenance from perceptual production gates
+
+Type: research-direction decision, 2026-08-26.
+
+B15-B23 have falsified strict Eevee pixel determinism at 32 samples across dither, sample-factor experiments, Fast GI, reprojection, frame/process history, PNG versus EXR, exposed CPU thread count, process initialization and repeated render calls. Continuing to search for a favorable exact setting risks optimizing the benchmark rather than the filmmaking workflow.
+
+The next study should preserve exact SceneSpec, BuildPlan, asset, runtime and structural hashes as the provenance gate, but evaluate new holdout renders under independently frozen numeric and perceptual pixel gates. B23 may nominate metrics and stress frames; it must not both choose and validate thresholds. Human visibility and production impact remain separate from bitwise identity.
+
+Status: direction selected; threshold derivation and holdout protocol not yet frozen.
+
 ## Journal rule for future work
 
 Every promoted result must record:

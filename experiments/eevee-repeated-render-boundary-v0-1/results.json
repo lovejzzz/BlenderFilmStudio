@@ -1,0 +1,373 @@
+{
+  "documentType": "BFS_B23_EEVEE_REPEATED_RENDER_BOUNDARY_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T12:11:04.555Z",
+  "decision": "PER_RENDER_VARIATION_SUPPORT",
+  "validExperiment": true,
+  "sentinels": [
+    1,
+    5,
+    20,
+    35,
+    38,
+    47,
+    83,
+    93,
+    103,
+    110,
+    114,
+    144
+  ],
+  "design": {
+    "type": "same-frame repeated-render versus fresh-process boundary with three process replicates",
+    "cells": [
+      {
+        "id": "PERSIST",
+        "processesPerSentinel": 3,
+        "replicates": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rendersPerProcess": 3,
+        "renderOrdinals": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "FRESH",
+        "processesPerSentinel": 3,
+        "replicates": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rendersPerProcess": 1,
+        "renderOrdinals": [
+          1
+        ]
+      }
+    ],
+    "sentinelFrames": [
+      1,
+      5,
+      20,
+      35,
+      38,
+      47,
+      83,
+      93,
+      103,
+      110,
+      114,
+      144
+    ],
+    "blockOrderPerFrame": [
+      "PERSIST-A",
+      "FRESH-A",
+      "PERSIST-B",
+      "FRESH-B",
+      "PERSIST-C",
+      "FRESH-C"
+    ],
+    "frameOrder": [
+      1,
+      5,
+      20,
+      35,
+      38,
+      47,
+      83,
+      93,
+      103,
+      110,
+      114,
+      144
+    ],
+    "runOrderFrozenBeforeExecution": true,
+    "processes": 72,
+    "renderCalls": 144,
+    "savedExrs": 144,
+    "withinPersistentPairsPerProcess": [
+      "R1-R2",
+      "R1-R3",
+      "R2-R3"
+    ],
+    "withinPersistentDecodedComparisons": 108,
+    "persistentCrossProcessPairsPerOrdinal": [
+      "A-B",
+      "A-C",
+      "B-C"
+    ],
+    "persistentCrossProcessDecodedComparisons": 108,
+    "freshCrossProcessPairs": [
+      "A-B",
+      "A-C",
+      "B-C"
+    ],
+    "freshCrossProcessDecodedComparisons": 36,
+    "materializedRunOrder": [
+      "PERSIST-0001-A",
+      "FRESH-0001-A",
+      "PERSIST-0001-B",
+      "FRESH-0001-B",
+      "PERSIST-0001-C",
+      "FRESH-0001-C",
+      "PERSIST-0005-A",
+      "FRESH-0005-A",
+      "PERSIST-0005-B",
+      "FRESH-0005-B",
+      "PERSIST-0005-C",
+      "FRESH-0005-C",
+      "PERSIST-0020-A",
+      "FRESH-0020-A",
+      "PERSIST-0020-B",
+      "FRESH-0020-B",
+      "PERSIST-0020-C",
+      "FRESH-0020-C",
+      "PERSIST-0035-A",
+      "FRESH-0035-A",
+      "PERSIST-0035-B",
+      "FRESH-0035-B",
+      "PERSIST-0035-C",
+      "FRESH-0035-C",
+      "PERSIST-0038-A",
+      "FRESH-0038-A",
+      "PERSIST-0038-B",
+      "FRESH-0038-B",
+      "PERSIST-0038-C",
+      "FRESH-0038-C",
+      "PERSIST-0047-A",
+      "FRESH-0047-A",
+      "PERSIST-0047-B",
+      "FRESH-0047-B",
+      "PERSIST-0047-C",
+      "FRESH-0047-C",
+      "PERSIST-0083-A",
+      "FRESH-0083-A",
+      "PERSIST-0083-B",
+      "FRESH-0083-B",
+      "PERSIST-0083-C",
+      "FRESH-0083-C",
+      "PERSIST-0093-A",
+      "FRESH-0093-A",
+      "PERSIST-0093-B",
+      "FRESH-0093-B",
+      "PERSIST-0093-C",
+      "FRESH-0093-C",
+      "PERSIST-0103-A",
+      "FRESH-0103-A",
+      "PERSIST-0103-B",
+      "FRESH-0103-B",
+      "PERSIST-0103-C",
+      "FRESH-0103-C",
+      "PERSIST-0110-A",
+      "FRESH-0110-A",
+      "PERSIST-0110-B",
+      "FRESH-0110-B",
+      "PERSIST-0110-C",
+      "FRESH-0110-C",
+      "PERSIST-0114-A",
+      "FRESH-0114-A",
+      "PERSIST-0114-B",
+      "FRESH-0114-B",
+      "PERSIST-0114-C",
+      "FRESH-0114-C",
+      "PERSIST-0144-A",
+      "FRESH-0144-A",
+      "PERSIST-0144-B",
+      "FRESH-0144-B",
+      "PERSIST-0144-C",
+      "FRESH-0144-C"
+    ]
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "b23SpecSha256": "7a4b37ca2eb1d2c370270bb5cb45fdd741e85ccce140bc51501a6639150cc2f1",
+    "b22ResultsSha256": "3212b38e5e6ff6af23906d85e8c17d8ef97d88e1715694a45173442e15b36c46",
+    "rendererSha256": "ec668a4a887d4e14b19421309ce1e9415e255e5085749ef35feecd6c3b22b0b7",
+    "comparatorSha256": "1ae916e26eae74f59c0e98921c52c19fe51893536669c85a6aee1f62098abdb4",
+    "runnerSha256": "7881411bef43dd7da20fd95c2dff1c1fc1168604b1785256e486e92b004fac99"
+  },
+  "gates": {
+    "WITHIN_PERSIST": {
+      "pairCount": 108,
+      "exactDecodedComparisons": 59,
+      "maximumAbsoluteError": 0.00634765625,
+      "totalFailurePixels": 3630,
+      "exact": false,
+      "comparisonUri": "experiments/eevee-repeated-render-boundary-v0-1/evidence/comparisons/WITHIN_PERSIST.comparison.json",
+      "bindingHash": "dc90d8ac8095e789f1bd1b7bbf06a7444f464c0f98876605251dc000cffa0579"
+    },
+    "PERSIST_CROSS": {
+      "pairCount": 108,
+      "exactDecodedComparisons": 64,
+      "maximumAbsoluteError": 0.00634765625,
+      "totalFailurePixels": 974,
+      "exact": false,
+      "comparisonUri": "experiments/eevee-repeated-render-boundary-v0-1/evidence/comparisons/PERSIST_CROSS.comparison.json",
+      "bindingHash": "66fdfd26b462cee638262cffa8ed2801c242f7e01ec74d1050f67090f7df1ccd"
+    },
+    "FRESH_CROSS": {
+      "pairCount": 36,
+      "exactDecodedComparisons": 25,
+      "maximumAbsoluteError": 0.005615234375,
+      "totalFailurePixels": 300,
+      "exact": false,
+      "comparisonUri": "experiments/eevee-repeated-render-boundary-v0-1/evidence/comparisons/FRESH_CROSS.comparison.json",
+      "bindingHash": "6b8251978ec3442d94ff7226c40e9726d0759e66a65a769b8c600ffcd1a8000b"
+    }
+  },
+  "processLedger": {
+    "processCount": 72,
+    "uniqueProcessIds": 72,
+    "renderCalls": 144,
+    "ledgerHash": "32714a002ee6132385cf5e5025d11d24a2fbd3bb1a64379942f0e7445d80f4ee",
+    "uri": "experiments/eevee-repeated-render-boundary-v0-1/evidence/process-ledger.json"
+  },
+  "attacks": [
+    {
+      "id": "N_B23_SPEC_SHA",
+      "expectedReason": "B23_SPEC_SHA",
+      "observedReason": "B23_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B22_RESULT_SHA",
+      "expectedReason": "B22_RESULT_SHA",
+      "observedReason": "B22_RESULT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SPEC_SHA",
+      "expectedReason": "REVIEW_SPEC_SHA",
+      "observedReason": "REVIEW_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER_SHA",
+      "expectedReason": "BLENDER_SHA",
+      "observedReason": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO_SHA",
+      "expectedReason": "OCIO_SHA",
+      "observedReason": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE_SHA",
+      "expectedReason": "SCENE_SHA",
+      "observedReason": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR_SHA",
+      "expectedReason": "CONFIGURATOR_SHA",
+      "observedReason": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER_SHA",
+      "expectedReason": "RENDERER_SHA",
+      "observedReason": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_COMPARATOR_SHA",
+      "expectedReason": "COMPARATOR_SHA",
+      "observedReason": "COMPARATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SOURCE_THREAD_STATE",
+      "expectedReason": "SOURCE_THREAD_STATE",
+      "observedReason": "SOURCE_THREAD_STATE",
+      "pass": true
+    },
+    {
+      "id": "N_REQUESTED_FIXED_CONTROLS",
+      "expectedReason": "REQUESTED_FIXED_CONTROLS",
+      "observedReason": "REQUESTED_FIXED_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_CELL_PROCESS_BINDING",
+      "expectedReason": "CELL_PROCESS_BINDING",
+      "observedReason": "CELL_PROCESS_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_PERSIST_RENDER_COUNT",
+      "expectedReason": "PERSIST_RENDER_COUNT",
+      "observedReason": "PERSIST_RENDER_COUNT",
+      "pass": true
+    },
+    {
+      "id": "N_FRESH_RENDER_COUNT",
+      "expectedReason": "FRESH_RENDER_COUNT",
+      "observedReason": "FRESH_RENDER_COUNT",
+      "pass": true
+    },
+    {
+      "id": "N_RENDER_ORDINAL_FRAME",
+      "expectedReason": "RENDER_ORDINAL_FRAME_INVARIANT",
+      "observedReason": "RENDER_ORDINAL_FRAME_INVARIANT",
+      "pass": true
+    },
+    {
+      "id": "N_UNIQUE_PROCESS_IDS",
+      "expectedReason": "PROCESS_ID_UNIQUENESS",
+      "observedReason": "PROCESS_ID_UNIQUENESS",
+      "pass": true
+    },
+    {
+      "id": "N_EXR_LAYOUT",
+      "expectedReason": "EXR_LAYOUT",
+      "observedReason": "EXR_LAYOUT",
+      "pass": true
+    },
+    {
+      "id": "N_MISSING_OR_MUTATED_EXR",
+      "expectedReason": "MISSING_OR_MUTATED_EXR",
+      "observedReason": "MISSING_OR_MUTATED_EXR",
+      "pass": true
+    },
+    {
+      "id": "N_WITHIN_BINDING",
+      "expectedReason": "WITHIN_PROCESS_COMPARISON_BINDING",
+      "observedReason": "WITHIN_PROCESS_COMPARISON_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_CROSS_BINDING",
+      "expectedReason": "CROSS_PROCESS_COMPARISON_BINDING",
+      "observedReason": "CROSS_PROCESS_COMPARISON_BINDING",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "runOrder": "experiments/eevee-repeated-render-boundary-v0-1/evidence/run-order.json",
+    "manifests": {
+      "PERSIST": "experiments/eevee-repeated-render-boundary-v0-1/evidence/PERSIST.manifest.json",
+      "FRESH": "experiments/eevee-repeated-render-boundary-v0-1/evidence/FRESH.manifest.json"
+    },
+    "renders": "experiments/eevee-repeated-render-boundary-v0-1/evidence/renders",
+    "comparisons": "experiments/eevee-repeated-render-boundary-v0-1/evidence/comparisons"
+  },
+  "nonClaims": [
+    "A stable same-process result would support an initialization boundary under this profile but would not identify a driver, shader-cache, allocator or source-level mechanism.",
+    "A non-exact same-process result would locate recurrence at each render invocation or later; it would not by itself prove a race.",
+    "Three repeated renders and three process replicates falsify strict determinism but do not estimate mismatch probability.",
+    "The PERSIST cell intentionally holds the frame constant and therefore does not measure prior-frame temporal history.",
+    "No perceptual tolerance is selected and near-equality remains non-exact.",
+    "Nothing generalizes to Cycles, another GPU/backend, another machine or another scene."
+  ]
+}
