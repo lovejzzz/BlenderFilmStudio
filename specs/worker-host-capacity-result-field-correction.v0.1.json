@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityResultFieldCorrection.v0.1",
+  "experimentId": "B40-C5",
+  "status": "PREREGISTERED_RESULT_FIELD_CORRECTION_BEFORE_TOOLING_OR_OUTPUT",
+  "c4": {
+    "specSha256": "33940601ecd966741054d33bc3b68ba2555750b7993e6c7b6fa3e776964ef434",
+    "preregistrationCommit": "78fc415e52b885bbd31ef79336f7cc17b9d7badc",
+    "resultSha256": "cb32e5beae35c9bb8d41ce9208936589c14f77748a7c5939cd1f665125bd61c7",
+    "auditSha256": "ff2c91fd8cbef7e84a65eb39a55d8a7419e36d349709522a8f354832030792e7",
+    "auditFailure": "IDENTITY_EVIDENCE_SELF_HASH"
+  },
+  "changedImplementationExact": [
+    "replayPassed is present inside evidence before evidenceHash is computed",
+    "attacks are generated against evidence that already contains replayPassed",
+    "if replay fails, replayPassed is set false and evidenceHash is recomputed before persistence",
+    "the final result spread does not introduce a new replayPassed field after evidence hashing"
+  ],
+  "unchanged": [
+    "C4 projection identity",
+    "C3 specific failure-code projection",
+    "C2 value-copy and JSON replay logic",
+    "C1 flags parser",
+    "B40 thresholds, observations, four blockers, 14 attacks and zero-runtime boundary"
+  ],
+  "acceptedVerdict": "WORKER_HOST_CAPACITY_BLOCKED_REPLAY_STABLE",
+  "nonClaims": [
+    "B40-C5 changes result-field lifecycle only",
+    "No prior attempt is retroactively accepted",
+    "No external mutation, runtime, download, cleanup or reserve override",
+    "No compatibility, performance, containment or production claim"
+  ]
+}
