@@ -45,15 +45,15 @@ const gaps: {
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: 'B01/B02 结构与像素复现通过；B06 以 10 次/45 对审计证伪 Bullet 释放轨迹；B07/B08 证明锁定轨迹可在正式编译链零误差重放。',
-    missing: '跨 GPU、驱动、OS、补丁版本、角色求值、渲染噪声与模拟缓存的分层容差边界仍未知。',
+    known: 'B01/B02 结构与选定 Cycles 像素复现通过；B06 证伪 Bullet 释放轨迹；B07/B08 证明锁定轨迹零误差重放；B14 完成 144 帧代理并暴露待控 A/B 的序列哈希变化。',
+    missing: '同源 Eevee 全序列 A/B、跨 GPU、驱动、OS、补丁版本、角色求值、渲染噪声与模拟缓存的分层容差边界仍未知。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
   },
   {
     id: 'G04', title: '代表性基准镜头组', type: 'experiment', priority: 'P0',
     question: '一个六秒室内镜头能否代表整条电影制作链？',
-    known: 'B01–B05 已覆盖编译、像素、角色、接触与抓握；B06–B08 覆盖物理证伪、轨迹冻结和正式编译；B09 已打开源物理盲评门。',
+    known: 'B01–B05 已覆盖编译、像素、角色、接触与抓握；B06–B08 覆盖物理证伪、轨迹冻结和正式编译；B09 已打开源物理盲评门；B14 首次把 B02 receipt 跑成完整 144 帧视频。',
     missing: 'B04/B05/B09 真实盲审仍不足；近景皮肤、毛发、布料、体积、大场景、崩溃恢复和跨镜头连续性仍无实证。',
     artifact: 'BFS Benchmark v0.1 · 6 Shots',
     gate: '六类镜头均能一键构建、失败、恢复、出具结构/像素/成本报告。',
@@ -101,7 +101,7 @@ const gaps: {
   {
     id: 'G10', title: '对照实验与真实经济性', type: 'experiment', priority: 'P0',
     question: '与人工 Blender、视频生成和传统混合流程相比，何时真的更便宜？',
-    known: '已经建立完整成本栈；简单 4K/512spp CPU 基准实测平均 327.65 秒/帧、约 140 MB/帧。',
+    known: '已经建立完整成本栈；简单 4K/512spp CPU 基准平均 327.65 秒/帧。B14 的 960×540 Eevee 代理实测 27.39 秒/144 帧，但明确不是同质量对照。',
     missing: '仍缺相同 brief 的三路对照，以及 Token、人工、功耗、GPU、重试和资产摊销的完整实测。',
     artifact: 'Three-arm Cost Study + Raw Telemetry',
     gate: '预注册假设后公开原始记录；不以生成秒数代替最终采用秒。',
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>收集 B04、B05 与 B09 的真实盲审，同时继续 B10 之后的 OS / 资产安全攻击。</h3><p>CLIP_D83K、CLIP_G52Q 与 CLIP_P84R 都已冻结响应 Schema 和聚合器，且没有合成答案。人类门等待真实评审时，工程侧不再调片以迎合结果，而是继续验证恶意 .blend、资源耗尽、进程隔离和供应链边界。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>对 B14 做相同 renderer/source 的 A/B decoded-pixel 比较，同时开放完整样片真实人审。</h3><p>第一次全序列与修正后全序列的 SHA 不同，但中间改过验证源文件，不能拿来宣称非确定性。下一实验要冻结同一工具字节，比较 PNG 容器与解码像素；人类门继续保持独立，不能由自动化补写答案。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/compile-receipt-v0-1">查看最新收据证据 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/review-dailies-v0-1">查看最新完整样片证据 →</Link></footer>
     </main>
   );
 }

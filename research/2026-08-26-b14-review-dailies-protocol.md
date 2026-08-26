@@ -2,7 +2,7 @@
 
 Date frozen: 2026-08-26, before implementing the sequence renderer, packager or verifier and before rendering the formal 144-frame sequence.
 
-Status: **PRE-REGISTERED / NOT YET EXECUTED**
+Status: **EXECUTED / FORMAL AUTOMATION TRUE / HUMAN REVIEW PENDING**
 
 ## Observed gap
 
@@ -78,3 +78,7 @@ Tracked evidence will contain the render spec, source/tool hashes, render teleme
 ## Post-freeze additions
 
 Any newly discovered requirement or failure will be labelled supplementary and added here without replacing or renumbering the frozen gates.
+
+Inspection after the first complete run found that the Blender-local OCIO check compared one cache ID with itself. The outer verifier did enforce the exact config SHA, but the local assertion was tautological. It was replaced by a real comparison against the receipt-verified BuildPlan config name and the full formal run was repeated. This implementation defect and both run hashes remain in the result note and journal.
+
+Inspection of the next candidate evidence found absolute local repository paths in the recorded FFmpeg command and Blender log tail. They did not affect verification, but violated the public evidence privacy rule. The runner was changed to publish `<REPO>` placeholders and the formal sequence was regenerated again so that final artifacts remain bound to the exact producing runner.

@@ -154,7 +154,25 @@ Decision: pre-register B14 as a `REVIEW_PROXY_NOT_MASTER` experiment. The 960×5
 
 Protocol: `research/2026-08-26-b14-review-dailies-protocol.md`.
 
-Status at freeze: not executed. Renderer, packager, verifier and formal sequence do not yet exist.
+First execution observation: the complete sequence rendered and passed the initial automation, but inspection found a tautological Blender-local OCIO assertion (`cache ID == itself`). The outer verifier already enforced the exact OCIO file SHA, so the run did not accept a different config, but the local check had no evidence value. Promotion stopped. The assertion was changed to compare the loaded config name with the receipt-verified BuildPlan and the entire shot was rerun.
+
+Formal execution observation:
+
+- 144/144 exact frame names, no gaps or extras;
+- real Blender render time `28.324786 s`, mean `0.196700 s/frame`;
+- 144 local PNG files totalled `83,216,547 B`;
+- sequence hash `a52903fc327139ae41ed08f2d257d704b7977e9fda060138b106ceb56dbd56e4`;
+- H.264 review file `438,567 B`, SHA-256 `e9f52ad3dc497fbb2e6074c2f79df2fa0c365235c5713a9f29e1ead927b340b8`;
+- ffprobe independently reported yuv420p, 960×540, 24/1 fps, 144 declared/decoded frames, 6 seconds and no audio;
+- render-before/render-after camera and timeline snapshots matched exactly;
+- 10/10 pre-registered attacks failed at their intended layer;
+- human review remains `PENDING`.
+
+The stopped pre-correction run had sequence hash `4584715f31efcde8c8e88d23d29b7b6d97088707bdea067a320b99360544f014` and video hash `1cbecb1dc1d446daaf599b75cff10fb4a34879a99c7f098bcf8e3eeba6f8780c`. A second corrected candidate passed, but evidence inspection found absolute local paths in its recorded FFmpeg command and log tail. Promotion stopped again; the runner was changed to emit `<REPO>` placeholders and the full shot was regenerated. Because tool identity changed across candidates, their differing sequence hashes are not a controlled determinism result. They create the next question: identical-source A/B comparison of PNG bytes and decoded pixels.
+
+Verdict: formal B14 automation true for a receipt-bound complete review proxy. It is explicitly not the 4K Cycles master, and cinematic/human acceptance has not passed.
+
+Artifacts: `experiments/review-dailies-v0-1/results.json`, `experiments/review-dailies-v0-1/evidence/`, `public/review-dailies-v0-1/` and `research/2026-08-26-b14-review-dailies-result.md`.
 
 ## Journal rule for future work
 
