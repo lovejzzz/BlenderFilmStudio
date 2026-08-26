@@ -45,8 +45,8 @@ const gaps: {
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: 'B28 在 12/12 PID 内复现双模式切换；B29 发现 3 个 Crypto-only 解耦反例；B30 的 CENTER 干预 144/144 strict exact；B31 又在四个未见 frame 确认 CENTER/NATURAL edge-reference RMSE 为 2.17–2.86×。',
-    missing: '单点 CENTER 的稳定性收益与边缘参考误差代价都已确认；仍缺兼顾二者的 deterministic multi-jitter 合成、时序/人类感知、跨 GPU、驱动、OS 与补丁版本证据。',
+    known: 'B30 的 CENTER 干预 144/144 strict exact；B31 确认单点边缘参考误差代价。B32 保留一次 mask-tie 无效尝试后，在新四帧上正式支持 Q4/Q8 确定性成本—质量曲线：Q8 A/B exact，edge-proxy mean 0.9510×，time 8.142×。',
+    missing: '静态 scene-linear proxy 曲线已确认；仍缺 Q4/Q8 连续帧 temporal residual、edge flicker、motion blur、独立人类感知、完整镜头成本，以及跨 GPU、驱动、OS 与补丁版本证据。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
   },
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>探索 deterministic multi-jitter ensemble。</h3><p>B31 已在四个未见 frame 确认单点 CENTER 的 edge-reference RMSE 至少为 NATURAL32 的 2.169×，所以不能把 strict stability 直接当生产修复。下一步派生 4-point / 8-point fixed-offset scene-linear 合成，同时测 strict repeatability、edge error 与 4×/8× render cost；B26 human gate 仍为 0/18。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>把 Q4/Q8 从静态帧推进到连续镜头。</h3><p>B32 已以 28 个新 PID、112 EXR 确认 4×/8× 静态 proxy 成本—质量曲线。下一协议必须冻结连续帧区间、temporal residual、edge flicker、motion blur 与 blind human gate，不能由四张静态帧推断电影感；B26 human gate 仍为 0/18。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/sampling-quality-holdout-v0-1">查看最新采样质量代价 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/quadrature-cost-holdout-v0-2">查看 B32 多抖动成本曲线 →</Link></footer>
     </main>
   );
 }
