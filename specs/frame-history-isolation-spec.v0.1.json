@@ -1,0 +1,162 @@
+{
+  "documentType": "BFS_FRAME_HISTORY_ISOLATION_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "At B25 frame 38, does rendering frames 1 through 37 first change the rate of a fixed-reference static-envelope failure relative to rendering frame 38 directly in a fresh Blender process?",
+  "evidenceBasis": {
+    "b25ResultsSha256": "1a49d66dd30e7febf23db6c48b455f472ec1d657b37980f8da53fd0c69f15e83",
+    "b25SpecSha256": "b94c70418d1453162c4eb07ee54912358212f6e3bee7ef0c30e2f78a0f214368",
+    "b25Decision": "STATIC_ONLY_ENVELOPE_FAIL",
+    "b25Frame": 38,
+    "observedPattern": "A-B and A-C failed the 16-pixel static ceiling with 17 changed pixels; B-C was decoded-pixel exact.",
+    "referenceSelectionRule": "Use B25 replicate B because B and C were decoded-pixel exact at frame 38; select B lexicographically before any B27 render.",
+    "reference": {
+      "uri": "public/frame-history-isolation-v0-1/b25-reference-frame-0038-B.png",
+      "containerSha256": "85e773b2be2a4d98f7a1144ed84bc338c6f5a76bd79c6a27f13638fa02e8c8f0",
+      "decodedRgbSha256": "c13638222371dcf3acf00354097e5955f48d630115f23ebe9e32147dae8bf308",
+      "layout": {
+        "width": 960,
+        "height": 540,
+        "channels": ["R", "G", "B", "A"],
+        "pixelFormat": "uint8"
+      }
+    }
+  },
+  "design": {
+    "type": "two-cell fresh-process intervention with a fixed interleaved execution schedule",
+    "cells": {
+      "HISTORY": {
+        "replicates": 12,
+        "renderedFrames": [1, 38],
+        "renderedFramesMeaning": "Every integer frame from 1 through 38 inclusive is rendered once in ascending order.",
+        "renderCallsPerProcess": 38,
+        "outputFilesPerProcess": 38,
+        "targetFrame": 38
+      },
+      "DIRECT": {
+        "replicates": 12,
+        "renderedFrames": [38, 38],
+        "renderedFramesMeaning": "Only frame 38 is rendered; no prior bpy.ops.render.render call occurs in the process.",
+        "renderCallsPerProcess": 1,
+        "outputFilesPerProcess": 1,
+        "targetFrame": 38
+      }
+    },
+    "processes": 24,
+    "renderCalls": 468,
+    "outputFiles": 468,
+    "primaryReferenceComparisons": 24,
+    "withinCellPairComparisons": 132,
+    "crossCellPairComparisons": 144,
+    "scheduleSeed": "BFS-B27-frame38-history-2026-08-26",
+    "scheduleSeedSha256": "7a2bc27387b9501cbff2459086ff09b00a9836c6834d7c841e9944805a3a1cfb",
+    "processOrder": [
+      "D01", "H01", "H02", "D02", "H03", "D03", "D04", "H04",
+      "H05", "D05", "H06", "D06", "D07", "H07", "D08", "H08",
+      "H09", "D09", "D10", "H10", "D11", "H11", "D12", "H12"
+    ],
+    "selectedBeforeAnyB27Render": true
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "motionBlur": false,
+    "format": "PNG8_RGBA",
+    "colorDomain": "ACES 2 SDR display output"
+  },
+  "frozenStaticEnvelope": {
+    "maximumAbsoluteErrorAtMost": 0.003922,
+    "rmsErrorAtMost": 0.0000152587890625,
+    "zeroThresholdFailurePixelsAtMost": 16
+  },
+  "primaryEndpoint": {
+    "name": "fixedReferenceStaticEnvelopeFailure",
+    "definition": "A target frame fails if comparison with the frozen B25-B reference exceeds any frozen B24 PNG8 ceiling.",
+    "unit": "one fresh Blender process",
+    "cellCounts": "HISTORY failures out of 12 versus DIRECT failures out of 12",
+    "test": "two-sided Fisher exact test",
+    "alpha": 0.05,
+    "noOptionalStopping": true,
+    "noMultiplicityClaim": "Only the fixed-reference static-envelope endpoint controls the primary decision."
+  },
+  "secondaryEndpoints": [
+    "fixed-reference decoded RGB exact count by cell",
+    "maximum absolute error, RMS error and changed-pixel count by replicate",
+    "decoded RGB variant counts and frequencies by cell",
+    "66 all-pairs comparisons within each cell",
+    "144 HISTORY-DIRECT cross-cell comparisons",
+    "render time and output container hash"
+  ],
+  "executionContract": {
+    "formalRendererComparatorAndRunnerMustNotExistAtFreeze": true,
+    "reuseFrozenConfigurator": true,
+    "eachReplicateMustUseOneUniqueFreshProcess": true,
+    "historyMustRenderExactlyFrames1Through38InAscendingOrder": true,
+    "directMustRenderExactlyFrame38WithNoEarlierRenderCall": true,
+    "everyRenderCallMustWriteAndHashOnePNG": true,
+    "mustNotSaveSourceBlend": true,
+    "allSourcePlanStructureRuntimeReferenceAndToolIdentitiesMustBeExact": true,
+    "recordProcessOrderPidsFrameOrderOutputHashesMetricsAndComparisonBindings": true,
+    "thresholdsSampleSizeScheduleAndDecisionRulesMustNotChangeAfterExecution": true,
+    "workOutputsRemainLocalButEvidenceAndResultAreCommitted": true,
+    "humanReviewMustRemainPending": true
+  },
+  "decisionRule": {
+    "HISTORY_ASSOCIATION_SUPPORT": "The valid primary test has p <= 0.05 and HISTORY has more fixed-reference envelope failures than DIRECT.",
+    "OPPOSITE_DIRECTION_ASSOCIATION": "The valid primary test has p <= 0.05 and DIRECT has more fixed-reference envelope failures than HISTORY.",
+    "B25_ENVELOPE_FAILURE_NOT_REPRODUCED": "No target frame in either cell fails the fixed-reference envelope.",
+    "FAILURE_REPRODUCED_NO_SIGNIFICANT_HISTORY_ASSOCIATION": "At least one target frame fails, but the two-sided Fisher test has p > 0.05.",
+    "INVALID_EXPERIMENT": "Any identity, reference, source, control, process, schedule, frame-order, output, layout, metric, binding, statistical or attack gate fails."
+  },
+  "requiredNegativeCases": [
+    "B27 spec identity mismatch",
+    "B25 evidence identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "plan or structure identity mismatch",
+    "configurator identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "runner identity mismatch",
+    "reference container or decoded RGB mismatch",
+    "source state or fixed control mismatch",
+    "process order mismatch",
+    "PID uniqueness or cell binding mismatch",
+    "history frame order or count mismatch",
+    "direct frame order or count mismatch",
+    "PNG layout mismatch",
+    "missing or mutated output",
+    "comparison loses manifest or file hash binding",
+    "static envelope mutation",
+    "sample size, alpha, endpoint or decision rule mutation",
+    "human-review status is not pending"
+  ],
+  "explicitNonClaims": [
+    "This is a mechanistic experiment on one frame, scene, render profile, Blender build, GPU/backend and machine; it is not a universal Blender history claim.",
+    "A significant association supports the manipulated render-history difference under this protocol but does not identify the lower-level Eevee subsystem responsible.",
+    "A non-significant result is not evidence of equivalence and the fixed 12+12 sample is not powered to prove absence of a small effect.",
+    "The fixed B25 reference is a pragmatic anchor selected before B27; it is not a ground-truth image or a claim that B25-B is perceptually superior.",
+    "Decoded RGB exactness and the frozen numeric envelope do not determine visibility, flicker perception or cinematic quality.",
+    "PNG8 review output is not the EXR master and container hashes are not used as the primary endpoint.",
+    "Human subjective review remains pending."
+  ]
+}
