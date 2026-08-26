@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "bfs.workerHostCapacitySerializationCorrection.v0.1",
+  "experimentId": "B40-C2",
+  "status": "PREREGISTERED_SERIALIZATION_CORRECTION_BEFORE_TOOLING_OR_OUTPUT",
+  "baseProtocol": {
+    "specSha256": "fd21c27801a83f542a4aaa498fbc61867b3116509bb6e43769d83873146850ca",
+    "preregistrationCommit": "8c39b715e7e2bacae81ca1ab9b2570472cf73fde"
+  },
+  "parserCorrection": {
+    "specSha256": "00f50c7ee250de2d78c9643be552b5aa5b1339463ff5d8c1c276acbc7fd0882a",
+    "preregistrationCommit": "f679c0a73d6b3cce53556452bfdf950caaf26f98"
+  },
+  "rejectedC1": {
+    "resultSha256": "a59acf6fdea2bd2d82ad6f18b9ee5d7aa9f632202f4c96dd1d61c1487b10d1d3",
+    "auditSha256": "8a05a54f99cb63b7f7408c5171dbac2d6b80f7c3cd0586ed267803c67be629ac",
+    "recordedAttacksMatch": false,
+    "divergentAttack": "fabricate the x64 emulator registration",
+    "runnerFailures": [
+      "EMULATOR_REGISTRATION"
+    ],
+    "auditFailures": [
+      "EMULATOR_REGISTRATION",
+      "CAPACITY_DECISION"
+    ]
+  },
+  "changedImplementationExact": [
+    "Every gate observed record is a structured value copy, never a reference into observations",
+    "Every gate required record is a structured value copy, never a reference into policy",
+    "The complete 14-attack vector before JSON serialization must equal the vector after JSON.stringify/JSON.parse",
+    "The base evidence analysis before JSON serialization must equal the analysis after JSON.stringify/JSON.parse"
+  ],
+  "unchanged": [
+    "B40 capacity thresholds and four expected blockers",
+    "B40-C1 literal flags: parser correction",
+    "B38 and B39-C1 evidence ancestry",
+    "raw read-only host, VM and Docker observations",
+    "nine probe classes and zero runtime operations",
+    "14 attack names and primary expected failure codes"
+  ],
+  "requiredSerializationGates": {
+    "baseAnalysisEqual": true,
+    "decisionEqual": true,
+    "attackVectorEqual": true,
+    "evidenceHashEqual": true
+  },
+  "acceptedVerdict": "WORKER_HOST_CAPACITY_BLOCKED_SERIALIZATION_STABLE",
+  "nonClaims": [
+    "B40-C2 corrects object aliasing and serialization stability only",
+    "B40 and B40-C1 remain immutable rejected attempts",
+    "No Colima mutation, container lifecycle operation, Blender launch, download, cleanup or reserve override",
+    "No Blender compatibility, Eevee/EGL, performance, containment or production claim"
+  ]
+}
