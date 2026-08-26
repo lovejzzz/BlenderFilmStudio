@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "bfs.linuxWorkerArchitecturePreflight.v0.2",
+  "experimentId": "B39-C1",
+  "status": "PREREGISTERED_CORRECTION_BEFORE_V02_TOOLING_OR_OUTPUT",
+  "question": "Does a corrected, structure-aware release-index parser reproduce the official Blender 5.2 Linux artifact and ARM64-host route decisions while preserving every non-cardinality gate from rejected B39?",
+  "correctionFrom": {
+    "experimentId": "B39",
+    "verdict": "X64_INDEX_IDENTITY",
+    "resultSha256": "b4e709f565427fe96478c29bf9ca21c2ea93d7d1e5fb45828f498d6e71728e73",
+    "auditSha256": "16b081cf56731bbc2f99e817ec9d64440244718caf6cf6ec99846472e674c2b5",
+    "changedAssumptionExact": "Replace x64 raw filename occurrences == 1 with raw filename occurrences == 2 and exact href target occurrences == 1",
+    "unchangedGateCount": 14
+  },
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+    "hostArchitecture": "arm64"
+  },
+  "sources": {
+    "releaseIndexUrl": "https://download.blender.org/release/Blender5.2/",
+    "checksumUrl": "https://download.blender.org/release/Blender5.2/blender-5.2.0.sha256"
+  },
+  "artifacts": {
+    "x64": {
+      "filename": "blender-5.2.0-linux-x64.tar.xz",
+      "platform": "linux/amd64",
+      "rawFilenameOccurrences": 2,
+      "exactHrefTargetOccurrences": 1,
+      "checksumOccurrences": 1,
+      "bytes": 384441228,
+      "sha256": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48"
+    },
+    "arm64": {
+      "filename": "blender-5.2.0-linux-arm64.tar.xz",
+      "platform": "linux/arm64",
+      "rawFilenameOccurrences": 0,
+      "exactHrefTargetOccurrences": 0,
+      "checksumOccurrences": 0,
+      "sha256": null
+    }
+  },
+  "host": {
+    "colimaDriver": "macOS Virtualization.Framework",
+    "colimaArchitecture": "aarch64",
+    "dockerServerVersion": "29.5.2",
+    "dockerArchitecture": "aarch64",
+    "requiredSecurityOptions": [
+      "name=apparmor",
+      "name=seccomp,profile=builtin",
+      "name=cgroupns"
+    ]
+  },
+  "probeTraceExact": [
+    "HOST_UNAME",
+    "COLIMA_STATUS",
+    "DOCKER_SERVER_VERSION",
+    "DOCKER_ARCH_SECURITY",
+    "DOCKER_EXISTING_IMAGE_INSPECT",
+    "BLENDER_RELEASE_INDEX_HTTPS",
+    "BLENDER_SHA256_MANIFEST_HTTPS",
+    "HOST_STATFS"
+  ],
+  "runtimeOperationsExecutedExact": [],
+  "routes": {
+    "nativeArm64Decision": "REJECTED_NO_OFFICIAL_ARTIFACT",
+    "x64ExecutionClass": "EXPERIMENT_ONLY_BEST_EFFORT_EMULATION",
+    "x64Decision": "IDENTIFIED_BUT_RUNTIME_BLOCKED"
+  },
+  "futureRuntime": {
+    "experimentId": "B40",
+    "state": "PENDING_SEPARATE_PREREGISTRATION",
+    "workerImageDigest": "PENDING_BUILD_AND_HASH_AFTER_DISK_ADMISSION"
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": 107374182400,
+    "projectedRuntimeWriteBytes": 21474836480,
+    "expectedCurrentStatus": "BLOCKED"
+  },
+  "frozenAnalyzerAttacks": [
+    "restore the rejected raw occurrence assumption",
+    "remove the unique exact href target",
+    "fabricate an official Linux arm64 href target",
+    "change the official x64 byte count",
+    "change the official x64 SHA-256",
+    "label linux/amd64 as native arm64",
+    "promote best-effort emulation to production",
+    "change the observed host architecture",
+    "change the observed Colima architecture",
+    "change the observed Docker architecture",
+    "remove a required Docker security option",
+    "mark below-reserve disk admission accepted",
+    "claim that a runtime operation executed",
+    "materialize an unpinned worker image",
+    "mark B40 complete before separate preregistration"
+  ],
+  "decisionRule": "All corrected cardinality gates, all 14 unchanged gate families and all 15 attacks pass; native route remains rejected; x64 route remains best-effort and runtime-blocked; runtime operation count remains zero",
+  "acceptedVerdict": "ARCHITECTURE_PREFLIGHT_CORRECTION_SUPPORT_RUNTIME_BLOCKED",
+  "nonClaims": [
+    "B39-C1 changes only the rejected directory-index cardinality model",
+    "No Blender archive download, Blender launch, container create/run/build/pull/exec or disk override",
+    "No claim that source-building Blender for Linux arm64 is impossible",
+    "No x64 emulation compatibility, Eevee/EGL, render, performance, containment or production claim",
+    "B40 remains pending and requires a separate preregistration after disk admission"
+  ]
+}
