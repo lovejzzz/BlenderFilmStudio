@@ -351,6 +351,19 @@ Protocol: `research/2026-08-26-b20-eevee-process-history-isolation-protocol.md`.
 
 Status at freeze: no B20 tool or render exists. A favorable fresh-process result would locate an engineering boundary, not yet prove an internal Blender mechanism or a viable production workaround.
 
+Formal execution observation:
+
+- all 39 planned render processes had unique observed PIDs and produced 468 frames;
+- HISTORY: 18/36 sentinel-pair comparisons exact, 118 failed pixels;
+- FRESH: 26/36 exact, 56 failed pixels;
+- cross-mode: 61/108 exact, 320 failed pixels;
+- all three gates retained maximum error approximately one 8-bit code value;
+- 18/18 implemented attacks reached their intended reason.
+
+Verdict: `PROCESS_ISOLATION_NOT_SUFFICIENT`. A new Blender process for every frame did not restore strict equality: frames 5, 35, 47, 103 and 110 still split across the three FRESH replicates. The smaller descriptive FRESH count is not promoted to a probability claim. The next isolation boundary is the scene-linear in-memory Render Result versus display transform / PNG8 output.
+
+Artifacts: `experiments/eevee-process-history-isolation-v0-1/results.json`, `experiments/eevee-process-history-isolation-v0-1/evidence/` and `research/2026-08-26-b20-eevee-process-history-isolation-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:

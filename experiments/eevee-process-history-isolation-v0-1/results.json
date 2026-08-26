@@ -1,0 +1,424 @@
+{
+  "documentType": "BFS_B20_PROCESS_HISTORY_ISOLATION_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T11:21:06.458Z",
+  "decision": "PROCESS_ISOLATION_NOT_SUFFICIENT",
+  "validExperiment": true,
+  "sentinels": [
+    1,
+    5,
+    20,
+    35,
+    38,
+    47,
+    83,
+    93,
+    103,
+    110,
+    114,
+    144
+  ],
+  "design": {
+    "type": "two-mode process-history isolation with three independent replicates per mode",
+    "modes": [
+      {
+        "id": "HISTORY",
+        "description": "One newly launched Blender process renders every frame 1-144 in ascending order; sentinel outputs are the primary comparison subset.",
+        "replicates": [
+          "H-A",
+          "H-B",
+          "H-C"
+        ],
+        "blenderProcesses": 3,
+        "renderedFramesPerReplicate": 144,
+        "totalRenderedFrames": 432
+      },
+      {
+        "id": "FRESH",
+        "description": "Each sentinel frame and replicate is rendered by its own newly launched Blender process, which exits after that one frame.",
+        "replicates": [
+          "F-A",
+          "F-B",
+          "F-C"
+        ],
+        "blenderProcesses": 36,
+        "renderedFramesPerProcess": 1,
+        "totalRenderedFrames": 36
+      }
+    ],
+    "runOrder": [
+      "H-A",
+      "F-A:1,5,20,35,38,47,83,93,103,110,114,144",
+      "H-B",
+      "F-B:1,5,20,35,38,47,83,93,103,110,114,144",
+      "H-C",
+      "F-C:1,5,20,35,38,47,83,93,103,110,114,144"
+    ],
+    "runOrderFrozenBeforeExecution": true,
+    "withinModePairs": [
+      "A-B",
+      "A-C",
+      "B-C"
+    ],
+    "crossModePairs": [
+      "H-A:F-A",
+      "H-A:F-B",
+      "H-A:F-C",
+      "H-B:F-A",
+      "H-B:F-B",
+      "H-B:F-C",
+      "H-C:F-A",
+      "H-C:F-B",
+      "H-C:F-C"
+    ],
+    "primarySentinelComparisonCountPerMode": 36,
+    "crossModeSentinelComparisonCount": 108,
+    "totalBlenderProcesses": 39,
+    "totalRenderedFrames": 468
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "b19ConfiguratorSha256": "12eec7ca42f9ef2df6233ca71b5ce338ecf2bbdebecbc1b90f3012b5e3f86a77",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "b20SpecSha256": "b59908f4ffcd3f4bf67f3c04f490df48b626e9d969fd31c3277b88b2f49fbedf",
+    "rendererSha256": "6c1bb9bf0bb43be0186ac5f045b5c65dfa0000d1f04c659e89e216f207f35265",
+    "comparatorSha256": "3e6f0a91e5a419ab2f07a908d7f61848676e8bfd762ffbc4556dcea721c069ed",
+    "configuratorSha256": "12eec7ca42f9ef2df6233ca71b5ce338ecf2bbdebecbc1b90f3012b5e3f86a77",
+    "runnerSha256": "963d442c78c1c5cd00162cd4568594ff58fc27732c90f4457a255dda270b8a2f"
+  },
+  "modes": {
+    "HISTORY": {
+      "pairCount": 3,
+      "expectedPairCount": 3,
+      "totalFrameComparisons": 36,
+      "exactFrameComparisons": 18,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 118,
+      "exact": false
+    },
+    "FRESH": {
+      "pairCount": 3,
+      "expectedPairCount": 3,
+      "totalFrameComparisons": 36,
+      "exactFrameComparisons": 26,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 56,
+      "exact": false
+    }
+  },
+  "crossMode": {
+    "pairCount": 9,
+    "expectedPairCount": 9,
+    "totalFrameComparisons": 108,
+    "exactFrameComparisons": 61,
+    "maximumAbsoluteError": 0.003921598196029663,
+    "totalFailurePixels": 320,
+    "exact": false
+  },
+  "processLedger": {
+    "processCount": 39,
+    "uniqueProcessIds": 39,
+    "ledgerHash": "99917614426712c84bf45f9a6d458983d4d165b209978eb1f9960684d5cdb4ff",
+    "uri": "experiments/eevee-process-history-isolation-v0-1/evidence/process-ledger.json"
+  },
+  "comparisons": {
+    "H-A_H-B": {
+      "kind": "WITHIN_HISTORY",
+      "a": "H-A",
+      "b": "H-B",
+      "decodedPixelExactFrames": 4,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 41,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-A_H-B.comparison.json",
+      "bindingHash": "9e802db8c79b8b9c5086a7c87e2d8ffbe46a8e1140c392bb78a6c8b24417a843"
+    },
+    "H-A_H-C": {
+      "kind": "WITHIN_HISTORY",
+      "a": "H-A",
+      "b": "H-C",
+      "decodedPixelExactFrames": 6,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 34,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-A_H-C.comparison.json",
+      "bindingHash": "6631f184189de9abfe781b8e5bc05df0aae3641dec9c4fbf7886ebf7bfcc8af9"
+    },
+    "H-B_H-C": {
+      "kind": "WITHIN_HISTORY",
+      "a": "H-B",
+      "b": "H-C",
+      "decodedPixelExactFrames": 8,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 43,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-B_H-C.comparison.json",
+      "bindingHash": "41ba1681696fd72e674b07a619cd77b7647b62405cfea09734c81724cc3a8297"
+    },
+    "F-A_F-B": {
+      "kind": "WITHIN_FRESH",
+      "a": "F-A",
+      "b": "F-B",
+      "decodedPixelExactFrames": 8,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921568393707275,
+      "totalFailurePixels": 23,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/F-A_F-B.comparison.json",
+      "bindingHash": "1676e2ad0e07acc0bf94a13118032a674df1e70d84421dde1930d39a218b3028"
+    },
+    "F-A_F-C": {
+      "kind": "WITHIN_FRESH",
+      "a": "F-A",
+      "b": "F-C",
+      "decodedPixelExactFrames": 10,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 13,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/F-A_F-C.comparison.json",
+      "bindingHash": "27b59d4b98510fdd1047a710c8b7670fe48279609e83588fed7529c70e8c7838"
+    },
+    "F-B_F-C": {
+      "kind": "WITHIN_FRESH",
+      "a": "F-B",
+      "b": "F-C",
+      "decodedPixelExactFrames": 8,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 20,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/F-B_F-C.comparison.json",
+      "bindingHash": "39de4b2f0770ffa5dbc8177a89150e0d06c19c52c0e1344263aad027b8d7e598"
+    },
+    "H-A_F-A": {
+      "kind": "CROSS_MODE",
+      "a": "H-A",
+      "b": "F-A",
+      "decodedPixelExactFrames": 6,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 47,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-A_F-A.comparison.json",
+      "bindingHash": "9997d876b43ff3484429416f85c4119fbab303f6e514673692c69cfb54557130"
+    },
+    "H-A_F-B": {
+      "kind": "CROSS_MODE",
+      "a": "H-A",
+      "b": "F-B",
+      "decodedPixelExactFrames": 5,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 44,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-A_F-B.comparison.json",
+      "bindingHash": "908bed91a3e9ab3a916499748b3cf548eaa9218a8fa133093e0e73af7e023fdd"
+    },
+    "H-A_F-C": {
+      "kind": "CROSS_MODE",
+      "a": "H-A",
+      "b": "F-C",
+      "decodedPixelExactFrames": 7,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 34,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-A_F-C.comparison.json",
+      "bindingHash": "910f385f7f1463d69664c725671c81ff288fc332211c630f75cccf79fe4df045"
+    },
+    "H-B_F-A": {
+      "kind": "CROSS_MODE",
+      "a": "H-B",
+      "b": "F-A",
+      "decodedPixelExactFrames": 7,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 32,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-B_F-A.comparison.json",
+      "bindingHash": "91a370ed096d3d0cc5b25648693d4102c913f9c1a05381c8af9ff9dc6d8ab99f"
+    },
+    "H-B_F-B": {
+      "kind": "CROSS_MODE",
+      "a": "H-B",
+      "b": "F-B",
+      "decodedPixelExactFrames": 7,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 49,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-B_F-B.comparison.json",
+      "bindingHash": "6725a3d6e02839cadf2d4b87b8394541714dfa724d313d7a6992c17f04f3ffe8"
+    },
+    "H-B_F-C": {
+      "kind": "CROSS_MODE",
+      "a": "H-B",
+      "b": "F-C",
+      "decodedPixelExactFrames": 6,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921568393707275,
+      "totalFailurePixels": 35,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-B_F-C.comparison.json",
+      "bindingHash": "272be23f7833086d88f144e016504b5607b0b94d31667b95b04411ea724d64dc"
+    },
+    "H-C_F-A": {
+      "kind": "CROSS_MODE",
+      "a": "H-C",
+      "b": "F-A",
+      "decodedPixelExactFrames": 7,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 27,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-C_F-A.comparison.json",
+      "bindingHash": "e15a10c6dfa1698c7bef1832bcb63c08ae21144707715bcb3899d9dde482175b"
+    },
+    "H-C_F-B": {
+      "kind": "CROSS_MODE",
+      "a": "H-C",
+      "b": "F-B",
+      "decodedPixelExactFrames": 9,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 28,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-C_F-B.comparison.json",
+      "bindingHash": "713b2121b0e60fafc7b28895c389e6c0ee63da6a56734ef1f7bb276ce391b77d"
+    },
+    "H-C_F-C": {
+      "kind": "CROSS_MODE",
+      "a": "H-C",
+      "b": "F-C",
+      "decodedPixelExactFrames": 7,
+      "frameCount": 12,
+      "maximumAbsoluteError": 0.003921598196029663,
+      "totalFailurePixels": 24,
+      "comparisonUri": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons/H-C_F-C.comparison.json",
+      "bindingHash": "75754bc4e2caa3cbffa1212398d83c1b218c5cac1eea4276e13752e0c1fb664b"
+    }
+  },
+  "attacks": [
+    {
+      "id": "N_B20_SPEC_SHA",
+      "expectedReason": "B20_SPEC_SHA",
+      "observedReason": "B20_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SPEC_SHA",
+      "expectedReason": "REVIEW_SPEC_SHA",
+      "observedReason": "REVIEW_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER_SHA",
+      "expectedReason": "BLENDER_SHA",
+      "observedReason": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO_SHA",
+      "expectedReason": "OCIO_SHA",
+      "observedReason": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE_SHA",
+      "expectedReason": "SCENE_SHA",
+      "observedReason": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER_SHA",
+      "expectedReason": "RENDERER_SHA",
+      "observedReason": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR_SHA",
+      "expectedReason": "CONFIGURATOR_SHA",
+      "observedReason": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDER_SAMPLES",
+      "expectedReason": "RENDER_SAMPLES",
+      "observedReason": "RENDER_SAMPLES",
+      "pass": true
+    },
+    {
+      "id": "N_DITHER",
+      "expectedReason": "FIXED_DITHER",
+      "observedReason": "FIXED_DITHER",
+      "pass": true
+    },
+    {
+      "id": "N_FAST_GI",
+      "expectedReason": "FAST_GI",
+      "observedReason": "FAST_GI",
+      "pass": true
+    },
+    {
+      "id": "N_REPROJECTION",
+      "expectedReason": "TAA_REPROJECTION",
+      "observedReason": "TAA_REPROJECTION",
+      "pass": true
+    },
+    {
+      "id": "N_HISTORY_ORDER",
+      "expectedReason": "FRAME_SCHEDULE",
+      "observedReason": "FRAME_SCHEDULE",
+      "pass": true
+    },
+    {
+      "id": "N_FRESH_SCOPE",
+      "expectedReason": "FRAME_COUNT",
+      "observedReason": "FRAME_COUNT",
+      "pass": true
+    },
+    {
+      "id": "N_PROCESS_ALIAS",
+      "expectedReason": "PROCESS_ALIAS",
+      "observedReason": "PROCESS_ALIAS",
+      "pass": true
+    },
+    {
+      "id": "N_MISSING_SENTINEL",
+      "expectedReason": "MISSING_SENTINEL",
+      "observedReason": "MISSING_SENTINEL",
+      "pass": true
+    },
+    {
+      "id": "N_MUTATED_SENTINEL",
+      "expectedReason": "IMAGE_SHA",
+      "observedReason": "IMAGE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_COMPARISON_BINDING",
+      "expectedReason": "COMPARISON_MANIFEST_BINDING",
+      "observedReason": "COMPARISON_MANIFEST_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_COMPARATOR_SHA",
+      "expectedReason": "COMPARATOR_SHA",
+      "observedReason": "COMPARATOR_SHA",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "manifests": {
+      "H-A": "experiments/eevee-process-history-isolation-v0-1/evidence/H-A.manifest.json",
+      "H-B": "experiments/eevee-process-history-isolation-v0-1/evidence/H-B.manifest.json",
+      "H-C": "experiments/eevee-process-history-isolation-v0-1/evidence/H-C.manifest.json",
+      "F-A": "experiments/eevee-process-history-isolation-v0-1/evidence/F-A.manifest.json",
+      "F-B": "experiments/eevee-process-history-isolation-v0-1/evidence/F-B.manifest.json",
+      "F-C": "experiments/eevee-process-history-isolation-v0-1/evidence/F-C.manifest.json"
+    },
+    "comparisons": "experiments/eevee-process-history-isolation-v0-1/evidence/comparisons",
+    "renders": "experiments/eevee-process-history-isolation-v0-1/evidence/renders"
+  },
+  "nonClaims": [
+    "The twelve sentinel frames are a pre-registered diagnostic subset and do not estimate failure probability for all frames or scenes.",
+    "A fresh-process result does not identify a specific Blender source-level race, cache or random-number mechanism.",
+    "The HISTORY and FRESH modes intentionally differ in prior rendered-frame history; the experiment tests that boundary, not render-speed equivalence.",
+    "Three replicates can falsify exact determinism but cannot estimate a stable mismatch rate.",
+    "No perceptual tolerance is selected and near-equality remains non-exact.",
+    "The result applies only to this Blender 5.2 Eevee PNG8 same-machine profile, not Cycles EXR masters or other devices.",
+    "A favorable fresh-process result would be an engineering clue, not yet a cost-effective production workflow recommendation."
+  ]
+}
