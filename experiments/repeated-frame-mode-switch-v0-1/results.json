@@ -1,0 +1,1202 @@
+{
+  "documentType": "BFS_B28_REPEATED_FRAME_MODE_SWITCH_RESULT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T13:57:53.210Z",
+  "decision": "WITHIN_PID_MODE_SWITCH_SUPPORT",
+  "independentDecision": "WITHIN_PID_MODE_SWITCH_SUPPORT",
+  "validExperiment": true,
+  "humanReview": {
+    "status": "PENDING",
+    "claim": "Automation cannot determine visibility, temporal perception or cinematic quality."
+  },
+  "question": "When frame 38 is rendered repeatedly without changing frame or scene inside one initialized Blender process, can one PID switch between the two decoded RGB modes established by B27?",
+  "design": {
+    "type": "twelve fresh persistent processes with repeated same-frame render calls",
+    "processOrder": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12"
+    ],
+    "processes": 12,
+    "targetFrame": 38,
+    "renderCallsPerProcess": 12,
+    "renderCalls": 144,
+    "outputFiles": 144,
+    "withinProcessAdjacentTransitions": 132,
+    "selectedBeforeAnyB28Render": true,
+    "frameSetRule": "Set frame 38 once before the first render. Do not change scene frame or reload the blend between the twelve calls.",
+    "renderRule": "Call bpy.ops.render.render(write_still=True) twelve times and write render-01.png through render-12.png."
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "b28SpecSha256": "60e3057d378201bc6c6f376422ec723277d733238547f9c206408a4f3f196ff5",
+    "b27ResultsSha256": "0d35e9f7b940a6588ec604674ebf493ce68f183b8506178b1447b4dba791a353",
+    "b27VariantAnalysisSha256": "7fb942e14387881fcd42737b7b99606b5022b8b418958f56c437b5ecb77c4596",
+    "rendererSha256": "46a138362fcb72cc8ac688a536ee395b51fec42e036573d776fe4135811242f0",
+    "classifierSha256": "e5d9b042bd4510a8adda04fde85d7376fb16bbfba379730b6ce6b7ba429d854e",
+    "runnerSha256": "8cf943191f83f47b659e5f0a21184675fb2445d042daade13653fada1d4eeb2d",
+    "referenceAnchorSha256": "85e773b2be2a4d98f7a1144ed84bc338c6f5a76bd79c6a27f13638fa02e8c8f0",
+    "alternateAnchorSha256": "2bbacb7c15d98a62e6614230620a739652ebcc158b8451d3a64f82e0693b9596"
+  },
+  "primary": {
+    "endpoint": "withinPidKnownModeSwitch",
+    "supportThresholdProcesses": 2,
+    "switchingProcessCount": 12,
+    "switchingProcesses": [
+      "P01",
+      "P02",
+      "P03",
+      "P04",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "P12"
+    ]
+  },
+  "summary": {
+    "adjacentComparisons": 132,
+    "modeOccurrences": {
+      "ALTERNATE": 28,
+      "REFERENCE": 116
+    },
+    "modeProcessCounts": {
+      "ALTERNATE": 12,
+      "REFERENCE": 12
+    },
+    "novelDecodedRgbHashes": [],
+    "observedAdjacentTransitions": 42,
+    "processes": 12,
+    "renders": 144,
+    "transitionDirections": {
+      "ALTERNATE->REFERENCE": 20,
+      "REFERENCE->ALTERNATE": 22
+    }
+  },
+  "ordinalModeCounts": [
+    {
+      "callOrdinal": 1,
+      "counts": {
+        "ALTERNATE": 2,
+        "REFERENCE": 10
+      }
+    },
+    {
+      "callOrdinal": 2,
+      "counts": {
+        "ALTERNATE": 1,
+        "REFERENCE": 11
+      }
+    },
+    {
+      "callOrdinal": 3,
+      "counts": {
+        "REFERENCE": 12
+      }
+    },
+    {
+      "callOrdinal": 4,
+      "counts": {
+        "ALTERNATE": 1,
+        "REFERENCE": 11
+      }
+    },
+    {
+      "callOrdinal": 5,
+      "counts": {
+        "ALTERNATE": 4,
+        "REFERENCE": 8
+      }
+    },
+    {
+      "callOrdinal": 6,
+      "counts": {
+        "ALTERNATE": 2,
+        "REFERENCE": 10
+      }
+    },
+    {
+      "callOrdinal": 7,
+      "counts": {
+        "ALTERNATE": 2,
+        "REFERENCE": 10
+      }
+    },
+    {
+      "callOrdinal": 8,
+      "counts": {
+        "ALTERNATE": 2,
+        "REFERENCE": 10
+      }
+    },
+    {
+      "callOrdinal": 9,
+      "counts": {
+        "ALTERNATE": 5,
+        "REFERENCE": 7
+      }
+    },
+    {
+      "callOrdinal": 10,
+      "counts": {
+        "ALTERNATE": 3,
+        "REFERENCE": 9
+      }
+    },
+    {
+      "callOrdinal": 11,
+      "counts": {
+        "ALTERNATE": 2,
+        "REFERENCE": 10
+      }
+    },
+    {
+      "callOrdinal": 12,
+      "counts": {
+        "ALTERNATE": 4,
+        "REFERENCE": 8
+      }
+    }
+  ],
+  "processes": [
+    {
+      "replicate": "P01",
+      "processId": 38496,
+      "sequence": [
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 3,
+        "REFERENCE": 9
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 4,
+      "transitions": [
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 1,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 7,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 8,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 11,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        }
+      ]
+    },
+    {
+      "replicate": "P02",
+      "processId": 38499,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 1,
+        "REFERENCE": 11
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 2,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 8,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 9,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "P03",
+      "processId": 38506,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "ALTERNATE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 3,
+        "REFERENCE": 9
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 5,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 4,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 5,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 9,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 10,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 11,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        }
+      ]
+    },
+    {
+      "replicate": "P04",
+      "processId": 38510,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "ALTERNATE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 3,
+        "REFERENCE": 9
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 4,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 4,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 5,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 6,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 8,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "P05",
+      "processId": 38515,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "ALTERNATE",
+        "ALTERNATE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 4,
+        "REFERENCE": 8
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 5,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 5,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 6,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 8,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 9,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 10,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        }
+      ]
+    },
+    {
+      "replicate": "P06",
+      "processId": 38517,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 2,
+        "REFERENCE": 10
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 4,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 4,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 5,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 8,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 9,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "P07",
+      "processId": 38522,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 2,
+        "REFERENCE": 10
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 4,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 5,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 6,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 10,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 11,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "P08",
+      "processId": 38528,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "ALTERNATE",
+        "REFERENCE",
+        "ALTERNATE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 3,
+        "REFERENCE": 9
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 3,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 8,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 10,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 11,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        }
+      ]
+    },
+    {
+      "replicate": "P09",
+      "processId": 38533,
+      "sequence": [
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 3,
+        "REFERENCE": 9
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 5,
+      "transitions": [
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 1,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 4,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 5,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        },
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 6,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 7,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "P10",
+      "processId": 38536,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 2,
+        "REFERENCE": 10
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 2,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 8,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 10,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "P11",
+      "processId": 38542,
+      "sequence": [
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 1,
+        "REFERENCE": 11
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 2,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 1,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 2,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "P12",
+      "processId": 38545,
+      "sequence": [
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "ALTERNATE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE",
+        "REFERENCE"
+      ],
+      "modeCounts": {
+        "ALTERNATE": 1,
+        "REFERENCE": 11
+      },
+      "withinPidKnownModeSwitch": true,
+      "adjacentTransitionCount": 2,
+      "transitions": [
+        {
+          "after": "ALTERNATE",
+          "afterCallOrdinal": 3,
+          "before": "REFERENCE",
+          "direction": "REFERENCE->ALTERNATE"
+        },
+        {
+          "after": "REFERENCE",
+          "afterCallOrdinal": 4,
+          "before": "ALTERNATE",
+          "direction": "ALTERNATE->REFERENCE"
+        }
+      ]
+    }
+  ],
+  "aggregate": {
+    "uniqueRenderProcesses": 12,
+    "renderProcesses": 12,
+    "renderCalls": 144,
+    "outputFiles": 144,
+    "totalRenderSeconds": 25.039339,
+    "attacksPassed": 23,
+    "attacksTotal": 23
+  },
+  "processLedger": [
+    {
+      "orderIndex": 0,
+      "replicate": "P01",
+      "processId": 38496,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "88d0c1abe6515b45750d30ff2e4083bf5e2df1a5430c265011996bc7bda23e9d",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "6dddc0fb644c4931fe252d3881b95743f73569b1384803acd3dc8eed0fefe4f1"
+    },
+    {
+      "orderIndex": 1,
+      "replicate": "P02",
+      "processId": 38499,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "c8e85010d30ed51434308585923c5134a11f1959692e02a19ba485fa7faad163",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "ea9eaa34203a4a977fed52927fbd7754f4e32292b6035e718c0bc840972ecd80"
+    },
+    {
+      "orderIndex": 2,
+      "replicate": "P03",
+      "processId": 38506,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "b87d359ae2b4bf49e2b39a419b7bfa048056a235ec97a99fe0c9f5e502ff4fdc",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "a45b01b69f30252ce32bdcb6f0dcc25a1dfd2d33fec3573f97109a6aa48e42c6"
+    },
+    {
+      "orderIndex": 3,
+      "replicate": "P04",
+      "processId": 38510,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "4939466d284fb189b5ffa3e91ce7fb7ae5a0a9eed4c5af9f09d0947b50d673a3",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "2aa39db7aaaa09c93a41085e44e33b7004f5fb8d129937894f769a4eb925b0af"
+    },
+    {
+      "orderIndex": 4,
+      "replicate": "P05",
+      "processId": 38515,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "858821e451d7e3be7e513b6ae881a938069b486b37145127c24b08d50359f386",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "4be1dbeaea84ba1dd6ff505a97933b1235008707cfb7e8a34bcd7fdaba6baf8d"
+    },
+    {
+      "orderIndex": 5,
+      "replicate": "P06",
+      "processId": 38517,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "9a5a80d6073be58eb5d88ee6dc909b849b4b41d1866e14e79918c8f025feff9b",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "df3ac7ebbe57e7108978972da41d0bac1782e2bea06664c78eaf2e3a1639793f"
+    },
+    {
+      "orderIndex": 6,
+      "replicate": "P07",
+      "processId": 38522,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "95b8af320b538d072cd70243d57a6a73fea92f7a53d58b47be3571abeb06e58a",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "4d78c3612b2c7505247671ede7735fffe32dcf6b0aef26186e8dce0bb0f887c6"
+    },
+    {
+      "orderIndex": 7,
+      "replicate": "P08",
+      "processId": 38528,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "70f185f1ab7519aa531ecdc525bc072d87e829b61b06cc6d5636f763b163be0d",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "002004ba62bbbac1ca3cc9f30e43c018e560d9c7314ffadeb62322b9f59f6826"
+    },
+    {
+      "orderIndex": 8,
+      "replicate": "P09",
+      "processId": 38533,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "e28ab6bab5afe39f07b15e1d5ce5017f63d7a6b7afd5bba97c722b5b5dad3466",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "e2d1cb5c3367cbf68f67553c0443410db28c7a9127670c0e3a03e9e42ad96929"
+    },
+    {
+      "orderIndex": 9,
+      "replicate": "P10",
+      "processId": 38536,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "93f3874ada696805537d891dd2069c77562c7c97bcbef37ca25e0001d049ca56",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "41e52256e73fc21c8f94659369f5a8fb875a9d3d75475b648f6bff7a5f63eb26"
+    },
+    {
+      "orderIndex": 10,
+      "replicate": "P11",
+      "processId": 38542,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "d105c1c6470f8914d9e03e63cb1ecc6113f94c64d93369ae998ccf944e68d7d3",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "b759beb47ded58a098ffed1fabd614a7f879cf3a8aed3e769b8e2d87413c6591"
+    },
+    {
+      "orderIndex": 11,
+      "replicate": "P12",
+      "processId": 38545,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "77da4e0730b960d0f34859e7f478cd2c715b18c5ad6a118958aba12954b00aee",
+      "interventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "ccaa60b88fb507dcc086f5d0a9eeb881b33b82e4d550c332e9ab5901ed9ea7b3"
+    }
+  ],
+  "attacks": [
+    {
+      "id": "N_B28_SPEC_IDENTITY",
+      "expected": "B28_SPEC_SHA",
+      "observed": "B28_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B27_RESULT_IDENTITY",
+      "expected": "B27_RESULT_SHA",
+      "observed": "B27_RESULT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B27_VARIANT_IDENTITY",
+      "expected": "B27_VARIANT_SHA",
+      "observed": "B27_VARIANT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SPEC_IDENTITY",
+      "expected": "REVIEW_SPEC_SHA",
+      "observed": "REVIEW_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER_IDENTITY",
+      "expected": "BLENDER_SHA",
+      "observed": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO_IDENTITY",
+      "expected": "OCIO_SHA",
+      "observed": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE_IDENTITY",
+      "expected": "SCENE_SHA",
+      "observed": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PLAN_STRUCTURE_IDENTITY",
+      "expected": "PLAN_STRUCTURE",
+      "observed": "PLAN_STRUCTURE",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR_IDENTITY",
+      "expected": "CONFIGURATOR_SHA",
+      "observed": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER_IDENTITY",
+      "expected": "RENDERER_SHA",
+      "observed": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_CLASSIFIER_IDENTITY",
+      "expected": "CLASSIFIER_SHA",
+      "observed": "CLASSIFIER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RUNNER_IDENTITY",
+      "expected": "RUNNER_SHA",
+      "observed": "RUNNER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_REFERENCE_ANCHOR",
+      "expected": "REFERENCE_ANCHOR",
+      "observed": "REFERENCE_ANCHOR",
+      "pass": true
+    },
+    {
+      "id": "N_ALTERNATE_ANCHOR",
+      "expected": "ALTERNATE_ANCHOR",
+      "observed": "ALTERNATE_ANCHOR",
+      "pass": true
+    },
+    {
+      "id": "N_SOURCE_CONTROLS",
+      "expected": "SOURCE_CONTROLS",
+      "observed": "SOURCE_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_PROCESS_ORDER",
+      "expected": "PROCESS_ORDER",
+      "observed": "PROCESS_ORDER",
+      "pass": true
+    },
+    {
+      "id": "N_PID_BINDING",
+      "expected": "PID_BINDING",
+      "observed": "PID_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FRAME_CALL_ORDER",
+      "expected": "FRAME_CALL_ORDER",
+      "observed": "FRAME_CALL_ORDER",
+      "pass": true
+    },
+    {
+      "id": "N_PNG_LAYOUT",
+      "expected": "PNG_LAYOUT",
+      "observed": "PNG_LAYOUT",
+      "pass": true
+    },
+    {
+      "id": "N_OUTPUT_BINDING",
+      "expected": "OUTPUT_BINDING",
+      "observed": "OUTPUT_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_CLASSIFICATION_BINDING",
+      "expected": "CLASSIFICATION_BINDING",
+      "observed": "CLASSIFICATION_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FROZEN_CONTRACT",
+      "expected": "FROZEN_CONTRACT",
+      "observed": "FROZEN_CONTRACT",
+      "pass": true
+    },
+    {
+      "id": "N_HUMAN_REVIEW",
+      "expected": "HUMAN_REVIEW",
+      "observed": "HUMAN_REVIEW",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "processLedger": "experiments/repeated-frame-mode-switch-v0-1/evidence/process-ledger.json",
+    "classificationIndex": "experiments/repeated-frame-mode-switch-v0-1/evidence/classification-index.json",
+    "classification": "experiments/repeated-frame-mode-switch-v0-1/evidence/mode-classification.json",
+    "binding": "experiments/repeated-frame-mode-switch-v0-1/evidence/classification-binding.json",
+    "manifests": {
+      "P01": "experiments/repeated-frame-mode-switch-v0-1/evidence/P01.manifest.json",
+      "P02": "experiments/repeated-frame-mode-switch-v0-1/evidence/P02.manifest.json",
+      "P03": "experiments/repeated-frame-mode-switch-v0-1/evidence/P03.manifest.json",
+      "P04": "experiments/repeated-frame-mode-switch-v0-1/evidence/P04.manifest.json",
+      "P05": "experiments/repeated-frame-mode-switch-v0-1/evidence/P05.manifest.json",
+      "P06": "experiments/repeated-frame-mode-switch-v0-1/evidence/P06.manifest.json",
+      "P07": "experiments/repeated-frame-mode-switch-v0-1/evidence/P07.manifest.json",
+      "P08": "experiments/repeated-frame-mode-switch-v0-1/evidence/P08.manifest.json",
+      "P09": "experiments/repeated-frame-mode-switch-v0-1/evidence/P09.manifest.json",
+      "P10": "experiments/repeated-frame-mode-switch-v0-1/evidence/P10.manifest.json",
+      "P11": "experiments/repeated-frame-mode-switch-v0-1/evidence/P11.manifest.json",
+      "P12": "experiments/repeated-frame-mode-switch-v0-1/evidence/P12.manifest.json"
+    },
+    "referenceAnchor": "public/frame-history-isolation-v0-1/b25-reference-frame-0038-B.png",
+    "alternateAnchor": "public/frame-history-isolation-v0-1/b27-alternate-frame-0038-D02.png"
+  },
+  "nonClaims": [
+    "Within-PID switching would locate recurrence at the render-invocation boundary or below; it would not identify a specific Eevee, Metal, rasterization, TAA or GPU-scheduling mechanism.",
+    "Process-lock support would not prove all initialization state is deterministic or generalize beyond this frame, scene, build, backend and machine.",
+    "The two known modes came from B27 post-hoc localization but are frozen before B28; a novel mode is valid evidence, not an invalid sample.",
+    "Twelve processes by twelve calls is a fixed mechanistic probe, not a population probability estimate or equivalence study.",
+    "Decoded RGB identity and mode switching do not determine visibility, temporal perception or cinematic quality.",
+    "PNG8 review output is not the EXR master, and human review remains a separate PENDING gate."
+  ]
+}
