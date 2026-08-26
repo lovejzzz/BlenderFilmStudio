@@ -1067,6 +1067,16 @@ Verdict: `WORKER_HOST_CAPACITY_ACCEPTED_REPLAY_STABLE`. The host is eligible onl
 
 Artifacts: `experiments/worker-host-capacity-readmission-v0-2/results.json`, `experiments/worker-host-capacity-readmission-v0-2/audit.json` and `research/2026-08-26-b40-r2-worker-host-capacity-readmission-result.md`.
 
+## J-059 · B41 Docker architecture alias crash before runtime
+
+Type: preregistered real-runtime canary, no-result identity parser crash, 2026-08-26.
+
+The disk guard accepted B41 with `134689046528` bytes available. Before creating an output directory or downloading anything, the runner queried the explicitly bound Colima Docker socket. Docker server JSON returned `Arch=arm64`, while the preregistered canonical Colima/Docker architecture was `aarch64`. The runner had frozen no alias normalization and stopped at `B41 Docker server architecture differs`.
+
+Status: `NO_RESULT_DOCKER_ARCHITECTURE_ALIAS_CRASH`. B41-C1 may map Docker API `arm64` to canonical `aarch64` and change nothing else. No archive download, build, image, container or Blender process occurred.
+
+Artifact: `research/2026-08-26-b41-docker-architecture-alias-crash.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
