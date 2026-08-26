@@ -110,7 +110,22 @@
         "apertureFStop": { "type": "number", "minimum": 0.5, "maximum": 64 },
         "focusDistanceM": { "type": "number", "exclusiveMinimum": 0, "maximum": 100000 },
         "shutterAngleDeg": { "type": "number", "minimum": 0, "maximum": 360 },
-        "transform": { "$ref": "#/$defs/transform" }
+        "transform": { "$ref": "#/$defs/transform" },
+        "transformKeys": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 1024,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["frame", "transform", "interpolation"],
+            "properties": {
+              "frame": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+              "transform": { "$ref": "#/$defs/transform" },
+              "interpolation": { "enum": ["LINEAR", "BEZIER", "CONSTANT"] }
+            }
+          }
+        }
       }
     },
     "light": {
@@ -152,7 +167,7 @@
       "required": ["outputProfile", "previewEngine", "finalEngine", "resolution", "samplesPreview", "samplesFinal", "denoise", "fileFormat", "pixelType", "compression", "passes", "outputRoot"],
       "properties": {
         "outputProfile": { "const": "BFS_RESEARCH_MASTER_0_1" },
-        "previewEngine": { "const": "BLENDER_EEVEE_NEXT" },
+        "previewEngine": { "const": "BLENDER_EEVEE" },
         "finalEngine": { "const": "CYCLES" },
         "resolution": {
           "type": "object",

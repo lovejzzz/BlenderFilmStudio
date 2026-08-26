@@ -41,7 +41,7 @@ The schema has ten required root blocks:
 1. `shot` — ID, title, frame range, rational 24fps, meter units, seed, and active camera.
 2. `assets` — stable ID, type, restricted URI, semantic version, SHA-256, license, transform, and visibility.
 3. `actors` — character asset reference, rig profile, and identity lock.
-4. `cameras` — lens, sensor, aperture, focus distance, shutter angle, and transform.
+4. `cameras` — lens, sensor, aperture, focus distance, shutter angle, transform, and optional restricted transform keys.
 5. `lights` — type, scene-linear color, energy, size, and transform.
 6. `world` — background color and strength.
 7. `events` — contact, gaze, dialogue, and cue events with frames and subjects.
@@ -67,6 +67,7 @@ Checks relationships that are awkward or impossible to express locally in JSON S
 - actors reference assets of kind `CHARACTER`
 - event frames are inside the shot
 - event subjects exist
+- camera transform keys are inside the shot and strictly increasing
 
 ### L3 — Security validation
 
@@ -77,13 +78,13 @@ Checks relationships that are awkward or impossible to express locally in JSON S
 - Requires outputs below `renders/`.
 - Schema constants require `networkAccess: false` and `arbitraryPython: false`.
 
-### L4 — Compiler preflight (not implemented)
+### L4 — BuildPlan and Blender verification (implemented 2026-08-26)
 
-The next layer will resolve asset manifests, check Blender API compatibility, calculate the dependency closure and resource budget, and emit an immutable dry-run BuildPlan.
+The compiler resolves and re-hashes local assets, verifies local provenance, calculates an immutable canonical BuildPlan, then verifies both the plan and assets again inside Blender 5.2.0 LTS. The first B01/B02 experiment is recorded in `research/2026-08-26-compiler-v0.1-experiment.md`.
 
 ## Fixture result
 
-The suite contains ten accepted and ten rejected mutations of one B02 base document.
+The suite contains eleven accepted and eleven rejected mutations of one B02 base document.
 
 Accepted:
 
@@ -97,6 +98,7 @@ Accepted:
 - Shifted frame range
 - World-light variant
 - High-sample non-denoised render
+- Camera dolly keyframe variant
 
 Rejected:
 
@@ -110,29 +112,21 @@ Rejected:
 - Missing asset license
 - Event outside shot range
 - Actor referencing a prop instead of a character
+- Camera keyframe outside the shot
 
-Result: **20/20 fixtures pass their expected accept/reject outcome.**
+Result: **22/22 fixtures pass their expected accept/reject outcome.**
 
 ## Explicit non-claims
 
-- The schema has not yet compiled a Blender scene.
-- The schema does not yet represent full animation curves, retargeting, facial performance, material node graphs, simulation caches, or editorial conform.
+- The schema has compiled B01 and B02, but not a production scene or actor performance.
+- The schema represents restricted camera transform keys, not general animation curves, retargeting, facial performance, material node graphs, simulation caches, or editorial conform.
 - Structural determinism does not imply cross-GPU pixel identity.
 - ACEScg and OpenEXR do not by themselves guarantee correct display or cinematic quality.
 - A research master is not a DCP.
 
 ## Next milestone
 
-Implement the smallest SceneSpec → immutable BuildPlan → Blender 5.2 compiler for B01 and B02 only:
-
-1. Validate SceneSpec.
-2. Resolve and hash allowed assets.
-3. Produce a dry-run BuildPlan.
-4. Rebuild a managed Blender collection idempotently.
-5. Create camera and light objects via data APIs.
-6. Apply render/output profile.
-7. Emit a scene manifest before rendering.
-8. Run two clean builds and compare structural hashes.
+The structural compiler milestone is complete. The next milestone is PixelSpec v0.1: pin the OCIO configuration and hash, render B01 plus three B02 frames to 4K multi-layer OpenEXR, inspect channels/metadata/finite values, and compare two clean renders.
 
 ## Primary references
 

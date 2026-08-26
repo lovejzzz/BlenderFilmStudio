@@ -153,7 +153,7 @@ export default function ResearchAgendaPage() {
     <main className="agenda-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><a href="#protocol">实验</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link></nav>
+        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link></nav>
         <span className="edition agenda-edition">Agenda 01</span>
       </header>
 
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>先写 SceneSpec v0.1，不先做完整 UI。</h3><p>用 B01 材质静物和 B02 六秒室内镜头定义 20 个合法/非法样例；编译器在启动 Blender 前完成验证，并为两次净构建输出结构哈希、EXR、FLIP 差异和完整成本日志。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>冻结 OCIO，建立 PixelSpec v0.1。</h3><p>SceneSpec、22 个正反样例和 B01/B02 双净构建已经通过。下一步输出真实 4K Multi-layer EXR，检查通道、有限值、元数据与两次渲染差异，再定义跨 GPU 容差。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">

@@ -16,9 +16,9 @@
       {
         "id": "SET_ROOM",
         "kind": "SET",
-        "uri": "assets/sets/interior-room.blend",
+        "uri": "assets/sets/B02-interior-room.blend",
         "version": "0.1.0",
-        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sha256": "061eb0ae00fa1a7d52580ed578aa3e36cb51fa1dee5b6cb326497927baf35032",
         "license": "CC0-1.0",
         "transform": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] },
         "visible": true
@@ -26,9 +26,9 @@
       {
         "id": "PROP_CHAIR",
         "kind": "PROP",
-        "uri": "library/props/chair.blend",
+        "uri": "library/props/B02-chair.blend",
         "version": "1.0.0",
-        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "sha256": "d7d110c27764c464c98fe336116bdc9aa3d7ec061e9f23a1b7bff329133e0642",
         "license": "CC-BY-4.0",
         "transform": { "locationM": [0.7, 0.2, 0], "rotationEulerDeg": [0, 0, -18], "scale": [1, 1, 1] },
         "visible": true
@@ -43,7 +43,11 @@
         "apertureFStop": 2.8,
         "focusDistanceM": 3.2,
         "shutterAngleDeg": 180,
-        "transform": { "locationM": [-3.8, -4.2, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1] }
+        "transform": { "locationM": [-3.8, -4.2, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1] },
+        "transformKeys": [
+          { "frame": 1, "transform": { "locationM": [-3.8, -4.2, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1] }, "interpolation": "LINEAR" },
+          { "frame": 144, "transform": { "locationM": [-2.1, -3.0, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1] }, "interpolation": "LINEAR" }
+        ]
       }
     ],
     "lights": [
@@ -60,7 +64,7 @@
     "events": [],
     "render": {
       "outputProfile": "BFS_RESEARCH_MASTER_0_1",
-      "previewEngine": "BLENDER_EEVEE_NEXT",
+      "previewEngine": "BLENDER_EEVEE",
       "finalEngine": "CYCLES",
       "resolution": { "width": 3840, "height": 2160, "percentage": 100 },
       "samplesPreview": 32,
@@ -100,9 +104,10 @@
     { "id": "V05_APPEND_FILL", "expectedValid": true, "mutations": [{ "op": "append", "path": "/lights", "value": { "id": "FILL_SOFT", "type": "AREA", "colorLinear": [0.25, 0.38, 0.7], "energy": 240, "sizeM": 3, "transform": { "locationM": [2, -1, 2], "rotationEulerDeg": [45, 0, 90], "scale": [1, 1, 1] } } }] },
     { "id": "V06_VALID_ACTOR", "expectedValid": true, "mutations": [{ "op": "append", "path": "/assets", "value": { "id": "CHAR_LEAD", "kind": "CHARACTER", "uri": "assets/characters/lead.blend", "version": "0.1.0", "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "license": "PROJECT-OWNED", "transform": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] }, "visible": true } }, { "op": "append", "path": "/actors", "value": { "id": "ACTOR_LEAD", "assetRef": "CHAR_LEAD", "rigProfile": "BFS_HUMANOID_0_1", "identityLock": true } }] },
     { "id": "V07_VALID_CONTACT", "expectedValid": true, "mutations": [{ "op": "append", "path": "/events", "value": { "id": "CONTACT_CHAIR", "type": "CONTACT", "frame": 72, "subjects": ["PROP_CHAIR"] } }] },
-    { "id": "V08_SHIFTED_RANGE", "expectedValid": true, "mutations": [{ "op": "set", "path": "/shot/frameStart", "value": 1001 }, { "op": "set", "path": "/shot/frameEnd", "value": 1144 }, { "op": "append", "path": "/events", "value": { "id": "CUE_ACTION", "type": "CUE", "frame": 1050, "subjects": ["PROP_CHAIR"] } }] },
+    { "id": "V08_SHIFTED_RANGE", "expectedValid": true, "mutations": [{ "op": "set", "path": "/shot/frameStart", "value": 1001 }, { "op": "set", "path": "/shot/frameEnd", "value": 1144 }, { "op": "set", "path": "/cameras/0/transformKeys/0/frame", "value": 1001 }, { "op": "set", "path": "/cameras/0/transformKeys/1/frame", "value": 1144 }, { "op": "append", "path": "/events", "value": { "id": "CUE_ACTION", "type": "CUE", "frame": 1050, "subjects": ["PROP_CHAIR"] } }] },
     { "id": "V09_WORLD_VARIANT", "expectedValid": true, "mutations": [{ "op": "set", "path": "/world/strength", "value": 0.05 }] },
     { "id": "V10_DENOISE_OFF", "expectedValid": true, "mutations": [{ "op": "set", "path": "/render/denoise", "value": false }, { "op": "set", "path": "/render/samplesFinal", "value": 2048 }] },
+    { "id": "V11_CAMERA_DOLLY", "expectedValid": true, "mutations": [{ "op": "set", "path": "/cameras/0/transformKeys/1/transform/locationM", "value": [-1.8, -2.8, 1.55] }] },
     { "id": "I01_UNKNOWN_ROOT_FIELD", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/unapproved", "value": true }] },
     { "id": "I02_WRONG_SPEC_VERSION", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/specVersion", "value": "0.2.0" }] },
     { "id": "I03_REVERSED_FRAME_RANGE", "expectedValid": false, "expectedCode": "SEM_FRAME_RANGE", "mutations": [{ "op": "set", "path": "/shot/frameStart", "value": 145 }, { "op": "set", "path": "/shot/frameEnd", "value": 1 }] },
@@ -112,6 +117,7 @@
     { "id": "I07_NETWORK_ENABLED", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/security/networkAccess", "value": true }] },
     { "id": "I08_MISSING_LICENSE", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "delete", "path": "/assets/0/license" }] },
     { "id": "I09_EVENT_OUTSIDE_RANGE", "expectedValid": false, "expectedCode": "SEM_EVENT_FRAME", "mutations": [{ "op": "append", "path": "/events", "value": { "id": "CUE_TOO_LATE", "type": "CUE", "frame": 999, "subjects": ["PROP_CHAIR"] } }] },
-    { "id": "I10_ACTOR_USES_PROP", "expectedValid": false, "expectedCode": "SEM_ACTOR_ASSET", "mutations": [{ "op": "append", "path": "/actors", "value": { "id": "ACTOR_BAD", "assetRef": "PROP_CHAIR", "rigProfile": "BFS_HUMANOID_0_1", "identityLock": true } }] }
+    { "id": "I10_ACTOR_USES_PROP", "expectedValid": false, "expectedCode": "SEM_ACTOR_ASSET", "mutations": [{ "op": "append", "path": "/actors", "value": { "id": "ACTOR_BAD", "assetRef": "PROP_CHAIR", "rigProfile": "BFS_HUMANOID_0_1", "identityLock": true } }] },
+    { "id": "I11_CAMERA_KEY_OUTSIDE_SHOT", "expectedValid": false, "expectedCode": "SEM_CAMERA_KEY_FRAME", "mutations": [{ "op": "set", "path": "/cameras/0/transformKeys/1/frame", "value": 999 }] }
   ]
 }

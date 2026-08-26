@@ -1,0 +1,96 @@
+{
+  "specVersion": "0.1.0",
+  "shot": {
+    "id": "SHOT_102",
+    "title": "B02 Interior Dolly",
+    "frameStart": 1,
+    "frameEnd": 144,
+    "frameRate": { "numerator": 24, "denominator": 1 },
+    "unitScaleMeters": 1,
+    "seed": 24082602,
+    "activeCamera": "CAM_B02"
+  },
+  "assets": [
+    {
+      "id": "SET_ROOM",
+      "kind": "SET",
+      "uri": "assets/sets/B02-interior-room.blend",
+      "version": "0.1.0",
+      "sha256": "061eb0ae00fa1a7d52580ed578aa3e36cb51fa1dee5b6cb326497927baf35032",
+      "license": "PROJECT-OWNED",
+      "transform": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] },
+      "visible": true
+    },
+    {
+      "id": "PROP_CHAIR",
+      "kind": "PROP",
+      "uri": "library/props/B02-chair.blend",
+      "version": "0.1.0",
+      "sha256": "d7d110c27764c464c98fe336116bdc9aa3d7ec061e9f23a1b7bff329133e0642",
+      "license": "PROJECT-OWNED",
+      "transform": { "locationM": [0.7, 0.2, 0], "rotationEulerDeg": [0, 0, -18], "scale": [1, 1, 1] },
+      "visible": true
+    }
+  ],
+  "actors": [],
+  "cameras": [
+    {
+      "id": "CAM_B02",
+      "lensMm": 50,
+      "sensorWidthMm": 36,
+      "apertureFStop": 2.8,
+      "focusDistanceM": 3.2,
+      "shutterAngleDeg": 180,
+      "transform": { "locationM": [-3.8, -4.2, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1] },
+      "transformKeys": [
+        { "frame": 1, "transform": { "locationM": [-3.8, -4.2, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1] }, "interpolation": "LINEAR" },
+        { "frame": 144, "transform": { "locationM": [-2.1, -3, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1] }, "interpolation": "LINEAR" }
+      ]
+    }
+  ],
+  "lights": [
+    {
+      "id": "KEY_WINDOW",
+      "type": "AREA",
+      "colorLinear": [1, 0.72, 0.48],
+      "energy": 1450,
+      "sizeM": 2.4,
+      "transform": { "locationM": [-1.8, 0.9, 2.5], "rotationEulerDeg": [62, 0, -90], "scale": [1, 1, 1] }
+    }
+  ],
+  "world": { "backgroundLinear": [0.015, 0.02, 0.03], "strength": 0.25 },
+  "events": [],
+  "render": {
+    "outputProfile": "BFS_RESEARCH_MASTER_0_1",
+    "previewEngine": "BLENDER_EEVEE",
+    "finalEngine": "CYCLES",
+    "resolution": { "width": 3840, "height": 2160, "percentage": 100 },
+    "samplesPreview": 32,
+    "samplesFinal": 512,
+    "denoise": true,
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "pixelType": "HALF_16",
+    "compression": "ZIP_LOSSLESS",
+    "passes": ["Combined", "Alpha", "Depth", "Normal", "Vector", "Cryptomatte"],
+    "outputRoot": "renders/SHOT_102/"
+  },
+  "security": {
+    "networkAccess": false,
+    "arbitraryPython": false,
+    "allowedAssetRoots": ["assets/", "library/"],
+    "allowedOperations": ["READ_MANIFEST", "IMPORT_ASSET", "CREATE_CAMERA", "CREATE_LIGHT", "SET_TRANSFORM", "SET_RENDER", "RENDER_PREVIEW", "RENDER_FINAL"]
+  },
+  "provenance": {
+    "briefId": "BRIEF_B02_INTERIOR_DOLLY",
+    "createdBy": "BFS deterministic benchmark",
+    "createdAtUtc": "2026-08-26T02:00:00Z",
+    "sources": [
+      {
+        "uri": "research/2026-08-25-research-gaps-and-experiment-roadmap.md",
+        "role": "BRIEF",
+        "license": "PROJECT-INTERNAL",
+        "sha256": "cdf9467b9942142fed58d41985ecd8d4b325b544aaf4e68b44304a715e82c5d5"
+      }
+    ]
+  }
+}
