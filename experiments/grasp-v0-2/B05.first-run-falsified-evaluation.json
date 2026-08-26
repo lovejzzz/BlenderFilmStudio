@@ -1,0 +1,4509 @@
+{
+  "documentType": "BFS_B05_COMPILED_GRASP_EVALUATION",
+  "version": "0.1.0",
+  "environment": {
+    "blender": "5.2.0 LTS"
+  },
+  "buildPlan": {
+    "version": "0.4.0",
+    "hash": "1bb7ef3cdee86a7eac9d4e8f62bcdfe25aa84fc11ab896a9f8c9e2891e7e37f0"
+  },
+  "missingObjects": [],
+  "measurements": {
+    "maximumJointLimitViolationDeg": 0.0,
+    "maximumBoneLengthRatioError": 2.61107e-07,
+    "holdSurfaceSeparationMinimumM": 0.044024683,
+    "holdSurfaceSeparationMaximumM": 0.044024683,
+    "minimumActiveContacts": 0,
+    "opposingNormalAngleDeg": 179.999991349,
+    "holdRelativeDriftM": 1.8e-08,
+    "holdTransportM": 0.300000006,
+    "acquirePopM": 0.0,
+    "releasePopM": 0.0,
+    "closureDistancesM": [
+      0.200638988,
+      0.182728663,
+      0.165512557,
+      0.149304447,
+      0.134420013,
+      0.121150314,
+      0.109751308,
+      0.100430611,
+      0.093321644,
+      0.088451598,
+      0.085710296,
+      0.084863479
+    ]
+  },
+  "checks": [
+    {
+      "id": "B05_C01_EXPECTED_OBJECTS",
+      "pass": true,
+      "observed": [],
+      "threshold": "none missing"
+    },
+    {
+      "id": "B05_C02_IK_CONTRACT",
+      "pass": true,
+      "observed": [
+        {
+          "finger": "FINGER_THUMB",
+          "valid": true,
+          "influences": {
+            "48": 1.0,
+            "49": 1.0,
+            "108": 1.0
+          }
+        },
+        {
+          "finger": "FINGER_INDEX",
+          "valid": true,
+          "influences": {
+            "48": 1.0,
+            "49": 1.0,
+            "108": 1.0
+          }
+        }
+      ],
+      "threshold": "2 declared two-bone IK chains, influence=1 during HOLD, no stretch"
+    },
+    {
+      "id": "B05_C03_JOINT_CONFIGURATION",
+      "pass": true,
+      "observed": true,
+      "threshold": "declared axis limit enabled; other axes locked"
+    },
+    {
+      "id": "B05_C04_JOINT_LIMITS",
+      "pass": true,
+      "observed": 0.0,
+      "threshold": 0.1
+    },
+    {
+      "id": "B05_C05_BONE_LENGTH",
+      "pass": true,
+      "observed": 2.61107e-07,
+      "threshold": "<=0.0001 and ik_stretch=0"
+    },
+    {
+      "id": "B05_C06_CLOSURE_MONOTONIC",
+      "pass": true,
+      "observed": [
+        0.200638988,
+        0.182728663,
+        0.165512557,
+        0.149304447,
+        0.134420013,
+        0.121150314,
+        0.109751308,
+        0.100430611,
+        0.093321644,
+        0.088451598,
+        0.085710296,
+        0.084863479
+      ],
+      "threshold": "non-increasing within 0.0001m and final < initial"
+    },
+    {
+      "id": "B05_C07_ACTIVE_CONTACTS",
+      "pass": false,
+      "observed": 0,
+      "threshold": 2
+    },
+    {
+      "id": "B05_C08_SURFACE_SEPARATION",
+      "pass": false,
+      "observed": {
+        "minimumM": 0.044024683,
+        "maximumM": 0.044024683
+      },
+      "threshold": "each declared contact range"
+    },
+    {
+      "id": "B05_C09_OPPOSING_NORMALS",
+      "pass": true,
+      "observed": 179.999991349,
+      "threshold": 150
+    },
+    {
+      "id": "B05_C10_HOLD_DRIFT",
+      "pass": true,
+      "observed": 1.8e-08,
+      "threshold": 0.003
+    },
+    {
+      "id": "B05_C11_TRANSPORT",
+      "pass": true,
+      "observed": 0.300000006,
+      "threshold": ">=0.299m"
+    },
+    {
+      "id": "B05_C12_SWITCH_POP",
+      "pass": true,
+      "observed": {
+        "acquireM": 0.0,
+        "releaseM": 0.0
+      },
+      "threshold": "<=0.001m"
+    },
+    {
+      "id": "B05_C13_ATTACHMENT_CONTRACT",
+      "pass": true,
+      "observed": {
+        "47": 0.0,
+        "48": 1.0,
+        "108": 1.0,
+        "120": 0.0
+      },
+      "threshold": "0\u21921 HOLD\u21920 Child Of palm"
+    },
+    {
+      "id": "B05_C14_NO_SHARED_CARRIER",
+      "pass": true,
+      "observed": {
+        "sharedAncestors": [],
+        "actorAncestors": [
+          "CHAR_B05"
+        ],
+        "propAncestors": [
+          "PROP_B05"
+        ],
+        "independentTransport": true
+      },
+      "threshold": "no shared non-scene parent/carrier"
+    }
+  ],
+  "allMachineChecksPassed": false,
+  "jointSamples": [
+    {
+      "frame": 1,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 1,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 1,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 1,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 2,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 2,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 2,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 2,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 3,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 3,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 3,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 3,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 4,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 4,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 4,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 4,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 5,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 5,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 5,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 5,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 6,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 6,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 6,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 6,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 7,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 7,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 7,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 7,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 8,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 8,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 8,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 8,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 9,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 9,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 9,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 9,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 10,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 10,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 10,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 10,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 11,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 11,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 11,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 11,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 12,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 12,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 12,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 12,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 13,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 13,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 13,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 13,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 14,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 14,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 14,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 14,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 15,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 15,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 15,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 15,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 16,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 16,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 16,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 16,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 17,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 17,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 17,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 17,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 18,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 18,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 18,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 18,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 19,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 19,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 19,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 19,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 20,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 20,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 20,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 20,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 21,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 21,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 21,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 21,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 22,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 22,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 22,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 22,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 23,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 23,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 23,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 23,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 24,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 24,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 24,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 24,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 25,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 25,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 25,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 25,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 26,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 26,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 26,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 26,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 27,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 27,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 27,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 27,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 28,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 28,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 28,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 28,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 29,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 29,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 29,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 29,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 30,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 30,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 30,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 30,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 31,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 31,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 31,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 31,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 32,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 32,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 32,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 32,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 33,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 33,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 33,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 33,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 34,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 34,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 34,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 34,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 35,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 35,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 35,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 35,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 36,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 36,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 36,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 36,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 37,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 37,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 37,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 37,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 38,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 4.18795653,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.99999985832
+    },
+    {
+      "frame": 38,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.242892519,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999775778
+    },
+    {
+      "frame": 38,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 4.18795653,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.99999985832
+    },
+    {
+      "frame": 38,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.242892519,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999775778
+    },
+    {
+      "frame": 39,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 8.410866552,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.99999984872
+    },
+    {
+      "frame": 39,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.210588032,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999832874
+    },
+    {
+      "frame": 39,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 8.410866552,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.99999984872
+    },
+    {
+      "frame": 39,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.210588032,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999832874
+    },
+    {
+      "frame": 40,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 12.481467199,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999924511
+    },
+    {
+      "frame": 40,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.205923827,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999846012
+    },
+    {
+      "frame": 40,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 12.481467199,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999924511
+    },
+    {
+      "frame": 40,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.205923827,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999846012
+    },
+    {
+      "frame": 41,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 16.368090723,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999880047
+    },
+    {
+      "frame": 41,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.227889875,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999767189
+    },
+    {
+      "frame": 41,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 16.368090723,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999880047
+    },
+    {
+      "frame": 41,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.227889875,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999767189
+    },
+    {
+      "frame": 42,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 20.068166414,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.99999981133
+    },
+    {
+      "frame": 42,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.234882335,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999908666
+    },
+    {
+      "frame": 42,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 20.068166414,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.99999981133
+    },
+    {
+      "frame": 42,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.234882335,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999908666
+    },
+    {
+      "frame": 43,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 23.563580608,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999908342
+    },
+    {
+      "frame": 43,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.234551071,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999811653
+    },
+    {
+      "frame": 43,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 23.563580608,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999908342
+    },
+    {
+      "frame": 43,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.234551071,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999811653
+    },
+    {
+      "frame": 44,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 26.847702901,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999754739
+    },
+    {
+      "frame": 44,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.226933649,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999755062
+    },
+    {
+      "frame": 44,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 26.847702901,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999754739
+    },
+    {
+      "frame": 44,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.226933649,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999755062
+    },
+    {
+      "frame": 45,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 29.917973678,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999981102
+    },
+    {
+      "frame": 45,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.216640474,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999852075
+    },
+    {
+      "frame": 45,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 29.917973678,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999981102
+    },
+    {
+      "frame": 45,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.216640474,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999852075
+    },
+    {
+      "frame": 46,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 32.755302561,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999924511
+    },
+    {
+      "frame": 46,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.249579328,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.9999997874
+    },
+    {
+      "frame": 46,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 32.755302561,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999924511
+    },
+    {
+      "frame": 46,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.249579328,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.9999997874
+    },
+    {
+      "frame": 47,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 35.416091545,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999843667
+    },
+    {
+      "frame": 47,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.232800808,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999884413
+    },
+    {
+      "frame": 47,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 35.416091545,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999843667
+    },
+    {
+      "frame": 47,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.232800808,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999884413
+    },
+    {
+      "frame": 48,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 48,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 48,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 48,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 49,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 49,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 49,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 49,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 50,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 50,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 50,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 50,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 51,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 51,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 51,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 51,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 52,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 52,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 52,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 52,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 53,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 53,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 53,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 53,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 54,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 54,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 54,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 54,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 55,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 55,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 55,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 55,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 56,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 56,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 56,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 56,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 57,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 57,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 57,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 57,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 58,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 58,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 58,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 58,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 59,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 59,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 59,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 59,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 60,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 60,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 60,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 60,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 61,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 61,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 61,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 61,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 62,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 62,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 62,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 62,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 63,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 63,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 63,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 63,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 64,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 64,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 64,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 64,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 65,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 65,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 65,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 65,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 66,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 66,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 66,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 66,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 67,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 67,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 67,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 67,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 68,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 68,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 68,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 68,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 69,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 69,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 69,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 69,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 70,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 70,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 70,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 70,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 71,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 71,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 71,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 71,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 72,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 72,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 72,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 72,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 73,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 73,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 73,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 73,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 74,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 74,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 74,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 74,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 75,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 75,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 75,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 75,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 76,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 76,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 76,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 76,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 77,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 77,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 77,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 77,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 78,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 78,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 78,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 78,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 79,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 79,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 79,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 79,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 80,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 80,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 80,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 80,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 81,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 81,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 81,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 81,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 82,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 82,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 82,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 82,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 83,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 83,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 83,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 83,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 84,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 84,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 84,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 84,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 85,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 85,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 85,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 85,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 86,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 86,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 86,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 86,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 87,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 87,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 87,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 87,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 88,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 88,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 88,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 88,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 89,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 89,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 89,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 89,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 90,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 90,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 90,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 90,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 91,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 91,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 91,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 91,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 92,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 92,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 92,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 92,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 93,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 93,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 93,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 93,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 94,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 94,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 94,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 94,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 95,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 95,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 95,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 95,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 96,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 96,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 96,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 96,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 97,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 97,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 97,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 97,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 98,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 98,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 98,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 98,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 99,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 99,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 99,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 99,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 100,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 100,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 100,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 100,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 101,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 101,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 101,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 101,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 102,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 102,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 102,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 102,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 103,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 103,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 103,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 103,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 104,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 104,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 104,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 104,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 105,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 105,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 105,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 105,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 106,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 106,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 106,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 106,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 107,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 107,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 107,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 107,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 108,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 108,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 108,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 37.885645477,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999989186
+    },
+    {
+      "frame": 108,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214944893,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999932919
+    },
+    {
+      "frame": 109,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 35.626983881,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999908342
+    },
+    {
+      "frame": 109,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.235259729,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999835906
+    },
+    {
+      "frame": 109,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 35.626983881,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999908342
+    },
+    {
+      "frame": 109,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.235259729,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999835906
+    },
+    {
+      "frame": 110,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 33.208109952,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.99999981133
+    },
+    {
+      "frame": 110,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.255354306,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.9999997874
+    },
+    {
+      "frame": 110,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 33.208109952,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.99999981133
+    },
+    {
+      "frame": 110,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.255354306,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.9999997874
+    },
+    {
+      "frame": 111,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 30.64702807,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999892174
+    },
+    {
+      "frame": 111,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.224435507,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999835906
+    },
+    {
+      "frame": 111,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 30.64702807,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999892174
+    },
+    {
+      "frame": 111,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.224435507,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999835906
+    },
+    {
+      "frame": 112,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 27.886871787,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999835583
+    },
+    {
+      "frame": 112,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.239187115,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999746978
+    },
+    {
+      "frame": 112,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 27.886871787,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999835583
+    },
+    {
+      "frame": 112,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.239187115,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999746978
+    },
+    {
+      "frame": 113,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 24.947248868,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999795161
+    },
+    {
+      "frame": 113,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.253032015,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999771231
+    },
+    {
+      "frame": 113,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 24.947248868,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999795161
+    },
+    {
+      "frame": 113,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.253032015,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999771231
+    },
+    {
+      "frame": 114,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 21.854079882,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999908342
+    },
+    {
+      "frame": 114,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.211685145,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999738893
+    },
+    {
+      "frame": 114,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 21.854079882,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999908342
+    },
+    {
+      "frame": 114,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.211685145,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999738893
+    },
+    {
+      "frame": 115,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 18.559724258,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999964933
+    },
+    {
+      "frame": 115,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214784343,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999815695
+    },
+    {
+      "frame": 115,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 18.559724258,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999964933
+    },
+    {
+      "frame": 115,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.214784343,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999815695
+    },
+    {
+      "frame": 116,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 15.099857783,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999863878
+    },
+    {
+      "frame": 116,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.207026889,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999928877
+    },
+    {
+      "frame": 116,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 15.099857783,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999863878
+    },
+    {
+      "frame": 116,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.207026889,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999928877
+    },
+    {
+      "frame": 117,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 11.466086154,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999827498
+    },
+    {
+      "frame": 117,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.232783733,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999841969
+    },
+    {
+      "frame": 117,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 11.466086154,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999827498
+    },
+    {
+      "frame": 117,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.232783733,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999841969
+    },
+    {
+      "frame": 118,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 7.705095422,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999846699
+    },
+    {
+      "frame": 118,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.237637462,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999848033
+    },
+    {
+      "frame": 118,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 7.705095422,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999846699
+    },
+    {
+      "frame": 118,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.237637462,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999848033
+    },
+    {
+      "frame": 119,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 3.842043307,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999825225
+    },
+    {
+      "frame": 119,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.222888429,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999764915
+    },
+    {
+      "frame": 119,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 3.842043307,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999825225
+    },
+    {
+      "frame": 119,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.222888429,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999764915
+    },
+    {
+      "frame": 120,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 120,
+      "finger": "FINGER_THUMB",
+      "bone": "THUMB_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    },
+    {
+      "frame": 120,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_PROXIMAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999859836
+    },
+    {
+      "frame": 120,
+      "finger": "FINGER_INDEX",
+      "bone": "INDEX_DISTAL",
+      "axis": "Z",
+      "angleDeg": 0.0,
+      "violationDeg": 0.0,
+      "lengthRatio": 0.999999949088
+    }
+  ],
+  "humanReview": {
+    "status": "PENDING",
+    "requiredAuthenticIndependentResponses": 3,
+    "received": 0
+  },
+  "explicitNonClaims": [
+    "This is deterministic kinematic IK, not force closure, frictional support, collision response, or dynamics.",
+    "The technical gripper does not establish photoreal anatomy, skin deformation, material credibility, or human performance quality.",
+    "Visibility and authentic human review are separate unresolved gates."
+  ]
+}

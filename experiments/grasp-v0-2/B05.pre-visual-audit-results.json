@@ -1,0 +1,345 @@
+{
+  "documentType": "BFS_B05_COMPILED_GRASP_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T06:16:00.546Z",
+  "environment": {
+    "blender": "5.2.0 LTS",
+    "platform": "darwin-arm64",
+    "node": "v26.5.0"
+  },
+  "sceneSpec": {
+    "version": "0.4.0",
+    "valid": true,
+    "shot": "SHOT_107"
+  },
+  "buildPlan": {
+    "version": "0.4.0",
+    "hash": "67dec4e517f8540d2365bc7752bac5c46aaff321cf143d210e37bf9362a7935f"
+  },
+  "firstRunFalsification": {
+    "buildPlanHash": "1bb7ef3cdee86a7eac9d4e8f62bcdfe25aa84fc11ab896a9f8c9e2891e7e37f0",
+    "maximumSeparationM": 0.044024683,
+    "failedChecks": [
+      "B05_C07_ACTIVE_CONTACTS",
+      "B05_C08_SURFACE_SEPARATION"
+    ],
+    "correction": "Technical finger chain length increased from 0.12 m to 0.18 m; acceptance thresholds were unchanged."
+  },
+  "cleanBuilds": {
+    "runs": [
+      {
+        "label": "run-a",
+        "structureHash": "25afbf9db65bbee065c6ed135fd56f28de2ca6bffe09bbd9cb3b7ce302ec4f35",
+        "blendSha256": "ac7718f55e996be8eaee3f29f012ec768ba8eac7782679dd53e513318af02907"
+      },
+      {
+        "label": "run-b",
+        "structureHash": "25afbf9db65bbee065c6ed135fd56f28de2ca6bffe09bbd9cb3b7ce302ec4f35",
+        "blendSha256": "deb3f83e3cf0ce05f6dbaa2186f0ab23ffbb670877cc2e7c4c21165c486f41a8"
+      }
+    ],
+    "structureHashesEqual": true,
+    "blendSha256Equal": false
+  },
+  "evaluation": {
+    "allMachineChecksPassed": true,
+    "measurements": {
+      "maximumJointLimitViolationDeg": 0,
+      "maximumBoneLengthRatioError": 2.71095e-7,
+      "holdSurfaceSeparationMinimumM": 0.001997984,
+      "holdSurfaceSeparationMaximumM": 0.001997984,
+      "minimumActiveContacts": 2,
+      "opposingNormalAngleDeg": 179.999991349,
+      "holdRelativeDriftM": 1.8e-8,
+      "holdTransportM": 0.300000006,
+      "acquirePopM": 0,
+      "releasePopM": 0,
+      "closureDistancesM": [
+        0.209990477,
+        0.191425903,
+        0.172268836,
+        0.152793505,
+        0.133300654,
+        0.114132725,
+        0.095415867,
+        0.076325443,
+        0.057239165,
+        0.038172766,
+        0.019091214,
+        0.000007656
+      ]
+    },
+    "checks": [
+      {
+        "id": "B05_C01_EXPECTED_OBJECTS",
+        "pass": true,
+        "observed": [],
+        "threshold": "none missing"
+      },
+      {
+        "id": "B05_C02_IK_CONTRACT",
+        "pass": true,
+        "observed": [
+          {
+            "finger": "FINGER_THUMB",
+            "valid": true,
+            "influences": {
+              "48": 1,
+              "49": 1,
+              "108": 1
+            }
+          },
+          {
+            "finger": "FINGER_INDEX",
+            "valid": true,
+            "influences": {
+              "48": 1,
+              "49": 1,
+              "108": 1
+            }
+          }
+        ],
+        "threshold": "2 declared two-bone IK chains, influence=1 during HOLD, no stretch"
+      },
+      {
+        "id": "B05_C03_JOINT_CONFIGURATION",
+        "pass": true,
+        "observed": true,
+        "threshold": "declared axis limit enabled; other axes locked"
+      },
+      {
+        "id": "B05_C04_JOINT_LIMITS",
+        "pass": true,
+        "observed": 0,
+        "threshold": 0.1
+      },
+      {
+        "id": "B05_C05_BONE_LENGTH",
+        "pass": true,
+        "observed": 2.71095e-7,
+        "threshold": "<=0.0001 and ik_stretch=0"
+      },
+      {
+        "id": "B05_C06_CLOSURE_MONOTONIC",
+        "pass": true,
+        "observed": [
+          0.209990477,
+          0.191425903,
+          0.172268836,
+          0.152793505,
+          0.133300654,
+          0.114132725,
+          0.095415867,
+          0.076325443,
+          0.057239165,
+          0.038172766,
+          0.019091214,
+          0.000007656
+        ],
+        "threshold": "non-increasing within 0.0001m and final < initial"
+      },
+      {
+        "id": "B05_C07_ACTIVE_CONTACTS",
+        "pass": true,
+        "observed": 2,
+        "threshold": 2
+      },
+      {
+        "id": "B05_C08_SURFACE_SEPARATION",
+        "pass": true,
+        "observed": {
+          "minimumM": 0.001997984,
+          "maximumM": 0.001997984
+        },
+        "threshold": "each declared contact range"
+      },
+      {
+        "id": "B05_C09_OPPOSING_NORMALS",
+        "pass": true,
+        "observed": 179.999991349,
+        "threshold": 150
+      },
+      {
+        "id": "B05_C10_HOLD_DRIFT",
+        "pass": true,
+        "observed": 1.8e-8,
+        "threshold": 0.003
+      },
+      {
+        "id": "B05_C11_TRANSPORT",
+        "pass": true,
+        "observed": 0.300000006,
+        "threshold": ">=0.299m"
+      },
+      {
+        "id": "B05_C12_SWITCH_POP",
+        "pass": true,
+        "observed": {
+          "acquireM": 0,
+          "releaseM": 0
+        },
+        "threshold": "<=0.001m"
+      },
+      {
+        "id": "B05_C13_ATTACHMENT_CONTRACT",
+        "pass": true,
+        "observed": {
+          "47": 0,
+          "48": 1,
+          "108": 1,
+          "120": 0
+        },
+        "threshold": "0→1 HOLD→0 Child Of palm"
+      },
+      {
+        "id": "B05_C14_NO_SHARED_CARRIER",
+        "pass": true,
+        "observed": {
+          "sharedAncestors": [],
+          "actorAncestors": [
+            "CHAR_B05"
+          ],
+          "propAncestors": [
+            "PROP_B05"
+          ],
+          "independentTransport": true
+        },
+        "threshold": "no shared non-scene parent/carrier"
+      }
+    ]
+  },
+  "negativeTests": [
+    {
+      "id": "N01_GENERIC_LIMIT_SOURCE",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "GraspSpec GRASP_B05_TWO_FINGER validation failed",
+      "observed": "GraspSpec GRASP_B05_TWO_FINGER validation failed:"
+    },
+    {
+      "id": "N02_INVALID_JOINT_RANGE",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "SEM_JOINT_RANGE",
+      "observed": "GraspSpec GRASP_B05_TWO_FINGER validation failed:"
+    },
+    {
+      "id": "N03_PARALLEL_NORMALS",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "SEM_OPPOSING_NORMALS",
+      "observed": "GraspSpec GRASP_B05_TWO_FINGER validation failed:"
+    },
+    {
+      "id": "N04_MISSING_FINGER_BONE",
+      "layer": "BLENDER_COMPILE",
+      "rejected": true,
+      "expected": "Grasp finger bone is missing",
+      "observed": "BFS_COMPILE_ERROR Grasp finger bone is missing: MISSING_DISTAL"
+    },
+    {
+      "id": "N05_UNAUTHORIZED_GRASP",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "does not authorize required operations: CREATE_GRASP",
+      "observed": "SceneSpec does not authorize required operations: CREATE_GRASP"
+    },
+    {
+      "id": "N06_STRETCH_ENABLED",
+      "layer": "RUNTIME_EVALUATION",
+      "rejected": true,
+      "expected": "B05_C02_IK_CONTRACT=false",
+      "observed": {
+        "id": "B05_C02_IK_CONTRACT",
+        "pass": false,
+        "observed": [
+          {
+            "finger": "FINGER_THUMB",
+            "valid": true,
+            "influences": {
+              "48": 1,
+              "49": 1,
+              "108": 1
+            }
+          },
+          {
+            "finger": "FINGER_INDEX",
+            "valid": false,
+            "influences": {
+              "48": 1,
+              "49": 1,
+              "108": 1
+            }
+          }
+        ],
+        "threshold": "2 declared two-bone IK chains, influence=1 during HOLD, no stretch"
+      }
+    },
+    {
+      "id": "N07_CONTACT_DISABLED",
+      "layer": "RUNTIME_EVALUATION",
+      "rejected": true,
+      "expected": "B05_C07_ACTIVE_CONTACTS=false",
+      "observed": {
+        "id": "B05_C07_ACTIVE_CONTACTS",
+        "pass": false,
+        "observed": 1,
+        "threshold": 2
+      }
+    },
+    {
+      "id": "N08_TARGET_DRIFT",
+      "layer": "RUNTIME_EVALUATION",
+      "rejected": true,
+      "expected": "B05_C10_HOLD_DRIFT=false",
+      "observed": {
+        "id": "B05_C10_HOLD_DRIFT",
+        "pass": false,
+        "observed": 0.019978438,
+        "threshold": 0.003
+      }
+    }
+  ],
+  "allAutomatedChecksPassed": true,
+  "visibility": {
+    "status": "PASS",
+    "summaries": [
+      {
+        "group": "FINGERS",
+        "minimumInFrameFraction": 1,
+        "minimumVisibleFraction": 0.9166666666666666,
+        "medianVisibleFraction": 1,
+        "gates": {
+          "minimumInFrameAtLeast050": true,
+          "minimumVisibleAtLeast025": true,
+          "medianVisibleAtLeast035": true
+        },
+        "passed": true
+      },
+      {
+        "group": "PROP",
+        "minimumInFrameFraction": 0.5,
+        "minimumVisibleFraction": 0.5,
+        "medianVisibleFraction": 1,
+        "gates": {
+          "minimumInFrameAtLeast050": true,
+          "minimumVisibleAtLeast025": true,
+          "medianVisibleAtLeast035": true
+        },
+        "passed": true
+      }
+    ],
+    "method": "EVALUATED_LOOP_TRIANGLE_CENTRES_ACTIVE_CAMERA_RAY_FIRST_HIT"
+  },
+  "humanReview": {
+    "status": "PENDING",
+    "requiredAuthenticIndependentResponses": 3,
+    "received": 0
+  },
+  "experimentComplete": false,
+  "explicitNonClaims": [
+    "This is deterministic kinematic IK, not force closure, frictional support, collision response, or dynamics.",
+    "The technical gripper does not establish photoreal anatomy, skin deformation, material credibility, or human performance quality.",
+    "Visibility and authentic human review are separate unresolved gates."
+  ]
+}

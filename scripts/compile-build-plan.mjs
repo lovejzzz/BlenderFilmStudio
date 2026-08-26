@@ -4,9 +4,11 @@ import { fileURLToPath } from 'node:url';
 import { canonicalJson, canonicalize, readJson, repositoryRoot, sha256, validateSceneSpec } from './lib/scene-spec.mjs';
 import { validateSceneSpecV02 } from './lib/scene-spec-v02.mjs';
 import { validateSceneSpecV03 } from './lib/scene-spec-v03.mjs';
+import { validateSceneSpecV04 } from './lib/scene-spec-v04.mjs';
 import { validateActorSpec } from './lib/actor-spec.mjs';
+import { validateGraspSpec } from './lib/grasp-spec.mjs';
 
-const COMPILER_VERSIONS = { '0.1.0': '0.1.0', '0.2.0': '0.2.0', '0.3.0': '0.3.0' };
+const COMPILER_VERSIONS = { '0.1.0': '0.1.0', '0.2.0': '0.2.0', '0.3.0': '0.3.0', '0.4.0': '0.4.1' };
 const TARGET_BLENDER = '5.2.0';
 const outputSpecPath = resolve(repositoryRoot, 'specs/output-spec.v0.1.json');
 
@@ -32,13 +34,14 @@ function requireOperations(document) {
   if (document.cameras.length > 0) required.add('CREATE_CAMERA');
   if (document.lights.length > 0) required.add('CREATE_LIGHT');
   if ((document.targets ?? []).length > 0) required.add('CREATE_TARGET');
-  if (document.actors.length > 0 && ['0.2.0', '0.3.0'].includes(document.specVersion)) {
+  if (document.actors.length > 0 && ['0.2.0', '0.3.0', '0.4.0'].includes(document.specVersion)) {
     required.add('IMPORT_ACTOR_SPEC');
     required.add('IMPORT_ACTION');
     required.add('APPLY_PERFORMANCE');
   }
   if ((document.attachments ?? []).length > 0) required.add('CREATE_CONSTRAINT');
   if ((document.geometryEvaluations ?? []).length > 0) required.add('EVALUATE_GEOMETRY');
+  if ((document.grasps ?? []).length > 0) required.add('CREATE_GRASP');
   if (document.assets.length + document.cameras.length + document.lights.length > 0) required.add('SET_TRANSFORM');
   const missing = [...required].filter(operation => !requested.has(operation));
   if (missing.length > 0) throw new Error(`SceneSpec does not authorize required operations: ${missing.join(', ')}`);
@@ -66,7 +69,7 @@ async function resolveAssets(document) {
 }
 
 async function resolveActors(document, assets) {
-  if (!['0.2.0', '0.3.0'].includes(document.specVersion)) return sortById(document.actors);
+  if (!['0.2.0', '0.3.0', '0.4.0'].includes(document.specVersion)) return sortById(document.actors);
   const assetMap = new Map(assets.map(asset => [asset.id, asset]));
   const targetSockets = new Map((document.targets ?? []).map(target => [target.id, new Set(target.sockets.map(socket => socket.id))]));
   const actors = [];
@@ -126,6 +129,37 @@ async function resolveActors(document, assets) {
   return actors;
 }
 
+async function resolveGrasps(document, assets) {
+  if (document.specVersion !== '0.4.0') return [];
+  const assetMap = new Map(assets.map(asset => [asset.id, asset]));
+  const grasps = [];
+  for (const binding of sortById(document.grasps)) {
+    const graspPath = resolve(repositoryRoot, binding.graspSpecUri);
+    assertBelowRepository(graspPath, `GraspSpec ${binding.id}`);
+    const bytes = await readFile(graspPath).catch(() => { throw new Error(`GraspSpec ${binding.id} is missing: ${binding.graspSpecUri}`); });
+    const actualSha256 = sha256(bytes);
+    if (actualSha256 !== binding.graspSpecSha256) throw new Error(`GraspSpec ${binding.id} hash mismatch: expected ${binding.graspSpecSha256}, received ${actualSha256}`);
+    const graspSpec = JSON.parse(bytes.toString('utf8'));
+    const validation = validateGraspSpec(graspSpec);
+    if (!validation.valid) {
+      const details = validation.errors.map(error => `${error.code} ${error.path}: ${error.message}`).join('\n');
+      throw new Error(`GraspSpec ${binding.id} validation failed:\n${details}`);
+    }
+    if (graspSpec.id !== binding.id || graspSpec.actorRef !== binding.actorRef || graspSpec.propRef !== binding.propAssetRef) throw new Error(`GraspSpec ${binding.id} identity references do not match SceneSpec binding`);
+    if (!assetMap.has(binding.actorAssetRef) || !assetMap.has(binding.propAssetRef)) throw new Error(`GraspSpec ${binding.id} references unresolved assets`);
+    if (graspSpec.phases.approach.start !== document.shot.frameStart || graspSpec.phases.release.end > document.shot.frameEnd) throw new Error(`GraspSpec ${binding.id} phase range does not fit the shot`);
+    if (binding.transportKeys[0].frame !== graspSpec.phases.hold.start || binding.transportKeys.at(-1).frame !== graspSpec.phases.hold.end) throw new Error(`Grasp ${binding.id} transport keys must span the exact HOLD window`);
+    grasps.push({
+      ...binding,
+      graspSpecUri: repoRelative(graspPath),
+      verifiedGraspSpecSha256: actualSha256,
+      graspSpecCanonicalSha256: sha256(canonicalJson(graspSpec)),
+      graspSpec: canonicalize(graspSpec),
+    });
+  }
+  return grasps;
+}
+
 async function verifyLocalSources(document) {
   const sources = [];
   for (const source of document.provenance.sources) {
@@ -163,6 +197,7 @@ function normalizeDocument(document) {
     influenceKeys: [...attachment.influenceKeys].sort((left, right) => left.frame - right.frame),
   }));
   if (normalized.geometryEvaluations) normalized.geometryEvaluations = sortById(normalized.geometryEvaluations);
+  if (normalized.grasps) normalized.grasps = sortById(normalized.grasps).map(grasp => ({ ...grasp, transportKeys: [...grasp.transportKeys].sort((left, right) => left.frame - right.frame) }));
   normalized.render.passes = [...normalized.render.passes].sort();
   normalized.security.allowedAssetRoots = [...normalized.security.allowedAssetRoots].sort();
   normalized.security.allowedOperations = [...normalized.security.allowedOperations].sort();
@@ -174,8 +209,9 @@ export async function compileBuildPlan(inputPath) {
   const absoluteInputPath = resolve(process.cwd(), inputPath);
   assertBelowRepository(absoluteInputPath, 'SceneSpec');
   const document = await readJson(absoluteInputPath);
-  const validator = document.specVersion === '0.3.0'
-    ? validateSceneSpecV03
+  const validator = document.specVersion === '0.4.0'
+    ? validateSceneSpecV04
+    : document.specVersion === '0.3.0' ? validateSceneSpecV03
     : document.specVersion === '0.2.0' ? validateSceneSpecV02 : validateSceneSpec;
   const validation = validator(document);
   if (!validation.valid) {
@@ -200,6 +236,7 @@ export async function compileBuildPlan(inputPath) {
   }
   const verifiedAssets = await resolveAssets(normalizedDocument);
   const verifiedActors = await resolveActors(normalizedDocument, verifiedAssets);
+  const verifiedGrasps = await resolveGrasps(normalizedDocument, verifiedAssets);
   const verifiedSources = await verifyLocalSources(normalizedDocument);
   const authorizedOperations = requireOperations(normalizedDocument);
   const outputRoot = resolve(repositoryRoot, normalizedDocument.render.outputRoot);
@@ -223,6 +260,7 @@ export async function compileBuildPlan(inputPath) {
     ...(normalizedDocument.targets ? { targets: normalizedDocument.targets } : {}),
     ...(normalizedDocument.attachments ? { attachments: normalizedDocument.attachments } : {}),
     ...(normalizedDocument.geometryEvaluations ? { geometryEvaluations: normalizedDocument.geometryEvaluations } : {}),
+    ...(normalizedDocument.grasps ? { grasps: verifiedGrasps } : {}),
     cameras: normalizedDocument.cameras,
     lights: normalizedDocument.lights,
     world: normalizedDocument.world,
@@ -253,7 +291,7 @@ export async function compileBuildPlan(inputPath) {
 
   return canonicalize({
     documentType: 'BFS_BUILD_PLAN',
-    planVersion: normalizedDocument.specVersion,
+    planVersion: compilerVersion,
     planHash: sha256(canonicalJson(plan)),
     plan,
   });

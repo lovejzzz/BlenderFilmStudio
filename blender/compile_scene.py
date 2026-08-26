@@ -20,7 +20,7 @@ from bpy_extras import anim_utils
 from mathutils import Euler, Matrix, Vector
 
 
-SUPPORTED_COMPILER_VERSIONS = {"0.1.0", "0.2.0", "0.3.0"}
+SUPPORTED_COMPILER_VERSIONS = {"0.1.0", "0.2.0", "0.3.0", "0.4.0", "0.4.1"}
 
 
 def canonical_json(value: object) -> str:
@@ -53,7 +53,7 @@ def resolve_below(root: Path, candidate: Path, label: str) -> Path:
 
 def load_verified_plan(plan_path: Path) -> dict:
     wrapper = json.loads(plan_path.read_text(encoding="utf-8"))
-    if wrapper.get("documentType") != "BFS_BUILD_PLAN" or wrapper.get("planVersion") not in {"0.1.0", "0.2.0", "0.3.0"}:
+    if wrapper.get("documentType") != "BFS_BUILD_PLAN" or wrapper.get("planVersion") not in {"0.1.0", "0.2.0", "0.3.0", "0.4.0", "0.4.1"}:
         raise RuntimeError("Unsupported BuildPlan document or version")
     actual_hash = sha256_bytes(canonical_json(wrapper["plan"]).encode("utf-8"))
     if actual_hash != wrapper.get("planHash"):
@@ -320,6 +320,145 @@ def create_attachments(
     return reports
 
 
+def create_grasps(
+    scene: bpy.types.Scene,
+    managed: bpy.types.Collection,
+    grasp_specs: list[dict],
+    asset_roots: dict[str, bpy.types.Object],
+    asset_collections: dict[str, bpy.types.Collection],
+) -> list[dict]:
+    reports = []
+    for binding in grasp_specs:
+        spec = binding["graspSpec"]
+        actor_objects = {obj.name: obj for obj in asset_collections[binding["actorAssetRef"]].all_objects}
+        prop_objects = {obj.name: obj for obj in asset_collections[binding["propAssetRef"]].all_objects}
+        rig = actor_objects.get(binding["armatureObject"])
+        prop_object = prop_objects.get(binding["propObject"])
+        actor_root = asset_roots[binding["actorAssetRef"]]
+        prop_root = asset_roots[binding["propAssetRef"]]
+        if rig is None or rig.type != "ARMATURE":
+            raise RuntimeError(f"Grasp armature is missing: {binding['armatureObject']}")
+        if prop_object is None or prop_object.type != "MESH":
+            raise RuntimeError(f"Grasp prop object is missing: {binding['propObject']}")
+        if spec["palmSocket"] not in rig.pose.bones:
+            raise RuntimeError(f"Grasp palm bone is missing: {spec['palmSocket']}")
+
+        configured_bones = []
+        for finger in spec["fingerChains"]:
+            for bone_spec in finger["bones"]:
+                name = bone_spec["boneSemantic"]
+                if name not in rig.pose.bones:
+                    raise RuntimeError(f"Grasp finger bone is missing: {name}")
+                bone = rig.pose.bones[name]
+                axis = bone_spec["rotationAxis"]
+                bone.rotation_mode = "XYZ"
+                bone.lock_ik_x = axis != "X"
+                bone.lock_ik_y = axis != "Y"
+                bone.lock_ik_z = axis != "Z"
+                for candidate in ("x", "y", "z"):
+                    setattr(bone, f"use_ik_limit_{candidate}", candidate.upper() == axis)
+                    if candidate.upper() == axis:
+                        setattr(bone, f"ik_min_{candidate}", math.radians(bone_spec["minimumDeg"]))
+                        setattr(bone, f"ik_max_{candidate}", math.radians(bone_spec["maximumDeg"]))
+                        setattr(bone, f"ik_stiffness_{candidate}", bone_spec["ikStiffness"])
+                bone.ik_stretch = 0
+                configured_bones.append({
+                    "finger": finger["id"], "bone": name, "axis": axis,
+                    "minimumDeg": bone_spec["minimumDeg"], "maximumDeg": bone_spec["maximumDeg"],
+                    "ikStiffness": bone_spec["ikStiffness"], "ikStretch": bone.ik_stretch,
+                })
+
+        frame = bpy.data.objects.new(f"{binding['id']}__TRANSPORT_FRAME", None)
+        frame.empty_display_type = "ARROWS"
+        frame.empty_display_size = 0.04
+        frame["bfs_grasp_id"] = binding["id"]
+        managed.objects.link(frame)
+        for key in binding["transportKeys"]:
+            # Move the full character asset root so both the armature and its
+            # visible deformed meshes share the declared transport transform.
+            actor_root.location = key["locationM"]
+            actor_root.keyframe_insert(data_path="location", frame=key["frame"], group="BFS_GRASP_TRANSPORT")
+            frame.location = key["locationM"]
+            frame.keyframe_insert(data_path="location", frame=key["frame"], group="BFS_GRASP_TRANSPORT")
+        transport_interpolation = {key["frame"]: key["interpolation"] for key in binding["transportKeys"]}
+        set_interpolation(actor_root.animation_data, transport_interpolation)
+        set_interpolation(frame.animation_data, transport_interpolation)
+
+        scene.frame_set(spec["phases"]["closure"]["end"])
+        bpy.context.view_layer.update()
+        contact_by_finger = {item["fingerRef"]: item for item in spec["contactPatches"]}
+        target_reports = []
+        influence_frames = {
+            spec["phases"]["closure"]["start"] - 1: 0.0,
+            spec["phases"]["closure"]["start"]: 0.0,
+            spec["phases"]["closure"]["end"]: 1.0,
+            spec["phases"]["hold"]["end"]: 1.0,
+            spec["phases"]["release"]["end"]: 0.0,
+        }
+        for finger in spec["fingerChains"]:
+            contact = contact_by_finger.get(finger["id"])
+            if contact is None:
+                raise RuntimeError(f"Grasp finger has no contact patch: {finger['id']}")
+            last_bone = rig.pose.bones[finger["bones"][-1]["boneSemantic"]]
+            target = bpy.data.objects.new(f"{binding['id']}__{contact['id']}", None)
+            target.empty_display_type = "SPHERE"
+            target.empty_display_size = 0.012
+            target.parent = frame
+            separation = (contact["separationRangeM"]["minimum"] + contact["separationRangeM"]["maximum"]) / 2
+            local_point = Vector(contact["targetPointLocalM"]) + Vector(contact["targetNormalLocal"]) * separation
+            target.location = prop_object.matrix_world @ local_point
+            managed.objects.link(target)
+            constraint = last_bone.constraints.new("IK")
+            constraint.name = f"BFS_GRASP_IK_{finger['id']}"
+            constraint.target = target
+            constraint.chain_count = len(finger["bones"])
+            constraint.use_stretch = False
+            for key_frame, value in sorted(influence_frames.items()):
+                constraint.influence = value
+                constraint.keyframe_insert(data_path="influence", frame=key_frame, group="BFS_GRASP_IK")
+            target_reports.append({
+                "finger": finger["id"], "contact": contact["id"], "target": target.name,
+                "lastBone": last_bone.name, "chainCount": constraint.chain_count,
+                "localPoint": rounded(local_point), "influenceKeys": [{"frame": key, "value": value} for key, value in sorted(influence_frames.items())],
+            })
+        set_interpolation(rig.animation_data, {**transport_interpolation, **{frame: "LINEAR" for frame in influence_frames}})
+
+        initial_location = Vector(prop_root.location)
+        release_frame = spec["phases"]["release"]["end"]
+        final_transport = Vector(binding["transportKeys"][-1]["locationM"])
+        for key_frame, location in ((scene.frame_start, initial_location), (release_frame - 1, initial_location), (release_frame, initial_location + final_transport)):
+            prop_root.location = location
+            prop_root.keyframe_insert(data_path="location", frame=key_frame, group="BFS_GRASP_PROP_BASE")
+        prop_constraint = prop_root.constraints.new("CHILD_OF")
+        prop_constraint.name = f"BFS_GRASP_PROP_{binding['id']}"
+        prop_constraint.target = rig
+        prop_constraint.subtarget = spec["palmSocket"]
+        acquire_frame = spec["phases"]["closure"]["end"]
+        scene.frame_set(acquire_frame)
+        bpy.context.view_layer.update()
+        target_matrix = rig.matrix_world @ rig.pose.bones[spec["palmSocket"]].matrix
+        prop_constraint.inverse_matrix = target_matrix.inverted()
+        prop_influence = {
+            acquire_frame - 1: 0.0, acquire_frame: 1.0,
+            spec["phases"]["hold"]["end"]: 1.0, release_frame: 0.0,
+        }
+        for key_frame, value in sorted(prop_influence.items()):
+            prop_constraint.influence = value
+            prop_constraint.keyframe_insert(data_path="influence", frame=key_frame, group="BFS_GRASP_PROP")
+        set_interpolation(prop_root.animation_data, {scene.frame_start: "CONSTANT", release_frame - 1: "CONSTANT", release_frame: "CONSTANT", **{frame: "CONSTANT" for frame in prop_influence}})
+        reports.append({
+            "id": binding["id"], "graspSpecSha256": binding["verifiedGraspSpecSha256"],
+            "actorAssetRef": binding["actorAssetRef"], "propAssetRef": binding["propAssetRef"],
+            "armature": rig.name, "palmBone": spec["palmSocket"], "configuredBones": configured_bones,
+            "targets": target_reports, "transportKeys": binding["transportKeys"],
+            "propConstraint": {"name": prop_constraint.name, "type": prop_constraint.type, "subtarget": prop_constraint.subtarget, "influenceKeys": [{"frame": key, "value": value} for key, value in sorted(prop_influence.items())]},
+            "actorRootAnimation": animation_structure(actor_root), "rigAnimation": animation_structure(rig),
+            "frameAnimation": animation_structure(frame), "propAnimation": animation_structure(prop_root),
+        })
+    scene.frame_set(scene.frame_start)
+    return reports
+
+
 def create_camera(managed: bpy.types.Collection, camera_spec: dict) -> bpy.types.Object:
     camera = bpy.data.cameras.new(f"{camera_spec['id']}_DATA")
     camera.lens = camera_spec["lensMm"]
@@ -496,6 +635,7 @@ def build_structure(
     target_objects: dict[tuple[str, str], bpy.types.Object],
     actor_reports: list[dict],
     attachment_reports: list[dict],
+    grasp_reports: list[dict],
 ) -> dict:
     plan = wrapper["plan"]
     managed = bpy.data.collections["BFS_SHOT"]
@@ -552,7 +692,7 @@ def build_structure(
             "view": scene.view_settings.view_transform,
         },
     }
-    if wrapper["planVersion"] in {"0.2.0", "0.3.0"}:
+    if wrapper["planVersion"] in {"0.2.0", "0.3.0", "0.4.0", "0.4.1"}:
         structure["targets"] = [
             {
                 "target": target_id,
@@ -566,9 +706,11 @@ def build_structure(
             for (target_id, socket_id), obj in sorted(target_objects.items())
         ]
         structure["actors"] = actor_reports
-    if wrapper["planVersion"] == "0.3.0":
+    if wrapper["planVersion"] in {"0.3.0", "0.4.0", "0.4.1"}:
         structure["attachments"] = attachment_reports
         structure["geometryEvaluations"] = wrapper["plan"].get("geometryEvaluations", [])
+    if wrapper["planVersion"] in {"0.4.0", "0.4.1"}:
+        structure["grasps"] = grasp_reports
     return structure
 
 
@@ -600,7 +742,7 @@ def main() -> None:
     asset_collections = {}
     asset_roots = {}
     for asset in plan["assets"]:
-        root_object, imported_collection = append_asset(repository_root, managed, asset, direct_import=wrapper["planVersion"] == "0.3.0")
+        root_object, imported_collection = append_asset(repository_root, managed, asset, direct_import=wrapper["planVersion"] in {"0.3.0", "0.4.0", "0.4.1"})
         asset_roots[asset["id"]] = root_object
         asset_collections[asset["id"]] = imported_collection
 
@@ -622,9 +764,10 @@ def main() -> None:
         if "actorSpec" in actor
     ]
     attachment_reports = create_attachments(scene, plan.get("attachments", []), plan["actors"], asset_roots, asset_collections)
+    grasp_reports = create_grasps(scene, managed, plan.get("grasps", []), asset_roots, asset_collections)
     warnings = configure_render(scene, plan["render"], plan["outputSpec"], next(camera for camera in plan["cameras"] if camera["id"] == plan["shot"]["activeCamera"]), artifact_root)
 
-    structure = build_structure(scene, wrapper, asset_collections, camera_objects, target_objects, actor_reports, attachment_reports)
+    structure = build_structure(scene, wrapper, asset_collections, camera_objects, target_objects, actor_reports, attachment_reports, grasp_reports)
     structure_hash = sha256_bytes(canonical_json(structure).encode("utf-8"))
     blend_path = artifact_root / "scene.blend"
     save_result = bpy.ops.wm.save_as_mainfile(filepath=str(blend_path), check_existing=False, compress=True, relative_remap=True)

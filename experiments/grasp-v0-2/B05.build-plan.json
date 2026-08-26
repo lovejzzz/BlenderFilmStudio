@@ -1,0 +1,510 @@
+{
+  "documentType": "BFS_BUILD_PLAN",
+  "plan": {
+    "actors": [],
+    "assets": [
+      {
+        "id": "CHAR_B05",
+        "kind": "CHARACTER",
+        "license": "PROJECT-OWNED",
+        "sha256": "a233fbf97a84c9b848065f06ba9a9d76737456fb4360d6c9089adcbd3741ea3e",
+        "transform": {
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "rotationEulerDeg": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "uri": "assets/characters/B05-gripper.blend",
+        "verifiedSha256": "a233fbf97a84c9b848065f06ba9a9d76737456fb4360d6c9089adcbd3741ea3e",
+        "version": "0.1.0",
+        "visible": true
+      },
+      {
+        "id": "PROP_B05",
+        "kind": "PROP",
+        "license": "PROJECT-OWNED",
+        "sha256": "7fec6042396f8b86e552fcc46851052e84c3400f2b79bf7df6dd05856ff5f39c",
+        "transform": {
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "rotationEulerDeg": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "uri": "library/props/B05-prop.blend",
+        "verifiedSha256": "7fec6042396f8b86e552fcc46851052e84c3400f2b79bf7df6dd05856ff5f39c",
+        "version": "0.1.0",
+        "visible": true
+      }
+    ],
+    "attachments": [],
+    "cameras": [
+      {
+        "apertureFStop": 8,
+        "focusDistanceM": 1.5,
+        "id": "CAM_B05",
+        "lensMm": 70,
+        "sensorWidthMm": 36,
+        "shutterAngleDeg": 180,
+        "transform": {
+          "locationM": [
+            0.7,
+            -1.4,
+            0.42
+          ],
+          "rotationEulerDeg": [
+            78,
+            0,
+            27
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "compiler": {
+      "name": "BFS_SCENE_COMPILER",
+      "targetApplication": "Blender",
+      "targetVersion": "5.2.0",
+      "version": "0.4.1"
+    },
+    "events": [],
+    "geometryEvaluations": [],
+    "grasps": [
+      {
+        "actorAssetRef": "CHAR_B05",
+        "actorRef": "ACTOR_B05",
+        "armatureObject": "RIG_B05",
+        "graspSpec": {
+          "acceptance": {
+            "humanReview": "REQUIRED",
+            "maxHoldDriftM": 0.003,
+            "maxJointLimitViolationDeg": 0.1,
+            "maxPenetrationDepthM": 0.001,
+            "minimumActiveContacts": 2,
+            "minimumOpposingNormalAngleDeg": 150,
+            "visibilityRequired": true
+          },
+          "actorRef": "ACTOR_B05",
+          "contactPatches": [
+            {
+              "fingerRef": "FINGER_THUMB",
+              "frictionCoefficientAssumption": 0.5,
+              "id": "CONTACT_THUMB",
+              "propObjectRef": "PROP_BODY",
+              "separationRangeM": {
+                "maximum": 0.003,
+                "minimum": 0.001
+              },
+              "targetNormalLocal": [
+                -1,
+                0,
+                0
+              ],
+              "targetPointLocalM": [
+                -0.05,
+                0,
+                0
+              ],
+              "tipSocket": "THUMB_TIP"
+            },
+            {
+              "fingerRef": "FINGER_INDEX",
+              "frictionCoefficientAssumption": 0.5,
+              "id": "CONTACT_INDEX",
+              "propObjectRef": "PROP_BODY",
+              "separationRangeM": {
+                "maximum": 0.003,
+                "minimum": 0.001
+              },
+              "targetNormalLocal": [
+                1,
+                0,
+                0
+              ],
+              "targetPointLocalM": [
+                0.05,
+                0,
+                0
+              ],
+              "tipSocket": "INDEX_TIP"
+            }
+          ],
+          "documentType": "BFS_GRASP_SPEC",
+          "fingerChains": [
+            {
+              "bones": [
+                {
+                  "boneSemantic": "THUMB_PROXIMAL",
+                  "ikStiffness": 0.35,
+                  "maximumDeg": 65,
+                  "minimumDeg": -10,
+                  "restDeg": 5,
+                  "rotationAxis": "Z"
+                },
+                {
+                  "boneSemantic": "THUMB_DISTAL",
+                  "ikStiffness": 0.25,
+                  "maximumDeg": 75,
+                  "minimumDeg": 0,
+                  "restDeg": 8,
+                  "rotationAxis": "Z"
+                }
+              ],
+              "id": "FINGER_THUMB",
+              "role": "THUMB",
+              "tipSocket": "THUMB_TIP"
+            },
+            {
+              "bones": [
+                {
+                  "boneSemantic": "INDEX_PROXIMAL",
+                  "ikStiffness": 0.35,
+                  "maximumDeg": 90,
+                  "minimumDeg": 0,
+                  "restDeg": 4,
+                  "rotationAxis": "Z"
+                },
+                {
+                  "boneSemantic": "INDEX_DISTAL",
+                  "ikStiffness": 0.25,
+                  "maximumDeg": 95,
+                  "minimumDeg": 0,
+                  "restDeg": 6,
+                  "rotationAxis": "Z"
+                }
+              ],
+              "id": "FINGER_INDEX",
+              "role": "INDEX",
+              "tipSocket": "INDEX_TIP"
+            }
+          ],
+          "id": "GRASP_B05_TWO_FINGER",
+          "palmSocket": "PALM_R",
+          "phases": {
+            "approach": {
+              "end": 36,
+              "start": 1
+            },
+            "closure": {
+              "end": 48,
+              "start": 37
+            },
+            "hold": {
+              "end": 108,
+              "start": 49
+            },
+            "release": {
+              "end": 120,
+              "start": 109
+            }
+          },
+          "propRef": "PROP_B05",
+          "provenance": {
+            "briefId": "BRIEF_B05_TWO_FINGER",
+            "createdAtUtc": "2026-08-26T06:00:00Z",
+            "createdBy": "BFS B05 design baseline",
+            "sources": [
+              "research/2026-08-26-b05-grasp-spec-design.md"
+            ]
+          },
+          "security": {
+            "arbitraryPython": false,
+            "networkAccess": false
+          },
+          "solverPolicy": {
+            "allowScriptedDrivers": false,
+            "allowStretch": false,
+            "ikSolver": "STANDARD",
+            "jointLimitSource": "POSE_BONE_IK_LIMITS",
+            "mode": "DECLARED_IK_TARGETS"
+          },
+          "specVersion": "0.1.0"
+        },
+        "graspSpecCanonicalSha256": "1e6043a4180da4f9fef0ba009d4bb60df3afb10b87c5b6fd4f461ed976ed2bad",
+        "graspSpecSha256": "0f7dbc3cfaca98c2dff6d2cb575fb41a19a846233fa18f25e645f74190fa1360",
+        "graspSpecUri": "specs/benchmarks/B05.grasp.json",
+        "id": "GRASP_B05_TWO_FINGER",
+        "propAssetRef": "PROP_B05",
+        "propObject": "PROP_BODY",
+        "transportKeys": [
+          {
+            "frame": 49,
+            "interpolation": "LINEAR",
+            "locationM": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "frame": 108,
+            "interpolation": "LINEAR",
+            "locationM": [
+              0,
+              0,
+              0.3
+            ]
+          }
+        ],
+        "verifiedGraspSpecSha256": "0f7dbc3cfaca98c2dff6d2cb575fb41a19a846233fa18f25e645f74190fa1360"
+      }
+    ],
+    "lights": [
+      {
+        "colorLinear": [
+          0.38,
+          0.58,
+          1
+        ],
+        "energy": 420,
+        "id": "FILL_B05",
+        "sizeM": 1.2,
+        "transform": {
+          "locationM": [
+            -0.9,
+            -0.5,
+            0.8
+          ],
+          "rotationEulerDeg": [
+            50,
+            0,
+            -55
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "type": "AREA"
+      },
+      {
+        "colorLinear": [
+          1,
+          0.74,
+          0.55
+        ],
+        "energy": 700,
+        "id": "KEY_B05",
+        "sizeM": 1.1,
+        "transform": {
+          "locationM": [
+            0.8,
+            -0.8,
+            1.3
+          ],
+          "rotationEulerDeg": [
+            25,
+            0,
+            35
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "type": "AREA"
+      }
+    ],
+    "outputSpec": {
+      "acceptance": {
+        "exactFrameCount": true,
+        "humanReview": "REQUIRED",
+        "pixelTolerance": "DEVICE_CLASS_POLICY_REQUIRED",
+        "rejectMissingChannels": true,
+        "rejectNaNOrInfinity": true,
+        "requirePerFrameSha256": true,
+        "requireRenderTelemetry": true,
+        "requireSceneManifest": true
+      },
+      "canonicalSha256": "0cfe3be32e15e2d71547281bae532172b895297e98f356335137ace9df0dfce3",
+      "color": {
+        "displayTransforms": [
+          {
+            "display": "sRGB - Display",
+            "id": "REVIEW_SDR",
+            "status": "configured-display-calibration-pending",
+            "target": "sRGB display / SDR 100 nit review",
+            "transform": "ACES 2 Output Transform",
+            "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+          },
+          {
+            "display": null,
+            "id": "REVIEW_CINEMA",
+            "status": "pending-calibration",
+            "target": "DCI theatrical reference conditions",
+            "transform": "ACES 2 Output Transform",
+            "view": null
+          }
+        ],
+        "ocioConfigName": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+        "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "ocioConfigUri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "ocioPolicy": "PINNED_EXACT_CONFIG_AND_HASH",
+        "openColorIOVersion": "2.5.0",
+        "sceneLinearEncoding": "ACEScg",
+        "sceneLinearRole": "ACEScg",
+        "verifiedOcioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+      },
+      "id": "BFS_RESEARCH_MASTER_0_1",
+      "master": {
+        "alpha": "PREMULTIPLIED",
+        "compression": "ZIP_LOSSLESS",
+        "container": "OpenEXR multi-layer image sequence",
+        "pixelType": "HALF",
+        "requiredAttributes": [
+          "chromaticities",
+          "framesPerSecond",
+          "timeCode",
+          "owner",
+          "comments"
+        ],
+        "requiredPasses": [
+          "Combined",
+          "Alpha",
+          "Depth",
+          "Normal",
+          "Vector",
+          "Cryptomatte"
+        ]
+      },
+      "picture": {
+        "frameNumberPadding": 6,
+        "frameRate": {
+          "denominator": 1,
+          "numerator": 24
+        },
+        "height": 2160,
+        "pixelAspectRatio": 1,
+        "shutterAngleDegrees": 180,
+        "width": 3840
+      },
+      "specVersion": "0.1.0"
+    },
+    "outputs": {
+      "blend": "renders/SHOT_107scene.blend",
+      "manifest": "renders/SHOT_107scene.manifest.json",
+      "root": "renders/SHOT_107"
+    },
+    "provenance": {
+      "briefId": "BRIEF_B05_COMPILED_GRASP",
+      "createdAtUtc": "2026-08-26T18:00:00Z",
+      "createdBy": "BFS SceneSpec v0.4 compiler experiment",
+      "sources": [
+        {
+          "license": "PROJECT-INTERNAL",
+          "role": "ASSET",
+          "sha256": "4f8efef56d8e4979e0265e2d425eb1162c430ffecebb780f6f38dc5ceea72e54",
+          "uri": "experiments/grasp-v0-2/asset-generation.json",
+          "verification": "HASH_VERIFIED"
+        },
+        {
+          "license": "PROJECT-INTERNAL",
+          "role": "REFERENCE",
+          "sha256": "0f7dbc3cfaca98c2dff6d2cb575fb41a19a846233fa18f25e645f74190fa1360",
+          "uri": "specs/benchmarks/B05.grasp.json",
+          "verification": "HASH_VERIFIED"
+        }
+      ]
+    },
+    "render": {
+      "compression": "ZIP_LOSSLESS",
+      "denoise": true,
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "finalEngine": "CYCLES",
+      "outputProfile": "BFS_RESEARCH_MASTER_0_1",
+      "outputRoot": "renders/SHOT_107/",
+      "passes": [
+        "Alpha",
+        "Combined",
+        "Cryptomatte",
+        "Depth",
+        "Normal",
+        "Vector"
+      ],
+      "pixelType": "HALF_16",
+      "previewEngine": "BLENDER_EEVEE",
+      "resolution": {
+        "height": 2160,
+        "percentage": 100,
+        "width": 3840
+      },
+      "samplesFinal": 128,
+      "samplesPreview": 32
+    },
+    "security": {
+      "arbitraryPython": false,
+      "authorizedOperations": [
+        "CREATE_CAMERA",
+        "CREATE_GRASP",
+        "CREATE_LIGHT",
+        "IMPORT_ASSET",
+        "SET_RENDER",
+        "SET_TRANSFORM"
+      ],
+      "compilerInternalOperations": [
+        "RESET_SCENE",
+        "SET_WORLD",
+        "SET_ACTIVE_CAMERA",
+        "WRITE_MANIFEST",
+        "SAVE_BLEND"
+      ],
+      "networkAccess": false
+    },
+    "shot": {
+      "activeCamera": "CAM_B05",
+      "frameEnd": 120,
+      "frameRate": {
+        "denominator": 1,
+        "numerator": 24
+      },
+      "frameStart": 1,
+      "id": "SHOT_107",
+      "seed": 24082605,
+      "title": "B05 Compiled Two-Finger Grasp",
+      "unitScaleMeters": 1
+    },
+    "source": {
+      "canonicalSha256": "92f056af70670cd9f1899f4029fbbda223ef56feb5abef33877404b37b3a121d",
+      "sceneSpecPath": "specs/benchmarks/B05.scene.json",
+      "sceneSpecVersion": "0.4.0"
+    },
+    "targets": [],
+    "world": {
+      "backgroundLinear": [
+        0.004,
+        0.008,
+        0.018
+      ],
+      "strength": 0.12
+    }
+  },
+  "planHash": "c245fe10b81c11b8c5fc423cf399b0b74f2a120f038d0bcc662d39092013425c",
+  "planVersion": "0.4.1"
+}
