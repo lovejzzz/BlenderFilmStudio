@@ -1,0 +1,108 @@
+{
+  "documentType": "BFS_EEVEE_SAMPLING_FACTORIAL_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "Under the frozen B02 Eevee review pipeline, does reducing renderSamples from 32 to 1 restore exact decoded-pixel reproducibility, and is that result conditional on output dither intensity?",
+  "historicalEvidence": {
+    "b15ResultsSha256": "57e0b555abc3d4e7ec2c0635372d3309733e066a8d6fd19c6c5fde2526762d88",
+    "samples32Dither1": {
+      "decodedPixelExactFrames": 127,
+      "failedPixels": 114,
+      "maximumAbsoluteError": 0.003921583294868469
+    },
+    "b16ResultsSha256": "a17ca91d39325192d374d21bb06da3b1d95ba368a7d039ee065a8631e01ef0a5",
+    "samples32Dither0": {
+      "decodedPixelExactFrames": 130,
+      "failedPixels": 69,
+      "maximumAbsoluteError": 0.003921598196029663
+    }
+  },
+  "design": {
+    "type": "2x2 full factorial with two clean sequence replicates per cell",
+    "factors": {
+      "renderSamples": [1, 32],
+      "ditherIntensity": [0.0, 1.0]
+    },
+    "cells": [
+      { "id": "S01-D0", "renderSamples": 1, "ditherIntensity": 0.0, "runs": ["S01-D0-A", "S01-D0-B"] },
+      { "id": "S01-D1", "renderSamples": 1, "ditherIntensity": 1.0, "runs": ["S01-D1-A", "S01-D1-B"] },
+      { "id": "S32-D0", "renderSamples": 32, "ditherIntensity": 0.0, "runs": ["S32-D0-A", "S32-D0-B"] },
+      { "id": "S32-D1", "renderSamples": 32, "ditherIntensity": 1.0, "runs": ["S32-D1-A", "S32-D1-B"] }
+    ],
+    "runOrder": ["S01-D0-A", "S32-D1-A", "S01-D1-A", "S32-D0-A", "S32-D0-B", "S01-D1-B", "S32-D1-B", "S01-D0-B"],
+    "runOrderFrozenBeforeExecution": true
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSamples1Sha256": "0d5857e2ba7a8952bb16c4f25c1576d5341570d23fcb0089cbb9dda86f54c2dd",
+    "reviewRenderSpecSamples32Sha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "rendererSha256": "b969e267db7b73eb7b6f8ea17abf09b2e129b9fce2e706fec950c5bb5e5eda5c",
+    "comparatorSha256": "cd770959a1e92c5df66d86d376870d4a961347276a637514e3bb37da1e697b4e",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "width": 960,
+    "height": 540,
+    "frameStart": 1,
+    "frameEnd": 144,
+    "frameCountPerRun": 144,
+    "totalRuns": 8,
+    "totalRenderedFrames": 1152,
+    "fps": 24,
+    "imageFormat": "PNG",
+    "colorDepth": "8",
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "motionBlur": false,
+    "sourceSceneDitherIntensity": 1.0
+  },
+  "interventionContract": {
+    "sameConfiguratorForAllCells": true,
+    "allowedRequestedDitherIntensities": [0.0, 1.0],
+    "requiredObservedBefore": 1.0,
+    "requiredObservedAfterEqualsRequested": true,
+    "mustNotSaveSourceBlend": true,
+    "rendererMustObserveRequestedRenderSamples": true
+  },
+  "primaryGatePerCell": {
+    "decodedPixelExactFrames": 144,
+    "maximumAbsoluteError": 0.0,
+    "totalFailurePixels": 0
+  },
+  "decisionRule": {
+    "SAMPLING_CAUSAL_SUPPORT": "Both sample-1 cells pass exact decoded pixels, both fresh sample-32 cells remain non-exact, and all controls and attacks pass.",
+    "SAMPLING_NOT_SUFFICIENT": "Both sample-1 cells contain at least one decoded-pixel difference, both fresh sample-32 cells remain non-exact, and the experiment is valid.",
+    "MIXED_OR_BASELINE_UNSTABLE": "Exactly one sample-1 cell is exact, or either fresh sample-32 cell is exact, with an otherwise valid experiment.",
+    "INVALID_EXPERIMENT": "Any frozen identity, run invariant, intervention control, sequence binding, comparison binding or negative-attack gate fails."
+  },
+  "secondaryObservations": [
+    "PNG container equality is measured separately and never substitutes for decoded-pixel equality.",
+    "Differing-frame counts, failed-pixel counts and maximum error are descriptive only; no post-hoc tolerance or significance test is permitted.",
+    "Fresh sample-32 cells test whether the historical B15/B16 non-exact pattern replicates in the same experimental batch.",
+    "Cross-cell image equality is not expected because sample count and dither intentionally change pixels; the causal response is within-cell A/B reproducibility."
+  ],
+  "requiredNegativeCases": [
+    "factorial spec identity mismatch",
+    "review spec identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "configurator identity mismatch",
+    "requested dither outside the frozen factor levels",
+    "observed renderSamples differs from the cell",
+    "A and B directories alias",
+    "missing frame",
+    "extra frame",
+    "mutated frame bytes",
+    "comparison artifact not bound to both sequence hashes"
+  ],
+  "explicitNonClaims": [
+    "An exact sample-1 result would not prove that Eevee is generally deterministic or identify a specific internal race without source-level evidence.",
+    "Sample-1 output is not asserted to be visually acceptable and may have materially worse antialiasing, lighting or effects quality.",
+    "The experiment does not select a perceptual tolerance and does not convert near-equality into equality.",
+    "The result applies to this same-machine Blender 5.2 Eevee PNG8 review profile, not Cycles EXR masters or other devices.",
+    "Two runs per cell can falsify exact determinism but cannot estimate a general probability of mismatch.",
+    "A small difference in failed-pixel counts across cells is not by itself a causal effect estimate."
+  ]
+}
