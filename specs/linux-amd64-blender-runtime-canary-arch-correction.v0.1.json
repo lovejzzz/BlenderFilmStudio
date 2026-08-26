@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderRuntimeCanaryArchCorrection.v0.1",
+  "experimentId": "B41-C1",
+  "status": "PREREGISTERED_BEFORE_CORRECTION_TOOLING_OR_OUTPUT",
+  "question": "Does normalizing Docker Server.Arch=arm64 to the frozen canonical aarch64 identity allow the otherwise unchanged B41 runtime canary to proceed?",
+  "parent": {
+    "specSha256": "63c5787f9566fb70dd2a250cb170d2d93ef13f5b3b426005562bd9283d308eb9",
+    "preregistrationCommit": "01502eb2ec23e113644e97436cd92b9118d5bac1",
+    "toolFreezeCommit": "71060db6f17246872470b4009044f1d8b2562579",
+    "failure": "NO_RESULT_DOCKER_ARCHITECTURE_ALIAS_CRASH"
+  },
+  "changedImplementationExact": "Normalize the Docker Server.Arch value arm64 to aarch64 before comparing and recording the frozen canonical server architecture.",
+  "acceptedRawDockerArchitecture": "arm64",
+  "canonicalDockerArchitecture": "aarch64",
+  "frozenUnchanged": [
+    "all B41 ancestry, runtime, artifact and image identities",
+    "disk admission and exact Docker socket",
+    "container resource, environment, mount and security contract",
+    "success Eevee canary and timeout canary",
+    "decision rules, accepted verdict and non-claims"
+  ],
+  "acceptedVerdict": "LINUX_AMD64_BLENDER_5_2_CANARY_AND_TIMEOUT_SUPPORTED",
+  "nonClaims": [
+    "B41-C1 changes an architecture label normalization only",
+    "It does not treat x64 emulation as native ARM64 or as production support",
+    "All B41 failure and non-claim boundaries remain active"
+  ]
+}
