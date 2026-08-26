@@ -1,0 +1,65 @@
+{
+  "documentType": "BFS_B11_ASSET_SECURITY_EXPERIMENT",
+  "version": "0.1.0",
+  "phase": "POST_REMEDIATION",
+  "executedAtUtc": "2026-08-26T07:50:52.080Z",
+  "harmlessExecutableCode": false,
+  "tests": [
+    {
+      "id": "N_DRIVER",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Asset safety audit failed: SET_STILL_LIFE: OBJECT:METAL_SPHERE:DRIVERS=1"
+    },
+    {
+      "id": "N_SHAPE_KEY_DRIVER",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Asset safety audit failed: SET_STILL_LIFE: SHAPE_KEYS:METAL_SPHERE:DRIVERS=1"
+    },
+    {
+      "id": "N_CONSTRAINT",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Asset safety audit failed: SET_STILL_LIFE: OBJECT:LEATHER_BLOCK:CONSTRAINTS=1"
+    },
+    {
+      "id": "N_RIGID_BODY",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Asset safety audit failed: SET_STILL_LIFE: OBJECT:GLASS_CYLINDER:RIGID_BODY"
+    },
+    {
+      "id": "N_ACTION",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Asset safety audit failed: SET_STILL_LIFE: OBJECT:SKIN_TONE_CARD:ACTION=SKIN_TONE_CARDAction"
+    },
+    {
+      "id": "N_LINKED_LIBRARY",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Asset safety audit failed: SET_STILL_LIFE: EXTERNAL_LIBRARY:/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/assets/sets/B11-work/B11-dependency.blend; OBJECT:B11_LINKED_INSTANCE:LINKED_INSTANCE_COLLECTION"
+    },
+    {
+      "id": "N_LIBRARY_OVERRIDE",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Asset safety audit failed: SET_STILL_LIFE: EXTERNAL_LIBRARY:/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/assets/sets/B11-work/B11-dependency.blend; OBJECT:B11_DEP_OBJECT:LIBRARY_OVERRIDE; OBJECT:B11_DEP_OBJECT:LINKED_LIBRARY"
+    },
+    {
+      "id": "N_COMBINED",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Asset safety audit failed: SET_STILL_LIFE: OBJECT:GLASS_CYLINDER:RIGID_BODY; OBJECT:LEATHER_BLOCK:CONSTRAINTS=1; OBJECT:METAL_SPHERE:DRIVERS=1; OBJECT:SKIN_TONE_CARD:ACTION=SKIN_TONE_CARDAction"
+    },
+    {
+      "id": "N_AUTOEXEC_ENABLED",
+      "rejected": true,
+      "observed": "BFS_COMPILE_ERROR Blender auto-execute scripts must be disabled for restricted compilation"
+    }
+  ],
+  "positiveControl": {
+    "accepted": true,
+    "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+    "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+    "pass": true
+  },
+  "experimentOutcomeAsExpected": true,
+  "securityGatePassed": true,
+  "passed": true,
+  "formalB11Complete": true,
+  "firstRunExpectedToFalsify": false
+}

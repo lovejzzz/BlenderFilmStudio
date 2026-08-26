@@ -134,11 +134,76 @@ def apply_transform(obj: bpy.types.Object, transform: dict) -> None:
     obj.scale = transform["scale"]
 
 
+def assert_appended_asset_safe(asset: dict, asset_path: Path, collection: bpy.types.Collection, prior_libraries: set[str]) -> None:
+    """Reject undeclared evaluation behavior before compiler-authored edits."""
+    object_names = {obj.name for obj in collection.all_objects}
+    findings = []
+    inspected_ids = set()
+
+    def inspect_animation(owner, label: str) -> None:
+        pointer = owner.as_pointer()
+        if pointer in inspected_ids:
+            return
+        inspected_ids.add(pointer)
+        animation = getattr(owner, "animation_data", None)
+        if animation and len(animation.drivers):
+            findings.append(f"{label}:DRIVERS={len(animation.drivers)}")
+        if animation and animation.action:
+            findings.append(f"{label}:ACTION={animation.action.name}")
+
+    inspect_animation(collection, f"COLLECTION:{collection.name}")
+    for obj in sorted(collection.all_objects, key=lambda item: item.name):
+        inspect_animation(obj, f"OBJECT:{obj.name}")
+        if obj.data:
+            inspect_animation(obj.data, f"DATA:{obj.name}")
+            if getattr(obj.data, "shape_keys", None):
+                inspect_animation(obj.data.shape_keys, f"SHAPE_KEYS:{obj.name}")
+        for slot in obj.material_slots:
+            if slot.material:
+                inspect_animation(slot.material, f"MATERIAL:{slot.material.name}")
+                if slot.material.node_tree:
+                    inspect_animation(slot.material.node_tree, f"NODETREE:{slot.material.name}")
+        if len(obj.constraints):
+            findings.append(f"OBJECT:{obj.name}:CONSTRAINTS={len(obj.constraints)}")
+        if obj.rigid_body is not None or obj.rigid_body_constraint is not None:
+            findings.append(f"OBJECT:{obj.name}:RIGID_BODY")
+        if obj.library is not None or (obj.data and obj.data.library is not None):
+            findings.append(f"OBJECT:{obj.name}:LINKED_LIBRARY")
+        if obj.override_library is not None:
+            findings.append(f"OBJECT:{obj.name}:LIBRARY_OVERRIDE")
+        if obj.instance_collection and obj.instance_collection.library is not None:
+            findings.append(f"OBJECT:{obj.name}:LINKED_INSTANCE_COLLECTION")
+        for modifier in obj.modifiers:
+            allowed_armature = asset["kind"] == "CHARACTER" and modifier.type == "ARMATURE" and modifier.object and modifier.object.name in object_names
+            if not allowed_armature:
+                findings.append(f"OBJECT:{obj.name}:MODIFIER={modifier.type}")
+        if obj.type == "ARMATURE":
+            for bone in obj.pose.bones:
+                for constraint in bone.constraints:
+                    allowed_limit = asset["kind"] == "CHARACTER" and bone.name == "head" and constraint.type == "LIMIT_ROTATION" and constraint.name == "BFS_HEAD_LIMIT" and getattr(constraint, "target", None) is None
+                    target = getattr(constraint, "target", None)
+                    allowed_gaze = asset["kind"] == "CHARACTER" and bone.name in {"eye.L", "eye.R"} and constraint.type == "DAMPED_TRACK" and constraint.name == f"BFS_GAZE_{bone.name}" and target and target.name == "GAZE_TARGET" and target.name in object_names
+                    if not (allowed_limit or allowed_gaze):
+                        findings.append(f"POSE:{obj.name}.{bone.name}:CONSTRAINT={constraint.type}:{constraint.name}")
+
+    if collection.library is not None:
+        findings.append(f"COLLECTION:{collection.name}:LINKED_LIBRARY")
+    if collection.override_library is not None:
+        findings.append(f"COLLECTION:{collection.name}:LIBRARY_OVERRIDE")
+    expected_library = str(asset_path.resolve())
+    allowed_libraries = prior_libraries | {expected_library}
+    external_libraries = [library.filepath for library in bpy.data.libraries if str(Path(bpy.path.abspath(library.filepath)).resolve()) not in allowed_libraries]
+    findings.extend(f"EXTERNAL_LIBRARY:{filepath}" for filepath in external_libraries)
+    if findings:
+        raise RuntimeError(f"Asset safety audit failed: {asset['id']}: {'; '.join(sorted(set(findings)))}")
+
+
 def append_asset(root: Path, managed: bpy.types.Collection, asset: dict, direct_import: bool = False) -> tuple[bpy.types.Object, bpy.types.Collection]:
     asset_path = resolve_below(root, Path(asset["uri"]), f"Asset {asset['id']}")
     actual_hash = sha256_file(asset_path)
     if actual_hash != asset["verifiedSha256"] or actual_hash != asset["sha256"]:
         raise RuntimeError(f"Asset hash mismatch during Blender compile: {asset['id']}")
+    prior_libraries = {str(Path(bpy.path.abspath(library.filepath)).resolve()) for library in bpy.data.libraries}
     with bpy.data.libraries.load(str(asset_path), link=False, recursive=True) as (source, target):
         if asset["id"] not in source.collections:
             raise RuntimeError(f"Asset library {asset['uri']} has no collection named {asset['id']}")
@@ -146,6 +211,7 @@ def append_asset(root: Path, managed: bpy.types.Collection, asset: dict, direct_
     imported = target.collections[0]
     if imported is None:
         raise RuntimeError(f"Blender could not append collection {asset['id']}")
+    assert_appended_asset_safe(asset, asset_path, imported, prior_libraries)
     root_object = bpy.data.objects.new(asset["id"], None)
     root_object.hide_render = not asset["visible"]
     root_object["bfs_asset_sha256"] = actual_hash
@@ -822,6 +888,8 @@ def build_structure(
 def main() -> None:
     started = time.perf_counter()
     args = parse_args()
+    if "--enable-autoexec" in sys.argv or bpy.context.preferences.filepaths.use_scripts_auto_execute:
+        raise RuntimeError("Blender auto-execute scripts must be disabled for restricted compilation")
     repository_root = args.repository_root.resolve()
     plan_path = resolve_below(repository_root, args.plan, "BuildPlan")
     wrapper = load_verified_plan(plan_path)
