@@ -19,8 +19,11 @@ def main() -> None:
     before = {
         "threadsMode": scene.render.threads_mode,
         "threads": int(scene.render.threads),
+        "ditherIntensity": float(scene.render.dither_intensity),
+        "useFastGi": bool(scene.eevee.use_fast_gi),
+        "useTaaReprojection": bool(scene.eevee.use_taa_reprojection),
     }
-    if before != {"threadsMode": "FIXED", "threads": 8}:
+    if before["threadsMode"] != "FIXED" or before["threads"] != 8:
         raise RuntimeError(f"B22 source thread state mismatch: {before!r}")
     if requested_mode != "FIXED" or requested_threads not in {1, 8}:
         raise RuntimeError(
@@ -32,11 +35,23 @@ def main() -> None:
 
     scene.render.threads_mode = requested_mode
     scene.render.threads = requested_threads
+    scene.render.dither_intensity = 0.0
+    scene.eevee.use_fast_gi = True
+    scene.eevee.use_taa_reprojection = True
     after = {
         "threadsMode": scene.render.threads_mode,
         "threads": int(scene.render.threads),
+        "ditherIntensity": float(scene.render.dither_intensity),
+        "useFastGi": bool(scene.eevee.use_fast_gi),
+        "useTaaReprojection": bool(scene.eevee.use_taa_reprojection),
     }
-    if after != {"threadsMode": requested_mode, "threads": requested_threads}:
+    if after != {
+        "threadsMode": requested_mode,
+        "threads": requested_threads,
+        "ditherIntensity": 0.0,
+        "useFastGi": True,
+        "useTaaReprojection": True,
+    }:
         raise RuntimeError(f"B22 intervention did not take effect: {after!r}")
 
     report = {

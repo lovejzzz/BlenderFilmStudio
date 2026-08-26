@@ -104,6 +104,11 @@ async function validateRun({
   if (intervention.before.threadsMode !== expectedSourceMode || intervention.before.threads !== expectedSourceThreads) return 'SOURCE_THREAD_STATE';
   if (intervention.requested.threadsMode !== expectedRequestedMode || intervention.after.threadsMode !== expectedRequestedMode) return 'REQUESTED_THREAD_MODE';
   if (intervention.requested.threads !== expectedRequestedThreads || intervention.after.threads !== expectedRequestedThreads) return 'REQUESTED_THREAD_COUNT';
+  if (
+    intervention.after.ditherIntensity !== expectedConstants.ditherIntensity ||
+    intervention.after.useFastGi !== expectedConstants.useFastGi ||
+    intervention.after.useTaaReprojection !== expectedConstants.useTaaReprojection
+  ) return 'FIXED_RENDER_CONSTANTS';
   if (intervention.cell !== record.cell || intervention.savedSourceBlend !== false) return 'INTERVENTION_BINDING';
 
   const report = JSON.parse(await readFile(record.reportPath, 'utf8'));
