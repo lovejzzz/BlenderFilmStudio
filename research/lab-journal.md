@@ -823,14 +823,30 @@ Status: `CARRIER_AND_INTERFACE_READY`; human status: `HUMAN_REVIEW_PENDING`, 0/1
 
 Artifacts: `experiments/human-quadrature-review-v0-1/results.json`, `experiments/human-quadrature-review-v0-1/evidence/`, `research/2026-08-26-b34-human-quadrature-review-protocol.md` and `research/2026-08-26-b34-human-quadrature-review-package-result.md`.
 
-## Journal rule for future work
+Note: responsive browser recheck after the superseding finding confirmed the desktop page at 1440 × 1000 with no horizontal overflow. The requested 390 × 844 temporary viewport override did not change the live viewport (it remained 1440 × 1000), so no mobile-browser pass is claimed from that run; the static responsive breakpoint remains build-checked only.
 
-Every promoted result must record:
+## J-040 · Public carrier-hash join falsifies B34 blinding sufficiency
 
-1. hypothesis or question;
-2. frozen gate before execution;
-3. exact real-Blender/runtime identity;
-4. positive and negative observations;
-5. falsified assumptions and non-claims;
-6. machine-readable artifact paths;
-7. the next unresolved boundary.
+Type: post-package adversarial blinding audit, 2026-08-26.
+
+Before distributing B34, a new audit tested whether “no source labels in the observer package” remained sufficient after package evidence was committed publicly. It used no sealed mapping, salt or analyzer output. The public manifest supplied method → carrier SHA; each observer HTML supplied CLIP label → the same carrier SHA.
+
+The join recovered NATURAL32, QUADRATURE4 and STRATIFIED8 for all 18/18 sessions. Verdict: `PUBLIC_HASH_JOIN_UNBLINDS_ALL_SESSIONS`; disposition: `DO_NOT_COLLECT_FORMAL_HUMAN_RESPONSES_FROM_B34_PUBLIC_EVIDENCE_STATE`.
+
+This does not invalidate B34's 1,872 source renders, 432 exact composites, three RGB-exact carriers, UI telemetry or response-chain engineering. It invalidates the assumption that these already-public carrier identities can support a repo-aware blind human study. B34 formal human count remains 0/18.
+
+Next: a new visual realization must be generated. Protocol and non-unblinding tooling may remain public, but method-labelled output/carrier/decoded-frame/pixel hashes must be withheld until all 18 preregistered responses are hash-locked. A public precollection commitment may bind the withheld package without revealing those identities.
+
+Artifact: `experiments/human-quadrature-review-v0-1/evidence/public-hash-unblinding-audit.json`.
+
+## Active goal experimental contract
+
+This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
+
+1. preregister the falsifiable question, variables, controls, thresholds and rejection conditions before creating the tested tool or output;
+2. test with real Blender when the claim concerns Blender, and record the exact runtime, hardware-relevant environment, input identity, process identity and randomness controls;
+3. retain failed runs, counterexamples, negative observations and boundary conditions instead of rewriting the history around the successful path;
+4. label statements as measured fact, inference, subjective judgment or unknown, and never promote one category into another;
+5. require a clean reproduction plus adversarial/attack tests before promoting an engineering result;
+6. require independent human observers for subjective visual claims; developer pilots and synthetic fixtures remain interface/attack evidence only;
+7. publish machine-readable artifacts, hashes, non-claims and the next unresolved boundary, except when delayed disclosure is itself required to preserve a preregistered blind experiment.

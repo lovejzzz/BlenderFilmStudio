@@ -2,11 +2,19 @@
 
 日期：2026-08-26（America/New_York）
 
-Package 判定：**`CARRIER_AND_INTERFACE_READY`**
+Package 工程判定：**`CARRIER_AND_INTERFACE_READY`**
 
-人类证据状态：**`HUMAN_REVIEW_PENDING` · 0/18**
+人类证据状态：**`DO_NOT_COLLECT_FORMAL_HUMAN_RESPONSES_FROM_B34_PUBLIC_EVIDENCE_STATE` · 0/18**
 
-这两个状态不能合并：B34 已证明正式载体、盲法、响应验证与分析边界可运行，但没有证明观察者偏好、可见闪烁差异或电影感。
+这两个状态不能合并：B34 已证明载体、响应验证与分析边界可运行，但后续 public-hash attack 击穿了 repo-aware observer 的盲法。它没有证明观察者偏好、可见闪烁差异或电影感，也不能再用于收集正式人类 response。
+
+## Superseding finding · public hash join 击穿盲法
+
+在准备分发时执行的新攻击只使用两类观察者可以获得的文件：公开跟踪的 `package.manifest.json`，以及分发给该观察者的 session `index.html`。公开 manifest 暴露 `method → carrier SHA-256`；session HTML 暴露 `CLIP-01/02/03 → 同一 SHA-256`。按 SHA join 即可恢复映射，不需要 sealed mapping、salt 或 unblinded analyzer。
+
+正式结果：`PUBLIC_HASH_JOIN_UNBLINDS_ALL_SESSIONS`，18/18 session 的三个方法全部恢复。被证伪的假设是：“只要 observer package 本身不出现 source label 或 sealed mapping，公开 method-labelled carrier hashes 后仍足够盲。”
+
+因此下文的 `CARRIER_AND_INTERFACE_READY` 只保留为工程事实，不再意味着可以开始 18 人收集。下一版本必须创建新的视觉 realization，并在全部预注册 response hash-lock 之前延迟披露所有 method-labelled output、carrier、decoded-frame 与 pixel hash。公开仓库在收集前只能包含协议、非解盲工具身份和不暴露方法映射的整体 commitment。
 
 ## 预注册与工具冻结
 
@@ -77,7 +85,7 @@ synthetic analyzer fixture 故意把 18 人的 Q4 都设为 `SEVERE`、主比较
 
 ## 当前边界
 
-B34 现在消除了“没有正式可分发载体/验证器/分析器”的工程缺口，但没有消除最关键的证据缺口：18 名独立观察者尚未完成。package ready 不能被写成 Q8 更好、无差异或有人类支持。远程显示器不统一；结果即使完成也只适用于这组三条六秒载体与记录条件。motion blur、4K 投影、跨镜头/机器、交付编码、表演、叙事和整体电影感仍不在声明内。
+B34 消除了“没有正式载体/验证器/分析器”的工程缺口，却发现了更前置的盲法缺口：公开证据能关联解盲。不得从这一 public evidence state 收集正式 response。package engineering ready 不能被写成 study ready、Q8 更好、无差异或有人类支持。远程显示器不统一；未来新版本即使完成也只适用于其新载体与记录条件。motion blur、4K 投影、跨镜头/机器、交付编码、表演、叙事和整体电影感仍不在声明内。
 
 ## 证据
 
@@ -86,3 +94,4 @@ B34 现在消除了“没有正式可分发载体/验证器/分析器”的工�
 - `experiments/human-quadrature-review-v0-1/evidence/composite-display.manifest.json` · SHA-256 `9e57c81716c5bd77eeae6fc12c0b28e8628894491db4bc0cc7375762d5400507`
 - `experiments/human-quadrature-review-v0-1/evidence/independent-package-audit.json` · SHA-256 `65dbfb2836fa852b76f2d143c88cbecbc1fc77b0d52ed9372637915b3f375e07`
 - `experiments/human-quadrature-review-v0-1/evidence/independent-composite-audit.json` · SHA-256 `7317be38d41119306e3589aa56244355d41fed638e7ab347a0acfc28b1f2df54`
+- `experiments/human-quadrature-review-v0-1/evidence/public-hash-unblinding-audit.json` · SHA-256 `5aa4f88367c383038283c4961e1e7c6545b4aeecef20983328b521002b4077df`
