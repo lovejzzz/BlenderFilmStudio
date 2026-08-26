@@ -44,7 +44,9 @@ B34 已证明公开 method-labelled carrier SHA 与 observer CLIP SHA 可以 joi
 
 ## 当前边界
 
-`COLLECTION_NOT_OPEN` 是主动门禁，不是缺少工程能力。正式采集还需要：把 public commitment 与页面提交部署后，对最终公开 commit 再执行 same-state leak audit；再做不计入样本的界面 pilot；然后才能逐人分发私有 session。每一份 response 被接受前都必须重新通过同一公开面审计。
+`COLLECTION_NOT_OPEN` 是主动门禁，不是缺少工程能力。真实浏览器开发者 pilot 已完成：三条匿名 clip 均达到 2/2 完整播放，汇总 dropped frame 为 0，画面实测 960×540 CSS px，无原生 controls、repo link 或禁用的 method/mapping 字样；response 保持 `UNLOCKED`，没有填写或下载结果。CLIP-01 首次播放因基线读取发生在解码已经开始后，记录为 decoded 140，而不是改写成 144；冻结 gate 要求的是正 frame delta 与 dropped 0。
+
+这个 pilot 只能证明界面门控，不能算人类审片。正式采集前还要把包含本记录的最终 public source 部署，并针对该精确状态重跑 3,226-value leak audit；通过后才能逐人分发私有 session。每一份 response 被接受前都必须再次通过同一公开面审计。
 
 人类 count 仍是 0。participant blinding 不等于独立 operator double-blinding；远程显示器不统一；motion blur、4K 投影、跨场景/机器、表演、叙事、photorealism 与整体电影感均不在声明内。
 

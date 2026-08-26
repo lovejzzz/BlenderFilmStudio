@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>部署 B35 公开面，再对最终 commit 重跑 leak gate。</h3><p>B35 新 realization 与 private package 已经通过真实 Blender、lossless carrier、独立 audit 和 sensitive-value injection attack；公开 commitment 自身与 3,226 个 registry values 匹配 0。页面部署会改变公开树，因此 collection 仍未开放。下一门是最终 deploy commit 的 same-state scan，再进行不计入样本的真实浏览器 pilot。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>发布 B35 最终公开源码，并对精确 commit 重跑 leak gate。</h3><p>B35 新 realization、private package 与真实浏览器界面 pilot 均已通过各自工程门；三条匿名 clip 各 2/2、汇总 dropped 0，但没有生成 response。页面发布会改变公开树，因此 collection 仍未开放。下一门是最终 deploy commit 的 same-state 3,226-value scan；通过后仍需 18 位独立观察者，不能由开发者补数。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
