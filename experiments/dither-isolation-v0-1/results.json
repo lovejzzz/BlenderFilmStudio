@@ -1,0 +1,102 @@
+{
+  "documentType": "BFS_B16_DITHER_ISOLATION_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T10:15:15.998Z",
+  "decision": "DITHER_NOT_SUFFICIENT",
+  "validExperiment": true,
+  "exactDecodedPixels": false,
+  "intervention": {
+    "before": 1,
+    "after": 0,
+    "configuratorSha256": "7c80c8ca1bfd36e6df41f16610fce9b1a69b0ab4e72efaf4a1a4ff17c9f115f4"
+  },
+  "baseline": {
+    "experiment": "B15",
+    "ditherIntensity": 1,
+    "frameCount": 144,
+    "containerExactFrames": 0,
+    "decodedPixelExactFrames": 127,
+    "failedPixels": 114,
+    "maximumAbsoluteError": 0.003921583294868469
+  },
+  "ditherZero": {
+    "aSequenceHash": "fdfa9abc8716025c00b5d48c04d53b7262df301e5c7cc04f65479f926178e2b7",
+    "bSequenceHash": "b82f55e94351865a757dfba372e572e002f24ab45ac165e2af0ed48042047cb8",
+    "containerExactFrames": 0,
+    "decodedPixelExactFrames": 130,
+    "maximumAbsoluteError": 0.003921598196029663,
+    "totalFailurePixels": 69,
+    "aRenderSeconds": 23.801723,
+    "bRenderSeconds": 23.682913
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "rendererSha256": "b969e267db7b73eb7b6f8ea17abf09b2e129b9fce2e706fec950c5bb5e5eda5c",
+    "comparatorSha256": "cd770959a1e92c5df66d86d376870d4a961347276a637514e3bb37da1e697b4e",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "attacks": [
+    {
+      "id": "N_CONFIGURATOR_SHA",
+      "expectedReason": "CONFIGURATOR_SHA",
+      "observedReason": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_INTERVENTION_VALUE",
+      "expectedReason": "INTERVENTION_VALUE",
+      "observedReason": "INTERVENTION_VALUE",
+      "pass": true
+    },
+    {
+      "id": "N_STARTING_DITHER",
+      "expectedReason": "STARTING_DITHER",
+      "observedReason": "STARTING_DITHER",
+      "pass": true
+    },
+    {
+      "id": "N_ALIAS_RUNS",
+      "expectedReason": "ALIAS_RUNS",
+      "observedReason": "ALIAS_RUNS",
+      "pass": true
+    },
+    {
+      "id": "N_A_MISSING_FRAME",
+      "expectedReason": "D0-A_MISSING_FRAME",
+      "observedReason": "D0-A_MISSING_FRAME",
+      "pass": true
+    },
+    {
+      "id": "N_B_MISSING_FRAME",
+      "expectedReason": "D0-B_MISSING_FRAME",
+      "observedReason": "D0-B_MISSING_FRAME",
+      "pass": true
+    },
+    {
+      "id": "N_B_EXTRA_FRAME",
+      "expectedReason": "D0-B_EXTRA_FRAME",
+      "observedReason": "D0-B_EXTRA_FRAME",
+      "pass": true
+    },
+    {
+      "id": "N_B_FRAME_SHA",
+      "expectedReason": "D0-B_FRAME_SHA",
+      "observedReason": "D0-B_FRAME_SHA",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "comparison": "experiments/dither-isolation-v0-1/evidence/D0.sequence.comparison.json",
+    "d0aManifest": "experiments/dither-isolation-v0-1/evidence/D0-A.sequence.manifest.json",
+    "d0bManifest": "experiments/dither-isolation-v0-1/evidence/D0-B.sequence.manifest.json"
+  },
+  "nonClaims": [
+    "A dither-zero exact result would show that dither is necessary for the observed B15 variation under this profile; it would not prove every Blender nondeterminism source is eliminated.",
+    "Disabling dither may increase visible banding and is not automatically the preferred artistic review setting.",
+    "The experiment does not select a perceptual tolerance.",
+    "Eevee 8-bit proxy behavior is not Cycles EXR master behavior.",
+    "Same-machine evidence is not cross-device evidence."
+  ]
+}

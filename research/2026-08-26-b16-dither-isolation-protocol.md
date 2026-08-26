@@ -2,7 +2,7 @@
 
 Date frozen: 2026-08-26, before implementing the dither configurator or rendering either D0 sequence.
 
-Status: **PRE-REGISTERED / NOT YET EXECUTED**
+Status: **EXECUTED / DITHER_NOT_SUFFICIENT**
 
 ## Evidence-supported candidate
 
@@ -59,3 +59,7 @@ Every case must reach its intended stable reason on disposable copies.
 - no Cycles EXR or master-output conclusion is made;
 - no cross-platform conclusion is made;
 - an exact D0 result does not prove all Blender operations are deterministic.
+
+## Execution result
+
+D0-A/B passed 8/8 attacks but only 130/144 decoded frames were exact. Fourteen frames contained 69 failed pixels; maximum channel error remained `0.003921598196029663`. The pre-registered decision is `DITHER_NOT_SUFFICIENT`.

@@ -218,6 +218,19 @@ Protocol: `research/2026-08-26-b16-dither-isolation-protocol.md`.
 
 Status at freeze: configurator and runner do not exist; D0-A and D0-B have not started.
 
+Formal execution observation:
+
+- both runs verified before `1.0`, requested/after `0.0`, and did not save the source `.blend`;
+- D0-A/B: 130/144 decoded frames exact;
+- 14 frames contained 69 failed pixels; maximum channel error `0.003921598196029663`;
+- 0/144 PNG containers byte-identical;
+- D0-A `23.801723 s`, D0-B `23.682913 s`;
+- 8/8 negative cases reached their intended reason.
+
+Verdict: `DITHER_NOT_SUFFICIENT`. Turning output dithering off does not restore exact Eevee sequence reproducibility. The reduced count relative to B15 is not promoted as an improvement because these are independent runs. Repeated differing frames and nearby coordinates point next toward render sampling or evaluation order.
+
+Artifacts: `experiments/dither-isolation-v0-1/results.json`, `experiments/dither-isolation-v0-1/evidence/` and `research/2026-08-26-b16-dither-isolation-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:

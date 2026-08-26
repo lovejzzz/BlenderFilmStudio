@@ -45,8 +45,8 @@ const gaps: {
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: 'B01/B02 结构与选定 Cycles 像素复现通过；B06 证伪 Bullet；B07/B08 锁定轨迹零误差；B14 完成 144 帧；B15 同源 A/B 正式证伪 Eevee 全序列 exact（127/144 帧 exact）。',
-    missing: 'Eevee 微差来源、预注册感知容差、跨 GPU、驱动、OS、补丁版本、角色求值、渲染噪声与模拟缓存边界仍未知。',
+    known: 'B01/B02 结构与选定 Cycles 像素复现通过；B06 证伪 Bullet；B07/B08 锁定轨迹零误差；B14 完成 144 帧；B15 证伪 Eevee exact；B16 又证伪“输出 dither 是充分原因”。',
+    missing: 'Eevee 微差的采样/求值来源、预注册感知容差、跨 GPU、驱动、OS、补丁版本、角色求值、渲染噪声与模拟缓存边界仍未知。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
   },
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>隔离 B15 的一-code-value 微差来源，并预注册感知容差实验。</h3><p>精确相等已经被证伪，下一步不能事后宣布“足够接近”。应分别控制 Eevee 采样、线程、颜色量化与写盘路径，再在看结果前冻结设备级阈值；完整样片人审继续保持独立。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>继续隔离 Eevee sample count 与求值顺序。</h3><p>B16 证明 dither=0 仍有 69 个一-code-value 微差；43、91、93、110、111、114 等帧重复出现。下一步控制采样或并行度，在看结果前冻结门槛；完整样片人审继续独立。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/review-proxy-repro-v0-1">查看最新复现边界证据 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/dither-isolation-v0-1">查看最新因果隔离证据 →</Link></footer>
     </main>
   );
 }
