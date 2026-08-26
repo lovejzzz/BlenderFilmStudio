@@ -135,8 +135,8 @@ def main() -> None:
     if "FINISHED" not in result:
         raise RuntimeError(f"Render failed: {sorted(result)}")
     render_result = bpy.data.images.get("Render Result")
-    if render_result is None or not render_result.has_data:
-        raise RuntimeError("Render Result unavailable")
+    if render_result is None:
+        raise RuntimeError("Render Result data-block unavailable")
 
     save_count = 0
     render_result.save_render(str(png_path.resolve()), scene=scene)
