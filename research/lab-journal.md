@@ -174,6 +174,20 @@ Verdict: formal B14 automation true for a receipt-bound complete review proxy. I
 
 Artifacts: `experiments/review-dailies-v0-1/results.json`, `experiments/review-dailies-v0-1/evidence/`, `public/review-dailies-v0-1/` and `research/2026-08-26-b14-review-dailies-result.md`.
 
+## J-008 · Same-source proxy reproducibility freeze
+
+Type: live pre-experiment audit, 2026-08-26.
+
+Question: with the exact B14 renderer, spec, receipt, `.blend`, Blender binary and OCIO bytes held constant, are two complete Eevee proxy sequences identical as PNG containers and as decoded RGBA pixels?
+
+Run A is frozen by B14 evidence hash `c5fb0c83…3380c`, sequence hash `a52903fc…d56e4`, renderer SHA `b969e267…eda5c` and ReviewRenderSpec SHA `65db6ca2…9553`. The runner must reverify all 144 A frame bytes before producing run B.
+
+Decision: exact decoded equality is the primary hypothesis: 144/144 frames with maximum absolute error zero and zero failed pixels. No perceptual tolerance will be invented after looking at the data. A decoded difference will complete B15 as `FORMAL EXACT FALSIFIED`, not as an invalid run.
+
+Protocol: `research/2026-08-26-b15-review-proxy-repro-protocol.md`.
+
+Status at freeze: not executed. Comparator and B15 runner do not yet exist; run B has not started.
+
 ## Journal rule for future work
 
 Every promoted result must record:
