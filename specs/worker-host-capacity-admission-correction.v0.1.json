@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityAdmissionCorrection.v0.1",
+  "experimentId": "B40-C1",
+  "status": "PREREGISTERED_TOOL_CORRECTION_BEFORE_CORRECTED_TOOLING_OR_OUTPUT",
+  "baseProtocol": {
+    "experimentId": "B40",
+    "specPath": "specs/worker-host-capacity-admission.v0.1.json",
+    "specSha256": "fd21c27801a83f542a4aaa498fbc61867b3116509bb6e43769d83873146850ca",
+    "preregistrationCommit": "8c39b715e7e2bacae81ca1ab9b2570472cf73fde"
+  },
+  "invalidAttempt": {
+    "verdict": "EMULATOR_GATE",
+    "resultSha256": "7233f2782032bb9dd1370eaaa1558be10f0cdb861fc83582af40832066a9e5e0",
+    "auditSha256": "dc067337e1e47d66792c5d3b60101f02801668fe7b620d286514c26f6a1b38d5"
+  },
+  "changedImplementationExact": {
+    "oldGrammar": "^flags\\s+(.+)$",
+    "newGrammar": "^flags:\\s+(.+)$",
+    "expectedRawLine": "flags: POCF",
+    "expectedParsedFlags": "POCF"
+  },
+  "unchanged": [
+    "all B40 capacity thresholds and explanations",
+    "all B40 evidence ancestry hashes",
+    "all nine read-only probe classes",
+    "all forbidden operations",
+    "all four expected capacity blockers and their order",
+    "zero-swap, x64-emulator and zero-competing-container accepted gates",
+    "all 14 analyzer attacks",
+    "zero runtime operations"
+  ],
+  "acceptedVerdict": "WORKER_HOST_CAPACITY_BLOCKED_CORRECTED_PARSER",
+  "nonClaims": [
+    "The correction changes only the literal binfmt flags key grammar",
+    "The invalid attempt remains immutable and is not retroactively accepted",
+    "No Colima mutation, container lifecycle operation, Blender launch, image/archive download, cleanup or reserve override",
+    "No Blender compatibility, Eevee/EGL, performance, containment or production claim"
+  ]
+}
