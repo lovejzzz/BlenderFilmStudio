@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>把静帧 envelope 扩展到连续播放。</h3><p>B24 的 24 个未见帧、72 个新进程在 EXR 与 PNG 上均 72/72 通过预冻结数值门。下一步冻结完整序列的 temporal-difference 指标与盲评协议，检验稀疏差异是否会在运动中形成可察觉闪烁或不一致。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>把数值时间门交给真实审片，并隔离 frame 38。</h3><p>B25 三次完整序列的 temporal residual 429/429 通过，但静态门仅 430/432：A 在 frame 38 出现一簇 17 像素差异，B/C exact。下一步冻结匿名播放与观看条件，保持 human gate PENDING 直到真实审片者完成；同时用预注册重复与 GPU/进程诊断区分孤立事件和可重复机制。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/production-tolerance-holdout-v0-1">查看最新 holdout 实验 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/temporal-residual-holdout-v0-1">查看最新连续序列实验 →</Link></footer>
     </main>
   );
 }
