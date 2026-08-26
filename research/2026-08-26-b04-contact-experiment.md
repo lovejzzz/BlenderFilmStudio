@@ -66,7 +66,7 @@ All 10 evaluated checks passed:
 | clear-phase BVH overlap | `0 / 0` max pairs | exact zero |
 | endpoint proximity samples | `0.144780189 / 0.605083704 m` | `≥ 0.05 m` |
 
-HOLD overlap peaked at 11 triangle pairs and is recorded only as a count. It is not penetration depth, pressure, contact area, or evidence of an anatomically plausible grasp.
+HOLD overlap peaked at 11 source-polygon face pairs and is recorded only as a count. The v0.1 evaluator did not explicitly tessellate those polygon inputs, so the earlier “triangle pairs” wording was corrected. The count is not penetration depth, pressure, contact area, or evidence of an anatomically plausible grasp.
 
 ## Negative fixtures
 
@@ -98,3 +98,7 @@ The rendered proxy is intentionally crude. Automatic checks cannot establish:
 - performance quality.
 
 Human review is still `PENDING`; therefore `experimentComplete` is `false`. The next step is a blinded review package with fixed questions and failure labels, followed by a comparison of BVH pairs against a stronger signed-distance or contact representation if reviewers identify errors the current metrics miss.
+
+## Subsequent geometry diagnostic
+
+The separately preregistered v0.2 diagnostic explicitly tessellated both evaluated meshes and added exact unsigned separation plus an inside-vertex depth proxy. It detected `0.018445877 m` maximum HOLD depth, above the v0.1 `0.005 m` position tolerance. This does not rewrite the original 10/10 result; it demonstrates that those 10 checks were insufficient for contact quality. See `research/2026-08-26-b04-geometry-diagnostic-result.md`.

@@ -1,7 +1,7 @@
 {
   "documentType": "BFS_B04_CONTACT_EXPERIMENT",
   "experimentVersion": "0.1.0",
-  "executedAtUtc": "2026-08-26T04:57:48.741Z",
+  "executedAtUtc": "2026-08-26T05:16:07.677Z",
   "environment": {
     "blender": "5.2.0 LTS",
     "platform": "darwin-arm64",
@@ -21,12 +21,12 @@
       {
         "label": "run-a",
         "structureHash": "7fd1a426dacbdf1e7bba8a1f94fc327677c9036d7e3576eace707c5a56e63757",
-        "blendSha256": "439bab134202d6b13cfb06f61f2c852e2b28b83e575b27f6a19b8755decb555a"
+        "blendSha256": "1ee09716359e11a4a13103183db213ab17cc704af3d5a5e520b20b14be80f385"
       },
       {
         "label": "run-b",
         "structureHash": "7fd1a426dacbdf1e7bba8a1f94fc327677c9036d7e3576eace707c5a56e63757",
-        "blendSha256": "28ab375e679bcb5c4603104a446c6e129561ddf62af60b01f3f5df1fc29285db"
+        "blendSha256": "51f600b5be55d561c0e3c97e180608378e9d7989cefcc1dd90df6351334a023e"
       }
     ],
     "structureHashesEqual": true,
@@ -123,7 +123,7 @@
         "threshold": "<= 0.01 m"
       },
       {
-        "detail": "BVH triangle-pair overlap is evaluated every frame.",
+        "detail": "BVH source-polygon face-pair overlap is evaluated every frame.",
         "id": "B04_C09_CLEAR_PHASE_OVERLAP",
         "measured": {
           "ACQUIRE": 11,
@@ -220,7 +220,7 @@
       "rejected": true,
       "expected": "B04_C09_CLEAR_PHASE_OVERLAP=false",
       "observed": {
-        "detail": "BVH triangle-pair overlap is evaluated every frame.",
+        "detail": "BVH source-polygon face-pair overlap is evaluated every frame.",
         "id": "B04_C09_CLEAR_PHASE_OVERLAP",
         "measured": {
           "ACQUIRE": 7,
@@ -263,7 +263,7 @@
   },
   "experimentComplete": false,
   "explicitNonClaims": [
-    "BVH overlap pairs are not penetration depth or contact pressure.",
+    "The v0.1 BVH receives source polygons without explicit tessellation; overlap pairs are face-index pairs, not penetration depth or contact pressure.",
     "Vertex-to-surface proximity is a sampled clearance estimate, not an exact signed distance.",
     "Machine checks cannot establish anatomical grasp quality or believable weight.",
     "Human review remains pending and B04 is not complete while it is pending."

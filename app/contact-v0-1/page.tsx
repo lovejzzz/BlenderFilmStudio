@@ -50,8 +50,8 @@ export default function ContactV01Page() {
       <section className="contact-hero">
         <div className="contact-grid" aria-hidden="true" />
         <div className="contact-hero-copy"><p className="eyebrow"><span /> BLENDER 5.2 · EXECUTED · B04</p><h1>数值接触成立。<br /><span>可信抓取尚未成立。</span></h1><p>SceneSpec v0.3 把真实道具、资产绑定插槽、父级切换和求值几何写成可拒绝合同。机器结果全部通过；技术假手的观感仍必须交给人类审查。</p></div>
-        <aside className="contact-gate"><b>STOP GATE</b><strong>HUMAN REVIEW<br />PENDING</strong><code>machine 10 / 10</code><code>negatives 8 / 8</code><small>B04 experiment complete = FALSE</small></aside>
-        <div className="contact-stats"><article><strong>2 / 2</strong><span>净构建结构一致</span><small>7fd1a426…63757</small></article><article><strong>10 / 10</strong><span>机器检查</span><small>evaluated Blender state</small></article><article><strong>8 / 8</strong><span>反例被拒绝</span><small>schema → evaluator</small></article><article><strong>0.4806 m</strong><span>HOLD 搬运</span><small>threshold ≥ 0.30 m</small></article></div>
+        <aside className="contact-gate"><b>STOP GATE</b><strong>CONTACT QUALITY<br />NOT PASSED</strong><code>v0.1 checks 10 / 10</code><code>v0.2 depth proxy 18.45 mm</code><small>human review also pending</small></aside>
+        <div className="contact-stats"><article><strong>2 / 2</strong><span>净构建结构一致</span><small>7fd1a426…63757</small></article><article><strong>10 / 10</strong><span>v0.1 合同检查</span><small>correct, but insufficient</small></article><article><strong>18.45 mm</strong><span>HOLD 穿入深度代理</span><small>v0.2 · tolerance 5 mm</small></article><article><strong>8 / 8</strong><span>反例被拒绝</span><small>schema → evaluator</small></article></div>
       </section>
 
       <section className="section contact-verdict">
@@ -77,7 +77,14 @@ export default function ContactV01Page() {
         <div className="section-index light">03 / 自动验收</div>
         <div className="contact-heading"><div><p className="eyebrow"><span /> TEN CHECKS · EVALUATED STATE</p><h2>不是“约束存在”。<br />是<span>最终状态满足阈值。</span></h2></div><p>每帧从 Blender dependency graph 读取手掌、道具、约束与变形网格。BVH overlap 只代表相交三角形对，不代表穿透深度或压力。</p></div>
         <div className="contact-checks">{checks.map(([id, title, detail]) => <article key={id}><span>{id}</span><h3>{title}</h3><p>{detail}</p><b>PASS</b></article>)}</div>
-        <div className="contact-nonclaim"><b>MEASUREMENT LIMIT</b><p>HOLD 最大重叠为 11 个三角形对；这里仅记录，不解释为“11 mm”或任何穿透体积。端点间隙是 vertex-to-surface 采样，不是精确 signed distance。</p></div>
+        <div className="contact-nonclaim"><b>V0.1 MEASUREMENT LIMIT</b><p>HOLD 最大重叠为 11 个 source-polygon face pairs；这里仅记录，不解释为“11 mm”或任何穿透体积。端点间隙是 vertex-to-surface 采样，不是精确 signed distance。</p></div>
+      </section>
+
+      <section className="section contact-diagnostic">
+        <div className="section-index">03B / 更强诊断的负结果</div>
+        <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> V0.1 PASS ≠ CONTACT QUALITY PASS</p><h2>socket 几乎零误差，<br /><span>手仍穿入道具 18.45 mm。</span></h2></div><p>v0.2 显式三角化求值网格，计算非相交表面的精确无符号距离，并用闭合网格 ray parity + 最近表面距离报告 inside-vertex 深度代理。HOLD 的 60/60 帧均发生表面相交。</p></div>
+        <div className="diagnostic-result"><article><span>APPROACH</span><strong>0 / 36</strong><b>重叠帧</b><small>minimum separation 94.78 mm</small></article><article className="fail"><span>ACQUIRE</span><strong>68.33 mm</strong><b>最大深度代理</b><small>9 / 12 overlap frames</small></article><article className="fail"><span>HOLD</span><strong>18.45 mm</strong><b>最大深度代理</b><small>60 / 60 overlap frames</small></article><article><span>RETREAT</span><strong>0 / 24</strong><b>重叠帧</b><small>minimum separation 605.08 mm</small></article></div>
+        <div className="diagnostic-verdict"><b>CLASSIFICATION</b><code>V01_AUTOMATIC_PASS_INSUFFICIENT_FOR_CONTACT_QUALITY</code><p>这是对验证器能力的证伪，不是把原实验结果改成“没运行”。v0.1 的 10 项合同与时序检查确实通过；v0.2 证明它们不足以支持“接触质量通过”。</p></div>
       </section>
 
       <section className="section contact-failure">
@@ -95,9 +102,9 @@ export default function ContactV01Page() {
       <section className="section contact-limits" id="limits">
         <div className="section-index">06 / 当前停止门槛</div>
         <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> EXPERIMENT COMPLETE = FALSE</p><h2>自动化完成。<br /><span>研究尚未完成。</span></h2></div><p>预注册要求机器通过与人类盲审同时成立。当前预览已经足以提示抓取视觉仍不自然，因此不能把 B04 写成“可信接触已解决”。下一步应建立可重复的人类审查表，并升级手指/接触表示。</p></div>
-        <div className="contact-gates"><article><span>DONE</span><b>合同 / 哈希 / 双构建</b></article><article><span>DONE</span><b>10 项求值 / 8 个反例</b></article><article className="pending"><span>PENDING</span><b>盲化人类审查</b></article><article className="blocked"><span>NOT PROVEN</span><b>可信手指抓握与重量感</b></article></div>
+        <div className="contact-gates"><article><span>DONE</span><b>合同 / 哈希 / 双构建</b></article><article className="pending"><span>DIAGNOSTIC FAIL</span><b>HOLD 穿入深度代理 18.45 mm</b></article><article className="pending"><span>PENDING</span><b>盲化人类审查</b></article><article className="blocked"><span>NOT PROVEN</span><b>可信手指抓握与重量感</b></article></div>
         <div className="contact-review-action"><div><span>INDEPENDENT REVIEW · NO METRICS</span><b>如果你尚未看过本页数据，可以参加 CLIP_A17F 盲审。</b><p>独立页面只显示 6 秒视频和固定问题，答案下载为本地 JSON，不会上传个人信息。</p></div><Link href="/review-b04">打开盲审页面 →</Link></div>
-        <div className="contact-artifacts"><a href={`${repo}research/2026-08-26-b04-contact-benchmark-protocol.md`}><span>PROTOCOL</span><b>预注册实验协议 ↗</b></a><a href={`${repo}specs/scene-spec.v0.3.schema.json`}><span>CONTRACT</span><b>SceneSpec v0.3 Schema ↗</b></a><a href={`${repo}experiments/contact-v0-1/results.json`}><span>RAW RESULT</span><b>实验结果与反例 ↗</b></a><a href={`${repo}experiments/contact-v0-1/B04.contact-evaluation.json`}><span>144 FRAMES</span><b>逐帧求值记录 ↗</b></a></div>
+        <div className="contact-artifacts"><a href={`${repo}research/2026-08-26-b04-contact-benchmark-protocol.md`}><span>PROTOCOL</span><b>预注册实验协议 ↗</b></a><a href={`${repo}specs/scene-spec.v0.3.schema.json`}><span>CONTRACT</span><b>SceneSpec v0.3 Schema ↗</b></a><a href={`${repo}experiments/contact-v0-1/results.json`}><span>V0.1 RESULT</span><b>实验结果与反例 ↗</b></a><a href={`${repo}experiments/contact-v0-1/B04.geometry-v0-2.json`}><span>V0.2 DIAGNOSTIC</span><b>144 帧表面距离与深度代理 ↗</b></a></div>
       </section>
 
       <footer><div><span className="brand-mark">BFS</span><b>B04 Contact Benchmark</b></div><p>SceneSpec v0.3 · Blender 5.2.0 LTS · Evidence, not a demo reel</p><Link href="/research-agenda">继续研究路线 →</Link></footer>

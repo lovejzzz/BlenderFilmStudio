@@ -53,8 +53,8 @@ const gaps: {
   {
     id: 'G04', title: '代表性基准镜头组', type: 'experiment', priority: 'P0',
     question: '一个六秒室内镜头能否代表整条电影制作链？',
-    known: 'B01/B02 已包含结构/像素报告；B03 角色求值已执行；B04 SceneSpec v0.3 自动检查 10/10、反例 8/8、双净构建一致。',
-    missing: 'B04 人类盲审仍未完成；B05–B06、近景皮肤、毛发、模拟恢复、体积与大场景仍无实证。',
+    known: 'B01/B02 已包含结构/像素报告；B03 角色求值已执行；B04 v0.1 合同检查 10/10、反例 8/8、双净构建一致，但 v0.2 几何诊断检出 HOLD 18.45 mm 穿入深度代理。',
+    missing: 'B04 接触几何尚未修正且人类盲审未完成；B05–B06、近景皮肤、毛发、模拟恢复、体积与大场景仍无实证。',
     artifact: 'BFS Benchmark v0.1 · 6 Shots',
     gate: '六类镜头均能一键构建、失败、恢复、出具结构/像素/成本报告。',
   },
@@ -69,7 +69,7 @@ const gaps: {
   {
     id: 'G06', title: '数字演员与表演协议', type: 'engineering', priority: 'P1',
     question: '如何把身份、动作、面部、视线、呼吸和接触分成可编辑层？',
-    known: 'ActorSpec v0.1 已通过规范/资产/求值测试；B03 场景相对眼神与脚底接触通过；B04 技术手掌—道具拿取通过 144 帧机器测量。',
+    known: 'ActorSpec v0.1 已通过规范/资产/求值测试；B03 场景相对眼神与脚底接触通过；B04 证明了父级切换与 real-prop socket，但更强几何诊断检出持续 HOLD 穿入。',
     missing: '英雄角色的皮肤、毛发、口腔、微表演、多角色反应、手指抓握、受力与重量感仍没有端到端可靠解。',
     artifact: 'Executed ActorSpec v0.1 + B03/B04 Scene Integration',
     gate: '同一角色完成近景对白、全身行走和拿取道具，身份不漂移且每层可单独修改。',

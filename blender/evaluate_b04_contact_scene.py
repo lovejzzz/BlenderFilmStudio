@@ -154,7 +154,7 @@ def main() -> None:
         check("B04_C06_RELATIVE_DRIFT", relative_position_drift <= 0.005 and relative_rotation_drift <= 3.0, {"positionM": round(relative_position_drift, 9), "rotationDeg": round(relative_rotation_drift, 9)}, "<= 0.005 m and <= 3 deg", "Held relative transform remains stable."),
         check("B04_C07_TRANSPORT", transport >= 0.30, round(transport, 9), ">= 0.30 m", "Visible prop transport during HOLD."),
         check("B04_C08_SWITCH_POP", acquire_step <= 0.01 and release_step <= 0.01, {"acquireM": round(acquire_step, 9), "releaseM": round(release_step, 9)}, "<= 0.01 m", "Prop discontinuity across acquire and release switches."),
-        check("B04_C09_CLEAR_PHASE_OVERLAP", max_overlap_by_phase["APPROACH"] == 0 and max_overlap_by_phase["RETREAT"] == 0, max_overlap_by_phase, "APPROACH=0 and RETREAT=0 pairs", "BVH triangle-pair overlap is evaluated every frame."),
+        check("B04_C09_CLEAR_PHASE_OVERLAP", max_overlap_by_phase["APPROACH"] == 0 and max_overlap_by_phase["RETREAT"] == 0, max_overlap_by_phase, "APPROACH=0 and RETREAT=0 pairs", "BVH source-polygon face-pair overlap is evaluated every frame."),
         check("B04_C10_ENDPOINT_CLEARANCE", clearances["1"] >= 0.05 and clearances["144"] >= 0.05, {key: round(value, 9) for key, value in clearances.items()}, ">= 0.05 m", "Vertex-to-surface proximity samples at endpoints."),
     ]
     report = {
@@ -168,7 +168,7 @@ def main() -> None:
         "samples": samples,
         "humanReview": {"status": "PENDING", "required": True},
         "explicitNonClaims": [
-            "BVH overlap pairs are not penetration depth or contact pressure.",
+            "The v0.1 BVH receives source polygons without explicit tessellation; overlap pairs are face-index pairs, not penetration depth or contact pressure.",
             "Vertex-to-surface proximity is a sampled clearance estimate, not an exact signed distance.",
             "Machine checks cannot establish anatomical grasp quality or believable weight.",
             "Human review remains pending and B04 is not complete while it is pending.",

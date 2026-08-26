@@ -138,6 +138,8 @@ The executed implementation retained ActorSpec v0.1 because its existing `GRASP`
 
 Full measurements and deviations are recorded in `research/2026-08-26-b04-contact-experiment.md` and `experiments/contact-v0-1/results.json`.
 
+Post-run terminology correction: the v0.1 evaluator passed source mesh polygons to `BVHTree.FromPolygons(..., all_triangles=False)`. Its overlap indices therefore refer to the supplied polygon list, not an explicitly tessellated triangle list. The v0.2 geometry diagnostic performs explicit `Mesh.calc_loop_triangles()` and reports triangle-pair indices separately.
+
 ## Primary references
 
 - [Blender 5.2 manual — Child Of constraint](https://docs.blender.org/manual/en/5.2/animation/constraints/relationship/child_of.html)
