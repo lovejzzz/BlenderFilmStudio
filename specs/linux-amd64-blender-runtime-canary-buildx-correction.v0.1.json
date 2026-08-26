@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderRuntimeCanaryBuildxCorrection.v0.1",
+  "experimentId": "B41-C3",
+  "status": "PREREGISTERED_BEFORE_CORRECTION_TOOLING_OR_OUTPUT",
+  "question": "Can the same frozen B41 build context produce a true linux/amd64 image when transported through the existing Colima-guest buildx/BuildKit worker instead of the host legacy builder?",
+  "parent": {
+    "c2SpecSha256": "8875a592c9029af78f542547b8d07e2b189bc0e518fa9f693a474438c28dd38e",
+    "c2PreregistrationCommit": "a3b401750d0f097088e269aa712d2dafb83a7b80",
+    "c2ToolFreezeCommit": "12bf83684b3bc380c61398c39285cf30657e6197",
+    "failedResultSha256": "719902283d0f08d51319d73fbc51b74d7b4b42de3172ffbee7c4607a66dd9135",
+    "failedAuditSha256": "9419d0dfe0853d00eb838668fea213fcff502af1cb8ead6ff13ed0eb8e5fb7a5",
+    "failure": "REJECTED_LEGACY_BUILDER_PLATFORM_MISMATCH"
+  },
+  "buildTransport": {
+    "outerExecutable": "colima",
+    "outerArgsPrefix": ["ssh", "--"],
+    "innerExecutable": "docker",
+    "innerArgsPrefix": ["buildx", "build", "--platform", "linux/amd64", "--pull", "--load", "--progress", "plain"],
+    "buildxVersion": "v0.34.1",
+    "builderName": "default",
+    "driver": "docker",
+    "buildkitVersion": "v0.30.0",
+    "requiredPlatform": "linux/amd64",
+    "createOrInstallBuilder": false
+  },
+  "changedImplementationExact": "Replace the host docker legacy build invocation with the existing Colima guest docker buildx build --platform linux/amd64 --pull --load --progress plain invocation against the same absolute virtiofs build context.",
+  "frozenUnchanged": [
+    "B41/B41-C1/B41-C2 ancestry, architecture normalization and receipt corrections",
+    "official archive and OCIO identities",
+    "Dockerfile bytes, base image digest, tag and build context",
+    "disk admission and runtime Docker socket",
+    "container resource, mount, environment and security contract",
+    "success Eevee and forced-timeout canaries",
+    "accepted verdict, audit and non-claims"
+  ],
+  "acceptedVerdict": "LINUX_AMD64_BLENDER_5_2_CANARY_AND_TIMEOUT_SUPPORTED",
+  "nonClaims": [
+    "B41-C3 changes build transport only",
+    "Buildx platform support does not itself prove the final image or Blender runtime",
+    "All previous runtime and production non-claims remain active"
+  ]
+}
