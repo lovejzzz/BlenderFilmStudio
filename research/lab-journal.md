@@ -188,6 +188,22 @@ Protocol: `research/2026-08-26-b15-review-proxy-repro-protocol.md`.
 
 Status at freeze: not executed. Comparator and B15 runner do not yet exist; run B has not started.
 
+First execution failures: Node stopped before Blender because `realpath` was imported from `node:path`. After correction, a complete candidate measured 126/144 exact decoded frames, but two SHA attacks left `copy.png`, so the earlier extra-frame gate fired and only 6/8 attacks reached their intended reason. That candidate was `INVALID EXPERIMENT`.
+
+Formal execution after fixing the fixture extension and regenerating run B:
+
+- 0/144 PNG files byte-identical;
+- 127/144 decoded RGBA frames pixel-exact;
+- 17 frames and 114 of 74,649,600 pixels differed (`0.0001527%`);
+- maximum channel difference `0.003921583294868469`, about one 8-bit code value;
+- worst frame 94 had 14 failed pixels;
+- A sequence `a52903fc…d56e4`, B sequence `ad3b8930…27139`;
+- 8/8 attacks returned the frozen reason.
+
+Verdict: `FORMAL EXACT FALSIFIED`. No perceptual tolerance was pre-registered, so B15 does not call the tiny magnitude a bounded pass. Exact Eevee proxy determinism is not a valid invariant here.
+
+Artifacts: `experiments/review-proxy-repro-v0-1/results.json`, `experiments/review-proxy-repro-v0-1/evidence/` and `research/2026-08-26-b15-review-proxy-repro-result.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:

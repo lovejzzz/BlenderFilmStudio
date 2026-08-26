@@ -2,7 +2,7 @@
 
 Date frozen: 2026-08-26, before implementing the sequence comparator and before rendering run B.
 
-Status: **PRE-REGISTERED / NOT YET EXECUTED**
+Status: **EXECUTED / FORMAL EXACT FALSIFIED**
 
 ## Triggering observation
 
@@ -65,6 +65,10 @@ Each attack must fail with its intended stable reason. Authoritative B14 evidenc
 - `INVALID EXPERIMENT`: a control/identity/attack gate fails.
 
 Falsification is a completed scientific result, not a failed task.
+
+## Post-freeze execution notes
+
+The first launch failed before Blender because `realpath` came from the wrong Node module. A later complete candidate remained invalid because two SHA fixtures used a temporary `.png` name and triggered the extra-frame gate first (6/8 attacks). After changing only the fixture extension to `.tmp`, run B and comparison were regenerated. The authoritative experiment passed 8/8 attacks and falsified exact decoded equality: 127/144 exact frames, 114 failed pixels, maximum channel error `0.003921583294868469`.
 
 ## Explicit non-claims
 
