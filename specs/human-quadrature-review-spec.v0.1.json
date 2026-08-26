@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "documentType": "BFS_HUMAN_QUADRATURE_REVIEW_SPEC",
+  "version": "0.1.0",
+  "experimentId": "B34-HUMAN-Q8-v0.1",
+  "status": "PREREGISTERED_BEFORE_CARRIER_TOOLING_OR_OUTPUTS",
+  "question": "Under recorded remote viewing conditions, do independent observers show a directional temporal-stability preference between a six-second Q8 sequence and NATURAL32, with Q4 retained as a diagnostic cost point?",
+  "standardsBasis": {
+    "primary": {
+      "name": "ITU-R BT.500-15",
+      "statusChecked": "in force (Main) on 2026-08-26",
+      "url": "https://www.itu.int/rec/R-REC-BT.500-15-202305-I/en"
+    },
+    "scope": "remote controlled-record study informed by BT.500; not represented as a calibrated BT.500 laboratory implementation"
+  },
+  "evidenceBasis": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "b26SpecSha256": "e54d72f5f844d1dbc1b95bc6778dc3249762d82e0a936dca44e7ecb231b572d6",
+    "b26ResultSha256": "fda08bbb7394d19b0fd03966c2a1825942a7550fbf3fdf78279d62d86fd9b26e",
+    "b26PackageStatus": "CARRIER_AND_INTERFACE_READY",
+    "b26HumanStatus": "PENDING",
+    "b33SpecSha256": "79fe033683352c4b8295d47bfca112ace7c7a9440ffdaa992933999fb8468ddf",
+    "b33ResultSha256": "e6728f75a224ba46f938ce21b2dbe03f44aa731d68f876abea40e78f03a81e44",
+    "b33AnalysisSha256": "3f7a5204111a219eaec395055d7f44f8b4c94fbd49ab545142b817c060ea3534",
+    "b33Decision": "Q8_TEMPORAL_PROXY_HOLDOUT_SUPPORT"
+  },
+  "b26GapAudit": {
+    "sourceMismatch": "B26 compares three B25 NATURAL32 replicate sequences; it does not compare NATURAL32, Q4 and Q8.",
+    "distributionGap": "B26 observer sessions remain local ignored work and have not been distributed to independent observers.",
+    "responseGap": "B26 downloads response JSON but has no accepted-response validator, locked response ledger or unblinded formal analyzer.",
+    "humanCount": 0,
+    "reuseDecision": "reuse the proven lossless carrier and blinding patterns, but create new B34 sources, mappings, sessions and response tooling"
+  },
+  "source": {
+    "reviewSpecUri": "specs/review-render-spec.v0.1.json",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+  },
+  "runtime": {
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderBinarySha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "ffmpegVersion": "8.1.2",
+    "ffmpegSha256": "1332dc2de372bade9a8a63da0d6cdfab9de97fcefbae707bcc0b0506e1203327",
+    "ffprobeVersion": "8.1.2",
+    "ffprobeSha256": "4322275c1c2ac6ba15c695b288788bc1204e75211b3d5c030e5812c82a6dff73",
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "motionBlur": false,
+    "dither": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true
+  },
+  "renderDesign": {
+    "frames": { "start": 1, "end": 144, "count": 144, "fps": 24, "durationSeconds": 6 },
+    "resolution": [960, 540],
+    "output": "OPEN_EXR RGBA 32-bit float ZIP",
+    "schedule": [
+      "NATURAL32",
+      "Q4_1", "Q4_2", "Q4_3", "Q4_4",
+      "Q8_1", "Q8_2", "Q8_3", "Q8_4", "Q8_5", "Q8_6", "Q8_7", "Q8_8"
+    ],
+    "natural32": { "samples": 32, "jitter": null, "processes": 1, "renderCalls": 144 },
+    "quadrature4": {
+      "samplesPerComponent": 32,
+      "points": [[-0.25, -0.25], [-0.25, 0.25], [0.25, -0.25], [0.25, 0.25]],
+      "weights": [0.25, 0.25, 0.25, 0.25],
+      "processes": 4,
+      "renderCalls": 576
+    },
+    "stratified8": {
+      "samplesPerComponent": 32,
+      "points": [
+        [-0.375, -0.375], [-0.375, 0.125], [-0.125, -0.125], [-0.125, 0.375],
+        [0.125, -0.375], [0.125, 0.125], [0.375, -0.125], [0.375, 0.375]
+      ],
+      "weights": [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
+      "processes": 8,
+      "renderCalls": 1152
+    },
+    "totalProcesses": 13,
+    "totalRenderCalls": 1872,
+    "allProcessesMustBeUnique": true,
+    "allOutputsMustBeNew": true,
+    "compositeDomain": "scene-linear RGB",
+    "realizationScope": "one frozen six-second realization per method; no whole-sequence cross-process repeatability claim"
+  },
+  "displayTransform": {
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "look": "None",
+    "exposure": 0,
+    "gamma": 1,
+    "output": "PNG RGBA 8-bit",
+    "dither": 0.0,
+    "method": "write scene-linear composites, load them in frozen Blender/OCIO, and save_render through the pinned scene display/view settings",
+    "threeVisibleMethods": ["NATURAL32", "QUADRATURE4", "STRATIFIED8"]
+  },
+  "carrier": {
+    "container": "WebM",
+    "codec": "VP9",
+    "profile": "Profile 1",
+    "pixelFormat": "gbrp",
+    "lossless": true,
+    "audio": false,
+    "frameRate": 24,
+    "acceptance": "decode all 144 frames to RGB and require 144/144 exact display-PNG pixels, maximum error 0 and zero changed RGB pixels",
+    "visibleFileNames": ["CLIP-01.webm", "CLIP-02.webm", "CLIP-03.webm"]
+  },
+  "resourceGate": {
+    "minimumFreeBytesBeforeRender": 8589934592,
+    "workDirectoriesMustStartEmpty": true,
+    "componentExrRetention": "retain until package result and all hashes are committed; later cleanup requires an explicit recorded action and remains reproducible by rerun"
+  },
+  "observerDesign": {
+    "formalTargetValidIndependentObservers": 18,
+    "formalMinimumValidIndependentObservers": 15,
+    "permutationCount": 6,
+    "balanceAtTarget": "each method-order permutation appears exactly three times",
+    "developerOwnerPilotClassification": "INTERFACE_PILOT_ONLY",
+    "directDevelopersExcluded": true,
+    "primaryComparison": "STRATIFIED8 versus NATURAL32 temporal stability",
+    "diagnosticMethod": "QUADRATURE4",
+    "singleClipScale": ["NONE", "BARELY_VISIBLE", "MILD", "OBVIOUS", "SEVERE"],
+    "pairwiseChoices": ["LEFT_MORE_STABLE", "INDISTINGUISHABLE", "RIGHT_MORE_STABLE"],
+    "playsPerClip": 2,
+    "playbackRate": 1.0,
+    "pauseSeekLoopAllowed": false
+  },
+  "viewingValidity": {
+    "studyClass": "REMOTE_CONTROLLED_RECORD_NOT_CALIBRATED_LAB",
+    "minimumDisplayNativeResolution": [1920, 1080],
+    "displayRefreshRateMustBeIntegerMultipleOfFps": true,
+    "acceptedRefreshRatesHz": [48, 72, 96, 120, 144, 240],
+    "browserZoomPercent": 100,
+    "requiredCssVideoSize": [960, 540],
+    "recommendedViewingDistance": "approximately three displayed-picture heights",
+    "ambient": "dim and stable; record description",
+    "videoPlaybackQualityDroppedFramesMaximum": 0,
+    "record": [
+      "anonymous observer id", "expertise", "direct development involvement",
+      "visual acuity and colour-vision screening", "display manufacturer/model/native resolution/refresh rate",
+      "browser and OS", "devicePixelRatio and browser zoom confirmation", "brightness setting",
+      "viewing distance", "ambient description", "session timestamps", "carrier hashes",
+      "per-play totalVideoFrames and droppedVideoFrames", "session mapping commitment"
+    ]
+  },
+  "blinding": {
+    "visibleLabels": ["CLIP-01", "CLIP-02", "CLIP-03"],
+    "underlyingLabels": ["NATURAL32", "QUADRATURE4", "STRATIFIED8"],
+    "sixOrderPermutations": ["NQ4Q8", "NQ8Q4", "Q4NQ8", "Q4Q8N", "Q8NQ4", "Q8Q4N"],
+    "mappingCommitment": "SHA-256 over canonical session mapping plus independent 32-byte salt",
+    "mappingStorage": "sealed ignored local work; absent from observer package and public manifest",
+    "unblindRule": "a response must be hash-locked before that session is analyzed; unused session mappings remain sealed"
+  },
+  "responseChain": {
+    "observerOutput": "one immutable JSON response download with canonical SHA-256",
+    "validator": "bind response to spec, session commitment, carrier hashes, complete fields, playback telemetry and response hash",
+    "acceptedLedger": "append accepted anonymous response hashes; never overwrite an accepted response",
+    "formalAnalyzer": "may emit a formal outcome only when 18 valid independent responses form the frozen balanced schedule",
+    "privacy": "do not collect names, email addresses or raw vision-health details"
+  },
+  "formalDecision": {
+    "invalidPackageOrResponse": "INVALID_REVIEW",
+    "zeroValidResponses": "HUMAN_REVIEW_PENDING",
+    "oneToFourteenValidIndependentResponses": "INFORMAL_REVIEW_ONLY",
+    "fifteenToSeventeenValidIndependentResponses": "FORMAL_REVIEW_INCOMPLETE",
+    "q8PreferenceSupport": "At least 14 of all 18 valid observers directionally choose Q8 as more stable than NATURAL32, and the count rating Q8 MILD-or-worse is not greater than the NATURAL32 count.",
+    "naturalPreferenceSupport": "At least 14 of all 18 valid observers directionally choose NATURAL32 as more stable than Q8, and the count rating NATURAL32 MILD-or-worse is not greater than the Q8 count.",
+    "noDirectionalDifference": "At least 14 of all 18 choose INDISTINGUISHABLE for Q8 versus NATURAL32 and no more than two observers rate either primary method MILD-or-worse.",
+    "q8PreferenceLabel": "Q8_TEMPORAL_PREFERENCE_SUPPORT",
+    "naturalPreferenceLabel": "NATURAL_TEMPORAL_PREFERENCE_SUPPORT",
+    "noDirectionalDifferenceLabel": "NO_DIRECTIONAL_DIFFERENCE_OBSERVED_UNDER_TEST_CONDITIONS",
+    "otherwise": "OBSERVER_DISAGREEMENT",
+    "q4Rule": "Q4 single-clip and pairwise observations are secondary descriptive results and cannot change the primary Q8-versus-NATURAL decision."
+  },
+  "attacksRequired": [
+    "wrong B34 spec or evidence-basis hash",
+    "wrong scene, Blender, OCIO, FFmpeg or FFprobe identity",
+    "changed frame range, point set, weights, samples, threads or method schedule",
+    "missing or duplicate render process ID",
+    "missing, reordered or hash-mismatched EXR",
+    "non-empty work directory or insufficient free-space preflight",
+    "changed scene-linear compositing weights or display transform",
+    "missing, duplicate or non-exact display PNG",
+    "carrier codec, profile, rate, geometry or duration mismatch",
+    "carrier RGB roundtrip mismatch",
+    "unbalanced or altered session schedule",
+    "sealed mapping exposed to observer package",
+    "mapping commitment mismatch",
+    "native pause, seek, loop or rate controls exposed in primary session",
+    "wrong playback count or dropped video frame",
+    "display refresh not an integer multiple of 24",
+    "required viewing record missing",
+    "developer or owner counted as independent observer",
+    "response hash, carrier binding or session commitment mismatch",
+    "response mutation after acceptance",
+    "unblinding before response lock",
+    "duplicate observer or duplicate session",
+    "formal decision below 18 valid balanced responses",
+    "Q4 secondary observation incorrectly changes the primary decision"
+  ],
+  "nonClaims": [
+    "Package generation, carrier integrity and interface automation are not human observations.",
+    "The remote study is informed by ITU-R BT.500-15 but is not a calibrated BT.500 laboratory implementation.",
+    "One six-second realization does not establish whole-sequence or cross-machine render repeatability.",
+    "Motion blur is disabled; the study does not validate motion-blur quality.",
+    "A Q8 preference or no-difference result would apply only to these carriers, observers and recorded viewing conditions.",
+    "Temporal-stability preference is not a judgment of acting, narrative, composition or general cinematic merit.",
+    "The study does not validate 4K projection, another scene, another engine, a delivery codec or the optimality of the Q8 point set."
+  ]
+}
