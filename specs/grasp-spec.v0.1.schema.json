@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/grasp-spec.v0.1.schema.json",
+  "title": "Blender Film Studio GraspSpec v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentType", "specVersion", "id", "actorRef", "propRef", "palmSocket", "fingerChains", "contactPatches", "phases", "solverPolicy", "acceptance", "security", "provenance"],
+  "properties": {
+    "documentType": { "const": "BFS_GRASP_SPEC" },
+    "specVersion": { "const": "0.1.0" },
+    "id": { "$ref": "#/$defs/id" },
+    "actorRef": { "$ref": "#/$defs/id" },
+    "propRef": { "$ref": "#/$defs/id" },
+    "palmSocket": { "$ref": "#/$defs/id" },
+    "fingerChains": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "role", "bones", "tipSocket"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "role": { "enum": ["THUMB", "INDEX", "MIDDLE", "RING", "LITTLE"] },
+          "tipSocket": { "$ref": "#/$defs/id" },
+          "bones": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["boneSemantic", "rotationAxis", "minimumDeg", "maximumDeg", "restDeg", "ikStiffness"],
+              "properties": {
+                "boneSemantic": { "$ref": "#/$defs/id" },
+                "rotationAxis": { "enum": ["X", "Y", "Z"] },
+                "minimumDeg": { "type": "number", "minimum": -180, "maximum": 180 },
+                "maximumDeg": { "type": "number", "minimum": -180, "maximum": 180 },
+                "restDeg": { "type": "number", "minimum": -180, "maximum": 180 },
+                "ikStiffness": { "type": "number", "minimum": 0, "maximum": 0.99 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contactPatches": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "fingerRef", "tipSocket", "propObjectRef", "targetPointLocalM", "targetNormalLocal", "separationRangeM", "frictionCoefficientAssumption"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "fingerRef": { "$ref": "#/$defs/id" },
+          "tipSocket": { "$ref": "#/$defs/id" },
+          "propObjectRef": { "$ref": "#/$defs/id" },
+          "targetPointLocalM": { "$ref": "#/$defs/vec3" },
+          "targetNormalLocal": { "$ref": "#/$defs/unitVec3" },
+          "separationRangeM": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["minimum", "maximum"],
+            "properties": {
+              "minimum": { "type": "number", "minimum": 0, "maximum": 0.02 },
+              "maximum": { "type": "number", "exclusiveMinimum": 0, "maximum": 0.03 }
+            }
+          },
+          "frictionCoefficientAssumption": { "type": "number", "minimum": 0, "maximum": 2 }
+        }
+      }
+    },
+    "phases": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approach", "closure", "hold", "release"],
+      "properties": {
+        "approach": { "$ref": "#/$defs/frameRange" },
+        "closure": { "$ref": "#/$defs/frameRange" },
+        "hold": { "$ref": "#/$defs/frameRange" },
+        "release": { "$ref": "#/$defs/frameRange" }
+      }
+    },
+    "solverPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "ikSolver", "jointLimitSource", "allowStretch", "allowScriptedDrivers"],
+      "properties": {
+        "mode": { "enum": ["KEYFRAMED_JOINTS", "DECLARED_IK_TARGETS"] },
+        "ikSolver": { "enum": ["STANDARD", "ITASC", "NONE"] },
+        "jointLimitSource": { "const": "POSE_BONE_IK_LIMITS" },
+        "allowStretch": { "const": false },
+        "allowScriptedDrivers": { "const": false }
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxJointLimitViolationDeg", "maxPenetrationDepthM", "minimumActiveContacts", "minimumOpposingNormalAngleDeg", "maxHoldDriftM", "visibilityRequired", "humanReview"],
+      "properties": {
+        "maxJointLimitViolationDeg": { "type": "number", "minimum": 0, "maximum": 5 },
+        "maxPenetrationDepthM": { "type": "number", "minimum": 0, "maximum": 0.01 },
+        "minimumActiveContacts": { "type": "integer", "minimum": 2, "maximum": 8 },
+        "minimumOpposingNormalAngleDeg": { "type": "number", "minimum": 90, "maximum": 180 },
+        "maxHoldDriftM": { "type": "number", "minimum": 0, "maximum": 0.02 },
+        "visibilityRequired": { "const": true },
+        "humanReview": { "const": "REQUIRED" }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["networkAccess", "arbitraryPython"],
+      "properties": {
+        "networkAccess": { "const": false },
+        "arbitraryPython": { "const": false }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["briefId", "createdBy", "createdAtUtc", "sources"],
+      "properties": {
+        "briefId": { "$ref": "#/$defs/id" },
+        "createdBy": { "type": "string", "minLength": 1 },
+        "createdAtUtc": { "type": "string", "format": "date-time" },
+        "sources": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{1,63}$" },
+    "vec3": { "type": "array", "prefixItems": [{ "type": "number" }, { "type": "number" }, { "type": "number" }], "items": false, "minItems": 3, "maxItems": 3 },
+    "unitVec3": { "allOf": [{ "$ref": "#/$defs/vec3" }], "description": "Compiler must reject vectors whose Euclidean length differs from 1 by more than 1e-6." },
+    "frameRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": { "start": { "type": "integer", "minimum": 1 }, "end": { "type": "integer", "minimum": 1 } }
+    }
+  }
+}

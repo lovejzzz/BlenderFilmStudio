@@ -1,0 +1,79 @@
+{
+  "documentType": "BFS_GRASP_SPEC",
+  "specVersion": "0.1.0",
+  "id": "GRASP_B05_TWO_FINGER",
+  "actorRef": "ACTOR_B05",
+  "propRef": "PROP_B05",
+  "palmSocket": "PALM_R",
+  "fingerChains": [
+    {
+      "id": "FINGER_THUMB",
+      "role": "THUMB",
+      "tipSocket": "THUMB_TIP",
+      "bones": [
+        { "boneSemantic": "THUMB_PROXIMAL", "rotationAxis": "Z", "minimumDeg": -10, "maximumDeg": 65, "restDeg": 5, "ikStiffness": 0.35 },
+        { "boneSemantic": "THUMB_DISTAL", "rotationAxis": "Z", "minimumDeg": 0, "maximumDeg": 75, "restDeg": 8, "ikStiffness": 0.25 }
+      ]
+    },
+    {
+      "id": "FINGER_INDEX",
+      "role": "INDEX",
+      "tipSocket": "INDEX_TIP",
+      "bones": [
+        { "boneSemantic": "INDEX_PROXIMAL", "rotationAxis": "Z", "minimumDeg": 0, "maximumDeg": 90, "restDeg": 4, "ikStiffness": 0.35 },
+        { "boneSemantic": "INDEX_DISTAL", "rotationAxis": "Z", "minimumDeg": 0, "maximumDeg": 95, "restDeg": 6, "ikStiffness": 0.25 }
+      ]
+    }
+  ],
+  "contactPatches": [
+    {
+      "id": "CONTACT_THUMB",
+      "fingerRef": "FINGER_THUMB",
+      "tipSocket": "THUMB_TIP",
+      "propObjectRef": "PROP_BODY",
+      "targetPointLocalM": [-0.05, 0, 0],
+      "targetNormalLocal": [-1, 0, 0],
+      "separationRangeM": { "minimum": 0.001, "maximum": 0.003 },
+      "frictionCoefficientAssumption": 0.5
+    },
+    {
+      "id": "CONTACT_INDEX",
+      "fingerRef": "FINGER_INDEX",
+      "tipSocket": "INDEX_TIP",
+      "propObjectRef": "PROP_BODY",
+      "targetPointLocalM": [0.05, 0, 0],
+      "targetNormalLocal": [1, 0, 0],
+      "separationRangeM": { "minimum": 0.001, "maximum": 0.003 },
+      "frictionCoefficientAssumption": 0.5
+    }
+  ],
+  "phases": {
+    "approach": { "start": 1, "end": 36 },
+    "closure": { "start": 37, "end": 48 },
+    "hold": { "start": 49, "end": 108 },
+    "release": { "start": 109, "end": 120 }
+  },
+  "solverPolicy": {
+    "mode": "DECLARED_IK_TARGETS",
+    "ikSolver": "STANDARD",
+    "jointLimitSource": "POSE_BONE_IK_LIMITS",
+    "allowStretch": false,
+    "allowScriptedDrivers": false
+  },
+  "acceptance": {
+    "maxJointLimitViolationDeg": 0.1,
+    "maxPenetrationDepthM": 0.001,
+    "minimumActiveContacts": 2,
+    "minimumOpposingNormalAngleDeg": 150,
+    "maxHoldDriftM": 0.003,
+    "visibilityRequired": true,
+    "humanReview": "REQUIRED"
+  },
+  "security": { "networkAccess": false, "arbitraryPython": false },
+  "provenance": {
+    "briefId": "BRIEF_B05_TWO_FINGER",
+    "createdBy": "BFS B05 design baseline",
+    "createdAtUtc": "2026-08-26T06:00:00Z",
+    "sources": ["research/2026-08-26-b05-grasp-spec-design.md"]
+  }
+}

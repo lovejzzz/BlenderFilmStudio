@@ -1,0 +1,66 @@
+{
+  "documentType": "BFS_GRASP_SPEC_VALIDATOR_SELF_TEST",
+  "fixturePath": "specs/benchmarks/B05.grasp.json",
+  "validFixturePassed": true,
+  "tests": [
+    {
+      "id": "GENERIC_LIMIT_SOURCE",
+      "rejected": true,
+      "errors": [
+        "/solverPolicy/jointLimitSource must be equal to constant"
+      ]
+    },
+    {
+      "id": "REVERSED_JOINT_RANGE",
+      "rejected": true,
+      "errors": [
+        "FINGER_THUMB.THUMB_PROXIMAL minimumDeg exceeds maximumDeg",
+        "FINGER_THUMB.THUMB_PROXIMAL restDeg is outside joint limits"
+      ]
+    },
+    {
+      "id": "REST_OUTSIDE_LIMIT",
+      "rejected": true,
+      "errors": [
+        "FINGER_THUMB.THUMB_PROXIMAL restDeg is outside joint limits"
+      ]
+    },
+    {
+      "id": "NON_UNIT_NORMAL",
+      "rejected": true,
+      "errors": [
+        "CONTACT_THUMB targetNormalLocal is not unit length"
+      ]
+    },
+    {
+      "id": "PARALLEL_NORMALS",
+      "rejected": true,
+      "errors": [
+        "maximum opposing-normal angle 0.000000 deg is below threshold"
+      ]
+    },
+    {
+      "id": "MISSING_FINGER_REF",
+      "rejected": true,
+      "errors": [
+        "CONTACT_THUMB references missing finger FINGER_MISSING",
+        "CONTACT_THUMB tipSocket does not match FINGER_MISSING"
+      ]
+    },
+    {
+      "id": "OVERLAPPING_PHASES",
+      "rejected": true,
+      "errors": [
+        "closure phase overlaps or reverses approach"
+      ]
+    },
+    {
+      "id": "STRETCH_ENABLED",
+      "rejected": true,
+      "errors": [
+        "/solverPolicy/allowStretch must be equal to constant"
+      ]
+    }
+  ],
+  "passed": true
+}

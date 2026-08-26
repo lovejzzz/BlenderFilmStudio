@@ -89,7 +89,7 @@ export default function CostModelPage() {
     <main className="cost-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="成本研究导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><a href="#economics">成本栈</a><Link className="route-tab agenda-route" href="/research-agenda">研究路线</Link><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link><Link className="route-tab actor-route" href="/actor-v0-1">角色实验</Link><Link className="route-tab contact-route" href="/contact-v0-1">接触实验</Link></nav>
+        <nav aria-label="成本研究导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><a href="#economics">成本栈</a><Link className="route-tab agenda-route" href="/research-agenda">研究路线</Link><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link><Link className="route-tab actor-route" href="/actor-v0-1">角色实验</Link><Link className="route-tab contact-route" href="/contact-v0-1">接触实验</Link><Link className="route-tab" href="/grasp-v0-1">手指抓握</Link></nav>
         <span className="edition cost-edition">Cost 01</span>
       </header>
 

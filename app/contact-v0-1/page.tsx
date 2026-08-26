@@ -51,7 +51,7 @@ export default function ContactV01Page() {
     <main className="contact-page">
       <header className="topbar">
         <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="接触实验导航"><Link href="/">技术基线</Link><Link href="/actor-v0-1">角色实验</Link><Link href="/research-agenda">研究路线</Link><a href="#evidence">画面</a><a href="#limits">边界</a></nav>
+        <nav aria-label="接触实验导航"><Link href="/">技术基线</Link><Link href="/actor-v0-1">角色实验</Link><Link href="/research-agenda">研究路线</Link><Link href="/grasp-v0-1">B05 手指抓握</Link><a href="#evidence">画面</a><a href="#limits">边界</a></nav>
         <span className="edition contact-edition">Contact 0.1</span>
       </header>
 

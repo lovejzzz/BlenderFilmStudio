@@ -46,7 +46,7 @@ export default function ActorV01Page() {
     <main className="actor-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="角色实验导航"><Link href="/">技术基线</Link><Link href="/compiler-v0-1">编译实验</Link><Link href="/pixel-v0-1">像素实验</Link><Link href="/research-agenda">研究路线</Link><Link className="contact-route" href="/contact-v0-1">接触实验</Link><a href="#evidence">证据</a><a href="#limits">边界</a></nav>
+        <nav aria-label="角色实验导航"><Link href="/">技术基线</Link><Link href="/compiler-v0-1">编译实验</Link><Link href="/pixel-v0-1">像素实验</Link><Link href="/research-agenda">研究路线</Link><Link className="contact-route" href="/contact-v0-1">接触实验</Link><Link href="/grasp-v0-1">手指抓握</Link><a href="#evidence">证据</a><a href="#limits">边界</a></nav>
         <span className="edition actor-edition">Actor 0.1</span>
       </header>
 

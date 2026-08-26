@@ -46,7 +46,7 @@ export default function PixelV01Page() {
     <main className="pixel-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="像素实验导航"><Link href="/">技术基线</Link><Link href="/compiler-v0-1">编译实验</Link><Link href="/cost-model">成本</Link><Link href="/research-agenda">研究路线</Link><Link className="actor-route" href="/actor-v0-1">角色实验</Link><Link className="contact-route" href="/contact-v0-1">接触实验</Link><a href="#results">结果</a><a href="#mastering">Mastering</a></nav>
+        <nav aria-label="像素实验导航"><Link href="/">技术基线</Link><Link href="/compiler-v0-1">编译实验</Link><Link href="/cost-model">成本</Link><Link href="/research-agenda">研究路线</Link><Link className="actor-route" href="/actor-v0-1">角色实验</Link><Link className="contact-route" href="/contact-v0-1">接触实验</Link><Link href="/grasp-v0-1">手指抓握</Link><a href="#results">结果</a><a href="#mastering">Mastering</a></nav>
         <span className="edition pixel-edition">Pixel 0.1</span>
       </header>
 
