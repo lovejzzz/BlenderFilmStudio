@@ -85,8 +85,8 @@ const gaps: {
   {
     id: 'G08', title: '代理执行安全', type: 'governance', priority: 'P0',
     question: 'Codex / MCP 可以修改什么，如何防止任意代码、越权读写和供应链污染？',
-    known: 'B10–B12 覆盖路径、资产求值结构与软资源预算；B13 用 receipt 绑定 plan、工具源、Blender/Node binary、profile、OCIO、manifest、规范结构与 .blend，10+2 攻击通过。',
-    missing: 'receipt 尚未签名或远程证明；解析器漏洞、子进程总内存、GPU/网络/系统调用、OS 隔离、包供应链、签名审批、dry-run、回滚和完整 MCP 授权仍未实现。',
+    known: 'B10–B12 覆盖路径、资产求值结构与软资源预算；B13 绑定编译收据。B36 用 6 个真实 PID 证明 `--disable-autoexec` 与 factory default 阻断受控 registered Text，trusted CLI probe 仍运行；首次 analyzer identity bug 被保留，7/7 attacks 与独立 audit 通过。',
+    missing: 'B36 不是 sandbox：解析器漏洞、子进程总内存、GPU/网络/系统调用、OS 隔离、真实 secret、包供应链、签名/远程证明、审批、dry-run、回滚和完整 MCP 授权仍未实现。',
     artifact: 'Restricted Tool Gateway + Threat Model',
     gate: '攻击样例不能越出工作目录、联网、读取秘密或绕过批准修改制作资产。',
   },
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>发布 B35 最终公开源码，并对精确 commit 重跑 leak gate。</h3><p>B35 新 realization、private package 与真实浏览器界面 pilot 均已通过各自工程门；三条匿名 clip 各 2/2、汇总 dropped 0，但没有生成 response。页面发布会改变公开树，因此 collection 仍未开放。下一门是最终 deploy commit 的 same-state 3,226-value scan；通过后仍需 18 位独立观察者，不能由开发者补数。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>预注册 B37 OS worker containment canary。</h3><p>B36 已证明显式 `--disable-autoexec` 能关闭 registered Text 自动执行，但 `.blend` 仍被解析，trusted probe 仍拥有 Python 能力。下一步用受控 loopback、假 secret、工作区外写入与 child-process canary 测试实际 kernel/VM boundary；若 macOS 本机没有可审计隔离，就把平台限制记录下来并转向 disposable VM。B35 人类采集仍单独等待 18 位独立观察者。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
