@@ -1,0 +1,272 @@
+{
+  "schemaVersion": "bfs.workerLaunchContractIndependentAudit.v0.1",
+  "experimentId": "B38",
+  "analysis": {
+    "schemaVersion": "bfs.workerLaunchContractAnalysis.v0.1",
+    "decision": "WORKER_LAUNCH_CONTRACT_LOGIC_SUPPORT_ONLY",
+    "passed": true,
+    "failures": []
+  },
+  "attacks": [
+    {
+      "id": "INHERITED_PARENT_ENV",
+      "expectedFailure": "ENVIRONMENT_KEYS",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "ENVIRONMENT_KEYS",
+        "ENVIRONMENT_VALUES",
+        "PARENT_ENVIRONMENT",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "MISSING_ENV_KEY",
+      "expectedFailure": "ENVIRONMENT_KEYS",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "ENVIRONMENT_KEYS",
+        "ENVIRONMENT_VALUES",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "ENV_PATH_ESCAPE",
+      "expectedFailure": "ENVIRONMENT_VALUES",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "ENVIRONMENT_VALUES",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "SHELL_TRUE",
+      "expectedFailure": "SHELL",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "SHELL",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "EXECUTABLE_IDENTITY",
+      "expectedFailure": "EXECUTABLE_IDENTITY",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "EXECUTABLE_IDENTITY",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "MISSING_DISABLE_AUTOEXEC",
+      "expectedFailure": "DISABLE_AUTOEXEC",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "ARGV_PREFIX",
+        "DISABLE_AUTOEXEC",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "ENABLE_AUTOEXEC",
+      "expectedFailure": "FORBIDDEN_ARGV",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "ARGV_PREFIX",
+        "FORBIDDEN_ARGV",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "MISSING_OFFLINE_MODE",
+      "expectedFailure": "OFFLINE_MODE",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "ARGV_PREFIX",
+        "OFFLINE_MODE",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "ONLINE_MODE",
+      "expectedFailure": "FORBIDDEN_ARGV",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "ARGV_PREFIX",
+        "FORBIDDEN_ARGV",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "PYTHON_EXIT_ZERO",
+      "expectedFailure": "PYTHON_EXIT_CODE",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "PYTHON_EXIT_CODE",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "IMAGE_TAG_NOT_DIGEST",
+      "expectedFailure": "IMAGE_DIGEST",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "IMAGE_DIGEST",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "PULL_ALWAYS",
+      "expectedFailure": "PULL_POLICY",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "PULL_POLICY",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "INPUT_WRITABLE",
+      "expectedFailure": "INPUT_MOUNT",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "INPUT_MOUNT",
+        "WRITABLE_MOUNT_SET",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "SECOND_WRITABLE_MOUNT",
+      "expectedFailure": "MOUNT_SET",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "MOUNT_SET",
+        "WRITABLE_MOUNT_SET",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "DOCKER_SOCKET_MOUNT",
+      "expectedFailure": "DOCKER_SOCKET_MOUNT",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "MOUNT_SET",
+        "WRITABLE_MOUNT_SET",
+        "DOCKER_SOCKET_MOUNT",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "NETWORK_BRIDGE",
+      "expectedFailure": "NETWORK",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "NETWORK",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "PRIVILEGED",
+      "expectedFailure": "PRIVILEGED",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "PRIVILEGED",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "CAPABILITY_ADDED",
+      "expectedFailure": "CAPABILITIES",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "CAPABILITIES",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "NO_NEW_PRIVILEGES_REMOVED",
+      "expectedFailure": "NO_NEW_PRIVILEGES",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "NO_NEW_PRIVILEGES",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "ROOT_USER",
+      "expectedFailure": "NON_ROOT_USER",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "NON_ROOT_USER",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "WRITABLE_ROOTFS",
+      "expectedFailure": "READ_ONLY_ROOTFS",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "READ_ONLY_ROOTFS",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "RESOURCE_LIMIT_REMOVED",
+      "expectedFailure": "RESOURCE_LIMITS",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "RESOURCE_LIMITS",
+        "PLAN_CANONICAL"
+      ]
+    },
+    {
+      "id": "BELOW_RESERVE_ACCEPTED",
+      "expectedFailure": "ADMISSION_DECISION",
+      "passed": true,
+      "failures": [
+        "ADMISSION_DECISION"
+      ]
+    },
+    {
+      "id": "TIMEOUT_PROMOTABLE",
+      "expectedFailure": "RECEIPT_PROMOTION",
+      "passed": true,
+      "failures": [
+        "RECEIPT_SELF_HASH",
+        "RECEIPT_PROMOTION",
+        "FAILURE_NOT_PROMOTABLE"
+      ]
+    },
+    {
+      "id": "PLAN_SELF_HASH",
+      "expectedFailure": "PLAN_SELF_HASH",
+      "passed": true,
+      "failures": [
+        "PLAN_SELF_HASH",
+        "PLAN_CANONICAL"
+      ]
+    }
+  ],
+  "recordedAttacksMatch": true,
+  "passed": true
+}
