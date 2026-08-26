@@ -971,6 +971,18 @@ Verdict: `ARCHITECTURE_PREFLIGHT_CORRECTION_SUPPORT_RUNTIME_BLOCKED`. The first 
 
 Artifacts: `experiments/linux-worker-architecture-preflight-v0-2/results.json`, `experiments/linux-worker-architecture-preflight-v0-2/audit.json` and `research/2026-08-26-b39-c1-index-parser-correction-result.md`.
 
+## J-051 · B40 attempt 1 binfmt parser invalidation
+
+Type: preregistered read-only host-capacity admission, invalid tool attempt, 2026-08-26.
+
+B40 froze host disk, VM memory/CPU, Docker storage, swap, emulator and competing-container gates before tooling. Four expected capacity blockers reproduced, but the runner added `X64_EMULATOR` even though the raw kernel record showed `enabled`, interpreter `/usr/bin/qemu-x86_64` and `flags: POCF`.
+
+The tool had frozen a whitespace-only parser for `flags`; the actual binfmt grammar uses the literal key `flags:`. It stored an empty flag string and falsely blocked the emulator. Verdict: `EMULATOR_GATE`; status `INVALID_TOOL_PARSER`. The independent audit correctly failed base acceptance and recorded-attack equality. Runtime operations remained zero.
+
+The attempt stays immutable. B40-C1 must bind its hashes and change only the exact key grammar; capacity thresholds and the expected four blockers remain unchanged.
+
+Artifacts: `experiments/worker-host-capacity-admission-v0-1/results.json`, `experiments/worker-host-capacity-admission-v0-1/audit.json` and `research/2026-08-26-b40-worker-host-capacity-admission-invalid-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityIndependentAudit.v0.1",
+  "experimentId": "B40",
+  "analysis": {
+    "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.1",
+    "passed": false,
+    "failures": [
+      "EMULATOR_GATE",
+      "OVERALL_GATE"
+    ],
+    "decision": "EMULATOR_GATE"
+  },
+  "attacks": [
+    {
+      "name": "lower the host disk reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower the projected host write",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "remove the infrastructure memory reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark six-GiB VM memory accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "remove the infrastructure CPU reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark four-CPU VM capacity accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "lower the Docker storage safety floor",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "POLICY_IDENTITY",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark below-floor Docker storage accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "hide a running competing container",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "EMULATOR_GATE",
+        "CONTAINER_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "accept nonzero VM swap",
+      "expectedFailure": "VM_SWAP_GATE",
+      "observedFailures": [
+        "VM_SWAP_GATE",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "fabricate the x64 emulator registration",
+      "expectedFailure": "EMULATOR_REGISTRATION",
+      "observedFailures": [
+        "EMULATOR_REGISTRATION",
+        "CAPACITY_DECISION",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "change an ancestry evidence hash",
+      "expectedFailure": "ANCESTRY_IDENTITY",
+      "observedFailures": [
+        "ANCESTRY_IDENTITY",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "claim a runtime operation executed",
+      "expectedFailure": "RUNTIME_OPERATION_BOUNDARY",
+      "observedFailures": [
+        "RUNTIME_OPERATION_BOUNDARY",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    },
+    {
+      "name": "mark overall admission accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "CAPACITY_DECISION",
+        "EMULATOR_GATE",
+        "OVERALL_GATE"
+      ],
+      "passed": true
+    }
+  ],
+  "recordedAttacksMatch": false,
+  "passed": false
+}

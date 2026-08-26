@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityEvidence.v0.1",
+  "experimentId": "B40",
+  "status": "READ_ONLY_CAPACITY_ADMISSION_COMPLETE_NO_RUNTIME_OPERATION",
+  "preregistration": {
+    "commit": "8c39b715e7e2bacae81ca1ab9b2570472cf73fde",
+    "specSha256": "fd21c27801a83f542a4aaa498fbc61867b3116509bb6e43769d83873146850ca"
+  },
+  "ancestry": {
+    "b38SpecSha256": "c96a6c7d9bf91c0b0f72fa2094ef6b6c0bb778d7443533f661859427715f9514",
+    "b38ResultSha256": "42fe3ceb1b36ded93c7cc40f1f0651c82f30a5e8878bcba3c2ec2eeb8454bf17",
+    "b38AuditSha256": "2c48229f0961faf8b030489ce0c69edd3785797ceeb4fc6e0c25ea990b0204f1",
+    "b39C1ResultSha256": "1898cca99da9215e4fd394df099417a5324d9405e5d6713711486d21875a1edf",
+    "b39C1AuditSha256": "12b292973eb166aea0eccf2fc071fdc730cec7dc102c2ad3d1297f4a7539edc7"
+  },
+  "toolFreezeCommit": "3df41bc3b176a08ee0f65f2fb65e91e46f66a3a5",
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b40-worker-host-capacity-admission.mjs",
+      "sha256": "c656006c65dc65bf9cfb567a861204a0c322d2563e212abbb725a6159457cc47"
+    },
+    "library": {
+      "uri": "scripts/lib/b40-worker-host-capacity-admission.mjs",
+      "sha256": "6aca631b54dd2860fb6942d375e1189ab83929e2cf21f53b7df758e6a52ded8a"
+    },
+    "audit": {
+      "uri": "scripts/audit-b40-worker-host-capacity-admission.mjs",
+      "sha256": "abf63a565b8756b9a8aae8c5adaff92f174c29bbb4ecb793315db8d1c2e97c41"
+    }
+  },
+  "policy": {
+    "workerCeilings": {
+      "memoryBytes": 8589934592,
+      "cpus": 4,
+      "shmBytes": 1073741824,
+      "pidsLimit": 256,
+      "projectedHostWriteBytes": 21474836480,
+      "minimumHostReserveBytes": 107374182400
+    },
+    "capacity": {
+      "infrastructureMemoryReserveBytes": 2147483648,
+      "requiredVmMemoryBytes": 10737418240,
+      "infrastructureCpuReserve": 1,
+      "requiredVmCpus": 5,
+      "minimumDockerStorageFreeBeforeBuildBytes": 8589934592,
+      "requiredRunningContainerCount": 0,
+      "requiredVmSwapBytes": 0,
+      "requiredEmulator": {
+        "registration": "qemu-x86_64",
+        "enabled": true,
+        "interpreter": "/usr/bin/qemu-x86_64",
+        "requiredFlags": "POCF"
+      },
+      "reasoning": {
+        "memory": "The VM must provide the frozen 8 GiB worker ceiling plus a separately reserved 2 GiB for the Linux VM, Docker daemon and filesystem cache; a cgroup ceiling is not a reservation.",
+        "cpu": "The VM must provide the frozen four-CPU worker ceiling plus one CPU of infrastructure headroom; a CPU quota is not a reservation.",
+        "dockerStorage": "Eight GiB of free Docker storage is a pre-build safety floor for the 384,441,228-byte compressed Blender archive, extracted tree, package layers, final image and rollback after a failed build; it is an admission policy, not a predicted exact image size."
+      }
+    }
+  },
+  "probeTrace": [
+    "HOST_STATFS",
+    "COLIMA_STATUS",
+    "COLIMA_CONFIG_READ",
+    "VM_MEMINFO_READ",
+    "VM_CPU_READ",
+    "VM_DOCKER_DF_READ",
+    "VM_BINFMT_READ",
+    "DOCKER_RUNNING_CONTAINER_COUNT",
+    "ANCESTRY_FILE_HASHES"
+  ],
+  "runtimeOperationsExecuted": [],
+  "observations": {
+    "host": {
+      "architecture": "arm64",
+      "availableBytes": "19688439808"
+    },
+    "colima": {
+      "status": {
+        "display_name": "colima",
+        "driver": "macOS Virtualization.Framework",
+        "arch": "aarch64",
+        "runtime": "docker",
+        "mount_type": "virtiofs",
+        "docker_socket": "unix:///Users/tianxing/.colima/default/docker.sock",
+        "containerd_socket": "unix:///Users/tianxing/.colima/default/containerd.sock",
+        "kubernetes": false,
+        "cpu": 4,
+        "memory": 6442450944,
+        "disk": 10737418240
+      },
+      "config": {
+        "cpu": 4,
+        "diskGiB": 10,
+        "memoryGiB": 6,
+        "arch": "aarch64",
+        "vmType": "vz",
+        "rosetta": false,
+        "mountType": "virtiofs"
+      },
+      "configSha256": "861be8798d34fd2ad6fae5ddf68c30071a6e08eec872004b90816a7ff53f89d8"
+    },
+    "vm": {
+      "memTotalBytes": "6197444608",
+      "swapTotalBytes": "0",
+      "onlineCpus": 4,
+      "dockerStorage": {
+        "totalBytes": "10461925376",
+        "usedBytes": "5272678400",
+        "availableBytes": "4635705344",
+        "usePercent": "54%"
+      },
+      "emulator": {
+        "registration": "qemu-x86_64",
+        "enabled": true,
+        "interpreter": "/usr/bin/qemu-x86_64",
+        "flags": ""
+      }
+    },
+    "docker": {
+      "runningContainerIds": []
+    }
+  },
+  "decision": {
+    "schemaVersion": "bfs.workerHostCapacityDecision.v0.1",
+    "status": "BLOCKED",
+    "reasons": [
+      "HOST_DISK_RESERVE",
+      "VM_MEMORY_CAPACITY",
+      "VM_CPU_CAPACITY",
+      "DOCKER_STORAGE_CAPACITY",
+      "X64_EMULATOR"
+    ],
+    "gates": {
+      "hostDisk": {
+        "status": "BLOCKED",
+        "observed": "19688439808",
+        "required": {
+          "projectedWriteBytes": "21474836480",
+          "minimumReserveBytes": "107374182400",
+          "freeAfterProjectedBytes": "-1786396672"
+        }
+      },
+      "vmMemory": {
+        "status": "BLOCKED",
+        "observed": "6197444608",
+        "required": "10737418240"
+      },
+      "vmCpu": {
+        "status": "BLOCKED",
+        "observed": 4,
+        "required": 5
+      },
+      "dockerStorage": {
+        "status": "BLOCKED",
+        "observed": "4635705344",
+        "required": "8589934592"
+      },
+      "vmSwap": {
+        "status": "ACCEPTED",
+        "observed": "0",
+        "required": "0"
+      },
+      "x64Emulator": {
+        "status": "BLOCKED",
+        "observed": {
+          "registration": "qemu-x86_64",
+          "enabled": true,
+          "interpreter": "/usr/bin/qemu-x86_64",
+          "flags": ""
+        },
+        "required": {
+          "registration": "qemu-x86_64",
+          "enabled": true,
+          "interpreter": "/usr/bin/qemu-x86_64",
+          "requiredFlags": "POCF"
+        }
+      },
+      "competingContainers": {
+        "status": "ACCEPTED",
+        "observed": 0,
+        "required": 0
+      }
+    }
+  },
+  "evidenceHash": "6bbbebc7ab5abe4e53dba40702deb75f49334829ffafc4fc1f831c504251d3d4",
+  "analysis": {
+    "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.1",
+    "passed": false,
+    "failures": [
+      "EMULATOR_GATE",
+      "OVERALL_GATE"
+    ],
+    "decision": "EMULATOR_GATE"
+  },
+  "attacks": [],
+  "attacksPassed": false,
+  "verdict": "EMULATOR_GATE",
+  "nonClaims": [
+    "B40 does not start, stop, restart or reconfigure Colima",
+    "B40 does not launch Blender or create, run, build, pull, exec, prune or delete a container/image",
+    "The 2 GiB memory, one CPU and 8 GiB Docker-storage reserves are explicit operational admission policies, not Blender minimum requirements or measured exact consumption",
+    "An enabled qemu-x86_64 registration does not prove Blender compatibility, Eevee/EGL availability, performance or output equivalence",
+    "No containment or production worker claim",
+    "No automatic cleanup or disk-reserve override"
+  ]
+}
