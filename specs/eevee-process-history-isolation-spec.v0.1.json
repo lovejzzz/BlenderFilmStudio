@@ -1,0 +1,137 @@
+{
+  "documentType": "BFS_EEVEE_PROCESS_HISTORY_ISOLATION_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "At the frozen 32-sample Eevee baseline, does rendering a frame in a newly launched Blender process restore strict decoded-pixel reproducibility relative to rendering the complete 1-144 timeline in one process?",
+  "evidenceBasis": {
+    "selectionRule": "Use frame 1 as the process-start anchor, plus every frame that failed decoded-pixel equality in at least four of the seven frozen 32-sample, dither-zero sequence comparisons listed below.",
+    "comparisonPopulation": 7,
+    "comparisonArtifacts": [
+      { "uri": "experiments/dither-isolation-v0-1/evidence/D0.sequence.comparison.json", "sha256": "5619bd1afe14d88d21030c26df5e976564dc23480b201af5a1efe81f3008ebb0" },
+      { "uri": "experiments/eevee-sampling-factorial-v0-1/evidence/S32-D0.sequence.comparison.json", "sha256": "86ed24c8b2a86a0e4dee83c0d3122e64aa66d729009cca230f520838fdb17088" },
+      { "uri": "experiments/eevee-sampling-dose-response-v0-1/evidence/S32.sequence.comparison.json", "sha256": "83ab660e5e5e01b055f417c485046b3f8e06093301ebe2750795179cc8e0befa" },
+      { "uri": "experiments/eevee-gi-reprojection-factorial-v0-1/evidence/G0-R0.sequence.comparison.json", "sha256": "865d3f994b5c5240a7cd0c9960538f7b57e64135d4c5000939dd4d2b7f554513" },
+      { "uri": "experiments/eevee-gi-reprojection-factorial-v0-1/evidence/G0-R1.sequence.comparison.json", "sha256": "767b41d1735a29ea3855e9cb2898e5676898c8b948deeb16a58b6f8ea71e0b26" },
+      { "uri": "experiments/eevee-gi-reprojection-factorial-v0-1/evidence/G1-R0.sequence.comparison.json", "sha256": "1679e23e4ca99044b9a53f8e507464d5dd7b862c2f69fd70f260ac247499069a" },
+      { "uri": "experiments/eevee-gi-reprojection-factorial-v0-1/evidence/G1-R1.sequence.comparison.json", "sha256": "67096da04084a2ae23a7b66a4797b87269edf4a0400dce88dd186b191aa8abe7" }
+    ],
+    "failureOccurrenceThreshold": 4,
+    "selectedByThreshold": [5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144],
+    "processStartAnchor": 1,
+    "sentinelFrames": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144]
+  },
+  "design": {
+    "type": "two-mode process-history isolation with three independent replicates per mode",
+    "modes": [
+      {
+        "id": "HISTORY",
+        "description": "One newly launched Blender process renders every frame 1-144 in ascending order; sentinel outputs are the primary comparison subset.",
+        "replicates": ["H-A", "H-B", "H-C"],
+        "blenderProcesses": 3,
+        "renderedFramesPerReplicate": 144,
+        "totalRenderedFrames": 432
+      },
+      {
+        "id": "FRESH",
+        "description": "Each sentinel frame and replicate is rendered by its own newly launched Blender process, which exits after that one frame.",
+        "replicates": ["F-A", "F-B", "F-C"],
+        "blenderProcesses": 36,
+        "renderedFramesPerProcess": 1,
+        "totalRenderedFrames": 36
+      }
+    ],
+    "runOrder": [
+      "H-A",
+      "F-A:1,5,20,35,38,47,83,93,103,110,114,144",
+      "H-B",
+      "F-B:1,5,20,35,38,47,83,93,103,110,114,144",
+      "H-C",
+      "F-C:1,5,20,35,38,47,83,93,103,110,114,144"
+    ],
+    "runOrderFrozenBeforeExecution": true,
+    "withinModePairs": ["A-B", "A-C", "B-C"],
+    "crossModePairs": ["H-A:F-A", "H-A:F-B", "H-A:F-C", "H-B:F-A", "H-B:F-B", "H-B:F-C", "H-C:F-A", "H-C:F-B", "H-C:F-C"],
+    "primarySentinelComparisonCountPerMode": 36,
+    "crossModeSentinelComparisonCount": 108,
+    "totalBlenderProcesses": 39,
+    "totalRenderedFrames": 468
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "b19ConfiguratorSha256": "12eec7ca42f9ef2df6233ca71b5ce338ecf2bbdebecbc1b90f3012b5e3f86a77",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "frameStart": 1,
+    "frameEnd": 144,
+    "fps": 24,
+    "imageFormat": "PNG",
+    "colorDepth": "8",
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "motionBlur": false
+  },
+  "implementationContract": {
+    "b20RendererAndComparatorMustNotExistAtFreeze": true,
+    "onePostFreezeRendererImplementationMustServeBothModes": true,
+    "sameReceiptSceneOcioAndRenderProfileForBothModes": true,
+    "verifySourceStateAndApplyConstantsInEveryBlenderProcess": true,
+    "mustNotSaveSourceBlend": true,
+    "historyModeMustRenderAllFramesAscendingInOneProcessPerReplicate": true,
+    "freshModeMustUseOneDistinctProcessPerFramePerReplicate": true,
+    "recordRendererComparatorAndRunnerHashesInResult": true,
+    "recordProcessIdAndInvocationIdForEveryRun": true,
+    "requireDistinctObservedProcessIdsForAll39Processes": true
+  },
+  "exactGate": {
+    "perImagePair": { "maximumAbsoluteError": 0.0, "failurePixels": 0 },
+    "perMode": "All 12 sentinel frames must be exact in all three within-mode replicate pairs.",
+    "crossMode": "All 12 sentinel frames must be exact in all nine history-to-fresh replicate pairs.",
+    "noPostHocTolerance": true
+  },
+  "decisionRule": {
+    "FRESH_PROCESS_RESTORES_EXACTNESS": "FRESH passes its complete within-mode gate and HISTORY does not, with a valid experiment.",
+    "HISTORY_PROCESS_ONLY_EXACT": "HISTORY passes its complete within-mode gate and FRESH does not, with a valid experiment.",
+    "NO_HISTORY_EFFECT_DETECTED": "Both modes pass their within-mode gates and every cross-mode sentinel comparison is exact, with a valid experiment.",
+    "DETERMINISTIC_HISTORY_EFFECT": "Both modes pass their within-mode gates but at least one cross-mode sentinel comparison is non-exact, with a valid experiment.",
+    "PROCESS_ISOLATION_NOT_SUFFICIENT": "Neither mode passes its complete within-mode gate, with a valid experiment.",
+    "INVALID_EXPERIMENT": "Any frozen identity, source/configuration observation, process-boundary, image/binding, count or negative-case gate fails."
+  },
+  "requiredNegativeCases": [
+    "B20 spec identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "runner-recorded render samples differ from 32",
+    "dither differs from fixed zero",
+    "Fast GI differs from fixed true",
+    "TAA reprojection differs from fixed true",
+    "history run omits or reorders a frame",
+    "fresh invocation renders more than one frame",
+    "fresh process ID aliases another experimental process",
+    "missing sentinel image",
+    "mutated sentinel image bytes",
+    "comparison is not bound to both image hashes"
+  ],
+  "explicitNonClaims": [
+    "The twelve sentinel frames are a pre-registered diagnostic subset and do not estimate failure probability for all frames or scenes.",
+    "A fresh-process result does not identify a specific Blender source-level race, cache or random-number mechanism.",
+    "The HISTORY and FRESH modes intentionally differ in prior rendered-frame history; the experiment tests that boundary, not render-speed equivalence.",
+    "Three replicates can falsify exact determinism but cannot estimate a stable mismatch rate.",
+    "No perceptual tolerance is selected and near-equality remains non-exact.",
+    "The result applies only to this Blender 5.2 Eevee PNG8 same-machine profile, not Cycles EXR masters or other devices.",
+    "A favorable fresh-process result would be an engineering clue, not yet a cost-effective production workflow recommendation."
+  ]
+}
