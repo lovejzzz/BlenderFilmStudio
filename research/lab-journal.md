@@ -1007,6 +1007,16 @@ B40-C3 must change only ordered failure-code projection; the serialization corre
 
 Artifacts: `experiments/worker-host-capacity-admission-v0-3/results.json`, `experiments/worker-host-capacity-admission-v0-3/audit.json` and `research/2026-08-26-b40-c2-failure-code-projection-invalid.md`.
 
+## J-054 · B40-C3 projection identity crash before result
+
+Type: preregistered failure-projection correction, no-result tool crash, 2026-08-26.
+
+The frozen C3 helper tried to read the C2 experiment's own preregistration identity from a nonexistent nested spec field and raised a `TypeError` before creating evidence, attacks or audit input. Status: `NO_RESULT_TOOL_CRASH`; no capacity decision exists for this invocation.
+
+B40-C4 may change only the identity source to the frozen C2 library constants. No runtime operation occurred.
+
+Artifact: `research/2026-08-26-b40-c3-no-result-tool-crash.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
