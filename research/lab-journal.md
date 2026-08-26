@@ -995,6 +995,18 @@ Status: `REJECTED_IN_MEMORY_ALIASING`. B40-C2 must value-copy gate records and f
 
 Artifacts: `experiments/worker-host-capacity-admission-v0-2/results.json`, `experiments/worker-host-capacity-admission-v0-2/audit.json` and `research/2026-08-26-b40-c1-aliasing-audit-failure.md`.
 
+## J-053 · B40-C2 round-trip passes but specific attack codes are lost
+
+Type: preregistered serialization correction, invalid wrapper projection, 2026-08-26.
+
+B40-C2 removed the observation/decision alias: base analysis, decision, evidence hash and attack vectors were stable across JSON round-trip. But its wrapper exposed only `BASE_ANALYSIS` for every mutated candidate instead of carrying through the base analyzer's specific failure codes.
+
+All 14 candidates were rejected, yet none matched its preregistered primary code, so the formal vector was 0/14. Runner and audit both failed while round-trip equality passed. Status: `INVALID_FAILURE_CODE_PROJECTION`.
+
+B40-C3 must change only ordered failure-code projection; the serialization correction, four capacity blockers, thresholds and zero-runtime boundary remain unchanged.
+
+Artifacts: `experiments/worker-host-capacity-admission-v0-3/results.json`, `experiments/worker-host-capacity-admission-v0-3/audit.json` and `research/2026-08-26-b40-c2-failure-code-projection-invalid.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

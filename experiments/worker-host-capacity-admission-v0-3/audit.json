@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityIndependentAudit.v0.3",
+  "experimentId": "B40-C2",
+  "analysis": {
+    "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.3",
+    "passed": true,
+    "failures": [],
+    "baseAnalysis": {
+      "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.1",
+      "passed": true,
+      "failures": [],
+      "decision": "WORKER_HOST_CAPACITY_BLOCKED"
+    },
+    "roundTripBaseAnalysis": {
+      "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.1",
+      "passed": true,
+      "failures": [],
+      "decision": "WORKER_HOST_CAPACITY_BLOCKED"
+    },
+    "decision": "WORKER_HOST_CAPACITY_BLOCKED_SERIALIZATION_STABLE"
+  },
+  "attacks": [
+    {
+      "name": "lower the host disk reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "lower the projected host write",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "remove the infrastructure memory reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "mark six-GiB VM memory accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "remove the infrastructure CPU reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "mark four-CPU VM capacity accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "lower the Docker storage safety floor",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "mark below-floor Docker storage accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "hide a running competing container",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "accept nonzero VM swap",
+      "expectedFailure": "VM_SWAP_GATE",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "fabricate the x64 emulator registration",
+      "expectedFailure": "EMULATOR_REGISTRATION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "change an ancestry evidence hash",
+      "expectedFailure": "ANCESTRY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "claim a runtime operation executed",
+      "expectedFailure": "RUNTIME_OPERATION_BOUNDARY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "mark overall admission accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    }
+  ],
+  "roundTripAnalysisEqual": true,
+  "roundTripAttackVectorEqual": true,
+  "recordedAttacksMatch": true,
+  "passed": false
+}

@@ -1,0 +1,344 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityEvidence.v0.3",
+  "experimentId": "B40-C2",
+  "status": "SERIALIZATION_STABLE_READ_ONLY_CAPACITY_ADMISSION_NO_RUNTIME_OPERATION",
+  "preregistration": {
+    "commit": "a117a6ccc5631e7db382a121822a88fc76511a6f",
+    "specSha256": "18d945fb9b96f5369b638b7214904ca6b3d7f110d1e544680a28dc41e8d7651a"
+  },
+  "correctionChain": {
+    "baseSpecSha256": "fd21c27801a83f542a4aaa498fbc61867b3116509bb6e43769d83873146850ca",
+    "parserCorrectionSpecSha256": "00f50c7ee250de2d78c9643be552b5aa5b1339463ff5d8c1c276acbc7fd0882a",
+    "rejectedC1ResultSha256": "a59acf6fdea2bd2d82ad6f18b9ee5d7aa9f632202f4c96dd1d61c1487b10d1d3",
+    "rejectedC1AuditSha256": "8a05a54f99cb63b7f7408c5171dbac2d6b80f7c3cd0586ed267803c67be629ac"
+  },
+  "ancestry": {
+    "b38SpecSha256": "c96a6c7d9bf91c0b0f72fa2094ef6b6c0bb778d7443533f661859427715f9514",
+    "b38ResultSha256": "42fe3ceb1b36ded93c7cc40f1f0651c82f30a5e8878bcba3c2ec2eeb8454bf17",
+    "b38AuditSha256": "2c48229f0961faf8b030489ce0c69edd3785797ceeb4fc6e0c25ea990b0204f1",
+    "b39C1ResultSha256": "1898cca99da9215e4fd394df099417a5324d9405e5d6713711486d21875a1edf",
+    "b39C1AuditSha256": "12b292973eb166aea0eccf2fc071fdc730cec7dc102c2ad3d1297f4a7539edc7"
+  },
+  "toolFreezeCommit": "6922597c82c6c8b928af36fc9a9075c0078cac09",
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b40-c2-serialization-stability.mjs",
+      "sha256": "9ffa1fdb1f60372c53dbdbacd0fbe673fe0a61bf9d27c1f3169466602858adce"
+    },
+    "library": {
+      "uri": "scripts/lib/b40-c2-serialization-stability.mjs",
+      "sha256": "cf348ff9ea174a60f633a0941e1e88e6cac9875a65aae93097adc2fbcebdbf9b"
+    },
+    "audit": {
+      "uri": "scripts/audit-b40-c2-serialization-stability.mjs",
+      "sha256": "58858cec9c585953dda57c69443908a3c8e4a53cba26938a11f4a45d11ab54d1"
+    }
+  },
+  "policy": {
+    "workerCeilings": {
+      "memoryBytes": 8589934592,
+      "cpus": 4,
+      "shmBytes": 1073741824,
+      "pidsLimit": 256,
+      "projectedHostWriteBytes": 21474836480,
+      "minimumHostReserveBytes": 107374182400
+    },
+    "capacity": {
+      "infrastructureMemoryReserveBytes": 2147483648,
+      "requiredVmMemoryBytes": 10737418240,
+      "infrastructureCpuReserve": 1,
+      "requiredVmCpus": 5,
+      "minimumDockerStorageFreeBeforeBuildBytes": 8589934592,
+      "requiredRunningContainerCount": 0,
+      "requiredVmSwapBytes": 0,
+      "requiredEmulator": {
+        "registration": "qemu-x86_64",
+        "enabled": true,
+        "interpreter": "/usr/bin/qemu-x86_64",
+        "requiredFlags": "POCF"
+      },
+      "reasoning": {
+        "memory": "The VM must provide the frozen 8 GiB worker ceiling plus a separately reserved 2 GiB for the Linux VM, Docker daemon and filesystem cache; a cgroup ceiling is not a reservation.",
+        "cpu": "The VM must provide the frozen four-CPU worker ceiling plus one CPU of infrastructure headroom; a CPU quota is not a reservation.",
+        "dockerStorage": "Eight GiB of free Docker storage is a pre-build safety floor for the 384,441,228-byte compressed Blender archive, extracted tree, package layers, final image and rollback after a failed build; it is an admission policy, not a predicted exact image size."
+      }
+    }
+  },
+  "probeTrace": [
+    "HOST_STATFS",
+    "COLIMA_STATUS",
+    "COLIMA_CONFIG_READ",
+    "VM_MEMINFO_READ",
+    "VM_CPU_READ",
+    "VM_DOCKER_DF_READ",
+    "VM_BINFMT_READ",
+    "DOCKER_RUNNING_CONTAINER_COUNT",
+    "ANCESTRY_FILE_HASHES"
+  ],
+  "runtimeOperationsExecuted": [],
+  "observations": {
+    "host": {
+      "architecture": "arm64",
+      "availableBytes": "19666964480"
+    },
+    "colima": {
+      "status": {
+        "display_name": "colima",
+        "driver": "macOS Virtualization.Framework",
+        "arch": "aarch64",
+        "runtime": "docker",
+        "mount_type": "virtiofs",
+        "docker_socket": "unix:///Users/tianxing/.colima/default/docker.sock",
+        "containerd_socket": "unix:///Users/tianxing/.colima/default/containerd.sock",
+        "kubernetes": false,
+        "cpu": 4,
+        "memory": 6442450944,
+        "disk": 10737418240
+      },
+      "config": {
+        "cpu": 4,
+        "diskGiB": 10,
+        "memoryGiB": 6,
+        "arch": "aarch64",
+        "vmType": "vz",
+        "rosetta": false,
+        "mountType": "virtiofs"
+      },
+      "configSha256": "861be8798d34fd2ad6fae5ddf68c30071a6e08eec872004b90816a7ff53f89d8"
+    },
+    "vm": {
+      "memTotalBytes": "6197444608",
+      "swapTotalBytes": "0",
+      "onlineCpus": 4,
+      "dockerStorage": {
+        "totalBytes": "10461925376",
+        "usedBytes": "5272678400",
+        "availableBytes": "4635705344",
+        "usePercent": "54%"
+      },
+      "emulator": {
+        "registration": "qemu-x86_64",
+        "enabled": true,
+        "interpreter": "/usr/bin/qemu-x86_64",
+        "flags": "POCF"
+      }
+    },
+    "docker": {
+      "runningContainerIds": []
+    }
+  },
+  "decision": {
+    "schemaVersion": "bfs.workerHostCapacityDecision.v0.1",
+    "status": "BLOCKED",
+    "reasons": [
+      "HOST_DISK_RESERVE",
+      "VM_MEMORY_CAPACITY",
+      "VM_CPU_CAPACITY",
+      "DOCKER_STORAGE_CAPACITY"
+    ],
+    "gates": {
+      "hostDisk": {
+        "status": "BLOCKED",
+        "observed": "19666964480",
+        "required": {
+          "projectedWriteBytes": "21474836480",
+          "minimumReserveBytes": "107374182400",
+          "freeAfterProjectedBytes": "-1807872000"
+        }
+      },
+      "vmMemory": {
+        "status": "BLOCKED",
+        "observed": "6197444608",
+        "required": "10737418240"
+      },
+      "vmCpu": {
+        "status": "BLOCKED",
+        "observed": 4,
+        "required": 5
+      },
+      "dockerStorage": {
+        "status": "BLOCKED",
+        "observed": "4635705344",
+        "required": "8589934592"
+      },
+      "vmSwap": {
+        "status": "ACCEPTED",
+        "observed": "0",
+        "required": "0"
+      },
+      "x64Emulator": {
+        "status": "ACCEPTED",
+        "observed": {
+          "registration": "qemu-x86_64",
+          "enabled": true,
+          "interpreter": "/usr/bin/qemu-x86_64",
+          "flags": "POCF"
+        },
+        "required": {
+          "registration": "qemu-x86_64",
+          "enabled": true,
+          "interpreter": "/usr/bin/qemu-x86_64",
+          "requiredFlags": "POCF"
+        }
+      },
+      "competingContainers": {
+        "status": "ACCEPTED",
+        "observed": 0,
+        "required": 0
+      }
+    }
+  },
+  "serializationGates": {
+    "baseAnalysisEqual": true,
+    "decisionEqual": true,
+    "attackVectorEqual": true,
+    "evidenceHashEqual": true
+  },
+  "serializationPassed": true,
+  "evidenceHash": "5db76b02c1fcc6284ae2e79b47c348e2740aa7e84ac7ba3d35d5919ffbfd8bd2",
+  "analysis": {
+    "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.3",
+    "passed": true,
+    "failures": [],
+    "baseAnalysis": {
+      "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.1",
+      "passed": true,
+      "failures": [],
+      "decision": "WORKER_HOST_CAPACITY_BLOCKED"
+    },
+    "roundTripBaseAnalysis": {
+      "schemaVersion": "bfs.workerHostCapacityAnalysis.v0.1",
+      "passed": true,
+      "failures": [],
+      "decision": "WORKER_HOST_CAPACITY_BLOCKED"
+    },
+    "decision": "WORKER_HOST_CAPACITY_BLOCKED_SERIALIZATION_STABLE"
+  },
+  "attacks": [
+    {
+      "name": "lower the host disk reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "lower the projected host write",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "remove the infrastructure memory reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "mark six-GiB VM memory accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "remove the infrastructure CPU reserve",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "mark four-CPU VM capacity accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "lower the Docker storage safety floor",
+      "expectedFailure": "POLICY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "mark below-floor Docker storage accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "hide a running competing container",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "accept nonzero VM swap",
+      "expectedFailure": "VM_SWAP_GATE",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "fabricate the x64 emulator registration",
+      "expectedFailure": "EMULATOR_REGISTRATION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "change an ancestry evidence hash",
+      "expectedFailure": "ANCESTRY_IDENTITY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "claim a runtime operation executed",
+      "expectedFailure": "RUNTIME_OPERATION_BOUNDARY",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    },
+    {
+      "name": "mark overall admission accepted",
+      "expectedFailure": "CAPACITY_DECISION",
+      "observedFailures": [
+        "BASE_ANALYSIS"
+      ],
+      "passed": false
+    }
+  ],
+  "attacksPassed": false,
+  "verdict": "SERIALIZATION_STABILITY_FAILED",
+  "nonClaims": [
+    "B40-C2 corrects object aliasing and serialization stability only",
+    "B40 and B40-C1 remain immutable rejected attempts",
+    "No Colima mutation, container lifecycle operation, Blender launch, download, cleanup or reserve override",
+    "No Blender compatibility, Eevee/EGL, performance, containment or production claim"
+  ]
+}
