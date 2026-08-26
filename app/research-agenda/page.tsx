@@ -85,8 +85,8 @@ const gaps: {
   {
     id: 'G08', title: '代理执行安全', type: 'governance', priority: 'P0',
     question: 'Codex / MCP 可以修改什么，如何防止任意代码、越权读写和供应链污染？',
-    known: 'B10–B12 覆盖路径、资产求值结构与软资源预算；B13 绑定编译收据。B36 用 6 个真实 PID 证明 `--disable-autoexec` 与 factory default 阻断受控 registered Text，trusted CLI probe 仍运行；首次 analyzer identity bug 被保留，7/7 attacks 与独立 audit 通过。',
-    missing: 'B36 不是 sandbox：解析器漏洞、子进程总内存、GPU/网络/系统调用、OS 隔离、真实 secret、包供应链、签名/远程证明、审批、dry-run、回滚和完整 MCP 授权仍未实现。',
+    known: 'B10–B13 覆盖路径、资产求值结构、软预算与收据。B36 证明 `--disable-autoexec` 阻断 registered Text。B37 的 6 PID deprecated-SBPL canary 阻断 16/16 sibling file/loopback/child 能力，但 inherited 假 secret 仍 2/2 可见；sanitized 后 0/2，9/9 attacks 与独立 audit 通过。',
+    missing: 'B36/B37 仍不是支持的生产 sandbox：`sandbox-exec` 已 deprecated 且 profile 是 allow-default。解析器内存安全、GPU/DoS、完整 IPC/syscall、真实 secret、供应链、签名/远程证明、审批、回滚和完整 MCP 授权仍未实现。',
     artifact: 'Restricted Tool Gateway + Threat Model',
     gate: '攻击样例不能越出工作目录、联网、读取秘密或绕过批准修改制作资产。',
   },
@@ -196,7 +196,7 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>预注册 B37 OS worker containment canary。</h3><p>B36 已证明显式 `--disable-autoexec` 能关闭 registered Text 自动执行，但 `.blend` 仍被解析，trusted probe 仍拥有 Python 能力。下一步用受控 loopback、假 secret、工作区外写入与 child-process canary 测试实际 kernel/VM boundary；若 macOS 本机没有可审计隔离，就把平台限制记录下来并转向 disposable VM。B35 人类采集仍单独等待 18 位独立观察者。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>冻结 supported worker backend 的决策实验。</h3><p>B37 已证明 deprecated SBPL 在本机能阻断窄能力，但 environment sanitization 必须独立实施，且这个 API 不应成为产品依赖。下一步对 disposable Linux VM/container 与签名 macOS App Sandbox worker host 做可执行对照：只读资产、单一输出、禁网、清洁环境、CPU/RAM/PID/GPU budget、kill/recovery 与 Blender 兼容性。B35 人类采集仍单独等待 18 位独立观察者。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
