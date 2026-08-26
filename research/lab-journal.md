@@ -402,6 +402,20 @@ Verdict: `PRE_PNG_VARIATION_SUPPORT`. Variation is already present at the scene-
 
 Artifacts: `experiments/dual-output-localization-v0-1/results.json`, `experiments/dual-output-localization-v0-1/evidence/` and `research/2026-08-26-b21-dual-output-localization-result.md`.
 
+## J-017 · Eevee fixed-thread-count freeze
+
+Type: live pre-experiment freeze, 2026-08-26.
+
+B21 proves that the variation already exists at the scene-linear EXR32 boundary. The accepted RNA inventory identifies one remaining exposed concurrency control: `scene.render.threads_mode=FIXED`, `threads=8`.
+
+B22 freezes T01 versus T08 with three fresh-process replicates per cell across all twelve carried-forward sentinels. The interleaved design totals 72 Blender processes and 72 RGBA32 float EXRs. Each cell passes only at 36/36 exact decoded comparisons. Five decision labels and nineteen negative categories are fixed before any formal B22 tool exists.
+
+The protocol explicitly warns that Blender's render-thread property may not serialize Eevee GPU work. Therefore a both-nonexact result would reject only this exposed control as sufficient, not concurrency in general.
+
+Protocol: `research/2026-08-26-b22-eevee-thread-count-factorial-protocol.md`.
+
+Status at freeze: no B22 configurator, renderer, comparator, runner or output exists.
+
 ## Journal rule for future work
 
 Every promoted result must record:

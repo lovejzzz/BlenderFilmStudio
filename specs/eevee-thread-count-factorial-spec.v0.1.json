@@ -1,0 +1,108 @@
+{
+  "documentType": "BFS_EEVEE_THREAD_COUNT_FACTORIAL_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "At the frozen 32-sample Eevee scene-linear EXR32 boundary, is Blender's exposed fixed render thread count of 8 a sufficient cause of strict cross-process variation relative to one fixed render thread?",
+  "evidenceBasis": {
+    "b21ResultsSha256": "0eb69e8a23b8453bd6d30408478ef0ffc3b1fd213f5e5c28255b9e5520be3a08",
+    "b21Decision": "PRE_PNG_VARIATION_SUPPORT",
+    "b21ExrExactPairs": 21,
+    "b21ExrTotalPairs": 36,
+    "controlInventorySha256": "abab0692823d13741ab9ff77fd67b904bcbc32b9b41d1f99af8c47a5068b1115",
+    "observedSourceThreadMode": "FIXED",
+    "observedSourceThreads": 8,
+    "sentinelFramesCarriedForward": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144]
+  },
+  "design": {
+    "type": "two-level fixed-thread intervention with three fresh-process replicates per sentinel and cell",
+    "cells": [
+      { "id": "T01", "threadsMode": "FIXED", "threads": 1, "replicates": ["A", "B", "C"] },
+      { "id": "T08", "threadsMode": "FIXED", "threads": 8, "replicates": ["A", "B", "C"] }
+    ],
+    "sentinelFrames": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144],
+    "blockOrderPerFrame": ["T01-A", "T08-A", "T01-B", "T08-B", "T01-C", "T08-C"],
+    "frameOrder": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144],
+    "runOrderFrozenBeforeExecution": true,
+    "processes": 72,
+    "renderedFrames": 72,
+    "withinCellPairsPerFrame": ["A-B", "A-C", "B-C"],
+    "primaryDecodedComparisonsPerCell": 36
+  },
+  "output": {
+    "id": "EXR32_SCENE_LINEAR",
+    "format": "OPEN_EXR",
+    "channels": ["R", "G", "B", "A"],
+    "colorDepthBits": 32,
+    "pixelType": "float",
+    "codec": "ZIP",
+    "colorDomain": "scene-linear ACEScg"
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "motionBlur": false
+  },
+  "interventionContract": {
+    "formalConfiguratorRendererComparatorAndRunnerMustNotExistAtFreeze": true,
+    "verifySourceThreadsModeFixedAndThreads8BeforeEveryIntervention": true,
+    "setThreadsModeFixedAndRequestedThreadCountInMemory": true,
+    "samePostFreezeConfiguratorAndRendererForBothCells": true,
+    "oneNewBlenderProcessAndOneRenderPerObservation": true,
+    "saveOneRgba32FloatExrPerObservation": true,
+    "mustNotSaveSourceBlend": true,
+    "recordObservedThreadsModeAndCountInEveryReport": true,
+    "recordAllToolHashesAndBindAllComparisons": true
+  },
+  "exactGate": {
+    "perDecodedExrPair": { "maximumAbsoluteError": 0.0, "failurePixels": 0 },
+    "perCell": "All 12 sentinel frames must be exact in A-B, A-C and B-C: 36/36.",
+    "noPostHocTolerance": true
+  },
+  "decisionRule": {
+    "THREAD_COUNT_CAUSAL_SUPPORT": "T01 is exact 36/36 and T08 is non-exact, with a valid experiment.",
+    "THREAD_COUNT_NOT_SUFFICIENT": "Both T01 and T08 are non-exact, with a valid experiment.",
+    "VARIATION_NOT_REPRODUCED": "Both T01 and T08 are exact 36/36, with a valid experiment.",
+    "REVERSE_OR_MIXED_THREAD_PATTERN": "T01 is non-exact and T08 is exact 36/36, with a valid experiment.",
+    "INVALID_EXPERIMENT": "Any identity, source-state, intervention, process, EXR layout, image, binding, count or attack gate fails."
+  },
+  "requiredNegativeCases": [
+    "B22 spec identity mismatch",
+    "B21 result identity mismatch",
+    "control inventory identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "configurator identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "source thread mode/count mismatch",
+    "requested thread mode differs from FIXED",
+    "requested thread count differs from cell",
+    "render samples differ from 32",
+    "dither/Fast-GI/reprojection constants differ",
+    "render count differs from one",
+    "EXR is not 960x540 RGBA float",
+    "missing or mutated EXR",
+    "comparison is not bound to both manifests and file hashes"
+  ],
+  "explicitNonClaims": [
+    "Blender's render thread control may not govern Eevee GPU shader execution or GPU sample reduction on this Apple Silicon machine.",
+    "A T01 exact result would support the exposed thread-count intervention under this profile but would not identify a source-level race.",
+    "A both-nonexact result would show only that this CPU-facing control is insufficient, not that scheduling or concurrency is irrelevant.",
+    "Three replicates falsify strict determinism but do not estimate mismatch probability.",
+    "No perceptual tolerance is selected and near-equality remains non-exact.",
+    "Nothing generalizes to Cycles, another GPU/backend, multilayer EXR or another machine."
+  ]
+}
