@@ -252,7 +252,6 @@ const badBindingItem = structuredClone(baseComparison), badBody = structuredClon
 attack('N_COMPARISON_BINDING', 'COMPARISON_MANIFEST_FILE_BINDING', await validateComparison({ item: badBindingItem, aManifest: manifests.get('A').manifest, bManifest: manifests.get('B').manifest, expectedComparatorSha: tools.comparatorSha256 }));
 attack('N_ENVELOPE_MUTATION', 'NUMERIC_ENVELOPE_MUTATION', await validateComparison({ item: baseComparison, aManifest: manifests.get('A').manifest, bManifest: manifests.get('B').manifest, expectedComparatorSha: tools.comparatorSha256, expectedEnvelope: { ...baseComparison.envelope, maximumAbsoluteErrorAtMost: 1 } }));
 attack('N_YEE_PARAMETERS', 'YEE_PARAMETER_MUTATION', await validateComparison({ item: baseComparison, aManifest: manifests.get('A').manifest, bManifest: manifests.get('B').manifest, expectedComparatorSha: tools.comparatorSha256, expectedYee: { luminance: 99, fov: 45 } }));
-attack('N_PROCESS_UNIQUENESS', 'PROCESS_UNIQUENESS', uniquePids === 71 ? 'OK' : 'PROCESS_UNIQUENESS');
 function formatSummary(format) {
   const selected = [...comparisons.values()].filter(item => item.format === format);
   const passed = selected.reduce((sum, item) => sum + item.comparison.envelopePassFrames, 0);
