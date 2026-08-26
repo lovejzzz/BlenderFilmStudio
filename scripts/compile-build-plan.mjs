@@ -3,9 +3,10 @@ import { relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { canonicalJson, canonicalize, readJson, repositoryRoot, sha256, validateSceneSpec } from './lib/scene-spec.mjs';
 import { validateSceneSpecV02 } from './lib/scene-spec-v02.mjs';
+import { validateSceneSpecV03 } from './lib/scene-spec-v03.mjs';
 import { validateActorSpec } from './lib/actor-spec.mjs';
 
-const COMPILER_VERSIONS = { '0.1.0': '0.1.0', '0.2.0': '0.2.0' };
+const COMPILER_VERSIONS = { '0.1.0': '0.1.0', '0.2.0': '0.2.0', '0.3.0': '0.3.0' };
 const TARGET_BLENDER = '5.2.0';
 const outputSpecPath = resolve(repositoryRoot, 'specs/output-spec.v0.1.json');
 
@@ -31,11 +32,13 @@ function requireOperations(document) {
   if (document.cameras.length > 0) required.add('CREATE_CAMERA');
   if (document.lights.length > 0) required.add('CREATE_LIGHT');
   if ((document.targets ?? []).length > 0) required.add('CREATE_TARGET');
-  if (document.actors.length > 0 && document.specVersion === '0.2.0') {
+  if (document.actors.length > 0 && ['0.2.0', '0.3.0'].includes(document.specVersion)) {
     required.add('IMPORT_ACTOR_SPEC');
     required.add('IMPORT_ACTION');
     required.add('APPLY_PERFORMANCE');
   }
+  if ((document.attachments ?? []).length > 0) required.add('CREATE_CONSTRAINT');
+  if ((document.geometryEvaluations ?? []).length > 0) required.add('EVALUATE_GEOMETRY');
   if (document.assets.length + document.cameras.length + document.lights.length > 0) required.add('SET_TRANSFORM');
   const missing = [...required].filter(operation => !requested.has(operation));
   if (missing.length > 0) throw new Error(`SceneSpec does not authorize required operations: ${missing.join(', ')}`);
@@ -63,7 +66,7 @@ async function resolveAssets(document) {
 }
 
 async function resolveActors(document, assets) {
-  if (document.specVersion !== '0.2.0') return sortById(document.actors);
+  if (!['0.2.0', '0.3.0'].includes(document.specVersion)) return sortById(document.actors);
   const assetMap = new Map(assets.map(asset => [asset.id, asset]));
   const targetSockets = new Map((document.targets ?? []).map(target => [target.id, new Set(target.sockets.map(socket => socket.id))]));
   const actors = [];
@@ -155,6 +158,11 @@ function normalizeDocument(document) {
   normalized.lights = sortById(normalized.lights);
   normalized.events = sortById(normalized.events);
   if (normalized.targets) normalized.targets = sortById(normalized.targets).map(target => ({ ...target, sockets: sortById(target.sockets) }));
+  if (normalized.attachments) normalized.attachments = sortById(normalized.attachments).map(attachment => ({
+    ...attachment,
+    influenceKeys: [...attachment.influenceKeys].sort((left, right) => left.frame - right.frame),
+  }));
+  if (normalized.geometryEvaluations) normalized.geometryEvaluations = sortById(normalized.geometryEvaluations);
   normalized.render.passes = [...normalized.render.passes].sort();
   normalized.security.allowedAssetRoots = [...normalized.security.allowedAssetRoots].sort();
   normalized.security.allowedOperations = [...normalized.security.allowedOperations].sort();
@@ -166,7 +174,9 @@ export async function compileBuildPlan(inputPath) {
   const absoluteInputPath = resolve(process.cwd(), inputPath);
   assertBelowRepository(absoluteInputPath, 'SceneSpec');
   const document = await readJson(absoluteInputPath);
-  const validator = document.specVersion === '0.2.0' ? validateSceneSpecV02 : validateSceneSpec;
+  const validator = document.specVersion === '0.3.0'
+    ? validateSceneSpecV03
+    : document.specVersion === '0.2.0' ? validateSceneSpecV02 : validateSceneSpec;
   const validation = validator(document);
   if (!validation.valid) {
     const details = validation.errors.map(error => `${error.code} ${error.path}: ${error.message}`).join('\n');
@@ -211,6 +221,8 @@ export async function compileBuildPlan(inputPath) {
     assets: verifiedAssets,
     actors: verifiedActors,
     ...(normalizedDocument.targets ? { targets: normalizedDocument.targets } : {}),
+    ...(normalizedDocument.attachments ? { attachments: normalizedDocument.attachments } : {}),
+    ...(normalizedDocument.geometryEvaluations ? { geometryEvaluations: normalizedDocument.geometryEvaluations } : {}),
     cameras: normalizedDocument.cameras,
     lights: normalizedDocument.lights,
     world: normalizedDocument.world,
@@ -241,7 +253,7 @@ export async function compileBuildPlan(inputPath) {
 
   return canonicalize({
     documentType: 'BFS_BUILD_PLAN',
-    planVersion: normalizedDocument.specVersion === '0.2.0' ? '0.2.0' : '0.1.0',
+    planVersion: normalizedDocument.specVersion,
     planHash: sha256(canonicalJson(plan)),
     plan,
   });

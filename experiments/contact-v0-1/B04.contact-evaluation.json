@@ -1,0 +1,5194 @@
+{
+  "allMachineChecksPassed": true,
+  "blender": {
+    "buildHash": "fbe6228777e7",
+    "version": "5.2.0 LTS"
+  },
+  "checks": [
+    {
+      "detail": "Restricted constraint resolves to the declared actor hand.",
+      "id": "B04_C01_CONSTRAINT_BINDING",
+      "measured": {
+        "subtarget": "hand.R",
+        "target": "RIG_LEAD",
+        "type": "CHILD_OF"
+      },
+      "pass": true,
+      "threshold": "CHILD_OF → RIG_LEAD.hand.R"
+    },
+    {
+      "detail": "Evaluated parent-switch states match the contract.",
+      "id": "B04_C02_INFLUENCE_STATES",
+      "measured": {
+        "1": 0.0,
+        "108": 1.0,
+        "109": 0.0,
+        "144": 0.0,
+        "47": 0.0,
+        "48": 1.0,
+        "49": 1.0
+      },
+      "pass": true,
+      "threshold": "0 / 0 / 1 / 1 / 1 / 0 / 0"
+    },
+    {
+      "detail": "Final twelve APPROACH frames move toward the real prop socket.",
+      "id": "B04_C03_APPROACH_MONOTONIC",
+      "measured": [
+        0.359932414,
+        0.355687918,
+        0.351443417,
+        0.347199033,
+        0.342954883,
+        0.338710742,
+        0.334466731,
+        0.330222969,
+        0.325979231,
+        0.321735753,
+        0.31749231,
+        0.313249073
+      ],
+      "pass": true,
+      "threshold": "non-increasing with strict net decrease"
+    },
+    {
+      "detail": "Maximum evaluated palm-to-grip position error during HOLD.",
+      "id": "B04_C04_HOLD_POSITION",
+      "measured": 1.6e-07,
+      "pass": true,
+      "threshold": "<= 0.005 m"
+    },
+    {
+      "detail": "Maximum evaluated palm-to-grip rotation error during HOLD.",
+      "id": "B04_C05_HOLD_ROTATION",
+      "measured": 0.0,
+      "pass": true,
+      "threshold": "<= 3 deg"
+    },
+    {
+      "detail": "Held relative transform remains stable.",
+      "id": "B04_C06_RELATIVE_DRIFT",
+      "measured": {
+        "positionM": 3.18e-07,
+        "rotationDeg": 0.0
+      },
+      "pass": true,
+      "threshold": "<= 0.005 m and <= 3 deg"
+    },
+    {
+      "detail": "Visible prop transport during HOLD.",
+      "id": "B04_C07_TRANSPORT",
+      "measured": 0.480552181,
+      "pass": true,
+      "threshold": ">= 0.30 m"
+    },
+    {
+      "detail": "Prop discontinuity across acquire and release switches.",
+      "id": "B04_C08_SWITCH_POP",
+      "measured": {
+        "acquireM": 1.33e-07,
+        "releaseM": 1.3e-07
+      },
+      "pass": true,
+      "threshold": "<= 0.01 m"
+    },
+    {
+      "detail": "BVH triangle-pair overlap is evaluated every frame.",
+      "id": "B04_C09_CLEAR_PHASE_OVERLAP",
+      "measured": {
+        "ACQUIRE": 11,
+        "APPROACH": 0,
+        "HOLD": 11,
+        "RELEASE": 11,
+        "RETREAT": 0
+      },
+      "pass": true,
+      "threshold": "APPROACH=0 and RETREAT=0 pairs"
+    },
+    {
+      "detail": "Vertex-to-surface proximity samples at endpoints.",
+      "id": "B04_C10_ENDPOINT_CLEARANCE",
+      "measured": {
+        "1": 0.144780189,
+        "144": 0.605083704
+      },
+      "pass": true,
+      "threshold": ">= 0.05 m"
+    }
+  ],
+  "documentType": "BFS_B04_CONTACT_EVALUATION",
+  "evaluationVersion": "0.1.0",
+  "explicitNonClaims": [
+    "BVH overlap pairs are not penetration depth or contact pressure.",
+    "Vertex-to-surface proximity is a sampled clearance estimate, not an exact signed distance.",
+    "Machine checks cannot establish anatomical grasp quality or believable weight.",
+    "Human review remains pending and B04 is not complete while it is pending."
+  ],
+  "geometry": {
+    "endpointClearanceSamplesM": {
+      "1": 0.144780189,
+      "144": 0.605083704
+    },
+    "maxOverlapPairsPerFrame": {
+      "ACQUIRE": 11,
+      "APPROACH": 0,
+      "HOLD": 11,
+      "RELEASE": 11,
+      "RETREAT": 0
+    },
+    "overlapPairTotals": {
+      "ACQUIRE": 53,
+      "APPROACH": 0,
+      "HOLD": 660,
+      "RELEASE": 24,
+      "RETREAT": 0
+    }
+  },
+  "humanReview": {
+    "required": true,
+    "status": "PENDING"
+  },
+  "planHash": "bb9e4ff1484d448868ec5a55a6830e353a17d3eb787cbda6d247a96abf545b08",
+  "samples": [
+    {
+      "frame": 1,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 2,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 3,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 4,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 5,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 6,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 7,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 8,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 9,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 10,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 11,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 12,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 13,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 14,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 15,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 16,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 17,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 18,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 19,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 20,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 21,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 22,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 23,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 24,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.364177083,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 25,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.576606512,
+        0.000372688,
+        1.102530122
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.359932411,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 26,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.5732131,
+        0.000745366,
+        1.105060101
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.355687921,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 27,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.569819629,
+        0.001118043,
+        1.107590199
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.351443418,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 28,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.566426158,
+        0.001490721,
+        1.110120296
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.34719903,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 29,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.563032746,
+        0.001863399,
+        1.112650275
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.342954885,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 30,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.559639275,
+        0.002236077,
+        1.115180373
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.338710735,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 31,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.556245804,
+        0.002608755,
+        1.117710471
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.334466725,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 32,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.552852392,
+        0.002981432,
+        1.12024045
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.330222972,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 33,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.549458921,
+        0.00335411,
+        1.122770548
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.325979229,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 34,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.546065509,
+        0.003726788,
+        1.125300527
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.321735752,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 35,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.542672038,
+        0.004099465,
+        1.127830625
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.317492311,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 36,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.539278626,
+        0.004472143,
+        1.130360723
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "APPROACH",
+      "positionErrorM": 0.313249076,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 37,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.517672539,
+        0.006149193,
+        1.144913673
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.287144975,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 38,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.49606654,
+        0.007826244,
+        1.159466743
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.261040883,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 39,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.474460512,
+        0.009503294,
+        1.174019694
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.234936834,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 40,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 4,
+      "palmLocationM": [
+        -0.452854455,
+        0.011180344,
+        1.188572764
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.208832702,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 41,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 4,
+      "palmLocationM": [
+        -0.431248426,
+        0.012857394,
+        1.203125715
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.182728649,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 42,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 4,
+      "palmLocationM": [
+        -0.409642398,
+        0.014534443,
+        1.217678785
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.156624538,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 43,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 4,
+      "palmLocationM": [
+        -0.38803637,
+        0.016211491,
+        1.232231736
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.13052049,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 44,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 4,
+      "palmLocationM": [
+        -0.366430342,
+        0.017888542,
+        1.246784806
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.104416375,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 45,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 6,
+      "palmLocationM": [
+        -0.344824314,
+        0.019565593,
+        1.261337876
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.078312259,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 46,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 6,
+      "palmLocationM": [
+        -0.323218256,
+        0.021242643,
+        1.275890827
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.052208188,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 47,
+      "gripLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 10,
+      "palmLocationM": [
+        -0.301612228,
+        0.022919696,
+        1.290443897
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 0.026104073,
+      "propLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 48,
+      "gripLocationM": [
+        -0.280006289,
+        0.024596682,
+        1.304996848
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.28000617,
+        0.024596741,
+        1.304996848
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "ACQUIRE",
+      "positionErrorM": 1.33e-07,
+      "propLocationM": [
+        -0.280006289,
+        0.024596682,
+        1.304996848
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 49,
+      "gripLocationM": [
+        -0.274249017,
+        0.025826534,
+        1.310625553
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.274248898,
+        0.025826579,
+        1.310625553
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.27e-07,
+      "propLocationM": [
+        -0.274249017,
+        0.025826534,
+        1.310625553
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 50,
+      "gripLocationM": [
+        -0.268491775,
+        0.027056357,
+        1.316254139
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.268491656,
+        0.027056416,
+        1.316254139
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.33e-07,
+      "propLocationM": [
+        -0.268491775,
+        0.027056357,
+        1.316254139
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 51,
+      "gripLocationM": [
+        -0.262734503,
+        0.028286209,
+        1.321882844
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.262734383,
+        0.028286252,
+        1.321882844
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.27e-07,
+      "propLocationM": [
+        -0.262734503,
+        0.028286209,
+        1.321882844
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 52,
+      "gripLocationM": [
+        -0.25697723,
+        0.029516032,
+        1.32751143
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.256977081,
+        0.029516092,
+        1.32751143
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.6e-07,
+      "propLocationM": [
+        -0.25697723,
+        0.029516032,
+        1.32751143
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 53,
+      "gripLocationM": [
+        -0.251219958,
+        0.030745884,
+        1.333140016
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.251219839,
+        0.030745929,
+        1.333140016
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.27e-07,
+      "propLocationM": [
+        -0.251219958,
+        0.030745884,
+        1.333140016
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 54,
+      "gripLocationM": [
+        -0.245462671,
+        0.031975709,
+        1.338768721
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.245462567,
+        0.031975769,
+        1.338768721
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.2e-07,
+      "propLocationM": [
+        -0.245462671,
+        0.031975709,
+        1.338768721
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 55,
+      "gripLocationM": [
+        -0.239705399,
+        0.033205561,
+        1.344397306
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.239705294,
+        0.033205602,
+        1.344397306
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.12e-07,
+      "propLocationM": [
+        -0.239705399,
+        0.033205561,
+        1.344397306
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 56,
+      "gripLocationM": [
+        -0.233948126,
+        0.034435384,
+        1.350026011
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.233947992,
+        0.03443544,
+        1.350026011
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.45e-07,
+      "propLocationM": [
+        -0.233948126,
+        0.034435384,
+        1.350026011
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 57,
+      "gripLocationM": [
+        -0.228190795,
+        0.035665236,
+        1.355654597
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.22819072,
+        0.035665281,
+        1.355654597
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 8.7e-08,
+      "propLocationM": [
+        -0.228190795,
+        0.035665236,
+        1.355654597
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 58,
+      "gripLocationM": [
+        -0.222433582,
+        0.036895059,
+        1.361283183
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.222433448,
+        0.036895115,
+        1.361283183
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.45e-07,
+      "propLocationM": [
+        -0.222433582,
+        0.036895059,
+        1.361283183
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 59,
+      "gripLocationM": [
+        -0.21667625,
+        0.038124911,
+        1.366911888
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.216676176,
+        0.038124949,
+        1.366911888
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 8.3e-08,
+      "propLocationM": [
+        -0.21667625,
+        0.038124911,
+        1.366911888
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 60,
+      "gripLocationM": [
+        -0.210919037,
+        0.039354734,
+        1.372540593
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.210918903,
+        0.039354786,
+        1.372540593
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.44e-07,
+      "propLocationM": [
+        -0.210919037,
+        0.039354734,
+        1.372540593
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 61,
+      "gripLocationM": [
+        -0.205161765,
+        0.040584587,
+        1.378169179
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.205161661,
+        0.04058462,
+        1.378169179
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.1e-07,
+      "propLocationM": [
+        -0.205161765,
+        0.040584587,
+        1.378169179
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 62,
+      "gripLocationM": [
+        -0.199404493,
+        0.041814409,
+        1.383797765
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.199404359,
+        0.041814461,
+        1.383797765
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.44e-07,
+      "propLocationM": [
+        -0.199404493,
+        0.041814409,
+        1.383797765
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 63,
+      "gripLocationM": [
+        -0.193647161,
+        0.043044262,
+        1.38942647
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.193647057,
+        0.043044299,
+        1.38942647
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.11e-07,
+      "propLocationM": [
+        -0.193647161,
+        0.043044262,
+        1.38942647
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 64,
+      "gripLocationM": [
+        -0.187889948,
+        0.044274084,
+        1.395055056
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.187889814,
+        0.044274133,
+        1.395055056
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.43e-07,
+      "propLocationM": [
+        -0.187889948,
+        0.044274084,
+        1.395055056
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 65,
+      "gripLocationM": [
+        -0.182132617,
+        0.045503937,
+        1.400683761
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.182132512,
+        0.045503974,
+        1.400683761
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.11e-07,
+      "propLocationM": [
+        -0.182132617,
+        0.045503937,
+        1.400683761
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 66,
+      "gripLocationM": [
+        -0.176375344,
+        0.046733759,
+        1.406312346
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.17637524,
+        0.046733808,
+        1.406312346
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.15e-07,
+      "propLocationM": [
+        -0.176375344,
+        0.046733759,
+        1.406312346
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 67,
+      "gripLocationM": [
+        -0.170618072,
+        0.047963582,
+        1.411940932
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.170617998,
+        0.047963642,
+        1.411940932
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 9.5e-08,
+      "propLocationM": [
+        -0.170618072,
+        0.047963582,
+        1.411940932
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 68,
+      "gripLocationM": [
+        -0.16486086,
+        0.049193434,
+        1.417569518
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.164860725,
+        0.049193483,
+        1.417569518
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.43e-07,
+      "propLocationM": [
+        -0.16486086,
+        0.049193434,
+        1.417569518
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 69,
+      "gripLocationM": [
+        -0.159103528,
+        0.050423287,
+        1.423198223
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.159103423,
+        0.05042332,
+        1.423198223
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.1e-07,
+      "propLocationM": [
+        -0.159103528,
+        0.050423287,
+        1.423198223
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 70,
+      "gripLocationM": [
+        -0.153346315,
+        0.051653109,
+        1.428826928
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.153346181,
+        0.051653162,
+        1.428826928
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.44e-07,
+      "propLocationM": [
+        -0.153346315,
+        0.051653109,
+        1.428826928
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 71,
+      "gripLocationM": [
+        -0.147589043,
+        0.052882932,
+        1.434455514
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.147588938,
+        0.052882995,
+        1.434455514
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.22e-07,
+      "propLocationM": [
+        -0.147589043,
+        0.052882932,
+        1.434455514
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 72,
+      "gripLocationM": [
+        -0.141831651,
+        0.054112785,
+        1.4400841
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.141831577,
+        0.054112833,
+        1.4400841
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 8.9e-08,
+      "propLocationM": [
+        -0.141831651,
+        0.054112785,
+        1.4400841
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 73,
+      "gripLocationM": [
+        -0.136074439,
+        0.055342637,
+        1.445712805
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.136074334,
+        0.055342671,
+        1.445712805
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.1e-07,
+      "propLocationM": [
+        -0.136074439,
+        0.055342637,
+        1.445712805
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 74,
+      "gripLocationM": [
+        -0.130317166,
+        0.05657246,
+        1.45134151
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.130317062,
+        0.056572504,
+        1.45134151
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.13e-07,
+      "propLocationM": [
+        -0.130317166,
+        0.05657246,
+        1.45134151
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 75,
+      "gripLocationM": [
+        -0.124559894,
+        0.057802282,
+        1.456970096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.12455979,
+        0.057802338,
+        1.456970096
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.18e-07,
+      "propLocationM": [
+        -0.124559894,
+        0.057802282,
+        1.456970096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 76,
+      "gripLocationM": [
+        -0.118802622,
+        0.059032135,
+        1.462598681
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.118802518,
+        0.059032179,
+        1.462598681
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.13e-07,
+      "propLocationM": [
+        -0.118802622,
+        0.059032135,
+        1.462598681
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 77,
+      "gripLocationM": [
+        -0.11304535,
+        0.060261957,
+        1.468227267
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.113045245,
+        0.060262013,
+        1.468227267
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.18e-07,
+      "propLocationM": [
+        -0.11304535,
+        0.060261957,
+        1.468227267
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 78,
+      "gripLocationM": [
+        -0.107288077,
+        0.06149181,
+        1.473855972
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.107287973,
+        0.061491847,
+        1.473855972
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.11e-07,
+      "propLocationM": [
+        -0.107288077,
+        0.06149181,
+        1.473855972
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 79,
+      "gripLocationM": [
+        -0.101530805,
+        0.062721632,
+        1.479484677
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.101530701,
+        0.062721692,
+        1.479484677
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.2e-07,
+      "propLocationM": [
+        -0.101530805,
+        0.062721632,
+        1.479484677
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 80,
+      "gripLocationM": [
+        -0.095773473,
+        0.063951485,
+        1.485113263
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.095773399,
+        0.063951522,
+        1.485113263
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 8.3e-08,
+      "propLocationM": [
+        -0.095773473,
+        0.063951485,
+        1.485113263
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 81,
+      "gripLocationM": [
+        -0.090016261,
+        0.065181307,
+        1.490741849
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.090016127,
+        0.06518136,
+        1.490741849
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.44e-07,
+      "propLocationM": [
+        -0.090016261,
+        0.065181307,
+        1.490741849
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 82,
+      "gripLocationM": [
+        -0.084258929,
+        0.06641116,
+        1.496370554
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.084258854,
+        0.066411197,
+        1.496370554
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 8.3e-08,
+      "propLocationM": [
+        -0.084258929,
+        0.06641116,
+        1.496370554
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 83,
+      "gripLocationM": [
+        -0.078501716,
+        0.067640983,
+        1.50199914
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.078501612,
+        0.067641027,
+        1.50199914
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.13e-07,
+      "propLocationM": [
+        -0.078501716,
+        0.067640983,
+        1.50199914
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 84,
+      "gripLocationM": [
+        -0.072744384,
+        0.068870805,
+        1.507627845
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.07274428,
+        0.068870865,
+        1.507627845
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.2e-07,
+      "propLocationM": [
+        -0.072744384,
+        0.068870805,
+        1.507627845
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 85,
+      "gripLocationM": [
+        -0.066987172,
+        0.070100658,
+        1.513256431
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.066987067,
+        0.070100702,
+        1.513256431
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.13e-07,
+      "propLocationM": [
+        -0.066987172,
+        0.070100658,
+        1.513256431
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 86,
+      "gripLocationM": [
+        -0.0612299,
+        0.07133051,
+        1.518885016
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.061229795,
+        0.07133054,
+        1.518885016
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.08e-07,
+      "propLocationM": [
+        -0.0612299,
+        0.07133051,
+        1.518885016
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 87,
+      "gripLocationM": [
+        -0.055472627,
+        0.072560333,
+        1.524513721
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.055472523,
+        0.07256037,
+        1.524513721
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.11e-07,
+      "propLocationM": [
+        -0.055472627,
+        0.072560333,
+        1.524513721
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 88,
+      "gripLocationM": [
+        -0.049715295,
+        0.073790155,
+        1.530142307
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.049715191,
+        0.073790215,
+        1.530142307
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.2e-07,
+      "propLocationM": [
+        -0.049715295,
+        0.073790155,
+        1.530142307
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 89,
+      "gripLocationM": [
+        -0.043958083,
+        0.075020008,
+        1.535771012
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.043957978,
+        0.075020052,
+        1.535771012
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.13e-07,
+      "propLocationM": [
+        -0.043958083,
+        0.075020008,
+        1.535771012
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 90,
+      "gripLocationM": [
+        -0.038200751,
+        0.07624986,
+        1.541399598
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.038200647,
+        0.07624989,
+        1.541399598
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.08e-07,
+      "propLocationM": [
+        -0.038200751,
+        0.07624986,
+        1.541399598
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 91,
+      "gripLocationM": [
+        -0.032443538,
+        0.077479683,
+        1.547028184
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.032443434,
+        0.077479728,
+        1.547028184
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.13e-07,
+      "propLocationM": [
+        -0.032443538,
+        0.077479683,
+        1.547028184
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 92,
+      "gripLocationM": [
+        -0.026686281,
+        0.078709505,
+        1.552656889
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.026686162,
+        0.078709565,
+        1.552656889
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.33e-07,
+      "propLocationM": [
+        -0.026686281,
+        0.078709505,
+        1.552656889
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 93,
+      "gripLocationM": [
+        -0.020929009,
+        0.079939358,
+        1.558285594
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.02092889,
+        0.079939403,
+        1.558285594
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.27e-07,
+      "propLocationM": [
+        -0.020929009,
+        0.079939358,
+        1.558285594
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 94,
+      "gripLocationM": [
+        -0.015171677,
+        0.081169181,
+        1.56391418
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.015171558,
+        0.081169233,
+        1.56391418
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.3e-07,
+      "propLocationM": [
+        -0.015171677,
+        0.081169181,
+        1.56391418
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 95,
+      "gripLocationM": [
+        -0.009414464,
+        0.082399033,
+        1.569542766
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.009414345,
+        0.082399078,
+        1.569542766
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.27e-07,
+      "propLocationM": [
+        -0.009414464,
+        0.082399033,
+        1.569542766
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 96,
+      "gripLocationM": [
+        -0.003657192,
+        0.083628856,
+        1.575171351
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        -0.003657073,
+        0.083628915,
+        1.575171351
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.33e-07,
+      "propLocationM": [
+        -0.003657192,
+        0.083628856,
+        1.575171351
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 97,
+      "gripLocationM": [
+        0.00210008,
+        0.084858708,
+        1.580800056
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.002100199,
+        0.084858745,
+        1.580800056
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.25e-07,
+      "propLocationM": [
+        0.00210008,
+        0.084858708,
+        1.580800056
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 98,
+      "gripLocationM": [
+        0.007857412,
+        0.086088561,
+        1.586428761
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.007857531,
+        0.08608859,
+        1.586428761
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.23e-07,
+      "propLocationM": [
+        0.007857412,
+        0.086088561,
+        1.586428761
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 99,
+      "gripLocationM": [
+        0.013614625,
+        0.087318383,
+        1.592057347
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.013614744,
+        0.087318428,
+        1.592057347
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.27e-07,
+      "propLocationM": [
+        0.013614625,
+        0.087318383,
+        1.592057347
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 100,
+      "gripLocationM": [
+        0.019371897,
+        0.088548206,
+        1.597685933
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.019372016,
+        0.088548258,
+        1.597685933
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.3e-07,
+      "propLocationM": [
+        0.019371897,
+        0.088548206,
+        1.597685933
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 101,
+      "gripLocationM": [
+        0.025129229,
+        0.089778058,
+        1.603314638
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.025129348,
+        0.089778095,
+        1.603314638
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.25e-07,
+      "propLocationM": [
+        0.025129229,
+        0.089778058,
+        1.603314638
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 102,
+      "gripLocationM": [
+        0.030886501,
+        0.091007911,
+        1.608943224
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.03088662,
+        0.09100794,
+        1.608943224
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.23e-07,
+      "propLocationM": [
+        0.030886501,
+        0.091007911,
+        1.608943224
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 103,
+      "gripLocationM": [
+        0.036643714,
+        0.092237733,
+        1.614571929
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.036643833,
+        0.092237771,
+        1.614571929
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.25e-07,
+      "propLocationM": [
+        0.036643714,
+        0.092237733,
+        1.614571929
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 104,
+      "gripLocationM": [
+        0.042401046,
+        0.093467556,
+        1.620200515
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.042401165,
+        0.093467608,
+        1.620200515
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.3e-07,
+      "propLocationM": [
+        0.042401046,
+        0.093467556,
+        1.620200515
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 105,
+      "gripLocationM": [
+        0.048158318,
+        0.094697408,
+        1.625829101
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.048158437,
+        0.094697453,
+        1.625829101
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.27e-07,
+      "propLocationM": [
+        0.048158318,
+        0.094697408,
+        1.625829101
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 106,
+      "gripLocationM": [
+        0.05391553,
+        0.095927231,
+        1.631457806
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.05391565,
+        0.095927276,
+        1.631457806
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.27e-07,
+      "propLocationM": [
+        0.05391553,
+        0.095927231,
+        1.631457806
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 107,
+      "gripLocationM": [
+        0.059672862,
+        0.097157083,
+        1.637086391
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.059672982,
+        0.097157121,
+        1.637086391
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.25e-07,
+      "propLocationM": [
+        0.059672862,
+        0.097157083,
+        1.637086391
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 108,
+      "gripLocationM": [
+        0.065430135,
+        0.098386906,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -5.3e-08,
+        0.632455528
+      ],
+      "influence": 1.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "HOLD",
+      "positionErrorM": 1.3e-07,
+      "propLocationM": [
+        0.065430135,
+        0.098386906,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 109,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 11,
+      "palmLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.0,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 110,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 6,
+      "palmLocationM": [
+        0.006754786,
+        0.089442693,
+        1.593377352
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.077181756,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 111,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 7,
+      "palmLocationM": [
+        -0.051920682,
+        0.080498427,
+        1.544039607
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.154363512,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 112,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.11059621,
+        0.071554154,
+        1.494701862
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.231545317,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 113,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.169271678,
+        0.062609889,
+        1.445364118
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.308727067,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 114,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.227947146,
+        0.053665619,
+        1.396026373
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.385908827,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 115,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.286622614,
+        0.044721354,
+        1.346688628
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.463090585,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 116,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.345298052,
+        0.035777085,
+        1.297351003
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.540272247,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 117,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.40397352,
+        0.026832815,
+        1.248013258
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.617454001,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 118,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.462649018,
+        0.017888542,
+        1.198675513
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.694635781,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 119,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.521324515,
+        0.008944277,
+        1.149337769
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.771817577,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 120,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RELEASE",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 121,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 122,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 123,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 124,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 125,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 126,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 127,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 128,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 129,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 130,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 131,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 132,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 133,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 134,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 135,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 136,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 137,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 138,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 139,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 140,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 141,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 142,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 143,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    },
+    {
+      "frame": 144,
+      "gripLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "gripRotationQuaternion": [
+        0.707106769,
+        -0.316227764,
+        -4.2e-08,
+        0.632455587
+      ],
+      "influence": 0.0,
+      "overlapPairs": 0,
+      "palmLocationM": [
+        -0.579999924,
+        1e-08,
+        1.100000024
+      ],
+      "palmRotationQuaternion": [
+        0.707106829,
+        -0.316227704,
+        -3.2e-08,
+        0.632455528
+      ],
+      "phase": "RETREAT",
+      "positionErrorM": 0.848999289,
+      "propLocationM": [
+        0.065430254,
+        0.098386958,
+        1.642715096
+      ],
+      "rotationErrorDeg": 0.0
+    }
+  ]
+}

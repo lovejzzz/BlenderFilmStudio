@@ -46,7 +46,7 @@ export default function ActorV01Page() {
     <main className="actor-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="角色实验导航"><Link href="/">技术基线</Link><Link href="/compiler-v0-1">编译实验</Link><Link href="/pixel-v0-1">像素实验</Link><Link href="/research-agenda">研究路线</Link><a href="#evidence">证据</a><a href="#limits">边界</a></nav>
+        <nav aria-label="角色实验导航"><Link href="/">技术基线</Link><Link href="/compiler-v0-1">编译实验</Link><Link href="/pixel-v0-1">像素实验</Link><Link href="/research-agenda">研究路线</Link><Link className="contact-route" href="/contact-v0-1">接触实验</Link><a href="#evidence">证据</a><a href="#limits">边界</a></nav>
         <span className="edition actor-edition">Actor 0.1</span>
       </header>
 
@@ -98,15 +98,15 @@ export default function ActorV01Page() {
       <section className="section actor-integration">
         <div className="section-index">06 / SceneSpec v0.2 集成</div>
         <div className="actor-heading dark-heading"><div><p className="eyebrow dark"><span /> ACTOR → SCENE → BUILDPLAN → BLENDER</p><h2>B03 已进入场景合同。<br /><span>目标相对误差可测。</span></h2></div><p>SceneSpec v0.1 保持冻结；v0.2 新增 ActorSpec 哈希引用、场景 target sockets 与角色专用权限。相同 BuildPlan 两次净编译得到同一结构哈希，再从最终 `.blend` 测量角色—目标关系。</p></div>
-        <div className="integration-stats"><article><strong>2 / 2</strong><span>净构建结构一致</span><small>b1760812…ae0c8</small></article><article><strong>9 / 9</strong><span>表情值零误差</span><small>compiled Shape Keys</small></article><article><strong>0.0°</strong><span>场景相对眼神</span><small>2 targets × 2 eyes</small></article><article><strong>4.4e−8 m</strong><span>最大脚底位置误差</span><small>144 samples · rotation 0°</small></article></div>
+        <div className="integration-stats"><article><strong>2 / 2</strong><span>净构建结构一致</span><small>96041c22…d5ff</small></article><article><strong>9 / 9</strong><span>表情值零误差</span><small>compiled Shape Keys</small></article><article><strong>0.0°</strong><span>场景相对眼神</span><small>2 targets × 2 eyes</small></article><article><strong>4.4e−8 m</strong><span>最大脚底位置误差</span><small>144 samples · rotation 0°</small></article></div>
         <div className="integration-plan"><span>BUILDPLAN</span><code>56417f40ffa6…c22cd</code><b>5 / 5 EVALUATION PASS</b><b>4 / 4 NEGATIVES REJECTED</b></div>
         <div className="integration-flow"><article><span>01</span><b>SceneSpec v0.2</b><small>actors + targets + permissions</small></article><i>→</i><article><span>02</span><b>Immutable BuildPlan</b><small>asset/action/spec hashes</small></article><i>→</i><article><span>03</span><b>Blender compile</b><small>Action + Shape Keys + gaze</small></article><i>→</i><article><span>04</span><b>Scene evaluator</b><small>gaze + position + rotation + slip</small></article></div>
       </section>
 
       <section className="section actor-limits" id="limits">
         <div className="section-index">07 / 明确边界与下一步</div>
-        <div className="actor-heading dark-heading"><div><p className="eyebrow dark"><span /> DO NOT OVERCLAIM</p><h2>下一关不是再放一个点。<br />是<span>让手真正拿起物体。</span></h2></div><p>B03 已测量脚底与场景目标的位置和旋转关系，但 target socket 数值一致仍不能证明网格接触可信。B04 必须加入可见手掌、道具几何、拿起/释放状态与穿插检测。</p></div>
-        <div className="actor-limit-grid"><article><span>NOT PROVEN</span><h3>近景人物真实感</h3><p>皮肤、眼睛、牙齿、舌头、头发、肌肉、口型、情绪与微表演。</p></article><article><span>NOT PROVEN</span><h3>接触可信度</h3><p>手指抓握、碰撞、掌心贴合、目标相对旋转、软组织与布料响应。</p></article><article className="next"><span>NEXT BENCHMARK</span><h3>B04 · Prop pickup</h3><p>建立可见手掌和道具几何，测量接近、闭合、持有、移动、释放与网格穿插。</p></article></div>
+        <div className="actor-heading dark-heading"><div><p className="eyebrow dark"><span /> B04 AUTOMATION EXECUTED</p><h2>手已经拿起物体。<br /><span>但还不像真实抓取。</span></h2></div><p>B04 已加入可见手掌、真实道具、父级切换与求值几何，10/10 机器检查和 8/8 反例通过；人类审查仍未完成，盒状手掌也不能证明手指与重量感。</p></div>
+        <div className="actor-limit-grid"><article><span>NOT PROVEN</span><h3>近景人物真实感</h3><p>皮肤、眼睛、牙齿、舌头、头发、肌肉、口型、情绪与微表演。</p></article><article><span>NOT PROVEN</span><h3>接触可信度</h3><p>手指抓握、碰撞压力、掌心贴合、软组织、布料响应与重量感。</p></article><article className="next"><span>EXECUTED · HUMAN PENDING</span><h3><Link href="/contact-v0-1">B04 · Prop pickup</Link></h3><p>查看 SceneSpec v0.3、双净构建、逐帧 BVH、失败修正与全部反例。</p></article></div>
         <div className="actor-artifacts"><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/actor-spec.v0.1.schema.json" target="_blank" rel="noreferrer"><span>CONTRACT</span><b>ActorSpec schema ↗</b></a><a href="https://github.com/lovejzzz/BlenderFilmStudio/tree/main/experiments/actor-v0-1" target="_blank" rel="noreferrer"><span>EXECUTED EVIDENCE</span><b>audit · evaluation · negatives ↗</b></a><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-26-actor-spec-v0.1-experiment.md" target="_blank" rel="noreferrer"><span>RESEARCH NOTE</span><b>methods · nonclaims ↗</b></a></div>
         <ol className="references actor-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>

@@ -135,8 +135,10 @@ SceneSpec v0.1 remains frozen. A new v0.2 contract adds:
 B03 was compiled twice from the same BuildPlan:
 
 - BuildPlan SHA-256: `56417f40ffa6f0514cddb78ae0b484f6a4820d9d397ebb0edca4b28a4b1c22cd`
-- run A structure SHA-256: `b17608123d5e5d09fb7ccbc8c72c113be462654a11e43595a5aa07a6145ae0c8`
-- run B structure SHA-256: `b17608123d5e5d09fb7ccbc8c72c113be462654a11e43595a5aa07a6145ae0c8`
+- run A structure SHA-256: `96041c22a6626b4c5aceff3cc74155d5be411cfe0142f3025ecdf2d86d84d5ff`
+- run B structure SHA-256: `96041c22a6626b4c5aceff3cc74155d5be411cfe0142f3025ecdf2d86d84d5ff`
+
+The earlier `b176…ae0c8` value was produced while the structure manifest accidentally omitted the actor/target subreport due to an early return. The compiled scene and evaluated B03 results were unchanged; the corrected compiler now includes those records, and B01/B02 regression hashes remain unchanged.
 - structure equality: **true**
 - raw `.blend` SHA equality: **false**
 

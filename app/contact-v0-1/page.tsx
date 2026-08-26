@@ -1,0 +1,105 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+
+const publicUrl = 'https://lovejzzz.github.io/BlenderFilmStudio/contact-v0-1/';
+const imageBasePath = process.env.GITHUB_PAGES === 'true' ? '/BlenderFilmStudio' : '';
+const repo = 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/';
+
+export const metadata: Metadata = {
+  title: 'B04 接触基准｜SceneSpec v0.3｜Blender Film Studio',
+  description: 'Blender 5.2 可见手—道具拿取实测：资产绑定 socket、Child Of 父级切换、依赖图几何、BVH 重叠与反例。',
+  alternates: { canonical: publicUrl },
+  openGraph: {
+    title: 'B04：机器通过，不等于抓取可信',
+    description: '10/10 自动检查、8/8 反例拒绝、双净构建一致；人类审查仍待完成。',
+    url: publicUrl,
+    images: [{ url: `${publicUrl}B04-frame-0078.png`, width: 960, height: 540, alt: 'B04 technical prop pickup at hold frame 78' }],
+  },
+};
+
+const frames = [
+  ['0036', 'APPROACH', '0 overlap pairs'],
+  ['0048', 'ACQUIRE', 'Child Of 0 → 1'],
+  ['0078', 'HOLD', 'relative drift ≈ 0'],
+  ['0108', 'HOLD END', 'transport 0.4806 m'],
+  ['0120', 'RELEASE', 'prop remains; hand retreats'],
+];
+
+const checks = [
+  ['C01–C03', '合同与接近', '约束绑定、影响值状态、最后 12 帧距离单调下降'],
+  ['C04–C06', '接触与漂移', '最大位置误差 1.6e−7 m；旋转 0°；相对漂移 3.18e−7 m'],
+  ['C07–C08', '搬运与切换', '搬运 0.4806 m；拿起/释放跳变约 1.3e−7 m'],
+  ['C09–C10', '求值几何', 'APPROACH/RETREAT 零重叠；端点间隙 0.1448 / 0.6051 m'],
+];
+
+const negatives = [
+  '缺失道具对象', '缺失角色 socket', '缺 CREATE_CONSTRAINT 权限', '影响值始终为零',
+  '释放位姿跳变 1 m', '接近阶段网格重叠', '静态假 target marker', '请求原始而非求值几何',
+];
+
+export default function ContactV01Page() {
+  return (
+    <main className="contact-page">
+      <header className="topbar">
+        <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
+        <nav aria-label="接触实验导航"><Link href="/">技术基线</Link><Link href="/actor-v0-1">角色实验</Link><Link href="/research-agenda">研究路线</Link><a href="#evidence">画面</a><a href="#limits">边界</a></nav>
+        <span className="edition contact-edition">Contact 0.1</span>
+      </header>
+
+      <section className="contact-hero">
+        <div className="contact-grid" aria-hidden="true" />
+        <div className="contact-hero-copy"><p className="eyebrow"><span /> BLENDER 5.2 · EXECUTED · B04</p><h1>数值接触成立。<br /><span>可信抓取尚未成立。</span></h1><p>SceneSpec v0.3 把真实道具、资产绑定插槽、父级切换和求值几何写成可拒绝合同。机器结果全部通过；技术假手的观感仍必须交给人类审查。</p></div>
+        <aside className="contact-gate"><b>STOP GATE</b><strong>HUMAN REVIEW<br />PENDING</strong><code>machine 10 / 10</code><code>negatives 8 / 8</code><small>B04 experiment complete = FALSE</small></aside>
+        <div className="contact-stats"><article><strong>2 / 2</strong><span>净构建结构一致</span><small>7fd1a426…63757</small></article><article><strong>10 / 10</strong><span>机器检查</span><small>evaluated Blender state</small></article><article><strong>8 / 8</strong><span>反例被拒绝</span><small>schema → evaluator</small></article><article><strong>0.4806 m</strong><span>HOLD 搬运</span><small>threshold ≥ 0.30 m</small></article></div>
+      </section>
+
+      <section className="section contact-verdict">
+        <div className="section-index">00 / 有限结论</div>
+        <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> WHAT THE EXPERIMENT PROVES</p><h2>Blender 可以编译<br /><span>可编辑的交互状态。</span></h2></div><p>它证明 Child Of 父级切换、Action、资产 socket 和依赖图几何可以被同一份不可变 BuildPlan 驱动并测量。它不证明手指抓握、受力、软组织、重量感或电影表演已经自动解决。</p></div>
+        <div className="contact-boundary"><b>AUTOMATION PASS</b><span>asset-bound target</span><span>parent switch</span><span>evaluated geometry</span><span>BVH overlap</span><span>identity lock</span><strong>HUMAN PENDING</strong></div>
+      </section>
+
+      <section className="section contact-evidence" id="evidence">
+        <div className="section-index light">01 / 五阶段可见证据</div>
+        <div className="contact-heading"><div><p className="eyebrow"><span /> TECHNICAL PROXY · NOT ART DIRECTION</p><h2>同一个道具，<br />经历<span>接近、拿起、搬运、释放。</span></h2></div><p>这些图直接来自编译后的 `.blend`。盒状手掌用于暴露几何和时序，不是角色美术展示；其中的僵硬与穿插感正是人类审查仍不能省略的原因。</p></div>
+        <div className="contact-gallery">{frames.map(([frame, title, note], index) => <figure className={index === 2 ? 'wide' : ''} key={frame}><Image src={`${imageBasePath}/contact-v0-1/B04-frame-${frame}.png`} alt={`B04 ${title} frame ${frame}`} width={960} height={540} sizes="(max-width: 800px) 100vw, 50vw" /><figcaption><span>FRAME {frame}</span><h3>{title}</h3><code>{note}</code></figcaption></figure>)}</div>
+      </section>
+
+      <section className="section contact-contract">
+        <div className="section-index">02 / SceneSpec v0.3</div>
+        <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> STATIC MARKERS ARE NOT CONTACT</p><h2>v0.3 新增三件事：<br /><span>绑定、切换、求值。</span></h2></div><p>道具 GRIP socket 必须绑定到真实资产对象；父级切换只能用受限 CHILD_OF 指令；碰撞检查必须读取依赖图求值后的网格。v0.1 与 v0.2 的含义保持冻结。</p></div>
+        <div className="contact-flow"><article><span>01</span><b>ASSET_OBJECT SOCKET</b><p>assetRef + objectRef + local transform</p></article><i>→</i><article><span>02</span><b>CHILD_OF TRACK</b><p>target actor/socket + inverse + influence keys</p></article><i>→</i><article><span>03</span><b>EVALUATED_WORLD</b><p>Depsgraph mesh → BVH overlap / proximity</p></article></div>
+        <div className="contact-plan"><span>BUILDPLAN SHA-256</span><code>bb9e4ff1484d…45b08</code><b>SCENE v0.3</b><b>BLENDER 5.2.0 LTS</b></div>
+      </section>
+
+      <section className="section contact-metrics">
+        <div className="section-index light">03 / 自动验收</div>
+        <div className="contact-heading"><div><p className="eyebrow"><span /> TEN CHECKS · EVALUATED STATE</p><h2>不是“约束存在”。<br />是<span>最终状态满足阈值。</span></h2></div><p>每帧从 Blender dependency graph 读取手掌、道具、约束与变形网格。BVH overlap 只代表相交三角形对，不代表穿透深度或压力。</p></div>
+        <div className="contact-checks">{checks.map(([id, title, detail]) => <article key={id}><span>{id}</span><h3>{title}</h3><p>{detail}</p><b>PASS</b></article>)}</div>
+        <div className="contact-nonclaim"><b>MEASUREMENT LIMIT</b><p>HOLD 最大重叠为 11 个三角形对；这里仅记录，不解释为“11 mm”或任何穿透体积。端点间隙是 vertex-to-surface 采样，不是精确 signed distance。</p></div>
+      </section>
+
+      <section className="section contact-failure">
+        <div className="section-index">04 / 先失败，再修正</div>
+        <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> FIRST RUN · 7 / 10</p><h2>父级切换没跳。<br /><span>几何与朝向却错了。</span></h2></div><p>第一轮拿起/释放跳变只有约 10⁻⁷ m，但握持旋转误差 90°，初始间隙只有 4.4 mm，接近与退开阶段发生重叠。由此修正动作距离、释放时机和道具朝向，再重新生成 Action 与哈希。</p></div>
+        <div className="contact-before-after"><article><span>FAILED RUN</span><strong>7 / 10</strong><p>rotation 90°<br />clearance 0.0044 m<br />clear-phase overlap</p></article><i>→</i><article className="fixed"><span>CORRECTED RUN</span><strong>10 / 10</strong><p>rotation 0°<br />clearance 0.1448 m<br />clear-phase overlap 0</p></article><aside><b>没有被修好的问题</b><p>技术盒状手掌仍不具备手指闭合、抓握区域、接触压力、软组织或重量感。机器通过不能覆盖这个视觉事实。</p></aside></div>
+      </section>
+
+      <section className="section contact-negatives">
+        <div className="section-index light">05 / 预注册反例</div>
+        <div className="contact-heading"><div><p className="eyebrow"><span /> 8 / 8 REJECTED</p><h2>系统必须知道<br /><span>哪些“成功”是伪造的。</span></h2></div><p>反例分别在 Schema、BuildPlan、Blender 编译和最终求值四层失败。尤其是静态假 marker：它看起来有 target，却与真实道具脱离，HOLD 位置误差达到 1.647 m。</p></div>
+        <ol className="contact-negative-list">{negatives.map((item, index) => <li key={item}><span>N{String(index + 1).padStart(2, '0')}</span><b>{item}</b><small>REJECTED</small></li>)}</ol>
+      </section>
+
+      <section className="section contact-limits" id="limits">
+        <div className="section-index">06 / 当前停止门槛</div>
+        <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> EXPERIMENT COMPLETE = FALSE</p><h2>自动化完成。<br /><span>研究尚未完成。</span></h2></div><p>预注册要求机器通过与人类盲审同时成立。当前预览已经足以提示抓取视觉仍不自然，因此不能把 B04 写成“可信接触已解决”。下一步应建立可重复的人类审查表，并升级手指/接触表示。</p></div>
+        <div className="contact-gates"><article><span>DONE</span><b>合同 / 哈希 / 双构建</b></article><article><span>DONE</span><b>10 项求值 / 8 个反例</b></article><article className="pending"><span>PENDING</span><b>盲化人类审查</b></article><article className="blocked"><span>NOT PROVEN</span><b>可信手指抓握与重量感</b></article></div>
+        <div className="contact-artifacts"><a href={`${repo}research/2026-08-26-b04-contact-benchmark-protocol.md`}><span>PROTOCOL</span><b>预注册实验协议 ↗</b></a><a href={`${repo}specs/scene-spec.v0.3.schema.json`}><span>CONTRACT</span><b>SceneSpec v0.3 Schema ↗</b></a><a href={`${repo}experiments/contact-v0-1/results.json`}><span>RAW RESULT</span><b>实验结果与反例 ↗</b></a><a href={`${repo}experiments/contact-v0-1/B04.contact-evaluation.json`}><span>144 FRAMES</span><b>逐帧求值记录 ↗</b></a></div>
+      </section>
+
+      <footer><div><span className="brand-mark">BFS</span><b>B04 Contact Benchmark</b></div><p>SceneSpec v0.3 · Blender 5.2.0 LTS · Evidence, not a demo reel</p><Link href="/research-agenda">继续研究路线 →</Link></footer>
+    </main>
+  );
+}

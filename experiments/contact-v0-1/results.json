@@ -1,0 +1,271 @@
+{
+  "documentType": "BFS_B04_CONTACT_EXPERIMENT",
+  "experimentVersion": "0.1.0",
+  "executedAtUtc": "2026-08-26T04:57:48.741Z",
+  "environment": {
+    "blender": "5.2.0 LTS",
+    "platform": "darwin-arm64",
+    "node": "v26.5.0"
+  },
+  "sceneSpec": {
+    "version": "0.3.0",
+    "valid": true,
+    "shot": "SHOT_104"
+  },
+  "buildPlan": {
+    "version": "0.3.0",
+    "hash": "bb9e4ff1484d448868ec5a55a6830e353a17d3eb787cbda6d247a96abf545b08"
+  },
+  "cleanBuilds": {
+    "runs": [
+      {
+        "label": "run-a",
+        "structureHash": "7fd1a426dacbdf1e7bba8a1f94fc327677c9036d7e3576eace707c5a56e63757",
+        "blendSha256": "439bab134202d6b13cfb06f61f2c852e2b28b83e575b27f6a19b8755decb555a"
+      },
+      {
+        "label": "run-b",
+        "structureHash": "7fd1a426dacbdf1e7bba8a1f94fc327677c9036d7e3576eace707c5a56e63757",
+        "blendSha256": "28ab375e679bcb5c4603104a446c6e129561ddf62af60b01f3f5df1fc29285db"
+      }
+    ],
+    "structureHashesEqual": true,
+    "blendSha256Equal": false
+  },
+  "evaluation": {
+    "allMachineChecksPassed": true,
+    "checks": [
+      {
+        "detail": "Restricted constraint resolves to the declared actor hand.",
+        "id": "B04_C01_CONSTRAINT_BINDING",
+        "measured": {
+          "subtarget": "hand.R",
+          "target": "RIG_LEAD",
+          "type": "CHILD_OF"
+        },
+        "pass": true,
+        "threshold": "CHILD_OF → RIG_LEAD.hand.R"
+      },
+      {
+        "detail": "Evaluated parent-switch states match the contract.",
+        "id": "B04_C02_INFLUENCE_STATES",
+        "measured": {
+          "1": 0,
+          "47": 0,
+          "48": 1,
+          "49": 1,
+          "108": 1,
+          "109": 0,
+          "144": 0
+        },
+        "pass": true,
+        "threshold": "0 / 0 / 1 / 1 / 1 / 0 / 0"
+      },
+      {
+        "detail": "Final twelve APPROACH frames move toward the real prop socket.",
+        "id": "B04_C03_APPROACH_MONOTONIC",
+        "measured": [
+          0.359932414,
+          0.355687918,
+          0.351443417,
+          0.347199033,
+          0.342954883,
+          0.338710742,
+          0.334466731,
+          0.330222969,
+          0.325979231,
+          0.321735753,
+          0.31749231,
+          0.313249073
+        ],
+        "pass": true,
+        "threshold": "non-increasing with strict net decrease"
+      },
+      {
+        "detail": "Maximum evaluated palm-to-grip position error during HOLD.",
+        "id": "B04_C04_HOLD_POSITION",
+        "measured": 1.6e-7,
+        "pass": true,
+        "threshold": "<= 0.005 m"
+      },
+      {
+        "detail": "Maximum evaluated palm-to-grip rotation error during HOLD.",
+        "id": "B04_C05_HOLD_ROTATION",
+        "measured": 0,
+        "pass": true,
+        "threshold": "<= 3 deg"
+      },
+      {
+        "detail": "Held relative transform remains stable.",
+        "id": "B04_C06_RELATIVE_DRIFT",
+        "measured": {
+          "positionM": 3.18e-7,
+          "rotationDeg": 0
+        },
+        "pass": true,
+        "threshold": "<= 0.005 m and <= 3 deg"
+      },
+      {
+        "detail": "Visible prop transport during HOLD.",
+        "id": "B04_C07_TRANSPORT",
+        "measured": 0.480552181,
+        "pass": true,
+        "threshold": ">= 0.30 m"
+      },
+      {
+        "detail": "Prop discontinuity across acquire and release switches.",
+        "id": "B04_C08_SWITCH_POP",
+        "measured": {
+          "acquireM": 1.33e-7,
+          "releaseM": 1.3e-7
+        },
+        "pass": true,
+        "threshold": "<= 0.01 m"
+      },
+      {
+        "detail": "BVH triangle-pair overlap is evaluated every frame.",
+        "id": "B04_C09_CLEAR_PHASE_OVERLAP",
+        "measured": {
+          "ACQUIRE": 11,
+          "APPROACH": 0,
+          "HOLD": 11,
+          "RELEASE": 11,
+          "RETREAT": 0
+        },
+        "pass": true,
+        "threshold": "APPROACH=0 and RETREAT=0 pairs"
+      },
+      {
+        "detail": "Vertex-to-surface proximity samples at endpoints.",
+        "id": "B04_C10_ENDPOINT_CLEARANCE",
+        "measured": {
+          "1": 0.144780189,
+          "144": 0.605083704
+        },
+        "pass": true,
+        "threshold": ">= 0.05 m"
+      }
+    ],
+    "geometry": {
+      "endpointClearanceSamplesM": {
+        "1": 0.144780189,
+        "144": 0.605083704
+      },
+      "maxOverlapPairsPerFrame": {
+        "ACQUIRE": 11,
+        "APPROACH": 0,
+        "HOLD": 11,
+        "RELEASE": 11,
+        "RETREAT": 0
+      },
+      "overlapPairTotals": {
+        "ACQUIRE": 53,
+        "APPROACH": 0,
+        "HOLD": 660,
+        "RELEASE": 24,
+        "RETREAT": 0
+      }
+    }
+  },
+  "negativeTests": [
+    {
+      "id": "N01_MISSING_PROP_OBJECT",
+      "layer": "BLENDER_COMPILE",
+      "rejected": true,
+      "expected": "Target socket object is missing",
+      "observed": "BFS_COMPILE_ERROR Target socket object is missing: PROP_B04.MISSING_PROP_OBJECT"
+    },
+    {
+      "id": "N02_MISSING_TARGET_SOCKET",
+      "layer": "BLENDER_COMPILE",
+      "rejected": true,
+      "expected": "Attachment socket is missing",
+      "observed": "BFS_COMPILE_ERROR Attachment socket is missing: ACTOR_B04.MISSING_PALM"
+    },
+    {
+      "id": "N03_MISSING_CONSTRAINT_PERMISSION",
+      "layer": "BUILD_PLAN",
+      "rejected": true,
+      "expected": "does not authorize required operations: CREATE_CONSTRAINT",
+      "observed": "SceneSpec does not authorize required operations: CREATE_CONSTRAINT"
+    },
+    {
+      "id": "N04_INFLUENCE_STUCK_ZERO",
+      "layer": "SCHEMA",
+      "rejected": true,
+      "expected": "SEM_INFLUENCE_STATES",
+      "observed": [
+        "SEM_INFLUENCE_STATES"
+      ]
+    },
+    {
+      "id": "N05_RELEASE_POP",
+      "layer": "EVALUATION",
+      "rejected": true,
+      "expected": "B04_C08_SWITCH_POP=false",
+      "observed": {
+        "detail": "Prop discontinuity across acquire and release switches.",
+        "id": "B04_C08_SWITCH_POP",
+        "measured": {
+          "acquireM": 1.33e-7,
+          "releaseM": 1.000000149
+        },
+        "pass": false,
+        "threshold": "<= 0.01 m"
+      }
+    },
+    {
+      "id": "N06_APPROACH_OVERLAP",
+      "layer": "EVALUATION",
+      "rejected": true,
+      "expected": "B04_C09_CLEAR_PHASE_OVERLAP=false",
+      "observed": {
+        "detail": "BVH triangle-pair overlap is evaluated every frame.",
+        "id": "B04_C09_CLEAR_PHASE_OVERLAP",
+        "measured": {
+          "ACQUIRE": 7,
+          "APPROACH": 11,
+          "HOLD": 0,
+          "RELEASE": 11,
+          "RETREAT": 0
+        },
+        "pass": false,
+        "threshold": "APPROACH=0 and RETREAT=0 pairs"
+      }
+    },
+    {
+      "id": "N07_FAKE_STATIC_TARGET",
+      "layer": "EVALUATION",
+      "rejected": true,
+      "expected": "B04_C04_HOLD_POSITION=false",
+      "observed": {
+        "detail": "Maximum evaluated palm-to-grip position error during HOLD.",
+        "id": "B04_C04_HOLD_POSITION",
+        "measured": 1.646958987,
+        "pass": false,
+        "threshold": "<= 0.005 m"
+      }
+    },
+    {
+      "id": "N08_ORIGINAL_GEOMETRY",
+      "layer": "SCHEMA",
+      "rejected": true,
+      "expected": "SCHEMA",
+      "observed": [
+        "SCHEMA"
+      ]
+    }
+  ],
+  "allAutomatedChecksPassed": true,
+  "humanReview": {
+    "required": true,
+    "status": "PENDING"
+  },
+  "experimentComplete": false,
+  "explicitNonClaims": [
+    "BVH overlap pairs are not penetration depth or contact pressure.",
+    "Vertex-to-surface proximity is a sampled clearance estimate, not an exact signed distance.",
+    "Machine checks cannot establish anatomical grasp quality or believable weight.",
+    "Human review remains pending and B04 is not complete while it is pending."
+  ]
+}

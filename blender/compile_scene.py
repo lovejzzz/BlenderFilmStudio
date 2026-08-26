@@ -20,7 +20,7 @@ from bpy_extras import anim_utils
 from mathutils import Euler, Matrix, Vector
 
 
-SUPPORTED_COMPILER_VERSIONS = {"0.1.0", "0.2.0"}
+SUPPORTED_COMPILER_VERSIONS = {"0.1.0", "0.2.0", "0.3.0"}
 
 
 def canonical_json(value: object) -> str:
@@ -53,7 +53,7 @@ def resolve_below(root: Path, candidate: Path, label: str) -> Path:
 
 def load_verified_plan(plan_path: Path) -> dict:
     wrapper = json.loads(plan_path.read_text(encoding="utf-8"))
-    if wrapper.get("documentType") != "BFS_BUILD_PLAN" or wrapper.get("planVersion") not in {"0.1.0", "0.2.0"}:
+    if wrapper.get("documentType") != "BFS_BUILD_PLAN" or wrapper.get("planVersion") not in {"0.1.0", "0.2.0", "0.3.0"}:
         raise RuntimeError("Unsupported BuildPlan document or version")
     actual_hash = sha256_bytes(canonical_json(wrapper["plan"]).encode("utf-8"))
     if actual_hash != wrapper.get("planHash"):
@@ -88,7 +88,7 @@ def apply_transform(obj: bpy.types.Object, transform: dict) -> None:
     obj.scale = transform["scale"]
 
 
-def append_asset(root: Path, managed: bpy.types.Collection, asset: dict) -> tuple[bpy.types.Object, bpy.types.Collection]:
+def append_asset(root: Path, managed: bpy.types.Collection, asset: dict, direct_import: bool = False) -> tuple[bpy.types.Object, bpy.types.Collection]:
     asset_path = resolve_below(root, Path(asset["uri"]), f"Asset {asset['id']}")
     actual_hash = sha256_file(asset_path)
     if actual_hash != asset["verifiedSha256"] or actual_hash != asset["sha256"]:
@@ -106,7 +106,7 @@ def append_asset(root: Path, managed: bpy.types.Collection, asset: dict) -> tupl
     root_object["bfs_asset_version"] = asset["version"]
     apply_transform(root_object, asset["transform"])
     managed.objects.link(root_object)
-    if asset["kind"] == "CHARACTER":
+    if asset["kind"] == "CHARACTER" or direct_import:
         managed.children.link(imported)
         for obj in imported.all_objects:
             if obj.parent is None:
@@ -118,7 +118,11 @@ def append_asset(root: Path, managed: bpy.types.Collection, asset: dict) -> tupl
     return root_object, imported
 
 
-def create_targets(managed: bpy.types.Collection, target_specs: list[dict]) -> dict[tuple[str, str], bpy.types.Object]:
+def create_targets(
+    managed: bpy.types.Collection,
+    target_specs: list[dict],
+    asset_collections: dict[str, bpy.types.Collection] | None = None,
+) -> dict[tuple[str, str], bpy.types.Object]:
     targets = {}
     for target in target_specs:
         for socket in target["sockets"]:
@@ -128,6 +132,19 @@ def create_targets(managed: bpy.types.Collection, target_specs: list[dict]) -> d
             obj["bfs_target_id"] = target["id"]
             obj["bfs_target_kind"] = target["kind"]
             obj["bfs_socket_id"] = socket["id"]
+            if socket.get("binding") == "ASSET_OBJECT":
+                if not asset_collections or socket["assetRef"] not in asset_collections:
+                    raise RuntimeError(f"Target socket asset is missing: {socket['assetRef']}")
+                object_map = {item.name: item for item in asset_collections[socket["assetRef"]].all_objects}
+                parent = object_map.get(socket["objectRef"])
+                if parent is None:
+                    raise RuntimeError(f"Target socket object is missing: {socket['assetRef']}.{socket['objectRef']}")
+                obj.parent = parent
+                obj["bfs_target_binding"] = "ASSET_OBJECT"
+                obj["bfs_target_asset_ref"] = socket["assetRef"]
+                obj["bfs_target_object_ref"] = socket["objectRef"]
+            else:
+                obj["bfs_target_binding"] = "WORLD"
             apply_transform(obj, socket["transform"])
             managed.objects.link(obj)
             targets[(target["id"], socket["id"])] = obj
@@ -216,6 +233,91 @@ def apply_actor_performance(
         "facialAnimation": animation_structure(shape_keys),
         "gazeAnimation": animation_structure(gaze_target),
     }
+    return structure
+
+
+def create_attachments(
+    scene: bpy.types.Scene,
+    attachment_specs: list[dict],
+    actor_specs: list[dict],
+    asset_roots: dict[str, bpy.types.Object],
+    asset_collections: dict[str, bpy.types.Collection],
+) -> list[dict]:
+    actor_map = {actor["id"]: actor for actor in actor_specs}
+    reports = []
+    for spec in attachment_specs:
+        actor = actor_map.get(spec["targetActorRef"])
+        if actor is None or "actorSpec" not in actor:
+            raise RuntimeError(f"Attachment actor is missing or unresolved: {spec['targetActorRef']}")
+        actor_spec = actor["actorSpec"]
+        socket = next((item for item in actor_spec["sockets"] if item["id"] == spec["targetEffectorSocket"]), None)
+        if socket is None:
+            raise RuntimeError(f"Attachment socket is missing: {spec['targetActorRef']}.{spec['targetEffectorSocket']}")
+        bone_mapping = next((item for item in actor_spec["rig"]["bones"] if item["semantic"] == socket["boneSemantic"]), None)
+        if bone_mapping is None:
+            raise RuntimeError(f"Attachment socket has no semantic bone mapping: {socket['boneSemantic']}")
+        actor_objects = {obj.name: obj for obj in asset_collections[actor["assetRef"]].all_objects}
+        rig = actor_objects.get(actor_spec["rig"]["armatureObject"])
+        if rig is None or bone_mapping["bone"] not in rig.pose.bones:
+            raise RuntimeError(f"Attachment target bone is missing: {bone_mapping['bone']}")
+        owner = asset_roots.get(spec["ownerAssetRef"])
+        if owner is None:
+            raise RuntimeError(f"Attachment owner asset is missing: {spec['ownerAssetRef']}")
+
+        initial_transform = {
+            "locationM": rounded(owner.location),
+            "rotationEulerDeg": [round(math.degrees(value), 9) for value in owner.rotation_euler],
+            "scale": rounded(owner.scale),
+        }
+        acquire_frame = next(key["frame"] for key in spec["influenceKeys"] if key["value"] == 1)
+        release_frame = next(
+            key["frame"] for previous, key in zip(spec["influenceKeys"], spec["influenceKeys"][1:])
+            if previous["value"] == 1 and key["value"] == 0
+        )
+        for frame, transform in (
+            (scene.frame_start, initial_transform),
+            (release_frame - 1, initial_transform),
+            (release_frame, spec["releaseTransform"]),
+        ):
+            apply_transform(owner, transform)
+            for data_path in ("location", "rotation_euler", "scale"):
+                owner.keyframe_insert(data_path=data_path, frame=frame, group="BFS_ATTACHMENT_BASE")
+        set_interpolation(owner.animation_data, {scene.frame_start: "CONSTANT", release_frame - 1: "CONSTANT", release_frame: "CONSTANT"})
+
+        apply_transform(owner, initial_transform)
+        constraint = owner.constraints.new("CHILD_OF")
+        constraint.name = spec["id"]
+        constraint.target = rig
+        constraint.subtarget = bone_mapping["bone"]
+        scene.frame_set(acquire_frame)
+        bpy.context.view_layer.update()
+        target_matrix = rig.matrix_world @ rig.pose.bones[bone_mapping["bone"]].matrix
+        constraint.inverse_matrix = target_matrix.inverted()
+        for key in spec["influenceKeys"]:
+            constraint.influence = key["value"]
+            constraint.keyframe_insert(data_path="influence", frame=key["frame"], group="BFS_ATTACHMENT_INFLUENCE")
+        attachment_interpolation = {
+            scene.frame_start: "CONSTANT",
+            release_frame - 1: "CONSTANT",
+            release_frame: "CONSTANT",
+            **{key["frame"]: key["interpolation"] for key in spec["influenceKeys"]},
+        }
+        set_interpolation(owner.animation_data, attachment_interpolation)
+        owner["bfs_attachment_id"] = spec["id"]
+        owner["bfs_attachment_inverse_policy"] = spec["inversePolicy"]
+        reports.append({
+            "id": spec["id"],
+            "type": constraint.type,
+            "owner": spec["ownerAssetRef"],
+            "targetActor": spec["targetActorRef"],
+            "targetSocket": spec["targetEffectorSocket"],
+            "targetBone": bone_mapping["bone"],
+            "inverseMatrix": [rounded(row) for row in constraint.inverse_matrix],
+            "influenceKeys": spec["influenceKeys"],
+            "ownerAnimation": animation_structure(owner),
+        })
+    scene.frame_set(scene.frame_start)
+    return reports
 
 
 def create_camera(managed: bpy.types.Collection, camera_spec: dict) -> bpy.types.Object:
@@ -393,6 +495,7 @@ def build_structure(
     camera_objects: dict[str, bpy.types.Object],
     target_objects: dict[tuple[str, str], bpy.types.Object],
     actor_reports: list[dict],
+    attachment_reports: list[dict],
 ) -> dict:
     plan = wrapper["plan"]
     managed = bpy.data.collections["BFS_SHOT"]
@@ -419,7 +522,7 @@ def build_structure(
             record["instanceCollection"] = obj.instance_collection.name
         managed_objects.append(record)
 
-    return {
+    structure = {
         "compilerVersion": plan["compiler"]["version"],
         "blender": {"version": bpy.app.version_string, "buildHash": bpy.app.build_hash.decode("ascii")},
         "planHash": wrapper["planHash"],
@@ -449,18 +552,23 @@ def build_structure(
             "view": scene.view_settings.view_transform,
         },
     }
-    if wrapper["planVersion"] == "0.2.0":
+    if wrapper["planVersion"] in {"0.2.0", "0.3.0"}:
         structure["targets"] = [
             {
                 "target": target_id,
                 "socket": socket_id,
-                "location": rounded(obj.location),
-                "rotationEuler": rounded(obj.rotation_euler),
-                "scale": rounded(obj.scale),
+                "binding": obj.get("bfs_target_binding", "WORLD"),
+                "parent": obj.parent.name if obj.parent else None,
+                "locationLocal": rounded(obj.location),
+                "rotationEulerLocal": rounded(obj.rotation_euler),
+                "scaleLocal": rounded(obj.scale),
             }
             for (target_id, socket_id), obj in sorted(target_objects.items())
         ]
         structure["actors"] = actor_reports
+    if wrapper["planVersion"] == "0.3.0":
+        structure["attachments"] = attachment_reports
+        structure["geometryEvaluations"] = wrapper["plan"].get("geometryEvaluations", [])
     return structure
 
 
@@ -492,11 +600,11 @@ def main() -> None:
     asset_collections = {}
     asset_roots = {}
     for asset in plan["assets"]:
-        root_object, imported_collection = append_asset(repository_root, managed, asset)
+        root_object, imported_collection = append_asset(repository_root, managed, asset, direct_import=wrapper["planVersion"] == "0.3.0")
         asset_roots[asset["id"]] = root_object
         asset_collections[asset["id"]] = imported_collection
 
-    target_objects = create_targets(managed, plan.get("targets", []))
+    target_objects = create_targets(managed, plan.get("targets", []), asset_collections)
     camera_objects = {camera["id"]: create_camera(managed, camera) for camera in plan["cameras"]}
     for light in plan["lights"]:
         create_light(managed, light)
@@ -513,9 +621,10 @@ def main() -> None:
         for actor in plan["actors"]
         if "actorSpec" in actor
     ]
+    attachment_reports = create_attachments(scene, plan.get("attachments", []), plan["actors"], asset_roots, asset_collections)
     warnings = configure_render(scene, plan["render"], plan["outputSpec"], next(camera for camera in plan["cameras"] if camera["id"] == plan["shot"]["activeCamera"]), artifact_root)
 
-    structure = build_structure(scene, wrapper, asset_collections, camera_objects, target_objects, actor_reports)
+    structure = build_structure(scene, wrapper, asset_collections, camera_objects, target_objects, actor_reports, attachment_reports)
     structure_hash = sha256_bytes(canonical_json(structure).encode("utf-8"))
     blend_path = artifact_root / "scene.blend"
     save_result = bpy.ops.wm.save_as_mainfile(filepath=str(blend_path), check_existing=False, compress=True, relative_remap=True)

@@ -37,9 +37,9 @@ const gaps: {
   {
     id: 'G02', title: 'SceneSpec 正式合同', type: 'engineering', priority: 'P0',
     question: '导演意图如何成为可验证、可版本化、可迁移的数据？',
-    known: 'SceneSpec v0.1 已覆盖镜头/资产/摄影机/灯光/输出；v0.2 保持向后边界并新增 ActorSpec 哈希、场景 target sockets 与角色操作权限。',
-    missing: '导演节奏、对白、镜头意图、复杂接触、模拟依赖、资产变体与版本迁移仍未形成完整正式语义。',
-    artifact: 'SceneSpec v0.1 + v0.2 Actor Integration',
+    known: 'v0.1 已覆盖镜头/资产/摄影机/灯光/输出；v0.2 增加角色合同；v0.3 已实测资产绑定 socket、受限父级切换与求值几何。',
+    missing: '导演节奏、对白、镜头意图、手指级接触、模拟依赖、资产变体与版本迁移仍未形成完整正式语义。',
+    artifact: 'SceneSpec v0.1–v0.3 + Migration Contract',
     gate: '所有非法输入在启动 Blender 前被定位到字段，旧版本能明确迁移或拒绝。',
   },
   {
@@ -53,8 +53,8 @@ const gaps: {
   {
     id: 'G04', title: '代表性基准镜头组', type: 'experiment', priority: 'P0',
     question: '一个六秒室内镜头能否代表整条电影制作链？',
-    known: 'B01/B02 已包含结构/像素报告；B03 已完成 ActorSpec → SceneSpec v0.2 → BuildPlan → Blender 双净构建和场景目标相对验收。',
-    missing: 'B04–B06 未实现；可见手—物接触、近景皮肤、毛发、模拟恢复、体积与大场景仍无实证。',
+    known: 'B01/B02 已包含结构/像素报告；B03 角色求值已执行；B04 SceneSpec v0.3 自动检查 10/10、反例 8/8、双净构建一致。',
+    missing: 'B04 人类盲审仍未完成；B05–B06、近景皮肤、毛发、模拟恢复、体积与大场景仍无实证。',
     artifact: 'BFS Benchmark v0.1 · 6 Shots',
     gate: '六类镜头均能一键构建、失败、恢复、出具结构/像素/成本报告。',
   },
@@ -69,8 +69,8 @@ const gaps: {
   {
     id: 'G06', title: '数字演员与表演协议', type: 'engineering', priority: 'P1',
     question: '如何把身份、动作、面部、视线、呼吸和接触分成可编辑层？',
-    known: 'ActorSpec v0.1 已通过规范/资产/求值测试；B03 场景相对眼神与脚底接触也已通过 144 帧测量。',
-    missing: '英雄角色的皮肤、毛发、口腔、微表演、多角色反应、手指抓握和可见网格接触仍没有端到端可靠解。',
+    known: 'ActorSpec v0.1 已通过规范/资产/求值测试；B03 场景相对眼神与脚底接触通过；B04 技术手掌—道具拿取通过 144 帧机器测量。',
+    missing: '英雄角色的皮肤、毛发、口腔、微表演、多角色反应、手指抓握、受力与重量感仍没有端到端可靠解。',
     artifact: 'Executed ActorSpec v0.1 + B03/B04 Scene Integration',
     gate: '同一角色完成近景对白、全身行走和拿取道具，身份不漂移且每层可单独修改。',
   },
@@ -153,7 +153,7 @@ export default function ResearchAgendaPage() {
     <main className="agenda-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link><Link className="route-tab actor-route" href="/actor-v0-1">角色实验</Link></nav>
+        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link><Link className="route-tab actor-route" href="/actor-v0-1">角色实验</Link><Link className="route-tab contact-route" href="/contact-v0-1">接触实验</Link></nav>
         <span className="edition agenda-edition">Agenda 01</span>
       </header>
 
@@ -196,12 +196,12 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>建立 B04 手—道具拿取基准。</h3><p>B03 已完成 ActorSpec → SceneSpec v0.2 集成、双净构建和场景目标相对验收。下一步加入可见手掌与道具网格、接近/持有/释放状态、目标相对误差和穿插检测，检验“socket 数值正确”能否转化为可信接触。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>完成 B04 盲化人类审查与手指级失败集。</h3><p>B04 的 SceneSpec v0.3、真实道具绑定、父级切换、逐帧 BVH、双净构建和 8 个反例已经执行；机器 10/10 不能判断抓握、重量感和视觉穿插。下一步冻结审查材料、评分表和失败标签，再决定升级 signed-distance、手指 rig 或接触代理。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
         <div className="section-index light">05 / 现在做什么</div>
-        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>B04 全身拿取基准</li><li>可见手掌 / 道具网格</li><li>接近 / 持有 / 释放状态</li><li>穿插与相对接触 Validator</li><li>Token / 渲染 / 人工遥测</li><li>受限角色工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>人工盲评设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
+        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>B04 盲化人类审查包</li><li>手指级接触失败标签</li><li>精确距离 / 穿透表示对照</li><li>审查者分歧与置信区间</li><li>Token / 渲染 / 人工遥测</li><li>受限角色工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>B05 模拟恢复设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
       </section>
 
       <section className="section agenda-method" id="sources">

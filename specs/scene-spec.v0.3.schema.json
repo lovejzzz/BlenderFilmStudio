@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.3.schema.json",
+  "title": "Blender Film Studio SceneSpec v0.3",
+  "description": "SceneSpec v0.2 plus asset-bound sockets, restricted parent switching, and evaluated geometry pairs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["specVersion", "shot", "assets", "actors", "targets", "attachments", "geometryEvaluations", "cameras", "lights", "world", "events", "render", "security", "provenance"],
+  "properties": {
+    "specVersion": { "const": "0.3.0" },
+    "shot": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/shot" },
+    "assets": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/asset" }, "maxItems": 256 },
+    "actors": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.2.schema.json#/$defs/actor" }, "maxItems": 32 },
+    "targets": { "type": "array", "items": { "$ref": "#/$defs/target" }, "maxItems": 256 },
+    "attachments": { "type": "array", "items": { "$ref": "#/$defs/attachment" }, "maxItems": 128 },
+    "geometryEvaluations": { "type": "array", "items": { "$ref": "#/$defs/geometryEvaluation" }, "maxItems": 128 },
+    "cameras": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/camera" }, "minItems": 1, "maxItems": 16 },
+    "lights": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/light" }, "maxItems": 128 },
+    "world": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/world" },
+    "events": { "type": "array", "items": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/event" }, "maxItems": 512 },
+    "render": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/render" },
+    "security": { "$ref": "#/$defs/security" },
+    "provenance": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/provenance" }
+  },
+  "$defs": {
+    "targetSocket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "binding", "transform"],
+      "properties": {
+        "id": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "binding": { "enum": ["WORLD", "ASSET_OBJECT"] },
+        "assetRef": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "objectRef": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "transform": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/transform" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "binding": { "const": "ASSET_OBJECT" } } },
+          "then": { "properties": { "assetRef": {}, "objectRef": {} }, "required": ["assetRef", "objectRef"] },
+          "else": { "properties": { "assetRef": {}, "objectRef": {} }, "not": { "anyOf": [{ "properties": { "assetRef": {} }, "required": ["assetRef"] }, { "properties": { "objectRef": {} }, "required": ["objectRef"] }] } }
+        }
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "sockets"],
+      "properties": {
+        "id": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "kind": { "enum": ["ACTOR_PROXY", "PROP_PROXY", "SURFACE"] },
+        "sockets": { "type": "array", "items": { "$ref": "#/$defs/targetSocket" }, "minItems": 1, "maxItems": 64 }
+      }
+    },
+    "influenceKey": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frame", "value", "interpolation"],
+      "properties": {
+        "frame": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "value": { "type": "number", "minimum": 0, "maximum": 1 },
+        "interpolation": { "enum": ["CONSTANT", "LINEAR"] }
+      }
+    },
+    "attachment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "ownerAssetRef", "targetActorRef", "targetEffectorSocket", "inversePolicy", "influenceKeys", "releaseTransform"],
+      "properties": {
+        "id": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "type": { "const": "CHILD_OF" },
+        "ownerAssetRef": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "targetActorRef": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "targetEffectorSocket": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "inversePolicy": { "const": "MATCH_AT_ACQUIRE" },
+        "influenceKeys": { "type": "array", "minItems": 4, "maxItems": 32, "items": { "$ref": "#/$defs/influenceKey" } },
+        "releaseTransform": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/transform" }
+      }
+    },
+    "phase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "frameStart", "frameEnd"],
+      "properties": {
+        "id": { "enum": ["APPROACH", "ACQUIRE", "HOLD", "RELEASE", "RETREAT"] },
+        "frameStart": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "frameEnd": { "type": "integer", "minimum": 0, "maximum": 10000000 }
+      }
+    },
+    "geometryEvaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "assetARef", "objectARef", "assetBRef", "objectBRef", "space", "phases"],
+      "properties": {
+        "id": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "assetARef": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "objectARef": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "assetBRef": { "$ref": "https://raw.githubusercontent.com/lovejzzz/BlenderFilmStudio/main/specs/scene-spec.v0.1.schema.json#/$defs/id" },
+        "objectBRef": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "space": { "const": "EVALUATED_WORLD" },
+        "phases": { "type": "array", "minItems": 5, "maxItems": 5, "items": { "$ref": "#/$defs/phase" } }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["networkAccess", "arbitraryPython", "allowedAssetRoots", "allowedOperations"],
+      "properties": {
+        "networkAccess": { "const": false },
+        "arbitraryPython": { "const": false },
+        "allowedAssetRoots": { "type": "array", "items": { "enum": ["assets/", "library/", "motion/"] }, "minItems": 1, "uniqueItems": true },
+        "allowedOperations": {
+          "type": "array",
+          "items": { "enum": ["READ_MANIFEST", "IMPORT_ASSET", "IMPORT_ACTOR_SPEC", "IMPORT_ACTION", "CREATE_CAMERA", "CREATE_LIGHT", "CREATE_TARGET", "CREATE_CONSTRAINT", "EVALUATE_GEOMETRY", "SET_TRANSFORM", "APPLY_PERFORMANCE", "SET_RENDER", "RENDER_PREVIEW", "RENDER_FINAL"] },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
