@@ -476,6 +476,20 @@ The next study should preserve exact SceneSpec, BuildPlan, asset, runtime and st
 
 Status: direction selected; threshold derivation and holdout protocol not yet frozen.
 
+## J-021 · Production-repeatability envelope derivation and holdout freeze
+
+Type: derivation audit plus live pre-experiment freeze, 2026-08-26.
+
+The B24 derivation tool consumed 288 pre-holdout scene-linear EXR pairs, 36 PNG pairs and 36 auxiliary OIIO Yee comparisons. It selected simple outward ceilings containing every derivation pair: EXR maximum error 1/128, RMS 1/65536 and at most 512 zero-threshold changed pixels; PNG maximum error 0.003922, RMS 1/65536, at most 16 changed pixels and zero Yee failure pixels at explicitly recorded 100 cd/m² / 45° inputs.
+
+The artifact is labeled `DERIVATION_ONLY_NOT_VALIDATION`. The holdout is selected arithmetically before rendering: all 24 frames where `frame mod 6 = 4`, none overlapping the twelve earlier sentinels. A/B/C fresh-process replicates yield 72 processes, one render and two saves each, and 72 pair comparisons per format.
+
+All pairs must remain inside every ceiling; aggregate averages cannot hide an exceedance. Twenty-two negative categories and five decisions are frozen. A pass validates only this scene/profile's numeric repeatability envelope, not bitwise identity, human invisibility or a universal Blender tolerance.
+
+Protocol: `research/2026-08-26-b24-production-tolerance-holdout-protocol.md`.
+
+Status at freeze: the configurator and dual-output renderer are reused by hash; no B24 comparator, runner or holdout output exists.
+
 ## Journal rule for future work
 
 Every promoted result must record:

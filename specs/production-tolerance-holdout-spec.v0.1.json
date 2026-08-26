@@ -1,0 +1,124 @@
+{
+  "documentType": "BFS_PRODUCTION_TOLERANCE_HOLDOUT_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "Does the independently frozen B24 numeric repeatability envelope generalize to 24 algorithmically selected, previously unused timeline frames while provenance and structure remain exact?",
+  "evidenceBasis": {
+    "derivationResultSha256": "9398b7f71253034987226877de10f6073f2151981f7180e2dc4a6e4a2309c076",
+    "derivationStatus": "DERIVATION_ONLY_NOT_VALIDATION",
+    "b23ResultsSha256": "b3c6d08beb35d4c75ddea7c67bcdc0d07c171fcfa55022a79ea1f068847c2a4d",
+    "b23Decision": "PER_RENDER_VARIATION_SUPPORT",
+    "derivationPairCounts": { "EXR32_SCENE_LINEAR": 288, "PNG8_DISPLAY": 36, "PNG8_YEE_AUXILIARY": 36 }
+  },
+  "holdout": {
+    "selectionRule": "All timeline frames from 1 through 144 where frame mod 6 equals 4.",
+    "frames": [4, 10, 16, 22, 28, 34, 40, 46, 52, 58, 64, 70, 76, 82, 88, 94, 100, 106, 112, 118, 124, 130, 136, 142],
+    "overlapWithB20ToB23Sentinels": [],
+    "selectedBeforeAnyB24Render": true
+  },
+  "design": {
+    "type": "three fresh-process replicates per holdout frame with same-Render-Result dual output",
+    "replicates": ["A", "B", "C"],
+    "replicatePairs": ["A-B", "A-C", "B-C"],
+    "blockOrderPerFrame": ["A", "B", "C"],
+    "processes": 72,
+    "renderCalls": 72,
+    "saves": 144,
+    "decodedComparisonsPerFormat": 72
+  },
+  "formats": {
+    "EXR32_SCENE_LINEAR": { "format": "OPEN_EXR", "channels": ["R", "G", "B", "A"], "colorDepthBits": 32, "pixelType": "float", "codec": "ZIP", "colorDomain": "scene-linear ACEScg" },
+    "PNG8_DISPLAY": { "format": "PNG", "channels": ["R", "G", "B", "A"], "colorDepthBits": 8, "pixelType": "uint8", "colorDomain": "ACES 2 SDR display output" }
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "rendererSha256": "b853d12f542b56c135e235451c6dc6f3108ed6b6c29216378f28caff3f5fb207"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "motionBlur": false
+  },
+  "frozenEnvelope": {
+    "EXR32_SCENE_LINEAR": {
+      "maximumAbsoluteErrorAtMost": 0.0078125,
+      "rmsErrorAtMost": 0.0000152587890625,
+      "zeroThresholdFailurePixelsAtMost": 512
+    },
+    "PNG8_DISPLAY": {
+      "maximumAbsoluteErrorAtMost": 0.003922,
+      "rmsErrorAtMost": 0.0000152587890625,
+      "zeroThresholdFailurePixelsAtMost": 16,
+      "yeeFailurePixelsAtMost": 0,
+      "yeeLuminanceCdM2": 100.0,
+      "yeeFieldOfViewDegrees": 45.0
+    }
+  },
+  "executionContract": {
+    "formalComparatorAndRunnerMustNotExistAtFreeze": true,
+    "reuseFrozenConfiguratorAndRendererForAllProcesses": true,
+    "oneNewBlenderProcessAndOneRenderPerObservation": true,
+    "saveTheSameRenderResultOnceAsPng8AndOnceAsExr32": true,
+    "mustNotSaveSourceBlend": true,
+    "allSourcePlanStructureRuntimeAndToolIdentitiesMustBeExact": true,
+    "recordAllOutputHashesMetricsAndComparisonBindings": true,
+    "thresholdsMustNotChangeAfterHoldoutExecution": true
+  },
+  "validationGate": {
+    "provenanceAndStructure": "All 72 observations pass exact identity, source, plan, structure, control, process, call-count and format gates.",
+    "EXR32_SCENE_LINEAR": "All 72 holdout pairs satisfy all three frozen EXR numeric ceilings.",
+    "PNG8_DISPLAY": "All 72 holdout pairs satisfy all three frozen PNG numeric ceilings and zero Yee failure pixels.",
+    "noAggregateAveraging": true,
+    "noThresholdRevision": true
+  },
+  "decisionRule": {
+    "PRODUCTION_REPEATABILITY_ENVELOPE_SUPPORT": "Both EXR and PNG pass 72/72 holdout pairs and all provenance gates pass.",
+    "SCENE_LINEAR_ENVELOPE_FAIL_DISPLAY_PASS": "EXR has one or more envelope failures while PNG passes 72/72, with a valid experiment.",
+    "DISPLAY_AND_SCENE_LINEAR_ENVELOPE_FAIL": "Both EXR and PNG have one or more envelope failures, with a valid experiment.",
+    "DISPLAY_ONLY_ENVELOPE_FAIL": "EXR passes 72/72 while PNG has one or more envelope failures, with a valid experiment.",
+    "INVALID_EXPERIMENT": "Any derivation, identity, source-state, process, call/save-count, layout, file, metric, binding, count or attack gate fails."
+  },
+  "requiredNegativeCases": [
+    "B24 spec identity mismatch",
+    "derivation artifact identity mismatch",
+    "B23 result identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "configurator identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "source thread state mismatch",
+    "requested fixed controls mismatch",
+    "holdout set or run order mismatch",
+    "process or replicate binding mismatch",
+    "render count differs from one",
+    "save count differs from two or same-Render-Result contract fails",
+    "EXR layout mismatch",
+    "PNG layout mismatch",
+    "missing or mutated output",
+    "comparison loses manifest or file hash binding",
+    "numeric envelope mutation",
+    "Yee viewing parameter mutation"
+  ],
+  "explicitNonClaims": [
+    "Passing validates this numeric envelope on one held-out scene/timeline profile; it does not establish a universal Blender tolerance.",
+    "The envelope is not a bitwise determinism claim and container hashes may differ.",
+    "The Yee auxiliary metric at 100 cd/m2 and 45 degrees is not a calibrated cinema or human blind-review result.",
+    "A display pass with an EXR fail does not make the scene-linear mastering difference irrelevant.",
+    "A holdout failure must remain published and thresholds must not be widened after observation.",
+    "Nothing generalizes to Cycles, another GPU/backend, another machine, another scene or temporal video perception."
+  ]
+}
