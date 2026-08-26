@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderRuntimeCanaryToolingCorrection.v0.1",
+  "experimentId": "B41-C2",
+  "status": "PREREGISTERED_BEFORE_CORRECTION_TOOLING_OR_OUTPUT",
+  "question": "After four exact tool corrections, can the otherwise unchanged B41-C1 canary reach image build and runtime without invalid receipt evidence?",
+  "parent": {
+    "c1SpecSha256": "4bf1c9ff97e395246148bae972455531b596fe38b0ad864a1a591c7b54b18aa1",
+    "c1PreregistrationCommit": "4974302e48922e9ca98a7253c0e6da17f89196d7",
+    "c1ToolFreezeCommit": "b5a699a183831448b7d470b667886b024c7a785d",
+    "failedResultSha256": "c7eee7bf44941ff46959fb800eb718e222bf185f2a037f2019d5ce0387817ef0",
+    "failedAuditSha256": "5d4663558aa7839e25024906bb13ca3898ad34e083a707eaceae46cd949d17f8",
+    "failure": "REJECTED_BUILD_CLI_AND_RECEIPT_TOOLING"
+  },
+  "changedImplementationExact": [
+    "Remove the unsupported --progress plain arguments from docker build while preserving every other build argument",
+    "Remove evidenceHash itself from the B41 evidence self-hash projection",
+    "Sort OCIO manifest relative paths by raw UTF-8 byte order equivalent to LC_ALL=C",
+    "In correction mode record the correction library and correction audit URIs paired with their actual hashes"
+  ],
+  "frozenUnchanged": [
+    "B41 and B41-C1 ancestry and architecture normalization",
+    "official Blender archive URL, byte count and SHA-256",
+    "base image digest, Dockerfile and runtime image rules",
+    "disk admission and explicit Docker socket",
+    "container resource, mount, environment and security contract",
+    "positive Eevee canary, forced timeout canary and promotion decisions",
+    "accepted verdict and all non-claims"
+  ],
+  "acceptedVerdict": "LINUX_AMD64_BLENDER_5_2_CANARY_AND_TIMEOUT_SUPPORTED",
+  "nonClaims": [
+    "B41-C2 changes four demonstrated tooling defects only",
+    "A later build, dependency, Blender, render, isolation or timeout failure remains a valid rejection",
+    "All B41 and B41-C1 non-claims remain active"
+  ]
+}
