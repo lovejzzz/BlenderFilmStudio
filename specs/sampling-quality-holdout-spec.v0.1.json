@@ -1,0 +1,152 @@
+{
+  "documentType": "BFS_SAMPLING_QUALITY_HOLDOUT_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "On four unseen frames, does CENTER32 increase scene-linear edge-reference RMSE to at least 1.5 times NATURAL32 on every frame, against a reliable dual independent NATURAL1024 reference proxy?",
+  "evidenceBasis": {
+    "b30ResultsSha256": "a25be579e1bc4c958962141a32e1b5e50c6cf32a3e352dad5c0d1d71e354e73f",
+    "b30SpecSha256": "de5da4a38ce22fe80f17d1bc220ceb70680ebd56a5b03104a650132c4a12ae00",
+    "b30Decision": "FIXED_JITTER_STRICT_STABILITY_SUPPORT",
+    "derivationResultsSha256": "a775834339deccf86d6fa536e2cf97a639f63b8ef2474de647e088231fbcda64",
+    "derivationAnalysisSha256": "b7466732975b7a400e5152b1c734898e5666423df6337e743b2972cecdb206cf",
+    "derivationRendererSha256": "fe3a28a6bfd75dd7f9c0b89c29e7cb7e0b1c8afdbbb51a0c40117a00656536e1",
+    "derivationAnalyzerSha256": "bced5a658ffa84e7ccfd0a95a8db205e2950d9600f53684b669130a6684f70ef",
+    "derivationRunnerSha256": "53f169aa4a2469364742450651c37dbc72d13e87d6feb018c723ed1fb5a7fe9a",
+    "derivationFrames": [37, 72, 103],
+    "derivationStatus": "EXPLORATORY_DERIVATION_ONLY_NOT_CONFIRMATION",
+    "derivationObservation": "CENTER32/NATURAL32 edge-reference RMSE ratios were 2.2360, 2.1876 and 2.2623 on three derivation frames; dual NATURAL1024 reference disagreement was zero on two frames and far below candidate error on the third."
+  },
+  "design": {
+    "type": "six fresh Blender processes rendering four unseen holdout frames",
+    "holdoutFrames": [10, 44, 86, 120],
+    "frameSelectionRule": "Selected before formal output; disjoint from B31 derivation frames and B30 frame 38.",
+    "schedule": ["NATURAL32_A", "CENTER32_A", "REFERENCE1024_A", "NATURAL32_B", "CENTER32_B", "REFERENCE1024_B"],
+    "cells": {
+      "NATURAL32": {"processes": 2, "samples": 32, "overridePixelJitterSample": null},
+      "CENTER32": {"processes": 2, "samples": 32, "overridePixelJitterSample": [0.0, 0.0]},
+      "REFERENCE1024": {"processes": 2, "samples": 1024, "overridePixelJitterSample": null}
+    },
+    "processes": 6,
+    "renderCallsPerProcess": 4,
+    "renderCalls": 24,
+    "outputFiles": 24,
+    "selectedBeforeAnyFormalB31Render": true
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "motionBlur": false,
+    "format": "OPEN_EXR_RGBA32_ZIP",
+    "colorDomain": "scene-linear"
+  },
+  "referenceProxy": {
+    "definition": "Pixelwise mean of two independent NATURAL1024 scene-linear RGB outputs per holdout frame.",
+    "truthClaim": false,
+    "spatialSupersampling": false,
+    "reliabilityMetric": "REFERENCE1024 A/B edge RMSE divided by mean NATURAL32 edge RMSE.",
+    "maximumReliabilityRatioPerFrame": 0.05,
+    "whyFivePercent": "A conservative ceiling far above derivation reference disagreement while requiring proxy noise to remain small relative to the comparison denominator."
+  },
+  "edgeRule": {
+    "gradient": "RGB Euclidean central difference of the dual-reference mean",
+    "quantile": 0.95,
+    "maskDefinition": "Pixels with gradient magnitude greater than or equal to the per-frame 95th percentile.",
+    "expectedPixelsPerFrame": 25920,
+    "selectedBeforeFormalOutput": true
+  },
+  "primaryEndpoint": {
+    "name": "allFrameEdgeReferenceCostRatio",
+    "unit": "one unseen holdout frame",
+    "naturalError": "Mean edge RMSE of NATURAL32_A and NATURAL32_B against the dual-reference mean.",
+    "centerError": "Mean edge RMSE of CENTER32_A and CENTER32_B against the dual-reference mean.",
+    "ratio": "centerError divided by naturalError.",
+    "costSupportThreshold": 1.5,
+    "supportRule": "All four holdout-frame ratios must be at least 1.5 after the reference reliability gate passes.",
+    "directionReversalRule": "Any holdout-frame ratio below 1.0 takes EDGE_COST_DIRECTION_REVERSED with precedence over support.",
+    "whyOnePointFive": "The threshold is contracted toward no effect from the minimum derivation ratio 2.1876 and frozen before holdout output.",
+    "noOptionalStopping": true
+  },
+  "secondaryEndpoints": [
+    "global and non-edge CENTER32/NATURAL32 RMSE ratios by frame",
+    "REFERENCE1024 A/B global and edge disagreement",
+    "NATURAL32 and CENTER32 A/B repeatability by frame",
+    "MAE and maximum absolute error by cell, replicate, ROI and frame",
+    "container SHA, byte count and render time for every EXR"
+  ],
+  "decisionPrecedence": [
+    "INVALID_EXPERIMENT",
+    "REFERENCE_PROXY_UNSTABLE",
+    "EDGE_COST_DIRECTION_REVERSED",
+    "EDGE_REFERENCE_COST_SUPPORT",
+    "MIXED_EDGE_REFERENCE_COST",
+    "EDGE_REFERENCE_COST_NOT_REPRODUCED"
+  ],
+  "decisionRule": {
+    "REFERENCE_PROXY_UNSTABLE": "Any frame has reference A/B edge RMSE greater than 5% of mean NATURAL32 edge RMSE, or a non-positive natural denominator.",
+    "EDGE_COST_DIRECTION_REVERSED": "The proxy is reliable, but at least one holdout frame has CENTER/NATURAL edge RMSE ratio below 1.0.",
+    "EDGE_REFERENCE_COST_SUPPORT": "The proxy is reliable and all four holdout-frame edge RMSE ratios are at least 1.5.",
+    "MIXED_EDGE_REFERENCE_COST": "The proxy is reliable, no frame reverses direction, and one to three holdout frames reach 1.5.",
+    "EDGE_REFERENCE_COST_NOT_REPRODUCED": "The proxy is reliable, no frame reverses direction, and no holdout frame reaches 1.5.",
+    "INVALID_EXPERIMENT": "Any identity, source, process, cell, frame, output, EXR layout, finite-value, binding, frozen-contract, attack or human-status gate fails."
+  },
+  "executionContract": {
+    "formalRendererAnalyzerAndRunnerMustNotExistAtFreeze": true,
+    "derivationMustRemainLabeledExploratory": true,
+    "allSixProcessesMustBeFreshAndPidUnique": true,
+    "scheduleFramesCellsSamplesAndJitterMustBeExact": true,
+    "eachProcessMustRenderExactlyFourOutputs": true,
+    "mustNotSaveSourceBlend": true,
+    "allIdentitiesSettingsHashesAndBindingsMustBeExact": true,
+    "referenceReliabilityEdgeRuleThresholdPrecedenceAndDecisionRulesMustNotChangeAfterExecution": true,
+    "workOutputsRemainLocalButEvidenceAndResultsAreCommitted": true,
+    "humanReviewMustRemainPending": true
+  },
+  "requiredNegativeCases": [
+    "B31 spec identity mismatch",
+    "B30 result or spec identity mismatch",
+    "derivation result or analysis identity mismatch",
+    "derivation tool identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "plan or structure identity mismatch",
+    "configurator identity mismatch",
+    "formal renderer identity mismatch",
+    "formal analyzer identity mismatch",
+    "formal runner identity mismatch",
+    "source or fixed control mismatch",
+    "cell sample or jitter mismatch",
+    "schedule mismatch",
+    "PID uniqueness or cell binding mismatch",
+    "frame set, render count or frame order mismatch",
+    "EXR layout or finite-value mismatch",
+    "missing or mutated output",
+    "analysis, manifest or file-hash binding mismatch",
+    "reference, edge, threshold, sample-size, precedence or decision-rule mutation",
+    "human-review status is not pending"
+  ],
+  "explicitNonClaims": [
+    "A dual NATURAL1024 mean is a stable reference proxy in derivation, not ground truth or a spatially supersampled reference.",
+    "Larger scene-linear edge-reference RMSE does not by itself prove visible aliasing, worse perceived sharpness or lower cinematic quality.",
+    "The top-5-percent gradient ROI is a frozen numerical edge proxy, not a semantic object boundary or calibrated contrast-sensitivity model.",
+    "Four holdout frames test this animated scene at fixed times; they do not establish a universal Blender, Eevee, GPU or content bound.",
+    "CENTER stability and edge-reference cost may coexist; neither endpoint cancels the other.",
+    "Human review and temporal playback remain PENDING separate gates."
+  ]
+}
