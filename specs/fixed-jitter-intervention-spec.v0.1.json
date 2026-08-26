@@ -1,0 +1,150 @@
+{
+  "documentType": "BFS_FIXED_JITTER_INTERVENTION_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "Does Blender 5.2's CENTER override_pixel_jitter_sample intervention produce one frozen decoded RGB identity both within and across fresh processes while the matched NATURAL control reproduces within-PID switching between the two B28 modes?",
+  "evidenceBasis": {
+    "b29ResultsSha256": "c81d3697a35000da3765ed798ac90304468fb2abed78d826ea5d4c5afcf0579f",
+    "b29SpecSha256": "38a3d32dc8ce4e85e3403685c3b727f68fa48a71f517e576dfaea2c643c555d9",
+    "b29Decision": "DECOUPLED_PASS_PATTERN",
+    "derivationResultsSha256": "3c0f45dbd1c84b16f7876e5060275c6992aa86006bef12742075f16ced18a3f6",
+    "derivationAnalysisSha256": "b8d32410392b9c717777d840b61313484d50aff4114c6248fefd1b82a4b06b0e",
+    "derivationRendererSha256": "71ae421bf84d2d04897f1b2b9c973401ea55154e5ae1c412dc8c930390b4e372",
+    "derivationAnalyzerSha256": "f53cfa67b089527d8c5a759fad475c2ccdb04b42c6651497179fbddbaa0b2c52",
+    "derivationRunnerSha256": "20d631df25b8be529bf25f0d6747a053288f66ba935e1092e054bc609d4db2a3",
+    "derivationStatus": "EXPLORATORY_DERIVATION_ONLY_NOT_CONFIRMATION",
+    "derivationObservation": "One NATURAL PID produced both frozen natural modes across twelve calls. CENTER, POS_QUARTER and NEG_QUARTER were each internally exact in one PID, while each fixed position produced a distinct full-frame sampling result. The prewritten selection rule nominated CENTER for confirmatory testing."
+  },
+  "sourceCodeEvidence": {
+    "uri": "https://github.com/blender/blender/blob/blender-v5.2-release/source/blender/draw/engines/eevee/eevee_sampling.cc",
+    "sha256": "014f3b2f6aa3c2b49e7b98d604aba9e8f518cd3a51acfaef6d18efc3a156d403",
+    "observation": "Sampling::init reads scene custom property override_pixel_jitter_sample; when present it replaces the filter U/V sample dimensions and also derives additional sample dimensions from the supplied values."
+  },
+  "design": {
+    "type": "interleaved NATURAL versus CENTER fixed-jitter intervention across fresh persistent Blender processes",
+    "schedule": ["N01", "C01", "N02", "C02", "N03", "C03", "N04", "C04", "N05", "C05", "N06", "C06", "N07", "C07", "N08", "C08", "N09", "C09", "N10", "C10", "N11", "C11", "N12", "C12"],
+    "cells": {
+      "NATURAL": {"processes": 12, "overridePixelJitterSample": null},
+      "CENTER": {"processes": 12, "overridePixelJitterSample": [0.0, 0.0]}
+    },
+    "processes": 24,
+    "targetFrame": 38,
+    "renderCallsPerProcess": 12,
+    "renderCalls": 288,
+    "outputFiles": 288,
+    "withinProcessAdjacentTransitions": 264,
+    "selectedBeforeAnyFormalB30Render": true,
+    "frameSetRule": "Set frame 38 once before the first render and do not change it between calls.",
+    "renderRule": "Call bpy.ops.render.render(write_still=True) exactly twelve times per fresh process and write call-01.png through call-12.png.",
+    "controlRule": "NATURAL must delete override_pixel_jitter_sample if present; CENTER must set it to exactly [0.0, 0.0] before the first render."
+  },
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "threadsMode": "FIXED",
+    "threads": 8,
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "motionBlur": false,
+    "format": "PNG8_RGBA_ACES2_SDR"
+  },
+  "frozenDecodedRgbHashes": {
+    "NATURAL_REFERENCE": "c13638222371dcf3acf00354097e5955f48d630115f23ebe9e32147dae8bf308",
+    "NATURAL_ALTERNATE": "6e9685c17234e93a75e8735166dc1c314ffaaff339bd3613088a44ae1db0feaf",
+    "CENTER_DERIVATION": "ba0591ae97f08f72be2558ebfcbd17ac894a4ea76256b03bae3dea4215ff8aca"
+  },
+  "primaryEndpoint": {
+    "name": "strictFixedJitterStabilityWithActiveNaturalControl",
+    "unit": "one independent persistent Blender PID",
+    "centerExactDefinition": "Every CENTER call in every CENTER PID must match the frozen CENTER_DERIVATION decoded RGB hash.",
+    "naturalSwitchDefinition": "A NATURAL PID switches when its twelve calls include both frozen NATURAL_REFERENCE and NATURAL_ALTERNATE hashes.",
+    "naturalSupportThresholdProcesses": 2,
+    "centerNovelRule": "Any CENTER decoded RGB hash outside CENTER_DERIVATION is preserved as evidence and takes CENTER_VARIATION; it is never coerced or averaged.",
+    "naturalNovelRule": "Any NATURAL decoded RGB hash outside the two frozen natural hashes is preserved and takes NATURAL_MODE_SPACE_EXPANDED.",
+    "noOptionalStopping": true
+  },
+  "secondaryEndpoints": [
+    "decoded RGB hash frequencies by cell, PID and call ordinal",
+    "within-PID adjacent transition counts and directions in each cell",
+    "CENTER container hashes and render times despite decoded identity",
+    "natural switching-PID count and natural mode totals",
+    "number and frequency of novel hashes by cell",
+    "descriptive fixed-versus-natural image-change metrics copied from the frozen derivation, not reoptimized"
+  ],
+  "decisionPrecedence": [
+    "INVALID_EXPERIMENT",
+    "NATURAL_MODE_SPACE_EXPANDED",
+    "CENTER_VARIATION",
+    "FIXED_JITTER_STRICT_STABILITY_SUPPORT",
+    "NATURAL_SINGLE_PID_SWITCH_INCONCLUSIVE",
+    "NATURAL_WITHIN_PID_SWITCH_NOT_REPRODUCED"
+  ],
+  "decisionRule": {
+    "NATURAL_MODE_SPACE_EXPANDED": "The valid NATURAL cell observes a decoded RGB hash outside its two frozen hashes.",
+    "CENTER_VARIATION": "No natural novel hash occurs, but one or more CENTER calls depart from the frozen CENTER_DERIVATION decoded RGB hash.",
+    "FIXED_JITTER_STRICT_STABILITY_SUPPORT": "No prior failure occurs, all 144 CENTER calls across 12 CENTER PIDs equal CENTER_DERIVATION, and at least two NATURAL PIDs each contain both frozen natural modes.",
+    "NATURAL_SINGLE_PID_SWITCH_INCONCLUSIVE": "No prior failure occurs, all CENTER calls are exact, and exactly one NATURAL PID contains both natural modes.",
+    "NATURAL_WITHIN_PID_SWITCH_NOT_REPRODUCED": "No prior failure occurs, all CENTER calls are exact, and no NATURAL PID contains both natural modes.",
+    "INVALID_EXPERIMENT": "Any identity, source, control, process, call, output, layout, binding, frozen-contract, attack or human-status gate fails."
+  },
+  "executionContract": {
+    "formalRendererClassifierAndRunnerMustNotExistAtFreeze": true,
+    "derivationMustRemainLabeledExploratory": true,
+    "all24ProcessesMustBeFreshAndPidUnique": true,
+    "scheduleMustBeExactlyInterleaved": true,
+    "eachProcessMustSetFrame38OnceAndRenderExactlyTwelveTimes": true,
+    "naturalPropertyMustBeAbsentAndCenterPropertyMustEqualZeroPair": true,
+    "mustNotSaveSourceBlend": true,
+    "allIdentitiesSettingsHashesAndBindingsMustBeExact": true,
+    "sampleSizeHashSetsThresholdPrecedenceAndDecisionRulesMustNotChangeAfterExecution": true,
+    "workOutputsRemainLocalButEvidenceAndResultsAreCommitted": true,
+    "humanReviewMustRemainPending": true
+  },
+  "requiredNegativeCases": [
+    "B30 spec identity mismatch",
+    "B29 result identity mismatch",
+    "B29 spec identity mismatch",
+    "derivation result identity mismatch",
+    "derivation analysis identity mismatch",
+    "derivation tool identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "plan or structure identity mismatch",
+    "configurator identity mismatch",
+    "formal renderer identity mismatch",
+    "formal classifier identity mismatch",
+    "formal runner identity mismatch",
+    "source state or fixed render-control mismatch",
+    "cell intervention mismatch",
+    "schedule mismatch",
+    "PID uniqueness or cell binding mismatch",
+    "frame-set, render-call or call-order mismatch",
+    "PNG layout mismatch",
+    "missing or mutated output",
+    "classification, manifest or file-hash binding mismatch",
+    "hash-set, sample-size, threshold, precedence or decision-rule mutation",
+    "human-review status is not pending"
+  ],
+  "explicitNonClaims": [
+    "Strict CENTER stability would support this intervention for one scene, frame, Blender build, backend and machine; it would not prove universal determinism.",
+    "Changing override_pixel_jitter_sample changes the sampling target across the full frame and is not a quality-preserving repair of the seventeen-pixel natural event.",
+    "The intervention also derives additional sample dimensions from the supplied values, so a positive result would not isolate filter U/V jitter as the sole causal dimension.",
+    "The fixed CENTER image has not been established as perceptually superior, anti-aliased, temporally acceptable or cinematic.",
+    "Twelve processes per cell and twelve calls per process are a fixed mechanistic probe, not a population equivalence or failure-probability bound.",
+    "Decoded RGB identity does not replace EXR mastering checks or the independent PENDING human-review gate."
+  ]
+}
