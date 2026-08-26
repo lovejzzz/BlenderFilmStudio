@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "bfs.autoexecBoundary.v0.1",
+  "experimentId": "B36",
+  "status": "PREREGISTERED_BEFORE_TOOLING_OR_OUTPUT",
+  "runtime": {
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderBinary": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "blenderBinarySha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "factoryStartup": true,
+    "background": true,
+    "timeoutSecondsPerProcess": 60
+  },
+  "controlledCanary": {
+    "registeredTextUseModule": true,
+    "sideEffect": "write one JSON marker inside ignored B36 work only",
+    "environmentKey": "BFS_B36_FAKE_SECRET",
+    "environmentValue": "BFS_B36_NONSECRET_CANARY_V1",
+    "markerPathKey": "BFS_B36_MARKER_PATH",
+    "forbiddenActions": [
+      "external network access",
+      "child process creation",
+      "reading any real secret",
+      "writing outside experiments/autoexec-boundary-v0-1/work"
+    ]
+  },
+  "cells": [
+    {"id": "ENABLE_A", "autoexec": "ENABLE", "expectedMarker": true},
+    {"id": "ENABLE_B", "autoexec": "ENABLE", "expectedMarker": true},
+    {"id": "DISABLE_A", "autoexec": "DISABLE", "expectedMarker": false},
+    {"id": "DISABLE_B", "autoexec": "DISABLE", "expectedMarker": false},
+    {"id": "FACTORY_DEFAULT_A", "autoexec": "FACTORY_DEFAULT", "expectedMarker": false},
+    {"id": "FACTORY_DEFAULT_B", "autoexec": "FACTORY_DEFAULT", "expectedMarker": false}
+  ],
+  "frozenGates": {
+    "uniquePositiveProcessIds": 6,
+    "zeroExitCodes": 6,
+    "trustedProbeReports": 6,
+    "enabledMarkers": 2,
+    "disabledOrDefaultMarkers": 0,
+    "enabledMarkerTokenExact": true,
+    "enabledMarkerPidEqualsProbePid": true,
+    "sourceBlendByteUnchanged": true,
+    "markerAbsentBeforeEveryLaunch": true
+  },
+  "frozenAnalyzerAttacks": [
+    "unexpected marker in DISABLE cell",
+    "unexpected marker in FACTORY_DEFAULT cell",
+    "missing marker in ENABLE cell",
+    "wrong non-secret canary token",
+    "marker PID differs from probe PID",
+    "duplicate Blender PID",
+    "source blend post-run SHA differs from pre-run SHA"
+  ],
+  "decisionRules": {
+    "support": "all frozen gates and all seven analyzer attacks pass",
+    "disableInsufficient": "a DISABLE cell writes a valid marker",
+    "identityOrDesignInvalid": "ENABLE cells do not execute the controlled registered Text or runtime identity differs",
+    "runInvalid": "process failure, timeout, missing trusted probe, dirty preflight, or source mutation"
+  },
+  "nonClaims": [
+    "No parser sandbox or memory-safety claim",
+    "No filesystem, network, child-process, GPU, syscall or secret isolation claim",
+    "No claim that disable-autoexec makes an untrusted blend safe to parse",
+    "No claim about manual Text execution or Freestyle scripts",
+    "No claim about add-ons, packages, MCP authorization or signed approvals"
+  ]
+}
