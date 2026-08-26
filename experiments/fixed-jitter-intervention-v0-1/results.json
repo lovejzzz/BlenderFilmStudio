@@ -1,0 +1,1845 @@
+{
+  "documentType": "BFS_B30_FIXED_JITTER_INTERVENTION_RESULT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T14:43:29.043Z",
+  "decision": "FIXED_JITTER_STRICT_STABILITY_SUPPORT",
+  "independentDecision": "FIXED_JITTER_STRICT_STABILITY_SUPPORT",
+  "validExperiment": true,
+  "question": "Does Blender 5.2's CENTER override_pixel_jitter_sample intervention produce one frozen decoded RGB identity both within and across fresh processes while the matched NATURAL control reproduces within-PID switching between the two B28 modes?",
+  "design": {
+    "type": "interleaved NATURAL versus CENTER fixed-jitter intervention across fresh persistent Blender processes",
+    "schedule": [
+      "N01",
+      "C01",
+      "N02",
+      "C02",
+      "N03",
+      "C03",
+      "N04",
+      "C04",
+      "N05",
+      "C05",
+      "N06",
+      "C06",
+      "N07",
+      "C07",
+      "N08",
+      "C08",
+      "N09",
+      "C09",
+      "N10",
+      "C10",
+      "N11",
+      "C11",
+      "N12",
+      "C12"
+    ],
+    "cells": {
+      "NATURAL": {
+        "processes": 12,
+        "overridePixelJitterSample": null
+      },
+      "CENTER": {
+        "processes": 12,
+        "overridePixelJitterSample": [
+          0,
+          0
+        ]
+      }
+    },
+    "processes": 24,
+    "targetFrame": 38,
+    "renderCallsPerProcess": 12,
+    "renderCalls": 288,
+    "outputFiles": 288,
+    "withinProcessAdjacentTransitions": 264,
+    "selectedBeforeAnyFormalB30Render": true,
+    "frameSetRule": "Set frame 38 once before the first render and do not change it between calls.",
+    "renderRule": "Call bpy.ops.render.render(write_still=True) exactly twelve times per fresh process and write call-01.png through call-12.png.",
+    "controlRule": "NATURAL must delete override_pixel_jitter_sample if present; CENTER must set it to exactly [0.0, 0.0] before the first render."
+  },
+  "humanReview": {
+    "status": "PENDING",
+    "claim": "Automation cannot determine anti-aliasing quality, visibility, temporal perception or cinematic quality."
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "b30SpecSha256": "de5da4a38ce22fe80f17d1bc220ceb70680ebd56a5b03104a650132c4a12ae00",
+    "b29ResultsSha256": "c81d3697a35000da3765ed798ac90304468fb2abed78d826ea5d4c5afcf0579f",
+    "b29SpecSha256": "38a3d32dc8ce4e85e3403685c3b727f68fa48a71f517e576dfaea2c643c555d9",
+    "derivationResultsSha256": "3c0f45dbd1c84b16f7876e5060275c6992aa86006bef12742075f16ced18a3f6",
+    "derivationAnalysisSha256": "b8d32410392b9c717777d840b61313484d50aff4114c6248fefd1b82a4b06b0e",
+    "rendererSha256": "6efc2926811d30809f17c284d2f85e9a5b106817e38ec0569edae1565467ab56",
+    "classifierSha256": "0459e0f249027aee4626dd9ca5d46f94e2f306621688d4c131129148fb1b7b15",
+    "runnerSha256": "49e334fe62fef2a1ab5ee73841dacd71b758ec6dc0f988d7885bda62b2dd97ad"
+  },
+  "primary": {
+    "centerExactProcessCount": 12,
+    "centerExactProcesses": [
+      "C01",
+      "C02",
+      "C03",
+      "C04",
+      "C05",
+      "C06",
+      "C07",
+      "C08",
+      "C09",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "endpoint": "strictFixedJitterStabilityWithActiveNaturalControl",
+    "naturalSupportThresholdProcesses": 2,
+    "naturalSwitchingProcessCount": 10,
+    "naturalSwitchingProcesses": [
+      "N02",
+      "N03",
+      "N04",
+      "N05",
+      "N06",
+      "N07",
+      "N08",
+      "N10",
+      "N11",
+      "N12"
+    ]
+  },
+  "summary": {
+    "adjacentComparisons": 264,
+    "cellModeOccurrences": {
+      "CENTER": {
+        "CENTER_EXPECTED": 144
+      },
+      "NATURAL": {
+        "NATURAL_ALTERNATE": 19,
+        "NATURAL_REFERENCE": 125
+      }
+    },
+    "centerProcesses": 12,
+    "naturalProcesses": 12,
+    "novelDecodedRgbHashes": {},
+    "processes": 24,
+    "renders": 288,
+    "transitionDirections": {
+      "NATURAL:NATURAL_ALTERNATE->NATURAL_REFERENCE": 15,
+      "NATURAL:NATURAL_REFERENCE->NATURAL_ALTERNATE": 15
+    }
+  },
+  "ordinalModeCounts": {
+    "CENTER": [
+      {
+        "callOrdinal": 1,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 2,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 3,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 4,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 5,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 6,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 7,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 8,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 9,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 10,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 11,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      },
+      {
+        "callOrdinal": 12,
+        "counts": {
+          "CENTER_EXPECTED": 12
+        }
+      }
+    ],
+    "NATURAL": [
+      {
+        "callOrdinal": 1,
+        "counts": {
+          "NATURAL_ALTERNATE": 2,
+          "NATURAL_REFERENCE": 10
+        }
+      },
+      {
+        "callOrdinal": 2,
+        "counts": {
+          "NATURAL_ALTERNATE": 2,
+          "NATURAL_REFERENCE": 10
+        }
+      },
+      {
+        "callOrdinal": 3,
+        "counts": {
+          "NATURAL_REFERENCE": 12
+        }
+      },
+      {
+        "callOrdinal": 4,
+        "counts": {
+          "NATURAL_REFERENCE": 12
+        }
+      },
+      {
+        "callOrdinal": 5,
+        "counts": {
+          "NATURAL_ALTERNATE": 2,
+          "NATURAL_REFERENCE": 10
+        }
+      },
+      {
+        "callOrdinal": 6,
+        "counts": {
+          "NATURAL_ALTERNATE": 2,
+          "NATURAL_REFERENCE": 10
+        }
+      },
+      {
+        "callOrdinal": 7,
+        "counts": {
+          "NATURAL_ALTERNATE": 2,
+          "NATURAL_REFERENCE": 10
+        }
+      },
+      {
+        "callOrdinal": 8,
+        "counts": {
+          "NATURAL_ALTERNATE": 2,
+          "NATURAL_REFERENCE": 10
+        }
+      },
+      {
+        "callOrdinal": 9,
+        "counts": {
+          "NATURAL_ALTERNATE": 1,
+          "NATURAL_REFERENCE": 11
+        }
+      },
+      {
+        "callOrdinal": 10,
+        "counts": {
+          "NATURAL_REFERENCE": 12
+        }
+      },
+      {
+        "callOrdinal": 11,
+        "counts": {
+          "NATURAL_ALTERNATE": 4,
+          "NATURAL_REFERENCE": 8
+        }
+      },
+      {
+        "callOrdinal": 12,
+        "counts": {
+          "NATURAL_ALTERNATE": 2,
+          "NATURAL_REFERENCE": 10
+        }
+      }
+    ]
+  },
+  "processes": [
+    {
+      "replicate": "N01",
+      "cell": "NATURAL",
+      "processId": 6994,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_REFERENCE": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": false,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "C01",
+      "cell": "CENTER",
+      "processId": 7138,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N02",
+      "cell": "NATURAL",
+      "processId": 7278,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 3,
+        "NATURAL_REFERENCE": 9
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 6,
+      "transitions": [
+        {
+          "afterCallOrdinal": 2,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 3,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        },
+        {
+          "afterCallOrdinal": 5,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 6,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        },
+        {
+          "afterCallOrdinal": 8,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 9,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "C02",
+      "cell": "CENTER",
+      "processId": 7428,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N03",
+      "cell": "NATURAL",
+      "processId": 7566,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 2,
+        "NATURAL_REFERENCE": 10
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 4,
+      "transitions": [
+        {
+          "afterCallOrdinal": 5,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 6,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        },
+        {
+          "afterCallOrdinal": 11,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 12,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "C03",
+      "cell": "CENTER",
+      "processId": 7702,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N04",
+      "cell": "NATURAL",
+      "processId": 7838,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 1,
+        "NATURAL_REFERENCE": 11
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 2,
+      "transitions": [
+        {
+          "afterCallOrdinal": 6,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 7,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "C04",
+      "cell": "CENTER",
+      "processId": 7973,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N05",
+      "cell": "NATURAL",
+      "processId": 8110,
+      "sequence": [
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 2,
+        "NATURAL_REFERENCE": 10
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 3,
+      "transitions": [
+        {
+          "afterCallOrdinal": 2,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        },
+        {
+          "afterCallOrdinal": 7,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 8,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "C05",
+      "cell": "CENTER",
+      "processId": 8245,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N06",
+      "cell": "NATURAL",
+      "processId": 8384,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 2,
+        "NATURAL_REFERENCE": 10
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 4,
+      "transitions": [
+        {
+          "afterCallOrdinal": 6,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 7,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        },
+        {
+          "afterCallOrdinal": 8,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 9,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "C06",
+      "cell": "CENTER",
+      "processId": 8517,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N07",
+      "cell": "NATURAL",
+      "processId": 8654,
+      "sequence": [
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 1,
+        "NATURAL_REFERENCE": 11
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 1,
+      "transitions": [
+        {
+          "afterCallOrdinal": 2,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "C07",
+      "cell": "CENTER",
+      "processId": 8787,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N08",
+      "cell": "NATURAL",
+      "processId": 8952,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_ALTERNATE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 2,
+        "NATURAL_REFERENCE": 10
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 1,
+      "transitions": [
+        {
+          "afterCallOrdinal": 11,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        }
+      ]
+    },
+    {
+      "replicate": "C08",
+      "cell": "CENTER",
+      "processId": 9142,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N09",
+      "cell": "NATURAL",
+      "processId": 9278,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_REFERENCE": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": false,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "C09",
+      "cell": "CENTER",
+      "processId": 9415,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N10",
+      "cell": "NATURAL",
+      "processId": 9620,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 2,
+        "NATURAL_REFERENCE": 10
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 4,
+      "transitions": [
+        {
+          "afterCallOrdinal": 7,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 8,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        },
+        {
+          "afterCallOrdinal": 9,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 10,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "C10",
+      "cell": "CENTER",
+      "processId": 9782,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N11",
+      "cell": "NATURAL",
+      "processId": 9918,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 1,
+        "NATURAL_REFERENCE": 11
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 2,
+      "transitions": [
+        {
+          "afterCallOrdinal": 11,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 12,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        }
+      ]
+    },
+    {
+      "replicate": "C11",
+      "cell": "CENTER",
+      "processId": 10056,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    },
+    {
+      "replicate": "N12",
+      "cell": "NATURAL",
+      "processId": 10190,
+      "sequence": [
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_REFERENCE",
+        "NATURAL_ALTERNATE",
+        "NATURAL_ALTERNATE"
+      ],
+      "modeCounts": {
+        "NATURAL_ALTERNATE": 3,
+        "NATURAL_REFERENCE": 9
+      },
+      "withinPidNaturalSwitch": true,
+      "centerExact": false,
+      "adjacentTransitionCount": 3,
+      "transitions": [
+        {
+          "afterCallOrdinal": 2,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        },
+        {
+          "afterCallOrdinal": 3,
+          "direction": "NATURAL_ALTERNATE->NATURAL_REFERENCE"
+        },
+        {
+          "afterCallOrdinal": 11,
+          "direction": "NATURAL_REFERENCE->NATURAL_ALTERNATE"
+        }
+      ]
+    },
+    {
+      "replicate": "C12",
+      "cell": "CENTER",
+      "processId": 10323,
+      "sequence": [
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED",
+        "CENTER_EXPECTED"
+      ],
+      "modeCounts": {
+        "CENTER_EXPECTED": 12
+      },
+      "withinPidNaturalSwitch": false,
+      "centerExact": true,
+      "adjacentTransitionCount": 0,
+      "transitions": []
+    }
+  ],
+  "aggregate": {
+    "uniqueRenderProcesses": 24,
+    "renderProcesses": 24,
+    "renderCalls": 288,
+    "outputFiles": 288,
+    "totalRenderSeconds": 51.90692599999999,
+    "attacksPassed": 25,
+    "attacksTotal": 25
+  },
+  "derivationInterventionCost": {
+    "status": "FROZEN_DERIVATION_DESCRIPTIVE_ONLY",
+    "centerVersusNaturalReferenceChangedPixels": 131779,
+    "centerVersusNaturalReferenceMaximumAbsoluteCodeDelta": 46,
+    "centerVersusNaturalReferenceRmsNormalized": 0.0036968891556978904
+  },
+  "processLedger": [
+    {
+      "orderIndex": 0,
+      "replicate": "N01",
+      "cell": "NATURAL",
+      "processId": 6994,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "cf91de7003fc6b134a8cea649bb25b0d2d446b10af69b16d3acd5b8cbfc424a3",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "3bf557edc6776a38ae7f83a1d081e5ab0217237b20b1beb3c98a6f720a9f8b26"
+    },
+    {
+      "orderIndex": 1,
+      "replicate": "C01",
+      "cell": "CENTER",
+      "processId": 7138,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "3131ec936872f7b1d6138ad3131a629e6f83dfa537504c7788aeae3b05a9c4a3",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "5acb93f3ba4fbed0f738092a330c375cb1a148f20ad2ae67dc74e9f64697a983"
+    },
+    {
+      "orderIndex": 2,
+      "replicate": "N02",
+      "cell": "NATURAL",
+      "processId": 7278,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "bb5648b5ed49dc44eba386923741d5a61b969fa4590109155189163790269611",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "91dc589bda6c983c18fac8bdceb7bcc8eb2b678ee2735b25b9f162f18d6aa158"
+    },
+    {
+      "orderIndex": 3,
+      "replicate": "C02",
+      "cell": "CENTER",
+      "processId": 7428,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "e7265b7598ba0351c19debd8b3259e37374ba23e2b01b88da5e509f46d63a468",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "2d0c749bf372fe4f5adc1095dd6cc99e6b6b50a60772f1392092ccb97a6bb629"
+    },
+    {
+      "orderIndex": 4,
+      "replicate": "N03",
+      "cell": "NATURAL",
+      "processId": 7566,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "d1d29baeaaf8ffd3b51f402335c58ca3c658b9f9fa389da8a1ec11fa4045b327",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "e1d13dd28fc2c8675f5af75ef82f53d97d7aebbb5d7b5bf92ec47c66d837102d"
+    },
+    {
+      "orderIndex": 5,
+      "replicate": "C03",
+      "cell": "CENTER",
+      "processId": 7702,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "c510e3a766f869dfc45fd7cc24488106522a6e910fb5d1afa782be6200f4e75d",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "db75312bb29ac1d95334ef962d8e2fb3abd9478f2e6b23efd29c132b8ded4ffb"
+    },
+    {
+      "orderIndex": 6,
+      "replicate": "N04",
+      "cell": "NATURAL",
+      "processId": 7838,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "7634d2c85ffd0264b3e23159ac84b62b82666987c3fe6f906941c227245418d6",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "82aa59d82c420e92c5714ee9e2f60bdb4778432ea8f6ec1579f2e17d3b8e3687"
+    },
+    {
+      "orderIndex": 7,
+      "replicate": "C04",
+      "cell": "CENTER",
+      "processId": 7973,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "e06095d68bb869fb3b9815320dcb898c3e3f206c8f94997323d3177ea10633a1",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "afa7bab91334be201cf25b7163f967fc7483457e0c85c180ccc97aa90b1d5a08"
+    },
+    {
+      "orderIndex": 8,
+      "replicate": "N05",
+      "cell": "NATURAL",
+      "processId": 8110,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "5b289ceab5178e35e4874b9e6bb5a8e2ae1228f51a88dbc2ddf291fde6ff867e",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "13794ffb39439e77cbdeb02022821a0a5a4ea706ae043b3948961d6043c7a177"
+    },
+    {
+      "orderIndex": 9,
+      "replicate": "C05",
+      "cell": "CENTER",
+      "processId": 8245,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "8ab354329c76f3e13d9d372b47c1ded6697db0dd70785a56f50bf28d3e2eb945",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "45e2ce46d48ae79b1c1c51846acc956c39a3106ea0564ecf4845a10162a6ad17"
+    },
+    {
+      "orderIndex": 10,
+      "replicate": "N06",
+      "cell": "NATURAL",
+      "processId": 8384,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "ea211e1e16371fd603114d64b48a385748e5357ee4e864af830b273e9fd1f84b",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "780bb4502a23f45ed7f3c0c73fab85553fbc3eb323597d0ef0160390ec135f6d"
+    },
+    {
+      "orderIndex": 11,
+      "replicate": "C06",
+      "cell": "CENTER",
+      "processId": 8517,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "4ce24afd9ade64e5011e28ab19313466c82a4c8ed9ab7b740515fd5558391d5e",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "bb3b4dd80b09ce3a14f0651c4d9f64eec3675988b2b4fe2d976c411c86ccca22"
+    },
+    {
+      "orderIndex": 12,
+      "replicate": "N07",
+      "cell": "NATURAL",
+      "processId": 8654,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "8eb2507d558c0fb6b8912a3e603a9ca22cf0da72627d209b40b6e2bc19cc672c",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "5166e78c8f3b7286a9aed38d524aece062b239452f0dd6a9c7bfca76bbaa71b4"
+    },
+    {
+      "orderIndex": 13,
+      "replicate": "C07",
+      "cell": "CENTER",
+      "processId": 8787,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "12f65966921985e9e3b7ca17e3e2d029faf05b8f0a77899d7efa4e4414c4ef5c",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "2e7a066d2d0fd4eebd86aa60fa26c2918512f9100b175ea38cc9e7ae45029f21"
+    },
+    {
+      "orderIndex": 14,
+      "replicate": "N08",
+      "cell": "NATURAL",
+      "processId": 8952,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "7b7d744798172b56f9d03d583dd5a71d29e5eae65cf5cd0b4d8ba6a455d41e1a",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "4fdadeacda3039425408b1a2fa595c381d9000b9e6f703de1427fb28cd40dd2b"
+    },
+    {
+      "orderIndex": 15,
+      "replicate": "C08",
+      "cell": "CENTER",
+      "processId": 9142,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "fcd47d13282a3d8e2aed54d9a7b3fdb5b3fa45176f2163d42b8659a887835a27",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "bfa6c35a6f9e448b6d6b5f119a769815e413754659b36eb8e41fd04de326ba4d"
+    },
+    {
+      "orderIndex": 16,
+      "replicate": "N09",
+      "cell": "NATURAL",
+      "processId": 9278,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "212ab33592cccc7c4c07af42e52acbb64fb0890b668d3e042e1b63c7492374f7",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "b0d3c2d7198304425a92913c0b1b6bbb8c097f132e6e4ac018fdcbd83ee8d988"
+    },
+    {
+      "orderIndex": 17,
+      "replicate": "C09",
+      "cell": "CENTER",
+      "processId": 9415,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "9750739be5df0183f16e8f69544aeb716d2ae1bd2d52d200a88600454c2c11f3",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "4c849ea4f32ed9e2f6a3aaf0c7c02a02c5e744f4a0d1620ab1c405a89a045378"
+    },
+    {
+      "orderIndex": 18,
+      "replicate": "N10",
+      "cell": "NATURAL",
+      "processId": 9620,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "d2ba15d7f2468cd342bf6f92ea4ce099ab9f7a4000cdbac4ca59a91337428155",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "2f746294c99868c683c3a2ebc4f329065f3f70f798ed26e40894733db145d0ea"
+    },
+    {
+      "orderIndex": 19,
+      "replicate": "C10",
+      "cell": "CENTER",
+      "processId": 9782,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "7f16031b63b5e36e52e44fb3d69984df2b08eba5311c68d2343ea7bbc43a3c49",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "e2ea35e252e550deb87a427990583020dd886ffbc08665cbdc7f8f581e97f388"
+    },
+    {
+      "orderIndex": 20,
+      "replicate": "N11",
+      "cell": "NATURAL",
+      "processId": 9918,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "b2d528c03432b4e4a59302b103ed2278c98223ff803edfb645bb8914d4e01818",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "703943e63d65ff7b3b4a3a6fa3892c301e92c98d8fa381910fc5a972f528d459"
+    },
+    {
+      "orderIndex": 21,
+      "replicate": "C11",
+      "cell": "CENTER",
+      "processId": 10056,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "c7d8b0ac2fb106e1101eb5170bc7b415686af07ee300d93453bbfac3eb8de744",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "868cbdfbf6b117fcdeb250e240841c6694704e95f30fc49c89b72d7d835fc55e"
+    },
+    {
+      "orderIndex": 22,
+      "replicate": "N12",
+      "cell": "NATURAL",
+      "processId": 10190,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "a29a953769eaf31b31d766f9a327a87e7f0855f4c4624820c750dfb5e17c6e90",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "a3bc26919942d0c8a671ac5cbc09e9237abd57b0f92b120d3975af8c3a5f8900"
+    },
+    {
+      "orderIndex": 23,
+      "replicate": "C12",
+      "cell": "CENTER",
+      "processId": 10323,
+      "renderCalls": 12,
+      "callOrder": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "renderReportSha256": "f4278e6bb1ca0859cfbdf2031f712c036116e3eafea96fe3d7c09ef88f4d59eb",
+      "threadInterventionReportSha256": "b7397eb72f9cce4cb30aa49a48e645310c37c822b46b41dc196c3fe635ff8675",
+      "manifestHash": "4ef721cfe48f1533438255c1ba1b5a846011a1b7f812dacc842b9776849063a3"
+    }
+  ],
+  "attacks": [
+    {
+      "id": "N_B30_SPEC_IDENTITY",
+      "expected": "B30_SPEC_SHA",
+      "observed": "B30_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B29_RESULT_IDENTITY",
+      "expected": "B29_RESULT_SHA",
+      "observed": "B29_RESULT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B29_SPEC_IDENTITY",
+      "expected": "B29_SPEC_SHA",
+      "observed": "B29_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_DERIVATION_RESULT_IDENTITY",
+      "expected": "DERIVATION_RESULT_SHA",
+      "observed": "DERIVATION_RESULT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_DERIVATION_ANALYSIS_IDENTITY",
+      "expected": "DERIVATION_ANALYSIS_SHA",
+      "observed": "DERIVATION_ANALYSIS_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_DERIVATION_TOOL_IDENTITY",
+      "expected": "DERIVATION_TOOLS",
+      "observed": "DERIVATION_TOOLS",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SPEC_IDENTITY",
+      "expected": "REVIEW_SPEC_SHA",
+      "observed": "REVIEW_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER_IDENTITY",
+      "expected": "BLENDER_SHA",
+      "observed": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO_IDENTITY",
+      "expected": "OCIO_SHA",
+      "observed": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE_IDENTITY",
+      "expected": "SCENE_SHA",
+      "observed": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_PLAN_STRUCTURE_IDENTITY",
+      "expected": "PLAN_STRUCTURE",
+      "observed": "PLAN_STRUCTURE",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR_IDENTITY",
+      "expected": "CONFIGURATOR_SHA",
+      "observed": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER_IDENTITY",
+      "expected": "RENDERER_SHA",
+      "observed": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_CLASSIFIER_IDENTITY",
+      "expected": "CLASSIFIER_SHA",
+      "observed": "CLASSIFIER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RUNNER_IDENTITY",
+      "expected": "RUNNER_SHA",
+      "observed": "RUNNER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SOURCE_CONTROLS",
+      "expected": "SOURCE_CONTROLS",
+      "observed": "SOURCE_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_CELL_INTERVENTION",
+      "expected": "CELL_INTERVENTION",
+      "observed": "CELL_INTERVENTION",
+      "pass": true
+    },
+    {
+      "id": "N_SCHEDULE",
+      "expected": "SCHEDULE",
+      "observed": "SCHEDULE",
+      "pass": true
+    },
+    {
+      "id": "N_PID_BINDING",
+      "expected": "PID_BINDING",
+      "observed": "PID_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FRAME_CALL_ORDER",
+      "expected": "FRAME_CALL_ORDER",
+      "observed": "FRAME_CALL_ORDER",
+      "pass": true
+    },
+    {
+      "id": "N_PNG_LAYOUT",
+      "expected": "PNG_LAYOUT",
+      "observed": "PNG_LAYOUT",
+      "pass": true
+    },
+    {
+      "id": "N_OUTPUT_BINDING",
+      "expected": "OUTPUT_BINDING",
+      "observed": "OUTPUT_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_CLASSIFICATION_BINDING",
+      "expected": "CLASSIFICATION_BINDING",
+      "observed": "CLASSIFICATION_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_FROZEN_CONTRACT",
+      "expected": "FROZEN_CONTRACT",
+      "observed": "FROZEN_CONTRACT",
+      "pass": true
+    },
+    {
+      "id": "N_HUMAN_REVIEW",
+      "expected": "HUMAN_REVIEW",
+      "observed": "HUMAN_REVIEW",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "processLedger": "experiments/fixed-jitter-intervention-v0-1/evidence/process-ledger.json",
+    "classificationIndex": "experiments/fixed-jitter-intervention-v0-1/evidence/classification-index.json",
+    "classification": "experiments/fixed-jitter-intervention-v0-1/evidence/mode-classification.json",
+    "binding": "experiments/fixed-jitter-intervention-v0-1/evidence/classification-binding.json",
+    "manifests": {
+      "N01": "experiments/fixed-jitter-intervention-v0-1/evidence/N01.manifest.json",
+      "C01": "experiments/fixed-jitter-intervention-v0-1/evidence/C01.manifest.json",
+      "N02": "experiments/fixed-jitter-intervention-v0-1/evidence/N02.manifest.json",
+      "C02": "experiments/fixed-jitter-intervention-v0-1/evidence/C02.manifest.json",
+      "N03": "experiments/fixed-jitter-intervention-v0-1/evidence/N03.manifest.json",
+      "C03": "experiments/fixed-jitter-intervention-v0-1/evidence/C03.manifest.json",
+      "N04": "experiments/fixed-jitter-intervention-v0-1/evidence/N04.manifest.json",
+      "C04": "experiments/fixed-jitter-intervention-v0-1/evidence/C04.manifest.json",
+      "N05": "experiments/fixed-jitter-intervention-v0-1/evidence/N05.manifest.json",
+      "C05": "experiments/fixed-jitter-intervention-v0-1/evidence/C05.manifest.json",
+      "N06": "experiments/fixed-jitter-intervention-v0-1/evidence/N06.manifest.json",
+      "C06": "experiments/fixed-jitter-intervention-v0-1/evidence/C06.manifest.json",
+      "N07": "experiments/fixed-jitter-intervention-v0-1/evidence/N07.manifest.json",
+      "C07": "experiments/fixed-jitter-intervention-v0-1/evidence/C07.manifest.json",
+      "N08": "experiments/fixed-jitter-intervention-v0-1/evidence/N08.manifest.json",
+      "C08": "experiments/fixed-jitter-intervention-v0-1/evidence/C08.manifest.json",
+      "N09": "experiments/fixed-jitter-intervention-v0-1/evidence/N09.manifest.json",
+      "C09": "experiments/fixed-jitter-intervention-v0-1/evidence/C09.manifest.json",
+      "N10": "experiments/fixed-jitter-intervention-v0-1/evidence/N10.manifest.json",
+      "C10": "experiments/fixed-jitter-intervention-v0-1/evidence/C10.manifest.json",
+      "N11": "experiments/fixed-jitter-intervention-v0-1/evidence/N11.manifest.json",
+      "C11": "experiments/fixed-jitter-intervention-v0-1/evidence/C11.manifest.json",
+      "N12": "experiments/fixed-jitter-intervention-v0-1/evidence/N12.manifest.json",
+      "C12": "experiments/fixed-jitter-intervention-v0-1/evidence/C12.manifest.json"
+    }
+  },
+  "nonClaims": [
+    "Strict CENTER stability would support this intervention for one scene, frame, Blender build, backend and machine; it would not prove universal determinism.",
+    "Changing override_pixel_jitter_sample changes the sampling target across the full frame and is not a quality-preserving repair of the seventeen-pixel natural event.",
+    "The intervention also derives additional sample dimensions from the supplied values, so a positive result would not isolate filter U/V jitter as the sole causal dimension.",
+    "The fixed CENTER image has not been established as perceptually superior, anti-aliased, temporally acceptable or cinematic.",
+    "Twelve processes per cell and twelve calls per process are a fixed mechanistic probe, not a population equivalence or failure-probability bound.",
+    "Decoded RGB identity does not replace EXR mastering checks or the independent PENDING human-review gate."
+  ]
+}
