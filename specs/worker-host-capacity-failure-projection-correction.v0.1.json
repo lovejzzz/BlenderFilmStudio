@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityFailureProjectionCorrection.v0.1",
+  "experimentId": "B40-C3",
+  "status": "PREREGISTERED_FAILURE_PROJECTION_CORRECTION_BEFORE_TOOLING_OR_OUTPUT",
+  "baseSpecSha256": "fd21c27801a83f542a4aaa498fbc61867b3116509bb6e43769d83873146850ca",
+  "serializationCorrection": {
+    "specSha256": "18d945fb9b96f5369b638b7214904ca6b3d7f110d1e544680a28dc41e8d7651a",
+    "preregistrationCommit": "a117a6ccc5631e7db382a121822a88fc76511a6f"
+  },
+  "invalidC2": {
+    "resultSha256": "b7f20549d49ac2dd4fb12693a2f37308d945d6b60b53389f5a9cdc582d75682d",
+    "auditSha256": "9e0da26bf645c8dc83246b1f7488ef51c10a8fd664530d411ae94492b23a0b9c",
+    "baseAnalysisPassed": true,
+    "roundTripPassed": true,
+    "attacksPassedByPrimaryCode": 0
+  },
+  "changedImplementationExact": {
+    "projection": "When baseAnalysis fails, append every ordered baseAnalysis.failures code to the wrapper failures, then append BASE_ANALYSIS as the final summary code",
+    "basePassBehavior": "When baseAnalysis passes, append no base code and no BASE_ANALYSIS summary",
+    "attackSuccess": "The preregistered expectedFailure must occur in the projected wrapper failures"
+  },
+  "unchanged": [
+    "value-copy serialization correction",
+    "pre/post JSON base analysis, decision, evidence hash and attack vector equality",
+    "B40 capacity thresholds, observations and four blockers",
+    "B40-C1 literal flags parser",
+    "14 attack names and expected primary codes",
+    "nine read-only probe classes and zero runtime operations"
+  ],
+  "acceptedVerdict": "WORKER_HOST_CAPACITY_BLOCKED_REPLAY_STABLE",
+  "nonClaims": [
+    "B40-C3 changes wrapper failure-code projection only",
+    "B40, B40-C1 and B40-C2 remain immutable rejected attempts",
+    "No external-state mutation, Blender/container runtime, download, cleanup or reserve override",
+    "No Blender compatibility, performance, containment or production claim"
+  ]
+}
