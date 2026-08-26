@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderRuntimeCanary.v0.1",
+  "experimentId": "B41",
+  "status": "PREREGISTERED_BEFORE_TOOLING_IMAGE_BUILD_DOWNLOAD_OR_RUNTIME",
+  "question": "Can the official Blender 5.2.0 Linux x64 artifact execute under best-effort linux/amd64 emulation on the admitted ARM64 Colima host, produce one real 32x32 Eevee render inside the frozen B38 launch boundary, and produce a non-promotable forced-timeout receipt?",
+  "ancestry": {
+    "b38SpecSha256": "c96a6c7d9bf91c0b0f72fa2094ef6b6c0bb778d7443533f661859427715f9514",
+    "b38ResultSha256": "42fe3ceb1b36ded93c7cc40f1f0651c82f30a5e8878bcba3c2ec2eeb8454bf17",
+    "b38AuditSha256": "2c48229f0961faf8b030489ce0c69edd3785797ceeb4fc6e0c25ea990b0204f1",
+    "b39C1ResultSha256": "1898cca99da9215e4fd394df099417a5324d9405e5d6713711486d21875a1edf",
+    "b39C1AuditSha256": "12b292973eb166aea0eccf2fc071fdc730cec7dc102c2ad3d1297f4a7539edc7",
+    "b40R2ResultSha256": "d716466e627eee0b95fffaf544b21cb404ad1b6059d4612c533891e81d08a303",
+    "b40R2AuditSha256": "e1b4b47526b03a0cea0f6e330f9a507941dec4baaca93a1996a16cfba5d24899"
+  },
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+    "hostArchitecture": "arm64",
+    "dockerHost": "unix:///Users/tianxing/.colima/default/docker.sock",
+    "dockerServerArchitecture": "aarch64",
+    "containerPlatform": "linux/amd64",
+    "executionClass": "EXPERIMENT_ONLY_BEST_EFFORT_EMULATION"
+  },
+  "artifact": {
+    "release": "5.2.0 LTS",
+    "url": "https://download.blender.org/release/Blender5.2/blender-5.2.0-linux-x64.tar.xz",
+    "filename": "blender-5.2.0-linux-x64.tar.xz",
+    "bytes": 384441228,
+    "sha256": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48",
+    "blenderExecutablePath": "/opt/bfs/blender/blender",
+    "blenderExecutableSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"
+  },
+  "imageBuild": {
+    "base": "debian:bookworm-slim@sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+    "tag": "bfs-blender-worker:5.2.0-b41",
+    "networkAllowedOnlyDuringBuild": true,
+    "archiveMustMatchBeforeBuild": true,
+    "imageMustBeRunByResolvedSha256Id": true,
+    "pullAtRuntime": "never"
+  },
+  "inputFixture": {
+    "canaryScriptsMustBeToolFrozen": true,
+    "ocioSource": "/Applications/Blender.app/Contents/Resources/5.2/datafiles/colormanagement",
+    "ocioTreeManifestSha256": "57f58f25ff919ab2acb214ed42e1a904f32b6c97836aea74c1ec87e13e8e0c16",
+    "inputMount": "/inputs",
+    "outputMount": "/outputs"
+  },
+  "containerContract": {
+    "shell": false,
+    "rootFilesystemReadOnly": true,
+    "network": "none",
+    "privileged": false,
+    "user": "65532:65532",
+    "capDrop": ["ALL"],
+    "capAdd": [],
+    "noNewPrivileges": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "inputReadOnly": true,
+    "outputWritable": true,
+    "tmpfs": [
+      "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+      "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532"
+    ],
+    "environmentKeysExact": [
+      "BFS_INPUT_ROOT", "BFS_JOB_ID", "BFS_OUTPUT_ROOT", "BFS_REPORT_PATH", "BLENDER_USER_CONFIG",
+      "BLENDER_USER_SCRIPTS", "HOME", "LANG", "LC_ALL", "OCIO", "TMPDIR"
+    ],
+    "environmentValues": {
+      "BFS_INPUT_ROOT": "/inputs",
+      "BFS_OUTPUT_ROOT": "/outputs",
+      "BFS_REPORT_PATH": "/outputs/runtime-report.json",
+      "BLENDER_USER_CONFIG": "/work/blender-config",
+      "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+      "HOME": "/work/home",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "OCIO": "/inputs/ocio/config.ocio",
+      "TMPDIR": "/work/tmp"
+    },
+    "blenderArgvPrefix": ["--background", "--factory-startup", "--disable-autoexec", "--offline-mode"],
+    "pythonFailureArgs": ["--python-exit-code", "1"]
+  },
+  "successCanary": {
+    "jobId": "B41-SUCCESS-01",
+    "script": "/inputs/runtime-canary.py",
+    "wallTimeMs": 30000,
+    "requiredChecks": [
+      "Blender version is exactly 5.2.0",
+      "Blender executable SHA-256 matches the frozen B38/Linux artifact identity",
+      "effective UID and GID are 65532",
+      "CapEff is zero and NoNewPrivs is one",
+      "the parent-only BFS_PARENT_SECRET is absent",
+      "writing below /inputs fails",
+      "writing below the read-only root fails",
+      "writing below /outputs succeeds",
+      "an outbound IPv4 connection fails under network=none",
+      "cgroup PID, memory and CPU values enforce 256, 8 GiB and four CPUs",
+      "bpy reports online access disabled and autoexec disabled",
+      "a real scene is saved and Eevee writes a valid 32x32 PNG",
+      "runtime report and stdout/stderr receipt are captured"
+    ],
+    "successPromotable": true
+  },
+  "timeoutCanary": {
+    "jobId": "B41-TIMEOUT-01",
+    "script": "/inputs/timeout-canary.py",
+    "wallTimeMs": 30000,
+    "terminateSignal": "SIGTERM",
+    "terminateGraceMs": 5000,
+    "forceSignal": "SIGKILL",
+    "mustIgnoreSigterm": true,
+    "requiredOutcome": "FORCED_TIMEOUT_NON_PROMOTABLE",
+    "outputPromotable": false
+  },
+  "diskAdmission": {
+    "projectedWriteBytes": 21474836480,
+    "minimumReserveBytes": 107374182400,
+    "mustPassBeforeDownloadAndBuild": true
+  },
+  "decisionRules": {
+    "accepted": "Artifact size/hash, image identity/platform, every success canary, valid 32x32 PNG, zero exit before 30 seconds, forced timeout receipt, non-promotion rule, output ownership, cleanup of experiment-created running containers, evidence hash and independent audit all pass.",
+    "runtimeSupportOnly": "The success canary passes but timeout enforcement or its receipt fails; retain evidence and do not promote the worker contract.",
+    "failed": "Build, artifact, executable, Blender, containment, resource, render, timeout or audit evidence fails."
+  },
+  "acceptedVerdict": "LINUX_AMD64_BLENDER_5_2_CANARY_AND_TIMEOUT_SUPPORTED",
+  "nonClaims": [
+    "Best-effort x64 emulation is not a production performance or availability claim",
+    "A 32x32 synthetic Eevee frame is not a cinematic-quality result",
+    "Container controls do not prove protection from every kernel, daemon, parser, GPU or denial-of-service vulnerability",
+    "Resource ceiling introspection is not an OOM, fork-bomb or sustained CPU-throttle stress test",
+    "B41 does not establish cross-host, cross-architecture or pixel-level determinism",
+    "The worker image remains experimental and is not selected as a production backend"
+  ]
+}
