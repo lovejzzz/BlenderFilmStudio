@@ -490,6 +490,31 @@ Protocol: `research/2026-08-26-b24-production-tolerance-holdout-protocol.md`.
 
 Status at freeze: the configurator and dual-output renderer are reused by hash; no B24 comparator, runner or holdout output exists.
 
+The first formal tool candidate (`0a69c1c`) rendered all 72 processes and found both formats 72/72 inside the envelope, but the experiment correctly classified itself invalid: the runner implemented 23 negative attacks while the frozen contract required 22. The unregistered extra PID attack was removed, producing accepted tool commit `d60c749`; all holdout renders were then rerun rather than promoting the invalid outputs.
+
+Accepted formal execution observation:
+
+- 72/72 unique Blender PIDs, 72 render calls and 144 same-Render-Result saves;
+- EXR32: 72/72 envelope pass, 70/72 strict exact, maximum error `0.0068359375`, maximum RMS `0.000012102088061225292`, maximum 17 changed pixels;
+- PNG8: 72/72 envelope pass, 70/72 strict exact, maximum error `0.003921568393707275`, maximum RMS `0.0000072052046660281146`, maximum 5 changed pixels;
+- OIIO Yee: zero failure pixels across all 72 PNG holdout pairs at the frozen nominal inputs;
+- only frame 10 A-B and A-C were non-exact; B-C was exact in both formats;
+- 22/22 attacks reached their frozen reason.
+
+Verdict: `PRODUCTION_REPEATABILITY_ENVELOPE_SUPPORT`. The derivation envelope generalized to every independent holdout pair without threshold revision, while strict pixel identity remained 70/72. This supports a numeric static-frame repeatability contract for this scene/profile, not calibrated invisibility, temporal stability or universal Blender behavior.
+
+Artifacts: `experiments/production-tolerance-holdout-v0-1/results.json`, `experiments/production-tolerance-holdout-v0-1/evidence/` and `research/2026-08-26-b24-production-tolerance-holdout-result.md`.
+
+## J-022 · Temporal presentation and human review boundary
+
+Type: next hypothesis selected from B24, 2026-08-26.
+
+B24 closes the static numeric holdout question for this profile but does not answer the film question: whether sparse run-to-run differences become detectable flicker or motion instability during continuous playback. Static OIIO Yee comparisons with nominal viewing inputs cannot stand in for a calibrated moving-image review.
+
+The next protocol should retain exact provenance/structure and the validated static envelope, then evaluate continuous full-sequence replicates with a frozen temporal-difference metric and blinded human playback review. Metric derivation and review acceptance must be separated from holdout validation, and reviewer disagreement must remain evidence.
+
+Status: direction selected; temporal/reviewer protocol not yet frozen.
+
 ## Journal rule for future work
 
 Every promoted result must record:

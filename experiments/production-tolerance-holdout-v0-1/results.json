@@ -1,0 +1,414 @@
+{
+  "documentType": "BFS_B24_PRODUCTION_TOLERANCE_HOLDOUT_EXPERIMENT",
+  "version": "0.1.0",
+  "executedAtUtc": "2026-08-26T12:30:09.503Z",
+  "decision": "PRODUCTION_REPEATABILITY_ENVELOPE_SUPPORT",
+  "validExperiment": true,
+  "holdout": {
+    "selectionRule": "All timeline frames from 1 through 144 where frame mod 6 equals 4.",
+    "frames": [
+      4,
+      10,
+      16,
+      22,
+      28,
+      34,
+      40,
+      46,
+      52,
+      58,
+      64,
+      70,
+      76,
+      82,
+      88,
+      94,
+      100,
+      106,
+      112,
+      118,
+      124,
+      130,
+      136,
+      142
+    ],
+    "overlapWithB20ToB23Sentinels": [],
+    "selectedBeforeAnyB24Render": true
+  },
+  "design": {
+    "type": "three fresh-process replicates per holdout frame with same-Render-Result dual output",
+    "replicates": [
+      "A",
+      "B",
+      "C"
+    ],
+    "replicatePairs": [
+      "A-B",
+      "A-C",
+      "B-C"
+    ],
+    "blockOrderPerFrame": [
+      "A",
+      "B",
+      "C"
+    ],
+    "processes": 72,
+    "renderCalls": 72,
+    "saves": 144,
+    "decodedComparisonsPerFormat": 72,
+    "materializedRunOrder": [
+      "H-0004-A",
+      "H-0004-B",
+      "H-0004-C",
+      "H-0010-A",
+      "H-0010-B",
+      "H-0010-C",
+      "H-0016-A",
+      "H-0016-B",
+      "H-0016-C",
+      "H-0022-A",
+      "H-0022-B",
+      "H-0022-C",
+      "H-0028-A",
+      "H-0028-B",
+      "H-0028-C",
+      "H-0034-A",
+      "H-0034-B",
+      "H-0034-C",
+      "H-0040-A",
+      "H-0040-B",
+      "H-0040-C",
+      "H-0046-A",
+      "H-0046-B",
+      "H-0046-C",
+      "H-0052-A",
+      "H-0052-B",
+      "H-0052-C",
+      "H-0058-A",
+      "H-0058-B",
+      "H-0058-C",
+      "H-0064-A",
+      "H-0064-B",
+      "H-0064-C",
+      "H-0070-A",
+      "H-0070-B",
+      "H-0070-C",
+      "H-0076-A",
+      "H-0076-B",
+      "H-0076-C",
+      "H-0082-A",
+      "H-0082-B",
+      "H-0082-C",
+      "H-0088-A",
+      "H-0088-B",
+      "H-0088-C",
+      "H-0094-A",
+      "H-0094-B",
+      "H-0094-C",
+      "H-0100-A",
+      "H-0100-B",
+      "H-0100-C",
+      "H-0106-A",
+      "H-0106-B",
+      "H-0106-C",
+      "H-0112-A",
+      "H-0112-B",
+      "H-0112-C",
+      "H-0118-A",
+      "H-0118-B",
+      "H-0118-C",
+      "H-0124-A",
+      "H-0124-B",
+      "H-0124-C",
+      "H-0130-A",
+      "H-0130-B",
+      "H-0130-C",
+      "H-0136-A",
+      "H-0136-B",
+      "H-0136-C",
+      "H-0142-A",
+      "H-0142-B",
+      "H-0142-C"
+    ]
+  },
+  "identities": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "configuratorSha256": "666145234183ae5abd65d979f803dccd1e79f244524fffa28aab0e1ccf5d4f4d",
+    "rendererSha256": "b853d12f542b56c135e235451c6dc6f3108ed6b6c29216378f28caff3f5fb207",
+    "b24SpecSha256": "d8cb2e230a5c093cca639cf12e2d210bcac0d1f27fc28d45498ad49382d1ebae",
+    "derivationResultSha256": "9398b7f71253034987226877de10f6073f2151981f7180e2dc4a6e4a2309c076",
+    "b23ResultsSha256": "b3c6d08beb35d4c75ddea7c67bcdc0d07c171fcfa55022a79ea1f068847c2a4d",
+    "comparatorSha256": "445404262e1d7cd649426e93da85e8756ebdeb63ba5aa3431a782336f934994a",
+    "runnerSha256": "a6edf72ce9233189b0375edb9f8dc4beed4470211618fd2abcf1f0b9e95ab7c8"
+  },
+  "frozenEnvelope": {
+    "EXR32_SCENE_LINEAR": {
+      "maximumAbsoluteErrorAtMost": 0.0078125,
+      "rmsErrorAtMost": 0.0000152587890625,
+      "zeroThresholdFailurePixelsAtMost": 512
+    },
+    "PNG8_DISPLAY": {
+      "maximumAbsoluteErrorAtMost": 0.003922,
+      "rmsErrorAtMost": 0.0000152587890625,
+      "zeroThresholdFailurePixelsAtMost": 16,
+      "yeeFailurePixelsAtMost": 0,
+      "yeeLuminanceCdM2": 100,
+      "yeeFieldOfViewDegrees": 45
+    }
+  },
+  "formats": {
+    "EXR32_SCENE_LINEAR": {
+      "pairGroups": 3,
+      "totalHoldoutPairs": 72,
+      "envelopePassPairs": 72,
+      "decodedExactPairs": 70,
+      "maximumAbsoluteError": 0.0068359375,
+      "maximumRmsError": 0.000012102088061225292,
+      "maximumFailurePixels": 17,
+      "maximumYeeFailurePixels": 0,
+      "pass": true
+    },
+    "PNG8_DISPLAY": {
+      "pairGroups": 3,
+      "totalHoldoutPairs": 72,
+      "envelopePassPairs": 72,
+      "decodedExactPairs": 70,
+      "maximumAbsoluteError": 0.003921568393707275,
+      "maximumRmsError": 0.0000072052046660281146,
+      "maximumFailurePixels": 5,
+      "maximumYeeFailurePixels": 0,
+      "pass": true
+    }
+  },
+  "processLedger": {
+    "processCount": 72,
+    "uniqueProcessIds": 72,
+    "renderCalls": 72,
+    "saves": 144,
+    "ledgerHash": "74bc09d8fc2852c14ad7ccc8247fe3731c2496acf60607ffafb57eb71a2315d7",
+    "uri": "experiments/production-tolerance-holdout-v0-1/evidence/process-ledger.json"
+  },
+  "comparisons": {
+    "EXR32_SCENE_LINEAR-A-B": {
+      "format": "EXR32_SCENE_LINEAR",
+      "envelopePassFrames": 24,
+      "decodedPixelExactFrames": 23,
+      "maximumAbsoluteError": 0.0068359375,
+      "maximumRmsError": 0.000012102088061225292,
+      "maximumFailurePixels": 17,
+      "maximumYeeFailurePixels": 0,
+      "comparisonUri": "experiments/production-tolerance-holdout-v0-1/evidence/comparisons/EXR32_SCENE_LINEAR-A-B.comparison.json",
+      "bindingHash": "c5f2e724d16da16b542c63b6649613cbda0240ab12ed0225155972d2629e618d"
+    },
+    "EXR32_SCENE_LINEAR-A-C": {
+      "format": "EXR32_SCENE_LINEAR",
+      "envelopePassFrames": 24,
+      "decodedPixelExactFrames": 23,
+      "maximumAbsoluteError": 0.0068359375,
+      "maximumRmsError": 0.000012102088061225292,
+      "maximumFailurePixels": 17,
+      "maximumYeeFailurePixels": 0,
+      "comparisonUri": "experiments/production-tolerance-holdout-v0-1/evidence/comparisons/EXR32_SCENE_LINEAR-A-C.comparison.json",
+      "bindingHash": "da4937a4ce25297ac41a6a87f423a62127a2a40376a7b4cdd19a998a583ffd6b"
+    },
+    "EXR32_SCENE_LINEAR-B-C": {
+      "format": "EXR32_SCENE_LINEAR",
+      "envelopePassFrames": 24,
+      "decodedPixelExactFrames": 24,
+      "maximumAbsoluteError": 0,
+      "maximumRmsError": 0,
+      "maximumFailurePixels": 0,
+      "maximumYeeFailurePixels": 0,
+      "comparisonUri": "experiments/production-tolerance-holdout-v0-1/evidence/comparisons/EXR32_SCENE_LINEAR-B-C.comparison.json",
+      "bindingHash": "28a8ca71e3d2fc01426725107c87980fbb85ebae57f5c2ddc91a868af16df494"
+    },
+    "PNG8_DISPLAY-A-B": {
+      "format": "PNG8_DISPLAY",
+      "envelopePassFrames": 24,
+      "decodedPixelExactFrames": 23,
+      "maximumAbsoluteError": 0.003921568393707275,
+      "maximumRmsError": 0.0000072052046660281146,
+      "maximumFailurePixels": 5,
+      "maximumYeeFailurePixels": 0,
+      "comparisonUri": "experiments/production-tolerance-holdout-v0-1/evidence/comparisons/PNG8_DISPLAY-A-B.comparison.json",
+      "bindingHash": "be561ec45f78854ee8350117b2e1eea48bd34aa27a15a8d3fd4c70ba88bce6cb"
+    },
+    "PNG8_DISPLAY-A-C": {
+      "format": "PNG8_DISPLAY",
+      "envelopePassFrames": 24,
+      "decodedPixelExactFrames": 23,
+      "maximumAbsoluteError": 0.003921568393707275,
+      "maximumRmsError": 0.0000072052046660281146,
+      "maximumFailurePixels": 5,
+      "maximumYeeFailurePixels": 0,
+      "comparisonUri": "experiments/production-tolerance-holdout-v0-1/evidence/comparisons/PNG8_DISPLAY-A-C.comparison.json",
+      "bindingHash": "46ca0bff8d29868260c171497d2afa5197bcc9297f4b80b26e8190f685de9dc1"
+    },
+    "PNG8_DISPLAY-B-C": {
+      "format": "PNG8_DISPLAY",
+      "envelopePassFrames": 24,
+      "decodedPixelExactFrames": 24,
+      "maximumAbsoluteError": 0,
+      "maximumRmsError": 0,
+      "maximumFailurePixels": 0,
+      "maximumYeeFailurePixels": 0,
+      "comparisonUri": "experiments/production-tolerance-holdout-v0-1/evidence/comparisons/PNG8_DISPLAY-B-C.comparison.json",
+      "bindingHash": "0da987934a2c538032ac26a1fdb3123f6f5c1abc1496a179153be029e5720a05"
+    }
+  },
+  "attacks": [
+    {
+      "id": "N_B24_SPEC_SHA",
+      "expectedReason": "B24_SPEC_SHA",
+      "observedReason": "B24_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_DERIVATION_SHA",
+      "expectedReason": "DERIVATION_SHA",
+      "observedReason": "DERIVATION_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_B23_RESULT_SHA",
+      "expectedReason": "B23_RESULT_SHA",
+      "observedReason": "B23_RESULT_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_REVIEW_SPEC_SHA",
+      "expectedReason": "REVIEW_SPEC_SHA",
+      "observedReason": "REVIEW_SPEC_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_BLENDER_SHA",
+      "expectedReason": "BLENDER_SHA",
+      "observedReason": "BLENDER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_OCIO_SHA",
+      "expectedReason": "OCIO_SHA",
+      "observedReason": "OCIO_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SCENE_SHA",
+      "expectedReason": "SCENE_SHA",
+      "observedReason": "SCENE_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_CONFIGURATOR_SHA",
+      "expectedReason": "CONFIGURATOR_SHA",
+      "observedReason": "CONFIGURATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_RENDERER_SHA",
+      "expectedReason": "RENDERER_SHA",
+      "observedReason": "RENDERER_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_COMPARATOR_SHA",
+      "expectedReason": "COMPARATOR_SHA",
+      "observedReason": "COMPARATOR_SHA",
+      "pass": true
+    },
+    {
+      "id": "N_SOURCE_THREAD_STATE",
+      "expectedReason": "SOURCE_THREAD_STATE",
+      "observedReason": "SOURCE_THREAD_STATE",
+      "pass": true
+    },
+    {
+      "id": "N_REQUESTED_FIXED_CONTROLS",
+      "expectedReason": "REQUESTED_FIXED_CONTROLS",
+      "observedReason": "REQUESTED_FIXED_CONTROLS",
+      "pass": true
+    },
+    {
+      "id": "N_HOLDOUT_RUN_ORDER",
+      "expectedReason": "HOLDOUT_SET_RUN_ORDER",
+      "observedReason": "HOLDOUT_SET_RUN_ORDER",
+      "pass": true
+    },
+    {
+      "id": "N_PROCESS_REPLICATE_BINDING",
+      "expectedReason": "PROCESS_REPLICATE_BINDING",
+      "observedReason": "PROCESS_REPLICATE_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_RENDER_CALL_COUNT",
+      "expectedReason": "RENDER_CALL_COUNT",
+      "observedReason": "RENDER_CALL_COUNT",
+      "pass": true
+    },
+    {
+      "id": "N_SAVE_COUNT",
+      "expectedReason": "SAVE_COUNT",
+      "observedReason": "SAVE_COUNT",
+      "pass": true
+    },
+    {
+      "id": "N_EXR_LAYOUT",
+      "expectedReason": "EXR_LAYOUT",
+      "observedReason": "EXR_LAYOUT",
+      "pass": true
+    },
+    {
+      "id": "N_PNG_LAYOUT",
+      "expectedReason": "PNG_LAYOUT",
+      "observedReason": "PNG_LAYOUT",
+      "pass": true
+    },
+    {
+      "id": "N_MISSING_OUTPUT",
+      "expectedReason": "MISSING_OR_MUTATED_OUTPUT",
+      "observedReason": "MISSING_OR_MUTATED_OUTPUT",
+      "pass": true
+    },
+    {
+      "id": "N_COMPARISON_BINDING",
+      "expectedReason": "COMPARISON_MANIFEST_FILE_BINDING",
+      "observedReason": "COMPARISON_MANIFEST_FILE_BINDING",
+      "pass": true
+    },
+    {
+      "id": "N_ENVELOPE_MUTATION",
+      "expectedReason": "NUMERIC_ENVELOPE_MUTATION",
+      "observedReason": "NUMERIC_ENVELOPE_MUTATION",
+      "pass": true
+    },
+    {
+      "id": "N_YEE_PARAMETERS",
+      "expectedReason": "YEE_PARAMETER_MUTATION",
+      "observedReason": "YEE_PARAMETER_MUTATION",
+      "pass": true
+    }
+  ],
+  "artifacts": {
+    "runOrder": "experiments/production-tolerance-holdout-v0-1/evidence/run-order.json",
+    "manifests": {
+      "A": "experiments/production-tolerance-holdout-v0-1/evidence/A.manifest.json",
+      "B": "experiments/production-tolerance-holdout-v0-1/evidence/B.manifest.json",
+      "C": "experiments/production-tolerance-holdout-v0-1/evidence/C.manifest.json"
+    },
+    "renders": "experiments/production-tolerance-holdout-v0-1/evidence/renders",
+    "comparisons": "experiments/production-tolerance-holdout-v0-1/evidence/comparisons"
+  },
+  "nonClaims": [
+    "Passing validates this numeric envelope on one held-out scene/timeline profile; it does not establish a universal Blender tolerance.",
+    "The envelope is not a bitwise determinism claim and container hashes may differ.",
+    "The Yee auxiliary metric at 100 cd/m2 and 45 degrees is not a calibrated cinema or human blind-review result.",
+    "A display pass with an EXR fail does not make the scene-linear mastering difference irrelevant.",
+    "A holdout failure must remain published and thresholds must not be widened after observation.",
+    "Nothing generalizes to Cycles, another GPU/backend, another machine, another scene or temporal video perception."
+  ]
+}
