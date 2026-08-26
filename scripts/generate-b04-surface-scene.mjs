@@ -1,0 +1,20 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { repositoryRoot } from './lib/scene-spec.mjs';
+
+const source = resolve(repositoryRoot, 'specs/benchmarks/B04.scene.json');
+const output = resolve(repositoryRoot, 'specs/benchmarks/B04.surface.scene.json');
+const document = JSON.parse(await readFile(source, 'utf8'));
+document.shot.id = 'SHOT_105';
+document.shot.title = 'B04 Surface Grip Correction';
+document.shot.seed = 24082605;
+const prop = document.assets.find(asset => asset.id === 'PROP_B04');
+prop.transform.locationM = [-0.372806171, 0.128350273, 1.490596848];
+document.targets[0].sockets[0].transform.locationM = [0, 0, -0.232];
+document.attachments[0].releaseTransform.locationM = [-0.027369747, 0.202140495, 1.828315096];
+document.render.outputRoot = 'renders/SHOT_105/';
+document.provenance.briefId = 'BRIEF_B04_SURFACE_GRIP';
+document.provenance.createdBy = 'BFS B04 surface-grip correction';
+document.provenance.createdAtUtc = '2026-08-26T17:00:00Z';
+await writeFile(output, `${JSON.stringify(document, null, 2)}\n`);
+process.stdout.write(`B04_SURFACE_SCENE_OK ${output}\n`);

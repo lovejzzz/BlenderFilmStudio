@@ -1,0 +1,40 @@
+import { createHash } from 'node:crypto';
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { repositoryRoot } from './lib/scene-spec.mjs';
+
+const hash = value => createHash('sha256').update(value).digest('hex');
+const actorSource = resolve(repositoryRoot, 'specs/benchmarks/B04.actor.json');
+const actorOutput = resolve(repositoryRoot, 'specs/benchmarks/B04.socket-frame.actor.json');
+const sceneSource = resolve(repositoryRoot, 'specs/benchmarks/B04.scene.json');
+const sceneOutput = resolve(repositoryRoot, 'specs/benchmarks/B04.socket-frame.scene.json');
+
+const actor = JSON.parse(await readFile(actorSource, 'utf8'));
+actor.sockets.find(socket => socket.id === 'PALM_R').offset.rotationEulerDeg = [29.205923042, 23.57817843, -77.395619221];
+actor.provenance.briefId = 'BRIEF_B04_SOCKET_FRAME';
+actor.provenance.createdBy = 'BFS B04 socket-frame correction';
+actor.provenance.createdAtUtc = '2026-08-26T17:30:00Z';
+const actorBytes = `${JSON.stringify(actor, null, 2)}\n`;
+await writeFile(actorOutput, actorBytes);
+const actorSha256 = hash(actorBytes);
+
+const scene = JSON.parse(await readFile(sceneSource, 'utf8'));
+scene.shot.id = 'SHOT_106';
+scene.shot.title = 'B04 Socket Frame Correction';
+scene.shot.seed = 24082606;
+const prop = scene.assets.find(asset => asset.id === 'PROP_B04');
+prop.transform.locationM = [-0.28000617, 0.024596741, 1.536996848];
+prop.transform.rotationEulerDeg = [0, 0, 0];
+scene.actors[0].actorSpecUri = 'specs/benchmarks/B04.socket-frame.actor.json';
+scene.actors[0].actorSpecSha256 = actorSha256;
+scene.targets[0].sockets[0].transform.locationM = [0, 0, -0.232];
+scene.attachments[0].releaseTransform.locationM = [0.065430254, 0.098386958, 1.874715096];
+scene.attachments[0].releaseTransform.rotationEulerDeg = [0, 0, 0];
+scene.render.outputRoot = 'renders/SHOT_106/';
+scene.provenance.briefId = 'BRIEF_B04_SOCKET_FRAME';
+scene.provenance.createdBy = 'BFS B04 socket-frame correction';
+scene.provenance.createdAtUtc = '2026-08-26T17:30:00Z';
+scene.provenance.sources[0].uri = 'specs/benchmarks/B04.socket-frame.actor.json';
+scene.provenance.sources[0].sha256 = actorSha256;
+await writeFile(sceneOutput, `${JSON.stringify(scene, null, 2)}\n`);
+process.stdout.write(`B04_SOCKET_FRAME_SCENE_OK ${actorSha256} ${sceneOutput}\n`);

@@ -1,0 +1,271 @@
+{
+  "documentType": "BFS_B04_SOCKET_FRAME_EXPERIMENT",
+  "experimentVersion": "0.3.0",
+  "executedAtUtc": "2026-08-26T05:21:24.021Z",
+  "environment": {
+    "blender": "5.2.0 LTS",
+    "platform": "darwin-arm64",
+    "node": "v26.5.0"
+  },
+  "fixtures": {
+    "actorSpecSha256": "72f502846c14026f4be00e01ee148540c40fddb3721aebaf34842949fd4a7442",
+    "buildPlanSha256": "31a00c586b04cb0156eaf0b2b5c2728e951f786e07cb883b601025a52c0d71a9"
+  },
+  "cleanBuilds": [
+    {
+      "label": "run-a",
+      "structureHash": "0359614194a9c476c99f85e92adc997c01e5c2079289e4ba41866ad4503f5c88",
+      "blendSha256": "918b03cffd02268f32efafdd70db34a19dabc5fd3e621697d72375df1bedf6e2"
+    },
+    {
+      "label": "run-b",
+      "structureHash": "0359614194a9c476c99f85e92adc997c01e5c2079289e4ba41866ad4503f5c88",
+      "blendSha256": "60f9c963fe717c05170ef99b2d37969a00e1064bb5b4765d96d2bac9fa04f20c"
+    }
+  ],
+  "contactChecks": [
+    {
+      "detail": "Restricted constraint resolves to the declared actor hand.",
+      "id": "B04_C01_CONSTRAINT_BINDING",
+      "measured": {
+        "subtarget": "hand.R",
+        "target": "RIG_LEAD",
+        "type": "CHILD_OF"
+      },
+      "pass": true,
+      "threshold": "CHILD_OF → RIG_LEAD.hand.R"
+    },
+    {
+      "detail": "Evaluated parent-switch states match the contract.",
+      "id": "B04_C02_INFLUENCE_STATES",
+      "measured": {
+        "1": 0,
+        "47": 0,
+        "48": 1,
+        "49": 1,
+        "108": 1,
+        "109": 0,
+        "144": 0
+      },
+      "pass": true,
+      "threshold": "0 / 0 / 1 / 1 / 1 / 0 / 0"
+    },
+    {
+      "detail": "Final twelve APPROACH frames move toward the real prop socket.",
+      "id": "B04_C03_APPROACH_MONOTONIC",
+      "measured": [
+        0.359932414,
+        0.355687918,
+        0.351443417,
+        0.347199033,
+        0.342954883,
+        0.338710742,
+        0.334466731,
+        0.330222969,
+        0.325979231,
+        0.321735753,
+        0.31749231,
+        0.313249073
+      ],
+      "pass": true,
+      "threshold": "non-increasing with strict net decrease"
+    },
+    {
+      "detail": "Maximum evaluated palm-to-grip position error during HOLD.",
+      "id": "B04_C04_HOLD_POSITION",
+      "measured": 1.6e-7,
+      "pass": true,
+      "threshold": "<= 0.005 m"
+    },
+    {
+      "detail": "Maximum evaluated palm-to-grip rotation error during HOLD.",
+      "id": "B04_C05_HOLD_ROTATION",
+      "measured": 0,
+      "pass": true,
+      "threshold": "<= 3 deg"
+    },
+    {
+      "detail": "Held relative transform remains stable.",
+      "id": "B04_C06_RELATIVE_DRIFT",
+      "measured": {
+        "positionM": 2.65e-7,
+        "rotationDeg": 0
+      },
+      "pass": true,
+      "threshold": "<= 0.005 m and <= 3 deg"
+    },
+    {
+      "detail": "Visible prop transport during HOLD.",
+      "id": "B04_C07_TRANSPORT",
+      "measured": 0.480552181,
+      "pass": true,
+      "threshold": ">= 0.30 m"
+    },
+    {
+      "detail": "Prop discontinuity across acquire and release switches.",
+      "id": "B04_C08_SWITCH_POP",
+      "measured": {
+        "acquireM": 1.33e-7,
+        "releaseM": 1.3e-7
+      },
+      "pass": true,
+      "threshold": "<= 0.01 m"
+    },
+    {
+      "detail": "BVH source-polygon face-pair overlap is evaluated every frame.",
+      "id": "B04_C09_CLEAR_PHASE_OVERLAP",
+      "measured": {
+        "ACQUIRE": 0,
+        "APPROACH": 0,
+        "HOLD": 0,
+        "RELEASE": 0,
+        "RETREAT": 0
+      },
+      "pass": true,
+      "threshold": "APPROACH=0 and RETREAT=0 pairs"
+    },
+    {
+      "detail": "Vertex-to-surface proximity samples at endpoints.",
+      "id": "B04_C10_ENDPOINT_CLEARANCE",
+      "measured": {
+        "1": 0.218510449,
+        "144": 0.685052395
+      },
+      "pass": true,
+      "threshold": ">= 0.05 m"
+    }
+  ],
+  "geometry": {
+    "phaseSummaries": [
+      {
+        "frames": 36,
+        "framesWithSurfaceOverlap": 0,
+        "maximumInsideVertexCount": 0,
+        "maximumInsideVertexDepthM": 0,
+        "maximumOverlapPairs": 0,
+        "minimumExactUnsignedSurfaceDistanceM": 0.179045221,
+        "phase": "APPROACH"
+      },
+      {
+        "frames": 12,
+        "framesWithSurfaceOverlap": 0,
+        "maximumInsideVertexCount": 0,
+        "maximumInsideVertexDepthM": 0,
+        "maximumOverlapPairs": 0,
+        "minimumExactUnsignedSurfaceDistanceM": 0.001999974,
+        "phase": "ACQUIRE"
+      },
+      {
+        "frames": 60,
+        "framesWithSurfaceOverlap": 0,
+        "maximumInsideVertexCount": 0,
+        "maximumInsideVertexDepthM": 0,
+        "maximumOverlapPairs": 0,
+        "minimumExactUnsignedSurfaceDistanceM": 0.001999974,
+        "phase": "HOLD"
+      },
+      {
+        "frames": 12,
+        "framesWithSurfaceOverlap": 0,
+        "maximumInsideVertexCount": 0,
+        "maximumInsideVertexDepthM": 0,
+        "maximumOverlapPairs": 0,
+        "minimumExactUnsignedSurfaceDistanceM": 0.001999974,
+        "phase": "RELEASE"
+      },
+      {
+        "frames": 24,
+        "framesWithSurfaceOverlap": 0,
+        "maximumInsideVertexCount": 0,
+        "maximumInsideVertexDepthM": 0,
+        "maximumOverlapPairs": 0,
+        "minimumExactUnsignedSurfaceDistanceM": 0.685052405,
+        "phase": "RETREAT"
+      }
+    ],
+    "finding": {
+      "classification": "NO_MATERIAL_INSIDE_VERTEX_DEPTH_DETECTED",
+      "holdDepthExceedsV01PositionTolerance": false,
+      "v01PositionToleranceM": 0.005
+    },
+    "reportSha256": "2bca2750405b1de56dca5759ed5cd9e6f76e713275728794196e3d5131639087"
+  },
+  "inheritedNegativeTests": [
+    {
+      "id": "N01_MISSING_PROP_OBJECT",
+      "rejected": true
+    },
+    {
+      "id": "N02_MISSING_TARGET_SOCKET",
+      "rejected": true
+    },
+    {
+      "id": "N03_MISSING_CONSTRAINT_PERMISSION",
+      "rejected": true
+    },
+    {
+      "id": "N04_INFLUENCE_STUCK_ZERO",
+      "rejected": true
+    },
+    {
+      "id": "N05_RELEASE_POP",
+      "rejected": true
+    },
+    {
+      "id": "N06_APPROACH_OVERLAP",
+      "rejected": true
+    },
+    {
+      "id": "N07_FAKE_STATIC_TARGET",
+      "rejected": true
+    },
+    {
+      "id": "N08_ORIGINAL_GEOMETRY",
+      "rejected": true
+    }
+  ],
+  "gates": {
+    "actorSpecValid": true,
+    "sceneSpecValid": true,
+    "buildPlanDeterministic": true,
+    "structureHashesEqual": true,
+    "originalTenChecksPass": true,
+    "originalEightNegativesStillRejected": true,
+    "holdOverlapFramesZero": true,
+    "holdInsideDepthZero": true,
+    "holdSeparationInPreregisteredRange": true,
+    "geometryReportsEqual": true
+  },
+  "allAutomatedGatesPassed": true,
+  "presentationVisibility": {
+    "originalCamera": {
+      "clipId": "CLIP_C42N",
+      "clipSha256": "bcf9119413b7539135798958da958304b820d4208f74537de64a7145f14c1163",
+      "visibilityGatePassed": false,
+      "handMinimumVisibleFraction": 0,
+      "propMinimumVisibleFraction": 0.16666666666666666
+    },
+    "reviewCamera": {
+      "clipId": "CLIP_D83K",
+      "clipSha256": "01467e0e946bb641211765ac7232e3968a16ee88768fc823c7329bbc265b5ebc",
+      "visibilityReportSha256": "7506c31cf1cd862be2c8b699c34aa52496d80182ce837090f0a1842d2d28cdf7",
+      "visibilityGatePassed": true,
+      "handMinimumVisibleFraction": 0.25,
+      "propMinimumVisibleFraction": 0.75
+    }
+  },
+  "humanReview": {
+    "protocolVersion": "0.2.0",
+    "clipId": "CLIP_D83K",
+    "status": "PENDING_INSUFFICIENT_RESPONSES",
+    "validResponses": 0,
+    "required": true
+  },
+  "experimentComplete": false,
+  "explicitNonClaims": [
+    "Inside-vertex depth is not exact minimum translation distance, penetration volume, force, pressure, or a signed distance field.",
+    "The parity test assumes closed, non-self-intersecting meshes and may fail at degenerate ray/triangle configurations.",
+    "Surface crossings can exist without any sampled vertex being inside the opposite mesh.",
+    "This diagnostic does not retroactively change the preregistered B04 v0.1 result."
+  ]
+}

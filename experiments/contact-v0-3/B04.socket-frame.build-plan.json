@@ -1,0 +1,750 @@
+{
+  "documentType": "BFS_BUILD_PLAN",
+  "plan": {
+    "actors": [
+      {
+        "actorSpec": {
+          "acceptance": {
+            "humanReview": "REQUIRED",
+            "maxContactPositionErrorM": 0.005,
+            "maxContactRotationErrorDeg": 3,
+            "maxFootSlipM": 0.01,
+            "maxGazeAngularErrorDeg": 2,
+            "rejectIdentityHashChange": true
+          },
+          "actor": {
+            "assetRef": "CHAR_B04",
+            "assetSha256": "b8684d757db22287aa2bbc0d2d6a919a4cfd1a72ebc4d5d6df782712b797eb6c",
+            "assetUri": "assets/characters/B04-lead.blend",
+            "id": "ACTOR_B04",
+            "identityLock": true,
+            "rigProfile": "BFS_HUMANOID_0_1"
+          },
+          "deformation": {
+            "meshes": [
+              {
+                "armatureModifier": "BFS_ARMATURE",
+                "object": "BODY",
+                "preserveVolume": true,
+                "topologySha256": "f706374a6b8fe876ca5d652fcc47b0021d3cbc4bbd0eb6e0b0f05812699ada19"
+              },
+              {
+                "armatureModifier": "BFS_ARMATURE",
+                "object": "HEAD",
+                "preserveVolume": true,
+                "topologySha256": "35fa0e6a63b0b0dc0e0878da88399378ea747a989d5d4da4dc0b2666edd1db88"
+              },
+              {
+                "armatureModifier": "BFS_ARMATURE",
+                "object": "EYE_L",
+                "preserveVolume": true,
+                "topologySha256": "6a22ba50fc295ec92e6635c78f04806312feacfa4a5a8c80d2906e778e2bf397"
+              },
+              {
+                "armatureModifier": "BFS_ARMATURE",
+                "object": "EYE_R",
+                "preserveVolume": true,
+                "topologySha256": "af79d2083fb7abf7c983b3d122b05eb2c104d6d6e4817d039b29aadbb408bf0d"
+              },
+              {
+                "armatureModifier": "BFS_ARMATURE",
+                "object": "HAND_L",
+                "preserveVolume": true,
+                "topologySha256": "2ca6e37f1e11c87b0822c2fc2f99e5be519350a647ce3a89aad7199836a87806"
+              },
+              {
+                "armatureModifier": "BFS_ARMATURE",
+                "object": "HAND_R",
+                "preserveVolume": true,
+                "topologySha256": "60bfbc42bbc308830c8bab772e7231241f9de6425a356b67af8ed16e375624f0"
+              }
+            ],
+            "shapeChannels": [
+              {
+                "id": "JAW_OPEN",
+                "maximum": 1,
+                "minimum": 0,
+                "neutral": 0,
+                "targetKey": "jawOpen"
+              },
+              {
+                "id": "BLINK_L",
+                "maximum": 1,
+                "minimum": 0,
+                "neutral": 0,
+                "targetKey": "eyeBlinkLeft"
+              },
+              {
+                "id": "BLINK_R",
+                "maximum": 1,
+                "minimum": 0,
+                "neutral": 0,
+                "targetKey": "eyeBlinkRight"
+              }
+            ],
+            "shapeKeyMesh": "HEAD",
+            "shapeKeySetSha256": "5adbba99fd6503f509c13ec46df4a12d79f93dc15366b4bbdf08a1d265285ed6"
+          },
+          "documentType": "BFS_ACTOR_SPEC",
+          "performance": {
+            "bodyActions": [
+              {
+                "actionName": "B04_RIGHT_HAND_PICKUP",
+                "blendInFrames": 0,
+                "blendOutFrames": 0,
+                "frameEnd": 144,
+                "frameStart": 1,
+                "id": "RIGHT_HAND_PICKUP",
+                "sha256": "0eebd23d58ac3668bc27d60b4f361ee8275ead6d6ee80c90508e52caaf471411",
+                "uri": "motion/B04/right-hand-pickup.blend",
+                "verifiedSha256": "0eebd23d58ac3668bc27d60b4f361ee8275ead6d6ee80c90508e52caaf471411"
+              }
+            ],
+            "contacts": [
+              {
+                "effectorSocket": "PALM_R",
+                "frameEnd": 108,
+                "frameStart": 49,
+                "id": "RIGHT_HAND_GRASP",
+                "mode": "GRASP",
+                "positionToleranceM": 0.005,
+                "rotationToleranceDeg": 3,
+                "targetRef": "PROP_PICKUP",
+                "targetSocket": "GRIP"
+              }
+            ],
+            "facialCurves": [],
+            "frameEnd": 144,
+            "frameRate": {
+              "denominator": 1,
+              "numerator": 24
+            },
+            "frameStart": 1,
+            "gazeKeys": [],
+            "layerOrder": [
+              "BODY",
+              "BREATH",
+              "GAZE",
+              "FACIAL",
+              "CONTACT"
+            ]
+          },
+          "provenance": {
+            "briefId": "BRIEF_B04_SOCKET_FRAME",
+            "createdAtUtc": "2026-08-26T17:30:00Z",
+            "createdBy": "BFS B04 socket-frame correction"
+          },
+          "rig": {
+            "allowedConstraints": [
+              "COPY_TRANSFORMS",
+              "CHILD_OF",
+              "IK",
+              "DAMPED_TRACK",
+              "LIMIT_ROTATION"
+            ],
+            "armatureObject": "RIG_LEAD",
+            "bones": [
+              {
+                "bone": "root",
+                "deform": false,
+                "semantic": "ROOT"
+              },
+              {
+                "bone": "pelvis",
+                "deform": true,
+                "semantic": "PELVIS"
+              },
+              {
+                "bone": "head",
+                "deform": true,
+                "semantic": "HEAD"
+              },
+              {
+                "bone": "eye.L",
+                "deform": true,
+                "semantic": "EYE_L"
+              },
+              {
+                "bone": "eye.R",
+                "deform": true,
+                "semantic": "EYE_R"
+              },
+              {
+                "bone": "hand.L",
+                "deform": true,
+                "semantic": "HAND_L"
+              },
+              {
+                "bone": "hand.R",
+                "deform": true,
+                "semantic": "HAND_R"
+              },
+              {
+                "bone": "foot.L",
+                "deform": true,
+                "semantic": "FOOT_L"
+              },
+              {
+                "bone": "foot.R",
+                "deform": true,
+                "semantic": "FOOT_R"
+              },
+              {
+                "bone": "jaw",
+                "deform": true,
+                "semantic": "JAW"
+              }
+            ],
+            "driverPolicy": {
+              "allowFullPython": false,
+              "mode": "BUILTIN_OR_SIMPLE_ONLY",
+              "requireSimpleExpressionFlag": true
+            },
+            "restPoseSha256": "d2b86534306324def968e70526a723bc5e80afd7b0b55b9df7779ee2365144f4",
+            "rotationMode": "QUATERNION"
+          },
+          "security": {
+            "allowedRoots": [
+              "assets/",
+              "library/",
+              "motion/"
+            ],
+            "arbitraryPython": false,
+            "networkAccess": false
+          },
+          "sockets": [
+            {
+              "boneSemantic": "HAND_L",
+              "id": "PALM_L",
+              "offset": {
+                "locationM": [
+                  0,
+                  0.3354102,
+                  0
+                ],
+                "rotationEulerDeg": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "boneSemantic": "HAND_R",
+              "id": "PALM_R",
+              "offset": {
+                "locationM": [
+                  0,
+                  0.3354102,
+                  0
+                ],
+                "rotationEulerDeg": [
+                  29.205923042,
+                  23.57817843,
+                  -77.395619221
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "boneSemantic": "FOOT_L",
+              "id": "SOLE_L",
+              "offset": {
+                "locationM": [
+                  0,
+                  0,
+                  -0.05
+                ],
+                "rotationEulerDeg": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "boneSemantic": "FOOT_R",
+              "id": "SOLE_R",
+              "offset": {
+                "locationM": [
+                  0,
+                  0,
+                  -0.05
+                ],
+                "rotationEulerDeg": [
+                  0,
+                  0,
+                  0
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "specVersion": "0.1.0"
+        },
+        "actorSpecCanonicalSha256": "8ac724d3b703b9fa639c279668f1f15747fbd256dfd3580ac21edd140147a24f",
+        "actorSpecSha256": "72f502846c14026f4be00e01ee148540c40fddb3721aebaf34842949fd4a7442",
+        "actorSpecUri": "specs/benchmarks/B04.socket-frame.actor.json",
+        "assetRef": "CHAR_B04",
+        "id": "ACTOR_B04",
+        "identityLock": true,
+        "rigProfile": "BFS_HUMANOID_0_1",
+        "verifiedActorSpecSha256": "72f502846c14026f4be00e01ee148540c40fddb3721aebaf34842949fd4a7442"
+      }
+    ],
+    "assets": [
+      {
+        "id": "CHAR_B04",
+        "kind": "CHARACTER",
+        "license": "PROJECT-OWNED",
+        "sha256": "b8684d757db22287aa2bbc0d2d6a919a4cfd1a72ebc4d5d6df782712b797eb6c",
+        "transform": {
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "rotationEulerDeg": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "uri": "assets/characters/B04-lead.blend",
+        "verifiedSha256": "b8684d757db22287aa2bbc0d2d6a919a4cfd1a72ebc4d5d6df782712b797eb6c",
+        "version": "0.1.0",
+        "visible": true
+      },
+      {
+        "id": "PROP_B04",
+        "kind": "PROP",
+        "license": "PROJECT-OWNED",
+        "sha256": "786f01eccb3ccf6f0e322d5655efa42b3a62108fb1eb4b3f3b38182f064215c6",
+        "transform": {
+          "locationM": [
+            -0.28000617,
+            0.024596741,
+            1.536996848
+          ],
+          "rotationEulerDeg": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "uri": "library/props/B04-prop.blend",
+        "verifiedSha256": "786f01eccb3ccf6f0e322d5655efa42b3a62108fb1eb4b3f3b38182f064215c6",
+        "version": "0.1.0",
+        "visible": true
+      }
+    ],
+    "attachments": [
+      {
+        "id": "PROP_TO_RIGHT_HAND",
+        "influenceKeys": [
+          {
+            "frame": 47,
+            "interpolation": "CONSTANT",
+            "value": 0
+          },
+          {
+            "frame": 48,
+            "interpolation": "CONSTANT",
+            "value": 1
+          },
+          {
+            "frame": 108,
+            "interpolation": "CONSTANT",
+            "value": 1
+          },
+          {
+            "frame": 109,
+            "interpolation": "CONSTANT",
+            "value": 0
+          }
+        ],
+        "inversePolicy": "MATCH_AT_ACQUIRE",
+        "ownerAssetRef": "PROP_B04",
+        "releaseTransform": {
+          "locationM": [
+            0.065430254,
+            0.098386958,
+            1.874715096
+          ],
+          "rotationEulerDeg": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "targetActorRef": "ACTOR_B04",
+        "targetEffectorSocket": "PALM_R",
+        "type": "CHILD_OF"
+      }
+    ],
+    "cameras": [
+      {
+        "apertureFStop": 5.6,
+        "focusDistanceM": 4.4,
+        "id": "CAM_B04",
+        "lensMm": 58,
+        "sensorWidthMm": 36,
+        "shutterAngleDeg": 180,
+        "transform": {
+          "locationM": [
+            2.35,
+            -4.1,
+            1.7
+          ],
+          "rotationEulerDeg": [
+            85.5,
+            0,
+            29.5
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "compiler": {
+      "name": "BFS_SCENE_COMPILER",
+      "targetApplication": "Blender",
+      "targetVersion": "5.2.0",
+      "version": "0.3.0"
+    },
+    "events": [],
+    "geometryEvaluations": [
+      {
+        "assetARef": "CHAR_B04",
+        "assetBRef": "PROP_B04",
+        "id": "RIGHT_HAND_PROP_GEOMETRY",
+        "objectARef": "HAND_R",
+        "objectBRef": "PROP_BODY",
+        "phases": [
+          {
+            "frameEnd": 36,
+            "frameStart": 1,
+            "id": "APPROACH"
+          },
+          {
+            "frameEnd": 48,
+            "frameStart": 37,
+            "id": "ACQUIRE"
+          },
+          {
+            "frameEnd": 108,
+            "frameStart": 49,
+            "id": "HOLD"
+          },
+          {
+            "frameEnd": 120,
+            "frameStart": 109,
+            "id": "RELEASE"
+          },
+          {
+            "frameEnd": 144,
+            "frameStart": 121,
+            "id": "RETREAT"
+          }
+        ],
+        "space": "EVALUATED_WORLD"
+      }
+    ],
+    "lights": [
+      {
+        "colorLinear": [
+          0.36,
+          0.58,
+          1
+        ],
+        "energy": 720,
+        "id": "FILL_B04",
+        "sizeM": 1.8,
+        "transform": {
+          "locationM": [
+            -2.4,
+            -1.4,
+            2
+          ],
+          "rotationEulerDeg": [
+            52,
+            0,
+            -54
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "type": "AREA"
+      },
+      {
+        "colorLinear": [
+          1,
+          0.72,
+          0.52
+        ],
+        "energy": 1150,
+        "id": "KEY_B04",
+        "sizeM": 2,
+        "transform": {
+          "locationM": [
+            2.2,
+            -2.1,
+            3.2
+          ],
+          "rotationEulerDeg": [
+            28,
+            0,
+            38
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        "type": "AREA"
+      }
+    ],
+    "outputSpec": {
+      "acceptance": {
+        "exactFrameCount": true,
+        "humanReview": "REQUIRED",
+        "pixelTolerance": "DEVICE_CLASS_POLICY_REQUIRED",
+        "rejectMissingChannels": true,
+        "rejectNaNOrInfinity": true,
+        "requirePerFrameSha256": true,
+        "requireRenderTelemetry": true,
+        "requireSceneManifest": true
+      },
+      "canonicalSha256": "0cfe3be32e15e2d71547281bae532172b895297e98f356335137ace9df0dfce3",
+      "color": {
+        "displayTransforms": [
+          {
+            "display": "sRGB - Display",
+            "id": "REVIEW_SDR",
+            "status": "configured-display-calibration-pending",
+            "target": "sRGB display / SDR 100 nit review",
+            "transform": "ACES 2 Output Transform",
+            "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+          },
+          {
+            "display": null,
+            "id": "REVIEW_CINEMA",
+            "status": "pending-calibration",
+            "target": "DCI theatrical reference conditions",
+            "transform": "ACES 2 Output Transform",
+            "view": null
+          }
+        ],
+        "ocioConfigName": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+        "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "ocioConfigUri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "ocioPolicy": "PINNED_EXACT_CONFIG_AND_HASH",
+        "openColorIOVersion": "2.5.0",
+        "sceneLinearEncoding": "ACEScg",
+        "sceneLinearRole": "ACEScg",
+        "verifiedOcioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+      },
+      "id": "BFS_RESEARCH_MASTER_0_1",
+      "master": {
+        "alpha": "PREMULTIPLIED",
+        "compression": "ZIP_LOSSLESS",
+        "container": "OpenEXR multi-layer image sequence",
+        "pixelType": "HALF",
+        "requiredAttributes": [
+          "chromaticities",
+          "framesPerSecond",
+          "timeCode",
+          "owner",
+          "comments"
+        ],
+        "requiredPasses": [
+          "Combined",
+          "Alpha",
+          "Depth",
+          "Normal",
+          "Vector",
+          "Cryptomatte"
+        ]
+      },
+      "picture": {
+        "frameNumberPadding": 6,
+        "frameRate": {
+          "denominator": 1,
+          "numerator": 24
+        },
+        "height": 2160,
+        "pixelAspectRatio": 1,
+        "shutterAngleDegrees": 180,
+        "width": 3840
+      },
+      "specVersion": "0.1.0"
+    },
+    "outputs": {
+      "blend": "renders/SHOT_106scene.blend",
+      "manifest": "renders/SHOT_106scene.manifest.json",
+      "root": "renders/SHOT_106"
+    },
+    "provenance": {
+      "briefId": "BRIEF_B04_SOCKET_FRAME",
+      "createdAtUtc": "2026-08-26T17:30:00Z",
+      "createdBy": "BFS B04 socket-frame correction",
+      "sources": [
+        {
+          "license": "PROJECT-INTERNAL",
+          "role": "ASSET",
+          "sha256": "72f502846c14026f4be00e01ee148540c40fddb3721aebaf34842949fd4a7442",
+          "uri": "specs/benchmarks/B04.socket-frame.actor.json",
+          "verification": "HASH_VERIFIED"
+        }
+      ]
+    },
+    "render": {
+      "compression": "ZIP_LOSSLESS",
+      "denoise": true,
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "finalEngine": "CYCLES",
+      "outputProfile": "BFS_RESEARCH_MASTER_0_1",
+      "outputRoot": "renders/SHOT_106/",
+      "passes": [
+        "Alpha",
+        "Combined",
+        "Cryptomatte",
+        "Depth",
+        "Normal",
+        "Vector"
+      ],
+      "pixelType": "HALF_16",
+      "previewEngine": "BLENDER_EEVEE",
+      "resolution": {
+        "height": 2160,
+        "percentage": 100,
+        "width": 3840
+      },
+      "samplesFinal": 128,
+      "samplesPreview": 32
+    },
+    "security": {
+      "arbitraryPython": false,
+      "authorizedOperations": [
+        "APPLY_PERFORMANCE",
+        "CREATE_CAMERA",
+        "CREATE_CONSTRAINT",
+        "CREATE_LIGHT",
+        "CREATE_TARGET",
+        "EVALUATE_GEOMETRY",
+        "IMPORT_ACTION",
+        "IMPORT_ACTOR_SPEC",
+        "IMPORT_ASSET",
+        "SET_RENDER",
+        "SET_TRANSFORM"
+      ],
+      "compilerInternalOperations": [
+        "RESET_SCENE",
+        "SET_WORLD",
+        "SET_ACTIVE_CAMERA",
+        "WRITE_MANIFEST",
+        "SAVE_BLEND"
+      ],
+      "networkAccess": false
+    },
+    "shot": {
+      "activeCamera": "CAM_B04",
+      "frameEnd": 144,
+      "frameRate": {
+        "denominator": 1,
+        "numerator": 24
+      },
+      "frameStart": 1,
+      "id": "SHOT_106",
+      "seed": 24082606,
+      "title": "B04 Socket Frame Correction",
+      "unitScaleMeters": 1
+    },
+    "source": {
+      "canonicalSha256": "5883046da54f96d19351af291f9bc645db7839e44d0d9257bf6c1aa4f134b5c3",
+      "sceneSpecPath": "specs/benchmarks/B04.socket-frame.scene.json",
+      "sceneSpecVersion": "0.3.0"
+    },
+    "targets": [
+      {
+        "id": "PROP_PICKUP",
+        "kind": "PROP_PROXY",
+        "sockets": [
+          {
+            "assetRef": "PROP_B04",
+            "binding": "ASSET_OBJECT",
+            "id": "GRIP",
+            "objectRef": "PROP_BODY",
+            "transform": {
+              "locationM": [
+                0,
+                0,
+                -0.232
+              ],
+              "rotationEulerDeg": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "world": {
+      "backgroundLinear": [
+        0.004,
+        0.008,
+        0.018
+      ],
+      "strength": 0.15
+    }
+  },
+  "planHash": "31a00c586b04cb0156eaf0b2b5c2728e951f786e07cb883b601025a52c0d71a9",
+  "planVersion": "0.3.0"
+}

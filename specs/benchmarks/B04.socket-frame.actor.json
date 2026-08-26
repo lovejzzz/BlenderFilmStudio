@@ -1,0 +1,296 @@
+{
+  "documentType": "BFS_ACTOR_SPEC",
+  "specVersion": "0.1.0",
+  "actor": {
+    "id": "ACTOR_B04",
+    "assetRef": "CHAR_B04",
+    "assetUri": "assets/characters/B04-lead.blend",
+    "assetSha256": "b8684d757db22287aa2bbc0d2d6a919a4cfd1a72ebc4d5d6df782712b797eb6c",
+    "rigProfile": "BFS_HUMANOID_0_1",
+    "identityLock": true
+  },
+  "rig": {
+    "armatureObject": "RIG_LEAD",
+    "restPoseSha256": "d2b86534306324def968e70526a723bc5e80afd7b0b55b9df7779ee2365144f4",
+    "rotationMode": "QUATERNION",
+    "bones": [
+      {
+        "semantic": "ROOT",
+        "bone": "root",
+        "deform": false
+      },
+      {
+        "semantic": "PELVIS",
+        "bone": "pelvis",
+        "deform": true
+      },
+      {
+        "semantic": "HEAD",
+        "bone": "head",
+        "deform": true
+      },
+      {
+        "semantic": "EYE_L",
+        "bone": "eye.L",
+        "deform": true
+      },
+      {
+        "semantic": "EYE_R",
+        "bone": "eye.R",
+        "deform": true
+      },
+      {
+        "semantic": "HAND_L",
+        "bone": "hand.L",
+        "deform": true
+      },
+      {
+        "semantic": "HAND_R",
+        "bone": "hand.R",
+        "deform": true
+      },
+      {
+        "semantic": "FOOT_L",
+        "bone": "foot.L",
+        "deform": true
+      },
+      {
+        "semantic": "FOOT_R",
+        "bone": "foot.R",
+        "deform": true
+      },
+      {
+        "semantic": "JAW",
+        "bone": "jaw",
+        "deform": true
+      }
+    ],
+    "allowedConstraints": [
+      "COPY_TRANSFORMS",
+      "CHILD_OF",
+      "IK",
+      "DAMPED_TRACK",
+      "LIMIT_ROTATION"
+    ],
+    "driverPolicy": {
+      "mode": "BUILTIN_OR_SIMPLE_ONLY",
+      "allowFullPython": false,
+      "requireSimpleExpressionFlag": true
+    }
+  },
+  "deformation": {
+    "meshes": [
+      {
+        "object": "BODY",
+        "topologySha256": "f706374a6b8fe876ca5d652fcc47b0021d3cbc4bbd0eb6e0b0f05812699ada19",
+        "armatureModifier": "BFS_ARMATURE",
+        "preserveVolume": true
+      },
+      {
+        "object": "HEAD",
+        "topologySha256": "35fa0e6a63b0b0dc0e0878da88399378ea747a989d5d4da4dc0b2666edd1db88",
+        "armatureModifier": "BFS_ARMATURE",
+        "preserveVolume": true
+      },
+      {
+        "object": "EYE_L",
+        "topologySha256": "6a22ba50fc295ec92e6635c78f04806312feacfa4a5a8c80d2906e778e2bf397",
+        "armatureModifier": "BFS_ARMATURE",
+        "preserveVolume": true
+      },
+      {
+        "object": "EYE_R",
+        "topologySha256": "af79d2083fb7abf7c983b3d122b05eb2c104d6d6e4817d039b29aadbb408bf0d",
+        "armatureModifier": "BFS_ARMATURE",
+        "preserveVolume": true
+      },
+      {
+        "object": "HAND_L",
+        "topologySha256": "2ca6e37f1e11c87b0822c2fc2f99e5be519350a647ce3a89aad7199836a87806",
+        "armatureModifier": "BFS_ARMATURE",
+        "preserveVolume": true
+      },
+      {
+        "object": "HAND_R",
+        "topologySha256": "60bfbc42bbc308830c8bab772e7231241f9de6425a356b67af8ed16e375624f0",
+        "armatureModifier": "BFS_ARMATURE",
+        "preserveVolume": true
+      }
+    ],
+    "shapeKeyMesh": "HEAD",
+    "shapeKeySetSha256": "5adbba99fd6503f509c13ec46df4a12d79f93dc15366b4bbdf08a1d265285ed6",
+    "shapeChannels": [
+      {
+        "id": "JAW_OPEN",
+        "targetKey": "jawOpen",
+        "minimum": 0,
+        "maximum": 1,
+        "neutral": 0
+      },
+      {
+        "id": "BLINK_L",
+        "targetKey": "eyeBlinkLeft",
+        "minimum": 0,
+        "maximum": 1,
+        "neutral": 0
+      },
+      {
+        "id": "BLINK_R",
+        "targetKey": "eyeBlinkRight",
+        "minimum": 0,
+        "maximum": 1,
+        "neutral": 0
+      }
+    ]
+  },
+  "sockets": [
+    {
+      "id": "PALM_L",
+      "boneSemantic": "HAND_L",
+      "offset": {
+        "locationM": [
+          0,
+          0.3354102,
+          0
+        ],
+        "rotationEulerDeg": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "PALM_R",
+      "boneSemantic": "HAND_R",
+      "offset": {
+        "locationM": [
+          0,
+          0.3354102,
+          0
+        ],
+        "rotationEulerDeg": [
+          29.205923042,
+          23.57817843,
+          -77.395619221
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "SOLE_L",
+      "boneSemantic": "FOOT_L",
+      "offset": {
+        "locationM": [
+          0,
+          0,
+          -0.05
+        ],
+        "rotationEulerDeg": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "SOLE_R",
+      "boneSemantic": "FOOT_R",
+      "offset": {
+        "locationM": [
+          0,
+          0,
+          -0.05
+        ],
+        "rotationEulerDeg": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  ],
+  "performance": {
+    "frameStart": 1,
+    "frameEnd": 144,
+    "frameRate": {
+      "numerator": 24,
+      "denominator": 1
+    },
+    "layerOrder": [
+      "BODY",
+      "BREATH",
+      "GAZE",
+      "FACIAL",
+      "CONTACT"
+    ],
+    "bodyActions": [
+      {
+        "id": "RIGHT_HAND_PICKUP",
+        "uri": "motion/B04/right-hand-pickup.blend",
+        "sha256": "0eebd23d58ac3668bc27d60b4f361ee8275ead6d6ee80c90508e52caaf471411",
+        "actionName": "B04_RIGHT_HAND_PICKUP",
+        "frameStart": 1,
+        "frameEnd": 144,
+        "blendInFrames": 0,
+        "blendOutFrames": 0
+      }
+    ],
+    "facialCurves": [],
+    "gazeKeys": [],
+    "contacts": [
+      {
+        "id": "RIGHT_HAND_GRASP",
+        "effectorSocket": "PALM_R",
+        "targetRef": "PROP_PICKUP",
+        "targetSocket": "GRIP",
+        "frameStart": 49,
+        "frameEnd": 108,
+        "positionToleranceM": 0.005,
+        "rotationToleranceDeg": 3,
+        "mode": "GRASP"
+      }
+    ]
+  },
+  "acceptance": {
+    "maxFootSlipM": 0.01,
+    "maxContactPositionErrorM": 0.005,
+    "maxContactRotationErrorDeg": 3,
+    "maxGazeAngularErrorDeg": 2,
+    "rejectIdentityHashChange": true,
+    "humanReview": "REQUIRED"
+  },
+  "security": {
+    "networkAccess": false,
+    "arbitraryPython": false,
+    "allowedRoots": [
+      "assets/",
+      "library/",
+      "motion/"
+    ]
+  },
+  "provenance": {
+    "briefId": "BRIEF_B04_SOCKET_FRAME",
+    "createdBy": "BFS B04 socket-frame correction",
+    "createdAtUtc": "2026-08-26T17:30:00Z"
+  }
+}

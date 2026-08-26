@@ -6,10 +6,15 @@ import { repositoryRoot } from './lib/scene-spec.mjs';
 const args = process.argv.slice(2);
 const inputIndex = args.indexOf('--input-dir');
 const outputIndex = args.indexOf('--output');
+const schemaIndex = args.indexOf('--schema');
 if (inputIndex < 0 || !args[inputIndex + 1]) throw new Error('Usage: node scripts/aggregate-b04-reviews.mjs --input-dir <dir> [--output <json>]');
 const inputDir = resolve(process.cwd(), args[inputIndex + 1]);
 const output = outputIndex >= 0 && args[outputIndex + 1] ? resolve(process.cwd(), args[outputIndex + 1]) : null;
-const schema = JSON.parse(await readFile(resolve(repositoryRoot, 'specs/human-review-response.v0.1.schema.json'), 'utf8'));
+const schemaPath = schemaIndex >= 0 && args[schemaIndex + 1] ? resolve(process.cwd(), args[schemaIndex + 1]) : resolve(repositoryRoot, 'specs/human-review-response.v0.1.schema.json');
+const schema = JSON.parse(await readFile(schemaPath, 'utf8'));
+const protocolVersion = schema.properties?.protocolVersion?.const;
+const clipId = schema.properties?.clipId?.const;
+if (!protocolVersion || !clipId) throw new Error(`Review schema must declare protocolVersion and clipId constants: ${schemaPath}`);
 const ajv = new Ajv2020({ allErrors: true, strict: true, formats: { 'date-time': true } });
 const validate = ajv.compile(schema);
 
@@ -61,7 +66,7 @@ const gates = {
   overallStrictMajority: enoughReviewers && metrics.overallAcceptance.pass > validCount / 2,
 };
 const report = {
-  documentType: 'BFS_HUMAN_REVIEW_AGGREGATE', protocolVersion: '0.1.0', clipId: 'CLIP_A17F',
+  documentType: 'BFS_HUMAN_REVIEW_AGGREGATE', protocolVersion, clipId,
   generatedAtUtc: new Date().toISOString(), input: { files: files.length, validResponses: validCount, invalidResponses: invalid.length },
   validReviewerCodes: [...reviewerCodes].sort(), invalid, metrics, gates,
   status: !enoughReviewers ? 'PENDING_INSUFFICIENT_RESPONSES' : Object.values(gates).every(Boolean) ? 'PASS' : 'FAIL',

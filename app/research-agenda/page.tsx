@@ -53,23 +53,23 @@ const gaps: {
   {
     id: 'G04', title: '代表性基准镜头组', type: 'experiment', priority: 'P0',
     question: '一个六秒室内镜头能否代表整条电影制作链？',
-    known: 'B01/B02 已包含结构/像素报告；B03 角色求值已执行；B04 v0.1 合同检查 10/10、反例 8/8、双净构建一致，但 v0.2 几何诊断检出 HOLD 18.45 mm 穿入深度代理。',
-    missing: 'B04 接触几何尚未修正且人类盲审未完成；B05–B06、近景皮肤、毛发、模拟恢复、体积与大场景仍无实证。',
+    known: 'B01/B02 已包含结构/像素报告；B03 角色求值已执行；B04 先检出 HOLD 18.45 mm 穿入，再通过 socket-frame 修正得到 0/60 重叠与 1.999974 mm 间距；双净构建一致。',
+    missing: 'B04 盲审仍为 0/3，技术动作路径与手指抓握尚未通过；B05–B06、近景皮肤、毛发、模拟恢复、体积与大场景仍无实证。',
     artifact: 'BFS Benchmark v0.1 · 6 Shots',
     gate: '六类镜头均能一键构建、失败、恢复、出具结构/像素/成本报告。',
   },
   {
     id: 'G05', title: '自动验收与人类校准', type: 'experiment', priority: 'P0',
     question: '系统如何知道镜头是真的通过，而不是“有一张图输出”？',
-    known: '结构规则、穿插、脚滑、曝光、缺帧、EXR 通道和 FLIP 图像差异可以自动测量。',
-    missing: '没有单一指标能衡量电影感、表演或构图；机器阈值尚未用导演/艺术家盲评校准。',
+    known: '结构规则、穿插、精确表面间距、镜头遮挡、脚滑、曝光、缺帧、EXR 通道和 FLIP 图像差异可以自动测量；B04 已冻结匿名审查协议与本地 JSON 聚合器。',
+    missing: '没有单一指标能衡量电影感、表演或构图；B04 尚无三名真实评审，机器阈值也尚未用导演/艺术家盲评校准。',
     artifact: 'Validator v0.1 + Human Review Protocol',
     gate: '在已标注故障集上达到预定召回率，并报告机器与人工分歧。',
   },
   {
     id: 'G06', title: '数字演员与表演协议', type: 'engineering', priority: 'P1',
     question: '如何把身份、动作、面部、视线、呼吸和接触分成可编辑层？',
-    known: 'ActorSpec v0.1 已通过规范/资产/求值测试；B03 场景相对眼神与脚底接触通过；B04 证明了父级切换与 real-prop socket，但更强几何诊断检出持续 HOLD 穿入。',
+    known: 'ActorSpec v0.1 已通过规范/资产/求值测试；B03 场景相对眼神与脚底接触通过；B04 证明父级切换与 real-prop socket，并把持续穿入修正为可复现的 2 mm 刚性间距。',
     missing: '英雄角色的皮肤、毛发、口腔、微表演、多角色反应、手指抓握、受力与重量感仍没有端到端可靠解。',
     artifact: 'Executed ActorSpec v0.1 + B03/B04 Scene Integration',
     gate: '同一角色完成近景对白、全身行走和拿取道具，身份不漂移且每层可单独修改。',
@@ -196,12 +196,12 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>完成 B04 盲化人类审查与手指级失败集。</h3><p>B04 的 SceneSpec v0.3、真实道具绑定、父级切换、逐帧 BVH、双净构建和 8 个反例已经执行；机器 10/10 不能判断抓握、重量感和视觉穿插。下一步冻结审查材料、评分表和失败标签，再决定升级 signed-distance、手指 rig 或接触代理。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>收集 B04 的 3 份独立盲审，并把失败转成 B05 动作/手指规格。</h3><p>修正后的刚性几何和审查机位均已通过自动门禁，CLIP_D83K、响应 Schema 与聚合器已经冻结；当前真实响应仍为 0。下一步不能再调同一片段，而应记录评审对动作路径、支撑关系、重量感和穿插的失败标签，再决定 B05 优先升级手指 rig、动作轨迹还是接触代理。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
         <div className="section-index light">05 / 现在做什么</div>
-        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>B04 盲化人类审查包</li><li>手指级接触失败标签</li><li>精确距离 / 穿透表示对照</li><li>审查者分歧与置信区间</li><li>Token / 渲染 / 人工遥测</li><li>受限角色工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>B05 模拟恢复设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
+        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>CLIP_D83K 三人独立盲审</li><li>动作路径 / 手指失败标签</li><li>B05 手指接触最小规格</li><li>审查者分歧与置信区间</li><li>Token / 渲染 / 人工遥测</li><li>受限角色工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>B05 模拟恢复设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
       </section>
 
       <section className="section agenda-method" id="sources">

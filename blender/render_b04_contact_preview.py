@@ -15,6 +15,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--frame", type=int, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--camera-location", nargs=3, type=float, default=(2.45, -4.3, 1.85))
+    parser.add_argument("--look-at", nargs=3, type=float, default=(-0.05, 0.02, 1.30))
+    parser.add_argument("--lens", type=float, default=62.0)
     return parser.parse_args(sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else [])
 
 
@@ -39,14 +42,26 @@ def add_floor(scene: bpy.types.Scene) -> None:
     scene.collection.objects.link(floor)
 
 
+def add_camera_light(scene: bpy.types.Scene, camera: bpy.types.Object) -> None:
+    light_data = bpy.data.lights.new("B04_REVIEW_CAMERA_LIGHT", type="AREA")
+    light_data.energy = 850
+    light_data.shape = "DISK"
+    light_data.size = 4.0
+    light = bpy.data.objects.new("B04_REVIEW_CAMERA_LIGHT", light_data)
+    light.location = camera.location
+    light.rotation_euler = camera.rotation_euler
+    scene.collection.objects.link(light)
+
+
 def main() -> None:
     args = parse_args()
     scene = bpy.context.scene
     add_floor(scene)
     camera = scene.camera
-    camera.location = (2.45, -4.3, 1.85)
-    camera.data.lens = 62
-    look_at(camera, Vector((-0.05, 0.02, 1.30)))
+    camera.location = args.camera_location
+    camera.data.lens = args.lens
+    look_at(camera, Vector(args.look_at))
+    add_camera_light(scene, camera)
     for obj in bpy.data.objects:
         if obj.type == "LIGHT":
             look_at(obj, Vector((-0.05, 0.02, 1.28)))
