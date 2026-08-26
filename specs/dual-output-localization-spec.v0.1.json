@@ -1,0 +1,148 @@
+{
+  "documentType": "BFS_DUAL_OUTPUT_LOCALIZATION_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "When one frozen Eevee Render Result is saved as both scene-linear RGBA32 float OpenEXR and display-referred RGBA8 PNG, in which output domain does strict cross-process variation first remain observable?",
+  "evidenceBasis": {
+    "b20ResultsSha256": "a576f02f9523cb776a33b6856296371ba5b792d8f9d41f817465292615b192b2",
+    "b20Decision": "PROCESS_ISOLATION_NOT_SUFFICIENT",
+    "b20FreshExactPairs": 26,
+    "b20FreshTotalPairs": 36,
+    "floatInventorySha256": "7feada23575e7f8dac98c37c074302b196a287a11ac37f117bf62fa7bd67a282",
+    "floatInventoryClassification": "EXPLORATORY_NOT_CAUSAL",
+    "acceptedOperationalBoundary": "One background render call can save the same Render Result as PNG RGBA8 and ZIP OpenEXR RGBA32; bundled OIIO decodes the EXR as 960x540 RGBA float. Direct Render Result.pixels access was empty and is excluded.",
+    "officialBlenderContract": [
+      "https://docs.blender.org/manual/en/5.2/render/color_management/color_spaces.html",
+      "https://docs.blender.org/manual/en/5.2/render/color_management/displays_views.html",
+      "https://docs.blender.org/manual/en/5.2/editors/image/image_settings.html"
+    ],
+    "sceneLinearEncoding": "ACEScg",
+    "sentinelFramesCarriedForwardWithoutReselection": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144]
+  },
+  "design": {
+    "type": "same-Render-Result dual-file localization with three fresh-process replicates per sentinel",
+    "sentinelFrames": [1, 5, 20, 35, 38, 47, 83, 93, 103, 110, 114, 144],
+    "replicates": ["A", "B", "C"],
+    "runOrder": [
+      "D-0001-A", "D-0001-B", "D-0001-C",
+      "D-0005-A", "D-0005-B", "D-0005-C",
+      "D-0020-A", "D-0020-B", "D-0020-C",
+      "D-0035-A", "D-0035-B", "D-0035-C",
+      "D-0038-A", "D-0038-B", "D-0038-C",
+      "D-0047-A", "D-0047-B", "D-0047-C",
+      "D-0083-A", "D-0083-B", "D-0083-C",
+      "D-0093-A", "D-0093-B", "D-0093-C",
+      "D-0103-A", "D-0103-B", "D-0103-C",
+      "D-0110-A", "D-0110-B", "D-0110-C",
+      "D-0114-A", "D-0114-B", "D-0114-C",
+      "D-0144-A", "D-0144-B", "D-0144-C"
+    ],
+    "runOrderFrozenBeforeExecution": true,
+    "processes": 36,
+    "renderOperatorCalls": 36,
+    "renderedFrames": 36,
+    "fileSaves": 72,
+    "withinFormatPairsPerFrame": ["A-B", "A-C", "B-C"],
+    "primaryDecodedComparisonsPerFormat": 36
+  },
+  "outputs": [
+    {
+      "id": "EXR32_SCENE_LINEAR",
+      "extension": ".exr",
+      "format": "OPEN_EXR",
+      "channels": ["R", "G", "B", "A"],
+      "colorDepthBits": 32,
+      "pixelType": "float",
+      "codec": "ZIP",
+      "colorDomain": "scene-linear ACEScg under the pinned B02 BuildPlan/OCIO contract"
+    },
+    {
+      "id": "PNG8_DISPLAY",
+      "extension": ".png",
+      "format": "PNG",
+      "channels": ["R", "G", "B", "A"],
+      "colorDepthBits": 8,
+      "pixelType": "uint8",
+      "display": "sRGB - Display",
+      "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+      "colorDomain": "display-referred review output"
+    }
+  ],
+  "frozenIdentity": {
+    "reviewRenderSpecSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "configuratorSha256": "12eec7ca42f9ef2df6233ca71b5ce338ecf2bbdebecbc1b90f3012b5e3f86a77",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "renderSamples": 32,
+    "ditherIntensity": 0.0,
+    "useFastGi": true,
+    "useTaaReprojection": true,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "motionBlur": false,
+    "sourceSceneDitherIntensity": 1.0,
+    "sourceUseFastGi": true,
+    "sourceUseTaaReprojection": true
+  },
+  "implementationContract": {
+    "formalRendererComparatorAndRunnerMustNotExistAtFreeze": true,
+    "oneNewBlenderProcessPerSentinelReplicate": true,
+    "exactlyOneRenderOperatorCallPerProcess": true,
+    "savePngBeforeChangingOnlyFileOutputSettings": true,
+    "saveExrFromSameRenderResultWithoutRerender": true,
+    "directImagePixelsAccessExcluded": true,
+    "mustNotSaveSourceBlend": true,
+    "recordRendererComparatorRunnerAndConfiguratorHashes": true,
+    "verifyEveryDecodedOutputLayoutAndPixelType": true,
+    "bindEveryComparisonToBothFileHashesAndBothRunManifests": true
+  },
+  "exactGate": {
+    "perDecodedPair": { "maximumAbsoluteError": 0.0, "failurePixels": 0 },
+    "perFormat": "All 12 sentinel frames must be exact in all A-B, A-C and B-C pairs: 36/36.",
+    "containerByteEqualityIsDescriptiveOnly": true,
+    "noPostHocTolerance": true
+  },
+  "decisionRule": {
+    "DISPLAY_PNG_PATH_SUPPORT": "EXR32_SCENE_LINEAR is exact 36/36 and PNG8_DISPLAY is non-exact, with a valid experiment.",
+    "PRE_PNG_VARIATION_SUPPORT": "Both EXR32_SCENE_LINEAR and PNG8_DISPLAY are non-exact, with a valid experiment.",
+    "PNG_QUANTIZATION_MASKS_FLOAT_VARIATION": "EXR32_SCENE_LINEAR is non-exact and PNG8_DISPLAY is exact 36/36, with a valid experiment.",
+    "VARIATION_NOT_REPRODUCED": "Both formats are exact 36/36, with a valid experiment.",
+    "INVALID_EXPERIMENT": "Any frozen identity, process, one-render/two-save, format/layout, image, binding, count or negative-case gate fails."
+  },
+  "requiredNegativeCases": [
+    "B21 spec identity mismatch",
+    "B20 result identity mismatch",
+    "float inventory identity mismatch",
+    "ReviewRenderSpec identity mismatch",
+    "Blender identity mismatch",
+    "OCIO identity mismatch",
+    "scene blend identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "configurator identity mismatch",
+    "render samples differ from 32",
+    "dither differs from zero",
+    "Fast GI differs from true",
+    "TAA reprojection differs from true",
+    "render operator count differs from one",
+    "save count differs from two",
+    "EXR is not 960x540 RGBA float",
+    "PNG is not 960x540 RGBA uint8",
+    "PNG or EXR partner is missing",
+    "PNG or EXR bytes are mutated",
+    "comparison is not bound to both file and manifest hashes"
+  ],
+  "explicitNonClaims": [
+    "The experiment does not directly read Blender's in-memory pixel buffer; it compares two files saved from the same Render Result.",
+    "A non-exact EXR localizes variation to at or before the scene-linear EXR save boundary, not to a specific shader, sample reducer, driver or GPU race.",
+    "An exact EXR and non-exact PNG would support the display/output path under this profile but would not prove which color-transform or quantization operation is causal.",
+    "Three replicates can falsify strict determinism but cannot estimate a stable mismatch probability.",
+    "No perceptual tolerance is selected and near-equality remains non-exact.",
+    "The result applies to Blender 5.2 Eevee on this machine and does not establish Cycles, multilayer EXR, AOV or cross-device reproducibility."
+  ]
+}

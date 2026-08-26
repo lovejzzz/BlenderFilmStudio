@@ -376,6 +376,18 @@ Therefore B21 must not claim direct in-memory pixel access. It should pre-regist
 
 Artifacts: `experiments/render-result-float-inventory-v0-1/results.json`, `experiments/render-result-float-inventory-v0-1/evidence/` and `research/2026-08-26-render-result-float-inventory.md`.
 
+## J-016 · Same-Render-Result dual-output freeze
+
+Type: live pre-experiment freeze, 2026-08-26.
+
+The accepted J-015 probe changes the next question from an unsafe “read memory pixels” claim to a verified dual-save boundary. B21 carries all twelve B20 sentinels forward, with A/B/C fresh-process replicates per frame. Each of 36 processes must render exactly once and save that same Render Result as both PNG RGBA8 and ZIP OpenEXR RGBA32.
+
+OIIO will compare all three pairs per frame separately for each format: 36 decoded comparisons per format, exact only at maximum error zero and zero failed pixels. Four valid labels distinguish PNG-path support, pre-PNG variation, PNG masking float variation and failure to reproduce; a fifth invalid label covers any control failure. Twenty-one negative categories are frozen.
+
+Protocol: `research/2026-08-26-b21-dual-output-localization-protocol.md`.
+
+Status at freeze: the formal B21 renderer, comparator and runner do not exist; no B21 frame has been rendered. Direct `Image.pixels` access remains explicitly excluded.
+
 ## Journal rule for future work
 
 Every promoted result must record:
