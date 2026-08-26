@@ -53,8 +53,8 @@ const gaps: {
   {
     id: 'G04', title: '代表性基准镜头组', type: 'experiment', priority: 'P0',
     question: '一个六秒室内镜头能否代表整条电影制作链？',
-    known: 'B01/B02 已包含固定 SceneSpec、资产哈希、BuildPlan、结构/像素报告与成本遥测。',
-    missing: 'B03–B06 尚未实现，近景皮肤、接触、毛发、模拟恢复、体积与大场景仍无实证。',
+    known: 'B01/B02 已包含固定 SceneSpec、BuildPlan、结构/像素报告；B03 已完成独立 ActorSpec、技术角色资产、审计与求值。',
+    missing: 'B03 尚未进入 SceneSpec；B04–B06 未实现，近景皮肤、目标相对接触、毛发、模拟恢复、体积与大场景仍无实证。',
     artifact: 'BFS Benchmark v0.1 · 6 Shots',
     gate: '六类镜头均能一键构建、失败、恢复、出具结构/像素/成本报告。',
   },
@@ -69,9 +69,9 @@ const gaps: {
   {
     id: 'G06', title: '数字演员与表演协议', type: 'engineering', priority: 'P1',
     question: '如何把身份、动作、面部、视线、呼吸和接触分成可编辑层？',
-    known: '固定角色资产可保证几何身份；身体/面部捕捉和动作重定向可提供可用底稿。',
-    missing: '英雄角色的皮肤、毛发、口腔、微表演、多角色反应和复杂接触仍没有端到端可靠解。',
-    artifact: 'ActorSpec + Performance Layer Contract',
+    known: 'ActorSpec v0.1 已通过 16/16 规范用例、13/13 资产审计和 4/4 求值检查；非 simple Driver 与身份篡改能被运行时拒绝。',
+    missing: '场景目标尚未接入；英雄角色的皮肤、毛发、口腔、微表演、多角色反应和复杂接触仍没有端到端可靠解。',
+    artifact: 'Executed ActorSpec v0.1 + B03/B04 Scene Integration',
     gate: '同一角色完成近景对白、全身行走和拿取道具，身份不漂移且每层可单独修改。',
   },
   {
@@ -153,7 +153,7 @@ export default function ResearchAgendaPage() {
     <main className="agenda-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link></nav>
+        <nav aria-label="研究路线导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><Link href="/cost-model">成本</Link><a href="#gaps">缺口</a><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link><Link className="route-tab actor-route" href="/actor-v0-1">角色实验</Link></nav>
         <span className="edition agenda-edition">Agenda 01</span>
       </header>
 
@@ -196,12 +196,12 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>建立 B03 ActorSpec 与表演分层。</h3><p>SceneSpec、双净构建、固定 ACES 2、4K PixelSpec 和 EXR mastering 已通过。下一步冻结角色身份、骨骼、身体、面部、视线、呼吸与接触的分层合同，再用近景对白和全身拿取镜头挑战它。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>把 ActorSpec 编译进 B03 SceneSpec。</h3><p>角色身份、骨架、动作、Shape Keys、眼神、socket 与 Driver 安全边界已经独立验证。下一步让场景拥有地面、凝视点和道具目标，测量角色相对目标的逐帧误差，再建立 B04 全身拿取基准。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
         <div className="section-index light">05 / 现在做什么</div>
-        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>ActorSpec v0.1</li><li>B03 / B04 基准包</li><li>身体 / 面部 / 视线分层</li><li>接触与脚滑 Validator</li><li>Token / 渲染 / 人工遥测</li><li>受限角色工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>人工盲评设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
+        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>ActorSpec → SceneSpec</li><li>B03 场景目标基准</li><li>B04 全身拿取基准</li><li>目标相对接触 Validator</li><li>Token / 渲染 / 人工遥测</li><li>受限角色工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>人工盲评设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
       </section>
 
       <section className="section agenda-method" id="sources">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/pixel-v0-1">查看最新像素证据 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/actor-v0-1">查看最新角色证据 →</Link></footer>
     </main>
   );
 }

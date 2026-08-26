@@ -1,0 +1,105 @@
+{
+  "documentType": "BFS_ACTOR_SPEC",
+  "specVersion": "0.1.0",
+  "actor": {
+    "id": "ACTOR_LEAD",
+    "assetRef": "CHAR_B03",
+    "assetUri": "assets/characters/B03-lead.blend",
+    "assetSha256": "10feb54a274ea6601f18379ee01964fbfda02d8cc0360b0efe3df3908ef4378f",
+    "rigProfile": "BFS_HUMANOID_0_1",
+    "identityLock": true
+  },
+  "rig": {
+    "armatureObject": "RIG_LEAD",
+    "restPoseSha256": "d2b86534306324def968e70526a723bc5e80afd7b0b55b9df7779ee2365144f4",
+    "rotationMode": "QUATERNION",
+    "bones": [
+      { "semantic": "ROOT", "bone": "root", "deform": false },
+      { "semantic": "PELVIS", "bone": "pelvis", "deform": true },
+      { "semantic": "HEAD", "bone": "head", "deform": true },
+      { "semantic": "EYE_L", "bone": "eye.L", "deform": true },
+      { "semantic": "EYE_R", "bone": "eye.R", "deform": true },
+      { "semantic": "HAND_L", "bone": "hand.L", "deform": true },
+      { "semantic": "HAND_R", "bone": "hand.R", "deform": true },
+      { "semantic": "FOOT_L", "bone": "foot.L", "deform": true },
+      { "semantic": "FOOT_R", "bone": "foot.R", "deform": true },
+      { "semantic": "JAW", "bone": "jaw", "deform": true }
+    ],
+    "allowedConstraints": ["COPY_TRANSFORMS", "CHILD_OF", "IK", "DAMPED_TRACK", "LIMIT_ROTATION"],
+    "driverPolicy": {
+      "mode": "BUILTIN_OR_SIMPLE_ONLY",
+      "allowFullPython": false,
+      "requireSimpleExpressionFlag": true
+    }
+  },
+  "deformation": {
+    "meshes": [
+      { "object": "BODY", "topologySha256": "f706374a6b8fe876ca5d652fcc47b0021d3cbc4bbd0eb6e0b0f05812699ada19", "armatureModifier": "BFS_ARMATURE", "preserveVolume": true },
+      { "object": "HEAD", "topologySha256": "35fa0e6a63b0b0dc0e0878da88399378ea747a989d5d4da4dc0b2666edd1db88", "armatureModifier": "BFS_ARMATURE", "preserveVolume": true },
+      { "object": "EYE_L", "topologySha256": "6a22ba50fc295ec92e6635c78f04806312feacfa4a5a8c80d2906e778e2bf397", "armatureModifier": "BFS_ARMATURE", "preserveVolume": true },
+      { "object": "EYE_R", "topologySha256": "af79d2083fb7abf7c983b3d122b05eb2c104d6d6e4817d039b29aadbb408bf0d", "armatureModifier": "BFS_ARMATURE", "preserveVolume": true }
+    ],
+    "shapeKeyMesh": "HEAD",
+    "shapeKeySetSha256": "5adbba99fd6503f509c13ec46df4a12d79f93dc15366b4bbdf08a1d265285ed6",
+    "shapeChannels": [
+      { "id": "JAW_OPEN", "targetKey": "jawOpen", "minimum": 0, "maximum": 1, "neutral": 0 },
+      { "id": "BLINK_L", "targetKey": "eyeBlinkLeft", "minimum": 0, "maximum": 1, "neutral": 0 },
+      { "id": "BLINK_R", "targetKey": "eyeBlinkRight", "minimum": 0, "maximum": 1, "neutral": 0 }
+    ]
+  },
+  "sockets": [
+    { "id": "PALM_L", "boneSemantic": "HAND_L", "offset": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] } },
+    { "id": "PALM_R", "boneSemantic": "HAND_R", "offset": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] } },
+    { "id": "SOLE_L", "boneSemantic": "FOOT_L", "offset": { "locationM": [0, 0, -0.05], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] } },
+    { "id": "SOLE_R", "boneSemantic": "FOOT_R", "offset": { "locationM": [0, 0, -0.05], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] } }
+  ],
+  "performance": {
+    "frameStart": 1,
+    "frameEnd": 144,
+    "frameRate": { "numerator": 24, "denominator": 1 },
+    "layerOrder": ["BODY", "BREATH", "GAZE", "FACIAL", "CONTACT"],
+    "bodyActions": [
+      {
+        "id": "BODY_IDLE",
+        "uri": "motion/B03/body-idle.blend",
+        "sha256": "165ea0b9867e20f7948c3d1be15a77ef77f7badc2addcf5e8054cafe2b1da994",
+        "actionName": "B03_BODY_IDLE",
+        "frameStart": 1,
+        "frameEnd": 144,
+        "blendInFrames": 0,
+        "blendOutFrames": 0
+      }
+    ],
+    "facialCurves": [
+      { "channel": "JAW_OPEN", "keys": [{ "frame": 1, "value": 0, "interpolation": "LINEAR" }, { "frame": 36, "value": 0.35, "interpolation": "BEZIER" }, { "frame": 72, "value": 0.05, "interpolation": "BEZIER" }] },
+      { "channel": "BLINK_L", "keys": [{ "frame": 48, "value": 0, "interpolation": "LINEAR" }, { "frame": 50, "value": 1, "interpolation": "BEZIER" }, { "frame": 53, "value": 0, "interpolation": "BEZIER" }] },
+      { "channel": "BLINK_R", "keys": [{ "frame": 48, "value": 0, "interpolation": "LINEAR" }, { "frame": 50, "value": 1, "interpolation": "BEZIER" }, { "frame": 53, "value": 0, "interpolation": "BEZIER" }] }
+    ],
+    "gazeKeys": [
+      { "frame": 1, "targetRef": "ACTOR_PARTNER", "targetSocket": "EYES", "headWeight": 0.35, "eyeWeight": 1 },
+      { "frame": 96, "targetRef": "PROP_MARK", "targetSocket": "GAZE_MARK", "headWeight": 0.2, "eyeWeight": 1 }
+    ],
+    "contacts": [
+      { "id": "LEFT_FOOT_PLANT", "effectorSocket": "SOLE_L", "targetRef": "SET_FLOOR", "targetSocket": "FLOOR", "frameStart": 1, "frameEnd": 72, "positionToleranceM": 0.01, "rotationToleranceDeg": 3, "mode": "PLANT" },
+      { "id": "RIGHT_FOOT_PLANT", "effectorSocket": "SOLE_R", "targetRef": "SET_FLOOR", "targetSocket": "FLOOR", "frameStart": 73, "frameEnd": 144, "positionToleranceM": 0.01, "rotationToleranceDeg": 3, "mode": "PLANT" }
+    ]
+  },
+  "acceptance": {
+    "maxFootSlipM": 0.01,
+    "maxContactPositionErrorM": 0.02,
+    "maxContactRotationErrorDeg": 5,
+    "maxGazeAngularErrorDeg": 2,
+    "rejectIdentityHashChange": true,
+    "humanReview": "REQUIRED"
+  },
+  "security": {
+    "networkAccess": false,
+    "arbitraryPython": false,
+    "allowedRoots": ["assets/", "library/", "motion/"]
+  },
+  "provenance": {
+    "briefId": "BRIEF_B03_ACTOR_CLOSEUP",
+    "createdBy": "BFS ActorSpec research",
+    "createdAtUtc": "2026-08-26T04:00:00Z"
+  }
+}

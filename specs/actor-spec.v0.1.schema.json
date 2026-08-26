@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovejzzz.github.io/BlenderFilmStudio/specs/actor-spec.v0.1.schema.json",
+  "title": "Blender Film Studio ActorSpec v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentType", "specVersion", "actor", "rig", "deformation", "sockets", "performance", "acceptance", "security", "provenance"],
+  "properties": {
+    "documentType": { "const": "BFS_ACTOR_SPEC" },
+    "specVersion": { "const": "0.1.0" },
+    "actor": { "$ref": "#/$defs/actor" },
+    "rig": { "$ref": "#/$defs/rig" },
+    "deformation": { "$ref": "#/$defs/deformation" },
+    "sockets": { "type": "array", "minItems": 1, "maxItems": 64, "items": { "$ref": "#/$defs/socket" } },
+    "performance": { "$ref": "#/$defs/performance" },
+    "acceptance": { "$ref": "#/$defs/acceptance" },
+    "security": { "$ref": "#/$defs/security" },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{1,63}$" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "vec3": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number", "minimum": -100000, "maximum": 100000 } },
+    "transform": {
+      "type": "object", "additionalProperties": false,
+      "required": ["locationM", "rotationEulerDeg", "scale"],
+      "properties": {
+        "locationM": { "$ref": "#/$defs/vec3" },
+        "rotationEulerDeg": { "$ref": "#/$defs/vec3" },
+        "scale": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number", "exclusiveMinimum": 0, "maximum": 1000 } }
+      }
+    },
+    "actor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "assetRef", "assetUri", "assetSha256", "rigProfile", "identityLock"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "assetRef": { "$ref": "#/$defs/id" },
+        "assetUri": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "assetSha256": { "$ref": "#/$defs/sha256" },
+        "rigProfile": { "const": "BFS_HUMANOID_0_1" },
+        "identityLock": { "const": true }
+      }
+    },
+    "boneMap": {
+      "type": "object", "additionalProperties": false,
+      "required": ["semantic", "bone", "deform"],
+      "properties": {
+        "semantic": { "enum": ["ROOT", "PELVIS", "SPINE_01", "SPINE_02", "NECK", "HEAD", "EYE_L", "EYE_R", "CLAVICLE_L", "CLAVICLE_R", "UPPER_ARM_L", "UPPER_ARM_R", "FOREARM_L", "FOREARM_R", "HAND_L", "HAND_R", "THIGH_L", "THIGH_R", "SHIN_L", "SHIN_R", "FOOT_L", "FOOT_R", "TOE_L", "TOE_R", "JAW"] },
+        "bone": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "deform": { "type": "boolean" }
+      }
+    },
+    "rig": {
+      "type": "object", "additionalProperties": false,
+      "required": ["armatureObject", "restPoseSha256", "rotationMode", "bones", "allowedConstraints", "driverPolicy"],
+      "properties": {
+        "armatureObject": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "restPoseSha256": { "$ref": "#/$defs/sha256" },
+        "rotationMode": { "enum": ["QUATERNION", "XYZ"] },
+        "bones": { "type": "array", "minItems": 7, "maxItems": 256, "items": { "$ref": "#/$defs/boneMap" } },
+        "allowedConstraints": {
+          "type": "array", "uniqueItems": true, "minItems": 1,
+          "items": { "enum": ["COPY_LOCATION", "COPY_ROTATION", "COPY_TRANSFORMS", "CHILD_OF", "IK", "DAMPED_TRACK", "LIMIT_DISTANCE", "LIMIT_ROTATION", "MAINTAIN_VOLUME"] }
+        },
+        "driverPolicy": {
+          "type": "object", "additionalProperties": false,
+          "required": ["mode", "allowFullPython", "requireSimpleExpressionFlag"],
+          "properties": {
+            "mode": { "const": "BUILTIN_OR_SIMPLE_ONLY" },
+            "allowFullPython": { "const": false },
+            "requireSimpleExpressionFlag": { "const": true }
+          }
+        }
+      }
+    },
+    "mesh": {
+      "type": "object", "additionalProperties": false,
+      "required": ["object", "topologySha256", "armatureModifier", "preserveVolume"],
+      "properties": {
+        "object": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "topologySha256": { "$ref": "#/$defs/sha256" },
+        "armatureModifier": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "preserveVolume": { "type": "boolean" }
+      }
+    },
+    "shapeChannel": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "targetKey", "minimum", "maximum", "neutral"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "targetKey": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "minimum": { "type": "number", "minimum": 0, "maximum": 1 },
+        "maximum": { "type": "number", "minimum": 0, "maximum": 1 },
+        "neutral": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "deformation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["meshes", "shapeKeyMesh", "shapeKeySetSha256", "shapeChannels"],
+      "properties": {
+        "meshes": { "type": "array", "minItems": 1, "maxItems": 32, "items": { "$ref": "#/$defs/mesh" } },
+        "shapeKeyMesh": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "shapeKeySetSha256": { "$ref": "#/$defs/sha256" },
+        "shapeChannels": { "type": "array", "minItems": 1, "maxItems": 256, "items": { "$ref": "#/$defs/shapeChannel" } }
+      }
+    },
+    "socket": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "boneSemantic", "offset"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "boneSemantic": { "$ref": "#/$defs/id" },
+        "offset": { "$ref": "#/$defs/transform" }
+      }
+    },
+    "key": {
+      "type": "object", "additionalProperties": false,
+      "required": ["frame", "value", "interpolation"],
+      "properties": {
+        "frame": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "value": { "type": "number", "minimum": 0, "maximum": 1 },
+        "interpolation": { "enum": ["CONSTANT", "LINEAR", "BEZIER"] }
+      }
+    },
+    "bodyAction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "uri", "sha256", "actionName", "frameStart", "frameEnd", "blendInFrames", "blendOutFrames"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "uri": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "actionName": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "frameStart": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "frameEnd": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "blendInFrames": { "type": "integer", "minimum": 0, "maximum": 120 },
+        "blendOutFrames": { "type": "integer", "minimum": 0, "maximum": 120 }
+      }
+    },
+    "facialCurve": {
+      "type": "object", "additionalProperties": false,
+      "required": ["channel", "keys"],
+      "properties": {
+        "channel": { "$ref": "#/$defs/id" },
+        "keys": { "type": "array", "minItems": 1, "maxItems": 10000, "items": { "$ref": "#/$defs/key" } }
+      }
+    },
+    "gazeKey": {
+      "type": "object", "additionalProperties": false,
+      "required": ["frame", "targetRef", "targetSocket", "headWeight", "eyeWeight"],
+      "properties": {
+        "frame": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "targetSocket": { "$ref": "#/$defs/id" },
+        "headWeight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "eyeWeight": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "contact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "effectorSocket", "targetRef", "targetSocket", "frameStart", "frameEnd", "positionToleranceM", "rotationToleranceDeg", "mode"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "effectorSocket": { "$ref": "#/$defs/id" },
+        "targetRef": { "$ref": "#/$defs/id" },
+        "targetSocket": { "$ref": "#/$defs/id" },
+        "frameStart": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "frameEnd": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "positionToleranceM": { "type": "number", "exclusiveMinimum": 0, "maximum": 0.5 },
+        "rotationToleranceDeg": { "type": "number", "minimum": 0, "maximum": 180 },
+        "mode": { "enum": ["PLANT", "GRASP", "SUPPORT"] }
+      }
+    },
+    "performance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["frameStart", "frameEnd", "frameRate", "layerOrder", "bodyActions", "facialCurves", "gazeKeys", "contacts"],
+      "properties": {
+        "frameStart": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "frameEnd": { "type": "integer", "minimum": 0, "maximum": 10000000 },
+        "frameRate": {
+          "type": "object", "additionalProperties": false, "required": ["numerator", "denominator"],
+          "properties": { "numerator": { "type": "integer", "minimum": 1, "maximum": 240 }, "denominator": { "type": "integer", "minimum": 1, "maximum": 1001 } }
+        },
+        "layerOrder": {
+          "type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true,
+          "prefixItems": [
+            { "const": "BODY" }, { "const": "BREATH" }, { "const": "GAZE" }, { "const": "FACIAL" }, { "const": "CONTACT" }
+          ]
+        },
+        "bodyActions": { "type": "array", "minItems": 1, "maxItems": 64, "items": { "$ref": "#/$defs/bodyAction" } },
+        "facialCurves": { "type": "array", "maxItems": 256, "items": { "$ref": "#/$defs/facialCurve" } },
+        "gazeKeys": { "type": "array", "maxItems": 10000, "items": { "$ref": "#/$defs/gazeKey" } },
+        "contacts": { "type": "array", "maxItems": 128, "items": { "$ref": "#/$defs/contact" } }
+      }
+    },
+    "acceptance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["maxFootSlipM", "maxContactPositionErrorM", "maxContactRotationErrorDeg", "maxGazeAngularErrorDeg", "rejectIdentityHashChange", "humanReview"],
+      "properties": {
+        "maxFootSlipM": { "type": "number", "minimum": 0, "maximum": 0.2 },
+        "maxContactPositionErrorM": { "type": "number", "minimum": 0, "maximum": 0.5 },
+        "maxContactRotationErrorDeg": { "type": "number", "minimum": 0, "maximum": 180 },
+        "maxGazeAngularErrorDeg": { "type": "number", "minimum": 0, "maximum": 90 },
+        "rejectIdentityHashChange": { "const": true },
+        "humanReview": { "const": "REQUIRED" }
+      }
+    },
+    "security": {
+      "type": "object", "additionalProperties": false,
+      "required": ["networkAccess", "arbitraryPython", "allowedRoots"],
+      "properties": {
+        "networkAccess": { "const": false },
+        "arbitraryPython": { "const": false },
+        "allowedRoots": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["assets/", "library/", "motion/"] } }
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["briefId", "createdBy", "createdAtUtc"],
+      "properties": {
+        "briefId": { "$ref": "#/$defs/id" },
+        "createdBy": { "type": "string", "minLength": 2, "maxLength": 200 },
+        "createdAtUtc": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

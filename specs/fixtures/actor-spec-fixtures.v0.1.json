@@ -1,0 +1,97 @@
+{
+  "base": {
+    "documentType": "BFS_ACTOR_SPEC",
+    "specVersion": "0.1.0",
+    "actor": {
+      "id": "ACTOR_LEAD",
+      "assetRef": "CHAR_LEAD",
+      "assetUri": "assets/characters/B03-lead.blend",
+      "assetSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "rigProfile": "BFS_HUMANOID_0_1",
+      "identityLock": true
+    },
+    "rig": {
+      "armatureObject": "RIG_LEAD",
+      "restPoseSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "rotationMode": "QUATERNION",
+      "bones": [
+        { "semantic": "ROOT", "bone": "root", "deform": false },
+        { "semantic": "PELVIS", "bone": "pelvis", "deform": true },
+        { "semantic": "HEAD", "bone": "head", "deform": true },
+        { "semantic": "EYE_L", "bone": "eye.L", "deform": true },
+        { "semantic": "EYE_R", "bone": "eye.R", "deform": true },
+        { "semantic": "HAND_L", "bone": "hand.L", "deform": true },
+        { "semantic": "HAND_R", "bone": "hand.R", "deform": true },
+        { "semantic": "FOOT_L", "bone": "foot.L", "deform": true },
+        { "semantic": "FOOT_R", "bone": "foot.R", "deform": true },
+        { "semantic": "JAW", "bone": "jaw", "deform": true }
+      ],
+      "allowedConstraints": ["COPY_TRANSFORMS", "CHILD_OF", "IK", "DAMPED_TRACK", "LIMIT_ROTATION"],
+      "driverPolicy": { "mode": "BUILTIN_OR_SIMPLE_ONLY", "allowFullPython": false, "requireSimpleExpressionFlag": true }
+    },
+    "deformation": {
+      "meshes": [
+        { "object": "BODY", "topologySha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "armatureModifier": "BFS_ARMATURE", "preserveVolume": true }
+      ],
+      "shapeKeyMesh": "HEAD",
+      "shapeKeySetSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "shapeChannels": [
+        { "id": "JAW_OPEN", "targetKey": "jawOpen", "minimum": 0, "maximum": 1, "neutral": 0 },
+        { "id": "BLINK_L", "targetKey": "eyeBlinkLeft", "minimum": 0, "maximum": 1, "neutral": 0 },
+        { "id": "BLINK_R", "targetKey": "eyeBlinkRight", "minimum": 0, "maximum": 1, "neutral": 0 }
+      ]
+    },
+    "sockets": [
+      { "id": "PALM_L", "boneSemantic": "HAND_L", "offset": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] } },
+      { "id": "PALM_R", "boneSemantic": "HAND_R", "offset": { "locationM": [0, 0, 0], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] } },
+      { "id": "SOLE_L", "boneSemantic": "FOOT_L", "offset": { "locationM": [0, 0, -0.05], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] } },
+      { "id": "SOLE_R", "boneSemantic": "FOOT_R", "offset": { "locationM": [0, 0, -0.05], "rotationEulerDeg": [0, 0, 0], "scale": [1, 1, 1] } }
+    ],
+    "performance": {
+      "frameStart": 1,
+      "frameEnd": 144,
+      "frameRate": { "numerator": 24, "denominator": 1 },
+      "layerOrder": ["BODY", "BREATH", "GAZE", "FACIAL", "CONTACT"],
+      "bodyActions": [
+        { "id": "BODY_IDLE", "uri": "motion/B03/body-idle.blend", "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "actionName": "B03_BODY_IDLE", "frameStart": 1, "frameEnd": 144, "blendInFrames": 0, "blendOutFrames": 0 }
+      ],
+      "facialCurves": [
+        { "channel": "JAW_OPEN", "keys": [{ "frame": 1, "value": 0, "interpolation": "LINEAR" }, { "frame": 24, "value": 0.4, "interpolation": "BEZIER" }] }
+      ],
+      "gazeKeys": [
+        { "frame": 1, "targetRef": "ACTOR_PARTNER", "targetSocket": "EYES", "headWeight": 0.35, "eyeWeight": 1 }
+      ],
+      "contacts": [
+        { "id": "LEFT_FOOT_PLANT", "effectorSocket": "SOLE_L", "targetRef": "SET_FLOOR", "targetSocket": "FLOOR", "frameStart": 1, "frameEnd": 24, "positionToleranceM": 0.01, "rotationToleranceDeg": 3, "mode": "PLANT" }
+      ]
+    },
+    "acceptance": {
+      "maxFootSlipM": 0.01,
+      "maxContactPositionErrorM": 0.02,
+      "maxContactRotationErrorDeg": 5,
+      "maxGazeAngularErrorDeg": 2,
+      "rejectIdentityHashChange": true,
+      "humanReview": "REQUIRED"
+    },
+    "security": { "networkAccess": false, "arbitraryPython": false, "allowedRoots": ["assets/", "library/", "motion/"] },
+    "provenance": { "briefId": "BRIEF_B03_ACTOR_CLOSEUP", "createdBy": "BFS ActorSpec research", "createdAtUtc": "2026-08-26T04:00:00Z" }
+  },
+  "cases": [
+    { "id": "AV01_BASE", "expectedValid": true, "mutations": [] },
+    { "id": "AV02_XYZ_ROTATION", "expectedValid": true, "mutations": [{ "op": "set", "path": "/rig/rotationMode", "value": "XYZ" }] },
+    { "id": "AV03_EMPTY_OPTIONAL_LAYERS", "expectedValid": true, "mutations": [{ "op": "set", "path": "/performance/facialCurves", "value": [] }, { "op": "set", "path": "/performance/gazeKeys", "value": [] }, { "op": "set", "path": "/performance/contacts", "value": [] }] },
+    { "id": "AI01_UNKNOWN_FIELD", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/actor/modelPrompt", "value": "make it cinematic" }] },
+    { "id": "AI02_IDENTITY_UNLOCK", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/actor/identityLock", "value": false }] },
+    { "id": "AI03_REVERSED_RANGE", "expectedValid": false, "expectedCode": "SEM_FRAME_RANGE", "mutations": [{ "op": "set", "path": "/performance/frameEnd", "value": 0 }] },
+    { "id": "AI04_DUPLICATE_BONE_SEMANTIC", "expectedValid": false, "expectedCode": "SEM_DUPLICATE_BONE_SEMANTIC", "mutations": [{ "op": "set", "path": "/rig/bones/1/semantic", "value": "ROOT" }] },
+    { "id": "AI05_DUPLICATE_TARGET_BONE", "expectedValid": false, "expectedCode": "SEM_DUPLICATE_TARGET_BONE", "mutations": [{ "op": "set", "path": "/rig/bones/1/bone", "value": "root" }] },
+    { "id": "AI06_SOCKET_UNKNOWN_BONE", "expectedValid": false, "expectedCode": "SEM_SOCKET_BONE", "mutations": [{ "op": "set", "path": "/sockets/0/boneSemantic", "value": "FOREARM_L" }] },
+    { "id": "AI07_FACE_CHANNEL_UNKNOWN", "expectedValid": false, "expectedCode": "SEM_FACE_CHANNEL", "mutations": [{ "op": "set", "path": "/performance/facialCurves/0/channel", "value": "SMILE_L" }] },
+    { "id": "AI08_FACE_KEY_OUTSIDE", "expectedValid": false, "expectedCode": "SEM_KEY_FRAME", "mutations": [{ "op": "set", "path": "/performance/facialCurves/0/keys/1/frame", "value": 200 }] },
+    { "id": "AI09_UNSAFE_MOTION_PATH", "expectedValid": false, "expectedCode": "SEC_PATH_TRAVERSAL", "mutations": [{ "op": "set", "path": "/performance/bodyActions/0/uri", "value": "../escape.blend" }] },
+    { "id": "AI10_CONTACT_UNKNOWN_SOCKET", "expectedValid": false, "expectedCode": "SEM_CONTACT_SOCKET", "mutations": [{ "op": "set", "path": "/performance/contacts/0/effectorSocket", "value": "FINGER_L" }] },
+    { "id": "AI11_CONTACT_REVERSED", "expectedValid": false, "expectedCode": "SEM_CONTACT_RANGE", "mutations": [{ "op": "set", "path": "/performance/contacts/0/frameStart", "value": 30 }, { "op": "set", "path": "/performance/contacts/0/frameEnd", "value": 20 }] },
+    { "id": "AI12_FULL_PYTHON_DRIVER", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/rig/driverPolicy/allowFullPython", "value": true }] },
+    { "id": "AI13_WRONG_LAYER_ORDER", "expectedValid": false, "expectedCode": "SCHEMA", "mutations": [{ "op": "set", "path": "/performance/layerOrder", "value": ["BODY", "FACIAL", "GAZE", "BREATH", "CONTACT"] }] }
+  ]
+}

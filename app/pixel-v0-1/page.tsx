@@ -46,7 +46,7 @@ export default function PixelV01Page() {
     <main className="pixel-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="像素实验导航"><Link href="/">技术基线</Link><Link href="/compiler-v0-1">编译实验</Link><Link href="/cost-model">成本</Link><Link href="/research-agenda">研究路线</Link><a href="#results">结果</a><a href="#mastering">Mastering</a></nav>
+        <nav aria-label="像素实验导航"><Link href="/">技术基线</Link><Link href="/compiler-v0-1">编译实验</Link><Link href="/cost-model">成本</Link><Link href="/research-agenda">研究路线</Link><Link className="actor-route" href="/actor-v0-1">角色实验</Link><a href="#results">结果</a><a href="#mastering">Mastering</a></nav>
         <span className="edition pixel-edition">Pixel 0.1</span>
       </header>
 
@@ -97,10 +97,10 @@ export default function PixelV01Page() {
         <div className="pixel-heading"><div><p className="eyebrow"><span /> REPORTS, NOT 1 GB BINARIES</p><h2>原始 EXR 留在本地，<br />报告进入版本控制。</h2></div><p>Git 保存 PixelSpec、渲染器、mastering 工具、每个 frame 的通道/统计/差异报告与汇总；巨大的 EXR 运行产物被明确忽略，避免把仓库变成无法审计的二进制仓库。</p></div>
         <div className="pixel-artifacts"><a href="https://github.com/lovejzzz/BlenderFilmStudio/tree/main/experiments/pixel-v0-1" target="_blank" rel="noreferrer"><span>PIXEL EXPERIMENT</span><b>results · inspections ↗</b></a><a href="https://github.com/lovejzzz/BlenderFilmStudio/tree/main/experiments/mastering-v0-1" target="_blank" rel="noreferrer"><span>MASTERING</span><b>conformance · comparisons ↗</b></a><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/pixel-spec.v0.1.json" target="_blank" rel="noreferrer"><span>CONTRACT</span><b>PixelSpec v0.1 ↗</b></a></div>
         <ol className="references pixel-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
-        <div className="pixel-next"><span>NEXT FALSIFIABLE GAP</span><div><h3>B03 · ActorSpec 与接触约束</h3><p>像素交付链已闭环。下一阶段验证骨骼、表情、眼神、脚滑、手—物接触与多镜头角色一致性；不把相机动画的成功外推到人物表演。</p></div></div>
+        <div className="pixel-next"><span>NEXT EVIDENCE LAYER</span><div><h3>B03 · ActorSpec v0.1</h3><p>角色合同、资产审计、负向 Driver 测试与逐帧求值已经执行。<Link href="/actor-v0-1">查看角色身份、眼神轴反例与 SceneSpec 集成缺口 →</Link></p></div></div>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>PixelSpec v0.1</b></div><p>Blender 5.2.0 LTS · 4K EXR · same-machine proof</p><Link href="/research-agenda">进入下一研究缺口 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>PixelSpec v0.1</b></div><p>Blender 5.2.0 LTS · 4K EXR · same-machine proof</p><Link href="/actor-v0-1">进入角色实验 →</Link></footer>
     </main>
   );
 }
