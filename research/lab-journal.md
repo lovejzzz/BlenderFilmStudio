@@ -135,6 +135,27 @@ Formal execution observation:
 
 Verdict: formal B13 true for local, exact-byte, self-hashed compile receipts. The receipt remains unsigned and is not remote attestation.
 
+## J-007 · Complete-shot review dailies gap
+
+Type: live pre-experiment audit, 2026-08-26.
+
+Question: does the receipt-bound B02 scene survive its entire 144-frame timeline and become a complete, playable, auditable review video?
+
+Observation before execution:
+
+- PixelSpec v0.1 rendered B02 frames 1, 72 and 144 twice, but never rendered frames 2–71 or 73–143;
+- existing B04/B05/B09 review clips demonstrate short video review mechanics for other experiments, but they are not bound to the B02 CompileReceipt;
+- measured B02 4K/512-sample Cycles frames take roughly 302–328 seconds each on this host, so a serial 144-frame master is approximately 12–15 hours;
+- Blender 5.2 reports the renderer identifier `BLENDER_EEVEE` and exposes `scene.eevee.taa_render_samples`; the frozen proxy uses that actual API rather than guessing a newer identifier;
+- local FFmpeg and ffprobe are both 8.1.2; their exact binary SHA-256 values are frozen in ReviewRenderSpec v0.1;
+- the B02-A receipt file SHA (`bdaa81e0…c1ff3`) and its internal receipt hash (`dbd11906…53678`) are separate integrity claims and are both frozen.
+
+Decision: pre-register B14 as a `REVIEW_PROXY_NOT_MASTER` experiment. The 960×540/32-sample Eevee sequence is a dailies gate for completeness, provenance and human review access. It cannot satisfy or weaken the existing 4K/512-sample Cycles master contract.
+
+Protocol: `research/2026-08-26-b14-review-dailies-protocol.md`.
+
+Status at freeze: not executed. Renderer, packager, verifier and formal sequence do not yet exist.
+
 ## Journal rule for future work
 
 Every promoted result must record:

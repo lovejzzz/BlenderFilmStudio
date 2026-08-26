@@ -1,0 +1,90 @@
+{
+  "documentType": "BFS_REVIEW_RENDER_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "purpose": "Render and package one complete, receipt-bound B02 review proxy without representing it as the research master",
+  "source": {
+    "benchmark": "B02",
+    "receiptUri": "experiments/compile-receipt-v0-1/evidence/B02-A/compile.receipt.json",
+    "receiptFileSha256": "bdaa81e0a65fbce0386e46becebf7123db17e95f6e7f687330051f61f61c1ff3",
+    "receiptHash": "dbd11906f93b122b62819dd49f6de15585cb3a56a18258b8bb738e70ee38b803",
+    "executionIdentityHash": "a85a728079af1fe93e6fe20eb4ee69bf82618ad5cdea3eec44f2e1d9a3e036a4",
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "runtime": {
+    "blender": {
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "binarySha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"
+    },
+    "ffmpeg": {
+      "version": "8.1.2",
+      "binarySha256": "1332dc2de372bade9a8a63da0d6cdfab9de97fcefbae707bcc0b0506e1203327"
+    },
+    "ffprobe": {
+      "version": "8.1.2",
+      "binarySha256": "4322275c1c2ac6ba15c695b288788bc1204e75211b3d5c030e5812c82a6dff73"
+    },
+    "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+  },
+  "timeline": {
+    "frameStart": 1,
+    "frameEnd": 144,
+    "expectedFrameCount": 144,
+    "fpsNumerator": 24,
+    "fpsDenominator": 1,
+    "expectedDurationSeconds": 6
+  },
+  "proxy": {
+    "classification": "REVIEW_PROXY_NOT_MASTER",
+    "renderEngine": "BLENDER_EEVEE",
+    "renderSamples": 32,
+    "motionBlur": false,
+    "width": 960,
+    "height": 540,
+    "resolutionPercentage": 100,
+    "imageFormat": "PNG",
+    "colorMode": "RGBA",
+    "colorDepth": "8",
+    "filmTransparent": false,
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "look": "None",
+    "exposure": 0,
+    "gamma": 1
+  },
+  "video": {
+    "container": "MP4",
+    "codec": "libx264",
+    "preset": "medium",
+    "constantRateFactor": 18,
+    "pixelFormat": "yuv420p",
+    "audio": false,
+    "fastStart": true,
+    "stripMetadata": true,
+    "bitexactFlags": true
+  },
+  "acceptance": {
+    "requireSourceReceiptVerification": true,
+    "requireExactSceneMarkers": true,
+    "requireSourceBlendByteMatch": true,
+    "requireCameraAndTimelineInvariant": true,
+    "requireExactFrameNames": true,
+    "rejectMissingOrExtraFrames": true,
+    "requirePerFrameSha256": true,
+    "requireSequenceManifestSelfHash": true,
+    "requireVideoSha256": true,
+    "requireDecodedFrameCount": true,
+    "requireExactVideoGeometryAndRate": true,
+    "humanReview": "PENDING"
+  },
+  "explicitNonClaims": [
+    "This 960x540 Eevee output is a review proxy and is not the 4K 512-sample Cycles research master.",
+    "A complete frame sequence does not prove photorealism, cinematic quality, temporal perceptual stability or acceptable acting.",
+    "H.264 review encoding is lossy and is not an archival or interchange master.",
+    "One same-machine sequence does not prove cross-device render reproducibility.",
+    "Receipt and hash verification are tamper evidence, not a digital signature or remote attestation."
+  ]
+}
