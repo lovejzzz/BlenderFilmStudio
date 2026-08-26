@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityAdmission.v0.1",
+  "experimentId": "B40",
+  "status": "PREREGISTERED_BEFORE_TOOLING_OR_OUTPUT",
+  "question": "Can the current Colima/Docker host safely admit a later Blender 5.2 linux/amd64 runtime canary while preserving the frozen B38 worker ceilings, an explicit infrastructure reserve, build-storage rollback room, host disk reserve and zero competing containers?",
+  "ancestry": {
+    "b38SpecSha256": "c96a6c7d9bf91c0b0f72fa2094ef6b6c0bb778d7443533f661859427715f9514",
+    "b38ResultSha256": "42fe3ceb1b36ded93c7cc40f1f0651c82f30a5e8878bcba3c2ec2eeb8454bf17",
+    "b38AuditSha256": "2c48229f0961faf8b030489ce0c69edd3785797ceeb4fc6e0c25ea990b0204f1",
+    "b39C1ResultSha256": "1898cca99da9215e4fd394df099417a5324d9405e5d6713711486d21875a1edf",
+    "b39C1AuditSha256": "12b292973eb166aea0eccf2fc071fdc730cec7dc102c2ad3d1297f4a7539edc7"
+  },
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+    "hostArchitecture": "arm64"
+  },
+  "frozenWorkerCeilingsFromB38": {
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "pidsLimit": 256,
+    "projectedHostWriteBytes": 21474836480,
+    "minimumHostReserveBytes": 107374182400
+  },
+  "capacityPolicy": {
+    "infrastructureMemoryReserveBytes": 2147483648,
+    "requiredVmMemoryBytes": 10737418240,
+    "infrastructureCpuReserve": 1,
+    "requiredVmCpus": 5,
+    "minimumDockerStorageFreeBeforeBuildBytes": 8589934592,
+    "requiredRunningContainerCount": 0,
+    "requiredVmSwapBytes": 0,
+    "requiredEmulator": {
+      "registration": "qemu-x86_64",
+      "enabled": true,
+      "interpreter": "/usr/bin/qemu-x86_64",
+      "requiredFlags": "POCF"
+    },
+    "reasoning": {
+      "memory": "The VM must provide the frozen 8 GiB worker ceiling plus a separately reserved 2 GiB for the Linux VM, Docker daemon and filesystem cache; a cgroup ceiling is not a reservation.",
+      "cpu": "The VM must provide the frozen four-CPU worker ceiling plus one CPU of infrastructure headroom; a CPU quota is not a reservation.",
+      "dockerStorage": "Eight GiB of free Docker storage is a pre-build safety floor for the 384,441,228-byte compressed Blender archive, extracted tree, package layers, final image and rollback after a failed build; it is an admission policy, not a predicted exact image size."
+    }
+  },
+  "probeTraceExact": [
+    "HOST_STATFS",
+    "COLIMA_STATUS",
+    "COLIMA_CONFIG_READ",
+    "VM_MEMINFO_READ",
+    "VM_CPU_READ",
+    "VM_DOCKER_DF_READ",
+    "VM_BINFMT_READ",
+    "DOCKER_RUNNING_CONTAINER_COUNT",
+    "ANCESTRY_FILE_HASHES"
+  ],
+  "forbiddenOperations": [
+    "colima start",
+    "colima stop",
+    "colima restart",
+    "colima delete",
+    "colima configuration mutation",
+    "docker run",
+    "docker create",
+    "docker build",
+    "docker pull",
+    "docker exec",
+    "docker prune",
+    "container or image deletion",
+    "Blender launch",
+    "Blender archive download",
+    "disk cleanup or reserve override"
+  ],
+  "expectedCurrentGates": {
+    "hostDisk": "BLOCKED",
+    "vmMemory": "BLOCKED",
+    "vmCpu": "BLOCKED",
+    "dockerStorage": "BLOCKED",
+    "vmSwap": "ACCEPTED",
+    "x64Emulator": "ACCEPTED",
+    "competingContainers": "ACCEPTED",
+    "overall": "BLOCKED",
+    "blockedReasonsExact": [
+      "HOST_DISK_RESERVE",
+      "VM_MEMORY_CAPACITY",
+      "VM_CPU_CAPACITY",
+      "DOCKER_STORAGE_CAPACITY"
+    ],
+    "runtimeOperationsExecuted": 0
+  },
+  "frozenAnalyzerAttacks": [
+    "lower the host disk reserve",
+    "lower the projected host write",
+    "remove the infrastructure memory reserve",
+    "mark six-GiB VM memory accepted",
+    "remove the infrastructure CPU reserve",
+    "mark four-CPU VM capacity accepted",
+    "lower the Docker storage safety floor",
+    "mark below-floor Docker storage accepted",
+    "hide a running competing container",
+    "accept nonzero VM swap",
+    "fabricate the x64 emulator registration",
+    "change an ancestry evidence hash",
+    "claim a runtime operation executed",
+    "mark overall admission accepted"
+  ],
+  "decisionRules": {
+    "workerHostCapacityBlocked": "all observations and decisions reproduce exactly, the four expected blockers remain, all 14 attacks pass and runtime operation count is zero",
+    "eligibleForB41Preregistration": "every gate is ACCEPTED in a new clean attempt; this changes external state and requires a separately preregistered B41, not reinterpretation of B40",
+    "runInvalid": "runtime, ancestry, preregistration, probe trace, policy, evidence self-hash or attack count differs"
+  },
+  "acceptedVerdict": "WORKER_HOST_CAPACITY_BLOCKED",
+  "nonClaims": [
+    "B40 does not start, stop, restart or reconfigure Colima",
+    "B40 does not launch Blender or create, run, build, pull, exec, prune or delete a container/image",
+    "The 2 GiB memory, one CPU and 8 GiB Docker-storage reserves are explicit operational admission policies, not Blender minimum requirements or measured exact consumption",
+    "An enabled qemu-x86_64 registration does not prove Blender compatibility, Eevee/EGL availability, performance or output equivalence",
+    "No containment or production worker claim",
+    "No automatic cleanup or disk-reserve override"
+  ]
+}
