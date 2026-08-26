@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "bfs.workerHostCapacityReadmissionReplayCorrection.v0.1",
+  "experimentId": "B40-R2",
+  "status": "PREREGISTERED_BEFORE_CORRECTION_TOOLING_OR_OUTPUT",
+  "question": "Does canonical evidence snapshotting plus hashed component-level replay diagnostics remove B40-R1's unlocalized pre-persistence mismatch while preserving the unchanged accepted capacity decision, 16 attack vector and zero-runtime boundary?",
+  "r1": {
+    "specSha256": "29ca949f6d9172a36df321b469050e7f7189b42ada790aa4f9bd2f6a97a131c1",
+    "preregistrationCommit": "0e52704ec2e61e0868c8f44e85b0ba24333d3145",
+    "toolFreezeCommit": "44f258f5b20d7e24144176a9a3b2f25e85d1be1e",
+    "failedResultSha256": "c83c93d7e89503572fd4277b7a06e628a801a5c3cf82904867ae2a4daeed27b3",
+    "failedAuditSha256": "42fadbe2b421e4a0a8307ba4001e5aeb105dc587b2e3c0c1f016d6ef787d50b5",
+    "failure": "REJECTED_REPLAY_DIAGNOSTIC_GAP"
+  },
+  "changedImplementationExact": [
+    "Create the tested base evidence through a JSON stringify/parse snapshot before analysis or attack evaluation",
+    "Store evidenceCanonicalEqual, analysisEqual and attackVectorEqual inside replayDiagnostics before the final evidence hash",
+    "Set replayPassed from the conjunction of those three stored component booleans",
+    "If final verification differs, write the exact false component booleans, set replayPassed false, recompute the evidence hash and reject"
+  ],
+  "frozenFromR1": [
+    "B40 policy inheritance and all numeric thresholds",
+    "probe trace and zero-runtime forbidden-operation boundary",
+    "expected ACCEPTED status for all seven gates with no blocked reasons",
+    "the ordered 16 attack names and expected primary failure codes",
+    "runtime and ancestry checks",
+    "accepted verdict string and non-claims"
+  ],
+  "requiredReplayDiagnostics": [
+    "evidenceCanonicalEqual",
+    "analysisEqual",
+    "attackVectorEqual"
+  ],
+  "decisionRules": {
+    "accepted": "All R1 scientific gates remain accepted, all 16 attacks pass, every persisted replay diagnostic is true, replayPassed is true and independent audit reproduces the exact analysis and attack vector.",
+    "rejected": "Any capacity, identity, hash, replay component, attack, recorded-vector or audit gate fails."
+  },
+  "acceptedVerdict": "WORKER_HOST_CAPACITY_ACCEPTED_REPLAY_STABLE",
+  "nonClaims": [
+    "B40-R2 corrects observability and comparison order only; it does not weaken a capacity gate",
+    "The experiment remains unblinded and post-intervention",
+    "No Colima mutation, container lifecycle operation, download or Blender process is permitted",
+    "Passing authorizes only separate B41 preregistration, not a Blender compatibility or rendering claim"
+  ]
+}
