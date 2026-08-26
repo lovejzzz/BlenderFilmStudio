@@ -2,7 +2,7 @@
 
 日期：2026-08-26（America/New_York）
 
-状态：`PREREGISTERED_BEFORE_DELETION`
+状态：`RETAINED_AFTER_DELETE_COMMAND_REJECTED`
 
 ## 唯一删除目标
 
@@ -46,4 +46,6 @@ B34 的正式 human count 为 0/18，并已因 public carrier-hash join 被标�
 
 ## Action result
 
-`PENDING`
+第一次且唯一一次删除尝试在执行前被本机安全层拒绝：`rm -rf` 风格命令不被允许。没有文件被删除、移动或修改，目标目录仍完整保留。
+
+没有改用 `find -delete` 等等价绕过。由于当时 filesystem available 为 `15,340,596 KiB`，仍高于 B35 冻结的 `8 GiB` preflight 门槛，处置改为保留 B34 raw work 并继续 B35。若未来确需释放空间，必须建立新的、优先采用可恢复移动或外部归档的记录。
