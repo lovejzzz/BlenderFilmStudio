@@ -1,0 +1,108 @@
+{
+  "documentType": "BFS_EEVEE_SAMPLING_DOSE_RESPONSE_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "At fixed output dither 0, where does exact decoded-pixel reproducibility change across Eevee renderSamples 1, 2, 4, 8, 16 and 32?",
+  "historicalEvidence": {
+    "experiment": "B17",
+    "resultsSha256": "738365cee8b09173d32b69dcec8355e055f4310f6b70d0e7dc40518ca55e7d72",
+    "samples1Dither0": { "decodedPixelExactFrames": 144, "failedPixels": 0, "maximumAbsoluteError": 0.0 },
+    "samples32Dither0": { "decodedPixelExactFrames": 132, "failedPixels": 88, "maximumAbsoluteError": 0.003921598196029663 }
+  },
+  "design": {
+    "type": "six-level dose response with two clean full-sequence replicates per level",
+    "renderSampleLevels": [1, 2, 4, 8, 16, 32],
+    "fixedDitherIntensity": 0.0,
+    "cells": [
+      { "id": "S01", "renderSamples": 1, "runs": ["S01-A", "S01-B"] },
+      { "id": "S02", "renderSamples": 2, "runs": ["S02-A", "S02-B"] },
+      { "id": "S04", "renderSamples": 4, "runs": ["S04-A", "S04-B"] },
+      { "id": "S08", "renderSamples": 8, "runs": ["S08-A", "S08-B"] },
+      { "id": "S16", "renderSamples": 16, "runs": ["S16-A", "S16-B"] },
+      { "id": "S32", "renderSamples": 32, "runs": ["S32-A", "S32-B"] }
+    ],
+    "runOrder": ["S01-A", "S32-A", "S08-A", "S02-A", "S16-A", "S04-A", "S04-B", "S16-B", "S02-B", "S08-B", "S32-B", "S01-B"],
+    "runOrderFrozenBeforeExecution": true
+  },
+  "reviewSpecMaterialization": {
+    "baseUri": "specs/review-render-spec.v0.1.json",
+    "baseSha256": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553",
+    "algorithm": "Parse base JSON, structured-clone it, replace only proxy.renderSamples with the integer level, then write JSON.stringify(value, null, 2) plus one LF byte.",
+    "expectedSha256BySamples": {
+      "1": "0d5857e2ba7a8952bb16c4f25c1576d5341570d23fcb0089cbb9dda86f54c2dd",
+      "2": "0f660db295f95b105000f19fa46f5566326940c3701c2c37adde1dc61223c73d",
+      "4": "f89dd9760b4bbda770b3e82128b314ca64753d2b48f4d709495d76a8457bdb4f",
+      "8": "f13e91b2cb9654101653e91403cfb1ae79de024958b4a09de3bea3c1597609c1",
+      "16": "9825a2b0807484a14df9802d90095e0d01822f72d4f20dd17916bbc75bb6d4b9",
+      "32": "65db6ca29fc1deb6c6e6b3927152794ca14ca09cbcc921db912fc2b5aecd9553"
+    },
+    "onlyAllowedSemanticDifference": "proxy.renderSamples"
+  },
+  "frozenIdentity": {
+    "rendererSha256": "b969e267db7b73eb7b6f8ea17abf09b2e129b9fce2e706fec950c5bb5e5eda5c",
+    "comparatorSha256": "cd770959a1e92c5df66d86d376870d4a961347276a637514e3bb37da1e697b4e",
+    "configuratorSha256": "444380da49194e5531bfc9d74d5f114436e8db43cd0c820365247f12b5e1c699",
+    "blenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b"
+  },
+  "constants": {
+    "engine": "BLENDER_EEVEE",
+    "ditherIntensity": 0.0,
+    "width": 960,
+    "height": 540,
+    "frameStart": 1,
+    "frameEnd": 144,
+    "frameCountPerRun": 144,
+    "totalRuns": 12,
+    "totalRenderedFrames": 1728,
+    "fps": 24,
+    "imageFormat": "PNG",
+    "colorDepth": "8",
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "motionBlur": false,
+    "sourceSceneDitherIntensity": 1.0
+  },
+  "primaryGatePerCell": {
+    "decodedPixelExactFrames": 144,
+    "maximumAbsoluteError": 0.0,
+    "totalFailurePixels": 0
+  },
+  "decisionRule": {
+    "ONLY_SINGLE_SAMPLE_EXACT": "The exactness vector for samples [1,2,4,8,16,32] is [true,false,false,false,false,false], and all controls/attacks pass.",
+    "MONOTONIC_BOUNDARY_FOUND": "The vector is a non-empty exact prefix followed by a non-empty non-exact suffix, with at least one exact level above 1, and all controls/attacks pass.",
+    "ALL_LEVELS_EXACT_BASELINE_UNSTABLE": "All six new cells are exact despite the frozen B17 sample-32 non-exact baseline, with an otherwise valid experiment.",
+    "NON_MONOTONIC_OR_UNSTABLE": "Sample 1 does not replicate exactness, or exact/non-exact states do not form a monotonic prefix/suffix boundary, with an otherwise valid experiment.",
+    "INVALID_EXPERIMENT": "Any frozen identity, spec materialization, run invariant, sequence binding, comparison binding or attack gate fails."
+  },
+  "requiredNegativeCases": [
+    "dose-response spec identity mismatch",
+    "base ReviewRenderSpec identity mismatch",
+    "materialized ReviewRenderSpec identity mismatch",
+    "renderer identity mismatch",
+    "comparator identity mismatch",
+    "configurator identity mismatch",
+    "dither differs from fixed zero",
+    "observed renderSamples differs from cell",
+    "A and B directories alias",
+    "missing frame",
+    "extra frame",
+    "mutated frame bytes",
+    "comparison artifact not bound to both sequence hashes"
+  ],
+  "secondaryObservations": [
+    "Failed-pixel counts and maximum errors are descriptive; they do not define a post-hoc tolerance.",
+    "Per-run render time is recorded as a cost response, not as evidence of pixel equality.",
+    "Representative sample-level frames may be published to expose the reproducibility versus visual-quality tradeoff.",
+    "PNG container equality remains separate from decoded-pixel equality."
+  ],
+  "explicitNonClaims": [
+    "A boundary in sample count does not identify a particular internal Blender algorithm, race or scheduling primitive.",
+    "This experiment does not show that low-sample output is visually acceptable.",
+    "Two runs per level can falsify exact determinism but cannot estimate mismatch probability.",
+    "The result applies to this same-machine Blender 5.2 Eevee PNG8 profile, not Cycles EXR masters or other devices.",
+    "A monotonic pattern in six selected powers of two does not prove monotonicity at every integer sample count.",
+    "No failed-pixel-count trend is treated as a causal effect size without further replication."
+  ]
+}

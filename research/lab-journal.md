@@ -260,6 +260,20 @@ Verdict: `SAMPLING_CAUSAL_SUPPORT`. Reducing Eevee render samples from 32 to 1 r
 
 Artifacts: `experiments/eevee-sampling-factorial-v0-1/results.json`, `experiments/eevee-sampling-factorial-v0-1/evidence/` and `research/2026-08-26-b17-eevee-sampling-factorial-result.md`.
 
+## J-011 · Eevee sampling dose-response freeze
+
+Type: live pre-experiment audit, 2026-08-26.
+
+B17 supplied causal support for render sample count: both sample-1 cells were exact and both sample-32 cells non-exact across two dither levels. Visual inspection also showed that sample 1 is strongly noisy, so “use one sample” is not a production solution.
+
+Question: at fixed dither 0, where does strict decoded-pixel reproducibility change across samples 1, 2, 4, 8, 16 and 32?
+
+B18 freezes 12 fresh Blender runs, 1,728 planned frames, an interleaved run order, exact zero-tolerance per-level gates, a monotonic-boundary decision matrix and 13 negative cases before its runner exists. All six ReviewRenderSpecs are mechanically derived from the same frozen base by changing one integer; their expected byte hashes are precomputed and frozen.
+
+Protocol: `research/2026-08-26-b18-eevee-sampling-dose-response-protocol.md`.
+
+Status at freeze: no B18 runner or B18 render exists.
+
 ## Journal rule for future work
 
 Every promoted result must record:
