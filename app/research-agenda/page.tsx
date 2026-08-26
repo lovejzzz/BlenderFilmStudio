@@ -37,32 +37,32 @@ const gaps: {
   {
     id: 'G02', title: 'SceneSpec 正式合同', type: 'engineering', priority: 'P0',
     question: '导演意图如何成为可验证、可版本化、可迁移的数据？',
-    known: 'v0.1 已覆盖镜头/资产/摄影机/灯光/输出；v0.2 增加角色合同；v0.3 已实测资产绑定 socket、受限父级切换与求值几何。',
-    missing: '导演节奏、对白、镜头意图、手指级接触、模拟依赖、资产变体与版本迁移仍未形成完整正式语义。',
-    artifact: 'SceneSpec v0.1–v0.3 + Migration Contract',
+    known: 'v0.1–v0.5 已依次覆盖基础镜头、角色、接触、抓握与哈希锁定轨迹；B08 已贯通 immutable BuildPlan 与 Blender 5.2 编译。',
+    missing: '导演节奏、对白、镜头意图、模拟依赖、资产变体、批量镜头关系与版本迁移仍未形成完整正式语义。',
+    artifact: 'SceneSpec v0.1–v0.5 + Migration Contract',
     gate: '所有非法输入在启动 Blender 前被定位到字段，旧版本能明确迁移或拒绝。',
   },
   {
     id: 'G03', title: '确定性与可复现边界', type: 'experiment', priority: 'P0',
     question: '相同输入在同机、跨机和补丁升级后，究竟能复现到什么程度？',
-    known: 'B01/B02 结构双净构建一致；同机 CPU 固定环境的 4 个 4K 代表帧双渲染均逐像素零误差。',
-    missing: '跨 GPU、驱动、OS、补丁版本、角色求值与模拟缓存的容差边界仍未知。',
+    known: 'B01/B02 结构与像素复现通过；B06 以 10 次/45 对审计证伪 Bullet 释放轨迹；B07/B08 证明锁定轨迹可在正式编译链零误差重放。',
+    missing: '跨 GPU、驱动、OS、补丁版本、角色求值、渲染噪声与模拟缓存的分层容差边界仍未知。',
     artifact: 'Reproducibility Matrix + Tolerance Policy',
     gate: '结构哈希严格一致；像素差异在按设备分层定义的阈值内。',
   },
   {
     id: 'G04', title: '代表性基准镜头组', type: 'experiment', priority: 'P0',
     question: '一个六秒室内镜头能否代表整条电影制作链？',
-    known: 'B01/B02 已包含结构/像素报告；B03 角色求值已执行；B04 先检出 HOLD 18.45 mm 穿入，再通过 socket-frame 修正得到 0/60 重叠与 1.999974 mm 间距；双净构建一致。',
-    missing: 'B04 盲审仍为 0/3，技术动作路径与手指抓握尚未通过；B05–B06、近景皮肤、毛发、模拟恢复、体积与大场景仍无实证。',
+    known: 'B01–B05 已覆盖编译、像素、角色、接触与抓握；B06–B08 覆盖物理证伪、轨迹冻结和正式编译；B09 已打开源物理盲评门。',
+    missing: 'B04/B05/B09 真实盲审仍不足；近景皮肤、毛发、布料、体积、大场景、崩溃恢复和跨镜头连续性仍无实证。',
     artifact: 'BFS Benchmark v0.1 · 6 Shots',
     gate: '六类镜头均能一键构建、失败、恢复、出具结构/像素/成本报告。',
   },
   {
     id: 'G05', title: '自动验收与人类校准', type: 'experiment', priority: 'P0',
     question: '系统如何知道镜头是真的通过，而不是“有一张图输出”？',
-    known: '结构规则、穿插、精确表面间距、镜头遮挡、脚滑、曝光、缺帧、EXR 通道和 FLIP 图像差异可以自动测量；B04 已冻结匿名审查协议与本地 JSON 聚合器。',
-    missing: '没有单一指标能衡量电影感、表演或构图；B04 尚无三名真实评审，机器阈值也尚未用导演/艺术家盲评校准。',
+    known: '结构、穿插、间距、遮挡、关键帧、EXR 与像素差异已有机器门；B04/B05/B09 均有哈希锁定匿名素材、响应 Schema 与本地聚合器。',
+    missing: '没有单一指标能衡量电影感、表演或构图；三个真实人类门均未收齐，机器阈值也尚未用导演/艺术家盲评校准。',
     artifact: 'Validator v0.1 + Human Review Protocol',
     gate: '在已标注故障集上达到预定召回率，并报告机器与人工分歧。',
   },
@@ -85,8 +85,8 @@ const gaps: {
   {
     id: 'G08', title: '代理执行安全', type: 'governance', priority: 'P0',
     question: 'Codex / MCP 可以修改什么，如何防止任意代码、越权读写和供应链污染？',
-    known: '模型可提出脚本和场景变更；Blender 官方 MCP 明确提示当前接口没有安全护栏。',
-    missing: '工具白名单、路径沙箱、网络策略、资产隔离、dry-run、审批和回滚协议尚未实现。',
+    known: 'B10 首轮发现 6 个 symlink/输出逃逸，修复后同一攻击集 8/8 被拒绝；SceneSpec 禁网、禁任意 Python并要求操作白名单。',
+    missing: '恶意 .blend、资源耗尽、OS 进程隔离、包供应链、签名审批、dry-run、回滚和完整 MCP 工具授权仍未实现。',
     artifact: 'Restricted Tool Gateway + Threat Model',
     gate: '攻击样例不能越出工作目录、联网、读取秘密或绕过批准修改制作资产。',
   },
@@ -196,12 +196,12 @@ export default function ResearchAgendaPage() {
         <div className="section-index">04 / 首轮实验协议</div>
         <div className="agenda-heading dark-heading"><div><p className="eyebrow dark"><span /> 18-WEEK FALSIFICATION PLAN</p><h2>越早失败，<br />研究越有价值。</h2></div><p>每阶段都有停止门槛。前一阶段不能通过，就修正假设，不用更多内容复杂度掩盖底层问题。</p></div>
         <div className="protocol-timeline">{phases.map(([phase, title, time, work, gate]) => <article key={phase}><header><span>{phase}</span><small>{time}</small></header><h3>{title}</h3><p>{work}</p><div><b>停止 / 通过门槛</b><span>{gate}</span></div></article>)}</div>
-        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>收集 B04 的 3 份独立盲审，并把失败转成 B05 动作/手指规格。</h3><p>修正后的刚性几何和审查机位均已通过自动门禁，CLIP_D83K、响应 Schema 与聚合器已经冻结；当前真实响应仍为 0。下一步不能再调同一片段，而应记录评审对动作路径、支撑关系、重量感和穿插的失败标签，再决定 B05 优先升级手指 rig、动作轨迹还是接触代理。</p></div></div>
+        <div className="first-action"><span>NEXT CONCRETE ACTION</span><div><h3>收集 B04、B05 与 B09 的真实盲审，同时继续 B10 之后的 OS / 资产安全攻击。</h3><p>CLIP_D83K、CLIP_G52Q 与 CLIP_P84R 都已冻结响应 Schema 和聚合器，且没有合成答案。人类门等待真实评审时，工程侧不再调片以迎合结果，而是继续验证恶意 .blend、资源耗尽、进程隔离和供应链边界。</p></div></div>
       </section>
 
       <section className="section agenda-decisions">
         <div className="section-index light">05 / 现在做什么</div>
-        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>CLIP_D83K 三人独立盲审</li><li>动作路径 / 手指失败标签</li><li>B05 手指接触最小规格</li><li>审查者分歧与置信区间</li><li>Token / 渲染 / 人工遥测</li><li>受限角色工具网关</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>B05 模拟恢复设计</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
+        <div className="decision-columns"><article className="now"><span>BUILD NOW</span><h2>立即建设</h2><ul><li>三条真实人类盲评门</li><li>恶意 .blend 隔离实验</li><li>资源与超时预算</li><li>审查者分歧记录</li><li>Token / 渲染 / 人工遥测</li><li>受限工具审批与回滚</li></ul></article><article><span>RESEARCH IN PARALLEL</span><h2>并行研究</h2><ul><li>跨 GPU 容差</li><li>物理显示校准</li><li>资产来源与 C2PA 映射</li><li>角色许可与肖像同意</li><li>ACES 2 审片路径</li><li>模拟缓存与恢复</li></ul></article><article className="later"><span>DEFER</span><h2>暂缓承诺</h2><ul><li>全自动英雄角色</li><li>端到端电影微表演</li><li>任意生成网格自动可动画</li><li>实验物理作为唯一主干</li><li>无人监督的任意代码执行</li><li>“一键长片”产品叙事</li></ul></article></div>
       </section>
 
       <section className="section agenda-method" id="sources">
@@ -211,7 +211,7 @@ export default function ResearchAgendaPage() {
         <ol className="references agenda-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/actor-v0-1">查看最新角色证据 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Falsifiable Research Agenda</b></div><p>Research tab · Snapshot: 2026-08-26 · Negative results are evidence</p><Link href="/security-v0-1">查看最新安全证据 →</Link></footer>
     </main>
   );
 }

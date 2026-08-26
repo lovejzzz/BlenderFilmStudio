@@ -1,0 +1,60 @@
+{
+  "documentType": "BFS_B10_PATH_SECURITY_EXPERIMENT",
+  "version": "0.1.0",
+  "phase": "POST_REMEDIATION",
+  "executedAtUtc": "2026-08-26T07:29:41.246Z",
+  "harmlessExternalFixture": true,
+  "negativeTests": [
+    {
+      "id": "N01_ASSET_SYMLINK",
+      "rejected": true,
+      "observed": "Asset PROP_B08 resolves outside the repository root"
+    },
+    {
+      "id": "N02_SCENE_SYMLINK",
+      "rejected": true,
+      "observed": "SceneSpec resolves outside the repository root"
+    },
+    {
+      "id": "N03_PROVENANCE_SYMLINK",
+      "rejected": true,
+      "observed": "Provenance source experiments/security-v0-1/work/external-source.json resolves outside the repository root"
+    },
+    {
+      "id": "N04_TRAJECTORY_SYMLINK",
+      "rejected": true,
+      "observed": "TrajectorySpec TRAJECTORY_B07_CANONICAL resolves outside the repository root"
+    },
+    {
+      "id": "N05_OUTPUT_ROOT_SYMLINK",
+      "rejected": true,
+      "observed": "Render output resolves outside the repository root"
+    },
+    {
+      "id": "N06_CLI_OUTPUT_OUTSIDE",
+      "rejected": true,
+      "observed": "BuildPlan output must resolve below the repository root"
+    },
+    {
+      "id": "N07_LEXICAL_TRAVERSAL",
+      "rejected": true,
+      "observed": "SceneSpec validation failed before BuildPlan generation:"
+    },
+    {
+      "id": "N08_NETWORK_ACCESS",
+      "rejected": true,
+      "observed": "SceneSpec validation failed before BuildPlan generation:"
+    }
+  ],
+  "vulnerableIds": [],
+  "positiveControl": {
+    "planHash": "7a4bccb640130db2dbf5c315907f81d5462605b6939b00a9df672c362d544dd9",
+    "pass": true
+  },
+  "passed": true,
+  "formalB10Complete": true,
+  "firstRunFalsification": {
+    "uri": "experiments/security-v0-1/first-run-falsified.json",
+    "observedVulnerableCases": 6
+  }
+}

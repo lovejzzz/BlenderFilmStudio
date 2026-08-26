@@ -1,5 +1,5 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import { relative, resolve, sep } from 'node:path';
+import { readFile, realpath, writeFile } from 'node:fs/promises';
+import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { canonicalJson, canonicalize, readJson, repositoryRoot, sha256, validateSceneSpec } from './lib/scene-spec.mjs';
 import { validateSceneSpecV02 } from './lib/scene-spec-v02.mjs';
@@ -13,6 +13,7 @@ import { validateTrajectorySpec } from './lib/trajectory-spec.mjs';
 const COMPILER_VERSIONS = { '0.1.0': '0.1.0', '0.2.0': '0.2.0', '0.3.0': '0.3.0', '0.4.0': '0.4.1', '0.5.0': '0.5.0' };
 const TARGET_BLENDER = '5.2.0';
 const outputSpecPath = resolve(repositoryRoot, 'specs/output-spec.v0.1.json');
+const repositoryRealRoot = await realpath(repositoryRoot);
 
 function repoRelative(absolutePath) {
   return relative(repositoryRoot, absolutePath).split(sep).join('/');
@@ -23,6 +24,38 @@ function assertBelowRepository(absolutePath, label) {
   if (pathFromRoot === '' || pathFromRoot.startsWith(`..${sep}`) || pathFromRoot === '..') {
     throw new Error(`${label} must resolve below the repository root`);
   }
+}
+
+function assertBelowRealRepository(actualPath, label, allowRoot = false) {
+  const pathFromRoot = relative(repositoryRealRoot, actualPath);
+  if ((!allowRoot && pathFromRoot === '') || pathFromRoot.startsWith(`..${sep}`) || pathFromRoot === '..') {
+    throw new Error(`${label} resolves outside the repository root`);
+  }
+}
+
+async function assertTrustedExistingPath(absolutePath, label, missingMessage) {
+  assertBelowRepository(absolutePath, label);
+  const actualPath = await realpath(absolutePath).catch(() => { throw new Error(missingMessage ?? `${label} is missing`); });
+  assertBelowRealRepository(actualPath, label);
+  if (actualPath !== absolutePath) throw new Error(`${label} must not traverse symbolic links`);
+  return actualPath;
+}
+
+async function assertTrustedOutputPath(absolutePath, label) {
+  assertBelowRepository(absolutePath, label);
+  let probe = absolutePath;
+  let actualPath;
+  while (!actualPath) {
+    actualPath = await realpath(probe).catch(error => {
+      if (error?.code !== 'ENOENT') throw error;
+      const parent = dirname(probe);
+      if (parent === probe) throw error;
+      probe = parent;
+      return null;
+    });
+  }
+  assertBelowRealRepository(actualPath, label, probe === repositoryRoot);
+  if (actualPath !== probe) throw new Error(`${label} must not traverse symbolic links`);
 }
 
 async function digestFile(absolutePath) {
@@ -59,10 +92,8 @@ async function resolveAssets(document) {
   const assets = [];
   for (const asset of sortById(document.assets)) {
     const absolutePath = resolve(repositoryRoot, asset.uri);
-    assertBelowRepository(absolutePath, `Asset ${asset.id}`);
-    const actualSha256 = await digestFile(absolutePath).catch(() => {
-      throw new Error(`Asset ${asset.id} is missing: ${asset.uri}`);
-    });
+    await assertTrustedExistingPath(absolutePath, `Asset ${asset.id}`, `Asset ${asset.id} is missing: ${asset.uri}`);
+    const actualSha256 = await digestFile(absolutePath);
     if (actualSha256 !== asset.sha256) {
       throw new Error(`Asset ${asset.id} hash mismatch: expected ${asset.sha256}, received ${actualSha256}`);
     }
@@ -78,10 +109,8 @@ async function resolveActors(document, assets) {
   const actors = [];
   for (const actor of sortById(document.actors)) {
     const actorSpecPath = resolve(repositoryRoot, actor.actorSpecUri);
-    assertBelowRepository(actorSpecPath, `ActorSpec ${actor.id}`);
-    const actorSpecBytes = await readFile(actorSpecPath).catch(() => {
-      throw new Error(`ActorSpec ${actor.id} is missing: ${actor.actorSpecUri}`);
-    });
+    await assertTrustedExistingPath(actorSpecPath, `ActorSpec ${actor.id}`, `ActorSpec ${actor.id} is missing: ${actor.actorSpecUri}`);
+    const actorSpecBytes = await readFile(actorSpecPath);
     const actualActorSpecSha256 = sha256(actorSpecBytes);
     if (actualActorSpecSha256 !== actor.actorSpecSha256) {
       throw new Error(`ActorSpec ${actor.id} hash mismatch: expected ${actor.actorSpecSha256}, received ${actualActorSpecSha256}`);
@@ -113,10 +142,8 @@ async function resolveActors(document, assets) {
     const resolvedActions = [];
     for (const action of actorSpec.performance.bodyActions) {
       const actionPath = resolve(repositoryRoot, action.uri);
-      assertBelowRepository(actionPath, `Actor action ${action.id}`);
-      const actualSha256 = await digestFile(actionPath).catch(() => {
-        throw new Error(`Actor action ${action.id} is missing: ${action.uri}`);
-      });
+      await assertTrustedExistingPath(actionPath, `Actor action ${action.id}`, `Actor action ${action.id} is missing: ${action.uri}`);
+      const actualSha256 = await digestFile(actionPath);
       if (actualSha256 !== action.sha256) throw new Error(`Actor action ${action.id} hash mismatch: expected ${action.sha256}, received ${actualSha256}`);
       resolvedActions.push({ ...action, uri: repoRelative(actionPath), verifiedSha256: actualSha256 });
     }
@@ -138,8 +165,8 @@ async function resolveGrasps(document, assets) {
   const grasps = [];
   for (const binding of sortById(document.grasps)) {
     const graspPath = resolve(repositoryRoot, binding.graspSpecUri);
-    assertBelowRepository(graspPath, `GraspSpec ${binding.id}`);
-    const bytes = await readFile(graspPath).catch(() => { throw new Error(`GraspSpec ${binding.id} is missing: ${binding.graspSpecUri}`); });
+    await assertTrustedExistingPath(graspPath, `GraspSpec ${binding.id}`, `GraspSpec ${binding.id} is missing: ${binding.graspSpecUri}`);
+    const bytes = await readFile(graspPath);
     const actualSha256 = sha256(bytes);
     if (actualSha256 !== binding.graspSpecSha256) throw new Error(`GraspSpec ${binding.id} hash mismatch: expected ${binding.graspSpecSha256}, received ${actualSha256}`);
     const graspSpec = JSON.parse(bytes.toString('utf8'));
@@ -169,8 +196,8 @@ async function resolveTrajectories(document, assets) {
   const trajectories = [];
   for (const binding of sortById(document.trajectories)) {
     const trajectoryPath = resolve(repositoryRoot, binding.trajectorySpecUri);
-    assertBelowRepository(trajectoryPath, `TrajectorySpec ${binding.id}`);
-    const bytes = await readFile(trajectoryPath).catch(() => { throw new Error(`TrajectorySpec ${binding.id} is missing: ${binding.trajectorySpecUri}`); });
+    await assertTrustedExistingPath(trajectoryPath, `TrajectorySpec ${binding.id}`, `TrajectorySpec ${binding.id} is missing: ${binding.trajectorySpecUri}`);
+    const bytes = await readFile(trajectoryPath);
     const actualSha256 = sha256(bytes);
     if (actualSha256 !== binding.trajectorySpecSha256) throw new Error(`TrajectorySpec ${binding.id} hash mismatch: expected ${binding.trajectorySpecSha256}, received ${actualSha256}`);
     const trajectorySpec = JSON.parse(bytes.toString('utf8'));
@@ -187,8 +214,8 @@ async function resolveTrajectories(document, assets) {
       throw new Error(`TrajectorySpec ${binding.id} range or frame rate does not match the shot`);
     }
     const evaluationPath = resolve(repositoryRoot, trajectorySpec.source.evaluationUri);
-    assertBelowRepository(evaluationPath, `TrajectorySpec source ${binding.id}`);
-    const evaluationBytes = await readFile(evaluationPath).catch(() => { throw new Error(`TrajectorySpec source evaluation is missing: ${trajectorySpec.source.evaluationUri}`); });
+    await assertTrustedExistingPath(evaluationPath, `TrajectorySpec source ${binding.id}`, `TrajectorySpec source evaluation is missing: ${trajectorySpec.source.evaluationUri}`);
+    const evaluationBytes = await readFile(evaluationPath);
     const evaluationSha256 = sha256(evaluationBytes);
     if (evaluationSha256 !== trajectorySpec.source.evaluationSha256) throw new Error(`TrajectorySpec ${binding.id} source evaluation hash mismatch: expected ${trajectorySpec.source.evaluationSha256}, received ${evaluationSha256}`);
     const sourceEvaluation = JSON.parse(evaluationBytes.toString('utf8'));
@@ -225,10 +252,8 @@ async function verifyLocalSources(document) {
       continue;
     }
     const absolutePath = resolve(repositoryRoot, normalized);
-    assertBelowRepository(absolutePath, `Provenance source ${source.uri}`);
-    const actualSha256 = await digestFile(absolutePath).catch(() => {
-      throw new Error(`Local provenance source is missing: ${source.uri}`);
-    });
+    await assertTrustedExistingPath(absolutePath, `Provenance source ${source.uri}`, `Local provenance source is missing: ${source.uri}`);
+    const actualSha256 = await digestFile(absolutePath);
     if (actualSha256 !== source.sha256) {
       throw new Error(`Provenance hash mismatch for ${source.uri}: expected ${source.sha256}, received ${actualSha256}`);
     }
@@ -264,7 +289,7 @@ function normalizeDocument(document) {
 
 export async function compileBuildPlan(inputPath) {
   const absoluteInputPath = resolve(process.cwd(), inputPath);
-  assertBelowRepository(absoluteInputPath, 'SceneSpec');
+  await assertTrustedExistingPath(absoluteInputPath, 'SceneSpec', `SceneSpec is missing: ${inputPath}`);
   const document = await readJson(absoluteInputPath);
   const validator = document.specVersion === '0.5.0'
     ? validateSceneSpecV05
@@ -280,15 +305,14 @@ export async function compileBuildPlan(inputPath) {
   const normalizedDocument = normalizeDocument(document);
   const compilerVersion = COMPILER_VERSIONS[normalizedDocument.specVersion];
   if (!compilerVersion) throw new Error(`Unsupported SceneSpec version: ${normalizedDocument.specVersion}`);
+  await assertTrustedExistingPath(outputSpecPath, 'OutputSpec', 'Pinned OutputSpec is missing');
   const outputSpec = await readJson(outputSpecPath);
   if (outputSpec.id !== normalizedDocument.render.outputProfile) {
     throw new Error(`Output profile ${normalizedDocument.render.outputProfile} does not match ${outputSpec.id}`);
   }
   const ocioConfigPath = resolve(repositoryRoot, outputSpec.color.ocioConfigUri);
-  assertBelowRepository(ocioConfigPath, 'OCIO config');
-  const ocioConfigSha256 = await digestFile(ocioConfigPath).catch(() => {
-    throw new Error(`Pinned OCIO config is missing: ${outputSpec.color.ocioConfigUri}`);
-  });
+  await assertTrustedExistingPath(ocioConfigPath, 'OCIO config', `Pinned OCIO config is missing: ${outputSpec.color.ocioConfigUri}`);
+  const ocioConfigSha256 = await digestFile(ocioConfigPath);
   if (ocioConfigSha256 !== outputSpec.color.ocioConfigSha256) {
     throw new Error(`OCIO config hash mismatch: expected ${outputSpec.color.ocioConfigSha256}, received ${ocioConfigSha256}`);
   }
@@ -299,7 +323,7 @@ export async function compileBuildPlan(inputPath) {
   const verifiedSources = await verifyLocalSources(normalizedDocument);
   const authorizedOperations = requireOperations(normalizedDocument);
   const outputRoot = resolve(repositoryRoot, normalizedDocument.render.outputRoot);
-  assertBelowRepository(outputRoot, 'Render output');
+  await assertTrustedOutputPath(outputRoot, 'Render output');
 
   const plan = canonicalize({
     compiler: {
@@ -368,6 +392,7 @@ async function main() {
   const serialized = `${JSON.stringify(buildPlan, null, 2)}\n`;
   if (outputIndex >= 0 && args[outputIndex + 1]) {
     const outputPath = resolve(process.cwd(), args[outputIndex + 1]);
+    await assertTrustedOutputPath(outputPath, 'BuildPlan output');
     await writeFile(outputPath, serialized);
     process.stdout.write(`BUILD_PLAN ${buildPlan.plan.shot.id} ${buildPlan.planHash} ${outputPath}\n`);
   } else {

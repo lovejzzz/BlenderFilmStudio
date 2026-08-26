@@ -1,0 +1,67 @@
+{
+  "documentType": "BFS_B10_PATH_SECURITY_EXPERIMENT",
+  "version": "0.1.0",
+  "phase": "FIRST_RUN_FALSIFICATION",
+  "executedAtUtc": "2026-08-26T07:26:07.686Z",
+  "harmlessExternalFixture": true,
+  "negativeTests": [
+    {
+      "id": "N01_ASSET_SYMLINK",
+      "rejected": false,
+      "planHash": "f520046e7bbd188cff34c6eb83f2678d809975e236038bc93617e766c5c54064",
+      "observed": "BUILD_PLAN_EMITTED"
+    },
+    {
+      "id": "N02_SCENE_SYMLINK",
+      "rejected": false,
+      "planHash": "7ea5d6adcb210adf3b21a764b89b7e1308c2a805b0e380e31a1ca3decca518a4",
+      "observed": "BUILD_PLAN_EMITTED"
+    },
+    {
+      "id": "N03_PROVENANCE_SYMLINK",
+      "rejected": false,
+      "planHash": "1271753afaa0c5e5f801065f090e1c5c50b2ee179e428271699aedbd7dcb4d09",
+      "observed": "BUILD_PLAN_EMITTED"
+    },
+    {
+      "id": "N04_TRAJECTORY_SYMLINK",
+      "rejected": false,
+      "planHash": "d86361f4c8d42a62e6bcf5dc9eac7dd0e9a06f089d0ca60076cbaaafe3a916bd",
+      "observed": "BUILD_PLAN_EMITTED"
+    },
+    {
+      "id": "N05_OUTPUT_ROOT_SYMLINK",
+      "rejected": false,
+      "planHash": "a21d88f3b67bdf2c9883aec9efdee79337f9480664d4b00654af730d6806eb69",
+      "observed": "BUILD_PLAN_EMITTED"
+    },
+    {
+      "id": "N06_CLI_OUTPUT_OUTSIDE",
+      "rejected": false,
+      "observed": "BUILD_PLAN SHOT_108 7a4bccb640130db2dbf5c315907f81d5462605b6939b00a9df672c362d544dd9 /var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b10-MrvbcI/outside-build-plan.json"
+    },
+    {
+      "id": "N07_LEXICAL_TRAVERSAL",
+      "rejected": true,
+      "observed": "SceneSpec validation failed before BuildPlan generation:"
+    },
+    {
+      "id": "N08_NETWORK_ACCESS",
+      "rejected": true,
+      "observed": "SceneSpec validation failed before BuildPlan generation:"
+    }
+  ],
+  "vulnerableIds": [
+    "N01_ASSET_SYMLINK",
+    "N02_SCENE_SYMLINK",
+    "N03_PROVENANCE_SYMLINK",
+    "N04_TRAJECTORY_SYMLINK",
+    "N05_OUTPUT_ROOT_SYMLINK",
+    "N06_CLI_OUTPUT_OUTSIDE"
+  ],
+  "positiveControl": {
+    "planHash": "7a4bccb640130db2dbf5c315907f81d5462605b6939b00a9df672c362d544dd9",
+    "pass": true
+  },
+  "passed": true
+}
