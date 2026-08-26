@@ -90,7 +90,7 @@ const audit = {
   studySpecSha256: specSha, resultSha256: await sha256File(resultPath),
   packageManifestSha256: await sha256File(manifestPath), sourceProcessLedgerSha256: await sha256File(ledgerPath),
   compositeDisplayManifestSha256: await sha256File(compositePath),
-  observations: { uniqueProcessIds: 13, sourceExrFiles: sourceFiles, sourceBytes, compositeExrFiles: compositeFiles, displayPngFiles: displayFiles, carrierFiles: 3, exactRoundtripFrames: roundtripFrames, changedRgbPixels, observerSessions: 18, permutationCounts, sealedMappingNotInObserverPackages: true, formalHumanResponses: 0 },
+  observations: { uniqueProcessIds: 13, sourceExrFiles: sourceFiles, sourceBytes, compositeExrFiles: compositeFiles, displayPngFiles: displayFiles, carrierFiles: 3, exactRoundtripFrames: roundtripFrames, changedRgbPixels: changedPixels, observerSessions: 18, permutationCounts, sealedMappingNotInObserverPackages: true, formalHumanResponses: 0 },
   nonClaim: 'This audits bytes, bindings, balance and package boundaries. It is not a human observation or a perceptual result.',
 };
 await writeFile(outputPath, `${JSON.stringify(audit, null, 2)}\n`);
