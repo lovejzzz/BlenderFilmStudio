@@ -1,0 +1,1044 @@
+{
+  "classification": "EXPLORATORY_RNA_AUDIT_NOT_CAUSAL_RESULT",
+  "documentType": "BFS_EEVEE_CONTROL_INVENTORY",
+  "domains": [
+    {
+      "label": "scene.eevee",
+      "properties": [
+        {
+          "description": "Apply blur to each jittered sample to reduce under-sampling artifacts",
+          "hardMax": 100.0,
+          "hardMin": 0.0,
+          "identifier": "bokeh_overblur",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Over-blur",
+          "softMax": 20.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 5.0
+        },
+        {
+          "description": "If non-zero, the maximum value for lights contribution on a surface. Higher values will be scaled down to avoid too much noise and slow convergence at the cost of accuracy. Used by light objects.",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "clamp_surface_direct",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Clamp Surface Direct",
+          "softMax": 3.4028234663852886e+38,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "If non-zero, the maximum value for indirect lighting on surface. Higher values will be scaled down to avoid too much noise and slow convergence at the cost of accuracy. Used by ray-tracing and light-probes.",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "clamp_surface_indirect",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Clamp Surface Indirect",
+          "softMax": 3.4028234663852886e+38,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 10.0
+        },
+        {
+          "description": "If non-zero, the maximum value for lights contribution in volumes. Higher values will be scaled down to avoid too much noise and slow convergence at the cost of accuracy. Used by light objects.",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "clamp_volume_direct",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Clamp Volume Direct",
+          "softMax": 3.4028234663852886e+38,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "If non-zero, the maximum value for indirect lighting in volumes. Higher values will be scaled down to avoid too much noise and slow convergence at the cost of accuracy. Used by light-probes.",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "clamp_volume_indirect",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Clamp Volume Indirect",
+          "softMax": 3.4028234663852886e+38,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "Bias the shading normal to reduce self intersection artifacts",
+          "hardMax": 1.0,
+          "hardMin": 0.0,
+          "identifier": "fast_gi_bias",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Bias",
+          "softMax": 0.5,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.05000000074505806
+        },
+        {
+          "description": "If non-zero, the maximum distance at which other surfaces will contribute to the fast GI approximation",
+          "hardMax": 100000.0,
+          "hardMin": 0.0,
+          "identifier": "fast_gi_distance",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Distance",
+          "softMax": 100.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "Fast GI approximation method",
+          "enumItems": [
+            "AMBIENT_OCCLUSION_ONLY",
+            "GLOBAL_ILLUMINATION"
+          ],
+          "identifier": "fast_gi_method",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Method",
+          "type": "ENUM",
+          "value": "GLOBAL_ILLUMINATION"
+        },
+        {
+          "description": "Precision of the fast GI ray marching",
+          "hardMax": 1.0,
+          "hardMin": 0.0,
+          "identifier": "fast_gi_quality",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Trace Precision",
+          "softMax": 1.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.25
+        },
+        {
+          "description": "Amount of GI ray to trace for each pixel",
+          "hardMax": 16,
+          "hardMin": 1,
+          "identifier": "fast_gi_ray_count",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Ray Count",
+          "softMax": 16,
+          "softMin": 1,
+          "type": "INT",
+          "value": 2
+        },
+        {
+          "description": "Control the quality of the fast GI lighting. Higher resolution uses more memory.",
+          "enumItems": [
+            "1",
+            "2",
+            "4",
+            "8",
+            "16"
+          ],
+          "identifier": "fast_gi_resolution",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Resolution",
+          "type": "ENUM",
+          "value": "2"
+        },
+        {
+          "description": "Amount of screen sample per GI ray",
+          "hardMax": 64,
+          "hardMin": 1,
+          "identifier": "fast_gi_step_count",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Step Count",
+          "softMax": 64,
+          "softMin": 1,
+          "type": "INT",
+          "value": 8
+        },
+        {
+          "description": "Geometric thickness of the surfaces when computing fast GI and ambient occlusion. Reduces light leaking and missing contact occlusion.",
+          "hardMax": 100000.0,
+          "hardMin": 0.0,
+          "identifier": "fast_gi_thickness_near",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Thickness",
+          "softMax": 100.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.10000000149011612
+        },
+        {
+          "description": "Size of every cubemaps",
+          "enumItems": [
+            "128",
+            "256",
+            "512",
+            "1024",
+            "2048",
+            "4096"
+          ],
+          "identifier": "gi_cubemap_resolution",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Cubemap Size",
+          "type": "ENUM",
+          "value": "512"
+        },
+        {
+          "description": "Number of times the light is reinjected inside light grids, 0 disable indirect diffuse light",
+          "hardMax": 2147483647,
+          "hardMin": 0,
+          "identifier": "gi_diffuse_bounces",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Diffuse Bounces",
+          "softMax": 2147483647,
+          "softMin": 0,
+          "type": "INT",
+          "value": 3
+        },
+        {
+          "description": "Clamp pixel intensity to reduce noise inside glossy reflections from reflection cubemaps (0 to disable)",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "gi_glossy_clamp",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Clamp Glossy",
+          "softMax": 3.4028234663852886e+38,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "Size of the irradiance pool, a bigger pool size allows for more irradiance grid in the scene but might not fit into GPU memory and decrease performance",
+          "enumItems": [
+            "16",
+            "32",
+            "64",
+            "128",
+            "256",
+            "512",
+            "1024"
+          ],
+          "identifier": "gi_irradiance_pool_size",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Irradiance Pool Size",
+          "type": "ENUM",
+          "value": "16"
+        },
+        {
+          "description": "Size of the shadow map applied to each irradiance sample",
+          "enumItems": [
+            "8",
+            "16",
+            "32",
+            "64"
+          ],
+          "identifier": "gi_visibility_resolution",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Irradiance Visibility Size",
+          "type": "ENUM",
+          "value": "32"
+        },
+        {
+          "description": "Lower values will reduce background bleeding onto foreground elements",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "motion_blur_depth_scale",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Bleeding Bias",
+          "softMax": 1000.0,
+          "softMin": 0.009999999776482582,
+          "type": "FLOAT",
+          "value": 100.0
+        },
+        {
+          "description": "Maximum blur distance a pixel can spread over",
+          "hardMax": 2048,
+          "hardMin": 0,
+          "identifier": "motion_blur_max",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Max Blur",
+          "softMax": 512,
+          "softMin": 0,
+          "type": "INT",
+          "value": 32
+        },
+        {
+          "description": "Controls accuracy of motion blur, more steps means longer render time",
+          "hardMax": 2147483647,
+          "hardMin": 1,
+          "identifier": "motion_blur_steps",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Motion steps",
+          "softMax": 64,
+          "softMin": 1,
+          "type": "INT",
+          "value": 1
+        },
+        {
+          "description": "Select the tracing method used to find scene-ray intersections",
+          "enumItems": [
+            "PROBE",
+            "SCREEN"
+          ],
+          "identifier": "ray_tracing_method",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Tracing Method",
+          "type": "ENUM",
+          "value": "SCREEN"
+        },
+        {
+          "description": "EEVEE settings for tracing reflections",
+          "identifier": "ray_tracing_options",
+          "isArray": false,
+          "isReadOnly": true,
+          "name": "Reflection Trace Options",
+          "type": "POINTER",
+          "value": "bpy.data.scenes['SHOT_102'].eevee.ray_tracing_options"
+        },
+        {
+          "description": "Size of the shadow pool, a bigger pool size allows for more shadows in the scene but might not fit into GPU memory",
+          "enumItems": [
+            "16",
+            "32",
+            "64",
+            "128",
+            "256",
+            "512",
+            "1024",
+            "1536",
+            "2048"
+          ],
+          "identifier": "shadow_pool_size",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadow Pool Size",
+          "type": "ENUM",
+          "value": "512"
+        },
+        {
+          "description": "Amount of shadow ray to trace for each light",
+          "hardMax": 4,
+          "hardMin": 1,
+          "identifier": "shadow_ray_count",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadow Ray Count",
+          "softMax": 4,
+          "softMin": 1,
+          "type": "INT",
+          "value": 1
+        },
+        {
+          "description": "Resolution percentage of shadow maps",
+          "hardMax": 1.0,
+          "hardMin": 0.0,
+          "identifier": "shadow_resolution_scale",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadows Resolution Scale",
+          "softMax": 1.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 1.0
+        },
+        {
+          "description": "Amount of shadow map sample per shadow ray",
+          "hardMax": 16,
+          "hardMin": 1,
+          "identifier": "shadow_step_count",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadow Step Count",
+          "softMax": 16,
+          "softMin": 1,
+          "type": "INT",
+          "value": 6
+        },
+        {
+          "description": "Number of samples per pixel for rendering",
+          "hardMax": 2147483647,
+          "hardMin": 1,
+          "identifier": "taa_render_samples",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Render Samples",
+          "softMax": 2147483647,
+          "softMin": 1,
+          "type": "INT",
+          "value": 64
+        },
+        {
+          "description": "Number of samples, unlimited if 0",
+          "hardMax": 2147483647,
+          "hardMin": 0,
+          "identifier": "taa_samples",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Viewport Samples",
+          "softMax": 2147483647,
+          "softMin": 0,
+          "type": "INT",
+          "value": 16
+        },
+        {
+          "description": "Jitter camera position to create accurate blurring using render samples (only for final render)",
+          "identifier": "use_bokeh_jittered",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Jitter Camera",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Use faster global illumination technique for high roughness surfaces",
+          "identifier": "use_fast_gi",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Fast GI Approximation",
+          "type": "BOOLEAN",
+          "value": true
+        },
+        {
+          "description": "Enable the ray-tracing module",
+          "identifier": "use_raytracing",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Use Ray-Tracing",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Enable jittered shadows on the viewport. (Jittered shadows are always enabled for final renders).",
+          "identifier": "use_shadow_jitter_viewport",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Jittered Shadows (Viewport)",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Enable shadow casting from lights",
+          "identifier": "use_shadows",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadows",
+          "type": "BOOLEAN",
+          "value": true
+        },
+        {
+          "description": "Denoise image using temporal reprojection (can leave some ghosting)",
+          "identifier": "use_taa_reprojection",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Viewport Denoising",
+          "type": "BOOLEAN",
+          "value": true
+        },
+        {
+          "description": "Cast shadows from volumetric materials onto volumetric materials (Very expensive)",
+          "identifier": "use_volumetric_shadows",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Volumetric Shadows",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Maximum light contribution, reducing noise",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "volumetric_light_clamp",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Clamp",
+          "softMax": 3.4028234663852886e+38,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "Maximum surface intersection count used by the accurate volume intersection method. Will create artifact if it is exceeded. Higher count increases VRAM usage.",
+          "hardMax": 16,
+          "hardMin": 1,
+          "identifier": "volumetric_ray_depth",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Volume Max Ray Depth",
+          "softMax": 16,
+          "softMin": 1,
+          "type": "INT",
+          "value": 16
+        },
+        {
+          "description": "Distribute more samples closer to the camera",
+          "hardMax": 1.0,
+          "hardMin": 0.0,
+          "identifier": "volumetric_sample_distribution",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Exponential Sampling",
+          "softMax": 1.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.800000011920929
+        },
+        {
+          "description": "Number of steps to compute volumetric effects. Higher step count increase VRAM usage and quality.",
+          "hardMax": 256,
+          "hardMin": 1,
+          "identifier": "volumetric_samples",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Steps",
+          "softMax": 256,
+          "softMin": 1,
+          "type": "INT",
+          "value": 64
+        },
+        {
+          "description": "Number of samples to compute volumetric shadowing",
+          "hardMax": 128,
+          "hardMin": 1,
+          "identifier": "volumetric_shadow_samples",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Volumetric Shadow Samples",
+          "softMax": 128,
+          "softMin": 1,
+          "type": "INT",
+          "value": 16
+        }
+      ],
+      "rnaType": "SceneEEVEE"
+    },
+    {
+      "label": "scene.render",
+      "properties": [
+        {
+          "description": "Maximum X value for the render region",
+          "hardMax": 1.0,
+          "hardMin": 0.0,
+          "identifier": "border_max_x",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Region Maximum X",
+          "softMax": 1.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 1.0
+        },
+        {
+          "description": "Maximum Y value for the render region",
+          "hardMax": 1.0,
+          "hardMin": 0.0,
+          "identifier": "border_max_y",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Region Maximum Y",
+          "softMax": 1.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 1.0
+        },
+        {
+          "description": "Minimum X value for the render region",
+          "hardMax": 1.0,
+          "hardMin": 0.0,
+          "identifier": "border_min_x",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Region Minimum X",
+          "softMax": 1.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "Minimum Y value for the render region",
+          "hardMax": 1.0,
+          "hardMin": 0.0,
+          "identifier": "border_min_y",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Region Minimum Y",
+          "softMax": 1.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "The device to use to process the denoise nodes in the compositor",
+          "enumItems": [
+            "AUTO",
+            "CPU",
+            "GPU"
+          ],
+          "identifier": "compositor_denoise_device",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Compositor Denoise Node Device",
+          "type": "ENUM",
+          "value": "AUTO"
+        },
+        {
+          "description": "The quality used by denoise nodes during the compositing of final renders if the nodes' quality option is set to Follow Scene",
+          "enumItems": [
+            "HIGH",
+            "BALANCED",
+            "FAST"
+          ],
+          "identifier": "compositor_denoise_final_quality",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Compositor Final Denoise Quality",
+          "type": "ENUM",
+          "value": "HIGH"
+        },
+        {
+          "description": "The quality used by denoise nodes during viewport and interactive compositing if the nodes' quality option is set to Follow Scene",
+          "enumItems": [
+            "HIGH",
+            "BALANCED",
+            "FAST"
+          ],
+          "identifier": "compositor_denoise_preview_quality",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Compositor Preview Denoise Quality",
+          "type": "ENUM",
+          "value": "BALANCED"
+        },
+        {
+          "description": "Amount of dithering noise added to the rendered image to break up banding",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "dither_intensity",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Dither Intensity",
+          "softMax": 2.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 1.0
+        },
+        {
+          "description": "Engine to use for rendering",
+          "enumItems": [
+            "BLENDER_EEVEE"
+          ],
+          "identifier": "engine",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Engine",
+          "type": "ENUM",
+          "value": "CYCLES"
+        },
+        {
+          "description": "Width over which the reconstruction filter combines samples",
+          "hardMax": 500.0,
+          "hardMin": 0.0,
+          "identifier": "filter_size",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Filter Size",
+          "softMax": 10.0,
+          "softMin": 0.009999999776482582,
+          "type": "FLOAT",
+          "value": 1.5
+        },
+        {
+          "description": "More than one rendering engine is available",
+          "identifier": "has_multiple_engines",
+          "isArray": false,
+          "isReadOnly": true,
+          "name": "Multiple Engines",
+          "type": "BOOLEAN",
+          "value": true
+        },
+        {
+          "description": "Offset for the shutter's time interval, allows to change the motion blur trails",
+          "enumItems": [
+            "START",
+            "CENTER",
+            "END"
+          ],
+          "identifier": "motion_blur_position",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Motion Blur Position",
+          "type": "ENUM",
+          "value": "CENTER"
+        },
+        {
+          "description": "Time taken in frames between shutter open and close",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "motion_blur_shutter",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shutter",
+          "softMax": 1.0,
+          "softMin": 0.009999999776482582,
+          "type": "FLOAT",
+          "value": 0.5
+        },
+        {
+          "description": "Curve defining the shutter's openness over time",
+          "identifier": "motion_blur_shutter_curve",
+          "isArray": false,
+          "isReadOnly": true,
+          "name": "Shutter Curve",
+          "type": "POINTER",
+          "value": "bpy.data.scenes['SHOT_102']...CurveMapping"
+        },
+        {
+          "description": "Maximum number of CPU cores to use simultaneously while rendering (for multi-core/CPU systems)",
+          "hardMax": 1024,
+          "hardMin": 1,
+          "identifier": "threads",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Threads",
+          "softMax": 1024,
+          "softMin": 1,
+          "type": "INT",
+          "value": 8
+        },
+        {
+          "description": "Determine the amount of render threads used",
+          "enumItems": [
+            "AUTO",
+            "FIXED"
+          ],
+          "identifier": "threads_mode",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Threads Mode",
+          "type": "ENUM",
+          "value": "FIXED"
+        },
+        {
+          "description": "Render a user-defined render region, within the frame size",
+          "identifier": "use_border",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Render Region",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Crop the rendered frame to the defined render region size",
+          "identifier": "use_crop_to_border",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Crop to Render Region",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Lock interface during rendering in favor of giving more memory to the renderer",
+          "identifier": "use_lock_interface",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Lock Interface",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Use multi-sampled 3D scene motion blur",
+          "identifier": "use_motion_blur",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Motion Blur",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Active render engine supports spherical stereo rendering",
+          "identifier": "use_spherical_stereo",
+          "isArray": false,
+          "isReadOnly": true,
+          "name": "Use Spherical Stereo",
+          "type": "BOOLEAN",
+          "value": true
+        }
+      ],
+      "rnaType": "RenderSettings"
+    },
+    {
+      "label": "scene.display_settings",
+      "properties": [],
+      "rnaType": "ColorManagedDisplaySettings"
+    },
+    {
+      "label": "scene.view_settings",
+      "properties": [],
+      "rnaType": "ColorManagedViewSettings"
+    },
+    {
+      "label": "preferences.system",
+      "properties": [
+        {
+          "description": "Number of samples used by the audio mixing buffer",
+          "enumItems": [
+            "SAMPLES_256",
+            "SAMPLES_512",
+            "SAMPLES_1024",
+            "SAMPLES_2048",
+            "SAMPLES_4096",
+            "SAMPLES_8192",
+            "SAMPLES_16384",
+            "SAMPLES_32768"
+          ],
+          "identifier": "audio_mixing_buffer",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Audio Mixing Buffer",
+          "type": "ENUM",
+          "value": "SAMPLES_2048"
+        },
+        {
+          "description": "Audio sample format",
+          "enumItems": [
+            "U8",
+            "S16",
+            "S24",
+            "S32",
+            "FLOAT",
+            "DOUBLE"
+          ],
+          "identifier": "audio_sample_format",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Audio Sample Format",
+          "type": "ENUM",
+          "value": "FLOAT"
+        },
+        {
+          "description": "Audio sample rate",
+          "enumItems": [
+            "RATE_44100",
+            "RATE_48000",
+            "RATE_96000",
+            "RATE_192000"
+          ],
+          "identifier": "audio_sample_rate",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Audio Sample Rate",
+          "type": "ENUM",
+          "value": "RATE_48000"
+        },
+        {
+          "description": "Number of shader compilation threads or subprocesses, clamped at the max threads supported by the CPU (requires restarting Blender for changes to take effect). A higher number increases the RAM usage while reducing compilation time. A value of 0 will use automatic configuration. (OpenGL only)",
+          "hardMax": 32,
+          "hardMin": 0,
+          "identifier": "gpu_shader_workers",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shader Compilation Workers",
+          "softMax": 32,
+          "softMin": 0,
+          "type": "INT",
+          "value": 0
+        },
+        {
+          "description": "Make this Blender version open blend files for all users. Requires elevated privileges.",
+          "identifier": "register_all_users",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Register for All Users",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "Display tool/property regions over the main region",
+          "identifier": "use_region_overlap",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Region Overlap",
+          "type": "BOOLEAN",
+          "value": true
+        }
+      ],
+      "rnaType": "PreferencesSystem"
+    }
+  ],
+  "explicitNonClaims": [
+    "RNA property presence does not prove that the property caused B15-B18 differences.",
+    "A property description is API metadata, not a determinism guarantee.",
+    "The inventory does not mutate or save the source blend.",
+    "Unexposed internal renderer state may exist beyond RNA."
+  ],
+  "lights": [
+    {
+      "energy": 1450.0,
+      "name": "KEY_WINDOW_DATA",
+      "properties": [
+        {
+          "description": "Actual data-block from .blend file (Main database) that generated that evaluated one",
+          "identifier": "original",
+          "isArray": false,
+          "isReadOnly": true,
+          "name": "Original ID",
+          "type": "POINTER",
+          "value": "bpy.data.lights['KEY_WINDOW_DATA']"
+        },
+        {
+          "description": "Shadow map clip start, below which objects will not generate shadows",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 9.999999974752427e-07,
+          "identifier": "shadow_buffer_clip_start",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadow Buffer Clip Start",
+          "softMax": 3.4028234663852886e+38,
+          "softMin": 0.0010000000474974513,
+          "type": "FLOAT",
+          "value": 0.05000000074505806
+        },
+        {
+          "description": "Blur shadow aliasing using Percentage Closer Filtering",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "shadow_filter_radius",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadow Filter Radius",
+          "softMax": 5.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 1.0
+        },
+        {
+          "description": "Apply shadow tracing to each jittered sample to reduce under-sampling artifacts",
+          "hardMax": 100.0,
+          "hardMin": 0.0,
+          "identifier": "shadow_jitter_overblur",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadow Jitter Overblur",
+          "softMax": 20.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 10.0
+        },
+        {
+          "description": "Minimum size of a shadow map pixel. Higher values use less memory at the cost of shadow quality.",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "shadow_maximum_resolution",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadows Resolution Limit",
+          "softMax": 0.019999999552965164,
+          "softMin": 9.999999747378752e-05,
+          "type": "FLOAT",
+          "value": 0.0010000000474974513
+        },
+        {
+          "description": "Light size for ray shadow sampling (Raytraced shadows)",
+          "hardMax": 3.4028234663852886e+38,
+          "hardMin": 0.0,
+          "identifier": "shadow_soft_size",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadow Soft Size",
+          "softMax": 100.0,
+          "softMin": 0.0,
+          "type": "FLOAT",
+          "value": 0.0
+        },
+        {
+          "description": "Limit the resolution at 1 unit from the light origin instead of relative to the shadowed pixel",
+          "identifier": "use_absolute_resolution",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Absolute Resolution Limit",
+          "type": "BOOLEAN",
+          "value": false
+        },
+        {
+          "description": "",
+          "identifier": "use_shadow",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "use_shadow",
+          "type": "BOOLEAN",
+          "value": true
+        },
+        {
+          "description": "Enable jittered soft shadows to increase shadow precision (disabled in viewport unless enabled in the render settings). Has a high performance impact.",
+          "identifier": "use_shadow_jitter",
+          "isArray": false,
+          "isReadOnly": false,
+          "name": "Shadow Jitter",
+          "type": "BOOLEAN",
+          "value": false
+        }
+      ],
+      "type": "AREA",
+      "users": [
+        "KEY_WINDOW"
+      ]
+    }
+  ],
+  "matchedTokens": [
+    "sample",
+    "seed",
+    "random",
+    "noise",
+    "jitter",
+    "temporal",
+    "taa",
+    "reprojection",
+    "shadow",
+    "ray",
+    "thread",
+    "gi",
+    "motion",
+    "dither"
+  ],
+  "observedRenderState": {
+    "ditherIntensity": 1.0,
+    "engine": "CYCLES",
+    "frameEnd": 144,
+    "frameStart": 1,
+    "threads": 8,
+    "threadsMode": "FIXED"
+  },
+  "runtime": {
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderVersion": "5.2.0 LTS",
+    "debugValue": 0,
+    "ocioConfigName": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+    "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.13"
+  },
+  "source": {
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "sceneBlendSha256": "2a5053601cbd98d7b404069454ff7b2b710aa885541c4972b5d3f6c216511b0b",
+    "sceneBlendUri": "experiments/compile-receipt-v0-1/evidence/B02-A/scene.blend",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+  },
+  "version": "0.1.0"
+}

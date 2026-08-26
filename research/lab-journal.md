@@ -289,6 +289,27 @@ Verdict: `NON_MONOTONIC_OR_UNSTABLE`. Sample 1 failed to replicate B17 exactness
 
 Artifacts: `experiments/eevee-sampling-dose-response-v0-1/results.json`, `experiments/eevee-sampling-dose-response-v0-1/evidence/` and `research/2026-08-26-b18-eevee-sampling-dose-response-result.md`.
 
+## J-012 · Eevee reproducibility-control inventory
+
+Type: live exploratory real-Blender audit, 2026-08-26.
+
+B18 falsified a simple sample-count boundary. Before selecting the next causal factor, a Blender 5.2 RNA inventory queried the exact receipt-bound B02 scene for sample, seed, random, noise, jitter, temporal, TAA, reprojection, shadow, ray, thread, GI, motion and dither controls.
+
+The first attempt failed on a relative OCIO path and an invalid assumption that every RNA property exposes `is_array`. The second script run exited zero but Blender had rejected the specified OCIO file and fallen back; it was rejected as invalid. The accepted third run used the receipt-bound OCIO path/SHA and removed absolute local paths from its artifact.
+
+Observation:
+
+- Fast GI is enabled with 2 GI rays and 8 steps per ray;
+- TAA temporal reprojection is enabled;
+- fixed render threads report 8;
+- Eevee ray tracing, camera bokeh jitter, light shadow jitter and volumetric shadows are disabled;
+- the only area light has `use_shadow_jitter = false`;
+- no explicit render seed/random control was exposed by the queried RNA domains.
+
+This is an inventory, not a causal result. It makes Fast GI and TAA reprojection the next evidence-supported intervention pair. B19 should pre-register a 2×2 on/off factorial with a fresh on/on baseline.
+
+Artifacts: `experiments/eevee-control-inventory-v0-1/results.json` and `research/2026-08-26-eevee-control-inventory.md`.
+
 ## Journal rule for future work
 
 Every promoted result must record:
