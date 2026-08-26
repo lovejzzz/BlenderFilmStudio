@@ -1,0 +1,152 @@
+{
+  "documentType": "BFS_BLIND_TEMPORAL_REVIEW_SPEC",
+  "specVersion": "0.1.0",
+  "status": "pre-registered",
+  "question": "Under recorded viewing conditions, do observers report visible temporal instability or a stability difference among the three B25 holdout sequences?",
+  "evidenceBasis": {
+    "b25ResultSha256": "1a49d66dd30e7febf23db6c48b455f472ec1d657b37980f8da53fd0c69f15e83",
+    "b25Decision": "STATIC_ONLY_ENVELOPE_FAIL",
+    "b25TemporalPassTransitions": 429,
+    "b25StaticPassFrames": 430,
+    "b25HumanReviewStatus": "PENDING"
+  },
+  "sourceIdentity": {
+    "A_manifest_sha256": "238b65faf9d63659b7a97586ff934822767145ce7e6c133b167fc4c3f86e6d9c",
+    "B_manifest_sha256": "24dc7aeb18cdf44df669f059149e75278e65d0b1c3071d8615936a0119722e40",
+    "C_manifest_sha256": "4e544a0e7255c75d6417528eb308888c5f7f3aad4c67e9c660d0ae4bd2b79240",
+    "framesPerSequence": 144,
+    "width": 960,
+    "height": 540,
+    "fps": 24,
+    "durationSeconds": 6,
+    "sourceFormat": "PNG8_RGBA",
+    "sourceAlphaContract": "all source alpha samples equal 1.0"
+  },
+  "playbackCarrier": {
+    "container": "WebM",
+    "codec": "VP9",
+    "profile": "Profile 1",
+    "pixelFormat": "gbrp",
+    "lossless": true,
+    "audio": false,
+    "ffmpegSha256": "1332dc2de372bade9a8a63da0d6cdfab9de97fcefbae707bcc0b0506e1203327",
+    "ffprobeSha256": "4322275c1c2ac6ba15c695b288788bc1204e75211b3d5c030e5812c82a6dff73",
+    "acceptance": "Decode all 144 frames back to RGB and require 144/144 exact pixels, maximum error 0, zero changed pixels; alpha may be omitted only after verifying every source alpha sample is opaque."
+  },
+  "observerDesign": {
+    "formalTargetValidObservers": 18,
+    "formalMinimumValidObservers": 15,
+    "permutationCount": 6,
+    "balanceAtTarget": "each of the six A/B/C order permutations is assigned to exactly three observers",
+    "observerMustNotHaveDirectlyDevelopedSystem": true,
+    "reportExpertise": true,
+    "recordVisionScreening": true,
+    "fewerThan15Classification": "INFORMAL_ONLY",
+    "developerOwnerPilotClassification": "INTERFACE_PILOT_ONLY"
+  },
+  "blinding": {
+    "visibleLabels": ["CLIP-01", "CLIP-02", "CLIP-03"],
+    "underlyingLabelsHiddenUntilResponsesLocked": ["A", "B", "C"],
+    "sixOrderPermutations": ["ABC", "ACB", "BAC", "BCA", "CAB", "CBA"],
+    "mappingCommitment": "SHA-256 over canonical session schedule plus a 32-byte random salt",
+    "sealedMappingLocation": "ignored local work directory, excluded from published package and observer interface",
+    "unblindOnlyAfterResponseLock": true
+  },
+  "primarySession": {
+    "playbackRate": 1.0,
+    "playsPerClip": 2,
+    "clipOrder": "assigned blinded permutation",
+    "seeking": false,
+    "pausing": false,
+    "looping": false,
+    "requiredSingleClipRatings": {
+      "temporalInstability": ["NONE", "BARELY_VISIBLE", "MILD", "OBVIOUS", "SEVERE"],
+      "confidence": ["LOW", "MEDIUM", "HIGH"],
+      "optionalTimeAndLocationNote": true
+    },
+    "requiredPairwiseChoices": ["LEFT_MORE_STABLE", "INDISTINGUISHABLE", "RIGHT_MORE_STABLE"],
+    "pairCountPerObserver": 3
+  },
+  "secondaryDiagnosticSession": {
+    "allowedOnlyAfterPrimaryResponsesLocked": true,
+    "mayPauseSeekOrReplay": true,
+    "resultsMustBeReportedSeparately": true
+  },
+  "viewingRecord": {
+    "required": [
+      "observer anonymous id",
+      "observer expertise",
+      "direct development involvement",
+      "visual acuity screening status",
+      "colour-vision screening status",
+      "display manufacturer and model",
+      "display native resolution",
+      "display refresh rate",
+      "display scaling and brightness setting",
+      "player or browser name and version",
+      "operating system",
+      "viewing distance",
+      "ambient lighting description",
+      "session start/end timestamps",
+      "assigned schedule commitment",
+      "carrier file hashes"
+    ]
+  },
+  "validObserverGate": {
+    "completedAllPrimaryTrials": true,
+    "noPlaybackFailure": true,
+    "carrierHashesAndRoundtripExact": true,
+    "requiredViewingRecordComplete": true,
+    "notDirectlyInvolvedInDevelopment": true,
+    "visionScreeningMeetsProtocol": true,
+    "responsesLockedBeforeUnblinding": true
+  },
+  "decisionRule": {
+    "INTERFACE_PILOT_ONLY": "One or more developer/owner sessions validate the package interface but cannot contribute to formal perception claims.",
+    "INFORMAL_REVIEW_ONLY": "At least one but fewer than 15 valid independent observers complete the protocol; publish responses descriptively without a formal visibility conclusion.",
+    "FORMAL_REVIEW_INCOMPLETE": "15-17 valid independent observers complete the protocol; preserve results and recruit to the balanced target of 18 before a production gate decision.",
+    "NO_DIFFERENCE_OBSERVED_UNDER_TEST_CONDITIONS": "All 18 valid observers rate every clip NONE or BARELY_VISIBLE and choose INDISTINGUISHABLE for all three pairs.",
+    "VISIBLE_TEMPORAL_DIFFERENCE_SUPPORT": "At least two valid independent observers identify the same clip/time region as MILD or worse, or choose the same directional pair preference with an overlapping time/location note.",
+    "OBSERVER_DISAGREEMENT": "The 18-observer target is complete but neither formal outcome rule is met.",
+    "INVALID_REVIEW": "Any carrier, identity, schedule, blinding, response-lock, viewing-record or validity gate fails."
+  },
+  "executionContract": {
+    "formalPackageGeneratorMustNotExistAtFreeze": true,
+    "encodeEachSourceSequenceIndependently": true,
+    "verifyEveryCarrierByFullRGBRoundtrip": true,
+    "doNotPublishSealedMappingBeforeResponseLock": true,
+    "doNotCountDeveloperOwnerPilotAsFormalObserver": true,
+    "doNotClaimHumanResultWhileStatusIsPending": true,
+    "negativeAndDisagreementResultsRemainPublished": true
+  },
+  "requiredNegativeCases": [
+    "B26 spec identity mismatch",
+    "B25 result identity mismatch",
+    "source manifest identity mismatch",
+    "ffmpeg or ffprobe identity mismatch",
+    "source frame hash mismatch",
+    "source alpha is not fully opaque",
+    "carrier metadata mismatch",
+    "carrier decoded frame count mismatch",
+    "carrier RGB roundtrip differs by any pixel",
+    "duplicate or missing carrier",
+    "invalid or unbalanced session schedule",
+    "mapping commitment mismatch",
+    "sealed mapping exposed to observer package",
+    "primary playback order mismatch",
+    "primary controls allow seek/pause",
+    "required viewing field missing",
+    "developer-owner pilot counted as formal",
+    "response mutated after lock",
+    "unblinding occurs before response lock",
+    "human conclusion emitted below the valid-observer gate"
+  ],
+  "explicitNonClaims": [
+    "An automated metric or carrier roundtrip pass is not a human visibility result.",
+    "A developer/owner pilot can validate only the interface and recording workflow.",
+    "Even a formal pass applies only to this six-second proxy, tested displays, viewing conditions and observer sample.",
+    "The protocol does not validate scene-linear EXR masters, motion blur, 4K cinema projection, another scene or another render engine.",
+    "Absence of reported difference is not proof that no difference exists.",
+    "The study evaluates temporal stability differences, not acting, composition, narrative quality or overall cinematic merit."
+  ]
+}
