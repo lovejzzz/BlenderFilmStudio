@@ -1705,6 +1705,20 @@ The first formal D4 compositor output does not yet exist. Next: freeze runner, B
 
 Artifacts: `specs/adaptive-vector-blur-semantics-derivation.v0.1.json`, `experiments/adaptive-vector-blur-semantics-preflight-v0-1/observation.json` and `research/2026-08-27-b52-d4-adaptive-vector-blur-semantics-derivation-protocol.md`.
 
+## J-103 · B52-D4 tools freeze after a retained Blender counterexample
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+The D4 Blender worker, matrix runner, analyzer, independent audit and six-test synthetic contract suite were frozen and pushed at commit `842af415f7a29393a81ac94b24744f05d440baa5`. The frozen receipt binds seven tool blobs because the analyzer also imports the D2 common library and D3 spatial analyzer.
+
+Three non-formal real-Blender worker probes were retained rather than silently discarded. The first failed before rendering because Blender 5.2 exposes the Group Output socket with visible name `Image` but internal identifier `Socket_0`; the draft graph contract had incorrectly expected the identifier to equal the name. After correcting and testing that exact boundary, two fresh CPU/four-thread Blender processes each evaluated the real four-node compositor and wrote RGBA32 EXRs. Their container hashes differed, but both decoded to the same bit-exact pixel hash `ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631`. This confirms why the preregistered repeat gate compares decoded pixels rather than mutable EXR container bytes. These scratch outputs are development evidence only and cannot be promoted into D4 measurements.
+
+The post-freeze zero-formal-output preflight then matched all seven frozen tools, five parent files, 54 parent EXRs, Blender executable and OCIO identities. It performed zero Blender processes, zero render calls and zero formal measurements; the formal output root remained absent. Disk admission passed narrowly: 107,916,320,768 bytes were free, and the projected 256 MiB write left 107,647,885,312 bytes, still above the frozen 100 GiB reserve.
+
+Next: execute the unchanged 36-process matrix, retain any failed cell, analyze only after all outputs exist, and run byte-exact independent replay before publishing a claim.
+
+Artifacts: `experiments/adaptive-vector-blur-semantics-preflight-v0-1/worker-smoke-observation.json` and `experiments/adaptive-vector-blur-semantics-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

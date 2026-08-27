@@ -1,0 +1,54 @@
+{
+  "classification": "NON_FORMAL_TOOL_DEVELOPMENT_SMOKE_TEST",
+  "experimentId": "B52-D4",
+  "formalEvidenceEligible": false,
+  "operationCounts": {
+    "blenderProcesses": 3,
+    "blenderRenderCalls": 2,
+    "cyclesRayRenders": 0,
+    "formalMeasurements": 0,
+    "formalOutputs": 0
+  },
+  "runtime": {
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderVersion": "5.2.0 LTS",
+    "compositorDevice": "CPU",
+    "threads": 4,
+    "threadsMode": "FIXED"
+  },
+  "schemaVersion": "bfs.adaptiveVectorBlurWorkerSmokeObservation.v0.1",
+  "source": {
+    "bytes": 3243613,
+    "sha256": "16f13105e60ada167b559b27dfdcd61095030b0eb8ebb5dfb0d81e9d16af2ee2",
+    "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_PROD_T010_M0_R1/artifacts/production.exr"
+  },
+  "trials": [
+    {
+      "failure": "COMPOSITOR_GRAPH_CONTRACT",
+      "observedGroupOutputIdentifier": "Socket_0",
+      "observedGroupOutputName": "Image",
+      "renderCalls": 0,
+      "status": "FAILED_AS_RETAINED_COUNTEREXAMPLE",
+      "trial": 1
+    },
+    {
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "outputBytes": 1144592,
+      "outputContainerSha256": "dd12e03197be317638d57cf3f714eacf546f14ca26b9df3c6536dcb2d180c7ee",
+      "renderCalls": 1,
+      "status": "PASS",
+      "trial": 2
+    },
+    {
+      "decodedExactToTrial2": true,
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "outputBytes": 1144592,
+      "outputContainerByteExactToTrial2": false,
+      "outputContainerSha256": "0c61af47d33aa79d110c673c01675ba74f684332936a18a1bdd44ecfee110060",
+      "renderCalls": 1,
+      "status": "PASS",
+      "trial": 3
+    }
+  ],
+  "interpretation": "The Blender 5.2 Group Output socket has visible name Image but internal identifier Socket_0. Two fresh successful processes produced byte-different EXR containers with bit-exact decoded RGBA32 pixels. The preregistered decoded-pixel repeat gate is therefore the relevant deterministic contract; these scratch outputs are not formal D4 evidence."
+}
