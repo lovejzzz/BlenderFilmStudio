@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "bfs.blenderStaticRadiusInterventionConsumerReport.v0.1",
+  "experimentId": "B52-D12.5-C2",
+  "producer": "node",
+  "fixtureId": "STATIC_BEVELED_WEDGE_PANEL_109X67",
+  "repeat": 1,
+  "pid": 23789,
+  "runtime": {
+    "node": "v26.5.0",
+    "nodeExecutableSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "adapter": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1/synthetic/adapter-report.json",
+    "sha256": "166c0739653b942dfb710df38a9cc044c02ce74fc49cac86d3338e90171b2bb9",
+    "reportHash": "e48728012c0ca3375ad4fc9938e56ea486624eaac3f76a39cd7e58e1c89fb7f1"
+  },
+  "contract": {
+    "common": "Both radii consume the same adapted scene-linear float32 Combined, Vector and Object Index arrays. Reconstruction arithmetic and previous-tap owner/alpha checks are identical to D12.3.",
+    "radius2Control": "Current pixel and every current neighbor within Chebyshev radius 2 must share the same registered owner and alpha >0.999; all four previous bilinear taps must share that owner and alpha.",
+    "radius3Intervention": "Identical rule with current-neighborhood Chebyshev radius 3; previous bilinear-tap rule is unchanged.",
+    "subsetInvariant": "Every radius-3 interior pixel must also be radius-2 interior. Radius-2-only pixels must have current-owner silhouette distance exactly 3.",
+    "boundaryRule": "Every registered owner pixel excluded from a radius interior forms that radius's boundary diagnostic domain and preserves current-frame RGB; cross-owner and out-of-bounds taps fail closed."
+  },
+  "arrays": {
+    "radius2Reconstructed": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1/synthetic/node/arrays/radius2-reconstructed.rgba32",
+      "sha256": "0fea604bf173e5d12ea9554a3f2edb71d0b4cff2cdf08f044a0f799de87882bf",
+      "bytes": 116848,
+      "shape": [
+        67,
+        109,
+        4
+      ],
+      "dtype": "little-endian-float32"
+    },
+    "radius2Interior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1/synthetic/node/arrays/radius2-interior.u8",
+      "sha256": "ed9b34d5f3fbb165f8afaa589ec7c01960013384a7ace4aed10285856b95ec69",
+      "bytes": 7303,
+      "shape": [
+        67,
+        109
+      ],
+      "dtype": "uint8"
+    },
+    "radius2Boundary": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1/synthetic/node/arrays/radius2-boundary.u8",
+      "sha256": "56227077082e013b4aa11c5044ec0202d14c35be16716af4ea85ee344b52c76e",
+      "bytes": 7303,
+      "shape": [
+        67,
+        109
+      ],
+      "dtype": "uint8"
+    },
+    "radius3Reconstructed": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1/synthetic/node/arrays/radius3-reconstructed.rgba32",
+      "sha256": "e693e217aae644c717794865ab9ef2f36bce2c57a2967558dfc92fa92da7b8df",
+      "bytes": 116848,
+      "shape": [
+        67,
+        109,
+        4
+      ],
+      "dtype": "little-endian-float32"
+    },
+    "radius3Interior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1/synthetic/node/arrays/radius3-interior.u8",
+      "sha256": "e3c5b4d8e0ad24e9b298329f608dfcdd8c4134d3ea991b7f64a33c1a215003bf",
+      "bytes": 7303,
+      "shape": [
+        67,
+        109
+      ],
+      "dtype": "uint8"
+    },
+    "radius3Boundary": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1/synthetic/node/arrays/radius3-boundary.u8",
+      "sha256": "8775a9d539374d153fcdbadc2ca90b08766a6d41a65789e21084b781795aa16a",
+      "bytes": 7303,
+      "shape": [
+        67,
+        109
+      ],
+      "dtype": "uint8"
+    }
+  },
+  "integrity": "external dual typed-envelope sidecars",
+  "operationCounts": {
+    "consumerProcesses": 1,
+    "radiusEvaluations": 2,
+    "pixelsVisited": 14606,
+    "modelCalls": 0,
+    "networkCalls": 0
+  }
+}

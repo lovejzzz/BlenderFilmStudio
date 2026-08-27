@@ -2685,6 +2685,16 @@ C2 spec SHA-256 is `d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c
 
 Next: commit C2 before editing tools, then freeze the exact delta and rerun preflight.
 
+## J-171 · D12.5-C2 exact-delta preflight is accepted
+
+Date: 2026-08-27 · Type: CORRECTED FROZEN-TOOL PREFLIGHT · Formal outputs/renders: 0/0
+
+The corrected tools were frozen at `a817ed9f4bc8d1c47def8123447576797d87f92f`. Relative to the invalid-run analyzer, the scientific code delta is exactly the registered built-in `bool` cast; the remaining edits bind the C2 spec identity. The new preflight again passed all 14 runtime, frozen-blob, syntax, analyzer-independence, synthetic paired-radius, three-fixture zero-render and root-freshness checks.
+
+Disk admission observed 107,569,524,736 bytes available; the 20 MiB projection leaves 107,548,553,216 bytes, 174,370,816 bytes above the unchanged reserve. Both C2 roots were fresh at admission. Preflight file SHA-256: `e848e30c03aa0af3db0e6c8ebd24c8e8eb05d90b813ced48b65b5428e2ef4c9e`.
+
+Next: commit this admission, then rerun all 55 processes from the C2 root without reusing invalid-run artifacts.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
