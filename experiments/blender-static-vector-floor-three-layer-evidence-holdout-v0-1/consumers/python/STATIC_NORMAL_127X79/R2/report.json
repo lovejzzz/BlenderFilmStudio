@@ -1,0 +1,54 @@
+{
+  "adapter": {
+    "reportHash": "d59ae470b7b768ef1659c48cc3f2cbd1b52dacbe40033b9518fea48057b0ed0b",
+    "sha256": "078cfb05bc661fe2c74ebc94dd26935fbbf7a47c490cf52da869d764a7780982",
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-vector-floor-three-layer-evidence-holdout-v0-1/adapters/STATIC_NORMAL_127X79/R2/report.json"
+  },
+  "arrays": {
+    "reconstructed": {
+      "bytes": 160528,
+      "dtype": "little-endian-float32",
+      "sha256": "2a5469116574d93deaacdbe72d0e88df3be21106a0785b52347d9589c46029df",
+      "shape": [
+        79,
+        127,
+        4
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-vector-floor-three-layer-evidence-holdout-v0-1/consumers/python/STATIC_NORMAL_127X79/R2/arrays/reconstructed.rgba32"
+    },
+    "valid": {
+      "bytes": 10033,
+      "dtype": "uint8",
+      "sha256": "583a4a3a894e804a74c9ae649e6f0f3138b4ba44e8d587992050f17b01c9e214",
+      "shape": [
+        79,
+        127
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-vector-floor-three-layer-evidence-holdout-v0-1/consumers/python/STATIC_NORMAL_127X79/R2/arrays/valid.u8"
+    }
+  },
+  "contract": {
+    "kernel": "clip-boundary bilinear; scalar float64 weights and accumulation in tap order TL, TR, BL, BR; one final float32 cast per channel",
+    "orientation": "decoded arrays are top-left; previous sample coordinate is (x + Vector.X, y - Vector.Y)",
+    "producerMetrics": "forbidden as decision inputs; producers emit payloads and identity metadata only",
+    "validity": "four previous owner/alpha taps and current owner/alpha equal the registered surface; four-pixel image margin"
+  },
+  "experimentId": "B52-D12.2",
+  "fixtureId": "STATIC_NORMAL_127X79",
+  "integrity": "external dual typed-envelope sidecars",
+  "operationCounts": {
+    "consumerProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "pixelsVisited": 10033
+  },
+  "pid": 20138,
+  "producer": "python",
+  "repeat": 2,
+  "runtime": {
+    "numpy": "2.3.4",
+    "python": "3.13.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35"
+  },
+  "schemaVersion": "bfs.blenderStaticVectorFloorConsumerReport.v0.1"
+}

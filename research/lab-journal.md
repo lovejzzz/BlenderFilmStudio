@@ -2523,6 +2523,22 @@ Next: commit this immutable admission, then create the formal root exactly once 
 
 Artifact: `experiments/blender-static-vector-floor-three-layer-evidence-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-159 · D12.2 supports bounded static residue and falsifies exact zero
+
+Date: 2026-08-27 · Type: COMPLETE REAL-BLENDER FRESH HOLDOUT · Runtime: 55 unique child PIDs
+
+The single-use D12.2 matrix completed all twelve real Blender 5.2 Cycles sources, six adapters, twelve independent consumers, twenty-four typed-envelope encoders and one analyzer. Every child PID was unique, every process exited zero and all 24 registered attacks passed. No model or network call occurred.
+
+Previous/current source RGB arrays were exact under identical authored transforms, but all six static cells contained nonzero Vector components and nonzero bilinear reconstruction error. Across the three fresh fixtures, maximum Vector magnitude per component was `7.62939453125e-6`, `1.52587890625e-5` and `2.288818359375e-5 px`; maximum RGB error was `8.94069671631e-8`, `1.19209289551e-7` and `1.78813934326e-7`. Both repeats were exact. The largest values retain approximately 10.67× headroom under the registered Vector and RGB-maximum tolerances.
+
+The formal verdict is `BLENDER_STATIC_VECTOR_FLOOR_WITHIN_REGISTERED_TOLERANCE`; the orthogonal classification is `STATIC_EXACT_ZERO_FALSIFIED`. This supports a bounded semantic tolerance and directly rejects a universal exact-zero gate.
+
+The three-layer evidence design also held: Python/Node reconstruction payloads matched 6/6, both frozen typed-envelope encoders matched for every one of twelve producer documents, and the independent analyzer recomputed all decision metrics from arrays while producers emitted no metrics. Result file SHA-256 is `948ffe7f6b18bc7a5458352c545570ec1a15f9975c2ae8250de3670ac7cf3036`; receipt file SHA-256 is `aa675e9d2cefb9e7ce3b8f53dc98437ddb393ae95b7d5cdb8773d71bee10ee5f`.
+
+The next boundary is fresh opaque nonplanar/multi-owner static geometry. The observed `1×/2×/3× 2^-17 px` maxima are a measured pattern only and must not be promoted to an internal Blender quantization claim without a separate experiment.
+
+Artifacts: `experiments/blender-static-vector-floor-three-layer-evidence-holdout-v0-1/` and `research/2026-08-27-b52-d12-2-static-vector-floor-three-layer-evidence-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
