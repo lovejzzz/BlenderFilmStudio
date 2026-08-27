@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "bfs.nativeCpuAdaptiveQualityCostPreflightObservation.v0.1",
+  "experimentId": "B52-D1-PREFLIGHT",
+  "date": "2026-08-27",
+  "status": "API_AND_ROSTER_CONFIRMED",
+  "scene": "Blender factory startup",
+  "render": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "resolution": [
+      8,
+      8
+    ],
+    "maxSamples": 4,
+    "adaptive": true,
+    "noiseThreshold": 0.1,
+    "minSamples": 0,
+    "denoising": false
+  },
+  "sampleCountProperty": "bpy.context.view_layer.cycles.pass_debug_sample_count",
+  "observedSubimages": [
+    {
+      "name": "ViewLayer.Combined",
+      "channels": 4
+    },
+    {
+      "name": "ViewLayer.Debug Sample Count",
+      "channels": 1,
+      "minimum": 1.0,
+      "maximum": 1.0,
+      "finite": true
+    }
+  ],
+  "temporaryArtifact": {
+    "sha256": "24d119b6ee035be643d08b9088a74f9963c0438b5ffa4cbddc5eb1296187d55d",
+    "bytes": 1671,
+    "retained": false,
+    "reason": "A factory-startup API probe is not formal production evidence; its compact decoded observation is retained instead."
+  },
+  "operationCounts": {
+    "nativeBlenderProcesses": 1,
+    "renders": 1,
+    "projectBlendFilesOpened": 0,
+    "projectExrsWritten": 0,
+    "sourceFilesModified": 0
+  },
+  "interpretation": "The corrected property produces a one-channel '<view-layer>.Debug Sample Count' EXR subimage. A four-sample trivial scene remained at normalized value 1.0 and does not test adaptive savings."
+}

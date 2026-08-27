@@ -1,0 +1,326 @@
+{
+  "schemaVersion": "bfs.nativeCpuAdaptiveQualityCostDerivationSpec.v0.1",
+  "experimentId": "B52-D1",
+  "status": "PREREGISTERED",
+  "question": "Can Blender 5.2 native Cycles CPU adaptive sampling reduce fresh-process and render-operator cost by at least 20 percent while retaining the frozen three-reference beauty floor, B51-D6 decoded Depth/Cryptomatte semantics, and exact Normal/Vector production passes on both known compositions?",
+  "parents": {
+    "d5Spec": {
+      "uri": "specs/native-cpu-data-pass-sample-cost-derivation.v0.1.json",
+      "sha256": "aff237f81520fb737521563a430159d5d4bb4c8304081983f786e12aebd3163f"
+    },
+    "d6Result": {
+      "uri": "experiments/native-cpu-data-pass-semantic-equivalence-derivation-v0-1/results.json",
+      "sha256": "f79eb1d82e537c9f46e490a76d37e3125651581c9dace8674c2d443e55a47d85",
+      "verdict": "CPU_DATA_SEMANTIC_SAMPLE_REDUCTION_NOT_OBSERVED",
+      "semanticDataSampleFloor": 128
+    },
+    "d6Audit": {
+      "uri": "experiments/native-cpu-data-pass-semantic-equivalence-derivation-v0-1/audit.json",
+      "sha256": "0d4fd7252535044eecd4cfecc9f4636cca1eaa36760795b1a96ad71e1906da15",
+      "status": "PASS"
+    },
+    "b48Spec": {
+      "uri": "specs/codex-worker-quality-cost-holdout.v0.1.json",
+      "sha256": "e26f67d4959b3ebb02eb6ce47e74aeb6d17b49e0ca2523e71691e6b050d803de"
+    },
+    "b48Result": {
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json",
+      "sha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3"
+    },
+    "b48Audit": {
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json",
+      "sha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "status": "PASS"
+    }
+  },
+  "normativeSources": {
+    "adaptiveSampling": {
+      "uri": "https://docs.blender.org/manual/en/latest/render/cycles/render_settings/sampling.html",
+      "claim": "Noise Threshold enables adaptive sampling; lower thresholds trade longer render time for lower noise, and Min Samples sets the minimum before adaptive stopping."
+    },
+    "sampleCountPass": {
+      "uri": "https://docs.blender.org/manual/en/latest/render/layers/passes.html",
+      "claim": "Cycles Sample Count is the samples calculated per pixel divided by maximum samples and is intended to analyze adaptive sampling."
+    },
+    "samplingImplementation": {
+      "uri": "https://developer.blender.org/docs/features/cycles/sampling_patterns/",
+      "claim": "Adaptive sampling estimates error from progressively accumulated sample subsets; effective samples per pixel are not known in advance."
+    }
+  },
+  "nativeBlender": {
+    "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "version": "5.2.0 LTS",
+    "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "bytes": 183237520,
+    "buildHash": "fbe6228777e7"
+  },
+  "rnaContract": {
+    "sceneProperties": [
+      "cycles.use_adaptive_sampling",
+      "cycles.adaptive_threshold",
+      "cycles.adaptive_min_samples",
+      "cycles.samples",
+      "cycles.seed",
+      "cycles.use_denoising"
+    ],
+    "sampleCountPassProperty": "view_layer.cycles.pass_debug_sample_count",
+    "rejectedProbeEvidence": "experiments/native-cpu-adaptive-quality-cost-rna-probe-failure-v0-1/failure.json"
+  },
+  "variantsFromD5": [
+    {
+      "id": "TABLETOP_WIDE",
+      "fixed128Parent": {
+        "uri": "experiments/native-cpu-data-pass-sample-cost-derivation-v0-1/TABLETOP_WIDE_S128_R1/artifacts/production.exr",
+        "sha256": "20ccad28416399c65cc9d20ddf01424546c4aed0ab82db9120e229f54d224986",
+        "bytes": 3222319
+      }
+    },
+    {
+      "id": "INTERIOR_CHAIR",
+      "fixed128Parent": {
+        "uri": "experiments/native-cpu-data-pass-sample-cost-derivation-v0-1/INTERIOR_CHAIR_S128_R1/artifacts/production.exr",
+        "sha256": "6b4f31bb91b8c79dfc5d8aed5c983bb57aa922c6ec24a5b10c06bb745d65efe5",
+        "bytes": 3309351
+      }
+    }
+  ],
+  "referenceCells": [
+    {
+      "id": "REF_A",
+      "maxSamples": 512,
+      "seedOffset": 314159,
+      "adaptive": false,
+      "repeat": 1
+    },
+    {
+      "id": "REF_B",
+      "maxSamples": 512,
+      "seedOffset": 424243,
+      "adaptive": false,
+      "repeat": 1
+    },
+    {
+      "id": "REF_C",
+      "maxSamples": 512,
+      "seedOffset": 535529,
+      "adaptive": false,
+      "repeat": 1
+    }
+  ],
+  "candidateProfiles": [
+    {
+      "id": "FIXED_128",
+      "maxSamples": 128,
+      "seedOffset": 647647,
+      "adaptive": false,
+      "noiseThreshold": 0.01,
+      "minSamples": 0,
+      "role": "CONTROL"
+    },
+    {
+      "id": "ADAPT_AUTO_M0",
+      "maxSamples": 128,
+      "seedOffset": 647647,
+      "adaptive": true,
+      "noiseThreshold": 0.0,
+      "minSamples": 0,
+      "role": "CANDIDATE"
+    },
+    {
+      "id": "ADAPT_T010_M0",
+      "maxSamples": 128,
+      "seedOffset": 647647,
+      "adaptive": true,
+      "noiseThreshold": 0.01,
+      "minSamples": 0,
+      "role": "CANDIDATE"
+    },
+    {
+      "id": "ADAPT_T010_M32",
+      "maxSamples": 128,
+      "seedOffset": 647647,
+      "adaptive": true,
+      "noiseThreshold": 0.01,
+      "minSamples": 32,
+      "role": "CANDIDATE"
+    },
+    {
+      "id": "ADAPT_T001_M0",
+      "maxSamples": 128,
+      "seedOffset": 647647,
+      "adaptive": true,
+      "noiseThreshold": 0.001,
+      "minSamples": 0,
+      "role": "CANDIDATE"
+    },
+    {
+      "id": "ADAPT_T001_M32",
+      "maxSamples": 128,
+      "seedOffset": 647647,
+      "adaptive": true,
+      "noiseThreshold": 0.001,
+      "minSamples": 32,
+      "role": "CANDIDATE"
+    }
+  ],
+  "candidateRepeats": 2,
+  "matrix": {
+    "variants": 2,
+    "referencesPerVariant": 3,
+    "candidateProfilesPerVariant": 6,
+    "candidateRepeats": 2,
+    "nativeBlenderProcesses": 30,
+    "renders": 30
+  },
+  "renderProfile": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "resolution": [
+      512,
+      288
+    ],
+    "animatedSeed": false,
+    "denoising": false,
+    "motionBlur": false,
+    "persistentData": false,
+    "cpuThreads": 4,
+    "passes": [
+      "Combined",
+      "Depth",
+      "Normal",
+      "Vector",
+      "CryptoObject00",
+      "CryptoObject01",
+      "CryptoObject02",
+      "Debug Sample Count"
+    ],
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorDepth": "32",
+    "codec": "ZIP"
+  },
+  "beautyQualityGate": {
+    "referenceCount": 3,
+    "ensemble": "float64 arithmetic mean",
+    "edgeSelection": "stable exact top 10 percent by ensemble AP1 luminance gradient",
+    "metrics": [
+      "linearNrmseByEnsembleRms",
+      "logLuminanceRmse",
+      "edgeLinearRmse"
+    ],
+    "floor": "per metric maximum absolute deviation of one reference from the three-reference mean",
+    "maximumFloorMultiple": 3.0,
+    "candidateMustPassEveryMetricEveryVariantAndRepeat": true
+  },
+  "dataSemanticGate": {
+    "source": "B51-D6 frozen productionSemanticProfile",
+    "cryptomatte": {
+      "hardMatteMismatchPixelsPerVisibleObject": 0,
+      "confidentDominantIdMismatchPixels": 0,
+      "perVisibleObjectMatteMaxAbsoluteError": 0.00392156862745098,
+      "perVisibleObjectMatteP99AbsoluteError": 0.0009775171065493646,
+      "perVisibleObjectMatteRmse": 0.0002442002442002442
+    },
+    "depth": {
+      "backgroundSentinelThreshold": 1000000000.0,
+      "foregroundMaskMismatchPixels": 0,
+      "stableSurfaceP99AbsoluteErrorMeters": 0.001,
+      "stableSurfaceMaxAbsoluteErrorMeters": 0.01,
+      "stableSurfaceP99RelativeError": 0.0001
+    }
+  },
+  "auxiliaryPassGate": {
+    "passes": [
+      "BFS_MASTER.Normal",
+      "BFS_MASTER.Vector"
+    ],
+    "comparison": "float32 exact to FIXED_128 within the same variant and repeat seed"
+  },
+  "sampleCountGate": {
+    "part": "BFS_MASTER.Debug Sample Count",
+    "interpretation": "normalizedSamples = actualSamples / maxSamples",
+    "finite": true,
+    "range": [
+      0.0,
+      1.0
+    ],
+    "fixed128AllPixels": 1.0,
+    "adaptiveMustStopAtLeastOnePixelBeforeMax": true,
+    "measurements": [
+      "minimumNormalizedSamples",
+      "p50NormalizedSamples",
+      "p95NormalizedSamples",
+      "p99NormalizedSamples",
+      "maximumNormalizedSamples",
+      "meanEffectiveSamples",
+      "fractionAtMaxSamples"
+    ]
+  },
+  "costGate": {
+    "minimumMedianRenderSavingFractionVersusFixed128": 0.2,
+    "measureFreshProcessWall": true,
+    "measureRenderOperator": true,
+    "measureSave": true,
+    "measureArtifactBytes": true
+  },
+  "selectionRule": {
+    "candidatePass": "both repeats on both variants pass beauty, D6 data semantics, exact Normal/Vector, Sample Count validity and the 20 percent median render saving gate",
+    "selectedProfile": "passing adaptive profile with lowest cross-variant median render seconds; tie breaks by lower noise threshold then higher minSamples",
+    "positiveVerdict": "NATIVE_CPU_ADAPTIVE_PRODUCTION_POINT_SELECTED",
+    "negativeVerdict": "NATIVE_CPU_ADAPTIVE_PRODUCTION_POINT_NOT_FOUND",
+    "invalidVerdict": "NATIVE_CPU_ADAPTIVE_QUALITY_COST_DERIVATION_INVALID"
+  },
+  "evidenceGates": {
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "268435456",
+    "perProcessWallTimeSeconds": 60,
+    "freshBlenderProcesses": true,
+    "emptyOutputRootBeforeRun": true,
+    "sourceAndParentIdentity": true,
+    "independentAnalysisReplay": true
+  },
+  "outputRoot": "experiments/native-cpu-adaptive-quality-cost-derivation-v0-1",
+  "operationBoundary": {
+    "nativeBlenderProcesses": 30,
+    "renders": 30,
+    "sourceBlendFilesModified": 0,
+    "parentExrsModified": 0,
+    "metalRenders": 0,
+    "dockerRuns": 0,
+    "downloadsDuringFormalRun": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0,
+    "networkRequired": false
+  },
+  "nonClaims": [
+    "unseen-scene generalization",
+    "2K or 4K throughput",
+    "motion blur or depth-of-field adaptive safety",
+    "denoised production quality",
+    "characters, hair, volume or transparency generalization",
+    "human cinematic preference",
+    "long-sequence thermal stability",
+    "GPU or cloud cost"
+  ],
+  "attacks": [
+    "PARENT_IDENTITY",
+    "BLENDER_IDENTITY",
+    "SOURCE_IDENTITY",
+    "DISK_ADMISSION",
+    "MATRIX_TOTALITY",
+    "FRESH_PROCESS",
+    "CPU_DEVICE",
+    "ADAPTIVE_SETTINGS",
+    "PASS_ROSTER",
+    "SAMPLE_COUNT_VALIDITY",
+    "FIXED128_PARENT_CONTROL",
+    "REPEAT_EXACTNESS",
+    "REFERENCE_INDEPENDENCE",
+    "BEAUTY_MEASUREMENT_TOTALITY",
+    "DATA_SEMANTIC_TOTALITY",
+    "AUXILIARY_PASS_TOTALITY",
+    "COST_MEASUREMENT_TOTALITY",
+    "ARTIFACT_IDENTITY",
+    "OPERATION_BOUNDARY",
+    "EVIDENCE_SELF_HASH"
+  ]
+}
