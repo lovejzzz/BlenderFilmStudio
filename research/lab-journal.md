@@ -1765,6 +1765,20 @@ Passing permits only a separately frozen fresh adaptive-Vector holdout. Failure 
 
 Artifacts: `specs/controlled-motion-vector-blur-calibration.v0.1.json` and `research/2026-08-27-b52-d5-controlled-motion-vector-blur-calibration-protocol.md`.
 
+## J-107 · B52-D5 tools freeze with a narrow but valid disk admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+The generated-scene worker, Blender 5.2 compositor worker, matrix runner, analyzer, independent audit and five-test contract suite were frozen and pushed at commit `19e96dc99bd117bfcadaf6d82ea9e0237a814c85`. All 20 attacks route from an independent synthetic-valid evidence base, so an early scientific failure cannot mask later validator checks. Audit integrity is also separated from the scientific verdict: intact INVALID evidence may audit PASS.
+
+Before freezing, real Blender development smoke covered all three fixtures and all four shutters. Both moving fixtures passed the intended sensitivity and dose behavior. The static fixture retained pixel identity at every shutter but exposed Vector p99 noise of about `1.90735e−5`, slightly above the already frozen `1/65536` static gate. That observation did not change the preregistered threshold. A separate pair of fresh static processes reproduced 8/8 multipart source arrays and the shutter-0.5 compositor output exactly.
+
+The post-freeze preflight matched six Git-frozen tool blobs, seven parent records, Blender and OCIO identities. It launched zero Blender processes, performed zero renders and confirmed that the formal output root was absent. Disk admission was narrow: 107,645,112,320 bytes free before a projected 134,217,728-byte write, leaving 107,510,894,592 bytes above the frozen 100 GiB reserve. The preflight SHA-256 is `4934d69cd76ffe4e766bef96133c7d35a53554007fee8ecc6c33f6e92fe582a4`.
+
+Next: run the unchanged 30-process matrix. A static-control failure is a valid calibration result, not permission to relax the gate.
+
+Artifact: `experiments/controlled-motion-vector-blur-calibration-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
