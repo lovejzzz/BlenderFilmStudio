@@ -1,0 +1,1749 @@
+{
+  "checks": {
+    "ocioIdentity": true,
+    "parentIdentity": true,
+    "runtimeBinaryIdentity": true
+  },
+  "diskAdmission": {
+    "availableBytes": 107417165824,
+    "projectedFreeAfterBytes": 107400388608,
+    "projectedWriteBytes": 16777216,
+    "reserveBytes": 107374182400,
+    "status": "ACCEPTED"
+  },
+  "experimentId": "B52-D6",
+  "parentObservations": [
+    {
+      "expectedBytes": null,
+      "expectedSha256": "b436f8c9905ff08c322bef3d7a9fa950bf7934b3f7d93ae25fcbabdc5b06862e",
+      "match": true,
+      "observedBytes": 110366,
+      "observedSha256": "b436f8c9905ff08c322bef3d7a9fa950bf7934b3f7d93ae25fcbabdc5b06862e",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/results.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "fb2b2246c24696e6aef52dbb18c83fe4d69e21353aba457d948279322cc3feb5",
+      "match": true,
+      "observedBytes": 41393,
+      "observedSha256": "fb2b2246c24696e6aef52dbb18c83fe4d69e21353aba457d948279322cc3feb5",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/audit.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "c4203daaadeac547b4e6740c783cf296bbbd862518837632dc7097d62c40aab3",
+      "match": true,
+      "observedBytes": 3813,
+      "observedSha256": "c4203daaadeac547b4e6740c783cf296bbbd862518837632dc7097d62c40aab3",
+      "uri": "experiments/deterministic-warp-preflight-v0-1/attempt-2/observation.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "0a028b23bab1709797339808e5aecd5666ec40559f83c4613753df571d9bb3c2",
+      "match": true,
+      "observedBytes": 779,
+      "observedSha256": "0a028b23bab1709797339808e5aecd5666ec40559f83c4613753df571d9bb3c2",
+      "uri": "experiments/deterministic-warp-preflight-v0-1/attempt-0.failure.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "fb46635a9f3dc718e2d3ec6a446a0d8d0ddf3d89cfc98e1ab6865d6bfdf43ffd",
+      "match": true,
+      "observedBytes": 650,
+      "observedSha256": "fb46635a9f3dc718e2d3ec6a446a0d8d0ddf3d89cfc98e1ab6865d6bfdf43ffd",
+      "uri": "experiments/deterministic-warp-preflight-v0-1/rna-multi-node-removal-crash.failure.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "854b27c4d7b2d42b7afa49520616d22085e13b792950a62d6733a9cffa5666d6",
+      "match": true,
+      "observedBytes": 9151,
+      "observedSha256": "854b27c4d7b2d42b7afa49520616d22085e13b792950a62d6733a9cffa5666d6",
+      "uri": "blender/probe_b52_d6_displace_semantics.py"
+    }
+  ],
+  "preregistration": {
+    "commit": "65ea41cdb0235630f781776fed8324a9f94ec4ad",
+    "specSha256": "28d3c0b292b89d5d056d5521aececbfb6d88b70971d2b500fbff69d2498703be",
+    "specUri": "specs/deterministic-displace-calibration.v0.1.json"
+  },
+  "receiptHash": "090ba0772af1675201f969a5fa146d178116918b9d4df92dd9042cdeb2abd8e9",
+  "runs": [
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "ZERO_NEAREST_CLIP",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R1/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R1/report.json"
+      ],
+      "cellId": "ZERO_NEAREST_CLIP_R1",
+      "elapsedSeconds": 1.887744,
+      "exitCode": 0,
+      "fixtureId": "ZERO_NEAREST_CLIP",
+      "pid": 22296,
+      "repeat": 1,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "de676bae28a480011d3d012db14bef539324e62a841a9627863c689bea168af3",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.41381,
+        "experimentId": "B52-D6",
+        "fixtureId": "ZERO_NEAREST_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 2882,
+          "sha256": "f70d3ce676275eccbb113160c33d28c3ece4e1f075ec25687fb2fbea5169edef",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R1/displace.exr"
+        },
+        "pid": 22296,
+        "repeat": 1,
+        "reportHash": "50fa71f2831b7fae89cb9dc80a44b77ce2e6ffdb3a92f01d61efa632c62ba949",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R1/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R1/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "ZERO_NEAREST_CLIP",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R2/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R2/report.json"
+      ],
+      "cellId": "ZERO_NEAREST_CLIP_R2",
+      "elapsedSeconds": 1.8983,
+      "exitCode": 0,
+      "fixtureId": "ZERO_NEAREST_CLIP",
+      "pid": 22307,
+      "repeat": 2,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "de676bae28a480011d3d012db14bef539324e62a841a9627863c689bea168af3",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.417207,
+        "experimentId": "B52-D6",
+        "fixtureId": "ZERO_NEAREST_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 2882,
+          "sha256": "df79b3b4cb308cff6096b0fdc0cb7c0d954000dabafe487809ab0958a390f94b",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R2/displace.exr"
+        },
+        "pid": 22307,
+        "repeat": 2,
+        "reportHash": "38175c94c5f76c8d0d04f81582cd8ef1a54c0735d409e7a77412c6e75ca37e9e",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R2/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R2/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/ZERO_NEAREST_CLIP_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "POSITIVE_INTEGER_NEAREST_CLIP",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R1/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R1/report.json"
+      ],
+      "cellId": "POSITIVE_INTEGER_NEAREST_CLIP_R1",
+      "elapsedSeconds": 1.899528,
+      "exitCode": 0,
+      "fixtureId": "POSITIVE_INTEGER_NEAREST_CLIP",
+      "pid": 22310,
+      "repeat": 1,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "6a7309c6215ccd81a4ef7090ef7a4042fc75b57cc072c0af995f7551c2b1b1c0",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.416641,
+        "experimentId": "B52-D6",
+        "fixtureId": "POSITIVE_INTEGER_NEAREST_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 3118,
+          "sha256": "7ba579bff6c5463af23bcece8330d42f99349a3288f63830752f28056cc3dbcb",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R1/displace.exr"
+        },
+        "pid": 22310,
+        "repeat": 1,
+        "reportHash": "fc65e99ad5f2766a032f7e647c28cc82f5ff9a69f01e6d0f1e25ed73f92a9740",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R1/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R1/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "POSITIVE_INTEGER_NEAREST_CLIP",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R2/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R2/report.json"
+      ],
+      "cellId": "POSITIVE_INTEGER_NEAREST_CLIP_R2",
+      "elapsedSeconds": 1.904099,
+      "exitCode": 0,
+      "fixtureId": "POSITIVE_INTEGER_NEAREST_CLIP",
+      "pid": 22318,
+      "repeat": 2,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "6a7309c6215ccd81a4ef7090ef7a4042fc75b57cc072c0af995f7551c2b1b1c0",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.424319,
+        "experimentId": "B52-D6",
+        "fixtureId": "POSITIVE_INTEGER_NEAREST_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 3118,
+          "sha256": "57ea7efd24768be74b0a46585be473c0b55a32d735fd1b54f72d8fe895688333",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R2/displace.exr"
+        },
+        "pid": 22318,
+        "repeat": 2,
+        "reportHash": "f202c4edd19c0562e019596e16481b9acc39cbcf90018b7c95f9612a2265679e",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R2/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R2/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_CLIP_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "NEGATIVE_INTEGER_NEAREST_CLIP",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R1/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R1/report.json"
+      ],
+      "cellId": "NEGATIVE_INTEGER_NEAREST_CLIP_R1",
+      "elapsedSeconds": 1.908225,
+      "exitCode": 0,
+      "fixtureId": "NEGATIVE_INTEGER_NEAREST_CLIP",
+      "pid": 22323,
+      "repeat": 1,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "d9584a3847433260e09bc51c37cbaacdbee19fa237934ec34391e1487f7486eb",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.420485,
+        "experimentId": "B52-D6",
+        "fixtureId": "NEGATIVE_INTEGER_NEAREST_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 3029,
+          "sha256": "de88eeb5a969b65c5aefb46306c719c5c8aac77ae7850b79f98f18547e6f266d",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R1/displace.exr"
+        },
+        "pid": 22323,
+        "repeat": 1,
+        "reportHash": "3196cfe2e0fd843795aa89446b26b13214ced72bcad0e37b2701ad7f7bd1b4f1",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R1/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R1/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "NEGATIVE_INTEGER_NEAREST_CLIP",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R2/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R2/report.json"
+      ],
+      "cellId": "NEGATIVE_INTEGER_NEAREST_CLIP_R2",
+      "elapsedSeconds": 1.909452,
+      "exitCode": 0,
+      "fixtureId": "NEGATIVE_INTEGER_NEAREST_CLIP",
+      "pid": 22326,
+      "repeat": 2,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "d9584a3847433260e09bc51c37cbaacdbee19fa237934ec34391e1487f7486eb",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.418967,
+        "experimentId": "B52-D6",
+        "fixtureId": "NEGATIVE_INTEGER_NEAREST_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 3029,
+          "sha256": "201210fc307e1a8315ededf4ac7c75cf84aa1f7fb96549987145fcd72f7fe079",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R2/displace.exr"
+        },
+        "pid": 22326,
+        "repeat": 2,
+        "reportHash": "b39979bc985331f67475f81e9cdda280ab1ceecf49a3255880c4c0898098c2bd",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R2/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R2/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/NEGATIVE_INTEGER_NEAREST_CLIP_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "SUBPIXEL_BILINEAR_CLIP",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R1/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R1/report.json"
+      ],
+      "cellId": "SUBPIXEL_BILINEAR_CLIP_R1",
+      "elapsedSeconds": 1.909193,
+      "exitCode": 0,
+      "fixtureId": "SUBPIXEL_BILINEAR_CLIP",
+      "pid": 22336,
+      "repeat": 1,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "84d18827cd160040926a5d203d71c49883a201f24b63dbb45af34aa8830847e1",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.419253,
+        "experimentId": "B52-D6",
+        "fixtureId": "SUBPIXEL_BILINEAR_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 4097,
+          "sha256": "b61327f358b57df14bf96ff8853f6aea8748495c3e5531dd313186df263c4eec",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R1/displace.exr"
+        },
+        "pid": 22336,
+        "repeat": 1,
+        "reportHash": "c0f63d3e93bf71c37bfe7ec56102e8334a6bd847d58a9fd4f0738a1ea698510d",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Bilinear"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R1/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R1/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "SUBPIXEL_BILINEAR_CLIP",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R2/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R2/report.json"
+      ],
+      "cellId": "SUBPIXEL_BILINEAR_CLIP_R2",
+      "elapsedSeconds": 1.897428,
+      "exitCode": 0,
+      "fixtureId": "SUBPIXEL_BILINEAR_CLIP",
+      "pid": 22340,
+      "repeat": 2,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "84d18827cd160040926a5d203d71c49883a201f24b63dbb45af34aa8830847e1",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.421695,
+        "experimentId": "B52-D6",
+        "fixtureId": "SUBPIXEL_BILINEAR_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 4097,
+          "sha256": "bafae7bec7b0f834a0228aecd515f1bbdf4d3e6333bba13eab10ae4e2f5aa68a",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R2/displace.exr"
+        },
+        "pid": 22340,
+        "repeat": 2,
+        "reportHash": "b2b0b0bca07582b5deca81cc457e9a3f8cd16404b13d3c665d39d2664f3610f4",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Bilinear"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R2/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R2/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/SUBPIXEL_BILINEAR_CLIP_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "DESTINATION_STEP_NEAREST_CLIP",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R1/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R1/report.json"
+      ],
+      "cellId": "DESTINATION_STEP_NEAREST_CLIP_R1",
+      "elapsedSeconds": 1.903874,
+      "exitCode": 0,
+      "fixtureId": "DESTINATION_STEP_NEAREST_CLIP",
+      "pid": 22343,
+      "repeat": 1,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "5df74b8c5b10a5102009db0a8d449e40853734eba021c6e511a8450746f76f97",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.42238,
+        "experimentId": "B52-D6",
+        "fixtureId": "DESTINATION_STEP_NEAREST_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 3097,
+          "sha256": "06d2fda54327bb5f102730f0dbda846f6a8c5c8f04ff3e8dc71ccd33d23fe74d",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R1/displace.exr"
+        },
+        "pid": 22343,
+        "repeat": 1,
+        "reportHash": "99faaf46517ea09cfd62c2285ae97b315560559ddc6f1d0df103d5e94daa900a",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R1/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R1/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "DESTINATION_STEP_NEAREST_CLIP",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R2/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R2/report.json"
+      ],
+      "cellId": "DESTINATION_STEP_NEAREST_CLIP_R2",
+      "elapsedSeconds": 1.903597,
+      "exitCode": 0,
+      "fixtureId": "DESTINATION_STEP_NEAREST_CLIP",
+      "pid": 22344,
+      "repeat": 2,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "5df74b8c5b10a5102009db0a8d449e40853734eba021c6e511a8450746f76f97",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.421367,
+        "experimentId": "B52-D6",
+        "fixtureId": "DESTINATION_STEP_NEAREST_CLIP",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 3097,
+          "sha256": "735b0b7ad49f5028610f69c7ded924f1820839381709f32e474c9eb709679377",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R2/displace.exr"
+        },
+        "pid": 22344,
+        "repeat": 2,
+        "reportHash": "2561bb7fad1e4d12e0fcbeb9e27f9abf3676e3292097267e05628f0977f70912",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Clip",
+          "extensionY": "Clip",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R2/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R2/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/DESTINATION_STEP_NEAREST_CLIP_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "POSITIVE_INTEGER_NEAREST_EXTEND",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R1/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R1/report.json"
+      ],
+      "cellId": "POSITIVE_INTEGER_NEAREST_EXTEND_R1",
+      "elapsedSeconds": 1.910684,
+      "exitCode": 0,
+      "fixtureId": "POSITIVE_INTEGER_NEAREST_EXTEND",
+      "pid": 22354,
+      "repeat": 1,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "6a7309c6215ccd81a4ef7090ef7a4042fc75b57cc072c0af995f7551c2b1b1c0",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.428734,
+        "experimentId": "B52-D6",
+        "fixtureId": "POSITIVE_INTEGER_NEAREST_EXTEND",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 3072,
+          "sha256": "5895b95081747a28e191720dbf2be1b0b5882b1becb36adfdb54ca49f60e7b85",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R1/displace.exr"
+        },
+        "pid": 22354,
+        "repeat": 1,
+        "reportHash": "01b53966c5fbc8cde33d0a338883109a8ae28a3c3c99000f528c58018c48ddaf",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Extend",
+          "extensionY": "Extend",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R1/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R1/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "POSITIVE_INTEGER_NEAREST_EXTEND",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R2/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R2/report.json"
+      ],
+      "cellId": "POSITIVE_INTEGER_NEAREST_EXTEND_R2",
+      "elapsedSeconds": 1.904307,
+      "exitCode": 0,
+      "fixtureId": "POSITIVE_INTEGER_NEAREST_EXTEND",
+      "pid": 22355,
+      "repeat": 2,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "6a7309c6215ccd81a4ef7090ef7a4042fc75b57cc072c0af995f7551c2b1b1c0",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.424381,
+        "experimentId": "B52-D6",
+        "fixtureId": "POSITIVE_INTEGER_NEAREST_EXTEND",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 3072,
+          "sha256": "7a9fb9ca68ce35b4590845eb01ae984630dd3330a203b62c266d5ed38c09dde9",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R2/displace.exr"
+        },
+        "pid": 22355,
+        "repeat": 2,
+        "reportHash": "da1679805061db1b5825ecf98144aa98e8cad762a4838a4519bf4f37f5be93fd",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Extend",
+          "extensionY": "Extend",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R2/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R2/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_EXTEND_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "POSITIVE_INTEGER_NEAREST_REPEAT",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R1/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R1/report.json"
+      ],
+      "cellId": "POSITIVE_INTEGER_NEAREST_REPEAT_R1",
+      "elapsedSeconds": 1.911999,
+      "exitCode": 0,
+      "fixtureId": "POSITIVE_INTEGER_NEAREST_REPEAT",
+      "pid": 22362,
+      "repeat": 1,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "6a7309c6215ccd81a4ef7090ef7a4042fc75b57cc072c0af995f7551c2b1b1c0",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.427549,
+        "experimentId": "B52-D6",
+        "fixtureId": "POSITIVE_INTEGER_NEAREST_REPEAT",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 2890,
+          "sha256": "07efab5a5303951c509c02bd2d32b1a9aeaab06df112b4d941783f8c176aacd5",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R1/displace.exr"
+        },
+        "pid": 22362,
+        "repeat": 1,
+        "reportHash": "8f72ba8ec014ccba7d520f541f651a026894accb65bc199f802a561a30c86a3a",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Repeat",
+          "extensionY": "Repeat",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R1/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R1/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d6_displace_cell.py",
+        "--",
+        "--spec",
+        "specs/deterministic-displace-calibration.v0.1.json",
+        "--fixture",
+        "POSITIVE_INTEGER_NEAREST_REPEAT",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R2/displace.exr",
+        "--report",
+        "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R2/report.json"
+      ],
+      "cellId": "POSITIVE_INTEGER_NEAREST_REPEAT_R2",
+      "elapsedSeconds": 1.924779,
+      "exitCode": 0,
+      "fixtureId": "POSITIVE_INTEGER_NEAREST_REPEAT",
+      "pid": 22365,
+      "repeat": 2,
+      "report": {
+        "arrays": {
+          "displacementFloat32Sha256": "6a7309c6215ccd81a4ef7090ef7a4042fc75b57cc072c0af995f7551c2b1b1c0",
+          "sourceFloat32Sha256": "ee558ea7b2a207e27cbccc101899bf17639006aeafd397ce49cd51e75b52076a"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "classification": "FORMAL_BLENDER_CELL",
+        "elapsedSeconds": 1.430793,
+        "experimentId": "B52-D6",
+        "fixtureId": "POSITIVE_INTEGER_NEAREST_REPEAT",
+        "graph": {
+          "links": [
+            "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0",
+            "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+            "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image"
+          ],
+          "match": true,
+          "nodeCount": 4
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "renderCalls": 1,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 2890,
+          "sha256": "e5d25356d216ce32afe5458fd5d51794978d93d324359303ea482ce0549c8491",
+          "uri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R2/displace.exr"
+        },
+        "pid": 22365,
+        "repeat": 2,
+        "reportHash": "87313de267892f1a68adf0e30ea6ae4f87a36fd8d2180a33ccbe3c8fb469610f",
+        "rna": {
+          "binding": "Scene.compositing_node_group",
+          "displaceInputs": [
+            [
+              "Image",
+              "Image",
+              "NodeSocketColor"
+            ],
+            [
+              "Displacement",
+              "Displacement",
+              "NodeSocketVector2D"
+            ],
+            [
+              "Interpolation",
+              "Interpolation",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension X",
+              "Extension X",
+              "NodeSocketMenu"
+            ],
+            [
+              "Extension Y",
+              "Extension Y",
+              "NodeSocketMenu"
+            ]
+          ],
+          "match": true,
+          "sceneHasLegacyNodeTree": false
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 1,
+          "threadsMode": "FIXED"
+        },
+        "sampling": {
+          "extensionX": "Repeat",
+          "extensionY": "Repeat",
+          "interpolation": "Nearest"
+        },
+        "schemaVersion": "bfs.deterministicDisplaceCellReport.v0.1"
+      },
+      "reportUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R2/report.json",
+      "stderrUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R2/stderr.log",
+      "stdoutUri": "experiments/deterministic-displace-calibration-v0-1/cells/POSITIVE_INTEGER_NEAREST_REPEAT_R2/stdout.log",
+      "timedOut": false
+    }
+  ],
+  "runtimeObservations": {
+    "blender": {
+      "expectedBytes": 183237520,
+      "expectedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "match": true,
+      "observedBytes": 183237520,
+      "observedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "uri": "/Applications/Blender.app/Contents/MacOS/Blender"
+    },
+    "ocio": {
+      "expectedBytes": null,
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true,
+      "observedBytes": 32807,
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    }
+  },
+  "schemaVersion": "bfs.deterministicDisplaceCalibrationReceipt.v0.1",
+  "toolFreezeCommit": "764ad216a77748026aca340a9a5e8f02fa544ccd",
+  "tools": {
+    "analyzer": {
+      "freezeCommit": "764ad216a77748026aca340a9a5e8f02fa544ccd",
+      "sha256": "ddf2d6d8e40eb69177c35aaf258e309c84987e046449ddb8cb510191aabea101",
+      "uri": "scripts/analyze-b52-d6-deterministic-displace-calibration.py"
+    },
+    "audit": {
+      "freezeCommit": "764ad216a77748026aca340a9a5e8f02fa544ccd",
+      "sha256": "e9b252f345e6c46edf6b06e16b4e69e1e3ebe7ca9041e99a85fe278add4576ce",
+      "uri": "scripts/audit-b52-d6-deterministic-displace-calibration.py"
+    },
+    "contractTests": {
+      "freezeCommit": "764ad216a77748026aca340a9a5e8f02fa544ccd",
+      "sha256": "1cf25605fd344c3bfae89c33b5cdc072506de63c8b8e6b4ab6c9f189d9207c48",
+      "uri": "tests/test_b52_d6_deterministic_displace_contract.py"
+    },
+    "reference": {
+      "freezeCommit": "764ad216a77748026aca340a9a5e8f02fa544ccd",
+      "sha256": "01d74ad6c1b19d0fe8ee821a446a196b5bbe2e8c1f3bdf429877dcd9678ef8c4",
+      "uri": "scripts/b52_d6_reference.py"
+    },
+    "runner": {
+      "freezeCommit": "764ad216a77748026aca340a9a5e8f02fa544ccd",
+      "sha256": "1871e23bf9d3ff16133fcffb373ccf61164b1507d5435143091d3f11af0521a6",
+      "uri": "scripts/run-b52-d6-deterministic-displace-calibration.py"
+    },
+    "worker": {
+      "freezeCommit": "764ad216a77748026aca340a9a5e8f02fa544ccd",
+      "sha256": "9d1eec2bc932fb5fffd1fde850aedc08fc6810a8158d34ad924c5a564869eeee",
+      "uri": "blender/render_b52_d6_displace_cell.py"
+    }
+  }
+}

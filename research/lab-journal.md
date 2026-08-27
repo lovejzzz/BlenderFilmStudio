@@ -1823,6 +1823,20 @@ The formal root remained absent and formal operation counts remained zero. The f
 
 Artifact: `experiments/deterministic-displace-calibration-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-111 · B52-D6 supports six exact primitives but rejects the full set
+
+Date: 2026-08-27 · Type: CONFIRMATORY REAL-BLENDER DISPLACE CALIBRATION · Blender processes: 14
+
+All 14 fresh Blender 5.2 CPU compositor processes completed with unique PIDs and zero timeouts. Every fixture's two decoded RGBA outputs reproduced exactly. The independent audit replayed the analyzer and all 35 derived reference/diagnostic files byte-exactly, matched 14/14 run artifacts, six frozen tools, six parents and all 20 attacks.
+
+Six of seven fixtures matched the independent destination-sampled float32 reference exactly: zero, both signed integer Clip translations, a two-axis destination step field, Extend and Repeat. Every nonzero fixture changed 3,071 or 3,072 pixels above the sensitivity threshold and reached a maximum change of 0.58203125–1.0.
+
+The subpixel Bilinear fixture was decoded-repeat-exact but not reference-exact. Its maximum error was `1.7583370208740234e-6`, RMSE `4.569772209229176e-8`, and no pixel exceeded `1/65536`. There were 341 nonzero scalar differences across 188 pixels; alpha remained exact. This is consistent with a small deterministic filtering-precision or operation-order difference, but D6 does not claim a cause.
+
+Verdict: `DETERMINISTIC_DISPLACE_CALIBRATION_NOT_SUPPORTED`, base failure `REFERENCE_MATCH`; audit `PASS`. Per the frozen rule, the full set cannot be promoted and the exactness gate cannot be relaxed after inspection. Next is a fresh, preregistered, tolerance-bounded Bilinear holdout with unseen displacements, alpha/frequency patterns and multiple resolutions. Only after that may the work proceed to depth/layer-aware temporal accumulation.
+
+Artifacts: `experiments/deterministic-displace-calibration-v0-1/` and `research/2026-08-27-b52-d6-deterministic-displace-calibration-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
