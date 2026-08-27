@@ -2821,6 +2821,16 @@ The formal matrix is frozen at 74 unique child processes including audit, 16 fre
 
 Artifacts: `specs/blender-projective-motion-disocclusion-adaptive-risk-holdout.v0.1.json` and `research/2026-08-27-b52-d12-8-projective-motion-disocclusion-adaptive-risk-holdout-protocol.md`.
 
+## J-184 · D12.8 source construction passes four real Blender zero-render probes
+
+Date: 2026-08-27 · Type: TOOL DEVELOPMENT · Formal Blender renders: 0
+
+After preregistration commit `7f62162`, the source renderer and multipart adapter were implemented without changing the frozen spec. Four fresh Blender 5.2 processes constructed the four registered scenes at current frame 1 with zero render calls. Every scene exposed two analytic owners, the background/occluder polygon counts were exactly 3,168/768, all unique-ID fixtures reported their frozen pass-index pairs, and the same-index depth trap preserved `[13505,13505]` exactly. Combined, Depth, Vector and Object Index were enabled on `BFS_D128_MASTER` in every probe.
+
+Both Python files compile under Blender Python 3.13. The adapter has not consumed a formal fixture EXR: doing so during development would expose the fresh holdout before tool freeze. Its first real multipart execution remains behind the frozen preflight/formal boundary. The observed Blender 6.0 deprecation warnings for `use_nodes` are non-fatal 5.2 API warnings and are retained as a future-version boundary, not a 5.2 failure.
+
+Artifacts: `blender/render_b52_d12_8_motion_disocclusion_source.py` and `scripts/adapt-b52-d12-8-motion-disocclusion-source.py`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
