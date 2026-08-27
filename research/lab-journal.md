@@ -2887,6 +2887,20 @@ The original audit reproduced the evidence but failed 9/10 because it required t
 
 Artifacts: `experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/`, `specs/blender-projective-motion-disocclusion-adaptive-risk-audit-c2.v0.1.json`, and `research/2026-08-27-b52-d12-8-formal-negative-and-c2-audit-protocol.md`.
 
+## J-190 · D12.8 C2 validates the immutable negative state
+
+Date: 2026-08-27 · Type: AUDIT-ONLY CORRECTION + RESULT INTERPRETATION · New Blender renders: 0
+
+The one permitted C2 Python process passed 16/16 checks and 40/40 mutation attacks. It spawned no Blender, adapter, consumer, envelope or analyzer process; verified the original 74 unique PIDs plus its own PID; bound the correction spec and both audit tools to frozen Git blobs; and reproduced the immutable rejected verdict with the exact five false and nine true scientific checks.
+
+From raw Python/Node payloads it reproduced 300 float64 risk differences across the six moving cells, per-cell maxima no larger than `4.336808689942018e-19`, exact repeat summaries, all 64 non-risk payload identities and zero derived adaptive-decision differences. The risk bytes therefore remain scientifically non-identical while the audit now correctly accepts that the negative result reports this state faithfully.
+
+The motion result is decisive for the next design: static tap-to-current contrast is safe on accepted samples but catastrophically conservative after correct projective transport. Moving fixtures retained 16.98%, 0%, and 13.17% of radius-2 history, while the static control retained 100%. D12.9 must preregister a motion-aware uncertainty term, canonical risk serialization and a valid-history-only depth metric on fresh fixtures.
+
+C2 audit SHA-256: `0dd3a31e7244a76167ee8c61e690fa2e1bd38ba1089351e6088192c7fb6df7d8`; audit hash: `872ebf57332da68bc18453a5747e47326e97dc2aeff85d84bc4f72c88f1d01b5`.
+
+Artifact: `research/2026-08-27-b52-d12-8-projective-motion-disocclusion-adaptive-risk-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

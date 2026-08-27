@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "bfs.blenderProjectiveMotionDisocclusionConsumerReport.v0.1",
+  "experimentId": "B52-D12.8-C1",
+  "producer": "node",
+  "fixtureId": "RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97",
+  "repeat": 2,
+  "pid": 30542,
+  "runtime": {
+    "node": "v26.5.0",
+    "nodeExecutableSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "adapter": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/adapters/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/report.json",
+    "sha256": "e2aafc5211d9b4cdf2b17710ec44993e3bb43543c5666de33d9e33abae949e8c",
+    "reportHash": "79ccbf56c3c0d6dc9a19258e128f0a9dc10e2ec34c9dc37c1f3862d44f2b8e43"
+  },
+  "reasonCodes": {
+    "UNREGISTERED": 0,
+    "INVALID_CURRENT_ORACLE": 1,
+    "INVALID_BOUNDS": 2,
+    "INVALID_OWNER": 3,
+    "INVALID_ALPHA": 4,
+    "INVALID_DEPTH": 5,
+    "VALID": 6
+  },
+  "projectionContract": {
+    "pixelCenter": "top-left integer pixel (x,y) denotes center ((x+0.5)/W,1-(y+0.5)/H)",
+    "cameraConvention": "Blender camera looks along local -Z; camera coordinates are transpose(R_camera_XYZ)*(world-cameraLocation)",
+    "sensorHeightMm": "sensorWidthMm*H/W",
+    "project": {
+      "u": "0.5+lensMm*cameraX/(-cameraZ*sensorWidthMm)",
+      "vBottom": "0.5+lensMm*cameraY/(-cameraZ*sensorHeightMm)",
+      "x": "u*W-0.5",
+      "yTop": "(1-vBottom)*H-0.5"
+    },
+    "currentSurface": "cast the current pixel-center ray through every declared bounded plane and select the nearest positive-depth hit; its analyticOwnerId is independent of Object Index",
+    "previousSurfacePoint": "inverse current owner transform maps the hit to owner-local coordinates; previous owner transform maps that same local point into world space",
+    "expectedVector": [
+      "previousX-currentX",
+      "currentYTop-previousYTop"
+    ],
+    "sampleCoordinateTopLeft": [
+      "currentX+Vector.X",
+      "currentY-Vector.Y"
+    ],
+    "predictedPreviousDepth": "negative previous-camera Z of the transformed current local surface point",
+    "independence": "the analyzer implements scalar Euler XYZ, pinhole, bounded ray-plane intersection, visibility and rigid transforms without bpy, bpy_extras, mathutils or consumer imports"
+  },
+  "structuralContract": {
+    "reasonPriority": [
+      "INVALID_CURRENT_ORACLE",
+      "INVALID_BOUNDS",
+      "INVALID_OWNER",
+      "INVALID_ALPHA",
+      "INVALID_DEPTH",
+      "VALID"
+    ],
+    "validWhen": [
+      "the current decoded owner and depth agree with the nearest analytic current surface",
+      "all four previous bilinear taps are in bounds",
+      "current alpha and all four previous tap alphas exceed 0.999",
+      "all four previous Object Index values equal current Object Index exactly",
+      "bilinearly sampled previous Depth matches transform-predicted previous-camera depth within max(1,predictedPreviousDepth)/1024"
+    ],
+    "sameIndexDepthRequirement": "SAME_INDEX_DEPTH_REVEAL uses equal passIndex on two analytic owners, so an owner-only rule must admit a registered wrong-history population while the depth rule rejects it",
+    "invalidFallback": "every structurally invalid registered current pixel copies current float32 RGBA exactly",
+    "forbidden": [
+      "direct previousDepth approximately equals currentDepth",
+      "owner-only acceptance in the same-index fixture",
+      "global epsilon not scaled by predicted depth",
+      "fixture-specific mask repair",
+      "reading future or target RGB to decide structural validity"
+    ]
+  },
+  "candidateContract": {
+    "radius2": "structurally valid AND current pixel and every current neighbor within Chebyshev radius 2 share current Object Index and alpha>0.999",
+    "localRiskChannel": "sum(abs(weight_i)*abs(previousTap_i-currentCenter)) over four bilinear taps plus one full float32 ULP at final reconstruction magnitude",
+    "localRiskPixel": "maximum of RGB channel risks, evaluated in binary64 from float32 inputs and frozen bilinear weights",
+    "adaptive": "radius2 AND localRiskPixel<=9.5367431640625e-7; comparison is inclusive",
+    "reconstruction": "four-tap bilinear previous RGBA in y0x0,y0x1,y1x0,y1x1 order, float64 arithmetic and one final float32 cast",
+    "adaptiveFallback": "registered current pixels outside adaptive copy current float32 RGBA exactly",
+    "riskThresholdSource": "unchanged D12.7 adaptiveHeadroom.reconstructionRgbMax",
+    "subsetInvariants": [
+      "adaptive is a subset of radius2",
+      "adaptive and adaptiveRejected partition radius2",
+      "radius3 is a subset of radius2"
+    ]
+  },
+  "arrays": {
+    "adaptiveReconstructed": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/adaptive-reconstructed.rgba32",
+      "sha256": "fcbbecebd4fc1d6a07dcddc98a7d8c20434216e4ea3e33f50eb095bf8aff15fe",
+      "bytes": 231248,
+      "shape": [
+        97,
+        149,
+        4
+      ],
+      "dtype": "little-endian-float32"
+    },
+    "reason": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/reason.u8",
+      "sha256": "0e7c818bdca563dfb6848137a57e11b2f4d98e16bd0e43120bf17f75c279147e",
+      "bytes": 14453,
+      "shape": [
+        97,
+        149
+      ],
+      "dtype": "uint8"
+    },
+    "analyticOwner": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/analytic-owner.u8",
+      "sha256": "46a66fbffdae3fae104cdb289d19b3d2d4af023d9801bf13fe08013eb89f777f",
+      "bytes": 14453,
+      "shape": [
+        97,
+        149
+      ],
+      "dtype": "uint8"
+    },
+    "structuralValid": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/structural-valid.u8",
+      "sha256": "9086548d766bd44912d810a0eff801ab018becf496fe1bfe8417baaa23d01d24",
+      "bytes": 14453,
+      "shape": [
+        97,
+        149
+      ],
+      "dtype": "uint8"
+    },
+    "radius2Interior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/radius2-interior.u8",
+      "sha256": "416785aa3ca660c5b3593c769579a491b20ce755a9b1359c208ea71f4b3f3d49",
+      "bytes": 14453,
+      "shape": [
+        97,
+        149
+      ],
+      "dtype": "uint8"
+    },
+    "radius3Interior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/radius3-interior.u8",
+      "sha256": "9024868cc987acad03dd63ed695b67740f4e7e46dd88ddfb790cbf2c82cf1308",
+      "bytes": 14453,
+      "shape": [
+        97,
+        149
+      ],
+      "dtype": "uint8"
+    },
+    "adaptiveInterior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/adaptive-interior.u8",
+      "sha256": "f872101880c319fc39905d3f3d328ef44144ed0b27737fea42b3aa01fd930dad",
+      "bytes": 14453,
+      "shape": [
+        97,
+        149
+      ],
+      "dtype": "uint8"
+    },
+    "adaptiveRejected": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/adaptive-rejected.u8",
+      "sha256": "3cfbebf5f55d9e5888773751a8af3b3444b50ad37ef501ac45f96edecda0eaf1",
+      "bytes": 14453,
+      "shape": [
+        97,
+        149
+      ],
+      "dtype": "uint8"
+    },
+    "riskRgb": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/node/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2/arrays/risk.rgb64",
+      "sha256": "c3d2e52b09416a3c4f90e874b72f662db9bd4ece7077ce523986d5d7edb7c8aa",
+      "bytes": 346872,
+      "shape": [
+        97,
+        149,
+        3
+      ],
+      "dtype": "little-endian-float64"
+    }
+  },
+  "operationCounts": {
+    "consumerProcesses": 1,
+    "pixelsVisited": 14453,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "reportHash": "41cfa954185247bbce081b7f69d692d44e708730a7ab49f1f9abb6b5f32f3333"
+}
