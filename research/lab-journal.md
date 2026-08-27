@@ -2767,6 +2767,16 @@ The bound is promising rather than merely conservative. Cell Spearman associatio
 
 Artifacts: `experiments/blender-static-interior-risk-localization-c2-v0-1/`, `research/2026-08-27-b52-d12-6-c2-interior-risk-localization-result.md`.
 
+## J-179 · D12.7 freezes an adaptive local-risk holdout
+
+Date: 2026-08-27 · Type: CONFIRMATORY PREREGISTRATION · New Blender renders: 0
+
+D12.7 moves the D12.6 arithmetic bound onto three unseen opaque static geometries. The candidate is frozen as radius-2 interior plus an inclusive 1/1048576 local-risk gate; radius 3 is the paired global-erosion comparator. Success requires zero underbounds, half-gate maximum, real risk rejection, at least 98% total radius-2 retention, at least 95% per-owner retention, at least 3% more total coverage than radius 3 and no owner below its radius-3 count. Spec SHA-256: `c51d0d83afd30b479bf3e7109c31110133649ee3d65a04d677dbe236b8075ed0`.
+
+The formal matrix registers 12 fresh Blender renders, 56 unique child processes, dual consumers, an independent audit and at least 30 mutations. No D12.5/D12.6 pixel artifact may enter the measurement domain.
+
+Artifacts: `specs/blender-static-adaptive-risk-gate-holdout.v0.1.json` and `research/2026-08-27-b52-d12-7-adaptive-risk-gate-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

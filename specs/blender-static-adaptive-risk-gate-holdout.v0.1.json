@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "bfs.blenderStaticAdaptiveRiskGateHoldout.v0.1",
+  "experimentId": "B52-D12.7",
+  "title": "Fresh static holdout of radius-2 plus a frozen local arithmetic risk gate versus global radius-3 erosion",
+  "question": "On unseen opaque static multi-owner Blender geometry, can the D12.6 local arithmetic bound retain a radius-2 coverage domain, reject only the registered high-risk tail, satisfy the twofold RGB headroom threshold, and preserve more total and per-owner coverage than global radius 3?",
+  "decisionRole": "confirmatory unseen-fixture validation of the D12.6-derived adaptive gate; D12.5 and D12.6 conclusions remain unchanged",
+  "parents": {
+    "d12_5Spec": {"uri":"specs/blender-static-radius-intervention-holdout.v0.1.json","sha256":"d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d","experimentId":"B52-D12.5-C2"},
+    "d12_5Result": {"uri":"experiments/blender-static-radius-intervention-holdout-c2-v0-1/results.json","sha256":"b3f70d11311fef9f3edf53bcfac511e256359e9b67971c94db89e2b0d323cdc7","evidenceHash":"e2a7ea77e5bde2e4aa5a846feba35edce143a2898ef9e1320ddc1230930635cc","verdict":"RADIUS3_WITHIN_PRODUCTION_TOLERANCE_BUT_HEADROOM_OR_COVERAGE_NOT_SUPPORTED"},
+    "d12_5Receipt": {"uri":"experiments/blender-static-radius-intervention-holdout-c2-v0-1/receipt.json","sha256":"a77350c5e6a7589b7ace39da56509156b810e19221a8d1e3f0e8a7f750767d40","receiptHash":"6023b119149ffe3dc4f2c5dc59966f95386272bdd2e23ac9b7f7672b0a9f0111"},
+    "d12_6Spec": {"uri":"specs/blender-static-interior-risk-localization.v0.1.json","sha256":"9ae043172e3d126d590b6be7942de759a503eee3c76cf4b96062e92285691fe5","experimentId":"B52-D12.6-C2"},
+    "d12_6Result": {"uri":"experiments/blender-static-interior-risk-localization-c2-v0-1/results.json","sha256":"dfddc8eda0e042860c6203fab3fe659a3c0126a939746dfa78de61f5c2806ba9","evidenceHash":"9213024cae89edece7f8c93ccb5580979dbc3ee9a32b83cefb877db778afd45c","verdict":"STATIC_INTERIOR_EXTREMA_LOCALIZED_AND_LOCAL_RISK_BOUND_CONSERVATIVE"},
+    "d12_6Audit": {"uri":"experiments/blender-static-interior-risk-localization-c2-v0-1/audit.json","sha256":"0a6b437d1cb5286f3db80a0e5dc21ca6903dbf80d3755e790ed6c2a0cf11d8b5","auditHash":"fa6e2bf1b66adb4e7043639dd02fe13ce09e95eb4b56b7ec09a09952780ab4e0","passed":true},
+    "d12_6Receipt": {"uri":"experiments/blender-static-interior-risk-localization-c2-v0-1/receipt.json","sha256":"9a89abfeb6b6c5bac530d841735bfc521e7e7f35cc2d7c2438de949e025b9446","receiptHash":"1dbff6cf239807785e9e9765bcc6482d8b2465006b5c57eefa57168f9a7adcba"},
+    "typedEnvelopeSpec": {"uri":"specs/blender-cross-language-evidence-envelope-development.v0.1.json","sha256":"8bd219570e0c7ec922a671919d680787caf55b2ba7d8a631ed5bc995ab24f116"},
+    "typedEnvelopePython": {"uri":"scripts/encode-b52-d12-1-evidence-envelope.py","sha256":"fe742fc94049abe6b200394635c3fdc42d880bfd4ca79640914c9e92800c3f92"},
+    "typedEnvelopeNode": {"uri":"scripts/encode-b52-d12-1-evidence-envelope.mjs","sha256":"b104df55ad8454556e3fc12a0f380d2ba4d9191efe6b649dc8a5d734dffdbf1b"}
+  },
+  "freshness": {
+    "requirements": [
+      "Every fixture ID, resolution, optical parameter, transform, owner ID, pass index, geometry parameter, material parameter and formal output path is unseen in D12.2 through D12.6.",
+      "No D12.5 or D12.6 EXR, adapted array, consumer payload, mask or per-pixel measurement may be a D12.7 measurement input.",
+      "The adaptive formula, inclusive threshold comparison, coverage gates, stress gate, fixtures and verdict mapping are frozen before any D12.7 tool or render output exists.",
+      "Repeat 1 is primary; repeat 2 is an exact source and consumer identity control."
+    ],
+    "formalToolPaths": [
+      "blender/render_b52_d12_7_adaptive_risk_source.py",
+      "scripts/adapt-b52-d12-7-adaptive-risk-source.py",
+      "scripts/reconstruct-b52-d12-7-adaptive-risk.py",
+      "scripts/reconstruct-b52-d12-7-adaptive-risk.mjs",
+      "scripts/analyze-b52-d12-7-adaptive-risk.py",
+      "scripts/audit-b52-d12-7-adaptive-risk.py",
+      "scripts/preflight-b52-d12-7-adaptive-risk.py",
+      "scripts/run-b52-d12-7-adaptive-risk.py",
+      "scripts/encode-b52-d12-1-evidence-envelope.py",
+      "scripts/encode-b52-d12-1-evidence-envelope.mjs"
+    ]
+  },
+  "runtime": {
+    "blender": {"executable":"/Applications/Blender.app/Contents/MacOS/Blender","sha256":"60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2","version":"5.2.0 LTS","buildHash":"fbe6228777e7","launchFlags":["--background","--factory-startup","--disable-autoexec","--python-exit-code","1"]},
+    "python": {"executable":"/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13","sha256":"cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35","openImageIO":"3.1.13.1","numpy":"2.3.4"},
+    "node": {"executable":"/opt/homebrew/Cellar/node/26.5.0/bin/node","sha256":"70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8","version":"v26.5.0"},
+    "ocio": {"uri":"color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio","sha256":"24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"}
+  },
+  "diskAdmission": {"minimumReserveBytes":107374182400,"projectedWriteBytes":25165824,"formalRoot":"experiments/blender-static-adaptive-risk-gate-holdout-v0-1","preflightRoot":"experiments/blender-static-adaptive-risk-gate-holdout-preflight-v0-1"},
+  "sceneContract": {
+    "frames":[0,1,2],"previousFrame":0,"currentFrame":1,"nextFrame":2,
+    "staticRule":"Every object and camera transform is identical at all three LINEAR keys; topology, modifier state and procedural material parameters are constant.",
+    "render":{"engine":"CYCLES","device":"CPU","samples":1,"seed":521277,"animatedSeed":false,"adaptiveSampling":false,"denoising":false,"motionBlur":false,"depthOfField":false,"persistentData":false,"threadsMode":"FIXED","threads":4,"pixelAspect":[1.0,1.0],"filmTransparent":false,"fileFormat":"OPEN_EXR_MULTILAYER","colorMode":"RGBA","colorDepth":"32","exrCodec":"ZIP","viewLayer":"BFS_D127_MASTER","passAlphaThreshold":0.5,"passes":["Combined","Depth","Vector","Object Index"]},
+    "materialContract":{"surface":"object-local procedural emission, alpha 1.0; world emission zero","formula":"clamp(baseRGB + x*coeffX + y*coeffY + z*coeffZ + waveAmplitude*sin(dot(Generated.xyz,waveFrequency)+wavePhase), 0.08, 0.92)","coordinateSpace":"Generated"}
+  },
+  "fixtures": [
+    {
+      "id":"STATIC_RIPPLED_BACKDROP_ROUNDED_BOX_117X79","resolution":[117,79],"lensMm":49.0,"sensorWidthMm":36.5,"cameraTransform":{"location":[-0.031,0.023,10.47],"rotationEuler":[-0.004,0.007,-0.002]},
+      "owners":[
+        {"id":"REAR_DUAL_RIPPLE_BACKDROP","passIndex":12113,"geometry":{"type":"DUAL_RIPPLE_GRID","size":[8.9,5.7],"subdivisions":[34,22],"waveA":[0.13,1.43,1.91],"waveB":[0.07,2.37,-1.19]},"transform":{"location":[0.06,-0.04,-0.51],"rotationEuler":[0.09,-0.08,0.031],"scale":[1.0,1.0,1.0]},"material":{"baseRGB":[0.46,0.31,0.67],"coeffX":[0.24,-0.11,0.18],"coeffY":[-0.16,0.27,0.12],"coeffZ":[0.05,-0.04,0.09],"waveAmplitude":[0.18,0.11,0.21],"waveFrequency":[11.3,7.7,5.1],"wavePhase":0.53}},
+        {"id":"FRONT_ROUNDED_BOX","passIndex":12227,"geometry":{"type":"ROUNDED_BOX","dimensions":[2.86,1.91,0.83],"bevelWidth":0.19,"bevelSegments":5},"transform":{"location":[0.69,-0.21,0.74],"rotationEuler":[0.24,-0.19,0.21],"scale":[1.0,1.0,1.0]},"material":{"baseRGB":[0.29,0.71,0.43],"coeffX":[-0.21,0.14,0.27],"coeffY":[0.23,-0.17,0.11],"coeffZ":[0.08,0.1,-0.07],"waveAmplitude":[0.12,0.19,0.15],"waveFrequency":[8.9,12.1,6.7],"wavePhase":1.29}}
+      ]
+    },
+    {
+      "id":"STATIC_SUPERELLIPSE_TORUS_139X91","resolution":[139,91],"lensMm":43.0,"sensorWidthMm":37.5,"cameraTransform":{"location":[0.029,-0.027,9.93],"rotationEuler":[0.003,-0.006,0.005]},
+      "owners":[
+        {"id":"REAR_SUPERELLIPSE_PRISM","passIndex":12331,"geometry":{"type":"SUPERELLIPSE_PRISM","dimensions":[6.2,4.35,0.61],"segments":52,"exponent":3.6,"bevelWidth":0.08,"bevelSegments":3},"transform":{"location":[-0.36,0.17,-0.37],"rotationEuler":[0.12,0.1,-0.07],"scale":[1.0,1.0,1.0]},"material":{"baseRGB":[0.66,0.38,0.26],"coeffX":[0.19,0.1,-0.22],"coeffY":[-0.13,0.25,0.17],"coeffZ":[0.14,-0.08,0.07],"waveAmplitude":[0.17,0.13,0.1],"waveFrequency":[9.7,6.1,12.4],"wavePhase":0.83}},
+        {"id":"FRONT_OFFSET_TORUS","passIndex":12447,"geometry":{"type":"TORUS","majorSegments":48,"minorSegments":18,"majorRadius":1.57,"minorRadius":0.31},"transform":{"location":[0.81,-0.16,0.79],"rotationEuler":[0.48,-0.24,0.22],"scale":[1.09,0.84,1.0]},"material":{"baseRGB":[0.22,0.61,0.73],"coeffX":[0.26,-0.16,0.1],"coeffY":[0.09,0.21,-0.24],"coeffZ":[-0.08,0.07,0.15],"waveAmplitude":[0.14,0.17,0.2],"waveFrequency":[12.7,8.2,6.4],"wavePhase":1.71}}
+      ]
+    },
+    {
+      "id":"STATIC_FRUSTUM_CROSSBAR_SPHERE_157X103","resolution":[157,103],"lensMm":53.0,"sensorWidthMm":40.0,"cameraTransform":{"location":[-0.021,-0.018,11.37],"rotationEuler":[0.005,0.003,-0.004]},
+      "owners":[
+        {"id":"REAR_SQUASHED_UV_SPHERE","passIndex":12553,"geometry":{"type":"UV_SPHERE","segments":42,"rings":26,"radius":2.41},"transform":{"location":[-0.27,0.11,-0.44],"rotationEuler":[0.2,-0.14,0.09],"scale":[1.23,1.06,0.79]},"material":{"baseRGB":[0.55,0.28,0.51],"coeffX":[-0.17,0.23,0.14],"coeffY":[0.2,0.08,-0.21],"coeffZ":[0.1,-0.09,0.12],"waveAmplitude":[0.13,0.2,0.16],"waveFrequency":[7.3,11.6,5.8],"wavePhase":0.41}},
+        {"id":"FRONT_TILTED_FRUSTUM","passIndex":12671,"geometry":{"type":"CONE_FRUSTUM","vertices":36,"radiusBottom":0.72,"radiusTop":0.37,"depth":5.61,"bevelWidth":0.06,"bevelSegments":3},"transform":{"location":[0.36,-0.13,0.82],"rotationEuler":[0.29,1.27,0.58],"scale":[1.0,1.0,1.0]},"material":{"baseRGB":[0.31,0.72,0.48],"coeffX":[0.23,-0.15,0.09],"coeffY":[-0.1,0.19,0.25],"coeffZ":[0.16,0.06,-0.13],"waveAmplitude":[0.19,0.1,0.14],"waveFrequency":[10.9,6.8,9.1],"wavePhase":1.17}},
+        {"id":"FRONT_CROSSBAR","passIndex":12787,"geometry":{"type":"CYLINDER","vertices":30,"radius":0.47,"depth":5.34,"bevelWidth":0.052,"bevelSegments":3},"transform":{"location":[0.74,0.24,1.03],"rotationEuler":[-0.31,1.3,-0.81],"scale":[1.0,1.0,1.0]},"material":{"baseRGB":[0.72,0.46,0.19],"coeffX":[-0.14,0.2,0.24],"coeffY":[0.27,-0.12,0.08],"coeffZ":[0.07,0.15,-0.1],"waveAmplitude":[0.15,0.18,0.12],"waveFrequency":[8.1,12.9,7.4],"wavePhase":2.21}}
+      ]
+    }
+  ],
+  "consumerContract": {
+    "radius2":"Current pixel and every current neighbor within Chebyshev radius 2 share registered owner and alpha >0.999; all four previous bilinear taps share that owner and alpha.",
+    "radius3":"The identical rule with current-neighborhood Chebyshev radius 3.",
+    "localRiskChannel":"sum(abs(weight_i) * abs(previousTap_i - currentCenter)) over the four bilinear taps, plus one full float32 ULP at the final reconstruction magnitude.",
+    "localRiskPixel":"maximum of the three RGB channel risks, evaluated in binary64 from float32 inputs and frozen bilinear weights.",
+    "adaptiveInterior":"radius2 interior AND localRiskPixel <= 9.5367431640625e-7; the comparison is inclusive.",
+    "adaptiveReconstruction":"the radius2 reconstructed float32 RGBA at adaptive-interior pixels; all excluded registered owner pixels fail closed into adaptive boundary.",
+    "subsetInvariants":["radius3 interior is a subset of radius2 interior","adaptive interior is a subset of radius2 interior","adaptive rejected and adaptive interior partition radius2 interior"]
+  },
+  "matrix": {"fixtureCount":3,"repeats":[1,2],"renderedFrames":[0,1],"realBlenderRenders":12,"adapterProcesses":6,"consumerProcesses":{"python":6,"node":6},"typedEnvelopeProcesses":{"python":12,"node":12},"analyzerProcesses":1,"auditProcesses":1,"totalUniqueChildProcesses":56,"modelCalls":0,"networkCalls":0},
+  "frozenGates": {
+    "productionTolerance":{"vectorComponentMaxPixels":0.000244140625,"reconstructionRgbMax":0.0000019073486328125,"reconstructionRgbRmse":9.5367431640625e-7},
+    "adaptiveHeadroom":{"reconstructionRgbMax":9.5367431640625e-7,"inclusive":true,"meaning":"at least twofold maximum headroom under the unchanged production maximum"},
+    "coverage":{"radius2MinimumInteriorPixelsPerCell":800,"adaptiveMinimumInteriorPixelsPerCell":800,"minimumAdaptivePixelsPerRegisteredOwner":64,"minimumRadius2PixelsForPerOwnerRetentionGate":100,"adaptiveToRadius2TotalRetentionMinimum":0.98,"adaptiveToRadius2PerOwnerRetentionMinimum":0.95,"adaptiveToRadius3TotalRatioMinimum":1.03,"adaptivePerOwnerMustMeetOrExceedRadius3":true},
+    "stress":{"minimumAdaptiveRejectedPixelsPerFixture":1,"scope":"primary repeat aggregated over RGB into pixel risk"},
+    "riskConservatism":{"maximumUnderboundRgbSamples":0},
+    "identity":["all parent file and internal hashes match","repeat source and consumer payloads are byte-identical","Python and Node reconstructed, mask and risk payloads are byte-identical","all reconstructed float32 bytes and adaptive decisions replay independently","all 56 process IDs are unique and exit zero","producer reports contain no metrics or verdicts"]
+  },
+  "decision": {
+    "supportedVerdict":"ADAPTIVE_LOCAL_RISK_GATE_SUPPORTED_ON_FRESH_STATIC_HOLDOUT",
+    "supportedWhen":"Every identity, replay, production, adaptive-headroom, risk-conservatism, stress and coverage/fairness gate passes in every fresh cell, and the independent audit rejects all registered attacks.",
+    "boundedVerdict":"ADAPTIVE_GATE_WITHIN_TOLERANCE_BUT_STRESS_OR_COVERAGE_NOT_SUPPORTED",
+    "boundedWhen":"Identity, replay, risk conservatism and adaptive production/headroom pass, but any registered stress or coverage comparison fails.",
+    "rejectedVerdict":"ADAPTIVE_LOCAL_RISK_GATE_NOT_SUPPORTED",
+    "rejectedWhen":"Any identity, replay, risk-conservatism, adaptive production/headroom, process-totality or audit-totality gate fails.",
+    "radius3Role":"fresh paired global-erosion comparator; its half-gate status is reported but is not required to fail",
+    "adaptiveRole":"confirmatory candidate only within opaque static owner interiors"
+  },
+  "attacks":{"minimumRegisteredAttacks":30,"requirements":["tamper a parent identity","tamper a source or payload byte","swap producer or repeat identity","flip an adaptive decision at equality and on either side","alter one risk weight, tap, ULP or channel reduction","violate either subset or partition","alter one owner count, coverage ratio, maximum, threshold or verdict","duplicate a process ID or inject model/network activity"]},
+  "operations":{"formalRunnerProcesses":1,"formalChildProcesses":56,"blenderProcesses":12,"blenderRenders":12,"modelCalls":0,"networkCalls":0},
+  "nonClaims":["This static opaque holdout does not validate motion, deformation, transparency, hair, particles, volumes, motion blur or disocclusion.","The local bound is an image-space arithmetic safety rule, not a causal model of Blender renderer internals.","Passing does not prove perceptual equivalence or eliminate the need for temporal and human review.","D12.7 does not revise D12.5-C2 or D12.6-C2.","A failed stress gate means the fresh fixtures did not exercise the candidate sufficiently, not that unsafe pixels were accepted."]
+}
