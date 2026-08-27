@@ -1,0 +1,20 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { repositoryRoot } from './lib/scene-spec.mjs';
+import { sha256File } from './lib/receipt-format.mjs';
+import { analyzeB42Evidence, observeSuccessfulRun, readB42Spec } from './lib/b42-linux-amd64-compiler-repro.mjs';
+
+const root = resolve(repositoryRoot, 'experiments/linux-amd64-compiler-repro-v0-1');
+const result = JSON.parse(await readFile(resolve(root, 'results.json'), 'utf8'));
+const spec = await readB42Spec();
+const analysis = analyzeB42Evidence(result, spec);
+const toolHashes = Object.fromEntries(await Promise.all(Object.entries(result.tools).map(async ([key, item]) => [key, await sha256File(resolve(repositoryRoot, item.uri))])));
+const toolsMatch = Object.entries(toolHashes).every(([key, digest]) => digest === result.tools[key].sha256);
+const observed = [];
+for (const benchmark of result.benchmarks) for (const run of benchmark.runs) observed.push({ id: run.id, value: await observeSuccessfulRun(resolve(root, 'runs', run.id)) });
+const outputsMatch = observed.every(item => JSON.stringify(item.value) === JSON.stringify(result.benchmarks.flatMap(benchmark => benchmark.runs).find(run => run.id === item.id).observed));
+const plansMatch = (await Promise.all(result.benchmarks.flatMap(benchmark => benchmark.plans).map(async plan => await sha256File(resolve(repositoryRoot, plan.uri)) === plan.fileSha256))).every(Boolean);
+const audit = { schemaVersion: 'bfs.linuxAmd64CompilerReproIndependentAudit.v0.1', experimentId: 'B42', analysis, toolHashes, toolsMatch, outputsMatch, plansMatch, passed: analysis.passed && toolsMatch && outputsMatch && plansMatch };
+await writeFile(resolve(root, 'audit.json'), `${JSON.stringify(audit, null, 2)}\n`);
+process.stdout.write(`BFS_B42_AUDIT ${audit.passed ? 'PASS' : 'FAIL'} tools=${toolsMatch ? 'MATCH' : 'MISMATCH'} outputs=${outputsMatch ? 'MATCH' : 'MISMATCH'} plans=${plansMatch ? 'MATCH' : 'MISMATCH'}\n`);
+if (!audit.passed) process.exitCode = 1;
