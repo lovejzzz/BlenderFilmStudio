@@ -2187,6 +2187,18 @@ The four initial formal tools and a machine-readable observation are now durable
 
 Artifacts: `experiments/blender-real-textured-temporal-end-to-end-development-smoke-v0-1/observation.json` and `research/2026-08-27-b52-d11-real-textured-development-smoke.md`.
 
+## J-136 · D11 development Raw EXR bridge preserves the observed counterexample bytes
+
+Date: 2026-08-27 · Type: DEVELOPMENT-ONLY REAL-BLENDER BRIDGE SMOKE · Formal outputs: 0
+
+The Python truncation result from J-135 was encoded as a 197×113 Raw RGBA float32 ZIP EXR. OIIO decode reproduced the input hash `85fb98ef…` exactly. A fresh Blender 5.2 compositor process then opened that EXR as Raw and used only `BFS_D11_EXTERNAL_SOURCE.Image→BFS_D11_GROUP_OUTPUT.Socket_0`; its decoded output again reproduced `85fb98ef…` exactly even though container hashes differed as allowed.
+
+The frozen bridge graph and RNA checks passed, with one compositor render and zero Cycles rays. The initial five-test contract suite also passed, covering spec/process identity, toward-zero versus nearest integerization, scalar coordinate/float32 behavior, rejection priority and the narrow adapter/bridge contract.
+
+Seven of eleven formal tool paths now have implementations. This remains pre-freeze development evidence: one encoder cell and one bridge repeat cannot satisfy the eight encoders, sixteen bridge processes, clean repeats, attacks or audit required by D11.
+
+Artifact: `experiments/blender-real-textured-temporal-end-to-end-development-smoke-v0-1/bridge-observation.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
