@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "bfs.nativeMetalProductionHoldoutSpec.v0.1",
+  "experimentId": "B51-H1",
+  "question": "After a fail-closed native Metal readiness canary, does the warm Metal candidate stay within the preregistered B51-D1 numerical envelope and timing budget on four deterministic compositions that were not rendered during derivation?",
+  "status": "PREREGISTERED_HOLDOUT",
+  "outputRoot": "experiments/native-metal-production-holdout-v0-1",
+  "parents": {
+    "b51D1Result": {"uri": "experiments/native-cycles-backend-derivation-v0-1/results.json", "sha256": "c6d9c0d1cea1b622092860b1b7db4361fd763a8e83da439d84b2d1b1fb356bb8", "verdict": "NATIVE_CYCLES_BACKEND_DERIVATION_USABLE"},
+    "b51D1Audit": {"uri": "experiments/native-cycles-backend-derivation-v0-1/audit.correction-v0.2.json", "sha256": "e75523ff1c1f94a5e76744314a3874442507d3628332a7aa61e869e692eb0fde", "status": "PASS"},
+    "b51D2Result": {"uri": "experiments/native-cycles-cache-state-derivation-v0-1/results.json", "sha256": "dcb01aaa4bcb2d69bc7dd12359a693812709539860bf6d45543e85bbe87bc74b", "verdict": "CYCLES_CACHE_STATE_DERIVATION_USABLE"},
+    "b51D2Audit": {"uri": "experiments/native-cycles-cache-state-derivation-v0-1/audit.correction-v0.2.json", "sha256": "692d0c7198a63dbc727858dc883cf2d7d5dfb03f4bcf73225b0ca16addb79848", "status": "PASS"}
+  },
+  "nativeBlender": {
+    "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "bytes": 183237520,
+    "version": "5.2.0 LTS",
+    "buildHash": "fbe6228777e7",
+    "hostArchitecture": "arm64",
+    "cpuDevice": {"name": "Apple M4 Max", "type": "CPU", "id": "CPU"},
+    "metalDevice": {"name": "Apple M4 Max (GPU - 40 cores)", "type": "METAL", "id": "METAL_Apple M4 Max (GPU - 40 cores)"}
+  },
+  "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+  "sources": {
+    "TABLETOP": {
+      "shotId": "SHOT_109",
+      "frame": 37,
+      "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+      "blendSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "blendBytes": 118702,
+      "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+      "sceneHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+      "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+    },
+    "INTERIOR": {
+      "shotId": "SHOT_110",
+      "frame": 19,
+      "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+      "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "blendBytes": 106078,
+      "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+      "sceneHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+      "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+    }
+  },
+  "canary": {
+    "runId": "CANARY_METAL",
+    "source": "TABLETOP",
+    "variant": "CANARY_UNALTERED",
+    "device": "METAL",
+    "resolution": [256, 144],
+    "samples": 16,
+    "requiredSubimages": 1,
+    "passes": ["Combined"],
+    "maxRenderSeconds": 2.0,
+    "maxSynchronizationSeconds": 2.0,
+    "maxProcessWallSeconds": 10.0,
+    "failurePolicy": "FAIL_CLOSED_BEFORE_HOLDOUT"
+  },
+  "variants": [
+    {
+      "id": "TABLETOP_WIDE",
+      "source": "TABLETOP",
+      "operations": [
+        {"target": "CAM_B43_A", "kind": "LOCATION_DELTA", "value": [0.28, 0.0, 0.08]},
+        {"target": "CAM_B43_A", "kind": "CAMERA_LENS_SET", "value": 52.0},
+        {"target": "SET_STILL_LIFE", "kind": "ROTATION_Z_DELTA", "value": 0.13962634015954636},
+        {"target": "KEY_LARGE", "kind": "LIGHT_ENERGY_SCALE", "value": 1.25}
+      ]
+    },
+    {
+      "id": "TABLETOP_TIGHT",
+      "source": "TABLETOP",
+      "operations": [
+        {"target": "CAM_B43_A", "kind": "LOCATION_DELTA", "value": [-0.18, 0.15, -0.04]},
+        {"target": "CAM_B43_A", "kind": "CAMERA_LENS_SET", "value": 68.0},
+        {"target": "SET_STILL_LIFE", "kind": "ROTATION_Z_DELTA", "value": -0.10471975511965977},
+        {"target": "RIM_COOL", "kind": "LIGHT_ENERGY_SCALE", "value": 1.35}
+      ]
+    },
+    {
+      "id": "INTERIOR_CHAIR",
+      "source": "INTERIOR",
+      "operations": [
+        {"target": "CAM_B43_B", "kind": "LOCATION_DELTA", "value": [0.12, -0.10, 0.06]},
+        {"target": "CAM_B43_B", "kind": "CAMERA_LENS_SET", "value": 64.0},
+        {"target": "PROP_CHAIR", "kind": "LOCATION_DELTA", "value": [0.42, -0.08, 0.0]},
+        {"target": "PROP_CHAIR", "kind": "ROTATION_Z_DELTA", "value": 0.17453292519943295},
+        {"target": "KEY_WINDOW", "kind": "LIGHT_ENERGY_SCALE", "value": 0.82}
+      ]
+    },
+    {
+      "id": "INTERIOR_WINDOW",
+      "source": "INTERIOR",
+      "operations": [
+        {"target": "CAM_B43_B", "kind": "LOCATION_DELTA", "value": [-0.16, 0.18, -0.04]},
+        {"target": "CAM_B43_B", "kind": "CAMERA_LENS_SET", "value": 78.0},
+        {"target": "PROP_CHAIR", "kind": "LOCATION_DELTA", "value": [-0.30, 0.12, 0.0]},
+        {"target": "PROP_CHAIR", "kind": "ROTATION_Z_DELTA", "value": -0.13962634015954636},
+        {"target": "KEY_WINDOW", "kind": "LIGHT_ENERGY_SCALE", "value": 1.30}
+      ]
+    }
+  ],
+  "renderProfile": {
+    "engine": "CYCLES",
+    "resolution": [512, 288],
+    "samples": 128,
+    "seedOffset": 647647,
+    "animatedSeed": false,
+    "denoising": false,
+    "motionBlur": false,
+    "persistentData": false,
+    "cpuThreads": 4,
+    "rawSubimages": 7,
+    "passes": ["Combined", "Depth", "Normal", "Vector", "CryptoObject00", "CryptoObject01", "CryptoObject02"],
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorDepth": "32",
+    "codec": "ZIP"
+  },
+  "cells": [
+    {"runId": "TW_CPU_R1", "variant": "TABLETOP_WIDE", "device": "CPU", "repeat": 1, "order": 1},
+    {"runId": "TW_METAL_R1", "variant": "TABLETOP_WIDE", "device": "METAL", "repeat": 1, "order": 2},
+    {"runId": "IC_CPU_R1", "variant": "INTERIOR_CHAIR", "device": "CPU", "repeat": 1, "order": 3},
+    {"runId": "IC_METAL_R1", "variant": "INTERIOR_CHAIR", "device": "METAL", "repeat": 1, "order": 4},
+    {"runId": "TT_CPU_R1", "variant": "TABLETOP_TIGHT", "device": "CPU", "repeat": 1, "order": 5},
+    {"runId": "TT_METAL_R1", "variant": "TABLETOP_TIGHT", "device": "METAL", "repeat": 1, "order": 6},
+    {"runId": "IW_CPU_R1", "variant": "INTERIOR_WINDOW", "device": "CPU", "repeat": 1, "order": 7},
+    {"runId": "IW_METAL_R1", "variant": "INTERIOR_WINDOW", "device": "METAL", "repeat": 1, "order": 8},
+    {"runId": "TW_METAL_R2", "variant": "TABLETOP_WIDE", "device": "METAL", "repeat": 2, "order": 9},
+    {"runId": "IC_METAL_R2", "variant": "INTERIOR_CHAIR", "device": "METAL", "repeat": 2, "order": 10},
+    {"runId": "TT_METAL_R2", "variant": "TABLETOP_TIGHT", "device": "METAL", "repeat": 2, "order": 11},
+    {"runId": "IW_METAL_R2", "variant": "INTERIOR_WINDOW", "device": "METAL", "repeat": 2, "order": 12}
+  ],
+  "promotionThresholds": {
+    "crossBackendCombined": {
+      "maxLinearNrmseByCpuMeanRms": 0.0065,
+      "maxLogLuminanceRmse": 0.0016,
+      "maxEdgeLinearRmse": 0.006,
+      "maxLinearP95AbsoluteError": 0.0000005,
+      "maxLinearAbsoluteError": 0.55
+    },
+    "metalRepeatCombined": {
+      "maxLinearNrmseByFirstMeanRms": 0.0001,
+      "maxLinearP95AbsoluteError": 0.000001
+    },
+    "exactPassesAcrossBackend": ["Depth", "CryptoObject00", "CryptoObject01", "CryptoObject02"],
+    "maxMetalRenderSecondsPerCell": 2.5,
+    "minimumVariantsPassing": 4,
+    "requireAllFinite": true
+  },
+  "evidenceGates": {
+    "canaryProcesses": 1,
+    "holdoutProcesses": 12,
+    "successfulRenders": 13,
+    "requiredHoldoutSubimagesPerRender": 7,
+    "sourceAndBindingIdentity": true,
+    "deviceIdentity": true,
+    "operationReplayIdentity": true,
+    "freshBlenderProcesses": true,
+    "emptyOutputRootBeforeRun": true,
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "perProcessWallTimeSeconds": 120
+  },
+  "derivedMeasurements": [
+    "canary EXR-reported render and synchronization time",
+    "CPU-versus-Metal Combined linear, log-luminance and edge divergence for four unseen deterministic compositions",
+    "Metal R1-versus-R2 Combined divergence and pass-domain identity",
+    "Depth and Cryptomatte exactness across CPU and Metal",
+    "per-cell render seconds, process wall seconds, EXR size and peak RSS"
+  ],
+  "operationBoundary": {"nativeBlenderProcesses": 13, "sceneFilesModified": 0, "cacheDirectoriesMoved": 0, "deletions": 0, "dockerRuns": 0, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0, "networkRequired": false},
+  "decisionRule": {
+    "supported": "The canary passes before any holdout cell, all 12 holdout cells pass identity and artifact gates, all four variants satisfy every frozen numerical and timing threshold, the independent analyzer replay is byte exact and every attack passes.",
+    "notSupported": "Any failed canary, render, identity gate, numerical threshold, timing threshold, exact-pass requirement, analyzer replay or attack rejects B51-H1.",
+    "notFullProductionPromotion": "A supported B51-H1 promotes warm Metal only to long-sequence stress and worker-containment testing; it does not authorize unattended production rendering."
+  },
+  "attacks": ["PARENT_IDENTITY", "BLENDER_IDENTITY", "SOURCE_IDENTITY", "OCIO_IDENTITY", "DISK_ADMISSION", "CANARY_ORDER", "CANARY_READINESS", "VARIANT_MATRIX", "OPERATION_REPLAY", "FRESH_PROCESS", "DEVICE_ASSIGNMENT", "RENDER_PROFILE", "PASS_ROSTER", "NON_FINITE", "CROSS_BACKEND_TOLERANCE", "METAL_REPEAT_TOLERANCE", "EXACT_PASS_DOMAIN", "TIMING_BUDGET", "ARTIFACT_IDENTITY", "OPERATION_BOUNDARY", "EVIDENCE_SELF_HASH"],
+  "nonClaims": ["long-sequence thermal stability", "power consumption", "GPU-memory sufficiency for characters, hair, 8K textures or volumes", "2K/4K throughput", "macOS worker containment or sandboxing", "cross-machine or cross-version generalization", "human perceptual equivalence", "cloud or dollar cost", "CPU as physical ground truth", "unattended production authorization"]
+}
