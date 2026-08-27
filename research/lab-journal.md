@@ -2081,6 +2081,22 @@ Preflight file SHA-256: `853ad3b15e4952749897f5bbd0a892828c5e7531a2ef4150bed78ac
 
 Artifact: `experiments/blender-multipart-temporal-adapter-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-129 · D10 retains a verifier-contract failure despite passing payload measurements
+
+Date: 2026-08-27 · Type: FORMAL HOLDOUT NEGATIVE RESULT + INDEPENDENT FAILURE AUDIT · Blender: 5.2.0 LTS `fbe6228777e7`
+
+The immutable D10 matrix ran once: 12 fresh Blender Cycles source processes, six adapter processes and one analyzer process, with 19 unique child PIDs and 12 ray renders. Source EXR passes reproduced exactly across repeats; all seven canonical adapter arrays reconstructed byte-for-byte and repeated exactly. Depth passed 60/60 measured owner rows with zero maximum error, ownership probes passed 60/60, and raster orientation passed.
+
+The observed Vector payload also passed every frozen numerical gate. Object XY/ZW endpoint maxima were `7.62939453125e-6` and `8.529922399520072e-6` pixels; camera worst-case maximum was `3.0517578125e-5`; nearest wrong candidates remained 4.472 or 8.062 pixels away. Static XY/ZW maximum was `3.0517578125e-5`, inside the preregistered nonzero boundary.
+
+Formal verdict nevertheless remains `BLENDER_MULTIPART_TEMPORAL_ADAPTER_HOLDOUT_NOT_SUPPORTED`, base failure `SCENE_STRUCTURE`, with `ANIMATION_STRUCTURE=false`. The frozen verifier compared JSON double literals directly with Blender RNA float32 readbacks: for example 17.3 versus 17.299999237060547, −0.7 versus −0.699999988079071, and 1.1 versus 1.100000023841858. Keyframe values showed the same representation effect. This is a verifier-contract counterexample, not permission to add a post-hoc epsilon or rerun D10.
+
+Because the base contract failed before attack replay, attacks are 0/34 and the independent audit correctly reports `FAIL`, while separately confirming 12/12 source artifacts, 6/6 adapter replays, 42/42 reconstructed arrays and 12/12 diagnostics. Result SHA-256: `0d28fb0d520a9f1ca493e952d492642698c72591e9d328dba7a71498dc3be8a1`; audit file SHA-256: `c47a74042e27716ab1fbac9f78aaf53f12fb631038f79d683710de7d1162ad5e`.
+
+Next: preregister D10.1 with an explicit IEEE-754 binary32 canonical structural representation and entirely unseen resolution, ortho scale, IDs, geometry and trajectories. Names, enums, integers, topology and operation counts remain exact, and a one-ULP canonical-value attack must fail. D10 evidence is retained only as design evidence; production pass promotion remains closed.
+
+Artifacts: `experiments/blender-multipart-temporal-adapter-holdout-v0-1/` and `research/2026-08-27-b52-d10-blender-multipart-temporal-adapter-holdout-invalid-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
