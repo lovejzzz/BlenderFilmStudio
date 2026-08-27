@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityGuestCorrection.v0.1",
+  "experimentId": "B41-D1-C1",
+  "status": "PREREGISTERED_BEFORE_CORRECTION_TOOLING_OR_OUTPUT",
+  "question": "Does a fail-closed Colima Python standard-library member reader reproduce the host-derived identity after the frozen GNU-tar/xz pipeline failed?",
+  "parent": {
+    "d1SpecSha256": "a6b9c0ef025d8e4394726b09250404f54e15ca1d2f795c3aaa70df606bd24ca8",
+    "d1PreregistrationCommit": "bbef07079be510e1ccb1d77dab452d543fd30928",
+    "d1ToolFreezeCommit": "ecc29dd0c9328f73dafa6698cec28c29f693feeb",
+    "failedResultSha256": "ce7337fcf966434085856a959909baea729b0a529855789c69496c23e43b7a1a",
+    "failedAuditSha256": "6d49a9fddcde0129e8ccdad72deabee612ac58a4f21ff3231549a1ff41123f2d",
+    "failure": "REJECTED_GUEST_DECOMPRESSOR_AND_PIPELINE_FAILURE"
+  },
+  "guestCorrection": {
+    "changedImplementationExact": "Replace only the Colima guest GNU-tar shell pipelines with an installed Python 3 standard-library tarfile/lzma reader that emits one JSON object and exits nonzero on archive, member, read or serialization failure",
+    "pythonVersionExact": "3.12.3",
+    "reader": "python3 standard-library tarfile in r:xz mode",
+    "output": "one JSON object with sha256 and bytes",
+    "shellPipeline": false,
+    "installPackages": false
+  },
+  "frozenUnchanged": [
+    "B41-D1 parent archive URL, filename, byte count, SHA-256 and member path",
+    "host bsdtar/Node streaming derivation and ELF identity gates",
+    "disk admission, temporary cleanup and zero Blender/image/container execution boundary",
+    "eight attacks, accepted verdict and non-claims"
+  ],
+  "acceptedVerdict": "LINUX_AMD64_BLENDER_EXECUTABLE_IDENTITY_DERIVED",
+  "nonClaims": [
+    "B41-D1-C1 changes the guest member reader only",
+    "Agreement does not prove Blender runtime compatibility, rendering or containment",
+    "The derived Linux identity does not replace historical macOS Blender identities",
+    "A later preregistered correction must bind the derived value before runtime"
+  ]
+}
