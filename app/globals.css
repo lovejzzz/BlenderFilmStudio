@@ -674,6 +674,32 @@ footer > a { justify-self: end; color: var(--acid); font-size: 11px; }
 .render-formulas b { margin: auto 0 20px; font: 550 17px var(--font-geist-mono); line-height: 1.5; }
 .render-formulas p { margin: 0; color: #676d68; font-size: 11px; line-height: 1.65; }
 
+.cost-hardware { background: #ece9e0; }
+.cost-hardware h2 span { color: #1e8568; }
+.hardware-gates { margin-top: 66px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--ink); }
+.hardware-gates article { min-height: 315px; padding: 25px; border-left: 1px solid var(--ink); display: flex; flex-direction: column; }
+.hardware-gates article:first-child { border-left: 0; }
+.hardware-gates article.now { background: var(--cost-mint); }
+.hardware-gates article.candidate { background: #171713; color: white; }
+.hardware-gates span, .hardware-gates b { font: 650 9px var(--font-geist-mono); }
+.hardware-gates .candidate span { color: var(--cost-mint); }
+.hardware-gates strong { margin-top: auto; font: 540 clamp(35px, 4.5vw, 66px) var(--font-geist-mono); letter-spacing: -.075em; }
+.hardware-gates p { margin: 10px 0 0; color: #626a64; font-size: 12px; line-height: 1.65; }
+.hardware-gates .candidate p { color: #9aa49f; }
+.hardware-blueprint { margin-top: 36px; border: 1px solid var(--ink); }
+.hardware-blueprint header { padding: 20px; display: flex; justify-content: space-between; gap: 25px; border-bottom: 1px solid var(--ink); }
+.hardware-blueprint header span, .hardware-blueprint header b, .hardware-blueprint article span { font: 650 9px var(--font-geist-mono); }
+.hardware-blueprint header span { color: #1e8568; }
+.hardware-blueprint > div { display: grid; grid-template-columns: repeat(4, 1fr); }
+.hardware-blueprint article { min-height: 165px; padding: 18px; border-left: 1px solid var(--ink); display: flex; flex-direction: column; }
+.hardware-blueprint article:first-child { border-left: 0; }
+.hardware-blueprint article strong { margin-top: auto; font: 550 clamp(19px, 2vw, 30px) var(--font-geist-mono); letter-spacing: -.05em; }
+.hardware-blueprint article small { margin-top: 8px; color: #69716b; }
+.hardware-blueprint > p { margin: 0; padding: 20px; border-top: 1px solid var(--ink); color: #626a64; font-size: 12px; line-height: 1.7; }
+.hardware-decision { margin-top: 34px; padding: 25px; border: 1px solid #1e8568; display: grid; grid-template-columns: 180px 1fr; gap: 30px; }
+.hardware-decision b { color: #1e8568; font: 650 9px var(--font-geist-mono); }
+.hardware-decision p { margin: 0; line-height: 1.7; }
+
 .condition-grid { margin-top: 68px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid #48554f; }
 .condition-grid article { min-height: 220px; padding: 25px; border-left: 1px solid #48554f; border-top: 1px solid #48554f; display: flex; flex-direction: column; }
 .condition-grid article:nth-child(-n+3) { border-top: 0; }
@@ -725,15 +751,17 @@ footer > a { justify-self: end; color: var(--acid); font-size: 11px; }
   .cost-shift-grid { grid-template-columns: 1fr; gap: 20px; }
   .shift-arrow { min-height: 45px; transform: rotate(90deg); }
   .shift-arrow small { display: none; }
-  .accepted-second, .pricing-note, .scenario-verdict, .instrumentation, .license-note { grid-template-columns: 1fr; }
+  .accepted-second, .pricing-note, .scenario-verdict, .instrumentation, .license-note, .hardware-decision { grid-template-columns: 1fr; }
   .pricing-head, .pricing-row { grid-template-columns: 1.4fr repeat(2, .6fr); }
   .pricing-head > span:nth-child(3), .pricing-row > span:nth-child(3), .pricing-head > span:nth-child(4), .pricing-row > span:nth-child(4) { display: none; }
-  .render-formulas, .condition-grid, .lever-grid, .method-cautions { grid-template-columns: 1fr 1fr; }
+  .render-formulas, .condition-grid, .lever-grid, .method-cautions, .hardware-gates, .hardware-blueprint > div { grid-template-columns: 1fr 1fr; }
   .render-formulas article:nth-child(3) { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--ink); }
   .condition-grid article:nth-child(n), .lever-grid article:nth-child(n) { border-left: 1px solid currentColor; border-top: 1px solid currentColor; }
   .condition-grid article:nth-child(-n+2), .lever-grid article:nth-child(-n+2) { border-top: 0; }
   .condition-grid article:nth-child(odd), .lever-grid article:nth-child(odd) { border-left: 0; }
   .method-cautions article:nth-child(3) { grid-column: 1 / -1; border-left: 0; border-top: 1px solid #4a5752; }
+  .hardware-gates article:nth-child(3), .hardware-blueprint article:nth-child(3) { border-left: 0; border-top: 1px solid var(--ink); }
+  .hardware-blueprint article:nth-child(4) { border-top: 1px solid var(--ink); }
   .stack-head, .stack-row { grid-template-columns: .7fr 1.3fr; }
   .stack-head > span:last-child, .stack-row > small { display: none; }
 }
@@ -742,10 +770,12 @@ footer > a { justify-self: end; color: var(--acid); font-size: 11px; }
   .cost-hero h1 { font-size: clamp(47px, 13vw, 68px); }
   .cost-hero-stats { grid-template-columns: 1fr; }
   .cost-hero-stats article:nth-child(n) { border-left: 0; border-top: 1px solid #35413d; min-height: 115px; }
-  .cost-lenses, .render-formulas, .condition-grid, .lever-grid, .method-cautions { grid-template-columns: 1fr; }
+  .cost-lenses, .render-formulas, .condition-grid, .lever-grid, .method-cautions, .hardware-gates, .hardware-blueprint > div { grid-template-columns: 1fr; }
   .cost-lenses article + article, .render-formulas article:nth-child(n), .method-cautions article:nth-child(n) { border-left: 0; border-top: 1px solid currentColor; }
   .condition-grid article:nth-child(n), .lever-grid article:nth-child(n) { border-left: 0; border-top: 1px solid currentColor; }
   .condition-grid article:first-child, .lever-grid article:first-child { border-top: 0; }
+  .hardware-gates article:nth-child(n), .hardware-blueprint article:nth-child(n) { border-left: 0; border-top: 1px solid var(--ink); }
+  .hardware-gates article:first-child, .hardware-blueprint article:first-child { border-top: 0; }
   .auth-line { grid-template-columns: 1fr; }
   .auth-line > i { height: 32px; }
   .auth-line > p { grid-column: 1; }

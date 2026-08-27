@@ -82,6 +82,11 @@ const references = [
   ['OpenAI', 'Sora 2 API 历史按秒价格', 'https://developers.openai.com/api/docs/models/sora-2'],
   ['Blender Foundation', 'Blender 许可与商业使用', 'https://www.blender.org/about/license/'],
   ['Blender Manual 5.2', 'Cycles 渲染设置与设备选择', 'https://docs.blender.org/manual/en/5.2/render/cycles/render_settings/index.html'],
+  ['Blender Manual 5.2', 'CUDA / OptiX / Metal 支持与显存边界', 'https://docs.blender.org/manual/en/5.2/render/cycles/gpu_rendering.html'],
+  ['Blender Open Data', 'RTX 5090 当前公开 benchmark 分布', 'https://opendata.blender.org/devices/NVIDIA%20GeForce%20RTX%205090/'],
+  ['NVIDIA', 'GeForce RTX 5090：32 GB 与官方系统要求', 'https://marketplace.nvidia.com/en-us/consumer/graphics-cards/nvidia-geforce-rtx-5090/'],
+  ['NVIDIA', 'RTX PRO 6000 Blackwell：96 GB ECC 与 600 W', 'https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000-family/'],
+  ['AMD', 'Ryzen 9 9950X：16C/32T、256 GB 内存上限与 Linux 支持', 'https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html'],
 ];
 
 export default function CostModelPage() {
@@ -89,7 +94,7 @@ export default function CostModelPage() {
     <main className="cost-page">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="返回技术基线"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="成本研究导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><a href="#economics">成本栈</a><Link className="route-tab agenda-route" href="/research-agenda">研究路线</Link><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link><Link className="route-tab actor-route" href="/actor-v0-1">角色实验</Link><Link className="route-tab contact-route" href="/contact-v0-1">接触实验</Link><Link className="route-tab" href="/grasp-v0-1">手指抓握</Link></nav>
+        <nav aria-label="成本研究导航"><Link href="/">技术基线</Link><Link href="/blender-5-2">Blender 5.2</Link><a href="#economics">成本栈</a><a href="#hardware">硬件采购门</a><Link className="route-tab agenda-route" href="/research-agenda">研究路线</Link><Link className="route-tab spec-route" href="/spec-v0-1">规格 v0.1</Link><Link className="route-tab compiler-route" href="/compiler-v0-1">编译实验</Link><Link className="route-tab" href="/pixel-v0-1">像素实验</Link><Link className="route-tab actor-route" href="/actor-v0-1">角色实验</Link><Link className="route-tab contact-route" href="/contact-v0-1">接触实验</Link><Link className="route-tab" href="/grasp-v0-1">手指抓握</Link></nav>
         <span className="edition cost-edition">Cost 01</span>
       </header>
 
@@ -173,8 +178,16 @@ export default function CostModelPage() {
         <div className="b49-cost-update b51-cost-update"><header><span>NEW · B51-D1 + D2 + H1 NATIVE BACKEND</span><b>Metal 热态成本很低，但 H1 拒绝把它直接写进生产报价</b></header><div><article><strong>0.14 s</strong><span>canary synchronization</span></article><article><strong>0.53–0.75 s</strong><span>H1 Metal / frame</span></article><article><strong>4 / 4 FAIL</strong><span>cross-backend data exact</span></article><article><strong>1 / 4 FAIL</strong><span>beauty tolerance</span></article></div><p>速度来自 512×288 简单场景实测，不是 2K/4K、长序列、电力或美元价格。H1 的 timing 全过，但图像合同失败；当前成本模型只能保留“Metal 候选吞吐”，不能把它当成已获批准的生产帧价。下一步需决定 beauty Metal + data CPU 的分后端合同是否成立。</p><Link href="/native-backend-v0-1">查看 H1 负结果、21/21 attacks 与下一分叉 →</Link></div>
       </section>
 
+      <section className="section cost-hardware" id="hardware">
+        <div className="section-index">06 / 硬件采购门 · 2026.08.27</div>
+        <div className="cost-section-heading dark-heading"><div><p className="eyebrow dark"><span /> BUY A NEW EVIDENCE DOMAIN · NOT A FASTER DUPLICATE</p><h2>当前机器够研究。<br />下一台必须<span>增加对照维度。</span></h2></div><p>本机实测为 M4 Max、16 CPU cores、40 GPU cores、48 GB unified memory；当前内盘仅约 100 GiB 可用。它足以继续编译器、Metal 与 H2 实验。最先逼近的资源是证据存储，不是计算。</p></div>
+        <div className="hardware-gates"><article className="now"><span>BUY FIRST · STORAGE</span><strong>4–8 TB</strong><b>Thunderbolt / NVMe evidence volume</b><p>触发：在保留失败 EXR 与 100 GiB 安全余量时，本机无法准入下一实验。当前已经接近该门。</p></article><article className="candidate"><span>RESEARCH EXPANSION</span><strong>RTX 5090</strong><b>Linux · CUDA / OptiX · 32 GB</b><p>触发：开始跨 GPU/OS holdout、队列持续占用本机，或需要独立无人值守节点。它增加 NVIDIA 证据域，不只是缩短等待。</p></article><article><span>DO NOT BUY YET</span><strong>96 GB</strong><b>RTX PRO 6000 · ECC</b><p>仅当真实生产场景在 32 GB 上 OOM、必须依赖 ECC，或角色/毛发/体积工作集经测量需要 32 GB 以上时晋级。</p></article></div>
+        <div className="hardware-blueprint"><header><span>RECOMMENDED COMPLEMENTARY NODE</span><b>不是第二台 Mac，也不是双 GPU 堆料</b></header><div><article><span>GPU</span><strong>RTX 5090 · 32 GB</strong><small>OptiX/CUDA counterfactual</small></article><article><span>CPU / RAM</span><strong>16C/32T · 128 GB</strong><small>Ryzen 9 9950X class</small></article><article><span>STORAGE</span><strong>4 TB + 4–8 TB</strong><small>workspace + evidence/cache</small></article><article><span>HOST</span><strong>Linux · 1200 W</strong><small>pinned driver · remote worker</small></article></div><p>NVIDIA 对 RTX 5090 标注 32 GB GDDR7，安装指南要求至少 1000 W；长期满载研究节点建议留电源与散热余量。Blender 5.2 在 Linux 支持 OptiX，并要求 NVIDIA driver ≥575。显示器不是必要投入：节点可以由当前 Mac 通过受限 worker/SSH 调度。</p></div>
+        <div className="hardware-decision"><b>CURRENT DECISION</b><p><strong>存储：现在有理由购买。</strong> RTX 5090 节点：有明确科研价值，但不是继续 H2 的前置条件；如果预算允许，它是下一项最有效的硬件投入。RTX PRO 6000：没有实测触发证据，暂不购买。</p></div>
+      </section>
+
       <section className="section cost-scenarios">
-        <div className="section-index light">06 / 条件与情景</div>
+        <div className="section-index light">07 / 条件与情景</div>
         <div className="cost-section-heading"><div><p className="eyebrow"><span /> WHEN IS IT “ALMOST SUBSCRIPTION ONLY”?</p><h2>只有六个条件<br />同时成立。</h2></div><p>这不是否定最初设想，而是把它变成可以验证的假设。只要任一条件变化，就切换相应成本模型。</p></div>
         <div className="condition-grid">
           <article><span>01</span><b>已有可用 GPU 工作站</b><p>不发生新增硬件现金支出。</p></article><article><span>02</span><b>全部本地渲染</b><p>不使用云 GPU 和大额出站流量。</p></article><article><span>03</span><b>资产已拥有或免费</b><p>没有临时购买、扫描和外包建模。</p></article><article><span>04</span><b>人工暂不计价</b><p>研究者时间被视为研发投入而非镜头成本。</p></article><article><span>05</span><b>Codex 未超过额度</b><p>不加购 credits，也不切换到 API 计费。</p></article><article><span>06</span><b>不接可选生成 API</b><p>不额外调用图像、3D、动作、声音或视频模型。</p></article>
@@ -183,21 +196,21 @@ export default function CostModelPage() {
       </section>
 
       <section className="section cost-levers">
-        <div className="section-index">07 / 降本路线</div>
+        <div className="section-index">08 / 降本路线</div>
         <div className="cost-section-heading dark-heading"><div><p className="eyebrow dark"><span /> OPTIMIZATION ORDER</p><h2>先减少失败，<br />再减少单价。</h2></div><p>把每个优化动作与测量指标绑定。低价模型如果导致更多返工，可能反而提高“每个最终采用秒”的成本。</p></div>
         <div className="lever-grid">{levers.map(([id, title, detail]) => <article key={id}><span>{id}</span><h3>{title}</h3><p>{detail}</p></article>)}</div>
         <div className="instrumentation"><span>每个镜头最少记录</span><div>{['Codex 模式与模型', '输入 / 缓存 / 输出 Token', '构建与渲染小时', '功耗与设备', '资产复用次数', '失败原因与重试', '人工分钟', '最终采用秒'].map(item => <b key={item}>{item}</b>)}</div></div>
       </section>
 
       <section className="section cost-method" id="sources">
-        <div className="section-index light">08 / 方法与证据</div>
+        <div className="section-index light">09 / 方法与证据</div>
         <div className="cost-section-heading"><div><p className="eyebrow"><span /> EVIDENCE POLICY</p><h2>价格会变，<br />公式应该稳定。</h2></div><p>本页所有价格以 2026-08-25 为截点，优先引用官方资料。具体订阅额度会随任务、模型、上下文、推理强度和工具调用变化；发布前应再次核价。</p></div>
         <div className="method-cautions"><article><b>事实</b><p>Blender 许可为零、Codex 的两种认证路径、公开套餐/API 价格，以及 PixelSpec 的 CPU 时间与 EXR 体积。</p></article><article><b>工程判断</b><p>推荐的模型路由、资产摊销方式、成本栈与降本顺序。</p></article><article><b>待实验</b><p>真实镜头的 Token、渲染能耗、GPU 吞吐、首次接受率与资产复用收益。</p></article></div>
         <ol className="references cost-references">{references.map(([author, title, href], index) => <li key={href}><span>{String(index + 1).padStart(2, '0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
         <div className="license-note"><b>许可提醒</b><p>Blender 本身可免费用于商业作品，作品版权归创作者；但如果未来分发依赖 <code>bpy</code> 的 Blender 插件，应单独审查 GPL 合规。免费使用与可任意闭源分发插件不是同一件事。</p></div>
       </section>
 
-      <footer><div><span className="brand-mark">BFS</span><b>Production Cost Model</b></div><p>Research tab · Snapshot: 2026-08-25 · Prices are time-sensitive</p><Link href="/blender-5-2">Blender 5.2 技术地图 →</Link></footer>
+      <footer><div><span className="brand-mark">BFS</span><b>Production Cost Model</b></div><p>Research tab · Updated: 2026-08-27 · Prices are time-sensitive</p><Link href="/blender-5-2">Blender 5.2 技术地图 →</Link></footer>
     </main>
   );
 }
