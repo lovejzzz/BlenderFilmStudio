@@ -23,9 +23,13 @@ import {
 import {
   B41_C4_PREREG_COMMIT, B41_C4_SPEC_SHA256, analyzeB41C4Evidence, hashB41C4Evidence, readB41C4Spec,
 } from './lib/b41-c4-platform-binary-identity-correction.mjs';
+import {
+  B41_C5_PREREG_COMMIT, B41_C5_SPEC_SHA256, analyzeB41C5Evidence, hashB41C5Evidence, readB41C5Spec,
+} from './lib/b41-c5-eevee-enum-correction.mjs';
 
 const spec = await readB41Spec();
-const binaryIdentityCorrectionMode = process.argv.includes('--c4');
+const eeveeEnumCorrectionMode = process.argv.includes('--c5');
+const binaryIdentityCorrectionMode = process.argv.includes('--c4') || eeveeEnumCorrectionMode;
 const buildxCorrectionMode = process.argv.includes('--c3') || binaryIdentityCorrectionMode;
 const toolingCorrectionMode = process.argv.includes('--c2') || buildxCorrectionMode;
 const correctionMode = process.argv.includes('--c1') || toolingCorrectionMode;
@@ -33,7 +37,10 @@ const correctionSpec = correctionMode ? await readB41C1Spec() : null;
 const toolingCorrectionSpec = toolingCorrectionMode ? await readB41C2Spec() : null;
 const buildxCorrectionSpec = buildxCorrectionMode ? await readB41C3Spec() : null;
 const binaryIdentityCorrectionSpec = binaryIdentityCorrectionMode ? await readB41C4Spec() : null;
-const experimentRoot = resolve(repositoryRoot, binaryIdentityCorrectionMode
+const eeveeEnumCorrectionSpec = eeveeEnumCorrectionMode ? await readB41C5Spec() : null;
+const experimentRoot = resolve(repositoryRoot, eeveeEnumCorrectionMode
+  ? 'experiments/linux-amd64-blender-runtime-canary-v0-6'
+  : binaryIdentityCorrectionMode
   ? 'experiments/linux-amd64-blender-runtime-canary-v0-5'
   : buildxCorrectionMode
   ? 'experiments/linux-amd64-blender-runtime-canary-v0-4'
@@ -44,7 +51,9 @@ const timeoutRoot = resolve(experimentRoot, 'timeout');
 const dockerfilePath = resolve(repositoryRoot, 'worker/b41/Dockerfile');
 const runtimeCanaryPath = resolve(repositoryRoot, 'fixtures/b41/runtime-canary.py');
 const timeoutCanaryPath = resolve(repositoryRoot, 'fixtures/b41/timeout-canary.py');
-const libraryPath = resolve(repositoryRoot, binaryIdentityCorrectionMode
+const libraryPath = resolve(repositoryRoot, eeveeEnumCorrectionMode
+  ? 'scripts/lib/b41-c5-eevee-enum-correction.mjs'
+  : binaryIdentityCorrectionMode
   ? 'scripts/lib/b41-c4-platform-binary-identity-correction.mjs'
   : buildxCorrectionMode
   ? 'scripts/lib/b41-c3-guest-buildx-correction.mjs'
@@ -52,7 +61,9 @@ const libraryPath = resolve(repositoryRoot, binaryIdentityCorrectionMode
   : correctionMode ? 'scripts/lib/b41-c1-docker-architecture-correction.mjs'
   : 'scripts/lib/b41-linux-amd64-blender-runtime-canary.mjs');
 const runnerPath = resolve(repositoryRoot, 'scripts/run-b41-linux-amd64-blender-runtime-canary.mjs');
-const auditPath = resolve(repositoryRoot, binaryIdentityCorrectionMode
+const auditPath = resolve(repositoryRoot, eeveeEnumCorrectionMode
+  ? 'scripts/audit-b41-c5-eevee-enum-correction.mjs'
+  : binaryIdentityCorrectionMode
   ? 'scripts/audit-b41-c4-platform-binary-identity-correction.mjs'
   : buildxCorrectionMode
   ? 'scripts/audit-b41-c3-guest-buildx-correction.mjs'
@@ -160,8 +171,8 @@ async function runTimedContainer({ name, args, wallTimeMs, graceMs }) {
   };
 }
 
-const preregistrationCommit = binaryIdentityCorrectionMode ? B41_C4_PREREG_COMMIT : buildxCorrectionMode ? B41_C3_PREREG_COMMIT : toolingCorrectionMode ? B41_C2_PREREG_COMMIT : correctionMode ? B41_C1_PREREG_COMMIT : B41_PREREG_COMMIT;
-const preregistrationSpecSha256 = binaryIdentityCorrectionMode ? B41_C4_SPEC_SHA256 : buildxCorrectionMode ? B41_C3_SPEC_SHA256 : toolingCorrectionMode ? B41_C2_SPEC_SHA256 : correctionMode ? B41_C1_SPEC_SHA256 : B41_SPEC_SHA256;
+const preregistrationCommit = eeveeEnumCorrectionMode ? B41_C5_PREREG_COMMIT : binaryIdentityCorrectionMode ? B41_C4_PREREG_COMMIT : buildxCorrectionMode ? B41_C3_PREREG_COMMIT : toolingCorrectionMode ? B41_C2_PREREG_COMMIT : correctionMode ? B41_C1_PREREG_COMMIT : B41_PREREG_COMMIT;
+const preregistrationSpecSha256 = eeveeEnumCorrectionMode ? B41_C5_SPEC_SHA256 : binaryIdentityCorrectionMode ? B41_C4_SPEC_SHA256 : buildxCorrectionMode ? B41_C3_SPEC_SHA256 : toolingCorrectionMode ? B41_C2_SPEC_SHA256 : correctionMode ? B41_C1_SPEC_SHA256 : B41_SPEC_SHA256;
 if (spawnSync('git', ['merge-base', '--is-ancestor', preregistrationCommit, 'HEAD'], { cwd: repositoryRoot }).status !== 0) throw new Error('B41 preregistration is not an ancestor');
 const toolFreezeCommit = probe('git', ['rev-parse', 'HEAD'], 'tool freeze identity');
 if (probe('git', ['status', '--porcelain', '--untracked-files=no'], 'tracked status') !== '') throw new Error('B41 tracked worktree must be clean');
@@ -215,6 +226,12 @@ if (binaryIdentityCorrectionMode) {
     || c3FailedAuditSha256 !== binaryIdentityCorrectionSpec.parent.failedAuditSha256
     || derivedLinuxResultSha256 !== binaryIdentityCorrectionSpec.derivation.resultSha256
     || derivedLinuxAuditSha256 !== binaryIdentityCorrectionSpec.derivation.auditSha256) throw new Error('B41-C4 parent or derivation evidence differs');
+}
+if (eeveeEnumCorrectionMode) {
+  const c4FailedResultSha256 = await sha256File(resolve(repositoryRoot, 'experiments/linux-amd64-blender-runtime-canary-v0-5/results.json'));
+  const c4FailedAuditSha256 = await sha256File(resolve(repositoryRoot, 'experiments/linux-amd64-blender-runtime-canary-v0-5/audit.json'));
+  if (c4FailedResultSha256 !== eeveeEnumCorrectionSpec.parent.failedResultSha256
+    || c4FailedAuditSha256 !== eeveeEnumCorrectionSpec.parent.failedAuditSha256) throw new Error('B41-C5 parent failure evidence differs');
 }
 let buildTransport = null;
 if (buildxCorrectionMode) {
@@ -326,8 +343,8 @@ operations.push('DOCKER_RUNNING_CONTAINER_CHECK');
 const runningNames = probe('docker', [...dockerBase, 'ps', '--format', '{{.Names}}'], 'B41 post-run container check').split('\n').filter(Boolean);
 const experimentContainersRunningAfter = runningNames.filter(name => experimentNames.includes(name)).length;
 const evidence = {
-  schemaVersion: binaryIdentityCorrectionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.5' : buildxCorrectionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.4' : toolingCorrectionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.3' : correctionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.2' : 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.1',
-  experimentId: binaryIdentityCorrectionMode ? 'B41-C4' : buildxCorrectionMode ? 'B41-C3' : toolingCorrectionMode ? 'B41-C2' : correctionMode ? 'B41-C1' : 'B41',
+  schemaVersion: eeveeEnumCorrectionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.6' : binaryIdentityCorrectionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.5' : buildxCorrectionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.4' : toolingCorrectionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.3' : correctionMode ? 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.2' : 'bfs.linuxAmd64BlenderRuntimeEvidence.v0.1',
+  experimentId: eeveeEnumCorrectionMode ? 'B41-C5' : binaryIdentityCorrectionMode ? 'B41-C4' : buildxCorrectionMode ? 'B41-C3' : toolingCorrectionMode ? 'B41-C2' : correctionMode ? 'B41-C1' : 'B41',
   status: 'REAL_LINUX_AMD64_BLENDER_RUNTIME_AND_TIMEOUT_CANARY',
   preregistration: { commit: preregistrationCommit, specSha256: preregistrationSpecSha256 },
   ...(correctionMode ? { architectureCorrection: {
@@ -359,12 +376,17 @@ const evidence = {
     platformIdentity: structuredClone(binaryIdentityCorrectionSpec.platformIdentity),
     changedImplementationExact: structuredClone(binaryIdentityCorrectionSpec.changedImplementationExact),
   } } : {}),
+  ...(eeveeEnumCorrectionMode ? { eeveeEnumCorrection: {
+    parent: structuredClone(eeveeEnumCorrectionSpec.parent),
+    observedRuntime: structuredClone(eeveeEnumCorrectionSpec.observedRuntime),
+    changedImplementationExact: structuredClone(eeveeEnumCorrectionSpec.changedImplementationExact),
+  } } : {}),
   ancestry, toolFreezeCommit,
   runtime: { nodeVersion: process.version, nodeBinary: process.execPath, nodeBinarySha256, dockerHost: spec.runtime.dockerHost, dockerServerVersion: dockerIdentity.Version, dockerServerArchitecture: canonicalDockerArchitecture },
   tools: {
     runner: { uri: 'scripts/run-b41-linux-amd64-blender-runtime-canary.mjs', sha256: await sha256File(runnerPath) },
-    library: { uri: binaryIdentityCorrectionMode ? 'scripts/lib/b41-c4-platform-binary-identity-correction.mjs' : buildxCorrectionMode ? 'scripts/lib/b41-c3-guest-buildx-correction.mjs' : toolingCorrectionMode ? 'scripts/lib/b41-c2-build-receipt-tooling-correction.mjs' : correctionMode ? 'scripts/lib/b41-c1-docker-architecture-correction.mjs' : 'scripts/lib/b41-linux-amd64-blender-runtime-canary.mjs', sha256: await sha256File(libraryPath) },
-    audit: { uri: binaryIdentityCorrectionMode ? 'scripts/audit-b41-c4-platform-binary-identity-correction.mjs' : buildxCorrectionMode ? 'scripts/audit-b41-c3-guest-buildx-correction.mjs' : toolingCorrectionMode ? 'scripts/audit-b41-c2-build-receipt-tooling-correction.mjs' : correctionMode ? 'scripts/audit-b41-c1-docker-architecture-correction.mjs' : 'scripts/audit-b41-linux-amd64-blender-runtime-canary.mjs', sha256: await sha256File(auditPath) },
+    library: { uri: eeveeEnumCorrectionMode ? 'scripts/lib/b41-c5-eevee-enum-correction.mjs' : binaryIdentityCorrectionMode ? 'scripts/lib/b41-c4-platform-binary-identity-correction.mjs' : buildxCorrectionMode ? 'scripts/lib/b41-c3-guest-buildx-correction.mjs' : toolingCorrectionMode ? 'scripts/lib/b41-c2-build-receipt-tooling-correction.mjs' : correctionMode ? 'scripts/lib/b41-c1-docker-architecture-correction.mjs' : 'scripts/lib/b41-linux-amd64-blender-runtime-canary.mjs', sha256: await sha256File(libraryPath) },
+    audit: { uri: eeveeEnumCorrectionMode ? 'scripts/audit-b41-c5-eevee-enum-correction.mjs' : binaryIdentityCorrectionMode ? 'scripts/audit-b41-c4-platform-binary-identity-correction.mjs' : buildxCorrectionMode ? 'scripts/audit-b41-c3-guest-buildx-correction.mjs' : toolingCorrectionMode ? 'scripts/audit-b41-c2-build-receipt-tooling-correction.mjs' : correctionMode ? 'scripts/audit-b41-c1-docker-architecture-correction.mjs' : 'scripts/audit-b41-linux-amd64-blender-runtime-canary.mjs', sha256: await sha256File(auditPath) },
     dockerfile: { uri: 'worker/b41/Dockerfile', sha256: await sha256File(dockerfilePath) },
     runtimeCanary: { uri: 'fixtures/b41/runtime-canary.py', sha256: await sha256File(runtimeCanaryPath) },
     timeoutCanary: { uri: 'fixtures/b41/timeout-canary.py', sha256: await sha256File(timeoutCanaryPath) },
@@ -373,17 +395,19 @@ const evidence = {
   launchContract: structuredClone(spec.containerContract), runtimeOperationsExecuted: operations,
   success, timeout, cleanup: { experimentContainersRunningAfter, temporaryBuildRootRemoved }, errors,
 };
-evidence.evidenceHash = binaryIdentityCorrectionMode ? hashB41C4Evidence(evidence) : buildxCorrectionMode ? hashB41C3Evidence(evidence) : toolingCorrectionMode ? hashB41C2Evidence(evidence) : hashB41Evidence(evidence);
-const analysis = binaryIdentityCorrectionMode
+evidence.evidenceHash = eeveeEnumCorrectionMode ? hashB41C5Evidence(evidence) : binaryIdentityCorrectionMode ? hashB41C4Evidence(evidence) : buildxCorrectionMode ? hashB41C3Evidence(evidence) : toolingCorrectionMode ? hashB41C2Evidence(evidence) : hashB41Evidence(evidence);
+const analysis = eeveeEnumCorrectionMode
+  ? analyzeB41C5Evidence(evidence, eeveeEnumCorrectionSpec, binaryIdentityCorrectionSpec, buildxCorrectionSpec, toolingCorrectionSpec, correctionSpec, spec)
+  : binaryIdentityCorrectionMode
   ? analyzeB41C4Evidence(evidence, binaryIdentityCorrectionSpec, buildxCorrectionSpec, toolingCorrectionSpec, correctionSpec, spec)
   : buildxCorrectionMode
   ? analyzeB41C3Evidence(evidence, buildxCorrectionSpec, toolingCorrectionSpec, correctionSpec, spec)
   : toolingCorrectionMode ? analyzeB41C2Evidence(evidence, toolingCorrectionSpec, correctionSpec, spec)
   : correctionMode ? analyzeB41C1Evidence(evidence, correctionSpec, spec)
   : analyzeB41Evidence(evidence, spec);
-const acceptedVerdict = binaryIdentityCorrectionMode ? binaryIdentityCorrectionSpec.acceptedVerdict : buildxCorrectionMode ? buildxCorrectionSpec.acceptedVerdict : toolingCorrectionMode ? toolingCorrectionSpec.acceptedVerdict : correctionMode ? correctionSpec.acceptedVerdict : spec.acceptedVerdict;
-const correctionNonClaims = binaryIdentityCorrectionMode ? [...correctionSpec.nonClaims, ...toolingCorrectionSpec.nonClaims, ...buildxCorrectionSpec.nonClaims, ...binaryIdentityCorrectionSpec.nonClaims] : buildxCorrectionMode ? [...correctionSpec.nonClaims, ...toolingCorrectionSpec.nonClaims, ...buildxCorrectionSpec.nonClaims] : toolingCorrectionMode ? [...correctionSpec.nonClaims, ...toolingCorrectionSpec.nonClaims] : correctionMode ? correctionSpec.nonClaims : [];
+const acceptedVerdict = eeveeEnumCorrectionMode ? eeveeEnumCorrectionSpec.acceptedVerdict : binaryIdentityCorrectionMode ? binaryIdentityCorrectionSpec.acceptedVerdict : buildxCorrectionMode ? buildxCorrectionSpec.acceptedVerdict : toolingCorrectionMode ? toolingCorrectionSpec.acceptedVerdict : correctionMode ? correctionSpec.acceptedVerdict : spec.acceptedVerdict;
+const correctionNonClaims = eeveeEnumCorrectionMode ? [...correctionSpec.nonClaims, ...toolingCorrectionSpec.nonClaims, ...buildxCorrectionSpec.nonClaims, ...binaryIdentityCorrectionSpec.nonClaims, ...eeveeEnumCorrectionSpec.nonClaims] : binaryIdentityCorrectionMode ? [...correctionSpec.nonClaims, ...toolingCorrectionSpec.nonClaims, ...buildxCorrectionSpec.nonClaims, ...binaryIdentityCorrectionSpec.nonClaims] : buildxCorrectionMode ? [...correctionSpec.nonClaims, ...toolingCorrectionSpec.nonClaims, ...buildxCorrectionSpec.nonClaims] : toolingCorrectionMode ? [...correctionSpec.nonClaims, ...toolingCorrectionSpec.nonClaims] : correctionMode ? correctionSpec.nonClaims : [];
 const result = { ...evidence, analysis, verdict: analysis.passed ? acceptedVerdict : 'LINUX_AMD64_BLENDER_5_2_CANARY_FAILED', nonClaims: [...spec.nonClaims, ...correctionNonClaims] };
 await writeFile(resolve(experimentRoot, 'results.json'), `${JSON.stringify(result, null, 2)}\n`);
-process.stdout.write(`BFS_${binaryIdentityCorrectionMode ? 'B41_C4' : buildxCorrectionMode ? 'B41_C3' : toolingCorrectionMode ? 'B41_C2' : correctionMode ? 'B41_C1' : 'B41'}_RESULT verdict=${result.verdict} build=${image.buildExitCode} success=${success.exitCode ?? 'NA'} timeout=${timeout.outcome ?? 'NA'} failures=${analysis.failures.join(',') || 'none'}\n`);
+process.stdout.write(`BFS_${eeveeEnumCorrectionMode ? 'B41_C5' : binaryIdentityCorrectionMode ? 'B41_C4' : buildxCorrectionMode ? 'B41_C3' : toolingCorrectionMode ? 'B41_C2' : correctionMode ? 'B41_C1' : 'B41'}_RESULT verdict=${result.verdict} build=${image.buildExitCode} success=${success.exitCode ?? 'NA'} timeout=${timeout.outcome ?? 'NA'} failures=${analysis.failures.join(',') || 'none'}\n`);
 if (!analysis.passed) process.exitCode = 1;
