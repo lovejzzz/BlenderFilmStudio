@@ -2647,6 +2647,20 @@ The first D12.5 JSON listed both frozen D12.1 envelope encoders in its seven-too
 
 No fixture, radius rule, numeric threshold, coverage gate, decision outcome, process count or non-claim changed. The corrected spec SHA-256 is `b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2`. This correction remains visible rather than rewriting J-166.
 
+## J-168 · Frozen D12.5 paired-radius tools pass zero-render admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs/renders: 0/0
+
+The D12.5 source builder, adapter, paired Python/Node consumers and independent analyzer were frozen at `ac74808725569a0c7ddfb5dcdcda26ae2a617ed0`. Preflight matched all seven formal paths to their Git blobs, bound Blender/Python/Node/OCIO plus the three typed-envelope parents, parsed every tool and confirmed the analyzer imports neither consumer.
+
+A synthetic hard owner split passed byte-exact Python/Node reconstruction for both radii. Radius 3 was a nonempty subset of radius 2 and removed a nonempty ring. Three independent Blender 5.2 zero-render probes then constructed every new geometry family—including the wavy subdivided panel, beveled prism, nested sphere/torus and beveled crossing rods—with correct owner rosters and no render calls.
+
+All 14 admission tests passed. Disk admission observed 107,590,574,080 bytes available; the frozen 20 MiB projection leaves 107,569,602,560 bytes, 195,420,160 bytes above the unchanged 100 GiB reserve. The formal root remained absent. Preflight file SHA-256: `e4ec7025d1a949d3552bff5b2525d377422c367ec4a75f9ac886c46a41cb200e`.
+
+Next: commit this immutable admission, create the formal root exactly once and execute the 55-process paired-radius matrix.
+
+Artifact: `experiments/blender-static-radius-intervention-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
