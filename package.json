@@ -144,7 +144,9 @@
     "experiment:codex-worker-sequence": "node scripts/run-guarded-node.mjs scripts/run-b46-worker-sequence-promotion.mjs",
     "audit:codex-worker-sequence": "node scripts/audit-b46-worker-sequence-promotion.mjs",
     "experiment:codex-worker-production-passes": "node scripts/run-guarded-node.mjs scripts/run-b47-worker-production-pass-promotion.mjs",
-    "audit:codex-worker-production-passes": "node scripts/audit-b47-worker-production-pass-promotion.mjs"
+    "audit:codex-worker-production-passes": "node scripts/audit-b47-worker-production-pass-promotion.mjs",
+    "experiment:codex-worker-quality-cost": "node scripts/run-guarded-node.mjs scripts/run-b48-quality-cost-holdout.mjs",
+    "audit:codex-worker-quality-cost": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13 scripts/audit-b48-quality-cost-holdout.py --spec specs/codex-worker-quality-cost-holdout.v0.1.json --receipt experiments/codex-worker-quality-cost-holdout-v0-1/run.receipt.json --results experiments/codex-worker-quality-cost-holdout-v0-1/results.json --output experiments/codex-worker-quality-cost-holdout-v0-1/audit.json"
   },
   "dependencies": {
     "next": "16.3.3",
