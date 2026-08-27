@@ -2725,6 +2725,14 @@ The formal boundary is one localizer plus one independent audit, zero Blender/mo
 
 Artifacts: `specs/blender-static-interior-risk-localization.v0.1.json` and `research/2026-08-27-b52-d12-6-static-interior-risk-localization-protocol.md`.
 
+## J-174 · D12.6 preflight accepts the frozen zero-render tools
+
+Date: 2026-08-27 · Type: PREFLIGHT · Blender renders: 0
+
+The D12.6 preflight passed 10/10 checks and 259 synthetic risk-bound cases before the formal root existed. It bound the three formal tools to commit `95389441e66aff5e6e5547fbab0bc593d5b790cb`, verified every named D12.5-C2 parent identity, confirmed independent audit imports and admitted the 4 MiB projected write above the unchanged 100 GiB reserve. No formal D12.6 measurement was run or inspected.
+
+Artifacts: `experiments/blender-static-interior-risk-localization-preflight-v0-1/preflight.json` and `research/2026-08-27-b52-d12-6-interior-risk-localization-preflight.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
