@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "bfs.nativeCyclesBackendDerivationSpec.v0.1",
+  "experimentId": "B51-D1",
+  "question": "On this Apple M4 Max host, can the installed official Blender 5.2 native arm64 build complete the frozen B49-R Cycles production-pass workload on both CPU and Metal, and what repeatability, cross-backend pixel divergence and render-time effect sizes should constrain a later production-backend holdout?",
+  "status": "PREREGISTERED_DERIVATION",
+  "outputRoot": "experiments/native-cycles-backend-derivation-v0-1",
+  "parents": {
+    "b49ResolutionResult": {
+      "uri": "experiments/codex-worker-resolution-holdout-v0-1/results.json",
+      "sha256": "feae838494de10b024f9186bd81aa9c9657a21fb14cf48748ce623e8f9148a42",
+      "verdict": "B49_RESOLUTION_SCALING_HOLDOUT_SUPPORTED"
+    },
+    "b49ResolutionAudit": {
+      "uri": "experiments/codex-worker-resolution-holdout-v0-1/audit.json",
+      "sha256": "9e3e6572211f3b910e85a0c9a7c8ba38545a10e107a5148c0554a41ca6f399a4",
+      "status": "PASS"
+    }
+  },
+  "nativeBlender": {
+    "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "bytes": 183237520,
+    "version": "5.2.0 LTS",
+    "buildHash": "fbe6228777e7",
+    "hostArchitecture": "arm64",
+    "observedDevices": [
+      {"name": "Apple M4 Max", "type": "CPU", "id": "CPU"},
+      {"name": "Apple M4 Max (GPU - 40 cores)", "type": "METAL", "id": "METAL_Apple M4 Max (GPU - 40 cores)"}
+    ]
+  },
+  "ocio": {
+    "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+    "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+  },
+  "shots": [
+    {
+      "id": "TABLETOP",
+      "shotId": "SHOT_109",
+      "frame": 37,
+      "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+      "blendSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "blendBytes": 118702,
+      "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+      "sceneHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+      "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+      "qemuCpuParent": {
+        "renderSeconds": 151.992087,
+        "freshContainerWallSeconds": 161.733,
+        "combinedCanonicalFloat32Sha256": "66cdec65604528a5007f75fa3b61b355a839015ff903b128846f9d0740c8b642",
+        "exrUri": "experiments/codex-worker-resolution-holdout-v0-1/TABLETOP/production.exr",
+        "exrSha256": "f594a67322b93fc444c71e19991dc3a9b6adc81d21b754d74a2eb31fc5d0ed2e"
+      }
+    },
+    {
+      "id": "INTERIOR",
+      "shotId": "SHOT_110",
+      "frame": 19,
+      "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+      "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "blendBytes": 106078,
+      "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+      "sceneHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+      "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954",
+      "qemuCpuParent": {
+        "renderSeconds": 191.877228,
+        "freshContainerWallSeconds": 201.652,
+        "combinedCanonicalFloat32Sha256": "2b1118f9e423c780616a77a55ae42f025351dd2ba89e5976a8dde269b6575723",
+        "exrUri": "experiments/codex-worker-resolution-holdout-v0-1/INTERIOR/production.exr",
+        "exrSha256": "a5ecbc12a5c91b01536428160a7d49313ef48ec904d4917f5a728d54d5b753ea"
+      }
+    }
+  ],
+  "renderProfile": {
+    "engine": "CYCLES",
+    "resolution": [512, 288],
+    "samples": 128,
+    "seedOffset": 647647,
+    "animatedSeed": false,
+    "denoising": false,
+    "motionBlur": false,
+    "persistentData": false,
+    "cpuThreads": 4,
+    "rawSubimages": 7,
+    "passes": ["Combined", "Depth", "Normal", "Vector", "CryptoObject00", "CryptoObject01", "CryptoObject02"],
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorDepth": "32",
+    "codec": "ZIP"
+  },
+  "cells": [
+    {"runId": "T_CPU_R1", "shot": "TABLETOP", "device": "CPU", "repeat": 1, "order": 1},
+    {"runId": "T_METAL_R1", "shot": "TABLETOP", "device": "METAL", "repeat": 1, "order": 2},
+    {"runId": "I_METAL_R1", "shot": "INTERIOR", "device": "METAL", "repeat": 1, "order": 3},
+    {"runId": "I_CPU_R1", "shot": "INTERIOR", "device": "CPU", "repeat": 1, "order": 4},
+    {"runId": "T_METAL_R2", "shot": "TABLETOP", "device": "METAL", "repeat": 2, "order": 5},
+    {"runId": "T_CPU_R2", "shot": "TABLETOP", "device": "CPU", "repeat": 2, "order": 6},
+    {"runId": "I_CPU_R2", "shot": "INTERIOR", "device": "CPU", "repeat": 2, "order": 7},
+    {"runId": "I_METAL_R2", "shot": "INTERIOR", "device": "METAL", "repeat": 2, "order": 8}
+  ],
+  "evidenceGates": {
+    "freshBlenderProcesses": 8,
+    "successfulRenders": 8,
+    "requiredSubimagesPerRender": 7,
+    "combinedFinite": true,
+    "sourceAndBindingIdentity": true,
+    "deviceIdentity": true,
+    "emptyOutputRootBeforeRun": true,
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "268435456",
+    "perProcessWallTimeSeconds": 900
+  },
+  "derivedMeasurements": [
+    "within-device repeat byte and decoded-float identity",
+    "CPU-versus-Metal scene-linear RGB NRMSE, log-luminance NRMSE and edge NRMSE",
+    "native-versus-qemu scene-linear RGB divergence",
+    "per-cell render seconds, process wall seconds and median speed ratios",
+    "EXR size and process peak RSS",
+    "device roster and exact Blender executable identity"
+  ],
+  "operationBoundary": {
+    "nativeBlenderProcesses": 8,
+    "dockerRuns": 0,
+    "imageBuilds": 0,
+    "downloads": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0,
+    "networkRequired": false
+  },
+  "decisionRule": {
+    "usableDerivation": "All evidence gates pass and an independent analyzer reproduces the result from the frozen receipt and EXRs.",
+    "notAProductionPromotion": "No speed, divergence or repeatability observation from this derivation alone selects a production backend. The observed effect sizes constrain a separately preregistered holdout."
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "BLENDER_IDENTITY",
+    "SOURCE_IDENTITY",
+    "OCIO_IDENTITY",
+    "DISK_ADMISSION",
+    "RUN_MATRIX",
+    "FRESH_PROCESS",
+    "DEVICE_ASSIGNMENT",
+    "RENDER_PROFILE",
+    "PASS_ROSTER",
+    "NON_FINITE",
+    "ARTIFACT_IDENTITY",
+    "OPERATION_BOUNDARY",
+    "EVIDENCE_SELF_HASH"
+  ],
+  "nonClaims": [
+    "production-backend selection",
+    "worker containment or sandboxing on macOS",
+    "2K or 4K throughput",
+    "complete-shot throughput",
+    "GPU-memory sufficiency for characters, hair, textures or volumes",
+    "human cinematic quality",
+    "cross-machine or cross-version generalization",
+    "cloud or dollar cost",
+    "native CPU or qemu CPU as image-quality ground truth"
+  ]
+}
