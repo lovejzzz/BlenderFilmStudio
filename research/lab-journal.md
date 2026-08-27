@@ -2125,6 +2125,20 @@ This is API and implementation evidence only. It uses preregistered fixtures bef
 
 Artifacts: `experiments/blender-multipart-temporal-adapter-f32-development-smoke-v0-1/` and `research/2026-08-27-b52-d10-1-f32-adapter-development-smoke.md`.
 
+## J-132 · Frozen D10.1 tools pass zero-formal-output admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+The seven D10.1 tools were frozen and pushed at commit `efd68ec1b1d2029c2526232290d8eadbe81972c7`. Post-freeze preflight matched all seven current files byte-for-byte to their Git blobs, all nine parent artifacts, Blender/Python/OCIO identities and the frozen spec. Freshness checks confirmed new resolution, ortho scale, object names, pass IDs and object/camera trajectories relative to D10.
+
+The analyzer AST imported none of `bpy`, `bpy_extras` or `mathutils`, and the independent projection path did not consume renderer coordinates. The seven-test contract suite passed, including binary32 canonical structure, adjacent-ULP rejection and non-float exactness. A fresh real Blender 5.2 process confirmed the four required ViewLayer pass API properties with zero render calls and zero ray renders.
+
+The D10.1 formal root remained absent before and after admission. Formal child processes, Blender processes, adapters, render calls, ray renders and measurements were all zero. Disk admission observed 107,816,214,528 available bytes and projected 107,799,437,312 after the frozen 16 MiB write, above the 107,374,182,400-byte reserve.
+
+Preflight file SHA-256: `a2b9ad8f279d00d7f19a5dd3cda83b3434949084acb2f89e5228dc43fe32ad52`; internal canonical hash: `a8293e5672aed374caab49b8aa31b6780e19ffa3b27cd6fa6a45fc5c177874d8`. Admission: `ACCEPTED`. Next: commit this immutable admission, then create the formal root exactly once and execute the unchanged 19-process matrix.
+
+Artifact: `experiments/blender-multipart-temporal-adapter-f32-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
