@@ -1,0 +1,55 @@
+{
+  "auditHash": "385b335e306b7040cfb81468674f83003ad7845298464e3647178d001b7538b5",
+  "baseFailure": "DUAL_RECONSTRUCTION_IDENTITY",
+  "checks": {
+    "attackTotality": false,
+    "diagnosticIdentity": true,
+    "evidenceReplay": false,
+    "preflightIdentity": true,
+    "processIdentity": true,
+    "receiptIdentity": true,
+    "resultIdentity": true,
+    "specIdentity": true,
+    "toolIdentity": true,
+    "verdictConsistency": true
+  },
+  "experimentId": "B52-D12",
+  "inputs": {
+    "preflight": {
+      "sha256": "09b193b4a97b45884bc381b13df5ed5983c2403bbbffdbcce90bca558b293f8c",
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-preflight-v0-1/frozen-tool-preflight.json"
+    },
+    "receipt": {
+      "sha256": "8c78b88ef512a5f7aa39554fced1067c12a5a0036c4c8231964b544da146ea4b",
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/run.receipt.json"
+    },
+    "result": {
+      "sha256": "a411948ec8854029d199786bbf0a81565bc91099e2f973a2311b7513c2d07d82",
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/results.json"
+    },
+    "spec": {
+      "sha256": "dd2e990d276e0ee5c2fee9d22cf42c7f84db2b6c1947b1219dceab06a76f66a2",
+      "uri": "specs/blender-projective-subpixel-reconstruction-holdout.v0.1.json"
+    }
+  },
+  "operationCounts": {
+    "auditProcesses": 1,
+    "blenderProcesses": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "renders": 0,
+    "replayAnalyzerProcesses": 1
+  },
+  "pid": 17981,
+  "replay": {
+    "analysisPid": null,
+    "baseFailure": null,
+    "exitCode": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/analyze-b52-d12-projective-subpixel-holdout.py\", line 368, in <module>\n    if __name__ == \"__main__\": main()\n                               ~~~~^^\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/analyze-b52-d12-projective-subpixel-holdout.py\", line 320, in main\n    elif not sidecar.is_file() or json.loads(sidecar.read_text()) != expected_sidecar: raise RuntimeError(f\"D12 diagnostic sidecar replay mismatch: {sidecar}\")\n                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: D12 diagnostic sidecar replay mismatch: experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/diagnostics/PROJECTIVE_OBJECT_DOLLY_TRANSLATE_107X67/current.json\n",
+    "stdout": "",
+    "verdict": null
+  },
+  "schemaVersion": "bfs.blenderProjectiveSubpixelAudit.v0.1",
+  "status": "FAIL",
+  "verdict": "BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED"
+}

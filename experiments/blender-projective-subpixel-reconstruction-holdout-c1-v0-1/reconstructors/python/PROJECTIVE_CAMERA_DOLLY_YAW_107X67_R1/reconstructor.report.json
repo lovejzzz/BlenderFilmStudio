@@ -1,0 +1,177 @@
+{
+  "adapter": {
+    "reportHash": "6e683b5f98c0029cc59050f0815ecca0685d1749e0626842c6d05ec360019a4e",
+    "sha256": "966beb2ecd58130c3723447ab0ec30f78d6dc035061186ecdec5b9b6ea7926d1",
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/adapters/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/adapter.report.json"
+  },
+  "arrays": {
+    "directDepthValid": {
+      "bytes": 7169,
+      "dtype": "uint8",
+      "sha256": "9050f5e67ec0fa375ff2d3c66f90fdc67fc363e3a711f1f270218401ac06550b",
+      "shape": [
+        67,
+        107
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors/python/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/arrays/direct-depth-valid.u8"
+    },
+    "expectedVector": {
+      "bytes": 57352,
+      "dtype": "little-endian-float32",
+      "sha256": "4d2941086107b88eb2dc71fdef870590d727e7112a0621caebe01a1be4f2c670",
+      "shape": [
+        67,
+        107,
+        2
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors/python/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/arrays/expected-vector.xy32"
+    },
+    "nearest": {
+      "bytes": 114704,
+      "dtype": "little-endian-float32",
+      "sha256": "8ad5a32958f22378a6b45ccc6cbcf91aceb5a0d65fe708e64e03d3277f474ec5",
+      "shape": [
+        67,
+        107,
+        4
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors/python/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/arrays/nearest.rgba32"
+    },
+    "predictedCurrentDepth": {
+      "bytes": 28676,
+      "dtype": "little-endian-float32",
+      "sha256": "0faeffebc7c19d1dba2fd11930ab1854e0493b6f509a8b0b2014dd827487ab14",
+      "shape": [
+        67,
+        107
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors/python/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/arrays/predicted-current-depth.f32"
+    },
+    "predictedPreviousDepth": {
+      "bytes": 28676,
+      "dtype": "little-endian-float32",
+      "sha256": "9ae758f65e289d40e24c112e24a4f82df8afc5089317b7ad2cf1b05f5edaa9c8",
+      "shape": [
+        67,
+        107
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors/python/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/arrays/predicted-previous-depth.f32"
+    },
+    "reconstructed": {
+      "bytes": 114704,
+      "dtype": "little-endian-float32",
+      "sha256": "abff84875fb785d4ac05f0b9bb6b502fd39832abb5fd349f086b95c8a4259e10",
+      "shape": [
+        67,
+        107,
+        4
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors/python/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/arrays/reconstructed.rgba32"
+    },
+    "valid": {
+      "bytes": 7169,
+      "dtype": "uint8",
+      "sha256": "ed38b3adbb88a4aa2671f16323787826588ffd70ff33bab7fc9587bf52b28936",
+      "shape": [
+        67,
+        107
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors/python/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/arrays/valid.u8"
+    },
+    "wrongSign": {
+      "bytes": 114704,
+      "dtype": "little-endian-float32",
+      "sha256": "43a455f56e90c7b54468d3ed4f207488f7fc1e2bd9b0083c710c4a45d2ccbd90",
+      "shape": [
+        67,
+        107,
+        4
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors/python/PROJECTIVE_CAMERA_DOLLY_YAW_107X67_R1/arrays/wrong-sign.rgba32"
+    }
+  },
+  "experimentId": "B52-D12",
+  "fixtureId": "PROJECTIVE_CAMERA_DOLLY_YAW_107X67",
+  "formula": {
+    "cameraConvention": "Blender camera looks along local -Z; camera coordinates are transpose(R_camera_XYZ) * (world-cameraLocation)",
+    "expectedVector": [
+      "previousX-currentX",
+      "currentYTop-previousYTop"
+    ],
+    "implementationIndependence": "analyzer must implement scalar pinhole, Euler XYZ matrix, ray-plane, rigid inverse and projection math without bpy, bpy_extras, mathutils or tested reconstructor imports",
+    "pixelCenter": "decoded top-left integer pixel (x,y) denotes center ((x+0.5)/W, 1-(y+0.5)/H)",
+    "predictedPreviousDepth": "negative previous-camera Z of the transformed current local surface point",
+    "project": {
+      "u": "0.5 + lensMm * cameraX / (-cameraZ * sensorWidthMm)",
+      "vBottom": "0.5 + lensMm * cameraY / (-cameraZ * sensorHeightMm)",
+      "x": "u*W - 0.5",
+      "yTop": "(1-vBottom)*H - 0.5"
+    },
+    "sampleCoordinateTopLeft": [
+      "currentX+Vector.X",
+      "currentY-Vector.Y"
+    ],
+    "sensorHeightMm": "sensorWidthMm * H / W",
+    "surfacePoint": "cast current pixel-center ray, intersect current local-z-zero plane, invert current rigid transform to local point, apply previous rigid transform"
+  },
+  "kernel": "clip-boundary separable bilinear",
+  "measurements": {
+    "correct": {
+      "absoluteSignedMeanPerChannel": [
+        7.167440676317703e-06,
+        1.7951171991249975e-05,
+        2.18641235493283e-05
+      ],
+      "maximum": 9.107589721679688e-05,
+      "p99": 8.391678333282467e-05,
+      "psnrUnitRangeDb": 88.12090411566965,
+      "rmse": 3.926040670512424e-05
+    },
+    "directDepthIdentityRejectedFraction": 1.0,
+    "directDepthIdentityRejectedPixels": 5841,
+    "fractionalComponentFractionBeyond1Over1024": 0.997517548365006,
+    "fractionalDistanceP50": 0.22217178344726562,
+    "movingPixels": 5841,
+    "nearest": {
+      "absoluteSignedMeanPerChannel": [
+        0.00015985071812156046,
+        0.0006926751691906078,
+        0.00033946117193930323
+      ],
+      "maximum": 0.0062358081340789795,
+      "p99": 0.005593618154525755,
+      "psnrUnitRangeDb": 52.50635743737333,
+      "rmse": 0.0023696386681949498
+    },
+    "validPixels": 5841,
+    "vectorEndpointMaximum": 4.076957702636719e-05,
+    "vectorEndpointP99": 2.7179718017578125e-05,
+    "wrongSign": {
+      "absoluteSignedMeanPerChannel": [
+        0.01622278310015397,
+        0.01559269291512506,
+        0.007170452302785141
+      ],
+      "maximum": 0.05859953165054321,
+      "p99": 0.05711984395980835,
+      "psnrUnitRangeDb": 31.98361513770978,
+      "rmse": 0.025166292682405233
+    }
+  },
+  "operationCounts": {
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "pixelsVisited": 7169,
+    "reconstructorProcesses": 1
+  },
+  "pid": 17939,
+  "producer": "python",
+  "repeat": 1,
+  "reportHash": "c622a7a6bb6c660aa76169859e94b7e70c3419696b8e16c2a3ddb742c2ad0323",
+  "runtime": {
+    "numpy": "2.3.4",
+    "python": "3.13.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35"
+  },
+  "schemaVersion": "bfs.blenderProjectiveSubpixelReconstructorReport.v0.1"
+}

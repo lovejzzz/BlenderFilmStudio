@@ -2411,6 +2411,24 @@ Next: commit this immutable admission, then create the fresh C1 root once and ex
 
 Artifact: `experiments/blender-projective-subpixel-reconstruction-holdout-c1-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-151 · D12-C1 completes; frozen contract rejects report identity and static exactness
+
+Date: 2026-08-27 · Type: COMPLETE REAL-BLENDER FORMAL MATRIX + RETAINED FAILED AUDIT · Runtime: 65 unique formal child PIDs
+
+C1 completed all registered work from a fresh root: sixteen Cycles sources, eight adapters, eight Python and eight corrected Node reconstructors, eight Raw EXR encoders, sixteen Blender compositor bridges and one analyzer. The corrected infrastructure therefore worked. Receipt SHA-256 is `8c78b88ef512a5f7aa39554fced1067c12a5a0036c4c8231964b544da146ea4b`.
+
+The frozen analyzer returned `BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED`, earliest base failure `DUAL_RECONSTRUCTION_IDENTITY`. Python and Node arrays were nevertheless byte-identical in all eight cells and both matched the analyzer's independent arrays. The failed identity is the Node report self-hash: JavaScript canonical serialization emits small values as decimals while Python emits exponent notation, so all eight Node reports fail the Python `valid_report()` hash check.
+
+All three moving fixtures passed the projective endpoint, fractional-domain, transform-depth, absolute quality and control gates. Their correct RMSE values were `5.0454e-5`, `4.5846e-5` and `3.9260e-5`, with 85.94–88.12 dB PSNR; nearest RMSE was 45–60 times larger. Direct depth identity rejected 96.39–100% of valid moving pixels, reaffirming the transform-aware rule.
+
+The static exact gate independently failed. Blender's static Vector residual was at most `1.5258789e-5 px`; bilinear reconstruction then differed by at most `1.4901161e-7` RGB, while the preregistered static threshold was exactly zero. This is small but genuinely outside the frozen claim.
+
+The first frozen audit is retained as `FAIL`. Its relative formal-root invocation made diagnostic sidecar replay compare relative URIs against stored absolute URIs. A temporary absolute-root diagnostic replay passed evidence replay and all identity checks, but the audit still rejected because its `attackTotality` check requires 57/57 attacks to pass even for a legitimate negative result. The temporary probe was deleted; it is not formal evidence.
+
+Result SHA-256: `a411948ec8854029d199786bbf0a81565bc91099e2f973a2311b7513c2d07d82`; failed-audit SHA-256: `f090b7667f7ea882cc45df694f0d1dd0e39a2ead3bc83cde268b7990a64f832d`; result attacks: 47/57. Next is a preregistered audit-only C2 with no rerender or formal data rewrite.
+
+Artifacts: `experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/` and `research/2026-08-27-b52-d12-c1-formal-result-and-audit-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
