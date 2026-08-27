@@ -1165,6 +1165,18 @@ Status: `REJECTED_EEVEE_HEADLESS_OR_EMULATION_TIMEOUT`. The observation does not
 
 Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-6/` and `research/2026-08-26-b41-c5-eevee-headless-timeout.md`.
 
+## J-067 · B41-D2 rejects four headless Eevee configurations
+
+Type: preregistered non-promotable 2×2 diagnostic, independently audited, 2026-08-26.
+
+The exact C5 image ran default versus explicit OpenGL crossed with default versus Mesa software/surfaceless environment. All four cells configured the scene, saved `.blend`, failed the pre-render GPU query because the gpu module was not initialized, emitted the same three `EGL_BAD_MATCH` messages and remained at `RENDER_STARTED` until the 90-second ceiling. TERM produced exit 143 in every cell; no PNG/report or KILL was required.
+
+The diagnostic completed validly with classification `NO_COMPLETION_WITHIN_DIAGNOSTIC_CEILING`, 0/4 completion and no promotion authority. Audit matched tools, milestones, partial artifacts and classification exactly.
+
+This rejects only the four tested configurations on ARM64 Colima/qemu. Next research must separately test a display-service route or a Vulkan software device, or decide that this host can support a CPU Cycles canary but not the frozen Eevee gate.
+
+Artifacts: `experiments/linux-amd64-eevee-headless-diagnostic-v0-1/` and `research/2026-08-26-b41-d2-eevee-headless-diagnostic-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

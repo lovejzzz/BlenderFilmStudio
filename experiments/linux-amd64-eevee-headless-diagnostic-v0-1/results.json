@@ -1,0 +1,638 @@
+{
+  "schemaVersion": "bfs.linuxAmd64EeveeHeadlessDiagnosticEvidence.v0.1",
+  "experimentId": "B41-D2",
+  "status": "NON_PROMOTABLE_HEADLESS_BACKEND_DIAGNOSTIC",
+  "preregistration": {
+    "commit": "c96cb2cf8beb7c3a4525b9960e4bc5bb380c2b20",
+    "specSha256": "850d0d7b0cf9b1aa98ac203e846a3fcc7a0aa1bf5d581bad97d57411bee5369b"
+  },
+  "parent": {
+    "c5SpecSha256": "96f7d6ab2e802667ebd168a2acd3a8e578e0f7b48135bd132edc73d9ae202919",
+    "c5PreregistrationCommit": "53746d9fd484e8e9e8f01f3334acff51f4f8ecce",
+    "c5ToolFreezeCommit": "5aa251b8ce1880ecc565e3bf0e6effd70a04f073",
+    "failedResultSha256": "54f3a707498b958d4632b7f940be1e39c3f310b638ea5daa11afe53befcf258d",
+    "failedAuditSha256": "5a1212205a983bfaa9fa0e2ddb72b93a36ca9dc3c2e2829803d8a4e6de97c761",
+    "failure": "REJECTED_EEVEE_HEADLESS_OR_EMULATION_TIMEOUT"
+  },
+  "toolFreezeCommit": "5afde8219a35e9bd31eeb6b8ebf967856a47b6d6",
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b41-d2-eevee-headless-diagnostic.mjs",
+      "sha256": "47d057d0f02da174eefc0e830d8ee151c0e0120e5f1d04dd4d7e0aa33d738334"
+    },
+    "library": {
+      "uri": "scripts/lib/b41-d2-eevee-headless-diagnostic.mjs",
+      "sha256": "b5ff1fbdf82fe1284e626e7709f23d1811775b51c55912416f7996d8904535d9"
+    },
+    "audit": {
+      "uri": "scripts/audit-b41-d2-eevee-headless-diagnostic.mjs",
+      "sha256": "3b79a8ae279073ea4a7c24ba5658a53427af46ef45ea116da0942a2fc6895230"
+    },
+    "diagnostic": {
+      "uri": "fixtures/b41/eevee-headless-diagnostic.py",
+      "sha256": "f034f5ec5e64b2b666b9b4e332d787e520a84bf4ad1e1843088e69d3ae9c3e2c"
+    }
+  },
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "dockerHost": "unix:///Users/tianxing/.colima/default/docker.sock",
+    "containerPlatform": "linux/amd64"
+  },
+  "diskAdmission": {
+    "availableBytes": "129370910720",
+    "projectedWriteBytes": "21474836480",
+    "minimumReserveBytes": "107374182400",
+    "freeAfterProjectedBytes": "107896074240",
+    "status": "ACCEPTED"
+  },
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "sizeBytes": 1004901158
+  },
+  "inputFixture": {
+    "ocioTreeManifestSha256": "57f58f25ff919ab2acb214ed42e1a904f32b6c97836aea74c1ec87e13e8e0c16"
+  },
+  "design": {
+    "factorial": "2x2",
+    "factors": {
+      "gpuBackend": [
+        "DEFAULT",
+        "EXPLICIT_OPENGL"
+      ],
+      "headlessEnvironment": [
+        "DEFAULT",
+        "MESA_SURFACELESS_SOFTWARE"
+      ]
+    },
+    "cells": [
+      {
+        "id": "B00",
+        "gpuBackend": "DEFAULT",
+        "headlessEnvironment": "DEFAULT"
+      },
+      {
+        "id": "B10",
+        "gpuBackend": "EXPLICIT_OPENGL",
+        "headlessEnvironment": "DEFAULT"
+      },
+      {
+        "id": "B01",
+        "gpuBackend": "DEFAULT",
+        "headlessEnvironment": "MESA_SURFACELESS_SOFTWARE"
+      },
+      {
+        "id": "B11",
+        "gpuBackend": "EXPLICIT_OPENGL",
+        "headlessEnvironment": "MESA_SURFACELESS_SOFTWARE"
+      }
+    ],
+    "explicitOpenGlArgv": [
+      "--gpu-backend",
+      "opengl"
+    ],
+    "softwareSurfacelessEnvironment": {
+      "EGL_PLATFORM": "surfaceless",
+      "LIBGL_ALWAYS_SOFTWARE": "1"
+    },
+    "wallTimeMsPerCell": 90000,
+    "terminateGraceMs": 5000,
+    "milestonesExactOrder": [
+      "PROCESS_STARTED",
+      "SCENE_CONFIGURED",
+      "BLEND_SAVED",
+      "GPU_PROBE_STARTED",
+      "GPU_PROBE_COMPLETED",
+      "RENDER_STARTED",
+      "RENDER_COMPLETED",
+      "REPORT_WRITTEN"
+    ],
+    "render": {
+      "engine": "BLENDER_EEVEE",
+      "width": 32,
+      "height": 32,
+      "fileFormat": "PNG"
+    }
+  },
+  "launchBoundary": {
+    "inheritB41C5SecurityContract": true,
+    "onlyCellDifferences": [
+      "optional --gpu-backend opengl argv",
+      "optional EGL_PLATFORM and LIBGL_ALWAYS_SOFTWARE environment"
+    ],
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": [
+      "ALL"
+    ],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "inputReadOnly": true,
+    "outputWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4
+  },
+  "cells": [
+    {
+      "id": "B00",
+      "gpuBackend": "DEFAULT",
+      "headlessEnvironment": "DEFAULT",
+      "attempted": true,
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/inputs/eevee-headless-diagnostic.py"
+      ],
+      "environment": {
+        "BFS_INPUT_ROOT": "/inputs",
+        "BFS_OUTPUT_ROOT": "/outputs",
+        "BFS_REPORT_PATH": "/outputs/report.json",
+        "BLENDER_USER_CONFIG": "/work/blender-config",
+        "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+        "HOME": "/work/home",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "OCIO": "/inputs/ocio/config.ocio",
+        "TMPDIR": "/work/tmp",
+        "BFS_JOB_ID": "B41-D2-B00",
+        "BFS_CELL_ID": "B00",
+        "BFS_MILESTONE_PATH": "/outputs/milestones.jsonl"
+      },
+      "exitCode": 143,
+      "signal": null,
+      "elapsedMs": 90095,
+      "stdout": "00:00.186  color_management | Using OCIO=/inputs/ocio/config.ocio\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\n",
+      "timeoutTriggered": true,
+      "termSent": true,
+      "forceKillSent": false,
+      "termAtMs": 90003,
+      "forceAtMs": null,
+      "milestones": [
+        {
+          "cellId": "B00",
+          "details": {},
+          "monotonicNs": 4696457262866,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1
+        },
+        {
+          "cellId": "B00",
+          "details": {
+            "engine": "BLENDER_EEVEE"
+          },
+          "monotonicNs": 4696488320792,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 2
+        },
+        {
+          "cellId": "B00",
+          "details": {
+            "bytes": 95645,
+            "sha256": "15e57a12f2459d5f21b7264cccd73c622fd23a87235bcd4423df7f06d61c7a2e"
+          },
+          "monotonicNs": 4696989957657,
+          "name": "BLEND_SAVED",
+          "processId": 1,
+          "sequence": 3
+        },
+        {
+          "cellId": "B00",
+          "details": {},
+          "monotonicNs": 4696990849409,
+          "name": "GPU_PROBE_STARTED",
+          "processId": 1,
+          "sequence": 4
+        },
+        {
+          "cellId": "B00",
+          "details": {
+            "error": "SystemError: GPU functions for drawing requires the gpu module to be initialized. See gpu.init."
+          },
+          "monotonicNs": 4696993325042,
+          "name": "GPU_PROBE_COMPLETED",
+          "processId": 1,
+          "sequence": 5
+        },
+        {
+          "cellId": "B00",
+          "details": {},
+          "monotonicNs": 4696993772793,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 6
+        }
+      ],
+      "report": null,
+      "artifacts": {
+        "blend": {
+          "bytes": 95645,
+          "sha256": "15e57a12f2459d5f21b7264cccd73c622fd23a87235bcd4423df7f06d61c7a2e"
+        },
+        "png": {
+          "valid": false,
+          "dimensions": null,
+          "bytes": 0,
+          "sha256": null
+        }
+      },
+      "completed": false,
+      "promotable": false
+    },
+    {
+      "id": "B10",
+      "gpuBackend": "EXPLICIT_OPENGL",
+      "headlessEnvironment": "DEFAULT",
+      "attempted": true,
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--gpu-backend",
+        "opengl",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/inputs/eevee-headless-diagnostic.py"
+      ],
+      "environment": {
+        "BFS_INPUT_ROOT": "/inputs",
+        "BFS_OUTPUT_ROOT": "/outputs",
+        "BFS_REPORT_PATH": "/outputs/report.json",
+        "BLENDER_USER_CONFIG": "/work/blender-config",
+        "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+        "HOME": "/work/home",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "OCIO": "/inputs/ocio/config.ocio",
+        "TMPDIR": "/work/tmp",
+        "BFS_JOB_ID": "B41-D2-B10",
+        "BFS_CELL_ID": "B10",
+        "BFS_MILESTONE_PATH": "/outputs/milestones.jsonl"
+      },
+      "exitCode": 143,
+      "signal": null,
+      "elapsedMs": 90088,
+      "stdout": "00:00.183  color_management | Using OCIO=/inputs/ocio/config.ocio\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\n",
+      "timeoutTriggered": true,
+      "termSent": true,
+      "forceKillSent": false,
+      "termAtMs": 90004,
+      "forceAtMs": null,
+      "milestones": [
+        {
+          "cellId": "B10",
+          "details": {},
+          "monotonicNs": 4786473083206,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1
+        },
+        {
+          "cellId": "B10",
+          "details": {
+            "engine": "BLENDER_EEVEE"
+          },
+          "monotonicNs": 4786505485252,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 2
+        },
+        {
+          "cellId": "B10",
+          "details": {
+            "bytes": 95644,
+            "sha256": "b2d528e98a673fdf2df4ca62d5d5f16a26aaee3ef3af909529d7e373b6cdbf8e"
+          },
+          "monotonicNs": 4786999285715,
+          "name": "BLEND_SAVED",
+          "processId": 1,
+          "sequence": 3
+        },
+        {
+          "cellId": "B10",
+          "details": {},
+          "monotonicNs": 4787000266218,
+          "name": "GPU_PROBE_STARTED",
+          "processId": 1,
+          "sequence": 4
+        },
+        {
+          "cellId": "B10",
+          "details": {
+            "error": "SystemError: GPU functions for drawing requires the gpu module to be initialized. See gpu.init."
+          },
+          "monotonicNs": 4787002047973,
+          "name": "GPU_PROBE_COMPLETED",
+          "processId": 1,
+          "sequence": 5
+        },
+        {
+          "cellId": "B10",
+          "details": {},
+          "monotonicNs": 4787002605433,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 6
+        }
+      ],
+      "report": null,
+      "artifacts": {
+        "blend": {
+          "bytes": 95644,
+          "sha256": "b2d528e98a673fdf2df4ca62d5d5f16a26aaee3ef3af909529d7e373b6cdbf8e"
+        },
+        "png": {
+          "valid": false,
+          "dimensions": null,
+          "bytes": 0,
+          "sha256": null
+        }
+      },
+      "completed": false,
+      "promotable": false
+    },
+    {
+      "id": "B01",
+      "gpuBackend": "DEFAULT",
+      "headlessEnvironment": "MESA_SURFACELESS_SOFTWARE",
+      "attempted": true,
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/inputs/eevee-headless-diagnostic.py"
+      ],
+      "environment": {
+        "BFS_INPUT_ROOT": "/inputs",
+        "BFS_OUTPUT_ROOT": "/outputs",
+        "BFS_REPORT_PATH": "/outputs/report.json",
+        "BLENDER_USER_CONFIG": "/work/blender-config",
+        "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+        "HOME": "/work/home",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "OCIO": "/inputs/ocio/config.ocio",
+        "TMPDIR": "/work/tmp",
+        "BFS_JOB_ID": "B41-D2-B01",
+        "BFS_CELL_ID": "B01",
+        "BFS_MILESTONE_PATH": "/outputs/milestones.jsonl",
+        "EGL_PLATFORM": "surfaceless",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "exitCode": 143,
+      "signal": null,
+      "elapsedMs": 90095,
+      "stdout": "00:00.184  color_management | Using OCIO=/inputs/ocio/config.ocio\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\n",
+      "timeoutTriggered": true,
+      "termSent": true,
+      "forceKillSent": false,
+      "termAtMs": 90003,
+      "forceAtMs": null,
+      "milestones": [
+        {
+          "cellId": "B01",
+          "details": {},
+          "monotonicNs": 4876633068146,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1
+        },
+        {
+          "cellId": "B01",
+          "details": {
+            "engine": "BLENDER_EEVEE"
+          },
+          "monotonicNs": 4876666725105,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 2
+        },
+        {
+          "cellId": "B01",
+          "details": {
+            "bytes": 95644,
+            "sha256": "d85a45574de05a234fdb6d34cef9aa494c06bb64be376b559f8e8e03455739e0"
+          },
+          "monotonicNs": 4877165564723,
+          "name": "BLEND_SAVED",
+          "processId": 1,
+          "sequence": 3
+        },
+        {
+          "cellId": "B01",
+          "details": {},
+          "monotonicNs": 4877166456350,
+          "name": "GPU_PROBE_STARTED",
+          "processId": 1,
+          "sequence": 4
+        },
+        {
+          "cellId": "B01",
+          "details": {
+            "error": "SystemError: GPU functions for drawing requires the gpu module to be initialized. See gpu.init."
+          },
+          "monotonicNs": 4877168320897,
+          "name": "GPU_PROBE_COMPLETED",
+          "processId": 1,
+          "sequence": 5
+        },
+        {
+          "cellId": "B01",
+          "details": {},
+          "monotonicNs": 4877168913023,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 6
+        }
+      ],
+      "report": null,
+      "artifacts": {
+        "blend": {
+          "bytes": 95644,
+          "sha256": "d85a45574de05a234fdb6d34cef9aa494c06bb64be376b559f8e8e03455739e0"
+        },
+        "png": {
+          "valid": false,
+          "dimensions": null,
+          "bytes": 0,
+          "sha256": null
+        }
+      },
+      "completed": false,
+      "promotable": false
+    },
+    {
+      "id": "B11",
+      "gpuBackend": "EXPLICIT_OPENGL",
+      "headlessEnvironment": "MESA_SURFACELESS_SOFTWARE",
+      "attempted": true,
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--gpu-backend",
+        "opengl",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/inputs/eevee-headless-diagnostic.py"
+      ],
+      "environment": {
+        "BFS_INPUT_ROOT": "/inputs",
+        "BFS_OUTPUT_ROOT": "/outputs",
+        "BFS_REPORT_PATH": "/outputs/report.json",
+        "BLENDER_USER_CONFIG": "/work/blender-config",
+        "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+        "HOME": "/work/home",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "OCIO": "/inputs/ocio/config.ocio",
+        "TMPDIR": "/work/tmp",
+        "BFS_JOB_ID": "B41-D2-B11",
+        "BFS_CELL_ID": "B11",
+        "BFS_MILESTONE_PATH": "/outputs/milestones.jsonl",
+        "EGL_PLATFORM": "surfaceless",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      },
+      "exitCode": 143,
+      "signal": null,
+      "elapsedMs": 90093,
+      "stdout": "00:00.178  color_management | Using OCIO=/inputs/ocio/config.ocio\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\n",
+      "timeoutTriggered": true,
+      "termSent": true,
+      "forceKillSent": false,
+      "termAtMs": 90003,
+      "forceAtMs": null,
+      "milestones": [
+        {
+          "cellId": "B11",
+          "details": {},
+          "monotonicNs": 4966511213004,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1
+        },
+        {
+          "cellId": "B11",
+          "details": {
+            "engine": "BLENDER_EEVEE"
+          },
+          "monotonicNs": 4966543055453,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 2
+        },
+        {
+          "cellId": "B11",
+          "details": {
+            "bytes": 95645,
+            "sha256": "3627e51c86c264ce5b621fc21a52b607331ec22bc8ac5e9c787d0569ae71da3f"
+          },
+          "monotonicNs": 4967032084957,
+          "name": "BLEND_SAVED",
+          "processId": 1,
+          "sequence": 3
+        },
+        {
+          "cellId": "B11",
+          "details": {},
+          "monotonicNs": 4967033144085,
+          "name": "GPU_PROBE_STARTED",
+          "processId": 1,
+          "sequence": 4
+        },
+        {
+          "cellId": "B11",
+          "details": {
+            "error": "SystemError: GPU functions for drawing requires the gpu module to be initialized. See gpu.init."
+          },
+          "monotonicNs": 4967035499215,
+          "name": "GPU_PROBE_COMPLETED",
+          "processId": 1,
+          "sequence": 5
+        },
+        {
+          "cellId": "B11",
+          "details": {},
+          "monotonicNs": 4967036105467,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 6
+        }
+      ],
+      "report": null,
+      "artifacts": {
+        "blend": {
+          "bytes": 95645,
+          "sha256": "3627e51c86c264ce5b621fc21a52b607331ec22bc8ac5e9c787d0569ae71da3f"
+        },
+        "png": {
+          "valid": false,
+          "dimensions": null,
+          "bytes": 0,
+          "sha256": null
+        }
+      },
+      "completed": false,
+      "promotable": false
+    }
+  ],
+  "classification": "NO_COMPLETION_WITHIN_DIAGNOSTIC_CEILING",
+  "runtimeOperationsExecuted": [
+    "DOCKER_IMAGE_INSPECT",
+    "DOCKER_RUN_B00",
+    "DOCKER_KILL_TERM_bfs-b41-d2-b00",
+    "DOCKER_RUN_B10",
+    "DOCKER_KILL_TERM_bfs-b41-d2-b10",
+    "DOCKER_RUN_B01",
+    "DOCKER_KILL_TERM_bfs-b41-d2-b01",
+    "DOCKER_RUN_B11",
+    "DOCKER_KILL_TERM_bfs-b41-d2-b11",
+    "DOCKER_RUNNING_CONTAINER_CHECK"
+  ],
+  "cleanup": {
+    "experimentContainersRunningAfter": 0,
+    "temporaryInputRootRemoved": true
+  },
+  "promotable": false,
+  "errors": [],
+  "evidenceHash": "6f80a07383ea3496bd465415292ec7351ba8d4213e5eb236df44f7c233bac1b1",
+  "analysis": {
+    "schemaVersion": "bfs.linuxAmd64EeveeHeadlessDiagnosticAnalysis.v0.1",
+    "passed": true,
+    "failures": [],
+    "decision": "EEVEE_HEADLESS_DIAGNOSTIC_COMPLETE_NON_PROMOTABLE"
+  },
+  "verdict": "EEVEE_HEADLESS_DIAGNOSTIC_COMPLETE_NON_PROMOTABLE",
+  "nonClaims": [
+    "B41-D2 cannot promote the worker even if a cell completes",
+    "A software Mesa result is not native GPU performance or production throughput evidence",
+    "A 90-second ceiling does not prove permanent deadlock",
+    "The diagnostic does not alter the frozen B41 30-second success threshold",
+    "No SceneSpec compiler workload runs in B41-D2"
+  ]
+}
