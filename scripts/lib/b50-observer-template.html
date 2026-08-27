@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anonymous focus review</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,system-ui,sans-serif;background:#0b0d0f;color:#f4f2ea}*{box-sizing:border-box}body{margin:0;padding:28px;background:radial-gradient(circle at 78% 10%,#26302b 0,transparent 32%),#0b0d0f}main{max-width:1080px;margin:auto}.kicker{font:700 11px ui-monospace,monospace;letter-spacing:.18em;color:#baf36b}h1{font-size:clamp(32px,6vw,72px);line-height:.94;margin:18px 0}.brief{font-size:20px;line-height:1.45;border-left:3px solid #baf36b;padding-left:18px}.viewer{margin:30px 0}.stage{position:relative;width:960px;height:540px;max-width:100%;aspect-ratio:16/9;background:#000;border:1px solid #58615d}.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.stage img[hidden]{display:none}.switch{display:flex;gap:8px;margin:12px 0}.switch button,.download{border:1px solid #aeb7b0;background:#121719;color:#fff;padding:12px 18px;font-weight:700;cursor:pointer}.switch button.active{background:#baf36b;color:#081006}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{border:1px solid #38403d;padding:18px;background:#111517}.card.full{grid-column:1/-1}fieldset{border:0;padding:0;margin:0 0 22px}legend{font-weight:750;margin-bottom:10px}label{display:block;margin:8px 0}select,input{width:100%;padding:10px;background:#080b0c;color:#fff;border:1px solid #4b5550}.choices label{display:inline-block;margin-right:18px}.choices input{width:auto}.note{color:#abb3ae;font-size:13px;line-height:1.5}.download{margin-top:20px;background:#baf36b;color:#071006}.status{font:700 12px ui-monospace,monospace;margin-left:12px}@media(max-width:800px){body{padding:16px}.grid{grid-template-columns:1fr}.card.full{grid-column:auto}.stage{width:100%;height:auto}.stage img{position:absolute}}
+</style>
+</head>
+<body><main>
+<p class="kicker">PARTICIPANT-BLIND · PAIRED STILL REVIEW</p>
+<h1>Where should the image focus?</h1>
+<p class="brief">“A restrained 24-frame locked-off portrait of a chair in an interior.”</p>
+<p class="note">Inspect both anonymous images at browser zoom 100%. Use the buttons to switch rapidly. Do not inspect file metadata or developer tools. This is a remote controlled-record study, not a calibrated cinema-lab session.</p>
+<section class="viewer">
+  <div class="stage" id="stage"><img id="imgA" src="IMAGE-A.png" alt="Anonymous image A"><img id="imgB" src="IMAGE-B.png" alt="Anonymous image B" hidden></div>
+  <div class="switch"><button type="button" id="showA" class="active">IMAGE-A</button><button type="button" id="showB">IMAGE-B</button></div>
+</section>
+<form id="review">
+<div class="grid">
+  <section class="card full"><fieldset><legend>Which image better fulfills the brief?</legend><div class="choices"><label><input required type="radio" name="primary" value="LEFT_BETTER"> IMAGE-A</label><label><input type="radio" name="primary" value="INDISTINGUISHABLE"> Indistinguishable</label><label><input type="radio" name="primary" value="RIGHT_BETTER"> IMAGE-B</label></div></fieldset>
+  <fieldset><legend>Which image feels more cinematic as a still frame?</legend><div class="choices"><label><input required type="radio" name="cinematic" value="LEFT_MORE_CINEMATIC"> IMAGE-A</label><label><input type="radio" name="cinematic" value="INDISTINGUISHABLE"> Indistinguishable</label><label><input type="radio" name="cinematic" value="RIGHT_MORE_CINEMATIC"> IMAGE-B</label></div></fieldset></section>
+  <section class="card"><label>Where does attention land first in IMAGE-A?<select required name="attentionA"><option value="">Choose</option><option>CHAIR</option><option>WINDOW</option><option>ROOM_GEOMETRY</option><option>OTHER</option><option>NO_CLEAR_SUBJECT</option></select></label></section>
+  <section class="card"><label>Where does attention land first in IMAGE-B?<select required name="attentionB"><option value="">Choose</option><option>CHAIR</option><option>WINDOW</option><option>ROOM_GEOMETRY</option><option>OTHER</option><option>NO_CLEAR_SUBJECT</option></select></label></section>
+  <section class="card full"><label>Confidence<select required name="confidence"><option value="">Choose</option><option>LOW</option><option>MEDIUM</option><option>HIGH</option></select></label></section>
+  <section class="card"><label>Anonymous observer ID<input required name="observerId" pattern="[A-Za-z0-9_-]{3,40}"></label><label>Relevant expertise<input required name="expertise" placeholder="e.g. general viewer, cinematography"></label><label>Directly developed this experiment?<select required name="direct"><option value="NO">NO</option><option value="YES">YES</option></select></label><label>Visual-acuity screening record<input required name="acuity" placeholder="normal/corrected; self-reported"></label><label>Colour-vision screening record<input required name="colour" placeholder="self-reported"></label></section>
+  <section class="card"><label>Display manufacturer/model<input required name="display"></label><label>Native width<input required type="number" min="1920" name="width"></label><label>Native height<input required type="number" min="1080" name="height"></label><label>Browser<input required name="browser"></label><label>Operating system<input required name="os"></label></section>
+  <section class="card"><label>Brightness setting<input required name="brightness"></label><label>Viewing distance<input required name="distance" placeholder="approximately 3 picture heights"></label></section>
+  <section class="card"><label>Ambient lighting<input required name="ambient" placeholder="dim and stable"></label><label>Browser zoom (%)<input required type="number" name="zoom" value="100"></label></section>
+</div>
+<button class="download" type="submit">Lock and download response JSON</button><span class="status" id="status"></span>
+</form>
+</main>
+<script id="session" type="application/json">__SESSION_JSON__</script>
+<script>
+const session=JSON.parse(document.getElementById('session').textContent);const startedAt=new Date().toISOString();
+const imgA=document.getElementById('imgA'),imgB=document.getElementById('imgB'),showA=document.getElementById('showA'),showB=document.getElementById('showB');
+function show(which){imgA.hidden=which!=='A';imgB.hidden=which!=='B';showA.classList.toggle('active',which==='A');showB.classList.toggle('active',which==='B')}showA.onclick=()=>show('A');showB.onclick=()=>show('B');
+function canonical(value){if(Array.isArray(value))return '['+value.map(canonical).join(',')+']';if(value&&typeof value==='object')return '{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+canonical(value[k])).join(',')+'}';return JSON.stringify(value)}
+async function sha256(value){const bytes=new TextEncoder().encode(canonical(value));const hash=await crypto.subtle.digest('SHA-256',bytes);return [...new Uint8Array(hash)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+document.getElementById('review').addEventListener('submit',async event=>{event.preventDefault();const form=new FormData(event.currentTarget);const rect=document.getElementById('stage').getBoundingClientRect();const body={documentType:'BFS_B50_BLINDED_RESPONSE',version:session.version,sessionId:session.sessionId,studySpecSha256:session.studySpecSha256,mappingCommitment:session.mappingCommitment,startedAt,lockedAt:new Date().toISOString(),imageBindings:session.imageBindings,primaryChoice:form.get('primary'),cinematicChoice:form.get('cinematic'),attentionByImage:[{label:'IMAGE-A',choice:form.get('attentionA')},{label:'IMAGE-B',choice:form.get('attentionB')}],confidence:form.get('confidence'),viewing:{observerId:form.get('observerId'),expertise:form.get('expertise'),directDevelopmentInvolvement:form.get('direct'),acuityScreening:form.get('acuity'),colourVisionScreening:form.get('colour'),displayManufacturerModel:form.get('display'),displayNativeWidth:Number(form.get('width')),displayNativeHeight:Number(form.get('height')),browser:form.get('browser'),operatingSystem:form.get('os'),brightnessSetting:form.get('brightness'),viewingDistance:form.get('distance'),ambientLighting:form.get('ambient'),browserZoomPercent:Number(form.get('zoom')),zoomConfirmed:Number(form.get('zoom'))===100,cssImageSize:[Math.round(rect.width),Math.round(rect.height)],devicePixelRatio:window.devicePixelRatio,userAgent:navigator.userAgent}};body.responseHash=await sha256(body);const blob=new Blob([JSON.stringify(body,null,2)+'\n'],{type:'application/json'});const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=session.sessionId+'.response.json';link.click();URL.revokeObjectURL(link.href);document.getElementById('status').textContent='LOCKED · '+body.responseHash.slice(0,12);event.currentTarget.querySelectorAll('input,select,button').forEach(item=>item.disabled=true)});
+</script>
+</body></html>
