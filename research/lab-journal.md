@@ -2713,6 +2713,18 @@ Result SHA-256: `b3f70d11311fef9f3edf53bcfac511e256359e9b67971c94db89e2b0d323cdc
 
 Artifacts: `experiments/blender-static-radius-intervention-holdout-c2-v0-1/` and `research/2026-08-27-b52-d12-5-c2-radius-intervention-holdout-result.md`.
 
+## J-173 · D12.6 freezes arithmetic localization before adaptive design
+
+Date: 2026-08-27 · Type: POST-HOC DEVELOPMENT PREREGISTRATION · New Blender renders: 0
+
+D12.5-C2 proved that global radius 3 removes ring-3 pixels but leaves fresh extrema at distance 17 and 4. D12.6 therefore freezes a read-only arithmetic diagnostic over the committed valid root before proposing an adaptive rule. Repeat 1 is primary and repeat 2 remains an identity control; invalid-run and D12.3 arrays are forbidden.
+
+Every fixture/radius tied maximum and top 64 tail samples must record owner, distance, Vector float32 bits, bilinear taps/weights, signed contributions, pre-cast value, final float32 bits and formal error. The candidate local bound sums absolute weighted tap-to-center differences and one full float32 ULP. It must underbound zero interior RGB samples; tightness, rank association and threshold selectivity remain report-only.
+
+The formal boundary is one localizer plus one independent audit, zero Blender/model/network calls, at least 18 mutation attacks and a 4 MiB projection above the unchanged 100 GiB reserve. This is derivation, not a fresh adaptive-gate validation.
+
+Artifacts: `specs/blender-static-interior-risk-localization.v0.1.json` and `research/2026-08-27-b52-d12-6-static-interior-risk-localization-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

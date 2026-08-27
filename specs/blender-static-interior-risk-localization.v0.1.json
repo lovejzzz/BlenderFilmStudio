@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "bfs.blenderStaticInteriorRiskLocalization.v0.1",
+  "experimentId": "B52-D12.6",
+  "title": "Zero-render arithmetic localization and local risk-bound derivation for D12.5-C2 static interior extrema",
+  "question": "What arithmetic terms produce the fresh D12.5-C2 distance-17 and distance-4 maxima, and can a local bilinear contrast bound conservatively upper-bound every radius-2/radius-3 interior RGB error without using silhouette distance as a universal explanation?",
+  "decisionRole": "post-hoc development diagnostic and bound derivation; not a holdout and not an adaptive-gate validation",
+  "parents": {
+    "d12_5Spec": {"uri":"specs/blender-static-radius-intervention-holdout.v0.1.json","sha256":"d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d","experimentId":"B52-D12.5-C2"},
+    "d12_5Result": {"uri":"experiments/blender-static-radius-intervention-holdout-c2-v0-1/results.json","sha256":"b3f70d11311fef9f3edf53bcfac511e256359e9b67971c94db89e2b0d323cdc7","verdict":"RADIUS3_WITHIN_PRODUCTION_TOLERANCE_BUT_HEADROOM_OR_COVERAGE_NOT_SUPPORTED","evidenceHash":"e2a7ea77e5bde2e4aa5a846feba35edce143a2898ef9e1320ddc1230930635cc"},
+    "d12_5Receipt": {"uri":"experiments/blender-static-radius-intervention-holdout-c2-v0-1/receipt.json","sha256":"a77350c5e6a7589b7ace39da56509156b810e19221a8d1e3f0e8a7f750767d40","receiptHash":"6023b119149ffe3dc4f2c5dc59966f95386272bdd2e23ac9b7f7672b0a9f0111"},
+    "d12_5Execution": {"uri":"experiments/blender-static-radius-intervention-holdout-c2-v0-1/execution.json","sha256":"4d55a48f8baef9adfa5b3601fc5e8108faf53f5f5234c5472f8b5a5086f5ebdb","executionHash":"93709e566e3231bc7aa09cbdb2d6c9f47918293910ab0832112d51c7a7fd6609"},
+    "d12_4Method": {"uri":"specs/blender-static-zero-headroom-localization.v0.1.json","sha256":"8df3c666e4409a243b1611131e5927b757fcd47453511b732fc26e579f526326"}
+  },
+  "frozenInputs": {
+    "root": "experiments/blender-static-radius-intervention-holdout-c2-v0-1",
+    "repeatForPrimaryAnalysis": 1,
+    "repeatForIdentityControl": 2,
+    "fixtures": ["STATIC_BEVELED_WEDGE_PANEL_109X67","STATIC_NESTED_CURVE_OCCLUSION_137X89","STATIC_CROSSING_RODS_SPHERE_149X97"],
+    "radii": [2,3],
+    "topSamplesPerFixtureRadius": 64,
+    "forbidden": "No invalid-run artifact, D12.3 array or newly rendered input may enter a D12.6 measurement."
+  },
+  "runtime": {
+    "python": {"executable":"/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13","sha256":"cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35","numpy":"2.3.4"}
+  },
+  "diskAdmission": {"minimumReserveBytes":107374182400,"projectedWriteBytes":4194304,"preflightRoot":"experiments/blender-static-interior-risk-localization-preflight-v0-1","formalRoot":"experiments/blender-static-interior-risk-localization-v0-1"},
+  "formalToolPaths": ["scripts/analyze-b52-d12-6-interior-risk.py","scripts/audit-b52-d12-6-interior-risk.py","scripts/preflight-b52-d12-6-interior-risk.py"],
+  "analysisContract": {
+    "identityBeforeMeasurement": ["verify all four parent file and internal hashes","verify D12.5-C2 verdict unchanged","verify every bound adapter/consumer report and payload hash","verify repeat-1/repeat-2 source and consumer payload identity","recompute every radius-2 and radius-3 reconstructed float32 byte"],
+    "maximumTotality": "For every fixture/radius, enumerate every pixel/channel tied at the formal RGB maximum; do not retain only the first coordinate.",
+    "sampleRecord": ["fixture/radius/owner","x/y/channel","Chebyshev owner-silhouette distance","raw Vector values and float32 bits","previous sample coordinate","four tap coordinates and RGB values","four bilinear weights","signed per-tap contributions relative to current center","pre-cast binary64 reconstruction","final float32 reconstruction and bits","signed and absolute formal error"],
+    "localRiskBound": {
+      "definition": "For each RGB channel, sum over four taps: abs(weight_i) * abs(previousTap_i - currentCenter), then add one full float32 ULP at the magnitude of the pre-cast reconstruction. Pixel risk is the maximum channel bound.",
+      "requiredProperty": "For every radius-interior RGB sample in all six primary cells, actual absolute error <= registered local risk bound; underbound count must be zero.",
+      "reportOnly": ["bound/actual ratio distribution","Spearman rank association between pixel risk and actual RGB maximum","recall and selected-pixel fraction at the frozen production gate and half-gate","owner/distance groups for top 64 actual-error and risk samples"]
+    }
+  },
+  "success": {
+    "verdict": "STATIC_INTERIOR_EXTREMA_LOCALIZED_AND_LOCAL_RISK_BOUND_CONSERVATIVE",
+    "requires": ["all identity and float32 replay checks pass","all tied maxima are enumerated","underbound count is zero","independent audit reproduces every maximum, sample record and aggregate","at least 18 registered mutation attacks are rejected"],
+    "failureVerdict": "STATIC_INTERIOR_RISK_LOCALIZATION_NOT_SUPPORTED"
+  },
+  "operations": {"formalLocalizers":1,"formalAudits":1,"blenderProcesses":0,"blenderRenders":0,"modelCalls":0,"networkCalls":0},
+  "nonClaims": ["D12.6 is not a fresh holdout and cannot support an adaptive production gate.","A conservative bound may be too loose to be useful; usefulness metrics are report-only here.","No causal claim about Blender internals follows from image-space arithmetic replay.","D12.5-C2 and D12.3 verdicts remain unchanged.","Motion, deformation, transparency, hair, particles, volumes, motion blur, disocclusion and perceptual quality remain out of scope."]
+}
