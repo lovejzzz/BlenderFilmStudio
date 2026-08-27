@@ -2797,6 +2797,18 @@ Audit-only C1 is preregistered before its tool exists. It may protect `analyzerP
 
 Artifacts: `experiments/blender-static-adaptive-risk-gate-holdout-v0-1/`, `specs/blender-static-adaptive-risk-gate-audit-c1.v0.1.json`, and `research/2026-08-27-b52-d12-7-formal-audit-failure-and-c1-protocol.md`.
 
+## J-182 · D12.7 C1 validates a bounded but technically strong candidate
+
+Date: 2026-08-27 · Type: AUDIT-ONLY CORRECTION + FORMAL INTERPRETATION · New Blender renders: 0
+
+The frozen result remains `ADAPTIVE_GATE_WITHIN_TOLERANCE_BUT_STRESS_OR_COVERAGE_NOT_SUPPORTED`. Adaptive retained 99.60%–99.86% of radius 2, exceeded radius-3 coverage by 10.47%–26.70%, rejected 11/7/26 high-risk pixels in the three primary fixtures, kept every owner above 95% radius-2 retention and above its radius-3 count, produced zero risk underbounds, and stayed below the `1/1048576` half-gate. Only `RADIUS3_PRODUCTION` failed: one comparator cell reached `2.1457672e-6`, above `1/524288`.
+
+The C1 audit bound every immutable parent, reran one independent Python process, reproduced the same result and rejected 30/30 repaired-self-hash mutations. No scientific process or artifact changed. Corrected audit SHA-256: `fe77a26135d8021db6eb52f6e310392efd1a155f5712c99cd9dddbc1925708ee`; correction receipt SHA-256: `12677054b85a325b803e6d59166d756306497c7b2e4159ae93bffe7f554f36a0`.
+
+The next holdout must preregister comparator decision semantics before new fixtures and add real rigid motion/disocclusion. D12.7 remains a static candidate, not a production temporal policy.
+
+Artifact: `research/2026-08-27-b52-d12-7-adaptive-risk-gate-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
