@@ -1423,6 +1423,22 @@ Next: freeze a two-scene, unseen-frame formal holdout with three 512-spp DOF ref
 
 Artifacts: `experiments/codex-worker-depth-of-field-derivation-v0-1/`, `specs/codex-worker-depth-of-field-derivation.v0.1.json`, `research/2026-08-27-b49-dof-d1-depth-of-field-derivation-protocol.md` and `research/2026-08-27-b49-dof-d1-depth-of-field-derivation-result.md`.
 
+## J-085 · B49-DOF closes the two-scene machine gate but not focus intent
+
+Date: 2026-08-27 · Type: FORMAL HOLDOUT · Runtime: ten fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+B49-DOF kept the promoted CENTER 0.5-frame motion blur enabled and changed only DOF. TABLETOP frame 43 and INTERIOR frame 23 each received three independent 512-spp DOF-on references plus same-seed 128-spp DOF-on/off candidates.
+
+TABLETOP's candidate floor multiples were 2.785777× linear, 2.496550× log-luminance and 2.856265× edge. INTERIOR's were 1.789957×, 1.798302× and 2.186421×. All six values passed the frozen 3× gate, and DOF-on was closer than off in all three metrics on both scenes. The relative advantage was only 0.47–0.57% on TABLETOP but 45–64% on INTERIOR.
+
+Both scenes reproduced D1's pass-domain boundary: Combined, Depth, Normal and active Cryptomatte layers changed; Vector stayed exact because motion-blur mode was fixed. DOF-on cost 1.0095× off render time on TABLETOP and 1.0298× on INTERIOR.
+
+All ten workers completed, 21/21 attacks passed, cleanup was zero and independent analysis replay was byte exact. Verdict: `B49_DEPTH_OF_FIELD_OPERATING_POINT_SUPPORTED`.
+
+This closes the bounded DOF machine gate, not artistic focus. INTERIOR's 3.2 m setting favors its window rather than the chair. Next: a viewable-resolution delayed-disclosure human review must test focus intent and cinematic preference directly.
+
+Artifacts: `experiments/codex-worker-depth-of-field-holdout-v0-1/`, `specs/codex-worker-depth-of-field-holdout.v0.1.json`, `research/2026-08-27-b49-dof-codex-worker-depth-of-field-holdout-protocol.md` and `research/2026-08-27-b49-dof-codex-worker-depth-of-field-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
