@@ -2625,6 +2625,20 @@ Result file SHA-256: `ba251ebe6262b85a9f12fcef1829a2556d9513a8014bf845da24e983c2
 
 Artifacts: `experiments/blender-static-zero-headroom-localization-v0-1/` and `research/2026-08-27-b52-d12-4-zero-headroom-localization-result.md`.
 
+## J-166 · D12.5 freezes radius 2 versus radius 3 before fresh renders
+
+Date: 2026-08-27 · Type: FRESH INTERVENTION HOLDOUT PREREGISTRATION · Formal outputs: 0
+
+D12.4 made radius 3 a plausible intervention only on reused arrays. D12.5 now freezes a paired confirmatory test on three never-rendered opaque static scenes: a wavy panel with beveled wedge at 109×67, nested curved occlusion at 137×89 and a sphere behind two independently owned crossing rods at 149×97. Rasters, optics, transforms, owner identities, topology, materials and output paths are fresh.
+
+The same twelve Blender source renders feed both consumers. Radius 2 is the unchanged control; radius 3 changes only current-owner erosion. The production limits remain `1/4096 px` Vector maximum, `1/524288` RGB maximum and `1/1048576` RMSE. The stronger intervention verdict additionally requires radius-3 RGB maximum ≤`1/1048576`, at least twofold headroom.
+
+Masking cannot purchase success. Radius 3 must retain at least 800 interior pixels and 80% of total radius-2 coverage per cell; every owner retains at least 64 pixels, and owners with at least 100 control pixels retain at least 60%. Radius 3 must be a strict subset-compatible mask, with removed pixels confined to silhouette-distance ring 3.
+
+The formal boundary is 55 unique child processes, at least 30 registered attacks, zero model/network calls and a 20 MiB projection above the unchanged 100 GiB reserve. All seven formal tool paths, preflight root and formal root were absent. No D12.5 output has been produced or inspected.
+
+Artifacts: `specs/blender-static-radius-intervention-holdout.v0.1.json` and `research/2026-08-27-b52-d12-5-static-radius-intervention-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
