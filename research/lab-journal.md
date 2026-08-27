@@ -2695,6 +2695,24 @@ Disk admission observed 107,569,524,736 bytes available; the 20 MiB projection l
 
 Next: commit this admission, then rerun all 55 processes from the C2 root without reusing invalid-run artifacts.
 
+## J-172 · Radius 3 stays within tolerance but fails the stronger intervention claim
+
+Date: 2026-08-27 · Type: COMPLETE REAL-BLENDER FRESH INTERVENTION HOLDOUT · Runtime: 55 unique child PIDs
+
+D12.5-C2 rerendered all twelve fresh Blender sources and completed the full paired-radius matrix. All 55 child PIDs were unique; all processes exited zero; Python/Node payloads, typed envelopes and repeats were exact; 30/30 mutation attacks passed. The formal outcome is `RADIUS3_WITHIN_PRODUCTION_TOLERANCE_BUT_HEADROOM_OR_COVERAGE_NOT_SUPPORTED`, with 21/23 decision checks passing.
+
+Radius 3 satisfied the unchanged production Vector, RGB-maximum and RMSE gates in every cell. It was always a subset of radius 2, removed only silhouette-distance ring-3 pixels, retained 83.324%–89.943% total coverage and left more than 3,100 interior pixels per cell.
+
+The stronger twofold-headroom gate failed. Wedge/panel and crossing-rods maxima remained unchanged at `1.2516975403e-6` and `1.1324882507e-6`, respectively 65.625% and 59.375% of the production limit. Their maxima were at distance 17 and 4, so a radius-3 erosion could not remove them. Only the nested-curves maximum fell, from `4.7683715820e-7` to `3.5762786865e-7`.
+
+The per-owner coverage gate also failed: the tilted foreground ring retained `202/402 = 50.249%`, below the frozen 60% floor even though aggregate coverage passed. This falsifies the stronger claim that a single global radius increase delivers both twofold numerical margin and topology-fair coverage.
+
+Next: perform a zero-render arithmetic localization of the fresh distance-17 and distance-4 maxima, then derive—but do not yet validate—a local Vector × same-owner-gradient risk gate.
+
+Result SHA-256: `b3f70d11311fef9f3edf53bcfac511e256359e9b67971c94db89e2b0d323cdc7`; receipt SHA-256: `a77350c5e6a7589b7ace39da56509156b810e19221a8d1e3f0e8a7f750767d40`.
+
+Artifacts: `experiments/blender-static-radius-intervention-holdout-c2-v0-1/` and `research/2026-08-27-b52-d12-5-c2-radius-intervention-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

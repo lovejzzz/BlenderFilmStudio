@@ -1,0 +1,97 @@
+{
+  "adapter": {
+    "reportHash": "617b8cb79298e05365cfb90820dd69f202b22508ba9f8a363688dfe602ee644f",
+    "sha256": "7e0d02b9ae92837bc30fa263039a8e3466178548829da06591435a8275933504",
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-v0-1/adapters/STATIC_CROSSING_RODS_SPHERE_149X97/R1/report.json"
+  },
+  "arrays": {
+    "radius2Boundary": {
+      "bytes": 14453,
+      "dtype": "uint8",
+      "sha256": "049dadcb3c9b2a8479772700bf0adef29f7db8c187a38c504e741af7ffc15a84",
+      "shape": [
+        97,
+        149
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-v0-1/consumers/python/STATIC_CROSSING_RODS_SPHERE_149X97/R1/arrays/radius2-boundary.u8"
+    },
+    "radius2Interior": {
+      "bytes": 14453,
+      "dtype": "uint8",
+      "sha256": "a37a50de49ad876c634d66cf59f5312c624b1def70d379526da553d64ef377d4",
+      "shape": [
+        97,
+        149
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-v0-1/consumers/python/STATIC_CROSSING_RODS_SPHERE_149X97/R1/arrays/radius2-interior.u8"
+    },
+    "radius2Reconstructed": {
+      "bytes": 231248,
+      "dtype": "little-endian-float32",
+      "sha256": "e3d0d5c50036dd1cf6feee8463449fe9039f50ef7fabed838f9e304ace9bee0c",
+      "shape": [
+        97,
+        149,
+        4
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-v0-1/consumers/python/STATIC_CROSSING_RODS_SPHERE_149X97/R1/arrays/radius2-reconstructed.rgba32"
+    },
+    "radius3Boundary": {
+      "bytes": 14453,
+      "dtype": "uint8",
+      "sha256": "6d474409bcfd8d675b8abd950eaf958ff1896259658e26fd2415106d9e817f58",
+      "shape": [
+        97,
+        149
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-v0-1/consumers/python/STATIC_CROSSING_RODS_SPHERE_149X97/R1/arrays/radius3-boundary.u8"
+    },
+    "radius3Interior": {
+      "bytes": 14453,
+      "dtype": "uint8",
+      "sha256": "e7ae311986356e210085dafbe94445bf0a9b4090a0b39b330c29e8d609de1f57",
+      "shape": [
+        97,
+        149
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-v0-1/consumers/python/STATIC_CROSSING_RODS_SPHERE_149X97/R1/arrays/radius3-interior.u8"
+    },
+    "radius3Reconstructed": {
+      "bytes": 231248,
+      "dtype": "little-endian-float32",
+      "sha256": "f01dfb16e98d75b8378180bc367c0f3015ffbf67f184a8372b1e37348673c1cf",
+      "shape": [
+        97,
+        149,
+        4
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-radius-intervention-holdout-c2-v0-1/consumers/python/STATIC_CROSSING_RODS_SPHERE_149X97/R1/arrays/radius3-reconstructed.rgba32"
+    }
+  },
+  "contract": {
+    "boundaryRule": "Every registered owner pixel excluded from a radius interior forms that radius's boundary diagnostic domain and preserves current-frame RGB; cross-owner and out-of-bounds taps fail closed.",
+    "common": "Both radii consume the same adapted scene-linear float32 Combined, Vector and Object Index arrays. Reconstruction arithmetic and previous-tap owner/alpha checks are identical to D12.3.",
+    "radius2Control": "Current pixel and every current neighbor within Chebyshev radius 2 must share the same registered owner and alpha >0.999; all four previous bilinear taps must share that owner and alpha.",
+    "radius3Intervention": "Identical rule with current-neighborhood Chebyshev radius 3; previous bilinear-tap rule is unchanged.",
+    "subsetInvariant": "Every radius-3 interior pixel must also be radius-2 interior. Radius-2-only pixels must have current-owner silhouette distance exactly 3."
+  },
+  "experimentId": "B52-D12.5-C2",
+  "fixtureId": "STATIC_CROSSING_RODS_SPHERE_149X97",
+  "integrity": "external dual typed-envelope sidecars",
+  "operationCounts": {
+    "consumerProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "pixelsVisited": 28906,
+    "radiusEvaluations": 2
+  },
+  "pid": 23922,
+  "producer": "python",
+  "repeat": 1,
+  "runtime": {
+    "numpy": "2.3.4",
+    "python": "3.13.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35"
+  },
+  "schemaVersion": "bfs.blenderStaticRadiusInterventionConsumerReport.v0.1"
+}
