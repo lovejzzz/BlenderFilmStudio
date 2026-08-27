@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityDerivationEvidence.v0.1",
+  "experimentId": "B41-D1",
+  "status": "OFFICIAL_ARCHIVE_MEMBER_IDENTITY_DERIVATION",
+  "preregistration": {
+    "commit": "bbef07079be510e1ccb1d77dab452d543fd30928",
+    "specSha256": "a6b9c0ef025d8e4394726b09250404f54e15ca1d2f795c3aaa70df606bd24ca8"
+  },
+  "parent": {
+    "b41C3SpecSha256": "d8f3ebca7c181bdced580f3bd588825a246fc80dcd94a352dc536738e3adad9f",
+    "b41C3PreregistrationCommit": "5ceb0e79b9b4afcc96fccd55212394334ca71a77",
+    "b41C3ToolFreezeCommit": "fac9ab8493ce4dedbec5bf282c24f53b3f3d52cf",
+    "failedResultSha256": "52030d29021274d5f2ca3444d0d52273ce6faff02661d51483b02cd69119aae6",
+    "failedAuditSha256": "9a7f8bab1b4ae74a7672494db57baa1994a48807b3bfec615dae35ad954d06b1",
+    "failure": "REJECTED_CROSS_PLATFORM_BINARY_IDENTITY_AND_AUDIT_PRE_RUNTIME_ASSUMPTION"
+  },
+  "toolFreezeCommit": "ecc29dd0c9328f73dafa6698cec28c29f693feeb",
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b41-d1-linux-binary-identity-derivation.mjs",
+      "sha256": "2ec5acbc3a5f64796d0b64c8068b4e3a970d59cf12040a527171764fde8bc768"
+    },
+    "library": {
+      "uri": "scripts/lib/b41-d1-linux-binary-identity-derivation.mjs",
+      "sha256": "c2565303df5994d4982baeabd6aa27ce75a148a500344614c79f3141a013ea50"
+    },
+    "audit": {
+      "uri": "scripts/audit-b41-d1-linux-binary-identity-derivation.mjs",
+      "sha256": "7b0672ced3aaf9652ccb65ef93d47036e76007af0ff81aba0a0f8bbbf7220fbb"
+    }
+  },
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "hostTar": "bsdtar 3.5.3 - libarchive 3.7.4 zlib/1.2.12 liblzma/5.4.3 bz2lib/1.0.8",
+    "colima": "colima version 0.10.3"
+  },
+  "diskAdmission": {
+    "availableBytes": "130424516608",
+    "projectedWriteBytes": "21474836480",
+    "minimumReserveBytes": "107374182400",
+    "freeAfterProjectedBytes": "108949680128",
+    "status": "ACCEPTED"
+  },
+  "artifact": {
+    "url": "https://download.blender.org/release/Blender5.2/blender-5.2.0-linux-x64.tar.xz",
+    "filename": "blender-5.2.0-linux-x64.tar.xz",
+    "bytes": 384441228,
+    "sha256": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48"
+  },
+  "member": {
+    "path": "blender-5.2.0-linux-x64/blender",
+    "cardinality": 1
+  },
+  "derivations": {
+    "host": {
+      "method": "Stream the exact member through host bsdtar into Node SHA-256 while recording its first 64 bytes and byte count",
+      "sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+      "bytes": 174666336
+    },
+    "guest": {
+      "method": "Stream the same exact member through GNU tar inside the existing Colima guest into sha256sum and wc -c",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "elf": {
+    "magicHex": "7f454c46",
+    "class": "ELF64",
+    "endianness": "little",
+    "machine": "x86-64",
+    "machineCode": 62,
+    "prefix64Hex": "7f454c4602010100000000000000000002003e000100000060637900000000004000000000000000e029690a0000000000000000400038000c00400022002100"
+  },
+  "cleanup": {
+    "temporaryArchiveRemoved": true
+  },
+  "runtimeOperationsExecuted": [
+    "ARCHIVE_DOWNLOAD",
+    "HOST_MEMBER_STREAM",
+    "COLIMA_GUEST_MEMBER_STREAM"
+  ],
+  "errors": [],
+  "attacks": [
+    {
+      "id": "archive-sha",
+      "expectedFailure": "ARCHIVE_IDENTITY",
+      "observedFailure": "ARCHIVE_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "archive-bytes",
+      "expectedFailure": "ARCHIVE_IDENTITY",
+      "observedFailure": "ARCHIVE_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "member-cardinality",
+      "expectedFailure": "MEMBER_IDENTITY",
+      "observedFailure": "MEMBER_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "guest-hash",
+      "expectedFailure": "DERIVATION_AGREEMENT",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "guest-bytes",
+      "expectedFailure": "DERIVATION_AGREEMENT",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "elf-machine",
+      "expectedFailure": "ELF_IDENTITY",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": false
+    },
+    {
+      "id": "temp-retained",
+      "expectedFailure": "CLEANUP_BOUNDARY",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": false
+    },
+    {
+      "id": "runtime-op",
+      "expectedFailure": "OPERATION_BOUNDARY",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": false
+    }
+  ],
+  "evidenceHash": "d896fe0bda9e762b19a28e241ace507fba4ba7caa800243ebba7610de5c6d796",
+  "analysis": {
+    "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityDerivationAnalysis.v0.1",
+    "passed": false,
+    "failures": [
+      "DERIVATION_AGREEMENT"
+    ],
+    "decision": "DERIVATION_AGREEMENT"
+  },
+  "verdict": "DERIVATION_AGREEMENT",
+  "nonClaims": [
+    "B41-D1 derives identity and does not execute Blender",
+    "An ELF x86-64 identity does not prove runtime compatibility, rendering or containment",
+    "The derived Linux identity does not replace historical macOS Blender identities",
+    "A later preregistered correction must bind the derived value before any runtime claim"
+  ]
+}

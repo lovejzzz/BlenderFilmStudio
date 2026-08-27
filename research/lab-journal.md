@@ -1117,6 +1117,18 @@ Next: preregister a read-only Linux binary identity derivation from the already 
 
 Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-4/` and `research/2026-08-26-b41-c3-linux-binary-identity-failure.md`.
 
+## J-063 · B41-D1 host identity candidate rejected by empty guest stream
+
+Type: preregistered archive-member derivation, rejected cross-method agreement, 2026-08-26.
+
+The exact official archive passed byte and SHA identity. Host bsdtar found the member once and produced an ELF64 x86-64 candidate of `174666336` bytes with SHA-256 `83e8261e…acf27`. The Colima guest produced empty-stream SHA-256 and zero bytes because GNU tar's `-J` requires an absent external `xz` executable, while the frozen POSIX shell pipeline lacked `pipefail` and masked tar's failure.
+
+The candidate was not promoted. Base analysis failed `DERIVATION_AGREEMENT`; independent audit reproduced only 5/8 attacks because the base failure shadowed three later mutations. No Blender, image build or container operation occurred.
+
+Status: `REJECTED_GUEST_DECOMPRESSOR_AND_PIPELINE_FAILURE`. B41-D1-C1 may change only the guest member reader to installed Python 3 standard-library `lzma`/`tarfile` with structured fail-closed output.
+
+Artifacts: `experiments/linux-amd64-blender-binary-identity-derivation-v0-1/` and `research/2026-08-26-b41-d1-guest-empty-stream-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

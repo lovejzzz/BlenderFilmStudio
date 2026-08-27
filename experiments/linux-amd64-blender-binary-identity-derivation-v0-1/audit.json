@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityDerivationIndependentAudit.v0.1",
+  "experimentId": "B41-D1",
+  "analysis": {
+    "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityDerivationAnalysis.v0.1",
+    "passed": false,
+    "failures": [
+      "DERIVATION_AGREEMENT"
+    ],
+    "decision": "DERIVATION_AGREEMENT"
+  },
+  "observedToolHashes": {
+    "runner": "2ec5acbc3a5f64796d0b64c8068b4e3a970d59cf12040a527171764fde8bc768",
+    "library": "c2565303df5994d4982baeabd6aa27ce75a148a500344614c79f3141a013ea50",
+    "audit": "7b0672ced3aaf9652ccb65ef93d47036e76007af0ff81aba0a0f8bbbf7220fbb"
+  },
+  "toolsMatch": true,
+  "replayedAttacks": [
+    {
+      "id": "archive-sha",
+      "expectedFailure": "ARCHIVE_IDENTITY",
+      "observedFailure": "ARCHIVE_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "archive-bytes",
+      "expectedFailure": "ARCHIVE_IDENTITY",
+      "observedFailure": "ARCHIVE_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "member-cardinality",
+      "expectedFailure": "MEMBER_IDENTITY",
+      "observedFailure": "MEMBER_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "guest-hash",
+      "expectedFailure": "DERIVATION_AGREEMENT",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "guest-bytes",
+      "expectedFailure": "DERIVATION_AGREEMENT",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "elf-machine",
+      "expectedFailure": "ELF_IDENTITY",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": false
+    },
+    {
+      "id": "temp-retained",
+      "expectedFailure": "CLEANUP_BOUNDARY",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": false
+    },
+    {
+      "id": "runtime-op",
+      "expectedFailure": "OPERATION_BOUNDARY",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": false
+    }
+  ],
+  "attacksMatch": true,
+  "attackCountExact": true,
+  "attacksPass": false,
+  "passed": false
+}
