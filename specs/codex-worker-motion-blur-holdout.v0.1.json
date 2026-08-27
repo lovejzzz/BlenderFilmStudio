@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "bfs.codexWorkerMotionBlurHoldoutSpec.v0.1",
+  "experimentId": "B49-MB",
+  "outputRoot": "experiments/codex-worker-motion-blur-holdout-v0-1",
+  "acceptedVerdict": "B49_MOTION_BLUR_OPERATING_POINT_SUPPORTED",
+  "indistinguishableVerdict": "B49_MOTION_BLUR_POINT_PASSES_BUT_OFF_NOT_DISTINGUISHED",
+  "rejectedVerdict": "B49_MOTION_BLUR_128_REJECTED",
+  "invalidVerdict": "B49_MOTION_BLUR_INVALID_EVIDENCE",
+  "parents": {
+    "qualityCostResult": {"uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json", "sha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3", "selectedCellId": "C128_RAW"},
+    "qualityCostAudit": {"uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json", "sha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d", "status": "PASS"},
+    "motionBlurDerivation": {"uri": "experiments/codex-worker-motion-blur-derivation-v0-1/analysis.json", "sha256": "9edfec279be387b3a51dcc6496303e215fac1f5fb3ebdf4f6484d7edf32a3e81", "status": "MOTION_BLUR_DERIVATION_USABLE"},
+    "motionBlurDerivationAudit": {"uri": "experiments/codex-worker-motion-blur-derivation-v0-1/audit.json", "sha256": "e60c1b3bfd63c604dd1a0ba61c91707adb70a0deb0f76ebb66d54e39c5a6fad5", "status": "PASS"}
+  },
+  "image": {"id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1", "os": "linux", "architecture": "amd64", "dockerReportedSizeBytes": 1004901158, "blenderVersion": "5.2.0 LTS", "blenderBuildHash": "fbe6228777e7"},
+  "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+  "shots": [
+    {"id": "TABLETOP", "motionClass": "LINEAR_CAMERA_PUSH", "shotId": "SHOT_109", "frame": 37, "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend", "blendSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0", "blendBytes": 118702, "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e", "sceneHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7", "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"},
+    {"id": "INTERIOR", "motionClass": "STATIC_CONTROL", "shotId": "SHOT_110", "frame": 19, "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend", "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf", "blendBytes": 106078, "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401", "sceneHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb", "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"}
+  ],
+  "cells": [
+    {"id": "T_REF_A", "shot": "TABLETOP", "samples": 512, "seedOffset": 314159, "motionBlur": true, "shutter": 0.5, "position": "CENTER", "role": "reference"},
+    {"id": "T_REF_B", "shot": "TABLETOP", "samples": 512, "seedOffset": 424243, "motionBlur": true, "shutter": 0.5, "position": "CENTER", "role": "reference"},
+    {"id": "T_REF_C", "shot": "TABLETOP", "samples": 512, "seedOffset": 535529, "motionBlur": true, "shutter": 0.5, "position": "CENTER", "role": "reference"},
+    {"id": "T_C128_ON", "shot": "TABLETOP", "samples": 128, "seedOffset": 647647, "motionBlur": true, "shutter": 0.5, "position": "CENTER", "role": "candidate"},
+    {"id": "T_C128_OFF", "shot": "TABLETOP", "samples": 128, "seedOffset": 647647, "motionBlur": false, "shutter": 0.5, "position": "CENTER", "role": "negative-control"},
+    {"id": "T_C128_ZERO", "shot": "TABLETOP", "samples": 128, "seedOffset": 647647, "motionBlur": true, "shutter": 0.0, "position": "CENTER", "role": "mode-control"},
+    {"id": "I_C128_OFF", "shot": "INTERIOR", "samples": 128, "seedOffset": 647647, "motionBlur": false, "shutter": 0.5, "position": "CENTER", "role": "static-off-control"},
+    {"id": "I_C128_ON", "shot": "INTERIOR", "samples": 128, "seedOffset": 647647, "motionBlur": true, "shutter": 0.5, "position": "CENTER", "role": "static-on-control"}
+  ],
+  "render": {"resolution": [128,72], "pixelCount": 9216, "denoising": false, "persistentData": false, "threads": 4, "rawSubimages": 7},
+  "qualityGate": {"referenceCount": 3, "ensemble": "float64 arithmetic mean of T_REF_A/B/C Combined", "edgeSelection": "stable exact top 10 percent by ensemble AP1 luminance gradient", "metrics": ["linearNrmseByEnsembleRms","logLuminanceRmse","edgeLinearRmse"], "floor": "per metric maximum absolute deviation of one reference from the three-reference mean", "maximumFloorMultiple": 3, "candidate": "T_C128_ON", "negativeControl": "T_C128_OFF", "minimumMetricsWhereCandidateStrictlyCloserThanNegativeControl": 2},
+  "passDomainGate": {"imageContinuousPasses": ["BFS_MASTER.Combined","BFS_MASTER.Depth","BFS_MASTER.Normal"], "identifierPasses": ["BFS_MASTER.CryptoObject00","BFS_MASTER.CryptoObject01","BFS_MASTER.CryptoObject02"], "modeDependentPasses": ["BFS_MASTER.Vector"], "movingZeroVsOffImageAndIdentifierExact": true, "movingZeroVsOffVectorMustDiffer": true, "staticOnVsOffImageAndIdentifierExact": true, "staticOnVsOffVectorMustDiffer": true},
+  "containerContract": {"platform": "linux/amd64", "network": "none", "user": "65532:65532", "capDrop": ["ALL"], "noNewPrivileges": true, "readOnlyRoot": true, "repositoryMountReadOnly": true, "outputMountWritable": true, "pidsLimit": 256, "memoryBytes": 8589934592, "cpus": 4, "shmBytes": 1073741824, "wallTimeMs": 180000, "killGraceMs": 5000},
+  "diskAdmission": {"minimumReserveBytes": "107374182400", "projectedWriteBytes": "1073741824"},
+  "operationBoundary": {"dockerRuns": 8, "frameRenders": 8, "hostExrAnalyses": 8, "builds": 0, "pulls": 0, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0},
+  "attacks": ["PARENT_IDENTITY","SOURCE_IDENTITY","IMAGE_IDENTITY","SECURITY_BOUNDARY","DISK_ADMISSION","CELL_ROSTER","SAMPLE_SETTING","SEED_SETTING","MOTION_BLUR_SETTING","PASS_ROSTER","NON_FINITE","REFERENCE_DISTINCT","QUALITY_FLOOR","METRIC_REPLAY","PASS_DOMAIN","VERDICT_REPLAY","OPERATION_BOUNDARY","CLEANUP","EVIDENCE_SELF_HASH"],
+  "nonClaims": ["human cinematic preference", "physically universal shutter", "complete-shot temporal stability", "object deformation or particle blur", "rolling shutter", "depth of field", "2K or 4K motion-blur cost", "GPU or Eevee behavior", "native x86 or cloud throughput", "dollar cost"]
+}
