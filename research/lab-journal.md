@@ -2429,6 +2429,20 @@ Result SHA-256: `a411948ec8854029d199786bbf0a81565bc91099e2f973a2311b7513c2d07d8
 
 Artifacts: `experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/` and `research/2026-08-27-b52-d12-c1-formal-result-and-audit-failure.md`.
 
+## J-152 · D12-C2 preregisters an audit-only negative-verdict replay correction
+
+Date: 2026-08-27 · Type: PRE-TOOL AUDIT-CORRECTION PREREGISTRATION · Formal rerenders/data rewrites: 0/0
+
+C1's receipt, result, diagnostics and failed audit remain immutable at commit `7afb2c0b4c0dd9d0276b80f25d2c6aced7a9b1e4`. C2 cannot modify the 47/57 attack values, negative verdict, `DUAL_RECONSTRUCTION_IDENTITY` base failure, Node report hashes, static zero threshold or any measurement.
+
+The corrected audit may normalize the formal root to an absolute path before replay, bind every immutable input identity and replace the logically invalid “all attacks true” audit test with a totality test over exact roster/order, boolean type, true-count consistency and nonempty methods. A diagnostic absolute-root replay already exited zero and reproduced the evidence, but its temporary output was deleted and has no formal authority.
+
+The new tool and `audit.c2.json` do not yet exist. C2 permits only one inherited analyzer `verify` subprocess and zero Blender, adapter, reconstructor, encoder or bridge processes. Passing will confirm the frozen negative result; it cannot convert it to support.
+
+Frozen C2 spec SHA-256: `e9a19e608de800121da0aec460bc514f6f62d51acd80dd56236adababa05cf44`.
+
+Artifacts: `specs/blender-projective-subpixel-reconstruction-audit-c2.v0.1.json` and `research/2026-08-27-b52-d12-c2-audit-negative-verdict-correction.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

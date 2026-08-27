@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "bfs.blenderProjectiveSubpixelAuditCorrection.v0.1",
+  "correctionId": "B52-D12-C2",
+  "title": "Absolute-root replay and negative-verdict attack-totality audit correction",
+  "classification": "AUDIT_ONLY_CORRECTION_AFTER_IMMUTABLE_NEGATIVE_RESULT",
+  "formalEvidence": {
+    "root": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1",
+    "retainedAtCommit": "7afb2c0b4c0dd9d0276b80f25d2c6aced7a9b1e4",
+    "scientificSpecSha256": "dd2e990d276e0ee5c2fee9d22cf42c7f84db2b6c1947b1219dceab06a76f66a2",
+    "preflightSha256": "09b193b4a97b45884bc381b13df5ed5983c2403bbbffdbcce90bca558b293f8c",
+    "receiptSha256": "8c78b88ef512a5f7aa39554fced1067c12a5a0036c4c8231964b544da146ea4b",
+    "resultSha256": "a411948ec8854029d199786bbf0a81565bc91099e2f973a2311b7513c2d07d82",
+    "verdict": "BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED",
+    "baseFailure": "DUAL_RECONSTRUCTION_IDENTITY",
+    "attacksPassed": 47,
+    "attacksRegistered": 57
+  },
+  "failedAudit": {
+    "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/audit.json",
+    "sha256": "f090b7667f7ea882cc45df694f0d1dd0e39a2ead3bc83cde268b7990a64f832d",
+    "toolUri": "scripts/audit-b52-d12-projective-subpixel-holdout.py",
+    "toolSha256": "709ef24c4098314e4c212b495d2bc56c91e6770a1775d7d8bf9d2c61445be290",
+    "status": "FAIL",
+    "failedChecks": ["attackTotality", "evidenceReplay"]
+  },
+  "diagnosticProbe": {
+    "formalEvidenceWritten": false,
+    "outputRetained": false,
+    "absoluteFormalRootReplayExitCode": 0,
+    "absoluteFormalRootEvidenceReplay": true,
+    "onlyRemainingFailedCheck": "attackTotality"
+  },
+  "allowedTool": {
+    "uri": "scripts/audit-b52-d12-projective-subpixel-holdout-c2.py",
+    "basis": "copy of scripts/audit-b52-d12-projective-subpixel-holdout.py",
+    "allowedChanges": [
+      "resolve formal-root to an absolute path before constructing result, receipt, diagnostic and replay paths",
+      "bind this correction spec plus the immutable preflight, receipt, result and failed-audit SHA-256 identities before replay",
+      "define attackTotality as exact registered roster/order, boolean type, passed-count consistency and method presence rather than requiring every negative-result gate to be true",
+      "write C2 correction provenance into the new audit output without changing compared scientific evidence",
+      "use a C2 schema/version and success marker"
+    ]
+  },
+  "forbiddenChanges": [
+    "any Blender, adapter, reconstructor, encoder, bridge or analyzer execution other than the inherited analyzer verify replay",
+    "any write to source EXRs, arrays, reports, receipt, results, diagnostics, failed audit or original audit tool",
+    "any change to the scientific verdict, base failure, evidence, measurements, attack booleans, thresholds or non-claims",
+    "repair or reinterpretation of Node report hashes",
+    "relaxation of the static exact threshold",
+    "claiming 57 attacks passed when the immutable result records 47"
+  ],
+  "output": {
+    "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/audit.c2.json",
+    "mustBeAbsentAtPreregistration": true,
+    "runCount": 1,
+    "formalRenders": 0,
+    "formalDataRewrites": 0
+  },
+  "passRequirements": [
+    "all immutable input hashes match",
+    "original failed audit remains byte-identical",
+    "result and receipt self-hashes match",
+    "65-process identity and 24 diagnostic identities match",
+    "all eleven frozen tool identities from the C1 preflight match",
+    "inherited analyzer verify replay exits zero and reproduces evidence, measurements, diagnostics, counts, attacks, verdict and base failure exactly",
+    "the 57 attack names and order equal the preregistered roster, every passed value is boolean, attacksPassed equals the count of true rows and every method is nonempty",
+    "negative verdict and DUAL_RECONSTRUCTION_IDENTITY base failure are consistent with the frozen decision rule"
+  ],
+  "preToolState": {
+    "correctedAuditToolExists": false,
+    "correctedAuditOutputExists": false,
+    "formalRendersAfterResult": 0,
+    "formalDataRewritesAfterResult": 0
+  }
+}
