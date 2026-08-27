@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "bfs.codexWorkerDepthOfFieldDerivationSpec.v0.1",
+  "experimentId": "B49-DOF-D1",
+  "outputRoot": "experiments/codex-worker-depth-of-field-derivation-v0-1",
+  "usableStatus": "DEPTH_OF_FIELD_DERIVATION_USABLE",
+  "invalidStatus": "DEPTH_OF_FIELD_DERIVATION_INVALID_EVIDENCE",
+  "parents": {
+    "motionBlurResult": {"uri": "experiments/codex-worker-motion-blur-holdout-v0-1/results.json", "sha256": "6fb46a8aecedf810cf9cb977349522345dafb043bfb62064ee03269f14088496", "verdict": "B49_MOTION_BLUR_OPERATING_POINT_SUPPORTED"},
+    "motionBlurAudit": {"uri": "experiments/codex-worker-motion-blur-holdout-v0-1/audit.json", "sha256": "fc20ec3509b83f3451188f722020fc5102d0ee7a8ffac7fbb530bd892d02b06c", "status": "PASS"}
+  },
+  "sources": [
+    {"title": "Blender 5.2 LTS Manual — Cameras / Depth of Field", "uri": "https://docs.blender.org/manual/en/5.2/render/cameras.html"},
+    {"title": "Blender 5.2 Python API — CameraDOFSettings", "uri": "https://docs.blender.org/api/5.2/bpy.types.CameraDOFSettings.html"}
+  ],
+  "image": {"id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1", "os": "linux", "architecture": "amd64", "dockerReportedSizeBytes": 1004901158, "blenderVersion": "5.2.0 LTS", "blenderBuildHash": "fbe6228777e7"},
+  "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+  "fixture": {
+    "kind": "PROCEDURAL_DEPTH_SEPARATED_EMISSION_TARGET",
+    "camera": {"locationM": [0,0,0], "rotationEulerDeg": [0,0,0], "looksAlongLocalAxis": "-Z", "lensMm": 50, "sensorWidthMm": 36, "apertureBlades": 0, "apertureRatio": 1},
+    "worldColor": [0,0,0],
+    "targets": [
+      {"id": "NEAR", "depthM": 3, "viewportCenter": [-0.28,0], "viewportSize": [0.24,0.6], "roiPixels": [15,43,54,122]},
+      {"id": "MID", "depthM": 5, "viewportCenter": [0,0], "viewportSize": [0.24,0.6], "roiPixels": [97,43,158,122]},
+      {"id": "FAR", "depthM": 8, "viewportCenter": [0.28,0], "viewportSize": [0.24,0.6], "roiPixels": [179,43,240,122]}
+    ],
+    "targetShader": {"kind": "EMISSION_BINARY_VERTICAL_BANDS", "bandsAcrossTarget": 12, "low": 0.02, "high": 1.0},
+    "focusObject": {"id": "FOCUS_MID", "locationM": [0,0,-5]}
+  },
+  "render": {"engine": "CYCLES", "device": "CPU", "resolution": [256,144], "pixelCount": 36864, "samples": 256, "denoising": false, "seedOffset": 492501, "persistentData": false, "motionBlur": false, "threads": 4, "output": "OPEN_EXR_MULTILAYER_FLOAT32"},
+  "cells": [
+    {"id": "OFF_D5_F4", "useDof": false, "focusMode": "DISTANCE", "focusDistanceM": 5, "apertureFStop": 4, "role": "pinhole baseline"},
+    {"id": "D5_F16", "useDof": true, "focusMode": "DISTANCE", "focusDistanceM": 5, "apertureFStop": 16, "role": "small-aperture dose"},
+    {"id": "D5_F4", "useDof": true, "focusMode": "DISTANCE", "focusDistanceM": 5, "apertureFStop": 4, "role": "compiled-scene aperture dose"},
+    {"id": "D5_F1_4", "useDof": true, "focusMode": "DISTANCE", "focusDistanceM": 5, "apertureFStop": 1.4, "role": "strong mid-focus dose"},
+    {"id": "D3_F1_4", "useDof": true, "focusMode": "DISTANCE", "focusDistanceM": 3, "apertureFStop": 1.4, "role": "near-focus selectivity"},
+    {"id": "D8_F1_4", "useDof": true, "focusMode": "DISTANCE", "focusDistanceM": 8, "apertureFStop": 1.4, "role": "far-focus selectivity"},
+    {"id": "OBJ5_F1_4", "useDof": true, "focusMode": "OBJECT", "focusObject": "FOCUS_MID", "focusDistanceM": 99, "apertureFStop": 1.4, "role": "focus-object override probe"}
+  ],
+  "frozenMeasurements": {
+    "perTarget": ["linear p05", "linear p95", "Michelson-like modulation", "horizontal-gradient RMS", "finite pixel count"],
+    "perPass": ["canonical float32 SHA-256", "changed float-component count", "RMSE", "maximum absolute error"],
+    "resource": ["render operator seconds", "fresh-container wall seconds", "peak self RSS KiB", "EXR bytes"]
+  },
+  "frozenRelations": [
+    {"id": "APERTURE_DOSE_AT_MID_FOCUS", "members": ["OFF_D5_F4","D5_F16","D5_F4","D5_F1_4"], "question": "How does local modulation change as the aperture opens while the 5 m focus plane stays fixed?"},
+    {"id": "FOCUS_SELECTIVITY", "members": ["D3_F1_4","D5_F1_4","D8_F1_4"], "question": "Does the highest-modulation target follow the requested 3/5/8 m focus distance?"},
+    {"id": "FOCUS_OBJECT_OVERRIDE", "left": "D5_F1_4", "right": "OBJ5_F1_4", "question": "Does an on-axis object at 5 m override the deliberately wrong 99 m numeric distance, and is the decoded output exact or only numerically close?"},
+    {"id": "PASS_DOMAIN", "left": "OFF_D5_F4", "right": "D5_F1_4", "question": "Which Combined, Depth, Normal, Vector and Cryptomatte domains change when only lens integration changes?"}
+  ],
+  "usabilityGates": [
+    "all seven cells complete inside the resource boundary",
+    "exact image and OCIO identity",
+    "fixture geometry and camera RNA echo the frozen spec",
+    "all decoded pass samples are finite and have the frozen resolution",
+    "all three target ROIs contain the frozen pixel count and nonzero signal range",
+    "all frozen relation statistics are emitted without a post-hoc threshold",
+    "no experiment container remains",
+    "independent analyzer replay is byte exact"
+  ],
+  "invalidators": ["missing or overlapping target ROI", "wrong focus/aperture state", "non-finite pass data", "missing relation", "resource timeout", "audit mismatch"],
+  "containerContract": {"platform": "linux/amd64", "network": "none", "user": "65532:65532", "capDrop": ["ALL"], "noNewPrivileges": true, "readOnlyRoot": true, "repositoryMountReadOnly": true, "outputMountWritable": true, "pidsLimit": 256, "memoryBytes": 8589934592, "cpus": 4, "shmBytes": 1073741824, "wallTimeMs": 180000, "killGraceMs": 5000},
+  "diskAdmission": {"minimumReserveBytes": "107374182400", "projectedWriteBytes": "1073741824"},
+  "operationBoundary": {"dockerRuns": 7, "frameRenders": 7, "hostExrAnalyses": 7, "builds": 0, "pulls": 0, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0},
+  "nonClaims": ["artistically correct focus target", "human cinematic preference", "depth-of-field temporal stability", "focus pulling", "anamorphic or polygonal bokeh quality", "complex transparency or hair", "2K or 4K depth-of-field cost", "GPU or Eevee behavior", "native x86 or cloud throughput", "dollar cost"]
+}
