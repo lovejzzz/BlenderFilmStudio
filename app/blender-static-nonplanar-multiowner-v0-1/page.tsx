@@ -28,7 +28,7 @@ export default function BlenderStaticNonplanarMultiownerPage() {
   return <main className="contact-page b51-page b52-page d11-page d111-page d12p-page d122-page d123-page">
     <header className="topbar">
       <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-      <nav aria-label="D12.3 导航"><Link href="/blender-static-vector-floor-v0-1">D12.2 底噪</Link><a href="#verdict">结论</a><a href="#fixtures">真实场景</a><a href="#headroom">零余量</a><Link href="/journal">日志</Link></nav>
+      <nav aria-label="D12.3 导航"><Link href="/blender-static-vector-floor-v0-1">D12.2 底噪</Link><a href="#verdict">结论</a><a href="#fixtures">真实场景</a><a href="#headroom">零余量</a><Link href="/blender-static-zero-headroom-localization-v0-1">D12.4 定位</Link><Link href="/journal">日志</Link></nav>
       <span className="edition contact-edition">Multi-owner D12.3</span>
     </header>
 
@@ -62,7 +62,7 @@ export default function BlenderStaticNonplanarMultiownerPage() {
       <div className="section-index">03 / PASS WITH ZERO HEADROOM</div>
       <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> ≤ IS TRUE · ROBUST IS UNPROVEN</p><h2>门槛没有失败。<br/><span>但它已经没有退路。</span></h2></div><p>冻结上限是 1/524288。遮挡平面的 interior RGB max 与它逐位相等。我们保留通过结论，同时拒绝“已具备鲁棒裕量”这一更强主张，也不在看到结果后提高门槛。</p></div>
       <div className="d123-bars">{fixtures.map(fixture => { const ratio = fixture.interiorMax / threshold; return <article key={fixture.id} className={ratio === 1 ? 'hit' : ''}><header><span>{fixture.id}</span><code>{(ratio * 100).toFixed(3)}% OF GATE</code></header><div><i style={{ '--level': `${ratio * 100}%` } as CSSProperties}/><b>LIMIT</b></div><footer><strong>{fixture.interiorMax.toExponential(8)}</strong><small>boundary max · {(fixture.boundaryMax / threshold).toFixed(2)}× gate</small></footer></article>})}</div>
-      <div className="d123-next"><span>NEXT · D12.4 MECHANISM LOCALIZATION</span><strong>不重渲染，不改 D12.3。</strong><div>{['owner ID','silhouette distance','Vector quantum','bilinear weights','local RGB gradient'].map(item => <code key={item}>{item}</code>)}</div><p>先利用已经锁定的 formal arrays 定位极值像素；只有形成可证伪机制假设后，才预注册新的分辨率/几何 holdout。</p></div>
+      <div className="d123-next"><span>D12.4 · MECHANISM LOCALIZED</span><strong>唯一像素，距离轮廓 3px。</strong><div>{['FRONT_OCCLUDER','x56 · y38 · B','Vector −2⁻¹⁷','exact gate'].map(item => <code key={item}>{item}</code>)}</div><p>锁定数组的独立重放已定位完整算术链；D12.3 结论不变，半径 3 仍需 fresh holdout。</p><Link href="/blender-static-zero-headroom-localization-v0-1">查看 D12.4 证据 →</Link></div>
       <div className="contact-artifacts"><a href={`${repo}experiments/blender-static-nonplanar-multiowner-holdout-v0-1/results.json`}><span>MACHINE RESULT</span><b>PASS · 27 / 27 attacks ↗</b></a><a href={`${repo}experiments/blender-static-nonplanar-multiowner-holdout-v0-1/receipt.json`}><span>FORMAL RECEIPT</span><b>55 unique processes ↗</b></a><a href={`${repo}research/2026-08-27-b52-d12-3-static-nonplanar-multiowner-holdout-result.md`}><span>RESULT NOTE</span><b>zero-headroom interpretation ↗</b></a><a href={`${repo}public/evidence/b52-d12-3/manifest.json`}><span>PROXY MANIFEST</span><b>source-bound · non-decisional ↗</b></a></div>
     </section>
 
