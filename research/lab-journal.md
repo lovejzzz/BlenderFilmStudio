@@ -2199,6 +2199,20 @@ Seven of eleven formal tool paths now have implementations. This remains pre-fre
 
 Artifact: `experiments/blender-real-textured-temporal-end-to-end-development-smoke-v0-1/bridge-observation.json`.
 
+## J-137 · Frozen D11 tools pass zero-formal-output admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+All eleven D11 formal tools were frozen and pushed at commit `d3bdfe4b543566f6e37305d18b9fb8a7d2485f36`. Preflight matched every working file byte-for-byte to its Git blob, all eleven parent artifacts, Blender/Python/Node/OCIO runtimes and the preregistered spec.
+
+Eight contract tests passed. The independent analyzer imports none of `bpy`, `bpy_extras` or `mathutils` and does not import either tested accumulator. A fresh Blender 5.2 process confirmed the four production-pass properties and exact two-node bridge graph with zero render calls and zero Cycles rays.
+
+The formal root remained absent before and after admission. Disk admission observed 107,501,121,536 available bytes and projected 107,434,012,672 after the frozen 64 MiB write, above the 107,374,182,400-byte reserve. This is a narrow 59,830,272-byte post-projection margin, so no unrelated large artifact may be created during the run.
+
+Preflight file SHA-256: `6f0ec142494047142bc621f89d52e1b75b8599d793fbf9d3d12cb413e8cda9b3`; internal canonical hash: `f6b22020a40371d170192e08e98107e8de0691d7825b1c3d337b09cdc3b027a7`. Admission: `ACCEPTED`. Next: commit the immutable admission, then create the formal root exactly once and execute the unchanged 65-process matrix.
+
+Artifact: `experiments/blender-real-textured-temporal-end-to-end-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
