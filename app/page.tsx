@@ -233,6 +233,7 @@ export default function Home() {
           <Link className="route-tab" href="/codex-worker-sequence-v0-1">Worker 连续序列</Link>
           <Link className="route-tab" href="/codex-worker-production-passes-v0-1">Worker 生产通道</Link>
           <Link className="route-tab" href="/quality-cost-holdout-v0-1">质量 × 成本</Link>
+          <Link className="route-tab" href="/resolution-holdout-v0-1">分辨率 Holdout</Link>
           <Link className="route-tab" href="/repeated-frame-mode-switch-v0-1">同 PID 模式</Link>
           <Link className="route-tab" href="/pass-domain-localization-v0-1">Pass 域定位</Link>
           <Link className="route-tab" href="/fixed-jitter-intervention-v0-1">固定抖动干预</Link>
