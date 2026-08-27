@@ -1,0 +1,247 @@
+{
+  "schemaVersion": "bfs.nativeCpuDataPassSemanticEquivalenceDerivationSpec.v0.1",
+  "experimentId": "B51-D6",
+  "status": "PREREGISTERED",
+  "question": "When Cryptomatte is decoded as ranked ID/coverage pairs and Depth is evaluated on task-relevant topology and stable surfaces, does any native CPU dose below 128 spp satisfy the frozen production-semantic profile on both D5 compositions and repeats?",
+  "parents": {
+    "d5Spec": {
+      "uri": "specs/native-cpu-data-pass-sample-cost-derivation.v0.1.json",
+      "sha256": "aff237f81520fb737521563a430159d5d4bb4c8304081983f786e12aebd3163f"
+    },
+    "d5Receipt": {
+      "uri": "experiments/native-cpu-data-pass-sample-cost-derivation-v0-1/run.receipt.json",
+      "sha256": "78627ca3038906af715ef6a110d8f14dff0d367d4c30c66e6f2e693786bf685e"
+    },
+    "d5Result": {
+      "uri": "experiments/native-cpu-data-pass-sample-cost-derivation-v0-1/results.json",
+      "sha256": "3fdeca2687388a87c84582baac03a07c0d63ca5233402739a4dcc2e53f65118e",
+      "verdict": "EXACT_CPU_DATA_SAMPLE_REDUCTION_NOT_OBSERVED",
+      "exactDataSampleFloor": 128
+    },
+    "d5Audit": {
+      "uri": "experiments/native-cpu-data-pass-sample-cost-derivation-v0-1/audit.json",
+      "sha256": "bb95ae595d0514da1b3d57a87a4d402527984ad2bd6d54f4b191823156e9fe9d",
+      "status": "PASS"
+    }
+  },
+  "normativeSources": {
+    "blenderPasses": {
+      "uri": "https://docs.blender.org/manual/en/latest/render/layers/passes.html",
+      "claim": "Each numbered Cryptomatte image stores two objects per pixel; levels define the maximum ranked objects represented."
+    },
+    "cryptomatteSpecification": {
+      "uri": "https://raw.githubusercontent.com/Psyop/Cryptomatte/master/specification/cryptomatte_specification.pdf",
+      "version": "1.2.0",
+      "sha256": "43b85ea8d611ad9c7dbbd557519f71a335f16179d25e45066309e67ad1584af1",
+      "bytes": 225862,
+      "claim": "CryptoObject00/01/02 encode six ranked ID/coverage pairs in RGBA order; IDs use MurmurHash3_32 converted by uint32_to_float32 and coverages are normalized filter weights."
+    }
+  },
+  "inputRoot": "experiments/native-cpu-data-pass-sample-cost-derivation-v0-1",
+  "variants": [
+    {
+      "id": "TABLETOP_WIDE",
+      "referenceRunId": "TABLETOP_WIDE_S128_R1",
+      "frozenParentExr": {
+        "uri": "experiments/native-metal-production-holdout-v0-1/TW_CPU_R1/artifacts/production.exr",
+        "sha256": "e08b8b6eb45feb919d0139109641fa00a82bd4bc7c5468f4a0376571ce392059",
+        "bytes": 3222319
+      }
+    },
+    {
+      "id": "INTERIOR_CHAIR",
+      "referenceRunId": "INTERIOR_CHAIR_S128_R1",
+      "frozenParentExr": {
+        "uri": "experiments/native-metal-production-holdout-v0-1/IC_CPU_R1/artifacts/production.exr",
+        "sha256": "4ae11634c26d00c55939fce1d7d80e47859505f2ccdb1dc3ebda790f8140de6f",
+        "bytes": 3309351
+      }
+    }
+  ],
+  "sampleLadder": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "repeatsPerVariantDose": 2,
+  "expectedRoster": [
+    "BFS_MASTER.Combined",
+    "BFS_MASTER.Depth",
+    "BFS_MASTER.Normal",
+    "BFS_MASTER.Vector",
+    "BFS_MASTER.CryptoObject00",
+    "BFS_MASTER.CryptoObject01",
+    "BFS_MASTER.CryptoObject02"
+  ],
+  "cryptomatteProfile": {
+    "metadataKey": "9821614",
+    "layerName": "BFS_MASTER.CryptoObject",
+    "hash": "MurmurHash3_32",
+    "conversion": "uint32_to_float32",
+    "rankChannels": [
+      [
+        "BFS_MASTER.CryptoObject00",
+        0,
+        1
+      ],
+      [
+        "BFS_MASTER.CryptoObject00",
+        2,
+        3
+      ],
+      [
+        "BFS_MASTER.CryptoObject01",
+        0,
+        1
+      ],
+      [
+        "BFS_MASTER.CryptoObject01",
+        2,
+        3
+      ],
+      [
+        "BFS_MASTER.CryptoObject02",
+        0,
+        1
+      ],
+      [
+        "BFS_MASTER.CryptoObject02",
+        2,
+        3
+      ]
+    ],
+    "coverageRange": [
+      0.0,
+      1.0
+    ],
+    "coverageSumEpsilon": 0.000001,
+    "confidentDominantCoverage": 0.5,
+    "hardMatteThreshold": 0.5,
+    "stableSurfaceCoverage": 0.999
+  },
+  "productionSemanticProfile": {
+    "cryptomatte": {
+      "hardMatteMismatchPixelsPerVisibleObject": 0,
+      "confidentDominantIdMismatchPixels": 0,
+      "perVisibleObjectMatteMaxAbsoluteError": 0.00392156862745098,
+      "perVisibleObjectMatteP99AbsoluteError": 0.0009775171065493646,
+      "perVisibleObjectMatteRmse": 0.0002442002442002442,
+      "thresholdRationale": "The worst pixel is bounded to one 8-bit alpha code, 99 percent of pixels to one 10-bit alpha code, and whole-frame RMSE to one 12-bit alpha code."
+    },
+    "depth": {
+      "backgroundSentinelThreshold": 1000000000.0,
+      "foregroundMaskMismatchPixels": 0,
+      "stableSurfaceP99AbsoluteErrorMeters": 0.001,
+      "stableSurfaceMaxAbsoluteErrorMeters": 0.01,
+      "stableSurfaceP99RelativeError": 0.0001,
+      "thresholdRationale": "Stable non-transition surfaces are bounded to 1 mm at p99 and 1 cm worst-case; foreground/background topology must remain exact. Numeric edge depth is not compared where parent Cryptomatte coverage is below 0.999."
+    }
+  },
+  "decisionRule": {
+    "validDerivationRequires": [
+      "all four D5 parent bindings retain their frozen identities and verdicts",
+      "all 32 D5 EXRs retain receipt-bound byte identities and the seven-subimage roster",
+      "all 128-spp reference data reproduce the frozen H1 CPU parents exactly",
+      "same-dose repeats remain exact in Depth and all three Cryptomatte layers",
+      "every Cryptomatte input has the frozen metadata contract and a consistent manifest per variant",
+      "all nonzero ranked IDs resolve through the manifest, coverages are finite and in range, summed coverage is bounded, duplicate nonzero IDs are absent and ranking is non-increasing",
+      "all semantic measurements are total for both variants, all doses and both repeats",
+      "all frozen attacks reach their intended reason and independent analyzer replay is byte exact"
+    ],
+    "semanticDataSampleFloor": "minimum ladder dose at which both repeats of both variants pass every frozen Cryptomatte and Depth production-semantic threshold",
+    "reductionObserved": "valid derivation and semanticDataSampleFloor exists below 128",
+    "reductionNotObserved": "valid derivation and no semanticDataSampleFloor exists below 128",
+    "noPostHocTolerance": "thresholds are frozen before the D6 analyzer is implemented or executed"
+  },
+  "measurements": {
+    "cryptomatte": [
+      "manifestObjectCount",
+      "visibleObjectCount",
+      "rankCoverageValidity",
+      "coverageSumMaximum",
+      "confidentDominantIdMismatchPixels",
+      "perObjectHardMatteMismatchPixels",
+      "perObjectMaxAbsoluteError",
+      "perObjectP99AbsoluteError",
+      "perObjectRmse",
+      "transitionPixelCount"
+    ],
+    "depth": [
+      "foregroundPixelCount",
+      "foregroundMaskMismatchPixels",
+      "stableSurfacePixelCount",
+      "stableSurfaceP50AbsoluteErrorMeters",
+      "stableSurfaceP95AbsoluteErrorMeters",
+      "stableSurfaceP99AbsoluteErrorMeters",
+      "stableSurfaceMaxAbsoluteErrorMeters",
+      "stableSurfaceP99RelativeError"
+    ],
+    "aggregate": [
+      "perVariantSemanticFloor",
+      "semanticDataSampleFloor",
+      "doseResponseTable"
+    ]
+  },
+  "evidenceGates": {
+    "variants": 2,
+    "doses": 8,
+    "repeatsPerDose": 2,
+    "inputExrs": 32,
+    "inputArtifactsModified": 0,
+    "newBlenderProcesses": 0,
+    "newRenders": 0,
+    "independentAnalysisReplay": true
+  },
+  "outputRoot": "experiments/native-cpu-data-pass-semantic-equivalence-derivation-v0-1",
+  "operationBoundary": {
+    "nativeBlenderProcesses": 0,
+    "renders": 0,
+    "inputExrsRead": 32,
+    "inputExrsModified": 0,
+    "outputJsonFilesWritten": 2,
+    "dockerRuns": 0,
+    "downloadsDuringFormalAnalysis": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0,
+    "networkRequired": false
+  },
+  "nonClaims": [
+    "universal Cryptomatte tolerance standard",
+    "numeric Depth safety at antialiased or mixed-object boundary pixels",
+    "beauty quality",
+    "unseen-scene generalization",
+    "split-backend production promotion",
+    "motion blur, transparency or depth-of-field generalization",
+    "long-sequence throughput or thermal stability",
+    "2K or 4K cost",
+    "human perceptual quality"
+  ],
+  "validVerdicts": [
+    "CPU_DATA_SEMANTIC_SAMPLE_REDUCTION_OBSERVED",
+    "CPU_DATA_SEMANTIC_SAMPLE_REDUCTION_NOT_OBSERVED"
+  ],
+  "invalidVerdict": "CPU_DATA_SEMANTIC_EQUIVALENCE_DERIVATION_INVALID",
+  "attacks": [
+    "D5_BINDING_IDENTITY",
+    "INPUT_ARTIFACT_IDENTITY",
+    "PASS_ROSTER",
+    "REFERENCE_128_EXACTNESS",
+    "DOSE_REPEAT_EXACTNESS",
+    "CRYPTOMATTE_METADATA",
+    "CRYPTOMATTE_MANIFEST",
+    "CRYPTOMATTE_ID_RESOLUTION",
+    "CRYPTOMATTE_COVERAGE_RANGE",
+    "CRYPTOMATTE_COVERAGE_SUM",
+    "CRYPTOMATTE_RANK_ORDER",
+    "CRYPTOMATTE_DUPLICATE_ID",
+    "DEPTH_SENTINEL",
+    "MEASUREMENT_TOTALITY",
+    "OPERATION_BOUNDARY",
+    "EVIDENCE_SELF_HASH"
+  ]
+}
