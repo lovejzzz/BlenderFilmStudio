@@ -2497,6 +2497,18 @@ This closes only the semantic-structure boundary already stated by the charter. 
 
 Artifact: `research/2026-08-27-core-compiler-evidence-revalidation.md`.
 
+## J-157 · D12.2 preregisters static floating-floor and three-layer evidence holdout
+
+Date: 2026-08-27 · Type: FRESH-HOLDOUT PREREGISTRATION · Formal outputs: 0
+
+D12.2 freezes three never-rendered static perspective fixtures at 83×53, 113×71 and 127×79, with fresh lens, sensor, pose, pass identity and output paths. Twelve real Blender 5.2 Cycles sources will test whether exactly unchanged transforms nevertheless produce a bounded Vector/reconstruction residue. The production tolerance is distinct from exactness: Vector component maximum ≤1/4096 px, reconstruction RGB maximum ≤1/524288 and RMSE ≤1/1048576. Exact-zero is an orthogonal reported observation, not a hidden acceptance condition.
+
+The evidence contract is split into three layers. Python/Node reconstructed payloads must be byte-identical; each producer report must receive identical typed-envelope bytes from both frozen D12.1 encoders; and one independent analyzer must recompute all decision metrics from payload arrays while ignoring producer metrics. This directly incorporates the D12.1 counterexample instead of loosening a report hash or rounding away a difference.
+
+The formal boundary is 55 unique child processes, zero model/network calls and a single-use fresh root. A 32 MiB projection must leave the unchanged 100 GiB reserve. All seven formal tools, preflight root and formal root are absent at preregistration.
+
+Artifacts: `specs/blender-static-vector-floor-three-layer-evidence-holdout.v0.1.json` and `research/2026-08-27-b52-d12-2-static-vector-floor-three-layer-evidence-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "bfs.blenderStaticVectorFloorThreeLayerEvidenceHoldout.v0.1",
+  "experimentId": "B52-D12.2",
+  "title": "Blender 5.2 static Vector floating floor and three-layer evidence fresh holdout",
+  "question": "Across three fresh, exactly static perspective scenes, is Blender 5.2's decoded Vector/reconstruction residual bounded by the registered production tolerance, and can Python/Node consumers agree at the payload layer while typed document integrity and one independent decision-metric implementation remain explicitly separate?",
+  "parents": {
+    "d12Result": {
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/results.json",
+      "sha256": "a411948ec8854029d199786bbf0a81565bc91099e2f973a2311b7513c2d07d82",
+      "verdict": "BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED"
+    },
+    "d12Audit": {
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/audit.c2.json",
+      "sha256": "8496c264fff4f9eca48ab9ac2bdb751b9d39f7124215da856829104550cb0481",
+      "status": "PASS"
+    },
+    "d12_1Result": {
+      "uri": "experiments/blender-cross-language-evidence-envelope-development-v0-1/results.json",
+      "sha256": "4fc177c51060d035b02384c4d7aa1c9e427394c5589e7bddfd9102553008ce07",
+      "verdict": "DEVELOPMENT_TYPED_EVIDENCE_ENVELOPE_NOT_COMPATIBLE"
+    },
+    "typedEnvelopeSpec": {
+      "uri": "specs/blender-cross-language-evidence-envelope-development.v0.1.json",
+      "sha256": "8bd219570e0c7ec922a671919d680787caf55b2ba7d8a631ed5bc995ab24f116"
+    },
+    "typedEnvelopePython": {
+      "uri": "scripts/encode-b52-d12-1-evidence-envelope.py",
+      "sha256": "fe742fc94049abe6b200394635c3fdc42d880bfd4ca79640914c9e92800c3f92"
+    },
+    "typedEnvelopeNode": {
+      "uri": "scripts/encode-b52-d12-1-evidence-envelope.mjs",
+      "sha256": "b104df55ad8454556e3fc12a0f380d2ba4d9191efe6b649dc8a5d734dffdbf1b"
+    }
+  },
+  "freshness": {
+    "excludedResolution": [107, 67],
+    "excludedLensMm": 47.0,
+    "requirements": [
+      "Every fixture resolution, lens, transform, pass index, identifier and output root is fresh relative to D12.",
+      "All seven formal tool paths, the preflight root and the formal root must be absent at preregistration.",
+      "No D12 source EXR or array may be a measurement input."
+    ]
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "version": "3.13",
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "version": "v26.5.0"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    }
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 33554432,
+    "formalRoot": "experiments/blender-static-vector-floor-three-layer-evidence-holdout-v0-1",
+    "preflightRoot": "experiments/blender-static-vector-floor-three-layer-evidence-holdout-preflight-v0-1"
+  },
+  "sceneContract": {
+    "frames": [0, 1, 2],
+    "previousFrame": 0,
+    "currentFrame": 1,
+    "nextFrame": 2,
+    "staticRule": "surface and camera transforms are byte-identical in the spec at frames 0, 1 and 2; every inserted F-Curve key uses LINEAR interpolation",
+    "surfaceSizeWorld": [9.7, 6.1],
+    "surfaceSubdivisions": [31, 19],
+    "material": {
+      "coordinate": "Generated object-local",
+      "red": {"frequency": 0.83, "phase": 0.37, "amplitude": 0.21, "offset": 0.5},
+      "green": {"frequency": 1.19, "phase": 0.73, "amplitude": 0.19, "offset": 0.5},
+      "blue": {"linearUv": [0.71, 0.57], "frequency": 0.67, "phase": 1.31, "amplitude": 0.17, "offset": 0.5},
+      "emissionStrength": 1.0,
+      "alpha": 1.0
+    },
+    "render": {
+      "engine": "CYCLES",
+      "device": "CPU",
+      "samples": 1,
+      "seed": 521222,
+      "animatedSeed": false,
+      "adaptiveSampling": false,
+      "denoising": false,
+      "motionBlur": false,
+      "depthOfField": false,
+      "persistentData": false,
+      "threadsMode": "FIXED",
+      "threads": 4,
+      "pixelAspect": [1.0, 1.0],
+      "filmTransparent": false,
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "colorMode": "RGBA",
+      "colorDepth": "32",
+      "exrCodec": "ZIP",
+      "viewLayer": "BFS_D122_MASTER",
+      "passAlphaThreshold": 0.5,
+      "passes": ["Combined", "Depth", "Vector", "Object Index"]
+    }
+  },
+  "fixtures": [
+    {
+      "id": "STATIC_WIDE_83X53",
+      "resolution": [83, 53],
+      "lensMm": 41.0,
+      "sensorWidthMm": 36.0,
+      "passIndex": 9121,
+      "surfaceTransform": {"location": [0.023, -0.029, 0.11], "rotationEuler": [0.007, -0.019, 0.005]},
+      "cameraTransform": {"location": [0.017, -0.013, 9.37], "rotationEuler": [0.001, -0.003, 0.002]}
+    },
+    {
+      "id": "STATIC_TELE_113X71",
+      "resolution": [113, 71],
+      "lensMm": 58.0,
+      "sensorWidthMm": 32.0,
+      "passIndex": 9232,
+      "surfaceTransform": {"location": [-0.037, 0.021, -0.08], "rotationEuler": [0.031, -0.057, 0.011]},
+      "cameraTransform": {"location": [0.029, -0.018, 11.13], "rotationEuler": [-0.004, 0.006, -0.003]}
+    },
+    {
+      "id": "STATIC_NORMAL_127X79",
+      "resolution": [127, 79],
+      "lensMm": 35.0,
+      "sensorWidthMm": 39.0,
+      "passIndex": 9343,
+      "surfaceTransform": {"location": [0.041, 0.033, 0.17], "rotationEuler": [-0.026, 0.043, -0.009]},
+      "cameraTransform": {"location": [-0.024, 0.027, 8.83], "rotationEuler": [0.005, -0.008, 0.004]}
+    }
+  ],
+  "consumer": {
+    "orientation": "decoded arrays are top-left; previous sample coordinate is (x + Vector.X, y - Vector.Y)",
+    "kernel": "clip-boundary bilinear; scalar float64 weights and accumulation in tap order TL, TR, BL, BR; one final float32 cast per channel",
+    "validity": "four previous owner/alpha taps and current owner/alpha equal the registered surface; four-pixel image margin",
+    "producerMetrics": "forbidden as decision inputs; producers emit payloads and identity metadata only"
+  },
+  "evidenceLayers": {
+    "payloadIdentity": "Python and Node reconstructed RGBA and valid-mask files must be byte-identical in all six cells; adapter source arrays are shared immutable inputs",
+    "documentIntegrity": "Each of twelve producer reports is independently encoded by both frozen D12.1 typed-envelope implementations; the two envelope byte streams and hashes must match for that same report",
+    "decisionMetrics": "One independent Python analyzer reads only adapter and payload arrays, recomputes all metrics in a frozen scalar order and ignores any producer metric field"
+  },
+  "thresholds": {
+    "minimumValidPixelsPerCell": 1200,
+    "vectorComponentAbsoluteMaximum": 0.000244140625,
+    "reconstructionRgbAbsoluteMaximum": 0.0000019073486328125,
+    "reconstructionRgbRmseMaximum": 0.00000095367431640625,
+    "sourceStaticRgbAbsoluteMaximum": 0.0,
+    "repeatSourceArrayIdentity": true,
+    "repeatReconstructionArrayIdentity": true,
+    "pythonNodePayloadIdentity": true,
+    "typedEnvelopeIdentity": true
+  },
+  "classification": {
+    "supported": "BLENDER_STATIC_VECTOR_FLOOR_WITHIN_REGISTERED_TOLERANCE",
+    "notSupported": "BLENDER_STATIC_VECTOR_FLOOR_NOT_WITHIN_REGISTERED_TOLERANCE",
+    "exactZeroObservation": "Report STATIC_EXACT_ZERO_OBSERVED only if every valid Vector component and reconstruction RGB error is bitwise positive or negative zero; otherwise report STATIC_EXACT_ZERO_FALSIFIED. This observation does not alter the tolerance verdict."
+  },
+  "processBoundary": {
+    "expectedUniqueChildProcesses": 55,
+    "sourceRenders": 12,
+    "adapters": 6,
+    "pythonConsumers": 6,
+    "nodeConsumers": 6,
+    "pythonEnvelopeEncoders": 12,
+    "nodeEnvelopeEncoders": 12,
+    "analyzers": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "formalRuns": 1,
+    "overwritePolicy": "refuse every existing formal output path; retain any failure and preregister a correction before a fresh root"
+  },
+  "formalToolPaths": [
+    "blender/render_b52_d12_2_static_floor_source.py",
+    "scripts/adapt-b52-d12-2-static-floor.py",
+    "scripts/reconstruct-b52-d12-2-static-floor.py",
+    "scripts/reconstruct-b52-d12-2-static-floor.mjs",
+    "scripts/analyze-b52-d12-2-static-floor.py",
+    "scripts/run-b52-d12-2-static-floor.py",
+    "scripts/preflight-b52-d12-2-static-floor.py"
+  ],
+  "attacks": [
+    "spec byte identity",
+    "tool Git-blob identity",
+    "Blender/Python/Node/OCIO identity",
+    "fresh output root",
+    "disk reserve admission",
+    "exact fixture roster and order",
+    "three-frame transform identity",
+    "source report self-binding",
+    "EXR multipart roster and channel layout",
+    "adapter array hash binding",
+    "unique process PIDs and exact operation counts",
+    "Python/Node payload byte identity",
+    "per-report dual typed-envelope identity",
+    "analyzer source independence from consumers",
+    "minimum valid coverage",
+    "Vector bound",
+    "reconstruction maximum bound",
+    "reconstruction RMSE bound",
+    "source static beauty identity",
+    "within-fixture repeat source-array identity",
+    "within-fixture repeat reconstruction identity",
+    "decision ignores producer metrics",
+    "exact-zero classification totality",
+    "results and receipt self-hash"
+  ],
+  "nonClaims": [
+    "No perceptual, cinematic-quality or calibrated-display claim is made.",
+    "The tolerance applies only to opaque rigid static planar fixtures under the frozen Blender 5.2/Cycles configuration.",
+    "A bounded static residual does not prove correctness for moving, deforming, transparent, disoccluded or multi-owner pixels.",
+    "The typed envelope is not claimed to implement RFC 8785/JCS.",
+    "Bit-exact producer reductions are not required and producer metrics cannot decide the result."
+  ]
+}
