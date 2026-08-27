@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "bfs.codexWorkerResolutionHoldoutSpec.v0.1",
+  "experimentId": "B49-R",
+  "outputRoot": "experiments/codex-worker-resolution-holdout-v0-1",
+  "acceptedVerdict": "B49_RESOLUTION_SCALING_HOLDOUT_SUPPORTED",
+  "rejectedVerdict": "B49_RESOLUTION_SCALING_HOLDOUT_REJECTED",
+  "invalidVerdict": "B49_RESOLUTION_HOLDOUT_INVALID_EVIDENCE",
+  "parents": {
+    "qualityCostResult": {"uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json", "sha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3", "verdict": "B48_NUMERICAL_QUALITY_COST_POINT_SELECTED", "selectedCellId": "C128_RAW"},
+    "qualityCostAudit": {"uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json", "sha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d", "status": "PASS"},
+    "resolutionDerivationReceipt": {"uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/run.receipt.json", "sha256": "c8ad4309dd44a7d50e1fff3cf7e680550d4c62acb1b52bff6532c749b042dc70"},
+    "resolutionDerivationAnalysis": {"uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/analysis.json", "sha256": "57a0f31232dbb45aa5a2064d9a75aee3c8c3d5631fdf5f301cf15fc07e3edbca", "usableForFormalDesign": true}
+  },
+  "image": {"id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1", "os": "linux", "architecture": "amd64", "dockerReportedSizeBytes": 1004901158, "blenderVersion": "5.2.0 LTS", "blenderBuildHash": "fbe6228777e7"},
+  "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+  "shots": [
+    {"id": "TABLETOP", "shotId": "SHOT_109", "frame": 37, "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend", "blendSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0", "blendBytes": 118702, "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e", "sceneHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7", "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e", "baseline": {"resolution": [128,72], "pixelCount": 9216, "renderSeconds": 9.876034, "exrBytes": 278195, "combinedCanonicalFloat32Sha256": "4e255e4fa7fdfac9c61d5cfa72d86525714203b7e0b9f1b8be9d99bd26d3dddd"}},
+    {"id": "INTERIOR", "shotId": "SHOT_110", "frame": 19, "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend", "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf", "blendBytes": 106078, "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401", "sceneHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb", "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954", "baseline": {"resolution": [128,72], "pixelCount": 9216, "renderSeconds": 12.119148, "exrBytes": 237682, "combinedCanonicalFloat32Sha256": "8b3120eaa1076b06a710c526b7931bff5b966df6e51123e9c4a170cf9948a3c8"}}
+  ],
+  "holdout": {"resolution": [512,288], "pixelCount": 147456, "pixelRatioToBaseline": 16, "samples": 128, "denoising": false, "seedOffset": 647647, "motionBlur": false, "persistentData": false, "threads": 4, "rawSubimages": 7},
+  "gates": {"renderPixelExponentMinimum": 0.95, "renderPixelExponentMaximum": 1.05, "exrByteExponentMinimum": 0.75, "exrByteExponentMaximum": 1.05, "peakSelfRssKiBMaximum": 2097152},
+  "projection": {"baseResolution": [128,72], "twoKResolution": [1920,1080], "twoKPixelRatio": 225, "fourKResolution": [3840,2160], "fourKPixelRatio": 900, "frames": 240, "exponentBand": [0.95,1.05], "labels": ["MODEL_PROJECTION_NOT_MEASURED", "CURRENT_QEMU_CPU_WORKER_ONLY"], "dollarCostAllowed": false},
+  "containerContract": {"platform": "linux/amd64", "network": "none", "user": "65532:65532", "capDrop": ["ALL"], "noNewPrivileges": true, "readOnlyRoot": true, "repositoryMountReadOnly": true, "outputMountWritable": true, "pidsLimit": 256, "memoryBytes": 8589934592, "cpus": 4, "shmBytes": 1073741824, "wallTimeMs": 300000, "killGraceMs": 5000},
+  "diskAdmission": {"minimumReserveBytes": "107374182400", "projectedWriteBytes": "1073741824"},
+  "operationBoundary": {"dockerRuns": 2, "frameRenders": 2, "hostExrAnalyses": 2, "builds": 0, "pulls": 0, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0},
+  "attacks": ["PARENT_IDENTITY", "SOURCE_IDENTITY", "IMAGE_IDENTITY", "SECURITY_BOUNDARY", "DISK_ADMISSION", "RESOLUTION_SETTING", "RENDER_SETTING", "PASS_ROSTER", "NON_FINITE", "RENDER_EXPONENT", "EXR_EXPONENT", "RSS_LIMIT", "OPERATION_BOUNDARY", "CLEANUP", "EVIDENCE_SELF_HASH"],
+  "nonClaims": ["measured 2K or 4K render", "complete-shot throughput", "human cinematic quality", "motion blur or depth-of-field quality", "complex character or texture memory", "GPU or Eevee behavior", "native x86 or cloud throughput", "dollar cost"]
+}
