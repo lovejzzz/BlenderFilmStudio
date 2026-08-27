@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "bfs.nativeCpuAdaptiveUpstreamControlDiagnosis.v0.1",
+  "experimentId": "B52-D1-DIAGNOSIS",
+  "date": "2026-08-27",
+  "status": "UPSTREAM_CONTROL_CONTAMINATION_CONFIRMED",
+  "formalB52Result": {
+    "uri": "experiments/native-cpu-adaptive-quality-cost-derivation-v0-1/results.json",
+    "sha256": "27cf05c52fd05a6e88c9df28bea23d0a776eee8124b24508c41daeefe7cfab87",
+    "verdict": "NATIVE_CPU_ADAPTIVE_QUALITY_COST_DERIVATION_INVALID",
+    "baseFailure": "FIXED128_PARENT_CONTROL"
+  },
+  "formalB52Audit": {
+    "uri": "experiments/native-cpu-adaptive-quality-cost-derivation-v0-1/audit.json",
+    "sha256": "a5b5c14820df972bef67485a2bb8bccc2ae9b3fc574c26f46aee83a077af3fba",
+    "status": "FAIL",
+    "analysisReplayByteExact": true,
+    "frozenToolsMatch": true,
+    "boundInputsMatch": true,
+    "artifactsMatch": true
+  },
+  "d5Renderer": {
+    "uri": "blender/render_b51_native_cpu_data_sample_cost.py",
+    "sha256": "30eb127b36b63c283f55dd386e79d9898cd0224327faca265233a8f937c74f4f",
+    "toolFreezeCommit": "3032206ae7537b733c4746c50ee61144b330f749",
+    "assignmentsToUseAdaptiveSampling": 0,
+    "assignmentsToAdaptiveThreshold": 0,
+    "assignmentsToAdaptiveMinSamples": 0,
+    "adaptiveSettingsRecordedInWorkerReport": false
+  },
+  "zeroRenderSourceObservations": [
+    {
+      "sourceId": "TABLETOP",
+      "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+      "blendSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "useAdaptiveSampling": true,
+      "adaptiveThreshold": 0.009999999776482582,
+      "adaptiveMinSamples": 0
+    },
+    {
+      "sourceId": "INTERIOR",
+      "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+      "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "useAdaptiveSampling": true,
+      "adaptiveThreshold": 0.009999999776482582,
+      "adaptiveMinSamples": 0
+    }
+  ],
+  "parentReproductionDiagnosis": [
+    {
+      "variantId": "TABLETOP_WIDE",
+      "trueFixed128ExactProductionPasses": 3,
+      "productionPassCount": 7,
+      "adaptiveT010M0ExactProductionPasses": 7,
+      "adaptiveT010M0AllProductionPassesExact": true,
+      "trueFixedChangedPixels": {
+        "Combined": 86509,
+        "Normal": 24897,
+        "Vector": 84789,
+        "CryptoObject00": 999
+      }
+    },
+    {
+      "variantId": "INTERIOR_CHAIR",
+      "trueFixed128ExactProductionPasses": 2,
+      "productionPassCount": 7,
+      "adaptiveT010M0ExactProductionPasses": 7,
+      "adaptiveT010M0AllProductionPassesExact": true,
+      "trueFixedChangedPixels": {
+        "Combined": 50171,
+        "Normal": 2471,
+        "Vector": 49891,
+        "CryptoObject00": 497,
+        "CryptoObject01": 5
+      }
+    }
+  ],
+  "operationCounts": {
+    "nativeBlenderProcesses": 2,
+    "renders": 0,
+    "existingExrsDecoded": 14,
+    "sourceFilesModified": 0,
+    "formalArtifactsModified": 0
+  },
+  "measuredConclusion": "Both source scenes carried adaptive sampling at threshold approximately 0.01/min 0, and the D5 renderer did not override or report it. B52 ADAPT_T010_M0 reproduces both D5 128-spp parents across all seven decoded production passes, while true non-adaptive FIXED_128 does not. The D5/D6 128-spp parent was therefore an adaptive-max-128 baseline, not a non-adaptive fixed-sample baseline.",
+  "nonClaims": [
+    "This diagnosis does not make B52-D1 valid.",
+    "It does not select an adaptive production point.",
+    "It does not invalidate D5/D6 comparisons inside their shared inherited adaptive configuration, but it narrows their interpretation.",
+    "It does not establish task-level acceptability of Normal or Vector changes."
+  ]
+}

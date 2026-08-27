@@ -1583,6 +1583,24 @@ Verdict: `CPU_DATA_SEMANTIC_SAMPLE_REDUCTION_NOT_OBSERVED`. H2 is no longer just
 
 Artifacts: `experiments/native-cpu-data-pass-semantic-equivalence-derivation-v0-1/`, `experiments/native-cpu-data-pass-semantic-equivalence-tool-identity-failure-v0-1/`, `specs/native-cpu-data-pass-semantic-equivalence-derivation.v0.1.json`, `research/2026-08-27-b51-d6-native-cpu-data-pass-semantic-equivalence-derivation-result.md` and `research/2026-08-27-b51-d6-c1-tool-freeze-identity-correction-protocol.md`.
 
+## J-095 · B52-D1 exposes inherited adaptive sampling in the supposed fixed parent
+
+Date: 2026-08-27 · Type: INVALID FORMAL DERIVATION + ZERO-RENDER ROOT-CAUSE DIAGNOSIS · Runtime: thirty fresh native Blender 5.2 CPU render processes plus two read-only Blender probes
+
+B52-D1 froze three independent 512-spp references and six 128-spp profiles across TABLETOP_WIDE and INTERIOR_CHAIR. Every cell emitted Combined, Depth, Normal, Vector, three Cryptomatte ranks and Debug Sample Count. All 30 processes completed, all twelve repeated candidate cells reproduced eight decoded parts exactly, and both three-reference groups were distinct.
+
+The experiment is invalid rather than positive or negative. Its true non-adaptive FIXED_128 control reproduced only 3/7 D5 parent passes on TABLETOP and 2/7 on INTERIOR. Combined, Normal, Vector and active Cryptomatte layers changed; Depth remained exact. The preregistered `FIXED128_PARENT_CONTROL` therefore failed before candidate selection.
+
+Two zero-render Blender probes found `use_adaptive_sampling=True`, threshold approximately `0.01` and min samples `0` in both exact source `.blend` files. The frozen D5 renderer never assigned or reported those properties. B52's explicit `ADAPT_T010_M0` reproduced both D5 parents across all seven passes, proving that D5/D6 used an inherited adaptive-max-128 parent rather than a non-adaptive fixed baseline.
+
+The failure chain is retained. The first analyzer attempt reached attack A16 after all renders and failed on a no-argument dictionary `pop`; C1 fixed only that mutation. C1 then misclassified six finite/in-range candidates that reached max everywhere as invalid experiment inputs; its 10/20 result remains byte-preserved. C2 separated measurement validity from candidate eligibility and exposed the real parent-control failure. The final independent replay is byte-exact and matches 30/30 artifacts, every input and frozen tool, but audit status remains FAIL and attacks 11/20 because the base gate is genuinely false.
+
+Descriptively, every adaptive candidate passed beauty, but the largest per-scene render savings were only 14.67% and 9.62%, below the frozen 20%, and no adaptive profile passed the complete data/auxiliary/sample/cost conjunction. These values cannot be promoted from an invalid experiment.
+
+Next: B52-D2 must explicitly define the actual production baseline as adaptive `0.01/min0/max128`, use fresh seeds and test looser thresholds. D5/D6 remain max-sample evidence only inside their inherited adaptive configuration.
+
+Artifacts: `experiments/native-cpu-adaptive-quality-cost-derivation-v0-1/`, `specs/native-cpu-adaptive-quality-cost-derivation.v0.1.json`, `research/2026-08-27-b52-d1-native-cpu-adaptive-quality-cost-derivation-result.md`, `research/2026-08-27-b52-d1-c1-analysis-tool-correction-protocol.md` and `research/2026-08-27-b52-d1-c2-sample-count-classification-correction-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
