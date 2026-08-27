@@ -2005,6 +2005,20 @@ Eight formal-tool candidates now exist: two producers, encoder, Blender worker, 
 
 Artifacts: `scripts/reference-b52-d9-1-temporal.py`, `scripts/reference-b52-d9-1-temporal.mjs`, `scripts/encode-b52-d9-1-resolved.py`, `blender/render_b52_d9_1_temporal_passthrough.py`, `scripts/analyze-b52-d9-1-temporal-holdout.py`, `scripts/run-b52-d9-1-temporal-holdout.py`, `scripts/audit-b52-d9-1-temporal-holdout.py`, and `tests/test_b52_d9_1_temporal_holdout_contract.py`.
 
+## J-124 · Frozen D9.1 tools pass zero-formal-output admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+The eight candidate tools were frozen in commit `0f476ac`. A post-freeze preflight re-hashed every current tool against its Git blob, verified all five parent artifacts, the Blender/Python/Node/OCIO runtimes and the retained D9 invalidation, and confirmed that both the D9 root and the D9.1 formal root remained absent.
+
+The component probe used five unique child PIDs: two producer processes, two EXR encoder processes and one real Blender 5.2 process. Python and Node matched across all ten arrays; both EXR reopen checks were exact; Blender constructed the frozen two-node Raw compositor graph with zero render calls. These probe values are explicitly not formal measurements.
+
+The host initially sat below the preregistered 100 GiB reserve. Under the user's prior cache-cleanup authorization, 117 explicitly named `/private/tmp/bfs-*` staging items totaling approximately 872 MiB were deleted; no repository, evidence or user-document path was touched. Frozen admission then observed 108,117,323,776 available bytes and projected 108,083,769,344 after the 32 MiB experiment, above the 107,374,182,400-byte reserve.
+
+Preflight file SHA-256: `89cc434f2b6c4c8113f2008a6a3f2fda23c02e77a61d5bd472e56be715337fce`; internal canonical preflight hash: `39fe43b468d1d40627d6483e965f7c2e94578056b74e451f5d5405d85ea2574c`. Admission status: `ACCEPTED`. Next: commit the immutable preflight, then create the formal root exactly once and run the 32-process matrix without tool changes.
+
+Artifact: `experiments/layer-depth-temporal-accumulation-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
