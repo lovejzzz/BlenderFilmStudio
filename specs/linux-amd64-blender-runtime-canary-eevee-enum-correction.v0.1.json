@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderRuntimeCanaryEeveeEnumCorrection.v0.1",
+  "experimentId": "B41-C5",
+  "status": "PREREGISTERED_BEFORE_CORRECTION_TOOLING_OR_OUTPUT",
+  "question": "Does the frozen real worker pass the success and timeout canaries when the Blender 5.2 Eevee engine identifier is corrected from BLENDER_EEVEE_NEXT to the runtime-observed BLENDER_EEVEE?",
+  "parent": {
+    "c4SpecSha256": "8dfb22a794c0406d58b2f6b03a7a750206182cb1ff9a864653c27d77aa0f3f19",
+    "c4PreregistrationCommit": "832556390cf38e2bdb9f5a81b94001c19d580540",
+    "c4ToolFreezeCommit": "bca45c7af125940d547bcf2afc782fc5d51b7cb3",
+    "failedResultSha256": "3cc14c978d7c21e9abd48a9608b8f39b03be665e0f24fab2e014fa834a114523",
+    "failedAuditSha256": "e7ba1b22ffd79c6dd38d89d05fc305b3184c6f713557aaeb25a93d684585e87e",
+    "failure": "REJECTED_BLENDER_5_2_EEVEE_ENUM_MISMATCH"
+  },
+  "observedRuntime": {
+    "blenderVersion": "5.2.0 LTS",
+    "buildHash": "fbe6228777e7",
+    "renderEngineEnumsExact": ["BLENDER_EEVEE", "BLENDER_WORKBENCH", "CYCLES"],
+    "rejectedIdentifier": "BLENDER_EEVEE_NEXT",
+    "acceptedIdentifier": "BLENDER_EEVEE",
+    "successExitCode": 1,
+    "successElapsedMs": 14465,
+    "timeoutOutcome": "FORCED_TIMEOUT_NON_PROMOTABLE"
+  },
+  "changedImplementationExact": [
+    "Replace only the runtime canary render-engine assignment literal BLENDER_EEVEE_NEXT with BLENDER_EEVEE",
+    "Project the runtime report to BLENDER_EEVEE_NEXT only inside the inherited analyzer, while separately requiring the unmodified observed report to equal BLENDER_EEVEE"
+  ],
+  "frozenUnchanged": [
+    "B41 through B41-C4 ancestry and platform-specific executable identity",
+    "official archive, base image, Dockerfile and buildx transport",
+    "runtime canary bytes except the one render-engine identifier literal",
+    "timeout canary bytes",
+    "disk, image, launch, mount, environment, user, capability, cgroup, network and read-only-root gates",
+    "32x32 Eevee output, 30 second TERM plus 5 second KILL timeout, cleanup and audit requirements",
+    "the observed missing /work/tmp PulseAudio warning remains recorded and is not changed in C5",
+    "accepted verdict and non-claims"
+  ],
+  "acceptedVerdict": "LINUX_AMD64_BLENDER_5_2_CANARY_AND_TIMEOUT_SUPPORTED",
+  "nonClaims": [
+    "B41-C5 corrects only the Blender 5.2 Eevee enum identifier",
+    "The nonfatal /work/tmp warning remains an unresolved observation",
+    "A successful 32x32 canary is not cinematic quality, production throughput or hostile-kernel isolation evidence",
+    "No SceneSpec compiler job runs in B41-C5"
+  ]
+}
