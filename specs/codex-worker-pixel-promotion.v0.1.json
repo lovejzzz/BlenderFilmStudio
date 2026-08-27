@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "bfs.codexWorkerPixelPromotion.v0.1",
+  "experimentId": "B45",
+  "status": "PREREGISTERED_BEFORE_RENDERER_RUNNER_OR_OUTPUT",
+  "question": "Do each pair of byte-different but structure-identical B44 .blend files render the exact same decoded scene-linear float pixels in fresh Blender 5.2 Linux/amd64 Cycles CPU workers, while preserving a bounded least-authority execution contract?",
+  "parents": {
+    "codexWorkerPromotion": {
+      "resultUri": "experiments/codex-to-blender-worker-promotion-v0-1/results.json",
+      "resultSha256": "9e5d02c055dce8e05b73588d0e39c4ad3823277b1437aec20b110ace30d4776a",
+      "auditUri": "experiments/codex-to-blender-worker-promotion-v0-1/audit.json",
+      "auditSha256": "7b5fd2487d3a5ac613bcc249c484c6758acee730b8faf80eb5e94c7ce8e10c81",
+      "verdict": "CODEX_TO_BLENDER_WORKER_PROMOTION_REPRODUCIBLE"
+    },
+    "cyclesWorkerControl": {
+      "resultUri": "experiments/linux-amd64-render-backend-control-v0-1/results.json",
+      "resultSha256": "67ea4b0e51d43ab5936e8c6b6890e07aba97918979fa1f0e349c7e98402865ef",
+      "auditUri": "experiments/linux-amd64-render-backend-control-v0-1/audit.json",
+      "auditSha256": "fa8f41464aebb54c78a4d4e824536d48724337226395bb893e731fbfc5419cda",
+      "classification": "CPU_ONLY_WORKER_CONFIRMED_EEVEE_GPU_ROUTE_ABSENT"
+    }
+  },
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "dockerReportedSizeBytes": 1004901158,
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderExecutableSha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "buildPullDownloadAllowed": false
+  },
+  "frozenInputs": {
+    "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+    "b44Result": {"uri": "experiments/codex-to-blender-worker-promotion-v0-1/results.json", "sha256": "9e5d02c055dce8e05b73588d0e39c4ad3823277b1437aec20b110ace30d4776a"},
+    "b44Audit": {"uri": "experiments/codex-to-blender-worker-promotion-v0-1/audit.json", "sha256": "7b5fd2487d3a5ac613bcc249c484c6758acee730b8faf80eb5e94c7ce8e10c81"}
+  },
+  "hostPixelDecoder": {
+    "pythonVersion": "3.13.3",
+    "pythonExecutable": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3.13",
+    "pythonExecutableSha256": "f5d584368bd127649722baa482517054d3c941ea5fbd29a669a8c5323dd21be5",
+    "opencvVersion": "4.11.0",
+    "numpyVersion": "1.26.4",
+    "openExrEnableEnvironment": "OPENCV_IO_ENABLE_OPENEXR=1",
+    "decodedLayout": "height,width,BGRA float32 C-order little-endian",
+    "canonicalPixelHash": "SHA-256(sorted compact JSON metadata + LF + decoded little-endian float32 bytes)"
+  },
+  "renderControl": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "width": 128,
+    "height": 72,
+    "resolutionPercentage": 100,
+    "samples": 1,
+    "seedSource": "compiled scene bfs_shot_seed",
+    "animatedSeed": false,
+    "denoising": false,
+    "threadsMode": "FIXED",
+    "threads": 4,
+    "filmTransparent": false,
+    "compositing": false,
+    "sequencer": false,
+    "renderOperatorCallsPerContainer": 1,
+    "savesFromSameRenderResult": 2,
+    "master": {"format": "OPEN_EXR", "channels": "RGBA", "colorDepth": "32", "codec": "ZIP", "domain": "scene-linear ACEScg"},
+    "review": {"format": "PNG", "channels": "RGBA", "colorDepth": "8", "view": "compiled scene ACES SDR view"}
+  },
+  "shots": [
+    {
+      "id": "TABLETOP",
+      "shotId": "SHOT_109",
+      "frame": 24,
+      "frameRange": [1, 48],
+      "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+      "sourceSceneCanonicalSha256": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+      "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+      "inputs": [
+        {"id": "TABLETOP-A1", "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend", "blendSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0", "blendBytes": 118702, "compileManifestSha256": "80aee5b9f386d677425856d20f366bc9aec7c1b66a31b5f1bc28e7a6e53d15de"},
+        {"id": "TABLETOP-A2", "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A2/scene.blend", "blendSha256": "fd3bf86f6e95b20e9bb634fb1b96ae9af4c697ad4930f14589cd75dffc1aaec6", "blendBytes": 118698, "compileManifestSha256": "43c538d2ebd1bdde85fa2838cbb9419c4e3fa04b2b30de47ee87c65f3ce2690b"}
+      ],
+      "requireSourceBlendHashesDifferent": true
+    },
+    {
+      "id": "INTERIOR",
+      "shotId": "SHOT_110",
+      "frame": 12,
+      "frameRange": [1, 24],
+      "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+      "sourceSceneCanonicalSha256": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+      "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954",
+      "inputs": [
+        {"id": "INTERIOR-A1", "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend", "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf", "blendBytes": 106078, "compileManifestSha256": "bb8bc5b94f74a18db070697bcd22d91abf5194755bff87776acaea6e4f4302e5"},
+        {"id": "INTERIOR-A2", "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A2/scene.blend", "blendSha256": "8bbe047fcb79f885ddc393ddfaf650b8492bd670b82d6305e8489909cc686e12", "blendBytes": 106078, "compileManifestSha256": "3dfe323a2bc3c96ce6a8b71a12c1f36b757974147843716f72b8ddd24443c976"}
+      ],
+      "requireSourceBlendHashesDifferent": true
+    }
+  ],
+  "negativeControl": {
+    "id": "TABLETOP-HASH-MISMATCH",
+    "sourceUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+    "declaredSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "expectedReason": "SOURCE_BLEND_HASH_MISMATCH",
+    "expectedContainerLaunchCount": 0
+  },
+  "containerContract": {
+    "platform": "linux/amd64",
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": ["ALL"],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "wallTimeMs": 60000,
+    "killGraceMs": 5000
+  },
+  "diskAdmission": {"minimumReserveBytes": "107374182400", "projectedWriteBytes": "1073741824"},
+  "operationBoundary": {
+    "dockerImageInspects": 1,
+    "dockerRuns": 4,
+    "hostExrAnalyses": 4,
+    "dockerRunningContainerChecks": 1,
+    "buildPullDownload": 0,
+    "modelCodexVideoApiCalls": 0
+  },
+  "acceptance": {
+    "allParentAndFrozenInputHashesMatch": true,
+    "allFourSourceBlendFileHashesAndSizesMatch": true,
+    "sourceBlendHashesDifferWithinEachShotPair": true,
+    "exactlyFourFreshWorkerContainers": true,
+    "allFourRendersExitZeroWithinWallTime": true,
+    "allFourReportsBindSourceBlendPlanSceneFrameRendererAndOcio": true,
+    "allFourExrFilesDecodeAsFinite128x72BgraFloat32": true,
+    "allFourPngReviewFilesAre128x72Rgba8": true,
+    "eachShotPairDecodedFloatPixelsAreByteExact": true,
+    "exrAndPngContainerHashesAreRecordedButNotRequiredEqual": true,
+    "hashMismatchNegativeStopsBeforeContainer": true,
+    "zeroBuildPullDownloadAndModelOperations": true,
+    "zeroExperimentContainersRunningAfter": true,
+    "independentAuditRequired": true
+  },
+  "attacks": [
+    "mutate parent evidence identity",
+    "mutate source blend identity",
+    "claim equal source blend hashes",
+    "mutate worker image identity",
+    "mutate container security boundary",
+    "mutate report source binding",
+    "mutate report plan binding",
+    "mutate report frame",
+    "mutate render settings",
+    "mark non-finite EXR accepted",
+    "mutate decoded pixel hash in one replicate",
+    "claim a fifth Docker run",
+    "claim rejected-source container launch",
+    "mutate evidence self-hash"
+  ],
+  "acceptedVerdict": "B44_BLEND_TO_FLOAT_PIXELS_EXACT",
+  "rejectedVerdict": "B44_BLEND_TO_FLOAT_PIXELS_NOT_EXACT_OR_INVALID",
+  "nonClaims": [
+    "B45 is a 128x72 one-sample representative-frame canary, not production image quality",
+    "B45 does not render a complete shot or establish temporal stability",
+    "B45 single-layer EXR is not the multilayer 4K research master",
+    "B45 decoded-pixel equality on one worker does not prove cross-device reproducibility",
+    "B45 PNG8 is a review image, not the scene-linear master",
+    "B45 does not establish Eevee or GPU availability",
+    "B45 does not make a model call or measure subscription limits",
+    "B45 does not establish cinematic lighting, composition, performance or human-perceived quality"
+  ]
+}
