@@ -248,6 +248,8 @@ export default function Home() {
           <Link className="route-tab" href="/temporal-accumulation-v0-1">D9.1 时序累积</Link>
           <Link className="route-tab" href="/blender-pass-adapter-v0-1">D10.1 Pass Adapter</Link>
           <Link className="route-tab" href="/blender-temporal-composition-v0-1">D11 组合反例</Link>
+          <Link className="route-tab" href="/blender-nearest-integer-temporal-recovery-v0-1">D11.1 整数恢复</Link>
+          <Link className="route-tab" href="/blender-projective-subpixel-reconstruction-v0-1">D12 亚像素</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>
