@@ -2583,6 +2583,18 @@ Result file SHA-256: `1f41d437539e28e62446215a7b1ad16e5ffa56ea9e9eaaaecf07d64999
 
 Artifacts: `experiments/blender-static-nonplanar-multiowner-holdout-v0-1/` and `research/2026-08-27-b52-d12-3-static-nonplanar-multiowner-holdout-result.md`.
 
+## J-163 · D12.4 freezes zero-render localization before inspecting extrema
+
+Date: 2026-08-27 · Type: POST-HOC DEVELOPMENT PREREGISTRATION · New Blender renders: 0
+
+D12.3 passed its inclusive interior gate while the occluding-plane RGB maximum landed exactly on `1/524288`. D12.4 does not change that verdict and may not widen the gate. It freezes a read-only diagnostic over the already committed D12.3 source EXRs, adapter arrays and dual-consumer outputs.
+
+The primary analysis uses repeat 1 while repeat 2 is a byte-identity control. Before interpretation, the future localizer must verify the D12.3 spec, results, receipt, execution record, all bound reports and payloads, then reproduce every formal reconstructed float32 byte. For the global maximum and top 32 samples per fixture it will record owner, Chebyshev silhouette distance, raw Vector float32 bits and `2^-17` ratio, exact bilinear taps/weights, signed tap contributions, local RGB range and a same-owner Depth Laplacian proxy.
+
+Success only means that every tied maximum pixel was enumerated and arithmetically accounted for under independent replay. It remains a post-hoc development diagnostic, not a holdout, causal claim or permission to revise D12.3.
+
+Artifacts: `specs/blender-static-zero-headroom-localization.v0.1.json` and `research/2026-08-27-b52-d12-4-zero-headroom-localization-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "bfs.blenderStaticZeroHeadroomLocalizationSpec.v0.1",
+  "experimentId": "B52-D12.4-DEV",
+  "title": "Static nonplanar multi-owner zero-headroom localization",
+  "status": "PREREGISTERED_BEFORE_LOCALIZER_IMPLEMENTATION",
+  "decisionRole": "POST_HOC_DEVELOPMENT_DIAGNOSTIC_CANNOT_CHANGE_D12_3",
+  "frozenInputs": {
+    "d12_3Spec": {
+      "uri": "specs/blender-static-nonplanar-multiowner-holdout.v0.1.json",
+      "sha256": "f1ffe5b4fe0912936b1e03677dd0985f11c34e6b5df4ddf70854533c4ad0b590"
+    },
+    "formalResults": {
+      "uri": "experiments/blender-static-nonplanar-multiowner-holdout-v0-1/results.json",
+      "sha256": "1f41d437539e28e62446215a7b1ad16e5ffa56ea9e9eaaaecf07d64999f2988d",
+      "internalHash": "0422bd06fbbd327fc4a98231c3815fe6b13de1ab1611e725064baca2ae3eeebe"
+    },
+    "formalReceipt": {
+      "uri": "experiments/blender-static-nonplanar-multiowner-holdout-v0-1/receipt.json",
+      "sha256": "080669fb36c286186ead1ad28e23f351d05d2f17167901bfc72339f937af84d3",
+      "internalHash": "fe2f4ab08547166e815f87c828060ddf890440d7a076494abd84c2c0d91196fc"
+    },
+    "formalExecution": {
+      "uri": "experiments/blender-static-nonplanar-multiowner-holdout-v0-1/execution.json",
+      "sha256": "05c897ff5466bdbf0663339652570d2999d7a8de56f764d1f731169a6c5b585b",
+      "internalHash": "063cfb6ec37a4b67dc5f8681aa13ee7a5f4a45e2338622a45e61ba8755c8c13d"
+    }
+  },
+  "runtime": {
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35"
+    },
+    "requiredModules": [
+      "numpy",
+      "OpenImageIO"
+    ]
+  },
+  "analysisCells": {
+    "fixtures": [
+      "STATIC_CURVED_PAIR_97X61",
+      "STATIC_OCCLUDING_PLANES_119X73",
+      "STATIC_THIN_DEPTH_STACK_131X83"
+    ],
+    "primaryRepeat": 1,
+    "identityControlRepeat": 2,
+    "topKInteriorSamplesPerFixture": 32
+  },
+  "frozenFormalBoundary": {
+    "interiorRgbMaximumInclusive": 0.0000019073486328125,
+    "d12_3Verdict": "BLENDER_STATIC_NONPLANAR_MULTIOWNER_INTERIOR_WITHIN_REGISTERED_TOLERANCE",
+    "d12_3ExactZeroObservation": "INTERIOR_EXACT_ZERO_FALSIFIED",
+    "mustRemainUnchanged": true
+  },
+  "measurements": {
+    "errorRanking": "descending absolute RGB reconstruction error, then y, x, channel",
+    "silhouetteDistance": "Chebyshev pixel distance from the current pixel to the nearest current-frame pixel that is outside the same owner with alpha greater than 0.999; the image exterior is outside-owner",
+    "vectorIdentity": "raw little-endian float32 value, uint32 bit pattern and ratio to 2^-17",
+    "bilinearCoordinates": "qx=x+vector.x; qy=y-vector.y; floor coordinates and four float64 weights exactly as the D12.3 consumer",
+    "tapContribution": "for each RGB channel, weight times (previous tap minus current center), before the final float32 cast",
+    "localContrast": "per-channel maximum minus minimum across the four bilinear source taps",
+    "depthPlanarityProxy": "absolute four-neighbor discrete Laplacian of the source Depth pass when all four neighbors share the center owner; otherwise null",
+    "tailBins": {
+      "silhouetteDistance": [2, 3, 4, 5, 8, 13],
+      "errorGateFractions": [0.125, 0.25, 0.5, 1.0]
+    }
+  },
+  "localizationGate": {
+    "successVerdict": "ZERO_HEADROOM_PIXEL_LOCALIZED_WITHOUT_FORMAL_REVISION",
+    "failureVerdict": "ZERO_HEADROOM_PIXEL_NOT_LOCALIZED",
+    "requirements": [
+      "all frozen input file and internal hashes verify before analysis",
+      "all adapter and consumer report hashes and bound payload hashes verify",
+      "primary and identity-control repeat payloads match byte-for-byte",
+      "recomputing the D12.3 bilinear consumer reproduces every formal reconstructed float32 byte",
+      "the global interior maximum and all tied coordinates are enumerated",
+      "each tied maximum records owner, silhouette distance, Vector bits, weights, tap colors, signed contributions, local contrast and depth-planarity proxy",
+      "an independent audit recomputes the global maximum, tied coordinates and reconstruction identity"
+    ]
+  },
+  "registeredNegativeCases": [
+    "D12_3_SPEC_IDENTITY",
+    "D12_3_RESULTS_FILE_IDENTITY",
+    "D12_3_RESULTS_INTERNAL_IDENTITY",
+    "D12_3_RECEIPT_FILE_IDENTITY",
+    "D12_3_RECEIPT_INTERNAL_IDENTITY",
+    "D12_3_EXECUTION_FILE_IDENTITY",
+    "D12_3_EXECUTION_INTERNAL_IDENTITY",
+    "ADAPTER_REPORT_IDENTITY",
+    "CONSUMER_REPORT_IDENTITY",
+    "PAYLOAD_IDENTITY",
+    "REPEAT_PAYLOAD_IDENTITY",
+    "RECONSTRUCTION_BYTE_IDENTITY",
+    "GLOBAL_MAXIMUM_IDENTITY",
+    "TIED_COORDINATE_TOTALITY",
+    "OUTPUT_SELF_HASH"
+  ],
+  "nonClaims": [
+    "This post-hoc development diagnostic is not a holdout and cannot promote or revise D12.3.",
+    "Exact bilinear decomposition establishes arithmetic accounting, not Blender implementation causality.",
+    "The diagnostic does not justify widening the frozen tolerance.",
+    "The diagnostic does not cover moving, deforming, transparent, volumetric, hair, particle, motion-blurred or disoccluded content.",
+    "No perceptual or cinematic-quality claim is made."
+  ]
+}
