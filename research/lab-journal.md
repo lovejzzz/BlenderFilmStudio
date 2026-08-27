@@ -2113,6 +2113,18 @@ Spec SHA-256: `11686c5e796c7bc1b4e45cf137c3d98347bc65bfec428f9d19545b55430f584b`
 
 Artifacts: `specs/blender-multipart-temporal-adapter-f32-holdout.v0.1.json` and `research/2026-08-27-b52-d10-1-blender-multipart-temporal-adapter-f32-holdout-protocol.md`.
 
+## J-131 · D10.1 pre-freeze smoke matches Blender RNA binary32 exactly
+
+Date: 2026-08-27 · Type: DEVELOPMENT-ONLY REAL-BLENDER IMPLEMENTATION SMOKE · Formal outputs: 0
+
+Six fresh Blender 5.2 processes rendered previous/current frames of all three preregistered 181×103 fixtures, followed by three fresh adapter processes. The reported ortho scale was `18.100000381469727`, exactly the IEEE-754 binary32 round-trip of 18.1. Canonical scene and layered Action structures matched exactly in 6/6 source cells; the raw JSON doubles did not where applicable. A one-ULP ortho-scale mutation and pass-index +1 mutation were rejected in 6/6.
+
+The new `BFS_F32_MASTER` multipart roster and channels matched. All 15 fixture-owner rows were visible, all analytic 3×3 probes were exact and every Depth maximum was zero. Object XY/ZW maxima were `3.814697265625e-6` / `8.529922399520072e-6`; camera worst-case XY/ZW maxima were `3.0755072587198445e-5` / `3.145679951185349e-5`; static maximum was `3.0517578125e-5`. All three adapters emitted seven canonical arrays with self-valid reports.
+
+This is API and implementation evidence only. It uses preregistered fixtures before tool freeze and cannot satisfy clean-repeat, frozen-tool, attack, audit or promotion gates. Observation internal hash: `31627cf6eb892d2f3f0fef1e749b81a53f7c34bfdae1ebe4692f99dbe11de682`.
+
+Artifacts: `experiments/blender-multipart-temporal-adapter-f32-development-smoke-v0-1/` and `research/2026-08-27-b52-d10-1-f32-adapter-development-smoke.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
