@@ -58,6 +58,23 @@
     "independent analyzer replay is byte exact"
   ],
   "invalidators": ["missing or overlapping target ROI", "wrong focus/aperture state", "non-finite pass data", "missing relation", "resource timeout", "audit mismatch"],
+  "attacks": [
+    {"id": "A01_PARENT", "expectedReason": "PARENT_IDENTITY"},
+    {"id": "A02_SOURCE", "expectedReason": "SOURCE_IDENTITY"},
+    {"id": "A03_IMAGE", "expectedReason": "IMAGE_IDENTITY"},
+    {"id": "A04_SECURITY", "expectedReason": "SECURITY_BOUNDARY"},
+    {"id": "A05_DISK", "expectedReason": "DISK_ADMISSION"},
+    {"id": "A06_CELLS", "expectedReason": "CELL_ROSTER"},
+    {"id": "A07_FIXTURE", "expectedReason": "FIXTURE_ECHO"},
+    {"id": "A08_DOF", "expectedReason": "DOF_SETTING"},
+    {"id": "A09_ROSTER", "expectedReason": "PASS_ROSTER"},
+    {"id": "A10_FINITE", "expectedReason": "NON_FINITE"},
+    {"id": "A11_ROI", "expectedReason": "ROI_INVALID"},
+    {"id": "A12_RELATION", "expectedReason": "RELATION_MISSING"},
+    {"id": "A13_OPERATIONS", "expectedReason": "OPERATION_BOUNDARY"},
+    {"id": "A14_CLEANUP", "expectedReason": "CLEANUP"},
+    {"id": "A15_HASH", "expectedReason": "EVIDENCE_SELF_HASH"}
+  ],
   "containerContract": {"platform": "linux/amd64", "network": "none", "user": "65532:65532", "capDrop": ["ALL"], "noNewPrivileges": true, "readOnlyRoot": true, "repositoryMountReadOnly": true, "outputMountWritable": true, "pidsLimit": 256, "memoryBytes": 8589934592, "cpus": 4, "shmBytes": 1073741824, "wallTimeMs": 180000, "killGraceMs": 5000},
   "diskAdmission": {"minimumReserveBytes": "107374182400", "projectedWriteBytes": "1073741824"},
   "operationBoundary": {"dockerRuns": 7, "frameRenders": 7, "hostExrAnalyses": 7, "builds": 0, "pulls": 0, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0},
