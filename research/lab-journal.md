@@ -1719,6 +1719,22 @@ Next: execute the unchanged 36-process matrix, retain any failed cell, analyze o
 
 Artifacts: `experiments/adaptive-vector-blur-semantics-preflight-v0-1/worker-smoke-observation.json` and `experiments/adaptive-vector-blur-semantics-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-104 · B52-D4 is invalid because the designated task does not move enough
+
+Date: 2026-08-27 · Type: REAL BLENDER COMPOSITOR DERIVATION · Blender processes: 36
+
+All 36 fresh Blender 5.2 CPU compositor processes succeeded with unique PIDs, zero timeouts and 36 finite RGBA32 EXRs. Eighteen two-process groups reproduced decoded pixels exactly. Parent/source identity, the four-node graph and the Blender 5.2 RNA contract all held.
+
+The experiment nevertheless failed its earliest semantic gate. Baseline Vector Blur changed no RGB pixel by more than the preregistered `1/65536` minimum on either scene. TABLETOP's maximum change was `3.814697e-6`; INTERIOR's was `1.192093e-7`. Candidate blur outputs were decoded-identical to their baseline outputs, but that equality is not evidence of safety because the chosen task first failed to demonstrate sensitivity.
+
+The first frozen analysis attempt also produced a retained software failure after all compositor outputs existed: a NumPy boolean was not strict-JSON serializable. The original receipt and traceback remain published. A post-output amendment frozen at `6d64a5ca2f2b4a83bc9f51fa2054133639c3e762` only casts NumPy booleans, adds one regression test and audits the old/new receipt boundary. It changed no gate and reused all 36 EXRs without rerendering.
+
+The final result is `ADAPTIVE_VECTOR_BLUR_SEMANTICS_DERIVATION_INVALID`, base failure `BASELINE_EFFECT`, candidates empty and attacks 12/19 because the real early failure masks seven later attack routes. Independent replay is byte-exact and every artifact identity check passes, but the audit correctly returns `FAIL`: the record is reproducible, while the intended inference is not established.
+
+Next: preregister D5 as a baseline-only controlled-motion calibration followed by a fresh animated holdout. It must establish a non-trivial task response before inspecting candidate equivalence; otherwise Blender Vector Blur should be retired as the oracle for this question.
+
+Artifacts: `experiments/adaptive-vector-blur-semantics-derivation-v0-1/` and `research/2026-08-27-b52-d4-adaptive-vector-blur-semantics-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

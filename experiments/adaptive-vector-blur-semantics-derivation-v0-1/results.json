@@ -1,0 +1,4860 @@
+{
+  "analysisAmendment": {
+    "analysisContractTestsPassed": 7,
+    "changedToolUris": [
+      "scripts/analyze-b52-d4-adaptive-vector-blur-semantics.py",
+      "scripts/audit-b52-d4-adaptive-vector-blur-semantics.py",
+      "tests/test_b52_d4_analysis_contract.py"
+    ],
+    "classification": "POST_OUTPUT_MECHANICAL_SERIALIZATION_FIX",
+    "formalCompositorOutputsRerendered": 0,
+    "formalCompositorOutputsReused": 36,
+    "freezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+    "originalAnalysisFailure": {
+      "bytes": 2266,
+      "sha256": "897a93fc62c8164f7b203a4ba079015dbe73c0581c919a2d52ad252756bba4ec",
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/analysis.failure.json"
+    },
+    "originalReceipt": {
+      "bytes": 242250,
+      "sha256": "bb3233c04242bf1179c935cc2fb7efc2812cb7d0aaf6e7793a3e75ad0c1f1b90",
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/run.receipt.original.json"
+    },
+    "originalToolFreezeCommit": "842af415f7a29393a81ac94b24744f05d440baa5",
+    "outcomeGatesChanged": false,
+    "parentCommit": "f48ef74df54a8eadfbaa54775adb2575d6e648df",
+    "reason": "Cast NumPy boolean scalars to built-in bool before strict JSON serialization; add regression coverage and amendment-aware audit."
+  },
+  "attacks": [
+    {
+      "expectedReason": "PARENT_IDENTITY",
+      "id": "A01_PARENT",
+      "observedReason": "PARENT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "PARENT_ARTIFACT_IDENTITY",
+      "id": "A02_ARTIFACT",
+      "observedReason": "PARENT_ARTIFACT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "BLENDER_IDENTITY",
+      "id": "A03_BLENDER",
+      "observedReason": "BLENDER_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "OCIO_IDENTITY",
+      "id": "A04_OCIO",
+      "observedReason": "OCIO_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "BLENDER52_RNA_CONTRACT",
+      "id": "A05_RNA",
+      "observedReason": "BLENDER52_RNA_CONTRACT",
+      "passed": true
+    },
+    {
+      "expectedReason": "COMPOSITOR_GRAPH_CONTRACT",
+      "id": "A06_GRAPH",
+      "observedReason": "COMPOSITOR_GRAPH_CONTRACT",
+      "passed": true
+    },
+    {
+      "expectedReason": "INPUT_ISOLATION",
+      "id": "A07_ISOLATION",
+      "observedReason": "INPUT_ISOLATION",
+      "passed": true
+    },
+    {
+      "expectedReason": "PROCESS_ROSTER",
+      "id": "A08_PROCESS",
+      "observedReason": "PROCESS_ROSTER",
+      "passed": true
+    },
+    {
+      "expectedReason": "PROCESS_EXIT_STATUS",
+      "id": "A09_EXIT",
+      "observedReason": "PROCESS_EXIT_STATUS",
+      "passed": true
+    },
+    {
+      "expectedReason": "OUTPUT_TOTALITY",
+      "id": "A10_OUTPUT",
+      "observedReason": "OUTPUT_TOTALITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "REPEAT_IDENTITY",
+      "id": "A11_REPEAT",
+      "observedReason": "REPEAT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "BASELINE_EFFECT",
+      "id": "A12_BASELINE",
+      "observedReason": "BASELINE_EFFECT",
+      "passed": true
+    },
+    {
+      "expectedReason": "VECTOR_ENERGY_TOTALITY",
+      "id": "A13_VECTOR",
+      "observedReason": "BASELINE_EFFECT",
+      "passed": false
+    },
+    {
+      "expectedReason": "BLUR_MEASUREMENT_TOTALITY",
+      "id": "A14_BLUR",
+      "observedReason": "BASELINE_EFFECT",
+      "passed": false
+    },
+    {
+      "expectedReason": "DIAGNOSTIC_TOTALITY",
+      "id": "A15_DIAGNOSTIC",
+      "observedReason": "BASELINE_EFFECT",
+      "passed": false
+    },
+    {
+      "expectedReason": "CLASSIFICATION_REPLAY",
+      "id": "A16_CLASSIFICATION",
+      "observedReason": "BASELINE_EFFECT",
+      "passed": false
+    },
+    {
+      "expectedReason": "OPERATION_BOUNDARY",
+      "id": "A17_OPERATION",
+      "observedReason": "BASELINE_EFFECT",
+      "passed": false
+    },
+    {
+      "expectedReason": "SOURCE_IMMUTABILITY",
+      "id": "A18_IMMUTABILITY",
+      "observedReason": "BASELINE_EFFECT",
+      "passed": false
+    },
+    {
+      "expectedReason": "EVIDENCE_SELF_HASH",
+      "id": "A19_HASH",
+      "observedReason": "BASELINE_EFFECT",
+      "passed": false
+    }
+  ],
+  "attacksPassed": 12,
+  "baseFailure": "BASELINE_EFFECT",
+  "baselineEffects": [
+    {
+      "changedPixelCount": 0,
+      "minimumChangedPixelCount": 1,
+      "passed": false,
+      "rgbAbsoluteErrorMaximum": 3.814697265625e-06,
+      "rgbAbsoluteErrorP50": 1.1641532182693481e-10,
+      "rgbAbsoluteErrorP95": 5.960464477539063e-08,
+      "rgbAbsoluteErrorP99": 5.960464477539063e-08,
+      "rgbAbsoluteErrorRmse": 7.110885265907535e-08,
+      "threshold": 1.52587890625e-05,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "changedPixelCount": 0,
+      "minimumChangedPixelCount": 1,
+      "passed": false,
+      "rgbAbsoluteErrorMaximum": 1.1920928955078125e-07,
+      "rgbAbsoluteErrorP50": 1.4901161193847656e-08,
+      "rgbAbsoluteErrorP95": 5.960464477539063e-08,
+      "rgbAbsoluteErrorP99": 5.960464477539063e-08,
+      "rgbAbsoluteErrorRmse": 2.4255371432145476e-08,
+      "threshold": 1.52587890625e-05,
+      "variantId": "INTERIOR_CHAIR"
+    }
+  ],
+  "candidateMeasurements": [
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": true,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T015_M0",
+      "variantId": "TABLETOP_WIDE",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 1511,
+        "changedPixelsAbove1Over65536": 6797,
+        "endpointErrorMaximum": 0.027420946390992972,
+        "endpointErrorP50": 3.814693627646193e-07,
+        "endpointErrorP95": 1.464298223234074e-05,
+        "endpointErrorP99": 0.0004184846715058572,
+        "endpointErrorRmse": 0.0006163169075008413,
+        "influenceRegionEnergyFraction": 0.9999123774125246,
+        "influenceRegionSquaredEnergy": 0.056005742199111905,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 8.997507267203628e-05,
+        "stableInteriorSquaredEnergy": 5.0395623039052344e-06,
+        "totalSquaredEnergy": 0.05601064999719084
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": false,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T015_M0",
+      "variantId": "INTERIOR_CHAIR",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "endpointErrorMaximum": 1.097781902570155e-05,
+        "endpointErrorP50": 6.035412082631647e-07,
+        "endpointErrorP95": 2.581975083405803e-06,
+        "endpointErrorP99": 4.034779720053784e-06,
+        "endpointErrorRmse": 1.2240941305058082e-06,
+        "influenceRegionEnergyFraction": 0.04918024200252399,
+        "influenceRegionSquaredEnergy": 1.086632627709561e-08,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.9681980797717923,
+        "stableInteriorSquaredEnergy": 2.1392241695593526e-07,
+        "totalSquaredEnergy": 2.2094902006659375e-07
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": true,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T015_M32",
+      "variantId": "TABLETOP_WIDE",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 1577,
+        "changedPixelsAbove1Over65536": 15827,
+        "endpointErrorMaximum": 0.037629301525633645,
+        "endpointErrorP50": 6.35784090263769e-07,
+        "endpointErrorP95": 2.2562326410915764e-05,
+        "endpointErrorP99": 0.0006846803498844423,
+        "endpointErrorRmse": 0.0008071592203492577,
+        "influenceRegionEnergyFraction": 0.999880858801745,
+        "influenceRegionSquaredEnergy": 0.09605702405482579,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.00012242428557428754,
+        "stableInteriorSquaredEnergy": 1.1761113777492464e-05,
+        "totalSquaredEnergy": 0.0960684697674284
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": false,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T015_M32",
+      "variantId": "INTERIOR_CHAIR",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "endpointErrorMaximum": 1.36702547206474e-05,
+        "endpointErrorP50": 6.9510363278929e-07,
+        "endpointErrorP95": 3.009296789494595e-06,
+        "endpointErrorP99": 4.757696112812172e-06,
+        "endpointErrorRmse": 1.428498701782653e-06,
+        "influenceRegionEnergyFraction": 0.0479665172962164,
+        "influenceRegionSquaredEnergy": 1.4433123760338919e-08,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.9705253842551006,
+        "stableInteriorSquaredEnergy": 2.92031061938476e-07,
+        "totalSquaredEnergy": 3.008999730209182e-07
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": true,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T020_M0",
+      "variantId": "TABLETOP_WIDE",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 1967,
+        "changedPixelsAbove1Over65536": 10542,
+        "endpointErrorMaximum": 0.03360463466631439,
+        "endpointErrorP50": 6.675709300907329e-07,
+        "endpointErrorP95": 1.8395735465947135e-05,
+        "endpointErrorP99": 0.0018788506896340025,
+        "endpointErrorRmse": 0.0007432361845765434,
+        "influenceRegionEnergyFraction": 0.9999102052358988,
+        "influenceRegionSquaredEnergy": 0.0814473840378644,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 9.223765189700405e-05,
+        "stableInteriorSquaredEnergy": 7.513190101938993e-06,
+        "totalSquaredEnergy": 0.0814546982432781
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": false,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T020_M0",
+      "variantId": "INTERIOR_CHAIR",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "endpointErrorMaximum": 1.097781902570155e-05,
+        "endpointErrorP50": 9.702933189928356e-07,
+        "endpointErrorP95": 3.251640337676427e-06,
+        "endpointErrorP99": 4.792154131470151e-06,
+        "endpointErrorRmse": 1.6069026948499936e-06,
+        "influenceRegionEnergyFraction": 0.06048334628677434,
+        "influenceRegionSquaredEnergy": 2.302912397299379e-08,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.9585298243177712,
+        "stableInteriorSquaredEnergy": 3.6496165492174117e-07,
+        "totalSquaredEnergy": 3.8075148593472384e-07
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": true,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T020_M32",
+      "variantId": "TABLETOP_WIDE",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 2098,
+        "changedPixelsAbove1Over65536": 24073,
+        "endpointErrorMaximum": 0.040597234828278164,
+        "endpointErrorP50": 1.1444080882938579e-06,
+        "endpointErrorP95": 2.9008362653201408e-05,
+        "endpointErrorP99": 0.0024875844618434595,
+        "endpointErrorRmse": 0.0009835828501125468,
+        "influenceRegionEnergyFraction": 0.9998738667129146,
+        "influenceRegionSquaredEnergy": 0.14263613481381351,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.00012971101979089033,
+        "stableInteriorSquaredEnergy": 1.85038124524189e-05,
+        "totalSquaredEnergy": 0.14265412824792573
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": false,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T020_M32",
+      "variantId": "INTERIOR_CHAIR",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "endpointErrorMaximum": 1.4525188262329653e-05,
+        "endpointErrorP50": 1.1947390639979023e-06,
+        "endpointErrorP95": 4.020700688731881e-06,
+        "endpointErrorP99": 6.025418145714437e-06,
+        "endpointErrorRmse": 1.9814127251642453e-06,
+        "influenceRegionEnergyFraction": 0.055802981681432724,
+        "influenceRegionSquaredEnergy": 3.230500029085409e-08,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.962584398968888,
+        "stableInteriorSquaredEnergy": 5.572513932352862e-07,
+        "totalSquaredEnergy": 5.789117233067656e-07
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": true,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T030_M0",
+      "variantId": "TABLETOP_WIDE",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 2802,
+        "changedPixelsAbove1Over65536": 33075,
+        "endpointErrorMaximum": 0.048740114980752064,
+        "endpointErrorP50": 3.1200056858783723e-06,
+        "endpointErrorP95": 3.5886748369909216e-05,
+        "endpointErrorP99": 0.003904614205144878,
+        "endpointErrorRmse": 0.0011985028158197587,
+        "influenceRegionEnergyFraction": 0.9998797000229155,
+        "influenceRegionSquaredEnergy": 0.21178164504204852,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.00012380965925855902,
+        "stableInteriorSquaredEnergy": 2.6223768028566027e-05,
+        "totalSquaredEnergy": 0.21180712543438462
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": false,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T030_M0",
+      "variantId": "INTERIOR_CHAIR",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "endpointErrorMaximum": 1.4961612557048453e-05,
+        "endpointErrorP50": 1.5447120749561956e-06,
+        "endpointErrorP95": 4.687895541248103e-06,
+        "endpointErrorP99": 6.737627330015454e-06,
+        "endpointErrorRmse": 2.363187494156541e-06,
+        "influenceRegionEnergyFraction": 0.07074421506917612,
+        "influenceRegionSquaredEnergy": 5.825721784813054e-08,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.9496740414220947,
+        "stableInteriorSquaredEnergy": 7.820479379372925e-07,
+        "totalSquaredEnergy": 8.234909072235042e-07
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": true,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T030_M32",
+      "variantId": "TABLETOP_WIDE",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 2802,
+        "changedPixelsAbove1Over65536": 33075,
+        "endpointErrorMaximum": 0.048740114980752064,
+        "endpointErrorP50": 3.1200056858783723e-06,
+        "endpointErrorP95": 3.5886748369909216e-05,
+        "endpointErrorP99": 0.003904614205144878,
+        "endpointErrorRmse": 0.0011985028158197587,
+        "influenceRegionEnergyFraction": 0.9998797000229155,
+        "influenceRegionSquaredEnergy": 0.21178164504204852,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.00012380965925855902,
+        "stableInteriorSquaredEnergy": 2.6223768028566027e-05,
+        "totalSquaredEnergy": 0.21180712543438462
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": false,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T030_M32",
+      "variantId": "INTERIOR_CHAIR",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "endpointErrorMaximum": 1.4961612557048453e-05,
+        "endpointErrorP50": 1.5447120749561956e-06,
+        "endpointErrorP95": 4.687895541248103e-06,
+        "endpointErrorP99": 6.737627330015454e-06,
+        "endpointErrorRmse": 2.363187494156541e-06,
+        "influenceRegionEnergyFraction": 0.07074421506917612,
+        "influenceRegionSquaredEnergy": 5.825721784813054e-08,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.9496740414220947,
+        "stableInteriorSquaredEnergy": 7.820479379372925e-07,
+        "totalSquaredEnergy": 8.234909072235042e-07
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": true,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T050_M0",
+      "variantId": "TABLETOP_WIDE",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 3360,
+        "changedPixelsAbove1Over65536": 40629,
+        "endpointErrorMaximum": 0.049311216721634445,
+        "endpointErrorP50": 6.455213299237375e-06,
+        "endpointErrorP95": 4.061810550042246e-05,
+        "endpointErrorP99": 0.005038912315683321,
+        "endpointErrorRmse": 0.0013033536644564002,
+        "influenceRegionEnergyFraction": 0.9998735833209279,
+        "influenceRegionSquaredEnergy": 0.2504563792402648,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.00013023722453289898,
+        "stableInteriorSquaredEnergy": 3.2622867773416994e-05,
+        "totalSquaredEnergy": 0.2504880451070745
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": false,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T050_M0",
+      "variantId": "INTERIOR_CHAIR",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "endpointErrorMaximum": 1.4961612557048453e-05,
+        "endpointErrorP50": 1.6136113061170342e-06,
+        "endpointErrorP95": 4.82531851069635e-06,
+        "endpointErrorP99": 6.905112191319678e-06,
+        "endpointErrorRmse": 2.444040009807753e-06,
+        "influenceRegionEnergyFraction": 0.08070040064695493,
+        "influenceRegionSquaredEnergy": 7.108120179067495e-08,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.9404963507040094,
+        "stableInteriorSquaredEnergy": 8.283925526001412e-07,
+        "totalSquaredEnergy": 8.808035799182498e-07
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": true,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T050_M32",
+      "variantId": "TABLETOP_WIDE",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 3360,
+        "changedPixelsAbove1Over65536": 40629,
+        "endpointErrorMaximum": 0.049311216721634445,
+        "endpointErrorP50": 6.455213299237375e-06,
+        "endpointErrorP95": 4.061810550042246e-05,
+        "endpointErrorP99": 0.005038912315683321,
+        "endpointErrorRmse": 0.0013033536644564002,
+        "influenceRegionEnergyFraction": 0.9998735833209279,
+        "influenceRegionSquaredEnergy": 0.2504563792402648,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.00013023722453289898,
+        "stableInteriorSquaredEnergy": 3.2622867773416994e-05,
+        "totalSquaredEnergy": 0.2504880451070745
+      }
+    },
+    {
+      "blurOutput": {
+        "alphaAbsoluteErrorMaximum": 0.0,
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "classifierPassed": false,
+        "influenceRegionEnergyFraction": 1.0,
+        "influenceRegionSquaredEnergy": 0.0,
+        "measurementTotal": true,
+        "outsideInfluencePixelsAbove1Over4096": 0,
+        "rgbAbsoluteErrorMaximum": 0.0,
+        "rgbAbsoluteErrorP50": 0.0,
+        "rgbAbsoluteErrorP95": 0.0,
+        "rgbAbsoluteErrorP99": 0.0,
+        "rgbAbsoluteErrorRmse": 0.0,
+        "totalSquaredEnergy": 0.0
+      },
+      "profileId": "ADAPT_T050_M32",
+      "variantId": "INTERIOR_CHAIR",
+      "vectorInput": {
+        "changedPixelsAbove1Over4096": 0,
+        "changedPixelsAbove1Over65536": 0,
+        "endpointErrorMaximum": 1.4961612557048453e-05,
+        "endpointErrorP50": 1.6136113061170342e-06,
+        "endpointErrorP95": 4.82531851069635e-06,
+        "endpointErrorP99": 6.905112191319678e-06,
+        "endpointErrorRmse": 2.444040009807753e-06,
+        "influenceRegionEnergyFraction": 0.08070040064695493,
+        "influenceRegionSquaredEnergy": 7.108120179067495e-08,
+        "measurementTotal": true,
+        "stableInteriorEnergyFraction": 0.9404963507040094,
+        "stableInteriorSquaredEnergy": 8.283925526001412e-07,
+        "totalSquaredEnergy": 8.808035799182498e-07
+      }
+    }
+  ],
+  "classificationGate": {
+    "alphaAbsoluteErrorMaximum": 1.52587890625e-05,
+    "blurInfluenceRegionEnergyFractionMinimum": 0.95,
+    "outsideInfluencePixelsAbove1Over4096": 0,
+    "rgbAbsoluteErrorMaximum": 0.00392156862745098,
+    "rgbAbsoluteErrorP99Maximum": 0.0009765625,
+    "rgbRmseMaximum": 0.000244140625,
+    "vectorInfluenceRegionEnergyFractionMinimum": 0.95
+  },
+  "d3Invariants": {
+    "attacksPassed": 13,
+    "baseFailure": null,
+    "futureHoldoutCandidates": [],
+    "verdict": "ADAPTIVE_PAYLOAD_SEMANTICS_DERIVATION_USABLE"
+  },
+  "diagnostics": [
+    {
+      "decodedRgb8Sha256": "8a548b59bcf9a07de7e69e7e98b9c3842ad232e0da7e4255b25af7f96128ad5a",
+      "decodedValueSha256": "4ba910161e78f99b92d2572c07b51bb37472c241f56cb38e21180afd858dd57f",
+      "identityMatch": true,
+      "kind": "vector-endpoint-error",
+      "mapping": {
+        "clipMaximum": 0.0009765625,
+        "minimum": 0.0,
+        "unit": "render-pass endpoint units"
+      },
+      "png": {
+        "bytes": 42446,
+        "sha256": "7e40fab7614b0de89cf7b77441da48dce1ca46ec37a4e2aeb51a7683d8f65d66",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t015_m0--vector-endpoint-error.png"
+      },
+      "profileId": "ADAPT_T015_M0",
+      "sidecar": {
+        "bytes": 1780,
+        "sha256": "e48f92e80f12ef565c0d0c556d3800aa958b7bdfa8111523b3c8631856682362",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t015_m0--vector-endpoint-error.json"
+      },
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedRgb8Sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf",
+      "decodedValueSha256": "250480ecefa3655c774b6a4e5d4eb16675ee4f181c2285c25020fac6e3aaf3b5",
+      "identityMatch": true,
+      "kind": "vector-blur-rgb-maximum-absolute-error",
+      "mapping": {
+        "clipMaximum": 0.00392156862745098,
+        "minimum": 0.0,
+        "unit": "scene-linear absolute RGB"
+      },
+      "png": {
+        "bytes": 629,
+        "sha256": "9b2ddfe40739a2817040c02a48bc4f5354d22f96fb9285ef29664ec70b42586f",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t015_m0--vector-blur-rgb-maximum-absolute-error.png"
+      },
+      "profileId": "ADAPT_T015_M0",
+      "sidecar": {
+        "bytes": 1818,
+        "sha256": "b208878d7d418189f8ff559054b9b48bfee184f34eac08c7e4f0ba6f237c88b0",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t015_m0--vector-blur-rgb-maximum-absolute-error.json"
+      },
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedRgb8Sha256": "542be2bfb021b4e6ba011cfa7ecd5f63d1321f902fd931a492d9c723ab8ce73b",
+      "decodedValueSha256": "4986732355fa944f9ea813380ad45801afeaabcb6115916520fb49df239b304b",
+      "identityMatch": true,
+      "kind": "vector-endpoint-error",
+      "mapping": {
+        "clipMaximum": 0.0009765625,
+        "minimum": 0.0,
+        "unit": "render-pass endpoint units"
+      },
+      "png": {
+        "bytes": 18227,
+        "sha256": "dddb6252e76ce94325107ff0b77eece1c5eee4f71c5e90d29b1d7b5f2b378042",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t015_m0--vector-endpoint-error.png"
+      },
+      "profileId": "ADAPT_T015_M0",
+      "sidecar": {
+        "bytes": 1786,
+        "sha256": "0c17bc3493c7786112911070f4e7be3802e45a9d5287762af21303a22bea8d18",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t015_m0--vector-endpoint-error.json"
+      },
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedRgb8Sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf",
+      "decodedValueSha256": "250480ecefa3655c774b6a4e5d4eb16675ee4f181c2285c25020fac6e3aaf3b5",
+      "identityMatch": true,
+      "kind": "vector-blur-rgb-maximum-absolute-error",
+      "mapping": {
+        "clipMaximum": 0.00392156862745098,
+        "minimum": 0.0,
+        "unit": "scene-linear absolute RGB"
+      },
+      "png": {
+        "bytes": 629,
+        "sha256": "9b2ddfe40739a2817040c02a48bc4f5354d22f96fb9285ef29664ec70b42586f",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t015_m0--vector-blur-rgb-maximum-absolute-error.png"
+      },
+      "profileId": "ADAPT_T015_M0",
+      "sidecar": {
+        "bytes": 1824,
+        "sha256": "0f677dfd3a80db11aeb1a96c70d46db077f19180d59a5fa23891683671cc985d",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t015_m0--vector-blur-rgb-maximum-absolute-error.json"
+      },
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedRgb8Sha256": "b46cda9ba836694f6edd190a75e8afdf8363b24362139bd1ddc7619ec33f855a",
+      "decodedValueSha256": "ad81561182e0a7950d743318bdcf7187e1e8499569e8029ad2bc8ec49d5e391d",
+      "identityMatch": true,
+      "kind": "vector-endpoint-error",
+      "mapping": {
+        "clipMaximum": 0.0009765625,
+        "minimum": 0.0,
+        "unit": "render-pass endpoint units"
+      },
+      "png": {
+        "bytes": 60901,
+        "sha256": "dd3c9ef36f5de23350daae07c458deefa4743c43da48eb3429a135fef83051b3",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t020_m32--vector-endpoint-error.png"
+      },
+      "profileId": "ADAPT_T020_M32",
+      "sidecar": {
+        "bytes": 1784,
+        "sha256": "505b95886ade22df3063f16c2dded533d73ef126f8bc32f881ab1706a1cce69c",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t020_m32--vector-endpoint-error.json"
+      },
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedRgb8Sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf",
+      "decodedValueSha256": "250480ecefa3655c774b6a4e5d4eb16675ee4f181c2285c25020fac6e3aaf3b5",
+      "identityMatch": true,
+      "kind": "vector-blur-rgb-maximum-absolute-error",
+      "mapping": {
+        "clipMaximum": 0.00392156862745098,
+        "minimum": 0.0,
+        "unit": "scene-linear absolute RGB"
+      },
+      "png": {
+        "bytes": 629,
+        "sha256": "9b2ddfe40739a2817040c02a48bc4f5354d22f96fb9285ef29664ec70b42586f",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t020_m32--vector-blur-rgb-maximum-absolute-error.png"
+      },
+      "profileId": "ADAPT_T020_M32",
+      "sidecar": {
+        "bytes": 1822,
+        "sha256": "aa6f6c5cf1b305c89a1a90d7de78d4673cb4933c131af91f1e57bccc49f2dd8a",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t020_m32--vector-blur-rgb-maximum-absolute-error.json"
+      },
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedRgb8Sha256": "abb618ce29606cd422fa182e9e95215691731f8941da72003db7dfc741e7ce18",
+      "decodedValueSha256": "e482d3348827738522967a89ce3757699dcab1c38e9103814ffec589fba7e4e2",
+      "identityMatch": true,
+      "kind": "vector-endpoint-error",
+      "mapping": {
+        "clipMaximum": 0.0009765625,
+        "minimum": 0.0,
+        "unit": "render-pass endpoint units"
+      },
+      "png": {
+        "bytes": 33584,
+        "sha256": "e15b43a194922ccde76d5f987db9ac871d0cc393a2d6883aca3150bfb56aef44",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t020_m32--vector-endpoint-error.png"
+      },
+      "profileId": "ADAPT_T020_M32",
+      "sidecar": {
+        "bytes": 1790,
+        "sha256": "8f4eb27b8403c0e2fa28868a161b0fc766695873f3b42e260bf1077b22b5017a",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t020_m32--vector-endpoint-error.json"
+      },
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedRgb8Sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf",
+      "decodedValueSha256": "250480ecefa3655c774b6a4e5d4eb16675ee4f181c2285c25020fac6e3aaf3b5",
+      "identityMatch": true,
+      "kind": "vector-blur-rgb-maximum-absolute-error",
+      "mapping": {
+        "clipMaximum": 0.00392156862745098,
+        "minimum": 0.0,
+        "unit": "scene-linear absolute RGB"
+      },
+      "png": {
+        "bytes": 629,
+        "sha256": "9b2ddfe40739a2817040c02a48bc4f5354d22f96fb9285ef29664ec70b42586f",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t020_m32--vector-blur-rgb-maximum-absolute-error.png"
+      },
+      "profileId": "ADAPT_T020_M32",
+      "sidecar": {
+        "bytes": 1828,
+        "sha256": "5cb1757f1e536218489286d0cb6d88db3c2afe1ea07d4bd03efd36645e12ab6b",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t020_m32--vector-blur-rgb-maximum-absolute-error.json"
+      },
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedRgb8Sha256": "5644a5fea01de81e575ea410f15abc3d1fd4e0dc484a01fbc0f963c81e21e59a",
+      "decodedValueSha256": "3250ba9ef087f48ceeff4f643c14119338012f29b179a4707e3fa58bae14e72e",
+      "identityMatch": true,
+      "kind": "vector-endpoint-error",
+      "mapping": {
+        "clipMaximum": 0.0009765625,
+        "minimum": 0.0,
+        "unit": "render-pass endpoint units"
+      },
+      "png": {
+        "bytes": 76111,
+        "sha256": "1e8dcf7d6347bd77923f6fe73e54b45d8d1907ba03e6d8f1c4d6a2b8af076648",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t050_m32--vector-endpoint-error.png"
+      },
+      "profileId": "ADAPT_T050_M32",
+      "sidecar": {
+        "bytes": 1784,
+        "sha256": "cc7ceb207c6e37a0623e2a5924d7f645355611a7e1c624a060ac9b70aac9e9ce",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t050_m32--vector-endpoint-error.json"
+      },
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedRgb8Sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf",
+      "decodedValueSha256": "250480ecefa3655c774b6a4e5d4eb16675ee4f181c2285c25020fac6e3aaf3b5",
+      "identityMatch": true,
+      "kind": "vector-blur-rgb-maximum-absolute-error",
+      "mapping": {
+        "clipMaximum": 0.00392156862745098,
+        "minimum": 0.0,
+        "unit": "scene-linear absolute RGB"
+      },
+      "png": {
+        "bytes": 629,
+        "sha256": "9b2ddfe40739a2817040c02a48bc4f5354d22f96fb9285ef29664ec70b42586f",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t050_m32--vector-blur-rgb-maximum-absolute-error.png"
+      },
+      "profileId": "ADAPT_T050_M32",
+      "sidecar": {
+        "bytes": 1822,
+        "sha256": "e86e15576f88aa7bfe7eae22e7e2344d20a566c13db221a9d119c33664529f6d",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/tabletop_wide--adapt_t050_m32--vector-blur-rgb-maximum-absolute-error.json"
+      },
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedRgb8Sha256": "c537a743355a27c0dcfe07a1112cc5066ac86f15e217f4a3afc559c9691137c3",
+      "decodedValueSha256": "c7d5f5dc4459a8feb29dd45c63c51123de82bcba102b091720d30e4dc3605f2c",
+      "identityMatch": true,
+      "kind": "vector-endpoint-error",
+      "mapping": {
+        "clipMaximum": 0.0009765625,
+        "minimum": 0.0,
+        "unit": "render-pass endpoint units"
+      },
+      "png": {
+        "bytes": 42360,
+        "sha256": "69580ab8eb679f57e1697b49151ac2e546118fbbb4b571a628ad719201490aa5",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t050_m32--vector-endpoint-error.png"
+      },
+      "profileId": "ADAPT_T050_M32",
+      "sidecar": {
+        "bytes": 1790,
+        "sha256": "fc89ff900dcf3641a5fac73a36df203d768f4954c7887a72ee045585b1f8b583",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t050_m32--vector-endpoint-error.json"
+      },
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedRgb8Sha256": "ecdd54e7af52d8ca757fa4f6b58884c0d8b5c487abeebdf23a4008a3b1b810bf",
+      "decodedValueSha256": "250480ecefa3655c774b6a4e5d4eb16675ee4f181c2285c25020fac6e3aaf3b5",
+      "identityMatch": true,
+      "kind": "vector-blur-rgb-maximum-absolute-error",
+      "mapping": {
+        "clipMaximum": 0.00392156862745098,
+        "minimum": 0.0,
+        "unit": "scene-linear absolute RGB"
+      },
+      "png": {
+        "bytes": 629,
+        "sha256": "9b2ddfe40739a2817040c02a48bc4f5354d22f96fb9285ef29664ec70b42586f",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t050_m32--vector-blur-rgb-maximum-absolute-error.png"
+      },
+      "profileId": "ADAPT_T050_M32",
+      "sidecar": {
+        "bytes": 1828,
+        "sha256": "b74e1756da0b6e6f2ebd9e8e11b1af425b05366ff9460e64f5c50680993cbb80",
+        "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/diagnostics/interior_chair--adapt_t050_m32--vector-blur-rgb-maximum-absolute-error.json"
+      },
+      "variantId": "INTERIOR_CHAIR"
+    }
+  ],
+  "evidenceCoreHash": "2afdc93cc58382bf10a7e3a3ca1d560f6cd30d5a11c418804189380b2b00ab89",
+  "experimentId": "B52-D4",
+  "influenceRegions": [
+    {
+      "baselineMotionMagnitudeMaximum": 0.9063266697185391,
+      "maskSha256": "7164d480e23509aaac0465651f452ba7226300f0e1d1c3e521556f8cdd721ce6",
+      "pixelCount": 15248,
+      "radiusOverflow": false,
+      "radiusPixels": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "baselineMotionMagnitudeMaximum": 5.839753474883245e-05,
+      "maskSha256": "bbb81b4b7db382c44f74f2b3cd5d434d2e2969f575ffd6ed4f09e91803f228e2",
+      "pixelCount": 9639,
+      "radiusOverflow": false,
+      "radiusPixels": 2,
+      "variantId": "INTERIOR_CHAIR"
+    }
+  ],
+  "nonClaims": [
+    "retroactive B52-D2 or B52-D3 promotion",
+    "production-safe adaptive profile",
+    "physical 3D motion-blur equivalence",
+    "correct assignment of previous versus next Vector channel pair",
+    "human-visible equivalence",
+    "freedom from Vector Blur's documented 2D occlusion and off-camera artifacts",
+    "candidate Combined or candidate Depth quality",
+    "Normal or Cryptomatte acceptance",
+    "INTERIOR beauty acceptance",
+    "unseen-seed, unseen-frame, unseen-scene, 2K or 4K generalization",
+    "render-cost improvement"
+  ],
+  "operationCounts": {
+    "blenderProcesses": 36,
+    "blenderRenderCalls": 36,
+    "candidateBaselinePairsAnalyzed": 16,
+    "compositorOutputsWritten": 36,
+    "cyclesRayRenders": 0,
+    "diagnosticPngsWritten": 12,
+    "existingParentExrsVerified": 54,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "parentExrsModified": 0,
+    "parentFilesHashed": 59,
+    "sourceBlendFilesModified": 0,
+    "sourceBlendFilesOpened": 0,
+    "sourceExrsUsedByCompositor": 18,
+    "videoModelCalls": 0
+  },
+  "outputObservations": [
+    {
+      "cellId": "TABLETOP_WIDE_PROD_T010_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "7e39e3028667d896636d126a2e6a9af418dce1bd79dc0d14d10bda6b636925e7",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "7e39e3028667d896636d126a2e6a9af418dce1bd79dc0d14d10bda6b636925e7",
+      "profileId": "PROD_T010_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_PROD_T010_M0_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_PROD_T010_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "557538724c50ff8eed194e5d322b3448c6f80b8a6b8bdfb4d7a3e360a59e0fd4",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "557538724c50ff8eed194e5d322b3448c6f80b8a6b8bdfb4d7a3e360a59e0fd4",
+      "profileId": "PROD_T010_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_PROD_T010_M0_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_PROD_T010_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "b561d892774086efe579c16cfb74449b9411cca5707e1616eebcdc0dcb04b394",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "b561d892774086efe579c16cfb74449b9411cca5707e1616eebcdc0dcb04b394",
+      "profileId": "PROD_T010_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_PROD_T010_M0_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_PROD_T010_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "0fc3f6ba9ba30b65e40b5fd7950c30f99db52a0371eace17f6bbe45d83514a2d",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "0fc3f6ba9ba30b65e40b5fd7950c30f99db52a0371eace17f6bbe45d83514a2d",
+      "profileId": "PROD_T010_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_PROD_T010_M0_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T015_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "b6851e3dc3f97ddf2451766bab15c2a8fbf5be6ef9a0bec81198d5a777572ccc",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "b6851e3dc3f97ddf2451766bab15c2a8fbf5be6ef9a0bec81198d5a777572ccc",
+      "profileId": "ADAPT_T015_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T015_M0_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T015_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "77ccd3404f69aab8383c8560a0d5de6519c41a3f9afc6dd57754883a0f1a8e53",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "77ccd3404f69aab8383c8560a0d5de6519c41a3f9afc6dd57754883a0f1a8e53",
+      "profileId": "ADAPT_T015_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T015_M0_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T015_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "9b55e62874e60804bc035cd23ef19e6cc43b1cd28e46c66d94bdb6e5db3a633a",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "9b55e62874e60804bc035cd23ef19e6cc43b1cd28e46c66d94bdb6e5db3a633a",
+      "profileId": "ADAPT_T015_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T015_M0_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T015_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "0230b367344884f537d803dbea667478dd64960253008ad01a66e546e1eb3c2d",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "0230b367344884f537d803dbea667478dd64960253008ad01a66e546e1eb3c2d",
+      "profileId": "ADAPT_T015_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T015_M0_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T015_M32_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "a83376eaf524946b57ec44853d26ae809f5805f50d142859330f5cc04d69e8e0",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "a83376eaf524946b57ec44853d26ae809f5805f50d142859330f5cc04d69e8e0",
+      "profileId": "ADAPT_T015_M32",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T015_M32_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T015_M32_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "fecdd2c0b69255337455c74620dd59c74f38430e49d26ea9c7c872361a23932f",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "fecdd2c0b69255337455c74620dd59c74f38430e49d26ea9c7c872361a23932f",
+      "profileId": "ADAPT_T015_M32",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T015_M32_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T015_M32_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "1b36cb9742654ef1a5808edfb16e11a7b7785aedbc976c2a4c14a0cc1b4bc881",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "1b36cb9742654ef1a5808edfb16e11a7b7785aedbc976c2a4c14a0cc1b4bc881",
+      "profileId": "ADAPT_T015_M32",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T015_M32_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T015_M32_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "db77c1ba622c7835a7daa2fdc23d9338006587c849546f5279ab78038bc91293",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "db77c1ba622c7835a7daa2fdc23d9338006587c849546f5279ab78038bc91293",
+      "profileId": "ADAPT_T015_M32",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T015_M32_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T020_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "9ee3da308fa05b6a0ebdbf8f6ccaead2d2d68c1b1743f160439cf5c9c1c9f4b3",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "9ee3da308fa05b6a0ebdbf8f6ccaead2d2d68c1b1743f160439cf5c9c1c9f4b3",
+      "profileId": "ADAPT_T020_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T020_M0_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T020_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "47544b0b15112ef0f2859ffe7edbe01fad5340630eb97d126fa48187cc67192b",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "47544b0b15112ef0f2859ffe7edbe01fad5340630eb97d126fa48187cc67192b",
+      "profileId": "ADAPT_T020_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T020_M0_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T020_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "ebe1cf16e1f8affa331f10ceb5dd573da7fca7f4195c5927d57d34da37c5027f",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "ebe1cf16e1f8affa331f10ceb5dd573da7fca7f4195c5927d57d34da37c5027f",
+      "profileId": "ADAPT_T020_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T020_M0_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T020_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "8e7fffdbd3d5fed8b17165cd5878844041f11c96788200fd714ab5c8de735411",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "8e7fffdbd3d5fed8b17165cd5878844041f11c96788200fd714ab5c8de735411",
+      "profileId": "ADAPT_T020_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T020_M0_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T020_M32_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "8c47999fd305622cb7caa998b8f65ff4a1abe9b6b18b9e662db7fe56400d642b",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "8c47999fd305622cb7caa998b8f65ff4a1abe9b6b18b9e662db7fe56400d642b",
+      "profileId": "ADAPT_T020_M32",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T020_M32_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T020_M32_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "5bad722b8bf597e5e0e6af68cd443a5b4e2f0fd7386da563c41a4e2323b86a53",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "5bad722b8bf597e5e0e6af68cd443a5b4e2f0fd7386da563c41a4e2323b86a53",
+      "profileId": "ADAPT_T020_M32",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T020_M32_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T020_M32_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "05e7b19543255b7f0e14ec9c3edf6ed25b9e84008719670b125e99943375c76d",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "05e7b19543255b7f0e14ec9c3edf6ed25b9e84008719670b125e99943375c76d",
+      "profileId": "ADAPT_T020_M32",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T020_M32_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T020_M32_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "a93bc1a0e46be835bfee116fc97e2ffb577d9a0baadbc69751c60b75d9362e84",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "a93bc1a0e46be835bfee116fc97e2ffb577d9a0baadbc69751c60b75d9362e84",
+      "profileId": "ADAPT_T020_M32",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T020_M32_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T030_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "b1c972e655a4b94e02693cad9e16865f99ad007d10872281704d53d364dff12d",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "b1c972e655a4b94e02693cad9e16865f99ad007d10872281704d53d364dff12d",
+      "profileId": "ADAPT_T030_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T030_M0_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T030_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "96973ccb4d28337e1d442bf6c45b908b1c6270c125da37023fb415197414ae96",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "96973ccb4d28337e1d442bf6c45b908b1c6270c125da37023fb415197414ae96",
+      "profileId": "ADAPT_T030_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T030_M0_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T030_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "915a8933b77cc0a4b934d90c46e7ae5e495c318f6e82a285c8c7593633bbbfe5",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "915a8933b77cc0a4b934d90c46e7ae5e495c318f6e82a285c8c7593633bbbfe5",
+      "profileId": "ADAPT_T030_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T030_M0_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T030_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "297c022fa5e67508476c1fb3c477bfe4d38b56cbed603c22632632eff5f34d10",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "297c022fa5e67508476c1fb3c477bfe4d38b56cbed603c22632632eff5f34d10",
+      "profileId": "ADAPT_T030_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T030_M0_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T030_M32_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "048b9a89bc6fd01a484bb1d70b99379430c706f71b433cd5d9619e8adaa479f1",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "048b9a89bc6fd01a484bb1d70b99379430c706f71b433cd5d9619e8adaa479f1",
+      "profileId": "ADAPT_T030_M32",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T030_M32_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T030_M32_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "406f434434d106b638df23e16703c4f56b4f4a365d22ffa88fe056fb97ae65ee",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "406f434434d106b638df23e16703c4f56b4f4a365d22ffa88fe056fb97ae65ee",
+      "profileId": "ADAPT_T030_M32",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T030_M32_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T030_M32_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "1dac8188e13c3b230971acfde526d739dfa6f02a6488d912e1246c434999f282",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "1dac8188e13c3b230971acfde526d739dfa6f02a6488d912e1246c434999f282",
+      "profileId": "ADAPT_T030_M32",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T030_M32_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T030_M32_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "4bc7f1e312482478c4238190b5584a63dac36a2622d8cc86f7f2c5df0dc0d285",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "4bc7f1e312482478c4238190b5584a63dac36a2622d8cc86f7f2c5df0dc0d285",
+      "profileId": "ADAPT_T030_M32",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T030_M32_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T050_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "ff068f6577f4435444fe6b85a58e349814aeb458bd2b31a2881cdb2d069045e6",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "ff068f6577f4435444fe6b85a58e349814aeb458bd2b31a2881cdb2d069045e6",
+      "profileId": "ADAPT_T050_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T050_M0_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T050_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "7e136d711906f567533079b192ea43e4a42349a8b1e36f502978b78a7506c0e1",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "7e136d711906f567533079b192ea43e4a42349a8b1e36f502978b78a7506c0e1",
+      "profileId": "ADAPT_T050_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T050_M0_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T050_M0_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "1981367c1c79b5c65773acb6c208635591437fe18d982923cbf1fc7c246c2097",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "1981367c1c79b5c65773acb6c208635591437fe18d982923cbf1fc7c246c2097",
+      "profileId": "ADAPT_T050_M0",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T050_M0_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T050_M0_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "ae81af5f8b1a31622e4d2dcb0863c50cf14ef9f172cf637488dadaca6f9b399e",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "ae81af5f8b1a31622e4d2dcb0863c50cf14ef9f172cf637488dadaca6f9b399e",
+      "profileId": "ADAPT_T050_M0",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T050_M0_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T050_M32_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "97cdb1a94f8a8308dd72bf3af3c5fb8e0eccad470a51e45785a401c4166d9221",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "97cdb1a94f8a8308dd72bf3af3c5fb8e0eccad470a51e45785a401c4166d9221",
+      "profileId": "ADAPT_T050_M32",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T050_M32_C1/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T050_M32_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "expectedBytes": 1144592,
+      "expectedSha256": "1ba482920219bd9482007ee50d0ebd5dc79ab0120433c53490475facce7f6d15",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1144592,
+      "observedSha256": "1ba482920219bd9482007ee50d0ebd5dc79ab0120433c53490475facce7f6d15",
+      "profileId": "ADAPT_T050_M32",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T050_M32_C2/vector-blur.exr",
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T050_M32_C1",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "1ae14d991a5a365d1f0ee6723ffac0a28e174f55417c51b49f3f0f94baec97d4",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "1ae14d991a5a365d1f0ee6723ffac0a28e174f55417c51b49f3f0f94baec97d4",
+      "profileId": "ADAPT_T050_M32",
+      "repeat": 1,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T050_M32_C1/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T050_M32_C2",
+      "channels": [
+        "R",
+        "G",
+        "B",
+        "A"
+      ],
+      "decodedPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "expectedBytes": 1721886,
+      "expectedSha256": "9995a57581f97f19f7abf0fd017afee161f414832ab65cfcf977ba37991b400e",
+      "finite": true,
+      "identityMatch": true,
+      "observedBytes": 1721886,
+      "observedSha256": "9995a57581f97f19f7abf0fd017afee161f414832ab65cfcf977ba37991b400e",
+      "profileId": "ADAPT_T050_M32",
+      "repeat": 2,
+      "shape": [
+        288,
+        512,
+        4
+      ],
+      "subimageName": "subimage-0",
+      "subimages": 1,
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T050_M32_C2/vector-blur.exr",
+      "variantId": "INTERIOR_CHAIR"
+    }
+  ],
+  "parentArtifactObservations": [
+    {
+      "expectedBytes": 3243613,
+      "expectedSha256": "16f13105e60ada167b559b27dfdcd61095030b0eb8ebb5dfb0d81e9d16af2ee2",
+      "kind": "TABLETOP_WIDE_PROD_T010_M0_R1",
+      "match": true,
+      "observedBytes": 3243613,
+      "observedSha256": "16f13105e60ada167b559b27dfdcd61095030b0eb8ebb5dfb0d81e9d16af2ee2",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_PROD_T010_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3243613,
+      "expectedSha256": "473e9227c96a3b5242334c11e0affc02870ac0fee40ffbb7f9e43867e4dcffbf",
+      "kind": "TABLETOP_WIDE_PROD_T010_M0_R2",
+      "match": true,
+      "observedBytes": 3243613,
+      "observedSha256": "473e9227c96a3b5242334c11e0affc02870ac0fee40ffbb7f9e43867e4dcffbf",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_PROD_T010_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3243613,
+      "expectedSha256": "d1651cd60ae17dc27db31fe4a6f8697168f9770c49666e0c40c8aacf83c847cd",
+      "kind": "TABLETOP_WIDE_PROD_T010_M0_R3",
+      "match": true,
+      "observedBytes": 3243613,
+      "observedSha256": "d1651cd60ae17dc27db31fe4a6f8697168f9770c49666e0c40c8aacf83c847cd",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_PROD_T010_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3347339,
+      "expectedSha256": "0ac9a84fffaa76d6ba5a91a35c9e03e0bd01836bfb23b4121fe3f6b775f251ce",
+      "kind": "INTERIOR_CHAIR_PROD_T010_M0_R1",
+      "match": true,
+      "observedBytes": 3347339,
+      "observedSha256": "0ac9a84fffaa76d6ba5a91a35c9e03e0bd01836bfb23b4121fe3f6b775f251ce",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_PROD_T010_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3347339,
+      "expectedSha256": "1d57e1999489d68460f29334efc86ba8ac47e15db7b67d70bf08124a1e673da1",
+      "kind": "INTERIOR_CHAIR_PROD_T010_M0_R2",
+      "match": true,
+      "observedBytes": 3347339,
+      "observedSha256": "1d57e1999489d68460f29334efc86ba8ac47e15db7b67d70bf08124a1e673da1",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_PROD_T010_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3347339,
+      "expectedSha256": "77630122695f1b7861bbe586ac7a48f645f4721bfe0025f192a491e1a62d586e",
+      "kind": "INTERIOR_CHAIR_PROD_T010_M0_R3",
+      "match": true,
+      "observedBytes": 3347339,
+      "observedSha256": "77630122695f1b7861bbe586ac7a48f645f4721bfe0025f192a491e1a62d586e",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_PROD_T010_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3171263,
+      "expectedSha256": "f7743cecb61726940714c45e9de9909dc042668e306f93e86f383523a088fa53",
+      "kind": "TABLETOP_WIDE_ADAPT_T015_M0_R1",
+      "match": true,
+      "observedBytes": 3171263,
+      "observedSha256": "f7743cecb61726940714c45e9de9909dc042668e306f93e86f383523a088fa53",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T015_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3171263,
+      "expectedSha256": "a339a844153fa5620ef50d2b7cc1fae2b61a5c30ffd57e17189884d187511d0a",
+      "kind": "TABLETOP_WIDE_ADAPT_T015_M0_R2",
+      "match": true,
+      "observedBytes": 3171263,
+      "observedSha256": "a339a844153fa5620ef50d2b7cc1fae2b61a5c30ffd57e17189884d187511d0a",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T015_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3171263,
+      "expectedSha256": "59c2c43cf0f0ce529ab994dea6131d3c65b7be59a5e1c8868d1262137c04068f",
+      "kind": "TABLETOP_WIDE_ADAPT_T015_M0_R3",
+      "match": true,
+      "observedBytes": 3171263,
+      "observedSha256": "59c2c43cf0f0ce529ab994dea6131d3c65b7be59a5e1c8868d1262137c04068f",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T015_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3374270,
+      "expectedSha256": "d4f55df27b9fa628ab514453bbaa23e32653150a5c2d496ddf4bbf0b3448a7ca",
+      "kind": "INTERIOR_CHAIR_ADAPT_T015_M0_R1",
+      "match": true,
+      "observedBytes": 3374270,
+      "observedSha256": "d4f55df27b9fa628ab514453bbaa23e32653150a5c2d496ddf4bbf0b3448a7ca",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T015_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3374270,
+      "expectedSha256": "225d5a9c886702b7f0cd497484e73ef4f7e0e7600da0904a8bd9568279117405",
+      "kind": "INTERIOR_CHAIR_ADAPT_T015_M0_R2",
+      "match": true,
+      "observedBytes": 3374270,
+      "observedSha256": "225d5a9c886702b7f0cd497484e73ef4f7e0e7600da0904a8bd9568279117405",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T015_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3374270,
+      "expectedSha256": "888ca507a85d832320e1e8270d34b57948057419e98263aa9778b9448c07718c",
+      "kind": "INTERIOR_CHAIR_ADAPT_T015_M0_R3",
+      "match": true,
+      "observedBytes": 3374270,
+      "observedSha256": "888ca507a85d832320e1e8270d34b57948057419e98263aa9778b9448c07718c",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T015_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3251694,
+      "expectedSha256": "72463cba1acafd932ec3dbb45ad439bb4ebbbdfed58e3474737a9af6836a58c9",
+      "kind": "TABLETOP_WIDE_ADAPT_T015_M32_R1",
+      "match": true,
+      "observedBytes": 3251694,
+      "observedSha256": "72463cba1acafd932ec3dbb45ad439bb4ebbbdfed58e3474737a9af6836a58c9",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T015_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3251694,
+      "expectedSha256": "75bba11473c195314982a38c1507b7ad8e48e95b75e499d7285bc70b7822e064",
+      "kind": "TABLETOP_WIDE_ADAPT_T015_M32_R2",
+      "match": true,
+      "observedBytes": 3251694,
+      "observedSha256": "75bba11473c195314982a38c1507b7ad8e48e95b75e499d7285bc70b7822e064",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T015_M32_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3251694,
+      "expectedSha256": "7f3a2a3a1092c08e68be5243dd62a12bac283175bb16fbc14d8dd371a83854d8",
+      "kind": "TABLETOP_WIDE_ADAPT_T015_M32_R3",
+      "match": true,
+      "observedBytes": 3251694,
+      "observedSha256": "7f3a2a3a1092c08e68be5243dd62a12bac283175bb16fbc14d8dd371a83854d8",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T015_M32_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3456958,
+      "expectedSha256": "aabbd653823f6432cb41a9fe18ea7af7f554b7d431f238ee34bce9e9805625bb",
+      "kind": "INTERIOR_CHAIR_ADAPT_T015_M32_R1",
+      "match": true,
+      "observedBytes": 3456958,
+      "observedSha256": "aabbd653823f6432cb41a9fe18ea7af7f554b7d431f238ee34bce9e9805625bb",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T015_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3456958,
+      "expectedSha256": "2010b69a62076e24eb0c8845c4690d7a44f8f5636445b14dc32cb57ffb4ab7c1",
+      "kind": "INTERIOR_CHAIR_ADAPT_T015_M32_R2",
+      "match": true,
+      "observedBytes": 3456958,
+      "observedSha256": "2010b69a62076e24eb0c8845c4690d7a44f8f5636445b14dc32cb57ffb4ab7c1",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T015_M32_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3456958,
+      "expectedSha256": "713ac668deed96caa70358025deb8c1f45db276340cff884a441b65428c80d0a",
+      "kind": "INTERIOR_CHAIR_ADAPT_T015_M32_R3",
+      "match": true,
+      "observedBytes": 3456958,
+      "observedSha256": "713ac668deed96caa70358025deb8c1f45db276340cff884a441b65428c80d0a",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T015_M32_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3161640,
+      "expectedSha256": "4feac696b885938f0fe1d9110196ae7ac46bfb895784385fe1f5362aaa58505a",
+      "kind": "TABLETOP_WIDE_ADAPT_T020_M0_R1",
+      "match": true,
+      "observedBytes": 3161640,
+      "observedSha256": "4feac696b885938f0fe1d9110196ae7ac46bfb895784385fe1f5362aaa58505a",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3161640,
+      "expectedSha256": "1d8bc93b712b95177b3398d7fe0c195be3d3d8679919163e25c29d4c5616fd87",
+      "kind": "TABLETOP_WIDE_ADAPT_T020_M0_R2",
+      "match": true,
+      "observedBytes": 3161640,
+      "observedSha256": "1d8bc93b712b95177b3398d7fe0c195be3d3d8679919163e25c29d4c5616fd87",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3161640,
+      "expectedSha256": "9ae367071b84e3c603a68a3ba2aa9f131348cf0930d5a1239fb4a2d35f30a1e0",
+      "kind": "TABLETOP_WIDE_ADAPT_T020_M0_R3",
+      "match": true,
+      "observedBytes": 3161640,
+      "observedSha256": "9ae367071b84e3c603a68a3ba2aa9f131348cf0930d5a1239fb4a2d35f30a1e0",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3223793,
+      "expectedSha256": "e63ac3252990de425b370a4e47c69239c48f92201c71b6c87f3b2cbd45329bd8",
+      "kind": "INTERIOR_CHAIR_ADAPT_T020_M0_R1",
+      "match": true,
+      "observedBytes": 3223793,
+      "observedSha256": "e63ac3252990de425b370a4e47c69239c48f92201c71b6c87f3b2cbd45329bd8",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3223793,
+      "expectedSha256": "95686280d8e463c36347b8e7b0916b24cac5852281c41ddd4a7734df5dd90468",
+      "kind": "INTERIOR_CHAIR_ADAPT_T020_M0_R2",
+      "match": true,
+      "observedBytes": 3223793,
+      "observedSha256": "95686280d8e463c36347b8e7b0916b24cac5852281c41ddd4a7734df5dd90468",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3223793,
+      "expectedSha256": "2f159478bd64ae5d2992c62d9c67249911f63c73334c640f2f42411562f1c5d6",
+      "kind": "INTERIOR_CHAIR_ADAPT_T020_M0_R3",
+      "match": true,
+      "observedBytes": 3223793,
+      "observedSha256": "2f159478bd64ae5d2992c62d9c67249911f63c73334c640f2f42411562f1c5d6",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3246211,
+      "expectedSha256": "e35c4a0bc9566bd5f3901c2d055a9ad1844dc83f57254c3ac8ad5a5e6e43e517",
+      "kind": "TABLETOP_WIDE_ADAPT_T020_M32_R1",
+      "match": true,
+      "observedBytes": 3246211,
+      "observedSha256": "e35c4a0bc9566bd5f3901c2d055a9ad1844dc83f57254c3ac8ad5a5e6e43e517",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3246211,
+      "expectedSha256": "6b1b7c7e46b4c804bb4c4c50b987becf101f83d1b1dbb37093c7dfbe83247865",
+      "kind": "TABLETOP_WIDE_ADAPT_T020_M32_R2",
+      "match": true,
+      "observedBytes": 3246211,
+      "observedSha256": "6b1b7c7e46b4c804bb4c4c50b987becf101f83d1b1dbb37093c7dfbe83247865",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M32_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3246211,
+      "expectedSha256": "5a6e46667b1c415dcbd500bd9f5348d9968bfbf8c3f49afb693c7c21b34a71a5",
+      "kind": "TABLETOP_WIDE_ADAPT_T020_M32_R3",
+      "match": true,
+      "observedBytes": 3246211,
+      "observedSha256": "5a6e46667b1c415dcbd500bd9f5348d9968bfbf8c3f49afb693c7c21b34a71a5",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M32_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3386725,
+      "expectedSha256": "06d590f9cca810a2ae85a9e85421faca67d5aa5f82f6efac541ab9b698bff37f",
+      "kind": "INTERIOR_CHAIR_ADAPT_T020_M32_R1",
+      "match": true,
+      "observedBytes": 3386725,
+      "observedSha256": "06d590f9cca810a2ae85a9e85421faca67d5aa5f82f6efac541ab9b698bff37f",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3386725,
+      "expectedSha256": "28954d0250e7824a77befcc774722475441200ecc7349d19eb8855759f321ac0",
+      "kind": "INTERIOR_CHAIR_ADAPT_T020_M32_R2",
+      "match": true,
+      "observedBytes": 3386725,
+      "observedSha256": "28954d0250e7824a77befcc774722475441200ecc7349d19eb8855759f321ac0",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M32_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3386725,
+      "expectedSha256": "8836b2c82228e66ea65309c9fdfbc53897f2e95e397a781ce56688c2cfe50961",
+      "kind": "INTERIOR_CHAIR_ADAPT_T020_M32_R3",
+      "match": true,
+      "observedBytes": 3386725,
+      "observedSha256": "8836b2c82228e66ea65309c9fdfbc53897f2e95e397a781ce56688c2cfe50961",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M32_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3233700,
+      "expectedSha256": "69d7e24cef8e805f3e95b36284f538fbeaefbbd7dee2fd256ab669fab65efc61",
+      "kind": "TABLETOP_WIDE_ADAPT_T030_M0_R1",
+      "match": true,
+      "observedBytes": 3233700,
+      "observedSha256": "69d7e24cef8e805f3e95b36284f538fbeaefbbd7dee2fd256ab669fab65efc61",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T030_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3233700,
+      "expectedSha256": "e06d2b578925fe8a9383e7bb1a2a3123cf04ccbc18458a41d1dd2e3527202ef4",
+      "kind": "TABLETOP_WIDE_ADAPT_T030_M0_R2",
+      "match": true,
+      "observedBytes": 3233700,
+      "observedSha256": "e06d2b578925fe8a9383e7bb1a2a3123cf04ccbc18458a41d1dd2e3527202ef4",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T030_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3233700,
+      "expectedSha256": "ff8f85fce62e1b05bdaa4285a1c2d2b434a7faaaaf93737b2363969335303b2f",
+      "kind": "TABLETOP_WIDE_ADAPT_T030_M0_R3",
+      "match": true,
+      "observedBytes": 3233700,
+      "observedSha256": "ff8f85fce62e1b05bdaa4285a1c2d2b434a7faaaaf93737b2363969335303b2f",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T030_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3231174,
+      "expectedSha256": "9b76f294fd618b204c1f3460a8c8b7e15bc180df8e6e3c650b2ab05e42079507",
+      "kind": "INTERIOR_CHAIR_ADAPT_T030_M0_R1",
+      "match": true,
+      "observedBytes": 3231174,
+      "observedSha256": "9b76f294fd618b204c1f3460a8c8b7e15bc180df8e6e3c650b2ab05e42079507",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T030_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3231174,
+      "expectedSha256": "b40e593daaa70a8e08973fde0948f2813cc476528f13cd4a1c8de46c5b774283",
+      "kind": "INTERIOR_CHAIR_ADAPT_T030_M0_R2",
+      "match": true,
+      "observedBytes": 3231174,
+      "observedSha256": "b40e593daaa70a8e08973fde0948f2813cc476528f13cd4a1c8de46c5b774283",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T030_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3231174,
+      "expectedSha256": "f60a560b2e413122cc839abb1051e62cfa3ac67d6d1a8b626c836b38d3d14595",
+      "kind": "INTERIOR_CHAIR_ADAPT_T030_M0_R3",
+      "match": true,
+      "observedBytes": 3231174,
+      "observedSha256": "f60a560b2e413122cc839abb1051e62cfa3ac67d6d1a8b626c836b38d3d14595",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T030_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3233700,
+      "expectedSha256": "03a8b2b6e351f587fb3d208e9a2208748c6e922c0bb2d21c3961388d0d17e339",
+      "kind": "TABLETOP_WIDE_ADAPT_T030_M32_R1",
+      "match": true,
+      "observedBytes": 3233700,
+      "observedSha256": "03a8b2b6e351f587fb3d208e9a2208748c6e922c0bb2d21c3961388d0d17e339",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T030_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3233700,
+      "expectedSha256": "1ecc330f2d83260456edeec31f53a070d4564279febaae3a7cccffacfa328855",
+      "kind": "TABLETOP_WIDE_ADAPT_T030_M32_R2",
+      "match": true,
+      "observedBytes": 3233700,
+      "observedSha256": "1ecc330f2d83260456edeec31f53a070d4564279febaae3a7cccffacfa328855",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T030_M32_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3233700,
+      "expectedSha256": "e55043b1fa4e69570a534b6eb945965129aacd2d80698f79aaa17d6799c7677a",
+      "kind": "TABLETOP_WIDE_ADAPT_T030_M32_R3",
+      "match": true,
+      "observedBytes": 3233700,
+      "observedSha256": "e55043b1fa4e69570a534b6eb945965129aacd2d80698f79aaa17d6799c7677a",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T030_M32_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3231174,
+      "expectedSha256": "9464b252b28b877d7584f8894aa3750afb46925f43076229a693586e1c020980",
+      "kind": "INTERIOR_CHAIR_ADAPT_T030_M32_R1",
+      "match": true,
+      "observedBytes": 3231174,
+      "observedSha256": "9464b252b28b877d7584f8894aa3750afb46925f43076229a693586e1c020980",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T030_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3231174,
+      "expectedSha256": "49b2c9539d72d65bea4be1546dba7b2d64d55ba842107aa6db078d13d9b70b73",
+      "kind": "INTERIOR_CHAIR_ADAPT_T030_M32_R2",
+      "match": true,
+      "observedBytes": 3231174,
+      "observedSha256": "49b2c9539d72d65bea4be1546dba7b2d64d55ba842107aa6db078d13d9b70b73",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T030_M32_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3231174,
+      "expectedSha256": "f366ad57aeabb109a9c92cde97a4a0a9d7928db71e5ca97504a1f049b42ed1b2",
+      "kind": "INTERIOR_CHAIR_ADAPT_T030_M32_R3",
+      "match": true,
+      "observedBytes": 3231174,
+      "observedSha256": "f366ad57aeabb109a9c92cde97a4a0a9d7928db71e5ca97504a1f049b42ed1b2",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T030_M32_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3208604,
+      "expectedSha256": "741cff0e9ed5f4473e56647c25a73d2d4a38d570c96851d6a81a7194bb1ea7de",
+      "kind": "TABLETOP_WIDE_ADAPT_T050_M0_R1",
+      "match": true,
+      "observedBytes": 3208604,
+      "observedSha256": "741cff0e9ed5f4473e56647c25a73d2d4a38d570c96851d6a81a7194bb1ea7de",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T050_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3208604,
+      "expectedSha256": "ef321d6e629e7920418e7788d731babead70892471b0beb15e5391c5523ca97b",
+      "kind": "TABLETOP_WIDE_ADAPT_T050_M0_R2",
+      "match": true,
+      "observedBytes": 3208604,
+      "observedSha256": "ef321d6e629e7920418e7788d731babead70892471b0beb15e5391c5523ca97b",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T050_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3208604,
+      "expectedSha256": "12781bdddd39c1ea6da74f3572422b75f51a0c644cbf6a22d3179c19536e0235",
+      "kind": "TABLETOP_WIDE_ADAPT_T050_M0_R3",
+      "match": true,
+      "observedBytes": 3208604,
+      "observedSha256": "12781bdddd39c1ea6da74f3572422b75f51a0c644cbf6a22d3179c19536e0235",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T050_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3160863,
+      "expectedSha256": "89841a37d8ca3c870b8faf5f39ea113e353edf400de0a5c0ba93ee206c84ff00",
+      "kind": "INTERIOR_CHAIR_ADAPT_T050_M0_R1",
+      "match": true,
+      "observedBytes": 3160863,
+      "observedSha256": "89841a37d8ca3c870b8faf5f39ea113e353edf400de0a5c0ba93ee206c84ff00",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T050_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3160863,
+      "expectedSha256": "9e5572f45f080bb41a19ea69d46f26a71da1ce12bb988863c4f41e7889d83428",
+      "kind": "INTERIOR_CHAIR_ADAPT_T050_M0_R2",
+      "match": true,
+      "observedBytes": 3160863,
+      "observedSha256": "9e5572f45f080bb41a19ea69d46f26a71da1ce12bb988863c4f41e7889d83428",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T050_M0_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3160863,
+      "expectedSha256": "91e7451f697cf63e6102c536768aa515869878dcd6d40e36f9e7393d01cd1010",
+      "kind": "INTERIOR_CHAIR_ADAPT_T050_M0_R3",
+      "match": true,
+      "observedBytes": 3160863,
+      "observedSha256": "91e7451f697cf63e6102c536768aa515869878dcd6d40e36f9e7393d01cd1010",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T050_M0_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3208604,
+      "expectedSha256": "01d8097cde69fd8ed95729486711e4fcf1cafb2bb4de0c734847b55a9f117c39",
+      "kind": "TABLETOP_WIDE_ADAPT_T050_M32_R1",
+      "match": true,
+      "observedBytes": 3208604,
+      "observedSha256": "01d8097cde69fd8ed95729486711e4fcf1cafb2bb4de0c734847b55a9f117c39",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T050_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3208604,
+      "expectedSha256": "dfeb61a40817a2088d3f29aa854938940ef0ec250483e84a037d207621eed6a6",
+      "kind": "TABLETOP_WIDE_ADAPT_T050_M32_R2",
+      "match": true,
+      "observedBytes": 3208604,
+      "observedSha256": "dfeb61a40817a2088d3f29aa854938940ef0ec250483e84a037d207621eed6a6",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T050_M32_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3208604,
+      "expectedSha256": "0fd9dbda46d482a5cc69bf3004df3b83f720d30ce8f88194f55a24dfec2a7fcb",
+      "kind": "TABLETOP_WIDE_ADAPT_T050_M32_R3",
+      "match": true,
+      "observedBytes": 3208604,
+      "observedSha256": "0fd9dbda46d482a5cc69bf3004df3b83f720d30ce8f88194f55a24dfec2a7fcb",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T050_M32_R3/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3160863,
+      "expectedSha256": "c41a2fd8a923d55c35f86167c23449dcc16568245fd1784600ee5ff5fddd055e",
+      "kind": "INTERIOR_CHAIR_ADAPT_T050_M32_R1",
+      "match": true,
+      "observedBytes": 3160863,
+      "observedSha256": "c41a2fd8a923d55c35f86167c23449dcc16568245fd1784600ee5ff5fddd055e",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T050_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3160863,
+      "expectedSha256": "9007458cac51db14833f581fcb5af57d6bfc4df4fc2dbb22ab404bfea7fb62c9",
+      "kind": "INTERIOR_CHAIR_ADAPT_T050_M32_R2",
+      "match": true,
+      "observedBytes": 3160863,
+      "observedSha256": "9007458cac51db14833f581fcb5af57d6bfc4df4fc2dbb22ab404bfea7fb62c9",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T050_M32_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3160863,
+      "expectedSha256": "9dafdf36a121195cc8fe9286679c56283abf2c7ed6e0b7e054e21e5eb4c10748",
+      "kind": "INTERIOR_CHAIR_ADAPT_T050_M32_R3",
+      "match": true,
+      "observedBytes": 3160863,
+      "observedSha256": "9dafdf36a121195cc8fe9286679c56283abf2c7ed6e0b7e054e21e5eb4c10748",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T050_M32_R3/artifacts/production.exr"
+    }
+  ],
+  "parentDisclosure": "All B52-D2 and B52-D3 measurements were observed before this derivation. B52-D4 is exploratory/derivational, creates new compositor outputs from retained EXRs, and may only propose a Vector task contract for a later fresh-seed holdout.",
+  "parentObservations": [
+    {
+      "expectedBytes": null,
+      "expectedSha256": "88f9284e014a5c4020aed374eef306cf22ed1c1badf5e680d93a919038526b7d",
+      "kind": "d3Spec",
+      "match": true,
+      "observedBytes": 9953,
+      "observedSha256": "88f9284e014a5c4020aed374eef306cf22ed1c1badf5e680d93a919038526b7d",
+      "uri": "specs/adaptive-payload-semantics-derivation.v0.1.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "337d2c3a54b4818164b77cb894a9802d86219ea4db12d76f8dc7e0cc96439952",
+      "kind": "d3Receipt",
+      "match": true,
+      "observedBytes": 28804,
+      "observedSha256": "337d2c3a54b4818164b77cb894a9802d86219ea4db12d76f8dc7e0cc96439952",
+      "uri": "experiments/adaptive-payload-semantics-derivation-v0-1/run.receipt.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "a4da9fe19e08e5181bc75723fa04ab5961fbe1c48f25748a56a65e75df429739",
+      "kind": "d3Result",
+      "match": true,
+      "observedBytes": 460870,
+      "observedSha256": "a4da9fe19e08e5181bc75723fa04ab5961fbe1c48f25748a56a65e75df429739",
+      "uri": "experiments/adaptive-payload-semantics-derivation-v0-1/results.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "c1b9c61cbef701f58797d3ddc898cb54e3d10b52a3b422abfddf3e21b37bd5cc",
+      "kind": "d3Audit",
+      "match": true,
+      "observedBytes": 54263,
+      "observedSha256": "c1b9c61cbef701f58797d3ddc898cb54e3d10b52a3b422abfddf3e21b37bd5cc",
+      "uri": "experiments/adaptive-payload-semantics-derivation-v0-1/audit.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "0e58246b453131c02ce5fe2fef4b726a92ac9e6b3cde6d5c0099657e2dfb64fb",
+      "kind": "interfacePreflight",
+      "match": true,
+      "observedBytes": 3318,
+      "observedSha256": "0e58246b453131c02ce5fe2fef4b726a92ac9e6b3cde6d5c0099657e2dfb64fb",
+      "uri": "experiments/adaptive-vector-blur-semantics-preflight-v0-1/observation.json"
+    }
+  ],
+  "preregistration": {
+    "commit": "173a2ed294b79b32089bc518249303da3cc5bb17",
+    "specSha256": "e8635a1507eb5a5e8bfd950dc02fc4630a7202fd9af14b5510a991359f2e439f",
+    "specUri": "specs/adaptive-vector-blur-semantics-derivation.v0.1.json"
+  },
+  "profileSummaries": [
+    {
+      "profileId": "ADAPT_T015_M0",
+      "variants": [
+        {
+          "decodedRepeatExact": true,
+          "passed": true,
+          "variantId": "TABLETOP_WIDE",
+          "vectorClassifierPassed": true
+        },
+        {
+          "decodedRepeatExact": true,
+          "passed": false,
+          "variantId": "INTERIOR_CHAIR",
+          "vectorClassifierPassed": false
+        }
+      ],
+      "vectorTaskTolerable": false
+    },
+    {
+      "profileId": "ADAPT_T015_M32",
+      "variants": [
+        {
+          "decodedRepeatExact": true,
+          "passed": true,
+          "variantId": "TABLETOP_WIDE",
+          "vectorClassifierPassed": true
+        },
+        {
+          "decodedRepeatExact": true,
+          "passed": false,
+          "variantId": "INTERIOR_CHAIR",
+          "vectorClassifierPassed": false
+        }
+      ],
+      "vectorTaskTolerable": false
+    },
+    {
+      "profileId": "ADAPT_T020_M0",
+      "variants": [
+        {
+          "decodedRepeatExact": true,
+          "passed": true,
+          "variantId": "TABLETOP_WIDE",
+          "vectorClassifierPassed": true
+        },
+        {
+          "decodedRepeatExact": true,
+          "passed": false,
+          "variantId": "INTERIOR_CHAIR",
+          "vectorClassifierPassed": false
+        }
+      ],
+      "vectorTaskTolerable": false
+    },
+    {
+      "profileId": "ADAPT_T020_M32",
+      "variants": [
+        {
+          "decodedRepeatExact": true,
+          "passed": true,
+          "variantId": "TABLETOP_WIDE",
+          "vectorClassifierPassed": true
+        },
+        {
+          "decodedRepeatExact": true,
+          "passed": false,
+          "variantId": "INTERIOR_CHAIR",
+          "vectorClassifierPassed": false
+        }
+      ],
+      "vectorTaskTolerable": false
+    },
+    {
+      "profileId": "ADAPT_T030_M0",
+      "variants": [
+        {
+          "decodedRepeatExact": true,
+          "passed": true,
+          "variantId": "TABLETOP_WIDE",
+          "vectorClassifierPassed": true
+        },
+        {
+          "decodedRepeatExact": true,
+          "passed": false,
+          "variantId": "INTERIOR_CHAIR",
+          "vectorClassifierPassed": false
+        }
+      ],
+      "vectorTaskTolerable": false
+    },
+    {
+      "profileId": "ADAPT_T030_M32",
+      "variants": [
+        {
+          "decodedRepeatExact": true,
+          "passed": true,
+          "variantId": "TABLETOP_WIDE",
+          "vectorClassifierPassed": true
+        },
+        {
+          "decodedRepeatExact": true,
+          "passed": false,
+          "variantId": "INTERIOR_CHAIR",
+          "vectorClassifierPassed": false
+        }
+      ],
+      "vectorTaskTolerable": false
+    },
+    {
+      "profileId": "ADAPT_T050_M0",
+      "variants": [
+        {
+          "decodedRepeatExact": true,
+          "passed": true,
+          "variantId": "TABLETOP_WIDE",
+          "vectorClassifierPassed": true
+        },
+        {
+          "decodedRepeatExact": true,
+          "passed": false,
+          "variantId": "INTERIOR_CHAIR",
+          "vectorClassifierPassed": false
+        }
+      ],
+      "vectorTaskTolerable": false
+    },
+    {
+      "profileId": "ADAPT_T050_M32",
+      "variants": [
+        {
+          "decodedRepeatExact": true,
+          "passed": true,
+          "variantId": "TABLETOP_WIDE",
+          "vectorClassifierPassed": true
+        },
+        {
+          "decodedRepeatExact": true,
+          "passed": false,
+          "variantId": "INTERIOR_CHAIR",
+          "vectorClassifierPassed": false
+        }
+      ],
+      "vectorTaskTolerable": false
+    }
+  ],
+  "regions": [
+    {
+      "baselineRunId": "TABLETOP_WIDE_PROD_T010_M0_R1",
+      "boundaryPixelCount": 10180,
+      "boundarySeedPixelCount": 4885,
+      "confidentDominantPixelCount": 90301,
+      "d3MaskIdentityMatch": true,
+      "dimensions": [
+        512,
+        288
+      ],
+      "foregroundPixelCount": 93497,
+      "maskSha256": {
+        "boundary": "b26ed64f15a121d5f83c1938a4600978375c05bdb7fe4bffd3f899a1823d1229",
+        "boundarySeed": "e7de60f5622ad6d2a8b713b5048dadab0b595b31679a545a42d8e52993c2acb6",
+        "foreground": "b490416baf4755d3c15ab7b47b84f13313663af7609f1f66b65f9b5ab553f3a7",
+        "stableInterior": "ebb1774d335e8b71538ae5612087a8264131733289c655fec13fc8f05e6b5401"
+      },
+      "stableInteriorPixelCount": 86840,
+      "variantId": "TABLETOP_WIDE",
+      "visibleObjectCount": 5,
+      "visibleObjectNames": [
+        "GLASS_CYLINDER",
+        "LEATHER_BLOCK",
+        "METAL_SPHERE",
+        "SKIN_TONE_CARD",
+        "STAGE"
+      ]
+    },
+    {
+      "baselineRunId": "INTERIOR_CHAIR_PROD_T010_M0_R1",
+      "boundaryPixelCount": 7089,
+      "boundarySeedPixelCount": 4299,
+      "confidentDominantPixelCount": 143157,
+      "d3MaskIdentityMatch": true,
+      "dimensions": [
+        512,
+        288
+      ],
+      "foregroundPixelCount": 147456,
+      "maskSha256": {
+        "boundary": "da3d28df77c9326788bcdcc2731bb10edc02ddad800ee08a3dec44bad20016f2",
+        "boundarySeed": "2f61e9b78ce9146eec8a96428e3a44ad4f2df42365c97f386808ea01073be1e8",
+        "foreground": "6765ef95316a0173ce56c8468d5d27d9a48b3fc1b5b3ac8f8c75d88c413eabd2",
+        "stableInterior": "d134fdaf2ef8d23a9902ccd4d284e8bbd09584fb3cd0d79ae5c152481d9d5ce9"
+      },
+      "stableInteriorPixelCount": 140367,
+      "variantId": "INTERIOR_CHAIR",
+      "visibleObjectCount": 9,
+      "visibleObjectNames": [
+        "BACK_WALL",
+        "CHAIR_BACK",
+        "CHAIR_LEG_01",
+        "CHAIR_LEG_02",
+        "CHAIR_LEG_03",
+        "CHAIR_LEG_04",
+        "CHAIR_SEAT",
+        "FLOOR",
+        "RIGHT_WALL"
+      ]
+    }
+  ],
+  "repeatComparisons": [
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "PROD_T010_M0",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "PROD_T010_M0",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T015_M0",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T015_M0",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T015_M32",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T015_M32",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T020_M0",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T020_M0",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T020_M32",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T020_M32",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T030_M0",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T030_M0",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T030_M32",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T030_M32",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T050_M0",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T050_M0",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T050_M32",
+      "rightPixelSha256": "ec74fd9a12e86150b458a8a54c83de939f14af8ebc77ba191ca29d33d89da631",
+      "rightRepeat": 2,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "decodedExact": true,
+      "leftPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "leftRepeat": 1,
+      "profileId": "ADAPT_T050_M32",
+      "rightPixelSha256": "241788d0827fbb073846d8d2d77d158507ba31dd4708cf01ae0d0a96d730cbf9",
+      "rightRepeat": 2,
+      "variantId": "INTERIOR_CHAIR"
+    }
+  ],
+  "runObservations": [
+    {
+      "cellId": "TABLETOP_WIDE_PROD_T010_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95386,
+      "profileId": "PROD_T010_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_PROD_T010_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95389,
+      "profileId": "PROD_T010_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_PROD_T010_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95392,
+      "profileId": "PROD_T010_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_PROD_T010_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95396,
+      "profileId": "PROD_T010_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T015_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95397,
+      "profileId": "ADAPT_T015_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T015_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95399,
+      "profileId": "ADAPT_T015_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T015_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95400,
+      "profileId": "ADAPT_T015_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T015_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95405,
+      "profileId": "ADAPT_T015_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T015_M32_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95408,
+      "profileId": "ADAPT_T015_M32",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T015_M32_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95416,
+      "profileId": "ADAPT_T015_M32",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T015_M32_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95419,
+      "profileId": "ADAPT_T015_M32",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T015_M32_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95424,
+      "profileId": "ADAPT_T015_M32",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T020_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95456,
+      "profileId": "ADAPT_T020_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T020_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95473,
+      "profileId": "ADAPT_T020_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T020_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95490,
+      "profileId": "ADAPT_T020_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T020_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95508,
+      "profileId": "ADAPT_T020_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T020_M32_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95531,
+      "profileId": "ADAPT_T020_M32",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T020_M32_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95553,
+      "profileId": "ADAPT_T020_M32",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T020_M32_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95554,
+      "profileId": "ADAPT_T020_M32",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T020_M32_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95579,
+      "profileId": "ADAPT_T020_M32",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T030_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95593,
+      "profileId": "ADAPT_T030_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T030_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95606,
+      "profileId": "ADAPT_T030_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T030_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95609,
+      "profileId": "ADAPT_T030_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T030_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95626,
+      "profileId": "ADAPT_T030_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T030_M32_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95627,
+      "profileId": "ADAPT_T030_M32",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T030_M32_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95634,
+      "profileId": "ADAPT_T030_M32",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T030_M32_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95666,
+      "profileId": "ADAPT_T030_M32",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T030_M32_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95680,
+      "profileId": "ADAPT_T030_M32",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T050_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95681,
+      "profileId": "ADAPT_T050_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T050_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95686,
+      "profileId": "ADAPT_T050_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T050_M0_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95694,
+      "profileId": "ADAPT_T050_M0",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T050_M0_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95701,
+      "profileId": "ADAPT_T050_M0",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T050_M32_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95703,
+      "profileId": "ADAPT_T050_M32",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "TABLETOP_WIDE_ADAPT_T050_M32_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95711,
+      "profileId": "ADAPT_T050_M32",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T050_M32_C1",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95712,
+      "profileId": "ADAPT_T050_M32",
+      "repeat": 1,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cellId": "INTERIOR_CHAIR_ADAPT_T050_M32_C2",
+      "exitCode": 0,
+      "graphLinks": [
+        "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+        "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+        "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+        "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+      ],
+      "graphMatch": true,
+      "graphNodeCount": 4,
+      "inputIsolationMatch": true,
+      "pid": 95724,
+      "profileId": "ADAPT_T050_M32",
+      "repeat": 2,
+      "reportHashMatch": true,
+      "rnaInputs": [
+        {
+          "identifier": "Image",
+          "name": "Image",
+          "type": "RGBA"
+        },
+        {
+          "identifier": "Speed",
+          "name": "Speed",
+          "type": "VECTOR"
+        },
+        {
+          "identifier": "Z",
+          "name": "Depth",
+          "type": "VALUE"
+        },
+        {
+          "identifier": "Samples",
+          "name": "Samples",
+          "type": "INT"
+        },
+        {
+          "identifier": "Shutter",
+          "name": "Shutter",
+          "type": "VALUE"
+        }
+      ],
+      "rnaMatch": true,
+      "variantId": "INTERIOR_CHAIR"
+    }
+  ],
+  "runtime": {
+    "numpy": "2.3.4",
+    "openImageIO": "3.1.13.1",
+    "python": "3.13.13"
+  },
+  "runtimeObservations": {
+    "blender": {
+      "expectedBytes": 183237520,
+      "expectedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "match": true,
+      "observedBytes": 183237520,
+      "observedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "uri": "/Applications/Blender.app/Contents/MacOS/Blender"
+    },
+    "ocio": {
+      "expectedBytes": null,
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "kind": "OCIO",
+      "match": true,
+      "observedBytes": 32807,
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    }
+  },
+  "schemaVersion": "bfs.adaptiveVectorBlurSemanticsDerivationEvidence.v0.1",
+  "sourcePostObservations": [
+    {
+      "expectedBytes": 3243613,
+      "expectedSha256": "16f13105e60ada167b559b27dfdcd61095030b0eb8ebb5dfb0d81e9d16af2ee2",
+      "kind": "TABLETOP_WIDE_PROD_T010_M0_R1",
+      "match": true,
+      "observedBytes": 3243613,
+      "observedSha256": "16f13105e60ada167b559b27dfdcd61095030b0eb8ebb5dfb0d81e9d16af2ee2",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_PROD_T010_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3347339,
+      "expectedSha256": "0ac9a84fffaa76d6ba5a91a35c9e03e0bd01836bfb23b4121fe3f6b775f251ce",
+      "kind": "INTERIOR_CHAIR_PROD_T010_M0_R1",
+      "match": true,
+      "observedBytes": 3347339,
+      "observedSha256": "0ac9a84fffaa76d6ba5a91a35c9e03e0bd01836bfb23b4121fe3f6b775f251ce",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_PROD_T010_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3171263,
+      "expectedSha256": "f7743cecb61726940714c45e9de9909dc042668e306f93e86f383523a088fa53",
+      "kind": "TABLETOP_WIDE_ADAPT_T015_M0_R1",
+      "match": true,
+      "observedBytes": 3171263,
+      "observedSha256": "f7743cecb61726940714c45e9de9909dc042668e306f93e86f383523a088fa53",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T015_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3374270,
+      "expectedSha256": "d4f55df27b9fa628ab514453bbaa23e32653150a5c2d496ddf4bbf0b3448a7ca",
+      "kind": "INTERIOR_CHAIR_ADAPT_T015_M0_R1",
+      "match": true,
+      "observedBytes": 3374270,
+      "observedSha256": "d4f55df27b9fa628ab514453bbaa23e32653150a5c2d496ddf4bbf0b3448a7ca",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T015_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3251694,
+      "expectedSha256": "72463cba1acafd932ec3dbb45ad439bb4ebbbdfed58e3474737a9af6836a58c9",
+      "kind": "TABLETOP_WIDE_ADAPT_T015_M32_R1",
+      "match": true,
+      "observedBytes": 3251694,
+      "observedSha256": "72463cba1acafd932ec3dbb45ad439bb4ebbbdfed58e3474737a9af6836a58c9",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T015_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3456958,
+      "expectedSha256": "aabbd653823f6432cb41a9fe18ea7af7f554b7d431f238ee34bce9e9805625bb",
+      "kind": "INTERIOR_CHAIR_ADAPT_T015_M32_R1",
+      "match": true,
+      "observedBytes": 3456958,
+      "observedSha256": "aabbd653823f6432cb41a9fe18ea7af7f554b7d431f238ee34bce9e9805625bb",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T015_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3161640,
+      "expectedSha256": "4feac696b885938f0fe1d9110196ae7ac46bfb895784385fe1f5362aaa58505a",
+      "kind": "TABLETOP_WIDE_ADAPT_T020_M0_R1",
+      "match": true,
+      "observedBytes": 3161640,
+      "observedSha256": "4feac696b885938f0fe1d9110196ae7ac46bfb895784385fe1f5362aaa58505a",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3223793,
+      "expectedSha256": "e63ac3252990de425b370a4e47c69239c48f92201c71b6c87f3b2cbd45329bd8",
+      "kind": "INTERIOR_CHAIR_ADAPT_T020_M0_R1",
+      "match": true,
+      "observedBytes": 3223793,
+      "observedSha256": "e63ac3252990de425b370a4e47c69239c48f92201c71b6c87f3b2cbd45329bd8",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3246211,
+      "expectedSha256": "e35c4a0bc9566bd5f3901c2d055a9ad1844dc83f57254c3ac8ad5a5e6e43e517",
+      "kind": "TABLETOP_WIDE_ADAPT_T020_M32_R1",
+      "match": true,
+      "observedBytes": 3246211,
+      "observedSha256": "e35c4a0bc9566bd5f3901c2d055a9ad1844dc83f57254c3ac8ad5a5e6e43e517",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3386725,
+      "expectedSha256": "06d590f9cca810a2ae85a9e85421faca67d5aa5f82f6efac541ab9b698bff37f",
+      "kind": "INTERIOR_CHAIR_ADAPT_T020_M32_R1",
+      "match": true,
+      "observedBytes": 3386725,
+      "observedSha256": "06d590f9cca810a2ae85a9e85421faca67d5aa5f82f6efac541ab9b698bff37f",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3233700,
+      "expectedSha256": "69d7e24cef8e805f3e95b36284f538fbeaefbbd7dee2fd256ab669fab65efc61",
+      "kind": "TABLETOP_WIDE_ADAPT_T030_M0_R1",
+      "match": true,
+      "observedBytes": 3233700,
+      "observedSha256": "69d7e24cef8e805f3e95b36284f538fbeaefbbd7dee2fd256ab669fab65efc61",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T030_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3231174,
+      "expectedSha256": "9b76f294fd618b204c1f3460a8c8b7e15bc180df8e6e3c650b2ab05e42079507",
+      "kind": "INTERIOR_CHAIR_ADAPT_T030_M0_R1",
+      "match": true,
+      "observedBytes": 3231174,
+      "observedSha256": "9b76f294fd618b204c1f3460a8c8b7e15bc180df8e6e3c650b2ab05e42079507",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T030_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3233700,
+      "expectedSha256": "03a8b2b6e351f587fb3d208e9a2208748c6e922c0bb2d21c3961388d0d17e339",
+      "kind": "TABLETOP_WIDE_ADAPT_T030_M32_R1",
+      "match": true,
+      "observedBytes": 3233700,
+      "observedSha256": "03a8b2b6e351f587fb3d208e9a2208748c6e922c0bb2d21c3961388d0d17e339",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T030_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3231174,
+      "expectedSha256": "9464b252b28b877d7584f8894aa3750afb46925f43076229a693586e1c020980",
+      "kind": "INTERIOR_CHAIR_ADAPT_T030_M32_R1",
+      "match": true,
+      "observedBytes": 3231174,
+      "observedSha256": "9464b252b28b877d7584f8894aa3750afb46925f43076229a693586e1c020980",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T030_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3208604,
+      "expectedSha256": "741cff0e9ed5f4473e56647c25a73d2d4a38d570c96851d6a81a7194bb1ea7de",
+      "kind": "TABLETOP_WIDE_ADAPT_T050_M0_R1",
+      "match": true,
+      "observedBytes": 3208604,
+      "observedSha256": "741cff0e9ed5f4473e56647c25a73d2d4a38d570c96851d6a81a7194bb1ea7de",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T050_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3160863,
+      "expectedSha256": "89841a37d8ca3c870b8faf5f39ea113e353edf400de0a5c0ba93ee206c84ff00",
+      "kind": "INTERIOR_CHAIR_ADAPT_T050_M0_R1",
+      "match": true,
+      "observedBytes": 3160863,
+      "observedSha256": "89841a37d8ca3c870b8faf5f39ea113e353edf400de0a5c0ba93ee206c84ff00",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T050_M0_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3208604,
+      "expectedSha256": "01d8097cde69fd8ed95729486711e4fcf1cafb2bb4de0c734847b55a9f117c39",
+      "kind": "TABLETOP_WIDE_ADAPT_T050_M32_R1",
+      "match": true,
+      "observedBytes": 3208604,
+      "observedSha256": "01d8097cde69fd8ed95729486711e4fcf1cafb2bb4de0c734847b55a9f117c39",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T050_M32_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3160863,
+      "expectedSha256": "c41a2fd8a923d55c35f86167c23449dcc16568245fd1784600ee5ff5fddd055e",
+      "kind": "INTERIOR_CHAIR_ADAPT_T050_M32_R1",
+      "match": true,
+      "observedBytes": 3160863,
+      "observedSha256": "c41a2fd8a923d55c35f86167c23449dcc16568245fd1784600ee5ff5fddd055e",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T050_M32_R1/artifacts/production.exr"
+    }
+  ],
+  "specObservation": {
+    "expectedBytes": null,
+    "expectedSha256": "e8635a1507eb5a5e8bfd950dc02fc4630a7202fd9af14b5510a991359f2e439f",
+    "kind": "D4_SPEC",
+    "match": true,
+    "observedBytes": 14350,
+    "observedSha256": "e8635a1507eb5a5e8bfd950dc02fc4630a7202fd9af14b5510a991359f2e439f",
+    "uri": "specs/adaptive-vector-blur-semantics-derivation.v0.1.json"
+  },
+  "toolFreezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+  "tools": {
+    "analysisContractTest": {
+      "freezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+      "sha256": "69f44c46eee141e8530a3fb725b0823e028da69dbd435060a31e3a55059b699f",
+      "uri": "tests/test_b52_d4_analysis_contract.py"
+    },
+    "analysisLibrary": {
+      "freezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+      "sha256": "058322e62c850a1b2172b32fc3a5b28bc86580aff39ef15bf8c039011f56053f",
+      "uri": "scripts/analyze-b52-native-cpu-adaptive-quality-cost.py"
+    },
+    "analyzer": {
+      "freezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+      "sha256": "a94045f4dc12bcec0812bf7cd4f4b86ac7de2b5730a12ae5dca26c4eb960527b",
+      "uri": "scripts/analyze-b52-d4-adaptive-vector-blur-semantics.py"
+    },
+    "audit": {
+      "freezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+      "sha256": "34583e834daa6f32df5669150b9613941e3ef1019456e69e7f2ef4edaff61e7d",
+      "uri": "scripts/audit-b52-d4-adaptive-vector-blur-semantics.py"
+    },
+    "blenderWorker": {
+      "freezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+      "sha256": "bfd8fbb526869e64638330918c2a3555b818dbe5765f09afb4b1a95784b9af9b",
+      "uri": "blender/render_b52_d4_vector_blur.py"
+    },
+    "d3AnalysisLibrary": {
+      "freezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+      "sha256": "443e5f0f682c5e951f7e7b283fc2b3941cf3b8b356749a61d9de2bd55adee209",
+      "uri": "scripts/analyze-b52-d3-adaptive-payload-semantics.py"
+    },
+    "runner": {
+      "freezeCommit": "6d64a5ca2f2b4a83bc9f51fa2054133639c3e762",
+      "sha256": "d37900962012425d9dfb9060e7af508f262b6e9e1390ba972c2c3857a95c524f",
+      "uri": "scripts/run-b52-d4-adaptive-vector-blur-semantics.py"
+    }
+  },
+  "vectorTaskTolerableProfiles": [],
+  "verdict": "ADAPTIVE_VECTOR_BLUR_SEMANTICS_DERIVATION_INVALID"
+}

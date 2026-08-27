@@ -1,0 +1,96 @@
+{
+  "blender": {
+    "buildHash": "fbe6228777e7",
+    "buildPlatform": "Darwin",
+    "version": "5.2.0 LTS"
+  },
+  "cellId": "INTERIOR_CHAIR_ADAPT_T020_M0_C1",
+  "elapsedSeconds": 1.568837,
+  "experimentId": "B52-D4",
+  "graph": {
+    "links": [
+      "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+      "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+      "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+      "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+    ],
+    "match": true,
+    "nodeCount": 4
+  },
+  "inputs": {
+    "baseline": {
+      "sha256": "0ac9a84fffaa76d6ba5a91a35c9e03e0bd01836bfb23b4121fe3f6b775f251ce",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_PROD_T010_M0_R1/artifacts/production.exr"
+    },
+    "depthPass": "Depth",
+    "imagePass": "Combined",
+    "speedPass": "Vector",
+    "speedSource": {
+      "sha256": "e63ac3252990de425b370a4e47c69239c48f92201c71b6c87f3b2cbd45329bd8",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/INTERIOR_CHAIR_ADAPT_T020_M0_R1/artifacts/production.exr"
+    }
+  },
+  "operationCounts": {
+    "blenderProcesses": 1,
+    "blenderRenderCalls": 1,
+    "cyclesRayRenders": 0,
+    "parentExrsModified": 0,
+    "sourceBlendFilesModified": 0,
+    "sourceBlendFilesOpened": 0
+  },
+  "output": {
+    "bytes": 1721886,
+    "sha256": "ebe1cf16e1f8affa331f10ceb5dd573da7fca7f4195c5927d57d34da37c5027f",
+    "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/INTERIOR_CHAIR_ADAPT_T020_M0_C1/vector-blur.exr"
+  },
+  "pid": 95490,
+  "profileId": "ADAPT_T020_M0",
+  "repeat": 1,
+  "reportHash": "4d4ebc58bb4cfb52f2e6e9544354947912f80fde766282aeb188151c9d1a8107",
+  "rna": {
+    "inputs": [
+      {
+        "identifier": "Image",
+        "name": "Image",
+        "type": "RGBA"
+      },
+      {
+        "identifier": "Speed",
+        "name": "Speed",
+        "type": "VECTOR"
+      },
+      {
+        "identifier": "Z",
+        "name": "Depth",
+        "type": "VALUE"
+      },
+      {
+        "identifier": "Samples",
+        "name": "Samples",
+        "type": "INT"
+      },
+      {
+        "identifier": "Shutter",
+        "name": "Shutter",
+        "type": "VALUE"
+      }
+    ],
+    "match": true
+  },
+  "runtime": {
+    "compositorDevice": "CPU",
+    "engine": "BLENDER_WORKBENCH",
+    "threads": 4,
+    "threadsMode": "FIXED"
+  },
+  "schemaVersion": "bfs.adaptiveVectorBlurCellReport.v0.1",
+  "sourcePost": {
+    "baselineSha256": "0ac9a84fffaa76d6ba5a91a35c9e03e0bd01836bfb23b4121fe3f6b775f251ce",
+    "speedSha256": "e63ac3252990de425b370a4e47c69239c48f92201c71b6c87f3b2cbd45329bd8"
+  },
+  "variantId": "INTERIOR_CHAIR",
+  "vectorBlur": {
+    "Samples": 32,
+    "Shutter": 0.5
+  }
+}

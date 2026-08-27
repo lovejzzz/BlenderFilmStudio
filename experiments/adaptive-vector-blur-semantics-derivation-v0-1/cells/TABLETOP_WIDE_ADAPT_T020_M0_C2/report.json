@@ -1,0 +1,96 @@
+{
+  "blender": {
+    "buildHash": "fbe6228777e7",
+    "buildPlatform": "Darwin",
+    "version": "5.2.0 LTS"
+  },
+  "cellId": "TABLETOP_WIDE_ADAPT_T020_M0_C2",
+  "elapsedSeconds": 1.553242,
+  "experimentId": "B52-D4",
+  "graph": {
+    "links": [
+      "BFS_BASELINE.Combined->BFS_VECTOR_BLUR.Image",
+      "BFS_BASELINE.Depth->BFS_VECTOR_BLUR.Z",
+      "BFS_SPEED_SOURCE.Vector->BFS_VECTOR_BLUR.Speed",
+      "BFS_VECTOR_BLUR.Image->BFS_GROUP_OUTPUT.Socket_0"
+    ],
+    "match": true,
+    "nodeCount": 4
+  },
+  "inputs": {
+    "baseline": {
+      "sha256": "16f13105e60ada167b559b27dfdcd61095030b0eb8ebb5dfb0d81e9d16af2ee2",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_PROD_T010_M0_R1/artifacts/production.exr"
+    },
+    "depthPass": "Depth",
+    "imagePass": "Combined",
+    "speedPass": "Vector",
+    "speedSource": {
+      "sha256": "4feac696b885938f0fe1d9110196ae7ac46bfb895784385fe1f5362aaa58505a",
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_ADAPT_T020_M0_R1/artifacts/production.exr"
+    }
+  },
+  "operationCounts": {
+    "blenderProcesses": 1,
+    "blenderRenderCalls": 1,
+    "cyclesRayRenders": 0,
+    "parentExrsModified": 0,
+    "sourceBlendFilesModified": 0,
+    "sourceBlendFilesOpened": 0
+  },
+  "output": {
+    "bytes": 1144592,
+    "sha256": "47544b0b15112ef0f2859ffe7edbe01fad5340630eb97d126fa48187cc67192b",
+    "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/cells/TABLETOP_WIDE_ADAPT_T020_M0_C2/vector-blur.exr"
+  },
+  "pid": 95473,
+  "profileId": "ADAPT_T020_M0",
+  "repeat": 2,
+  "reportHash": "e5ab8da1679b4ea56e9f80524a3761b003f5ae90d8a041ca7d6d5a68045e9075",
+  "rna": {
+    "inputs": [
+      {
+        "identifier": "Image",
+        "name": "Image",
+        "type": "RGBA"
+      },
+      {
+        "identifier": "Speed",
+        "name": "Speed",
+        "type": "VECTOR"
+      },
+      {
+        "identifier": "Z",
+        "name": "Depth",
+        "type": "VALUE"
+      },
+      {
+        "identifier": "Samples",
+        "name": "Samples",
+        "type": "INT"
+      },
+      {
+        "identifier": "Shutter",
+        "name": "Shutter",
+        "type": "VALUE"
+      }
+    ],
+    "match": true
+  },
+  "runtime": {
+    "compositorDevice": "CPU",
+    "engine": "BLENDER_WORKBENCH",
+    "threads": 4,
+    "threadsMode": "FIXED"
+  },
+  "schemaVersion": "bfs.adaptiveVectorBlurCellReport.v0.1",
+  "sourcePost": {
+    "baselineSha256": "16f13105e60ada167b559b27dfdcd61095030b0eb8ebb5dfb0d81e9d16af2ee2",
+    "speedSha256": "4feac696b885938f0fe1d9110196ae7ac46bfb895784385fe1f5362aaa58505a"
+  },
+  "variantId": "TABLETOP_WIDE",
+  "vectorBlur": {
+    "Samples": 32,
+    "Shutter": 0.5
+  }
+}
