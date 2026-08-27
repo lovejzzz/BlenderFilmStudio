@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "bfs.adaptiveVectorBlurSemanticsPreflight.v0.1",
+  "experimentId": "B52-D4-PREFLIGHT",
+  "date": "2026-08-27",
+  "classification": "EXPLORATORY_INTERFACE_DERIVATION_ONLY",
+  "runtime": {
+    "blenderExecutable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "blenderExecutableBytes": 183237520,
+    "blenderExecutableSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "version": "5.2.0 LTS",
+    "buildHash": "fbe6228777e7",
+    "buildPlatform": "Darwin"
+  },
+  "legacyApiProbe": {
+    "exitCode": 1,
+    "attempt": "set Scene.use_nodes and access Scene.node_tree under --python-exit-code 1",
+    "observation": "Scene.use_nodes emitted a removal warning and Scene.node_tree raised AttributeError",
+    "meaning": "a Blender 4.x compositor script cannot be assumed valid in Blender 5.2"
+  },
+  "blender52ApiProbe": {
+    "exitCode": 0,
+    "construction": [
+      "bpy.data.node_groups.new(name, 'CompositorNodeTree')",
+      "scene.compositing_node_group = tree",
+      "tree.nodes.new('CompositorNodeVecBlur')"
+    ],
+    "nodeType": "CompositorNodeVecBlur",
+    "inputContract": [
+      {"identifier": "Image", "name": "Image", "type": "RGBA"},
+      {"identifier": "Speed", "name": "Speed", "type": "VECTOR"},
+      {"identifier": "Z", "name": "Depth", "type": "VALUE"},
+      {"identifier": "Samples", "name": "Samples", "type": "INT", "default": 32},
+      {"identifier": "Shutter", "name": "Shutter", "type": "VALUE", "default": 0.5}
+    ],
+    "outputContract": [
+      {"identifier": "Image", "name": "Image", "type": "RGBA"}
+    ],
+    "legacyNodeOptionPropertiesPresent": false
+  },
+  "multilayerInputProbe": {
+    "exitCode": 0,
+    "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/TABLETOP_WIDE_PROD_T010_M0_R1/artifacts/production.exr",
+    "sha256": "16f13105e60ada167b559b27dfdcd61095030b0eb8ebb5dfb0d81e9d16af2ee2",
+    "imageType": "MULTILAYER",
+    "colorspace": "ACEScg",
+    "socketRoster": [
+      "Combined",
+      "Alpha",
+      "Depth",
+      "Normal",
+      "Vector",
+      "CryptoObject00",
+      "CryptoObject01",
+      "CryptoObject02",
+      "Debug Sample Count"
+    ],
+    "fileOutputContract": "Blender 5.2 File Output begins with an extension socket and uses file_output_items; the formal tool will use the compositor Group Output and scene render output instead"
+  },
+  "executionDeviceProbe": {
+    "exitCode": 0,
+    "renderCompositorDevicePropertyPresent": true,
+    "factoryDefault": "GPU",
+    "factoryThreadsMode": "AUTO",
+    "factoryThreads": 16,
+    "formalChoice": "CPU compositor with FIXED 4 threads"
+  },
+  "normativeSources": [
+    "https://developer.blender.org/docs/release_notes/5.0/migration/compositor_migration/",
+    "https://docs.blender.org/api/5.2/bpy.types.Scene.html",
+    "https://docs.blender.org/manual/en/5.2/compositing/types/filter/blur/vector_blur.html",
+    "https://docs.blender.org/manual/en/5.2/render/layers/passes.html"
+  ],
+  "operationCounts": {
+    "blenderProcesses": 5,
+    "renderCalls": 0,
+    "cyclesRayRenders": 0,
+    "imagesWritten": 0,
+    "formalCandidateMeasurements": 0
+  },
+  "nonClaims": [
+    "Vector Blur compositor execution works headlessly",
+    "Vector Blur output identity or quality",
+    "candidate equivalence",
+    "production safety"
+  ]
+}

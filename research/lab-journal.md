@@ -1689,6 +1689,22 @@ Next: B52-D4 should preregister magnitude-weighted Normal/Vector localization an
 
 Artifacts: `experiments/adaptive-payload-semantics-derivation-v0-1/` and `research/2026-08-27-b52-d3-adaptive-payload-semantics-derivation-result.md`.
 
+## J-102 · B52-D4 freezes a real Blender 5.2 Vector Blur task
+
+Date: 2026-08-27 · Type: PREREGISTERED COMPOSITOR DERIVATION · Formal outputs: 0
+
+D3 left one narrow ambiguity. Candidate Vector endpoint errors were far below the frozen p99 and maximum limits, but exact nonzero-support counts and changed-pixel localization rejected every pair. D4 asks whether those small payload differences materially change Blender's designated downstream Vector Blur task when baseline Combined and Depth are held fixed.
+
+Five zero-render interface probes preceded preregistration and are explicitly exploratory. The first preserved failure is important: the Blender 4.x `Scene.node_tree` path no longer exists in Blender 5.2. The valid API creates an independent `CompositorNodeTree`, binds it through `Scene.compositing_node_group`, addresses Vector Blur inputs by `Image`, `Speed`, `Z`, `Samples` and `Shutter` identifiers, and terminates at Group Output. The retained D2 multipart EXR exposes the expected Combined, Depth and Vector sockets. Factory compositor execution defaults to GPU, so the formal contract explicitly uses CPU and four fixed threads.
+
+The frozen matrix is two variants × baseline plus eight candidates × two fresh processes: 36 Blender 5.2 compositor outputs. Every graph receives baseline Combined and baseline Depth; only the Vector source varies. Samples are 32 and Shutter is 0.5. Each process starts from factory state, opens no source `.blend`, writes one RGBA32 ZIP EXR and counts its render call honestly, while Cycles ray renders remain zero.
+
+Input Vector and output RGB errors use squared-energy localization inside a motion-radius-dilated Cryptomatte boundary. The output gates are fixed before output exists: p99 `1/1024`, maximum `1/255`, RMSE `1/4096`, alpha maximum `1/65536`, at least 95% input/output error energy inside the influence domain and zero outside-domain pixels above `1/4096`. A profile must pass both variants and exact decoded repeats. Passing can only propose a Vector contract; it cannot revise D2/D3, Normal, Crypto or INTERIOR beauty.
+
+The first formal D4 compositor output does not yet exist. Next: freeze runner, Blender graph compiler, analyzer, independent audit and synthetic attacks before executing the 36-process matrix.
+
+Artifacts: `specs/adaptive-vector-blur-semantics-derivation.v0.1.json`, `experiments/adaptive-vector-blur-semantics-preflight-v0-1/observation.json` and `research/2026-08-27-b52-d4-adaptive-vector-blur-semantics-derivation-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

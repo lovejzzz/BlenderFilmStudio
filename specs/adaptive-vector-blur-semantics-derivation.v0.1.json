@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "bfs.adaptiveVectorBlurSemanticsDerivationSpec.v0.1",
+  "experimentId": "B52-D4",
+  "status": "PREREGISTERED",
+  "question": "When baseline Combined and Depth are held fixed, do the non-exact Vector payloads retained by B52-D2 materially change a frozen Blender 5.2 Vector Blur result, and can magnitude-weighted error localization replace D3's exact nonzero-support count as a falsifiable proposal for a future holdout?",
+  "designClass": "known-input Blender compositor task-semantics derivation with zero new Cycles sampling",
+  "parentDisclosure": "All B52-D2 and B52-D3 measurements were observed before this derivation. B52-D4 is exploratory/derivational, creates new compositor outputs from retained EXRs, and may only propose a Vector task contract for a later fresh-seed holdout.",
+  "parents": {
+    "d3Spec": {
+      "uri": "specs/adaptive-payload-semantics-derivation.v0.1.json",
+      "sha256": "88f9284e014a5c4020aed374eef306cf22ed1c1badf5e680d93a919038526b7d"
+    },
+    "d3Receipt": {
+      "uri": "experiments/adaptive-payload-semantics-derivation-v0-1/run.receipt.json",
+      "sha256": "337d2c3a54b4818164b77cb894a9802d86219ea4db12d76f8dc7e0cc96439952"
+    },
+    "d3Result": {
+      "uri": "experiments/adaptive-payload-semantics-derivation-v0-1/results.json",
+      "sha256": "a4da9fe19e08e5181bc75723fa04ab5961fbe1c48f25748a56a65e75df429739",
+      "verdict": "ADAPTIVE_PAYLOAD_SEMANTICS_DERIVATION_USABLE",
+      "futureHoldoutCandidates": []
+    },
+    "d3Audit": {
+      "uri": "experiments/adaptive-payload-semantics-derivation-v0-1/audit.json",
+      "sha256": "c1b9c61cbef701f58797d3ddc898cb54e3d10b52a3b422abfddf3e21b37bd5cc",
+      "status": "PASS"
+    },
+    "interfacePreflight": {
+      "uri": "experiments/adaptive-vector-blur-semantics-preflight-v0-1/observation.json",
+      "sha256": "0e58246b453131c02ce5fe2fef4b726a92ac9e6b3cde6d5c0099657e2dfb64fb",
+      "classification": "EXPLORATORY_INTERFACE_DERIVATION_ONLY"
+    }
+  },
+  "normativeSources": {
+    "vectorPass": {
+      "uri": "https://docs.blender.org/manual/en/5.2/render/layers/passes.html",
+      "claims": [
+        "Vector contains four components representing two screen-space motion vectors based on next and previous frames.",
+        "The Vector pass is intended for the Vector Blur node."
+      ]
+    },
+    "vectorBlur": {
+      "uri": "https://docs.blender.org/manual/en/5.2/compositing/types/filter/blur/vector_blur.html",
+      "claims": [
+        "Vector Blur consumes Combined Image, Vector Speed and Depth.",
+        "Samples is a quality factor and Shutter is exposure duration.",
+        "The 2D pass cannot recover hidden or off-camera 3D information and may produce artifacts."
+      ]
+    },
+    "compositorMigration": {
+      "uri": "https://developer.blender.org/docs/release_notes/5.0/migration/compositor_migration/",
+      "claims": [
+        "The compositor tree is an independent data block assigned through Scene.compositing_node_group.",
+        "Node options moved to identifier-addressed input sockets.",
+        "Group Output replaces the removed Composite node."
+      ]
+    },
+    "sceneApi": {
+      "uri": "https://docs.blender.org/api/5.2/bpy.types.Scene.html",
+      "claims": [
+        "Scene.compositing_node_group is the Blender 5.2 compositor node tree binding.",
+        "Scene.use_nodes is deprecated and has no effect."
+      ]
+    }
+  },
+  "runtime": {
+    "blenderExecutable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "blenderExecutableBytes": 183237520,
+    "blenderExecutableSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "version": "5.2.0 LTS",
+    "buildHash": "fbe6228777e7",
+    "buildPlatform": "Darwin",
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5"
+    },
+    "launchFlags": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--python-exit-code",
+      "1"
+    ],
+    "compositorDevice": "CPU",
+    "threadsMode": "FIXED",
+    "threads": 4,
+    "environmentAllowlist": [
+      "PATH",
+      "LANG",
+      "LC_ALL",
+      "OCIO",
+      "TMPDIR",
+      "BLENDER_USER_CONFIG",
+      "BLENDER_USER_SCRIPTS"
+    ]
+  },
+  "inputs": {
+    "parentOutputRoot": "experiments/native-cpu-adaptive-production-holdout-v0-1",
+    "baselineProfile": "PROD_T010_M0",
+    "candidateProfiles": [
+      "ADAPT_T015_M0",
+      "ADAPT_T015_M32",
+      "ADAPT_T020_M0",
+      "ADAPT_T020_M32",
+      "ADAPT_T030_M0",
+      "ADAPT_T030_M32",
+      "ADAPT_T050_M0",
+      "ADAPT_T050_M32"
+    ],
+    "variants": [
+      "TABLETOP_WIDE",
+      "INTERIOR_CHAIR"
+    ],
+    "verifiedParentArtifacts": 54,
+    "sourceRepeat": 1,
+    "candidateBaselinePairs": 16,
+    "isolation": {
+      "image": "always the variant's PROD_T010_M0_R1 Combined pass",
+      "depth": "always the variant's PROD_T010_M0_R1 Depth pass",
+      "speed": "the cell profile's repeat-1 Vector pass; baseline cells use PROD_T010_M0_R1",
+      "excludedCandidateInputs": [
+        "candidate Combined",
+        "candidate Depth",
+        "candidate Normal",
+        "candidate Cryptomatte",
+        "candidate Sample Count"
+      ]
+    }
+  },
+  "compositorMatrix": {
+    "profilesIncludingBaseline": 9,
+    "variants": 2,
+    "freshProcessRepeats": 2,
+    "expectedBlenderProcesses": 36,
+    "expectedCompositorOutputs": 36,
+    "expectedUniquePids": 36,
+    "nodeGraph": {
+      "treeType": "CompositorNodeTree",
+      "sceneBinding": "Scene.compositing_node_group",
+      "nodes": [
+        "CompositorNodeImage:baseline",
+        "CompositorNodeImage:speedSource",
+        "CompositorNodeVecBlur",
+        "NodeGroupOutput"
+      ],
+      "links": [
+        "baseline.Combined -> VectorBlur.Image",
+        "speedSource.Vector -> VectorBlur.Speed",
+        "baseline.Depth -> VectorBlur.Z",
+        "VectorBlur.Image -> GroupOutput.Image"
+      ],
+      "vectorBlurInputs": {
+        "Samples": 32,
+        "Shutter": 0.5
+      },
+      "identifierAddressingRequired": true,
+      "legacySceneNodeTreeForbidden": true
+    },
+    "renderShell": {
+      "engine": "BLENDER_WORKBENCH",
+      "sceneContent": "fresh empty scene with one generated camera; no source blend is opened",
+      "resolution": [512, 288],
+      "resolutionPercentage": 100,
+      "pixelAspect": [1, 1],
+      "filmTransparent": true,
+      "renderUseCompositing": true,
+      "output": {
+        "fileFormat": "OPEN_EXR",
+        "colorMode": "RGBA",
+        "colorDepth": "32",
+        "exrCodec": "ZIP"
+      },
+      "interpretation": "bpy.ops.render.render is used only to evaluate the compositor and write its Group Output; it is counted as a Blender render call but not as a Cycles scene-sampling render"
+    }
+  },
+  "repeatContract": {
+    "comparison": "decoded float32 RGBA arrays from the two fresh-process outputs of each profile × variant cell",
+    "required": "shape, finite mask and every decoded channel are exact",
+    "containerByteIdentityRequired": false,
+    "containerNonIdentityInterpretation": "metadata or container variation is recorded but cannot fail decoded repeat identity"
+  },
+  "baselineEffectGate": {
+    "comparison": "baseline Vector Blur output versus the same baseline Combined input",
+    "domain": "all finite RGB pixels",
+    "minimumChangedPixelsAbove": {
+      "absoluteError": 0.0000152587890625,
+      "count": 1
+    },
+    "requiredVariants": 2,
+    "failureMeaning": "the chosen compositor task is non-informative for the retained scenes"
+  },
+  "influenceRegion": {
+    "boundarySeeds": "reuse the exact D3 baseline Cryptomatte boundary seeds",
+    "baselineMotionMagnitude": "per-pixel maximum of Euclidean norm(X,Y) and Euclidean norm(Z,W) from baseline Vector",
+    "dilationMetric": "Chebyshev",
+    "radiusFormulaPixels": "ceil(maximum finite baseline motion magnitude * Shutter) + 1",
+    "radiusMinimumPixels": 1,
+    "radiusMaximumPixels": 64,
+    "radiusOverflow": "INVALID because a larger unregistered influence domain would be required"
+  },
+  "vectorMagnitudeTask": {
+    "pairing": {
+      "pairA": ["X", "Y"],
+      "pairB": ["Z", "W"],
+      "directionNonClaim": "Neither pair is labeled previous or next; Blender Vector Blur consumes the full four-channel socket."
+    },
+    "perPixelError": "maximum of candidate-baseline Euclidean endpoint error for pairA and pairB",
+    "energy": "sum of squared per-pixel error in float64 accumulation",
+    "zeroEnergyConvention": "influenceRegionEnergyFraction = 1 when total energy is exactly zero",
+    "measurements": [
+      "endpointErrorP50",
+      "endpointErrorP95",
+      "endpointErrorP99",
+      "endpointErrorMaximum",
+      "endpointErrorRmse",
+      "changedPixelsAbove1Over65536",
+      "changedPixelsAbove1Over4096",
+      "totalSquaredEnergy",
+      "influenceRegionSquaredEnergy",
+      "influenceRegionEnergyFraction",
+      "stableInteriorSquaredEnergy",
+      "stableInteriorEnergyFraction"
+    ]
+  },
+  "blurOutputTask": {
+    "comparison": "candidate-speed compositor output versus baseline-speed compositor output with baseline Combined and Depth held identical",
+    "domain": "all finite 512x288 pixels",
+    "rgbPerPixelError": "maximum absolute error across scene-linear RGB",
+    "energy": "sum of squared rgbPerPixelError in float64 accumulation",
+    "measurements": [
+      "rgbAbsoluteErrorP50",
+      "rgbAbsoluteErrorP95",
+      "rgbAbsoluteErrorP99",
+      "rgbAbsoluteErrorMaximum",
+      "rgbRmse",
+      "alphaAbsoluteErrorMaximum",
+      "changedPixelsAbove1Over65536",
+      "changedPixelsAbove1Over4096",
+      "totalSquaredEnergy",
+      "influenceRegionSquaredEnergy",
+      "influenceRegionEnergyFraction",
+      "outsideInfluencePixelsAbove1Over4096"
+    ],
+    "derivationClassifier": {
+      "vectorInfluenceRegionEnergyFractionMinimum": 0.95,
+      "rgbAbsoluteErrorP99Maximum": 0.0009765625,
+      "rgbAbsoluteErrorMaximum": 0.00392156862745098,
+      "rgbRmseMaximum": 0.000244140625,
+      "alphaAbsoluteErrorMaximum": 0.0000152587890625,
+      "blurInfluenceRegionEnergyFractionMinimum": 0.95,
+      "outsideInfluencePixelsAbove1Over4096": 0
+    },
+    "thresholdRationale": "The 95% localization rule carries D3's preregistered fraction into an energy domain. RGB gates freeze one code value maximum, sub-code p99 and quarter-sub-code RMSE before compositor outputs exist. They are engineering thresholds, not human visibility thresholds."
+  },
+  "diagnostics": {
+    "profiles": [
+      "ADAPT_T015_M0",
+      "ADAPT_T020_M32",
+      "ADAPT_T050_M32"
+    ],
+    "variants": 2,
+    "mapsPerPair": [
+      "vector-endpoint-error",
+      "vector-blur-rgb-maximum-absolute-error"
+    ],
+    "pngCount": 12,
+    "mappings": {
+      "vector-endpoint-error": {
+        "minimum": 0.0,
+        "clipMaximum": 0.0009765625,
+        "unit": "render-pass endpoint units"
+      },
+      "vector-blur-rgb-maximum-absolute-error": {
+        "minimum": 0.0,
+        "clipMaximum": 0.00392156862745098,
+        "unit": "scene-linear absolute RGB"
+      }
+    },
+    "encoding": {
+      "normalization": "t = clip((value - minimum) / (clipMaximum - minimum), 0, 1)",
+      "rgb": ["R = t", "G = t * t", "B = 0"],
+      "quantization": "round-to-nearest uint8 after multiplication by 255",
+      "fileFormat": "PNG RGB8"
+    },
+    "sidecar": "one canonical JSON file per PNG binding map kind, source/output identities, mapping, decoded-value SHA-256 and PNG SHA-256"
+  },
+  "decisionRule": {
+    "usableVerdict": "ADAPTIVE_VECTOR_BLUR_SEMANTICS_DERIVATION_USABLE",
+    "invalidVerdict": "ADAPTIVE_VECTOR_BLUR_SEMANTICS_DERIVATION_INVALID",
+    "vectorTaskTolerableProfile": "the profile passes every blurOutputTask derivation classifier on both variants and both output repeats are decoded exact",
+    "noProfileIsStillUsable": true,
+    "promotionBoundary": "a tolerable profile is only a proposed Vector contract; it cannot become a B52-D2 production candidate, override D3 Normal/Crypto failures, or bypass INTERIOR beauty"
+  },
+  "evidenceGates": {
+    "parentIdentity": true,
+    "preflightIdentity": true,
+    "all54ParentArtifactIdentities": true,
+    "blenderIdentity": true,
+    "ocioIdentity": true,
+    "blender52RnaContract": true,
+    "processRoster": true,
+    "outputTotality": true,
+    "decodedRepeatIdentity": true,
+    "baselineEffect": true,
+    "measurementTotality": true,
+    "diagnosticIdentity": true,
+    "sourceAndParentImmutability": true,
+    "independentReplay": true,
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "268435456"
+  },
+  "outputRoot": "experiments/adaptive-vector-blur-semantics-derivation-v0-1",
+  "operationBoundary": {
+    "parentFilesHashed": 59,
+    "existingParentExrsVerified": 54,
+    "sourceExrsUsedByCompositor": 18,
+    "blenderProcesses": 36,
+    "blenderRenderCalls": 36,
+    "cyclesRayRenders": 0,
+    "compositorOutputsWritten": 36,
+    "candidateBaselinePairsAnalyzed": 16,
+    "diagnosticPngsWritten": 12,
+    "sourceBlendFilesOpened": 0,
+    "sourceBlendFilesModified": 0,
+    "parentExrsModified": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "PARENT_ARTIFACT_IDENTITY",
+    "BLENDER_IDENTITY",
+    "OCIO_IDENTITY",
+    "BLENDER52_RNA_CONTRACT",
+    "COMPOSITOR_GRAPH_CONTRACT",
+    "INPUT_ISOLATION",
+    "PROCESS_ROSTER",
+    "PROCESS_EXIT_STATUS",
+    "OUTPUT_TOTALITY",
+    "REPEAT_IDENTITY",
+    "BASELINE_EFFECT",
+    "VECTOR_ENERGY_TOTALITY",
+    "BLUR_MEASUREMENT_TOTALITY",
+    "DIAGNOSTIC_TOTALITY",
+    "CLASSIFICATION_REPLAY",
+    "OPERATION_BOUNDARY",
+    "SOURCE_IMMUTABILITY",
+    "EVIDENCE_SELF_HASH"
+  ],
+  "nonClaims": [
+    "retroactive B52-D2 or B52-D3 promotion",
+    "production-safe adaptive profile",
+    "physical 3D motion-blur equivalence",
+    "correct assignment of previous versus next Vector channel pair",
+    "human-visible equivalence",
+    "freedom from Vector Blur's documented 2D occlusion and off-camera artifacts",
+    "candidate Combined or candidate Depth quality",
+    "Normal or Cryptomatte acceptance",
+    "INTERIOR beauty acceptance",
+    "unseen-seed, unseen-frame, unseen-scene, 2K or 4K generalization",
+    "render-cost improvement"
+  ]
+}
