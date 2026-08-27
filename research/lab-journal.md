@@ -1673,6 +1673,22 @@ The first machine-readable preregistration had SHA-256 `a1bec59991eac984cdfd1765
 
 Artifacts: `specs/adaptive-payload-semantics-derivation.v0.1.json` and `research/2026-08-27-b52-d3-adaptive-payload-semantics-derivation-protocol.md`.
 
+## J-101 · B52-D3 is usable, with zero future holdout candidates
+
+Date: 2026-08-27 · Type: ZERO-RERENDER DERIVATION · Blender processes: 0
+
+The D3 tools were frozen at commit `189857f2a74e235862006b542f6b6bf5087aff1d` after six synthetic tests passed, including all 13 attack routes and byte-deterministic PNG/sidecar generation. Only then did the formal analyzer open the 54 retained D2 EXRs.
+
+All 54 artifacts, eight-part rosters, two Cryptomatte manifests and 18 three-repeat groups passed identity and exactness checks. The analyzer measured 16 candidate–baseline pairs and wrote 18 fixed-scale diagnostic PNGs plus 18 canonical sidecars without launching Blender or rendering.
+
+Cryptomatte passed only TABLETOP `0.015/min0` and `0.02/min0`. Every pair had zero stable-interior dominant-ID mismatch, zero stable-interior hard-matte mismatch and 100% changed-alpha boundary localization, but INTERIOR and wider profiles exceeded the frozen composite/outlier amplitude limits. Normal and Vector passed 0/16. Normal maximum angle was 3.55–11.65 degrees and Lambertian maximum error 0.0599–0.1518. Vector endpoint magnitudes were far below their gates, yet INTERIOR had 530–890 stable-interior support mismatches and all changed-pixel localization fractions were only 3.19–6.61%.
+
+The formal verdict is `ADAPTIVE_PAYLOAD_SEMANTICS_DERIVATION_USABLE` with an empty future-candidate list. The independent audit replayed the result byte-exactly, matched 54/54 EXRs, 36/36 diagnostic artifacts, five frozen tools and 13/13 attacks. D2 remains a valid negative.
+
+Next: B52-D4 should preregister magnitude-weighted Normal/Vector localization and a deterministic downstream Vector Blur/warp task on the retained EXRs. It may propose a later holdout but cannot revise D2 or bypass the still-failing INTERIOR beauty gate.
+
+Artifacts: `experiments/adaptive-payload-semantics-derivation-v0-1/` and `research/2026-08-27-b52-d3-adaptive-payload-semantics-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
