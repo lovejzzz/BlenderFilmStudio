@@ -1,0 +1,4887 @@
+{
+  "schemaVersion": "bfs.linuxAmd64CompilerReproEvidence.v0.2",
+  "experimentId": "B42-C1",
+  "preregistration": {
+    "commit": "0ac2e80cb9e1c931baad7a140d403afce2c2d1bd",
+    "specSha256": "55c973a0b423960d93a8afcedc2c1881b6d386f6c2fb1c082ef13660a7a1fdd5"
+  },
+  "parent": {
+    "experimentId": "B41-D3",
+    "resultSha256": "67ea4b0e51d43ab5936e8c6b6890e07aba97918979fa1f0e349c7e98402865ef",
+    "auditSha256": "fa8f41464aebb54c78a4d4e824536d48724337226395bb893e731fbfc5419cda",
+    "classification": "CPU_ONLY_WORKER_CONFIRMED_EEVEE_GPU_ROUTE_ABSENT"
+  },
+  "correctionParent": {
+    "experimentId": "B42",
+    "specSha256": "9cfc3839ef61b9e000850f2ee112e22f5e816f5b8c6f0a4b3daede9bb6265fde",
+    "preregistrationCommit": "636552dccf7502d0af8d61673f54607280a86934",
+    "toolFreezeCommit": "a44d4f57e438ef691589300f485af14347bf9169",
+    "failureSha256": "d7ef08eccb28055ed6ad26d6579caec7a414da68f3b8282120efcbd94eaa32f2",
+    "failureCommit": "30b99da63938d31adba78fdd5debcbee60825ece",
+    "failureClass": "OCI_NESTED_MOUNTPOINT_ABSENT_AND_ANALYZER_NOT_FAILURE_TOTAL"
+  },
+  "toolFreezeCommit": "c685281e527b5d960fe0c0309f268d110c01b28f",
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b42-linux-amd64-compiler-repro.mjs",
+      "sha256": "4a14b40ed37f84f3624f2384214a128d8d09615cdd029bd3c54ed8cfdeca9ec6"
+    },
+    "library": {
+      "uri": "scripts/lib/b42-linux-amd64-compiler-repro.mjs",
+      "sha256": "f0fdbd44af98505cc81a61c49e16d40ba88426f9aaaacc0c075267402fdb8d70"
+    },
+    "audit": {
+      "uri": "scripts/audit-b42-linux-amd64-compiler-repro.mjs",
+      "sha256": "fb56d0a95c3d8b0c9053f6151a42babd20b40480b6e1439cd0f4dadd8c099103"
+    },
+    "planCompiler": {
+      "uri": "scripts/compile-build-plan.mjs",
+      "sha256": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413"
+    },
+    "sceneCompiler": {
+      "uri": "blender/compile_scene.py",
+      "sha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240"
+    }
+  },
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "sizeBytes": 1004901158
+  },
+  "diskAdmission": {
+    "availableBytes": "129286651904",
+    "projectedWriteBytes": "1073741824",
+    "minimumReserveBytes": "107374182400",
+    "freeAfterProjectedBytes": "128212910080",
+    "status": "ACCEPTED"
+  },
+  "securityBoundary": {
+    "platform": "linux/amd64",
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": [
+      "ALL"
+    ],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "wallTimeMs": 30000,
+    "killGraceMs": 5000
+  },
+  "benchmarks": [
+    {
+      "id": "B01",
+      "plans": [
+        {
+          "suffix": "A",
+          "uri": "experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B01-A.build-plan.json",
+          "fileSha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+          "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf"
+        },
+        {
+          "suffix": "B",
+          "uri": "experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B01-B.build-plan.json",
+          "fileSha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+          "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf"
+        }
+      ],
+      "planFilesByteEqual": true,
+      "runs": [
+        {
+          "id": "B01-A",
+          "containerName": "bfs-b42-b01-a",
+          "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+          "argv": [
+            "--host",
+            "unix:///Users/tianxing/.colima/default/docker.sock",
+            "run",
+            "--rm",
+            "--name",
+            "bfs-b42-b01-a",
+            "--platform",
+            "linux/amd64",
+            "--pull",
+            "never",
+            "--read-only",
+            "--network",
+            "none",
+            "--user",
+            "65532:65532",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges:true",
+            "--pids-limit",
+            "256",
+            "--memory",
+            "8589934592",
+            "--cpus",
+            "4",
+            "--shm-size",
+            "1073741824",
+            "--mount",
+            "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree,dst=/repo,readonly",
+            "--mount",
+            "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree/experiments/linux-amd64-compiler-repro-c1-v0-1/runs/B01-A,dst=/repo/worker-output",
+            "--tmpfs",
+            "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+            "--tmpfs",
+            "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+            "--env",
+            "BLENDER_USER_CONFIG=/work/blender-config",
+            "--env",
+            "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+            "--env",
+            "HOME=/work/home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "LC_ALL=C.UTF-8",
+            "--env",
+            "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+            "--env",
+            "TMPDIR=/work/tmp",
+            "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+            "--background",
+            "--factory-startup",
+            "--disable-autoexec",
+            "--offline-mode",
+            "--python-exit-code",
+            "1",
+            "--python",
+            "/repo/blender/compile_scene.py",
+            "--",
+            "--plan",
+            "/repo/experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B01-A.build-plan.json",
+            "--repository-root",
+            "/repo",
+            "--output-dir",
+            "/repo/worker-output"
+          ],
+          "exitCode": 0,
+          "signal": null,
+          "elapsedMs": 9685,
+          "stdout": "00:00.118  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.663  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.663  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.663  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.663  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.663  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nInfo: Saved as \"scene.blend\"\nBFS_COMPILE_OK SHOT_101 316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b /repo/worker-output/scene.manifest.json\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+          "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n",
+          "timeoutTriggered": false,
+          "termSent": false,
+          "killSent": false,
+          "observed": {
+            "manifest": {
+              "sha256": "26891ea0287fcd4124bd2a90a7a16060fadbbc385f2aff731439e81ec724657e",
+              "value": {
+                "documentType": "BFS_SCENE_MANIFEST",
+                "execution": {
+                  "blender": {
+                    "buildBranch": "blender-v5.2-release",
+                    "buildHash": "fbe6228777e7",
+                    "buildPlatform": "Linux",
+                    "version": "5.2.0 LTS"
+                  },
+                  "compiler": {
+                    "name": "BFS_SCENE_COMPILER",
+                    "targetApplication": "Blender",
+                    "targetVersion": "5.2.0",
+                    "version": "0.1.0"
+                  },
+                  "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                  "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+                  "planVersion": "0.1.0",
+                  "sourceSceneCanonicalSha256": "10d8ef02fbe71c0b44ca6fc93a25f7952cff605b31d40fc04f9c6029ee7119b0"
+                },
+                "manifestVersion": "0.2.0",
+                "structure": {
+                  "assetCollections": [
+                    {
+                      "name": "SET_STILL_LIFE",
+                      "objects": [
+                        {
+                          "location": [
+                            1.450000048,
+                            0.200000003,
+                            0.720000029
+                          ],
+                          "materials": [
+                            "MAT_GLASS"
+                          ],
+                          "mesh": {
+                            "edges": 96,
+                            "polygons": 34,
+                            "vertices": 64
+                          },
+                          "name": "GLASS_CYLINDER",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.899999976,
+                            0.899999976,
+                            1.450000048
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -1.450000048,
+                            0.200000003,
+                            0.550000012
+                          ],
+                          "materials": [
+                            "MAT_LEATHER"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "LEATHER_BLOCK",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            1.100000024,
+                            1.100000024,
+                            1.100000024
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            0.150000006,
+                            0.720000029
+                          ],
+                          "materials": [
+                            "MAT_BRUSHED_METAL"
+                          ],
+                          "mesh": {
+                            "edges": 992,
+                            "polygons": 512,
+                            "vertices": 482
+                          },
+                          "name": "METAL_SPHERE",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            1.350000024,
+                            1.350000024,
+                            1.350000024
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            1.049999952,
+                            0.519999981
+                          ],
+                          "materials": [
+                            "MAT_SKIN_REFERENCE"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "SKIN_TONE_CARD",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            1.549999952,
+                            0.119999997,
+                            1
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            0,
+                            -0.150000006
+                          ],
+                          "materials": [
+                            "MAT_NEUTRAL"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "STAGE",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            5,
+                            3.200000048,
+                            0.300000012
+                          ],
+                          "type": "MESH"
+                        }
+                      ]
+                    }
+                  ],
+                  "blender": {
+                    "buildHash": "fbe6228777e7",
+                    "version": "5.2.0 LTS"
+                  },
+                  "cameraSamples": [
+                    {
+                      "camera": "CAM_B01",
+                      "frame": 1,
+                      "location": [
+                        0,
+                        -8,
+                        3.200000048
+                      ],
+                      "rotationEuler": [
+                        1.186823845,
+                        0,
+                        0
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "compilerVersion": "0.1.0",
+                  "managedCollection": {
+                    "name": "BFS_SHOT",
+                    "objects": [
+                      {
+                        "animation": [],
+                        "camera": {
+                          "apertureFStop": 4,
+                          "focusDistanceM": 8.199999809,
+                          "lensMm": 58,
+                          "sensorWidthMm": 36
+                        },
+                        "location": [
+                          0,
+                          -8,
+                          3.200000048
+                        ],
+                        "name": "CAM_B01",
+                        "rotationEuler": [
+                          1.186823845,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "CAMERA"
+                      },
+                      {
+                        "light": {
+                          "color": [
+                            1,
+                            0.75999999,
+                            0.579999983
+                          ],
+                          "energy": 1200,
+                          "type": "AREA"
+                        },
+                        "location": [
+                          -3.200000048,
+                          -2.400000095,
+                          5
+                        ],
+                        "name": "KEY_LARGE",
+                        "rotationEuler": [
+                          0.488692194,
+                          0,
+                          -0.663225114
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "LIGHT"
+                      },
+                      {
+                        "light": {
+                          "color": [
+                            0.349999994,
+                            0.519999981,
+                            1
+                          ],
+                          "energy": 750,
+                          "type": "AREA"
+                        },
+                        "location": [
+                          3,
+                          1.5,
+                          3.799999952
+                        ],
+                        "name": "RIM_COOL",
+                        "rotationEuler": [
+                          0.837758064,
+                          0,
+                          2.408554316
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "LIGHT"
+                      },
+                      {
+                        "instanceCollection": "SET_STILL_LIFE",
+                        "location": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "name": "SET_STILL_LIFE",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "EMPTY"
+                      }
+                    ]
+                  },
+                  "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+                  "render": {
+                    "colorDepth": "16",
+                    "cyclesAnimatedSeed": false,
+                    "cyclesDevice": "CPU",
+                    "cyclesSamples": 512,
+                    "cyclesSeed": 24082601,
+                    "display": "sRGB - Display",
+                    "engine": "CYCLES",
+                    "exrCodec": "ZIP",
+                    "fileFormat": "OPEN_EXR_MULTILAYER",
+                    "fps": 24,
+                    "fpsBase": 1,
+                    "frameRange": [
+                      1,
+                      1
+                    ],
+                    "ocioConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+                    "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                    "resolution": [
+                      3840,
+                      2160,
+                      100
+                    ],
+                    "sceneLinearRole": "ACEScg",
+                    "threads": 8,
+                    "threadsMode": "FIXED",
+                    "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+                  },
+                  "shot": {
+                    "activeCamera": "CAM_B01",
+                    "frameEnd": 1,
+                    "frameRate": {
+                      "denominator": 1,
+                      "numerator": 24
+                    },
+                    "frameStart": 1,
+                    "id": "SHOT_101",
+                    "seed": 24082601,
+                    "title": "B01 Material Still Life",
+                    "unitScaleMeters": 1
+                  }
+                },
+                "structureCanonical": {
+                  "bytes": 3130,
+                  "sha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+                  "uri": "scene.structure.canonical.json"
+                },
+                "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+                "telemetry": {
+                  "blendBytes": 117606,
+                  "compileSeconds": 0.229294
+                },
+                "warnings": [
+                  "ACES 2 OCIO config is pinned and verified; the physical review display is not yet calibrated by this experiment."
+                ]
+              }
+            },
+            "structure": {
+              "sha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+              "bytes": 3130,
+              "value": {
+                "assetCollections": [
+                  {
+                    "name": "SET_STILL_LIFE",
+                    "objects": [
+                      {
+                        "location": [
+                          1.450000048,
+                          0.200000003,
+                          0.720000029
+                        ],
+                        "materials": [
+                          "MAT_GLASS"
+                        ],
+                        "mesh": {
+                          "edges": 96,
+                          "polygons": 34,
+                          "vertices": 64
+                        },
+                        "name": "GLASS_CYLINDER",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.899999976,
+                          0.899999976,
+                          1.450000048
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -1.450000048,
+                          0.200000003,
+                          0.550000012
+                        ],
+                        "materials": [
+                          "MAT_LEATHER"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "LEATHER_BLOCK",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1.100000024,
+                          1.100000024,
+                          1.100000024
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          0.150000006,
+                          0.720000029
+                        ],
+                        "materials": [
+                          "MAT_BRUSHED_METAL"
+                        ],
+                        "mesh": {
+                          "edges": 992,
+                          "polygons": 512,
+                          "vertices": 482
+                        },
+                        "name": "METAL_SPHERE",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1.350000024,
+                          1.350000024,
+                          1.350000024
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          1.049999952,
+                          0.519999981
+                        ],
+                        "materials": [
+                          "MAT_SKIN_REFERENCE"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "SKIN_TONE_CARD",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1.549999952,
+                          0.119999997,
+                          1
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          0,
+                          -0.150000006
+                        ],
+                        "materials": [
+                          "MAT_NEUTRAL"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "STAGE",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          5,
+                          3.200000048,
+                          0.300000012
+                        ],
+                        "type": "MESH"
+                      }
+                    ]
+                  }
+                ],
+                "blender": {
+                  "buildHash": "fbe6228777e7",
+                  "version": "5.2.0 LTS"
+                },
+                "cameraSamples": [
+                  {
+                    "camera": "CAM_B01",
+                    "frame": 1,
+                    "location": [
+                      0,
+                      -8,
+                      3.200000048
+                    ],
+                    "rotationEuler": [
+                      1.186823845,
+                      0,
+                      0
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "compilerVersion": "0.1.0",
+                "managedCollection": {
+                  "name": "BFS_SHOT",
+                  "objects": [
+                    {
+                      "animation": [],
+                      "camera": {
+                        "apertureFStop": 4,
+                        "focusDistanceM": 8.199999809,
+                        "lensMm": 58,
+                        "sensorWidthMm": 36
+                      },
+                      "location": [
+                        0,
+                        -8,
+                        3.200000048
+                      ],
+                      "name": "CAM_B01",
+                      "rotationEuler": [
+                        1.186823845,
+                        0,
+                        0
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "CAMERA"
+                    },
+                    {
+                      "light": {
+                        "color": [
+                          1,
+                          0.75999999,
+                          0.579999983
+                        ],
+                        "energy": 1200,
+                        "type": "AREA"
+                      },
+                      "location": [
+                        -3.200000048,
+                        -2.400000095,
+                        5
+                      ],
+                      "name": "KEY_LARGE",
+                      "rotationEuler": [
+                        0.488692194,
+                        0,
+                        -0.663225114
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "LIGHT"
+                    },
+                    {
+                      "light": {
+                        "color": [
+                          0.349999994,
+                          0.519999981,
+                          1
+                        ],
+                        "energy": 750,
+                        "type": "AREA"
+                      },
+                      "location": [
+                        3,
+                        1.5,
+                        3.799999952
+                      ],
+                      "name": "RIM_COOL",
+                      "rotationEuler": [
+                        0.837758064,
+                        0,
+                        2.408554316
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "LIGHT"
+                    },
+                    {
+                      "instanceCollection": "SET_STILL_LIFE",
+                      "location": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "name": "SET_STILL_LIFE",
+                      "rotationEuler": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "EMPTY"
+                    }
+                  ]
+                },
+                "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+                "render": {
+                  "colorDepth": "16",
+                  "cyclesAnimatedSeed": false,
+                  "cyclesDevice": "CPU",
+                  "cyclesSamples": 512,
+                  "cyclesSeed": 24082601,
+                  "display": "sRGB - Display",
+                  "engine": "CYCLES",
+                  "exrCodec": "ZIP",
+                  "fileFormat": "OPEN_EXR_MULTILAYER",
+                  "fps": 24,
+                  "fpsBase": 1,
+                  "frameRange": [
+                    1,
+                    1
+                  ],
+                  "ocioConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+                  "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                  "resolution": [
+                    3840,
+                    2160,
+                    100
+                  ],
+                  "sceneLinearRole": "ACEScg",
+                  "threads": 8,
+                  "threadsMode": "FIXED",
+                  "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+                },
+                "shot": {
+                  "activeCamera": "CAM_B01",
+                  "frameEnd": 1,
+                  "frameRate": {
+                    "denominator": 1,
+                    "numerator": 24
+                  },
+                  "frameStart": 1,
+                  "id": "SHOT_101",
+                  "seed": 24082601,
+                  "title": "B01 Material Still Life",
+                  "unitScaleMeters": 1
+                }
+              }
+            },
+            "blend": {
+              "sha256": "4509e97c4f939509d0f3363b3a90a2f0db419e5b805629ccaafb1ae3c995d3f8",
+              "bytes": 117606
+            }
+          },
+          "completed": true
+        },
+        {
+          "id": "B01-B",
+          "containerName": "bfs-b42-b01-b",
+          "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+          "argv": [
+            "--host",
+            "unix:///Users/tianxing/.colima/default/docker.sock",
+            "run",
+            "--rm",
+            "--name",
+            "bfs-b42-b01-b",
+            "--platform",
+            "linux/amd64",
+            "--pull",
+            "never",
+            "--read-only",
+            "--network",
+            "none",
+            "--user",
+            "65532:65532",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges:true",
+            "--pids-limit",
+            "256",
+            "--memory",
+            "8589934592",
+            "--cpus",
+            "4",
+            "--shm-size",
+            "1073741824",
+            "--mount",
+            "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree,dst=/repo,readonly",
+            "--mount",
+            "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree/experiments/linux-amd64-compiler-repro-c1-v0-1/runs/B01-B,dst=/repo/worker-output",
+            "--tmpfs",
+            "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+            "--tmpfs",
+            "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+            "--env",
+            "BLENDER_USER_CONFIG=/work/blender-config",
+            "--env",
+            "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+            "--env",
+            "HOME=/work/home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "LC_ALL=C.UTF-8",
+            "--env",
+            "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+            "--env",
+            "TMPDIR=/work/tmp",
+            "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+            "--background",
+            "--factory-startup",
+            "--disable-autoexec",
+            "--offline-mode",
+            "--python-exit-code",
+            "1",
+            "--python",
+            "/repo/blender/compile_scene.py",
+            "--",
+            "--plan",
+            "/repo/experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B01-B.build-plan.json",
+            "--repository-root",
+            "/repo",
+            "--output-dir",
+            "/repo/worker-output"
+          ],
+          "exitCode": 0,
+          "signal": null,
+          "elapsedMs": 9678,
+          "stdout": "00:00.118  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.655  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.656  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.656  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.656  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.656  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nInfo: Saved as \"scene.blend\"\nBFS_COMPILE_OK SHOT_101 316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b /repo/worker-output/scene.manifest.json\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+          "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n",
+          "timeoutTriggered": false,
+          "termSent": false,
+          "killSent": false,
+          "observed": {
+            "manifest": {
+              "sha256": "4be18d6282e08c67d07bdea0077861a88673c793255d782511e8ce1ccb83af34",
+              "value": {
+                "documentType": "BFS_SCENE_MANIFEST",
+                "execution": {
+                  "blender": {
+                    "buildBranch": "blender-v5.2-release",
+                    "buildHash": "fbe6228777e7",
+                    "buildPlatform": "Linux",
+                    "version": "5.2.0 LTS"
+                  },
+                  "compiler": {
+                    "name": "BFS_SCENE_COMPILER",
+                    "targetApplication": "Blender",
+                    "targetVersion": "5.2.0",
+                    "version": "0.1.0"
+                  },
+                  "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                  "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+                  "planVersion": "0.1.0",
+                  "sourceSceneCanonicalSha256": "10d8ef02fbe71c0b44ca6fc93a25f7952cff605b31d40fc04f9c6029ee7119b0"
+                },
+                "manifestVersion": "0.2.0",
+                "structure": {
+                  "assetCollections": [
+                    {
+                      "name": "SET_STILL_LIFE",
+                      "objects": [
+                        {
+                          "location": [
+                            1.450000048,
+                            0.200000003,
+                            0.720000029
+                          ],
+                          "materials": [
+                            "MAT_GLASS"
+                          ],
+                          "mesh": {
+                            "edges": 96,
+                            "polygons": 34,
+                            "vertices": 64
+                          },
+                          "name": "GLASS_CYLINDER",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.899999976,
+                            0.899999976,
+                            1.450000048
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -1.450000048,
+                            0.200000003,
+                            0.550000012
+                          ],
+                          "materials": [
+                            "MAT_LEATHER"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "LEATHER_BLOCK",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            1.100000024,
+                            1.100000024,
+                            1.100000024
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            0.150000006,
+                            0.720000029
+                          ],
+                          "materials": [
+                            "MAT_BRUSHED_METAL"
+                          ],
+                          "mesh": {
+                            "edges": 992,
+                            "polygons": 512,
+                            "vertices": 482
+                          },
+                          "name": "METAL_SPHERE",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            1.350000024,
+                            1.350000024,
+                            1.350000024
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            1.049999952,
+                            0.519999981
+                          ],
+                          "materials": [
+                            "MAT_SKIN_REFERENCE"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "SKIN_TONE_CARD",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            1.549999952,
+                            0.119999997,
+                            1
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            0,
+                            -0.150000006
+                          ],
+                          "materials": [
+                            "MAT_NEUTRAL"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "STAGE",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            5,
+                            3.200000048,
+                            0.300000012
+                          ],
+                          "type": "MESH"
+                        }
+                      ]
+                    }
+                  ],
+                  "blender": {
+                    "buildHash": "fbe6228777e7",
+                    "version": "5.2.0 LTS"
+                  },
+                  "cameraSamples": [
+                    {
+                      "camera": "CAM_B01",
+                      "frame": 1,
+                      "location": [
+                        0,
+                        -8,
+                        3.200000048
+                      ],
+                      "rotationEuler": [
+                        1.186823845,
+                        0,
+                        0
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "compilerVersion": "0.1.0",
+                  "managedCollection": {
+                    "name": "BFS_SHOT",
+                    "objects": [
+                      {
+                        "animation": [],
+                        "camera": {
+                          "apertureFStop": 4,
+                          "focusDistanceM": 8.199999809,
+                          "lensMm": 58,
+                          "sensorWidthMm": 36
+                        },
+                        "location": [
+                          0,
+                          -8,
+                          3.200000048
+                        ],
+                        "name": "CAM_B01",
+                        "rotationEuler": [
+                          1.186823845,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "CAMERA"
+                      },
+                      {
+                        "light": {
+                          "color": [
+                            1,
+                            0.75999999,
+                            0.579999983
+                          ],
+                          "energy": 1200,
+                          "type": "AREA"
+                        },
+                        "location": [
+                          -3.200000048,
+                          -2.400000095,
+                          5
+                        ],
+                        "name": "KEY_LARGE",
+                        "rotationEuler": [
+                          0.488692194,
+                          0,
+                          -0.663225114
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "LIGHT"
+                      },
+                      {
+                        "light": {
+                          "color": [
+                            0.349999994,
+                            0.519999981,
+                            1
+                          ],
+                          "energy": 750,
+                          "type": "AREA"
+                        },
+                        "location": [
+                          3,
+                          1.5,
+                          3.799999952
+                        ],
+                        "name": "RIM_COOL",
+                        "rotationEuler": [
+                          0.837758064,
+                          0,
+                          2.408554316
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "LIGHT"
+                      },
+                      {
+                        "instanceCollection": "SET_STILL_LIFE",
+                        "location": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "name": "SET_STILL_LIFE",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "EMPTY"
+                      }
+                    ]
+                  },
+                  "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+                  "render": {
+                    "colorDepth": "16",
+                    "cyclesAnimatedSeed": false,
+                    "cyclesDevice": "CPU",
+                    "cyclesSamples": 512,
+                    "cyclesSeed": 24082601,
+                    "display": "sRGB - Display",
+                    "engine": "CYCLES",
+                    "exrCodec": "ZIP",
+                    "fileFormat": "OPEN_EXR_MULTILAYER",
+                    "fps": 24,
+                    "fpsBase": 1,
+                    "frameRange": [
+                      1,
+                      1
+                    ],
+                    "ocioConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+                    "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                    "resolution": [
+                      3840,
+                      2160,
+                      100
+                    ],
+                    "sceneLinearRole": "ACEScg",
+                    "threads": 8,
+                    "threadsMode": "FIXED",
+                    "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+                  },
+                  "shot": {
+                    "activeCamera": "CAM_B01",
+                    "frameEnd": 1,
+                    "frameRate": {
+                      "denominator": 1,
+                      "numerator": 24
+                    },
+                    "frameStart": 1,
+                    "id": "SHOT_101",
+                    "seed": 24082601,
+                    "title": "B01 Material Still Life",
+                    "unitScaleMeters": 1
+                  }
+                },
+                "structureCanonical": {
+                  "bytes": 3130,
+                  "sha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+                  "uri": "scene.structure.canonical.json"
+                },
+                "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+                "telemetry": {
+                  "blendBytes": 117608,
+                  "compileSeconds": 0.234179
+                },
+                "warnings": [
+                  "ACES 2 OCIO config is pinned and verified; the physical review display is not yet calibrated by this experiment."
+                ]
+              }
+            },
+            "structure": {
+              "sha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+              "bytes": 3130,
+              "value": {
+                "assetCollections": [
+                  {
+                    "name": "SET_STILL_LIFE",
+                    "objects": [
+                      {
+                        "location": [
+                          1.450000048,
+                          0.200000003,
+                          0.720000029
+                        ],
+                        "materials": [
+                          "MAT_GLASS"
+                        ],
+                        "mesh": {
+                          "edges": 96,
+                          "polygons": 34,
+                          "vertices": 64
+                        },
+                        "name": "GLASS_CYLINDER",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.899999976,
+                          0.899999976,
+                          1.450000048
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -1.450000048,
+                          0.200000003,
+                          0.550000012
+                        ],
+                        "materials": [
+                          "MAT_LEATHER"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "LEATHER_BLOCK",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1.100000024,
+                          1.100000024,
+                          1.100000024
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          0.150000006,
+                          0.720000029
+                        ],
+                        "materials": [
+                          "MAT_BRUSHED_METAL"
+                        ],
+                        "mesh": {
+                          "edges": 992,
+                          "polygons": 512,
+                          "vertices": 482
+                        },
+                        "name": "METAL_SPHERE",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1.350000024,
+                          1.350000024,
+                          1.350000024
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          1.049999952,
+                          0.519999981
+                        ],
+                        "materials": [
+                          "MAT_SKIN_REFERENCE"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "SKIN_TONE_CARD",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1.549999952,
+                          0.119999997,
+                          1
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          0,
+                          -0.150000006
+                        ],
+                        "materials": [
+                          "MAT_NEUTRAL"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "STAGE",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          5,
+                          3.200000048,
+                          0.300000012
+                        ],
+                        "type": "MESH"
+                      }
+                    ]
+                  }
+                ],
+                "blender": {
+                  "buildHash": "fbe6228777e7",
+                  "version": "5.2.0 LTS"
+                },
+                "cameraSamples": [
+                  {
+                    "camera": "CAM_B01",
+                    "frame": 1,
+                    "location": [
+                      0,
+                      -8,
+                      3.200000048
+                    ],
+                    "rotationEuler": [
+                      1.186823845,
+                      0,
+                      0
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "compilerVersion": "0.1.0",
+                "managedCollection": {
+                  "name": "BFS_SHOT",
+                  "objects": [
+                    {
+                      "animation": [],
+                      "camera": {
+                        "apertureFStop": 4,
+                        "focusDistanceM": 8.199999809,
+                        "lensMm": 58,
+                        "sensorWidthMm": 36
+                      },
+                      "location": [
+                        0,
+                        -8,
+                        3.200000048
+                      ],
+                      "name": "CAM_B01",
+                      "rotationEuler": [
+                        1.186823845,
+                        0,
+                        0
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "CAMERA"
+                    },
+                    {
+                      "light": {
+                        "color": [
+                          1,
+                          0.75999999,
+                          0.579999983
+                        ],
+                        "energy": 1200,
+                        "type": "AREA"
+                      },
+                      "location": [
+                        -3.200000048,
+                        -2.400000095,
+                        5
+                      ],
+                      "name": "KEY_LARGE",
+                      "rotationEuler": [
+                        0.488692194,
+                        0,
+                        -0.663225114
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "LIGHT"
+                    },
+                    {
+                      "light": {
+                        "color": [
+                          0.349999994,
+                          0.519999981,
+                          1
+                        ],
+                        "energy": 750,
+                        "type": "AREA"
+                      },
+                      "location": [
+                        3,
+                        1.5,
+                        3.799999952
+                      ],
+                      "name": "RIM_COOL",
+                      "rotationEuler": [
+                        0.837758064,
+                        0,
+                        2.408554316
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "LIGHT"
+                    },
+                    {
+                      "instanceCollection": "SET_STILL_LIFE",
+                      "location": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "name": "SET_STILL_LIFE",
+                      "rotationEuler": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "EMPTY"
+                    }
+                  ]
+                },
+                "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+                "render": {
+                  "colorDepth": "16",
+                  "cyclesAnimatedSeed": false,
+                  "cyclesDevice": "CPU",
+                  "cyclesSamples": 512,
+                  "cyclesSeed": 24082601,
+                  "display": "sRGB - Display",
+                  "engine": "CYCLES",
+                  "exrCodec": "ZIP",
+                  "fileFormat": "OPEN_EXR_MULTILAYER",
+                  "fps": 24,
+                  "fpsBase": 1,
+                  "frameRange": [
+                    1,
+                    1
+                  ],
+                  "ocioConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+                  "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                  "resolution": [
+                    3840,
+                    2160,
+                    100
+                  ],
+                  "sceneLinearRole": "ACEScg",
+                  "threads": 8,
+                  "threadsMode": "FIXED",
+                  "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+                },
+                "shot": {
+                  "activeCamera": "CAM_B01",
+                  "frameEnd": 1,
+                  "frameRate": {
+                    "denominator": 1,
+                    "numerator": 24
+                  },
+                  "frameStart": 1,
+                  "id": "SHOT_101",
+                  "seed": 24082601,
+                  "title": "B01 Material Still Life",
+                  "unitScaleMeters": 1
+                }
+              }
+            },
+            "blend": {
+              "sha256": "fbc7210a1b71407ed1db8e929bf20838bdc15960491767e53b710e1224efe830",
+              "bytes": 117608
+            }
+          },
+          "completed": true
+        }
+      ],
+      "structureFilesByteEqual": true,
+      "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+      "blendByteIdentical": false
+    },
+    {
+      "id": "B02",
+      "plans": [
+        {
+          "suffix": "A",
+          "uri": "experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B02-A.build-plan.json",
+          "fileSha256": "8595f30c78b3d2d0266c94d05e2e37b8d90c7864d2c904b6c2e58abc164f187d",
+          "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687"
+        },
+        {
+          "suffix": "B",
+          "uri": "experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B02-B.build-plan.json",
+          "fileSha256": "8595f30c78b3d2d0266c94d05e2e37b8d90c7864d2c904b6c2e58abc164f187d",
+          "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687"
+        }
+      ],
+      "planFilesByteEqual": true,
+      "runs": [
+        {
+          "id": "B02-A",
+          "containerName": "bfs-b42-b02-a",
+          "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+          "argv": [
+            "--host",
+            "unix:///Users/tianxing/.colima/default/docker.sock",
+            "run",
+            "--rm",
+            "--name",
+            "bfs-b42-b02-a",
+            "--platform",
+            "linux/amd64",
+            "--pull",
+            "never",
+            "--read-only",
+            "--network",
+            "none",
+            "--user",
+            "65532:65532",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges:true",
+            "--pids-limit",
+            "256",
+            "--memory",
+            "8589934592",
+            "--cpus",
+            "4",
+            "--shm-size",
+            "1073741824",
+            "--mount",
+            "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree,dst=/repo,readonly",
+            "--mount",
+            "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree/experiments/linux-amd64-compiler-repro-c1-v0-1/runs/B02-A,dst=/repo/worker-output",
+            "--tmpfs",
+            "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+            "--tmpfs",
+            "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+            "--env",
+            "BLENDER_USER_CONFIG=/work/blender-config",
+            "--env",
+            "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+            "--env",
+            "HOME=/work/home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "LC_ALL=C.UTF-8",
+            "--env",
+            "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+            "--env",
+            "TMPDIR=/work/tmp",
+            "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+            "--background",
+            "--factory-startup",
+            "--disable-autoexec",
+            "--offline-mode",
+            "--python-exit-code",
+            "1",
+            "--python",
+            "/repo/blender/compile_scene.py",
+            "--",
+            "--plan",
+            "/repo/experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B02-A.build-plan.json",
+            "--repository-root",
+            "/repo",
+            "--output-dir",
+            "/repo/worker-output"
+          ],
+          "exitCode": 0,
+          "signal": null,
+          "elapsedMs": 9776,
+          "stdout": "00:00.119  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.663  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.663  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.663  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.663  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.664  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nInfo: Saved as \"scene.blend\"\nBFS_COMPILE_OK SHOT_102 a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687 025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856 /repo/worker-output/scene.manifest.json\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+          "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n",
+          "timeoutTriggered": false,
+          "termSent": false,
+          "killSent": false,
+          "observed": {
+            "manifest": {
+              "sha256": "194fe4d400759cad51d4f30a73ca406fd96b89dd28c8907e40cb9ad9ef5dc6f3",
+              "value": {
+                "documentType": "BFS_SCENE_MANIFEST",
+                "execution": {
+                  "blender": {
+                    "buildBranch": "blender-v5.2-release",
+                    "buildHash": "fbe6228777e7",
+                    "buildPlatform": "Linux",
+                    "version": "5.2.0 LTS"
+                  },
+                  "compiler": {
+                    "name": "BFS_SCENE_COMPILER",
+                    "targetApplication": "Blender",
+                    "targetVersion": "5.2.0",
+                    "version": "0.1.0"
+                  },
+                  "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                  "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+                  "planVersion": "0.1.0",
+                  "sourceSceneCanonicalSha256": "db7a07b7afd5b2bde14a63ccaea48632ffcaab721c48cdb2717bb8445c18c37d"
+                },
+                "manifestVersion": "0.2.0",
+                "structure": {
+                  "assetCollections": [
+                    {
+                      "name": "PROP_CHAIR",
+                      "objects": [
+                        {
+                          "location": [
+                            0,
+                            0.400000006,
+                            1.179999948
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_FABRIC"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_BACK",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.899999976,
+                            0.150000006,
+                            1.25
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -0.360000014,
+                            -0.360000014,
+                            0.239999995
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_LEG_01",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.119999997,
+                            0.119999997,
+                            0.479999989
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0.360000014,
+                            -0.360000014,
+                            0.239999995
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_LEG_02",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.119999997,
+                            0.119999997,
+                            0.479999989
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -0.360000014,
+                            0.360000014,
+                            0.239999995
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_LEG_03",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.119999997,
+                            0.119999997,
+                            0.479999989
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0.360000014,
+                            0.360000014,
+                            0.239999995
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_LEG_04",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.119999997,
+                            0.119999997,
+                            0.479999989
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            0,
+                            0.519999981
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_FABRIC"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_SEAT",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.899999976,
+                            0.899999976,
+                            0.159999996
+                          ],
+                          "type": "MESH"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "SET_ROOM",
+                      "objects": [
+                        {
+                          "location": [
+                            0,
+                            3.5,
+                            1.799999952
+                          ],
+                          "materials": [
+                            "MAT_WARM_PLASTER"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "BACK_WALL",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            7,
+                            0.200000003,
+                            3.599999905
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            0,
+                            -0.100000001
+                          ],
+                          "materials": [
+                            "MAT_DARK_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "FLOOR",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            7,
+                            7,
+                            0.200000003
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -3.5,
+                            0,
+                            1.799999952
+                          ],
+                          "materials": [
+                            "MAT_WARM_PLASTER"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "LEFT_WALL",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.200000003,
+                            7,
+                            3.599999905
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            3.5,
+                            0,
+                            1.799999952
+                          ],
+                          "materials": [
+                            "MAT_WARM_PLASTER"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "RIGHT_WALL",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.200000003,
+                            7,
+                            3.599999905
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -3.25,
+                            0.800000012,
+                            2
+                          ],
+                          "materials": [
+                            "MAT_WINDOW_FRAME"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "WINDOW_MULLION",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.239999995,
+                            0.100000001,
+                            1.5
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -3.25,
+                            0.800000012,
+                            1.25
+                          ],
+                          "materials": [
+                            "MAT_WINDOW_FRAME"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "WINDOW_SILL",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.239999995,
+                            2.099999905,
+                            0.119999997
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -3.25,
+                            0.800000012,
+                            2.799999952
+                          ],
+                          "materials": [
+                            "MAT_WINDOW_FRAME"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "WINDOW_TOP",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.239999995,
+                            2.099999905,
+                            0.119999997
+                          ],
+                          "type": "MESH"
+                        }
+                      ]
+                    }
+                  ],
+                  "blender": {
+                    "buildHash": "fbe6228777e7",
+                    "version": "5.2.0 LTS"
+                  },
+                  "cameraSamples": [
+                    {
+                      "camera": "CAM_B02",
+                      "frame": 1,
+                      "location": [
+                        -3.799999952,
+                        -4.199999809,
+                        1.549999952
+                      ],
+                      "rotationEuler": [
+                        1.274090409,
+                        0,
+                        -0.715584993
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "camera": "CAM_B02",
+                      "frame": 72,
+                      "location": [
+                        -2.955944061,
+                        -3.604195595,
+                        1.549999952
+                      ],
+                      "rotationEuler": [
+                        1.274090409,
+                        0,
+                        -0.715584993
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "camera": "CAM_B02",
+                      "frame": 144,
+                      "location": [
+                        -2.099999905,
+                        -3,
+                        1.549999952
+                      ],
+                      "rotationEuler": [
+                        1.274090409,
+                        0,
+                        -0.715584993
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "compilerVersion": "0.1.0",
+                  "managedCollection": {
+                    "name": "BFS_SHOT",
+                    "objects": [
+                      {
+                        "animation": [
+                          {
+                            "arrayIndex": 0,
+                            "dataPath": "location",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": -3.799999952
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": -2.099999905
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 1,
+                            "dataPath": "location",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": -4.199999809
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": -3
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 2,
+                            "dataPath": "location",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1.549999952
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1.549999952
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 0,
+                            "dataPath": "rotation_euler",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1.274090409
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1.274090409
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 1,
+                            "dataPath": "rotation_euler",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 0
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 2,
+                            "dataPath": "rotation_euler",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": -0.715584993
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": -0.715584993
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 0,
+                            "dataPath": "scale",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 1,
+                            "dataPath": "scale",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 2,
+                            "dataPath": "scale",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        ],
+                        "camera": {
+                          "apertureFStop": 2.799999952,
+                          "focusDistanceM": 3.200000048,
+                          "lensMm": 50,
+                          "sensorWidthMm": 36
+                        },
+                        "location": [
+                          -3.799999952,
+                          -4.199999809,
+                          1.549999952
+                        ],
+                        "name": "CAM_B02",
+                        "rotationEuler": [
+                          1.274090409,
+                          0,
+                          -0.715584993
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "CAMERA"
+                      },
+                      {
+                        "light": {
+                          "color": [
+                            1,
+                            0.720000029,
+                            0.479999989
+                          ],
+                          "energy": 1450,
+                          "type": "AREA"
+                        },
+                        "location": [
+                          -1.799999952,
+                          0.899999976,
+                          2.5
+                        ],
+                        "name": "KEY_WINDOW",
+                        "rotationEuler": [
+                          1.082104087,
+                          0,
+                          -1.570796371
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "LIGHT"
+                      },
+                      {
+                        "instanceCollection": "PROP_CHAIR",
+                        "location": [
+                          0.699999988,
+                          0.200000003,
+                          0
+                        ],
+                        "name": "PROP_CHAIR",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          -0.314159274
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "EMPTY"
+                      },
+                      {
+                        "instanceCollection": "SET_ROOM",
+                        "location": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "name": "SET_ROOM",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "EMPTY"
+                      }
+                    ]
+                  },
+                  "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+                  "render": {
+                    "colorDepth": "16",
+                    "cyclesAnimatedSeed": false,
+                    "cyclesDevice": "CPU",
+                    "cyclesSamples": 512,
+                    "cyclesSeed": 24082602,
+                    "display": "sRGB - Display",
+                    "engine": "CYCLES",
+                    "exrCodec": "ZIP",
+                    "fileFormat": "OPEN_EXR_MULTILAYER",
+                    "fps": 24,
+                    "fpsBase": 1,
+                    "frameRange": [
+                      1,
+                      144
+                    ],
+                    "ocioConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+                    "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                    "resolution": [
+                      3840,
+                      2160,
+                      100
+                    ],
+                    "sceneLinearRole": "ACEScg",
+                    "threads": 8,
+                    "threadsMode": "FIXED",
+                    "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+                  },
+                  "shot": {
+                    "activeCamera": "CAM_B02",
+                    "frameEnd": 144,
+                    "frameRate": {
+                      "denominator": 1,
+                      "numerator": 24
+                    },
+                    "frameStart": 1,
+                    "id": "SHOT_102",
+                    "seed": 24082602,
+                    "title": "B02 Interior Dolly",
+                    "unitScaleMeters": 1
+                  }
+                },
+                "structureCanonical": {
+                  "bytes": 6752,
+                  "sha256": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+                  "uri": "scene.structure.canonical.json"
+                },
+                "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+                "telemetry": {
+                  "blendBytes": 106880,
+                  "compileSeconds": 0.266116
+                },
+                "warnings": [
+                  "ACES 2 OCIO config is pinned and verified; the physical review display is not yet calibrated by this experiment."
+                ]
+              }
+            },
+            "structure": {
+              "sha256": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+              "bytes": 6752,
+              "value": {
+                "assetCollections": [
+                  {
+                    "name": "PROP_CHAIR",
+                    "objects": [
+                      {
+                        "location": [
+                          0,
+                          0.400000006,
+                          1.179999948
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_FABRIC"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_BACK",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.899999976,
+                          0.150000006,
+                          1.25
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -0.360000014,
+                          -0.360000014,
+                          0.239999995
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_LEG_01",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.119999997,
+                          0.119999997,
+                          0.479999989
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0.360000014,
+                          -0.360000014,
+                          0.239999995
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_LEG_02",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.119999997,
+                          0.119999997,
+                          0.479999989
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -0.360000014,
+                          0.360000014,
+                          0.239999995
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_LEG_03",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.119999997,
+                          0.119999997,
+                          0.479999989
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0.360000014,
+                          0.360000014,
+                          0.239999995
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_LEG_04",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.119999997,
+                          0.119999997,
+                          0.479999989
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          0,
+                          0.519999981
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_FABRIC"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_SEAT",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.899999976,
+                          0.899999976,
+                          0.159999996
+                        ],
+                        "type": "MESH"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "SET_ROOM",
+                    "objects": [
+                      {
+                        "location": [
+                          0,
+                          3.5,
+                          1.799999952
+                        ],
+                        "materials": [
+                          "MAT_WARM_PLASTER"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "BACK_WALL",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          7,
+                          0.200000003,
+                          3.599999905
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          0,
+                          -0.100000001
+                        ],
+                        "materials": [
+                          "MAT_DARK_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "FLOOR",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          7,
+                          7,
+                          0.200000003
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -3.5,
+                          0,
+                          1.799999952
+                        ],
+                        "materials": [
+                          "MAT_WARM_PLASTER"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "LEFT_WALL",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.200000003,
+                          7,
+                          3.599999905
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          3.5,
+                          0,
+                          1.799999952
+                        ],
+                        "materials": [
+                          "MAT_WARM_PLASTER"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "RIGHT_WALL",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.200000003,
+                          7,
+                          3.599999905
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -3.25,
+                          0.800000012,
+                          2
+                        ],
+                        "materials": [
+                          "MAT_WINDOW_FRAME"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "WINDOW_MULLION",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.239999995,
+                          0.100000001,
+                          1.5
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -3.25,
+                          0.800000012,
+                          1.25
+                        ],
+                        "materials": [
+                          "MAT_WINDOW_FRAME"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "WINDOW_SILL",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.239999995,
+                          2.099999905,
+                          0.119999997
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -3.25,
+                          0.800000012,
+                          2.799999952
+                        ],
+                        "materials": [
+                          "MAT_WINDOW_FRAME"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "WINDOW_TOP",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.239999995,
+                          2.099999905,
+                          0.119999997
+                        ],
+                        "type": "MESH"
+                      }
+                    ]
+                  }
+                ],
+                "blender": {
+                  "buildHash": "fbe6228777e7",
+                  "version": "5.2.0 LTS"
+                },
+                "cameraSamples": [
+                  {
+                    "camera": "CAM_B02",
+                    "frame": 1,
+                    "location": [
+                      -3.799999952,
+                      -4.199999809,
+                      1.549999952
+                    ],
+                    "rotationEuler": [
+                      1.274090409,
+                      0,
+                      -0.715584993
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "camera": "CAM_B02",
+                    "frame": 72,
+                    "location": [
+                      -2.955944061,
+                      -3.604195595,
+                      1.549999952
+                    ],
+                    "rotationEuler": [
+                      1.274090409,
+                      0,
+                      -0.715584993
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "camera": "CAM_B02",
+                    "frame": 144,
+                    "location": [
+                      -2.099999905,
+                      -3,
+                      1.549999952
+                    ],
+                    "rotationEuler": [
+                      1.274090409,
+                      0,
+                      -0.715584993
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "compilerVersion": "0.1.0",
+                "managedCollection": {
+                  "name": "BFS_SHOT",
+                  "objects": [
+                    {
+                      "animation": [
+                        {
+                          "arrayIndex": 0,
+                          "dataPath": "location",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": -3.799999952
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": -2.099999905
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 1,
+                          "dataPath": "location",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": -4.199999809
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": -3
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 2,
+                          "dataPath": "location",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1.549999952
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1.549999952
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 0,
+                          "dataPath": "rotation_euler",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1.274090409
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1.274090409
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 1,
+                          "dataPath": "rotation_euler",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 0
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 0
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 2,
+                          "dataPath": "rotation_euler",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": -0.715584993
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": -0.715584993
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 0,
+                          "dataPath": "scale",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 1,
+                          "dataPath": "scale",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 2,
+                          "dataPath": "scale",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            }
+                          ]
+                        }
+                      ],
+                      "camera": {
+                        "apertureFStop": 2.799999952,
+                        "focusDistanceM": 3.200000048,
+                        "lensMm": 50,
+                        "sensorWidthMm": 36
+                      },
+                      "location": [
+                        -3.799999952,
+                        -4.199999809,
+                        1.549999952
+                      ],
+                      "name": "CAM_B02",
+                      "rotationEuler": [
+                        1.274090409,
+                        0,
+                        -0.715584993
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "CAMERA"
+                    },
+                    {
+                      "light": {
+                        "color": [
+                          1,
+                          0.720000029,
+                          0.479999989
+                        ],
+                        "energy": 1450,
+                        "type": "AREA"
+                      },
+                      "location": [
+                        -1.799999952,
+                        0.899999976,
+                        2.5
+                      ],
+                      "name": "KEY_WINDOW",
+                      "rotationEuler": [
+                        1.082104087,
+                        0,
+                        -1.570796371
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "LIGHT"
+                    },
+                    {
+                      "instanceCollection": "PROP_CHAIR",
+                      "location": [
+                        0.699999988,
+                        0.200000003,
+                        0
+                      ],
+                      "name": "PROP_CHAIR",
+                      "rotationEuler": [
+                        0,
+                        0,
+                        -0.314159274
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "EMPTY"
+                    },
+                    {
+                      "instanceCollection": "SET_ROOM",
+                      "location": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "name": "SET_ROOM",
+                      "rotationEuler": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "EMPTY"
+                    }
+                  ]
+                },
+                "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+                "render": {
+                  "colorDepth": "16",
+                  "cyclesAnimatedSeed": false,
+                  "cyclesDevice": "CPU",
+                  "cyclesSamples": 512,
+                  "cyclesSeed": 24082602,
+                  "display": "sRGB - Display",
+                  "engine": "CYCLES",
+                  "exrCodec": "ZIP",
+                  "fileFormat": "OPEN_EXR_MULTILAYER",
+                  "fps": 24,
+                  "fpsBase": 1,
+                  "frameRange": [
+                    1,
+                    144
+                  ],
+                  "ocioConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+                  "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                  "resolution": [
+                    3840,
+                    2160,
+                    100
+                  ],
+                  "sceneLinearRole": "ACEScg",
+                  "threads": 8,
+                  "threadsMode": "FIXED",
+                  "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+                },
+                "shot": {
+                  "activeCamera": "CAM_B02",
+                  "frameEnd": 144,
+                  "frameRate": {
+                    "denominator": 1,
+                    "numerator": 24
+                  },
+                  "frameStart": 1,
+                  "id": "SHOT_102",
+                  "seed": 24082602,
+                  "title": "B02 Interior Dolly",
+                  "unitScaleMeters": 1
+                }
+              }
+            },
+            "blend": {
+              "sha256": "a9f999f470939e8715a1accdcc3f67823049266013cb59bfa6b6a2bb22cb8d00",
+              "bytes": 106880
+            }
+          },
+          "completed": true
+        },
+        {
+          "id": "B02-B",
+          "containerName": "bfs-b42-b02-b",
+          "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+          "argv": [
+            "--host",
+            "unix:///Users/tianxing/.colima/default/docker.sock",
+            "run",
+            "--rm",
+            "--name",
+            "bfs-b42-b02-b",
+            "--platform",
+            "linux/amd64",
+            "--pull",
+            "never",
+            "--read-only",
+            "--network",
+            "none",
+            "--user",
+            "65532:65532",
+            "--cap-drop",
+            "ALL",
+            "--security-opt",
+            "no-new-privileges:true",
+            "--pids-limit",
+            "256",
+            "--memory",
+            "8589934592",
+            "--cpus",
+            "4",
+            "--shm-size",
+            "1073741824",
+            "--mount",
+            "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree,dst=/repo,readonly",
+            "--mount",
+            "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree/experiments/linux-amd64-compiler-repro-c1-v0-1/runs/B02-B,dst=/repo/worker-output",
+            "--tmpfs",
+            "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+            "--tmpfs",
+            "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+            "--env",
+            "BLENDER_USER_CONFIG=/work/blender-config",
+            "--env",
+            "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+            "--env",
+            "HOME=/work/home",
+            "--env",
+            "LANG=C.UTF-8",
+            "--env",
+            "LC_ALL=C.UTF-8",
+            "--env",
+            "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+            "--env",
+            "TMPDIR=/work/tmp",
+            "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+            "--background",
+            "--factory-startup",
+            "--disable-autoexec",
+            "--offline-mode",
+            "--python-exit-code",
+            "1",
+            "--python",
+            "/repo/blender/compile_scene.py",
+            "--",
+            "--plan",
+            "/repo/experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B02-B.build-plan.json",
+            "--repository-root",
+            "/repo",
+            "--output-dir",
+            "/repo/worker-output"
+          ],
+          "exitCode": 0,
+          "signal": null,
+          "elapsedMs": 9361,
+          "stdout": "00:00.121  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.668  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.669  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.669  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.669  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.669  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nInfo: Saved as \"scene.blend\"\nBFS_COMPILE_OK SHOT_102 a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687 025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856 /repo/worker-output/scene.manifest.json\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+          "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n",
+          "timeoutTriggered": false,
+          "termSent": false,
+          "killSent": false,
+          "observed": {
+            "manifest": {
+              "sha256": "43c1afbe59af1b03cc96f22f6739f9b3bf8b7c69576def29526e0f5847c280cc",
+              "value": {
+                "documentType": "BFS_SCENE_MANIFEST",
+                "execution": {
+                  "blender": {
+                    "buildBranch": "blender-v5.2-release",
+                    "buildHash": "fbe6228777e7",
+                    "buildPlatform": "Linux",
+                    "version": "5.2.0 LTS"
+                  },
+                  "compiler": {
+                    "name": "BFS_SCENE_COMPILER",
+                    "targetApplication": "Blender",
+                    "targetVersion": "5.2.0",
+                    "version": "0.1.0"
+                  },
+                  "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                  "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+                  "planVersion": "0.1.0",
+                  "sourceSceneCanonicalSha256": "db7a07b7afd5b2bde14a63ccaea48632ffcaab721c48cdb2717bb8445c18c37d"
+                },
+                "manifestVersion": "0.2.0",
+                "structure": {
+                  "assetCollections": [
+                    {
+                      "name": "PROP_CHAIR",
+                      "objects": [
+                        {
+                          "location": [
+                            0,
+                            0.400000006,
+                            1.179999948
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_FABRIC"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_BACK",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.899999976,
+                            0.150000006,
+                            1.25
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -0.360000014,
+                            -0.360000014,
+                            0.239999995
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_LEG_01",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.119999997,
+                            0.119999997,
+                            0.479999989
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0.360000014,
+                            -0.360000014,
+                            0.239999995
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_LEG_02",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.119999997,
+                            0.119999997,
+                            0.479999989
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -0.360000014,
+                            0.360000014,
+                            0.239999995
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_LEG_03",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.119999997,
+                            0.119999997,
+                            0.479999989
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0.360000014,
+                            0.360000014,
+                            0.239999995
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_LEG_04",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.119999997,
+                            0.119999997,
+                            0.479999989
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            0,
+                            0.519999981
+                          ],
+                          "materials": [
+                            "MAT_CHAIR_FABRIC"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "CHAIR_SEAT",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.899999976,
+                            0.899999976,
+                            0.159999996
+                          ],
+                          "type": "MESH"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "SET_ROOM",
+                      "objects": [
+                        {
+                          "location": [
+                            0,
+                            3.5,
+                            1.799999952
+                          ],
+                          "materials": [
+                            "MAT_WARM_PLASTER"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "BACK_WALL",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            7,
+                            0.200000003,
+                            3.599999905
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            0,
+                            0,
+                            -0.100000001
+                          ],
+                          "materials": [
+                            "MAT_DARK_WOOD"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "FLOOR",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            7,
+                            7,
+                            0.200000003
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -3.5,
+                            0,
+                            1.799999952
+                          ],
+                          "materials": [
+                            "MAT_WARM_PLASTER"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "LEFT_WALL",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.200000003,
+                            7,
+                            3.599999905
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            3.5,
+                            0,
+                            1.799999952
+                          ],
+                          "materials": [
+                            "MAT_WARM_PLASTER"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "RIGHT_WALL",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.200000003,
+                            7,
+                            3.599999905
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -3.25,
+                            0.800000012,
+                            2
+                          ],
+                          "materials": [
+                            "MAT_WINDOW_FRAME"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "WINDOW_MULLION",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.239999995,
+                            0.100000001,
+                            1.5
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -3.25,
+                            0.800000012,
+                            1.25
+                          ],
+                          "materials": [
+                            "MAT_WINDOW_FRAME"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "WINDOW_SILL",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.239999995,
+                            2.099999905,
+                            0.119999997
+                          ],
+                          "type": "MESH"
+                        },
+                        {
+                          "location": [
+                            -3.25,
+                            0.800000012,
+                            2.799999952
+                          ],
+                          "materials": [
+                            "MAT_WINDOW_FRAME"
+                          ],
+                          "mesh": {
+                            "edges": 12,
+                            "polygons": 6,
+                            "vertices": 8
+                          },
+                          "name": "WINDOW_TOP",
+                          "rotationEuler": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "scale": [
+                            0.239999995,
+                            2.099999905,
+                            0.119999997
+                          ],
+                          "type": "MESH"
+                        }
+                      ]
+                    }
+                  ],
+                  "blender": {
+                    "buildHash": "fbe6228777e7",
+                    "version": "5.2.0 LTS"
+                  },
+                  "cameraSamples": [
+                    {
+                      "camera": "CAM_B02",
+                      "frame": 1,
+                      "location": [
+                        -3.799999952,
+                        -4.199999809,
+                        1.549999952
+                      ],
+                      "rotationEuler": [
+                        1.274090409,
+                        0,
+                        -0.715584993
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "camera": "CAM_B02",
+                      "frame": 72,
+                      "location": [
+                        -2.955944061,
+                        -3.604195595,
+                        1.549999952
+                      ],
+                      "rotationEuler": [
+                        1.274090409,
+                        0,
+                        -0.715584993
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ]
+                    },
+                    {
+                      "camera": "CAM_B02",
+                      "frame": 144,
+                      "location": [
+                        -2.099999905,
+                        -3,
+                        1.549999952
+                      ],
+                      "rotationEuler": [
+                        1.274090409,
+                        0,
+                        -0.715584993
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ]
+                    }
+                  ],
+                  "compilerVersion": "0.1.0",
+                  "managedCollection": {
+                    "name": "BFS_SHOT",
+                    "objects": [
+                      {
+                        "animation": [
+                          {
+                            "arrayIndex": 0,
+                            "dataPath": "location",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": -3.799999952
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": -2.099999905
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 1,
+                            "dataPath": "location",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": -4.199999809
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": -3
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 2,
+                            "dataPath": "location",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1.549999952
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1.549999952
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 0,
+                            "dataPath": "rotation_euler",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1.274090409
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1.274090409
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 1,
+                            "dataPath": "rotation_euler",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 0
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 0
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 2,
+                            "dataPath": "rotation_euler",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": -0.715584993
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": -0.715584993
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 0,
+                            "dataPath": "scale",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 1,
+                            "dataPath": "scale",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              }
+                            ]
+                          },
+                          {
+                            "arrayIndex": 2,
+                            "dataPath": "scale",
+                            "keyframes": [
+                              {
+                                "frame": 1,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              },
+                              {
+                                "frame": 144,
+                                "interpolation": "LINEAR",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        ],
+                        "camera": {
+                          "apertureFStop": 2.799999952,
+                          "focusDistanceM": 3.200000048,
+                          "lensMm": 50,
+                          "sensorWidthMm": 36
+                        },
+                        "location": [
+                          -3.799999952,
+                          -4.199999809,
+                          1.549999952
+                        ],
+                        "name": "CAM_B02",
+                        "rotationEuler": [
+                          1.274090409,
+                          0,
+                          -0.715584993
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "CAMERA"
+                      },
+                      {
+                        "light": {
+                          "color": [
+                            1,
+                            0.720000029,
+                            0.479999989
+                          ],
+                          "energy": 1450,
+                          "type": "AREA"
+                        },
+                        "location": [
+                          -1.799999952,
+                          0.899999976,
+                          2.5
+                        ],
+                        "name": "KEY_WINDOW",
+                        "rotationEuler": [
+                          1.082104087,
+                          0,
+                          -1.570796371
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "LIGHT"
+                      },
+                      {
+                        "instanceCollection": "PROP_CHAIR",
+                        "location": [
+                          0.699999988,
+                          0.200000003,
+                          0
+                        ],
+                        "name": "PROP_CHAIR",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          -0.314159274
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "EMPTY"
+                      },
+                      {
+                        "instanceCollection": "SET_ROOM",
+                        "location": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "name": "SET_ROOM",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "type": "EMPTY"
+                      }
+                    ]
+                  },
+                  "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+                  "render": {
+                    "colorDepth": "16",
+                    "cyclesAnimatedSeed": false,
+                    "cyclesDevice": "CPU",
+                    "cyclesSamples": 512,
+                    "cyclesSeed": 24082602,
+                    "display": "sRGB - Display",
+                    "engine": "CYCLES",
+                    "exrCodec": "ZIP",
+                    "fileFormat": "OPEN_EXR_MULTILAYER",
+                    "fps": 24,
+                    "fpsBase": 1,
+                    "frameRange": [
+                      1,
+                      144
+                    ],
+                    "ocioConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+                    "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                    "resolution": [
+                      3840,
+                      2160,
+                      100
+                    ],
+                    "sceneLinearRole": "ACEScg",
+                    "threads": 8,
+                    "threadsMode": "FIXED",
+                    "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+                  },
+                  "shot": {
+                    "activeCamera": "CAM_B02",
+                    "frameEnd": 144,
+                    "frameRate": {
+                      "denominator": 1,
+                      "numerator": 24
+                    },
+                    "frameStart": 1,
+                    "id": "SHOT_102",
+                    "seed": 24082602,
+                    "title": "B02 Interior Dolly",
+                    "unitScaleMeters": 1
+                  }
+                },
+                "structureCanonical": {
+                  "bytes": 6752,
+                  "sha256": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+                  "uri": "scene.structure.canonical.json"
+                },
+                "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+                "telemetry": {
+                  "blendBytes": 106875,
+                  "compileSeconds": 0.243295
+                },
+                "warnings": [
+                  "ACES 2 OCIO config is pinned and verified; the physical review display is not yet calibrated by this experiment."
+                ]
+              }
+            },
+            "structure": {
+              "sha256": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+              "bytes": 6752,
+              "value": {
+                "assetCollections": [
+                  {
+                    "name": "PROP_CHAIR",
+                    "objects": [
+                      {
+                        "location": [
+                          0,
+                          0.400000006,
+                          1.179999948
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_FABRIC"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_BACK",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.899999976,
+                          0.150000006,
+                          1.25
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -0.360000014,
+                          -0.360000014,
+                          0.239999995
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_LEG_01",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.119999997,
+                          0.119999997,
+                          0.479999989
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0.360000014,
+                          -0.360000014,
+                          0.239999995
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_LEG_02",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.119999997,
+                          0.119999997,
+                          0.479999989
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -0.360000014,
+                          0.360000014,
+                          0.239999995
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_LEG_03",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.119999997,
+                          0.119999997,
+                          0.479999989
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0.360000014,
+                          0.360000014,
+                          0.239999995
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_LEG_04",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.119999997,
+                          0.119999997,
+                          0.479999989
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          0,
+                          0.519999981
+                        ],
+                        "materials": [
+                          "MAT_CHAIR_FABRIC"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "CHAIR_SEAT",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.899999976,
+                          0.899999976,
+                          0.159999996
+                        ],
+                        "type": "MESH"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "SET_ROOM",
+                    "objects": [
+                      {
+                        "location": [
+                          0,
+                          3.5,
+                          1.799999952
+                        ],
+                        "materials": [
+                          "MAT_WARM_PLASTER"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "BACK_WALL",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          7,
+                          0.200000003,
+                          3.599999905
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          0,
+                          0,
+                          -0.100000001
+                        ],
+                        "materials": [
+                          "MAT_DARK_WOOD"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "FLOOR",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          7,
+                          7,
+                          0.200000003
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -3.5,
+                          0,
+                          1.799999952
+                        ],
+                        "materials": [
+                          "MAT_WARM_PLASTER"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "LEFT_WALL",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.200000003,
+                          7,
+                          3.599999905
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          3.5,
+                          0,
+                          1.799999952
+                        ],
+                        "materials": [
+                          "MAT_WARM_PLASTER"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "RIGHT_WALL",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.200000003,
+                          7,
+                          3.599999905
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -3.25,
+                          0.800000012,
+                          2
+                        ],
+                        "materials": [
+                          "MAT_WINDOW_FRAME"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "WINDOW_MULLION",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.239999995,
+                          0.100000001,
+                          1.5
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -3.25,
+                          0.800000012,
+                          1.25
+                        ],
+                        "materials": [
+                          "MAT_WINDOW_FRAME"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "WINDOW_SILL",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.239999995,
+                          2.099999905,
+                          0.119999997
+                        ],
+                        "type": "MESH"
+                      },
+                      {
+                        "location": [
+                          -3.25,
+                          0.800000012,
+                          2.799999952
+                        ],
+                        "materials": [
+                          "MAT_WINDOW_FRAME"
+                        ],
+                        "mesh": {
+                          "edges": 12,
+                          "polygons": 6,
+                          "vertices": 8
+                        },
+                        "name": "WINDOW_TOP",
+                        "rotationEuler": [
+                          0,
+                          0,
+                          0
+                        ],
+                        "scale": [
+                          0.239999995,
+                          2.099999905,
+                          0.119999997
+                        ],
+                        "type": "MESH"
+                      }
+                    ]
+                  }
+                ],
+                "blender": {
+                  "buildHash": "fbe6228777e7",
+                  "version": "5.2.0 LTS"
+                },
+                "cameraSamples": [
+                  {
+                    "camera": "CAM_B02",
+                    "frame": 1,
+                    "location": [
+                      -3.799999952,
+                      -4.199999809,
+                      1.549999952
+                    ],
+                    "rotationEuler": [
+                      1.274090409,
+                      0,
+                      -0.715584993
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "camera": "CAM_B02",
+                    "frame": 72,
+                    "location": [
+                      -2.955944061,
+                      -3.604195595,
+                      1.549999952
+                    ],
+                    "rotationEuler": [
+                      1.274090409,
+                      0,
+                      -0.715584993
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  },
+                  {
+                    "camera": "CAM_B02",
+                    "frame": 144,
+                    "location": [
+                      -2.099999905,
+                      -3,
+                      1.549999952
+                    ],
+                    "rotationEuler": [
+                      1.274090409,
+                      0,
+                      -0.715584993
+                    ],
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ]
+                  }
+                ],
+                "compilerVersion": "0.1.0",
+                "managedCollection": {
+                  "name": "BFS_SHOT",
+                  "objects": [
+                    {
+                      "animation": [
+                        {
+                          "arrayIndex": 0,
+                          "dataPath": "location",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": -3.799999952
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": -2.099999905
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 1,
+                          "dataPath": "location",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": -4.199999809
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": -3
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 2,
+                          "dataPath": "location",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1.549999952
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1.549999952
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 0,
+                          "dataPath": "rotation_euler",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1.274090409
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1.274090409
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 1,
+                          "dataPath": "rotation_euler",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 0
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 0
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 2,
+                          "dataPath": "rotation_euler",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": -0.715584993
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": -0.715584993
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 0,
+                          "dataPath": "scale",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 1,
+                          "dataPath": "scale",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            }
+                          ]
+                        },
+                        {
+                          "arrayIndex": 2,
+                          "dataPath": "scale",
+                          "keyframes": [
+                            {
+                              "frame": 1,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            },
+                            {
+                              "frame": 144,
+                              "interpolation": "LINEAR",
+                              "value": 1
+                            }
+                          ]
+                        }
+                      ],
+                      "camera": {
+                        "apertureFStop": 2.799999952,
+                        "focusDistanceM": 3.200000048,
+                        "lensMm": 50,
+                        "sensorWidthMm": 36
+                      },
+                      "location": [
+                        -3.799999952,
+                        -4.199999809,
+                        1.549999952
+                      ],
+                      "name": "CAM_B02",
+                      "rotationEuler": [
+                        1.274090409,
+                        0,
+                        -0.715584993
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "CAMERA"
+                    },
+                    {
+                      "light": {
+                        "color": [
+                          1,
+                          0.720000029,
+                          0.479999989
+                        ],
+                        "energy": 1450,
+                        "type": "AREA"
+                      },
+                      "location": [
+                        -1.799999952,
+                        0.899999976,
+                        2.5
+                      ],
+                      "name": "KEY_WINDOW",
+                      "rotationEuler": [
+                        1.082104087,
+                        0,
+                        -1.570796371
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "LIGHT"
+                    },
+                    {
+                      "instanceCollection": "PROP_CHAIR",
+                      "location": [
+                        0.699999988,
+                        0.200000003,
+                        0
+                      ],
+                      "name": "PROP_CHAIR",
+                      "rotationEuler": [
+                        0,
+                        0,
+                        -0.314159274
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "EMPTY"
+                    },
+                    {
+                      "instanceCollection": "SET_ROOM",
+                      "location": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "name": "SET_ROOM",
+                      "rotationEuler": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "scale": [
+                        1,
+                        1,
+                        1
+                      ],
+                      "type": "EMPTY"
+                    }
+                  ]
+                },
+                "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+                "render": {
+                  "colorDepth": "16",
+                  "cyclesAnimatedSeed": false,
+                  "cyclesDevice": "CPU",
+                  "cyclesSamples": 512,
+                  "cyclesSeed": 24082602,
+                  "display": "sRGB - Display",
+                  "engine": "CYCLES",
+                  "exrCodec": "ZIP",
+                  "fileFormat": "OPEN_EXR_MULTILAYER",
+                  "fps": 24,
+                  "fpsBase": 1,
+                  "frameRange": [
+                    1,
+                    144
+                  ],
+                  "ocioConfig": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+                  "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+                  "resolution": [
+                    3840,
+                    2160,
+                    100
+                  ],
+                  "sceneLinearRole": "ACEScg",
+                  "threads": 8,
+                  "threadsMode": "FIXED",
+                  "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+                },
+                "shot": {
+                  "activeCamera": "CAM_B02",
+                  "frameEnd": 144,
+                  "frameRate": {
+                    "denominator": 1,
+                    "numerator": 24
+                  },
+                  "frameStart": 1,
+                  "id": "SHOT_102",
+                  "seed": 24082602,
+                  "title": "B02 Interior Dolly",
+                  "unitScaleMeters": 1
+                }
+              }
+            },
+            "blend": {
+              "sha256": "6c0242d3d6ee497931eeabf1f5fb9e06078da88052b0f43f24a8d367b4c3bbdf",
+              "bytes": 106875
+            }
+          },
+          "completed": true
+        }
+      ],
+      "structureFilesByteEqual": true,
+      "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+      "blendByteIdentical": false
+    }
+  ],
+  "negativeControl": {
+    "id": "B01-TAMPERED",
+    "containerName": "bfs-b42-b01-tampered",
+    "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "argv": [
+      "--host",
+      "unix:///Users/tianxing/.colima/default/docker.sock",
+      "run",
+      "--rm",
+      "--name",
+      "bfs-b42-b01-tampered",
+      "--platform",
+      "linux/amd64",
+      "--pull",
+      "never",
+      "--read-only",
+      "--network",
+      "none",
+      "--user",
+      "65532:65532",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges:true",
+      "--pids-limit",
+      "256",
+      "--memory",
+      "8589934592",
+      "--cpus",
+      "4",
+      "--shm-size",
+      "1073741824",
+      "--mount",
+      "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree,dst=/repo,readonly",
+      "--mount",
+      "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b42-c1-worktree/experiments/linux-amd64-compiler-repro-c1-v0-1/runs/B01-TAMPERED,dst=/repo/worker-output",
+      "--tmpfs",
+      "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+      "--tmpfs",
+      "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+      "--env",
+      "BLENDER_USER_CONFIG=/work/blender-config",
+      "--env",
+      "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+      "--env",
+      "HOME=/work/home",
+      "--env",
+      "LANG=C.UTF-8",
+      "--env",
+      "LC_ALL=C.UTF-8",
+      "--env",
+      "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "--env",
+      "TMPDIR=/work/tmp",
+      "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--offline-mode",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "/repo/blender/compile_scene.py",
+      "--",
+      "--plan",
+      "/repo/experiments/linux-amd64-compiler-repro-c1-v0-1/plans/B01-TAMPERED.build-plan.json",
+      "--repository-root",
+      "/repo",
+      "--output-dir",
+      "/repo/worker-output"
+    ],
+    "exitCode": 1,
+    "signal": null,
+    "elapsedMs": 8545,
+    "stdout": "00:00.108  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.606  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.606  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.606  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.606  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.606  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n",
+    "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\nBFS_COMPILE_ERROR BuildPlan hash mismatch: expected 0000000000000000000000000000000000000000000000000000000000000000, received 316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf\n",
+    "timeoutTriggered": false,
+    "termSent": false,
+    "killSent": false,
+    "diagnosticMatched": true,
+    "outputFiles": 0
+  },
+  "runtimeOperationsExecuted": [
+    "DOCKER_IMAGE_INSPECT",
+    "DOCKER_RUN_B01-A",
+    "DOCKER_RUN_B01-B",
+    "DOCKER_RUN_B02-A",
+    "DOCKER_RUN_B02-B",
+    "DOCKER_RUN_B01_TAMPERED",
+    "DOCKER_RUNNING_CONTAINER_CHECK"
+  ],
+  "cleanup": {
+    "experimentContainersRunningAfter": 0
+  },
+  "errors": [],
+  "evidenceHash": "c4349fd589f003d059c9f1803fbf75353a0eebe260ff194b6df291e13019503b",
+  "analysis": {
+    "schemaVersion": "bfs.linuxAmd64CompilerReproAnalysis.v0.1",
+    "passed": true,
+    "failures": [],
+    "decision": "LINUX_AMD64_COMPILER_REPRODUCIBLE"
+  },
+  "verdict": "LINUX_AMD64_COMPILER_REPRODUCIBLE_AFTER_MOUNT_CORRECTION",
+  "nonClaims": [
+    "B42 does not render final pixels or establish image quality",
+    "B42 does not claim .blend files are byte-identical",
+    "B42 does not establish Eevee or GPU availability",
+    "B42 tests two bounded benchmark scenes, not arbitrary SceneSpec coverage",
+    "B42 is local evidence, not remote attestation"
+  ]
+}

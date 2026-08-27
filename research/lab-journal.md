@@ -1189,6 +1189,18 @@ Classification: `CPU_ONLY_WORKER_CONFIRMED_EEVEE_GPU_ROUTE_ABSENT`. The current 
 
 Artifacts: `experiments/linux-amd64-render-backend-control-v0-1/` and `research/2026-08-26-b41-d3-render-backend-control-result.md`.
 
+## J-069 · B42 failure retained; B42-C1 closes the compiler reproducibility gate
+
+Type: preregistered worker compiler experiment, retained launch failure, narrow correction and independent audit, 2026-08-26.
+
+B42 regenerated both B01 and B02 BuildPlans twice with exact frozen byte identities, but all five containers exited 125 before Blender because OCI could not create an absent nested mountpoint inside the read-only `/repo` bind. Its analyzer then threw on the absent observations. The generated plans, logs and `failure.json` were committed; no acceptance result was fabricated.
+
+B42-C1 preregistered only a tracked empty `/repo/worker-output` mountpoint and failure-total analysis. The four clean Blender 5.2 Linux/amd64 compilations exited zero in 9,361–9,776 ms. B01 reproduced structure hash `c699fc27…b7f0b`; B02 reproduced `025c6fa5…fa856`. Their `.blend` bytes differed, as explicitly allowed. The fifth container rejected a zeroed top-level `planHash`, exited 1 and wrote no scene artifacts.
+
+Independent audit passed tool hashes, regenerated plan files and direct output observations. Verdict: `LINUX_AMD64_COMPILER_REPRODUCIBLE_AFTER_MOUNT_CORRECTION`. This closes the two-scene compile gate, not pixel quality, Eevee/GPU, arbitrary-scene coverage, `.blend` byte identity or remote attestation.
+
+Artifacts: `experiments/linux-amd64-compiler-repro-v0-1/`, `experiments/linux-amd64-compiler-repro-c1-v0-1/`, `research/2026-08-26-b42-nested-mountpoint-failure.md`, and `research/2026-08-26-b42-c1-linux-amd64-compiler-repro-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
