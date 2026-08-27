@@ -315,7 +315,7 @@ def validate(evidence: dict, spec: dict, d5_spec: dict) -> str | None:
             "beautyPass": beauty_by_run[run_id]["passed"],
             "dataSemanticPass": data_by_run[run_id]["passed"] and data_by_run[run_id]["structuralValid"],
             "auxiliaryPass": auxiliary_by_run[run_id]["allExact"],
-            "sampleCountPass": sample_by_run[run_id]["valid"],
+            "sampleCountPass": sample_by_run[run_id]["gatePassed"],
         }
         expected_flags["combinedPass"] = all(expected_flags.values())
         if any(item[key] != value for key, value in expected_flags.items()):
@@ -428,7 +428,8 @@ def main() -> None:
         in_range = bool(finite and np.all(count_pixels >= 0.0) and np.all(count_pixels <= 1.0))
         all_at_max = bool(np.array_equal(count_pixels, np.ones_like(count_pixels)))
         stopped = bool(np.any(count_pixels < 1.0))
-        sample_valid = finite and in_range and (stopped if profile["adaptive"] else all_at_max)
+        sample_valid = finite and in_range and (profile["adaptive"] or all_at_max)
+        sample_gate_passed = sample_valid and (stopped if profile["adaptive"] else all_at_max)
         sample_measurements.append({
             "runId": run["runId"], "variantId": run["variant"], "profileId": run["profile"], "repeat": run["repeat"],
             "adaptive": profile["adaptive"], "finite": finite, "inRange": in_range, "allAtMaxSamples": all_at_max,
@@ -436,7 +437,8 @@ def main() -> None:
             "p50NormalizedSamples": percentile(count_pixels, 0.50), "p95NormalizedSamples": percentile(count_pixels, 0.95),
             "p99NormalizedSamples": percentile(count_pixels, 0.99), "maximumNormalizedSamples": float(np.max(count_pixels)),
             "meanEffectiveSamples": float(np.mean(count_pixels) * profile["maxSamples"]),
-            "fractionAtMaxSamples": float(np.count_nonzero(count_pixels == 1.0) / count_pixels.size), "valid": sample_valid,
+            "fractionAtMaxSamples": float(np.count_nonzero(count_pixels == 1.0) / count_pixels.size),
+            "valid": sample_valid, "gatePassed": sample_gate_passed,
         })
         selected = report["device"]["selected"]
         device_valid = len(selected) == 1 and selected[0]["id"] == expected_cpu["id"] and selected[0]["type"] == "CPU"
@@ -521,8 +523,8 @@ def main() -> None:
         candidate_measurements.append({
             "runId": run_id, "variantId": beauty["variantId"], "profileId": beauty["profileId"], "repeat": beauty["repeat"],
             "beautyPass": beauty["passed"], "dataSemanticPass": semantic["passed"] and semantic["structuralValid"],
-            "auxiliaryPass": auxiliary["allExact"], "sampleCountPass": sample["valid"],
-            "combinedPass": beauty["passed"] and semantic["passed"] and semantic["structuralValid"] and auxiliary["allExact"] and sample["valid"],
+            "auxiliaryPass": auxiliary["allExact"], "sampleCountPass": sample["gatePassed"],
+            "combinedPass": beauty["passed"] and semantic["passed"] and semantic["structuralValid"] and auxiliary["allExact"] and sample["gatePassed"],
         })
 
     observations_by_run = {item["runId"]: item for item in run_observations}
@@ -558,18 +560,23 @@ def main() -> None:
     if args.correction_tool_freeze_commit:
         if subprocess.run(["git", "merge-base", "--is-ancestor", args.correction_tool_freeze_commit, "HEAD"], cwd=root).returncode:
             raise RuntimeError("correction tool freeze is not an ancestor")
-        failure_path = args.receipt.parent / "analysis.failure.json"
-        if not failure_path.is_file():
-            raise RuntimeError("B52-D1 correction failure evidence absent")
+        failure_paths = [
+            args.receipt.parent / "analysis.failure.json",
+            args.receipt.parent / "analysis.semantic-classification.failure.json",
+            args.receipt.parent / "results.invalid-analysis-c1.json",
+        ]
+        if not all(path.is_file() for path in failure_paths):
+            raise RuntimeError("B52-D1 correction-chain evidence absent")
         for name in ("analyzer", "audit"):
             path = root / tools[name]["uri"]
             tools[name]["sha256"] = sha256_file(path)
             tools[name]["freezeCommit"] = args.correction_tool_freeze_commit
         analysis_correction = {
-            "id": "B52-D1-C1", "status": "LIMITED_ANALYSIS_TOOL_CORRECTION",
+            "id": "B52-D1-C2", "status": "LIMITED_ANALYSIS_TOOL_CORRECTION_CHAIN",
             "originalRunReceipt": {"uri": str(args.receipt.resolve().relative_to(root)), "sha256": sha256_file(args.receipt)},
-            "failureEvidence": {"uri": str(failure_path.resolve().relative_to(root)), "sha256": sha256_file(failure_path)},
+            "failureEvidence": [{"uri": str(path.resolve().relative_to(root)), "sha256": sha256_file(path)} for path in failure_paths],
             "originalToolFreezeCommit": receipt["toolFreezeCommit"],
+            "priorCorrectionToolFreezeCommits": ["b0d275d95b77899a8ae777917d9b5223895cbe6c"],
             "correctedToolFreezeCommit": args.correction_tool_freeze_commit,
             "rendersReused": len(receipt["runs"]), "rendersRepeated": 0,
         }

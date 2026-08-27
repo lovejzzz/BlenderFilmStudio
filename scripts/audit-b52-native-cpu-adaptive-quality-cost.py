@@ -84,8 +84,9 @@ def main() -> None:
     correction_checks = []
     if result.get("analysisCorrection") is not None:
         correction = result["analysisCorrection"]
-        for binding_name in ("originalRunReceipt", "failureEvidence"):
-            binding = correction[binding_name]
+        correction_bindings = [("originalRunReceipt", correction["originalRunReceipt"])]
+        correction_bindings += [(f"failureEvidence[{index}]", binding) for index, binding in enumerate(correction["failureEvidence"])]
+        for binding_name, binding in correction_bindings:
             path = root / binding["uri"]
             observed = sha256_file(path) if path.is_file() else None
             correction_checks.append({"name": binding_name, "uri": binding["uri"], "expectedSha256": binding["sha256"], "observedSha256": observed, "match": observed == binding["sha256"]})

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "bfs.nativeCpuAdaptiveQualityCostSemanticClassificationFailure.v0.1",
+  "experimentId": "B52-D1",
+  "date": "2026-08-27",
+  "status": "REJECTED_CORRECTED_ANALYSIS_ATTEMPT",
+  "stage": "SAMPLE_COUNT_CANDIDATE_CLASSIFICATION",
+  "reason": "LEGAL_NON_STOPPING_CANDIDATE_MISCLASSIFIED_AS_EXPERIMENT_INVALID",
+  "priorCorrectionToolFreezeCommit": "b0d275d95b77899a8ae777917d9b5223895cbe6c",
+  "priorAnalyzerSha256": "379aa0dc37b7034d124bd3bc87db4a335f4fdefb24646538e0ccf4abf48ed6c2",
+  "rejectedResult": {
+    "uri": "experiments/native-cpu-adaptive-quality-cost-derivation-v0-1/results.invalid-analysis-c1.json",
+    "sha256": "21c15ae1ce447a01220b42c9d1845bc1a71f976697fedfb5bf09f16f15148b30",
+    "verdict": "NATIVE_CPU_ADAPTIVE_QUALITY_COST_DERIVATION_INVALID",
+    "baseFailure": "SAMPLE_COUNT_VALIDITY",
+    "attacksPassed": 10,
+    "attackCount": 20
+  },
+  "observedCells": {
+    "validFiniteInRangeButNoEarlyStop": 6,
+    "affectedProfiles": [
+      "ADAPT_T001_M0",
+      "ADAPT_T001_M32"
+    ]
+  },
+  "protocolInterpretation": "The preregistered passing-profile rule requires an eligible adaptive profile to stop at least one pixel before max. A finite in-range adaptive cell that reaches max everywhere is a valid measured candidate that fails eligibility, not an invalid experiment input.",
+  "permittedCorrection": "Separate Sample Count measurement validity from candidate gate passage. Keep finite/range and fixed-control all-max checks as experiment-validity requirements; use early stopping only in the candidate combined-pass decision.",
+  "renderState": {
+    "rendersReused": 30,
+    "rendersRepeated": 0,
+    "renderReceiptModified": false,
+    "specModified": false,
+    "thresholdsModified": false,
+    "matrixModified": false
+  },
+  "additionalRejectedInvocation": {
+    "reason": "RELATIVE_RECEIPT_PATH_NOT_NORMALIZED",
+    "resultsWritten": false,
+    "toolModifiedInResponse": false,
+    "resolution": "Replay the same frozen C1 analyzer with absolute paths."
+  }
+}
