@@ -1851,6 +1851,24 @@ The formal root is absent. Spec SHA-256: `f102a969cb59d92b0103c6807f20ca54369785
 
 Artifacts: `specs/subpixel-bilinear-tolerance-holdout.v0.1.json` and `research/2026-08-27-b52-d7-subpixel-bilinear-tolerance-holdout-protocol.md`.
 
+## J-113 · B52-D7 tools freeze without hiding the predicted tail failure
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+The scalar Python reference, independent Node reference, Blender 5.2 worker, runner, analyzer, audit and four-test contract suite were frozen and pushed at commit `6d7c7b0933b40eb995facf940f15f7f1af988a3b`. The analyzer now binds every receipt PID, fixture, repeat and operation count back to its self-hashed child report; duplicated or relabeled reports therefore fail `PROCESS_ROSTER` instead of being accepted as separate processes.
+
+Before the freeze, 18 development-smoke child processes exercised all six fixtures: six Python references, six Node references and six real Blender compositor renders. Python and Node were byte-identical for 6/6 fixtures. All six Blender outputs stayed below the pre-existing `1/65536` maximum-error boundary with zero pixels above it, and every per-channel signed mean remained below `1/1048576`.
+
+The already frozen distribution gate was not revised after inspection. Four fixtures exceeded the p99 `1/1048576` limit; `HF_127X73_EXTEND_MIX` also exceeded the RMSE limit at `1.0071396468059945e-6`. The development smoke therefore predicts the formal first failure `TOLERANCE_DISTRIBUTION`. A synthetic full receipt constructed from those retained outputs reached exactly that failure while the other 22 evidence fields passed.
+
+The post-freeze preflight matched seven Git-frozen tool blobs, three D6 parents, Blender, bundled Python, Node and OCIO identities. It used two reference processes and one real Blender 5.2 RNA/graph probe, but made zero formal child processes, zero render calls and zero formal measurements. Runtime observations preserved their true absolute executable paths. The formal output root remained absent.
+
+Disk admission remained extremely narrow: 107,442,343,936 bytes free before a projected 16,777,216-byte write, leaving 107,425,566,720 bytes above the frozen 107,374,182,400-byte reserve. The frozen preflight SHA-256 is `91dd1803dd4a3574fae2f4744e8d76cebcb4ca2d7a379b2aee45563305e1fe56`; its canonical self-hash is `0e02c61913c00217bed074d78ad68a00cc70daa7e267cb85f6d4ab46e0dbd0be`.
+
+Next: execute the unchanged 24-process matrix. A distribution failure is the preregistered scientific outcome, not permission to relax p99 or RMSE after seeing the data.
+
+Artifacts: `experiments/subpixel-bilinear-tolerance-preflight-v0-1/` and `experiments/subpixel-bilinear-tolerance-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
