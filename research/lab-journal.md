@@ -1809,6 +1809,20 @@ The formal output root is absent. The preregistered spec SHA-256 is `28d3c0b292b
 
 Artifacts: `specs/deterministic-displace-calibration.v0.1.json`, `research/2026-08-27-b52-d6-deterministic-displace-calibration-protocol.md`, `blender/probe_b52_d6_displace_semantics.py` and `experiments/deterministic-warp-preflight-v0-1/`.
 
+## J-110 · B52-D6 tools freeze with a preserved Bilinear counterexample
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+The independent reference, Blender worker, runner, analyzer, audit and seven-test contract suite were frozen and pushed at commit `764ad216a77748026aca340a9a5e8f02fa544ccd`. All 20 attacks route independently from synthetic-valid evidence. A synthetic receipt built from the real smoke outputs also reaches the frozen `REFERENCE_MATCH` failure instead of crashing the analyzer.
+
+Seven pre-freeze real Blender worker smokes covered every fixture. Zero, both signed integer Clip cases, the destination-sampled step field, Extend and Repeat matched the independent float32 reference exactly. The Bilinear fixture did not: its maximum absolute error was `1.7583370208740234e-6`, RMSE `4.569772209229176e-8`. This is below `1/65536` but violates the already frozen exact-array gate, so the smoke was retained and no threshold was changed.
+
+The first frozen preflight was correctly blocked because free space had fallen below the 100 GiB reserve. Only explicitly authorized regenerable caches were removed: 845 MiB of `/tmp/bfs-*` scratch artifacts and 317 MiB of Colima cache; no repository evidence or user file was deleted. The second preflight matched six frozen tools, six parents, Blender and OCIO, then ran one real Blender 5.2 RNA/graph process with zero render calls. It admitted the 16 MiB projection with 107,447,611,392 bytes free and 107,430,834,176 projected after the write, above the 107,374,182,400-byte reserve.
+
+The formal root remained absent and formal operation counts remained zero. The frozen preflight SHA-256 is `0a78a457f8d58b0324a74deb791edab4a1a9823b19abd556a0a5305106a55aa0`. Next: execute the unchanged 14-process matrix. The expected Bilinear failure remains a falsifiable prediction, not permission to skip the run.
+
+Artifact: `experiments/deterministic-displace-calibration-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
