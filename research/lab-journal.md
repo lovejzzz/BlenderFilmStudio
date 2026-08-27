@@ -1735,6 +1735,20 @@ Next: preregister D5 as a baseline-only controlled-motion calibration followed b
 
 Artifacts: `experiments/adaptive-vector-blur-semantics-derivation-v0-1/` and `research/2026-08-27-b52-d4-adaptive-vector-blur-semantics-derivation-result.md`.
 
+## J-105 · Controlled motion proves the Blender node is responsive
+
+Date: 2026-08-27 · Type: EXPLORATORY REAL-BLENDER TASK CALIBRATION · Formal claims: 0
+
+D4 could not distinguish candidate Vector outputs because its retained scenes produced too little effective motion. A new non-formal fixture therefore used an orthographic camera, a high-contrast moving plane, a static foreground occluder and known linear keyframes at frames 0/1/2. No adaptive candidate was opened.
+
+Two failures remain part of the record. Attempt 0 used the rejected `BLENDER_EEVEE_NEXT` enum; Blender 5.2 exposed `BLENDER_EEVEE`, `BLENDER_WORKBENCH` and `CYCLES`. Attempt 1 then hit the Blender 5.2 layered Action migration: `Action.fcurves` is absent, while keyframe curves live under `Action.layers[].strips[].channelbags[].fcurves[]`. Both failures occurred before rendering.
+
+Attempt 2 used real Blender EEVEE; attempt 3 repeated the fixture with Cycles CPU at 16 fixed samples. Cycles produced a maximum Vector magnitude of 51.200012 pixels. Real Blender Vector Blur at shutters 0.25, 0.5 and 1.0 changed 15,375–15,390 pixels above `1/65536`; RGB maximum error rose from 0.872852 to 0.985832 to 1.039586, and RMSE rose from 0.042492 to 0.060361 to 0.086440. Maximum and RMSE were both strictly dose ordered.
+
+This is exploratory support that Blender 5.2 Vector Blur is not universally inert. It does not validate an adaptive profile or become a holdout. The next formal question can now freeze controlled object motion, controlled camera motion and a static negative control before implementing the formal tool.
+
+Artifacts: `blender/probe_b52_d5_controlled_motion.py`, `scripts/analyze-b52-d5-controlled-motion-preflight.py` and `experiments/controlled-motion-vector-blur-preflight-v0-1/`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

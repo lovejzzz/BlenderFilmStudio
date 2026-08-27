@@ -1,0 +1,119 @@
+{
+  "blender": {
+    "buildHash": "fbe6228777e7",
+    "buildPlatform": "Darwin",
+    "version": "5.2.0 LTS"
+  },
+  "classification": "EXPLORATORY_NOT_FORMAL_NOT_PROMOTABLE",
+  "compositorOutputs": [
+    {
+      "bytes": 1721492,
+      "renderSeconds": 0.005567,
+      "samples": 32,
+      "sha256": "1fe717442bb85f51a9aa461b561ba1f36b40ee54415a97314ef628b688df560a",
+      "shutter": 0.25,
+      "uri": "vector-blur-shutter-0p25.exr"
+    },
+    {
+      "bytes": 1721184,
+      "renderSeconds": 0.005539,
+      "samples": 32,
+      "sha256": "d44723f4a90ebbf8fe919f54a86a87aee9d707ef65c10f6b3afa8e3e0fa69676",
+      "shutter": 0.5,
+      "uri": "vector-blur-shutter-0p5.exr"
+    },
+    {
+      "bytes": 1721235,
+      "renderSeconds": 0.005758,
+      "samples": 32,
+      "sha256": "87896ee126bf3f1653fbdad9b54862f044a991fe8053ea0ab88d057b42aa1623",
+      "shutter": 1.0,
+      "uri": "vector-blur-shutter-1p0.exr"
+    }
+  ],
+  "fixtureRender": {
+    "engine": "CYCLES",
+    "fixture": {
+      "camera": {
+        "orthoScale": 10.0,
+        "type": "ORTHO"
+      },
+      "frame": 1,
+      "motionBlur": false,
+      "moverXByFrame": {
+        "0": -1.0,
+        "1": 0.0,
+        "2": 1.0
+      },
+      "nominalHorizontalPixelsPerFrame": 28.8,
+      "occluderCenterX": 0.72,
+      "resolution": [
+        512,
+        288
+      ]
+    },
+    "renderSeconds": 0.403636,
+    "source": {
+      "bytes": 1886887,
+      "sha256": "4848a8951729972d078abd67c765a7c377c71b38ee6105f918d2dabe9c36ed61",
+      "uri": "controlled-motion-source.exr"
+    }
+  },
+  "graph": {
+    "groupOutput": {
+      "identifier": "Socket_0",
+      "name": "Image"
+    },
+    "imageOutputs": [
+      "Combined",
+      "Alpha",
+      "Depth",
+      "Normal",
+      "Vector",
+      "CryptoObject00",
+      "CryptoObject01",
+      "CryptoObject02"
+    ],
+    "linkCount": 4,
+    "nodeCount": 3,
+    "vectorBlurInputs": [
+      {
+        "identifier": "Image",
+        "name": "Image",
+        "type": "RGBA"
+      },
+      {
+        "identifier": "Speed",
+        "name": "Speed",
+        "type": "VECTOR"
+      },
+      {
+        "identifier": "Z",
+        "name": "Depth",
+        "type": "VALUE"
+      },
+      {
+        "identifier": "Samples",
+        "name": "Samples",
+        "type": "INT"
+      },
+      {
+        "identifier": "Shutter",
+        "name": "Shutter",
+        "type": "VALUE"
+      }
+    ]
+  },
+  "nonClaims": [
+    "This probe is not a preregistered experiment.",
+    "The synthetic fixture is not a production shot or human-quality reference.",
+    "No adaptive candidate is evaluated or promoted."
+  ],
+  "operationCounts": {
+    "blenderProcesses": 1,
+    "compositorRenderCalls": 3,
+    "cyclesRayRenders": 1,
+    "fixtureRenderCalls": 1
+  },
+  "schemaVersion": "bfs.controlledMotionVectorBlurExploratoryProbe.v0.1"
+}
