@@ -1377,6 +1377,22 @@ Next: keep resolution fixed and separately preregister motion-blur and depth-of-
 
 Artifacts: `experiments/codex-worker-resolution-holdout-v0-1/`, `specs/codex-worker-resolution-holdout.v0.1.json`, `research/2026-08-27-b49-r-codex-worker-resolution-holdout-protocol.md` and `research/2026-08-27-b49-r-codex-worker-resolution-holdout-result.md`.
 
+## J-082 · B49-MB-D1 derives motion-blur semantics and a Vector-pass counterexample
+
+Date: 2026-08-27 · Type: LIVE DERIVATION · Runtime: eleven fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+B49-MB-D1 froze eleven 128×72, 128-spp raw cells before its tools: six on TABLETOP's linear camera push and five on static INTERIOR. The moving cells isolated blur off, enabled shutter zero, centered shutter 0.5/1.0 and a nominally identical `[22,23]` interval expressed as START at frame 22 versus END at frame 23.
+
+Zero shutter preserved moving Combined/Depth/Normal/Cryptomatte exactly relative to off, but changed 32,552 Vector float components. Centered 0.5 and 1.0 shutter changed 21,133 and 21,247 Combined components with RMSE 0.008706 and 0.013087. Global edge energy did not decrease monotonically, falsifying a proposed one-number blur-quality proxy.
+
+START 1.0 at frame 22 and END 1.0 at frame 23 reproduced all seven decoded passes exactly, despite different EXR container hashes. On static INTERIOR, every blur-on cell preserved Combined/Depth/Normal/Cryptomatte exactly while Vector changed by a small amount. Vector must therefore be treated as mode-dependent representation rather than a passive image pass; Cryptomatte ID floats must not be interpreted through generic RMSE.
+
+Centered shutter 0.5/1.0 cost only 1.008×/1.013× the off Blender render time in this bounded cell. All eleven workers completed, cleanup was zero and the independent analyzer replay was byte exact. Status: `MOTION_BLUR_DERIVATION_USABLE`.
+
+Next: a formal unseen-frame holdout with three independent 512-spp blur references, 128-spp on/off candidates, reference-floor quality gates and pass-domain-specific static controls. Human shutter preference remains outside machine promotion.
+
+Artifacts: `experiments/codex-worker-motion-blur-derivation-v0-1/`, `specs/codex-worker-motion-blur-derivation.v0.1.json`, `research/2026-08-27-b49-mb-d1-motion-blur-derivation-protocol.md` and `research/2026-08-27-b49-mb-d1-motion-blur-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
