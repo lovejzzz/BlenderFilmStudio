@@ -2,10 +2,13 @@ import { spawnSync } from 'node:child_process';
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { canonicalJson, repositoryRoot } from './lib/scene-spec.mjs';
-import { analyzeB45Evidence, hashB45Evidence, readB45Spec, runB45Attacks } from './lib/b45-worker-pixel-promotion.mjs';
+import { B45_C1_IDENTITY, B45_IDENTITY, analyzeB45C1Evidence, analyzeB45Evidence, hashB45Evidence, readB45C1Spec, readB45Spec, runB45Attacks, runB45C1Attacks, runB45FailureTotalitySelfTest } from './lib/b45-worker-pixel-promotion.mjs';
 import { sha256File } from './lib/receipt-format.mjs';
 
-const outputRoot = resolve(repositoryRoot, 'experiments/codex-worker-pixel-promotion-v0-1');
+const c1Mode = process.argv.includes('--c1');
+const correctionSpec = c1Mode ? await readB45C1Spec() : null;
+const identity = c1Mode ? B45_C1_IDENTITY : B45_IDENTITY;
+const outputRoot = resolve(repositoryRoot, c1Mode ? correctionSpec.outputRoot : 'experiments/codex-worker-pixel-promotion-v0-1');
 const result = JSON.parse(await readFile(resolve(outputRoot, 'results.json'), 'utf8'));
 const spec = await readB45Spec();
 
@@ -67,16 +70,24 @@ const pairObservations = result.shots.map(shot => {
   return { id: shot.id, canonicalPixelSha256A: a.decoded.canonicalPixelSha256, canonicalPixelSha256B: b.decoded.canonicalPixelSha256, pixelExact: a.decoded.canonicalPixelSha256 === b.decoded.canonicalPixelSha256, exrContainerByteExact: a.artifacts.exr.sha256 === b.artifacts.exr.sha256, pngContainerByteExact: a.artifacts.png.sha256 === b.artifacts.png.sha256 };
 });
 const pairsMatch = result.shots.every(shot => canonicalJson(pairObservations.find(item => item.id === shot.id)) === canonicalJson({ id: shot.id, ...shot.pairComparison })) && pairObservations.every(item => item.pixelExact);
-const attacks = runB45Attacks(result, spec);
+const attacks = runB45Attacks(result, spec, { identity });
 const attacksMatch = canonicalJson(attacks) === canonicalJson(result.attacks) && attacks.every(item => item.passed);
-const analysis = analyzeB45Evidence(result, spec);
+const correctionAttacks = c1Mode ? runB45C1Attacks(result, spec, correctionSpec) : [];
+const correctionAttacksMatch = !c1Mode || (canonicalJson(correctionAttacks) === canonicalJson(result.correctionAttacks) && correctionAttacks.every(item => item.passed));
+const failureTotalSelfTest = c1Mode ? runB45FailureTotalitySelfTest(result, spec) : null;
+const failureTotalSelfTestMatch = !c1Mode || canonicalJson(failureTotalSelfTest) === canonicalJson(result.failureTotalSelfTest);
+const correctionParentMatch = !c1Mode || (canonicalJson(result.correctionParent) === canonicalJson(correctionSpec.parentFailure)
+  && await sha256File(resolve(repositoryRoot, correctionSpec.parentFailure.uri)) === correctionSpec.parentFailure.sha256);
+const analysis = c1Mode ? analyzeB45C1Evidence(result, spec, correctionSpec) : analyzeB45Evidence(result, spec);
 const audit = {
-  schemaVersion: 'bfs.codexWorkerPixelPromotionIndependentAudit.v0.1', experimentId: 'B45', analysis,
+  schemaVersion: c1Mode ? 'bfs.codexWorkerPixelPromotionIndependentAudit.v0.2' : 'bfs.codexWorkerPixelPromotionIndependentAudit.v0.1', experimentId: identity.experimentId, analysis,
   parentsMatch, parentObservations, toolsMatch, toolObservations, inputsMatch, inputObservations,
   outputsMatch, runObservations, pairsMatch, pairObservations, attacksMatch, attacks,
+  correctionParentMatch, failureTotalSelfTestMatch, failureTotalSelfTest, correctionAttacksMatch, correctionAttacks,
   evidenceSelfHashMatch: result.evidenceHash === hashB45Evidence(result),
 };
-audit.passed = analysis.passed && parentsMatch && toolsMatch && inputsMatch && outputsMatch && pairsMatch && attacksMatch && audit.evidenceSelfHashMatch;
+audit.passed = analysis.passed && parentsMatch && toolsMatch && inputsMatch && outputsMatch && pairsMatch && attacksMatch
+  && correctionParentMatch && failureTotalSelfTestMatch && correctionAttacksMatch && audit.evidenceSelfHashMatch;
 await writeFile(resolve(outputRoot, 'audit.json'), `${JSON.stringify(audit, null, 2)}\n`);
-process.stdout.write(`BFS_B45_AUDIT ${audit.passed ? 'PASS' : 'FAIL'} outputs=${outputsMatch ? 'MATCH' : 'MISMATCH'} pixels=${pairObservations.filter(item => item.pixelExact).length}/${pairObservations.length} attacks=${attacks.filter(item => item.passed).length}/${attacks.length}\n`);
+process.stdout.write(`BFS_${c1Mode ? 'B45_C1' : 'B45'}_AUDIT ${audit.passed ? 'PASS' : 'FAIL'} outputs=${outputsMatch ? 'MATCH' : 'MISMATCH'} pixels=${pairObservations.filter(item => item.pixelExact).length}/${pairObservations.length} attacks=${attacks.filter(item => item.passed).length}/${attacks.length} correctionAttacks=${correctionAttacks.filter(item => item.passed).length}/${correctionAttacks.length}\n`);
 if (!audit.passed) process.exitCode = 1;

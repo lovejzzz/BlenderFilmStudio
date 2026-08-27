@@ -161,15 +161,30 @@ def main() -> None:
         raise RuntimeError("Render Result is absent")
     exr_path = output_dir / "frame.exr"
     png_path = output_dir / "frame.png"
+    scene.render.image_settings.media_type = "IMAGE"
     scene.render.image_settings.file_format = "OPEN_EXR"
     scene.render.image_settings.color_mode = "RGBA"
     scene.render.image_settings.color_depth = "32"
     scene.render.image_settings.exr_codec = "ZIP"
     image.save_render(str(exr_path), scene=scene)
+    exr_save_settings = {
+        "mediaType": scene.render.image_settings.media_type,
+        "fileFormat": scene.render.image_settings.file_format,
+        "colorMode": scene.render.image_settings.color_mode,
+        "colorDepth": scene.render.image_settings.color_depth,
+        "codec": scene.render.image_settings.exr_codec,
+    }
+    scene.render.image_settings.media_type = "IMAGE"
     scene.render.image_settings.file_format = "PNG"
     scene.render.image_settings.color_mode = "RGBA"
     scene.render.image_settings.color_depth = "8"
     image.save_render(str(png_path), scene=scene)
+    png_save_settings = {
+        "mediaType": scene.render.image_settings.media_type,
+        "fileFormat": scene.render.image_settings.file_format,
+        "colorMode": scene.render.image_settings.color_mode,
+        "colorDepth": scene.render.image_settings.color_depth,
+    }
     dimensions = png_dimensions(png_path)
     if dimensions != (128, 72) or not exr_path.exists():
         raise RuntimeError(f"output validation failed: PNG {dimensions}, EXR {exr_path.exists()}")
@@ -194,6 +209,7 @@ def main() -> None:
         "ocio": {"name": config.getName(), "sha256": scene.get("bfs_ocio_sha256"), "declaredEncoding": scene.get("bfs_declared_encoding")},
         "originalSettings": original_settings,
         "appliedSettings": applied_settings,
+        "saveSettings": {"exr": exr_save_settings, "png": png_save_settings},
         "renderOperatorCalls": 1,
         "savesFromSameRenderResult": 2,
         "artifacts": artifacts,

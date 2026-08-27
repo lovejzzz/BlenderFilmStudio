@@ -6,6 +6,25 @@ export const B45_SPEC_URI = 'specs/codex-worker-pixel-promotion.v0.1.json';
 export const B45_SPEC_PATH = resolve(repositoryRoot, B45_SPEC_URI);
 export const B45_SPEC_SHA256 = 'bca84a43296c1f783bff4669e7a616a4c89a5d0b1660b6c8a11680b6ca0c11e8';
 export const B45_PREREG_COMMIT = 'd0eeb985bb9db39338fce02f1b0cbeaac96cc640';
+export const B45_C1_SPEC_URI = 'specs/codex-worker-pixel-promotion-media-type-correction.v0.1.json';
+export const B45_C1_SPEC_PATH = resolve(repositoryRoot, B45_C1_SPEC_URI);
+export const B45_C1_SPEC_SHA256 = '7f7ae50999c412a251fef55e941e109b58cbc41904f9f297ecfaddbf6aaeda11';
+export const B45_C1_PREREG_COMMIT = '222574d793088c04e1d02b9a5d1d1c56f0776c88';
+
+export const B45_IDENTITY = {
+  schemaVersion: 'bfs.codexWorkerPixelPromotionEvidence.v0.1',
+  experimentId: 'B45',
+  preregistrationCommit: B45_PREREG_COMMIT,
+  specSha256: B45_SPEC_SHA256,
+  analysisSchemaVersion: 'bfs.codexWorkerPixelPromotionAnalysis.v0.1',
+};
+export const B45_C1_IDENTITY = {
+  schemaVersion: 'bfs.codexWorkerPixelPromotionEvidence.v0.2',
+  experimentId: 'B45-C1',
+  preregistrationCommit: B45_C1_PREREG_COMMIT,
+  specSha256: B45_C1_SPEC_SHA256,
+  analysisSchemaVersion: 'bfs.codexWorkerPixelPromotionAnalysis.v0.2',
+};
 
 export async function readB45Spec() {
   const bytes = await readFile(B45_SPEC_PATH);
@@ -14,9 +33,16 @@ export async function readB45Spec() {
   return JSON.parse(bytes);
 }
 
+export async function readB45C1Spec() {
+  const bytes = await readFile(B45_C1_SPEC_PATH);
+  const digest = sha256(bytes);
+  if (digest !== B45_C1_SPEC_SHA256) throw new Error(`B45-C1 spec SHA mismatch: ${digest}`);
+  return JSON.parse(bytes);
+}
+
 export function hashB45Evidence(evidence) {
   const copy = structuredClone(evidence);
-  for (const key of ['evidenceHash', 'analysis', 'attacks', 'attacksPassed', 'verdict', 'nonClaims']) delete copy[key];
+  for (const key of ['evidenceHash', 'analysis', 'attacks', 'attacksPassed', 'correctionAttacks', 'correctionAttacksPassed', 'verdict', 'nonClaims']) delete copy[key];
   return sha256(Buffer.from(canonicalJson(copy)));
 }
 
@@ -38,11 +64,11 @@ export function expectedAppliedSettings(spec) {
   };
 }
 
-export function analyzeB45Evidence(evidence, spec, { requireAttacks = true } = {}) {
+export function analyzeB45Evidence(evidence, spec, { requireAttacks = true, requireEvidenceHash = true, identity = B45_IDENTITY } = {}) {
   const failures = [];
   const gate = (condition, code) => { if (!condition && !failures.includes(code)) failures.push(code); };
-  gate(evidence?.schemaVersion === 'bfs.codexWorkerPixelPromotionEvidence.v0.1' && evidence?.experimentId === 'B45', 'EVIDENCE_SCHEMA');
-  gate(evidence?.preregistration?.commit === B45_PREREG_COMMIT && evidence?.preregistration?.specSha256 === B45_SPEC_SHA256, 'PREREGISTRATION_IDENTITY');
+  gate(evidence?.schemaVersion === identity.schemaVersion && evidence?.experimentId === identity.experimentId, 'EVIDENCE_SCHEMA');
+  gate(evidence?.preregistration?.commit === identity.preregistrationCommit && evidence?.preregistration?.specSha256 === identity.specSha256, 'PREREGISTRATION_IDENTITY');
   gate(canonicalJson(evidence?.parents) === canonicalJson(spec.parents), 'PARENT_IDENTITY');
   gate(evidence?.parentObservations?.length === 4 && evidence.parentObservations.every(item => item.match), 'PARENT_HASH');
   gate(evidence?.inputObservations?.length >= 11 && evidence.inputObservations.every(item => item.match), 'FROZEN_INPUT_HASH');
@@ -97,11 +123,11 @@ export function analyzeB45Evidence(evidence, spec, { requireAttacks = true } = {
   gate(evidence?.cleanup?.experimentContainersRunningAfter === 0, 'CLEANUP_BOUNDARY');
   gate(Array.isArray(evidence?.errors) && evidence.errors.length === 0, 'RUN_ERRORS');
   if (requireAttacks) gate(evidence?.attacks?.length === spec.attacks.length && evidence.attacks.every(item => item.passed), 'ATTACKS');
-  gate(evidence?.evidenceHash === hashB45Evidence(evidence), 'EVIDENCE_SELF_HASH');
-  return { schemaVersion: 'bfs.codexWorkerPixelPromotionAnalysis.v0.1', passed: failures.length === 0, failures, decision: failures[0] ?? spec.acceptedVerdict };
+  if (requireEvidenceHash) gate(evidence?.evidenceHash === hashB45Evidence(evidence), 'EVIDENCE_SELF_HASH');
+  return { schemaVersion: identity.analysisSchemaVersion, passed: failures.length === 0, failures, decision: failures[0] ?? spec.acceptedVerdict };
 }
 
-export function runB45Attacks(evidence, spec) {
+export function runB45Attacks(evidence, spec, { identity = B45_IDENTITY } = {}) {
   const attacks = [
     ['A01_PARENT_IDENTITY', 'PARENT_IDENTITY', value => { value.parents.codexWorkerPromotion.resultSha256 = '0'.repeat(64); }],
     ['A02_SOURCE_IDENTITY', 'SOURCE_IDENTITY_TABLETOP-A1', value => { value.shots.find(item => item.id === 'TABLETOP').runs[0].source.sha256 = '0'.repeat(64); }],
@@ -120,8 +146,82 @@ export function runB45Attacks(evidence, spec) {
   ];
   return attacks.map(([id, expectedReason, mutate]) => {
     const value = structuredClone(evidence);
-    mutate(value);
-    const observedReason = analyzeB45Evidence(value, spec, { requireAttacks: false }).failures[0] ?? 'NO_REJECTION';
-    return { id, expectedReason, observedReason, passed: observedReason === expectedReason };
+    try {
+      mutate(value);
+      const observedReason = analyzeB45Evidence(value, spec, { requireAttacks: false, identity }).failures[0] ?? 'NO_REJECTION';
+      return { id, expectedReason, observedReason, passed: observedReason === expectedReason };
+    } catch (error) {
+      return { id, expectedReason, observedReason: 'ATTACK_FIXTURE_UNAVAILABLE', passed: false, error: error instanceof Error ? error.message : String(error) };
+    }
+  });
+}
+
+export function runB45FailureTotalitySelfTest(evidence, spec) {
+  const value = structuredClone(evidence);
+  const run = value?.shots?.find(item => item.id === 'TABLETOP')?.runs?.[0];
+  if (run) run.report = null;
+  try {
+    const analysis = analyzeB45Evidence(value, spec, { requireAttacks: false, identity: B45_C1_IDENTITY });
+    const attacks = runB45Attacks(value, spec, { identity: B45_C1_IDENTITY });
+    const observedReason = analysis.failures[0] ?? 'NO_REJECTION';
+    return {
+      passed: observedReason === 'REPORT_SOURCE_TABLETOP-A1' && attacks.length === spec.attacks.length,
+      expectedReason: 'REPORT_SOURCE_TABLETOP-A1', observedReason,
+      attackGeneratorReturned: attacks.length,
+      attackGeneratorThrew: false,
+    };
+  } catch (error) {
+    return {
+      passed: false, expectedReason: 'REPORT_SOURCE_TABLETOP-A1', observedReason: 'THREW',
+      attackGeneratorReturned: 0, attackGeneratorThrew: true,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
+}
+
+export function analyzeB45C1Evidence(evidence, spec, correctionSpec, { requireAttacks = true } = {}) {
+  const base = analyzeB45Evidence(evidence, spec, { requireAttacks: false, requireEvidenceHash: false, identity: B45_C1_IDENTITY });
+  const failures = [...base.failures];
+  const gate = (condition, code) => { if (!condition && !failures.includes(code)) failures.push(code); };
+  gate(canonicalJson(evidence?.correctionParent) === canonicalJson(correctionSpec.parentFailure), 'C1_PARENT_FAILURE');
+  const expectedExr = correctionSpec.corrections.find(item => item.id === 'EXR_MEDIA_TYPE')?.requiredReport;
+  const expectedPng = { mediaType: 'IMAGE', fileFormat: 'PNG', colorMode: 'RGBA', colorDepth: '8' };
+  for (const shot of spec.shots) for (const input of shot.inputs) {
+    const report = evidence?.shots?.find(item => item.id === shot.id)?.runs?.find(item => item.id === input.id)?.report;
+    gate(canonicalJson(report?.saveSettings?.exr) === canonicalJson(expectedExr)
+      && canonicalJson(report?.saveSettings?.png) === canonicalJson(expectedPng), `C1_SAVE_SETTINGS_${input.id}`);
+  }
+  gate(evidence?.failureTotalSelfTest?.passed === true
+    && evidence.failureTotalSelfTest.observedReason === 'REPORT_SOURCE_TABLETOP-A1'
+    && evidence.failureTotalSelfTest.attackGeneratorReturned === spec.attacks.length
+    && evidence.failureTotalSelfTest.attackGeneratorThrew === false, 'C1_FAILURE_TOTALITY');
+  if (requireAttacks) {
+    gate(evidence?.attacks?.length === spec.attacks.length && evidence.attacks.every(item => item.passed), 'ATTACKS');
+    gate(evidence?.correctionAttacks?.length === correctionSpec.requiredCorrectionAttacks.length
+      && evidence.correctionAttacks.every(item => item.passed), 'C1_ATTACKS');
+  }
+  gate(evidence?.evidenceHash === hashB45Evidence(evidence), 'EVIDENCE_SELF_HASH');
+  return {
+    schemaVersion: B45_C1_IDENTITY.analysisSchemaVersion,
+    passed: failures.length === 0,
+    failures,
+    decision: failures[0] ?? correctionSpec.acceptedVerdict,
+  };
+}
+
+export function runB45C1Attacks(evidence, spec, correctionSpec) {
+  const definitions = [
+    ['C1_A01_EXR_MEDIA_TYPE', 'C1_SAVE_SETTINGS_TABLETOP-A1', value => { value.shots.find(item => item.id === 'TABLETOP').runs[0].report.saveSettings.exr.mediaType = 'MULTI_LAYER_IMAGE'; }],
+    ['C1_A02_NULL_TOTALITY', 'C1_FAILURE_TOTALITY', value => { value.failureTotalSelfTest.passed = false; }],
+  ];
+  return definitions.map(([id, expectedReason, mutate]) => {
+    const value = structuredClone(evidence);
+    try {
+      mutate(value);
+      const observedReason = analyzeB45C1Evidence(value, spec, correctionSpec, { requireAttacks: false }).failures[0] ?? 'NO_REJECTION';
+      return { id, expectedReason, observedReason, passed: observedReason === expectedReason };
+    } catch (error) {
+      return { id, expectedReason, observedReason: 'ATTACK_FIXTURE_UNAVAILABLE', passed: false, error: error instanceof Error ? error.message : String(error) };
+    }
   });
 }

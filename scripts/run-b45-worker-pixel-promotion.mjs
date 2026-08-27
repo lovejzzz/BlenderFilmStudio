@@ -3,12 +3,15 @@ import { chmod, mkdir, readFile, readdir, stat, statfs, writeFile } from 'node:f
 import { resolve } from 'node:path';
 import { repositoryRoot } from './lib/scene-spec.mjs';
 import { readB41Spec } from './lib/b41-linux-amd64-blender-runtime-canary.mjs';
-import { B45_PREREG_COMMIT, B45_SPEC_SHA256, analyzeB45Evidence, hashB45Evidence, readB45Spec, runB45Attacks } from './lib/b45-worker-pixel-promotion.mjs';
+import { B45_C1_IDENTITY, B45_IDENTITY, analyzeB45C1Evidence, analyzeB45Evidence, hashB45Evidence, readB45C1Spec, readB45Spec, runB45Attacks, runB45C1Attacks, runB45FailureTotalitySelfTest } from './lib/b45-worker-pixel-promotion.mjs';
 import { sha256File } from './lib/receipt-format.mjs';
 
 const spec = await readB45Spec();
+const c1Mode = process.argv.includes('--c1');
+const correctionSpec = c1Mode ? await readB45C1Spec() : null;
+const identity = c1Mode ? B45_C1_IDENTITY : B45_IDENTITY;
 const workerSpec = await readB41Spec();
-const experimentRoot = resolve(repositoryRoot, 'experiments/codex-worker-pixel-promotion-v0-1');
+const experimentRoot = resolve(repositoryRoot, c1Mode ? correctionSpec.outputRoot : 'experiments/codex-worker-pixel-promotion-v0-1');
 const runsRoot = resolve(experimentRoot, 'runs');
 const dockerBase = ['--host', workerSpec.runtime.dockerHost];
 const names = spec.shots.flatMap(shot => shot.inputs.map(input => `bfs-b45-${input.id.toLowerCase()}`));
@@ -83,8 +86,9 @@ function analyzeExr(input, output) {
   return stdout;
 }
 
-if (spawnSync('git', ['merge-base', '--is-ancestor', B45_PREREG_COMMIT, 'HEAD'], { cwd: repositoryRoot }).status !== 0) throw new Error('B45 preregistration is not an ancestor');
+if (spawnSync('git', ['merge-base', '--is-ancestor', identity.preregistrationCommit, 'HEAD'], { cwd: repositoryRoot }).status !== 0) throw new Error(`${identity.experimentId} preregistration is not an ancestor`);
 const toolFreezeCommit = probe('git', ['rev-parse', 'HEAD'], 'tool freeze identity');
+if (c1Mode && await sha256File(resolve(repositoryRoot, correctionSpec.parentFailure.uri)) !== correctionSpec.parentFailure.sha256) throw new Error('B45-C1 parent failure differs');
 const existing = await readdir(experimentRoot).catch(error => error.code === 'ENOENT' ? [] : Promise.reject(error));
 if (existing.length > 0) throw new Error(`B45 output root is not empty: ${existing.join(', ')}`);
 for (const name of names) if (spawnSync('docker', [...dockerBase, 'container', 'inspect', name], { encoding: 'utf8' }).status === 0) throw new Error(`B45 container already exists: ${name}`);
@@ -176,8 +180,8 @@ try {
 operations.push('DOCKER_RUNNING_CONTAINER_CHECK');
 const running = probe('docker', [...dockerBase, 'ps', '--format', '{{.Names}}'], 'running container check').split('\n').filter(Boolean);
 const evidence = {
-  schemaVersion: 'bfs.codexWorkerPixelPromotionEvidence.v0.1', experimentId: 'B45',
-  preregistration: { commit: B45_PREREG_COMMIT, specSha256: B45_SPEC_SHA256 }, parents: spec.parents, parentObservations,
+  schemaVersion: identity.schemaVersion, experimentId: identity.experimentId,
+  preregistration: { commit: identity.preregistrationCommit, specSha256: identity.specSha256 }, parents: spec.parents, parentObservations,
   toolFreezeCommit,
   tools: {
     runner: { uri: 'scripts/run-b45-worker-pixel-promotion.mjs', sha256: await sha256File(resolve(repositoryRoot, 'scripts/run-b45-worker-pixel-promotion.mjs')) },
@@ -190,12 +194,18 @@ const evidence = {
   securityBoundary: spec.containerContract, renderControl: spec.renderControl, shots, negativeControl,
   runtimeOperationsExecuted: operations, cleanup: { experimentContainersRunningAfter: running.filter(name => names.includes(name)).length }, errors,
 };
+if (c1Mode) evidence.correctionParent = correctionSpec.parentFailure;
+if (c1Mode) evidence.failureTotalSelfTest = runB45FailureTotalitySelfTest(evidence, spec);
 evidence.evidenceHash = hashB45Evidence(evidence);
-evidence.attacks = runB45Attacks(evidence, spec);
+evidence.attacks = runB45Attacks(evidence, spec, { identity });
 evidence.attacksPassed = evidence.attacks.filter(item => item.passed).length;
-evidence.analysis = analyzeB45Evidence(evidence, spec);
-evidence.verdict = evidence.analysis.passed ? spec.acceptedVerdict : spec.rejectedVerdict;
-evidence.nonClaims = spec.nonClaims;
+if (c1Mode) {
+  evidence.correctionAttacks = runB45C1Attacks(evidence, spec, correctionSpec);
+  evidence.correctionAttacksPassed = evidence.correctionAttacks.filter(item => item.passed).length;
+}
+evidence.analysis = c1Mode ? analyzeB45C1Evidence(evidence, spec, correctionSpec) : analyzeB45Evidence(evidence, spec);
+evidence.verdict = evidence.analysis.passed ? (c1Mode ? correctionSpec.acceptedVerdict : spec.acceptedVerdict) : (c1Mode ? correctionSpec.rejectedVerdict : spec.rejectedVerdict);
+evidence.nonClaims = c1Mode ? [...spec.nonClaims, ...correctionSpec.nonClaims] : spec.nonClaims;
 await writeFile(resolve(experimentRoot, 'results.json'), `${JSON.stringify(evidence, null, 2)}\n`);
-process.stdout.write(`BFS_B45_RESULT verdict=${evidence.verdict} exact=${shots.filter(item => item.pairComparison.pixelExact).length}/${spec.shots.length} attacks=${evidence.attacksPassed}/${evidence.attacks.length} failures=${evidence.analysis.failures.join(',') || 'none'}\n`);
+process.stdout.write(`BFS_${c1Mode ? 'B45_C1' : 'B45'}_RESULT verdict=${evidence.verdict} exact=${shots.filter(item => item.pairComparison.pixelExact).length}/${spec.shots.length} attacks=${evidence.attacksPassed}/${evidence.attacks.length} failures=${evidence.analysis.failures.join(',') || 'none'}\n`);
 if (!evidence.analysis.passed) process.exitCode = 1;
