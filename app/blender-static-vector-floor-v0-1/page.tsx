@@ -20,7 +20,7 @@ export default function BlenderStaticVectorFloorPage() {
   return <main className="contact-page b51-page b52-page d11-page d111-page d12p-page d122-page">
     <header className="topbar">
       <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-      <nav aria-label="D12.2 导航"><Link href="/blender-projective-subpixel-reconstruction-v0-1">D12 反例</Link><a href="#verdict">结论</a><a href="#floor">浮点底噪</a><a href="#identity">三层证据</a><Link href="/journal">日志</Link></nav>
+      <nav aria-label="D12.2 导航"><Link href="/blender-projective-subpixel-reconstruction-v0-1">D12 反例</Link><a href="#verdict">结论</a><a href="#floor">浮点底噪</a><a href="#identity">三层证据</a><Link href="/blender-static-nonplanar-multiowner-v0-1">D12.3</Link><Link href="/journal">日志</Link></nav>
       <span className="edition contact-edition">Static Floor D12.2</span>
     </header>
 

@@ -251,6 +251,7 @@ export default function Home() {
           <Link className="route-tab" href="/blender-nearest-integer-temporal-recovery-v0-1">D11.1 整数恢复</Link>
           <Link className="route-tab" href="/blender-projective-subpixel-reconstruction-v0-1">D12 亚像素</Link>
           <Link className="route-tab" href="/blender-static-vector-floor-v0-1">D12.2 静态底噪</Link>
+          <Link className="route-tab" href="/blender-static-nonplanar-multiowner-v0-1">D12.3 多主体</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>
