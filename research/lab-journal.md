@@ -1521,6 +1521,22 @@ Next: preregister B51-H2 as a split-backend holdout. Metal beauty and CPU Depth/
 
 Artifacts: `experiments/native-metal-pass-localization-v0-1/`, `specs/native-metal-pass-localization.v0.1.json`, `research/2026-08-27-b51-d3-native-metal-pass-localization-protocol.md` and `research/2026-08-27-b51-d3-native-metal-pass-localization-result.md`.
 
+## J-091 · B51-D4 exposes wall-clock metadata as the first split-assembly blocker
+
+Date: 2026-08-27 · Type: ZERO-RERENDER ENGINEERING DERIVATION · Runtime: Blender 5.2 Python 3.13 / OpenImageIO 3.1.13.1
+
+D4 routed Metal Combined/Normal/Vector and CPU Depth/Cryptomatte from four retained H1 EXRs into four seven-part production candidates without launching Blender. All output pixel arrays matched their selected source exactly; roster, provenance and finite-value gates passed.
+
+The derivation remains invalid. TABLETOP_WIDE's two merge replicates differed at seven bytes—one per subimage—even though their decoded arrays were exact. Binary inspection identified the sole difference as OpenEXR `capDate`: the writes crossed from second `47` to `48`. INTERIOR_CHAIR's two writes occurred within second `48` and were byte-exact. OpenImageIO's writer source confirms that absent OIIO `DateTime` metadata is replaced with current local time and mapped to OpenEXR `capDate`.
+
+Base status is `MERGE_REPLICATE_BYTE_IDENTITY`; only 13/15 attacks reached their intended reason because the real base failure masked two later mutations. Independent replay is `FAIL`, 1/6 byte-exact, while both frozen tool blobs still match. This is a retained negative result, not production promotion.
+
+Two pre-result failures were also retained. A nonexistent full preregistration SHA stopped the first tool before output; C1 changed exactly that literal. The corrected tool then stopped at the 100 GiB disk reserve. Removing only 1.6 GiB of previously authorized, reconstructible Playwright cache allowed the unchanged gate to admit the formal run.
+
+Next: preregister a narrow `Date` → `DateTime` normalization correction, rerun assembly without Blender, require all four outputs and independent replay byte-exact, then—and only then—design B51-H2 on unseen renders.
+
+Artifacts: `experiments/native-split-backend-assembly-derivation-v0-1/`, `experiments/native-split-backend-assembly-derivation-preflight-failure-v0-1/`, `experiments/native-split-backend-assembly-derivation-capacity-failure-v0-1/`, `research/2026-08-27-b51-d4-native-split-backend-assembly-invalid-result.md`, `research/2026-08-27-b51-d4-c1-preregistration-sha-correction-protocol.md` and `research/2026-08-27-b51-d4-c2-capacity-readmission-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
