@@ -1275,6 +1275,18 @@ Next: preregister a production-representation and quality ladder. Separate multi
 
 Artifacts: `specs/codex-worker-sequence-promotion.v0.1.json`, `experiments/codex-worker-sequence-promotion-v0-1/`, `research/2026-08-26-b46-codex-worker-sequence-promotion-protocol.md` and `research/2026-08-26-b46-codex-worker-sequence-promotion-result.md`.
 
+## J-075 · B47-D1 derives the real multipart production-pass boundary
+
+Date: 2026-08-26 · Type: LIVE DERIVATION · Runtime: Blender 5.2 Linux/amd64 Cycles CPU worker
+
+The B47-D1 probe was frozen at `ade1000d528f4194693f190fa2a9c3e0e3a5da9f` before execution. One TABLETOP frame was rendered from the B44 `.blend` at 128×72 and eight samples, with Combined, Depth, Normal, Vector and Object Cryptomatte enabled. The resulting 242,603-byte RGBA32 ZIP multipart EXR contained seven float subimages: Combined, Depth, Normal, Vector and CryptoObject00–02.
+
+All decoded components were finite. Depth used exactly `1e10` as the far-background value rather than infinity. The moving-camera Vector pass contained 32,244 non-zero components even with motion blur disabled. Cryptomatte declared MurmurHash3_32 / uint32-to-float32 and carried a parseable object manifest; its identity lanes cannot be judged by ordinary color-magnitude rules.
+
+This is derivation evidence only. It freezes the formal B47 pass roster and semantic rules but does not establish A/B pass reproducibility or production readiness. B47 will compare two frames from both TABLETOP builds and both INTERIOR builds: 28 cross-build pass pairs, moving/static temporal controls, manifest semantics and an independent audit. Sampling, denoising and motion blur remain isolated for B48.
+
+Artifacts: `experiments/codex-worker-production-pack-derivation-v0-1/`, `research/2026-08-26-b47-production-pass-derivation-protocol.md` and `research/2026-08-26-b47-d1-production-pass-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
