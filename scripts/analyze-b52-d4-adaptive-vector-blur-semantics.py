@@ -126,7 +126,7 @@ def measure_vector(baseline: np.ndarray, candidate: np.ndarray, influence: np.nd
         "influenceRegionEnergyFraction": fraction,
         "stableInteriorSquaredEnergy": stable_energy,
         "stableInteriorEnergyFraction": 0.0 if total == 0.0 else stable_energy / total,
-        "measurementTotal": bool(error.size) and np.isfinite(error).all(),
+        "measurementTotal": bool(bool(error.size) and np.isfinite(error).all()),
     }, error
 
 
@@ -138,8 +138,8 @@ def measure_blur(baseline: np.ndarray, candidate: np.ndarray, influence: np.ndar
     total, inside, fraction = energy_fraction(rgb_error, influence)
     stats = finite_stats(rgb_error, "rgbAbsoluteError")
     outside = int(np.count_nonzero((rgb_error > 1.0 / 4096.0) & ~influence))
-    total_measurement = bool(rgb_error.size) and np.isfinite(rgb_error).all() and np.isfinite(alpha_error).all()
-    passed = (
+    total_measurement = bool(bool(rgb_error.size) and np.isfinite(rgb_error).all() and np.isfinite(alpha_error).all())
+    passed = bool(
         total_measurement
         and vector_measurement.get("influenceRegionEnergyFraction", -1.0) >= gate["vectorInfluenceRegionEnergyFractionMinimum"]
         and stats["rgbAbsoluteErrorP99"] <= gate["rgbAbsoluteErrorP99Maximum"]
@@ -340,6 +340,24 @@ def main() -> None:
     expected_preregistration = {"commit": PREREGISTRATION_COMMIT, "specUri": "specs/adaptive-vector-blur-semantics-derivation.v0.1.json", "specSha256": SPEC_SHA256}
     if sha256_file(args.spec) != SPEC_SHA256 or receipt.get("preregistration") != expected_preregistration:
         raise RuntimeError("B52-D4 preregistration identity differs")
+    amendment = receipt.get("analysisAmendment")
+    expected_changed_tools = [
+        "scripts/analyze-b52-d4-adaptive-vector-blur-semantics.py",
+        "scripts/audit-b52-d4-adaptive-vector-blur-semantics.py",
+        "tests/test_b52_d4_analysis_contract.py",
+    ]
+    if (
+        not isinstance(amendment, dict)
+        or amendment.get("classification") != "POST_OUTPUT_MECHANICAL_SERIALIZATION_FIX"
+        or amendment.get("outcomeGatesChanged") is not False
+        or amendment.get("formalCompositorOutputsReused") != 36
+        or amendment.get("changedToolUris") != expected_changed_tools
+    ):
+        raise RuntimeError("B52-D4 post-output analysis amendment is absent or outside its frozen scope")
+    original_receipt_path = root / amendment["originalReceipt"]["uri"]
+    failure_path = root / amendment["originalAnalysisFailure"]["uri"]
+    if sha256_file(original_receipt_path) != amendment["originalReceipt"]["sha256"] or sha256_file(failure_path) != amendment["originalAnalysisFailure"]["sha256"]:
+        raise RuntimeError("B52-D4 post-output analysis amendment evidence identity mismatch")
 
     d3_spec = json.loads((root / spec["parents"]["d3Spec"]["uri"]).read_text(encoding="utf-8"))
     d3_result = json.loads((root / spec["parents"]["d3Result"]["uri"]).read_text(encoding="utf-8"))
@@ -440,7 +458,7 @@ def main() -> None:
                 diagnostics.append(write_diagnostic(diagnostics_directory, canonical_diagnostics_directory, variant, profile, kind, maps[kind], spec["diagnostics"]["mappings"][kind], sources))
 
     evidence = {
-        "schemaVersion": "bfs.adaptiveVectorBlurSemanticsDerivationEvidence.v0.1", "experimentId": spec["experimentId"], "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"],
+        "schemaVersion": "bfs.adaptiveVectorBlurSemanticsDerivationEvidence.v0.1", "experimentId": spec["experimentId"], "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"], "analysisAmendment": amendment,
         "runtime": {"python": platform.python_version(), "openImageIO": oiio.VERSION_STRING, "numpy": np.__version__},
         "specObservation": receipt["specObservation"], "parentObservations": receipt["parentObservations"], "parentArtifactObservations": receipt["parentArtifactObservations"], "runtimeObservations": receipt["runtimeObservations"],
         "d3Invariants": {"verdict": d3_result["verdict"], "futureHoldoutCandidates": d3_result["futureHoldoutCandidates"], "baseFailure": d3_result["baseFailure"], "attacksPassed": d3_result["attacksPassed"]},

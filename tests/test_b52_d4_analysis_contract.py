@@ -116,6 +116,19 @@ class B52D4ContractTests(unittest.TestCase):
         self.assertEqual(measured["rgbAbsoluteErrorMaximum"], 0.0)
         self.assertTrue(np.array_equal(error, np.zeros((2, 2))))
 
+    def test_real_measurements_are_strict_json_serializable(self):
+        baseline = np.zeros((2, 2, 4), dtype=np.float32)
+        candidate = baseline.copy()
+        candidate[0, 0, 0] = 0.25
+        influence = np.ones((2, 2), dtype=bool)
+        stable = np.zeros((2, 2), dtype=bool)
+        vector, _ = ANALYZER.measure_vector(baseline, candidate, influence, stable)
+        blurred, _ = ANALYZER.measure_blur(baseline, candidate, influence, vector, SPEC["blurOutputTask"]["derivationClassifier"])
+        json.dumps({"vector": vector, "blur": blurred}, allow_nan=False)
+        self.assertIs(type(vector["measurementTotal"]), bool)
+        self.assertIs(type(blurred["measurementTotal"]), bool)
+        self.assertIs(type(blurred["classifierPassed"]), bool)
+
     def test_diagnostic_is_byte_deterministic(self):
         values = np.asarray([[0.0, 0.0001], [0.0002, 0.0003]], dtype=np.float32)
         mapping = SPEC["diagnostics"]["mappings"]["vector-endpoint-error"]

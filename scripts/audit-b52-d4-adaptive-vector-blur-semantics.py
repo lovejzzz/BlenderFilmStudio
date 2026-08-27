@@ -39,6 +39,38 @@ def main() -> None:
     receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
     result = json.loads(result_path.read_text(encoding="utf-8"))
     analyzer = root / receipt["tools"]["analyzer"]["uri"]
+    amendment = receipt["analysisAmendment"]
+    original_receipt_path = root / amendment["originalReceipt"]["uri"]
+    original_failure_path = root / amendment["originalAnalysisFailure"]["uri"]
+    original_receipt = json.loads(original_receipt_path.read_text(encoding="utf-8"))
+    normalized_receipt = dict(receipt)
+    normalized_receipt.pop("analysisAmendment", None)
+    normalized_receipt["toolFreezeCommit"] = original_receipt["toolFreezeCommit"]
+    normalized_receipt["tools"] = original_receipt["tools"]
+    changed_tool_uris = amendment["changedToolUris"]
+    amendment_commit = amendment["freezeCommit"]
+    amendment_parent = amendment["parentCommit"]
+    commit_parent = subprocess.run(["git", "rev-parse", f"{amendment_commit}^"], cwd=root, capture_output=True, text=True, check=False)
+    commit_files_process = subprocess.run(["git", "diff-tree", "--no-commit-id", "--name-only", "-r", amendment_commit], cwd=root, capture_output=True, text=True, check=False)
+    commit_files = sorted(line for line in commit_files_process.stdout.splitlines() if line)
+    expected_changed_tools = sorted(changed_tool_uris)
+    unchanged_tool_hashes = all(
+        receipt["tools"][name]["sha256"] == original_receipt["tools"][name]["sha256"]
+        for name in receipt["tools"]
+        if receipt["tools"][name]["uri"] not in changed_tool_uris
+    )
+    amendment_checks = {
+        "classificationMatch": amendment.get("classification") == "POST_OUTPUT_MECHANICAL_SERIALIZATION_FIX",
+        "outcomeGatesUnchanged": amendment.get("outcomeGatesChanged") is False,
+        "formalOutputsReused": amendment.get("formalCompositorOutputsReused") == 36,
+        "originalReceiptIdentityMatch": sha256_file(original_receipt_path) == amendment["originalReceipt"]["sha256"],
+        "originalFailureIdentityMatch": sha256_file(original_failure_path) == amendment["originalAnalysisFailure"]["sha256"],
+        "receiptNonToolFieldsExact": normalized_receipt == original_receipt,
+        "commitParentMatch": commit_parent.returncode == 0 and commit_parent.stdout.strip() == amendment_parent,
+        "commitFilesExact": commit_files_process.returncode == 0 and commit_files == expected_changed_tools,
+        "unchangedToolHashesExact": unchanged_tool_hashes,
+        "resultBindingMatch": result.get("analysisAmendment") == amendment,
+    }
 
     with tempfile.TemporaryDirectory(prefix="bfs-b52-d4-audit-") as temporary:
         temporary_root = Path(temporary)
@@ -103,6 +135,7 @@ def main() -> None:
 
     passed = (
         replay_exact
+        and all(amendment_checks.values())
         and len(frozen_tools) == 7 and all(item["match"] for item in frozen_tools)
         and len(bound_inputs) == 8 and all(item["match"] for item in bound_inputs)
         and len(artifact_checks) == 54 and all(item["match"] for item in artifact_checks)
@@ -116,7 +149,7 @@ def main() -> None:
         and result["d3Invariants"]["futureHoldoutCandidates"] == spec["parents"]["d3Result"]["futureHoldoutCandidates"]
     )
     audit = {
-        "schemaVersion": "bfs.adaptiveVectorBlurSemanticsDerivationAudit.v0.1", "status": "PASS" if passed else "FAIL", "verdict": result["verdict"], "vectorTaskTolerableProfiles": result["vectorTaskTolerableProfiles"],
+        "schemaVersion": "bfs.adaptiveVectorBlurSemanticsDerivationAudit.v0.1", "status": "PASS" if passed else "FAIL", "verdict": result["verdict"], "vectorTaskTolerableProfiles": result["vectorTaskTolerableProfiles"], "analysisAmendmentChecks": amendment_checks,
         "attacksPassed": result["attacksPassed"], "attackCount": len(result["attacks"]), "evidenceCoreHash": result["evidenceCoreHash"],
         "receipt": {"uri": str(receipt_path.relative_to(root)), "sha256": sha256_file(receipt_path)}, "analysisReplay": analysis_replay,
         "frozenToolChecks": frozen_tools, "frozenToolsMatch": all(item["match"] for item in frozen_tools), "boundInputChecks": bound_inputs, "boundInputsMatch": all(item["match"] for item in bound_inputs),
