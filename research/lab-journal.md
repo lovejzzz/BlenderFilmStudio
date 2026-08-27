@@ -2213,6 +2213,22 @@ Preflight file SHA-256: `6f0ec142494047142bc621f89d52e1b75b8599d793fbf9d3d12cb41
 
 Artifact: `experiments/blender-real-textured-temporal-end-to-end-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-138 · D11 formally rejects the unmodified real-textured composition
+
+Date: 2026-08-27 · Type: CONFIRMATORY REAL-BLENDER END-TO-END NEGATIVE RESULT + INDEPENDENT REPLAY AUDIT · Blender: 5.2.0 LTS `fbe6228777e7`
+
+The immutable D11 matrix completed exactly once with 65 unique child PIDs: 16 real Cycles sources, eight adapters, eight Python and eight Node accumulators, eight Raw EXR encoders, 16 Blender compositor bridges and one analyzer. All 56 registered attacks passed, 40 diagnostic PNGs plus 40 sidecars were bound, and every base gate except motion integerization passed.
+
+Raw Vector endpoint error was tiny—moving-fixture p99 at most `8.529922399520072e-6` pixels and maximum `1.0789593218788873e-5`—but toward-zero conversion still changed near-integers to adjacent pixels. Owner-interior mismatches repeated exactly: object 211/1,120, camera 449/21,645, same-ID depth 86/1,120 per repeat, and static 0/21,645. The formal total was 1,492 mismatched owner-interior pixels across eight cells.
+
+Verdict: `BLENDER_REAL_TEXTURED_TEMPORAL_END_TO_END_HOLDOUT_NOT_SUPPORTED`; base failure: `MOTION_INTEGERIZATION`. Python and Node remained byte-identical, all semantic probes and controls passed, static was 22,261/22,261 valid, and the Raw EXR/Blender bridge remained decoded-float32 exact. The round-nearest diagnostic changed 87, 318 and 129 resolved scalars per moving-fixture repeat but was not allowed to repair D11.
+
+Independent replay audit: `PASS`. Its 85,550-pixel broad sentinel includes background/static owners and is only a nonzero consistency check; the preregistered owner-interior measurement is 1,492. Receipt SHA-256: `dd75ba0e2f4a4b0ee950f9e12e84dc3f12265fe743a89370fb4f15f2643fc689`; result SHA-256: `490c569c4d12fe82ef49ff3d82d657512dbe297c69fd7f8f34df9b7daeeb31c8`; audit SHA-256: `4bd0e2081b831c75e5572c48c3b281e4a440e8d8f108fc50e1d774a878df6c2b`.
+
+D8, D9.1 and D10.1 retain their narrow individual results; their unmodified composition is rejected. Per the frozen decision rule, next is a fresh D11.1 preregistration with an explicit nearest-integer quantizer. D11 will not be revised or rerun.
+
+Artifacts: `experiments/blender-real-textured-temporal-end-to-end-holdout-v0-1/` and `research/2026-08-27-b52-d11-blender-real-textured-temporal-end-to-end-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
