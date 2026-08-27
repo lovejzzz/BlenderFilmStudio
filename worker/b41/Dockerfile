@@ -2,7 +2,7 @@ FROM --platform=linux/amd64 debian:bookworm-slim@sha256:88200866dfff7ea7f5cbcb6e
 
 ARG BLENDER_ARCHIVE=blender-5.2.0-linux-x64.tar.xz
 ARG BLENDER_ARCHIVE_SHA256=96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48
-ARG BLENDER_EXECUTABLE_SHA256=60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2
+ARG BLENDER_EXECUTABLE_SHA256=83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \

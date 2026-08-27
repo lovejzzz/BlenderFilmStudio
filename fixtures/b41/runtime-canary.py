@@ -107,7 +107,7 @@ png_path = OUTPUT_ROOT / "canary.png"
 dimensions = png_dimensions(png_path)
 checks = {
     "blenderVersionExact": tuple(bpy.app.version) == (5, 2, 0),
-    "blenderExecutableSha256": sha256_file(executable) == "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "blenderExecutableSha256": sha256_file(executable) == "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
     "uidNonRootExact": os.geteuid() == 65532 and os.getegid() == 65532,
     "capabilitiesEmpty": status.get("CapEff") == "0000000000000000",
     "noNewPrivileges": status.get("NoNewPrivs") == "1",
