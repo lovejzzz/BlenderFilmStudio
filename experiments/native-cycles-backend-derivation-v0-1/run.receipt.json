@@ -1,0 +1,1067 @@
+{
+  "blenderObservation": {
+    "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "expectedBytes": 183237520,
+    "expectedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "match": true,
+    "observedBytes": 183237520,
+    "observedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"
+  },
+  "diskAdmission": {
+    "availableBytes": 108756893696,
+    "freeAfterProjectedBytes": 108488458240,
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 268435456,
+    "status": "ACCEPTED"
+  },
+  "operationBoundary": {
+    "dockerRuns": 0,
+    "downloads": 0,
+    "imageBuilds": 0,
+    "modelCalls": 0,
+    "nativeBlenderProcesses": 8,
+    "networkRequired": false,
+    "videoModelCalls": 0
+  },
+  "parentObservations": [
+    {
+      "expectedSha256": "feae838494de10b024f9186bd81aa9c9657a21fb14cf48748ce623e8f9148a42",
+      "match": true,
+      "observedSha256": "feae838494de10b024f9186bd81aa9c9657a21fb14cf48748ce623e8f9148a42",
+      "uri": "experiments/codex-worker-resolution-holdout-v0-1/results.json"
+    },
+    {
+      "expectedSha256": "9e3e6572211f3b910e85a0c9a7c8ba38545a10e107a5148c0554a41ca6f399a4",
+      "match": true,
+      "observedSha256": "9e3e6572211f3b910e85a0c9a7c8ba38545a10e107a5148c0554a41ca6f399a4",
+      "uri": "experiments/codex-worker-resolution-holdout-v0-1/audit.json"
+    }
+  ],
+  "parents": {
+    "b49ResolutionAudit": {
+      "sha256": "9e3e6572211f3b910e85a0c9a7c8ba38545a10e107a5148c0554a41ca6f399a4",
+      "status": "PASS",
+      "uri": "experiments/codex-worker-resolution-holdout-v0-1/audit.json"
+    },
+    "b49ResolutionResult": {
+      "sha256": "feae838494de10b024f9186bd81aa9c9657a21fb14cf48748ce623e8f9148a42",
+      "uri": "experiments/codex-worker-resolution-holdout-v0-1/results.json",
+      "verdict": "B49_RESOLUTION_SCALING_HOLDOUT_SUPPORTED"
+    }
+  },
+  "preregistration": {
+    "commit": "57ae67254c0c269c283acd7e280654a74316442e",
+    "specSha256": "91457a34f654423ccd14eee25ea0b147d7a66ddce6c107fb9f1e20f694ca931b",
+    "specUri": "specs/native-cycles-backend-derivation.v0.1.json"
+  },
+  "runs": [
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b51_native_cycles_backend.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/native-cycles-backend-derivation.v0.1.json",
+        "--run-id",
+        "T_CPU_R1",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/native-cycles-backend-derivation-v0-1/T_CPU_R1/artifacts"
+      ],
+      "device": "CPU",
+      "elapsedSeconds": 4.670857,
+      "exitCode": 0,
+      "killSent": false,
+      "order": 1,
+      "pid": 48378,
+      "repeat": 1,
+      "report": {
+        "artifact": {
+          "bytes": 3606267,
+          "sha256": "93672b4960a3ea7707ec4279e37264fce1192d9d8f9765b8860f85e2dabcfb93",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082643,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+          "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+          "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "device": {
+          "requestedId": "CPU",
+          "requestedType": "CPU",
+          "roster": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU",
+              "use": true
+            },
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL",
+              "use": false
+            }
+          ],
+          "selected": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU"
+            }
+          ]
+        },
+        "experimentId": "B51-D1",
+        "frame": 37,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "order": 1,
+        "passed": true,
+        "peakSelfRssBytes": 353714176,
+        "preregistrationCommit": "57ae67254c0c269c283acd7e280654a74316442e",
+        "process": {
+          "parentPid": 48274,
+          "pid": 48378
+        },
+        "renderSeconds": 4.111534,
+        "repeat": 1,
+        "runId": "T_CPU_R1",
+        "saveSeconds": 0.010655,
+        "schemaVersion": "bfs.nativeCyclesBackendWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "cyclesDevice": "CPU",
+          "denoising": false,
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730290,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "TABLETOP",
+        "source": {
+          "bytes": 118702,
+          "sha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+        }
+      },
+      "runId": "T_CPU_R1",
+      "shotId": "TABLETOP",
+      "termSent": false,
+      "timeoutTriggered": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b51_native_cycles_backend.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/native-cycles-backend-derivation.v0.1.json",
+        "--run-id",
+        "T_METAL_R1",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/native-cycles-backend-derivation-v0-1/T_METAL_R1/artifacts"
+      ],
+      "device": "METAL",
+      "elapsedSeconds": 110.113568,
+      "exitCode": 0,
+      "killSent": false,
+      "order": 2,
+      "pid": 48657,
+      "repeat": 1,
+      "report": {
+        "artifact": {
+          "bytes": 3609676,
+          "sha256": "84235ef4fd8479e246b45878b08492fd40b93b85c49cb7ade2a190704b9bd8ac",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082643,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+          "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+          "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "device": {
+          "requestedId": "METAL_Apple M4 Max (GPU - 40 cores)",
+          "requestedType": "METAL",
+          "roster": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU",
+              "use": false
+            },
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL",
+              "use": true
+            }
+          ],
+          "selected": [
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL"
+            }
+          ]
+        },
+        "experimentId": "B51-D1",
+        "frame": 37,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "order": 2,
+        "passed": true,
+        "peakSelfRssBytes": 834551808,
+        "preregistrationCommit": "57ae67254c0c269c283acd7e280654a74316442e",
+        "process": {
+          "parentPid": 48274,
+          "pid": 48657
+        },
+        "renderSeconds": 109.53371,
+        "repeat": 1,
+        "runId": "T_METAL_R1",
+        "saveSeconds": 0.010364,
+        "schemaVersion": "bfs.nativeCyclesBackendWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "cyclesDevice": "GPU",
+          "denoising": false,
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730290,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "TABLETOP",
+        "source": {
+          "bytes": 118702,
+          "sha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+        }
+      },
+      "runId": "T_METAL_R1",
+      "shotId": "TABLETOP",
+      "termSent": false,
+      "timeoutTriggered": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b51_native_cycles_backend.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/native-cycles-backend-derivation.v0.1.json",
+        "--run-id",
+        "I_METAL_R1",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/native-cycles-backend-derivation-v0-1/I_METAL_R1/artifacts"
+      ],
+      "device": "METAL",
+      "elapsedSeconds": 1.374328,
+      "exitCode": 0,
+      "killSent": false,
+      "order": 3,
+      "pid": 55368,
+      "repeat": 1,
+      "report": {
+        "artifact": {
+          "bytes": 3368764,
+          "sha256": "ad70a3cbe61e74d093fe55ffba9525710873ee2af32f33ae20968b5ec95b5a66",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082644,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+          "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+          "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "device": {
+          "requestedId": "METAL_Apple M4 Max (GPU - 40 cores)",
+          "requestedType": "METAL",
+          "roster": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU",
+              "use": false
+            },
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL",
+              "use": true
+            }
+          ],
+          "selected": [
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL"
+            }
+          ]
+        },
+        "experimentId": "B51-D1",
+        "frame": 19,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "order": 3,
+        "passed": true,
+        "peakSelfRssBytes": 786776064,
+        "preregistrationCommit": "57ae67254c0c269c283acd7e280654a74316442e",
+        "process": {
+          "parentPid": 48274,
+          "pid": 55368
+        },
+        "renderSeconds": 0.716692,
+        "repeat": 1,
+        "runId": "I_METAL_R1",
+        "saveSeconds": 0.012519,
+        "schemaVersion": "bfs.nativeCyclesBackendWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "cyclesDevice": "GPU",
+          "denoising": false,
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730291,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "INTERIOR",
+        "source": {
+          "bytes": 106078,
+          "sha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+        }
+      },
+      "runId": "I_METAL_R1",
+      "shotId": "INTERIOR",
+      "termSent": false,
+      "timeoutTriggered": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b51_native_cycles_backend.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/native-cycles-backend-derivation.v0.1.json",
+        "--run-id",
+        "I_CPU_R1",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/native-cycles-backend-derivation-v0-1/I_CPU_R1/artifacts"
+      ],
+      "device": "CPU",
+      "elapsedSeconds": 5.682154,
+      "exitCode": 0,
+      "killSent": false,
+      "order": 4,
+      "pid": 55457,
+      "repeat": 1,
+      "report": {
+        "artifact": {
+          "bytes": 3377428,
+          "sha256": "50e2b0576e56d09694a372e3b50d22a7e59fb2ba28668833734c3df51c5eebc7",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082644,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+          "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+          "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "device": {
+          "requestedId": "CPU",
+          "requestedType": "CPU",
+          "roster": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU",
+              "use": true
+            },
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL",
+              "use": false
+            }
+          ],
+          "selected": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU"
+            }
+          ]
+        },
+        "experimentId": "B51-D1",
+        "frame": 19,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "order": 4,
+        "passed": true,
+        "peakSelfRssBytes": 350633984,
+        "preregistrationCommit": "57ae67254c0c269c283acd7e280654a74316442e",
+        "process": {
+          "parentPid": 48274,
+          "pid": 55457
+        },
+        "renderSeconds": 5.089731,
+        "repeat": 1,
+        "runId": "I_CPU_R1",
+        "saveSeconds": 0.00959,
+        "schemaVersion": "bfs.nativeCyclesBackendWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "cyclesDevice": "CPU",
+          "denoising": false,
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730291,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "INTERIOR",
+        "source": {
+          "bytes": 106078,
+          "sha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+        }
+      },
+      "runId": "I_CPU_R1",
+      "shotId": "INTERIOR",
+      "termSent": false,
+      "timeoutTriggered": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b51_native_cycles_backend.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/native-cycles-backend-derivation.v0.1.json",
+        "--run-id",
+        "T_METAL_R2",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/native-cycles-backend-derivation-v0-1/T_METAL_R2/artifacts"
+      ],
+      "device": "METAL",
+      "elapsedSeconds": 1.141782,
+      "exitCode": 0,
+      "killSent": false,
+      "order": 5,
+      "pid": 55794,
+      "repeat": 2,
+      "report": {
+        "artifact": {
+          "bytes": 3609856,
+          "sha256": "427542c7a8cf4a78d1ff435b997a155a5ec942e9e0d23542c8548110909c9af3",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082643,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+          "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+          "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "device": {
+          "requestedId": "METAL_Apple M4 Max (GPU - 40 cores)",
+          "requestedType": "METAL",
+          "roster": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU",
+              "use": false
+            },
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL",
+              "use": true
+            }
+          ],
+          "selected": [
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL"
+            }
+          ]
+        },
+        "experimentId": "B51-D1",
+        "frame": 37,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "order": 5,
+        "passed": true,
+        "peakSelfRssBytes": 762920960,
+        "preregistrationCommit": "57ae67254c0c269c283acd7e280654a74316442e",
+        "process": {
+          "parentPid": 48274,
+          "pid": 55794
+        },
+        "renderSeconds": 0.574321,
+        "repeat": 2,
+        "runId": "T_METAL_R2",
+        "saveSeconds": 0.00923,
+        "schemaVersion": "bfs.nativeCyclesBackendWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "cyclesDevice": "GPU",
+          "denoising": false,
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730290,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "TABLETOP",
+        "source": {
+          "bytes": 118702,
+          "sha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+        }
+      },
+      "runId": "T_METAL_R2",
+      "shotId": "TABLETOP",
+      "termSent": false,
+      "timeoutTriggered": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b51_native_cycles_backend.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/native-cycles-backend-derivation.v0.1.json",
+        "--run-id",
+        "T_CPU_R2",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/native-cycles-backend-derivation-v0-1/T_CPU_R2/artifacts"
+      ],
+      "device": "CPU",
+      "elapsedSeconds": 4.689805,
+      "exitCode": 0,
+      "killSent": false,
+      "order": 6,
+      "pid": 55861,
+      "repeat": 2,
+      "report": {
+        "artifact": {
+          "bytes": 3606267,
+          "sha256": "bcc0678f5347259e08d53f009f06bb66bbebe320d9f6d3562c7d62ace5d99819",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082643,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+          "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+          "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "device": {
+          "requestedId": "CPU",
+          "requestedType": "CPU",
+          "roster": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU",
+              "use": true
+            },
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL",
+              "use": false
+            }
+          ],
+          "selected": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU"
+            }
+          ]
+        },
+        "experimentId": "B51-D1",
+        "frame": 37,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "order": 6,
+        "passed": true,
+        "peakSelfRssBytes": 353828864,
+        "preregistrationCommit": "57ae67254c0c269c283acd7e280654a74316442e",
+        "process": {
+          "parentPid": 48274,
+          "pid": 55861
+        },
+        "renderSeconds": 4.121948,
+        "repeat": 2,
+        "runId": "T_CPU_R2",
+        "saveSeconds": 0.009049,
+        "schemaVersion": "bfs.nativeCyclesBackendWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "cyclesDevice": "CPU",
+          "denoising": false,
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730290,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "TABLETOP",
+        "source": {
+          "bytes": 118702,
+          "sha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+        }
+      },
+      "runId": "T_CPU_R2",
+      "shotId": "TABLETOP",
+      "termSent": false,
+      "timeoutTriggered": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b51_native_cycles_backend.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/native-cycles-backend-derivation.v0.1.json",
+        "--run-id",
+        "I_CPU_R2",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/native-cycles-backend-derivation-v0-1/I_CPU_R2/artifacts"
+      ],
+      "device": "CPU",
+      "elapsedSeconds": 5.591108,
+      "exitCode": 0,
+      "killSent": false,
+      "order": 7,
+      "pid": 56144,
+      "repeat": 2,
+      "report": {
+        "artifact": {
+          "bytes": 3377428,
+          "sha256": "a7439a669563012da93bf9171cb93303f23fff0b78775bb18a70d3f31d5e5b4f",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082644,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+          "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+          "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "device": {
+          "requestedId": "CPU",
+          "requestedType": "CPU",
+          "roster": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU",
+              "use": true
+            },
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL",
+              "use": false
+            }
+          ],
+          "selected": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU"
+            }
+          ]
+        },
+        "experimentId": "B51-D1",
+        "frame": 19,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "order": 7,
+        "passed": true,
+        "peakSelfRssBytes": 349077504,
+        "preregistrationCommit": "57ae67254c0c269c283acd7e280654a74316442e",
+        "process": {
+          "parentPid": 48274,
+          "pid": 56144
+        },
+        "renderSeconds": 5.028774,
+        "repeat": 2,
+        "runId": "I_CPU_R2",
+        "saveSeconds": 0.009552,
+        "schemaVersion": "bfs.nativeCyclesBackendWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "cyclesDevice": "CPU",
+          "denoising": false,
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730291,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "INTERIOR",
+        "source": {
+          "bytes": 106078,
+          "sha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+        }
+      },
+      "runId": "I_CPU_R2",
+      "shotId": "INTERIOR",
+      "termSent": false,
+      "timeoutTriggered": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b51_native_cycles_backend.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/native-cycles-backend-derivation.v0.1.json",
+        "--run-id",
+        "I_METAL_R2",
+        "--output-dir",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/native-cycles-backend-derivation-v0-1/I_METAL_R2/artifacts"
+      ],
+      "device": "METAL",
+      "elapsedSeconds": 1.288124,
+      "exitCode": 0,
+      "killSent": false,
+      "order": 8,
+      "pid": 56482,
+      "repeat": 2,
+      "report": {
+        "artifact": {
+          "bytes": 3368676,
+          "sha256": "8aff4e0c3bbf3bf87d1729fa8eefee7dad7e54297aaf80ea2a0a9d4ab6440922",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082644,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+          "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+          "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "device": {
+          "requestedId": "METAL_Apple M4 Max (GPU - 40 cores)",
+          "requestedType": "METAL",
+          "roster": [
+            {
+              "id": "CPU",
+              "name": "Apple M4 Max",
+              "type": "CPU",
+              "use": false
+            },
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL",
+              "use": true
+            }
+          ],
+          "selected": [
+            {
+              "id": "METAL_Apple M4 Max (GPU - 40 cores)",
+              "name": "Apple M4 Max (GPU - 40 cores)",
+              "type": "METAL"
+            }
+          ]
+        },
+        "experimentId": "B51-D1",
+        "frame": 19,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "order": 8,
+        "passed": true,
+        "peakSelfRssBytes": 789069824,
+        "preregistrationCommit": "57ae67254c0c269c283acd7e280654a74316442e",
+        "process": {
+          "parentPid": 48274,
+          "pid": 56482
+        },
+        "renderSeconds": 0.694591,
+        "repeat": 2,
+        "runId": "I_METAL_R2",
+        "saveSeconds": 0.013465,
+        "schemaVersion": "bfs.nativeCyclesBackendWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "cyclesDevice": "GPU",
+          "denoising": false,
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730291,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "INTERIOR",
+        "source": {
+          "bytes": 106078,
+          "sha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+        }
+      },
+      "runId": "I_METAL_R2",
+      "shotId": "INTERIOR",
+      "termSent": false,
+      "timeoutTriggered": false
+    }
+  ],
+  "runtimeOperations": [
+    "NATIVE_BLENDER_PROCESS_T_CPU_R1",
+    "NATIVE_BLENDER_PROCESS_T_METAL_R1",
+    "NATIVE_BLENDER_PROCESS_I_METAL_R1",
+    "NATIVE_BLENDER_PROCESS_I_CPU_R1",
+    "NATIVE_BLENDER_PROCESS_T_METAL_R2",
+    "NATIVE_BLENDER_PROCESS_T_CPU_R2",
+    "NATIVE_BLENDER_PROCESS_I_CPU_R2",
+    "NATIVE_BLENDER_PROCESS_I_METAL_R2"
+  ],
+  "schemaVersion": "bfs.nativeCyclesBackendRunReceipt.v0.1",
+  "sourceObservations": [
+    {
+      "expectedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "match": true,
+      "observedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+    },
+    {
+      "expectedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "match": true,
+      "observedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+    },
+    {
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true,
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    },
+    {
+      "expectedSha256": "91457a34f654423ccd14eee25ea0b147d7a66ddce6c107fb9f1e20f694ca931b",
+      "match": true,
+      "observedSha256": "91457a34f654423ccd14eee25ea0b147d7a66ddce6c107fb9f1e20f694ca931b",
+      "uri": "specs/native-cycles-backend-derivation.v0.1.json"
+    }
+  ],
+  "toolFreezeCommit": "2e3df9e948e0d925b846b230801303bea5860e8b",
+  "tools": {
+    "analyzer": {
+      "sha256": "b1794824b35037f2d7ff432d85c95c0faf9620584478689f971e9b8be2dc1ad3",
+      "uri": "scripts/analyze-b51-native-cycles-backend-derivation.py"
+    },
+    "audit": {
+      "sha256": "f78c4dff58bee7b79a5639eff7108f99be41e5e78e0b92da2813e6f808304805",
+      "uri": "scripts/audit-b51-native-cycles-backend-derivation.py"
+    },
+    "renderer": {
+      "sha256": "f33f5fae8bf1199d52db3e481fe788c626395d6ae8f60fcac076872ed9327886",
+      "uri": "blender/render_b51_native_cycles_backend.py"
+    },
+    "runner": {
+      "sha256": "551192f222ae1c2c7e3d04aedca481db6ac476e22a2d45afd5a26f4758891435",
+      "uri": "scripts/run-b51-native-cycles-backend-derivation.py"
+    }
+  }
+}

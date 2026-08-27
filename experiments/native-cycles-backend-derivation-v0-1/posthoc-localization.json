@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "bfs.nativeCyclesBackendPosthocLocalization.v0.1",
+  "experimentId": "B51-D1",
+  "status": "POSTHOC_EXPLORATORY_NOT_A_GATE",
+  "method": "Open each repeat pair with OpenImageIO, compare every decoded float component and each subimage's metadata attributes.",
+  "repeatPairs": {
+    "TABLETOP_CPU": {
+      "left": "T_CPU_R1",
+      "right": "T_CPU_R2",
+      "changedFloatComponentsByPass": {"Combined": 0, "Depth": 0, "Normal": 0, "Vector": 0, "CryptoObject00": 0, "CryptoObject01": 0, "CryptoObject02": 0},
+      "maximumAbsoluteFloatDifferenceByPass": {"Combined": 0.0, "Depth": 0.0, "Normal": 0.0, "Vector": 0.0, "CryptoObject00": 0.0, "CryptoObject01": 0.0, "CryptoObject02": 0.0},
+      "containerByteDifferenceLocalizedToCombinedMetadata": ["Date", "RenderTime", "cycles.BFS_MASTER.render_time", "cycles.BFS_MASTER.total_time"]
+    },
+    "INTERIOR_CPU": {
+      "left": "I_CPU_R1",
+      "right": "I_CPU_R2",
+      "changedFloatComponentsByPass": {"Combined": 0, "Depth": 0, "Normal": 0, "Vector": 0, "CryptoObject00": 0, "CryptoObject01": 0, "CryptoObject02": 0},
+      "maximumAbsoluteFloatDifferenceByPass": {"Combined": 0.0, "Depth": 0.0, "Normal": 0.0, "Vector": 0.0, "CryptoObject00": 0.0, "CryptoObject01": 0.0, "CryptoObject02": 0.0},
+      "containerByteDifferenceLocalizedToCombinedMetadata": ["Date", "RenderTime", "cycles.BFS_MASTER.render_time", "cycles.BFS_MASTER.total_time"]
+    },
+    "TABLETOP_METAL": {
+      "left": "T_METAL_R1",
+      "right": "T_METAL_R2",
+      "changedFloatComponentsByPass": {"Combined": 95039, "Depth": 0, "Normal": 3724, "Vector": 10551, "CryptoObject00": 0, "CryptoObject01": 0, "CryptoObject02": 0},
+      "maximumAbsoluteFloatDifferenceByPass": {"Combined": 0.000011444091796875, "Depth": 0.0, "Normal": 2.384185791015625e-7, "Vector": 4.76837158203125e-7, "CryptoObject00": 0.0, "CryptoObject01": 0.0, "CryptoObject02": 0.0},
+      "combinedMetadata": {
+        "coldRenderTime": "01:49.53",
+        "warmRenderTime": "00:00.57",
+        "coldCyclesRenderTime": "00:01.17",
+        "warmCyclesRenderTime": "00:00.40",
+        "coldCyclesSynchronizationTime": "01:48.31",
+        "warmCyclesSynchronizationTime": "00:00.13"
+      }
+    },
+    "INTERIOR_METAL": {
+      "left": "I_METAL_R1",
+      "right": "I_METAL_R2",
+      "changedFloatComponentsByPass": {"Combined": 109410, "Depth": 0, "Normal": 612, "Vector": 2, "CryptoObject00": 0, "CryptoObject01": 0, "CryptoObject02": 0},
+      "maximumAbsoluteFloatDifferenceByPass": {"Combined": 4.76837158203125e-7, "Depth": 0.0, "Normal": 1.1920928955078125e-7, "Vector": 1.8189894035458565e-12, "CryptoObject00": 0.0, "CryptoObject01": 0.0, "CryptoObject02": 0.0}
+    }
+  },
+  "hostCacheObservation": {
+    "timing": "observed only after the frozen run",
+    "path": "/Users/tianxing/.cache/cycles/kernels/Apple_M4_Max",
+    "bytesLabel": "74M from du -sh",
+    "fileCount": 79,
+    "filesModifiedWithin45MinutesAtObservation": 79,
+    "interpretation": "The 108.31-second Cycles synchronization field and the subsequently populated kernel cache are consistent with cold Metal kernel/cache preparation, but no pre-run cache tree digest was frozen, so causal attribution remains a hypothesis for B51-D2."
+  },
+  "nonClaims": [
+    "The posthoc cache observation does not prove that every synchronization second was compilation.",
+    "Tiny Metal repeat differences are not a perceptual judgment.",
+    "CPU decoded-float identity does not imply EXR byte identity because timing metadata differs."
+  ]
+}

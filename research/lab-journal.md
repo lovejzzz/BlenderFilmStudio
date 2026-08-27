@@ -1453,6 +1453,24 @@ A real browser pilot confirmed native/CSS 960×540 display, correct A/B switchin
 
 Artifacts: `experiments/focus-intent-human-review-v0-1/`, `specs/focus-intent-human-review-spec.v0.1.json`, `research/2026-08-27-b50-focus-intent-human-review-protocol.md` and `research/2026-08-27-b50-focus-intent-package-result.md`.
 
+## J-087 · B51-D1 exposes native Metal's warm speed and cold synchronization boundary
+
+Date: 2026-08-27 · Type: LIVE BACKEND DERIVATION · Runtime: eight fresh native Blender 5.2 arm64 processes
+
+B51-D1 reused the exact two B49-R 512×288 / 128-spp / seven-pass scenes in a balanced two-repeat CPU × Metal matrix. The installed Blender enumerated the Apple M4 Max CPU and 40-core Metal GPU. Both devices completed every cell.
+
+Native four-thread CPU rendered TABLETOP in 4.112/4.122 seconds and INTERIOR in 5.090/5.029 seconds, about 36.9–37.9× faster than the qemu CPU parents. Warm Metal rendered the scenes in 0.574 and 0.695–0.717 seconds, about 7.17× faster than native CPU and 265–272× faster than qemu.
+
+The first Metal cell instead took 109.534 seconds. Its EXR metadata reported 108.31 seconds of Cycles synchronization; a later TABLETOP Metal process reported 0.13 seconds. A post-run inventory found 79 recently modified files / 74 MiB in `~/.cache/cycles/kernels/Apple_M4_Max`. This is consistent with cold cache preparation but remains posthoc because no pre-run cache tree hash was frozen.
+
+CPU repeat EXRs differed in container bytes only through time/date metadata while all seven decoded passes were exact. Metal repeats changed Combined, Normal and Vector floats while Depth and all Cryptomatte layers stayed exact; maximum Combined repeat difference was `1.144409e-5` on TABLETOP and `4.768372e-7` on INTERIOR.
+
+The first audit crashed on a `str`/`Path` helper mismatch. C1 retained that exception, changed no render/result bytes, verified the original frozen tool blobs and qemu parent EXRs, and replayed the analyzer byte-exactly. Verdict: `NATIVE_CYCLES_BACKEND_DERIVATION_USABLE`, 14/14 attacks—not production promotion.
+
+Next: freeze an atomic cache-sequester/restore experiment that distinguishes fresh process from fresh Cycles cache without deleting the user's 74 MiB cache. Then use unseen frames to set formal throughput and numerical-tolerance gates.
+
+Artifacts: `experiments/native-cycles-backend-derivation-v0-1/`, `specs/native-cycles-backend-derivation.v0.1.json`, `research/2026-08-27-b51-d1-native-cycles-backend-derivation-protocol.md`, `research/2026-08-27-b51-c1-native-backend-audit-correction.md` and `research/2026-08-27-b51-d1-native-cycles-backend-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
