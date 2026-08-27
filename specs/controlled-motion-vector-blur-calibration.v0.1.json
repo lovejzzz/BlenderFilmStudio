@@ -1,0 +1,429 @@
+{
+  "schemaVersion": "bfs.controlledMotionVectorBlurCalibration.v0.1",
+  "experimentId": "B52-D5",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "question": "Can two deterministic controlled-motion fixtures and one static negative control make Blender 5.2 Vector Blur a sensitive, shutter-dose-ordered and decoded-repeat-exact task oracle before any adaptive candidate is evaluated?",
+  "parents": {
+    "d4Spec": {
+      "uri": "specs/adaptive-vector-blur-semantics-derivation.v0.1.json",
+      "sha256": "e8635a1507eb5a5e8bfd950dc02fc4630a7202fd9af14b5510a991359f2e439f"
+    },
+    "d4Receipt": {
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/run.receipt.json",
+      "sha256": "bb45fe5a3e38e032c66054268170bf92d8a173db968ddb1a18420868338895e4"
+    },
+    "d4Result": {
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/results.json",
+      "sha256": "6c55a5b93a95eb6f6070c29c8cfc10ba746121fb5ec9b04de062ae2407ca12d9",
+      "verdict": "ADAPTIVE_VECTOR_BLUR_SEMANTICS_DERIVATION_INVALID",
+      "baseFailure": "BASELINE_EFFECT"
+    },
+    "d4Audit": {
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/audit.json",
+      "sha256": "c019a3272287f2b6c49060eae1fa8e8723cdada7a0d7c4032d22cef1918c0933",
+      "status": "FAIL"
+    },
+    "controlledMotionPreflight": {
+      "uri": "experiments/controlled-motion-vector-blur-preflight-v0-1/attempt-3/observation.json",
+      "sha256": "5cde6dd9b2e6478a5a17717a2ada52670d57f0b96401b16de82e27e5397e3809",
+      "classification": "EXPLORATORY_NOT_FORMAL_NOT_PROMOTABLE"
+    },
+    "preflightFailure0": {
+      "uri": "experiments/controlled-motion-vector-blur-preflight-v0-1/attempt-0.failure.json",
+      "sha256": "cd01c9db32f4240de1b03890d16e3846b75dc924ef190bed31bbd799c25fd57f"
+    },
+    "preflightFailure1": {
+      "uri": "experiments/controlled-motion-vector-blur-preflight-v0-1/attempt-1.failure.json",
+      "sha256": "07367df2fcaa140e2b9ec87dcfef985f350be90a09ab498a5af4e13d642fb1df"
+    }
+  },
+  "normativeSources": [
+    {
+      "authority": "Blender Manual 5.2",
+      "url": "https://docs.blender.org/manual/en/5.2/compositing/types/filter/blur/vector_blur.html",
+      "use": "Vector Blur consumes Image, Speed and Z and exposes Samples and Shutter"
+    },
+    {
+      "authority": "Blender Manual 5.2",
+      "url": "https://docs.blender.org/manual/en/5.2/render/layers/passes.html",
+      "use": "Vector is a four-component screen-space pass derived from adjacent frames"
+    },
+    {
+      "authority": "Blender Python API 5.2",
+      "url": "https://docs.blender.org/api/5.2/bpy.types.Scene.html",
+      "use": "Scene.compositing_node_group is the Blender 5 compositor binding"
+    }
+  ],
+  "runtime": {
+    "blenderExecutable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "blenderExecutableSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "blenderExecutableBytes": 183237520,
+    "version": "5.2.0 LTS",
+    "buildHash": "fbe6228777e7",
+    "buildPlatform": "Darwin",
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5"
+    },
+    "launchFlags": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--python-exit-code",
+      "1"
+    ],
+    "environmentAllowlist": [
+      "PATH",
+      "LANG",
+      "LC_ALL",
+      "OCIO",
+      "TMPDIR",
+      "BLENDER_USER_CONFIG",
+      "BLENDER_USER_SCRIPTS"
+    ]
+  },
+  "fixtureCommon": {
+    "construction": "fresh factory state; generated primitives only; no source blend or external asset",
+    "frameRange": [
+      0,
+      2
+    ],
+    "evaluationFrame": 1,
+    "camera": {
+      "type": "ORTHO",
+      "location": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "rotationEuler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orthoScale": 10.0
+    },
+    "geometry": [
+      {
+        "id": "BFS_BACKGROUND",
+        "primitive": "PLANE",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          8.9,
+          5.0,
+          1.0
+        ],
+        "baseColor": [
+          0.035,
+          0.12,
+          0.22,
+          1.0
+        ]
+      },
+      {
+        "id": "BFS_MOVER",
+        "primitive": "PLANE",
+        "location": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          0.8,
+          0.8,
+          1.0
+        ],
+        "baseColor": [
+          0.92,
+          0.055,
+          0.02,
+          1.0
+        ]
+      },
+      {
+        "id": "BFS_OCCLUDER",
+        "primitive": "PLANE",
+        "location": [
+          0.72,
+          0.0,
+          2.0
+        ],
+        "scale": [
+          0.18,
+          1.45,
+          1.0
+        ],
+        "baseColor": [
+          0.015,
+          0.018,
+          0.022,
+          1.0
+        ]
+      }
+    ],
+    "keyLight": {
+      "type": "AREA",
+      "location": [
+        -2.0,
+        -2.0,
+        7.0
+      ],
+      "energy": 1200.0,
+      "shape": "DISK",
+      "size": 8.0
+    },
+    "world": {
+      "color": [
+        0.015,
+        0.02,
+        0.03,
+        1.0
+      ],
+      "strength": 0.2
+    }
+  },
+  "fixtures": [
+    {
+      "id": "OBJECT_OCCLUSION_X",
+      "motionClass": "OBJECT_TRANSLATION_ACROSS_STATIC_OCCLUDER",
+      "moverXByFrame": {
+        "0": -1.0,
+        "1": 0.0,
+        "2": 1.0
+      },
+      "cameraXByFrame": null
+    },
+    {
+      "id": "CAMERA_PAN_X",
+      "motionClass": "ORTHOGRAPHIC_CAMERA_TRANSLATION_OVER_LAYERED_GEOMETRY",
+      "moverXByFrame": null,
+      "cameraXByFrame": {
+        "0": -0.5,
+        "1": 0.0,
+        "2": 0.5
+      }
+    },
+    {
+      "id": "STATIC_CONTROL",
+      "motionClass": "NO_KEYFRAMES",
+      "moverXByFrame": null,
+      "cameraXByFrame": null
+    }
+  ],
+  "sourceRender": {
+    "freshProcessRepeats": 2,
+    "engine": "CYCLES",
+    "device": "CPU",
+    "resolution": [
+      512,
+      288
+    ],
+    "resolutionPercentage": 100,
+    "samples": 16,
+    "seed": 20260827,
+    "animatedSeed": false,
+    "adaptiveSampling": false,
+    "denoising": false,
+    "motionBlur": false,
+    "persistentData": false,
+    "threadsMode": "FIXED",
+    "threads": 4,
+    "passes": [
+      "Combined",
+      "Depth",
+      "Normal",
+      "Vector",
+      "CryptoObject00",
+      "CryptoObject01",
+      "CryptoObject02",
+      "Debug Sample Count"
+    ],
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorMode": "RGBA",
+    "colorDepth": "32",
+    "exrCodec": "ZIP"
+  },
+  "compositor": {
+    "freshProcessPerFixtureShutterRepeat": true,
+    "shutters": [
+      0.0,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "samples": 32,
+    "device": "CPU",
+    "threadsMode": "FIXED",
+    "threads": 4,
+    "graph": {
+      "treeType": "CompositorNodeTree",
+      "sceneBinding": "Scene.compositing_node_group",
+      "nodes": [
+        "CompositorNodeImage",
+        "CompositorNodeVecBlur",
+        "NodeGroupOutput"
+      ],
+      "links": [
+        "source.Combined -> VectorBlur.Image",
+        "source.Vector -> VectorBlur.Speed",
+        "source.Depth -> VectorBlur.Z",
+        "VectorBlur.Image -> GroupOutput.Image"
+      ]
+    },
+    "output": {
+      "resolution": [
+        512,
+        288
+      ],
+      "fileFormat": "OPEN_EXR",
+      "colorMode": "RGBA",
+      "colorDepth": "32",
+      "exrCodec": "ZIP"
+    }
+  },
+  "identityAndRepeatGates": {
+    "sourceProcesses": 6,
+    "compositorProcesses": 24,
+    "uniquePids": 30,
+    "sourceOutputs": 6,
+    "compositorOutputs": 24,
+    "sourceDecodedPassPairsExact": "24/24",
+    "compositorDecodedPairsExact": "12/12",
+    "finiteOutputs": "30/30",
+    "sourceAndOutputIdentityRequired": true
+  },
+  "taskValidityGates": {
+    "movingFixtures": [
+      "OBJECT_OCCLUSION_X",
+      "CAMERA_PAN_X"
+    ],
+    "movingVector": {
+      "magnitudeMaximumMinimumPixels": 8.0,
+      "magnitudeMaximumMaximumPixels": 128.0,
+      "magnitudeP99MinimumPixels": 8.0,
+      "pixelsAboveOnePixelMinimum": 2000
+    },
+    "shutterZero": {
+      "rgbAbsoluteErrorMaximum": 0.0000152587890625,
+      "changedPixelsAbove1Over65536": 0
+    },
+    "movingShutterHalf": {
+      "rgbAbsoluteErrorMaximumMinimum": 0.05,
+      "rgbAbsoluteErrorP99Minimum": 0.005,
+      "rgbRmseMinimum": 0.005,
+      "changedPixelsAbove1Over4096Minimum": 1000
+    },
+    "movingDoseResponse": {
+      "shutters": [
+        0.25,
+        0.5,
+        1.0
+      ],
+      "rgbMaximumStrictlyIncreasing": true,
+      "rgbP99StrictlyIncreasing": true,
+      "rgbRmseStrictlyIncreasing": true,
+      "shutterOneToQuarterRmseRatioMinimum": 1.5
+    },
+    "staticControl": {
+      "vectorMagnitudeMaximumPixels": 0.0009765625,
+      "vectorMagnitudeP99Pixels": 0.0000152587890625,
+      "allShuttersRgbAbsoluteErrorMaximum": 0.0000152587890625,
+      "allShuttersChangedPixelsAbove1Over65536": 0
+    }
+  },
+  "diagnostics": {
+    "pngCount": 9,
+    "mapsPerFixture": [
+      "combined",
+      "vector-magnitude",
+      "shutter-0p5-rgb-maximum-absolute-error"
+    ],
+    "mappings": {
+      "combined": {
+        "minimum": 0.0,
+        "clipMaximum": 1.0,
+        "encoding": "linear RGB channels independently clipped then RGB8 round-to-nearest"
+      },
+      "vector-magnitude": {
+        "minimum": 0.0,
+        "clipMaximum": 64.0,
+        "encoding": "t,t^2,0 RGB8"
+      },
+      "shutter-0p5-rgb-maximum-absolute-error": {
+        "minimum": 0.0,
+        "clipMaximum": 1.0,
+        "encoding": "t,t^2,0 RGB8"
+      }
+    },
+    "canonicalSidecarPerPng": true,
+    "decodedReopenRequired": true
+  },
+  "decisionRule": {
+    "supportedVerdict": "CONTROLLED_VECTOR_BLUR_TASK_CALIBRATION_SUPPORTED",
+    "invalidVerdict": "CONTROLLED_VECTOR_BLUR_TASK_CALIBRATION_INVALID",
+    "supportedMeaning": "all identity, repeat, moving sensitivity, shutter-zero, dose-response, static-control, diagnostic and attack gates pass",
+    "nextIfSupported": "preregister a fresh controlled-motion adaptive Vector holdout without changing the calibrated task",
+    "nextIfInvalid": "retire Blender Vector Blur as the oracle for this branch and preregister an independent deterministic warp or optical-flow task"
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "BLENDER_IDENTITY",
+    "OCIO_IDENTITY",
+    "FIXTURE_ROSTER",
+    "FIXTURE_STRUCTURE",
+    "BLENDER52_ANIMATION_API",
+    "SOURCE_PROCESS_ROSTER",
+    "SOURCE_PASS_TOTALITY",
+    "SOURCE_REPEAT_IDENTITY",
+    "COMPOSITOR_GRAPH_CONTRACT",
+    "COMPOSITOR_PROCESS_ROSTER",
+    "COMPOSITOR_OUTPUT_TOTALITY",
+    "COMPOSITOR_REPEAT_IDENTITY",
+    "MOVING_TASK_SENSITIVITY",
+    "SHUTTER_ZERO_IDENTITY",
+    "DOSE_RESPONSE",
+    "STATIC_NEGATIVE_CONTROL",
+    "DIAGNOSTIC_TOTALITY",
+    "OPERATION_BOUNDARY",
+    "EVIDENCE_SELF_HASH"
+  ],
+  "evidenceGates": {
+    "toolFreezeBeforeFormalOutput": true,
+    "zeroFormalOutputPreflightAfterToolFreeze": true,
+    "retainFailedCells": true,
+    "independentReplayRequired": true,
+    "minimumDiskReserveBytes": 107374182400,
+    "projectedWriteBytes": 134217728
+  },
+  "operationBoundary": {
+    "blenderProcesses": 30,
+    "blenderRenderCalls": 30,
+    "cyclesRayRenders": 6,
+    "sourceMultipartExrsWritten": 6,
+    "compositorRgbaExrsWritten": 24,
+    "sourceDecodedPassPairsCompared": 24,
+    "compositorDecodedPairsCompared": 12,
+    "diagnosticPngsWritten": 9,
+    "sourceBlendFilesOpened": 0,
+    "sourceBlendFilesModified": 0,
+    "externalAssetsOpened": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0,
+    "adaptiveCandidatesEvaluated": 0
+  },
+  "outputRoot": "experiments/controlled-motion-vector-blur-calibration-v0-1",
+  "nonClaims": [
+    "D5 does not evaluate or promote any adaptive sampling profile.",
+    "Synthetic task calibration is not production-shot, visual-quality, cinematic-motion or human-preference evidence.",
+    "Passing does not validate Vector Blur occlusion correctness, off-camera content, arbitrary motion, deformation, transparency, hair, volume or long sequences.",
+    "Passing cannot revise the D2 production negative, D3 payload results or D4 invalid result.",
+    "The diagnostic PNGs do not replace float32 measurements.",
+    "No video-generation model participates in D5."
+  ]
+}

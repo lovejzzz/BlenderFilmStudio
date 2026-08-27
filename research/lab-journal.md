@@ -1749,6 +1749,22 @@ This is exploratory support that Blender 5.2 Vector Blur is not universally iner
 
 Artifacts: `blender/probe_b52_d5_controlled_motion.py`, `scripts/analyze-b52-d5-controlled-motion-preflight.py` and `experiments/controlled-motion-vector-blur-preflight-v0-1/`.
 
+## J-106 · B52-D5 freezes task validity before a formal tool exists
+
+Date: 2026-08-27 · Type: CONFIRMATORY TASK-CALIBRATION PREREGISTRATION · Formal outputs: 0
+
+D5 separates task validity from adaptive-profile evaluation. It freezes two generated moving fixtures—object translation across a static occluder and orthographic camera translation over layered geometry—plus a no-keyframe negative control. No source `.blend`, external asset or adaptive candidate is permitted.
+
+Each fixture requires two fresh Cycles CPU source renders and four shutter settings through two fresh compositor repeats. The resulting boundary is 30 unique Blender 5.2 processes, six multipart sources, 24 RGBA compositor outputs and 30 render calls. All eight decoded source parts and all 12 compositor repeat pairs must reproduce exactly.
+
+The task must distinguish motion from stasis before it can be used as an oracle. Both moving fixtures need non-trivial Vector magnitude, shutter-zero identity, a material shutter-0.5 response and strict 0.25→0.5→1.0 maximum/p99/RMSE dose ordering. The static control must retain near-zero Vector and pixel identity at every shutter. Nine fixed-scale diagnostics and 20 adversarial attacks are preregistered.
+
+All bound D4, exploratory-observation, Blender executable and OCIO hashes were rechecked before this entry. The formal output root was absent. The preregistered spec SHA-256 is `5c2e6564650d6ab6d98f6bb7d91da4304c1cfeece4601871ed74fe5fd5521e01`; the protocol SHA-256 is `33411d6348554470fb70a4c69ff985d47b3396b007f56e2268cfb8fa09b149c2`.
+
+Passing permits only a separately frozen fresh adaptive-Vector holdout. Failure retires Blender Vector Blur as this branch's oracle and moves the next falsifiable test to deterministic warp or independent optical flow. Neither outcome can revise D2, D3 or D4.
+
+Artifacts: `specs/controlled-motion-vector-blur-calibration.v0.1.json` and `research/2026-08-27-b52-d5-controlled-motion-vector-blur-calibration-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
