@@ -1,0 +1,100 @@
+{
+  "blender": {
+    "buildHash": "fbe6228777e7",
+    "buildPlatform": "Darwin",
+    "version": "5.2.0 LTS"
+  },
+  "elapsedSeconds": 1.429726,
+  "experimentId": "B52-D5",
+  "fixtureId": "OBJECT_OCCLUSION_X",
+  "graph": {
+    "links": [
+      "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+      "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+      "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+      "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+    ],
+    "match": true,
+    "nodeCount": 3
+  },
+  "input": {
+    "depthPass": "Depth",
+    "imagePass": "Combined",
+    "sha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+    "speedPass": "Vector",
+    "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr"
+  },
+  "operationCounts": {
+    "blenderProcesses": 1,
+    "blenderRenderCalls": 1,
+    "cyclesRayRenders": 0,
+    "externalAssetsOpened": 0,
+    "sourceBlendFilesOpened": 0
+  },
+  "output": {
+    "bytes": 1721259,
+    "sha256": "c092ee04b32f560dd203c5dff3cdf4712ff50f2e6d5deb73d07a62b121d1f3bd",
+    "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R2/vector-blur.exr"
+  },
+  "pid": 13020,
+  "repeat": 2,
+  "reportHash": "cf2c79873a1daaddade731e3ba6385e8cedbb880c86da442d477d166c346419a",
+  "rna": {
+    "groupOutput": {
+      "identifier": "Socket_0",
+      "name": "Image"
+    },
+    "imageOutputs": [
+      "Combined",
+      "Alpha",
+      "Depth",
+      "Normal",
+      "Vector",
+      "CryptoObject00",
+      "CryptoObject01",
+      "CryptoObject02",
+      "Debug Sample Count"
+    ],
+    "match": true,
+    "vectorBlurInputs": [
+      {
+        "identifier": "Image",
+        "name": "Image",
+        "type": "RGBA"
+      },
+      {
+        "identifier": "Speed",
+        "name": "Speed",
+        "type": "VECTOR"
+      },
+      {
+        "identifier": "Z",
+        "name": "Depth",
+        "type": "VALUE"
+      },
+      {
+        "identifier": "Samples",
+        "name": "Samples",
+        "type": "INT"
+      },
+      {
+        "identifier": "Shutter",
+        "name": "Shutter",
+        "type": "VALUE"
+      }
+    ]
+  },
+  "runtime": {
+    "compositorDevice": "CPU",
+    "engine": "BLENDER_WORKBENCH",
+    "threads": 4,
+    "threadsMode": "FIXED"
+  },
+  "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+  "shutter": 1.0,
+  "sourcePostSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+  "vectorBlur": {
+    "Samples": 32,
+    "Shutter": 1.0
+  }
+}

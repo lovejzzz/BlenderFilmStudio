@@ -1779,6 +1779,22 @@ Next: run the unchanged 30-process matrix. A static-control failure is a valid c
 
 Artifact: `experiments/controlled-motion-vector-blur-calibration-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-108 · B52-D5 retires Vector Blur as this branch's oracle
+
+Date: 2026-08-27 · Type: CONFIRMATORY REAL-BLENDER TASK CALIBRATION · Blender processes: 30
+
+All six fresh Cycles sources and 24 fresh compositor cells completed with 30 unique PIDs. The three fixtures reproduced 24/24 decoded multipart pass pairs and 12/12 decoded compositor pairs exactly. The contract suite passed 20/20 attacks without early-failure masking.
+
+Both moving fixtures passed. Object translation produced a 51.200012 px Vector maximum and shutter 0.25/0.5/1.0 RMSE of 0.042265/0.060391/0.086485. Camera translation produced a 25.600033 px maximum and RMSE of 0.035245/0.051398/0.074459. Their maximum, p99 and RMSE sequences were strictly increasing; shutter-zero changed no pixel above `1/65536`.
+
+The static negative control failed one frozen gate. Its Vector maximum was only `2.67029e−5` px, but p99 was `1.90735e−5`, above `1/65536`. This floor was decoded-repeat-exact. All four static compositor outputs nevertheless stayed below the pixel threshold, with RGB maximum `2.38419e−7` and zero changed pixels above `1/65536`.
+
+Verdict: `CONTROLLED_VECTOR_BLUR_TASK_CALIBRATION_INVALID`, base failure `STATIC_NEGATIVE_CONTROL`. The audit is independently `PASS`: result replay byte-exact, 6/6 source artifacts, 24/24 compositor artifacts, 30/30 reports, 18/18 diagnostic artifacts and all frozen inputs/tools matched. Audit PASS means the invalid evidence is intact; it does not reverse the scientific result.
+
+Per the preregistered decision rule, no adaptive-Vector holdout will be created. The next task oracle will be a separately preregistered deterministic warp or independent optical-flow task; the preferred first route is a CPU reference warp with explicit coordinates, sampling kernel and occlusion policy.
+
+Artifacts: `experiments/controlled-motion-vector-blur-calibration-v0-1/` and `research/2026-08-27-b52-d5-controlled-motion-vector-blur-calibration-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

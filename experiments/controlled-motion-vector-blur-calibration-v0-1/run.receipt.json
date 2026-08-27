@@ -1,0 +1,4747 @@
+{
+  "compositorRuns": [
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--shutter",
+        "0.0",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R1/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SHUTTER_0p0_R1",
+      "elapsedSeconds": 1.850799,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 12983,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.418675,
+        "experimentId": "B52-D5",
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "698cc70c65997ca6c722037bbc3636140c02dc6bd73a6a1670390af7b067fef7",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R1/vector-blur.exr"
+        },
+        "pid": 12983,
+        "repeat": 1,
+        "reportHash": "6ffb61f3119ee9b4eda68532efa2f861795f68e155c68442a3a0b9b30a88d412",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.0,
+        "sourcePostSha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R1/report.json",
+      "shutter": 0.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--shutter",
+        "0.0",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R2/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SHUTTER_0p0_R2",
+      "elapsedSeconds": 1.860777,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 12984,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.423971,
+        "experimentId": "B52-D5",
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "1dd00e9466e80f40331acb3efa98f8e96819cb706c1ee97fce73ce41164c3831",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R2/vector-blur.exr"
+        },
+        "pid": 12984,
+        "repeat": 2,
+        "reportHash": "858acf6d574f73be063c1ef9ca01a481c980b8e408a98c9f7dba52b06467d325",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.0,
+        "sourcePostSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R2/report.json",
+      "shutter": 0.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p0_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--shutter",
+        "0.25",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R1/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SHUTTER_0p25_R1",
+      "elapsedSeconds": 1.858691,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 12985,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.425316,
+        "experimentId": "B52-D5",
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1721569,
+          "sha256": "7bb94a934c9098abbee2ad057209cd145e877136647b2c131268bffd7c648fae",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R1/vector-blur.exr"
+        },
+        "pid": 12985,
+        "repeat": 1,
+        "reportHash": "38598a907c10cc3370a8e040bcd99992942d98be9e9b008319db282ae3cd010b",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.25,
+        "sourcePostSha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.25
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R1/report.json",
+      "shutter": 0.25,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--shutter",
+        "0.25",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R2/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SHUTTER_0p25_R2",
+      "elapsedSeconds": 1.866028,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 12986,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.427002,
+        "experimentId": "B52-D5",
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1721569,
+          "sha256": "e5c115056463e86f25131ee83d64022f28509bf2c79420d37cb022d08348f3fe",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R2/vector-blur.exr"
+        },
+        "pid": 12986,
+        "repeat": 2,
+        "reportHash": "aa5452ce2b1561ced7aa993f491a25b4524c9503a483911c31b3878471b09a01",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.25,
+        "sourcePostSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.25
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R2/report.json",
+      "shutter": 0.25,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p25_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--shutter",
+        "0.5",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R1/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SHUTTER_0p5_R1",
+      "elapsedSeconds": 1.855972,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 13003,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.424074,
+        "experimentId": "B52-D5",
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1721320,
+          "sha256": "f2410612a7203f72316d00577fab3c234e0c7cee2d0d011e57f63b29390388b2",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R1/vector-blur.exr"
+        },
+        "pid": 13003,
+        "repeat": 1,
+        "reportHash": "3e3b34f0672b9f1363441aeaacc3c7f52b511c68cd50e3ea31177ce00b20dfbe",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.5,
+        "sourcePostSha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.5
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R1/report.json",
+      "shutter": 0.5,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--shutter",
+        "0.5",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R2/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SHUTTER_0p5_R2",
+      "elapsedSeconds": 1.86098,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 13004,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.426419,
+        "experimentId": "B52-D5",
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1721320,
+          "sha256": "8d4e7e2ae7e92090c351c73d3c6faabea4573757f60068ab65e396686f8dfec8",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R2/vector-blur.exr"
+        },
+        "pid": 13004,
+        "repeat": 2,
+        "reportHash": "f8a471b99a816d5f7e9aff4dbc4b184f6f4e785c4eeb20e42ff8379af9dcf9c9",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.5,
+        "sourcePostSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.5
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R2/report.json",
+      "shutter": 0.5,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_0p5_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--shutter",
+        "1.0",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R1/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SHUTTER_1p0_R1",
+      "elapsedSeconds": 1.865198,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 13005,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.426197,
+        "experimentId": "B52-D5",
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1721259,
+          "sha256": "e3076be18e02bf32acb8d9319bcfebf7a310713c629277cac1d503e4871b41e1",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R1/vector-blur.exr"
+        },
+        "pid": 13005,
+        "repeat": 1,
+        "reportHash": "280673a656ad5fd8d7b3fe7974ee2fccfe8dd0ddefd3ac3b5d60d42052b9611d",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 1.0,
+        "sourcePostSha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 1.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R1/report.json",
+      "shutter": 1.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--shutter",
+        "1.0",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R2/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SHUTTER_1p0_R2",
+      "elapsedSeconds": 1.86379,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 13020,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.429726,
+        "experimentId": "B52-D5",
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1721259,
+          "sha256": "c092ee04b32f560dd203c5dff3cdf4712ff50f2e6d5deb73d07a62b121d1f3bd",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R2/vector-blur.exr"
+        },
+        "pid": 13020,
+        "repeat": 2,
+        "reportHash": "cf2c79873a1daaddade731e3ba6385e8cedbb880c86da442d477d166c346419a",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 1.0,
+        "sourcePostSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 1.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R2/report.json",
+      "shutter": 1.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/OBJECT_OCCLUSION_X_SHUTTER_1p0_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--shutter",
+        "0.0",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R1/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SHUTTER_0p0_R1",
+      "elapsedSeconds": 1.867294,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 13021,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.432149,
+        "experimentId": "B52-D5",
+        "fixtureId": "CAMERA_PAN_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "8e3dd5689f5045a08c444237c621162ca4591ff97369b0348497778c4539cf35",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R1/vector-blur.exr"
+        },
+        "pid": 13021,
+        "repeat": 1,
+        "reportHash": "f73eb0dad223b71181bed17e6b96d34b7f4437b7f2dda75f5a19c0da04b9a51e",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.0,
+        "sourcePostSha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R1/report.json",
+      "shutter": 0.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--shutter",
+        "0.0",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R2/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SHUTTER_0p0_R2",
+      "elapsedSeconds": 1.869064,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 13022,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.431364,
+        "experimentId": "B52-D5",
+        "fixtureId": "CAMERA_PAN_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "72ae896e36829ccb505cd4b5ac6721a35cb4d009b4fa72b16118184b22cc8ebd",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R2/vector-blur.exr"
+        },
+        "pid": 13022,
+        "repeat": 2,
+        "reportHash": "d50d852ff8c322f72d37bcee15f6287577eb91eb1eff9c85e110652763f57d65",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.0,
+        "sourcePostSha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R2/report.json",
+      "shutter": 0.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p0_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--shutter",
+        "0.25",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R1/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SHUTTER_0p25_R1",
+      "elapsedSeconds": 1.888212,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 13025,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.450678,
+        "experimentId": "B52-D5",
+        "fixtureId": "CAMERA_PAN_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1707344,
+          "sha256": "0680f1293fedc98a64bd3f24be77182642c84983a70a8c597b49c4f3313c72d3",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R1/vector-blur.exr"
+        },
+        "pid": 13025,
+        "repeat": 1,
+        "reportHash": "e5c75bf478994a49014ddeb59ff1d93f3ab1caa7c0288664b1511e6a5cb80174",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.25,
+        "sourcePostSha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.25
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R1/report.json",
+      "shutter": 0.25,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--shutter",
+        "0.25",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R2/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SHUTTER_0p25_R2",
+      "elapsedSeconds": 1.896932,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 13026,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.459491,
+        "experimentId": "B52-D5",
+        "fixtureId": "CAMERA_PAN_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1707344,
+          "sha256": "047489d2f23f5757f0c8fb8da3f77961e9369618bbf7890d43ed79b883a95ad5",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R2/vector-blur.exr"
+        },
+        "pid": 13026,
+        "repeat": 2,
+        "reportHash": "3c5811060e19dfc73699a37896772ffb19038a506be84b143969a0e3c0035e76",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.25,
+        "sourcePostSha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.25
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R2/report.json",
+      "shutter": 0.25,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p25_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--shutter",
+        "0.5",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R1/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SHUTTER_0p5_R1",
+      "elapsedSeconds": 1.890707,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 13029,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.451719,
+        "experimentId": "B52-D5",
+        "fixtureId": "CAMERA_PAN_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1701524,
+          "sha256": "8bb7a07c2757ff171ee753bf4cb050fdefac6b44df9d5188c88c3790187619bb",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R1/vector-blur.exr"
+        },
+        "pid": 13029,
+        "repeat": 1,
+        "reportHash": "c074ad0a70b166c4bfd92711a969e5fff508f792ab6b91f78dbdfee411a7c1f6",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.5,
+        "sourcePostSha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.5
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R1/report.json",
+      "shutter": 0.5,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--shutter",
+        "0.5",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R2/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SHUTTER_0p5_R2",
+      "elapsedSeconds": 1.894363,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 13030,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.455966,
+        "experimentId": "B52-D5",
+        "fixtureId": "CAMERA_PAN_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1701524,
+          "sha256": "a040125dd9bee12c67d076f459cce2cb12bcc22b5623ccd785321cbcc1b3c7e2",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R2/vector-blur.exr"
+        },
+        "pid": 13030,
+        "repeat": 2,
+        "reportHash": "1ae70d13426087aada55184a3484a15f0ad3768551457b7f8a1a2da976d5ed54",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.5,
+        "sourcePostSha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.5
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R2/report.json",
+      "shutter": 0.5,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_0p5_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--shutter",
+        "1.0",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R1/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SHUTTER_1p0_R1",
+      "elapsedSeconds": 1.892963,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 13031,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.455675,
+        "experimentId": "B52-D5",
+        "fixtureId": "CAMERA_PAN_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1695670,
+          "sha256": "2ac8fed89db94bce9207080808c0a8e9b8b23bf64265894f8b7031159bfcd840",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R1/vector-blur.exr"
+        },
+        "pid": 13031,
+        "repeat": 1,
+        "reportHash": "5d702d72c8d0f23d4572954c22512411c8895e80854d5ee0907c713218a7051b",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 1.0,
+        "sourcePostSha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 1.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R1/report.json",
+      "shutter": 1.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--shutter",
+        "1.0",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R2/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SHUTTER_1p0_R2",
+      "elapsedSeconds": 1.892437,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 13032,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.456187,
+        "experimentId": "B52-D5",
+        "fixtureId": "CAMERA_PAN_X",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1695670,
+          "sha256": "886e96cf933018d8cbff2e48810c188d145253a2987d60fcc88696b9056b73d8",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R2/vector-blur.exr"
+        },
+        "pid": 13032,
+        "repeat": 2,
+        "reportHash": "5c0a8e23c58e63868c5931baf7bbc09a0d0ec244f36de936244c866c2be61550",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 1.0,
+        "sourcePostSha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 1.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R2/report.json",
+      "shutter": 1.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/CAMERA_PAN_X_SHUTTER_1p0_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--shutter",
+        "0.0",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R1/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SHUTTER_0p0_R1",
+      "elapsedSeconds": 1.872378,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 13033,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.433378,
+        "experimentId": "B52-D5",
+        "fixtureId": "STATIC_CONTROL",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "263a49d7bc1c847d45ef2aa4efa016b2ffc2853cca434c76e77a5570c3d7a023",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R1/vector-blur.exr"
+        },
+        "pid": 13033,
+        "repeat": 1,
+        "reportHash": "9d8c04b97b91dd3ee8f9dcbffd7df4e0bf73f9fc3de55b7a817ffabf8fdbbb17",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.0,
+        "sourcePostSha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R1/report.json",
+      "shutter": 0.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--shutter",
+        "0.0",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R2/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SHUTTER_0p0_R2",
+      "elapsedSeconds": 1.865066,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 13035,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.429301,
+        "experimentId": "B52-D5",
+        "fixtureId": "STATIC_CONTROL",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "37b7a9a82fb3b862ea9d61773351674e6f1af28e7c263b48425a2611dd88209b",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R2/vector-blur.exr"
+        },
+        "pid": 13035,
+        "repeat": 2,
+        "reportHash": "6599bed4efb98303951bae56178e199abc634e676a8204ae1aa2667ee6c0de52",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.0,
+        "sourcePostSha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R2/report.json",
+      "shutter": 0.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p0_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--shutter",
+        "0.25",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R1/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SHUTTER_0p25_R1",
+      "elapsedSeconds": 1.870498,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 13036,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.434057,
+        "experimentId": "B52-D5",
+        "fixtureId": "STATIC_CONTROL",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "1466182ab61e571bf67cfc5880c454963f49ca6ab491228ef1c53eac095b32f4",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R1/vector-blur.exr"
+        },
+        "pid": 13036,
+        "repeat": 1,
+        "reportHash": "abe79202f65b0511835646f8128eb7859f8c8201642e4fc409baec9f2799d082",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.25,
+        "sourcePostSha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.25
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R1/report.json",
+      "shutter": 0.25,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--shutter",
+        "0.25",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R2/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SHUTTER_0p25_R2",
+      "elapsedSeconds": 1.874287,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 13037,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.438016,
+        "experimentId": "B52-D5",
+        "fixtureId": "STATIC_CONTROL",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "29590f5182e93c5bd29158088e3e9974b22964fa93e401ef4383d26d29c77ed2",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R2/vector-blur.exr"
+        },
+        "pid": 13037,
+        "repeat": 2,
+        "reportHash": "4c964e387963f8c55d2ee233b55a5bf8a2c363a84749576b68d4ae3a34ad7616",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.25,
+        "sourcePostSha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.25
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R2/report.json",
+      "shutter": 0.25,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p25_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--shutter",
+        "0.5",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R1/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SHUTTER_0p5_R1",
+      "elapsedSeconds": 1.872393,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 13038,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.435113,
+        "experimentId": "B52-D5",
+        "fixtureId": "STATIC_CONTROL",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "48b6ddbc8430870c2568354f131748b5f8e089fbc4188c16a5ed385730d2443b",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R1/vector-blur.exr"
+        },
+        "pid": 13038,
+        "repeat": 1,
+        "reportHash": "13cb4a0bb41e2dad7deb2ffb6e118de535e496c03d032516ca500e5192a3bd45",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.5,
+        "sourcePostSha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.5
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R1/report.json",
+      "shutter": 0.5,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--shutter",
+        "0.5",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R2/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SHUTTER_0p5_R2",
+      "elapsedSeconds": 1.870077,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 13039,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.434796,
+        "experimentId": "B52-D5",
+        "fixtureId": "STATIC_CONTROL",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "a31525869374d9d88268fbf29ad9f39aedf106329720fd3a24737b284798f453",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R2/vector-blur.exr"
+        },
+        "pid": 13039,
+        "repeat": 2,
+        "reportHash": "ee59da2380f39ec2c1b122dbcec490e813fe2c2c48c3cc4d1ca3ef3ae11a71cb",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 0.5,
+        "sourcePostSha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 0.5
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R2/report.json",
+      "shutter": 0.5,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_0p5_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr",
+        "--expected-source-sha",
+        "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--shutter",
+        "1.0",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R1/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R1/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SHUTTER_1p0_R1",
+      "elapsedSeconds": 1.871016,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 13040,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.433037,
+        "experimentId": "B52-D5",
+        "fixtureId": "STATIC_CONTROL",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "583e1f6c7426e338dbd0afc70b572d471a764cc8ce37209c83b2a8c5a106864b",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R1/vector-blur.exr"
+        },
+        "pid": 13040,
+        "repeat": 1,
+        "reportHash": "5a42b02a258408e19e3f8380ffad9f2951d08c5408a43a1c11630550416de907",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 1.0,
+        "sourcePostSha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 1.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R1/report.json",
+      "shutter": 1.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_vector_blur_cell.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--source-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr",
+        "--expected-source-sha",
+        "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--shutter",
+        "1.0",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R2/vector-blur.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R2/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SHUTTER_1p0_R2",
+      "elapsedSeconds": 1.869196,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 13041,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.433245,
+        "experimentId": "B52-D5",
+        "fixtureId": "STATIC_CONTROL",
+        "graph": {
+          "links": [
+            "BFS_D5_SOURCE.Combined->BFS_D5_VECTOR_BLUR.Image",
+            "BFS_D5_SOURCE.Depth->BFS_D5_VECTOR_BLUR.Z",
+            "BFS_D5_SOURCE.Vector->BFS_D5_VECTOR_BLUR.Speed",
+            "BFS_D5_VECTOR_BLUR.Image->BFS_D5_GROUP_OUTPUT.Socket_0"
+          ],
+          "match": true,
+          "nodeCount": 3
+        },
+        "input": {
+          "depthPass": "Depth",
+          "imagePass": "Combined",
+          "sha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+          "speedPass": "Vector",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 0,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1722919,
+          "sha256": "5629c2f919e0ba86f6fa08c1ae5ed089e895165eb6a2fc1ccd3fb0ae72772140",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R2/vector-blur.exr"
+        },
+        "pid": 13041,
+        "repeat": 2,
+        "reportHash": "38dd97ec138af5acc777f85cd80a01b87f6544b028142f5fd314309cb1d44549",
+        "rna": {
+          "groupOutput": {
+            "identifier": "Socket_0",
+            "name": "Image"
+          },
+          "imageOutputs": [
+            "Combined",
+            "Alpha",
+            "Depth",
+            "Normal",
+            "Vector",
+            "CryptoObject00",
+            "CryptoObject01",
+            "CryptoObject02",
+            "Debug Sample Count"
+          ],
+          "match": true,
+          "vectorBlurInputs": [
+            {
+              "identifier": "Image",
+              "name": "Image",
+              "type": "RGBA"
+            },
+            {
+              "identifier": "Speed",
+              "name": "Speed",
+              "type": "VECTOR"
+            },
+            {
+              "identifier": "Z",
+              "name": "Depth",
+              "type": "VALUE"
+            },
+            {
+              "identifier": "Samples",
+              "name": "Samples",
+              "type": "INT"
+            },
+            {
+              "identifier": "Shutter",
+              "name": "Shutter",
+              "type": "VALUE"
+            }
+          ]
+        },
+        "runtime": {
+          "compositorDevice": "CPU",
+          "engine": "BLENDER_WORKBENCH",
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurCellReport.v0.1",
+        "shutter": 1.0,
+        "sourcePostSha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+        "vectorBlur": {
+          "Samples": 32,
+          "Shutter": 1.0
+        }
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R2/report.json",
+      "shutter": 1.0,
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/compositor/STATIC_CONTROL_SHUTTER_1p0_R2/stdout.log",
+      "timedOut": false
+    }
+  ],
+  "diskAdmission": {
+    "availableBytes": 107643912192,
+    "minimumReserveBytes": 107374182400,
+    "projectedFreeAfterBytes": 107509694464,
+    "projectedWriteBytes": 134217728,
+    "status": "ACCEPTED"
+  },
+  "experimentId": "B52-D5",
+  "operationPlan": {
+    "adaptiveCandidatesEvaluated": 0,
+    "blenderProcesses": 30,
+    "blenderRenderCalls": 30,
+    "compositorDecodedPairsCompared": 12,
+    "compositorRgbaExrsWritten": 24,
+    "cyclesRayRenders": 6,
+    "diagnosticPngsWritten": 9,
+    "externalAssetsOpened": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "sourceBlendFilesModified": 0,
+    "sourceBlendFilesOpened": 0,
+    "sourceDecodedPassPairsCompared": 24,
+    "sourceMultipartExrsWritten": 6,
+    "videoModelCalls": 0
+  },
+  "parentObservations": [
+    {
+      "expectedBytes": null,
+      "expectedSha256": "e8635a1507eb5a5e8bfd950dc02fc4630a7202fd9af14b5510a991359f2e439f",
+      "kind": "d4Spec",
+      "match": true,
+      "observedBytes": 14350,
+      "observedSha256": "e8635a1507eb5a5e8bfd950dc02fc4630a7202fd9af14b5510a991359f2e439f",
+      "uri": "specs/adaptive-vector-blur-semantics-derivation.v0.1.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "bb45fe5a3e38e032c66054268170bf92d8a173db968ddb1a18420868338895e4",
+      "kind": "d4Receipt",
+      "match": true,
+      "observedBytes": 243541,
+      "observedSha256": "bb45fe5a3e38e032c66054268170bf92d8a173db968ddb1a18420868338895e4",
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/run.receipt.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "6c55a5b93a95eb6f6070c29c8cfc10ba746121fb5ec9b04de062ae2407ca12d9",
+      "kind": "d4Result",
+      "match": true,
+      "observedBytes": 166595,
+      "observedSha256": "6c55a5b93a95eb6f6070c29c8cfc10ba746121fb5ec9b04de062ae2407ca12d9",
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/results.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "c019a3272287f2b6c49060eae1fa8e8723cdada7a0d7c4032d22cef1918c0933",
+      "kind": "d4Audit",
+      "match": true,
+      "observedBytes": 73035,
+      "observedSha256": "c019a3272287f2b6c49060eae1fa8e8723cdada7a0d7c4032d22cef1918c0933",
+      "uri": "experiments/adaptive-vector-blur-semantics-derivation-v0-1/audit.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "5cde6dd9b2e6478a5a17717a2ada52670d57f0b96401b16de82e27e5397e3809",
+      "kind": "controlledMotionPreflight",
+      "match": true,
+      "observedBytes": 4695,
+      "observedSha256": "5cde6dd9b2e6478a5a17717a2ada52670d57f0b96401b16de82e27e5397e3809",
+      "uri": "experiments/controlled-motion-vector-blur-preflight-v0-1/attempt-3/observation.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "cd01c9db32f4240de1b03890d16e3846b75dc924ef190bed31bbd799c25fd57f",
+      "kind": "preflightFailure0",
+      "match": true,
+      "observedBytes": 504,
+      "observedSha256": "cd01c9db32f4240de1b03890d16e3846b75dc924ef190bed31bbd799c25fd57f",
+      "uri": "experiments/controlled-motion-vector-blur-preflight-v0-1/attempt-0.failure.json"
+    },
+    {
+      "expectedBytes": null,
+      "expectedSha256": "07367df2fcaa140e2b9ec87dcfef985f350be90a09ab498a5af4e13d642fb1df",
+      "kind": "preflightFailure1",
+      "match": true,
+      "observedBytes": 548,
+      "observedSha256": "07367df2fcaa140e2b9ec87dcfef985f350be90a09ab498a5af4e13d642fb1df",
+      "uri": "experiments/controlled-motion-vector-blur-preflight-v0-1/attempt-1.failure.json"
+    }
+  ],
+  "preregistration": {
+    "commit": "0e127a66d19f16dec7bf88bafb5158d608e574cf",
+    "specSha256": "5c2e6564650d6ab6d98f6bb7d91da4304c1cfeece4601871ed74fe5fd5521e01",
+    "specUri": "specs/controlled-motion-vector-blur-calibration.v0.1.json"
+  },
+  "runtimeObservations": {
+    "blender": {
+      "expectedBytes": 183237520,
+      "expectedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "match": true,
+      "observedBytes": 183237520,
+      "observedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "uri": "/Applications/Blender.app/Contents/MacOS/Blender"
+    },
+    "ocio": {
+      "expectedBytes": null,
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "kind": "OCIO",
+      "match": true,
+      "observedBytes": 32807,
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    }
+  },
+  "schemaVersion": "bfs.controlledMotionVectorBlurCalibrationReceipt.v0.1",
+  "sourcePostObservations": [
+    {
+      "expectedBytes": 1889344,
+      "expectedSha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+      "kind": "OBJECT_OCCLUSION_X_R1",
+      "match": true,
+      "observedBytes": 1889344,
+      "observedSha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr"
+    },
+    {
+      "expectedBytes": 1889344,
+      "expectedSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+      "kind": "OBJECT_OCCLUSION_X_R2",
+      "match": true,
+      "observedBytes": 1889344,
+      "observedSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr"
+    },
+    {
+      "expectedBytes": 1990759,
+      "expectedSha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+      "kind": "CAMERA_PAN_X_R1",
+      "match": true,
+      "observedBytes": 1990759,
+      "observedSha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr"
+    },
+    {
+      "expectedBytes": 1990759,
+      "expectedSha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+      "kind": "CAMERA_PAN_X_R2",
+      "match": true,
+      "observedBytes": 1990759,
+      "observedSha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr"
+    },
+    {
+      "expectedBytes": 1884836,
+      "expectedSha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+      "kind": "STATIC_CONTROL_R1",
+      "match": true,
+      "observedBytes": 1884836,
+      "observedSha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr"
+    },
+    {
+      "expectedBytes": 1884836,
+      "expectedSha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+      "kind": "STATIC_CONTROL_R2",
+      "match": true,
+      "observedBytes": 1884836,
+      "observedSha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr"
+    }
+  ],
+  "sourcePreObservations": [
+    {
+      "expectedBytes": 1889344,
+      "expectedSha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+      "kind": "OBJECT_OCCLUSION_X_R1",
+      "match": true,
+      "observedBytes": 1889344,
+      "observedSha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr"
+    },
+    {
+      "expectedBytes": 1889344,
+      "expectedSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+      "kind": "OBJECT_OCCLUSION_X_R2",
+      "match": true,
+      "observedBytes": 1889344,
+      "observedSha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr"
+    },
+    {
+      "expectedBytes": 1990759,
+      "expectedSha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+      "kind": "CAMERA_PAN_X_R1",
+      "match": true,
+      "observedBytes": 1990759,
+      "observedSha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr"
+    },
+    {
+      "expectedBytes": 1990759,
+      "expectedSha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+      "kind": "CAMERA_PAN_X_R2",
+      "match": true,
+      "observedBytes": 1990759,
+      "observedSha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr"
+    },
+    {
+      "expectedBytes": 1884836,
+      "expectedSha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+      "kind": "STATIC_CONTROL_R1",
+      "match": true,
+      "observedBytes": 1884836,
+      "observedSha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr"
+    },
+    {
+      "expectedBytes": 1884836,
+      "expectedSha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+      "kind": "STATIC_CONTROL_R2",
+      "match": true,
+      "observedBytes": 1884836,
+      "observedSha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr"
+    }
+  ],
+  "sourceRuns": [
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_controlled_motion_source.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SOURCE_R1",
+      "elapsedSeconds": 2.198615,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 12930,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.770361,
+        "experimentId": "B52-D5",
+        "fixture": {
+          "cameraXByFrame": null,
+          "id": "OBJECT_OCCLUSION_X",
+          "motionClass": "OBJECT_TRANSLATION_ACROSS_STATIC_OCCLUDER",
+          "moverXByFrame": {
+            "0": -1.0,
+            "1": 0.0,
+            "2": 1.0
+          }
+        },
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "fixtureStructure": {
+          "cameraAction": [],
+          "moverAction": [
+            {
+              "arrayIndex": 0,
+              "channelBagIndex": 0,
+              "dataPath": "location",
+              "keyframes": [
+                {
+                  "frame": 0.0,
+                  "interpolation": "LINEAR",
+                  "value": -1.0
+                },
+                {
+                  "frame": 1.0,
+                  "interpolation": "LINEAR",
+                  "value": 0.0
+                },
+                {
+                  "frame": 2.0,
+                  "interpolation": "LINEAR",
+                  "value": 1.0
+                }
+              ],
+              "layerIndex": 0,
+              "stripIndex": 0
+            }
+          ],
+          "objects": [
+            {
+              "location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "name": "BFS_BACKGROUND",
+              "scale": [
+                8.9,
+                5.0,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                10.0
+              ],
+              "name": "BFS_D5_CAMERA",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "CAMERA"
+            },
+            {
+              "location": [
+                -2.0,
+                -2.0,
+                7.0
+              ],
+              "name": "BFS_D5_KEY",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "LIGHT"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "name": "BFS_MOVER",
+              "scale": [
+                0.8,
+                0.8,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.72,
+                0.0,
+                2.0
+              ],
+              "name": "BFS_OCCLUDER",
+              "scale": [
+                0.18,
+                1.45,
+                1.0
+              ],
+              "type": "MESH"
+            }
+          ],
+          "sceneName": "BFS_D5_OBJECT_OCCLUSION_X"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 1,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1889344,
+          "sha256": "b2be30217b28b38693b5c866825be7a43b6a6e03f160ff3cce6912fc7ccf9532",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/source.exr"
+        },
+        "passState": {
+          "Combined": true,
+          "CryptoObject": true,
+          "Depth": true,
+          "Normal": true,
+          "Vector": true,
+          "cryptomatteDepth": 6,
+          "sampleCount": true,
+          "viewLayer": "BFS_MASTER"
+        },
+        "pid": 12930,
+        "renderSeconds": 0.39038,
+        "repeat": 1,
+        "reportHash": "26aa85f9054de2a36bedc2859e8544c410c5199edd49271e8f6c372d8221fdf4",
+        "runtime": {
+          "adaptiveSampling": false,
+          "animatedSeed": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "samples": 16,
+          "seed": 20260827,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurSourceReport.v0.1"
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/report.json",
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_controlled_motion_source.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--fixture",
+        "OBJECT_OCCLUSION_X",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/report.json"
+      ],
+      "cellId": "OBJECT_OCCLUSION_X_SOURCE_R2",
+      "elapsedSeconds": 2.202007,
+      "exitCode": 0,
+      "fixtureId": "OBJECT_OCCLUSION_X",
+      "pid": 12931,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.771154,
+        "experimentId": "B52-D5",
+        "fixture": {
+          "cameraXByFrame": null,
+          "id": "OBJECT_OCCLUSION_X",
+          "motionClass": "OBJECT_TRANSLATION_ACROSS_STATIC_OCCLUDER",
+          "moverXByFrame": {
+            "0": -1.0,
+            "1": 0.0,
+            "2": 1.0
+          }
+        },
+        "fixtureId": "OBJECT_OCCLUSION_X",
+        "fixtureStructure": {
+          "cameraAction": [],
+          "moverAction": [
+            {
+              "arrayIndex": 0,
+              "channelBagIndex": 0,
+              "dataPath": "location",
+              "keyframes": [
+                {
+                  "frame": 0.0,
+                  "interpolation": "LINEAR",
+                  "value": -1.0
+                },
+                {
+                  "frame": 1.0,
+                  "interpolation": "LINEAR",
+                  "value": 0.0
+                },
+                {
+                  "frame": 2.0,
+                  "interpolation": "LINEAR",
+                  "value": 1.0
+                }
+              ],
+              "layerIndex": 0,
+              "stripIndex": 0
+            }
+          ],
+          "objects": [
+            {
+              "location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "name": "BFS_BACKGROUND",
+              "scale": [
+                8.9,
+                5.0,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                10.0
+              ],
+              "name": "BFS_D5_CAMERA",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "CAMERA"
+            },
+            {
+              "location": [
+                -2.0,
+                -2.0,
+                7.0
+              ],
+              "name": "BFS_D5_KEY",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "LIGHT"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "name": "BFS_MOVER",
+              "scale": [
+                0.8,
+                0.8,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.72,
+                0.0,
+                2.0
+              ],
+              "name": "BFS_OCCLUDER",
+              "scale": [
+                0.18,
+                1.45,
+                1.0
+              ],
+              "type": "MESH"
+            }
+          ],
+          "sceneName": "BFS_D5_OBJECT_OCCLUSION_X"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 1,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1889344,
+          "sha256": "4fe4b5c7acfe32c4e37e2c7b40eca7158c8ab40c60813a131d048d73ea613880",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/source.exr"
+        },
+        "passState": {
+          "Combined": true,
+          "CryptoObject": true,
+          "Depth": true,
+          "Normal": true,
+          "Vector": true,
+          "cryptomatteDepth": 6,
+          "sampleCount": true,
+          "viewLayer": "BFS_MASTER"
+        },
+        "pid": 12931,
+        "renderSeconds": 0.391084,
+        "repeat": 2,
+        "reportHash": "6cc3bb1d9537c997040b6989b33ef0b903f92f5d032ef53c4dfd96176c087550",
+        "runtime": {
+          "adaptiveSampling": false,
+          "animatedSeed": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "samples": 16,
+          "seed": 20260827,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurSourceReport.v0.1"
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/report.json",
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/OBJECT_OCCLUSION_X_SOURCE_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_controlled_motion_source.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SOURCE_R1",
+      "elapsedSeconds": 2.213152,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 12934,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.781222,
+        "experimentId": "B52-D5",
+        "fixture": {
+          "cameraXByFrame": {
+            "0": -0.5,
+            "1": 0.0,
+            "2": 0.5
+          },
+          "id": "CAMERA_PAN_X",
+          "motionClass": "ORTHOGRAPHIC_CAMERA_TRANSLATION_OVER_LAYERED_GEOMETRY",
+          "moverXByFrame": null
+        },
+        "fixtureId": "CAMERA_PAN_X",
+        "fixtureStructure": {
+          "cameraAction": [
+            {
+              "arrayIndex": 0,
+              "channelBagIndex": 0,
+              "dataPath": "location",
+              "keyframes": [
+                {
+                  "frame": 0.0,
+                  "interpolation": "LINEAR",
+                  "value": -0.5
+                },
+                {
+                  "frame": 1.0,
+                  "interpolation": "LINEAR",
+                  "value": 0.0
+                },
+                {
+                  "frame": 2.0,
+                  "interpolation": "LINEAR",
+                  "value": 0.5
+                }
+              ],
+              "layerIndex": 0,
+              "stripIndex": 0
+            }
+          ],
+          "moverAction": [],
+          "objects": [
+            {
+              "location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "name": "BFS_BACKGROUND",
+              "scale": [
+                8.9,
+                5.0,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                10.0
+              ],
+              "name": "BFS_D5_CAMERA",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "CAMERA"
+            },
+            {
+              "location": [
+                -2.0,
+                -2.0,
+                7.0
+              ],
+              "name": "BFS_D5_KEY",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "LIGHT"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "name": "BFS_MOVER",
+              "scale": [
+                0.8,
+                0.8,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.72,
+                0.0,
+                2.0
+              ],
+              "name": "BFS_OCCLUDER",
+              "scale": [
+                0.18,
+                1.45,
+                1.0
+              ],
+              "type": "MESH"
+            }
+          ],
+          "sceneName": "BFS_D5_CAMERA_PAN_X"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 1,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1990759,
+          "sha256": "11630c68a7733e123524eb1cbf15eac0070291a416e08e7882d29bbb48df9040",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/source.exr"
+        },
+        "passState": {
+          "Combined": true,
+          "CryptoObject": true,
+          "Depth": true,
+          "Normal": true,
+          "Vector": true,
+          "cryptomatteDepth": 6,
+          "sampleCount": true,
+          "viewLayer": "BFS_MASTER"
+        },
+        "pid": 12934,
+        "renderSeconds": 0.391491,
+        "repeat": 1,
+        "reportHash": "e7ad33955712e6af24efffb6b521849b0d36ccb35a6f5fa4f5b36b911698e5c3",
+        "runtime": {
+          "adaptiveSampling": false,
+          "animatedSeed": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "samples": 16,
+          "seed": 20260827,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurSourceReport.v0.1"
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/report.json",
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_controlled_motion_source.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--fixture",
+        "CAMERA_PAN_X",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/report.json"
+      ],
+      "cellId": "CAMERA_PAN_X_SOURCE_R2",
+      "elapsedSeconds": 2.225025,
+      "exitCode": 0,
+      "fixtureId": "CAMERA_PAN_X",
+      "pid": 12938,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.786808,
+        "experimentId": "B52-D5",
+        "fixture": {
+          "cameraXByFrame": {
+            "0": -0.5,
+            "1": 0.0,
+            "2": 0.5
+          },
+          "id": "CAMERA_PAN_X",
+          "motionClass": "ORTHOGRAPHIC_CAMERA_TRANSLATION_OVER_LAYERED_GEOMETRY",
+          "moverXByFrame": null
+        },
+        "fixtureId": "CAMERA_PAN_X",
+        "fixtureStructure": {
+          "cameraAction": [
+            {
+              "arrayIndex": 0,
+              "channelBagIndex": 0,
+              "dataPath": "location",
+              "keyframes": [
+                {
+                  "frame": 0.0,
+                  "interpolation": "LINEAR",
+                  "value": -0.5
+                },
+                {
+                  "frame": 1.0,
+                  "interpolation": "LINEAR",
+                  "value": 0.0
+                },
+                {
+                  "frame": 2.0,
+                  "interpolation": "LINEAR",
+                  "value": 0.5
+                }
+              ],
+              "layerIndex": 0,
+              "stripIndex": 0
+            }
+          ],
+          "moverAction": [],
+          "objects": [
+            {
+              "location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "name": "BFS_BACKGROUND",
+              "scale": [
+                8.9,
+                5.0,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                10.0
+              ],
+              "name": "BFS_D5_CAMERA",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "CAMERA"
+            },
+            {
+              "location": [
+                -2.0,
+                -2.0,
+                7.0
+              ],
+              "name": "BFS_D5_KEY",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "LIGHT"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "name": "BFS_MOVER",
+              "scale": [
+                0.8,
+                0.8,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.72,
+                0.0,
+                2.0
+              ],
+              "name": "BFS_OCCLUDER",
+              "scale": [
+                0.18,
+                1.45,
+                1.0
+              ],
+              "type": "MESH"
+            }
+          ],
+          "sceneName": "BFS_D5_CAMERA_PAN_X"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 1,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1990759,
+          "sha256": "b26a0de06f8de10e1c4af418a29a7b346761561d7f2bb6cd94b350877e39a0ba",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/source.exr"
+        },
+        "passState": {
+          "Combined": true,
+          "CryptoObject": true,
+          "Depth": true,
+          "Normal": true,
+          "Vector": true,
+          "cryptomatteDepth": 6,
+          "sampleCount": true,
+          "viewLayer": "BFS_MASTER"
+        },
+        "pid": 12938,
+        "renderSeconds": 0.392311,
+        "repeat": 2,
+        "reportHash": "4d1d4cc0ace3109298b3a9d62121b375537f29b928a9f5bb6962be8612c8cc0f",
+        "runtime": {
+          "adaptiveSampling": false,
+          "animatedSeed": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "samples": 16,
+          "seed": 20260827,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurSourceReport.v0.1"
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/report.json",
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/CAMERA_PAN_X_SOURCE_R2/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_controlled_motion_source.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--repeat",
+        "1",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SOURCE_R1",
+      "elapsedSeconds": 2.218956,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 12939,
+      "repeat": 1,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.783509,
+        "experimentId": "B52-D5",
+        "fixture": {
+          "cameraXByFrame": null,
+          "id": "STATIC_CONTROL",
+          "motionClass": "NO_KEYFRAMES",
+          "moverXByFrame": null
+        },
+        "fixtureId": "STATIC_CONTROL",
+        "fixtureStructure": {
+          "cameraAction": [],
+          "moverAction": [],
+          "objects": [
+            {
+              "location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "name": "BFS_BACKGROUND",
+              "scale": [
+                8.9,
+                5.0,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                10.0
+              ],
+              "name": "BFS_D5_CAMERA",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "CAMERA"
+            },
+            {
+              "location": [
+                -2.0,
+                -2.0,
+                7.0
+              ],
+              "name": "BFS_D5_KEY",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "LIGHT"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "name": "BFS_MOVER",
+              "scale": [
+                0.8,
+                0.8,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.72,
+                0.0,
+                2.0
+              ],
+              "name": "BFS_OCCLUDER",
+              "scale": [
+                0.18,
+                1.45,
+                1.0
+              ],
+              "type": "MESH"
+            }
+          ],
+          "sceneName": "BFS_D5_STATIC_CONTROL"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 1,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1884836,
+          "sha256": "34c13bf1a96c4f2950f64125bebf902211926482010861375daf6085a8f81837",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/source.exr"
+        },
+        "passState": {
+          "Combined": true,
+          "CryptoObject": true,
+          "Depth": true,
+          "Normal": true,
+          "Vector": true,
+          "cryptomatteDepth": 6,
+          "sampleCount": true,
+          "viewLayer": "BFS_MASTER"
+        },
+        "pid": 12939,
+        "renderSeconds": 0.39097,
+        "repeat": 1,
+        "reportHash": "61fc198d46ec4b5cdcff2b3a207444d096743d6d7454713ac4889ba6703e105a",
+        "runtime": {
+          "adaptiveSampling": false,
+          "animatedSeed": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "samples": 16,
+          "seed": 20260827,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurSourceReport.v0.1"
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/report.json",
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R1/stdout.log",
+      "timedOut": false
+    },
+    {
+      "argv": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d5_controlled_motion_source.py",
+        "--",
+        "--spec",
+        "specs/controlled-motion-vector-blur-calibration.v0.1.json",
+        "--fixture",
+        "STATIC_CONTROL",
+        "--repeat",
+        "2",
+        "--output-exr",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr",
+        "--report",
+        "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/report.json"
+      ],
+      "cellId": "STATIC_CONTROL_SOURCE_R2",
+      "elapsedSeconds": 2.238904,
+      "exitCode": 0,
+      "fixtureId": "STATIC_CONTROL",
+      "pid": 12941,
+      "repeat": 2,
+      "report": {
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Darwin",
+          "version": "5.2.0 LTS"
+        },
+        "elapsedSeconds": 1.801235,
+        "experimentId": "B52-D5",
+        "fixture": {
+          "cameraXByFrame": null,
+          "id": "STATIC_CONTROL",
+          "motionClass": "NO_KEYFRAMES",
+          "moverXByFrame": null
+        },
+        "fixtureId": "STATIC_CONTROL",
+        "fixtureStructure": {
+          "cameraAction": [],
+          "moverAction": [],
+          "objects": [
+            {
+              "location": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "name": "BFS_BACKGROUND",
+              "scale": [
+                8.9,
+                5.0,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                10.0
+              ],
+              "name": "BFS_D5_CAMERA",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "CAMERA"
+            },
+            {
+              "location": [
+                -2.0,
+                -2.0,
+                7.0
+              ],
+              "name": "BFS_D5_KEY",
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "type": "LIGHT"
+            },
+            {
+              "location": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "name": "BFS_MOVER",
+              "scale": [
+                0.8,
+                0.8,
+                1.0
+              ],
+              "type": "MESH"
+            },
+            {
+              "location": [
+                0.72,
+                0.0,
+                2.0
+              ],
+              "name": "BFS_OCCLUDER",
+              "scale": [
+                0.18,
+                1.45,
+                1.0
+              ],
+              "type": "MESH"
+            }
+          ],
+          "sceneName": "BFS_D5_STATIC_CONTROL"
+        },
+        "operationCounts": {
+          "blenderProcesses": 1,
+          "blenderRenderCalls": 1,
+          "cyclesRayRenders": 1,
+          "externalAssetsOpened": 0,
+          "sourceBlendFilesOpened": 0
+        },
+        "output": {
+          "bytes": 1884836,
+          "sha256": "af655953cc77c2e270ec07aadc4f89c2a36abd53461fdc7e4a0f7b887041af10",
+          "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/source.exr"
+        },
+        "passState": {
+          "Combined": true,
+          "CryptoObject": true,
+          "Depth": true,
+          "Normal": true,
+          "Vector": true,
+          "cryptomatteDepth": 6,
+          "sampleCount": true,
+          "viewLayer": "BFS_MASTER"
+        },
+        "pid": 12941,
+        "renderSeconds": 0.392158,
+        "repeat": 2,
+        "reportHash": "5ef3a081e4ee39d796f512a6d3967eaccd4119d6fee03ae2eaaa83d620adbbed",
+        "runtime": {
+          "adaptiveSampling": false,
+          "animatedSeed": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "samples": 16,
+          "seed": 20260827,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "schemaVersion": "bfs.controlledMotionVectorBlurSourceReport.v0.1"
+      },
+      "reportUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/report.json",
+      "stderrUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/stderr.log",
+      "stdoutUri": "experiments/controlled-motion-vector-blur-calibration-v0-1/sources/STATIC_CONTROL_SOURCE_R2/stdout.log",
+      "timedOut": false
+    }
+  ],
+  "specObservation": {
+    "expectedBytes": null,
+    "expectedSha256": "5c2e6564650d6ab6d98f6bb7d91da4304c1cfeece4601871ed74fe5fd5521e01",
+    "kind": "D5_SPEC",
+    "match": true,
+    "observedBytes": 12341,
+    "observedSha256": "5c2e6564650d6ab6d98f6bb7d91da4304c1cfeece4601871ed74fe5fd5521e01",
+    "uri": "specs/controlled-motion-vector-blur-calibration.v0.1.json"
+  },
+  "toolFreezeCommit": "19e96dc99bd117bfcadaf6d82ea9e0237a814c85",
+  "tools": {
+    "analysisContractTest": {
+      "freezeCommit": "19e96dc99bd117bfcadaf6d82ea9e0237a814c85",
+      "sha256": "56e2d246341c69656f06923005c97acd7a720ab56fe71ac1e34d84e04597026f",
+      "uri": "tests/test_b52_d5_analysis_contract.py"
+    },
+    "analyzer": {
+      "freezeCommit": "19e96dc99bd117bfcadaf6d82ea9e0237a814c85",
+      "sha256": "b4a987676668a9afdcd365b677730a491d7aa51fc10b4ea9bc47cda4d662f34b",
+      "uri": "scripts/analyze-b52-d5-controlled-motion-calibration.py"
+    },
+    "audit": {
+      "freezeCommit": "19e96dc99bd117bfcadaf6d82ea9e0237a814c85",
+      "sha256": "469fc2ce7e815f0e727c48b3fdcecf488ae0bfd62ee7bf54ddb8dbd11caa67c4",
+      "uri": "scripts/audit-b52-d5-controlled-motion-calibration.py"
+    },
+    "compositorWorker": {
+      "freezeCommit": "19e96dc99bd117bfcadaf6d82ea9e0237a814c85",
+      "sha256": "a922fb85970e29b940c7265db34d1e30df61bd7200fb0185195a4b5002bd81ce",
+      "uri": "blender/render_b52_d5_vector_blur_cell.py"
+    },
+    "runner": {
+      "freezeCommit": "19e96dc99bd117bfcadaf6d82ea9e0237a814c85",
+      "sha256": "b1f1449eca49fdde86bb597dab05bb50b6b0f67dc9c9843b30655b3fed2f7a53",
+      "uri": "scripts/run-b52-d5-controlled-motion-calibration.py"
+    },
+    "sourceWorker": {
+      "freezeCommit": "19e96dc99bd117bfcadaf6d82ea9e0237a814c85",
+      "sha256": "2de5988e558735144c44ec54deb52aa01c753267e092bcd9746156edf44d7aea",
+      "uri": "blender/render_b52_d5_controlled_motion_source.py"
+    }
+  }
+}
