@@ -2639,6 +2639,14 @@ The formal boundary is 55 unique child processes, at least 30 registered attacks
 
 Artifacts: `specs/blender-static-radius-intervention-holdout.v0.1.json` and `research/2026-08-27-b52-d12-5-static-radius-intervention-holdout-protocol.md`.
 
+## J-167 · D12.5-C1 binds the referenced typed-envelope parents
+
+Date: 2026-08-27 · Type: PREREGISTRATION EVIDENCE-BINDING CORRECTION · Formal outputs/tools: 0/0
+
+The first D12.5 JSON listed both frozen D12.1 envelope encoders in its seven-tool roster but omitted their parent URI/SHA bindings and the typed-envelope spec binding needed by the future runner. Before any formal tool path existed and before any render, adapter, consumer or analyzer output, C1 adds exactly those three already established identities.
+
+No fixture, radius rule, numeric threshold, coverage gate, decision outcome, process count or non-claim changed. The corrected spec SHA-256 is `b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2`. This correction remains visible rather than rewriting J-166.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

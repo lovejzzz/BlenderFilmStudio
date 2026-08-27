@@ -2,7 +2,9 @@
 
 Date: 2026-08-27
 
-Status: preregistered before formal tools or output
+Status: preregistered and evidence-binding correction committed before formal tools or output
+
+Correction D12.5-C1: the first committed JSON omitted the already frozen D12.1 typed-envelope spec and encoder identities that its formal-tool roster referenced. Before any D12.5 tool existed or output was produced, those three parent identities were added. Fixtures, radii, thresholds, coverage gates, decisions and process counts did not change. The corrected spec SHA-256 is `b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2`.
 
 ## Why this experiment exists
 
