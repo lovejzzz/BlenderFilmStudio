@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "bfs.linuxAmd64CompilerReproMountCorrection.v0.1",
+  "experimentId": "B42-C1",
+  "status": "PREREGISTERED_BEFORE_CORRECTION_TOOLING_OR_OUTPUT",
+  "question": "With a pre-existing frozen nested output mountpoint and failure-total analysis, does the otherwise unchanged B42 experiment satisfy all original acceptance gates?",
+  "parent": {
+    "experimentId": "B42",
+    "specSha256": "9cfc3839ef61b9e000850f2ee112e22f5e816f5b8c6f0a4b3daede9bb6265fde",
+    "preregistrationCommit": "636552dccf7502d0af8d61673f54607280a86934",
+    "toolFreezeCommit": "a44d4f57e438ef691589300f485af14347bf9169",
+    "failureSha256": "d7ef08eccb28055ed6ad26d6579caec7a414da68f3b8282120efcbd94eaa32f2",
+    "failureCommit": "30b99da63938d31adba78fdd5debcbee60825ece",
+    "failureClass": "OCI_NESTED_MOUNTPOINT_ABSENT_AND_ANALYZER_NOT_FAILURE_TOTAL"
+  },
+  "allowedChanges": [
+    "Add the tracked empty directory marker worker-output/.gitkeep so /repo/worker-output exists before OCI applies the nested writable bind",
+    "Write all correction evidence to experiments/linux-amd64-compiler-repro-c1-v0-1",
+    "Make the analyzer treat a missing run observation as a failed gate instead of throwing"
+  ],
+  "frozenFromB42": [
+    "image and Blender identities",
+    "SceneSpec, schema, OutputSpec, OCIO, asset and compiler identities",
+    "B01 and B02 expected serialized plan hashes, planHash values and structure hashes",
+    "two clean containers per benchmark plus one tampered-plan container",
+    "container isolation and resource ceilings",
+    "30 second wall-time and 5 second kill grace",
+    "all acceptance gates and non-claims"
+  ],
+  "mountpointFixture": {
+    "uri": "worker-output/.gitkeep",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "containerPath": "/repo/worker-output"
+  },
+  "acceptedVerdict": "LINUX_AMD64_COMPILER_REPRODUCIBLE_AFTER_MOUNT_CORRECTION",
+  "rejectedVerdict": "LINUX_AMD64_COMPILER_REPRO_CORRECTION_REJECTED"
+}
