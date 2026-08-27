@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "bfs.nativeCpuDataPassSampleCostDerivationSpec.v0.1",
+  "experimentId": "B51-D5",
+  "status": "PREREGISTERED",
+  "question": "Can native Cycles CPU render Depth and object Cryptomatte exactly like the frozen 128-spp CPU parent at a lower sample count, and what wall-time curve would that make available to a later split-backend holdout?",
+  "parents": {
+    "h1Spec": {
+      "uri": "specs/native-metal-production-holdout.v0.1.json",
+      "sha256": "06178fde2f81e5ce8746f6e851010443c62408c0414e157647c0e7ded5b52232"
+    },
+    "h1Receipt": {
+      "uri": "experiments/native-metal-production-holdout-v0-1/run.receipt.json",
+      "sha256": "42d9dff174378e90e724bae93f710df96e63cb3a0e18eeebd3958dd69d3d69cc"
+    },
+    "h1Result": {
+      "uri": "experiments/native-metal-production-holdout-v0-1/results.json",
+      "sha256": "9bcd9dea0ea071decfde1021195794837e088e57b0ef499a66159332ca86a8a9",
+      "verdict": "NATIVE_METAL_PRODUCTION_HOLDOUT_NOT_SUPPORTED"
+    },
+    "h1Audit": {
+      "uri": "experiments/native-metal-production-holdout-v0-1/audit.correction-v0.2.json",
+      "sha256": "f707b3d11aba424e4932f107561e205e6a7aa015d33d18f2346896b0ebb5edd3",
+      "status": "PASS"
+    },
+    "d4c3Result": {
+      "uri": "experiments/native-split-backend-assembly-capdate-correction-v0-1/results.json",
+      "sha256": "aa231952119cf91e0d252a0e8b08aa1f72ac1e49f24fd82844aabafba9e81cfb",
+      "verdict": "NATIVE_SPLIT_BACKEND_ASSEMBLY_CAPDATE_CORRECTION_USABLE"
+    },
+    "d4c3Audit": {
+      "uri": "experiments/native-split-backend-assembly-capdate-correction-v0-1/audit.json",
+      "sha256": "864f257fdb9f14c7a3f217cb4e62fc21b4947896119ba59c9562c113b48ca84e",
+      "status": "PASS"
+    }
+  },
+  "nativeBlender": {
+    "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "version": "5.2.0",
+    "sha256": "660d806fd3866c813238d601485d6d1c8b85593f31c2e7659e73a9c955165c46",
+    "bytes": 249616
+  },
+  "ocio": {
+    "uri": "blender/ocio/aces_2.0/config.ocio",
+    "sha256": "76847f0d4395723c4c78c6c07718f534d3aad8c6e16dd86a6ef98a55af78f6e3"
+  },
+  "sources": {
+    "TABLETOP": {
+      "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+      "blendSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "blendBytes": 118702,
+      "frame": 37,
+      "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+      "sceneHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+      "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+    },
+    "INTERIOR": {
+      "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+      "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "blendBytes": 106078,
+      "frame": 19,
+      "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+      "sceneHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+      "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+    }
+  },
+  "variants": [
+    {
+      "id": "TABLETOP_WIDE",
+      "source": "TABLETOP",
+      "parentRunId": "TW_CPU_R1",
+      "parentExr": {
+        "uri": "experiments/native-metal-production-holdout-v0-1/TW_CPU_R1/artifacts/production.exr",
+        "sha256": "e08b8b6eb45feb919d0139109641fa00a82bd4bc7c5468f4a0376571ce392059",
+        "bytes": 3222319,
+        "renderSeconds": 3.487335
+      },
+      "operations": [
+        {"target": "CAM_B43_A", "kind": "LOCATION_DELTA", "value": [0.28, 0.0, 0.08]},
+        {"target": "CAM_B43_A", "kind": "CAMERA_LENS_SET", "value": 52.0},
+        {"target": "SET_STILL_LIFE", "kind": "ROTATION_Z_DELTA", "value": 0.13962634015954636},
+        {"target": "KEY_LARGE", "kind": "LIGHT_ENERGY_SCALE", "value": 1.25}
+      ]
+    },
+    {
+      "id": "INTERIOR_CHAIR",
+      "source": "INTERIOR",
+      "parentRunId": "IC_CPU_R1",
+      "parentExr": {
+        "uri": "experiments/native-metal-production-holdout-v0-1/IC_CPU_R1/artifacts/production.exr",
+        "sha256": "4ae11634c26d00c55939fce1d7d80e47859505f2ccdb1dc3ebda790f8140de6f",
+        "bytes": 3309351,
+        "renderSeconds": 5.141117
+      },
+      "operations": [
+        {"target": "CAM_B43_B", "kind": "LOCATION_DELTA", "value": [0.12, -0.10, 0.06]},
+        {"target": "CAM_B43_B", "kind": "CAMERA_LENS_SET", "value": 64.0},
+        {"target": "PROP_CHAIR", "kind": "LOCATION_DELTA", "value": [0.42, -0.08, 0.0]},
+        {"target": "PROP_CHAIR", "kind": "ROTATION_Z_DELTA", "value": 0.17453292519943295},
+        {"target": "KEY_WINDOW", "kind": "LIGHT_ENERGY_SCALE", "value": 0.82}
+      ]
+    }
+  ],
+  "sampleLadder": [1, 2, 4, 8, 16, 32, 64, 128],
+  "repeatsPerVariantDose": 2,
+  "renderProfile": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "resolution": [512, 288],
+    "seedOffset": 647647,
+    "animatedSeed": false,
+    "denoising": false,
+    "motionBlur": false,
+    "persistentData": false,
+    "cpuThreads": 4,
+    "rawSubimages": 7,
+    "passes": ["Combined", "Depth", "Normal", "Vector", "CryptoObject00", "CryptoObject01", "CryptoObject02"],
+    "dataPasses": ["Depth", "CryptoObject00", "CryptoObject01", "CryptoObject02"],
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorDepth": "32",
+    "codec": "ZIP"
+  },
+  "decisionRule": {
+    "validDerivationRequires": [
+      "both 128-spp repeats reproduce every parent data-pass float array exactly for both variants",
+      "both repeats at every dose reproduce each other exactly in all four data passes",
+      "all 32 renders complete with exact identity, profile, roster, finite and operation-replay gates",
+      "all attacks reach their intended reason and independent analysis replay is byte exact"
+    ],
+    "exactDataSampleFloor": "minimum ladder dose at which all four data passes equal the 128-spp parent exactly in both repeats and both variants",
+    "reductionObserved": "valid derivation and exactDataSampleFloor exists below 128",
+    "reductionNotObserved": "valid derivation and no exactDataSampleFloor exists below 128",
+    "noTolerancePromotion": "non-exact lower-dose passes are measured but cannot be selected by this derivation"
+  },
+  "measurements": {
+    "perPass": ["floatExactToParent", "floatExactBetweenRepeats", "changedComponents", "changedPixels", "changedPixelFraction", "maxAbsoluteDifference"],
+    "perDose": ["renderSeconds", "freshProcessWallSeconds", "saveSeconds", "speedupVersusFrozen128ParentRender"],
+    "aggregate": ["exactDataSampleFloor", "perVariantExactFloor", "doseResponseTable"]
+  },
+  "evidenceGates": {
+    "variants": 2,
+    "doses": 8,
+    "repeatsPerDose": 2,
+    "nativeBlenderProcesses": 32,
+    "successfulRenders": 32,
+    "requiredSubimagesPerRender": 7,
+    "perProcessWallTimeSeconds": 30,
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "134217728",
+    "emptyOutputRootBeforeRun": true,
+    "sourceAndParentIdentity": true,
+    "freshBlenderProcesses": true,
+    "independentAnalysisReplay": true
+  },
+  "outputRoot": "experiments/native-cpu-data-pass-sample-cost-derivation-v0-1",
+  "attacks": [
+    "PARENT_IDENTITY",
+    "BLENDER_IDENTITY",
+    "SOURCE_IDENTITY",
+    "OCIO_IDENTITY",
+    "DISK_ADMISSION",
+    "VARIANT_DOSE_MATRIX",
+    "OPERATION_REPLAY",
+    "FRESH_PROCESS",
+    "CPU_DEVICE_ASSIGNMENT",
+    "RENDER_PROFILE",
+    "PASS_ROSTER",
+    "NON_FINITE",
+    "PARENT_128_DATA_EXACTNESS",
+    "DOSE_REPEAT_DATA_EXACTNESS",
+    "MEASUREMENT_TOTALITY",
+    "ARTIFACT_IDENTITY",
+    "OPERATION_BOUNDARY",
+    "EVIDENCE_SELF_HASH"
+  ],
+  "operationBoundary": {
+    "nativeBlenderProcesses": 32,
+    "renders": 32,
+    "sceneFilesModified": 0,
+    "sourceExrsModified": 0,
+    "metalRenders": 0,
+    "mergedExrsWritten": 0,
+    "dockerRuns": 0,
+    "downloads": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0,
+    "networkRequired": false
+  },
+  "validVerdicts": [
+    "EXACT_CPU_DATA_SAMPLE_REDUCTION_OBSERVED",
+    "EXACT_CPU_DATA_SAMPLE_REDUCTION_NOT_OBSERVED"
+  ],
+  "invalidVerdict": "NATIVE_CPU_DATA_PASS_SAMPLE_COST_DERIVATION_INVALID",
+  "nonClaims": [
+    "lower-dose beauty quality",
+    "tolerance-based Cryptomatte semantic equivalence",
+    "Depth compositing safety when non-exact",
+    "unseen-scene generalization",
+    "split-backend production promotion",
+    "long-sequence throughput or thermal stability",
+    "2K/4K cost",
+    "human perceptual quality"
+  ]
+}
