@@ -2035,6 +2035,22 @@ This supports the external integer-motion layer/depth accumulator and Blender Ra
 
 Artifacts: `experiments/layer-depth-temporal-accumulation-holdout-v0-1/` and `research/2026-08-27-b52-d9-1-layer-depth-temporal-accumulation-holdout-result.md`.
 
+## J-126 · D10 derives the real Blender 5.2 multipart adapter mapping
+
+Date: 2026-08-27 · Type: DEVELOPMENT-ONLY REAL-BLENDER DERIVATION · Formal outputs: 0
+
+D9.1 deliberately stopped before production-pass extraction. D10 therefore rendered three generated 192×108 Cycles fixtures in three fresh Blender 5.2 processes: asymmetric object XY motion, asymmetric camera XY motion and a static depth/ownership control. Asymmetry was necessary because D5's previous/current/next trajectories made the two Vector pairs algebraically indistinguishable.
+
+The first analyzer attempt expected the historical internal name `BFS_MASTER.IndexOB` and correctly stopped with no observation. The real Blender 5.2 multilayer file instead exposed `BFS_MASTER.Object Index.X`; the development analyzer was corrected before any formal spec or root existed. The complete observed roster is Combined RGBA, Depth Z, Vector XYZW and Object Index X.
+
+Across nine visible object/fixture rows, the unique minimum mapping is `Vector.XY = previous_screen − current_screen` and `Vector.ZW = current_screen − next_screen`. The maximum per-pixel endpoint errors for those mappings were `1.5686782979579906e-5` and `2.1542276378777538e-5` pixels. Depth matched analytic camera-space distances 10/9/8 with zero error, and Object Index matched opaque IDs 11/22/33 exactly. The static fixture was zero in this run, but D5's retained `2.6702880859375e-5` static counterexample forbids an exact-zero formal gate.
+
+For D9.1's `q=(x−dx,y+dy)` convention, the candidate adapter writes `motion=(-Vector.X,-Vector.Y)`: Blender's X is screen-right and Y screen-up, while the decoded raster row axis is down. This is a derived candidate only. The projection oracle came from Blender itself and all fixtures are now seen; none may be promoted to holdout evidence.
+
+Observation SHA-256: `303718b7d16f1a088c4c2d7f9d51e9cf66d178b5e00047843415388ae6f28693`. Next: preregister unseen resolution/trajectory, two fresh repeats, independent analytic projection, pass-roster and mapping attacks, then implement the frozen adapter.
+
+Artifacts: `experiments/layer-depth-pass-adapter-development-v0-1/` and `research/2026-08-27-b52-d10-pass-adapter-development-derivation.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
