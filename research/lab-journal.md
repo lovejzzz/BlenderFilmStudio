@@ -1331,6 +1331,22 @@ Next: freeze unseen frames, candidate seeds and a per-frame three-reference rule
 
 Artifacts: `experiments/codex-worker-reference-calibration-derivation-v0-1/`, `research/2026-08-26-b48-d2-independent-reference-calibration-protocol.md` and `research/2026-08-26-b48-d2-independent-reference-calibration-result.md`.
 
+## J-079 · B48 selects a bounded 128-spp raw numerical operating point
+
+Date: 2026-08-26 · Type: FORMAL HOLDOUT · Runtime: 14 fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+B48 froze TABLETOP frame 37 and INTERIOR frame 19 before formal tools. Each shot received three new 512-spp raw reference seeds plus 32 raw/OIDN and 128 raw/OIDN candidates using a fourth seed. For each frame, a candidate had to keep linear NRMSE, log-luminance RMSE and top-10%-edge RMSE within 3× the largest individual-reference deviation from the three-reference mean. All three metrics had to pass on both scenes.
+
+Only `C128_RAW` passed both holdouts. Its floor multiples were 2.342/2.438/2.206 on TABLETOP and 1.767/1.771/2.066 on INTERIOR. Both OIDN cells passed INTERIOR but failed TABLETOP linear/edge gates; 32 raw failed both. This preserves the scene-dependent denoiser counterexample instead of choosing by log-luminance alone.
+
+The selected cell averaged 10.998 Blender render seconds and 21.011 fresh-container wall seconds per 128×72 frame. A mechanical 240-frame projection is 2,639 render seconds (44.0 minutes) and 61.9 MB of multipart EXR data. It is not a complete-shot execution or a high-resolution/cloud-cost forecast.
+
+All 14 workers completed, all 18 attacks passed, no container remained, and the independent audit reopened every EXR and produced a byte-exact results replay. Verdict: `B48_NUMERICAL_QUALITY_COST_POINT_SELECTED`. Evidence-core hash: `445e7533…dfd0e`.
+
+Next: B49 must separately scale resolution and cinema features from this selected baseline, then use blinded humans for perceptual cinematic-quality claims.
+
+Artifacts: `experiments/codex-worker-quality-cost-holdout-v0-1/`, `specs/codex-worker-quality-cost-holdout.v0.1.json`, `research/2026-08-26-b48-codex-worker-quality-cost-holdout-protocol.md` and `research/2026-08-26-b48-codex-worker-quality-cost-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
