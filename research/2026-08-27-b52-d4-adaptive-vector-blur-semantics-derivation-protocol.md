@@ -1,7 +1,7 @@
 # B52-D4 · Blender 5.2 Vector Blur 任务语义派生协议
 
-日期：2026-08-27  
-状态：**PREREGISTERED — 不得在看到正式 compositor 输出后改门槛**  
+日期：2026-08-27
+状态：**PREREGISTERED — 不得在看到正式 compositor 输出后改门槛**
 机器规格：`specs/adaptive-vector-blur-semantics-derivation.v0.1.json`
 
 ## 1. 为什么是这一门
