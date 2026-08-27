@@ -44,7 +44,7 @@ export default function BlenderPassAdapterPage() {
   return <main className="contact-page b51-page b52-page d91-page d101-page">
     <header className="topbar">
       <a className="brand" href="../"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></a>
-      <nav aria-label="D10.1 导航"><a href="../temporal-accumulation-v0-1/">D9.1 累积</a><a href="#failure">D10 失败</a><a href="#oracle">Typed oracle</a><a href="#adapter">Adapter</a><a href="#evidence">诊断图</a><a href="#boundary">D11</a><a href="../journal/">日志</a></nav>
+      <nav aria-label="D10.1 导航"><a href="../temporal-accumulation-v0-1/">D9.1 累积</a><a href="#failure">D10 失败</a><a href="#oracle">Typed oracle</a><a href="#adapter">Adapter</a><a href="#evidence">诊断图</a><a href="../blender-temporal-composition-v0-1/">D11 反例</a><a href="../journal/">日志</a></nav>
       <span className="edition contact-edition">Pass Adapter D10.1</span>
     </header>
 
@@ -85,13 +85,13 @@ export default function BlenderPassAdapterPage() {
     </section>
 
     <section className="section contact-limits b51-next" id="boundary">
-      <div className="section-index">04 / NEXT FALSIFIABLE GATE</div>
-      <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> B52-D11 · REAL TEXTURED END-TO-END HOLDOUT</p><h2>接口已经接上。<br/><span>现在必须证明整条链不会说谎。</span></h2></div><p>D10.1 尚未让真实 textured beauty 经过 D9.1 accumulator，也没有证明遮挡、反遮挡、越界、same-ID depth swap 与静态控制在一条 production chain 中同时成立。D11 必须使用 fresh Blender 场景，从真实 multipart render 一直走到 D8 Raw EXR 输出。</p></div>
+      <div className="section-index">04 / DOWNSTREAM COMPOSITION RESULT</div>
+      <div className="contact-heading dark-heading"><div><p className="eyebrow dark"><span /> B52-D11 · REAL TEXTURED END-TO-END HOLDOUT</p><h2>接口本身成立。<br/><span>未修改组合仍被反例拒绝。</span></h2></div><p>D11 已用全新真实场景把 textured multipart、D10.1 adapter、Python/Node accumulator、Raw EXR 与 Blender compositor 串成一条链。所有接口与重放门通过，但 near-integer Vector 经 toward-zero 转换后稳定偏移一像素；正式结论保持 NOT_SUPPORTED。</p></div>
       <div className="b51-next-flow"><article><span>01</span><b>REAL TEXTURED RENDER</b><p>fresh scene · occlusion cases</p></article><i>→</i><article><span>02</span><b>D10.1 ADAPTER</b><p>production pass extraction</p></article><i>→</i><article><span>03</span><b>D9.1 ACCUMULATOR</b><p>analytic validity + controls</p></article><i>→</i><article><span>04</span><b>D8 RAW EXR</b><p>end-to-end decoded exactness</p></article></div>
-      <div className="contact-nonclaim"><b>CURRENT NON-CLAIMS</b><p>不声称 perspective/subpixel/deforming motion 已支持；不声称 Cryptomatte ownership 已支持；不声称真实 temporal beauty 已改善；不声称人物、材质或电影感已经由本实验解决。</p></div>
+      <div className="contact-nonclaim"><b>D10.1 SUPPORT REMAINS NARROW</b><p>D11 没有推翻 pass adapter 的 typed float32 extraction；它拒绝的是 adapter 与 integer accumulator 的未修改组合。唯一允许的恢复是在全新 D11.1 中显式插入 nearest-integer quantizer，而不是改写 D11。</p></div>
       <div className="contact-artifacts"><a href={`${repo}experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/results.json`}><span>D10.1 MACHINE RESULT</span><b>SUPPORTED · 37 / 37 ↗</b></a><a href={`${repo}experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/audit.json`}><span>D10.1 AUDIT</span><b>PASS · 42 / 42 arrays ↗</b></a><a href={`${repo}research/2026-08-27-b52-d10-blender-multipart-temporal-adapter-holdout-invalid-result.md`}><span>D10 NEGATIVE RESULT</span><b>NOT SUPPORTED · retained ↗</b></a><a href={`${repo}specs/blender-multipart-temporal-adapter-f32-holdout.v0.1.json`}><span>FROZEN SPEC</span><b>typed oracle · fresh fixtures ↗</b></a></div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D10.1 Pass Adapter Research</b></div><p>D10 failure retained · D10.1 narrow support · D11 end-to-end next</p><a href="../journal/">继续看实验日志 →</a></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D10.1 Pass Adapter Research</b></div><p>D10 failure retained · D10.1 narrow support · D11 composition rejected</p><a href="../blender-temporal-composition-v0-1/">继续看 D11 反例 →</a></footer>
   </main>;
 }
