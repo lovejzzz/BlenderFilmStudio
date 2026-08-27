@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'B52-D10.1 Blender Multipart Pass Adapter｜Blender Film Studio',
@@ -44,8 +43,8 @@ const views = [
 export default function BlenderPassAdapterPage() {
   return <main className="contact-page b51-page b52-page d91-page d101-page">
     <header className="topbar">
-      <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-      <nav aria-label="D10.1 导航"><Link href="/temporal-accumulation-v0-1">D9.1 累积</Link><a href="#failure">D10 失败</a><a href="#oracle">Typed oracle</a><a href="#adapter">Adapter</a><a href="#evidence">诊断图</a><a href="#boundary">D11</a><Link href="/journal">日志</Link></nav>
+      <a className="brand" href="../"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></a>
+      <nav aria-label="D10.1 导航"><a href="../temporal-accumulation-v0-1/">D9.1 累积</a><a href="#failure">D10 失败</a><a href="#oracle">Typed oracle</a><a href="#adapter">Adapter</a><a href="#evidence">诊断图</a><a href="#boundary">D11</a><a href="../journal/">日志</a></nav>
       <span className="edition contact-edition">Pass Adapter D10.1</span>
     </header>
 
@@ -93,6 +92,6 @@ export default function BlenderPassAdapterPage() {
       <div className="contact-artifacts"><a href={`${repo}experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/results.json`}><span>D10.1 MACHINE RESULT</span><b>SUPPORTED · 37 / 37 ↗</b></a><a href={`${repo}experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/audit.json`}><span>D10.1 AUDIT</span><b>PASS · 42 / 42 arrays ↗</b></a><a href={`${repo}research/2026-08-27-b52-d10-blender-multipart-temporal-adapter-holdout-invalid-result.md`}><span>D10 NEGATIVE RESULT</span><b>NOT SUPPORTED · retained ↗</b></a><a href={`${repo}specs/blender-multipart-temporal-adapter-f32-holdout.v0.1.json`}><span>FROZEN SPEC</span><b>typed oracle · fresh fixtures ↗</b></a></div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D10.1 Pass Adapter Research</b></div><p>D10 failure retained · D10.1 narrow support · D11 end-to-end next</p><Link href="/journal">继续看实验日志 →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D10.1 Pass Adapter Research</b></div><p>D10 failure retained · D10.1 narrow support · D11 end-to-end next</p><a href="../journal/">继续看实验日志 →</a></footer>
   </main>;
 }
