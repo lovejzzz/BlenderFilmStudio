@@ -1227,6 +1227,20 @@ This proves only a narrow subscription-authenticated proposal gate, not arbitrar
 
 Artifacts: `experiments/codex-scenespec-holdout-v0-1/`, `specs/codex-scenespec-holdout.v0.1.json`, `research/2026-08-26-b43-codex-subscription-intent-holdout-protocol.md` and `research/2026-08-26-b43-codex-subscription-intent-holdout-result.md`.
 
+## J-072 · B44 closes the saved Codex proposal → real Blender compile chain
+
+Type: preregistered promotion holdout, four real Linux/amd64 Blender worker invocations, independently audited, 2026-08-26.
+
+B44 consumed three immutable outputs from the already completed B43 Codex holdout rather than calling the model again. `TABLETOP-A` and `INTERIOR-A` passed the frozen adapter and matched the exact golden SceneSpecs and immutable BuildPlans. `UNAUTHORIZED-A` remained a strict rejection with zero SceneSpecs, zero BuildPlans and zero container launches.
+
+The two accepted plans each entered two fresh Blender 5.2 Linux/amd64 containers under the unchanged B42-C1 isolation contract. All four processes exited 0 in 10,228–10,423 ms. `SHOT_109` reproduced canonical structure hash `6a71287a…5e82e` in 2/2 runs; `SHOT_110` reproduced `56d32ed8…6d954` in 2/2. The `.blend` byte hashes differed within both pairs, so semantic structure reproducibility passed while `.blend` byte identity remained explicitly unclaimed.
+
+The operation trace contained exactly four Docker runs and no build, pull or download. Twelve of twelve attacks passed, zero experiment containers remained, and the independent audit matched parents, tools, inputs, proposals, outputs, attacks and the evidence self-hash. Verdict: `CODEX_TO_BLENDER_WORKER_PROMOTION_REPRODUCIBLE`.
+
+This closes the narrow saved-proposal-to-compiled-scene chain for two preset-bound shots. It does not establish arbitrary prompt coverage or final pixels. Next: preregister B45 to render frozen representative frames directly from the B44 `.blend` outputs before attempting a complete sequence.
+
+Artifacts: `experiments/codex-to-blender-worker-promotion-v0-1/`, `specs/codex-to-blender-worker-promotion.v0.1.json`, `research/2026-08-26-b44-codex-to-blender-worker-promotion-protocol.md` and `research/2026-08-26-b44-codex-to-blender-worker-promotion-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
