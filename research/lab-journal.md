@@ -2787,6 +2787,16 @@ Three fresh Blender 5.2 processes constructed all seven new geometry types with 
 
 Artifacts: `experiments/blender-static-adaptive-risk-gate-holdout-preflight-v0-1/frozen-tool-preflight.json` and `research/2026-08-27-b52-d12-7-adaptive-risk-gate-preflight.md`.
 
+## J-181 · D12.7 matrix completes; audit mutation projection fails
+
+Date: 2026-08-27 · Type: FORMAL RESULT + AUDIT FAILURE · Blender renders: 12
+
+All 54 production children and the analyzer completed. The frozen result is `ADAPTIVE_GATE_WITHIN_TOLERANCE_BUT_STRESS_OR_COVERAGE_NOT_SUPPORTED`, 20/21 checks: the adaptive candidate passed every identity, production, headroom, conservatism, stress and coverage gate; only paired `RADIUS3_PRODUCTION` failed. The independent audit reproduced payloads, measurements and 56-process totality, but caught only 28/30 repaired-self-hash mutations because its expected projection omitted the analyzer mutation roster itself. The runner correctly wrote `run.failure.json` and no receipt.
+
+Audit-only C1 is preregistered before its tool exists. It may protect `analyzerPid` and the already semantically checked `mutationAttacks` array, bind all immutable parents, and write only a new audit and correction receipt. It cannot rerun or change any scientific artifact or verdict.
+
+Artifacts: `experiments/blender-static-adaptive-risk-gate-holdout-v0-1/`, `specs/blender-static-adaptive-risk-gate-audit-c1.v0.1.json`, and `research/2026-08-27-b52-d12-7-formal-audit-failure-and-c1-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "bfs.blenderStaticAdaptiveRiskGateAuditCorrection.v0.1",
+  "experimentId": "B52-D12.7-AUDIT-C1",
+  "title": "Audit-only protection of analyzer mutation roster fields",
+  "question": "Can the immutable D12.7 result, including its bounded verdict, be independently replayed while rejecting all 30 repaired-self-hash mutations after protecting the analyzer mutation roster itself?",
+  "scope": "audit only; no Blender, adapter, consumer, envelope, analyzer or measurement rerun",
+  "parents": {
+    "d12_7Spec": {"uri":"specs/blender-static-adaptive-risk-gate-holdout.v0.1.json","sha256":"c51d0d83afd30b479bf3e7109c31110133649ee3d65a04d677dbe236b8075ed0"},
+    "execution": {"uri":"experiments/blender-static-adaptive-risk-gate-holdout-v0-1/execution.json","sha256":"307d1250b6f069399cf8e1123aa097ffe11f23566340a939874f9962a4f0e9c6","executionHash":"63be3036f2ec5aaf2e6155d638247a86c0fa54f2acd9c6205aebd450488f1e24"},
+    "result": {"uri":"experiments/blender-static-adaptive-risk-gate-holdout-v0-1/results.json","sha256":"1a569ace92b58b41b6faffe164778c5db35b1b0d7288ca3425f885ec5b0746a5","evidenceHash":"b459fe0e8048fd6cffc2a249ed0c4e0de431fd1e0f3beda0e339cca98718d55d","verdict":"ADAPTIVE_GATE_WITHIN_TOLERANCE_BUT_STRESS_OR_COVERAGE_NOT_SUPPORTED"},
+    "failedAudit": {"uri":"experiments/blender-static-adaptive-risk-gate-holdout-v0-1/audit.json","sha256":"2ecb05c5cb299e0b6c15dc9edb75e20a9edf5885e803883d7b310efaccf6ffac","auditHash":"b500e91a7310a3c4f415f54b55067686bb623018e4ee1c8df7a0f048ccb1985d","mutationAttackPassed":28,"mutationAttackTotal":30},
+    "failure": {"uri":"experiments/blender-static-adaptive-risk-gate-holdout-v0-1/run.failure.json","sha256":"23a8788fc78d67559c9817a85266aa9d3325f245f09d0607d6ba10d6e9ca2ea9","failureHash":"11ae09e52f578fe15bfd4b75474f51fb6db94228eb1eca4dcf969f07ee031e83"},
+    "originalAuditTool": {"uri":"scripts/audit-b52-d12-7-adaptive-risk.py","sha256":"c0b6e1ccebbfadb46b59e596bbdaac0c508ff1cc6dc6dcc1b50923871fdd2bf5","gitCommit":"006d3934b3cf625e9f7e85bd837f0f5889d2be45"}
+  },
+  "diagnosis": {
+    "escapedAttacks": ["M10_REPAIRED_SELF_HASH","M25_REPAIRED_SELF_HASH"],
+    "commonMutation": "set result.mutationAttacks[0].passed=false and repair result.evidenceHash",
+    "cause": "validate protected mutation counts and semantic roster checks but omitted the mutationAttacks array from its expected projection"
+  },
+  "allowedCorrection": {
+    "newAuditTool": "scripts/audit-b52-d12-7-adaptive-risk-c1.py",
+    "newRunner": "scripts/run-b52-d12-7-adaptive-risk-audit-c1.py",
+    "semanticDiff": [
+      "add analyzerPid to the independently expected result projection",
+      "add the already semantically validated mutationAttacks array to the independently expected result projection",
+      "bind this correction spec and every immutable parent before replay",
+      "write only audit.c1.json and receipt.c1.json"
+    ],
+    "forbidden": ["change any source EXR or canonical array","rerun Blender, adapter, consumer, envelope or analyzer","change any metric, threshold, check, verdict or non-claim","overwrite execution.json, results.json, audit.json or run.failure.json"]
+  },
+  "runtime": {"pythonExecutable":"/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13","pythonSha256":"cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35"},
+  "outputs": {"audit":"experiments/blender-static-adaptive-risk-gate-holdout-v0-1/audit.c1.json","receipt":"experiments/blender-static-adaptive-risk-gate-holdout-v0-1/receipt.c1.json"},
+  "gates": {"payloadReplayPassed":true,"processTotalityPassed":true,"expectedVerdict":"ADAPTIVE_GATE_WITHIN_TOLERANCE_BUT_STRESS_OR_COVERAGE_NOT_SUPPORTED","mutationAttackPassed":30,"mutationAttackTotal":30,"modelCalls":0,"networkCalls":0},
+  "diskAdmission": {"minimumReserveBytes":107374182400,"projectedWriteBytes":1048576},
+  "operations": {"runnerProcesses":1,"auditProcesses":1,"blenderProcesses":0,"blenderRenders":0,"adapterProcesses":0,"consumerProcesses":0,"envelopeProcesses":0,"analyzerProcesses":0,"modelCalls":0,"networkCalls":0},
+  "nonClaims": ["A passing C1 audit verifies the immutable bounded result; it does not change that verdict.","C1 does not reinterpret the preregistered radius-3 comparator gate.","C1 does not create a missing original formal receipt."]
+}

@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "bfs.blenderStaticAdaptiveRiskConsumerReport.v0.1",
+  "experimentId": "B52-D12.7",
+  "producer": "node",
+  "fixtureId": "STATIC_SUPERELLIPSE_TORUS_139X91",
+  "repeat": 2,
+  "pid": 26578,
+  "runtime": {
+    "node": "v26.5.0",
+    "nodeExecutableSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "adapter": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/adapters/STATIC_SUPERELLIPSE_TORUS_139X91/R2/report.json",
+    "sha256": "28cc81691b69125b95d32c140a068da1d62ec9ad1791cdb18f3f5307745b8ced",
+    "reportHash": "38b1c2a075124b0c2ecb5a9f55dea40194cfd7a196217cb62959eca990b554c4"
+  },
+  "contract": {
+    "radius2": "Current pixel and every current neighbor within Chebyshev radius 2 share registered owner and alpha >0.999; all four previous bilinear taps share that owner and alpha.",
+    "radius3": "The identical rule with current-neighborhood Chebyshev radius 3.",
+    "localRiskChannel": "sum(abs(weight_i) * abs(previousTap_i - currentCenter)) over the four bilinear taps, plus one full float32 ULP at the final reconstruction magnitude.",
+    "localRiskPixel": "maximum of the three RGB channel risks, evaluated in binary64 from float32 inputs and frozen bilinear weights.",
+    "adaptiveInterior": "radius2 interior AND localRiskPixel <= 9.5367431640625e-7; the comparison is inclusive.",
+    "adaptiveReconstruction": "the radius2 reconstructed float32 RGBA at adaptive-interior pixels; all excluded registered owner pixels fail closed into adaptive boundary.",
+    "subsetInvariants": [
+      "radius3 interior is a subset of radius2 interior",
+      "adaptive interior is a subset of radius2 interior",
+      "adaptive rejected and adaptive interior partition radius2 interior"
+    ]
+  },
+  "arrays": {
+    "radius2Reconstructed": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/radius2-reconstructed.rgba32",
+      "sha256": "f4dc2818590b0b704f468c976ad0f55a33f9ef42bdd09cee3956c0d95f5fd1d2",
+      "bytes": 202384,
+      "shape": [
+        91,
+        139,
+        4
+      ],
+      "dtype": "little-endian-float32"
+    },
+    "radius2Interior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/radius2-interior.u8",
+      "sha256": "48e54fa4f07f1111880b3339f1076a31d481644d8e780066a061244676d0784c",
+      "bytes": 12649,
+      "shape": [
+        91,
+        139
+      ],
+      "dtype": "uint8"
+    },
+    "radius2Boundary": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/radius2-boundary.u8",
+      "sha256": "02df9325e7d7f6a94fc5e3a19c299bf3c78f4b61a319bc794dd33844872c1218",
+      "bytes": 12649,
+      "shape": [
+        91,
+        139
+      ],
+      "dtype": "uint8"
+    },
+    "radius3Reconstructed": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/radius3-reconstructed.rgba32",
+      "sha256": "e3d5e33dadff673e96f6f6a10f42ef4a07f482a935f4a1e0099fc49e9b5931f5",
+      "bytes": 202384,
+      "shape": [
+        91,
+        139,
+        4
+      ],
+      "dtype": "little-endian-float32"
+    },
+    "radius3Interior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/radius3-interior.u8",
+      "sha256": "d4e51148ef94e6ce43e5f2c04e78253c8303ccff0fe606f0a156eca48df5cd54",
+      "bytes": 12649,
+      "shape": [
+        91,
+        139
+      ],
+      "dtype": "uint8"
+    },
+    "radius3Boundary": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/radius3-boundary.u8",
+      "sha256": "6f2a77a344b26db3bdb47271959823c1d4f75d0d7d3498430d0a7706b8a4ed44",
+      "bytes": 12649,
+      "shape": [
+        91,
+        139
+      ],
+      "dtype": "uint8"
+    },
+    "adaptiveReconstructed": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/adaptive-reconstructed.rgba32",
+      "sha256": "f4dc2818590b0b704f468c976ad0f55a33f9ef42bdd09cee3956c0d95f5fd1d2",
+      "bytes": 202384,
+      "shape": [
+        91,
+        139,
+        4
+      ],
+      "dtype": "little-endian-float32"
+    },
+    "adaptiveInterior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/adaptive-interior.u8",
+      "sha256": "4845ed17ffe7dbef0dbb91259d3be47fc5ee9f1be35872bd89da0f397b2f920f",
+      "bytes": 12649,
+      "shape": [
+        91,
+        139
+      ],
+      "dtype": "uint8"
+    },
+    "adaptiveBoundary": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/adaptive-boundary.u8",
+      "sha256": "9e5107c1c9471680b11eacba516558460b563ad16f07ac8412affce3b9bb64aa",
+      "bytes": 12649,
+      "shape": [
+        91,
+        139
+      ],
+      "dtype": "uint8"
+    },
+    "adaptiveRejected": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/adaptive-rejected.u8",
+      "sha256": "f95d6e202075b9c0a29e8a3a7e29c3eabca0c612811afa8a9ab0be7884467ed8",
+      "bytes": 12649,
+      "shape": [
+        91,
+        139
+      ],
+      "dtype": "uint8"
+    },
+    "riskRgb": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-adaptive-risk-gate-holdout-v0-1/consumers/node/STATIC_SUPERELLIPSE_TORUS_139X91/R2/arrays/risk.rgb64",
+      "sha256": "54e17398beb6b6812d077e1626ed276ec1b5904c7bb6f5dc10aa46aa0a520110",
+      "bytes": 303576,
+      "shape": [
+        91,
+        139,
+        3
+      ],
+      "dtype": "little-endian-float64"
+    }
+  },
+  "integrity": "external dual typed-envelope sidecars",
+  "operationCounts": {
+    "consumerProcesses": 1,
+    "radiusEvaluations": 2,
+    "adaptiveEvaluations": 1,
+    "pixelsVisited": 37947,
+    "modelCalls": 0,
+    "networkCalls": 0
+  }
+}
