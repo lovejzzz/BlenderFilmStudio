@@ -1503,6 +1503,24 @@ Next: B51-D3 must localize changed Depth/Cryptomatte components and the `INTERIO
 
 Artifacts: `experiments/native-metal-production-holdout-v0-1/`, `specs/native-metal-production-holdout.v0.1.json`, `research/2026-08-27-b51-h1-native-metal-production-holdout-protocol.md`, `research/2026-08-27-b51-h1-native-metal-production-holdout-result.md`, `research/2026-08-27-b51-h1-c1-negative-baseline-audit-correction.md` and `research/2026-08-27-b51-h1-c2-audit-evidence-root-correction.md`.
 
+## J-090 · B51-D3 separates sparse Crypto boundaries from broad low-amplitude Depth drift
+
+Date: 2026-08-27 · Type: ZERO-RERENDER DERIVATION · Runtime: Blender 5.2 Python 3.13 / OpenImageIO 3.1.13.1
+
+B51-D3 reopened the twelve retained H1 EXRs without launching Blender or changing source evidence. It froze pass-specific four-neighbor boundary rules, one-pixel data dilation, a 95% localization classifier, a two-pixel beauty-association mask and five diagnostic PNG mappings before the analysis tools existed.
+
+Every changed Cryptomatte pixel was inside the frozen boundary neighborhood. Active-layer changes were sparse—4, 8, 136 and 15 pixels across the four compositions—and the same locations recurred in both Metal replicates. This is spatial classification only; identifier floats cannot be interpreted as ordinary continuous error, and semantic matte equivalence remains untested.
+
+Depth behaved differently. CPU–Metal non-exact values covered 33.51%, 47.71%, 69.68% and 80.19% of the image; only 6.06%, 3.75%, 21.37% and 80.24% of those pixels were boundary-localized. Interior absolute differences remained small at roughly `3.34e−6–4.77e−6`, but their wide spatial support falsifies the blanket claim that all data-pass mismatch is edge noise.
+
+The `INTERIOR_CHAIR` Combined outlier had 1,971 pixels above `1e−3` max-channel error, 829 four-connected components and a maximum channel error of `0.347776`. All `6.236593` units of squared-error energy fell inside the two-pixel-dilated data-disagreement mask, giving an association fraction of `1.0`. This supports spatial association, not a causal mechanism.
+
+The independent audit reproduced receipt, result and five PNGs byte-exactly and passed 11/11 attacks. Verdict: `METAL_PASS_LOCALIZATION_USABLE`, evidence-core hash `9fc4b2a3…0c82`.
+
+Next: preregister B51-H2 as a split-backend holdout. Metal beauty and CPU Depth/Cryptomatte must be merged only if cross-backend alignment, multipart representation, reproducibility and total wall cost pass new frozen gates. Otherwise Metal remains preview/beauty-only and the production data path stays CPU.
+
+Artifacts: `experiments/native-metal-pass-localization-v0-1/`, `specs/native-metal-pass-localization.v0.1.json`, `research/2026-08-27-b51-d3-native-metal-pass-localization-protocol.md` and `research/2026-08-27-b51-d3-native-metal-pass-localization-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

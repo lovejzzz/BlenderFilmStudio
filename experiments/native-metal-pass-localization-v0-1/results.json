@@ -1,0 +1,1214 @@
+{
+  "algorithm": {
+    "beautyAssociationDilationRadiusPixels": 2,
+    "beautyHighErrorMaxChannelThreshold": 0.001,
+    "beautySquaredErrorAssociationThreshold": 0.9,
+    "cryptomatteDiscontinuity": "Any exact float32 component inequality across an orthogonal pair marks both pixels.",
+    "dataDisagreement": "Any exact CPU-versus-Metal component inequality in Depth or any of the three Cryptomatte passes.",
+    "dataPassBoundaryLocalizedThreshold": 0.95,
+    "depthDiscontinuity": "For each finite orthogonal pair, abs(a-b) > max(1e-3, 0.01 * min(abs(a), abs(b))); non-finite mismatch is a boundary.",
+    "dilationRadiusPixels": 1,
+    "neighborhood": "4_CONNECTED"
+  },
+  "attacks": [
+    {
+      "expectedReason": "PARENT_IDENTITY",
+      "id": "A01_PARENT",
+      "observedReason": "PARENT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "H1_AUDIT_IDENTITY",
+      "id": "A02_H1_AUDIT",
+      "observedReason": "H1_AUDIT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "H1_RECEIPT_IDENTITY",
+      "id": "A03_H1_RECEIPT",
+      "observedReason": "H1_RECEIPT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "EXR_ARTIFACT_IDENTITY",
+      "id": "A04_EXR",
+      "observedReason": "EXR_ARTIFACT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "PASS_ROSTER",
+      "id": "A05_ROSTER",
+      "observedReason": "PASS_ROSTER",
+      "passed": true
+    },
+    {
+      "expectedReason": "NON_FINITE",
+      "id": "A06_FINITE",
+      "observedReason": "NON_FINITE",
+      "passed": true
+    },
+    {
+      "expectedReason": "PAIR_MATRIX",
+      "id": "A07_PAIR",
+      "observedReason": "PAIR_MATRIX",
+      "passed": true
+    },
+    {
+      "expectedReason": "ALGORITHM_IDENTITY",
+      "id": "A08_ALGORITHM",
+      "observedReason": "ALGORITHM_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "DIAGNOSTIC_IMAGE_IDENTITY",
+      "id": "A09_IMAGE",
+      "observedReason": "DIAGNOSTIC_IMAGE_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "OPERATION_BOUNDARY",
+      "id": "A10_OPERATION",
+      "observedReason": "OPERATION_BOUNDARY",
+      "passed": true
+    },
+    {
+      "expectedReason": "EVIDENCE_SELF_HASH",
+      "id": "A11_HASH",
+      "observedReason": "EVIDENCE_SELF_HASH",
+      "passed": true
+    }
+  ],
+  "attacksPassed": 11,
+  "baseFailure": null,
+  "chairBeauty": {
+    "absoluteErrorQuantiles": {
+      "0.5": 2.9802322387695312e-08,
+      "0.9": 1.1920928955078125e-07,
+      "0.95": 1.7881393432617188e-07,
+      "0.99": 0.0014547680318355684,
+      "0.999": 0.005888434171676629,
+      "0.9999": 0.2095549840867097
+    },
+    "associatedSquaredErrorEnergy": 6.236592502971485,
+    "associatedWithDataDisagreement": true,
+    "associationFraction": 1.0,
+    "associationThreshold": 0.9,
+    "cpuRunId": "IC_CPU_R1",
+    "highErrorBbox": [
+      1,
+      2,
+      502,
+      286
+    ],
+    "highErrorComponents": {
+      "count": 829,
+      "largestPixels": 179,
+      "topTenPixels": [
+        179,
+        124,
+        100,
+        54,
+        22,
+        18,
+        16,
+        15,
+        13,
+        12
+      ]
+    },
+    "highErrorPixels": 1971,
+    "highErrorThreshold": 0.001,
+    "maximumChannelAbsoluteError": 0.3477763831615448,
+    "metalRunId": "IC_METAL_R1",
+    "topTwentyPixels": [
+      {
+        "maxChannelAbsoluteError": 0.3477763831615448,
+        "squaredErrorEnergy": 0.3061015773041662,
+        "x": 271,
+        "y": 14
+      },
+      {
+        "maxChannelAbsoluteError": 0.3008858263492584,
+        "squaredErrorEnergy": 0.2306366451375199,
+        "x": 271,
+        "y": 15
+      },
+      {
+        "maxChannelAbsoluteError": 0.29630252718925476,
+        "squaredErrorEnergy": 0.2218127041166742,
+        "x": 273,
+        "y": 14
+      },
+      {
+        "maxChannelAbsoluteError": 0.293192058801651,
+        "squaredErrorEnergy": 0.2192332158011414,
+        "x": 278,
+        "y": 15
+      },
+      {
+        "maxChannelAbsoluteError": 0.29281264543533325,
+        "squaredErrorEnergy": 0.2190563758090578,
+        "x": 276,
+        "y": 14
+      },
+      {
+        "maxChannelAbsoluteError": 0.29254645109176636,
+        "squaredErrorEnergy": 0.2190293278048312,
+        "x": 277,
+        "y": 15
+      },
+      {
+        "maxChannelAbsoluteError": 0.28846246004104614,
+        "squaredErrorEnergy": 0.21129150140337316,
+        "x": 273,
+        "y": 16
+      },
+      {
+        "maxChannelAbsoluteError": 0.278598427772522,
+        "squaredErrorEnergy": 0.19849014607606819,
+        "x": 273,
+        "y": 15
+      },
+      {
+        "maxChannelAbsoluteError": 0.277823269367218,
+        "squaredErrorEnergy": 0.19624347286826627,
+        "x": 275,
+        "y": 17
+      },
+      {
+        "maxChannelAbsoluteError": 0.27005600929260254,
+        "squaredErrorEnergy": 0.1840518082612279,
+        "x": 270,
+        "y": 13
+      },
+      {
+        "maxChannelAbsoluteError": 0.26564499735832214,
+        "squaredErrorEnergy": 0.17604352290158243,
+        "x": 277,
+        "y": 14
+      },
+      {
+        "maxChannelAbsoluteError": 0.2597457766532898,
+        "squaredErrorEnergy": 0.17091569070233703,
+        "x": 271,
+        "y": 13
+      },
+      {
+        "maxChannelAbsoluteError": 0.2415681779384613,
+        "squaredErrorEnergy": 0.14880788278010026,
+        "x": 272,
+        "y": 15
+      },
+      {
+        "maxChannelAbsoluteError": 0.2368341088294983,
+        "squaredErrorEnergy": 0.14238616611137012,
+        "x": 274,
+        "y": 12
+      },
+      {
+        "maxChannelAbsoluteError": 0.23215365409851074,
+        "squaredErrorEnergy": 0.13539973557043883,
+        "x": 278,
+        "y": 17
+      },
+      {
+        "maxChannelAbsoluteError": 0.22488296031951904,
+        "squaredErrorEnergy": 0.12817784620562378,
+        "x": 277,
+        "y": 18
+      },
+      {
+        "maxChannelAbsoluteError": 0.2208978235721588,
+        "squaredErrorEnergy": 0.12433408532039714,
+        "x": 276,
+        "y": 17
+      },
+      {
+        "maxChannelAbsoluteError": 0.2205851972103119,
+        "squaredErrorEnergy": 0.1227302954452707,
+        "x": 274,
+        "y": 16
+      },
+      {
+        "maxChannelAbsoluteError": 0.20579048991203308,
+        "squaredErrorEnergy": 0.10581643863945533,
+        "x": 275,
+        "y": 13
+      },
+      {
+        "maxChannelAbsoluteError": 0.20451974868774414,
+        "squaredErrorEnergy": 0.10510149870521435,
+        "x": 275,
+        "y": 16
+      }
+    ],
+    "totalSquaredErrorEnergy": 6.236592502971485
+  },
+  "diagnosticArtifacts": [
+    {
+      "bytes": 31742,
+      "match": true,
+      "sha256": "37e448fd51efe0d46b83215632e9de828883bd2d36c3c3911f4637e6fe693cdb",
+      "uri": "tabletop_wide-data-map.png"
+    },
+    {
+      "bytes": 44319,
+      "match": true,
+      "sha256": "ed418a5221dfae5bfc063dd13dc9149a6f6e9258ad87ca260c5a9d3c5bff90f6",
+      "uri": "tabletop_tight-data-map.png"
+    },
+    {
+      "bytes": 40813,
+      "match": true,
+      "sha256": "6ce2d24742d3ea0f217f74feee4cf081b57bfb8596620e7df8b4946c64cd5cbd",
+      "uri": "interior_chair-data-map.png"
+    },
+    {
+      "bytes": 35694,
+      "match": true,
+      "sha256": "f1d2765e6daa724823a5cd0b751e1f6f9babee5a29cc6dfae760b9890f64e8f6",
+      "uri": "interior_window-data-map.png"
+    },
+    {
+      "bytes": 134309,
+      "match": true,
+      "sha256": "a090cfb8bd7ca1fde2104d709d139ff8d1223f5e54cf66acd154165d0dbf4996",
+      "uri": "interior-chair-beauty-heatmap.png"
+    }
+  ],
+  "diskAdmission": {
+    "availableBytes": 107437305856,
+    "freeAfterProjectedBytes": 107420528640,
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 16777216,
+    "status": "ACCEPTED"
+  },
+  "evidenceCoreHash": "9fc4b2a3174758d8de9bf9a987813ac4708333bf53c5a84ccb04a91374350c82",
+  "experimentId": "B51-D3",
+  "h1AuditStatus": "PASS",
+  "h1Verdict": "NATIVE_METAL_PRODUCTION_HOLDOUT_NOT_SUPPORTED",
+  "nonClaims": [
+    "production-backend promotion",
+    "perceptual invisibility",
+    "Cryptomatte semantic equivalence",
+    "Depth compositing safety",
+    "cause of CPU-versus-Metal numerical divergence",
+    "long-sequence stability",
+    "cross-machine generalization",
+    "new render evidence"
+  ],
+  "operationCounts": {
+    "blenderProcesses": 0,
+    "downloads": 0,
+    "imagesWritten": 5,
+    "jsonFilesWritten": 2,
+    "modelCalls": 0,
+    "networkRequired": false,
+    "renders": 0,
+    "sourceExrsModified": 0,
+    "videoModelCalls": 0
+  },
+  "pairs": [
+    {
+      "cpuRunId": "TW_CPU_R1",
+      "dataDisagreementBbox": [
+        0,
+        11,
+        511,
+        273
+      ],
+      "dataDisagreementPixels": 49421,
+      "metalRunId": "TW_METAL_R1",
+      "passes": {
+        "BFS_MASTER.CryptoObject00": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 5,
+          "changedPixelBbox": [
+            179,
+            106,
+            423,
+            252
+          ],
+          "changedPixelFraction": 2.712673611111111e-05,
+          "changedPixels": 4,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 1.6182416566420534e+34,
+          "meanAbsoluteDifferenceAllComponents": 2.743600898983516e+28,
+          "nearBoundaryChangedPixels": 4,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.Depth": {
+          "boundaryLocalized": false,
+          "changedFloatComponents": 49418,
+          "changedPixelBbox": [
+            0,
+            11,
+            511,
+            273
+          ],
+          "changedPixelFraction": 0.3351372612847222,
+          "changedPixels": 49418,
+          "interiorChangedFloatComponents": 46422,
+          "interiorMaximumAbsoluteDifference": 4.76837158203125e-06,
+          "maximumAbsoluteDifference": 1.6689300537109375e-05,
+          "meanAbsoluteDifferenceAllComponents": 2.228868349144856e-07,
+          "nearBoundaryChangedPixels": 2996,
+          "nearBoundaryFraction": 0.06062568294953256
+        }
+      },
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cpuRunId": "TW_CPU_R1",
+      "dataDisagreementBbox": [
+        0,
+        11,
+        511,
+        273
+      ],
+      "dataDisagreementPixels": 49421,
+      "metalRunId": "TW_METAL_R2",
+      "passes": {
+        "BFS_MASTER.CryptoObject00": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 5,
+          "changedPixelBbox": [
+            179,
+            106,
+            423,
+            252
+          ],
+          "changedPixelFraction": 2.712673611111111e-05,
+          "changedPixels": 4,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 1.6182416566420534e+34,
+          "meanAbsoluteDifferenceAllComponents": 2.743600898983516e+28,
+          "nearBoundaryChangedPixels": 4,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.Depth": {
+          "boundaryLocalized": false,
+          "changedFloatComponents": 49418,
+          "changedPixelBbox": [
+            0,
+            11,
+            511,
+            273
+          ],
+          "changedPixelFraction": 0.3351372612847222,
+          "changedPixels": 49418,
+          "interiorChangedFloatComponents": 46422,
+          "interiorMaximumAbsoluteDifference": 4.76837158203125e-06,
+          "maximumAbsoluteDifference": 1.6689300537109375e-05,
+          "meanAbsoluteDifferenceAllComponents": 2.228868349144856e-07,
+          "nearBoundaryChangedPixels": 2996,
+          "nearBoundaryFraction": 0.06062568294953256
+        }
+      },
+      "variantId": "TABLETOP_WIDE"
+    },
+    {
+      "cpuRunId": "TT_CPU_R1",
+      "dataDisagreementBbox": [
+        0,
+        0,
+        511,
+        287
+      ],
+      "dataDisagreementPixels": 70355,
+      "metalRunId": "TT_METAL_R1",
+      "passes": {
+        "BFS_MASTER.CryptoObject00": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 12,
+          "changedPixelBbox": [
+            0,
+            12,
+            378,
+            164
+          ],
+          "changedPixelFraction": 5.425347222222222e-05,
+          "changedPixels": 8,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.012499988079071045,
+          "meanAbsoluteDifferenceAllComponents": 1.6689298516010038e-07,
+          "nearBoundaryChangedPixels": 8,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.Depth": {
+          "boundaryLocalized": false,
+          "changedFloatComponents": 70351,
+          "changedPixelBbox": [
+            0,
+            0,
+            511,
+            287
+          ],
+          "changedPixelFraction": 0.4770982530381944,
+          "changedPixels": 70351,
+          "interiorChangedFloatComponents": 67710,
+          "interiorMaximumAbsoluteDifference": 4.76837158203125e-06,
+          "maximumAbsoluteDifference": 6.4849853515625e-05,
+          "meanAbsoluteDifferenceAllComponents": 3.079120587143633e-07,
+          "nearBoundaryChangedPixels": 2641,
+          "nearBoundaryFraction": 0.037540333470739574
+        }
+      },
+      "variantId": "TABLETOP_TIGHT"
+    },
+    {
+      "cpuRunId": "TT_CPU_R1",
+      "dataDisagreementBbox": [
+        0,
+        0,
+        511,
+        287
+      ],
+      "dataDisagreementPixels": 70355,
+      "metalRunId": "TT_METAL_R2",
+      "passes": {
+        "BFS_MASTER.CryptoObject00": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 12,
+          "changedPixelBbox": [
+            0,
+            12,
+            378,
+            164
+          ],
+          "changedPixelFraction": 5.425347222222222e-05,
+          "changedPixels": 8,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.012499988079071045,
+          "meanAbsoluteDifferenceAllComponents": 1.6689298516010038e-07,
+          "nearBoundaryChangedPixels": 8,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.Depth": {
+          "boundaryLocalized": false,
+          "changedFloatComponents": 70351,
+          "changedPixelBbox": [
+            0,
+            0,
+            511,
+            287
+          ],
+          "changedPixelFraction": 0.4770982530381944,
+          "changedPixels": 70351,
+          "interiorChangedFloatComponents": 67710,
+          "interiorMaximumAbsoluteDifference": 4.76837158203125e-06,
+          "maximumAbsoluteDifference": 6.4849853515625e-05,
+          "meanAbsoluteDifferenceAllComponents": 3.079120587143633e-07,
+          "nearBoundaryChangedPixels": 2641,
+          "nearBoundaryFraction": 0.037540333470739574
+        }
+      },
+      "variantId": "TABLETOP_TIGHT"
+    },
+    {
+      "cpuRunId": "IC_CPU_R1",
+      "dataDisagreementBbox": [
+        0,
+        0,
+        511,
+        287
+      ],
+      "dataDisagreementPixels": 102796,
+      "metalRunId": "IC_METAL_R1",
+      "passes": {
+        "BFS_MASTER.CryptoObject00": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 310,
+          "changedPixelBbox": [
+            267,
+            9,
+            345,
+            114
+          ],
+          "changedPixelFraction": 0.0008341471354166666,
+          "changedPixels": 123,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 1.955240592972668e+20,
+          "meanAbsoluteDifferenceAllComponents": 2.287319622839768e+16,
+          "nearBoundaryChangedPixels": 123,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 15,
+          "changedPixelBbox": [
+            267,
+            10,
+            270,
+            18
+          ],
+          "changedPixelFraction": 8.816189236111111e-05,
+          "changedPixels": 13,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 707025829888.0,
+          "meanAbsoluteDifferenceAllComponents": 1198706.4444446156,
+          "nearBoundaryChangedPixels": 13,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.Depth": {
+          "boundaryLocalized": false,
+          "changedFloatComponents": 102750,
+          "changedPixelBbox": [
+            0,
+            0,
+            511,
+            287
+          ],
+          "changedPixelFraction": 0.6968180338541666,
+          "changedPixels": 102750,
+          "interiorChangedFloatComponents": 80797,
+          "interiorMaximumAbsoluteDifference": 3.337860107421875e-06,
+          "maximumAbsoluteDifference": 3.814697265625e-06,
+          "meanAbsoluteDifferenceAllComponents": 5.103097969873083e-07,
+          "nearBoundaryChangedPixels": 21953,
+          "nearBoundaryFraction": 0.213654501216545
+        }
+      },
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cpuRunId": "IC_CPU_R1",
+      "dataDisagreementBbox": [
+        0,
+        0,
+        511,
+        287
+      ],
+      "dataDisagreementPixels": 102796,
+      "metalRunId": "IC_METAL_R2",
+      "passes": {
+        "BFS_MASTER.CryptoObject00": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 310,
+          "changedPixelBbox": [
+            267,
+            9,
+            345,
+            114
+          ],
+          "changedPixelFraction": 0.0008341471354166666,
+          "changedPixels": 123,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 1.955240592972668e+20,
+          "meanAbsoluteDifferenceAllComponents": 2.287319622839768e+16,
+          "nearBoundaryChangedPixels": 123,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 15,
+          "changedPixelBbox": [
+            267,
+            10,
+            270,
+            18
+          ],
+          "changedPixelFraction": 8.816189236111111e-05,
+          "changedPixels": 13,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 707025829888.0,
+          "meanAbsoluteDifferenceAllComponents": 1198706.4444446156,
+          "nearBoundaryChangedPixels": 13,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.Depth": {
+          "boundaryLocalized": false,
+          "changedFloatComponents": 102750,
+          "changedPixelBbox": [
+            0,
+            0,
+            511,
+            287
+          ],
+          "changedPixelFraction": 0.6968180338541666,
+          "changedPixels": 102750,
+          "interiorChangedFloatComponents": 80797,
+          "interiorMaximumAbsoluteDifference": 3.337860107421875e-06,
+          "maximumAbsoluteDifference": 3.814697265625e-06,
+          "meanAbsoluteDifferenceAllComponents": 5.103097969873083e-07,
+          "nearBoundaryChangedPixels": 21953,
+          "nearBoundaryFraction": 0.213654501216545
+        }
+      },
+      "variantId": "INTERIOR_CHAIR"
+    },
+    {
+      "cpuRunId": "IW_CPU_R1",
+      "dataDisagreementBbox": [
+        0,
+        0,
+        511,
+        287
+      ],
+      "dataDisagreementPixels": 118249,
+      "metalRunId": "IW_METAL_R1",
+      "passes": {
+        "BFS_MASTER.CryptoObject00": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 27,
+          "changedPixelBbox": [
+            361,
+            18,
+            434,
+            266
+          ],
+          "changedPixelFraction": 9.494357638888889e-05,
+          "changedPixels": 14,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 1.9461596864013031e+27,
+          "meanAbsoluteDifferenceAllComponents": 3.299560015193182e+21,
+          "nearBoundaryChangedPixels": 14,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 1,
+          "changedPixelBbox": [
+            385,
+            18,
+            385,
+            18
+          ],
+          "changedPixelFraction": 6.781684027777777e-06,
+          "changedPixels": 1,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 1.9461596864013031e+27,
+          "meanAbsoluteDifferenceAllComponents": 3.299560015193182e+21,
+          "nearBoundaryChangedPixels": 1,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.Depth": {
+          "boundaryLocalized": false,
+          "changedFloatComponents": 118248,
+          "changedPixelBbox": [
+            0,
+            0,
+            511,
+            287
+          ],
+          "changedPixelFraction": 0.8019205729166666,
+          "changedPixels": 118248,
+          "interiorChangedFloatComponents": 23365,
+          "interiorMaximumAbsoluteDifference": 3.337860107421875e-06,
+          "maximumAbsoluteDifference": 3.337860107421875e-06,
+          "meanAbsoluteDifferenceAllComponents": 3.124849980748776e-07,
+          "nearBoundaryChangedPixels": 94883,
+          "nearBoundaryFraction": 0.8024068060347743
+        }
+      },
+      "variantId": "INTERIOR_WINDOW"
+    },
+    {
+      "cpuRunId": "IW_CPU_R1",
+      "dataDisagreementBbox": [
+        0,
+        0,
+        511,
+        287
+      ],
+      "dataDisagreementPixels": 118249,
+      "metalRunId": "IW_METAL_R2",
+      "passes": {
+        "BFS_MASTER.CryptoObject00": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 27,
+          "changedPixelBbox": [
+            361,
+            18,
+            434,
+            266
+          ],
+          "changedPixelFraction": 9.494357638888889e-05,
+          "changedPixels": 14,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 1.9461596864013031e+27,
+          "meanAbsoluteDifferenceAllComponents": 3.299560015193182e+21,
+          "nearBoundaryChangedPixels": 14,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 1,
+          "changedPixelBbox": [
+            385,
+            18,
+            385,
+            18
+          ],
+          "changedPixelFraction": 6.781684027777777e-06,
+          "changedPixels": 1,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 1.9461596864013031e+27,
+          "meanAbsoluteDifferenceAllComponents": 3.299560015193182e+21,
+          "nearBoundaryChangedPixels": 1,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "boundaryLocalized": true,
+          "changedFloatComponents": 0,
+          "changedPixelBbox": null,
+          "changedPixelFraction": 0.0,
+          "changedPixels": 0,
+          "interiorChangedFloatComponents": 0,
+          "interiorMaximumAbsoluteDifference": 0.0,
+          "maximumAbsoluteDifference": 0.0,
+          "meanAbsoluteDifferenceAllComponents": 0.0,
+          "nearBoundaryChangedPixels": 0,
+          "nearBoundaryFraction": 1.0
+        },
+        "BFS_MASTER.Depth": {
+          "boundaryLocalized": false,
+          "changedFloatComponents": 118248,
+          "changedPixelBbox": [
+            0,
+            0,
+            511,
+            287
+          ],
+          "changedPixelFraction": 0.8019205729166666,
+          "changedPixels": 118248,
+          "interiorChangedFloatComponents": 23365,
+          "interiorMaximumAbsoluteDifference": 3.337860107421875e-06,
+          "maximumAbsoluteDifference": 3.337860107421875e-06,
+          "meanAbsoluteDifferenceAllComponents": 3.124849980748776e-07,
+          "nearBoundaryChangedPixels": 94883,
+          "nearBoundaryFraction": 0.8024068060347743
+        }
+      },
+      "variantId": "INTERIOR_WINDOW"
+    }
+  ],
+  "parentObservations": [
+    {
+      "expectedSha256": "42d9dff174378e90e724bae93f710df96e63cb3a0e18eeebd3958dd69d3d69cc",
+      "match": true,
+      "observedSha256": "42d9dff174378e90e724bae93f710df96e63cb3a0e18eeebd3958dd69d3d69cc",
+      "uri": "experiments/native-metal-production-holdout-v0-1/run.receipt.json"
+    },
+    {
+      "expectedSha256": "9bcd9dea0ea071decfde1021195794837e088e57b0ef499a66159332ca86a8a9",
+      "match": true,
+      "observedSha256": "9bcd9dea0ea071decfde1021195794837e088e57b0ef499a66159332ca86a8a9",
+      "uri": "experiments/native-metal-production-holdout-v0-1/results.json"
+    },
+    {
+      "expectedSha256": "f707b3d11aba424e4932f107561e205e6a7aa015d33d18f2346896b0ebb5edd3",
+      "match": true,
+      "observedSha256": "f707b3d11aba424e4932f107561e205e6a7aa015d33d18f2346896b0ebb5edd3",
+      "uri": "experiments/native-metal-production-holdout-v0-1/audit.correction-v0.2.json"
+    }
+  ],
+  "preregistration": {
+    "commit": "bd806f0845b44efeceeec6e8d6a6e0a6b5717bb9",
+    "specSha256": "5f4f3685e73e28959960e4fee7cb427297ef0e33dfec52fb107935bd931f0587",
+    "specUri": "specs/native-metal-pass-localization.v0.1.json"
+  },
+  "runtime": {
+    "numpy": "2.3.4",
+    "openImageIO": "3.1.13.1",
+    "python": "3.13.13"
+  },
+  "schemaVersion": "bfs.nativeMetalPassLocalizationEvidence.v0.1",
+  "sourceObservations": [
+    {
+      "expectedBytes": 3309351,
+      "expectedSha256": "4ae11634c26d00c55939fce1d7d80e47859505f2ccdb1dc3ebda790f8140de6f",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3309351,
+      "observedSha256": "4ae11634c26d00c55939fce1d7d80e47859505f2ccdb1dc3ebda790f8140de6f",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "IC_CPU_R1",
+      "uri": "experiments/native-metal-production-holdout-v0-1/IC_CPU_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3299667,
+      "expectedSha256": "9e5f3199c58c6aee9ba239d684c730266a65633dce55d2939570ce73d287e5e8",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3299667,
+      "observedSha256": "9e5f3199c58c6aee9ba239d684c730266a65633dce55d2939570ce73d287e5e8",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "IC_METAL_R1",
+      "uri": "experiments/native-metal-production-holdout-v0-1/IC_METAL_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3299663,
+      "expectedSha256": "5045bba68423148c57b0cc693a4dbbd69c65fb5f6e0c8abbe00450f1c74deff1",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3299663,
+      "observedSha256": "5045bba68423148c57b0cc693a4dbbd69c65fb5f6e0c8abbe00450f1c74deff1",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "IC_METAL_R2",
+      "uri": "experiments/native-metal-production-holdout-v0-1/IC_METAL_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3487240,
+      "expectedSha256": "88b98069f9dc02b2294f61629bb1cf0ca38dbd1bda57d7634ee9c9c50784f9be",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3487240,
+      "observedSha256": "88b98069f9dc02b2294f61629bb1cf0ca38dbd1bda57d7634ee9c9c50784f9be",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "IW_CPU_R1",
+      "uri": "experiments/native-metal-production-holdout-v0-1/IW_CPU_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3482951,
+      "expectedSha256": "554a93571bc634fc2f98b718190a3708dc3acfd46617c3209a8cf3d671f2876a",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3482951,
+      "observedSha256": "554a93571bc634fc2f98b718190a3708dc3acfd46617c3209a8cf3d671f2876a",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "IW_METAL_R1",
+      "uri": "experiments/native-metal-production-holdout-v0-1/IW_METAL_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3482947,
+      "expectedSha256": "238d01cc99bb77cc2ee33567313f5c6834932a4526889115861ddb97c2fd8e28",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3482947,
+      "observedSha256": "238d01cc99bb77cc2ee33567313f5c6834932a4526889115861ddb97c2fd8e28",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "IW_METAL_R2",
+      "uri": "experiments/native-metal-production-holdout-v0-1/IW_METAL_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 4357193,
+      "expectedSha256": "02fbc7fd343b4f0ed82ef19becba67dec9a191a4f42f59b9763be9456e3e5de1",
+      "finite": true,
+      "match": true,
+      "observedBytes": 4357193,
+      "observedSha256": "02fbc7fd343b4f0ed82ef19becba67dec9a191a4f42f59b9763be9456e3e5de1",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "TT_CPU_R1",
+      "uri": "experiments/native-metal-production-holdout-v0-1/TT_CPU_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 4358002,
+      "expectedSha256": "eecd581a32d9a0cdad7112786f25de0d23273ed33fb69f122132a1e247f68b6f",
+      "finite": true,
+      "match": true,
+      "observedBytes": 4358002,
+      "observedSha256": "eecd581a32d9a0cdad7112786f25de0d23273ed33fb69f122132a1e247f68b6f",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "TT_METAL_R1",
+      "uri": "experiments/native-metal-production-holdout-v0-1/TT_METAL_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 4357519,
+      "expectedSha256": "f65cb780340dda417afa51ab564c365085a3cfe1e76fdec914887b756b4308c0",
+      "finite": true,
+      "match": true,
+      "observedBytes": 4357519,
+      "observedSha256": "f65cb780340dda417afa51ab564c365085a3cfe1e76fdec914887b756b4308c0",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "TT_METAL_R2",
+      "uri": "experiments/native-metal-production-holdout-v0-1/TT_METAL_R2/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3222319,
+      "expectedSha256": "e08b8b6eb45feb919d0139109641fa00a82bd4bc7c5468f4a0376571ce392059",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3222319,
+      "observedSha256": "e08b8b6eb45feb919d0139109641fa00a82bd4bc7c5468f4a0376571ce392059",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "TW_CPU_R1",
+      "uri": "experiments/native-metal-production-holdout-v0-1/TW_CPU_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3220396,
+      "expectedSha256": "e25f0fc9ad6b16c08bbdadfdd3d0d497b7a46bc6bc650c0046dc142c8b048d82",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3220396,
+      "observedSha256": "e25f0fc9ad6b16c08bbdadfdd3d0d497b7a46bc6bc650c0046dc142c8b048d82",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "TW_METAL_R1",
+      "uri": "experiments/native-metal-production-holdout-v0-1/TW_METAL_R1/artifacts/production.exr"
+    },
+    {
+      "expectedBytes": 3220646,
+      "expectedSha256": "02705e4877563fa7f19fe7a3bc3eb23ea991eeabce0a11f84e25d8b0b461d023",
+      "finite": true,
+      "match": true,
+      "observedBytes": 3220646,
+      "observedSha256": "02705e4877563fa7f19fe7a3bc3eb23ea991eeabce0a11f84e25d8b0b461d023",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "runId": "TW_METAL_R2",
+      "uri": "experiments/native-metal-production-holdout-v0-1/TW_METAL_R2/artifacts/production.exr"
+    }
+  ],
+  "toolFreezeCommit": "6a616961a54ee1265b1f73b0966ba97b676be1ac",
+  "tools": {
+    "analyzer": {
+      "sha256": "7146fdb19961daa82968ce3ad3c3ed0f132139097198dcdd26dbe6313c5dc991",
+      "uri": "scripts/analyze-b51-native-metal-pass-localization.py"
+    },
+    "audit": {
+      "sha256": "98357f43cdf0fa6c9d19ceee3bbc9d01c37cc01e51d9a072e0b2c6998e0957bb",
+      "uri": "scripts/audit-b51-native-metal-pass-localization.py"
+    }
+  },
+  "verdict": "METAL_PASS_LOCALIZATION_USABLE"
+}
