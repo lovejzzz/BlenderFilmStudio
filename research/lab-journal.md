@@ -2749,6 +2749,14 @@ D12.6-C2 is registered before changing the frozen tool. Its only permitted scien
 
 Artifacts: `specs/blender-static-interior-risk-localization.v0.1.json` and `research/2026-08-27-b52-d12-6-static-interior-risk-localization-protocol.md`.
 
+## J-177 · D12.6-C2 preflight accepts the corrected frozen tools
+
+Date: 2026-08-27 · Type: CORRECTED PREFLIGHT · Blender renders: 0
+
+The corrected preflight passed 10/10 checks and the same 259 synthetic bound cases before the fresh C2 formal root existed. It binds the tools to commit `b9718ce083fd3501c6c4a4a87c171b42497dbe1c`, includes the retained invalid-run identity, and admits the projected write above the unchanged reserve. No formal measurement was run or inspected.
+
+Artifacts: `experiments/blender-static-interior-risk-localization-c2-preflight-v0-1/preflight.json` and `research/2026-08-27-b52-d12-6-c2-preflight.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
