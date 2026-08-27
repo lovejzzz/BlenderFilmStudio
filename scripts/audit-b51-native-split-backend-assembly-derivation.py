@@ -29,13 +29,17 @@ def main() -> None:
     parser.add_argument("--spec", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--correction-spec", type=Path)
     args = parser.parse_args()
     root = args.spec.resolve().parent.parent; original = args.output_root.resolve()
-    result = json.loads((original / "results.json").read_text(encoding="utf-8")); receipt = json.loads((original / "assembly.receipt.json").read_text(encoding="utf-8")); spec = json.loads(args.spec.read_text(encoding="utf-8"))
+    result = json.loads((original / "results.json").read_text(encoding="utf-8")); receipt = json.loads((original / "assembly.receipt.json").read_text(encoding="utf-8")); spec = json.loads(args.spec.read_text(encoding="utf-8")); correction = json.loads(args.correction_spec.read_text(encoding="utf-8")) if args.correction_spec else None
     assembler = Path(__file__).with_name("run-b51-native-split-backend-assembly-derivation.py")
     with tempfile.TemporaryDirectory(prefix="bfs-b51-d4-audit-") as temporary:
         replay = Path(temporary) / "replay"
-        process = subprocess.run([sys.executable, str(assembler), "--spec", str(args.spec), "--output-root", str(replay), "--replay-receipt", str(original / "assembly.receipt.json")], cwd=root, capture_output=True, text=True, check=False)
+        command = [sys.executable, str(assembler), "--spec", str(args.spec), "--output-root", str(replay), "--replay-receipt", str(original / "assembly.receipt.json")]
+        if args.correction_spec:
+            command.extend(["--correction-spec", str(args.correction_spec)])
+        process = subprocess.run(command, cwd=root, capture_output=True, text=True, check=False)
         if process.returncode:
             raise RuntimeError(f"B51-D4 replay failed: {process.stdout}\n{process.stderr}")
         names = ["assembly.receipt.json", "results.json", *[item["uri"] for item in result["artifacts"]]]
@@ -44,8 +48,12 @@ def main() -> None:
         for name, binding in receipt["tools"].items():
             observed = git_blob_hash(receipt["toolFreezeCommit"], binding["uri"], root)
             frozen.append({"name": name, "uri": binding["uri"], "expectedSha256": binding["sha256"], "observedGitBlobSha256": observed, "match": observed == binding["sha256"]})
-        passed = all(item["byteExact"] for item in comparisons) and all(item["match"] for item in frozen) and result["verdict"] == "NATIVE_SPLIT_BACKEND_ASSEMBLY_DERIVATION_USABLE" and result["attacksPassed"] == len(spec["attacks"])
-        audit = {"schemaVersion": "bfs.nativeSplitBackendAssemblyAudit.v0.1", "status": "PASS" if passed else "FAIL", "verdict": result["verdict"], "attacksPassed": result["attacksPassed"], "attackCount": len(result["attacks"]), "evidenceCoreHash": result["evidenceCoreHash"], "artifactReplay": comparisons, "allArtifactsByteExact": all(item["byteExact"] for item in comparisons), "frozenToolChecks": frozen, "frozenToolsMatch": all(item["match"] for item in frozen), "toolHashes": {"assembler": sha256_file(assembler), "audit": sha256_file(Path(__file__))}, "replayStdout": process.stdout.strip(), "failures": [] if passed else ["REPLAY_OR_GATE_MISMATCH"]}
+        expected_verdict = correction["successVerdict"] if correction else "NATIVE_SPLIT_BACKEND_ASSEMBLY_DERIVATION_USABLE"
+        correction_attacks = result.get("correctionAttacks", [])
+        attacks_passed = result["attacksPassed"] + result.get("correctionAttacksPassed", 0)
+        attack_count = len(result["attacks"]) + len(correction_attacks)
+        passed = all(item["byteExact"] for item in comparisons) and all(item["match"] for item in frozen) and result["verdict"] == expected_verdict and attacks_passed == len(spec["attacks"]) + (len(correction["correctionAttacks"]) if correction else 0)
+        audit = {"schemaVersion": "bfs.nativeSplitBackendAssemblyAudit.v0.1", "status": "PASS" if passed else "FAIL", "verdict": result["verdict"], "attacksPassed": attacks_passed, "attackCount": attack_count, "baseAttacksPassed": result["attacksPassed"], "correctionAttacksPassed": result.get("correctionAttacksPassed", 0), "evidenceCoreHash": result["evidenceCoreHash"], "artifactReplay": comparisons, "allArtifactsByteExact": all(item["byteExact"] for item in comparisons), "frozenToolChecks": frozen, "frozenToolsMatch": all(item["match"] for item in frozen), "toolHashes": {"assembler": sha256_file(assembler), "audit": sha256_file(Path(__file__))}, "replayStdout": process.stdout.strip(), "failures": [] if passed else ["REPLAY_OR_GATE_MISMATCH"]}
         args.output.write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(f"BFS_B51_D4_AUDIT {audit['status']} artifacts={sum(item['byteExact'] for item in comparisons)}/{len(comparisons)}", flush=True)
         if not passed:

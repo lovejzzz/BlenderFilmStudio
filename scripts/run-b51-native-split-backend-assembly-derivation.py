@@ -7,6 +7,7 @@ import copy
 import hashlib
 import json
 import platform
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -18,6 +19,8 @@ import OpenImageIO as oiio
 ROOT = Path(__file__).resolve().parents[1]
 PREREGISTRATION_COMMIT = "8494459950d3b822e3641d14e7608bf046f305f7"
 SPEC_SHA256 = "553e613911bd9b46ce02ef539d635720095bf56400e7dfc8425e0f5bc2537368"
+CORRECTION_PREREGISTRATION_COMMIT = "c8c10e2a609dee6a27f4699d5d5c65849bac6bf6"
+CORRECTION_SPEC_SHA256 = "911665b8a5e6660440e5cb6c0d8cf68ef17191c2d40187cc2f698a13198c9ec9"
 
 
 def sha256_file(path: Path) -> str:
@@ -37,6 +40,11 @@ def git(*args: str) -> str:
     if process.returncode:
         raise RuntimeError(process.stderr.strip() or "git failed")
     return process.stdout.strip()
+
+
+def git_blob_hash(commit: str, uri: str) -> str | None:
+    process = subprocess.run(["git", "show", f"{commit}:{uri}"], cwd=ROOT, capture_output=True, check=False)
+    return hashlib.sha256(process.stdout).hexdigest() if process.returncode == 0 else None
 
 
 def normalize(value):
@@ -110,7 +118,7 @@ def add_provenance(spec: oiio.ImageSpec, pair: dict, backend: str, source: dict,
     spec.attribute("bfs:mergeToolGitBlobSha256", tool_hash)
 
 
-def write_split_exr(path: Path, pair: dict, source_parts: dict, spec: dict, tool_hash: str) -> None:
+def write_split_exr(path: Path, pair: dict, source_parts: dict, spec: dict, tool_hash: str, capture_date: str | None = None) -> None:
     if path.exists():
         raise RuntimeError(f"refusing to overwrite {path}")
     path.parent.mkdir(parents=True, exist_ok=False)
@@ -121,6 +129,8 @@ def write_split_exr(path: Path, pair: dict, source_parts: dict, spec: dict, tool
         selected = source_parts[backend][name]
         output_spec = oiio.ImageSpec(selected["spec"])
         add_provenance(output_spec, pair, backend, pair[backend.lower()], tool_hash, spec["outputContract"]["splitContractValue"])
+        if capture_date is not None:
+            output_spec.attribute("DateTime", capture_date)
         output_specs.append(output_spec)
         arrays.append(selected["pixels"])
     writer = oiio.ImageOutput.create(str(path))
@@ -138,7 +148,8 @@ def write_split_exr(path: Path, pair: dict, source_parts: dict, spec: dict, tool
 
 
 def hash_payload(evidence: dict) -> dict:
-    return {key: value for key, value in evidence.items() if key not in {"evidenceCoreHash", "baseFailure", "attacks", "attacksPassed", "verdict"}}
+    excluded = {"evidenceCoreHash", "baseFailure", "correctionFailure", "attacks", "attacksPassed", "correctionAttacks", "correctionAttacksPassed", "verdict"}
+    return {key: value for key, value in evidence.items() if key not in excluded}
 
 
 def validate(evidence: dict, spec: dict) -> str | None:
@@ -159,6 +170,23 @@ def validate(evidence: dict, spec: dict) -> str | None:
     if not all(item["byteExact"] for item in evidence["replicateComparisons"]): return "MERGE_REPLICATE_BYTE_IDENTITY"
     if evidence["operationCounts"] != spec["operationBoundary"]: return "OPERATION_BOUNDARY"
     if evidence.get("evidenceCoreHash") != canonical_hash(hash_payload(evidence)): return "EVIDENCE_SELF_HASH"
+    return None
+
+
+def validate_correction(evidence: dict, spec: dict, correction: dict) -> str | None:
+    base = validate(evidence, spec)
+    if base:
+        return base
+    if not all(item["match"] for item in evidence["correctionParentObservations"]):
+        return "CORRECTION_PARENT_IDENTITY"
+    expected = correction["correctionContract"]["expectedByPair"]
+    if any(item["derived"] != expected[item["pairId"]] or not item["sourceMatch"] for item in evidence["captureDateObservations"]):
+        return "CAPTURE_DATE_SOURCE"
+    if any(not item["captureDateMatch"] for item in evidence["artifacts"]):
+        return "CAPTURE_DATE_OUTPUT"
+    required = correction["evidenceGates"]["requiredSubimagesPerMergedExr"]
+    if any(len(item["observedCaptureDates"]) != required for item in evidence["artifacts"]):
+        return "CAPTURE_DATE_ALL_SUBIMAGES"
     return None
 
 
@@ -187,17 +215,63 @@ def run_attacks(evidence: dict, spec: dict) -> list[dict]:
     return rows
 
 
+def run_correction_attacks(evidence: dict, spec: dict, correction: dict) -> list[dict]:
+    rows = []
+    def add(identifier: str, reason: str, mutate) -> None:
+        clone = copy.deepcopy(evidence); mutate(clone)
+        clone["evidenceCoreHash"] = canonical_hash(hash_payload(clone))
+        observed = validate_correction(clone, spec, correction)
+        rows.append({"id": identifier, "expectedReason": reason, "observedReason": observed, "passed": observed == reason})
+    add("C01_PARENT", "CORRECTION_PARENT_IDENTITY", lambda x: x["correctionParentObservations"][0].update(match=False))
+    add("C02_SOURCE", "CAPTURE_DATE_SOURCE", lambda x: x["captureDateObservations"][0].update(sourceMatch=False))
+    add("C03_OUTPUT", "CAPTURE_DATE_OUTPUT", lambda x: x["artifacts"][0].update(captureDateMatch=False))
+    add("C04_TOTALITY", "CAPTURE_DATE_ALL_SUBIMAGES", lambda x: x["artifacts"][0]["observedCaptureDates"].pop())
+    return rows
+
+
+def correction_parent_observations(correction: dict) -> list[dict]:
+    rows = []
+    for item in correction["parents"].values():
+        if "gitCommit" in item:
+            actual = git_blob_hash(item["gitCommit"], item["uri"])
+        else:
+            path = ROOT / item["uri"]
+            actual = sha256_file(path) if path.is_file() else None
+        rows.append({"uri": item["uri"], "gitCommit": item.get("gitCommit"), "expectedSha256": item["sha256"], "observedSha256": actual, "match": actual == item["sha256"]})
+    return rows
+
+
+def derive_capture_date(source_value: object) -> str:
+    value = str(source_value or "")
+    match = re.fullmatch(r"(\d{4})/(\d{2})/(\d{2}) (\d{2}:\d{2}:\d{2})", value)
+    if not match:
+        raise RuntimeError(f"invalid frozen Metal Date attribute: {value!r}")
+    return f"{match.group(1)}:{match.group(2)}:{match.group(3)} {match.group(4)}"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--spec", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--replay-receipt", type=Path)
+    parser.add_argument("--correction-spec", type=Path)
     args = parser.parse_args()
     if sha256_file(args.spec) != SPEC_SHA256:
         raise RuntimeError("B51-D4 spec SHA differs")
     if subprocess.run(["git", "merge-base", "--is-ancestor", PREREGISTRATION_COMMIT, "HEAD"], cwd=ROOT).returncode:
         raise RuntimeError("B51-D4 preregistration is not an ancestor")
     spec = json.loads(args.spec.read_text(encoding="utf-8"))
+    correction = None
+    correction_parents = []
+    if args.correction_spec:
+        if sha256_file(args.correction_spec) != CORRECTION_SPEC_SHA256:
+            raise RuntimeError("B51-D4-C3 correction spec SHA differs")
+        if subprocess.run(["git", "merge-base", "--is-ancestor", CORRECTION_PREREGISTRATION_COMMIT, "HEAD"], cwd=ROOT).returncode:
+            raise RuntimeError("B51-D4-C3 preregistration is not an ancestor")
+        correction = json.loads(args.correction_spec.read_text(encoding="utf-8"))
+        correction_parents = correction_parent_observations(correction)
+        if not all(item["match"] for item in correction_parents):
+            raise RuntimeError("B51-D4-C3 parent identity differs")
     output = args.output_root.resolve()
     if output.exists() and any(output.iterdir()):
         raise RuntimeError("B51-D4 output root is not empty")
@@ -227,7 +301,7 @@ def main() -> None:
     receipt_path = output / "assembly.receipt.json"
     if args.replay_receipt:
         frozen = json.loads(args.replay_receipt.read_text(encoding="utf-8"))
-        if frozen["parentObservations"] != parents or frozen["sourceObservations"] != source_observations:
+        if frozen["parentObservations"] != parents or frozen["sourceObservations"] != source_observations or frozen.get("correctionParentObservations", []) != correction_parents:
             raise RuntimeError("B51-D4 replay input observation differs")
         receipt_path.write_bytes(args.replay_receipt.read_bytes()); receipt = frozen
     else:
@@ -236,10 +310,10 @@ def main() -> None:
         if admission["status"] != "ACCEPTED": raise RuntimeError("B51-D4 disk admission blocked")
         tool_freeze = git("rev-parse", "HEAD")
         tools = {"assembler": {"uri": "scripts/run-b51-native-split-backend-assembly-derivation.py", "sha256": sha256_file(Path(__file__))}, "audit": {"uri": "scripts/audit-b51-native-split-backend-assembly-derivation.py", "sha256": sha256_file(Path(__file__).with_name("audit-b51-native-split-backend-assembly-derivation.py"))}}
-        receipt = {"schemaVersion": "bfs.nativeSplitBackendAssemblyReceipt.v0.1", "preregistration": {"commit": PREREGISTRATION_COMMIT, "specUri": str(args.spec.resolve().relative_to(ROOT)), "specSha256": SPEC_SHA256}, "toolFreezeCommit": tool_freeze, "tools": tools, "parentObservations": parents, "sourceObservations": source_observations, "diskAdmission": admission}
+        receipt = {"schemaVersion": "bfs.nativeSplitBackendAssemblyReceipt.v0.1", "preregistration": {"commit": PREREGISTRATION_COMMIT, "specUri": str(args.spec.resolve().relative_to(ROOT)), "specSha256": SPEC_SHA256}, "correctionPreregistration": None if correction is None else {"commit": CORRECTION_PREREGISTRATION_COMMIT, "specUri": str(args.correction_spec.resolve().relative_to(ROOT)), "specSha256": CORRECTION_SPEC_SHA256}, "toolFreezeCommit": tool_freeze, "tools": tools, "parentObservations": parents, "correctionParentObservations": correction_parents, "sourceObservations": source_observations, "diskAdmission": admission}
         receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-    pair_observations, artifacts, replicate_comparisons = [], [], []
+    pair_observations, artifacts, replicate_comparisons, capture_date_observations = [], [], [], []
     geometry_fields = spec["alignmentContract"]["exactImageGeometryFields"]
     common_attrs = spec["alignmentContract"]["exactCommonAttributes"]
     crypto_attrs = spec["alignmentContract"]["exactCryptomatteAttributes"]
@@ -248,6 +322,12 @@ def main() -> None:
     tool_hash = receipt["tools"]["assembler"]["sha256"]
     for pair in spec["pairs"]:
         parts = loaded[pair["id"]]
+        capture_date = None
+        if correction:
+            source_date = parts["METAL"]["BFS_MASTER.Combined"]["spec"].getattribute("Date")
+            capture_date = derive_capture_date(source_date)
+            expected_capture_date = correction["correctionContract"]["expectedByPair"][pair["id"]]
+            capture_date_observations.append({"pairId": pair["id"], "source": normalize(source_date), "derived": capture_date, "expected": expected_capture_date, "sourceMatch": capture_date == expected_capture_date})
         geometry_rows = []
         for name in expected_roster:
             cpu_geometry = spec_geometry(parts["CPU"][name]["spec"], geometry_fields)
@@ -263,7 +343,7 @@ def main() -> None:
         pair_paths = []
         for replicate in range(1, spec["outputContract"]["mergeReplicatesPerPair"] + 1):
             relative = Path(f"{pair['id']}_MERGE_R{replicate}") / "split-production.exr"; target = output / relative
-            write_split_exr(target, pair, parts, spec, tool_hash); roster, merged = load_exr(target)
+            write_split_exr(target, pair, parts, spec, tool_hash, capture_date); roster, merged = load_exr(target)
             pass_checks, provenance_checks = [], []
             for name in expected_roster:
                 selected_backend = routing[name]; selected = parts[selected_backend][name]
@@ -272,16 +352,26 @@ def main() -> None:
                 expected_provenance = {"bfs:splitContract": spec["outputContract"]["splitContractValue"], "bfs:passSourceBackend": selected_backend, "bfs:passSourceRunId": pair[selected_backend.lower()]["runId"], "bfs:passSourceArtifactSha256": pair[selected_backend.lower()]["sha256"], "bfs:beautyArtifactSha256": pair["metal"]["sha256"], "bfs:dataArtifactSha256": pair["cpu"]["sha256"], "bfs:mergeToolGitBlobSha256": tool_hash}
                 observed_provenance = attributes(merged[name]["spec"], list(expected_provenance))
                 provenance_checks.append({"pass": name, "expected": expected_provenance, "observed": observed_provenance, "match": observed_provenance == expected_provenance})
-            artifact = {"pairId": pair["id"], "replicate": replicate, "uri": str(relative), "sha256": sha256_file(target), "bytes": target.stat().st_size, "roster": roster, "rosterMatch": roster == expected_roster, "passChecks": pass_checks, "selectedPassesExact": all(item["floatExact"] for item in pass_checks), "provenanceChecks": provenance_checks, "provenanceMatch": all(item["match"] for item in provenance_checks), "finite": all(item["finite"] for item in merged.values())}
+            observed_capture_dates = [normalize(merged[name]["spec"].getattribute("DateTime")) for name in expected_roster]
+            artifact = {"pairId": pair["id"], "replicate": replicate, "uri": str(relative), "sha256": sha256_file(target), "bytes": target.stat().st_size, "roster": roster, "rosterMatch": roster == expected_roster, "passChecks": pass_checks, "selectedPassesExact": all(item["floatExact"] for item in pass_checks), "provenanceChecks": provenance_checks, "provenanceMatch": all(item["match"] for item in provenance_checks), "observedCaptureDates": observed_capture_dates, "captureDateMatch": correction is None or observed_capture_dates == [capture_date] * len(expected_roster), "finite": all(item["finite"] for item in merged.values())}
             artifacts.append(artifact); pair_paths.append(target)
         replicate_comparisons.append({"pairId": pair["id"], "left": str(pair_paths[0].relative_to(output)), "right": str(pair_paths[1].relative_to(output)), "leftSha256": sha256_file(pair_paths[0]), "rightSha256": sha256_file(pair_paths[1]), "byteExact": pair_paths[0].read_bytes() == pair_paths[1].read_bytes()})
 
-    evidence = {"schemaVersion": "bfs.nativeSplitBackendAssemblyEvidence.v0.1", "experimentId": spec["experimentId"], "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"], "runtime": {"python": platform.python_version(), "openImageIO": oiio.VERSION_STRING, "numpy": np.__version__}, "parentObservations": receipt["parentObservations"], "sourceObservations": receipt["sourceObservations"], "diskAdmission": receipt["diskAdmission"], "passRouting": spec["passRouting"], "pairObservations": pair_observations, "artifacts": artifacts, "replicateComparisons": replicate_comparisons, "operationCounts": spec["operationBoundary"], "nonClaims": spec["nonClaims"]}
+    evidence = {"schemaVersion": "bfs.nativeSplitBackendAssemblyEvidence.v0.1", "experimentId": spec["experimentId"] if correction is None else correction["experimentId"], "preregistration": receipt["preregistration"], "correctionPreregistration": receipt.get("correctionPreregistration"), "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"], "runtime": {"python": platform.python_version(), "openImageIO": oiio.VERSION_STRING, "numpy": np.__version__}, "parentObservations": receipt["parentObservations"], "correctionParentObservations": receipt.get("correctionParentObservations", []), "sourceObservations": receipt["sourceObservations"], "captureDateObservations": capture_date_observations, "diskAdmission": receipt["diskAdmission"], "passRouting": spec["passRouting"], "pairObservations": pair_observations, "artifacts": artifacts, "replicateComparisons": replicate_comparisons, "operationCounts": spec["operationBoundary"], "nonClaims": spec["nonClaims"] if correction is None else correction["nonClaims"]}
     evidence["evidenceCoreHash"] = canonical_hash(hash_payload(evidence)); evidence["baseFailure"] = validate(evidence, spec); evidence["evidenceCoreHash"] = canonical_hash(hash_payload(evidence)); evidence["baseFailure"] = validate(evidence, spec)
     evidence["attacks"] = run_attacks(evidence, spec); evidence["attacksPassed"] = sum(item["passed"] for item in evidence["attacks"])
-    evidence["verdict"] = "NATIVE_SPLIT_BACKEND_ASSEMBLY_DERIVATION_USABLE" if evidence["baseFailure"] is None and evidence["attacksPassed"] == len(spec["attacks"]) else "NATIVE_SPLIT_BACKEND_ASSEMBLY_DERIVATION_INVALID"
+    evidence["correctionFailure"] = None if correction is None else validate_correction(evidence, spec, correction)
+    evidence["correctionAttacks"] = [] if correction is None else run_correction_attacks(evidence, spec, correction)
+    evidence["correctionAttacksPassed"] = sum(item["passed"] for item in evidence["correctionAttacks"])
+    if correction:
+        usable = evidence["correctionFailure"] is None and evidence["attacksPassed"] == len(spec["attacks"]) and evidence["correctionAttacksPassed"] == len(correction["correctionAttacks"])
+        evidence["verdict"] = correction["successVerdict"] if usable else correction["failureVerdict"]
+    else:
+        evidence["verdict"] = "NATIVE_SPLIT_BACKEND_ASSEMBLY_DERIVATION_USABLE" if evidence["baseFailure"] is None and evidence["attacksPassed"] == len(spec["attacks"]) else "NATIVE_SPLIT_BACKEND_ASSEMBLY_DERIVATION_INVALID"
     (output / "results.json").write_text(json.dumps(evidence, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
-    print(f"BFS_B51_D4_RESULT verdict={evidence['verdict']} attacks={evidence['attacksPassed']}/{len(spec['attacks'])} artifacts={len(artifacts)} failure={evidence['baseFailure'] or 'none'}", flush=True)
+    attack_total = len(spec["attacks"]) + (len(correction["correctionAttacks"]) if correction else 0)
+    attack_passed = evidence["attacksPassed"] + evidence["correctionAttacksPassed"]
+    print(f"BFS_B51_D4_RESULT verdict={evidence['verdict']} attacks={attack_passed}/{attack_total} artifacts={len(artifacts)} failure={evidence['correctionFailure'] or evidence['baseFailure'] or 'none'}", flush=True)
     for row in replicate_comparisons:
         print(f"BFS_B51_D4_PAIR {row['pairId']} byteExact={row['byteExact']} sha256={row['leftSha256']}", flush=True)
 
