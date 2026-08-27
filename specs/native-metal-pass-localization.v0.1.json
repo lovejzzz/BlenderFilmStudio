@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "bfs.nativeMetalPassLocalizationSpec.v0.1",
+  "experimentId": "B51-D3",
+  "question": "Are the B51-H1 CPU-versus-Metal Depth and Cryptomatte exactness failures localized to semantic boundaries, and how much of the INTERIOR_CHAIR Combined squared-error energy is spatially associated with the same data-pass disagreement region?",
+  "status": "PREREGISTERED_DERIVATION",
+  "outputRoot": "experiments/native-metal-pass-localization-v0-1",
+  "parents": {
+    "h1Receipt": {"uri": "experiments/native-metal-production-holdout-v0-1/run.receipt.json", "sha256": "42d9dff174378e90e724bae93f710df96e63cb3a0e18eeebd3958dd69d3d69cc"},
+    "h1Result": {"uri": "experiments/native-metal-production-holdout-v0-1/results.json", "sha256": "9bcd9dea0ea071decfde1021195794837e088e57b0ef499a66159332ca86a8a9", "verdict": "NATIVE_METAL_PRODUCTION_HOLDOUT_NOT_SUPPORTED"},
+    "h1Audit": {"uri": "experiments/native-metal-production-holdout-v0-1/audit.correction-v0.2.json", "sha256": "f707b3d11aba424e4932f107561e205e6a7aa015d33d18f2346896b0ebb5edd3", "status": "PASS"}
+  },
+  "sourceRoot": "experiments/native-metal-production-holdout-v0-1",
+  "variants": [
+    {"id": "TABLETOP_WIDE", "cpu": "TW_CPU_R1", "metal": ["TW_METAL_R1", "TW_METAL_R2"]},
+    {"id": "TABLETOP_TIGHT", "cpu": "TT_CPU_R1", "metal": ["TT_METAL_R1", "TT_METAL_R2"]},
+    {"id": "INTERIOR_CHAIR", "cpu": "IC_CPU_R1", "metal": ["IC_METAL_R1", "IC_METAL_R2"]},
+    {"id": "INTERIOR_WINDOW", "cpu": "IW_CPU_R1", "metal": ["IW_METAL_R1", "IW_METAL_R2"]}
+  ],
+  "resolution": [512, 288],
+  "requiredRoster": ["BFS_MASTER.Combined", "BFS_MASTER.Depth", "BFS_MASTER.Normal", "BFS_MASTER.Vector", "BFS_MASTER.CryptoObject00", "BFS_MASTER.CryptoObject01", "BFS_MASTER.CryptoObject02"],
+  "localizedPasses": ["BFS_MASTER.Depth", "BFS_MASTER.CryptoObject00", "BFS_MASTER.CryptoObject01", "BFS_MASTER.CryptoObject02"],
+  "boundaryAlgorithm": {
+    "neighborhood": "4_CONNECTED",
+    "depthDiscontinuity": "For each finite orthogonal pair, abs(a-b) > max(1e-3, 0.01 * min(abs(a), abs(b))); non-finite mismatch is a boundary.",
+    "cryptomatteDiscontinuity": "Any exact float32 component inequality across an orthogonal pair marks both pixels.",
+    "dataDisagreement": "Any exact CPU-versus-Metal component inequality in Depth or any of the three Cryptomatte passes.",
+    "dilationRadiusPixels": 1,
+    "beautyAssociationDilationRadiusPixels": 2,
+    "dataPassBoundaryLocalizedThreshold": 0.95,
+    "beautySquaredErrorAssociationThreshold": 0.90,
+    "beautyHighErrorMaxChannelThreshold": 0.001
+  },
+  "visualization": {
+    "heatmap": "INTERIOR_CHAIR Metal R1 RGB max-absolute error; log10(error + 1e-8) mapped from [-8,0] to black-red, data-disagreement dilation overlaid cyan.",
+    "dataMaps": "For each variant Metal R1: red=Depth disagreement, green=any Cryptomatte disagreement, blue=one-pixel dilated union.",
+    "format": "PNG_UINT8_RGB"
+  },
+  "evidenceGates": {
+    "expectedExrs": 12,
+    "artifactIdentityAgainstH1Receipt": true,
+    "requiredSubimagesPerExr": 7,
+    "allRequiredPassesFinite": true,
+    "pairMatrixExact": true,
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "16777216"
+  },
+  "operationBoundary": {"blenderProcesses": 0, "renders": 0, "sourceExrsModified": 0, "imagesWritten": 5, "jsonFilesWritten": 2, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0, "networkRequired": false},
+  "decisionRule": {
+    "usableDerivation": "All H1 parent and EXR identities match, all 12 EXRs expose the frozen roster and finite values, the pair matrix and algorithms match this spec, five PNG diagnostics and the JSON evidence are identity-bound, every attack passes and independent replay is byte exact.",
+    "classificationNotPromotion": "Boundary-localized classifications are measured derivation outputs. They may motivate a split backend contract but cannot revise H1 or promote Metal without a new preregistered holdout."
+  },
+  "attacks": ["PARENT_IDENTITY", "H1_AUDIT_IDENTITY", "H1_RECEIPT_IDENTITY", "EXR_ARTIFACT_IDENTITY", "PASS_ROSTER", "NON_FINITE", "PAIR_MATRIX", "ALGORITHM_IDENTITY", "DIAGNOSTIC_IMAGE_IDENTITY", "OPERATION_BOUNDARY", "EVIDENCE_SELF_HASH"],
+  "nonClaims": ["production-backend promotion", "perceptual invisibility", "Cryptomatte semantic equivalence", "Depth compositing safety", "cause of CPU-versus-Metal numerical divergence", "long-sequence stability", "cross-machine generalization", "new render evidence"]
+}
