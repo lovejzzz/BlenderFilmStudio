@@ -2509,6 +2509,20 @@ The formal boundary is 55 unique child processes, zero model/network calls and a
 
 Artifacts: `specs/blender-static-vector-floor-three-layer-evidence-holdout.v0.1.json` and `research/2026-08-27-b52-d12-2-static-vector-floor-three-layer-evidence-protocol.md`.
 
+## J-158 · Frozen D12.2 tools pass dual-consumer, Blender and disk admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs/renders: 0/0
+
+All seven D12.2 formal tools were frozen and pushed at `7b431bb5b1a57a61c2c08f645f7d2116c4637648`. The accepted preflight matched each working file byte-for-byte to its Git blob, bound the preregistered spec and Blender/Python/Node/OCIO runtimes, parsed every tool and verified the independent analyzer imports neither consumer.
+
+A synthetic 83×53 static cell containing a `1/65536`-pixel Vector residue passed both real Python and Node CLIs; reconstructed RGBA and valid-mask payloads matched byte-for-byte. A fresh Blender 5.2 process then constructed the registered Cycles scene, three-frame static actions and Combined/Depth/Vector/Object Index pass state with zero render calls.
+
+All 13 preflight tests passed. Disk admission observed 107,466,350,592 bytes available; the frozen 32 MiB projection leaves 107,432,796,160 bytes, 58,613,760 bytes above the unchanged 100 GiB reserve. The formal root remained absent. Preflight file SHA-256: `ddc6008eadb600d5cfa5ecf5e9187f327e51d877010c7c08b8ec6c45e8b70dbe`; internal hash: `973b5f238a6fee8897dcb2b20f1f07597d713492eaa36d79aa34b1cbabb68593`.
+
+Next: commit this immutable admission, then create the formal root exactly once and execute the registered 55 child processes.
+
+Artifact: `experiments/blender-static-vector-floor-three-layer-evidence-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
