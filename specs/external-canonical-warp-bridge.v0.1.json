@@ -1,7 +1,14 @@
 {
   "schemaVersion": "bfs.externalCanonicalWarpBridge.v0.1",
   "experimentId": "B52-D8",
-  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "status": "AMENDED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "preFormalAmendment": {
+    "previousSpecSha256": "6fb141b459e7f5d1b98021c843b28e80f19c36172c7a9466d9bb08cc72c0089f",
+    "reason": "The first committed preregistration omitted only the mechanical formal output path, disk admission constants and machine verdict labels. They are added before any formal tool implementation or output; fixtures, process counts, gates, attacks and scientific decision boundary are unchanged."
+  },
+  "formalOutputRoot": "experiments/external-canonical-warp-bridge-v0-1",
+  "projectedWriteBytes": 16777216,
+  "diskReserveBytes": 107374182400,
   "question": "Can two independently generated canonical float32 Bilinear warp arrays be encoded as Raw RGBA32 EXR, ingested by Blender 5.2, passed through the minimal CPU compositor graph, and decoded with every float32 channel bit unchanged across two fresh Blender processes?",
   "parents": {
     "d7Spec": {
@@ -193,6 +200,8 @@
     "RESULT_SELF_HASH"
   ],
   "decisionRule": {
+    "passVerdict": "EXTERNAL_CANONICAL_WARP_BRIDGE_SUPPORTED",
+    "failVerdict": "EXTERNAL_CANONICAL_WARP_BRIDGE_NOT_SUPPORTED",
     "supported": "All gates and all 24 attacks pass; verdict EXTERNAL_CANONICAL_WARP_BRIDGE_SUPPORTED.",
     "notSupported": "Any gate fails; preserve outputs, report the earliest baseFailure, and use Blender only before the external pixel stage or keep the final composite outside Blender.",
     "nextIfSupported": "Preregister a layer/depth-aware external temporal accumulation experiment using this exact bridge as transport only.",

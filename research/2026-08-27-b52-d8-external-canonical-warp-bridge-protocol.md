@@ -2,6 +2,8 @@
 
 日期：2026-08-27
 
+预正式工具修订：初版提交后、任何正式工具实现或正式输出之前，补入漏写的 formal output path、100 GiB disk reserve、16 MiB projected write 与两个 machine verdict label。fixture、进程数、gate、attack 和科学判定边界均未改变；旧 spec hash 保留在修订字段中。
+
 ## 为什么改变边界
 
 D7 的两个独立 reference 在全部六个 fixture 上逐 byte 一致，Blender 也跨净进程完全复现；但 Blender Bilinear 在四个高频/Repeat 边界用例上违反冻结的 p99/RMSE 分布门，因此不能成为通用 temporal warp consumer。D8 不调宽阈值，也不再要求 Blender 计算 warp。它把像素计算放到 Blender 外部，只问 Blender 能否作为精确的 float32 传输与后续场景管线边界。

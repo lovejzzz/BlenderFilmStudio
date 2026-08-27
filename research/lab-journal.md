@@ -1899,6 +1899,16 @@ The formal output root is absent. Spec SHA-256: `6fb141b459e7f5d1b98021c843b28e8
 
 Artifacts: `specs/external-canonical-warp-bridge.v0.1.json`, `research/2026-08-27-b52-d8-external-canonical-warp-bridge-protocol.md` and `experiments/external-canonical-warp-bridge-development-smoke-v0-1/`.
 
+## J-116 · B52-D8 repairs mechanical preregistration omissions before tool work
+
+Date: 2026-08-27 · Type: PRE-FORMAL-IMPLEMENTATION PROTOCOL AMENDMENT · Formal outputs: 0
+
+Review of the first committed D8 spec found four mechanical omissions needed by the frozen runner: the formal output path, projected write, disk reserve and literal pass/fail verdict labels. No formal D8 tool had been implemented and the formal root remained absent, so the spec was amended before tool work rather than allowing the runner to hide constants in code.
+
+The fixture roster, 24-process matrix, exact gates, 24 attacks, decision boundary and non-claims are unchanged. The amendment binds the previous spec hash `6fb141b459e7f5d1b98021c843b28e80f19c36172c7a9466d9bb08cc72c0089f` and explains the change in-machine. Amended spec SHA-256: `94a58f4e3c36b1828cb7e1bc4d5646cd577fac1afd411685235185590644a6a5`; amended protocol SHA-256: `d9ca793aa32705ee7f5f690611c79973f705329874802b72e58399b3451b2d25`.
+
+Next: commit this amendment separately, then implement formal tools against only the amended identity.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
