@@ -1347,6 +1347,20 @@ Next: B49 must separately scale resolution and cinema features from this selecte
 
 Artifacts: `experiments/codex-worker-quality-cost-holdout-v0-1/`, `specs/codex-worker-quality-cost-holdout.v0.1.json`, `research/2026-08-26-b48-codex-worker-quality-cost-holdout-protocol.md` and `research/2026-08-26-b48-codex-worker-quality-cost-holdout-result.md`.
 
+## J-080 · B49-D1 measures near-linear pixel-cost scaling through 384×216
+
+Date: 2026-08-27 · Type: LIVE DERIVATION · Runtime: three fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+B49-D1 held B48's selected TABLETOP 128-spp raw cell fixed and changed only resolution: 128×72, 256×144 and 384×216, or 1×/4×/9× pixels. The new 128×72 Combined float32 hash exactly reproduced B48's selected holdout artifact.
+
+Render time was 9.816, 38.181 and 86.434 seconds. Relative to pixels, the 4× and 9× time ratios were 3.890× and 8.806×, yielding effective exponents 0.980 and 0.990. EXR bytes scaled 3.546× and 7.693×. Self-reported peak RSS moved only from 504,588 to 526,068 KiB, so this simple scene/range is compute-dominated rather than memory-dominated.
+
+Fresh-container wall time scaled only 2.452× and 4.921× because roughly 9–10 seconds of Blender/scene startup is amortized. The analyzer replay was byte-exact and no container remained.
+
+This does not measure 2K/4K. Next: freeze an unseen 512×288 (16× pixels) validation on both scenes and a prediction interval before execution. Motion blur and DOF remain separate target-changing interventions.
+
+Artifacts: `experiments/codex-worker-resolution-scaling-derivation-v0-1/`, `research/2026-08-26-b49-d1-resolution-scaling-derivation-protocol.md` and `research/2026-08-27-b49-d1-resolution-scaling-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
