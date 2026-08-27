@@ -2875,6 +2875,18 @@ Disk admission measured 107,490,267,136 available bytes; after the frozen 64 MiB
 
 Artifact: `experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-189 · D12.8-C1 rejects motion generalization; C2 freezes audit-state semantics
+
+Date: 2026-08-27 · Type: FORMAL NEGATIVE RESULT + AUDIT-ONLY PREREGISTRATION · Blender renders: 16
+
+The single formal matrix completed 72 production children, one analyzer and one audit. The immutable result is `PROJECTIVE_MOTION_DISOCCLUSION_ADAPTIVE_GATE_NOT_SUPPORTED`, 9/14 checks, with 40/40 analyzer mutations. Structural rejection, fallback, risk conservatism, static control, registered stress and comparator exclusion passed. The unchanged D12.7 risk threshold retained only 16.98%, 0%, and 13.17% of radius-2 history on the three moving fixtures, falsifying production coverage.
+
+Python and Node differed only in `risk.rgb64`: 46/88/16 scalars per moving fixture and repeat, at no more than `4.336808689942018e-19`; all eight decision/reconstruction payloads, both repeats and every adaptive decision agreed. Exact cross-language identity therefore remains false. `VECTOR_DEPTH_ORACLE` also remains false; the frozen analyzer included expected depth-rejected pixels in its aggregate depth maximum, and no post-hoc correction is allowed.
+
+The original audit reproduced the evidence but failed 9/10 because it required the already-failed scientific dual-payload gate to pass. C2 is preregistered before its tool exists. One new read-only Python process may verify that the raw divergence exactly matches the negative result, while preserving every formal byte, false check, verdict and the absence of an original receipt.
+
+Artifacts: `experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/`, `specs/blender-projective-motion-disocclusion-adaptive-risk-audit-c2.v0.1.json`, and `research/2026-08-27-b52-d12-8-formal-negative-and-c2-audit-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

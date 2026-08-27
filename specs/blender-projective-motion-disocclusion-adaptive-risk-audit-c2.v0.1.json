@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "bfs.blenderProjectiveMotionDisocclusionAdaptiveRiskAuditCorrection.v0.1",
+  "experimentId": "B52-D12.8-AUDIT-C2",
+  "title": "Audit-only state replay for the immutable negative D12.8-C1 result",
+  "status": "PREREGISTERED_AFTER_IMMUTABLE_FORMAL_FAILURE_BEFORE_CORRECTION_TOOL",
+  "question": "Can one new read-only Python audit process verify that the immutable D12.8-C1 result faithfully reports its observed Python/Node risk-payload divergence and rejected verdict, without requiring the failed scientific identity gate itself to pass?",
+  "scope": "audit semantics only; no Blender, adapter, consumer, envelope, analyzer, source render, measurement or scientific-decision rerun",
+  "parents": {
+    "d12_8C1Spec": {
+      "uri": "specs/blender-projective-motion-disocclusion-adaptive-risk-holdout.v0.1.json",
+      "sha256": "d7e7c0ee0bd7f512766188eabda9fa0dccb098a0729b26487aa38bee97d6aea6",
+      "experimentId": "B52-D12.8-C1"
+    },
+    "preflight": {
+      "uri": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-preflight-v0-1/frozen-tool-preflight.json",
+      "sha256": "1850366b093bd28f635ea63d27db9a06abf98238de5fe4cb86285a7361c1f47d",
+      "preflightHash": "1e0c99b14221a362ebaf2e6f6ce96ad3215d896db7fd6c6139093551cd532289",
+      "toolFreezeCommit": "462937751d6375784ae63968e6614ccf85f53215"
+    },
+    "formalRootMarker": {
+      "uri": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/.formal-root-created.json",
+      "sha256": "09bb3bab67d8154e518a7bb127ce5f80c9301d602b39a19c5f9a56448c67aca5"
+    },
+    "execution": {
+      "uri": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/execution.json",
+      "sha256": "6d0cd577443d67c31582c2b05fe64ab4a970647e0921a4b0bd2398a7a99c7c0a",
+      "executionHash": "33d87901158785023e23ece14a80aece5b3ff2404b3b49b053c73564e6e34b6f"
+    },
+    "result": {
+      "uri": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/results.json",
+      "sha256": "0a621b87b3565b3106b11ab1c9cef705f16ab3701c02d9deef5e730bee2992f1",
+      "evidenceHash": "8e0d17403cac74cdd51dcbb3d78a2e4a6864ee8fdd53b3c6d567179ab77bf76e",
+      "verdict": "PROJECTIVE_MOTION_DISOCCLUSION_ADAPTIVE_GATE_NOT_SUPPORTED",
+      "checkPassed": 9,
+      "checkTotal": 14,
+      "mutationAttackPassed": 40,
+      "mutationAttackTotal": 40,
+      "analyzerPid": 30616
+    },
+    "failedAudit": {
+      "uri": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/audit.json",
+      "sha256": "015353cef9dc8a3005ff7df432bd14c4e3ca77e0389e4d025c58ef8df30d01da",
+      "auditHash": "99e6d0f1ba04d44a45d266decdbcb550f775c7d4c004055720a46c22aef1c7fc",
+      "passed": false,
+      "checkPassed": 9,
+      "checkTotal": 10,
+      "onlyFalseCheck": "DUAL_PAYLOAD_IDENTITY",
+      "auditPid": 30618
+    },
+    "failure": {
+      "uri": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/run.failure.json",
+      "sha256": "c28efa01f417071011fd4bf61df041ceaf2aa884b66a340d737c64e23dc5d27f",
+      "failureHash": "ab60d300276aab2ddc9bb7dc942623414973f43d54b45ed16229774f0677d66c"
+    },
+    "originalAuditTool": {
+      "uri": "scripts/audit-b52-d12-8-motion-disocclusion.py",
+      "sha256": "338bcff140ddd9997378e66473bea6c422b7a2d43690659608dab208761d1b4f",
+      "gitCommit": "462937751d6375784ae63968e6614ccf85f53215"
+    }
+  },
+  "diagnosis": {
+    "failedInfrastructureCheck": "DUAL_PAYLOAD_IDENTITY",
+    "cause": "The original audit required every Python/Node payload to be byte-identical even when the immutable analyzer correctly reported SOURCE_ADAPTER_CONSUMER_IDENTITY=false and DUAL_AND_INDEPENDENT_REPLAY=false from that same raw divergence. An audit of a negative experiment must verify the failed state, not require the scientific gate to pass.",
+    "observedDifferenceClass": "Only risk.rgb64 differs in the six moving cells; all eight decision and reconstruction payloads are byte-identical in every cell, the static risk payload is byte-identical, and no adaptive accept/reject decision differs.",
+    "analyzerDomainLimitation": "VECTOR_DEPTH_ORACLE remains false. The immutable analyzer included expected INVALID_DEPTH disocclusion samples in depthRelativeMaximum. C2 records this as a limitation and does not change the metric, check or verdict."
+  },
+  "expectedNegativeState": {
+    "falseResultChecks": [
+      "SOURCE_ADAPTER_CONSUMER_IDENTITY",
+      "DUAL_AND_INDEPENDENT_REPLAY",
+      "VECTOR_DEPTH_ORACLE",
+      "ADAPTIVE_QUALITY",
+      "COVERAGE"
+    ],
+    "trueResultChecks": [
+      "PARENT_IDENTITY",
+      "PREFLIGHT_TOOL_IDENTITY",
+      "PROCESS_TOTALITY_BEFORE_AUDIT",
+      "STRUCTURAL_REJECTION",
+      "RISK_CONSERVATISM",
+      "STATIC_CONTROL",
+      "STRESS_EXPOSURE",
+      "COMPARATOR_REPORT_ONLY",
+      "MODEL_NETWORK_ZERO"
+    ],
+    "cells": [
+      {
+        "cell": "RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R1",
+        "mismatchedPayloads": ["risk.rgb64"],
+        "riskScalarDifferenceCount": 46,
+        "riskAbsoluteDifferenceMaximum": 2.168404344971009e-19,
+        "riskDifferenceRosterHash": "e3a4bcdcee016fd8093cb4ae770b67c619dc00a935f391a902067d3e1a7a220c",
+        "derivedDecisionDifferenceCount": 0
+      },
+      {
+        "cell": "RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R2",
+        "mismatchedPayloads": ["risk.rgb64"],
+        "riskScalarDifferenceCount": 46,
+        "riskAbsoluteDifferenceMaximum": 2.168404344971009e-19,
+        "riskDifferenceRosterHash": "e3a4bcdcee016fd8093cb4ae770b67c619dc00a935f391a902067d3e1a7a220c",
+        "derivedDecisionDifferenceCount": 0
+      },
+      {
+        "cell": "CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101/R1",
+        "mismatchedPayloads": ["risk.rgb64"],
+        "riskScalarDifferenceCount": 88,
+        "riskAbsoluteDifferenceMaximum": 4.336808689942018e-19,
+        "riskDifferenceRosterHash": "b03de21da06f64cf0bc1f7a7a3f180cf9536344e2cea9bcec6a165baf8b51079",
+        "derivedDecisionDifferenceCount": 0
+      },
+      {
+        "cell": "CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101/R2",
+        "mismatchedPayloads": ["risk.rgb64"],
+        "riskScalarDifferenceCount": 88,
+        "riskAbsoluteDifferenceMaximum": 4.336808689942018e-19,
+        "riskDifferenceRosterHash": "b03de21da06f64cf0bc1f7a7a3f180cf9536344e2cea9bcec6a165baf8b51079",
+        "derivedDecisionDifferenceCount": 0
+      },
+      {
+        "cell": "SAME_INDEX_DEPTH_REVEAL_173X107/R1",
+        "mismatchedPayloads": ["risk.rgb64"],
+        "riskScalarDifferenceCount": 16,
+        "riskAbsoluteDifferenceMaximum": 2.168404344971009e-19,
+        "riskDifferenceRosterHash": "df3cd6c359aa4acbb6668ba2909a428b290e7af2fc5f1d03a8990372222cb1ee",
+        "derivedDecisionDifferenceCount": 0
+      },
+      {
+        "cell": "SAME_INDEX_DEPTH_REVEAL_173X107/R2",
+        "mismatchedPayloads": ["risk.rgb64"],
+        "riskScalarDifferenceCount": 16,
+        "riskAbsoluteDifferenceMaximum": 2.168404344971009e-19,
+        "riskDifferenceRosterHash": "df3cd6c359aa4acbb6668ba2909a428b290e7af2fc5f1d03a8990372222cb1ee",
+        "derivedDecisionDifferenceCount": 0
+      },
+      {
+        "cell": "MULTI_OWNER_STATIC_CONTROL_127X83/R1",
+        "mismatchedPayloads": [],
+        "riskScalarDifferenceCount": 0,
+        "riskAbsoluteDifferenceMaximum": 0.0,
+        "riskDifferenceRosterHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "derivedDecisionDifferenceCount": 0
+      },
+      {
+        "cell": "MULTI_OWNER_STATIC_CONTROL_127X83/R2",
+        "mismatchedPayloads": [],
+        "riskScalarDifferenceCount": 0,
+        "riskAbsoluteDifferenceMaximum": 0.0,
+        "riskDifferenceRosterHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "derivedDecisionDifferenceCount": 0
+      }
+    ],
+    "repeatSummaryIdentityRequired": true,
+    "nonRiskPayloadIdentityChecks": 64,
+    "riskPayloadIdentityChecks": 8,
+    "riskPayloadIdentityFailures": 6,
+    "totalRiskScalarDifferences": 300,
+    "totalDerivedDecisionDifferences": 0
+  },
+  "allowedCorrection": {
+    "newAuditTool": "scripts/audit-b52-d12-8-motion-disocclusion-c2.py",
+    "semanticDiff": [
+      "replace the original audit requirement that all dual payloads pass with an exact state-replay requirement that the raw divergence matches the immutable analyzer's two false identity/replay checks",
+      "recompute the complete float64 risk difference roster, count, maximum absolute difference and threshold-derived decision differences from immutable raw bytes",
+      "verify all other original audit checks remain true and the original audit has exactly one false check",
+      "bind the original 74 unique process identities and add only the current C2 audit process",
+      "write only audit.c2.json"
+    ],
+    "forbidden": [
+      "run Blender or render any frame",
+      "run an adapter, consumer, envelope encoder or analyzer",
+      "change or overwrite any immutable source, array, report, execution, result, audit or failure artifact",
+      "change any scientific metric, threshold, check value, verdict, mutation roster or non-claim",
+      "reinterpret VECTOR_DEPTH_ORACLE as passing",
+      "create a replacement original-run receipt"
+    ]
+  },
+  "runtime": {
+    "pythonExecutable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+    "pythonSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35"
+  },
+  "outputs": {
+    "audit": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/audit.c2.json"
+  },
+  "gates": {
+    "immutableParentIdentity": true,
+    "original74PidState": true,
+    "resultNegativeStateReplay": true,
+    "rawDualDifferenceStateReplay": true,
+    "originalAuditFailureStateReplay": true,
+    "mutationAttacksPassed": 40,
+    "mutationAttacksTotal": 40,
+    "expectedVerdict": "PROJECTIVE_MOTION_DISOCCLUSION_ADAPTIVE_GATE_NOT_SUPPORTED",
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 1048576
+  },
+  "operations": {
+    "newAuditProcesses": 1,
+    "newBlenderProcesses": 0,
+    "newBlenderRenders": 0,
+    "newAdapterProcesses": 0,
+    "newConsumerProcesses": 0,
+    "newEnvelopeProcesses": 0,
+    "newAnalyzerProcesses": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "nonClaims": [
+    "A passing C2 audit validates the immutable negative result; it does not make the adaptive gate supported or bounded.",
+    "C2 does not waive Python/Node raw float64 identity. The divergence remains a failed scientific check and a future serialization-design defect.",
+    "C2 does not repair the analyzer's depth-domain limitation or change VECTOR_DEPTH_ORACLE=false.",
+    "C2 does not create the original runner receipt that was correctly withheld after the failed original audit.",
+    "C2 does not validate motion-aware risk coverage, deforming geometry, cinematic quality or production rendering."
+  ]
+}
