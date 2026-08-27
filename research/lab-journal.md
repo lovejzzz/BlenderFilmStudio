@@ -2733,6 +2733,14 @@ The D12.6 preflight passed 10/10 checks and 259 synthetic risk-bound cases befor
 
 Artifacts: `experiments/blender-static-interior-risk-localization-preflight-v0-1/preflight.json` and `research/2026-08-27-b52-d12-6-interior-risk-localization-preflight.md`.
 
+## J-175 · First D12.6 formal run is retained as invalid
+
+Date: 2026-08-27 · Type: INVALID FORMAL RUN · Blender renders: 0
+
+The frozen localizer exited before writing a result because an edge pixel entered the bilinear tap reader before its coordinates were rejected, producing an x=109 out-of-bounds access in the 109-pixel-wide fixture. No D12.6 measurement was emitted or inspected. The root is retained permanently; a correction requires a new experiment identity and fresh preflight/formal roots.
+
+Artifacts: `experiments/blender-static-interior-risk-localization-v0-1/failure.json` and `research/2026-08-27-b52-d12-6-first-formal-run-invalid.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
