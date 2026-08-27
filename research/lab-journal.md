@@ -2567,6 +2567,22 @@ Next: commit this immutable admission, then run the single-use 55-process real-B
 
 Artifact: `experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-162 · D12.3 passes at owner interiors, with one exact threshold hit
+
+Date: 2026-08-27 · Type: COMPLETE REAL-BLENDER FRESH HOLDOUT · Runtime: 55 unique child PIDs
+
+D12.3 completed twelve real Blender 5.2 sources, six adapters, twelve owner-aware consumers, twenty-four typed-envelope encoders and one independent analyzer. All 55 child PIDs were unique, all processes exited zero and all 27 attacks passed. Python/Node reconstruction, interior and boundary payloads matched 6/6; twelve documents matched under both typed-envelope implementations; repeats were exact.
+
+The formal verdict is `BLENDER_STATIC_NONPLANAR_MULTIOWNER_INTERIOR_WITHIN_REGISTERED_TOLERANCE`; exact zero is again falsified. Curved-pair, occluding-plane and thin-depth-stack fixtures retained 2,598, 7,265 and 2,437 owner-interior pixels respectively while reporting 968, 1,411 and 829 boundary pixels. Every registered owner pixel entered exactly one mask and there was zero overlap.
+
+The occluding-plane interior maximum RGB error was exactly `1.9073486328125e-6`, the frozen `1/524288` upper limit. The `≤` gate therefore passes with zero headroom. Boundary RGB maxima were `7.33137e-6`, `5.24521e-6` and `9.89437e-6`; the largest is approximately 5.19 times the interior gate. Boundary magnitudes did not affect the preregistered verdict and do not authorize boundary reuse.
+
+This is a narrow support result with an exposed fragility, not a reason to widen the threshold. Next: localize the exact-threshold pixels by owner, curvature/silhouette distance, raw Vector quantum and bilinear weights before any fresh generalization holdout.
+
+Result file SHA-256: `1f41d437539e28e62446215a7b1ad16e5ffa56ea9e9eaaaecf07d64999f2988d`; receipt file SHA-256: `080669fb36c286186ead1ad28e23f351d05d2f17167901bfc72339f937af84d3`.
+
+Artifacts: `experiments/blender-static-nonplanar-multiowner-holdout-v0-1/` and `research/2026-08-27-b52-d12-3-static-nonplanar-multiowner-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
