@@ -2263,6 +2263,22 @@ Next: freeze the exact thirteen tools in Git, run the zero-formal-output identit
 
 Artifacts: `blender/render_b52_d11_1_textured_source.py`, `scripts/quantize-b52-d11-1-motion.py`, `scripts/quantize-b52-d11-1-motion.mjs`, `scripts/analyze-b52-d11-1-nearest-integer-recovery.py` and the remaining paths frozen by `formalToolPaths` in the D11.1 spec.
 
+## J-141 · D11.1 frozen preflight passes after a retained disk rejection
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT + AUTHORIZED REGENERABLE-CACHE CLEANUP · Formal outputs: 0
+
+The exact thirteen D11.1 tools were frozen at commit `8d94d677b9c8c266ccdf4532f3e74dd84f91fc00`. The first post-freeze preflight matched all thirteen Git blobs, sixteen parent artifacts, Blender, bundled Python, Node and OCIO; freshness, ten contract tests, analyzer import independence and a real Blender 5.2 API/graph probe also passed. The probe created the exact `BFS_D111_EXTERNAL_SOURCE.Image→BFS_D111_GROUP_OUTPUT.Socket_0` link with zero render calls.
+
+That first receipt remained `REJECTED` only at disk admission: 107,323,805,696 bytes were available, and the 72 MiB projection would leave 107,248,308,224 bytes—below the frozen 100 GiB reserve. It is retained as `frozen-tool-preflight.rejected-disk.json`; no formal root or measurement existed.
+
+Under the user's prior cache-cleanup authorization, only `/Users/tianxing/.npm/_cacache` was removed: approximately 181 MiB of reconstructible package cache, recoverable by npm refetch. No repository path, experimental evidence or personal document was deleted. The unchanged preflight then observed 107,460,284,416 bytes available and projected 107,384,786,944 after the experiment, 10,604,544 bytes above the same reserve. Status became `ACCEPTED`; all formal operation counts remained zero and the formal root stayed absent.
+
+Accepted preflight file SHA-256: `6a61e41a3a328072f7eab922d2a934a4ae4fe535f51185f198a7416e09001093`. Rejected preflight file SHA-256: `3b865363b37809695a09e333a4aece2a66804e408414db9cfba06e77d43b08de`.
+
+Next: commit both immutable preflight receipts, then run the admitted 81-process formal matrix exactly once. Do not rerun D11.1 after its formal root exists.
+
+Artifacts: `experiments/blender-nearest-integer-temporal-recovery-holdout-preflight-v0-1/`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

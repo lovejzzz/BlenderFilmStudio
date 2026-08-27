@@ -1,0 +1,355 @@
+{
+  "allFrozenToolsMatchGit": true,
+  "analyzerForbiddenImportsAbsent": true,
+  "blenderApiProbe": {
+    "argv": [
+      "/Applications/Blender.app/Contents/MacOS/Blender",
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--python-exit-code",
+      "1",
+      "--python-expr",
+      "import bpy,json,os; from pathlib import Path; bpy.ops.wm.read_factory_settings(use_empty=True); s=bpy.context.scene; l=bpy.context.view_layer; t=bpy.data.node_groups.new('BFS_D111_PREFLIGHT_TREE','CompositorNodeTree'); s.compositing_node_group=t; n=t.nodes.new('CompositorNodeImage'); n.name='BFS_D111_EXTERNAL_SOURCE'; t.interface.new_socket(name='Image',in_out='OUTPUT',socket_type='NodeSocketColor'); g=t.nodes.new('NodeGroupOutput'); g.name='BFS_D111_GROUP_OUTPUT'; t.links.new(n.outputs['Image'],g.inputs['Image']); Path('/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-d11-1-preflight-ngkfl7zf/blender-api.json').write_text(json.dumps({'pid':os.getpid(),'passes':{'combined':hasattr(l,'use_pass_combined'),'depth':hasattr(l,'use_pass_z'),'vector':hasattr(l,'use_pass_vector'),'objectIndex':hasattr(l,'use_pass_object_index')},'graph':[f'{x.from_node.name}.{x.from_socket.identifier}->{x.to_node.name}.{x.to_socket.identifier}' for x in t.links],'renderCalls':0}))"
+    ],
+    "exitCode": 0,
+    "passed": true,
+    "report": {
+      "graph": [
+        "BFS_D111_EXTERNAL_SOURCE.Image->BFS_D111_GROUP_OUTPUT.Socket_0"
+      ],
+      "passes": {
+        "combined": true,
+        "depth": true,
+        "objectIndex": true,
+        "vector": true
+      },
+      "pid": 99394,
+      "renderCalls": 0
+    },
+    "stderr": "",
+    "stdout": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.061  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.061  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.061  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.061  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.061  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:00.255  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.255  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.255  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.255  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.255  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+  },
+  "classification": "ZERO_FORMAL_OUTPUT_FROZEN_TOOL_PREFLIGHT",
+  "contractTests": {
+    "argv": [
+      "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "-m",
+      "unittest",
+      "tests/test_b52_d11_1_nearest_integer_recovery_contract.py",
+      "-v"
+    ],
+    "exitCode": 0,
+    "passed": true,
+    "stderr": "test_accumulator_retains_toward_zero_identity (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_accumulator_retains_toward_zero_identity) ... ok\ntest_analyzer_independence_and_frozen_totals (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_analyzer_independence_and_frozen_totals) ... ok\ntest_atomic_rejection_produces_no_output_or_report (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_atomic_rejection_produces_no_output_or_report) ... ok\ntest_half_integer_adjacent_and_nonfinite_are_rejected (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_half_integer_adjacent_and_nonfinite_are_rejected) ... ok\ntest_nearest_rule_detects_trunc_floor_and_ceil_substitutions (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_nearest_rule_detects_trunc_floor_and_ceil_substitutions) ... ok\ntest_python_node_cli_byte_identity_and_report_binding (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_python_node_cli_byte_identity_and_report_binding) ... ok\ntest_radius_is_inclusive_and_just_outside_rejects (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_radius_is_inclusive_and_just_outside_rejects) ... ok\ntest_reason_priority_and_bridge_contract (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_reason_priority_and_bridge_contract) ... ok\ntest_signed_zero_is_canonical_and_quantization_is_idempotent (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_signed_zero_is_canonical_and_quantization_is_idempotent) ... ok\ntest_spec_identity_and_formal_boundary (tests.test_b52_d11_1_nearest_integer_recovery_contract.B52D111ContractTests.test_spec_identity_and_formal_boundary) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.289s\n\nOK\n",
+    "stdout": ""
+  },
+  "diskAdmission": {
+    "availableBytes": 107460284416,
+    "projectedAvailableAfterBytes": 107384786944,
+    "projectedWriteBytes": 75497472,
+    "reserveBytes": 107374182400,
+    "status": "ACCEPTED"
+  },
+  "experimentId": "B52-D11.1",
+  "formalOperationCounts": {
+    "blenderProcesses": 0,
+    "childProcesses": 0,
+    "cyclesRayRenders": 0,
+    "formalMeasurements": 0,
+    "renderCalls": 0
+  },
+  "formalRoot": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1",
+  "formalRootAbsent": true,
+  "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+  "freshnessMatched": true,
+  "nonClaims": [
+    "Preflight creates no D11.1 formal output.",
+    "The Blender API probe performs zero renders.",
+    "Development smoke artifacts cannot satisfy formal gates."
+  ],
+  "parents": {
+    "d10_1Audit": {
+      "actualBytes": 14544,
+      "actualSha256": "f6ef6b2236aa8501ef533c88f5f1e9604f71b259d4beffc90825b14afdb52328",
+      "expectedBytes": null,
+      "expectedSha256": "f6ef6b2236aa8501ef533c88f5f1e9604f71b259d4beffc90825b14afdb52328",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/audit.json"
+    },
+    "d10_1Receipt": {
+      "actualBytes": 36680,
+      "actualSha256": "703f0d37c7b5cda800a57a70221596ba68ceb61af99ae46664da378ae68b0128",
+      "expectedBytes": null,
+      "expectedSha256": "703f0d37c7b5cda800a57a70221596ba68ceb61af99ae46664da378ae68b0128",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/run.receipt.json"
+    },
+    "d10_1Result": {
+      "actualBytes": 125427,
+      "actualSha256": "c0f94547b432159772029f67abe70da12ff0f236707d7f92896c75ee664ebc60",
+      "expectedBytes": null,
+      "expectedSha256": "c0f94547b432159772029f67abe70da12ff0f236707d7f92896c75ee664ebc60",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/results.json"
+    },
+    "d10_1ResultNote": {
+      "actualBytes": 5584,
+      "actualSha256": "0a95b0a896d479fec9cb3c54fa4857bb4aa2f3afca6076499a9b892253bdb1ab",
+      "expectedBytes": null,
+      "expectedSha256": "0a95b0a896d479fec9cb3c54fa4857bb4aa2f3afca6076499a9b892253bdb1ab",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/research/2026-08-27-b52-d10-1-blender-multipart-temporal-adapter-f32-holdout-result.md"
+    },
+    "d10_1Spec": {
+      "actualBytes": 16955,
+      "actualSha256": "11686c5e796c7bc1b4e45cf137c3d98347bc65bfec428f9d19545b55430f584b",
+      "expectedBytes": null,
+      "expectedSha256": "11686c5e796c7bc1b4e45cf137c3d98347bc65bfec428f9d19545b55430f584b",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-multipart-temporal-adapter-f32-holdout.v0.1.json"
+    },
+    "d11Audit": {
+      "actualBytes": 16223,
+      "actualSha256": "4bd0e2081b831c75e5572c48c3b281e4a440e8d8f108fc50e1d774a878df6c2b",
+      "expectedBytes": null,
+      "expectedSha256": "4bd0e2081b831c75e5572c48c3b281e4a440e8d8f108fc50e1d774a878df6c2b",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-real-textured-temporal-end-to-end-holdout-v0-1/audit.json"
+    },
+    "d11Receipt": {
+      "actualBytes": 1237754,
+      "actualSha256": "dd75ba0e2f4a4b0ee950f9e12e84dc3f12265fe743a89370fb4f15f2643fc689",
+      "expectedBytes": null,
+      "expectedSha256": "dd75ba0e2f4a4b0ee950f9e12e84dc3f12265fe743a89370fb4f15f2643fc689",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-real-textured-temporal-end-to-end-holdout-v0-1/run.receipt.json"
+    },
+    "d11Result": {
+      "actualBytes": 57966,
+      "actualSha256": "490c569c4d12fe82ef49ff3d82d657512dbe297c69fd7f8f34df9b7daeeb31c8",
+      "expectedBytes": null,
+      "expectedSha256": "490c569c4d12fe82ef49ff3d82d657512dbe297c69fd7f8f34df9b7daeeb31c8",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-real-textured-temporal-end-to-end-holdout-v0-1/results.json"
+    },
+    "d11ResultNote": {
+      "actualBytes": 3789,
+      "actualSha256": "dedd35671f0d0caa26ac4baaa57ca8b5f2b4c68c9edec5acfd97221ed257a1ad",
+      "expectedBytes": null,
+      "expectedSha256": "dedd35671f0d0caa26ac4baaa57ca8b5f2b4c68c9edec5acfd97221ed257a1ad",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/research/2026-08-27-b52-d11-blender-real-textured-temporal-end-to-end-result.md"
+    },
+    "d11Spec": {
+      "actualBytes": 21241,
+      "actualSha256": "f1505c42426e8e286ee1584de3df12fb33b7db57518d6d91e1fd93aa3bed5a5f",
+      "expectedBytes": null,
+      "expectedSha256": "f1505c42426e8e286ee1584de3df12fb33b7db57518d6d91e1fd93aa3bed5a5f",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-real-textured-temporal-end-to-end-holdout.v0.1.json"
+    },
+    "d8Audit": {
+      "actualBytes": 11672,
+      "actualSha256": "8ded86e46e0fdb6b99b55c304317d09ea6db4b4c8b9bbd553bd578ea93bee8fd",
+      "expectedBytes": null,
+      "expectedSha256": "8ded86e46e0fdb6b99b55c304317d09ea6db4b4c8b9bbd553bd578ea93bee8fd",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/external-canonical-warp-bridge-v0-1/audit.json"
+    },
+    "d8Result": {
+      "actualBytes": 21368,
+      "actualSha256": "153340e4f7d76bb9e530a26347e6582974850d7fdcb423b1b7799aaa7ad3a1fb",
+      "expectedBytes": null,
+      "expectedSha256": "153340e4f7d76bb9e530a26347e6582974850d7fdcb423b1b7799aaa7ad3a1fb",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/external-canonical-warp-bridge-v0-1/results.json"
+    },
+    "d8Spec": {
+      "actualBytes": 9369,
+      "actualSha256": "94a58f4e3c36b1828cb7e1bc4d5646cd577fac1afd411685235185590644a6a5",
+      "expectedBytes": null,
+      "expectedSha256": "94a58f4e3c36b1828cb7e1bc4d5646cd577fac1afd411685235185590644a6a5",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/external-canonical-warp-bridge.v0.1.json"
+    },
+    "d9_1Audit": {
+      "actualBytes": 23733,
+      "actualSha256": "6213aebcdb3364a60f2d256b0ba7c9ee66344b281a9e528f9b39feb594ebb83b",
+      "expectedBytes": null,
+      "expectedSha256": "6213aebcdb3364a60f2d256b0ba7c9ee66344b281a9e528f9b39feb594ebb83b",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/layer-depth-temporal-accumulation-holdout-v0-1/audit.json"
+    },
+    "d9_1Result": {
+      "actualBytes": 43197,
+      "actualSha256": "a8e41983a5ec02df8977c44d76413b11cb0f63f2249941d5663875d30c28e7f1",
+      "expectedBytes": null,
+      "expectedSha256": "a8e41983a5ec02df8977c44d76413b11cb0f63f2249941d5663875d30c28e7f1",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/layer-depth-temporal-accumulation-holdout-v0-1/results.json"
+    },
+    "d9_1Spec": {
+      "actualBytes": 9901,
+      "actualSha256": "669077423e0101dd5600576d295c0b7a62189a30b18c1dd6ab18a3b5257cd28f",
+      "expectedBytes": null,
+      "expectedSha256": "669077423e0101dd5600576d295c0b7a62189a30b18c1dd6ab18a3b5257cd28f",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/layer-depth-temporal-accumulation-holdout.v0.1.json"
+    }
+  },
+  "parentsMatch": true,
+  "preflightHash": "b78cbed8f2b56c755afde276ce0299529c856360a0a27d07b65e7aa0eb3d27c0",
+  "preregistration": {
+    "commit": "08543cf17371966c9bb4963f8b78158906fe1f2f",
+    "specSha256": "c4cb343672f53660d7c4ab69ccd489e00bb211e4aa1f489429f7a626ee48c42a",
+    "specUri": "specs/blender-nearest-integer-temporal-recovery-holdout.v0.1.json"
+  },
+  "runtimeMatch": true,
+  "runtimes": {
+    "blender": {
+      "actualBytes": 183237520,
+      "actualSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "expectedBytes": 183237520,
+      "expectedSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "match": true,
+      "uri": "/Applications/Blender.app/Contents/MacOS/Blender"
+    },
+    "node": {
+      "actualBytes": 50320,
+      "actualSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "expectedBytes": 50320,
+      "expectedSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "match": true,
+      "uri": "/opt/homebrew/Cellar/node/26.5.0/bin/node"
+    },
+    "ocio": {
+      "actualBytes": 32807,
+      "actualSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "expectedBytes": null,
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true,
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    },
+    "python": {
+      "actualBytes": 5543888,
+      "actualSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "expectedBytes": 5543888,
+      "expectedSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "match": true,
+      "uri": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13"
+    }
+  },
+  "schemaVersion": "bfs.blenderNearestIntegerTemporalRecoveryFrozenToolPreflight.v0.1",
+  "spec": {
+    "sha256": "c4cb343672f53660d7c4ab69ccd489e00bb211e4aa1f489429f7a626ee48c42a",
+    "uri": "specs/blender-nearest-integer-temporal-recovery-holdout.v0.1.json"
+  },
+  "status": "ACCEPTED",
+  "tools": {
+    "blender/render_b52_d11_1_resolved_passthrough.py": {
+      "bytes": 6282,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "bff29b9d14a877216185f0d3d17a3786b8e1f25497c46ac2af03ca046dabf2ed",
+      "match": true,
+      "sha256": "bff29b9d14a877216185f0d3d17a3786b8e1f25497c46ac2af03ca046dabf2ed",
+      "uri": "blender/render_b52_d11_1_resolved_passthrough.py"
+    },
+    "blender/render_b52_d11_1_textured_source.py": {
+      "bytes": 14960,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "64656faecda11b7a02fbd0b1c593accdc28011c44484b273667f5b79672b5383",
+      "match": true,
+      "sha256": "64656faecda11b7a02fbd0b1c593accdc28011c44484b273667f5b79672b5383",
+      "uri": "blender/render_b52_d11_1_textured_source.py"
+    },
+    "scripts/accumulate-b52-d11-1-temporal.mjs": {
+      "bytes": 8764,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "9efda9ae7a61cb2997686b7be3d552fca094f4c3de4b3882b0928bd28fa76b1e",
+      "match": true,
+      "sha256": "9efda9ae7a61cb2997686b7be3d552fca094f4c3de4b3882b0928bd28fa76b1e",
+      "uri": "scripts/accumulate-b52-d11-1-temporal.mjs"
+    },
+    "scripts/accumulate-b52-d11-1-temporal.py": {
+      "bytes": 8944,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "36b53190c14704b7e568031f2c32481f38c6434bd954b5daf7153e2ed674fa74",
+      "match": true,
+      "sha256": "36b53190c14704b7e568031f2c32481f38c6434bd954b5daf7153e2ed674fa74",
+      "uri": "scripts/accumulate-b52-d11-1-temporal.py"
+    },
+    "scripts/adapt-b52-d11-1-multipart.py": {
+      "bytes": 8056,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "2ea86e1776769f366f8aa4f6fc7b26c8b3737555160b258c385651ebf79856fb",
+      "match": true,
+      "sha256": "2ea86e1776769f366f8aa4f6fc7b26c8b3737555160b258c385651ebf79856fb",
+      "uri": "scripts/adapt-b52-d11-1-multipart.py"
+    },
+    "scripts/analyze-b52-d11-1-nearest-integer-recovery.py": {
+      "bytes": 40408,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "76b8c20e97933ee7596683782fbfdb29e5b5f144530759f9b749fa3254cb5ec5",
+      "match": true,
+      "sha256": "76b8c20e97933ee7596683782fbfdb29e5b5f144530759f9b749fa3254cb5ec5",
+      "uri": "scripts/analyze-b52-d11-1-nearest-integer-recovery.py"
+    },
+    "scripts/audit-b52-d11-1-nearest-integer-recovery.py": {
+      "bytes": 19750,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "feb1214b00b16e833db2e65f38308d4c82b76f8952aadf62ad0a72670fbabb4a",
+      "match": true,
+      "sha256": "feb1214b00b16e833db2e65f38308d4c82b76f8952aadf62ad0a72670fbabb4a",
+      "uri": "scripts/audit-b52-d11-1-nearest-integer-recovery.py"
+    },
+    "scripts/encode-b52-d11-1-resolved.py": {
+      "bytes": 5610,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "79f97c5a464f9ad92d55be8a82b7db16d97c1b6ed96f28f33f2e7129e263e7f9",
+      "match": true,
+      "sha256": "79f97c5a464f9ad92d55be8a82b7db16d97c1b6ed96f28f33f2e7129e263e7f9",
+      "uri": "scripts/encode-b52-d11-1-resolved.py"
+    },
+    "scripts/preflight-b52-d11-1-nearest-integer-recovery.py": {
+      "bytes": 10701,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "c756cddcd10e03f3bdcab51778bcd005a1ca858c0ed4e039dc4b6c16fde36e20",
+      "match": true,
+      "sha256": "c756cddcd10e03f3bdcab51778bcd005a1ca858c0ed4e039dc4b6c16fde36e20",
+      "uri": "scripts/preflight-b52-d11-1-nearest-integer-recovery.py"
+    },
+    "scripts/quantize-b52-d11-1-motion.mjs": {
+      "bytes": 6052,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "82011e8f4c7684ca93fc0af8c3640056cd5dd5fb5d068d5a3b153c94af5422c0",
+      "match": true,
+      "sha256": "82011e8f4c7684ca93fc0af8c3640056cd5dd5fb5d068d5a3b153c94af5422c0",
+      "uri": "scripts/quantize-b52-d11-1-motion.mjs"
+    },
+    "scripts/quantize-b52-d11-1-motion.py": {
+      "bytes": 5940,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "27a70f47ae1a57481cbe4532c86526fa22060ebc41cede48c93976af7c3683e9",
+      "match": true,
+      "sha256": "27a70f47ae1a57481cbe4532c86526fa22060ebc41cede48c93976af7c3683e9",
+      "uri": "scripts/quantize-b52-d11-1-motion.py"
+    },
+    "scripts/run-b52-d11-1-nearest-integer-recovery.py": {
+      "bytes": 15423,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "30ed42c60febce51c111282628c15cccb470ba1caec765a82c68f43b105bbf48",
+      "match": true,
+      "sha256": "30ed42c60febce51c111282628c15cccb470ba1caec765a82c68f43b105bbf48",
+      "uri": "scripts/run-b52-d11-1-nearest-integer-recovery.py"
+    },
+    "tests/test_b52_d11_1_nearest_integer_recovery_contract.py": {
+      "bytes": 11521,
+      "freezeCommit": "8d94d677b9c8c266ccdf4532f3e74dd84f91fc00",
+      "gitBlobSha256": "0bc1845808bc74750fe00dcd0cb2fa1f5f94c0e83c27384841de96172e883229",
+      "match": true,
+      "sha256": "0bc1845808bc74750fe00dcd0cb2fa1f5f94c0e83c27384841de96172e883229",
+      "uri": "tests/test_b52_d11_1_nearest_integer_recovery_contract.py"
+    }
+  }
+}
