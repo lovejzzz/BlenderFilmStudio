@@ -6,11 +6,21 @@ import { repositoryRoot, sha256 } from './scene-spec.mjs';
 export const B42_SPEC_PATH = resolve(repositoryRoot, 'specs/linux-amd64-compiler-repro.v0.1.json');
 export const B42_SPEC_SHA256 = '9cfc3839ef61b9e000850f2ee112e22f5e816f5b8c6f0a4b3daede9bb6265fde';
 export const B42_PREREG_COMMIT = '636552dccf7502d0af8d61673f54607280a86934';
+export const B42_C1_SPEC_PATH = resolve(repositoryRoot, 'specs/linux-amd64-compiler-repro-mount-correction.v0.1.json');
+export const B42_C1_SPEC_SHA256 = '55c973a0b423960d93a8afcedc2c1881b6d386f6c2fb1c082ef13660a7a1fdd5';
+export const B42_C1_PREREG_COMMIT = '0ac2e80cb9e1c931baad7a140d403afce2c2d1bd';
 
 export async function readB42Spec() {
   const bytes = await readFile(B42_SPEC_PATH);
   const digest = sha256(bytes);
   if (digest !== B42_SPEC_SHA256) throw new Error(`B42 spec SHA mismatch: ${digest}`);
+  return JSON.parse(bytes);
+}
+
+export async function readB42C1Spec() {
+  const bytes = await readFile(B42_C1_SPEC_PATH);
+  const digest = sha256(bytes);
+  if (digest !== B42_C1_SPEC_SHA256) throw new Error(`B42-C1 spec SHA mismatch: ${digest}`);
   return JSON.parse(bytes);
 }
 
@@ -33,11 +43,11 @@ export async function observeSuccessfulRun(runRoot) {
   };
 }
 
-export function analyzeB42Evidence(evidence, spec) {
+export function analyzeB42Evidence(evidence, spec, identity = { schemaVersion: 'bfs.linuxAmd64CompilerReproEvidence.v0.1', experimentId: 'B42', commit: B42_PREREG_COMMIT, specSha256: B42_SPEC_SHA256 }) {
   const failures = [];
   const gate = (condition, code) => { if (!condition && !failures.includes(code)) failures.push(code); };
-  gate(evidence?.schemaVersion === 'bfs.linuxAmd64CompilerReproEvidence.v0.1' && evidence?.experimentId === 'B42', 'EVIDENCE_SCHEMA');
-  gate(evidence?.preregistration?.commit === B42_PREREG_COMMIT && evidence?.preregistration?.specSha256 === B42_SPEC_SHA256, 'PREREGISTRATION_IDENTITY');
+  gate(evidence?.schemaVersion === identity.schemaVersion && evidence?.experimentId === identity.experimentId, 'EVIDENCE_SCHEMA');
+  gate(evidence?.preregistration?.commit === identity.commit && evidence?.preregistration?.specSha256 === identity.specSha256, 'PREREGISTRATION_IDENTITY');
   gate(canonicalJson(evidence?.parent) === canonicalJson(spec.parent), 'PARENT_IDENTITY');
   gate(canonicalJson(evidence?.image) === canonicalJson({ id: spec.image.id, os: spec.image.os, architecture: spec.image.architecture, sizeBytes: spec.image.dockerReportedSizeBytes }), 'IMAGE_IDENTITY');
   gate(/^[a-f0-9]{40}$/.test(evidence?.toolFreezeCommit ?? '') && Object.values(evidence?.tools ?? {}).every(item => /^[a-f0-9]{64}$/.test(item.sha256)), 'TOOL_IDENTITY');
@@ -48,7 +58,7 @@ export function analyzeB42Evidence(evidence, spec) {
     const benchmark = evidence.benchmarks?.find(item => item.id === expected.id);
     gate(benchmark?.plans?.length === 2 && benchmark.plans.every(plan => plan.fileSha256 === expected.expectedPlan.fileSha256 && plan.planHash === expected.expectedPlan.planHash) && benchmark.planFilesByteEqual === true, `${expected.id}_PLAN_REPRO`);
     gate(benchmark?.runs?.length === 2 && benchmark.runs.every(run => run.exitCode === 0 && run.timeoutTriggered === false && run.completed === true), `${expected.id}_RUNS_COMPLETE`);
-    gate(benchmark?.runs?.every(run => run.observed.manifest.value.execution.planHash === expected.expectedPlan.planHash && run.observed.manifest.value.structureHash === expected.expectedStructureHash && run.observed.structure.sha256 === expected.expectedStructureHash), `${expected.id}_MANIFEST_BINDING`);
+    gate(benchmark?.runs?.every(run => run.observed?.manifest?.value?.execution?.planHash === expected.expectedPlan.planHash && run.observed?.manifest?.value?.structureHash === expected.expectedStructureHash && run.observed?.structure?.sha256 === expected.expectedStructureHash), `${expected.id}_MANIFEST_BINDING`);
     gate(benchmark?.structureFilesByteEqual === true && benchmark?.structureHash === expected.expectedStructureHash, `${expected.id}_STRUCTURE_REPRO`);
   }
   gate(evidence?.negativeControl?.exitCode !== 0 && evidence?.negativeControl?.timeoutTriggered === false && evidence?.negativeControl?.diagnosticMatched === true && evidence?.negativeControl?.outputFiles === 0, 'TAMPER_REJECTION');
@@ -57,4 +67,14 @@ export function analyzeB42Evidence(evidence, spec) {
   gate(Array.isArray(evidence?.errors) && evidence.errors.length === 0, 'RUN_ERRORS');
   gate(evidence?.evidenceHash === hashB42Evidence(evidence), 'EVIDENCE_SELF_HASH');
   return { schemaVersion: 'bfs.linuxAmd64CompilerReproAnalysis.v0.1', passed: failures.length === 0, failures, decision: failures[0] ?? spec.acceptedVerdict };
+}
+
+export function analyzeB42C1Evidence(evidence, spec, correctionSpec) {
+  const analysis = analyzeB42Evidence(evidence, spec, { schemaVersion: 'bfs.linuxAmd64CompilerReproEvidence.v0.2', experimentId: 'B42-C1', commit: B42_C1_PREREG_COMMIT, specSha256: B42_C1_SPEC_SHA256 });
+  if (canonicalJson(evidence?.correctionParent) !== canonicalJson(correctionSpec.parent)) {
+    analysis.failures.unshift('CORRECTION_PARENT_IDENTITY');
+    analysis.passed = false;
+    analysis.decision = 'CORRECTION_PARENT_IDENTITY';
+  }
+  return analysis;
 }

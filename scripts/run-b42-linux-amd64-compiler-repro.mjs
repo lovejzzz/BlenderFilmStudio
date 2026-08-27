@@ -5,10 +5,11 @@ import { compileBuildPlan } from './compile-build-plan.mjs';
 import { repositoryRoot } from './lib/scene-spec.mjs';
 import { sha256File } from './lib/receipt-format.mjs';
 import { readB41Spec } from './lib/b41-linux-amd64-blender-runtime-canary.mjs';
-import { B42_PREREG_COMMIT, B42_SPEC_SHA256, analyzeB42Evidence, hashB42Evidence, observeSuccessfulRun, readB42Spec } from './lib/b42-linux-amd64-compiler-repro.mjs';
+import { B42_C1_PREREG_COMMIT, B42_C1_SPEC_SHA256, B42_PREREG_COMMIT, B42_SPEC_SHA256, analyzeB42C1Evidence, analyzeB42Evidence, hashB42Evidence, observeSuccessfulRun, readB42C1Spec, readB42Spec } from './lib/b42-linux-amd64-compiler-repro.mjs';
 
-const [spec, baseSpec] = await Promise.all([readB42Spec(), readB41Spec()]);
-const experimentRoot = resolve(repositoryRoot, 'experiments/linux-amd64-compiler-repro-v0-1');
+const c1Mode = process.argv.includes('--c1');
+const [spec, baseSpec, correctionSpec] = await Promise.all([readB42Spec(), readB41Spec(), c1Mode ? readB42C1Spec() : null]);
+const experimentRoot = resolve(repositoryRoot, c1Mode ? 'experiments/linux-amd64-compiler-repro-c1-v0-1' : 'experiments/linux-amd64-compiler-repro-v0-1');
 const plansRoot = resolve(experimentRoot, 'plans');
 const runsRoot = resolve(experimentRoot, 'runs');
 const dockerBase = ['--host', baseSpec.runtime.dockerHost];
@@ -54,15 +55,19 @@ function dockerArgs(name, planRel, outputRoot) {
   return [...args, spec.image.id, '--background', '--factory-startup', '--disable-autoexec', '--offline-mode', '--python-exit-code', '1', '--python', '/repo/blender/compile_scene.py', '--', '--plan', `/repo/${planRel}`, '--repository-root', '/repo', '--output-dir', '/repo/worker-output'];
 }
 
-if (spawnSync('git', ['merge-base', '--is-ancestor', B42_PREREG_COMMIT, 'HEAD'], { cwd: repositoryRoot }).status !== 0) throw new Error('B42 preregistration is not an ancestor');
+const preregistrationCommit = c1Mode ? B42_C1_PREREG_COMMIT : B42_PREREG_COMMIT;
+const preregistrationSpecSha256 = c1Mode ? B42_C1_SPEC_SHA256 : B42_SPEC_SHA256;
+if (spawnSync('git', ['merge-base', '--is-ancestor', preregistrationCommit, 'HEAD'], { cwd: repositoryRoot }).status !== 0) throw new Error('B42 preregistration is not an ancestor');
 const toolFreezeCommit = probe('git', ['rev-parse', 'HEAD'], 'tool freeze identity');
 if (probe('git', ['status', '--porcelain', '--untracked-files=no'], 'tracked status') !== '') throw new Error('B42 tracked worktree must be clean');
 for (const item of Object.values(spec.inputs)) if (await sha256File(resolve(repositoryRoot, item.uri)) !== item.sha256) throw new Error(`B42 input differs: ${item.uri}`);
+if (c1Mode && await sha256File(resolve(repositoryRoot, correctionSpec.mountpointFixture.uri)) !== correctionSpec.mountpointFixture.sha256) throw new Error('B42-C1 mountpoint fixture differs');
 for (const benchmark of spec.benchmarks) {
   if (await sha256File(resolve(repositoryRoot, benchmark.sceneSpec.uri)) !== benchmark.sceneSpec.sha256) throw new Error(`B42 SceneSpec differs: ${benchmark.id}`);
   for (const asset of benchmark.assets) if (await sha256File(resolve(repositoryRoot, asset.uri)) !== asset.sha256) throw new Error(`B42 asset differs: ${asset.uri}`);
 }
 if (await sha256File(resolve(repositoryRoot, 'experiments/linux-amd64-render-backend-control-v0-1/results.json')) !== spec.parent.resultSha256 || await sha256File(resolve(repositoryRoot, 'experiments/linux-amd64-render-backend-control-v0-1/audit.json')) !== spec.parent.auditSha256) throw new Error('B42 parent evidence differs');
+if (c1Mode && await sha256File(resolve(repositoryRoot, 'experiments/linux-amd64-compiler-repro-v0-1/failure.json')) !== correctionSpec.parent.failureSha256) throw new Error('B42-C1 failure evidence differs');
 for (const name of names) if (spawnSync('docker', [...dockerBase, 'container', 'inspect', name], { encoding: 'utf8' }).status === 0) throw new Error(`B42 container already exists: ${name}`);
 operations.push('DOCKER_IMAGE_INSPECT');
 const image = JSON.parse(probe('docker', [...dockerBase, 'image', 'inspect', spec.image.id], 'image inspect'))[0];
@@ -126,14 +131,15 @@ try {
 operations.push('DOCKER_RUNNING_CONTAINER_CHECK');
 const running = probe('docker', [...dockerBase, 'ps', '--format', '{{.Names}}'], 'running container check').split('\n').filter(Boolean);
 const evidence = {
-  schemaVersion: 'bfs.linuxAmd64CompilerReproEvidence.v0.1', experimentId: 'B42', preregistration: { commit: B42_PREREG_COMMIT, specSha256: B42_SPEC_SHA256 }, parent: spec.parent,
+  schemaVersion: c1Mode ? 'bfs.linuxAmd64CompilerReproEvidence.v0.2' : 'bfs.linuxAmd64CompilerReproEvidence.v0.1', experimentId: c1Mode ? 'B42-C1' : 'B42', preregistration: { commit: preregistrationCommit, specSha256: preregistrationSpecSha256 }, parent: spec.parent,
+  ...(c1Mode ? { correctionParent: correctionSpec.parent } : {}),
   toolFreezeCommit, tools: { runner: { uri: 'scripts/run-b42-linux-amd64-compiler-repro.mjs', sha256: await sha256File(runnerPath) }, library: { uri: 'scripts/lib/b42-linux-amd64-compiler-repro.mjs', sha256: await sha256File(libraryPath) }, audit: { uri: 'scripts/audit-b42-linux-amd64-compiler-repro.mjs', sha256: await sha256File(auditPath) }, planCompiler: spec.inputs.planCompiler, sceneCompiler: spec.inputs.sceneCompiler },
   image: { id: image.Id, os: image.Os, architecture: image.Architecture, sizeBytes: image.Size }, diskAdmission, securityBoundary: spec.containerContract, benchmarks, negativeControl, runtimeOperationsExecuted: operations, cleanup: { experimentContainersRunningAfter: running.filter(name => names.includes(name)).length }, errors,
 };
 evidence.evidenceHash = hashB42Evidence(evidence);
-evidence.analysis = analyzeB42Evidence(evidence, spec);
-evidence.verdict = evidence.analysis.passed ? spec.acceptedVerdict : 'LINUX_AMD64_COMPILER_REPRO_REJECTED';
+evidence.analysis = c1Mode ? analyzeB42C1Evidence(evidence, spec, correctionSpec) : analyzeB42Evidence(evidence, spec);
+evidence.verdict = evidence.analysis.passed ? (c1Mode ? correctionSpec.acceptedVerdict : spec.acceptedVerdict) : (c1Mode ? correctionSpec.rejectedVerdict : 'LINUX_AMD64_COMPILER_REPRO_REJECTED');
 evidence.nonClaims = spec.nonClaims;
 await writeFile(resolve(experimentRoot, 'results.json'), `${JSON.stringify(evidence, null, 2)}\n`);
-process.stdout.write(`BFS_B42_RESULT verdict=${evidence.verdict} failures=${evidence.analysis.failures.join(',') || 'none'}\n`);
+process.stdout.write(`BFS_${c1Mode ? 'B42_C1' : 'B42'}_RESULT verdict=${evidence.verdict} failures=${evidence.analysis.failures.join(',') || 'none'}\n`);
 if (!evidence.analysis.passed) process.exitCode = 1;
