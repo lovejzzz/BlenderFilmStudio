@@ -1991,6 +1991,20 @@ The formal root is absent. Spec SHA-256: `669077423e0101dd5600576d295c0b7a62189a
 
 Artifacts: `specs/layer-depth-temporal-accumulation-holdout.v0.1.json` and `research/2026-08-27-b52-d9-1-layer-depth-temporal-accumulation-holdout-protocol.md`.
 
+## J-123 · D9.1 development implementation survives the frozen sensitivity gates and real Blender transport
+
+Date: 2026-08-27 · Type: PRE-FREEZE DEVELOPMENT VALIDATION · Formal outputs: 0
+
+The new scalar Python and independent Node producers ran as eight fresh processes across all four D9.1 fixtures. Every one of the ten emitted arrays matched byte-for-byte between languages. An independently implemented analyzer reconstructed the texture, motion, layer, depth, analytic validity, complementary noise and resolved target without importing either producer; all reconstructed arrays matched both producer paths.
+
+The preregistered controls now have material power without changing the failed D9 threshold. Wrong-sign motion produced 816 pixels / 1.125 maximum error for foreground crossing, 4,453 / 1.125 for camera pan and 270 / 1.140625 for the same-ID depth swap. Naive history produced 306 / 1.015625 and 729 / 1.140625 on its two applicable fixtures. The static control remained 3,053/3,053 valid with zero wrong-sign error. All values exceed the frozen ≥32 pixel and ≥0.25 maximum-error gates where applicable.
+
+A separate development bridge smoke encoded the 103×63 resolved array as Raw float32 ZIP EXR and passed it through a real Blender 5.2.0 LTS compositor render. All 25,956 decoded RGBA scalars remained exact and maximum error was zero. This run exposed a concrete API mismatch in the first worker draft: Blender 5.2 accepts the engine enum `BLENDER_EEVEE`, not `BLENDER_EEVEE_NEXT`. The failed launch was retained in the working transcript, the worker was corrected before tool freeze, and the successful rerun used the same producer array and gate.
+
+Eight formal-tool candidates now exist: two producers, encoder, Blender worker, independent analyzer, runner, independent replay audit and contract tests. Contract tests pass 5/5. Development temporary outputs were deleted after measurement; the D9.1 formal root remains absent. Next: freeze these exact tools, run a zero-formal-output component/identity/disk preflight, and only then admit the 32-process formal matrix.
+
+Artifacts: `scripts/reference-b52-d9-1-temporal.py`, `scripts/reference-b52-d9-1-temporal.mjs`, `scripts/encode-b52-d9-1-resolved.py`, `blender/render_b52_d9_1_temporal_passthrough.py`, `scripts/analyze-b52-d9-1-temporal-holdout.py`, `scripts/run-b52-d9-1-temporal-holdout.py`, `scripts/audit-b52-d9-1-temporal-holdout.py`, and `tests/test_b52_d9_1_temporal_holdout_contract.py`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
