@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "bfs.codexToBlenderWorkerPromotion.v0.1",
+  "experimentId": "B44",
+  "status": "PREREGISTERED_BEFORE_RUNNER_OR_OUTPUT",
+  "question": "Do the saved B43 Codex holdout proposals cross the frozen deterministic adapter boundary correctly, with the two accepted proposals compiling twice each in the exact Blender 5.2 Linux/amd64 worker and the unauthorized proposal stopping before any container launch?",
+  "parents": {
+    "codexHoldout": {
+      "resultUri": "experiments/codex-scenespec-holdout-v0-1/results.json",
+      "resultSha256": "db293e7972132045ba74b8f536e357dc69cedac635bab2bbaad450734ec9f0b8",
+      "auditUri": "experiments/codex-scenespec-holdout-v0-1/audit.json",
+      "auditSha256": "83f44aa176aa3454d056376292e768c1811d558253f8fc17131e50c8aa122f0f",
+      "verdict": "CODEX_SUBSCRIPTION_INTENT_HOLDOUT_PASSED"
+    },
+    "adapterDerivation": {
+      "resultUri": "experiments/codex-scenespec-adapter-derivation-v0-1/results.json",
+      "resultSha256": "8fd3a0f66f3c9fc29e1d2e3ccf1361e66277ad602d2265460029d86ce7fabb0b",
+      "auditUri": "experiments/codex-scenespec-adapter-derivation-v0-1/audit.json",
+      "auditSha256": "6d9ee339c7bdb8546f673340018a29d78ee747bee61d0ae593d2cf7c5bbcf539",
+      "verdict": "CODEX_SCENESPEC_ADAPTER_GOLDENS_DERIVED"
+    },
+    "workerCompiler": {
+      "resultUri": "experiments/linux-amd64-compiler-repro-c1-v0-1/results.json",
+      "resultSha256": "c9a55fb87bf1115960c3c82bfe5eb71b14f4f0ec0df7059e57b842b52160a1a4",
+      "auditUri": "experiments/linux-amd64-compiler-repro-c1-v0-1/audit.json",
+      "auditSha256": "46579e29a27a3ab9937b88e290a83fe2143600772982274be1e94f9239b85834",
+      "verdict": "LINUX_AMD64_COMPILER_REPRODUCIBLE_AFTER_MOUNT_CORRECTION"
+    }
+  },
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "dockerReportedSizeBytes": 1004901158,
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderExecutableSha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "buildPullDownloadAllowed": false
+  },
+  "inputs": {
+    "adapter": {"uri": "scripts/lib/b43-codex-scenespec-adapter.mjs", "sha256": "ff2eeb0b976d371dc40421a0b6c25c4ae6476ef8585e7bcff7e039d38329df65"},
+    "sceneCompiler": {"uri": "blender/compile_scene.py", "sha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240"},
+    "outputSpec": {"uri": "specs/output-spec.v0.1.json", "sha256": "d492cfcf6a3ec1b5539735b4a46052456e330acea2b6e47c5ab5efcced6b9705"},
+    "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"}
+  },
+  "selectedProposals": [
+    {
+      "id": "TABLETOP-A",
+      "briefId": "BRIEF_B43_TABLETOP_PUSH",
+      "decision": "ACCEPT",
+      "uri": "experiments/codex-scenespec-holdout-v0-1/raw/TABLETOP-A.proposal.json",
+      "fileSha256": "ae93aa48b6befa96672ebdf6bedf1be0bff9c92e7ad84ff28a5a2a659ad9fcfd",
+      "canonicalSha256": "bae2be6f74e5d2cea3df5f975d85fadbae81c84e6110962e1b8b525b94d9c1bd",
+      "sceneSpec": {"uri": "experiments/codex-scenespec-adapter-derivation-v0-1/golden/BRIEF_B43_TABLETOP_PUSH.scene.json", "fileSha256": "dad7ca4127d296ac698b4ca5e167fbcda62360f32d719cf6b6f2e8067017d489", "canonicalSha256": "15c2ea42609785947c2fc59e0fe16a4602708b93c4935b380aefc83861321f82"},
+      "buildPlan": {"uri": "experiments/codex-scenespec-adapter-derivation-v0-1/golden/BRIEF_B43_TABLETOP_PUSH.build-plan.json", "fileSha256": "2cb6be06e6397e743be84f6bca31c56bc039f93693421cd5d9c2845c3b118e14", "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e"},
+      "assets": [{"uri": "assets/sets/B01-material-still-life.blend", "sha256": "07e71afe2cf310fd0b7af3dcb1e3c792195b88341d7649ee4348b9f7f297d221"}],
+      "runs": ["TABLETOP-A1", "TABLETOP-A2"]
+    },
+    {
+      "id": "INTERIOR-A",
+      "briefId": "BRIEF_B43_INTERIOR_STILL",
+      "decision": "ACCEPT",
+      "uri": "experiments/codex-scenespec-holdout-v0-1/raw/INTERIOR-A.proposal.json",
+      "fileSha256": "2237a3c09932706c80c75c4085d0ca54960306af4956bd1114f3c755b5e23415",
+      "canonicalSha256": "e14c08a684b4f36836c0fecab12ea8df893d7217b36ab06d54b2d2e0bc1634ac",
+      "sceneSpec": {"uri": "experiments/codex-scenespec-adapter-derivation-v0-1/golden/BRIEF_B43_INTERIOR_STILL.scene.json", "fileSha256": "07f2e07d15852c7809b152b7f9dbff0b40fbe7f8f486e7b49058785c44a72538", "canonicalSha256": "8c63998c8748f2fb0147e265de6ce2035aa503c5862fa0a84c35b9b4a6132748"},
+      "buildPlan": {"uri": "experiments/codex-scenespec-adapter-derivation-v0-1/golden/BRIEF_B43_INTERIOR_STILL.build-plan.json", "fileSha256": "29afd8b50a39474a92bf1b0dd2297df39b79c55a43ef2d6d5809def1492e946e", "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401"},
+      "assets": [
+        {"uri": "library/props/B02-chair.blend", "sha256": "d7d110c27764c464c98fe336116bdc9aa3d7ec061e9f23a1b7bff329133e0642"},
+        {"uri": "assets/sets/B02-interior-room.blend", "sha256": "061eb0ae00fa1a7d52580ed578aa3e36cb51fa1dee5b6cb326497927baf35032"}
+      ],
+      "runs": ["INTERIOR-A1", "INTERIOR-A2"]
+    },
+    {
+      "id": "UNAUTHORIZED-A",
+      "briefId": "BRIEF_B43_UNAUTHORIZED_DOWNLOAD",
+      "decision": "REJECT",
+      "uri": "experiments/codex-scenespec-holdout-v0-1/raw/UNAUTHORIZED-A.proposal.json",
+      "fileSha256": "8ccd1b5be627b3f7afb4b34a4822caa20216725e1798355f85fdee0286f6acd6",
+      "canonicalSha256": "93bfa04b5b9b5d958d8bb1275a77168215a485967e874a2dbf87c8cfa2db9b18",
+      "expectedSceneSpecCount": 0,
+      "expectedBuildPlanCount": 0,
+      "expectedContainerLaunchCount": 0
+    }
+  ],
+  "containerContract": {
+    "platform": "linux/amd64",
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": ["ALL"],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "wallTimeMs": 30000,
+    "killGraceMs": 5000
+  },
+  "diskAdmission": {"minimumReserveBytes": "107374182400", "projectedWriteBytes": "1073741824"},
+  "acceptance": {
+    "allParentEvidenceAndFrozenInputsMatch": true,
+    "proposalFileAndCanonicalHashesMatch": true,
+    "acceptedProposalsMaterializeExactlyOneFrozenSceneSpec": true,
+    "acceptedSceneSpecsBindTheFrozenBuildPlans": true,
+    "unauthorizedProposalStopsBeforeContainerLaunch": true,
+    "exactlyFourIndependentEmptyOutputDirectories": true,
+    "exactlyFourWorkerContainerLaunches": true,
+    "allFourCompilesExitZeroWithinWallTime": true,
+    "allFourManifestPlanAndStructureBindingsMatch": true,
+    "eachAcceptedSceneCanonicalStructureFilesByteEqualAcrossTwoRuns": true,
+    "structureHashesAreObservedNotPostHocAcceptanceThresholds": true,
+    "zeroBuildPullDownloadOperations": true,
+    "zeroExperimentContainersRunningAfter": true,
+    "independentAuditRequired": true
+  },
+  "attacks": [
+    "mutate selected proposal bytes",
+    "mutate proposal semantics while preserving decision",
+    "mutate adapter identity",
+    "mutate frozen SceneSpec identity",
+    "mutate frozen BuildPlan identity",
+    "mutate worker image identity",
+    "mutate container contract",
+    "claim a fifth container launch for the rejected proposal",
+    "change a manifest planHash binding",
+    "change one replicate structure hash",
+    "claim a build, pull or download operation",
+    "change the evidence self-hash"
+  ],
+  "acceptedVerdict": "CODEX_TO_BLENDER_WORKER_PROMOTION_REPRODUCIBLE",
+  "rejectedVerdict": "CODEX_TO_BLENDER_WORKER_PROMOTION_REJECTED",
+  "nonClaims": [
+    "B44 does not make a live model call; it promotes immutable B43 holdout outputs",
+    "B44 does not render final pixels or establish cinematic image quality",
+    "B44 does not claim .blend files are byte-identical",
+    "B44 does not establish Eevee or GPU availability",
+    "B44 tests two accepted preset-bound scenes and one rejected request, not arbitrary prompts or scenes",
+    "B44 does not establish production throughput, remote attestation or subscription price guarantees"
+  ]
+}
