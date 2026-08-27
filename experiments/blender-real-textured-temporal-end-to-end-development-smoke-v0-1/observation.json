@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "bfs.blenderRealTexturedTemporalDevelopmentSmokeObservation.v0.1",
+  "experimentId": "B52-D11-DEVELOPMENT-SMOKE",
+  "classification": "DEVELOPMENT_ONLY_NOT_FORMAL_EVIDENCE",
+  "date": "2026-08-27",
+  "preregisteredSpec": {
+    "uri": "specs/blender-real-textured-temporal-end-to-end-holdout.v0.1.json",
+    "sha256": "f1505c42426e8e286ee1584de3df12fb33b7db57518d6d91e1fd93aa3bed5a5f"
+  },
+  "fixtureId": "REAL_OCCLUSION_DISOCCLUSION_OBJECT_XY_197X113",
+  "repeat": 1,
+  "attempts": [
+    {
+      "outcome": "IMPLEMENTATION_EXCEPTION_BEFORE_RENDER",
+      "exception": "KeyError: locationByFrame",
+      "cause": "dict.get default expression was evaluated eagerly for a static object",
+      "formalOutputs": 0
+    },
+    {
+      "outcome": "SMOKE_PIPELINE_COMPLETED",
+      "processes": 5,
+      "cyclesRayRenders": 2,
+      "adapters": 1,
+      "pythonAccumulators": 1,
+      "nodeAccumulators": 1
+    }
+  ],
+  "source": {
+    "previous": {
+      "pid": 77946,
+      "exrSha256": "dd22f8ba5453ee86b188d35276d6fd81ab04f6e1517c98622352364875661d23",
+      "bytes": 10906
+    },
+    "current": {
+      "pid": 77925,
+      "exrSha256": "82dbb276f6aaab259cf98bed0cf2552a9a6921ba8b7302749dd277f022930184",
+      "bytes": 12473
+    },
+    "multipartRosterExact": true,
+    "sceneAndAnimationReported": true
+  },
+  "adapter": {
+    "pid": 77950,
+    "motionSha256": "01ec3c1cda20287ec8c9425b7b5b4255029f3dfd023ac126224c7eb16d1acdbc",
+    "currentRgbaSha256": "8afc2cffbd053c31aea0a178fa5534f20d335fc62f26c6dc82c2781ab461df14",
+    "arraysWritten": 7,
+    "integerization": "none"
+  },
+  "accumulators": {
+    "pythonPid": 77966,
+    "nodePid": 77968,
+    "allSevenOutputsByteExact": true,
+    "validPixels": 21668,
+    "invalidPixels": 593,
+    "validitySha256": "500c03e2bad86beb59865fda27ce6de1148773ae86a140b803497d6cce2ec485",
+    "reasonSha256": "b6b22164331d0209937e271055bdada2ada076dc889d5aab21868e7c98999835",
+    "truncationResolvedSha256": "85fb98eff8d34f0a778acf3c3adc2bd3b4e5fc85c1539dda6b5065d44a5705e2",
+    "roundNearestResolvedSha256": "8afc2cffbd053c31aea0a178fa5534f20d335fc62f26c6dc82c2781ab461df14",
+    "roundNearestEqualsCurrentExact": true,
+    "truncationEqualsCurrentExact": false,
+    "roundNearestChangedValidityPixels": 0,
+    "roundNearestChangedResolvedScalars": 87
+  },
+  "semanticProbes": {
+    "validMoverInterior3x3": "VALID_9_OF_9",
+    "layerDisocclusion3x3": "INVALID_LAYER_9_OF_9"
+  },
+  "motionIntegerizationObservation": {
+    "analyticMotion": [
+      13,
+      -7
+    ],
+    "examples": [
+      {
+        "raw": [
+          12.999996185302734,
+          -7
+        ],
+        "truncated": [
+          12,
+          -7
+        ]
+      },
+      {
+        "raw": [
+          13,
+          -6.999996185302734
+        ],
+        "truncated": [
+          13,
+          -6
+        ]
+      }
+    ],
+    "interpretation": "The preregistered composition risk is observed in one development cell; it is not a formal D11 verdict."
+  },
+  "toolSha256": {
+    "blender/render_b52_d11_textured_source.py": "6f33ee1cca6f374cbe332dd060336190de1f81399b40dc0820a00cbae49cb04c",
+    "scripts/adapt-b52-d11-multipart.py": "1a51301f30d24a81668ae5138ff50fb2cd4a1e2abdd2fa9748899b9fb3f90d4a",
+    "scripts/accumulate-b52-d11-temporal.py": "eacd41ad5bb4ec235d8073170a1cec1c0d2b9e723357d2280521167564ad79f5",
+    "scripts/accumulate-b52-d11-temporal.mjs": "a54f4aa47277652fb339f0a4418f46fb9c0fbb5f1db0593ba28ab3e806d7c8ac"
+  },
+  "nonClaims": [
+    "This smoke uses one fixture and one repeat before tool freeze.",
+    "It does not satisfy D11 freshness, repeat, attack, bridge, audit or promotion gates.",
+    "It cannot change the preregistered D11 decision rule."
+  ],
+  "observationBodyHash": "3785b3e12a58d9b15222b9a8f8577d1631c55b7b4060cdbcb32351804241f961"
+}

@@ -2173,6 +2173,20 @@ All eleven formal tool paths and the formal root are absent. Passing would promo
 
 Artifacts: `specs/blender-real-textured-temporal-end-to-end-holdout.v0.1.json` and `research/2026-08-27-b52-d11-blender-real-textured-temporal-end-to-end-holdout-protocol.md`.
 
+## J-135 · D11 development smoke observes the preregistered integerization risk
+
+Date: 2026-08-27 · Type: DEVELOPMENT-ONLY REAL-BLENDER COMPOSITION SMOKE · Formal outputs: 0
+
+The first implementation attempt stopped before rendering: an eagerly evaluated `dict.get` fallback tried to read `locationByFrame` on a static object. The failure was retained, the branch was made explicit, and no source EXR existed from that attempt.
+
+The corrected development cell launched two real Blender 5.2 Cycles source processes, one multipart adapter, one scalar Python accumulator and one independent scalar Node accumulator for the 197×113 object-motion fixture. The multipart roster matched, both 3×3 semantic probes were exact, and Python/Node produced byte-identical validity, reason, resolved, naive, wrong-sign and round-nearest diagnostic arrays.
+
+The inherited truncation path yielded 21,668 valid and 593 invalid pixels. Raw values included `12.999996185302734 → 12` and `−6.999996185302734 → −6`. The round-nearest diagnostic changed no validity pixels but changed 87 resolved float32 scalars; it equaled current RGBA exactly (`8afc2cff…`), while truncation did not (`85fb98ef…`). This is a direct development signal for the frozen `MOTION_INTEGERIZATION` risk, not a formal verdict.
+
+The four initial formal tools and a machine-readable observation are now durable. The smoke has only one fixture/repeat, occurs before tool freeze and includes no Raw EXR bridge, attack replay or independent audit. Next: implement the remaining seven frozen tools, run contract tests and zero-output preflight, then freeze before any formal root is created.
+
+Artifacts: `experiments/blender-real-textured-temporal-end-to-end-development-smoke-v0-1/observation.json` and `research/2026-08-27-b52-d11-real-textured-development-smoke.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
