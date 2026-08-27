@@ -1601,6 +1601,32 @@ Next: B52-D2 must explicitly define the actual production baseline as adaptive `
 
 Artifacts: `experiments/native-cpu-adaptive-quality-cost-derivation-v0-1/`, `specs/native-cpu-adaptive-quality-cost-derivation.v0.1.json`, `research/2026-08-27-b52-d1-native-cpu-adaptive-quality-cost-derivation-result.md`, `research/2026-08-27-b52-d1-c1-analysis-tool-correction-protocol.md` and `research/2026-08-27-b52-d1-c2-sample-count-classification-correction-protocol.md`.
 
+## J-096 · B52-D1 evidence reaches both production publications
+
+Date: 2026-08-27 · Type: EXACT-SOURCE PUBLICATION + DELAYED-DISCLOSURE AUDIT · Runtime: GitHub Pages and owner-only Sites
+
+The B52-D1 result, failure chain, sample-count visualization and upstream-control diagnosis were published from exact source commit `c044d3a31ceecf53a6e201ad70f306102f19a3ab`. GitHub Pages completed both build and deploy jobs. The owner-only Sites publication saved the same commit as version 46 and deployed it successfully; browser verification found the B52-D1 and INVALID content on the production route.
+
+The Sites source Git service returned HTTP 500 for the initial approximately 91 MiB evidence pack. No success was inferred from Git's trailing text: `ls-remote` proved the branch was still old. The immutable blobs were then transferred through eight temporary 7.4–12.9 MB staging commits, the exact source HEAD was pushed, its remote SHA was verified and the temporary branch was deleted. The public source history was not rewritten.
+
+The B50 exact-public-state audit then scanned the exact Git HEAD plus static build: 4,098 files, zero sensitive-registry matches and human responses still 0/18. Status: `BFS_B50_EXACT_PUBLIC_STATE_PASS`. This closes publication isolation only; it does not manufacture human evidence or open collection by itself.
+
+Published routes: `https://lovejzzz.github.io/BlenderFilmStudio/adaptive-cpu-v0-1/` and `https://blender-film-studio-research.skylab.chatgpt.site/adaptive-cpu-v0-1/`.
+
+## J-097 · B52-D2 freezes the real production adaptive baseline
+
+Date: 2026-08-27 · Type: CONFIRMATORY HOLDOUT PREREGISTRATION · Runtime: zero D2 renders
+
+B52-D2 explicitly defines the production CPU control as `adaptive=true, threshold=0.01, min=0, max=128`. It does not relabel the invalid D1 experiment. The protocol discloses that all D1 candidate measurements were already observed and uses them only to choose a new hypothesis grid.
+
+The holdout freezes eight looser candidates—thresholds 0.015/0.02/0.03/0.05 crossed with min samples 0/32—against the production control. Two compositions × nine profiles × three repeats require 54 fresh Blender processes. Every new cell uses the previously unused `seedOffset=758759`; only the six immutable D1 512-spp reference EXRs are reused.
+
+A candidate must pass every beauty, decoded Depth/Cryptomatte, exact Normal/Vector, Sample Count mechanism and per-variant 20% median render-saving gate. Fresh-process wall is recorded but not promoted as marginal render cost. Failure of baseline validity makes the experiment INVALID; an intact baseline with no eligible candidate yields NOT_SUPPORTED.
+
+The exact auxiliary-pass requirement is deliberately conservative because no downstream task-specific Normal/Vector tolerance has been validated. A candidate blocked only there cannot be posthoc promoted; it would justify a separately preregistered semantic derivation.
+
+Artifacts: `specs/native-cpu-adaptive-production-holdout.v0.1.json` and `research/2026-08-27-b52-d2-native-cpu-adaptive-production-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
