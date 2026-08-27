@@ -1,0 +1,1476 @@
+{
+  "schemaVersion": "bfs.depthOfFieldDerivationRunReceipt.v0.1",
+  "preregistration": {
+    "commit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+    "specUri": "specs/codex-worker-depth-of-field-derivation.v0.1.json",
+    "specSha256": "27039abd12cc29a604450708552322442373845e50d5471e068af0c71724f76c"
+  },
+  "toolFreezeCommit": "a9431447d992f1638063780857ad7257bc3be156",
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b49-depth-of-field-derivation.mjs",
+      "sha256": "bdbb53ac2264e614fbd42d022f53a754a76a4f5f7643dbe6dbebdc5e56001f9c"
+    },
+    "renderer": {
+      "uri": "blender/render_b49_depth_of_field_derivation.py",
+      "sha256": "ca08056a567d664ba79b6efee9098fb2a701241e66d8aded72d5b264f72f380a"
+    },
+    "analyzer": {
+      "uri": "scripts/analyze-b49-depth-of-field-derivation.py",
+      "sha256": "00cf196a84d1029ba68a6cf9bae014304132a2fbea938cc8df5e2312c80bde90"
+    },
+    "audit": {
+      "uri": "scripts/audit-b49-depth-of-field-derivation.py",
+      "sha256": "fcb8ffe2c83c7ffd0b36713b2f90ea3c7fd8bd29ecd6ac4dc3d8f1e010608c31"
+    }
+  },
+  "parents": {
+    "motionBlurResult": {
+      "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/results.json",
+      "sha256": "6fb46a8aecedf810cf9cb977349522345dafb043bfb62064ee03269f14088496",
+      "verdict": "B49_MOTION_BLUR_OPERATING_POINT_SUPPORTED"
+    },
+    "motionBlurAudit": {
+      "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/audit.json",
+      "sha256": "fc20ec3509b83f3451188f722020fc5102d0ee7a8ffac7fbb530bd892d02b06c",
+      "status": "PASS"
+    }
+  },
+  "parentObservations": [
+    {
+      "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/results.json",
+      "expectedSha256": "6fb46a8aecedf810cf9cb977349522345dafb043bfb62064ee03269f14088496",
+      "observedSha256": "6fb46a8aecedf810cf9cb977349522345dafb043bfb62064ee03269f14088496",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/audit.json",
+      "expectedSha256": "fc20ec3509b83f3451188f722020fc5102d0ee7a8ffac7fbb530bd892d02b06c",
+      "observedSha256": "fc20ec3509b83f3451188f722020fc5102d0ee7a8ffac7fbb530bd892d02b06c",
+      "match": true
+    }
+  ],
+  "sourceObservations": [
+    {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true
+    },
+    {
+      "uri": "specs/codex-worker-depth-of-field-derivation.v0.1.json",
+      "expectedSha256": "27039abd12cc29a604450708552322442373845e50d5471e068af0c71724f76c",
+      "observedSha256": "27039abd12cc29a604450708552322442373845e50d5471e068af0c71724f76c",
+      "match": true
+    }
+  ],
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "sizeBytes": 1004901158
+  },
+  "hostInspectorObservation": {
+    "pythonExecutable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+    "pythonVersion": "3.13.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+    "packages": {
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    }
+  },
+  "diskAdmission": {
+    "availableBytes": "118186958848",
+    "projectedWriteBytes": "1073741824",
+    "minimumReserveBytes": "107374182400",
+    "freeAfterProjectedBytes": "117113217024",
+    "status": "ACCEPTED"
+  },
+  "securityBoundary": {
+    "platform": "linux/amd64",
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": [
+      "ALL"
+    ],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "wallTimeMs": 180000,
+    "killGraceMs": 5000
+  },
+  "operationBoundary": {
+    "dockerRuns": 7,
+    "frameRenders": 7,
+    "hostExrAnalyses": 7,
+    "builds": 0,
+    "pulls": 0,
+    "downloads": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0
+  },
+  "runtimeOperations": [
+    "DOCKER_RUN_OFF_D5_F4",
+    "DOCKER_RUN_D5_F16",
+    "DOCKER_RUN_D5_F4",
+    "DOCKER_RUN_D5_F1_4",
+    "DOCKER_RUN_D3_F1_4",
+    "DOCKER_RUN_D8_F1_4",
+    "DOCKER_RUN_OBJ5_F1_4",
+    "DOCKER_RUNNING_CONTAINER_CHECK",
+    "HOST_EXR_ANALYSIS_OFF_D5_F4",
+    "HOST_EXR_ANALYSIS_D5_F16",
+    "HOST_EXR_ANALYSIS_D5_F4",
+    "HOST_EXR_ANALYSIS_D5_F1_4",
+    "HOST_EXR_ANALYSIS_D3_F1_4",
+    "HOST_EXR_ANALYSIS_D8_F1_4",
+    "HOST_EXR_ANALYSIS_OBJ5_F1_4"
+  ],
+  "runs": [
+    {
+      "runId": "OFF_D5_F4",
+      "containerName": "bfs-b49-dof-off-d5-f4",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-off-d5-f4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/OFF_D5_F4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "OFF_D5_F4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 16250,
+      "stdout": "00:00.128  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.694  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.695  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.695  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.695  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.695  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B49_DOF_CELL_OK id=OFF_D5_F4 renderSeconds=6.126003\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n/repo/blender/render_b49_depth_of_field_derivation.py:33: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n/repo/blender/render_b49_depth_of_field_derivation.py:157: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  if scene.world.use_nodes:\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 82131,
+          "sha256": "e1e09d43fdc7f8d7189a437e009167b82c26191ed4ed7ac6d329a62a7a92878f",
+          "uri": "production.exr"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "cellId": "OFF_D5_F4",
+        "experimentId": "B49-DOF-D1",
+        "fixture": {
+          "camera": {
+            "lensMm": 50,
+            "locationM": [
+              0,
+              0,
+              0
+            ],
+            "name": "CAM_DOF_FIXTURE",
+            "rotationEulerRad": [
+              0,
+              0,
+              0
+            ],
+            "sensorWidthMm": 36,
+            "type": "PERSP"
+          },
+          "focusObjectLocationM": [
+            0,
+            0,
+            -5
+          ],
+          "targets": [
+            {
+              "depthM": 3,
+              "id": "NEAR",
+              "viewportCenter01": [
+                0.17,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 5,
+              "id": "MID",
+              "viewportCenter01": [
+                0.5,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 8,
+              "id": "FAR",
+              "viewportCenter01": [
+                0.83,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            }
+          ]
+        },
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 508128,
+        "preregistrationCommit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+        "renderSeconds": 6.126003,
+        "role": "pinhole baseline",
+        "saveSeconds": 0.042343,
+        "schemaVersion": "bfs.depthOfFieldDerivationCellReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "apertureBlades": 0,
+          "apertureFStop": 4,
+          "apertureRatio": 1,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "focusDistanceM": 5,
+          "focusMode": "DISTANCE",
+          "focusObject": null,
+          "focusObjectDistanceM": null,
+          "motionBlur": false,
+          "persistentData": false,
+          "resolution": [
+            256,
+            144,
+            100
+          ],
+          "samples": 256,
+          "seed": 492501,
+          "threads": 4,
+          "threadsMode": "FIXED",
+          "useDof": false
+        }
+      }
+    },
+    {
+      "runId": "D5_F16",
+      "containerName": "bfs-b49-dof-d5-f16",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d5-f16",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F16,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D5_F16",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 17019,
+      "stdout": "00:00.128  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.717  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.717  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.717  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.717  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.717  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B49_DOF_CELL_OK id=D5_F16 renderSeconds=6.827096\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n/repo/blender/render_b49_depth_of_field_derivation.py:33: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n/repo/blender/render_b49_depth_of_field_derivation.py:157: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  if scene.world.use_nodes:\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 90076,
+          "sha256": "cbcd196204d9d3393e36e75e4ce40e4bdb576103b09e7df29fb105f3b5b00bf1",
+          "uri": "production.exr"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "cellId": "D5_F16",
+        "experimentId": "B49-DOF-D1",
+        "fixture": {
+          "camera": {
+            "lensMm": 50,
+            "locationM": [
+              0,
+              0,
+              0
+            ],
+            "name": "CAM_DOF_FIXTURE",
+            "rotationEulerRad": [
+              0,
+              0,
+              0
+            ],
+            "sensorWidthMm": 36,
+            "type": "PERSP"
+          },
+          "focusObjectLocationM": [
+            0,
+            0,
+            -5
+          ],
+          "targets": [
+            {
+              "depthM": 3,
+              "id": "NEAR",
+              "viewportCenter01": [
+                0.17,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 5,
+              "id": "MID",
+              "viewportCenter01": [
+                0.5,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 8,
+              "id": "FAR",
+              "viewportCenter01": [
+                0.83,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            }
+          ]
+        },
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 507852,
+        "preregistrationCommit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+        "renderSeconds": 6.827096,
+        "role": "small-aperture dose",
+        "saveSeconds": 0.042197,
+        "schemaVersion": "bfs.depthOfFieldDerivationCellReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "apertureBlades": 0,
+          "apertureFStop": 16,
+          "apertureRatio": 1,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "focusDistanceM": 5,
+          "focusMode": "DISTANCE",
+          "focusObject": null,
+          "focusObjectDistanceM": null,
+          "motionBlur": false,
+          "persistentData": false,
+          "resolution": [
+            256,
+            144,
+            100
+          ],
+          "samples": 256,
+          "seed": 492501,
+          "threads": 4,
+          "threadsMode": "FIXED",
+          "useDof": true
+        }
+      }
+    },
+    {
+      "runId": "D5_F4",
+      "containerName": "bfs-b49-dof-d5-f4",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d5-f4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D5_F4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 16861,
+      "stdout": "00:00.125  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.705  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.706  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.706  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.706  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.706  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B49_DOF_CELL_OK id=D5_F4 renderSeconds=6.78137\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n/repo/blender/render_b49_depth_of_field_derivation.py:33: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n/repo/blender/render_b49_depth_of_field_derivation.py:157: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  if scene.world.use_nodes:\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 93523,
+          "sha256": "2261b9e96bc582398dcd440718072aecaa8c3d6bf49b1d5dd144e8681ec6f24e",
+          "uri": "production.exr"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "cellId": "D5_F4",
+        "experimentId": "B49-DOF-D1",
+        "fixture": {
+          "camera": {
+            "lensMm": 50,
+            "locationM": [
+              0,
+              0,
+              0
+            ],
+            "name": "CAM_DOF_FIXTURE",
+            "rotationEulerRad": [
+              0,
+              0,
+              0
+            ],
+            "sensorWidthMm": 36,
+            "type": "PERSP"
+          },
+          "focusObjectLocationM": [
+            0,
+            0,
+            -5
+          ],
+          "targets": [
+            {
+              "depthM": 3,
+              "id": "NEAR",
+              "viewportCenter01": [
+                0.17,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 5,
+              "id": "MID",
+              "viewportCenter01": [
+                0.5,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 8,
+              "id": "FAR",
+              "viewportCenter01": [
+                0.83,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            }
+          ]
+        },
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 507432,
+        "preregistrationCommit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+        "renderSeconds": 6.78137,
+        "role": "compiled-scene aperture dose",
+        "saveSeconds": 0.04197,
+        "schemaVersion": "bfs.depthOfFieldDerivationCellReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "apertureBlades": 0,
+          "apertureFStop": 4,
+          "apertureRatio": 1,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "focusDistanceM": 5,
+          "focusMode": "DISTANCE",
+          "focusObject": null,
+          "focusObjectDistanceM": null,
+          "motionBlur": false,
+          "persistentData": false,
+          "resolution": [
+            256,
+            144,
+            100
+          ],
+          "samples": 256,
+          "seed": 492501,
+          "threads": 4,
+          "threadsMode": "FIXED",
+          "useDof": true
+        }
+      }
+    },
+    {
+      "runId": "D5_F1_4",
+      "containerName": "bfs-b49-dof-d5-f1-4",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d5-f1-4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F1_4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D5_F1_4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 16909,
+      "stdout": "00:00.125  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.693  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.693  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.693  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.693  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.693  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B49_DOF_CELL_OK id=D5_F1_4 renderSeconds=6.906643\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n/repo/blender/render_b49_depth_of_field_derivation.py:33: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n/repo/blender/render_b49_depth_of_field_derivation.py:157: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  if scene.world.use_nodes:\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 99847,
+          "sha256": "24adabeb97d48a83efa1000eeda6f9981e220694be26b9eb66276bafa7154792",
+          "uri": "production.exr"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "cellId": "D5_F1_4",
+        "experimentId": "B49-DOF-D1",
+        "fixture": {
+          "camera": {
+            "lensMm": 50,
+            "locationM": [
+              0,
+              0,
+              0
+            ],
+            "name": "CAM_DOF_FIXTURE",
+            "rotationEulerRad": [
+              0,
+              0,
+              0
+            ],
+            "sensorWidthMm": 36,
+            "type": "PERSP"
+          },
+          "focusObjectLocationM": [
+            0,
+            0,
+            -5
+          ],
+          "targets": [
+            {
+              "depthM": 3,
+              "id": "NEAR",
+              "viewportCenter01": [
+                0.17,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 5,
+              "id": "MID",
+              "viewportCenter01": [
+                0.5,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 8,
+              "id": "FAR",
+              "viewportCenter01": [
+                0.83,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            }
+          ]
+        },
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 507476,
+        "preregistrationCommit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+        "renderSeconds": 6.906643,
+        "role": "strong mid-focus dose",
+        "saveSeconds": 0.041524,
+        "schemaVersion": "bfs.depthOfFieldDerivationCellReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "apertureBlades": 0,
+          "apertureFStop": 1.399999976158142,
+          "apertureRatio": 1,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "focusDistanceM": 5,
+          "focusMode": "DISTANCE",
+          "focusObject": null,
+          "focusObjectDistanceM": null,
+          "motionBlur": false,
+          "persistentData": false,
+          "resolution": [
+            256,
+            144,
+            100
+          ],
+          "samples": 256,
+          "seed": 492501,
+          "threads": 4,
+          "threadsMode": "FIXED",
+          "useDof": true
+        }
+      }
+    },
+    {
+      "runId": "D3_F1_4",
+      "containerName": "bfs-b49-dof-d3-f1-4",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d3-f1-4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D3_F1_4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D3_F1_4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 17060,
+      "stdout": "00:00.125  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.704  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.705  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.705  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.705  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.705  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B49_DOF_CELL_OK id=D3_F1_4 renderSeconds=6.894723\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n/repo/blender/render_b49_depth_of_field_derivation.py:33: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n/repo/blender/render_b49_depth_of_field_derivation.py:157: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  if scene.world.use_nodes:\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 102616,
+          "sha256": "1a23d5a6ee38c39bf21a1a5b9e4314adea2507e41dac8b45cbc4a2f19c67ff09",
+          "uri": "production.exr"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "cellId": "D3_F1_4",
+        "experimentId": "B49-DOF-D1",
+        "fixture": {
+          "camera": {
+            "lensMm": 50,
+            "locationM": [
+              0,
+              0,
+              0
+            ],
+            "name": "CAM_DOF_FIXTURE",
+            "rotationEulerRad": [
+              0,
+              0,
+              0
+            ],
+            "sensorWidthMm": 36,
+            "type": "PERSP"
+          },
+          "focusObjectLocationM": [
+            0,
+            0,
+            -5
+          ],
+          "targets": [
+            {
+              "depthM": 3,
+              "id": "NEAR",
+              "viewportCenter01": [
+                0.17,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 5,
+              "id": "MID",
+              "viewportCenter01": [
+                0.5,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 8,
+              "id": "FAR",
+              "viewportCenter01": [
+                0.83,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            }
+          ]
+        },
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 507800,
+        "preregistrationCommit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+        "renderSeconds": 6.894723,
+        "role": "near-focus selectivity",
+        "saveSeconds": 0.043999,
+        "schemaVersion": "bfs.depthOfFieldDerivationCellReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "apertureBlades": 0,
+          "apertureFStop": 1.399999976158142,
+          "apertureRatio": 1,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "focusDistanceM": 3,
+          "focusMode": "DISTANCE",
+          "focusObject": null,
+          "focusObjectDistanceM": null,
+          "motionBlur": false,
+          "persistentData": false,
+          "resolution": [
+            256,
+            144,
+            100
+          ],
+          "samples": 256,
+          "seed": 492501,
+          "threads": 4,
+          "threadsMode": "FIXED",
+          "useDof": true
+        }
+      }
+    },
+    {
+      "runId": "D8_F1_4",
+      "containerName": "bfs-b49-dof-d8-f1-4",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d8-f1-4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D8_F1_4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D8_F1_4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 16967,
+      "stdout": "00:00.126  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.670  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.671  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.671  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.671  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.671  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B49_DOF_CELL_OK id=D8_F1_4 renderSeconds=6.935578\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n/repo/blender/render_b49_depth_of_field_derivation.py:33: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n/repo/blender/render_b49_depth_of_field_derivation.py:157: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  if scene.world.use_nodes:\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 101020,
+          "sha256": "5e631c30dd28d9a7a52c9f0d1187922e43ba96153efb0eb416b231df1985186f",
+          "uri": "production.exr"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "cellId": "D8_F1_4",
+        "experimentId": "B49-DOF-D1",
+        "fixture": {
+          "camera": {
+            "lensMm": 50,
+            "locationM": [
+              0,
+              0,
+              0
+            ],
+            "name": "CAM_DOF_FIXTURE",
+            "rotationEulerRad": [
+              0,
+              0,
+              0
+            ],
+            "sensorWidthMm": 36,
+            "type": "PERSP"
+          },
+          "focusObjectLocationM": [
+            0,
+            0,
+            -5
+          ],
+          "targets": [
+            {
+              "depthM": 3,
+              "id": "NEAR",
+              "viewportCenter01": [
+                0.17,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 5,
+              "id": "MID",
+              "viewportCenter01": [
+                0.5,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 8,
+              "id": "FAR",
+              "viewportCenter01": [
+                0.83,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            }
+          ]
+        },
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 505956,
+        "preregistrationCommit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+        "renderSeconds": 6.935578,
+        "role": "far-focus selectivity",
+        "saveSeconds": 0.04241,
+        "schemaVersion": "bfs.depthOfFieldDerivationCellReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "apertureBlades": 0,
+          "apertureFStop": 1.399999976158142,
+          "apertureRatio": 1,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "focusDistanceM": 8,
+          "focusMode": "DISTANCE",
+          "focusObject": null,
+          "focusObjectDistanceM": null,
+          "motionBlur": false,
+          "persistentData": false,
+          "resolution": [
+            256,
+            144,
+            100
+          ],
+          "samples": 256,
+          "seed": 492501,
+          "threads": 4,
+          "threadsMode": "FIXED",
+          "useDof": true
+        }
+      }
+    },
+    {
+      "runId": "OBJ5_F1_4",
+      "containerName": "bfs-b49-dof-obj5-f1-4",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-obj5-f1-4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/OBJ5_F1_4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "OBJ5_F1_4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 16967,
+      "stdout": "00:00.121  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.679  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.679  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.680  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.680  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.680  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B49_DOF_CELL_OK id=OBJ5_F1_4 renderSeconds=6.85671\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n/repo/blender/render_b49_depth_of_field_derivation.py:33: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n/repo/blender/render_b49_depth_of_field_derivation.py:157: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  if scene.world.use_nodes:\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 99847,
+          "sha256": "3d655dd27d00fb6d212d5ec584614f5a49f662c941d3c2edbd4532fbddaf30c3",
+          "uri": "production.exr"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "cellId": "OBJ5_F1_4",
+        "experimentId": "B49-DOF-D1",
+        "fixture": {
+          "camera": {
+            "lensMm": 50,
+            "locationM": [
+              0,
+              0,
+              0
+            ],
+            "name": "CAM_DOF_FIXTURE",
+            "rotationEulerRad": [
+              0,
+              0,
+              0
+            ],
+            "sensorWidthMm": 36,
+            "type": "PERSP"
+          },
+          "focusObjectLocationM": [
+            0,
+            0,
+            -5
+          ],
+          "targets": [
+            {
+              "depthM": 3,
+              "id": "NEAR",
+              "viewportCenter01": [
+                0.17,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 5,
+              "id": "MID",
+              "viewportCenter01": [
+                0.5,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            },
+            {
+              "depthM": 8,
+              "id": "FAR",
+              "viewportCenter01": [
+                0.83,
+                0.5
+              ],
+              "viewportSize01": [
+                0.24,
+                0.6
+              ]
+            }
+          ]
+        },
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 506168,
+        "preregistrationCommit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+        "renderSeconds": 6.85671,
+        "role": "focus-object override probe",
+        "saveSeconds": 0.042245,
+        "schemaVersion": "bfs.depthOfFieldDerivationCellReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "apertureBlades": 0,
+          "apertureFStop": 1.399999976158142,
+          "apertureRatio": 1,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "focusDistanceM": 99,
+          "focusMode": "OBJECT",
+          "focusObject": "FOCUS_MID",
+          "focusObjectDistanceM": 5,
+          "motionBlur": false,
+          "persistentData": false,
+          "resolution": [
+            256,
+            144,
+            100
+          ],
+          "samples": 256,
+          "seed": 492501,
+          "threads": 4,
+          "threadsMode": "FIXED",
+          "useDof": true
+        }
+      }
+    }
+  ],
+  "cleanup": {
+    "experimentContainersRunningAfter": 0
+  }
+}

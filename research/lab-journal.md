@@ -1407,6 +1407,22 @@ All eight workers completed, 19/19 attacks passed, cleanup was zero and independ
 
 Artifacts: `experiments/codex-worker-motion-blur-holdout-v0-1/`, `specs/codex-worker-motion-blur-holdout.v0.1.json`, `research/2026-08-27-b49-mb-codex-worker-motion-blur-holdout-protocol.md` and `research/2026-08-27-b49-mb-codex-worker-motion-blur-holdout-result.md`.
 
+## J-084 · B49-DOF-D1 separates focus semantics and exposes auxiliary-pass changes
+
+Date: 2026-08-27 · Type: LIVE DERIVATION · Runtime: seven fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+B49-DOF-D1 first inspected the promoted scenes and found that DOF was already enabled: TABLETOP's 8.2 m focus lies inside its 7.13–10.21 m subject band, while INTERIOR's 3.2 m focus favors the 2.74–4.89 m window region rather than the 5.71–6.98 m chair. A deterministic 256×144, 256-spp fixture then placed equal projected-size stripe targets at 3, 5 and 8 m.
+
+At f/1.4, maximum local modulation followed the requested near/mid/far focus plane in 3/3 cells. With 5 m focus fixed, the mid-plane metric remained exact as the aperture opened while near/far horizontal-gradient RMS decreased coherently. An on-axis 5 m focus object overrode a deliberately poisoned 99 m numeric distance and reproduced all seven decoded passes exactly against numeric 5 m.
+
+DOF off versus 5 m f/1.4 changed Combined, Depth, Normal and the active Cryptomatte layer; Vector remained exact. This rejects the assumption that auxiliary geometry/ID passes remain pinhole-exact when beauty DOF is enabled. Identifier floats and far-background Depth sentinels are not generic RMSE domains.
+
+DOF-on operator time was 1.107–1.132× off in this fixture. All seven workers completed, 15/15 attacks passed, cleanup was zero and the independent analyzer replay was byte exact. Status: `DEPTH_OF_FIELD_DERIVATION_USABLE`.
+
+Next: freeze a two-scene, unseen-frame formal holdout with three 512-spp DOF references and paired 128-spp on/off candidates. Human focus intent and cinematic preference remain a separate blind-review gate.
+
+Artifacts: `experiments/codex-worker-depth-of-field-derivation-v0-1/`, `specs/codex-worker-depth-of-field-derivation.v0.1.json`, `research/2026-08-27-b49-dof-d1-depth-of-field-derivation-protocol.md` and `research/2026-08-27-b49-dof-d1-depth-of-field-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

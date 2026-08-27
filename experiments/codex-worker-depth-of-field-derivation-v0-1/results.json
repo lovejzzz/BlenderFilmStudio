@@ -1,0 +1,2703 @@
+{
+  "attacks": [
+    {
+      "expectedReason": "PARENT_IDENTITY",
+      "id": "A01_PARENT",
+      "observedReason": "PARENT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "SOURCE_IDENTITY",
+      "id": "A02_SOURCE",
+      "observedReason": "SOURCE_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "IMAGE_IDENTITY",
+      "id": "A03_IMAGE",
+      "observedReason": "IMAGE_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "SECURITY_BOUNDARY",
+      "id": "A04_SECURITY",
+      "observedReason": "SECURITY_BOUNDARY",
+      "passed": true
+    },
+    {
+      "expectedReason": "DISK_ADMISSION",
+      "id": "A05_DISK",
+      "observedReason": "DISK_ADMISSION",
+      "passed": true
+    },
+    {
+      "expectedReason": "CELL_ROSTER",
+      "id": "A06_CELLS",
+      "observedReason": "CELL_ROSTER",
+      "passed": true
+    },
+    {
+      "expectedReason": "FIXTURE_ECHO",
+      "id": "A07_FIXTURE",
+      "observedReason": "FIXTURE_ECHO",
+      "passed": true
+    },
+    {
+      "expectedReason": "DOF_SETTING",
+      "id": "A08_DOF",
+      "observedReason": "DOF_SETTING",
+      "passed": true
+    },
+    {
+      "expectedReason": "PASS_ROSTER",
+      "id": "A09_ROSTER",
+      "observedReason": "PASS_ROSTER",
+      "passed": true
+    },
+    {
+      "expectedReason": "NON_FINITE",
+      "id": "A10_FINITE",
+      "observedReason": "NON_FINITE",
+      "passed": true
+    },
+    {
+      "expectedReason": "ROI_INVALID",
+      "id": "A11_ROI",
+      "observedReason": "ROI_INVALID",
+      "passed": true
+    },
+    {
+      "expectedReason": "RELATION_MISSING",
+      "id": "A12_RELATION",
+      "observedReason": "RELATION_MISSING",
+      "passed": true
+    },
+    {
+      "expectedReason": "OPERATION_BOUNDARY",
+      "id": "A13_OPERATIONS",
+      "observedReason": "OPERATION_BOUNDARY",
+      "passed": true
+    },
+    {
+      "expectedReason": "CLEANUP",
+      "id": "A14_CLEANUP",
+      "observedReason": "CLEANUP",
+      "passed": true
+    },
+    {
+      "expectedReason": "EVIDENCE_SELF_HASH",
+      "id": "A15_HASH",
+      "observedReason": "EVIDENCE_SELF_HASH",
+      "passed": true
+    }
+  ],
+  "attacksPassed": 15,
+  "baseFailure": null,
+  "cleanup": {
+    "experimentContainersRunningAfter": 0
+  },
+  "diskAdmission": {
+    "availableBytes": "118186958848",
+    "freeAfterProjectedBytes": "117113217024",
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "1073741824",
+    "status": "ACCEPTED"
+  },
+  "evidenceCoreHash": "f5c945a9c2d06efe13abfe0371fba952e1e27bee56453fb955b4f70444c52ddd",
+  "experimentId": "B49-DOF-D1",
+  "hostInspector": {
+    "packages": {
+      "numpy": "2.3.4",
+      "openImageIO": "3.1.13.1"
+    },
+    "pythonExecutable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+    "pythonVersion": "3.13.13"
+  },
+  "image": {
+    "architecture": "amd64",
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "sizeBytes": 1004901158
+  },
+  "nonClaims": [
+    "artistically correct focus target",
+    "human cinematic preference",
+    "depth-of-field temporal stability",
+    "focus pulling",
+    "anamorphic or polygonal bokeh quality",
+    "complex transparency or hair",
+    "2K or 4K depth-of-field cost",
+    "GPU or Eevee behavior",
+    "native x86 or cloud throughput",
+    "dollar cost"
+  ],
+  "observations": [
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-off-d5-f4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/OFF_D5_F4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "OFF_D5_F4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 82131,
+        "sha256": "e1e09d43fdc7f8d7189a437e009167b82c26191ed4ed7ac6d329a62a7a92878f",
+        "uri": "experiments/codex-worker-depth-of-field-derivation-v0-1/OFF_D5_F4/production.exr"
+      },
+      "cellId": "OFF_D5_F4",
+      "fixture": {
+        "camera": {
+          "lensMm": 50,
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "name": "CAM_DOF_FIXTURE",
+          "rotationEulerRad": [
+            0,
+            0,
+            0
+          ],
+          "sensorWidthMm": 36,
+          "type": "PERSP"
+        },
+        "focusObjectLocationM": [
+          0,
+          0,
+          -5
+        ],
+        "targets": [
+          {
+            "depthM": 3,
+            "id": "NEAR",
+            "viewportCenter01": [
+              0.17,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 5,
+            "id": "MID",
+            "viewportCenter01": [
+              0.5,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 8,
+            "id": "FAR",
+            "viewportCenter01": [
+              0.83,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          }
+        ]
+      },
+      "freshContainerWallSeconds": 16.25,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "5e8977b10be6af8cec875d39320efa9615df7a470900bea50b30d3cf9be6498e",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "b35818d7e3789720c72912ea3733109950c2dfaaa5a8e2c55323ce9584dfcbd3",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "b7f3d6df777e676f9395596714f056a41699c25e2b846a5aae951c15f730f541",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "c0c13262317e0c490bd53a6931420b1c0df7692b6df19d609dd7c9c8e0c207e1",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 508128,
+      "renderSeconds": 6.126003,
+      "role": "pinhole baseline",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "settings": {
+        "animatedSeed": false,
+        "apertureBlades": 0,
+        "apertureFStop": 4,
+        "apertureRatio": 1,
+        "denoising": false,
+        "device": "CPU",
+        "engine": "CYCLES",
+        "focusDistanceM": 5,
+        "focusMode": "DISTANCE",
+        "focusObject": null,
+        "focusObjectDistanceM": null,
+        "motionBlur": false,
+        "persistentData": false,
+        "resolution": [
+          256,
+          144,
+          100
+        ],
+        "samples": 256,
+        "seed": 492501,
+        "threads": 4,
+        "threadsMode": "FIXED",
+        "useDof": false
+      },
+      "targetMetrics": {
+        "FAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.44647543746466745,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3672,
+          "roiPixels": [
+            187,
+            36,
+            238,
+            108
+          ]
+        },
+        "MID": {
+          "finitePixelCount": 3744,
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3744,
+          "roiPixels": [
+            102,
+            36,
+            154,
+            108
+          ]
+        },
+        "NEAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.4463551656966525,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3672,
+          "roiPixels": [
+            18,
+            36,
+            69,
+            108
+          ]
+        }
+      }
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d5-f16",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F16,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D5_F16",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 90076,
+        "sha256": "cbcd196204d9d3393e36e75e4ce40e4bdb576103b09e7df29fb105f3b5b00bf1",
+        "uri": "experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F16/production.exr"
+      },
+      "cellId": "D5_F16",
+      "fixture": {
+        "camera": {
+          "lensMm": 50,
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "name": "CAM_DOF_FIXTURE",
+          "rotationEulerRad": [
+            0,
+            0,
+            0
+          ],
+          "sensorWidthMm": 36,
+          "type": "PERSP"
+        },
+        "focusObjectLocationM": [
+          0,
+          0,
+          -5
+        ],
+        "targets": [
+          {
+            "depthM": 3,
+            "id": "NEAR",
+            "viewportCenter01": [
+              0.17,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 5,
+            "id": "MID",
+            "viewportCenter01": [
+              0.5,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 8,
+            "id": "FAR",
+            "viewportCenter01": [
+              0.83,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          }
+        ]
+      },
+      "freshContainerWallSeconds": 17.019,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "c5048f4365f8549b4ece020c7b45259efa8e022ede5018329f474bbc74fa3e4f",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "e732d3139f10f08e838dda40d394924bbaa578dd0e659fb51dd71599370601c8",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "b7f3d6df777e676f9395596714f056a41699c25e2b846a5aae951c15f730f541",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "44cbe7b34278f802c9ada1f576d8a7eacd240fa00df513a2fe970351e205bdea",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 507852,
+      "renderSeconds": 6.827096,
+      "role": "small-aperture dose",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "settings": {
+        "animatedSeed": false,
+        "apertureBlades": 0,
+        "apertureFStop": 16,
+        "apertureRatio": 1,
+        "denoising": false,
+        "device": "CPU",
+        "engine": "CYCLES",
+        "focusDistanceM": 5,
+        "focusMode": "DISTANCE",
+        "focusObject": null,
+        "focusObjectDistanceM": null,
+        "motionBlur": false,
+        "persistentData": false,
+        "resolution": [
+          256,
+          144,
+          100
+        ],
+        "samples": 256,
+        "seed": 492501,
+        "threads": 4,
+        "threadsMode": "FIXED",
+        "useDof": true
+      },
+      "targetMetrics": {
+        "FAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.44638034800575144,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3672,
+          "roiPixels": [
+            187,
+            36,
+            238,
+            108
+          ]
+        },
+        "MID": {
+          "finitePixelCount": 3744,
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3744,
+          "roiPixels": [
+            102,
+            36,
+            154,
+            108
+          ]
+        },
+        "NEAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.4459861524117271,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3672,
+          "roiPixels": [
+            18,
+            36,
+            69,
+            108
+          ]
+        }
+      }
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d5-f4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D5_F4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 93523,
+        "sha256": "2261b9e96bc582398dcd440718072aecaa8c3d6bf49b1d5dd144e8681ec6f24e",
+        "uri": "experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F4/production.exr"
+      },
+      "cellId": "D5_F4",
+      "fixture": {
+        "camera": {
+          "lensMm": 50,
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "name": "CAM_DOF_FIXTURE",
+          "rotationEulerRad": [
+            0,
+            0,
+            0
+          ],
+          "sensorWidthMm": 36,
+          "type": "PERSP"
+        },
+        "focusObjectLocationM": [
+          0,
+          0,
+          -5
+        ],
+        "targets": [
+          {
+            "depthM": 3,
+            "id": "NEAR",
+            "viewportCenter01": [
+              0.17,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 5,
+            "id": "MID",
+            "viewportCenter01": [
+              0.5,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 8,
+            "id": "FAR",
+            "viewportCenter01": [
+              0.83,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          }
+        ]
+      },
+      "freshContainerWallSeconds": 16.861,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "a06908ac76b38e44d190fd7656359ac5586eaf2cca91128c97f6a3d759deee4a",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "3a0564e7c09618a08a9d2859d2d87a3c461f2b134729df046db0e5723d799fdf",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "92fe16923280864c2493d831c3aadb3424fed1a771c4de8bbeca2a87b0925e08",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "ecf9cf1eaac1cfecfa84fd489d3783f84be09554a037585f760df69a8141a81f",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 507432,
+      "renderSeconds": 6.78137,
+      "role": "compiled-scene aperture dose",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "settings": {
+        "animatedSeed": false,
+        "apertureBlades": 0,
+        "apertureFStop": 4,
+        "apertureRatio": 1,
+        "denoising": false,
+        "device": "CPU",
+        "engine": "CYCLES",
+        "focusDistanceM": 5,
+        "focusMode": "DISTANCE",
+        "focusObject": null,
+        "focusObjectDistanceM": null,
+        "motionBlur": false,
+        "persistentData": false,
+        "resolution": [
+          256,
+          144,
+          100
+        ],
+        "samples": 256,
+        "seed": 492501,
+        "threads": 4,
+        "threadsMode": "FIXED",
+        "useDof": true
+      },
+      "targetMetrics": {
+        "FAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.4436538171311081,
+          "modulation": 0.9532782198537562,
+          "p05": 0.023828107863664627,
+          "p95": 0.9961718916893006,
+          "pixelCount": 3672,
+          "roiPixels": [
+            187,
+            36,
+            238,
+            108
+          ]
+        },
+        "MID": {
+          "finitePixelCount": 3744,
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3744,
+          "roiPixels": [
+            102,
+            36,
+            154,
+            108
+          ]
+        },
+        "NEAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.4379170350320083,
+          "modulation": 0.9532665252445082,
+          "p05": 0.023828109726309776,
+          "p95": 0.9959167242050171,
+          "pixelCount": 3672,
+          "roiPixels": [
+            18,
+            36,
+            69,
+            108
+          ]
+        }
+      }
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d5-f1-4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F1_4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D5_F1_4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 99847,
+        "sha256": "24adabeb97d48a83efa1000eeda6f9981e220694be26b9eb66276bafa7154792",
+        "uri": "experiments/codex-worker-depth-of-field-derivation-v0-1/D5_F1_4/production.exr"
+      },
+      "cellId": "D5_F1_4",
+      "fixture": {
+        "camera": {
+          "lensMm": 50,
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "name": "CAM_DOF_FIXTURE",
+          "rotationEulerRad": [
+            0,
+            0,
+            0
+          ],
+          "sensorWidthMm": 36,
+          "type": "PERSP"
+        },
+        "focusObjectLocationM": [
+          0,
+          0,
+          -5
+        ],
+        "targets": [
+          {
+            "depthM": 3,
+            "id": "NEAR",
+            "viewportCenter01": [
+              0.17,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 5,
+            "id": "MID",
+            "viewportCenter01": [
+              0.5,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 8,
+            "id": "FAR",
+            "viewportCenter01": [
+              0.83,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          }
+        ]
+      },
+      "freshContainerWallSeconds": 16.909,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "8afb98e6c6b95f4e4012a3b3c949f2cfc0f6c64f8c27648008bc2659e3eec5e2",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "b047fed225666a758cc1ebd5ee3749942a5e72171a2798477a94413449695077",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "c3f2fae26d4984c22eb0f8dd11d59aa2f9a749a05766bb76576bbe931dd7e64a",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "17a32faaf306b9266bc3691c1b31d0566c2ab79f25cdcabd64da0a4404907393",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 507476,
+      "renderSeconds": 6.906643,
+      "role": "strong mid-focus dose",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "settings": {
+        "animatedSeed": false,
+        "apertureBlades": 0,
+        "apertureFStop": 1.399999976158142,
+        "apertureRatio": 1,
+        "denoising": false,
+        "device": "CPU",
+        "engine": "CYCLES",
+        "focusDistanceM": 5,
+        "focusMode": "DISTANCE",
+        "focusObject": null,
+        "focusObjectDistanceM": null,
+        "motionBlur": false,
+        "persistentData": false,
+        "resolution": [
+          256,
+          144,
+          100
+        ],
+        "samples": 256,
+        "seed": 492501,
+        "threads": 4,
+        "threadsMode": "FIXED",
+        "useDof": true
+      },
+      "targetMetrics": {
+        "FAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.4245740902399339,
+          "modulation": 0.9457720864225679,
+          "p05": 0.02765623480081558,
+          "p95": 0.9923437237739563,
+          "pixelCount": 3672,
+          "roiPixels": [
+            187,
+            36,
+            238,
+            108
+          ]
+        },
+        "MID": {
+          "finitePixelCount": 3744,
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3744,
+          "roiPixels": [
+            102,
+            36,
+            154,
+            108
+          ]
+        },
+        "NEAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.3844853839002926,
+          "modulation": 0.9007350106112619,
+          "p05": 0.05062515288591385,
+          "p95": 0.9693750143051147,
+          "pixelCount": 3672,
+          "roiPixels": [
+            18,
+            36,
+            69,
+            108
+          ]
+        }
+      }
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d3-f1-4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D3_F1_4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D3_F1_4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 102616,
+        "sha256": "1a23d5a6ee38c39bf21a1a5b9e4314adea2507e41dac8b45cbc4a2f19c67ff09",
+        "uri": "experiments/codex-worker-depth-of-field-derivation-v0-1/D3_F1_4/production.exr"
+      },
+      "cellId": "D3_F1_4",
+      "fixture": {
+        "camera": {
+          "lensMm": 50,
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "name": "CAM_DOF_FIXTURE",
+          "rotationEulerRad": [
+            0,
+            0,
+            0
+          ],
+          "sensorWidthMm": 36,
+          "type": "PERSP"
+        },
+        "focusObjectLocationM": [
+          0,
+          0,
+          -5
+        ],
+        "targets": [
+          {
+            "depthM": 3,
+            "id": "NEAR",
+            "viewportCenter01": [
+              0.17,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 5,
+            "id": "MID",
+            "viewportCenter01": [
+              0.5,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 8,
+            "id": "FAR",
+            "viewportCenter01": [
+              0.83,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          }
+        ]
+      },
+      "freshContainerWallSeconds": 17.06,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "0e5199e621a2eb14813ec7b7b751cb00626051c6d5cf21f32704f92da57b10b7",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "838d5f3159d91c79b9a26cff8c26855f766497e335cb1a13882834024b841c91",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "0779236cf3e73b24637c00cb55e8f42930be27709f52f522e1c42c0ff33c485d",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "e5aeb3be9b7646927f9dd86f84f7a8ddff15c0d7790fb91412ca85c5525918d6",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 507800,
+      "renderSeconds": 6.894723,
+      "role": "near-focus selectivity",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "settings": {
+        "animatedSeed": false,
+        "apertureBlades": 0,
+        "apertureFStop": 1.399999976158142,
+        "apertureRatio": 1,
+        "denoising": false,
+        "device": "CPU",
+        "engine": "CYCLES",
+        "focusDistanceM": 3,
+        "focusMode": "DISTANCE",
+        "focusObject": null,
+        "focusObjectDistanceM": null,
+        "motionBlur": false,
+        "persistentData": false,
+        "resolution": [
+          256,
+          144,
+          100
+        ],
+        "samples": 256,
+        "seed": 492501,
+        "threads": 4,
+        "threadsMode": "FIXED",
+        "useDof": true
+      },
+      "targetMetrics": {
+        "FAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.31264875241128454,
+          "modulation": 0.7584206058277158,
+          "p05": 0.12335965447127818,
+          "p95": 0.8979166418313981,
+          "pixelCount": 3672,
+          "roiPixels": [
+            187,
+            36,
+            238,
+            108
+          ]
+        },
+        "MID": {
+          "finitePixelCount": 3744,
+          "horizontalGradientRms": 0.3879514464533421,
+          "modulation": 0.9007350383790605,
+          "p05": 0.050625137984752655,
+          "p95": 0.9693750143051147,
+          "pixelCount": 3744,
+          "roiPixels": [
+            102,
+            36,
+            154,
+            108
+          ]
+        },
+        "NEAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.44635806708992565,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3672,
+          "roiPixels": [
+            18,
+            36,
+            69,
+            108
+          ]
+        }
+      }
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-d8-f1-4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/D8_F1_4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "D8_F1_4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 101020,
+        "sha256": "5e631c30dd28d9a7a52c9f0d1187922e43ba96153efb0eb416b231df1985186f",
+        "uri": "experiments/codex-worker-depth-of-field-derivation-v0-1/D8_F1_4/production.exr"
+      },
+      "cellId": "D8_F1_4",
+      "fixture": {
+        "camera": {
+          "lensMm": 50,
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "name": "CAM_DOF_FIXTURE",
+          "rotationEulerRad": [
+            0,
+            0,
+            0
+          ],
+          "sensorWidthMm": 36,
+          "type": "PERSP"
+        },
+        "focusObjectLocationM": [
+          0,
+          0,
+          -5
+        ],
+        "targets": [
+          {
+            "depthM": 3,
+            "id": "NEAR",
+            "viewportCenter01": [
+              0.17,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 5,
+            "id": "MID",
+            "viewportCenter01": [
+              0.5,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 8,
+            "id": "FAR",
+            "viewportCenter01": [
+              0.83,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          }
+        ]
+      },
+      "freshContainerWallSeconds": 16.967,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "16b9617457ba4bf522111c17e4db3a4f4c7404c07ffaeb3a5b7d90f1ca8e8402",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "144358614ee085af855c16ab31051d38a8b755e1b6b85624c6dc096d3569ada4",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "08f72f4ddb6385f3780c2273f62f99534289c9da6729f12e9ce4607905cd9ccc",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "9f1d4c94718de5b47de32cce3da66ecef6b524ad1d23a1ef97add773d54dfe14",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 505956,
+      "renderSeconds": 6.935578,
+      "role": "far-focus selectivity",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "settings": {
+        "animatedSeed": false,
+        "apertureBlades": 0,
+        "apertureFStop": 1.399999976158142,
+        "apertureRatio": 1,
+        "denoising": false,
+        "device": "CPU",
+        "engine": "CYCLES",
+        "focusDistanceM": 8,
+        "focusMode": "DISTANCE",
+        "focusObject": null,
+        "focusObjectDistanceM": null,
+        "motionBlur": false,
+        "persistentData": false,
+        "resolution": [
+          256,
+          144,
+          100
+        ],
+        "samples": 256,
+        "seed": 492501,
+        "threads": 4,
+        "threadsMode": "FIXED",
+        "useDof": true
+      },
+      "targetMetrics": {
+        "FAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.4464752532992352,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3672,
+          "roiPixels": [
+            187,
+            36,
+            238,
+            108
+          ]
+        },
+        "MID": {
+          "finitePixelCount": 3744,
+          "horizontalGradientRms": 0.4291112643197211,
+          "modulation": 0.9457720899757867,
+          "p05": 0.027656232938170433,
+          "p95": 0.9923437237739563,
+          "pixelCount": 3744,
+          "roiPixels": [
+            102,
+            36,
+            154,
+            108
+          ]
+        },
+        "NEAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.31230866088435544,
+          "modulation": 0.7580485024293236,
+          "p05": 0.12335968427360058,
+          "p95": 0.8963462114334106,
+          "pixelCount": 3672,
+          "roiPixels": [
+            18,
+            36,
+            69,
+            108
+          ]
+        }
+      }
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-dof-obj5-f1-4",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-depth-of-field-derivation-v0-1/OBJ5_F1_4,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_depth_of_field_derivation.py",
+        "--",
+        "--cell-id",
+        "OBJ5_F1_4",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 99847,
+        "sha256": "3d655dd27d00fb6d212d5ec584614f5a49f662c941d3c2edbd4532fbddaf30c3",
+        "uri": "experiments/codex-worker-depth-of-field-derivation-v0-1/OBJ5_F1_4/production.exr"
+      },
+      "cellId": "OBJ5_F1_4",
+      "fixture": {
+        "camera": {
+          "lensMm": 50,
+          "locationM": [
+            0,
+            0,
+            0
+          ],
+          "name": "CAM_DOF_FIXTURE",
+          "rotationEulerRad": [
+            0,
+            0,
+            0
+          ],
+          "sensorWidthMm": 36,
+          "type": "PERSP"
+        },
+        "focusObjectLocationM": [
+          0,
+          0,
+          -5
+        ],
+        "targets": [
+          {
+            "depthM": 3,
+            "id": "NEAR",
+            "viewportCenter01": [
+              0.17,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 5,
+            "id": "MID",
+            "viewportCenter01": [
+              0.5,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          },
+          {
+            "depthM": 8,
+            "id": "FAR",
+            "viewportCenter01": [
+              0.83,
+              0.5
+            ],
+            "viewportSize01": [
+              0.24,
+              0.6
+            ]
+          }
+        ]
+      },
+      "freshContainerWallSeconds": 16.967,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "8afb98e6c6b95f4e4012a3b3c949f2cfc0f6c64f8c27648008bc2659e3eec5e2",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "b047fed225666a758cc1ebd5ee3749942a5e72171a2798477a94413449695077",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "c3f2fae26d4984c22eb0f8dd11d59aa2f9a749a05766bb76576bbe931dd7e64a",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "17a32faaf306b9266bc3691c1b31d0566c2ab79f25cdcabd64da0a4404907393",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            144,
+            256,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 506168,
+      "renderSeconds": 6.85671,
+      "role": "focus-object override probe",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "settings": {
+        "animatedSeed": false,
+        "apertureBlades": 0,
+        "apertureFStop": 1.399999976158142,
+        "apertureRatio": 1,
+        "denoising": false,
+        "device": "CPU",
+        "engine": "CYCLES",
+        "focusDistanceM": 99,
+        "focusMode": "OBJECT",
+        "focusObject": "FOCUS_MID",
+        "focusObjectDistanceM": 5,
+        "motionBlur": false,
+        "persistentData": false,
+        "resolution": [
+          256,
+          144,
+          100
+        ],
+        "samples": 256,
+        "seed": 492501,
+        "threads": 4,
+        "threadsMode": "FIXED",
+        "useDof": true
+      },
+      "targetMetrics": {
+        "FAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.4245740902399339,
+          "modulation": 0.9457720864225679,
+          "p05": 0.02765623480081558,
+          "p95": 0.9923437237739563,
+          "pixelCount": 3672,
+          "roiPixels": [
+            187,
+            36,
+            238,
+            108
+          ]
+        },
+        "MID": {
+          "finitePixelCount": 3744,
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413,
+          "p05": 0.023828107863664627,
+          "p95": 1.0,
+          "pixelCount": 3744,
+          "roiPixels": [
+            102,
+            36,
+            154,
+            108
+          ]
+        },
+        "NEAR": {
+          "finitePixelCount": 3672,
+          "horizontalGradientRms": 0.3844853839002926,
+          "modulation": 0.9007350106112619,
+          "p05": 0.05062515288591385,
+          "p95": 0.9693750143051147,
+          "pixelCount": 3672,
+          "roiPixels": [
+            18,
+            36,
+            69,
+            108
+          ]
+        }
+      }
+    }
+  ],
+  "operationCounts": {
+    "builds": 0,
+    "dockerRuns": 7,
+    "downloads": 0,
+    "hostExrAnalyses": 7,
+    "modelCalls": 0,
+    "pulls": 0,
+    "videoModelCalls": 0
+  },
+  "parentObservations": [
+    {
+      "expectedSha256": "6fb46a8aecedf810cf9cb977349522345dafb043bfb62064ee03269f14088496",
+      "match": true,
+      "observedSha256": "6fb46a8aecedf810cf9cb977349522345dafb043bfb62064ee03269f14088496",
+      "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/results.json"
+    },
+    {
+      "expectedSha256": "fc20ec3509b83f3451188f722020fc5102d0ee7a8ffac7fbb530bd892d02b06c",
+      "match": true,
+      "observedSha256": "fc20ec3509b83f3451188f722020fc5102d0ee7a8ffac7fbb530bd892d02b06c",
+      "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/audit.json"
+    }
+  ],
+  "parents": {
+    "motionBlurAudit": {
+      "sha256": "fc20ec3509b83f3451188f722020fc5102d0ee7a8ffac7fbb530bd892d02b06c",
+      "status": "PASS",
+      "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/audit.json"
+    },
+    "motionBlurResult": {
+      "sha256": "6fb46a8aecedf810cf9cb977349522345dafb043bfb62064ee03269f14088496",
+      "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/results.json",
+      "verdict": "B49_MOTION_BLUR_OPERATING_POINT_SUPPORTED"
+    }
+  },
+  "preregistration": {
+    "commit": "9eef748598a8ec1dfd320eac846eb03a492d9831",
+    "specSha256": "27039abd12cc29a604450708552322442373845e50d5471e068af0c71724f76c",
+    "specUri": "specs/codex-worker-depth-of-field-derivation.v0.1.json"
+  },
+  "relations": {
+    "apertureDoseAtMidFocus": {
+      "FAR": [
+        {
+          "cellId": "OFF_D5_F4",
+          "horizontalGradientRms": 0.44647543746466745,
+          "modulation": 0.9534529132749413
+        },
+        {
+          "cellId": "D5_F16",
+          "horizontalGradientRms": 0.44638034800575144,
+          "modulation": 0.9534529132749413
+        },
+        {
+          "cellId": "D5_F4",
+          "horizontalGradientRms": 0.4436538171311081,
+          "modulation": 0.9532782198537562
+        },
+        {
+          "cellId": "D5_F1_4",
+          "horizontalGradientRms": 0.4245740902399339,
+          "modulation": 0.9457720864225679
+        }
+      ],
+      "MID": [
+        {
+          "cellId": "OFF_D5_F4",
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413
+        },
+        {
+          "cellId": "D5_F16",
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413
+        },
+        {
+          "cellId": "D5_F4",
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413
+        },
+        {
+          "cellId": "D5_F1_4",
+          "horizontalGradientRms": 0.45095799967457084,
+          "modulation": 0.9534529132749413
+        }
+      ],
+      "NEAR": [
+        {
+          "cellId": "OFF_D5_F4",
+          "horizontalGradientRms": 0.4463551656966525,
+          "modulation": 0.9534529132749413
+        },
+        {
+          "cellId": "D5_F16",
+          "horizontalGradientRms": 0.4459861524117271,
+          "modulation": 0.9534529132749413
+        },
+        {
+          "cellId": "D5_F4",
+          "horizontalGradientRms": 0.4379170350320083,
+          "modulation": 0.9532665252445082
+        },
+        {
+          "cellId": "D5_F1_4",
+          "horizontalGradientRms": 0.3844853839002926,
+          "modulation": 0.9007350106112619
+        }
+      ]
+    },
+    "focusObjectOverride": {
+      "BFS_MASTER.Combined": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "8afb98e6c6b95f4e4012a3b3c949f2cfc0f6c64f8c27648008bc2659e3eec5e2",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "8afb98e6c6b95f4e4012a3b3c949f2cfc0f6c64f8c27648008bc2659e3eec5e2",
+        "rmse": 0.0
+      },
+      "BFS_MASTER.CryptoObject00": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "b047fed225666a758cc1ebd5ee3749942a5e72171a2798477a94413449695077",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "b047fed225666a758cc1ebd5ee3749942a5e72171a2798477a94413449695077",
+        "rmse": 0.0
+      },
+      "BFS_MASTER.CryptoObject01": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+        "rmse": 0.0
+      },
+      "BFS_MASTER.CryptoObject02": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+        "rmse": 0.0
+      },
+      "BFS_MASTER.Depth": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "c3f2fae26d4984c22eb0f8dd11d59aa2f9a749a05766bb76576bbe931dd7e64a",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "c3f2fae26d4984c22eb0f8dd11d59aa2f9a749a05766bb76576bbe931dd7e64a",
+        "rmse": 0.0
+      },
+      "BFS_MASTER.Normal": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "17a32faaf306b9266bc3691c1b31d0566c2ab79f25cdcabd64da0a4404907393",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "17a32faaf306b9266bc3691c1b31d0566c2ab79f25cdcabd64da0a4404907393",
+        "rmse": 0.0
+      },
+      "BFS_MASTER.Vector": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+        "rmse": 0.0
+      }
+    },
+    "focusSelectivity": [
+      {
+        "cellId": "D3_F1_4",
+        "expectedHighestModulationTarget": "NEAR",
+        "followsRequestedPlane": true,
+        "modulationByTarget": {
+          "FAR": 0.7584206058277158,
+          "MID": 0.9007350383790605,
+          "NEAR": 0.9534529132749413
+        },
+        "observedHighestModulationTarget": "NEAR"
+      },
+      {
+        "cellId": "D5_F1_4",
+        "expectedHighestModulationTarget": "MID",
+        "followsRequestedPlane": true,
+        "modulationByTarget": {
+          "FAR": 0.9457720864225679,
+          "MID": 0.9534529132749413,
+          "NEAR": 0.9007350106112619
+        },
+        "observedHighestModulationTarget": "MID"
+      },
+      {
+        "cellId": "D8_F1_4",
+        "expectedHighestModulationTarget": "FAR",
+        "followsRequestedPlane": true,
+        "modulationByTarget": {
+          "FAR": 0.9534529132749413,
+          "MID": 0.9457720899757867,
+          "NEAR": 0.7580485024293236
+        },
+        "observedHighestModulationTarget": "FAR"
+      }
+    ],
+    "passDomain": {
+      "BFS_MASTER.Combined": {
+        "changedFloatComponents": 33819,
+        "exact": false,
+        "leftHash": "5e8977b10be6af8cec875d39320efa9615df7a470900bea50b30d3cf9be6498e",
+        "maximumAbsoluteError": 0.18187516927719116,
+        "rightHash": "8afb98e6c6b95f4e4012a3b3c949f2cfc0f6c64f8c27648008bc2659e3eec5e2",
+        "rmse": 0.022699141017600465
+      },
+      "BFS_MASTER.CryptoObject00": {
+        "changedFloatComponents": 1892,
+        "exact": false,
+        "leftHash": "b35818d7e3789720c72912ea3733109950c2dfaaa5a8e2c55323ce9584dfcbd3",
+        "maximumAbsoluteError": 6.505135146179273e+37,
+        "rightHash": "b047fed225666a758cc1ebd5ee3749942a5e72171a2798477a94413449695077",
+        "rmse": 2.5069585687217835e+36
+      },
+      "BFS_MASTER.CryptoObject01": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "c8f1238f774193c5ae28431b387b14ff145810d5f642af699e67c01ac3ecb8b8",
+        "rmse": 0.0
+      },
+      "BFS_MASTER.CryptoObject02": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "e770652e5ef9e1cbe51770494b5f6795bbd9ac0e9ec7c8f254ab9b49cdee6148",
+        "rmse": 0.0
+      },
+      "BFS_MASTER.Depth": {
+        "changedFloatComponents": 136,
+        "exact": false,
+        "leftHash": "b7f3d6df777e676f9395596714f056a41699c25e2b846a5aae951c15f730f541",
+        "maximumAbsoluteError": 9999999997.0,
+        "rightHash": "c3f2fae26d4984c22eb0f8dd11d59aa2f9a749a05766bb76576bbe931dd7e64a",
+        "rmse": 607390822.1014802
+      },
+      "BFS_MASTER.Normal": {
+        "changedFloatComponents": 1573,
+        "exact": false,
+        "leftHash": "c0c13262317e0c490bd53a6931420b1c0df7692b6df19d609dd7c9c8e0c207e1",
+        "maximumAbsoluteError": 0.140625,
+        "rightHash": "17a32faaf306b9266bc3691c1b31d0566c2ab79f25cdcabd64da0a4404907393",
+        "rmse": 0.00617360958892483
+      },
+      "BFS_MASTER.Vector": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+        "maximumAbsoluteError": 0.0,
+        "rightHash": "89fdaaab72f90b492efc63aeff2bc65fd6cab17688be539c8e79412cae0d257e",
+        "rmse": 0.0
+      }
+    }
+  },
+  "runtime": {
+    "numpy": "2.3.4",
+    "openImageIO": "3.1.13.1",
+    "python": "3.13.13"
+  },
+  "schemaVersion": "bfs.codexWorkerDepthOfFieldDerivationEvidence.v0.1",
+  "securityBoundary": {
+    "capDrop": [
+      "ALL"
+    ],
+    "cpus": 4,
+    "killGraceMs": 5000,
+    "memoryBytes": 8589934592,
+    "network": "none",
+    "noNewPrivileges": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "platform": "linux/amd64",
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "shmBytes": 1073741824,
+    "user": "65532:65532",
+    "wallTimeMs": 180000
+  },
+  "sourceObservations": [
+    {
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true,
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    },
+    {
+      "expectedSha256": "27039abd12cc29a604450708552322442373845e50d5471e068af0c71724f76c",
+      "match": true,
+      "observedSha256": "27039abd12cc29a604450708552322442373845e50d5471e068af0c71724f76c",
+      "uri": "specs/codex-worker-depth-of-field-derivation.v0.1.json"
+    }
+  ],
+  "status": "DEPTH_OF_FIELD_DERIVATION_USABLE",
+  "toolFreezeCommit": "a9431447d992f1638063780857ad7257bc3be156",
+  "tools": {
+    "analyzer": {
+      "sha256": "00cf196a84d1029ba68a6cf9bae014304132a2fbea938cc8df5e2312c80bde90",
+      "uri": "scripts/analyze-b49-depth-of-field-derivation.py"
+    },
+    "audit": {
+      "sha256": "fcb8ffe2c83c7ffd0b36713b2f90ea3c7fd8bd29ecd6ac4dc3d8f1e010608c31",
+      "uri": "scripts/audit-b49-depth-of-field-derivation.py"
+    },
+    "renderer": {
+      "sha256": "ca08056a567d664ba79b6efee9098fb2a701241e66d8aded72d5b264f72f380a",
+      "uri": "blender/render_b49_depth_of_field_derivation.py"
+    },
+    "runner": {
+      "sha256": "bdbb53ac2264e614fbd42d022f53a754a76a4f5f7643dbe6dbebdc5e56001f9c",
+      "uri": "scripts/run-b49-depth-of-field-derivation.mjs"
+    }
+  }
+}
