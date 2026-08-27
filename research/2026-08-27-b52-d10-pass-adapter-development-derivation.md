@@ -1,7 +1,8 @@
 # B52-D10 · Blender 5.2 Vector / Depth / Object Index adapter 开发推导
 
-日期：2026-08-27  
-状态：`EXPLORATORY_NOT_FORMAL_NOT_PROMOTABLE`  
+日期：2026-08-27
+
+状态：`EXPLORATORY_NOT_FORMAL_NOT_PROMOTABLE`
 运行时：Blender 5.2.0 LTS，build `fbe6228777e7`，Cycles CPU，motion blur 关闭
 
 ## 问题

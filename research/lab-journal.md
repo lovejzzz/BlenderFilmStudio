@@ -2051,6 +2051,22 @@ Observation SHA-256: `303718b7d16f1a088c4c2d7f9d51e9cf66d178b5e00047843415388ae6
 
 Artifacts: `experiments/layer-depth-pass-adapter-development-v0-1/` and `research/2026-08-27-b52-d10-pass-adapter-development-derivation.md`.
 
+## J-127 · D10 freezes the unseen Blender multipart adapter holdout
+
+Date: 2026-08-27 · Type: REAL-BLENDER ADAPTER PREREGISTRATION · Formal outputs: 0
+
+The development mapping is now separated from a fresh formal question. D10 freezes an unseen 173×97 orthographic scene at exactly 10 pixels per world unit, new asymmetric object and camera trajectories, new IDs 101/202/303/404/505 and five binary-exact camera depths. The 192×108 development EXRs, pass indices and trajectories are forbidden formal inputs.
+
+An independent standard-library projection oracle—not `bpy`, `bpy_extras`, `mathutils` or renderer-reported coordinates—predicts XY as previous minus current and ZW as current minus next. Correct endpoint error must remain below p99 `1/4096 px` and maximum `1/1024 px`; the nearest wrong component/sign candidate must remain at least 4 px away. Static uses the same tolerance, not exact zero, preserving D5's retained `2.6702880859375e-5` counterexample.
+
+Each previous/current frame and repeat gets a fresh Blender process: 3 fixtures × 2 repeats × 2 frames = 12 Cycles renders. Six fresh adapter processes must write seven D9.1-format raw arrays with `motion=(-Vector.X,-Vector.Y)`. One independent analyzer reconstructs every array for byte-exact comparison. Total formal boundary: 19 unique child PIDs, 12 ray renders, 12 diagnostics plus sidecars and 34 attacks.
+
+The EXR roster is frozen to Combined, Depth, Vector and the observed Blender 5.2 name `Object Index`; accepting the stale `IndexOB` name is an attack failure. Analytic 3×3 owner probes, five depths and asymmetric top/bottom markers bind ownership and raster orientation.
+
+Formal root and formal tools are absent. Spec SHA-256: `147338ae39b9c025a8f2a4921da55b15f8c16f339f34c711502dc3c94ca03566`. Next: commit the preregistration before implementing any formal tool.
+
+Artifacts: `specs/blender-multipart-temporal-adapter-holdout.v0.1.json` and `research/2026-08-27-b52-d10-blender-multipart-temporal-adapter-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

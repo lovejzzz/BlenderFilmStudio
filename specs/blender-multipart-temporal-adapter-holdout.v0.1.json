@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "bfs.blenderMultipartTemporalAdapterHoldout.v0.1",
+  "experimentId": "B52-D10",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "question": "On unseen opaque orthographic fixtures, can a frozen adapter reproducibly extract Blender 5.2 multipart Combined, Depth, Vector and Object Index into the D9.1 canonical previous/current arrays, identify both Vector temporal pairs and convert XY into the D9.1 current-to-previous coordinate convention within preregistered error gates?",
+  "formalOutputRoot": "experiments/blender-multipart-temporal-adapter-holdout-v0-1",
+  "projectedWriteBytes": 16777216,
+  "diskReserveBytes": 107374182400,
+  "parents": {
+    "d9_1Spec": {"uri": "specs/layer-depth-temporal-accumulation-holdout.v0.1.json", "sha256": "669077423e0101dd5600576d295c0b7a62189a30b18c1dd6ab18a3b5257cd28f"},
+    "d9_1Result": {"uri": "experiments/layer-depth-temporal-accumulation-holdout-v0-1/results.json", "sha256": "a8e41983a5ec02df8977c44d76413b11cb0f63f2249941d5663875d30c28e7f1", "verdict": "LAYER_DEPTH_TEMPORAL_ACCUMULATION_HOLDOUT_SUPPORTED"},
+    "d9_1Audit": {"uri": "experiments/layer-depth-temporal-accumulation-holdout-v0-1/audit.json", "sha256": "6213aebcdb3364a60f2d256b0ba7c9ee66344b281a9e528f9b39feb594ebb83b", "status": "PASS"},
+    "d5Result": {"uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/results.json", "sha256": "b436f8c9905ff08c322bef3d7a9fa950bf7934b3f7d93ae25fcbabdc5b06862e", "verdict": "CONTROLLED_VECTOR_BLUR_TASK_CALIBRATION_INVALID", "retainedCounterexample": "static Vector maximum 2.6702880859375e-5 forbids an exact-zero static gate"},
+    "d10DevelopmentObservation": {"uri": "experiments/layer-depth-pass-adapter-development-v0-1/observation.json", "sha256": "303718b7d16f1a088c4c2d7f9d51e9cf66d178b5e00047843415388ae6f28693", "classification": "EXPLORATORY_NOT_FORMAL_NOT_PROMOTABLE"},
+    "d10DevelopmentNote": {"uri": "research/2026-08-27-b52-d10-pass-adapter-development-derivation.md", "sha256": "3d633c60afa076a7dd8fa575a61b9a4502566435323dd0402f8920a11e1d6335"}
+  },
+  "normativeSources": [
+    {
+      "uri": "https://docs.blender.org/manual/en/5.2/render/layers/passes.html",
+      "claims": [
+        "Depth is the distance to the nearest visible surface",
+        "Vector has four components representing two screen-space vectors based on previous and next frames",
+        "Vector pass is disabled when Motion Blur is enabled",
+        "Object Index is a user-defined visible-pixel ID and is not anti-aliased"
+      ]
+    },
+    {
+      "uri": "https://docs.blender.org/api/5.2/bpy.types.ViewLayer.html",
+      "claims": ["use_pass_z, use_pass_vector, use_pass_object_index and pass_alpha_threshold are Blender 5.2 ViewLayer properties"]
+    }
+  ],
+  "freshness": {
+    "reuseDevelopmentResolution": false,
+    "reuseDevelopmentOrthoScale": false,
+    "reuseDevelopmentObjectTrajectories": false,
+    "reuseDevelopmentCameraTrajectories": false,
+    "reuseDevelopmentPassIndices": false,
+    "reuseDevelopmentExrFiles": false,
+    "formalRendererAndAdapterAbsentAtPreregistration": true,
+    "formalOutputRootAbsentAtPreregistration": true
+  },
+  "runtime": {
+    "blender": {"executable": "/Applications/Blender.app/Contents/MacOS/Blender", "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2", "bytes": 183237520, "version": "5.2.0 LTS", "buildHash": "fbe6228777e7", "buildPlatform": "Darwin", "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]},
+    "python": {"executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13", "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35", "bytes": 5543888, "openImageIO": "3.1.13.1", "numpy": "2.3.4"},
+    "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+    "environmentAllowlist": ["PATH", "LANG", "LC_ALL", "OCIO", "TMPDIR", "BLENDER_USER_CONFIG", "BLENDER_USER_SCRIPTS"]
+  },
+  "sourceRender": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "samples": 1,
+    "seed": 20260827,
+    "animatedSeed": false,
+    "adaptiveSampling": false,
+    "denoising": false,
+    "motionBlur": false,
+    "persistentData": false,
+    "threadsMode": "FIXED",
+    "threads": 4,
+    "resolution": [173, 97],
+    "resolutionPercentage": 100,
+    "pixelAspect": [1.0, 1.0],
+    "filmTransparent": false,
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorMode": "RGBA",
+    "colorDepth": "32",
+    "exrCodec": "ZIP",
+    "viewLayer": "BFS_MASTER",
+    "passAlphaThreshold": 0.5,
+    "expectedSubimages": ["BFS_MASTER.Combined", "BFS_MASTER.Depth", "BFS_MASTER.Vector", "BFS_MASTER.Object Index"],
+    "expectedChannels": {
+      "BFS_MASTER.Combined": ["BFS_MASTER.Combined.R", "BFS_MASTER.Combined.G", "BFS_MASTER.Combined.B", "BFS_MASTER.Combined.A"],
+      "BFS_MASTER.Depth": ["BFS_MASTER.Depth.Z"],
+      "BFS_MASTER.Vector": ["BFS_MASTER.Vector.X", "BFS_MASTER.Vector.Y", "BFS_MASTER.Vector.Z", "BFS_MASTER.Vector.W"],
+      "BFS_MASTER.Object Index": ["BFS_MASTER.Object Index.X"]
+    }
+  },
+  "scene": {
+    "construction": "fresh factory state; generated opaque planes and emission materials only; no source blend or external asset",
+    "frameRange": [0, 2],
+    "previousFrame": 0,
+    "currentFrame": 1,
+    "nextFrame": 2,
+    "camera": {"name": "BFS_D10_CAMERA", "type": "ORTHO", "location": [0.0, 0.0, 10.0], "rotationEuler": [0.0, 0.0, 0.0], "orthoScale": 17.3},
+    "pixelsPerWorldUnit": 10.0,
+    "objects": [
+      {"name": "BFS_BACKGROUND", "location": [0.0, 0.0, 0.5], "scale": [10.0, 6.0, 1.0], "passIndex": 101, "expectedDepth": 9.5, "probeOffsetXY": [-5.0, 0.0], "emission": [0.03, 0.08, 0.16, 1.0]},
+      {"name": "BFS_MOVER", "location": [0.0, 0.0, 1.75], "scale": [0.8, 0.65, 1.0], "passIndex": 202, "expectedDepth": 8.25, "probeOffsetXY": [-0.4, 0.0], "emission": [0.9, 0.04, 0.02, 1.0]},
+      {"name": "BFS_NEAR", "location": [0.4, 0.0, 3.25], "scale": [0.2, 1.1, 1.0], "passIndex": 303, "expectedDepth": 6.75, "probeOffsetXY": [0.0, 0.8], "emission": [0.02, 0.7, 0.16, 1.0]},
+      {"name": "BFS_TOP_MARKER", "location": [-2.4, 1.4, 2.25], "scale": [0.3, 0.25, 1.0], "passIndex": 404, "expectedDepth": 7.75, "probeOffsetXY": [0.0, 0.0], "emission": [0.7, 0.1, 0.8, 1.0]},
+      {"name": "BFS_BOTTOM_MARKER", "location": [2.3, -1.5, 2.5], "scale": [0.35, 0.25, 1.0], "passIndex": 505, "expectedDepth": 7.5, "probeOffsetXY": [0.0, 0.0], "emission": [0.9, 0.55, 0.02, 1.0]}
+    ],
+    "ownershipProbeRadiusPixels": 1
+  },
+  "analyticOracle": {
+    "allowedDependencies": ["Python standard library math only"],
+    "forbiddenDependencies": ["bpy", "bpy_extras", "mathutils", "Blender source render reports", "development observation projected coordinates"],
+    "screenUpPx": "[width/2 + (objectX-cameraX)*width/orthoScale, height/2 + (objectY-cameraY)*width/orthoScale]",
+    "topLeftPx": "[screenUpX, height-screenUpY]",
+    "depth": "cameraZ-objectZ because camera rotation is zero and every plane faces +Z",
+    "vectorXY": "previousScreenUpPx-currentScreenUpPx",
+    "vectorZW": "currentScreenUpPx-nextScreenUpPx",
+    "d9Motion": "[-Vector.X,-Vector.Y] so D9.1 q=(x-dx,y+dy) lands at the previous top-left raster coordinate"
+  },
+  "fixtures": [
+    {
+      "id": "HOLDOUT_OBJECT_XY_173X97",
+      "moverByFrame": {"0": [-0.7, 0.3, 1.75], "1": [0.0, 0.0, 1.75], "2": [1.1, -0.5, 1.75]},
+      "cameraByFrame": null,
+      "expectedMovingOwner": "BFS_MOVER",
+      "expectedVectorXY": [-7.0, 3.0],
+      "expectedVectorZW": [-11.0, 5.0],
+      "expectedD9Motion": [7.0, -3.0]
+    },
+    {
+      "id": "HOLDOUT_CAMERA_XY_173X97",
+      "moverByFrame": null,
+      "cameraByFrame": {"0": [-0.6, 0.4, 10.0], "1": [0.0, 0.0, 10.0], "2": [1.3, -0.8, 10.0]},
+      "expectedMovingOwner": "ALL_VISIBLE_OWNERS",
+      "expectedVectorXY": [6.0, -4.0],
+      "expectedVectorZW": [13.0, -8.0],
+      "expectedD9Motion": [-6.0, 4.0]
+    },
+    {
+      "id": "HOLDOUT_STATIC_DEPTH_OWNER_173X97",
+      "moverByFrame": null,
+      "cameraByFrame": null,
+      "expectedMovingOwner": null,
+      "expectedVectorXY": [0.0, 0.0],
+      "expectedVectorZW": [0.0, 0.0],
+      "expectedD9Motion": [0.0, 0.0]
+    }
+  ],
+  "canonicalAdapterContract": {
+    "coordinates": "top-left row-major decoded OpenImageIO raster",
+    "floatEncoding": "little-endian float32 with no color transform",
+    "inputsPerFixtureRepeat": ["previous frame multipart EXR", "current frame multipart EXR"],
+    "outputs": {
+      "previousRgba": "previous.rgba32 <- previous BFS_MASTER.Combined RGBA",
+      "currentRgba": "current.rgba32 <- current BFS_MASTER.Combined RGBA",
+      "previousDepth": "previous-depth.f32 <- previous BFS_MASTER.Depth.Z",
+      "currentDepth": "current-depth.f32 <- current BFS_MASTER.Depth.Z",
+      "previousLayer": "previous-layer.f32 <- previous BFS_MASTER.Object Index.X",
+      "currentLayer": "current-layer.f32 <- current BFS_MASTER.Object Index.X",
+      "motion": "motion.xy32 <- [-current Vector.X,-current Vector.Y]"
+    },
+    "unusedButValidated": "current Vector.ZW must match current-minus-next; previous-frame Vector is not consumed",
+    "overwritePolicy": "refuse if output directory or report already exists"
+  },
+  "processMatrix": {
+    "freshRepeats": 2,
+    "framesRenderedPerFixtureRepeat": [0, 1],
+    "sourceBlenderProcesses": 12,
+    "sourceRenderCalls": 12,
+    "cyclesRayRenders": 12,
+    "adapterPythonProcesses": 6,
+    "analysisPythonProcesses": 1,
+    "totalChildProcesses": 19,
+    "allPidsUnique": true,
+    "sourceBlendFilesOpened": 0,
+    "externalAssetsOpened": 0
+  },
+  "measurementGates": {
+    "movingVectorCorrectCandidateEndpointErrorP99MaximumPixels": 0.000244140625,
+    "movingVectorCorrectCandidateEndpointErrorAbsoluteMaximumPixels": 0.0009765625,
+    "movingVectorNearestWrongCandidateMedianMinimumPixels": 4.0,
+    "staticVectorPairMagnitudeP99MaximumPixels": 0.000244140625,
+    "staticVectorPairMagnitudeAbsoluteMaximumPixels": 0.0009765625,
+    "depthAbsoluteErrorMaximum": 0.000001,
+    "ownershipProbeAllPixelsExact": true,
+    "ownershipEveryDeclaredIdVisibleEachFrame": true,
+    "topMarkerCentroidRowLessThanBottomMarkerCentroidRow": true,
+    "adapterArraysEqualIndependentReconstruction": true,
+    "repeatDecodedPassesExact": true,
+    "repeatCanonicalArraysExact": true
+  },
+  "gates": {
+    "allProcessesExitZero": true,
+    "allPidsUnique": true,
+    "parentRuntimeSpecAndToolIdentityExact": true,
+    "fixtureSceneAnimationAndRenderStateExact": true,
+    "multipartRosterChannelsShapeAndFiniteExact": true,
+    "sourceReportsBindEveryExr": true,
+    "sourceRepeatsDecodedExact": true,
+    "analyticOracleIndependent": true,
+    "vectorXYMappingWithinGate": true,
+    "vectorZWMappingWithinGate": true,
+    "wrongMappingsSeparated": true,
+    "staticVectorWithinTolerance": true,
+    "depthWithinGate": true,
+    "ownershipAndOrientationExact": true,
+    "adapterReportsBindInputsAndOutputs": true,
+    "adapterCanonicalArraysExact": true,
+    "adapterRepeatsExact": true,
+    "operationCountsExact": true,
+    "diagnosticsAndSidecarsExact": true
+  },
+  "diagnostics": {
+    "perFixture": ["current-combined", "current-depth", "current-ownership", "current-previous-motion-magnitude"],
+    "expectedPngs": 12,
+    "expectedSidecars": 12,
+    "diagnosticsAreNotMeasurementInputs": true
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "D5_COUNTEREXAMPLE_IDENTITY",
+    "DEVELOPMENT_OBSERVATION_IDENTITY",
+    "FRESHNESS_IDENTITY",
+    "PREREGISTRATION_IDENTITY",
+    "TOOL_FREEZE_IDENTITY",
+    "RUNTIME_IDENTITY",
+    "DISK_ADMISSION",
+    "FIXTURE_ROSTER",
+    "SCENE_STRUCTURE",
+    "ANIMATION_STRUCTURE",
+    "RENDER_STATE",
+    "SOURCE_PROCESS_ROSTER",
+    "PID_UNIQUENESS",
+    "SOURCE_REPORT_BINDING",
+    "MULTIPART_ROSTER",
+    "MULTIPART_CHANNEL_LAYOUT",
+    "SOURCE_REPEAT_DECODED_IDENTITY",
+    "ANALYTIC_ORACLE_INDEPENDENCE",
+    "VECTOR_XY_MAPPING",
+    "VECTOR_ZW_MAPPING",
+    "VECTOR_COMPONENT_SWAP",
+    "VECTOR_SIGN_FLIP",
+    "D9_COORDINATE_CONVERSION",
+    "STATIC_VECTOR_BOUNDARY",
+    "DEPTH_SEMANTICS",
+    "OWNERSHIP_SEMANTICS",
+    "RASTER_ORIENTATION",
+    "ADAPTER_REPORT_BINDING",
+    "ADAPTER_ARRAY_RECONSTRUCTION",
+    "ADAPTER_REPEAT_IDENTITY",
+    "DIAGNOSTIC_TOTALITY",
+    "OPERATION_BOUNDARY",
+    "RESULT_SELF_HASH"
+  ],
+  "decisionRule": {
+    "passVerdict": "BLENDER_MULTIPART_TEMPORAL_ADAPTER_HOLDOUT_SUPPORTED",
+    "failVerdict": "BLENDER_MULTIPART_TEMPORAL_ADAPTER_HOLDOUT_NOT_SUPPORTED",
+    "supported": "All 19 formal child processes, exact identities, analytic mappings, error gates, canonical-array reconstruction, repeat checks, diagnostics and 34 attacks pass.",
+    "notSupported": "Any gate fails; preserve the counterexample and do not connect Blender production multipart passes to the D9.1 temporal accumulator.",
+    "nextIfSupported": "Preregister a fresh opaque integer-motion end-to-end Blender render -> adapter -> D9.1 temporal accumulation -> Raw EXR bridge holdout.",
+    "nextIfNotSupported": "Do not revise this holdout after output; design a new adapter or pass contract under a new preregistration."
+  },
+  "nonClaims": [
+    "D10 does not validate perspective projection, subpixel resampling or deformation motion.",
+    "D10 excludes transparency, multi-owner pixels, volumetrics, hair, depth of field and motion blur.",
+    "D10 validates Object Index only for opaque single-owner pixels and does not validate Cryptomatte.",
+    "D10 does not run the D9.1 accumulator on real rendered beauty pixels and does not claim temporal image quality.",
+    "D10 does not claim cross-engine, cross-version, cross-operating-system or cross-GPU equivalence.",
+    "D10 does not claim cinematic quality or human preference."
+  ]
+}
