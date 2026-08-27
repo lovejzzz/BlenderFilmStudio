@@ -2139,6 +2139,24 @@ Preflight file SHA-256: `a2b9ad8f279d00d7f19a5dd3cda83b3434949084acb2f89e5228dc4
 
 Artifact: `experiments/blender-multipart-temporal-adapter-f32-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-133 · D10.1 formally supports the real Blender multipart adapter
+
+Date: 2026-08-27 · Type: CONFIRMATORY REAL-BLENDER HOLDOUT + INDEPENDENT REPLAY AUDIT · Blender: 5.2.0 LTS `fbe6228777e7`
+
+The immutable D10.1 matrix completed exactly once: 12 fresh Blender Cycles source processes, six adapter processes and one independent analyzer, with 19 unique child PIDs and 12 ray renders. All 37 base checks passed and all 37 mutation attacks returned their preregistered failure labels. Source Combined/Depth/Vector/Object Index passes reproduced exactly across both repeats, and all seven canonical adapter arrays repeated exactly for all three fixtures.
+
+Typed structural comparison closed D10's verifier defect without changing D10. Twelve of twelve source cells matched scene and layered Action structure after explicit IEEE-754 binary32 round-trip. Raw JSON doubles, a one-ULP ortho-scale mutation and pass-index +1 were all rejected. D10 remains NOT_SUPPORTED with FAIL audit; D10.1 is a separate result.
+
+Object XY/ZW maxima were `3.814697265625e-6` / `8.529922399520072e-6` pixels and its nearest wrong candidate was 8.062 pixels away. Camera worst-case XY/ZW maxima were `3.0755072587198445e-5` / `3.145679951185349e-5`, with nearest wrong at least 12.529 pixels. Static XY/ZW maximum was `3.0517578125e-5`, inside the frozen nonzero boundary. Depth passed 60/60 rows with zero maximum error; ownership probes passed 60/60 and orientation passed.
+
+Verdict: `BLENDER_MULTIPART_TEMPORAL_ADAPTER_F32_HOLDOUT_SUPPORTED`, base failure `null`, attacks 37/37. Independent audit `PASS`: 12/12 source artifacts, 6/6 adapter replay cells, 42/42 arrays and 12/12 diagnostics, with frozen-tool, parent, runtime, self-hash and operation identities intact.
+
+Receipt SHA-256: `703f0d37c7b5cda800a57a70221596ba68ceb61af99ae46664da378ae68b0128`; result SHA-256: `c0f94547b432159772029f67abe70da12ff0f236707d7f92896c75ee664ebc60`; audit SHA-256: `f6ef6b2236aa8501ef533c88f5f1e9604f71b259d4beffc90825b14afdb52328`.
+
+This promotes only the opaque orthographic integer-motion production-pass adapter. Next: preregister B52-D11, a fresh real textured render → D10.1 adapter → D9.1 accumulator → D8 Raw EXR end-to-end holdout with occlusion, disocclusion, bounds, same-ID depth rejection and static controls.
+
+Artifacts: `experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/` and `research/2026-08-27-b52-d10-1-blender-multipart-temporal-adapter-f32-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
