@@ -1,9 +1,9 @@
 {
-  "schemaVersion": "bfs.blenderStaticRadiusInterventionHoldout.v0.1",
-  "experimentId": "B52-D12.5",
-  "title": "Blender 5.2 static owner-erosion radius-2 versus radius-3 fresh intervention holdout",
+  "schemaVersion": "bfs.blenderStaticRadiusInterventionHoldoutCorrection.v0.2",
+  "experimentId": "B52-D12.5-C2",
+  "title": "Blender 5.2 static owner-erosion radius-2 versus radius-3 fresh intervention holdout — C2",
   "question": "On fresh opaque static multi-owner geometry, does increasing the current-owner erosion radius from 2 to 3 remove the D12.4 first-eligible-ring tail while retaining useful coverage and at least twofold RGB-maximum headroom under the unchanged D12.2 production tolerance?",
-  "decisionRole": "fresh confirmatory intervention holdout derived from D12.4; D12.3 remains unchanged",
+  "decisionRole": "fresh-root infrastructure correction of the invalid first D12.5 run; confirmatory intervention contract and D12.3 remain unchanged",
   "parents": {
     "d12_3Spec": {
       "uri": "specs/blender-static-nonplanar-multiowner-holdout.v0.1.json",
@@ -43,12 +43,21 @@
     "derivation": {
       "observedOnly": "On reused D12.3 arrays, all fixture maxima occurred at silhouette distance 3; filtering to distance >=4 reduced the cross-fixture RGB maximum to 4.76837158203125e-7, exactly 25% of the frozen gate.",
       "confirmatoryBoundary": "No D12.3 source, array or output may be a D12.5 measurement input. Radius 3 is unsupported until this holdout completes."
+    },
+    "invalidFirstRun": {
+      "root": "experiments/blender-static-radius-intervention-holdout-v0-1",
+      "failureUri": "experiments/blender-static-radius-intervention-holdout-v0-1/run.failure.json",
+      "failureSha256": "e90d0e26d936e35c6882a04863d2bd1e406b65db3899ca77df58a904c02ebc61",
+      "failureHash": "903f9c3802d492cdf61d7e571a6b6e467b758f2e52386071a6dfd50bb6b07729",
+      "resultsAbsent": true,
+      "scientificVerdict": null,
+      "diagnosticRestriction": "Only traceback, execution counts and results-file absence were inspected; no measurements or pixel values were read."
     }
   },
   "freshness": {
     "requirements": [
       "Every fixture identifier, raster, lens, sensor width, camera transform, owner identifier, pass index, geometry parameter, material parameter and output path is fresh relative to D12.2 and D12.3.",
-      "All seven formal tool paths, the preflight root and the formal root are absent at preregistration.",
+      "The C2 preflight root and formal root are absent at correction preregistration; the invalid first root remains retained and read-only.",
       "No D12.2 or D12.3 EXR, array, mask, report or metric may be a D12.5 measurement input.",
       "No formal D12.5 render, adapter, consumer or analyzer output may be inspected before tool freeze and accepted preflight."
     ],
@@ -89,8 +98,8 @@
   "diskAdmission": {
     "minimumReserveBytes": 107374182400,
     "projectedWriteBytes": 20971520,
-    "formalRoot": "experiments/blender-static-radius-intervention-holdout-v0-1",
-    "preflightRoot": "experiments/blender-static-radius-intervention-holdout-preflight-v0-1"
+    "formalRoot": "experiments/blender-static-radius-intervention-holdout-c2-v0-1",
+    "preflightRoot": "experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1"
   },
   "sceneContract": {
     "frames": [0, 1, 2],
@@ -285,7 +294,12 @@
       "runtime, process-count, duplicate-PID, exit-code, model/network-count and disk-admission mutation"
     ]
   },
-  "invalidRunPolicy": "Any infrastructure failure, missing formal cell, preflight mismatch, root reuse, threshold change, unregistered correction, analyzer crash or incomplete attack totality invalidates the run. Retain the failed root; corrections require a new preregistration and fresh root.",
+  "correctionContract": {
+    "allowedCodeDelta": "In the independent analyzer only, cast the radius3SubsetOfRadius2 comparison result from numpy.bool_ to built-in bool before evidence serialization; update bound spec identity and C2 root/experiment labels throughout the toolchain.",
+    "forbiddenChanges": "Fixtures, source construction, adapter arrays, reconstruction arithmetic, radius rules, numeric thresholds, coverage gates, decision logic, process counts, attack minimum and non-claims may not change.",
+    "rerunRule": "Run the complete 55-process matrix from the fresh C2 root after a new frozen preflight; do not reuse any source or array from the invalid root."
+  },
+  "invalidRunPolicy": "Any infrastructure failure, missing formal cell, preflight mismatch, root reuse, threshold change, unregistered correction, analyzer crash or incomplete attack totality invalidates the run. Retain the failed root; further corrections require a new preregistration and fresh root.",
   "nonClaims": [
     "D12.5 does not revise D12.3 or prove a Blender internal cause for the static Vector residue.",
     "A supported radius 3 would apply only to the registered opaque static owner-interior domain, not motion, deformation, transparency, hair, particles, volumes, motion blur or disocclusion.",

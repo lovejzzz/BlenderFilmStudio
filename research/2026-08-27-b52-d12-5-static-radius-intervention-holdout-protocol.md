@@ -6,6 +6,8 @@ Status: preregistered and evidence-binding correction committed before formal to
 
 Correction D12.5-C1: the first committed JSON omitted the already frozen D12.1 typed-envelope spec and encoder identities that its formal-tool roster referenced. Before any D12.5 tool existed or output was produced, those three parent identities were added. Fixtures, radii, thresholds, coverage gates, decisions and process counts did not change. The corrected spec SHA-256 is `b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2`.
 
+Correction D12.5-C2: the first single-use formal run is retained as invalid after the analyzer failed to serialize one NumPy `bool_`; `results.json` was never written and no measurement or pixel value was inspected. C2 permits exactly one scientific-code delta—cast the subset comparison to built-in `bool`—plus updated experiment/spec/root identities. The complete matrix must rerun from a fresh root; no invalid-run EXR or array may be reused. All fixtures, arithmetic, radii, thresholds, coverage gates, decisions, process counts, attacks and non-claims remain unchanged. C2 spec SHA-256 is `d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d`.
+
 ## Why this experiment exists
 
 D12.3 supported the unchanged static reconstruction tolerance inside same-owner regions, but one occluding-plane sample landed exactly on the inclusive RGB-maximum gate. D12.4 replayed that sample without new renders: it was the unique global maximum, lay at Chebyshev silhouette distance 3 and combined a `-2^-17 px` horizontal Vector residue with large same-owner blue-channel contrast. Filtering the already observed arrays to distance 4 or greater left a cross-fixture maximum equal to 25% of the gate.
@@ -56,7 +58,7 @@ No threshold or coverage floor may be revised after output inspection.
 
 The formal matrix contains twelve Blender renders, six adapters, twelve dual-radius consumers, twenty-four typed-envelope encoders and one independent analyzer: exactly 55 unique child processes. Python and Node must emit byte-identical reconstruction and mask payloads; both frozen typed-envelope implementations must agree per document; the analyzer must recompute decisions from arrays without trusting producer metrics. At least thirty registered mutation attacks must pass.
 
-The single-use formal root is `experiments/blender-static-radius-intervention-holdout-v0-1`. The preflight root, formal root and all seven formal tool paths were absent at preregistration. A 20 MiB projected write must leave the unchanged 100 GiB disk reserve. Model and network calls are zero.
+The C2 single-use formal root is `experiments/blender-static-radius-intervention-holdout-c2-v0-1`. Its preflight root is `experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1`; both were absent at correction preregistration. The invalid first root remains retained and read-only. A 20 MiB projected write must leave the unchanged 100 GiB disk reserve. Model and network calls are zero.
 
 ## Non-claims
 

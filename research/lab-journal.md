@@ -2673,6 +2673,18 @@ D12.5-C2 is limited to casting that subset flag to built-in `bool` plus fresh ex
 
 Artifact: `research/2026-08-27-b52-d12-5-first-formal-run-invalid.md`.
 
+## J-170 · D12.5-C2 freezes one serialization cast and a fresh root
+
+Date: 2026-08-27 · Type: INFRASTRUCTURE CORRECTION PREREGISTRATION · New outputs: 0
+
+C2 is registered after retaining the invalid first root and before changing the analyzer. The only scientific-code delta allowed is `subset = bool(...)`, converting the NumPy comparison result into a standard JSON-serializable boolean. Tool/spec labels and preflight/formal roots must change to bind a genuinely fresh run.
+
+The complete 55-process matrix must rerender all twelve sources; no EXR, adapter array or consumer payload from the invalid root may be reused. Fixtures, scene construction, reconstruction arithmetic, radii, production thresholds, twofold-headroom requirement, coverage gates, decision logic, attack minimum and non-claims remain byte-for-byte or semantically unchanged as specified.
+
+C2 spec SHA-256 is `d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d`. Both `experiments/blender-static-radius-intervention-holdout-c2-preflight-v0-1` and `experiments/blender-static-radius-intervention-holdout-c2-v0-1` were absent.
+
+Next: commit C2 before editing tools, then freeze the exact delta and rerun preflight.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
