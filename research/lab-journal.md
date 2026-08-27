@@ -2485,6 +2485,18 @@ No source report changed and no Blender, model or network process ran. Result SH
 
 Artifacts: `experiments/blender-cross-language-evidence-envelope-development-v0-1/results.json` and `research/2026-08-27-b52-d12-1-cross-language-evidence-envelope-development-result.md`.
 
+## J-156 · Core compiler evidence survives direct byte-stream revalidation
+
+Date: 2026-08-27 · Type: READ-ONLY CORE ACCEPTANCE AUDIT · New Blender renders: 0
+
+The active goal's minimum compiler boundary was re-audited so later pixel research could not substitute for an incomplete SceneSpec → BuildPlan → Blender result. SHA-256 was recomputed directly from all eight retained canonical structure byte streams: B01-A/B and B02-A/B in both the native receipt root and the corrected clean Linux/amd64 worker root. Every digest matched its adjacent manifest and the frozen benchmark identity.
+
+B01 remains `c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b` under plan `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`; B02 remains `025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856` under plan `a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687`. The current SceneSpec suite passed 22/22 valid/invalid fixtures. The Linux/amd64 audit remains pass, Codex-to-worker promotion remains reproducible with a passing audit, and the published compiler route returned HTTP 200.
+
+This closes only the semantic-structure boundary already stated by the charter. `.blend` bytes remain non-identical, and no arbitrary-scene, cinematic-quality, calibrated-display or throughput claim follows. No evidence file was rewritten and no Blender render was launched.
+
+Artifact: `research/2026-08-27-core-compiler-evidence-revalidation.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
