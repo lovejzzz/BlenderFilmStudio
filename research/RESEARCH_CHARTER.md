@@ -24,6 +24,8 @@ Crossing these gates establishes the minimum controlled compiler workflow at its
 
 B51-D4 status amendment: the first split-backend assembly derivation proved the intended Metal-beauty / CPU-data routing at decoded-float level but rejected the multipart artifact because OpenImageIO auto-generated `capDate` values made one merge pair differ by seven container bytes; its independent replay also failed. The preregistered C3 correction derived `DateTime` from each frozen Metal source and wrote it across all seven output parts. Both known merge pairs and the independent six-artifact replay became byte-exact; 19/19 attacks passed. This closes known-input assembly engineering only. B51-H2 may now test the split-backend contract on unseen Blender renders and total wall cost; B50's human gate remains independently pending.
 
+B51-D5 cost amendment: 32 fresh native CPU renders measured an eight-dose sample ladder on two known H1 compositions. Every within-dose repeat was exact and both 128-spp controls reproduced their parents, but no 1–64 spp dose reproduced Depth plus all three Cryptomatte passes exactly on both variants. The audited exact sample floor is therefore 128 spp (`EXACT_CPU_DATA_SAMPLE_REDUCTION_NOT_OBSERVED`, 18/18 attacks, byte-exact analyzer replay). Under the current exact contract, split rendering has no demonstrated cost advantage because it still pays for a full CPU render plus Metal. B51-D6 must define and test task-relevant Depth and decoded-matte semantics before a non-exact lower-dose profile may enter unseen H2.
+
 ## Non-negotiable method
 
 1. **Use real Blender.** A Blender-facing claim must be exercised against the installed Blender binary and real `.blend` data unless explicitly labelled as a design-only hypothesis.

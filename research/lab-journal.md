@@ -1551,6 +1551,22 @@ This closes only the known-input assembly engineering gate. Next is a separately
 
 Artifacts: `experiments/native-split-backend-assembly-capdate-correction-v0-1/`, `specs/native-split-backend-assembly-capdate-correction.v0.1.json`, `research/2026-08-27-b51-d4-c3-capdate-normalization-correction-protocol.md` and `research/2026-08-27-b51-d4-c3-capdate-normalization-correction-result.md`.
 
+## J-093 · B51-D5 finds no exact CPU data-pass sample discount
+
+Date: 2026-08-27 · Type: REAL BLENDER DOSE–RESPONSE · Runtime: 32 fresh native Blender 5.2 CPU processes
+
+D5 held two H1 compositions, seed, camera/geometry/light operations, 512×288 profile and seven-pass EXR contract constant while varying Cycles samples through 1/2/4/8/16/32/64/128, with two fresh-process repeats per cell.
+
+All 32 renders completed, and every same-dose repeat reproduced the four data passes exactly. Both new 128-spp repeats also reproduced the frozen H1 CPU parent exactly. No lower dose did so on both variants. The exact floor is therefore 128 spp and the valid verdict is `EXACT_CPU_DATA_SAMPLE_REDUCTION_NOT_OBSERVED`.
+
+At 64 spp, TABLETOP Depth changed on 63.26% of pixels and INTERIOR_CHAIR on 100%; CryptoObject00 changed on roughly 2.8–3.0%. These measurements do not establish semantic failure because background sentinels and Cryptomatte ID/coverage encoding make raw absolute error misleading. D5 deliberately promotes no tolerance.
+
+The analyzer passed 18/18 attacks. Independent replay was byte-exact, all four frozen tool blobs matched and 32/32 EXR identities matched. Two zero-render preflight identity failures—wrong OCIO path, then wrong Blender executable binding—remain published with narrow C1/C2 corrections.
+
+Next: B51-D6 must evaluate task-relevant Depth regions and decoded Cryptomatte mattes before any non-exact sample reduction can enter H2. Under the current exact contract, split rendering has no demonstrated cost advantage because it still pays for a full 128-spp CPU render plus Metal.
+
+Artifacts: `experiments/native-cpu-data-pass-sample-cost-derivation-v0-1/`, `experiments/native-cpu-data-pass-sample-cost-preflight-failure-v0-1/`, `experiments/native-cpu-data-pass-sample-cost-blender-identity-failure-v0-1/`, `research/2026-08-27-b51-d5-native-cpu-data-pass-sample-cost-derivation-result.md`, `research/2026-08-27-b51-d5-c1-ocio-identity-correction-protocol.md` and `research/2026-08-27-b51-d5-c2-blender-identity-correction-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
