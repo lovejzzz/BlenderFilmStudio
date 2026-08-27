@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "bfs.codexWorkerPixelPromotionMediaTypeCorrection.v0.1",
+  "experimentId": "B45-C1",
+  "status": "PREREGISTERED_BEFORE_CORRECTION",
+  "question": "After correcting only the single-layer EXR media-type transition and null-report analysis totality, does the unchanged B45 experiment produce its originally required real float-pixel result?",
+  "baseSpec": {
+    "uri": "specs/codex-worker-pixel-promotion.v0.1.json",
+    "sha256": "bca84a43296c1f783bff4669e7a616a4c89a5d0b1660b6c8a11680b6ca0c11e8",
+    "preregistrationCommit": "d0eeb985bb9db39338fce02f1b0cbeaac96cc640"
+  },
+  "parentFailure": {
+    "uri": "experiments/codex-worker-pixel-promotion-v0-1/failure.json",
+    "sha256": "ffa4e2eec31b1963ed6127ef6dba0fad6cb880b445fad9da2ec920dd6565630f",
+    "classification": "INVALID_TOOL_INTERFACE_NO_PIXEL_DECISION",
+    "toolFreezeCommit": "cb48308a9e866aae7839363e22f4cff854b6fb89"
+  },
+  "corrections": [
+    {
+      "id": "EXR_MEDIA_TYPE",
+      "allowedChange": "Set scene.render.image_settings.media_type to IMAGE immediately before assigning file_format OPEN_EXR",
+      "requiredReport": {"mediaType": "IMAGE", "fileFormat": "OPEN_EXR", "colorMode": "RGBA", "colorDepth": "32", "codec": "ZIP"}
+    },
+    {
+      "id": "NULL_ANALYSIS_TOTALITY",
+      "allowedChange": "Make attacks and analysis return frozen failure codes rather than throw when report or decoded output is null",
+      "requiredSelfTest": "Replacing TABLETOP-A1 report with null returns REPORT_SOURCE_TABLETOP-A1 and does not throw"
+    }
+  ],
+  "unchanged": [
+    "all B45 parent and source identities",
+    "frames 24 and 12",
+    "Cycles CPU at 128x72 and one sample",
+    "shot seed, animated seed, denoising, threads, compositing and sequencer controls",
+    "one render call and two same-Render-Result saves",
+    "decoded float-pixel exactness acceptance",
+    "four Docker runs and zero negative-control Docker runs",
+    "100 GiB disk reserve and 1 GiB projected write",
+    "worker image and containment contract",
+    "all B45 non-claims"
+  ],
+  "outputRoot": "experiments/codex-worker-pixel-promotion-c1-v0-1",
+  "requiredCorrectionAttacks": [
+    {"id": "C1_A01_EXR_MEDIA_TYPE", "expectedReason": "C1_SAVE_SETTINGS_TABLETOP-A1"},
+    {"id": "C1_A02_NULL_TOTALITY", "expectedReason": "C1_FAILURE_TOTALITY"}
+  ],
+  "acceptedVerdict": "B44_BLEND_TO_FLOAT_PIXELS_EXACT_AFTER_MEDIA_TYPE_CORRECTION",
+  "rejectedVerdict": "B44_BLEND_TO_FLOAT_PIXELS_NOT_EXACT_OR_C1_INVALID",
+  "nonClaims": [
+    "B45-C1 changes an output API precondition and analyzer totality only",
+    "B45-C1 does not revise a frame, render control, pixel threshold, security boundary or quality claim",
+    "A passing C1 would retain every B45 non-claim"
+  ]
+}

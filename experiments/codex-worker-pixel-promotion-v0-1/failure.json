@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "bfs.codexWorkerPixelPromotionFailure.v0.1",
+  "experimentId": "B45",
+  "classification": "INVALID_TOOL_INTERFACE_NO_PIXEL_DECISION",
+  "preregistration": {
+    "commit": "d0eeb985bb9db39338fce02f1b0cbeaac96cc640",
+    "specSha256": "bca84a43296c1f783bff4669e7a616a4c89a5d0b1660b6c8a11680b6ca0c11e8"
+  },
+  "toolFreeze": {
+    "commit": "cb48308a9e866aae7839363e22f4cff854b6fb89",
+    "rendererSha256": "114f0f86bc635bfcdb7910e8980056e791549fd0dcb6094b4a232e61801ca101",
+    "runnerSha256": "27c8cf12549f86a5334fc1fc6c257b16e16e37903158fd063963ef7ac2fa24e4",
+    "librarySha256": "89ae44a32d6327ec774857d17eb5af69072a6e0627e09ea8955002c3a9e22d9e",
+    "auditSha256": "77f76454b130df7344f3489ddffe401691168bf9de885f04a8886d010e32a5b0"
+  },
+  "attempts": [
+    {
+      "id": "DEFAULT_GUARD",
+      "status": "BLOCKED_BEFORE_B45_RUNNER",
+      "exitCode": 75,
+      "availableBytes": "128554926080",
+      "reserveBytes": "107374182400",
+      "projectedWriteBytes": "21474836480",
+      "freeAfterProjectedBytes": "107080089600",
+      "runtimeOperations": 0
+    },
+    {
+      "id": "PREREGISTERED_ONE_GIB_GUARD",
+      "status": "RUNNER_CRASHED_AFTER_FOUR_FAILED_CONTAINERS",
+      "exitCode": 1,
+      "availableBytes": "128719110144",
+      "reserveBytes": "107374182400",
+      "projectedWriteBytes": "1073741824",
+      "freeAfterProjectedBytes": "127645368320",
+      "dockerRuns": 4,
+      "hostExrAnalyses": 0
+    }
+  ],
+  "runs": [
+    {
+      "id": "TABLETOP-A1",
+      "exitCode": 1,
+      "elapsedMs": 9920,
+      "stdoutSha256": "9e70cd300cc1ce89636106ed60a24bcc2baf4fcb2bd19aaedca254704d250237",
+      "stderrSha256": "2ac24ce090c009c4810ccc34a9c0d7e53159814250795c665bd13254034646b6",
+      "milestonesSha256": "6857d5cd719ec9558b81e9cd6ff7302de063b29341fa3f1b5311a88b668853f1",
+      "milestones": ["PROCESS_STARTED", "SOURCE_VERIFIED", "SCENE_CONFIGURED", "RENDER_STARTED"],
+      "exrCount": 0,
+      "pngCount": 0,
+      "reportCount": 0
+    },
+    {
+      "id": "TABLETOP-A2",
+      "exitCode": 1,
+      "elapsedMs": 9946,
+      "stdoutSha256": "6d4ab37316cfe44d481cefb87484c57b6962334acc2c8b05cbd2d689aca6b735",
+      "stderrSha256": "2ac24ce090c009c4810ccc34a9c0d7e53159814250795c665bd13254034646b6",
+      "milestonesSha256": "00b1b459025cfbdc466ec9b54159585757ea85ec4ab9f63d0ea9e68191a59d34",
+      "milestones": ["PROCESS_STARTED", "SOURCE_VERIFIED", "SCENE_CONFIGURED", "RENDER_STARTED"],
+      "exrCount": 0,
+      "pngCount": 0,
+      "reportCount": 0
+    },
+    {
+      "id": "INTERIOR-A1",
+      "exitCode": 1,
+      "elapsedMs": 10062,
+      "stdoutSha256": "ee8e6bccf067636ce1c231567d35a66e2aac8fc745bbef01b29002ea7ccfe8b8",
+      "stderrSha256": "2ac24ce090c009c4810ccc34a9c0d7e53159814250795c665bd13254034646b6",
+      "milestonesSha256": "de95316324e3f93c85af3cabb976a7504c472dd24e59dc4170ab096e30f7fa20",
+      "milestones": ["PROCESS_STARTED", "SOURCE_VERIFIED", "SCENE_CONFIGURED", "RENDER_STARTED"],
+      "exrCount": 0,
+      "pngCount": 0,
+      "reportCount": 0
+    },
+    {
+      "id": "INTERIOR-A2",
+      "exitCode": 1,
+      "elapsedMs": 9945,
+      "stdoutSha256": "8989c83aeeb88d3a3aaa514c3711dc347bd28ffd8556ee9b043e4f6afa980bfb",
+      "stderrSha256": "2ac24ce090c009c4810ccc34a9c0d7e53159814250795c665bd13254034646b6",
+      "milestonesSha256": "b238b189261bf514a183b3890c66b90140351b49d091a3033c946b97e36cf976",
+      "milestones": ["PROCESS_STARTED", "SOURCE_VERIFIED", "SCENE_CONFIGURED", "RENDER_STARTED"],
+      "exrCount": 0,
+      "pngCount": 0,
+      "reportCount": 0
+    }
+  ],
+  "sharedBlenderDiagnostic": "bpy_struct: item.attr = val: enum \"OPEN_EXR\" not found in ('OPEN_EXR_MULTILAYER')",
+  "rendererCause": "The loaded compiled scene retained image_settings.media_type=MULTI_LAYER_IMAGE. The renderer assigned single-layer file_format=OPEN_EXR without first changing media_type to IMAGE.",
+  "analyzerCause": "runB45Attacks dereferenced runs[0].report.source after every run report was null, so the runner crashed before writing results.json.",
+  "runnerCrash": "TypeError: Cannot read properties of null (reading 'source')",
+  "resultsJsonWritten": false,
+  "auditJsonWritten": false,
+  "experimentContainersRunningAfterManualCheck": 0,
+  "pixelDecision": null,
+  "allowedCorrectionScope": [
+    "Set image_settings.media_type=IMAGE before assigning file_format=OPEN_EXR",
+    "Make attack generation and analysis failure-total when reports or decoded outputs are null",
+    "Write correction outputs to a new directory and retain this failed attempt"
+  ]
+}
