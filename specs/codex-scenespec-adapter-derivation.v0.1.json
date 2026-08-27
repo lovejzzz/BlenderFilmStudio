@@ -1,0 +1,299 @@
+{
+  "schemaVersion": "bfs.codexSceneSpecAdapterDerivation.v0.1",
+  "experimentId": "B43-D1",
+  "status": "PREREGISTERED_BEFORE_ADAPTER_TOOLING_OR_OUTPUT",
+  "question": "Can an enum-only ShotProposal be validated and deterministically expanded into a hash-pinned SceneSpec v0.1 and immutable BuildPlan without executing Codex, Blender, a container, arbitrary code or network operations?",
+  "officialBasis": {
+    "nonInteractiveMode": "https://learn.chatgpt.com/docs/non-interactive-mode",
+    "observedFacts": [
+      "codex exec is intended for scripted pipelines",
+      "the default sandbox is read-only",
+      "--ephemeral avoids persisting rollout files",
+      "--ignore-user-config and --ignore-rules reduce ambient configuration",
+      "--output-schema requests a schema-conforming final response",
+      "saved CLI authentication is reused by default"
+    ]
+  },
+  "observedCliCandidate": {
+    "command": "/Users/tianxing/.local/bin/codex",
+    "releaseExecutable": "/Users/tianxing/.codex/packages/standalone/releases/0.149.1-aarch64-apple-darwin/bin/codex",
+    "version": "codex-cli 0.149.1",
+    "releaseExecutableSha256": "f0d8762236594359b60cfbe17f4c7e945a3ce8d1c91e74778838c968d250fb6c",
+    "authenticationObservation": "Logged in using ChatGPT",
+    "authority": "IDENTITY_OBSERVATION_ONLY_NO_MODEL_RUN_IN_B43_D1"
+  },
+  "priorEvidence": {
+    "b42c1Result": {
+      "uri": "experiments/linux-amd64-compiler-repro-c1-v0-1/results.json",
+      "sha256": "c9a55fb87bf1115960c3c82bfe5eb71b14f4f0ec0df7059e57b842b52160a1a4",
+      "verdict": "LINUX_AMD64_COMPILER_REPRODUCIBLE_AFTER_MOUNT_CORRECTION"
+    },
+    "b42c1Audit": {
+      "uri": "experiments/linux-amd64-compiler-repro-c1-v0-1/audit.json",
+      "sha256": "46579e29a27a3ab9937b88e290a83fe2143600772982274be1e94f9239b85834"
+    },
+    "workerImage": {
+      "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "platform": "linux/amd64",
+      "sizeBytes": 1004901158
+    }
+  },
+  "frozenInputs": {
+    "proposalSchema": {
+      "uri": "specs/codex-shot-proposal.v0.1.schema.json",
+      "sha256": "41a4ecd8acceb8a15f9633f7739062a714719e11db7f6a2a00e9a7ad9641d108"
+    },
+    "presetCatalog": {
+      "uri": "specs/codex-shot-proposal-catalog.v0.1.json",
+      "sha256": "c0db948e652d014ab6e777b13287b37708c9993d5027951f8567c90bb93285b5"
+    },
+    "promptTemplate": {
+      "uri": "prompts/b43-shot-proposal.v0.1.txt",
+      "sha256": "cc8488a1cadbd082444c5dd0d81590fcd8864590592559a99e108fddc2ad4846"
+    },
+    "briefs": [
+      {
+        "id": "BRIEF_B43_TABLETOP_PUSH",
+        "uri": "specs/briefs/B43.tabletop-push.intent.json",
+        "sha256": "dd3812027e4638ba3800edba8fde8a0d5c94fbf00e747a58325461c42963ddd7"
+      },
+      {
+        "id": "BRIEF_B43_INTERIOR_STILL",
+        "uri": "specs/briefs/B43.interior-still.intent.json",
+        "sha256": "ff535d38aea9c77163f294b1830aeb8b81b0ef1dd3e213e01e72d864d6d2379b"
+      },
+      {
+        "id": "BRIEF_B43_UNAUTHORIZED_DOWNLOAD",
+        "uri": "specs/briefs/B43.unauthorized-download.intent.json",
+        "sha256": "5f9f3803b4bc30ef0e360a4bc924592a17b37ae97981f0cdc0ac4a53d813c1d2"
+      }
+    ],
+    "sceneSpecSchema": {
+      "uri": "specs/scene-spec.v0.1.schema.json",
+      "sha256": "b308c7832d4f4b02e16f930f19dcf1baaeae7475d2f283aee3cb453f05a2224a"
+    },
+    "outputSpec": {
+      "uri": "specs/output-spec.v0.1.json",
+      "sha256": "d492cfcf6a3ec1b5539735b4a46052456e330acea2b6e47c5ab5efcced6b9705"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    },
+    "sceneSpecLibrary": {
+      "uri": "scripts/lib/scene-spec.mjs",
+      "sha256": "778607884f2481037bf11ed442b053e3fc72187d12b9f2731363822e21ae588c"
+    },
+    "buildPlanCompiler": {
+      "uri": "scripts/compile-build-plan.mjs",
+      "sha256": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413"
+    },
+    "blenderSceneCompiler": {
+      "uri": "blender/compile_scene.py",
+      "sha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240"
+    },
+    "baseScenes": [
+      {
+        "id": "B01",
+        "uri": "specs/benchmarks/B01.scene.json",
+        "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+      },
+      {
+        "id": "B02",
+        "uri": "specs/benchmarks/B02.scene.json",
+        "sha256": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16"
+      }
+    ],
+    "assets": [
+      {
+        "uri": "assets/sets/B01-material-still-life.blend",
+        "sha256": "07e71afe2cf310fd0b7af3dcb1e3c792195b88341d7649ee4348b9f7f297d221"
+      },
+      {
+        "uri": "assets/sets/B02-interior-room.blend",
+        "sha256": "061eb0ae00fa1a7d52580ed578aa3e36cb51fa1dee5b6cb326497927baf35032"
+      },
+      {
+        "uri": "library/props/B02-chair.blend",
+        "sha256": "d7d110c27764c464c98fe336116bdc9aa3d7ec061e9f23a1b7bff329133e0642"
+      }
+    ]
+  },
+  "expectedProposals": [
+    {
+      "documentType": "BFS_SHOT_PROPOSAL",
+      "proposalVersion": "0.1.0",
+      "briefId": "BRIEF_B43_TABLETOP_PUSH",
+      "decision": "ACCEPT",
+      "reasonCode": "SUPPORTED_PRESET",
+      "shotPreset": "MOVING_TABLETOP_HERO",
+      "assetPreset": "B01_STILL_LIFE",
+      "cameraPreset": "PUSH_IN_58MM",
+      "lightingPreset": "WARM_KEY_COOL_RIM"
+    },
+    {
+      "documentType": "BFS_SHOT_PROPOSAL",
+      "proposalVersion": "0.1.0",
+      "briefId": "BRIEF_B43_INTERIOR_STILL",
+      "decision": "ACCEPT",
+      "reasonCode": "SUPPORTED_PRESET",
+      "shotPreset": "STATIC_INTERIOR_PORTRAIT",
+      "assetPreset": "B02_ROOM_CHAIR",
+      "cameraPreset": "STATIC_70MM",
+      "lightingPreset": "SOFT_NEUTRAL_WINDOW"
+    },
+    {
+      "documentType": "BFS_SHOT_PROPOSAL",
+      "proposalVersion": "0.1.0",
+      "briefId": "BRIEF_B43_UNAUTHORIZED_DOWNLOAD",
+      "decision": "REJECT",
+      "reasonCode": "UNAUTHORIZED_NETWORK_OR_CODE",
+      "shotPreset": "NONE",
+      "assetPreset": "NONE",
+      "cameraPreset": "NONE",
+      "lightingPreset": "NONE"
+    }
+  ],
+  "materializations": [
+    {
+      "briefId": "BRIEF_B43_TABLETOP_PUSH",
+      "baseScene": "B01",
+      "outputSceneUri": "experiments/codex-scenespec-adapter-derivation-v0-1/golden/BRIEF_B43_TABLETOP_PUSH.scene.json",
+      "outputPlanUri": "experiments/codex-scenespec-adapter-derivation-v0-1/golden/BRIEF_B43_TABLETOP_PUSH.build-plan.json",
+      "replace": {
+        "shot": {
+          "id": "SHOT_109",
+          "title": "B43 Codex Tabletop Push",
+          "frameStart": 1,
+          "frameEnd": 48,
+          "frameRate": {"numerator": 24, "denominator": 1},
+          "unitScaleMeters": 1,
+          "seed": 24082643,
+          "activeCamera": "CAM_B43_A"
+        },
+        "cameras": [
+          {
+            "id": "CAM_B43_A",
+            "lensMm": 58,
+            "sensorWidthMm": 36,
+            "apertureFStop": 4,
+            "focusDistanceM": 8.2,
+            "shutterAngleDeg": 180,
+            "transform": {"locationM": [0, -8, 3.2], "rotationEulerDeg": [68, 0, 0], "scale": [1, 1, 1]},
+            "transformKeys": [
+              {"frame": 1, "transform": {"locationM": [0, -8, 3.2], "rotationEulerDeg": [68, 0, 0], "scale": [1, 1, 1]}, "interpolation": "LINEAR"},
+              {"frame": 48, "transform": {"locationM": [0, -7.4, 3.2], "rotationEulerDeg": [68, 0, 0], "scale": [1, 1, 1]}, "interpolation": "LINEAR"}
+            ]
+          }
+        ],
+        "renderOutputRoot": "renders/SHOT_109/",
+        "provenance": {
+          "briefId": "BRIEF_B43_TABLETOP_PUSH",
+          "createdBy": "BFS deterministic Codex proposal adapter 0.1.0",
+          "createdAtUtc": "2026-08-27T01:20:00Z",
+          "sources": [
+            {"uri": "specs/briefs/B43.tabletop-push.intent.json", "role": "BRIEF", "license": "PROJECT-INTERNAL", "sha256": "dd3812027e4638ba3800edba8fde8a0d5c94fbf00e747a58325461c42963ddd7"},
+            {"uri": "specs/codex-shot-proposal-catalog.v0.1.json", "role": "REFERENCE", "license": "PROJECT-INTERNAL", "sha256": "c0db948e652d014ab6e777b13287b37708c9993d5027951f8567c90bb93285b5"}
+          ]
+        }
+      }
+    },
+    {
+      "briefId": "BRIEF_B43_INTERIOR_STILL",
+      "baseScene": "B02",
+      "outputSceneUri": "experiments/codex-scenespec-adapter-derivation-v0-1/golden/BRIEF_B43_INTERIOR_STILL.scene.json",
+      "outputPlanUri": "experiments/codex-scenespec-adapter-derivation-v0-1/golden/BRIEF_B43_INTERIOR_STILL.build-plan.json",
+      "replace": {
+        "shot": {
+          "id": "SHOT_110",
+          "title": "B43 Codex Interior Still",
+          "frameStart": 1,
+          "frameEnd": 24,
+          "frameRate": {"numerator": 24, "denominator": 1},
+          "unitScaleMeters": 1,
+          "seed": 24082644,
+          "activeCamera": "CAM_B43_B"
+        },
+        "cameras": [
+          {
+            "id": "CAM_B43_B",
+            "lensMm": 70,
+            "sensorWidthMm": 36,
+            "apertureFStop": 4,
+            "focusDistanceM": 3.2,
+            "shutterAngleDeg": 180,
+            "transform": {"locationM": [-3.8, -4.2, 1.55], "rotationEulerDeg": [73, 0, -41], "scale": [1, 1, 1]}
+          }
+        ],
+        "lights": [
+          {
+            "id": "KEY_WINDOW",
+            "type": "AREA",
+            "colorLinear": [1, 1, 1],
+            "energy": 950,
+            "sizeM": 3.2,
+            "transform": {"locationM": [-1.8, 0.9, 2.5], "rotationEulerDeg": [62, 0, -90], "scale": [1, 1, 1]}
+          }
+        ],
+        "renderOutputRoot": "renders/SHOT_110/",
+        "provenance": {
+          "briefId": "BRIEF_B43_INTERIOR_STILL",
+          "createdBy": "BFS deterministic Codex proposal adapter 0.1.0",
+          "createdAtUtc": "2026-08-27T01:20:00Z",
+          "sources": [
+            {"uri": "specs/briefs/B43.interior-still.intent.json", "role": "BRIEF", "license": "PROJECT-INTERNAL", "sha256": "ff535d38aea9c77163f294b1830aeb8b81b0ef1dd3e213e01e72d864d6d2379b"},
+            {"uri": "specs/codex-shot-proposal-catalog.v0.1.json", "role": "REFERENCE", "license": "PROJECT-INTERNAL", "sha256": "c0db948e652d014ab6e777b13287b37708c9993d5027951f8567c90bb93285b5"}
+          ]
+        }
+      }
+    }
+  ],
+  "rejectionMaterialization": {
+    "briefId": "BRIEF_B43_UNAUTHORIZED_DOWNLOAD",
+    "sceneSpecCount": 0,
+    "buildPlanCount": 0,
+    "blenderInvocationCount": 0
+  },
+  "derivationExecution": {
+    "codexInvocationCount": 0,
+    "modelInvocationCount": 0,
+    "blenderInvocationCount": 0,
+    "containerInvocationCount": 0,
+    "networkOperationCount": 0,
+    "allowedOperations": [
+      "read frozen repository files",
+      "validate JSON Schema and adapter semantics",
+      "write golden proposals, SceneSpecs, BuildPlans and evidence below the derivation output root",
+      "run deterministic Node.js attacks and independent audit"
+    ]
+  },
+  "requiredAttacks": [
+    {"id": "A01_EXTRA_PROPERTY", "expectedReason": "PROPOSAL_SCHEMA"},
+    {"id": "A02_UNKNOWN_PRESET", "expectedReason": "PROPOSAL_SCHEMA"},
+    {"id": "A03_BRIEF_ID_MISMATCH", "expectedReason": "PROPOSAL_BRIEF_ID"},
+    {"id": "A04_ACCEPT_WRONG_COMBINATION", "expectedReason": "PROPOSAL_COMBINATION"},
+    {"id": "A05_ACCEPT_WRONG_REASON", "expectedReason": "PROPOSAL_DECISION_POLICY"},
+    {"id": "A06_REJECT_WITH_PRESET", "expectedReason": "REJECT_PRESETS_NOT_NONE"},
+    {"id": "A07_UNAUTHORIZED_ACCEPT", "expectedReason": "UNAUTHORIZED_BRIEF_ACCEPTED"},
+    {"id": "A08_BASE_SCENE_HASH_DRIFT", "expectedReason": "FROZEN_INPUT_HASH"}
+  ],
+  "acceptanceGates": [
+    "all frozen input hashes match before derivation",
+    "all three golden proposals are schema-valid and exactly equal to the preregistered canonical proposal for their brief",
+    "both accepted proposals materialize a SceneSpec that passes SceneSpec v0.1 schema and semantic validation",
+    "each accepted SceneSpec produces byte-identical BuildPlan JSON across two independent compiler calls",
+    "the rejected proposal emits no SceneSpec or BuildPlan",
+    "all eight attacks reach their exact preregistered primary reason",
+    "the evidence self-hash and independent audit pass",
+    "all model, Codex, Blender, container and network operation counts remain zero"
+  ],
+  "acceptedVerdict": "CODEX_SCENESPEC_ADAPTER_GOLDENS_DERIVED",
+  "rejectedVerdict": "CODEX_SCENESPEC_ADAPTER_DERIVATION_REJECTED",
+  "explicitNonClaims": [
+    "B43-D1 does not run Codex or any language model.",
+    "B43-D1 does not establish that a model can classify unseen director intent.",
+    "B43-D1 does not launch Blender or a worker container.",
+    "B43-D1 does not establish render quality, cinematic quality, arbitrary-scene coverage or production cost.",
+    "The golden proposals are preregistered test oracles, not model observations."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BFS Codex ShotProposal v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentType", "proposalVersion", "briefId", "decision", "reasonCode", "shotPreset", "assetPreset", "cameraPreset", "lightingPreset"],
+  "properties": {
+    "documentType": {"type": "string", "const": "BFS_SHOT_PROPOSAL"},
+    "proposalVersion": {"type": "string", "const": "0.1.0"},
+    "briefId": {"type": "string", "enum": ["BRIEF_B43_TABLETOP_PUSH", "BRIEF_B43_INTERIOR_STILL", "BRIEF_B43_UNAUTHORIZED_DOWNLOAD"]},
+    "decision": {"type": "string", "enum": ["ACCEPT", "REJECT"]},
+    "reasonCode": {"type": "string", "enum": ["SUPPORTED_PRESET", "UNAUTHORIZED_NETWORK_OR_CODE", "AMBIGUOUS_INTENT"]},
+    "shotPreset": {"type": "string", "enum": ["MOVING_TABLETOP_HERO", "STATIC_INTERIOR_PORTRAIT", "NONE"]},
+    "assetPreset": {"type": "string", "enum": ["B01_STILL_LIFE", "B02_ROOM_CHAIR", "NONE"]},
+    "cameraPreset": {"type": "string", "enum": ["PUSH_IN_58MM", "STATIC_70MM", "NONE"]},
+    "lightingPreset": {"type": "string", "enum": ["WARM_KEY_COOL_RIM", "SOFT_NEUTRAL_WINDOW", "NONE"]}
+  }
+}
