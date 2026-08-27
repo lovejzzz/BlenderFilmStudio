@@ -1,0 +1,2141 @@
+{
+  "attacks": [
+    {
+      "expectedReason": "PARENT_IDENTITY",
+      "id": "A01_PARENT",
+      "observedReason": "PARENT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "SOURCE_IDENTITY",
+      "id": "A02_SOURCE",
+      "observedReason": "SOURCE_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "IMAGE_IDENTITY",
+      "id": "A03_IMAGE",
+      "observedReason": "IMAGE_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "SECURITY_BOUNDARY",
+      "id": "A04_SECURITY",
+      "observedReason": "SECURITY_BOUNDARY",
+      "passed": true
+    },
+    {
+      "expectedReason": "DISK_ADMISSION",
+      "id": "A05_DISK",
+      "observedReason": "DISK_ADMISSION",
+      "passed": true
+    },
+    {
+      "expectedReason": "CELL_ROSTER",
+      "id": "A06_CELLS",
+      "observedReason": "CELL_ROSTER",
+      "passed": true
+    },
+    {
+      "expectedReason": "SAMPLE_SETTING",
+      "id": "A07_SAMPLES",
+      "observedReason": "SAMPLE_SETTING",
+      "passed": true
+    },
+    {
+      "expectedReason": "SEED_SETTING",
+      "id": "A08_SEED",
+      "observedReason": "SEED_SETTING",
+      "passed": true
+    },
+    {
+      "expectedReason": "MOTION_BLUR_SETTING",
+      "id": "A09_BLUR",
+      "observedReason": "MOTION_BLUR_SETTING",
+      "passed": true
+    },
+    {
+      "expectedReason": "PASS_ROSTER",
+      "id": "A10_ROSTER",
+      "observedReason": "PASS_ROSTER",
+      "passed": true
+    },
+    {
+      "expectedReason": "NON_FINITE",
+      "id": "A11_FINITE",
+      "observedReason": "NON_FINITE",
+      "passed": true
+    },
+    {
+      "expectedReason": "REFERENCE_DISTINCT",
+      "id": "A12_REFERENCES",
+      "observedReason": "REFERENCE_DISTINCT",
+      "passed": true
+    },
+    {
+      "expectedReason": "QUALITY_FLOOR",
+      "id": "A13_FLOOR",
+      "observedReason": "QUALITY_FLOOR",
+      "passed": true
+    },
+    {
+      "expectedReason": "METRIC_REPLAY",
+      "id": "A14_METRIC",
+      "observedReason": "METRIC_REPLAY",
+      "passed": true
+    },
+    {
+      "expectedReason": "PASS_DOMAIN",
+      "id": "A15_DOMAIN",
+      "observedReason": "PASS_DOMAIN",
+      "passed": true
+    },
+    {
+      "expectedReason": "VERDICT_REPLAY",
+      "id": "A16_VERDICT",
+      "observedReason": "VERDICT_REPLAY",
+      "passed": true
+    },
+    {
+      "expectedReason": "OPERATION_BOUNDARY",
+      "id": "A17_OPERATIONS",
+      "observedReason": "OPERATION_BOUNDARY",
+      "passed": true
+    },
+    {
+      "expectedReason": "CLEANUP",
+      "id": "A18_CLEANUP",
+      "observedReason": "CLEANUP",
+      "passed": true
+    },
+    {
+      "expectedReason": "EVIDENCE_SELF_HASH",
+      "id": "A19_HASH",
+      "observedReason": "EVIDENCE_SELF_HASH",
+      "passed": true
+    }
+  ],
+  "attacksPassed": 19,
+  "baseFailure": null,
+  "cleanup": {
+    "experimentContainersRunningAfter": 0
+  },
+  "diskAdmission": {
+    "availableBytes": "118304911360",
+    "freeAfterProjectedBytes": "117231169536",
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "1073741824",
+    "status": "ACCEPTED"
+  },
+  "evidenceCoreHash": "2b1d351935efb8dc8a9f1f1d2f7afe1b960c2ff975be9612fcbaa781faca8524",
+  "experimentId": "B49-MB",
+  "hostInspector": {
+    "packages": {
+      "numpy": "2.3.4",
+      "openImageIO": "3.1.13.1"
+    },
+    "pythonExecutable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+    "pythonVersion": "3.13.13"
+  },
+  "image": {
+    "architecture": "amd64",
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "sizeBytes": 1004901158
+  },
+  "nonClaims": [
+    "human cinematic preference",
+    "physically universal shutter",
+    "complete-shot temporal stability",
+    "object deformation or particle blur",
+    "rolling shutter",
+    "depth of field",
+    "2K or 4K motion-blur cost",
+    "GPU or Eevee behavior",
+    "native x86 or cloud throughput",
+    "dollar cost"
+  ],
+  "observations": [
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-mb-t-ref-a",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_A,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_motion_blur_holdout.py",
+        "--",
+        "--cell-id",
+        "T_REF_A",
+        "--source-sha256",
+        "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+        "--plan-hash",
+        "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+        "--scene-hash",
+        "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+        "--structure-hash",
+        "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 168505,
+        "sha256": "4158267cde3a396853575a13c282489a9214297d61ff8ac426af08b79f6d8a1b",
+        "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_A/production.exr"
+      },
+      "baseShotSeed": 24082643,
+      "cellId": "T_REF_A",
+      "frame": 37,
+      "freshContainerWallSeconds": 38.719,
+      "motionBlur": true,
+      "motionBlurPosition": "CENTER",
+      "motionBlurShutter": 0.5,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "c18e6073ab256f4049e377df144f3d050665150db19e713fc9b7a4da54e7ee44",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "512426b0917dfaed571b9c4c1d62581e036d15f90b79a55cf82603f98f8d2dcf",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "5625f56d3533daf0d069aba7933f9bd381761b220b1042fa5d15e247b525df04",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "b76199c66f101f2229b98d0eb22670dd67a1cc809e7087d13aad02088f6d6d95",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "97bbbf05d833a7695da11a2ea278c4aeb21fc146262b18715656475b42db61f1",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "f796fb71fcd9d6a1ca6fe3b56bdf6e14abf922db5c5ed1a171e96ce91a95c6ce",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 506532,
+      "renderSeconds": 29.165057,
+      "role": "reference",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 512,
+      "seed": 24396802,
+      "seedOffset": 314159,
+      "shotId": "TABLETOP"
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-mb-t-ref-b",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_B,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_motion_blur_holdout.py",
+        "--",
+        "--cell-id",
+        "T_REF_B",
+        "--source-sha256",
+        "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+        "--plan-hash",
+        "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+        "--scene-hash",
+        "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+        "--structure-hash",
+        "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 168268,
+        "sha256": "41f887c193454c39adf4087b71f0c4e1d87d9d81f32f69f3892a39a361624a24",
+        "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_B/production.exr"
+      },
+      "baseShotSeed": 24082643,
+      "cellId": "T_REF_B",
+      "frame": 37,
+      "freshContainerWallSeconds": 38.784,
+      "motionBlur": true,
+      "motionBlurPosition": "CENTER",
+      "motionBlurShutter": 0.5,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "be8aef72a9acba5cda9ca58a5948fa62759a4b136730551e4cf67323c8714ca7",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "5d78ce17bb3d1c46558b0f3f26792a4c4a2943717be558e47a00a2808c38b992",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "d17354a3170a08bebfe283785a9955e927091e7e426a8cbdb0f784bd07c10b36",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "c9fd3a2e372e1d1f3f339e6dfe97a1f132412f93f0206dc2eed8f8101aca21d5",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "dc422726fc53d833e86e6e4961a2bd2d5bbbc7b5f0ee01dfaad618c7ef362ef7",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "f796fb71fcd9d6a1ca6fe3b56bdf6e14abf922db5c5ed1a171e96ce91a95c6ce",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 506260,
+      "renderSeconds": 29.158008,
+      "role": "reference",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 512,
+      "seed": 24506886,
+      "seedOffset": 424243,
+      "shotId": "TABLETOP"
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-mb-t-ref-c",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_C,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_motion_blur_holdout.py",
+        "--",
+        "--cell-id",
+        "T_REF_C",
+        "--source-sha256",
+        "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+        "--plan-hash",
+        "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+        "--scene-hash",
+        "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+        "--structure-hash",
+        "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 168425,
+        "sha256": "8a88e062fb4c00aee15b84a009469be026f951f7a26243d99aee09615aafbe48",
+        "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_C/production.exr"
+      },
+      "baseShotSeed": 24082643,
+      "cellId": "T_REF_C",
+      "frame": 37,
+      "freshContainerWallSeconds": 38.651,
+      "motionBlur": true,
+      "motionBlurPosition": "CENTER",
+      "motionBlurShutter": 0.5,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "95818842d59e4579e3b30bb62191f1d222ff8b8e60a01610d2b1b75fd51570b4",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "08953ecfe58f0434e9a00ada05eb6313935459f2dc4e44a44bac6e2faae515d5",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "8bcc28e28d798ed7a33aa548c88fbcfd1b6902e97a999b905649e6288e259524",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "7388d56fdf7e005a453d5c7370a4c82e259f4d0278b58b506cfefa55e3b0d0e4",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "aab71ed7b5f28e93ed5a26213e500d999eaf42ea4f01426511216feb8b289b50",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "f796fb71fcd9d6a1ca6fe3b56bdf6e14abf922db5c5ed1a171e96ce91a95c6ce",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 507308,
+      "renderSeconds": 28.967368,
+      "role": "reference",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 512,
+      "seed": 24618172,
+      "seedOffset": 535529,
+      "shotId": "TABLETOP"
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-mb-t-c128-on",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-motion-blur-holdout-v0-1/T_C128_ON,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_motion_blur_holdout.py",
+        "--",
+        "--cell-id",
+        "T_C128_ON",
+        "--source-sha256",
+        "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+        "--plan-hash",
+        "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+        "--scene-hash",
+        "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+        "--structure-hash",
+        "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 160705,
+        "sha256": "2ca9b2aa9dd61ee2b28ba17228c3d7186842694adc3fe09d7b3da5742fa843f0",
+        "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_C128_ON/production.exr"
+      },
+      "baseShotSeed": 24082643,
+      "cellId": "T_C128_ON",
+      "frame": 37,
+      "freshContainerWallSeconds": 19.615,
+      "motionBlur": true,
+      "motionBlurPosition": "CENTER",
+      "motionBlurShutter": 0.5,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "97518ce33fe50dfad3c1267898aa26f37ea2db283bc6ec40a9165a5faaa536aa",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "7123ac14eea6db7801a7a1780eb7004b98bed2ab3300f756de7fcddf38f1b833",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "15a296f9f88a5dbdf6d2dc6a801cd3fb1939a5b69ff67c7a699f4bee860b0ca3",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "f1a974e1cd1857f8e56ef87c383128cf292889a88977285fef313094faf6172f",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "f7d175604329d6e927e3e2815a6dd19d4aead3653a5c689ad5b5d922038d97ff",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "f796fb71fcd9d6a1ca6fe3b56bdf6e14abf922db5c5ed1a171e96ce91a95c6ce",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 506428,
+      "renderSeconds": 9.980701,
+      "role": "candidate",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 128,
+      "seed": 24730290,
+      "seedOffset": 647647,
+      "shotId": "TABLETOP"
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-mb-t-c128-off",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-motion-blur-holdout-v0-1/T_C128_OFF,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_motion_blur_holdout.py",
+        "--",
+        "--cell-id",
+        "T_C128_OFF",
+        "--source-sha256",
+        "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+        "--plan-hash",
+        "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+        "--scene-hash",
+        "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+        "--structure-hash",
+        "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 278195,
+        "sha256": "e577cab9789c16ed4cc8684020b1aca1c17b9dff29e7c94f6e23c44ad8a00dc2",
+        "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_C128_OFF/production.exr"
+      },
+      "baseShotSeed": 24082643,
+      "cellId": "T_C128_OFF",
+      "frame": 37,
+      "freshContainerWallSeconds": 19.666,
+      "motionBlur": false,
+      "motionBlurPosition": "CENTER",
+      "motionBlurShutter": 0.5,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "e4164232ca1715b389b2e139ba3c210afda13e2efb01393ff5b3db274764b0c2",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "b5efd592eb41dea0ade716e9beeb52761bdc4a8179f705d2e9e5adbccf5805dd",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "f171e772486bc7f673b984b8428d689ba08e567ce8de41937f7b57dc945adfd8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "c0728285313c62f37d2be93cfcccffabd1f18734fa1f71e43f89aad9ba4afb44",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "976e2910f7153a2e16b5c13f98d9a6bec16bef30f2ed24ad330e0c9f31ae63e9",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "7a8383dd2fab805a63ec9d806745efeed8fcfa6597a8d10cd9bd4f677d707d74",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 506832,
+      "renderSeconds": 9.856871,
+      "role": "negative-control",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 128,
+      "seed": 24730290,
+      "seedOffset": 647647,
+      "shotId": "TABLETOP"
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-mb-t-c128-zero",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-motion-blur-holdout-v0-1/T_C128_ZERO,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_motion_blur_holdout.py",
+        "--",
+        "--cell-id",
+        "T_C128_ZERO",
+        "--source-sha256",
+        "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+        "--plan-hash",
+        "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+        "--scene-hash",
+        "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+        "--structure-hash",
+        "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 158731,
+        "sha256": "29ea2d00b0707b88665e5bff099e1807b3c8ed810f2cbd4fba8d92083519fb49",
+        "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_C128_ZERO/production.exr"
+      },
+      "baseShotSeed": 24082643,
+      "cellId": "T_C128_ZERO",
+      "frame": 37,
+      "freshContainerWallSeconds": 19.48,
+      "motionBlur": true,
+      "motionBlurPosition": "CENTER",
+      "motionBlurShutter": 0,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "e4164232ca1715b389b2e139ba3c210afda13e2efb01393ff5b3db274764b0c2",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "b5efd592eb41dea0ade716e9beeb52761bdc4a8179f705d2e9e5adbccf5805dd",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "f171e772486bc7f673b984b8428d689ba08e567ce8de41937f7b57dc945adfd8",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "c0728285313c62f37d2be93cfcccffabd1f18734fa1f71e43f89aad9ba4afb44",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "976e2910f7153a2e16b5c13f98d9a6bec16bef30f2ed24ad330e0c9f31ae63e9",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "f796fb71fcd9d6a1ca6fe3b56bdf6e14abf922db5c5ed1a171e96ce91a95c6ce",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 507632,
+      "renderSeconds": 9.83358,
+      "role": "mode-control",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 128,
+      "seed": 24730290,
+      "seedOffset": 647647,
+      "shotId": "TABLETOP"
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-mb-i-c128-off",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-motion-blur-holdout-v0-1/I_C128_OFF,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_motion_blur_holdout.py",
+        "--",
+        "--cell-id",
+        "I_C128_OFF",
+        "--source-sha256",
+        "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+        "--plan-hash",
+        "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+        "--scene-hash",
+        "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+        "--structure-hash",
+        "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 237682,
+        "sha256": "761c05ee9bb97ad26952d531e62b3d3d45ea46063b5b150afdf69e390f0f0325",
+        "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/I_C128_OFF/production.exr"
+      },
+      "baseShotSeed": 24082644,
+      "cellId": "I_C128_OFF",
+      "frame": 19,
+      "freshContainerWallSeconds": 21.814,
+      "motionBlur": false,
+      "motionBlurPosition": "CENTER",
+      "motionBlurShutter": 0.5,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "49a4cb4c2bb230e8704047defd83f45f309da0f3498af458bc6d7659b2055999",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "d668d6bd5d2a49d5a7f3d06e42832a90cc9cdebc7f3fb7772f908dcaa50c9ce4",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "e8320c1bfc97fc3347884be9f36499896599982c0aa4b1599928ec5c0fcd620a",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "00790064efb7b2f1634de7d0298709651179c5d24c83b99e52ee0ba1b4fbe1ff",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "906af07c3078c12613fa27a704e21e87ee7daef092c7834f8eee34d5c8e95689",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "28d3e1feeaef07b5e32b8ee8db63257602bfdf1c5f783360289ff20f27d99411",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 504356,
+      "renderSeconds": 12.129584,
+      "role": "static-off-control",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 128,
+      "seed": 24730291,
+      "seedOffset": 647647,
+      "shotId": "INTERIOR"
+    },
+    {
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-mb-i-c128-on",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-motion-blur-holdout-v0-1/I_C128_ON,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_motion_blur_holdout.py",
+        "--",
+        "--cell-id",
+        "I_C128_ON",
+        "--source-sha256",
+        "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+        "--plan-hash",
+        "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+        "--scene-hash",
+        "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+        "--structure-hash",
+        "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 174553,
+        "sha256": "feae4b3e6ba725dffce3089e49e062dc53aad9fd0c6f58edf31deefb90f743cb",
+        "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/I_C128_ON/production.exr"
+      },
+      "baseShotSeed": 24082644,
+      "cellId": "I_C128_ON",
+      "frame": 19,
+      "freshContainerWallSeconds": 21.579,
+      "motionBlur": true,
+      "motionBlurPosition": "CENTER",
+      "motionBlurShutter": 0.5,
+      "passes": {
+        "BFS_MASTER.Combined": {
+          "canonicalFloat32Sha256": "49a4cb4c2bb230e8704047defd83f45f309da0f3498af458bc6d7659b2055999",
+          "channels": [
+            "BFS_MASTER.Combined.R",
+            "BFS_MASTER.Combined.G",
+            "BFS_MASTER.Combined.B",
+            "BFS_MASTER.Combined.A"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject00": {
+          "canonicalFloat32Sha256": "d668d6bd5d2a49d5a7f3d06e42832a90cc9cdebc7f3fb7772f908dcaa50c9ce4",
+          "channels": [
+            "BFS_MASTER.CryptoObject00.r",
+            "BFS_MASTER.CryptoObject00.g",
+            "BFS_MASTER.CryptoObject00.b",
+            "BFS_MASTER.CryptoObject00.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject01": {
+          "canonicalFloat32Sha256": "e8320c1bfc97fc3347884be9f36499896599982c0aa4b1599928ec5c0fcd620a",
+          "channels": [
+            "BFS_MASTER.CryptoObject01.r",
+            "BFS_MASTER.CryptoObject01.g",
+            "BFS_MASTER.CryptoObject01.b",
+            "BFS_MASTER.CryptoObject01.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.CryptoObject02": {
+          "canonicalFloat32Sha256": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+          "channels": [
+            "BFS_MASTER.CryptoObject02.r",
+            "BFS_MASTER.CryptoObject02.g",
+            "BFS_MASTER.CryptoObject02.b",
+            "BFS_MASTER.CryptoObject02.a"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "BFS_MASTER.Depth": {
+          "canonicalFloat32Sha256": "00790064efb7b2f1634de7d0298709651179c5d24c83b99e52ee0ba1b4fbe1ff",
+          "channels": [
+            "BFS_MASTER.Depth.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            1
+          ]
+        },
+        "BFS_MASTER.Normal": {
+          "canonicalFloat32Sha256": "906af07c3078c12613fa27a704e21e87ee7daef092c7834f8eee34d5c8e95689",
+          "channels": [
+            "BFS_MASTER.Normal.X",
+            "BFS_MASTER.Normal.Y",
+            "BFS_MASTER.Normal.Z"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            3
+          ]
+        },
+        "BFS_MASTER.Vector": {
+          "canonicalFloat32Sha256": "f796fb71fcd9d6a1ca6fe3b56bdf6e14abf922db5c5ed1a171e96ce91a95c6ce",
+          "channels": [
+            "BFS_MASTER.Vector.X",
+            "BFS_MASTER.Vector.Y",
+            "BFS_MASTER.Vector.Z",
+            "BFS_MASTER.Vector.W"
+          ],
+          "finite": true,
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        }
+      },
+      "peakSelfRssKiB": 504296,
+      "renderSeconds": 11.917336,
+      "role": "static-on-control",
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 128,
+      "seed": 24730291,
+      "seedOffset": 647647,
+      "shotId": "INTERIOR"
+    }
+  ],
+  "operationCounts": {
+    "builds": 0,
+    "dockerRuns": 8,
+    "downloads": 0,
+    "hostExrAnalyses": 8,
+    "modelCalls": 0,
+    "pulls": 0,
+    "videoModelCalls": 0
+  },
+  "parentObservations": [
+    {
+      "expectedSha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "match": true,
+      "observedSha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json"
+    },
+    {
+      "expectedSha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "match": true,
+      "observedSha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json"
+    },
+    {
+      "expectedSha256": "9edfec279be387b3a51dcc6496303e215fac1f5fb3ebdf4f6484d7edf32a3e81",
+      "match": true,
+      "observedSha256": "9edfec279be387b3a51dcc6496303e215fac1f5fb3ebdf4f6484d7edf32a3e81",
+      "uri": "experiments/codex-worker-motion-blur-derivation-v0-1/analysis.json"
+    },
+    {
+      "expectedSha256": "e60c1b3bfd63c604dd1a0ba61c91707adb70a0deb0f76ebb66d54e39c5a6fad5",
+      "match": true,
+      "observedSha256": "e60c1b3bfd63c604dd1a0ba61c91707adb70a0deb0f76ebb66d54e39c5a6fad5",
+      "uri": "experiments/codex-worker-motion-blur-derivation-v0-1/audit.json"
+    }
+  ],
+  "parents": {
+    "motionBlurDerivation": {
+      "sha256": "9edfec279be387b3a51dcc6496303e215fac1f5fb3ebdf4f6484d7edf32a3e81",
+      "status": "MOTION_BLUR_DERIVATION_USABLE",
+      "uri": "experiments/codex-worker-motion-blur-derivation-v0-1/analysis.json"
+    },
+    "motionBlurDerivationAudit": {
+      "sha256": "e60c1b3bfd63c604dd1a0ba61c91707adb70a0deb0f76ebb66d54e39c5a6fad5",
+      "status": "PASS",
+      "uri": "experiments/codex-worker-motion-blur-derivation-v0-1/audit.json"
+    },
+    "qualityCostAudit": {
+      "sha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "status": "PASS",
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json"
+    },
+    "qualityCostResult": {
+      "selectedCellId": "C128_RAW",
+      "sha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json"
+    }
+  },
+  "passDomains": {
+    "movingZeroVsOff": {
+      "BFS_MASTER.Combined": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "e4164232ca1715b389b2e139ba3c210afda13e2efb01393ff5b3db274764b0c2",
+        "rightHash": "e4164232ca1715b389b2e139ba3c210afda13e2efb01393ff5b3db274764b0c2"
+      },
+      "BFS_MASTER.CryptoObject00": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "b5efd592eb41dea0ade716e9beeb52761bdc4a8179f705d2e9e5adbccf5805dd",
+        "rightHash": "b5efd592eb41dea0ade716e9beeb52761bdc4a8179f705d2e9e5adbccf5805dd"
+      },
+      "BFS_MASTER.CryptoObject01": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "f171e772486bc7f673b984b8428d689ba08e567ce8de41937f7b57dc945adfd8",
+        "rightHash": "f171e772486bc7f673b984b8428d689ba08e567ce8de41937f7b57dc945adfd8"
+      },
+      "BFS_MASTER.CryptoObject02": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+        "rightHash": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a"
+      },
+      "BFS_MASTER.Depth": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "c0728285313c62f37d2be93cfcccffabd1f18734fa1f71e43f89aad9ba4afb44",
+        "rightHash": "c0728285313c62f37d2be93cfcccffabd1f18734fa1f71e43f89aad9ba4afb44"
+      },
+      "BFS_MASTER.Normal": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "976e2910f7153a2e16b5c13f98d9a6bec16bef30f2ed24ad330e0c9f31ae63e9",
+        "rightHash": "976e2910f7153a2e16b5c13f98d9a6bec16bef30f2ed24ad330e0c9f31ae63e9"
+      },
+      "BFS_MASTER.Vector": {
+        "changedFloatComponents": 33190,
+        "exact": false,
+        "leftHash": "7a8383dd2fab805a63ec9d806745efeed8fcfa6597a8d10cd9bd4f677d707d74",
+        "rightHash": "f796fb71fcd9d6a1ca6fe3b56bdf6e14abf922db5c5ed1a171e96ce91a95c6ce"
+      }
+    },
+    "staticOnVsOff": {
+      "BFS_MASTER.Combined": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "49a4cb4c2bb230e8704047defd83f45f309da0f3498af458bc6d7659b2055999",
+        "rightHash": "49a4cb4c2bb230e8704047defd83f45f309da0f3498af458bc6d7659b2055999"
+      },
+      "BFS_MASTER.CryptoObject00": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "d668d6bd5d2a49d5a7f3d06e42832a90cc9cdebc7f3fb7772f908dcaa50c9ce4",
+        "rightHash": "d668d6bd5d2a49d5a7f3d06e42832a90cc9cdebc7f3fb7772f908dcaa50c9ce4"
+      },
+      "BFS_MASTER.CryptoObject01": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "e8320c1bfc97fc3347884be9f36499896599982c0aa4b1599928ec5c0fcd620a",
+        "rightHash": "e8320c1bfc97fc3347884be9f36499896599982c0aa4b1599928ec5c0fcd620a"
+      },
+      "BFS_MASTER.CryptoObject02": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a",
+        "rightHash": "b14f0f3146cebab1767305ca1eb7b65f99112f5c159f83337e4fa5e81094468a"
+      },
+      "BFS_MASTER.Depth": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "00790064efb7b2f1634de7d0298709651179c5d24c83b99e52ee0ba1b4fbe1ff",
+        "rightHash": "00790064efb7b2f1634de7d0298709651179c5d24c83b99e52ee0ba1b4fbe1ff"
+      },
+      "BFS_MASTER.Normal": {
+        "changedFloatComponents": 0,
+        "exact": true,
+        "leftHash": "906af07c3078c12613fa27a704e21e87ee7daef092c7834f8eee34d5c8e95689",
+        "rightHash": "906af07c3078c12613fa27a704e21e87ee7daef092c7834f8eee34d5c8e95689"
+      },
+      "BFS_MASTER.Vector": {
+        "changedFloatComponents": 36348,
+        "exact": false,
+        "leftHash": "28d3e1feeaef07b5e32b8ee8db63257602bfdf1c5f783360289ff20f27d99411",
+        "rightHash": "f796fb71fcd9d6a1ca6fe3b56bdf6e14abf922db5c5ed1a171e96ce91a95c6ce"
+      }
+    }
+  },
+  "preregistration": {
+    "commit": "ef309564d63bc7f4f40a1ed5db467e63d1632baa",
+    "specSha256": "851233f31d4126119160be4e893d0a4f163b821d8451c2872c4c31feb5c66a6a",
+    "specUri": "specs/codex-worker-motion-blur-holdout.v0.1.json"
+  },
+  "quality": {
+    "candidateCellId": "T_C128_ON",
+    "candidateCloserMetricCount": 3,
+    "candidateCloserMetrics": [
+      "linearNrmseByEnsembleRms",
+      "logLuminanceRmse",
+      "edgeLinearRmse"
+    ],
+    "candidateFloorMultiples": {
+      "edgeLinearRmse": 2.2661771887290114,
+      "linearNrmseByEnsembleRms": 2.390795412690645,
+      "logLuminanceRmse": 2.4356344814398545
+    },
+    "candidateMetrics": {
+      "edgeLinearRmse": 0.11410528911376551,
+      "linearMae": 0.011699063105001843,
+      "linearMaxAbsoluteError": 1.715863545735676,
+      "linearNrmseByEnsembleRms": 0.050661619994276104,
+      "linearP95AbsoluteError": 0.05355900600552557,
+      "linearRmse": 0.04415098826469525,
+      "logLuminanceRmse": 0.025344054295644826
+    },
+    "candidatePassed": true,
+    "edgeMask": {
+      "gradientCutoff": 0.06447258690187552,
+      "pixelCount": 922
+    },
+    "ensemble": {
+      "dtype": "float64-le",
+      "rgbRms": 0.8714878890505979,
+      "sha256": "60c7e367bf32e1e835155430065a0cc43d45f6948183296f20af42b26a00d80b",
+      "shape": [
+        72,
+        128,
+        4
+      ]
+    },
+    "negativeControlCellId": "T_C128_OFF",
+    "negativeControlMetrics": {
+      "edgeLinearRmse": 0.11462460739776358,
+      "linearMae": 0.011759725027494837,
+      "linearMaxAbsoluteError": 1.615595181783041,
+      "linearNrmseByEnsembleRms": 0.05085270598640814,
+      "linearP95AbsoluteError": 0.05366095453500744,
+      "linearRmse": 0.04431751739260553,
+      "logLuminanceRmse": 0.025430137459319987
+    },
+    "referenceFloor": {
+      "edgeLinearRmse": 0.05035144192664018,
+      "linearNrmseByEnsembleRms": 0.021190278233494095,
+      "logLuminanceRmse": 0.01040552451066565
+    },
+    "references": [
+      {
+        "cellId": "T_REF_A",
+        "combinedCanonicalFloat32Sha256": "c18e6073ab256f4049e377df144f3d050665150db19e713fc9b7a4da54e7ee44",
+        "metricsAgainstEnsemble": {
+          "edgeLinearRmse": 0.049127843830537934,
+          "linearMae": 0.004973057556511591,
+          "linearMaxAbsoluteError": 0.9063801765441895,
+          "linearNrmseByEnsembleRms": 0.021025317270003993,
+          "linearP95AbsoluteError": 0.02133173234760759,
+          "linearRmse": 0.018323309364254862,
+          "logLuminanceRmse": 0.01040552451066565
+        }
+      },
+      {
+        "cellId": "T_REF_B",
+        "combinedCanonicalFloat32Sha256": "be8aef72a9acba5cda9ca58a5948fa62759a4b136730551e4cf67323c8714ca7",
+        "metricsAgainstEnsemble": {
+          "edgeLinearRmse": 0.039191661606501796,
+          "linearMae": 0.004810627091098558,
+          "linearMaxAbsoluteError": 0.5779485702514648,
+          "linearNrmseByEnsembleRms": 0.01805272110134532,
+          "linearP95AbsoluteError": 0.02173722237348556,
+          "linearRmse": 0.015732727804230618,
+          "logLuminanceRmse": 0.01010961733287018
+        }
+      },
+      {
+        "cellId": "T_REF_C",
+        "combinedCanonicalFloat32Sha256": "95818842d59e4579e3b30bb62191f1d222ff8b8e60a01610d2b1b75fd51570b4",
+        "metricsAgainstEnsemble": {
+          "edgeLinearRmse": 0.05035144192664018,
+          "linearMae": 0.00498992651085647,
+          "linearMaxAbsoluteError": 0.726121187210083,
+          "linearNrmseByEnsembleRms": 0.021190278233494095,
+          "linearP95AbsoluteError": 0.02150027602910995,
+          "linearRmse": 0.018467070846102603,
+          "logLuminanceRmse": 0.009963065886342931
+        }
+      }
+    ]
+  },
+  "runtime": {
+    "numpy": "2.3.4",
+    "openImageIO": "3.1.13.1",
+    "python": "3.13.13"
+  },
+  "schemaVersion": "bfs.codexWorkerMotionBlurHoldoutEvidence.v0.1",
+  "securityBoundary": {
+    "capDrop": [
+      "ALL"
+    ],
+    "cpus": 4,
+    "killGraceMs": 5000,
+    "memoryBytes": 8589934592,
+    "network": "none",
+    "noNewPrivileges": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "platform": "linux/amd64",
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "shmBytes": 1073741824,
+    "user": "65532:65532",
+    "wallTimeMs": 180000
+  },
+  "sourceObservations": [
+    {
+      "expectedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "match": true,
+      "observedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+    },
+    {
+      "expectedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "match": true,
+      "observedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+    },
+    {
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true,
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    },
+    {
+      "expectedSha256": "851233f31d4126119160be4e893d0a4f163b821d8451c2872c4c31feb5c66a6a",
+      "match": true,
+      "observedSha256": "851233f31d4126119160be4e893d0a4f163b821d8451c2872c4c31feb5c66a6a",
+      "uri": "specs/codex-worker-motion-blur-holdout.v0.1.json"
+    }
+  ],
+  "toolFreezeCommit": "03296b2348be0490485a8a58118a1544cac3e0a9",
+  "tools": {
+    "analyzer": {
+      "sha256": "8bdb1ffafbe6f62beb4ced596afe292aa18ebb82cc00008ced1e7eb65587e4d4",
+      "uri": "scripts/analyze-b49-motion-blur-holdout.py"
+    },
+    "audit": {
+      "sha256": "f7e30081cbe8595fa3a53eff66616b3d3670f282f2fe1cb35fc9ce439cb31692",
+      "uri": "scripts/audit-b49-motion-blur-holdout.py"
+    },
+    "renderer": {
+      "sha256": "7f0c62be34b200bb33ff8e8eeae79154f63914f0453181c989d198d2e242f8e9",
+      "uri": "blender/render_b49_motion_blur_holdout.py"
+    },
+    "runner": {
+      "sha256": "ed176d6858bc3b7ddf4da64bd9899fee27142993b0f0d48170d98e69ff5ccb5d",
+      "uri": "scripts/run-b49-motion-blur-holdout.mjs"
+    }
+  },
+  "verdict": "B49_MOTION_BLUR_OPERATING_POINT_SUPPORTED"
+}

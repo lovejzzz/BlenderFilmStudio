@@ -1393,6 +1393,20 @@ Next: a formal unseen-frame holdout with three independent 512-spp blur referenc
 
 Artifacts: `experiments/codex-worker-motion-blur-derivation-v0-1/`, `specs/codex-worker-motion-blur-derivation.v0.1.json`, `research/2026-08-27-b49-mb-d1-motion-blur-derivation-protocol.md` and `research/2026-08-27-b49-mb-d1-motion-blur-derivation-result.md`.
 
+## J-083 · B49-MB validates the 128-spp raw point under half-frame camera exposure
+
+Date: 2026-08-27 · Type: FORMAL HOLDOUT · Runtime: eight fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+B49-MB used TABLETOP frame 37, previously unobserved with blur. Three independent 512-spp centered-shutter-0.5 references established a local blur floor. A 128-spp blur-on candidate and same-seed blur-off control were compared through linear NRMSE, log-luminance RMSE and top-10%-edge RMSE. Static INTERIOR frame 19 and moving zero-shutter cells enforced the pass-domain rules derived in D1.
+
+The blur-on candidate's floor multiples were 2.3908× linear, 2.4356× log-luminance and 2.2662× edge, all below the frozen 3× limit. It was closer than off on all three metrics, satisfying `B49_MOTION_BLUR_OPERATING_POINT_SUPPORTED`. The relative improvements were small—0.376%, 0.339% and 0.453%—and blur off would also have remained within 3× floor. This supports numerical adequacy and a consistent direction toward the blur reference, not obvious perceptual superiority.
+
+The 128-spp blur-on render took 9.981 seconds versus 9.857 seconds off; fresh-worker wall was 19.615 versus 19.666 seconds. Moving zero-shutter and static on/off comparisons preserved Combined/Depth/Normal/Cryptomatte exactly while Vector changed 33,190 and 36,348 components. The production representation must bind Vector to blur mode.
+
+All eight workers completed, 19/19 attacks passed, cleanup was zero and independent analysis replay was byte exact. Motion blur's bounded machine gate is closed; depth of field is next. Human preference remains a separate viewable-resolution blind review.
+
+Artifacts: `experiments/codex-worker-motion-blur-holdout-v0-1/`, `specs/codex-worker-motion-blur-holdout.v0.1.json`, `research/2026-08-27-b49-mb-codex-worker-motion-blur-holdout-protocol.md` and `research/2026-08-27-b49-mb-codex-worker-motion-blur-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
