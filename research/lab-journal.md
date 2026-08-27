@@ -1317,6 +1317,20 @@ No production point is promoted. The single 512-spp reference shares a seed with
 
 Artifacts: `experiments/codex-worker-quality-cost-ladder-derivation-v0-1/`, `research/2026-08-26-b48-d1-quality-cost-ladder-derivation-protocol.md` and `research/2026-08-26-b48-d1-quality-cost-ladder-derivation-result.md`.
 
+## J-078 · B48-D2 measures the high-sample reference floor
+
+Date: 2026-08-26 · Type: LIVE DERIVATION · Runtime: three fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+D2 froze three 512-spp raw reference seeds before its renderer, runner and analyzer. R512-A/B/C completed in 27.540, 27.458 and 27.318 render seconds. All produced the exact B47 seven-subimage roster with finite Combined data. The original-seed A replica reproduced D1's canonical float32 Combined hash exactly in a clean worker. The two new seed interventions produced different hashes from A and each other.
+
+The three references were not numerically identical: pairwise normalized linear RMSE was 0.033108–0.035242, log-luminance RMSE 0.016657–0.017365 and edge RMSE 0.072621–0.078448. Individual deviation from their float64 ensemble mean was 0.018740–0.019996 NRMSE, 0.009618–0.010008 log-luminance and 0.041061–0.044491 edge RMSE. This directly falsifies treating one 512-spp realization as noiseless truth.
+
+Re-evaluating D1 against the three-reference mean preserved the ranking conflict: 128 raw had lower linear and edge error than every denoised cell, while 128 OIDN had lower log-luminance error. The analyzer replay was byte-identical; calibration status is `usableForFormalDesign=true`.
+
+Next: freeze unseen frames, candidate seeds and a per-frame three-reference rule. A candidate will need all three metrics within a fixed multiple of the local reference floor; the cheapest cell passing every holdout becomes the bounded numerical operating point. Human cinematic quality remains a separate later gate.
+
+Artifacts: `experiments/codex-worker-reference-calibration-derivation-v0-1/`, `research/2026-08-26-b48-d2-independent-reference-calibration-protocol.md` and `research/2026-08-26-b48-d2-independent-reference-calibration-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
