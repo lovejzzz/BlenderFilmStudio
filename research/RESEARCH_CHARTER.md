@@ -6,6 +6,22 @@ This charter is a persistent execution constraint for the BlenderFilmStudio goal
 
 Continuously advance BlenderFilmStudio by implementing and testing the SceneSpec → immutable BuildPlan → real Blender 5.2 workflow. Reproduce B01/B02 semantic structure across clean builds, publish falsifiable evidence, and continue to the next evidence-supported gap. Do this as an experimental research program rather than a feature-demo program.
 
+## Active goal: three workflow gates
+
+The active goal is judged through three explicit, falsifiable gates. A partial result must not be promoted to an end-to-end workflow pass.
+
+1. **Worker build gate.** Build and identity-pin a real Blender 5.2 Linux/amd64 worker through buildx. The platform, official archive, Blender executable, image, build transport and retained receipts must be independently auditable.
+2. **Runtime canary gate.** Exercise real Blender inside the worker and test the declared render backend, read-only input, writable output, network isolation, non-root execution, capability removal, CPU/memory/PID limits and TERM → KILL timeout behavior. A backend that does not complete must remain an explicit open boundary rather than being silently replaced by a weaker claim.
+3. **End-to-end reproduction gate.** Run `SceneSpec → immutable BuildPlan → Blender compiler` for B01 and B02 from clean worker invocations twice each; compare canonical scene structure, `.blend` and compile receipts, camera, lighting, materials and topology, then retain adversarial integrity controls, independent audit, journal and published evidence.
+
+### Evidence status at the 2026-08-26 checkpoint
+
+- **Gate 1 — closed after documented corrections.** The retained image is Linux/amd64 and binds the official Blender 5.2 executable identity. Earlier legacy-builder and cross-platform identity failures remain in the record.
+- **Gate 2 — resolved only to a bounded CPU-worker result.** Real Blender, containment, forced timeout and Cycles CPU rendering were observed. Headless Eevee did not complete on this ARM64 Colima/qemu host; the Eevee/GPU route remains open and must not be described as passed.
+- **Gate 3 — closed for B01/B02 only.** Four clean compiler containers reproduced both canonical structure hashes and a fifth tampered-plan container failed closed. This does not establish arbitrary-scene coverage, pixel quality, production throughput or `.blend` byte identity.
+
+Crossing these gates establishes the minimum controlled compiler workflow at its stated backend boundary. It does not establish the larger creative workflow. The next active evidence gap is the subscription-authenticated Codex CLI intent boundary: an unseen director brief must produce only a schema-valid, least-authority proposal; a deterministic adapter—not the model—must bind assets, hashes and technical values before the accepted SceneSpec enters the already proven worker path.
+
 ## Non-negotiable method
 
 1. **Use real Blender.** A Blender-facing claim must be exercised against the installed Blender binary and real `.blend` data unless explicitly labelled as a design-only hypothesis.
