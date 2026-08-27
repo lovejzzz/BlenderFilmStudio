@@ -2351,6 +2351,22 @@ All eleven formal tool paths, the preflight root and the formal root are absent.
 
 Artifacts: `specs/blender-projective-subpixel-reconstruction-holdout.v0.1.json` and `research/2026-08-27-b52-d12-projective-subpixel-reconstruction-holdout-protocol.md`.
 
+## J-147 · Frozen D12 tools pass zero-formal-output admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+All eleven D12 formal tools were frozen and pushed at `37fb06e68c7761dc432fa48b9287e78f7a427f24`. Preflight matched every working file byte-for-byte to its Git blob, all parent artifacts, Blender/Python/Node/OCIO runtimes and the preregistered spec.
+
+Eleven contract tests passed, including an end-to-end synthetic static CLI comparison in which the scalar Python and Node reconstructors produced byte-identical reconstruction, validity, projective endpoint, predicted-depth, nearest, wrong-sign and direct-depth-control arrays. The analyzer contains no Blender/mathutils or tested-reconstructor import.
+
+Two fresh Blender 5.2 processes performed zero-render probes. The source probe constructed the frozen 47 mm perspective camera, 3,080-vertex/2,967-polygon surface, twenty-node continuous emission graph and four production passes with zero Cycles rays. The bridge probe opened a generated 107×67 Raw EXR and built exactly `BFS_D12_EXTERNAL_SOURCE.Image→BFS_D12_GROUP_OUTPUT.Socket_0`, again with zero render calls.
+
+Disk admission observed 107,548,725,248 available bytes and projected 107,481,616,384 after the frozen 64 MiB write, above the unchanged 107,374,182,400-byte reserve. The formal root remained absent before and after preflight. Status: `ACCEPTED`; preflight file SHA-256: `fb2205ec6a0486b37df3689a2567ccb85fe714fec71af3709f5cb235c5059e6f`; internal hash: `9582a44251b43dd712461ab9c0af6bdce25c1f7259a052fce9e8d0ca2a01257e`.
+
+Next: commit this immutable admission, then create the formal root exactly once and execute the unchanged 65-process matrix. Formal fixture renders have not yet occurred.
+
+Artifact: `experiments/blender-projective-subpixel-reconstruction-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
