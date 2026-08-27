@@ -1,0 +1,66 @@
+{
+  "adapter": {
+    "reportHash": "d97cb3131103683cbbf708320f0a6d7c75e7711460517214a4bd07543bbef92b",
+    "sha256": "947577c86e9e9a3792fcc714b3880fd193c9af9e4014b37439ed8065cbea959a",
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/synthetic/adapter-report.json"
+  },
+  "arrays": {
+    "boundary": {
+      "bytes": 5917,
+      "dtype": "uint8",
+      "sha256": "b1231d09feb59bb20550744c37dc9eee3a27839e617cb52890a497569983f500",
+      "shape": [
+        61,
+        97
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/synthetic/python/arrays/boundary.u8"
+    },
+    "reconstructed": {
+      "bytes": 94672,
+      "dtype": "little-endian-float32",
+      "sha256": "84468525269c2b7bf95689ed74be8f53c1da4be38945d1642262ec41a4c243d3",
+      "shape": [
+        61,
+        97,
+        4
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/synthetic/python/arrays/reconstructed.rgba32"
+    },
+    "valid": {
+      "bytes": 5917,
+      "dtype": "uint8",
+      "sha256": "97ac567bfdfdb3b264cce88a8d4c51656398a5aef76fcdf2714c101957b92710",
+      "shape": [
+        61,
+        97
+      ],
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/synthetic/python/arrays/valid.u8"
+    }
+  },
+  "contract": {
+    "boundaryDefinition": "a registered current owner pixel excluded only because its radius-2 neighborhood or previous bilinear taps cross owner/alpha",
+    "failureRule": "cross-owner or alpha-mismatched history rejects instead of blending",
+    "interiorDefinition": "current owner is one registered positive integer ID; current alpha >0.999; every pixel in a Chebyshev-radius-2 current 5x5 neighborhood has the same owner and alpha; all four previous bilinear taps have that same owner and alpha",
+    "kernel": "clip-boundary bilinear; scalar float64 weights and TL,TR,BL,BR accumulation; one final float32 cast",
+    "orientation": "decoded arrays are top-left; previous sample coordinate is (x + Vector.X, y - Vector.Y)",
+    "producerMetrics": "forbidden as decision inputs; producers emit payload and identity metadata only"
+  },
+  "experimentId": "B52-D12.3",
+  "fixtureId": "STATIC_CURVED_PAIR_97X61",
+  "integrity": "external dual typed-envelope sidecars",
+  "operationCounts": {
+    "consumerProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "pixelsVisited": 5917
+  },
+  "pid": 21015,
+  "producer": "python",
+  "repeat": 1,
+  "runtime": {
+    "numpy": "2.3.4",
+    "python": "3.13.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35"
+  },
+  "schemaVersion": "bfs.blenderStaticNonplanarMultiownerConsumerReport.v0.1"
+}

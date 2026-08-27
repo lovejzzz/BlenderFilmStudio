@@ -2553,6 +2553,20 @@ All seven formal tool paths, preflight root and formal root are absent. Next: co
 
 Artifacts: `specs/blender-static-nonplanar-multiowner-holdout.v0.1.json` and `research/2026-08-27-b52-d12-3-static-nonplanar-multiowner-holdout-protocol.md`.
 
+## J-161 · Frozen D12.3 tools pass owner-boundary and real-geometry admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs/renders: 0/0
+
+All seven D12.3 tools were frozen and pushed at `dfbcb50d90b780ee0bbdf728a0706749b3aa8541`. Preflight matched every working file to its Git blob, bound the preregistration and runtime identities, parsed all tools and verified analyzer import independence.
+
+The synthetic two-owner cell placed a hard Object Index split through a continuous image and injected a `1/65536`-pixel static Vector residue. Python and Node produced byte-identical reconstruction, owner-interior and boundary payloads; both masks were nonempty and their intersection was empty. A real Blender 5.2 zero-render probe constructed the fresh scaled UV sphere and tilted torus, their procedural materials, three-frame static actions and four-pass Cycles view layer.
+
+All 13 tests passed. Disk admission observed 107,422,646,272 bytes available; the 16 MiB projection leaves 107,405,869,056 bytes, 31,686,656 bytes above the unchanged 100 GiB reserve. Formal root remained absent. Preflight file SHA-256: `bce826c2adf9b43898d09e5ae1408c8e18165408eb7a5df5bb402b171f92186a`; internal hash: `a4628792e805a8e9cfc350ad80ed2066ca6bd7894479365ae433e1c4b300b223`.
+
+Next: commit this immutable admission, then run the single-use 55-process real-Blender matrix.
+
+Artifact: `experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

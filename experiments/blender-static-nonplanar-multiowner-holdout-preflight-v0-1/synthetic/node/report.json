@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "bfs.blenderStaticNonplanarMultiownerConsumerReport.v0.1",
+  "experimentId": "B52-D12.3",
+  "producer": "node",
+  "fixtureId": "STATIC_CURVED_PAIR_97X61",
+  "repeat": 1,
+  "pid": 21016,
+  "runtime": {
+    "node": "v26.5.0",
+    "nodeExecutableSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "adapter": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/synthetic/adapter-report.json",
+    "sha256": "947577c86e9e9a3792fcc714b3880fd193c9af9e4014b37439ed8065cbea959a",
+    "reportHash": "d97cb3131103683cbbf708320f0a6d7c75e7711460517214a4bd07543bbef92b"
+  },
+  "contract": {
+    "orientation": "decoded arrays are top-left; previous sample coordinate is (x + Vector.X, y - Vector.Y)",
+    "interiorDefinition": "current owner is one registered positive integer ID; current alpha >0.999; every pixel in a Chebyshev-radius-2 current 5x5 neighborhood has the same owner and alpha; all four previous bilinear taps have that same owner and alpha",
+    "boundaryDefinition": "a registered current owner pixel excluded only because its radius-2 neighborhood or previous bilinear taps cross owner/alpha",
+    "kernel": "clip-boundary bilinear; scalar float64 weights and TL,TR,BL,BR accumulation; one final float32 cast",
+    "failureRule": "cross-owner or alpha-mismatched history rejects instead of blending",
+    "producerMetrics": "forbidden as decision inputs; producers emit payload and identity metadata only"
+  },
+  "arrays": {
+    "reconstructed": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/synthetic/node/arrays/reconstructed.rgba32",
+      "sha256": "84468525269c2b7bf95689ed74be8f53c1da4be38945d1642262ec41a4c243d3",
+      "bytes": 94672,
+      "shape": [
+        61,
+        97,
+        4
+      ],
+      "dtype": "little-endian-float32"
+    },
+    "valid": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/synthetic/node/arrays/valid.u8",
+      "sha256": "97ac567bfdfdb3b264cce88a8d4c51656398a5aef76fcdf2714c101957b92710",
+      "bytes": 5917,
+      "shape": [
+        61,
+        97
+      ],
+      "dtype": "uint8"
+    },
+    "boundary": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1/synthetic/node/arrays/boundary.u8",
+      "sha256": "b1231d09feb59bb20550744c37dc9eee3a27839e617cb52890a497569983f500",
+      "bytes": 5917,
+      "shape": [
+        61,
+        97
+      ],
+      "dtype": "uint8"
+    }
+  },
+  "integrity": "external dual typed-envelope sidecars",
+  "operationCounts": {
+    "consumerProcesses": 1,
+    "pixelsVisited": 5917,
+    "modelCalls": 0,
+    "networkCalls": 0
+  }
+}
