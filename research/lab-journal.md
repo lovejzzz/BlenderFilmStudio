@@ -2853,6 +2853,16 @@ C1 adds only that spec URI/SHA, changes the experiment and output roots to fresh
 
 Artifact: `research/2026-08-27-b52-d12-8-c1-typed-envelope-parent-correction.md`.
 
+## J-187 · D12.8-C1 preflight development exposes Node parent-directory failure
+
+Date: 2026-08-27 · Type: PREFLIGHT TOOL FAILURE · Formal Blender renders: 0
+
+The first zero-output preflight development invocation reached the synthetic consumer stage but raised `FileNotFoundError` because the preflight attempted to read a missing Node report without surfacing child stderr. After adding failure propagation, a second invocation exposed the real cause: Node used non-recursive `mkdir` for the nested consumer array directory and exited with `ENOENT`.
+
+No preflight JSON, C1 formal root, source EXR, adapter payload, measurement or verdict was created. The correction is limited to recursive parent materialization after the existing non-existence guard, plus explicit child stdout/stderr propagation in preflight. Consumer arithmetic and every frozen scientific rule remain unchanged. Both failed invocations are retained in this journal rather than promoted into an accepted preflight.
+
+Artifacts: `scripts/reconstruct-b52-d12-8-motion-disocclusion.mjs` and `scripts/preflight-b52-d12-8-motion-disocclusion.py`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
