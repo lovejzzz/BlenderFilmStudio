@@ -1921,6 +1921,20 @@ Disk admission was again narrow but valid after removing only two regenerable te
 
 Frozen preflight SHA-256: `25886acd2d3344c583323e1abeaab56ad3befa59f12b2e2ca40f1faed377e7a4`. Next: execute the unchanged 24-process formal matrix and preserve any exactness counterexample.
 
+## J-118 · B52-D8 proves the external canonical warp bridge is exact
+
+Date: 2026-08-27 · Type: CONFIRMATORY REAL-BLENDER BRIDGE HOLDOUT · Child processes: 24
+
+All three Python producers, three independently implemented Node producers, six EXR encoders and twelve fresh Blender 5.2 compositor cells completed with 24 unique PIDs. Python and Node canonical arrays agreed byte-for-byte for all three unseen warps. Every Raw FLOAT EXR decoded back to its source raw exactly before Blender.
+
+All twelve Blender outputs then decoded exactly to their canonical raw inputs. This includes negative RGB, RGB above one, non-opaque alpha, high-frequency structure and distinct orientation corners. Both clean Blender repeats and both producer paths converged for every fixture. Across the full matrix maximum absolute error was zero and changed scalar count was zero.
+
+Verdict: `EXTERNAL_CANONICAL_WARP_BRIDGE_SUPPORTED`, base failure `null`, attacks 24/24. Independent audit `PASS`: producer replay 6/6, encoder decoded replay 6/6, formal artifacts 24/24, analyzer and 12 diagnostics byte-exact, with all parent/runtime/tool/self-hash and operation-count checks intact.
+
+This closes a concrete architectural gap: Blender need not be trusted as the high-frequency Bilinear consumer. Codex-side deterministic code can compute canonical pixels, write Raw float32 EXR, and use Blender's frozen pass-through without a decoded pixel change. The next unresolved boundary is B52-D9 layer/depth-aware external temporal accumulation—especially occlusion, disocclusion and history validity—not transport.
+
+Artifacts: `experiments/external-canonical-warp-bridge-v0-1/` and `research/2026-08-27-b52-d8-external-canonical-warp-bridge-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
