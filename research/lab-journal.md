@@ -2609,6 +2609,22 @@ Next: commit the immutable admission, create the formal output root once, then r
 
 Artifact: `experiments/blender-static-zero-headroom-localization-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-165 · D12.4 localizes the unique threshold pixel without revising D12.3
+
+Date: 2026-08-27 · Type: COMPLETE POST-HOC DEVELOPMENT DIAGNOSTIC · New Blender renders: 0
+
+The formal localizer passed 16/16 checks and the independent audit passed 15/15 base checks plus 15/15 registered mutation attacks. Every D12.3 input identity, report binding, payload hash, repeat payload and reconstructed float32 byte was reproduced. No Blender, model or network call occurred.
+
+The global threshold is reached by exactly one sample: blue channel `(56,38)` on `FRONT_OCCLUDER` owner `10454`. It lies at Chebyshev silhouette distance 3, the first eligible ring under radius-2 erosion. Raw Vector is `(-2^-17, 0)` pixels. That gives the left neighbor weight `2^-17`; its blue value differs from the center by approximately `-0.249674`, producing a signed contribution `-1.9048577542e-6`. The final float32 cast changes the stored error to exactly `-1.9073486328125e-6`, the frozen gate.
+
+All 32 highest-error samples in the occluding fixture belong to the front occluder and 15 are at distance 3. The rear plane maximum is only `2.98023223877e-8`. On the already observed arrays, requiring distance at least 4 lowers the maximum across all three fixtures to `4.76837158203e-7`, one quarter of the gate. That makes radius 3 a plausible post-hoc correction candidate, not a validated setting.
+
+Next: preregister a fresh D12.5 radius-2 versus radius-3 holdout with new geometry/resolutions, unchanged numeric gates and explicit coverage retention. D12.3 remains formally passed with zero headroom.
+
+Result file SHA-256: `ba251ebe6262b85a9f12fcef1829a2556d9513a8014bf845da24e983c2430a89`; audit file SHA-256: `26055eb706a76fbf7fda3c326ee70d49c70b9b58d62c4b28a101815fc0b0f8ee`.
+
+Artifacts: `experiments/blender-static-zero-headroom-localization-v0-1/` and `research/2026-08-27-b52-d12-4-zero-headroom-localization-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
