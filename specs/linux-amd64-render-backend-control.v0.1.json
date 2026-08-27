@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "bfs.linuxAmd64RenderBackendControl.v0.1",
+  "experimentId": "B41-D3",
+  "status": "PREREGISTERED_BEFORE_CONTROL_TOOLING_OR_OUTPUT",
+  "question": "Does the exact B41-D2 image complete a contained Cycles CPU render and/or an Eevee Vulkan render, and which EGL, llvmpipe, lavapipe and DRM capabilities are visible inside the Blender process?",
+  "parent": {
+    "d2SpecSha256": "850d0d7b0cf9b1aa98ac203e846a3fcc7a0aa1bf5d581bad97d57411bee5369b",
+    "d2PreregistrationCommit": "c96cb2cf8beb7c3a4525b9960e4bc5bb380c2b20",
+    "d2ToolFreezeCommit": "5afde8219a35e9bd31eeb6b8ebf967856a47b6d6",
+    "resultSha256": "7a448ce9fc5f92bdd170258adf7c7ef4c46d1a1d25cfdd02e8eea71e32b24348",
+    "auditSha256": "35e0df8ef9b33a35a76695c726052fd79f5d18cae254078904a1c035f6b35533",
+    "classification": "NO_COMPLETION_WITHIN_DIAGNOSTIC_CEILING"
+  },
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "dockerReportedSizeBytes": 1004901158,
+    "buildPullDownloadAllowed": false
+  },
+  "controls": [
+    {
+      "id": "CYCLES_CPU",
+      "engine": "CYCLES",
+      "device": "CPU",
+      "gpuBackendArgv": [],
+      "width": 32,
+      "height": 32,
+      "samples": 1,
+      "wallTimeMs": 60000
+    },
+    {
+      "id": "EEVEE_VULKAN",
+      "engine": "BLENDER_EEVEE",
+      "device": null,
+      "gpuBackendArgv": ["--gpu-backend", "vulkan"],
+      "width": 32,
+      "height": 32,
+      "samples": null,
+      "wallTimeMs": 90000
+    }
+  ],
+  "inventoryPaths": [
+    "/usr/lib/x86_64-linux-gnu/dri/llvmpipe_dri.so",
+    "/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0",
+    "/usr/lib/x86_64-linux-gnu/libvulkan_lvp.so",
+    "/usr/share/vulkan/icd.d/lvp_icd.x86_64.json",
+    "/dev/dri"
+  ],
+  "milestonesExactOrder": ["PROCESS_STARTED", "INVENTORY_RECORDED", "SCENE_CONFIGURED", "BLEND_SAVED", "RENDER_STARTED", "RENDER_COMPLETED", "REPORT_WRITTEN"],
+  "classificationOrder": ["VULKAN_EEVEE_ROUTE_AVAILABLE", "CPU_ONLY_WORKER_CONFIRMED_EEVEE_GPU_ROUTE_ABSENT", "NO_RENDER_CONTROL_COMPLETES"],
+  "securityBoundary": {
+    "inheritB41C5": true,
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": ["ALL"],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "inputReadOnly": true,
+    "outputWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "21474836480"
+  },
+  "acceptance": {
+    "bothControlsAttempted": true,
+    "partialArtifactsAndMilestonesRetained": true,
+    "inventoryRecordedBeforeRender": true,
+    "zeroBuildPullDownloadOperations": true,
+    "zeroExperimentContainersRunningAfter": true,
+    "independentAuditRequired": true,
+    "promotable": false
+  },
+  "acceptedVerdict": "RENDER_BACKEND_CONTROL_COMPLETE_NON_PROMOTABLE",
+  "nonClaims": [
+    "B41-D3 cannot promote the frozen Eevee worker gate",
+    "Cycles CPU success would not establish Eevee or GPU availability",
+    "Vulkan failure without lavapipe packages would not reject a rebuilt software-Vulkan image",
+    "A synthetic 32x32 single-sample render is not production quality or throughput evidence",
+    "No SceneSpec compiler workload runs in B41-D3"
+  ]
+}
