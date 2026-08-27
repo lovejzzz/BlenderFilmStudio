@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "bfs.blenderNearestIntegerTemporalRecoveryNodeQuantizerReport.v0.1",
+  "experimentId": "B52-D11.1",
+  "fixtureId": "QUANTIZED_SAME_ID_DEPTH_DISCLOSURE_199X109",
+  "repeat": 2,
+  "producer": "node",
+  "pid": 309,
+  "runtime": {
+    "node": "v26.5.0",
+    "nodeExecutableSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "adapterReport": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/adapters/QUANTIZED_SAME_ID_DEPTH_DISCLOSURE_199X109_R2/adapter.report.json",
+    "sha256": "a1c6914359d6ec7184b54e8cda8cd57c7b6e04ca614191efdc03ef5bb9050408"
+  },
+  "input": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/adapters/QUANTIZED_SAME_ID_DEPTH_DISCLOSURE_199X109_R2/arrays/motion.xy32",
+    "sha256": "d49bdaaca9564f07d01f2e724fc42443f604bef65e39b2fb21f34d6afb92c10e",
+    "bytes": 173528
+  },
+  "output": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/quantizers/node/QUANTIZED_SAME_ID_DEPTH_DISCLOSURE_199X109_R2/motion-quantized.xy32",
+    "sha256": "84dd3f55a80e7f7ccd0d54622c975a9e6258ece657fcb345c6b98053d0ec95c7",
+    "bytes": 173528,
+    "shape": [
+      109,
+      199,
+      2
+    ],
+    "dtype": "little-endian-float32"
+  },
+  "quantizer": {
+    "candidate": "value >= 0 ? floor(value + 0.5) : ceil(value - 0.5)",
+    "acceptanceRadiusPixels": 0.0009765625,
+    "wholeArrayAccepted": true,
+    "positiveZeroCanonical": true,
+    "idempotent": true
+  },
+  "metrics": {
+    "componentCount": 43382,
+    "maximumAbsoluteQuantizationErrorPixelsDecimal": "0.000007629394531250"
+  },
+  "operationCounts": {
+    "pythonQuantizerProcesses": 0,
+    "nodeQuantizerProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "reportHash": "fcc53f60d565cf7cf4fa82675508fc3188bea3be0b651676be31540579fa36ce"
+}

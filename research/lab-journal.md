@@ -2305,6 +2305,20 @@ C2 is preregistered before its tool exists. It may copy the exact C1 tool and ch
 
 Artifacts: `research/2026-08-27-b52-d11-1-c2-receipt-hash-literal-correction.md`.
 
+## J-144 · D11.1-C2 independently supports bounded integer-motion recovery
+
+Date: 2026-08-27 · Type: CORRECTED INDEPENDENT REPLAY AUDIT + CONFIRMATORY RESULT · Formal rerenders: 0
+
+The C2 audit tool was frozen and pushed at `add84222c218f27be772db3632c090127888c65f`, then run exactly against the immutable D11.1 formal root. It passed result, receipt, spec, preflight, process, diagnostic, evidence and verdict checks; independently replayed all eight cells; reconstructed all fourteen evidence gates; and accounted for all 71 registered attacks. No Blender process, render, adapter, quantizer, accumulator or encoder was rerun.
+
+The formal verdict is therefore auditable as `BLENDER_NEAREST_INTEGER_TEMPORAL_RECOVERY_HOLDOUT_SUPPORTED`, with `baseFailure=null`. Eighty-one formal child PIDs were unique. Python and Node were byte-identical for quantization and accumulation in 8/8 cells; maximum observed quantization error was `7.62939453125e-6` px; and the explicit bounded quantizer recovered 397, 661 and 359 pixels per repeat from the inherited toward-zero error in the three moving fixtures. The static control remained 21,691/21,691 valid. Sixteen semantic probe patches and sixteen real Blender Raw EXR bridges were exact.
+
+The correction history remains part of the evidence. The original audit crashed on replay-only NumPy `bool_` serialization. C1 added the preregistered native-boolean cast but stopped on a malformed 65-character receipt hash literal. C2 changed only that literal and correction provenance. Neither correction changed or reran the formal matrix. C2 audit file SHA-256 is `35ef7e30f0f231262e58ee307cac4050e5e0137cbc1af209ac5d2ab7b1cb552f`; its internal canonical hash is `c7fdf2f467e92c94cfd59a96881509b1fd87fc49d57a7e5d15f36b8be0570d40`.
+
+This does not erase D11's rejection and does not authorize arbitrary rounding. Support applies only when every finite component lies within the frozen inclusive `1/1024`-pixel domain. Perspective, subpixel, deformation, transparency, multi-owner coverage and perceived quality remain untested. The next boundary is a separately preregistered perspective/subpixel reconstruction contract, not radius widening.
+
+Artifacts: `experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/` and `research/2026-08-27-b52-d11-1-nearest-integer-temporal-recovery-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

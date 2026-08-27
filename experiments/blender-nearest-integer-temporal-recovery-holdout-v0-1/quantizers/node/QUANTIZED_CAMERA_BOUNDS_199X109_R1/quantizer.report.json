@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "bfs.blenderNearestIntegerTemporalRecoveryNodeQuantizerReport.v0.1",
+  "experimentId": "B52-D11.1",
+  "fixtureId": "QUANTIZED_CAMERA_BOUNDS_199X109",
+  "repeat": 1,
+  "producer": "node",
+  "pid": 186,
+  "runtime": {
+    "node": "v26.5.0",
+    "nodeExecutableSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "adapterReport": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/adapters/QUANTIZED_CAMERA_BOUNDS_199X109_R1/adapter.report.json",
+    "sha256": "8b3c4a87f81722b2ab8a1109c94dd41482e4f50c712a1deaa34bc171acb82c22"
+  },
+  "input": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/adapters/QUANTIZED_CAMERA_BOUNDS_199X109_R1/arrays/motion.xy32",
+    "sha256": "bf41eae1f300aff5a9e936f7c7d7442d21258ce5270620f0ded20db45a1117b8",
+    "bytes": 173528
+  },
+  "output": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/quantizers/node/QUANTIZED_CAMERA_BOUNDS_199X109_R1/motion-quantized.xy32",
+    "sha256": "172a0a27486067ebf94d2710d597b8c7dea4f4fa1eb52b8d946c56cb0b9a27e8",
+    "bytes": 173528,
+    "shape": [
+      109,
+      199,
+      2
+    ],
+    "dtype": "little-endian-float32"
+  },
+  "quantizer": {
+    "candidate": "value >= 0 ? floor(value + 0.5) : ceil(value - 0.5)",
+    "acceptanceRadiusPixels": 0.0009765625,
+    "wholeArrayAccepted": true,
+    "positiveZeroCanonical": true,
+    "idempotent": true
+  },
+  "metrics": {
+    "componentCount": 43382,
+    "maximumAbsoluteQuantizationErrorPixelsDecimal": "0.000007629394531250"
+  },
+  "operationCounts": {
+    "pythonQuantizerProcesses": 0,
+    "nodeQuantizerProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "reportHash": "4dd3448d258432a3e1eb3610aba2e0364566228e2d1f00896e337bc6fad221f2"
+}

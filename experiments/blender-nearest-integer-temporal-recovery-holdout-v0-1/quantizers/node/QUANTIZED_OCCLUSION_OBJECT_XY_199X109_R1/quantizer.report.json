@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "bfs.blenderNearestIntegerTemporalRecoveryNodeQuantizerReport.v0.1",
+  "experimentId": "B52-D11.1",
+  "fixtureId": "QUANTIZED_OCCLUSION_OBJECT_XY_199X109",
+  "repeat": 1,
+  "producer": "node",
+  "pid": 139,
+  "runtime": {
+    "node": "v26.5.0",
+    "nodeExecutableSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "adapterReport": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/adapters/QUANTIZED_OCCLUSION_OBJECT_XY_199X109_R1/adapter.report.json",
+    "sha256": "ff42875b537165cba478e3f957ed87a187202809d0c531e1337f8e33ef5e8c3b"
+  },
+  "input": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/adapters/QUANTIZED_OCCLUSION_OBJECT_XY_199X109_R1/arrays/motion.xy32",
+    "sha256": "68e13fd420f4a5c22dc40ac382b4e3e34c68b142e181b5b82130e4adaa10c0f1",
+    "bytes": 173528
+  },
+  "output": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/quantizers/node/QUANTIZED_OCCLUSION_OBJECT_XY_199X109_R1/motion-quantized.xy32",
+    "sha256": "ee367cf33a216c8f266cd6ce1a58e0a676e8b0e4de8b46553b670f0d34b0123a",
+    "bytes": 173528,
+    "shape": [
+      109,
+      199,
+      2
+    ],
+    "dtype": "little-endian-float32"
+  },
+  "quantizer": {
+    "candidate": "value >= 0 ? floor(value + 0.5) : ceil(value - 0.5)",
+    "acceptanceRadiusPixels": 0.0009765625,
+    "wholeArrayAccepted": true,
+    "positiveZeroCanonical": true,
+    "idempotent": true
+  },
+  "metrics": {
+    "componentCount": 43382,
+    "maximumAbsoluteQuantizationErrorPixelsDecimal": "0.000007629394531250"
+  },
+  "operationCounts": {
+    "pythonQuantizerProcesses": 0,
+    "nodeQuantizerProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "reportHash": "2831064eef88b3f3fabcbb20a2d2062ae12a61143af572df35af7f130c28ed15"
+}
