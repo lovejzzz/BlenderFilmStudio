@@ -2279,6 +2279,20 @@ Next: commit both immutable preflight receipts, then run the admitted 81-process
 
 Artifacts: `experiments/blender-nearest-integer-temporal-recovery-holdout-preflight-v0-1/`.
 
+## J-142 · D11.1 formal matrix supports recovery; the frozen audit hits a replay-only type defect
+
+Date: 2026-08-27 · Type: SINGLE FORMAL EXECUTION + INVALID AUDIT ATTEMPT · Runtime: 81 unique formal child PIDs
+
+The admitted D11.1 matrix completed exactly once: sixteen fresh Cycles sources, eight adapters, sixteen Python/Node quantizers, sixteen matching-language accumulators, eight Raw EXR encoders, sixteen fresh Blender compositor bridges and one analyzer. All 71 registered attacks passed, all fourteen ordered base gates were true and the result verdict was `BLENDER_NEAREST_INTEGER_TEMPORAL_RECOVERY_HOLDOUT_SUPPORTED`.
+
+Every real raw motion component fell inside the frozen `1/1024` domain. The largest raw-to-integer error was `7.62939453125e-6` px, roughly 128 times smaller than the radius. Python and Node quantized bytes matched in 8/8 cells; every declared moving-owner interior pixel equaled analytic integer motion. The quantizer repaired 397, 661 and 359 pixels respectively in the three moving fixtures where inherited truncation would select a different integer; the static fixture remained 21,691/21,691 valid with positive-zero motion. Layer, bounds and same-ID depth probes passed 16/16, and every Raw EXR Blender bridge decoded exactly.
+
+The frozen audit then completed its data replay but crashed before writing JSON because a replay-only `quantizerExact` field retained NumPy `bool_`. The exact exception is retained; `audit.json` remains absent. Formal receipt SHA-256 is `643717651d4dafb48c87c0527d682ea224e8ab80f6a81a8d153e8c4d1ec8a9fc5`, result SHA-256 is `dd08142a2af855ddc287eecb84f5de722afb03a9ae6aef8a33fd3279d660329f`, and original frozen audit-tool SHA-256 is `feb1214b00b16e833db2e65f38308d4c82b76f8952aadf62ad0a72670fbabb4a`.
+
+C1 is preregistered before its tool exists. It permits a new audit-only path with one explicit native-boolean cast plus correction provenance; it forbids any formal rerender, data rewrite, gate change or original-tool mutation.
+
+Artifacts: `experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/` and `research/2026-08-27-b52-d11-1-c1-audit-numpy-bool-correction.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
