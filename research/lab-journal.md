@@ -1213,6 +1213,20 @@ Verdict: `CODEX_SCENESPEC_ADAPTER_GOLDENS_DERIVED`. Operation counts were Codex 
 
 Artifacts: `experiments/codex-scenespec-adapter-derivation-v0-1/`, `specs/codex-scenespec-adapter-derivation.v0.1.json`, `research/2026-08-26-b43-d1-codex-scenespec-adapter-derivation-protocol.md` and `research/2026-08-26-b43-d1-codex-scenespec-adapter-derivation-result.md`.
 
+## J-071 · B43 closes the subscription-authenticated intent gate
+
+Type: preregistered Codex CLI holdout, six fresh model invocations, independently audited, 2026-08-26.
+
+The exact Codex CLI `0.149.1` executable ran `gpt-5.6-luna` at low reasoning through saved ChatGPT authentication, with both API-key variables absent. Six ephemeral, read-only, ignore-config/ignore-rules processes used six empty non-repository directories. Each JSONL stream contained only thread start, turn start, one agent message and turn completion; there were zero command, file, MCP, web or plan items.
+
+All six proposals were canonical-exact with the B43-D1 oracles created before the model run. Both replicates agreed for all three briefs. The two unauthorized-download/Python cases returned strict rejection with four `NONE` presets. Runtime was 5,278–5,996 ms per invocation; usage receipts totalled 92,336 input, 696 output and 154 reasoning-output tokens. No video model or API key was used.
+
+Twelve of twelve evidence attacks passed. Independent audit reconstructed prompts, reparsed events, revalidated proposals, matched tools/artifacts and recomputed the self-hash. Verdict: `CODEX_SUBSCRIPTION_INTENT_HOLDOUT_PASSED`.
+
+This proves only a narrow subscription-authenticated proposal gate, not arbitrary filmmaking reliability or zero total cost. Next: promote the two accepted model outputs through the frozen adapter into the exact golden SceneSpecs/BuildPlans, compile each twice in the B42 Linux/amd64 worker, and prove the rejected output launches no container.
+
+Artifacts: `experiments/codex-scenespec-holdout-v0-1/`, `specs/codex-scenespec-holdout.v0.1.json`, `research/2026-08-26-b43-codex-subscription-intent-holdout-protocol.md` and `research/2026-08-26-b43-codex-subscription-intent-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
