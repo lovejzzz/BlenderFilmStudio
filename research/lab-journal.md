@@ -2319,6 +2319,22 @@ This does not erase D11's rejection and does not authorize arbitrary rounding. S
 
 Artifacts: `experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/` and `research/2026-08-27-b52-d11-1-nearest-integer-temporal-recovery-holdout-result.md`.
 
+## J-145 · Real Blender perspective probe identifies the correct subpixel endpoint and a depth-identity counterexample
+
+Date: 2026-08-27 · Type: DEVELOPMENT-ONLY PROJECTIVE/SUBPIXEL CALIBRATION · Formal outputs: 0
+
+The first D12 development process stopped before rendering because Blender 5.2's `ShaderNodeCombineColor` has no Alpha input. That empty attempt is retained as `FAILED_BEFORE_RENDER`; the one-line graph correction ran in a new root.
+
+The corrected probe rendered two real 101×61 Cycles multipart EXRs from an opaque, continuously textured plane moving laterally and toward a 50 mm perspective camera. All 12,322 moving Vector XY components were genuinely outside D11.1's `1/1024` near-integer domain; median distance from an integer was `0.2575163841` pixel.
+
+An independent pinhole ray/plane/projective oracle established the top-left decoded endpoint formula `q=(x+Vector.X, y−Vector.Y)`. Blender's maximum endpoint error over 6,161 moving-owner pixels was `2.6787651905e-5` pixel. External bilinear reconstruction achieved RMSE `6.10225e-5` and 84.29 dB unit-range PSNR against the current real Blender beauty, versus RMSE `2.79617e-3` for nearest and `1.55352e-2` for the wrong-sign control.
+
+The probe also falsified direct cross-frame depth identity for perspective/dolly history validation. Correct corresponding surface samples differed by `0.1800003052` depth units, while the inherited identity tolerance was only `0.0095898435`; all 5,225 measured pixels would be wrongly rejected. D12 must compare previous Depth against a transform-predicted previous-camera depth of the current rigid surface point, not against current Depth.
+
+This is calibration evidence only. The formal holdout must use fresh resolution, lens, transforms, material spectrum and identifiers, and must freeze the projection oracle, bilinear kernel, transform-aware depth rule, absolute quality gates, nearest/wrong-sign controls, process identity and attacks before its tools or output exist.
+
+Artifacts: `experiments/blender-projective-subpixel-development-probe-v0-1/`, `experiments/blender-projective-subpixel-development-probe-v0-2/` and `research/2026-08-27-b52-d12-projective-subpixel-development-probe.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
