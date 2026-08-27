@@ -22,7 +22,9 @@ Read-only inspection of the already promoted worker scenes found:
 
 ## Frozen fixture and seven cells
 
-Each cell starts in a fresh isolated Blender 5.2 Linux/amd64 Cycles CPU worker. A deterministic emission fixture places three equal projected-size, high-frequency stripe targets at camera depths 3 m, 5 m and 8 m. They occupy disjoint frozen image ROIs. A 50 mm perspective camera at the origin looks down local `-Z`; an empty focus marker lies on-axis at exactly 5 m. World emission is black, motion blur and denoising are off, and output is 256×144, 256 spp, float32 multilayer EXR under the fixed ACES 2 config.
+Each cell starts in a fresh isolated Blender 5.2 Linux/amd64 Cycles CPU worker. A deterministic emission fixture places three equal projected-size, high-frequency stripe targets at camera depths 3 m, 5 m and 8 m. Target centers and sizes use explicit 0–1 camera-frame coordinates, and their disjoint frozen image ROIs lie inside those projected rectangles. A 50 mm perspective camera at the origin looks down local `-Z`; an empty focus marker lies on-axis at exactly 5 m. World emission is black, motion blur and denoising are off, and output is 256×144, 256 spp, float32 multilayer EXR under the fixed ACES 2 config.
+
+Correction record: the first preregistration commit `c476e48` mixed centered target coordinates with 0–1 ROI coordinates. This was detected by geometry review before any fixture renderer, runner, analyzer or output existed. The C1 commit changes only target-coordinate representation and nested ROIs; cells, interventions, measurements, resource gates and claims are unchanged. C1 is the operative preregistration.
 
 The seven cells are:
 
