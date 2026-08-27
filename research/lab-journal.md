@@ -1471,6 +1471,22 @@ Next: freeze an atomic cache-sequester/restore experiment that distinguishes fre
 
 Artifacts: `experiments/native-cycles-backend-derivation-v0-1/`, `specs/native-cycles-backend-derivation.v0.1.json`, `research/2026-08-27-b51-d1-native-cycles-backend-derivation-protocol.md`, `research/2026-08-27-b51-c1-native-backend-audit-correction.md` and `research/2026-08-27-b51-d1-native-cycles-backend-derivation-result.md`.
 
+## J-088 · B51-D2 falsifies the user Cycles cache as the 108-second cause
+
+Date: 2026-08-27 · Type: REVERSIBLE CACHE INTERVENTION · Runtime: three fresh native Blender 5.2 Metal processes
+
+B51-D2 hashed the exact 79-file / 77,737,584-byte `~/.cache/cycles` tree, atomically sequestered it without deletion, launched Metal with the path absent, retained the newly generated 75-file test cache and restored the original to the exact preflight tree hash. The quarantine path is absent; the generated test cache remains ignored for audit.
+
+The cache-absent cell took 0.789983 seconds in Blender and 1.404792 seconds wall, with 0.34 seconds of EXR-reported synchronization. The two cache-present fresh processes took 0.578154/0.569390 seconds and 0.13 seconds synchronization each. Cache absence imposed a measurable 0.21-second penalty but did not reproduce D1's 108.31-second event. The exact user-level Cycles cache is therefore not a sufficient cause.
+
+Cold/warm and warm/warm Metal comparisons again changed Combined, Normal and Vector while Depth and three Cryptomatte layers stayed exact; maximum Combined delta remained `1.144409e-5`.
+
+The first analyzer failed after safe restore because Blender wrote `MM:SS.xx` while the parser required three fields. C1 retained the failure, added two-field parsing only, reran no Blender and moved no cache. Corrected replay was byte exact; current original/retained trees matched the receipt; original frozen tools matched their Git blobs; 18/18 attacks passed. Verdict: `CYCLES_CACHE_STATE_DERIVATION_USABLE`.
+
+Next: use a pre-job Metal synchronization canary and unseen frames to freeze warm-state throughput and numerical tolerance. Treat host-session cold readiness as a separate metric; do not clear OS/Metal caches destructively to chase the 108-second event.
+
+Artifacts: `experiments/native-cycles-cache-state-derivation-v0-1/`, `specs/native-cycles-cache-state-derivation.v0.1.json`, `research/2026-08-27-b51-d2-cycles-cache-state-derivation-protocol.md`, `research/2026-08-27-b51-d2-c1-duration-parser-correction.md` and `research/2026-08-27-b51-d2-cycles-cache-state-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
