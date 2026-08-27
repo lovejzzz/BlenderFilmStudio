@@ -2019,6 +2019,22 @@ Preflight file SHA-256: `89cc434f2b6c4c8113f2008a6a3f2fda23c02e77a61d5bd472e56be
 
 Artifact: `experiments/layer-depth-temporal-accumulation-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-125 · D9.1 formally supports exact external layer/depth temporal accumulation
+
+Date: 2026-08-27 · Type: FORMAL HOLDOUT + INDEPENDENT REPLAY AUDIT · Blender: 5.2.0 LTS `fbe6228777e7`
+
+The immutable D9.1 matrix completed once: 4 Python accumulator processes, 4 Node accumulator processes, 8 Raw float32 EXR encoders and 16 real Blender compositor renders, with 32 unique child PIDs, 16 render calls and zero Cycles ray renders. Python and Node matched on all ten arrays for every fixture. Independently reconstructed validity and clean targets matched exactly.
+
+Foreground crossing had 6,183/6,489 valid histories; its naive and wrong-sign attacks produced 306/1.015625 and 816/1.125. Camera pan had 5,700/6,527 valid histories and its wrong-sign attack produced 4,453/1.125. Same-ID depth swap had 3,632/4,361 valid histories; naive and wrong-sign attacks produced 729/1.140625 and 270/1.140625. Static retained 3,053/3,053 valid histories and zero control error.
+
+All eight EXR decode checks, sixteen Blender decoded outputs, eight Blender repeat pairs and four producer-path comparisons were exact. Maximum resolved error was zero and changed resolved scalar count was zero. Formal verdict: `LAYER_DEPTH_TEMPORAL_ACCUMULATION_HOLDOUT_SUPPORTED`, base failure `null`, attacks 30/30.
+
+Independent audit `PASS`: formal artifacts 32/32, producer replay 8/8, encoder replay 8/8, diagnostics 40/40, and analyzer output byte-exact. Receipt SHA-256: `5086d4ba55c3bc5f80dea1c190e1c11f387bd09965fbc4e14bb2449ba7d982a6`; result SHA-256: `a8e41983a5ec02df8977c44d76413b11cb0f63f2249941d5663875d30c28e7f1`; audit file SHA-256: `6213aebcdb3364a60f2d256b0ba7c9ee66344b281a9e528f9b39feb594ebb83b`; audit self-hash: `b855009838e6726f7d8296951377200748b21d2e3e3866193f26c86f037383cf`.
+
+This supports the external integer-motion layer/depth accumulator and Blender Raw output bridge only. It does not validate Blender Vector component order/sign or production pass extraction. Next: preregister a real Blender multipart Vector/Depth/ownership adapter holdout.
+
+Artifacts: `experiments/layer-depth-temporal-accumulation-holdout-v0-1/` and `research/2026-08-27-b52-d9-1-layer-depth-temporal-accumulation-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
