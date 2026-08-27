@@ -1883,6 +1883,22 @@ The low-frequency Clip/Extend subset passed, but excluding high-frequency bounda
 
 Artifacts: `experiments/subpixel-bilinear-tolerance-holdout-v0-1/` and `research/2026-08-27-b52-d7-subpixel-bilinear-tolerance-holdout-result.md`.
 
+## J-115 · B52-D8 moves the warp consumer outside Blender
+
+Date: 2026-08-27 · Type: EXTERNAL-CANONICAL-BRIDGE PREREGISTRATION · Formal outputs: 0
+
+D7 rejected Blender's general Bilinear consumer at the frozen distribution gate, so D8 does not relax the threshold or ask Blender to resample pixels. It freezes a narrower systems question: can an independently computed canonical float32 warp survive Raw EXR encoding, Blender 5.2 ingestion, a one-link CPU compositor graph and RGBA32 EXR output with every decoded channel bit unchanged?
+
+A development-only real-Blender probe preceded the formal protocol. A 37×23 external RGBA raster containing negative RGB, values above 1 and non-opaque alpha was encoded as FLOAT/ZIP/Raw EXR and passed through `Image → Group Output`. All 3,404 decoded float32 scalars remained exact; changed scalar count and maximum error were both zero. The retained probe is design evidence only and cannot satisfy a formal gate.
+
+The formal matrix freezes three unseen warps: signed HDR + Clip, high-frequency HDR + Extend and unique edge sentinels + destination-varying Repeat. Independent scalar Python and Node producers must first emit byte-identical top-left RGBA little-endian float32 arrays. Six separate OpenImageIO encoder processes must preserve those arrays through EXR encode/decode. Each producer-fixture EXR then receives two fresh Blender processes, for 24 unique child PIDs total, 12 compositor renders and zero Cycles ray renders.
+
+Every producer, encoder and Blender output is exact-only: no tolerance is allowed. Negative, above-one, alpha and orientation sentinels must remain present and position-exact. Twenty-four attacks bind parents, runtimes, all reports and artifacts, graph/RNA, repeat, producer-path convergence, diagnostics and result self-hash. Container-byte equality is explicitly outside scope; decoded canonical float32 identity is the measurement.
+
+The formal output root is absent. Spec SHA-256: `6fb141b459e7f5d1b98021c843b28e80f19c36172c7a9466d9bb08cc72c0089f`; protocol SHA-256: `fc861d1cbb45ab86529a4bd51d4992d65c92192ac360c5aea249a9f449681853`. Passing permits only a separately preregistered layer/depth-aware external temporal accumulator. Failure keeps final pixel compositing and master EXR outside Blender.
+
+Artifacts: `specs/external-canonical-warp-bridge.v0.1.json`, `research/2026-08-27-b52-d8-external-canonical-warp-bridge-protocol.md` and `experiments/external-canonical-warp-bridge-development-smoke-v0-1/`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

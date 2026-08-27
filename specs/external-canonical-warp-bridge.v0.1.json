@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "bfs.externalCanonicalWarpBridge.v0.1",
+  "experimentId": "B52-D8",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "question": "Can two independently generated canonical float32 Bilinear warp arrays be encoded as Raw RGBA32 EXR, ingested by Blender 5.2, passed through the minimal CPU compositor graph, and decoded with every float32 channel bit unchanged across two fresh Blender processes?",
+  "parents": {
+    "d7Spec": {
+      "uri": "specs/subpixel-bilinear-tolerance-holdout.v0.1.json",
+      "sha256": "f102a969cb59d92b0103c6807f20ca5436978504aafadd14a9b0353709ea0df5"
+    },
+    "d7Result": {
+      "uri": "experiments/subpixel-bilinear-tolerance-holdout-v0-1/results.json",
+      "sha256": "c940d4a4205adbcf2068a395a65be683468d07ec5f4783bb8705b8315cfac6d2",
+      "verdict": "SUBPIXEL_BILINEAR_TOLERANCE_HOLDOUT_NOT_SUPPORTED",
+      "baseFailure": "TOLERANCE_DISTRIBUTION"
+    },
+    "d7Audit": {
+      "uri": "experiments/subpixel-bilinear-tolerance-holdout-v0-1/audit.json",
+      "sha256": "3f145d2878533ce640e2aab7d9be3cb0c7a5483cb4187ed76cff919740aedad1",
+      "status": "PASS"
+    }
+  },
+  "developmentObservation": {
+    "classification": "DEVELOPMENT_ONLY_NOT_FORMAL_EVIDENCE",
+    "uri": "experiments/external-canonical-warp-bridge-development-smoke-v0-1/observation.json",
+    "sha256": "a9f2ccfdd1622047741e80146d96a681c36723febacefadaf6a6c687335498db",
+    "observedDecodedExact": true,
+    "changedScalars": 0,
+    "maximumAbsoluteError": 0.0,
+    "probeWorkerSha256": "d66d97280f0b3bfde1507003d6015a72e905669655124e87821c5aafac68d8a4",
+    "probeDriverSha256": "75ddff8d456c7f1f1d52193802e163aaea1eabf16f0b466a67069d69fb3c3a78"
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "bytes": 183237520,
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "buildPlatform": "Darwin",
+      "launchFlags": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1"
+      ]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "bytes": 5543888,
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "bytes": 50320,
+      "version": "v26.5.0"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5"
+    },
+    "compositorDevice": "CPU",
+    "threadsMode": "FIXED",
+    "threads": 1
+  },
+  "canonicalContract": {
+    "coordinates": "top-left origin; x increases right; y increases down; integer coordinates identify destination pixel centers",
+    "sourceCoordinate": "u=x-dx(x,y), v=y+dy(x,y)",
+    "producerInputStorage": "source and displacement values first cast to IEEE-754 float32",
+    "producerArithmetic": "promote stored float32 values to float64; Bilinear sample in y0x0/y0x1/y1x0/y1x1 tap order; cast final RGBA once to float32",
+    "rawIdentity": "SHA-256 of C-contiguous top-left-row-major RGBA little-endian float32 bytes",
+    "finiteOnly": true,
+    "producerIndependence": "Python scalar loops and Node JavaScript loops share only this frozen specification and may not import one another",
+    "exr": {
+      "channels": ["R", "G", "B", "A"],
+      "storage": "FLOAT",
+      "compression": "zip",
+      "colorspace": "Raw",
+      "decodedIdentity": "OpenImageIO FLOAT decode must reproduce canonical raw bytes exactly",
+      "containerByteIdentityRequired": false
+    },
+    "blenderGraph": [
+      "BFS_D8_EXTERNAL_SOURCE.Image->BFS_D8_GROUP_OUTPUT.Socket_0"
+    ],
+    "blenderOutput": {
+      "fileFormat": "OPEN_EXR",
+      "colorMode": "RGBA",
+      "colorDepth": "32",
+      "exrCodec": "ZIP",
+      "inputColorspace": "Raw"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "SIGNED_HDR_ALPHA_61X43_CLIP",
+      "resolution": [61, 43],
+      "sourcePattern": "SIGNED_HDR_ALPHA",
+      "field": {"dx": "3/8", "dy": "-5/8"},
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "requiredSentinels": ["negativeRgb", "rgbAboveOne", "nonOpaqueAlpha", "transparentClipBoundary"]
+    },
+    {
+      "id": "HIGH_FREQUENCY_113X67_EXTEND",
+      "resolution": [113, 67],
+      "sourcePattern": "HIGH_FREQUENCY_HDR",
+      "field": {"dx": "-9/8", "dy": "5/4"},
+      "extensionX": "Extend",
+      "extensionY": "Extend",
+      "requiredSentinels": ["negativeRgb", "rgbAboveOne", "highFrequency", "nonOpaqueAlpha"]
+    },
+    {
+      "id": "EDGE_SENTINEL_79X53_REPEAT_FIELD",
+      "resolution": [79, 53],
+      "sourcePattern": "EDGE_SENTINEL",
+      "field": {
+        "dx": "[1/8,-3/8,5/8,-7/8][x mod 4]",
+        "dy": "[-1/4,3/4][y mod 2]"
+      },
+      "extensionX": "Repeat",
+      "extensionY": "Repeat",
+      "requiredSentinels": ["negativeRgb", "rgbAboveOne", "uniqueEdges", "nonOpaqueAlpha"]
+    }
+  ],
+  "processMatrix": {
+    "pythonProducerProcesses": 3,
+    "nodeProducerProcesses": 3,
+    "exrEncoderProcesses": 6,
+    "blenderRepeatsPerProducerFixture": 2,
+    "blenderProcesses": 12,
+    "totalChildProcesses": 24,
+    "allPidsUnique": true,
+    "blenderRenderCalls": 12,
+    "cyclesRayRenders": 0,
+    "sourceBlendFilesOpened": 0,
+    "generatedExternalExrAssetsOpened": 12
+  },
+  "gates": {
+    "allProcessesExitZero": true,
+    "allPidsUnique": true,
+    "caseAndArtifactRosterExact": true,
+    "allValuesFinite": true,
+    "pythonNodeCanonicalRawExact": true,
+    "allEncoderDecodedCanonicalRawExact": true,
+    "allBlenderDecodedCanonicalRawExact": true,
+    "allBlenderDecodedRepeatsExact": true,
+    "allProducerPathsConvergeAfterBlender": true,
+    "maximumAbsoluteError": 0.0,
+    "changedScalars": 0,
+    "rangeSentinelsPresentBeforeAndAfter": true,
+    "orientationSentinelsExact": true,
+    "graphAndRnaExact": true,
+    "operationCountsExact": true,
+    "diagnosticArtifactsExact": true
+  },
+  "diagnostics": {
+    "perFixture": ["canonicalReference", "maximumAcrossFourBlenderOutputsAbsoluteError"],
+    "expectedPngs": 6,
+    "expectedSidecars": 6,
+    "referenceEncoding": "signed/HDR RGB mapped by fixed display-only scale and alpha shown separately",
+    "errorEncoding": "zero is black; any nonzero float32 difference is a fixed visible red sentinel",
+    "diagnosticsAreNotMeasurementInputs": true
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "PREREGISTRATION_IDENTITY",
+    "TOOL_FREEZE_IDENTITY",
+    "BLENDER_RUNTIME_IDENTITY",
+    "PYTHON_RUNTIME_IDENTITY",
+    "NODE_RUNTIME_IDENTITY",
+    "OCIO_IDENTITY",
+    "PROCESS_ROSTER",
+    "PROCESS_PID_UNIQUENESS",
+    "FIXTURE_ROSTER",
+    "PRODUCER_REPORT_BINDING",
+    "PYTHON_NODE_CANONICAL_IDENTITY",
+    "ENCODER_REPORT_BINDING",
+    "EXR_CHANNEL_AND_STORAGE_LAYOUT",
+    "EXR_ENCODE_DECODE_IDENTITY",
+    "BLENDER_REPORT_BINDING",
+    "BLENDER_GRAPH_RNA",
+    "BLENDER_OUTPUT_HASH",
+    "BLENDER_DECODED_IDENTITY",
+    "BLENDER_REPEAT_IDENTITY",
+    "PRODUCER_PATH_CONVERGENCE",
+    "RANGE_AND_ORIENTATION_SENTINELS",
+    "DIAGNOSTIC_TOTALITY",
+    "RESULT_SELF_HASH"
+  ],
+  "decisionRule": {
+    "supported": "All gates and all 24 attacks pass; verdict EXTERNAL_CANONICAL_WARP_BRIDGE_SUPPORTED.",
+    "notSupported": "Any gate fails; preserve outputs, report the earliest baseFailure, and use Blender only before the external pixel stage or keep the final composite outside Blender.",
+    "nextIfSupported": "Preregister a layer/depth-aware external temporal accumulation experiment using this exact bridge as transport only.",
+    "nextIfNotSupported": "Test an external compositor-to-master-EXR route that bypasses Blender image ingestion and compositor output."
+  },
+  "nonClaims": [
+    "No claim that Blender's Bilinear implementation matches the external canonical warp.",
+    "No claim that EXR container bytes reproduce; only decoded canonical float32 arrays are in scope.",
+    "No claim about depth, occlusion, temporal accumulation, motion blur, denoising, Cycles, shot assembly, cinematic quality or human preference.",
+    "No claim that arbitrary Blender nodes preserve float32 identity; only the frozen one-link pass-through graph is tested.",
+    "The development probe is design evidence only and cannot satisfy a formal gate."
+  ]
+}
