@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "documentType": "BFS_FOCUS_INTENT_HUMAN_REVIEW_SPEC",
+  "version": "0.1.0",
+  "experimentId": "B50-FOCUS-INTENT-HUMAN-REVIEW-v0.1",
+  "status": "PREREGISTERED_BEFORE_B50_RENDER_OR_REVIEW_TOOLING",
+  "question": "Under recorded remote viewing conditions, do 18 independent observers prefer the original compiled window-depth focus or a chair-bound focus for fulfilling the frozen brief, while cinematic preference is recorded as a secondary judgment and all image-to-condition identities remain under delayed disclosure until collection closes?",
+  "evidenceClasses": {
+    "measuredFact": "machine-measured scene, render, image, package, hash and response-chain evidence",
+    "subjectiveJudgment": "an eligible independent observer response, never a developer pilot or synthetic fixture",
+    "inference": "a conclusion permitted only after the frozen 18-response decision gate",
+    "unknown": "anything not measured or identifiable under this design"
+  },
+  "standardsBasis": {
+    "primary": {
+      "name": "ITU-R BT.500-15",
+      "url": "https://www.itu.int/rec/R-REC-BT.500-15-202305-I/en"
+    },
+    "scope": "remote controlled-record paired-image study informed by BT.500; not a calibrated BT.500 laboratory implementation"
+  },
+  "frozenBrief": {
+    "catalogUri": "specs/codex-shot-proposal-catalog.v0.1.json",
+    "catalogSha256": "c0db948e652d014ab6e777b13287b37708c9993d5027951f8567c90bb93285b5",
+    "proposalId": "STATIC_INTERIOR_PORTRAIT",
+    "text": "A restrained 24-frame locked-off portrait of a chair in an interior."
+  },
+  "source": {
+    "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+    "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+    "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+    "camera": "CAM_B43_B",
+    "frame": 23,
+    "sceneIsStaticAcrossFrames": true
+  },
+  "focusDerivation": {
+    "observedWith": "real Blender 5.2.0 LTS read-only depsgraph inspection before preregistration",
+    "originalFocusDistanceM": 3.200000047683716,
+    "semanticChairObject": "PROP_CHAIR",
+    "chairObjectOriginCameraDepthM": 6.452064037322998,
+    "chairSeatCameraDepthRangeM": [5.712367057800293, 6.887693881988525],
+    "chairBackCenterCameraDepthM": 6.459178447723389,
+    "chairBackCameraDepthRangeM": [6.04227876663208, 6.876078128814697],
+    "windowGeometryCameraDepthRangeM": [2.737614393234253, 4.892086982727051],
+    "interpretation": "the original numeric focus is in the window-geometry range; the chair-object intervention is anchored to the compiled semantic subject rather than a visually selected arbitrary distance"
+  },
+  "parentEvidence": {
+    "machineHoldoutSpecUri": "specs/codex-worker-depth-of-field-holdout.v0.1.json",
+    "machineHoldoutSpecSha256": "c486eb6666b462a4dd0ce115fab1ddb13f9e15d4af4f90a904bbeb84206821d3",
+    "machineVerdict": "B49_DEPTH_OF_FIELD_OPERATING_POINT_SUPPORTED",
+    "boundary": "B49 proves numerical adequacy and Blender focus semantics; it does not select the artistically correct focus target"
+  },
+  "runtime": {
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "workerImageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "workerPlatform": "linux/amd64",
+    "hostBlenderSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "ocioUri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+  },
+  "renderDesign": {
+    "cells": [
+      {
+        "id": "FOCUS_NUMERIC_3P2",
+        "role": "ORIGINAL_COMPILED_FOCUS",
+        "focusObject": null,
+        "focusDistanceM": 3.200000047683716
+      },
+      {
+        "id": "FOCUS_OBJECT_CHAIR",
+        "role": "SEMANTIC_SUBJECT_FOCUS",
+        "focusObject": "PROP_CHAIR",
+        "numericFocusDistanceRetainedM": 3.200000047683716
+      }
+    ],
+    "singleVariable": "camera.data.dof.focus_object",
+    "resolution": [960, 540],
+    "samples": 128,
+    "seedOffset": 825204,
+    "engine": "CYCLES",
+    "device": "CPU",
+    "threads": 4,
+    "denoising": false,
+    "persistentData": false,
+    "motionBlur": true,
+    "motionBlurShutter": 0.5,
+    "motionBlurPosition": "CENTER",
+    "useDof": true,
+    "apertureFStop": 4.0,
+    "lensMm": 70.0,
+    "output": "seven-subimage scene-linear float32 multipart OpenEXR plus ACES 2 SDR review PNG",
+    "display": "sRGB - Display",
+    "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+    "pngEncoding": "8-bit RGB, no labels, no metadata carrying condition identity",
+    "sameSeedAndAllNonFocusControlsRequired": true
+  },
+  "resourceGate": {
+    "minimumHostReserveAfterProjectedWriteBytes": 107374182400,
+    "projectedWriteBytes": 2147483648,
+    "outputDirectoriesMustStartEmpty": true,
+    "renderTimeoutSecondsPerCell": 1800,
+    "allExperimentContainersRemovedAfterRun": true
+  },
+  "delayedDisclosure": {
+    "privateUntilClose": [
+      "condition-labelled EXR and PNG hashes or filenames",
+      "observer IMAGE-to-condition mappings and salts",
+      "observer-visible image hashes and session packages",
+      "accepted responses and private ledger"
+    ],
+    "publicBeforeClose": [
+      "this spec and protocol",
+      "tool source without output identities",
+      "a salted whole-package commitment",
+      "a leak-audit summary with counts and a salted sensitive-registry commitment"
+    ],
+    "publicLeakGate": "scan the complete tracked tree and public static build for every private sensitive identity; require zero matches before collection and before accepting each response",
+    "observerPackageGate": "no condition labels, source paths, repository links, other-session identifiers, mapping or unblinding material",
+    "closeRule": "close only after 18 valid balanced responses are hash-locked, or freeze ABORTED_NO_FORMAL_RESULT; collection cannot reopen",
+    "revealRule": "condition-labelled hashes, mappings, salts and analysis may be disclosed only after close",
+    "breachRule": "any pre-close condition-to-IMAGE join invalidates the study"
+  },
+  "observerDesign": {
+    "formalTargetValidIndependentObservers": 18,
+    "formalMinimumValidIndependentObservers": 15,
+    "orderBalanceAtTarget": {
+      "AB": 9,
+      "BA": 9
+    },
+    "visibleLabels": ["IMAGE-A", "IMAGE-B"],
+    "primaryPrompt": "Which image better fulfills: ‘A restrained 24-frame locked-off portrait of a chair in an interior’ ?",
+    "primaryChoices": ["LEFT_BETTER", "INDISTINGUISHABLE", "RIGHT_BETTER"],
+    "secondaryPrompt": "Which image feels more cinematic as a still frame?",
+    "secondaryChoices": ["LEFT_MORE_CINEMATIC", "INDISTINGUISHABLE", "RIGHT_MORE_CINEMATIC"],
+    "attentionPrompt": "Where does your attention land first in each image?",
+    "attentionChoices": ["CHAIR", "WINDOW", "ROOM_GEOMETRY", "OTHER", "NO_CLEAR_SUBJECT"],
+    "confidenceChoices": ["LOW", "MEDIUM", "HIGH"],
+    "developerOwnerPilotClassification": "INTERFACE_PILOT_ONLY",
+    "directDevelopersExcluded": true,
+    "operatorBlinding": "participant-blind; operator double-blinding is not claimed"
+  },
+  "viewingValidity": {
+    "studyClass": "REMOTE_CONTROLLED_RECORD_NOT_CALIBRATED_LAB",
+    "minimumDisplayNativeResolution": [1920, 1080],
+    "browserZoomPercent": 100,
+    "requiredCssImageSize": [960, 540],
+    "recommendedViewingDistance": "approximately three displayed-picture heights",
+    "ambient": "dim and stable; record description",
+    "privacy": "anonymous IDs and categorical viewing conditions only"
+  },
+  "responseChain": {
+    "observerOutput": "one immutable canonical-hashed JSON response",
+    "validator": "bind response to spec, session commitment, IMAGE-labelled hashes, complete fields and recorded viewing conditions",
+    "acceptedLedger": "append accepted response hashes to private ignored storage; never overwrite",
+    "preAcceptLeakAudit": "rerun the public-state leak gate immediately before every accept",
+    "formalAnalyzer": "unavailable until collection is closed and exactly 18 valid responses satisfy the balanced schedule"
+  },
+  "formalDecision": {
+    "zeroValidResponses": "HUMAN_REVIEW_PENDING",
+    "oneToFourteenValidIndependentResponses": "INFORMAL_REVIEW_ONLY",
+    "fifteenToSeventeenValidIndependentResponses": "FORMAL_REVIEW_INCOMPLETE",
+    "chairFocusSupport": "At least 14 of 18 choose the chair-focus condition as better fulfilling the brief, at least 14 report CHAIR as first attention in that condition, and its CHAIR-attention count is not lower than the original condition.",
+    "originalFocusSupport": "At least 14 of 18 choose the original-focus condition as better fulfilling the brief, at least 14 report CHAIR as first attention in that condition, and its CHAIR-attention count is not lower than the chair-focus condition.",
+    "noDirectionalDifference": "At least 14 of 18 choose INDISTINGUISHABLE for brief fulfillment, at least 14 choose INDISTINGUISHABLE for cinematic preference, and the two CHAIR-attention counts differ by no more than two.",
+    "chairFocusLabel": "CHAIR_FOCUS_INTENT_SUPPORT",
+    "originalFocusLabel": "ORIGINAL_FOCUS_INTENT_SUPPORT",
+    "noDifferenceLabel": "NO_DIRECTIONAL_FOCUS_DIFFERENCE_OBSERVED",
+    "otherwise": "OBSERVER_DISAGREEMENT",
+    "secondaryRule": "cinematic preference is descriptive and cannot overturn the brief-fulfillment primary decision"
+  },
+  "attacksRequired": [
+    "wrong spec, catalog, parent evidence, source blend, image, Blender or OCIO identity",
+    "wrong frame, resolution, samples, seed, engine, threads, denoising, blur, aperture or lens",
+    "missing or wrong semantic chair object",
+    "chair origin or component-depth derivation mismatch",
+    "more than focus_object differs between render conditions",
+    "missing, undecodable, non-finite or wrong-subimage EXR",
+    "wrong ACES display/view or PNG dimensions",
+    "identical condition images or no measurable image difference",
+    "non-empty output directory, failed disk reserve, timeout or remaining container",
+    "unbalanced or incomplete 18-session schedule",
+    "condition label, source path, repository link or mapping in observer package",
+    "private sensitive value found in tracked tree or public build",
+    "public tree changed after leak audit without a new audit",
+    "response accepted without a same-state passing leak audit",
+    "wrong spec, session, commitment or visible-image binding in response",
+    "developer, owner, synthetic fixture, duplicate observer or duplicate session counted as independent",
+    "incomplete primary, secondary, attention, confidence or viewing record",
+    "response mutation or hash mismatch",
+    "formal decision below 18 valid balanced responses",
+    "secondary cinematic answer changes the primary decision",
+    "unblinding before close or reopening collection after close"
+  ],
+  "nonClaims": [
+    "Package generation, image integrity, leak scanning and interface pilots are not human observations.",
+    "The remote study is not a calibrated BT.500 laboratory implementation.",
+    "Participant blinding does not prove operator double-blinding.",
+    "One static frame does not establish focus-pull quality or complete-shot temporal stability.",
+    "The study does not establish general cinematic quality, photorealism, acting, narrative, identity consistency or optimal composition.",
+    "The study does not establish 2K/4K adequacy, GPU throughput, cloud cost or delivery-master quality.",
+    "Any result applies only to this frozen scene, pair of focus conditions, observers and recorded viewing conditions."
+  ]
+}
