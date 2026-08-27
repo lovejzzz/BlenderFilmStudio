@@ -1537,6 +1537,20 @@ Next: preregister a narrow `Date` → `DateTime` normalization correction, rerun
 
 Artifacts: `experiments/native-split-backend-assembly-derivation-v0-1/`, `experiments/native-split-backend-assembly-derivation-preflight-failure-v0-1/`, `experiments/native-split-backend-assembly-derivation-capacity-failure-v0-1/`, `research/2026-08-27-b51-d4-native-split-backend-assembly-invalid-result.md`, `research/2026-08-27-b51-d4-c1-preregistration-sha-correction-protocol.md` and `research/2026-08-27-b51-d4-c2-capacity-readmission-protocol.md`.
 
+## J-092 · B51-D4-C3 makes known-pair split assembly reproducible
+
+Date: 2026-08-27 · Type: PREREGISTERED METADATA CORRECTION · Runtime: Blender 5.2 Python 3.13 / OpenImageIO 3.1.13.1
+
+C3 changed only the missing output `DateTime` rule. It required each pair's frozen Metal Combined `Date`, converted the date separators from slash to colon, and applied that capture value to every output subimage. All pixel, routing, metadata, provenance, disk and operation boundaries remained frozen.
+
+TABLETOP_WIDE's two corrected multipart EXRs now share SHA-256 `8157aab6…729de9`; INTERIOR_CHAIR's share `cbd80be0…cf9cc`. All 28 reopened subimages carry the expected pair-specific `DateTime`. Every selected float array remains exact to its CPU/Metal source.
+
+All 15 original attacks and four correction attacks passed. Independent replay reproduced receipt, result and four EXRs byte-for-byte; both frozen tool blobs matched. Verdict: `NATIVE_SPLIT_BACKEND_ASSEMBLY_CAPDATE_CORRECTION_USABLE`.
+
+This closes only the known-input assembly engineering gate. Next is a separately preregistered B51-H2 with unseen Blender renders, total split-vs-CPU wall cost and clean-replicate evidence. Human B50 remains 0/18.
+
+Artifacts: `experiments/native-split-backend-assembly-capdate-correction-v0-1/`, `specs/native-split-backend-assembly-capdate-correction.v0.1.json`, `research/2026-08-27-b51-d4-c3-capdate-normalization-correction-protocol.md` and `research/2026-08-27-b51-d4-c3-capdate-normalization-correction-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
