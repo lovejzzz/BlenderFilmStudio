@@ -2367,6 +2367,20 @@ Next: commit this immutable admission, then create the formal root exactly once 
 
 Artifact: `experiments/blender-projective-subpixel-reconstruction-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-148 · D12 formal execution is invalidated by a frozen Node parent-directory defect
+
+Date: 2026-08-27 · Type: INVALID FORMAL EXECUTION · Scientific verdict: none
+
+The admitted D12 runner created its formal root once. Sixteen real Blender 5.2 Cycles source processes, the first adapter and the first Python reconstructor completed with eighteen unique reported PIDs. The first Node reconstruction process then exited before output because `fs.mkdirSync(outputDir,{recursive:false})` could not create `arrays/` while its parent cell directory was absent.
+
+The failure is retained at `RECONSTRUCTOR_NODE / node_PROJECTIVE_OBJECT_DOLLY_TRANSLATE_107X67_R1`. No encoder, bridge, analyzer, attack replay or audit ran; no receipt or results file exists. D12 therefore has no scientific verdict.
+
+The completed Python cell observed 5,841 valid pixels, endpoint maximum `2.21729e-5` px and correct-bilinear RMSE `5.04537e-5`, but those are partial invalid-run measurements and cannot be promoted. The frozen thresholds and science logic will not be changed in response.
+
+The next legal step is a pre-tool C1 protocol. It may correct only nested output-directory materialization and correction/new-root provenance, must add the missing-parent contract test, must rerun all 65 successful processes from scratch in a new root, and must not reuse any failed-root source or array as measurement input. `run.failure.json` SHA-256: `ccb05339ec16b9d92350ad53552ae7368d2536e6e023bd0f1660ed9f7b67ec34`.
+
+Artifacts: `experiments/blender-projective-subpixel-reconstruction-holdout-v0-1/` and `research/2026-08-27-b52-d12-formal-execution-invalid-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
