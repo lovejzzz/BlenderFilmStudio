@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "bfs.nativeSplitBackendAssemblyDerivationSpec.v0.1",
+  "experimentId": "B51-D4",
+  "question": "Can a deterministic, provenance-bearing multipart OpenEXR be assembled from Metal beauty-domain passes and CPU data-domain passes while preserving every selected float32 array exactly and rejecting cross-source misalignment?",
+  "status": "PREREGISTERED_DERIVATION",
+  "outputRoot": "experiments/native-split-backend-assembly-derivation-v0-1",
+  "preregisteredAt": "2026-08-27",
+  "parents": {
+    "h1Receipt": {
+      "uri": "experiments/native-metal-production-holdout-v0-1/run.receipt.json",
+      "sha256": "42d9dff174378e90e724bae93f710df96e63cb3a0e18eeebd3958dd69d3d69cc"
+    },
+    "h1Result": {
+      "uri": "experiments/native-metal-production-holdout-v0-1/results.json",
+      "sha256": "9bcd9dea0ea071decfde1021195794837e088e57b0ef499a66159332ca86a8a9",
+      "verdict": "NATIVE_METAL_PRODUCTION_HOLDOUT_NOT_SUPPORTED"
+    },
+    "h1Audit": {
+      "uri": "experiments/native-metal-production-holdout-v0-1/audit.correction-v0.2.json",
+      "sha256": "f707b3d11aba424e4932f107561e205e6a7aa015d33d18f2346896b0ebb5edd3",
+      "status": "PASS"
+    },
+    "d3Result": {
+      "uri": "experiments/native-metal-pass-localization-v0-1/results.json",
+      "sha256": "10dc769383e88db5bfad75f95ad882a18758e9b7a6db1c3a683a46eed98bfec0",
+      "verdict": "METAL_PASS_LOCALIZATION_USABLE"
+    },
+    "d3Audit": {
+      "uri": "experiments/native-metal-pass-localization-v0-1/audit.json",
+      "sha256": "9911a59b627aaa511626583315c10a98df3a39f9de589e519345f71e87a9c458",
+      "status": "PASS"
+    }
+  },
+  "runtime": {
+    "python": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+    "openImageIO": "3.1.13.1",
+    "blenderProcesses": 0,
+    "renders": 0
+  },
+  "pairs": [
+    {
+      "id": "TABLETOP_WIDE",
+      "cpu": {
+        "runId": "TW_CPU_R1",
+        "uri": "experiments/native-metal-production-holdout-v0-1/TW_CPU_R1/artifacts/production.exr",
+        "sha256": "e08b8b6eb45feb919d0139109641fa00a82bd4bc7c5468f4a0376571ce392059",
+        "bytes": 3222319
+      },
+      "metal": {
+        "runId": "TW_METAL_R1",
+        "uri": "experiments/native-metal-production-holdout-v0-1/TW_METAL_R1/artifacts/production.exr",
+        "sha256": "e25f0fc9ad6b16c08bbdadfdd3d0d497b7a46bc6bc650c0046dc142c8b048d82",
+        "bytes": 3220396
+      }
+    },
+    {
+      "id": "INTERIOR_CHAIR",
+      "cpu": {
+        "runId": "IC_CPU_R1",
+        "uri": "experiments/native-metal-production-holdout-v0-1/IC_CPU_R1/artifacts/production.exr",
+        "sha256": "4ae11634c26d00c55939fce1d7d80e47859505f2ccdb1dc3ebda790f8140de6f",
+        "bytes": 3309351
+      },
+      "metal": {
+        "runId": "IC_METAL_R1",
+        "uri": "experiments/native-metal-production-holdout-v0-1/IC_METAL_R1/artifacts/production.exr",
+        "sha256": "9e5f3199c58c6aee9ba239d684c730266a65633dce55d2939570ce73d287e5e8",
+        "bytes": 3299667
+      }
+    }
+  ],
+  "passRouting": {
+    "METAL": [
+      "BFS_MASTER.Combined",
+      "BFS_MASTER.Normal",
+      "BFS_MASTER.Vector"
+    ],
+    "CPU": [
+      "BFS_MASTER.Depth",
+      "BFS_MASTER.CryptoObject00",
+      "BFS_MASTER.CryptoObject01",
+      "BFS_MASTER.CryptoObject02"
+    ],
+    "orderedOutputRoster": [
+      "BFS_MASTER.Combined",
+      "BFS_MASTER.Depth",
+      "BFS_MASTER.Normal",
+      "BFS_MASTER.Vector",
+      "BFS_MASTER.CryptoObject00",
+      "BFS_MASTER.CryptoObject01",
+      "BFS_MASTER.CryptoObject02"
+    ]
+  },
+  "alignmentContract": {
+    "exactImageGeometryFields": [
+      "width",
+      "height",
+      "depth",
+      "x",
+      "y",
+      "z",
+      "full_x",
+      "full_y",
+      "full_z",
+      "full_width",
+      "full_height",
+      "full_depth",
+      "nchannels",
+      "channelnames",
+      "format"
+    ],
+    "exactCommonAttributes": [
+      "Camera",
+      "File",
+      "Frame",
+      "PixelAspectRatio",
+      "ResolutionUnit",
+      "Scene",
+      "Software",
+      "XResolution",
+      "YResolution",
+      "colorInteropID",
+      "oiio:ColorSpace",
+      "screenWindowCenter",
+      "screenWindowWidth"
+    ],
+    "exactCryptomatteAttributes": [
+      "cryptomatte/9821614/conversion",
+      "cryptomatte/9821614/hash",
+      "cryptomatte/9821614/manifest",
+      "cryptomatte/9821614/name"
+    ],
+    "allowedTopLevelDifferences": [
+      "Date",
+      "RenderTime",
+      "cycles.BFS_MASTER.render_time",
+      "cycles.BFS_MASTER.synchronization_time",
+      "cycles.BFS_MASTER.total_time"
+    ]
+  },
+  "outputContract": {
+    "format": "multipart OpenEXR",
+    "pixelType": "float32",
+    "compression": "zip",
+    "mergeReplicatesPerPair": 2,
+    "requireByteExactReplicate": true,
+    "requireSelectedPassFloatExact": true,
+    "requireFiniteSelectedPasses": true,
+    "requiredProvenanceAttributes": [
+      "bfs:splitContract",
+      "bfs:passSourceBackend",
+      "bfs:passSourceRunId",
+      "bfs:passSourceArtifactSha256",
+      "bfs:beautyArtifactSha256",
+      "bfs:dataArtifactSha256",
+      "bfs:mergeToolGitBlobSha256"
+    ],
+    "splitContractValue": "METAL_COMBINED_NORMAL_VECTOR__CPU_DEPTH_CRYPTO_V0_1",
+    "preserveSelectedSourceSpecThenAddBfsProvenance": true,
+    "preserveCryptomatteManifestFromMetalCombinedOnlyWhenExactToCpu": true,
+    "forbidSourceOverwrite": true
+  },
+  "evidenceGates": {
+    "pairs": 2,
+    "sourceExrs": 4,
+    "mergedExrs": 4,
+    "requiredSubimagesPerMergedExr": 7,
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "67108864",
+    "outputRootMustBeAbsentOrEmpty": true,
+    "sourceIdentity": true,
+    "parentIdentity": true,
+    "frozenToolIdentity": true,
+    "independentReplay": true
+  },
+  "operationBoundary": {
+    "blenderProcesses": 0,
+    "renders": 0,
+    "sourceExrsModified": 0,
+    "mergedExrsWritten": 4,
+    "jsonFilesWritten": 2,
+    "downloads": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0,
+    "networkRequired": false
+  },
+  "decisionRule": {
+    "usable": "All parent/source identities and alignment fields pass; every output has the ordered seven-part roster, required provenance and finite arrays; each output pass is float32-exact to its routed source; both merge replicates are byte-exact; independent replay is byte-exact; and every attack passes.",
+    "invalid": "Any identity, alignment, manifest, roster, provenance, selected-pass exactness, finiteness, deterministic-replicate, replay or attack failure invalidates B51-D4.",
+    "promotionBoundary": "A usable derivation freezes the merger mechanics for an unseen B51-H2. It does not promote Metal beauty, claim perceptual equivalence, make Depth/Cryptomatte cross-backend equivalent or authorize production."
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "SOURCE_IDENTITY",
+    "SOURCE_ROLE_SWAP",
+    "PAIR_IDENTITY",
+    "IMAGE_GEOMETRY_ALIGNMENT",
+    "COMMON_ATTRIBUTE_ALIGNMENT",
+    "CRYPTOMATTE_MANIFEST_ALIGNMENT",
+    "PASS_ROUTING",
+    "PASS_ROSTER",
+    "PROVENANCE_METADATA",
+    "SELECTED_PASS_EXACTNESS",
+    "NON_FINITE",
+    "MERGE_REPLICATE_BYTE_IDENTITY",
+    "OPERATION_BOUNDARY",
+    "EVIDENCE_SELF_HASH"
+  ],
+  "nonClaims": [
+    "Metal beauty production promotion",
+    "human perceptual equivalence",
+    "cross-backend Depth or Cryptomatte equivalence",
+    "Cryptomatte compositing safety",
+    "Depth compositing safety",
+    "long-sequence stability",
+    "new render evidence",
+    "cross-machine or cross-version generalization",
+    "2K or 4K throughput",
+    "power or dollar cost"
+  ]
+}
