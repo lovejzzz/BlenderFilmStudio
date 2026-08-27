@@ -27,7 +27,7 @@ export default function BlenderStaticZeroHeadroomLocalizationPage() {
   return <main className="contact-page b51-page b52-page d11-page d111-page d12p-page d122-page d123-page d124-page">
     <header className="topbar">
       <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-      <nav aria-label="D12.4 导航"><Link href="/blender-static-nonplanar-multiowner-v0-1">D12.3</Link><a href="#pixel">像素</a><a href="#arithmetic">算术</a><a href="#next">下一实验</a><Link href="/journal">日志</Link></nav>
+      <nav aria-label="D12.4 导航"><Link href="/blender-static-nonplanar-multiowner-v0-1">D12.3</Link><a href="#pixel">像素</a><a href="#arithmetic">算术</a><Link href="/blender-static-radius-intervention-v0-1">D12.5 干预</Link><Link href="/journal">日志</Link></nav>
       <span className="edition contact-edition">Localization D12.4</span>
     </header>
 
