@@ -2863,6 +2863,18 @@ No preflight JSON, C1 formal root, source EXR, adapter payload, measurement or v
 
 Artifacts: `scripts/reconstruct-b52-d12-8-motion-disocclusion.mjs` and `scripts/preflight-b52-d12-8-motion-disocclusion.py`.
 
+## J-188 · D12.8-C1 frozen tools pass zero-formal-output admission
+
+Date: 2026-08-27 · Type: CORRECTED PREFLIGHT · Formal Blender renders: 0
+
+At tool-freeze commit `462937751d6375784ae63968e6614ccf85f53215`, the corrected preflight passed 11/11 checks. Four real Blender 5.2 processes reconstructed all fresh scenes with zero render calls; the same-index fixture retained `[13505,13505]`. Every parent, runtime and Git blob identity matched.
+
+The synthetic branch suite exercised `INVALID_CURRENT_ORACLE`, `INVALID_BOUNDS`, `INVALID_OWNER`, `INVALID_ALPHA`, `INVALID_DEPTH` and `VALID`, plus 16 adaptive risk rejections. Python and Node produced byte-identical hashes for all nine canonical payloads. Analyzer imports remained independent of both consumers and Blender geometry modules.
+
+Disk admission measured 107,490,267,136 available bytes; after the frozen 64 MiB projection, 107,423,158,272 bytes remain, only 48,975,872 bytes above the 100 GiB reserve. The C1 formal root remained absent. Preflight hash: `1e0c99b14221a362ebaf2e6f6ce96ad3215d896db7fd6c6139093551cd532289`.
+
+Artifact: `experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
