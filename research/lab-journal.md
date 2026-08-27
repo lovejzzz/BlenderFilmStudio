@@ -2809,6 +2809,18 @@ The next holdout must preregister comparator decision semantics before new fixtu
 
 Artifact: `research/2026-08-27-b52-d12-7-adaptive-risk-gate-holdout-result.md`.
 
+## J-183 · D12.8 freezes real motion and disocclusion before tool work
+
+Date: 2026-08-27 · Type: CONFIRMATORY PREREGISTRATION · New Blender renders: 0
+
+D12.8 separates history reuse into two ordered decisions on four entirely fresh perspective fixtures: transform-aware structural validity first, then the unchanged D12.7 radius-2 plus inclusive `1/1048576` local-risk gate. The fixtures introduce moving-owner reveal, camera dolly/yaw parallax with bounds loss, a same-Object-Index depth trap, and a multi-owner static control. Invalid history and risk-rejected history must both copy current float32 RGBA exactly.
+
+Comparator semantics are now explicit before new evidence: radius 3 is report-only and cannot affect the candidate verdict. The candidate still must satisfy zero false acceptance, zero risk underbounds, the D12.7 half-gate, 98% total radius-2 retention, 95% per-owner retention, real risk stress and cross-language/repeat/process/audit identity. A safe candidate with inadequate coverage receives a distinct bounded label rather than support.
+
+The formal matrix is frozen at 74 unique child processes including audit, 16 fresh Blender Cycles source renders, zero model/network calls and a 64 MiB projection above the 100 GiB reserve. At preregistration time both output roots and all eight new tool paths are absent. Spec SHA-256: `67722b1c8fafa0b83518e6e467de1adb9ca88bd32b7145f15be2d5627767b4d4`.
+
+Artifacts: `specs/blender-projective-motion-disocclusion-adaptive-risk-holdout.v0.1.json` and `research/2026-08-27-b52-d12-8-projective-motion-disocclusion-adaptive-risk-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

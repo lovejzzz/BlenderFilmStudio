@@ -1,0 +1,544 @@
+{
+  "schemaVersion": "bfs.blenderProjectiveMotionDisocclusionAdaptiveRiskHoldout.v0.1",
+  "experimentId": "B52-D12.8",
+  "title": "Fresh projective rigid-motion and disocclusion holdout for the frozen D12.7 adaptive local-risk gate",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_OR_OUTPUT",
+  "question": "On unseen opaque multi-owner Blender 5.2 scenes containing real rigid object motion, camera parallax, bounds loss and disocclusion, can transform-aware structural rejection prevent invalid history reuse while the frozen D12.7 radius-2 plus local-risk rule preserves its absolute RGB headroom and preregistered coverage?",
+  "decisionRole": "confirmatory generalization test of the unchanged D12.7 candidate beyond static inputs; no D12, D12.5, D12.6 or D12.7 verdict is revised",
+  "parents": {
+    "d10_1Spec": {
+      "uri": "specs/blender-multipart-temporal-adapter-f32-holdout.v0.1.json",
+      "sha256": "11686c5e796c7bc1b4e45cf137c3d98347bc65bfec428f9d19545b55430f584b",
+      "experimentId": "B52-D10.1"
+    },
+    "d10_1Result": {
+      "uri": "experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/results.json",
+      "sha256": "c0f94547b432159772029f67abe70da12ff0f236707d7f92896c75ee664ebc60",
+      "resultHash": "acf9a3559b8d1a194e248930b58cff3050c12a94540cabff2b0989a6f2c8266f",
+      "verdict": "BLENDER_MULTIPART_TEMPORAL_ADAPTER_F32_HOLDOUT_SUPPORTED"
+    },
+    "d10_1Audit": {
+      "uri": "experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/audit.json",
+      "sha256": "f6ef6b2236aa8501ef533c88f5f1e9604f71b259d4beffc90825b14afdb52328",
+      "auditHash": "e582de3925486b39a317bb1e1614e2b32eef3c41e7aa70e1dbd84ee04eaf1188",
+      "status": "PASS"
+    },
+    "d12Spec": {
+      "uri": "specs/blender-projective-subpixel-reconstruction-holdout.v0.1.json",
+      "sha256": "dd2e990d276e0ee5c2fee9d22cf42c7f84db2b6c1947b1219dceab06a76f66a2",
+      "experimentId": "B52-D12"
+    },
+    "d12Result": {
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/results.json",
+      "sha256": "a411948ec8854029d199786bbf0a81565bc91099e2f973a2311b7513c2d07d82",
+      "resultHash": "c45eb2f837850e23cf44055d79a70097e20b1717cfe3826ecdc2722188e4df6f",
+      "evidenceCoreHash": "17de3a43a5ead7d9068b0729fe885af5b12a83c30df4876d4e7afa956d0f7d22",
+      "verdict": "BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED",
+      "baseFailure": "DUAL_RECONSTRUCTION_IDENTITY"
+    },
+    "d12CorrectedAudit": {
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/audit.c2.json",
+      "sha256": "8496c264fff4f9eca48ab9ac2bdb751b9d39f7124215da856829104550cb0481",
+      "auditHash": "603c5b31ddb9e9530dc993bb3cd043dce3a3e75d4736821949a093e015f13865",
+      "status": "PASS"
+    },
+    "d12_7Spec": {
+      "uri": "specs/blender-static-adaptive-risk-gate-holdout.v0.1.json",
+      "sha256": "c51d0d83afd30b479bf3e7109c31110133649ee3d65a04d677dbe236b8075ed0",
+      "experimentId": "B52-D12.7"
+    },
+    "d12_7Result": {
+      "uri": "experiments/blender-static-adaptive-risk-gate-holdout-v0-1/results.json",
+      "sha256": "1a569ace92b58b41b6faffe164778c5db35b1b0d7288ca3425f885ec5b0746a5",
+      "evidenceHash": "b459fe0e8048fd6cffc2a249ed0c4e0de431fd1e0f3beda0e339cca98718d55d",
+      "verdict": "ADAPTIVE_GATE_WITHIN_TOLERANCE_BUT_STRESS_OR_COVERAGE_NOT_SUPPORTED"
+    },
+    "d12_7CorrectedAudit": {
+      "uri": "experiments/blender-static-adaptive-risk-gate-holdout-v0-1/audit.c1.json",
+      "sha256": "fe77a26135d8021db6eb52f6e310392efd1a155f5712c99cd9dddbc1925708ee",
+      "auditHash": "9064fca6a3dc060975e949d3018b737560e01fdeaeac780fb9a25e0729aa4170",
+      "passed": true
+    },
+    "d12_7CorrectionReceipt": {
+      "uri": "experiments/blender-static-adaptive-risk-gate-holdout-v0-1/receipt.c1.json",
+      "sha256": "12677054b85a325b803e6d59166d756306497c7b2e4159ae93bffe7f554f36a0",
+      "receiptHash": "0a7e20b39523f392b348b006450e62a8badb3192aab445b9a050593bab5d4217"
+    },
+    "typedEnvelopePython": {
+      "uri": "scripts/encode-b52-d12-1-evidence-envelope.py",
+      "sha256": "fe742fc94049abe6b200394635c3fdc42d880bfd4ca79640914c9e92800c3f92"
+    },
+    "typedEnvelopeNode": {
+      "uri": "scripts/encode-b52-d12-1-evidence-envelope.mjs",
+      "sha256": "b104df55ad8454556e3fc12a0f380d2ba4d9191efe6b649dc8a5d734dffdbf1b"
+    }
+  },
+  "freshness": {
+    "requirements": [
+      "Every fixture ID, raster, camera trajectory, surface trajectory, analytic owner ID, pass index, transform, material coefficient and formal path is unseen in D10.1 and D12 through D12.7.",
+      "No prior EXR, adapted array, mask, consumer payload or per-pixel measurement may be a D12.8 measurement input.",
+      "The structural validity rule, risk formula, inclusive threshold, comparator role, gates and verdict mapping are frozen before any D12.8 formal tool or render output exists.",
+      "Repeat 1 is primary; repeat 2 is an exact source and consumer identity control.",
+      "A preflight probe may inspect Blender API and graph structure but may not render, write the formal root or emit a measurement."
+    ],
+    "newFormalToolPaths": [
+      "blender/render_b52_d12_8_motion_disocclusion_source.py",
+      "scripts/adapt-b52-d12-8-motion-disocclusion-source.py",
+      "scripts/reconstruct-b52-d12-8-motion-disocclusion.py",
+      "scripts/reconstruct-b52-d12-8-motion-disocclusion.mjs",
+      "scripts/analyze-b52-d12-8-motion-disocclusion.py",
+      "scripts/audit-b52-d12-8-motion-disocclusion.py",
+      "scripts/preflight-b52-d12-8-motion-disocclusion.py",
+      "scripts/run-b52-d12-8-motion-disocclusion.py"
+    ],
+    "reusedFrozenTools": [
+      "scripts/encode-b52-d12-1-evidence-envelope.py",
+      "scripts/encode-b52-d12-1-evidence-envelope.mjs"
+    ]
+  },
+  "sceneContract": {
+    "construction": "fresh factory state; analytic opaque tessellated rectangular surfaces with continuous Generated object-local emission only; no source blend, image texture, light, transparency, deformation, simulation or external asset",
+    "frameRange": [0, 2],
+    "previousFrame": 0,
+    "currentFrame": 1,
+    "nextFrame": 2,
+    "eulerOrder": "XYZ",
+    "camera": {
+      "type": "PERSP",
+      "lensMm": 51.0,
+      "sensorWidthMm": 36.0,
+      "sensorFit": "HORIZONTAL",
+      "clipStart": 0.1,
+      "clipEnd": 100.0,
+      "depthOfField": false
+    },
+    "surfaces": {
+      "backgroundSizeWorld": [14.2, 8.6],
+      "backgroundSubdivisions": [72, 44],
+      "occluderSizeWorld": [4.4, 3.2],
+      "occluderSubdivisions": [32, 24],
+      "localPlane": "local z=0 with rectangular bounds; the independent oracle intersects all declared surfaces and chooses the nearest positive camera depth"
+    },
+    "materials": {
+      "coordinate": "Generated object-local",
+      "emissionStrength": 1.0,
+      "alpha": 1.0,
+      "background": {
+        "baseRGB": [0.47, 0.38, 0.57],
+        "uCoefficients": [0.19, -0.13, 0.11],
+        "vCoefficients": [-0.14, 0.18, 0.09],
+        "waveAmplitude": [0.08, 0.07, 0.09],
+        "waveFrequency": [2.7, 3.1, 2.3],
+        "wavePhase": 0.37
+      },
+      "occluder": {
+        "baseRGB": [0.31, 0.62, 0.42],
+        "uCoefficients": [-0.16, 0.12, 0.17],
+        "vCoefficients": [0.15, 0.11, -0.13],
+        "waveAmplitude": [0.07, 0.09, 0.06],
+        "waveFrequency": [3.3, 2.5, 2.9],
+        "wavePhase": 1.21
+      },
+      "clamp": [0.08, 0.92]
+    },
+    "render": {
+      "engine": "CYCLES",
+      "device": "CPU",
+      "samples": 1,
+      "seed": 521280,
+      "animatedSeed": false,
+      "adaptiveSampling": false,
+      "denoising": false,
+      "motionBlur": false,
+      "persistentData": false,
+      "threadsMode": "FIXED",
+      "threads": 4,
+      "resolutionPercentage": 100,
+      "pixelAspect": [1.0, 1.0],
+      "filmTransparent": false,
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "colorMode": "RGBA",
+      "colorDepth": "32",
+      "exrCodec": "ZIP",
+      "viewLayer": "BFS_D128_MASTER",
+      "passAlphaThreshold": 0.5,
+      "expectedSubimages": [
+        "BFS_D128_MASTER.Combined",
+        "BFS_D128_MASTER.Depth",
+        "BFS_D128_MASTER.Vector",
+        "BFS_D128_MASTER.Object Index"
+      ]
+    }
+  },
+  "fixtures": [
+    {
+      "id": "RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97",
+      "resolution": [149, 97],
+      "purpose": ["moving foreground owner", "occlusion and disocclusion", "subpixel rigid motion", "Object Index rejection"],
+      "cameraByFrame": {
+        "0": {"location": [0.013, -0.021, 10.7], "rotationEuler": [0.002, -0.004, 0.001]},
+        "1": {"location": [0.013, -0.021, 10.7], "rotationEuler": [0.002, -0.004, 0.001]},
+        "2": {"location": [0.013, -0.021, 10.7], "rotationEuler": [0.002, -0.004, 0.001]}
+      },
+      "owners": [
+        {
+          "analyticOwnerId": "D128_SWEEP_BACKGROUND",
+          "role": "background",
+          "passIndex": 13101,
+          "transformByFrame": {
+            "0": {"location": [0.0, 0.0, 0.0], "rotationEuler": [0.012, -0.018, 0.003]},
+            "1": {"location": [0.0, 0.0, 0.0], "rotationEuler": [0.012, -0.018, 0.003]},
+            "2": {"location": [0.0, 0.0, 0.0], "rotationEuler": [0.012, -0.018, 0.003]}
+          }
+        },
+        {
+          "analyticOwnerId": "D128_SWEEP_OCCLUDER",
+          "role": "occluder",
+          "passIndex": 13202,
+          "transformByFrame": {
+            "0": {"location": [-1.41, 0.31, 2.72], "rotationEuler": [0.018, -0.027, -0.041]},
+            "1": {"location": [0.09, -0.17, 2.72], "rotationEuler": [-0.012, 0.023, 0.017]},
+            "2": {"location": [1.36, 0.24, 2.72], "rotationEuler": [0.021, 0.047, 0.052]}
+          }
+        }
+      ],
+      "requiredStress": {"reason": "INVALID_OWNER", "minimumPrimaryPixels": 24}
+    },
+    {
+      "id": "CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101",
+      "resolution": [163, 101],
+      "purpose": ["camera dolly and yaw", "parallax", "out-of-bounds history", "static surfaces with moving camera"],
+      "cameraByFrame": {
+        "0": {"location": [-0.13, 0.06, 10.82], "rotationEuler": [0.003, 0.009, -0.002]},
+        "1": {"location": [0.02, -0.04, 10.46], "rotationEuler": [-0.004, -0.006, 0.003]},
+        "2": {"location": [0.18, 0.03, 10.11], "rotationEuler": [0.005, -0.014, 0.006]}
+      },
+      "owners": [
+        {
+          "analyticOwnerId": "D128_PARALLAX_BACKGROUND",
+          "role": "background",
+          "passIndex": 13303,
+          "transformByFrame": {
+            "0": {"location": [0.0, 0.0, -0.08], "rotationEuler": [-0.016, 0.021, 0.0]},
+            "1": {"location": [0.0, 0.0, -0.08], "rotationEuler": [-0.016, 0.021, 0.0]},
+            "2": {"location": [0.0, 0.0, -0.08], "rotationEuler": [-0.016, 0.021, 0.0]}
+          }
+        },
+        {
+          "analyticOwnerId": "D128_PARALLAX_OCCLUDER",
+          "role": "occluder",
+          "passIndex": 13404,
+          "transformByFrame": {
+            "0": {"location": [0.77, -0.18, 2.58], "rotationEuler": [0.026, -0.052, 0.033]},
+            "1": {"location": [0.77, -0.18, 2.58], "rotationEuler": [0.026, -0.052, 0.033]},
+            "2": {"location": [0.77, -0.18, 2.58], "rotationEuler": [0.026, -0.052, 0.033]}
+          }
+        }
+      ],
+      "requiredStress": {"reason": "INVALID_BOUNDS", "minimumPrimaryPixels": 16}
+    },
+    {
+      "id": "SAME_INDEX_DEPTH_REVEAL_173X107",
+      "resolution": [173, 107],
+      "purpose": ["same Object Index on two analytic owners", "depth-only disocclusion rejection", "moving foreground", "naive owner-only sensitivity"],
+      "cameraByFrame": {
+        "0": {"location": [-0.017, 0.028, 11.06], "rotationEuler": [0.001, 0.003, -0.002]},
+        "1": {"location": [-0.017, 0.028, 11.06], "rotationEuler": [0.001, 0.003, -0.002]},
+        "2": {"location": [-0.017, 0.028, 11.06], "rotationEuler": [0.001, 0.003, -0.002]}
+      },
+      "owners": [
+        {
+          "analyticOwnerId": "D128_DEPTH_BACKGROUND",
+          "role": "background",
+          "passIndex": 13505,
+          "transformByFrame": {
+            "0": {"location": [0.0, 0.0, 0.04], "rotationEuler": [0.019, -0.013, 0.004]},
+            "1": {"location": [0.0, 0.0, 0.04], "rotationEuler": [0.019, -0.013, 0.004]},
+            "2": {"location": [0.0, 0.0, 0.04], "rotationEuler": [0.019, -0.013, 0.004]}
+          }
+        },
+        {
+          "analyticOwnerId": "D128_DEPTH_OCCLUDER",
+          "role": "occluder",
+          "passIndex": 13505,
+          "transformByFrame": {
+            "0": {"location": [-1.22, -0.29, 2.91], "rotationEuler": [-0.021, 0.032, -0.029]},
+            "1": {"location": [0.31, 0.22, 2.91], "rotationEuler": [0.014, -0.024, 0.023]},
+            "2": {"location": [1.57, -0.11, 2.91], "rotationEuler": [0.033, -0.061, 0.047]}
+          }
+        }
+      ],
+      "requiredStress": {"reason": "INVALID_DEPTH", "minimumPrimaryPixels": 24}
+    },
+    {
+      "id": "MULTI_OWNER_STATIC_CONTROL_127X83",
+      "resolution": [127, 83],
+      "purpose": ["static negative control", "multi-owner boundary", "nonzero Blender Vector floor", "repeat identity"],
+      "cameraByFrame": {
+        "0": {"location": [0.009, -0.014, 10.53], "rotationEuler": [0.002, -0.003, 0.001]},
+        "1": {"location": [0.009, -0.014, 10.53], "rotationEuler": [0.002, -0.003, 0.001]},
+        "2": {"location": [0.009, -0.014, 10.53], "rotationEuler": [0.002, -0.003, 0.001]}
+      },
+      "owners": [
+        {
+          "analyticOwnerId": "D128_STATIC_BACKGROUND",
+          "role": "background",
+          "passIndex": 13606,
+          "transformByFrame": {
+            "0": {"location": [0.0, 0.0, -0.03], "rotationEuler": [0.011, 0.016, -0.003]},
+            "1": {"location": [0.0, 0.0, -0.03], "rotationEuler": [0.011, 0.016, -0.003]},
+            "2": {"location": [0.0, 0.0, -0.03], "rotationEuler": [0.011, 0.016, -0.003]}
+          }
+        },
+        {
+          "analyticOwnerId": "D128_STATIC_OCCLUDER",
+          "role": "occluder",
+          "passIndex": 13707,
+          "transformByFrame": {
+            "0": {"location": [-0.63, 0.37, 2.64], "rotationEuler": [-0.018, 0.041, -0.027]},
+            "1": {"location": [-0.63, 0.37, 2.64], "rotationEuler": [-0.018, 0.041, -0.027]},
+            "2": {"location": [-0.63, 0.37, 2.64], "rotationEuler": [-0.018, 0.041, -0.027]}
+          }
+        }
+      ],
+      "requiredStress": null
+    }
+  ],
+  "adapterContract": {
+    "coordinates": "top-left row-major decoded OpenImageIO raster",
+    "floatEncoding": "little-endian finite float32 with no color transform",
+    "outputs": [
+      "previous.rgba32",
+      "current.rgba32",
+      "previous-depth.f32",
+      "current-depth.f32",
+      "previous-owner.f32",
+      "current-owner.f32",
+      "vector.xy32",
+      "vector-next.xy32"
+    ],
+    "motion": "vector.xy32 is current Blender Vector.XY exactly; consumer q=(x+Vector.X,y-Vector.Y); vector-next.xy32 retains current Vector.ZW for oracle validation",
+    "overwritePolicy": "refuse if output directory or report already exists"
+  },
+  "projectionOracle": {
+    "pixelCenter": "top-left integer pixel (x,y) denotes center ((x+0.5)/W,1-(y+0.5)/H)",
+    "cameraConvention": "Blender camera looks along local -Z; camera coordinates are transpose(R_camera_XYZ)*(world-cameraLocation)",
+    "sensorHeightMm": "sensorWidthMm*H/W",
+    "project": {
+      "u": "0.5+lensMm*cameraX/(-cameraZ*sensorWidthMm)",
+      "vBottom": "0.5+lensMm*cameraY/(-cameraZ*sensorHeightMm)",
+      "x": "u*W-0.5",
+      "yTop": "(1-vBottom)*H-0.5"
+    },
+    "currentSurface": "cast the current pixel-center ray through every declared bounded plane and select the nearest positive-depth hit; its analyticOwnerId is independent of Object Index",
+    "previousSurfacePoint": "inverse current owner transform maps the hit to owner-local coordinates; previous owner transform maps that same local point into world space",
+    "expectedVector": ["previousX-currentX", "currentYTop-previousYTop"],
+    "sampleCoordinateTopLeft": ["currentX+Vector.X", "currentY-Vector.Y"],
+    "predictedPreviousDepth": "negative previous-camera Z of the transformed current local surface point",
+    "independence": "the analyzer implements scalar Euler XYZ, pinhole, bounded ray-plane intersection, visibility and rigid transforms without bpy, bpy_extras, mathutils or consumer imports"
+  },
+  "structuralValidity": {
+    "reasonPriority": ["INVALID_CURRENT_ORACLE", "INVALID_BOUNDS", "INVALID_OWNER", "INVALID_ALPHA", "INVALID_DEPTH", "VALID"],
+    "validWhen": [
+      "the current decoded owner and depth agree with the nearest analytic current surface",
+      "all four previous bilinear taps are in bounds",
+      "current alpha and all four previous tap alphas exceed 0.999",
+      "all four previous Object Index values equal current Object Index exactly",
+      "bilinearly sampled previous Depth matches transform-predicted previous-camera depth within max(1,predictedPreviousDepth)/1024"
+    ],
+    "sameIndexDepthRequirement": "SAME_INDEX_DEPTH_REVEAL uses equal passIndex on two analytic owners, so an owner-only rule must admit a registered wrong-history population while the depth rule rejects it",
+    "invalidFallback": "every structurally invalid registered current pixel copies current float32 RGBA exactly",
+    "forbidden": [
+      "direct previousDepth approximately equals currentDepth",
+      "owner-only acceptance in the same-index fixture",
+      "global epsilon not scaled by predicted depth",
+      "fixture-specific mask repair",
+      "reading future or target RGB to decide structural validity"
+    ]
+  },
+  "candidateContract": {
+    "radius2": "structurally valid AND current pixel and every current neighbor within Chebyshev radius 2 share current Object Index and alpha>0.999",
+    "localRiskChannel": "sum(abs(weight_i)*abs(previousTap_i-currentCenter)) over four bilinear taps plus one full float32 ULP at final reconstruction magnitude",
+    "localRiskPixel": "maximum of RGB channel risks, evaluated in binary64 from float32 inputs and frozen bilinear weights",
+    "adaptive": "radius2 AND localRiskPixel<=9.5367431640625e-7; comparison is inclusive",
+    "reconstruction": "four-tap bilinear previous RGBA in y0x0,y0x1,y1x0,y1x1 order, float64 arithmetic and one final float32 cast",
+    "adaptiveFallback": "registered current pixels outside adaptive copy current float32 RGBA exactly",
+    "riskThresholdSource": "unchanged D12.7 adaptiveHeadroom.reconstructionRgbMax",
+    "subsetInvariants": [
+      "adaptive is a subset of radius2",
+      "adaptive and adaptiveRejected partition radius2",
+      "radius3 is a subset of radius2"
+    ]
+  },
+  "comparatorContract": {
+    "radius3": "the same structural validity and current-neighborhood rule with Chebyshev radius 3 and no local-risk rejection",
+    "decisionRole": "report-only paired diagnostic",
+    "mandatoryForCandidateVerdict": false,
+    "frozenRationale": "D12.7 showed that comparator production failure can obscure a candidate-specific result; D12.8 therefore records radius-3 quality and coverage but no radius-3 check can support, bound or reject the adaptive candidate"
+  },
+  "frozenGates": {
+    "vectorAndDepth": {
+      "vectorEndpointAbsoluteMaximumPixels": 0.0009765625,
+      "vectorEndpointP99MaximumPixels": 0.000244140625,
+      "predictedDepthMaximumRelative": 0.0009765625
+    },
+    "adaptiveQuality": {
+      "rgbMaximum": 9.5367431640625e-7,
+      "rgbRmseMaximum": 9.5367431640625e-7,
+      "riskUnderboundRgbSamplesMaximum": 0
+    },
+    "coverage": {
+      "radius2MinimumPixelsPerCell": 256,
+      "adaptiveMinimumPixelsPerCell": 256,
+      "minimumAdaptivePixelsPerAnalyticOwner": 64,
+      "minimumRadius2PixelsForPerOwnerRetentionGate": 100,
+      "adaptiveToRadius2TotalRetentionMinimum": 0.98,
+      "adaptiveToRadius2PerOwnerRetentionMinimum": 0.95
+    },
+    "disocclusion": {
+      "falseAcceptedInvalidHistoryPixelsMaximum": 0,
+      "invalidFallbackMustEqualCurrentExact": true,
+      "minimumOwnerOnlyWrongAcceptsInSameIndexPrimary": 24,
+      "requiredPrimaryStressFromFixture": true
+    },
+    "stress": {
+      "minimumAdaptiveRiskRejectedPixelsPerMovingPrimaryFixture": 1
+    },
+    "staticControl": {
+      "vectorComponentAbsoluteMaximumPixels": 0.000244140625,
+      "adaptiveRgbMaximum": 9.5367431640625e-7,
+      "allStructurallyValidInteriorExpected": true
+    },
+    "identity": [
+      "all parent file and internal hashes match",
+      "all Blender source repeats and all canonical payload repeats are byte-identical",
+      "Python and Node reconstructed, reason, mask and risk payloads are byte-identical",
+      "the independent analyzer exactly replays every payload and decision",
+      "all required child process IDs are unique and exit zero",
+      "producer reports contain no aggregate metrics or verdicts",
+      "all registered mutation attacks are rejected"
+    ]
+  },
+  "decision": {
+    "supportedVerdict": "PROJECTIVE_MOTION_DISOCCLUSION_ADAPTIVE_GATE_SUPPORTED",
+    "supportedWhen": "Every identity, projection, structural-rejection, adaptive-quality, coverage, stress, static-control, process-totality and audit-totality gate passes. Comparator measurements are excluded from this conjunction.",
+    "boundedVerdict": "PROJECTIVE_MOTION_DISOCCLUSION_ADAPTIVE_GATE_SAFE_BUT_COVERAGE_NOT_SUPPORTED",
+    "boundedWhen": "Identity, projection, structural rejection, adaptive RGB maximum/RMSE, risk conservatism, invalid fallback, process totality and audit totality pass, but any candidate coverage or risk-stress gate fails.",
+    "rejectedVerdict": "PROJECTIVE_MOTION_DISOCCLUSION_ADAPTIVE_GATE_NOT_SUPPORTED",
+    "rejectedWhen": "Any identity, projection, structural-rejection, adaptive-quality, risk-conservatism, invalid-fallback, static-control, process-totality or audit-totality gate fails.",
+    "comparatorExclusion": "No radius-3 error, coverage or stress measurement participates in any verdict branch.",
+    "noRetroactiveRelabel": "D12.7 remains bounded and D12 remains not supported regardless of D12.8 outcome."
+  },
+  "baseFailureOrder": [
+    "PARENT_IDENTITY",
+    "FRESHNESS",
+    "RUNTIME_IDENTITY",
+    "PROCESS_TOTALITY",
+    "SOURCE_STRUCTURE",
+    "SOURCE_REPEAT",
+    "MULTIPART_PAYLOAD",
+    "PROJECTION_ORACLE",
+    "STRUCTURAL_REASON_ORACLE",
+    "DISOCCLUSION_FALSE_ACCEPT",
+    "INVALID_FALLBACK",
+    "DUAL_CONSUMER_IDENTITY",
+    "FULL_REPLAY",
+    "RISK_CONSERVATISM",
+    "ADAPTIVE_QUALITY",
+    "STATIC_CONTROL",
+    "COVERAGE",
+    "STRESS_EXPOSURE",
+    "ATTACK_TOTALITY",
+    "EVIDENCE_IDENTITY"
+  ],
+  "processMatrix": {
+    "fixtureCount": 4,
+    "repeats": [1, 2],
+    "renderedFrames": [0, 1],
+    "sourceBlenderProcesses": 16,
+    "sourceCyclesRayRenders": 16,
+    "adapterProcesses": 8,
+    "pythonConsumerProcesses": 8,
+    "nodeConsumerProcesses": 8,
+    "typedEnvelopePythonProcesses": 16,
+    "typedEnvelopeNodeProcesses": 16,
+    "analyzerProcesses": 1,
+    "auditProcesses": 1,
+    "totalUniqueChildProcessesIncludingAudit": 74,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "attacks": {
+    "minimumRegisteredAttacks": 40,
+    "requirements": [
+      "tamper a parent, runtime, tool, process or freshness identity",
+      "tamper a source EXR, array, report, typed envelope or result self-hash",
+      "flip Vector X sign, Y raster origin, pixel-center convention, Euler order or nearest-surface choice",
+      "swap analytic owners, pass indices, repeats or fixture identities",
+      "accept an out-of-bounds, wrong-owner, alpha-invalid or depth-invalid history pixel",
+      "make the same-index fixture pass with owner-only validity",
+      "alter a bilinear tap, weight, accumulation order, risk term, ULP term, channel maximum or inclusive equality",
+      "flip adaptive/radius subset or partition membership",
+      "let any comparator measurement influence verdict mapping",
+      "alter a quality, coverage, stress, static or operation-count gate"
+    ]
+  },
+  "diagnostics": {
+    "requiredPerFixtureRepeat": [
+      "current ACEScg display proxy",
+      "analytic current-owner proxy",
+      "structural reason mask",
+      "adaptive accepted/rejected mask",
+      "radius-3 comparator mask",
+      "RGB absolute-error heatmap"
+    ],
+    "integrity": "every diagnostic is bound to source and payload hashes but is never a measurement input"
+  },
+  "nonClaims": [
+    "D12.8 does not revise the negative D12 result or the bounded D12.7 result.",
+    "D12.8 covers only opaque rigid bounded planar owners with compiler-known transforms and Object Index/depth metadata.",
+    "It does not validate curved surfaces, deformation, skinned characters, transparency, Cryptomatte fractional coverage, hair, particles, volumes, motion blur, depth of field or noisy path-traced lighting.",
+    "It does not establish temporal denoising quality, perceptual stability, cinematic quality, character consistency, production rendering or cross-platform equivalence.",
+    "A bounded result means the candidate remained numerically safe on accepted samples but rejected too much useful history or lacked preregistered stress; it is not a production promotion.",
+    "A supported result would authorize only a subsequent preregistered curved/deforming-owner experiment, not deployment."
+  ],
+  "diskAdmission": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 67108864,
+    "formalRoot": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-v0-1",
+    "preflightRoot": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-preflight-v0-1"
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "version": "v26.5.0"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    },
+    "environmentAllowlist": ["PATH", "LANG", "LC_ALL", "OCIO", "TMPDIR", "BLENDER_USER_CONFIG", "BLENDER_USER_SCRIPTS"]
+  },
+  "preToolState": {
+    "checkedDate": "2026-08-27",
+    "formalRootAbsent": true,
+    "preflightRootAbsent": true,
+    "allEightNewFormalToolPathsAbsent": true,
+    "formalRenders": 0,
+    "formalMeasurements": 0
+  }
+}
