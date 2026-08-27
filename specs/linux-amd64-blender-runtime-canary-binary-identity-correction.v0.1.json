@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderRuntimeCanaryBinaryIdentityCorrection.v0.1",
+  "experimentId": "B41-C4",
+  "status": "PREREGISTERED_BEFORE_CORRECTION_TOOLING_OR_OUTPUT",
+  "question": "Can the frozen B41 linux/amd64 worker build and pass both real canaries when its image and runtime checks use the independently derived Linux executable identity instead of the historical macOS identity?",
+  "parent": {
+    "c3SpecSha256": "d8f3ebca7c181bdced580f3bd588825a246fc80dcd94a352dc536738e3adad9f",
+    "c3PreregistrationCommit": "5ceb0e79b9b4afcc96fccd55212394334ca71a77",
+    "c3ToolFreezeCommit": "fac9ab8493ce4dedbec5bf282c24f53b3f3d52cf",
+    "failedResultSha256": "52030d29021274d5f2ca3444d0d52273ce6faff02661d51483b02cd69119aae6",
+    "failedAuditSha256": "9a7f8bab1b4ae74a7672494db57baa1994a48807b3bfec615dae35ad954d06b1",
+    "failure": "REJECTED_CROSS_PLATFORM_BINARY_IDENTITY_AND_AUDIT_PRE_RUNTIME_ASSUMPTION"
+  },
+  "derivation": {
+    "specSha256": "ffbafff1368ae25a3f82c2b92dc723aff10fb6f5fcd616b7627f4a0d4fa62af1",
+    "preregistrationCommit": "895c506578acd161ba4c14c5e75fb59c90b216b8",
+    "toolFreezeCommit": "2f4545e86e69ad3683e1de1e9297ec07a6f910a3",
+    "resultSha256": "407a327462ecc50e62df28b138e6073095f9816594974883209917b016e44d3c",
+    "auditSha256": "37c9adaf857840774db5ed8584b049b0f4958d5119286b2f995676a912c1ea54",
+    "verdict": "LINUX_AMD64_BLENDER_EXECUTABLE_IDENTITY_DERIVED",
+    "memberBytes": 174666336,
+    "linuxAmd64ExecutableSha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27"
+  },
+  "platformIdentity": {
+    "historicalDarwinExecutableSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "linuxAmd64ExecutableSha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27"
+  },
+  "changedImplementationExact": [
+    "Replace only the Dockerfile Blender executable SHA-256 expected value with the independently derived linux/amd64 value",
+    "Replace only the runtime canary Blender executable SHA-256 expected value with the independently derived linux/amd64 value",
+    "Project the runtime report to the historical macOS identity only inside the inherited analyzer, while separately requiring the unmodified observed report to equal the derived linux/amd64 identity",
+    "Treat absent runtime artifacts as an exact empty object only for a failed pre-runtime receipt; successful claims still require independently observed PNG and blend identities"
+  ],
+  "frozenUnchanged": [
+    "B41 through B41-C3 ancestry, official archive, base image and buildx transport",
+    "Dockerfile bytes except the one executable SHA-256 literal",
+    "runtime canary bytes except the one executable SHA-256 literal",
+    "timeout canary bytes",
+    "disk gate, Docker socket, image tag and build context",
+    "container mounts, environment, user, capabilities, cgroups, network and read-only root",
+    "Eevee 32x32 success canary and 30 second TERM plus 5 second KILL timeout canary",
+    "accepted verdict and all production non-claims"
+  ],
+  "acceptedVerdict": "LINUX_AMD64_BLENDER_5_2_CANARY_AND_TIMEOUT_SUPPORTED",
+  "nonClaims": [
+    "B41-C4 corrects platform-specific executable identity only",
+    "A successful canary is not production workload, throughput, visual quality or hostile-kernel isolation evidence",
+    "qemu behavior does not prove native x86-64 or cloud-worker behavior",
+    "No SceneSpec compiler job runs in B41-C4"
+  ]
+}
