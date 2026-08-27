@@ -1,0 +1,113 @@
+{
+  "baseFailure": null,
+  "checks": [
+    {
+      "id": "SPEC_IDENTITY",
+      "passed": true
+    },
+    {
+      "id": "PYTHON_IDENTITY",
+      "passed": true
+    },
+    {
+      "id": "FROZEN_TOOL_IDENTITY",
+      "passed": true
+    },
+    {
+      "id": "TOOL_PARSE",
+      "passed": true
+    },
+    {
+      "id": "AUDIT_IMPORT_INDEPENDENCE",
+      "passed": true
+    },
+    {
+      "id": "ZERO_RENDER_SURFACE",
+      "passed": true
+    },
+    {
+      "id": "FORMAL_ROOT_ABSENT",
+      "passed": true
+    },
+    {
+      "id": "D12_3_ROOT_PRESENT",
+      "passed": true
+    },
+    {
+      "id": "DISK_RESERVE",
+      "passed": true
+    },
+    {
+      "id": "LOCALIZER_SMOKE",
+      "passed": true
+    },
+    {
+      "id": "AUDIT_BASE_TOTALITY",
+      "passed": true
+    },
+    {
+      "id": "AUDIT_ATTACK_TOTALITY",
+      "passed": true
+    }
+  ],
+  "diskAdmission": {
+    "availableBytes": 107589361664,
+    "projectedBytes": 4194304,
+    "remainingBytes": 107585167360,
+    "reserveBytes": 107374182400,
+    "status": "ACCEPTED"
+  },
+  "experimentId": "B52-D12.4-DEV",
+  "operationCounts": {
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "newBlenderRenders": 0
+  },
+  "passed": 12,
+  "preflightHash": "345980f162ea5ba60daff15f2a7fbd053c6aea7ebead84e95b862105e94703af",
+  "schemaVersion": "bfs.blenderStaticZeroHeadroomLocalizationPreflight.v0.1",
+  "smoke": {
+    "audit": {
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/audit-b52-d12-4-zero-headroom.py",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-static-zero-headroom-localization.v0.1.json",
+        "--experiment-root",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-v0-1",
+        "--result",
+        "/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-d124-preflight-dxcvxjbt/results.json",
+        "--output",
+        "/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-d124-preflight-dxcvxjbt/audit.json"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "BFS_B52_D124_AUDIT_OK verdict=AUDIT_MATCH base=15/15 attacks=15/15\n"
+    },
+    "auditHash": "a627cf540d73f2a7d61f4125308c88efba41769a0eb52d3de58e112ce950cf84",
+    "localizer": {
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/analyze-b52-d12-4-zero-headroom.py",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-static-zero-headroom-localization.v0.1.json",
+        "--experiment-root",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-static-nonplanar-multiowner-holdout-v0-1",
+        "--output",
+        "/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-d124-preflight-dxcvxjbt/results.json"
+      ],
+      "exitCode": 0,
+      "stderr": "",
+      "stdout": "BFS_B52_D124_LOCALIZATION_OK verdict=ZERO_HEADROOM_PIXEL_LOCALIZED_WITHOUT_FORMAL_REVISION global=1.9073486328125e-06 ties=1 checks=16/16\n"
+    },
+    "resultHash": "9bd402b0417902b628ff74b85ea754d35827c28e4b94ec6bc40e01ee251dff67"
+  },
+  "status": "ACCEPTED",
+  "toolFreezeCommit": "d72ede30ec88d73c1154be2f723f73eb1ab8f494",
+  "toolHashes": {
+    "scripts/analyze-b52-d12-4-zero-headroom.py": "95f5b8655cea0f464225dcf00a54c47a3ed8e99b9950f759ec894297bb77e1cb",
+    "scripts/audit-b52-d12-4-zero-headroom.py": "6f6346f19fcefa7c58e93e996e2068e26600638e5b5b4661825b1f5950146b47",
+    "scripts/preflight-b52-d12-4-zero-headroom.py": "74f2a6ddcf8088b6f510f65375670d198db871c53c8c25e802cca740401990cc"
+  },
+  "total": 12
+}

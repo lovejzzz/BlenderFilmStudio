@@ -2595,6 +2595,20 @@ Success only means that every tied maximum pixel was enumerated and arithmetical
 
 Artifacts: `specs/blender-static-zero-headroom-localization.v0.1.json` and `research/2026-08-27-b52-d12-4-zero-headroom-localization-protocol.md`.
 
+## J-164 · Frozen D12.4 localizer passes zero-render admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · New Blender renders: 0
+
+The analyzer, independent audit and preflight were frozen at `d72ede30ec88d73c1154be2f723f73eb1ab8f494`. Preflight verified all three working files against their Git blobs, parsed the tools, confirmed the audit does not import the analyzer, and rejected Blender/subprocess surfaces from the two evidence readers.
+
+A disposable read-only smoke run reproduced the D12.3 float32 consumer bytes, the exact global maximum and its tied coordinates. The independent audit passed all 15 base checks and rejected all 15 registered in-memory mutations. The formal D12.4 root remained absent.
+
+All 12 admission checks passed. Disk admission observed 107,589,361,664 bytes available; the 4 MiB projection leaves 107,585,167,360 bytes, 210,984,960 bytes above the unchanged 100 GiB reserve. Preflight file SHA-256: `a6ab1fad53932e23142e65937cfd0cd7030a20b476a879d2cd6bb820d3d55396`; internal hash: `345980f162ea5ba60daff15f2a7fbd053c6aea7ebead84e95b862105e94703af`.
+
+Next: commit the immutable admission, create the formal output root once, then run one localizer process and one independent audit process without invoking Blender.
+
+Artifact: `experiments/blender-static-zero-headroom-localization-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
