@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "bfs.linuxAmd64CompilerRepro.v0.1",
+  "experimentId": "B42",
+  "status": "PREREGISTERED_BEFORE_RUNNER_OR_OUTPUT",
+  "question": "Can the exact verified Blender 5.2 Linux/amd64 worker compile B01 and B02 twice from independently regenerated immutable BuildPlans and reproduce the frozen semantic structure hashes while rejecting a tampered plan?",
+  "parent": {
+    "experimentId": "B41-D3",
+    "resultSha256": "67ea4b0e51d43ab5936e8c6b6890e07aba97918979fa1f0e349c7e98402865ef",
+    "auditSha256": "fa8f41464aebb54c78a4d4e824536d48724337226395bb893e731fbfc5419cda",
+    "classification": "CPU_ONLY_WORKER_CONFIRMED_EEVEE_GPU_ROUTE_ABSENT"
+  },
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "dockerReportedSizeBytes": 1004901158,
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderExecutableSha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "buildPullDownloadAllowed": false
+  },
+  "inputs": {
+    "planCompiler": {"uri": "scripts/compile-build-plan.mjs", "sha256": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413"},
+    "sceneSpecLibrary": {"uri": "scripts/lib/scene-spec.mjs", "sha256": "778607884f2481037bf11ed442b053e3fc72187d12b9f2731363822e21ae588c"},
+    "sceneSchema": {"uri": "specs/scene-spec.v0.1.schema.json", "sha256": "b308c7832d4f4b02e16f930f19dcf1baaeae7475d2f283aee3cb453f05a2224a"},
+    "outputSpec": {"uri": "specs/output-spec.v0.1.json", "sha256": "d492cfcf6a3ec1b5539735b4a46052456e330acea2b6e47c5ab5efcced6b9705"},
+    "sceneCompiler": {"uri": "blender/compile_scene.py", "sha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240"},
+    "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"}
+  },
+  "benchmarks": [
+    {
+      "id": "B01",
+      "sceneSpec": {"uri": "specs/benchmarks/B01.scene.json", "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"},
+      "expectedPlan": {"fileSha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be", "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf"},
+      "expectedStructureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+      "assets": [{"uri": "assets/sets/B01-material-still-life.blend", "sha256": "07e71afe2cf310fd0b7af3dcb1e3c792195b88341d7649ee4348b9f7f297d221"}]
+    },
+    {
+      "id": "B02",
+      "sceneSpec": {"uri": "specs/benchmarks/B02.scene.json", "sha256": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16"},
+      "expectedPlan": {"fileSha256": "8595f30c78b3d2d0266c94d05e2e37b8d90c7864d2c904b6c2e58abc164f187d", "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687"},
+      "expectedStructureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+      "assets": [
+        {"uri": "library/props/B02-chair.blend", "sha256": "d7d110c27764c464c98fe336116bdc9aa3d7ec061e9f23a1b7bff329133e0642"},
+        {"uri": "assets/sets/B02-interior-room.blend", "sha256": "061eb0ae00fa1a7d52580ed578aa3e36cb51fa1dee5b6cb326497927baf35032"}
+      ]
+    }
+  ],
+  "runs": ["B01-A", "B01-B", "B02-A", "B02-B"],
+  "negativeControl": {
+    "id": "B01-TAMPERED",
+    "mutation": "Replace the top-level planHash with 64 zeroes without changing plan content",
+    "expectedExitNonZero": true,
+    "expectedDiagnosticSubstring": "BuildPlan hash mismatch"
+  },
+  "containerContract": {
+    "platform": "linux/amd64",
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": ["ALL"],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "wallTimeMs": 30000,
+    "killGraceMs": 5000
+  },
+  "diskAdmission": {"minimumReserveBytes": "107374182400", "projectedWriteBytes": "1073741824"},
+  "acceptance": {
+    "freshPlanGeneratedTwicePerBenchmark": true,
+    "bothPlanFilesMatchFrozenFileShaAndPlanHash": true,
+    "fourIndependentEmptyOutputDirectories": true,
+    "allFourCompilesExitZeroWithinWallTime": true,
+    "allFourManifestBindingsMatch": true,
+    "eachBenchmarkCanonicalStructureFilesByteEqual": true,
+    "eachBenchmarkStructureHashMatchesFrozenExpected": true,
+    "tamperedPlanRejected": true,
+    "zeroBuildPullDownloadOperations": true,
+    "zeroExperimentContainersRunningAfter": true,
+    "independentAuditRequired": true
+  },
+  "acceptedVerdict": "LINUX_AMD64_COMPILER_REPRODUCIBLE",
+  "nonClaims": [
+    "B42 does not render final pixels or establish image quality",
+    "B42 does not claim .blend files are byte-identical",
+    "B42 does not establish Eevee or GPU availability",
+    "B42 tests two bounded benchmark scenes, not arbitrary SceneSpec coverage",
+    "B42 is local evidence, not remote attestation"
+  ]
+}
