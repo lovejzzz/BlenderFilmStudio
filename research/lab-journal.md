@@ -2157,6 +2157,22 @@ This promotes only the opaque orthographic integer-motion production-pass adapte
 
 Artifacts: `experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/` and `research/2026-08-27-b52-d10-1-blender-multipart-temporal-adapter-f32-holdout-result.md`.
 
+## J-134 · D11 freezes the raw-float-to-integer composition risk before tool work
+
+Date: 2026-08-27 · Type: REAL-TEXTURED END-TO-END PREREGISTRATION · Formal outputs: 0
+
+D8, D9.1 and D10.1 each passed their narrow formal gates, but their composition has not been tested. The most specific open interface is now explicit: D10.1 preserves raw Blender float32 motion while D9.1 uses `int()` truncation toward zero. A theoretically integral displacement observed just below that integer can silently become a one-pixel error even while satisfying D10.1's subpixel endpoint tolerance.
+
+D11 freezes the parent behavior unchanged. The adapter may not round or snap. A round-to-nearest counterfactual is recorded only as a diagnostic and is forbidden from repairing the verdict. Every moving-owner interior pixel must both remain within D10.1's raw endpoint tolerance and truncate to the preregistered integer motion; failure is `MOTION_INTEGERIZATION`.
+
+Four entirely fresh 197×113 real-Blender mesh-textured fixtures cover layer disocclusion, camera bounds, same-Object-Index depth rejection and an all-valid static control. Exact 3×3 semantic probes bind each rejection reason away from raster/material edges. High-contrast per-face emission patterns preserve the D9.1 wrong-sign and naive-history sensitivity requirements without using external textures.
+
+The formal boundary is 65 unique child PIDs: 16 real Cycles source processes, eight adapters, eight Python plus eight Node accumulators, eight Raw EXR encoders, 16 real Blender compositor bridge processes and one independent analyzer. It contains 32 Blender renders, zero model/network calls, a 64 MiB projection and the frozen 100 GiB disk reserve.
+
+All eleven formal tool paths and the formal root are absent. Passing would promote only opaque orthographic integer-motion composition. A motion-integerization failure permits only a fresh D11.1 quantizer preregistration; D11 cannot be revised or rerun. Frozen spec SHA-256: `f1505c42426e8e286ee1584de3df12fb33b7db57518d6d91e1fd93aa3bed5a5f`.
+
+Artifacts: `specs/blender-real-textured-temporal-end-to-end-holdout.v0.1.json` and `research/2026-08-27-b52-d11-blender-real-textured-temporal-end-to-end-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
