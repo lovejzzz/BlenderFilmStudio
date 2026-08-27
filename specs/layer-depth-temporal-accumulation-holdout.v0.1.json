@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "bfs.layerDepthTemporalAccumulationHoldout.v0.1",
+  "experimentId": "B52-D9.1",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "question": "On fresh, fully specified spatially textured two-layer sequences, can independent Python and Node implementations exactly recover analytic history validity and clean temporal output, reject ownership/depth discontinuities, detect wrong motion direction within the same surface, and survive the Blender 5.2 Raw EXR bridge unchanged?",
+  "formalOutputRoot": "experiments/layer-depth-temporal-accumulation-holdout-v0-1",
+  "projectedWriteBytes": 33554432,
+  "diskReserveBytes": 107374182400,
+  "parents": {
+    "d8Spec": {"uri": "specs/external-canonical-warp-bridge.v0.1.json", "sha256": "94a58f4e3c36b1828cb7e1bc4d5646cd577fac1afd411685235185590644a6a5"},
+    "d8Result": {"uri": "experiments/external-canonical-warp-bridge-v0-1/results.json", "sha256": "153340e4f7d76bb9e530a26347e6582974850d7fdcb423b1b7799aaa7ad3a1fb", "verdict": "EXTERNAL_CANONICAL_WARP_BRIDGE_SUPPORTED"},
+    "d8Audit": {"uri": "experiments/external-canonical-warp-bridge-v0-1/audit.json", "sha256": "8ded86e46e0fdb6b99b55c304317d09ea6db4b4c8b9bbd553bd578ea93bee8fd", "status": "PASS"},
+    "d9DevelopmentObservation": {"uri": "experiments/layer-depth-temporal-accumulation-development-smoke-v0-1/observation.json", "sha256": "b2325abc3827694167961a02e8c2f09afdf71dc55bec9c5e505642a20ff1fa20", "verdict": "B52_D9_DESIGN_INVALID_BEFORE_FORMAL_OUTPUT"},
+    "d9InvalidResult": {"uri": "research/2026-08-27-b52-d9-temporal-accumulation-design-invalid-result.md", "sha256": "6c12fd370b864c12afc547b0aca7d4832af5da5e76b6c649f92e562f9e62b774"}
+  },
+  "freshness": {
+    "reuseD9Arrays": false,
+    "reuseD9Resolutions": false,
+    "reuseD9Boxes": false,
+    "reuseD9MotionVectors": false,
+    "reuseD9ConstantColorSurfaces": false,
+    "allFormalOutputsAbsentAtPreregistration": true
+  },
+  "runtime": {
+    "blender": {"executable": "/Applications/Blender.app/Contents/MacOS/Blender", "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2", "bytes": 183237520, "version": "5.2.0 LTS", "buildHash": "fbe6228777e7", "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]},
+    "python": {"executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13", "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35", "bytes": 5543888, "openImageIO": "3.1.13.1", "numpy": "2.3.4"},
+    "node": {"executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node", "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8", "bytes": 50320, "version": "v26.5.0"},
+    "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+    "blenderCompositorDevice": "CPU",
+    "threads": 1
+  },
+  "canonicalContract": {
+    "coordinates": "top-left integer pixel centers",
+    "previousCoordinate": "q=(x-dx,y+dy)",
+    "sampling": "nearest integer only",
+    "historyValid": "q in bounds AND currentLayerId==previousLayerId(q) AND abs(previousDepth(q)-currentDepth)<=max(1,currentDepth)/1024 AND both alpha>0",
+    "accumulation": "valid: float32(0.5*currentRGBA+0.5*previousRGBA(q)); invalid: currentRGBA exactly",
+    "validNoise": "previous += [s/16,-s/32,s/64,0], current -= the same q-addressed vector, s=(-1)^((qx+3*qy) mod 2)",
+    "canonicalFloat": "top-left row-major little-endian float32 bytes",
+    "canonicalMask": "one unsigned byte per top-left row-major pixel"
+  },
+  "surfaceTextures": {
+    "BACKGROUND_CHECKER": {
+      "selector": "b=((floor(lx/2)+floor(ly/3)) mod 2)",
+      "b0": [0.125, -0.5, 0.25, 1.0],
+      "b1": [1.625, 0.75, 1.25, 1.0]
+    },
+    "FOREGROUND_STRIPE": {
+      "selector": "b=((floor(lx/2)+floor(ly/2)) mod 2)",
+      "b0": [2.0, 0.125, -0.5, 1.0],
+      "b1": [-0.25, 1.5, 0.875, 1.0]
+    },
+    "OLD_PATCH": {
+      "selector": "b=(floor(lx/2) mod 2)",
+      "b0": [1.75, -0.5, 0.25, 1.0],
+      "b1": [-0.25, 0.5, 1.5, 1.0]
+    },
+    "NEW_PATCH": {
+      "selector": "b=(floor(ly/2) mod 2)",
+      "b0": [0.25, 1.75, -0.5, 1.0],
+      "b1": [1.25, -0.25, 0.75, 1.0]
+    }
+  },
+  "fixtures": [
+    {
+      "id": "TEXTURED_FOREGROUND_CROSSING_103X63",
+      "resolution": [103, 63],
+      "previousForegroundBox": [27, 14, 51, 48],
+      "currentForegroundBox": [36, 14, 60, 48],
+      "foregroundMotion": [9, 0],
+      "backgroundMotion": [0, 0],
+      "foregroundLocalOffset": {"previous": [0, 0], "current": [9, 0]},
+      "backgroundLocalOffset": {"previous": [0, 0], "current": [0, 0]},
+      "foreground": {"texture": "FOREGROUND_STRIPE", "depth": 1.0, "layerId": 2.0},
+      "background": {"texture": "BACKGROUND_CHECKER", "depth": 4.0, "layerId": 1.0}
+    },
+    {
+      "id": "TEXTURED_CAMERA_PAN_107X61",
+      "resolution": [107, 61],
+      "previousForegroundBox": [31, 11, 68, 44],
+      "currentForegroundBox": [38, 15, 75, 48],
+      "allLayerMotion": [7, -4],
+      "allLayerLocalOffset": {"previous": [0, 0], "current": [7, 4]},
+      "foreground": {"texture": "FOREGROUND_STRIPE", "depth": 2.0, "layerId": 2.0},
+      "background": {"texture": "BACKGROUND_CHECKER", "depth": 8.0, "layerId": 1.0}
+    },
+    {
+      "id": "TEXTURED_DEPTH_SWAP_SAME_ID_89X49",
+      "resolution": [89, 49],
+      "previousPatchBox": [33, 11, 55, 38],
+      "currentPatchBox": [28, 11, 50, 38],
+      "patchMotion": [-5, 0],
+      "backgroundMotion": [0, 0],
+      "previousPatch": {"texture": "OLD_PATCH", "localOffset": [0, 0], "depth": 1.0, "layerId": 11.0},
+      "currentPatch": {"texture": "NEW_PATCH", "localOffset": [-5, 0], "depth": 4.0, "layerId": 11.0},
+      "background": {"texture": "BACKGROUND_CHECKER", "localOffset": [0, 0], "depth": 4.0, "layerId": 11.0}
+    },
+    {
+      "id": "TEXTURED_STATIC_CONTROL_71X43",
+      "resolution": [71, 43],
+      "foregroundBox": [18, 8, 53, 34],
+      "motion": [0, 0],
+      "foreground": {"texture": "FOREGROUND_STRIPE", "depth": 2.0, "layerId": 2.0},
+      "background": {"texture": "BACKGROUND_CHECKER", "depth": 8.0, "layerId": 1.0}
+    }
+  ],
+  "sensitivityControls": {
+    "naiveUnconditionalHistory": {"applicableFixtures": ["TEXTURED_FOREGROUND_CROSSING_103X63", "TEXTURED_DEPTH_SWAP_SAME_ID_89X49"], "minimumWrongPixels": 32, "minimumMaximumAbsoluteError": 0.25},
+    "wrongMotionSign": {"applicableFixtures": ["TEXTURED_FOREGROUND_CROSSING_103X63", "TEXTURED_CAMERA_PAN_107X61", "TEXTURED_DEPTH_SWAP_SAME_ID_89X49"], "minimumWrongPixels": 32, "minimumMaximumAbsoluteError": 0.25}
+  },
+  "processMatrix": {
+    "pythonAccumulatorProcesses": 4,
+    "nodeAccumulatorProcesses": 4,
+    "exrEncoderProcesses": 8,
+    "blenderRepeatsPerProducerFixture": 2,
+    "blenderProcesses": 16,
+    "totalChildProcesses": 32,
+    "allPidsUnique": true,
+    "blenderRenderCalls": 16,
+    "cyclesRayRenders": 0,
+    "sourceBlendFilesOpened": 0,
+    "generatedExternalExrAssetsOpened": 16
+  },
+  "gates": {
+    "allProcessesExitZero": true,
+    "allPidsUnique": true,
+    "pythonNodeAllArraysExact": true,
+    "validityMaskEqualsAnalyticGroundTruth": true,
+    "resolvedRgbaEqualsCleanGroundTruth": true,
+    "invalidPixelsEqualCurrentExactly": true,
+    "validPixelsEqualCleanTargetExactly": true,
+    "naiveControlSensitiveOnApplicableFixtures": true,
+    "wrongMotionSignSensitiveOnApplicableFixtures": true,
+    "staticControlAllValid": true,
+    "staticControlResolvedExact": true,
+    "allEncoderDecodedExact": true,
+    "allBlenderDecodedExact": true,
+    "allBlenderRepeatsExact": true,
+    "allProducerPathsConvergeAfterBlender": true,
+    "maximumAbsoluteResolvedError": 0.0,
+    "changedResolvedScalars": 0,
+    "graphAndRnaExact": true,
+    "operationCountsExact": true,
+    "diagnosticArtifactsExact": true
+  },
+  "diagnostics": {"perFixture": ["current", "historyValidity", "resolved", "naiveHistoryError", "wrongSignError"], "expectedPngs": 20, "expectedSidecars": 20, "diagnosticsAreNotMeasurementInputs": true},
+  "attacks": ["PARENT_IDENTITY", "D9_INVALID_PARENT_IDENTITY", "FRESHNESS_IDENTITY", "PREREGISTRATION_IDENTITY", "TOOL_FREEZE_IDENTITY", "RUNTIME_IDENTITY", "PROCESS_ROSTER", "PID_UNIQUENESS", "FIXTURE_ROSTER", "PRODUCER_REPORT_BINDING", "INPUT_ARRAY_IDENTITY", "DUAL_ALL_ARRAYS_EXACT", "ANALYTIC_VALIDITY_GROUND_TRUTH", "ANALYTIC_RESOLVED_GROUND_TRUTH", "INVALID_PIXEL_CURRENT_IDENTITY", "VALID_PIXEL_TARGET_IDENTITY", "NAIVE_CONTROL_SENSITIVITY", "WRONG_SIGN_CONTROL_SENSITIVITY", "STATIC_NEGATIVE_CONTROL", "ENCODER_REPORT_BINDING", "EXR_LAYOUT", "EXR_ENCODE_DECODE_IDENTITY", "BLENDER_REPORT_BINDING", "BLENDER_GRAPH_RNA", "BLENDER_OUTPUT_HASH", "BLENDER_DECODED_IDENTITY", "BLENDER_REPEAT_IDENTITY", "PRODUCER_PATH_CONVERGENCE", "DIAGNOSTIC_TOTALITY", "RESULT_SELF_HASH"],
+  "decisionRule": {
+    "passVerdict": "LAYER_DEPTH_TEMPORAL_ACCUMULATION_HOLDOUT_SUPPORTED",
+    "failVerdict": "LAYER_DEPTH_TEMPORAL_ACCUMULATION_HOLDOUT_NOT_SUPPORTED",
+    "supported": "All exact gates, applicable sensitivity controls and 30 attacks pass.",
+    "notSupported": "Any gate fails; preserve the counterexample and do not connect Blender production Vector/Depth to this accumulator.",
+    "nextIfSupported": "Preregister a real Blender multipart adapter holdout for Vector component/sign, Depth and ownership extraction.",
+    "nextIfNotSupported": "Do not revise this holdout after output; design a new algorithm or task under a new preregistration."
+  },
+  "nonClaims": ["D9.1 does not validate Blender Vector component order/sign.", "D9.1 excludes subpixel reprojection, transparency mixtures, volumetrics, motion blur and depth of field.", "D9.1 does not prove temporal denoising, anti-aliasing, cinematic quality or human preference.", "D8 transport is reused only for resolved RGBA, not as semantic input-extraction evidence."]
+}

@@ -1977,6 +1977,20 @@ D9 is therefore `B52_D9_DESIGN_INVALID_BEFORE_FORMAL_OUTPUT`. No encoder, Blende
 
 Artifacts: `experiments/layer-depth-temporal-accumulation-development-smoke-v0-1/` and `research/2026-08-27-b52-d9-temporal-accumulation-design-invalid-result.md`.
 
+## J-122 · B52-D9.1 freezes fresh spatial texture without lowering the failed gate
+
+Date: 2026-08-27 · Type: TEXTURED TEMPORAL FRESH-HOLDOUT PREREGISTRATION · Formal outputs: 0
+
+D9.1 keeps the failed 0.25 wrong-sign magnitude gate. It replaces the underpowered constant-color task with four never-run rasters, boxes and trajectories whose surface-local checker/stripe functions are completely specified before tool implementation. D9 arrays, resolutions, boxes, motion vectors and constant-color surfaces are forbidden inputs.
+
+The new fixtures are 103×63 foreground crossing at 9 px, 107×61 two-axis camera pan at (7,−4), 89×49 same-ID depth swap at −5 px and a 71×43 static control. Moving-surface local offsets are frozen so correct `q=(x−dx,y+dy)` selects the same texel, while wrong-sign motion selects a different checker/stripe phase even when layer and depth still agree.
+
+Python and Node must agree on all ten arrays, analytic validity and resolved RGBA; exact accumulation must hit the clean target with zero changed scalar. Naive ownership/depth omission applies to two fixtures; wrong-sign applies to all three moving fixtures, each at ≥32 wrong pixels and ≥0.25 maximum error. Eight encoder and sixteen real Blender pass-through processes extend the boundary to 32 unique PIDs and 30 attacks.
+
+The formal root is absent. Spec SHA-256: `669077423e0101dd5600576d295c0b7a62189a30b18c1dd6ab18a3b5257cd28f`; protocol SHA-256: `a97d40f06057f6d01a04d23dff40f9d73626d7f10a3fc15b54b8048ab2968e69`. Passing permits only a separate real Blender multipart Vector/Depth adapter holdout.
+
+Artifacts: `specs/layer-depth-temporal-accumulation-holdout.v0.1.json` and `research/2026-08-27-b52-d9-1-layer-depth-temporal-accumulation-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
