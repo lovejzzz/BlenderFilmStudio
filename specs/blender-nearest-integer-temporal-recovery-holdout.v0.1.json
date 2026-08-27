@@ -1,0 +1,357 @@
+{
+  "schemaVersion": "bfs.blenderNearestIntegerTemporalRecoveryHoldout.v0.1",
+  "experimentId": "B52-D11.1",
+  "status": "PREREGISTERED_NO_FORMAL_TOOLS_OR_OUTPUT",
+  "question": "On entirely fresh opaque orthographic integer-motion scenes, can two independent bounded nearest-integer quantizers convert raw Blender 5.2 float32 motion into exact integral float32 motion before the unchanged toward-zero accumulator semantics, so that the complete multipart-to-Raw-EXR temporal chain passes without admitting subpixel motion, widening D10.1 tolerances or revising D11?",
+  "parents": {
+    "d8Spec": {"uri": "specs/external-canonical-warp-bridge.v0.1.json", "sha256": "94a58f4e3c36b1828cb7e1bc4d5646cd577fac1afd411685235185590644a6a5"},
+    "d8Result": {"uri": "experiments/external-canonical-warp-bridge-v0-1/results.json", "sha256": "153340e4f7d76bb9e530a26347e6582974850d7fdcb423b1b7799aaa7ad3a1fb", "verdict": "EXTERNAL_CANONICAL_WARP_BRIDGE_SUPPORTED"},
+    "d8Audit": {"uri": "experiments/external-canonical-warp-bridge-v0-1/audit.json", "sha256": "8ded86e46e0fdb6b99b55c304317d09ea6db4b4c8b9bbd553bd578ea93bee8fd", "status": "PASS"},
+    "d9_1Spec": {"uri": "specs/layer-depth-temporal-accumulation-holdout.v0.1.json", "sha256": "669077423e0101dd5600576d295c0b7a62189a30b18c1dd6ab18a3b5257cd28f"},
+    "d9_1Result": {"uri": "experiments/layer-depth-temporal-accumulation-holdout-v0-1/results.json", "sha256": "a8e41983a5ec02df8977c44d76413b11cb0f63f2249941d5663875d30c28e7f1", "verdict": "LAYER_DEPTH_TEMPORAL_ACCUMULATION_HOLDOUT_SUPPORTED"},
+    "d9_1Audit": {"uri": "experiments/layer-depth-temporal-accumulation-holdout-v0-1/audit.json", "sha256": "6213aebcdb3364a60f2d256b0ba7c9ee66344b281a9e528f9b39feb594ebb83b", "status": "PASS"},
+    "d10_1Spec": {"uri": "specs/blender-multipart-temporal-adapter-f32-holdout.v0.1.json", "sha256": "11686c5e796c7bc1b4e45cf137c3d98347bc65bfec428f9d19545b55430f584b"},
+    "d10_1Receipt": {"uri": "experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/run.receipt.json", "sha256": "703f0d37c7b5cda800a57a70221596ba68ceb61af99ae46664da378ae68b0128"},
+    "d10_1Result": {"uri": "experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/results.json", "sha256": "c0f94547b432159772029f67abe70da12ff0f236707d7f92896c75ee664ebc60", "verdict": "BLENDER_MULTIPART_TEMPORAL_ADAPTER_F32_HOLDOUT_SUPPORTED"},
+    "d10_1Audit": {"uri": "experiments/blender-multipart-temporal-adapter-f32-holdout-v0-1/audit.json", "sha256": "f6ef6b2236aa8501ef533c88f5f1e9604f71b259d4beffc90825b14afdb52328", "status": "PASS"},
+    "d10_1ResultNote": {"uri": "research/2026-08-27-b52-d10-1-blender-multipart-temporal-adapter-f32-holdout-result.md", "sha256": "0a95b0a896d479fec9cb3c54fa4857bb4aa2f3afca6076499a9b892253bdb1ab"},
+    "d11Spec": {"uri": "specs/blender-real-textured-temporal-end-to-end-holdout.v0.1.json", "sha256": "f1505c42426e8e286ee1584de3df12fb33b7db57518d6d91e1fd93aa3bed5a5f"},
+    "d11Receipt": {"uri": "experiments/blender-real-textured-temporal-end-to-end-holdout-v0-1/run.receipt.json", "sha256": "dd75ba0e2f4a4b0ee950f9e12e84dc3f12265fe743a89370fb4f15f2643fc689"},
+    "d11Result": {"uri": "experiments/blender-real-textured-temporal-end-to-end-holdout-v0-1/results.json", "sha256": "490c569c4d12fe82ef49ff3d82d657512dbe297c69fd7f8f34df9b7daeeb31c8", "verdict": "BLENDER_REAL_TEXTURED_TEMPORAL_END_TO_END_HOLDOUT_NOT_SUPPORTED", "baseFailure": "MOTION_INTEGERIZATION"},
+    "d11Audit": {"uri": "experiments/blender-real-textured-temporal-end-to-end-holdout-v0-1/audit.json", "sha256": "4bd0e2081b831c75e5572c48c3b281e4a440e8d8f108fc50e1d774a878df6c2b", "status": "PASS"},
+    "d11ResultNote": {"uri": "research/2026-08-27-b52-d11-blender-real-textured-temporal-end-to-end-result.md", "sha256": "dedd35671f0d0caa26ac4baaa57ca8b5f2b4c68c9edec5acfd97221ed257a1ad"}
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "bytes": 183237520,
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "buildPlatform": "Darwin",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "bytes": 5543888,
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "bytes": 50320,
+      "version": "v26.5.0"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    },
+    "environmentAllowlist": ["PATH", "LANG", "LC_ALL", "OCIO", "TMPDIR", "BLENDER_USER_CONFIG", "BLENDER_USER_SCRIPTS"]
+  },
+  "freshness": {
+    "reuseD9OrD9_1Resolutions": false,
+    "reuseD10OrD10_1ResolutionOrScale": false,
+    "reuseD11ResolutionOrScale": false,
+    "reuseD9ThroughD11Names": false,
+    "reuseD9ThroughD11PassIndices": false,
+    "reuseD9ThroughD11Geometry": false,
+    "reuseD9ThroughD11Materials": false,
+    "reuseD9ThroughD11Trajectories": false,
+    "reuseParentExrCanonicalOrResolvedArrays": false,
+    "reuseD11FormalOutputsForFormalDecision": false,
+    "formalToolsAbsentAtPreregistration": true,
+    "formalOutputRootAbsentAtPreregistration": true
+  },
+  "formalOutputRoot": "experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1",
+  "formalToolPaths": [
+    "blender/render_b52_d11_1_textured_source.py",
+    "scripts/adapt-b52-d11-1-multipart.py",
+    "scripts/quantize-b52-d11-1-motion.py",
+    "scripts/quantize-b52-d11-1-motion.mjs",
+    "scripts/accumulate-b52-d11-1-temporal.py",
+    "scripts/accumulate-b52-d11-1-temporal.mjs",
+    "scripts/encode-b52-d11-1-resolved.py",
+    "blender/render_b52_d11_1_resolved_passthrough.py",
+    "scripts/analyze-b52-d11-1-nearest-integer-recovery.py",
+    "scripts/run-b52-d11-1-nearest-integer-recovery.py",
+    "scripts/audit-b52-d11-1-nearest-integer-recovery.py",
+    "scripts/preflight-b52-d11-1-nearest-integer-recovery.py",
+    "tests/test_b52_d11_1_nearest_integer_recovery_contract.py"
+  ],
+  "diskReserveBytes": 107374182400,
+  "projectedWriteBytes": 75497472,
+  "sourceRender": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "samples": 1,
+    "seed": 521111,
+    "animatedSeed": false,
+    "adaptiveSampling": false,
+    "denoising": false,
+    "motionBlur": false,
+    "depthOfField": false,
+    "persistentData": false,
+    "threadsMode": "FIXED",
+    "threads": 4,
+    "resolution": [199, 109],
+    "resolutionPercentage": 100,
+    "pixelAspect": [1.0, 1.0],
+    "filmTransparent": false,
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorMode": "RGBA",
+    "colorDepth": "32",
+    "exrCodec": "ZIP",
+    "viewLayer": "BFS_D111_MASTER",
+    "passAlphaThreshold": 0.5,
+    "expectedSubimages": ["BFS_D111_MASTER.Combined", "BFS_D111_MASTER.Depth", "BFS_D111_MASTER.Vector", "BFS_D111_MASTER.Object Index"],
+    "expectedChannels": {
+      "BFS_D111_MASTER.Combined": ["BFS_D111_MASTER.Combined.R", "BFS_D111_MASTER.Combined.G", "BFS_D111_MASTER.Combined.B", "BFS_D111_MASTER.Combined.A"],
+      "BFS_D111_MASTER.Depth": ["BFS_D111_MASTER.Depth.Z"],
+      "BFS_D111_MASTER.Vector": ["BFS_D111_MASTER.Vector.X", "BFS_D111_MASTER.Vector.Y", "BFS_D111_MASTER.Vector.Z", "BFS_D111_MASTER.Vector.W"],
+      "BFS_D111_MASTER.Object Index": ["BFS_D111_MASTER.Object Index.X"]
+    }
+  },
+  "scene": {
+    "construction": "fresh factory state; generated opaque tessellated plane meshes with per-face emission material indices; no source blend, image texture or external asset",
+    "frameRange": [0, 2],
+    "previousFrame": 0,
+    "currentFrame": 1,
+    "nextFrame": 2,
+    "resolution": [199, 109],
+    "camera": {
+      "name": "BFS_D111_CAMERA",
+      "type": "ORTHO",
+      "location": [0.6, -0.3, 15.0],
+      "rotationEuler": [0.0, 0.0, 0.0],
+      "orthoScale": 19.9
+    },
+    "nominalPixelsPerWorldUnit": 10.0,
+    "textureConstruction": {
+      "geometry": "single mesh object per surface; regular local-coordinate quad grid; alternating polygon material_index; coplanar internal faces share vertices",
+      "backgroundCellWorld": [0.8, 0.8],
+      "foregroundCellWorld": [0.6, 0.6],
+      "filterSafety": "semantic probe centers are analytically selected at least two pixels from object and material-cell boundaries",
+      "materials": {
+        "BACKGROUND_A": [0.12, 0.95, 0.28, 1.0],
+        "BACKGROUND_B": [1.65, 0.08, 0.55, 1.0],
+        "FOREGROUND_A": [0.04, 1.7, 1.15, 1.0],
+        "FOREGROUND_B": [2.1, 0.38, 0.03, 1.0],
+        "STATIC_A": [0.65, 0.12, 1.55, 1.0],
+        "STATIC_B": [1.25, 1.35, 0.06, 1.0]
+      },
+      "shader": "Emission Color -> Surface, strength 1; alpha 1; no texture filtering node"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "QUANTIZED_OCCLUSION_OBJECT_XY_199X109",
+      "purpose": ["positive and negative near-integer components", "moving textured owner", "layer discontinuity", "occlusion", "disocclusion", "wrong-sign sensitivity"],
+      "objects": [
+        {"name": "BFS_D111_OCC_BACKGROUND", "location": [0.0, 0.0, 0.5], "sizeWorld": [25.6, 14.4], "passIndex": 7101, "texture": "BACKGROUND_CHECKER"},
+        {"name": "BFS_D111_OCC_MOVER", "locationByFrame": {"0": [-1.6, 0.8, 3.2], "1": [0.0, -0.3, 3.2], "2": [1.2, 0.6, 3.2]}, "sizeWorld": [4.8, 3.6], "passIndex": 7202, "texture": "FOREGROUND_CHECKER"}
+      ],
+      "expectedVectorXY": [-16.0, 11.0],
+      "expectedVectorZW": [-12.0, -9.0],
+      "expectedD9Motion": [16.0, -11.0],
+      "semanticProbes": [
+        {"name": "valid_mover_interior", "centerTopLeftPixel": [96, 51], "radiusPixels": 1, "expected": "VALID"},
+        {"name": "layer_disocclusion", "centerTopLeftPixel": [63, 40], "radiusPixels": 1, "expected": "INVALID_LAYER"}
+      ]
+    },
+    {
+      "id": "QUANTIZED_CAMERA_BOUNDS_199X109",
+      "purpose": ["positive and negative near-integer components", "camera motion", "out-of-bounds history", "wrong-sign sensitivity"],
+      "cameraByFrame": {"0": [-0.7, 0.9, 15.0], "1": [0.6, -0.3, 15.0], "2": [2.4, 0.5, 15.0]},
+      "objects": [
+        {"name": "BFS_D111_CAM_BACKGROUND", "location": [0.0, 0.0, 0.5], "sizeWorld": [25.6, 14.4], "passIndex": 7303, "texture": "BACKGROUND_CHECKER"},
+        {"name": "BFS_D111_CAM_MARKER", "location": [-2.0, 1.2, 2.7], "sizeWorld": [4.2, 3.0], "passIndex": 7404, "texture": "FOREGROUND_CHECKER"}
+      ],
+      "expectedVectorXY": [13.0, -12.0],
+      "expectedVectorZW": [18.0, 8.0],
+      "expectedD9Motion": [-13.0, 12.0],
+      "semanticProbes": [
+        {"name": "valid_camera_interior", "centerTopLeftPixel": [97, 47], "radiusPixels": 1, "expected": "VALID"},
+        {"name": "camera_bounds_rejection", "centerTopLeftPixel": [187, 93], "radiusPixels": 1, "expected": "INVALID_BOUNDS"}
+      ]
+    },
+    {
+      "id": "QUANTIZED_SAME_ID_DEPTH_DISCLOSURE_199X109",
+      "purpose": ["positive and negative near-integer components", "same Object Index", "depth discontinuity", "disocclusion", "naive-history sensitivity"],
+      "objects": [
+        {"name": "BFS_D111_DEPTH_BACKGROUND", "location": [0.0, 0.0, 0.5], "sizeWorld": [25.6, 14.4], "passIndex": 7505, "texture": "BACKGROUND_CHECKER"},
+        {"name": "BFS_D111_DEPTH_OCCLUDER", "locationByFrame": {"0": [-1.3, 0.7, 3.2], "1": [0.4, -0.1, 3.2], "2": [1.5, 1.0, 3.2]}, "sizeWorld": [4.8, 3.6], "passIndex": 7505, "texture": "FOREGROUND_CHECKER"}
+      ],
+      "expectedVectorXY": [-17.0, 8.0],
+      "expectedVectorZW": [-11.0, -11.0],
+      "expectedD9Motion": [17.0, -8.0],
+      "semanticProbes": [
+        {"name": "valid_same_id_mover", "centerTopLeftPixel": [100, 49], "radiusPixels": 1, "expected": "VALID"},
+        {"name": "same_id_depth_rejection", "centerTopLeftPixel": [65, 47], "radiusPixels": 1, "expected": "INVALID_DEPTH"}
+      ]
+    },
+    {
+      "id": "QUANTIZED_TEXTURED_STATIC_CONTROL_199X109",
+      "purpose": ["static negative control", "signed-zero canonicalization", "all-valid history"],
+      "objects": [
+        {"name": "BFS_D111_STATIC_BACKGROUND", "location": [0.0, 0.0, 0.5], "sizeWorld": [25.6, 14.4], "passIndex": 7606, "texture": "BACKGROUND_CHECKER"},
+        {"name": "BFS_D111_STATIC_MARKER", "location": [1.2, -0.8, 3.0], "sizeWorld": [4.8, 3.6], "passIndex": 7707, "texture": "STATIC_CHECKER"}
+      ],
+      "expectedVectorXY": [0.0, 0.0],
+      "expectedVectorZW": [0.0, 0.0],
+      "expectedD9Motion": [0.0, 0.0],
+      "semanticProbes": [
+        {"name": "static_background", "centerTopLeftPixel": [65, 47], "radiusPixels": 1, "expected": "VALID"},
+        {"name": "static_marker", "centerTopLeftPixel": [108, 56], "radiusPixels": 1, "expected": "VALID"}
+      ]
+    }
+  ],
+  "typedStructuralOracle": {
+    "inheritance": "D10.1 binary32 typed oracle without broadening",
+    "floatPaths": ["scene.camera.location[*]", "scene.camera.rotationEuler[*]", "scene.camera.orthoScale", "scene.objects[*].location[*]", "scene.objects[*].sizeWorld[*]", "animation[*].keyframes[*].frame", "animation[*].keyframes[*].value", "material emission color[*]"],
+    "exactPaths": ["names", "enums", "integers", "pass indices", "mesh topology", "polygon material indices", "Action/layer/strip/channel-bag roster", "render state", "operation counts"],
+    "forbidden": ["global epsilon", "decimal display rounding", "canonicalizing names/enums/indices/topology", "accepting adjacent binary32 values"]
+  },
+  "adapterContract": {
+    "inheritance": "D10.1 channel extraction and raster orientation with BFS_D111_MASTER replacing only the frozen view-layer name",
+    "outputs": ["previous.rgba32", "current.rgba32", "previous-depth.f32", "current-depth.f32", "previous-layer.f32", "current-layer.f32", "motion.xy32"],
+    "motion": "raw float32 [-current Vector.X,-current Vector.Y]; no rounding, snapping, epsilon, clamping or quantization in the adapter",
+    "unusedValidated": "current Vector.ZW remains measured against current-minus-next"
+  },
+  "quantizerContract": {
+    "input": "adapter motion.xy32 decoded strictly as little-endian finite IEEE-754 binary32",
+    "domain": "every component must lie within 1/1024 pixel inclusive of its nearest mathematical integer; rejection is whole-array and produces no output payload",
+    "acceptanceRadiusPixels": 0.0009765625,
+    "candidate": "value >= 0 ? floor(value + 0.5) : ceil(value - 0.5)",
+    "halfIntegerPolicy": "the candidate rule is half-away-from-zero, but every exact or adjacent half-integer is outside the 1/1024 domain and must be rejected",
+    "output": "motion-quantized.xy32 containing exact integral float32 values; all zero candidates serialize as positive-zero bytes 00000000",
+    "independence": "one scalar Python implementation and one scalar Node implementation share only this spec; they may not import one another, D11 quantization diagnostics or fixture expected motion",
+    "requiredProperties": ["finite input", "whole-array atomic rejection", "inclusive radius", "nearest-integer exactness", "Python/Node byte identity", "idempotence", "positive-zero canonicalization", "report input/output hash binding"],
+    "forbidden": ["toward-zero as quantizer", "floor as quantizer", "ceil as quantizer", "clamping", "subpixel resampling", "global epsilon", "fixture-specific expected-motion lookup", "partial output after rejection", "radius widening after output"]
+  },
+  "rawMotionGate": {
+    "correctEndpointErrorP99MaximumPixels": 0.000244140625,
+    "correctEndpointErrorAbsoluteMaximumPixels": 0.0009765625,
+    "allPixelComponentsWithinQuantizerDomain": true,
+    "movingOwnerQuantizedMotion": "Every analytically interior pixel belonging to each declared moving owner must equal expectedD9Motion exactly after quantization.",
+    "staticQuantizedMotion": "Every static pixel must serialize as [+0,+0] float32 bytes.",
+    "failureLabelForRealOutOfDomainInput": "QUANTIZER_DOMAIN"
+  },
+  "accumulatorContract": {
+    "coordinates": "top-left integer pixel centers",
+    "motionInput": "motion-quantized.xy32 from the matching-language quantizer; Python and Node quantized payloads must first be byte-identical",
+    "motionIntegerization": "retain D11/D9.1 toward-zero semantics: Python int() and JavaScript Math.trunc(); exact integral float32 inputs make this operation an identity",
+    "previousCoordinate": "q=(x-trunc(dx), y+trunc(dy))",
+    "historyValid": "q in bounds AND currentLayerId==previousLayerId(q) AND abs(previousDepth(q)-currentDepth)<=max(1,currentDepth)/1024 AND both alpha>0",
+    "accumulation": "valid: cast each 0.5*current+0.5*previous(q) result once to float32; invalid: current float32 scalar exactly",
+    "producerIndependence": "scalar Python and scalar Node implementations do not import one another and retain the D11 accumulation algorithm after input/report wiring",
+    "forbidden": ["second rounding step inside accumulation", "floor or ceil inside accumulation", "subpixel sampling", "global validity epsilon", "fixture-specific motion repair"]
+  },
+  "semanticOracle": {
+    "independence": "standard-library projection and declared geometry only; may not consume renderer-reported screen coordinates, quantizer output or accumulator validity output",
+    "probeSize": "3x3 at every frozen centerTopLeftPixel",
+    "reasonPriority": ["INVALID_BOUNDS", "INVALID_LAYER", "INVALID_DEPTH", "INVALID_ALPHA", "VALID"],
+    "requirements": ["every probe pixel has the expected reason", "layer_disocclusion fails without layer equality", "same_id_depth_rejection passes layer equality and fails only depth", "camera_bounds_rejection fails bounds before reading previous arrays", "valid probes satisfy every conjunct"]
+  },
+  "sensitivityControls": {
+    "naiveNoLayerOrDepth": {"applicableFixtures": ["QUANTIZED_OCCLUSION_OBJECT_XY_199X109", "QUANTIZED_SAME_ID_DEPTH_DISCLOSURE_199X109"], "minimumChangedPixels": 32, "minimumMaximumAbsoluteDifference": 0.125},
+    "wrongMotionSign": {"applicableFixtures": ["QUANTIZED_OCCLUSION_OBJECT_XY_199X109", "QUANTIZED_CAMERA_BOUNDS_199X109", "QUANTIZED_SAME_ID_DEPTH_DISCLOSURE_199X109"], "minimumChangedPixels": 32, "minimumMaximumAbsoluteDifference": 0.125},
+    "static": {"applicableFixtures": ["QUANTIZED_TEXTURED_STATIC_CONTROL_199X109"], "requiredValidPixels": 21691, "requiredResolvedEqualsCurrentExact": true}
+  },
+  "rawExrBridge": {
+    "input": "Python resolved.rgba32 only after quantizer and accumulator Python/Node outputs are byte-identical",
+    "encoder": {"channels": ["R", "G", "B", "A"], "storage": "FLOAT", "compression": "zip", "colorspace": "Raw", "decodedIdentity": "exact canonical float32 bytes"},
+    "blenderGraph": ["BFS_D111_EXTERNAL_SOURCE.Image->BFS_D111_GROUP_OUTPUT.Socket_0"],
+    "blenderOutput": {"fileFormat": "OPEN_EXR", "colorMode": "RGBA", "colorDepth": "32", "exrCodec": "ZIP", "inputColorspace": "Raw"},
+    "containerByteIdentityRequired": false
+  },
+  "processMatrix": {
+    "freshRepeats": 2,
+    "sourceFramesPerFixtureRepeat": [0, 1],
+    "sourceBlenderProcesses": 16,
+    "sourceCyclesRayRenders": 16,
+    "adapterPythonProcesses": 8,
+    "pythonQuantizerProcesses": 8,
+    "nodeQuantizerProcesses": 8,
+    "pythonAccumulatorProcesses": 8,
+    "nodeAccumulatorProcesses": 8,
+    "resolvedExrEncoderProcesses": 8,
+    "bridgeRepeatsPerEncodedCell": 2,
+    "bridgeBlenderProcesses": 16,
+    "bridgeCompositorRenders": 16,
+    "analysisPythonProcesses": 1,
+    "totalChildProcesses": 81,
+    "totalBlenderProcesses": 32,
+    "totalBlenderRenderCalls": 32,
+    "allPidsUnique": true,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "gates": {
+    "allProcessesExitZero": true,
+    "allPidsUnique": true,
+    "parentRuntimeSpecAndFrozenToolIdentityExact": true,
+    "fixtureSceneAnimationMaterialMeshAndRenderStateExact": true,
+    "typedRnaFloat32CanonicalizationExact": true,
+    "multipartRosterChannelsShapeAndFiniteExact": true,
+    "sourceReportsBindEveryExr": true,
+    "sourceRepeatsDecodedExact": true,
+    "adapterReportsBindEveryInputAndOutput": true,
+    "adapterArraysEqualIndependentReconstruction": true,
+    "adapterRepeatsExact": true,
+    "rawVectorEndpointsWithinD10_1Gate": true,
+    "everyRawMotionComponentInsideFrozenQuantizerDomain": true,
+    "quantizerReportsBindEveryInputAndOutput": true,
+    "pythonNodeQuantizedMotionExact": true,
+    "quantizedMotionIntegralAndAnalyticallyCorrect": true,
+    "quantizerMutationContractExact": true,
+    "semanticProbeReasonsExact": true,
+    "pythonNodeValidityMaskExact": true,
+    "pythonNodeResolvedRgbaExact": true,
+    "invalidPixelsEqualCurrentExactly": true,
+    "naiveAndWrongSignControlsSensitive": true,
+    "staticControlAllValidExactAndPositiveZero": true,
+    "resolvedEncoderDecodedExact": true,
+    "allBridgeDecodedExact": true,
+    "allBridgeRepeatsExact": true,
+    "operationCountsExact": true,
+    "diagnosticArtifactsExact": true
+  },
+  "baseFailureOrder": ["PARENT_OR_TOOL_IDENTITY", "RUNTIME_OR_DISK_ADMISSION", "FRESHNESS", "SCENE_STRUCTURE", "SOURCE_RENDER", "ADAPTER_EXTRACTION", "QUANTIZER_DOMAIN", "QUANTIZER_IDENTITY", "SEMANTIC_VALIDITY", "ACCUMULATOR_IDENTITY", "CONTROL_SENSITIVITY", "STATIC_CONTROL", "RAW_EXR_BRIDGE", "DIAGNOSTIC_OR_OPERATION_IDENTITY"],
+  "diagnostics": {
+    "perFixture": ["currentCombined", "currentDepth", "currentOwnership", "rawMotionMagnitude", "quantizationError", "quantizedMotion", "truncationRecovery", "historyValidity", "validityReason", "resolved", "naiveDifference", "wrongSignDifference"],
+    "expectedPngs": 48,
+    "expectedSidecars": 48,
+    "diagnosticsAreNotMeasurementInputs": true
+  },
+  "attacks": [
+    "D8_PARENT_IDENTITY", "D9_1_PARENT_IDENTITY", "D10_1_PARENT_IDENTITY", "D11_NEGATIVE_PARENT_IDENTITY", "PREREGISTRATION_IDENTITY", "TOOL_FREEZE_IDENTITY", "RUNTIME_IDENTITY", "OCIO_IDENTITY", "DISK_ADMISSION", "FRESHNESS_IDENTITY",
+    "FIXTURE_ROSTER", "SCENE_STRUCTURE", "ANIMATION_STRUCTURE", "MESH_TOPOLOGY", "POLYGON_MATERIAL_INDEX", "MATERIAL_EMISSION", "RENDER_STATE", "SOURCE_PROCESS_ROSTER", "PID_UNIQUENESS", "SOURCE_REPORT_BINDING",
+    "MULTIPART_ROSTER", "MULTIPART_CHANNEL_LAYOUT", "SOURCE_REPEAT_DECODED_IDENTITY", "ADAPTER_REPORT_BINDING", "ADAPTER_ARRAY_RECONSTRUCTION", "ADAPTER_REPEAT_IDENTITY", "VECTOR_XY_MAPPING", "VECTOR_ZW_MAPPING", "RAW_VECTOR_TOLERANCE", "D9_COORDINATE_CONVERSION",
+    "QUANTIZER_REPORT_BINDING", "QUANTIZER_F32_INPUT_IDENTITY", "QUANTIZER_OUTPUT_DTYPE_SHAPE", "QUANTIZER_PYTHON_NODE_IDENTITY", "QUANTIZER_NEAREST_INTEGER", "QUANTIZER_RADIUS_INCLUSIVE", "QUANTIZER_RADIUS_JUST_OUTSIDE_REJECTED", "QUANTIZER_HALF_INTEGER_REJECTED", "QUANTIZER_NONFINITE_REJECTED", "QUANTIZER_TOWARD_ZERO_SUBSTITUTION_REJECTED",
+    "QUANTIZER_FLOOR_SUBSTITUTION_REJECTED", "QUANTIZER_CEIL_SUBSTITUTION_REJECTED", "QUANTIZER_NEGATIVE_ZERO_CANONICAL", "QUANTIZER_IDEMPOTENCE", "QUANTIZER_NO_PARTIAL_OUTPUT_ON_REJECT", "QUANTIZED_MOVING_OWNER_EXACT", "QUANTIZED_STATIC_EXACT", "SEMANTIC_ORACLE_INDEPENDENCE", "VALIDITY_BOUNDS", "VALIDITY_LAYER",
+    "VALIDITY_SAME_ID_DEPTH", "VALIDITY_ALPHA", "SEMANTIC_PROBE_TOTALITY", "ACCUMULATOR_PROCESS_ROSTER", "PYTHON_NODE_VALIDITY_IDENTITY", "PYTHON_NODE_RESOLVED_IDENTITY", "INVALID_PIXEL_CURRENT_IDENTITY", "NAIVE_CONTROL_SENSITIVITY", "WRONG_SIGN_CONTROL_SENSITIVITY", "STATIC_NEGATIVE_CONTROL",
+    "ENCODER_REPORT_BINDING", "RESOLVED_EXR_LAYOUT", "RESOLVED_EXR_DECODE_IDENTITY", "BRIDGE_REPORT_BINDING", "BRIDGE_GRAPH_RNA", "BRIDGE_OUTPUT_HASH", "BRIDGE_DECODED_IDENTITY", "BRIDGE_REPEAT_IDENTITY", "DIAGNOSTIC_TOTALITY", "OPERATION_BOUNDARY", "RESULT_SELF_HASH"
+  ],
+  "decisionRule": {
+    "passVerdict": "BLENDER_NEAREST_INTEGER_TEMPORAL_RECOVERY_HOLDOUT_SUPPORTED",
+    "failVerdict": "BLENDER_NEAREST_INTEGER_TEMPORAL_RECOVERY_HOLDOUT_NOT_SUPPORTED",
+    "supported": "All 81 formal child processes, raw-domain, dual-quantizer, unchanged accumulator-semantic, semantic, control, Raw EXR bridge, diagnostic and registered attack gates pass.",
+    "notSupported": "Any gate fails; preserve every completed cell and report the earliest baseFailure. Do not widen the quantizer radius, clamp an outlier, revise a probe or rerun this holdout after formal output.",
+    "nextIfSupported": "Preregister a new perspective/subpixel reconstruction experiment; D11.1 support remains limited to declared orthographic integer-motion input.",
+    "nextIfQuantizerDomainFailure": "Isolate the real Blender out-of-domain Vector population under a fresh diagnostic preregistration; do not widen 1/1024 or emit partial quantized output.",
+    "nextIfQuantizerIdentityFailure": "Isolate cross-language candidate, signed-zero, atomic-rejection or report-binding behavior under a new preregistration.",
+    "nextIfOtherFailure": "Isolate the first failed contract under a new preregistration without revising or rerunning D11.1."
+  },
+  "nonClaims": [
+    "D11.1 does not change D11's NOT_SUPPORTED verdict or audit PASS.",
+    "D11.1 does not claim that arbitrary float32 motion can be rounded safely; the quantizer rejects every component farther than 1/1024 pixel from an integer.",
+    "D11.1 does not validate perspective, subpixel, deformation, transparency, volumetrics, hair, motion blur or depth of field.",
+    "D11.1 does not validate Cryptomatte or multi-owner pixels; ownership is opaque Object Index only.",
+    "D11.1 does not claim that temporal averaging improves image quality; it validates a bounded dataflow and rejection contract only.",
+    "D11.1 does not claim cinematic quality, character consistency or human preference.",
+    "D11.1 does not claim cross-version, cross-operating-system, cross-CPU or cross-GPU equivalence.",
+    "A supported D11.1 would not authorize production rendering, unattended execution or radius widening."
+  ]
+}

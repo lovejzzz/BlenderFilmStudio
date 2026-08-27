@@ -2229,6 +2229,24 @@ D8, D9.1 and D10.1 retain their narrow individual results; their unmodified comp
 
 Artifacts: `experiments/blender-real-textured-temporal-end-to-end-holdout-v0-1/` and `research/2026-08-27-b52-d11-blender-real-textured-temporal-end-to-end-result.md`.
 
+## J-139 · D11.1 preregisters a bounded dual-implementation motion quantizer
+
+Date: 2026-08-27 · Type: INTEGERIZATION-RECOVERY FRESH-HOLDOUT PREREGISTRATION · Formal outputs: 0
+
+D11 remains `BLENDER_REAL_TEXTURED_TEMPORAL_END_TO_END_HOLDOUT_NOT_SUPPORTED`; no D11 tool, result or output is revised or rerun. D11.1 freezes the only recovery permitted by that result: an explicit nearest-integer conversion between the raw adapter and the inherited toward-zero accumulator semantics.
+
+The quantizer is deliberately narrower than unconditional rounding. Each finite raw float32 component receives the language-independent candidate `v>=0 ? floor(v+0.5) : ceil(v-0.5)` and is accepted only when its distance to that integer is at most `1/1024` pixel inclusive—the pre-existing D10.1 absolute endpoint-error ceiling, not a threshold fitted to D11. Any out-of-domain component rejects the complete array and produces no output. Half-integers, NaN, infinities, partial output, clamping, fixture lookup, global epsilon and post-output radius widening are forbidden. Zero must serialize as positive float32 zero.
+
+Independent Python and Node quantizers must bind the same raw adapter bytes and produce byte-identical integral float32 motion. Their matching-language accumulators retain `int()` / `Math.trunc()` so the downstream integerization is an identity rather than a second repair. The analyzer independently recomputes the quantizer, and 71 registered mutations cover radius boundaries, signed zero, nonfinite and half-integer rejection, alternate integerizers, idempotence, report binding and the complete inherited temporal/bridge chain.
+
+Four fresh 199×109 scenes with orthographic scale 19.9 use new names, pass IDs 7101–7707, divisible 0.8/0.6-world mesh grids, material values and trajectories. They cover object occlusion, camera bounds, same-ID depth disocclusion and a 21,691-pixel all-valid static control. Frozen motion pairs include both signs: `[+16,−11]`, `[−13,+12]`, `[+17,−8]` and `[+0,+0]` after quantization.
+
+The formal boundary is 81 unique child PIDs: 16 Cycles sources, eight adapters, 16 quantizers, 16 accumulators, eight encoders, 16 compositor bridges and one analyzer. Projected write is 72 MiB and must leave the frozen 100 GiB reserve. All thirteen formal tool paths and the formal root are absent at preregistration.
+
+Frozen spec SHA-256: `c4cb343672f53660d7c4ab69ccd489e00bb211e4aa1f489429f7a626ee48c42a`. Passing would support only declared orthographic integer-motion input; the next boundary would be a new perspective/subpixel reconstruction contract, not a wider rounding radius.
+
+Artifacts: `specs/blender-nearest-integer-temporal-recovery-holdout.v0.1.json` and `research/2026-08-27-b52-d11-1-nearest-integer-temporal-recovery-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
