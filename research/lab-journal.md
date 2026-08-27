@@ -2777,6 +2777,16 @@ The formal matrix registers 12 fresh Blender renders, 56 unique child processes,
 
 Artifacts: `specs/blender-static-adaptive-risk-gate-holdout.v0.1.json` and `research/2026-08-27-b52-d12-7-adaptive-risk-gate-holdout-protocol.md`.
 
+## J-180 · D12.7 frozen tools pass zero-output admission
+
+Date: 2026-08-27 · Type: PREFLIGHT · Blender renders: 0
+
+The D12.7 preflight passed 17/17 checks before the formal root existed. It binds all ten tools to commit `006d3934b3cf625e9f7e85bd837f0f5889d2be45`, verifies every runtime and parent identity, obtains byte-identical Python/Node results for all eleven synthetic payloads, exercises accepted/rejected adaptive pixels and all subset/partition branches, and passes 259 arithmetic-bound cases.
+
+Three fresh Blender 5.2 processes constructed all seven new geometry types with zero render calls and no EXR. Disk admission left `141344768` bytes above the unchanged 100 GiB reserve after the 24 MiB projection. No D12.7 formal pixel or decision has been created or inspected.
+
+Artifacts: `experiments/blender-static-adaptive-risk-gate-holdout-preflight-v0-1/frozen-tool-preflight.json` and `research/2026-08-27-b52-d12-7-adaptive-risk-gate-preflight.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
