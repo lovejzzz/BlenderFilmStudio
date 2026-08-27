@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "bfs.linuxAmd64CompilerReproFailure.v0.1",
+  "experimentId": "B42",
+  "verdict": "LINUX_AMD64_COMPILER_REPRO_REJECTED",
+  "preregistration": {
+    "commit": "636552dccf7502d0af8d61673f54607280a86934",
+    "specSha256": "9cfc3839ef61b9e000850f2ee112e22f5e816f5b8c6f0a4b3daede9bb6265fde"
+  },
+  "toolFreezeCommit": "a44d4f57e438ef691589300f485af14347bf9169",
+  "observations": {
+    "planGeneration": {
+      "B01": {
+        "runAFileSha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+        "runBFileSha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+        "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+        "passed": true
+      },
+      "B02": {
+        "runAFileSha256": "8595f30c78b3d2d0266c94d05e2e37b8d90c7864d2c904b6c2e58abc164f187d",
+        "runBFileSha256": "8595f30c78b3d2d0266c94d05e2e37b8d90c7864d2c904b6c2e58abc164f187d",
+        "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+        "passed": true
+      }
+    },
+    "containerLaunches": {
+      "attempted": 5,
+      "exitCodes": [125, 125, 125, 125, 125],
+      "blenderProcessesStarted": 0,
+      "commonFailure": "OCI runtime could not create /repo/worker-output inside the read-only repository mount because the destination mountpoint did not already exist"
+    },
+    "analyzer": {
+      "completed": false,
+      "failure": "Null-observation handling attempted to dereference run.observed.manifest after launch failures"
+    },
+    "cleanup": {
+      "experimentContainersRunningAfter": 0
+    }
+  },
+  "falsification": {
+    "originalClaimAccepted": false,
+    "requiredCorrection": "Pre-create and freeze the nested output mountpoint, and make the analyzer total over failed launches before any rerun"
+  }
+}
