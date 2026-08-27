@@ -1,7 +1,11 @@
 {
   "schemaVersion": "bfs.layerDepthTemporalAccumulationCalibration.v0.1",
   "experimentId": "B52-D9",
-  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "status": "AMENDED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "preFormalAmendment": {
+    "previousSpecSha256": "72ce27443350ef2abb1b45a7630b5c9beee09025103ce690bc523421d9f6dc27",
+    "reason": "Design review found that CAMERA_PAN moves both layers identically and has only out-of-bounds invalid history, while the naive control already preserves bounds rejection. Naive sensitivity therefore cannot logically apply to CAMERA_PAN. Before any formal tool or output, applicability is made explicit: naive history is tested on the two ownership/depth fixtures; wrong-sign motion remains tested on all three moving fixtures. No coordinate, threshold, fixture geometry, process count, gate value or verdict rule changes."
+  },
   "question": "On unseen analytic two-layer sequences with exact ground truth, can two independent implementations produce the exact same history-validity mask and ghost-free float32 temporal accumulation, then survive the D8 Blender 5.2 Raw EXR bridge unchanged?",
   "formalOutputRoot": "experiments/layer-depth-temporal-accumulation-calibration-v0-1",
   "projectedWriteBytes": 33554432,
@@ -122,11 +126,13 @@
   "sensitivityControls": {
     "naiveUnconditionalHistory": {
       "definition": "use reprojected previous color wherever q is in bounds, ignoring layerId and depth",
+      "applicableFixtures": ["FOREGROUND_CROSSING_97X61", "DEPTH_SWAP_SAME_ID_83X47"],
       "dynamicFixtureMinimumWrongPixels": 32,
       "minimumMaximumAbsoluteError": 0.25
     },
     "wrongMotionSign": {
       "definition": "q=(x+dx,y-dy) while every other rule remains unchanged",
+      "applicableFixtures": ["FOREGROUND_CROSSING_97X61", "CAMERA_PAN_101X59", "DEPTH_SWAP_SAME_ID_83X47"],
       "movingFixtureMinimumWrongPixels": 32,
       "minimumMaximumAbsoluteError": 0.25
     }

@@ -1951,6 +1951,18 @@ The formal root is absent. Spec SHA-256: `72ce27443350ef2abb1b45a7630b5c9beee090
 
 Artifacts: `specs/layer-depth-temporal-accumulation-calibration.v0.1.json` and `research/2026-08-27-b52-d9-layer-depth-temporal-accumulation-calibration-protocol.md`.
 
+## J-120 · B52-D9 removes an impossible sensitivity requirement before tool work
+
+Date: 2026-08-27 · Type: PRE-FORMAL-IMPLEMENTATION PROTOCOL AMENDMENT · Formal outputs: 0
+
+Design review found that CAMERA_PAN translates both visible layers by the same vector. Its only invalid history is out of bounds, and the frozen naive control already retains bounds rejection while omitting only ID/depth checks. Requiring 32 naive-history errors on that fixture was therefore logically impossible and would measure a contradiction rather than algorithm sensitivity.
+
+No D9 formal tool existed and the formal root remained absent. The amendment now explicitly applies naive-history sensitivity to FOREGROUND_CROSSING and DEPTH_SWAP_SAME_ID, the two fixtures containing ownership/depth rejection. Wrong-sign motion still applies to all three moving fixtures. Coordinates, threshold values, fixture geometry, process counts, exact gates, 29 attacks and verdict rules are unchanged.
+
+The previous spec hash `72ce27443350ef2abb1b45a7630b5c9beee09025103ce690bc523421d9f6dc27` remains bound in the amended file. Amended spec SHA-256: `d02986d1e682f0a945c68b307a993452de59e0ac4f4ecf769b002c9e2de51030`; amended protocol SHA-256: `19435d66549872365cfa07c81e78726fd00ddb51209bf20208fd3cd4753fa726`.
+
+Next: freeze tools only against the amended identity; no hidden fallback or fixture-specific threshold is permitted.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
