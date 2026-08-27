@@ -184,8 +184,21 @@ def validate(evidence: dict, spec: dict) -> str | None:
 
 def attacks(evidence: dict, spec: dict) -> list[dict]:
     rows = []
+    baseline = copy.deepcopy(evidence)
+    baseline["baseFailure"] = None
+    for comparison in baseline["comparisons"].values():
+        for pair in comparison["crossBackend"]:
+            pair["metrics"].update(linearNrmseByReferenceMeanRms=0.0, logLuminanceRmse=0.0, edgeLinearRmse=0.0, linearP95AbsoluteError=0.0, linearMaxAbsoluteError=0.0)
+        comparison["metalRepeat"]["metrics"].update(linearNrmseByReferenceMeanRms=0.0, linearP95AbsoluteError=0.0)
+        comparison["metalRenderSeconds"] = [0.0 for _ in comparison["metalRenderSeconds"]]
+        for exact_passes in comparison["exactPassesAcrossBackend"].values():
+            for name in exact_passes:
+                exact_passes[name] = True
+    baseline["evidenceCoreHash"] = canonical_hash(hash_payload(baseline))
+    if validate(baseline, spec) is not None:
+        raise RuntimeError("attack baseline could not be isolated from observed gate failures")
     def add(identifier: str, reason: str, mutate) -> None:
-        clone = copy.deepcopy(evidence); mutate(clone); clone["evidenceCoreHash"] = canonical_hash(hash_payload(clone)) if reason != "EVIDENCE_SELF_HASH" else "0" * 64
+        clone = copy.deepcopy(baseline); mutate(clone); clone["evidenceCoreHash"] = canonical_hash(hash_payload(clone)) if reason != "EVIDENCE_SELF_HASH" else "0" * 64
         observed = validate(clone, spec); rows.append({"id": identifier, "expectedReason": reason, "observedReason": observed, "passed": observed == reason})
     add("A01_PARENT", "PARENT_IDENTITY", lambda x: x["parentObservations"][0].update(match=False))
     add("A02_BLENDER", "BLENDER_IDENTITY", lambda x: x["blenderObservation"].update(match=False))
@@ -242,7 +255,7 @@ def full_analysis(spec: dict, receipt: dict, output: Path) -> None:
 
     canary_report = receipt["canary"]["report"]
     operation_counts = {"nativeBlenderProcesses": sum(item.startswith("NATIVE_BLENDER_PROCESS_") for item in receipt["runtimeOperations"]), "sceneFilesModified": 0 if all(item["match"] for item in receipt["sourcePostObservations"]) else 1, "cacheDirectoriesMoved": 0, "deletions": 0, "dockerRuns": 0, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0, "networkRequired": False}
-    evidence = {"schemaVersion": "bfs.nativeMetalProductionHoldoutEvidence.v0.1", "experimentId": spec["experimentId"], "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"], "runtime": {"python": platform.python_version(), "openImageIO": oiio.VERSION_STRING, "numpy": np.__version__}, "parents": receipt["parents"], "parentObservations": receipt["parentObservations"], "sourceObservations": receipt["sourceObservations"], "sourcePostObservations": receipt["sourcePostObservations"], "blenderObservation": receipt["blenderObservation"], "diskAdmission": receipt["diskAdmission"], "canary": {"runId": canary_report["runId"], "order": canary_report["order"], "processPid": canary_report["process"]["pid"], "runnerObservedPid": receipt["canary"]["pid"], "runtimeOperationIndex": receipt["runtimeOperations"].index(f"NATIVE_BLENDER_PROCESS_{spec['canary']['runId']}"), "decision": receipt["canaryDecision"]}, "observations": observations, "comparisons": comparisons, "operationCounts": operation_counts, "nonClaims": spec["nonClaims"], "baseFailure": None}
+    evidence = {"schemaVersion": "bfs.nativeMetalProductionHoldoutEvidence.v0.1", "experimentId": spec["experimentId"], "analysisCorrection": {"id": "B51-H1-C1", "scope": "Isolate attack cases from an already-negative observed baseline; accept an audited negative verdict without changing renders, metrics, thresholds or the base failure."}, "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"], "runtime": {"python": platform.python_version(), "openImageIO": oiio.VERSION_STRING, "numpy": np.__version__}, "parents": receipt["parents"], "parentObservations": receipt["parentObservations"], "sourceObservations": receipt["sourceObservations"], "sourcePostObservations": receipt["sourcePostObservations"], "blenderObservation": receipt["blenderObservation"], "diskAdmission": receipt["diskAdmission"], "canary": {"runId": canary_report["runId"], "order": canary_report["order"], "processPid": canary_report["process"]["pid"], "runnerObservedPid": receipt["canary"]["pid"], "runtimeOperationIndex": receipt["runtimeOperations"].index(f"NATIVE_BLENDER_PROCESS_{spec['canary']['runId']}"), "decision": receipt["canaryDecision"]}, "observations": observations, "comparisons": comparisons, "operationCounts": operation_counts, "nonClaims": spec["nonClaims"], "baseFailure": None}
     evidence["evidenceCoreHash"] = canonical_hash(hash_payload(evidence)); failure = validate(evidence, spec); evidence["baseFailure"] = failure; evidence["evidenceCoreHash"] = canonical_hash(hash_payload(evidence)); failure = validate(evidence, spec); evidence["baseFailure"] = failure
     evidence["attacks"] = attacks(evidence, spec); evidence["attacksPassed"] = sum(item["passed"] for item in evidence["attacks"])
     evidence["verdict"] = "NATIVE_METAL_PRODUCTION_HOLDOUT_SUPPORTED" if failure is None and evidence["attacksPassed"] == len(spec["attacks"]) else "NATIVE_METAL_PRODUCTION_HOLDOUT_NOT_SUPPORTED"

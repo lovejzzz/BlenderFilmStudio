@@ -50,7 +50,8 @@ def main() -> None:
         frozen_match = all(item["match"] for item in frozen)
         parent_match = all(item["match"] for item in receipt["parentObservations"])
         source_match = all(item["match"] for item in [*receipt["sourceObservations"], *receipt["sourcePostObservations"]])
-        passed = exact and frozen_match and parent_match and source_match and result["verdict"] == "NATIVE_METAL_PRODUCTION_HOLDOUT_SUPPORTED" and result["attacksPassed"] == len(spec["attacks"])
+        verdict_valid = (result["verdict"] == "NATIVE_METAL_PRODUCTION_HOLDOUT_SUPPORTED" and result["baseFailure"] is None) or (result["verdict"] == "NATIVE_METAL_PRODUCTION_HOLDOUT_NOT_SUPPORTED" and result["baseFailure"] is not None)
+        passed = exact and frozen_match and parent_match and source_match and verdict_valid and result["attacksPassed"] == len(spec["attacks"])
         audit = {"schemaVersion": "bfs.nativeMetalProductionHoldoutAudit.v0.1", "status": "PASS" if passed else "FAIL", "resultsSha256": sha256_file(args.results), "replaySha256": sha256_file(replay), "byteExactReplay": exact, "verdict": result["verdict"], "attacksPassed": result["attacksPassed"], "attackCount": len(result["attacks"]), "evidenceCoreHash": result["evidenceCoreHash"], "toolHashes": {"analyzer": sha256_file(analyzer), "audit": sha256_file(Path(__file__))}, "frozenToolChecks": frozen, "frozenToolsMatch": frozen_match, "parentIdentityMatch": parent_match, "sourceIdentityMatch": source_match, "replayStdout": process.stdout.strip(), "failures": [] if passed else ["RESULT_REPLAY_OR_GATE_MISMATCH"]}
         args.output.write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(f"BFS_B51_H1_AUDIT {audit['status']} replay={'MATCH' if exact else 'DIFF'}", flush=True)
