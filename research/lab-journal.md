@@ -1627,6 +1627,22 @@ The exact auxiliary-pass requirement is deliberately conservative because no dow
 
 Artifacts: `specs/native-cpu-adaptive-production-holdout.v0.1.json` and `research/2026-08-27-b52-d2-native-cpu-adaptive-production-holdout-protocol.md`.
 
+## J-098 · B52-D2 tools freeze with zero formal renders
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Runtime: host Python plus one zero-render Blender 5.2 process
+
+The D2 renderer, runner, analyzer, independent audit and synthetic analysis-contract test were frozen at commit `d0e6e157c83aa72e77bce560caf9d42974b42d3a`. The receipt also binds the reused D1 renderer/analyzer libraries, so imported code cannot escape the frozen-tool audit.
+
+The frozen runner resolved seven parent identities, two source `.blend` files plus OCIO, six immutable references, seven tool blobs and the exact Blender executable. It expanded the preregistered matrix to 54 cells and admitted the projected 384 MiB write while preserving the 100 GiB reserve: 108,337,467,392 bytes free before projection and 107,934,814,208 after projection.
+
+A real Blender 5.2 process loaded TABLETOP, replayed four registered scene operations, selected only the Apple M4 Max CPU and observed the explicit production control as adaptive true, max 128, threshold `0.009999999776...`, min 0, four threads and Sample Count enabled. It performed zero renders and wrote no formal output.
+
+Four synthetic contract tests passed under Blender's Python/OpenImageIO runtime. They prove that the validator distinguishes a valid positive from a valid no-selection negative, classifies baseline failure as INVALID, catches cost-field tampering and routes all 22 injected attacks to their expected failure reasons. These tests validate decision logic, not image quality.
+
+The formal D2 output root remains absent. Next is the unchanged 54-process run, followed by analyzer replay and independent audit before any production claim.
+
+Artifact: `experiments/native-cpu-adaptive-production-preflight-v0-1/observation.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

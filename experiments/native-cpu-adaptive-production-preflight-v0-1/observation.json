@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "bfs.nativeCpuAdaptiveProductionPreflightObservation.v0.1",
+  "experimentId": "B52-D2",
+  "status": "PASS",
+  "observedAt": "2026-08-27",
+  "preregistration": {
+    "commit": "5467a234c98d4e632705f32ad1209b1703105266",
+    "specSha256": "41288927f5f12c2488b9e9396ff943a152b736157264d156bfea26806eb5273e",
+    "specUri": "specs/native-cpu-adaptive-production-holdout.v0.1.json"
+  },
+  "toolFreezeCommit": "d0e6e157c83aa72e77bce560caf9d42974b42d3a",
+  "tools": {
+    "analysisContractTest": {
+      "sha256": "1e39d323df3f75233c20cb73c7d21a0b43a58bfb9cc3553c9960fb8650ac918b",
+      "uri": "tests/test_b52_d2_analysis_contract.py"
+    },
+    "analysisLibrary": {
+      "sha256": "058322e62c850a1b2172b32fc3a5b28bc86580aff39ef15bf8c039011f56053f",
+      "uri": "scripts/analyze-b52-native-cpu-adaptive-quality-cost.py"
+    },
+    "analyzer": {
+      "sha256": "6e10b26168b8b3513202985317b35f167d765b5915f71c394a4708793ca44cd9",
+      "uri": "scripts/analyze-b52-d2-native-cpu-adaptive-production.py"
+    },
+    "audit": {
+      "sha256": "ecf7c8d75f77de43ba5bcba5f4c48adcd89cdf63158e1bac23092c3a08f2f598",
+      "uri": "scripts/audit-b52-d2-native-cpu-adaptive-production.py"
+    },
+    "renderer": {
+      "sha256": "7d589f82d9bc3949fabaf711f139aed816fa7ba9b3fb07e8b09c3764eca94d50",
+      "uri": "blender/render_b52_d2_native_cpu_adaptive_production.py"
+    },
+    "rendererLibrary": {
+      "sha256": "3dc5b7219a90628a9b50616b1a942e9143703ae1bc0239289d15b6345d56ab82",
+      "uri": "blender/render_b52_native_cpu_adaptive_quality_cost.py"
+    },
+    "runner": {
+      "sha256": "13455a1d96cbb5d13a34ee9295ad891c0752e4cc9cf4f651bc19df64bc32b6c5",
+      "uri": "scripts/run-b52-d2-native-cpu-adaptive-production.py"
+    }
+  },
+  "runnerPreflight": {
+    "status": "PASS",
+    "blenderIdentity": true,
+    "frozenTools": 7,
+    "matrixCells": 54,
+    "parentIdentities": 7,
+    "sourceIdentities": 3,
+    "referenceIdentities": 6,
+    "diskAdmission": {
+      "availableBytes": 108337467392,
+      "projectedWriteBytes": 402653184,
+      "freeAfterProjectedBytes": 107934814208,
+      "minimumReserveBytes": 107374182400,
+      "status": "ACCEPTED"
+    },
+    "renders": 0
+  },
+  "realBlenderZeroRenderPreflight": {
+    "status": "PASS",
+    "blenderVersion": "5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "variantId": "TABLETOP_WIDE",
+    "profileId": "PROD_T010_M0",
+    "sourceSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+    "bindingsMatch": true,
+    "operationCount": 4,
+    "selectedDevice": {
+      "id": "CPU",
+      "name": "Apple M4 Max",
+      "type": "CPU"
+    },
+    "settings": {
+      "engine": "CYCLES",
+      "cyclesDevice": "CPU",
+      "maxSamples": 128,
+      "seed": 24841402,
+      "adaptive": true,
+      "noiseThresholdObserved": 0.009999999776482582,
+      "noiseThresholdRegistered": 0.01,
+      "minSamples": 0,
+      "threads": 4,
+      "sampleCountPass": true
+    },
+    "renders": 0
+  },
+  "analysisContractTests": {
+    "runtime": "Blender 5.2 Python 3.13",
+    "tests": 4,
+    "passed": 4,
+    "failed": 0,
+    "injectedAttacks": 22,
+    "injectedAttacksPassed": 22,
+    "coveredBranches": [
+      "valid positive selection",
+      "valid negative result without invalidation",
+      "baseline failure classification",
+      "cost tamper detection"
+    ]
+  },
+  "formalOutputRootAbsent": true,
+  "formalRenders": 0,
+  "nonClaims": [
+    "formal B52-D2 result",
+    "candidate quality or cost",
+    "unseen-scene generalization"
+  ]
+}
