@@ -1153,6 +1153,18 @@ A nonfatal PulseAudio warning also showed `/work/tmp` absent; it is recorded but
 
 Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-5/` and `research/2026-08-26-b41-c4-eevee-enum-failure.md`.
 
+## J-066 · B41-C5 saves the scene but Eevee exceeds the success timeout
+
+Type: preregistered Blender 5.2 enum correction, real render-boundary rejection, 2026-08-26.
+
+The corrected `BLENDER_EEVEE` assignment passed. The constrained success container created its write probe and saved a `95641`-byte `.blend`, then emitted three `EGL_BAD_MATCH` messages and produced no PNG/report before 30 seconds. TERM at `30002 ms` ended Blender with exit 143 at `30096 ms`; KILL was unnecessary.
+
+The separate timeout canary again reached READY, recorded TERM, received KILL and exited 137 as non-promotable. Independent audit matched tools and the partial artifact set but correctly failed success.
+
+Status: `REJECTED_EEVEE_HEADLESS_OR_EMULATION_TIMEOUT`. The observation does not yet distinguish slow QEMU execution from a headless EGL backend failure. Next is a preregistered diagnostic with render milestones, a fixed time ladder and an explicit software-headless environment factor; it cannot promote B41 by itself.
+
+Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-6/` and `research/2026-08-26-b41-c5-eevee-headless-timeout.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

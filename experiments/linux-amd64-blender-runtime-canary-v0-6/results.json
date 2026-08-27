@@ -1,0 +1,475 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderRuntimeEvidence.v0.6",
+  "experimentId": "B41-C5",
+  "status": "REAL_LINUX_AMD64_BLENDER_RUNTIME_AND_TIMEOUT_CANARY",
+  "preregistration": {
+    "commit": "53746d9fd484e8e9e8f01f3334acff51f4f8ecce",
+    "specSha256": "96f7d6ab2e802667ebd168a2acd3a8e578e0f7b48135bd132edc73d9ae202919"
+  },
+  "architectureCorrection": {
+    "parentSpecSha256": "63c5787f9566fb70dd2a250cb170d2d93ef13f5b3b426005562bd9283d308eb9",
+    "parentPreregistrationCommit": "01502eb2ec23e113644e97436cd92b9118d5bac1",
+    "parentToolFreezeCommit": "71060db6f17246872470b4009044f1d8b2562579",
+    "rawDockerArchitecture": "arm64",
+    "canonicalDockerArchitecture": "aarch64",
+    "changedImplementationExact": "Normalize the Docker Server.Arch value arm64 to aarch64 before comparing and recording the frozen canonical server architecture."
+  },
+  "toolingCorrection": {
+    "c1SpecSha256": "4bf1c9ff97e395246148bae972455531b596fe38b0ad864a1a591c7b54b18aa1",
+    "c1PreregistrationCommit": "4974302e48922e9ca98a7253c0e6da17f89196d7",
+    "c1ToolFreezeCommit": "b5a699a183831448b7d470b667886b024c7a785d",
+    "failedResultSha256": "c7eee7bf44941ff46959fb800eb718e222bf185f2a037f2019d5ce0387817ef0",
+    "failedAuditSha256": "5d4663558aa7839e25024906bb13ca3898ad34e083a707eaceae46cd949d17f8",
+    "changedImplementationExact": [
+      "Remove the unsupported --progress plain arguments from docker build while preserving every other build argument",
+      "Remove evidenceHash itself from the B41 evidence self-hash projection",
+      "Sort OCIO manifest relative paths by raw UTF-8 byte order equivalent to LC_ALL=C",
+      "In correction mode record the correction library and correction audit URIs paired with their actual hashes"
+    ]
+  },
+  "buildxCorrection": {
+    "c2SpecSha256": "8875a592c9029af78f542547b8d07e2b189bc0e518fa9f693a474438c28dd38e",
+    "c2PreregistrationCommit": "a3b401750d0f097088e269aa712d2dafb83a7b80",
+    "c2ToolFreezeCommit": "12bf83684b3bc380c61398c39285cf30657e6197",
+    "failedResultSha256": "719902283d0f08d51319d73fbc51b74d7b4b42de3172ffbee7c4607a66dd9135",
+    "failedAuditSha256": "9419d0dfe0853d00eb838668fea213fcff502af1cb8ead6ff13ed0eb8e5fb7a5",
+    "changedImplementationExact": "Replace the host docker legacy build invocation with the existing Colima guest docker buildx build --platform linux/amd64 --pull --load --progress plain invocation against the same absolute virtiofs build context."
+  },
+  "buildTransport": {
+    "buildxVersion": "v0.34.1",
+    "builderName": "default",
+    "driver": "docker",
+    "buildkitVersion": "v0.30.0",
+    "platforms": [
+      "linux/arm64",
+      "linux/amd64",
+      "linux/amd64/v2",
+      "linux/386"
+    ],
+    "command": [
+      "colima",
+      "ssh",
+      "--",
+      "docker",
+      "buildx",
+      "build",
+      "--platform",
+      "linux/amd64",
+      "--pull",
+      "--load",
+      "--progress",
+      "plain",
+      "--tag",
+      "bfs-blender-worker:5.2.0-b41",
+      "--file",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b41-c5-worktree/.bfs-b41-X8vBhT/build/Dockerfile",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/.bfs-b41-c5-worktree/.bfs-b41-X8vBhT/build"
+    ]
+  },
+  "binaryIdentityCorrection": {
+    "parent": {
+      "c3SpecSha256": "d8f3ebca7c181bdced580f3bd588825a246fc80dcd94a352dc536738e3adad9f",
+      "c3PreregistrationCommit": "5ceb0e79b9b4afcc96fccd55212394334ca71a77",
+      "c3ToolFreezeCommit": "fac9ab8493ce4dedbec5bf282c24f53b3f3d52cf",
+      "failedResultSha256": "52030d29021274d5f2ca3444d0d52273ce6faff02661d51483b02cd69119aae6",
+      "failedAuditSha256": "9a7f8bab1b4ae74a7672494db57baa1994a48807b3bfec615dae35ad954d06b1",
+      "failure": "REJECTED_CROSS_PLATFORM_BINARY_IDENTITY_AND_AUDIT_PRE_RUNTIME_ASSUMPTION"
+    },
+    "derivation": {
+      "specSha256": "ffbafff1368ae25a3f82c2b92dc723aff10fb6f5fcd616b7627f4a0d4fa62af1",
+      "preregistrationCommit": "895c506578acd161ba4c14c5e75fb59c90b216b8",
+      "toolFreezeCommit": "2f4545e86e69ad3683e1de1e9297ec07a6f910a3",
+      "resultSha256": "407a327462ecc50e62df28b138e6073095f9816594974883209917b016e44d3c",
+      "auditSha256": "37c9adaf857840774db5ed8584b049b0f4958d5119286b2f995676a912c1ea54",
+      "verdict": "LINUX_AMD64_BLENDER_EXECUTABLE_IDENTITY_DERIVED",
+      "memberBytes": 174666336,
+      "linuxAmd64ExecutableSha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27"
+    },
+    "platformIdentity": {
+      "historicalDarwinExecutableSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "linuxAmd64ExecutableSha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27"
+    },
+    "changedImplementationExact": [
+      "Replace only the Dockerfile Blender executable SHA-256 expected value with the independently derived linux/amd64 value",
+      "Replace only the runtime canary Blender executable SHA-256 expected value with the independently derived linux/amd64 value",
+      "Project the runtime report to the historical macOS identity only inside the inherited analyzer, while separately requiring the unmodified observed report to equal the derived linux/amd64 identity",
+      "Treat absent runtime artifacts as an exact empty object only for a failed pre-runtime receipt; successful claims still require independently observed PNG and blend identities"
+    ]
+  },
+  "eeveeEnumCorrection": {
+    "parent": {
+      "c4SpecSha256": "8dfb22a794c0406d58b2f6b03a7a750206182cb1ff9a864653c27d77aa0f3f19",
+      "c4PreregistrationCommit": "832556390cf38e2bdb9f5a81b94001c19d580540",
+      "c4ToolFreezeCommit": "bca45c7af125940d547bcf2afc782fc5d51b7cb3",
+      "failedResultSha256": "3cc14c978d7c21e9abd48a9608b8f39b03be665e0f24fab2e014fa834a114523",
+      "failedAuditSha256": "e7ba1b22ffd79c6dd38d89d05fc305b3184c6f713557aaeb25a93d684585e87e",
+      "failure": "REJECTED_BLENDER_5_2_EEVEE_ENUM_MISMATCH"
+    },
+    "observedRuntime": {
+      "blenderVersion": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "renderEngineEnumsExact": [
+        "BLENDER_EEVEE",
+        "BLENDER_WORKBENCH",
+        "CYCLES"
+      ],
+      "rejectedIdentifier": "BLENDER_EEVEE_NEXT",
+      "acceptedIdentifier": "BLENDER_EEVEE",
+      "successExitCode": 1,
+      "successElapsedMs": 14465,
+      "timeoutOutcome": "FORCED_TIMEOUT_NON_PROMOTABLE"
+    },
+    "changedImplementationExact": [
+      "Replace only the runtime canary render-engine assignment literal BLENDER_EEVEE_NEXT with BLENDER_EEVEE",
+      "Project the runtime report to BLENDER_EEVEE_NEXT only inside the inherited analyzer, while separately requiring the unmodified observed report to equal BLENDER_EEVEE"
+    ]
+  },
+  "ancestry": {
+    "b38SpecSha256": "c96a6c7d9bf91c0b0f72fa2094ef6b6c0bb778d7443533f661859427715f9514",
+    "b38ResultSha256": "42fe3ceb1b36ded93c7cc40f1f0651c82f30a5e8878bcba3c2ec2eeb8454bf17",
+    "b38AuditSha256": "2c48229f0961faf8b030489ce0c69edd3785797ceeb4fc6e0c25ea990b0204f1",
+    "b39C1ResultSha256": "1898cca99da9215e4fd394df099417a5324d9405e5d6713711486d21875a1edf",
+    "b39C1AuditSha256": "12b292973eb166aea0eccf2fc071fdc730cec7dc102c2ad3d1297f4a7539edc7",
+    "b40R2ResultSha256": "d716466e627eee0b95fffaf544b21cb404ad1b6059d4612c533891e81d08a303",
+    "b40R2AuditSha256": "e1b4b47526b03a0cea0f6e330f9a507941dec4baaca93a1996a16cfba5d24899"
+  },
+  "toolFreezeCommit": "5aa251b8ce1880ecc565e3bf0e6effd70a04f073",
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeBinarySha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+    "dockerHost": "unix:///Users/tianxing/.colima/default/docker.sock",
+    "dockerServerVersion": "29.5.2",
+    "dockerServerArchitecture": "aarch64"
+  },
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b41-linux-amd64-blender-runtime-canary.mjs",
+      "sha256": "cd117efc3beb59cfaf357f2eb3e7f57b8541251e2c32c97c59b2772951902506"
+    },
+    "library": {
+      "uri": "scripts/lib/b41-c5-eevee-enum-correction.mjs",
+      "sha256": "97511008bcdab660dc0ceb05c1b32bd8b5075b45fa86774c4df8b903cebfdb3a"
+    },
+    "audit": {
+      "uri": "scripts/audit-b41-c5-eevee-enum-correction.mjs",
+      "sha256": "323b71f93ce2e8a3bbbb07b582caf62783f014616e31d820ed3257b18b7d7248"
+    },
+    "dockerfile": {
+      "uri": "worker/b41/Dockerfile",
+      "sha256": "1525bd508cbd6b064978c8ce0d080ebc64bb187dca8b3f666b7218915042026c"
+    },
+    "runtimeCanary": {
+      "uri": "fixtures/b41/runtime-canary.py",
+      "sha256": "b644e188702d7a0376350abad7c8d7785b13eff41264398151a24047def631b2"
+    },
+    "timeoutCanary": {
+      "uri": "fixtures/b41/timeout-canary.py",
+      "sha256": "ab0e5e08ad3b66d3f82a9a088b8d7535f4d5dbaa914bf3716c0c71cb80dec14f"
+    }
+  },
+  "diskAdmission": {
+    "availableBytes": "130356801536",
+    "projectedWriteBytes": "21474836480",
+    "minimumReserveBytes": "107374182400",
+    "freeAfterProjectedBytes": "108881965056",
+    "status": "ACCEPTED"
+  },
+  "artifact": {
+    "url": "https://download.blender.org/release/Blender5.2/blender-5.2.0-linux-x64.tar.xz",
+    "filename": "blender-5.2.0-linux-x64.tar.xz",
+    "bytes": 384441228,
+    "sha256": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48"
+  },
+  "inputFixture": {
+    "ocioTreeManifestSha256": "57f58f25ff919ab2acb214ed42e1a904f32b6c97836aea74c1ec87e13e8e0c16"
+  },
+  "image": {
+    "buildExitCode": 0,
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "buildElapsedMs": 112476,
+    "repoTags": [
+      "bfs-blender-worker:5.2.0-b41"
+    ]
+  },
+  "launchContract": {
+    "shell": false,
+    "rootFilesystemReadOnly": true,
+    "network": "none",
+    "privileged": false,
+    "user": "65532:65532",
+    "capDrop": [
+      "ALL"
+    ],
+    "capAdd": [],
+    "noNewPrivileges": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "inputReadOnly": true,
+    "outputWritable": true,
+    "tmpfs": [
+      "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+      "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532"
+    ],
+    "environmentKeysExact": [
+      "BFS_INPUT_ROOT",
+      "BFS_JOB_ID",
+      "BFS_OUTPUT_ROOT",
+      "BFS_REPORT_PATH",
+      "BLENDER_USER_CONFIG",
+      "BLENDER_USER_SCRIPTS",
+      "HOME",
+      "LANG",
+      "LC_ALL",
+      "OCIO",
+      "TMPDIR"
+    ],
+    "environmentValues": {
+      "BFS_INPUT_ROOT": "/inputs",
+      "BFS_OUTPUT_ROOT": "/outputs",
+      "BFS_REPORT_PATH": "/outputs/runtime-report.json",
+      "BLENDER_USER_CONFIG": "/work/blender-config",
+      "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+      "HOME": "/work/home",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "OCIO": "/inputs/ocio/config.ocio",
+      "TMPDIR": "/work/tmp"
+    },
+    "blenderArgvPrefix": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--offline-mode"
+    ],
+    "pythonFailureArgs": [
+      "--python-exit-code",
+      "1"
+    ]
+  },
+  "runtimeOperationsExecuted": [
+    "DOCKER_BUILD",
+    "DOCKER_IMAGE_INSPECT",
+    "DOCKER_RUN_SUCCESS",
+    "DOCKER_KILL_TERM",
+    "DOCKER_RUN_TIMEOUT",
+    "DOCKER_KILL_TERM",
+    "DOCKER_KILL_KILL",
+    "DOCKER_RUNNING_CONTAINER_CHECK"
+  ],
+  "success": {
+    "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "platform": "linux/amd64",
+    "argv": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--offline-mode",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "/inputs/runtime-canary.py"
+    ],
+    "environment": {
+      "BFS_INPUT_ROOT": "/inputs",
+      "BFS_JOB_ID": "B41-SUCCESS-01",
+      "BFS_OUTPUT_ROOT": "/outputs",
+      "BFS_REPORT_PATH": "/outputs/runtime-report.json",
+      "BLENDER_USER_CONFIG": "/work/blender-config",
+      "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+      "HOME": "/work/home",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "OCIO": "/inputs/ocio/config.ocio",
+      "TMPDIR": "/work/tmp"
+    },
+    "exitCode": 143,
+    "signal": null,
+    "elapsedMs": 30096,
+    "stdout": "00:00.187  color_management | Using OCIO=/inputs/ocio/config.ocio\n",
+    "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\n",
+    "timedOut": true,
+    "timeoutTriggered": true,
+    "termSent": true,
+    "forceKillSent": false,
+    "termAtMs": 30002,
+    "forceAtMs": null,
+    "report": null,
+    "artifacts": {
+      "png": {
+        "valid": false,
+        "dimensions": null,
+        "bytes": 0,
+        "sha256": null
+      },
+      "blend": {
+        "bytes": 95641,
+        "sha256": "55112b7b7c878f7b751301e4d14d33706202538671caa681c856d63cad19ce3d"
+      }
+    },
+    "promotable": false
+  },
+  "timeout": {
+    "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "platform": "linux/amd64",
+    "argv": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--offline-mode",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "/inputs/timeout-canary.py"
+    ],
+    "environment": {
+      "BFS_INPUT_ROOT": "/inputs",
+      "BFS_JOB_ID": "B41-TIMEOUT-01",
+      "BFS_OUTPUT_ROOT": "/outputs",
+      "BFS_REPORT_PATH": "/outputs/runtime-report.json",
+      "BLENDER_USER_CONFIG": "/work/blender-config",
+      "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+      "HOME": "/work/home",
+      "LANG": "C.UTF-8",
+      "LC_ALL": "C.UTF-8",
+      "OCIO": "/inputs/ocio/config.ocio",
+      "TMPDIR": "/work/tmp"
+    },
+    "exitCode": 137,
+    "signal": null,
+    "elapsedMs": 35074,
+    "stdout": "00:00.194  color_management | Using OCIO=/inputs/ocio/config.ocio\nBFS_B41_TIMEOUT_CANARY=READY\n",
+    "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n",
+    "timedOut": true,
+    "timeoutTriggered": true,
+    "termSent": true,
+    "forceKillSent": true,
+    "termAtMs": 30002,
+    "forceAtMs": 35022,
+    "readyObserved": true,
+    "sigtermObserved": true,
+    "outcome": "FORCED_TIMEOUT_NON_PROMOTABLE",
+    "promotable": false
+  },
+  "cleanup": {
+    "experimentContainersRunningAfter": 0,
+    "temporaryBuildRootRemoved": true
+  },
+  "errors": [],
+  "evidenceHash": "f1af52afc960daff4f30ab6ad8040b7e7dc9f6bd62efa1a5aa7770ab3180910d",
+  "analysis": {
+    "schemaVersion": "bfs.linuxAmd64BlenderRuntimeAnalysis.v0.6",
+    "passed": false,
+    "failures": [
+      "EEVEE_RUNTIME_IDENTITY",
+      "LINUX_BINARY_RUNTIME_IDENTITY",
+      "SUCCESS_PROCESS",
+      "SUCCESS_CANARIES",
+      "BLENDER_RUNTIME",
+      "SUCCESS_ARTIFACTS",
+      "SUCCESS_PROMOTION"
+    ],
+    "c4Analysis": {
+      "schemaVersion": "bfs.linuxAmd64BlenderRuntimeAnalysis.v0.5",
+      "passed": false,
+      "failures": [
+        "LINUX_BINARY_RUNTIME_IDENTITY",
+        "SUCCESS_PROCESS",
+        "SUCCESS_CANARIES",
+        "BLENDER_RUNTIME",
+        "SUCCESS_ARTIFACTS",
+        "SUCCESS_PROMOTION"
+      ],
+      "c3Analysis": {
+        "schemaVersion": "bfs.linuxAmd64BlenderRuntimeAnalysis.v0.4",
+        "passed": false,
+        "failures": [
+          "SUCCESS_PROCESS",
+          "SUCCESS_CANARIES",
+          "BLENDER_RUNTIME",
+          "SUCCESS_ARTIFACTS",
+          "SUCCESS_PROMOTION"
+        ],
+        "c2Analysis": {
+          "schemaVersion": "bfs.linuxAmd64BlenderRuntimeAnalysis.v0.3",
+          "passed": false,
+          "failures": [
+            "SUCCESS_PROCESS",
+            "SUCCESS_CANARIES",
+            "BLENDER_RUNTIME",
+            "SUCCESS_ARTIFACTS",
+            "SUCCESS_PROMOTION"
+          ],
+          "c1Analysis": {
+            "schemaVersion": "bfs.linuxAmd64BlenderRuntimeAnalysis.v0.2",
+            "passed": false,
+            "failures": [
+              "ARCH_CORRECTION_EVIDENCE_SELF_HASH",
+              "SUCCESS_PROCESS",
+              "SUCCESS_CANARIES",
+              "BLENDER_RUNTIME",
+              "SUCCESS_ARTIFACTS",
+              "SUCCESS_PROMOTION",
+              "EVIDENCE_SELF_HASH"
+            ],
+            "parentAnalysis": {
+              "schemaVersion": "bfs.linuxAmd64BlenderRuntimeAnalysis.v0.1",
+              "passed": false,
+              "failures": [
+                "SUCCESS_PROCESS",
+                "SUCCESS_CANARIES",
+                "BLENDER_RUNTIME",
+                "SUCCESS_ARTIFACTS",
+                "SUCCESS_PROMOTION",
+                "EVIDENCE_SELF_HASH"
+              ],
+              "decision": "SUCCESS_PROCESS"
+            },
+            "decision": "ARCH_CORRECTION_EVIDENCE_SELF_HASH"
+          },
+          "correctedParentFailures": [
+            "SUCCESS_PROCESS",
+            "SUCCESS_CANARIES",
+            "BLENDER_RUNTIME",
+            "SUCCESS_ARTIFACTS",
+            "SUCCESS_PROMOTION"
+          ],
+          "decision": "SUCCESS_PROCESS"
+        },
+        "decision": "SUCCESS_PROCESS"
+      },
+      "decision": "LINUX_BINARY_RUNTIME_IDENTITY"
+    },
+    "decision": "EEVEE_RUNTIME_IDENTITY"
+  },
+  "verdict": "LINUX_AMD64_BLENDER_5_2_CANARY_FAILED",
+  "nonClaims": [
+    "Best-effort x64 emulation is not a production performance or availability claim",
+    "A 32x32 synthetic Eevee frame is not a cinematic-quality result",
+    "Container controls do not prove protection from every kernel, daemon, parser, GPU or denial-of-service vulnerability",
+    "Resource ceiling introspection is not an OOM, fork-bomb or sustained CPU-throttle stress test",
+    "B41 does not establish cross-host, cross-architecture or pixel-level determinism",
+    "The worker image remains experimental and is not selected as a production backend",
+    "B41-C1 changes an architecture label normalization only",
+    "It does not treat x64 emulation as native ARM64 or as production support",
+    "All B41 failure and non-claim boundaries remain active",
+    "B41-C2 changes four demonstrated tooling defects only",
+    "A later build, dependency, Blender, render, isolation or timeout failure remains a valid rejection",
+    "All B41 and B41-C1 non-claims remain active",
+    "B41-C3 changes build transport only",
+    "Buildx platform support does not itself prove the final image or Blender runtime",
+    "All previous runtime and production non-claims remain active",
+    "B41-C4 corrects platform-specific executable identity only",
+    "A successful canary is not production workload, throughput, visual quality or hostile-kernel isolation evidence",
+    "qemu behavior does not prove native x86-64 or cloud-worker behavior",
+    "No SceneSpec compiler job runs in B41-C4",
+    "B41-C5 corrects only the Blender 5.2 Eevee enum identifier",
+    "The nonfatal /work/tmp warning remains an unresolved observation",
+    "A successful 32x32 canary is not cinematic quality, production throughput or hostile-kernel isolation evidence",
+    "No SceneSpec compiler job runs in B41-C5"
+  ]
+}
