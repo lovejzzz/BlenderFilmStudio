@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "bfs.layerDepthTemporalAccumulationCalibration.v0.1",
+  "experimentId": "B52-D9",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "question": "On unseen analytic two-layer sequences with exact ground truth, can two independent implementations produce the exact same history-validity mask and ghost-free float32 temporal accumulation, then survive the D8 Blender 5.2 Raw EXR bridge unchanged?",
+  "formalOutputRoot": "experiments/layer-depth-temporal-accumulation-calibration-v0-1",
+  "projectedWriteBytes": 33554432,
+  "diskReserveBytes": 107374182400,
+  "parents": {
+    "d8Spec": {
+      "uri": "specs/external-canonical-warp-bridge.v0.1.json",
+      "sha256": "94a58f4e3c36b1828cb7e1bc4d5646cd577fac1afd411685235185590644a6a5"
+    },
+    "d8Result": {
+      "uri": "experiments/external-canonical-warp-bridge-v0-1/results.json",
+      "sha256": "153340e4f7d76bb9e530a26347e6582974850d7fdcb423b1b7799aaa7ad3a1fb",
+      "verdict": "EXTERNAL_CANONICAL_WARP_BRIDGE_SUPPORTED"
+    },
+    "d8Audit": {
+      "uri": "experiments/external-canonical-warp-bridge-v0-1/audit.json",
+      "sha256": "8ded86e46e0fdb6b99b55c304317d09ea6db4b4c8b9bbd553bd578ea93bee8fd",
+      "status": "PASS"
+    }
+  },
+  "normativeSources": [
+    {
+      "authority": "Blender Manual 5.2",
+      "url": "https://docs.blender.org/manual/en/5.2/render/layers/passes.html",
+      "use": "Depth is nearest visible-surface distance; Vector contains next/previous screen-space motion pairs; alpha threshold affects data-pass surface ownership"
+    },
+    {
+      "authority": "AMD FidelityFX FSR2 2.3.3 manual",
+      "url": "https://gpuopen.com/manuals/fidelityfx_sdk/techniques/super-resolution-temporal/",
+      "use": "Depth clipping explicitly marks disocclusion; motion-vector scale/direction and reactive regions are first-class temporal inputs"
+    },
+    {
+      "authority": "Marco Salvi, GDC 2016",
+      "url": "https://developer.download.nvidia.com/gameworks/events/GDC2016/msalvi_temporal_supersampling.pdf",
+      "use": "Temporal supersampling requires reprojection plus history validation/clamping rather than unconditional frame blending"
+    }
+  ],
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "bytes": 183237520,
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "bytes": 5543888,
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "bytes": 50320,
+      "version": "v26.5.0"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    },
+    "blenderCompositorDevice": "CPU",
+    "threads": 1
+  },
+  "coordinateAndValidityContract": {
+    "coordinates": "top-left integer pixel centers",
+    "motionStorage": "current-pixel screen-space integer displacement (dx,dy) in float32",
+    "previousCoordinate": "q=(x-dx,y+dy)",
+    "sampling": "nearest integer only in D9; subpixel filtering is intentionally excluded",
+    "inBounds": "0<=qx<width and 0<=qy<height",
+    "layerOwnership": "current float32 layerId equals previous layerId at q exactly",
+    "depth": "positive camera distance; background sentinel is 1e10",
+    "depthAgreement": "abs(previousDepth(q)-currentDepth)<=max(1,currentDepth)/1024",
+    "alphaAgreement": "both alpha values are greater than zero",
+    "historyValid": "inBounds AND layerOwnership AND depthAgreement AND alphaAgreement",
+    "accumulation": "valid: float32(0.5*currentRGBA + 0.5*previousRGBA(q)); invalid: currentRGBA exactly",
+    "canonicalIdentity": "SHA-256 of top-left row-major little-endian float32 bytes; validity mask uses one byte per pixel"
+  },
+  "analyticConstruction": {
+    "cleanTarget": "piecewise-constant two-layer RGBA image at the current frame",
+    "validPixelNoise": "current and correctly reprojected previous colors receive equal-and-opposite binary-exact noise, so their 0.5 average equals cleanTarget exactly",
+    "invalidPixelCurrent": "current color equals cleanTarget exactly",
+    "wrongHistory": "unvalidated previous color intentionally differs across ownership/depth boundaries",
+    "groundTruth": "both the history-validity mask and clean resolved image are generated directly from layer trajectories, not inferred from the accumulator output"
+  },
+  "fixtures": [
+    {
+      "id": "FOREGROUND_CROSSING_97X61",
+      "resolution": [97, 61],
+      "motion": "foreground dx=8,dy=0; background dx=0,dy=0",
+      "layers": "near red foreground rectangle depth=1 crosses static blue background depth=4",
+      "required": ["occlusion", "disocclusion", "layerIdRejection", "outOfBoundsNone"]
+    },
+    {
+      "id": "CAMERA_PAN_101X59",
+      "resolution": [101, 59],
+      "motion": "all visible layers dx=5,dy=-3",
+      "layers": "near patterned foreground depth=2 over far patterned background depth=8",
+      "required": ["outOfBounds", "twoLayerReprojection", "orientation"]
+    },
+    {
+      "id": "DEPTH_SWAP_SAME_ID_83X47",
+      "resolution": [83, 47],
+      "motion": "moving patch dx=-4,dy=0",
+      "layers": "crossing surfaces intentionally share layerId=7 but use depths 1 and 4",
+      "required": ["depthRejectionIndependentOfId", "disocclusion", "sameIdAttack"]
+    },
+    {
+      "id": "STATIC_CONTROL_73X41",
+      "resolution": [73, 41],
+      "motion": "dx=0,dy=0 everywhere",
+      "layers": "unchanged two-layer composition with complementary valid-pixel noise",
+      "required": ["allHistoryValid", "zeroInvalidPixels", "exactNoiseCancellation"]
+    }
+  ],
+  "sensitivityControls": {
+    "naiveUnconditionalHistory": {
+      "definition": "use reprojected previous color wherever q is in bounds, ignoring layerId and depth",
+      "dynamicFixtureMinimumWrongPixels": 32,
+      "minimumMaximumAbsoluteError": 0.25
+    },
+    "wrongMotionSign": {
+      "definition": "q=(x+dx,y-dy) while every other rule remains unchanged",
+      "movingFixtureMinimumWrongPixels": 32,
+      "minimumMaximumAbsoluteError": 0.25
+    }
+  },
+  "processMatrix": {
+    "pythonAccumulatorProcesses": 4,
+    "nodeAccumulatorProcesses": 4,
+    "exrEncoderProcesses": 8,
+    "blenderRepeatsPerProducerFixture": 2,
+    "blenderProcesses": 16,
+    "totalChildProcesses": 32,
+    "allPidsUnique": true,
+    "blenderRenderCalls": 16,
+    "cyclesRayRenders": 0,
+    "sourceBlendFilesOpened": 0,
+    "generatedExternalExrAssetsOpened": 16
+  },
+  "gates": {
+    "allProcessesExitZero": true,
+    "allPidsUnique": true,
+    "pythonNodeInputsExact": true,
+    "pythonNodeValidityMaskExact": true,
+    "pythonNodeResolvedRgbaExact": true,
+    "validityMaskEqualsAnalyticGroundTruth": true,
+    "resolvedRgbaEqualsCleanGroundTruth": true,
+    "invalidPixelsEqualCurrentExactly": true,
+    "validPixelsEqualCleanTargetExactly": true,
+    "naiveControlSensitive": true,
+    "wrongMotionSignControlSensitive": true,
+    "staticControlAllValid": true,
+    "staticControlResolvedExact": true,
+    "allEncoderDecodedExact": true,
+    "allBlenderDecodedExact": true,
+    "allBlenderRepeatsExact": true,
+    "allProducerPathsConvergeAfterBlender": true,
+    "maximumAbsoluteResolvedError": 0.0,
+    "changedResolvedScalars": 0,
+    "operationCountsExact": true,
+    "diagnosticArtifactsExact": true
+  },
+  "diagnostics": {
+    "perFixture": ["current", "historyValidity", "resolved", "naiveHistoryError"],
+    "expectedPngs": 16,
+    "expectedSidecars": 16,
+    "diagnosticsAreNotMeasurementInputs": true
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "PREREGISTRATION_IDENTITY",
+    "TOOL_FREEZE_IDENTITY",
+    "RUNTIME_IDENTITY",
+    "PROCESS_ROSTER",
+    "PID_UNIQUENESS",
+    "FIXTURE_ROSTER",
+    "PRODUCER_REPORT_BINDING",
+    "INPUT_ARRAY_IDENTITY",
+    "DUAL_INPUT_EXACT",
+    "DUAL_VALIDITY_EXACT",
+    "DUAL_RESOLVED_EXACT",
+    "ANALYTIC_VALIDITY_GROUND_TRUTH",
+    "ANALYTIC_RESOLVED_GROUND_TRUTH",
+    "INVALID_PIXEL_CURRENT_IDENTITY",
+    "VALID_PIXEL_TARGET_IDENTITY",
+    "NAIVE_CONTROL_SENSITIVITY",
+    "WRONG_SIGN_CONTROL_SENSITIVITY",
+    "STATIC_NEGATIVE_CONTROL",
+    "ENCODER_REPORT_BINDING",
+    "EXR_ENCODE_DECODE_IDENTITY",
+    "BLENDER_REPORT_BINDING",
+    "BLENDER_GRAPH_RNA",
+    "BLENDER_OUTPUT_HASH",
+    "BLENDER_DECODED_IDENTITY",
+    "BLENDER_REPEAT_IDENTITY",
+    "PRODUCER_PATH_CONVERGENCE",
+    "DIAGNOSTIC_TOTALITY",
+    "RESULT_SELF_HASH"
+  ],
+  "decisionRule": {
+    "passVerdict": "LAYER_DEPTH_TEMPORAL_ACCUMULATION_CALIBRATION_SUPPORTED",
+    "failVerdict": "LAYER_DEPTH_TEMPORAL_ACCUMULATION_CALIBRATION_NOT_SUPPORTED",
+    "supported": "All exact gates, sensitivity controls and 29 attacks pass.",
+    "notSupported": "Any gate fails; preserve the counterexample and do not connect Blender production Vector/Depth to this accumulator.",
+    "nextIfSupported": "Preregister a real Blender multipart holdout that calibrates Vector component/direction and converts B47 passes into the D9 canonical input convention.",
+    "nextIfNotSupported": "Repair the externally defined validity/accumulation algorithm under a new preregistration before using production passes."
+  },
+  "nonClaims": [
+    "D9 uses analytic integer motion and does not validate Blender Vector component order or sign.",
+    "D9 does not validate subpixel reprojection, transparency mixtures, volumetrics, motion blur, depth of field or arbitrary Cryptomatte coverage.",
+    "D9 does not claim temporal denoising quality, anti-aliasing quality, cinematic quality or human preference.",
+    "D8 transport is reused only for final resolved RGBA; it does not validate semantic input extraction.",
+    "A passing D9 requires a separate real Blender multipart holdout before production use."
+  ]
+}

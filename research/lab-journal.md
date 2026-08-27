@@ -1935,6 +1935,22 @@ This closes a concrete architectural gap: Blender need not be trusted as the hig
 
 Artifacts: `experiments/external-canonical-warp-bridge-v0-1/` and `research/2026-08-27-b52-d8-external-canonical-warp-bridge-result.md`.
 
+## J-119 · B52-D9 freezes ownership/depth history validity before Blender Vector
+
+Date: 2026-08-27 · Type: LAYER/DEPTH TEMPORAL CALIBRATION PREREGISTRATION · Formal outputs: 0
+
+D8 closes exact transport but not temporal correctness. D9 therefore freezes an analytic integer-motion calibration before connecting production Blender passes. This separation is deliberate: Blender 5.2 Vector contains previous/next screen-space pairs, D5 observed a reproducible static Vector floor, and D7 rejected the general Blender Bilinear consumer. Mixing sign/component calibration, subpixel filtering and occlusion in one experiment would make a failure uninterpretable.
+
+Four unseen two-layer fixtures cover foreground crossing, two-axis camera pan, out-of-bounds history, a same-ID/depth-swap attack and a static all-valid control. Current→previous motion is explicitly `q=(x−dx,y+dy)`. History validity requires bounds, exact layer ID, positive depth agreement within `max(1,z)/1024` and nonzero alpha. Valid output is an exact 0.5 current/history average; invalid output is current exactly.
+
+Ground truth comes directly from layer trajectories. Valid pixels receive complementary binary-exact noise so the correct average equals a clean target; invalid current pixels already equal that target. Unconditional history and wrong-sign motion are frozen sensitivity controls, each required to create at least 32 wrong pixels and 0.25 maximum error on applicable moving fixtures.
+
+The formal boundary is 4 Python + 4 Node accumulator processes, 8 EXR encoders and 16 fresh Blender D8-style pass-through processes: 32 unique PIDs, 16 compositor renders and 0 Cycles ray renders. Validity masks, resolved pixels and every decoded bridge output are exact-only. Twenty-nine attacks cover parents, ground truth, controls, transport and replay.
+
+The formal root is absent. Spec SHA-256: `72ce27443350ef2abb1b45a7630b5c9beee09025103ce690bc523421d9f6dc27`; protocol SHA-256: `4c42278636b211d3278786cb665be6f11cd974fd5375e4899863a95fe442242d`. Passing permits only a separate real Blender multipart Vector/Depth adapter holdout.
+
+Artifacts: `specs/layer-depth-temporal-accumulation-calibration.v0.1.json` and `research/2026-08-27-b52-d9-layer-depth-temporal-accumulation-calibration-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
