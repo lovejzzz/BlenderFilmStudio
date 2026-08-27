@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "bfs.codexSceneSpecAdapterDerivationIndependentAudit.v0.1",
+  "experimentId": "B43-D1",
+  "analysis": {
+    "schemaVersion": "bfs.codexSceneSpecAdapterDerivationAnalysis.v0.1",
+    "passed": true,
+    "failures": [],
+    "decision": "CODEX_SCENESPEC_ADAPTER_GOLDENS_DERIVED"
+  },
+  "frozenInputsMatch": true,
+  "toolsMatch": true,
+  "toolObservations": {
+    "library": {
+      "uri": "scripts/lib/b43-codex-scenespec-adapter.mjs",
+      "expectedSha256": "ff2eeb0b976d371dc40421a0b6c25c4ae6476ef8585e7bcff7e039d38329df65",
+      "observedSha256": "ff2eeb0b976d371dc40421a0b6c25c4ae6476ef8585e7bcff7e039d38329df65",
+      "match": true
+    },
+    "runner": {
+      "uri": "scripts/derive-b43-codex-scenespec-adapter.mjs",
+      "expectedSha256": "cb92d3165ad726372de2a58a1270f44ab035607384cf47a499b5345105b04147",
+      "observedSha256": "cb92d3165ad726372de2a58a1270f44ab035607384cf47a499b5345105b04147",
+      "match": true
+    },
+    "audit": {
+      "uri": "scripts/audit-b43-codex-scenespec-adapter.mjs",
+      "expectedSha256": "0ad1e4514309393c05c457222f54134e7e2bf800a36bd730cc0780719fdc7645",
+      "observedSha256": "0ad1e4514309393c05c457222f54134e7e2bf800a36bd730cc0780719fdc7645",
+      "match": true
+    },
+    "planCompiler": {
+      "uri": "scripts/compile-build-plan.mjs",
+      "expectedSha256": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413",
+      "observedSha256": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413",
+      "match": true
+    },
+    "sceneSpecLibrary": {
+      "uri": "scripts/lib/scene-spec.mjs",
+      "expectedSha256": "778607884f2481037bf11ed442b053e3fc72187d12b9f2731363822e21ae588c",
+      "observedSha256": "778607884f2481037bf11ed442b053e3fc72187d12b9f2731363822e21ae588c",
+      "match": true
+    }
+  },
+  "artifactsMatch": true,
+  "caseObservations": [
+    {
+      "briefId": "BRIEF_B43_TABLETOP_PUSH",
+      "proposalSchemaValid": true,
+      "proposalSemanticValid": true,
+      "proposalOracleExact": true,
+      "proposalFileHashMatch": true,
+      "sceneSpecValid": true,
+      "sceneFileHashMatch": true,
+      "planFileHashMatch": true,
+      "planReplayByteEqual": true
+    },
+    {
+      "briefId": "BRIEF_B43_INTERIOR_STILL",
+      "proposalSchemaValid": true,
+      "proposalSemanticValid": true,
+      "proposalOracleExact": true,
+      "proposalFileHashMatch": true,
+      "sceneSpecValid": true,
+      "sceneFileHashMatch": true,
+      "planFileHashMatch": true,
+      "planReplayByteEqual": true
+    },
+    {
+      "briefId": "BRIEF_B43_UNAUTHORIZED_DOWNLOAD",
+      "proposalSchemaValid": true,
+      "proposalSemanticValid": true,
+      "proposalOracleExact": true,
+      "proposalFileHashMatch": true,
+      "rejectedOutputCountsExact": true
+    }
+  ],
+  "attacksMatch": true,
+  "attacks": [
+    {
+      "id": "A01_EXTRA_PROPERTY",
+      "expectedReason": "PROPOSAL_SCHEMA",
+      "observedReason": "PROPOSAL_SCHEMA",
+      "passed": true
+    },
+    {
+      "id": "A02_UNKNOWN_PRESET",
+      "expectedReason": "PROPOSAL_SCHEMA",
+      "observedReason": "PROPOSAL_SCHEMA",
+      "passed": true
+    },
+    {
+      "id": "A03_BRIEF_ID_MISMATCH",
+      "expectedReason": "PROPOSAL_BRIEF_ID",
+      "observedReason": "PROPOSAL_BRIEF_ID",
+      "passed": true
+    },
+    {
+      "id": "A04_ACCEPT_WRONG_COMBINATION",
+      "expectedReason": "PROPOSAL_COMBINATION",
+      "observedReason": "PROPOSAL_COMBINATION",
+      "passed": true
+    },
+    {
+      "id": "A05_ACCEPT_WRONG_REASON",
+      "expectedReason": "PROPOSAL_DECISION_POLICY",
+      "observedReason": "PROPOSAL_DECISION_POLICY",
+      "passed": true
+    },
+    {
+      "id": "A06_REJECT_WITH_PRESET",
+      "expectedReason": "REJECT_PRESETS_NOT_NONE",
+      "observedReason": "REJECT_PRESETS_NOT_NONE",
+      "passed": true
+    },
+    {
+      "id": "A07_UNAUTHORIZED_ACCEPT",
+      "expectedReason": "UNAUTHORIZED_BRIEF_ACCEPTED",
+      "observedReason": "UNAUTHORIZED_BRIEF_ACCEPTED",
+      "passed": true
+    },
+    {
+      "id": "A08_BASE_SCENE_HASH_DRIFT",
+      "expectedReason": "FROZEN_INPUT_HASH",
+      "observedReason": "FROZEN_INPUT_HASH",
+      "passed": true
+    }
+  ],
+  "selfHashMatch": true,
+  "prohibitedOperationCountsExact": true,
+  "passed": true
+}

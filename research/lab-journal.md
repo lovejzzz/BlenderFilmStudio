@@ -1201,6 +1201,18 @@ Independent audit passed tool hashes, regenerated plan files and direct output o
 
 Artifacts: `experiments/linux-amd64-compiler-repro-v0-1/`, `experiments/linux-amd64-compiler-repro-c1-v0-1/`, `research/2026-08-26-b42-nested-mountpoint-failure.md`, and `research/2026-08-26-b42-c1-linux-amd64-compiler-repro-result.md`.
 
+## J-070 · B43-D1 derives the model-independent intent adapter oracle
+
+Type: preregistered deterministic derivation, no model or Blender execution, 2026-08-26.
+
+B43-D1 froze three DirectorIntents, an enum-only ShotProposal schema, a preset catalog, the prompt template, exact proposal answers and every technical SceneSpec replacement value before implementing the adapter. The model-facing object has no path, hash, numeric transform, Blender command or arbitrary-code field.
+
+The formal derivation produced two valid SceneSpecs and byte-identical double-compiled BuildPlans: `SHOT_109` plan hash `60e4cdf7…cb275e` and `SHOT_110` plan hash `9c8cb0e0…d46401`. The unauthorized network/Python brief produced a strict rejection and zero SceneSpec/BuildPlan artifacts. Eight of eight attacks reached the preregistered reason. Independent audit matched frozen inputs, tools, all artifacts, replay and evidence self-hash.
+
+Verdict: `CODEX_SCENESPEC_ADAPTER_GOLDENS_DERIVED`. Operation counts were Codex 0, model 0, Blender 0, container 0 and network 0. This is an answer-key and adapter result, not evidence of model reliability. Next: preregister the exact subscription-authenticated `codex exec` holdout and compare its outputs to these pre-existing oracles without permitting tool calls.
+
+Artifacts: `experiments/codex-scenespec-adapter-derivation-v0-1/`, `specs/codex-scenespec-adapter-derivation.v0.1.json`, `research/2026-08-26-b43-d1-codex-scenespec-adapter-derivation-protocol.md` and `research/2026-08-26-b43-d1-codex-scenespec-adapter-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
