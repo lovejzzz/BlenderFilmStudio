@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "bfs.adaptivePayloadSemanticsDerivationSpec.v0.1",
+  "experimentId": "B52-D3",
+  "status": "PREREGISTERED",
+  "question": "Can the non-exact Cryptomatte, Normal and Vector differences retained by B52-D2 be classified in explicit compositor and stable-surface task domains tightly enough to define a falsifiable future holdout profile, without rerendering or retroactively promoting any D2 candidate?",
+  "designClass": "zero-rerender task-semantics derivation from fully observed B52-D2 evidence",
+  "parentDisclosure": "All B52-D2 aggregate and per-cell results were observed before this derivation. B52-D3 is exploratory/derivational and may only propose thresholds for a future fresh-seed holdout.",
+  "parents": {
+    "d2Spec": {
+      "uri": "specs/native-cpu-adaptive-production-holdout.v0.1.json",
+      "sha256": "41288927f5f12c2488b9e9396ff943a152b736157264d156bfea26806eb5273e"
+    },
+    "d2Receipt": {
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/run.receipt.json",
+      "sha256": "9b50216d10a78cc27b2dd9030b58927c08e7739d6fe3e919092ea0870988d477",
+      "runCount": 54
+    },
+    "d2Result": {
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/results.json",
+      "sha256": "a6ed8b03e8ae15c302e58a05e1a75c49297183eca56330320569ea644914b3ac",
+      "verdict": "NATIVE_CPU_ADAPTIVE_PRODUCTION_HOLDOUT_NOT_SUPPORTED"
+    },
+    "d2Audit": {
+      "uri": "experiments/native-cpu-adaptive-production-holdout-v0-1/audit.json",
+      "sha256": "73ce3fc9a041112a3e54b18c37786c33048d3e4b7a78de6db3b7c500b7b8c129",
+      "status": "PASS"
+    }
+  },
+  "normativeSources": {
+    "passes": {
+      "uri": "https://docs.blender.org/manual/en/latest/render/layers/passes.html",
+      "claims": [
+        "Normal is the surface normal used for shading.",
+        "Vector contains motion vectors for the Vector Blur node.",
+        "Data passes are subject to alpha-threshold surface selection."
+      ]
+    },
+    "cryptomatte": {
+      "uri": "https://docs.blender.org/manual/en/latest/compositing/types/mask/cryptomatte.html",
+      "claims": [
+        "Cryptomatte produces object mattes for compositing.",
+        "Its mattes are anti-aliased and account for effects such as motion blur and transparency."
+      ]
+    }
+  },
+  "inputs": {
+    "outputRoot": "experiments/native-cpu-adaptive-production-holdout-v0-1",
+    "baselineProfile": "PROD_T010_M0",
+    "candidateProfiles": [
+      "ADAPT_T015_M0",
+      "ADAPT_T015_M32",
+      "ADAPT_T020_M0",
+      "ADAPT_T020_M32",
+      "ADAPT_T030_M0",
+      "ADAPT_T030_M32",
+      "ADAPT_T050_M0",
+      "ADAPT_T050_M32"
+    ],
+    "variants": [
+      "TABLETOP_WIDE",
+      "INTERIOR_CHAIR"
+    ],
+    "verifiedArtifacts": 54,
+    "representativeRepeat": 1,
+    "analyzedCandidateBaselinePairs": 16,
+    "repeatIdentityRequirement": "all three repeats exact across all eight decoded parts before representative-repeat reduction"
+  },
+  "regionContract": {
+    "depthForegroundThreshold": 1000000000.0,
+    "confidentDominantCoverage": 0.999,
+    "connectivity": 4,
+    "boundarySeeds": [
+      "four-neighbor change in baseline dominant Cryptomatte ID on foreground pixels",
+      "any baseline visible-object matte with alpha strictly between zero and one"
+    ],
+    "dilation": {
+      "metric": "Chebyshev",
+      "radiusPixels": 1
+    },
+    "stableInterior": "baseline depth foreground AND dominant coverage >= 0.999 AND outside the one-pixel dilated boundary"
+  },
+  "cryptomatteTask": {
+    "decode": "Cryptomatte 1.2.0 six ranked ID/coverage pairs using the baseline manifest",
+    "perVisibleObjectMeasurements": [
+      "hardMatteMismatchPixels",
+      "hardMatteMismatchPixelsInsideBoundary",
+      "hardMatteMismatchPixelsStableInterior",
+      "alphaAbsoluteErrorP50",
+      "alphaAbsoluteErrorP95",
+      "alphaAbsoluteErrorP99",
+      "alphaAbsoluteErrorMaximum",
+      "alphaAbsoluteErrorRmse",
+      "changedAlphaBoundaryLocalizationFraction"
+    ],
+    "unitContrastComposite": {
+      "definition": "RGB = matte * foreground + (1 - matte) * background",
+      "foregrounds": [
+        [
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "background": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measurements": [
+        "rgbAbsoluteErrorP99",
+        "rgbAbsoluteErrorMaximum",
+        "rgbRmse"
+      ]
+    },
+    "derivationClassifier": {
+      "stableInteriorHardMatteMismatchPixels": 0,
+      "stableInteriorConfidentDominantIdMismatchPixels": 0,
+      "minimumChangedAlphaBoundaryLocalizationFraction": 0.95,
+      "unitContrastCompositeP99Maximum": 0.00392156862745098,
+      "unitContrastCompositeAbsoluteMaximum": 0.05
+    }
+  },
+  "normalTask": {
+    "channels": [
+      "X",
+      "Y",
+      "Z"
+    ],
+    "domain": "stableInterior",
+    "normalizationEpsilon": 0.000001,
+    "measurements": [
+      "validVectorMaskMismatchPixels",
+      "angularErrorDegreesP50",
+      "angularErrorDegreesP95",
+      "angularErrorDegreesP99",
+      "angularErrorDegreesMaximum",
+      "changedNormalBoundaryLocalizationFraction"
+    ],
+    "lambertianProbeDirections": [
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      [
+        -0.7071067811865475,
+        0.0,
+        0.7071067811865475
+      ],
+      [
+        0.0,
+        0.7071067811865475,
+        0.7071067811865475
+      ],
+      [
+        0.0,
+        -0.7071067811865475,
+        0.7071067811865475
+      ]
+    ],
+    "derivationClassifier": {
+      "validVectorMaskMismatchPixels": 0,
+      "angularErrorDegreesP99Maximum": 0.25,
+      "angularErrorDegreesAbsoluteMaximum": 2.0,
+      "lambertianAbsoluteErrorP99Maximum": 0.0009765625,
+      "lambertianAbsoluteErrorMaximum": 0.00392156862745098,
+      "minimumChangedNormalBoundaryLocalizationFraction": 0.95
+    }
+  },
+  "vectorTask": {
+    "channels": [
+      "X",
+      "Y",
+      "Z",
+      "W"
+    ],
+    "domain": "stableInterior",
+    "pairing": {
+      "pairA": [
+        "X",
+        "Y"
+      ],
+      "pairB": [
+        "Z",
+        "W"
+      ],
+      "directionNonClaim": "The derivation does not assign previous/next temporal direction to either pair."
+    },
+    "nonzeroEpsilon": 0.000001,
+    "measurements": [
+      "nonzeroSupportMismatchPixels",
+      "pairAEndpointErrorP50",
+      "pairAEndpointErrorP95",
+      "pairAEndpointErrorP99",
+      "pairAEndpointErrorMaximum",
+      "pairBEndpointErrorP50",
+      "pairBEndpointErrorP95",
+      "pairBEndpointErrorP99",
+      "pairBEndpointErrorMaximum",
+      "changedVectorBoundaryLocalizationFraction"
+    ],
+    "derivationClassifier": {
+      "stableInteriorNonzeroSupportMismatchPixels": 0,
+      "pairEndpointErrorP99Maximum": 0.0009765625,
+      "pairEndpointErrorAbsoluteMaximum": 0.015625,
+      "minimumChangedVectorBoundaryLocalizationFraction": 0.95
+    }
+  },
+  "diagnostics": {
+    "profiles": [
+      "ADAPT_T015_M0",
+      "ADAPT_T020_M32",
+      "ADAPT_T050_M32"
+    ],
+    "variants": 2,
+    "mapsPerPair": [
+      "cryptomatte-maximum-alpha-error",
+      "normal-angular-error-degrees",
+      "vector-maximum-pair-endpoint-error"
+    ],
+    "pngCount": 18,
+    "mapping": "frozen linear or clipped mappings recorded in each PNG sidecar"
+  },
+  "decisionRule": {
+    "usableVerdict": "ADAPTIVE_PAYLOAD_SEMANTICS_DERIVATION_USABLE",
+    "invalidVerdict": "ADAPTIVE_PAYLOAD_SEMANTICS_DERIVATION_INVALID",
+    "futureHoldoutCandidate": "profile passes Crypto, Normal and Vector derivation classifiers on both variants; this is a proposal only and cannot change B52-D2",
+    "noCandidateIsStillUsable": true
+  },
+  "evidenceGates": {
+    "parentIdentity": true,
+    "all54ArtifactIdentities": true,
+    "all18RepeatGroupsExact": true,
+    "measurementTotality": true,
+    "diagnosticIdentity": true,
+    "independentReplay": true,
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "67108864"
+  },
+  "outputRoot": "experiments/adaptive-payload-semantics-derivation-v0-1",
+  "operationBoundary": {
+    "existingExrsOpened": 54,
+    "candidateBaselinePairsAnalyzed": 16,
+    "diagnosticPngsWritten": 18,
+    "blenderProcesses": 0,
+    "renders": 0,
+    "sourceFilesModified": 0,
+    "parentExrsModified": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0
+  },
+  "nonClaims": [
+    "retroactive B52-D2 promotion",
+    "production-safe payload tolerance",
+    "temporal Vector Blur equivalence",
+    "human-visible compositing equivalence",
+    "unseen-seed, unseen-frame or unseen-scene generalization",
+    "scene-conditioned threshold selection",
+    "render cost improvement",
+    "2K or 4K behavior"
+  ],
+  "attacks": [
+    "PARENT_IDENTITY",
+    "ARTIFACT_IDENTITY",
+    "PASS_ROSTER",
+    "REPEAT_IDENTITY",
+    "CRYPTOMATTE_MANIFEST",
+    "REGION_TOTALITY",
+    "CRYPTOMATTE_MEASUREMENT_TOTALITY",
+    "NORMAL_MEASUREMENT_TOTALITY",
+    "VECTOR_MEASUREMENT_TOTALITY",
+    "DIAGNOSTIC_TOTALITY",
+    "CLASSIFICATION_REPLAY",
+    "OPERATION_BOUNDARY",
+    "EVIDENCE_SELF_HASH"
+  ]
+}

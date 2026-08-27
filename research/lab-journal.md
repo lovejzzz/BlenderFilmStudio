@@ -1659,6 +1659,20 @@ Next: a zero-rerender B52-D3 must derive task-specific Crypto/Normal/Vector sema
 
 Artifacts: `experiments/native-cpu-adaptive-production-holdout-v0-1/`, `research/2026-08-27-b52-d2-native-cpu-adaptive-production-holdout-result.md` and `specs/native-cpu-adaptive-production-holdout.v0.1.json`.
 
+## J-100 · B52-D3 freezes a zero-rerender payload task-semantics derivation
+
+Date: 2026-08-27 · Type: PREREGISTERED DERIVATION · Formal renders: 0
+
+D3 is explicitly downstream of fully observed D2 evidence. It cannot relabel D2's valid negative, select thresholds as if they were unseen, or claim production safety. Its only permitted output is a falsifiable candidate contract for a later fresh-seed holdout.
+
+The frozen input binds the exact D2 spec, 54-run receipt, result and audit hashes. All 54 retained EXRs must be reverified, all 18 profile × variant three-repeat groups must remain exact across eight decoded parts, and only then may repeat 1 represent the 16 candidate–baseline pairs. Blender processes, renders, network calls and model calls are all frozen at zero.
+
+The baseline-only spatial contract separates one-pixel-dilated Cryptomatte boundaries from confident stable interiors. Cryptomatte is measured as per-object matte error and two unit-contrast composites; Normal as angular error plus five Lambertian probes; Vector as two unnamed endpoint pairs without asserting previous/next direction. Three frozen profiles × two variants × three pass maps produce exactly 18 diagnostic PNGs. Thirteen attacks cover parent/artifact identity, pass and repeat rosters, all task measurements, diagnostic totality, decision replay, operation boundary and self-hash.
+
+The preregistration is machine-readable and its SHA-256 is `a1bec59991eac984cdfd17659e5353e705b95ccf4e24b83935f65b6c10eb541a`. Next: freeze the analyzer and independent audit before reading any derived measurement. A usable derivation may still select no future profile; no outcome can promote D2 retroactively.
+
+Artifacts: `specs/adaptive-payload-semantics-derivation.v0.1.json` and `research/2026-08-27-b52-d3-adaptive-payload-semantics-derivation-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
