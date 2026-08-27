@@ -245,6 +245,7 @@ export default function Home() {
           <Link className="route-tab" href="/quadrature-temporal-holdout-v0-1">Q8 连续时间门</Link>
           <Link className="route-tab" href="/human-quadrature-review-v0-1">B34 公开失盲</Link>
           <Link className="route-tab" href="/delayed-disclosure-review-v0-2">B35 延迟披露</Link>
+          <Link className="route-tab" href="/temporal-accumulation-v0-1">D9.1 时序累积</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>
