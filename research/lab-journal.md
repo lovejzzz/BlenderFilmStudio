@@ -2395,6 +2395,22 @@ Frozen correction-spec SHA-256: `f540b6a2ee0bb7b2e149c795b89adbc5ab24355750f7339
 
 Artifacts: `specs/blender-projective-subpixel-reconstruction-node-parent-correction.v0.1.json` and `research/2026-08-27-b52-d12-c1-node-parent-directory-correction.md`.
 
+## J-150 · Frozen D12-C1 tools pass missing-parent and zero-render admission
+
+Date: 2026-08-27 · Type: CORRECTION-DELTA + FROZEN-TOOL PREFLIGHT · C1 formal outputs: 0
+
+The four C1 files were frozen and pushed at `cd363c9`. Preflight matched all four C1 blobs to that commit and all seven unchanged scientific tools to the original D12 tool freeze `37fb06e68c7761dc432fa48b9287e78f7a427f24`. The original Node file still matched SHA-256 `e74471901441e478526f65946b43c6d1f31d274fc8928fd8229008b4337456f9`; the corrected copy was exactly the original bytes with the single registered `recursive:false` to `recursive:true` replacement.
+
+Twelve contracts passed. The eleven inherited contracts ran from a temporary byte-for-byte materialization of the original frozen-tool commit so their preregistered old-root-absence assertion remained evaluated at its intended historical boundary. The new C1 regression began with both `node-cell/` and `arrays/` absent, completed successfully and matched all eight Python output payloads byte-for-byte.
+
+Two real Blender 5.2 API probes again built the exact source pass state and compositor bridge graph with zero renders. Parent identities, runtime identities, analyzer independence, invalid-root retention and new-root freshness all passed. The failed D12 `run.failure.json` still matched its registered hash, and the C1 runner contained no failed-root measurement path.
+
+Disk admission observed 107,509,596,160 available bytes. The registered 64 MiB projection leaves 107,442,487,296 bytes, 68,304,896 bytes above the unchanged 100 GiB reserve. Status: `ACCEPTED`. Receipt SHA-256: `09b193b4a97b45884bc381b13df5ed5983c2403bbbffdbcce90bca558b293f8c`; internal hash: `4a7268dcd9562bee6b4368bce48a72061c7e13e253801e14034131b3292cfd9c`.
+
+Next: commit this immutable admission, then create the fresh C1 root once and execute all 65 child processes from scratch. No C1 formal render or measurement exists yet.
+
+Artifact: `experiments/blender-projective-subpixel-reconstruction-holdout-c1-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
