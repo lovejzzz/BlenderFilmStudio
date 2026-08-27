@@ -15,7 +15,7 @@ from pathlib import Path
 import bpy
 
 
-SPEC_SHA256 = "b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2"
+SPEC_SHA256 = "d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d"
 
 
 def sha256_file(path: Path) -> str:

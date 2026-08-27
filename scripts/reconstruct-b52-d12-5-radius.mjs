@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Paired radius-2/radius-3 owner-aware scalar Node consumer for B52-D12.5. */
 import crypto from 'node:crypto';import fs from 'node:fs';import process from 'node:process';
-const SPEC_SHA256='b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2';
+const SPEC_SHA256='d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d';
 const INPUTS={previousRgba:['previous.rgba32',4],currentRgba:['current.rgba32',4],previousOwner:['previous-owner.f32',1],currentOwner:['current-owner.f32',1],vector:['vector.xy32',2]};
 function parseArgs(){const out={};for(let i=2;i<process.argv.length;i+=2)out[process.argv[i].replace(/^--/,'')]=process.argv[i+1];for(const key of ['spec','fixture','repeat','input-dir','adapter-report','output-dir','report'])if(!(key in out))throw new Error(`missing --${key}`);out.repeat=Number(out.repeat);return out;}
 const shaBytes=value=>crypto.createHash('sha256').update(value).digest('hex');const shaFile=path=>shaBytes(fs.readFileSync(path));

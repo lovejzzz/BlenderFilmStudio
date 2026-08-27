@@ -7,7 +7,7 @@ import argparse, ast, hashlib, json, os, shutil, subprocess
 from pathlib import Path
 import numpy as np
 
-SPEC_SHA256="b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2";PREREGISTRATION_COMMIT="1cadc6bc43988c44e96f2c08dc27a99afec2356e"
+SPEC_SHA256="d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d";PREREGISTRATION_COMMIT="01c44b09d251a087863069b69fc21b00677af457"
 def sha_bytes(value:bytes)->str:return hashlib.sha256(value).hexdigest()
 def sha_file(path:Path)->str:
     d=hashlib.sha256()

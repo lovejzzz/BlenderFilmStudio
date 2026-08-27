@@ -8,7 +8,7 @@ from collections import deque
 from pathlib import Path
 import numpy as np
 
-SPEC_SHA256="b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2"
+SPEC_SHA256="d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d"
 SOURCE_ARRAYS=("previousRgba","currentRgba","previousOwner","currentOwner","vector","vectorNext")
 PAYLOADS={2:{"reconstructed":"radius2-reconstructed.rgba32","interior":"radius2-interior.u8","boundary":"radius2-boundary.u8"},3:{"reconstructed":"radius3-reconstructed.rgba32","interior":"radius3-interior.u8","boundary":"radius3-boundary.u8"}}
 def sha_bytes(value:bytes)->str:return hashlib.sha256(value).hexdigest()
@@ -99,7 +99,7 @@ def main()->None:
                 for y,x in np.argwhere(interior):
                     key=f"{int(arrays['currentOwner'][y,x])}/d{int(distance[y,x])}";value=max(abs(float(out["reconstructed"][y,x,c])-float(arrays["currentRgba"][y,x,c])) for c in range(3));ring_owner[key]=max(ring_owner.get(key,0.0),value)
                 radius_rows[radius]={"interiorPixels":interior_count,"boundaryPixels":boundary_count,"maskOverlapPixels":overlap,"partitionPassed":partition,"vectorComponentAbsoluteMaximum":vector_max,"reconstructionRgb":reconstruction,"ownerMeasurements":owners,"ringOwnerMaximum":ring_owner,"boundaryDiagnostic":boundary_metric(arrays["previousRgba"],arrays["currentRgba"],arrays["vector"],boundary)}
-            r2=outputs["python"][2]["interior"].astype(bool);r3=outputs["python"][3]["interior"].astype(bool);removed=r2&~r3;subset=np.logical_and(r3,~r2).sum()==0;removed_ring3=bool(removed.any()) and bool(np.all(distance[removed]==3));total_retention=radius_rows[3]["interiorPixels"]/radius_rows[2]["interiorPixels"] if radius_rows[2]["interiorPixels"] else 0.0;owner_retention={}
+            r2=outputs["python"][2]["interior"].astype(bool);r3=outputs["python"][3]["interior"].astype(bool);removed=r2&~r3;subset=bool(np.logical_and(r3,~r2).sum()==0);removed_ring3=bool(removed.any()) and bool(np.all(distance[removed]==3));total_retention=radius_rows[3]["interiorPixels"]/radius_rows[2]["interiorPixels"] if radius_rows[2]["interiorPixels"] else 0.0;owner_retention={}
             for owner in sorted(registered):
                 r2_count=int((r2&(arrays["currentOwner"]==np.float32(owner))).sum());r3_count=int((r3&(arrays["currentOwner"]==np.float32(owner))).sum());owner_retention[str(int(owner))]={"radius2":r2_count,"radius3":r3_count,"ratio":r3_count/r2_count if r2_count else None}
             source_static=metric(arrays["previousRgba"],arrays["currentRgba"],owner_mask);measurements.append({"cell":cell,"fixtureId":fid,"repeat":repeat,"resolution":fixture["resolution"],"registeredOwnerPixels":registered_count,"sourceStaticRgb":source_static,"radii":{"2":radius_rows[2],"3":radius_rows[3]},"radius3SubsetOfRadius2":subset,"radius2OnlyPixels":int(removed.sum()),"radius2OnlyDistanceExactly3":removed_ring3,"totalCoverageRetention":total_retention,"ownerCoverageRetention":owner_retention});guards["r2Partition"]=radius_rows[2]["partitionPassed"];guards["r3Partition"]=radius_rows[3]["partitionPassed"];guards["subset"]=subset;guards["removedRing3"]=removed_ring3;guards["sourceStatic"]=source_static["maximum"]==0.0;cell_guards[cell]=guards

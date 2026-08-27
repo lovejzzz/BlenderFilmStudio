@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 import OpenImageIO as oiio
 
-SPEC_SHA256="b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2"
+SPEC_SHA256="d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d"
 FILES={"previousRgba":"previous.rgba32","currentRgba":"current.rgba32","previousOwner":"previous-owner.f32","currentOwner":"current-owner.f32","vector":"vector.xy32","vectorNext":"vector-next.xy32"}
 def sha_bytes(value:bytes)->str:return hashlib.sha256(value).hexdigest()
 def sha_file(path:Path)->str:

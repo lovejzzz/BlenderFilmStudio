@@ -7,7 +7,7 @@ import argparse, hashlib, json, math, os, sys
 from pathlib import Path
 import numpy as np
 
-SPEC_SHA256="b24aa05aeb1ab7a33e8fc57afc646308b5454eb0a5c5bf77dbbf8cc33f2ed5f2"
+SPEC_SHA256="d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d"
 INPUTS={"previousRgba":("previous.rgba32",4),"currentRgba":("current.rgba32",4),"previousOwner":("previous-owner.f32",1),"currentOwner":("current-owner.f32",1),"vector":("vector.xy32",2)}
 def sha_bytes(value:bytes)->str:return hashlib.sha256(value).hexdigest()
 def sha_file(path:Path)->str:
