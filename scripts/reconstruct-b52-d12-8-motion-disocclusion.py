@@ -34,9 +34,6 @@ OUTPUTS = {
     "adaptiveInterior": ("adaptive-interior.u8", "u1"),
     "adaptiveRejected": ("adaptive-rejected.u8", "u1"),
     "riskRgb": ("risk.rgb64", "<f8"),
-    "expectedVector": ("expected-vector.xy32", "<f4"),
-    "predictedCurrentDepth": ("predicted-current-depth.f32", "<f4"),
-    "predictedPreviousDepth": ("predicted-previous-depth.f32", "<f4"),
 }
 REASONS = {
     "UNREGISTERED": 0,
@@ -237,9 +234,6 @@ def main() -> None:
         "adaptiveInterior": np.zeros((height, width), dtype=np.uint8),
         "adaptiveRejected": np.zeros((height, width), dtype=np.uint8),
         "riskRgb": np.zeros((height, width, 3), dtype="<f8"),
-        "expectedVector": np.zeros((height, width, 2), dtype="<f4"),
-        "predictedCurrentDepth": np.zeros((height, width), dtype="<f4"),
-        "predictedPreviousDepth": np.zeros((height, width), dtype="<f4"),
     }
     threshold = float(spec["frozenGates"]["adaptiveQuality"]["rgbMaximum"])
     for y in range(height):
@@ -249,9 +243,6 @@ def main() -> None:
                 outputs["reason"][y, x] = REASONS["INVALID_CURRENT_ORACLE"]
                 continue
             outputs["analyticOwner"][y, x] = oracle["ownerIndex"]
-            outputs["expectedVector"][y, x] = oracle["expectedVector"]
-            outputs["predictedCurrentDepth"][y, x] = oracle["currentDepth"]
-            outputs["predictedPreviousDepth"][y, x] = oracle["previousDepth"]
             current_depth_tolerance = max(1.0, oracle["currentDepth"]) / 1024.0
             current_ok = arrays["currentOwner"][y, x] == oracle["passIndex"] and abs(float(arrays["currentDepth"][y, x]) - oracle["currentDepth"]) <= current_depth_tolerance
             if not current_ok:

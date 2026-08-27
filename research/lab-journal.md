@@ -2831,6 +2831,18 @@ Both Python files compile under Blender Python 3.13. The adapter has not consume
 
 Artifacts: `blender/render_b52_d12_8_motion_disocclusion_source.py` and `scripts/adapt-b52-d12-8-motion-disocclusion-source.py`.
 
+## J-185 · Dual consumer smoke removes non-normative projection bytes
+
+Date: 2026-08-27 · Type: TOOL DEVELOPMENT COUNTEREXAMPLE + CORRECTION · Formal Blender renders: 0
+
+The first synthetic two-owner smoke compared 12 Python/Node payloads. Eleven were byte-exact: adaptive reconstruction, accepted/rejected masks, analytic-owner mask, structural reason/valid masks, radius-2/radius-3 masks, both predicted-depth arrays and the float64 risk array. Only consumer-emitted `expectedVector.xy32` differed, exposing a last-bit cross-language trigonometric diagnostic rather than a decision difference.
+
+The frozen spec requires cross-language identity for reconstructed, reason, mask and risk payloads, while the independent analyzer owns the projection oracle. Before tool freeze, both consumers therefore stopped exporting non-normative projection/depth diagnostic arrays; their calculations remain internal to structural decisions and the analyzer will recompute projection independently. A second clean synthetic run produced byte-identical hashes for all nine remaining canonical payloads.
+
+This smoke is not scientific evidence: it used generated constant-color arrays, no Blender render and no formal fixture measurement. It is retained as a contract-design counterexample.
+
+Artifacts: `scripts/reconstruct-b52-d12-8-motion-disocclusion.py` and `scripts/reconstruct-b52-d12-8-motion-disocclusion.mjs`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
