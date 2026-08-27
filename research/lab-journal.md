@@ -2293,6 +2293,18 @@ C1 is preregistered before its tool exists. It permits a new audit-only path wit
 
 Artifacts: `experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/` and `research/2026-08-27-b52-d11-1-c1-audit-numpy-bool-correction.md`.
 
+## J-143 · D11.1-C1 correctly rejects a malformed 65-character receipt hash
+
+Date: 2026-08-27 · Type: INVALID CORRECTION ATTEMPT + PRE-TOOL C2 PREREGISTRATION · Formal rerenders: 0
+
+C1 was frozen at `e7a8ef5cb59e89f0fbc4462a032bf58adcdaf33c`, but its new identity guard stopped before replay because the preregistered receipt hash literal contained 65 hexadecimal characters. No formal file changed and `audit.json` remained absent. This is a correction-provenance transcription defect, not an experimental result.
+
+The receipt and result were then hashed by `shasum`, OpenSSL and Blender's bundled Python. All three agreed on the 64-character receipt SHA-256 `643717651d4dafb48c87a5925391f06ef30ce97f62a8ab321d4c4aba62d0f443` and result SHA-256 `dd08142a2af855ddc287eecb84f5de722afb03a9ae6aef8a33fd3279d660329f`.
+
+C2 is preregistered before its tool exists. It may copy the exact C1 tool and change only that receipt literal plus C2 provenance identifiers; the native-boolean cast and all replay logic remain frozen. Formal render, analyzer, receipt, result and diagnostics remain immutable.
+
+Artifacts: `research/2026-08-27-b52-d11-1-c2-receipt-hash-literal-correction.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
