@@ -1241,6 +1241,24 @@ This closes the narrow saved-proposal-to-compiled-scene chain for two preset-bou
 
 Artifacts: `experiments/codex-to-blender-worker-promotion-v0-1/`, `specs/codex-to-blender-worker-promotion.v0.1.json`, `research/2026-08-26-b44-codex-to-blender-worker-promotion-protocol.md` and `research/2026-08-26-b44-codex-to-blender-worker-promotion-result.md`.
 
+## J-073 · B45 failure retained; B45-C1 reaches exact decoded float pixels
+
+Date: 2026-08-26
+
+B45 preregistered a one-frame pixel promotion directly from each of the four B44 `.blend` outputs. The first command retained the 100 GiB disk reserve but stopped because the common wrapper projected 20 GiB instead of the frozen 1 GiB. Re-running with `BFS_PROJECTED_WRITE_GIB=1` aligned the wrapper with the frozen projection. All four containers then verified the source and scene bindings and reached `RENDER_STARTED`, but Blender rejected the single-layer `OPEN_EXR` enum while `image_settings.media_type` still held `MULTI_LAYER_IMAGE`. No EXR, PNG or report existed. The runner then exposed a second defect by dereferencing a null report during attack generation. This attempt is retained as `INVALID_TOOL_INTERFACE_NO_PIXEL_DECISION` rather than interpreted as a renderer or pixel result.
+
+The raw failure, exact artifact hashes and a correction protocol were committed before implementation. B45-C1 permitted only `media_type=IMAGE` before the already frozen EXR save and total analysis/attacks over null reports; it preserved the two frames, Cycles CPU, 128×72, one sample, four threads, shot seeds, no denoise, exact float-pixel gate, four-container count, worker isolation, 100 GiB reserve and 1 GiB projected write.
+
+Four new Blender 5.2 Linux/amd64 containers then completed in 9,690–10,258 ms. TABLETOP A1/A2 decoded to `b45f5424cce4982bc698dc31cef1e2731a22c1073c4795767de0f95140ce7dbd`; INTERIOR A1/A2 decoded to `0dd7514f888d1db4a5602defc55d6aeda6caf8226667c908d4ce1d6dbab6544b`. Each output contained 9,216 pixels and 36,864 finite little-endian float32 BGRA components. The independent audit re-decoded all four EXRs and passed 14/14 base attacks, 2/2 correction attacks, correction-parent identity, self-hash and null-totality replay.
+
+TABLETOP's EXR and PNG container hashes differed across A/B while its decoded float arrays were exact. INTERIOR happened to match at both levels. This confirms that container-byte identity and pixel-content identity are separate evidence layers. The two 1-sample frames are diagnostic canaries, not image-quality exhibits.
+
+Verdict: `B44_BLEND_TO_FLOAT_PIXELS_EXACT_AFTER_MEDIA_TYPE_CORRECTION`.
+
+Next: preregister a bounded short continuous-shot promotion from the same B44 scenes. Freeze the frame interval, temporal comparison domain, quality intervention, runtime/disk ceiling and interrupted-run recovery before rendering. Do not infer cinematic quality, 4K throughput, GPU/Eevee parity, cross-host reproducibility or arbitrary-scene coverage from B45-C1.
+
+Artifacts: `experiments/codex-worker-pixel-promotion-v0-1/failure.json`, `experiments/codex-worker-pixel-promotion-c1-v0-1/`, `specs/codex-worker-pixel-promotion.v0.1.json`, `specs/codex-worker-pixel-promotion-media-type-correction.v0.1.json`, `research/2026-08-26-b45-invalid-media-type-and-null-analysis.md` and `research/2026-08-26-b45-c1-codex-worker-pixel-promotion-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

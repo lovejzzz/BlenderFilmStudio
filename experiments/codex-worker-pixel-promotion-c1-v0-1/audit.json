@@ -1,0 +1,1394 @@
+{
+  "schemaVersion": "bfs.codexWorkerPixelPromotionIndependentAudit.v0.2",
+  "experimentId": "B45-C1",
+  "analysis": {
+    "schemaVersion": "bfs.codexWorkerPixelPromotionAnalysis.v0.2",
+    "passed": true,
+    "failures": [],
+    "decision": "B44_BLEND_TO_FLOAT_PIXELS_EXACT_AFTER_MEDIA_TYPE_CORRECTION"
+  },
+  "parentsMatch": true,
+  "parentObservations": [
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/results.json",
+      "expectedSha256": "9e5d02c055dce8e05b73588d0e39c4ad3823277b1437aec20b110ace30d4776a",
+      "observedSha256": "9e5d02c055dce8e05b73588d0e39c4ad3823277b1437aec20b110ace30d4776a",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/audit.json",
+      "expectedSha256": "7b5fd2487d3a5ac613bcc249c484c6758acee730b8faf80eb5e94c7ce8e10c81",
+      "observedSha256": "7b5fd2487d3a5ac613bcc249c484c6758acee730b8faf80eb5e94c7ce8e10c81",
+      "match": true
+    },
+    {
+      "uri": "experiments/linux-amd64-render-backend-control-v0-1/results.json",
+      "expectedSha256": "67ea4b0e51d43ab5936e8c6b6890e07aba97918979fa1f0e349c7e98402865ef",
+      "observedSha256": "67ea4b0e51d43ab5936e8c6b6890e07aba97918979fa1f0e349c7e98402865ef",
+      "match": true
+    },
+    {
+      "uri": "experiments/linux-amd64-render-backend-control-v0-1/audit.json",
+      "expectedSha256": "fa8f41464aebb54c78a4d4e824536d48724337226395bb893e731fbfc5419cda",
+      "observedSha256": "fa8f41464aebb54c78a4d4e824536d48724337226395bb893e731fbfc5419cda",
+      "match": true
+    }
+  ],
+  "toolsMatch": true,
+  "toolObservations": {
+    "runner": {
+      "uri": "scripts/run-b45-worker-pixel-promotion.mjs",
+      "expectedSha256": "76b5a5af5a3c98d175fa1187d5aff05e496311a6e85ce82f90337c2f06ee5a31",
+      "observedSha256": "76b5a5af5a3c98d175fa1187d5aff05e496311a6e85ce82f90337c2f06ee5a31",
+      "match": true
+    },
+    "library": {
+      "uri": "scripts/lib/b45-worker-pixel-promotion.mjs",
+      "expectedSha256": "767556e1c546eb90baf9216ab3f893bde4e5abc8bfd39041fe073c652f946e10",
+      "observedSha256": "767556e1c546eb90baf9216ab3f893bde4e5abc8bfd39041fe073c652f946e10",
+      "match": true
+    },
+    "audit": {
+      "uri": "scripts/audit-b45-worker-pixel-promotion.mjs",
+      "expectedSha256": "4f2803ce70e159f5eda66bd942eeb3361554a841bb48ae62fcf50ae2ccf27ab1",
+      "observedSha256": "4f2803ce70e159f5eda66bd942eeb3361554a841bb48ae62fcf50ae2ccf27ab1",
+      "match": true
+    },
+    "renderer": {
+      "uri": "blender/render_b45_worker_pixel_canary.py",
+      "expectedSha256": "90dc9c3663a697723dceda1f993f5756ee63b1b078d4100fb340abec53a5bd19",
+      "observedSha256": "90dc9c3663a697723dceda1f993f5756ee63b1b078d4100fb340abec53a5bd19",
+      "match": true
+    },
+    "pixelAnalyzer": {
+      "uri": "scripts/analyze-b45-worker-pixels.py",
+      "expectedSha256": "02a0001dbfdbde95451167899ab0c017f977820b42bc478ba6536e4adaf61410",
+      "observedSha256": "02a0001dbfdbde95451167899ab0c017f977820b42bc478ba6536e4adaf61410",
+      "match": true
+    }
+  },
+  "inputsMatch": true,
+  "inputObservations": [
+    {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/results.json",
+      "expectedSha256": "9e5d02c055dce8e05b73588d0e39c4ad3823277b1437aec20b110ace30d4776a",
+      "observedSha256": "9e5d02c055dce8e05b73588d0e39c4ad3823277b1437aec20b110ace30d4776a",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/audit.json",
+      "expectedSha256": "7b5fd2487d3a5ac613bcc249c484c6758acee730b8faf80eb5e94c7ce8e10c81",
+      "observedSha256": "7b5fd2487d3a5ac613bcc249c484c6758acee730b8faf80eb5e94c7ce8e10c81",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+      "expectedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "observedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.manifest.json",
+      "expectedSha256": "80aee5b9f386d677425856d20f366bc9aec7c1b66a31b5f1bc28e7a6e53d15de",
+      "observedSha256": "80aee5b9f386d677425856d20f366bc9aec7c1b66a31b5f1bc28e7a6e53d15de",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A2/scene.blend",
+      "expectedSha256": "fd3bf86f6e95b20e9bb634fb1b96ae9af4c697ad4930f14589cd75dffc1aaec6",
+      "observedSha256": "fd3bf86f6e95b20e9bb634fb1b96ae9af4c697ad4930f14589cd75dffc1aaec6",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A2/scene.manifest.json",
+      "expectedSha256": "43c538d2ebd1bdde85fa2838cbb9419c4e3fa04b2b30de47ee87c65f3ce2690b",
+      "observedSha256": "43c538d2ebd1bdde85fa2838cbb9419c4e3fa04b2b30de47ee87c65f3ce2690b",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+      "expectedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "observedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.manifest.json",
+      "expectedSha256": "bb8bc5b94f74a18db070697bcd22d91abf5194755bff87776acaea6e4f4302e5",
+      "observedSha256": "bb8bc5b94f74a18db070697bcd22d91abf5194755bff87776acaea6e4f4302e5",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A2/scene.blend",
+      "expectedSha256": "8bbe047fcb79f885ddc393ddfaf650b8492bd670b82d6305e8489909cc686e12",
+      "observedSha256": "8bbe047fcb79f885ddc393ddfaf650b8492bd670b82d6305e8489909cc686e12",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A2/scene.manifest.json",
+      "expectedSha256": "3dfe323a2bc3c96ce6a8b71a12c1f36b757974147843716f72b8ddd24443c976",
+      "observedSha256": "3dfe323a2bc3c96ce6a8b71a12c1f36b757974147843716f72b8ddd24443c976",
+      "match": true
+    }
+  ],
+  "outputsMatch": true,
+  "runObservations": [
+    {
+      "id": "TABLETOP-A1",
+      "report": {
+        "appliedSettings": {
+          "animatedSeed": false,
+          "compositing": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "filmTransparent": false,
+          "resolution": [
+            128,
+            72,
+            100
+          ],
+          "samples": 1,
+          "seed": 24082643,
+          "sequencer": false,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "artifacts": {
+          "exr": {
+            "bytes": 82813,
+            "sha256": "bee41c6807b4861df0919fe9ab89e2e34b3c2e3c1dd13bfe759d82885058eb5e",
+            "uri": "frame.exr"
+          },
+          "png": {
+            "bytes": 20333,
+            "dimensions": [
+              128,
+              72
+            ],
+            "sha256": "d95caf142c4f40ba695909c220f7ffea3e0a90686e62daf11262875e3e6f8c63",
+            "uri": "frame.png"
+          }
+        },
+        "bindings": {
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+          "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+          "shotSeed": 24082643,
+          "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS",
+          "versionTuple": [
+            5,
+            2,
+            0
+          ]
+        },
+        "elapsedSeconds": 0.489685,
+        "frame": 24,
+        "ocio": {
+          "declaredEncoding": "ACEScg",
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "originalSettings": {
+          "device": "CPU",
+          "displayDevice": "sRGB - Display",
+          "engine": "CYCLES",
+          "frameRange": [
+            1,
+            48
+          ],
+          "look": "None",
+          "resolution": [
+            3840,
+            2160,
+            100
+          ],
+          "samples": 512,
+          "threads": 8,
+          "threadsMode": "FIXED",
+          "viewTransform": "ACES 2.0 - SDR 100 nits (Rec.709)"
+        },
+        "passed": true,
+        "renderOperatorCalls": 1,
+        "saveSettings": {
+          "exr": {
+            "codec": "ZIP",
+            "colorDepth": "32",
+            "colorMode": "RGBA",
+            "fileFormat": "OPEN_EXR",
+            "mediaType": "IMAGE"
+          },
+          "png": {
+            "colorDepth": "8",
+            "colorMode": "RGBA",
+            "fileFormat": "PNG",
+            "mediaType": "IMAGE"
+          }
+        },
+        "savesFromSameRenderResult": 2,
+        "schemaVersion": "bfs.workerPixelCanaryReport.v0.1",
+        "shotId": "SHOT_109",
+        "source": {
+          "bytes": 118702,
+          "sha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+          "uri": "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+        }
+      },
+      "decoded": {
+        "canonicalPixelSha256": "b45f5424cce4982bc698dc31cef1e2731a22c1073c4795767de0f95140ce7dbd",
+        "channels": [
+          {
+            "max": 54.385074615478516,
+            "mean": 0.21239304542541504,
+            "min": 0,
+            "name": "B"
+          },
+          {
+            "max": 26.70270538330078,
+            "mean": 0.1736428141593933,
+            "min": 0,
+            "name": "G"
+          },
+          {
+            "max": 29.245393753051758,
+            "mean": 0.20033811032772064,
+            "min": 0,
+            "name": "R"
+          },
+          {
+            "max": 1,
+            "mean": 1,
+            "min": 1,
+            "name": "A"
+          }
+        ],
+        "componentCount": 36864,
+        "finite": true,
+        "input": {
+          "bytes": 82813,
+          "sha256": "bee41c6807b4861df0919fe9ab89e2e34b3c2e3c1dd13bfe759d82885058eb5e",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A1/frame.exr"
+        },
+        "metadata": {
+          "channelOrder": "BGRA",
+          "dtype": "float32-le",
+          "order": "C",
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "pixelCount": 9216,
+        "runtime": {
+          "numpy": "1.26.4",
+          "opencv": "4.11.0",
+          "python": "3.13.3"
+        },
+        "schemaVersion": "bfs.workerPixelDecode.v0.1"
+      },
+      "milestones": [
+        {
+          "details": {},
+          "monotonicNs": 11139606655292,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {
+            "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+            "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+            "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+            "shotSeed": 24082643,
+            "sourceSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+            "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+          },
+          "monotonicNs": 11139615287704,
+          "name": "SOURCE_VERIFIED",
+          "processId": 1,
+          "sequence": 2,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {
+            "animatedSeed": false,
+            "compositing": false,
+            "denoising": false,
+            "device": "CPU",
+            "engine": "CYCLES",
+            "filmTransparent": false,
+            "resolution": [
+              128,
+              72,
+              100
+            ],
+            "samples": 1,
+            "seed": 24082643,
+            "sequencer": false,
+            "threads": 4,
+            "threadsMode": "FIXED"
+          },
+          "monotonicNs": 11139621797868,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 3,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {},
+          "monotonicNs": 11139622789325,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 4,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {
+            "exr": {
+              "bytes": 82813,
+              "sha256": "bee41c6807b4861df0919fe9ab89e2e34b3c2e3c1dd13bfe759d82885058eb5e",
+              "uri": "frame.exr"
+            },
+            "png": {
+              "bytes": 20333,
+              "dimensions": [
+                128,
+                72
+              ],
+              "sha256": "d95caf142c4f40ba695909c220f7ffea3e0a90686e62daf11262875e3e6f8c63",
+              "uri": "frame.png"
+            }
+          },
+          "monotonicNs": 11140095335710,
+          "name": "RENDER_COMPLETED",
+          "processId": 1,
+          "sequence": 5,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {
+            "passed": true,
+            "reportSha256": "82a60385c0ea5e4ed664e5488a537dba05df8ed01ead4978be86c34f83ddf181"
+          },
+          "monotonicNs": 11140097966833,
+          "name": "REPORT_WRITTEN",
+          "processId": 1,
+          "sequence": 6,
+          "shotId": "SHOT_109"
+        }
+      ],
+      "artifacts": {
+        "exr": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A1/frame.exr",
+          "bytes": 82813,
+          "sha256": "bee41c6807b4861df0919fe9ab89e2e34b3c2e3c1dd13bfe759d82885058eb5e"
+        },
+        "png": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A1/frame.png",
+          "bytes": 20333,
+          "sha256": "d95caf142c4f40ba695909c220f7ffea3e0a90686e62daf11262875e3e6f8c63",
+          "valid": true,
+          "dimensions": [
+            128,
+            72
+          ]
+        },
+        "report": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A1/render.report.json",
+          "bytes": 2568,
+          "sha256": "82a60385c0ea5e4ed664e5488a537dba05df8ed01ead4978be86c34f83ddf181"
+        },
+        "pixelAnalysis": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A1/pixel-analysis.json",
+          "bytes": 1180,
+          "sha256": "7f91cf8d0df620ae37a45691befc594f08440b9b47a76480c4b154deae5f44b2"
+        }
+      },
+      "match": true
+    },
+    {
+      "id": "TABLETOP-A2",
+      "report": {
+        "appliedSettings": {
+          "animatedSeed": false,
+          "compositing": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "filmTransparent": false,
+          "resolution": [
+            128,
+            72,
+            100
+          ],
+          "samples": 1,
+          "seed": 24082643,
+          "sequencer": false,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "artifacts": {
+          "exr": {
+            "bytes": 82813,
+            "sha256": "b5bbba7e1f1cbe639b3f72fe0836354081ac2f097f211ea4d3b594869582a927",
+            "uri": "frame.exr"
+          },
+          "png": {
+            "bytes": 20333,
+            "dimensions": [
+              128,
+              72
+            ],
+            "sha256": "a2051c486f144269525f416aa7d83c4f9e70990819a9650d4ee59a462ef15875",
+            "uri": "frame.png"
+          }
+        },
+        "bindings": {
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+          "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+          "shotSeed": 24082643,
+          "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS",
+          "versionTuple": [
+            5,
+            2,
+            0
+          ]
+        },
+        "elapsedSeconds": 0.477126,
+        "frame": 24,
+        "ocio": {
+          "declaredEncoding": "ACEScg",
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "originalSettings": {
+          "device": "CPU",
+          "displayDevice": "sRGB - Display",
+          "engine": "CYCLES",
+          "frameRange": [
+            1,
+            48
+          ],
+          "look": "None",
+          "resolution": [
+            3840,
+            2160,
+            100
+          ],
+          "samples": 512,
+          "threads": 8,
+          "threadsMode": "FIXED",
+          "viewTransform": "ACES 2.0 - SDR 100 nits (Rec.709)"
+        },
+        "passed": true,
+        "renderOperatorCalls": 1,
+        "saveSettings": {
+          "exr": {
+            "codec": "ZIP",
+            "colorDepth": "32",
+            "colorMode": "RGBA",
+            "fileFormat": "OPEN_EXR",
+            "mediaType": "IMAGE"
+          },
+          "png": {
+            "colorDepth": "8",
+            "colorMode": "RGBA",
+            "fileFormat": "PNG",
+            "mediaType": "IMAGE"
+          }
+        },
+        "savesFromSameRenderResult": 2,
+        "schemaVersion": "bfs.workerPixelCanaryReport.v0.1",
+        "shotId": "SHOT_109",
+        "source": {
+          "bytes": 118698,
+          "sha256": "fd3bf86f6e95b20e9bb634fb1b96ae9af4c697ad4930f14589cd75dffc1aaec6",
+          "uri": "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A2/scene.blend"
+        }
+      },
+      "decoded": {
+        "canonicalPixelSha256": "b45f5424cce4982bc698dc31cef1e2731a22c1073c4795767de0f95140ce7dbd",
+        "channels": [
+          {
+            "max": 54.385074615478516,
+            "mean": 0.21239304542541504,
+            "min": 0,
+            "name": "B"
+          },
+          {
+            "max": 26.70270538330078,
+            "mean": 0.1736428141593933,
+            "min": 0,
+            "name": "G"
+          },
+          {
+            "max": 29.245393753051758,
+            "mean": 0.20033811032772064,
+            "min": 0,
+            "name": "R"
+          },
+          {
+            "max": 1,
+            "mean": 1,
+            "min": 1,
+            "name": "A"
+          }
+        ],
+        "componentCount": 36864,
+        "finite": true,
+        "input": {
+          "bytes": 82813,
+          "sha256": "b5bbba7e1f1cbe639b3f72fe0836354081ac2f097f211ea4d3b594869582a927",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A2/frame.exr"
+        },
+        "metadata": {
+          "channelOrder": "BGRA",
+          "dtype": "float32-le",
+          "order": "C",
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "pixelCount": 9216,
+        "runtime": {
+          "numpy": "1.26.4",
+          "opencv": "4.11.0",
+          "python": "3.13.3"
+        },
+        "schemaVersion": "bfs.workerPixelDecode.v0.1"
+      },
+      "milestones": [
+        {
+          "details": {},
+          "monotonicNs": 11150001743811,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {
+            "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+            "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+            "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+            "shotSeed": 24082643,
+            "sourceSha256": "fd3bf86f6e95b20e9bb634fb1b96ae9af4c697ad4930f14589cd75dffc1aaec6",
+            "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+          },
+          "monotonicNs": 11150009285141,
+          "name": "SOURCE_VERIFIED",
+          "processId": 1,
+          "sequence": 2,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {
+            "animatedSeed": false,
+            "compositing": false,
+            "denoising": false,
+            "device": "CPU",
+            "engine": "CYCLES",
+            "filmTransparent": false,
+            "resolution": [
+              128,
+              72,
+              100
+            ],
+            "samples": 1,
+            "seed": 24082643,
+            "sequencer": false,
+            "threads": 4,
+            "threadsMode": "FIXED"
+          },
+          "monotonicNs": 11150014319805,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 3,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {},
+          "monotonicNs": 11150014959055,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 4,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {
+            "exr": {
+              "bytes": 82813,
+              "sha256": "b5bbba7e1f1cbe639b3f72fe0836354081ac2f097f211ea4d3b594869582a927",
+              "uri": "frame.exr"
+            },
+            "png": {
+              "bytes": 20333,
+              "dimensions": [
+                128,
+                72
+              ],
+              "sha256": "a2051c486f144269525f416aa7d83c4f9e70990819a9650d4ee59a462ef15875",
+              "uri": "frame.png"
+            }
+          },
+          "monotonicNs": 11150477982958,
+          "name": "RENDER_COMPLETED",
+          "processId": 1,
+          "sequence": 5,
+          "shotId": "SHOT_109"
+        },
+        {
+          "details": {
+            "passed": true,
+            "reportSha256": "be7e26d63fe197d9446746d427a27f6e2a25407594a93ea49adcbe3fc9a3ea58"
+          },
+          "monotonicNs": 11150480420790,
+          "name": "REPORT_WRITTEN",
+          "processId": 1,
+          "sequence": 6,
+          "shotId": "SHOT_109"
+        }
+      ],
+      "artifacts": {
+        "exr": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A2/frame.exr",
+          "bytes": 82813,
+          "sha256": "b5bbba7e1f1cbe639b3f72fe0836354081ac2f097f211ea4d3b594869582a927"
+        },
+        "png": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A2/frame.png",
+          "bytes": 20333,
+          "sha256": "a2051c486f144269525f416aa7d83c4f9e70990819a9650d4ee59a462ef15875",
+          "valid": true,
+          "dimensions": [
+            128,
+            72
+          ]
+        },
+        "report": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A2/render.report.json",
+          "bytes": 2568,
+          "sha256": "be7e26d63fe197d9446746d427a27f6e2a25407594a93ea49adcbe3fc9a3ea58"
+        },
+        "pixelAnalysis": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/TABLETOP-A2/pixel-analysis.json",
+          "bytes": 1180,
+          "sha256": "85d0ff2f10743dbf7cb2cd13d2d5bfde1429f8329236618c3ad1f557004de43d"
+        }
+      },
+      "match": true
+    },
+    {
+      "id": "INTERIOR-A1",
+      "report": {
+        "appliedSettings": {
+          "animatedSeed": false,
+          "compositing": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "filmTransparent": false,
+          "resolution": [
+            128,
+            72,
+            100
+          ],
+          "samples": 1,
+          "seed": 24082644,
+          "sequencer": false,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "artifacts": {
+          "exr": {
+            "bytes": 112403,
+            "sha256": "dcfdcf74bc4802cdd4d6a275071138f3b2ba9f292fc969131f94dc4b54729b00",
+            "uri": "frame.exr"
+          },
+          "png": {
+            "bytes": 27262,
+            "dimensions": [
+              128,
+              72
+            ],
+            "sha256": "808fc4e8212f211207a0bca3a73bda5003b433ca34e0c0f4f091111945d6391a",
+            "uri": "frame.png"
+          }
+        },
+        "bindings": {
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+          "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+          "shotSeed": 24082644,
+          "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS",
+          "versionTuple": [
+            5,
+            2,
+            0
+          ]
+        },
+        "elapsedSeconds": 0.487657,
+        "frame": 12,
+        "ocio": {
+          "declaredEncoding": "ACEScg",
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "originalSettings": {
+          "device": "CPU",
+          "displayDevice": "sRGB - Display",
+          "engine": "CYCLES",
+          "frameRange": [
+            1,
+            24
+          ],
+          "look": "None",
+          "resolution": [
+            3840,
+            2160,
+            100
+          ],
+          "samples": 512,
+          "threads": 8,
+          "threadsMode": "FIXED",
+          "viewTransform": "ACES 2.0 - SDR 100 nits (Rec.709)"
+        },
+        "passed": true,
+        "renderOperatorCalls": 1,
+        "saveSettings": {
+          "exr": {
+            "codec": "ZIP",
+            "colorDepth": "32",
+            "colorMode": "RGBA",
+            "fileFormat": "OPEN_EXR",
+            "mediaType": "IMAGE"
+          },
+          "png": {
+            "colorDepth": "8",
+            "colorMode": "RGBA",
+            "fileFormat": "PNG",
+            "mediaType": "IMAGE"
+          }
+        },
+        "savesFromSameRenderResult": 2,
+        "schemaVersion": "bfs.workerPixelCanaryReport.v0.1",
+        "shotId": "SHOT_110",
+        "source": {
+          "bytes": 106078,
+          "sha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+          "uri": "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+        }
+      },
+      "decoded": {
+        "canonicalPixelSha256": "0dd7514f888d1db4a5602defc55d6aeda6caf8226667c908d4ce1d6dbab6544b",
+        "channels": [
+          {
+            "max": 2.042259693145752,
+            "mean": 0.1789342314004898,
+            "min": 0,
+            "name": "B"
+          },
+          {
+            "max": 1.9392943382263184,
+            "mean": 0.2421843260526657,
+            "min": 0,
+            "name": "G"
+          },
+          {
+            "max": 1.9924250841140747,
+            "mean": 0.29839855432510376,
+            "min": 0,
+            "name": "R"
+          },
+          {
+            "max": 1,
+            "mean": 1,
+            "min": 1,
+            "name": "A"
+          }
+        ],
+        "componentCount": 36864,
+        "finite": true,
+        "input": {
+          "bytes": 112403,
+          "sha256": "dcfdcf74bc4802cdd4d6a275071138f3b2ba9f292fc969131f94dc4b54729b00",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A1/frame.exr"
+        },
+        "metadata": {
+          "channelOrder": "BGRA",
+          "dtype": "float32-le",
+          "order": "C",
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "pixelCount": 9216,
+        "runtime": {
+          "numpy": "1.26.4",
+          "opencv": "4.11.0",
+          "python": "3.13.3"
+        },
+        "schemaVersion": "bfs.workerPixelDecode.v0.1"
+      },
+      "milestones": [
+        {
+          "details": {},
+          "monotonicNs": 11159802558114,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {
+            "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+            "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+            "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+            "shotSeed": 24082644,
+            "sourceSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+            "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+          },
+          "monotonicNs": 11159810449319,
+          "name": "SOURCE_VERIFIED",
+          "processId": 1,
+          "sequence": 2,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {
+            "animatedSeed": false,
+            "compositing": false,
+            "denoising": false,
+            "device": "CPU",
+            "engine": "CYCLES",
+            "filmTransparent": false,
+            "resolution": [
+              128,
+              72,
+              100
+            ],
+            "samples": 1,
+            "seed": 24082644,
+            "sequencer": false,
+            "threads": 4,
+            "threadsMode": "FIXED"
+          },
+          "monotonicNs": 11159815057483,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 3,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {},
+          "monotonicNs": 11159815730816,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 4,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {
+            "exr": {
+              "bytes": 112403,
+              "sha256": "dcfdcf74bc4802cdd4d6a275071138f3b2ba9f292fc969131f94dc4b54729b00",
+              "uri": "frame.exr"
+            },
+            "png": {
+              "bytes": 27262,
+              "dimensions": [
+                128,
+                72
+              ],
+              "sha256": "808fc4e8212f211207a0bca3a73bda5003b433ca34e0c0f4f091111945d6391a",
+              "uri": "frame.png"
+            }
+          },
+          "monotonicNs": 11160289249102,
+          "name": "RENDER_COMPLETED",
+          "processId": 1,
+          "sequence": 5,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {
+            "passed": true,
+            "reportSha256": "7ca019a3abae55ac7c3437f7765c2307010e5abe0c1fbaf731b02ee668accdb0"
+          },
+          "monotonicNs": 11160291886018,
+          "name": "REPORT_WRITTEN",
+          "processId": 1,
+          "sequence": 6,
+          "shotId": "SHOT_110"
+        }
+      ],
+      "artifacts": {
+        "exr": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A1/frame.exr",
+          "bytes": 112403,
+          "sha256": "dcfdcf74bc4802cdd4d6a275071138f3b2ba9f292fc969131f94dc4b54729b00"
+        },
+        "png": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A1/frame.png",
+          "bytes": 27262,
+          "sha256": "808fc4e8212f211207a0bca3a73bda5003b433ca34e0c0f4f091111945d6391a",
+          "valid": true,
+          "dimensions": [
+            128,
+            72
+          ]
+        },
+        "report": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A1/render.report.json",
+          "bytes": 2569,
+          "sha256": "7ca019a3abae55ac7c3437f7765c2307010e5abe0c1fbaf731b02ee668accdb0"
+        },
+        "pixelAnalysis": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A1/pixel-analysis.json",
+          "bytes": 1180,
+          "sha256": "7b2a51f5da7157c15f5abf581cf1c92aedcfb0ccd578b496f9b28e15c75ba41f"
+        }
+      },
+      "match": true
+    },
+    {
+      "id": "INTERIOR-A2",
+      "report": {
+        "appliedSettings": {
+          "animatedSeed": false,
+          "compositing": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "filmTransparent": false,
+          "resolution": [
+            128,
+            72,
+            100
+          ],
+          "samples": 1,
+          "seed": 24082644,
+          "sequencer": false,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "artifacts": {
+          "exr": {
+            "bytes": 112403,
+            "sha256": "dcfdcf74bc4802cdd4d6a275071138f3b2ba9f292fc969131f94dc4b54729b00",
+            "uri": "frame.exr"
+          },
+          "png": {
+            "bytes": 27262,
+            "dimensions": [
+              128,
+              72
+            ],
+            "sha256": "808fc4e8212f211207a0bca3a73bda5003b433ca34e0c0f4f091111945d6391a",
+            "uri": "frame.png"
+          }
+        },
+        "bindings": {
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+          "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+          "shotSeed": 24082644,
+          "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS",
+          "versionTuple": [
+            5,
+            2,
+            0
+          ]
+        },
+        "elapsedSeconds": 0.488804,
+        "frame": 12,
+        "ocio": {
+          "declaredEncoding": "ACEScg",
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "originalSettings": {
+          "device": "CPU",
+          "displayDevice": "sRGB - Display",
+          "engine": "CYCLES",
+          "frameRange": [
+            1,
+            24
+          ],
+          "look": "None",
+          "resolution": [
+            3840,
+            2160,
+            100
+          ],
+          "samples": 512,
+          "threads": 8,
+          "threadsMode": "FIXED",
+          "viewTransform": "ACES 2.0 - SDR 100 nits (Rec.709)"
+        },
+        "passed": true,
+        "renderOperatorCalls": 1,
+        "saveSettings": {
+          "exr": {
+            "codec": "ZIP",
+            "colorDepth": "32",
+            "colorMode": "RGBA",
+            "fileFormat": "OPEN_EXR",
+            "mediaType": "IMAGE"
+          },
+          "png": {
+            "colorDepth": "8",
+            "colorMode": "RGBA",
+            "fileFormat": "PNG",
+            "mediaType": "IMAGE"
+          }
+        },
+        "savesFromSameRenderResult": 2,
+        "schemaVersion": "bfs.workerPixelCanaryReport.v0.1",
+        "shotId": "SHOT_110",
+        "source": {
+          "bytes": 106078,
+          "sha256": "8bbe047fcb79f885ddc393ddfaf650b8492bd670b82d6305e8489909cc686e12",
+          "uri": "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A2/scene.blend"
+        }
+      },
+      "decoded": {
+        "canonicalPixelSha256": "0dd7514f888d1db4a5602defc55d6aeda6caf8226667c908d4ce1d6dbab6544b",
+        "channels": [
+          {
+            "max": 2.042259693145752,
+            "mean": 0.1789342314004898,
+            "min": 0,
+            "name": "B"
+          },
+          {
+            "max": 1.9392943382263184,
+            "mean": 0.2421843260526657,
+            "min": 0,
+            "name": "G"
+          },
+          {
+            "max": 1.9924250841140747,
+            "mean": 0.29839855432510376,
+            "min": 0,
+            "name": "R"
+          },
+          {
+            "max": 1,
+            "mean": 1,
+            "min": 1,
+            "name": "A"
+          }
+        ],
+        "componentCount": 36864,
+        "finite": true,
+        "input": {
+          "bytes": 112403,
+          "sha256": "dcfdcf74bc4802cdd4d6a275071138f3b2ba9f292fc969131f94dc4b54729b00",
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A2/frame.exr"
+        },
+        "metadata": {
+          "channelOrder": "BGRA",
+          "dtype": "float32-le",
+          "order": "C",
+          "shape": [
+            72,
+            128,
+            4
+          ]
+        },
+        "pixelCount": 9216,
+        "runtime": {
+          "numpy": "1.26.4",
+          "opencv": "4.11.0",
+          "python": "3.13.3"
+        },
+        "schemaVersion": "bfs.workerPixelDecode.v0.1"
+      },
+      "milestones": [
+        {
+          "details": {},
+          "monotonicNs": 11169594860520,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {
+            "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+            "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+            "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+            "shotSeed": 24082644,
+            "sourceSha256": "8bbe047fcb79f885ddc393ddfaf650b8492bd670b82d6305e8489909cc686e12",
+            "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+          },
+          "monotonicNs": 11169602574309,
+          "name": "SOURCE_VERIFIED",
+          "processId": 1,
+          "sequence": 2,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {
+            "animatedSeed": false,
+            "compositing": false,
+            "denoising": false,
+            "device": "CPU",
+            "engine": "CYCLES",
+            "filmTransparent": false,
+            "resolution": [
+              128,
+              72,
+              100
+            ],
+            "samples": 1,
+            "seed": 24082644,
+            "sequencer": false,
+            "threads": 4,
+            "threadsMode": "FIXED"
+          },
+          "monotonicNs": 11169607743973,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 3,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {},
+          "monotonicNs": 11169608854348,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 4,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {
+            "exr": {
+              "bytes": 112403,
+              "sha256": "dcfdcf74bc4802cdd4d6a275071138f3b2ba9f292fc969131f94dc4b54729b00",
+              "uri": "frame.exr"
+            },
+            "png": {
+              "bytes": 27262,
+              "dimensions": [
+                128,
+                72
+              ],
+              "sha256": "808fc4e8212f211207a0bca3a73bda5003b433ca34e0c0f4f091111945d6391a",
+              "uri": "frame.png"
+            }
+          },
+          "monotonicNs": 11170082750896,
+          "name": "RENDER_COMPLETED",
+          "processId": 1,
+          "sequence": 5,
+          "shotId": "SHOT_110"
+        },
+        {
+          "details": {
+            "passed": true,
+            "reportSha256": "083409656fd1b8eff0dd66bc708a61d1faff43944b54f51a8b4eacaeacd1c67f"
+          },
+          "monotonicNs": 11170085401520,
+          "name": "REPORT_WRITTEN",
+          "processId": 1,
+          "sequence": 6,
+          "shotId": "SHOT_110"
+        }
+      ],
+      "artifacts": {
+        "exr": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A2/frame.exr",
+          "bytes": 112403,
+          "sha256": "dcfdcf74bc4802cdd4d6a275071138f3b2ba9f292fc969131f94dc4b54729b00"
+        },
+        "png": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A2/frame.png",
+          "bytes": 27262,
+          "sha256": "808fc4e8212f211207a0bca3a73bda5003b433ca34e0c0f4f091111945d6391a",
+          "valid": true,
+          "dimensions": [
+            128,
+            72
+          ]
+        },
+        "report": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A2/render.report.json",
+          "bytes": 2569,
+          "sha256": "083409656fd1b8eff0dd66bc708a61d1faff43944b54f51a8b4eacaeacd1c67f"
+        },
+        "pixelAnalysis": {
+          "uri": "experiments/codex-worker-pixel-promotion-c1-v0-1/runs/INTERIOR-A2/pixel-analysis.json",
+          "bytes": 1180,
+          "sha256": "7b564d4060f769e2a39a05b8e30e6012aa20e10d65c618ea5ad3561a5a46fe1c"
+        }
+      },
+      "match": true
+    }
+  ],
+  "pairsMatch": true,
+  "pairObservations": [
+    {
+      "id": "TABLETOP",
+      "canonicalPixelSha256A": "b45f5424cce4982bc698dc31cef1e2731a22c1073c4795767de0f95140ce7dbd",
+      "canonicalPixelSha256B": "b45f5424cce4982bc698dc31cef1e2731a22c1073c4795767de0f95140ce7dbd",
+      "pixelExact": true,
+      "exrContainerByteExact": false,
+      "pngContainerByteExact": false
+    },
+    {
+      "id": "INTERIOR",
+      "canonicalPixelSha256A": "0dd7514f888d1db4a5602defc55d6aeda6caf8226667c908d4ce1d6dbab6544b",
+      "canonicalPixelSha256B": "0dd7514f888d1db4a5602defc55d6aeda6caf8226667c908d4ce1d6dbab6544b",
+      "pixelExact": true,
+      "exrContainerByteExact": true,
+      "pngContainerByteExact": true
+    }
+  ],
+  "attacksMatch": true,
+  "attacks": [
+    {
+      "id": "A01_PARENT_IDENTITY",
+      "expectedReason": "PARENT_IDENTITY",
+      "observedReason": "PARENT_IDENTITY",
+      "passed": true
+    },
+    {
+      "id": "A02_SOURCE_IDENTITY",
+      "expectedReason": "SOURCE_IDENTITY_TABLETOP-A1",
+      "observedReason": "SOURCE_IDENTITY_TABLETOP-A1",
+      "passed": true
+    },
+    {
+      "id": "A03_SOURCE_DIVERGENCE",
+      "expectedReason": "SOURCE_DIVERGENCE_TABLETOP",
+      "observedReason": "SOURCE_DIVERGENCE_TABLETOP",
+      "passed": true
+    },
+    {
+      "id": "A04_IMAGE_IDENTITY",
+      "expectedReason": "IMAGE_IDENTITY",
+      "observedReason": "IMAGE_IDENTITY",
+      "passed": true
+    },
+    {
+      "id": "A05_SECURITY_BOUNDARY",
+      "expectedReason": "SECURITY_BOUNDARY",
+      "observedReason": "SECURITY_BOUNDARY",
+      "passed": true
+    },
+    {
+      "id": "A06_REPORT_SOURCE",
+      "expectedReason": "REPORT_SOURCE_TABLETOP-A1",
+      "observedReason": "REPORT_SOURCE_TABLETOP-A1",
+      "passed": true
+    },
+    {
+      "id": "A07_REPORT_PLAN",
+      "expectedReason": "REPORT_PLAN_TABLETOP-A1",
+      "observedReason": "REPORT_PLAN_TABLETOP-A1",
+      "passed": true
+    },
+    {
+      "id": "A08_REPORT_FRAME",
+      "expectedReason": "REPORT_FRAME_TABLETOP-A1",
+      "observedReason": "REPORT_FRAME_TABLETOP-A1",
+      "passed": true
+    },
+    {
+      "id": "A09_RENDER_SETTINGS",
+      "expectedReason": "RENDER_SETTINGS_TABLETOP-A1",
+      "observedReason": "RENDER_SETTINGS_TABLETOP-A1",
+      "passed": true
+    },
+    {
+      "id": "A10_NON_FINITE_ACCEPTED",
+      "expectedReason": "EXR_DECODE_TABLETOP-A1",
+      "observedReason": "EXR_DECODE_TABLETOP-A1",
+      "passed": true
+    },
+    {
+      "id": "A11_PIXEL_HASH",
+      "expectedReason": "PIXEL_PAIR_TABLETOP",
+      "observedReason": "PIXEL_PAIR_TABLETOP",
+      "passed": true
+    },
+    {
+      "id": "A12_FIFTH_DOCKER_RUN",
+      "expectedReason": "OPERATION_BOUNDARY",
+      "observedReason": "OPERATION_BOUNDARY",
+      "passed": true
+    },
+    {
+      "id": "A13_NEGATIVE_LAUNCH",
+      "expectedReason": "NEGATIVE_PRE_CONTAINER",
+      "observedReason": "NEGATIVE_PRE_CONTAINER",
+      "passed": true
+    },
+    {
+      "id": "A14_EVIDENCE_HASH",
+      "expectedReason": "EVIDENCE_SELF_HASH",
+      "observedReason": "EVIDENCE_SELF_HASH",
+      "passed": true
+    }
+  ],
+  "correctionParentMatch": true,
+  "failureTotalSelfTestMatch": true,
+  "failureTotalSelfTest": {
+    "passed": true,
+    "expectedReason": "REPORT_SOURCE_TABLETOP-A1",
+    "observedReason": "REPORT_SOURCE_TABLETOP-A1",
+    "attackGeneratorReturned": 14,
+    "attackGeneratorThrew": false
+  },
+  "correctionAttacksMatch": true,
+  "correctionAttacks": [
+    {
+      "id": "C1_A01_EXR_MEDIA_TYPE",
+      "expectedReason": "C1_SAVE_SETTINGS_TABLETOP-A1",
+      "observedReason": "C1_SAVE_SETTINGS_TABLETOP-A1",
+      "passed": true
+    },
+    {
+      "id": "C1_A02_NULL_TOTALITY",
+      "expectedReason": "C1_FAILURE_TOTALITY",
+      "observedReason": "C1_FAILURE_TOTALITY",
+      "passed": true
+    }
+  ],
+  "evidenceSelfHashMatch": true,
+  "passed": true
+}
