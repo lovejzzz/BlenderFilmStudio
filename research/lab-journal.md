@@ -1439,6 +1439,20 @@ This closes the bounded DOF machine gate, not artistic focus. INTERIOR's 3.2 m s
 
 Artifacts: `experiments/codex-worker-depth-of-field-holdout-v0-1/`, `specs/codex-worker-depth-of-field-holdout.v0.1.json`, `research/2026-08-27-b49-dof-codex-worker-depth-of-field-holdout-protocol.md` and `research/2026-08-27-b49-dof-codex-worker-depth-of-field-holdout-result.md`.
 
+## J-086 · B50 packages the first viewable focus-intent blind review
+
+Date: 2026-08-27 · Type: DELAYED-DISCLOSURE HUMAN PACKAGE · Runtime: two fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+B50 froze the exact chair-portrait brief, source scene, 960×540 render pair, 18-observer 9/9 order schedule, response schema and symmetric decision thresholds before tool implementation. A read-only real-Blender derivation measured the compiled 3.2 m focus inside the 2.74–4.89 m window range, while the semantic `PROP_CHAIR` root was at 6.452064 m and the chair-back center at 6.459178 m.
+
+The first execution stopped before any container because projected free space missed the frozen 100 GiB reserve by about 674 MB. Removing only a 1.62 GB reconstructible Codex runtime cache allowed the unchanged gate to pass. Two fresh workers then rendered the original numeric-focus and chair-object-focus cells at 960×540, 128 raw samples. Their walls were 670.342 and 667.678 seconds. Only `camera.data.dof.focus_object` differed.
+
+Both seven-subimage EXRs and ACES 2 review PNGs reopened successfully. The pair changed 1,553,929 scene-linear RGB values and 373,958 PNG channel values. Eighteen private anonymous sessions were generated with exact 9/9 order balance. All 21 attacks passed; an independent 29-check audit scanned 3,616 tracked/public files against the private sensitive registry and found zero matches.
+
+A real browser pilot confirmed native/CSS 960×540 display, correct A/B switching, zero condition/repository leakage and zero console errors. It did not submit or download a response. Status: `PACKAGE_READY_HUMAN_PENDING`; human evidence remains exactly 0/18 and collection remains closed until the exact published public state passes a final leak audit.
+
+Artifacts: `experiments/focus-intent-human-review-v0-1/`, `specs/focus-intent-human-review-spec.v0.1.json`, `research/2026-08-27-b50-focus-intent-human-review-protocol.md` and `research/2026-08-27-b50-focus-intent-package-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

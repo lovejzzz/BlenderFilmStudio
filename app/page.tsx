@@ -236,6 +236,7 @@ export default function Home() {
           <Link className="route-tab" href="/resolution-holdout-v0-1">分辨率 Holdout</Link>
           <Link className="route-tab" href="/motion-blur-holdout-v0-1">运动模糊 Holdout</Link>
           <Link className="route-tab" href="/depth-of-field-holdout-v0-1">景深 Holdout</Link>
+          <Link className="route-tab" href="/focus-intent-review-v0-1">焦点意图盲评</Link>
           <Link className="route-tab" href="/repeated-frame-mode-switch-v0-1">同 PID 模式</Link>
           <Link className="route-tab" href="/pass-domain-localization-v0-1">Pass 域定位</Link>
           <Link className="route-tab" href="/fixed-jitter-intervention-v0-1">固定抖动干预</Link>
