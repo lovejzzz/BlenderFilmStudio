@@ -36,6 +36,11 @@ def tree_manifest(root: Path) -> dict:
     return {"fileCount": len(records), "bytes": sum(item["bytes"] for item in records), "treeSha256": canonical_hash(records)}
 
 
+def git_blob_hash(commit: str, uri: str, repository_root: Path) -> str | None:
+    process = subprocess.run(["git", "show", f"{commit}:{uri}"], cwd=repository_root, capture_output=True, check=False)
+    return hashlib.sha256(process.stdout).hexdigest() if process.returncode == 0 else None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(); parser.add_argument("--spec", type=Path, required=True); parser.add_argument("--receipt", type=Path, required=True); parser.add_argument("--results", type=Path, required=True); parser.add_argument("--output", type=Path, required=True); args = parser.parse_args()
     analyzer = Path(__file__).with_name("analyze-b51-cycles-cache-state-derivation.py")
@@ -51,9 +56,14 @@ def main() -> None:
         current_original = tree_manifest(original)
         current_retained = tree_manifest(retained)
         retained_receipt = next(item["retainedManifest"] for item in receipt["cacheEvents"] if item["event"] == "RETAIN_GENERATED")
+        frozen_tool_checks = []
+        for name, binding in receipt["tools"].items():
+            observed = git_blob_hash(receipt["toolFreezeCommit"], binding["uri"], repository_root)
+            frozen_tool_checks.append({"name": name, "uri": binding["uri"], "expectedSha256": binding["sha256"], "observedGitBlobSha256": observed, "match": observed == binding["sha256"]})
+        frozen_tools_match = all(item["match"] for item in frozen_tool_checks)
         safe = restore["status"] == "PASS" and restore["matchesPreflight"] and restore["originalExists"] and not restore["originalIsSymlink"] and not restore["quarantineExists"] and restore["generatedRetentionExists"] and receipt["executionError"] is None and not quarantine.exists() and current_original["treeSha256"] == receipt["cachePreflight"]["original"]["treeSha256"] and current_retained["treeSha256"] == retained_receipt["treeSha256"]
-        passed = exact and safe and result["verdict"] == "CYCLES_CACHE_STATE_DERIVATION_USABLE" and result["attacksPassed"] == len(spec["attacks"])
-        audit = {"schemaVersion": "bfs.cyclesCacheStateDerivationAudit.v0.1", "status": "PASS" if passed else "FAIL", "resultsSha256": sha256_file(args.results), "replaySha256": sha256_file(replay), "byteExactReplay": exact, "cacheSafetyPass": safe, "originalCacheTreeSha256": receipt["cachePreflight"]["original"]["treeSha256"], "restoredCacheTreeSha256": restore["restoredManifest"]["treeSha256"], "currentOriginalCacheTreeSha256": current_original["treeSha256"], "currentRetainedGeneratedCacheTreeSha256": current_retained["treeSha256"], "verdict": result["verdict"], "attacksPassed": result["attacksPassed"], "attackCount": len(result["attacks"]), "evidenceCoreHash": result["evidenceCoreHash"], "toolHashes": {"analyzer": sha256_file(analyzer), "audit": sha256_file(__file__)}, "replayStdout": process.stdout.strip(), "failures": [] if passed else ["REPLAY_OR_CACHE_SAFETY_MISMATCH"]}
+        passed = exact and safe and frozen_tools_match and result["verdict"] == "CYCLES_CACHE_STATE_DERIVATION_USABLE" and result["attacksPassed"] == len(spec["attacks"])
+        audit = {"schemaVersion": "bfs.cyclesCacheStateDerivationAudit.v0.2", "status": "PASS" if passed else "FAIL", "analysisCorrection": result["analysisCorrection"], "resultsSha256": sha256_file(args.results), "replaySha256": sha256_file(replay), "byteExactReplay": exact, "cacheSafetyPass": safe, "frozenToolChecks": frozen_tool_checks, "frozenToolsMatch": frozen_tools_match, "originalCacheTreeSha256": receipt["cachePreflight"]["original"]["treeSha256"], "restoredCacheTreeSha256": restore["restoredManifest"]["treeSha256"], "currentOriginalCacheTreeSha256": current_original["treeSha256"], "currentRetainedGeneratedCacheTreeSha256": current_retained["treeSha256"], "verdict": result["verdict"], "attacksPassed": result["attacksPassed"], "attackCount": len(result["attacks"]), "evidenceCoreHash": result["evidenceCoreHash"], "toolHashes": {"correctedAnalyzer": sha256_file(analyzer), "correctedAudit": sha256_file(__file__)}, "replayStdout": process.stdout.strip(), "failures": [] if passed else ["REPLAY_OR_CACHE_SAFETY_MISMATCH"]}
         args.output.write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n"); print(f"BFS_B51_D2_AUDIT {audit['status']} replay={'MATCH' if exact else 'DIFF'} cacheSafety={safe}", flush=True)
         if not passed: raise SystemExit(1)
 

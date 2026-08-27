@@ -31,8 +31,14 @@ def canonical_hash(value: object) -> str:
 def duration_seconds(value: str | None) -> float | None:
     if not value:
         return None
-    hours, minutes, seconds = value.split(":")
-    return int(hours) * 3600 + int(minutes) * 60 + float(seconds)
+    fields = value.split(":")
+    if len(fields) == 2:
+        minutes, seconds = fields
+        return int(minutes) * 60 + float(seconds)
+    if len(fields) == 3:
+        hours, minutes, seconds = fields
+        return int(hours) * 3600 + int(minutes) * 60 + float(seconds)
+    raise ValueError(f"unsupported EXR duration: {value}")
 
 
 def read_exr(path: Path, width: int, height: int) -> tuple[list[str], dict, dict]:
@@ -138,7 +144,7 @@ def main() -> None:
     timing_summary["coldOverWarmR1RenderRatio"] = timing_summary["coldRenderSeconds"] / timing_summary["warmRenderSeconds"][0]
     timing_summary["coldOverWarmR1SynchronizationRatio"] = timing_summary["coldSynchronizationSeconds"] / timing_summary["warmSynchronizationSeconds"][0]
     operation_counts = {"nativeBlenderProcesses": sum(item.startswith("NATIVE_BLENDER_PROCESS_") for item in receipt["runtimeOperations"]), "atomicDirectoryRenames": sum(item.startswith("ATOMIC_RENAME_") for item in receipt["runtimeOperations"]), "deletions": 0, "dockerRuns": 0, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0}
-    evidence = {"schemaVersion": "bfs.cyclesCacheStateDerivationEvidence.v0.1", "experimentId": spec["experimentId"], "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"], "runtime": {"python": platform.python_version(), "openImageIO": oiio.VERSION_STRING, "numpy": np.__version__}, "parents": receipt["parents"], "parentObservations": receipt["parentObservations"], "sourceObservations": receipt["sourceObservations"], "blenderObservation": receipt["blenderObservation"], "diskAdmission": receipt["diskAdmission"], "cachePreflight": receipt["cachePreflight"], "cacheEvents": receipt["cacheEvents"], "cacheRestore": receipt["cacheRestore"], "observations": observations, "timingSummary": timing_summary, "passComparisons": pass_comparisons, "operationCounts": operation_counts, "nonClaims": spec["nonClaims"], "baseFailure": None}
+    evidence = {"schemaVersion": "bfs.cyclesCacheStateDerivationEvidence.v0.1", "experimentId": spec["experimentId"], "analysisCorrection": {"id": "B51-D2-C1", "scope": "Accept Blender EXR MM:SS.xx and HH:MM:SS.xx duration formats; no render, receipt, metric or gate mutation."}, "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"], "runtime": {"python": platform.python_version(), "openImageIO": oiio.VERSION_STRING, "numpy": np.__version__}, "parents": receipt["parents"], "parentObservations": receipt["parentObservations"], "sourceObservations": receipt["sourceObservations"], "blenderObservation": receipt["blenderObservation"], "diskAdmission": receipt["diskAdmission"], "cachePreflight": receipt["cachePreflight"], "cacheEvents": receipt["cacheEvents"], "cacheRestore": receipt["cacheRestore"], "observations": observations, "timingSummary": timing_summary, "passComparisons": pass_comparisons, "operationCounts": operation_counts, "nonClaims": spec["nonClaims"], "baseFailure": None}
     evidence["evidenceCoreHash"] = canonical_hash(hash_payload(evidence)); failure = validate(evidence, spec); evidence["baseFailure"] = failure; evidence["evidenceCoreHash"] = canonical_hash(hash_payload(evidence)); failure = validate(evidence, spec); evidence["baseFailure"] = failure
     evidence["attacks"] = attacks(evidence, spec); evidence["attacksPassed"] = sum(item["passed"] for item in evidence["attacks"]); evidence["verdict"] = "CYCLES_CACHE_STATE_DERIVATION_USABLE" if failure is None and evidence["attacksPassed"] == len(spec["attacks"]) else "CYCLES_CACHE_STATE_DERIVATION_INVALID"
     args.output.write_text(json.dumps(evidence, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
