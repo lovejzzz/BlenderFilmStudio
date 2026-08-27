@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 
 
-SPEC_SHA256 = "89ff4a34bd4367996ac139c73b46ac8d9627173da3302f2148b90e283695d353"
+SPEC_SHA256 = "9ae043172e3d126d590b6be7942de759a503eee3c76cf4b96062e92285691fe5"
 CHANNELS = ("R", "G", "B")
 SOURCE_FILES = {
     "previousRgba": ("previous.rgba32", 4),
@@ -170,8 +170,10 @@ def reconstruct(arrays: dict[str, np.ndarray], registered: set[float], radius: i
             owner = current_owner[y, x]
             if float(owner) not in registered or current[y, x, 3] <= np.float32(0.999):
                 continue
-            terms = bilinear_terms(previous, current, vector, x, y, 0)
-            coords = terms["coordinates"]
+            qx = x + float(vector[y, x, 0])
+            qy = y - float(vector[y, x, 1])
+            x0, y0 = math.floor(qx), math.floor(qy)
+            coords = ((x0, y0), (x0 + 1, y0), (x0, y0 + 1), (x0 + 1, y0 + 1))
             neighborhood_ok = x >= radius and y >= radius and x < width - radius and y < height - radius
             if neighborhood_ok:
                 neighborhood_ok = all(
@@ -360,6 +362,7 @@ def main() -> None:
     parent_checks["d12_5ReceiptInternalHash"] = self_hash_ok(parent_documents["d12_5Receipt"], "receiptHash") and parent_documents["d12_5Receipt"]["receiptHash"] == spec["parents"]["d12_5Receipt"]["receiptHash"]
     parent_checks["d12_5ExecutionInternalHash"] = self_hash_ok(parent_documents["d12_5Execution"], "executionHash") and parent_documents["d12_5Execution"]["executionHash"] == spec["parents"]["d12_5Execution"]["executionHash"]
     parent_checks["d12_5Verdict"] = parent_documents["d12_5Result"]["verdict"] == spec["parents"]["d12_5Result"]["verdict"]
+    parent_checks["invalidD12_6Status"] = parent_documents["invalidD12_6Run"]["status"] == spec["parents"]["invalidD12_6Run"]["status"] and parent_documents["invalidD12_6Run"]["resultFileWritten"] is False and parent_documents["invalidD12_6Run"]["measurementInspected"] is False
     if not all(parent_checks.values()):
         raise RuntimeError(f"parent identity failure: {parent_checks}")
 

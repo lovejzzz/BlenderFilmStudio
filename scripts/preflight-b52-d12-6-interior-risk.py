@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 
 
-SPEC_SHA256 = "89ff4a34bd4367996ac139c73b46ac8d9627173da3302f2148b90e283695d353"
+SPEC_SHA256 = "9ae043172e3d126d590b6be7942de759a503eee3c76cf4b96062e92285691fe5"
 
 
 def sha256_file(path: Path) -> str:
