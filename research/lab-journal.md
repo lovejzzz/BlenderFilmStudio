@@ -2067,6 +2067,20 @@ Formal root and formal tools are absent. Spec SHA-256: `147338ae39b9c025a8f2a492
 
 Artifacts: `specs/blender-multipart-temporal-adapter-holdout.v0.1.json` and `research/2026-08-27-b52-d10-blender-multipart-temporal-adapter-holdout-protocol.md`.
 
+## J-128 · Frozen D10 tools pass zero-formal-output admission
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+Seven D10 tools were frozen at commit `c290360723d9eed0bc740eb411842ae52b172213`: source renderer, canonical adapter, independent analyzer, runner, audit, preflight and five-test standard-library contract suite. The preflight matched every working file to its Git blob, all D9.1/D5/development parents, Blender/Python/OCIO runtimes and the frozen spec.
+
+The independent analyzer's AST imported neither `bpy`, `bpy_extras` nor `mathutils` and contained no renderer-projection payload dependency. Freshness checks confirmed unseen resolution, ortho scale, trajectories and disjoint pass IDs. Contract tests passed 5/5. A real Blender 5.2 process confirmed the four required ViewLayer API properties with zero render calls and zero Cycles ray renders.
+
+The formal root remained absent before and after preflight; formal child processes and measurements stayed at zero. Disk admission observed 107,858,395,136 available bytes and projected 107,841,617,920 after the 16 MiB experiment, above the 107,374,182,400-byte reserve.
+
+Preflight file SHA-256: `853ad3b15e4952749897f5bbd0a892828c5e7531a2ef4150bed78acf6d7ce484`; internal canonical hash: `dd34c79de3b0aee6d086ab72695eeadff447ad27c31828fb60060b698bf0f6ed`. Admission status: `ACCEPTED`. Next: commit this immutable admission and execute the unchanged 19-process matrix once.
+
+Artifact: `experiments/blender-multipart-temporal-adapter-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
