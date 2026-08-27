@@ -1,0 +1,457 @@
+{
+  "schemaVersion": "bfs.resolutionHoldoutRunReceipt.v0.1",
+  "preregistration": {
+    "commit": "fe2f857abeac9116d01d589fcf5f4cc3532d3f9a",
+    "specUri": "specs/codex-worker-resolution-holdout.v0.1.json",
+    "specSha256": "6abee2d211c787c4d350785d2e87c26b469d32ae090a125b36dd2aef1599a47c"
+  },
+  "toolFreezeCommit": "581c7e1d6761be306f894980a7f76db4c6614c89",
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b49-resolution-holdout.mjs",
+      "sha256": "1d04410c14d5656ebbbeea2cc953d94f6ba4971806bdf81ebd4f0f2e1bed040b"
+    },
+    "renderer": {
+      "uri": "blender/render_b49_resolution_holdout.py",
+      "sha256": "21ad6e90faabff1e000e49cd47351f5daae90a471aa6a73a240155419af64d64"
+    },
+    "analyzer": {
+      "uri": "scripts/analyze-b49-resolution-holdout.py",
+      "sha256": "b95175fead8d5c0bf7dbb4d13871949e0fbe8eb378ad2193af36375fbaee00b1"
+    },
+    "audit": {
+      "uri": "scripts/audit-b49-resolution-holdout.py",
+      "sha256": "d9173deda9204077006ced264aa79ed729b784013480247464cfdedd34619d08"
+    }
+  },
+  "parents": {
+    "qualityCostResult": {
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json",
+      "sha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "verdict": "B48_NUMERICAL_QUALITY_COST_POINT_SELECTED",
+      "selectedCellId": "C128_RAW"
+    },
+    "qualityCostAudit": {
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json",
+      "sha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "status": "PASS"
+    },
+    "resolutionDerivationReceipt": {
+      "uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/run.receipt.json",
+      "sha256": "c8ad4309dd44a7d50e1fff3cf7e680550d4c62acb1b52bff6532c749b042dc70"
+    },
+    "resolutionDerivationAnalysis": {
+      "uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/analysis.json",
+      "sha256": "57a0f31232dbb45aa5a2064d9a75aee3c8c3d5631fdf5f301cf15fc07e3edbca",
+      "usableForFormalDesign": true
+    }
+  },
+  "parentObservations": [
+    {
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json",
+      "expectedSha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "observedSha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json",
+      "expectedSha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "observedSha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/run.receipt.json",
+      "expectedSha256": "c8ad4309dd44a7d50e1fff3cf7e680550d4c62acb1b52bff6532c749b042dc70",
+      "observedSha256": "c8ad4309dd44a7d50e1fff3cf7e680550d4c62acb1b52bff6532c749b042dc70",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/analysis.json",
+      "expectedSha256": "57a0f31232dbb45aa5a2064d9a75aee3c8c3d5631fdf5f301cf15fc07e3edbca",
+      "observedSha256": "57a0f31232dbb45aa5a2064d9a75aee3c8c3d5631fdf5f301cf15fc07e3edbca",
+      "match": true
+    }
+  ],
+  "sourceObservations": [
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+      "expectedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "observedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "match": true
+    },
+    {
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+      "expectedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "observedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "match": true
+    },
+    {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true
+    },
+    {
+      "uri": "specs/codex-worker-resolution-holdout.v0.1.json",
+      "expectedSha256": "6abee2d211c787c4d350785d2e87c26b469d32ae090a125b36dd2aef1599a47c",
+      "observedSha256": "6abee2d211c787c4d350785d2e87c26b469d32ae090a125b36dd2aef1599a47c",
+      "match": true
+    }
+  ],
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "sizeBytes": 1004901158
+  },
+  "hostInspectorObservation": {
+    "pythonExecutable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+    "pythonVersion": "3.13.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+    "packages": {
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    }
+  },
+  "diskAdmission": {
+    "availableBytes": "118351523840",
+    "projectedWriteBytes": "1073741824",
+    "minimumReserveBytes": "107374182400",
+    "freeAfterProjectedBytes": "117277782016",
+    "status": "ACCEPTED"
+  },
+  "securityBoundary": {
+    "platform": "linux/amd64",
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": [
+      "ALL"
+    ],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4,
+    "shmBytes": 1073741824,
+    "wallTimeMs": 300000,
+    "killGraceMs": 5000
+  },
+  "operationBoundary": {
+    "dockerRuns": 2,
+    "frameRenders": 2,
+    "hostExrAnalyses": 2,
+    "builds": 0,
+    "pulls": 0,
+    "downloads": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0
+  },
+  "runtimeOperations": [
+    "DOCKER_RUN_TABLETOP",
+    "DOCKER_RUN_INTERIOR",
+    "DOCKER_RUNNING_CONTAINER_CHECK",
+    "HOST_EXR_ANALYSIS_TABLETOP",
+    "HOST_EXR_ANALYSIS_INTERIOR"
+  ],
+  "runs": [
+    {
+      "runId": "TABLETOP",
+      "shotId": "TABLETOP",
+      "containerName": "bfs-b49-r-tabletop",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-r-tabletop",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-resolution-holdout-v0-1/TABLETOP,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_resolution_holdout.py",
+        "--",
+        "--shot-id",
+        "SHOT_109",
+        "--source-sha256",
+        "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+        "--frame",
+        "37",
+        "--plan-hash",
+        "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+        "--scene-hash",
+        "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+        "--structure-hash",
+        "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 161733,
+      "stdout": "00:00.122  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.675  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.675  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.676  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.676  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.676  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:08.607  blend            | Read blend: \"/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend\"\nBFS_B49_R_WORKER_OK shot=SHOT_109 renderSeconds=151.992087 peakRssKiB=541200\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 3541488,
+          "sha256": "f594a67322b93fc444c71e19991dc3a9b6adc81d21b754d74a2eb31fc5d0ed2e",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082643,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+          "sceneSpecHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+          "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "experimentId": "B49-R",
+        "frame": 37,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 541200,
+        "preregistrationCommit": "fe2f857abeac9116d01d589fcf5f4cc3532d3f9a",
+        "renderSeconds": 151.992087,
+        "saveSeconds": 0.093178,
+        "schemaVersion": "bfs.resolutionHoldoutWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730290,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "SHOT_109",
+        "source": {
+          "bytes": 118702,
+          "sha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+          "uri": "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+        }
+      }
+    },
+    {
+      "runId": "INTERIOR",
+      "shotId": "INTERIOR",
+      "containerName": "bfs-b49-r-interior",
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-r-interior",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-resolution-holdout-v0-1/INTERIOR,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_resolution_holdout.py",
+        "--",
+        "--shot-id",
+        "SHOT_110",
+        "--source-sha256",
+        "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+        "--frame",
+        "19",
+        "--plan-hash",
+        "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+        "--scene-hash",
+        "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+        "--structure-hash",
+        "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 201652,
+      "stdout": "00:00.122  color_management | Using OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.673  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.673  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.673  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.673  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.673  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:08.655  blend            | Read blend: \"/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend\"\nBFS_B49_R_WORKER_OK shot=SHOT_110 renderSeconds=191.877228 peakRssKiB=541336\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "killSent": false,
+      "report": {
+        "artifact": {
+          "bytes": 3360262,
+          "sha256": "a5ecbc12a5c91b01536428160a7d49313ef48ec904d4917f5a728d54d5b753ea",
+          "uri": "production.exr"
+        },
+        "bindings": {
+          "baseShotSeed": 24082644,
+          "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+          "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+          "sceneSpecHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+          "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954"
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "buildPlatform": "Linux",
+          "version": "5.2.0 LTS"
+        },
+        "experimentId": "B49-R",
+        "frame": 19,
+        "ocio": {
+          "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+          "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+        },
+        "passed": true,
+        "peakSelfRssKiB": 541336,
+        "preregistrationCommit": "fe2f857abeac9116d01d589fcf5f4cc3532d3f9a",
+        "renderSeconds": 191.877228,
+        "saveSeconds": 0.097537,
+        "schemaVersion": "bfs.resolutionHoldoutWorkerReport.v0.1",
+        "settings": {
+          "animatedSeed": false,
+          "denoising": false,
+          "device": "CPU",
+          "engine": "CYCLES",
+          "motionBlur": false,
+          "persistentData": false,
+          "pixelCount": 147456,
+          "resolution": [
+            512,
+            288,
+            100
+          ],
+          "samples": 128,
+          "seed": 24730291,
+          "seedOffset": 647647,
+          "threads": 4,
+          "threadsMode": "FIXED"
+        },
+        "shotId": "SHOT_110",
+        "source": {
+          "bytes": 106078,
+          "sha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+          "uri": "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+        }
+      }
+    }
+  ],
+  "cleanup": {
+    "experimentContainersRunningAfter": 0
+  }
+}

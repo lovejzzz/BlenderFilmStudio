@@ -1,0 +1,628 @@
+{
+  "attacks": [
+    {
+      "expectedReason": "PARENT_IDENTITY",
+      "id": "A01_PARENT_IDENTITY",
+      "observedReason": "PARENT_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "SOURCE_IDENTITY",
+      "id": "A02_SOURCE_IDENTITY",
+      "observedReason": "SOURCE_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "IMAGE_IDENTITY",
+      "id": "A03_IMAGE_IDENTITY",
+      "observedReason": "IMAGE_IDENTITY",
+      "passed": true
+    },
+    {
+      "expectedReason": "SECURITY_BOUNDARY",
+      "id": "A04_SECURITY_BOUNDARY",
+      "observedReason": "SECURITY_BOUNDARY",
+      "passed": true
+    },
+    {
+      "expectedReason": "DISK_ADMISSION",
+      "id": "A05_DISK_ADMISSION",
+      "observedReason": "DISK_ADMISSION",
+      "passed": true
+    },
+    {
+      "expectedReason": "RESOLUTION_SETTING",
+      "id": "A06_RESOLUTION_SETTING",
+      "observedReason": "RESOLUTION_SETTING",
+      "passed": true
+    },
+    {
+      "expectedReason": "RENDER_SETTING",
+      "id": "A07_RENDER_SETTING",
+      "observedReason": "RENDER_SETTING",
+      "passed": true
+    },
+    {
+      "expectedReason": "PASS_ROSTER",
+      "id": "A08_PASS_ROSTER",
+      "observedReason": "PASS_ROSTER",
+      "passed": true
+    },
+    {
+      "expectedReason": "NON_FINITE",
+      "id": "A09_NON_FINITE",
+      "observedReason": "NON_FINITE",
+      "passed": true
+    },
+    {
+      "expectedReason": "RENDER_EXPONENT",
+      "id": "A10_RENDER_EXPONENT",
+      "observedReason": "RENDER_EXPONENT",
+      "passed": true
+    },
+    {
+      "expectedReason": "EXR_EXPONENT",
+      "id": "A11_EXR_EXPONENT",
+      "observedReason": "EXR_EXPONENT",
+      "passed": true
+    },
+    {
+      "expectedReason": "RSS_LIMIT",
+      "id": "A12_RSS_LIMIT",
+      "observedReason": "RSS_LIMIT",
+      "passed": true
+    },
+    {
+      "expectedReason": "OPERATION_BOUNDARY",
+      "id": "A13_OPERATION_BOUNDARY",
+      "observedReason": "OPERATION_BOUNDARY",
+      "passed": true
+    },
+    {
+      "expectedReason": "CLEANUP",
+      "id": "A14_CLEANUP",
+      "observedReason": "CLEANUP",
+      "passed": true
+    },
+    {
+      "expectedReason": "EVIDENCE_SELF_HASH",
+      "id": "A15_EVIDENCE_SELF_HASH",
+      "observedReason": "EVIDENCE_SELF_HASH",
+      "passed": true
+    }
+  ],
+  "attacksPassed": 15,
+  "baseFailure": null,
+  "cleanup": {
+    "experimentContainersRunningAfter": 0
+  },
+  "diskAdmission": {
+    "availableBytes": "118351523840",
+    "freeAfterProjectedBytes": "117277782016",
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "1073741824",
+    "status": "ACCEPTED"
+  },
+  "evidenceCoreHash": "0b8199d48cc18c8f03b47f6763be705e5f6c0a655b62d293e5977b72db2a2c9e",
+  "experimentId": "B49-R",
+  "gates": {
+    "exrByteExponentMaximum": 1.05,
+    "exrByteExponentMinimum": 0.75,
+    "peakSelfRssKiBMaximum": 2097152,
+    "renderPixelExponentMaximum": 1.05,
+    "renderPixelExponentMinimum": 0.95
+  },
+  "hostInspector": {
+    "packages": {
+      "numpy": "2.3.4",
+      "openImageIO": "3.1.13.1"
+    },
+    "pythonExecutable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+    "pythonExecutableSha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+    "pythonVersion": "3.13.13"
+  },
+  "image": {
+    "architecture": "amd64",
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "sizeBytes": 1004901158
+  },
+  "nonClaims": [
+    "measured 2K or 4K render",
+    "complete-shot throughput",
+    "human cinematic quality",
+    "motion blur or depth-of-field quality",
+    "complex character or texture memory",
+    "GPU or Eevee behavior",
+    "native x86 or cloud throughput",
+    "dollar cost"
+  ],
+  "observations": [
+    {
+      "allCombinedFinite": true,
+      "animatedSeed": false,
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-r-tabletop",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-resolution-holdout-v0-1/TABLETOP,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_resolution_holdout.py",
+        "--",
+        "--shot-id",
+        "SHOT_109",
+        "--source-sha256",
+        "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+        "--frame",
+        "37",
+        "--plan-hash",
+        "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e",
+        "--scene-hash",
+        "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7",
+        "--structure-hash",
+        "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 3541488,
+        "sha256": "f594a67322b93fc444c71e19991dc3a9b6adc81d21b754d74a2eb31fc5d0ed2e",
+        "uri": "experiments/codex-worker-resolution-holdout-v0-1/TABLETOP/production.exr"
+      },
+      "baseShotSeed": 24082643,
+      "baseline": {
+        "combinedCanonicalFloat32Sha256": "4e255e4fa7fdfac9c61d5cfa72d86525714203b7e0b9f1b8be9d99bd26d3dddd",
+        "exrBytes": 278195,
+        "pixelCount": 9216,
+        "renderSeconds": 9.876034,
+        "resolution": [
+          128,
+          72
+        ]
+      },
+      "combinedCanonicalFloat32Sha256": "66cdec65604528a5007f75fa3b61b355a839015ff903b128846f9d0740c8b642",
+      "denoising": false,
+      "effectiveExponents": {
+        "exrBytes": 0.9175468145494644,
+        "renderSeconds": 0.9859801506751739
+      },
+      "frame": 37,
+      "freshContainerWallSeconds": 161.733,
+      "motionBlur": false,
+      "peakSelfRssKiB": 541200,
+      "persistentData": false,
+      "pixelCount": 147456,
+      "pixelRatioToBaseline": 16,
+      "projection": {
+        "basis": "committed 128x72 baseline and preregistered exponent band",
+        "labels": [
+          "MODEL_PROJECTION_NOT_MEASURED",
+          "CURRENT_QEMU_CPU_WORKER_ONLY"
+        ],
+        "rows": {
+          "fourK": {
+            "frames": 240,
+            "perFrameSecondsRange": [
+              6325.763636328559,
+              12489.274508661536
+            ],
+            "pixelRatio": 900,
+            "resolution": [
+              3840,
+              2160
+            ],
+            "sequenceSecondsRange": [
+              1518183.2727188542,
+              2997425.8820787687
+            ]
+          },
+          "twoK": {
+            "frames": 240,
+            "perFrameSecondsRange": [
+              1694.946398923508,
+              2913.226289235215
+            ],
+            "pixelRatio": 225,
+            "resolution": [
+              1920,
+              1080
+            ],
+            "sequenceSecondsRange": [
+              406787.1357416419,
+              699174.3094164516
+            ]
+          }
+        }
+      },
+      "ratiosToBaseline": {
+        "exrBytes": 12.730235985549704,
+        "renderSeconds": 15.389992278276885
+      },
+      "renderSeconds": 151.992087,
+      "resolution": [
+        512,
+        288,
+        100
+      ],
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 128,
+      "saveSeconds": 0.093178,
+      "seed": 24730290,
+      "seedOffset": 647647,
+      "shotId": "TABLETOP",
+      "sourceShotId": "SHOT_109",
+      "threads": 4
+    },
+    {
+      "allCombinedFinite": true,
+      "animatedSeed": false,
+      "argv": [
+        "--host",
+        "unix:///Users/tianxing/.colima/default/docker.sock",
+        "run",
+        "--rm",
+        "--name",
+        "bfs-b49-r-interior",
+        "--platform",
+        "linux/amd64",
+        "--pull",
+        "never",
+        "--read-only",
+        "--network",
+        "none",
+        "--user",
+        "65532:65532",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges:true",
+        "--pids-limit",
+        "256",
+        "--memory",
+        "8589934592",
+        "--cpus",
+        "4",
+        "--shm-size",
+        "1073741824",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio,dst=/repo,readonly",
+        "--mount",
+        "type=bind,src=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/codex-worker-resolution-holdout-v0-1/INTERIOR,dst=/repo/worker-output",
+        "--tmpfs",
+        "/tmp:rw,noexec,nosuid,nodev,size=536870912,uid=65532,gid=65532",
+        "--tmpfs",
+        "/work:rw,noexec,nosuid,nodev,size=1073741824,uid=65532,gid=65532",
+        "--env",
+        "BLENDER_USER_CONFIG=/work/blender-config",
+        "--env",
+        "BLENDER_USER_SCRIPTS=/work/blender-scripts",
+        "--env",
+        "HOME=/work/home",
+        "--env",
+        "LANG=C.UTF-8",
+        "--env",
+        "LC_ALL=C.UTF-8",
+        "--env",
+        "OCIO=/repo/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "--env",
+        "TMPDIR=/work/tmp",
+        "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+        "--background",
+        "--disable-autoexec",
+        "--offline-mode",
+        "/repo/experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/repo/blender/render_b49_resolution_holdout.py",
+        "--",
+        "--shot-id",
+        "SHOT_110",
+        "--source-sha256",
+        "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+        "--frame",
+        "19",
+        "--plan-hash",
+        "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401",
+        "--scene-hash",
+        "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb",
+        "--structure-hash",
+        "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954",
+        "--ocio-sha256",
+        "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "--output-dir",
+        "/repo/worker-output"
+      ],
+      "artifact": {
+        "bytes": 3360262,
+        "sha256": "a5ecbc12a5c91b01536428160a7d49313ef48ec904d4917f5a728d54d5b753ea",
+        "uri": "experiments/codex-worker-resolution-holdout-v0-1/INTERIOR/production.exr"
+      },
+      "baseShotSeed": 24082644,
+      "baseline": {
+        "combinedCanonicalFloat32Sha256": "8b3120eaa1076b06a710c526b7931bff5b966df6e51123e9c4a170cf9948a3c8",
+        "exrBytes": 237682,
+        "pixelCount": 9216,
+        "renderSeconds": 12.119148,
+        "resolution": [
+          128,
+          72
+        ]
+      },
+      "combinedCanonicalFloat32Sha256": "2b1118f9e423c780616a77a55ae42f025351dd2ba89e5976a8dde269b6575723",
+      "denoising": false,
+      "effectiveExponents": {
+        "exrBytes": 0.9553672923309682,
+        "renderSeconds": 0.9962058298457745
+      },
+      "frame": 19,
+      "freshContainerWallSeconds": 201.652,
+      "motionBlur": false,
+      "peakSelfRssKiB": 541336,
+      "persistentData": false,
+      "pixelCount": 147456,
+      "pixelRatioToBaseline": 16,
+      "projection": {
+        "basis": "committed 128x72 baseline and preregistered exponent band",
+        "labels": [
+          "MODEL_PROJECTION_NOT_MEASURED",
+          "CURRENT_QEMU_CPU_WORKER_ONLY"
+        ],
+        "rows": {
+          "fourK": {
+            "frames": 240,
+            "perFrameSecondsRange": [
+              7762.515370206703,
+              15325.925992467868
+            ],
+            "pixelRatio": 900,
+            "resolution": [
+              3840,
+              2160
+            ],
+            "sequenceSecondsRange": [
+              1863003.6888496086,
+              3678222.238192288
+            ]
+          },
+          "twoK": {
+            "frames": 240,
+            "perFrameSecondsRange": [
+              2079.914494079408,
+              3574.898644206002
+            ],
+            "pixelRatio": 225,
+            "resolution": [
+              1920,
+              1080
+            ],
+            "sequenceSecondsRange": [
+              499179.47857905796,
+              857975.6746094404
+            ]
+          }
+        }
+      },
+      "ratiosToBaseline": {
+        "exrBytes": 14.137637683964288,
+        "renderSeconds": 15.832567437909002
+      },
+      "renderSeconds": 191.877228,
+      "resolution": [
+        512,
+        288,
+        100
+      ],
+      "roster": [
+        "BFS_MASTER.Combined",
+        "BFS_MASTER.Depth",
+        "BFS_MASTER.Normal",
+        "BFS_MASTER.Vector",
+        "BFS_MASTER.CryptoObject00",
+        "BFS_MASTER.CryptoObject01",
+        "BFS_MASTER.CryptoObject02"
+      ],
+      "samples": 128,
+      "saveSeconds": 0.097537,
+      "seed": 24730291,
+      "seedOffset": 647647,
+      "shotId": "INTERIOR",
+      "sourceShotId": "SHOT_110",
+      "threads": 4
+    }
+  ],
+  "operationCounts": {
+    "builds": 0,
+    "dockerRuns": 2,
+    "downloads": 0,
+    "hostExrAnalyses": 2,
+    "modelCalls": 0,
+    "pulls": 0,
+    "videoModelCalls": 0
+  },
+  "parentObservations": [
+    {
+      "expectedSha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "match": true,
+      "observedSha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json"
+    },
+    {
+      "expectedSha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "match": true,
+      "observedSha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json"
+    },
+    {
+      "expectedSha256": "c8ad4309dd44a7d50e1fff3cf7e680550d4c62acb1b52bff6532c749b042dc70",
+      "match": true,
+      "observedSha256": "c8ad4309dd44a7d50e1fff3cf7e680550d4c62acb1b52bff6532c749b042dc70",
+      "uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/run.receipt.json"
+    },
+    {
+      "expectedSha256": "57a0f31232dbb45aa5a2064d9a75aee3c8c3d5631fdf5f301cf15fc07e3edbca",
+      "match": true,
+      "observedSha256": "57a0f31232dbb45aa5a2064d9a75aee3c8c3d5631fdf5f301cf15fc07e3edbca",
+      "uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/analysis.json"
+    }
+  ],
+  "parents": {
+    "qualityCostAudit": {
+      "sha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d",
+      "status": "PASS",
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json"
+    },
+    "qualityCostResult": {
+      "selectedCellId": "C128_RAW",
+      "sha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3",
+      "uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json",
+      "verdict": "B48_NUMERICAL_QUALITY_COST_POINT_SELECTED"
+    },
+    "resolutionDerivationAnalysis": {
+      "sha256": "57a0f31232dbb45aa5a2064d9a75aee3c8c3d5631fdf5f301cf15fc07e3edbca",
+      "uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/analysis.json",
+      "usableForFormalDesign": true
+    },
+    "resolutionDerivationReceipt": {
+      "sha256": "c8ad4309dd44a7d50e1fff3cf7e680550d4c62acb1b52bff6532c749b042dc70",
+      "uri": "experiments/codex-worker-resolution-scaling-derivation-v0-1/run.receipt.json"
+    }
+  },
+  "preregistration": {
+    "commit": "fe2f857abeac9116d01d589fcf5f4cc3532d3f9a",
+    "specSha256": "6abee2d211c787c4d350785d2e87c26b469d32ae090a125b36dd2aef1599a47c",
+    "specUri": "specs/codex-worker-resolution-holdout.v0.1.json"
+  },
+  "runtime": {
+    "numpy": "2.3.4",
+    "openImageIO": "3.1.13.1",
+    "python": "3.13.13"
+  },
+  "schemaVersion": "bfs.codexWorkerResolutionHoldoutEvidence.v0.1",
+  "securityBoundary": {
+    "capDrop": [
+      "ALL"
+    ],
+    "cpus": 4,
+    "killGraceMs": 5000,
+    "memoryBytes": 8589934592,
+    "network": "none",
+    "noNewPrivileges": true,
+    "outputMountWritable": true,
+    "pidsLimit": 256,
+    "platform": "linux/amd64",
+    "readOnlyRoot": true,
+    "repositoryMountReadOnly": true,
+    "shmBytes": 1073741824,
+    "user": "65532:65532",
+    "wallTimeMs": 300000
+  },
+  "sourceObservations": [
+    {
+      "expectedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "match": true,
+      "observedSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0",
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend"
+    },
+    {
+      "expectedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "match": true,
+      "observedSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf",
+      "uri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend"
+    },
+    {
+      "expectedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "match": true,
+      "observedSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    },
+    {
+      "expectedSha256": "6abee2d211c787c4d350785d2e87c26b469d32ae090a125b36dd2aef1599a47c",
+      "match": true,
+      "observedSha256": "6abee2d211c787c4d350785d2e87c26b469d32ae090a125b36dd2aef1599a47c",
+      "uri": "specs/codex-worker-resolution-holdout.v0.1.json"
+    }
+  ],
+  "toolFreezeCommit": "581c7e1d6761be306f894980a7f76db4c6614c89",
+  "tools": {
+    "analyzer": {
+      "sha256": "b95175fead8d5c0bf7dbb4d13871949e0fbe8eb378ad2193af36375fbaee00b1",
+      "uri": "scripts/analyze-b49-resolution-holdout.py"
+    },
+    "audit": {
+      "sha256": "d9173deda9204077006ced264aa79ed729b784013480247464cfdedd34619d08",
+      "uri": "scripts/audit-b49-resolution-holdout.py"
+    },
+    "renderer": {
+      "sha256": "21ad6e90faabff1e000e49cd47351f5daae90a471aa6a73a240155419af64d64",
+      "uri": "blender/render_b49_resolution_holdout.py"
+    },
+    "runner": {
+      "sha256": "1d04410c14d5656ebbbeea2cc953d94f6ba4971806bdf81ebd4f0f2e1bed040b",
+      "uri": "scripts/run-b49-resolution-holdout.mjs"
+    }
+  },
+  "verdict": "B49_RESOLUTION_SCALING_HOLDOUT_SUPPORTED"
+}

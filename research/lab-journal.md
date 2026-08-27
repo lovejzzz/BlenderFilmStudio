@@ -1361,6 +1361,22 @@ This does not measure 2K/4K. Next: freeze an unseen 512×288 (16× pixels) valid
 
 Artifacts: `experiments/codex-worker-resolution-scaling-derivation-v0-1/`, `research/2026-08-26-b49-d1-resolution-scaling-derivation-protocol.md` and `research/2026-08-27-b49-d1-resolution-scaling-derivation-result.md`.
 
+## J-081 · B49-R validates near-linear resolution cost on two unseen 512×288 cells
+
+Date: 2026-08-27 · Type: FORMAL HOLDOUT · Runtime: two fresh Blender 5.2 Linux/amd64 Cycles CPU workers
+
+B49-R froze an unseen 512×288 point—16× the committed 128×72 pixel count—before the formal tools existed. TABLETOP frame 37 and INTERIOR frame 19 each retained B48's selected 128-spp raw point, seed offset 647647, four threads, ACES 2, motion blur off, denoising off and the seven-subimage production EXR pack.
+
+TABLETOP rendered in 151.992 seconds, 15.390× its committed baseline, for an effective pixel exponent of 0.985980. INTERIOR rendered in 191.877 seconds, 15.833× baseline, for an exponent of 0.996206. Both fell inside the preregistered `[0.95,1.05]` gate. EXR byte exponents were 0.917547 and 0.955367; peak self RSS was approximately 541 MiB on both and remained below the 2 GiB gate.
+
+Both EXRs reopened as finite 512×288 float32 Combined arrays with the exact seven-pass roster. All 15 attacks passed, no container remained, and the independent audit reproduced the full result byte for byte. Verdict: `B49_RESOLUTION_SCALING_HOLDOUT_SUPPORTED`.
+
+The frozen `[0.95,1.05]` model band projects roughly 28–60 minutes per 2K frame and 1.76–4.26 hours per 4K frame across the two baselines on this current qemu CPU worker. Those are explicitly `MODEL_PROJECTION_NOT_MEASURED` and `CURRENT_QEMU_CPU_WORKER_ONLY`, not measured high-resolution renders or dollar costs.
+
+Next: keep resolution fixed and separately preregister motion-blur and depth-of-field interventions. Human cinematic quality, characters/hair and a production GPU backend remain open.
+
+Artifacts: `experiments/codex-worker-resolution-holdout-v0-1/`, `specs/codex-worker-resolution-holdout.v0.1.json`, `research/2026-08-27-b49-r-codex-worker-resolution-holdout-protocol.md` and `research/2026-08-27-b49-r-codex-worker-resolution-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
