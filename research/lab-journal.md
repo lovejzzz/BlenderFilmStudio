@@ -2471,6 +2471,20 @@ Frozen development spec SHA-256: `8bd219570e0c7ec922a671919d680787caf55b2ba7d8a6
 
 Artifacts: `specs/blender-cross-language-evidence-envelope-development.v0.1.json` and `research/2026-08-27-b52-d12-1-cross-language-evidence-envelope-development-protocol.md`.
 
+## J-155 · D12.1-DEV separates document hashing from reduction identity
+
+Date: 2026-08-27 · Type: DUAL-LANGUAGE ALGORITHM DEVELOPMENT NEGATIVE RESULT · Encoder processes: 50 Python + 50 Node
+
+The typed IEEE-754 envelope passed all sixteen adversarial cases and produced byte-identical Python/Node envelopes for every one of the sixteen retained report bodies. Each language can therefore validate the exact same document without depending on decimal exponent spelling.
+
+The preregistered outcome is nevertheless `DEVELOPMENT_TYPED_EVIDENCE_ENVELOPE_NOT_COMPATIBLE`, gates 10/11. Only four of eight corresponding producer measurement envelopes were exact. Camera wrong-sign RMSE differed by `1.50227e-15` and derived PSNR by `5.15143e-13 dB`; static endpoint p99 differed by one binary64 ULP (`1.69407e-21 px`). Both repeats reproduced each difference.
+
+This localizes a second issue beyond JSON formatting: Python/NumPy and JavaScript reductions can produce distinct binary64 metrics over byte-identical float32 arrays. Future evidence must separate payload identity, document self-integrity and independent decision metrics. Producer metric equality needs a frozen reduction or registered tolerance; it cannot stand in for array identity.
+
+No source report changed and no Blender, model or network process ran. Result SHA-256: `4fc177c51060d035b02384c4d7aa1c9e427394c5589e7bddfd9102553008ce07`; internal hash: `ec8b57dcacde07c5741b3ec5d5a300551ec4557e18a72106bae467a54f8826de`.
+
+Artifacts: `experiments/blender-cross-language-evidence-envelope-development-v0-1/results.json` and `research/2026-08-27-b52-d12-1-cross-language-evidence-envelope-development-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
