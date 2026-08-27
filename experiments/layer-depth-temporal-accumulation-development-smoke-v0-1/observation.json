@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "bfs.layerDepthTemporalAccumulationDevelopmentSmoke.v0.1",
+  "experimentId": "B52-D9",
+  "classification": "DEVELOPMENT_ONLY_NOT_FORMAL_EVIDENCE",
+  "spec": {
+    "uri": "specs/layer-depth-temporal-accumulation-calibration.v0.1.json",
+    "sha256": "d02986d1e682f0a945c68b307a993452de59e0ac4f4ecf769b002c9e2de51030"
+  },
+  "tools": {
+    "python": {
+      "uri": "scripts/reference-b52-d9-temporal.py",
+      "sha256": "e67b9597a517819636191b52fb2536e13b875f3fd1bb8e7ab0876f3f50db63d8"
+    },
+    "node": {
+      "uri": "scripts/reference-b52-d9-temporal.mjs",
+      "sha256": "15fe17a5976120e0619b8eb66b5f025485ed07e75ce5bcdbdad7e611edf0f7a6"
+    }
+  },
+  "developmentOperationCounts": {
+    "pythonAccumulatorProcesses": 4,
+    "nodeAccumulatorProcesses": 4,
+    "totalChildProcesses": 8,
+    "allPidsUnique": true,
+    "blenderProcesses": 0,
+    "renderCalls": 0
+  },
+  "formalOperationCounts": {
+    "childProcesses": 0,
+    "blenderRenderCalls": 0,
+    "formalMeasurements": 0
+  },
+  "formalOutputRootAbsent": true,
+  "dualProducer": {
+    "allTenArraysByteExact": "4/4",
+    "resolvedRgbaExact": "4/4",
+    "analyticValidityExact": "4/4",
+    "resolvedEqualsCleanTarget": "4/4"
+  },
+  "fixtures": [
+    {
+      "id": "FOREGROUND_CROSSING_97X61",
+      "pids": {"python": 51282, "node": 51283},
+      "validPixels": 5669,
+      "invalidPixels": 248,
+      "validitySha256": "f3a4cbac26c896bd93cfcc77b79b2e3400b43f10462512f757f496f3084f67ba",
+      "resolvedSha256": "4d49cc40b1c00c15351e259296c3137507067868e81ec5db400f6ae01aa5152e",
+      "naiveControl": {"wrongPixels": 248, "maximumAbsoluteError": 0.71875, "frozenGatePass": true},
+      "wrongSignControl": {"wrongPixels": 496, "maximumAbsoluteError": 0.0625, "frozenGatePass": false}
+    },
+    {
+      "id": "CAMERA_PAN_101X59",
+      "pids": {"python": 51288, "node": 51289},
+      "validPixels": 5376,
+      "invalidPixels": 583,
+      "validitySha256": "11fa76edfb0579a6bdebdff8710b0eac7a5b419d36d0573b2a5efcb7e49fb36d",
+      "resolvedSha256": "eac0478a38da579d983ae8a8cc82c61f06246f2a43ada480bddbeb209ad33b2a",
+      "naiveControl": {"wrongPixels": 0, "maximumAbsoluteError": 0.0, "applicable": false},
+      "wrongSignControl": {"wrongPixels": 2026, "maximumAbsoluteError": 0.0625, "frozenGatePass": false}
+    },
+    {
+      "id": "DEPTH_SWAP_SAME_ID_83X47",
+      "pids": {"python": 51292, "node": 51293},
+      "validPixels": 3349,
+      "invalidPixels": 552,
+      "validitySha256": "208197c41bbcf3705d4fa1e0f3f8e43095e1a9c177c16738cb0df818458b53c7",
+      "resolvedSha256": "414030be5190749389a14bdb5b519ed3211e3a11c952fa59c9571301ecfa28a7",
+      "naiveControl": {"wrongPixels": 552, "maximumAbsoluteError": 1.015625, "frozenGatePass": true},
+      "wrongSignControl": {"wrongPixels": 184, "maximumAbsoluteError": 0.640625, "frozenGatePass": true}
+    },
+    {
+      "id": "STATIC_CONTROL_73X41",
+      "pids": {"python": 51296, "node": 51297},
+      "validPixels": 2993,
+      "invalidPixels": 0,
+      "validitySha256": "3a34eff1bf870f37ba04dfed50ffd8ccba6f8cff10963854ab93474c4c1b9880",
+      "resolvedSha256": "a6370863cc2331b9e82a47e92e44650c72e66010f7361ac274020525a4ebfb76",
+      "staticControlPass": true
+    }
+  ],
+  "frozenSensitivityGate": {
+    "wrongPixels": 32,
+    "maximumAbsoluteError": 0.25
+  },
+  "baseFailure": "WRONG_SIGN_CONTROL_SENSITIVITY",
+  "verdict": "B52_D9_DESIGN_INVALID_BEFORE_FORMAL_OUTPUT",
+  "interpretation": "The correct accumulator and dual implementation are exact, but constant-color same-surface regions make wrong-sign reprojection differ only by the 1/16 development noise amplitude. The frozen 0.25 sensitivity gate is therefore underpowered in two of three moving fixtures.",
+  "decision": "Do not implement or execute the D9 formal matrix. Preserve this counterexample and preregister a fresh D9.1 holdout with fully specified spatially varying surface texture before writing its tools.",
+  "nonClaims": [
+    "This does not falsify layer/depth history validation.",
+    "This does not support the D9 formal verdict because the designated wrong-sign control is not sufficiently sensitive.",
+    "No Blender process or formal output was produced."
+  ]
+}

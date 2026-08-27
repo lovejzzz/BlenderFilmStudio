@@ -1963,6 +1963,20 @@ The previous spec hash `72ce27443350ef2abb1b45a7630b5c9beee09025103ce690bc523421
 
 Next: freeze tools only against the amended identity; no hidden fallback or fixture-specific threshold is permitted.
 
+## J-121 · B52-D9 stops before formal output because wrong-sign control is underpowered
+
+Date: 2026-08-27 · Type: DEVELOPMENT-SMOKE DESIGN INVALIDATION · Formal outputs: 0
+
+Four scalar Python and four independent Node processes agreed byte-for-byte on all ten arrays for every D9 fixture. The correct validity mask and resolved RGBA matched analytic ground truth 4/4; invalid pixels equaled current exactly, valid pixels equaled the clean target exactly, and the static control retained 2,993/2,993 valid histories.
+
+The frozen wrong-sign control nevertheless failed its magnitude requirement on two moving fixtures. FOREGROUND changed 496 pixels and CAMERA changed 2,026, but both reached only 0.0625 maximum error rather than 0.25. DEPTH_SWAP passed at 184 pixels and 0.640625. Both applicable naive-history controls passed at 248/0.71875 and 552/1.015625.
+
+Cause: the first two fixtures use constant color within each layer. Wrong-sign lookup often remains inside the same ownership/depth region, so the only error is the ±1/16 complementary noise. The task can count a direction change but cannot meet its own frozen material-error magnitude. Lowering the threshold or silently adding texture after seeing this output would rewrite the experiment.
+
+D9 is therefore `B52_D9_DESIGN_INVALID_BEFORE_FORMAL_OUTPUT`. No encoder, Blender formal worker, runner, audit or formal root was created. The two development implementations and observation remain as a counterexample. Next: preregister D9.1 with fully specified surface-local spatial texture and entirely fresh resolution/trajectory before implementing its tools.
+
+Artifacts: `experiments/layer-depth-temporal-accumulation-development-smoke-v0-1/` and `research/2026-08-27-b52-d9-temporal-accumulation-design-invalid-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
