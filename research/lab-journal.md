@@ -2915,6 +2915,20 @@ Result SHA-256: `e78ddf4d447b46398dc0ad314ee81e55c7bf2e22744ab57a2a2c7cbb8833438
 
 Artifact: `research/2026-08-27-b52-d12-9-motion-aware-curvature-risk-derivation-result.md`.
 
+## J-192 · D12.9-H1 留出协议冻结，正式测量尚未开始
+
+Date: 2026-08-27 · Type: PREREGISTRATION + TOOL DEVELOPMENT · Formal Blender renders: 0
+
+D12.9-H1 已在 commit `ac4d7cd` 预登记：四个未见 fixture 使用新的 raster、47 mm lens、camera/owner trajectory、pass index、material coefficients/frequencies/phases 与独立 formal root。Q30/Q24 风险公式、`131072` inclusive risk threshold、`2^-15` quality ceiling、per-cell/per-owner coverage、typed depth domains、same-index depth/curvature stress、74-process matrix、至少 48 个攻击以及三档 verdict mapping 均已在任何正式工具输出或 render 之前冻结。Spec SHA-256 为 `c2756a20e314cf470698ef7af6160154b8d7e2d5e8531ce6591b2509a8730dbc`。
+
+工具开发阶段用真实 Blender 5.2 分别构建了四个新场景，每次都得到两个 analytic owner、零 render call 并正常退出；这些是 probe-only API/scene-construction 证据，不是 holdout measurement。探针后的临时 `jq` 汇总表达式存在优先级错误并打印解析错误，但四份 Blender report 均已生成且进程 exit 0；该 reporting defect 不影响 Blender probe，也不被隐藏。
+
+Python/Node consumer 已在合成静态数组上对十个 canonical output payload 全部逐字节一致。第一版合成 stress 把颜色变化放在整数采样坐标，正确地没有触发 curvature risk，暴露了测试设计缺陷：整数位置的双线性余项为零。冻结前的 preflight 实现因此改为使用 Q24-exact 的 `(0.5,0.5)` fractional sample 与 4×4 Q30 checker support，要求 `supportEligible=1` 且 `riskRejected=1`。这项新版 preflight 尚未运行。
+
+源场景、adapter、双语言 consumer、独立 scalar analyzer、raw-payload audit、zero-formal-output preflight 与 single-use runner 均已实现，并通过 Blender Python 3.13 `py_compile` / Node syntax check。正式 root 与 preflight root 仍不存在，正式 Blender renders 仍为 0；因此当前状态只能写作 **TOOLS IMPLEMENTED, HOLDOUT NOT RUN**。磁盘最近测得约 102.3 GiB 可用，扣除冻结的 80 MiB projection 后仍在 100 GiB reserve 之上，但余量很小，重启后必须重新做 admission check。
+
+Artifacts: `specs/blender-motion-aware-curvature-risk-holdout.v0.1.json`, `blender/render_b52_d12_9_motion_aware_source.py`, and `scripts/*b52-d12-9-motion-aware*`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
