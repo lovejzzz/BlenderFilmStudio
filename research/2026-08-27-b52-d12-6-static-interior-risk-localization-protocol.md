@@ -2,7 +2,15 @@
 
 Date: 2026-08-27
 
-Status: preregistered before diagnostic tools or output
+Status: corrected as B52-D12.6-C2 before corrected tools or output
+
+## C2 correction boundary
+
+The first frozen localizer failed before writing or exposing any measurement because reconstruction replay read bilinear taps at an image-edge pixel before testing coordinate eligibility. The failed root is retained and forbidden for measurement.
+
+C2 permits one scientific-code correction only: reconstruction replay must derive sample coordinates, reject out-of-bounds coordinates, and only then call the tap-reading helper. No arithmetic expression, evidence input, sample roster, statistic, threshold or decision rule may change. C2 uses fresh preflight and formal roots.
+
+Corrected spec SHA-256: `9ae043172e3d126d590b6be7942de759a503eee3c76cf4b96062e92285691fe5`.
 
 ## Why radius alone is no longer enough
 
@@ -28,4 +36,4 @@ One formal localizer and one independent audit run, with zero Blender processes,
 
 Success means localization and a conservative bound only. It does not validate an adaptive production rule or revise D12.5-C2. A fresh adaptive-gate holdout may be designed only after this diagnostic reports both safety and selectivity.
 
-Machine-readable contract: `specs/blender-static-interior-risk-localization.v0.1.json`.
+Machine-readable corrected contract: `specs/blender-static-interior-risk-localization.v0.1.json`.

@@ -2741,6 +2741,14 @@ The frozen localizer exited before writing a result because an edge pixel entere
 
 Artifacts: `experiments/blender-static-interior-risk-localization-v0-1/failure.json` and `research/2026-08-27-b52-d12-6-first-formal-run-invalid.md`.
 
+## J-176 · D12.6-C2 freezes the sole edge-order correction
+
+Date: 2026-08-27 · Type: CORRECTED PREREGISTRATION · New Blender renders: 0
+
+D12.6-C2 is registered before changing the frozen tool. Its only permitted scientific-code delta is to test bilinear sample-coordinate bounds before the helper reads taps during reconstruction replay. All evidence inputs, arithmetic, samples, report-only statistics, thresholds and decisions remain unchanged; the invalid D12.6 root is forbidden for measurement and C2 receives fresh preflight/formal roots. Corrected spec SHA-256: `9ae043172e3d126d590b6be7942de759a503eee3c76cf4b96062e92285691fe5`.
+
+Artifacts: `specs/blender-static-interior-risk-localization.v0.1.json` and `research/2026-08-27-b52-d12-6-static-interior-risk-localization-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

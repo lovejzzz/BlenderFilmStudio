@@ -1,15 +1,22 @@
 {
   "schemaVersion": "bfs.blenderStaticInteriorRiskLocalization.v0.1",
-  "experimentId": "B52-D12.6",
-  "title": "Zero-render arithmetic localization and local risk-bound derivation for D12.5-C2 static interior extrema",
+  "experimentId": "B52-D12.6-C2",
+  "title": "Corrected zero-render arithmetic localization and local risk-bound derivation for D12.5-C2 static interior extrema",
   "question": "What arithmetic terms produce the fresh D12.5-C2 distance-17 and distance-4 maxima, and can a local bilinear contrast bound conservatively upper-bound every radius-2/radius-3 interior RGB error without using silhouette distance as a universal explanation?",
   "decisionRole": "post-hoc development diagnostic and bound derivation; not a holdout and not an adaptive-gate validation",
   "parents": {
+    "invalidD12_6Run": {"uri":"experiments/blender-static-interior-risk-localization-v0-1/failure.json","sha256":"bd89cd5778aa082bb2f753356d4b193f6b03b13c1acd595ec0a6c462f6789707","status":"INVALID_TOOL_FAILURE_BEFORE_RESULT"},
     "d12_5Spec": {"uri":"specs/blender-static-radius-intervention-holdout.v0.1.json","sha256":"d9bdfa0d39d98b7bee74caad334d6ff0ce793aec68641b13f008c33e5a2c6a3d","experimentId":"B52-D12.5-C2"},
     "d12_5Result": {"uri":"experiments/blender-static-radius-intervention-holdout-c2-v0-1/results.json","sha256":"b3f70d11311fef9f3edf53bcfac511e256359e9b67971c94db89e2b0d323cdc7","verdict":"RADIUS3_WITHIN_PRODUCTION_TOLERANCE_BUT_HEADROOM_OR_COVERAGE_NOT_SUPPORTED","evidenceHash":"e2a7ea77e5bde2e4aa5a846feba35edce143a2898ef9e1320ddc1230930635cc"},
     "d12_5Receipt": {"uri":"experiments/blender-static-radius-intervention-holdout-c2-v0-1/receipt.json","sha256":"a77350c5e6a7589b7ace39da56509156b810e19221a8d1e3f0e8a7f750767d40","receiptHash":"6023b119149ffe3dc4f2c5dc59966f95386272bdd2e23ac9b7f7672b0a9f0111"},
     "d12_5Execution": {"uri":"experiments/blender-static-radius-intervention-holdout-c2-v0-1/execution.json","sha256":"4d55a48f8baef9adfa5b3601fc5e8108faf53f5f5234c5472f8b5a5086f5ebdb","executionHash":"93709e566e3231bc7aa09cbdb2d6c9f47918293910ab0832112d51c7a7fd6609"},
     "d12_4Method": {"uri":"specs/blender-static-zero-headroom-localization.v0.1.json","sha256":"8df3c666e4409a243b1611131e5927b757fcd47453511b732fc26e579f526326"}
+  },
+  "correctionContract": {
+    "reason": "The first frozen localizer read bilinear taps at an image-edge pixel before testing coordinate eligibility and exited before writing or exposing any measurement.",
+    "onlyPermittedScientificCodeDelta": "In reconstruction replay only, derive sample coordinates, test bounds, and reject the pixel before calling the helper that reads tap values. All arithmetic, evidence, samples, statistics, thresholds and decisions remain byte-for-byte or semantically unchanged.",
+    "measurementExposureBeforeCorrection": false,
+    "invalidRootIsForbiddenForMeasurement": true
   },
   "frozenInputs": {
     "root": "experiments/blender-static-radius-intervention-holdout-c2-v0-1",
@@ -23,7 +30,7 @@
   "runtime": {
     "python": {"executable":"/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13","sha256":"cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35","numpy":"2.3.4"}
   },
-  "diskAdmission": {"minimumReserveBytes":107374182400,"projectedWriteBytes":4194304,"preflightRoot":"experiments/blender-static-interior-risk-localization-preflight-v0-1","formalRoot":"experiments/blender-static-interior-risk-localization-v0-1"},
+  "diskAdmission": {"minimumReserveBytes":107374182400,"projectedWriteBytes":4194304,"preflightRoot":"experiments/blender-static-interior-risk-localization-c2-preflight-v0-1","formalRoot":"experiments/blender-static-interior-risk-localization-c2-v0-1"},
   "formalToolPaths": ["scripts/analyze-b52-d12-6-interior-risk.py","scripts/audit-b52-d12-6-interior-risk.py","scripts/preflight-b52-d12-6-interior-risk.py"],
   "analysisContract": {
     "identityBeforeMeasurement": ["verify all four parent file and internal hashes","verify D12.5-C2 verdict unchanged","verify every bound adapter/consumer report and payload hash","verify repeat-1/repeat-2 source and consumer payload identity","recompute every radius-2 and radius-3 reconstructed float32 byte"],
