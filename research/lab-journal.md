@@ -2443,6 +2443,20 @@ Frozen C2 spec SHA-256: `e9a19e608de800121da0aec460bc514f6f62d51acd80dd56236adab
 
 Artifacts: `specs/blender-projective-subpixel-reconstruction-audit-c2.v0.1.json` and `research/2026-08-27-b52-d12-c2-audit-negative-verdict-correction.md`.
 
+## J-153 · D12-C2 independently confirms the frozen negative result
+
+Date: 2026-08-27 · Type: CORRECTED INDEPENDENT REPLAY AUDIT · Formal rerenders/data rewrites: 0/0
+
+The C2 audit tool was frozen and pushed at `1a2220c`, then executed once. It bound the C2 spec, original C1 preflight, receipt, result, failed audit and its own Git blob before replay. All ten checks passed: spec, preflight, result, receipt, process, attack totality, diagnostic, tool, evidence replay and verdict consistency.
+
+The inherited analyzer verify subprocess exited zero and exactly reproduced evidence, measurements, 24 diagnostic identities, operation counts, all 57 registered attack rows, the 47 passed count, `BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED` verdict and `DUAL_RECONSTRUCTION_IDENTITY` base failure. C2 ran zero Blender processes and rewrote no formal input.
+
+This confirms, rather than repairs, the negative result. Eight Node reports still fail Python canonical self-hash despite byte-identical Python/Node arrays, and static reconstruction still exceeds the frozen exact-zero threshold by `1.4901161e-7` RGB. Three moving projective fixtures retain their strong positive numeric measurements, but D12 as registered is not supported.
+
+C2 audit SHA-256: `8496c264fff4f9eca48ab9ac2bdb751b9d39f7124215da856829104550cb0481`; internal audit hash: `603c5b31ddb9e9530dc993bb3cd043dce3a3e75d4736821949a093e015f13865`.
+
+Artifact: `experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/audit.c2.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

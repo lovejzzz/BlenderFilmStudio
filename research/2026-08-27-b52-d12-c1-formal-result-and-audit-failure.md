@@ -4,7 +4,9 @@
 矩阵状态：`COMPLETE_65_UNIQUE_CHILD_PIDS`  
 冻结 analyzer verdict：`BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED`  
 最早失败 gate：`DUAL_RECONSTRUCTION_IDENTITY`  
-首次独立 audit：`FAIL`
+首次独立 audit：`FAIL`（保留）
+
+C2 corrected audit：`PASS`
 
 ## 结论先行
 
@@ -33,7 +35,9 @@ C1 的基础设施更正成功：新根目录从零完成了全部 16 次 Cycles
 
 一个不写入正式根目录的诊断 replay 使用绝对根目录后，`evidenceReplay`、身份、进程、诊断和 verdict consistency 全部通过，唯一剩余失败就是上述 `attackTotality` 定义。这是 audit-only 工具缺陷；该临时诊断输出已删除，不能充当正式 audit。
 
-下一步必须先预注册 audit-only C2。它不得重跑 Blender、改写 receipt/result/diagnostics 或重新解释 D12 阈值；只能把 formal root 规范化为绝对路径，并把 attack totality 检查改为“57 个注册项完整、顺序一致、布尔值与计数一致”，而不是要求负结果的每个 gate 都通过。
+随后预注册并冻结的 audit-only C2 将 formal root 规范化为绝对路径，并把 attack totality 检查改为“57 个注册项完整、顺序一致、布尔值与计数一致”，而不是要求负结果的每个 gate 都通过。C2 只运行一次继承 analyzer 的 verify replay，没有 Blender 进程或正式数据改写。
+
+C2 结果为 `PASS`：10/10 checks 为 true，replay 退出 0，并逐项复现 evidence、measurements、24 份 diagnostics、operation counts、57 个 attack 布尔值、47 的通过计数、negative verdict 与 `DUAL_RECONSTRUCTION_IDENTITY` base failure。C2 不改变原 `FAIL` audit，也不把任何 false gate 改为 true。
 
 ## 证据身份
 
@@ -41,6 +45,8 @@ C1 的基础设施更正成功：新根目录从零完成了全部 16 次 Cycles
 - receipt SHA-256：`8c78b88ef512a5f7aa39554fced1067c12a5a0036c4c8231964b544da146ea4b`
 - result SHA-256：`a411948ec8854029d199786bbf0a81565bc91099e2f973a2311b7513c2d07d82`
 - failed audit SHA-256：`f090b7667f7ea882cc45df694f0d1dd0e39a2ead3bc83cde268b7990a64f832d`
+- C2 passing audit SHA-256：`8496c264fff4f9eca48ab9ac2bdb751b9d39f7124215da856829104550cb0481`
+- C2 internal audit hash：`603c5b31ddb9e9530dc993bb3cd043dce3a3e75d4736821949a093e015f13865`
 - frozen result attacks：47/57 passed
 - diagnostics：24 PNG + 24 bound sidecars
 - formal root size at retention：约 17 MiB，477 files
@@ -50,4 +56,4 @@ C1 的基础设施更正成功：新根目录从零完成了全部 16 次 Cycles
 - 这不支持曲面、变形、遮挡、多 owner、透明、毛发、体积、运动模糊、景深、噪声光照或生产级时序积累。
 - 数值很小不等于 static exact gate 通过；该 gate 按预注册规则确实失败。
 - Node 数组相同不等于 Node report identity 通过；冻结合约把两者同时放进最早的 dual identity gate。
-- 在 corrected audit `PASS` 之前，不把当前 result 宣称为已完成独立审计。
+- C2 `PASS` 确认的是冻结负结果的可重放性，不支持被 D12 排除的生产范围。
