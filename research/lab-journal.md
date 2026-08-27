@@ -2539,6 +2539,20 @@ The next boundary is fresh opaque nonplanar/multi-owner static geometry. The obs
 
 Artifacts: `experiments/blender-static-vector-floor-three-layer-evidence-holdout-v0-1/` and `research/2026-08-27-b52-d12-2-static-vector-floor-three-layer-evidence-result.md`.
 
+## J-160 · D12.3 preregisters nonplanar and multi-owner static boundary
+
+Date: 2026-08-27 · Type: FRESH-HOLDOUT PREREGISTRATION · Formal outputs: 0
+
+D12.2's bounded static result is carried forward without widening its thresholds. D12.3 freezes three new opaque scenes: a scaled UV sphere with torus, an occluding tilted-grid/beveled-cube pair, and an icosphere behind a thin cylinder plus small sphere. Rasters, lenses, sensors, owner IDs, transforms, topology and materials are fresh.
+
+Formal tolerance applies only to owner-interior pixels: a registered current owner with alpha >0.999, a same-owner radius-2 current neighborhood and four same-owner previous bilinear taps. Cross-owner taps fail closed. Excluded registered-owner pixels form a mandatory boundary diagnostic set whose count, owner roster, Vector maximum and reconstruction error must be reported but cannot leak into the interior verdict.
+
+The D12.2 bounds remain exactly `1/4096 px` Vector maximum, `1/524288` reconstruction RGB maximum and `1/1048576` RMSE. Six cells must each contain at least 800 interior and 50 boundary pixels. The three-layer payload/document/decision evidence contract and 55-process boundary remain unchanged. The smaller 16 MiB projection must leave the same 100 GiB reserve.
+
+All seven formal tool paths, preflight root and formal root are absent. Next: commit this preregistration before implementing any formal tool.
+
+Artifacts: `specs/blender-static-nonplanar-multiowner-holdout.v0.1.json` and `research/2026-08-27-b52-d12-3-static-nonplanar-multiowner-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

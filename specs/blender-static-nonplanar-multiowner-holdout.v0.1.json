@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "bfs.blenderStaticNonplanarMultiownerHoldout.v0.1",
+  "experimentId": "B52-D12.3",
+  "title": "Blender 5.2 static nonplanar and multi-owner floating-floor fresh holdout",
+  "question": "Does the D12.2 static Vector/reconstruction tolerance survive three fresh opaque static scenes containing curved or depth-varying geometry and multiple Object Index owners when the formal gate is restricted to owner-interior pixels and cross-owner bilinear taps fail closed?",
+  "parents": {
+    "d12_2Spec": {
+      "uri": "specs/blender-static-vector-floor-three-layer-evidence-holdout.v0.1.json",
+      "sha256": "fa63daa0c3b7b3f080a488aa0fc84996fd52cd731efce94ebe28bbc81b55d9d3"
+    },
+    "d12_2Result": {
+      "uri": "experiments/blender-static-vector-floor-three-layer-evidence-holdout-v0-1/results.json",
+      "sha256": "948ffe7f6b18bc7a5458352c545570ec1a15f9975c2ae8250de3670ac7cf3036",
+      "verdict": "BLENDER_STATIC_VECTOR_FLOOR_WITHIN_REGISTERED_TOLERANCE",
+      "exactZeroObservation": "STATIC_EXACT_ZERO_FALSIFIED"
+    },
+    "d12_2Receipt": {
+      "uri": "experiments/blender-static-vector-floor-three-layer-evidence-holdout-v0-1/receipt.json",
+      "sha256": "aa675e9d2cefb9e7ce3b8f53dc98437ddb393ae95b7d5cdb8773d71bee10ee5f",
+      "processes": 55
+    },
+    "d12_2ResultCommit": "c77de9a3a977f7ebd9d6271861fb56f594ba5a6e",
+    "typedEnvelopeSpec": {
+      "uri": "specs/blender-cross-language-evidence-envelope-development.v0.1.json",
+      "sha256": "8bd219570e0c7ec922a671919d680787caf55b2ba7d8a631ed5bc995ab24f116"
+    },
+    "typedEnvelopePython": {
+      "uri": "scripts/encode-b52-d12-1-evidence-envelope.py",
+      "sha256": "fe742fc94049abe6b200394635c3fdc42d880bfd4ca79640914c9e92800c3f92"
+    },
+    "typedEnvelopeNode": {
+      "uri": "scripts/encode-b52-d12-1-evidence-envelope.mjs",
+      "sha256": "b104df55ad8454556e3fc12a0f380d2ba4d9191efe6b649dc8a5d734dffdbf1b"
+    }
+  },
+  "freshness": {
+    "requirements": [
+      "Every fixture identifier, raster, lens, sensor width, object roster, pass index, material parameter and output path is fresh relative to D12.2.",
+      "All seven formal tool paths, the preflight root and the formal root must be absent at preregistration.",
+      "No D12.2 EXR or array may be a measurement input."
+    ]
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "version": "v26.5.0"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    }
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 16777216,
+    "formalRoot": "experiments/blender-static-nonplanar-multiowner-holdout-v0-1",
+    "preflightRoot": "experiments/blender-static-nonplanar-multiowner-holdout-preflight-v0-1"
+  },
+  "sceneContract": {
+    "frames": [0, 1, 2],
+    "previousFrame": 0,
+    "currentFrame": 1,
+    "nextFrame": 2,
+    "staticRule": "Every object and camera transform is identical at all three LINEAR keys; modifier parameters and topology are constant.",
+    "render": {
+      "engine": "CYCLES",
+      "device": "CPU",
+      "samples": 1,
+      "seed": 521233,
+      "animatedSeed": false,
+      "adaptiveSampling": false,
+      "denoising": false,
+      "motionBlur": false,
+      "depthOfField": false,
+      "persistentData": false,
+      "threadsMode": "FIXED",
+      "threads": 4,
+      "pixelAspect": [1.0, 1.0],
+      "filmTransparent": false,
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "colorMode": "RGBA",
+      "colorDepth": "32",
+      "exrCodec": "ZIP",
+      "viewLayer": "BFS_D123_MASTER",
+      "passAlphaThreshold": 0.5,
+      "passes": ["Combined", "Depth", "Vector", "Object Index"]
+    },
+    "materialContract": "Every owner receives a fresh procedural object-local emission material with owner-specific bounded RGB functions and alpha 1.0; world emission is zero."
+  },
+  "fixtures": [
+    {
+      "id": "STATIC_CURVED_PAIR_97X61",
+      "resolution": [97, 61],
+      "lensMm": 44.0,
+      "sensorWidthMm": 34.0,
+      "cameraTransform": {"location": [0.019, -0.027, 10.41], "rotationEuler": [0.003, -0.005, 0.002]},
+      "owners": [
+        {"id": "CURVED_UV_SPHERE", "passIndex": 10121, "geometry": {"type": "UV_SPHERE", "segments": 32, "rings": 20, "radius": 2.15}, "transform": {"location": [-1.38, 0.12, 0.07], "rotationEuler": [0.09, -0.13, 0.04], "scale": [1.0, 1.24, 0.78]}},
+        {"id": "CURVED_TORUS", "passIndex": 10232, "geometry": {"type": "TORUS", "majorSegments": 36, "minorSegments": 12, "majorRadius": 1.55, "minorRadius": 0.42}, "transform": {"location": [1.72, -0.18, 0.31], "rotationEuler": [0.31, 0.17, -0.09], "scale": [1.0, 1.0, 1.0]}}
+      ]
+    },
+    {
+      "id": "STATIC_OCCLUDING_PLANES_119X73",
+      "resolution": [119, 73],
+      "lensMm": 52.0,
+      "sensorWidthMm": 37.0,
+      "cameraTransform": {"location": [-0.031, 0.016, 10.87], "rotationEuler": [-0.002, 0.007, -0.003]},
+      "owners": [
+        {"id": "REAR_TILTED_GRID", "passIndex": 10343, "geometry": {"type": "GRID", "size": [8.8, 5.7], "subdivisions": [27, 17]}, "transform": {"location": [0.0, 0.0, -0.41], "rotationEuler": [0.07, -0.11, 0.02], "scale": [1.0, 1.0, 1.0]}},
+        {"id": "FRONT_OCCLUDER", "passIndex": 10454, "geometry": {"type": "BEVELED_CUBE", "size": 2.0, "bevelWidth": 0.18, "bevelSegments": 3}, "transform": {"location": [0.83, -0.34, 0.74], "rotationEuler": [0.18, 0.23, -0.12], "scale": [1.23, 0.91, 0.46]}}
+      ]
+    },
+    {
+      "id": "STATIC_THIN_DEPTH_STACK_131X83",
+      "resolution": [131, 83],
+      "lensMm": 38.0,
+      "sensorWidthMm": 40.0,
+      "cameraTransform": {"location": [0.026, 0.021, 9.23], "rotationEuler": [0.004, -0.006, 0.003]},
+      "owners": [
+        {"id": "DEPTH_BACK_SPHERE", "passIndex": 10565, "geometry": {"type": "ICO_SPHERE", "subdivisions": 3, "radius": 2.27}, "transform": {"location": [-0.72, 0.13, -0.26], "rotationEuler": [0.12, -0.08, 0.06], "scale": [1.12, 0.88, 1.0]}},
+        {"id": "THIN_DIAGONAL_ROD", "passIndex": 10676, "geometry": {"type": "CYLINDER", "vertices": 24, "radius": 0.16, "depth": 5.8}, "transform": {"location": [0.87, -0.11, 0.82], "rotationEuler": [0.17, 0.43, -0.71], "scale": [1.0, 1.0, 1.0]}},
+        {"id": "SMALL_FRONT_SPHERE", "passIndex": 10787, "geometry": {"type": "UV_SPHERE", "segments": 24, "rings": 16, "radius": 0.72}, "transform": {"location": [1.58, 0.88, 1.16], "rotationEuler": [-0.09, 0.14, 0.05], "scale": [1.0, 1.0, 1.0]}}
+      ]
+    }
+  ],
+  "ownerAwareConsumer": {
+    "orientation": "decoded arrays are top-left; previous sample coordinate is (x + Vector.X, y - Vector.Y)",
+    "interiorDefinition": "current owner is one registered positive integer ID; current alpha >0.999; every pixel in a Chebyshev-radius-2 current 5x5 neighborhood has the same owner and alpha; all four previous bilinear taps have that same owner and alpha",
+    "boundaryDefinition": "a registered current owner pixel excluded only because its radius-2 neighborhood or previous bilinear taps cross owner/alpha",
+    "kernel": "clip-boundary bilinear; scalar float64 weights and TL,TR,BL,BR accumulation; one final float32 cast",
+    "failureRule": "cross-owner or alpha-mismatched history rejects instead of blending",
+    "producerMetrics": "forbidden as decision inputs; producers emit payload and identity metadata only"
+  },
+  "evidenceLayers": {
+    "payloadIdentity": "Python and Node reconstructed RGBA, owner-interior valid mask and boundary mask must be byte-identical in all six cells",
+    "documentIntegrity": "Both frozen D12.1 typed-envelope implementations must emit identical bytes for each of twelve producer reports",
+    "decisionMetrics": "One independent analyzer recomputes interior and boundary diagnostics from adapter/payload arrays and ignores producer metrics"
+  },
+  "thresholds": {
+    "minimumInteriorPixelsPerCell": 800,
+    "minimumBoundaryPixelsPerCell": 50,
+    "interiorVectorComponentAbsoluteMaximum": 0.000244140625,
+    "interiorReconstructionRgbAbsoluteMaximum": 0.0000019073486328125,
+    "interiorReconstructionRgbRmseMaximum": 0.00000095367431640625,
+    "sourceStaticRgbAbsoluteMaximum": 0.0,
+    "repeatSourceArrayIdentity": true,
+    "repeatConsumerArrayIdentity": true,
+    "pythonNodePayloadIdentity": true,
+    "typedEnvelopeIdentity": true
+  },
+  "boundaryPolicy": {
+    "formalDecision": "Boundary pixels must satisfy roster, repeat, payload and envelope identity but their Vector/reconstruction magnitude is diagnostic and cannot pass or fail the interior tolerance verdict.",
+    "requiredDiagnostics": ["count", "owner roster", "Vector component absolute maximum", "reconstruction RGB maximum", "reconstruction RGB RMSE"]
+  },
+  "classification": {
+    "supported": "BLENDER_STATIC_NONPLANAR_MULTIOWNER_INTERIOR_WITHIN_REGISTERED_TOLERANCE",
+    "notSupported": "BLENDER_STATIC_NONPLANAR_MULTIOWNER_INTERIOR_NOT_WITHIN_REGISTERED_TOLERANCE",
+    "exactZeroObservation": "Report INTERIOR_EXACT_ZERO_OBSERVED only if every accepted interior Vector component and reconstruction RGB error is zero; otherwise INTERIOR_EXACT_ZERO_FALSIFIED. This observation does not change the tolerance verdict."
+  },
+  "processBoundary": {
+    "expectedUniqueChildProcesses": 55,
+    "sourceRenders": 12,
+    "adapters": 6,
+    "pythonConsumers": 6,
+    "nodeConsumers": 6,
+    "pythonEnvelopeEncoders": 12,
+    "nodeEnvelopeEncoders": 12,
+    "analyzers": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "formalRuns": 1,
+    "overwritePolicy": "refuse every existing formal output; retain failures and require a preregistered fresh-root correction"
+  },
+  "formalToolPaths": [
+    "blender/render_b52_d12_3_nonplanar_multiowner_source.py",
+    "scripts/adapt-b52-d12-3-nonplanar-multiowner.py",
+    "scripts/reconstruct-b52-d12-3-nonplanar-multiowner.py",
+    "scripts/reconstruct-b52-d12-3-nonplanar-multiowner.mjs",
+    "scripts/analyze-b52-d12-3-nonplanar-multiowner.py",
+    "scripts/run-b52-d12-3-nonplanar-multiowner.py",
+    "scripts/preflight-b52-d12-3-nonplanar-multiowner.py"
+  ],
+  "attacks": [
+    "spec and parent byte identity",
+    "frozen tool Git-blob identity",
+    "Blender/Python/Node/OCIO identity",
+    "fresh formal root and disk reserve",
+    "exact fixture/owner/pass-index roster",
+    "three-frame transform/topology/modifier identity",
+    "source report and EXR binding",
+    "multipart/channel layout",
+    "adapter array binding",
+    "unique process and operation totality",
+    "current-owner registered integer domain",
+    "owner-interior radius-2 erosion",
+    "cross-owner tap fail-closed behavior",
+    "Python/Node payload byte identity",
+    "per-document dual typed-envelope identity",
+    "analyzer import independence",
+    "minimum interior and boundary coverage",
+    "interior Vector bound",
+    "interior reconstruction maximum and RMSE bounds",
+    "source static beauty identity",
+    "within-fixture repeat source identity",
+    "within-fixture repeat consumer identity",
+    "boundary diagnostic totality without decision leakage",
+    "producer metrics absent",
+    "exact-zero classification totality",
+    "result/receipt self-hash"
+  ],
+  "nonClaims": [
+    "No perceptual, cinematic-quality or calibrated-display claim is made.",
+    "Boundary magnitudes are diagnostic; this experiment does not promote temporal reuse across ownership boundaries.",
+    "The result does not cover moving, deforming, transparent, volumetric, hair, particle, motion-blurred or disoccluded content.",
+    "The result does not establish a universal Blender Vector quantization mechanism.",
+    "The typed envelope is not claimed to implement RFC 8785/JCS."
+  ]
+}
