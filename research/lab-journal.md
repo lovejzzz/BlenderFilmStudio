@@ -2661,6 +2661,18 @@ Next: commit this immutable admission, create the formal root exactly once and e
 
 Artifact: `experiments/blender-static-radius-intervention-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-169 · D12.5 first formal run is invalid; no pixels promoted
+
+Date: 2026-08-27 · Type: INVALID INFRASTRUCTURE RUN · Runtime: 55 unique child PIDs
+
+The first D12.5 single-use root completed 12 Blender renders, six adapters, twelve paired-radius consumers and 24 envelope encoders across 54 successful unique children. The independent analyzer was the 55th unique child and exited 1 before writing `results.json`.
+
+Diagnosis read only the traceback, execution counts and file presence. A radius-subset comparison remained a NumPy `bool_`; standard JSON serialization rejected it during evidence-hash construction. No measurement, threshold outcome or fixture pixel value was inspected. The root is retained, cannot be resumed and carries no scientific verdict.
+
+D12.5-C2 is limited to casting that subset flag to built-in `bool` plus fresh experiment/root identities. Geometry, radii, thresholds, coverage gates, decisions and attacks remain frozen. Failure file SHA-256: `e90d0e26d936e35c6882a04863d2bd1e406b65db3899ca77df58a904c02ebc61`.
+
+Artifact: `research/2026-08-27-b52-d12-5-first-formal-run-invalid.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
