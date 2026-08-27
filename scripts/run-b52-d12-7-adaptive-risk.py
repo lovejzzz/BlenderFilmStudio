@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+"""Single-use formal runner for B52-D12.7."""
+from __future__ import annotations
+
+import argparse, datetime as dt, hashlib, json, os, shutil, subprocess, time
+from pathlib import Path
+
+SPEC_SHA256="c51d0d83afd30b479bf3e7109c31110133649ee3d65a04d677dbe236b8075ed0"
+def sha_file(path:Path)->str:
+ digest=hashlib.sha256()
+ with path.open("rb") as handle:
+  for chunk in iter(lambda:handle.read(1048576),b""):digest.update(chunk)
+ return digest.hexdigest()
+def canon(value:object)->str:return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(",",":"),allow_nan=False).encode()).hexdigest()
+
+def main()->None:
+ p=argparse.ArgumentParser();p.add_argument("--spec",type=Path,required=True);p.add_argument("--preflight",type=Path,required=True);p.add_argument("--output-root",type=Path,required=True);a=p.parse_args();repo=Path.cwd().resolve();spec_path=a.spec.resolve();preflight_path=a.preflight.resolve();root=a.output_root.resolve();spec=json.loads(spec_path.read_text());preflight=json.loads(preflight_path.read_text())
+ if sha_file(spec_path)!=SPEC_SHA256 or preflight.get("preflightHash")!=canon({k:v for k,v in preflight.items() if k!="preflightHash"}) or preflight.get("status")!="ACCEPTED":raise RuntimeError("D12.7 identity/admission mismatch")
+ if root.exists() or root!=(repo/spec["diskAdmission"]["formalRoot"]).resolve():raise RuntimeError("refusing to reuse or redirect D12.7 formal root")
+ tools={path:sha_file(repo/path) for path in spec["freshness"]["formalToolPaths"]}
+ if tools!=preflight["toolHashes"]:raise RuntimeError("D12.7 tools differ from preflight")
+ free=shutil.disk_usage(repo).free;projected=spec["diskAdmission"]["projectedWriteBytes"];reserve=spec["diskAdmission"]["minimumReserveBytes"]
+ if free-projected<reserve:raise RuntimeError("D12.7 disk admission rejected")
+ root.mkdir(parents=True,exist_ok=False);marker={"experimentId":spec["experimentId"],"createdAtUtc":dt.datetime.now(dt.timezone.utc).isoformat(),"pid":os.getpid(),"specSha256":SPEC_SHA256};marker_path=root/".formal-root-created.json";marker_path.write_text(json.dumps(marker,indent=2,sort_keys=True)+"\n")
+ base_env={"PATH":os.environ.get("PATH",""),"LANG":"C.UTF-8","LC_ALL":"C.UTF-8","OCIO":str((repo/spec["runtime"]["ocio"]["uri"]).resolve())};children=[];started=time.monotonic()
+ def child(role:str,cell:str,argv:list[str],env:dict[str,str]|None=None)->dict:
+  logs=root/"logs"/role.lower();logs.mkdir(parents=True,exist_ok=True);safe=cell.replace("/","_");out=logs/f"{safe}.stdout.log";err=logs/f"{safe}.stderr.log";tick=time.monotonic();proc=subprocess.Popen(argv,cwd=repo,env=env or base_env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True);stdout,stderr=proc.communicate();out.write_text(stdout);err.write_text(stderr);row={"role":role,"cell":cell,"pid":proc.pid,"exitCode":proc.returncode,"elapsedSeconds":round(time.monotonic()-tick,6),"argv":argv,"stdout":{"uri":str(out),"sha256":sha_file(out)},"stderr":{"uri":str(err),"sha256":sha_file(err)}};children.append(row);print(f"BFS_D127_CHILD role={role} cell={cell} pid={proc.pid} exit={proc.returncode}",flush=True)
+  if proc.returncode!=0:
+   failure={"schemaVersion":"bfs.blenderStaticAdaptiveRiskGateFailure.v0.1","experimentId":spec["experimentId"],"failedChild":row,"completedChildren":children,"specSha256":SPEC_SHA256,"preflightSha256":sha_file(preflight_path),"formalRootMarkerSha256":sha_file(marker_path)};failure["failureHash"]=canon(failure);(root/"run.failure.json").write_text(json.dumps(failure,indent=2,sort_keys=True)+"\n");raise RuntimeError(f"D12.7 child failed: {role} {cell}")
+  return row
+ blender=spec["runtime"]["blender"]["executable"];python=spec["runtime"]["python"]["executable"];node=spec["runtime"]["node"]["executable"];source=str(repo/"blender/render_b52_d12_7_adaptive_risk_source.py");adapter=str(repo/"scripts/adapt-b52-d12-7-adaptive-risk-source.py");py_consumer=str(repo/"scripts/reconstruct-b52-d12-7-adaptive-risk.py");node_consumer=str(repo/"scripts/reconstruct-b52-d12-7-adaptive-risk.mjs");typed_spec=str((repo/spec["parents"]["typedEnvelopeSpec"]["uri"]).resolve());typed_py=str((repo/spec["parents"]["typedEnvelopePython"]["uri"]).resolve());typed_node=str((repo/spec["parents"]["typedEnvelopeNode"]["uri"]).resolve())
+ for fixture in spec["fixtures"]:
+  fid=fixture["id"]
+  for repeat in (1,2):
+   for frame in (0,1):
+    cell=f"{fid}/R{repeat}/F{frame}";sdir=root/"sources"/fid/f"R{repeat}"/f"frame-{frame}";runtime=root/"runtime"/fid/f"R{repeat}"/f"frame-{frame}";env={**base_env}
+    for key,suffix in (("TMPDIR","tmp"),("BLENDER_USER_CONFIG","config"),("BLENDER_USER_SCRIPTS","scripts")):
+     target=runtime/suffix;target.mkdir(parents=True,exist_ok=True);env[key]=str(target)
+    child("SOURCE",cell,[blender,*spec["runtime"]["blender"]["launchFlags"],"--python",source,"--","--spec",str(spec_path),"--fixture",fid,"--frame",str(frame),"--repeat",str(repeat),"--output-exr",str(sdir/"source.exr"),"--report",str(sdir/"report.json")],env)
+   adir=root/"adapters"/fid/f"R{repeat}";src=root/"sources"/fid/f"R{repeat}";child("ADAPTER",f"{fid}/R{repeat}",[python,adapter,"--spec",str(spec_path),"--fixture",fid,"--repeat",str(repeat),"--previous-exr",str(src/"frame-0/source.exr"),"--current-exr",str(src/"frame-1/source.exr"),"--previous-report",str(src/"frame-0/report.json"),"--current-report",str(src/"frame-1/report.json"),"--output-dir",str(adir/"arrays"),"--report",str(adir/"report.json")])
+   for producer,exe,tool in (("python",python,py_consumer),("node",node,node_consumer)):
+    cdir=root/"consumers"/producer/fid/f"R{repeat}";child(f"CONSUMER_{producer.upper()}",f"{fid}/R{repeat}",[exe,tool,"--spec",str(spec_path),"--fixture",fid,"--repeat",str(repeat),"--input-dir",str(adir/"arrays"),"--adapter-report",str(adir/"report.json"),"--output-dir",str(cdir/"arrays"),"--report",str(cdir/"report.json")]);edir=root/"envelopes"/producer/fid/f"R{repeat}";child("ENVELOPE_PYTHON",f"{producer}/{fid}/R{repeat}",[python,typed_py,"--spec",typed_spec,"--input",str(cdir/"report.json"),"--output",str(edir/"report.python-envelope.json")]);child("ENVELOPE_NODE",f"{producer}/{fid}/R{repeat}",[node,typed_node,"--spec",typed_spec,"--input",str(cdir/"report.json"),"--output",str(edir/"report.node-envelope.json")])
+ operation_counts={"sourceRenders":sum(row["role"]=="SOURCE" for row in children),"adapters":sum(row["role"]=="ADAPTER" for row in children),"pythonConsumers":sum(row["role"]=="CONSUMER_PYTHON" for row in children),"nodeConsumers":sum(row["role"]=="CONSUMER_NODE" for row in children),"pythonEnvelopeEncoders":sum(row["role"]=="ENVELOPE_PYTHON" for row in children),"nodeEnvelopeEncoders":sum(row["role"]=="ENVELOPE_NODE" for row in children),"analyzers":1,"audits":1,"modelCalls":0,"networkCalls":0}
+ execution={"schemaVersion":"bfs.blenderStaticAdaptiveRiskGateExecution.v0.1","experimentId":spec["experimentId"],"rootCreatedFresh":True,"formalRootMarker":{"uri":str(marker_path),"sha256":sha_file(marker_path)},"spec":{"uri":str(spec_path),"sha256":sha_file(spec_path)},"preflight":{"uri":str(preflight_path),"sha256":sha_file(preflight_path),"preflightHash":preflight["preflightHash"]},"toolFreezeCommit":preflight["toolFreezeCommit"],"toolHashes":tools,"diskAdmission":{"availableBytes":free,"projectedWriteBytes":projected,"minimumReserveBytes":reserve,"freeAfterProjectedBytes":free-projected,"status":"ACCEPTED"},"operationCounts":operation_counts,"children":children};execution["executionHash"]=canon(execution);execution_path=root/"execution.json";execution_path.write_text(json.dumps(execution,indent=2,sort_keys=True,allow_nan=False)+"\n")
+ child("ANALYZER","FORMAL",[python,str(repo/"scripts/analyze-b52-d12-7-adaptive-risk.py"),"--spec",str(spec_path),"--root",str(root),"--preflight",str(preflight_path),"--execution",str(execution_path),"--output",str(root/"results.json")]);result=json.loads((root/"results.json").read_text());child("AUDIT","FORMAL",[python,str(repo/"scripts/audit-b52-d12-7-adaptive-risk.py"),"--spec",str(spec_path),"--root",str(root),"--execution",str(execution_path),"--result",str(root/"results.json"),"--output",str(root/"audit.json")]);audit=json.loads((root/"audit.json").read_text());pids=[row["pid"] for row in children];process_ok=len(children)==spec["matrix"]["totalUniqueChildProcesses"] and len(set(pids))==len(pids) and all(row["exitCode"]==0 for row in children)
+ body={"schemaVersion":"bfs.blenderStaticAdaptiveRiskGateReceipt.v0.1","experimentId":spec["experimentId"],"executedAtUtc":dt.datetime.now(dt.timezone.utc).isoformat(),"elapsedSeconds":round(time.monotonic()-started,6),"spec":{"uri":str(spec_path),"sha256":sha_file(spec_path)},"preflight":{"uri":str(preflight_path),"sha256":sha_file(preflight_path),"preflightHash":preflight["preflightHash"]},"execution":{"uri":str(execution_path),"sha256":sha_file(execution_path),"executionHash":execution["executionHash"]},"result":{"uri":str(root/"results.json"),"sha256":sha_file(root/"results.json"),"evidenceHash":result["evidenceHash"],"verdict":result["verdict"]},"audit":{"uri":str(root/"audit.json"),"sha256":sha_file(root/"audit.json"),"auditHash":audit["auditHash"],"passed":audit["passed"]},"toolFreezeCommit":preflight["toolFreezeCommit"],"toolHashes":tools,"processes":{"expected":spec["matrix"]["totalUniqueChildProcesses"],"observed":len(children),"unique":len(set(pids)),"passed":process_ok,"children":children},"operationCounts":operation_counts};receipt={**body,"receiptHash":canon(body)};(root/"receipt.json").write_text(json.dumps(receipt,indent=2,sort_keys=True,allow_nan=False)+"\n")
+ if not process_ok or not audit["passed"]:raise RuntimeError("D12.7 process/audit totality failure")
+ print(f"BFS_B52_D127_FORMAL_COMPLETE verdict={result['verdict']} checks={result['checkPassed']}/{result['checkTotal']} analyzerAttacks={result['mutationAttackPassed']}/{result['mutationAttackTotal']} auditAttacks={audit['mutationAttackPassed']}/{audit['mutationAttackTotal']} receipt={receipt['receiptHash']}")
+
+if __name__=="__main__":main()
