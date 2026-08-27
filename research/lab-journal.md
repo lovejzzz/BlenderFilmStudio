@@ -2757,6 +2757,16 @@ The corrected preflight passed 10/10 checks and the same 259 synthetic bound cas
 
 Artifacts: `experiments/blender-static-interior-risk-localization-c2-preflight-v0-1/preflight.json` and `research/2026-08-27-b52-d12-6-c2-preflight.md`.
 
+## J-178 · Local arithmetic risk replaces distance as the next hypothesis
+
+Date: 2026-08-27 · Type: FORMAL POST-HOC DIAGNOSTIC · Blender renders: 0
+
+D12.6-C2 passed: 92,763 interior RGB samples produced zero local-bound underestimates, all eight formal checks passed, and an independent process rejected 18/18 mutations. The fresh maxima are explained by tiny Vector weights multiplied by local color contrast: the wedge ties occur at silhouette distances 17 and 11, while the rods maximum remains at distance 4. Distance alone is not the common mechanism.
+
+The bound is promising rather than merely conservative. Cell Spearman association is 0.8944–0.9281; at the half-gate, radius 2 selects 12/16,428 pixels to capture all 7 actual positives, while radius 3 selects 7/14,493 to capture all 6. This licenses a new unseen-fixture adaptive-risk holdout, not deployment.
+
+Artifacts: `experiments/blender-static-interior-risk-localization-c2-v0-1/`, `research/2026-08-27-b52-d12-6-c2-interior-risk-localization-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
