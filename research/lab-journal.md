@@ -2097,6 +2097,22 @@ Next: preregister D10.1 with an explicit IEEE-754 binary32 canonical structural 
 
 Artifacts: `experiments/blender-multipart-temporal-adapter-holdout-v0-1/` and `research/2026-08-27-b52-d10-blender-multipart-temporal-adapter-holdout-invalid-result.md`.
 
+## J-130 · D10.1 preregisters typed float32 structure on entirely unseen fixtures
+
+Date: 2026-08-27 · Type: VERIFIER-RECOVERY FRESH-HOLDOUT PREREGISTRATION · Formal outputs: 0
+
+D10 remains `BLENDER_MULTIPART_TEMPORAL_ADAPTER_HOLDOUT_NOT_SUPPORTED`; its analyzer and 173×97 output are not revised or rerun. D10.1 freezes a new question: can an explicitly typed structural oracle represent Blender RNA float storage correctly while the complete real-pass adapter contract independently survives unchanged payload thresholds?
+
+Only declared RNA float paths are canonicalized through an IEEE-754 binary32 pack/unpack before exact comparison. Names, enums, integers, pass indices, topology, action roster, render/pass state, identities and operation counts remain exact. Three frozen sensitivity controls require raw 18.1 to differ when canonicalization is skipped, a one-ULP canonical ortho-scale mutation to fail, and a pass-index increment to fail. Global epsilon and decimal rounding are forbidden.
+
+Fresh fixtures use 181×103, ortho scale 18.1, new object names and geometry, IDs 111/222/333/444/555, object pairs (−11,+7)/(−18,+11), camera pairs (+9,−6)/(+20,−12), and a static control. All D10 Vector, static, Depth, ownership, repeat, adapter, process and diagnostic gates remain unchanged. The boundary is again 12 real Cycles Blender processes, six adapters and one independent analyzer: 19 unique child PIDs and 37 attacks.
+
+The formal root and all seven D10.1 tool paths are absent. Passing may promote only the opaque orthographic integer-motion adapter and open a separately preregistered real textured end-to-end temporal experiment. Failure remains a new counterexample; it is not permission to revise D10.1 after output.
+
+Spec SHA-256: `11686c5e796c7bc1b4e45cf137c3d98347bc65bfec428f9d19545b55430f584b`.
+
+Artifacts: `specs/blender-multipart-temporal-adapter-f32-holdout.v0.1.json` and `research/2026-08-27-b52-d10-1-blender-multipart-temporal-adapter-f32-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
