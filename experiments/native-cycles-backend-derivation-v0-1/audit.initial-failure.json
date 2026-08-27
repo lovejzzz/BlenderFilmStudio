@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "bfs.nativeCyclesBackendAuditFailure.v0.1",
+  "experimentId": "B51-D1",
+  "stage": "INDEPENDENT_AUDIT",
+  "status": "FAILED_BEFORE_AUDIT_ARTIFACT",
+  "renderOutputsChanged": false,
+  "resultsChanged": false,
+  "exceptionType": "AttributeError",
+  "exception": "'str' object has no attribute 'open'",
+  "cause": "sha256_file expected a pathlib.Path but the frozen audit tool passed __file__ as str while hashing itself",
+  "correctionBoundary": "B51-C1 may change only the audit tool, add frozen-tool and qemu-parent identity checks, and produce audit.correction-v0.2.json. It may not rerender or rewrite run.receipt.json or results.json."
+}
