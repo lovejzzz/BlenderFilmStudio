@@ -41,19 +41,24 @@ def main() -> None:
 
     with tempfile.TemporaryDirectory(prefix="bfs-b52-d1-audit-") as temporary:
         replay = Path(temporary) / "results.json"
-        process = subprocess.run([
+        replay_argv = [
             sys.executable, str(analyzer), "--spec", str(args.spec),
             "--receipt", str(receipt_path), "--output", str(replay),
-        ], cwd=root, capture_output=True, text=True, check=False)
+        ]
+        correction = result.get("analysisCorrection")
+        if correction is not None:
+            replay_argv += ["--correction-tool-freeze-commit", correction["correctedToolFreezeCommit"]]
+        process = subprocess.run(replay_argv, cwd=root, capture_output=True, text=True, check=False)
         if process.returncode:
             raise RuntimeError(f"B52-D1 analyzer replay failed: {process.stdout}\n{process.stderr}")
         replay_exact = result_path.read_bytes() == replay.read_bytes()
         replay_observation = {"uri": "results.json", "originalSha256": sha256_file(result_path), "replaySha256": sha256_file(replay), "byteExact": replay_exact}
 
     frozen_tools = []
-    for name, binding in receipt["tools"].items():
-        observed = git_blob_hash(receipt["toolFreezeCommit"], binding["uri"], root)
-        frozen_tools.append({"name": name, "uri": binding["uri"], "expectedSha256": binding["sha256"], "observedGitBlobSha256": observed, "match": observed == binding["sha256"]})
+    for name, binding in result["tools"].items():
+        freeze_commit = binding.get("freezeCommit", receipt["toolFreezeCommit"])
+        observed = git_blob_hash(freeze_commit, binding["uri"], root)
+        frozen_tools.append({"name": name, "uri": binding["uri"], "freezeCommit": freeze_commit, "expectedSha256": binding["sha256"], "observedGitBlobSha256": observed, "match": observed == binding["sha256"]})
 
     bound_inputs = []
     for item in [*receipt["parentObservations"], *receipt["sourceObservations"], *receipt["sourcePostObservations"]]:
@@ -76,8 +81,18 @@ def main() -> None:
     valid_verdicts = {
         spec["selectionRule"]["positiveVerdict"], spec["selectionRule"]["negativeVerdict"]
     }
+    correction_checks = []
+    if result.get("analysisCorrection") is not None:
+        correction = result["analysisCorrection"]
+        for binding_name in ("originalRunReceipt", "failureEvidence"):
+            binding = correction[binding_name]
+            path = root / binding["uri"]
+            observed = sha256_file(path) if path.is_file() else None
+            correction_checks.append({"name": binding_name, "uri": binding["uri"], "expectedSha256": binding["sha256"], "observedSha256": observed, "match": observed == binding["sha256"]})
+        correction_checks.append({"name": "noRerender", "expected": {"rendersReused": 30, "rendersRepeated": 0}, "observed": {"rendersReused": correction["rendersReused"], "rendersRepeated": correction["rendersRepeated"]}, "match": correction["rendersReused"] == 30 and correction["rendersRepeated"] == 0})
     passed = (
         replay_exact and all(item["match"] for item in frozen_tools + bound_inputs + artifacts)
+        and all(item["match"] for item in correction_checks)
         and result["verdict"] in valid_verdicts and result["attacksPassed"] == len(spec["attacks"])
         and result["baseFailure"] is None
     )
@@ -88,6 +103,7 @@ def main() -> None:
         "evidenceCoreHash": result["evidenceCoreHash"], "analysisReplay": replay_observation,
         "frozenToolChecks": frozen_tools, "frozenToolsMatch": all(item["match"] for item in frozen_tools),
         "boundInputChecks": bound_inputs, "boundInputsMatch": all(item["match"] for item in bound_inputs),
+        "correctionChecks": correction_checks, "correctionChecksMatch": all(item["match"] for item in correction_checks),
         "artifactChecks": artifacts, "artifactsMatch": all(item["match"] for item in artifacts),
         "toolHashes": {"analyzer": sha256_file(analyzer), "audit": sha256_file(Path(__file__))},
         "replayStdout": process.stdout.strip(), "failures": [] if passed else ["REPLAY_OR_GATE_MISMATCH"],

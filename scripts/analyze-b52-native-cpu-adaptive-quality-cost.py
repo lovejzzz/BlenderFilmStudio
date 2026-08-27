@@ -10,6 +10,7 @@ import json
 import math
 import platform
 import statistics
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -350,7 +351,7 @@ def run_attacks(evidence: dict, spec: dict, d5_spec: dict) -> list[dict]:
     add("A13_REFERENCE", "REFERENCE_INDEPENDENCE", lambda x: x["referenceIndependence"][0].update(threeDistinct=False))
     add("A14_BEAUTY", "BEAUTY_MEASUREMENT_TOTALITY", lambda x: x["beautyMeasurements"][0].update(measurementTotal=False))
     add("A15_DATA", "DATA_SEMANTIC_TOTALITY", lambda x: x["dataSemanticMeasurements"][0].update(measurementTotal=False))
-    add("A16_AUX", "AUXILIARY_PASS_TOTALITY", lambda x: x["auxiliaryPassMeasurements"][0]["passes"].pop())
+    add("A16_AUX", "AUXILIARY_PASS_TOTALITY", lambda x: x["auxiliaryPassMeasurements"][0]["passes"].pop("BFS_MASTER.Normal"))
     add("A17_COST", "COST_MEASUREMENT_TOTALITY", lambda x: x["costMeasurements"].pop())
     add("A18_ARTIFACT", "ARTIFACT_IDENTITY", lambda x: x["runObservations"][0].update(artifactIdentityMatch=False))
     add("A19_BOUNDARY", "OPERATION_BOUNDARY", lambda x: x["operationCounts"].update(metalRenders=1))
@@ -363,6 +364,7 @@ def main() -> None:
     parser.add_argument("--spec", type=Path, required=True)
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--correction-tool-freeze-commit")
     args = parser.parse_args()
     root = args.spec.resolve().parent.parent
     spec = json.loads(args.spec.read_text(encoding="utf-8"))
@@ -549,9 +551,31 @@ def main() -> None:
         "metalRenders": 0, "dockerRuns": 0, "downloadsDuringFormalRun": 0,
         "modelCalls": 0, "videoModelCalls": 0, "networkRequired": False,
     }
+    tools = copy.deepcopy(receipt["tools"])
+    for binding in tools.values():
+        binding["freezeCommit"] = receipt["toolFreezeCommit"]
+    analysis_correction = None
+    if args.correction_tool_freeze_commit:
+        if subprocess.run(["git", "merge-base", "--is-ancestor", args.correction_tool_freeze_commit, "HEAD"], cwd=root).returncode:
+            raise RuntimeError("correction tool freeze is not an ancestor")
+        failure_path = args.receipt.parent / "analysis.failure.json"
+        if not failure_path.is_file():
+            raise RuntimeError("B52-D1 correction failure evidence absent")
+        for name in ("analyzer", "audit"):
+            path = root / tools[name]["uri"]
+            tools[name]["sha256"] = sha256_file(path)
+            tools[name]["freezeCommit"] = args.correction_tool_freeze_commit
+        analysis_correction = {
+            "id": "B52-D1-C1", "status": "LIMITED_ANALYSIS_TOOL_CORRECTION",
+            "originalRunReceipt": {"uri": str(args.receipt.resolve().relative_to(root)), "sha256": sha256_file(args.receipt)},
+            "failureEvidence": {"uri": str(failure_path.resolve().relative_to(root)), "sha256": sha256_file(failure_path)},
+            "originalToolFreezeCommit": receipt["toolFreezeCommit"],
+            "correctedToolFreezeCommit": args.correction_tool_freeze_commit,
+            "rendersReused": len(receipt["runs"]), "rendersRepeated": 0,
+        }
     evidence = {
         "schemaVersion": "bfs.nativeCpuAdaptiveQualityCostEvidence.v0.1", "experimentId": spec["experimentId"],
-        "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": receipt["tools"],
+        "preregistration": receipt["preregistration"], "toolFreezeCommit": receipt["toolFreezeCommit"], "tools": tools,
         "runtime": {"python": platform.python_version(), "openImageIO": oiio.VERSION_STRING, "numpy": np.__version__},
         "transitiveD6Spec": {"uri": str(d6_spec_path.relative_to(root)), "sha256": sha256_file(d6_spec_path)},
         "parentObservations": receipt["parentObservations"], "sourceObservations": receipt["sourceObservations"],
@@ -565,6 +589,8 @@ def main() -> None:
         "qualityGate": spec["beautyQualityGate"], "dataSemanticGate": thresholds,
         "operationCounts": operation_counts, "nonClaims": spec["nonClaims"],
     }
+    if analysis_correction is not None:
+        evidence["analysisCorrection"] = analysis_correction
     summaries, selected = replay_selection(evidence, spec)
     evidence["profileSummaries"], evidence["selectedProfileId"] = summaries, selected
     evidence["evidenceCoreHash"] = canonical_hash(hash_payload(evidence))
