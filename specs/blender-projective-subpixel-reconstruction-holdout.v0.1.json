@@ -1,0 +1,344 @@
+{
+  "schemaVersion": "bfs.blenderProjectiveSubpixelReconstructionHoldout.v0.1",
+  "experimentId": "B52-D12",
+  "title": "Blender 5.2 rigid-planar projective subpixel reconstruction fresh holdout",
+  "question": "On fresh opaque rigid planar perspective scenes with genuinely non-integer motion, can an independent pinhole/transform oracle validate Blender 5.2 Vector endpoints, can two independent clip-bilinear consumers reconstruct the current continuous-texture beauty from the previous beauty within frozen absolute and relative gates, and can transform-predicted previous-camera depth preserve correct history that direct cross-frame depth identity would reject?",
+  "parents": {
+    "d11_1Spec": {
+      "uri": "specs/blender-nearest-integer-temporal-recovery-holdout.v0.1.json",
+      "sha256": "c4cb343672f53660d7c4ab69ccd489e00bb211e4aa1f489429f7a626ee48c42a"
+    },
+    "d11_1Result": {
+      "uri": "experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/results.json",
+      "sha256": "dd08142a2af855ddc287eecb84f5de722afb03a9ae6aef8a33fd3279d660329f",
+      "verdict": "BLENDER_NEAREST_INTEGER_TEMPORAL_RECOVERY_HOLDOUT_SUPPORTED"
+    },
+    "d11_1Audit": {
+      "uri": "experiments/blender-nearest-integer-temporal-recovery-holdout-v0-1/audit.json",
+      "sha256": "35ef7e30f0f231262e58ee307cac4050e5e0137cbc1af209ac5d2ab7b1cb552f",
+      "status": "PASS"
+    },
+    "developmentCommit": "fbf7cd0",
+    "developmentAnalysis": {
+      "uri": "experiments/blender-projective-subpixel-development-probe-v0-2/analysis-with-oracle-depth.json",
+      "sha256": "2a51837401ca992d65a29f2d35f5cd6cd1473cfd4472b9217f6f60c8b9a014d3",
+      "status": "DEVELOPMENT_ONLY"
+    },
+    "developmentNote": {
+      "uri": "research/2026-08-27-b52-d12-projective-subpixel-development-probe.md",
+      "sha256": "9bb22627ba6b6b56aae2c5905288fc734231e8eaf1e148628992b4274e7c852a"
+    }
+  },
+  "freshness": {
+    "excludedDevelopmentResolution": [101, 61],
+    "formalResolution": [107, 67],
+    "excludedLensMm": 50.0,
+    "formalLensMm": 47.0,
+    "excludedSensorWidthMm": 36.0,
+    "formalSensorWidthMm": 35.0,
+    "requirements": [
+      "No formal fixture may reuse the development trajectory, object name, pass index, material frequency, phase or output root.",
+      "The formal output root and every formal tool path must be absent at preregistration.",
+      "Development EXRs and arrays are forbidden inputs to the formal decision."
+    ]
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "bytes": 183237520,
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "buildPlatform": "Darwin",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "bytes": 5543888,
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "bytes": 50320,
+      "version": "v26.5.0"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    },
+    "environmentAllowlist": ["PATH", "LANG", "LC_ALL", "OCIO", "TMPDIR", "BLENDER_USER_CONFIG", "BLENDER_USER_SCRIPTS"]
+  },
+  "diskReserveBytes": 107374182400,
+  "projectedWriteBytes": 67108864,
+  "formalOutputRoot": "experiments/blender-projective-subpixel-reconstruction-holdout-v0-1",
+  "preflightOutputRoot": "experiments/blender-projective-subpixel-reconstruction-holdout-preflight-v0-1",
+  "scene": {
+    "construction": "fresh factory state; one generated opaque tessellated rigid plane with continuous object-local emission; no source blend, image texture or external asset",
+    "frameRange": [0, 2],
+    "previousFrame": 0,
+    "currentFrame": 1,
+    "nextFrame": 2,
+    "resolution": [107, 67],
+    "surfaceSizeWorld": [10.4, 6.5],
+    "surfaceSubdivisions": [69, 43],
+    "eulerOrder": "XYZ",
+    "camera": {
+      "type": "PERSP",
+      "lensMm": 47.0,
+      "sensorWidthMm": 35.0,
+      "sensorFit": "HORIZONTAL",
+      "clipStart": 0.1,
+      "clipEnd": 100.0
+    },
+    "material": {
+      "coordinate": "Generated object-local",
+      "red": {"axis": "u", "frequency": 1.13, "phase": 0.29, "amplitude": 0.22, "offset": 0.5},
+      "green": {"axis": "v", "frequency": 0.91, "phase": 0.61, "amplitude": 0.20, "offset": 0.5},
+      "blue": {"linearUv": [0.63, 1.07], "frequency": 0.79, "phase": 1.11, "amplitude": 0.18, "offset": 0.5},
+      "emissionStrength": 1.0,
+      "alpha": 1.0
+    }
+  },
+  "sourceRender": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "samples": 1,
+    "seed": 521212,
+    "animatedSeed": false,
+    "adaptiveSampling": false,
+    "denoising": false,
+    "motionBlur": false,
+    "depthOfField": false,
+    "persistentData": false,
+    "threadsMode": "FIXED",
+    "threads": 4,
+    "resolution": [107, 67],
+    "resolutionPercentage": 100,
+    "pixelAspect": [1.0, 1.0],
+    "filmTransparent": false,
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorMode": "RGBA",
+    "colorDepth": "32",
+    "exrCodec": "ZIP",
+    "viewLayer": "BFS_D12_MASTER",
+    "passAlphaThreshold": 0.5,
+    "expectedSubimages": [
+      "BFS_D12_MASTER.Combined",
+      "BFS_D12_MASTER.Depth",
+      "BFS_D12_MASTER.Vector",
+      "BFS_D12_MASTER.Object Index"
+    ],
+    "expectedChannels": {
+      "BFS_D12_MASTER.Combined": ["BFS_D12_MASTER.Combined.R", "BFS_D12_MASTER.Combined.G", "BFS_D12_MASTER.Combined.B", "BFS_D12_MASTER.Combined.A"],
+      "BFS_D12_MASTER.Depth": ["BFS_D12_MASTER.Depth.Z"],
+      "BFS_D12_MASTER.Vector": ["BFS_D12_MASTER.Vector.X", "BFS_D12_MASTER.Vector.Y", "BFS_D12_MASTER.Vector.Z", "BFS_D12_MASTER.Vector.W"],
+      "BFS_D12_MASTER.Object Index": ["BFS_D12_MASTER.Object Index.X"]
+    }
+  },
+  "fixtures": [
+    {
+      "id": "PROJECTIVE_OBJECT_DOLLY_TRANSLATE_107X67",
+      "passIndex": 8211,
+      "surfaceByFrame": {
+        "0": {"location": [-0.063, 0.041, -0.080], "rotationEuler": [0.0, 0.0, 0.0]},
+        "1": {"location": [0.021, -0.031, 0.170], "rotationEuler": [0.0, 0.0, 0.0]},
+        "2": {"location": [0.074, 0.026, 0.390], "rotationEuler": [0.0, 0.0, 0.0]}
+      },
+      "cameraByFrame": {
+        "0": {"location": [0.0, 0.0, 10.2], "rotationEuler": [0.0, 0.0, 0.0]},
+        "1": {"location": [0.0, 0.0, 10.2], "rotationEuler": [0.0, 0.0, 0.0]},
+        "2": {"location": [0.0, 0.0, 10.2], "rotationEuler": [0.0, 0.0, 0.0]}
+      },
+      "purpose": ["fractional translation", "rigid dolly", "nonconstant projective scale", "transform-predicted previous depth"]
+    },
+    {
+      "id": "PROJECTIVE_OBJECT_YAW_PITCH_107X67",
+      "passIndex": 8322,
+      "surfaceByFrame": {
+        "0": {"location": [-0.041, 0.019, 0.060], "rotationEuler": [-0.021, -0.047, 0.006]},
+        "1": {"location": [0.027, -0.024, 0.145], "rotationEuler": [0.016, 0.031, -0.004]},
+        "2": {"location": [0.069, 0.033, 0.225], "rotationEuler": [0.038, 0.083, -0.011]}
+      },
+      "cameraByFrame": {
+        "0": {"location": [0.0, 0.0, 10.2], "rotationEuler": [0.0, 0.0, 0.0]},
+        "1": {"location": [0.0, 0.0, 10.2], "rotationEuler": [0.0, 0.0, 0.0]},
+        "2": {"location": [0.0, 0.0, 10.2], "rotationEuler": [0.0, 0.0, 0.0]}
+      },
+      "purpose": ["fractional projective homography", "rigid yaw and pitch", "spatially varying motion", "spatially varying predicted depth"]
+    },
+    {
+      "id": "PROJECTIVE_CAMERA_DOLLY_YAW_107X67",
+      "passIndex": 8433,
+      "surfaceByFrame": {
+        "0": {"location": [0.0, 0.0, 0.0], "rotationEuler": [0.012, -0.018, 0.0]},
+        "1": {"location": [0.0, 0.0, 0.0], "rotationEuler": [0.012, -0.018, 0.0]},
+        "2": {"location": [0.0, 0.0, 0.0], "rotationEuler": [0.012, -0.018, 0.0]}
+      },
+      "cameraByFrame": {
+        "0": {"location": [-0.052, 0.029, 10.170], "rotationEuler": [0.002, 0.006, -0.001]},
+        "1": {"location": [0.018, -0.023, 9.990], "rotationEuler": [-0.003, -0.004, 0.002]},
+        "2": {"location": [0.064, 0.018, 9.790], "rotationEuler": [0.004, -0.011, 0.004]}
+      },
+      "purpose": ["camera-induced fractional motion", "camera dolly", "camera yaw", "previous-camera depth prediction"]
+    },
+    {
+      "id": "PROJECTIVE_STATIC_CONTROL_107X67",
+      "passIndex": 8544,
+      "surfaceByFrame": {
+        "0": {"location": [0.013, -0.017, 0.090], "rotationEuler": [0.009, -0.014, 0.003]},
+        "1": {"location": [0.013, -0.017, 0.090], "rotationEuler": [0.009, -0.014, 0.003]},
+        "2": {"location": [0.013, -0.017, 0.090], "rotationEuler": [0.009, -0.014, 0.003]}
+      },
+      "cameraByFrame": {
+        "0": {"location": [0.011, -0.008, 10.110], "rotationEuler": [0.001, -0.002, 0.0]},
+        "1": {"location": [0.011, -0.008, 10.110], "rotationEuler": [0.001, -0.002, 0.0]},
+        "2": {"location": [0.011, -0.008, 10.110], "rotationEuler": [0.001, -0.002, 0.0]}
+      },
+      "purpose": ["static negative control", "positive-zero expectation", "repeat identity"]
+    }
+  ],
+  "projectionOracle": {
+    "pixelCenter": "decoded top-left integer pixel (x,y) denotes center ((x+0.5)/W, 1-(y+0.5)/H)",
+    "cameraConvention": "Blender camera looks along local -Z; camera coordinates are transpose(R_camera_XYZ) * (world-cameraLocation)",
+    "sensorHeightMm": "sensorWidthMm * H / W",
+    "project": {
+      "u": "0.5 + lensMm * cameraX / (-cameraZ * sensorWidthMm)",
+      "vBottom": "0.5 + lensMm * cameraY / (-cameraZ * sensorHeightMm)",
+      "x": "u*W - 0.5",
+      "yTop": "(1-vBottom)*H - 0.5"
+    },
+    "surfacePoint": "cast current pixel-center ray, intersect current local-z-zero plane, invert current rigid transform to local point, apply previous rigid transform",
+    "expectedVector": ["previousX-currentX", "currentYTop-previousYTop"],
+    "sampleCoordinateTopLeft": ["currentX+Vector.X", "currentY-Vector.Y"],
+    "predictedPreviousDepth": "negative previous-camera Z of the transformed current local surface point",
+    "implementationIndependence": "analyzer must implement scalar pinhole, Euler XYZ matrix, ray-plane, rigid inverse and projection math without bpy, bpy_extras, mathutils or tested reconstructor imports"
+  },
+  "reconstruction": {
+    "inputColor": "previous BFS_D12_MASTER.Combined decoded as top-left little-endian float32 linear RGBA",
+    "kernel": "clip-boundary separable bilinear",
+    "tapOrder": ["y0x0", "y0x1", "y1x0", "y1x1"],
+    "arithmetic": "promote float32 inputs and coordinates to float64; accumulate taps in frozen order; cast RGBA to float32 once",
+    "validity": [
+      "current pixel lies at least four pixels from image boundary",
+      "all four previous bilinear taps are in bounds",
+      "current alpha and all four previous tap alphas exceed 0.999",
+      "current Object Index and all four previous tap Object Index values equal fixture passIndex exactly",
+      "current Depth matches analytic current-camera ray-plane depth within max(1,predictedCurrentDepth)/1024",
+      "bilinearly sampled previous Depth matches transform-predicted previous-camera depth within max(1,predictedPreviousDepth)/1024"
+    ],
+    "forbiddenDepthRule": "sampledPreviousDepth approximately equals currentDepth",
+    "target": "current BFS_D12_MASTER.Combined RGB on the valid mask",
+    "controls": {
+      "wrongSign": ["currentX-Vector.X", "currentY+Vector.Y"],
+      "nearest": "round each correct continuous coordinate to nearest integer with ties-to-even numpy/JavaScript-equivalent helper frozen by contract tests",
+      "directDepthIdentity": "diagnostic only; count pixels that inherited cross-frame depth identity would reject"
+    }
+  },
+  "thresholds": {
+    "minimumValidPixelsPerFixture": 4000,
+    "movingFractionalComponentFractionBeyond1Over1024": 0.75,
+    "movingFractionalDistanceP50Minimum": 0.05,
+    "vectorEndpointMaximum": 0.0009765625,
+    "vectorEndpointP99": 0.000244140625,
+    "predictedDepthMaximumRelative": 0.0009765625,
+    "correctBilinearMaximumRgb": 0.001953125,
+    "correctBilinearP99Rgb": 0.0009765625,
+    "correctBilinearRmseRgb": 0.000244140625,
+    "correctBilinearAbsoluteSignedMeanPerChannel": 0.000244140625,
+    "correctBilinearMinimumPsnrUnitRangeDb": 72.0,
+    "correctToNearestMaximumRmseRatio": 0.25,
+    "correctToWrongSignMaximumRmseRatio": 0.1,
+    "staticVectorMaximum": 0.0009765625,
+    "staticReconstructionMaximumRgb": 0.0,
+    "pythonNodeCanonicalMaximum": 0.0,
+    "bridgeDecodedMaximum": 0.0,
+    "directDepthIdentityMovingRejectedFractionMinimum": 0.95
+  },
+  "processMatrix": {
+    "sourceProcesses": 16,
+    "cyclesRayRenders": 16,
+    "adapterProcesses": 8,
+    "pythonReconstructorProcesses": 8,
+    "nodeReconstructorProcesses": 8,
+    "encoderProcesses": 8,
+    "bridgeProcesses": 16,
+    "compositorBridgeRenders": 16,
+    "analysisProcesses": 1,
+    "totalChildProcesses": 65,
+    "requiredUniqueChildPids": 65,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "baseFailureOrder": [
+    "PARENT_IDENTITY",
+    "FRESHNESS",
+    "RUNTIME_IDENTITY",
+    "PROCESS_IDENTITY",
+    "SOURCE_STRUCTURE",
+    "SOURCE_REPEAT",
+    "MULTIPART_PAYLOAD",
+    "PROJECTION_ORACLE",
+    "SUBPIXEL_DOMAIN",
+    "DUAL_RECONSTRUCTION_IDENTITY",
+    "TRANSFORM_DEPTH_VALIDITY",
+    "RECONSTRUCTION_QUALITY",
+    "CONTROL_SENSITIVITY",
+    "STATIC_CONTROL",
+    "BRIDGE_EXACT",
+    "ATTACK_TOTALITY",
+    "DIAGNOSTIC_IDENTITY",
+    "EVIDENCE_IDENTITY"
+  ],
+  "attacks": [
+    "PARENT_RESULT_HASH", "PARENT_AUDIT_HASH", "DEVELOPMENT_INPUT_REUSE", "FORMAL_OUTPUT_PREEXISTS",
+    "BLENDER_EXECUTABLE_HASH", "PYTHON_EXECUTABLE_HASH", "NODE_EXECUTABLE_HASH", "OCIO_HASH",
+    "RUNNER_PID_DUPLICATION", "CHILD_PID_DUPLICATION", "PROCESS_COUNT", "FIXTURE_ROSTER", "REPEAT_ROSTER",
+    "SOURCE_EXR_HASH", "SOURCE_REPORT_HASH", "SCENE_STRUCTURE", "ANIMATION_STRUCTURE", "CAMERA_TYPE", "CAMERA_LENS", "SENSOR_WIDTH",
+    "MULTIPART_ROSTER", "MULTIPART_CHANNELS", "ARRAY_SHAPE", "NONFINITE_PAYLOAD", "REPEAT_DECODE_IDENTITY",
+    "VECTOR_X_SIGN", "VECTOR_Y_ORIGIN", "CAMERA_ROTATION_ORDER", "OBJECT_ROTATION_ORDER", "PIXEL_CENTER_OFFSET", "PROJECTIVE_ENDPOINT",
+    "SUBPIXEL_FRACTION", "BILINEAR_TAP_ORDER", "BILINEAR_WEIGHT", "BILINEAR_BOUNDARY", "PYTHON_NODE_OUTPUT",
+    "OWNER_CURRENT", "OWNER_PREVIOUS_TAPS", "ALPHA_CURRENT", "ALPHA_PREVIOUS_TAPS", "CURRENT_DEPTH_ORACLE", "PREVIOUS_DEPTH_ORACLE", "DIRECT_DEPTH_IDENTITY_CONTROL",
+    "QUALITY_MAXIMUM", "QUALITY_P99", "QUALITY_RMSE", "QUALITY_BIAS", "QUALITY_PSNR", "NEAREST_CONTROL", "WRONG_SIGN_CONTROL", "STATIC_CONTROL",
+    "ENCODER_BINDING", "BRIDGE_GRAPH", "BRIDGE_DECODE", "DIAGNOSTIC_HASH", "RESULT_SELF_HASH", "RECEIPT_SELF_HASH"
+  ],
+  "formalToolPaths": [
+    "blender/render_b52_d12_projective_source.py",
+    "scripts/adapt-b52-d12-projective-multipart.py",
+    "scripts/reconstruct-b52-d12-subpixel.py",
+    "scripts/reconstruct-b52-d12-subpixel.mjs",
+    "scripts/encode-b52-d12-reconstruction.py",
+    "blender/render_b52_d12_reconstruction_passthrough.py",
+    "scripts/analyze-b52-d12-projective-subpixel-holdout.py",
+    "scripts/run-b52-d12-projective-subpixel-holdout.py",
+    "scripts/preflight-b52-d12-projective-subpixel-holdout.py",
+    "scripts/audit-b52-d12-projective-subpixel-holdout.py",
+    "tests/test_b52_d12_projective_subpixel_contract.py"
+  ],
+  "diagnostics": {
+    "participatesInDecision": false,
+    "perCell": ["current", "correct-bilinear", "absolute-error", "nearest-error", "wrong-sign-error", "depth-validity"],
+    "format": "PNG plus JSON sidecar bound to canonical float32 inputs and masks"
+  },
+  "decision": {
+    "supportedVerdict": "BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_SUPPORTED",
+    "unsupportedVerdict": "BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED",
+    "rule": "SUPPORTED requires every ordered base gate, every registered attack, both clean source repeats, all eight Python/Node canonical identities, all transform-aware depth gates, all moving quality/control gates, the exact static control and all sixteen Raw EXR bridge decodes. Otherwise preserve the earliest base failure and return NOT_SUPPORTED."
+  },
+  "nonClaims": [
+    "No D11 or D11.1 verdict is revised.",
+    "No arbitrary texture bandwidth, curved surface, deformation, occlusion, disocclusion, multiple owner, transparency, Cryptomatte coverage, hair, volume, motion blur or depth of field is supported.",
+    "No noisy path-traced lighting, temporal accumulation, denoising, perceptual preference, cinematic quality, character consistency, production rendering or cross-platform equivalence is established.",
+    "Transform-aware depth support is limited to the frozen rigid planar object/camera transforms known to the compiler."
+  ],
+  "nextBoundaryIfSupported": "Fresh real-occlusion projective holdout with transform-predicted previous depth, explicit disocclusion rejection and multi-owner boundary handling; the current single-owner planar result remains frozen as a control.",
+  "preToolState": {
+    "formalOutputExists": false,
+    "preflightOutputExists": false,
+    "formalToolsExist": false,
+    "formalRenders": 0,
+    "formalMeasurements": 0
+  }
+}

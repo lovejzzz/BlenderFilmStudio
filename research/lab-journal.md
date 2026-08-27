@@ -2335,6 +2335,22 @@ This is calibration evidence only. The formal holdout must use fresh resolution,
 
 Artifacts: `experiments/blender-projective-subpixel-development-probe-v0-1/`, `experiments/blender-projective-subpixel-development-probe-v0-2/` and `research/2026-08-27-b52-d12-projective-subpixel-development-probe.md`.
 
+## J-146 · D12 freezes a transform-aware projective subpixel holdout before formal tools
+
+Date: 2026-08-27 · Type: PROJECTIVE/SUBPIXEL FRESH-HOLDOUT PREREGISTRATION · Formal outputs: 0
+
+D12 does not widen D11.1's near-integer radius. It freezes a separate float-motion contract for four entirely fresh 107×67 perspective fixtures: rigid object dolly/translation, rigid object yaw/pitch, camera dolly/yaw and a static control. The 47 mm camera, 35 mm sensor, scene identifiers, pass IDs, trajectories and continuous object-local emission spectrum are disjoint from the 101×61 development probe.
+
+The independent oracle casts a current pixel-center ray, intersects the current rigid plane, recovers its local point, applies the previous object transform and projects through the previous camera. The decoded top-left sample coordinate is frozen as `q=(x+Vector.X, y−Vector.Y)`. A separate transform-aware depth oracle predicts that same point's previous-camera depth; direct `previousDepth≈currentDepth` is forbidden and retained only as a diagnostic counterexample.
+
+The consumer is clip-boundary bilinear with four owner/alpha taps, float64 accumulation in fixed order and one final float32 cast. Python and Node must produce byte-identical reconstruction, validity and predicted-depth arrays. Moving RGB gates are maximum ≤1/512, p99 ≤1/1024, RMSE and per-channel absolute bias ≤1/4096, PSNR ≥72 dB, plus at least 4× RMSE improvement over nearest and 10× over wrong-sign. The static reconstruction must be exact.
+
+The formal boundary is 65 unique child PIDs: 16 real Cycles sources, eight adapters, sixteen independent reconstructors, eight encoders, sixteen Blender compositor bridges and one analyzer. Fifty-seven attacks cover identity, freshness, projection convention, subpixel domain, kernel, metadata, depth physics, quality controls, bridge and self-hashes. The 64 MiB projection must leave the unchanged 100 GiB reserve.
+
+All eleven formal tool paths, the preflight root and the formal root are absent. Frozen spec SHA-256: `dd2e990d276e0ee5c2fee9d22cf42c7f84db2b6c1947b1219dceab06a76f66a2`. Next: commit the preregistration, implement the exact tools, freeze them in a second commit, and admit formal output only through a zero-output identity/API/disk preflight.
+
+Artifacts: `specs/blender-projective-subpixel-reconstruction-holdout.v0.1.json` and `research/2026-08-27-b52-d12-projective-subpixel-reconstruction-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
