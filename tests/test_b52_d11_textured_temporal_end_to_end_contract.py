@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import ast
 import unittest
 from pathlib import Path
 
@@ -114,6 +115,33 @@ class B52D11ContractTests(unittest.TestCase):
         self.assertEqual(self.spec["rawExrBridge"]["encoder"]["storage"], "FLOAT")
         self.assertEqual(self.spec["adapterContract"]["motion"], "raw float32 [-current Vector.X,-current Vector.Y]; no rounding, snapping, epsilon, clamping or quantization in the adapter")
         self.assertEqual(self.spec["motionIntegerizationGate"]["failureLabel"], "MOTION_INTEGERIZATION")
+
+    def test_all_formal_tools_exist_but_formal_root_does_not(self) -> None:
+        self.assertTrue(all((ROOT / uri).is_file() for uri in self.spec["formalToolPaths"]))
+        self.assertFalse((ROOT / self.spec["formalOutputRoot"]).exists())
+
+    def test_analyzer_is_independent_of_blender_and_tested_accumulators(self) -> None:
+        analyzer_path = ROOT / "scripts/analyze-b52-d11-textured-temporal-end-to-end.py"
+        source = analyzer_path.read_text()
+        tree = ast.parse(source)
+        imported = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imported.update(alias.name for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported.add(node.module)
+        self.assertTrue(imported.isdisjoint({"bpy", "bpy_extras", "mathutils"}))
+        self.assertNotIn("accumulate-b52-d11-temporal", source)
+        self.assertIn("def independent_accumulate", source)
+
+    def test_diagnostic_and_operation_totals_are_frozen(self) -> None:
+        self.assertEqual(self.spec["diagnostics"]["expectedPngs"], 40)
+        self.assertEqual(self.spec["diagnostics"]["expectedSidecars"], 40)
+        matrix = self.spec["processMatrix"]
+        self.assertEqual(matrix["totalBlenderProcesses"], 32)
+        self.assertEqual(matrix["totalBlenderRenderCalls"], 32)
+        self.assertEqual(matrix["sourceCyclesRayRenders"], 16)
+        self.assertEqual(matrix["bridgeCompositorRenders"], 16)
 
 
 if __name__ == "__main__":
