@@ -1909,6 +1909,18 @@ The fixture roster, 24-process matrix, exact gates, 24 attacks, decision boundar
 
 Next: commit this amendment separately, then implement formal tools against only the amended identity.
 
+## J-117 · B52-D8 tools freeze with an exact end-to-end development path
+
+Date: 2026-08-27 · Type: FROZEN-TOOL PREFLIGHT · Formal outputs: 0
+
+Eight formal tools were frozen at commit `dd924ab37e4353e8941f73c39347e2b6cc44a988`: two independent producers, EXR encoder, Blender worker, runner, analyzer, audit and four-test contract suite. Python and Node produced byte-identical canonical warps for all three fixtures. A pre-freeze real-Blender tool smoke also passed the signed-HDR fixture end to end; input and output shared canonical hash `09c2d182b27d0d0b7568ffa3626b939df469929b3007df58b883873be28c22a1`, with zero changed scalars.
+
+The frozen preflight matched all eight Git blobs, three D7 parent files and four runtime identities. It ran both producer paths and both encoders in temporary storage, confirmed byte-exact producer convergence and encode/decode identity, then opened one generated EXR in a real Blender 5.2 process to verify the frozen two-node/one-link graph with zero render calls. The formal root remained absent and formal child processes, renders and measurements remained zero.
+
+Disk admission was again narrow but valid after removing only two regenerable temporary directories created by this work. Free space was 107,429,011,456 bytes; after the frozen 16,777,216-byte projection it remains 107,412,234,240 bytes, above the 107,374,182,400-byte reserve. No repository evidence or user file was deleted.
+
+Frozen preflight SHA-256: `25886acd2d3344c583323e1abeaab56ad3befa59f12b2e2ca40f1faed377e7a4`. Next: execute the unchanged 24-process formal matrix and preserve any exactness counterexample.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
