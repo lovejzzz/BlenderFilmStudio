@@ -1869,6 +1869,20 @@ Next: execute the unchanged 24-process matrix. A distribution failure is the pre
 
 Artifacts: `experiments/subpixel-bilinear-tolerance-preflight-v0-1/` and `experiments/subpixel-bilinear-tolerance-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-114 · B52-D7 rejects the general Blender Bilinear consumer
+
+Date: 2026-08-27 · Type: CONFIRMATORY FRESH HOLDOUT · Child processes: 24
+
+All six scalar Python references, six independently coded Node references and twelve fresh Blender 5.2 compositor cells completed with 24 unique PIDs and zero timeouts. Python and Node agreed byte-for-byte for 6/6 fixtures. Blender's two decoded outputs per fixture reproduced exactly for 6/6. Runtime identity, source/displacement formulas, graph/RNA, operation counts, output hashes, task sensitivity, signed bias and the maximum-error boundary all passed.
+
+The full primitive nevertheless failed its preregistered distribution gate. `LF_63X47_REPEAT_FIELD` and all three high-frequency fixtures exceeded p99 `1/1048576`; `HF_127X73_EXTEND_MIX` also exceeded RMSE at `1.0071396468059945e-6`. All six stayed below maximum `1/65536`, with zero pixels above it. The largest observed error was `7.62939453125e-6`, exactly half that maximum boundary.
+
+Verdict: `SUBPIXEL_BILINEAR_TOLERANCE_HOLDOUT_NOT_SUPPORTED`, base failure `TOLERANCE_DISTRIBUTION`. The independent audit is `PASS`: 24/24 runs, 12/12 regenerated references, 24/24 diagnostics, byte-exact analyzer replay, seven frozen tools, three parents, four runtimes and all 23 attacks matched.
+
+The low-frequency Clip/Extend subset passed, but excluding high-frequency boundaries would remove the cases most relevant to occlusion edges. It will not be promoted as a general temporal primitive. Next: preregister an external canonical warp consumer and prove that its Raw float32 EXR survives Blender ingestion without decoded-array change; depth/layer-aware temporal accumulation remains a later, separate gate.
+
+Artifacts: `experiments/subpixel-bilinear-tolerance-holdout-v0-1/` and `research/2026-08-27-b52-d7-subpixel-bilinear-tolerance-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
