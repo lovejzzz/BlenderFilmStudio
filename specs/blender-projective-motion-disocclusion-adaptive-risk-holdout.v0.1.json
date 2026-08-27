@@ -1,8 +1,21 @@
 {
   "schemaVersion": "bfs.blenderProjectiveMotionDisocclusionAdaptiveRiskHoldout.v0.1",
-  "experimentId": "B52-D12.8",
+  "experimentId": "B52-D12.8-C1",
   "title": "Fresh projective rigid-motion and disocclusion holdout for the frozen D12.7 adaptive local-risk gate",
-  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_OR_OUTPUT",
+  "status": "CORRECTED_PREREGISTRATION_BEFORE_FORMAL_OUTPUT",
+  "correction": {
+    "originalExperimentId": "B52-D12.8",
+    "originalSpecSha256": "67722b1c8fafa0b83518e6e467de1adb9ca88bd32b7145f15be2d5627767b4d4",
+    "originalPreregistrationCommit": "7f62162",
+    "reason": "The reused typed-envelope encoders require their D12.1 machine-readable spec as an input, but the original D12.8 parent roster froze only the two encoder files.",
+    "onlyPermittedChanges": [
+      "bind the unchanged D12.1 typed-envelope spec by URI and SHA-256",
+      "change the experiment identity and output roots to fresh C1 identities",
+      "replace the original pre-tool snapshot with this pre-formal correction snapshot",
+      "update embedded spec SHA-256 constants after this corrected spec is frozen"
+    ],
+    "scientificContractChanged": false
+  },
   "question": "On unseen opaque multi-owner Blender 5.2 scenes containing real rigid object motion, camera parallax, bounds loss and disocclusion, can transform-aware structural rejection prevent invalid history reuse while the frozen D12.7 radius-2 plus local-risk rule preserves its absolute RGB headroom and preregistered coverage?",
   "decisionRole": "confirmatory generalization test of the unchanged D12.7 candidate beyond static inputs; no D12, D12.5, D12.6 or D12.7 verdict is revised",
   "parents": {
@@ -71,6 +84,11 @@
     "typedEnvelopeNode": {
       "uri": "scripts/encode-b52-d12-1-evidence-envelope.mjs",
       "sha256": "b104df55ad8454556e3fc12a0f380d2ba4d9191efe6b649dc8a5d734dffdbf1b"
+    },
+    "typedEnvelopeSpec": {
+      "uri": "specs/blender-cross-language-evidence-envelope-development.v0.1.json",
+      "sha256": "8bd219570e0c7ec922a671919d680787caf55b2ba7d8a631ed5bc995ab24f116",
+      "experimentId": "B52-D12.1"
     }
   },
   "freshness": {
@@ -505,8 +523,8 @@
   "diskAdmission": {
     "minimumReserveBytes": 107374182400,
     "projectedWriteBytes": 67108864,
-    "formalRoot": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-v0-1",
-    "preflightRoot": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-preflight-v0-1"
+    "formalRoot": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1",
+    "preflightRoot": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-preflight-v0-1"
   },
   "runtime": {
     "blender": {
@@ -533,12 +551,22 @@
     },
     "environmentAllowlist": ["PATH", "LANG", "LC_ALL", "OCIO", "TMPDIR", "BLENDER_USER_CONFIG", "BLENDER_USER_SCRIPTS"]
   },
-  "preToolState": {
+  "originalPreToolState": {
     "checkedDate": "2026-08-27",
     "formalRootAbsent": true,
     "preflightRootAbsent": true,
     "allEightNewFormalToolPathsAbsent": true,
     "formalRenders": 0,
     "formalMeasurements": 0
+  },
+  "correctionState": {
+    "checkedDate": "2026-08-27",
+    "originalFormalRootAbsent": true,
+    "originalPreflightRootAbsent": true,
+    "c1FormalRootAbsent": true,
+    "c1PreflightRootAbsent": true,
+    "formalRendersAcrossOriginalAndC1": 0,
+    "formalMeasurementsAcrossOriginalAndC1": 0,
+    "newToolsAlreadyUnderDevelopment": true
   }
 }

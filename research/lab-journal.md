@@ -2843,6 +2843,16 @@ This smoke is not scientific evidence: it used generated constant-color arrays, 
 
 Artifacts: `scripts/reconstruct-b52-d12-8-motion-disocclusion.py` and `scripts/reconstruct-b52-d12-8-motion-disocclusion.mjs`.
 
+## J-186 · D12.8-C1 binds the missing typed-envelope spec before formal output
+
+Date: 2026-08-27 · Type: MECHANICAL PREREGISTRATION CORRECTION · Formal Blender renders: 0
+
+Runner implementation exposed an incomplete dependency graph: the two frozen D12.1 envelope encoders require the D12.1 machine spec, but original D12.8 froze only the encoder files. No undeclared input is allowed into a formal evidence chain.
+
+C1 adds only that spec URI/SHA, changes the experiment and output roots to fresh C1 identities, and updates embedded corrected-spec hashes. The question, fixtures, transforms, validity/risk algorithms, thresholds, comparator role, process matrix and verdicts do not change. Original preregistration commit `7f62162` and SHA `67722b1c…7b4d4` remain the immutable historical boundary; corrected spec SHA is `d7e7c0ee…6aea6`.
+
+Artifact: `research/2026-08-27-b52-d12-8-c1-typed-envelope-parent-correction.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

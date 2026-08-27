@@ -13,7 +13,7 @@ from pathlib import Path
 import numpy as np
 
 
-SPEC_SHA256 = "67722b1c8fafa0b83518e6e467de1adb9ca88bd32b7145f15be2d5627767b4d4"
+SPEC_SHA256 = "d7e7c0ee0bd7f512766188eabda9fa0dccb098a0729b26487aa38bee97d6aea6"
 INPUTS = {
     "previousRgba": ("previous.rgba32", 4),
     "currentRgba": ("current.rgba32", 4),

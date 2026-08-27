@@ -5,7 +5,7 @@ import argparse, hashlib, json, math, os, struct, sys
 from pathlib import Path
 import numpy as np
 
-SPEC_SHA256="67722b1c8fafa0b83518e6e467de1adb9ca88bd32b7145f15be2d5627767b4d4"
+SPEC_SHA256="d7e7c0ee0bd7f512766188eabda9fa0dccb098a0729b26487aa38bee97d6aea6"
 INPUTS={"previousRgba":("previous.rgba32",4),"currentRgba":("current.rgba32",4),"previousDepth":("previous-depth.f32",1),"currentDepth":("current-depth.f32",1),"previousOwner":("previous-owner.f32",1),"currentOwner":("current-owner.f32",1),"vector":("vector.xy32",2),"vectorNext":("vector-next.xy32",2)}
 OUTPUTS={"adaptiveReconstructed":("adaptive-reconstructed.rgba32",4,"<f4"),"reason":("reason.u8",1,"u1"),"analyticOwner":("analytic-owner.u8",1,"u1"),"structuralValid":("structural-valid.u8",1,"u1"),"radius2Interior":("radius2-interior.u8",1,"u1"),"radius3Interior":("radius3-interior.u8",1,"u1"),"adaptiveInterior":("adaptive-interior.u8",1,"u1"),"adaptiveRejected":("adaptive-rejected.u8",1,"u1"),"riskRgb":("risk.rgb64",3,"<f8")}
 REASONS={"UNREGISTERED":0,"INVALID_CURRENT_ORACLE":1,"INVALID_BOUNDS":2,"INVALID_OWNER":3,"INVALID_ALPHA":4,"INVALID_DEPTH":5,"VALID":6}

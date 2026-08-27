@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const SPEC_SHA256 = '67722b1c8fafa0b83518e6e467de1adb9ca88bd32b7145f15be2d5627767b4d4';
+const SPEC_SHA256 = 'd7e7c0ee0bd7f512766188eabda9fa0dccb098a0729b26487aa38bee97d6aea6';
 const INPUTS = {
   previousRgba: ['previous.rgba32', 4], currentRgba: ['current.rgba32', 4],
   previousDepth: ['previous-depth.f32', 1], currentDepth: ['current-depth.f32', 1],
