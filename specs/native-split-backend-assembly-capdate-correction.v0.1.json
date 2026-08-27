@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "bfs.nativeSplitBackendAssemblyCapDateCorrectionSpec.v0.1",
+  "experimentId": "B51-D4-C3",
+  "title": "Deterministic OpenEXR capDate correction for split-backend assembly",
+  "parents": {
+    "baseSpec": {
+      "uri": "specs/native-split-backend-assembly-derivation.v0.1.json",
+      "sha256": "553e613911bd9b46ce02ef539d635720095bf56400e7dfc8425e0f5bc2537368"
+    },
+    "invalidReceipt": {
+      "uri": "experiments/native-split-backend-assembly-derivation-v0-1/assembly.receipt.json",
+      "sha256": "9923400ea376706e44b9dc3e79aff91882e2e5393903c679dbb2e36d8ce8f1a6"
+    },
+    "invalidResult": {
+      "uri": "experiments/native-split-backend-assembly-derivation-v0-1/results.json",
+      "sha256": "56587ea8b77378dd2fa4b44fec0788795f96c3b3fed1f2af2921014bd077e37e",
+      "verdict": "NATIVE_SPLIT_BACKEND_ASSEMBLY_DERIVATION_INVALID",
+      "baseFailure": "MERGE_REPLICATE_BYTE_IDENTITY"
+    },
+    "invalidAudit": {
+      "uri": "experiments/native-split-backend-assembly-derivation-v0-1/audit.json",
+      "sha256": "19e2d0ac14e9fbc3360dac06a64aae017e3dfb960bbf8ed4ca14bc8337288ec1",
+      "status": "FAIL"
+    },
+    "correctedParentAssembler": {
+      "uri": "scripts/run-b51-native-split-backend-assembly-derivation.py",
+      "gitCommit": "2824e0f9b3207de091436eba3083beda7f5abdd3",
+      "sha256": "d1e0794b022648f572b9ab47441bb18d5ec24c4f5d3957c38f898937c5e80357"
+    },
+    "parentAudit": {
+      "uri": "scripts/audit-b51-native-split-backend-assembly-derivation.py",
+      "gitCommit": "2824e0f9b3207de091436eba3083beda7f5abdd3",
+      "sha256": "b9bb718bbe9db92bdeed97d7880ef975969ec54ee29a978c692ff9abb5f8b79a"
+    }
+  },
+  "correctionContract": {
+    "sourceBackend": "METAL",
+    "sourcePass": "BFS_MASTER.Combined",
+    "sourceAttribute": "Date",
+    "sourceFormat": "YYYY/MM/DD HH:MM:SS",
+    "outputAttribute": "DateTime",
+    "outputFormat": "YYYY:MM:DD HH:MM:SS",
+    "transform": "replace the two date-component slashes with colons; preserve all digits and time",
+    "applyToEveryOutputSubimage": true,
+    "expectedByPair": {
+      "TABLETOP_WIDE": "2026:08:27 03:18:33",
+      "INTERIOR_CHAIR": "2026:08:27 03:18:40"
+    },
+    "forbidWallClockDateTime": true,
+    "allowedCodeChange": "add deterministic Date-to-DateTime derivation, write it on all seven output specs, persist observations, validate it and audit replay"
+  },
+  "inheritedContract": {
+    "passRouting": true,
+    "sourceIdentity": true,
+    "parentIdentity": true,
+    "imageGeometryAlignment": true,
+    "commonAttributeAlignment": true,
+    "cryptomatteManifestAlignment": true,
+    "passRoster": true,
+    "provenanceMetadata": true,
+    "selectedPassExactness": true,
+    "finiteValues": true,
+    "mergeReplicateByteIdentity": true,
+    "evidenceSelfHash": true,
+    "independentByteExactReplay": true
+  },
+  "evidenceGates": {
+    "pairs": 2,
+    "mergedExrs": 4,
+    "requiredSubimagesPerMergedExr": 7,
+    "minimumDiskReserveBytes": "107374182400",
+    "projectedWriteBytes": "67108864",
+    "outputRootMustBeAbsentOrEmpty": true,
+    "allOutputDateTimesExact": true,
+    "allFourExrsByteExactOnIndependentReplay": true
+  },
+  "correctionAttacks": [
+    "CORRECTION_PARENT_IDENTITY",
+    "CAPTURE_DATE_SOURCE",
+    "CAPTURE_DATE_OUTPUT",
+    "CAPTURE_DATE_ALL_SUBIMAGES"
+  ],
+  "operationBoundary": {
+    "blenderProcesses": 0,
+    "renders": 0,
+    "sourceExrsModified": 0,
+    "mergedExrsWritten": 4,
+    "jsonFilesWritten": 2,
+    "downloads": 0,
+    "modelCalls": 0,
+    "videoModelCalls": 0,
+    "networkRequired": false
+  },
+  "successVerdict": "NATIVE_SPLIT_BACKEND_ASSEMBLY_CAPDATE_CORRECTION_USABLE",
+  "failureVerdict": "NATIVE_SPLIT_BACKEND_ASSEMBLY_CAPDATE_CORRECTION_INVALID",
+  "nonClaims": [
+    "This does not make the invalid D4 result valid retroactively",
+    "This does not render Blender or test unseen frames",
+    "This does not promote Metal beauty or a split-backend production path",
+    "This does not prove long-sequence stability, perceptual quality or cross-machine generalization"
+  ]
+}
