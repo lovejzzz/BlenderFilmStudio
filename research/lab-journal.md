@@ -1287,6 +1287,22 @@ This is derivation evidence only. It freezes the formal B47 pass roster and sema
 
 Artifacts: `experiments/codex-worker-production-pack-derivation-v0-1/`, `research/2026-08-26-b47-production-pass-derivation-protocol.md` and `research/2026-08-26-b47-d1-production-pass-derivation-result.md`.
 
+## J-076 · B47 closes the bounded multipart production-pass handoff
+
+Date: 2026-08-26 · Type: LIVE EXPERIMENT · Runtime: Blender 5.2 Linux/amd64 Cycles CPU worker
+
+B47 was preregistered at `c93ef549982fcf55cb53a4c3383b145cb14d20a4` after D1 fixed the real pass layout and before the formal renderer, runner or audit existed. The tools were frozen at `93ee9aeb2a5e0093021158fcd8e7ffda78c5e845`. Four fresh workers rendered TABLETOP frames 21–22 and INTERIOR frames 9–10 at 128×72, eight samples, fixed shot seed, denoise off and motion blur off.
+
+All eight multipart OpenEXRs contained exactly Combined, Depth, Normal, Vector and CryptoObject00–02 with the frozen channels and float format. Across the two B44 semantic build pairs, all 28 frame/pass comparisons were canonical float32 exact. Every value was finite; Depth stayed positive with the `1e10` far sentinel; Normal stayed inside [-1,1]; the moving TABLETOP Vector passes contained more than 32,000 non-zero components. Both Cryptomatte manifests were A/B exact and included every frozen asset object.
+
+The moving-camera control changed Combined, Depth, Normal and Vector across frames in both builds. The static control kept all seven pass hashes unchanged in both builds. All eight EXR container hashes differed—including static frames with identical decoded passes—so byte identity was again kept separate from content identity.
+
+The independent audit reopened every EXR, reconstructed 56 observations and 28 pass pairs, verified temporal relations and passed 18/18 attacks. Verdict: `B44_BLEND_TO_MULTIPART_PRODUCTION_PASSES_EXACT`. Evidence hash: `7e8139e710dee9e4f75f333f22bf58ffa9045767d5d843e6581b25198bbbbc02`.
+
+Next: preregister B48 as a quality/cost ladder. Sampling, denoising and motion blur must be isolated rather than bundled. Pass reproducibility does not establish cinematic quality, 4K, complete-shot throughput or human preference.
+
+Artifacts: `specs/codex-worker-production-pass-promotion.v0.1.json`, `experiments/codex-worker-production-pass-promotion-v0-1/`, `research/2026-08-26-b47-codex-worker-production-pass-promotion-protocol.md` and `research/2026-08-26-b47-codex-worker-production-pass-promotion-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
