@@ -1567,6 +1567,22 @@ Next: B51-D6 must evaluate task-relevant Depth regions and decoded Cryptomatte m
 
 Artifacts: `experiments/native-cpu-data-pass-sample-cost-derivation-v0-1/`, `experiments/native-cpu-data-pass-sample-cost-preflight-failure-v0-1/`, `experiments/native-cpu-data-pass-sample-cost-blender-identity-failure-v0-1/`, `research/2026-08-27-b51-d5-native-cpu-data-pass-sample-cost-derivation-result.md`, `research/2026-08-27-b51-d5-c1-ocio-identity-correction-protocol.md` and `research/2026-08-27-b51-d5-c2-blender-identity-correction-protocol.md`.
 
+## J-094 · B51-D6 closes the low-sample split-production hypothesis
+
+Date: 2026-08-27 · Type: ZERO-RERENDER SEMANTIC DERIVATION · Runtime: Blender Python 3.13 / OpenImageIO 3.1.13.1
+
+D6 reused all 32 retained D5 EXRs and decoded CryptoObject00/01/02 as six ranked ID/coverage pairs under the Cryptomatte 1.2.0 contract. It reconstructed manifest-addressed object mattes instead of treating ID floats as continuous error. Depth was separated into foreground topology and stable, non-transition surfaces.
+
+The production-semantic profile froze exact 0.5 hard mattes, exact dominant IDs on parent-confident pixels, 8/10/12-bit alpha error bounds, exact foreground topology and 1 mm p99 / 1 cm max stable-surface depth bounds before analyzer implementation.
+
+No 1–64 spp dose passed both variants and repeats. At 64 spp, TABLETOP and INTERIOR had 10/102 confident dominant-ID mismatches, 53/205 total hard-matte mismatches and worst matte alpha errors of 0.09375/0.15625. TABLETOP stable Depth p99 was 2.802 mm with 56 foreground-mask mismatches; INTERIOR p99 was 73.200 mm and max 182.019 mm. Both semantic floors remained 128 spp.
+
+All 32 EXR identities and metadata contracts matched; unresolved IDs, coverage-range/sum faults, rank inversions and duplicate active IDs were zero. The first analysis result was rejected before audit because its provided full tool-freeze SHA did not resolve; C1 changed only that identity. Corrected audit is PASS, analyzer replay byte-exact, 16/16 attacks, 2/2 frozen tools and 32/32 artifacts.
+
+Verdict: `CPU_DATA_SEMANTIC_SAMPLE_REDUCTION_NOT_OBSERVED`. H2 is no longer justified as a cost-saving split-production route. Metal remains preview/lookdev or beauty-only evidence; production cost work pivots to the single native CPU path. B50 remains independently 0/18 human pending.
+
+Artifacts: `experiments/native-cpu-data-pass-semantic-equivalence-derivation-v0-1/`, `experiments/native-cpu-data-pass-semantic-equivalence-tool-identity-failure-v0-1/`, `specs/native-cpu-data-pass-semantic-equivalence-derivation.v0.1.json`, `research/2026-08-27-b51-d6-native-cpu-data-pass-semantic-equivalence-derivation-result.md` and `research/2026-08-27-b51-d6-c1-tool-freeze-identity-correction-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
