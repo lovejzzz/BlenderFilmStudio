@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "bfs.codexWorkerMotionBlurDerivationSpec.v0.1",
+  "experimentId": "B49-MB-D1",
+  "outputRoot": "experiments/codex-worker-motion-blur-derivation-v0-1",
+  "usableStatus": "MOTION_BLUR_DERIVATION_USABLE",
+  "invalidStatus": "MOTION_BLUR_DERIVATION_INVALID_EVIDENCE",
+  "parents": {
+    "sequenceResult": {"uri": "experiments/codex-worker-sequence-promotion-v0-1/results.json", "sha256": "3b0c959dc64a6633d2cf9ec2beeada3c05452ed693187b338afd6f12f9e4dd39"},
+    "sequenceAudit": {"uri": "experiments/codex-worker-sequence-promotion-v0-1/audit.json", "sha256": "ee4af14446fe81b7c99e69f94a41f46bc268b27ed24ace86853c9ee1b726c9b1", "status": "PASS"},
+    "qualityCostResult": {"uri": "experiments/codex-worker-quality-cost-holdout-v0-1/results.json", "sha256": "2d7155f38c79640daa45c72fc4e8e1b924825bbdac1c87ebcd2e8bdcba5a66d3", "selectedCellId": "C128_RAW"},
+    "qualityCostAudit": {"uri": "experiments/codex-worker-quality-cost-holdout-v0-1/audit.json", "sha256": "5c759711f880ff873a9afebcc42bb1cf73bae8226b09d903b5292e472538124d", "status": "PASS"},
+    "resolutionResult": {"uri": "experiments/codex-worker-resolution-holdout-v0-1/results.json", "sha256": "feae838494de10b024f9186bd81aa9c9657a21fb14cf48748ce623e8f9148a42", "verdict": "B49_RESOLUTION_SCALING_HOLDOUT_SUPPORTED"},
+    "resolutionAudit": {"uri": "experiments/codex-worker-resolution-holdout-v0-1/audit.json", "sha256": "9e3e6572211f3b910e85a0c9a7c8ba38545a10e107a5148c0554a41ca6f399a4", "status": "PASS"}
+  },
+  "image": {"id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1", "os": "linux", "architecture": "amd64", "dockerReportedSizeBytes": 1004901158, "blenderVersion": "5.2.0 LTS", "blenderBuildHash": "fbe6228777e7"},
+  "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+  "shots": [
+    {"id": "TABLETOP", "motionClass": "LINEAR_CAMERA_PUSH", "shotId": "SHOT_109", "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/TABLETOP-A1/scene.blend", "blendSha256": "9c4f9cc26e213c0b4de0462f7ad6878cabf27a2204ec1448e98e93aed36bd1f0", "blendBytes": 118702, "planHash": "60e4cdf7a5471b37e75a44f58980cd98da3818b72fc87fc19eed27cd76cb275e", "sceneHash": "d7922dd473304146d64b020fa60adbdbe35fe68010f88f8ae7a59b4182958ea7", "structureHash": "6a71287aed7c982ed6ca1889858b43eafa5012708ce5f577abd2ee872345e82e", "camera": {"name": "CAM_B43_A", "type": "PERSP", "action": "CAM_B43_AAction", "actionFrameRange": [1,48], "interpolation": "LINEAR"}},
+    {"id": "INTERIOR", "motionClass": "STATIC_CONTROL", "shotId": "SHOT_110", "blendUri": "experiments/codex-to-blender-worker-promotion-v0-1/runs/INTERIOR-A1/scene.blend", "blendSha256": "c73c2065587df16381f29a3394fe0b00c297bda8733357919d76d8f8ed3529cf", "blendBytes": 106078, "planHash": "9c8cb0e05eb47aec62f69ed7b1a2173acb4fa7b7074eec5b13f91b93acd46401", "sceneHash": "43a15344812f4d2be89105e5bcbae56f0c483a0d8e81834a59ede23d0d7e4bbb", "structureHash": "56d32ed8a8813c3365852a9ab52660b81e09eb5887daed4fa41f5459f3a6d954", "camera": {"name": "CAM_B43_B", "type": "PERSP", "action": null, "interpolation": null}}
+  ],
+  "render": {"resolution": [128,72], "pixelCount": 9216, "samples": 128, "denoising": false, "seedOffset": 647647, "persistentData": false, "threads": 4, "rawSubimages": 7},
+  "cells": [
+    {"id": "T_OFF_F22", "shot": "TABLETOP", "frame": 22, "enabled": false, "shutter": 0.5, "position": "CENTER", "role": "moving off baseline"},
+    {"id": "T_ZERO_F22", "shot": "TABLETOP", "frame": 22, "enabled": true, "shutter": 0.0, "position": "CENTER", "role": "zero-width toggle counterfactual"},
+    {"id": "T_CENTER05_F22", "shot": "TABLETOP", "frame": 22, "enabled": true, "shutter": 0.5, "position": "CENTER", "role": "conventional half-frame exposure"},
+    {"id": "T_CENTER10_F22", "shot": "TABLETOP", "frame": 22, "enabled": true, "shutter": 1.0, "position": "CENTER", "role": "full-frame exposure dose"},
+    {"id": "T_START10_F22", "shot": "TABLETOP", "frame": 22, "enabled": true, "shutter": 1.0, "position": "START", "role": "window [22,23]"},
+    {"id": "T_END10_F23", "shot": "TABLETOP", "frame": 23, "enabled": true, "shutter": 1.0, "position": "END", "role": "window [22,23] equivalence probe"},
+    {"id": "I_OFF_F10", "shot": "INTERIOR", "frame": 10, "enabled": false, "shutter": 0.5, "position": "CENTER", "role": "static off baseline"},
+    {"id": "I_CENTER05_F10", "shot": "INTERIOR", "frame": 10, "enabled": true, "shutter": 0.5, "position": "CENTER", "role": "static half-frame control"},
+    {"id": "I_CENTER10_F10", "shot": "INTERIOR", "frame": 10, "enabled": true, "shutter": 1.0, "position": "CENTER", "role": "static full-frame control"},
+    {"id": "I_START10_F10", "shot": "INTERIOR", "frame": 10, "enabled": true, "shutter": 1.0, "position": "START", "role": "static start-window control"},
+    {"id": "I_END10_F11", "shot": "INTERIOR", "frame": 11, "enabled": true, "shutter": 1.0, "position": "END", "role": "static equivalent-window control"}
+  ],
+  "frozenRelations": [
+    {"id": "MOVING_ZERO_VS_OFF", "left": "T_OFF_F22", "right": "T_ZERO_F22", "question": "Does a zero-width shutter isolate the enable toggle without changing decoded passes?"},
+    {"id": "MOVING_HALF_VS_OFF", "left": "T_OFF_F22", "right": "T_CENTER05_F22", "question": "Does a half-frame centered exposure materially change the moving-camera Combined result?"},
+    {"id": "MOVING_DOSE", "members": ["T_ZERO_F22","T_CENTER05_F22","T_CENTER10_F22"], "question": "How do difference magnitude, edge energy and cost respond to shutter duration?"},
+    {"id": "MOVING_EQUIVALENT_WINDOW", "left": "T_START10_F22", "right": "T_END10_F23", "question": "Do nominally identical [22,23] exposure windows decode identically?"},
+    {"id": "STATIC_INVARIANCE", "members": ["I_OFF_F10","I_CENTER05_F10","I_CENTER10_F10","I_START10_F10","I_END10_F11"], "question": "Does enabling or repositioning the shutter preserve a temporally static scene?"}
+  ],
+  "containerContract": {"platform": "linux/amd64", "network": "none", "user": "65532:65532", "capDrop": ["ALL"], "noNewPrivileges": true, "readOnlyRoot": true, "repositoryMountReadOnly": true, "outputMountWritable": true, "pidsLimit": 256, "memoryBytes": 8589934592, "cpus": 4, "shmBytes": 1073741824, "wallTimeMs": 180000, "killGraceMs": 5000},
+  "diskAdmission": {"minimumReserveBytes": "107374182400", "projectedWriteBytes": "1073741824"},
+  "operationBoundary": {"dockerRuns": 11, "frameRenders": 11, "hostExrAnalyses": 11, "builds": 0, "pulls": 0, "downloads": 0, "modelCalls": 0, "videoModelCalls": 0},
+  "usabilityGates": ["all cells complete within boundary", "exact source/image/OCIO identity", "finite decoded float32 passes", "exact seven-subimage roster", "all frozen relation statistics emitted", "no experiment container remains", "analyzer replay byte-exact"],
+  "nonClaims": ["physically correct shutter choice", "human cinematic preference", "motion-blur temporal stability over a complete shot", "object deformation or particle blur", "rolling shutter", "depth of field", "high-resolution blur cost", "GPU or Eevee behavior", "native x86 or cloud throughput", "dollar cost"]
+}
