@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "bfs.linuxAmd64EeveeHeadlessDiagnostic.v0.1",
+  "experimentId": "B41-D2",
+  "status": "PREREGISTERED_BEFORE_DIAGNOSTIC_TOOLING_OR_OUTPUT",
+  "question": "Does the B41-C5 Eevee canary complete within 90 seconds under baseline, explicit OpenGL, Mesa software-surfaceless, or their combined headless configuration, and at which recorded stage does each cell stop?",
+  "parent": {
+    "c5SpecSha256": "96f7d6ab2e802667ebd168a2acd3a8e578e0f7b48135bd132edc73d9ae202919",
+    "c5PreregistrationCommit": "53746d9fd484e8e9e8f01f3334acff51f4f8ecce",
+    "c5ToolFreezeCommit": "5aa251b8ce1880ecc565e3bf0e6effd70a04f073",
+    "failedResultSha256": "54f3a707498b958d4632b7f940be1e39c3f310b638ea5daa11afe53befcf258d",
+    "failedAuditSha256": "5a1212205a983bfaa9fa0e2ddb72b93a36ca9dc3c2e2829803d8a4e6de97c761",
+    "failure": "REJECTED_EEVEE_HEADLESS_OR_EMULATION_TIMEOUT"
+  },
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "tag": "bfs-blender-worker:5.2.0-b41",
+    "os": "linux",
+    "architecture": "amd64",
+    "dockerReportedSizeBytes": 1004901158,
+    "buildOrPullAllowed": false
+  },
+  "sources": [
+    {
+      "url": "https://docs.blender.org/api/5.2/bpy.types.RenderSettings.html",
+      "claim": "Blender 5.2 RenderSettings.engine defaults to BLENDER_EEVEE"
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/5.2/render/eevee/limitations/limitations.html",
+      "claim": "EEVEE is a rasterization engine that uses GPU processing"
+    },
+    {
+      "url": "https://docs.blender.org/manual/en/5.2/advanced/command_line/arguments.html",
+      "claim": "Blender 5.2 supports vulkan, metal and opengl values for --gpu-backend"
+    }
+  ],
+  "design": {
+    "factorial": "2x2",
+    "factors": {
+      "gpuBackend": ["DEFAULT", "EXPLICIT_OPENGL"],
+      "headlessEnvironment": ["DEFAULT", "MESA_SURFACELESS_SOFTWARE"]
+    },
+    "cells": [
+      {"id": "B00", "gpuBackend": "DEFAULT", "headlessEnvironment": "DEFAULT"},
+      {"id": "B10", "gpuBackend": "EXPLICIT_OPENGL", "headlessEnvironment": "DEFAULT"},
+      {"id": "B01", "gpuBackend": "DEFAULT", "headlessEnvironment": "MESA_SURFACELESS_SOFTWARE"},
+      {"id": "B11", "gpuBackend": "EXPLICIT_OPENGL", "headlessEnvironment": "MESA_SURFACELESS_SOFTWARE"}
+    ],
+    "explicitOpenGlArgv": ["--gpu-backend", "opengl"],
+    "softwareSurfacelessEnvironment": {
+      "EGL_PLATFORM": "surfaceless",
+      "LIBGL_ALWAYS_SOFTWARE": "1"
+    },
+    "wallTimeMsPerCell": 90000,
+    "terminateGraceMs": 5000,
+    "milestonesExactOrder": [
+      "PROCESS_STARTED",
+      "SCENE_CONFIGURED",
+      "BLEND_SAVED",
+      "GPU_PROBE_STARTED",
+      "GPU_PROBE_COMPLETED",
+      "RENDER_STARTED",
+      "RENDER_COMPLETED",
+      "REPORT_WRITTEN"
+    ],
+    "render": {"engine": "BLENDER_EEVEE", "width": 32, "height": 32, "fileFormat": "PNG"}
+  },
+  "frozenLaunchBoundary": {
+    "inheritB41C5SecurityContract": true,
+    "onlyCellDifferences": ["optional --gpu-backend opengl argv", "optional EGL_PLATFORM and LIBGL_ALWAYS_SOFTWARE environment"],
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": ["ALL"],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "inputReadOnly": true,
+    "outputWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4
+  },
+  "classificationOrder": [
+    "SLOW_BUT_COMPLETES_BASELINE",
+    "SOFTWARE_SURFACELESS_REQUIRED",
+    "EXPLICIT_OPENGL_REQUIRED",
+    "COMPLETES_WITHIN_DIAGNOSTIC_CEILING",
+    "NO_COMPLETION_WITHIN_DIAGNOSTIC_CEILING"
+  ],
+  "acceptance": {
+    "diagnosticPassOnly": true,
+    "allFourCellsAttempted": true,
+    "imageIdentityExact": true,
+    "launchIdentitiesExact": true,
+    "milestonesAndPartialArtifactsRetained": true,
+    "zeroExperimentContainersRunningAfter": true,
+    "buildPullDownloadOperations": 0,
+    "independentAuditRequired": true,
+    "promotable": false
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "21474836480"
+  },
+  "acceptedVerdict": "EEVEE_HEADLESS_DIAGNOSTIC_COMPLETE_NON_PROMOTABLE",
+  "nonClaims": [
+    "B41-D2 cannot promote the worker even if a cell completes",
+    "A software Mesa result is not native GPU performance or production throughput evidence",
+    "A 90-second ceiling does not prove permanent deadlock",
+    "The diagnostic does not alter the frozen B41 30-second success threshold",
+    "No SceneSpec compiler workload runs in B41-D2"
+  ]
+}
