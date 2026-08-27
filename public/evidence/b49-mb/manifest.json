@@ -1,0 +1,136 @@
+{
+  "artifacts": [
+    {
+      "id": "moving-off",
+      "kind": "ACES_DISPLAY_PROXY",
+      "output": {
+        "bytes": 14681,
+        "sha256": "49800ca65f90e4264dcc5f83b41a790cb85207196fd7e1271d125168edaddd8c",
+        "uri": "public/evidence/b49-mb/moving-off.png"
+      },
+      "sourceExrs": [
+        {
+          "sha256": "e577cab9789c16ed4cc8684020b1aca1c17b9dff29e7c94f6e23c44ad8a00dc2",
+          "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_C128_OFF/production.exr"
+        }
+      ]
+    },
+    {
+      "id": "moving-on",
+      "kind": "ACES_DISPLAY_PROXY",
+      "output": {
+        "bytes": 14679,
+        "sha256": "93f75d7b85d07ad8205b016b15335e8aa7976fc29bb1e4ce131bcd6214ca7acc",
+        "uri": "public/evidence/b49-mb/moving-on.png"
+      },
+      "sourceExrs": [
+        {
+          "sha256": "2ca9b2aa9dd61ee2b28ba17228c3d7186842694adc3fe09d7b3da5742fa843f0",
+          "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_C128_ON/production.exr"
+        }
+      ]
+    },
+    {
+      "id": "moving-reference-ensemble",
+      "kind": "ACES_DISPLAY_PROXY",
+      "output": {
+        "bytes": 12681,
+        "sha256": "8c28ae4950d5f9af8f776450c2ffb8351055a2774b3e7dd029f2f804723336a2",
+        "uri": "public/evidence/b49-mb/moving-reference-ensemble.png"
+      },
+      "sourceExrs": [
+        {
+          "sha256": "4158267cde3a396853575a13c282489a9214297d61ff8ac426af08b79f6d8a1b",
+          "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_A/production.exr"
+        },
+        {
+          "sha256": "41f887c193454c39adf4087b71f0c4e1d87d9d81f32f69f3892a39a361624a24",
+          "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_B/production.exr"
+        },
+        {
+          "sha256": "8a88e062fb4c00aee15b84a009469be026f951f7a26243d99aee09615aafbe48",
+          "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/T_REF_C/production.exr"
+        }
+      ]
+    },
+    {
+      "id": "static-off",
+      "kind": "ACES_DISPLAY_PROXY",
+      "output": {
+        "bytes": 12894,
+        "sha256": "44e08ab167e52122cf118a7d156cf76a4df9696c4fb0864764ffdc014014c52f",
+        "uri": "public/evidence/b49-mb/static-off.png"
+      },
+      "sourceExrs": [
+        {
+          "sha256": "761c05ee9bb97ad26952d531e62b3d3d45ea46063b5b150afdf69e390f0f0325",
+          "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/I_C128_OFF/production.exr"
+        }
+      ]
+    },
+    {
+      "id": "static-on",
+      "kind": "ACES_DISPLAY_PROXY",
+      "output": {
+        "bytes": 12894,
+        "sha256": "44e08ab167e52122cf118a7d156cf76a4df9696c4fb0864764ffdc014014c52f",
+        "uri": "public/evidence/b49-mb/static-on.png"
+      },
+      "sourceExrs": [
+        {
+          "sha256": "feae4b3e6ba725dffce3089e49e062dc53aad9fd0c6f58edf31deefb90f743cb",
+          "uri": "experiments/codex-worker-motion-blur-holdout-v0-1/I_C128_ON/production.exr"
+        }
+      ]
+    },
+    {
+      "id": "moving-difference",
+      "kind": "LINEAR_MAX_RGB_ABSOLUTE_DIFFERENCE_HEATMAP",
+      "output": {
+        "bytes": 7363,
+        "sha256": "7fbf7bc8ce7c69f53fae8ed22d7b4163de8303915c051764be95c06745ccad6f",
+        "uri": "public/evidence/b49-mb/moving-difference.png"
+      },
+      "scale": {
+        "black": 0,
+        "clamp": "99th percentile of moving on/off difference",
+        "fullScale": 0.016683541238307995
+      },
+      "statistics": {
+        "maximum": 0.28675079345703125,
+        "nonzeroPixels": 7400,
+        "p99": 0.016683541238307995
+      }
+    },
+    {
+      "id": "static-difference",
+      "kind": "LINEAR_MAX_RGB_ABSOLUTE_DIFFERENCE_HEATMAP",
+      "output": {
+        "bytes": 377,
+        "sha256": "2f071a67d498625f8ab2fc10c4abd4afcb6925f1516e1286f0735ee62efcb80f",
+        "uri": "public/evidence/b49-mb/static-difference.png"
+      },
+      "scale": {
+        "black": 0,
+        "clamp": "99th percentile of moving on/off difference",
+        "fullScale": 0.016683541238307995
+      },
+      "statistics": {
+        "maximum": 0.0,
+        "nonzeroPixels": 0,
+        "p99": 0.0
+      }
+    }
+  ],
+  "decisionRole": "HUMAN_NAVIGATION_ONLY",
+  "differenceScaleSharedAcrossMovingAndStatic": 0.016683541238307995,
+  "display": "sRGB - Display",
+  "ocio": {
+    "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+    "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+  },
+  "schemaVersion": "bfs.b49MotionBlurProxyManifest.v0.1",
+  "sourceEncoding": "ACEScg scene-linear float32",
+  "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+}
