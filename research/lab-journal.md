@@ -2381,6 +2381,20 @@ The next legal step is a pre-tool C1 protocol. It may correct only nested output
 
 Artifacts: `experiments/blender-projective-subpixel-reconstruction-holdout-v0-1/` and `research/2026-08-27-b52-d12-formal-execution-invalid-result.md`.
 
+## J-149 · D12-C1 preregisters one infrastructure-only Node correction
+
+Date: 2026-08-27 · Type: PRE-TOOL INFRASTRUCTURE-CORRECTION PREREGISTRATION · C1 formal outputs: 0
+
+The original D12 science specification, admitted tools and failed formal root remain immutable. C1 permits exactly one scientific-tool behavior change in a new Node file: replace the single nonrecursive output-directory creation with recursive creation so that a previously absent cell parent can be materialized. A new contract must invoke that tool with both the cell parent and `arrays/` absent and require a successful byte-identical Python/Node result.
+
+No fixture, transform, camera parameter, material, projection formula, Vector convention, bilinear arithmetic, validity rule, threshold, control, attack, diagnostic or decision rule may change. The first invalid execution's partial Python metrics cannot be used for tuning. Every unchanged scientific tool must continue to match the original `37fb06e68c7761dc432fa48b9287e78f7a427f24` freeze.
+
+C1 must start from the absent root `experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/`, rerender all sixteen source frames and complete all 65 successful unique child processes. It may not copy, link or consume failed-root EXRs, arrays or reports as measurement inputs. The failed root remains bound by `run.failure.json` SHA-256 `ccb05339ec16b9d92350ad53552ae7368d2536e6e023bd0f1660ed9f7b67ec34`.
+
+Frozen correction-spec SHA-256: `f540b6a2ee0bb7b2e149c795b89adbc5ab24355750f73392f21ca65c40020a79`. If any later C1 stage fails, that attempt must be retained rather than patched or resumed in place. Only a complete new-root matrix plus the inherited independent audit can authorize a D12 scientific verdict.
+
+Artifacts: `specs/blender-projective-subpixel-reconstruction-node-parent-correction.v0.1.json` and `research/2026-08-27-b52-d12-c1-node-parent-directory-correction.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

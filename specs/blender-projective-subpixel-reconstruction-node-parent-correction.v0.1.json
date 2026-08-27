@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "bfs.blenderProjectiveSubpixelNodeParentCorrection.v0.1",
+  "correctionId": "B52-D12-C1",
+  "title": "Node missing-parent infrastructure correction for the B52-D12 fresh holdout",
+  "classification": "INFRASTRUCTURE_CORRECTION_BEFORE_SCIENTIFIC_DECISION",
+  "scientificSpec": {
+    "uri": "specs/blender-projective-subpixel-reconstruction-holdout.v0.1.json",
+    "sha256": "dd2e990d276e0ee5c2fee9d22cf42c7f84db2b6c1947b1219dceab06a76f66a2",
+    "experimentId": "B52-D12"
+  },
+  "invalidExecution": {
+    "root": "experiments/blender-projective-subpixel-reconstruction-holdout-v0-1",
+    "retainedAtCommit": "10537348e853603be1b83c5807945bbf6c1d9279",
+    "failureUri": "experiments/blender-projective-subpixel-reconstruction-holdout-v0-1/run.failure.json",
+    "failureSha256": "ccb05339ec16b9d92350ad53552ae7368d2536e6e023bd0f1660ed9f7b67ec34",
+    "failedStage": "RECONSTRUCTOR_NODE",
+    "failedCell": "node_PROJECTIVE_OBJECT_DOLLY_TRANSLATE_107X67_R1",
+    "scientificVerdict": null
+  },
+  "originalAdmission": {
+    "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-preflight-v0-1/frozen-tool-preflight.json",
+    "sha256": "fb2205ec6a0486b37df3689a2567ccb85fe714fec71af3709f5cb235c5059e6f",
+    "toolFreezeCommit": "37fb06e68c7761dc432fa48b9287e78f7a427f24"
+  },
+  "cause": {
+    "originalTool": "scripts/reconstruct-b52-d12-subpixel.mjs",
+    "originalToolSha256": "e74471901441e478526f65946b43c6d1f31d274fc8928fd8229008b4337456f9",
+    "failedExpression": "fs.mkdirSync(args['output-dir'], { recursive: false });",
+    "condition": "the output array directory and its immediate parent cell directory were both absent",
+    "effect": "Node exited with ENOENT before producing arrays or a success report"
+  },
+  "allowedChanges": [
+    {
+      "path": "scripts/reconstruct-b52-d12-subpixel-c1.mjs",
+      "basis": "exact byte copy of scripts/reconstruct-b52-d12-subpixel.mjs before correction",
+      "semanticDelta": "replace exactly one occurrence of fs.mkdirSync(args['output-dir'], { recursive: false }); with fs.mkdirSync(args['output-dir'], { recursive: true });",
+      "maximumChangedSourceLinesExcludingProvenance": 1
+    },
+    {
+      "path": "tests/test_b52_d12_c1_parent_directory_contract.py",
+      "semanticDelta": "add a zero-render contract invocation where neither the reconstructor cell parent nor arrays directory exists; require Node success and Python/Node byte identity"
+    },
+    {
+      "path": "scripts/run-b52-d12-projective-subpixel-holdout-c1.py",
+      "semanticDelta": "route Node cells to the corrected tool, route every output to the new C1 root, bind correction provenance and otherwise preserve the original 65-process matrix"
+    },
+    {
+      "path": "scripts/preflight-b52-d12-projective-subpixel-holdout-c1.py",
+      "semanticDelta": "verify correction identity, exact allowed delta, unchanged frozen tools, missing-parent contract, zero-render Blender probes, new-root freshness and disk admission"
+    }
+  ],
+  "forbiddenChanges": [
+    "scientific spec bytes, fixtures, transforms, lens, sensor, resolution or generated material",
+    "projection oracle, Vector sign convention, bilinear kernel, tap order or arithmetic",
+    "owner, alpha, boundary, current-depth or transform-predicted previous-depth validity rules",
+    "thresholds, controls, base failure order, attacks, diagnostics or decision rule",
+    "Blender, Python, Node or OCIO runtime identities",
+    "any original D12 formal tool, preflight receipt, failed-root file or report",
+    "resume, copy, hard-link, symlink or measurement reuse from the invalid D12 root",
+    "selection or tuning based on partial invalid-run measurements"
+  ],
+  "unchangedScientificToolPaths": [
+    "blender/render_b52_d12_projective_source.py",
+    "scripts/adapt-b52-d12-projective-multipart.py",
+    "scripts/reconstruct-b52-d12-subpixel.py",
+    "scripts/encode-b52-d12-reconstruction.py",
+    "blender/render_b52_d12_reconstruction_passthrough.py",
+    "scripts/analyze-b52-d12-projective-subpixel-holdout.py",
+    "scripts/audit-b52-d12-projective-subpixel-holdout.py"
+  ],
+  "execution": {
+    "formalOutputRoot": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1",
+    "preflightOutputRoot": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-preflight-v0-1",
+    "rootPolicy": "new root must be absent at preregistration, correction-tool freeze and preflight; create once and never overwrite",
+    "inputPolicy": "all source EXRs, adapter arrays, reconstructions, encoded EXRs and bridge EXRs must be created inside the new C1 root",
+    "processMatrix": {
+      "sourceProcesses": 16,
+      "cyclesRayRenders": 16,
+      "adapterProcesses": 8,
+      "pythonReconstructorProcesses": 8,
+      "nodeReconstructorProcesses": 8,
+      "encoderProcesses": 8,
+      "bridgeProcesses": 16,
+      "compositorBridgeRenders": 16,
+      "analysisProcesses": 1,
+      "totalChildProcesses": 65,
+      "requiredUniqueChildPids": 65
+    },
+    "projectedWriteBytes": 67108864,
+    "diskReserveBytes": 107374182400
+  },
+  "preflightRequirements": [
+    "correction spec and scientific spec hashes match",
+    "invalid root and failure receipt remain byte-identical",
+    "new formal root and C1 preflight root are absent",
+    "corrected Node source differs from the original by exactly the registered mkdir recursive flag",
+    "every unchanged scientific tool matches its blob at the original tool freeze commit",
+    "every C1 tool and test matches its blob at the C1 tool freeze commit",
+    "the missing-parent contract passes without Blender renders",
+    "the inherited contract suite passes",
+    "source and bridge Blender API probes execute with zero renders",
+    "projected write leaves at least the unchanged 100 GiB reserve"
+  ],
+  "decision": {
+    "infrastructureValidity": "VALID only if the complete fresh 65-child matrix succeeds and the inherited independent audit passes",
+    "scientificVerdictAuthority": "only the unchanged B52-D12 analyzer and audit may produce SUPPORTED or NOT_SUPPORTED from new-root evidence",
+    "failurePolicy": "retain any new failure as another invalid correction attempt; do not patch or resume it in place"
+  },
+  "preToolState": {
+    "correctedNodeToolExists": false,
+    "correctionRunnerExists": false,
+    "correctionPreflightExists": false,
+    "missingParentContractExists": false,
+    "formalOutputExists": false,
+    "preflightOutputExists": false,
+    "c1FormalRenders": 0,
+    "c1FormalMeasurements": 0
+  }
+}
