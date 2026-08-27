@@ -1837,6 +1837,20 @@ Verdict: `DETERMINISTIC_DISPLACE_CALIBRATION_NOT_SUPPORTED`, base failure `REFER
 
 Artifacts: `experiments/deterministic-displace-calibration-v0-1/` and `research/2026-08-27-b52-d6-deterministic-displace-calibration-result.md`.
 
+## J-112 · B52-D7 freezes a fresh dual-reference Bilinear holdout
+
+Date: 2026-08-27 · Type: FRESH-HOLDOUT PREREGISTRATION · Formal outputs: 0
+
+D6 remains `DETERMINISTIC_DISPLACE_CALIBRATION_NOT_SUPPORTED`; its bit-exact gate is not relaxed. D7 instead freezes a new tolerance-bounded question before any D7 worker or output exists. It reuses neither the D6 displacement pair nor its rendered/reference arrays.
+
+Six unseen Bilinear fixtures span 63×47 and 127×73 rasters, low-frequency alpha ramps, high-frequency alpha checkers, Clip/Extend/Repeat and constant plus destination-varying fields. Each has non-integer binary-exact displacement components. One scalar Python process and one independently coded Node process must produce byte-identical canonical reference arrays before two fresh Blender outputs may be judged. The full boundary is 24 unique child PIDs, 12 Blender compositor renders and zero Cycles ray renders.
+
+The maximum error gate remains the pre-existing `1/65536`. Fresh distribution gates are p99 and RMSE ≤`1/1048576`, absolute mean signed error per channel ≤`1/1048576`, alpha maximum ≤`1/65536`, and zero pixels above the maximum. Every task must also change at least half the raster and reach 0.125 maximum change. Twenty-three attacks cover three runtimes, dual-reference agreement, Blender graph/RNA, repeat, tolerance, bias, sensitivity, diagnostics and self-hash.
+
+The formal root is absent. Spec SHA-256: `f102a969cb59d92b0103c6807f20ca5436978504aafadd14a9b0353709ea0df5`; protocol SHA-256: `5dcf859bbdea1125a0654bf58e8e1414e5b02f7a795ecfb4bdb2d10fddead378`. Passing can promote only the tolerance-bounded Bilinear primitive; depth/layer-aware temporal accumulation remains a separate experiment.
+
+Artifacts: `specs/subpixel-bilinear-tolerance-holdout.v0.1.json` and `research/2026-08-27-b52-d7-subpixel-bilinear-tolerance-holdout-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

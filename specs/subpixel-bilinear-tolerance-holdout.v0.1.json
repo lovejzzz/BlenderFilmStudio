@@ -1,0 +1,301 @@
+{
+  "schemaVersion": "bfs.subpixelBilinearToleranceHoldout.v0.1",
+  "experimentId": "B52-D7",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "question": "On unseen subpixel offsets, resolutions, alpha patterns and extension modes, does Blender 5.2 CPU Displace remain repeat-exact and agree with two independently implemented Bilinear references within the pre-existing 1/65536 maximum-error boundary?",
+  "parents": {
+    "d6Spec": {
+      "uri": "specs/deterministic-displace-calibration.v0.1.json",
+      "sha256": "28d3c0b292b89d5d056d5521aececbfb6d88b70971d2b500fbff69d2498703be"
+    },
+    "d6Result": {
+      "uri": "experiments/deterministic-displace-calibration-v0-1/results.json",
+      "sha256": "e473ead8715b34971f7d457b86c0821782504ed22ae321eba5f9843ca9fe0348",
+      "verdict": "DETERMINISTIC_DISPLACE_CALIBRATION_NOT_SUPPORTED",
+      "baseFailure": "REFERENCE_MATCH"
+    },
+    "d6Audit": {
+      "uri": "experiments/deterministic-displace-calibration-v0-1/audit.json",
+      "sha256": "3f50e7e01a50946aead0aee4924a9f12e960989640d365e6c6b31c8e732976af",
+      "status": "PASS"
+    }
+  },
+  "thresholdProvenance": {
+    "maximumAbsoluteError": {
+      "value": 0.0000152587890625,
+      "expression": "1/65536",
+      "preExistingSource": "B52-D6 gates.pixelsAboveOneOver65536 and diagnostic error scale; frozen before D6 formal output"
+    },
+    "rmse": {
+      "value": 9.5367431640625e-7,
+      "expression": "1/1048576",
+      "purpose": "fresh-holdout distribution constraint, approximately 21 times the D6 observed RMSE"
+    },
+    "p99": {
+      "value": 9.5367431640625e-7,
+      "expression": "1/1048576",
+      "purpose": "fresh-holdout tail constraint, eight times the D6 observed all-scalar p99"
+    },
+    "absoluteMeanSignedErrorPerChannel": {
+      "value": 9.5367431640625e-7,
+      "expression": "1/1048576",
+      "purpose": "reject a small but spatially systematic directional bias"
+    }
+  },
+  "freshness": {
+    "reuseD6RenderedOutputs": false,
+    "reuseD6ReferenceOutputs": false,
+    "reuseD6DisplacementPairs": false,
+    "d6ObservedPair": [
+      0.5,
+      -0.25
+    ],
+    "allD7OffsetsUnseen": true,
+    "allD7ResolutionsUnseen": true,
+    "allD7SourcePatternsUnseen": true
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "bytes": 183237520,
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "buildPlatform": "Darwin",
+      "launchFlags": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1"
+      ]
+    },
+    "pythonReference": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "bytes": 5543888,
+      "implementation": "independent scalar Python loops using math.floor, float64 arithmetic and struct.pack float32 output"
+    },
+    "nodeReference": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "bytes": 50320,
+      "version": "v26.5.0",
+      "implementation": "independent JavaScript loops using Math.floor, Number arithmetic and Float32Array output"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5"
+    },
+    "compositorDevice": "CPU",
+    "threadsMode": "FIXED",
+    "threads": 1
+  },
+  "coordinateAndArithmeticContract": {
+    "decodedCoordinates": "top-left origin; x increases right; y increases down; integer coordinates name pixel centers",
+    "displacementSampling": "destination sampled at output integer coordinate (x,y)",
+    "sourceCoordinate": "u=x-dx(x,y), v=y+dy(x,y)",
+    "inputStorage": "source and displacement values first cast to IEEE-754 float32",
+    "referenceArithmetic": "promote stored float32 values to float64; compute four separable Bilinear weights and RGBA sum in the written tap order; cast final RGBA once to float32",
+    "tapOrder": [
+      "y0x0",
+      "y0x1",
+      "y1x0",
+      "y1x1"
+    ],
+    "clip": "out-of-range tap is RGBA=(0,0,0,0)",
+    "extend": "clamp each tap coordinate independently",
+    "repeat": "Euclidean modulo each tap coordinate independently",
+    "canonicalIdentity": "SHA-256 of C-contiguous top-left-row-major RGBA little-endian float32 bytes"
+  },
+  "sourcePatterns": {
+    "LOW_FREQUENCY_ALPHA_RAMP": {
+      "R": "(x mod 64)/64",
+      "G": "(y mod 64)/64",
+      "B": "((x+3*y) mod 64)/64",
+      "A": "((x+2*y) mod 17)/16"
+    },
+    "HIGH_FREQUENCY_ALPHA_CHECKER": {
+      "R": "(x xor y) bit0",
+      "G": "((5*x+11*y) mod 16)/16",
+      "B": "((13*x+7*y) mod 32)/32",
+      "A": "((3*x+5*y) mod 9)/8"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "LF_63X47_CLIP_Q1",
+      "resolution": [
+        63,
+        47
+      ],
+      "sourcePattern": "LOW_FREQUENCY_ALPHA_RAMP",
+      "field": {
+        "dx": "1/4",
+        "dy": "3/4"
+      },
+      "extensionX": "Clip",
+      "extensionY": "Clip"
+    },
+    {
+      "id": "LF_63X47_EXTEND_MIX",
+      "resolution": [
+        63,
+        47
+      ],
+      "sourcePattern": "LOW_FREQUENCY_ALPHA_RAMP",
+      "field": {
+        "dx": "-3/2",
+        "dy": "1/8"
+      },
+      "extensionX": "Extend",
+      "extensionY": "Extend"
+    },
+    {
+      "id": "LF_63X47_REPEAT_FIELD",
+      "resolution": [
+        63,
+        47
+      ],
+      "sourcePattern": "LOW_FREQUENCY_ALPHA_RAMP",
+      "field": {
+        "dx": "3/8 if x<31 else -5/8",
+        "dy": "1/4 if y even else -3/4"
+      },
+      "extensionX": "Repeat",
+      "extensionY": "Repeat"
+    },
+    {
+      "id": "HF_127X73_CLIP_MIX",
+      "resolution": [
+        127,
+        73
+      ],
+      "sourcePattern": "HIGH_FREQUENCY_ALPHA_CHECKER",
+      "field": {
+        "dx": "-3/4",
+        "dy": "3/2"
+      },
+      "extensionX": "Clip",
+      "extensionY": "Clip"
+    },
+    {
+      "id": "HF_127X73_EXTEND_MIX",
+      "resolution": [
+        127,
+        73
+      ],
+      "sourcePattern": "HIGH_FREQUENCY_ALPHA_CHECKER",
+      "field": {
+        "dx": "17/8",
+        "dy": "-3/8"
+      },
+      "extensionX": "Extend",
+      "extensionY": "Extend"
+    },
+    {
+      "id": "HF_127X73_REPEAT_FIELD",
+      "resolution": [
+        127,
+        73
+      ],
+      "sourcePattern": "HIGH_FREQUENCY_ALPHA_CHECKER",
+      "field": {
+        "dx": "[1/8,5/8,-7/8,3/8][x mod 4]",
+        "dy": "[-1/8,7/8][y mod 2]"
+      },
+      "extensionX": "Repeat",
+      "extensionY": "Repeat"
+    }
+  ],
+  "processMatrix": {
+    "pythonReferenceProcesses": 6,
+    "nodeReferenceProcesses": 6,
+    "blenderRepeatsPerFixture": 2,
+    "blenderProcesses": 12,
+    "totalChildProcesses": 24,
+    "allPidsUnique": true,
+    "blenderRenderCalls": 12,
+    "cyclesRayRenders": 0,
+    "sourceBlendFilesOpened": 0,
+    "externalAssetsOpened": 0,
+    "blenderOutput": {
+      "fileFormat": "OPEN_EXR",
+      "colorMode": "RGBA",
+      "colorDepth": "32",
+      "exrCodec": "ZIP",
+      "inputColorspace": "Raw"
+    }
+  },
+  "gates": {
+    "allProcessesExitZero": true,
+    "allPidsUnique": true,
+    "caseAndArtifactRosterExact": true,
+    "allValuesFinite": true,
+    "pythonNodeReferenceExact": true,
+    "blenderDecodedRepeatExact": true,
+    "maximumAbsoluteError": 0.0000152587890625,
+    "rmse": 9.5367431640625e-7,
+    "p99AbsoluteScalarError": 9.5367431640625e-7,
+    "absoluteMeanSignedErrorPerChannel": 9.5367431640625e-7,
+    "alphaMaximumAbsoluteError": 0.0000152587890625,
+    "pixelsAboveMaximumAbsoluteError": 0,
+    "minimumChangedPixelFraction": 0.5,
+    "minimumMaximumAbsoluteChange": 0.125,
+    "graphAndRnaExact": true,
+    "operationCountsExact": true
+  },
+  "diagnostics": {
+    "perFixture": [
+      "referenceRGBA",
+      "maximumAbsoluteError"
+    ],
+    "expectedPngs": 12,
+    "expectedSidecars": 12,
+    "referenceEncoding": "linear RGB clipped to [0,1], round-half-up RGB8",
+    "errorEncoding": "t=clip(max-channel-absolute-error/(1/65536),0,1); RGB8=(t,t^2,0), round-half-up"
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "BLENDER_RUNTIME_IDENTITY",
+    "PYTHON_RUNTIME_IDENTITY",
+    "NODE_RUNTIME_IDENTITY",
+    "OCIO_IDENTITY",
+    "CASE_ROSTER",
+    "PROCESS_ROSTER",
+    "PID_UNIQUENESS",
+    "REPORT_SELF_HASH",
+    "SOURCE_FORMULA",
+    "DISPLACEMENT_FORMULA",
+    "RNA_CONTRACT",
+    "GRAPH_CONTRACT",
+    "OPERATION_COUNTS",
+    "OUTPUT_HASH",
+    "DECODED_REPEAT",
+    "DUAL_REFERENCE_EXACT",
+    "TOLERANCE_MAXIMUM",
+    "TOLERANCE_DISTRIBUTION",
+    "SIGNED_BIAS",
+    "TASK_SENSITIVITY",
+    "DIAGNOSTIC_TOTALITY",
+    "RESULT_SELF_HASH"
+  ],
+  "decision": {
+    "passVerdict": "SUBPIXEL_BILINEAR_TOLERANCE_HOLDOUT_SUPPORTED",
+    "failVerdict": "SUBPIXEL_BILINEAR_TOLERANCE_HOLDOUT_NOT_SUPPORTED",
+    "passPermits": "Promote only the frozen tolerance-bounded Bilinear primitive, then preregister a separate depth/layer-aware temporal accumulation experiment.",
+    "failureAction": "Retain all outputs and use a fully external warp consumer or a narrower passing subset; do not infer occlusion or motion-blur support.",
+    "nonClaims": [
+      "does not revise D6's NOT_SUPPORTED exactness verdict",
+      "not depth-aware or occlusion-aware",
+      "not a temporal integrator or motion-blur result",
+      "not validation of Blender Vector pass or adaptive sampling",
+      "not a production shot or cinematic-quality judgment",
+      "not human perceptual evidence"
+    ]
+  },
+  "formalOutputRoot": "experiments/subpixel-bilinear-tolerance-holdout-v0-1",
+  "projectedWriteBytes": 16777216,
+  "diskReserveBytes": 107374182400
+}
