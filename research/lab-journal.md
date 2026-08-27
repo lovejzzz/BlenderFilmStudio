@@ -1177,6 +1177,18 @@ This rejects only the four tested configurations on ARM64 Colima/qemu. Next rese
 
 Artifacts: `experiments/linux-amd64-eevee-headless-diagnostic-v0-1/` and `research/2026-08-26-b41-d2-eevee-headless-diagnostic-result.md`.
 
+## J-068 · B41-D3 confirms a real CPU render worker and isolates Eevee
+
+Type: preregistered non-promotable renderer controls, independently audited, 2026-08-26.
+
+The exact constrained image completed a Blender 5.2 Cycles CPU 32×32/1-sample render in `11039 ms`, exit 0, producing a valid `2515`-byte PNG and `95671`-byte `.blend`. The forced-Vulkan Eevee control saved its scene but remained at `RENDER_STARTED` for `90084 ms`, then exited 143 after TERM with no PNG.
+
+Both controls saw Mesa EGL. Neither saw the preregistered lavapipe library/ICD paths or `/dev/dri`; the probed llvmpipe filename was also absent, though that path alone does not exhaust Debian software-OpenGL packaging. Audit matched tools, milestones, artifacts and classification.
+
+Classification: `CPU_ONLY_WORKER_CONFIRMED_EEVEE_GPU_ROUTE_ABSENT`. The current image may proceed under a separately preregistered compile-only/Cycles CPU boundary. The Eevee gate remains open and requires a GPU-backed worker or a separately built and tested software-Vulkan stack.
+
+Artifacts: `experiments/linux-amd64-render-backend-control-v0-1/` and `research/2026-08-26-b41-d3-render-backend-control-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

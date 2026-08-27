@@ -1,0 +1,479 @@
+{
+  "schemaVersion": "bfs.linuxAmd64RenderBackendControlEvidence.v0.1",
+  "experimentId": "B41-D3",
+  "status": "NON_PROMOTABLE_RENDER_BACKEND_CONTROL",
+  "preregistration": {
+    "commit": "294daf383b93d294ef1d66f8bf30b3913ceeda8e",
+    "specSha256": "3fd1404422ed62c44a42a8433e89b9dc70e98daaf0bc6c305d7b0aaa32d5fb3f"
+  },
+  "parent": {
+    "d2SpecSha256": "850d0d7b0cf9b1aa98ac203e846a3fcc7a0aa1bf5d581bad97d57411bee5369b",
+    "d2PreregistrationCommit": "c96cb2cf8beb7c3a4525b9960e4bc5bb380c2b20",
+    "d2ToolFreezeCommit": "5afde8219a35e9bd31eeb6b8ebf967856a47b6d6",
+    "resultSha256": "7a448ce9fc5f92bdd170258adf7c7ef4c46d1a1d25cfdd02e8eea71e32b24348",
+    "auditSha256": "35e0df8ef9b33a35a76695c726052fd79f5d18cae254078904a1c035f6b35533",
+    "classification": "NO_COMPLETION_WITHIN_DIAGNOSTIC_CEILING"
+  },
+  "toolFreezeCommit": "1f6ce741a97872ec29fbc60cf6e0bcc71762a1a6",
+  "tools": {
+    "runner": {
+      "uri": "scripts/run-b41-d3-render-backend-control.mjs",
+      "sha256": "e68e101c2df55cc72cf81c36381a303c5558f346b90b318766abafb5658f05e3"
+    },
+    "library": {
+      "uri": "scripts/lib/b41-d3-render-backend-control.mjs",
+      "sha256": "892ea5ef11eba4d0b593a091b95556e5f360b1426ffc7d716084d8dac0db0046"
+    },
+    "audit": {
+      "uri": "scripts/audit-b41-d3-render-backend-control.mjs",
+      "sha256": "4b923e752c07c5c71fdb64a92a3b11097269879507e5838926aead2d9e36b034"
+    },
+    "control": {
+      "uri": "fixtures/b41/render-backend-control.py",
+      "sha256": "cee3a55b70feadee1ed49e4fa2df47de916c865b70cf96bcfb4114899c8f4c78"
+    }
+  },
+  "runtime": {
+    "nodeVersion": "v26.5.0",
+    "nodeBinary": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "dockerHost": "unix:///Users/tianxing/.colima/default/docker.sock",
+    "containerPlatform": "linux/amd64"
+  },
+  "diskAdmission": {
+    "availableBytes": "129347108864",
+    "projectedWriteBytes": "21474836480",
+    "minimumReserveBytes": "107374182400",
+    "freeAfterProjectedBytes": "107872272384",
+    "status": "ACCEPTED"
+  },
+  "image": {
+    "id": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+    "os": "linux",
+    "architecture": "amd64",
+    "sizeBytes": 1004901158
+  },
+  "inputFixture": {
+    "ocioTreeManifestSha256": "57f58f25ff919ab2acb214ed42e1a904f32b6c97836aea74c1ec87e13e8e0c16"
+  },
+  "securityBoundary": {
+    "inheritB41C5": true,
+    "network": "none",
+    "user": "65532:65532",
+    "capDrop": [
+      "ALL"
+    ],
+    "noNewPrivileges": true,
+    "readOnlyRoot": true,
+    "inputReadOnly": true,
+    "outputWritable": true,
+    "pidsLimit": 256,
+    "memoryBytes": 8589934592,
+    "cpus": 4
+  },
+  "controls": [
+    {
+      "id": "CYCLES_CPU",
+      "engine": "CYCLES",
+      "device": "CPU",
+      "gpuBackendArgv": [],
+      "attempted": true,
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/inputs/render-backend-control.py"
+      ],
+      "environment": {
+        "BFS_INPUT_ROOT": "/inputs",
+        "BFS_OUTPUT_ROOT": "/outputs",
+        "BFS_REPORT_PATH": "/outputs/report.json",
+        "BLENDER_USER_CONFIG": "/work/blender-config",
+        "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+        "HOME": "/work/home",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "OCIO": "/inputs/ocio/config.ocio",
+        "TMPDIR": "/work/tmp",
+        "BFS_JOB_ID": "B41-D3-CYCLES_CPU",
+        "BFS_CONTROL_ID": "CYCLES_CPU",
+        "BFS_ENGINE": "CYCLES",
+        "BFS_SAMPLES": "1",
+        "BFS_MILESTONE_PATH": "/outputs/milestones.jsonl"
+      },
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMs": 11039,
+      "stdout": "00:00.176  color_management | Using OCIO=/inputs/ocio/config.ocio\n00:10.410  render           | Saved: '/outputs/canary.png'\nInfo: Saved as \"canary.blend\"\nBFS_B41_D3_CONTROL=PASS\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:32:04)\n\nBlender quit\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\n",
+      "timeoutTriggered": false,
+      "termSent": false,
+      "forceKillSent": false,
+      "termAtMs": null,
+      "forceAtMs": null,
+      "milestones": [
+        {
+          "controlId": "CYCLES_CPU",
+          "details": {},
+          "monotonicNs": 5515910240775,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1
+        },
+        {
+          "controlId": "CYCLES_CPU",
+          "details": {
+            "paths": [
+              {
+                "bytes": null,
+                "exists": false,
+                "path": "/usr/lib/x86_64-linux-gnu/dri/llvmpipe_dri.so",
+                "type": null
+              },
+              {
+                "bytes": 288248,
+                "exists": true,
+                "path": "/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0",
+                "type": "file"
+              },
+              {
+                "bytes": null,
+                "exists": false,
+                "path": "/usr/lib/x86_64-linux-gnu/libvulkan_lvp.so",
+                "type": null
+              },
+              {
+                "bytes": null,
+                "exists": false,
+                "path": "/usr/share/vulkan/icd.d/lvp_icd.x86_64.json",
+                "type": null
+              },
+              {
+                "bytes": null,
+                "exists": false,
+                "path": "/dev/dri",
+                "type": null
+              }
+            ]
+          },
+          "monotonicNs": 5515913073154,
+          "name": "INVENTORY_RECORDED",
+          "processId": 1,
+          "sequence": 2
+        },
+        {
+          "controlId": "CYCLES_CPU",
+          "details": {
+            "engine": "CYCLES",
+            "samples": 1
+          },
+          "monotonicNs": 5515939256782,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 3
+        },
+        {
+          "controlId": "CYCLES_CPU",
+          "details": {
+            "bytes": 95671,
+            "sha256": "527d5d3a59355e14cde623574101851b30c7cc3c5efd4fa7173c2071abe46635"
+          },
+          "monotonicNs": 5516403978231,
+          "name": "BLEND_SAVED",
+          "processId": 1,
+          "sequence": 4
+        },
+        {
+          "controlId": "CYCLES_CPU",
+          "details": {},
+          "monotonicNs": 5516405087941,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 5
+        },
+        {
+          "controlId": "CYCLES_CPU",
+          "details": {
+            "bytes": 2515,
+            "dimensions": [
+              32,
+              32
+            ],
+            "sha256": "d66e8befae87d66e999bfd4274d7d30ca0f1074df219b7c59afa7ff0f8da1fc4"
+          },
+          "monotonicNs": 5518692920708,
+          "name": "RENDER_COMPLETED",
+          "processId": 1,
+          "sequence": 6
+        },
+        {
+          "controlId": "CYCLES_CPU",
+          "details": {
+            "passed": true
+          },
+          "monotonicNs": 5518696796631,
+          "name": "REPORT_WRITTEN",
+          "processId": 1,
+          "sequence": 7
+        }
+      ],
+      "report": {
+        "artifacts": {
+          "blend": {
+            "bytes": 95671,
+            "sha256": "527d5d3a59355e14cde623574101851b30c7cc3c5efd4fa7173c2071abe46635"
+          },
+          "png": {
+            "bytes": 2515,
+            "dimensions": [
+              32,
+              32
+            ],
+            "sha256": "d66e8befae87d66e999bfd4274d7d30ca0f1074df219b7c59afa7ff0f8da1fc4"
+          }
+        },
+        "blender": {
+          "buildHash": "fbe6228777e7",
+          "renderEngine": "CYCLES",
+          "version": "5.2.0 LTS",
+          "versionTuple": [
+            5,
+            2,
+            0
+          ]
+        },
+        "controlId": "CYCLES_CPU",
+        "inventory": [
+          {
+            "bytes": null,
+            "exists": false,
+            "path": "/usr/lib/x86_64-linux-gnu/dri/llvmpipe_dri.so",
+            "type": null
+          },
+          {
+            "bytes": 288248,
+            "exists": true,
+            "path": "/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0",
+            "type": "file"
+          },
+          {
+            "bytes": null,
+            "exists": false,
+            "path": "/usr/lib/x86_64-linux-gnu/libvulkan_lvp.so",
+            "type": null
+          },
+          {
+            "bytes": null,
+            "exists": false,
+            "path": "/usr/share/vulkan/icd.d/lvp_icd.x86_64.json",
+            "type": null
+          },
+          {
+            "bytes": null,
+            "exists": false,
+            "path": "/dev/dri",
+            "type": null
+          }
+        ],
+        "passed": true,
+        "schemaVersion": "bfs.renderBackendControlCellReport.v0.1"
+      },
+      "artifacts": {
+        "blend": {
+          "bytes": 95671,
+          "sha256": "527d5d3a59355e14cde623574101851b30c7cc3c5efd4fa7173c2071abe46635"
+        },
+        "png": {
+          "valid": true,
+          "dimensions": [
+            32,
+            32
+          ],
+          "bytes": 2515,
+          "sha256": "d66e8befae87d66e999bfd4274d7d30ca0f1074df219b7c59afa7ff0f8da1fc4"
+        }
+      },
+      "completed": true,
+      "promotable": false
+    },
+    {
+      "id": "EEVEE_VULKAN",
+      "engine": "BLENDER_EEVEE",
+      "device": null,
+      "gpuBackendArgv": [
+        "--gpu-backend",
+        "vulkan"
+      ],
+      "attempted": true,
+      "imageId": "sha256:c4b0f6bebe77e9bd10b4875aaf0500d798de081259397c525f923f7a9eea35b1",
+      "argv": [
+        "--gpu-backend",
+        "vulkan",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--offline-mode",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/inputs/render-backend-control.py"
+      ],
+      "environment": {
+        "BFS_INPUT_ROOT": "/inputs",
+        "BFS_OUTPUT_ROOT": "/outputs",
+        "BFS_REPORT_PATH": "/outputs/report.json",
+        "BLENDER_USER_CONFIG": "/work/blender-config",
+        "BLENDER_USER_SCRIPTS": "/work/blender-scripts",
+        "HOME": "/work/home",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "OCIO": "/inputs/ocio/config.ocio",
+        "TMPDIR": "/work/tmp",
+        "BFS_JOB_ID": "B41-D3-EEVEE_VULKAN",
+        "BFS_CONTROL_ID": "EEVEE_VULKAN",
+        "BFS_ENGINE": "BLENDER_EEVEE",
+        "BFS_SAMPLES": "0",
+        "BFS_MILESTONE_PATH": "/outputs/milestones.jsonl"
+      },
+      "exitCode": 143,
+      "signal": null,
+      "elapsedMs": 90084,
+      "stdout": "00:00.173  color_management | Using OCIO=/inputs/ocio/config.ocio\n00:00.714  gpu.vulkan       | ERROR Unable to initialize a Vulkan 1.2 instance.\n",
+      "stderr": "Failed to create random directory /work/tmp/pulse-PKdhtXMmr18n: No such file or directory\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\nEGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).\n",
+      "timeoutTriggered": true,
+      "termSent": true,
+      "forceKillSent": false,
+      "termAtMs": 90003,
+      "forceAtMs": null,
+      "milestones": [
+        {
+          "controlId": "EEVEE_VULKAN",
+          "details": {},
+          "monotonicNs": 5527059734052,
+          "name": "PROCESS_STARTED",
+          "processId": 1,
+          "sequence": 1
+        },
+        {
+          "controlId": "EEVEE_VULKAN",
+          "details": {
+            "paths": [
+              {
+                "bytes": null,
+                "exists": false,
+                "path": "/usr/lib/x86_64-linux-gnu/dri/llvmpipe_dri.so",
+                "type": null
+              },
+              {
+                "bytes": 288248,
+                "exists": true,
+                "path": "/usr/lib/x86_64-linux-gnu/libEGL_mesa.so.0",
+                "type": "file"
+              },
+              {
+                "bytes": null,
+                "exists": false,
+                "path": "/usr/lib/x86_64-linux-gnu/libvulkan_lvp.so",
+                "type": null
+              },
+              {
+                "bytes": null,
+                "exists": false,
+                "path": "/usr/share/vulkan/icd.d/lvp_icd.x86_64.json",
+                "type": null
+              },
+              {
+                "bytes": null,
+                "exists": false,
+                "path": "/dev/dri",
+                "type": null
+              }
+            ]
+          },
+          "monotonicNs": 5527062809057,
+          "name": "INVENTORY_RECORDED",
+          "processId": 1,
+          "sequence": 2
+        },
+        {
+          "controlId": "EEVEE_VULKAN",
+          "details": {
+            "engine": "BLENDER_EEVEE",
+            "samples": null
+          },
+          "monotonicNs": 5527091304646,
+          "name": "SCENE_CONFIGURED",
+          "processId": 1,
+          "sequence": 3
+        },
+        {
+          "controlId": "EEVEE_VULKAN",
+          "details": {
+            "bytes": 95642,
+            "sha256": "b748b1598eab60bf618e02d02088407dc1d5c074c39c2d6f8246fe5f86b93a04"
+          },
+          "monotonicNs": 5527555077007,
+          "name": "BLEND_SAVED",
+          "processId": 1,
+          "sequence": 4
+        },
+        {
+          "controlId": "EEVEE_VULKAN",
+          "details": {},
+          "monotonicNs": 5527556203551,
+          "name": "RENDER_STARTED",
+          "processId": 1,
+          "sequence": 5
+        }
+      ],
+      "report": null,
+      "artifacts": {
+        "blend": {
+          "bytes": 95642,
+          "sha256": "b748b1598eab60bf618e02d02088407dc1d5c074c39c2d6f8246fe5f86b93a04"
+        },
+        "png": {
+          "valid": false,
+          "dimensions": null,
+          "bytes": 0,
+          "sha256": null
+        }
+      },
+      "completed": false,
+      "promotable": false
+    }
+  ],
+  "classification": "CPU_ONLY_WORKER_CONFIRMED_EEVEE_GPU_ROUTE_ABSENT",
+  "runtimeOperationsExecuted": [
+    "DOCKER_IMAGE_INSPECT",
+    "DOCKER_RUN_CYCLES_CPU",
+    "DOCKER_RUN_EEVEE_VULKAN",
+    "DOCKER_KILL_TERM_bfs-b41-d3-eevee-vulkan",
+    "DOCKER_RUNNING_CONTAINER_CHECK"
+  ],
+  "cleanup": {
+    "experimentContainersRunningAfter": 0,
+    "temporaryInputRootRemoved": true
+  },
+  "promotable": false,
+  "errors": [],
+  "evidenceHash": "8646d013b408d9caf6177d60f4b393337d427a961888f5dc16fc211e36a59999",
+  "analysis": {
+    "schemaVersion": "bfs.linuxAmd64RenderBackendControlAnalysis.v0.1",
+    "passed": true,
+    "failures": [],
+    "decision": "RENDER_BACKEND_CONTROL_COMPLETE_NON_PROMOTABLE"
+  },
+  "verdict": "RENDER_BACKEND_CONTROL_COMPLETE_NON_PROMOTABLE",
+  "nonClaims": [
+    "B41-D3 cannot promote the frozen Eevee worker gate",
+    "Cycles CPU success would not establish Eevee or GPU availability",
+    "Vulkan failure without lavapipe packages would not reject a rebuilt software-Vulkan image",
+    "A synthetic 32x32 single-sample render is not production quality or throughput evidence",
+    "No SceneSpec compiler workload runs in B41-D3"
+  ]
+}
