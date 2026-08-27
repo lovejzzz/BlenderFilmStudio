@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "bfs.crossLanguageEvidenceEnvelopeDevelopment.v0.1",
+  "experimentId": "B52-D12.1-DEV",
+  "title": "Typed IEEE-754 evidence-envelope cross-language development probe",
+  "classification": "DEVELOPMENT_ONLY_ALGORITHM_PROBE",
+  "question": "Can independent Python and Node implementations replace unstable decimal JSON number spelling with a typed IEEE-754 binary64 hexadecimal envelope, recompute identical hashes for every retained D12 reconstructor report body, and demonstrate exact measurement equality for every corresponding Python/Node cell?",
+  "parents": {
+    "d12Spec": {
+      "uri": "specs/blender-projective-subpixel-reconstruction-holdout.v0.1.json",
+      "sha256": "dd2e990d276e0ee5c2fee9d22cf42c7f84db2b6c1947b1219dceab06a76f66a2"
+    },
+    "d12Result": {
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/results.json",
+      "sha256": "a411948ec8854029d199786bbf0a81565bc91099e2f973a2311b7513c2d07d82",
+      "verdict": "BLENDER_PROJECTIVE_SUBPIXEL_RECONSTRUCTION_HOLDOUT_NOT_SUPPORTED",
+      "baseFailure": "DUAL_RECONSTRUCTION_IDENTITY"
+    },
+    "d12Audit": {
+      "uri": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/audit.c2.json",
+      "sha256": "8496c264fff4f9eca48ab9ac2bdb751b9d39f7124215da856829104550cb0481",
+      "status": "PASS"
+    }
+  },
+  "inputs": {
+    "root": "experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/reconstructors",
+    "pythonReports": 8,
+    "nodeReports": 8,
+    "pairing": ["fixtureId", "repeat"],
+    "reusePolicy": "retained D12 reports are permitted only for development diagnosis; no D12 verdict or file changes"
+  },
+  "envelope": {
+    "removeBeforeHash": ["reportHash"],
+    "objectKeys": "Unicode scalar strings sorted by code point; current corpus additionally requires ASCII keys",
+    "arrays": "preserve order",
+    "strings": "UTF-8 JSON strings; reject unpaired surrogates",
+    "booleansAndNull": "preserve JSON type",
+    "numbers": "reject nonfinite and |integer value| > 2^53-1; convert every JSON number, including integral-valued numbers, to object {\"$f64be\":\"hhhhhhhhhhhhhhhh\"}",
+    "floatingEncoding": "IEEE-754 binary64, network byte order, lowercase 16 hexadecimal digits",
+    "signedZero": "canonicalize both +0 and -0 to 0000000000000000",
+    "serialization": "UTF-8 JSON, keys sorted, separators comma/colon, no insignificant whitespace",
+    "digest": "SHA-256 lowercase hexadecimal"
+  },
+  "independence": {
+    "pythonTool": "scripts/encode-b52-d12-1-evidence-envelope.py",
+    "nodeTool": "scripts/encode-b52-d12-1-evidence-envelope.mjs",
+    "analyzer": "scripts/analyze-b52-d12-1-evidence-envelope-development.py",
+    "rule": "neither encoder may invoke or import the other language implementation; analyzer invokes both CLIs as separate processes and checks their output bytes"
+  },
+  "adversarialCases": [
+    "positive zero", "negative zero", "small positive exponent", "small negative exponent",
+    "largest safe integer", "negative largest safe integer", "unsafe integer rejection", "positive infinity rejection",
+    "negative infinity rejection", "NaN rejection", "object insertion-order permutation", "nested array order",
+    "ASCII control escaping", "Unicode scalar string", "unpaired surrogate rejection", "existing $f64be user key remains ordinary data"
+  ],
+  "gates": {
+    "inputRosterExact": true,
+    "originalPythonReportsNativeHashValid": 8,
+    "originalNodeReportsNativeHashInvalid": 8,
+    "pythonNodeEnvelopeBytesExactPerReport": 16,
+    "pythonNodeEnvelopeHashExactPerReport": 16,
+    "pairedMeasurementEnvelopeExact": 8,
+    "adversarialCasesPassed": 16,
+    "sourceReportsModified": 0,
+    "blenderProcesses": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "outputRoot": "experiments/blender-cross-language-evidence-envelope-development-v0-1",
+  "outcomes": {
+    "compatible": "DEVELOPMENT_TYPED_EVIDENCE_ENVELOPE_COMPATIBLE",
+    "notCompatible": "DEVELOPMENT_TYPED_EVIDENCE_ENVELOPE_NOT_COMPATIBLE"
+  },
+  "nonClaims": [
+    "This development probe does not change the D12 verdict, report files, self-hashes, attack values or static exact failure.",
+    "It does not establish RFC 8785/JCS compliance or general canonicalization for arbitrary JSON documents.",
+    "It does not authorize a production report schema until a separately preregistered fresh holdout passes.",
+    "It makes no Blender rendering, temporal reconstruction or cinematic-quality claim."
+  ],
+  "preToolState": {
+    "pythonToolExists": false,
+    "nodeToolExists": false,
+    "analyzerExists": false,
+    "outputExists": false,
+    "measurements": 0
+  }
+}

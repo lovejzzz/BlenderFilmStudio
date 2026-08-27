@@ -2457,6 +2457,20 @@ C2 audit SHA-256: `8496c264fff4f9eca48ab9ac2bdb751b9d39f7124215da856829104550cb0
 
 Artifact: `experiments/blender-projective-subpixel-reconstruction-holdout-c1-v0-1/audit.c2.json`.
 
+## J-154 · D12.1-DEV preregisters a typed cross-language evidence envelope
+
+Date: 2026-08-27 · Type: ALGORITHM DEVELOPMENT PREREGISTRATION · Blender/model/network calls: 0/0/0
+
+D12's 8/8 Python/Node array identities remain positive, while all eight Node report native self-hashes remain invalid under Python's decimal canonical dump. D12.1-DEV asks whether the language-dependent decimal number representation can be removed from the evidence hash without hiding numeric differences.
+
+Every JSON number will be replaced by a typed `{"$f64be":"..."}` object containing its IEEE-754 binary64 network-order bytes as sixteen lowercase hexadecimal digits. Both signed zeros canonicalize to positive zero; nonfinite values, integer-valued numbers outside ±(2^53−1) and unpaired surrogates reject. Objects sort keys, arrays preserve order and the final compact UTF-8 JSON receives SHA-256.
+
+Independent Python and Node CLIs plus a third analyzer path are absent at preregistration. Passing requires byte/hash identity for all sixteen retained report bodies, exact normalized measurement identity for all eight corresponding cells, all sixteen adversarial cases and zero source modification. The output is development-only and cannot revise D12 or claim RFC 8785/JCS compliance.
+
+Frozen development spec SHA-256: `8bd219570e0c7ec922a671919d680787caf55b2ba7d8a631ed5bc995ab24f116`.
+
+Artifacts: `specs/blender-cross-language-evidence-envelope-development.v0.1.json` and `research/2026-08-27-b52-d12-1-cross-language-evidence-envelope-development-protocol.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
