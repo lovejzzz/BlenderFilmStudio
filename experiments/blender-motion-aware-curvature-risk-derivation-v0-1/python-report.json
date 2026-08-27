@@ -1,0 +1,238 @@
+{
+  "candidate": {
+    "calibrationFactor": 4,
+    "colorFixedPoint": {
+      "fractionBits": 30,
+      "requirement": "every previous float32 RGB sample multiplied by 2^30 is an exact integer in the declared [0,1] derivation domain",
+      "scale": 1073741824
+    },
+    "curvature": "Mx is the per-channel maximum absolute horizontal second difference at x0 and x0+1 on rows y0 and y0+1; My is the analogous vertical maximum at y0 and y0+1 on columns x0 and x0+1; all colors are signed Q30 integers",
+    "fallback": "ineligible or risk-rejected pixels copy current float32 RGBA exactly in the future holdout",
+    "inputDomain": "D12.8 structurally valid radius-2 pixels; RGB and motion are read only from the previous frame and current Blender Vector; current RGB is forbidden from the decision",
+    "motionFixedPoint": {
+      "fractionBits": 24,
+      "requirement": "the fractional part of q=(x+Vector.X,y-Vector.Y), multiplied by 2^24, is an exact integer",
+      "scale": 16777216
+    },
+    "name": "Q30_PREVIOUS_CURVATURE_X4",
+    "qualityThresholdSceneLinear": 3.0517578125e-05,
+    "reconstruction": "unchanged four-tap float64 bilinear sum followed by one float32 cast; reconstruction is measured but not an input to the risk decision",
+    "riskNumerator": "2 * (Fx*(2^24-Fx)*Mx + Fy*(2^24-Fy)*My)",
+    "riskQ30": "ceil(riskNumerator / 2^48) + 512, saturated to uint32 maximum",
+    "riskThresholdQ30Inclusive": 131072,
+    "riskThresholdSceneLinear": 0.0001220703125,
+    "roundingAllowanceQ30": 512,
+    "support": "the 4x4 previous-frame rectangle [x0-1,x0+2] by [y0-1,y0+2] is in bounds, has one exact Object Index and alpha greater than 0.999"
+  },
+  "experimentId": "B52-D12.9-D1",
+  "fixtures": {
+    "CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101": {
+      "adapterReport": {
+        "reportHash": "7d76983155c5e3ae512a125ad25de24f3f4d150f329728f34b2d914e437474fe",
+        "sha256": "0f1528836e847792f0d05f27607a064fcf46052fea2582070d81854eb42edc15",
+        "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/adapters/CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101/R1/report.json"
+      },
+      "arrays": {
+        "accepted": {
+          "bytes": 16463,
+          "dtype": "uint8",
+          "sha256": "a9c958f6a9a34d3dfae69773d4bd400b2533db3108c8af57f2bb799bc5110ff0",
+          "shape": [
+            101,
+            163
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101/accepted.u8"
+        },
+        "eligible": {
+          "bytes": 16463,
+          "dtype": "uint8",
+          "sha256": "a9c958f6a9a34d3dfae69773d4bd400b2533db3108c8af57f2bb799bc5110ff0",
+          "shape": [
+            101,
+            163
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101/eligible.u8"
+        },
+        "riskQ30": {
+          "bytes": 197556,
+          "dtype": "little-endian-uint32",
+          "sha256": "09b0ef1f0eb3b80b585306891af0462123eb5defe6fc4c3ea345ec3a9af2270a",
+          "shape": [
+            101,
+            163,
+            3
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101/risk.q30.u32"
+        }
+      },
+      "consumerReport": {
+        "reportHash": "cdebf38f9905a3a79e18deb1942cf1ca982fb4306fe662d9ebe9fe13802e7e4b",
+        "sha256": "fbb79c1f250a95555a0cad7c21d69fa82dc89616d33ccee130b0fa34ca39214e",
+        "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/python/CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101/R1/report.json"
+      },
+      "counts": {
+        "accepted": 13853,
+        "eligible": 13853,
+        "radius2": 14082
+      }
+    },
+    "MULTI_OWNER_STATIC_CONTROL_127X83": {
+      "adapterReport": {
+        "reportHash": "a4d2e0cc4fe90ab23eab77f446f002a951a4cc1bbaee43b28aeb400b37dd145b",
+        "sha256": "23a79773699fa4dd22bd6aefd6ce3572afbcbfd89171b334f54e3281e48a7534",
+        "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/adapters/MULTI_OWNER_STATIC_CONTROL_127X83/R1/report.json"
+      },
+      "arrays": {
+        "accepted": {
+          "bytes": 10541,
+          "dtype": "uint8",
+          "sha256": "fbd0277b7a1758bf18b17804d1dc5b7daef632cf5523655c1451d6c941d18ceb",
+          "shape": [
+            83,
+            127
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/MULTI_OWNER_STATIC_CONTROL_127X83/accepted.u8"
+        },
+        "eligible": {
+          "bytes": 10541,
+          "dtype": "uint8",
+          "sha256": "fbd0277b7a1758bf18b17804d1dc5b7daef632cf5523655c1451d6c941d18ceb",
+          "shape": [
+            83,
+            127
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/MULTI_OWNER_STATIC_CONTROL_127X83/eligible.u8"
+        },
+        "riskQ30": {
+          "bytes": 126492,
+          "dtype": "little-endian-uint32",
+          "sha256": "ee90bf78dc3a31028badfdbdeeaae9564ea6095fd79181c052639256a012e24b",
+          "shape": [
+            83,
+            127,
+            3
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/MULTI_OWNER_STATIC_CONTROL_127X83/risk.q30.u32"
+        }
+      },
+      "consumerReport": {
+        "reportHash": "b937986892a285aa02e09e3773e9f8b0d1093fb2279de80dbdac2c32e556fcda",
+        "sha256": "6cace180a6f2b7f1561d7f9c265d7769045eb1e61cac9e12f09be09248175e4e",
+        "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/python/MULTI_OWNER_STATIC_CONTROL_127X83/R1/report.json"
+      },
+      "counts": {
+        "accepted": 9045,
+        "eligible": 9045,
+        "radius2": 9045
+      }
+    },
+    "RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97": {
+      "adapterReport": {
+        "reportHash": "e90dc61db0929e2b9b2155737c9bee2d4344d0d1d910be52851ce7ea27096231",
+        "sha256": "00a7bd2f875af59f38a572537bce58a6a072f530e0f6c6ef483f91bf7132cb75",
+        "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/adapters/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R1/report.json"
+      },
+      "arrays": {
+        "accepted": {
+          "bytes": 14453,
+          "dtype": "uint8",
+          "sha256": "455856364e40a0200e5bf498802e6d05d75dcc3ab848c3d900614c7e7459f77d",
+          "shape": [
+            97,
+            149
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/accepted.u8"
+        },
+        "eligible": {
+          "bytes": 14453,
+          "dtype": "uint8",
+          "sha256": "455856364e40a0200e5bf498802e6d05d75dcc3ab848c3d900614c7e7459f77d",
+          "shape": [
+            97,
+            149
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/eligible.u8"
+        },
+        "riskQ30": {
+          "bytes": 173436,
+          "dtype": "little-endian-uint32",
+          "sha256": "a1426c039006f6a730f37b4774089dfd2031de3da8390ed2b0442f2017b7c4f3",
+          "shape": [
+            97,
+            149,
+            3
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/risk.q30.u32"
+        }
+      },
+      "consumerReport": {
+        "reportHash": "8ce511d0a75c21eee2486673b96a3cc92d3200238b62c7ac59c89690035827bb",
+        "sha256": "0ce6e28dffeb7e39026a8c60c1e213e1b5debd27e292385d585995dd05e1a4f9",
+        "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/python/RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97/R1/report.json"
+      },
+      "counts": {
+        "accepted": 8646,
+        "eligible": 8646,
+        "radius2": 8823
+      }
+    },
+    "SAME_INDEX_DEPTH_REVEAL_173X107": {
+      "adapterReport": {
+        "reportHash": "2b43a06f240d37d39c73a6c644db476203c8504355d2302dcf5ec18703c61400",
+        "sha256": "d96f19d74540671a172a15f8e047579a9df74e820184ad7cdeed1d26e6edd640",
+        "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/adapters/SAME_INDEX_DEPTH_REVEAL_173X107/R1/report.json"
+      },
+      "arrays": {
+        "accepted": {
+          "bytes": 18511,
+          "dtype": "uint8",
+          "sha256": "a1d8f3c1a2b2a10475bc3b99d818ff080d82ce832ac2cc5d053221342492c62e",
+          "shape": [
+            107,
+            173
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/SAME_INDEX_DEPTH_REVEAL_173X107/accepted.u8"
+        },
+        "eligible": {
+          "bytes": 18511,
+          "dtype": "uint8",
+          "sha256": "184126480144fa466def79014646049842a7ecae26a0d398c2d92104d4adaa57",
+          "shape": [
+            107,
+            173
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/SAME_INDEX_DEPTH_REVEAL_173X107/eligible.u8"
+        },
+        "riskQ30": {
+          "bytes": 222132,
+          "dtype": "little-endian-uint32",
+          "sha256": "665182ac8c0ed447fb2e4d468026c1cde6382b2037cfb8ac2497bf07e5ae2d61",
+          "shape": [
+            107,
+            173,
+            3
+          ],
+          "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-motion-aware-curvature-risk-derivation-v0-1/producers/python/SAME_INDEX_DEPTH_REVEAL_173X107/risk.q30.u32"
+        }
+      },
+      "consumerReport": {
+        "reportHash": "33037264978a7088506c6c7aeb2c90c3c53aecb276aeb3d5fafb20b6176bc277",
+        "sha256": "df9508859afcbbce92e824630aeac6f459cbe04c4e64cf34e3bebcda5f48c060",
+        "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/consumers/python/SAME_INDEX_DEPTH_REVEAL_173X107/R1/report.json"
+      },
+      "counts": {
+        "accepted": 11544,
+        "eligible": 11641,
+        "radius2": 11843
+      }
+    }
+  },
+  "operationCounts": {
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "pid": 32372,
+  "producer": "python",
+  "reportHash": "689965956f24dff4ada9f43e516a8087315587066aa7009bacc030e1b3501d10",
+  "schemaVersion": "bfs.blenderMotionAwareCurvatureRiskProducerReport.v0.1"
+}

@@ -2901,6 +2901,20 @@ C2 audit SHA-256: `0dd3a31e7244a76167ee8c61e690fa2e1bd38ba1089351e6088192c7fb6df
 
 Artifact: `research/2026-08-27-b52-d12-8-projective-motion-disocclusion-adaptive-risk-result.md`.
 
+## J-191 · Q30 二阶差分风险从 D12.8 失败数据中恢复运动覆盖
+
+Date: 2026-08-27 · Type: POST-HOC CANDIDATE DERIVATION · New Blender renders: 0
+
+D12.9-D1 明确把 D12.8 当作已观察的派生集，而不是新 holdout。候选不再对 previous taps 与 current RGB 做绝对差；它只读取 previous RGB / owner / alpha 与 current Vector，以 4×4 previous support 的水平、垂直二阶差分估计双线性插值余项。颜色以 Q30、运动小数以 Q24 表示，风险输出为 little-endian uint32；current RGB 只由独立 analyzer 用于测量，不参与 accept / reject。
+
+Python 与 Node 对四个 fixture 的 `eligible.u8`、`accepted.u8`、`risk.q30.u32` 全部逐字节一致，独立整数重放一致，三个进程唯一，10/10 checks 通过。三组 moving fixture 的 radius-2 retention 从旧规则的 16.98%、0%、13.17% 提升到 97.994%、98.374%、97.475%；所有有至少 100 个样本的 analytic owner retention 均不低于 97.092%。accepted RGB maximum 为 `1.866657e-5`，低于冻结的 `2^-15` quality ceiling；所有 eligible RGB 样本 risk underbound 为 0。static control 保留 100%，same-index fixture 仍有 97 个 curvature-risk rejection。
+
+这只是 post-hoc candidate selection。有限差分不是任意 rendered signal 的数学上界；factor 4、Q30 allowance 与两个 threshold 都是在看过 D12.8 后选定，必须在任何新 render 之前冻结进 D12.9-H1。下一步必须使用新 resolution、transform、material frequency 与 disocclusion geometry，并把 valid-history depth agreement 与 expected depth rejection 分成两个 typed domain。
+
+Result SHA-256: `e78ddf4d447b46398dc0ad314ee81e55c7bf2e22744ab57a2a2c7cbb8833438c`; evidence hash: `ea7ad8f269016ee01a42a9e42558f727f73cb979f50fbd6ccc92301de1fa3ac1`; receipt hash: `78188333858c398804105891afb200762185655e6e28bf69ceb3f224c8253566`.
+
+Artifact: `research/2026-08-27-b52-d12-9-motion-aware-curvature-risk-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

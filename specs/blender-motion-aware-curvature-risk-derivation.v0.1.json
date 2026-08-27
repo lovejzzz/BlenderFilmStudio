@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "bfs.blenderMotionAwareCurvatureRiskDerivation.v0.1",
+  "experimentId": "B52-D12.9-D1",
+  "title": "Post-hoc derivation of a canonical motion-aware curvature risk candidate",
+  "status": "EXPLORATORY_DERIVATION",
+  "question": "Can a previous-frame-only local curvature estimate separate transported signal gradient from bilinear interpolation uncertainty on the failed D12.8 motion evidence while remaining byte-identical across Python and Node?",
+  "decisionRole": "candidate selection only; this derivation may not support production or revise any prior verdict",
+  "sourceEvidence": {
+    "spec": {
+      "uri": "specs/blender-projective-motion-disocclusion-adaptive-risk-holdout.v0.1.json",
+      "sha256": "d7e7c0ee0bd7f512766188eabda9fa0dccb098a0729b26487aa38bee97d6aea6"
+    },
+    "result": {
+      "uri": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/results.json",
+      "sha256": "0a621b87b3565b3106b11ab1c9cef705f16ab3701c02d9deef5e730bee2992f1",
+      "verdict": "PROJECTIVE_MOTION_DISOCCLUSION_ADAPTIVE_GATE_NOT_SUPPORTED"
+    },
+    "correctedAudit": {
+      "uri": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1/audit.c2.json",
+      "sha256": "0dd3a31e7244a76167ee8c61e690fa2e1bd38ba1089351e6088192c7fb6df7d8",
+      "checkPassed": 16,
+      "checkTotal": 16
+    },
+    "root": "experiments/blender-projective-motion-disocclusion-adaptive-risk-holdout-c1-v0-1",
+    "repeat": 1,
+    "fixtures": [
+      "RIGID_OBJECT_SWEEP_DISOCCLUSION_149X97",
+      "CAMERA_DOLLY_YAW_PARALLAX_BOUNDS_163X101",
+      "SAME_INDEX_DEPTH_REVEAL_173X107",
+      "MULTI_OWNER_STATIC_CONTROL_127X83"
+    ]
+  },
+  "candidate": {
+    "name": "Q30_PREVIOUS_CURVATURE_X4",
+    "inputDomain": "D12.8 structurally valid radius-2 pixels; RGB and motion are read only from the previous frame and current Blender Vector; current RGB is forbidden from the decision",
+    "support": "the 4x4 previous-frame rectangle [x0-1,x0+2] by [y0-1,y0+2] is in bounds, has one exact Object Index and alpha greater than 0.999",
+    "colorFixedPoint": {
+      "fractionBits": 30,
+      "scale": 1073741824,
+      "requirement": "every previous float32 RGB sample multiplied by 2^30 is an exact integer in the declared [0,1] derivation domain"
+    },
+    "motionFixedPoint": {
+      "fractionBits": 24,
+      "scale": 16777216,
+      "requirement": "the fractional part of q=(x+Vector.X,y-Vector.Y), multiplied by 2^24, is an exact integer"
+    },
+    "curvature": "Mx is the per-channel maximum absolute horizontal second difference at x0 and x0+1 on rows y0 and y0+1; My is the analogous vertical maximum at y0 and y0+1 on columns x0 and x0+1; all colors are signed Q30 integers",
+    "riskNumerator": "2 * (Fx*(2^24-Fx)*Mx + Fy*(2^24-Fy)*My)",
+    "riskQ30": "ceil(riskNumerator / 2^48) + 512, saturated to uint32 maximum",
+    "calibrationFactor": 4,
+    "roundingAllowanceQ30": 512,
+    "riskThresholdQ30Inclusive": 131072,
+    "riskThresholdSceneLinear": 0.0001220703125,
+    "qualityThresholdSceneLinear": 0.000030517578125,
+    "reconstruction": "unchanged four-tap float64 bilinear sum followed by one float32 cast; reconstruction is measured but not an input to the risk decision",
+    "fallback": "ineligible or risk-rejected pixels copy current float32 RGBA exactly in the future holdout"
+  },
+  "derivationGates": {
+    "dualPayloadByteIdentity": true,
+    "riskUnderboundRgbSamplesMaximum": 0,
+    "acceptedRgbMaximum": 0.000030517578125,
+    "acceptedRgbRmseMaximum": 0.000030517578125,
+    "minimumAcceptedToRadius2PerCell": 0.97,
+    "minimumAcceptedToRadius2PerOwner": 0.95,
+    "minimumRadius2PixelsForOwnerGate": 100,
+    "minimumSameIndexRiskRejectedPixels": 1,
+    "staticControlRetention": 1.0
+  },
+  "runtime": {
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "version": "v26.5.0"
+    }
+  },
+  "outputs": {
+    "root": "experiments/blender-motion-aware-curvature-risk-derivation-v0-1",
+    "arraysPerProducerAndFixture": [
+      "eligible.u8",
+      "accepted.u8",
+      "risk.q30.u32"
+    ]
+  },
+  "nextExperiment": {
+    "id": "B52-D12.9-H1",
+    "requirements": [
+      "freeze unseen Blender 5.2 fixtures, transforms, materials, resolutions, tool hashes and verdict mapping before any formal render",
+      "recompute structural validity rather than importing D12.8 masks",
+      "measure predicted-depth agreement only on analytically valid history and count expected depth rejection in a separate domain",
+      "require non-empty useful coverage for every moving analytic owner",
+      "retain exact current-RGBA fallback and zero false acceptance of invalid history",
+      "treat this D12.8-derived candidate and both thresholds as fixed; no post-hoc widening"
+    ]
+  },
+  "nonClaims": [
+    "D12.9-D1 is post-hoc on D12.8 and is not a holdout.",
+    "It does not show that finite second differences are a mathematical upper bound for arbitrary rendered signals.",
+    "It does not validate curved or deforming geometry, path-traced lighting, transparency, motion blur, depth of field, denoising, cinematic quality or production use.",
+    "Only a future preregistered fresh Blender 5.2 experiment may test generalization."
+  ]
+}
