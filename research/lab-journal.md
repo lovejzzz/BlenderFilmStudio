@@ -1303,6 +1303,20 @@ Next: preregister B48 as a quality/cost ladder. Sampling, denoising and motion b
 
 Artifacts: `specs/codex-worker-production-pass-promotion.v0.1.json`, `experiments/codex-worker-production-pass-promotion-v0-1/`, `research/2026-08-26-b47-codex-worker-production-pass-promotion-protocol.md` and `research/2026-08-26-b47-codex-worker-production-pass-promotion-result.md`.
 
+## J-077 · B48-D1 reveals a multi-objective sampling/denoising cost curve
+
+Date: 2026-08-26 · Type: LIVE DERIVATION · Runtime: Blender 5.2 Linux/amd64 Cycles CPU worker
+
+B48-D1 froze its seven-cell order at `ed39580fa2a6814b28f9d981289e32d74ee6f60f` and its tools at `a48caada5d6db80c499a47f62fcd0ddd40805528`. One worker rendered the same B44 TABLETOP-A1 frame at 8/32/128 spp raw, the same three sample counts with OpenImageDenoise, and 512 spp raw as a numerical reference. Source, frame, seed, 128×72 resolution, four threads, ACES 2 OCIO, production-pass roster, motion-blur-off state and container boundary remained fixed.
+
+Raw render time rose from 0.807 seconds at 8 spp to 2.537 at 32, 9.558 at 128 and 27.460 at 512. OIDN cells took 17.350, 19.209 and 26.316 seconds: on this worker, denoiser overhead dominated low-sample render cost. OIDN improved log-luminance RMSE at every sample count, but at 32 and 128 spp it increased both scene-linear normalized RMSE and top-10%-edge RMSE relative to the matched raw cell. The 128-spp raw cell was faster than every denoised cell and had lower linear/edge error than all of them against the current reference.
+
+Denoising also changed the production representation: the EXR gained an eighth `Noisy Image` subimage and grew from the raw 242–274 KB range to 354–378 KB. All Combined arrays were finite, and a replay of the frozen analyzer produced the same SHA-256 `f2469f76…745d`.
+
+No production point is promoted. The single 512-spp reference shares a seed with candidates and is not noiseless ground truth; the one-process run also confounds order with warm state. Next: render independent high-sample references in fresh workers, measure the reference floor, then freeze a multi-objective formal gate instead of inventing one scalar “cinematic” score.
+
+Artifacts: `experiments/codex-worker-quality-cost-ladder-derivation-v0-1/`, `research/2026-08-26-b48-d1-quality-cost-ladder-derivation-protocol.md` and `research/2026-08-26-b48-d1-quality-cost-ladder-derivation-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
