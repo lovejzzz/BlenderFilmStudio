@@ -37,7 +37,7 @@ export default function BlenderProjectiveSubpixelReconstructionPage() {
   return <main className="contact-page b51-page b52-page d11-page d111-page d12p-page">
     <header className="topbar">
       <a className="brand" href="../"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></a>
-      <nav aria-label="D12 导航"><a href="../blender-nearest-integer-temporal-recovery-v0-1/">D11.1</a><a href="#verdict">结论</a><a href="#matrix">运动测量</a><a href="#evidence">诊断图</a><a href="#audit">审计</a><a href="../journal/">日志</a></nav>
+      <nav aria-label="D12 导航"><a href="../blender-nearest-integer-temporal-recovery-v0-1/">D11.1</a><a href="#verdict">结论</a><a href="#matrix">运动测量</a><a href="#evidence">诊断图</a><a href="#audit">审计</a><a href="../blender-static-vector-floor-v0-1/">D12.2 静态底噪</a><a href="../journal/">日志</a></nav>
       <span className="edition contact-edition">Projective Subpixel D12</span>
     </header>
 
