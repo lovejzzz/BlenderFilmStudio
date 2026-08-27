@@ -2247,6 +2247,22 @@ Frozen spec SHA-256: `c4cb343672f53660d7c4ab69ccd489e00bb211e4aa1f489429f7a626ee
 
 Artifacts: `specs/blender-nearest-integer-temporal-recovery-holdout.v0.1.json` and `research/2026-08-27-b52-d11-1-nearest-integer-temporal-recovery-holdout-protocol.md`.
 
+## J-140 · D11.1 development smoke crosses the real Blender bridge exactly
+
+Date: 2026-08-27 · Type: PRE-FREEZE DEVELOPMENT TOOLCHAIN SMOKE · Formal outputs: 0
+
+Thirteen D11.1 formal-tool candidates now implement the preregistered 81-process boundary. The new interface is explicit: the unchanged raw multipart adapter feeds independent scalar Python and Node nearest-integer quantizers; matching-language accumulators then retain `int()` / `Math.trunc()` over exact integral float32 motion. The analyzer and audit independently reconstruct quantization and accumulation rather than importing either tested implementation.
+
+Ten zero-formal-output contract tests passed. They exercised inclusive `1/1024` acceptance, the first representable float32 outside the radius, exact and adjacent half-integers, NaN and infinities, signed-zero canonicalization, idempotence, alternative integerizers, whole-array atomic rejection and Python/Node CLI byte identity. A development rejection containing one `0.25` component left neither output payload nor success report for both languages.
+
+A separate nine-process real-Blender smoke used only `QUANTIZED_OCCLUSION_OBJECT_XY_199X109`: two fresh Cycles source renders, one adapter, two quantizers, two accumulators, one EXR encoder and one Blender compositor bridge. Python and Node produced the same quantized-motion SHA-256 `ee367cf33a216c8f266cd6ce1a58e0a676e8b0e4de8b46553b670f0d34b0123a` and the same five accumulator arrays. The resolved canonical array SHA-256 was `85f7994bb2b508c6f5e0ca3d90b83c078aa29cdb4d552a238232114355e48b6a`, with 20,763 valid pixels. Blender bridge decode changed zero float32 scalars.
+
+The smoke occupied approximately 3.9 MB and was deleted after measurement. It is design evidence only: it contains one fixture, one source repeat and one bridge repeat, so it cannot satisfy any D11.1 formal gate. Blender 5.2 also emitted two Blender-6.0 deprecation warnings for `World.use_nodes` and `Material.use_nodes`; they did not change exit status or bytes and are retained as a future migration concern.
+
+Next: freeze the exact thirteen tools in Git, run the zero-formal-output identity/API/disk preflight against that commit, and admit the 81-process matrix only if the unchanged 100 GiB reserve passes.
+
+Artifacts: `blender/render_b52_d11_1_textured_source.py`, `scripts/quantize-b52-d11-1-motion.py`, `scripts/quantize-b52-d11-1-motion.mjs`, `scripts/analyze-b52-d11-1-nearest-integer-recovery.py` and the remaining paths frozen by `formalToolPaths` in the D11.1 spec.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
