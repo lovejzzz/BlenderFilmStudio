@@ -1643,6 +1643,22 @@ The formal D2 output root remains absent. Next is the unchanged 54-process run, 
 
 Artifact: `experiments/native-cpu-adaptive-production-preflight-v0-1/observation.json`.
 
+## J-099 · B52-D2 finds a real cost curve but no production-safe global point
+
+Date: 2026-08-27 · Type: CONFIRMATORY NATIVE CPU HOLDOUT · Runtime: 54 fresh Blender 5.2 processes
+
+D2 replaced the invalid fixed control with the explicitly configured production baseline `adaptive=true / threshold=0.01 / min=0 / max=128`. Six baseline cells passed beauty, Sample Count, Cryptomatte structure and three-repeat exactness. All 54 processes completed with unique PIDs and zero timeouts; all 18 profile × variant groups reproduced eight decoded parts across three repeats exactly.
+
+The cost mechanism is real. Every candidate reduced median mean effective samples on both scenes. Five of eight profiles saved at least 20% render time on both scenes; the highest worst-scene saving was 44.79% at 0.05/min32.
+
+No profile passed the joint production contract. TABLETOP beauty passed through threshold 0.03, but INTERIOR failed from the mildest 0.015 profile onward. Depth passed all 48 candidate cells with zero measured difference under the D6 domains. Cryptomatte passed 0/48: even 0.015/min0 produced 7 TABLETOP hard-matte mismatches and 15 INTERIOR confident-ID / 30 hard-matte mismatches. Normal and Vector were non-exact in 48/48 cells.
+
+The result is a valid negative: `NATIVE_CPU_ADAPTIVE_PRODUCTION_HOLDOUT_NOT_SUPPORTED`, selected profile null, base failure null, 22/22 attacks. The independent audit reproduced results byte-exactly and matched seven frozen tools, every bound input and 54/54 EXRs.
+
+Next: a zero-rerender B52-D3 must derive task-specific Crypto/Normal/Vector semantics from the retained EXRs without retroactively promoting D2. A separate fresh-seed experiment may then test a scene-conditioned fine threshold curve; INTERIOR beauty prevents any current global promotion.
+
+Artifacts: `experiments/native-cpu-adaptive-production-holdout-v0-1/`, `research/2026-08-27-b52-d2-native-cpu-adaptive-production-holdout-result.md` and `specs/native-cpu-adaptive-production-holdout.v0.1.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
