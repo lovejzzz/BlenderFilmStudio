@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityDerivationIndependentAudit.v0.2",
+  "experimentId": "B41-D1-C1",
+  "analysis": {
+    "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityDerivationAnalysis.v0.2",
+    "passed": true,
+    "failures": [],
+    "baseAnalysis": {
+      "schemaVersion": "bfs.linuxAmd64BlenderBinaryIdentityDerivationAnalysis.v0.1",
+      "passed": true,
+      "failures": [],
+      "decision": "LINUX_AMD64_BLENDER_EXECUTABLE_IDENTITY_DERIVED"
+    },
+    "decision": "LINUX_AMD64_BLENDER_EXECUTABLE_IDENTITY_DERIVED"
+  },
+  "observedToolHashes": {
+    "runner": "60d839c408e21ae157ec08098936975be243037557309c687ea2a15d0138899b",
+    "library": "d105d3ef5d6e6e342259f3a4d19dd62d19486b2cd260bdf982276e9fe618b559",
+    "audit": "20a560808d3eca9a5b40aa975ae1c9f7ffe591ce905784604834e398cd39d0cc"
+  },
+  "toolsMatch": true,
+  "replayedAttacks": [
+    {
+      "id": "archive-sha",
+      "expectedFailure": "ARCHIVE_IDENTITY",
+      "observedFailure": "ARCHIVE_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "archive-bytes",
+      "expectedFailure": "ARCHIVE_IDENTITY",
+      "observedFailure": "ARCHIVE_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "member-cardinality",
+      "expectedFailure": "MEMBER_IDENTITY",
+      "observedFailure": "MEMBER_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "guest-hash",
+      "expectedFailure": "DERIVATION_AGREEMENT",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "guest-bytes",
+      "expectedFailure": "DERIVATION_AGREEMENT",
+      "observedFailure": "DERIVATION_AGREEMENT",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "elf-machine",
+      "expectedFailure": "ELF_IDENTITY",
+      "observedFailure": "ELF_IDENTITY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "temp-retained",
+      "expectedFailure": "CLEANUP_BOUNDARY",
+      "observedFailure": "CLEANUP_BOUNDARY",
+      "rejected": true,
+      "passed": true
+    },
+    {
+      "id": "runtime-op",
+      "expectedFailure": "OPERATION_BOUNDARY",
+      "observedFailure": "OPERATION_BOUNDARY",
+      "rejected": true,
+      "passed": true
+    }
+  ],
+  "attacksMatch": true,
+  "attackCountExact": true,
+  "attacksPass": true,
+  "passed": true
+}

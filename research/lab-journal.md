@@ -1129,6 +1129,18 @@ Status: `REJECTED_GUEST_DECOMPRESSOR_AND_PIPELINE_FAILURE`. B41-D1-C1 may change
 
 Artifacts: `experiments/linux-amd64-blender-binary-identity-derivation-v0-1/` and `research/2026-08-26-b41-d1-guest-empty-stream-failure.md`.
 
+## J-064 · B41-D1-C1 derives and audits the Linux executable identity
+
+Type: preregistered guest-reader correction and independently audited identity derivation, 2026-08-26.
+
+The exact `384441228`-byte official archive matched SHA-256 `96f6c181…351c48`, and the executable member appeared once. Host bsdtar/Node and Colima Python 3.12.3 `tarfile/lzma` independently streamed the member. Both measured `174666336` bytes and SHA-256 `83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27`.
+
+The ELF header was ELF64, little-endian, x86-64. The archive was removed, no Blender/image/container operation occurred, 8/8 attacks produced their expected primary reason, and independent audit passed tool identity and exact replay.
+
+Verdict: `LINUX_AMD64_BLENDER_EXECUTABLE_IDENTITY_DERIVED`. This is an identity result only. A separate B41 runtime correction must bind it before any launch, render, containment or timeout claim.
+
+Artifacts: `experiments/linux-amd64-blender-binary-identity-derivation-v0-2/` and `research/2026-08-26-b41-d1-c1-linux-binary-identity-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
