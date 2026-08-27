@@ -1,0 +1,329 @@
+{
+  "schemaVersion": "bfs.deterministicDisplaceCalibration.v0.1",
+  "experimentId": "B52-D6",
+  "status": "PREREGISTERED_BEFORE_FORMAL_TOOL_IMPLEMENTATION_OR_OUTPUT",
+  "question": "Does Blender 5.2's CPU compositor Displace node reproduce an independently implemented destination-sampled RGBA warp exactly for frozen integer, subpixel, varying-field and boundary-extension fixtures across fresh processes?",
+  "parents": {
+    "d5Result": {
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/results.json",
+      "sha256": "b436f8c9905ff08c322bef3d7a9fa950bf7934b3f7d93ae25fcbabdc5b06862e",
+      "verdict": "CONTROLLED_VECTOR_BLUR_TASK_CALIBRATION_INVALID",
+      "baseFailure": "STATIC_NEGATIVE_CONTROL"
+    },
+    "d5Audit": {
+      "uri": "experiments/controlled-motion-vector-blur-calibration-v0-1/audit.json",
+      "sha256": "fb2b2246c24696e6aef52dbb18c83fe4d69e21353aba457d948279322cc3feb5",
+      "status": "PASS"
+    },
+    "exploratoryObservation": {
+      "uri": "experiments/deterministic-warp-preflight-v0-1/attempt-2/observation.json",
+      "sha256": "c4203daaadeac547b4e6740c783cf296bbbd862518837632dc7097d62c40aab3",
+      "classification": "EXPLORATORY_NOT_FORMAL_NOT_PROMOTABLE"
+    },
+    "exploratoryColorspaceFailure": {
+      "uri": "experiments/deterministic-warp-preflight-v0-1/attempt-0.failure.json",
+      "sha256": "0a028b23bab1709797339808e5aecd5666ec40559f83c4613753df571d9bb3c2"
+    },
+    "exploratoryRnaCrash": {
+      "uri": "experiments/deterministic-warp-preflight-v0-1/rna-multi-node-removal-crash.failure.json",
+      "sha256": "fb46635a9f3dc718e2d3ec6a446a0d8d0ddf3d89cfc98e1ab6865d6bfdf43ffd"
+    },
+    "exploratoryProbe": {
+      "uri": "blender/probe_b52_d6_displace_semantics.py",
+      "sha256": "854b27c4d7b2d42b7afa49520616d22085e13b792950a62d6733a9cffa5666d6"
+    }
+  },
+  "normativeSources": [
+    {
+      "authority": "Blender Manual 5.2",
+      "url": "https://docs.blender.org/manual/en/5.2/compositing/types/transform/displace.html",
+      "use": "Displace accepts an image and a two-dimensional pixel displacement and exposes Nearest/Bilinear/Bicubic/Anisotropic interpolation plus Clip/Extend/Repeat extension"
+    },
+    {
+      "authority": "Blender Manual 5.2",
+      "url": "https://docs.blender.org/manual/en/5.2/compositing/types/transform/translate.html",
+      "use": "Translate documents the same interpolation and axis-specific extension vocabulary used to triangulate transform semantics"
+    },
+    {
+      "authority": "Blender Python API 5.2",
+      "url": "https://docs.blender.org/api/5.2/bpy.types.Scene.html",
+      "use": "Scene.compositing_node_group is the Blender 5 compositor binding"
+    }
+  ],
+  "runtime": {
+    "blenderExecutable": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "blenderExecutableSha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+    "blenderExecutableBytes": 183237520,
+    "version": "5.2.0 LTS",
+    "buildHash": "fbe6228777e7",
+    "buildPlatform": "Darwin",
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5"
+    },
+    "launchFlags": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "--python-exit-code",
+      "1"
+    ],
+    "environmentAllowlist": [
+      "PATH",
+      "LANG",
+      "LC_ALL",
+      "OCIO",
+      "TMPDIR",
+      "BLENDER_USER_CONFIG",
+      "BLENDER_USER_SCRIPTS"
+    ],
+    "compositorDevice": "CPU",
+    "threadsMode": "FIXED",
+    "threads": 1
+  },
+  "raster": {
+    "resolution": [
+      64,
+      48
+    ],
+    "decodedCoordinateSystem": "top-left origin; x increases right; y increases down; integer coordinates name pixel centers",
+    "storage": "RGBA float32 scene-linear Raw",
+    "sourceFormula": {
+      "R": "x / 64",
+      "G": "y / 64",
+      "B": "((3*x + 5*y) mod 64) / 64",
+      "A": "min(1, x / 16)"
+    },
+    "allFormulaConstantsAreExactlyRepresentableBinaryFractions": true
+  },
+  "referenceWarp": {
+    "implementationBoundary": "host Python and NumPy; must not import or execute the Blender worker",
+    "displacementSampling": "destination sampled at output integer coordinate (x,y)",
+    "sourceCoordinate": {
+      "u": "x - dx(x,y)",
+      "v": "y + dy(x,y)"
+    },
+    "nearest": "all Nearest fixtures use integer displacement; sample the single resolved integer coordinate",
+    "bilinear": "floor u/v, combine four RGBA taps with separable weights; resolve every tap independently through the frozen extension rule",
+    "clip": "an out-of-range tap is transparent black RGBA=(0,0,0,0)",
+    "extend": "clamp each axis to its nearest boundary coordinate",
+    "repeat": "apply Euclidean modulo independently to each axis",
+    "alpha": "sample and interpolate alpha as a fourth independent float32 channel",
+    "arithmetic": "NumPy float32; fixtures use only binary-exact source values, displacements and bilinear weights",
+    "canonicalArrayIdentity": "SHA-256 of C-contiguous top-left-row-major RGBA float32 little-endian bytes"
+  },
+  "fixtures": [
+    {
+      "id": "ZERO_NEAREST_CLIP",
+      "field": {
+        "dx": "0",
+        "dy": "0"
+      },
+      "interpolation": "Nearest",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "sensitivityRequired": false
+    },
+    {
+      "id": "POSITIVE_INTEGER_NEAREST_CLIP",
+      "field": {
+        "dx": "5",
+        "dy": "-3"
+      },
+      "interpolation": "Nearest",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "sensitivityRequired": true
+    },
+    {
+      "id": "NEGATIVE_INTEGER_NEAREST_CLIP",
+      "field": {
+        "dx": "-7",
+        "dy": "4"
+      },
+      "interpolation": "Nearest",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "sensitivityRequired": true
+    },
+    {
+      "id": "SUBPIXEL_BILINEAR_CLIP",
+      "field": {
+        "dx": "1/2",
+        "dy": "-1/4"
+      },
+      "interpolation": "Bilinear",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "sensitivityRequired": true
+    },
+    {
+      "id": "DESTINATION_STEP_NEAREST_CLIP",
+      "field": {
+        "dx": "0 if x < 32 else 3",
+        "dy": "-2 if y < 24 else 1"
+      },
+      "interpolation": "Nearest",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "sensitivityRequired": true
+    },
+    {
+      "id": "POSITIVE_INTEGER_NEAREST_EXTEND",
+      "field": {
+        "dx": "5",
+        "dy": "-3"
+      },
+      "interpolation": "Nearest",
+      "extensionX": "Extend",
+      "extensionY": "Extend",
+      "sensitivityRequired": true
+    },
+    {
+      "id": "POSITIVE_INTEGER_NEAREST_REPEAT",
+      "field": {
+        "dx": "5",
+        "dy": "-3"
+      },
+      "interpolation": "Nearest",
+      "extensionX": "Repeat",
+      "extensionY": "Repeat",
+      "sensitivityRequired": true
+    }
+  ],
+  "blenderMatrix": {
+    "freshProcessRepeats": 2,
+    "freshProcessPerFixtureRepeat": true,
+    "expectedProcesses": 14,
+    "expectedRenderCalls": 14,
+    "expectedCyclesRayRenders": 0,
+    "sourceBlendFilesOpened": 0,
+    "externalAssetsOpened": 0,
+    "output": {
+      "fileFormat": "OPEN_EXR",
+      "colorMode": "RGBA",
+      "colorDepth": "32",
+      "exrCodec": "ZIP"
+    },
+    "graph": {
+      "nodes": [
+        "CompositorNodeImage:BFS_D6_SOURCE",
+        "CompositorNodeImage:BFS_D6_DISPLACEMENT",
+        "CompositorNodeDisplace:BFS_D6_DISPLACE",
+        "NodeGroupOutput:BFS_D6_GROUP_OUTPUT"
+      ],
+      "links": [
+        "BFS_D6_SOURCE.Image->BFS_D6_DISPLACE.Image",
+        "BFS_D6_DISPLACEMENT.Image->BFS_D6_DISPLACE.Displacement",
+        "BFS_D6_DISPLACE.Image->BFS_D6_GROUP_OUTPUT.Socket_0"
+      ]
+    },
+    "rna": {
+      "sceneHasLegacyNodeTree": false,
+      "sceneBinding": "compositing_node_group",
+      "displaceInputs": [
+        [
+          "Image",
+          "Image",
+          "NodeSocketColor"
+        ],
+        [
+          "Displacement",
+          "Displacement",
+          "NodeSocketVector2D"
+        ],
+        [
+          "Interpolation",
+          "Interpolation",
+          "NodeSocketMenu"
+        ],
+        [
+          "Extension X",
+          "Extension X",
+          "NodeSocketMenu"
+        ],
+        [
+          "Extension Y",
+          "Extension Y",
+          "NodeSocketMenu"
+        ]
+      ]
+    }
+  },
+  "gates": {
+    "allProcessesExitZero": true,
+    "allPidsUnique": true,
+    "reportAndOutputRosterExact": true,
+    "allValuesFinite": true,
+    "decodedRepeatExact": true,
+    "referenceDecodedFloat32Exact": true,
+    "maximumAbsoluteError": 0.0,
+    "rmse": 0.0,
+    "pixelsAboveOneOver65536": 0,
+    "zeroFixtureMatchesAuthoredSourceExactly": true,
+    "minimumChangedPixelsAboveOneOver65536ForSensitiveFixture": 256,
+    "minimumMaximumAbsoluteChangeForSensitiveFixture": 0.0625,
+    "graphAndRnaExact": true,
+    "operationCountsExact": true
+  },
+  "diagnostics": {
+    "cases": [
+      "ZERO_NEAREST_CLIP",
+      "POSITIVE_INTEGER_NEAREST_CLIP",
+      "NEGATIVE_INTEGER_NEAREST_CLIP",
+      "SUBPIXEL_BILINEAR_CLIP",
+      "DESTINATION_STEP_NEAREST_CLIP",
+      "POSITIVE_INTEGER_NEAREST_EXTEND",
+      "POSITIVE_INTEGER_NEAREST_REPEAT"
+    ],
+    "perCase": [
+      "referenceRGBA",
+      "maximumAbsoluteError"
+    ],
+    "expectedPngs": 14,
+    "expectedSidecars": 14,
+    "referenceEncoding": "linear RGB clipped to [0,1], alpha ignored, round-half-up RGB8",
+    "errorEncoding": "t=clip(max-channel-absolute-error/(1/65536),0,1); RGB8=(t,t^2,0), round-half-up",
+    "sidecar": "canonical JSON binds source arrays, rendered EXR, reference float32 identity, PNG identity and decoded PNG identity"
+  },
+  "attacks": [
+    "PARENT_IDENTITY",
+    "RUNTIME_BINARY_IDENTITY",
+    "OCIO_IDENTITY",
+    "CASE_ROSTER",
+    "PROCESS_ROSTER",
+    "PID_UNIQUENESS",
+    "REPORT_SELF_HASH",
+    "SOURCE_FORMULA",
+    "DISPLACEMENT_FORMULA",
+    "RNA_CONTRACT",
+    "GRAPH_CONTRACT",
+    "OPERATION_COUNTS",
+    "OUTPUT_HASH",
+    "DECODED_REPEAT",
+    "REFERENCE_ARRAY_HASH",
+    "REFERENCE_MATCH",
+    "TASK_SENSITIVITY",
+    "DIAGNOSTIC_ROSTER",
+    "DIAGNOSTIC_SIDECAR",
+    "RESULT_SELF_HASH"
+  ],
+  "decision": {
+    "passVerdict": "DETERMINISTIC_DISPLACE_CALIBRATION_SUPPORTED",
+    "failVerdict": "DETERMINISTIC_DISPLACE_CALIBRATION_NOT_SUPPORTED",
+    "passPermits": "Use the frozen CPU warp as an independent oracle for the tested Blender 5.2 Displace modes, then preregister a separate layered/depth-aware temporal accumulation experiment.",
+    "failureAction": "Retain all outputs, identify the earliest failed semantic axis and either narrow to the passing primitive or replace Blender Displace with a fully external warp consumer.",
+    "nonClaims": [
+      "not an occlusion-aware or depth-aware warp",
+      "not a motion-blur integrator",
+      "not validation of Blender's Vector pass",
+      "not validation of adaptive sampling",
+      "not a production shot or cinematic-quality judgment",
+      "not a human perceptual result"
+    ]
+  },
+  "formalOutputRoot": "experiments/deterministic-displace-calibration-v0-1",
+  "projectedWriteBytes": 16777216,
+  "diskReserveBytes": 107374182400
+}

@@ -1795,6 +1795,20 @@ Per the preregistered decision rule, no adaptive-Vector holdout will be created.
 
 Artifacts: `experiments/controlled-motion-vector-blur-calibration-v0-1/` and `research/2026-08-27-b52-d5-controlled-motion-vector-blur-calibration-result.md`.
 
+## J-109 · B52-D6 freezes an independent pixel-warp oracle
+
+Date: 2026-08-27 · Type: PREREGISTERED DETERMINISTIC-WARP CALIBRATION · Formal outputs: 0
+
+D5 retired Blender Vector Blur as this branch's oracle, so D6 moves the definition of correctness outside Blender. Official 5.2 documentation and real RNA agree that Displace now consumes a two-dimensional pixel displacement directly and exposes interpolation plus per-axis extension; the legacy Scale X/Y inputs and `Scene.node_tree` path are absent.
+
+Three exploratory boundaries are retained. A mutation-heavy multi-node RNA comprehension crashed one zero-render process with exit 139, while fresh single-node read-only probes succeeded. The first pixel probe then failed before rendering because the bound ACES 2.0 configuration has no `Non-Color` enum; `Raw` is the valid data space. The final 8×6 real-compositor probe executed seven cases and found zero decoded float32 error for zero/integer/subpixel displacement, a destination-sampled step field, Clip/Extend/Repeat and changing alpha.
+
+Those observations freeze, but cannot satisfy, the formal contract. In top-left decoded coordinates the independent source lookup is `(u,v)=(x-dx,y+dy)`. Seven 64×48 analytic fixtures cover zero, positive/negative integer, binary-exact subpixel bilinear, a two-axis destination step field and both non-Clip extension modes. Each receives two fresh Blender processes: 14 unique PIDs, 14 compositor calls and zero Cycles ray renders. The Blender result and independent NumPy float32 reference must have identical canonical array hashes, and each nonzero task must separately pass a sensitivity gate.
+
+The formal output root is absent. The preregistered spec SHA-256 is `28d3c0b292b89d5d056d5521aececbfb6d88b70971d2b500fbff69d2498703be`; protocol SHA-256 is `ba567ec8c66094874b6d8304f0d40d1456bf2b5e19be84cd80088461b9e2b874`. Passing will validate only the tested 2D sampling primitive and permit a separate depth/layer-aware temporal experiment; it will not validate occlusion, motion blur, Vector, adaptive sampling or cinematic quality.
+
+Artifacts: `specs/deterministic-displace-calibration.v0.1.json`, `research/2026-08-27-b52-d6-deterministic-displace-calibration-protocol.md`, `blender/probe_b52_d6_displace_semantics.py` and `experiments/deterministic-warp-preflight-v0-1/`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

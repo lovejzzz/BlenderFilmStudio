@@ -1,0 +1,152 @@
+{
+  "blender": {
+    "binary": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "buildHash": "fbe6228777e7",
+    "pid": 19530,
+    "version": "5.2.0 LTS"
+  },
+  "cases": [
+    {
+      "bytes": 804,
+      "caseId": "zero_nearest_clip",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "interpolation": "Nearest",
+      "sha256": "6be1ba4047c8552d4448ffbd64074a3f4f87a9aab8cc5d5e18ac4ce06ab978db",
+      "vector": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "bytes": 811,
+      "caseId": "plus_x2_nearest_clip",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "interpolation": "Nearest",
+      "sha256": "d8606b4e182665e4733fe359800b951baa0bc72307ddd7b990c836a1cd925865",
+      "vector": [
+        2.0,
+        0.0
+      ]
+    },
+    {
+      "bytes": 801,
+      "caseId": "plus_y1_nearest_clip",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "interpolation": "Nearest",
+      "sha256": "4d396ca1c745f26d1431bb6ceb271e8fb9c7d46e3bbd5527b94cd14191e40b0b",
+      "vector": [
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "bytes": 848,
+      "caseId": "plus_x_half_bilinear_clip",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "interpolation": "Bilinear",
+      "sha256": "16a1187dfb0ae39f4ca2b5201e1dc2f0d8641992d7b369440076bd794acda9b7",
+      "vector": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "bytes": 815,
+      "caseId": "step_x_nearest_clip",
+      "extensionX": "Clip",
+      "extensionY": "Clip",
+      "interpolation": "Nearest",
+      "sha256": "178bb8e5f94fd0bc5fcdd6c813749ba212ac0cacf47444f6d9f0e86a4bddf217",
+      "vector": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "bytes": 810,
+      "caseId": "plus_x2_nearest_extend",
+      "extensionX": "Extend",
+      "extensionY": "Clip",
+      "interpolation": "Nearest",
+      "sha256": "5faf2c866cecd8161f56bc939b026715d1ca3609fd5aecbd0c4d22e4532cfe0a",
+      "vector": [
+        2.0,
+        0.0
+      ]
+    },
+    {
+      "bytes": 806,
+      "caseId": "plus_x2_nearest_repeat",
+      "extensionX": "Repeat",
+      "extensionY": "Clip",
+      "interpolation": "Nearest",
+      "sha256": "aa0ee304d44857aa0879bbfd5067f5b640c661a175200287e2bbe55b55c8a8ce",
+      "vector": [
+        2.0,
+        0.0
+      ]
+    }
+  ],
+  "classification": "EXPLORATORY_NOT_FORMAL_NOT_PROMOTABLE",
+  "comparisons": {
+    "plusX2Extend_shiftRight": 0.0,
+    "plusX2Repeat_shiftRight": 0.0,
+    "plusX2_shiftLeft": 1.0,
+    "plusX2_shiftRight": 0.0,
+    "plusXHalfBilinear_shiftRight": 0.0,
+    "plusY1_shiftDownDecoded": 1.0,
+    "plusY1_shiftUpDecoded": 0.0,
+    "stepXOutputSampled": 0.0,
+    "zeroVsAuthoredSource": 0.0
+  },
+  "operationCounts": {
+    "blenderProcesses": 1,
+    "cyclesRayRenders": 0,
+    "renderCalls": 7
+  },
+  "resolution": [
+    8,
+    6
+  ],
+  "rna": {
+    "binding": "Scene.compositing_node_group",
+    "displaceInputs": [
+      {
+        "default": "<bpy_float[4], NodeSocketColor.default_value>",
+        "identifier": "Image",
+        "name": "Image",
+        "type": "NodeSocketColor"
+      },
+      {
+        "default": "<bpy_float[2], NodeSocketVector2D.default_value>",
+        "identifier": "Displacement",
+        "name": "Displacement",
+        "type": "NodeSocketVector2D"
+      },
+      {
+        "default": "Nearest",
+        "identifier": "Interpolation",
+        "name": "Interpolation",
+        "type": "NodeSocketMenu"
+      },
+      {
+        "default": "Repeat",
+        "identifier": "Extension X",
+        "name": "Extension X",
+        "type": "NodeSocketMenu"
+      },
+      {
+        "default": "Clip",
+        "identifier": "Extension Y",
+        "name": "Extension Y",
+        "type": "NodeSocketMenu"
+      }
+    ],
+    "sceneHasLegacyNodeTree": false
+  },
+  "schemaVersion": "bfs.b52D6DisplaceExploratoryProbe.v0.1"
+}
