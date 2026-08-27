@@ -1487,6 +1487,22 @@ Next: use a pre-job Metal synchronization canary and unseen frames to freeze war
 
 Artifacts: `experiments/native-cycles-cache-state-derivation-v0-1/`, `specs/native-cycles-cache-state-derivation.v0.1.json`, `research/2026-08-27-b51-d2-cycles-cache-state-derivation-protocol.md`, `research/2026-08-27-b51-d2-c1-duration-parser-correction.md` and `research/2026-08-27-b51-d2-cycles-cache-state-derivation-result.md`.
 
+## J-089 · B51-H1 rejects a single cross-backend production contract
+
+Date: 2026-08-27 · Type: FORMAL NATIVE BACKEND HOLDOUT · Runtime: thirteen fresh native Blender 5.2 arm64 processes
+
+B51-H1 froze a fail-closed Metal canary and four deterministic compositions that had never been rendered in D1/D2. The canary passed before the matrix at 0.396386 seconds render, 0.14 seconds synchronization and 1.164752 seconds process wall. Each unseen composition then received one native CPU reference and two Metal candidates at the unchanged 512×288 / 128-spp / seven-pass profile.
+
+All eight Metal candidates rendered in 0.525–0.751 seconds and their within-Metal Combined NRMSE was only `5.4e−8–1.1e−7`. Warm readiness, timing and repeatability therefore passed.
+
+The image contract did not. CPU–Metal Depth was non-exact in all four compositions, and at least one active Cryptomatte layer was non-exact in every composition. This invalidates the inference from D1/D2's same-backend exactness to cross-backend exactness. `INTERIOR_CHAIR` also exceeded the frozen Combined limits: linear NRMSE `0.012599 > 0.0065`, log-luminance RMSE `0.003519 > 0.0016`, and edge RMSE `0.011479 > 0.0060`.
+
+The first analysis correctly returned a negative verdict but only 18/21 attacks because the real exact-pass failure masked later injected failures. C1 isolated attack baselines without changing evidence or thresholds. The first independent replay then exposed an output/evidence-root path coupling; C2 retained that failure and bound EXR lookup to the receipt directory. Corrected audit is PASS, 21/21 attacks and byte-exact replay. Verdict: `NATIVE_METAL_PRODUCTION_HOLDOUT_NOT_SUPPORTED`.
+
+Next: B51-D3 must localize changed Depth/Cryptomatte components and the `INTERIOR_CHAIR` beauty outlier from the retained EXRs without rerendering. Long-sequence stress is blocked until beauty and data-pass backend contracts are separated or newly justified.
+
+Artifacts: `experiments/native-metal-production-holdout-v0-1/`, `specs/native-metal-production-holdout.v0.1.json`, `research/2026-08-27-b51-h1-native-metal-production-holdout-protocol.md`, `research/2026-08-27-b51-h1-native-metal-production-holdout-result.md`, `research/2026-08-27-b51-h1-c1-negative-baseline-audit-correction.md` and `research/2026-08-27-b51-h1-c2-audit-evidence-root-correction.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
