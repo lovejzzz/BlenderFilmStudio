@@ -230,6 +230,7 @@ export default function Home() {
           <Link className="route-tab" href="/linux-amd64-compiler-repro-v0-1">Worker 编译复现</Link>
           <Link className="route-tab" href="/codex-to-blender-worker-v0-1">Codex → Blender</Link>
           <Link className="route-tab" href="/codex-worker-pixels-v0-1">Worker 浮点像素</Link>
+          <Link className="route-tab" href="/codex-worker-sequence-v0-1">Worker 连续序列</Link>
           <Link className="route-tab" href="/repeated-frame-mode-switch-v0-1">同 PID 模式</Link>
           <Link className="route-tab" href="/pass-domain-localization-v0-1">Pass 域定位</Link>
           <Link className="route-tab" href="/fixed-jitter-intervention-v0-1">固定抖动干预</Link>

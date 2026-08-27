@@ -1259,6 +1259,22 @@ Next: preregister a bounded short continuous-shot promotion from the same B44 sc
 
 Artifacts: `experiments/codex-worker-pixel-promotion-v0-1/failure.json`, `experiments/codex-worker-pixel-promotion-c1-v0-1/`, `specs/codex-worker-pixel-promotion.v0.1.json`, `specs/codex-worker-pixel-promotion-media-type-correction.v0.1.json`, `research/2026-08-26-b45-invalid-media-type-and-null-analysis.md` and `research/2026-08-26-b45-c1-codex-worker-pixel-promotion-result.md`.
 
+## J-074 · B44 `.blend` reaches exact bounded sequences and fresh-attempt recovery
+
+Date: 2026-08-26 · Type: LIVE EXPERIMENT · Runtime: Blender 5.2 Linux/amd64 Cycles CPU worker
+
+B46 was preregistered at commit `259cf3071b8ccd3884ecb3154a2dcc99380dec7b`, before its renderer, analyzer, runner or audit existed. The frozen intervention used the four B44 `.blend` outputs, two ordered eight-frame intervals, 128×72, eight samples, fixed shot seed and four CPU threads. Motion blur, denoising, animated seed, persistent data, compositing and sequencer were disabled. The tool set was frozen at `6895092342afae5c3860a2a7b62142f7de5c088f` before the first formal container.
+
+All four primary containers completed. TABLETOP-A1/A2 produced the same complete sequence hash `6dcea8c9…496c`; all 8 cross-build frame hashes and all 7 float32 temporal-delta hashes were exact, while each moving-camera transition changed 20,600–21,010 components. INTERIOR-A1/A2 produced the same complete sequence hash `334bdd26…e28c5`; all 8 frames and 7 transition hashes were exact, and the static control changed exactly zero components in every transition. Overall: 16/16 frame pairs and 14/14 temporal-delta pairs exact.
+
+The fifth container completed TABLETOP frame 21, durably recorded it, then exited 86 at the preregistered fault point. It left exactly one frame and no final report, so it was not promotable. The sixth container wrote to a new empty output root and reproduced all eight primary TABLETOP frames, all seven temporal deltas and the complete sequence hash exactly. This is evidence for a narrow discard-and-fresh-retry policy, not in-place resume or host-failure recovery.
+
+The independent audit re-decoded 40 successful EXRs, re-probed four eight-frame H.264 navigation carriers, reconstructed both pair comparisons and recovery comparison, and passed 21/21 attacks. Verdict: `B44_BLEND_TO_BOUNDED_SEQUENCE_EXACT_WITH_RECOVERY`. Evidence hash: `5781211095a441760a2878a3578cfab8f080d99ac881740aa8015e76e0c87f4b`.
+
+Next: preregister a production-representation and quality ladder. Separate multilayer EXR/AOV/Vector correctness, motion blur, sampling, denoising and render cost rather than bundling them into one “cinematic” claim. B46 does not establish complete shots, perceptual temporal quality, 4K, characters, GPU/Eevee, cross-host reproducibility, arbitrary scenes or production throughput.
+
+Artifacts: `specs/codex-worker-sequence-promotion.v0.1.json`, `experiments/codex-worker-sequence-promotion-v0-1/`, `research/2026-08-26-b46-codex-worker-sequence-promotion-protocol.md` and `research/2026-08-26-b46-codex-worker-sequence-promotion-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
