@@ -1141,6 +1141,18 @@ Verdict: `LINUX_AMD64_BLENDER_EXECUTABLE_IDENTITY_DERIVED`. This is an identity 
 
 Artifacts: `experiments/linux-amd64-blender-binary-identity-derivation-v0-2/` and `research/2026-08-26-b41-d1-c1-linux-binary-identity-result.md`.
 
+## J-065 · B41-C4 builds and launches amd64 Blender; canary enum is invalid
+
+Type: preregistered platform-binary correction, real Blender/container rejection, 2026-08-26.
+
+Buildx completed a `linux/amd64` image (`sha256:0ca8ce…1941b`). The constrained success container launched Blender 5.2.0 LTS build `fbe6228777e7`, loaded the frozen OCIO config and entered the mounted canary as uid 65532. It exited one because Blender 5.2 exposes render engines `BLENDER_EEVEE`, `BLENDER_WORKBENCH` and `CYCLES`; the canary used invalid `BLENDER_EEVEE_NEXT`.
+
+The independent timeout container reached READY, received TERM at about 30.0 seconds, recorded SIGTERM, received KILL at about 35.0 seconds and exited 137 as non-promotable. Cleanup left zero experiment containers. Audit matched tools/artifact absence and timeout state but correctly failed the overall success claim.
+
+A nonfatal PulseAudio warning also showed `/work/tmp` absent; it is recorded but was not the exit cause and will not be combined with the next correction. Status: `REJECTED_BLENDER_5_2_EEVEE_ENUM_MISMATCH`.
+
+Artifacts: `experiments/linux-amd64-blender-runtime-canary-v0-5/` and `research/2026-08-26-b41-c4-eevee-enum-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
