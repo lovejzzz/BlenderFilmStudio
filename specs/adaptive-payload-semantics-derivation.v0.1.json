@@ -229,7 +229,34 @@
       "vector-maximum-pair-endpoint-error"
     ],
     "pngCount": 18,
-    "mapping": "frozen linear or clipped mappings recorded in each PNG sidecar"
+    "mappings": {
+      "cryptomatte-maximum-alpha-error": {
+        "minimum": 0.0,
+        "clipMaximum": 0.05,
+        "unit": "absolute alpha"
+      },
+      "normal-angular-error-degrees": {
+        "minimum": 0.0,
+        "clipMaximum": 2.0,
+        "unit": "degrees"
+      },
+      "vector-maximum-pair-endpoint-error": {
+        "minimum": 0.0,
+        "clipMaximum": 0.015625,
+        "unit": "render-pass endpoint units"
+      }
+    },
+    "encoding": {
+      "normalization": "t = clip((value - minimum) / (clipMaximum - minimum), 0, 1)",
+      "rgb": [
+        "R = t",
+        "G = t * t",
+        "B = 0"
+      ],
+      "quantization": "round-to-nearest uint8 after multiplication by 255",
+      "fileFormat": "PNG RGB8"
+    },
+    "sidecar": "one canonical JSON file per PNG binding the map kind, source identities, mapping, decoded-value SHA-256 and PNG SHA-256"
   },
   "decisionRule": {
     "usableVerdict": "ADAPTIVE_PAYLOAD_SEMANTICS_DERIVATION_USABLE",

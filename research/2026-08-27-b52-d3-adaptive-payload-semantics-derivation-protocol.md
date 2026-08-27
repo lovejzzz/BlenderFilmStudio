@@ -52,7 +52,9 @@ D3 不允许把“non-exact”直接改写成“可接受”，也不允许把�
 
 ## 可视诊断
 
-为三个预先指定的代表 profile——最温和 `0.015/min0`、第一个双场景成本过门 `0.02/min32`、最高 savings `0.05/min32`——在两个构图各输出 Crypto maximum-alpha、Normal angle、Vector maximum-pair-error 三张 map，共 18 张 PNG。每张 sidecar 记录映射范围与源 identity。
+为三个预先指定的代表 profile——最温和 `0.015/min0`、第一个双场景成本过门 `0.02/min32`、最高 savings `0.05/min32`——在两个构图各输出 Crypto maximum-alpha、Normal angle、Vector maximum-pair-error 三张 map，共 18 张 PNG。
+
+映射不能在看过派生结果后自动伸缩：Crypto 固定裁剪到 `[0, 0.05]`，Normal 固定裁剪到 `[0, 2°]`，Vector 固定裁剪到 `[0, 1/64]`。令归一化值为 `t`，RGB8 固定编码为 `(t, t², 0)`。每张 canonical JSON sidecar 绑定 map kind、candidate/baseline identity、映射合同、decoded-value SHA-256 与 PNG SHA-256。
 
 ## 判定
 
