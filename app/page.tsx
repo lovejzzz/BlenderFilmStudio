@@ -254,6 +254,7 @@ export default function Home() {
           <Link className="route-tab" href="/blender-static-nonplanar-multiowner-v0-1">D12.3 多主体</Link>
           <Link className="route-tab" href="/blender-static-zero-headroom-localization-v0-1">D12.4 像素定位</Link>
           <Link className="route-tab" href="/blender-static-radius-intervention-v0-1">D12.5 半径干预</Link>
+          <Link className="route-tab" href="/blender-static-interior-risk-localization-v0-1">D12.6 局部风险</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>
