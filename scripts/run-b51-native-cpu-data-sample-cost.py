@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PREREGISTRATION_COMMIT = "c1cb85429b946fc8a22d540eb8186c43dbbc0023"
 SPEC_URI = Path("specs/native-cpu-data-pass-sample-cost-derivation.v0.1.json")
-SPEC_SHA256 = "66f64e05f51c0398c53352eabf5db601c976c672fae7b1244ba3c094f8d713e5"
+SPEC_SHA256 = "e504b5afa816271b70db6cfb5148eb664123817c8a5cd942595ff182d18730ae"
 INSPECTOR_PYTHON = Path("/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13")
 
 
