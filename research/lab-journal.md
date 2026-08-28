@@ -3141,6 +3141,20 @@ Preflight hash: `d4a8db392659b557fca6eea9842dbcf87a81be0814e03a3b643adb03ba998b3
 
 Artifact: `experiments/blender-material-index-owner-integration-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-210 · Material Index 把登记 alias 从 15 降到 0，但语义攻击审计待补
+
+Date: 2026-08-28 · Type: FORMAL RESULT WITH PROMOTION HOLD · Real Blender renders: 16
+
+D12.11-I1 在 66.44 秒内完成 74/74 unique children：16 source renders、8 adapters、16 dual consumers、32 typed envelopes、analyzer 与 audit 全部 exit zero。Tool-produced verdict 为 `MATERIAL_INDEX_OWNER_INTERVENTION_SAFE_BUT_COVERAGE_NOT_SUPPORTED`，18/19；raw audit 9/9。
+
+Primary endpoint 两次重复一致：critical fixture 的 H1 registered accepted-alias set 为 15，Material Index 接受其中 0；accepted-outside-true-owner-bilinear 为 0；全八 cell new accepted coordinates 为 0、false accepted invalid history 为 0。Combined/Depth/Vector/Object Index 与 H1 canonical arrays byte exact。Critical accepted 从 13,717 降至 13,003，`INVALID_OWNER` 从 0 变 4,187、`INVALID_DEPTH` 从 4,169 变 0；其他三个 fixtures 的 accepted counts 完全不变。Coverage 仍因 sweep 的 0.94558 cell ratio 与 0.94151 foreground retention 未过原门。
+
+收尾审查发现 formal analyzer 的 56 mutation rows 只做 `mutationNonce` 后的 canonical-hash sensitivity，并未真的执行 spec 预登记的 channel swap、token reuse、alias bit flip 等语义攻击。因此原始 measurements 与独立 raw audit 保留有效，但 56/56 的广义攻击覆盖声明尚未证明，结果暂不 promotion。下一步是先绑定整个 immutable root，再预登记独立 no-render adversarial audit；不得修改或重跑本 root。
+
+Result SHA-256: `3eaa1461a7fa8b9f74e3320e19e56efa1cde3e0ea05618c1e04239d082b88457`; evidence hash: `2cabaed16827e9d2c4a0baf2d02ee79ff20efb27f3d303045127a20a9e6acbac`; audit hash: `e1e49a0d06ebf3b3f46721f06d5857c105f1feee0127934a5ca57c234b054b12`; receipt hash: `843ce7bc952a211cafb49e2f8ba1580a614144070b079a72a9bcc398fd15065e`。
+
+Artifact: `research/2026-08-28-b52-d12-11-i1-formal-result-and-attack-gap.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

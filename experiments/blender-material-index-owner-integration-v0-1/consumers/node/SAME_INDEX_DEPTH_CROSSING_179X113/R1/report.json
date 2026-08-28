@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "bfs.blenderMaterialIndexOwnerConsumerReport.v0.1",
+  "experimentId": "B52-D12.11-I1",
+  "producer": "node",
+  "fixtureId": "SAME_INDEX_DEPTH_CROSSING_179X113",
+  "repeat": 1,
+  "pid": 44599,
+  "runtime": {
+    "node": "v26.5.0",
+    "nodeExecutableSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+  },
+  "adapter": {
+    "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/adapters/SAME_INDEX_DEPTH_CROSSING_179X113/R1/report.json",
+    "sha256": "8a1d394f0a2733503db4527c92acfb3e5863083cb5b778d89dd8965aa1bf9237",
+    "reportHash": "21559e385e6d7199e181cb777816ad2d430f1ba570ff15c93d71ed467baca8fb"
+  },
+  "reasonCodes": {
+    "UNREGISTERED": 0,
+    "INVALID_CURRENT_ORACLE": 1,
+    "INVALID_BOUNDS": 2,
+    "INVALID_OWNER": 3,
+    "INVALID_ALPHA": 4,
+    "INVALID_DEPTH": 5,
+    "VALID": 6
+  },
+  "projectionContract": {
+    "pixelCenter": "top-left integer pixel (x,y) denotes center ((x+0.5)/W,1-(y+0.5)/H)",
+    "cameraConvention": "Blender camera looks along local -Z; camera coordinates are transpose(R_camera_XYZ)*(world-cameraLocation)",
+    "sensorHeightMm": "sensorWidthMm*H/W",
+    "project": {
+      "u": "0.5+lensMm*cameraX/(-cameraZ*sensorWidthMm)",
+      "vBottom": "0.5+lensMm*cameraY/(-cameraZ*sensorHeightMm)",
+      "x": "u*W-0.5",
+      "yTop": "(1-vBottom)*H-0.5"
+    },
+    "currentSurface": "cast the current pixel-center ray through every declared bounded plane and select the nearest positive-depth hit; analyticOwnerId remains independent of Object Index",
+    "previousSurfacePoint": "inverse current owner transform maps the hit to owner-local coordinates; previous owner transform maps the same local point into world space",
+    "expectedVector": [
+      "previousX-currentX",
+      "currentYTop-previousYTop"
+    ],
+    "sampleCoordinateTopLeft": [
+      "currentX+Vector.X",
+      "currentY-Vector.Y"
+    ],
+    "predictedPreviousDepth": "negative previous-camera Z of the transformed current local surface point",
+    "independence": "the analyzer implements scalar Euler XYZ, pinhole, bounded ray-plane intersection, visibility and rigid transforms without bpy, bpy_extras, mathutils or consumer imports"
+  },
+  "structuralContract": {
+    "reasonPriority": [
+      "INVALID_CURRENT_ORACLE",
+      "INVALID_BOUNDS",
+      "INVALID_OWNER",
+      "INVALID_ALPHA",
+      "INVALID_DEPTH",
+      "VALID"
+    ],
+    "validWhen": [
+      "the current decoded owner and depth agree with the nearest analytic current surface",
+      "all four previous bilinear taps are in bounds",
+      "current alpha and all four previous tap alphas exceed 0.999",
+      "all four previous Object Index values equal current Object Index exactly",
+      "bilinearly sampled previous Depth matches transform-predicted previous-camera depth within max(1,predictedPreviousDepth)/1024"
+    ],
+    "sameIndexDepthRequirement": "SAME_INDEX_DEPTH_CROSSING uses equal passIndex on two analytic owners so owner-only validity must expose wrong-history candidates and depth must reject them",
+    "invalidFallback": "every structurally invalid registered current pixel copies current float32 RGBA exactly",
+    "forbidden": [
+      "direct previousDepth approximately equals currentDepth",
+      "owner-only acceptance in the same-index fixture",
+      "global depth epsilon not scaled by predicted depth",
+      "fixture-specific mask repair",
+      "reading future or target RGB to decide structural validity"
+    ]
+  },
+  "candidateContract": {
+    "baseDomain": "structurally valid AND current pixel and every current neighbor within Chebyshev radius 2 share current Object Index and alpha>0.999",
+    "support": "the previous-frame 4x4 rectangle [x0-1,x0+2] by [y0-1,y0+2] is in bounds, has one exact Object Index and alpha>0.999",
+    "colorQ30": "each previous float32 RGB sample multiplied by 2^30 must be an exact signed integer in the declared [0,1] domain",
+    "motionQ24": "the fractional parts Fx,Fy of q=(x+Vector.X,y-Vector.Y), multiplied by 2^24, must be exact integers",
+    "curvature": "Mx is the maximum absolute horizontal Q30 second difference at x0 and x0+1 on rows y0 and y0+1; My is the analogous vertical maximum at y0 and y0+1 on columns x0 and x0+1",
+    "riskNumerator": "2*(Fx*(2^24-Fx)*Mx + Fy*(2^24-Fy)*My)",
+    "riskQ30": "ceil(riskNumerator/2^48)+512, saturated to uint32 maximum",
+    "accept": "baseDomain AND support AND max(riskQ30.RGB)<=131072; comparison is inclusive",
+    "reconstruction": "four-tap bilinear previous RGBA in y0x0,y0x1,y1x0,y1x1 order, explicit binary64 operation graph ((v0*w0+v1*w1)+v2*w2)+v3*w3 and one final float32 cast",
+    "fallback": "registered current pixels outside accept, including structural, radius-2, support and risk rejection, copy current float32 RGBA exactly",
+    "decisionInputs": [
+      "previous float32 RGB/alpha/Object Index",
+      "current float32 alpha/Object Index/depth",
+      "previous depth",
+      "current Blender Vector",
+      "compiler-known transforms and camera"
+    ],
+    "forbiddenDecisionInputs": [
+      "current RGB",
+      "next-frame RGB",
+      "future reconstruction error",
+      "fixture-specific thresholds"
+    ],
+    "subsetInvariants": [
+      "accepted is a subset of supportEligible",
+      "supportEligible is a subset of radius2",
+      "supportRejected and supportEligible partition radius2",
+      "accepted and riskRejected partition supportEligible"
+    ]
+  },
+  "arrays": {
+    "acceptedReconstructed": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/accepted-reconstructed.rgba32",
+      "sha256": "66bcb4e384ecaef59aa963904633439f821c5e911326704d6ee7267d8a4a25d8",
+      "bytes": 323632,
+      "shape": [
+        113,
+        179,
+        4
+      ],
+      "dtype": "little-endian-float32"
+    },
+    "reason": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/reason.u8",
+      "sha256": "6238acbfe4a1e6e99370a9bae5d1b69978e4dcc329c8ca2f42210b5a6ea06760",
+      "bytes": 20227,
+      "shape": [
+        113,
+        179
+      ],
+      "dtype": "uint8"
+    },
+    "analyticOwner": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/analytic-owner.u8",
+      "sha256": "4c2027dec230d0da60407e99e7c9ba24a021198777d464486e95160cd05731d9",
+      "bytes": 20227,
+      "shape": [
+        113,
+        179
+      ],
+      "dtype": "uint8"
+    },
+    "structuralValid": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/structural-valid.u8",
+      "sha256": "f80f5541aed37d5ba7608ecbea5769a45c73e40981f17ddd9665aff4e768b039",
+      "bytes": 20227,
+      "shape": [
+        113,
+        179
+      ],
+      "dtype": "uint8"
+    },
+    "radius2Interior": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/radius2-interior.u8",
+      "sha256": "ab26c4c8f501a9449f9aa031ede6c00291b1e622065bb45809eda04729047842",
+      "bytes": 20227,
+      "shape": [
+        113,
+        179
+      ],
+      "dtype": "uint8"
+    },
+    "supportEligible": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/support-eligible.u8",
+      "sha256": "528076d558d92fee2cc608c460f298b29c4f344062e13156250be420450142f6",
+      "bytes": 20227,
+      "shape": [
+        113,
+        179
+      ],
+      "dtype": "uint8"
+    },
+    "supportRejected": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/support-rejected.u8",
+      "sha256": "fdd0f8dd83771ded05cea9b40f0def20448b668cb29ced988d11b38c18554556",
+      "bytes": 20227,
+      "shape": [
+        113,
+        179
+      ],
+      "dtype": "uint8"
+    },
+    "accepted": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/accepted.u8",
+      "sha256": "528076d558d92fee2cc608c460f298b29c4f344062e13156250be420450142f6",
+      "bytes": 20227,
+      "shape": [
+        113,
+        179
+      ],
+      "dtype": "uint8"
+    },
+    "riskRejected": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/risk-rejected.u8",
+      "sha256": "087fd26748a61552aa34dc4b128127897e052da185eb3fab306ca0f973c19a64",
+      "bytes": 20227,
+      "shape": [
+        113,
+        179
+      ],
+      "dtype": "uint8"
+    },
+    "riskQ30": {
+      "uri": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-index-owner-integration-v0-1/consumers/node/SAME_INDEX_DEPTH_CROSSING_179X113/R1/arrays/risk.q30.u32",
+      "sha256": "64d122304c0ab6df5c37052d7a8e3850dfb50ee590c749e5dc0a65fa500b5e62",
+      "bytes": 242724,
+      "shape": [
+        113,
+        179,
+        3
+      ],
+      "dtype": "little-endian-uint32"
+    }
+  },
+  "operationCounts": {
+    "consumerProcesses": 1,
+    "pixelsVisited": 20227,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "reportHash": "52445c6cb2d676c861cca28d7d28d8ecb6d5f0973cce5001595170a18777acae"
+}
