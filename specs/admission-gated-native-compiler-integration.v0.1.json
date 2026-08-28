@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "bfs.admissionGatedNativeCompilerIntegrationSpec.v0.1",
+  "experimentId": "B54-E1",
+  "title": "Admission-gated native Blender 5.2 compiler integration",
+  "date": "2026-08-28",
+  "hypothesis": "The B53-E1 admission module can guard the real restricted SceneSpec compiler entry with a relative evidence/output invocation, preserve total attempt receipts before Blender authorization, and still reproduce the frozen B01/B02 BuildPlan and canonical Blender structure identities across two fresh native builds per benchmark.",
+  "parentEvidence": {
+    "admissionTotality": {
+      "experimentId": "B53-E1",
+      "toolFreezeCommit": "4c028c455357e14d4248767e1d3c33354f0e3a7d",
+      "results": {
+        "uri": "experiments/formal-runner-admission-path-totality-v0-1/results.json",
+        "sha256": "a5e58a5d925a1e3222ba5ee51f4b4d4db973ffcdef0dac64e6d1c2c4bdfb0c48",
+        "resultHash": "1b5d1dfd36de6689e2692c6fee3e3f853ca278523917c53aba61bbbd932ce33f"
+      },
+      "receipt": {
+        "uri": "experiments/formal-runner-admission-path-totality-v0-1/receipt.json",
+        "sha256": "e8655510dd49b3522af2ebc7b57b3c8a512bb3c55a48efc3950c9aa9c38da68e",
+        "receiptHash": "82169fc5a46681c4ba1b3a995e574eb372809eceb3f96047a284a2d54d5880b9"
+      },
+      "admissionLibrary": {
+        "uri": "scripts/lib/formal-run-admission.mjs",
+        "sha256": "382a06e82c815b69539edf6211bd3d9db28a05c2aa49d1f7a6ddaed61f18f67a"
+      }
+    },
+    "coreCompilerRevalidation": {
+      "verdict": "CORE_SCENESPEC_BUILDPLAN_BLENDER52_B01_B02_REPRODUCIBILITY_REVALIDATED",
+      "uri": "research/2026-08-28-post-h2-core-compiler-revalidation.md"
+    }
+  },
+  "freshness": {
+    "checkedAbsentBeforeThisSpec": [
+      "specs/admission-gated-native-compiler-integration.v0.1.json",
+      "research/2026-08-28-b54-e1-admission-gated-native-compiler-integration-protocol.md",
+      "scripts/preflight-b54-e1-admission-gated-native-compiler.mjs",
+      "scripts/run-b54-e1-admission-gated-native-compiler.mjs",
+      "scripts/audit-b54-e1-admission-gated-native-compiler.mjs",
+      "experiments/admission-gated-native-compiler-preflight-v0-1",
+      "experiments/admission-gated-native-compiler-attempt-v0-1",
+      "experiments/admission-gated-native-compiler-v0-1"
+    ],
+    "newToolPaths": [
+      "scripts/preflight-b54-e1-admission-gated-native-compiler.mjs",
+      "scripts/run-b54-e1-admission-gated-native-compiler.mjs",
+      "scripts/audit-b54-e1-admission-gated-native-compiler.mjs"
+    ],
+    "preflightRoot": "experiments/admission-gated-native-compiler-preflight-v0-1",
+    "attemptRoot": "experiments/admission-gated-native-compiler-attempt-v0-1",
+    "formalRoot": "experiments/admission-gated-native-compiler-v0-1",
+    "requirements": [
+      "Commit and push this exact spec and protocol before creating any B54-E1 tool byte or output root.",
+      "Commit and push all three new exact tool bytes before creating the preflight root.",
+      "Run one zero-Blender preflight; commit and push accepted preflight evidence before creating attempt/formal roots.",
+      "The formal runner is single-use. Retain every partial output; any repair requires a new experiment ID."
+    ]
+  },
+  "runtime": {
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "version": "v26.5.0",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+    },
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "version": "Blender 5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"
+    },
+    "git": {
+      "executable": "/usr/bin/git",
+      "originRef": "origin/main"
+    },
+    "forbidden": [
+      "network access",
+      "model calls",
+      "Docker or Colima",
+      "bpy.ops.render or any image render",
+      "reuse or deletion of a pre-existing experiment output"
+    ]
+  },
+  "inputs": {
+    "benchmarks": [
+      {
+        "id": "B01",
+        "sceneSpecUri": "specs/benchmarks/B01.scene.json",
+        "sceneSpecSha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4",
+        "expectedPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+        "expectedStructureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b"
+      },
+      {
+        "id": "B02",
+        "sceneSpecUri": "specs/benchmarks/B02.scene.json",
+        "sceneSpecSha256": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16",
+        "expectedPlanHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+        "expectedStructureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+      }
+    ],
+    "outputSpec": {
+      "uri": "specs/output-spec.v0.1.json",
+      "sha256": "d492cfcf6a3ec1b5539735b4a46052456e330acea2b6e47c5ab5efcced6b9705"
+    },
+    "sceneSpecSuiteExpected": "22/22"
+  },
+  "intervention": {
+    "admission": {
+      "module": "scripts/lib/formal-run-admission.mjs",
+      "formalEvidenceCliShape": "repository-relative preflight root",
+      "formalOutputCliShape": "repository-relative fresh formal root",
+      "originRef": "origin/main",
+      "attemptLedger": "Create the separately declared fresh attempt root and self-hashed attempt.json before calling admitFormalRun(). On accept write admission.json plus receipt.json before formal-root materialization; on reject write failure.json plus receipt.json with scientificVerdict null.",
+      "authorizationBoundary": "No Blender or restricted compiler process may start before accepted admission and its receipt are durable."
+    },
+    "buildPlan": {
+      "method": "Call current compileBuildPlan() twice per benchmark in the formal runner, require canonical wrapper byte identity, require the frozen plan hash, and write one formal BuildPlan per benchmark only after admission.",
+      "compilerSourceUnchanged": true
+    },
+    "nativeCompiler": {
+      "entry": "scripts/run-restricted-blender-compile.mjs",
+      "runs": ["B01-A", "B01-B", "B02-A", "B02-B"],
+      "freshOutputPerRun": true,
+      "factoryStartup": true,
+      "disableAutoexec": true,
+      "renderCalls": 0,
+      "currentCompileReceiptRequired": true,
+      "currentReceiptVerifierRequired": true,
+      "blendArtifactAuditRequired": true
+    },
+    "existingProductionToolChanges": "none"
+  },
+  "preflightContract": {
+    "blenderProcesses": 0,
+    "blenderRenderCalls": 0,
+    "requirements": [
+      "Exact preregistration, B53 parent evidence, Node/Blender binary identities and all frozen tool hashes.",
+      "All spec/tool/input paths tracked-clean and tool-freeze commit pushed to origin/main.",
+      "SceneSpec suite remains 22/22.",
+      "Two in-memory compileBuildPlan calls per benchmark are canonical-byte exact and equal frozen plan hashes.",
+      "Relative preflight/formal path spellings pass a no-output admission-shaped component probe without creating attempt/formal roots.",
+      "Projected 512 MiB write leaves at least 100 GiB free.",
+      "Preflight, attempt and formal roots remain absent before accepted preflight creation."
+    ]
+  },
+  "formalOperationContract": {
+    "runnerProcesses": 1,
+    "restrictedCompileDirectChildren": 4,
+    "nativeCompileInvocations": 4,
+    "compileReceiptBlenderIdentityProbes": 4,
+    "independentAuditorProcesses": 1,
+    "receiptVerifierDirectChildren": 4,
+    "verifierBlenderIdentityProbes": 4,
+    "blendArtifactAuditDirectChildren": 4,
+    "caseCompilations": 4,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "processEvidenceBoundary": "Direct child PIDs/exit codes are exact. Nested Blender compile PIDs are bound by budget reports. Existing receipt/verifier Blender --version probes are counted semantically from their frozen code paths but are not independently PID-attributed."
+  },
+  "gates": [
+    "SPEC_PARENT_RUNTIME_AND_TOOL_IDENTITIES",
+    "ZERO_BLENDER_PREFLIGHT_ACCEPTED_AND_PUSHED",
+    "RELATIVE_PATH_FORMAL_ADMISSION_ACCEPTED",
+    "ATTEMPT_ADMISSION_AND_RECEIPT_SELF_HASH_EXACT",
+    "FORMAL_ROOT_MATERIALIZED_ONLY_AFTER_ADMISSION",
+    "SCENESPEC_SUITE_22_OF_22",
+    "BUILDPLAN_PAIR_CANONICAL_BYTES_EXACT",
+    "B01_B02_PLAN_HASHES_FROZEN",
+    "FOUR_FRESH_RESTRICTED_COMPILES_PASS",
+    "FOUR_CURRENT_COMPILE_RECEIPTS_VERIFY_19_CHECKS",
+    "B01_B02_PAIR_STRUCTURE_BYTES_EXACT",
+    "B01_B02_STRUCTURE_HASHES_FROZEN",
+    "FOUR_BLEND_EMBEDDED_BINDINGS_EXACT",
+    "NO_UNBOUND_OR_BACKUP_OUTPUT_FILES",
+    "DIRECT_PROCESS_AND_SEMANTIC_OPERATION_COUNTS_EXACT",
+    "MODEL_NETWORK_DOCKER_AND_RENDER_ZERO",
+    "INDEPENDENT_AUDIT_AND_SEMANTIC_ATTACKS_MINIMUM_24",
+    "VERDICT_MAPPING_OUTCOME_NEUTRAL"
+  ],
+  "auditContract": {
+    "independence": "The auditor must not import the B54 preflight or runner. It may invoke the already-existing current CompileReceipt verifier as an external child, and must independently reopen canonical structure bytes, manifests, BuildPlans, admission records and .blend files.",
+    "receiptVerification": "B01-A/B and B02-A/B each pass the current verifier with exactly 19 checks.",
+    "structureVerification": "Parse every scene.structure.canonical.json, require deep equality with its adjacent manifest structure, require both manifest hash bindings, require A/B byte identity per benchmark and the two frozen hashes.",
+    "blendVerification": "Run blender/audit_compiled_artifact.py on all four .blend files and require embedded planHash, structureHash, manifest version and Blender build hash bindings.",
+    "semanticAttacksMinimum": 24,
+    "verdictValidation": "Outcome-neutral: derive supported versus rejected from observed gates; a tool/process exception invalidates with scientificVerdict null."
+  },
+  "diskAdmission": {
+    "projectedWriteBytes": 536870912,
+    "minimumReserveBytes": 107374182400,
+    "observedBeforePreregistrationBytes": 109484290048
+  },
+  "decision": {
+    "supportedVerdict": "ADMISSION_GATED_NATIVE_COMPILER_INTEGRATION_SUPPORTED",
+    "supportedWhen": "All 18 gates pass, admission is durable before formal-root materialization, all four native compiles/receipts/blend audits pass, B01/B02 plan and structure identities remain frozen, and 24 or more semantic attacks are rejected.",
+    "rejectedVerdict": "ADMISSION_GATED_NATIVE_COMPILER_INTEGRATION_REJECTED",
+    "invalidated": "Any frozen tool/process failure produces scientificVerdict null, preserves partial evidence and forbids same-ID repair or rerun."
+  },
+  "nonClaims": [
+    "This does not repair or rerun B52-D12.14-H2.",
+    "This does not claim deterministic .blend container bytes.",
+    "This does not render pixels or prove cinematic image quality.",
+    "B01/B02 are minimal compiler benchmarks, not full actor, cloth, hair, simulation or production-lighting coverage.",
+    "Local Git ancestry and SHA-256 receipts are not signatures or remote attestation.",
+    "Nested Blender identity-probe subprocess PIDs are not independently attributed by existing production tools.",
+    "A supported result does not silently modify existing frozen runners or replace the public production entry alias."
+  ],
+  "promotionBoundary": "If supported, a later explicitly preregistered release step may expose the admission-gated wrapper as the preferred compiler entry. Existing runners remain immutable; any later compiler, receipt, admission or orchestration change must rerun the B01/B02 plan and structure regression gates."
+}

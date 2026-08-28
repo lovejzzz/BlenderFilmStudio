@@ -3840,3 +3840,15 @@ site source commit `c4eb406558b6c25fc87fe1e1ea537861e21dec0f` 推送后，GitHub
 同一source commit推送到Sites source repository并保存为version 79；archive content hash为 `sha256:cf74f1497a5abd78fc976d642df86a54ef4eb604219e29ce3a3de067e345f3d5`，共373 files、28,876,800 bytes。deployment `appgdep_6a918bd6e6288191a224ee9cded21e1f` succeeded。发布前再次验证current user为owner、access mode为custom、exactly one allowed account且其role为owner、external visitors为0、workspace/tenant groups为空；owner-only exact route匿名请求返回HTTP 401。Owner-only URL为 `https://blender-film-studio-research.skylab.chatgpt.site/formal-runner-admission-totality-v0-1/`。
 
 本地dev server已停止；发布临时archive目录已移入用户Trash。没有创建或刷新Sites screenshot，也没有执行视觉QA。B53-E1 publication至此封闭。下一阶段必须遵守promotion boundary：若把admission module接入production compiler orchestration，先建立新的integration preregistration，冻结采用边界与失败receipt semantics，并以B01/B02双净构建structure hashes作为不可回退的回归门。
+
+## J-271 · B54-E1 admission-gated native compiler integration 预登记
+
+Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender renders: 0
+
+在spec、protocol、三条new tool paths、preflight/attempt/formal roots全部确认不存在时，预登记 `B54-E1`。B53-E1只证明isolated formal admission totality；本实验冻结下一步最小integration：不修改现有production compiler files，新建single-use wrapper，在任何Blender授权前消费repository-relative preflight/formal paths并持久化attempt→admission/failure→receipt。
+
+正式runner必须从当前B01/B02 SceneSpecs各调用 `compileBuildPlan()` 两次，要求canonical wrapper byte exact及plan hashes `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf` / `a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687`；随后通过unchanged restricted CLI执行B01-A/B、B02-A/B四次fresh native Blender 5.2 compiles。Acceptance仍是canonical structure bytes pair-exact及frozen hashes `c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b` / `025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856`，不要求 `.blend` byte identity。
+
+Preflight冻结为0 Blender process：22/22 SceneSpec suite、B01/B02 in-memory dual compile、tool/Git/runtime identities、relative-path component boundary、three-root absence和512 MiB projection后100 GiB reserve。正式audit不import新preflight/runner；它外部调用current verifier要求4份receipt各19 checks，重开四份structure/manifests，以Blender审计四个 `.blend` embedded bindings并执行至少24项one-field attacks。正式语义计数冻结4 restricted compiles、4 native compile invocations、4 receipt identity probes、4 current verifier invocations、4 verifier identity probes、4 blend audits、1 runner与1 auditor；existing APIs不暴露八个Blender `--version` probe PIDs，必须明确作为非OS-attestation边界。
+
+Spec SHA-256为 `4453d24e7e2a36ca114435a979dc7501247b3da1f5ec0f394143356c058d30cd`；protocol SHA-256为 `8df4b9e239c5fa61aa12e6b7d539d2c3bf2e088be7ee2a52e8177badf227ac60`。18项gates全部通过才支持 `ADMISSION_GATED_NATIVE_COMPILER_INTEGRATION_SUPPORTED`；任何tool/process exception使scientificVerdict为null并禁止同ID修复重跑。下一动作只提交推送exact spec、protocol与本entry；远端preregistration commit形成前不得创建任何B54 tool byte或root。
