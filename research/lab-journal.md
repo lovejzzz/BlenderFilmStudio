@@ -3117,6 +3117,18 @@ Date: 2026-08-28 · Type: PUBLICATION CHECKPOINT · New Blender renders: 0
 
 Artifacts: `public/evidence/b52-d12-10-p1-c1/manifest.json`; `app/blender-owner-token-pass-v0-1/page.tsx`.
 
+## J-208 · D12.11-I1 Material Index owner integration 预登记
+
+Date: 2026-08-28 · Type: PAIRED INTERVENTION PREREGISTRATION · New formal Blender renders: 0
+
+D12.11-I1 被固定为配对的 post-hoc 因果干预，而不是新场景 holdout。它逐项继承 H1 的四个 fixture、两次 clean repeats、两帧、Cycles CPU、相机、几何、Object Index、Combined/Depth/Vector、投影 oracle、结构判定、Q30/Q24 算法、131072 inclusive threshold、quality/coverage/fallback/static gates；唯一语义变化是给八个 analytic owners 分配 shot-local Material Index 21101–21402，并让原 equality predicates 读取 Material Index。Object Index 继续输出并作为负对照，关键两 owner 仍共享 14555。
+
+Primary endpoint 在看见任何新 tool/render 前绑定到 C1 已登记集合：SAME_INDEX_DEPTH_CROSSING 每 repeat 有 17 个 Object Index bilinear aliases，其中 15 个被 H1 接受。成功要求新的 accepted-outside-true-owner-bilinear 与 accepted-on-registered-15 都为 0；全八 cell 不得出现任何 H1 之外的新 accepted coordinate，analytic invalid-history false accepts 也必须为 0。Combined、Depth、Vector 与 Object Index canonical arrays 必须逐字节等于 H1，避免把结果归因于场景或 render 变化。覆盖率阈值没有放宽，alias 消失不能掩盖 coverage failure。
+
+Formal matrix 预登记为 16 次新 Blender 5.2 Cycles CPU renders、74 个唯一 child processes、Python/Node dual consumers、typed envelopes、independent analyzer/audit 和至少 56 个 mutation attacks。Formal/preflight roots 与八个新工具路径在本条记录前均不存在；磁盘准入保留 100 GiB reserve。Spec SHA-256: `89dd3637ffe5af3544e8cd8aca8869eedd8b1a1867d41e08a354e5cd0c3b2a0e`。
+
+Artifact: `specs/blender-material-index-owner-integration.v0.1.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
