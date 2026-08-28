@@ -255,6 +255,8 @@ export default function Home() {
           <Link className="route-tab" href="/blender-static-zero-headroom-localization-v0-1">D12.4 像素定位</Link>
           <Link className="route-tab" href="/blender-static-radius-intervention-v0-1">D12.5 半径干预</Link>
           <Link className="route-tab" href="/blender-static-interior-risk-localization-v0-1">D12.6 局部风险</Link>
+          <Link className="route-tab" href="/blender-motion-aware-curvature-risk-holdout-v0-1">D12.9 新鲜运动门</Link>
+          <Link className="route-tab" href="/blender-owner-token-pass-v0-1">D12.10 Owner Token</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>

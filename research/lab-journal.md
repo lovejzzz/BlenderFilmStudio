@@ -3107,6 +3107,16 @@ P1-C1 runner 在 freeze commit `07eba7d` 后创建 fresh correction root；analy
 
 Artifact: `research/2026-08-28-b52-d12-10-p1-c1-owner-token-pass-result.md`.
 
+## J-207 · P1-C1 证据代理与研究页面固化
+
+Date: 2026-08-28 · Type: PUBLICATION CHECKPOINT · New Blender renders: 0
+
+从已接受 P1-C1 arrays 只读导出三张展示代理：共享 Object Index、离散 Material Index 与 filtered custom AOV。代理不作为新增测量，也不替代 EXR/NPY 原始证据；它们只把“无法区分、精确分类、边界混合”三种 pass 语义放进可审阅页面。Manifest SHA-256 为 `725893efcb13b72556b62f54dee3e4bd2c2ed5c3303a212433c1a7714536c003`，manifest hash 为 `b7746bfbd233a024f74854c2395f66f4d4ef9930e13852d57f7e0fa1a10e6650`。
+
+新增 `/blender-owner-token-pass-v0-1/` 研究 tab，明确保留原 P1 analyzer failure、P1-C1 post-hoc 限制、Material Index 0–32767 范围与 shared-material duplication 约束。全仓 lint 为 0 errors；新增页面定向 lint 为 0 errors / 0 warnings，补丁 whitespace check 通过。下一恢复点不是继续润色页面，而是预登记 fresh Material Index ownership integration：保持 H1 的 depth/alpha/vector/Q30/coverage/quality gates 不变，目标是把已定位的 15 个 same-index accepted aliases 降为 0，且不得产生新 false accepts。
+
+Artifacts: `public/evidence/b52-d12-10-p1-c1/manifest.json`; `app/blender-owner-token-pass-v0-1/page.tsx`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
