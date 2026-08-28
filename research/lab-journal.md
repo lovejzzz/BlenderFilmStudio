@@ -3852,3 +3852,13 @@ Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender renders: 0
 Preflight冻结为0 Blender process：22/22 SceneSpec suite、B01/B02 in-memory dual compile、tool/Git/runtime identities、relative-path component boundary、three-root absence和512 MiB projection后100 GiB reserve。正式audit不import新preflight/runner；它外部调用current verifier要求4份receipt各19 checks，重开四份structure/manifests，以Blender审计四个 `.blend` embedded bindings并执行至少24项one-field attacks。正式语义计数冻结4 restricted compiles、4 native compile invocations、4 receipt identity probes、4 current verifier invocations、4 verifier identity probes、4 blend audits、1 runner与1 auditor；existing APIs不暴露八个Blender `--version` probe PIDs，必须明确作为非OS-attestation边界。
 
 Spec SHA-256为 `4453d24e7e2a36ca114435a979dc7501247b3da1f5ec0f394143356c058d30cd`；protocol SHA-256为 `8df4b9e239c5fa61aa12e6b7d539d2c3bf2e088be7ee2a52e8177badf227ac60`。18项gates全部通过才支持 `ADMISSION_GATED_NATIVE_COMPILER_INTEGRATION_SUPPORTED`；任何tool/process exception使scientificVerdict为null并禁止同ID修复重跑。下一动作只提交推送exact spec、protocol与本entry；远端preregistration commit形成前不得创建任何B54 tool byte或root。
+
+## J-272 · B54-E1 Codex 升级重启前实现断点
+
+Date: 2026-08-28 · Type: OPERATIONAL CHECKPOINT / UNFROZEN IMPLEMENTATION · New Blender renders: 0
+
+用户准备升级并重启 Codex，因此在B54-E1正式工具冻结与任何native compile之前主动停止。preregistration commit `ad13c0bc7400a3e43b296449d8263f10e6a974af` 已与 `origin/main` 一致；此后只创建preflight候选 `scripts/preflight-b54-e1-admission-gated-native-compiler.mjs`。runner、independent auditor、preflight/attempt/formal roots均未创建，也未执行Blender、Docker/Colima、network、model或render工作。当前没有B54或Blender compile后台进程；macOS Blender thumbnailer app extension不属于本实验。
+
+候选preflight为315行，SHA-256为 `e650cf69b969c36564ec0c372250a7d2bdbb9de051262d80cb81a34af56f0e42`，并通过Node 26 `--check`。一次显式 `--development-probe` 返回PASS：SceneSpec suite 22/22；B01与B02各两次in-memory BuildPlan canonical bytes exact且frozen plan hashes分别为 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf` 与 `a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687`；repository-relative component admission ACCEPTED且probe output保持不存在；磁盘在512 MiB projection后预计剩余108,877,807,616 bytes，高于100 GiB reserve。该probe记录5个Git children、0 Blender processes与0 render calls，并明确没有创建formal roots。
+
+本文件只是可恢复的implementation checkpoint，不是tool-freeze、official preflight、formal evidence或scientific verdict。重启后的恢复入口：先审读并完善preflight异常失败持久化与字段命名，再实现single-use runner与不import preflight/runner的auditor；三工具完成后只能在不创建B54 roots的development mode验证。随后记录exact tool hashes、提交推送独立tool-freeze，确认远端一致后才允许调用一次official zero-Blender preflight。用户原有 `README.md` 修改与三份未跟踪research drafts继续排除于提交之外。
