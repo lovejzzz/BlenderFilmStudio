@@ -4465,3 +4465,15 @@ WAIT CLI projection correction commit `742484c8295ec8afa55ff7990542071a67933e98`
 C2 request file SHA/requestHash为 `46813afee135deaabbb3eee8c9bf0aad1ac4dc6000cc86777c432d87623b5b46` / `45b7d2b82dd50bf9c7d71bea8cb54bf52c3b2a9832a1bb6ffa109f0a60251ed9`，绑定tool-freeze commit `742484c8295ec8afa55ff7990542071a67933e98`、ledger SHA `0946685b…`与orchestrator SHA `d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a`。Expected outcome除C1的WAIT、zero duplicate与exact cleanup外，新增可机械审计条件：stdout的`waitProcess.pid`、`identityHash`、executable与argv SHA必须与ledger中`NATIVE_PROCESS_OBSERVED` exact一致。
 
 C2 execution roots与official B58 roots仍不存在。下一动作只提交推送C2 preflight/request与本entry，随后使用相同bounded harness最后执行一次。
+
+## J-329 · B58 live-process C2 exact native WAIT与zero-duplicate通过
+
+Date: 2026-08-28 · Type: DEVELOPMENT REAL-BLENDER LIVE-PROCESS PROBE · New Blender processes: 1 · New Blender renders: 0
+
+C2 preflight/request evidence commit `11f3946d35fb7d8e416737aa84e9f048af74f07a` 与`origin/main` exact后，bounded harness启动orchestrator/wrapper/native Blender PID 88257/88291/88452。Wrapper/native durable identity hashes为 `bf337a58783ef97f7f98c82e2b730461acb4fcce7fe9469d1472fb668b82f8cc` / `990c2aea6d4f3be27b87348a2ad6c6104b7b12cc51931d4e7dc1882897d93bcc`，native argv SHA为 `bc1872c2c0569b0fd9580a7177f913fdf49d0048697ddab41bef5800552dd8ef`。Native在SIGSTOP后state为`TNs`；orchestrator以143退出后，wrapper PPID已变1，native仍以PPID 88426存活。
+
+第二个resume以exit 0返回`WAIT_LIVE_PROCESS`，stdout新增的`waitProcess` exact投影PID 88452、executable `/Applications/Blender.app/Contents/MacOS/Blender`、identity hash `990c2a…`与argv SHA `bc1872…`，四项全部与sequence-6 `NATIVE_PROCESS_OBSERVED` byte-exact一致。`PROCESS_STARTED` / `NATIVE_PROCESS_OBSERVED`计数均保持1→1，ledger只因PLAN verified skip从6→7，compile仍STARTED，compile terminal receipt与production receipt均不存在，因此duplicate compiler/native/verifier spawn全部为0。
+
+采集后harness只对重新验证的native group发TERM+CONT并等待wrapper收尾；88257/88291/88452均确认消失，无Blender核心进程遗留。Output以`RESTRICTED_COMPILE` invalidation收尾，file SHA/self-hash为 `3af264ecbde2b317b22bb14c4bea6da1afd63160aeee373b46165a99101c99d5` / `56891da63425f64a27c46d7ce244efe8a0fb6761ef22441689055196b74a0896`，render/model/network/Docker为0。Job manifest self-hash为 `83268c9c21c469bc74944b5272841882df775f368d1391952bc416a56b48c324`，7-event ledger head为 `3e21bda971ecd594bbb260ff4e5d638f56605cb71474b9a6e4fc82b96bbfef27`。
+
+该development probe现在关闭真实live-process WAIT/zero-duplicate开发缺口，但仍不是B58 formal verdict。正常full chain、exit-86、native interruption/fresh retry和live WAIT四类真Blender development路径已齐。下一阶段是实现预登记的official single-use preflight、formal runner与不import execution modules的independent auditor，然后才能在三个冻结official roots上评定34/34 gates与至少64/72 attacks。
