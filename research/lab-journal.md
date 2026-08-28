@@ -4593,3 +4593,13 @@ Parameterized tool commit `fe43248` 推送后，fresh临时sparse clone以显式
 Rehearsal final为可信`BLOCKED_HOST_STABILITY`，19/20 gates；磁盘已通过，available 112,283,795,456 bytes、门上余量77,774,848 bytes。唯一失败为`CODEX_TREE_RSS`：4,321,673,216 bytes，超4 GiB ceiling 26,705,920 bytes。额外浏览器检查显示当前in-app browser为0 session tabs / 0 user tabs，因此没有可关闭标签，未执行close或打开新页面。
 
 实际R1 formal root仍不存在。下一动作提交推送本entry后执行真实R1；若RSS仍失败，则保留正式阻断证据并在可恢复断点请求重启Codex，不发送宽泛process signals。
+
+## J-342 · B59-G0-R1真实readmission：磁盘恢复，当前Codex会话RSS阻断
+
+Date: 2026-08-28 · Type: FORMAL HOST READMISSION / RESTART CHECKPOINT · New Blender processes: 0 · New Blender renders: 0
+
+Release commit `9ca67eba93e6937657b1d8b34519d8718961c5e2` 与`origin/main` exact后，真实R1 single-use root完成。Parent B59 results/audit SHA重新验证有效，selected R1 spec path/SHA exact，synthetic control有效，所有integrity checks通过，24/24 attacks拒绝，合计8/12 short read-only children，零Blender/render/browser automation/network/model/Docker/cleanup/signal/restart。Results/audit file SHA为 `86cad7343ac49c33abedb722bea2f63041a9f3ea76f30a93260704b3dfb5fe6f` / `3b3c8bdf1b3a74681339d820ab76b839f76e02c7ee3a1199713c34c738062bee`，self-hash为 `c68791970ea44a95c30ca7960e1d85fde66f08c6e0fff8077586a77098efc472` / `55a8bbbdde8d68f1f4360a43e22215738a8e78d44699556279ce5f7bd6c33ab2`。
+
+Final verdict为可信`BLOCKED_HOST_STABILITY`，19/20 gates。磁盘已通过：available 112,269,066,240 bytes，比不变门槛高63,045,632 bytes。唯一失败为`CODEX_TREE_RSS`：5,069,733,888 bytes，超过4 GiB ceiling 774,766,592 bytes；system-wide memory free仍85%，1 main、4 renderers、最大renderer 1,191,804,928 bytes。In-app browser检查为0 tabs，没有可关闭对象。
+
+当前安全断点完整：全部变化与证据已落盘，未运行B58/Blender。不得杀承载本任务的renderer或在同一失败root重试。下一动作需要用户重启Codex；重启后先预注册fresh R2 post-restart readmission，再运行同一20-gate/24-attack有界链。只有R2通过才进入重复稳定性观察阶段。
