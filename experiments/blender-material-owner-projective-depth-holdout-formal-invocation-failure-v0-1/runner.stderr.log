@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/run-b52-d12-14-h2-projective-depth.py", line 200, in <module>
+    if __name__ == "__main__": main()
+                               ~~~~^^
+  File "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/run-b52-d12-14-h2-projective-depth.py", line 127, in main
+    if subprocess.run(["git", "diff", "--quiet", "HEAD", "--", *[str(path.relative_to(root)) for path in tool_paths], str(cli.preflight_root.relative_to(root))], cwd=root).returncode != 0: raise RuntimeError("H2 tools or preflight evidence are uncommitted")
+                                                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Applications/Blender.app/Contents/Resources/5.2/python/lib/python3.13/pathlib/_local.py", line 385, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: 'experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1' is not in the subpath of '/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio'

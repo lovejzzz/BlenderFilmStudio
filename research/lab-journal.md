@@ -3730,3 +3730,15 @@ preflight实际operation counts为1个preflight process、11个children、1个Bl
 preflight file SHA-256 / self-hash为 `e7551d41df86c8a56a8f660c8c491c208cbbeb69372855217ec2bd26ffa7400c` / `019d1c85d4b157d0d46d43bf1ce1b9e0dd5b46f37fcc94b351703a2875fab3fd`；receipt file SHA-256 / self-hash为 `4fda09b4f4853eaa9f41b16ad7219d640194d0bbbb1998c75777788f139e7a07` / `c2d4dce8632f981980e3f365c56c134c75f332c419be917b9dc5d8f4c2ee952f`。full-shape result / analysis receipt self-hashes为 `e3868cb53d5671523f4f039476a7e6a2ef4c6fb51c1e6c93bd150d5ab7ca89cf` / `738b1358656ea6befa4c57efef0f6959f4dd3f81205684a488a7442641cd54e2`。独立9项复核重算四份canonical self-hash、preflight file binding、22份child stdout/stderr bindings、11个exit codes/PIDs，并确认root中0个EXR。observed free bytes为109,593,456,640；扣除67,108,864 projected bytes后仍高于107,374,182,400 minimum reserve。
 
 下一动作只提交并推送exact preflight evidence root与本entry。该evidence commit形成且远端一致之前不得运行formal runner；之后runner才被允许创建fresh formal root并执行exactly 4次Blender 5.2 Cycles renders。
+
+## J-261 · D12.14-H2 正式调用被冻结 runner admission 缺口作废
+
+Date: 2026-08-28 · Type: FORMAL INVOCATION INVALIDATED / NO SCIENTIFIC VERDICT · New Blender renders: 0
+
+corrected official preflight evidence commit `7986502763ccbeffa5c1f40ba2b0bfa218e836b0` 推送且本地/远端一致后，按protocol首次且唯一调用formal runner。调用使用仓库内相对 `--preflight-root` 与 `--output-root`，与此前所有命令风格一致。冻结runner在创建formal root与进入自身failure-finally范围之前，于line 127执行 `cli.preflight_root.relative_to(root)`；相对Path不能相对于绝对repo root求relative path，因此立即抛出 `ValueError`，exit 1。
+
+这是preflight未覆盖的第二个admission缺口：preflight验证了runner forced-failure finally path和完整nested tree，却没有用runner正式CLI的相对路径形状执行只读admission。此次失败发生在任何child启动之前：1次runner invocation、0 child、0 Blender process、0 render calls、0 Cycles renders、0 EXR、0 adapter/consumer/analyzer/auditor、0 model/network calls；formal root在调用前后均不存在。H2因此没有scientific verdict，不能声称supported、not-supported或rejected。
+
+按原始H2 preregistration的不可修复规则，冻结tool failure禁止用同一experiment ID修复重跑。即使改用absolute path可能绕过该bug，也不允许再次调用 `B52-D12.14-H2`。机器证据保存在 `experiments/blender-material-owner-projective-depth-holdout-formal-invocation-failure-v0-1`：stderr SHA-256为 `fbaa7799dcc00a584b688f206beee1289ee23203e90e5af285c46fbbcf5fe007`；failure file SHA-256 / self-hash为 `6a212c91d8eeff0319017ae51d00daf3505d14d9f494a0318d441924f2b6d492` / `8ca7ba69004dfd51fa0b08d00153f033d43961f608252e161617b0b3a511ae4c`；receipt file SHA-256 / self-hash为 `d5133f52b712e32b93b0997aff9837722a241ae9e781eb1919f7c3136f56e5ab` / `479bde998ad41d0f21e08cabea6c4405d91afa45558239538aeda87b14c93e38`。独立6项检查重算两份self-hash与两层file binding，并确认null verdict和0 render。
+
+下一动作只提交推送失效证据与本entry，不修改H2 runner、不创建H2 formal root。随后遵守promotion boundary，返回主目标 `SceneSpec → immutable BuildPlan → Blender 5.2 compiler`，先审计B01/B02现有证据与尚未满足的两次净构建结构哈希复现门。
