@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "bfs.budgetedNativeChildPidReceiptCorrectionSpec.v0.1",
+  "experimentId": "B55-E1",
+  "title": "Budgeted native child PID receipt correction",
+  "date": "2026-08-28",
+  "hypothesis": "A minimal additive supervisor schema correction can persist the exact spawned child PID for native Blender compiles, can be corroborated by child-authored PID/PPID probes across PASS, CHILD_FAILED and BUDGET_EXCEEDED outcomes, and can close B54-E1's sole process-evidence gap without changing SceneSpec, BuildPlan, restricted CLI, Blender compiler, CompileReceipt tooling, frozen B01/B02 plan hashes or frozen B01/B02 canonical structure hashes.",
+  "parentEvidence": {
+    "experimentId": "B54-E1",
+    "evidenceCommit": "7ed5727363e4914db58fd074dbaf66910aeebfe3",
+    "scientificVerdict": "ADMISSION_GATED_NATIVE_COMPILER_INTEGRATION_REJECTED",
+    "results": {
+      "uri": "experiments/admission-gated-native-compiler-v0-1/results.json",
+      "sha256": "b0859222afef40e450d22e2c731fd108e7c55fa88f3bbd156e44db42562064ac",
+      "resultHash": "1a9a231d2d2b683ee17ca82b2c231ff8755b167a108a16493b2c6e908b6624fc"
+    },
+    "audit": {
+      "uri": "experiments/admission-gated-native-compiler-v0-1/audit.json",
+      "sha256": "a8bc8556465dfc43f5986b801384565e8fdef07fc98d03a2ba89ef5ac256a747",
+      "auditHash": "2cbed88860d3b143a29dc131cac53051a4cee36cdf37e43ea3500bfdc649cc93"
+    },
+    "receipt": {
+      "uri": "experiments/admission-gated-native-compiler-v0-1/receipt.json",
+      "sha256": "03a32ba5134051ac0535ca0a52bfc8ff6b14c3e77b1d085cef83aa985612888c",
+      "receiptHash": "dbdeb57ea3388a642de885bd57bd20c666b37cd14e2944436171dcf5f8cc9565"
+    },
+    "frozenObservation": {
+      "gateCount": 18,
+      "passingGateCount": 17,
+      "onlyFalseGate": "DIRECT_PROCESS_AND_SEMANTIC_OPERATION_COUNTS_EXACT",
+      "nativeCompilePidBindingsAvailable": false,
+      "limitation": "Current budget report schema binds native command, arguments, exit and metrics but exposes no native Blender PID."
+    }
+  },
+  "freshness": {
+    "checkedAbsentBeforeThisSpec": [
+      "specs/budgeted-native-child-pid-receipt-correction.v0.1.json",
+      "research/2026-08-28-b55-e1-budgeted-native-child-pid-receipt-correction-protocol.md",
+      "scripts/preflight-b55-e1-budgeted-native-child-pid-receipt.mjs",
+      "scripts/run-b55-e1-budgeted-native-child-pid-receipt.mjs",
+      "scripts/audit-b55-e1-budgeted-native-child-pid-receipt.mjs",
+      "experiments/budgeted-native-child-pid-receipt-preflight-v0-1",
+      "experiments/budgeted-native-child-pid-receipt-attempt-v0-1",
+      "experiments/budgeted-native-child-pid-receipt-v0-1"
+    ],
+    "productionInterventionPath": "scripts/lib/budgeted-process.mjs",
+    "newToolPaths": [
+      "scripts/preflight-b55-e1-budgeted-native-child-pid-receipt.mjs",
+      "scripts/run-b55-e1-budgeted-native-child-pid-receipt.mjs",
+      "scripts/audit-b55-e1-budgeted-native-child-pid-receipt.mjs"
+    ],
+    "preflightRoot": "experiments/budgeted-native-child-pid-receipt-preflight-v0-1",
+    "attemptRoot": "experiments/budgeted-native-child-pid-receipt-attempt-v0-1",
+    "formalRoot": "experiments/budgeted-native-child-pid-receipt-v0-1",
+    "requirements": [
+      "Commit and push this exact spec and protocol before changing the production supervisor or creating any B55-E1 tool byte or output root.",
+      "Commit and push the corrected supervisor and all three exact new tool bytes before creating the preflight root.",
+      "Run one zero-Blender preflight containing child-authored PID/PPID probes; commit and push accepted preflight evidence before creating attempt or formal roots.",
+      "The formal runner is single-use. Retain every partial output; any repair requires a new experiment ID."
+    ]
+  },
+  "runtime": {
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "version": "v26.5.0",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+    },
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "version": "Blender 5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"
+    },
+    "git": {
+      "executable": "/usr/bin/git",
+      "originRef": "origin/main"
+    },
+    "forbidden": [
+      "network access",
+      "model calls",
+      "Docker or Colima",
+      "bpy.ops.render or any image render",
+      "reuse, deletion or mutation of B54-E1 evidence",
+      "reuse or deletion of a pre-existing B55-E1 output"
+    ]
+  },
+  "intervention": {
+    "before": {
+      "uri": "scripts/lib/budgeted-process.mjs",
+      "sha256": "0c4cc332139d7e11bd33dccb0c340a3947851907fc02ab68b57be5275ec5ec40",
+      "documentVersion": "0.1.0",
+      "childFields": ["exitCode", "signal", "spawnError"]
+    },
+    "allowedProductionChange": {
+      "uri": "scripts/lib/budgeted-process.mjs",
+      "requirements": [
+        "Capture the value returned as child.pid immediately after spawn and before awaiting process completion.",
+        "Emit child.pid as a positive safe integer for a successfully spawned child and null when no child PID exists.",
+        "Advance BFS_BUDGETED_PROCESS_RESULT version from 0.1.0 to 0.2.0.",
+        "Preserve budget validation, monitoring, termination, output accounting, log hashing, outcome mapping and every pre-existing returned field."
+      ]
+    },
+    "unchangedProductionFiles": [
+      {
+        "uri": "scripts/run-restricted-blender-compile.mjs",
+        "sha256": "4cd49d91e7f396f04876b8fcb14ac3a10ff19fbba11309cae1cdc6911740b2af"
+      },
+      {
+        "uri": "scripts/lib/compile-receipt.mjs",
+        "sha256": "6fbe9a2394acbc0712ac73451db2602ec1aed8d23e49dde87bb124be2c07de95"
+      },
+      {
+        "uri": "scripts/verify-compile-receipt.mjs",
+        "sha256": "75d4e778b70f253d63d2079b15b8aadeacdf497d39843705ef2b7ecfe9c7a23f"
+      },
+      {
+        "uri": "scripts/compile-build-plan.mjs",
+        "sha256": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413"
+      },
+      {
+        "uri": "blender/compile_scene.py",
+        "sha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240"
+      },
+      {
+        "uri": "scripts/lib/formal-run-admission.mjs",
+        "sha256": "382a06e82c815b69539edf6211bd3d9db28a05c2aa49d1f7a6ddaed61f18f67a"
+      }
+    ],
+    "compileReceiptBoundary": "The existing CompileReceipt already binds the complete budget.report.json by file SHA-256 and the current verifier reopens that bound file. B55 adds no new CompileReceipt field and does not claim that the current 19-check verifier independently proves PID semantics; the B55 independent auditor owns the explicit PID schema and semantic checks.",
+    "admission": {
+      "module": "scripts/lib/formal-run-admission.mjs",
+      "formalEvidenceCliShape": "repository-relative accepted preflight root",
+      "formalOutputCliShape": "repository-relative fresh formal root",
+      "originRef": "origin/main",
+      "attemptLedger": "Create the separately declared fresh attempt root and self-hashed attempt.json before calling admitFormalRun(). On accept write admission.json plus receipt.json before formal-root materialization; on reject write failure.json plus receipt.json with scientificVerdict null.",
+      "authorizationBoundary": "No Blender or restricted compiler process may start before accepted admission and its receipt are durable."
+    }
+  },
+  "pidProbeContract": {
+    "officialPreflightOnly": true,
+    "blenderProcesses": 0,
+    "cases": [
+      {
+        "id": "PASS_SELF_REPORT",
+        "expectedOutcome": "PASS",
+        "expectedExitCode": 0,
+        "pidRequirement": "Positive safe integer equal to the PID written by the child; child-authored PPID equals the preflight process PID."
+      },
+      {
+        "id": "CHILD_FAILED_SELF_REPORT",
+        "expectedOutcome": "CHILD_FAILED",
+        "expectedExitCode": 7,
+        "pidRequirement": "Positive safe integer equal to the PID written by the child; child-authored PPID equals the preflight process PID."
+      },
+      {
+        "id": "WALL_TIME_SELF_REPORT",
+        "expectedOutcome": "BUDGET_EXCEEDED",
+        "expectedBreach": "WALL_TIME",
+        "pidRequirement": "Positive safe integer equal to the PID written by the child; child-authored PPID equals the preflight process PID; termination is requested and awaited."
+      },
+      {
+        "id": "SPAWN_ERROR_NULL_PID",
+        "expectedOutcome": "CHILD_FAILED",
+        "pidRequirement": "Exactly null because no child PID was allocated; spawnError is non-null."
+      }
+    ],
+    "nonRegression": "PASS, CHILD_FAILED, BUDGET_EXCEEDED and spawn-error outcome semantics must remain unchanged apart from the additive version/PID receipt fields."
+  },
+  "inputs": {
+    "benchmarks": [
+      {
+        "id": "B01",
+        "sceneSpecUri": "specs/benchmarks/B01.scene.json",
+        "sceneSpecSha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4",
+        "expectedPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+        "expectedStructureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b"
+      },
+      {
+        "id": "B02",
+        "sceneSpecUri": "specs/benchmarks/B02.scene.json",
+        "sceneSpecSha256": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16",
+        "expectedPlanHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+        "expectedStructureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+      }
+    ],
+    "outputSpec": {
+      "uri": "specs/output-spec.v0.1.json",
+      "sha256": "d492cfcf6a3ec1b5539735b4a46052456e330acea2b6e47c5ab5efcced6b9705"
+    },
+    "sceneSpecSuiteExpected": "22/22"
+  },
+  "preflightContract": {
+    "blenderProcesses": 0,
+    "blenderRenderCalls": 0,
+    "requirements": [
+      "Exact preregistration, B54 parent evidence, Node/Blender identities, corrected supervisor hash and all three B55 tool hashes.",
+      "All spec/tool/input paths tracked-clean and tool-freeze commit pushed to origin/main.",
+      "Only the preregistered supervisor path differs among existing production files; every declared unchanged production hash remains exact.",
+      "SceneSpec suite remains 22/22 and two in-memory compileBuildPlan calls per benchmark remain canonical-byte exact at the frozen plan hashes.",
+      "All four frozen child PID/PPID probe cases satisfy their expected outcome and PID rules without starting Blender.",
+      "Projected 512 MiB write leaves at least 100 GiB free.",
+      "Preflight, attempt and formal roots remain absent before accepted preflight creation."
+    ]
+  },
+  "formalOperationContract": {
+    "runnerProcesses": 1,
+    "restrictedCompileDirectChildren": 4,
+    "nativeCompileInvocations": 4,
+    "compileReceiptBlenderIdentityProbes": 4,
+    "independentAuditorProcesses": 1,
+    "receiptVerifierDirectChildren": 4,
+    "verifierBlenderIdentityProbes": 4,
+    "blendArtifactAuditDirectChildren": 4,
+    "caseCompilations": 4,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "nativePidRequirements": [
+      "Every passing budget report is BFS_BUDGETED_PROCESS_RESULT version 0.2.0 with a positive safe integer child.pid.",
+      "The command is the exact frozen Blender executable, exitCode is zero, signal and spawnError are null, and termination.requested is false.",
+      "Each native child PID differs from its simultaneously live restricted-wrapper parent PID. PID values from non-overlapping runs are not required to be globally unique because operating systems may recycle them after exit."
+    ]
+  },
+  "gates": [
+    "SPEC_PARENT_RUNTIME_AND_TOOL_IDENTITIES",
+    "B54_SINGLE_PID_GAP_BOUND_EXACT",
+    "SUPERVISOR_CHANGE_MINIMAL_AND_SCHEMA_V0_2",
+    "ZERO_BLENDER_PID_PROBE_PREFLIGHT_ACCEPTED_AND_PUSHED",
+    "PID_PROBE_PASS_FAIL_BREACH_AND_SPAWN_ERROR_EXACT",
+    "RELATIVE_PATH_FORMAL_ADMISSION_ACCEPTED",
+    "ATTEMPT_ADMISSION_AND_RECEIPT_SELF_HASH_EXACT",
+    "FORMAL_ROOT_MATERIALIZED_ONLY_AFTER_ADMISSION",
+    "SCENESPEC_SUITE_22_OF_22",
+    "BUILDPLAN_PAIR_CANONICAL_BYTES_EXACT",
+    "B01_B02_PLAN_HASHES_FROZEN",
+    "FOUR_FRESH_RESTRICTED_COMPILES_PASS",
+    "FOUR_NATIVE_PID_RECEIPT_SCHEMAS_EXACT",
+    "FOUR_CURRENT_COMPILE_RECEIPTS_VERIFY_19_CHECKS",
+    "B01_B02_PAIR_STRUCTURE_BYTES_EXACT",
+    "B01_B02_STRUCTURE_HASHES_FROZEN",
+    "FOUR_BLEND_EMBEDDED_BINDINGS_EXACT",
+    "NO_UNBOUND_OR_BACKUP_OUTPUT_FILES",
+    "DIRECT_PROCESS_AND_SEMANTIC_OPERATION_COUNTS_EXACT",
+    "MODEL_NETWORK_DOCKER_AND_RENDER_ZERO",
+    "INDEPENDENT_AUDIT_AND_SEMANTIC_ATTACKS_MINIMUM_32",
+    "VERDICT_MAPPING_OUTCOME_NEUTRAL"
+  ],
+  "auditContract": {
+    "independence": "The auditor must not import the B55 preflight or runner. It may invoke the unchanged current CompileReceipt verifier as an external child and must independently reopen the B54 evidence, accepted PID probes, plans, budget reports, receipts, manifests, canonical structure and .blend bindings.",
+    "pidVerification": "Require the official preflight's three child-authored PID/PPID observations to equal their supervisor reports; require the spawn-error PID to be null; require all four native reports to satisfy the frozen schema, command, outcome, exit and distinctness rules.",
+    "receiptVerification": "B01-A/B and B02-A/B each pass the unchanged current verifier with exactly 19 checks; independently require each CompileReceipt's bound budget-report file SHA-256 to cover the PID-bearing report.",
+    "structureVerification": "Parse every scene.structure.canonical.json, require deep equality with its adjacent manifest structure, require both manifest hash bindings, require A/B byte identity per benchmark and the two frozen hashes.",
+    "blendVerification": "Run blender/audit_compiled_artifact.py on all four .blend files and require embedded planHash, structureHash, manifest version and Blender build hash bindings.",
+    "semanticAttacksMinimum": 32,
+    "requiredPidAttacks": [
+      "missing child.pid",
+      "null child.pid on a successful spawn",
+      "string child.pid",
+      "fractional child.pid",
+      "non-positive child.pid",
+      "native child.pid equal to its corresponding restricted-wrapper PID",
+      "wrong result document version",
+      "PID-bearing budget report changed without matching CompileReceipt file hash"
+    ],
+    "verdictValidation": "Outcome-neutral: derive supported versus rejected from observed gates; a frozen tool/process exception invalidates with scientificVerdict null."
+  },
+  "diskAdmission": {
+    "projectedWriteBytes": 536870912,
+    "minimumReserveBytes": 107374182400,
+    "observedBeforePreregistrationBytes": 109511720960
+  },
+  "decision": {
+    "supportedVerdict": "BUDGETED_NATIVE_CHILD_PID_RECEIPT_CORRECTION_SUPPORTED",
+    "supportedWhen": "All 22 gates pass, all official PID probes and four native PID reports satisfy the frozen rules, all four native compiles/current receipts/blend audits pass, B01/B02 plan and structure identities remain frozen, and at least 32 semantic attacks are rejected.",
+    "rejectedVerdict": "BUDGETED_NATIVE_CHILD_PID_RECEIPT_CORRECTION_REJECTED",
+    "invalidated": "Any frozen tool/process exception produces scientificVerdict null, preserves partial evidence and forbids same-ID repair or rerun."
+  },
+  "nonClaims": [
+    "This does not repair, modify or rerun B54-E1; its REJECTED result remains immutable.",
+    "A supervisor-local PID receipt is not a cryptographic process identity, remote attestation or proof against a malicious supervisor.",
+    "A PID may be recycled by the operating system after the child exits; the receipt binds the observed spawn event, not permanent process identity.",
+    "The current 19-check CompileReceipt verifier binds the PID-bearing budget report by file hash but does not independently validate PID semantics.",
+    "This does not claim deterministic .blend container bytes.",
+    "This does not render pixels or prove cinematic image quality.",
+    "B01/B02 remain minimal compiler benchmarks, not full actor, cloth, hair, simulation or production-lighting coverage.",
+    "Existing Blender --version identity-probe subprocess PIDs remain semantic counts rather than independently attributed OS process receipts."
+  ],
+  "promotionBoundary": "If supported, a later release step may treat budget report v0.2 child.pid as the production supervisor's native child receipt. Any later supervisor, receipt, verifier, admission, compiler or orchestration change must be separately preregistered and rerun the B01/B02 plan and structure regression gates."
+}

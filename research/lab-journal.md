@@ -3928,3 +3928,15 @@ site source commit `ce092da0535f111f61cd87f3396f8489df9277b5` 已与 `origin/mai
 发布前再次验证current user为owner、access mode为custom、exactly one allowed account且其role为owner、external visitors为0、workspace/tenant groups为空；owner-only route匿名请求返回HTTP 401。没有创建或刷新Sites screenshot，也没有执行截图、DOM、点击、resize或视觉QA。
 
 用户准备升级并重启Codex，因此本次在publication checkpoint主动收口，不启动B55。B54-E1 scientific verdict保持封闭的 `ADMISSION_GATED_NATIVE_COMPILER_INTEGRATION_REJECTED`：编译器4/4、receipt 4×19、B01/B02 structure identity 2/2均通过，唯一失败是budget report未持久化native Blender PID。重启后的下一实验应先预登记最小supervisor PID-receipt correction，再修改 `scripts/lib/budgeted-process.mjs`；不得改写或重跑B54 evidence。用户原有 `README.md` 修改与三份未跟踪research drafts继续排除于本次提交之外。
+
+## J-279 · B55-E1 budgeted native child PID receipt correction 预登记
+
+Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+从J-278断点恢复后，重新确认repository HEAD与 `origin/main` exact为 `8acc451a9c2efc9ff49930d91d868c09d923d180`，B55 spec/protocol/三条tool paths和three roots全部不存在，production supervisor仍为SHA-256 `0c4cc332139d7e11bd33dccb0c340a3947851907fc02ab68b57be5275ec5ec40`。B54 results/audit/receipt file与self hashes exact；18 gates中exactly 17为true，唯一false gate仍是 `DIRECT_PROCESS_AND_SEMANTIC_OPERATION_COUNTS_EXACT`，`nativeCompilePidBindingsAvailable=false`。
+
+B55冻结最小production intervention：只允许 `scripts/lib/budgeted-process.mjs` 把spawn返回的 `child.pid` 立即捕获为positive safe integer或null，并把 `BFS_BUDGETED_PROCESS_RESULT` 从0.1.0升级到0.2.0；budget validation、monitoring、termination、outcome mapping和所有旧字段必须保持。Restricted CLI、Blender compiler、CompileReceipt generator/verifier、BuildPlan compiler均以当前SHA冻结为unchanged controls。
+
+Official zero-Blender preflight必须经corrected supervisor运行四种child-authored probe：PASS exit 0、CHILD_FAILED exit 7、WALL_TIME budget kill三种均要求child自写PID与report PID一致、child自写PPID与preflight PID一致；spawn error要求PID exact null。Accepted preflight commit/push后，formal runner才可relative-path admission并执行B01-A/B、B02-A/B四次fresh native compile。四份budget report必须为v0.2、positive native PIDs、exact Blender command与clean exit；每个native PID不得等于其同时存活的wrapper parent PID，但不要求非重叠运行的PID全局唯一，因为OS可在退出后复用。四份current verifier仍须各19 checks，B01/B02 plan/structure identities不可回退，independent audit至少拒绝32项attacks。
+
+预登记前磁盘available为109,511,720,960 bytes；512 MiB projection后108,974,850,048 bytes，高于100 GiB reserve。未清理用户或历史证据。下一动作只能提交并推送exact spec、protocol与本entry；远端preregistration commit形成前不得修改supervisor、创建B55 tool byte、运行PID probe或创建B55 root。
