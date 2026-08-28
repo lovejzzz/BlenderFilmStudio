@@ -3007,6 +3007,18 @@ C1 禁止改变 ray-plane oracle、owner token、tap/stencil、三类 support cl
 
 Artifact: `specs/blender-temporal-owner-support-localization-c1.v0.1.json`.
 
+## J-199 · C1 内部通过，但首次独立审计器失败
+
+Date: 2026-08-28 · Type: RETAINED AUDIT-TOOL FAILURE · New Blender renders: 0
+
+C1 analyzer 一次运行得到 16/16 checks、30/30 targeted mutations 与 `TEMPORAL_OWNER_SUPPORT_ALIAS_LOCALIZED_C1`。40 个派生 payload 与 D1 byte exact；same-index primary 的正确分解为 accepted `13,717 = 13,702 within-bilinear + 15 outside-bilinear`，而 `13,702 = 13,652 full-stencil + 50 extra-stencil`。所有修正比例均在 `[0,1]`。
+
+首次独立 Node audit 只通过 7/10、独立攻击 11/12，因此结果暂不推广。复核定位到两个 audit-tool 缺陷：Node `JSON.stringify` 不能复现 Python 对 `1.0` 等数值的 canonical bytes；“analysis hash attack”又在篡改后重新计算了合法 hash，因此它不是攻击。其余 payload byte identity、D1 classification identity、set/ratio replay、formal attack roster 与 zero-operation gates 均通过。
+
+失败 audit 与 tool 已用 SHA 固定并保留。下一步只允许新 audit tool path 与 `audit-c1.json`；不得改变 C1 analyzer、result、payload 或 measurement。Failure audit SHA-256: `3597bddced17737a78fc3e64627fcc7f07c4938aaeb598eda34018aee616d90a`。
+
+Artifact: `research/2026-08-28-b52-d12-10-c1-audit-d1-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
