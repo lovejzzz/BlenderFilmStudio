@@ -4327,3 +4327,13 @@ B01 compile development evidence commit `723921021d47b265310e1c7f64adf56accb27a1
 FINALIZE从全部completed/failed/abandoned receipts机械重算production wrapper、native compile、preferred/current verifier、artifact-audit Blender及zero render/model/network/Docker totals；FINALIZE stage completed后才创建self-hashed final receipt，final receipt绑定manifest、stage receipts与completed ledger prefix，随后terminal `JOB_FINALIZED` event反向绑定receipt。实现同时覆盖两个crash window：FINALIZE stage completed但final receipt尚未创建时，resume只materialize receipt而不重跑stage；final receipt已fsync但terminal event未写时，resume只补terminal closure。Closed final receipt的再次resume返回byte-exact existing receipt且processStarts 0。
 
 新增continuation safety：job request/manifest必须绑定ledger与orchestrator的exact SHA及pushed tool-freeze commit；每次start/resume都用Git blob与current bytes双重验证。工具升级后的旧job只允许status/read audit，不允许由新bytes继续执行。因本实现改变orchestrator bytes，J-315 B01 job至此保持封闭，不用它运行verify/finalize。Node syntax、targeted ESLint、diff check与旧job只读status通过；没有启动新Blender。下一动作只提交推送本checkpoint；随后以该commit生成fresh full-chain B01 preflight/request，执行compile + preferred verifier + finalize，并验证第二次resume为0 processes。
+
+## J-317 · B58 full-chain B01 development preflight接受
+
+Date: 2026-08-28 · Type: DEVELOPMENT FULL-CHAIN PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
+
+VERIFY/FINALIZE candidate commit `37fb87791b829f3b275c249f9e09ccec64636726` 与`origin/main` exact后，为fresh full-chain B01 cell调用preferred production preflight一次。结果ACCEPTED，plan hash保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；preflight file SHA/self-hash为 `8478325d19db2c0d1ee43ace3198d434f9d408d503f539dd53a5aba5330a62ea` / `1373d9d7b94f00911697fb51364cb6a923399bb9f4b0cb2047296f6d07d0ca2b`。Observed available为109,317,533,696 bytes，projection后108,780,662,784，高于100 GiB reserve；Blender/render/model/network/Docker为0。
+
+Fresh job request file SHA/requestHash为 `81a8a6d5360720ed62c51278d8348d2f69d9ca60bf5697990571b63738099c25` / `8ed1c1e9714f965a1ed2d9825069d6aa29b6a90d7417f3ccf30f72d87d7340cc`。它绑定tool-freeze commit与ledger/orchestrator SHA `0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13` / `f85fe21c951beea0622c14cc4b1afbeea2de521aedd136ccdd03fa92033a96d7`，并冻结one normal compile candidate、fresh disjoint production-attempt/output/job roots与C1 resource categories。
+
+三个execution roots和official B58 roots均保持不存在。下一动作只提交推送preflight/request与本entry；随后对其pushed evidence commit调用完整`job:production start`一次，不使用development stop。Expected chain为PLAN、1 compile Blender、preferred verifier + 1 current Node child + 1 artifact-audit Blender、FINALIZE、terminal final receipt，render/model/network/Docker仍0。任何tool hash、audit observation、11-check verification或closure failure必须保留counterexample。
