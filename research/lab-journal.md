@@ -3830,3 +3830,13 @@ formal evidence commit `ed65023` 推送后，新增 `formal-runner-admission-tot
 首页新增 `B53-E1 准入总路径` tab；H2失效页把此前future admission contract更新为observed B53-E1 follow-up，但没有更改H2的null verdict。GitHub Pages sparse checkout只加入页面实际import的spec、audit、results与receipt。新页、H2页和首页定向ESLint为0 errors；React best-practices复核确认新增页保持纯Server Component，无hooks、client data waterfall、第三方bundle或hydration state。
 
 本地dev server上新页、H2页与首页exact routes均返回HTTP 200。Vinext/Sites production build成功，发现86个CDN warmup paths；GitHub Pages Next static build成功生成88/88 pages，新route明确为static。按Sites验证边界，没有执行截图、DOM、点击、resize或视觉QA。下一动作只提交推送本页、CSS、导航、Pages workflow与本entry；随后确认GitHub Pages exact source commit，再以owner-only access发布同一source commit到Sites。
+
+## J-270 · B53-E1 研究页双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
+
+site source commit `c4eb406558b6c25fc87fe1e1ea537861e21dec0f` 推送后，GitHub Pages workflow `33174920237` 的build与deploy均completed/success，head SHA exact；公开B53 route与更新后的H2 route均返回HTTP 200。公开URL为 `https://lovejzzz.github.io/BlenderFilmStudio/formal-runner-admission-totality-v0-1/`。
+
+同一source commit推送到Sites source repository并保存为version 79；archive content hash为 `sha256:cf74f1497a5abd78fc976d642df86a54ef4eb604219e29ce3a3de067e345f3d5`，共373 files、28,876,800 bytes。deployment `appgdep_6a918bd6e6288191a224ee9cded21e1f` succeeded。发布前再次验证current user为owner、access mode为custom、exactly one allowed account且其role为owner、external visitors为0、workspace/tenant groups为空；owner-only exact route匿名请求返回HTTP 401。Owner-only URL为 `https://blender-film-studio-research.skylab.chatgpt.site/formal-runner-admission-totality-v0-1/`。
+
+本地dev server已停止；发布临时archive目录已移入用户Trash。没有创建或刷新Sites screenshot，也没有执行视觉QA。B53-E1 publication至此封闭。下一阶段必须遵守promotion boundary：若把admission module接入production compiler orchestration，先建立新的integration preregistration，冻结采用边界与失败receipt semantics，并以B01/B02双净构建structure hashes作为不可回退的回归门。
