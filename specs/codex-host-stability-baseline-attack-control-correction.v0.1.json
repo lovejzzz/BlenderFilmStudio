@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "bfs.codex-host-stability-baseline-attack-control-correction.v0.1",
+  "experimentId": "B59-G0-C1",
+  "status": "PREREGISTERED_CORRECTION",
+  "parentCommit": "6875e1f4baa6faab95a80696f849d346d724dca3",
+  "parentSpec": "specs/codex-host-stability-baseline.v0.1.json",
+  "invalidAuditorSha256": "269a745a88d85150b88aa6300fa6c62c4b016c0ca610b6dbad1e7d2a50f23fc6",
+  "rehearsalEvidence": {
+    "resultsSha256": "fc02787390de94188d8bd3232d998206f02e7cb9aecbf52c5db32e15bb4bf514",
+    "auditSha256": "1bf2c1631ad33486ebf82c50cbea2a940f865495fdffb90b6d599696c09f7493",
+    "provisionalVerdict": "BLOCKED_HOST_STABILITY",
+    "failedHostGates": [
+      "DISK_STABILITY_MARGIN",
+      "CODEX_TREE_RSS"
+    ],
+    "auditVerdict": "INVALID_EVIDENCE",
+    "attackScore": "21/24",
+    "absorbedAttacks": [
+      "A10_DISK_AVAILABLE_BELOW_MARGIN",
+      "A11_DISK_PROJECTION_MUTATION",
+      "A16_CODEX_TREE_RSS_ABOVE_CEILING"
+    ]
+  },
+  "diagnosis": "The three mutations stayed inside gate families that were already failing in the observed receipt. Because the validator checks the projected gate vector rather than exact observed resource values, a second failing value was semantically equivalent and was accepted after resealing.",
+  "allowedCorrection": {
+    "runnerChanges": 0,
+    "thresholdChanges": 0,
+    "attackIdChanges": 0,
+    "formalRootChanges": 0,
+    "auditorChange": "Construct one synthetic admissible control from the frozen thresholds, project its expected gate/failure/verdict fields, require the control to validate, and apply all original 24 mutations to independent clones of that control."
+  },
+  "requiredCorrectionGates": [
+    "OBSERVED_BLOCKED_RECEIPT_REMAINS_VALID",
+    "SYNTHETIC_ADMISSIBLE_CONTROL_VALIDATES",
+    "ORIGINAL_ATTACK_IDS_EXACT",
+    "ALL_24_ATTACKS_REJECTED",
+    "RUNNER_BYTES_UNCHANGED",
+    "ALL_THRESHOLDS_UNCHANGED",
+    "FORMAL_ROOT_STILL_FRESH"
+  ],
+  "nonClaims": [
+    "The synthetic control is not a host observation.",
+    "The correction does not turn the blocked host into an admitted host.",
+    "The correction does not close Gate 0 or authorize B58."
+  ]
+}

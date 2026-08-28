@@ -4507,3 +4507,13 @@ Date: 2026-08-28 · Type: STABILITY TOOL IMPLEMENTATION · New Blender processes
 Runner只使用bounded `git`、`memory_pressure`和`ps`读取子进程，直接从plist与`statfs`读取版本和磁盘；原始process table与252 KB crash report均不输出。Auditor独立重算receipt语义、自哈希、即时资源门并对24个resealed mutations逐项验证拒绝。两者均对stdout施加8 KiB上限，对receipt施加64 KiB上限，formal ceilings保持零Blender/render/browser automation/network/model/Docker/cleanup/signal/restart。
 
 Node syntax、zero-warning targeted ESLint和diff check通过；formal root仍不存在。下一动作只提交推送工具字节，再在临时clone中排练，不消费正式single-use root。
+
+## J-333 · B59-G0临时clone反例与C1 attack-control修正预注册
+
+Date: 2026-08-28 · Type: REHEARSAL COUNTEREXAMPLE / CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+工具commit `6875e1f` 推送后，在共享Git objects的临时sparse clone中排练，未消费真实formal root。首命令因sparse clone缺少空`experiments/`父目录而在formal root创建前ENOENT停止；补建临时父目录后，runner生成3,755-byte bounded receipt，provisional verdict为`BLOCKED_HOST_STABILITY`，真实失败门是`DISK_STABILITY_MARGIN`与`CODEX_TREE_RSS`。结果SHA为 `fc02787390de94188d8bd3232d998206f02e7cb9aecbf52c5db32e15bb4bf514`。
+
+Auditor的16个integrity checks全部通过，runner/auditor合计8/12 children，零Blender及其他禁用资源；但三项同族攻击被既有false gate吸收：A10 disk available、A11 disk projection、A16 Codex tree RSS。Audit只得21/24并正确返回`INVALID_EVIDENCE`，audit SHA为 `1bf2c1631ad33486ebf82c50cbea2a940f865495fdffb90b6d599696c09f7493`。
+
+C1冻结唯一修正：不改runner、阈值、gate、attack ID或formal root；auditor先从冻结阈值构造并验证一个明确标记的synthetic admissible control，再把原24个mutations逐一施加到独立control clones。Synthetic control不替代真实宿主观察，真实disk/RSS blocker必须保留。实际formal root仍不存在。
