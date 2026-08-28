@@ -3742,3 +3742,13 @@ corrected official preflight evidence commit `7986502763ccbeffa5c1f40ba2b0bfa218
 按原始H2 preregistration的不可修复规则，冻结tool failure禁止用同一experiment ID修复重跑。即使改用absolute path可能绕过该bug，也不允许再次调用 `B52-D12.14-H2`。机器证据保存在 `experiments/blender-material-owner-projective-depth-holdout-formal-invocation-failure-v0-1`：stderr SHA-256为 `fbaa7799dcc00a584b688f206beee1289ee23203e90e5af285c46fbbcf5fe007`；failure file SHA-256 / self-hash为 `6a212c91d8eeff0319017ae51d00daf3505d14d9f494a0318d441924f2b6d492` / `8ca7ba69004dfd51fa0b08d00153f033d43961f608252e161617b0b3a511ae4c`；receipt file SHA-256 / self-hash为 `d5133f52b712e32b93b0997aff9837722a241ae9e781eb1919f7c3136f56e5ab` / `479bde998ad41d0f21e08cabea6c4405d91afa45558239538aeda87b14c93e38`。独立6项检查重算两份self-hash与两层file binding，并确认null verdict和0 render。
 
 下一动作只提交推送失效证据与本entry，不修改H2 runner、不创建H2 formal root。随后遵守promotion boundary，返回主目标 `SceneSpec → immutable BuildPlan → Blender 5.2 compiler`，先审计B01/B02现有证据与尚未满足的两次净构建结构哈希复现门。
+
+## J-262 · H2 后核心 SceneSpec 编译器门重新核验
+
+Date: 2026-08-28 · Type: CORE GOAL EVIDENCE REVALIDATION · New Blender renders: 0 · New Blender compilations: 0
+
+H2失效证据commit `e6b8fb857d6bdcf19294bd8714bb98de505b75b8` 推送后，按主目标逐项重开当前证据，而不是依赖旧journal结论。SceneSpec v0.1 fixture suite为22/22；current `compileBuildPlan()`在同一fresh Node process中对B01、B02各执行两次，两个wrapper分别canonical byte exact，plan hashes仍为 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf` 与 `a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687`。
+
+current receipt verifier重新验证native B01-A/B、B02-A/B，4/4均PASS OK且每份19项bindings成立。随后直接重算native receipt root与corrected Linux/amd64 B42-C1 root的八份 `scene.structure.canonical.json`：每份parsed content均与adjacent manifest structure深相等，byte SHA均同时等于manifest的两处binding。B01四份仍为 `c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b`；B02四份仍为 `025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856`。
+
+因此核心 `SceneSpec → immutable BuildPlan → Blender 5.2` B01/B02双净构建结构复现门有当前直接证据支持，不需要用H2替代，也不因H2失效而回退。新result note为 `research/2026-08-28-post-h2-core-compiler-revalidation.md`。下一项有观察支持的缺口是formal-run admission reliability：future one-shot preflight必须执行relative/absolute path equivalence、containment、fresh-root、pushed-evidence lookup与failure-receipt reachability；必须作为新实验，禁止修复或重跑H2。
