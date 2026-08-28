@@ -18,7 +18,9 @@ import {
   createManifest,
   deriveJobState,
   readJson,
+  readManifest,
   readProcessIdentity,
+  readStageReceipt,
   releaseWriterLease,
   sha256Bytes,
   sha256File,
@@ -43,9 +45,13 @@ const COMMIT_PATTERN = /^[0-9a-f]{40}$/;
 const NPM = '/opt/homebrew/bin/npm';
 const MAXIMUM_CAPTURE_BYTES = 4 * 1024 * 1024;
 const execFileAsync = promisify(execFile);
+const JOB_TOOL_PATHS = [
+  'scripts/lib/restart-safe-job-ledger.mjs',
+  'scripts/run-restart-safe-production-job.mjs',
+];
 
 function parseArguments(argv) {
-  const parsed = { developmentStopAfterPlan: false, developmentStopAfterCompile: false };
+  const parsed = { developmentStopAfterPlan: false, developmentStopAfterCompile: false, developmentStopAfterVerify: false };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
     if (token === '--mode') parsed.mode = argv[++index];
@@ -54,6 +60,7 @@ function parseArguments(argv) {
     else if (token === '--preflight-evidence-commit') parsed.preflightEvidenceCommit = argv[++index];
     else if (token === '--development-stop-after-plan') parsed.developmentStopAfterPlan = true;
     else if (token === '--development-stop-after-compile') parsed.developmentStopAfterCompile = true;
+    else if (token === '--development-stop-after-verify') parsed.developmentStopAfterVerify = true;
     else throw new Error(`Unknown or incomplete argument: ${token}`);
   }
   if (!['start', 'resume', 'status'].includes(parsed.mode)) throw new Error('--mode must be start, resume or status');
@@ -62,8 +69,8 @@ function parseArguments(argv) {
   if (parsed.mode !== 'start' && parsed.request) throw new Error('--request is accepted only in start mode');
   if (parsed.mode === 'start' && !COMMIT_PATTERN.test(parsed.preflightEvidenceCommit ?? '')) throw new Error('Start mode requires a full --preflight-evidence-commit');
   if (parsed.mode !== 'start' && parsed.preflightEvidenceCommit) throw new Error('--preflight-evidence-commit is accepted only in start mode');
-  if (parsed.developmentStopAfterPlan && parsed.developmentStopAfterCompile) throw new Error('Development stop flags are mutually exclusive');
-  if (parsed.mode === 'status' && (parsed.developmentStopAfterPlan || parsed.developmentStopAfterCompile)) throw new Error('Status mode cannot use development flags');
+  if ([parsed.developmentStopAfterPlan, parsed.developmentStopAfterCompile, parsed.developmentStopAfterVerify].filter(Boolean).length > 1) throw new Error('Development stop flags are mutually exclusive');
+  if (parsed.mode === 'status' && (parsed.developmentStopAfterPlan || parsed.developmentStopAfterCompile || parsed.developmentStopAfterVerify)) throw new Error('Status mode cannot use development flags');
   return parsed;
 }
 
@@ -110,6 +117,8 @@ async function readAndValidateRequest(requestUri, expectedJobRoot) {
   requireNormalizedRelative(request.productionRelease?.uri, 'request.productionRelease.uri');
   requireHash(request.productionRelease?.sha256, 'request.productionRelease.sha256');
   if (!COMMIT_PATTERN.test(request.toolFreezeCommit ?? '')) throw new Error('request.toolFreezeCommit must be a full lowercase Git SHA-1');
+  if (!isDeepStrictEqual(Object.keys(request.toolHashes ?? {}).sort(), [...JOB_TOOL_PATHS].sort())) throw new Error('request.toolHashes key set mismatch');
+  for (const uri of JOB_TOOL_PATHS) requireHash(request.toolHashes[uri], `request.toolHashes[${uri}]`);
   if (!Array.isArray(request.compileAttempts) || request.compileAttempts.length === 0) throw new Error('request.compileAttempts must be non-empty');
   const attemptIds = new Set();
   const registeredRoots = [{ label: 'jobRoot', path: request.jobRoot }];
@@ -140,6 +149,7 @@ async function readAndValidateRequest(requestUri, expectedJobRoot) {
   if (canonicalJson(first) !== canonicalJson(second) || first.planHash !== request.expectedBuildPlanHash) {
     throw new Error('Job request BuildPlan binding mismatch');
   }
+  await validateToolFreeze(request);
   return { requestPath, requestUri, request, requestFileSha256: await sha256File(requestPath), prevalidatedPlan: first };
 }
 
@@ -153,6 +163,7 @@ async function initializeJob(parsed) {
     expectedBuildPlanHash: validated.request.expectedBuildPlanHash,
     productionRelease: validated.request.productionRelease,
     toolFreezeCommit: validated.request.toolFreezeCommit,
+    toolHashes: validated.request.toolHashes,
     preflightEvidenceCommit: parsed.preflightEvidenceCommit,
     stageDag: EXPECTED_STAGE_DAG,
     compileAttempts: validated.request.compileAttempts,
@@ -168,6 +179,28 @@ async function initializeJob(parsed) {
     },
   });
   return { jobRoot, manifest: created.manifest, prevalidatedPlan: validated.prevalidatedPlan };
+}
+
+async function gitOutput(args) {
+  const result = await execFileAsync('/usr/bin/git', args, {
+    cwd: repositoryRoot, encoding: null, timeout: 10000,
+    env: { PATH: '/usr/bin:/bin', LANG: 'C', LC_ALL: 'C', GIT_CONFIG_NOSYSTEM: '1', GIT_TERMINAL_PROMPT: '0' },
+  });
+  return result.stdout;
+}
+
+async function validateToolFreeze(manifest) {
+  if (!COMMIT_PATTERN.test(manifest.toolFreezeCommit ?? '')) throw new Error('Job manifest tool-freeze commit is invalid');
+  if (!isDeepStrictEqual(Object.keys(manifest.toolHashes ?? {}).sort(), [...JOB_TOOL_PATHS].sort())) throw new Error('Job manifest tool hash key set mismatch');
+  await gitOutput(['merge-base', '--is-ancestor', manifest.toolFreezeCommit, 'origin/main']);
+  for (const uri of JOB_TOOL_PATHS) {
+    const expected = manifest.toolHashes[uri];
+    requireHash(expected, `manifest.toolHashes[${uri}]`);
+    const path = await resolveExistingRepositoryPath(uri, `Restart-safe tool ${uri}`);
+    const current = await sha256File(path);
+    const frozen = sha256Bytes(await gitOutput(['show', `${manifest.toolFreezeCommit}:${uri}`]));
+    if (current !== expected || frozen !== expected) throw new Error(`Restart-safe tool freeze mismatch: ${uri}`);
+  }
 }
 
 function jobRelative(jobRoot, path) {
@@ -326,17 +359,25 @@ function descendantPids(rootPid, pairs) {
   return found;
 }
 
-async function observeNativeCompileProcess(rootPid, isClosed, timeoutMs = 10000) {
+async function observeDescendantProcess(rootPid, isClosed, predicate, timeoutMs = 10000) {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline && !isClosed()) {
     const descendants = descendantPids(rootPid, await processParentPairs());
     for (const pid of descendants) {
       const identity = await readProcessIdentity(pid).catch(() => null);
-      if (identity?.live && identity.executable.includes('Blender') && identity.argv.includes('compile_scene.py')) return identity;
+      if (identity?.live && predicate(identity)) return identity;
     }
     await delay(10);
   }
   return null;
+}
+
+async function observeNativeCompileProcess(rootPid, isClosed) {
+  return observeDescendantProcess(rootPid, isClosed, identity => identity.executable.includes('Blender') && identity.argv.includes('compile_scene.py'));
+}
+
+async function observeArtifactAuditProcess(rootPid, isClosed) {
+  return observeDescendantProcess(rootPid, isClosed, identity => identity.executable.includes('Blender') && identity.argv.includes('audit_compiled_artifact.py'), 20000);
 }
 
 async function writeAttemptTerminal(jobRoot, stageId, attemptId, status, body) {
@@ -587,6 +628,250 @@ function nextCompileCandidate(manifest, state) {
   return candidate;
 }
 
+function parsePreferredVerification(stdout) {
+  const prefix = 'BFS_PRODUCTION_RECEIPT_VERIFICATION_JSON ';
+  const line = stdout.split('\n').find(row => row.startsWith(prefix));
+  if (!line) throw new Error('Preferred verification JSON line is missing');
+  return JSON.parse(line.slice(prefix.length));
+}
+
+function nextStageAttemptId(state, stageId) {
+  return `${stageId}-${String(state.stages[stageId].attempts.length + 1).padStart(4, '0')}`;
+}
+
+async function runVerifyStage(jobRoot, state) {
+  const stageId = 'VERIFY_RECEIPT';
+  const attemptId = nextStageAttemptId(state, stageId);
+  const compileReceipt = state.stages.PRODUCTION_COMPILE.completed.receipt;
+  const productionReceiptUri = compileReceipt.outputs.receipt.uri;
+  await appendLedgerEvent(jobRoot, {
+    eventType: 'STAGE_STARTED', stageId, attemptId,
+    payload: { productionReceipt: compileReceipt.outputs.receipt },
+  });
+  const launched = spawnCaptured(NPM, ['run', 'verify:production-receipt', '--', '--receipt', productionReceiptUri]);
+  const wrapperIdentity = await readProcessIdentity(launched.child.pid);
+  if (!wrapperIdentity.live) throw new Error('Preferred verifier exited before its identity could be recorded');
+  await appendLedgerEvent(jobRoot, {
+    eventType: 'PROCESS_STARTED', stageId, attemptId,
+    payload: { role: 'PREFERRED_VERIFIER_CLI', process: wrapperIdentity },
+  });
+  const auditObserved = await observeArtifactAuditProcess(launched.child.pid, launched.isClosed);
+  if (auditObserved) {
+    await appendLedgerEvent(jobRoot, {
+      eventType: 'ARTIFACT_AUDIT_PROCESS_OBSERVED', stageId, attemptId,
+      payload: { role: 'ARTIFACT_AUDIT_BLENDER', process: auditObserved },
+    });
+  }
+  const wrapper = await launched.completion;
+  if (!auditObserved) throw new Error('Artifact-audit Blender completed or failed before durable process identity observation; recovery must fail closed');
+  const processRecord = {
+    wrapper: wrapperIdentity,
+    artifactAuditBlender: auditObserved,
+    terminal: {
+      exitCode: wrapper.exitCode, signal: wrapper.signal, spawnError: wrapper.spawnError,
+      elapsedNanoseconds: wrapper.elapsedNanoseconds, stdout: wrapper.stdout, stderr: wrapper.stderr,
+    },
+  };
+  let verification = null;
+  try { verification = parsePreferredVerification(wrapper.stdoutText); } catch {}
+  if (wrapper.exitCode !== 0 || wrapper.signal !== null || wrapper.spawnError !== null || !verification?.valid) {
+    const terminal = await writeAttemptTerminal(jobRoot, stageId, attemptId, 'FAILED', {
+      reason: 'PREFERRED_VERIFIER_FAILED', process: processRecord,
+      evidence: { productionReceipt: compileReceipt.outputs.receipt, verification },
+      resources: { productionCompilerStarts: 0, nativeCompileBlenderStarts: 0, successfulNativeCompiles: 0, preferredVerifierStarts: 1, currentReceiptVerifierNodeChildren: verification?.children?.currentReceiptVerifier ? 1 : 0, artifactAuditBlenderStarts: 1, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },
+    });
+    return { status: 'FAILED', attempt: terminal.receipt };
+  }
+  if (!validSelfHash(verification, 'verificationHash') || verification.reason !== 'OK' || verification.checks?.length !== 11) {
+    throw new Error('Preferred verification self-hash or check count mismatch');
+  }
+  if (verification.receipt?.sha256 !== compileReceipt.outputs.receipt.sha256
+    || verification.receipt?.receiptHash !== compileReceipt.outputs.receipt.receiptHash
+    || verification.planHash !== state.manifest.expectedBuildPlanHash
+    || verification.nativeChildPid !== compileReceipt.outputs.nativePid) {
+    throw new Error('Preferred verification compile receipt binding mismatch');
+  }
+  if (verification.children?.blendArtifactAudit?.pid !== auditObserved.pid
+    || !Number.isSafeInteger(verification.children?.currentReceiptVerifier?.pid)) {
+    throw new Error('Preferred verifier child process accounting mismatch');
+  }
+  const verificationPath = resolve(jobRoot, 'attempts', stageId, attemptId, 'verification.json');
+  await writeExclusiveDurableJson(verificationPath, verification);
+  const completed = await completeStage(jobRoot, stageId, attemptId, {
+    status: 'COMPLETED', promotable: true,
+    inputs: { productionReceipt: compileReceipt.outputs.receipt, compileStageReceiptHash: compileReceipt.receiptHash },
+    outputs: {
+      verification: { uri: jobRelative(jobRoot, verificationPath), sha256: await sha256File(verificationPath), verificationHash: verification.verificationHash },
+      planHash: verification.planHash,
+      structureHash: verification.structureHash,
+      nativeChildPid: verification.nativeChildPid,
+      currentReceiptVerifierPid: verification.children.currentReceiptVerifier.pid,
+      artifactAuditBlenderPid: verification.children.blendArtifactAudit.pid,
+      checkCount: verification.checks.length,
+    },
+    process: processRecord,
+    resources: { productionCompilerStarts: 0, nativeCompileBlenderStarts: 0, successfulNativeCompiles: 0, preferredVerifierStarts: 1, currentReceiptVerifierNodeChildren: 1, artifactAuditBlenderStarts: 1, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },
+  });
+  return { status: 'COMPLETED', stage: completed.receipt };
+}
+
+async function recoverStartedVerify(jobRoot, state) {
+  const stage = state.stages.VERIFY_RECEIPT;
+  const started = [...stage.attempts].reverse().find(attempt => attempt.status === 'STARTED');
+  if (!started) throw new Error('Started verify stage has no started attempt');
+  const wrapperEvent = [...state.ledger.events].reverse().find(row => row.event.eventType === 'PROCESS_STARTED'
+    && row.event.stageId === 'VERIFY_RECEIPT' && row.event.attemptId === started.attemptId);
+  if (!wrapperEvent?.event.payload?.process) throw new Error('REFUSE_RECOVERY: started verifier has no recorded process identity');
+  const wrapperComparison = await compareRecordedProcess(wrapperEvent.event.payload.process);
+  if (wrapperComparison.state === 'LIVE_MATCH') return { status: 'WAIT_LIVE_PROCESS', process: wrapperComparison.observed };
+  if (wrapperComparison.state !== 'DEAD') throw new Error('REFUSE_RECOVERY: verifier PID identity is ambiguous or reused');
+  const auditEvent = [...state.ledger.events].reverse().find(row => row.event.eventType === 'ARTIFACT_AUDIT_PROCESS_OBSERVED'
+    && row.event.stageId === 'VERIFY_RECEIPT' && row.event.attemptId === started.attemptId);
+  if (!auditEvent?.event.payload?.process) throw new Error('REFUSE_RECOVERY: dead verifier has no durable artifact-audit Blender identity');
+  const auditComparison = await compareRecordedProcess(auditEvent.event.payload.process);
+  if (auditComparison.state === 'LIVE_MATCH') return { status: 'WAIT_LIVE_PROCESS', process: auditComparison.observed };
+  if (auditComparison.state !== 'DEAD') throw new Error('REFUSE_RECOVERY: artifact-audit Blender PID identity is ambiguous or reused');
+  const terminal = await writeAttemptTerminal(jobRoot, 'VERIFY_RECEIPT', started.attemptId, 'ABANDONED', {
+    reason: 'RECORDED_VERIFIER_AND_AUDIT_DEAD_WITHOUT_TERMINAL_STAGE_RECEIPT',
+    process: {
+      wrapper: { recorded: wrapperEvent.event.payload.process, observed: wrapperComparison.observed },
+      artifactAuditBlender: { recorded: auditEvent.event.payload.process, observed: auditComparison.observed },
+    },
+    evidence: { outputPromoted: false },
+    resources: { productionCompilerStarts: 0, nativeCompileBlenderStarts: 0, successfulNativeCompiles: 0, preferredVerifierStarts: 1, currentReceiptVerifierNodeChildren: 0, artifactAuditBlenderStarts: 1, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },
+  });
+  return { status: 'ABANDONED', attempt: terminal.receipt };
+}
+
+const RESOURCE_KEYS = [
+  'productionCompilerStarts', 'nativeCompileBlenderStarts', 'successfulNativeCompiles',
+  'preferredVerifierStarts', 'currentReceiptVerifierNodeChildren', 'artifactAuditBlenderStarts',
+  'renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses',
+];
+
+function addResources(total, resources) {
+  for (const key of RESOURCE_KEYS) {
+    const value = resources?.[key] ?? 0;
+    if (!Number.isSafeInteger(value) || value < 0) throw new Error(`Invalid resource count ${key}`);
+    total[key] += value;
+  }
+}
+
+async function recomputeResourceTotals(state) {
+  const total = Object.fromEntries(RESOURCE_KEYS.map(key => [key, 0]));
+  for (const stage of Object.values(state.stages)) {
+    if (stage.completed) addResources(total, stage.completed.receipt.resources);
+    for (const attempt of stage.attempts) {
+      if (attempt.terminalReceipt && attempt.status !== 'COMPLETED') addResources(total, attempt.terminalReceipt.receipt.resources);
+    }
+  }
+  total.totalBlenderStarts = total.nativeCompileBlenderStarts + total.artifactAuditBlenderStarts;
+  return total;
+}
+
+async function runFinalizeStage(jobRoot, state) {
+  const stageId = 'FINALIZE';
+  const attemptId = nextStageAttemptId(state, stageId);
+  await appendLedgerEvent(jobRoot, { eventType: 'STAGE_STARTED', stageId, attemptId, payload: {} });
+  const startedState = await deriveJobState(jobRoot);
+  const resourceTotals = await recomputeResourceTotals(startedState);
+  const dependencyReceipts = {};
+  for (const dependency of ['PLAN_BIND', 'PRODUCTION_COMPILE', 'VERIFY_RECEIPT']) {
+    const completed = startedState.stages[dependency].completed;
+    if (!completed) throw new Error(`FINALIZE dependency is incomplete: ${dependency}`);
+    dependencyReceipts[dependency] = { sha256: completed.sha256, receiptHash: completed.receipt.receiptHash };
+  }
+  await completeStage(jobRoot, stageId, attemptId, {
+    status: 'COMPLETED', promotable: true,
+    inputs: { dependencyReceipts, ledgerHeadBeforeFinalize: startedState.ledger.headEventHash },
+    outputs: { finalReceiptUri: 'final-receipt.json', resourceTotals },
+    process: { orchestratorPid: process.pid, childProcesses: 0 },
+    resources: Object.fromEntries(RESOURCE_KEYS.map(key => [key, 0])),
+  });
+  return ensureFinalClosure(jobRoot);
+}
+
+async function materializeFinalReceipt(jobRoot, completedState) {
+  const resourceTotals = await recomputeResourceTotals(completedState);
+  const stages = {};
+  for (const stageIdValue of completedState.manifest.stageDag.map(row => row.id)) {
+    const receipt = await readStageReceipt(jobRoot, stageIdValue);
+    stages[stageIdValue] = { uri: jobRelative(jobRoot, receipt.path), sha256: receipt.sha256, receiptHash: receipt.receipt.receiptHash };
+  }
+  const finalPath = resolve(jobRoot, 'final-receipt.json');
+  const { record } = await writeExclusiveDurableHashed(finalPath, {
+    schemaVersion: 'bfs.restartSafeProductionFinalReceipt.v0.1',
+    jobId: completedState.manifest.jobId,
+    status: 'PASS', promotable: true,
+    manifest: { uri: 'job-manifest.json', sha256: completedState.manifestFileSha256, manifestHash: completedState.manifest.manifestHash },
+    ledgerPrefix: { eventCount: completedState.ledger.events.length, headEventHash: completedState.ledger.headEventHash },
+    stages,
+    resourceTotals,
+    operations: { renderCalls: resourceTotals.renderCalls, modelCalls: resourceTotals.modelCalls, networkCalls: resourceTotals.networkCalls, dockerProcesses: resourceTotals.dockerProcesses },
+    closureRule: 'Final receipt binds the completed-stage ledger prefix; the terminal JOB_FINALIZED event binds this receipt.',
+  }, 'receiptHash');
+  return { path: finalPath, value: record, sha256: await sha256File(finalPath), state: completedState, closure: 'NEEDS_TERMINAL_EVENT' };
+}
+
+async function inspectFinalReceipt(jobRoot) {
+  const finalPath = resolve(jobRoot, 'final-receipt.json');
+  const final = await readOptionalJson(finalPath);
+  if (!final) return null;
+  if (final.value.schemaVersion !== 'bfs.restartSafeProductionFinalReceipt.v0.1' || final.value.status !== 'PASS'
+    || final.value.promotable !== true || !validSelfHash(final.value, 'receiptHash')) throw new Error('Final receipt schema, status or self-hash mismatch');
+  const state = await deriveJobState(jobRoot);
+  if (final.value.jobId !== state.manifest.jobId || final.value.manifest.manifestHash !== state.manifest.manifestHash
+    || final.value.manifest.sha256 !== state.manifestFileSha256) throw new Error('Final receipt manifest binding mismatch');
+  const terminal = state.ledger.events.at(-1)?.event;
+  for (const stageId of state.manifest.stageDag.map(row => row.id)) {
+    if (state.stages[stageId].status !== 'COMPLETED') throw new Error(`Final receipt has incomplete stage ${stageId}`);
+    const receipt = await readStageReceipt(jobRoot, stageId);
+    const reference = final.value.stages[stageId];
+    if (reference?.sha256 !== receipt.sha256 || reference?.receiptHash !== receipt.receipt.receiptHash) throw new Error(`Final receipt stage binding mismatch: ${stageId}`);
+  }
+  const totals = await recomputeResourceTotals(state);
+  if (!isDeepStrictEqual(totals, final.value.resourceTotals)) throw new Error('Final receipt resource totals mismatch');
+  if (terminal?.eventType === 'JOB_FINALIZED') {
+    if (terminal.previousEventHash !== final.value.ledgerPrefix.headEventHash
+      || terminal.payload?.receipt?.sha256 !== final.sha256 || terminal.payload?.receipt?.receiptHash !== final.value.receiptHash
+      || final.value.ledgerPrefix.eventCount !== state.ledger.events.length - 1 || terminal.sequence !== final.value.ledgerPrefix.eventCount + 1) {
+      throw new Error('Final receipt terminal ledger closure mismatch');
+    }
+    return { path: finalPath, value: final.value, sha256: final.sha256, state, closure: 'CLOSED' };
+  }
+  if (state.ledger.headEventHash === final.value.ledgerPrefix.headEventHash
+    && state.ledger.events.length === final.value.ledgerPrefix.eventCount
+    && state.stages.FINALIZE.status === 'COMPLETED') {
+    return { path: finalPath, value: final.value, sha256: final.sha256, state, closure: 'NEEDS_TERMINAL_EVENT' };
+  }
+  throw new Error('Final receipt has an ambiguous or divergent ledger closure');
+}
+
+async function ensureFinalClosure(jobRoot) {
+  let inspected = await inspectFinalReceipt(jobRoot);
+  if (!inspected) {
+    const state = await deriveJobState(jobRoot);
+    if (state.stages.FINALIZE.status !== 'COMPLETED') throw new Error('Cannot materialize final receipt before FINALIZE completion');
+    inspected = await materializeFinalReceipt(jobRoot, state);
+  }
+  if (inspected.closure === 'NEEDS_TERMINAL_EVENT') {
+    await appendLedgerEvent(jobRoot, {
+      eventType: 'JOB_FINALIZED',
+      payload: { receipt: { uri: 'final-receipt.json', sha256: inspected.sha256, receiptHash: inspected.value.receiptHash }, ledgerPrefixHeadEventHash: inspected.value.ledgerPrefix.headEventHash },
+    });
+  }
+  const closed = await inspectFinalReceipt(jobRoot);
+  if (!closed || closed.closure !== 'CLOSED') throw new Error('Final receipt closure did not become terminal');
+  return closed;
+}
+
+async function readValidatedFinalReceipt(jobRoot) {
+  const inspected = await inspectFinalReceipt(jobRoot);
+  if (!inspected) return null;
+  if (inspected.closure !== 'CLOSED') throw new Error('Final receipt exists without terminal ledger closure');
+  return inspected;
+}
+
 async function runAvailableStages(jobRoot, prevalidatedPlan, parsed) {
   let state = await deriveJobState(jobRoot);
   if (state.stages.PLAN_BIND.status === 'COMPLETED') {
@@ -632,7 +917,37 @@ async function runAvailableStages(jobRoot, prevalidatedPlan, parsed) {
   }
   state = await deriveJobState(jobRoot);
   if (parsed.developmentStopAfterCompile) return { outcome: 'DEVELOPMENT_COMPILE_CHECKPOINT', state: publicState(state) };
-  throw new Error('VERIFY_RECEIPT implementation is intentionally unavailable in this unfrozen checkpoint');
+  if (state.stages.VERIFY_RECEIPT.status === 'COMPLETED') {
+    await appendLedgerEvent(jobRoot, {
+      eventType: 'STAGE_SKIPPED_VERIFIED', stageId: 'VERIFY_RECEIPT', attemptId: state.stages.VERIFY_RECEIPT.completed.attemptId,
+      payload: { receiptHash: state.stages.VERIFY_RECEIPT.completed.receipt.receiptHash },
+    });
+  } else {
+    if (state.stages.VERIFY_RECEIPT.status === 'STARTED') {
+      const recovered = await recoverStartedVerify(jobRoot, state);
+      if (recovered.status === 'WAIT_LIVE_PROCESS') {
+        return { outcome: 'WAIT_LIVE_PROCESS', state: publicState(await deriveJobState(jobRoot)), process: recovered.process };
+      }
+      state = await deriveJobState(jobRoot);
+    }
+    if (!['PENDING', 'FAILED', 'ABANDONED'].includes(state.stages.VERIFY_RECEIPT.status)) {
+      throw new Error(`VERIFY_RECEIPT is not recoverable from status ${state.stages.VERIFY_RECEIPT.status}`);
+    }
+    const verification = await runVerifyStage(jobRoot, state);
+    state = await deriveJobState(jobRoot);
+    if (verification.status === 'FAILED') return { outcome: 'VERIFY_FAILED_NEEDS_RESUME', state: publicState(state) };
+  }
+  state = await deriveJobState(jobRoot);
+  if (parsed.developmentStopAfterVerify) return { outcome: 'DEVELOPMENT_VERIFY_CHECKPOINT', state: publicState(state) };
+  let finalized;
+  if (state.stages.FINALIZE.status === 'COMPLETED') finalized = await ensureFinalClosure(jobRoot);
+  else {
+    if (state.stages.FINALIZE.status !== 'PENDING') throw new Error(`FINALIZE is not recoverable from status ${state.stages.FINALIZE.status}`);
+    finalized = await runFinalizeStage(jobRoot, state);
+  }
+  const final = await readValidatedFinalReceipt(jobRoot);
+  if (!final || final.value.receiptHash !== finalized.value.receiptHash) throw new Error('Final receipt post-write validation failed');
+  return { outcome: 'COMPLETE', state: publicState(final.state), finalReceipt: { sha256: final.sha256, receiptHash: final.value.receiptHash } };
 }
 
 export async function runRestartSafeProductionJob(argv) {
@@ -647,9 +962,41 @@ export async function runRestartSafeProductionJob(argv) {
   }
   if (parsed.mode === 'status') {
     const state = await deriveJobState(jobRoot);
-    const result = publicState(state);
+    const final = await readValidatedFinalReceipt(jobRoot);
+    const result = { ...publicState(state), finalReceiptHash: final?.value.receiptHash ?? null };
     process.stdout.write(`BFS_RESTART_SAFE_JOB_STATUS ${JSON.stringify(result)}\n`);
     return result;
+  }
+  const finalInspection = parsed.mode === 'resume' ? await inspectFinalReceipt(jobRoot) : null;
+  if (finalInspection?.closure === 'CLOSED') {
+    const result = {
+      outcome: 'ALREADY_FINALIZED',
+      state: publicState(finalInspection.state),
+      finalReceipt: { sha256: finalInspection.sha256, receiptHash: finalInspection.value.receiptHash },
+      processStarts: 0,
+    };
+    process.stdout.write(`BFS_RESTART_SAFE_JOB ${result.outcome} ${JSON.stringify(result.state)}\n`);
+    return result;
+  }
+  if (parsed.mode === 'resume') {
+    const { manifest } = await readManifest(jobRoot);
+    await validateToolFreeze(manifest);
+  }
+  if (finalInspection?.closure === 'NEEDS_TERMINAL_EVENT') {
+    const lease = await acquireWriterLease(jobRoot, { allowReclaimDead: true });
+    try {
+      const closed = await ensureFinalClosure(jobRoot);
+      const result = {
+        outcome: 'RECOVERED_FINAL_LEDGER_CLOSURE',
+        state: publicState(closed.state),
+        finalReceipt: { sha256: closed.sha256, receiptHash: closed.value.receiptHash },
+        processStarts: 0,
+      };
+      process.stdout.write(`BFS_RESTART_SAFE_JOB ${result.outcome} ${JSON.stringify(result.state)}\n`);
+      return result;
+    } finally {
+      await releaseWriterLease(lease);
+    }
   }
   const lease = await acquireWriterLease(jobRoot, { allowReclaimDead: parsed.mode === 'resume' });
   try {
