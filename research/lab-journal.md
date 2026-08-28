@@ -3246,3 +3246,19 @@ Date: 2026-08-28 · Type: IMPLEMENTATION FREEZE CHECKPOINT · Formal outputs: 0
 每个 consumer 一次处理七个 frozen factors，full symmetric stencil 不使用 factor，one-sided row/column 才应用 inflation。输出包含 control masks 与每 factor 的 eligible/unavailable/accepted/risk/reconstruction arrays。Runner 预定 16 consumer + 1 analyzer + 1 audit child processes；auditor 对 parent/adapter/raw decisions/risk/support/fallback/result/cross-language/repeat 执行 64 个真实 in-memory mutations，不允许 `mutationNonce` 计数。
 
 四工具已分别通过 Blender 5.2 bundled Python syntax compilation 或 Node syntax check，补丁 whitespace check 通过；尚未创建 formal root，也没有运行任何 consumer。下一动作必须先把这些 exact bytes 提交为 tool-freeze commit，再允许 runner 创建第一份 D12.12 output。
+
+## J-218 · D12.12-D1 one-sided curvature candidate 通过推导门，但未通过完整 sweep coverage 门
+
+Date: 2026-08-28 · Type: POST-HOC DERIVATION ACCEPTED / FRESH HOLDOUT REQUIRED · New Blender renders: 0
+
+在预登记 commit `9b327ea`、工具冻结 commit `c91869a` 之后，formal root commit `5eb87b6` 保留了 16 个独立 consumer、1 个 analyzer 与 1 个 independent audit 子进程的完整输出；所有进程唯一且退出码为 0，父 D12.11 formal tree 在实验前后均为 `d1d50c211d4a94321ef7c051e9b066ff700a36d8`。
+
+冻结的七因子族 `[1,2,4,8,16,32,64]` 按机械规则选出最小通过者 **factor 1**。Analyzer 为 13/13，独立 audit baseline 为 21/21，64/64 个真实 semantic mutations 全部被命名门拒绝。Python/Node 全数组 byte exact、两次 repeat byte exact、full-symmetric-stencil 路径与 D12.11 byte exact；selected factor 的 measured risk underbound、false invalid-history accept、Material alias accept 与 static accepted delta 均为 0。
+
+Rotated sweep 的 146 个 localized opportunities 中 146 个 eligible、136 个新增 accepted，coverage 从 `0.9455795488` 升至 `0.9587489106`；foreground-owner retention 从 `0.9415061296` 升至 `0.9502626970`。因此 owner gate 已过，但原 0.97 cell gate **仍未通过**。Camera parallax 的 152 个 opportunities 中 144 个新增 accepted，coverage 从 `0.9773526` 升至 `0.986723936`。全局 accepted RGB maximum 为 `3.0308961868286133e-05`，RMSE 为 `1.0527398680313309e-05`。
+
+结论被限制为 post-hoc candidate：在 D12.11 已有 Blender 5.2 real-render arrays 上，symmetric 4×4 curvature support 对这两个边界族过于保守；但 factor 1 对任意 rendered function 并无数学上界保证，且 sweep 仍暴露独立 risk-rejection bottleneck。重启后的第一动作不是改写现有结果，而是先为 D12.12-H1 预登记全新的 Blender 5.2 holdout：冻结 factor 1，覆盖 left/right、top/bottom one-sided boundaries 与 neither-side negative control，再创建 source/render 工具；在此之前可先完成 source-bound evidence proxies 与研究网站 tab。
+
+Result file SHA-256 / self-hash: `4c68f0fad380e0362b3913c0f08f009aa009a620d8e718520a73319edd4e98e2` / `eba522125663564ee3d1cb6cb53fe3d0207fd3b32aa35160dba6fc481da6a841`。Audit file SHA-256 / self-hash: `5418414190a1f945ecc7a2d6069bbf8139898630eb54b2cb325332cbfb544615` / `a33ddf28b4eed72f37938c0bb334c23a3149f92cbe69d1596b0e673ac454cef1`。Receipt file SHA-256 / self-hash: `29749a31ad573a0ef8226534da4deb601b772bb0681d4b0068b122613ab129c8` / `87ce924b6d4cc212b9a49e43475bdd4334564e6b1a2e42e67db9f689f33a7bd9`。
+
+Artifact: `research/2026-08-28-b52-d12-12-d1-one-sided-curvature-derivation-result.md`.
