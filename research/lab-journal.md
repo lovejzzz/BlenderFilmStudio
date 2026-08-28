@@ -3155,6 +3155,18 @@ Result SHA-256: `3eaa1461a7fa8b9f74e3320e19e56efa1cde3e0ea05618c1e04239d082b8845
 
 Artifact: `research/2026-08-28-b52-d12-11-i1-formal-result-and-attack-gap.md`.
 
+## J-211 · D12.11-I1-A1 真实语义攻击审计预登记
+
+Date: 2026-08-28 · Type: ADVERSARIAL AUDIT PREREGISTRATION · New Blender renders: 0
+
+在新 audit tool 与 output root 均不存在时，I1-A1 绑定 formal commit `ec6305a7d125d4f857450b8c431ef379214f45bf`、root Git tree `d1d50c211d4a94321ef7c051e9b066ff700a36d8`、result/audit/execution/receipt 与 promotion-hold note。基线 validator 固定 19 个 raw/identity/semantic gates，并必须从 C1 truth 与 consumer masks 独立重算两次 `15→0`、全八 cell new accepted=0。
+
+攻击 roster 精确冻结为 56 个实际 mutation：8 parent bytes、4 source reports、8 paired adapter bytes、2 owner-channel substitutions、4 token contract、4 Object Index controls、2 registered alias accepts、8 new accepted coordinates、4 fallback bytes、4 coverage-result edits、verdict/result/audit/receipt 各 1、2 Q30 threshold crossings、2 Vector sign flips。每个攻击都在隔离的 in-memory copy 上执行，必要时同步修复被攻击 artifact 的局部 self-hash，以避免所有测试退化成 hash-only；必须击中预登记的 named gate。`mutationNonce` 不被允许计数。
+
+Audit 不导入原 analyzer/audit/consumer 或 Blender modules，不启动 Blender/render/model/network，并要求 formal Git tree 攻击前后不变。Spec SHA-256: `bc1f6c9e171d009bedd6041e53aa7e3580185e72897800efe5b06e1ed25cad22`。
+
+Artifact: `specs/blender-material-index-owner-integration-adversarial-audit.v0.1.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
