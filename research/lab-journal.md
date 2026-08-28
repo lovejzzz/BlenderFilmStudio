@@ -3306,3 +3306,13 @@ Formal matrix 冻结为 6 fixtures × 2 frames × 2 clean repeats = 24 个新 Cy
 预登记时 observed free bytes 为 110,389,080,064；projected write 201,326,592 bytes 后仍高于冻结的 100 GiB reserve。Spec SHA-256: `b0defadbd120f77dfe81bfa16d9dfd4e3a4d4a15ad1c8ddd1176d21f2e13b648`。
 
 Artifact: `specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json`.
+
+## J-223 · D12.12-H1 三工具可恢复实现检查点
+
+Date: 2026-08-28 · Type: IMPLEMENTATION CHECKPOINT / NOT A FORMAL RESULT · New Blender renders: 0
+
+预登记 commit `ff093a5` 之后才创建 Blender source、OpenImageIO adapter 与第一套 scalar Python consumer；三者以独立 checkpoint commit `21941f2d775b10666ea1ab1a0cfecaf6697ef4bb` 推送到 `main`。Blender 5.2 bundled Python 3.13 对三个文件的语法编译均通过；这只证明工具可被解释器加载，不证明场景、pass 语义、方向门或数值结论正确。
+
+Source 已实现六个冻结 fixture 的 Cycles CPU 场景、Generated emission、Material/Object pass indices 与 probe-only 路径；adapter 已实现 multipart EXR roster、10 个数组、Material token domain 和共享 Object Index 负对照；Python consumer 已实现 analytic projection/visibility、symmetric 与 one-sided support、Q30 risk、exact fallback 和冻结的方向 control masks。文件 SHA-256 依次为 `352e4f30569e8966b01ac638e79f54e0ac1973da9fdbf065312230e8b0c78188`、`bf5b9e72c27d2c8fd5aedad0cdaea4a7fda077543123e4ff644f96c85e24ce99`、`42a654afc729e66db2627e48f7ff153048e21d06e29506501fe4484d5341db25`。
+
+停止点被明确冻结：Node 独立 consumer、analyzer、independent auditor、preflight 和 110-process runner 尚未创建；formal/preflight output roots 尚未生成；24 个 Blender renders 尚未启动；因此 directional acceptance、coverage、risk underbound、RGB maximum/RMSE 与 holdout pass/fail 全部未知。重启后的第一动作是实现 Node consumer 并要求 every-array byte exact，随后才实现 analyzer/auditor/preflight/runner；八工具全部冻结并通过 zero-render preflight 之前，不得创建 formal root 或宣称 H1 通过。
