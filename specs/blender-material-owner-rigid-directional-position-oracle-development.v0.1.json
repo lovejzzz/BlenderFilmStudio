@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerRigidDirectionalPositionOracleDevelopment.v0.1",
+  "experimentId": "B52-D12.14-P1",
+  "title": "Position-pass oracle development probe for Blender 5.2 rigid directional motion",
+  "status": "PREREGISTERED_DEVELOPMENT_INSTRUMENT_PROBE_AFTER_DISCLOSED_H1_POSTFAILURE_OBSERVATIONS_BEFORE_NEW_TOOL_OR_RENDER_OUTPUT",
+  "classification": "DEVELOPMENT_ONLY_NOT_CONFIRMATORY_NOT_A_SCIENTIFIC_VERDICT",
+  "question": "Can a fresh Blender 5.2 Position pass bind the Vector pass to the actual first-hit ShaderData position tightly enough to replace H1's invalid pixel-center projection oracle, while two clean renders preserve exact decoded pass identity?",
+  "decisionBoundary": "This probe may validate an H2 control/oracle design. It cannot repair B52-D12.14-H1, create an H1 verdict, validate inverse-depth reconstruction on a fresh fixture, authorize compiler promotion or serve as an H2 measurement input.",
+  "parents": {
+    "h1Spec": {
+      "uri": "specs/blender-material-owner-rigid-directional-render-holdout.v0.1.json",
+      "sha256": "7ff239d91dca6ea8708ce4cac955dd0b129ae067028a77ec1699a43a236195a8",
+      "experimentId": "B52-D12.14-H1"
+    },
+    "h1FrozenSourceTool": {
+      "uri": "blender/render_b52_d12_14_h1_rigid_directional_source.py",
+      "sha256": "9ba86e95e8d24c2592690c575cd87749433a1af00a7d2c18ace3e2153daf36ce"
+    },
+    "h1FrozenConsumerTool": {
+      "uri": "scripts/reconstruct-b52-d12-14-h1-rigid-directional.py",
+      "sha256": "7bae8c665df9d904369fe7774204c42024a2b15c3a4b615bd7e8d28ab8238c40"
+    },
+    "h1Failure": {
+      "uri": "experiments/blender-material-owner-rigid-directional-render-holdout-v0-1/failure.json",
+      "fileSha256": "8a5caef198ee65ac35a932f26d2a74604fff833ce978407c1a6526132fa6f953",
+      "failureHash": "6629e437b37bb4c7b10be22967a57f978830d515d680cac173c7d912b8ddaef3",
+      "scientificVerdict": null
+    },
+    "repository": {
+      "commitBeforePreregistration": "9270ea3a1430a1d46fc72326b06fbfad41cc63b8",
+      "treeBeforePreregistration": "b62ffc68b1af9471ff7977a99f64545f30276e82"
+    }
+  },
+  "disclosedPostfailureObservations": {
+    "classification": "OBSERVED_BEFORE_THIS_DEVELOPMENT_PREREGISTRATION_NON_DECISIONAL",
+    "h1NeitherReasonCounts": {
+      "registered": 27383,
+      "sameOwnerBilinearSupport": 16819,
+      "linearDepthValid": 278,
+      "linearDepthInvalid": 16541,
+      "radius2AfterLinearDepth": 270,
+      "neitherHorizontalAfterLinearDepth": 270
+    },
+    "linearDepthInterpolation": {
+      "absoluteErrorMedian": 0.3819589931877907,
+      "absoluteErrorMaximum": 0.4652322060410441
+    },
+    "inverseDepthReplay": {
+      "formula": "1 / bilinear(1 / previousDepth)",
+      "absoluteErrorMedian": 0.0000275397720024273,
+      "absoluteErrorMaximum": 0.0001884176535824622,
+      "passesOriginalRelativeDepthGate": 16819,
+      "sameOwnerBilinearSupport": 16819,
+      "radius2": 16065,
+      "neitherHorizontal": 16065,
+      "relationToOldRasterPilot": "The recovered 16065 witnesses exactly equal the disclosed H1 zero-render structural pilot count. This observation motivates a future projective-depth candidate but is not fresh evidence."
+    },
+    "pixelCenterVectorOracle": {
+      "frozenTolerancePixels": 0.00006103515625,
+      "maximumAbsoluteErrorByFixture": {
+        "RIGID_TOP_FRESH_193X135": 0.00020807439631198577,
+        "RIGID_BOTTOM_FRESH_193X137": 0.000152587890625,
+        "RIGID_NEITHER_FRESH_197X139": 0.0005771591031589196
+      },
+      "interpretation": "The H1 oracle projects integer pixel centers, while Cycles computes Vector from the actual first-hit ShaderData position. The fixed tolerance is therefore not a valid general oracle."
+    }
+  },
+  "officialSourceEvidence": {
+    "repository": "https://github.com/blender/blender",
+    "exactBuildCommit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "files": [
+      {
+        "uri": "https://github.com/blender/blender/blob/fbe6228777e7d9afefcd61a413844e790ae75db7/intern/cycles/kernel/film/data_passes.h",
+        "sha256": "fc534ab62f81b837d1ce4eb23d5840742e387137372b4d0d86262268f3966c03",
+        "relevance": "Depth is camera_z_depth(sd->P), Position writes sd->P, and Motion calls primitive_motion_vector from the same ShaderData path."
+      },
+      {
+        "uri": "https://github.com/blender/blender/blob/fbe6228777e7d9afefcd61a413844e790ae75db7/intern/cycles/kernel/geom/primitive.h",
+        "sha256": "46d292f44caacd809e9ac097029b266bb889279c391ed0c8b6fffbe14204dddc",
+        "relevance": "Rigid motion starts from sd->P, applies previous/post object transforms, projects center/pre/post through camera raster transforms, then subtracts raster positions."
+      },
+      {
+        "uri": "https://github.com/blender/blender/blob/fbe6228777e7d9afefcd61a413844e790ae75db7/intern/cycles/scene/camera.cpp",
+        "sha256": "cb0e909f1d1ddd025ceee3c651fe0d6f29c3399ae1c3ddb1a783ffc093f37ce5",
+        "relevance": "The motion pass camera matrices are built as current/previous world-to-raster projection transforms."
+      }
+    ],
+    "inference": "Because Position and Vector share sd->P in this exact build, projecting Position through the declared current and previous rigid transforms tests Vector at its actual subpixel hit rather than at an assumed pixel center."
+  },
+  "freshness": {
+    "checkedAbsentBeforeThisSpec": [
+      "specs/blender-material-owner-rigid-directional-position-oracle-development.v0.1.json",
+      "blender/develop_b52_d12_14_position_oracle_probe.py",
+      "scripts/analyze-b52-d12-14-position-oracle-probe.py",
+      "scripts/run-b52-d12-14-position-oracle-probe.py",
+      "experiments/blender-material-owner-rigid-directional-position-oracle-development-v0-1"
+    ],
+    "requirements": [
+      "Commit and push this exact spec before any P1 tool byte or output exists.",
+      "Freeze and push all three P1 tools before creating the output root.",
+      "Create exactly two new factory-empty Blender 5.2 Cycles CPU renders. Do not copy or consume the H1 EXRs as measurement inputs.",
+      "The P1 fixture, scene structure and H1 frozen source behavior are development inputs permanently excluded from H2 formal measurement.",
+      "Retain any failed root and report the failure without repairing or rerunning P1."
+    ],
+    "newToolPaths": [
+      "blender/develop_b52_d12_14_position_oracle_probe.py",
+      "scripts/analyze-b52-d12-14-position-oracle-probe.py",
+      "scripts/run-b52-d12-14-position-oracle-probe.py"
+    ],
+    "outputRoot": "experiments/blender-material-owner-rigid-directional-position-oracle-development-v0-1"
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7"
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "openImageIO": "3.1.13.1",
+      "numpy": "2.3.4"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    }
+  },
+  "renderMatrix": {
+    "fixtureId": "RIGID_NEITHER_FRESH_197X139",
+    "frame": 1,
+    "repeats": [1, 2],
+    "newBlenderProcesses": 2,
+    "newBlenderRenderCalls": 2,
+    "engine": "CYCLES",
+    "device": "CPU",
+    "samples": 1,
+    "seed": 5212141,
+    "resolution": [197, 139],
+    "addedPass": "Position",
+    "expectedSubimages": [
+      "BFS_D1214P1_MASTER.Combined",
+      "BFS_D1214P1_MASTER.Depth",
+      "BFS_D1214P1_MASTER.Position",
+      "BFS_D1214P1_MASTER.Vector",
+      "BFS_D1214P1_MASTER.Object Index",
+      "BFS_D1214P1_MASTER.Material Index"
+    ]
+  },
+  "positionOracle": {
+    "currentPoint": "decoded Position pass world-space XYZ",
+    "currentRaster": "project currentPoint through the current camera",
+    "localPoint": "transpose(currentOwnerRotation) * (currentPoint - currentOwnerLocation)",
+    "previousPoint": "previousOwnerLocation + previousOwnerRotation * localPoint",
+    "previousRaster": "project previousPoint through the previous camera",
+    "expectedVector": ["previousRasterX-currentRasterX", "currentRasterYTop-previousRasterYTop"],
+    "forbiddenInputs": ["integer pixel center as current hit", "current or previous RGB", "H1 analytic mask", "H1 EXR"],
+    "controlOnly": "Position may validate source semantics and Vector identity but may not be a reconstruction decision input."
+  },
+  "gates": {
+    "sourceReportsAndExrBindingsValid": true,
+    "exactSubimageRosterAndFloatChannels": true,
+    "foregroundPositionPixelsMinimum": 20000,
+    "positionFinite": true,
+    "positionMaterialAndObjectTokensExact": true,
+    "currentDepthFromPositionMaximumAbsoluteError": 0.00006103515625,
+    "positionOracleVectorMaximumAbsoluteErrorPixels": 0.00006103515625,
+    "vectorNextMaximumAbsoluteMagnitudePixels": 0.00006103515625,
+    "decodedPassArraysExactAcrossRepeats": true,
+    "containerMetadataDifferenceAllowlist": ["Date", "RenderTime", "Scene"],
+    "containerBytesMayDiffer": true,
+    "operationCountsExact": true,
+    "noModelOrNetworkCalls": true
+  },
+  "outcomes": {
+    "supported": "POSITION_PASS_ORACLE_DEVELOPMENT_SUPPORTED",
+    "notSupported": "POSITION_PASS_ORACLE_DEVELOPMENT_NOT_SUPPORTED",
+    "failure": "POSITION_PASS_ORACLE_DEVELOPMENT_INVALIDATED_BY_TOOL_OR_EXECUTION_FAILURE"
+  },
+  "nextBoundary": "Only a supported P1 result permits an H2 spec to use Position as a control oracle. Inverse-depth remains a separate pilot-informed algorithm change that requires a new formal experiment ID, fresh fixture and fresh rendered measurements."
+}

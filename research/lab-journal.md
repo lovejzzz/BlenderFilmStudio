@@ -3596,3 +3596,15 @@ Sites 发布前复核 current user role 为 owner、access mode 为 custom、唯
 重启后的精确续接顺序已经冻结为：先对 H1 partial arrays 做只读取证，分解 NEITHER 270 witnesses 的 reason-code、owner、Vector、current Depth 与 previous-support 损失；再用全新实验 ID 预登记 H2。H2 至少增加 analyzer-on-probe-shaped-report schema smoke、canonical decoded-pass digest、容许且单独报告的 container metadata 差异、可在 child failure 时仍写 immutable failure execution/receipt 的 finally-path，并选择真实 pass pilot 支持至少 1,024 个 NEITHER witnesses 的 fresh raster/transform。新 spec 提交前不得创建 H2 tool bytes、output root 或 formal render。之后才返回主目标 SceneSpec → immutable BuildPlan → Blender 5.2 compiler 的 B01/B02 净构建复现。
 
 用户原有未提交内容 `README.md` 与三份 2026-08-26 Physis/Remainder Room research drafts 均未纳入本检查点，也未被改写。
+
+## J-249 · D12.14-H1 NEITHER 失效机理定位与 P1 Position oracle 预登记
+
+Date: 2026-08-28 · Type: POSTFAILURE READ-ONLY DIAGNOSTIC / DEVELOPMENT PREREGISTRATION · New Blender renders: 0
+
+从 J-248 精确恢复后，只读取证分解 H1 consumer arrays。NEITHER 的 reason chain 为：27,383 registered，16,819 same-owner bilinear support，16,541 `INVALID_DEPTH`，278 structural-valid，270 radius-2，270 `SUPPORT_UNAVAILABLE`，0 eligible/accepted。TOP 与 BOTTOM 没有 depth failure。因此 270-witness 缺口不是 risk candidate 或 raster-domain 本身造成，而是 edge-on previous plane 的 Z interpolation contract。
+
+对 16,819 个 same-owner supports，直接 `bilinear(Z)` 相对 transform-predicted previous depth 的绝对误差 median/max 为 `0.3819589931877907` / `0.4652322060410441`；解析 tap depths 自身也重现同一数量级，rendered taps 与解析 taps 的最大差仅 `0.0035654820740553816`，排除了 Blender Depth pass 大幅失真。改为 `1 / bilinear(1 / Z)` 后 median/max 降至 `2.75397720024273e-5` / `1.884176535824622e-4`；全部 16,819 supports 通过原 relative-depth gate，随后精确恢复 16,065 radius-2 与 16,065 NEITHER witnesses，等于 H1 的 disclosed zero-render pilot。该结果是新算法设计输入，不是 H1 verdict。
+
+另一个独立缺口是 pixel-center Vector oracle：TOP/BOTTOM/NEITHER observed max 分别为 `2.0807439631198577e-4`、`1.52587890625e-4` 与 `5.771591031589196e-4` pixel，均超过冻结 `1/16384`。本机 build hash 对应的官方 Blender commit `fbe6228777e7d9afefcd61a413844e790ae75db7` 源码显示 Position、Depth 与 Vector 同源于 first-hit `ShaderData.sd->P`，Vector 再经过 previous object 与 raster projection；因此 integer pixel center 不是同一物理样本。
+
+在 P1 spec、三条新工具路径与 output root 全部确认不存在时，预登记 `B52-D12.14-P1`。它将用同一 H1 development-only fixture 做两次新的 Blender 5.2 current-frame render，只增加 Position pass，并以 Position world point 重建 current/previous raster endpoints。P1 只验证 H2 instrument design；该 fixture、结果与 H1 EXR 均禁止成为 H2 formal measurement input。P1 spec SHA-256 为 `2ccffbcfe861fd80406901b417cf4cd2b2b8977c6925d6fb73e3d0328092efe3`。下一动作必须先提交推送 exact P1 spec/protocol；随后才允许创建 P1 tools，工具冻结提交后才允许渲染。
