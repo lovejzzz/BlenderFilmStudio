@@ -41,6 +41,7 @@ export default function RigidDirectionalHoldoutFailurePage() {
       <nav aria-label="D12.14-H1 failure 导航">
         <Link href="/blender-material-owner-rigid-directional-calibration-v0-1">D12.14-C2</Link>
         <a href="#status">状态</a><a href="#failure">故障</a><a href="#evidence">证据</a><a href="#forensics">取证</a><a href="#boundary">边界</a>
+        <Link href="/blender-projective-depth-position-oracle-v0-1">D12.14-P1</Link>
         <Link href="/journal">日志</Link>
       </nav>
       <span className="edition contact-edition">Formal H1 · Invalidated</span>
@@ -131,6 +132,7 @@ export default function RigidDirectionalHoldoutFailurePage() {
         <article className="pass"><span>DECODED SOURCE PASSES</span><strong>BYTE EXACT</strong><p>Repeat adapters 与 consumers 完全一致；Python/Node every array、24 envelope pairs 也一致。</p></article>
         <article className="fail"><span>EXR CONTAINER FILES</span><strong>NOT BYTE EXACT</strong><p>像素相同，但 Combined metadata 的 <code>Date</code>、<code>RenderTime</code>、<code>Scene</code> 不同。</p></article>
       </div>
+      <div className="d1214h1-followup"><span>POSTFAILURE RESULT · P1</span><strong>270 不是 raster-domain 上限。</strong><p>Inverse-depth replay 恢复 16,065 个 NEITHER witnesses；两个 fresh Position renders 又把 Vector oracle max error 从 5.77e−4 降至 3.28e−5 px。<Link href="/blender-projective-depth-position-oracle-v0-1">查看两条根因与 H2 入口合同 →</Link></p></div>
     </section>
 
     <section className="section d1214h1-boundary" id="boundary">
@@ -142,7 +144,7 @@ export default function RigidDirectionalHoldoutFailurePage() {
       <div className="d1214h1-next-grid">
         <article><span>SCHEMA HANDOFF</span><strong>analyzer-on-probe smoke</strong><p>让真实 probe report 穿过 analyzer 的 normalization boundary。</p></article>
         <article><span>SOURCE IDENTITY</span><strong>canonical decoded digest</strong><p>像素/pass identity 与 EXR container metadata 分层判定。</p></article>
-        <article><span>NEITHER DOMAIN</span><strong>≥ 1,024 witnesses</strong><p>以已披露 270 为 pilot input；不能降低旧 minimum。</p></article>
+        <article><span>PROJECTIVE DEPTH</span><strong>1 / bilinear(1/Z)</strong><p>Posthoc 已恢复 16,065；仍须用 fresh H2 正式验证。</p></article>
         <article><span>FAILURE TOTALITY</span><strong>runner finally receipt</strong><p>任何 child 失败也要留下 process roster 与 immutable failure chain。</p></article>
       </div>
       <div className="contact-artifacts">
@@ -152,6 +154,6 @@ export default function RigidDirectionalHoldoutFailurePage() {
       </div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.14-H1 Frozen Tool Failure</b></div><p>12 renders · 54 successful children · scientific verdict null</p><Link href="/blender-material-owner-rigid-directional-calibration-v0-1">返回 D12.14-C2 →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.14-H1 Frozen Tool Failure</b></div><p>12 renders · 54 successful children · scientific verdict null</p><Link href="/blender-projective-depth-position-oracle-v0-1">继续 D12.14-P1 →</Link></footer>
   </main>;
 }

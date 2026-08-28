@@ -3632,3 +3632,13 @@ Tool-freeze commit `0a7ed9b` 推送后，runner 一次性创建 fresh P1 root。
 独立 posthoc evidence check 的 19/19 项通过，包括 results/execution/receipt 与两份 source report self-hash、EXR bindings、artifact/log hashes、3/3 children和实际 operation counts。与此同时保留一个工具覆盖缺口：P1 analyzer 的 `OPERATION_BOUNDARY` 是常量 true，而不是内部 replay；独立检查证明观察值，但不是 preregistered gate。H2 必须把 source/runner counts replay 写进 analyzer 与 audit。Result file/self hashes为 `69edb9ad3db3c67b5b21ad3b3a4c9e0ab59e05e29d38a60a34ce9ae04457b9fa` / `c3d8b7226872702d3947320ed19dbeed80b19704adf9432dbc2505e4abcd534e`；receipt self-hash为 `4b805e0f513100b836867c017cab1fa07cf8101a9c8b4fd75fef68b9871e40e8`。
 
 P1 至此封闭，不修改或重跑。下一步先提交并推送 exact evidence root、posthoc audit 和 result note；然后把 P1 与 H1 inverse-depth 诊断发布到研究网站，再预登记 fresh H2。
+
+## J-252 · D12.14 投影修复研究页完成本地验证
+
+Date: 2026-08-28 · Type: WEBSITE SOURCE VALIDATED / RESTART CHECKPOINT · New Blender renders: 0
+
+新增研究页 `blender-projective-depth-position-oracle-v0-1`，把 H1 失败后的两条独立算法缺口明确分开：previous-depth gate 不能对 perspective depth 直接做 `bilinear(Z)`，已观察的同 owner support 应改为 `1 / bilinear(1 / Z)`；Vector control oracle 不能假定 integer pixel center，必须使用 Position pass 记录的同一 first-hit world point。页面直接读取 P1 frozen `results.json` 与独立 `audit.posthoc.json`，公开 P1 的 27,383 foreground Position pixels、Position-derived current Depth exact、Position-based Vector max `3.281015233369544e-5 px`、六组 decoded pass arrays repeat exact，以及 EXR container metadata variation 的严格边界。
+
+首页新增 `D12.14-P1 投影修复` tab；H1 页面新增到 P1 的证据链链接和 H2 约束；GitHub Pages sparse checkout 显式加入 P1 results/audit 两份机器证据。新页、H1 页与首页定向 ESLint 为 0 errors；Vinext/Sites production build 成功并发现 84 个 CDN warmup paths；GitHub Pages static build 成功生成 86/86 pages。localhost 上首页、H1 和 P1 route 均返回 HTTP 200。P1 页 metadata 的 title、description 与 canonical 已核对；详情页显式清除继承的 Open Graph/X 图片，同时保留全站既有 `public/og.png`，没有伪造与实验无关的图像。
+
+按站点验证边界，本阶段没有执行用户未请求的截图、DOM、点击或视觉 QA。下一动作是只提交并推送站点源文件、本 journal 与 Pages workflow；必须继续排除用户原有 `README.md` 和三份 2026-08-26 research drafts。重启后先确认该 source commit 与 GitHub Pages workflow，再完成 owner-only Sites 发布；之后以全新 ID 预登记 H2，把 inverse-depth、Position oracle、decoded-pass identity、probe-shaped analyzer smoke、operation-count replay 和 failure receipt 写成可执行 gate。
