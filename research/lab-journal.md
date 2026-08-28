@@ -3698,3 +3698,13 @@ tool-freeze commit `0fbb9e2fa1350377de15fadcce9be1699761adc2` 推送后，首次
 首次preflight root已完整保留并重命名为 `experiments/blender-material-owner-projective-depth-holdout-preflight-invalid-v0-1`；其accepted状态被machine record明确作废。`postflight-failure.json` file SHA-256 / self-hash为 `2a911349011137a815fffcedb4c2f7d2d32b03715c878cb48382f9783474f9fa` / `9b6a2343af33ed7dbfad082ab793a3819e39bc6b66db78d7fb870c745d27a78e`。
 
 预登记 `B52-D12.14-H2-TOOL-C2` 只授权两项preformal change：Node mkdir改为recursive；preflight必须实际运行nested-parent Python/Node synthetic consumers并完成full-shaped analyzer dry run。source、adapter、Python consumer、analyzer、auditor、runner及全部科学语义禁止改动。C2 SHA-256为 `d3cab8e72764d1b12046be41068d3f6cafbd014110fc46748a03e29904bc2e38`。下一动作是先提交推送C2与invalid root；随后才编辑两条授权工具并形成第二tool-freeze。
+
+## J-258 · Codex 升级重启前安全断点
+
+Date: 2026-08-28 · Type: OPERATIONAL CHECKPOINT / NO EXPERIMENT EXECUTION · New Blender renders: 0
+
+因用户准备升级并重启 Codex，本轮主动停止在 `B52-D12.14-H2-TOOL-C2` 已预登记、尚未实施的边界。检查时 Git `HEAD` 与 `origin/main` 均为 `6f1bc09433f23d2b542b2b5becb804e8eeb88451`；正式 H2 root `experiments/blender-material-owner-projective-depth-holdout-v0-1` 从未创建，corrected official preflight 也尚未运行。没有 Blender render、EXR、consumer measurement 或 scientific verdict 在此断点之后产生。
+
+机器上没有实验 runner、Blender render、localhost server 或 H2 Python process在运行；仅存在 macOS 启动的 Blender thumbnailer application extension，不属于实验任务，保留不动。工作卷剩余约 `102 GiB`。用户原有 `README.md` 修改与三份未跟踪的 2026-08-26 research drafts仍明确排除于项目提交之外。
+
+重启后的唯一恢复入口：先确认本断点 commit与远端一致；再严格按C2只修改Node consumer的一处recursive parent materialization，以及preflight的nested-parent Python/Node + full-shaped analyzer NOT_SUPPORTED probe。完成syntax与零渲染验证后提交第二tool-freeze；随后才允许运行新的official preflight。只有该preflight被提交并推送，才可启动exactly 4次正式 H2 renders。不得以首次13/13但已作废的preflight作为runner凭据，也不得跳过C2或提前创建formal root。
