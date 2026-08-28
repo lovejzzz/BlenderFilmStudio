@@ -4131,3 +4131,13 @@ Sequence-5 disk admission因此durably写为REJECTED、reason `FREE_AFTER_PROJEC
 Date: 2026-08-28 · Type: DEVELOPMENT PREFLIGHT EVIDENCE · New Blender processes: 0 · New Blender renders: 0
 
 在low-disk development evidence commit `4af2456`推送后，为对称正常路径创建fresh B01 preflight/output binding，release仍指向未变的implementation candidate `968cc709f02721a623a85e816b4a071d6d1824db`。Preferred preflight ACCEPTED，plan hash `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；available 108,587,016,192 bytes，projection后108,050,145,280 bytes，Blender/render/model/network/Docker为0。Preflight file SHA/self-hash为 `4a80b853af5aecca94c6a110627b700bf172f60e5f71c5ea542e8732af5924a5` / `51973f0b2b1fe68f4b2a766bf143a84f8187aaa0bb8bcdd264cbe405e9776acc`。下一动作先推送该evidence，再以fresh attempt执行一次正常capacity real Blender compile并调用preferred verifier。
+
+## J-298 · B57 normal-capacity real Blender development chain通过
+
+Date: 2026-08-28 · Type: DEVELOPMENT REAL-BLENDER INTEGRATION PROBE · New Blender compilations: 1 · New Blender renders: 0
+
+Accepted pass-path preflight evidence commit `d9a6187323470a2e6bac5ece5da1239e55008cab` 与 `origin/main` exact后，preferred `compile:production`在fresh attempt/output完成真实Blender 5.2 B01 compile。JIT时真实available/effective均为108,584,042,496 bytes，sequence-5 disk admission ACCEPTED，自哈希 `09535de98cf25e708dd3c98e4e00213f8ae57c929e85b2a4fee4bc5a0129eb25`，file SHA `76228c291f5f1c50ea84dda186222f115dddfaf3c7bd5e3fae6f46fd5ef8a321`；wrapper/native PID为13695/13699。
+
+Production receipt schema为v0.2，file SHA/self-hash `bf4e22aef036e7093b02eb1f8d583c46e9fc7e2b9b0a3fa8d99762db286b1b35` / `cd34662fc21c940b2620482978b2ae6e4bb916ea74e06fa3f9234025f1697ad6`。Preferred verifier 11/11 checks PASS，其中新增`NATIVE_COMPILE_DISK_READMISSION`；其内部unchanged current CompileReceipt仍19/19。B01 plan/structure保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf` / `c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b`，`.blend` audit绑定Blender build `fbe6228777e7`。Output roster含exact disk record且无frames/、`.blend1`、image或render；model/network/Docker为0。
+
+两条development causal paths现已同时成立：差1 byte在spawn前拒绝，真实capacity完成receipt-bound compile。但这仍不是B57 formal verdict；还缺B57 single-use preflight/runner/independent auditor、完整B01/B02四-run矩阵、至少56 attacks与26-gate mapping。下一动作只提交推送development evidence，再实现这些正式工具并重新冻结hashes。
