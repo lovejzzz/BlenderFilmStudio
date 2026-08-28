@@ -4183,3 +4183,13 @@ Independent auditor给出有边界而非支持结论：`PRODUCTION_DISK_JIT_READ
 逃逸原因不是JIT disk observation缺失，而是production verifier只分别验证disk文件SHA/self-hash与receipt self-hash，没有把receipt投影的`diskAdmissionHash`及sequence/status/observed/effective/ceiling/policy重新与实际disk record逐字段比较。攻击因此可以修改receipt里的disk hash、重新计算receiptHash，并保持指向的真实disk文件未变。Correction只在production verifier加入该外部交叉绑定，并让B57 independent auditor的receipt语义函数接收从真实disk record读取的expected hash；v0.2 release只更新该verifier frozen hash。新verifier/auditor/release SHA-256分别为 `80a719e19f6c71eeb878b946d767f40b4142d80a91c0f28253c4f1b26f7860c9`、`c13e103494e23ae61bd791cefb0b07357fc47deb2e7ed80e10c7e255bda8ea4c`、`77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252`；v0.2 frozen replay为31/31 exact，Node syntax与targeted ESLint通过。
 
 该修复不追溯改判C2。下一动作先提交推送C2失败证据、correction bytes与本entry，再用Git读取的exact commit在全新C3 preflight/attempt/formal roots重跑完整彩排；只有C3达到26/26与56/56后，才允许冻结正式工具并创建official B57 preflight。
+
+## J-304 · B57 C3交叉绑定修复后零Blender preflight接受
+
+Date: 2026-08-28 · Type: CORRECTED REHEARSAL PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
+
+C2 bounded evidence与production verifier cross-binding correction commit `c621c5b01f647fb1c4fdf88ba2b17c14d8750f12` 已与 `origin/main` exact。C3使用Git实际读取的该full SHA作为tool-freeze commit，在三个fresh disjoint roots上执行meta preflight。12/12 checks全部通过：B56 parent、B57 spec/preregistration、v0.1 preserved release、v0.2 31-file release与三条B57 tool bytes、package aliases、SceneSpec 22/22、B01/B02 dual BuildPlan、real disk、one-byte boundary及五份production preflight均exact。
+
+Meta preflight file SHA/self-hash为 `2aff716a18a4d54acf07f81e206b7da1f0e3dd1b4282feca2e4d80083bf2c7ed` / `3450f9a9f428064d2d585fcfdf4393a7c18e741de3f533401b5998d72f69c520`。真实available为108,594,233,344 bytes，扣除536,870,912 projected bytes后为108,057,362,432 bytes，高于107,374,182,400-byte reserve；forced negative 107,911,053,311 bytes仍比threshold精确少1 byte且只会降低真实观察。LOW-DISK、B01-A/B、B02-A/B五份nested preflight均ACCEPTED，operation count为五个production preflight processes、0 Blender/render/model/network/Docker。
+
+Bound C3 attempt/formal roots仍不存在。下一动作只提交推送该preflight与本entry，再用Git读取的exact evidence commit调用single-use C3 runner一次。C3是完整彩排而非official B57；只有26/26 gates与56/56 attacks均通过，才允许后续冻结最终tool commit并创建三个预登记的official roots。
