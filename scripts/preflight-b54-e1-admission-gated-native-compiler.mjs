@@ -1,9 +1,9 @@
 #!/opt/homebrew/Cellar/node/26.5.0/bin/node
 
 import { spawn } from 'node:child_process';
-import { lstat, mkdir, readFile, realpath, statfs, writeFile } from 'node:fs/promises';
+import { lstat, mkdir, readFile, statfs, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
-import { admitFormalRun, canonicalHash, runGit, sha256File, sortValue } from './lib/formal-run-admission.mjs';
+import { admitFormalRun, canonicalHash, runGit, sha256Bytes, sha256File, sortValue } from './lib/formal-run-admission.mjs';
 import { compileBuildPlan } from './compile-build-plan.mjs';
 import { canonicalJson, repositoryRoot } from './lib/scene-spec.mjs';
 
@@ -77,6 +77,43 @@ async function writeHashed(path, body, field) {
   return record;
 }
 
+function validSelfHash(record, field) {
+  const body = structuredClone(record);
+  delete body[field];
+  return typeof record[field] === 'string' && record[field] === canonicalHash(body);
+}
+
+async function parentEvidenceProbe(spec) {
+  const parent = spec.parentEvidence.admissionTotality;
+  const resultPath = resolve(repositoryRoot, parent.results.uri);
+  const receiptPath = resolve(repositoryRoot, parent.receipt.uri);
+  const result = JSON.parse(await readFile(resultPath, 'utf8'));
+  const receipt = JSON.parse(await readFile(receiptPath, 'utf8'));
+  return {
+    result: {
+      uri: parent.results.uri,
+      sha256: await sha256File(resultPath),
+      selfHash: result.resultHash,
+      exact: await sha256File(resultPath) === parent.results.sha256
+        && result.resultHash === parent.results.resultHash
+        && validSelfHash(result, 'resultHash'),
+    },
+    receipt: {
+      uri: parent.receipt.uri,
+      sha256: await sha256File(receiptPath),
+      selfHash: receipt.receiptHash,
+      exact: await sha256File(receiptPath) === parent.receipt.sha256
+        && receipt.receiptHash === parent.receipt.receiptHash
+        && validSelfHash(receipt, 'receiptHash'),
+    },
+    admissionLibrary: {
+      uri: parent.admissionLibrary.uri,
+      sha256: await sha256File(resolve(repositoryRoot, parent.admissionLibrary.uri)),
+      exact: await sha256File(resolve(repositoryRoot, parent.admissionLibrary.uri)) === parent.admissionLibrary.sha256,
+    },
+  };
+}
+
 async function runChild(command, args, role) {
   const started = process.hrtime.bigint();
   const child = spawn(command, args, {
@@ -115,8 +152,8 @@ async function buildPlanProbe(spec) {
       benchmark: benchmark.id,
       firstPlanHash: first.planHash,
       secondPlanHash: second.planHash,
-      firstCanonicalSha256: canonicalHash(first),
-      secondCanonicalSha256: canonicalHash(second),
+      firstCanonicalSha256: sha256Bytes(Buffer.from(firstCanonical)),
+      secondCanonicalSha256: sha256Bytes(Buffer.from(secondCanonical)),
       canonicalBytesExact: firstCanonical === secondCanonical,
       frozenPlanHashExact: first.planHash === benchmark.expectedPlanHash && second.planHash === benchmark.expectedPlanHash,
     });
@@ -171,8 +208,8 @@ async function commonChecks(spec) {
     sceneSpecSuite: {
       passed: validator.exitCode === 0 && suiteLines.length === 22 && suiteLines.every(line => line.startsWith('PASS ')) && validator.stdout.includes('22/22 fixtures passed'),
       observedCases: suiteLines.length,
-      stdoutSha256: canonicalHash({ stdout: validator.stdout }),
-      stderrSha256: canonicalHash({ stderr: validator.stderr }),
+      stdoutSha256: sha256Bytes(Buffer.from(validator.stdout)),
+      stderrSha256: sha256Bytes(Buffer.from(validator.stderr)),
     },
     buildPlans,
     componentAdmission,
@@ -219,42 +256,56 @@ async function main() {
   if (await pathState(outputRoot)) throw new Error('Preflight output root already exists; B54-E1 preflight is single-use');
   if (await pathState(resolve(repositoryRoot, spec.freshness.attemptRoot)) || await pathState(resolve(repositoryRoot, spec.freshness.formalRoot))) throw new Error('Attempt/formal root must remain absent before preflight');
 
-  const identityGitChildren = [];
-  const head = (await runGit(['rev-parse', 'HEAD'], repositoryRoot, row => identityGitChildren.push({ phase: 'HEAD', ...row }))).stdout.trim();
-  const originMainResult = await runGit(['rev-parse', '--verify', 'origin/main'], repositoryRoot, row => identityGitChildren.push({ phase: 'ORIGIN_MAIN', ...row }));
-  const originMain = originMainResult.stdout.trim();
-  const scopedPaths = ['specs/admission-gated-native-compiler-integration.v0.1.json', ...TOOL_PATHS, ...CONFIG_PATHS];
-  const tracked = await runGit(['ls-files', '--', ...scopedPaths], repositoryRoot, row => identityGitChildren.push({ phase: 'TRACKED', ...row }));
-  const dirty = await runGit(['status', '--porcelain=v1', '--untracked-files=all', '--', ...scopedPaths], repositoryRoot, row => identityGitChildren.push({ phase: 'CLEAN', ...row }));
-  const preregistration = await runGit(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, args.toolFreezeCommit], repositoryRoot, row => identityGitChildren.push({ phase: 'PREREGISTRATION_ANCESTRY', ...row }));
-  const toolHashes = {};
-  for (const uri of TOOL_PATHS) toolHashes[uri] = await sha256File(resolve(repositoryRoot, uri));
-  const configurationHashes = {};
-  for (const uri of CONFIG_PATHS) configurationHashes[uri] = await sha256File(resolve(repositoryRoot, uri));
-  const nodeIdentity = { executable: process.execPath, version: process.version, sha256: await sha256File(process.execPath) };
-  const blenderIdentity = { executable: BLENDER_EXECUTABLE, sha256: await sha256File(BLENDER_EXECUTABLE), versionBinding: spec.runtime.blender.version, buildHashBinding: spec.runtime.blender.buildHash };
-  const common = await commonChecks(spec);
   const rootsAbsentBeforeWrite = !await pathState(outputRoot)
     && !await pathState(resolve(repositoryRoot, spec.freshness.attemptRoot))
     && !await pathState(resolve(repositoryRoot, spec.freshness.formalRoot));
-  const checks = {
-    SPEC_AND_PREREGISTRATION_IDENTITY: await sha256File(specPath) === SPEC_SHA256 && preregistration.exitCode === 0,
-    TOOL_FREEZE_HEAD_AND_ORIGIN_EXACT: head === args.toolFreezeCommit && originMainResult.exitCode === 0 && originMain === args.toolFreezeCommit,
-    ALL_SCOPED_PATHS_TRACKED_CLEAN: tracked.exitCode === 0 && tracked.stdout.trim().split('\n').filter(Boolean).length === scopedPaths.length && dirty.exitCode === 0 && dirty.stdout === '',
-    NODE_RUNTIME_EXACT: nodeIdentity.executable === spec.runtime.node.executable && nodeIdentity.version === spec.runtime.node.version && nodeIdentity.sha256 === spec.runtime.node.sha256,
-    BLENDER_BINARY_EXACT_WITHOUT_PROCESS: blenderIdentity.executable === spec.runtime.blender.executable && blenderIdentity.sha256 === spec.runtime.blender.sha256,
-    INPUT_AND_CONFIGURATION_HASHES_EXACT: spec.inputs.benchmarks.every(row => configurationHashes[row.sceneSpecUri] === row.sceneSpecSha256) && configurationHashes[spec.inputs.outputSpec.uri] === spec.inputs.outputSpec.sha256,
-    SCENESPEC_SUITE_22_OF_22: common.sceneSpecSuite.passed,
-    BUILDPLAN_PAIR_CANONICAL_BYTES_EXACT: common.buildPlans.length === 2 && common.buildPlans.every(row => row.canonicalBytesExact),
-    B01_B02_PLAN_HASHES_FROZEN: common.buildPlans.every(row => row.frozenPlanHashExact),
-    RELATIVE_COMPONENT_ADMISSION_ACCEPTED: common.componentAdmission.status === 'ACCEPTED' && common.componentAdmission.outputAbsoluteMatches,
-    COMPONENT_ADMISSION_CREATED_NO_OUTPUT: common.componentAdmission.outputAbsent,
-    THREE_B54_ROOTS_ABSENT_BEFORE_WRITE: rootsAbsentBeforeWrite,
-    DISK_RESERVE_ACCEPTED: common.disk.status === 'ACCEPTED',
-    PREFLIGHT_BLENDER_MODEL_NETWORK_RENDER_ZERO: true,
-  };
-  const status = Object.values(checks).every(Boolean) ? 'ACCEPTED' : 'REJECTED';
   await mkdir(outputRoot, { recursive: false });
+  const identityGitChildren = [];
+  const toolHashes = {};
+  const configurationHashes = {};
+  let nodeIdentity = null;
+  let blenderIdentity = null;
+  let parentEvidence = null;
+  let common = null;
+  let checks = { PREFLIGHT_EXECUTION_COMPLETED: false };
+  let failure = null;
+  try {
+    const head = (await runGit(['rev-parse', 'HEAD'], repositoryRoot, row => identityGitChildren.push({ phase: 'HEAD', ...row }))).stdout.trim();
+    const originMainResult = await runGit(['rev-parse', '--verify', 'origin/main'], repositoryRoot, row => identityGitChildren.push({ phase: 'ORIGIN_MAIN', ...row }));
+    const originMain = originMainResult.stdout.trim();
+    const scopedPaths = [...new Set(['specs/admission-gated-native-compiler-integration.v0.1.json', ...TOOL_PATHS, ...CONFIG_PATHS])];
+    const tracked = await runGit(['ls-files', '--', ...scopedPaths], repositoryRoot, row => identityGitChildren.push({ phase: 'TRACKED', ...row }));
+    const dirty = await runGit(['status', '--porcelain=v1', '--untracked-files=all', '--', ...scopedPaths], repositoryRoot, row => identityGitChildren.push({ phase: 'CLEAN', ...row }));
+    const preregistration = await runGit(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, args.toolFreezeCommit], repositoryRoot, row => identityGitChildren.push({ phase: 'PREREGISTRATION_ANCESTRY', ...row }));
+    for (const uri of TOOL_PATHS) toolHashes[uri] = await sha256File(resolve(repositoryRoot, uri));
+    for (const uri of CONFIG_PATHS) configurationHashes[uri] = await sha256File(resolve(repositoryRoot, uri));
+    nodeIdentity = { executable: process.execPath, version: process.version, sha256: await sha256File(process.execPath) };
+    blenderIdentity = { executable: BLENDER_EXECUTABLE, sha256: await sha256File(BLENDER_EXECUTABLE), versionBinding: spec.runtime.blender.version, buildHashBinding: spec.runtime.blender.buildHash };
+    parentEvidence = await parentEvidenceProbe(spec);
+    common = await commonChecks(spec);
+    const trackedUris = tracked.stdout.trim().split('\n').filter(Boolean);
+    checks = {
+      SPEC_AND_PREREGISTRATION_IDENTITY: await sha256File(specPath) === SPEC_SHA256 && preregistration.exitCode === 0,
+      PARENT_B53_EVIDENCE_EXACT: parentEvidence.result.exact && parentEvidence.receipt.exact && parentEvidence.admissionLibrary.exact,
+      TOOL_FREEZE_HEAD_AND_ORIGIN_EXACT: head === args.toolFreezeCommit && originMainResult.exitCode === 0 && originMain === args.toolFreezeCommit,
+      ALL_SCOPED_PATHS_TRACKED_CLEAN: tracked.exitCode === 0 && trackedUris.length === scopedPaths.length && scopedPaths.every(uri => trackedUris.includes(uri)) && dirty.exitCode === 0 && dirty.stdout === '',
+      NODE_RUNTIME_EXACT: nodeIdentity.executable === spec.runtime.node.executable && nodeIdentity.version === spec.runtime.node.version && nodeIdentity.sha256 === spec.runtime.node.sha256,
+      BLENDER_BINARY_EXACT_WITHOUT_PROCESS: blenderIdentity.executable === spec.runtime.blender.executable && blenderIdentity.sha256 === spec.runtime.blender.sha256,
+      INPUT_AND_CONFIGURATION_HASHES_EXACT: spec.inputs.benchmarks.every(row => configurationHashes[row.sceneSpecUri] === row.sceneSpecSha256) && configurationHashes[spec.inputs.outputSpec.uri] === spec.inputs.outputSpec.sha256,
+      SCENESPEC_SUITE_22_OF_22: common.sceneSpecSuite.passed,
+      BUILDPLAN_PAIR_CANONICAL_BYTES_EXACT: common.buildPlans.length === 2 && common.buildPlans.every(row => row.canonicalBytesExact),
+      B01_B02_PLAN_HASHES_FROZEN: common.buildPlans.every(row => row.frozenPlanHashExact),
+      RELATIVE_COMPONENT_ADMISSION_ACCEPTED: common.componentAdmission.status === 'ACCEPTED' && common.componentAdmission.outputAbsoluteMatches,
+      COMPONENT_ADMISSION_CREATED_NO_OUTPUT: common.componentAdmission.outputAbsent,
+      THREE_B54_ROOTS_ABSENT_BEFORE_WRITE: rootsAbsentBeforeWrite,
+      DISK_RESERVE_ACCEPTED: common.disk.status === 'ACCEPTED',
+      PREFLIGHT_BLENDER_MODEL_NETWORK_RENDER_ZERO: true,
+      PREFLIGHT_EXECUTION_COMPLETED: true,
+    };
+  } catch (error) {
+    failure = { name: error?.name ?? 'Error', message: error?.message ?? String(error), stack: error?.stack ?? null };
+  }
+  const status = !failure && Object.values(checks).every(Boolean) ? 'ACCEPTED' : 'REJECTED';
   const preflightBody = {
     schemaVersion: 'bfs.admissionGatedNativeCompilerPreflight.v0.1',
     experimentId: 'B54-E1',
@@ -267,17 +318,19 @@ async function main() {
     configurationHashes,
     nodeIdentity,
     blenderIdentity,
+    parentEvidence,
     checks,
     checkPassed: Object.values(checks).filter(Boolean).length,
     checkTotal: Object.keys(checks).length,
-    sceneSpecSuite: common.sceneSpecSuite,
-    buildPlans: common.buildPlans,
-    componentAdmission: common.componentAdmission,
-    disk: common.disk,
+    sceneSpecSuite: common?.sceneSpecSuite ?? null,
+    buildPlans: common?.buildPlans ?? null,
+    componentAdmission: common?.componentAdmission ?? null,
+    disk: common?.disk ?? null,
+    failure,
     operationCounts: {
       preflightProcesses: 1,
-      sceneSpecValidatorChildren: 1,
-      gitChildren: identityGitChildren.length + common.gitChildren.length,
+      sceneSpecValidatorChildren: common ? 1 : 0,
+      gitChildren: identityGitChildren.length + (common?.gitChildren.length ?? 0),
       blenderProcesses: 0,
       blenderRenderCalls: 0,
       cyclesRayRenders: 0,
@@ -285,7 +338,7 @@ async function main() {
       modelCalls: 0,
       networkCalls: 0,
     },
-    children: { validator: common.validator, git: [...identityGitChildren, ...common.gitChildren] },
+    children: { validator: common?.validator ?? null, git: [...identityGitChildren, ...(common?.gitChildren ?? [])] },
     rootObservations: {
       preflightRoot: { uri: repoUri(outputRoot), absentBeforeWrite: rootsAbsentBeforeWrite },
       attemptRoot: { uri: spec.freshness.attemptRoot, absent: !await pathState(resolve(repositoryRoot, spec.freshness.attemptRoot)) },
