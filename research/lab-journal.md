@@ -4443,3 +4443,15 @@ Child-first correction commit `b629b9bc8b98ce1f9b2d1f6ad032b575c754fa0b` 与`ori
 C1 request file SHA/requestHash为 `d9e1572a35e9faae989acc893e77e1c47b79c9cff04e9c7bed4cac928dd7c875` / `38be38faaa1acf467631d18010883283d2f990d7f7fe2960f5c7ffd87f6c3d7a`，绑定tool-freeze commit `b629b9bc8b98ce1f9b2d1f6ad032b575c754fa0b`、unchanged ledger SHA `0946685b…`与corrected orchestrator SHA `ab06eb891719f4ce65b1b48535cfcbb40007bf801f351572766fb1965dcee0ab`。介入、期望WAIT outcome、zero duplicate process与exact-PID cleanup边界与J-324完全相同；原root不复用。
 
 C1 execution roots与official B58 roots仍不存在。下一动作只提交推送C1 preflight/request与本entry，随后使用相同bounded harness一次性复现。
+
+## J-327 · live-process C1命中WAIT，但CLI未投影wait PID
+
+Date: 2026-08-28 · Type: DEVELOPMENT LIVE-PROCESS BOUNDED SUCCESS / OBSERVABILITY CORRECTION · New Blender processes: 1 · New Blender renders: 0
+
+C1 preflight/request evidence commit `968c528a33e8624187271908691c3d38ad005822` 与`origin/main` exact后，bounded harness启动orchestrator/wrapper/native Blender PID 87636/87670/87834。Wrapper/native durable identity hashes为 `c7b3e2bbc90b66447b1e804e896bf867a683a5637b9096a403b2376284686df5` / `7aa283f88aff17946712eb9c59fc22017b381b3b5d5e0e37a06086be976d9dab`。Native在SIGSTOP后state为`TNs`；orchestrator以143退出后，wrapper被re-parent为PPID 1，native仍以PPID 87800存活并保持stopped。
+
+第二个resume正式返回`WAIT_LIVE_PROCESS`，证明child-first修正跨过了re-parented wrapper mismatch并看到已记录live native。`PROCESS_STARTED` / `NATIVE_PROCESS_OBSERVED`均保持1→1，无duplicate compiler/Blender/verifier；ledger只因PLAN verified skip从6→7，compile仍STARTED且terminal receipt不存在，production receipt不存在。证据采集后exact native group经TERM+CONT收尾，87636/87670/87834均确认消失，无Blender核心进程遗留。Output invalidation file SHA/self-hash为 `03888e75c6fa3f64993813ce14753a55996d6e0650d2f15cf3afeb11fdd4eda9` / `479f3981f233dda4f09554c0518b795de812bfece8c3cb33f576e10be6b71327`，render/model/network/Docker为0。
+
+然而当前CLI有一个可审计性缺口：`runAvailableStages()`的返回值确实包含`process` identity，但command-line输出只序列化`result.state`，所以外部harness无法从stdout直接断言WAIT的PID是87834。该次结果因此只记为bounded success，不用于关闭live-process gate。原C1 root不复用。
+
+C2 correction仅使CLI在result存在`process`时向原status JSON增加`waitProcess`，完整投影PID、parentPid、start、executable、argv SHA与identity hash；非WAIT outcome的现有输出不变，不改任何recovery判定。Correction后orchestrator candidate SHA为 `d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a`，ledger SHA保持 `0946685b…`；Node syntax、targeted ESLint与diff check通过。下一动作先提交推送C1 evidence与CLI correction，然后用fresh C2 roots最后复验stdout `waitProcess.pid === recorded native PID`。

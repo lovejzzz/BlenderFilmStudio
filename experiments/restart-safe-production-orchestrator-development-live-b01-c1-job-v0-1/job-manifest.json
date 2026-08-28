@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobManifest.v0.1",
+  "jobId": "B58-DEV-LIVE-B01-C1",
+  "request": {
+    "uri": "experiments/restart-safe-production-orchestrator-development-live-b01-c1-request-v0-1.json",
+    "sha256": "d9e1572a35e9faae989acc893e77e1c47b79c9cff04e9c7bed4cac928dd7c875",
+    "requestHash": "38be38faaa1acf467631d18010883283d2f990d7f7fe2960f5c7ffd87f6c3d7a"
+  },
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B01.scene.json",
+    "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+  },
+  "expectedBuildPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "b629b9bc8b98ce1f9b2d1f6ad032b575c754fa0b",
+  "toolHashes": {
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/run-restart-safe-production-job.mjs": "ab06eb891719f4ce65b1b48535cfcbb40007bf801f351572766fb1965dcee0ab"
+  },
+  "preflightEvidenceCommit": "968c528a33e8624187271908691c3d38ad005822",
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "B01-LIVE-COMPILE-C1-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-development-live-b01-c1-preflight-v0-1",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-development-live-b01-c1-production-attempt-v0-1",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-development-live-b01-c1-output-v0-1",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": null,
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "manifestHash": "5b0af184ed049d4c87d637b41f60abbadd9c4c3755389e8cd8a39759f549b5cf"
+}

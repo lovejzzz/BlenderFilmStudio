@@ -1007,7 +1007,8 @@ export async function runRestartSafeProductionJob(argv) {
   const lease = await acquireWriterLease(jobRoot, { allowReclaimDead: parsed.mode === 'resume' });
   try {
     const result = await runAvailableStages(jobRoot, initialized?.prevalidatedPlan ?? null, parsed);
-    process.stdout.write(`BFS_RESTART_SAFE_JOB ${result.outcome} ${JSON.stringify(result.state)}\n`);
+    const publicResult = result.process ? { ...result.state, waitProcess: result.process } : result.state;
+    process.stdout.write(`BFS_RESTART_SAFE_JOB ${result.outcome} ${JSON.stringify(publicResult)}\n`);
     if (result.exitCode) process.exitCode = result.exitCode;
     return result;
   } finally {
