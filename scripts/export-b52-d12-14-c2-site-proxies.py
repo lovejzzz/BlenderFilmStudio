@@ -12,6 +12,7 @@ import OpenImageIO as oiio
 
 
 SCALE = 3
+PUBLIC_OUTPUT_URI = "public/evidence/b52-d12-14-c2/rigid-directional-domain-matrix.png"
 TARGETS = (
     "TOP_MISSING_BOTTOM_AVAILABLE",
     "BOTTOM_MISSING_TOP_AVAILABLE",
@@ -110,7 +111,7 @@ def main() -> None:
         "mapping": {name: value.astype(int).tolist() for name, value in COLORS.items()},
         "panelOrder": {"columns": list(TARGETS), "rows": ["previous-foreground", "current-domain"]},
         "sources": sources, "counts": counts,
-        "outputs": [{"uri": str(output), "sha256": sha_file(output), "nearestScale": SCALE, "width": pixels.shape[1] * SCALE, "height": pixels.shape[0] * SCALE}],
+        "outputs": [{"uri": PUBLIC_OUTPUT_URI, "sha256": sha_file(output), "nearestScale": SCALE, "width": pixels.shape[1] * SCALE, "height": pixels.shape[0] * SCALE}],
         "nonClaims": [
             "The matrix is a categorical nearest-neighbor rendering of committed masks, not a Blender display transform.",
             "Rows use different coordinate roles: the upper row is previous-frame owner raster; the lower row is current-frame classification.",

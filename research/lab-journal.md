@@ -3492,3 +3492,13 @@ D12.14-C2 的正式实验已经完整保存在 `main` 与远端 commit `2ab40ad`
 重启后的精确续接顺序：先补 D12.14-C2 scoped CSS；再把新 route 接入首页与 D12.13 邻接导航；再将新页面直接 import 的 `results.json`、`audit.json`、`execution.json` 加入 GitHub Pages sparse checkout；随后执行 exporter replay、定向 ESLint、Vinext production build 与 GitHub static build。所有验证通过后才允许合入 `main`、等待公开 exact route HTTP 200，并将同一 source commit 发布到 owner-only Sites。最后另行预登记 fresh Blender render holdout；不得把 calibration masks 当作 confirmatory denominator。
 
 用户原有未提交内容 `README.md` 与三份 2026-08-26 Physis/Remainder Room research drafts 均未纳入 checkpoint，也未被改写。
+
+## J-240 · D12.14-C2 页面完成并通过双构建验证
+
+Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
+
+Checkpoint 恢复后完成 `/blender-material-owner-rigid-directional-calibration-v0-1/` 的 scoped CSS、首页入口、D12.13 邻接导航与 GitHub Pages 精确 sparse-checkout 输入。页面从已提交的 `results.json`、`audit.json` 与 `execution.json` 直接构建候选、probe 和 evidence-chain 数值；不复制一套独立 measurement source。内容明确区分 C1 preformal falsification、C2 pilot-informed calibration、真实 Blender 5.2 zero-render realizability 与尚未执行的 fresh rendered holdout。
+
+站点 proxy 重放首先暴露一个可复现性缺口：PNG 已 byte exact，但 exporter 把临时输出目录写入 manifest 的 `outputs[].uri`，导致相同证据在不同目录产生不同 manifest hash。修复将该字段固定为公开逻辑 URI，不改变任何像素、source URI、source hash 或分类；随后从新临时目录重放得到 PNG SHA-256 `5a1d12e39178922344cc268c41ef352cab542d3afca2948c8fa3cf4100e6e9d7` 与 manifest SHA-256 `35906b4956eaf08ac7f7a15aa8f44a2436e856de4c168632b9af5181f8aef92a`，两者均与 checkpoint 资产逐字节一致，manifest internal hash 仍为 `2af904965f56cddebb04cd5044887bda24aa9929bc46955f29f829a8c217b669`。
+
+新页、首页和 D12.13 页定向 ESLint 为 0 errors；导出器在 Blender 5.2 bundled Python 下 syntax check 通过；精确 local route 返回 HTTP 200。Vinext/Sites production build 成功并发现 82 个 CDN warmup paths；GitHub Pages static build 成功生成 84/84 pages，新 route 被确认 static。按发布规范未执行未请求的截图、DOM、点击或视觉 QA。下一动作是把 exact validated source 合入 `main`，等待公开 Pages exact route 成功，再将同一 source commit 发布到经复核仍为 owner-only 的 Sites。

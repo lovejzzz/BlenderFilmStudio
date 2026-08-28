@@ -53,6 +53,7 @@ export default function QualityCouplingDerivationPage() {
       <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
       <nav aria-label="D12.13-D1 derivation 导航">
         <Link href="/blender-material-owner-one-sided-curvature-holdout-v0-1">D12.12-H1</Link>
+        <Link href="/blender-material-owner-rigid-directional-calibration-v0-1">D12.14-C2</Link>
         <a href="#verdict">判决</a><a href="#frontier">阈值前沿</a><a href="#coverage">Fixture</a><a href="#integrity">审计</a><a href="#next">下一步</a>
         <Link href="/journal">日志</Link>
       </nav>
@@ -165,6 +166,6 @@ export default function QualityCouplingDerivationPage() {
       </div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.13-D1 Quality Coupling Derivation</b></div><p>evidence valid · global threshold rejected · mechanism research continues</p><Link href="/blender-material-owner-one-sided-curvature-holdout-v0-1">返回 D12.12-H1 →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.13-D1 Quality Coupling Derivation</b></div><p>evidence valid · global threshold rejected · mechanism research continues</p><Link href="/blender-material-owner-rigid-directional-calibration-v0-1">继续 D12.14-C2 →</Link></footer>
   </main>;
 }
