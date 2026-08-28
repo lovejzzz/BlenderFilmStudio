@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "bfs.codex-host-stability-baseline-audit.v0.1",
+  "experimentId": "B59-G0",
+  "auditedAt": "2026-08-28T18:20:50.097Z",
+  "results": {
+    "path": "experiments/codex-host-stability-baseline-v0-1/results.json",
+    "sha256": "5a0132be20d5cc9de439bec3e848b3f89416de282706c2b443c42bb442b48c33",
+    "selfHash": "709723234ef543a889e0766445fd9dbe3e0e72ef1c1cc889d8a9edf7f6dbdeae"
+  },
+  "replay": {
+    "availableBytes": 109110325248,
+    "memoryFreePercent": 89,
+    "processes": {
+      "mainCodexProcessCount": 1,
+      "rendererCount": 4,
+      "maximumRendererRssBytes": 1033420800,
+      "codexTreeRssBytes": 4306911232,
+      "activeBlenderProcessCount": 0,
+      "activeB58WorkerProcessCount": 0,
+      "browserAutomationProcessCount": 0,
+      "crashpadHandlerCount": 8,
+      "orphanCrashpadHandlerCount": 8
+    },
+    "codexVersion": "26.820.80927 (7271)"
+  },
+  "integrityChecks": {
+    "SPEC_SHA": true,
+    "RECEIPT_FILE_SIZE": true,
+    "RECEIPT_SELF_HASH": true,
+    "SCOPED_RELEASE_CLEAN": true,
+    "CRASH_REPORT_SHA": true,
+    "CURRENT_VERSION_REPLAY": true,
+    "DISK_GATE_REPLAY": true,
+    "MEMORY_GATE_REPLAY": true,
+    "MAIN_PROCESS_GATE_REPLAY": true,
+    "RENDERER_COUNT_GATE_REPLAY": true,
+    "SINGLE_RENDERER_GATE_REPLAY": true,
+    "CODEX_TREE_GATE_REPLAY": true,
+    "NO_BLENDER_GATE_REPLAY": true,
+    "NO_B58_GATE_REPLAY": true,
+    "NO_BROWSER_AUTOMATION_GATE_REPLAY": true,
+    "BASE_SEMANTIC_MODEL": true
+  },
+  "syntheticAdmissibleControl": {
+    "valid": true,
+    "selfHash": "fb135bf06fcc7847050aec7447b1b3fcad314d4fc3f5c6ec8ac35ebc08e5551a"
+  },
+  "attackIdsExact": true,
+  "attackResults": [
+    {
+      "id": "A01_SPEC_SHA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A02_PARENT_COMMIT_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A03_DIRTY_FORMAL_ROOT",
+      "rejected": true
+    },
+    {
+      "id": "A04_CRASH_REPORT_SHA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A05_CRASH_REPORT_BYTE_COUNT_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A06_CRASH_THREAD_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A07_CRASH_EXCEPTION_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A08_CODEX_VERSION_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A09_STALE_CAPTURE_TIME",
+      "rejected": true
+    },
+    {
+      "id": "A10_DISK_AVAILABLE_BELOW_MARGIN",
+      "rejected": true
+    },
+    {
+      "id": "A11_DISK_PROJECTION_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A12_MEMORY_FREE_BELOW_FLOOR",
+      "rejected": true
+    },
+    {
+      "id": "A13_MAIN_PROCESS_COUNT_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A14_RENDERER_COUNT_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A15_SINGLE_RENDERER_RSS_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A16_CODEX_TREE_RSS_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A17_ACTIVE_BLENDER_PROCESS",
+      "rejected": true
+    },
+    {
+      "id": "A18_ACTIVE_B58_WORKER",
+      "rejected": true
+    },
+    {
+      "id": "A19_BROWSER_AUTOMATION_PROCESS",
+      "rejected": true
+    },
+    {
+      "id": "A20_NONZERO_NETWORK_OR_MODEL_OR_DOCKER",
+      "rejected": true
+    },
+    {
+      "id": "A21_NONZERO_SIGNAL_OR_CLEANUP",
+      "rejected": true
+    },
+    {
+      "id": "A22_STDOUT_SIZE_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A23_RECEIPT_SIZE_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A24_RECEIPT_SELF_HASH_MUTATION",
+      "rejected": true
+    }
+  ],
+  "attacksPassed": 24,
+  "attacksTotal": 24,
+  "auditCommands": [
+    {
+      "label": "git-scoped-status",
+      "exitCode": 0,
+      "stdoutBytes": 0,
+      "durationMs": 14
+    },
+    {
+      "label": "memory-pressure",
+      "exitCode": 0,
+      "stdoutBytes": 110,
+      "durationMs": 1
+    },
+    {
+      "label": "process-snapshot",
+      "exitCode": 0,
+      "stdoutBytes": 179817,
+      "durationMs": 23
+    }
+  ],
+  "combinedChildProcesses": 8,
+  "finalGates": {
+    "SPEC_AND_PARENT_IDENTITY": true,
+    "FRESH_FORMAL_ROOT": true,
+    "CRASH_EVIDENCE_IDENTITY": true,
+    "CRASH_SIGNATURE_EXACT": true,
+    "CURRENT_CODEX_VERSION_EXACT": true,
+    "SNAPSHOT_FRESHNESS": true,
+    "DISK_STABILITY_MARGIN": false,
+    "MEMORY_PRESSURE": true,
+    "CODEX_MAIN_PROCESS_COUNT": true,
+    "CODEX_RENDERER_COUNT": true,
+    "SINGLE_RENDERER_RSS": true,
+    "CODEX_TREE_RSS": false,
+    "NO_ACTIVE_BLENDER": true,
+    "NO_ACTIVE_B58_WORKER": true,
+    "NO_BROWSER_AUTOMATION_PROCESS": true,
+    "RESOURCE_CEILINGS_ZERO": true,
+    "STDOUT_BOUNDED": true,
+    "RECEIPT_BOUNDED": true,
+    "RECEIPT_SELF_HASH": true,
+    "INDEPENDENT_AUDIT_REPLAY": true
+  },
+  "passedGates": 18,
+  "totalGates": 20,
+  "failedGates": [
+    "DISK_STABILITY_MARGIN",
+    "CODEX_TREE_RSS"
+  ],
+  "finalVerdict": "BLOCKED_HOST_STABILITY",
+  "receiptBytes": 5014,
+  "selfHash": "d7f9d75ae09aaaa1886eff1a351a2ccae15794bd8c2b0140ce50bff317920f9a"
+}

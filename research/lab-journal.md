@@ -4553,3 +4553,13 @@ C2 commit `365c07c` 推送后，第三个fresh临时sparse clone完成runner+aud
 唯一失败门为`DISK_STABILITY_MARGIN`：available 109,111,910,400 bytes，相对精确minimum 112,206,020,608少3,094,110,208 bytes。Codex main/renderer为1/4，最大renderer RSS 1,016,823,808 bytes，Codex tree RSS 4,287,758,336 bytes，低于4 GiB门但只余约7.2 MB；active Blender/B58/browser automation均为0。观察到8个PPID-1 crashpad handlers，仅作为诊断记录，不自动清理、不推定根因。
 
 Rehearsal results/audit SHA为 `a671cc44ac31eff28532275580d908de76052f39ac3de954df727a93b9ada092` / `573672e8487ebf0e4a43e6bfeab2b55645010dc8503af59627ac3f86562e376b`。实际formal root仍不存在；下一动作提交推送本entry，再运行单次真实B59-G0 bounded baseline。
+
+## J-338 · B59-G0真实有界宿主基线：证据有效，稳定性阻断
+
+Date: 2026-08-28 · Type: FORMAL READ-ONLY HOST BASELINE · New Blender processes: 0 · New Blender renders: 0
+
+Release commit `e3237177ecf95a889a03fbfc43939be0fb964c5b` 与`origin/main` exact后，single-use formal runner和独立auditor在真实root完成。Results/audit file SHA为 `5a0132be20d5cc9de439bec3e848b3f89416de282706c2b443c42bb442b48c33` / `06e54e79f7ec1fa7bb60a4cef69ef36830f8bab89bb6d213d6007962c45c4b43`，self-hash为 `709723234ef543a889e0766445fd9dbe3e0e72ef1c1cc889d8a9edf7f6dbdeae` / `d7f9d75ae09aaaa1886eff1a351a2ccae15794bd8c2b0140ce50bff317920f9a`。Receipts只有3,755 / 5,014 bytes；合计8/12 short read-only children，24/24 attacks，synthetic control有效，所有integrity checks通过。
+
+Final verdict为可信`BLOCKED_HOST_STABILITY`，18/20 gates通过。磁盘available 109,110,300,672 bytes，比112,206,020,608-byte稳定门少3,095,719,936 bytes。Codex tree RSS 4,306,321,408 bytes，比4 GiB ceiling高11,354,112 bytes；system-wide memory free仍为89%。进程观察为1 main、4 renderers、最大renderer 1,032,830,976 bytes、0 active Blender、0 B58 worker、0 browser automation。8个PPID-1 crashpad handlers只记录未清理。
+
+该结果不关闭Gate 0，也不授权B58 official run。下一动作是提交推送正式证据，然后只读定位至少约3.1 GB可重建缓存与Codex RSS来源；任何清理或进程处置必须精确到目标，且处置后使用新协议做readmission，绝不降低门槛。
