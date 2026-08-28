@@ -3374,3 +3374,13 @@ Date: 2026-08-28 · Type: POST-HOC DERIVATION PREREGISTRATION · New Blender ren
 预登记固定原始 `131072 Q30` 为诊断基线、`32768 Q30 = 3.0517578125e-5` 为精确 quality gate，并按 `[32768, 24576, 16384, 8192, 4096]` 的降序机械选择最大合格阈值。每个 candidate 必须同时满足零 risk underbound、accepted maximum/RMSE quality、0.97 primary cell coverage、0.95 per-Material-owner retention、static/repeat/cross-language exactness 与 fallback/current-RGB decision isolation；任一 coverage 或 safety gate 不通过就不能被导出。TOP/BOTTOM/NEITHER directional masks 仅 report，因为 H1 已证明这些 fixtures 没有形成预期 stress domain。
 
 父 spec/result/audit/receipt 文件 SHA-256、H1 formal commit/tree、固定 Python/Node executable SHA 与版本已逐项复核；四个 tool paths 和 output root 仍不存在。预登记 spec SHA-256 为 `e9d79a2ec54acaf36a0df1168ea71102b0b94ab66f4e10f1cda56dbd1ea70c00`。重启后的下一动作是从此已推送 spec 实现两个独立 consumer、analyzer、mutation auditor 与 26-process runner；在 tool-freeze commit 之前不得创建 output root 或观察 threshold 结果。
+
+## J-230 · D12.13-D1 四工具冻结
+
+Date: 2026-08-28 · Type: FORMAL TOOL FREEZE · New Blender renders: 0
+
+Commit `59945d9` 冻结并推送四个预登记工具：独立 Python consumer、独立 Node consumer、runner/第三 analyzer 与不 import 其余工具的 mutation auditor。Runner 固定 12 Python + 12 Node + 1 analyzer + 1 audit = 26 个唯一子进程；analyzer/auditor 在同一 immutable execution plan 中各自绑定真实 PID 后才允许产生 result/audit。所有路径保持 Blender render、model、network operation count 为 0。
+
+四工具 SHA-256（按 spec 顺序）为 `b70c7e963788d41de9ff956df800ccf21ed7fb00fe81cd499600bee0e374b33a`、`4b642014ef63d6d4e6765f1e6bfbe8e53c0703a87d6ba01bf88a718f85e5645c`、`2b25adbecf346cc95a083d794c6a6743879f83105b7ab88f995588ab5f3e2952`、`4dbc1415f7b29ccdccef57dc282c2334a0c48ff6bc6f86e0eedcd9a2274740dd`。固定解释器 Python syntax、Node syntax 与 formal-root absence gate 通过。
+
+一次性 `/tmp` smoke 对 LEFT/R1 的 2 个 shared arrays 和 5×2 threshold arrays 完成 12/12 Python/Node byte identity 后已清除。该预正式自检按冻结阈值得到 accepted counts `13668 / 11742 / 9482 / 6810 / 5333`；其中最大阈值 `32768 Q30` 的 13668/16892 retention 已明显低于 0.97 gate。这不是正式六-fixture结论，也不得据此修改阈值族或 coverage gate；下一动作仍是从 frozen commit 启动完整 26-process derivation，让“无 candidate”作为合法可证伪结果被审计。
