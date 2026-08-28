@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "bfs.blenderTemporalOwnerSupportLocalization.v0.1",
+  "experimentId": "B52-D12.10-D1",
+  "title": "Post-hoc localization of Object Index alias, true-owner bilinear support and curvature-stencil support",
+  "status": "PREREGISTERED_BEFORE_ANALYZER_OR_OUTPUT",
+  "question": "Within the immutable D12.9-H1 radius-2 domains, how much loss and hidden aliasing comes from true analytic-owner disagreement in the four bilinear taps, from the additional 4x4 curvature stencil, and from Q30 rejection after true-owner support is available?",
+  "decisionRole": "post-hoc failure localization on already observed H1 data; it cannot validate a new candidate, alter H1, choose a production threshold or count as a fresh holdout",
+  "parents": {
+    "h1Spec": {
+      "uri": "specs/blender-motion-aware-curvature-risk-holdout.v0.1.json",
+      "sha256": "c2756a20e314cf470698ef7af6160154b8d7e2d5e8531ce6591b2509a8730dbc",
+      "experimentId": "B52-D12.9-H1"
+    },
+    "h1Result": {
+      "uri": "experiments/blender-motion-aware-curvature-risk-holdout-v0-1/results.json",
+      "sha256": "23cc449e6d1c83e06c8f5a80335ead42ec37cc433eee70c54cb4d9fef308d8ee",
+      "evidenceHash": "cb9f68251a0016634a0580decc5f898732172eee9eddd560a42dccb493490f16",
+      "verdict": "MOTION_AWARE_CURVATURE_RISK_SAFE_BUT_COVERAGE_NOT_SUPPORTED"
+    },
+    "h1Audit": {
+      "uri": "experiments/blender-motion-aware-curvature-risk-holdout-v0-1/audit.json",
+      "sha256": "160c194ddaaa4bb727328371de8e8f538af3b0935a4f65ec33e3e10821b46bb8",
+      "auditHash": "46635a9777885a690961cf070ddbd2a7bb1ab97d996f772a3010e52f61ec0943"
+    },
+    "h1Receipt": {
+      "uri": "experiments/blender-motion-aware-curvature-risk-holdout-v0-1/receipt.json",
+      "sha256": "9d774b40fe41b2008d4d103a6f45b7f15afa324d8e2bd024d88cd112c7631d9f",
+      "receiptHash": "c794bd2c79a584b6ade138d8b09d4bc516f68778c1bf8f6c6d29926424cf3fe8"
+    },
+    "h1CoverageDiagnostic": {
+      "uri": "experiments/blender-motion-aware-curvature-risk-holdout-coverage-analysis-v0-1/results.json",
+      "sha256": "fd64d5963abd8f6bb06966d709637946e882a614fc5bb53f7a1f9d8bc1cabf1e",
+      "analysisHash": "56a04de570ca33dc271bc7d4a62400bb0fa98bcb3760885435c77df3ae79d516"
+    },
+    "h1CoverageTool": {
+      "uri": "scripts/analyze-b52-d12-9-h1-coverage-boundary.py",
+      "sha256": "df29b262dca2864c262b317db6343ec7a03ae9d35782aaa076ca9a4be0b62a2b"
+    }
+  },
+  "freshness": {
+    "analyzerPath": "scripts/analyze-b52-d12-10-temporal-owner-support.py",
+    "outputRoot": "experiments/blender-temporal-owner-support-localization-v0-1",
+    "requirements": [
+      "The analyzer path and output root do not exist at preregistration.",
+      "No H1 byte may be changed, rewritten or copied into a replacement formal root.",
+      "No new Blender render, model call, network call or subjective review is permitted.",
+      "Every classification, gate, attack family and verdict label is frozen before analyzer output.",
+      "Any later intervention derived from this analysis requires a new identity and a fresh holdout."
+    ]
+  },
+  "inputContract": {
+    "formalRoot": "experiments/blender-motion-aware-curvature-risk-holdout-v0-1",
+    "fixtures": [
+      "ROTATED_SWEEP_HIGH_FREQUENCY_157X103",
+      "CAMERA_TRUCK_PITCH_PARALLAX_167X109",
+      "SAME_INDEX_DEPTH_CROSSING_179X113",
+      "STATIC_FREQUENCY_CONTROL_131X89"
+    ],
+    "repeats": [1, 2],
+    "adapterArrays": [
+      "previous-owner.f32",
+      "current-owner.f32",
+      "vector.xy32"
+    ],
+    "consumerArrays": [
+      "analytic-owner.u8",
+      "radius2-interior.u8",
+      "support-eligible.u8",
+      "support-rejected.u8",
+      "accepted.u8",
+      "risk-rejected.u8"
+    ],
+    "formalBytesAreReadOnly": true
+  },
+  "independentOwnerOracle": {
+    "implementation": "scalar Python math only; imports of bpy, bpy_extras, mathutils and every D12.9 consumer/analyzer are forbidden",
+    "eulerOrder": "XYZ",
+    "pixelCenter": "top-left integer pixel (x,y) denotes center ((x+0.5)/W,1-(y+0.5)/H)",
+    "camera": "Blender camera looks along local -Z; use the frozen 47 mm horizontal-fit pinhole projection",
+    "surfaceSelection": "at frame 0 or frame 1, cast the declared pixel-center ray through every bounded analytic plane and choose the nearest positive camera-depth hit",
+    "token": "the 1-based index of the selected analytic owner in the frozen fixture owners array; unlike Object Index, this token remains different when two owners share passIndex",
+    "currentIdentityCheck": "the independently recomputed frame-1 token mask must equal the frozen analyzer-emitted analytic-owner.u8 payload byte-for-byte",
+    "previousIdentity": "compute a full frame-0 token mask independently; do not infer it from previous Object Index"
+  },
+  "classificationContract": {
+    "domain": "every pixel in frozen radius2-interior.u8",
+    "sampleCoordinate": "q=(x+Vector.X,y-Vector.Y) in top-left coordinates",
+    "bilinearTapSet": "the four floor(q) taps in y0x0,y0x1,y1x0,y1x1 order",
+    "curvatureStencil": "the 4x4 previous rectangle [x0-1,x0+2] by [y0-1,y0+2]",
+    "trueOwnerBilinearCompatible": "all four previous oracle tokens equal the current oracle token and are nonzero",
+    "trueOwnerCurvatureCompatible": "trueOwnerBilinearCompatible and all 16 curvature-stencil tokens equal the current oracle token",
+    "partition": [
+      "TRUE_OWNER_BILINEAR_MISMATCH: radius2 and not trueOwnerBilinearCompatible",
+      "TRUE_OWNER_EXTRA_STENCIL_MISMATCH: trueOwnerBilinearCompatible and not trueOwnerCurvatureCompatible",
+      "TRUE_OWNER_FULL_STENCIL: trueOwnerCurvatureCompatible"
+    ],
+    "objectIndexBilinearAlias": "frozen Object Index structural validity or support admits the pixel while trueOwnerBilinearCompatible is false",
+    "objectIndexCurvatureAlias": "frozen support-eligible.u8 is true while trueOwnerCurvatureCompatible is false",
+    "oneSidedStencilOpportunity": "TRUE_OWNER_EXTRA_STENCIL_MISMATCH; four interpolation taps are owner-correct, but symmetric curvature support crosses an owner boundary",
+    "riskAfterTrueOwnerFullStencil": "risk-rejected.u8 within TRUE_OWNER_FULL_STENCIL",
+    "acceptedOutsideTrueOwnerBilinear": "accepted.u8 while trueOwnerBilinearCompatible is false; report as a safety-critical localization, never relabel H1"
+  },
+  "measurements": {
+    "perCell": [
+      "radius2 pixels",
+      "three-way partition counts and fractions",
+      "Object Index bilinear alias pixels",
+      "Object Index curvature alias pixels",
+      "one-sided stencil opportunity pixels",
+      "support-rejected and risk-rejected counts inside each true-owner class",
+      "accepted count and fraction against radius2",
+      "accepted count and fraction against trueOwnerBilinearCompatible",
+      "accepted count and fraction against trueOwnerFullStencil",
+      "acceptedOutsideTrueOwnerBilinear pixels"
+    ],
+    "perOwner": "repeat the counts for every current analytic owner with a non-empty radius2 domain",
+    "repeatIdentity": "all oracle token masks and derived classification payloads must be byte-identical between repeat 1 and repeat 2",
+    "aggregation": "repeat 1 is descriptive primary; repeat 2 is identity control only"
+  },
+  "frozenGates": {
+    "parentIdentity": true,
+    "formalVerdictUnchanged": true,
+    "currentOraclePayloadIdentityEveryCell": true,
+    "classificationPartitionEveryCell": true,
+    "repeatIdentityEveryFixture": true,
+    "sameIndexObjectIndexAliasMinimumPrimaryPixels": 1,
+    "movingOneSidedStencilOpportunityMinimumPrimaryPixels": 1,
+    "outputContainsNoNewThresholdOrSupportedCandidate": true,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "attacks": {
+    "minimumRegisteredAttacks": 24,
+    "families": [
+      "tamper a parent SHA, internal hash, fixture, repeat or formal verdict",
+      "flip pixel-center, Y origin, Euler order, frame number or nearest-surface selection",
+      "replace analytic owner token with Object Index",
+      "swap current and previous token masks or owner indices",
+      "change q sign, tap order, floor rule or 4x4 extent",
+      "break the three-way partition, repeat identity or per-owner accounting",
+      "hide acceptedOutsideTrueOwnerBilinear or merge it into ordinary risk rejection",
+      "introduce a new threshold, supported candidate, Blender render, model call or network call"
+    ]
+  },
+  "decision": {
+    "localizedVerdict": "TEMPORAL_OWNER_SUPPORT_ALIAS_LOCALIZED",
+    "localizedWhen": "All identities, oracle checks, partitions, repeats, same-index alias exposure, moving one-sided opportunity, operation counts and attacks pass.",
+    "notLocalizedVerdict": "TEMPORAL_OWNER_SUPPORT_ALIAS_NOT_LOCALIZED",
+    "noPromotion": "Neither verdict supports a reconstruction candidate or changes D12.9-H1."
+  },
+  "nonClaims": [
+    "D12.10-D1 is post-hoc on H1 and is not a holdout.",
+    "Analytic owner tokens are compiler-known ground truth for these synthetic planar scenes, not yet a validated production AOV.",
+    "The analysis does not prove Material Index, Cryptomatte or a custom AOV is the correct transport mechanism.",
+    "One-sided stencil opportunity is a localization count, not evidence that a one-sided estimator is safe.",
+    "No coverage denominator is changed and no H1 failure is relabeled."
+  ]
+}

@@ -2971,6 +2971,18 @@ Rotated sweep 需要再接纳 253 个 risk-rejected pixels，最小 Q30 threshol
 
 Artifact: `experiments/blender-motion-aware-curvature-risk-holdout-coverage-analysis-v0-1/results.json`.
 
+## J-196 · D12.10-D1 预登记 true-owner support 定位
+
+Date: 2026-08-28 · Type: POST-HOC LOCALIZATION PREREGISTRATION · New Blender renders: 0
+
+H1 指向的下一变量被限制为 owner identity 与 support geometry，不再允许继续调 scalar threshold。D12.10-D1 在 analyzer 与 output root 都不存在时冻结：以独立 scalar ray-plane oracle 分别重建 frame 0 / frame 1 的 analytic owner token；在 H1 radius-2 域中把像素严格分成 four-tap true-owner mismatch、four taps 正确但额外 4×4 symmetric stencil 跨 owner、full true-owner stencil 三类。
+
+协议会分别报告 Object Index bilinear alias、curvature-support alias、one-sided stencil opportunity、full-support 内的 Q30 risk rejection，以及任何 accepted-but-true-owner-mismatch 像素。repeat 2 只做 token/classification byte identity；所有 H1 formal bytes 只读，禁止 Blender render、模型与网络。same-index alias 和 moving one-sided opportunity 都必须非空，否则定位 verdict 失败。
+
+该分析明确是 post-hoc，不允许生成新 threshold、supported candidate 或新的 coverage denominator，也不允许把 H1 的 bounded verdict 改写。Spec SHA-256: `ac507754a47496a7b9f4f29e1d3313738c12580d0f10e19ef42301f2f4892a7b`。
+
+Artifact: `specs/blender-temporal-owner-support-localization.v0.1.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
