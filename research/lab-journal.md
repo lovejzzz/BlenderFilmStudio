@@ -2943,6 +2943,22 @@ Date: 2026-08-28 · Type: PREREGISTERED PREFLIGHT · Formal Blender renders: 0
 
 Artifact: `experiments/blender-motion-aware-curvature-risk-holdout-preflight-v0-1/frozen-tool-preflight.json`.
 
+## J-194 · D12.9-H1 安全成立，但新鲜覆盖门未成立
+
+Date: 2026-08-28 · Type: FORMAL BOUNDED RESULT · Blender renders: 16
+
+一次性 formal matrix 在 66.34 秒内完成 72 个生产 children、一个独立 analyzer 与一个 raw-payload audit。74 个 PID 全部唯一且 exit zero；Python/Node 的 80 个 canonical consumer payload audit checks 全部 byte exact；48/48 mutation attacks 与 9/9 audit checks 通过。正式 verdict 为 `MOTION_AWARE_CURVATURE_RISK_SAFE_BUT_COVERAGE_NOT_SUPPORTED`，科学门 13/14，唯一 false check 为 `COVERAGE`。
+
+已接受域仍满足安全主张：每个 cell 的 risk underbound 为 0，accepted RGB max/RMSE 低于 `2^-15`，false invalid accept 为 0，所有 fallback 精确复制 current float32 RGBA。Vector endpoint、typed valid-history depth、same-index expected depth rejection、stress 与 static control 全部通过。same-index 场景把 4,169 个同 pass index 但错误深度的 history 正确分离到 `INVALID_DEPTH`，没有污染 valid-history depth maximum。
+
+覆盖在两个新鲜 moving fixture 失守。Rotated sweep 接受 9,765 / 10,327（94.558%），前景 owner 为 8,064 / 8,565（94.151%）；Same-index crossing 接受 13,717 / 14,159（96.878%）。Camera parallax 为 97.735%，static control 为 100%。损失同时来自 incomplete 4×4 support 与真实 curvature rejection。
+
+后验阈值检查否定了“只差一点所以调大阈值”：sweep 达到 97% 至少需 Q30 `140559`，但 max error 变成 `3.260374e-5`，超过质量门；same-index 达到 97% 需 Q30 `31569966`，max error `1.230001e-3`，约为质量门的 40 倍。下一干预必须把 target validity、true-owner support 与 interior curvature acceptance 分成 typed domains，并研究 compiler-controlled temporal owner identity；不能事后把 97% denominator 改成更容易通过的集合。
+
+Evidence hash: `cb9f68251a0016634a0580decc5f898732172eee9eddd560a42dccb493490f16`; audit hash: `46635a9777885a690961cf070ddbd2a7bb1ab97d996f772a3010e52f61ec0943`; receipt hash: `c794bd2c79a584b6ade138d8b09d4bc516f68778c1bf8f6c6d29926424cf3fe8`.
+
+Artifact: `research/2026-08-28-b52-d12-9-h1-motion-aware-curvature-risk-holdout-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
