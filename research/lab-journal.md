@@ -3316,3 +3316,11 @@ Date: 2026-08-28 · Type: IMPLEMENTATION CHECKPOINT / NOT A FORMAL RESULT · New
 Source 已实现六个冻结 fixture 的 Cycles CPU 场景、Generated emission、Material/Object pass indices 与 probe-only 路径；adapter 已实现 multipart EXR roster、10 个数组、Material token domain 和共享 Object Index 负对照；Python consumer 已实现 analytic projection/visibility、symmetric 与 one-sided support、Q30 risk、exact fallback 和冻结的方向 control masks。文件 SHA-256 依次为 `352e4f30569e8966b01ac638e79f54e0ac1973da9fdbf065312230e8b0c78188`、`bf5b9e72c27d2c8fd5aedad0cdaea4a7fda077543123e4ff644f96c85e24ce99`、`42a654afc729e66db2627e48f7ff153048e21d06e29506501fe4484d5341db25`。
 
 停止点被明确冻结：Node 独立 consumer、analyzer、independent auditor、preflight 和 110-process runner 尚未创建；formal/preflight output roots 尚未生成；24 个 Blender renders 尚未启动；因此 directional acceptance、coverage、risk underbound、RGB maximum/RMSE 与 holdout pass/fail 全部未知。重启后的第一动作是实现 Node consumer 并要求 every-array byte exact，随后才实现 analyzer/auditor/preflight/runner；八工具全部冻结并通过 zero-render preflight 之前，不得创建 formal root 或宣称 H1 通过。
+
+## J-224 · D12.12-H1 八工具冻结
+
+Date: 2026-08-28 · Type: FORMAL TOOL FREEZE · New Blender renders: 0
+
+Commit `8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026` 将八个预登记 formal tool path 的最终状态冻结并推送。新增的独立 Node consumer 不调用 Python consumer；analyzer 第三次重算 analytic projection/visibility、结构域、四种方向、neither-side、Q30 risk、reason 与 reconstruction；auditor 不 import source/adapter/consumer/analyzer/runner，并准备 92 个隔离的真实 payload/semantic mutations；runner 固定 24 Blender + 12 adapter + 12 Python + 12 Node + 24 Python envelope + 24 Node envelope + 1 analyzer + 1 audit = 110 个子进程。
+
+八工具 SHA-256（按 spec 顺序）为 `efdebaf2a6ba153bded03c2d28a5151ad196392952c2fde71e57a227d188e2ba`、`bf5b9e72c27d2c8fd5aedad0cdaea4a7fda077543123e4ff644f96c85e24ce99`、`42a654afc729e66db2627e48f7ff153048e21d06e29506501fe4484d5341db25`、`9fa6b68d6fabf0fbab3a341cc3c43e6422fe1ae14cb07106e43ad6682994f8fd`、`f519ef952b04385b5c9440067912a56c294d32a63b37412d3f3802b06d6e9954`、`086455e1ed0a156b1c2da2905a17413ebc91c7fe6261fd14cbae929f9168b1ad`、`a01b04134816973aa46d1525a764e7a23ccd499839b46c3c6c7047ab39237e41`、`8e1a5acb3712f07a7b6340c7e4e3d0f699cc4a966127be849c5913bd185e77e9`。固定 Blender Python 对七个 Python 工具的 syntax compile、固定 Node 对 `.mjs` 的 syntax check、六类合成方向分支和一个 Q30 算术例均通过；仍未创建 preflight/formal root，正式 holdout 结论继续保持未知。
