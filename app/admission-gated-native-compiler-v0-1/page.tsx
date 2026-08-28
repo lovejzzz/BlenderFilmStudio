@@ -76,6 +76,7 @@ export default function AdmissionGatedNativeCompilerPage() {
       <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
       <nav aria-label="B54-E1 native compiler integration 导航">
         <Link href="/formal-runner-admission-totality-v0-1">B53 准入</Link>
+        <Link href="/budgeted-native-child-pid-receipt-v0-1">B55 PID 修正</Link>
         <a href="#sequence">时序</a><a href="#reproduction">复现</a><a href="#gates">门</a><a href="#pid-gap">PID 缺口</a><a href="#boundary">边界</a>
         <Link href="/journal">日志</Link>
       </nav>
@@ -175,7 +176,7 @@ export default function AdmissionGatedNativeCompilerPage() {
         <article><span>RUNNER DIRECT CHILDREN</span><strong>4</strong><p>PIDs、args、exit、elapsed与stdout/stderr hashes exact。</p></article>
         <article><span>AUDITOR DIRECT CHILDREN</span><strong>8</strong><p>4 verifier + 4 `.blend` audits；roster exact。</p></article>
         <article><span>SEMANTIC INVOCATIONS</span><strong>20</strong><p>4 compile + 4 receipt probes + 4 verifier + 4 verifier probes + 4 blend audits。</p></article>
-        <article className="gap"><span>NATIVE PID BINDINGS</span><strong>0/4</strong><p>下一实验只修正这一字段，不改变B54 evidence。</p></article>
+        <article className="gap"><span>NATIVE PID BINDINGS</span><strong>0/4</strong><p>B55已在新ID里修正这一字段；B54 evidence保持不变。</p></article>
       </div>
     </section>
 
@@ -183,13 +184,13 @@ export default function AdmissionGatedNativeCompilerPage() {
       <div className="section-index">04 / RESULT AND NEXT INTERVENTION</div>
       <div className="contact-heading dark-heading">
         <div><p className="eyebrow dark"><span /> REJECTED DOES NOT MEAN NOTHING WORKED</p><h2>保留成功的链。<br/><span>只修正失败的证据字段。</span></h2></div>
-        <p>B54-E1同一ID已经封闭。下一实验应在budget supervisor返回值中持久化native PID，并验证PID不是restricted Node child PID、不是verifier PID、也不是事后猜测；然后重新跑B01/B02全部回归门。</p>
+        <p>B54-E1同一ID已经封闭。Observed follow-up B55-E1只修改budget supervisor，把spawn返回的native PID写入v0.2 report，并以child-authored PID/PPID与全部B01/B02回归门独立验证。</p>
       </div>
       <div className="b54-boundary-grid">
         <article className="preserve"><span>PRESERVED OBSERVATION</span><strong>compiler semantics</strong><p>SceneSpec、BuildPlan、四次compile、receipt、structure与blend bindings全部通过。</p></article>
         <article className="reject"><span>REJECTED CLAIM</span><strong>complete PID evidence</strong><p>Current budget report不能证明native Blender OS PID。</p></article>
         <article><span>NON-CLAIM</span><strong>cinematic pixels</strong><p>没有render frame；本实验不评价影像真实感或电影感。</p></article>
-        <article className="next"><span>NEXT PREREGISTRATION</span><strong>PID receipt correction</strong><p>最小production change + fresh B01/B02 regression。</p></article>
+        <article className="next"><span>OBSERVED FOLLOW-UP</span><strong>22/22 supported</strong><p>三处exact replacement · 四类PID probes · 四次fresh regression。<br/><Link href="/budgeted-native-child-pid-receipt-v0-1">查看B55完整证据 →</Link></p></article>
       </div>
       <div className="b54-nonclaims">
         {spec.nonClaims.map((claim, index) => <p key={claim}><span>{String(index + 1).padStart(2, '0')}</span>{claim}</p>)}
@@ -202,6 +203,6 @@ export default function AdmissionGatedNativeCompilerPage() {
       </div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B54-E1 Native Compiler Integration</b></div><p>4/4 compiles · 17/18 gates · 33/33 attacks · 0 renders</p><Link href="/formal-runner-admission-totality-v0-1">返回B53准入实验 →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B54-E1 Native Compiler Integration</b></div><p>4/4 compiles · 17/18 gates · 33/33 attacks · 0 renders</p><Link href="/budgeted-native-child-pid-receipt-v0-1">继续到B55 PID修正 →</Link></footer>
   </main>;
 }
