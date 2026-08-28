@@ -149,7 +149,7 @@ function main() {
     if (neitherHorizontal || neitherVertical) { masks.oneSidedUnavailable[i] = 1; reason[i] = 6; continue; }
     reason[i] = 7;
   }
-  fs.mkdirSync(cli["output-dir"], {recursive: false});
+  fs.mkdirSync(cli["output-dir"], {recursive: true});
   const controlValues = {...masks, consumerPredictedDepth: predicted, directZSample: directSample, inverseDepthSample: inverseSample};
   const controlRecords = {};
   for (const [name, [filename, dtype]] of Object.entries(CONTROL_OUTPUTS)) controlRecords[name] = writeArray(path.join(cli["output-dir"], "control", filename), controlValues[name], dtype, [height, width]);

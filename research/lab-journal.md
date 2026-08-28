@@ -3708,3 +3708,13 @@ Date: 2026-08-28 · Type: OPERATIONAL CHECKPOINT / NO EXPERIMENT EXECUTION · Ne
 机器上没有实验 runner、Blender render、localhost server 或 H2 Python process在运行；仅存在 macOS 启动的 Blender thumbnailer application extension，不属于实验任务，保留不动。工作卷剩余约 `102 GiB`。用户原有 `README.md` 修改与三份未跟踪的 2026-08-26 research drafts仍明确排除于项目提交之外。
 
 重启后的唯一恢复入口：先确认本断点 commit与远端一致；再严格按C2只修改Node consumer的一处recursive parent materialization，以及preflight的nested-parent Python/Node + full-shaped analyzer NOT_SUPPORTED probe。完成syntax与零渲染验证后提交第二tool-freeze；随后才允许运行新的official preflight。只有该preflight被提交并推送，才可启动exactly 4次正式 H2 renders。不得以首次13/13但已作废的preflight作为runner凭据，也不得跳过C2或提前创建formal root。
+
+## J-259 · D12.14-H2-C2 第二次工具冻结候选
+
+Date: 2026-08-28 · Type: PRE-FORMAL TOOL CORRECTION / ZERO-RENDER VALIDATION · New Blender renders: 0
+
+从checkpoint commit `1c79aebea95eab452920a5be6cc40aca1e7219d8`恢复，确认corrected official preflight root与formal root均不存在后，严格实施 `B52-D12.14-H2-TOOL-C2` 的两项授权变更。Node consumer只把最终output directory materialization从 `recursive:false` 改为 `recursive:true`；preflight新增真实nested-parent Python/Node consumer执行、every-array byte identity、两repeat adapter/consumer formal-shaped tree、18-child synthetic execution draft、typed-envelope pair与完整analyzer NOT_SUPPORTED dry run。没有修改source、adapter、Python consumer、analyzer、auditor、runner、spec、correction或任何科学判据。
+
+Blender-bundled Python 3.13 `py_compile` 与Node 26 `--check`均通过。独立 `/tmp` 零渲染开发probe从四个不存在的 `consumers/{python,node}/R{1,2}` parents启动，4/4 consumer children和analyzer child全部exit 0；Python/Node every output array byte exact；analyzer完整执行12项gates，唯一false为preregistered `PROJECTIVE_DEPTH_MEASUREMENT`，因此正确返回 `MATERIAL_OWNER_PROJECTIVE_DEPTH_EFFECT_NOT_SUPPORTED`，不是异常或REJECTED。probe result self-hash为 `b4ee503e28671e0e075c71b9544fbcce806dc384fc97daa424fa9a9c082fb5d2`，analysis receipt self-hash为 `02f06788b34d9a2929304daf6df956eb206fe789c120caffd53c4f021e3956ef`；临时root已移入用户Trash，不成为formal evidence。
+
+Node consumer SHA-256从 `73b3127d9cf08e8220520a6fd93481b2879ee0bdb86419833b18a03025b02ef3` 变为 `d0a03b358962da9b564ae3b0b1fda526c640c8fd11aac11cd26f9e0435e631ef`；preflight从 `03ec5b996332ee976ca96a783f12ce09f3f65ec83a85deebf31c9fc81fef522d` 变为 `869a1e9cedebf03d2e256395e99d94c664429feaf40cb3868f9047fde024348e`。其余六工具SHA依次仍为 `c12e637352f8c6b8fbf6aad6c56b9264884a95087c33d2229af61d0c908262b5`、`65ecb58e2bbf8b569f9e82b72d21995cd5892a888787e68d6129c3a1a6ebbae7`、`507253e5b3f7778736a4fc3c765267ea82ee7afd6efe350b6a9afaa417b6f009`、`c246b35d4c68af4d6556f3ac1b6298ef9e329637ea33b72248501898e623fc7a`、`6b180be8cc623c615ef667df70d3d40cb56741fd1c2c2de801fe245a06bc5e3c`、`9ff190fb878e5ad3e2cae1e72f251c2143fdb67445894d6087794e9411156f2b`。下一动作只提交推送这两条corrected tool bytes与本entry形成第二tool-freeze；远端形成后才可创建fresh official preflight。
