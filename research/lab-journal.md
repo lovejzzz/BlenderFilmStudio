@@ -4241,3 +4241,15 @@ B57 official evidence commit `64d93980bdccab13c1f6b306bfcc0ff0eb670ab9` 与研�
 同一fix commit已推送到Sites source repository。现有成功Vinext archive重新保存为version 84，server archive content hash为 `sha256:ba1136a36ef0ccc46e480d33affda3bdbb65c7882d90abe2f34b2b74d3dc9ea0`，377 files、29,317,120 bytes；owner-only deployment `appgdep_6a91bc0dc7d8819187c529a057f37012` succeeded。Authenticated exact route返回HTTP 200、70,247 bytes并包含同一四项证据标记；anonymous route返回HTTP 401。发布时重新验证current user为owner、custom access、exactly one allowed owner account、external visitors 0、workspace/tenant groups empty。
 
 遵守J-284 crash guard，全程没有browser handoff、截图、DOM、点击、resize或新增用户可见tab；所有发布验收均为构建、workflow状态与non-browser HTTP。临时archive与本次HTTP抓取随后精确清理，README及三份未跟踪research drafts未被stage。B57 publication现已封闭；下一阶段只进入restart-safe job manifest、受控中断恢复与exactly-once阶段语义。
+
+## J-309 · B58-E1 restart-safe production orchestrator预登记
+
+Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+B57 parent保持正式结论 `PRODUCTION_DISK_JIT_READMISSION_SUPPORTED`、26/26 gates、56/56 attacks；results/audit/receipt file SHA-256继续为 `2d8bdc2260c964ae106d29b4832cd128abdf101ddae99e028b8e68572136f047`、`9a9aa2275dfe03c26de514f31957b884647f1283620f86291449ad50cef15798`、`68d7252a26d5e49ba02680f5da5051ebe2598cf56172068358159c3512213b74`。B58 machine-readable spec与human protocol SHA-256分别为 `a1ea52598d66263989c56f9737917b7ff297122b6731ec31d6f535cacc32cf41` / `50c3d8f8e61ea894e4dadf0d1f2a2ff92e793de56bacfe1f2d01d48951d35f81`。
+
+B58冻结单机append-only orchestration contract：immutable job manifest、hash-chained event ledger、PLAN_BIND → PRODUCTION_COMPILE → VERIFY_RECEIPT → FINALIZE四阶段DAG、exclusive-create/fsync receipts、只从已验证bytes重建状态、completed stage只写`SKIPPED_VERIFIED`而不得再次spawn、live/ambiguous process必须`WAIT/REFUSE`、failed/abandoned attempt永久保留且只能用新attempt ID与empty root重试。Candidate `job:production` entry与ledger/orchestrator/preflight/formal runner/independent auditor五条未来tool paths已在spec冻结；登记时全部不存在，三个formal roots也全部不存在。
+
+正式矩阵冻结四个cells：B01 baseline；在compile completed receipt和ledger event落盘后、verify开始前exit 86，下一独立invocation必须0 additional Blender恢复；B02真实native Blender受控SIGTERM，失败attempt不得promote，恢复只重试compile而不重跑已完成plan；以及live exact child identity阻止duplicate spawn。上限为4 production compiler/native Blender starts、3 successful compiles、1 controlled interruption、3 preferred verifiers及0 render/model/network/Docker。Independent auditor不得import orchestrator execution modules，必须重开全部authoritative bytes；SUPPORTED要求34/34 gates与至少64/72 frozen one-field attacks，任何completed-stage duplicate spawn、dirty attempt promotion、unsafe live-process处理或B57 disk门降低都直接REJECTED。
+
+预登记时filesystem available为108,261,376,000 bytes，扣除536,870,912 projected write后为107,724,505,088，仅比100 GiB reserve高350,322,688 bytes。该余量很薄：正式preflight或任何native-spawn readmission若跌破原门槛，必须先安全恢复容量，禁止降低reserve。下一动作只提交推送spec、protocol与本entry；远端exact前不得创建B58 tools或任何B58 root。

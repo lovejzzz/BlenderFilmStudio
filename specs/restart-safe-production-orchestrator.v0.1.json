@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestrator.v0.1",
+  "experimentId": "B58-E1",
+  "status": "PREREGISTERED_BEFORE_TOOLING_OR_OUTPUT",
+  "date": "2026-08-28",
+  "question": "Can a single-host append-only job ledger resume the preferred Blender 5.2 production compiler after orchestrator loss and a controlled native-Blender interruption without trusting mutable state, losing accepted evidence, or rerunning a completed immutable stage?",
+  "parent": {
+    "experimentId": "B57-E1",
+    "verdict": "PRODUCTION_DISK_JIT_READMISSION_SUPPORTED",
+    "results": { "uri": "experiments/production-disk-jit-readmission-v0-1/results.json", "sha256": "2d8bdc2260c964ae106d29b4832cd128abdf101ddae99e028b8e68572136f047" },
+    "audit": { "uri": "experiments/production-disk-jit-readmission-v0-1/audit.json", "sha256": "9a9aa2275dfe03c26de514f31957b884647f1283620f86291449ad50cef15798" },
+    "receipt": { "uri": "experiments/production-disk-jit-readmission-v0-1/receipt.json", "sha256": "68d7252a26d5e49ba02680f5da5051ebe2598cf56172068358159c3512213b74", "receiptHash": "5deeeda43de95376a96dfc6c688a3dce1a9e33d4ced304fa504d58cfb4645521" }
+  },
+  "frozenProductionSurface": {
+    "release": { "uri": "specs/production-compiler-entry.v0.2.json", "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252" },
+    "compiler": { "uri": "scripts/run-production-blender-compile.mjs", "sha256": "05ae75819a4b1517c3a68345ac1d64b0cea2fd6d3f3891a887bea917c2785466" },
+    "verifier": { "uri": "scripts/verify-production-compile-receipt.mjs", "sha256": "80a719e19f6c71eeb878b946d767f40b4142d80a91c0f28253c4f1b26f7860c9" },
+    "receiptLibrary": { "uri": "scripts/lib/production-compile-receipt.mjs", "sha256": "039ff78c7c9129d0c34a2980ed9c28c1c49fe7320085d73a179ab7aa89ff0d46" },
+    "budgetSupervisor": { "uri": "scripts/lib/budgeted-process.mjs", "sha256": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d" },
+    "aliases": {
+      "preflight": "npm run preflight:production --",
+      "compile": "npm run compile:production --",
+      "verify": "npm run verify:production-receipt --"
+    }
+  },
+  "runtime": {
+    "host": "single local macOS host",
+    "osVersion": "26.5.1",
+    "osBuild": "25F80",
+    "architecture": "arm64",
+    "nodeVersion": "v26.5.0",
+    "blenderVersion": "Blender 5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7"
+  },
+  "capacityAtPreregistration": {
+    "filesystemAvailableBytes": 108261376000,
+    "projectedWriteBytes": 536870912,
+    "minimumReserveBytes": 107374182400,
+    "freeAfterProjectedWriteBytes": 107724505088,
+    "formalExecutionRule": "If a fresh preflight or any native-spawn JIT readmission falls below the unchanged reserve, stop before Blender and recover capacity; never lower or override the threshold."
+  },
+  "threatModel": {
+    "included": [
+      "orchestrator process exits after a durable completed-stage receipt and before the next stage begins",
+      "native Blender receives a controlled termination during an incomplete compile attempt",
+      "a restarted orchestrator encounters a live matching process and must not duplicate it",
+      "ledger, manifest, receipt, artifact and resource-accounting mutation",
+      "PID reuse or unverifiable process identity causing fail-closed recovery"
+    ],
+    "excluded": [
+      "filesystem corruption or loss of acknowledged fsync writes",
+      "kernel, firmware or malicious-host compromise",
+      "distributed or cross-host scheduling",
+      "network filesystems and concurrent external writers",
+      "power-loss durability beyond the local filesystem contract",
+      "automatic deletion of failed attempts"
+    ]
+  },
+  "jobContract": {
+    "stateAuthority": "Only an immutable manifest plus a contiguous append-only hash-chained event ledger and verified immutable stage receipts may determine recovery state; a mutable status file is never authoritative.",
+    "freshRootRequired": true,
+    "singleWriter": true,
+    "concurrentSecondWriter": "REFUSE",
+    "durability": [
+      "exclusive-create every manifest, event and terminal receipt",
+      "fsync file contents before visibility",
+      "fsync the containing directory after creation",
+      "never rewrite, truncate, rename over or delete accepted evidence"
+    ],
+    "layout": {
+      "root": ["job-manifest.json", "events", "stages", "attempts", "final-receipt.json"],
+      "eventName": "six-digit sequence plus event type",
+      "stageReceipt": "stages/<stage-id>/receipt.json",
+      "attemptRoot": "attempts/<stage-id>/<attempt-id>"
+    },
+    "ledgerFields": ["schemaVersion", "jobId", "sequence", "eventType", "stageId", "attemptId", "previousEventHash", "payload", "eventHash"],
+    "manifestBindings": ["jobId", "SceneSpec URI and SHA-256", "BuildPlan hash", "production release SHA-256", "tool-freeze commit", "ordered stage DAG", "output roots", "resource policy", "manifestHash"],
+    "stageDag": [
+      { "id": "PLAN_BIND", "dependsOn": [], "completedBy": "a valid immutable plan receipt binding two byte-identical BuildPlan compilations" },
+      { "id": "PRODUCTION_COMPILE", "dependsOn": ["PLAN_BIND"], "completedBy": "a valid B57 production receipt plus independently valid current CompileReceipt and native disk admission" },
+      { "id": "VERIFY_RECEIPT", "dependsOn": ["PRODUCTION_COMPILE"], "completedBy": "the preferred verifier's valid result bound to the production receipt bytes" },
+      { "id": "FINALIZE", "dependsOn": ["VERIFY_RECEIPT"], "completedBy": "a self-hashed final receipt binding the complete ledger, stage receipts, artifacts and resource totals" }
+    ]
+  },
+  "recoveryRules": {
+    "deriveStateFromBytesEveryInvocation": true,
+    "completedStage": "Verify the ledger prefix, stage receipt self-hash, declared input/output hashes, artifact roster and stage-specific verifier; then emit SKIPPED_VERIFIED without spawning that stage again.",
+    "startedWithoutTerminalReceipt": "Check the recorded process identity. If the exact process is live, return WAIT_LIVE_PROCESS and spawn nothing. If it is dead, unverifiable or identity-mismatched, write a non-promotable abandonment receipt and retry only in a new empty attempt root.",
+    "failedStage": "Preserve the failed attempt, mark it non-promotable and retry only the failed stage and its not-yet-completed descendants under a new attempt ID.",
+    "corruptOrAmbiguousState": "REFUSE_RECOVERY",
+    "secondResumeAfterCompletion": "Return the existing final receipt byte-exactly with zero compiler, Blender or verifier processes.",
+    "exactlyOnceBoundary": "Exactly-once means no second spawn for a logically completed immutable stage within this single-host job contract; failed or abandoned attempts may be retried under new identities."
+  },
+  "resourceAccounting": {
+    "perAttempt": ["wrapper PID", "native Blender PID when present", "command and argv hashes", "start and terminal timestamps", "elapsed time", "peak sampled RSS", "log bytes and hash", "output file count and bytes", "exit code", "signal", "spawn error", "termination request"],
+    "jobTotals": ["stage attempts", "compiler wrappers", "native Blender starts", "preferred verifier starts", "wall time", "peak sampled RSS", "log bytes", "output bytes"],
+    "crossBinding": "Job totals must be recomputed from immutable attempt receipts; neither the orchestrator nor final receipt may supply unverified totals."
+  },
+  "candidateProductionEntry": {
+    "packageAlias": "job:production",
+    "command": "node scripts/run-restart-safe-production-job.mjs",
+    "singleCommandModes": ["start", "resume", "status"],
+    "rule": "The same executable and immutable job manifest drive first execution and recovery; mode changes may not change job semantics or stage identities."
+  },
+  "formalToolPaths": [
+    "scripts/lib/restart-safe-job-ledger.mjs",
+    "scripts/run-restart-safe-production-job.mjs",
+    "scripts/preflight-b58-e1-restart-safe-production-orchestrator.mjs",
+    "scripts/run-b58-e1-restart-safe-production-orchestrator.mjs",
+    "scripts/audit-b58-e1-restart-safe-production-orchestrator.mjs"
+  ],
+  "formalRoots": {
+    "preflight": "experiments/restart-safe-production-orchestrator-preflight-v0-1",
+    "attempt": "experiments/restart-safe-production-orchestrator-attempt-v0-1",
+    "formal": "experiments/restart-safe-production-orchestrator-v0-1"
+  },
+  "formalMatrix": [
+    {
+      "id": "BASELINE_B01",
+      "sceneSpec": "specs/benchmarks/B01.scene.json",
+      "fault": null,
+      "expected": "four stages complete; one production compiler, one native Blender and one preferred verifier"
+    },
+    {
+      "id": "ORCHESTRATOR_EXIT_AFTER_COMPILE_B01",
+      "sceneSpec": "specs/benchmarks/B01.scene.json",
+      "fault": "exit 86 after the PRODUCTION_COMPILE completed receipt and ledger event are fsynced, before VERIFY_RECEIPT start",
+      "expected": "first invocation exits; recovery verifies and skips PLAN_BIND and PRODUCTION_COMPILE, starts no additional Blender, runs VERIFY_RECEIPT once and finalizes"
+    },
+    {
+      "id": "BLENDER_INTERRUPTED_B02",
+      "sceneSpec": "specs/benchmarks/B02.scene.json",
+      "fault": "send SIGTERM to the observed native Blender process group immediately after its identity is recorded; allow the existing supervisor to escalate only if required",
+      "expected": "first compile attempt is non-promotable; recovery preserves it, reuses completed PLAN_BIND, compiles once in a fresh attempt, verifies and finalizes"
+    },
+    {
+      "id": "LIVE_PROCESS_REFUSAL",
+      "sceneSpec": "specs/benchmarks/B01.scene.json",
+      "fault": "recover against a started receipt whose exact controlled child identity is still live",
+      "expected": "WAIT_LIVE_PROCESS with zero duplicate compiler, Blender or verifier spawn"
+    }
+  ],
+  "operationCeilings": {
+    "productionCompilerStarts": 4,
+    "nativeBlenderStarts": 4,
+    "successfulNativeCompiles": 3,
+    "controlledInterruptedNativeCompiles": 1,
+    "preferredVerifierStarts": 3,
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0
+  },
+  "frozenGates": [
+    "PARENT_B57_EXACT",
+    "PREREGISTRATION_AND_TOOL_FREEZE_PUSHED",
+    "FORMAL_ROOTS_FRESH_AND_DISJOINT",
+    "PREFLIGHT_ZERO_BLENDER_ACCEPTED",
+    "PRODUCTION_SURFACE_EXACT",
+    "DISK_RESERVE_AND_JIT_READMISSION_UNCHANGED",
+    "JOB_MANIFEST_SELF_HASH_AND_INPUT_BINDINGS",
+    "STAGE_DAG_EXACT",
+    "LEDGER_SEQUENCE_CONTIGUOUS",
+    "LEDGER_PREVIOUS_HASH_CHAIN_EXACT",
+    "LEDGER_EXCLUSIVE_CREATE_AND_DIRECTORY_FSYNC",
+    "BASELINE_B01_COMPLETE",
+    "BASELINE_OPERATION_COUNTS_EXACT",
+    "ORCHESTRATOR_EXIT_86_AT_FROZEN_BOUNDARY",
+    "COMPILE_RECEIPT_DURABLE_BEFORE_ORCHESTRATOR_EXIT",
+    "RECOVERY_SKIPS_COMPLETED_PLAN",
+    "RECOVERY_SKIPS_COMPLETED_COMPILE",
+    "RECOVERY_STARTS_ZERO_ADDITIONAL_BLENDER_AFTER_COMPILE_CHECKPOINT",
+    "RECOVERY_RUNS_EXACTLY_ONE_VERIFIER",
+    "RECOVERY_FINAL_RECEIPT_VALID",
+    "NATIVE_BLENDER_INTERRUPTION_OBSERVED",
+    "INTERRUPTED_ATTEMPT_TERMINAL_AND_NON_PROMOTABLE",
+    "INTERRUPTED_ATTEMPT_RETAINED",
+    "RETRY_USES_NEW_ATTEMPT_ID_AND_EMPTY_ROOT",
+    "RETRY_DOES_NOT_RERUN_COMPLETED_PLAN",
+    "B02_RECOVERY_COMPILE_AND_VERIFY_VALID",
+    "LIVE_MATCHING_PROCESS_BLOCKS_DUPLICATE_SPAWN",
+    "PID_IDENTITY_AMBIGUITY_FAILS_CLOSED",
+    "REPEATED_FINAL_RESUME_ZERO_PROCESS_AND_BYTE_EXACT",
+    "RESOURCE_TOTALS_RECOMPUTE_EXACT",
+    "ARTIFACT_AND_RECEIPT_ROSTERS_EXACT",
+    "PROCESS_AND_ATTEMPT_IDENTITIES_UNIQUE",
+    "SEMANTIC_ATTACKS_MINIMUM_64",
+    "ZERO_RENDER_MODEL_NETWORK_DOCKER"
+  ],
+  "frozenSemanticAttacks": [
+    "A01_MANIFEST_SELF_HASH", "A02_MANIFEST_JOB_ID", "A03_MANIFEST_SCENE_URI", "A04_MANIFEST_SCENE_SHA", "A05_MANIFEST_PLAN_HASH", "A06_MANIFEST_RELEASE_SHA", "A07_MANIFEST_TOOL_FREEZE_COMMIT", "A08_MANIFEST_STAGE_ORDER",
+    "A09_MANIFEST_STAGE_DEPENDENCY", "A10_MANIFEST_OUTPUT_ROOT", "A11_MANIFEST_RESOURCE_POLICY", "A12_LEDGER_FIRST_SEQUENCE", "A13_LEDGER_SEQUENCE_GAP", "A14_LEDGER_DUPLICATE_SEQUENCE", "A15_LEDGER_EVENT_HASH", "A16_LEDGER_PREVIOUS_EVENT_HASH",
+    "A17_LEDGER_JOB_ID", "A18_LEDGER_STAGE_ID", "A19_LEDGER_ATTEMPT_ID", "A20_LEDGER_EVENT_TYPE", "A21_STAGE_RECEIPT_FILE_SHA", "A22_STAGE_RECEIPT_SELF_HASH", "A23_STAGE_RECEIPT_INPUT_HASH", "A24_STAGE_RECEIPT_OUTPUT_HASH",
+    "A25_STAGE_RECEIPT_STATUS", "A26_STAGE_RECEIPT_PROMOTABLE", "A27_STAGE_RECEIPT_JOB_ID", "A28_STAGE_RECEIPT_STAGE_ID", "A29_STAGE_RECEIPT_ATTEMPT_ID", "A30_STAGE_RECEIPT_LEDGER_EVENT_HASH", "A31_PRODUCTION_RECEIPT_SHA", "A32_PRODUCTION_RECEIPT_SELF_HASH",
+    "A33_CURRENT_RECEIPT_BINDING", "A34_NATIVE_DISK_ADMISSION_BINDING", "A35_BUILD_PLAN_BINDING", "A36_STRUCTURE_HASH_BINDING", "A37_BLEND_ARTIFACT_HASH", "A38_ARTIFACT_ROSTER_EXTRA_FILE", "A39_ARTIFACT_ROSTER_MISSING_FILE", "A40_COMPLETED_STAGE_CHANGED_TO_STARTED",
+    "A41_COMPLETED_STAGE_DUPLICATE_SPAWN_COUNT", "A42_RECOVERY_ACTION_SKIP_TO_RETRY", "A43_RECOVERY_ACTION_RETRY_TO_SKIP", "A44_ORCHESTRATOR_FAULT_BOUNDARY", "A45_CRASH_COMPILE_COUNT", "A46_CRASH_NATIVE_PID", "A47_CRASH_VERIFIER_COUNT", "A48_INTERRUPTED_SIGNAL",
+    "A49_INTERRUPTED_ATTEMPT_PROMOTABLE", "A50_INTERRUPTED_OUTPUT_REUSED", "A51_RETRY_ATTEMPT_ID_REUSED", "A52_RETRY_OUTPUT_ROOT_REUSED", "A53_RETRY_PLAN_STAGE_RERUN", "A54_LIVE_PROCESS_CHANGED_TO_DEAD", "A55_LIVE_PROCESS_PID", "A56_LIVE_PROCESS_START_IDENTITY",
+    "A57_LIVE_PROCESS_EXECUTABLE", "A58_LIVE_PROCESS_ARGV_HASH", "A59_AMBIGUOUS_PROCESS_MARKED_SAFE", "A60_WRAPPER_PID_ACCOUNTING", "A61_NATIVE_PID_ACCOUNTING", "A62_EXIT_CODE_ACCOUNTING", "A63_SIGNAL_ACCOUNTING", "A64_LOG_HASH_ACCOUNTING",
+    "A65_LOG_BYTES_ACCOUNTING", "A66_OUTPUT_BYTES_ACCOUNTING", "A67_PEAK_RSS_ACCOUNTING", "A68_JOB_TOTAL_STAGE_ATTEMPTS", "A69_JOB_TOTAL_NATIVE_STARTS", "A70_JOB_TOTAL_VERIFIER_STARTS", "A71_FINAL_RECEIPT_LEDGER_HEAD", "A72_FINAL_RECEIPT_SELF_HASH"
+  ],
+  "decisionRules": {
+    "supported": "34/34 gates pass, at least 64/72 registered attacks reject, operation ceilings are exact, and the independent auditor reopens all authoritative bytes without importing orchestrator execution modules.",
+    "bounded": "durable recovery works but a non-duplication, process-identity, receipt-binding or resource-accounting gate is unproven.",
+    "rejected": "a completed immutable stage is spawned again, a live or ambiguous attempt causes a duplicate spawn, a failed attempt becomes promotable, evidence is overwritten, or any safety/disk gate is weakened.",
+    "invalid": "parent identity, tool freeze, pushed preflight, fresh-root ordering, fault boundary or operation counts cannot be established."
+  },
+  "acceptedVerdict": "RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED",
+  "boundedVerdict": "RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED",
+  "rejectedVerdict": "RESTART_SAFE_PRODUCTION_ORCHESTRATOR_REJECTED",
+  "nonClaims": [
+    "No distributed exactly-once or cross-host failover claim",
+    "No claim that an application-level fsync survives filesystem, controller or hardware corruption",
+    "No automatic cleanup, overwrite or in-place continuation of a failed attempt",
+    "No render, EXR, delivery video or cinematic-quality claim",
+    "No proof of an actual macOS power loss or kernel panic",
+    "The controlled orchestrator exit is evidence for Codex-independent restartability, not by itself proof that every future Codex desktop crash mode is harmless"
+  ]
+}
