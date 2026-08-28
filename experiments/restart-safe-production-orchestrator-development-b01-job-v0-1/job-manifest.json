@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobManifest.v0.1",
+  "jobId": "B58-DEV-B01-COMPILE-1",
+  "request": {
+    "uri": "experiments/restart-safe-production-orchestrator-development-b01-request-v0-1.json",
+    "sha256": "fd7fe9d3c28d0f3ede47b87be00d86e2da3d85cbfd641ade24c2f425191e4314",
+    "requestHash": "2a07ae38d430a9dcc5e7515178ced80677984d59c89aefd4a65b57c885c017a4"
+  },
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B01.scene.json",
+    "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+  },
+  "expectedBuildPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "4fedacbc78cd3f940ccabca87d606130b4c04a48",
+  "preflightEvidenceCommit": "269d0590d9355a235cb62101a26c5c3e0edeae6a",
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "B01-COMPILE-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-development-b01-preflight-v0-1",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-development-b01-production-attempt-v0-1",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-development-b01-output-v0-1",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": null,
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "manifestHash": "9254ce91aeb09363caf7023e0f32076541c41503952c90f35aaa9991ebfe0bf0"
+}
