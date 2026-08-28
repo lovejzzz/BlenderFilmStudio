@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobManifest.v0.1",
+  "jobId": "B58-DEV-INTERRUPT-B02-1",
+  "request": {
+    "uri": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-request-v0-1.json",
+    "sha256": "5a8be8e544648bd0b96b2d69658324314ba8b3d39bdd2c00e9dc66054e46a866",
+    "requestHash": "9737380294225ea8d65a8fbed20f7bc98e7b7bdef07ae8b1d8a92efe40da9acb"
+  },
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B02.scene.json",
+    "sha256": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16"
+  },
+  "expectedBuildPlanHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "37fb87791b829f3b275c249f9e09ccec64636726",
+  "toolHashes": {
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/run-restart-safe-production-job.mjs": "f85fe21c951beea0622c14cc4b1afbeea2de521aedd136ccdd03fa92033a96d7"
+  },
+  "preflightEvidenceCommit": "d0257dab0d7d958bee32197edfaeb1535b210a54",
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "B02-INTERRUPTED-COMPILE-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-preflight-v0-1",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-production-attempt-v0-1",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-output-v0-1",
+      "fault": "INTERRUPT_NATIVE_AFTER_OBSERVED"
+    },
+    {
+      "attemptId": "B02-RETRY-COMPILE-0002",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-retry-preflight-v0-1",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-retry-production-attempt-v0-1",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-retry-output-v0-1",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": null,
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "manifestHash": "8a4cb35141c43d672237a7df8303a32a2223f76841803f53a0c0752e36690d64"
+}

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionAttemptReceipt.v0.1",
+  "jobId": "B58-DEV-INTERRUPT-B02-1",
+  "stageId": "PRODUCTION_COMPILE",
+  "attemptId": "B02-INTERRUPTED-COMPILE-0001",
+  "status": "FAILED",
+  "promotable": false,
+  "reason": "CONTROLLED_NATIVE_INTERRUPTION",
+  "candidate": {
+    "attemptId": "B02-INTERRUPTED-COMPILE-0001",
+    "preflightRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-preflight-v0-1",
+    "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-production-attempt-v0-1",
+    "outputRoot": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-output-v0-1",
+    "fault": "INTERRUPT_NATIVE_AFTER_OBSERVED"
+  },
+  "process": {
+    "wrapper": {
+      "pid": 86091,
+      "parentPid": 86083,
+      "start": "Fri Aug 28 13:39:49 2026",
+      "executable": "node",
+      "argv": "node /opt/homebrew/bin/npm run compile:production -- --scene-spec specs/benchmarks/B02.scene.json --preflight-root experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-preflight-v0-1 --attempt-root experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-production-attempt-v0-1 --output-root experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-output-v0-1 --preflight-evidence-commit d0257dab0d7d958bee32197edfaeb1535b210a54",
+      "argvSha256": "88e6213f7d6dcb676278dd1b45c45b598bca9ad5e3ff512543730ddab8ac1f67",
+      "live": true,
+      "identityHash": "fb24966b984f4db391f41bf4d7f51bc21dc7bd2bbfa9624822627e5ce20c869a"
+    },
+    "native": {
+      "pid": 86217,
+      "parentPid": 86194,
+      "start": "Fri Aug 28 13:39:49 2026",
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "argv": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_scene.py -- --plan /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-output-v0-1/build-plan.json --repository-root /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio --output-dir /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-output-v0-1/restricted",
+      "argvSha256": "d2e62fcdc7715ea7769e8906eb30d9dc48252c29c92cecc14d354156e3b67c1d",
+      "live": true,
+      "identityHash": "3281edeb62fc224ee0a7711b96816557c0876eed6e86eca72fa9471eff742626"
+    },
+    "terminal": {
+      "exitCode": 1,
+      "signal": null,
+      "spawnError": null,
+      "elapsedNanoseconds": 544689042,
+      "stdout": {
+        "bytes": 565,
+        "capturedBytes": 565,
+        "sha256": "7abcee0934db1164ae4f2e1ac833cf3c448966fdcb58b2e683f06762d214e02a",
+        "truncated": false
+      },
+      "stderr": {
+        "bytes": 133,
+        "capturedBytes": 133,
+        "sha256": "ca5d48833c4b685a66115d195f2a6dbc6e3d9dfbda289535726e4edd9c9ab086",
+        "truncated": false
+      }
+    },
+    "fault": {
+      "type": "INTERRUPT_NATIVE_AFTER_OBSERVED",
+      "nativeProcess": {
+        "pid": 86217,
+        "parentPid": 86194,
+        "start": "Fri Aug 28 13:39:49 2026",
+        "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+        "argv": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_scene.py -- --plan /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-output-v0-1/build-plan.json --repository-root /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio --output-dir /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-output-v0-1/restricted",
+        "argvSha256": "d2e62fcdc7715ea7769e8906eb30d9dc48252c29c92cecc14d354156e3b67c1d",
+        "live": true,
+        "identityHash": "3281edeb62fc224ee0a7711b96816557c0876eed6e86eca72fa9471eff742626"
+      },
+      "signal": "SIGTERM",
+      "signalSent": true
+    }
+  },
+  "evidence": {
+    "invalidation": {
+      "uri": "experiments/restart-safe-production-orchestrator-development-interrupt-b02-failed-output-v0-1/invalidation.json",
+      "sha256": "3219403b021b8459e6981a411501d43f74259821026e051b69ec8aba332e9c46",
+      "invalidationHash": "c646ef576ad0214d9ab518f64d05f5f9d9d83b32f420ea8bbe4445775f3264f9"
+    },
+    "productionAttemptRoster": [
+      "admission.json",
+      "attempt.json",
+      "receipt.json"
+    ],
+    "outputRoster": [
+      "build-plan.json",
+      "formal-start.json",
+      "invalidation.json",
+      "native-compile-disk-admission.json",
+      "restricted"
+    ]
+  },
+  "resources": {
+    "productionCompilerStarts": 1,
+    "nativeCompileBlenderStarts": 1,
+    "successfulNativeCompiles": 0,
+    "preferredVerifierStarts": 0,
+    "artifactAuditBlenderStarts": 0,
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0
+  },
+  "receiptHash": "460585fabd1bdca0fdd40989bcaf4ae548521deeda80214b9ec47a371e1f6bd3"
+}
