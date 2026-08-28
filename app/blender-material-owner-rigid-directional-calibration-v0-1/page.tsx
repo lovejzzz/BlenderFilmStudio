@@ -49,6 +49,7 @@ export default function RigidDirectionalCalibrationPage() {
       <nav aria-label="D12.14-C2 calibration 导航">
         <Link href="/blender-material-owner-quality-coupling-derivation-v0-1">D12.13-D1</Link>
         <a href="#verdict">结论</a><a href="#candidates">刚体候选</a><a href="#domains">方向域</a><a href="#blender">Blender</a><a href="#evidence">证据</a><a href="#next">下一门</a>
+        <Link href="/blender-material-owner-rigid-directional-render-holdout-v0-1">D12.14-H1</Link>
         <Link href="/journal">日志</Link>
       </nav>
       <span className="edition contact-edition">Calibration D12.14-C2</span>
@@ -173,16 +174,16 @@ export default function RigidDirectionalCalibrationPage() {
     <section className="section d1214c2-next" id="next">
       <div className="section-index">05 / NEXT GATE · FRESH BLENDER RENDER HOLDOUT</div>
       <div className="contact-heading">
-        <div><p className="eyebrow"><span /> GEOMETRY IS READY · PASSES ARE NOT</p><h2>下一步才轮到渲染。<br/><span>而且必须使用新数据。</span></h2></div>
-        <p>新 holdout 可以绑定这三条 world transforms，但必须重新冻结 raster、Material/Object tokens、Generated signals、EXR outputs 与两次 clean repeats。只有真实 Material Index、Vector、Depth 与 analytic masks 对齐后，才有资格重新测试 factor 1。</p>
+        <div><p className="eyebrow"><span /> THE RENDER HOLDOUT RAN · THE INSTRUMENT FAILED</p><h2>12 次渲染完成了。<br/><span>但 H1 没有科学结论。</span></h2></div>
+        <p>Fresh holdout 使用了新 raster、tokens、signals、EXR outputs 与两次 repeats；第 55 个 child 因冻结 analyzer 的 schema 缺口中止。失败证据已封存，相同 ID 不得重跑。</p>
       </div>
       <div className="d1214c2-next-grid">
-        <article><span>FREEZE</span><strong>new rasters + tokens</strong><p>Calibration masks 不得充当 confirmatory denominator。</p></article>
-        <article><span>RENDER</span><strong>3 fixtures × 2 frames × 2 repeats</strong><p>真实 Cycles passes；container 与 pixel determinism 分层。</p></article>
-        <article><span>DECIDE</span><strong>quality + direction + fallback</strong><p>任何一门失败都保留 rejected verdict，不允许现场修 fixture。</p></article>
+        <article><span>COMPLETED</span><strong>12 fresh renders</strong><p>3 fixtures × 2 frames × 2 repeats 全部产生真实 Cycles passes。</p></article>
+        <article><span>FAILED</span><strong>frozen analyzer</strong><p>Background subdivisions 未在 analyzer schema normalization 中展开。</p></article>
+        <article><span>READ</span><strong>open H1 failure dossier</strong><p><Link href="/blender-material-owner-rigid-directional-render-holdout-v0-1">查看完整失败链与非决定性取证 →</Link></p></article>
       </div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.14-C2 Rigid Directional Calibration</b></div><p>rigid domains derived · render evidence still pending</p><Link href="/blender-material-owner-quality-coupling-derivation-v0-1">返回 D12.13-D1 →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.14-C2 Rigid Directional Calibration</b></div><p>rigid domains derived · H1 instrument failure preserved</p><Link href="/blender-material-owner-rigid-directional-render-holdout-v0-1">进入 D12.14-H1 →</Link></footer>
   </main>;
 }
