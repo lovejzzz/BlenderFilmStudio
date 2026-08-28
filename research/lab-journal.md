@@ -3262,3 +3262,25 @@ Rotated sweep 的 146 个 localized opportunities 中 146 个 eligible、136 个
 Result file SHA-256 / self-hash: `4c68f0fad380e0362b3913c0f08f009aa009a620d8e718520a73319edd4e98e2` / `eba522125663564ee3d1cb6cb53fe3d0207fd3b32aa35160dba6fc481da6a841`。Audit file SHA-256 / self-hash: `5418414190a1f945ecc7a2d6069bbf8139898630eb54b2cb325332cbfb544615` / `a33ddf28b4eed72f37938c0bb334c23a3149f92cbe69d1596b0e673ac454cef1`。Receipt file SHA-256 / self-hash: `29749a31ad573a0ef8226534da4deb601b772bb0681d4b0068b122613ab129c8` / `87ce924b6d4cc212b9a49e43475bdd4334564e6b1a2e42e67db9f689f33a7bd9`。
 
 Artifact: `research/2026-08-28-b52-d12-12-d1-one-sided-curvature-derivation-result.md`.
+
+## J-219 · D12.12-D1 source-bound 代理图与研究 tab 实现检查点
+
+Date: 2026-08-28 · Type: RECOVERABLE PUBLICATION CHECKPOINT · New Blender renders: 0
+
+新增只读导出器，将 D12.11 baseline accepted 与 D12.12-D1 的 radius-2、localized opportunity、factor-1 accepted 和 Q30 risk arrays 映射为两张最近邻分类图。导出器由 Blender 5.2 bundled Python 3.13 与 OpenImageIO 3.1.13.1 实际执行；sweep 图重算得到 radius 10,327、baseline accepted 9,765、candidate accepted 9,901、new accepted 136、remaining risk 426、opportunity rejected 10，parallax 图重算得到 15,366、15,018、15,162、144、204、8，均与 formal result 绑定数字一致。
+
+两图人工检查可读：绿色为旧 accepted、黄色为新恢复、洋红为 remaining risk、红色为存在单侧机会但仍拒绝的反例。分类固定为 `SOURCE_BOUND_VISUALIZATION_NOT_DECISIONAL_EVIDENCE`，不充当 Blender display transform，也不替代 raw arrays 或未来 fresh holdout。Manifest internal hash 为 `37a8f49aa598fe234d48a84fecc33efee4a7a4efdb7009acc07695841915356c`，文件 SHA-256 为 `fa2bcfc4bc259305b77845cd66e046c559efe2d44e8dd1daaeadeb9a246fe929`；sweep / parallax PNG SHA-256 分别为 `47981400c60cb8b3786bbd0a0d8ed11c492cf2335fc42f407d3e58148acd0dc6` / `a4f1c8064260730ea6c42aa7d972966a929105f6475b3505a784e7daa7c0ef7d`。
+
+新增 `/blender-material-owner-one-sided-curvature-v0-1/` tab，并把 D12.11、首页导航接入新的研究链。页面将 factor-1 局部恢复、七因子机械选择、13/13 analyzer、21/21 baseline audit、64/64 attacks 与 sweep 仍低于 0.97 的反例放在同一叙事中；明确标记 post-hoc candidate 不能进入 production compiler，D12.12-H1 必须另行预登记。此时尚未执行 lint/build 或发布，下一动作是先通过 React 定向检查与双构建门。
+
+Artifacts: `scripts/export-b52-d12-12-d1-site-proxies.py`; `public/evidence/b52-d12-12-d1/manifest.json`; `app/blender-material-owner-one-sided-curvature-v0-1/page.tsx`.
+
+## J-220 · D12.12-D1 研究 tab 通过 React 与双构建门
+
+Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
+
+本地开发服务器对精确 route `/blender-material-owner-one-sided-curvature-v0-1/` 成功编译并返回 HTTP 200，随后按 Sites 规则将同一 coherent preview 送入 Codex 面板；未执行未请求的浏览器 DOM、截图或交互 QA。React 定向检查覆盖新增页、D12.11 导航与首页导航，结果为 0 errors / 0 warnings；新增页保持 Server Component，静态数组在模块级，使用 Next Image，没有 client state、数据 waterfall 或不必要 bundle。
+
+全仓 ESLint 为 0 errors / 31 warnings。30 个属于此前路径；第 31 个来自已冻结 D12.12 Node consumer 的 expression warning，不能为了 lint 数字改写实验工具字节。Vinext/Sites production build 成功，识别 79 条 routes 并包含 D12.12；GitHub Pages Next static build 成功生成 81/81 pages，并将新增 route 明确认定为 static。
+
+下一动作是只提交本轮 exporter、代理图/manifest、研究页、CSS、两处导航与 J-219/J-220；不得包含 README 或三份用户未提交研究稿。推送后必须等待 GitHub Pages 对 exact commit 成功，并在 Sites 发布前重新核验 owner-only access。

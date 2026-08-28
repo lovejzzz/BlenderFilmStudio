@@ -258,6 +258,7 @@ export default function Home() {
           <Link className="route-tab" href="/blender-motion-aware-curvature-risk-holdout-v0-1">D12.9 新鲜运动门</Link>
           <Link className="route-tab" href="/blender-owner-token-pass-v0-1">D12.10 Owner Token</Link>
           <Link className="route-tab" href="/blender-material-index-owner-integration-v0-1">D12.11 Material Owner</Link>
+          <Link className="route-tab" href="/blender-material-owner-one-sided-curvature-v0-1">D12.12 单侧曲率</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>

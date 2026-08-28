@@ -74,6 +74,7 @@ export default function MaterialIndexOwnerIntegrationPage() {
       <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
       <nav aria-label="D12.11 Material Index owner integration 导航">
         <Link href="/blender-owner-token-pass-v0-1">D12.10</Link>
+        <Link href="/blender-material-owner-one-sided-curvature-v0-1">D12.12 Result</Link>
         <a href="#verdict">结论</a>
         <a href="#evidence">像素证据</a>
         <a href="#matrix">配对矩阵</a>
@@ -199,6 +200,6 @@ export default function MaterialIndexOwnerIntegrationPage() {
       </div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.11 Material Index Owner Integration</b></div><p>owner identity accepted · coverage not supported</p><Link href="/blender-owner-token-pass-v0-1">返回 D12.10 Owner Token →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.11 Material Index Owner Integration</b></div><p>owner identity accepted · coverage not supported</p><Link href="/blender-material-owner-one-sided-curvature-v0-1">继续：D12.12 单侧曲率候选 →</Link></footer>
   </main>;
 }
