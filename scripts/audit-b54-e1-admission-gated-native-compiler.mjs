@@ -44,6 +44,7 @@ const CONFIG_PATHS = [
 const EXPECTED_RUN_FILES = [
   'budget.report.json',
   'compile.receipt.json',
+  'frames',
   'scene.blend',
   'scene.manifest.json',
   'scene.structure.canonical.json',
@@ -413,6 +414,7 @@ async function main() {
       const runId = `${benchmark.id}-${suffix}`;
       const runRoot = resolve(formalRoot, 'runs', runId);
       const names = await collectNames(runRoot);
+      const framesEmpty = (await collectNames(resolve(runRoot, 'frames'))).length === 0;
       const budgetPath = resolve(runRoot, 'budget.report.json');
       const receiptPath = resolve(runRoot, 'compile.receipt.json');
       const manifestPath = resolve(runRoot, 'scene.manifest.json');
@@ -438,7 +440,8 @@ async function main() {
         benchmark: benchmark.id,
         outputUri: repoUri(repositoryRoot, runRoot),
         names,
-        rosterExact: deepExact(names, EXPECTED_RUN_FILES),
+        framesEmpty,
+        rosterExact: deepExact(names, EXPECTED_RUN_FILES) && framesEmpty,
         budget,
         budgetSha256: await sha256File(budgetPath),
         budgetBindingExact: operationBinding?.budget?.sha256 === await sha256File(budgetPath) && operationBinding?.budget?.outcome === 'PASS',
