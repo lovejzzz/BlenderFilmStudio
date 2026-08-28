@@ -4215,3 +4215,17 @@ C3完整彩排证据commit `3c4d3bc7533379f472b281a5bdd14443fe1beb44` 与 `origi
 Official preflight file SHA/self-hash为 `793c1d316ce6ad863e32ba1c9e0b353729b20c2c4f7f3918979a71b2e776a9d8` / `a78eb660438434fbd6931b8ebaf396d56c68db5b0017a645f793408c65b1a222`。真实available为108,501,454,848 bytes，扣除536,870,912 projected bytes后为107,964,583,936 bytes，高于107,374,182,400-byte reserve；forced negative仍为107,911,053,311 bytes并精确低于threshold 1 byte。LOW-DISK与B01-A/B、B02-A/B五份production preflight均ACCEPTED；Blender/render/model/network/Docker全部0，official attempt/formal roots仍不存在。
 
 下一动作只提交推送official preflight与本entry，读取exact evidence commit并确认`origin/main`一致，然后对bound official attempt/formal roots调用single-use runner一次。任何失败都必须保留，official同一ID禁止修补或重跑。
+
+## J-307 · B57-E1 production disk JIT readmission正式支持
+
+Date: 2026-08-28 · Type: OFFICIAL FORMAL RESULT · New Blender compilations: 4 · New Blender renders: 0
+
+Official accepted preflight evidence commit `ab43958de3b6387fdb148115edf034d72949e717` 与 `origin/main` exact后，single-use B57 runner只调用一次。Meta attempt/admission/receipt/formal-start按sequence 1–4 durable写入；LOW-DISK先执行，四个正常production compiles随后依固定顺序完成，最后由独立auditor直接重开全部证据。
+
+LOW-DISK在native spawn前真实观察108,497,092,608 bytes，effective ceiling为107,911,053,311 bytes，projection后107,374,182,399，精确低于100 GiB reserve 1 byte。Sequence-5 disk admission以`FREE_AFTER_PROJECTED_WRITE_BELOW_RESERVE`拒绝，disk/invalidation self-hash为 `a02b4d89947f8c1dc9b365578c25009779e632506590f4ab8342d2be21652147` / `2fc2b3e6a32585e04e18bdfe270f02a40fd71082b29e7d627cf9640db739cfaf`；restricted wrapper与native Blender processes均0。
+
+B01-A/B、B02-A/B四次preferred production compile与verifier全部PASS；wrapper/native PID分别为58237/58240、58343/58346、58448/58451、58553/58556。B01 plan/structure pair保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf` / `c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b`；B02保持 `a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687` / `025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856`。四份receipt均把sequence/status、observed/effective bytes、ceiling、policy与disk hash逐字段绑定回真实disk record；disk/receipt self-hash、root/restricted rosters与`.blend` embedded bindings全部exact。
+
+Independent formal verdict为 `PRODUCTION_DISK_JIT_READMISSION_SUPPORTED`：26/26 gates、56/56 resealed semantic attacks、0 escaped。Formal-start/operation/audit/results/receipt file SHA-256依次为 `5401b79143c8b65b4710edb45788ad9aa52067856bf7349a3419d9ec75c1b6a7`、`9dc6841bee1302605850f0fbd1ce5ede94a060c492d6ca83c7d233d1fd25cfdf`、`9a9aa2275dfe03c26de514f31957b884647f1283620f86291449ad50cef15798`、`2d8bdc2260c964ae106d29b4832cd128abdf101ddae99e028b8e68572136f047`、`68d7252a26d5e49ba02680f5da5051ebe2598cf56172068358159c3512213b74`；formal receipt self-hash为 `5deeeda43de95376a96dfc6c688a3dce1a9e33d4ced304fa504d58cfb4645521`。45个formal files仅含四份`.blend`，无EXR/image/video/`.blend1`；render/model/network/Docker均0。
+
+B57-E1 official ID至此封闭，禁止修改或重跑。该SUPPORTED只关闭“accepted preflight之后、native compile之前磁盘容量可能过期且receipt未强绑定”的生产安全缺口；它不证明Codex进程崩溃恢复、跨阶段幂等续跑或最终电影质量。下一动作先提交推送exact official evidence并发布B57研究页，随后按当前Goal进入restart-safe job manifest与受控中断恢复，不再扩张同类disk experiments。

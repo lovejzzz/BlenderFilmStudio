@@ -1,0 +1,68 @@
+{
+  "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+  "version": "0.2.0",
+  "outcome": "PASS",
+  "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+  "args": [
+    "--background",
+    "--factory-startup",
+    "--disable-autoexec",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_scene.py",
+    "--",
+    "--plan",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/production-disk-jit-readmission-v0-1/runs/B02-A/build-plan.json",
+    "--repository-root",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio",
+    "--output-dir",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/production-disk-jit-readmission-v0-1/runs/B02-A/restricted"
+  ],
+  "budgets": {
+    "documentType": "BFS_RESTRICTED_COMPILE_BUDGET",
+    "version": "0.1.0",
+    "scope": "BLENDER_SCENE_COMPILE_ONLY",
+    "wallTimeMs": 30000,
+    "maxRssBytes": 2147483648,
+    "maxLogBytes": 2097152,
+    "maxOutputFiles": 32,
+    "maxOutputBytes": 134217728,
+    "sampleIntervalMs": 100,
+    "nonClaims": [
+      "kernel hard memory limit",
+      "descendant process RSS accounting",
+      "GPU VRAM containment",
+      "network isolation",
+      "final frame render budget"
+    ]
+  },
+  "metrics": {
+    "elapsedMs": 468,
+    "peakSampledRssBytes": 241270784,
+    "logBytes": 1129,
+    "output": {
+      "fileCount": 3,
+      "bytes": 131441,
+      "symlinkCount": 0
+    }
+  },
+  "breach": null,
+  "child": {
+    "pid": 58451,
+    "exitCode": 0,
+    "signal": null,
+    "spawnError": null
+  },
+  "termination": {
+    "requested": false,
+    "awaited": true
+  },
+  "logSha256": "ceb1931028c5a11e23e81f44f668acf7d08fc776f0609eded4f183c66808b609",
+  "outputPreview": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.054  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nInfo: Saved as \"scene.blend\"\nBFS_COMPILE_OK SHOT_102 a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687 025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856 /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/production-disk-jit-readmission-v0-1/runs/B02-A/restricted/scene.manifest.json\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n",
+  "outputPreviewTruncated": false,
+  "budgetProfile": {
+    "uri": "specs/restricted-compile-budget.v0.1.json",
+    "sha256": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe"
+  }
+}
