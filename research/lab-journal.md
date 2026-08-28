@@ -4517,3 +4517,11 @@ Date: 2026-08-28 · Type: REHEARSAL COUNTEREXAMPLE / CORRECTION PREREGISTRATION 
 Auditor的16个integrity checks全部通过，runner/auditor合计8/12 children，零Blender及其他禁用资源；但三项同族攻击被既有false gate吸收：A10 disk available、A11 disk projection、A16 Codex tree RSS。Audit只得21/24并正确返回`INVALID_EVIDENCE`，audit SHA为 `1bf2c1631ad33486ebf82c50cbea2a940f865495fdffb90b6d599696c09f7493`。
 
 C1冻结唯一修正：不改runner、阈值、gate、attack ID或formal root；auditor先从冻结阈值构造并验证一个明确标记的synthetic admissible control，再把原24个mutations逐一施加到独立control clones。Synthetic control不替代真实宿主观察，真实disk/RSS blocker必须保留。实际formal root仍不存在。
+
+## J-334 · B59-G0-C1 synthetic admissible attack control实现
+
+Date: 2026-08-28 · Type: AUDITOR CORRECTION IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+C1 preregistration commit `6adece1` 推送后，只修改independent auditor。它现在从真实receipt克隆一个明确标记的synthetic control，把disk、memory、process与zero-resource字段设为冻结门槛内的边界值，投影19个true runner gates、pending audit gate、空failure list与`ADMITTED_PENDING_AUDIT`，reseal后必须先通过同一个semantic validator。24个原始攻击随后分别作用于该control的独立clone；A01–A23重封hash，A24只破坏hash。
+
+Runner字节与SHA `fbfea40c…`保持不变，所有资源阈值、20 gates、24 attack IDs及formal root不变。Corrected auditor SHA为 `52474b5c07e9b598e8d8d3336b2222223e0edbcb1857c8d4ff8172c3cc347054`。Node syntax、zero-warning targeted ESLint与diff check通过，实际formal root仍不存在。下一动作提交推送修正后，在新的临时sparse clone重跑完整rehearsal。

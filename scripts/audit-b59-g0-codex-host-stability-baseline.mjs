@@ -159,6 +159,46 @@ function validateCandidate(candidate) {
     && expected.RECEIPT_SELF_HASH && expected.STDOUT_BOUNDED && expected.RECEIPT_BOUNDED;
 }
 
+function makeSyntheticAdmissibleControl(observed) {
+  const control = structuredClone(observed);
+  control.syntheticControl = true;
+  control.capturedAt = new Date().toISOString();
+  control.disk.availableBytes = spec.resourcePolicy.minimumAvailableBytes + 1;
+  control.disk.minimumCoreDiskReserveBytes = spec.resourcePolicy.minimumCoreDiskReserveBytes;
+  control.disk.b58ProjectedWriteBytes = spec.resourcePolicy.b58ProjectedWriteBytes;
+  control.disk.additionalStabilityMarginBytes = spec.resourcePolicy.additionalStabilityMarginBytes;
+  control.disk.minimumAvailableBytes = spec.resourcePolicy.minimumAvailableBytes;
+  control.disk.headroomBytes = 1;
+  control.memory.minimumFreePercent = spec.resourcePolicy.minimumMemoryFreePercent;
+  control.memory.systemWideFreePercent = spec.resourcePolicy.minimumMemoryFreePercent;
+  control.processes.mainCodexProcessCount = spec.processPolicy.requiredMainCodexProcessCount;
+  control.processes.rendererCount = 0;
+  control.processes.maximumRendererRssBytes = 0;
+  control.processes.codexTreeRssBytes = 0;
+  control.processes.activeBlenderProcessCount = spec.processPolicy.requiredActiveBlenderProcessCount;
+  control.processes.activeB58WorkerProcessCount = spec.processPolicy.requiredActiveB58WorkerProcessCount;
+  control.processes.browserAutomationProcessCount = spec.processPolicy.requiredBrowserAutomationProcessCount;
+  control.resourceAccounting = {
+    ...control.resourceAccounting,
+    blenderProcesses: 0,
+    renderProcesses: 0,
+    browserAutomationCalls: 0,
+    networkCalls: 0,
+    modelCalls: 0,
+    dockerCalls: 0,
+    cleanupOperations: 0,
+    signalsSent: 0,
+    hostRestarts: 0,
+    codexRestarts: 0
+  };
+  control.stdoutBytes = Math.min(control.stdoutBytes, spec.resourcePolicy.maximumStdoutBytes);
+  control.receiptBytes = Math.min(control.receiptBytes, spec.resourcePolicy.maximumReceiptBytes);
+  control.gates = Object.fromEntries(spec.requiredGates.map((name) => [name, name === 'INDEPENDENT_AUDIT_REPLAY' ? 'PENDING' : true]));
+  control.failedGates = [];
+  control.provisionalVerdict = 'ADMITTED_PENDING_AUDIT';
+  return reseal(control);
+}
+
 if (!existsSync(resultsPath)) throw new Error('missing results.json');
 if (existsSync(auditPath)) throw new Error('audit.json already exists');
 const resultsText = readFileSync(resultsPath, 'utf8');
@@ -201,6 +241,9 @@ const integrityChecks = {
   BASE_SEMANTIC_MODEL: validateCandidate(results)
 };
 
+const syntheticControl = makeSyntheticAdmissibleControl(results);
+const syntheticControlValid = validateCandidate(syntheticControl);
+
 const attacks = [
   ['A01_SPEC_SHA_MUTATION', (x) => { x.spec.sha256 = '0'.repeat(64); }],
   ['A02_PARENT_COMMIT_MUTATION', (x) => { x.git.specParentCommit = '0'.repeat(40); }],
@@ -229,14 +272,14 @@ const attacks = [
 ];
 
 const attackResults = attacks.map(([id, mutate, shouldReseal = true]) => {
-  const candidate = structuredClone(results);
+  const candidate = structuredClone(syntheticControl);
   mutate(candidate);
   if (shouldReseal) reseal(candidate);
   return { id, rejected: !validateCandidate(candidate) };
 });
 const attackIdsExact = canonical(attacks.map(([id]) => id)) === canonical(spec.registeredAttacks);
 const attacksPassed = attackIdsExact && attackResults.every((item) => item.rejected);
-const integrityPassed = Object.values(integrityChecks).every(Boolean);
+const integrityPassed = Object.values(integrityChecks).every(Boolean) && syntheticControlValid;
 const independentAuditPassed = integrityPassed && attacksPassed
   && results.resourceAccounting.childProcesses + auditCommands.length <= spec.formalCeilings.childProcesses;
 const finalGates = { ...results.gates, INDEPENDENT_AUDIT_REPLAY: independentAuditPassed };
@@ -255,6 +298,7 @@ const audit = {
   results: { path: spec.formalRoot + '/results.json', sha256: sha256File(resultsPath), selfHash: results.selfHash },
   replay: { availableBytes: replayAvailableBytes, memoryFreePercent: replayMemoryPercent, processes: replayProcesses, codexVersion: replayVersion },
   integrityChecks,
+  syntheticAdmissibleControl: { valid: syntheticControlValid, selfHash: syntheticControl.selfHash },
   attackIdsExact,
   attackResults,
   attacksPassed: attackResults.filter((item) => item.rejected).length,
