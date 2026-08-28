@@ -1,0 +1,124 @@
+{
+  "commands": [
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/calibrate-b52-d12-14-c2-rigid-directional.py",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-material-owner-rigid-directional-calibration.v0.1.json",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/oracles/python"
+      ],
+      "label": "python-oracle"
+    },
+    {
+      "command": [
+        "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/calibrate-b52-d12-14-c2-rigid-directional.mjs",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-material-owner-rigid-directional-calibration.v0.1.json",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/oracles/node"
+      ],
+      "label": "node-oracle"
+    },
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/probe_b52_d12_14_c2_rigid_directional_calibration.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-material-owner-rigid-directional-calibration.v0.1.json",
+        "--oracle-report",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/oracles/python/report.json",
+        "--target",
+        "TOP_MISSING_BOTTOM_AVAILABLE",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/blender-probes/TOP_MISSING_BOTTOM_AVAILABLE/report.json"
+      ],
+      "label": "blender-probe-TOP_MISSING_BOTTOM_AVAILABLE"
+    },
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/probe_b52_d12_14_c2_rigid_directional_calibration.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-material-owner-rigid-directional-calibration.v0.1.json",
+        "--oracle-report",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/oracles/python/report.json",
+        "--target",
+        "BOTTOM_MISSING_TOP_AVAILABLE",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/blender-probes/BOTTOM_MISSING_TOP_AVAILABLE/report.json"
+      ],
+      "label": "blender-probe-BOTTOM_MISSING_TOP_AVAILABLE"
+    },
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/probe_b52_d12_14_c2_rigid_directional_calibration.py",
+        "--",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-material-owner-rigid-directional-calibration.v0.1.json",
+        "--oracle-report",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/oracles/python/report.json",
+        "--target",
+        "NEITHER_HORIZONTAL_AVAILABLE",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/blender-probes/NEITHER_HORIZONTAL_AVAILABLE/report.json"
+      ],
+      "label": "blender-probe-NEITHER_HORIZONTAL_AVAILABLE"
+    },
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/audit-b52-d12-14-c2-rigid-directional.py",
+        "--spec",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/specs/blender-material-owner-rigid-directional-calibration.v0.1.json",
+        "--root",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/blender-material-owner-rigid-directional-calibration-v0-1/audit.json"
+      ],
+      "label": "independent-audit"
+    }
+  ],
+  "expectedUniqueChildProcesses": 6,
+  "experimentId": "B52-D12.14-C2",
+  "operationCounts": {
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "planHash": "956c8baf8508a6d49f2c5a04b2ac1869df32c33f5e0a5c0603a5886806e3a822",
+  "schemaVersion": "bfs.blenderMaterialOwnerRigidDirectionalCalibrationExecutionPlan.v0.1",
+  "specSha256": "e123b80fdba40c7e7e396e1aad149573e1e123c57198a21fa8af944320d7e4c3",
+  "toolFreezeCommit": "afd94d51bf085e10290f846d05903e92281dc3c2",
+  "toolHashes": {
+    "blender/probe_b52_d12_14_c2_rigid_directional_calibration.py": "b98150ec8dbd85acf3076af427e8656039651dd93ab62ab0ea9af429e75c9b39",
+    "scripts/audit-b52-d12-14-c2-rigid-directional.py": "d745e5e00d81733bf55bdd1725a3f075cab65c0b766417953aa5b27a75421eda",
+    "scripts/calibrate-b52-d12-14-c2-rigid-directional.mjs": "2344c46247f650c1ea3f4640c85dd98acd4dc5fe7199c49ffa680e7d5ab48dff",
+    "scripts/calibrate-b52-d12-14-c2-rigid-directional.py": "43693be502e89ed35d9083798a086590643fde3ae354e7a352fb4b767b503e04",
+    "scripts/run-b52-d12-14-c2-rigid-directional.py": "35b7351bb0313fbcd80d496ea71b61842a87457dba9a91d64301ac03e0ef95c5"
+  }
+}

@@ -3466,3 +3466,17 @@ Date: 2026-08-28 · Type: FORMAL TOOL IMPLEMENTATION CHECKPOINT · New Blender r
 `/tmp` smoke 对冻结的 500 candidates 达到 candidate table 与 selected masks byte exact，table SHA-256 为 `d92fc7a9ec26ce0186f0879c209d715d2281d5d715e1171b7cefbb1d48a7ba5f`。两者机械选择相同三项：`TOP-000153`（target/neighborhood 187，non-target 0）、`BOTTOM-000069`（189/189，0）、`NEITHER-000113`（15,113/15,113，0）。三次真实 Blender 5.2 factory-empty probe 均保持同一 foreground mesh datablock、local-vertex hash 与 `[1,1,1]` scale；maximum projection errors 分别为 `1.0908596152603423e-5`、`1.2781884947798972e-5`、`5.573793135482674e-6 pixel`，均低于预登记 `3.0517578125e-5`。NEITHER RNA rotation error为 `3.003596038553269e-9`，world-corner error为 `5.4045198982777265e-8`；其余两项为 0。Render Result、EXR、render/model/network calls 均为 0，临时目录已清除。
 
 五工具 SHA-256（按 spec 顺序）为 `b98150ec8dbd85acf3076af427e8656039651dd93ab62ab0ea9af429e75c9b39`、`43693be502e89ed35d9083798a086590643fde3ae354e7a352fb4b767b503e04`、`2344c46247f650c1ea3f4640c85dd98acd4dc5fe7199c49ffa680e7d5ab48dff`、`d745e5e00d81733bf55bdd1725a3f075cab65c0b766417953aa5b27a75421eda`、`35b7351bb0313fbcd80d496ea71b61842a87457dba9a91d64301ac03e0ef95c5`。固定 Python/Node syntax checks 通过；formal root 仍不存在。下一动作必须将这些 exact bytes 与本 journal entry 提交为 tool-freeze commit，随后 runner 才可创建正式输出。
+
+## J-238 · D12.14-C2 刚体方向夹具候选正式导出
+
+Date: 2026-08-28 · Type: PILOT-INFORMED CALIBRATION DERIVED / AUDIT ACCEPTED · New Blender renders: 0
+
+Tool-freeze commit `afd94d51bf085e10290f846d05903e92281dc3c2` 后，formal runner 完成 6/6 unique child processes：Python/Node 3D oracles、三个 Blender probes 与 independent auditor 全部 exit 0。Runner evidence 8/8、audit baseline 18/18、concrete semantic attacks 64/64，receipt valid；H1 formal tree 前后保持 `de1ac6a394a3963a158d0e3432d5dfb89aaf9a87`。正式 root 仅 2.1 MiB，EXR/render/model/network 均为 0。
+
+机械选择为 `TOP-000153`、`BOTTOM-000069`、`NEITHER-000113`。TOP/BOTTOM target 与 robustness minima 分别为 187/187、189/189，NEITHER 为 15,113/15,113；三者 non-target one-sided 均为 0。Blender 真实 RNA probe 证明每个候选在两帧复用同一 `[8,7]` mesh datablock，scale 恒为 `[1,1,1]`；projection error 全部低于预冻结 `1/32768 pixel`。Verdict 为 `MATERIAL_OWNER_RIGID_DIRECTIONAL_CALIBRATION_CANDIDATES_DERIVED`。
+
+Result / audit / execution / receipt file SHA-256 为 `005d4338ccd0c7e791b3279517b3a3c1f7590eb20739f997d94f4358bcd79f96` / `0e4c0f514ed469ed09c6582d4f2369339dfaa4b653dfcd3d1fc18fd1be8f38f5` / `86870d88fe65422bfbcda6cd49c07afb2f78ef39f279626b1db3ca34fa8b76b3` / `373706abc369cb3a09017cb88a1d6de51de8ea314f0c0999ed9c1aed27f669d4`；对应 self-hash 为 `7f6270a24d4c57218034401a9821aac1e39e649324ad33ac2b1d9e0c4a1bde8f` / `6a1c20d463cc4148677101eeffb7350f6c0aeb6e13c6dfc9f5332a4577604fd8` / `04b82b594a68813e52fd10917486fd5a6af0c2e09aba502a17d65d4e9996f925` / `e2a6cc139972ee9120ed70edc3b79df7b8378ae26badcb145409aabcf474d4c7`。
+
+该结果只解决 world-space rigid fixture realizability，不验证 factor 1 或 Blender passes。下一动作是提交 formal root 与 result note，然后为 fresh rendered holdout 另行预登记新 rasters/tokens/signals/output；不能直接复用 calibration cells 充当 confirmatory evidence。
+
+Artifact: `research/2026-08-28-b52-d12-14-c2-rigid-directional-calibration-result.md`。
