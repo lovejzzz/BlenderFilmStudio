@@ -3192,3 +3192,15 @@ This contract is part of the active BlenderFilmStudio goal and applies to every 
 5. require a clean reproduction plus adversarial/attack tests before promoting an engineering result;
 6. require independent human observers for subjective visual claims; developer pilots and synthetic fixtures remain interface/attack evidence only;
 7. publish machine-readable artifacts, hashes, non-claims and the next unresolved boundary, except when delayed disclosure is itself required to preserve a preregistered blind experiment.
+
+## J-213 · D12.11-I1 重启前证据代理检查点
+
+Date: 2026-08-28 · Type: RECOVERABLE PUBLICATION CHECKPOINT · New Blender renders: 0
+
+从已冻结的 D12.11-I1、H1 与 C1 arrays 只读导出四张最近邻放大的分类代理：共享 Object Index、分离 Material Index、干预前后 accepted delta，以及尚未解决的 sweep coverage boundary。导出器先通过 Blender 5.2 bundled Python syntax compilation，再成功生成 4/4 outputs；人工检查确认图像可读，且没有插值创造的新像素类别。
+
+代理被明确标记为 `SOURCE_BOUND_VISUALIZATION_NOT_DECISIONAL_EVIDENCE`：颜色仅是解释性分类映射，不是 Blender 显示变换；图像不能替代绑定的 EXR/NPY 与正式审计。Manifest 重新绑定正式 result SHA `3eaa1461a7fa8b9f74e3320e19e56efa1cde3e0ea05618c1e04239d082b88457`、adversarial result SHA `b38666b6a6ebc234b0f41311d376875f6d980404afcd6e1f4eaf9d710e78e22c`，并记录 `15→0` aliases、13,717→13,003 accepted、146 support rejects 与 416 risk rejects。Manifest internal hash 为 `9333159908c8fa8573d662e4ea1b4d5fdaaab02295272529cf3d5bc07699fae9`，文件 SHA-256 为 `a593a9bf63c3c999331f537648ab46c163156b42dd6c13d52fa23d5d526268d9`。
+
+本检查点为 Codex 升级重启而建立。恢复后的下一条确定路径是：新增 `/blender-material-index-owner-integration-v0-1/` tab，链接正式与 adversarial artifacts，执行 lint/build，然后同时发布 GitHub Pages 与 owner-only Sites。发布完成后，下一技术实验固定在 one-sided extra-stencil coverage gap（sweep 146、parallax 152），不得回头修改 D12.11-I1 的 frozen artifacts。
+
+Artifacts: `scripts/export-b52-d12-11-i1-site-proxies.py`; `public/evidence/b52-d12-11-i1/manifest.json`.
