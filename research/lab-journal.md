@@ -2929,6 +2929,20 @@ Python/Node consumer 已在合成静态数组上对十个 canonical output paylo
 
 Artifacts: `specs/blender-motion-aware-curvature-risk-holdout.v0.1.json`, `blender/render_b52_d12_9_motion_aware_source.py`, and `scripts/*b52-d12-9-motion-aware*`.
 
+## J-193 · D12.9-H1 冻结工具通过零正式输出准入
+
+Date: 2026-08-28 · Type: PREREGISTERED PREFLIGHT · Formal Blender renders: 0
+
+重启后重新核对 commit `76ac7a1431d90d0785afcaec8253a3d040bbca9d`、Blender 5.2、Blender Python 3.13、Node 26.5.0、OCIO、所有 parent 与 tool blob 身份，全部匹配预登记值。正式 root 在预检开始和结束时都不存在。
+
+一次冻结 preflight 通过 10/10 checks。四个真实 Blender 5.2 子进程分别构建 `ROTATED_SWEEP_HIGH_FREQUENCY_157X103`、`CAMERA_TRUCK_PITCH_PARALLAX_167X109`、`SAME_INDEX_DEPTH_CROSSING_179X113` 与 `STATIC_FREQUENCY_CONTROL_131X89`；每份自哈希 report 均有效、owner count 均为 2、render call 均为 0。独立 analyzer 的 import graph 不含 consumer、`bpy` 或 `mathutils`。
+
+合成分支测试以 Q24-exact `(0.5,0.5)` fractional sample 和 4×4 Q30 checker support 命中 `supportEligible=1`、`riskRejected=1`，其余 accepted pixels 为 9,870。Python 与 Node 均 exit 0、report self-hash 有效、十个 canonical payload 全部逐字节一致。该测试只证明冻结工具能识别预定分支，不是 holdout quality evidence。
+
+磁盘准入测得 `110369837056` available bytes；扣除冻结的 80 MiB projection 后为 `110285950976` bytes，高于 100 GiB reserve。Preflight hash: `6f1e1ad65a17ab09d1f80a0b3d25a915313c649e2765919178b36ad9e9f1b4be`。下一步只允许一次 fresh formal root creation；任何 child failure 都必须保留原始 root 与 failure receipt。
+
+Artifact: `experiments/blender-motion-aware-curvature-risk-holdout-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
