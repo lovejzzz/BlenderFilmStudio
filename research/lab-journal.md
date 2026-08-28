@@ -3430,3 +3430,15 @@ Date: 2026-08-28 · Type: POST-FAILURE FIXTURE CALIBRATION PREREGISTRATION · Ne
 成功只允许导出三个供未来 fresh-render holdout 预登记使用的 fixture candidates；它不验证 factor 1，不触碰 D12.13-D1 no-candidate 结论，也不进入 production compiler。正式输出允许合法返回 `CANDIDATES_NOT_DERIVED`。预登记时可用空间为 110,202,679,296 bytes，冻结最大写入 67,108,864 bytes 后仍高于 100 GiB reserve。Spec SHA-256: `fd3fe2808346c49a87183b3ed215b07abcbaf4058df13d055cc893b482ae30f5`。
 
 Artifact: `specs/blender-material-owner-directional-fixture-calibration.v0.1.json`。下一动作必须先提交并推送 exact spec；之后才允许实现五个工具，且 tool-freeze commit 之前不得创建 formal root。
+
+## J-235 · D12.14-C1 在 formal root 前被 Blender 投影精度门证伪
+
+Date: 2026-08-28 · Type: PREFORMAL DESIGN FALSIFICATION · New Blender renders: 0
+
+预登记 commit `9b20091` 后实现两套独立 scalar oracle 与一个 Blender projection probe prototype。`/tmp` smoke 中 Python/Node 对 3,900-row candidate table 和 selected masks byte exact，临时选择 TOP/BOTTOM 各 109 个纯 target witnesses、NEITHER 4,071 个纯 target witnesses；candidate table SHA-256 为 `97920657e2c1c4663dfe04866bcc93a1ba9f6a1eb91740561cb7cebba5908ff9`。这些是未冻结工具的 preformal observations，不能成为正式 calibration 结果或未来 holdout 输入。
+
+三次真实 Blender 5.2 factory-empty、zero-render probes 均拒绝原 `1e-9 pixel` hard gate：TOP/BOTTOM/NEITHER 的 Blender maximum absolute projection errors 分别为 `5.7220458984375e-6`、`5.781650543212891e-6`、`5.0067901611328125e-6`；对应独立 scalar errors 仅约 `7.1e-15–1.4e-14`。Render Result 均不存在，EXR count、render/model/network calls 均为 0，临时目录随后清除。
+
+另一个设计缺口也在 tool freeze 前被识别：NEITHER 的 `58.5366×` 投影尺度差尚未证明能由同一尺寸刚体平面的双帧 transforms 实现；当前 probe 只是分别反解两个矩形。因而原 spec 必须保留而不能事后放宽，formal root 不得创建。下一步应使用新 experiment ID 预登记 world-space rigid-realizability calibration，直接冻结 owner size、camera/owner transforms、Euler rotations、3D ray-plane oracle 与基于本次已披露量化观察的新容差。
+
+Artifact: `research/2026-08-28-b52-d12-14-c1-directional-calibration-preregistered-gate-falsification.md`。
