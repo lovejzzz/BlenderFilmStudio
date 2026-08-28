@@ -260,6 +260,7 @@ export default function Home() {
           <Link className="route-tab" href="/blender-material-index-owner-integration-v0-1">D12.11 Material Owner</Link>
           <Link className="route-tab" href="/blender-material-owner-one-sided-curvature-v0-1">D12.12 单侧曲率</Link>
           <Link className="route-tab" href="/blender-material-owner-one-sided-curvature-holdout-v0-1">D12.12-H1 留出</Link>
+          <Link className="route-tab" href="/blender-material-owner-quality-coupling-derivation-v0-1">D12.13 全局阈值</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>

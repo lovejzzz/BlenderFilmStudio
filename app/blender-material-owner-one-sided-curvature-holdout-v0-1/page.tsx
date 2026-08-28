@@ -47,7 +47,7 @@ export default function OneSidedCurvatureHoldoutPage() {
     <header className="topbar">
       <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
       <nav aria-label="D12.12-H1 holdout 导航">
-        <Link href="/blender-material-owner-one-sided-curvature-v0-1">D12.12-D1</Link>
+        <Link href="/blender-material-owner-one-sided-curvature-v0-1">D12.12-D1</Link><Link href="/blender-material-owner-quality-coupling-derivation-v0-1">D12.13-D1</Link>
         <a href="#verdict">判决</a><a href="#quality">质量反例</a><a href="#directions">方向矩阵</a><a href="#determinism">确定性</a><a href="#evidence">证据</a>
         <Link href="/journal">日志</Link>
       </nav>
@@ -161,6 +161,6 @@ export default function OneSidedCurvatureHoldoutPage() {
       <div className="i1-proxy-note"><b>VISUAL CLASSIFICATION</b><code>SOURCE_BOUND_VISUALIZATION_NOT_DECISIONAL_EVIDENCE</code><span>manifest · f24511e8f2bd…36fc</span></div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.12-H1 Confirmatory Holdout</b></div><p>evidence valid · candidate rejected · promotion stopped</p><Link href="/blender-material-owner-one-sided-curvature-v0-1">返回 D12.12 derivation →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.12-H1 Confirmatory Holdout</b></div><p>evidence valid · candidate rejected · promotion stopped</p><Link href="/blender-material-owner-quality-coupling-derivation-v0-1">继续 D12.13 threshold derivation →</Link></footer>
   </main>;
 }

@@ -3398,3 +3398,11 @@ Date: 2026-08-28 · Type: POST-HOC DERIVATION NOT DERIVED / AUDIT ACCEPTED · Ne
 Result / audit / execution / receipt file SHA-256 为 `66a1598e2b4f0dee1ee7773b566c1bf5085a2a02fc911e050b873bdcfa28ca19` / `cc761d726c409d54cbf84faa07a7a600e35a2ab5d65e58dadee50fb9f6d0d988` / `206b69e5e2ba9d52d79b6dcd709a88f5c62a0683766173c970b4fd7dd0cf8009` / `a7448121ef15947edd2beed24f2222792672b43a06afcd67e7807b68d10c0caa`；对应 self-hash 为 `c0e43d0acac844939457f0fdec0b8eda7fa850d0fed26720b873401aa88a4737` / `fcbd74e2ae5b2dc62e226b24b58c45b2c5753c35aff1058829055f0445f6579a` / `8bca7f38c5907d9097691db443ab943bfc074b705b92405a40554226ebdd4545` / `984ed1922979face344d6d387a835bc565f5c69d9519c8c88d83f544e16703f2`。
 
 Artifact: `research/2026-08-28-b52-d12-13-d1-quality-coupled-threshold-derivation-result.md`。下一动作是在不修改本结果的前提下，分别预登记 directional fixture calibration 与 risk-tightness decomposition；前者修复实验域，后者研究机制而非继续调 threshold。
+
+## J-232 · D12.13-D1 no-candidate tab 通过双构建门
+
+Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
+
+新增 `/blender-material-owner-quality-coupling-derivation-v0-1/`。页面首屏把 `evidence receipt valid` 与 `zero candidate derived` 分开；threshold frontier 直接从已提交 `results.json` 构建五档 quality/cell-coverage/owner-retention 对照，不复制另一套手写 measurement source。四个 primary fixtures、NEITHER/STATIC controls、attempt0 87/88 failure、`bbc8192` scoped repair、formal rerun 88/88 与两个独立 next tracks 均被显式披露。
+
+精确 local route 返回 HTTP 200；新页、首页与 H1 邻接页定向 ESLint 为 0 errors。Vinext/Sites production build 成功并发现 81 个 warmup paths；GitHub Pages static build 成功生成 83/83 pages，新 route 明确认定为 static。没有执行未请求的截图、DOM 或交互 QA。下一动作只提交新页、CSS、首页/H1 导航与本 journal entry，然后等待 GitHub Pages exact commit 成功，并在 owner-only Sites access 复核后发布相同 source commit。
