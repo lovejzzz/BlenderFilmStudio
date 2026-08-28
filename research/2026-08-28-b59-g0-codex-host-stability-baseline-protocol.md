@@ -20,7 +20,7 @@ Raw process listings, crash JSON and system logs must not be printed. Runner std
 
 Disk admission is stricter than the unchanged B58 production rule. The host must expose at least:
 
-`100 GiB core reserve + 0.5 GiB B58 projected write + 4 GiB stability margin = 112,205,053,952 bytes available`.
+`100 GiB core reserve + 0.5 GiB B58 projected write + 4 GiB stability margin = 112,206,020,608 bytes available`.
 
 The added 4 GiB is an operational stability margin, not a relaxation or replacement of the production reserve.
 

@@ -4535,3 +4535,11 @@ C1 commit `ae11980` 推送后，在fresh临时sparse clone完成第二次排练�
 根因为预注册冗余总数字段的算术笔误：107,374,182,400 + 536,870,912 + 4,294,967,296精确等于112,206,020,608，而JSON/protocol写成112,205,053,952，少966,656 bytes。Runner始终从三个冻结加数实时求和，执行门没有被放松。
 
 C2只允许把冗余`minimumAvailableBytes`和对应prose改为112,206,020,608；三个component thresholds、runner、auditor、20 gates、24 attacks、ceilings及formal root全部不变。实际formal root仍不存在。
+
+## J-336 · B59-G0-C2精确总数修正实现
+
+Date: 2026-08-28 · Type: PREREGISTERED ARITHMETIC CORRECTION · New Blender processes: 0 · New Blender renders: 0
+
+C2 preregistration commit `ac833e8` 推送后，只把parent spec的`minimumAvailableBytes`与parent protocol对应prose从112,205,053,952修正为112,206,020,608。Node独立重算确认它精确等于107,374,182,400 + 536,870,912 + 4,294,967,296。
+
+修正后parent spec/protocol SHA为 `ad8a49082dca1a9cf1df6e0626dc5c313c499a7232fbd2f01460d163f27cd11c` / `1b79ce07e376005336d913b90588478ea7de655cb83ac8a9a0e67f5c0b74d54d`。Runner/auditor SHA保持 `fbfea40c…` / `52474b5c…`，Node syntax、zero-warning targeted ESLint与diff check通过。实际formal root仍不存在；下一动作提交推送两字节修正与本entry，再用第三个fresh临时sparse clone重跑。
