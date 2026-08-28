@@ -1,0 +1,294 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerDirectionalFixtureCalibration.v0.1",
+  "experimentId": "B52-D12.14-C1",
+  "title": "Zero-render calibration of TOP, BOTTOM and NEITHER Material-owner directional fixture domains",
+  "status": "PREREGISTERED_BEFORE_CALIBRATION_TOOL_OR_OUTPUT",
+  "question": "Can two independent scalar raster oracles and Blender 5.2 RNA projection probes derive robust planar fixture parameters that actually generate the TOP_MISSING_BOTTOM_AVAILABLE, BOTTOM_MISSING_TOP_AVAILABLE and NEITHER_HORIZONTAL_AVAILABLE structural domains that D12.12-H1 failed to instantiate?",
+  "decisionRole": "exploratory fixture-domain calibration only; selected geometry may be frozen into a later fresh-render holdout but is not evidence for temporal reconstruction quality or for the rejected factor-1 candidate",
+  "scientificClassification": {
+    "postFailureCalibration": "D12.12-H1 established that the TOP and BOTTOM fixtures produced zero target witnesses and that the NEITHER fixture instead produced RIGHT_MISSING_LEFT_AVAILABLE cells. This calibration is explicitly post-hoc and cannot repair that holdout.",
+    "zeroRender": "The calibration operates on declared projected planar silhouettes and rigid affine reprojection only. Blender may construct and inspect the selected camera and planes, but bpy.ops.render, Render Result, EXR output and ray rendering are forbidden.",
+    "separation": "No H1 RGB, depth, vector, accepted, risk, reconstruction, quality or coverage array is a calibration input. Only the frozen projection, radius-2, bilinear-support and directional-class definitions are reused.",
+    "futureUse": "Any selected parameters must be committed before a separately preregistered fresh Blender-render holdout chooses new raster sizes, Material tokens, signals and output paths. Calibration rows are development data and may not be counted as confirmatory measurements."
+  },
+  "parents": {
+    "rejectedHoldoutSpec": {
+      "uri": "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+      "sha256": "b0defadbd120f77dfe81bfa16d9dfd4e3a4d4a15ad1c8ddd1176d21f2e13b648",
+      "experimentId": "B52-D12.12-H1",
+      "gitCommit": "ff093a5ec7e3dd56432fdefea0366c46376dd0d0"
+    },
+    "rejectedHoldoutResult": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1/results.json",
+      "sha256": "175c6c568b60b29332954c9bd3f24634c4028aaf8a5c221fd999ad01acc9c0a7",
+      "resultHash": "c3c84f825b78ff4302fc6e65ff04956ac783a65dcc5ccf99fc1688bd5d15fdee",
+      "verdict": "MATERIAL_OWNER_ONE_SIDED_CURVATURE_HOLDOUT_REJECTED"
+    },
+    "rejectedHoldoutAudit": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1/audit.json",
+      "sha256": "d983482d6d0d752e268273487592a42a7700b121c8769195d49001bb2742c4e1",
+      "auditHash": "bc7e90af03a631c6ae799581ff3e84a855f149bab28e1ba59fc43c709e922ab4",
+      "verdict": "MATERIAL_OWNER_ONE_SIDED_CURVATURE_HOLDOUT_AUDIT_ACCEPTED"
+    },
+    "rejectedHoldoutReceipt": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1/receipt.json",
+      "sha256": "9b692d8945821c2458a41952cc3cecde73066703d603455a484d9d4d8b7d9b14",
+      "receiptHash": "55c122a7ecd748b07cf2803b4694ba05d77b1f0833d9c4295d2fbbdc4d5a6830"
+    },
+    "rejectedHoldoutFormalRoot": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1",
+      "gitCommit": "d20fa589c919605fd44a61ee555c76ae63c87596",
+      "gitTree": "de1ac6a394a3963a158d0e3432d5dfb89aaf9a87"
+    }
+  },
+  "observedFailure": {
+    "source": "committed D12.12-H1 result and control arrays; these values motivate the calibration target but are not searched or changed",
+    "top": {
+      "cell": "TOP_OUTER_MISSING_EXPANSION_169X113/R1",
+      "radius2": 17325,
+      "fullStencil": 17325,
+      "targetWitnesses": 0
+    },
+    "bottom": {
+      "cell": "BOTTOM_OUTER_MISSING_EXPANSION_177X115/R1",
+      "radius2": 18511,
+      "fullStencil": 18511,
+      "targetWitnesses": 0
+    },
+    "neither": {
+      "cell": "NEITHER_HORIZONTAL_STRIP_185X117/R1",
+      "radius2": 791,
+      "fullStencil": 226,
+      "targetWitnesses": 0,
+      "rightMissingWitnessesGlobal": 565
+    }
+  },
+  "freshness": {
+    "requirements": [
+      "This specification and all six new tool/output paths are absent when preregistration begins.",
+      "This exact specification is committed and pushed before any calibration tool byte or output exists.",
+      "All five tools are committed and pushed in a later tool-freeze commit before the output root exists.",
+      "The runner may create the output root only when the current tool bytes, parent identities, runtime identities and formal parent Git tree match this specification.",
+      "No search grid, candidate ordering, raster convention, mask rule, robustness neighborhood, selection rule, gate, attack family or verdict mapping may change after this commit."
+    ],
+    "newToolPaths": [
+      "blender/probe_b52_d12_14_c1_directional_calibration.py",
+      "scripts/calibrate-b52-d12-14-c1-directional-fixtures.py",
+      "scripts/calibrate-b52-d12-14-c1-directional-fixtures.mjs",
+      "scripts/audit-b52-d12-14-c1-directional-fixtures.py",
+      "scripts/run-b52-d12-14-c1-directional-fixtures.py"
+    ],
+    "formalRoot": "experiments/blender-material-owner-directional-fixture-calibration-v0-1"
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "version": "v26.5.0"
+    },
+    "environmentAllowlist": ["PATH", "LANG", "LC_ALL", "TMPDIR", "BLENDER_USER_CONFIG", "BLENDER_USER_SCRIPTS"]
+  },
+  "rasterContract": {
+    "coordinates": "top-left continuous pixel coordinates; integer (x,y) is the center of that raster pixel",
+    "ownerMask": "a pixel belongs to the foreground rectangle iff its center is inside or on all four projected rectangle edges; every other pixel belongs to the background token",
+    "currentInterior": "current foreground pixel and every current Chebyshev-radius-2 neighbor share the foreground token",
+    "reprojection": "previous = previousCenter + (current-currentCenter)/scale independently per axis",
+    "bilinearCell": "x0=floor(previousX), y0=floor(previousY); four taps are (x0,y0),(x0+1,y0),(x0,y0+1),(x0+1,y0+1)",
+    "bilinearSupport": "all four taps are in bounds and share the current foreground token",
+    "outerSupport": {
+      "left": "(x0-1,y0) and (x0-1,y0+1) share the foreground token",
+      "right": "(x0+2,y0) and (x0+2,y0+1) share the foreground token",
+      "top": "(x0,y0-1) and (x0+1,y0-1) share the foreground token",
+      "bottom": "(x0,y0+2) and (x0+1,y0+2) share the foreground token"
+    },
+    "classes": {
+      "TOP_MISSING_BOTTOM_AVAILABLE": "bilinearSupport and not top and bottom and left and right",
+      "BOTTOM_MISSING_TOP_AVAILABLE": "bilinearSupport and top and not bottom and left and right",
+      "NEITHER_HORIZONTAL_AVAILABLE": "bilinearSupport and ((not left and not right) on at least one bilinear row); vertical support is reported separately",
+      "FULL_STENCIL": "bilinearSupport and left and right and top and bottom"
+    },
+    "edgeTolerance": 0,
+    "floatingPoint": "binary64 only; no epsilon or geometric snapping",
+    "arrayOrder": "row-major y then x"
+  },
+  "searchSpace": {
+    "enumeration": "Cartesian products are enumerated in the exact array order below; candidateId is target plus zero-based six-digit ordinal",
+    "vertical": {
+      "targets": ["TOP_MISSING_BOTTOM_AVAILABLE", "BOTTOM_MISSING_TOP_AVAILABLE"],
+      "resolutionByTarget": {
+        "TOP_MISSING_BOTTOM_AVAILABLE": [191, 127],
+        "BOTTOM_MISSING_TOP_AVAILABLE": [193, 129]
+      },
+      "currentWidthPixels": [112],
+      "currentHeightPixels": [80],
+      "scaleX": [1.0],
+      "scaleY": [1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 3.0],
+      "targetEdgePhase": [0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95],
+      "orthogonalCenterOffsetPixels": [-1.0, 0.0, 1.0],
+      "targetAxisCurrentCenterOffsetPixels": [-2.0, -1.0, 0.0, 1.0, 2.0],
+      "construction": [
+        "Current foreground rectangle is centered at raster center plus targetAxisCurrentCenterOffsetPixels on Y and has the declared current width and height.",
+        "Previous width and height equal currentWidth/scaleX and currentHeight/scaleY.",
+        "For TOP, previous top edge is floor((H-previousHeight)/2)+targetEdgePhase; for BOTTOM, previous bottom edge is H-1-(floor((H-previousHeight)/2)+targetEdgePhase).",
+        "The previous orthogonal center is raster center X plus orthogonalCenterOffsetPixels; the remaining previous edge follows from its width/height.",
+        "The affine reprojection is determined by the two rectangle centers and declared scales."
+      ]
+    },
+    "neitherHorizontal": {
+      "target": "NEITHER_HORIZONTAL_AVAILABLE",
+      "resolution": [197, 131],
+      "currentWidthPixels": [72, 96, 120],
+      "currentHeightPixels": [72],
+      "previousWidthPixels": [2.05, 2.15, 2.25, 2.35, 2.45, 2.55, 2.65, 2.75, 2.85, 2.95, 3.05, 3.15, 3.25, 3.35, 3.45, 3.55, 3.65, 3.75, 3.85, 3.95],
+      "previousHeightPixels": [72],
+      "previousCenterPhaseX": [0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95],
+      "previousCenterOffsetY": [-1.0, 0.0, 1.0],
+      "construction": [
+        "Current rectangle is centered at raster center with the declared dimensions.",
+        "Previous center X is floor((W-1)/2)+previousCenterPhaseX and center Y is raster center plus previousCenterOffsetY.",
+        "Previous rectangle uses the declared previous dimensions.",
+        "Scale is derived exactly as currentWidth/previousWidth and currentHeight/previousHeight."
+      ]
+    }
+  },
+  "measurementContract": {
+    "measurementRegion": "the full raster; class masks are intersected with currentInterior and bilinearSupport before counting",
+    "perVerticalTargetMinimumWitnesses": 64,
+    "neitherHorizontalMinimumWitnesses": 16,
+    "maximumNonTargetOneSidedFraction": 0.05,
+    "minimumCurrentInterior": 1024,
+    "minimumBilinearSupport": 64,
+    "verticalRobustnessNeighborhood": "same target and all available immediately adjacent targetEdgePhase entries at identical remaining parameters",
+    "neitherRobustnessNeighborhood": "all available immediately adjacent previousCenterPhaseX entries at identical remaining parameters",
+    "minimumNeighborhoodTargetWitnesses": 8,
+    "selection": [
+      "Discard candidates failing any target, purity, interior, support or neighborhood gate.",
+      "For each target independently, maximize the minimum target-witness count across its frozen robustness neighborhood.",
+      "Then minimize non-target one-sided witness count, then minimize scaleY for vertical targets or derived scaleX for NEITHER, then select the lowest candidateId.",
+      "No selected parameter from one target changes the roster or ordering for another target."
+    ],
+    "requiredSelectedTargets": ["TOP_MISSING_BOTTOM_AVAILABLE", "BOTTOM_MISSING_TOP_AVAILABLE", "NEITHER_HORIZONTAL_AVAILABLE"]
+  },
+  "blenderProjectionProbe": {
+    "camera": {
+      "type": "PERSP",
+      "location": [0.0, 0.0, 10.0],
+      "rotationEuler": [0.0, 0.0, 0.0],
+      "lensMm": 53.0,
+      "sensorWidthMm": 36.0,
+      "sensorFit": "HORIZONTAL",
+      "clipStart": 0.1,
+      "clipEnd": 100.0
+    },
+    "planeDepthByFrame": {"0": 0.0, "1": 2.0},
+    "conversion": "for each selected projected rectangle and frame, solve the axis-aligned world-plane center and size from the frozen pinhole camera, raster dimensions and plane depth; construct one four-vertex plane with no material and no animation dependency",
+    "checks": [
+      "Blender 5.2 scene is created from factory-empty state in an isolated process per selected target.",
+      "world_to_camera_view projected corner coordinates converted back to top-left pixels match the selected rectangle corners within 1e-9 maximum absolute error.",
+      "Analytic scalar pinhole projection of the same Blender world corners matches Blender projection within 1e-9.",
+      "No Render Result image exists, no bpy.ops.render call occurs and the calibration root contains zero EXR files."
+    ]
+  },
+  "requiredOutputs": {
+    "executionPlan": "execution-plan.json",
+    "pythonReport": "oracles/python/report.json",
+    "nodeReport": "oracles/node/report.json",
+    "pythonCandidateTable": "oracles/python/candidates.bin",
+    "nodeCandidateTable": "oracles/node/candidates.bin",
+    "selectedMasks": "oracles/{python,node}/selected/{target}/{mask}.u8",
+    "blenderProbeReports": "blender-probes/{target}/report.json",
+    "result": "results.json",
+    "audit": "audit.json",
+    "execution": "execution.json",
+    "receipt": "receipt.json"
+  },
+  "processMatrix": {
+    "pythonOracleProcesses": 1,
+    "nodeOracleProcesses": 1,
+    "blenderProbeProcesses": 3,
+    "auditProcesses": 1,
+    "totalUniqueChildProcesses": 6,
+    "allChildrenUniquePid": true,
+    "allChildrenExitZeroRequired": true,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "hardGates": {
+    "parentHashesAndFormalTreeExact": true,
+    "specToolRuntimeAndProcessIdentity": true,
+    "pythonNodeCandidateRosterAndMetricBytesExact": true,
+    "pythonNodeSelectedTargetAndMaskBytesExact": true,
+    "allThreeTargetsSelected": true,
+    "selectionRuleReplayExact": true,
+    "blenderProjectionMaximumAbsoluteError": 1e-9,
+    "analyticVsBlenderProjectionMaximumAbsoluteError": 1e-9,
+    "formalRootExrCount": 0,
+    "minimumConcreteSemanticAttacks": 48,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "attackFamilies": [
+    "SPEC_IDENTITY",
+    "PARENT_RESULT_IDENTITY",
+    "PARENT_TREE_IDENTITY",
+    "TOOL_IDENTITY",
+    "PROCESS_IDENTITY",
+    "CANDIDATE_ORDER",
+    "PIXEL_CENTER_CONVENTION",
+    "OWNER_EDGE_INCLUSION",
+    "REPROJECTION_SIGN",
+    "BILINEAR_FLOOR",
+    "RADIUS2_DOMAIN",
+    "OUTER_TAP_CLASS",
+    "TARGET_COUNT",
+    "NON_TARGET_PURITY",
+    "NEIGHBORHOOD_ROBUSTNESS",
+    "SELECTION_TIE_BREAK",
+    "PYTHON_NODE_ARRAY_IDENTITY",
+    "BLENDER_CAMERA_IDENTITY",
+    "BLENDER_PROJECTED_CORNER",
+    "RENDER_ZERO",
+    "EXR_ZERO",
+    "MODEL_ZERO",
+    "NETWORK_ZERO",
+    "RECEIPT_BINDING"
+  ],
+  "decision": {
+    "derivedVerdict": "MATERIAL_OWNER_DIRECTIONAL_FIXTURE_CALIBRATION_CANDIDATES_DERIVED",
+    "derivedWhen": "Every hard gate and at least 48 independent concrete semantic attacks pass and the mechanical selection emits exactly one robust candidate for each of TOP, BOTTOM and NEITHER.",
+    "notDerivedVerdict": "MATERIAL_OWNER_DIRECTIONAL_FIXTURE_CALIBRATION_CANDIDATES_NOT_DERIVED",
+    "notDerivedWhen": "The evidence chain is valid but one or more target has no candidate passing the frozen domain and robustness gates.",
+    "invalidVerdict": "MATERIAL_OWNER_DIRECTIONAL_FIXTURE_CALIBRATION_INVALID",
+    "invalidWhen": "Any identity, cross-language, selection replay, Blender projection, zero-render, process, audit-totality or attack gate fails.",
+    "promotionBoundary": "A derived result authorizes only a new preregistration that freezes the selected geometry into fresh Blender 5.2 rendered fixtures. It does not promote factor 1, change D12.12-H1, change D12.13-D1 or enter the production compiler."
+  },
+  "diskAdmission": {
+    "observedFreeBytesBeforePreregistration": 110202679296,
+    "projectedMaximumWriteBytes": 67108864,
+    "minimumReserveBytesAfterWrite": 107374182400,
+    "admitted": true
+  },
+  "nonClaims": [
+    "A projected rectangle oracle does not prove Blender raster coverage, pass semantics or temporal vector bytes.",
+    "A Blender RNA projection probe is not a render and does not validate Cycles visibility or edge sampling.",
+    "Fixture-domain witnesses do not establish acceptable RGB error, risk tightness, coverage or cinematic quality.",
+    "This calibration cannot retroactively repair or reinterpret the rejected D12.12-H1 result.",
+    "Selected planar parameters do not establish behavior for nonplanar, deforming, transparent, hair, volume, motion-blurred, depth-of-field, lit or denoised scenes."
+  ]
+}

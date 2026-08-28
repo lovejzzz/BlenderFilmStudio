@@ -3418,3 +3418,15 @@ Sites 发布前复核 current user 为 owner、access mode 为 custom、唯一 a
 公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-owner-quality-coupling-derivation-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-owner-quality-coupling-derivation-v0-1/`。
 
 重启后的下一条技术路径保持不变：先独立预登记 directional fixture calibration，以 zero-render analytic oracle 修复 TOP/BOTTOM/NEITHER stress-domain 构造；完成后再另行预登记 risk-tightness decomposition。不得继续在 D12.13-D1 已拒绝的 global-threshold family 内调参。
+
+## J-234 · D12.14-C1 directional fixture calibration 预登记
+
+Date: 2026-08-28 · Type: POST-FAILURE FIXTURE CALIBRATION PREREGISTRATION · New Blender renders: 0
+
+在新 spec、五个 tool paths 与 formal root 均不存在时，冻结 `B52-D12.14-C1`。它只处理 D12.12-H1 已暴露的实验域缺口：TOP 的 17,325 个 radius-2 cells 与 BOTTOM 的 18,511 个 radius-2 cells 全部仍是 full stencil，目标 witnesses 都为 0；NEITHER 的目标 witnesses 为 0，却形成 565 个 global right-missing cells。该 calibration 明确为 post-hoc development work，不能修复 H1，也不读取 H1 RGB/depth/vector/risk/reconstruction arrays。
+
+搜索域冻结为投影矩形上的两套独立 scalar raster oracle：TOP/BOTTOM 各 1,050 个候选，NEITHER 1,800 个候选。像素中心、edge inclusion、radius-2、bilinear floor、四类 outer taps、目标纯度、相邻 phase robustness 与机械 tie-break 全部写死。Python/Node 必须对 candidate roster、metrics、selected masks 逐字节一致；每个选中目标再由独立 Blender 5.2 factory-empty process 构造相机与双帧平面，只检查 world-to-camera 投影，不调用 render。总矩阵为 2 个 oracle + 3 个 Blender probes + 1 个 independent audit = 6 个唯一子进程，formal root 必须保持 0 EXR、0 render、0 model、0 network。
+
+成功只允许导出三个供未来 fresh-render holdout 预登记使用的 fixture candidates；它不验证 factor 1，不触碰 D12.13-D1 no-candidate 结论，也不进入 production compiler。正式输出允许合法返回 `CANDIDATES_NOT_DERIVED`。预登记时可用空间为 110,202,679,296 bytes，冻结最大写入 67,108,864 bytes 后仍高于 100 GiB reserve。Spec SHA-256: `fd3fe2808346c49a87183b3ed215b07abcbaf4058df13d055cc893b482ae30f5`。
+
+Artifact: `specs/blender-material-owner-directional-fixture-calibration.v0.1.json`。下一动作必须先提交并推送 exact spec；之后才允许实现五个工具，且 tool-freeze commit 之前不得创建 formal root。
