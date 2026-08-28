@@ -1,0 +1,1041 @@
+{
+  "admissionReplay": {
+    "attemptAdmissionReceiptExact": true,
+    "evidenceCommit": "37416bcf7540589ed9327e176868cb2aab1da65a",
+    "formalAfterAdmission": true,
+    "gitChildren": [
+      {
+        "args": [
+          "ls-files",
+          "-z",
+          "--",
+          "experiments/budgeted-native-child-pid-receipt-preflight-v0-1"
+        ],
+        "elapsedNanoseconds": 12226250,
+        "exitCode": 0,
+        "phase": "PREFLIGHT_TRACKED",
+        "pid": 81672,
+        "stderr": "",
+        "stdout": "experiments/budgeted-native-child-pid-receipt-preflight-v0-1/pid-probes/CHILD_FAILED_SELF_REPORT/budget.report.json\u0000experiments/budgeted-native-child-pid-receipt-preflight-v0-1/pid-probes/CHILD_FAILED_SELF_REPORT/child-observation.json\u0000experiments/budgeted-native-child-pid-receipt-preflight-v0-1/pid-probes/PASS_SELF_REPORT/budget.report.json\u0000experiments/budgeted-native-child-pid-receipt-preflight-v0-1/pid-probes/PASS_SELF_REPORT/child-observation.json\u0000experiments/budgeted-native-child-pid-receipt-preflight-v0-1/pid-probes/SPAWN_ERROR_NULL_PID/budget.report.json\u0000experiments/budgeted-native-child-pid-receipt-preflight-v0-1/pid-probes/WALL_TIME_SELF_REPORT/budget.report.json\u0000experiments/budgeted-native-child-pid-receipt-preflight-v0-1/pid-probes/WALL_TIME_SELF_REPORT/child-observation.json\u0000experiments/budgeted-native-child-pid-receipt-preflight-v0-1/preflight.json\u0000experiments/budgeted-native-child-pid-receipt-preflight-v0-1/receipt.json\u0000"
+      },
+      {
+        "args": [
+          "status",
+          "--porcelain=v1",
+          "--untracked-files=all",
+          "--",
+          "experiments/budgeted-native-child-pid-receipt-preflight-v0-1"
+        ],
+        "elapsedNanoseconds": 13135250,
+        "exitCode": 0,
+        "phase": "PREFLIGHT_CLEAN",
+        "pid": 81673,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "args": [
+          "log",
+          "-1",
+          "--format=%H",
+          "--",
+          "experiments/budgeted-native-child-pid-receipt-preflight-v0-1"
+        ],
+        "elapsedNanoseconds": 9598625,
+        "exitCode": 0,
+        "phase": "PREFLIGHT_COMMIT",
+        "pid": 81674,
+        "stderr": "",
+        "stdout": "37416bcf7540589ed9327e176868cb2aab1da65a\n"
+      },
+      {
+        "args": [
+          "rev-parse",
+          "--verify",
+          "origin/main"
+        ],
+        "elapsedNanoseconds": 9204542,
+        "exitCode": 0,
+        "phase": "ORIGIN",
+        "pid": 81675,
+        "stderr": "",
+        "stdout": "37416bcf7540589ed9327e176868cb2aab1da65a\n"
+      },
+      {
+        "args": [
+          "merge-base",
+          "--is-ancestor",
+          "37416bcf7540589ed9327e176868cb2aab1da65a",
+          "origin/main"
+        ],
+        "elapsedNanoseconds": 9762833,
+        "exitCode": 0,
+        "phase": "PREFLIGHT_ANCESTOR",
+        "pid": 81676,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "args": [
+          "merge-base",
+          "--is-ancestor",
+          "bf62f9a02dbfb966f585a4c0e634da1e3507cd72",
+          "d36956299caa7067656d159533172809db1173a0"
+        ],
+        "elapsedNanoseconds": 9965417,
+        "exitCode": 0,
+        "phase": "PREREGISTRATION_ANCESTOR",
+        "pid": 81677,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "args": [
+          "merge-base",
+          "--is-ancestor",
+          "d36956299caa7067656d159533172809db1173a0",
+          "37416bcf7540589ed9327e176868cb2aab1da65a"
+        ],
+        "elapsedNanoseconds": 11097416,
+        "exitCode": 0,
+        "phase": "TOOL_FREEZE_ANCESTOR",
+        "pid": 81678,
+        "stderr": "",
+        "stdout": ""
+      },
+      {
+        "args": [
+          "show",
+          "bf62f9a02dbfb966f585a4c0e634da1e3507cd72:scripts/lib/budgeted-process.mjs"
+        ],
+        "elapsedNanoseconds": 10152583,
+        "exitCode": 0,
+        "phase": "SUPERVISOR_BEFORE",
+        "pid": 81679,
+        "stderr": "",
+        "stdout": "import { execFile } from 'node:child_process';\nimport { createHash } from 'node:crypto';\nimport { lstat, readdir } from 'node:fs/promises';\nimport { performance } from 'node:perf_hooks';\nimport { spawn } from 'node:child_process';\nimport { setTimeout as delay } from 'node:timers/promises';\n\nconst REASONS = new Set(['WALL_TIME', 'RSS_BYTES', 'LOG_BYTES', 'OUTPUT_FILES', 'OUTPUT_BYTES']);\n\nfunction requirePositiveInteger(value, label) {\n  if (!Number.isSafeInteger(value) || value <= 0) throw new Error(`${label} must be a positive safe integer`);\n}\n\nexport function validateBudgets(budgets) {\n  for (const key of ['wallTimeMs', 'maxRssBytes', 'maxLogBytes', 'maxOutputFiles', 'maxOutputBytes', 'sampleIntervalMs']) requirePositiveInteger(budgets[key], key);\n  return budgets;\n}\n\nexport async function measureOutput(root) {\n  const totals = { fileCount: 0, bytes: 0, symlinkCount: 0 };\n  async function visit(directory) {\n    let entries;\n    try { entries = await readdir(directory, { withFileTypes: true }); } catch (error) {\n      if (error.code === 'ENOENT') return;\n      throw error;\n    }\n    for (const entry of entries) {\n      const path = `${directory}/${entry.name}`;\n      if (entry.isSymbolicLink()) { totals.symlinkCount += 1; continue; }\n      if (entry.isDirectory()) { await visit(path); continue; }\n      if (entry.isFile()) {\n        const metadata = await lstat(path);\n        totals.fileCount += 1;\n        totals.bytes += metadata.size;\n      }\n    }\n  }\n  await visit(root);\n  return totals;\n}\n\nfunction sampleRootRss(pid) {\n  return new Promise(resolve => {\n    execFile('/bin/ps', ['-o', 'rss=', '-p', String(pid)], { timeout: 1000 }, (error, stdout) => {\n      if (error) { resolve(null); return; }\n      const kibibytes = Number.parseInt(stdout.trim(), 10);\n      resolve(Number.isFinite(kibibytes) ? kibibytes * 1024 : null);\n    });\n  });\n}\n\nexport async function runBudgetedProcess({ command, args = [], cwd, env = process.env, outputRoot, budgets }) {\n  validateBudgets(budgets);\n  const started = performance.now();\n  const child = spawn(command, args, { cwd, env, detached: process.platform !== 'win32', stdio: ['ignore', 'pipe', 'pipe'] });\n  let closed = false;\n  let spawnError = null;\n  let logBytes = 0;\n  let peakSampledRssBytes = 0;\n  let breach = null;\n  let monitorBusy = false;\n  let terminationRequested = false;\n  let forceTimer = null;\n  const previewChunks = [];\n  let previewBytes = 0;\n  const logSha256 = createHash('sha256');\n\n  function terminate() {\n    if (closed || terminationRequested) return;\n    terminationRequested = true;\n    const signalTarget = process.platform === 'win32' ? child.pid : -child.pid;\n    try { process.kill(signalTarget, 'SIGTERM'); } catch { try { child.kill('SIGTERM'); } catch {} }\n    forceTimer = setTimeout(() => {\n      if (closed) return;\n      try { process.kill(signalTarget, 'SIGKILL'); } catch { try { child.kill('SIGKILL'); } catch {} }\n    }, 500);\n  }\n\n  function recordBreach(reason, observed, limit) {\n    if (breach) return;\n    if (!REASONS.has(reason)) throw new Error(`Unknown budget reason ${reason}`);\n    breach = { reason, observed, limit };\n    terminate();\n  }\n\n  function recordLog(chunk) {\n    logBytes += chunk.length;\n    logSha256.update(chunk);\n    if (previewBytes < 4096) {\n      const slice = chunk.subarray(0, 4096 - previewBytes);\n      previewChunks.push(slice);\n      previewBytes += slice.length;\n    }\n    if (logBytes > budgets.maxLogBytes) recordBreach('LOG_BYTES', logBytes, budgets.maxLogBytes);\n  }\n  child.stdout.on('data', recordLog);\n  child.stderr.on('data', recordLog);\n\n  const completion = new Promise(resolve => {\n    child.on('error', error => { spawnError = error; });\n    child.on('close', (code, signal) => { closed = true; resolve({ code, signal }); });\n  });\n\n  async function monitor() {\n    if (closed || monitorBusy || breach) return;\n    monitorBusy = true;\n    try {\n      const elapsedMs = performance.now() - started;\n      if (elapsedMs > budgets.wallTimeMs) { recordBreach('WALL_TIME', Math.ceil(elapsedMs), budgets.wallTimeMs); return; }\n      const rss = await sampleRootRss(child.pid);\n      if (rss !== null) peakSampledRssBytes = Math.max(peakSampledRssBytes, rss);\n      if (rss !== null && rss > budgets.maxRssBytes) { recordBreach('RSS_BYTES', rss, budgets.maxRssBytes); return; }\n      const output = await measureOutput(outputRoot);\n      if (output.fileCount > budgets.maxOutputFiles) { recordBreach('OUTPUT_FILES', output.fileCount, budgets.maxOutputFiles); return; }\n      if (output.bytes > budgets.maxOutputBytes) recordBreach('OUTPUT_BYTES', output.bytes, budgets.maxOutputBytes);\n    } finally {\n      monitorBusy = false;\n    }\n  }\n\n  await monitor();\n  const interval = setInterval(() => { void monitor(); }, budgets.sampleIntervalMs);\n  const completionResult = await completion;\n  clearInterval(interval);\n  if (forceTimer) clearTimeout(forceTimer);\n  while (monitorBusy) await delay(1);\n  const finalOutput = await measureOutput(outputRoot);\n  const elapsedMs = Math.ceil(performance.now() - started);\n  if (!breach && elapsedMs > budgets.wallTimeMs) breach = { reason: 'WALL_TIME', observed: elapsedMs, limit: budgets.wallTimeMs };\n  if (!breach && finalOutput.fileCount > budgets.maxOutputFiles) breach = { reason: 'OUTPUT_FILES', observed: finalOutput.fileCount, limit: budgets.maxOutputFiles };\n  if (!breach && finalOutput.bytes > budgets.maxOutputBytes) breach = { reason: 'OUTPUT_BYTES', observed: finalOutput.bytes, limit: budgets.maxOutputBytes };\n  const outcome = breach ? 'BUDGET_EXCEEDED' : spawnError || completionResult.code !== 0 ? 'CHILD_FAILED' : 'PASS';\n  return {\n    documentType: 'BFS_BUDGETED_PROCESS_RESULT', version: '0.1.0', outcome,\n    command, args, budgets, metrics: { elapsedMs, peakSampledRssBytes, logBytes, output: finalOutput },\n    breach, child: { exitCode: completionResult.code, signal: completionResult.signal, spawnError: spawnError?.message ?? null },\n    termination: { requested: terminationRequested, awaited: true },\n    logSha256: logSha256.digest('hex'),\n    outputPreview: Buffer.concat(previewChunks).toString('utf8'),\n    outputPreviewTruncated: logBytes > previewBytes,\n  };\n}\n"
+      }
+    ],
+    "originCommit": "37416bcf7540589ed9327e176868cb2aab1da65a",
+    "pidProbeAudit": {
+      "exact": true,
+      "rows": [
+        {
+          "childExact": true,
+          "exact": true,
+          "fileBindingsExact": true,
+          "id": "PASS_SELF_REPORT",
+          "outcomeExact": true
+        },
+        {
+          "childExact": true,
+          "exact": true,
+          "fileBindingsExact": true,
+          "id": "CHILD_FAILED_SELF_REPORT",
+          "outcomeExact": true
+        },
+        {
+          "childExact": true,
+          "exact": true,
+          "fileBindingsExact": true,
+          "id": "WALL_TIME_SELF_REPORT",
+          "outcomeExact": true
+        },
+        {
+          "childExact": true,
+          "exact": true,
+          "fileBindingsExact": true,
+          "id": "SPAWN_ERROR_NULL_PID",
+          "outcomeExact": true
+        }
+      ]
+    },
+    "preflightAcceptedPushed": true,
+    "relativeAdmissionAccepted": true
+  },
+  "auditHash": "411fe96ab68b2c7916a44e6cf2b0a4c971a0298eee7090556a5f131adfa7a0d2",
+  "auditInterpretation": "PASS means the independent auditor completed; scientific support depends on every frozen gate.",
+  "backupFiles": [],
+  "blendChildren": [
+    {
+      "args": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/audit_compiled_artifact.py",
+        "--",
+        "--input",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/scene.blend",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B01-A.blend-audit.json"
+      ],
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "elapsedNanoseconds": 527855959,
+      "exitCode": 0,
+      "pid": 81682,
+      "role": "BLEND_AUDIT_B01-A",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/blend-audit-b01-a.stderr.log"
+      },
+      "stdout": {
+        "bytes": 870,
+        "sha256": "74080a6db42ea73ddc41a2d1369f8f7c08448bf74986c69bcb5b40e2f28b0f71",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/blend-audit-b01-a.stdout.log"
+      }
+    },
+    {
+      "args": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/audit_compiled_artifact.py",
+        "--",
+        "--input",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-B/scene.blend",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B01-B.blend-audit.json"
+      ],
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "elapsedNanoseconds": 527376417,
+      "exitCode": 0,
+      "pid": 81685,
+      "role": "BLEND_AUDIT_B01-B",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/blend-audit-b01-b.stderr.log"
+      },
+      "stdout": {
+        "bytes": 870,
+        "sha256": "a61e5af2c3ef9b1eced56deb231128a792a321a5fe54ded61e46072c25a0acb5",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/blend-audit-b01-b.stdout.log"
+      }
+    },
+    {
+      "args": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/audit_compiled_artifact.py",
+        "--",
+        "--input",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-A/scene.blend",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B02-A.blend-audit.json"
+      ],
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "elapsedNanoseconds": 522503875,
+      "exitCode": 0,
+      "pid": 81690,
+      "role": "BLEND_AUDIT_B02-A",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/blend-audit-b02-a.stderr.log"
+      },
+      "stdout": {
+        "bytes": 870,
+        "sha256": "d03c445fd40916b04199a872e2482b2f0351cf36d84c83107ce5a214651c087d",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/blend-audit-b02-a.stdout.log"
+      }
+    },
+    {
+      "args": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/audit_compiled_artifact.py",
+        "--",
+        "--input",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-B/scene.blend",
+        "--output",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B02-B.blend-audit.json"
+      ],
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "elapsedNanoseconds": 529444375,
+      "exitCode": 0,
+      "pid": 81694,
+      "role": "BLEND_AUDIT_B02-B",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/blend-audit-b02-b.stderr.log"
+      },
+      "stdout": {
+        "bytes": 870,
+        "sha256": "0cb58571badecafdd8dcc1d523fcec5a6fb587e7b3f77cfc7e9f00ecdc7c93f7",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/blend-audit-b02-b.stdout.log"
+      }
+    }
+  ],
+  "expectedScientificVerdict": "BUDGETED_NATIVE_CHILD_PID_RECEIPT_CORRECTION_SUPPORTED",
+  "experimentId": "B55-E1",
+  "gateNamesExact": true,
+  "gatePassed": 22,
+  "gateTotal": 22,
+  "gates": {
+    "ATTEMPT_ADMISSION_AND_RECEIPT_SELF_HASH_EXACT": true,
+    "B01_B02_PAIR_STRUCTURE_BYTES_EXACT": true,
+    "B01_B02_PLAN_HASHES_FROZEN": true,
+    "B01_B02_STRUCTURE_HASHES_FROZEN": true,
+    "B54_SINGLE_PID_GAP_BOUND_EXACT": true,
+    "BUILDPLAN_PAIR_CANONICAL_BYTES_EXACT": true,
+    "DIRECT_PROCESS_AND_SEMANTIC_OPERATION_COUNTS_EXACT": true,
+    "FORMAL_ROOT_MATERIALIZED_ONLY_AFTER_ADMISSION": true,
+    "FOUR_BLEND_EMBEDDED_BINDINGS_EXACT": true,
+    "FOUR_CURRENT_COMPILE_RECEIPTS_VERIFY_19_CHECKS": true,
+    "FOUR_FRESH_RESTRICTED_COMPILES_PASS": true,
+    "FOUR_NATIVE_PID_RECEIPT_SCHEMAS_EXACT": true,
+    "INDEPENDENT_AUDIT_AND_SEMANTIC_ATTACKS_MINIMUM_32": true,
+    "MODEL_NETWORK_DOCKER_AND_RENDER_ZERO": true,
+    "NO_UNBOUND_OR_BACKUP_OUTPUT_FILES": true,
+    "PID_PROBE_PASS_FAIL_BREACH_AND_SPAWN_ERROR_EXACT": true,
+    "RELATIVE_PATH_FORMAL_ADMISSION_ACCEPTED": true,
+    "SCENESPEC_SUITE_22_OF_22": true,
+    "SPEC_PARENT_RUNTIME_AND_TOOL_IDENTITIES": true,
+    "SUPERVISOR_CHANGE_MINIMAL_AND_SCHEMA_V0_2": true,
+    "VERDICT_MAPPING_OUTCOME_NEUTRAL": true,
+    "ZERO_BLENDER_PID_PROBE_PREFLIGHT_ACCEPTED_AND_PUSHED": true
+  },
+  "identities": {
+    "admissionSelfHashExact": true,
+    "attemptReceiptSelfHashExact": true,
+    "attemptSelfHashExact": true,
+    "blenderBinaryExact": true,
+    "configurationChecks": [
+      {
+        "exact": true,
+        "expected": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe",
+        "observed": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe",
+        "uri": "specs/restricted-compile-budget.v0.1.json"
+      },
+      {
+        "exact": true,
+        "expected": "d492cfcf6a3ec1b5539735b4a46052456e330acea2b6e47c5ab5efcced6b9705",
+        "observed": "d492cfcf6a3ec1b5539735b4a46052456e330acea2b6e47c5ab5efcced6b9705",
+        "uri": "specs/output-spec.v0.1.json"
+      },
+      {
+        "exact": true,
+        "expected": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "observed": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+      },
+      {
+        "exact": true,
+        "expected": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4",
+        "observed": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4",
+        "uri": "specs/benchmarks/B01.scene.json"
+      },
+      {
+        "exact": true,
+        "expected": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16",
+        "observed": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16",
+        "uri": "specs/benchmarks/B02.scene.json"
+      }
+    ],
+    "configurationRosterExact": true,
+    "falseParentGates": [
+      "DIRECT_PROCESS_AND_SEMANTIC_OPERATION_COUNTS_EXACT"
+    ],
+    "formalStartSelfHashExact": true,
+    "nodeExact": true,
+    "operationDraftSelfHashExact": true,
+    "parentExact": true,
+    "parentSingleGapExact": true,
+    "planObservationSelfHashExact": true,
+    "preflightReceiptSelfHashExact": true,
+    "preflightSelfHashExact": true,
+    "preregistrationCommit": "bf62f9a02dbfb966f585a4c0e634da1e3507cd72",
+    "specSha256": "8aafaad2afe90ac022e6378700d5013470c08b994515eb9cdd2b245df7a320e7",
+    "supervisorChangeMinimal": true,
+    "supervisorMinimality": {
+      "afterSha256": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d",
+      "beforeSha256": "0c4cc332139d7e11bd33dccb0c340a3947851907fc02ab68b57be5275ec5ec40",
+      "exact": true,
+      "expectedSha256": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d",
+      "replacementCounts": [
+        1,
+        1,
+        1
+      ],
+      "uri": "scripts/lib/budgeted-process.mjs"
+    },
+    "toolChecks": [
+      {
+        "exact": true,
+        "expected": "b9aa5afaced6adec03fc480893262eb96249155f9fd3b57b71fe181217fadba7",
+        "observed": "b9aa5afaced6adec03fc480893262eb96249155f9fd3b57b71fe181217fadba7",
+        "uri": "blender/audit_compiled_artifact.py"
+      },
+      {
+        "exact": true,
+        "expected": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240",
+        "observed": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240",
+        "uri": "blender/compile_scene.py"
+      },
+      {
+        "exact": true,
+        "expected": "351b3ca54ecc5a2c90cd93c780518a1610af89c9f59522587c17659f06fcec60",
+        "observed": "351b3ca54ecc5a2c90cd93c780518a1610af89c9f59522587c17659f06fcec60",
+        "uri": "scripts/audit-b55-e1-budgeted-native-child-pid-receipt.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413",
+        "observed": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413",
+        "uri": "scripts/compile-build-plan.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "70fae53ba39912f9846b4f9264d3df543fce6b1a59b2483bb25a4cceb0294f66",
+        "observed": "70fae53ba39912f9846b4f9264d3df543fce6b1a59b2483bb25a4cceb0294f66",
+        "uri": "scripts/lib/actor-spec.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d",
+        "observed": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d",
+        "uri": "scripts/lib/budgeted-process.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "6fbe9a2394acbc0712ac73451db2602ec1aed8d23e49dde87bb124be2c07de95",
+        "observed": "6fbe9a2394acbc0712ac73451db2602ec1aed8d23e49dde87bb124be2c07de95",
+        "uri": "scripts/lib/compile-receipt.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "382a06e82c815b69539edf6211bd3d9db28a05c2aa49d1f7a6ddaed61f18f67a",
+        "observed": "382a06e82c815b69539edf6211bd3d9db28a05c2aa49d1f7a6ddaed61f18f67a",
+        "uri": "scripts/lib/formal-run-admission.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "61dba87ac1ed09fcf34c5d1afe860d4cccfbdf24215c7c51367ae0fa812d476f",
+        "observed": "61dba87ac1ed09fcf34c5d1afe860d4cccfbdf24215c7c51367ae0fa812d476f",
+        "uri": "scripts/lib/grasp-spec.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "a7b3be629daf5ebc50b023eea367a4e525ca66b58acafb8b23107cb6bdb4aebc",
+        "observed": "a7b3be629daf5ebc50b023eea367a4e525ca66b58acafb8b23107cb6bdb4aebc",
+        "uri": "scripts/lib/receipt-format.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "a01e301edcb2fede8d70fabb69ce733ee3dd0de4060be332259b168e2c516827",
+        "observed": "a01e301edcb2fede8d70fabb69ce733ee3dd0de4060be332259b168e2c516827",
+        "uri": "scripts/lib/scene-spec-v02.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "e7378649733e3821a87d7278a0aa592b85173bff28dc1c4530854a99c704b938",
+        "observed": "e7378649733e3821a87d7278a0aa592b85173bff28dc1c4530854a99c704b938",
+        "uri": "scripts/lib/scene-spec-v03.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "8424815191c754cdadd7eb13fa12adcbbbc73530acee3a0bd5b4b9cddc193e9f",
+        "observed": "8424815191c754cdadd7eb13fa12adcbbbc73530acee3a0bd5b4b9cddc193e9f",
+        "uri": "scripts/lib/scene-spec-v04.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "31593c5ea056531a762a1edb8623b6a5b0a9304051d32fccec7b3598c90ee5cb",
+        "observed": "31593c5ea056531a762a1edb8623b6a5b0a9304051d32fccec7b3598c90ee5cb",
+        "uri": "scripts/lib/scene-spec-v05.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "778607884f2481037bf11ed442b053e3fc72187d12b9f2731363822e21ae588c",
+        "observed": "778607884f2481037bf11ed442b053e3fc72187d12b9f2731363822e21ae588c",
+        "uri": "scripts/lib/scene-spec.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "739fa911b8809d59ec6872d317b5e305bec212e11a1a197bcbacd0e4ef6dcab3",
+        "observed": "739fa911b8809d59ec6872d317b5e305bec212e11a1a197bcbacd0e4ef6dcab3",
+        "uri": "scripts/lib/trajectory-spec.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "e1ffa80665c4174812a851f435b7360d92e538c39aa10c2c9bf8c8016180b557",
+        "observed": "e1ffa80665c4174812a851f435b7360d92e538c39aa10c2c9bf8c8016180b557",
+        "uri": "scripts/preflight-b55-e1-budgeted-native-child-pid-receipt.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "b385f7867de97e50d4d135ce34b76a2ce91cda1d197fc1561c2e35b2b7538a5e",
+        "observed": "b385f7867de97e50d4d135ce34b76a2ce91cda1d197fc1561c2e35b2b7538a5e",
+        "uri": "scripts/run-b55-e1-budgeted-native-child-pid-receipt.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "4cd49d91e7f396f04876b8fcb14ac3a10ff19fbba11309cae1cdc6911740b2af",
+        "observed": "4cd49d91e7f396f04876b8fcb14ac3a10ff19fbba11309cae1cdc6911740b2af",
+        "uri": "scripts/run-restricted-blender-compile.mjs"
+      },
+      {
+        "exact": true,
+        "expected": "75d4e778b70f253d63d2079b15b8aadeacdf497d39843705ef2b7ecfe9c7a23f",
+        "observed": "75d4e778b70f253d63d2079b15b8aadeacdf497d39843705ef2b7ecfe9c7a23f",
+        "uri": "scripts/verify-compile-receipt.mjs"
+      }
+    ],
+    "toolRosterExact": true,
+    "unchangedProductionExact": true
+  },
+  "operationCounts": {
+    "auditorGitChildren": 8,
+    "auditorProcesses": 1,
+    "blendArtifactAuditDirectChildren": 4,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "dockerProcesses": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "receiptVerifierDirectChildren": 4,
+    "verifierBlenderIdentityProbes": 4
+  },
+  "planAudits": [
+    {
+      "benchmark": "B01",
+      "bindingExact": true,
+      "fileBindingExact": true,
+      "fileSha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+      "frozenExact": true,
+      "pairObservationExact": true,
+      "planSelfHashExact": true,
+      "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/plans/B01.build-plan.json"
+    },
+    {
+      "benchmark": "B02",
+      "bindingExact": true,
+      "fileBindingExact": true,
+      "fileSha256": "8595f30c78b3d2d0266c94d05e2e37b8d90c7864d2c904b6c2e58abc164f187d",
+      "frozenExact": true,
+      "pairObservationExact": true,
+      "planSelfHashExact": true,
+      "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/plans/B02.build-plan.json"
+    }
+  ],
+  "processReplay": {
+    "auditorChildRowsExact": true,
+    "auditorParentPid": 81611,
+    "auditorPid": 81671,
+    "directProcessAndSemanticCountsExact": true,
+    "nativePidBindingsExact": true,
+    "nativePidEvidenceBoundary": "SUPERVISOR_LOCAL_SPAWN_PID_CORROBORATED_BY_CHILD_AUTHORED_PREFLIGHT",
+    "runnerChildRowsExact": true,
+    "runnerPid": 81611,
+    "semanticCountsExact": true
+  },
+  "runAudits": [
+    {
+      "benchmark": "B01",
+      "blendAuditSha256": "728fe0efeb2e9bfd3446ed231bf64602f9b08fd145cf96f49d6c177b49c5e858",
+      "blendAuditUri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B01-A.blend-audit.json",
+      "blendBindingExact": true,
+      "blendSha256": "9275349e5bb22dea4165132b19a74a5bf3146277d683787426bc9d1f99143fd0",
+      "budgetBindingExact": true,
+      "budgetSha256": "c027886d282d0e08757b9573f2befaafeb24e8075c27137f42c2895cab939b48",
+      "expectedStructureExact": true,
+      "framesEmpty": true,
+      "manifestSha256": "1aeec0d85b94c2b9f308afd82b2770599ec4c292c9bd2c4b6db143d1c63431fa",
+      "names": [
+        "budget.report.json",
+        "compile.receipt.json",
+        "frames",
+        "scene.blend",
+        "scene.manifest.json",
+        "scene.structure.canonical.json"
+      ],
+      "nativeChildPid": 81628,
+      "nativeInvocationSemanticExact": true,
+      "nativePidReceiptSchemaExact": true,
+      "outputUri": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A",
+      "receiptBindingExact": true,
+      "receiptBudgetFileHashBindingExact": true,
+      "receiptSelfExact": true,
+      "receiptSha256": "9cd3d321f6343189996792690f4ff64466620dfb37182dd02a005a514547c7c0",
+      "rosterExact": true,
+      "runId": "B01-A",
+      "structureBindingExact": true,
+      "structureSha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+      "verificationSha256": "f91faf2054c6f6ec6f681aba3b0e8fe1264b7ed34c3e95dc8701024cef8f4f43",
+      "verificationUri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B01-A.verification.json",
+      "verifierExact": true
+    },
+    {
+      "benchmark": "B01",
+      "blendAuditSha256": "728fe0efeb2e9bfd3446ed231bf64602f9b08fd145cf96f49d6c177b49c5e858",
+      "blendAuditUri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B01-B.blend-audit.json",
+      "blendBindingExact": true,
+      "blendSha256": "2fbb43d85e5a84ee7e14c6d9567a96f8fb7d567fe4874cfdff33f6bf6812cda7",
+      "budgetBindingExact": true,
+      "budgetSha256": "533c4e650a929514320bb35d039e860a115c0f3068583d52bb40f4b98cdae79a",
+      "expectedStructureExact": true,
+      "framesEmpty": true,
+      "manifestSha256": "f0377c4480fbe7b256ba267f74d3bc6305c9a26f893b9df625c9d2c26d872768",
+      "names": [
+        "budget.report.json",
+        "compile.receipt.json",
+        "frames",
+        "scene.blend",
+        "scene.manifest.json",
+        "scene.structure.canonical.json"
+      ],
+      "nativeChildPid": 81644,
+      "nativeInvocationSemanticExact": true,
+      "nativePidReceiptSchemaExact": true,
+      "outputUri": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-B",
+      "receiptBindingExact": true,
+      "receiptBudgetFileHashBindingExact": true,
+      "receiptSelfExact": true,
+      "receiptSha256": "156d0330690d41d511ebd42ba7353b4991fe44c64389eaa749a23cc48284d12e",
+      "rosterExact": true,
+      "runId": "B01-B",
+      "structureBindingExact": true,
+      "structureSha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+      "verificationSha256": "523928e33a80c7c40aa1f1200cc60df62ed3a29cebcb3d1a87a4b08beafd7735",
+      "verificationUri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B01-B.verification.json",
+      "verifierExact": true
+    },
+    {
+      "benchmark": "B02",
+      "blendAuditSha256": "b67c8bf7a737c7b9d03d2e8aa5db4dd556eabcdba10a7bc77911bbfaa15dd920",
+      "blendAuditUri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B02-A.blend-audit.json",
+      "blendBindingExact": true,
+      "blendSha256": "f797d54b14858fd898b13c285bf333151e511346afaf1ae8bc763152c8b11401",
+      "budgetBindingExact": true,
+      "budgetSha256": "7351799efabdc24a018edeb761f9d4a0b336ba8ee68e90a887e0009916a650fe",
+      "expectedStructureExact": true,
+      "framesEmpty": true,
+      "manifestSha256": "3c6e82c03e8adf6f41463d267cd02658637e054b1c02f7452a70562978b7afc9",
+      "names": [
+        "budget.report.json",
+        "compile.receipt.json",
+        "frames",
+        "scene.blend",
+        "scene.manifest.json",
+        "scene.structure.canonical.json"
+      ],
+      "nativeChildPid": 81654,
+      "nativeInvocationSemanticExact": true,
+      "nativePidReceiptSchemaExact": true,
+      "outputUri": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-A",
+      "receiptBindingExact": true,
+      "receiptBudgetFileHashBindingExact": true,
+      "receiptSelfExact": true,
+      "receiptSha256": "94ecb57b757ac3a377dd186391ddf701c7f16661d01f32de8832a195f1c3c114",
+      "rosterExact": true,
+      "runId": "B02-A",
+      "structureBindingExact": true,
+      "structureSha256": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+      "verificationSha256": "e69a7da270b9fae1cb7936e1eb03abb4f5dd2ebb1a8d4f61a9a5a1e9d8c8b16e",
+      "verificationUri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B02-A.verification.json",
+      "verifierExact": true
+    },
+    {
+      "benchmark": "B02",
+      "blendAuditSha256": "b67c8bf7a737c7b9d03d2e8aa5db4dd556eabcdba10a7bc77911bbfaa15dd920",
+      "blendAuditUri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B02-B.blend-audit.json",
+      "blendBindingExact": true,
+      "blendSha256": "27fa0bed6512f6c9c32328b0e732aafc5445fde15666d5f8e3fbcac0629476fa",
+      "budgetBindingExact": true,
+      "budgetSha256": "f4d606abff165a8d90e431485acd9ca930335e5ae0c083555a2234849ca358e9",
+      "expectedStructureExact": true,
+      "framesEmpty": true,
+      "manifestSha256": "d9d116e4d4884d2df12ddff53a56b458deeca0c447960ccd8a054eed6f541642",
+      "names": [
+        "budget.report.json",
+        "compile.receipt.json",
+        "frames",
+        "scene.blend",
+        "scene.manifest.json",
+        "scene.structure.canonical.json"
+      ],
+      "nativeChildPid": 81663,
+      "nativeInvocationSemanticExact": true,
+      "nativePidReceiptSchemaExact": true,
+      "outputUri": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-B",
+      "receiptBindingExact": true,
+      "receiptBudgetFileHashBindingExact": true,
+      "receiptSelfExact": true,
+      "receiptSha256": "e7bc9491b2dfcaad61bd4697143fb2229a4a5dc6551722399187340b3d6c2a83",
+      "rosterExact": true,
+      "runId": "B02-B",
+      "structureBindingExact": true,
+      "structureSha256": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+      "verificationSha256": "de13f20119b1d2f83321fbec829545e42e6e85de8abc6a404de4a880183ca25a",
+      "verificationUri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B02-B.verification.json",
+      "verifierExact": true
+    }
+  ],
+  "schemaVersion": "bfs.budgetedNativeChildPidReceiptIndependentAudit.v0.1",
+  "scientificVerdict": null,
+  "semanticAttackCount": 41,
+  "semanticAttacks": [
+    {
+      "changedField": "status",
+      "id": "PREFLIGHT_STATUS",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-preflight-v0-1/preflight.json"
+    },
+    {
+      "changedField": "toolHashes.scripts/compile-build-plan.mjs",
+      "id": "PREFLIGHT_TOOL_HASH",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-preflight-v0-1/preflight.json"
+    },
+    {
+      "changedField": "status",
+      "id": "PREFLIGHT_RECEIPT_STATUS",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-preflight-v0-1/receipt.json"
+    },
+    {
+      "changedField": "preflight.sha256",
+      "id": "PREFLIGHT_RECEIPT_BINDING",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-preflight-v0-1/receipt.json"
+    },
+    {
+      "changedField": "invocation.outputRoot",
+      "id": "ATTEMPT_INVOCATION",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-attempt-v0-1/attempt.json"
+    },
+    {
+      "changedField": "status",
+      "id": "ADMISSION_STATUS",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-attempt-v0-1/admission.json"
+    },
+    {
+      "changedField": "evidence.identityHash",
+      "id": "ADMISSION_IDENTITY",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-attempt-v0-1/admission.json"
+    },
+    {
+      "changedField": "status",
+      "id": "ATTEMPT_RECEIPT_STATUS",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-attempt-v0-1/receipt.json"
+    },
+    {
+      "changedField": "admission.sha256",
+      "id": "ATTEMPT_RECEIPT_ADMISSION",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-attempt-v0-1/receipt.json"
+    },
+    {
+      "changedField": "authorization.admissionIdentityHash",
+      "id": "FORMAL_START_AUTHORIZATION",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/formal-start.json"
+    },
+    {
+      "changedField": "planHash",
+      "id": "PLAN_HASH_B01",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/plans/B01.build-plan.json"
+    },
+    {
+      "changedField": "planHash",
+      "id": "PLAN_HASH_B02",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/plans/B02.build-plan.json"
+    },
+    {
+      "changedField": "createdAtUtc",
+      "id": "RECEIPT_B01-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/compile.receipt.json"
+    },
+    {
+      "changedField": "structureHash",
+      "id": "MANIFEST_B01-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/scene.manifest.json"
+    },
+    {
+      "changedField": "valid",
+      "id": "VERIFIER_B01-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B01-A.verification.json"
+    },
+    {
+      "changedField": "scene.planHash",
+      "id": "BLEND_AUDIT_B01-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B01-A.blend-audit.json"
+    },
+    {
+      "changedField": "outcome",
+      "id": "BUDGET_B01-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/budget.report.json"
+    },
+    {
+      "changedField": "createdAtUtc",
+      "id": "RECEIPT_B01-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-B/compile.receipt.json"
+    },
+    {
+      "changedField": "structureHash",
+      "id": "MANIFEST_B01-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-B/scene.manifest.json"
+    },
+    {
+      "changedField": "valid",
+      "id": "VERIFIER_B01-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B01-B.verification.json"
+    },
+    {
+      "changedField": "scene.planHash",
+      "id": "BLEND_AUDIT_B01-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B01-B.blend-audit.json"
+    },
+    {
+      "changedField": "outcome",
+      "id": "BUDGET_B01-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-B/budget.report.json"
+    },
+    {
+      "changedField": "createdAtUtc",
+      "id": "RECEIPT_B02-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-A/compile.receipt.json"
+    },
+    {
+      "changedField": "structureHash",
+      "id": "MANIFEST_B02-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-A/scene.manifest.json"
+    },
+    {
+      "changedField": "valid",
+      "id": "VERIFIER_B02-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B02-A.verification.json"
+    },
+    {
+      "changedField": "scene.planHash",
+      "id": "BLEND_AUDIT_B02-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B02-A.blend-audit.json"
+    },
+    {
+      "changedField": "outcome",
+      "id": "BUDGET_B02-A",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-A/budget.report.json"
+    },
+    {
+      "changedField": "createdAtUtc",
+      "id": "RECEIPT_B02-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-B/compile.receipt.json"
+    },
+    {
+      "changedField": "structureHash",
+      "id": "MANIFEST_B02-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-B/scene.manifest.json"
+    },
+    {
+      "changedField": "valid",
+      "id": "VERIFIER_B02-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B02-B.verification.json"
+    },
+    {
+      "changedField": "scene.planHash",
+      "id": "BLEND_AUDIT_B02-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/blend/B02-B.blend-audit.json"
+    },
+    {
+      "changedField": "outcome",
+      "id": "BUDGET_B02-B",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-B/budget.report.json"
+    },
+    {
+      "changedField": "child.pid",
+      "id": "PID_MISSING",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/budget.report.json"
+    },
+    {
+      "changedField": "child.pid",
+      "id": "PID_NULL_ON_SUCCESS",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/budget.report.json"
+    },
+    {
+      "changedField": "child.pid",
+      "id": "PID_STRING",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/budget.report.json"
+    },
+    {
+      "changedField": "child.pid",
+      "id": "PID_FRACTIONAL",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/budget.report.json"
+    },
+    {
+      "changedField": "child.pid",
+      "id": "PID_NON_POSITIVE",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/budget.report.json"
+    },
+    {
+      "changedField": "child.pid",
+      "id": "PID_EQUALS_WRAPPER",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/budget.report.json"
+    },
+    {
+      "changedField": "version",
+      "id": "BUDGET_RESULT_VERSION",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/budget.report.json"
+    },
+    {
+      "changedField": "bound budget.report.json child.pid",
+      "id": "PID_REPORT_CHANGED_WITHOUT_RECEIPT_HASH",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/compile.receipt.json"
+    },
+    {
+      "changedField": "nativeCompileInvocations",
+      "id": "OPERATION_DRAFT_COUNT",
+      "rejected": true,
+      "target": "experiments/budgeted-native-child-pid-receipt-v0-1/operation-draft.json"
+    }
+  ],
+  "semanticAttacksPassed": 41,
+  "status": "PASS",
+  "verifierChildren": [
+    {
+      "args": [
+        "scripts/verify-compile-receipt.mjs",
+        "--receipt",
+        "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-A/compile.receipt.json",
+        "--report",
+        "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B01-A.verification.json"
+      ],
+      "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "elapsedNanoseconds": 414644667,
+      "exitCode": 0,
+      "pid": 81680,
+      "role": "RECEIPT_VERIFIER_B01-A",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/receipt-verifier-b01-a.stderr.log"
+      },
+      "stdout": {
+        "bytes": 27,
+        "sha256": "fa476d7a1228a52c1b8c844f5759dcdccc2fe7710d650c8002cefbecf5a52b52",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/receipt-verifier-b01-a.stdout.log"
+      }
+    },
+    {
+      "args": [
+        "scripts/verify-compile-receipt.mjs",
+        "--receipt",
+        "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B01-B/compile.receipt.json",
+        "--report",
+        "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B01-B.verification.json"
+      ],
+      "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "elapsedNanoseconds": 413010667,
+      "exitCode": 0,
+      "pid": 81683,
+      "role": "RECEIPT_VERIFIER_B01-B",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/receipt-verifier-b01-b.stderr.log"
+      },
+      "stdout": {
+        "bytes": 27,
+        "sha256": "fa476d7a1228a52c1b8c844f5759dcdccc2fe7710d650c8002cefbecf5a52b52",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/receipt-verifier-b01-b.stdout.log"
+      }
+    },
+    {
+      "args": [
+        "scripts/verify-compile-receipt.mjs",
+        "--receipt",
+        "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-A/compile.receipt.json",
+        "--report",
+        "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B02-A.verification.json"
+      ],
+      "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "elapsedNanoseconds": 404593334,
+      "exitCode": 0,
+      "pid": 81687,
+      "role": "RECEIPT_VERIFIER_B02-A",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/receipt-verifier-b02-a.stderr.log"
+      },
+      "stdout": {
+        "bytes": 27,
+        "sha256": "fa476d7a1228a52c1b8c844f5759dcdccc2fe7710d650c8002cefbecf5a52b52",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/receipt-verifier-b02-a.stdout.log"
+      }
+    },
+    {
+      "args": [
+        "scripts/verify-compile-receipt.mjs",
+        "--receipt",
+        "experiments/budgeted-native-child-pid-receipt-v0-1/runs/B02-B/compile.receipt.json",
+        "--report",
+        "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/verifier/B02-B.verification.json"
+      ],
+      "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "elapsedNanoseconds": 401453750,
+      "exitCode": 0,
+      "pid": 81692,
+      "role": "RECEIPT_VERIFIER_B02-B",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/receipt-verifier-b02-b.stderr.log"
+      },
+      "stdout": {
+        "bytes": 27,
+        "sha256": "fa476d7a1228a52c1b8c844f5759dcdccc2fe7710d650c8002cefbecf5a52b52",
+        "uri": "experiments/budgeted-native-child-pid-receipt-v0-1/audit-replay/process-logs/receipt-verifier-b02-b.stdout.log"
+      }
+    }
+  ]
+}
