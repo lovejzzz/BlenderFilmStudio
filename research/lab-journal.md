@@ -3608,3 +3608,13 @@ Date: 2026-08-28 · Type: POSTFAILURE READ-ONLY DIAGNOSTIC / DEVELOPMENT PREREGI
 另一个独立缺口是 pixel-center Vector oracle：TOP/BOTTOM/NEITHER observed max 分别为 `2.0807439631198577e-4`、`1.52587890625e-4` 与 `5.771591031589196e-4` pixel，均超过冻结 `1/16384`。本机 build hash 对应的官方 Blender commit `fbe6228777e7d9afefcd61a413844e790ae75db7` 源码显示 Position、Depth 与 Vector 同源于 first-hit `ShaderData.sd->P`，Vector 再经过 previous object 与 raster projection；因此 integer pixel center 不是同一物理样本。
 
 在 P1 spec、三条新工具路径与 output root 全部确认不存在时，预登记 `B52-D12.14-P1`。它将用同一 H1 development-only fixture 做两次新的 Blender 5.2 current-frame render，只增加 Position pass，并以 Position world point 重建 current/previous raster endpoints。P1 只验证 H2 instrument design；该 fixture、结果与 H1 EXR 均禁止成为 H2 formal measurement input。P1 spec SHA-256 为 `2ccffbcfe861fd80406901b417cf4cd2b2b8977c6925d6fb73e3d0328092efe3`。下一动作必须先提交推送 exact P1 spec/protocol；随后才允许创建 P1 tools，工具冻结提交后才允许渲染。
+
+## J-250 · D12.14-P1 三工具冻结候选与零渲染验证
+
+Date: 2026-08-28 · Type: DEVELOPMENT TOOL-FREEZE CANDIDATE · New Blender renders: 0
+
+P1 preregistration commit `15a4f19` 已推送后才创建三条新工具。Source 通过 import identity 复用冻结 H1 scene construction，只改 scene/view-layer development identity并启用 Position pass；它仍执行 factory-empty Cycles CPU、H1 88° rigid fixture、frame 1、sample 1 与原 seed。Analyzer 从 decoded Position world XYZ 反解 current local point、施加 previous rigid transform并分别投影 current/previous raster endpoints；integer pixel-center oracle仅作为失败对照，禁止成为新 gate。Analyzer 还检查六个 multipart subimages、float channel roster、Position→Depth、zero next Vector、两次 decoded-array identity 与仅 `Date`/`RenderTime`/`Scene` 可变化的 container metadata。
+
+Runner 冻结为两个 source children 加一个 analyzer child；在任何 child failure 上也会写 `execution.json`、`failure.json` 与 `receipt.json`，避免 H1 runner 没有 finally-path 的证据缺口。运行前另有 100 GiB reserve safety gate 和 32 MiB maximum projected write；该 gate 只保护主机，不改变 P1 development outcome。
+
+真实 Blender 5.2 factory-startup 加载 source 的 `--help` 路径成功，确认 `bpy`、frozen H1 import 与 argparse 可加载；两个 bundled-Python tools 的 `--help` 成功；三文件均通过 bundled Python 3.13 `py_compile`，P1 output root 保持不存在，render calls 为 0。按 source/analyzer/runner 顺序的 SHA-256 为 `9e1d338608306cfc89ed2111560ed88e46b860549505e084388e4150a7b3def2`、`6cf55af97af37dfe4e94e048246a3796b1a143760c0077fd6f343ea5fcb8b302`、`9e607fb8d8c33bedbf572e3a9d764eaffb08a48f40e7c161ce64e2bcbd58441f`。下一动作必须提交推送 exact tool bytes；只有该 tool-freeze commit 在远端后才能创建 P1 output root并运行两次新 render。
