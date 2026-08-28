@@ -3772,3 +3772,15 @@ site source commit `9cf632d256dc495b7ac696da8292d0ec7be33123` 推送后，GitHub
 同一source commit推送到Sites source repository并保存为version 78；archive content hash为 `sha256:b2a38e2707ce2c7f01a1135db090cded288c70dfac63e1a687eb7394e8c535f6`，deployment `appgdep_6a9183f78e4c819186e2ab05f9679b08` succeeded。发布前再次验证current user为owner、access mode为custom、exactly one allowed account且其role为owner、external visitors为0、workspace/tenant groups为空；owner-only exact route的匿名请求返回HTTP 401。Owner-only URL为 `https://blender-film-studio-research.skylab.chatgpt.site/blender-projective-depth-formal-invalidation-v0-1/`。
 
 H2 publication至此封闭；没有改变H2 null verdict或same-ID禁止重跑边界。下一阶段按J-262观察启动新的formal-run admission reliability实验：先预登记relative/absolute equivalence、containment、fresh-root、pushed-evidence lookup与pre-try failure receipt reachability，再创建任何tool byte。
+
+## J-265 · B53-E1 formal runner admission path totality 预登记
+
+Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender renders: 0
+
+在spec、protocol、三条new tool paths与formal root全部确认不存在时，预登记 `B53-E1`。Parent evidence绑定B42 nested mountpoint/null-observation failure、D12.14-H1 producer-only schema smoke failure与D12.14-H2 relative/absolute path admission failure；本实验不修复或重跑任何parent。
+
+冻结17-case matrix：relative、dot-segment与absolute三种等价positive spellings必须accept并产生exact canonical evidence identity；14个negatives分别要求outside repo、symlink、missing/not-directory、untracked、committed-not-pushed、preflight self-hash/status、tool hash、outside/symlink/existing output与missing origin branch的exact earliest reason。每个case都必须拥有receipt；每个rejection都必须在任何formal work之前写self-hashed failure，scientificVerdict始终为null。Admission不得创建声明的formal output。
+
+正式实现限定为dependency-free Node admission library、single-use runner与不import前两者的independent auditor。Runner只可创建isolated local fixture Git repo和local bare origin；Blender、Docker/Colima、network、model、render与external repository全部禁止。Audit必须重开fixture、复算hash/path/Git ancestry/process boundary并执行至少32项one-field semantic attacks。Spec SHA-256为 `d85c450e4f927a684a630324da3ee5281b0cd57f3fcd23cdccf5d4cfe3f2b4f5`；protocol SHA-256为 `d3470821f5d4ae3d31fa2f3a2d218db0cfc2bb66e7c576eee9d7a80313d031a5`。
+
+下一动作只能提交并推送exact spec、protocol与本entry；远端preregistration commit形成前不得创建任何B53-E1 tool byte或output root。Supported verdict只授权未来新实验采用admission module；production compiler orchestration变更仍必须重跑B01/B02 structure regression。

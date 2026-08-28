@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "bfs.formalRunnerAdmissionPathTotalitySpec.v0.1",
+  "experimentId": "B53-E1",
+  "title": "Formal runner admission path equivalence and failure totality",
+  "date": "2026-08-28",
+  "hypothesis": "A single repository-path admission module can make relative, dot-segment and absolute representations of the same trusted evidence/output locations observationally equivalent, reject every escape or stale-evidence case before formal work, and still write a self-hashed failure receipt for every rejected invocation.",
+  "motivation": {
+    "observedFailures": [
+      {
+        "id": "B42",
+        "uri": "experiments/linux-amd64-compiler-repro-v0-1/failure.json",
+        "sha256": "d7ef08eccb28055ed6ad26d6579caec7a414da68f3b8282120efcbd94eaa32f2",
+        "lesson": "A nested writable mountpoint absent from the frozen image prevented every container launch; the analyzer was also not total over null observations."
+      },
+      {
+        "id": "B52-D12.14-H1",
+        "uri": "experiments/blender-material-owner-rigid-directional-render-holdout-v0-1/failure.json",
+        "sha256": "8a5caef198ee65ac35a932f26d2a74604fff833ce978407c1a6526132fa6f953",
+        "lesson": "A producer-only preflight did not exercise the analyzer's actual schema-consumer boundary."
+      },
+      {
+        "id": "B52-D12.14-H2",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-formal-invocation-failure-v0-1/failure.json",
+        "sha256": "6a212c91d8eeff0319017ae51d00daf3505d14d9f494a0318d441924f2b6d492",
+        "lesson": "An accepted full-shaped preflight did not exercise the formal runner's exact relative CLI path shape; admission failed before its try/finally boundary."
+      }
+    ]
+  },
+  "freshness": {
+    "checkedAbsentBeforeThisSpec": [
+      "specs/formal-runner-admission-path-totality.v0.1.json",
+      "research/2026-08-28-b53-e1-formal-runner-admission-path-totality-protocol.md",
+      "scripts/lib/formal-run-admission.mjs",
+      "scripts/run-b53-e1-formal-runner-admission-path-totality.mjs",
+      "scripts/audit-b53-e1-formal-runner-admission-path-totality.mjs",
+      "experiments/formal-runner-admission-path-totality-v0-1"
+    ],
+    "newToolPaths": [
+      "scripts/lib/formal-run-admission.mjs",
+      "scripts/run-b53-e1-formal-runner-admission-path-totality.mjs",
+      "scripts/audit-b53-e1-formal-runner-admission-path-totality.mjs"
+    ],
+    "formalRoot": "experiments/formal-runner-admission-path-totality-v0-1",
+    "requirements": [
+      "Commit and push this exact spec and protocol before creating any B53-E1 tool byte or output root.",
+      "Commit and push all three exact tool bytes before creating the formal root.",
+      "The formal run is single-use. Retain any failure; repair requires a new experiment ID."
+    ]
+  },
+  "runtime": {
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "version": "v26.5.0",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"
+    },
+    "git": {
+      "executable": "/usr/bin/git",
+      "transport": "local file-protocol bare origin only"
+    },
+    "environmentAllowlist": [
+      "PATH",
+      "LANG",
+      "LC_ALL",
+      "TMPDIR"
+    ],
+    "forbidden": [
+      "Blender",
+      "Docker or Colima",
+      "network access",
+      "model calls",
+      "rendering",
+      "external repositories"
+    ]
+  },
+  "admissionContract": {
+    "evidenceInput": {
+      "resolution": "Resolve CLI spelling against the declared repository root, then require the resolved path and realpath to be identical and strictly below the repository realpath.",
+      "type": "existing directory",
+      "git": [
+        "tracked and clean at HEAD",
+        "latest path-affecting commit is an ancestor of the exact configured origin branch",
+        "preflight record is canonical-self-hashed and status ACCEPTED",
+        "all declared tool hashes equal the current tool bytes"
+      ]
+    },
+    "formalOutput": {
+      "resolution": "Resolve CLI spelling against the declared repository root and require its nearest existing ancestor realpath to remain strictly below the repository realpath.",
+      "freshness": "target must not exist as a file, directory or symbolic link",
+      "materialization": "admission returns the canonical absolute target but does not create it"
+    },
+    "attemptLedger": {
+      "root": "a separately declared fresh repository-contained root created before semantic admission",
+      "success": "write one canonical self-hashed admission.json and receipt.json",
+      "failure": "write one canonical self-hashed failure.json and receipt.json even when evidence/output admission rejects",
+      "verdict": "scientificVerdict is always null; this experiment tests execution infrastructure only"
+    },
+    "canonicalIdentity": {
+      "representation": "repository-relative POSIX path plus file SHA/self-hash/tool bindings",
+      "forbiddenInputs": [
+        "caller spelling",
+        "current working directory outside the declared repository",
+        "absolute host prefix",
+        "symlink alias"
+      ]
+    }
+  },
+  "positiveCases": [
+    {
+      "id": "P01_RELATIVE",
+      "evidenceShape": "fixture/evidence",
+      "outputShape": "fixture/formal-relative",
+      "expected": "ACCEPT"
+    },
+    {
+      "id": "P02_DOT_SEGMENTS",
+      "evidenceShape": "fixture/./scratch/../evidence",
+      "outputShape": "fixture/./scratch/../formal-dot",
+      "expected": "ACCEPT"
+    },
+    {
+      "id": "P03_ABSOLUTE",
+      "evidenceShape": "absolute path to fixture/evidence",
+      "outputShape": "absolute path to fixture/formal-absolute",
+      "expected": "ACCEPT"
+    }
+  ],
+  "negativeCases": [
+    { "id": "N01_EVIDENCE_OUTSIDE_REPOSITORY", "expectedReason": "EVIDENCE_OUTSIDE_REPOSITORY" },
+    { "id": "N02_EVIDENCE_SYMLINK_ALIAS", "expectedReason": "EVIDENCE_SYMLINK_ALIAS" },
+    { "id": "N03_EVIDENCE_MISSING", "expectedReason": "EVIDENCE_MISSING" },
+    { "id": "N04_EVIDENCE_NOT_DIRECTORY", "expectedReason": "EVIDENCE_NOT_DIRECTORY" },
+    { "id": "N05_EVIDENCE_UNTRACKED", "expectedReason": "EVIDENCE_NOT_TRACKED_CLEAN" },
+    { "id": "N06_EVIDENCE_COMMITTED_NOT_PUSHED", "expectedReason": "EVIDENCE_COMMIT_NOT_PUSHED" },
+    { "id": "N07_PREFLIGHT_SELF_HASH", "expectedReason": "PREFLIGHT_SELF_HASH" },
+    { "id": "N08_PREFLIGHT_STATUS", "expectedReason": "PREFLIGHT_STATUS" },
+    { "id": "N09_TOOL_HASH", "expectedReason": "TOOL_HASH" },
+    { "id": "N10_OUTPUT_OUTSIDE_REPOSITORY", "expectedReason": "OUTPUT_OUTSIDE_REPOSITORY" },
+    { "id": "N11_OUTPUT_SYMLINK_ALIAS", "expectedReason": "OUTPUT_SYMLINK_ALIAS" },
+    { "id": "N12_OUTPUT_EXISTS_DIRECTORY", "expectedReason": "OUTPUT_EXISTS" },
+    { "id": "N13_OUTPUT_EXISTS_FILE", "expectedReason": "OUTPUT_EXISTS" },
+    { "id": "N14_ORIGIN_BRANCH_MISSING", "expectedReason": "ORIGIN_BRANCH_MISSING" }
+  ],
+  "gates": [
+    "SPEC_AND_TOOL_IDENTITIES",
+    "THREE_POSITIVES_ACCEPT",
+    "POSITIVE_EVIDENCE_CANONICAL_IDENTITY_EXACT",
+    "POSITIVE_OUTPUT_PARENT_IDENTITY_EXACT",
+    "FOURTEEN_NEGATIVES_REJECT_WITH_EXACT_REASON",
+    "EVERY_CASE_WRITES_ONE_RECEIPT",
+    "EVERY_REJECTION_WRITES_SELF_HASHED_FAILURE",
+    "NO_CASE_CREATES_DECLARED_FORMAL_OUTPUT",
+    "NO_SYMLINK_OR_OUTSIDE_WRITE",
+    "LOCAL_BARE_ORIGIN_ONLY",
+    "PROCESS_ROSTER_EXACT",
+    "MODEL_NETWORK_BLENDER_RENDER_ZERO",
+    "AUDIT_REPLAY_EXACT",
+    "SEMANTIC_ATTACKS_MINIMUM_32"
+  ],
+  "operationContract": {
+    "runnerProcesses": 1,
+    "auditorProcesses": 1,
+    "caseEvaluations": 17,
+    "gitChildProcesses": "observed and reported exactly; no fixed count claim before implementation",
+    "blenderProcesses": 0,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "dockerProcesses": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "decision": {
+    "supportedVerdict": "FORMAL_RUNNER_ADMISSION_PATH_TOTALITY_SUPPORTED",
+    "supportedWhen": "All fourteen gates pass, all 17 cases match their frozen outcome/reason, every case has a valid receipt, and 32 or more independent semantic attacks are rejected.",
+    "rejectedVerdict": "FORMAL_RUNNER_ADMISSION_PATH_TOTALITY_REJECTED",
+    "invalidated": "Any tool/process failure produces scientificVerdict null and forbids same-ID repair or rerun."
+  },
+  "nonClaims": [
+    "This does not repair or rerun B52-D12.14-H2.",
+    "This does not prove Blender, Docker, remote Git hosting or arbitrary filesystem behavior.",
+    "A local bare origin emulates pushed-commit ancestry only; it is not remote attestation.",
+    "Path admission totality does not prove downstream analyzer, renderer or scientific correctness.",
+    "No production compiler behavior changes unless a later integration experiment preregisters adoption."
+  ],
+  "promotionBoundary": "If supported, future one-shot experiment runners may preregister adoption of the B53-E1 admission module. Existing frozen runners and evidence remain immutable. The next integration must still revalidate B01/B02 structure hashes if it changes compiler orchestration."
+}
