@@ -4165,3 +4165,9 @@ Date: 2026-08-28 · Type: REHEARSAL ADMISSION FAILURE / MECHANICAL CORRECTION ·
 C1 accepted rehearsal preflight evidence commit `eb72f8d835e5c5a6293573106c843cd0b26ff14f` 与 `origin/main` exact后，single-use runner创建sequence-1 meta attempt，但unchanged `admitFormalRun()`立即返回`TOOL_HASH`，formal root保持不存在、Blender=0。原因是B57 meta preflight只保存了`toolFreeze.hashes`，而既有admission contract要求同一映射同时投影到顶层`toolHashes`；因此不是JIT磁盘假设或production compile失败。
 
 Rejected attempt/failure/receipt file SHA分别为 `b895eee2904879954f7b0c2e9ad6bf739d05f45fbbcb0dd101fb7fcc34fdad40`、`0138f9b00a130b8e2bd6c899db4ef72820921df4c4716ff15b95ef4e7e3c98db`、`d82065faa6a767ac60c0527d11d80480463359ed53af93b3fe02327bbadb8a5b`，失败root保留。唯一correction是在meta preflight body增加`toolHashes: toolFreeze.hashes`，不改变任何hash集合、实验门、生产release或runner/auditor语义。该修改使preflight tool byte变化，因此旧C1 preflight不得复用；下一步提交推送correction与failure evidence后，必须使用C2三组fresh roots重新运行全部五份zero-Blender preflights。
+
+## J-302 · B57 C2 rehearsal preflight重新准入
+
+Date: 2026-08-28 · Type: CORRECTED REHEARSAL PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
+
+Mechanical correction commit `454ed0efe135984401d5ce6dcbc713db9e36961a` 与 `origin/main` exact后，C2 fresh meta preflight 12/12 ACCEPTED；顶层`toolHashes`现与`toolFreeze.hashes` byte-identical，五份LOW-DISK/B01-A/B/B02-A/B production preflight全部ACCEPTED，Blender/render/model/network/Docker为0。Meta file SHA/self-hash为 `4d5e85557fdda7afe24a5b26755b109db58690789680b498c53b65aee078378b` / `345268e8526db0649e703a13628cec7bc81dd61b74b11326856b283bf374a852`。下一动作先推送C2 evidence，再用其bound C2 attempt/formal roots运行完整rehearsal。
