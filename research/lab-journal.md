@@ -3916,3 +3916,15 @@ formal evidence commit `7ed5727`推送后，新增 `admission-gated-native-compi
 Homepage新增 `B54-E1 原生编译器准入` tab；B53页把未来integration gate更新为observed B54 17/18结果并链接新页。GitHub Pages sparse checkout只加入新页实际import的spec、preflight、audit、results与receipt。B54、B53与homepage exact local routes均HTTP 200；三TSX定向ESLint为0 errors/0 warnings；Vinext/Sites build成功并发现87个CDN warmup paths；GitHub Pages production build通过TypeScript并生成89/89 static pages，新route明确为static。
 
 React best-practices复核：新页是纯Server Component，JSON在module scope静态加载；没有client hooks、effect、hydration state、third-party bundle、data waterfall或重复network fetch。Existing social preview与metadata policy保持不变；B54 detail metadata单独设置title/description且清空继承image。按Sites验证边界，没有执行截图、DOM inspection、点击、resize或视觉QA。下一动作只提交推送page/CSS/navigation/Pages workflow与本entry；随后确认GitHub Pages exact source commit，并把同一validated source发布到owner-only Sites。
+
+## J-278 · B54-E1 研究页双站点发布与重启断点
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE / OPERATIONAL CHECKPOINT · New Blender renders: 0
+
+site source commit `ce092da0535f111f61cd87f3396f8489df9277b5` 已与 `origin/main` exact一致。GitHub Pages workflow `33178371484` completed/success且head SHA exact；公开B54 route返回HTTP 200：`https://lovejzzz.github.io/BlenderFilmStudio/admission-gated-native-compiler-v0-1/`。
+
+同一source commit推送到Sites source repository，重新执行Vinext production build后用hosting helper打包成功；保存为version 80，archive content hash为 `sha256:822e8cf1c216f7f344ba44132b3fa23ded3624e4f56fc21c83c99cfb1f190bd5`，共374 files、28,999,680 bytes。deployment `appgdep_6a919669f5b481918869fbdbcf124e72` succeeded，owner-only exact route为 `https://blender-film-studio-research.skylab.chatgpt.site/admission-gated-native-compiler-v0-1/`。
+
+发布前再次验证current user为owner、access mode为custom、exactly one allowed account且其role为owner、external visitors为0、workspace/tenant groups为空；owner-only route匿名请求返回HTTP 401。没有创建或刷新Sites screenshot，也没有执行截图、DOM、点击、resize或视觉QA。
+
+用户准备升级并重启Codex，因此本次在publication checkpoint主动收口，不启动B55。B54-E1 scientific verdict保持封闭的 `ADMISSION_GATED_NATIVE_COMPILER_INTEGRATION_REJECTED`：编译器4/4、receipt 4×19、B01/B02 structure identity 2/2均通过，唯一失败是budget report未持久化native Blender PID。重启后的下一实验应先预登记最小supervisor PID-receipt correction，再修改 `scripts/lib/budgeted-process.mjs`；不得改写或重跑B54 evidence。用户原有 `README.md` 修改与三份未跟踪research drafts继续排除于本次提交之外。
