@@ -4091,3 +4091,13 @@ B57只修复一个因果缺口：accepted preflight的disk observation可能在f
 正式负例冻结为正常accepted preflight之后把effective available ceiling设为107,911,053,311 bytes，即required reserve+projection少1 byte；ceiling只能降低真实观察，不能制造acceptance。正式正例仍为B01-A/B、B02-A/B四个fresh preferred-alias compiles，并要求四份JIT disk admission、四份production verifier、四份19-check current receipt、native PID、plan/structure/blend bindings全部通过；render/model/network/Docker为0。Independent auditor不得import execution modules，至少拒绝56项semantic attacks；26-gate outcome mapping已在spec/protocol中冻结。
 
 预登记时repository filesystem available为108,723,322,880 bytes，projection后108,186,451,968 bytes，高于107,374,182,400-byte reserve。下一动作只能提交并推送exact spec、protocol与本entry形成preregistration commit；远端一致前不得创建v0.2 release、修改production tool byte或创建任何B57 root。
+
+## J-293 · B57 v0.2 release与JIT disk receipt实现候选
+
+Date: 2026-08-28 · Type: DEVELOPMENT IMPLEMENTATION CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+Preregistration commit `c9e0b9e25c41b751fb456cf115e29e63996dbea4` 与 `origin/main` exact后才创建additive `production-compiler-entry.v0.2.json`并修改四条production implementation paths；v0.1 release SHA仍exact `010cb8bbfc4acd56c1f766cf014b1bdbf9652b3d35f92ed89e8891a51a8e43cf`。三个package aliases与全部unchanged controls保持原hash。
+
+Runner候选在BuildPlan durable write之后把phase设为`NATIVE_COMPILE_DISK_ADMISSION`，真实`statfs(repositoryRoot)`后使用冻结100 GiB reserve与0.5 GiB projection，先exclusive-create/fsync sequence-5 disk admission，再允许restricted wrapper spawn。Test ceiling只接受non-negative且不高于real observation的整数；非法或raise ceiling都写REJECTED。Receipt升级为`bfs.productionCompileReceipt.v0.2`，root roster加入disk admission，并绑定file SHA、自哈希、real/effective bytes、ceiling flag与policy；independent production verifier增加`NATIVE_COMPILE_DISK_READMISSION`检查。
+
+v0.2 release冻结31 files且全量SHA replay 31/31 exact；release/preflight/runner/receipt/verifier candidate SHA依次为 `c5dc72a3a30c67d3cfeee1cd9c0fc07fa438fa466e9bff587d3e7e7dd2c74311`、`48adeb62acbdb4f0dc250c93a9a3b69dda7a489743d0538ea14a53b6a0386b11`、`05ae75819a4b1517c3a68345ac1d64b0cea2fd6d3f3891a887bea917c2785466`、`039ff78c7c9129d0c34a2980ed9c28c1c49fe7320085d73a179ab7aa89ff0d46`、`17bf7e0a99faeba01f688e1df518b356fe54d66fa331052a1fed2323c4e15f1c`。四文件Node syntax、targeted ESLint与diff check通过；未创建B57 root、未运行preflight或Blender。下一动作先提交推送candidate，随后只在fresh development roots验证正常与one-byte-below路径；发现缺陷必须保留反例并换fresh root。

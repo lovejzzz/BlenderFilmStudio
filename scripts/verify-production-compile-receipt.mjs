@@ -95,13 +95,13 @@ async function verify(receiptUri) {
   const receiptPath = await resolveExistingRepositoryPath(receiptUri, 'Production receipt');
   const outputRoot = dirname(receiptPath);
   const receipt = JSON.parse(await readFile(receiptPath, 'utf8'));
-  if (receipt.schemaVersion !== 'bfs.productionCompileReceipt.v0.1' || receipt.status !== 'PASS') throw new Error('Production receipt schema or status mismatch');
+  if (receipt.schemaVersion !== 'bfs.productionCompileReceipt.v0.2' || receipt.status !== 'PASS') throw new Error('Production receipt schema or status mismatch');
   if (!validSelfHash(receipt, 'receiptHash')) throw new Error('Production receipt self-hash mismatch');
   checks.push('PRODUCTION_RECEIPT_SELF_HASH');
 
   const releasePath = await requireIdentity(receipt.release, 'Release manifest');
   const release = JSON.parse(await readFile(releasePath, 'utf8'));
-  if (release.schemaVersion !== 'bfs.productionCompilerEntry.v0.1' || release.releaseId !== receipt.release.releaseId) throw new Error('Release manifest binding mismatch');
+  if (release.schemaVersion !== 'bfs.productionCompilerEntry.v0.2' || release.releaseId !== receipt.release.releaseId) throw new Error('Release manifest binding mismatch');
   for (const [uri, expectedSha256] of Object.entries(release.frozenFiles).sort(([left], [right]) => left.localeCompare(right))) {
     const filePath = await resolveExistingRepositoryPath(uri, `Frozen release file ${uri}`);
     if (await sha256File(filePath) !== expectedSha256) throw new Error(`Frozen release file mismatch: ${uri}`);
@@ -139,6 +139,17 @@ async function verify(receiptUri) {
   if (sha256Bytes(Buffer.from(canonicalJson(wrapper.plan))) !== wrapper.planHash || wrapper.planHash !== receipt.buildPlan.planHash
     || wrapper.planHash !== preflight.buildPlan.planHash) throw new Error('BuildPlan binding mismatch');
   checks.push('SCENE_AND_BUILD_PLAN_BINDINGS');
+
+  const diskAdmissionPath = await requireIdentity(receipt.authorization.nativeCompileDiskAdmission, 'Native compile disk admission');
+  const diskAdmission = requireRecord(JSON.parse(await readFile(diskAdmissionPath, 'utf8')), 'bfs.productionNativeCompileDiskAdmission.v0.1', 'diskAdmissionHash', 'Native compile disk admission');
+  if (diskAdmission.sequence !== 5 || diskAdmission.status !== 'ACCEPTED' || diskAdmission.disk?.status !== 'PASS'
+    || diskAdmission.policy?.minimumReserveBytes !== '107374182400' || diskAdmission.policy?.projectedWriteBytes !== '536870912'
+    || diskAdmission.policy?.overrideAllowedByReleaseEntry !== false
+    || BigInt(diskAdmission.effectiveAvailableBytes) > BigInt(diskAdmission.filesystemAvailableBytesObserved)
+    || diskAdmission.restrictedCompilerProcessesStarted !== 0 || diskAdmission.nativeBlenderProcessesStarted !== 0) {
+    throw new Error('Native compile disk readmission mismatch');
+  }
+  checks.push('NATIVE_COMPILE_DISK_READMISSION');
 
   const budgetPath = await requireIdentity(receipt.restrictedCompile.budgetReport, 'Budget report');
   const compileReceiptPath = await requireIdentity(receipt.restrictedCompile.compileReceipt, 'Current CompileReceipt');

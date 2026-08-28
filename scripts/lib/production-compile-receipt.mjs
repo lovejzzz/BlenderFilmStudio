@@ -150,6 +150,7 @@ export async function createProductionCompileReceipt({
   admissionPath,
   attemptReceiptPath,
   formalStartPath,
+  diskAdmissionPath,
   sceneSpecPath,
   planPath,
   restrictedRoot,
@@ -168,6 +169,7 @@ export async function createProductionCompileReceipt({
   const admission = requireHashedRecord(JSON.parse(await readFile(admissionPath, 'utf8')), 'admissionHash', 'Production admission');
   const attemptReceipt = requireHashedRecord(JSON.parse(await readFile(attemptReceiptPath, 'utf8')), 'receiptHash', 'Production attempt receipt');
   const formalStart = requireHashedRecord(JSON.parse(await readFile(formalStartPath, 'utf8')), 'formalStartHash', 'Production formal start');
+  const diskAdmission = requireHashedRecord(JSON.parse(await readFile(diskAdmissionPath, 'utf8')), 'diskAdmissionHash', 'Native compile disk admission');
   const wrapper = JSON.parse(await readFile(planPath, 'utf8'));
   const budgetReport = JSON.parse(await readFile(budgetReportPath, 'utf8'));
   const compileReceipt = JSON.parse(await readFile(compileReceiptPath, 'utf8'));
@@ -175,10 +177,16 @@ export async function createProductionCompileReceipt({
   const structureBytes = await readFile(structurePath);
   const structureHash = sha256Bytes(structureBytes);
 
-  if (release.schemaVersion !== 'bfs.productionCompilerEntry.v0.1') throw new Error('Production release manifest schema mismatch');
+  if (release.schemaVersion !== 'bfs.productionCompilerEntry.v0.2') throw new Error('Production release manifest schema mismatch');
   if (preflight.status !== 'ACCEPTED') throw new Error('Production preflight is not accepted');
   if (attempt.sequence !== 1 || admission.sequence !== 2 || attemptReceipt.sequence !== 3 || formalStart.sequence !== 4) {
     throw new Error('Production authorization sequence mismatch');
+  }
+  if (diskAdmission.schemaVersion !== 'bfs.productionNativeCompileDiskAdmission.v0.1' || diskAdmission.sequence !== 5 || diskAdmission.status !== 'ACCEPTED'
+    || diskAdmission.disk?.status !== 'PASS' || diskAdmission.policy?.minimumReserveBytes !== '107374182400'
+    || diskAdmission.policy?.projectedWriteBytes !== '536870912' || diskAdmission.policy?.overrideAllowedByReleaseEntry !== false
+    || BigInt(diskAdmission.effectiveAvailableBytes) > BigInt(diskAdmission.filesystemAvailableBytesObserved)) {
+    throw new Error('Native compile disk admission binding mismatch');
   }
   if (canonicalHash(wrapper.plan) !== wrapper.planHash) throw new Error('Production BuildPlan self-hash mismatch');
   if (budgetReport.documentType !== 'BFS_BUDGETED_PROCESS_RESULT' || budgetReport.version !== '0.2.0' || budgetReport.outcome !== 'PASS') {
@@ -192,13 +200,13 @@ export async function createProductionCompileReceipt({
 
   const rootRosterBeforeReceipt = (await readdir(outputRoot)).sort();
   const restrictedRoster = (await readdir(restrictedRoot)).sort();
-  const expectedRootBeforeReceipt = ['build-plan.json', 'formal-start.json', 'restricted'];
+  const expectedRootBeforeReceipt = ['build-plan.json', 'formal-start.json', 'native-compile-disk-admission.json', 'restricted'];
   const expectedRestricted = ['budget.report.json', 'compile-receipt.json', 'scene.blend', 'scene.manifest.json', 'scene.structure.canonical.json'];
   if (!isDeepStrictEqual(rootRosterBeforeReceipt, expectedRootBeforeReceipt)) throw new Error(`Unexpected production output root roster: ${rootRosterBeforeReceipt.join(', ')}`);
   if (!isDeepStrictEqual(restrictedRoster, expectedRestricted)) throw new Error(`Unexpected restricted output roster: ${restrictedRoster.join(', ')}`);
 
   const body = {
-    schemaVersion: 'bfs.productionCompileReceipt.v0.1',
+    schemaVersion: 'bfs.productionCompileReceipt.v0.2',
     status: 'PASS',
     release: { ...(await fileIdentity(releaseManifestPath)), releaseCommit, releaseId: release.releaseId },
     authorization: {
@@ -207,6 +215,7 @@ export async function createProductionCompileReceipt({
       admission: { ...(await fileIdentity(admissionPath)), admissionHash: admission.admissionHash, sequence: admission.sequence, status: admission.status },
       attemptReceipt: { ...(await fileIdentity(attemptReceiptPath)), receiptHash: attemptReceipt.receiptHash, sequence: attemptReceipt.sequence, status: attemptReceipt.status },
       formalStart: { ...(await fileIdentity(formalStartPath)), formalStartHash: formalStart.formalStartHash, sequence: formalStart.sequence },
+      nativeCompileDiskAdmission: { ...(await fileIdentity(diskAdmissionPath)), diskAdmissionHash: diskAdmission.diskAdmissionHash, sequence: diskAdmission.sequence, status: diskAdmission.status, filesystemAvailableBytesObserved: diskAdmission.filesystemAvailableBytesObserved, effectiveAvailableBytes: diskAdmission.effectiveAvailableBytes, testCeilingApplied: diskAdmission.testCeilingApplied, policy: diskAdmission.policy },
     },
     source: await fileIdentity(sceneSpecPath),
     buildPlan: { ...(await fileIdentity(planPath)), planHash: wrapper.planHash, planVersion: wrapper.planVersion, sourceSceneCanonicalSha256: wrapper.plan.source.canonicalSha256 },
@@ -225,6 +234,7 @@ export async function createProductionCompileReceipt({
     },
     claims: {
       admissionPrecedesOutput: true,
+      nativeCompileDiskReadmission: true,
       exactArtifactBinding: true,
       supervisorLocalNativePidReceipt: true,
       signed: false,

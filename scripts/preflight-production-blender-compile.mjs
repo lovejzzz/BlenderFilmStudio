@@ -18,7 +18,7 @@ import {
 } from './lib/production-compile-receipt.mjs';
 import { repositoryRoot } from './lib/scene-spec.mjs';
 
-const RELEASE_MANIFEST_URI = 'specs/production-compiler-entry.v0.1.json';
+const RELEASE_MANIFEST_URI = 'specs/production-compiler-entry.v0.2.json';
 
 class PreflightError extends Error {
   constructor(reason, message) {
@@ -86,10 +86,10 @@ async function sceneCommitIdentity(sceneUri, gitChildren) {
 
 async function readReleaseManifest(releasePath) {
   const release = JSON.parse(await readFile(releasePath, 'utf8'));
-  if (release.schemaVersion !== 'bfs.productionCompilerEntry.v0.1' || release.status !== 'RELEASE_CANDIDATE') {
+  if (release.schemaVersion !== 'bfs.productionCompilerEntry.v0.2' || release.status !== 'RELEASE_CANDIDATE') {
     throw new PreflightError('RELEASE_MANIFEST', 'Production release manifest schema or status mismatch');
   }
-  if (release.originRef !== 'origin/main' || release.preregistrationCommit !== 'b9cf983abb3e741b5a7726200e9082bc50e1a89d') {
+  if (release.originRef !== 'origin/main' || release.preregistrationCommit !== 'c9e0b9e25c41b751fb456cf115e29e63996dbea4') {
     throw new PreflightError('RELEASE_MANIFEST', 'Production release manifest provenance mismatch');
   }
   return release;

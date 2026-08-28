@@ -2,11 +2,12 @@
 
 import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { readFile, readdir, rmdir } from 'node:fs/promises';
+import { readFile, readdir, rmdir, statfs } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { compileBuildPlan } from './compile-build-plan.mjs';
 import { AdmissionError, admitFormalRun } from './lib/formal-run-admission.mjs';
+import { evaluateDiskSpace, gibToBytes } from './lib/disk-space-guard.mjs';
 import {
   canonicalJson,
   createProductionCompileReceipt,
@@ -21,7 +22,7 @@ import {
 } from './lib/production-compile-receipt.mjs';
 import { repositoryRoot } from './lib/scene-spec.mjs';
 
-const RELEASE_MANIFEST_URI = 'specs/production-compiler-entry.v0.1.json';
+const RELEASE_MANIFEST_URI = 'specs/production-compiler-entry.v0.2.json';
 const RESTRICTED_CLI_URI = 'scripts/run-restricted-blender-compile.mjs';
 
 function parseArguments(argv) {
@@ -139,6 +140,43 @@ async function writeInvalidation(outputRoot, phase, error, context = {}) {
   }
 }
 
+async function writeNativeCompileDiskAdmission(outputRoot) {
+  const filesystem = await statfs(repositoryRoot, { bigint: true });
+  const observedAvailableBytes = filesystem.bavail * filesystem.bsize;
+  const ceilingText = process.env.BFS_PRODUCTION_COMPILE_AVAILABLE_BYTES_CEILING;
+  let ceilingBytes = null;
+  let invalidCeiling = false;
+  if (ceilingText !== undefined) {
+    if (!/^[0-9]+$/.test(ceilingText)) invalidCeiling = true;
+    else {
+      ceilingBytes = BigInt(ceilingText);
+      if (ceilingBytes > observedAvailableBytes) invalidCeiling = true;
+    }
+  }
+  const effectiveAvailableBytes = invalidCeiling || ceilingBytes === null ? observedAvailableBytes : ceilingBytes;
+  const disk = evaluateDiskSpace({
+    availableBytes: effectiveAvailableBytes,
+    capacityBytes: filesystem.blocks * filesystem.bsize,
+    reserveBytes: gibToBytes(100),
+    projectedWriteBytes: gibToBytes(0.5),
+    target: repositoryRoot,
+  });
+  const accepted = !invalidCeiling && disk.status === 'PASS';
+  return writeDurableHashed(resolve(outputRoot, 'native-compile-disk-admission.json'), {
+    schemaVersion: 'bfs.productionNativeCompileDiskAdmission.v0.1',
+    sequence: 5,
+    status: accepted ? 'ACCEPTED' : 'REJECTED',
+    reason: invalidCeiling ? 'TEST_CEILING_MAY_ONLY_LOWER_REAL_OBSERVATION' : disk.reason,
+    filesystemAvailableBytesObserved: observedAvailableBytes.toString(),
+    effectiveAvailableBytes: effectiveAvailableBytes.toString(),
+    testCeilingApplied: ceilingBytes !== null && !invalidCeiling,
+    disk,
+    policy: { minimumReserveBytes: gibToBytes(100).toString(), projectedWriteBytes: gibToBytes(0.5).toString(), overrideAllowedByReleaseEntry: false },
+    restrictedCompilerProcessesStarted: 0,
+    nativeBlenderProcessesStarted: 0,
+  }, 'diskAdmissionHash');
+}
+
 export async function runProductionCompile(argv) {
   const parsed = parseArguments(argv);
   const sceneSpecPath = await resolveExistingRepositoryPath(parsed.sceneSpec, 'Production SceneSpec');
@@ -236,6 +274,11 @@ export async function runProductionCompile(argv) {
     const planPath = resolve(outputRoot, 'build-plan.json');
     await writeDurableJson(planPath, first);
 
+    phase = 'NATIVE_COMPILE_DISK_ADMISSION';
+    const diskAdmissionPath = resolve(outputRoot, 'native-compile-disk-admission.json');
+    const diskAdmission = await writeNativeCompileDiskAdmission(outputRoot);
+    if (diskAdmission.status !== 'ACCEPTED') throw new Error(`Native compile disk admission rejected: ${diskAdmission.reason}`);
+
     phase = 'RESTRICTED_COMPILE';
     const restrictedRoot = resolve(outputRoot, 'restricted');
     const wrapper = await runChild(process.execPath, [
@@ -274,6 +317,7 @@ export async function runProductionCompile(argv) {
       admissionPath,
       attemptReceiptPath,
       formalStartPath,
+      diskAdmissionPath,
       sceneSpecPath,
       planPath,
       restrictedRoot,
