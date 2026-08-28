@@ -1,0 +1,1973 @@
+{
+  "auditorProcessesPlanned": 1,
+  "blenderProcesses": 0,
+  "blenderRenderCalls": 0,
+  "caseEvaluations": 17,
+  "cyclesRayRenders": 0,
+  "dockerProcesses": 0,
+  "experimentId": "B53-E1",
+  "gitChildProcessCount": 140,
+  "gitChildProcesses": [
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "elapsedNanoseconds": 9180125,
+      "exitCode": 0,
+      "phase": "FORMAL_HEAD",
+      "pid": 61420,
+      "stderr": "",
+      "stdout": "4c028c455357e14d4248767e1d3c33354f0e3a7d\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6329750,
+      "exitCode": 0,
+      "phase": "FORMAL_ORIGIN_MAIN",
+      "pid": 61421,
+      "stderr": "",
+      "stdout": "4c028c455357e14d4248767e1d3c33354f0e3a7d\n"
+    },
+    {
+      "args": [
+        "ls-files",
+        "--",
+        "specs/formal-runner-admission-path-totality.v0.1.json",
+        "scripts/lib/formal-run-admission.mjs",
+        "scripts/run-b53-e1-formal-runner-admission-path-totality.mjs",
+        "scripts/audit-b53-e1-formal-runner-admission-path-totality.mjs"
+      ],
+      "elapsedNanoseconds": 7590458,
+      "exitCode": 0,
+      "phase": "FORMAL_TRACKED",
+      "pid": 61422,
+      "stderr": "",
+      "stdout": "scripts/audit-b53-e1-formal-runner-admission-path-totality.mjs\nscripts/lib/formal-run-admission.mjs\nscripts/run-b53-e1-formal-runner-admission-path-totality.mjs\nspecs/formal-runner-admission-path-totality.v0.1.json\n"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "specs/formal-runner-admission-path-totality.v0.1.json",
+        "scripts/lib/formal-run-admission.mjs",
+        "scripts/run-b53-e1-formal-runner-admission-path-totality.mjs",
+        "scripts/audit-b53-e1-formal-runner-admission-path-totality.mjs"
+      ],
+      "elapsedNanoseconds": 9968750,
+      "exitCode": 0,
+      "phase": "FORMAL_CLEAN",
+      "pid": 61423,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "ae7e57ff86d8a5f735e5a32d3b80755edb6b8f4d",
+        "4c028c455357e14d4248767e1d3c33354f0e3a7d"
+      ],
+      "elapsedNanoseconds": 7360625,
+      "exitCode": 0,
+      "phase": "FORMAL_PREREG_ANCESTRY",
+      "pid": 61424,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "init",
+        "--bare",
+        "--initial-branch=main",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git"
+      ],
+      "elapsedNanoseconds": 9896459,
+      "exitCode": 0,
+      "phase": "FIXTURE_INIT_BARE",
+      "pid": 61425,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git/\n"
+    },
+    {
+      "args": [
+        "init",
+        "--initial-branch=main"
+      ],
+      "elapsedNanoseconds": 9664083,
+      "exitCode": 0,
+      "phase": "FIXTURE_INIT_SEED",
+      "pid": 61426,
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/seed/.git/\n"
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6807625,
+      "exitCode": 0,
+      "phase": "FIXTURE_CONFIG_SEED",
+      "pid": 61427,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6255458,
+      "exitCode": 0,
+      "phase": "FIXTURE_CONFIG_SEED",
+      "pid": 61428,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "add",
+        "--",
+        "tools/admission-tool.mjs",
+        "fixture/evidence/preflight.json"
+      ],
+      "elapsedNanoseconds": 7592041,
+      "exitCode": 0,
+      "phase": "FIXTURE_SEED_ADD",
+      "pid": 61429,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "commit",
+        "-m",
+        "fixture: seed accepted evidence"
+      ],
+      "elapsedNanoseconds": 13661334,
+      "exitCode": 0,
+      "phase": "FIXTURE_SEED_COMMIT",
+      "pid": 61430,
+      "stderr": "",
+      "stdout": "[main (root-commit) 3906bed] fixture: seed accepted evidence\n 2 files changed, 10 insertions(+)\n create mode 100644 fixture/evidence/preflight.json\n create mode 100644 tools/admission-tool.mjs\n"
+    },
+    {
+      "args": [
+        "remote",
+        "add",
+        "origin",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git"
+      ],
+      "elapsedNanoseconds": 6857791,
+      "exitCode": 0,
+      "phase": "FIXTURE_SEED_REMOTE",
+      "pid": 61434,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "push",
+        "-u",
+        "origin",
+        "main"
+      ],
+      "elapsedNanoseconds": 37319958,
+      "exitCode": 0,
+      "phase": "FIXTURE_SEED_PUSH",
+      "pid": 61435,
+      "stderr": "To /private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git\n * [new branch]      main -> main\n",
+      "stdout": "branch 'main' set up to track 'origin/main'.\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "elapsedNanoseconds": 6392167,
+      "exitCode": 0,
+      "phase": "FIXTURE_SEED_HEAD",
+      "pid": 61443,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/P01_RELATIVE"
+      ],
+      "elapsedNanoseconds": 29145792,
+      "exitCode": 0,
+      "phase": "CLONE_P01_RELATIVE",
+      "pid": 61444,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/P01_RELATIVE'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6398917,
+      "exitCode": 0,
+      "phase": "CONFIG_P01_RELATIVE",
+      "pid": 61449,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6113042,
+      "exitCode": 0,
+      "phase": "CONFIG_P01_RELATIVE",
+      "pid": 61450,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 5983750,
+      "exitCode": 0,
+      "phase": "ADMISSION_P01_RELATIVE",
+      "pid": 61451,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 7421084,
+      "exitCode": 0,
+      "phase": "ADMISSION_P01_RELATIVE",
+      "pid": 61452,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6616416,
+      "exitCode": 0,
+      "phase": "ADMISSION_P01_RELATIVE",
+      "pid": 61453,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 5809834,
+      "exitCode": 0,
+      "phase": "ADMISSION_P01_RELATIVE",
+      "pid": 61454,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6304125,
+      "exitCode": 0,
+      "phase": "ADMISSION_P01_RELATIVE",
+      "pid": 61455,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/P02_DOT_SEGMENTS"
+      ],
+      "elapsedNanoseconds": 28927209,
+      "exitCode": 0,
+      "phase": "CLONE_P02_DOT_SEGMENTS",
+      "pid": 61456,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/P02_DOT_SEGMENTS'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6573458,
+      "exitCode": 0,
+      "phase": "CONFIG_P02_DOT_SEGMENTS",
+      "pid": 61461,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6051333,
+      "exitCode": 0,
+      "phase": "CONFIG_P02_DOT_SEGMENTS",
+      "pid": 61462,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 5744833,
+      "exitCode": 0,
+      "phase": "ADMISSION_P02_DOT_SEGMENTS",
+      "pid": 61463,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6721334,
+      "exitCode": 0,
+      "phase": "ADMISSION_P02_DOT_SEGMENTS",
+      "pid": 61464,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6516083,
+      "exitCode": 0,
+      "phase": "ADMISSION_P02_DOT_SEGMENTS",
+      "pid": 61466,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6133625,
+      "exitCode": 0,
+      "phase": "ADMISSION_P02_DOT_SEGMENTS",
+      "pid": 61468,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6380416,
+      "exitCode": 0,
+      "phase": "ADMISSION_P02_DOT_SEGMENTS",
+      "pid": 61469,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/P03_ABSOLUTE"
+      ],
+      "elapsedNanoseconds": 29395083,
+      "exitCode": 0,
+      "phase": "CLONE_P03_ABSOLUTE",
+      "pid": 61470,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/P03_ABSOLUTE'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6599834,
+      "exitCode": 0,
+      "phase": "CONFIG_P03_ABSOLUTE",
+      "pid": 61475,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 5941125,
+      "exitCode": 0,
+      "phase": "CONFIG_P03_ABSOLUTE",
+      "pid": 61476,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6017167,
+      "exitCode": 0,
+      "phase": "ADMISSION_P03_ABSOLUTE",
+      "pid": 61477,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 7105416,
+      "exitCode": 0,
+      "phase": "ADMISSION_P03_ABSOLUTE",
+      "pid": 61478,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6505875,
+      "exitCode": 0,
+      "phase": "ADMISSION_P03_ABSOLUTE",
+      "pid": 61479,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 5862834,
+      "exitCode": 0,
+      "phase": "ADMISSION_P03_ABSOLUTE",
+      "pid": 61480,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6157833,
+      "exitCode": 0,
+      "phase": "ADMISSION_P03_ABSOLUTE",
+      "pid": 61481,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N01_EVIDENCE_OUTSIDE_REPOSITORY"
+      ],
+      "elapsedNanoseconds": 29236083,
+      "exitCode": 0,
+      "phase": "CLONE_N01_EVIDENCE_OUTSIDE_REPOSITORY",
+      "pid": 61482,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N01_EVIDENCE_OUTSIDE_REPOSITORY'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 8069083,
+      "exitCode": 0,
+      "phase": "CONFIG_N01_EVIDENCE_OUTSIDE_REPOSITORY",
+      "pid": 61487,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6100584,
+      "exitCode": 0,
+      "phase": "CONFIG_N01_EVIDENCE_OUTSIDE_REPOSITORY",
+      "pid": 61488,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N02_EVIDENCE_SYMLINK_ALIAS"
+      ],
+      "elapsedNanoseconds": 28850250,
+      "exitCode": 0,
+      "phase": "CLONE_N02_EVIDENCE_SYMLINK_ALIAS",
+      "pid": 61489,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N02_EVIDENCE_SYMLINK_ALIAS'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6162375,
+      "exitCode": 0,
+      "phase": "CONFIG_N02_EVIDENCE_SYMLINK_ALIAS",
+      "pid": 61494,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6572875,
+      "exitCode": 0,
+      "phase": "CONFIG_N02_EVIDENCE_SYMLINK_ALIAS",
+      "pid": 61495,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N03_EVIDENCE_MISSING"
+      ],
+      "elapsedNanoseconds": 29947000,
+      "exitCode": 0,
+      "phase": "CLONE_N03_EVIDENCE_MISSING",
+      "pid": 61496,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N03_EVIDENCE_MISSING'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6693875,
+      "exitCode": 0,
+      "phase": "CONFIG_N03_EVIDENCE_MISSING",
+      "pid": 61501,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6467209,
+      "exitCode": 0,
+      "phase": "CONFIG_N03_EVIDENCE_MISSING",
+      "pid": 61502,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N04_EVIDENCE_NOT_DIRECTORY"
+      ],
+      "elapsedNanoseconds": 30767125,
+      "exitCode": 0,
+      "phase": "CLONE_N04_EVIDENCE_NOT_DIRECTORY",
+      "pid": 61503,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N04_EVIDENCE_NOT_DIRECTORY'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6491791,
+      "exitCode": 0,
+      "phase": "CONFIG_N04_EVIDENCE_NOT_DIRECTORY",
+      "pid": 61508,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6184958,
+      "exitCode": 0,
+      "phase": "CONFIG_N04_EVIDENCE_NOT_DIRECTORY",
+      "pid": 61509,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N05_EVIDENCE_UNTRACKED"
+      ],
+      "elapsedNanoseconds": 30927958,
+      "exitCode": 0,
+      "phase": "CLONE_N05_EVIDENCE_UNTRACKED",
+      "pid": 61510,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N05_EVIDENCE_UNTRACKED'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6915167,
+      "exitCode": 0,
+      "phase": "CONFIG_N05_EVIDENCE_UNTRACKED",
+      "pid": 61515,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6505792,
+      "exitCode": 0,
+      "phase": "CONFIG_N05_EVIDENCE_UNTRACKED",
+      "pid": 61516,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/untracked-evidence"
+      ],
+      "elapsedNanoseconds": 6234917,
+      "exitCode": 0,
+      "phase": "ADMISSION_N05_EVIDENCE_UNTRACKED",
+      "pid": 61517,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/untracked-evidence"
+      ],
+      "elapsedNanoseconds": 7347458,
+      "exitCode": 0,
+      "phase": "ADMISSION_N05_EVIDENCE_UNTRACKED",
+      "pid": 61518,
+      "stderr": "",
+      "stdout": "?? fixture/untracked-evidence/preflight.json\n"
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N06_EVIDENCE_COMMITTED_NOT_PUSHED"
+      ],
+      "elapsedNanoseconds": 30485833,
+      "exitCode": 0,
+      "phase": "CLONE_N06_EVIDENCE_COMMITTED_NOT_PUSHED",
+      "pid": 61519,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N06_EVIDENCE_COMMITTED_NOT_PUSHED'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 7071042,
+      "exitCode": 0,
+      "phase": "CONFIG_N06_EVIDENCE_COMMITTED_NOT_PUSHED",
+      "pid": 61524,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6294959,
+      "exitCode": 0,
+      "phase": "CONFIG_N06_EVIDENCE_COMMITTED_NOT_PUSHED",
+      "pid": 61525,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "add",
+        "--",
+        "fixture/unpushed-evidence/preflight.json"
+      ],
+      "elapsedNanoseconds": 7176542,
+      "exitCode": 0,
+      "phase": "ADD_N06",
+      "pid": 61526,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "commit",
+        "-m",
+        "fixture: local evidence only"
+      ],
+      "elapsedNanoseconds": 12925875,
+      "exitCode": 0,
+      "phase": "COMMIT_N06",
+      "pid": 61527,
+      "stderr": "",
+      "stdout": "[main 4162bcd] fixture: local evidence only\n 1 file changed, 9 insertions(+)\n create mode 100644 fixture/unpushed-evidence/preflight.json\n"
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/unpushed-evidence"
+      ],
+      "elapsedNanoseconds": 6936209,
+      "exitCode": 0,
+      "phase": "ADMISSION_N06_EVIDENCE_COMMITTED_NOT_PUSHED",
+      "pid": 61530,
+      "stderr": "",
+      "stdout": "fixture/unpushed-evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/unpushed-evidence"
+      ],
+      "elapsedNanoseconds": 6874584,
+      "exitCode": 0,
+      "phase": "ADMISSION_N06_EVIDENCE_COMMITTED_NOT_PUSHED",
+      "pid": 61531,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/unpushed-evidence"
+      ],
+      "elapsedNanoseconds": 7103500,
+      "exitCode": 0,
+      "phase": "ADMISSION_N06_EVIDENCE_COMMITTED_NOT_PUSHED",
+      "pid": 61532,
+      "stderr": "",
+      "stdout": "4162bcd4abd6a406223ed47205773fa44b2a8a9a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6099125,
+      "exitCode": 0,
+      "phase": "ADMISSION_N06_EVIDENCE_COMMITTED_NOT_PUSHED",
+      "pid": 61533,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "4162bcd4abd6a406223ed47205773fa44b2a8a9a",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6484500,
+      "exitCode": 1,
+      "phase": "ADMISSION_N06_EVIDENCE_COMMITTED_NOT_PUSHED",
+      "pid": 61534,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N07_PREFLIGHT_SELF_HASH"
+      ],
+      "elapsedNanoseconds": 30808917,
+      "exitCode": 0,
+      "phase": "CLONE_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61535,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N07_PREFLIGHT_SELF_HASH'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6312750,
+      "exitCode": 0,
+      "phase": "CONFIG_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61540,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 5786208,
+      "exitCode": 0,
+      "phase": "CONFIG_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61541,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "checkout",
+        "-b",
+        "case-n07-preflight-self-hash"
+      ],
+      "elapsedNanoseconds": 8034542,
+      "exitCode": 0,
+      "phase": "BRANCH_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61542,
+      "stderr": "Switched to a new branch 'case-n07-preflight-self-hash'\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "add",
+        "--all"
+      ],
+      "elapsedNanoseconds": 7470416,
+      "exitCode": 0,
+      "phase": "ADD_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61543,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "commit",
+        "-m",
+        "fixture: corrupt preflight self hash"
+      ],
+      "elapsedNanoseconds": 12958167,
+      "exitCode": 0,
+      "phase": "COMMIT_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61544,
+      "stderr": "",
+      "stdout": "[case-n07-preflight-self-hash b202b94] fixture: corrupt preflight self hash\n 1 file changed, 1 insertion(+), 1 deletion(-)\n"
+    },
+    {
+      "args": [
+        "push",
+        "-u",
+        "origin",
+        "case-n07-preflight-self-hash"
+      ],
+      "elapsedNanoseconds": 35858500,
+      "exitCode": 0,
+      "phase": "PUSH_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61547,
+      "stderr": "To /private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git\n * [new branch]      case-n07-preflight-self-hash -> case-n07-preflight-self-hash\n",
+      "stdout": "branch 'case-n07-preflight-self-hash' set up to track 'origin/case-n07-preflight-self-hash'.\n"
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6298833,
+      "exitCode": 0,
+      "phase": "ADMISSION_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61555,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 7034375,
+      "exitCode": 0,
+      "phase": "ADMISSION_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61556,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6727792,
+      "exitCode": 0,
+      "phase": "ADMISSION_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61557,
+      "stderr": "",
+      "stdout": "b202b9416e56197cbc6e39ae82729eaf3aa14bb1\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/case-n07-preflight-self-hash"
+      ],
+      "elapsedNanoseconds": 5719375,
+      "exitCode": 0,
+      "phase": "ADMISSION_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61558,
+      "stderr": "",
+      "stdout": "b202b9416e56197cbc6e39ae82729eaf3aa14bb1\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "b202b9416e56197cbc6e39ae82729eaf3aa14bb1",
+        "origin/case-n07-preflight-self-hash"
+      ],
+      "elapsedNanoseconds": 6340334,
+      "exitCode": 0,
+      "phase": "ADMISSION_N07_PREFLIGHT_SELF_HASH",
+      "pid": 61559,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N08_PREFLIGHT_STATUS"
+      ],
+      "elapsedNanoseconds": 31122125,
+      "exitCode": 0,
+      "phase": "CLONE_N08_PREFLIGHT_STATUS",
+      "pid": 61560,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N08_PREFLIGHT_STATUS'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6531083,
+      "exitCode": 0,
+      "phase": "CONFIG_N08_PREFLIGHT_STATUS",
+      "pid": 61565,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6591709,
+      "exitCode": 0,
+      "phase": "CONFIG_N08_PREFLIGHT_STATUS",
+      "pid": 61566,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "checkout",
+        "-b",
+        "case-n08-preflight-status"
+      ],
+      "elapsedNanoseconds": 8218250,
+      "exitCode": 0,
+      "phase": "BRANCH_N08_PREFLIGHT_STATUS",
+      "pid": 61567,
+      "stderr": "Switched to a new branch 'case-n08-preflight-status'\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "add",
+        "--all"
+      ],
+      "elapsedNanoseconds": 7382417,
+      "exitCode": 0,
+      "phase": "ADD_N08_PREFLIGHT_STATUS",
+      "pid": 61568,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "commit",
+        "-m",
+        "fixture: rejected preflight status"
+      ],
+      "elapsedNanoseconds": 22037625,
+      "exitCode": 0,
+      "phase": "COMMIT_N08_PREFLIGHT_STATUS",
+      "pid": 61569,
+      "stderr": "",
+      "stdout": "[case-n08-preflight-status f287313] fixture: rejected preflight status\n 1 file changed, 2 insertions(+), 2 deletions(-)\n"
+    },
+    {
+      "args": [
+        "push",
+        "-u",
+        "origin",
+        "case-n08-preflight-status"
+      ],
+      "elapsedNanoseconds": 40382500,
+      "exitCode": 0,
+      "phase": "PUSH_N08_PREFLIGHT_STATUS",
+      "pid": 61572,
+      "stderr": "To /private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git\n * [new branch]      case-n08-preflight-status -> case-n08-preflight-status\n",
+      "stdout": "branch 'case-n08-preflight-status' set up to track 'origin/case-n08-preflight-status'.\n"
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6911042,
+      "exitCode": 0,
+      "phase": "ADMISSION_N08_PREFLIGHT_STATUS",
+      "pid": 61580,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 7486958,
+      "exitCode": 0,
+      "phase": "ADMISSION_N08_PREFLIGHT_STATUS",
+      "pid": 61581,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6913667,
+      "exitCode": 0,
+      "phase": "ADMISSION_N08_PREFLIGHT_STATUS",
+      "pid": 61582,
+      "stderr": "",
+      "stdout": "f2873137c7108517ac36ba5ba8d8cf11e9f1a404\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/case-n08-preflight-status"
+      ],
+      "elapsedNanoseconds": 5839417,
+      "exitCode": 0,
+      "phase": "ADMISSION_N08_PREFLIGHT_STATUS",
+      "pid": 61583,
+      "stderr": "",
+      "stdout": "f2873137c7108517ac36ba5ba8d8cf11e9f1a404\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "f2873137c7108517ac36ba5ba8d8cf11e9f1a404",
+        "origin/case-n08-preflight-status"
+      ],
+      "elapsedNanoseconds": 6324875,
+      "exitCode": 0,
+      "phase": "ADMISSION_N08_PREFLIGHT_STATUS",
+      "pid": 61584,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N09_TOOL_HASH"
+      ],
+      "elapsedNanoseconds": 31067916,
+      "exitCode": 0,
+      "phase": "CLONE_N09_TOOL_HASH",
+      "pid": 61585,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N09_TOOL_HASH'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6572417,
+      "exitCode": 0,
+      "phase": "CONFIG_N09_TOOL_HASH",
+      "pid": 61590,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6297042,
+      "exitCode": 0,
+      "phase": "CONFIG_N09_TOOL_HASH",
+      "pid": 61591,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "checkout",
+        "-b",
+        "case-n09-tool-hash"
+      ],
+      "elapsedNanoseconds": 8109875,
+      "exitCode": 0,
+      "phase": "BRANCH_N09_TOOL_HASH",
+      "pid": 61592,
+      "stderr": "Switched to a new branch 'case-n09-tool-hash'\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "add",
+        "--all"
+      ],
+      "elapsedNanoseconds": 7958042,
+      "exitCode": 0,
+      "phase": "ADD_N09_TOOL_HASH",
+      "pid": 61593,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "commit",
+        "-m",
+        "fixture: mismatched tool hash"
+      ],
+      "elapsedNanoseconds": 13439584,
+      "exitCode": 0,
+      "phase": "COMMIT_N09_TOOL_HASH",
+      "pid": 61594,
+      "stderr": "",
+      "stdout": "[case-n09-tool-hash 2beab77] fixture: mismatched tool hash\n 1 file changed, 2 insertions(+), 2 deletions(-)\n"
+    },
+    {
+      "args": [
+        "push",
+        "-u",
+        "origin",
+        "case-n09-tool-hash"
+      ],
+      "elapsedNanoseconds": 36348958,
+      "exitCode": 0,
+      "phase": "PUSH_N09_TOOL_HASH",
+      "pid": 61597,
+      "stderr": "To /private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git\n * [new branch]      case-n09-tool-hash -> case-n09-tool-hash\n",
+      "stdout": "branch 'case-n09-tool-hash' set up to track 'origin/case-n09-tool-hash'.\n"
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6440708,
+      "exitCode": 0,
+      "phase": "ADMISSION_N09_TOOL_HASH",
+      "pid": 61605,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 7093667,
+      "exitCode": 0,
+      "phase": "ADMISSION_N09_TOOL_HASH",
+      "pid": 61606,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6823667,
+      "exitCode": 0,
+      "phase": "ADMISSION_N09_TOOL_HASH",
+      "pid": 61607,
+      "stderr": "",
+      "stdout": "2beab77d84c9451aab6269293c1e9618202fa848\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/case-n09-tool-hash"
+      ],
+      "elapsedNanoseconds": 5919041,
+      "exitCode": 0,
+      "phase": "ADMISSION_N09_TOOL_HASH",
+      "pid": 61608,
+      "stderr": "",
+      "stdout": "2beab77d84c9451aab6269293c1e9618202fa848\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "2beab77d84c9451aab6269293c1e9618202fa848",
+        "origin/case-n09-tool-hash"
+      ],
+      "elapsedNanoseconds": 6545250,
+      "exitCode": 0,
+      "phase": "ADMISSION_N09_TOOL_HASH",
+      "pid": 61609,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N10_OUTPUT_OUTSIDE_REPOSITORY"
+      ],
+      "elapsedNanoseconds": 31657625,
+      "exitCode": 0,
+      "phase": "CLONE_N10_OUTPUT_OUTSIDE_REPOSITORY",
+      "pid": 61610,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N10_OUTPUT_OUTSIDE_REPOSITORY'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6705375,
+      "exitCode": 0,
+      "phase": "CONFIG_N10_OUTPUT_OUTSIDE_REPOSITORY",
+      "pid": 61615,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6038750,
+      "exitCode": 0,
+      "phase": "CONFIG_N10_OUTPUT_OUTSIDE_REPOSITORY",
+      "pid": 61616,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6356958,
+      "exitCode": 0,
+      "phase": "ADMISSION_N10_OUTPUT_OUTSIDE_REPOSITORY",
+      "pid": 61617,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 7418917,
+      "exitCode": 0,
+      "phase": "ADMISSION_N10_OUTPUT_OUTSIDE_REPOSITORY",
+      "pid": 61618,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6521833,
+      "exitCode": 0,
+      "phase": "ADMISSION_N10_OUTPUT_OUTSIDE_REPOSITORY",
+      "pid": 61619,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 5691208,
+      "exitCode": 0,
+      "phase": "ADMISSION_N10_OUTPUT_OUTSIDE_REPOSITORY",
+      "pid": 61620,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6566375,
+      "exitCode": 0,
+      "phase": "ADMISSION_N10_OUTPUT_OUTSIDE_REPOSITORY",
+      "pid": 61621,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N11_OUTPUT_SYMLINK_ALIAS"
+      ],
+      "elapsedNanoseconds": 33345375,
+      "exitCode": 0,
+      "phase": "CLONE_N11_OUTPUT_SYMLINK_ALIAS",
+      "pid": 61622,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N11_OUTPUT_SYMLINK_ALIAS'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6549708,
+      "exitCode": 0,
+      "phase": "CONFIG_N11_OUTPUT_SYMLINK_ALIAS",
+      "pid": 61627,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6137292,
+      "exitCode": 0,
+      "phase": "CONFIG_N11_OUTPUT_SYMLINK_ALIAS",
+      "pid": 61628,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6014833,
+      "exitCode": 0,
+      "phase": "ADMISSION_N11_OUTPUT_SYMLINK_ALIAS",
+      "pid": 61629,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6862792,
+      "exitCode": 0,
+      "phase": "ADMISSION_N11_OUTPUT_SYMLINK_ALIAS",
+      "pid": 61630,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6771584,
+      "exitCode": 0,
+      "phase": "ADMISSION_N11_OUTPUT_SYMLINK_ALIAS",
+      "pid": 61631,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 5689875,
+      "exitCode": 0,
+      "phase": "ADMISSION_N11_OUTPUT_SYMLINK_ALIAS",
+      "pid": 61632,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6374334,
+      "exitCode": 0,
+      "phase": "ADMISSION_N11_OUTPUT_SYMLINK_ALIAS",
+      "pid": 61633,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N12_OUTPUT_EXISTS_DIRECTORY"
+      ],
+      "elapsedNanoseconds": 31293333,
+      "exitCode": 0,
+      "phase": "CLONE_N12_OUTPUT_EXISTS_DIRECTORY",
+      "pid": 61634,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N12_OUTPUT_EXISTS_DIRECTORY'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6376875,
+      "exitCode": 0,
+      "phase": "CONFIG_N12_OUTPUT_EXISTS_DIRECTORY",
+      "pid": 61639,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6304083,
+      "exitCode": 0,
+      "phase": "CONFIG_N12_OUTPUT_EXISTS_DIRECTORY",
+      "pid": 61640,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6207208,
+      "exitCode": 0,
+      "phase": "ADMISSION_N12_OUTPUT_EXISTS_DIRECTORY",
+      "pid": 61641,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6816375,
+      "exitCode": 0,
+      "phase": "ADMISSION_N12_OUTPUT_EXISTS_DIRECTORY",
+      "pid": 61642,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6786250,
+      "exitCode": 0,
+      "phase": "ADMISSION_N12_OUTPUT_EXISTS_DIRECTORY",
+      "pid": 61643,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6159750,
+      "exitCode": 0,
+      "phase": "ADMISSION_N12_OUTPUT_EXISTS_DIRECTORY",
+      "pid": 61644,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6216292,
+      "exitCode": 0,
+      "phase": "ADMISSION_N12_OUTPUT_EXISTS_DIRECTORY",
+      "pid": 61645,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N13_OUTPUT_EXISTS_FILE"
+      ],
+      "elapsedNanoseconds": 31070542,
+      "exitCode": 0,
+      "phase": "CLONE_N13_OUTPUT_EXISTS_FILE",
+      "pid": 61646,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N13_OUTPUT_EXISTS_FILE'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 6699208,
+      "exitCode": 0,
+      "phase": "CONFIG_N13_OUTPUT_EXISTS_FILE",
+      "pid": 61651,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6123917,
+      "exitCode": 0,
+      "phase": "CONFIG_N13_OUTPUT_EXISTS_FILE",
+      "pid": 61652,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6338375,
+      "exitCode": 0,
+      "phase": "ADMISSION_N13_OUTPUT_EXISTS_FILE",
+      "pid": 61653,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 7347542,
+      "exitCode": 0,
+      "phase": "ADMISSION_N13_OUTPUT_EXISTS_FILE",
+      "pid": 61654,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6722208,
+      "exitCode": 0,
+      "phase": "ADMISSION_N13_OUTPUT_EXISTS_FILE",
+      "pid": 61655,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 5793500,
+      "exitCode": 0,
+      "phase": "ADMISSION_N13_OUTPUT_EXISTS_FILE",
+      "pid": 61656,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a",
+        "origin/main"
+      ],
+      "elapsedNanoseconds": 6064833,
+      "exitCode": 0,
+      "phase": "ADMISSION_N13_OUTPUT_EXISTS_FILE",
+      "pid": 61657,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "-c",
+        "protocol.file.allow=always",
+        "clone",
+        "--no-local",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/origin.git",
+        "/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N14_ORIGIN_BRANCH_MISSING"
+      ],
+      "elapsedNanoseconds": 31736584,
+      "exitCode": 0,
+      "phase": "CLONE_N14_ORIGIN_BRANCH_MISSING",
+      "pid": 61658,
+      "stderr": "Cloning into '/private/var/folders/m5/9b5k0tt50x91406yr6zww2r40000gn/T/bfs-b53-e1-z2LH1h/case-repositories/N14_ORIGIN_BRANCH_MISSING'...\n",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "BFS B53-E1 Fixture"
+      ],
+      "elapsedNanoseconds": 7043208,
+      "exitCode": 0,
+      "phase": "CONFIG_N14_ORIGIN_BRANCH_MISSING",
+      "pid": 61663,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "b53-e1@invalid.local"
+      ],
+      "elapsedNanoseconds": 6472250,
+      "exitCode": 0,
+      "phase": "CONFIG_N14_ORIGIN_BRANCH_MISSING",
+      "pid": 61664,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "ls-files",
+        "-z",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6176333,
+      "exitCode": 0,
+      "phase": "ADMISSION_N14_ORIGIN_BRANCH_MISSING",
+      "pid": 61665,
+      "stderr": "",
+      "stdout": "fixture/evidence/preflight.json\u0000"
+    },
+    {
+      "args": [
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6980417,
+      "exitCode": 0,
+      "phase": "ADMISSION_N14_ORIGIN_BRANCH_MISSING",
+      "pid": 61666,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "args": [
+        "log",
+        "-1",
+        "--format=%H",
+        "--",
+        "fixture/evidence"
+      ],
+      "elapsedNanoseconds": 6508459,
+      "exitCode": 0,
+      "phase": "ADMISSION_N14_ORIGIN_BRANCH_MISSING",
+      "pid": 61667,
+      "stderr": "",
+      "stdout": "3906bedcc589f304fa65b3ab4a69d3c0d3d1197a\n"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "origin/missing-b53-e1"
+      ],
+      "elapsedNanoseconds": 6280042,
+      "exitCode": 128,
+      "phase": "ADMISSION_N14_ORIGIN_BRANCH_MISSING",
+      "pid": 61668,
+      "stderr": "fatal: Needed a single revision\n",
+      "stdout": ""
+    }
+  ],
+  "modelCalls": 0,
+  "networkCalls": 0,
+  "operationHash": "ccff853c02284a8d9f7bc572d4686d44da862ee4d4dd24c9c6cdcd528dd834ff",
+  "runnerPid": 61409,
+  "runnerProcesses": 1,
+  "schemaVersion": "bfs.formalRunnerAdmissionOperationDraft.v0.1"
+}

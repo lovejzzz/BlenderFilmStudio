@@ -3806,3 +3806,17 @@ checkpoint commit `2db59b7e93088ca8e2562a5093960d43ea16baf0` 推送后，完成d
 最终完整development matrix只在runner自有临时目录执行并由runner删除：17 case evaluations全部符合冻结reason；34/34 semantic attacks被拒绝；`SPEC_AND_TOOL_IDENTITIES`因三工具尚未提交而按预期为false，其余13/13 gates全部为true。该probe记录135个runner-side与84个auditor-side Git children，仅用于开发覆盖，不冒充未来formal counts。三工具均通过Node 26 `--check`、`git diff --check`与定向ESLint 0 errors；formal root继续不存在，Blender、Docker/Colima、network、model、render均为0。
 
 按library、runner、auditor顺序的SHA-256为 `382a06e82c815b69539edf6211bd3d9db28a05c2aa49d1f7a6ddaed61f18f67a`、`a479693b085774eee92f0eb2f0dfa18bc84221ac7578f9677e1635ec59bb44b8`、`ff25d1f768489f2e0f6304a0d0dddc31cacb94509c4557dd673e04f375404536`。下一动作必须只提交并推送这三条exact tool bytes与本entry形成tool-freeze；远端commit一致后才可创建single-use formal root并调用runner一次。
+
+## J-268 · B53-E1 formal runner admission path totality 支持
+
+Date: 2026-08-28 · Type: FORMAL EXECUTION-INFRASTRUCTURE RESULT · New Blender renders: 0
+
+tool-freeze commit `4c028c455357e14d4248767e1d3c33354f0e3a7d` 与 `origin/main` exact一致、三条tool paths tracked-clean且formal root不存在后，只调用formal runner一次。独立auditor在临时fixture删除前重开local bare origin与17个isolated clones；正式结果为 `FORMAL_RUNNER_ADMISSION_PATH_TOTALITY_SUPPORTED`，14/14 frozen gates和34/34 one-field semantic attacks全部通过。
+
+P01 relative、P02 dot-segment与P03 absolute均ACCEPT，三者canonical evidence identity exact，identity hash为 `8e69d1eeb68f314aa6697347fef5a43fb539fae8d84667d776278444c6f023b5`；三种output canonical parent均为 `fixture`，target basenames不同且均未物化。14个negative逐一返回冻结的earliest reason；每个case都有attempt、admission/failure、receipt三份记录，`scientificVerdict`在case层始终为null。所有17个output fingerprint before/after exact。
+
+正式operation counts为1个runner process、1个independent auditor、17个case evaluations、140个runner-side Git children、84个auditor-side Git children，共224个Git children；Blender process/render、Cycles ray render、Docker/Colima、model与network均为0。临时fixture由runner在audit完成后删除，formal root中无invalidation record。
+
+formal-start、execution、audit、results、receipt的file SHA-256依次为 `13d1e6912927f2789b340ad85b50451fc504c0d8399d16101dfb323c78569e22`、`f1c8ac9177b2cd27bd7ba7dd41791f4dcdb3c4175c2c3b6e0b6f5dafed48ac31`、`bd330841231065c1217f7eda3e02892788b737c5e5eb6fe3953e284c108f6968`、`a5e58a5d925a1e3222ba5ee51f4b4d4db973ffcdef0dac64e6d1c2c4bdfb0c48`、`e8655510dd49b3522af2ebc7b57b3c8a512bb3c55a48efc3950c9aa9c38da68e`；对应self-hashes为 `9c021b95836becdba9f471d740e0871a547b3f10d88d96c420bc7296a5f305c0`、`de07aa440861288ad40709e28b95e9e92d160b51897e513a4c71adc626493e63`、`fe270af055104a20e49194cff2d5833c600348a6fc52a573504c9cb28162241a`、`1b5d1dfd36de6689e2692c6fee3e3f853ca278523917c53aba61bbbd932ce33f`、`82169fc5a46681c4ba1b3a995e574eb372809eceb3f96047a284a2d54d5880b9`。
+
+正式调用后另做一次不import formal tools的只读离线复核；首个inline命令有未闭合括号并在解析阶段退出，未读取或修改evidence。修正后的命令验证8/8顶层self-hash、51/51 case self-hash、17/17 case file bindings、17/17 frozen outcome/reason、17/17 output unchanged、tool/result/receipt bindings、fixture deletion和no-invalidation全部为true。B53-E1同一ID现已封闭，禁止修复或重跑。下一动作只提交推送exact formal root与本entry；随后发布研究页，并在任何production orchestration adoption前预登记integration且重跑B01/B02 structure regressions。
