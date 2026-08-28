@@ -3752,3 +3752,13 @@ H2失效证据commit `e6b8fb857d6bdcf19294bd8714bb98de505b75b8` 推送后，按�
 current receipt verifier重新验证native B01-A/B、B02-A/B，4/4均PASS OK且每份19项bindings成立。随后直接重算native receipt root与corrected Linux/amd64 B42-C1 root的八份 `scene.structure.canonical.json`：每份parsed content均与adjacent manifest structure深相等，byte SHA均同时等于manifest的两处binding。B01四份仍为 `c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b`；B02四份仍为 `025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856`。
 
 因此核心 `SceneSpec → immutable BuildPlan → Blender 5.2` B01/B02双净构建结构复现门有当前直接证据支持，不需要用H2替代，也不因H2失效而回退。新result note为 `research/2026-08-28-post-h2-core-compiler-revalidation.md`。下一项有观察支持的缺口是formal-run admission reliability：future one-shot preflight必须执行relative/absolute path equivalence、containment、fresh-root、pushed-evidence lookup与failure-receipt reachability；必须作为新实验，禁止修复或重跑H2。
+
+## J-263 · D12.14-H2 正式调用失效研究页完成本地验证
+
+Date: 2026-08-28 · Type: WEBSITE SOURCE VALIDATED · New Blender renders: 0
+
+新增研究页 `blender-projective-depth-formal-invalidation-v0-1`，直接读取corrected preflight、formal invocation failure与failure receipt机器证据。页面把三件事严格分开：15/15 preflight确实验证了nested consumers与full-shaped analyzer；正式runner在0 child/0 Blender/0 render时因relative/absolute path admission缺口作废；inverse-depth hypothesis因此没有scientific verdict。页面同时公开下一版formal admission contract与H2后B01/B02核心编译器复核结果。
+
+首页新增 `D12.14-H2 正式调用失效` tab；P1页面从未来时entry contract更新为observed H2 outcome，并链接完整失效链。GitHub Pages sparse checkout只新增页面实际import的三份小型machine JSON，没有引入9.3 MiB preflight arrays。新页、P1与首页定向ESLint为0 errors；Vinext/Sites production build成功并发现85个CDN warmup paths；GitHub Pages static build成功生成87/87 pages，新route明确为static。本地新页、P1与首页exact routes均返回HTTP 200。
+
+按Sites验证边界，没有执行用户未请求的截图、DOM、点击、resize或视觉QA。React best-practices复核确认新增页面是纯Server Component、无hooks/client data waterfall、无第三方bundle或hydration state，现有静态map规模无需额外memoization。下一动作只提交并推送新页、CSS、导航、Pages workflow与本entry；随后确认公开Pages exact commit，并在owner-only Sites access复核后发布同一source commit。

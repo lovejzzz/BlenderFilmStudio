@@ -264,6 +264,7 @@ export default function Home() {
           <Link className="route-tab" href="/blender-material-owner-rigid-directional-calibration-v0-1">D12.14 刚体校准</Link>
           <Link className="route-tab" href="/blender-material-owner-rigid-directional-render-holdout-v0-1">D12.14-H1 工具失败</Link>
           <Link className="route-tab" href="/blender-projective-depth-position-oracle-v0-1">D12.14-P1 投影修复</Link>
+          <Link className="route-tab" href="/blender-projective-depth-formal-invalidation-v0-1">D12.14-H2 正式调用失效</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>

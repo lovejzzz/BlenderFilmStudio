@@ -38,6 +38,7 @@ export default function ProjectiveDepthPositionOraclePage() {
       <nav aria-label="D12.14-P1 projective oracle 导航">
         <Link href="/blender-material-owner-rigid-directional-render-holdout-v0-1">D12.14-H1</Link>
         <a href="#split">双重根因</a><a href="#source">源码</a><a href="#probe">P1 实测</a><a href="#identity">身份</a><a href="#boundary">边界</a>
+        <Link href="/blender-projective-depth-formal-invalidation-v0-1">D12.14-H2</Link>
         <Link href="/journal">日志</Link>
       </nav>
       <span className="edition contact-edition">Development P1 · Supported</span>
@@ -135,11 +136,12 @@ export default function ProjectiveDepthPositionOraclePage() {
     </section>
 
     <section className="section d1214p1-boundary" id="boundary">
-      <div className="section-index">04 / H2 ENTRY CONTRACT</div>
+      <div className="section-index">04 / H2 ENTRY CONTRACT & OBSERVED OUTCOME</div>
       <div className="contact-heading">
-        <div><p className="eyebrow"><span /> P1 CLOSES AN INSTRUMENT GAP · NOT THE ALGORITHM</p><h2>下一次才测 inverse depth。<br/><span>而且必须是 fresh。</span></h2></div>
-        <p>P1 analyzer 的 operation boundary 是常量 true；posthoc audit 独立验证实际 counts，但不能倒装成 preregistered gate。H2 必须把 schema handoff、operation replay、decoded digest 与 failure receipt 全部变成可执行合同。</p>
+        <div><p className="eyebrow"><span /> P1 CLOSED AN INSTRUMENT GAP · H2 DID NOT REACH MEASUREMENT</p><h2>H2 没有测到 inverse depth。<br/><span>它停在正式调用入口。</span></h2></div>
+        <p>H2 corrected preflight把schema handoff、operation replay、decoded digest与failure path变成可执行合同，但正式runner在启动任何Blender child前遇到relative/absolute path admission缺口。0 render，scientific verdict仍为null。</p>
       </div>
+      <div className="d1214p1-h2-outcome"><span>OBSERVED H2 OUTCOME</span><strong>15 / 15 PREFLIGHT → 0 FORMAL CHILDREN → NULL VERDICT</strong><p>冻结runner失败后没有absolute-path workaround或同ID重跑。<Link href="/blender-projective-depth-formal-invalidation-v0-1">查看完整失效链与下一版admission contract →</Link></p></div>
       <div className="d1214p1-next-grid">
         <article><span>ALGORITHM</span><strong>inverse-depth gate</strong><p>正式 candidate 使用 reciprocal interpolation；linear Z 保留为 negative control。</p></article>
         <article><span>CONTROL ORACLE</span><strong>Position only</strong><p>Position 只验证 Vector/Depth source semantics，禁止影响 reconstruction decision。</p></article>
@@ -154,6 +156,6 @@ export default function ProjectiveDepthPositionOraclePage() {
       </div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.14-P1 Projective Instrument Repair</b></div><p>2 fresh renders · 14/14 development gates · scientific verdict null</p><Link href="/blender-material-owner-rigid-directional-render-holdout-v0-1">返回 H1 failure →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.14-P1 Projective Instrument Repair</b></div><p>2 fresh renders · 14/14 development gates · scientific verdict null</p><Link href="/blender-projective-depth-formal-invalidation-v0-1">继续 H2 invalidation →</Link></footer>
   </main>;
 }
