@@ -4563,3 +4563,15 @@ Release commit `e3237177ecf95a889a03fbfc43939be0fb964c5b` 与`origin/main` exact
 Final verdict为可信`BLOCKED_HOST_STABILITY`，18/20 gates通过。磁盘available 109,110,300,672 bytes，比112,206,020,608-byte稳定门少3,095,719,936 bytes。Codex tree RSS 4,306,321,408 bytes，比4 GiB ceiling高11,354,112 bytes；system-wide memory free仍为89%。进程观察为1 main、4 renderers、最大renderer 1,032,830,976 bytes、0 active Blender、0 B58 worker、0 browser automation。8个PPID-1 crashpad handlers只记录未清理。
 
 该结果不关闭Gate 0，也不授权B58 official run。下一动作是提交推送正式证据，然后只读定位至少约3.1 GB可重建缓存与Codex RSS来源；任何清理或进程处置必须精确到目标，且处置后使用新协议做readmission，绝不降低门槛。
+
+## J-339 · 精确缓存处置与B59-G0-R1 readmission预注册
+
+Date: 2026-08-28 · Type: AUTHORIZED CACHE REMEDIATION / READMISSION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+在正式blocked evidence commit `d115e5d` 推送后，只读容量定位发现LTX权重本体已经不存在，仅剩空lock；Hugging Face大目录实际为Qwen，因此未把Qwen冒充LTX删除。Colima约25 GiB且属于worker基础设施，也未改动。
+
+使用用户此前明确的缓存清理授权，精确删除六个可重建目标：pnpm store 1,784,520 KiB、Gradle caches 1,032,468 KiB、Bun install cache 715,804 KiB、npm `_npx` 210,528 KiB、npm logs 44 KiB及未运行DaVinci时的`~/Movies/CacheClip` 648,720 KiB。目标`du`合计4,497,494,016 bytes；没有相关包管理器/Resolve进程运行，没有模型、Colima、项目媒体或repo证据被删，也没有发送signal。第一次宽泛`rm -rf`命令被安全层拒绝且未产生变更，实际处置使用每个绝对目标限定的`find -depth -delete`并逐项验证消失。
+
+Formal baseline available为109,110,300,672 bytes；immediate post-cleanup为112,308,187,136 bytes，实测增加3,197,886,464 bytes，比不变的112,206,020,608-byte稳定门高102,166,528 bytes。非正式RSS复测为1 main、4 renderers、Codex tree 4,294,721,536 bytes，仅比4 GiB ceiling低245,760 bytes，因此不能据此宣告稳定。
+
+R1预注册全量复用20 gates、24 attacks及全部阈值，只允许同一runner/auditor新增显式repository-relative `--spec`选择，为fresh root `experiments/codex-host-stability-readmission-v0-1`执行。即使R1 admitted也只允许进入重复观察阶段，不关闭Gate 0、不授权B58。

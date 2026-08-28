@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "bfs.codex-host-stability-readmission.v0.1",
+  "experimentId": "B59-G0-R1",
+  "status": "PREREGISTERED",
+  "parentCommit": "d115e5da8cacddb9f03a427c554acf5cde50dde0",
+  "parentEvidence": {
+    "resultsPath": "experiments/codex-host-stability-baseline-v0-1/results.json",
+    "resultsSha256": "5a0132be20d5cc9de439bec3e848b3f89416de282706c2b443c42bb442b48c33",
+    "auditPath": "experiments/codex-host-stability-baseline-v0-1/audit.json",
+    "auditSha256": "06e54e79f7ec1fa7bb60a4cef69ef36830f8bab89bb6d213d6007962c45c4b43",
+    "verdict": "BLOCKED_HOST_STABILITY",
+    "failedGates": [
+      "DISK_STABILITY_MARGIN",
+      "CODEX_TREE_RSS"
+    ]
+  },
+  "remediation": {
+    "authorization": "User previously authorized cache cleanup; only exact reconstructible cache paths were removed.",
+    "removedTargets": [
+      { "path": "/Users/tianxing/Library/pnpm/store", "observedKiB": 1784520 },
+      { "path": "/Users/tianxing/.gradle/caches", "observedKiB": 1032468 },
+      { "path": "/Users/tianxing/.bun/install/cache", "observedKiB": 715804 },
+      { "path": "/Users/tianxing/.npm/_npx", "observedKiB": 210528 },
+      { "path": "/Users/tianxing/.npm/_logs", "observedKiB": 44 },
+      { "path": "/Users/tianxing/Movies/CacheClip", "observedKiB": 648720 }
+    ],
+    "declaredCacheBytes": 4497494016,
+    "formalBaselineAvailableBytes": 109110300672,
+    "immediatePostCleanupAvailableBytes": 112308187136,
+    "observedAvailableDeltaBytes": 3197886464,
+    "postCleanupHeadroomBytes": 102166528,
+    "modelsRemoved": 0,
+    "colimaMutations": 0,
+    "repositoryEvidenceRemoved": 0,
+    "processSignalsSent": 0
+  },
+  "crashEvidence": {
+    "sourcePath": "/Users/tianxing/.codex/attachments/656fcf6d-9c41-4778-97ed-025b6e0dfc43/pasted-text.txt",
+    "sha256": "035649c3c49d8d95385f5221f968fd2824132d30184399ab204341542ef6d4b8",
+    "bytes": 252628,
+    "lines": 1323,
+    "version": "26.820.80927 (7271)"
+  },
+  "formalRoot": "experiments/codex-host-stability-readmission-v0-1",
+  "toolPaths": {
+    "runner": "scripts/run-b59-g0-codex-host-stability-baseline.mjs",
+    "auditor": "scripts/audit-b59-g0-codex-host-stability-baseline.mjs"
+  },
+  "releasePaths": [
+    "specs/codex-host-stability-baseline.v0.1.json",
+    "specs/codex-host-stability-readmission.v0.1.json",
+    "research/2026-08-28-b59-g0-codex-host-stability-baseline-protocol.md",
+    "research/2026-08-28-b59-g0-readmission-protocol.md",
+    "scripts/run-b59-g0-codex-host-stability-baseline.mjs",
+    "scripts/audit-b59-g0-codex-host-stability-baseline.mjs"
+  ],
+  "resourcePolicy": {
+    "minimumCoreDiskReserveBytes": 107374182400,
+    "b58ProjectedWriteBytes": 536870912,
+    "additionalStabilityMarginBytes": 4294967296,
+    "minimumAvailableBytes": 112206020608,
+    "minimumMemoryFreePercent": 25,
+    "maximumCodexRendererCount": 6,
+    "maximumSingleRendererRssBytes": 1610612736,
+    "maximumCodexTreeRssBytes": 4294967296,
+    "maximumStdoutBytes": 8192,
+    "maximumReceiptBytes": 65536,
+    "maximumSnapshotAgeSecondsAtAudit": 300
+  },
+  "processPolicy": {
+    "requiredMainCodexProcessCount": 1,
+    "requiredActiveBlenderProcessCount": 0,
+    "requiredActiveB58WorkerProcessCount": 0,
+    "requiredBrowserAutomationProcessCount": 0
+  },
+  "formalCeilings": {
+    "blenderProcesses": 0,
+    "renderProcesses": 0,
+    "browserAutomationCalls": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "dockerCalls": 0,
+    "cleanupOperations": 0,
+    "signalsSent": 0,
+    "hostRestarts": 0,
+    "codexRestarts": 0,
+    "childProcesses": 12
+  },
+  "requiredGates": [
+    "SPEC_AND_PARENT_IDENTITY",
+    "FRESH_FORMAL_ROOT",
+    "CRASH_EVIDENCE_IDENTITY",
+    "CRASH_SIGNATURE_EXACT",
+    "CURRENT_CODEX_VERSION_EXACT",
+    "SNAPSHOT_FRESHNESS",
+    "DISK_STABILITY_MARGIN",
+    "MEMORY_PRESSURE",
+    "CODEX_MAIN_PROCESS_COUNT",
+    "CODEX_RENDERER_COUNT",
+    "SINGLE_RENDERER_RSS",
+    "CODEX_TREE_RSS",
+    "NO_ACTIVE_BLENDER",
+    "NO_ACTIVE_B58_WORKER",
+    "NO_BROWSER_AUTOMATION_PROCESS",
+    "RESOURCE_CEILINGS_ZERO",
+    "STDOUT_BOUNDED",
+    "RECEIPT_BOUNDED",
+    "RECEIPT_SELF_HASH",
+    "INDEPENDENT_AUDIT_REPLAY"
+  ],
+  "registeredAttacks": [
+    "A01_SPEC_SHA_MUTATION",
+    "A02_PARENT_COMMIT_MUTATION",
+    "A03_DIRTY_FORMAL_ROOT",
+    "A04_CRASH_REPORT_SHA_MUTATION",
+    "A05_CRASH_REPORT_BYTE_COUNT_MUTATION",
+    "A06_CRASH_THREAD_MUTATION",
+    "A07_CRASH_EXCEPTION_MUTATION",
+    "A08_CODEX_VERSION_MUTATION",
+    "A09_STALE_CAPTURE_TIME",
+    "A10_DISK_AVAILABLE_BELOW_MARGIN",
+    "A11_DISK_PROJECTION_MUTATION",
+    "A12_MEMORY_FREE_BELOW_FLOOR",
+    "A13_MAIN_PROCESS_COUNT_MUTATION",
+    "A14_RENDERER_COUNT_ABOVE_CEILING",
+    "A15_SINGLE_RENDERER_RSS_ABOVE_CEILING",
+    "A16_CODEX_TREE_RSS_ABOVE_CEILING",
+    "A17_ACTIVE_BLENDER_PROCESS",
+    "A18_ACTIVE_B58_WORKER",
+    "A19_BROWSER_AUTOMATION_PROCESS",
+    "A20_NONZERO_NETWORK_OR_MODEL_OR_DOCKER",
+    "A21_NONZERO_SIGNAL_OR_CLEANUP",
+    "A22_STDOUT_SIZE_ABOVE_CEILING",
+    "A23_RECEIPT_SIZE_ABOVE_CEILING",
+    "A24_RECEIPT_SELF_HASH_MUTATION"
+  ]
+}
