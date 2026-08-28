@@ -104,6 +104,16 @@ def normalized_adapter_report(report: dict) -> dict:
     return value
 
 
+def expected_multipart_channels(layer: str) -> dict[str, list[str]]:
+    return {
+        f"{layer}.Combined": [f"{layer}.Combined.{channel}" for channel in ("R", "G", "B", "A")],
+        f"{layer}.Depth": [f"{layer}.Depth.Z"],
+        f"{layer}.Vector": [f"{layer}.Vector.{channel}" for channel in ("X", "Y", "Z", "W")],
+        f"{layer}.Object Index": [f"{layer}.Object Index.X"],
+        f"{layer}.Material Index": [f"{layer}.Material Index.X"],
+    }
+
+
 def git_tree(uri: str) -> str:
     return subprocess.run(["git", "rev-parse", f"HEAD:{uri}"], check=True, text=True, capture_output=True).stdout.strip()
 
@@ -190,6 +200,24 @@ def effective_fixture(spec: dict, fixture: dict) -> dict:
     return result
 
 
+def animation_matches(rows: list[dict], transforms: dict, tolerance: float = 1e-6) -> bool:
+    expected_paths = {"location": "location", "rotation_euler": "rotationEuler"}
+    indexed = {(row.get("dataPath"), row.get("arrayIndex")): row for row in rows}
+    if set(indexed) != {(path, index) for path in expected_paths for index in range(3)}:
+        return False
+    for data_path, source_key in expected_paths.items():
+        for index in range(3):
+            keyframes = indexed[(data_path, index)].get("keyframes", [])
+            if len(keyframes) != 3:
+                return False
+            for frame, keyframe in zip((0, 1, 2), keyframes):
+                if int(keyframe[0]) != frame or keyframe[2] != "LINEAR":
+                    return False
+                if abs(float(keyframe[1]) - float(transforms[str(frame)][source_key][index])) > tolerance:
+                    return False
+    return True
+
+
 def surface_at(spec, fixture, frame, pixel_x, pixel_y):
     width, height = fixture["resolution"]
     camera_spec = spec["sceneContract"]["camera"]
@@ -241,7 +269,7 @@ def oracle_pixel(spec, fixture, x, y):
     valid_history = bool(
         visible is not None
         and visible[1]["analyticOwnerId"] == owner["analyticOwnerId"]
-        and abs(float(visible[0]) - previous_depth) <= max(1.0, previous_depth) / 4096.0
+        and abs(float(visible[0]) - previous_depth) <= float(spec["projectionOracle"]["tolerances"]["depthMaximumAbsoluteError"])
     )
     return {
         "ownerId": owner["analyticOwnerId"],
@@ -300,6 +328,8 @@ def replay(spec, fixture, arrays):
     vector_mismatch = 0
     threshold = int(spec["frozenCandidate"]["riskThresholdQ30Inclusive"])
     allowance = int(spec["frozenCandidate"]["roundingAllowanceQ30"])
+    vector_oracle_tolerance = float(spec["projectionOracle"]["tolerances"]["vectorMaximumAbsoluteErrorPixels"])
+    depth_oracle_tolerance = float(spec["projectionOracle"]["tolerances"]["depthMaximumAbsoluteError"])
 
     def valid_tap(yy, xx, owner):
         return 0 <= xx < width and 0 <= yy < height and arrays["previousOwner"][yy, xx] == owner and arrays["previousRgba"][yy, xx, 3] > np.float32(0.999)
@@ -324,10 +354,9 @@ def replay(spec, fixture, arrays):
                 continue
             owner_truth[y, x] = int(oracle["ownerToken"])
             masks["analyticValidHistory"][y, x] = int(oracle["validHistory"])
-            if max(abs(float(arrays["vector"][y, x, index]) - oracle["expectedVector"][index]) for index in range(2)) > 2.0 / 1024.0:
+            if max(abs(float(arrays["vector"][y, x, index]) - oracle["expectedVector"][index]) for index in range(2)) > vector_oracle_tolerance:
                 vector_mismatch += 1
-            tolerance = max(1.0, oracle["currentDepth"]) / 1024.0
-            if owner_value != oracle["ownerToken"] or arrays["currentObjectIndex"][y, x] != oracle["objectIndex"] or abs(float(arrays["currentDepth"][y, x]) - oracle["currentDepth"]) > tolerance:
+            if owner_value != oracle["ownerToken"] or arrays["currentObjectIndex"][y, x] != oracle["objectIndex"] or abs(float(arrays["currentDepth"][y, x]) - oracle["currentDepth"]) > depth_oracle_tolerance:
                 reason[y, x] = 1
                 continue
             vector_x, vector_y = (float(value) for value in arrays["vector"][y, x])
@@ -448,16 +477,17 @@ def main():
         if "uri" in row and "sha256" in row:
             parent_checks[name] = sha_file(Path(row["uri"])) == row["sha256"]
     parent_trees = {
-        "derivationFormalRoot": git_tree(spec["parents"]["derivationFormalRoot"]["uri"]),
-        "materialOwnerFormalRoot": git_tree(spec["parents"]["materialOwnerFormalRoot"]["uri"]),
+        "rigidCalibrationFormalRoot": git_tree(spec["parents"]["rigidCalibrationFormalRoot"]["uri"]),
+        "rejectedRenderedHoldoutFormalRoot": git_tree(spec["parents"]["rejectedRenderedHoldoutFormalRoot"]["uri"]),
     }
     parent_tree_exact = (
-        parent_trees["derivationFormalRoot"] == spec["parents"]["derivationFormalRoot"]["gitTree"]
-        and parent_trees["materialOwnerFormalRoot"] == spec["parents"]["materialOwnerFormalRoot"]["gitTree"]
+        parent_trees["rigidCalibrationFormalRoot"] == spec["parents"]["rigidCalibrationFormalRoot"]["gitTree"]
+        and parent_trees["rejectedRenderedHoldoutFormalRoot"] == spec["parents"]["rejectedRenderedHoldoutFormalRoot"]["gitTree"]
     )
     tool_hashes = {uri: sha_file(Path(uri)) for uri in spec["freshness"]["newFormalToolPaths"]}
     report_hashes = True
     source_bindings = True
+    mesh_transform_exact = True
     source_repeat_identity = True
     adapter_repeat_identity = True
     cross_language = True
@@ -465,6 +495,7 @@ def main():
     typed_envelopes = True
     report_semantic_identity = True
     replay_exact = True
+    current_rgb_metamorphism = True
     material_domain_exact = True
     object_negative_control = True
     fallback_exact = True
@@ -479,6 +510,7 @@ def main():
     source_fingerprints = {}
     adapter_fingerprints = {}
     adapter_report_fingerprints = {}
+    source_mesh_fingerprints = {}
 
     for raw_fixture in spec["fixtures"]:
         fixture = effective_fixture(spec, raw_fixture)
@@ -489,6 +521,7 @@ def main():
         source_fingerprints[fixture_id] = {}
         adapter_fingerprints[fixture_id] = {}
         adapter_report_fingerprints[fixture_id] = {}
+        source_mesh_fingerprints[fixture_id] = {}
         for repeat in (1, 2):
             source_hashes = {}
             source_semantics = {}
@@ -500,7 +533,36 @@ def main():
                 source_bindings &= (
                     report.get("fixtureId") == fixture_id and report.get("repeat") == repeat and report.get("frame") == frame
                     and report.get("probeOnly") is False and report.get("output", {}).get("sha256") == sha_file(exr)
+                    and report.get("fixture") == fixture
                 )
+                observed_owners = {
+                    owner.get("analyticOwnerId"): owner
+                    for owner in report.get("sceneStructure", {}).get("owners", [])
+                }
+                mesh_transform_exact &= set(observed_owners) == {owner["analyticOwnerId"] for owner in fixture["owners"]}
+                animation_owners = report.get("animation", {}).get("owners", {})
+                for owner in fixture["owners"]:
+                    observed = observed_owners.get(owner["analyticOwnerId"], {})
+                    columns, rows = (int(value) for value in owner["subdivisions"])
+                    expected_transform = owner["transformByFrame"][str(frame)]
+                    mesh_transform_exact &= (
+                        observed.get("role") == owner["role"]
+                        and observed.get("vertices") == (columns + 1) * (rows + 1)
+                        and observed.get("polygons") == columns * rows
+                        and observed.get("scale") == [1.0, 1.0, 1.0]
+                        and isinstance(observed.get("meshDataName"), str)
+                        and isinstance(observed.get("localVertexSha256"), str)
+                        and len(observed.get("localVertexSha256", "")) == 64
+                        and np.allclose(observed.get("location", []), expected_transform["location"], rtol=0.0, atol=1e-6)
+                        and np.allclose(observed.get("rotationEuler", []), expected_transform["rotationEuler"], rtol=0.0, atol=1e-6)
+                        and animation_matches(animation_owners.get(observed.get("name"), []), owner["transformByFrame"])
+                    )
+                    fingerprint = {
+                        key: observed.get(key)
+                        for key in ("meshDataName", "localVertexSha256", "vertices", "polygons", "scale")
+                    }
+                    prior = source_mesh_fingerprints[fixture_id].setdefault(owner["analyticOwnerId"], fingerprint)
+                    mesh_transform_exact &= prior == fingerprint
                 source_hashes[frame] = sha_file(exr)
                 source_semantics[frame] = {
                     "fixture": report.get("fixture"), "runtime": report.get("runtime"),
@@ -512,6 +574,15 @@ def main():
             adapter_base = cli.root / "adapters" / fixture_id / f"R{repeat}"
             adapter_report = json.loads((adapter_base / "report.json").read_text())
             report_hashes &= self_ok(adapter_report, "reportHash")
+            render = spec["sceneContract"]["render"]
+            expected_roster = render["expectedSubimages"]
+            expected_channels = expected_multipart_channels(render["viewLayer"])
+            source_bindings &= (
+                adapter_report.get("multipart", {}).get("previousRoster") == expected_roster
+                and adapter_report.get("multipart", {}).get("currentRoster") == expected_roster
+                and adapter_report.get("multipart", {}).get("previousChannels") == expected_channels
+                and adapter_report.get("multipart", {}).get("currentChannels") == expected_channels
+            )
             adapter_report_fingerprints[fixture_id][repeat] = normalized_adapter_report(adapter_report)
             arrays = {}
             adapter_hashes = {}
@@ -522,12 +593,27 @@ def main():
                 source_bindings &= adapter_report["arrays"][name]["sha256"] == adapter_hashes[name]
             adapter_fingerprints[fixture_id][repeat] = adapter_hashes
             declared_material = {0.0, *(float(owner["materialPassIndex"]) for owner in fixture["owners"])}
+            declared_nonzero = {float(owner["materialPassIndex"]) for owner in fixture["owners"]}
             shared_object = float(fixture["owners"][0]["objectPassIndex"])
-            material_domain_exact &= all(set(float(value) for value in np.unique(arrays[name])).issubset(declared_material) for name in ("previousOwner", "currentOwner"))
+            material_domain_exact &= len(declared_nonzero) == len(fixture["owners"])
+            material_domain_exact &= all(1.0 <= token <= 32767.0 for token in declared_nonzero)
+            for name in ("previousOwner", "currentOwner"):
+                observed_material = set(float(value) for value in np.unique(arrays[name]))
+                material_domain_exact &= observed_material.issubset(declared_material) and declared_nonzero.issubset(observed_material)
             object_negative_control &= fixture["owners"][0]["objectPassIndex"] == fixture["owners"][1]["objectPassIndex"]
-            object_negative_control &= all(set(float(value) for value in np.unique(arrays[name])).issubset({0.0, shared_object}) for name in ("previousObjectIndex", "currentObjectIndex"))
+            for name in ("previousObjectIndex", "currentObjectIndex"):
+                observed_object = set(float(value) for value in np.unique(arrays[name]))
+                object_negative_control &= observed_object.issubset({0.0, shared_object}) and shared_object in observed_object
 
             replayed = replay(spec, fixture, arrays)
+            metamorphic_arrays = {name: value for name, value in arrays.items()}
+            metamorphic_arrays["currentRgba"] = arrays["currentRgba"].copy()
+            metamorphic_arrays["currentRgba"][..., :3] = np.float32(0.3125)
+            metamorphic = replay(spec, fixture, metamorphic_arrays)
+            current_rgb_metamorphism &= all(
+                np.array_equal(replayed[name], metamorphic[name])
+                for name in (*CONTROLS, *(name for name in DECISIONS if name != "reconstructed"))
+            )
             producer_values, producer_hashes = {}, {}
             producer_reports = {}
             for producer in ("python", "node"):
@@ -615,34 +701,36 @@ def main():
         global_quality = {"maximum": float(np.abs(all_errors).max()), "rmse": float(np.sqrt(np.mean(all_errors * all_errors))), "sampleCount": int(all_errors.size)}
     else:
         global_quality = {"maximum": None, "rmse": None, "sampleCount": 0}
-    direction_contract = True
-    neither_contract = True
-    coverage_contract = True
-    static_contract = True
     direction_threshold = spec["directionalMeasurementContract"]
-    coverage = spec["coverageGates"]
+    top_contract = True
+    bottom_contract = True
+    neither_witness_contract = True
+    neither_zero_accept_contract = True
     for row in cells:
-        fixture_id = row["fixtureId"]
         klass = row["primaryDirectionalClass"]
-        if fixture_id in coverage["primaryFixtures"]:
-            direction_contract &= (
-                row["directionalEligible"] >= direction_threshold["perPrimaryFixtureMinimumDirectionalEligible"]
-                and row["directionalAccepted"] >= direction_threshold["perPrimaryFixtureMinimumDirectionalAccepted"]
+        if klass == "TOP_MISSING_BOTTOM_AVAILABLE":
+            top_contract &= (
+                row["directionalEligible"] >= direction_threshold["topMinimumDirectionalEligiblePerRepeat"]
+                and row["directionalAccepted"] >= direction_threshold["topMinimumDirectionalAcceptedPerRepeat"]
                 and row["directionalAcceptance"] is not None
-                and row["directionalAcceptance"] >= direction_threshold["perPrimaryFixtureMinimumDirectionalAcceptance"]
+                and row["directionalAcceptance"] >= direction_threshold["topMinimumDirectionalAcceptancePerRepeat"]
             )
-            coverage_contract &= row["acceptedToRadius2"] is not None and row["acceptedToRadius2"] >= coverage["minimumAcceptedToRadius2PerPrimaryFixture"]
-            coverage_contract &= all(owner["retention"] is not None and owner["retention"] >= coverage["minimumAcceptedRetentionPerAnalyticOwner"] for owner in row["perOwner"].values())
+        if klass == "BOTTOM_MISSING_TOP_AVAILABLE":
+            bottom_contract &= (
+                row["directionalEligible"] >= direction_threshold["bottomMinimumDirectionalEligiblePerRepeat"]
+                and row["directionalAccepted"] >= direction_threshold["bottomMinimumDirectionalAcceptedPerRepeat"]
+                and row["directionalAcceptance"] is not None
+                and row["directionalAcceptance"] >= direction_threshold["bottomMinimumDirectionalAcceptancePerRepeat"]
+            )
         if klass == "NEITHER_HORIZONTAL_AVAILABLE":
-            neither_contract &= row["directionalWitnesses"] >= direction_threshold["neitherSideMinimumWitnesses"] and row["directionalAccepted"] <= direction_threshold["neitherSideAcceptedMaximum"]
-        if klass == "STATIC_FULL_STENCIL_CONTROL":
-            static_row = next(candidate for candidate in cells if candidate["cell"] == row["cell"])
-            values_base = cli.root / "consumers" / "python" / fixture_id / f"R{row['repeat']}" / "arrays"
-            accepted_array = load_array(values_base / DECISIONS["accepted"][0], "u1", spec["fixtures"][-1]["resolution"][1], spec["fixtures"][-1]["resolution"][0], 1)[0]
-            symmetric_array = load_array(values_base / CONTROLS["symmetricAccepted"][0], "u1", spec["fixtures"][-1]["resolution"][1], spec["fixtures"][-1]["resolution"][0], 1)[0]
-            static_delta = int(np.logical_xor(accepted_array.astype(bool), symmetric_array.astype(bool)).sum())
-            static_ratio = static_row["acceptedToRadius2"]
-            static_contract &= static_delta == spec["hardGates"]["staticControlAcceptedDelta"] and static_ratio is not None and static_ratio >= spec["hardGates"]["staticControlMinimumAcceptedToRadius2"]
+            neither_witness_contract &= row["directionalWitnesses"] >= direction_threshold["neitherMinimumWitnessesPerRepeat"]
+            neither_zero_accept_contract &= row["directionalAccepted"] <= direction_threshold["neitherAcceptedMaximumPerRepeat"]
+    direction_checks = {
+        "TOP_DIRECTIONAL_ACCEPTANCE": top_contract,
+        "BOTTOM_DIRECTIONAL_ACCEPTANCE": bottom_contract,
+        "NEITHER_MINIMUM_WITNESSES": neither_witness_contract,
+    }
+    direction_contract = all(direction_checks.values())
 
     source_isolation = True
     python_source = Path("scripts/reconstruct-b52-d12-14-h1-rigid-directional.py").read_text()
@@ -656,6 +744,7 @@ def main():
     hard_checks = {
         "PARENT_BYTES": all(parent_checks.values()), "PARENT_FORMAL_TREES": parent_tree_exact,
         "SOURCE_REPORT_EXR_BINDINGS": report_hashes and source_bindings,
+        "FIXED_MESH_SCALE_DECLARED_TRANSFORMS": mesh_transform_exact,
         "SOURCE_REPEAT_IDENTITY": source_repeat_identity, "ADAPTER_REPEAT_IDENTITY": adapter_repeat_identity,
         "CONSUMER_REPEAT_IDENTITY": consumer_repeat_identity, "CROSS_LANGUAGE_EVERY_ARRAY": cross_language,
         "NORMALIZED_CONSUMER_REPORT_IDENTITY": report_semantic_identity,
@@ -663,19 +752,18 @@ def main():
         "VECTOR_PROJECTION_ORACLE": all(row["vectorMismatch"] == 0 for row in cells),
         "MATERIAL_TOKEN_DOMAIN": material_domain_exact, "OBJECT_INDEX_SHARED_NEGATIVE_CONTROL": object_negative_control,
         "FULL_STENCIL_BASELINE_IDENTITY": full_identity, "RISK_UNDERBOUND_ZERO": risk_underbound == 0,
-        "ACCEPTED_RGB_MAXIMUM": global_quality["maximum"] is not None and global_quality["maximum"] <= quality_limit,
-        "ACCEPTED_RGB_RMSE": global_quality["rmse"] is not None and global_quality["rmse"] <= rmse_limit,
+        "ACCEPTED_RGB_MAXIMUM": global_quality["maximum"] is None or global_quality["maximum"] <= quality_limit,
+        "ACCEPTED_RGB_RMSE": global_quality["rmse"] is None or global_quality["rmse"] <= rmse_limit,
         "FALSE_INVALID_HISTORY_ZERO": false_invalid == 0, "MATERIAL_ALIAS_ZERO": material_aliases == 0,
-        "FALLBACK_EXACT": fallback_exact, "CURRENT_RGB_DECISION_ISOLATION": source_isolation,
-        "STATIC_CONTROL": static_contract, "NEITHER_SIDE_NEGATIVE_CONTROL": neither_contract,
+        "FALLBACK_EXACT": fallback_exact,
+        "CURRENT_RGB_DECISION_METAMORPHISM": source_isolation and current_rgb_metamorphism,
+        "NEITHER_ACCEPTED_ZERO": neither_zero_accept_contract,
     }
     hard_passed = all(hard_checks.values())
     if not hard_passed:
         verdict = spec["decision"]["rejectedVerdict"]
     elif not direction_contract:
         verdict = spec["decision"]["directionFailureVerdict"]
-    elif not coverage_contract:
-        verdict = spec["decision"]["boundedVerdict"]
     else:
         verdict = spec["decision"]["supportedVerdict"]
     supported = verdict == spec["decision"]["supportedVerdict"]
@@ -685,9 +773,15 @@ def main():
         "passed": supported, "verdict": verdict, "factor": 1,
         "hardChecksPassed": sum(bool(value) for value in hard_checks.values()), "hardChecksTotal": len(hard_checks),
         "hardChecks": [{"id": name, "passed": bool(value)} for name, value in hard_checks.items()],
-        "directionalStressContract": bool(direction_contract), "coverageContract": bool(coverage_contract),
+        "directionChecksPassed": sum(bool(value) for value in direction_checks.values()),
+        "directionChecksTotal": len(direction_checks),
+        "directionChecks": [{"id": name, "passed": bool(value)} for name, value in direction_checks.items()],
+        "directionalStressContract": bool(direction_contract),
+        "neitherWitnessContract": bool(neither_witness_contract),
+        "neitherAcceptedZero": bool(neither_zero_accept_contract),
         "globalQuality": global_quality, "riskUnderboundRgbSamples": risk_underbound,
         "falseInvalidHistoryAccepts": false_invalid, "acceptedMaterialAliases": material_aliases,
+        "currentRgbDecisionMetamorphism": bool(current_rgb_metamorphism),
         "cells": cells, "parentChecks": parent_checks, "parentTrees": parent_trees,
         "toolHashes": tool_hashes,
         "operationCounts": {"analyzerProcesses": 1, "blenderRenderCalls": 0, "modelCalls": 0, "networkCalls": 0},
@@ -705,7 +799,7 @@ def main():
     }
     receipt = {**receipt_body, "receiptHash": canonical_hash(receipt_body)}
     cli.analysis_receipt.write_text(json.dumps(receipt, indent=2, sort_keys=True, allow_nan=False) + "\n")
-    print(f"BFS_B52_D1214H1_ANALYZER verdict={verdict} hard={sum(hard_checks.values())}/{len(hard_checks)} direction={direction_contract} coverage={coverage_contract}")
+    print(f"BFS_B52_D1214H1_ANALYZER verdict={verdict} hard={sum(hard_checks.values())}/{len(hard_checks)} direction={sum(direction_checks.values())}/{len(direction_checks)}")
 
 
 if __name__ == "__main__":

@@ -86,12 +86,12 @@ def main():
         subprocess.run(["git", "diff", "--quiet", "HEAD", "--", uri], check=True)
         subprocess.run(["git", "ls-files", "--error-unmatch", uri], check=True, stdout=subprocess.DEVNULL)
     parent_trees_before = {
-        "derivationFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['derivationFormalRoot']['uri']}"),
-        "materialOwnerFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['materialOwnerFormalRoot']['uri']}"),
+        "rigidCalibrationFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['rigidCalibrationFormalRoot']['uri']}"),
+        "rejectedRenderedHoldoutFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['rejectedRenderedHoldoutFormalRoot']['uri']}"),
     }
     if parent_trees_before != {
-        "derivationFormalRoot": spec["parents"]["derivationFormalRoot"]["gitTree"],
-        "materialOwnerFormalRoot": spec["parents"]["materialOwnerFormalRoot"]["gitTree"],
+        "rigidCalibrationFormalRoot": spec["parents"]["rigidCalibrationFormalRoot"]["gitTree"],
+        "rejectedRenderedHoldoutFormalRoot": spec["parents"]["rejectedRenderedHoldoutFormalRoot"]["gitTree"],
     }:
         raise RuntimeError("D12.14-H1 parent formal tree mismatch")
     free_bytes = shutil.disk_usage(Path.cwd()).free
@@ -170,7 +170,7 @@ def main():
         "--output", str(result_path), "--analysis-receipt", str(analysis_receipt_path),
     ]
     children.append(spawn(analyzer_command, "analyzer", environment))
-    if len(children) != 109:
+    if len(children) != 55:
         raise RuntimeError(f"D12.14-H1 pre-audit process roster mismatch: {len(children)}")
 
     execution_plan_path = cli.root / "execution-plan.json"
@@ -205,8 +205,8 @@ def main():
     }
     children.append(audit_row)
     parent_trees_after = {
-        "derivationFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['derivationFormalRoot']['uri']}"),
-        "materialOwnerFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['materialOwnerFormalRoot']['uri']}"),
+        "rigidCalibrationFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['rigidCalibrationFormalRoot']['uri']}"),
+        "rejectedRenderedHoldoutFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['rejectedRenderedHoldoutFormalRoot']['uri']}"),
     }
     execution_body = {
         "schemaVersion": "bfs.blenderMaterialOwnerRigidDirectionalRenderHoldoutExecution.v0.1",

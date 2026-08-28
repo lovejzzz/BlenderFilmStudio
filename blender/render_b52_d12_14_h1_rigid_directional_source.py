@@ -269,16 +269,22 @@ def setup(spec: dict, fixture: dict, frame: int, repeat: int):
     return scene, camera, owners
 
 
-def owner_structure(owner: bpy.types.Object) -> dict:
+def owner_structure(owner: bpy.types.Object, owner_spec: dict) -> dict:
     material = owner.data.materials[0]
+    local_vertices = [[float(value) for value in vertex.co] for vertex in owner.data.vertices]
     return {
+        "analyticOwnerId": owner_spec["analyticOwnerId"],
+        "role": owner_spec["role"],
         "name": owner.name,
+        "meshDataName": owner.data.name,
+        "localVertexSha256": canonical_hash(local_vertices),
         "objectPassIndex": int(owner.pass_index),
         "materialPassIndex": int(material.pass_index),
         "vertices": len(owner.data.vertices),
         "polygons": len(owner.data.polygons),
         "location": [float(value) for value in owner.location],
         "rotationEuler": [float(value) for value in owner.rotation_euler],
+        "scale": [float(value) for value in owner.scale],
         "material": material.name,
         "materialNodes": sorted(node.name for node in material.node_tree.nodes),
     }
@@ -333,7 +339,7 @@ def main() -> None:
                 "location": [float(value) for value in camera.location],
                 "rotationEuler": [float(value) for value in camera.rotation_euler],
             },
-            "owners": [owner_structure(owner) for owner in owners],
+            "owners": [owner_structure(owner, owner_spec) for owner, owner_spec in zip(owners, fixture["owners"])],
         },
         "animation": {"camera": action_rows(camera), "owners": {owner.name: action_rows(owner) for owner in owners}},
         "passState": {

@@ -199,7 +199,7 @@ function oraclePixel(spec, fixture, x, y) {
   const validHistory = Boolean(
     visible
     && visible[1].analyticOwnerId === owner.analyticOwnerId
-    && Math.abs(visible[0] - previousDepth) <= Math.max(1, previousDepth) / 4096,
+    && Math.abs(visible[0] - previousDepth) <= Number(spec.projectionOracle.tolerances.depthMaximumAbsoluteError),
   );
   return {
     ownerToken: Math.fround(owner.materialPassIndex),
@@ -296,6 +296,7 @@ function main() {
   const reconstructed = new Float32Array(arrays.currentRgba);
   const threshold = Number(spec.frozenCandidate.riskThresholdQ30Inclusive);
   const allowance = BigInt(spec.frozenCandidate.roundingAllowanceQ30);
+  const depthOracleTolerance = Number(spec.projectionOracle.tolerances.depthMaximumAbsoluteError);
   const rgba = (pixel, channel) => pixel * 4 + channel;
   const xy = (pixel, channel) => pixel * 2 + channel;
   const rgb = (pixel, channel) => pixel * 3 + channel;
@@ -329,11 +330,10 @@ function main() {
         continue;
       }
       masks.analyticValidHistory[pixel] = Number(oracle.validHistory);
-      const tolerance = Math.max(1, oracle.currentDepth) / 1024;
       if (
         ownerValue !== oracle.ownerToken
         || arrays.currentObjectIndex[pixel] !== oracle.objectIndex
-        || Math.abs(arrays.currentDepth[pixel] - oracle.currentDepth) > tolerance
+        || Math.abs(arrays.currentDepth[pixel] - oracle.currentDepth) > depthOracleTolerance
       ) {
         reason[pixel] = 1;
         continue;

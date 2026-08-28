@@ -206,7 +206,7 @@ def oracle_pixel(spec: dict, fixture: dict, x: int, y: int):
     valid_history = bool(
         visible is not None
         and visible[1]["analyticOwnerId"] == owner["analyticOwnerId"]
-        and abs(float(visible[0]) - previous_depth) <= max(1.0, previous_depth) / 4096.0
+        and abs(float(visible[0]) - previous_depth) <= float(spec["projectionOracle"]["tolerances"]["depthMaximumAbsoluteError"])
     )
     return {
         "ownerId": owner["analyticOwnerId"],
@@ -309,6 +309,7 @@ def main() -> None:
     reconstructed = arrays["currentRgba"].copy()
     threshold = int(spec["frozenCandidate"]["riskThresholdQ30Inclusive"])
     allowance = int(spec["frozenCandidate"]["roundingAllowanceQ30"])
+    depth_oracle_tolerance = float(spec["projectionOracle"]["tolerances"]["depthMaximumAbsoluteError"])
 
     for y in range(height):
         for x in range(width):
@@ -321,8 +322,7 @@ def main() -> None:
                 reason[y, x] = 1
                 continue
             masks["analyticValidHistory"][y, x] = int(oracle["validHistory"])
-            tolerance = max(1.0, oracle["currentDepth"]) / 1024.0
-            if owner_value != oracle["ownerToken"] or arrays["currentObjectIndex"][y, x] != oracle["objectIndex"] or abs(float(arrays["currentDepth"][y, x]) - oracle["currentDepth"]) > tolerance:
+            if owner_value != oracle["ownerToken"] or arrays["currentObjectIndex"][y, x] != oracle["objectIndex"] or abs(float(arrays["currentDepth"][y, x]) - oracle["currentDepth"]) > depth_oracle_tolerance:
                 reason[y, x] = 1
                 continue
             vector_x, vector_y = (float(value) for value in arrays["vector"][y, x])

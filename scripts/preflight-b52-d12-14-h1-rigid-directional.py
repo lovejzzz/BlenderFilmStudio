@@ -95,6 +95,56 @@ def synthetic_direction_checks():
     return passed and arithmetic, {"cases": observed, "riskExampleQ30": risk, "riskExpectedQ30": 3328}
 
 
+def effective_fixture(spec: dict, fixture: dict) -> dict:
+    camera = spec["sceneContract"]["camera"]
+    result = {
+        **fixture,
+        "cameraByFrame": {
+            frame: {"location": camera["locationByFrame"][frame], "rotationEuler": camera["rotationEulerByFrame"][frame]}
+            for frame in ("0", "1", "2")
+        },
+    }
+    owners = []
+    for row in fixture["owners"]:
+        owner = dict(row)
+        if owner["role"] == "background":
+            background = spec["sceneContract"]["background"]
+            owner.update({
+                "sizeWorld": background["sizeWorld"],
+                "subdivisions": background["subdivisions"],
+                "transformByFrame": background["transformByFrame"],
+            })
+        else:
+            owner["sizeWorld"] = spec["sceneContract"]["foreground"]["sizeWorld"]
+        owners.append(owner)
+    result["owners"] = owners
+    return result
+
+
+def animation_matches(rows: list[dict], transforms: dict, tolerance: float = 1e-6) -> bool:
+    expected_paths = {"location": "location", "rotation_euler": "rotationEuler"}
+    indexed = {(row.get("dataPath"), row.get("arrayIndex")): row for row in rows}
+    if set(indexed) != {(path, index) for path in expected_paths for index in range(3)}:
+        return False
+    for data_path, source_key in expected_paths.items():
+        for index in range(3):
+            keyframes = indexed[(data_path, index)].get("keyframes", [])
+            if len(keyframes) != 3:
+                return False
+            for frame, keyframe in zip((0, 1, 2), keyframes):
+                if int(keyframe[0]) != frame or keyframe[2] != "LINEAR":
+                    return False
+                if abs(float(keyframe[1]) - float(transforms[str(frame)][source_key][index])) > tolerance:
+                    return False
+    return True
+
+
+def vectors_close(observed, expected, tolerance: float = 1e-6) -> bool:
+    return len(observed or []) == len(expected) and all(
+        abs(float(left) - float(right)) <= tolerance for left, right in zip(observed, expected)
+    )
+
+
 def arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("--spec", type=Path, required=True)
@@ -125,12 +175,12 @@ def main():
     }
     parent_checks = {name: sha_file(Path(row["uri"])) == row["sha256"] for name, row in spec["parents"].items() if "uri" in row and "sha256" in row}
     parent_trees = {
-        "derivationFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['derivationFormalRoot']['uri']}"),
-        "materialOwnerFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['materialOwnerFormalRoot']['uri']}"),
+        "rigidCalibrationFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['rigidCalibrationFormalRoot']['uri']}"),
+        "rejectedRenderedHoldoutFormalRoot": git("rev-parse", f"HEAD:{spec['parents']['rejectedRenderedHoldoutFormalRoot']['uri']}"),
     }
     parent_tree_exact = parent_trees == {
-        "derivationFormalRoot": spec["parents"]["derivationFormalRoot"]["gitTree"],
-        "materialOwnerFormalRoot": spec["parents"]["materialOwnerFormalRoot"]["gitTree"],
+        "rigidCalibrationFormalRoot": spec["parents"]["rigidCalibrationFormalRoot"]["gitTree"],
+        "rejectedRenderedHoldoutFormalRoot": spec["parents"]["rejectedRenderedHoldoutFormalRoot"]["gitTree"],
     }
     syntax_commands = [
         [spec["runtime"]["python"]["executable"], "-m", "py_compile", *[uri for uri in spec["freshness"]["newFormalToolPaths"] if uri.endswith(".py")]],
@@ -159,6 +209,11 @@ def main():
                 "passes": report.get("passState"), "ownerCount": len(owners),
                 "materialTokens": sorted(owner.get("materialPassIndex") for owner in owners),
                 "objectTokens": sorted(set(owner.get("objectPassIndex") for owner in owners)),
+                "fixture": report.get("fixture"),
+                "camera": report.get("sceneStructure", {}).get("camera"),
+                "ownerStructures": owners,
+                "cameraAnimation": report.get("animation", {}).get("camera", []),
+                "ownerAnimations": report.get("animation", {}).get("owners", {}),
             })
     synthetic_passed, synthetic = synthetic_direction_checks()
     python_source = Path("scripts/reconstruct-b52-d12-14-h1-rigid-directional.py").read_text()
@@ -166,13 +221,38 @@ def main():
     rgb_isolation = all(fragment not in python_source for fragment in ("currentRgba\"][y, x, 0", "currentRgba\"][y, x, 1", "currentRgba\"][y, x, 2"))
     rgb_isolation &= all(fragment not in node_source for fragment in ("currentRgba[rgba(pixel, 0)]", "currentRgba[rgba(pixel, 1)]", "currentRgba[rgba(pixel, 2)]"))
     probe_exact = len(probe_reports) == len(spec["fixtures"])
-    for fixture, probe in zip(spec["fixtures"], probe_reports):
+    for raw_fixture, probe in zip(spec["fixtures"], probe_reports):
+        fixture = effective_fixture(spec, raw_fixture)
         probe_exact &= (
             probe["fixtureId"] == fixture["id"] and probe["selfHash"] and probe["probeOnly"] and probe["zeroRender"]
             and probe["ownerCount"] == 2
             and probe["materialTokens"] == sorted(owner["materialPassIndex"] for owner in fixture["owners"])
             and probe["objectTokens"] == [fixture["owners"][0]["objectPassIndex"]]
+            and probe["fixture"] == fixture
             and all(probe["passes"].get(name) is True for name in ("Combined", "Depth", "Vector", "Object Index", "Material Index"))
+        )
+        observed_owners = {owner.get("analyticOwnerId"): owner for owner in probe["ownerStructures"]}
+        probe_exact &= set(observed_owners) == {owner["analyticOwnerId"] for owner in fixture["owners"]}
+        for owner in fixture["owners"]:
+            observed = observed_owners.get(owner["analyticOwnerId"], {})
+            columns, rows = (int(value) for value in owner["subdivisions"])
+            transform = owner["transformByFrame"]["1"]
+            probe_exact &= (
+                observed.get("role") == owner["role"]
+                and observed.get("vertices") == (columns + 1) * (rows + 1)
+                and observed.get("polygons") == columns * rows
+                and observed.get("scale") == [1.0, 1.0, 1.0]
+                and isinstance(observed.get("meshDataName"), str)
+                and len(observed.get("localVertexSha256", "")) == 64
+                and vectors_close(observed.get("location"), transform["location"])
+                and vectors_close(observed.get("rotationEuler"), transform["rotationEuler"])
+                and animation_matches(probe["ownerAnimations"].get(observed.get("name"), []), owner["transformByFrame"])
+            )
+        camera_transform = fixture["cameraByFrame"]["1"]
+        probe_exact &= (
+            vectors_close(probe["camera"].get("location"), camera_transform["location"])
+            and vectors_close(probe["camera"].get("rotationEuler"), camera_transform["rotationEuler"])
+            and animation_matches(probe["cameraAnimation"], fixture["cameraByFrame"])
         )
     free_bytes = shutil.disk_usage(Path.cwd()).free
     required = int(spec["diskAdmission"]["minimumReserveBytesAfterProjectedWrite"]) + int(spec["diskAdmission"]["projectedWriteBytes"])
