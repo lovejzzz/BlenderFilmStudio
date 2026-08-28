@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorVerifierAccountingCorrection.v0.1",
+  "correctionId": "B58-E1-C1",
+  "status": "PREREGISTERED_BEFORE_ORCHESTRATOR_FORMAL_TOOLING_OR_OUTPUT",
+  "date": "2026-08-28",
+  "parentPreregistration": {
+    "experimentId": "B58-E1",
+    "commit": "9fe37d7c8b3d2e6b3ea522ba9c2e4515a100d99b",
+    "spec": { "uri": "specs/restart-safe-production-orchestrator.v0.1.json", "sha256": "a1ea52598d66263989c56f9737917b7ff297122b6731ec31d6f535cacc32cf41" },
+    "protocol": { "uri": "research/2026-08-28-b58-e1-restart-safe-production-orchestrator-protocol.md", "sha256": "50c3d8f8e61ea894e4dadf0d1f2a2ff92e793de56bacfe1f2d01d48951d35f81" }
+  },
+  "defect": {
+    "class": "PREREGISTERED_PROCESS_ACCOUNTING_CATEGORY_AMBIGUITY",
+    "finding": "The parent text requires the post-compile recovery to run the preferred production verifier while starting zero additional Blender processes. The frozen verifier necessarily starts one separate Blender artifact-audit process, so the literal conjunction is impossible even when no compile is repeated.",
+    "discoveredBefore": ["production orchestrator implementation", "official preflight", "formal output", "B58 Blender process"],
+    "notAScientificOutcome": true
+  },
+  "frozenVerifierFacts": {
+    "uri": "scripts/verify-production-compile-receipt.mjs",
+    "sha256": "80a719e19f6c71eeb878b946d767f40b4142d80a91c0f28253c4f1b26f7860c9",
+    "preferredAlias": "npm run verify:production-receipt --",
+    "perSuccessfulInvocation": {
+      "preferredVerifierCliProcesses": 1,
+      "currentReceiptVerifierNodeChildren": 1,
+      "artifactAuditBlenderProcesses": 1,
+      "nativeCompileBlenderProcesses": 0
+    },
+    "artifactAuditCommand": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python blender/audit_compiled_artifact.py"
+  },
+  "authorizedCorrection": {
+    "scope": "Replace ambiguous aggregate Blender wording with disjoint native-compile and artifact-audit process categories everywhere the parent matrix, gate and operation ceiling are interpreted.",
+    "parentGateReplaced": "RECOVERY_STARTS_ZERO_ADDITIONAL_BLENDER_AFTER_COMPILE_CHECKPOINT",
+    "effectiveGate": "RECOVERY_STARTS_ZERO_ADDITIONAL_NATIVE_COMPILE_BLENDER_AFTER_COMPILE_CHECKPOINT",
+    "postCompileRecovery": {
+      "additionalProductionCompilerStarts": 0,
+      "additionalNativeCompileBlenderStarts": 0,
+      "preferredVerifierStarts": 1,
+      "currentReceiptVerifierNodeChildren": 1,
+      "artifactAuditBlenderStarts": 1
+    },
+    "effectiveOperationCeilings": {
+      "productionCompilerStarts": 4,
+      "nativeCompileBlenderStarts": 4,
+      "successfulNativeCompiles": 3,
+      "controlledInterruptedNativeCompiles": 1,
+      "preferredVerifierStarts": 3,
+      "currentReceiptVerifierNodeChildren": 3,
+      "artifactAuditBlenderStarts": 3,
+      "totalBlenderStarts": 7,
+      "renderCalls": 0,
+      "modelCalls": 0,
+      "networkCalls": 0,
+      "dockerProcesses": 0
+    },
+    "effectiveMatrixInterpretation": {
+      "BASELINE_B01": "one native compile Blender plus one artifact-audit Blender",
+      "ORCHESTRATOR_EXIT_AFTER_COMPILE_B01": "the first invocation starts one native compile Blender; recovery starts zero additional native compile Blender and one artifact-audit Blender through the preferred verifier",
+      "BLENDER_INTERRUPTED_B02": "one interrupted native compile Blender, one recovery native compile Blender and one artifact-audit Blender after recovery success",
+      "LIVE_PROCESS_REFUSAL": "zero native compile or artifact-audit Blender starts by the refusal invocation"
+    }
+  },
+  "unchanged": [
+    "parent B57 identities and verdict",
+    "four-stage DAG and exactly-once boundary",
+    "manifest, ledger, receipt, recovery and writer rules",
+    "all SceneSpec and BuildPlan semantics",
+    "fault boundaries and retry identities",
+    "34-gate denominator; exactly one gate label is replaced",
+    "72 parent semantic attacks",
+    "100 GiB reserve plus 0.5 GiB projected write",
+    "zero render, model, network and Docker operations",
+    "formal root identities"
+  ],
+  "additionalSemanticAttacks": [
+    "C1_A01_AUDIT_BLENDER_COUNTED_AS_NATIVE_COMPILE",
+    "C1_A02_AUDIT_BLENDER_OMITTED_FROM_TOTAL",
+    "C1_A03_NATIVE_COMPILE_REPEAT_HIDDEN_AS_AUDIT",
+    "C1_A04_PREFERRED_VERIFIER_COUNT_WITHOUT_AUDIT_CHILD",
+    "C1_A05_AUDIT_CHILD_WITHOUT_PREFERRED_VERIFIER",
+    "C1_A06_CURRENT_RECEIPT_CHILD_OMITTED",
+    "C1_A07_TOTAL_BLENDER_STARTS_OFF_BY_ONE",
+    "C1_A08_LIVE_REFUSAL_SPAWNS_AUDIT_BLENDER"
+  ],
+  "effectiveDecisionRule": "SUPPORTED requires all 34 effective gates, at least 64/72 parent attacks, 8/8 correction attacks and exact disjoint process accounting. Any second native compile after a valid compile-stage receipt is REJECTED even if mislabeled as audit work.",
+  "formalRootsRemain": {
+    "preflight": "experiments/restart-safe-production-orchestrator-preflight-v0-1",
+    "attempt": "experiments/restart-safe-production-orchestrator-attempt-v0-1",
+    "formal": "experiments/restart-safe-production-orchestrator-v0-1"
+  },
+  "nonClaims": [
+    "This correction does not execute or validate the orchestrator",
+    "An artifact-audit Blender process is not a render and does not write cinematic output",
+    "Disjoint accounting does not weaken the no-repeat rule for completed native compilation"
+  ]
+}

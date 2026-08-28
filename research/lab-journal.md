@@ -4263,3 +4263,13 @@ B58 preregistration commit `9fe37d7c8b3d2e6b3ea522ba9c2e4515a100d99b` 已推送�
 第一轮仅位于系统temporary root的development integration test暴露两个实现错误：macOS `/tmp` → `/private/tmp`根别名被误判成root内部symlink traversal；随后writer identity局部变量遮蔽全局`process`导致`ReferenceError`。两者均在临时root保留终端反例后修正；没有创建B58 formal roots、没有改动B57 production surface，也没有启动Blender。修正后的positive probe创建manifest、3-event contiguous ledger、PLAN_BIND completed receipt，重新derive为COMPLETED，并成功获取/释放writer lease。Negative probe确认第二writer得到`LIVE_WRITER`，单字段ledger payload mutation得到`LEDGER_EVENT_HASH`。
 
 `node --check`、targeted ESLint、`git diff --check`与两组temporary probes现全部通过，temporary roots已精确清理。本文件仍只是unfrozen implementation candidate，不是tool-freeze、official preflight或restart-safety verdict。下一动作先提交推送library checkpoint，再实现同一预登记path的`job:production` orchestrator；正式根继续禁止创建。
+
+## J-311 · B58-E1-C1 preferred verifier进程记账修正预登记
+
+Date: 2026-08-28 · Type: PREREGISTRATION CORRECTION / NO B58 EXECUTION · New Blender processes: 0 · New Blender renders: 0
+
+在实现`job:production` orchestrator前重读冻结的 `scripts/verify-production-compile-receipt.mjs` bytes，发现B58 parent把“post-compile recovery不启动额外Blender”与“必须调用preferred verifier”同时写入，而该verifier每次成功调用必然spawn一个Blender 5.2 child重开`.blend`执行`blender/audit_compiled_artifact.py`。这个child不是native compile且不render，但仍是Blender process，因此原aggregate wording不可同时满足。该缺口发现时production orchestrator、official preflight、formal roots与任何B58 Blender process全部不存在。
+
+原B58 spec/protocol保持byte exact `a1ea52598d66263989c56f9737917b7ff297122b6731ec31d6f535cacc32cf41` / `50c3d8f8e61ea894e4dadf0d1f2a2ff92e793de56bacfe1f2d01d48951d35f81`，不原地改写。C1 correction spec/protocol SHA-256为 `1a8f17bda34e7d1f7c683b742e93a2f32d1b9c3a1651388c68efddf566f9c3cd` / `e297c5b2396aac39409fc0eeb8185d2d19deace0ebf10bfb347aa6091aff7b34`。唯一授权修正是把process taxonomy拆为native-compile Blender与artifact-audit Blender，并将一个effective gate改为`RECOVERY_STARTS_ZERO_ADDITIONAL_NATIVE_COMPILE_BLENDER_AFTER_COMPILE_CHECKPOINT`；34-gate denominator、72 parent attacks和所有其他语义不变。
+
+正式exact上限现为4 production compiler wrappers、4 native-compile Blender starts（3 success + 1 controlled interruption）、3 preferred verifier CLIs、3 current-receipt Node children、3 artifact-audit Blender starts，即7 total Blender processes但仍0 render/model/network/Docker。新增8项correction attacks拒绝把compile伪装成audit、遗漏audit child或总数off-by-one。下一动作只提交推送C1与本entry；远端一致前仍不得创建production orchestrator或B58 roots。
