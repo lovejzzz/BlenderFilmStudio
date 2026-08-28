@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "bfs.blenderTemporalOwnerSupportLocalizationCorrection.v0.1",
+  "experimentId": "B52-D12.10-C1",
+  "title": "Mechanical set-intersection correction for D12.10-D1 owner-support localization",
+  "status": "PREREGISTERED_BEFORE_CORRECTED_TOOL_OR_OUTPUT",
+  "question": "After correcting two invalid accepted-domain numerators to explicit set intersections, what true-owner support and Object Index alias counts are present in the immutable H1 data?",
+  "decisionRole": "mechanical correction of an invalid post-hoc localization report; H1 remains bounded and C1 remains post-hoc",
+  "parents": {
+    "d1210Spec": {
+      "uri": "specs/blender-temporal-owner-support-localization.v0.1.json",
+      "sha256": "ac507754a47496a7b9f4f29e1d3313738c12580d0f10e19ef42301f2f4892a7b",
+      "experimentId": "B52-D12.10-D1"
+    },
+    "d1210InvalidTool": {
+      "uri": "scripts/analyze-b52-d12-10-temporal-owner-support.py",
+      "sha256": "90d7a0bc639999d5c5c1bcfda65d7edaaefabbc1fa37f8592206eb8460662be2"
+    },
+    "d1210InvalidResult": {
+      "uri": "experiments/blender-temporal-owner-support-localization-v0-1/results.json",
+      "sha256": "9cb5a01d7dbeba357e8a371be0f5b75e5837291ef6d6cc829b74eb425a7e08d4",
+      "analysisHash": "9868072e5bb214241e75957332bc78e4eed1b5c9ccfdb4db3dc1f78b61b5960e",
+      "invalidReason": "acceptedToTrueOwnerBilinear and acceptedToTrueOwnerFullStencil used total accepted as numerator and can exceed one"
+    },
+    "failureNote": {
+      "uri": "research/2026-08-28-b52-d12-10-d1-aggregation-defect.md",
+      "sha256": "1be7e20b74b50a7fa34b74a766cb39c1c2a024c6cb64bf604ced4502272f3240"
+    }
+  },
+  "freshness": {
+    "correctedToolPath": "scripts/analyze-b52-d12-10-c1-temporal-owner-support.py",
+    "correctedOutputRoot": "experiments/blender-temporal-owner-support-localization-c1-v0-1",
+    "requirements": [
+      "The corrected tool and output root do not exist at C1 preregistration.",
+      "The invalid D1 tool, result, payloads and emitted verdict remain byte-preserved.",
+      "C1 reads the same immutable H1 formal arrays and creates no Blender, model or network output.",
+      "No oracle, token, q, tap, stencil, classification, owner, threshold or H1 verdict semantic may change."
+    ]
+  },
+  "permittedChanges": [
+    "Define acceptedWithinTrueOwnerBilinear as accepted AND trueOwnerBilinearCompatible.",
+    "Define acceptedWithinTrueOwnerFullStencil as accepted AND trueOwnerCurvatureCompatible.",
+    "Compute acceptedToTrueOwnerBilinear from acceptedWithinTrueOwnerBilinear divided by trueOwnerBilinearCompatible.",
+    "Compute acceptedToTrueOwnerFullStencil from acceptedWithinTrueOwnerFullStencil divided by trueOwnerCurvatureCompatible.",
+    "Add accepted-domain set decomposition and closed-unit-interval checks at cell and owner level.",
+    "Increase the attack minimum from 24 to 28 to cover the corrected intersections and decompositions.",
+    "Use C1 schema, experiment, output and verdict identities."
+  ],
+  "forbiddenChanges": [
+    "changing any D12.10-D1 three-way classification or payload byte",
+    "changing any H1 formal byte or verdict",
+    "dropping the 15 observed accepted-outside-true-owner-bilinear pixels",
+    "introducing a threshold, reconstruction candidate, coverage denominator or production claim",
+    "deleting or overwriting the invalid D1 output"
+  ],
+  "correctedMeasurementContract": {
+    "cellAcceptedDecomposition": "accepted = acceptedWithinTrueOwnerBilinear + acceptedOutsideTrueOwnerBilinear",
+    "cellBilinearDecomposition": "acceptedWithinTrueOwnerBilinear = acceptedWithinTrueOwnerFullStencil + acceptedWithinTrueOwnerExtraStencilMismatch",
+    "ownerAcceptedDecomposition": "repeat both equalities independently for every analytic current owner",
+    "ratioBounds": "every non-null acceptedTo* ratio is within the closed interval [0,1]",
+    "payloadIdentity": "all five derived payload hashes must equal the preserved D1 hashes for every fixture and repeat",
+    "classificationIdentity": "every class count, alias count, one-sided opportunity and risk-after-full-stencil count must equal D1"
+  },
+  "frozenGates": {
+    "allOriginalParentIdentities": true,
+    "invalidD1Identity": true,
+    "payloadIdentityWithD1": true,
+    "classificationIdentityWithD1": true,
+    "currentOraclePayloadIdentityEveryCell": true,
+    "classificationPartitionEveryCell": true,
+    "repeatIdentityEveryFixture": true,
+    "sameIndexObjectIndexAliasMinimumPrimaryPixels": 1,
+    "movingOneSidedStencilOpportunityMinimumPrimaryPixels": 1,
+    "acceptedSetDecompositionEveryCellAndOwner": true,
+    "allRatiosWithinClosedUnitInterval": true,
+    "acceptedOutsideTrueOwnerBilinearSameIndexPrimaryMinimum": 1,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "attacks": {
+    "minimumRegisteredAttacks": 28,
+    "requiredNewTargets": [
+      "replace accepted intersection with total accepted",
+      "replace full-stencil accepted intersection with bilinear accepted",
+      "emit a ratio below zero or above one",
+      "break cell accepted decomposition",
+      "break owner accepted decomposition",
+      "hide acceptedOutsideTrueOwnerBilinear"
+    ]
+  },
+  "decision": {
+    "localizedVerdict": "TEMPORAL_OWNER_SUPPORT_ALIAS_LOCALIZED_C1",
+    "localizedWhen": "Every original localization gate plus corrected payload identity, classification identity, set decomposition, ratio bound, alias exposure, operation and attack gate passes.",
+    "notLocalizedVerdict": "TEMPORAL_OWNER_SUPPORT_ALIAS_NOT_LOCALIZED_C1",
+    "noPromotion": "C1 remains post-hoc and cannot validate a reconstruction intervention or revise H1."
+  },
+  "nonClaims": [
+    "C1 does not make the invalid D1 result valid; it emits a separate corrected result.",
+    "C1 is not a fresh holdout and does not select or validate a new candidate.",
+    "The 15 accepted owner aliases are localization evidence, not yet a demonstrated perceptual or production failure.",
+    "One-sided opportunity counts do not prove a one-sided estimator is safe.",
+    "No H1 coverage, quality or verdict label changes."
+  ]
+}

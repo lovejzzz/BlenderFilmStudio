@@ -2995,6 +2995,18 @@ same-index primary 中恰有 15 个 accepted pixels 落在 true-owner bilinear d
 
 Artifact: `research/2026-08-28-b52-d12-10-d1-aggregation-defect.md`.
 
+## J-198 · D12.10-C1 冻结机械聚合修正
+
+Date: 2026-08-28 · Type: CORRECTION PREREGISTRATION · New Blender renders: 0
+
+D12.10-D1 的错误结果、工具和五类派生 payload 保持原样；C1 在新 analyzer 与新 output root 均不存在时冻结。允许的修正仅限把两个错误 numerator 改成 accepted 与对应 true-owner domain 的显式交集，并增加 cell/owner 两层 set decomposition、ratio ∈ [0,1]、D1 payload/classification identity 与至少 28 个 mutation attacks。
+
+C1 禁止改变 ray-plane oracle、owner token、tap/stencil、三类 support classification、Q30 risk、阈值或 H1 verdict，也禁止隐藏 same-index primary 中已经观察到的 15 个 accepted-outside-true-owner-bilinear pixels。它仍是 post-hoc failure localization，不是新 holdout、候选算法或生产安全证明。
+
+冻结时确认 corrected tool `scripts/analyze-b52-d12-10-c1-temporal-owner-support.py` 与 corrected output root `experiments/blender-temporal-owner-support-localization-c1-v0-1` 均不存在。Spec SHA-256: `2ba1edd74fef18eacfa1c170cab4e35f80afc575eaef1ffe3500428553555403`。
+
+Artifact: `specs/blender-temporal-owner-support-localization-c1.v0.1.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
