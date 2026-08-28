@@ -3762,3 +3762,13 @@ Date: 2026-08-28 · Type: WEBSITE SOURCE VALIDATED · New Blender renders: 0
 首页新增 `D12.14-H2 正式调用失效` tab；P1页面从未来时entry contract更新为observed H2 outcome，并链接完整失效链。GitHub Pages sparse checkout只新增页面实际import的三份小型machine JSON，没有引入9.3 MiB preflight arrays。新页、P1与首页定向ESLint为0 errors；Vinext/Sites production build成功并发现85个CDN warmup paths；GitHub Pages static build成功生成87/87 pages，新route明确为static。本地新页、P1与首页exact routes均返回HTTP 200。
 
 按Sites验证边界，没有执行用户未请求的截图、DOM、点击、resize或视觉QA。React best-practices复核确认新增页面是纯Server Component、无hooks/client data waterfall、无第三方bundle或hydration state，现有静态map规模无需额外memoization。下一动作只提交并推送新页、CSS、导航、Pages workflow与本entry；随后确认公开Pages exact commit，并在owner-only Sites access复核后发布同一source commit。
+
+## J-264 · D12.14-H2 正式调用失效研究页双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
+
+site source commit `9cf632d256dc495b7ac696da8292d0ec7be33123` 推送后，GitHub Pages workflow `33172634355` 的build与deploy均completed/success，head SHA exact；公开H2 route返回HTTP 200。公开URL为 `https://lovejzzz.github.io/BlenderFilmStudio/blender-projective-depth-formal-invalidation-v0-1/`。
+
+同一source commit推送到Sites source repository并保存为version 78；archive content hash为 `sha256:b2a38e2707ce2c7f01a1135db090cded288c70dfac63e1a687eb7394e8c535f6`，deployment `appgdep_6a9183f78e4c819186e2ab05f9679b08` succeeded。发布前再次验证current user为owner、access mode为custom、exactly one allowed account且其role为owner、external visitors为0、workspace/tenant groups为空；owner-only exact route的匿名请求返回HTTP 401。Owner-only URL为 `https://blender-film-studio-research.skylab.chatgpt.site/blender-projective-depth-formal-invalidation-v0-1/`。
+
+H2 publication至此封闭；没有改变H2 null verdict或same-ID禁止重跑边界。下一阶段按J-262观察启动新的formal-run admission reliability实验：先预登记relative/absolute equivalence、containment、fresh-root、pushed-evidence lookup与pre-try failure receipt reachability，再创建任何tool byte。
