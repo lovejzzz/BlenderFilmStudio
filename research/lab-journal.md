@@ -4229,3 +4229,15 @@ B01-A/B、B02-A/B四次preferred production compile与verifier全部PASS；wrapp
 Independent formal verdict为 `PRODUCTION_DISK_JIT_READMISSION_SUPPORTED`：26/26 gates、56/56 resealed semantic attacks、0 escaped。Formal-start/operation/audit/results/receipt file SHA-256依次为 `5401b79143c8b65b4710edb45788ad9aa52067856bf7349a3419d9ec75c1b6a7`、`9dc6841bee1302605850f0fbd1ce5ede94a060c492d6ca83c7d233d1fd25cfdf`、`9a9aa2275dfe03c26de514f31957b884647f1283620f86291449ad50cef15798`、`2d8bdc2260c964ae106d29b4832cd128abdf101ddae99e028b8e68572136f047`、`68d7252a26d5e49ba02680f5da5051ebe2598cf56172068358159c3512213b74`；formal receipt self-hash为 `5deeeda43de95376a96dfc6c688a3dce1a9e33d4ced304fa504d58cfb4645521`。45个formal files仅含四份`.blend`，无EXR/image/video/`.blend1`；render/model/network/Docker均0。
 
 B57-E1 official ID至此封闭，禁止修改或重跑。该SUPPORTED只关闭“accepted preflight之后、native compile之前磁盘容量可能过期且receipt未强绑定”的生产安全缺口；它不证明Codex进程崩溃恢复、跨阶段幂等续跑或最终电影质量。下一动作先提交推送exact official evidence并发布B57研究页，随后按当前Goal进入restart-safe job manifest与受控中断恢复，不再扩张同类disk experiments。
+
+## J-308 · B57-E1 研究页双站点发布完成并修复Pages取证缺口
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE / DEPLOYMENT INCIDENT CLOSED · New Blender renders: 0
+
+B57 official evidence commit `64d93980bdccab13c1f6b306bfcc0ff0eb670ab9` 与研究页source commit `3192b61329b70757bbc88865c965d037f7b09f87` 均已推送。页面直接读取frozen spec、v0.2 release、official preflight/results/audit/receipt/low-disk record及C2 bounded results/audit，公开展示`PRODUCTION_DISK_JIT_READMISSION_SUPPORTED`、26/26 gates、56/56 attacks、one-byte-below spawn-block、C2反例与cross-binding correction、4次真实Blender 5.2 compile及zero-render claim boundary。Targeted ESLint、TypeScript、92-route GitHub Pages static build、Vinext production build与本地non-browser HTTP验证全部通过。
+
+首次GitHub Pages workflow run `33191281987` 失败，原因不是页面实现或实验结论，而是`.github/workflows/deploy-pages.yml`的sparse checkout遗漏了页面静态导入的9份B57 JSON证据。修复只把这9个exact tracked paths加入checkout，不修改B57 evidence、页面语义或实验工具；fix commit为 `42c5ef8783267bf6b541ba18e8c96a51998c1c2d`。替代workflow run `33191448458` 在同一commit完成build与deploy并为success；公开route `https://lovejzzz.github.io/BlenderFilmStudio/production-disk-jit-readmission-v0-1/` 返回HTTP 200、58,913 bytes，并包含`26 PASS`、`56/56`、`C2 REHEARSAL`与`restart-safe`。邮件中的失败通知因此对应已被替代的旧run，incident至此关闭。
+
+同一fix commit已推送到Sites source repository。现有成功Vinext archive重新保存为version 84，server archive content hash为 `sha256:ba1136a36ef0ccc46e480d33affda3bdbb65c7882d90abe2f34b2b74d3dc9ea0`，377 files、29,317,120 bytes；owner-only deployment `appgdep_6a91bc0dc7d8819187c529a057f37012` succeeded。Authenticated exact route返回HTTP 200、70,247 bytes并包含同一四项证据标记；anonymous route返回HTTP 401。发布时重新验证current user为owner、custom access、exactly one allowed owner account、external visitors 0、workspace/tenant groups empty。
+
+遵守J-284 crash guard，全程没有browser handoff、截图、DOM、点击、resize或新增用户可见tab；所有发布验收均为构建、workflow状态与non-browser HTTP。临时archive与本次HTTP抓取随后精确清理，README及三份未跟踪research drafts未被stage。B57 publication现已封闭；下一阶段只进入restart-safe job manifest、受控中断恢复与exactly-once阶段语义。
