@@ -206,7 +206,7 @@ export default function ProductionCompilerEntryPromotionPage() {
         <article className="claim"><span>SUPPORTED CLAIM</span><strong>preferred entry promoted</strong><p>三个公开 alias 与七步 durable authorization 已通过真实 Blender 回归。</p></article>
         <article><span>STRUCTURAL EVIDENCE</span><strong>2 plans · 2 structures</strong><p>B01/B02 各自 A/B exact；四份 `.blend` 的内嵌绑定均通过。</p></article>
         <article className="limit"><span>NON-CLAIM</span><strong>cinematic pixels</strong><p>本实验没有 render；也不主张 container bytes deterministic、signed 或 remotely attested。</p></article>
-        <article className="next"><span>NEXT TECHNICAL GAP</span><strong>disk TOCTOU</strong><p>预检记录磁盘后到 native compile 启动前仍有时间窗；B57 将要求就地重观察并绑定 receipt。</p></article>
+        <article className="next"><span>NEXT GATE · NOW CLOSED</span><strong><Link href="/production-disk-jit-readmission-v0-1">B57 supported</Link></strong><p>native spawn 前已就地重观察磁盘，并把 sequence-5 决定交叉绑定进 production receipt。</p></article>
       </div>
       <div className="b55-nonclaims">
         {promotionSpec.nonClaims.map((claim, index) => <p key={claim}><span>{String(index + 1).padStart(2, '0')}</span>{claim}</p>)}
