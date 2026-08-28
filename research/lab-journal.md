@@ -3093,6 +3093,20 @@ C1 必须重新从同一八份 EXR 提取 24 个 float32 arrays，并同时与 r
 
 Artifact: `specs/blender-owner-token-pass-probe-c1.v0.1.json`.
 
+## J-206 · Material Index 与 Value AOV 均可传 owner token，但边界语义不同
+
+Date: 2026-08-28 · Type: CORRECTED POST-HOC PASS RESULT · New Blender renders: 0
+
+P1-C1 runner 在 freeze commit `07eba7d` 后创建 fresh correction root；analyzer 与独立 audit 两个新 PID 均 exit zero。结果 12/12、28/28，audit 14/14；24 个 corrected arrays 同时与 raw EXR 和失败 P1 arrays byte exact。正式 verdict 为 `MATERIAL_INDEX_AND_CUSTOM_AOV_OWNER_TOKENS_VIABLE`。
+
+修正 mask 每 cell 有 background 16,816、foreground 5,727、boundary 1,968 pixels。八个 cell 的 stable interiors 全部 exact：Object Index 7/7，Material Index 11/23，Value AOV 0.25/0.75；三种 pass 都 display-invariant、clean-repeat byte exact。Object Index 按预登记不能区分 owners。
+
+边界语义出现关键分叉：Material Index 在全部 1,968 个 boundary pixels 中只出现 11/23；Value AOV 在 F0/F1 分别有 658/652 个 mixed pixels、20 个 unique values，步长 0.015625，与 32 samples 对 0.5 token delta 的采样混合一致。因此第一条 fresh integration 候选优先 Material Index exact identity；AOV mixture 必须另行 typed-invalid 或作为 coverage evidence，不能直接当 categorical scalar key。
+
+这仍是 post-hoc transport evidence。下一实验必须保持 H1 的 depth/alpha/vector/risk/coverage/quality gates 不变，只把 same-index ownership 换成 compiler-assigned Material Index，并证明原 15 个 accepted aliases 被消除且不产生新 false accepts。Result SHA-256: `3210641459a978e18cb2f71a2cd12b43e820edcd7bd4a1fe5d774e1f8179d3b0`; evidence hash: `8de2871e551de8bbac1a87080042ba577735c6068b0e1850effbdd03cf4f02a2`; audit hash: `8b35f791c9eb7dacb6fbb4327c266bdb33870b8c41d6f6d4a19e61005fc9a202`; receipt hash: `11895973dcff014e317ad70e141e2b248a1efeda4202afea9ccae01e85ae5cfb`。
+
+Artifact: `research/2026-08-28-b52-d12-10-p1-c1-owner-token-pass-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
