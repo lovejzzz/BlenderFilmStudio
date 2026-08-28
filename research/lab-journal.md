@@ -4623,3 +4623,13 @@ R2 preregistration commit `bd32c15` 推送后，runner/auditor的process summary
 Auditor独立重采main PID列表并要求与receipt exact一致。Synthetic admissible control在R2中使用一个不同于旧PID的合成PID；A25把resealed candidate的current PID改回92848并标记old PID present，必须被semantic validator拒绝。R2为25 attacks，旧spec仍为24。
 
 Runner/auditor新SHA为 `46127189b5491622923fef33d655b69fa699cad375113d241ac756e85b126b8a` / `14bd615626de8667e5a0f5dc091db70e630f901bf988ed6b771896e7750e49ff`。Node syntax、zero-warning targeted ESLint与diff check通过，真实R2 formal root仍不存在。下一动作提交推送工具字节，再在旧PID仍存活的fresh临时clone证明R2 fail-closed且25/25 attacks完整；不消费真实R2 root。
+
+## J-345 · B59-G0-R2 pre-restart负控正确fail-closed
+
+Date: 2026-08-28 · Type: PRE-RESTART NEGATIVE CONTROL · New Blender processes: 0 · New Blender renders: 0
+
+R2 tool commit `ce62f76` 推送后，在旧Codex仍存活时用fresh临时sparse clone执行R2负控，未消费真实R2 root。Runner exact观察current main PID仍为92848，old PID present=true、current PID different=false、restart boundary valid=false；因此`CODEX_MAIN_PROCESS_COUNT`正确失败。Codex tree RSS 4,663,197,696 bytes也失败；磁盘available 112,264,663,040 bytes，仍高于稳定门58,642,432 bytes。
+
+Auditor final为可信`BLOCKED_HOST_STABILITY`，18/20 gates，25/25 attacks，synthetic control有效、integrity failures与failed attacks均为0、合计8/12 children，禁用资源全部为0。Results/audit SHA为 `0789d8f551bcef0de9e8f5beea88f9dccbe28320b2eb76748d9de13b12537e08` / `766915b2572bbb639360b5bc924a0953912226723e2cc6045a58a03603b76e90`。
+
+该负控证明新turn、RSS波动或renderer变化不能伪装成重启。真实R2 root仍不存在。下一动作只接受完整Codex重启后出现不同main PID，再从已推送release运行真实R2；当前旧进程不再增加实验负担。
