@@ -4455,3 +4455,13 @@ C1 preflight/request evidence commit `968c528a33e8624187271908691c3d38ad005822` 
 然而当前CLI有一个可审计性缺口：`runAvailableStages()`的返回值确实包含`process` identity，但command-line输出只序列化`result.state`，所以外部harness无法从stdout直接断言WAIT的PID是87834。该次结果因此只记为bounded success，不用于关闭live-process gate。原C1 root不复用。
 
 C2 correction仅使CLI在result存在`process`时向原status JSON增加`waitProcess`，完整投影PID、parentPid、start、executable、argv SHA与identity hash；非WAIT outcome的现有输出不变，不改任何recovery判定。Correction后orchestrator candidate SHA为 `d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a`，ledger SHA保持 `0946685b…`；Node syntax、targeted ESLint与diff check通过。下一动作先提交推送C1 evidence与CLI correction，然后用fresh C2 roots最后复验stdout `waitProcess.pid === recorded native PID`。
+
+## J-328 · B58 live-process C2 auditable-WAIT preflight接受
+
+Date: 2026-08-28 · Type: CORRECTED DEVELOPMENT LIVE-PROCESS PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
+
+WAIT CLI projection correction commit `742484c8295ec8afa55ff7990542071a67933e98` 与`origin/main` exact后，使用fresh C2 preflight/output/production-attempt/job roots第三次准入B01 live-process cell。Preferred preflight返回ACCEPTED，BuildPlan hash保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；preflight file SHA/self-hash为 `2de09f9dcc2de5e7ace11dbb90747ce790a4d632e3a3cdd6a4ab3f7310085adf` / `38e5f66ce6ac9df5f93f50e1d0a3da465e1ba224049f13800d0a55cf52ea3d1a`。Observed available为109,293,395,968 bytes，projection后108,756,525,056 bytes，高于100 GiB reserve；Blender/render/model/network/Docker为0。
+
+C2 request file SHA/requestHash为 `46813afee135deaabbb3eee8c9bf0aad1ac4dc6000cc86777c432d87623b5b46` / `45b7d2b82dd50bf9c7d71bea8cb54bf52c3b2a9832a1bb6ffa109f0a60251ed9`，绑定tool-freeze commit `742484c8295ec8afa55ff7990542071a67933e98`、ledger SHA `0946685b…`与orchestrator SHA `d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a`。Expected outcome除C1的WAIT、zero duplicate与exact cleanup外，新增可机械审计条件：stdout的`waitProcess.pid`、`identityHash`、executable与argv SHA必须与ledger中`NATIVE_PROCESS_OBSERVED` exact一致。
+
+C2 execution roots与official B58 roots仍不存在。下一动作只提交推送C2 preflight/request与本entry，随后使用相同bounded harness最后执行一次。

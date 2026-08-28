@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobRequest.v0.1",
+  "jobId": "B58-DEV-LIVE-B01-C2",
+  "jobRoot": "experiments/restart-safe-production-orchestrator-development-live-b01-c2-job-v0-1",
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B01.scene.json",
+    "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+  },
+  "expectedBuildPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "742484c8295ec8afa55ff7990542071a67933e98",
+  "toolHashes": {
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/run-restart-safe-production-job.mjs": "d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a"
+  },
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "B01-LIVE-COMPILE-C2-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-development-live-b01-c2-preflight-v0-1",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-development-live-b01-c2-production-attempt-v0-1",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-development-live-b01-c2-output-v0-1",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": null,
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "requestHash": "45b7d2b82dd50bf9c7d71bea8cb54bf52c3b2a9832a1bb6ffa109f0a60251ed9"
+}
