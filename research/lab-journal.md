@@ -3055,6 +3055,18 @@ Date: 2026-08-28 · Type: DEVELOPMENT API OBSERVATION · Blender renders: 0
 
 该观察只用于把已经预登记的 source tool 写到真实 API，不是 pass transport 证据。五个新工具随后通过 system Python 与 Blender Python 的 syntax compilation；尚未运行 preflight 或 render。下一步先把工具 bytes 固定到 Git commit，再允许 preflight 产生首个 output root。
 
+## J-203 · P1 零渲染 preflight 通过并准入 formal
+
+Date: 2026-08-28 · Type: PREREGISTERED PREFLIGHT · Formal Blender renders: 0
+
+工具在 commit `646bfc8c4a11d0fc013b2860e41b3e705173f731` 冻结后运行一次 preflight。它反查 spec 最后修改 commit `a70676cae1794703915cb8dfc5b11a518e8a4f4c`，证明五个工具在预登记 commit 中都不存在，并逐个验证 working bytes 与 freeze commit blob 相同。
+
+两个独立 Blender 5.2 PID 分别重建 ACES SDR 与 Un-tone-mapped cell，均为 zero-render probe。12/12 checks 通过：display round-trip、Material Index API、AOV add/remove 与 VALUE registration、Output AOV node、0–32767 material index range、7/7 shared Object Index、11/23 Material Index、0.25/0.75 AOV assignments 全部匹配。stderr 只有 Blender 6.0 预告性质的 `use_nodes` deprecation warning。
+
+磁盘准入测得 `110300434432` available bytes；扣除 128 MiB projection 后为 `110166216704`，高于 100 GiB reserve。Formal root 在 preflight 前后都不存在。Preflight hash: `71c5de8fcf6d19e6022f366a19f37c7e6b928d5303773170d79210ec334302a7`; file SHA-256: `e2aa0b7e590e1c4cdbe7e4deb60fa9105dfcbd758db4a1f3ff8053d4bd9e250b`。
+
+Artifact: `experiments/blender-owner-token-pass-probe-preflight-v0-1/preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
