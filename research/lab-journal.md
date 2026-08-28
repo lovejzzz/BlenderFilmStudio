@@ -4543,3 +4543,13 @@ Date: 2026-08-28 · Type: PREREGISTERED ARITHMETIC CORRECTION · New Blender pro
 C2 preregistration commit `ac833e8` 推送后，只把parent spec的`minimumAvailableBytes`与parent protocol对应prose从112,205,053,952修正为112,206,020,608。Node独立重算确认它精确等于107,374,182,400 + 536,870,912 + 4,294,967,296。
 
 修正后parent spec/protocol SHA为 `ad8a49082dca1a9cf1df6e0626dc5c313c499a7232fbd2f01460d163f27cd11c` / `1b79ce07e376005336d913b90588478ea7de655cb83ac8a9a0e67f5c0b74d54d`。Runner/auditor SHA保持 `fbfea40c…` / `52474b5c…`，Node syntax、zero-warning targeted ESLint与diff check通过。实际formal root仍不存在；下一动作提交推送两字节修正与本entry，再用第三个fresh临时sparse clone重跑。
+
+## J-337 · B59-G0-C2完整rehearsal收敛为可信host blocker
+
+Date: 2026-08-28 · Type: BOUNDED STABILITY REHEARSAL · New Blender processes: 0 · New Blender renders: 0
+
+C2 commit `365c07c` 推送后，第三个fresh临时sparse clone完成runner+auditor全链。Synthetic admissible control有效，16个integrity checks无失败，24/24 attacks拒绝，runner/auditor合计8/12 short read-only children，stdout与两份receipt均远低于冻结上限。Final verdict从前两次的`INVALID_EVIDENCE`收敛为可信的`BLOCKED_HOST_STABILITY`，19/20 gates通过。
+
+唯一失败门为`DISK_STABILITY_MARGIN`：available 109,111,910,400 bytes，相对精确minimum 112,206,020,608少3,094,110,208 bytes。Codex main/renderer为1/4，最大renderer RSS 1,016,823,808 bytes，Codex tree RSS 4,287,758,336 bytes，低于4 GiB门但只余约7.2 MB；active Blender/B58/browser automation均为0。观察到8个PPID-1 crashpad handlers，仅作为诊断记录，不自动清理、不推定根因。
+
+Rehearsal results/audit SHA为 `a671cc44ac31eff28532275580d908de76052f39ac3de954df727a93b9ada092` / `573672e8487ebf0e4a43e6bfeab2b55645010dc8503af59627ac3f86562e376b`。实际formal root仍不存在；下一动作提交推送本entry，再运行单次真实B59-G0 bounded baseline。
