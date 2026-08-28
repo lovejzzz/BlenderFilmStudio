@@ -387,7 +387,7 @@ async function main() {
       restrictedCompileDirectChildren: restrictedChildren.length,
       restrictedCompileChildren: restrictedChildren,
       nativeCompileInvocations: runBindings.length,
-      nativeCompilePidBindingsAvailable,
+      nativeCompilePidBindingsAvailable: nativePidBindingsAvailable,
       compileReceiptBlenderIdentityProbes: runBindings.length,
       independentAuditorProcessesPlanned: 1,
       receiptVerifierDirectChildrenPlanned: 4,
@@ -434,7 +434,7 @@ async function main() {
         verifierBlenderIdentityProbes: auditRead.record.operationCounts.verifierBlenderIdentityProbes,
         blendArtifactAudits: auditRead.record.operationCounts.blendArtifactAuditDirectChildren,
       },
-      nativeCompilePidBindingsAvailable,
+      nativeCompilePidBindingsAvailable: nativePidBindingsAvailable,
       prohibitedOperationCounts: { blenderRenderCalls: 0, cyclesRayRenders: 0, dockerProcesses: 0, modelCalls: 0, networkCalls: 0 },
       scientificVerdict: null,
     }, 'operationHash');
@@ -458,7 +458,7 @@ async function main() {
       planIdentities: pair.observations,
       runBindings,
       processEvidence: {
-        nativeCompilePidBindingsAvailable,
+        nativeCompilePidBindingsAvailable: nativePidBindingsAvailable,
         limitation: nativePidBindingsAvailable ? null : 'Current budget report schema binds native command, arguments, exit and metrics but exposes no native Blender PID.',
       },
       audit: { uri: repoUri(auditPath), sha256: auditRead.sha256, auditHash: auditRead.record.auditHash },
