@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerProjectiveDepthHoldoutCorrection.v0.1",
+  "correctionId": "B52-D12.14-H2-C1",
+  "experimentId": "B52-D12.14-H2",
+  "title": "Pre-tool clarification of the consumer predicted-depth source",
+  "status": "PREREGISTERED_PRE_TOOL_PRE_OUTPUT_SEMANTIC_CORRECTION",
+  "parentSpec": {
+    "uri": "specs/blender-material-owner-projective-depth-holdout.v0.1.json",
+    "sha256": "2961f621b38f934cffaa7abe36deaaa5e01e7505d6361985039d0380578d244b",
+    "preregistrationCommit": "c4321835dcc4acb225d398e645efa46f99030fb1",
+    "preregistrationTree": "89ef1b2bb15e638d90c385a2ecc26f1da87b34c2"
+  },
+  "problem": "The parent spec correctly forbids Position from Python/Node consumer decisions and assigns Position to analyzer/auditor control, but its projective-depth prose does not name the allowed consumer-side source of predicted previous depth. Leaving that value implicit would permit incompatible implementations or accidental Position leakage.",
+  "freshness": {
+    "checkedBeforeCorrection": {
+      "allEightH2ToolPathsAbsent": true,
+      "preflightRootAbsent": true,
+      "formalRootAbsent": true,
+      "h2BlenderRenders": 0,
+      "h2ExrFiles": 0
+    },
+    "requirements": [
+      "Commit and push this correction before any H2 tool byte is created.",
+      "Every H2 tool, preflight record, formal result and receipt must bind both the parent spec SHA-256 and this correction SHA-256.",
+      "No hypothesis, fixture, raster, formula, tolerance, witness threshold, process count, attack minimum or verdict mapping changes."
+    ]
+  },
+  "resolvedSemantics": {
+    "consumerCurrentPoint": "For integer output cell (x,y), unproject the top-left raster pixel center through the current camera using decoded current Depth as positive camera-space -Z. This uses only x, y, current Depth and frozen camera parameters.",
+    "consumerPreviousPoint": "Transform that reconstructed current world point into current owner-local coordinates using the owner selected only by exact current Material Index; apply the same owner's frozen previous rigid transform.",
+    "consumerPredictedPreviousDepth": "Project consumerPreviousPoint through the frozen previous camera and use its positive camera-space -Z.",
+    "consumerDepthGate": "The Python and Node consumers compare direct-Z and reciprocal-depth samples independently to consumerPredictedPreviousDepth using the unchanged max(1,predictedDepth)/1024 tolerance.",
+    "positionControlPrediction": "The analyzer independently uses decoded current Position as the current world point, applies the same Material-selected rigid transform and previous camera projection, and computes the authoritative control predictedPreviousDepth plus expected Vector.",
+    "formalMeasurementSet": "A projective-depth-rescued measurement cell must be rescued by the consumer calculation and must independently pass the Position-derived reciprocal-depth gate. The analyzer reports both sets and their intersection; the frozen minimum 1024 applies to the intersection.",
+    "agreementGate": "Every consumer inverse-depth-valid or rescued cell counted toward a verdict must also pass the Position-derived inverse-depth gate. Consumer-only cells are reported and excluded; they do not automatically reject unless their inclusion changes a decision array or another hard gate fails.",
+    "positionIsolation": "Position remains unavailable to both consumers. Adapter control arrays and analyzer inputs may not be passed as a consumer input directory."
+  },
+  "unchanged": [
+    "1 / bilinear(1 / previousDepth) decision formula",
+    "bilinear(previousDepth) paired control",
+    "four-tap Material and alpha support",
+    "relative depth tolerance",
+    "201x137 NEITHER-000060 fixture",
+    "minimum 1024 rescued intersection witnesses",
+    "minimum 1024 NEITHER intersection witnesses",
+    "zero NEITHER accepted",
+    "Position 1/16384 Depth/Vector control tolerances",
+    "decoded repeat identity and metadata allowlist",
+    "four formal Cycles renders",
+    "64 semantic attacks",
+    "failure-finally semantics and verdict mapping"
+  ],
+  "toolBoundary": "All H2 tools must require --spec and --correction arguments and reject either identity mismatch. The correction is not optional and cannot be inferred from file location.",
+  "scientificEffect": "This is an executable semantic clarification made before tool creation and before measurement. It does not use an observed outcome and cannot improve a future H2 verdict after the fact."
+}

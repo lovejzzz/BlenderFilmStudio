@@ -3666,3 +3666,13 @@ H2 把两条修正严格分离。consumer decision只允许 Combined RGBA、Dept
 预登记同时冻结 decoded-pass repeat identity、仅 `Date`/`RenderTime`/`Scene` 的 container metadata allowlist、Python/Node every-array identity、current-RGB decision metamorphism、64项独立 semantic attacks、4次正式 Cycles renders、analyzer probe-shaped schema smoke、analyzer/audit actual operation-count replay，以及 runner child failure finally-path 的 execution/failure/receipt。任何 tool/execution failure都只能产生 `scientificVerdict=null`，不得修复后用相同 ID重跑。
 
 Spec SHA-256 为 `2961f621b38f934cffaa7abe36deaaa5e01e7505d6361985039d0380578d244b`；protocol SHA-256 为 `6b87d3c26d1fe7ec93664076a893fe6d50bd0de32df331dbf1fd5b97d10767fe`。下一动作必须只提交并推送 spec、protocol 与本 entry；该 preregistration commit在远端之前不得创建任何 H2 tool byte。
+
+## J-255 · D12.14-H2-C1 consumer predicted-depth 语义更正
+
+Date: 2026-08-28 · Type: PRE-TOOL SPECIFICATION CORRECTION · New Blender renders: 0
+
+H2 preregistration commit `c4321835dcc4acb225d398e645efa46f99030fb1` 推送后、八条 H2 tool paths 与两个 output roots仍全部不存在时，审读识别出一个执行歧义：parent spec正确禁止 Position进入 consumer decisions，也把 Position-predicted depth指定为 analysis control，却没有命名 consumer执行 depth gate时允许使用的 predicted previous depth来源。若不先更正，Python/Node可能各自选择不同隐式 oracle，或错误读取 Position。
+
+更正 `B52-D12.14-H2-C1` 冻结两条独立路径。consumer只用 integer cell、decoded current Depth、exact Material token和 frozen camera/owner transforms，重建 pixel-center current world point并预测 previous depth；Position仍不传给 consumer。analyzer独立从 decoded Position first-hit计算 control predicted depth与 Vector。正式 rescued witness必须同时属于 consumer rescued set并通过 Position-derived reciprocal-depth gate；冻结的1,024 minimum施加于该 intersection。consumer-only cells单独报告并排除，不能被用于提高 verdict。
+
+C1不改变 trajectory、raster、signal、tokens、formula、relative tolerance、minimum witnesses、zero acceptance、Position tolerance、repeat identity、render/process counts、attack minimum或 verdict mapping。Correction SHA-256 为 `9b6fdcedd571ad1ec7fb8d02bc7c6a630014d204de02f4a8b74bf5509c625a92`。所有 H2 tools必须同时要求 parent spec与C1 correction并拒绝任一 identity mismatch。下一动作仍是先提交推送 exact correction与本 entry；远端 commit形成之前不得创建工具。
