@@ -7,7 +7,16 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const specPath = resolve(repositoryRoot, 'specs/codex-host-stability-baseline.v0.1.json');
+const defaultSpecRelativePath = 'specs/codex-host-stability-baseline.v0.1.json';
+let specRelativePath = defaultSpecRelativePath;
+if (process.argv.length > 2) {
+  if (process.argv.length !== 4 || process.argv[2] !== '--spec') throw new Error('usage: auditor [--spec specs/name.json]');
+  specRelativePath = process.argv[3];
+}
+if (!/^specs\/[A-Za-z0-9._/-]+[.]json$/.test(specRelativePath) || specRelativePath.includes('..')) {
+  throw new Error('spec path must be a repository-relative specs/*.json path');
+}
+const specPath = resolve(repositoryRoot, specRelativePath);
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const formalRoot = resolve(repositoryRoot, spec.formalRoot);
 const resultsPath = resolve(formalRoot, 'results.json');
@@ -113,10 +122,14 @@ function expectedGateVector(candidate) {
   const resources = candidate.resourceAccounting;
   return {
     SPEC_AND_PARENT_IDENTITY: candidate.spec.sha256 === sha256File(specPath)
+      && candidate.spec.path === specRelativePath
       && candidate.git.specParentCommit === spec.parentCommit
       && candidate.git.parentIsAncestor === true
       && candidate.git.headCommit === candidate.git.originMainCommit
-      && candidate.git.scopedStatus === '',
+      && candidate.git.scopedStatus === ''
+      && (spec.parentEvidence ? candidate.parentEvidence?.valid === true
+        && candidate.parentEvidence.resultsSha256 === spec.parentEvidence.resultsSha256
+        && candidate.parentEvidence.auditSha256 === spec.parentEvidence.auditSha256 : candidate.parentEvidence === null),
     FRESH_FORMAL_ROOT: candidate.formalRoot === spec.formalRoot && candidate.formalRootFreshAtStart === true,
     CRASH_EVIDENCE_IDENTITY: signature.sha256 === spec.crashEvidence.sha256 && signature.bytes === spec.crashEvidence.bytes && signature.lines === spec.crashEvidence.lines,
     CRASH_SIGNATURE_EXACT: signature.processExact === true && signature.identifierExact === true && signature.versionExact === true && signature.threadExact === true && signature.exceptionExact === true && signature.serializerSymbolPresent === true,
@@ -204,13 +217,14 @@ if (existsSync(auditPath)) throw new Error('audit.json already exists');
 const resultsText = readFileSync(resultsPath, 'utf8');
 const results = JSON.parse(resultsText);
 
-const scopedStatus = runBounded('/usr/bin/git', [
-  'status', '--short', '--',
+const defaultReleasePaths = [
   'specs/codex-host-stability-baseline.v0.1.json',
   'research/2026-08-28-b59-g0-codex-host-stability-baseline-protocol.md',
   'scripts/run-b59-g0-codex-host-stability-baseline.mjs',
   'scripts/audit-b59-g0-codex-host-stability-baseline.mjs'
-], 'git-scoped-status', 32768).trim();
+];
+const releasePaths = spec.releasePaths ?? defaultReleasePaths;
+const scopedStatus = runBounded('/usr/bin/git', ['status', '--short', '--', ...releasePaths], 'git-scoped-status', 32768).trim();
 
 const memoryOutput = runBounded('/usr/bin/memory_pressure', ['-Q'], 'memory-pressure', 32768);
 const memoryMatch = memoryOutput.match(/System-wide memory free percentage:\s*(\d+)%/);
@@ -224,10 +238,14 @@ const replayVersion = `${readPlistString(appPlist, 'CFBundleShortVersionString')
 
 const integrityChecks = {
   SPEC_SHA: results.spec.sha256 === sha256File(specPath),
+  SELECTED_SPEC_PATH: results.spec.path === specRelativePath,
   RECEIPT_FILE_SIZE: results.receiptBytes === statSync(resultsPath).size,
   RECEIPT_SELF_HASH: results.selfHash === sha256Bytes(canonical(withoutSelfHash(results))),
   SCOPED_RELEASE_CLEAN: scopedStatus === '',
   CRASH_REPORT_SHA: sha256File(spec.crashEvidence.sourcePath) === spec.crashEvidence.sha256,
+  PARENT_EVIDENCE: spec.parentEvidence ? results.parentEvidence?.valid === true
+    && sha256File(resolve(repositoryRoot, spec.parentEvidence.resultsPath)) === spec.parentEvidence.resultsSha256
+    && sha256File(resolve(repositoryRoot, spec.parentEvidence.auditPath)) === spec.parentEvidence.auditSha256 : results.parentEvidence === null,
   CURRENT_VERSION_REPLAY: replayVersion === results.currentRuntime.codexVersion,
   DISK_GATE_REPLAY: (replayAvailableBytes >= spec.resourcePolicy.minimumAvailableBytes) === results.gates.DISK_STABILITY_MARGIN,
   MEMORY_GATE_REPLAY: (replayMemoryPercent >= spec.resourcePolicy.minimumMemoryFreePercent) === results.gates.MEMORY_PRESSURE,

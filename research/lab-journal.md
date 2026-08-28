@@ -4575,3 +4575,11 @@ Date: 2026-08-28 · Type: AUTHORIZED CACHE REMEDIATION / READMISSION PREREGISTRA
 Formal baseline available为109,110,300,672 bytes；immediate post-cleanup为112,308,187,136 bytes，实测增加3,197,886,464 bytes，比不变的112,206,020,608-byte稳定门高102,166,528 bytes。非正式RSS复测为1 main、4 renderers、Codex tree 4,294,721,536 bytes，仅比4 GiB ceiling低245,760 bytes，因此不能据此宣告稳定。
 
 R1预注册全量复用20 gates、24 attacks及全部阈值，只允许同一runner/auditor新增显式repository-relative `--spec`选择，为fresh root `experiments/codex-host-stability-readmission-v0-1`执行。即使R1 admitted也只允许进入重复观察阶段，不关闭Gate 0、不授权B58。
+
+## J-340 · B59-G0-R1显式spec选择与parent-evidence绑定实现
+
+Date: 2026-08-28 · Type: READMISSION TOOL INTERFACE IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+R1 preregistration commit `27d496a` 推送后，为runner/auditor增加唯一可选接口`--spec specs/name.json`。路径必须匹配repository-relative `specs/*.json`且禁止`..`；无参数行为仍绑定原baseline spec。Selected spec现在决定experiment ID、formal root、release paths、parent commit、阈值与攻击表，results/audit绑定selected spec path与SHA。
+
+R1还在`SPEC_AND_PARENT_IDENTITY`中加入parent results/audit文件SHA复核，确保readmission不能脱离原blocked evidence。Runner/auditor新SHA为 `da28e24ca7f87a8636ddbad5d2fd1d230e72e375458d220e86d4b0cb98cfbd4d` / `a0629f14a6cd2c23c04c580a65cd0932e0ff14ef80cb2537d4350494bd2e3f9d`；R1 spec SHA为 `89bee700c22585c45cfb6019b644091af2bf5df8c11bc33ba106d006b6befe9d`。Node syntax、zero-warning targeted ESLint与diff check通过，R1 formal root仍不存在。下一动作提交推送工具字节，再在fresh临时sparse clone以显式R1 spec排练。

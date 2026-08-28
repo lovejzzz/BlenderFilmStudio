@@ -7,7 +7,16 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const specPath = resolve(repositoryRoot, 'specs/codex-host-stability-baseline.v0.1.json');
+const defaultSpecRelativePath = 'specs/codex-host-stability-baseline.v0.1.json';
+let specRelativePath = defaultSpecRelativePath;
+if (process.argv.length > 2) {
+  if (process.argv.length !== 4 || process.argv[2] !== '--spec') throw new Error('usage: runner [--spec specs/name.json]');
+  specRelativePath = process.argv[3];
+}
+if (!/^specs\/[A-Za-z0-9._/-]+[.]json$/.test(specRelativePath) || specRelativePath.includes('..')) {
+  throw new Error('spec path must be a repository-relative specs/*.json path');
+}
+const specPath = resolve(repositoryRoot, specRelativePath);
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const formalRoot = resolve(repositoryRoot, spec.formalRoot);
 const resultsPath = resolve(formalRoot, 'results.json');
@@ -111,13 +120,14 @@ function writeExclusiveDurable(path, value) {
 
 if (existsSync(formalRoot)) throw new Error(`formal root is not fresh: ${formalRoot}`);
 
-const scopedStatus = runBounded('/usr/bin/git', [
-  'status', '--short', '--',
+const defaultReleasePaths = [
   'specs/codex-host-stability-baseline.v0.1.json',
   'research/2026-08-28-b59-g0-codex-host-stability-baseline-protocol.md',
   'scripts/run-b59-g0-codex-host-stability-baseline.mjs',
   'scripts/audit-b59-g0-codex-host-stability-baseline.mjs'
-], 'git-scoped-status', 32768).trim();
+];
+const releasePaths = spec.releasePaths ?? defaultReleasePaths;
+const scopedStatus = runBounded('/usr/bin/git', ['status', '--short', '--', ...releasePaths], 'git-scoped-status', 32768).trim();
 if (scopedStatus) throw new Error(`scoped release files are dirty: ${scopedStatus}`);
 
 const [headCommit, originMainCommit] = runBounded('/usr/bin/git', ['rev-parse', 'HEAD', 'origin/main'], 'git-identities', 4096).trim().split('\n');
@@ -174,8 +184,14 @@ const processSummary = summarizeProcesses(processes);
 
 const capturedAt = new Date().toISOString();
 const specSha256 = sha256File(specPath);
+const parentEvidence = spec.parentEvidence ? {
+  resultsSha256: sha256File(resolve(repositoryRoot, spec.parentEvidence.resultsPath)),
+  auditSha256: sha256File(resolve(repositoryRoot, spec.parentEvidence.auditPath)),
+  valid: sha256File(resolve(repositoryRoot, spec.parentEvidence.resultsPath)) === spec.parentEvidence.resultsSha256
+    && sha256File(resolve(repositoryRoot, spec.parentEvidence.auditPath)) === spec.parentEvidence.auditSha256
+} : null;
 const gates = {
-  SPEC_AND_PARENT_IDENTITY: specSha256.length === 64 && parentIsAncestor && headCommit === originMainCommit,
+  SPEC_AND_PARENT_IDENTITY: specSha256.length === 64 && parentIsAncestor && headCommit === originMainCommit && (parentEvidence?.valid ?? true),
   FRESH_FORMAL_ROOT: true,
   CRASH_EVIDENCE_IDENTITY: crash.sha256 === spec.crashEvidence.sha256 && crash.bytes === spec.crashEvidence.bytes && crash.lines === spec.crashEvidence.lines,
   CRASH_SIGNATURE_EXACT: crash.processExact && crash.identifierExact && crash.versionExact && crash.threadExact && crash.exceptionExact && crash.serializerSymbolPresent,
@@ -215,7 +231,8 @@ const results = {
   experimentId: spec.experimentId,
   capturedAt,
   git: { headCommit, originMainCommit, specParentCommit: spec.parentCommit, parentIsAncestor, scopedStatus },
-  spec: { path: 'specs/codex-host-stability-baseline.v0.1.json', sha256: specSha256 },
+  spec: { path: specRelativePath, sha256: specSha256 },
+  parentEvidence,
   formalRoot: spec.formalRoot,
   formalRootFreshAtStart: true,
   crash,
