@@ -3618,3 +3618,17 @@ P1 preregistration commit `15a4f19` 已推送后才创建三条新工具。Sourc
 Runner 冻结为两个 source children 加一个 analyzer child；在任何 child failure 上也会写 `execution.json`、`failure.json` 与 `receipt.json`，避免 H1 runner 没有 finally-path 的证据缺口。运行前另有 100 GiB reserve safety gate 和 32 MiB maximum projected write；该 gate 只保护主机，不改变 P1 development outcome。
 
 真实 Blender 5.2 factory-startup 加载 source 的 `--help` 路径成功，确认 `bpy`、frozen H1 import 与 argparse 可加载；两个 bundled-Python tools 的 `--help` 成功；三文件均通过 bundled Python 3.13 `py_compile`，P1 output root 保持不存在，render calls 为 0。按 source/analyzer/runner 顺序的 SHA-256 为 `9e1d338608306cfc89ed2111560ed88e46b860549505e084388e4150a7b3def2`、`6cf55af97af37dfe4e94e048246a3796b1a143760c0077fd6f343ea5fcb8b302`、`9e607fb8d8c33bedbf572e3a9d764eaffb08a48f40e7c161ce64e2bcbd58441f`。下一动作必须提交推送 exact tool bytes；只有该 tool-freeze commit 在远端后才能创建 P1 output root并运行两次新 render。
+
+## J-251 · D12.14-P1 Position oracle development supported
+
+Date: 2026-08-28 · Type: REAL BLENDER DEVELOPMENT RESULT · New Blender renders: 2
+
+Tool-freeze commit `0a7ed9b` 推送后，runner 一次性创建 fresh P1 root。两个 Blender 5.2 Cycles CPU source children 与 analyzer child 全部 exit 0；14/14 development gates 成立。27,383 个 foreground Position pixels全部 finite且 token exact，Position-derived current Depth max error 为 0，next Vector max magnitude为 0。
+
+旧 integer pixel-center oracle 的 Vector max error 为 `5.771591031589196e-4 px`；Position 投影显示真实 first-hit current raster 相对 integer center 在 X/Y 均有约 `5.07e-4`–`5.56e-4 px` 偏移。改用同一个 Position world point 计算 current/previous endpoints 后，Vector error median/p99/max 为 `7.949904869519742e-6` / `2.4902754290678786e-5` / `3.281015233369544e-5 px`，通过冻结 `1/16384` gate。该开发结果支持 Position 作为 H2 control oracle，不支持 Position 进入 reconstruction decisions。
+
+两次 EXR container bytes不同，但 Combined、Depth、Position、Vector、Object Index 与 Material Index decoded arrays全部 byte exact；metadata differences精确限制在 Combined 的 `Date`、`RenderTime`、`Scene`。因此 H2 repeat identity 应冻结为 decoded-pass digest，container与 allowlisted metadata另行报告。
+
+独立 posthoc evidence check 的 19/19 项通过，包括 results/execution/receipt 与两份 source report self-hash、EXR bindings、artifact/log hashes、3/3 children和实际 operation counts。与此同时保留一个工具覆盖缺口：P1 analyzer 的 `OPERATION_BOUNDARY` 是常量 true，而不是内部 replay；独立检查证明观察值，但不是 preregistered gate。H2 必须把 source/runner counts replay 写进 analyzer 与 audit。Result file/self hashes为 `69edb9ad3db3c67b5b21ad3b3a4c9e0ab59e05e29d38a60a34ce9ae04457b9fa` / `c3d8b7226872702d3947320ed19dbeed80b19704adf9432dbc2505e4abcd534e`；receipt self-hash为 `4b805e0f513100b836867c017cab1fa07cf8101a9c8b4fd75fef68b9871e40e8`。
+
+P1 至此封闭，不修改或重跑。下一步先提交并推送 exact evidence root、posthoc audit 和 result note；然后把 P1 与 H1 inverse-depth 诊断发布到研究网站，再预登记 fresh H2。

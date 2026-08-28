@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerRigidDirectionalPositionOracleDevelopmentPosthocAudit.v0.1",
+  "experimentId": "B52-D12.14-P1",
+  "status": "POSTHOC_INDEPENDENT_EVIDENCE_CHECK_ACCEPTED_NOT_A_PREREGISTERED_GATE",
+  "scientificVerdict": null,
+  "developmentVerdict": "POSITION_PASS_ORACLE_DEVELOPMENT_SUPPORTED",
+  "checksPassed": 19,
+  "checksTotal": 19,
+  "allPassed": true,
+  "checks": {
+    "resultSelfHash": true,
+    "executionSelfHash": true,
+    "receiptSelfHash": true,
+    "sourceReportSelfHashes": true,
+    "sourceExrBindings": true,
+    "sourceOperationCounts": true,
+    "receiptExecutionFileAndSelfHashes": true,
+    "receiptResultFileAndSelfHashes": true,
+    "receiptArtifactFileHashesAndSizes": true,
+    "threeSuccessfulChildren": true,
+    "childLogHashes": true,
+    "executionOperationCounts": true,
+    "fourteenResultGatesTrue": true,
+    "failureFileAbsent": true
+  },
+  "fileSha256": {
+    "results.json": "69edb9ad3db3c67b5b21ad3b3a4c9e0ab59e05e29d38a60a34ce9ae04457b9fa",
+    "execution.json": "5ecde80477a2372d7c837b34a38f83fe67449baf453329cfd1a787149aeb6618",
+    "receipt.json": "b24e63690338b33b09d915c771795f2e57e69c612b50ce48116b4d518979c203"
+  },
+  "rootBytesBeforeAuditFile": 1092953,
+  "toolCoverageFinding": {
+    "issue": "The frozen analyzer assigns OPERATION_BOUNDARY=true after validating source identities but does not itself replay source report operationCounts or runner child counts.",
+    "independentCheck": "This posthoc audit directly verified both source report operationCounts, all three child exit codes and logs, and execution operationCounts.",
+    "effect": "Observed P1 counts are independently supported, but H2 must replace the constant gate with executable replay. This audit does not modify P1 results or become a preregistered P1 gate."
+  },
+  "operationCounts": {
+    "posthocAuditProcesses": 1,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "auditHash": "3b731a9b9f01f18283ff79de4e0b48fe8e1f95cfbe48308f81d715824f15dc8e"
+}
