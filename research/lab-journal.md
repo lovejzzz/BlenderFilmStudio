@@ -3514,3 +3514,17 @@ Sites 发布前再次复核 current user role 为 owner、access mode 为 custom
 公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-owner-rigid-directional-calibration-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-owner-rigid-directional-calibration-v0-1/`。
 
 下一阶段不再修改 calibration 结论。必须使用新 experiment ID 预登记 fresh Blender render holdout：固定 C2 导出的三条 world transforms，但重新冻结 Material/Object tokens、Generated/Vector/Depth signals、EXR outputs、两次 clean repeats 与 quality/directional/fallback gates；calibration masks 只能用于 fixture construction，不能充当 confirmatory denominator。
+
+## J-242 · D12.14-H1 fresh rigid directional render holdout 预登记
+
+Date: 2026-08-28 · Type: PILOT-INFORMED RENDERED HOLDOUT PREREGISTRATION · New Blender renders: 0
+
+在新 spec、八个 H1 tool paths、preflight root 与 formal root 均不存在时，冻结 `B52-D12.14-H1`。该实验只继承 C2 的三条刚体 world transforms；新 raster、Material/Object tokens、mesh tessellation、Generated emission coefficients、render seed、EXR paths 与全部真实 passes 均在 C2 之后冻结。正式矩阵为 3 fixtures × 2 frames × 2 clean repeats = 12 个 factory-empty Cycles CPU renders，加 adapter、Python/Node consumers、typed envelopes、analyzer 与 independent audit，总计 56 个唯一子进程。
+
+预登记前的 zero-render raster-phase pilot 暴露了新的结构反例：把 C2 三个 raster 直接改为 `[199,133]`、`[201,135]`、`[203,137]` 后，TOP/BOTTOM/NEITHER 目标 witnesses 全部变为 0。随后在每个 C2 宽高的 ±8、step 2 网格上做未落盘探索，确认目标域对 width phase 敏感而对已选择 width 下的 height 更稳定。冻结的新 raster 为 TOP `[193,135]`（189 target，15,876 bilinear，15,687 full）、BOTTOM `[193,137]`（189 target，22,302 bilinear，22,113 full）与 NEITHER `[197,139]`（16,065 target/bilinear，0 full）；三者 non-target one-sided 均为 0。该 pilot 只观察解析结构域，没有构造新材质、调用 Blender、读取 passes 或计算 risk/acceptance/quality，明确不是 confirmatory measurement。
+
+正式判定继续使用 D12.12-H1 的 factor 1、Q30/Q24、inclusive threshold 131,072、2⁻¹⁵ quality 与 exact fallback；TOP/BOTTOM 每个 repeat 至少 128 个 formal pass-derived eligible cells、至少 1 accepted 且 acceptance ≥ 50%，NEITHER 每个 repeat 至少 1,024 witnesses 且 accepted 必须为 0。任何 pilot mask 都禁止成为 source、adapter、consumer、analyzer 或 auditor 输入。即使全部通过，也只支持这三个 fresh opaque rigid-planar emission fixtures；D12.13-D1 的 global coverage rejection 仍阻止 compiler promotion。
+
+预登记时 free bytes 为 109,606,830,080；冻结最大写入 134,217,728 bytes 后余量 109,472,612,352，仍高于 100 GiB reserve。Spec static audit 通过：3 fixtures、56-process sum、12-render matrix、唯一 Material tokens、shared Object Index negative controls、full-frame regions、parent tree identity 与 runtime executable hashes全部一致。Spec SHA-256: `7ff239d91dca6ea8708ce4cac955dd0b129ae067028a77ec1699a43a236195a8`。
+
+Artifact: `specs/blender-material-owner-rigid-directional-render-holdout.v0.1.json`。下一动作必须先提交并推送 exact spec；随后才允许实现八个工具。Formal root 在 tool-freeze commit 之前必须不存在。
