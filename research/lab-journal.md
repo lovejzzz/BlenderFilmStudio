@@ -4583,3 +4583,13 @@ Date: 2026-08-28 · Type: READMISSION TOOL INTERFACE IMPLEMENTATION · New Blend
 R1 preregistration commit `27d496a` 推送后，为runner/auditor增加唯一可选接口`--spec specs/name.json`。路径必须匹配repository-relative `specs/*.json`且禁止`..`；无参数行为仍绑定原baseline spec。Selected spec现在决定experiment ID、formal root、release paths、parent commit、阈值与攻击表，results/audit绑定selected spec path与SHA。
 
 R1还在`SPEC_AND_PARENT_IDENTITY`中加入parent results/audit文件SHA复核，确保readmission不能脱离原blocked evidence。Runner/auditor新SHA为 `da28e24ca7f87a8636ddbad5d2fd1d230e72e375458d220e86d4b0cb98cfbd4d` / `a0629f14a6cd2c23c04c580a65cd0932e0ff14ef80cb2537d4350494bd2e3f9d`；R1 spec SHA为 `89bee700c22585c45cfb6019b644091af2bf5df8c11bc33ba106d006b6befe9d`。Node syntax、zero-warning targeted ESLint与diff check通过，R1 formal root仍不存在。下一动作提交推送工具字节，再在fresh临时sparse clone以显式R1 spec排练。
+
+## J-341 · B59-G0-R1 parameterized readmission rehearsal有效
+
+Date: 2026-08-28 · Type: BOUNDED READMISSION REHEARSAL · New Blender processes: 0 · New Blender renders: 0
+
+Parameterized tool commit `fe43248` 推送后，fresh临时sparse clone以显式R1 spec完成runner+auditor。Parent results/audit SHA绑定有效，selected spec path/SHA exact，synthetic control有效，所有integrity checks通过，24/24 attacks拒绝，合计8/12 children且所有禁用资源为0。Results/audit SHA为 `7e46ace77de901a7a5b391621c185f3d74c8eab4f32057a1d767c4c955d40eec` / `15ec063adbb2f7ff6b2292faa8e0dd7e07e6cfe12124edc41adf04cade265e2c`。
+
+Rehearsal final为可信`BLOCKED_HOST_STABILITY`，19/20 gates；磁盘已通过，available 112,283,795,456 bytes、门上余量77,774,848 bytes。唯一失败为`CODEX_TREE_RSS`：4,321,673,216 bytes，超4 GiB ceiling 26,705,920 bytes。额外浏览器检查显示当前in-app browser为0 session tabs / 0 user tabs，因此没有可关闭标签，未执行close或打开新页面。
+
+实际R1 formal root仍不存在。下一动作提交推送本entry后执行真实R1；若RSS仍失败，则保留正式阻断证据并在可恢复断点请求重启Codex，不发送宽泛process signals。
