@@ -61,6 +61,7 @@ export default function OneSidedCurvaturePage() {
       <Link className="brand" href="/"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
       <nav aria-label="D12.12 one-sided curvature 导航">
         <Link href="/blender-material-index-owner-integration-v0-1">D12.11</Link>
+        <Link href="/blender-material-owner-one-sided-curvature-holdout-v0-1">H1 Result</Link>
         <a href="#verdict">结论</a>
         <a href="#rule">规则</a>
         <a href="#evidence">像素图</a>
@@ -181,6 +182,6 @@ export default function OneSidedCurvaturePage() {
       </div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.12 One-sided Curvature Candidate</b></div><p>post-hoc candidate derived · fresh holdout required</p><Link href="/blender-material-index-owner-integration-v0-1">返回 D12.11 Material Owner →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B52-D12.12 One-sided Curvature Candidate</b></div><p>post-hoc candidate derived · H1 later rejected</p><Link href="/blender-material-owner-one-sided-curvature-holdout-v0-1">查看 D12.12-H1 新鲜留出结果 →</Link></footer>
   </main>;
 }

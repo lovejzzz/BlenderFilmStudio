@@ -3346,3 +3346,13 @@ Raw EXR repeat SHA 不同亦触发 hard gate；10 个 canonical pixel arrays 则
 Result / audit / execution / receipt file SHA-256 分别为 `175c6c568b60b29332954c9bd3f24634c4028aaf8a5c221fd999ad01acc9c0a7` / `d983482d6d0d752e268273487592a42a7700b121c8769195d49001bb2742c4e1` / `babddc5c9849004c901d99d0c86f8b09d7d5696ad3b9149d5b5a5c99bcc6c935` / `9b692d8945821c2458a41952cc3cecde73066703d603455a484d9d4d8b7d9b14`；对应 self-hash 为 `c3c84f825b78ff4302fc6e65ff04956ac783a65dcc5ccf99fc1688bd5d15fdee` / `bc7e90af03a631c6ae799581ff3e84a855f149bab28e1ba59fc43c709e922ab4` / `0798b9edf859d9e5cc19a9b5b5190383737e272388cf716be5fca0ef63c747ee` / `55c122a7ecd748b07cf2803b4694ba05d77b1f0833d9c4295d2fbbdc4d5a6830`。
 
 Artifact: `research/2026-08-28-b52-d12-12-h1-one-sided-curvature-holdout-result.md`.
+
+## J-227 · D12.12-H1 rejection tab 与 source-bound 反例图通过构建门
+
+Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
+
+新增 `/blender-material-owner-one-sided-curvature-holdout-v0-1/`，首屏明确区分 `evidence receipt valid` 与 `candidate rejected`。页面将三类失败同时呈现：risk threshold 与 quality gate 的 4× policy gap、TOP/BOTTOM/NEITHER fixture 未形成目标 stress domain、raw EXR container metadata 不确定性；并保留 20/23 hard checks、24 renders、110 processes、21/21 audit baseline 与 93/93 attacks 等通过证据，避免把 reject 描述为坏实验。
+
+只读 exporter 从已提交 R1 arrays 生成方向 2×2 matrix 与 neither quality counterexample 两张 nearest-neighbor 分类图。Manifest internal hash `f24511e8f2bd2ff80fcc7d067fcc8cd587f2f38222492c82c377b01ba11436fc`，文件 SHA-256 `4b706ef2840480be23a0e0921207babec234d5cb7e2dd8d43360e5a3da8c293f`；direction / quality PNG SHA-256 为 `08d78466e557df2ce2da976edd95d04d129f35d6a85b27d3a9f52eec3d7d75fd` / `40947278064494b4a45fcef44eeb9e1167430f935490048415354f720da82aa0`。分类固定为 `SOURCE_BOUND_VISUALIZATION_NOT_DECISIONAL_EVIDENCE`。
+
+精确 local route 返回 HTTP 200；定向 ESLint 为 0/0，完整 lint 为 0 errors / 31 个既有 warnings。Vinext/Sites production build 成功并发现 80 个 warmup paths；GitHub Pages Next static build 成功生成 82/82 pages，并把新 route 明确认定为 static。没有执行未请求的截图、DOM 或交互 QA。下一动作是只提交 exporter、manifest/PNGs、新页、CSS、导航与本 journal entry，随后等待公开 Pages exact commit 成功，并在 owner-only Sites access 复核后发布同一 source commit。
