@@ -3652,3 +3652,17 @@ Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
 Sites 发布前再次验证 current user role 为 owner、access mode 为 custom、唯一 allowed account 为 owner、external visitors 为 0、workspace/tenant groups 为空。Owner-only P1 exact route 的匿名请求返回 HTTP 401；没有改变站点共享边界。公开 route 为 `https://lovejzzz.github.io/BlenderFilmStudio/blender-projective-depth-position-oracle-v0-1/`；owner-only route 为 `https://blender-film-studio-research.skylab.chatgpt.site/blender-projective-depth-position-oracle-v0-1/`。
 
 P1 publication 至此封闭。下一动作转入 fresh H2 preregistration：先冻结 hypothesis、fresh fixture、inverse-depth algorithm、Position-only control oracle、decoded-pass repeat identity、probe-shaped analyzer smoke、actual operation-count replay、minimum witness 与 failure-receipt semantics；spec commit 推送之前不得创建 H2 tools 或 formal output root。
+
+## J-254 · D12.14-H2 projective-depth formal holdout 预登记
+
+Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender renders: 0
+
+在八条 H2 tool paths、preflight root 与 formal root 全部确认不存在时，预登记 `B52-D12.14-H2`。该实验使用 C2 candidate table 中此前未选中、从未渲染的 `NEITHER-000060` trajectory；新 raster 为 `201x137`，并冻结新的 foreground/background tessellation、Material/Object tokens、Generated emission、view layer 与 render seed。H1/P1 的 EXR、decoded arrays 与 masks 永久禁止成为 H2 measurement inputs。
+
+预登记前唯一新增 construction evidence 是一次 unsaved Blender-bundled Python scalar pilot：它只调用 frozen C2 analytic raster functions，在 16 个新 raster sizes 上检查 structural masks；没有 Blender process、render、EXR、model 或 network call。冻结 raster 的 analytic current-radius2 / bilinear-support / NEITHER / full-stencil counts 为 `26,201 / 13,034 / 13,034 / 0`。这些值只建立目标 domain，不预测 Cycles Depth、Position、Vector、tokens、RGB、repeat identity 或 verdict。
+
+H2 把两条修正严格分离。consumer decision只允许 Combined RGBA、Depth、Material Index 与 Vector XY；正式 depth gate使用 `1 / bilinear(1/Z)`，而 `bilinear(Z)` 只是 paired control。Position、Vector ZW、Object Index 与 analytic truth写入独立 control directory，只允许 analyzer/auditor验证 actual first-hit Depth/Vector，不得进入 Python/Node decisions。每个 repeat必须至少有 1,024 个 inverse-depth-valid cells、1,024 个 direct-Z-fail/inverse-pass rescued cells与1,024个 NEITHER witnesses；NEITHER accepted必须为0，fallback必须 exact。
+
+预登记同时冻结 decoded-pass repeat identity、仅 `Date`/`RenderTime`/`Scene` 的 container metadata allowlist、Python/Node every-array identity、current-RGB decision metamorphism、64项独立 semantic attacks、4次正式 Cycles renders、analyzer probe-shaped schema smoke、analyzer/audit actual operation-count replay，以及 runner child failure finally-path 的 execution/failure/receipt。任何 tool/execution failure都只能产生 `scientificVerdict=null`，不得修复后用相同 ID重跑。
+
+Spec SHA-256 为 `2961f621b38f934cffaa7abe36deaaa5e01e7505d6361985039d0380578d244b`；protocol SHA-256 为 `6b87d3c26d1fe7ec93664076a893fe6d50bd0de32df331dbf1fd5b97d10767fe`。下一动作必须只提交并推送 spec、protocol 与本 entry；该 preregistration commit在远端之前不得创建任何 H2 tool byte。
