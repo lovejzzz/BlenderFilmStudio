@@ -4433,3 +4433,13 @@ Live preflight/request evidence commit的exact SHA为 `6f2f7be39cd7f9577a7ae0c08
 证据采集后，harness只向再验证的native process group发TERM+CONT，并等待wrapper收尾；86984/87019/87185三个PID均确认消失，无Blender核心进程遗留。Production output以`RESTRICTED_COMPILE` invalidation收尾，file SHA/self-hash为 `75c2c5a6a994441183fdb27625b47bf87644143cc31f4655e058756d737c0d37` / `3d8560a6c0612c96dced70a8315668906427612059b9964d72739ec5e7790e26`，production receipt不存在，render/model/network/Docker为0。
 
 修正只改recovery检查顺序，不改identity判定强度：compile若已有durable native identity，先检查native；exact live立即WAIT，ambiguous/reused立即REFUSE，exact dead才继续查wrapper。Verifier recovery对durable artifact-audit Blender对称使用相同child-first规则。Wrapper仍exact live时仍WAIT，两者dead才ABANDON，任一identity ambiguous均REFUSE。修正后orchestrator candidate SHA为 `ab06eb891719f4ce65b1b48535cfcbb40007bf801f351572766fb1965dcee0ab`，ledger library保持 `0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13`；Node syntax、targeted ESLint与diff check通过。下一动作先提交推送反例与correction bytes，然后用fresh C1 preflight/request/job roots重跑同一live intervention。
+
+## J-326 · B58 live-process child-first C1 preflight接受
+
+Date: 2026-08-28 · Type: CORRECTED DEVELOPMENT LIVE-PROCESS PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
+
+Child-first correction commit `b629b9bc8b98ce1f9b2d1f6ad032b575c754fa0b` 与`origin/main` exact后，使用fresh C1 preflight/output/production-attempt/job roots重新准入B01 live-process cell。Preferred preflight返回ACCEPTED，BuildPlan hash保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；preflight file SHA/self-hash为 `b5b0a0f9636a4d092b42fa63546314e95de8fe2746543455cc3d79357c211386` / `e9ed0fdbb2199a16127c92943e90d0e8ace1c7c1c9fb1686c684f87749fc05e7`。Observed available为109,273,387,008 bytes，projection后108,736,516,096 bytes，高于100 GiB reserve；Blender/render/model/network/Docker为0。
+
+C1 request file SHA/requestHash为 `d9e1572a35e9faae989acc893e77e1c47b79c9cff04e9c7bed4cac928dd7c875` / `38be38faaa1acf467631d18010883283d2f990d7f7fe2960f5c7ffd87f6c3d7a`，绑定tool-freeze commit `b629b9bc8b98ce1f9b2d1f6ad032b575c754fa0b`、unchanged ledger SHA `0946685b…`与corrected orchestrator SHA `ab06eb891719f4ce65b1b48535cfcbb40007bf801f351572766fb1965dcee0ab`。介入、期望WAIT outcome、zero duplicate process与exact-PID cleanup边界与J-324完全相同；原root不复用。
+
+C1 execution roots与official B58 roots仍不存在。下一动作只提交推送C1 preflight/request与本entry，随后使用相同bounded harness一次性复现。
