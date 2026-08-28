@@ -600,15 +600,18 @@ async function recoverStartedCompile(jobRoot, state) {
   if (!processEvent?.event.payload?.process) throw new Error('REFUSE_RECOVERY: started compile has no recorded process identity');
   const nativeEvent = [...state.ledger.events].reverse().find(row => row.event.eventType === 'NATIVE_PROCESS_OBSERVED'
     && row.event.stageId === 'PRODUCTION_COMPILE' && row.event.attemptId === started.attemptId);
+  let nativeComparison = null;
+  if (nativeEvent?.event.payload?.process) {
+    nativeComparison = await compareRecordedProcess(nativeEvent.event.payload.process);
+    if (nativeComparison.state === 'LIVE_MATCH') return { status: 'WAIT_LIVE_PROCESS', process: nativeComparison.observed };
+    if (nativeComparison.state !== 'DEAD') throw new Error('REFUSE_RECOVERY: native Blender PID identity is ambiguous or reused');
+  }
   const wrapperComparison = await compareRecordedProcess(processEvent.event.payload.process);
   if (wrapperComparison.state === 'LIVE_MATCH') return { status: 'WAIT_LIVE_PROCESS', process: wrapperComparison.observed };
   if (wrapperComparison.state !== 'DEAD') throw new Error('REFUSE_RECOVERY: compiler wrapper PID identity is ambiguous or reused');
   if (!nativeEvent?.event.payload?.process) {
     throw new Error('REFUSE_RECOVERY: dead wrapper has no durable native Blender identity; orphan state is ambiguous');
   }
-  const nativeComparison = await compareRecordedProcess(nativeEvent.event.payload.process);
-  if (nativeComparison.state === 'LIVE_MATCH') return { status: 'WAIT_LIVE_PROCESS', process: nativeComparison.observed };
-  if (nativeComparison.state !== 'DEAD') throw new Error('REFUSE_RECOVERY: native Blender PID identity is ambiguous or reused');
   const terminal = await writeAttemptTerminal(jobRoot, 'PRODUCTION_COMPILE', started.attemptId, 'ABANDONED', {
     reason: 'RECORDED_WRAPPER_DEAD_WITHOUT_TERMINAL_STAGE_RECEIPT',
     process: {
@@ -722,15 +725,18 @@ async function recoverStartedVerify(jobRoot, state) {
   const wrapperEvent = [...state.ledger.events].reverse().find(row => row.event.eventType === 'PROCESS_STARTED'
     && row.event.stageId === 'VERIFY_RECEIPT' && row.event.attemptId === started.attemptId);
   if (!wrapperEvent?.event.payload?.process) throw new Error('REFUSE_RECOVERY: started verifier has no recorded process identity');
+  const auditEvent = [...state.ledger.events].reverse().find(row => row.event.eventType === 'ARTIFACT_AUDIT_PROCESS_OBSERVED'
+    && row.event.stageId === 'VERIFY_RECEIPT' && row.event.attemptId === started.attemptId);
+  let auditComparison = null;
+  if (auditEvent?.event.payload?.process) {
+    auditComparison = await compareRecordedProcess(auditEvent.event.payload.process);
+    if (auditComparison.state === 'LIVE_MATCH') return { status: 'WAIT_LIVE_PROCESS', process: auditComparison.observed };
+    if (auditComparison.state !== 'DEAD') throw new Error('REFUSE_RECOVERY: artifact-audit Blender PID identity is ambiguous or reused');
+  }
   const wrapperComparison = await compareRecordedProcess(wrapperEvent.event.payload.process);
   if (wrapperComparison.state === 'LIVE_MATCH') return { status: 'WAIT_LIVE_PROCESS', process: wrapperComparison.observed };
   if (wrapperComparison.state !== 'DEAD') throw new Error('REFUSE_RECOVERY: verifier PID identity is ambiguous or reused');
-  const auditEvent = [...state.ledger.events].reverse().find(row => row.event.eventType === 'ARTIFACT_AUDIT_PROCESS_OBSERVED'
-    && row.event.stageId === 'VERIFY_RECEIPT' && row.event.attemptId === started.attemptId);
   if (!auditEvent?.event.payload?.process) throw new Error('REFUSE_RECOVERY: dead verifier has no durable artifact-audit Blender identity');
-  const auditComparison = await compareRecordedProcess(auditEvent.event.payload.process);
-  if (auditComparison.state === 'LIVE_MATCH') return { status: 'WAIT_LIVE_PROCESS', process: auditComparison.observed };
-  if (auditComparison.state !== 'DEAD') throw new Error('REFUSE_RECOVERY: artifact-audit Blender PID identity is ambiguous or reused');
   const terminal = await writeAttemptTerminal(jobRoot, 'VERIFY_RECEIPT', started.attemptId, 'ABANDONED', {
     reason: 'RECORDED_VERIFIER_AND_AUDIT_DEAD_WITHOUT_TERMINAL_STAGE_RECEIPT',
     process: {

@@ -4421,3 +4421,15 @@ Native-interruption/retry evidence commit `bd78b14` 推送后，为B01 live-proc
 Self-hashed request file SHA/requestHash为 `99518e996626d7d5bf44052ef308de1be23170c41f5561f691a74ff5c976036a` / `1c8ab0544a5257ecacb844d210d79fc9bce6be932ea5adac98bd824803ffa705`，只注册一个B01 normal compile candidate。Development intervention不改production/tool-freeze bytes：首个orchestrator在`NATIVE_PROCESS_OBSERVED`已fsync后，由外部harness对exact native PID发SIGSTOP，再终止orchestrator模拟主进程丢失，保持已记录wrapper/native child存活。第二个resume必须验证identity并返回`WAIT_LIVE_PROCESS`，compile `PROCESS_STARTED` / `NATIVE_PROCESS_OBSERVED`均不得增加，也不得创建stage terminal receipt或第亊output。证据采集后只允许向记录且再验证的exact PID/process group发送终止信号，禁止宽泛清理。
 
 Execution roots与official B58 roots仍不存在。下一动作只提交推送本preflight/request与entry，随后由bounded harness一次性执行上述过程。
+
+## J-325 · live-process首轮安全REFUSE并定位re-parented wrapper优先级缺口
+
+Date: 2026-08-28 · Type: DEVELOPMENT LIVE-PROCESS COUNTEREXAMPLE / RECOVERY CORRECTION · New Blender processes: 1 · New Blender renders: 0
+
+Live preflight/request evidence commit的exact SHA为 `6f2f7be39cd7f9577a7ae0c085bc716ed54a3ae2`。Bounded harness启动orchestrator PID 86984，ledger先后持久化production wrapper PID 87019和native Blender PID 87185及其exact identity hashes `72e5f444a1b481dfd449bf31db27ba2c1614aae355090af7466baa0dd00b4112` / `353f7d29fd571f3757ff8bf979cc7f4e15162fda185a53566913b72c0b015054`。Harness对重新验证的native PID发SIGSTOP，`ps` state为`TNs`，随后对exact orchestrator PID发SIGTERM，终端exit 143；wrapper与native在resume前均仍存活。
+
+第二个resume没有spawn新进程：`PROCESS_STARTED` / `NATIVE_PROCESS_OBSERVED`计数均保持1→1，compile terminal receipt不存在。但它在PLAN `STAGE_SKIPPED_VERIFIED`使ledger 6→7后返回`REFUSE_RECOVERY: compiler wrapper PID identity is ambiguous or reused`，而非预期的`WAIT_LIVE_PROCESS`。原因是orchestrator死亡后npm wrapper被OS re-parent，其parentPid改变使wrapper full identity不再exact；但已记录native Blender仍在原budget-supervisor下，full identity保持exact live。当前代码先查wrapper，因而在检查exact live native之前就fail-closed。该root是安全bounded反例：没有duplicate spawn，但不满足预登记WAIT outcome，不在原root重试。
+
+证据采集后，harness只向再验证的native process group发TERM+CONT，并等待wrapper收尾；86984/87019/87185三个PID均确认消失，无Blender核心进程遗留。Production output以`RESTRICTED_COMPILE` invalidation收尾，file SHA/self-hash为 `75c2c5a6a994441183fdb27625b47bf87644143cc31f4655e058756d737c0d37` / `3d8560a6c0612c96dced70a8315668906427612059b9964d72739ec5e7790e26`，production receipt不存在，render/model/network/Docker为0。
+
+修正只改recovery检查顺序，不改identity判定强度：compile若已有durable native identity，先检查native；exact live立即WAIT，ambiguous/reused立即REFUSE，exact dead才继续查wrapper。Verifier recovery对durable artifact-audit Blender对称使用相同child-first规则。Wrapper仍exact live时仍WAIT，两者dead才ABANDON，任一identity ambiguous均REFUSE。修正后orchestrator candidate SHA为 `ab06eb891719f4ce65b1b48535cfcbb40007bf801f351572766fb1965dcee0ab`，ledger library保持 `0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13`；Node syntax、targeted ESLint与diff check通过。下一动作先提交推送反例与correction bytes，然后用fresh C1 preflight/request/job roots重跑同一live intervention。
