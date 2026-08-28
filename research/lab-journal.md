@@ -3204,3 +3204,15 @@ Date: 2026-08-28 · Type: RECOVERABLE PUBLICATION CHECKPOINT · New Blender rend
 本检查点为 Codex 升级重启而建立。恢复后的下一条确定路径是：新增 `/blender-material-index-owner-integration-v0-1/` tab，链接正式与 adversarial artifacts，执行 lint/build，然后同时发布 GitHub Pages 与 owner-only Sites。发布完成后，下一技术实验固定在 one-sided extra-stencil coverage gap（sweep 146、parallax 152），不得回头修改 D12.11-I1 的 frozen artifacts。
 
 Artifacts: `scripts/export-b52-d12-11-i1-site-proxies.py`; `public/evidence/b52-d12-11-i1/manifest.json`.
+
+## J-214 · D12.11-I1 研究页通过双构建门
+
+Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
+
+新增 `/blender-material-index-owner-integration-v0-1/` tab，将 `15→0` primary endpoint、四通道 byte-exact negative controls、四 fixture 配对矩阵、formal mutation gap、独立 56/56 semantic attacks，以及仍未通过的 coverage 门放在同一叙事链。四张 evidence proxies 均通过 Next Image 以原始分类像素的 nearest-neighbor 语义展示；页面明确标注它们不参与 verdict。
+
+定向 ESLint 对新增页、D12.10 导航与首页导航为 0 errors / 0 warnings；全仓 ESLint 为 0 errors，保留 30 个历史 warnings。Vinext/Sites production build 成功并识别 78 条 routes；GitHub Pages 的 Next static build 成功生成 80/80 pages，新增 route 被确认 static。开发服务器对精确 route 返回 HTTP 200，未进行未请求的浏览器 DOM 或截图 QA。
+
+下一恢复点是提交并推送这份 exact validated source，然后只在确认 Sites access 仍为 owner-only 后部署同一 commit；GitHub Pages 也必须等待对应 workflow 成功，不能以本地 build 代替公开可访问性证据。
+
+Artifact: `app/blender-material-index-owner-integration-v0-1/page.tsx`.
