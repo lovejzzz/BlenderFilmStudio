@@ -3236,3 +3236,13 @@ Date: 2026-08-28 · Type: POST-HOC CANDIDATE PREREGISTRATION · New Blender rend
 这是 post-hoc derivation，预登记同时写死一条反成功叙事：即使 146 个 sweep support rejects 全部恢复，仍不足以单独达到原 97% cell gate，risk rejects 必须作为独立机制处理。D1 不启动 Blender/render/model/network；只有未来另行预登记的 D12.12-H1 才能测试泛化。Spec SHA-256: `f179b4cea6c8d3bc19b4cf2534055ef98b3fa8dac9954bfeae28bc2a237dd640`。
 
 Artifact: `specs/blender-material-owner-one-sided-curvature-derivation.v0.1.json`.
+
+## J-217 · D12.12-D1 四工具实现待冻结
+
+Date: 2026-08-28 · Type: IMPLEMENTATION FREEZE CHECKPOINT · Formal outputs: 0
+
+预登记 commit `9b327ea` 之后才创建四个工具：独立 scalar Python/Node consumers、带独立 analyzer mode 的 runner，以及不 import consumers/runner 的 NumPy auditor。两套 consumers 都从 D12.11 adapter 的 Material Index、Depth、Vector、previous RGB/alpha 与 H1 analytic projection 重算 structural/radius2/bilinear domains；C1 classification 只作为 measurement mask，不参与决定。
+
+每个 consumer 一次处理七个 frozen factors，full symmetric stencil 不使用 factor，one-sided row/column 才应用 inflation。输出包含 control masks 与每 factor 的 eligible/unavailable/accepted/risk/reconstruction arrays。Runner 预定 16 consumer + 1 analyzer + 1 audit child processes；auditor 对 parent/adapter/raw decisions/risk/support/fallback/result/cross-language/repeat 执行 64 个真实 in-memory mutations，不允许 `mutationNonce` 计数。
+
+四工具已分别通过 Blender 5.2 bundled Python syntax compilation 或 Node syntax check，补丁 whitespace check 通过；尚未创建 formal root，也没有运行任何 consumer。下一动作必须先把这些 exact bytes 提交为 tool-freeze commit，再允许 runner 创建第一份 D12.12 output。
