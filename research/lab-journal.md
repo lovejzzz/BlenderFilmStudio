@@ -2983,6 +2983,18 @@ H1 指向的下一变量被限制为 owner identity 与 support geometry，不�
 
 Artifact: `specs/blender-temporal-owner-support-localization.v0.1.json`.
 
+## J-197 · D12.10-D1 定位输出因比例聚合错误作废
+
+Date: 2026-08-28 · Type: TOOL/MEASUREMENT FAILURE · New Blender renders: 0
+
+D12.10-D1 首次 analyzer 输出表面通过 9/9 checks 与 24/24 mutations，独立 frame-1 owner token 也与 H1 analytic-owner payload exact；但人工复核发现 `acceptedToTrueOwnerBilinear` 与 `acceptedToTrueOwnerFullStencil` 使用了全体 accepted 作分子，而不是 accepted 与各自 domain 的交集。
+
+same-index primary 中恰有 15 个 accepted pixels 落在 true-owner bilinear domain 外，因此 background owner ratio 变成 `1.006846...`，cell 的 full-stencil ratio 变成 `1.004761...`。任何 set retention 大于 1 都直接证明聚合错误。原始 tool、payload 与结果不覆盖、不删除；D1 emitted verdict 作废。
+
+与此同时，原始分类暴露的 17 个 same-index bilinear owner aliases 和其中 15 个 accepted aliases 是必须进一步核验的安全边界。C1 只允许把两个 numerator 改成显式 set intersection，并新增 ratio ∈ [0,1] 与 accepted decomposition checks；必须使用新 tool path 和 fresh output root。
+
+Artifact: `research/2026-08-28-b52-d12-10-d1-aggregation-defect.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
