@@ -3642,3 +3642,13 @@ Date: 2026-08-28 · Type: WEBSITE SOURCE VALIDATED / RESTART CHECKPOINT · New B
 首页新增 `D12.14-P1 投影修复` tab；H1 页面新增到 P1 的证据链链接和 H2 约束；GitHub Pages sparse checkout 显式加入 P1 results/audit 两份机器证据。新页、H1 页与首页定向 ESLint 为 0 errors；Vinext/Sites production build 成功并发现 84 个 CDN warmup paths；GitHub Pages static build 成功生成 86/86 pages。localhost 上首页、H1 和 P1 route 均返回 HTTP 200。P1 页 metadata 的 title、description 与 canonical 已核对；详情页显式清除继承的 Open Graph/X 图片，同时保留全站既有 `public/og.png`，没有伪造与实验无关的图像。
 
 按站点验证边界，本阶段没有执行用户未请求的截图、DOM、点击或视觉 QA。下一动作是只提交并推送站点源文件、本 journal 与 Pages workflow；必须继续排除用户原有 `README.md` 和三份 2026-08-26 research drafts。重启后先确认该 source commit 与 GitHub Pages workflow，再完成 owner-only Sites 发布；之后以全新 ID 预登记 H2，把 inverse-depth、Position oracle、decoded-pass identity、probe-shaped analyzer smoke、operation-count replay 和 failure receipt 写成可执行 gate。
+
+## J-253 · D12.14-P1 投影修复研究页双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
+
+重启后从 source commit `3546985d0d1996e317084b3cb2db105529cb9051` 精确恢复。GitHub Pages workflow `33168944260` 的 build 与 deploy 均 completed/success；公开 P1 route 返回 HTTP 200。相同 commit 被推送到 Sites source repository，重新执行 production build后保存为 version 77；archive content hash 为 `sha256:e233b0072f4e13d1ba6139e966889242684370ec6ee15f78581e1f96e82f1757`，deployment `appgdep_6a91778f8ea88191b130401a3c72319f` succeeded。
+
+Sites 发布前再次验证 current user role 为 owner、access mode 为 custom、唯一 allowed account 为 owner、external visitors 为 0、workspace/tenant groups 为空。Owner-only P1 exact route 的匿名请求返回 HTTP 401；没有改变站点共享边界。公开 route 为 `https://lovejzzz.github.io/BlenderFilmStudio/blender-projective-depth-position-oracle-v0-1/`；owner-only route 为 `https://blender-film-studio-research.skylab.chatgpt.site/blender-projective-depth-position-oracle-v0-1/`。
+
+P1 publication 至此封闭。下一动作转入 fresh H2 preregistration：先冻结 hypothesis、fresh fixture、inverse-depth algorithm、Position-only control oracle、decoded-pass repeat identity、probe-shaped analyzer smoke、actual operation-count replay、minimum witness 与 failure-receipt semantics；spec commit 推送之前不得创建 H2 tools 或 formal output root。
