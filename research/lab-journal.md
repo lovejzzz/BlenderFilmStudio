@@ -3954,3 +3954,15 @@ preregistration commit `bf62f9a02dbfb966f585a4c0e634da1e3507cd72` 与 `origin/ma
 完整independent audit为22/22 gates、41/41 semantic attacks，formal rehearsal verdict `BUDGETED_NATIVE_CHILD_PID_RECEIPT_CORRECTION_SUPPORTED`。四份budget reports均为 `BFS_BUDGETED_PROCESS_RESULT@0.2.0`、positive safe-integer native PID、exact Blender command、exit 0、null signal/spawnError、termination unrequested，且各PID不等于同时存活的restricted wrapper parent PID；四份current CompileReceipt verifier各19 checks，并由receipt file SHA覆盖PID-bearing report。B01/B02 plan hashes与canonical structure pair identities保持 `316114...` / `a9022b...` 和 `c699fc...` / `025c6f...`；12/12顶层self-hashes、4/4 PID schemas、4/4 receipt budget bindings离线复算通过。Blender render、Cycles ray render、Docker/Colima、model与network均为0。
 
 按supervisor、preflight、runner、auditor顺序的最终candidate SHA-256为 `cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d`、`e1ffa80665c4174812a851f435b7360d92e538c39aa10c2c9bf8c8016180b557`、`b385f7867de97e50d4d135ce34b76a2ce91cda1d197fc1561c2e35b2b7538a5e`、`351b3ca54ecc5a2c90cd93c780518a1610af89c9f59522587c17659f06fcec60`；四文件Node syntax、targeted ESLint与diff checks通过。26 MiB最终fixture与此前owned rehearsal roots均已删除。下一动作只能提交推送这四条exact bytes与本entry形成tool-freeze；远端一致后才允许在real repository调用official preflight一次。
+
+## J-281 · B55-E1 official zero-Blender PID preflight accepted
+
+Date: 2026-08-28 · Type: FORMAL PREFLIGHT ACCEPTANCE · New Blender processes: 0 · New Blender renders: 0
+
+tool-freeze commit `d36956299caa7067656d159533172809db1173a0` 与 `origin/main` exact、四条tool hashes与J-280一致且preflight/attempt/formal roots全部不存在后，只调用official preflight一次。结果为19/19 ACCEPTED：B54 parent的17/18与single PID gap exact；production supervisor before/current/expected hashes与3/3 single replacements exact；unchanged production controls exact；SceneSpec 22/22；B01/B02 dual BuildPlan canonical与frozen plan hashes exact；relative component admission accepted且未创建probe output。
+
+四种正式PID probes全部通过。Preflight PID为81376；PASS child receipt/self-report为81399/81399、PPID 81376、exit 0；CHILD_FAILED为81403/81403、PPID 81376、exit 7；WALL_TIME为81407/81407、PPID 81376、`BUDGET_EXCEEDED`、breach `WALL_TIME`、termination requested/awaited；spawn-error为v0.2 `CHILD_FAILED`、PID exact null、exit -2且spawnError非空。四次budget calls中只有三次实际Node child spawn；Blender、render、Cycles ray render、Docker/Colima、model与network均为0。
+
+观察到109,276,856,320 available bytes；512 MiB projection后108,739,985,408 bytes，高于100 GiB reserve。`preflight.json` file SHA-256 / self-hash为 `d74ee91ca4bc7db370cd5f5f4833435607d7b062a9e251e858e4406761514368` / `68bf69f562e4eebb950638713ffbfa224f4e4142bd5c328c348553d6b3e2b3f5`；`receipt.json` file SHA-256 / self-hash为 `59e657e428d4ba275976ab7caf78565546aa27d0d2ca69faeee488f5bf006c48` / `b740884ec4682b1743675666319f5d9748a2ea9d5fda05c4f05cc90e61b27840`。不import B55 tools的built-in-only readback复算两份self-hash均exact；attempt/formal roots仍不存在。
+
+下一动作只能提交并推送exact accepted preflight root与本entry。确认其affecting commit在 `origin/main` 后，才可用冻结的repository-relative spellings调用formal runner一次；同一B55 ID禁止修复或重跑。

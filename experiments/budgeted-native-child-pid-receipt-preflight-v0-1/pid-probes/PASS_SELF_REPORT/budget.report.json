@@ -1,0 +1,45 @@
+{
+  "args": [
+    "--input-type=commonjs",
+    "-e",
+    "const{writeFileSync}=require('node:fs');const[output,mode]=process.argv.slice(1);writeFileSync(output,JSON.stringify({pid:process.pid,ppid:process.ppid})+'\\n',{flag:'wx'});if(mode==='fail')process.exit(7);if(mode==='wait')setInterval(()=>{},1000);",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/budgeted-native-child-pid-receipt-preflight-v0-1/pid-probes/PASS_SELF_REPORT/child-observation.json",
+    "pass"
+  ],
+  "breach": null,
+  "budgets": {
+    "maxLogBytes": 1048576,
+    "maxOutputBytes": 1048576,
+    "maxOutputFiles": 8,
+    "maxRssBytes": 1073741824,
+    "sampleIntervalMs": 10,
+    "wallTimeMs": 5000
+  },
+  "child": {
+    "exitCode": 0,
+    "pid": 81399,
+    "signal": null,
+    "spawnError": null
+  },
+  "command": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+  "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+  "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "metrics": {
+    "elapsedMs": 30,
+    "logBytes": 0,
+    "output": {
+      "bytes": 27,
+      "fileCount": 1,
+      "symlinkCount": 0
+    },
+    "peakSampledRssBytes": 43237376
+  },
+  "outcome": "PASS",
+  "outputPreview": "",
+  "outputPreviewTruncated": false,
+  "termination": {
+    "awaited": true,
+    "requested": false
+  },
+  "version": "0.2.0"
+}
