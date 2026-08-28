@@ -4101,3 +4101,11 @@ Preregistration commit `c9e0b9e25c41b751fb456cf115e29e63996dbea4` 与 `origin/ma
 Runner候选在BuildPlan durable write之后把phase设为`NATIVE_COMPILE_DISK_ADMISSION`，真实`statfs(repositoryRoot)`后使用冻结100 GiB reserve与0.5 GiB projection，先exclusive-create/fsync sequence-5 disk admission，再允许restricted wrapper spawn。Test ceiling只接受non-negative且不高于real observation的整数；非法或raise ceiling都写REJECTED。Receipt升级为`bfs.productionCompileReceipt.v0.2`，root roster加入disk admission，并绑定file SHA、自哈希、real/effective bytes、ceiling flag与policy；independent production verifier增加`NATIVE_COMPILE_DISK_READMISSION`检查。
 
 v0.2 release冻结31 files且全量SHA replay 31/31 exact；release/preflight/runner/receipt/verifier candidate SHA依次为 `c5dc72a3a30c67d3cfeee1cd9c0fc07fa438fa466e9bff587d3e7e7dd2c74311`、`48adeb62acbdb4f0dc250c93a9a3b69dda7a489743d0538ea14a53b6a0386b11`、`05ae75819a4b1517c3a68345ac1d64b0cea2fd6d3f3891a887bea917c2785466`、`039ff78c7c9129d0c34a2980ed9c28c1c49fe7320085d73a179ab7aa89ff0d46`、`17bf7e0a99faeba01f688e1df518b356fe54d66fa331052a1fed2323c4e15f1c`。四文件Node syntax、targeted ESLint与diff check通过；未创建B57 root、未运行preflight或Blender。下一动作先提交推送candidate，随后只在fresh development roots验证正常与one-byte-below路径；发现缺陷必须保留反例并换fresh root。
+
+## J-294 · B57 one-byte-below development preflight accepted
+
+Date: 2026-08-28 · Type: DEVELOPMENT PREFLIGHT EVIDENCE · New Blender processes: 0 · New Blender renders: 0
+
+Implementation candidate commit `968cc709f02721a623a85e816b4a071d6d1824db` 与 `origin/main` exact后，为冻结的低磁盘development case创建fresh preflight，绑定B01 SceneSpec、fresh output `experiments/b57-jit-development-low-output-v0-1`与v0.2 release commit。Preferred `preflight:production` 返回ACCEPTED，BuildPlan hash保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；真实available 108,625,825,792 bytes，projection后108,088,954,880 bytes，高于100 GiB reserve。Blender/render/model/network/Docker均为0。
+
+Preflight file SHA/self-hash为 `a6a87093a237500de8aebb3b94767379e401c6022298795ef14eabf523db042f` / `68aef97d8f9a68a2c7a70adb077cc06bed1396af63a09292efc24a91fb650bf8`；requested output与attempt root仍不存在。下一动作只提交推送该accepted development evidence与本entry；随后以exact evidence commit调用production runner一次，并将JIT ceiling固定为107,911,053,311 bytes。Expected outcome是`NATIVE_COMPILE_DISK_ADMISSION` invalidation、restricted/native process 0，不是compile PASS。
