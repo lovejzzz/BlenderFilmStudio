@@ -3406,3 +3406,15 @@ Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
 新增 `/blender-material-owner-quality-coupling-derivation-v0-1/`。页面首屏把 `evidence receipt valid` 与 `zero candidate derived` 分开；threshold frontier 直接从已提交 `results.json` 构建五档 quality/cell-coverage/owner-retention 对照，不复制另一套手写 measurement source。四个 primary fixtures、NEITHER/STATIC controls、attempt0 87/88 failure、`bbc8192` scoped repair、formal rerun 88/88 与两个独立 next tracks 均被显式披露。
 
 精确 local route 返回 HTTP 200；新页、首页与 H1 邻接页定向 ESLint 为 0 errors。Vinext/Sites production build 成功并发现 81 个 warmup paths；GitHub Pages static build 成功生成 83/83 pages，新 route 明确认定为 static。没有执行未请求的截图、DOM 或交互 QA。下一动作只提交新页、CSS、首页/H1 导航与本 journal entry，然后等待 GitHub Pages exact commit 成功，并在 owner-only Sites access 复核后发布相同 source commit。
+
+## J-233 · D12.13-D1 no-candidate tab 双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
+
+Validated source commit `b7370f639de43a5042c9bbcd65ee3154809e37e9` 已推送。首次 GitHub Pages workflow `33159699179` 因 sparse checkout 未包含页面直接导入的三份 experiment JSON 而失败；修复只把 `results.json`、`audit.json`、`execution.json` 加入部署 workflow 的精确 checkout allowlist，没有改写实验数据或页面判断。修复后的 workflow `33159797638` completed/success，公开精确 route 返回 HTTP 200。
+
+Sites 发布前复核 current user 为 owner、access mode 为 custom、唯一 allowed account user 为当前 owner、external visitors 为 0、workspace/tenant groups 均为空；随后将 exact source commit 推送到受控 source repository，从成功的本地 build archive 保存 version 74，并完成 private deployment `appgdep_6a91568537448191824ad8018cfb477d`。匿名精确 route 返回 401，本地开发服务已关闭。
+
+公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-owner-quality-coupling-derivation-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-owner-quality-coupling-derivation-v0-1/`。
+
+重启后的下一条技术路径保持不变：先独立预登记 directional fixture calibration，以 zero-render analytic oracle 修复 TOP/BOTTOM/NEITHER stress-domain 构造；完成后再另行预登记 risk-tightness decomposition。不得继续在 D12.13-D1 已拒绝的 global-threshold family 内调参。
