@@ -4109,3 +4109,19 @@ Date: 2026-08-28 · Type: DEVELOPMENT PREFLIGHT EVIDENCE · New Blender processe
 Implementation candidate commit `968cc709f02721a623a85e816b4a071d6d1824db` 与 `origin/main` exact后，为冻结的低磁盘development case创建fresh preflight，绑定B01 SceneSpec、fresh output `experiments/b57-jit-development-low-output-v0-1`与v0.2 release commit。Preferred `preflight:production` 返回ACCEPTED，BuildPlan hash保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；真实available 108,625,825,792 bytes，projection后108,088,954,880 bytes，高于100 GiB reserve。Blender/render/model/network/Docker均为0。
 
 Preflight file SHA/self-hash为 `a6a87093a237500de8aebb3b94767379e401c6022298795ef14eabf523db042f` / `68aef97d8f9a68a2c7a70adb077cc06bed1396af63a09292efc24a91fb650bf8`；requested output与attempt root仍不存在。下一动作只提交推送该accepted development evidence与本entry；随后以exact evidence commit调用production runner一次，并将JIT ceiling固定为107,911,053,311 bytes。Expected outcome是`NATIVE_COMPILE_DISK_ADMISSION` invalidation、restricted/native process 0，不是compile PASS。
+
+## J-295 · 首个low-disk调用因手写commit身份失效
+
+Date: 2026-08-28 · Type: DEVELOPMENT ASSEMBLY FAILURE · New Blender processes: 0 · New Blender renders: 0
+
+Accepted preflight evidence推送后，首次runner调用错误地使用了手写full SHA `fb1899ec3965db8704d92fd45a6635e44b366184`，真实commit为 `fb1899ee01e3df2bd0690c93ba5a0df007235c6e`。Unchanged formal admission在output materialization前返回`EVIDENCE_COMMIT_MISMATCH`，因此没有创建requested output、BuildPlan或disk admission，Blender=0。该结果不能用于B57磁盘假设。
+
+失败attempt root保留sequence-1 attempt、sequence-2 failure与sequence-3 rejected receipt，自哈希分别为 `409ff7b46a6bdd7a93739b35575dcae609b07e831e4e51e3b4811cd9af44bed2`、`38d350d63bb1299a6fb81ba1d23476fc81682b4202b371bcb03f7ce346fd5601`、`b517095b7d679a375e0bf9a667f09a3b472f39c6c89d5eb6d25d848e21c86830`。没有在原attempt root修补；下一调用只允许使用Git读取的exact SHA与fresh C1 attempt root，同时保持同一accepted preflight及尚未创建的bound output。
+
+## J-296 · one-byte-below JIT disk gate在spawn前拒绝
+
+Date: 2026-08-28 · Type: DEVELOPMENT CAUSAL PROBE · New restricted compiler processes: 0 · New Blender processes: 0 · New Blender renders: 0
+
+C1使用exact pushed evidence commit与fresh attempt root后，通过sequence 1/2/3 admission并materialize authorized output；formal-start sequence 4和B01 immutable BuildPlan写盘后，runner真实观察available 108,622,110,720 bytes，再应用冻结ceiling 107,911,053,311 bytes。扣除536,870,912 projected bytes后为107,374,182,399，exactly低于100 GiB reserve 1 byte。
+
+Sequence-5 disk admission因此durably写为REJECTED、reason `FREE_AFTER_PROJECTED_WRITE_BELOW_RESERVE`，disk self-hash `6873e1118f8417b9ccc4d42bc7321c2ad724735252cae81015a8f3288d6c66e2`；随后invalidation phase exact `NATIVE_COMPILE_DISK_ADMISSION`、self-hash `9716473700daf9142639b2a753ffb199400186d52c5ec8a112154793fd5844ef`。Output roster exact为BuildPlan、formal-start、disk admission与invalidation；`restricted/`不存在，restricted wrapper与native Blender processes均0。该development probe支持核心fail-closed因果路径，但尚未验证正常capacity compile、production receipt v0.2或independent B57 audit，因此不写formal verdict。
