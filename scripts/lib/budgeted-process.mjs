@@ -53,6 +53,7 @@ export async function runBudgetedProcess({ command, args = [], cwd, env = proces
   validateBudgets(budgets);
   const started = performance.now();
   const child = spawn(command, args, { cwd, env, detached: process.platform !== 'win32', stdio: ['ignore', 'pipe', 'pipe'] });
+  const childPid = Number.isSafeInteger(child.pid) && child.pid > 0 ? child.pid : null;
   let closed = false;
   let spawnError = null;
   let logBytes = 0;
@@ -131,9 +132,9 @@ export async function runBudgetedProcess({ command, args = [], cwd, env = proces
   if (!breach && finalOutput.bytes > budgets.maxOutputBytes) breach = { reason: 'OUTPUT_BYTES', observed: finalOutput.bytes, limit: budgets.maxOutputBytes };
   const outcome = breach ? 'BUDGET_EXCEEDED' : spawnError || completionResult.code !== 0 ? 'CHILD_FAILED' : 'PASS';
   return {
-    documentType: 'BFS_BUDGETED_PROCESS_RESULT', version: '0.1.0', outcome,
+    documentType: 'BFS_BUDGETED_PROCESS_RESULT', version: '0.2.0', outcome,
     command, args, budgets, metrics: { elapsedMs, peakSampledRssBytes, logBytes, output: finalOutput },
-    breach, child: { exitCode: completionResult.code, signal: completionResult.signal, spawnError: spawnError?.message ?? null },
+    breach, child: { pid: childPid, exitCode: completionResult.code, signal: completionResult.signal, spawnError: spawnError?.message ?? null },
     termination: { requested: terminationRequested, awaited: true },
     logSha256: logSha256.digest('hex'),
     outputPreview: Buffer.concat(previewChunks).toString('utf8'),
