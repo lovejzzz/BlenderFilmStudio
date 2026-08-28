@@ -4205,3 +4205,13 @@ B01-A/B、B02-A/B四次preferred production compile与verifier全部PASS；wrapp
 Independent auditor给出 `PRODUCTION_DISK_JIT_READMISSION_SUPPORTED`：26/26 gates、56/56 resealed semantic attacks、0 escaped。C2暴露的四个`DISK_HASH` attacks现全部被实际disk record外部交叉绑定拒绝。Formal-start/operation/audit/results/receipt file SHA-256分别为 `883b00864902215a2bcd7df20f1cb1900a2af4ed4bb46914049844bd1941e9e4`、`117bfb4e054d95edd132f0f89570194decea9328c385a60e1406b46768b899d5`、`ef2e3d2f83c147d284c0ac4d972a18cae732cb1d393cc7471cf46f2fbc55646b`、`7a886e9c8c4a26f957b272486b856f5519cf9ddb786a15f7c01f4a426f205bb2`、`77be6ff68e05842d1c7dd97da9a82c3eacc1ecb76711d291cb23f6c1d6e4db43`；formal receipt self-hash为 `2cfe230eb6f217023cec36a185e60183894f9e117b0e97b1c479e6f2d5d2a4f4`。45个formal files中只有四份`.blend`，无EXR/image/video/`.blend1`；render/model/network/Docker均0。
 
 C3只证明最终tool bytes在隔离彩排中可达全部冻结门槛，不替代official B57。下一动作先提交推送C3 attempt/formal evidence与本entry；该exact evidence commit将作为final tool-freeze commit。随后只允许在预登记的三个official roots执行一次zero-Blender preflight，推送后再执行一次official runner。
+
+## J-306 · B57-E1 official zero-Blender preflight接受
+
+Date: 2026-08-28 · Type: OFFICIAL PREFLIGHT ACCEPTED · New Blender processes: 0 · New Blender renders: 0
+
+C3完整彩排证据commit `3c4d3bc7533379f472b281a5bdd14443fe1beb44` 与 `origin/main` exact，且成为official final tool-freeze commit。在预登记的三个official roots全部fresh、absent且互不嵌套时，只调用official meta preflight一次。结果12/12 ACCEPTED：B56 parent、B57 spec/preregistration、v0.1 release preservation、v0.2 31-file release、三条B57 tools、package aliases、SceneSpec 22/22、B01/B02 BuildPlan pairs、real disk、one-byte boundary与五份nested production preflight全部exact。
+
+Official preflight file SHA/self-hash为 `793c1d316ce6ad863e32ba1c9e0b353729b20c2c4f7f3918979a71b2e776a9d8` / `a78eb660438434fbd6931b8ebaf396d56c68db5b0017a645f793408c65b1a222`。真实available为108,501,454,848 bytes，扣除536,870,912 projected bytes后为107,964,583,936 bytes，高于107,374,182,400-byte reserve；forced negative仍为107,911,053,311 bytes并精确低于threshold 1 byte。LOW-DISK与B01-A/B、B02-A/B五份production preflight均ACCEPTED；Blender/render/model/network/Docker全部0，official attempt/formal roots仍不存在。
+
+下一动作只提交推送official preflight与本entry，读取exact evidence commit并确认`origin/main`一致，然后对bound official attempt/formal roots调用single-use runner一次。任何失败都必须保留，official同一ID禁止修补或重跑。
