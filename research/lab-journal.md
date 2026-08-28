@@ -4000,3 +4000,13 @@ Date: 2026-08-28 · Type: OPERATIONAL INCIDENT / CLIENT-STABILITY GUARD · New B
 替代解释检查：`codesign --verify --deep --strict`通过，Gatekeeper判定为Notarized Developer ID；48 GiB机器无memory throttling，根卷仍有约89 GiB available；检查时没有Vinext/Vite listener或Blender进程。系统统一日志在第一次重启后的browser-control窗口记录CUA service bootstrap timeout与连续XPC connection interruptions。综合时间线与两次相同signature，当前最强可操作解释是内部浏览器automation并发关闭及其重连路径触发客户端不变量失败，而不是Blender、网站source、磁盘耗尽、内存压力或app bundle损坏。
 
 新增repository-root `AGENTS.md` 作为跨会话持久guard：在Codex app版本变化或用户明确授权controlled retest之前，本repo禁止in-app browser automation和browser-target `open_in_codex`；保持最多一个用户可见BlenderFilmStudio标签；不得并发或批量close；验证改用build及non-browser HTTP。Guard启用后未再调用browser tools。随后在不启动dev/HMR listener的条件下，Vinext production build成功并发现88个CDN warmup paths；GitHub Pages production build通过TypeScript并生成90/90 static pages，B55 route在两种build中均存在。该build结果证明网站source可编译，不证明客户端缺陷已被上游修复；当前结论是已建立可持续规避，不是修复Codex二进制。
+
+## J-285 · B55-E1 研究页双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE / NON-BROWSER VERIFICATION · New Blender renders: 0
+
+包含B55页面和client-stability guard的source commit `b175edb631f88020033526b56430b27980c5fae9` 与 `origin/main` exact一致。GitHub Pages workflow `33182974561` 的build与deploy均completed/success、head SHA exact；公开B55 route与B54 parent route均返回HTTP 200。公开B55 URL为 `https://lovejzzz.github.io/BlenderFilmStudio/budgeted-native-child-pid-receipt-v0-1/`。
+
+同一source commit推送到Sites source repository，并在journal变更后重新执行Vinext production build，继续发现88个CDN warmup paths。hosting helper打包后保存为version 81；server archive content hash为 `sha256:e70dc64f39b3d1f0039894d0bbf1b98ef74155f4f4702e97b3c61f3848a960f5`，共375 files、29,143,040 bytes。Owner-only deployment `appgdep_6a91a37217f88191afa5142ff6e15401` succeeded。发布前access重新验证为current user owner、custom mode、exactly one allowed account且其role为owner、external visitors为0、workspace/tenant groups均为空；发布后exact B55 route匿名请求返回HTTP 401，携带站点自身owner bypass credential的non-browser请求返回HTTP 200。Owner-only URL为 `https://blender-film-studio-research.skylab.chatgpt.site/budgeted-native-child-pid-receipt-v0-1/`。
+
+为遵守J-284 guard，没有执行browser handoff、截图、DOM、点击、resize或视觉QA，唯一用户可见标签保持不新增。临时24 MiB发布archive目录已移动到用户Trash，可恢复且可由exact source重新生成。Guard启用后当前Codex main process连续运行超过9分钟，已经越过第二次同signature crash的约5分15秒复现窗口，且没有新ChatGPT diagnostic report；这支持规避措施有效，但不扩大为上游binary defect已修复。B55-E1 publication至此封闭。下一项有证据支持的缺口是把B54/B55验证过的admission、budgeted process与receipt语义提升为production compiler首选入口；必须先做新ID预登记，不能把实验专用runner直接冒充production interface。
