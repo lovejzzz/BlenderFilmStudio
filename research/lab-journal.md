@@ -3560,3 +3560,15 @@ Tool-freeze commit `7488f0a` 推送后、formal root 仍不存在时，使用冻
 正式运行前观察 free bytes 为 109,609,832,448；冻结 required-before-formal 为 107,508,400,128，headroom 2,101,432,320 bytes。Preflight root 140 KiB；`preflight.json` file SHA-256 / self-hash 为 `38e1e2d1783994bf9d1b7ec4e53a1f81de639080f8f38e47d340b74a8a219e4d` / `b14c2bcd207caeb1d023e2c8431fe72b237dafcc92973cb8d0659fa67ca7ddd4`；`receipt.json` file SHA-256 / self-hash 为 `615a7cad4af09fc2180f1d6c96238cb984efaeb2e4f09d4542e7f1a951e6bdb7` / `bb4da865f29bca8b7933a818264e9e3fe8f36cd05dd9cd23630fc7fbcc29c398`。三个 probe report self-hash 均由独立 canonical replay 验证。
 
 该 preflight 只证明正式运行已被准入，不能预测 H1 科学 verdict。下一动作是先提交并推送 exact preflight evidence，再让冻结 runner 一次性创建 fresh formal root；若任一真实 render、adapter、consumer、analyzer 或 auditor gate 失败，应保留失败输出并报告，不得修改工具后重跑同一 experiment ID。
+
+## J-246 · D12.14-H1 正式运行被冻结 analyzer 缺口中止
+
+Date: 2026-08-28 · Type: FORMAL RUN INVALIDATED / FROZEN TOOL FAILURE · New Blender renders: 12
+
+Passing preflight commit `5c6bacad87c9db72078ef4b7497d2da5bd929081` 后，runner 一次性创建 fresh formal root。前 54 个 children 全部成功：12 个 Blender 5.2 Cycles CPU renders、6 adapters、Python/Node 各 6 consumers、Python/Node 各 12 typed envelopes。第 55 个 analyzer 以 `KeyError: 'subdivisions'` 中止；冻结 analyzer 的 `effective_fixture` 没有像 source/preflight/auditor 那样为 background owner 展开全局 subdivisions，却在新增 mesh gate 中直接读取该键。Audit 未启动，results/execution/receipt 均未产生。因此 H1 没有科学 verdict，合法状态只能是 `FORMAL_RUN_INVALIDATED_BY_FROZEN_ANALYZER_FAILURE`；修复后不得用相同 experiment ID 重跑。
+
+失败后的只读取证确认 12 source reports/EXR bindings、6 adapter reports、12 consumer reports self-hash 有效；Python/Node every array、repeat adapter arrays、repeat consumer arrays与 24 envelope pairs均 byte exact。EXR containers 的 repeat bytes 不同，但 decoded pass arrays exact；OpenImageIO diff 把已观察的 Combined metadata 差异定位为 `Date`、`RenderTime` 与按 repeat 命名的 `Scene`，其余四个 subimages无 metadata 差异。冻结 analyzer 把 container SHA 当成 source-pass repeat identity，故该 gate 即使绕过当前异常也会失败。
+
+非决定性取证得到：TOP 每次 189/189 accepted、quality max `2.4020671844482422e-5`；BOTTOM 每次 189/189、quality max `1.9103288650512695e-5`；两者 risk-underbound RGB samples 为 0。NEITHER 每次 accepted 0，但正式 witnesses 仅 270，低于冻结 minimum 1,024。它们只能指导新 ID 的 pilot-informed 设计，不能补造 H1 verdict。
+
+Machine failure self-hash: `6629e437b37bb4c7b10be22967a57f978830d515d680cac173c7d912b8ddaef3`。Artifact: `research/2026-08-28-b52-d12-14-h1-rendered-holdout-frozen-tool-failure.md`。下一步是提交并推送完整 partial root 与 failure record，再预登记新 experiment ID；新 spec 必须包含 analyzer-on-probe schema smoke、canonical decoded-pass repeat identity、fresh signal/tokens/output，以及 runner failure receipt finally-path。
