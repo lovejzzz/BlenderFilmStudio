@@ -4525,3 +4525,13 @@ Date: 2026-08-28 · Type: AUDITOR CORRECTION IMPLEMENTATION · New Blender proce
 C1 preregistration commit `6adece1` 推送后，只修改independent auditor。它现在从真实receipt克隆一个明确标记的synthetic control，把disk、memory、process与zero-resource字段设为冻结门槛内的边界值，投影19个true runner gates、pending audit gate、空failure list与`ADMITTED_PENDING_AUDIT`，reseal后必须先通过同一个semantic validator。24个原始攻击随后分别作用于该control的独立clone；A01–A23重封hash，A24只破坏hash。
 
 Runner字节与SHA `fbfea40c…`保持不变，所有资源阈值、20 gates、24 attack IDs及formal root不变。Corrected auditor SHA为 `52474b5c07e9b598e8d8d3336b2222223e0edbcb1857c8d4ff8172c3cc347054`。Node syntax、zero-warning targeted ESLint与diff check通过，实际formal root仍不存在。下一动作提交推送修正后，在新的临时sparse clone重跑完整rehearsal。
+
+## J-335 · B59-G0-C1排练发现总数字段算术反例并预注册C2
+
+Date: 2026-08-28 · Type: REHEARSAL COUNTEREXAMPLE / ARITHMETIC CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+C1 commit `ae11980` 推送后，在fresh临时sparse clone完成第二次排练。真实runner receipt为3,732 bytes，保留`DISK_STABILITY_MARGIN` blocker；auditor的integrity replay通过且24/24 attacks全部拒绝，但synthetic admissible control未通过，final仍为`INVALID_EVIDENCE`。Results/audit SHA分别为 `dc8aa9f7c30b5ec5d34152132cdbe0bdaf80915830578a98ac0bfac9f4310256` / `9d3a805c9425742f2766d325c8098a007c720d2d76c0d92b8b7cbf7385de9be9`。
+
+根因为预注册冗余总数字段的算术笔误：107,374,182,400 + 536,870,912 + 4,294,967,296精确等于112,206,020,608，而JSON/protocol写成112,205,053,952，少966,656 bytes。Runner始终从三个冻结加数实时求和，执行门没有被放松。
+
+C2只允许把冗余`minimumAvailableBytes`和对应prose改为112,206,020,608；三个component thresholds、runner、auditor、20 gates、24 attacks、ceilings及formal root全部不变。实际formal root仍不存在。
