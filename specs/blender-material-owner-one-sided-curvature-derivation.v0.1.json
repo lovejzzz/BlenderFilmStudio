@@ -1,0 +1,309 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerOneSidedCurvatureDerivation.v0.1",
+  "experimentId": "B52-D12.12-D1",
+  "title": "Post-hoc derivation of a Material-owner one-sided curvature support candidate",
+  "status": "PREREGISTERED_BEFORE_DERIVATION_TOOLS_OR_OUTPUT",
+  "question": "On the immutable D12.11 Material Index arrays, can a factor-frozen one-sided second-difference rule safely recover a meaningful portion of the 146 sweep and 152 parallax pixels whose bilinear taps have one true owner but whose symmetric 4x4 curvature stencil crosses an owner or alpha boundary?",
+  "decisionRole": "candidate derivation only; this experiment is post-hoc on D12.9-H1/D12.11-I1 and cannot revise their verdicts or support production",
+  "scientificClassification": {
+    "measuredParents": "The source arrays were produced by 16 real Blender 5.2 Cycles CPU renders and accepted by the D12.11 formal and adversarial audits.",
+    "derivedIntervention": "D12.12-D1 creates no new Blender render. It recomputes decisions from immutable real-render arrays with independent Python and Node implementations.",
+    "unknown": "Whether the selected rule generalizes to unseen geometry, materials, motion, lighting or owner boundaries remains unknown until a fresh holdout."
+  },
+  "parents": {
+    "materialOwnerSpec": {
+      "uri": "specs/blender-material-index-owner-integration.v0.1.json",
+      "sha256": "89dd3637ffe5af3544e8cd8aca8869eedd8b1a1867d41e08a354e5cd0c3b2a0e",
+      "experimentId": "B52-D12.11-I1"
+    },
+    "materialOwnerResult": {
+      "uri": "experiments/blender-material-index-owner-integration-v0-1/results.json",
+      "sha256": "3eaa1461a7fa8b9f74e3320e19e56efa1cde3e0ea05618c1e04239d082b88457",
+      "evidenceHash": "2cabaed16827e9d2c4a0baf2d02ee79ff20efb27f3d303045127a20a9e6acbac",
+      "verdict": "MATERIAL_INDEX_OWNER_INTERVENTION_SAFE_BUT_COVERAGE_NOT_SUPPORTED"
+    },
+    "materialOwnerAudit": {
+      "uri": "experiments/blender-material-index-owner-integration-v0-1/audit.json",
+      "sha256": "0133d69d4c5c0a9f1edf8bcb1b7d003d98e477c2390de733986e1f2d21edced6",
+      "auditHash": "e1e49a0d06ebf3b3f46721f06d5857c105f1feee0127934a5ca57c234b054b12"
+    },
+    "materialOwnerExecution": {
+      "uri": "experiments/blender-material-index-owner-integration-v0-1/execution.json",
+      "sha256": "fe945e4591152f432be93d4b2a0f0f47ce54ae3e3c0f3fadfbfdc9205b392f58"
+    },
+    "materialOwnerReceipt": {
+      "uri": "experiments/blender-material-index-owner-integration-v0-1/receipt.json",
+      "sha256": "0c05da327f8d8113d1f4e233222cf1df906635d7334629af05530e5381bfc12e",
+      "receiptHash": "843ce7bc952a211cafb49e2f8ba1580a614144070b079a72a9bcc398fd15065e"
+    },
+    "materialOwnerAdversarialSpec": {
+      "uri": "specs/blender-material-index-owner-integration-adversarial-audit.v0.1.json",
+      "sha256": "bc1f6c9e171d009bedd6041e53aa7e3580185e72897800efe5b06e1ed25cad22"
+    },
+    "materialOwnerAdversarialResult": {
+      "uri": "experiments/blender-material-index-owner-integration-adversarial-audit-v0-1/results.json",
+      "sha256": "b38666b6a6ebc234b0f41311d376875f6d980404afcd6e1f4eaf9d710e78e22c",
+      "adversarialAuditHash": "a75ee65dbd3255c565ca2531a08f0d395248ea369a716f16c6952fcd275345f7",
+      "verdict": "MATERIAL_INDEX_OWNER_INTERVENTION_ADVERSARIAL_AUDIT_ACCEPTED"
+    },
+    "ownerSupportLocalizationSpec": {
+      "uri": "specs/blender-temporal-owner-support-localization-c1.v0.1.json",
+      "sha256": "2ba1edd74fef18eacfa1c170cab4e35f80afc575eaef1ffe3500428553555403"
+    },
+    "ownerSupportLocalizationResult": {
+      "uri": "experiments/blender-temporal-owner-support-localization-c1-v0-1/results.json",
+      "sha256": "90e8a4d72c0224e4195cd6a52ea193d93211d6dfe368ed7efdd1c3d421d393c8",
+      "analysisHash": "e0f9c8417357ef0d08a75c45ce108d650fe8df22b7a6f3140ea4c3e787ddc719",
+      "verdict": "TEMPORAL_OWNER_SUPPORT_ALIAS_LOCALIZED_C1"
+    },
+    "coverageBoundaryResult": {
+      "uri": "experiments/blender-motion-aware-curvature-risk-holdout-coverage-analysis-v0-1/results.json",
+      "sha256": "fd64d5963abd8f6bb06966d709637946e882a614fc5bb53f7a1f9d8bc1cabf1e",
+      "analysisHash": "56a04de570ca33dc271bc7d4a62400bb0fa98bcb3760885435c77df3ae79d516"
+    },
+    "frozenPythonConsumer": {
+      "uri": "scripts/reconstruct-b52-d12-11-material-owner.py",
+      "sha256": "b0a169357a0b37858aef7322296131a1246be6d29e4deccb4d62e0a7b763038f"
+    },
+    "frozenNodeConsumer": {
+      "uri": "scripts/reconstruct-b52-d12-11-material-owner.mjs",
+      "sha256": "61195c605abcfd20dc834e6d61e5f70ab24e397411f33a1aa153e2645110e23b"
+    },
+    "formalRoot": {
+      "uri": "experiments/blender-material-index-owner-integration-v0-1",
+      "gitCommit": "ec6305a7d125d4f857450b8c431ef379214f45bf",
+      "gitTree": "d1d50c211d4a94321ef7c051e9b066ff700a36d8"
+    }
+  },
+  "freshness": {
+    "newToolPaths": [
+      "scripts/derive-b52-d12-12-one-sided-curvature.py",
+      "scripts/derive-b52-d12-12-one-sided-curvature.mjs",
+      "scripts/audit-b52-d12-12-one-sided-curvature.py",
+      "scripts/run-b52-d12-12-one-sided-curvature.py"
+    ],
+    "outputRoot": "experiments/blender-material-owner-one-sided-curvature-derivation-v0-1",
+    "requirements": [
+      "The four new tool paths and output root do not exist when this specification is committed.",
+      "The specification commit must precede every new tool byte and every D12.12 output byte.",
+      "After implementation, all four tools must be frozen in a later Git commit before the runner may create the output root.",
+      "The D12.11 formal Git tree must be identical before and after derivation.",
+      "No candidate factor, gate, fixture, threshold, mutation target or verdict mapping may change after tool creation begins."
+    ]
+  },
+  "sourceMatrix": {
+    "fixtures": [
+      {
+        "id": "ROTATED_SWEEP_HIGH_FREQUENCY_157X103",
+        "repeats": [1, 2],
+        "localizedOneSidedOpportunitiesPerRepeat": 146,
+        "baselineAcceptedPerRepeat": 9765,
+        "radius2PerRepeat": 10327,
+        "baselineAcceptedToRadius2": 0.945579548755689
+      },
+      {
+        "id": "CAMERA_TRUCK_PITCH_PARALLAX_167X109",
+        "repeats": [1, 2],
+        "localizedOneSidedOpportunitiesPerRepeat": 152,
+        "baselineAcceptedPerRepeat": 15018,
+        "radius2PerRepeat": 15366,
+        "baselineAcceptedToRadius2": 0.9773525966419367
+      },
+      {
+        "id": "SAME_INDEX_DEPTH_CROSSING_179X113",
+        "repeats": [1, 2],
+        "localizedOneSidedOpportunitiesPerRepeat": 490,
+        "baselineAcceptedPerRepeat": 13003,
+        "registeredMaterialAliasesPerRepeat": 0,
+        "role": "owner-identity and invalid-history negative control"
+      },
+      {
+        "id": "STATIC_FREQUENCY_CONTROL_131X89",
+        "repeats": [1, 2],
+        "localizedOneSidedOpportunitiesPerRepeat": 0,
+        "baselineAcceptedPerRepeat": 10065,
+        "role": "full-stencil identity and no-op control"
+      }
+    ],
+    "primaryOpportunityFixtures": [
+      "ROTATED_SWEEP_HIGH_FREQUENCY_157X103",
+      "CAMERA_TRUCK_PITCH_PARALLAX_167X109"
+    ],
+    "repeatOneIsPrimary": true,
+    "repeatTwoIsExactIdentityControl": true
+  },
+  "frozenBaseline": {
+    "ownerIdentity": "compiler-assigned Material Index exact integer equality",
+    "structuralValidity": "recompute D12.11 current-oracle, bounds, bilinear-owner, alpha and predicted-depth gates from adapter arrays; importing D12.11 decision masks as decisions is forbidden",
+    "currentInterior": "recompute the D12.11 Chebyshev radius-2 current Material Index and alpha domain",
+    "bilinearReconstruction": "four previous-frame taps at (y0,x0),(y0,x0+1),(y0+1,x0),(y0+1,x0+1), explicit binary64 sum ((v0*w0+v1*w1)+v2*w2)+v3*w3, one final float32 cast",
+    "colorQ30Scale": 1073741824,
+    "motionQ24Scale": 16777216,
+    "roundingAllowanceQ30": 512,
+    "riskThresholdQ30Inclusive": 131072,
+    "qualityMaximumSceneLinear": 0.000030517578125,
+    "qualityRmseMaximumSceneLinear": 0.000030517578125,
+    "fallback": "every registered pixel not accepted copies current float32 RGBA exactly",
+    "forbiddenDecisionInputs": [
+      "current RGB",
+      "next-frame RGB",
+      "future reconstruction error",
+      "analytic true-owner masks",
+      "fixture ID or fixture-specific thresholds"
+    ]
+  },
+  "candidateFamily": {
+    "name": "MATERIAL_OWNER_ONE_SIDED_D2_POWER_OF_TWO",
+    "inflationFactors": [1, 2, 4, 8, 16, 32, 64],
+    "commonBilinearSupport": "all four reconstruction taps are in bounds, have the same exact previous Material Index as the current owner token, and alpha > 0.999",
+    "outerTapValidity": "an outer tap is valid only when it is in bounds, has the same exact previous Material Index as the bilinear owner token, and alpha > 0.999",
+    "horizontalRule": [
+      "For each bilinear row y0 and y0+1, compute the left second difference at x0 only when x0-1 is valid and the right second difference at x0+1 only when x0+2 is valid.",
+      "If both differences exist for a row, use their maximum absolute Q30 value exactly as D12.11.",
+      "If exactly one exists, multiply its absolute Q30 value by the tested inflation factor.",
+      "If neither exists for either bilinear row, horizontal support is unavailable and the pixel is rejected. Mx is the maximum of the two row values."
+    ],
+    "verticalRule": [
+      "For each bilinear column x0 and x0+1, compute the top second difference at y0 only when y0-1 is valid and the bottom second difference at y0+1 only when y0+2 is valid.",
+      "If both differences exist for a column, use their maximum absolute Q30 value exactly as D12.11.",
+      "If exactly one exists, multiply its absolute Q30 value by the tested inflation factor.",
+      "If neither exists for either bilinear column, vertical support is unavailable and the pixel is rejected. My is the maximum of the two column values."
+    ],
+    "riskFormula": "riskQ30 = ceil(2*(Fx*(2^24-Fx)*Mx + Fy*(2^24-Fy)*My)/2^48)+512, saturated to uint32 maximum, independently per RGB channel",
+    "acceptance": "accept only when the recomputed frozen baseline domain and one-sided support are valid and max(riskQ30.RGB) <= 131072 inclusive",
+    "fullStencilIdentity": "when all symmetric 4x4 outer taps are valid, every factor must reproduce the D12.11 risk, accepted and reconstruction bytes exactly",
+    "factorMonotonicity": "for the same pixel, risk must be nondecreasing and accepted sets must be nested nonincreasing as factor increases",
+    "selectionRule": "choose the numerically smallest registered factor that passes every selection gate; if no factor passes, derive no candidate"
+  },
+  "measurements": {
+    "perFactorFixtureRepeat": [
+      "recomputed structural, radius2 and four-tap Material-owner domain counts",
+      "full symmetric, one-sided eligible and unavailable counts",
+      "newly eligible and newly accepted intersections with the frozen localized opportunity mask",
+      "risk underbound count across every eligible RGB sample",
+      "accepted RGB maximum absolute error and RMSE",
+      "accepted count, accepted/radius2 and per-owner retention",
+      "new accepted coordinates relative to D12.11 and false invalid-history accepts",
+      "fallback byte identity",
+      "Python/Node array and report identity"
+    ],
+    "requiredArraysPerFactor": [
+      "one-sided-eligible.u8",
+      "one-sided-unavailable.u8",
+      "accepted.u8",
+      "risk.q30.u32",
+      "accepted-reconstructed.rgba32"
+    ],
+    "requiredControlArrays": [
+      "structural-valid.u8",
+      "radius2-interior.u8",
+      "bilinear-support.u8",
+      "full-stencil.u8",
+      "localized-opportunity.u8"
+    ]
+  },
+  "selectionGates": {
+    "parentIdentity": true,
+    "formalRootGitTreeImmutable": true,
+    "independentPythonNodeByteIdentityEveryArray": true,
+    "repeatIdentityEveryFixtureAndFactor": true,
+    "recomputedBaselineMasksEqualD12_11": true,
+    "fullStencilRiskAcceptedAndReconstructionByteExactToD12_11": true,
+    "factorMonotonicity": true,
+    "riskUnderboundRgbSamplesMaximum": 0,
+    "acceptedRgbMaximum": 0.000030517578125,
+    "acceptedRgbRmseMaximum": 0.000030517578125,
+    "falseInvalidHistoryAcceptsMaximum": 0,
+    "registeredMaterialAliasesAcceptedMaximum": 0,
+    "minimumLocalizedOpportunityEligibilityPerPrimaryFixture": 0.8,
+    "minimumLocalizedOpportunityAcceptancePerPrimaryFixture": 0.5,
+    "minimumAdditionalAcceptedPerPrimaryFixture": 1,
+    "staticControlAcceptedDelta": 0,
+    "fallbackExact": true,
+    "currentRgbDecisionMetamorphism": true,
+    "minimumConcreteSemanticAttacks": 64,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "coverageReporting": {
+    "required": [
+      "report accepted/radius2 using the original frozen denominator",
+      "report the original D12.11 coverage gates without changing them",
+      "report how much of any remaining deficit comes from one-sided-unavailable versus risk-rejected pixels",
+      "report sweep and parallax separately and per analytic owner"
+    ],
+    "forbidden": [
+      "claiming the original 97% cell or 95% owner gate passed unless the selected arrays actually pass it",
+      "dropping support-rejected or risk-rejected pixels from the denominator",
+      "combining repeats to inflate pixel counts",
+      "treating post-hoc D12.12-D1 coverage as fresh holdout evidence"
+    ]
+  },
+  "attacks": {
+    "minimumConcreteSemanticAttacks": 64,
+    "mutationNonceCounts": false,
+    "requiredFamilies": [
+      "bound parent byte and formal-root tree mutations",
+      "adapter payload and report self-hash mutations",
+      "Material Index zero, reuse, swap and out-of-range mutations",
+      "bilinear tap owner and alpha substitutions",
+      "left, right, top and bottom outer-tap validity substitutions",
+      "one-sided eligibility and unavailable-mask injections",
+      "inflation factor label/value mismatch and unregistered factor injection",
+      "risk numerator, ceil, allowance, saturation and inclusive-threshold mutations",
+      "factor monotonicity violations",
+      "accepted-set and new-accept injections",
+      "current RGB decision-dependence metamorphism",
+      "fallback, result, audit and receipt payload mutations",
+      "repeat and cross-language identity mutations"
+    ],
+    "independence": "The auditor may use Python standard library and NumPy but may not import either derivation implementation, the D12.11 consumers, Blender modules or analyzer helpers."
+  },
+  "execution": {
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "version": "v26.5.0"
+    },
+    "processContract": {
+      "consumerProcesses": 16,
+      "analyzerProcesses": 1,
+      "auditProcesses": 1,
+      "allChildrenUniquePid": true,
+      "allChildrenExitZeroRequired": true
+    },
+    "disk": {
+      "minimumFreeBytesAfterProjectedWrite": 107374182400,
+      "projectedWriteBytes": 134217728
+    }
+  },
+  "decision": {
+    "derivedVerdict": "MATERIAL_OWNER_ONE_SIDED_CURVATURE_CANDIDATE_DERIVED",
+    "derivedWhen": "At least one registered factor passes every selection gate, both implementations are byte exact, the independent audit passes every baseline gate and at least 64 concrete semantic attacks, and the smallest passing factor is selected mechanically.",
+    "notDerivedVerdict": "MATERIAL_OWNER_ONE_SIDED_CURVATURE_CANDIDATE_NOT_DERIVED",
+    "noPromotion": "Either verdict is a post-hoc derivation result. Only a separately preregistered fresh Blender holdout may test generalization or production promotion."
+  },
+  "nextExperimentIfDerived": {
+    "id": "B52-D12.12-H1",
+    "requirements": [
+      "freeze unseen Blender 5.2 fixtures, camera and owner trajectories, material frequencies, rasters, token assignments and tool hashes before formal rendering",
+      "include at least one boundary where only a left/right outer tap is unavailable and one where only a top/bottom outer tap is unavailable",
+      "include a negative control where neither side can support a second difference",
+      "preserve D12.11 Material Index identity, structural, Q30/Q24, fallback, quality and original coverage denominators",
+      "repeat every source render from clean Blender processes and require exact source/adapter/decision identity"
+    ]
+  },
+  "nonClaims": [
+    "D12.12-D1 is not a fresh holdout and cannot revise the bounded D12.11 verdict.",
+    "A finite-difference estimate is not a mathematical error bound for arbitrary rendered signals merely because it succeeds on these arrays.",
+    "Recovery of all 146 sweep support rejects would still be insufficient by itself to reach the frozen 97% sweep cell gate; risk-rejected pixels remain a separate mechanism.",
+    "The experiment does not establish perceptual importance, cinematic quality, denoising safety, transparency, motion blur, depth of field, deforming geometry or production readiness.",
+    "No visual proxy, current-frame RGB value or analytic true-owner mask may influence a candidate decision."
+  ]
+}

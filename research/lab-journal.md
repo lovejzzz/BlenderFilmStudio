@@ -3216,3 +3216,23 @@ Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
 下一恢复点是提交并推送这份 exact validated source，然后只在确认 Sites access 仍为 owner-only 后部署同一 commit；GitHub Pages 也必须等待对应 workflow 成功，不能以本地 build 代替公开可访问性证据。
 
 Artifact: `app/blender-material-index-owner-integration-v0-1/page.tsx`.
+
+## J-215 · D12.11-I1 双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
+
+Validated source commit `fb30cafa5cb9c6774e84a09821c3b5f175e06c80` 已推送。GitHub Pages workflow `33152100294` completed/success；公开 D12.11 route 返回 HTTP 200。Sites 在发布前重新核验 access：current user role 为 owner、mode 为 custom、allowed account user 恰为 1、external visitors 为 0、workspace/tenant groups 均为空；随后从同一 commit 的本地成功 build 保存 version 71，并以 private deployment 成功发布。匿名 HTTP 请求返回 401，符合 owner-only 边界。
+
+公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-index-owner-integration-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-index-owner-integration-v0-1/`。
+
+## J-216 · D12.12-D1 one-sided curvature derivation 预登记
+
+Date: 2026-08-28 · Type: POST-HOC CANDIDATE PREREGISTRATION · New Blender renders: 0
+
+在四个新工具路径与输出 root 全部不存在时，D12.12-D1 绑定 D12.11 formal tree `d1d50c211d4a94321ef7c051e9b066ff700a36d8`、formal/adversarial result、C1 support localization、coverage diagnostic 与两份 frozen consumers。问题被限制为：能否只用 previous-frame Material Index、alpha、RGB 与已冻结的 Q30/Q24 输入，对 146 sweep / 152 parallax symmetric-stencil losses 建立 one-sided second-difference candidate。
+
+候选族冻结为 inflation factors `1,2,4,8,16,32,64`。每个 bilinear row/column 若左右或上下 second difference 都可用则保持 D12.11 max；若只剩一侧则乘 factor；两侧都不可用必须拒绝。选择规则是通过全部门的最小 factor。门包括：Python/Node 全数组 byte exact、两次 repeat exact、full-stencil 路径与 D12.11 byte exact、factor risk 单调/accepted 集合嵌套、risk underbound=0、accepted maximum/RMSE 均不超过 `3.0517578125e-05`、false invalid accept=0、Material alias accept=0、两组 primary fixture 的 localized opportunity eligibility ≥80% 且 acceptance ≥50%、fallback exact，以及独立至少 64 个真实 semantic attacks。
+
+这是 post-hoc derivation，预登记同时写死一条反成功叙事：即使 146 个 sweep support rejects 全部恢复，仍不足以单独达到原 97% cell gate，risk rejects 必须作为独立机制处理。D1 不启动 Blender/render/model/network；只有未来另行预登记的 D12.12-H1 才能测试泛化。Spec SHA-256: `f179b4cea6c8d3bc19b4cf2534055ef98b3fa8dac9954bfeae28bc2a237dd640`。
+
+Artifact: `specs/blender-material-owner-one-sided-curvature-derivation.v0.1.json`.
