@@ -1,0 +1,2611 @@
+{
+  "checks": [
+    {
+      "id": "SPEC_IDENTITY",
+      "passed": true
+    },
+    {
+      "id": "TOOLS_COMMITTED_AND_CLEAN",
+      "passed": true
+    },
+    {
+      "id": "RUNTIME_IDENTITIES",
+      "passed": true
+    },
+    {
+      "id": "PARENT_BYTES",
+      "passed": true
+    },
+    {
+      "id": "PARENT_FORMAL_TREES",
+      "passed": true
+    },
+    {
+      "id": "TOOL_SYNTAX",
+      "passed": true
+    },
+    {
+      "id": "ALL_SCENES_CONSTRUCT",
+      "passed": true
+    },
+    {
+      "id": "ZERO_RENDER",
+      "passed": true
+    },
+    {
+      "id": "SYNTHETIC_DIRECTION_AND_Q_ARITHMETIC",
+      "passed": true
+    },
+    {
+      "id": "CURRENT_RGB_DECISION_ISOLATION",
+      "passed": true
+    },
+    {
+      "id": "DISK_RESERVE",
+      "passed": true
+    },
+    {
+      "id": "FORMAL_ROOT_ABSENT",
+      "passed": true
+    },
+    {
+      "id": "MODEL_CALLS_ZERO",
+      "passed": true
+    },
+    {
+      "id": "NETWORK_CALLS_ZERO",
+      "passed": true
+    }
+  ],
+  "checksPassed": 14,
+  "checksTotal": 14,
+  "children": [
+    {
+      "category": "syntax",
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "-m",
+        "py_compile",
+        "blender/render_b52_d12_14_h1_rigid_directional_source.py",
+        "scripts/adapt-b52-d12-14-h1-rigid-directional-source.py",
+        "scripts/reconstruct-b52-d12-14-h1-rigid-directional.py",
+        "scripts/analyze-b52-d12-14-h1-rigid-directional.py",
+        "scripts/audit-b52-d12-14-h1-rigid-directional.py",
+        "scripts/preflight-b52-d12-14-h1-rigid-directional.py",
+        "scripts/run-b52-d12-14-h1-rigid-directional.py"
+      ],
+      "elapsedSeconds": 0.039459,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "category": "syntax",
+      "command": [
+        "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "--check",
+        "scripts/reconstruct-b52-d12-14-h1-rigid-directional.mjs"
+      ],
+      "elapsedSeconds": 0.024876,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_14_h1_rigid_directional_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-rigid-directional-render-holdout.v0.1.json",
+        "--fixture",
+        "RIGID_TOP_FRESH_193X135",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-rigid-directional-render-holdout-preflight-v0-1/probes/RIGID_TOP_FRESH_193X135/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.061754,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_14_h1_rigid_directional_source.py:231: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_14_h1_rigid_directional_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.057  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.057  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.057  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.057  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.057  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.538  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.538  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.538  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.538  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.538  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1214H1_SOURCE_OK fixture=RIGID_TOP_FRESH_193X135 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_14_h1_rigid_directional_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-rigid-directional-render-holdout.v0.1.json",
+        "--fixture",
+        "RIGID_BOTTOM_FRESH_193X137",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-rigid-directional-render-holdout-preflight-v0-1/probes/RIGID_BOTTOM_FRESH_193X137/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.027936,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_14_h1_rigid_directional_source.py:231: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_14_h1_rigid_directional_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.055  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.055  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.055  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.055  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.055  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.512  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.512  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.512  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.512  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.512  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1214H1_SOURCE_OK fixture=RIGID_BOTTOM_FRESH_193X137 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_14_h1_rigid_directional_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-rigid-directional-render-holdout.v0.1.json",
+        "--fixture",
+        "RIGID_NEITHER_FRESH_197X139",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-rigid-directional-render-holdout-preflight-v0-1/probes/RIGID_NEITHER_FRESH_197X139/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.03568,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_14_h1_rigid_directional_source.py:231: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_14_h1_rigid_directional_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.054  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.516  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.516  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.516  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.516  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.516  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1214H1_SOURCE_OK fixture=RIGID_NEITHER_FRESH_197X139 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    }
+  ],
+  "disk": {
+    "freeBytes": 109609832448,
+    "requiredBeforeFormal": 107508400128
+  },
+  "experimentId": "B52-D12.14-H1",
+  "operationCounts": {
+    "blenderProbeProcesses": 3,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "preflightProcesses": 5
+  },
+  "parentChecks": {
+    "qualityCouplingResult": true,
+    "qualityCouplingSpec": true,
+    "rejectedRenderedHoldoutResult": true,
+    "rejectedRenderedHoldoutSpec": true,
+    "rigidCalibrationAudit": true,
+    "rigidCalibrationReceipt": true,
+    "rigidCalibrationResult": true,
+    "rigidCalibrationSpec": true,
+    "typedEnvelopeNode": true,
+    "typedEnvelopePython": true
+  },
+  "parentTrees": {
+    "rejectedRenderedHoldoutFormalRoot": "de1ac6a394a3963a158d0e3432d5dfb89aaf9a87",
+    "rigidCalibrationFormalRoot": "19dfdf4f726b910a66d7f4a1e07aa113547abc2d"
+  },
+  "passed": true,
+  "preflightHash": "b14c2bcd207caeb1d023e2c8431fe72b237dafcc92973cb8d0659fa67ca7ddd4",
+  "probeReports": [
+    {
+      "camera": {
+        "lensMm": 53.0,
+        "location": [
+          0.0,
+          0.0,
+          11.0
+        ],
+        "name": "BFS_D1214H1_CAMERA",
+        "rotationEuler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sensorWidthMm": 36.0,
+        "type": "PERSP"
+      },
+      "cameraAnimation": [
+        {
+          "arrayIndex": 0,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 1,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 2,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              11.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              11.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              11.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 0,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 1,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 2,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        }
+      ],
+      "fixture": {
+        "cameraByFrame": {
+          "0": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "1": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "2": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "id": "RIGID_TOP_FRESH_193X135",
+        "measurementRegionNormalized": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "owners": [
+          {
+            "analyticOwnerId": "D1214H1_TOP_BACKGROUND",
+            "materialPassIndex": 24201,
+            "materialVariant": "background",
+            "objectPassIndex": 24200,
+            "role": "background",
+            "sizeWorld": [
+              30.0,
+              20.0
+            ],
+            "subdivisions": [
+              88,
+              60
+            ],
+            "transformByFrame": {
+              "0": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "1": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "2": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          },
+          {
+            "analyticOwnerId": "D1214H1_TOP_FOREGROUND",
+            "materialPassIndex": 24202,
+            "materialVariant": "RIGID_TOP_FRESH",
+            "objectPassIndex": 24200,
+            "role": "foreground",
+            "sizeWorld": [
+              8.0,
+              7.0
+            ],
+            "subdivisions": [
+              72,
+              64
+            ],
+            "transformByFrame": {
+              "0": {
+                "location": [
+                  0.0,
+                  -2.5,
+                  0.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "1": {
+                "location": [
+                  0.0,
+                  -3.0,
+                  4.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "2": {
+                "location": [
+                  0.0,
+                  -3.0,
+                  4.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          }
+        ],
+        "primaryDirectionalClass": "TOP_MISSING_BOTTOM_AVAILABLE",
+        "purpose": [
+          "fresh TOP raster",
+          "bottom curvature available",
+          "same rigid C2 plane",
+          "shared Object Index negative control"
+        ],
+        "resolution": [
+          193,
+          135
+        ],
+        "sourceCandidateId": "TOP-000153"
+      },
+      "fixtureId": "RIGID_TOP_FRESH_193X135",
+      "materialTokens": [
+        24201,
+        24202
+      ],
+      "objectTokens": [
+        24200
+      ],
+      "ownerAnimations": {
+        "BFS_D1214H1_D1214H1_TOP_BACKGROUND": [
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                -2.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                -2.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                -2.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          }
+        ],
+        "BFS_D1214H1_D1214H1_TOP_FOREGROUND": [
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                -2.5,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                -3.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                -3.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                4.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                4.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          }
+        ]
+      },
+      "ownerCount": 2,
+      "ownerStructures": [
+        {
+          "analyticOwnerId": "D1214H1_TOP_BACKGROUND",
+          "localVertexSha256": "144844e6b03b45e18897dde42ad958bb2f4f042d0a23a5cdcdb110a30b4f769c",
+          "location": [
+            0.0,
+            0.0,
+            -2.0
+          ],
+          "material": "BFS_D1214H1_D1214H1_TOP_BACKGROUND_MATERIAL",
+          "materialNodes": [
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C0_BASE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C0_CLAMP",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C0_LINEAR",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C0_U",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C0_V",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C0_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C0_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C1_BASE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C1_CLAMP",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C1_LINEAR",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C1_U",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C1_V",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C1_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C1_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C2_BASE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C2_CLAMP",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C2_LINEAR",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C2_U",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C2_V",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C2_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_C2_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_EMISSION",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_GENERATED",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_OUTPUT",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_RGB",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_SEPARATE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_WAVE_PHASE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_WAVE_SINE",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_WAVE_SUM",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_WAVE_U",
+            "BFS_D1214H1_D1214H1_TOP_BACKGROUND_WAVE_V"
+          ],
+          "materialPassIndex": 24201,
+          "meshDataName": "BFS_D1214H1_D1214H1_TOP_BACKGROUND_MESH",
+          "name": "BFS_D1214H1_D1214H1_TOP_BACKGROUND",
+          "objectPassIndex": 24200,
+          "polygons": 5280,
+          "role": "background",
+          "rotationEuler": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertices": 5429
+        },
+        {
+          "analyticOwnerId": "D1214H1_TOP_FOREGROUND",
+          "localVertexSha256": "a893e2a5bf6dfa0d1b55027301f2e38a5915132a34bd8e85b54c2586051270fc",
+          "location": [
+            0.0,
+            -3.0,
+            4.0
+          ],
+          "material": "BFS_D1214H1_D1214H1_TOP_FOREGROUND_MATERIAL",
+          "materialNodes": [
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C0_BASE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C0_CLAMP",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C0_LINEAR",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C0_U",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C0_V",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C0_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C0_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C1_BASE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C1_CLAMP",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C1_LINEAR",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C1_U",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C1_V",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C1_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C1_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C2_BASE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C2_CLAMP",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C2_LINEAR",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C2_U",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C2_V",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C2_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_C2_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_EMISSION",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_GENERATED",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_OUTPUT",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_RGB",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_SEPARATE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_WAVE_PHASE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_WAVE_SINE",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_WAVE_SUM",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_WAVE_U",
+            "BFS_D1214H1_D1214H1_TOP_FOREGROUND_WAVE_V"
+          ],
+          "materialPassIndex": 24202,
+          "meshDataName": "BFS_D1214H1_D1214H1_TOP_FOREGROUND_MESH",
+          "name": "BFS_D1214H1_D1214H1_TOP_FOREGROUND",
+          "objectPassIndex": 24200,
+          "polygons": 4608,
+          "role": "foreground",
+          "rotationEuler": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertices": 4745
+        }
+      ],
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1214H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-rigid-directional-render-holdout-preflight-v0-1/probes/RIGID_TOP_FRESH_193X135/report.json",
+      "selfHash": true,
+      "sha256": "5d912b3fde9b97ca8cf30ebecdcc1bcc12214569182159d2a5ba1e6bd7a7ea6a",
+      "zeroRender": true
+    },
+    {
+      "camera": {
+        "lensMm": 53.0,
+        "location": [
+          0.0,
+          0.0,
+          11.0
+        ],
+        "name": "BFS_D1214H1_CAMERA",
+        "rotationEuler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sensorWidthMm": 36.0,
+        "type": "PERSP"
+      },
+      "cameraAnimation": [
+        {
+          "arrayIndex": 0,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 1,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 2,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              11.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              11.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              11.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 0,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 1,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 2,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        }
+      ],
+      "fixture": {
+        "cameraByFrame": {
+          "0": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "1": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "2": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "id": "RIGID_BOTTOM_FRESH_193X137",
+        "measurementRegionNormalized": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "owners": [
+          {
+            "analyticOwnerId": "D1214H1_BOTTOM_BACKGROUND",
+            "materialPassIndex": 24301,
+            "materialVariant": "background",
+            "objectPassIndex": 24300,
+            "role": "background",
+            "sizeWorld": [
+              30.0,
+              20.0
+            ],
+            "subdivisions": [
+              88,
+              60
+            ],
+            "transformByFrame": {
+              "0": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "1": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "2": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          },
+          {
+            "analyticOwnerId": "D1214H1_BOTTOM_FOREGROUND",
+            "materialPassIndex": 24302,
+            "materialVariant": "RIGID_BOTTOM_FRESH",
+            "objectPassIndex": 24300,
+            "role": "foreground",
+            "sizeWorld": [
+              8.0,
+              7.0
+            ],
+            "subdivisions": [
+              74,
+              66
+            ],
+            "transformByFrame": {
+              "0": {
+                "location": [
+                  0.0,
+                  2.0,
+                  0.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "1": {
+                "location": [
+                  0.0,
+                  2.0,
+                  3.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "2": {
+                "location": [
+                  0.0,
+                  2.0,
+                  3.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          }
+        ],
+        "primaryDirectionalClass": "BOTTOM_MISSING_TOP_AVAILABLE",
+        "purpose": [
+          "fresh BOTTOM raster",
+          "top curvature available",
+          "same rigid C2 plane",
+          "shared Object Index negative control"
+        ],
+        "resolution": [
+          193,
+          137
+        ],
+        "sourceCandidateId": "BOTTOM-000069"
+      },
+      "fixtureId": "RIGID_BOTTOM_FRESH_193X137",
+      "materialTokens": [
+        24301,
+        24302
+      ],
+      "objectTokens": [
+        24300
+      ],
+      "ownerAnimations": {
+        "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND": [
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                -2.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                -2.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                -2.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          }
+        ],
+        "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND": [
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                2.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                2.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                2.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                3.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                3.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          }
+        ]
+      },
+      "ownerCount": 2,
+      "ownerStructures": [
+        {
+          "analyticOwnerId": "D1214H1_BOTTOM_BACKGROUND",
+          "localVertexSha256": "144844e6b03b45e18897dde42ad958bb2f4f042d0a23a5cdcdb110a30b4f769c",
+          "location": [
+            0.0,
+            0.0,
+            -2.0
+          ],
+          "material": "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_MATERIAL",
+          "materialNodes": [
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C0_BASE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C0_CLAMP",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C0_LINEAR",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C0_U",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C0_V",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C0_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C0_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C1_BASE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C1_CLAMP",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C1_LINEAR",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C1_U",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C1_V",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C1_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C1_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C2_BASE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C2_CLAMP",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C2_LINEAR",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C2_U",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C2_V",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C2_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_C2_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_EMISSION",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_GENERATED",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_OUTPUT",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_RGB",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_SEPARATE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_WAVE_PHASE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_WAVE_SINE",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_WAVE_SUM",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_WAVE_U",
+            "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_WAVE_V"
+          ],
+          "materialPassIndex": 24301,
+          "meshDataName": "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND_MESH",
+          "name": "BFS_D1214H1_D1214H1_BOTTOM_BACKGROUND",
+          "objectPassIndex": 24300,
+          "polygons": 5280,
+          "role": "background",
+          "rotationEuler": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertices": 5429
+        },
+        {
+          "analyticOwnerId": "D1214H1_BOTTOM_FOREGROUND",
+          "localVertexSha256": "adc8bc7af08b454cac384dae10d69928f61e71996fe630491f6ed0d60e1ef2cd",
+          "location": [
+            0.0,
+            2.0,
+            3.0
+          ],
+          "material": "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_MATERIAL",
+          "materialNodes": [
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C0_BASE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C0_CLAMP",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C0_LINEAR",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C0_U",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C0_V",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C0_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C0_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C1_BASE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C1_CLAMP",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C1_LINEAR",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C1_U",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C1_V",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C1_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C1_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C2_BASE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C2_CLAMP",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C2_LINEAR",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C2_U",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C2_V",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C2_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_C2_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_EMISSION",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_GENERATED",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_OUTPUT",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_RGB",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_SEPARATE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_WAVE_PHASE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_WAVE_SINE",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_WAVE_SUM",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_WAVE_U",
+            "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_WAVE_V"
+          ],
+          "materialPassIndex": 24302,
+          "meshDataName": "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND_MESH",
+          "name": "BFS_D1214H1_D1214H1_BOTTOM_FOREGROUND",
+          "objectPassIndex": 24300,
+          "polygons": 4884,
+          "role": "foreground",
+          "rotationEuler": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertices": 5025
+        }
+      ],
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1214H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-rigid-directional-render-holdout-preflight-v0-1/probes/RIGID_BOTTOM_FRESH_193X137/report.json",
+      "selfHash": true,
+      "sha256": "a4afad8ef5bc2d4ad2d8ed2a03b8e3a575475cf22d9c7ca4da8b8fed7c21cef3",
+      "zeroRender": true
+    },
+    {
+      "camera": {
+        "lensMm": 53.0,
+        "location": [
+          0.0,
+          0.0,
+          11.0
+        ],
+        "name": "BFS_D1214H1_CAMERA",
+        "rotationEuler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sensorWidthMm": 36.0,
+        "type": "PERSP"
+      },
+      "cameraAnimation": [
+        {
+          "arrayIndex": 0,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 1,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 2,
+          "channelBagIndex": 0,
+          "dataPath": "location",
+          "keyframes": [
+            [
+              0.0,
+              11.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              11.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              11.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 0,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 1,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        },
+        {
+          "arrayIndex": 2,
+          "channelBagIndex": 0,
+          "dataPath": "rotation_euler",
+          "keyframes": [
+            [
+              0.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              1.0,
+              0.0,
+              "LINEAR"
+            ],
+            [
+              2.0,
+              0.0,
+              "LINEAR"
+            ]
+          ],
+          "layerIndex": 0,
+          "stripIndex": 0
+        }
+      ],
+      "fixture": {
+        "cameraByFrame": {
+          "0": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "1": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "2": {
+            "location": [
+              0.0,
+              0.0,
+              11.0
+            ],
+            "rotationEuler": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "id": "RIGID_NEITHER_FRESH_197X139",
+        "measurementRegionNormalized": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "owners": [
+          {
+            "analyticOwnerId": "D1214H1_NEITHER_BACKGROUND",
+            "materialPassIndex": 24401,
+            "materialVariant": "background",
+            "objectPassIndex": 24400,
+            "role": "background",
+            "sizeWorld": [
+              30.0,
+              20.0
+            ],
+            "subdivisions": [
+              88,
+              60
+            ],
+            "transformByFrame": {
+              "0": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "1": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "2": {
+                "location": [
+                  0.0,
+                  0.0,
+                  -2.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          },
+          {
+            "analyticOwnerId": "D1214H1_NEITHER_FOREGROUND",
+            "materialPassIndex": 24402,
+            "materialVariant": "RIGID_NEITHER_FRESH",
+            "objectPassIndex": 24400,
+            "role": "foreground",
+            "sizeWorld": [
+              8.0,
+              7.0
+            ],
+            "subdivisions": [
+              76,
+              68
+            ],
+            "transformByFrame": {
+              "0": {
+                "location": [
+                  0.5,
+                  0.0,
+                  -1.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  1.53588974175501,
+                  0.0
+                ]
+              },
+              "1": {
+                "location": [
+                  0.0,
+                  0.0,
+                  4.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              },
+              "2": {
+                "location": [
+                  0.0,
+                  0.0,
+                  4.0
+                ],
+                "rotationEuler": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          }
+        ],
+        "primaryDirectionalClass": "NEITHER_HORIZONTAL_AVAILABLE",
+        "purpose": [
+          "fresh NEITHER raster",
+          "mandatory zero acceptance",
+          "88-degree rigid rotation",
+          "fallback negative control"
+        ],
+        "resolution": [
+          197,
+          139
+        ],
+        "sourceCandidateId": "NEITHER-000113"
+      },
+      "fixtureId": "RIGID_NEITHER_FRESH_197X139",
+      "materialTokens": [
+        24401,
+        24402
+      ],
+      "objectTokens": [
+        24400
+      ],
+      "ownerAnimations": {
+        "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND": [
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                -2.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                -2.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                -2.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          }
+        ],
+        "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND": [
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.5,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "location",
+            "keyframes": [
+              [
+                0.0,
+                -1.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                4.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                4.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 0,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 1,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                1.535889744758606,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          },
+          {
+            "arrayIndex": 2,
+            "channelBagIndex": 0,
+            "dataPath": "rotation_euler",
+            "keyframes": [
+              [
+                0.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                1.0,
+                0.0,
+                "LINEAR"
+              ],
+              [
+                2.0,
+                0.0,
+                "LINEAR"
+              ]
+            ],
+            "layerIndex": 0,
+            "stripIndex": 0
+          }
+        ]
+      },
+      "ownerCount": 2,
+      "ownerStructures": [
+        {
+          "analyticOwnerId": "D1214H1_NEITHER_BACKGROUND",
+          "localVertexSha256": "144844e6b03b45e18897dde42ad958bb2f4f042d0a23a5cdcdb110a30b4f769c",
+          "location": [
+            0.0,
+            0.0,
+            -2.0
+          ],
+          "material": "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_MATERIAL",
+          "materialNodes": [
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C0_BASE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C0_CLAMP",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C0_LINEAR",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C0_U",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C0_V",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C0_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C0_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C1_BASE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C1_CLAMP",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C1_LINEAR",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C1_U",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C1_V",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C1_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C1_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C2_BASE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C2_CLAMP",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C2_LINEAR",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C2_U",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C2_V",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C2_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_C2_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_EMISSION",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_GENERATED",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_OUTPUT",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_RGB",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_SEPARATE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_WAVE_PHASE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_WAVE_SINE",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_WAVE_SUM",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_WAVE_U",
+            "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_WAVE_V"
+          ],
+          "materialPassIndex": 24401,
+          "meshDataName": "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND_MESH",
+          "name": "BFS_D1214H1_D1214H1_NEITHER_BACKGROUND",
+          "objectPassIndex": 24400,
+          "polygons": 5280,
+          "role": "background",
+          "rotationEuler": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertices": 5429
+        },
+        {
+          "analyticOwnerId": "D1214H1_NEITHER_FOREGROUND",
+          "localVertexSha256": "ae1737191a854ba2f246e42a09fd0f9d8d6d9ceffeb38a434ff54c7bdee81a3c",
+          "location": [
+            0.0,
+            0.0,
+            4.0
+          ],
+          "material": "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_MATERIAL",
+          "materialNodes": [
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C0_BASE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C0_CLAMP",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C0_LINEAR",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C0_U",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C0_V",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C0_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C0_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C1_BASE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C1_CLAMP",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C1_LINEAR",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C1_U",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C1_V",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C1_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C1_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C2_BASE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C2_CLAMP",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C2_LINEAR",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C2_U",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C2_V",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C2_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_C2_WITH_WAVE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_EMISSION",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_GENERATED",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_OUTPUT",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_RGB",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_SEPARATE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_WAVE_PHASE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_WAVE_SINE",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_WAVE_SUM",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_WAVE_U",
+            "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_WAVE_V"
+          ],
+          "materialPassIndex": 24402,
+          "meshDataName": "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND_MESH",
+          "name": "BFS_D1214H1_D1214H1_NEITHER_FOREGROUND",
+          "objectPassIndex": 24400,
+          "polygons": 5168,
+          "role": "foreground",
+          "rotationEuler": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "vertices": 5313
+        }
+      ],
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1214H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-rigid-directional-render-holdout-preflight-v0-1/probes/RIGID_NEITHER_FRESH_197X139/report.json",
+      "selfHash": true,
+      "sha256": "70fcf7c5163fe2c4c94a31a7d5c90e7cac272697e0779573708b13bfe367f8e0",
+      "zeroRender": true
+    }
+  ],
+  "runtimeChecks": {
+    "blender": true,
+    "node": true,
+    "ocio": true,
+    "python": true
+  },
+  "schemaVersion": "bfs.blenderMaterialOwnerRigidDirectionalRenderHoldoutPreflight.v0.1",
+  "specSha256": "7ff239d91dca6ea8708ce4cac955dd0b129ae067028a77ec1699a43a236195a8",
+  "synthetic": {
+    "cases": {
+      "BOTTOM_MISSING_TOP_AVAILABLE": {
+        "bottom": true,
+        "eligible": true,
+        "left": false,
+        "neither": false,
+        "right": false,
+        "top": false
+      },
+      "FULL_STENCIL": {
+        "bottom": false,
+        "eligible": true,
+        "left": false,
+        "neither": false,
+        "right": false,
+        "top": false
+      },
+      "LEFT_MISSING_RIGHT_AVAILABLE": {
+        "bottom": false,
+        "eligible": true,
+        "left": true,
+        "neither": false,
+        "right": false,
+        "top": false
+      },
+      "NEITHER_HORIZONTAL_AVAILABLE": {
+        "bottom": false,
+        "eligible": false,
+        "left": false,
+        "neither": true,
+        "right": false,
+        "top": false
+      },
+      "RIGHT_MISSING_LEFT_AVAILABLE": {
+        "bottom": false,
+        "eligible": true,
+        "left": false,
+        "neither": false,
+        "right": true,
+        "top": false
+      },
+      "TOP_MISSING_BOTTOM_AVAILABLE": {
+        "bottom": false,
+        "eligible": true,
+        "left": false,
+        "neither": false,
+        "right": false,
+        "top": true
+      }
+    },
+    "riskExampleQ30": 3328,
+    "riskExpectedQ30": 3328
+  },
+  "toolCommits": {
+    "blender/render_b52_d12_14_h1_rigid_directional_source.py": "7488f0a44b4c158a5eeed5336992635fdca26400",
+    "scripts/adapt-b52-d12-14-h1-rigid-directional-source.py": "be2a501c7f54c8050dec87fd76499e99a0de3b05",
+    "scripts/analyze-b52-d12-14-h1-rigid-directional.py": "7488f0a44b4c158a5eeed5336992635fdca26400",
+    "scripts/audit-b52-d12-14-h1-rigid-directional.py": "7488f0a44b4c158a5eeed5336992635fdca26400",
+    "scripts/preflight-b52-d12-14-h1-rigid-directional.py": "7488f0a44b4c158a5eeed5336992635fdca26400",
+    "scripts/reconstruct-b52-d12-14-h1-rigid-directional.mjs": "7488f0a44b4c158a5eeed5336992635fdca26400",
+    "scripts/reconstruct-b52-d12-14-h1-rigid-directional.py": "7488f0a44b4c158a5eeed5336992635fdca26400",
+    "scripts/run-b52-d12-14-h1-rigid-directional.py": "7488f0a44b4c158a5eeed5336992635fdca26400"
+  },
+  "toolHashes": {
+    "blender/render_b52_d12_14_h1_rigid_directional_source.py": "9ba86e95e8d24c2592690c575cd87749433a1af00a7d2c18ace3e2153daf36ce",
+    "scripts/adapt-b52-d12-14-h1-rigid-directional-source.py": "1ae9316c0448006bc7696f60778a23154f70791d9bf7059dac3592f4cdac856e",
+    "scripts/analyze-b52-d12-14-h1-rigid-directional.py": "144ac0360205cedf719cf570f1f022887e4b4e551bbc415a4a62809c406c3705",
+    "scripts/audit-b52-d12-14-h1-rigid-directional.py": "6b9d6dd864e1671cd4c49bb70e3369917259c1555d1b529aaeaa93d9798d0671",
+    "scripts/preflight-b52-d12-14-h1-rigid-directional.py": "42ddde68468ec6b8652ecafdecf785a54bf52e2e21be4d24eaa98b44476789b0",
+    "scripts/reconstruct-b52-d12-14-h1-rigid-directional.mjs": "ec43f68c9d893051e8ead149bf29c6c29f57e9963e7aa5f3174ae8d91fdd4378",
+    "scripts/reconstruct-b52-d12-14-h1-rigid-directional.py": "7bae8c665df9d904369fe7774204c42024a2b15c3a4b615bd7e8d28ab8238c40",
+    "scripts/run-b52-d12-14-h1-rigid-directional.py": "9b5503143d132ac9f9deca807c33fd611434dee6c901f122a82a98e49855f0d1"
+  }
+}

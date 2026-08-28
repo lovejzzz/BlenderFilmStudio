@@ -3550,3 +3550,13 @@ Date: 2026-08-28 · Type: FORMAL TOOL-FREEZE CANDIDATE · New Blender renders: 0
 在 `/tmp` 中运行三次独立 Blender 5.2.0 LTS factory-empty source probes；TOP/BOTTOM/NEITHER 全部 exit 0，Material/Object/Vector/Depth/Combined passes 注册正确，foreground scale 均为 `[1,1,1]`，三帧 action 与 effective fixture exact，Render Result 与正式 EXR 均未创建，`blenderRenderCalls=0`。Foreground local-vertex hashes 分别为 `a893e2a5bf6dfa0d1b55027301f2e38a5915132a34bd8e85b54c2586051270fc`、`adc8bc7af08b454cac384dae10d69928f61e71996fe630491f6ed0d60e1ef2cd`、`ae1737191a854ba2f246e42a09fd0f9d8d6d9ceffeb38a434ff54c7bdee81a3c`。7 个 Python tools 通过 `py_compile`，Node consumer 通过 `node --check`；preflight 与 formal roots 仍不存在。
 
 按 spec 顺序，待冻结的八个 tool SHA-256 为：`9ba86e95e8d24c2592690c575cd87749433a1af00a7d2c18ace3e2153daf36ce`、`1ae9316c0448006bc7696f60778a23154f70791d9bf7059dac3592f4cdac856e`、`7bae8c665df9d904369fe7774204c42024a2b15c3a4b615bd7e8d28ab8238c40`、`ec43f68c9d893051e8ead149bf29c6c29f57e9963e7aa5f3174ae8d91fdd4378`、`144ac0360205cedf719cf570f1f022887e4b4e551bbc415a4a62809c406c3705`、`6b9d6dd864e1671cd4c49bb70e3369917259c1555d1b529aaeaa93d9798d0671`、`42ddde68468ec6b8652ecafdecf785a54bf52e2e21be4d24eaa98b44476789b0`、`9b5503143d132ac9f9deca807c33fd611434dee6c901f122a82a98e49855f0d1`。下一动作必须提交并推送这些 exact bytes 与本 entry，形成 tool-freeze commit；随后才可运行 official zero-render preflight。
+
+## J-245 · D12.14-H1 official zero-render preflight 全门通过
+
+Date: 2026-08-28 · Type: FORMAL PREFLIGHT ACCEPTED · New Blender renders: 0
+
+Tool-freeze commit `7488f0a` 推送后、formal root 仍不存在时，使用冻结的 Blender bundled Python 启动 official preflight。5/5 child processes exit 0：两项 Python/Node syntax checks 与三项 Blender 5.2 factory-empty scene probes。Preflight 14/14 gates 全部通过，包括 spec/tool/runtime/environment identities、所有 parent bytes、C2 与 D12.12-H1 formal Git trees、三套场景构造、pass registration、固定 local mesh/scale/三帧 action、synthetic direction/Q arithmetic、current-RGB source isolation、disk reserve、formal-root absence，以及 render/model/network 零调用。
+
+正式运行前观察 free bytes 为 109,609,832,448；冻结 required-before-formal 为 107,508,400,128，headroom 2,101,432,320 bytes。Preflight root 140 KiB；`preflight.json` file SHA-256 / self-hash 为 `38e1e2d1783994bf9d1b7ec4e53a1f81de639080f8f38e47d340b74a8a219e4d` / `b14c2bcd207caeb1d023e2c8431fe72b237dafcc92973cb8d0659fa67ca7ddd4`；`receipt.json` file SHA-256 / self-hash 为 `615a7cad4af09fc2180f1d6c96238cb984efaeb2e4f09d4542e7f1a951e6bdb7` / `bb4da865f29bca8b7933a818264e9e3fe8f36cd05dd9cd23630fc7fbcc29c398`。三个 probe report self-hash 均由独立 canonical replay 验证。
+
+该 preflight 只证明正式运行已被准入，不能预测 H1 科学 verdict。下一动作是先提交并推送 exact preflight evidence，再让冻结 runner 一次性创建 fresh formal root；若任一真实 render、adapter、consumer、analyzer 或 auditor gate 失败，应保留失败输出并报告，不得修改工具后重跑同一 experiment ID。
