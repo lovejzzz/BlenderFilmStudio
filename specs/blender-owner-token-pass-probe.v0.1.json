@@ -1,0 +1,319 @@
+{
+  "schemaVersion": "bfs.blenderOwnerTokenPassProbe.v0.1",
+  "experimentId": "B52-D12.10-P1",
+  "title": "Real Blender 5.2 compiler-controlled temporal owner-token pass probe",
+  "status": "PREREGISTERED_BEFORE_NEW_TOOLS_PREFLIGHT_OR_RENDER",
+  "question": "Can Material Index or a scalar custom AOV transport a deterministic compiler-assigned per-owner token through Blender 5.2 Cycles multilayer EXR when distinct analytic owners deliberately share Object Index?",
+  "decisionRole": "pass-semantics and transport feasibility only; no temporal reconstruction candidate is promoted",
+  "parents": {
+    "h1Spec": {
+      "uri": "specs/blender-motion-aware-curvature-risk-holdout.v0.1.json",
+      "sha256": "c2756a20e314cf470698ef7af6160154b8d7e2d5e8531ce6591b2509a8730dbc"
+    },
+    "c1Spec": {
+      "uri": "specs/blender-temporal-owner-support-localization-c1.v0.1.json",
+      "sha256": "2ba1edd74fef18eacfa1c170cab4e35f80afc575eaef1ffe3500428553555403"
+    },
+    "c1Result": {
+      "uri": "experiments/blender-temporal-owner-support-localization-c1-v0-1/results.json",
+      "sha256": "90e8a4d72c0224e4195cd6a52ea193d93211d6dfe368ed7efdd1c3d421d393c8",
+      "analysisHash": "e0f9c8417357ef0d08a75c45ce108d650fe8df22b7a6f3140ea4c3e787ddc719",
+      "verdict": "TEMPORAL_OWNER_SUPPORT_ALIAS_LOCALIZED_C1"
+    },
+    "c1Audit": {
+      "uri": "experiments/blender-temporal-owner-support-localization-c1-v0-1/audit-c1.json",
+      "sha256": "7bea1f8db8bf15a41384fa3b1e9a8be5bc44b35ce71b34f18ea51e7549f705c2",
+      "auditHash": "88c4f6081b80e2b62b535e7d4bb364a3b52c45d8b23ded48e30b69060e338e57",
+      "passed": true
+    }
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "launchFlags": [
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1"
+      ]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "numpy": "2.3.4",
+      "openImageIO": "3.1.13.1"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+    },
+    "environmentAllowlist": [
+      "PATH",
+      "LANG",
+      "LC_ALL",
+      "OCIO",
+      "TMPDIR",
+      "BLENDER_USER_CONFIG",
+      "BLENDER_USER_SCRIPTS"
+    ]
+  },
+  "freshness": {
+    "newToolPaths": [
+      "blender/render_b52_d12_10_p1_owner_token_source.py",
+      "scripts/analyze-b52-d12-10-p1-owner-token.py",
+      "scripts/audit-b52-d12-10-p1-owner-token.py",
+      "scripts/preflight-b52-d12-10-p1-owner-token.py",
+      "scripts/run-b52-d12-10-p1-owner-token.py"
+    ],
+    "preflightRoot": "experiments/blender-owner-token-pass-probe-preflight-v0-1",
+    "formalRoot": "experiments/blender-owner-token-pass-probe-v0-1",
+    "requirements": [
+      "All five tool paths and both output roots are absent at preregistration.",
+      "Preflight performs zero render calls and freezes exact tool hashes plus the tool-freeze commit.",
+      "Formal creates its root once and never overwrites a source, result, audit or receipt.",
+      "Every source render launches from factory startup in a fresh Blender process with isolated config, scripts and temporary directories."
+    ]
+  },
+  "sceneContract": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "resolution": [
+      193,
+      127
+    ],
+    "samples": 32,
+    "adaptiveSampling": false,
+    "denoise": false,
+    "transparentFilm": false,
+    "seed": 121001,
+    "camera": {
+      "type": "ORTHO",
+      "location": [
+        0.0,
+        0.0,
+        10.0
+      ],
+      "rotationEuler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "looksAlongLocalAxis": "-Z",
+      "orthoScaleWorld": 8.0
+    },
+    "owners": [
+      {
+        "analyticOwnerId": "P1_BACKGROUND",
+        "objectName": "P1_BACKGROUND",
+        "materialName": "P1_BACKGROUND_MATERIAL",
+        "objectIndex": 7,
+        "materialIndex": 11,
+        "customAovValue": 0.25,
+        "sizeWorld": [
+          14.0,
+          10.0
+        ],
+        "locationByFrame": {
+          "0": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "1": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "analyticOwnerId": "P1_FOREGROUND",
+        "objectName": "P1_FOREGROUND",
+        "materialName": "P1_FOREGROUND_MATERIAL",
+        "objectIndex": 7,
+        "materialIndex": 23,
+        "customAovValue": 0.75,
+        "sizeWorld": [
+          3.7,
+          3.1
+        ],
+        "locationByFrame": {
+          "0": [
+            -0.37,
+            0.13,
+            1.0
+          ],
+          "1": [
+            0.41,
+            0.13,
+            1.0
+          ]
+        }
+      }
+    ],
+    "displayCells": [
+      {
+        "id": "ACES_SDR",
+        "displayDevice": "sRGB - Display",
+        "viewTransform": "ACES 2.0 - SDR 100 nits (Rec.709)",
+        "look": "None",
+        "exposure": 0.0,
+        "gamma": 1.0
+      },
+      {
+        "id": "UN_TONE_MAPPED",
+        "displayDevice": "sRGB - Display",
+        "viewTransform": "Un-tone-mapped",
+        "look": "None",
+        "exposure": 1.0,
+        "gamma": 1.0
+      }
+    ],
+    "viewLayerName": "BFS_OWNER_TOKEN",
+    "customAovName": "OwnerToken",
+    "customAovType": "VALUE",
+    "output": {
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "colorDepth": "32",
+      "colorMode": "RGBA",
+      "compression": "ZIP",
+      "expectedPassSuffixes": [
+        ".Combined",
+        ".Object Index",
+        ".Material Index",
+        ".OwnerToken"
+      ]
+    }
+  },
+  "analyticMaskContract": {
+    "source": "independent orthographic pixel-center projection from the frozen camera, resolution, owner bounds and frame location",
+    "arrayOrigin": "OpenImageIO top-left row order",
+    "stableInteriorMarginPixels": 3.0,
+    "foregroundInterior": "pixel center lies at least three pixels inside all four projected foreground edges",
+    "backgroundInterior": "pixel center lies inside the projected background and at least three pixels outside the projected foreground bounds",
+    "boundaryBand": "pixel center lies within three pixels of any projected foreground edge while inside the projected background",
+    "minimumInteriorPixelsPerOwnerPerCell": 256
+  },
+  "mechanisms": {
+    "OBJECT_INDEX_CONTROL": {
+      "expectedTokens": {
+        "P1_BACKGROUND": 7.0,
+        "P1_FOREGROUND": 7.0
+      },
+      "expectedIdentityOutcome": "DOES_NOT_DISTINGUISH"
+    },
+    "MATERIAL_INDEX": {
+      "expectedTokens": {
+        "P1_BACKGROUND": 11.0,
+        "P1_FOREGROUND": 23.0
+      }
+    },
+    "CUSTOM_VALUE_AOV": {
+      "expectedTokens": {
+        "P1_BACKGROUND": 0.25,
+        "P1_FOREGROUND": 0.75
+      }
+    }
+  },
+  "formalMatrix": {
+    "frames": [
+      0,
+      1
+    ],
+    "displayCells": [
+      "ACES_SDR",
+      "UN_TONE_MAPPED"
+    ],
+    "repeats": [
+      1,
+      2
+    ],
+    "sourceRenderProcesses": 8,
+    "analyzerProcesses": 1,
+    "auditProcesses": 1,
+    "expectedUniqueChildProcesses": 10,
+    "blenderRenderCalls": 8,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "measurementContract": {
+    "passDiscovery": "OpenImageIO multipart roster and channel names are recorded; each expected suffix must resolve to exactly one finite float32 subimage.",
+    "interiorDiscreteness": "For every owner, frame, display cell and repeat, every stable-interior sample equals the frozen mechanism token exactly as float32.",
+    "identitySeparation": "Material Index and custom AOV stable-interior tokens differ between owners while Object Index equals 7 for both.",
+    "displayInvariance": "For a fixed frame and repeat, every Object Index, Material Index and custom AOV float32 array is byte-identical between ACES_SDR and UN_TONE_MAPPED.",
+    "repeatDeterminism": "For a fixed frame and display cell, every tested pass float32 array is byte-identical between the two clean-process repeats.",
+    "boundaryCharacterization": "For each mechanism, report finite unique values, minimum, maximum, exact-token count, non-token count and SHA over the frozen boundary band; boundary fractions are measured but do not change the interior denominator.",
+    "sourceIntegrity": "Every source report self-hash, EXR SHA, runtime identity, scene cardinality, pass settings, render-call count and compiler token assignment is verified."
+  },
+  "candidateGates": {
+    "common": [
+      "PASS_AVAILABLE_IN_MULTILAYER_EXR",
+      "ALL_VALUES_FINITE",
+      "STABLE_INTERIOR_SAMPLE_MINIMUM",
+      "STABLE_INTERIOR_EXACT_TOKEN",
+      "DISTINGUISHES_SAME_OBJECT_INDEX_OWNERS",
+      "DISPLAY_INVARIANT_FLOAT32_BYTES",
+      "CLEAN_PROCESS_REPEAT_FLOAT32_BYTES"
+    ],
+    "objectIndexControl": [
+      "STABLE_INTERIOR_EQUALS_SHARED_SEVEN",
+      "DOES_NOT_DISTINGUISH_AS_PREREGISTERED"
+    ],
+    "materialIndexAdditional": [
+      "MATERIAL_PASS_INDEX_ASSIGNMENT_ROUND_TRIP",
+      "TOKENS_ARE_INTEGER_FLOAT32"
+    ],
+    "customAovAdditional": [
+      "AOV_REGISTERED_AS_VALUE",
+      "OUTPUT_AOV_NODE_ASSIGNMENT_ROUND_TRIP"
+    ]
+  },
+  "attacks": {
+    "minimumRegisteredAttacks": 24,
+    "requiredTargets": [
+      "make owners share Material Index",
+      "make owners share custom AOV value",
+      "swap foreground and background Material Index",
+      "swap foreground and background custom AOV value",
+      "perturb one stable-interior Material Index sample",
+      "perturb one stable-interior custom AOV sample",
+      "hide an expected EXR pass",
+      "inject NaN",
+      "change one display-cell payload hash",
+      "change one repeat payload hash",
+      "shrink an interior below the frozen minimum",
+      "claim Object Index distinguishes the owners",
+      "change a source EXR SHA",
+      "change a source report self-hash",
+      "change render-call total",
+      "change Blender runtime identity"
+    ]
+  },
+  "frozenDecision": {
+    "bothViable": "MATERIAL_INDEX_AND_CUSTOM_AOV_OWNER_TOKENS_VIABLE",
+    "materialOnly": "MATERIAL_INDEX_OWNER_TOKEN_ONLY_VIABLE",
+    "customAovOnly": "CUSTOM_AOV_OWNER_TOKEN_ONLY_VIABLE",
+    "noneViable": "NO_TESTED_OWNER_TOKEN_PASS_VIABLE",
+    "mapping": "Evaluate common and mechanism-specific gates independently; Object Index must behave as the preregistered negative control. Select the exact label corresponding to the two viability booleans.",
+    "promotionRule": "A viable label permits a separately preregistered H1 integration intervention; it does not itself validate temporal reconstruction."
+  },
+  "diskAdmission": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 134217728,
+    "preflightRoot": "experiments/blender-owner-token-pass-probe-preflight-v0-1",
+    "formalRoot": "experiments/blender-owner-token-pass-probe-v0-1"
+  },
+  "nonClaims": [
+    "This probe does not revise the D12.9-H1 bounded verdict or coverage denominator.",
+    "Stable-interior token transport does not prove boundary samples are safe for temporal reuse.",
+    "Material Index viability does not prove multi-material analytic owners are automatically handled.",
+    "Custom AOV viability does not prove every third-party material can be injected without semantic change.",
+    "Byte determinism on this CPU fixture does not prove cross-device or cross-Blender-version determinism.",
+    "No perceptual quality, speedup, production cost or final-film claim is made.",
+    "No model or video-generation system participates."
+  ]
+}

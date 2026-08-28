@@ -3033,6 +3033,20 @@ Result SHA-256: `90e8a4d72c0224e4195cd6a52ea193d93211d6dfe368ed7efdd1c3d421d393c
 
 Artifact: `research/2026-08-28-b52-d12-10-c1-temporal-owner-support-localization-result.md`.
 
+## J-201 · D12.10-P1 预登记真实 Blender owner-token pass probe
+
+Date: 2026-08-28 · Type: REAL-BLENDER INTERVENTION PREREGISTRATION · Formal Blender renders: 0
+
+C1 将 same-index owner alias 与 moving 4×4 stencil loss 分离后，下一实验只处理第一项：Blender 是否能把 compiler-assigned analytic-owner token 作为可审计数据 pass 传进 multilayer EXR。P1 在五个新工具、preflight root 与 formal root 全部不存在时冻结。
+
+正式矩阵固定为 193×127、Cycles CPU、32 samples、两个 motion frames、ACES SDR / Un-tone-mapped 两个显示设置、两个净进程 repeats，共 8 次真实 render。背景与前景故意共享 Object Index 7，同时分别赋 Material Index 11/23 与 Value AOV 0.25/0.75。独立正交投影只在三像素 stable interiors 判定 exact token；边缘只测量、不挪进内域 denominator。
+
+候选必须同时通过 EXR 可用、finite、每 owner 至少 256 interior pixels、float32 exact token、same-index 区分、display-invariant bytes 与 clean-repeat bytes。Object Index 必须按预登记成为 negative control。Material Index 与 custom AOV 分别给出 viability，不允许把 pass probe 直接称为 temporal reconstruction 成功。
+
+Spec SHA-256: `7eb76c00baad8cbc4f996ec7a139e6a3cb1fd90c1c02391a531d8c2637abd4be`。
+
+Artifact: `specs/blender-owner-token-pass-probe.v0.1.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
