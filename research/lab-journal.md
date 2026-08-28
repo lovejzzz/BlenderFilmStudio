@@ -3167,6 +3167,20 @@ Audit 不导入原 analyzer/audit/consumer 或 Blender modules，不启动 Blend
 
 Artifact: `specs/blender-material-index-owner-integration-adversarial-audit.v0.1.json`.
 
+## J-212 · 56 个真实 mutation 全过，Material Index integration 解除 promotion hold
+
+Date: 2026-08-28 · Type: ACCEPTED ADVERSARIAL AUDIT · New Blender renders: 0
+
+I1-A1 独立 validator baseline 19/19、concrete attacks 56/56，正式 verdict `MATERIAL_INDEX_OWNER_INTERVENTION_ADVERSARIAL_AUDIT_ACCEPTED`。它从 raw H1 accepted、C1 true-owner 与 I1 consumer masks 重算两次 critical endpoint：registered H1 aliases 15，Material accepted aliases 0，new accepted vs H1 0，13,717→13,003。Formal Git tree 前后均为 `d1d50c211d4a94321ef7c051e9b066ff700a36d8`。
+
+56 个攻击实际修改隔离副本，覆盖 parent/source/adapter、self-consistent channel substitution、token zero/reuse/out-of-range/swap、Object Index negative control、alias/new-accept injection、fallback、coverage、verdict/result/audit/receipt、Q30 threshold 与 Vector sign。必要的局部 report/self-hash 被同步修复后，semantic gates 仍全部拒绝；不再是 `mutationNonce` hash sensitivity。
+
+因此 J-210 的 promotion hold 解除：在这组 paired H1 matrix 内，compiler-assigned Material Index 被接受为 frozen temporal candidate 的 owner identity input。结论仍为 bounded，因为 sweep coverage 0.94558 与 foreground retention 0.94151 未过原门；146/152 one-sided extra-stencil opportunities 仍是下一技术缺口。
+
+Result SHA-256: `b38666b6a6ebc234b0f41311d376875f6d980404afcd6e1f4eaf9d710e78e22c`; adversarial audit hash: `a75ee65dbd3255c565ca2531a08f0d395248ea369a716f16c6952fcd275345f7`。
+
+Artifact: `research/2026-08-28-b52-d12-11-i1-adversarial-audit-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
