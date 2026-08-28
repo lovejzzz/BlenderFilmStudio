@@ -3081,6 +3081,18 @@ Result SHA-256: `e5916494d80dca03b6ba039817c49ad42a4365e67473f7afdb0ef77c622ae90
 
 Artifact: `research/2026-08-28-b52-d12-10-p1-formal-analysis-failure.md`.
 
+## J-205 · P1-C1 冻结正交投影与 outcome-neutral validator 修正
+
+Date: 2026-08-28 · Type: CORRECTION PREREGISTRATION · New Blender renders: 0
+
+在三个 corrected tool paths 与 corrected root 全部不存在时，P1-C1 绑定原 spec、execution、invalid result、failure、invalid analyzer、failure note，并逐项冻结八份 source report/EXR SHA。允许的 measurement 修正只有 landscape camera 的 `worldWidth=orthoScale`、`worldHeight=orthoScale×height/width`；validator 则必须按原四标签映射核验任何结果，禁止要求特定候选通过。
+
+C1 必须重新从同一八份 EXR 提取 24 个 float32 arrays，并同时与 raw parts 和失败 P1 已保存 arrays byte exact。三像素 margin、256 minimum、7/7、11/23、0.25/0.75、所有 mechanism gates、boundary/display/repeat measurements 均不可改变。新 runner 只允许一个 analyzer 和一个独立 audit process，Blender/model/network/render 全为零。
+
+该修正已经看过失败数据，明确是 post-hoc，不得称为 fresh holdout。Spec SHA-256: `5805af301077a8b3ae18892e3c4c2c5a2ad646a7e8b3cdddd762c39d22293a77`。
+
+Artifact: `specs/blender-owner-token-pass-probe-c1.v0.1.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
