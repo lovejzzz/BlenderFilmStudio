@@ -4010,3 +4010,20 @@ Date: 2026-08-28 · Type: PUBLICATION COMPLETE / NON-BROWSER VERIFICATION · New
 同一source commit推送到Sites source repository，并在journal变更后重新执行Vinext production build，继续发现88个CDN warmup paths。hosting helper打包后保存为version 81；server archive content hash为 `sha256:e70dc64f39b3d1f0039894d0bbf1b98ef74155f4f4702e97b3c61f3848a960f5`，共375 files、29,143,040 bytes。Owner-only deployment `appgdep_6a91a37217f88191afa5142ff6e15401` succeeded。发布前access重新验证为current user owner、custom mode、exactly one allowed account且其role为owner、external visitors为0、workspace/tenant groups均为空；发布后exact B55 route匿名请求返回HTTP 401，携带站点自身owner bypass credential的non-browser请求返回HTTP 200。Owner-only URL为 `https://blender-film-studio-research.skylab.chatgpt.site/budgeted-native-child-pid-receipt-v0-1/`。
 
 为遵守J-284 guard，没有执行browser handoff、截图、DOM、点击、resize或视觉QA，唯一用户可见标签保持不新增。临时24 MiB发布archive目录已移动到用户Trash，可恢复且可由exact source重新生成。Guard启用后当前Codex main process连续运行超过9分钟，已经越过第二次同signature crash的约5分15秒复现窗口，且没有新ChatGPT diagnostic report；这支持规避措施有效，但不扩大为上游binary defect已修复。B55-E1 publication至此封闭。下一项有证据支持的缺口是把B54/B55验证过的admission、budgeted process与receipt语义提升为production compiler首选入口；必须先做新ID预登记，不能把实验专用runner直接冒充production interface。
+## J-286 · 主机磁盘容量门恢复与精确缓存清理
+
+Date: 2026-08-28 · Type: OPERATIONAL CAPACITY INTERVENTION · New Blender processes: 0 · New Blender renders: 0
+
+新goal生效后的首个生产入口预检观察available 98,323,091,456 bytes；100 GiB冻结reserve加512 MiB projected write共需107,911,053,312 bytes，shortfall为9,587,961,856 bytes，因此B56不得预登记后继续执行。只读审计确认12 GiB Hugging Face cache由Qwen等模型占用，LTX-Video本体已不存在，仅余0-byte lock；Colima 24 GiB包含当前BFS Blender worker与GPT Bot profiles；repo experiments约18 GiB属于不可删除科研证据。
+
+沿用用户此前“授权清理缓存并扩容 Colima”及明确删除LTX的授权，只清空六个精确、可重建cache targets：Adobe 3,206,708 KiB、Video Village plugin downloads 2,637,572 KiB、Adobe Camera Raw 1,169,088 KiB、Telegram 926,880 KiB、Google 550,972 KiB与Codex workspace dependencies 1,619,196 KiB。没有删除Qwen、BFS Blender worker image、任何Colima profile、repo evidence或用户工作树文件。清理后available为108,449,669,120 bytes；扣除512 MiB后为107,912,798,208 bytes，高于100 GiB reserve 538,615,808 bytes，unchanged gate为PASS。既有`scripts/disk-space-guard.mjs`保持fail-closed且default projected write仍为20 GiB；没有降低reserve或新增automatic deletion。
+
+## J-287 · B56-E1 production compiler entry promotion 预登记
+
+Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+B55-E1 formal evidence commit `e3bf6c1d71cd5c931d0937c12e647331851c436f` 仍为22/22 gates、41/41 attacks和四次native compile通过；results/audit/receipt file SHA-256分别为 `7e24d5a9ef6a948b73b98a3dbe9d2e970bdc553d7c217b30c43e7621efd93b7c`、`8f5ee5c33b3132494893d2294b3eee9ae4fd524c6a9f37c32fa13bd4763d9944`、`b8529364d0010fe218856f65fc0e5ec0e4fdf9dda7f61d35ca0bb8ee61476fe6`。当前package只暴露`compile:plan`、低层`compile:restricted`与`verify:receipt`，三个production aliases与五条production paths均不存在；B54/B55 runner是single-use evidence tool，不能冒充可复用production API。
+
+B56冻结一个additive release layer：新增release manifest、production preflight/runner/receipt library/verifier和exactly three package aliases，既有formal admission、budget supervisor v0.2、restricted compiler、BuildPlan compiler、CompileReceipt generator/verifier、Blender compiler/auditor保持exact hash。Production sequence必须是pushed zero-Blender preflight → fsynced attempt → admission → fsynced receipt → output materialization → immutable BuildPlan → exactly one restricted compile → production receipt → independent verifier；拒绝路径必须zero Blender且不创建requested output。
+
+Formal matrix冻结B01-A/B、B02-A/B四次preferred alias invocation，四份current CompileReceipt各19 checks、四份positive native PID、B01/B02 plan/structure pair identity、四份blend binding、zero render/model/network/Docker与至少48项semantic attacks。512 MiB projection后仍须保留100 GiB；预登记观察available为108,446,367,744 bytes。下一动作只能提交并推送exact spec、protocol与本entry；远端preregistration commit形成前不得创建release manifest、package aliases、B56 tool byte或任何B56 output root。
