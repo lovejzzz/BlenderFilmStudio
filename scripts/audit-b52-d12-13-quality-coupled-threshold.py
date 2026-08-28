@@ -171,6 +171,7 @@ def main():
     fallback = True
     repeat_fingerprints: dict[str, dict[str, dict[int, dict[str, str]]]] = {producer: {} for producer in ("python", "node")}
     recomputed = {threshold: {"errors": [], "cells": [], "underbounds": 0, "falseInvalid": 0, "aliases": 0} for threshold in thresholds}
+    fallback_mutation_witness = None
     for fixture_id in spec["inputContract"]["fixtures"]:
         fixture = fixtures[fixture_id]
         width, height = fixture["resolution"]
@@ -194,6 +195,7 @@ def main():
             risk, risk_payload = load_record(h1["decisionArrays"]["riskQ30"], "<u4", shape3)
             h1_reconstructed, h1_reconstructed_payload = load_record(h1["decisionArrays"]["reconstructed"], "<f4", shape4)
             if fixture_id == spec["inputContract"]["fixtures"][0] and repeat == 1:
+                fallback_mutation_witness = current_payload != h1_reconstructed_payload
                 artifacts.extend([
                     ("input/current-rgba", Path(adapter["arrays"]["currentRgba"]["uri"]), adapter["arrays"]["currentRgba"]["sha256"], "eligible, risk, reconstruction and current-RGBA payload mutation"),
                     ("input/eligible", Path(h1["decisionArrays"]["oneSidedEligible"]["uri"]), h1["decisionArrays"]["oneSidedEligible"]["sha256"], "eligible, risk, reconstruction and current-RGBA payload mutation"),
@@ -343,7 +345,7 @@ def main():
     add_attack("RESULT_RMSE", family_result, "RESULT_METRICS", selected_candidate["quality"]["rmse"] != original_rmse)
     add_attack("RISK_UNDERBOUND_COUNT", family_result, "RISK_UNDERBOUND_ZERO", result["candidates"][0]["riskUnderboundRgbSamples"] + 1 != result["candidates"][0]["riskUnderboundRgbSamples"])
     add_attack("ACCEPTED_BIT_FLIP", family_result, "ACCEPTANCE_REPLAY", True)
-    add_attack("FALLBACK_FROM_H1", family_result, "FALLBACK_EXACT", current_payload != h1_reconstructed_payload)
+    add_attack("FALLBACK_FROM_H1", family_result, "FALLBACK_EXACT", fallback_mutation_witness is True)
     add_attack("DROP_ALPHA_FALLBACK", family_result, "FALLBACK_EXACT", len(current_payload) != len(current_payload) * 3 // 4)
 
     family_coverage = "coverage denominator and per-owner retention mutation"
