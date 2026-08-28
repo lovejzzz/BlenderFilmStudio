@@ -3480,3 +3480,15 @@ Result / audit / execution / receipt file SHA-256 为 `005d4338ccd0c7e791b327951
 该结果只解决 world-space rigid fixture realizability，不验证 factor 1 或 Blender passes。下一动作是提交 formal root 与 result note，然后为 fresh rendered holdout 另行预登记新 rasters/tokens/signals/output；不能直接复用 calibration cells 充当 confirmatory evidence。
 
 Artifact: `research/2026-08-28-b52-d12-14-c2-rigid-directional-calibration-result.md`。
+
+## J-239 · Codex 升级重启前的 D12.14-C2 网站发布检查点
+
+Date: 2026-08-28 · Type: RESTART-SAFE PUBLICATION CHECKPOINT · New Blender renders: 0
+
+D12.14-C2 的正式实验已经完整保存在 `main` 与远端 commit `2ab40ad`：500 个 world-space candidates、6 个唯一子进程、runner 8/8、audit baseline 18/18、semantic attacks 64/64、receipt valid。当前没有 Blender、Vinext/Next 或临时 HTTP 服务进程；重启不会中断实验或遗留渲染任务。
+
+尚未发布的站点工作被隔离到 checkpoint 分支 `codex/d12-14-c2-site-publication`。已完成内容包括：从正式 result masks 机械导出的 2×3 source-bound domain matrix、带资产哈希的 manifest、可重放导出器，以及 `/blender-material-owner-rigid-directional-calibration-v0-1/` 页面主体。PNG SHA-256 为 `5a1d12e39178922344cc268c41ef352cab542d3afca2948c8fa3cf4100e6e9d7`；manifest internal hash 为 `2af904965f56cddebb04cd5044887bda24aa9929bc46955f29f829a8c217b669`。该图只作 `SOURCE_BOUND_VISUALIZATION_NOT_DECISIONAL_EVIDENCE`，不能替代 fresh rendered holdout。
+
+重启后的精确续接顺序：先补 D12.14-C2 scoped CSS；再把新 route 接入首页与 D12.13 邻接导航；再将新页面直接 import 的 `results.json`、`audit.json`、`execution.json` 加入 GitHub Pages sparse checkout；随后执行 exporter replay、定向 ESLint、Vinext production build 与 GitHub static build。所有验证通过后才允许合入 `main`、等待公开 exact route HTTP 200，并将同一 source commit 发布到 owner-only Sites。最后另行预登记 fresh Blender render holdout；不得把 calibration masks 当作 confirmatory denominator。
+
+用户原有未提交内容 `README.md` 与三份 2026-08-26 Physis/Remainder Room research drafts 均未纳入 checkpoint，也未被改写。
