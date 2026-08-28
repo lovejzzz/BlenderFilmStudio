@@ -3794,3 +3794,15 @@ Date: 2026-08-28 · Type: OPERATIONAL CHECKPOINT / UNFROZEN IMPLEMENTATION · Ne
 当前library候选为183行，SHA-256 `382a06e82c815b69539edf6211bd3d9db28a05c2aa49d1f7a6ddaed61f18f67a`；`node --check` 与 `git diff --check`通过。该文件只是可恢复的实现checkpoint，不是tool-freeze，不构成formal evidence或admission结论。其path、Git ancestry、self-hash、tool binding和output containment逻辑尚须由runner matrix与不import该library的auditor验证。
 
 重启后的恢复入口：确认本checkpoint commit与远端一致；先实现 `scripts/run-b53-e1-formal-runner-admission-path-totality.mjs` 与 `scripts/audit-b53-e1-formal-runner-admission-path-totality.mjs`，再对三条工具做syntax和仅位于临时目录的development probes。只有审读与零formal-output验证通过后，才能记录exact tool hashes并形成独立tool-freeze commit；tool-freeze推送前不得创建 `experiments/formal-runner-admission-path-totality-v0-1`。用户原有 `README.md` 修改与三份未跟踪research drafts继续排除于提交之外。
+
+## J-267 · B53-E1 三工具冻结候选与完整临时矩阵
+
+Date: 2026-08-28 · Type: FORMAL TOOL-FREEZE CANDIDATE / TEMPORARY DEVELOPMENT PROBES · New Blender renders: 0
+
+checkpoint commit `2db59b7e93088ca8e2562a5093960d43ea16baf0` 推送后，完成dependency-free admission library、single-use runner与不import前两者的independent auditor。Runner在语义admission前创建每case attempt ledger；三种positive只返回canonical target而不物化；14种negative各写self-hashed failure与receipt。Auditor重新实现path、Git ancestry、preflight/tool hashing，重开17个isolated clones，逐条绑定execution summary，并执行34项one-field attacks。
+
+第一个临时positive probe揭示macOS `$TMPDIR` lexical `/var/...` 与realpath `/private/var/...` 的清理守卫差异；遗留的唯一自有临时目录已移入用户Trash。第二个probe确认repository root也必须在创建后立即canonicalize，而不能放宽symlink拒绝条件。这两项都在tool-freeze前修正；没有创建formal root或formal verdict。
+
+最终完整development matrix只在runner自有临时目录执行并由runner删除：17 case evaluations全部符合冻结reason；34/34 semantic attacks被拒绝；`SPEC_AND_TOOL_IDENTITIES`因三工具尚未提交而按预期为false，其余13/13 gates全部为true。该probe记录135个runner-side与84个auditor-side Git children，仅用于开发覆盖，不冒充未来formal counts。三工具均通过Node 26 `--check`、`git diff --check`与定向ESLint 0 errors；formal root继续不存在，Blender、Docker/Colima、network、model、render均为0。
+
+按library、runner、auditor顺序的SHA-256为 `382a06e82c815b69539edf6211bd3d9db28a05c2aa49d1f7a6ddaed61f18f67a`、`a479693b085774eee92f0eb2f0dfa18bc84221ac7578f9677e1635ec59bb44b8`、`ff25d1f768489f2e0f6304a0d0dddc31cacb94509c4557dd673e04f375404536`。下一动作必须只提交并推送这三条exact tool bytes与本entry形成tool-freeze；远端commit一致后才可创建single-use formal root并调用runner一次。
