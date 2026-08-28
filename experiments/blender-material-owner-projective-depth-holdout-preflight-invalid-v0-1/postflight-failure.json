@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerProjectiveDepthPreflightInvalidation.v0.1",
+  "experimentId": "B52-D12.14-H2",
+  "specSha256": "2961f621b38f934cffaa7abe36deaaa5e01e7505d6361985039d0380578d244b",
+  "correctionSha256": "9b6fdcedd571ad1ec7fb8d02bc7c6a630014d204de02f4a8b74bf5509c625a92",
+  "classification": "ACCEPTED_PREFLIGHT_INVALIDATED_BY_POSTFLIGHT_FULL_SHAPE_TOOL_PROBE",
+  "scientificVerdict": null,
+  "formalRootCreated": false,
+  "h2BlenderRenderCalls": 0,
+  "failedTool": {
+    "uri": "scripts/reconstruct-b52-d12-14-h2-projective-depth.mjs",
+    "sha256": "73b3127d9cf08e8220520a6fd93481b2879ee0bdb86419833b18a03025b02ef3",
+    "toolFreezeCommit": "0fbb9e2",
+    "failure": "Node fs.mkdirSync(outputDir,{recursive:false}) raised ENOENT when the formal-shaped consumer parent directory did not already exist."
+  },
+  "invalidatedPreflight": {
+    "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/preflight.json",
+    "sha256": "35cef27ac358f3b937cfa8e164ced4ed23b02fc3f6c9139769388443387bb959",
+    "reportedStatus": "ACCEPTED",
+    "reasonStatusIsNotAuthoritative": "The frozen preflight tested syntax and arithmetic but did not invoke both consumers from a formal-shaped missing-parent directory."
+  },
+  "invalidatedReceipt": {
+    "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/receipt.json",
+    "sha256": "e26048c8be46bcc9735804f456fc9c3dacdb91132dc4f354cfeb7664ad262137"
+  },
+  "preservation": "The entire root, including the accepted report, logs, runner failure probe and partial full-shape probe, is retained under a renamed invalid-evidence path. It cannot admit a formal run.",
+  "nextBoundary": "Create and push a preformal infrastructure correction, change only the Node parent-directory creation and preflight consumer/full-shape coverage, freeze new tool bytes, and create a fresh official preflight root before any H2 render.",
+  "operationCounts": {
+    "postflightProbeProcesses": 3,
+    "blenderProcesses": 0,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "exrFiles": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "postflightHash": "9b6a2343af33ed7dbfad082ab793a3819e39bc6b66db78d7fb870c745d27a78e"
+}

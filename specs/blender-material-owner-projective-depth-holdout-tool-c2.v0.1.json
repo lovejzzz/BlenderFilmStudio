@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerProjectiveDepthToolCorrection.v0.1",
+  "correctionId": "B52-D12.14-H2-TOOL-C2",
+  "experimentId": "B52-D12.14-H2",
+  "title": "Preformal Node parent-directory and preflight coverage correction",
+  "status": "PREREGISTERED_AFTER_INVALIDATED_PREFLIGHT_BEFORE_FORMAL_ROOT_OR_RENDER",
+  "parents": {
+    "scientificSpec": {"uri": "specs/blender-material-owner-projective-depth-holdout.v0.1.json", "sha256": "2961f621b38f934cffaa7abe36deaaa5e01e7505d6361985039d0380578d244b"},
+    "semanticCorrection": {"uri": "specs/blender-material-owner-projective-depth-holdout-c1.v0.1.json", "sha256": "9b6fdcedd571ad1ec7fb8d02bc7c6a630014d204de02f4a8b74bf5509c625a92"},
+    "firstToolFreeze": {"gitCommit": "0fbb9e2fa1350377de15fadcce9be1699761adc2", "gitTree": "e2a655f793d44447982950f87ddce90c18e4ebf8"},
+    "invalidatedPreflight": {
+      "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-invalid-v0-1",
+      "reportedStatus": "ACCEPTED_BUT_INVALIDATED",
+      "postflightFailureUri": "experiments/blender-material-owner-projective-depth-holdout-preflight-invalid-v0-1/postflight-failure.json",
+      "postflightFailureSha256": "2a911349011137a815fffcedb4c2f7d2d32b03715c878cb48382f9783474f9fa",
+      "postflightHash": "9b6a2343af33ed7dbfad082ab793a3819e39bc6b66db78d7fb870c745d27a78e"
+    }
+  },
+  "freshness": {
+    "formalRootAbsent": true,
+    "h2BlenderRenderCalls": 0,
+    "h2ExrFiles": 0,
+    "newOfficialPreflightRootAbsent": true,
+    "sameScientificFixtureAndMeasurement": true
+  },
+  "observedFailure": {
+    "tool": "scripts/reconstruct-b52-d12-14-h2-projective-depth.mjs",
+    "frozenSha256": "73b3127d9cf08e8220520a6fd93481b2879ee0bdb86419833b18a03025b02ef3",
+    "formalShapedCondition": "The runner passes an output directory whose consumer/language/repeat parent does not yet exist.",
+    "error": "ENOENT from fs.mkdirSync(outputDir,{recursive:false})",
+    "whyFirstPreflightMissedIt": "The first consumer byte-identity development test used an output directory directly beneath an already-created temporary root; the official preflight checked syntax and scalar arithmetic but did not invoke both consumers from the formal-shaped missing-parent layout."
+  },
+  "authorizedChanges": [
+    {
+      "path": "scripts/reconstruct-b52-d12-14-h2-projective-depth.mjs",
+      "exactChange": "Change only the output-root creation option from recursive:false to recursive:true. Preserve every input, arithmetic, array, count, report and decision byte semantic."
+    },
+    {
+      "path": "scripts/preflight-b52-d12-14-h2-projective-depth.py",
+      "exactChange": "Add a synthetic full-resolution decision fixture and invoke both frozen consumers using nested output paths with absent parents; require byte-exact output directories and equal counts. Add a complete formal-shaped analyzer dry run that must terminate normally with the frozen NOT_SUPPORTED verdict rather than an exception."
+    }
+  ],
+  "forbiddenChanges": [
+    "source, adapter, Python consumer, analyzer, auditor or runner bytes",
+    "scientific spec or C1 semantics",
+    "trajectory, raster, mesh, signal, tokens or seed",
+    "direct-Z or reciprocal-depth arithmetic",
+    "Position oracle, tolerances, minimum witnesses or verdict mapping",
+    "formal process matrix, render count or attack count"
+  ],
+  "evidenceRules": [
+    "Preserve the complete invalidated preflight root and never use it for formal admission.",
+    "Commit and push this correction plus invalid evidence before editing either authorized tool.",
+    "Commit and push the two corrected tool bytes in a second tool-freeze commit.",
+    "Run a fresh official preflight at the original preregistered preflight path and commit/push its accepted evidence before formal execution.",
+    "The formal receipt must bind the accepted preflight tool hashes; this C2 document remains an infrastructure provenance parent and does not alter scientific results."
+  ],
+  "scientificEffect": "None. This correction occurs before the formal root and before any H2 render. It prevents a directory-creation infrastructure failure and strengthens preflight coverage without changing the candidate or any outcome threshold."
+}

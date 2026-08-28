@@ -1,0 +1,262 @@
+{
+  "artifacts": {
+    "analyzerSmoke": {
+      "sha256": "9ceb4be3cbad3b8ab33a0b5e4926144154fa6465393fb002fef497ba0a8cb12c",
+      "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/analyzer-smoke-result.json"
+    },
+    "runnerFailureProbe": {
+      "failureSha256": "120f2688efa6b0e4f71390f21be6b7fbd48a55f701e4788d3c209998188a62a0",
+      "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/runner-failure-probe"
+    },
+    "sceneProbe": {
+      "sha256": "d43cd121cad13ec8a536b5707dd57bbaee295bfd6762cb9b55e12a6adbbd375b",
+      "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/scene-probe-report.json"
+    }
+  },
+  "children": [
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "-m",
+        "py_compile",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_14_h2_projective_depth_source.py",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/adapt-b52-d12-14-h2-projective-depth-source.py",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/reconstruct-b52-d12-14-h2-projective-depth.py",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/analyze-b52-d12-14-h2-projective-depth.py",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/audit-b52-d12-14-h2-projective-depth.py",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/preflight-b52-d12-14-h2-projective-depth.py",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/run-b52-d12-14-h2-projective-depth.py"
+      ],
+      "elapsedSeconds": 0.032236,
+      "exitCode": 0,
+      "label": "syntax-python",
+      "pid": 58269,
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/syntax-python.stderr.log"
+      },
+      "stdout": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/syntax-python.stdout.log"
+      }
+    },
+    {
+      "command": [
+        "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "--check",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/reconstruct-b52-d12-14-h2-projective-depth.mjs"
+      ],
+      "elapsedSeconds": 0.023225,
+      "exitCode": 0,
+      "label": "syntax-node",
+      "pid": 58270,
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/syntax-node.stderr.log"
+      },
+      "stdout": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/syntax-node.stdout.log"
+      }
+    },
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_14_h2_projective_depth_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-projective-depth-holdout.v0.1.json",
+        "--correction",
+        "specs/blender-material-owner-projective-depth-holdout-c1.v0.1.json",
+        "--fixture",
+        "PROJECTIVE_NEITHER_FRESH_201X137",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/scene-probe-report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.022171,
+      "exitCode": 0,
+      "label": "scene-probe",
+      "pid": 58271,
+      "stderr": {
+        "sha256": "22639ab56d4b9683685bc0aca271a0d482d8e3c3a3124d7fdfa2beb01d478279",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/scene-probe.stderr.log"
+      },
+      "stdout": {
+        "sha256": "b9f1d291d66481977fd83a9fb31297ef76285e4936058fb89c259b7fa4ac7360",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/scene-probe.stdout.log"
+      }
+    },
+    {
+      "command": [
+        "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "-e",
+        "const d=[2,4,2,4],w=[.25,.25,.25,.25];const f=(v)=>((v[0]*w[0]+v[1]*w[1])+v[2]*w[2])+v[3]*w[3];const direct=f(d),inverse=1/f(d.map(x=>1/x));if(direct!==3||Math.abs(inverse-8/3)>1e-15)process.exit(2);console.log(JSON.stringify({direct,inverse}));"
+      ],
+      "elapsedSeconds": 0.024557,
+      "exitCode": 0,
+      "label": "synthetic-arithmetic",
+      "pid": 58281,
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/synthetic-arithmetic.stderr.log"
+      },
+      "stdout": {
+        "sha256": "eb09d12211e55832ecdffdf278060b428ec83c10b635306edaf3588a9d7effb8",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/synthetic-arithmetic.stdout.log"
+      }
+    },
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/analyze-b52-d12-14-h2-projective-depth.py",
+        "--spec",
+        "specs/blender-material-owner-projective-depth-holdout.v0.1.json",
+        "--correction",
+        "specs/blender-material-owner-projective-depth-holdout-c1.v0.1.json",
+        "--schema-smoke",
+        "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/analyzer-smoke-bundle.json",
+        "--output",
+        "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/analyzer-smoke-result.json"
+      ],
+      "elapsedSeconds": 0.051629,
+      "exitCode": 0,
+      "label": "analyzer-schema-smoke",
+      "pid": 58282,
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/analyzer-schema-smoke.stderr.log"
+      },
+      "stdout": {
+        "sha256": "e505191e8d5e2410481e2caba29c064fc2b5cc57b2c621ddf6c99f7a69bb43c0",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/analyzer-schema-smoke.stdout.log"
+      }
+    },
+    {
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/scripts/run-b52-d12-14-h2-projective-depth.py",
+        "--spec",
+        "specs/blender-material-owner-projective-depth-holdout.v0.1.json",
+        "--correction",
+        "specs/blender-material-owner-projective-depth-holdout-c1.v0.1.json",
+        "--failure-probe",
+        "--probe-root",
+        "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/runner-failure-probe"
+      ],
+      "elapsedSeconds": 0.026927,
+      "exitCode": 0,
+      "label": "runner-failure-probe",
+      "pid": 58283,
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/runner-failure-probe.stderr.log"
+      },
+      "stdout": {
+        "sha256": "22280e189ac5cf9ae64811777fc6ec9611d46c18eb7763e4e2aa003063403055",
+        "uri": "experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/logs/runner-failure-probe.stdout.log"
+      }
+    }
+  ],
+  "correctionSha256": "9b6fdcedd571ad1ec7fb8d02bc7c6a630014d204de02f4a8b74bf5509c625a92",
+  "disk": {
+    "freeBytesObserved": 109628350464,
+    "minimumReserveBytesAfterProjectedWrite": 107374182400,
+    "projectedWriteBytes": 67108864
+  },
+  "evidenceChecks": [
+    {
+      "name": "SPEC_AND_CORRECTION_IDENTITIES",
+      "passed": true
+    },
+    {
+      "name": "ALL_TOOL_BYTES_TRACKED_CLEAN",
+      "passed": true
+    },
+    {
+      "name": "PYTHON_AND_NODE_SYNTAX",
+      "passed": true
+    },
+    {
+      "name": "FACTORY_SCENE_PROBE",
+      "passed": true
+    },
+    {
+      "name": "ZERO_RENDER_AND_EXR",
+      "passed": true
+    },
+    {
+      "name": "RECIPROCAL_DEPTH_SYNTHETIC_ARITHMETIC",
+      "passed": true
+    },
+    {
+      "name": "ANALYZER_PROBE_SCHEMA_SMOKE",
+      "passed": true
+    },
+    {
+      "name": "RUNNER_FAILURE_FINALLY_PATH",
+      "passed": true
+    },
+    {
+      "name": "FORMAL_ROOT_ABSENT",
+      "passed": true
+    },
+    {
+      "name": "DISK_RESERVE",
+      "passed": true
+    },
+    {
+      "name": "UNIQUE_CHILD_PIDS",
+      "passed": true
+    },
+    {
+      "name": "CHILDREN_EXIT_ZERO",
+      "passed": true
+    },
+    {
+      "name": "MODEL_AND_NETWORK_ZERO",
+      "passed": true
+    }
+  ],
+  "evidenceChecksPassed": 13,
+  "evidenceChecksTotal": 13,
+  "experimentId": "B52-D12.14-H2",
+  "gitCommit": "0fbb9e2fa1350377de15fadcce9be1699761adc2",
+  "gitTree": "e2a655f793d44447982950f87ddce90c18e4ebf8",
+  "operationCounts": {
+    "blenderProcesses": 1,
+    "blenderRenderCalls": 0,
+    "childProcesses": 6,
+    "cyclesRayRenders": 0,
+    "exrFiles": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "preflightProcesses": 1
+  },
+  "passed": true,
+  "pid": 58250,
+  "preflightHash": "727ecc97bc5f1bd37e3dcbb6ab73d083c0b95b5c29eb1caa95909e3570c8d3ba",
+  "schemaVersion": "bfs.blenderMaterialOwnerProjectiveDepthPreflight.v0.1",
+  "specSha256": "2961f621b38f934cffaa7abe36deaaa5e01e7505d6361985039d0380578d244b",
+  "status": "ACCEPTED",
+  "toolHashes": {
+    "blender/render_b52_d12_14_h2_projective_depth_source.py": "c12e637352f8c6b8fbf6aad6c56b9264884a95087c33d2229af61d0c908262b5",
+    "scripts/adapt-b52-d12-14-h2-projective-depth-source.py": "65ecb58e2bbf8b569f9e82b72d21995cd5892a888787e68d6129c3a1a6ebbae7",
+    "scripts/analyze-b52-d12-14-h2-projective-depth.py": "c246b35d4c68af4d6556f3ac1b6298ef9e329637ea33b72248501898e623fc7a",
+    "scripts/audit-b52-d12-14-h2-projective-depth.py": "6b180be8cc623c615ef667df70d3d40cb56741fd1c2c2de801fe245a06bc5e3c",
+    "scripts/preflight-b52-d12-14-h2-projective-depth.py": "03ec5b996332ee976ca96a783f12ce09f3f65ec83a85deebf31c9fc81fef522d",
+    "scripts/reconstruct-b52-d12-14-h2-projective-depth.mjs": "73b3127d9cf08e8220520a6fd93481b2879ee0bdb86419833b18a03025b02ef3",
+    "scripts/reconstruct-b52-d12-14-h2-projective-depth.py": "507253e5b3f7778736a4fc3c765267ea82ee7afd6efe350b6a9afaa417b6f009",
+    "scripts/run-b52-d12-14-h2-projective-depth.py": "9ff190fb878e5ad3e2cae1e72f251c2143fdb67445894d6087794e9411156f2b"
+  }
+}

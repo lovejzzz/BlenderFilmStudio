@@ -3686,3 +3686,15 @@ C1 correction commit `a5abc64` 推送后才创建八条 H2 tools。Source从 fac
 7个Python tools通过Blender-bundled Python 3.13 `py_compile`，Node consumer通过Node 26 `--check`；Blender source、analyzer与runner的CLI加载成功。一个完全synthetic、非H1/P1的201x137 static background decision set被Python/Node consumers处理；两者所有output files byte exact，counts均为27,200 bilinear/direct/inverse、26,201 radius-2、0 rescued、0 accepted。Analyzer probe-shaped schema smoke与runner forced pre-render failure probe均通过独立self-hash replay。另一次真实Blender 5.2 factory-startup scene probe构造两个新meshes，foreground/background分别为5,025/5,859 vertices与4,884/5,704 polygons；Position pass注册、201x137 raster、scale `[1,1,1]`、0 render calls、0 EXR全部成立。
 
 按source、adapter、Python consumer、Node consumer、analyzer、auditor、preflight、runner顺序的SHA-256为：`c12e637352f8c6b8fbf6aad6c56b9264884a95087c33d2229af61d0c908262b5`、`65ecb58e2bbf8b569f9e82b72d21995cd5892a888787e68d6129c3a1a6ebbae7`、`507253e5b3f7778736a4fc3c765267ea82ee7afd6efe350b6a9afaa417b6f009`、`73b3127d9cf08e8220520a6fd93481b2879ee0bdb86419833b18a03025b02ef3`、`c246b35d4c68af4d6556f3ac1b6298ef9e329637ea33b72248501898e623fc7a`、`6b180be8cc623c615ef667df70d3d40cb56741fd1c2c2de801fe245a06bc5e3c`、`03ec5b996332ee976ca96a783f12ce09f3f65ec83a85deebf31c9fc81fef522d`、`9ff190fb878e5ad3e2cae1e72f251c2143fdb67445894d6087794e9411156f2b`。两个H2 output roots仍不存在。下一动作必须提交推送 exact tools与本 entry形成tool-freeze；之后才允许运行 official zero-render preflight。
+
+## J-257 · D12.14-H2 首次 preflight 被 full-shape probe 否决
+
+Date: 2026-08-28 · Type: PREFORMAL INFRASTRUCTURE FAILURE / INVALIDATED PREFLIGHT · New Blender renders: 0
+
+tool-freeze commit `0fbb9e2fa1350377de15fadcce9be1699761adc2` 推送后，首次official preflight自身报告13/13 accepted、0 render。随后在formal root仍不存在时追加一个更强的完整formal-shaped analyzer dry run：synthetic adapter树、Python/Node consumers、18-child execution draft与envelopes全部使用正式目录层级，期望analyzer正常产生NOT_SUPPORTED而非异常。
+
+该probe在Node consumer阶段立即发现冻结工具缺口：`fs.mkdirSync(outputDir,{recursive:false})` 在runner将要使用的、parent尚不存在的 `consumers/node/R1/arrays` 路径抛出 `ENOENT`。Python consumer成功是因为其 `mkdir(parents=True)`；首次development byte test误用了已存在的直接parent，official preflight又只检查syntax与scalar arithmetic，因此均未覆盖真正目录边界。没有H2 Blender process、render、EXR或formal root产生，不能形成科学 verdict。
+
+首次preflight root已完整保留并重命名为 `experiments/blender-material-owner-projective-depth-holdout-preflight-invalid-v0-1`；其accepted状态被machine record明确作废。`postflight-failure.json` file SHA-256 / self-hash为 `2a911349011137a815fffcedb4c2f7d2d32b03715c878cb48382f9783474f9fa` / `9b6a2343af33ed7dbfad082ab793a3819e39bc6b66db78d7fb870c745d27a78e`。
+
+预登记 `B52-D12.14-H2-TOOL-C2` 只授权两项preformal change：Node mkdir改为recursive；preflight必须实际运行nested-parent Python/Node synthetic consumers并完成full-shaped analyzer dry run。source、adapter、Python consumer、analyzer、auditor、runner及全部科学语义禁止改动。C2 SHA-256为 `d3cab8e72764d1b12046be41068d3f6cafbd014110fc46748a03e29904bc2e38`。下一动作是先提交推送C2与invalid root；随后才编辑两条授权工具并形成第二tool-freeze。
