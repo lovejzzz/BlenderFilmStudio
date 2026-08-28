@@ -4273,3 +4273,13 @@ Date: 2026-08-28 · Type: PREREGISTRATION CORRECTION / NO B58 EXECUTION · New B
 原B58 spec/protocol保持byte exact `a1ea52598d66263989c56f9737917b7ff297122b6731ec31d6f535cacc32cf41` / `50c3d8f8e61ea894e4dadf0d1f2a2ff92e793de56bacfe1f2d01d48951d35f81`，不原地改写。C1 correction spec/protocol SHA-256为 `1a8f17bda34e7d1f7c683b742e93a2f32d1b9c3a1651388c68efddf566f9c3cd` / `e297c5b2396aac39409fc0eeb8185d2d19deace0ebf10bfb347aa6091aff7b34`。唯一授权修正是把process taxonomy拆为native-compile Blender与artifact-audit Blender，并将一个effective gate改为`RECOVERY_STARTS_ZERO_ADDITIONAL_NATIVE_COMPILE_BLENDER_AFTER_COMPILE_CHECKPOINT`；34-gate denominator、72 parent attacks和所有其他语义不变。
 
 正式exact上限现为4 production compiler wrappers、4 native-compile Blender starts（3 success + 1 controlled interruption）、3 preferred verifier CLIs、3 current-receipt Node children、3 artifact-audit Blender starts，即7 total Blender processes但仍0 render/model/network/Docker。新增8项correction attacks拒绝把compile伪装成audit、遗漏audit child或总数off-by-one。下一动作只提交推送C1与本entry；远端一致前仍不得创建production orchestrator或B58 roots。
+
+## J-312 · B58 `job:production` manifest与PLAN_BIND checkpoint
+
+Date: 2026-08-28 · Type: PARTIAL ORCHESTRATOR IMPLEMENTATION / DEVELOPMENT ONLY · New Blender processes: 0 · New Blender renders: 0
+
+B58-C1 correction commit `fc01f6fb74d3ad0517d27b2639e1bc057a3d44cb` 与`origin/main` exact后，创建冻结candidate path `scripts/run-restart-safe-production-job.mjs`，当前SHA-256为 `33ed4fda615f8c45cf44da7a591690cfe1608baf432160a3bc17a367c8dc70bc`；ledger library保持 `05032a4532d96170476479a352842399d463d2ee16687f2e2a0a2ac50a4592fa`。该checkpoint只实现start/resume/status参数、self-hashed job request验证、SceneSpec/release/expected BuildPlan bindings、immutable manifest、writer lease与`PLAN_BIND` stage；production compile/verify/finalize路径显式拒绝，尚未添加package alias，因此不能被误当成可用production entry。
+
+Temporary B01 development job从fresh root创建manifest与`JOB_CREATED`，PLAN_BIND两次编译得到byte-identical plan hash `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`，落盘two plan artifacts、completed stage receipt和3-event ledger。随后独立resume重新验证receipt，只追加`STAGE_SKIPPED_VERIFIED`，ledger变为4 events；PLAN_BIND attempt count仍exactly 1，child/Blender/render/model/network/Docker均0。两次status只读且未改变ledger。
+
+`node --check`、targeted ESLint与`git diff --check`通过，temporary request/job root已精确删除，三个formal roots继续不存在。本文件和library仍未冻结。下一动作先提交推送该checkpoint，再实现PRODUCTION_COMPILE stage的bounded child capture、native fault observation、failed-attempt quarantine与completed receipt；在development preflight存在前不得启动Blender。
