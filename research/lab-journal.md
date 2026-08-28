@@ -4411,3 +4411,13 @@ Second independent invocation使用`resume`，对PLAN_BIND只写一条`STAGE_SKI
 Preferred verifier随后完成11/11，current receipt内嵌19/19，current child/audit Blender PID为86447/86602，verification self-hash为 `c8e644b75c03ae18025102326ded2a90bee94f7a475fe2bf1609d41a67a11596`并绑定native PID 86392。Final ledger共20 events：唯一FAULT、一个FAILED compile attempt、一个COMPLETED retry，四阶段最终全部COMPLETED。Final receipt file SHA/self-hash为 `2fd8677210a7fb481ab7e123549e02e4a9c9a0f0bc6fcccebed9ea0d794953d5` / `20faee8e2c3eddf6c911ee3c1ff47f356a61a06d98251db57d49c80c7d2cc7b7`；resource totals为2 production compilers、2 native compile Blender starts、1 successful compile、1 preferred verifier、1 current child、1 artifact-audit Blender，total Blender starts 3，render/model/network/Docker为0。
 
 第三个closed-job resume返回`ALREADY_FINALIZED`，final file SHA和20-event ledger均不变。Manifest、PLAN receipt、failed attempt receipt、completed compile/verify/finalize receipts、verification、final receipt、invalidation、retry production receipt与disk admission共11个self-hash全部独立重算通过；Node syntax、targeted ESLint与diff check通过。该probe支持受控native中断不可promote、failed evidence不丢失及fresh retry语义，仍不是B58 formal verdict。下一缺口是真实live-process WAIT/REFUSE，然后才能实现official preflight/runner/auditor。
+
+## J-324 · B58 live-process refusal development preflight接受
+
+Date: 2026-08-28 · Type: DEVELOPMENT LIVE-PROCESS PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
+
+Native-interruption/retry evidence commit `bd78b14` 推送后，为B01 live-process cell创建fresh preflight/output/production-attempt/job roots。Preferred preflight返回ACCEPTED，BuildPlan hash为 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；preflight file SHA/self-hash为 `dcfacda137f290a8f304b1fea02c6a71368fd4c63deb240ec94886e3bb321162` / `9a41901eb33c6627ba7cad797362e49846d3e9f9cb31b00c118ef61cc9c66284`。Observed available为109,335,576,576 bytes，projection后108,798,705,664 bytes，高于100 GiB reserve；Blender/render/model/network/Docker均为0。
+
+Self-hashed request file SHA/requestHash为 `99518e996626d7d5bf44052ef308de1be23170c41f5561f691a74ff5c976036a` / `1c8ab0544a5257ecacb844d210d79fc9bce6be932ea5adac98bd824803ffa705`，只注册一个B01 normal compile candidate。Development intervention不改production/tool-freeze bytes：首个orchestrator在`NATIVE_PROCESS_OBSERVED`已fsync后，由外部harness对exact native PID发SIGSTOP，再终止orchestrator模拟主进程丢失，保持已记录wrapper/native child存活。第二个resume必须验证identity并返回`WAIT_LIVE_PROCESS`，compile `PROCESS_STARTED` / `NATIVE_PROCESS_OBSERVED`均不得增加，也不得创建stage terminal receipt或第亊output。证据采集后只允许向记录且再验证的exact PID/process group发送终止信号，禁止宽泛清理。
+
+Execution roots与official B58 roots仍不存在。下一动作只提交推送本preflight/request与entry，随后由bounded harness一次性执行上述过程。
