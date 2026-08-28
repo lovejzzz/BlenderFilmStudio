@@ -4171,3 +4171,15 @@ Rejected attempt/failure/receipt file SHA分别为 `b895eee2904879954f7b0c2e9ad6
 Date: 2026-08-28 · Type: CORRECTED REHEARSAL PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
 
 Mechanical correction commit `454ed0efe135984401d5ce6dcbc713db9e36961a` 与 `origin/main` exact后，C2 fresh meta preflight 12/12 ACCEPTED；顶层`toolHashes`现与`toolFreeze.hashes` byte-identical，五份LOW-DISK/B01-A/B/B02-A/B production preflight全部ACCEPTED，Blender/render/model/network/Docker为0。Meta file SHA/self-hash为 `4d5e85557fdda7afe24a5b26755b109db58690789680b498c53b65aee078378b` / `345268e8526db0649e703a13628cec7bc81dd61b74b11326856b283bf374a852`。下一动作先推送C2 evidence，再用其bound C2 attempt/formal roots运行完整rehearsal。
+
+## J-303 · B57 C2完整彩排定位production receipt disk cross-binding缺口
+
+Date: 2026-08-28 · Type: BOUNDED REHEARSAL / VERIFIER CORRECTION · New Blender compilations: 4 · New Blender renders: 0
+
+C2 accepted preflight evidence commit `4fe11eea55277705d42a2c70846cfbb8625fe061` 与 `origin/main` exact后，single-use rehearsal runner完成LOW-DISK反例与B01-A/B、B02-A/B四次真实Blender 5.2净编译。LOW-DISK继续在sequence-5以冻结的one-byte-below ceiling拒绝，restricted/native process均为0。四个正常路径wrapper/native PID分别为33354/33357、33463/33466、33578/33581、33699/33702；B01/B02 plan与structure pair全部byte-exact，preferred compile/verifier、current 19-check verifier、native PID、`.blend` binding及zero-render/model/network/Docker边界均通过。
+
+Independent auditor给出有边界而非支持结论：`PRODUCTION_DISK_JIT_READMISSION_BOUNDED`，25/26 gates，52/56 semantic attacks。唯一失败gate为`INDEPENDENT_AUDIT_AND_SEMANTIC_ATTACKS_MINIMUM_56`；四个escaped attacks精确为`B01-A_DISK_HASH`、`B01-B_DISK_HASH`、`B02-A_DISK_HASH`、`B02-B_DISK_HASH`。Results/audit/formal-receipt file SHA-256为 `f9f855103b852f5a89beb6b42bc210f26656b25bd3ed65f0eb714aacc8dbc533`、`121b84c0bcaad48b09e55f43b6f11c1bf9e307b58d7406c0d3e1490421199d01`、`b23d10a2ffe17e356d470b1c98c083d3c34e0ae1552c3db9d7d06f9388b7bfba`；formal receipt self-hash为 `54f186e898d46663cc053bf466f438409c39f517bf587ba4c840f400f2f9f694`。C2 roots永久保留，不在原ID修复或重跑。
+
+逃逸原因不是JIT disk observation缺失，而是production verifier只分别验证disk文件SHA/self-hash与receipt self-hash，没有把receipt投影的`diskAdmissionHash`及sequence/status/observed/effective/ceiling/policy重新与实际disk record逐字段比较。攻击因此可以修改receipt里的disk hash、重新计算receiptHash，并保持指向的真实disk文件未变。Correction只在production verifier加入该外部交叉绑定，并让B57 independent auditor的receipt语义函数接收从真实disk record读取的expected hash；v0.2 release只更新该verifier frozen hash。新verifier/auditor/release SHA-256分别为 `80a719e19f6c71eeb878b946d767f40b4142d80a91c0f28253c4f1b26f7860c9`、`c13e103494e23ae61bd791cefb0b07357fc47deb2e7ed80e10c7e255bda8ea4c`、`77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252`；v0.2 frozen replay为31/31 exact，Node syntax与targeted ESLint通过。
+
+该修复不追溯改判C2。下一动作先提交推送C2失败证据、correction bytes与本entry，再用Git读取的exact commit在全新C3 preflight/attempt/formal roots重跑完整彩排；只有C3达到26/26与56/56后，才允许冻结正式工具并创建official B57 preflight。

@@ -149,6 +149,11 @@ async function verify(receiptUri) {
     || diskAdmission.restrictedCompilerProcessesStarted !== 0 || diskAdmission.nativeBlenderProcessesStarted !== 0) {
     throw new Error('Native compile disk readmission mismatch');
   }
+  const receiptDisk = receipt.authorization.nativeCompileDiskAdmission;
+  if (receiptDisk.diskAdmissionHash !== diskAdmission.diskAdmissionHash || receiptDisk.sequence !== diskAdmission.sequence
+    || receiptDisk.status !== diskAdmission.status || receiptDisk.filesystemAvailableBytesObserved !== diskAdmission.filesystemAvailableBytesObserved
+    || receiptDisk.effectiveAvailableBytes !== diskAdmission.effectiveAvailableBytes || receiptDisk.testCeilingApplied !== diskAdmission.testCeilingApplied
+    || !isDeepStrictEqual(receiptDisk.policy, diskAdmission.policy)) throw new Error('Production receipt disk cross-binding mismatch');
   checks.push('NATIVE_COMPILE_DISK_READMISSION');
 
   const budgetPath = await requireIdentity(receipt.restrictedCompile.budgetReport, 'Budget report');

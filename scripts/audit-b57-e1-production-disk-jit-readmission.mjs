@@ -38,12 +38,13 @@ function parseArguments(argv) {
 
 async function json(path) { return JSON.parse(await readFile(path, 'utf8')); }
 
-function acceptedReceiptSemantics(receipt) {
+function acceptedReceiptSemantics(receipt, expectedDiskHash = receipt?.authorization?.nativeCompileDiskAdmission?.diskAdmissionHash) {
   const disk = receipt?.authorization?.nativeCompileDiskAdmission;
   return receipt?.schemaVersion === 'bfs.productionCompileReceipt.v0.2' && receipt.status === 'PASS'
     && validHash(receipt, 'receiptHash') && disk?.sequence === 5 && disk.status === 'ACCEPTED'
     && disk.policy?.minimumReserveBytes === '107374182400' && disk.policy?.projectedWriteBytes === '536870912'
     && disk.policy?.overrideAllowedByReleaseEntry === false
+    && disk.diskAdmissionHash === expectedDiskHash
     && BigInt(disk.effectiveAvailableBytes ?? -1) <= BigInt(disk.filesystemAvailableBytesObserved ?? -2)
     && Number.isSafeInteger(receipt.restrictedCompile?.budgetReport?.nativeChildPid)
     && receipt.restrictedCompile.budgetReport.nativeChildPid > 0
@@ -56,7 +57,7 @@ function reseal(record, field) {
   return { ...body, [field]: canonicalHash(body) };
 }
 
-function receiptAttacks(runId, original) {
+function receiptAttacks(runId, original, expectedDiskHash) {
   const mutations = [
     ['SCHEMA', r => { r.schemaVersion = 'bfs.productionCompileReceipt.v0.1'; }],
     ['STATUS', r => { r.status = 'FAIL'; }],
@@ -77,7 +78,7 @@ function receiptAttacks(runId, original) {
     const copy = structuredClone(original);
     mutate(copy);
     const sealed = reseal(copy, 'receiptHash');
-    return { id: `${runId}_${id}`, rejected: !acceptedReceiptSemantics(sealed) };
+    return { id: `${runId}_${id}`, rejected: !acceptedReceiptSemantics(sealed, expectedDiskHash) };
   });
 }
 
@@ -131,7 +132,7 @@ async function audit(parsed) {
       && run.verification.checks.includes('NATIVE_COMPILE_DISK_READMISSION') && run.verification.currentCompileReceiptVerification.checks.length === 19
       && canonical(rootRoster) === canonical(receipt.output.expectedRootRoster) && canonical(restrictedRoster) === canonical(receipt.output.expectedRestrictedRoster);
     runInspections.push({ runId: run.runId, benchmarkId: run.benchmarkId, exact, planHash: receipt.buildPlan.planHash, structureHash: receipt.restrictedCompile.sceneStructureCanonical.structureHash, wrapperPid: receipt.restrictedCompile.wrapperProcess.pid, nativePid: budget.child.pid, diskAdmissionHash: disk.diskAdmissionHash, receiptHash: receipt.receiptHash });
-    attacks.push(...receiptAttacks(run.runId, receipt));
+    attacks.push(...receiptAttacks(run.runId, receipt, disk.diskAdmissionHash));
   }
   const b01 = runInspections.filter(row => row.benchmarkId === 'B01');
   const b02 = runInspections.filter(row => row.benchmarkId === 'B02');
