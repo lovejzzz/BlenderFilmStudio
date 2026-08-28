@@ -4385,3 +4385,15 @@ First invocation随后精确以exit code 86结束。此时ledger共8 events：se
 Final receipt file SHA/self-hash为 `fd8364db1bd31f94d98ac8fde51a8285faa75643714f1af50b8792b58647bfc6` / `ca47deaa329da7f4a748bd554bb446e2d27ba4fd94358c5d501801a291cfb09b`，resource totals为1 production compiler、1 native compile Blender、1 successful compile、1 preferred verifier、1 current verifier child、1 artifact-audit Blender，total Blender starts 2，render/model/network/Docker为0。第三个closed-job resume返回`ALREADY_FINALIZED`，final file SHA与17-event ledger均byte-exact不变。Manifest、四份stage receipts、verification、production receipt、disk admission与final receipt共9个self-hash全部独立重算通过；Node syntax、targeted ESLint与diff check通过。
 
 该development probe现在支持B58的post-compile crash recovery与zero-additional-native-compile命题，但仍不是formal verdict。下一个最高价值缺口是B02真native Blender受控SIGTERM：failed attempt必须不可promote，新invocation只能使用fresh attempt/output重试compile，PLAN不得重跑。
+
+## J-322 · B58 B02 native-interruption/retry development preflights接受
+
+Date: 2026-08-28 · Type: DEVELOPMENT FAULT-INJECTION PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
+
+Exit-86恢复证据commit `67da431` 推送后，为B02受控中断与fresh retry创建两组彻底disjoint的preflight/production-attempt/output roots，另用一个fresh job root串联两个candidate。两次preferred production preflight均ACCEPTED，BuildPlan hash均为B02 identity `a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687`，SceneSpec file SHA为 `774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16`。
+
+Interrupted candidate preflight file SHA/self-hash为 `8812927b70102951e401458c817f83ac7e721eeb13c60f3efc11eb071835e8fe` / `305070dda943ca37033df25c61ecda2a021fa880dec58307aca970cfdc4b8149`，observed/projection-after disk为109,326,573,568 / 108,789,702,656 bytes。Retry candidate preflight file SHA/self-hash为 `63a7f0dbed15d7ea718174df10c5b8fc0bc9adc52d4a266e9f833c7f823899fd` / `440f9e409cedbfa5138798613da694b96b3ac7df0243a4bbea730608644c49f9`，observed/projection-after为109,326,307,328 / 108,789,436,416 bytes。两者都高于107,374,182,400-byte reserve，且Blender/render/model/network/Docker为0。
+
+Job request file SHA/requestHash为 `5a8be8e544648bd0b96b2d69658324314ba8b3d39bdd2c00e9dc66054e46a866` / `9737380294225ea8d65a8fbed20f7bc98e7b7bdef07ae8b1d8a92efe40da9acb`。它按序冻结两个compile candidates：`B02-INTERRUPTED-COMPILE-0001` 使用`INTERRUPT_NATIVE_AFTER_OBSERVED`，`B02-RETRY-COMPILE-0002` 无fault。Expected first invocation必须在durable native identity后向该Blender process group发SIGTERM，并以non-promotable FAILED attempt停止；second invocation必须verified-skip PLAN，不得使用第一output root，只能在第亊fresh root启动一次compile，随后verify/finalize。
+
+两组execution roots、job root与official B58 roots均仍不存在。下一动作只提交推送两份preflight、request与本entry；实验调用仍必须从Git读取exact preflight evidence commit。
