@@ -3990,3 +3990,13 @@ Date: 2026-08-28 · Type: WEBSITE SOURCE CHECKPOINT / NOT YET PUBLISHED · New B
 用户准备升级并重启Codex，因此在完整production builds与双站点发布前主动收口。新增 `budgeted-native-child-pid-receipt-v0-1` 研究页源码，直接读取B55 frozen spec、official preflight、independent audit、results与formal receipt；页面展示三处最小supervisor correction、四类PID probe、四次formal native compile的wrapper/native PID、B01/B02 plan与structure identity、22/22 gates、41/41 attacks，以及“本地spawn receipt并非远程或密码学attestation”的claim boundary。首页加入B55 tab，B54页的next-step叙述更新为已观察到的B55 correction，GitHub Pages sparse checkout加入本页实际import的B55证据。
 
 本地dev server曾成功热更新，收口时已明确停止。新B55页、B54页与首页的targeted ESLint为0 errors/0 warnings，`git diff --check`通过；没有执行production build、GitHub Pages deploy或Sites deploy，因此本entry不声称页面已发布，也没有做截图、DOM、点击、resize或视觉QA。重启后的exact恢复入口：先对该checkpoint commit运行Vinext/Sites build与GitHub Pages static build，再按source-commit exactness完成公开GitHub Pages和owner-only Sites双发布；发布完成后才预登记下一项production entry promotion实验。用户原有 `README.md` 修改与三份未跟踪research drafts继续排除于本次提交之外。
+
+## J-284 · Codex内部浏览器重复崩溃与持久规避边界
+
+Date: 2026-08-28 · Type: OPERATIONAL INCIDENT / CLIENT-STABILITY GUARD · New Blender renders: 0
+
+在用户要求把大量内部浏览器标签清理到一个后，第一次实现错误地并发claim/close多个标签；Codex desktop随后于10:47:49崩溃。重启后再次尝试内部浏览器automation连接，应用于10:53:24第二次崩溃。两份macOS crash reports的SHA-256分别为 `ea125aa9336004a6c2119419f16307e953851d5481f29798266da80feafd1e6a` 与 `035649c3c49d8d95385f5221f968fd2824132d30184399ab204341542ef6d4b8`；二者均来自Codex `26.820.80927 (7271)`、均由thread 20 `Chrome_IOThread`触发、均为 `EXC_BREAKPOINT (SIGTRAP)` / signal 5，且crashed stack前七层symbol-relative offsets完全一致。该一致性支持“同一客户端browser-control failure mode复现”，但缺少未剥离符号和内部断言文本，因此不声称已经证明具体source-level root cause。
+
+替代解释检查：`codesign --verify --deep --strict`通过，Gatekeeper判定为Notarized Developer ID；48 GiB机器无memory throttling，根卷仍有约89 GiB available；检查时没有Vinext/Vite listener或Blender进程。系统统一日志在第一次重启后的browser-control窗口记录CUA service bootstrap timeout与连续XPC connection interruptions。综合时间线与两次相同signature，当前最强可操作解释是内部浏览器automation并发关闭及其重连路径触发客户端不变量失败，而不是Blender、网站source、磁盘耗尽、内存压力或app bundle损坏。
+
+新增repository-root `AGENTS.md` 作为跨会话持久guard：在Codex app版本变化或用户明确授权controlled retest之前，本repo禁止in-app browser automation和browser-target `open_in_codex`；保持最多一个用户可见BlenderFilmStudio标签；不得并发或批量close；验证改用build及non-browser HTTP。Guard启用后未再调用browser tools。随后在不启动dev/HMR listener的条件下，Vinext production build成功并发现88个CDN warmup paths；GitHub Pages production build通过TypeScript并生成90/90 static pages，B55 route在两种build中均存在。该build结果证明网站source可编译，不证明客户端缺陷已被上游修复；当前结论是已建立可持续规避，不是修复Codex二进制。
