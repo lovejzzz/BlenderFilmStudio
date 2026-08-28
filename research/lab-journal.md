@@ -3528,3 +3528,13 @@ Date: 2026-08-28 · Type: PILOT-INFORMED RENDERED HOLDOUT PREREGISTRATION · New
 预登记时 free bytes 为 109,606,830,080；冻结最大写入 134,217,728 bytes 后余量 109,472,612,352，仍高于 100 GiB reserve。Spec static audit 通过：3 fixtures、56-process sum、12-render matrix、唯一 Material tokens、shared Object Index negative controls、full-frame regions、parent tree identity 与 runtime executable hashes全部一致。Spec SHA-256: `7ff239d91dca6ea8708ce4cac955dd0b129ae067028a77ec1699a43a236195a8`。
 
 Artifact: `specs/blender-material-owner-rigid-directional-render-holdout.v0.1.json`。下一动作必须先提交并推送 exact spec；随后才允许实现八个工具。Formal root 在 tool-freeze commit 之前必须不存在。
+
+## J-243 · Codex 升级重启前的 D12.14-H1 工具实现检查点
+
+Date: 2026-08-28 · Type: RESTART-SAFE IMPLEMENTATION CHECKPOINT · New Blender renders: 0
+
+预登记 commit `33692d211a37f6db98ddb3def4e91a4e5cd07547` 已在远端 `main`；其后才创建八个全新 H1 tool paths。当前实现已完成从旧 holdout 工具的结构化分叉、D12.14-H1 schema/path 替换，以及 `effective_fixture` 归一化层：它把 spec 的全局 camera、background owner 与 foreground owner 几何配置机械展开为每个 fixture 的 frame-local 输入，供 Blender source、Python/Node consumers 与 analyzer 读取。7 个 Python 文件通过 `py_compile`，Node consumer 通过 `node --check`。
+
+这是非冻结 WIP，不是 formal tool-freeze，也不是实验结果。已知尚未完成项包括：把四个 runner/analyzer/auditor/preflight 中的 parent tree 键改为 `rigidCalibrationFormalRoot` 与 `rejectedRenderedHoldoutFormalRoot`；把 runner 的 pre-audit child count 从旧矩阵改为 55（加 audit 后总计 56）；把 analyzer/auditor 从旧 coverage/static verdict 改为 TOP/BOTTOM directional + NEITHER zero-acceptance 语义；让零 accepted 样本的 quality gate 保持 vacuous safety，以便正确映射 `directionFailureVerdict`；增加固定 local mesh hash 与 `[1,1,1]` scale 的显式证明；最后才可做 `/tmp` source smoke、工具 hash 冻结、提交并推送 tool-freeze commit。
+
+本检查点不得创建 preflight/formal roots，不得运行正式 Cycles render，也不得据此宣称 D12.14-H1 支持或拒绝。重启后的精确续接入口是先完成上述静态适配，再重复语法检查与临时 source probe；只有 exact tool bytes 提交后才能运行 preflight，preflight 通过后才允许创建 formal root。用户原有 `README.md` 与三份 2026-08-26 Physis/Remainder Room research drafts 继续保持未纳入、未改写。
