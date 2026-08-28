@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobManifest.v0.1",
+  "jobId": "B58-DEV-EXIT86-B01-1",
+  "request": {
+    "uri": "experiments/restart-safe-production-orchestrator-development-exit86-b01-request-v0-1.json",
+    "sha256": "5201175e61e761d7a7251a44660d744aeb8498f3086f0c977f4ee81ae30888dc",
+    "requestHash": "8af13ec108ab7114237ff096ed114d9baecd135ba406d300f4391b5edc00e823"
+  },
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B01.scene.json",
+    "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+  },
+  "expectedBuildPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "37fb87791b829f3b275c249f9e09ccec64636726",
+  "toolHashes": {
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/run-restart-safe-production-job.mjs": "f85fe21c951beea0622c14cc4b1afbeea2de521aedd136ccdd03fa92033a96d7"
+  },
+  "preflightEvidenceCommit": "44d9efe035c9e2e1341689eb89267f07d1181968",
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "B01-EXIT86-COMPILE-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-development-exit86-b01-preflight-v0-1",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-development-exit86-b01-production-attempt-v0-1",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-development-exit86-b01-output-v0-1",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": "EXIT_AFTER_PRODUCTION_COMPILE",
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "manifestHash": "d1764f0e0d95860c3d9a2a9a4e3256b239714be656f37410eef2171d43461bde"
+}

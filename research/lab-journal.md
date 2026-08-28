@@ -4361,3 +4361,13 @@ Full-chain baseline evidence commit `30f209b3a95d666b2943fb37d2b8f041114cb03c` �
 Self-hashed job request file SHA/requestHash为 `5201175e61e761d7a7251a44660d744aeb8498f3086f0c977f4ee81ae30888dc` / `8af13ec108ab7114237ff096ed114d9baecd135ba406d300f4391b5edc00e823`。它绑定不变的tool-freeze commit `37fb87791b829f3b275c249f9e09ccec64636726`与ledger/orchestrator hashes，只注册一个normal compile candidate，并把`orchestratorFault`冻结为`EXIT_AFTER_PRODUCTION_COMPILE`。Expected first invocation必须在compile completed receipt与对应ledger event durable之后、VERIFY_RECEIPT start之前返回exit code 86；随后新进程resume必须对compile只写verified skip，不得新启native compile Blender，但应正常启动preferred verifier与audit Blender并完成FINALIZE。
 
 Execution roots与三个official B58 roots继续不存在。下一动作只提交推送该preflight/request与本entry；远端exact后才允许first invocation。
+
+## J-320 · exit-86首次调用因手写evidence commit失配在Blender前拒绝
+
+Date: 2026-08-28 · Type: DEVELOPMENT ASSEMBLY FAILURE / FAIL-CLOSED RECOVERY PROBE · New Blender processes: 0 · New Blender renders: 0
+
+Exit-86 preflight/request commit的真实full SHA为 `44d9efeb5b404a1998f8cc7171ca9c83b95e823a`，首次orchestrator调用却错误手写了`44d9efe035c9e2e1341689eb89267f07d1181968`。Restart-safe job已durably完成PLAN_BIND并记录production npm wrapper PID 84965，但内层unchanged production admission在output materialization前精确返回`EVIDENCE_COMMIT_MISMATCH`。Production attempt/failure/rejected receipt file SHA分别为 `3baa4b75b680dde5a510da9d26ffdf429b34f500ae7cee3eabaf02338591bab1`、`63551f62c7c34129f08ca07f9fffafe93b7df8c0b2d28970298a5d8dabe530bb`、`90481c27b80ba0bbe6fa06fc3749116e6dbfd20cf8a95b338e4d9978bf2fa936`；rejected receipt自哈希为 `d3245d15ae1d42e68f7e0b8d2510224aa6e32a5587881156c39e73ab9b9abbe8`。其声明compiler/Blender processes started为0，requested output root仍不存在，render/model/network/Docker均为0。该root不能用于exit-86假设。
+
+对该started job使用独立resume时，reducer先验证并追加一条PLAN_BIND `STAGE_SKIPPED_VERIFIED`，随后因dead wrapper没有durable native Blender identity返回`REFUSE_RECOVERY: ... orphan state is ambiguous`，没有spawn任何新进程。Ledger因此从5 events增为6 events，compile仍STARTED，VERIFY仍PENDING。这是预登记fail-closed规则的真实负例，不在原job/attempt root修补或重试。
+
+C1 request改用fresh job `B58-DEV-EXIT86-B01-C1`与fresh production-attempt root，保持原accepted preflight绑定的仍未创建output root。C1 request file SHA/requestHash为 `001b419ce6d28f70d46b7c50c114554439f40f440bbac14b4f1e9a1826501e8f` / `b2fe2457e1d25254eef1d250cada0e3422dc87e96c0aec7c7c75f04e03a4e250`，tool-freeze bytes与exit-86语义不变。下一动作先提交推送本失败证据与C1 request，然后必须用`git log -1 --format=%H -- <preflight-root>`读取的exact SHA，不再手写commit身份。
