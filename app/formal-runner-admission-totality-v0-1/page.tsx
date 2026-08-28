@@ -188,7 +188,7 @@ export default function FormalRunnerAdmissionTotalityPage() {
         <article className="claim"><span>SUPPORTED CLAIM</span><strong>path + evidence admission totality</strong><p>在冻结的17-case local-Git fixture内，等价路径归一且拒绝路径均留下receipt。</p></article>
         <article><span>NON-CLAIM</span><strong>H2 hypothesis</strong><p>Projective-depth material-owner实验仍是null verdict，不因本结果被追溯修复。</p></article>
         <article><span>NON-CLAIM</span><strong>arbitrary hosts</strong><p>Local bare origin只模拟pushed ancestry，不是remote attestation或任意filesystem证明。</p></article>
-        <article className="next"><span>NEXT INTEGRATION GATE</span><strong>B01 / B02 regressions</strong><p>若admission进入production compiler orchestration，必须新预登记并重跑结构哈希复现。</p></article>
+        <article className="next"><span>OBSERVED INTEGRATION GATE</span><strong>B54-E1 · 17/18</strong><p>四次native compile与B01/B02结构哈希全部复现；current budget report缺native PID，因此formal verdict为REJECTED。</p><Link href="/admission-gated-native-compiler-v0-1">打开完整integration证据 →</Link></article>
       </div>
       <div className="b53-nonclaims">
         {spec.nonClaims.map((claim, index) => <p key={claim}><span>{String(index + 1).padStart(2, '0')}</span>{claim}</p>)}
