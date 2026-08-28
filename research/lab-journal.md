@@ -4477,3 +4477,13 @@ C2 preflight/request evidence commit `11f3946d35fb7d8e416737aa84e9f048af74f07a` 
 采集后harness只对重新验证的native group发TERM+CONT并等待wrapper收尾；88257/88291/88452均确认消失，无Blender核心进程遗留。Output以`RESTRICTED_COMPILE` invalidation收尾，file SHA/self-hash为 `3af264ecbde2b317b22bb14c4bea6da1afd63160aeee373b46165a99101c99d5` / `56891da63425f64a27c46d7ce244efe8a0fb6761ef22441689055196b74a0896`，render/model/network/Docker为0。Job manifest self-hash为 `83268c9c21c469bc74944b5272841882df775f368d1391952bc416a56b48c324`，7-event ledger head为 `3e21bda971ecd594bbb260ff4e5d638f56605cb71474b9a6e4fc82b96bbfef27`。
 
 该development probe现在关闭真实live-process WAIT/zero-duplicate开发缺口，但仍不是B58 formal verdict。正常full chain、exit-86、native interruption/fresh retry和live WAIT四类真Blender development路径已齐。下一阶段是实现预登记的official single-use preflight、formal runner与不import execution modules的independent auditor，然后才能在三个冻结official roots上评定34/34 gates与至少64/72 attacks。
+
+## J-330 · Goal 重定义：稳定性成为 B58 official run 的前置 Gate 0
+
+Date: 2026-08-28 · Type: GOAL CORRECTION / CRASH CONTAINMENT · New Blender processes: 0 · New Blender renders: 0
+
+用户提供的Codex桌面端崩溃报告记录 `com.openai.codex` 26.820.80927 (7271) 在 `Chrome_IOThread` 触发 `EXC_BREAKPOINT (SIGTRAP)`，同时主线程位于 `v8::ValueSerializer::WriteValue`。该证据提示内嵌Chromium I/O、跨进程消息或V8值序列化路径，但当前不足以唯一归因，因此不把Blender、磁盘或单个网页标签直接宣判为根因。
+
+项目执行目标现改为“稳定、可恢复、可审计的Blender 5.2电影生产系统”，并按Gate 0宿主稳定性、Gate 1工作流正确性、Gate 2电影质量与成本顺序推进。Gate 0通过前，B58 official formal run暂停；只允许低风险静态检查、证据整理、轻量实现和稳定性诊断。默认防线包括最少浏览器标签、大输出落盘只回传摘要、低频状态更新、严格磁盘余量、精确PID回收、断点续作，以及每次实验的资源预算和停止条件。
+
+完整执行宪章保存为 `research/2026-08-28-stability-first-goal-v0.1.zh-CN.md`。本次没有启动Blender、渲染、模型、网络或Docker工作负载。
