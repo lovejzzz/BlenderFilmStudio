@@ -4125,3 +4125,9 @@ Date: 2026-08-28 · Type: DEVELOPMENT CAUSAL PROBE · New restricted compiler pr
 C1使用exact pushed evidence commit与fresh attempt root后，通过sequence 1/2/3 admission并materialize authorized output；formal-start sequence 4和B01 immutable BuildPlan写盘后，runner真实观察available 108,622,110,720 bytes，再应用冻结ceiling 107,911,053,311 bytes。扣除536,870,912 projected bytes后为107,374,182,399，exactly低于100 GiB reserve 1 byte。
 
 Sequence-5 disk admission因此durably写为REJECTED、reason `FREE_AFTER_PROJECTED_WRITE_BELOW_RESERVE`，disk self-hash `6873e1118f8417b9ccc4d42bc7321c2ad724735252cae81015a8f3288d6c66e2`；随后invalidation phase exact `NATIVE_COMPILE_DISK_ADMISSION`、self-hash `9716473700daf9142639b2a753ffb199400186d52c5ec8a112154793fd5844ef`。Output roster exact为BuildPlan、formal-start、disk admission与invalidation；`restricted/`不存在，restricted wrapper与native Blender processes均0。该development probe支持核心fail-closed因果路径，但尚未验证正常capacity compile、production receipt v0.2或independent B57 audit，因此不写formal verdict。
+
+## J-297 · B57 normal-capacity development preflight accepted
+
+Date: 2026-08-28 · Type: DEVELOPMENT PREFLIGHT EVIDENCE · New Blender processes: 0 · New Blender renders: 0
+
+在low-disk development evidence commit `4af2456`推送后，为对称正常路径创建fresh B01 preflight/output binding，release仍指向未变的implementation candidate `968cc709f02721a623a85e816b4a071d6d1824db`。Preferred preflight ACCEPTED，plan hash `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；available 108,587,016,192 bytes，projection后108,050,145,280 bytes，Blender/render/model/network/Docker为0。Preflight file SHA/self-hash为 `4a80b853af5aecca94c6a110627b700bf172f60e5f71c5ea542e8732af5924a5` / `51973f0b2b1fe68f4b2a766bf143a84f8187aaa0bb8bcdd264cbe405e9776acc`。下一动作先推送该evidence，再以fresh attempt执行一次正常capacity real Blender compile并调用preferred verifier。
