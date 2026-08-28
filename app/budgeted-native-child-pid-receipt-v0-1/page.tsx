@@ -218,7 +218,7 @@ export default function BudgetedNativeChildPidReceiptPage() {
         <article className="claim"><span>SUPPORTED CLAIM</span><strong>spawn PID persisted</strong><p>四份native budget receipts、四份CompileReceipts与independent audit共同绑定。</p></article>
         <article><span>CORROBORATION</span><strong>child-authored PID / PPID</strong><p>PASS、child failure与budget kill三条不同outcome路径均exact。</p></article>
         <article className="limit"><span>NON-CLAIM</span><strong>cryptographic identity</strong><p>不是remote attestation；不能抵御恶意改写的supervisor或证明PID永不复用。</p></article>
-        <article className="next"><span>NEXT TECHNICAL GAP</span><strong>production entry promotion</strong><p>Admission + v0.2 PID receipt尚未成为公开preferred compiler entry，需要独立release contract。</p></article>
+        <article className="next"><span>NEXT BOUNDARY · OBSERVED</span><strong><Link href="/production-compiler-entry-promotion-v0-1">production entry supported →</Link></strong><p>B56 已用独立 release contract、四次 fresh compile、27/27 gates 将 preferred entry 晋级。</p></article>
       </div>
       <div className="b55-nonclaims">
         {spec.nonClaims.map((claim, index) => <p key={claim}><span>{String(index + 1).padStart(2, '0')}</span>{claim}</p>)}
@@ -232,6 +232,6 @@ export default function BudgetedNativeChildPidReceiptPage() {
       </div>
     </section>
 
-    <footer><div><span className="brand-mark">BFS</span><b>B55-E1 Native Child PID Receipt</b></div><p>3 replacements · 4 probes · 4 compiles · 22/22 gates · 41/41 attacks · 0 renders</p><Link href="/admission-gated-native-compiler-v0-1">查看B54原始缺口 →</Link></footer>
+    <footer><div><span className="brand-mark">BFS</span><b>B55-E1 Native Child PID Receipt</b></div><p>3 replacements · 4 probes · 4 compiles · 22/22 gates · 41/41 attacks · 0 renders</p><Link href="/production-compiler-entry-promotion-v0-1">继续到 B56 生产入口 →</Link></footer>
   </main>;
 }

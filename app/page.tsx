@@ -264,7 +264,7 @@ export default function Home() {
           <Link className="route-tab" href="/blender-material-owner-rigid-directional-calibration-v0-1">D12.14 刚体校准</Link>
           <Link className="route-tab" href="/blender-material-owner-rigid-directional-render-holdout-v0-1">D12.14-H1 工具失败</Link>
           <Link className="route-tab" href="/blender-projective-depth-position-oracle-v0-1">D12.14-P1 投影修复</Link>
-          <Link className="route-tab" href="/blender-projective-depth-formal-invalidation-v0-1">D12.14-H2 正式调用失效</Link><Link className="route-tab" href="/formal-runner-admission-totality-v0-1">B53-E1 准入总路径</Link><Link className="route-tab" href="/admission-gated-native-compiler-v0-1">B54-E1 原生编译器准入</Link><Link className="route-tab" href="/budgeted-native-child-pid-receipt-v0-1">B55-E1 原生 PID Receipt</Link>
+          <Link className="route-tab" href="/blender-projective-depth-formal-invalidation-v0-1">D12.14-H2 正式调用失效</Link><Link className="route-tab" href="/formal-runner-admission-totality-v0-1">B53-E1 准入总路径</Link><Link className="route-tab" href="/admission-gated-native-compiler-v0-1">B54-E1 原生编译器准入</Link><Link className="route-tab" href="/budgeted-native-child-pid-receipt-v0-1">B55-E1 原生 PID Receipt</Link><Link className="route-tab" href="/production-compiler-entry-promotion-v0-1">B56-E1 生产编译入口</Link>
         </nav>
         <span className="edition">Baseline 01</span>
       </header>
