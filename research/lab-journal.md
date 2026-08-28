@@ -4351,3 +4351,13 @@ Final receipt file SHA/self-hash为 `f6cf9b9ff98886eaa485e339116c8f7bdf9d252d16b
 随后用第二个独立orchestrator process调用`resume`。返回`ALREADY_FINALIZED`；final receipt file SHA前后仍为 `f6cf9b…`，ledger event count仍14，`PROCESS_STARTED` / `NATIVE_PROCESS_OBSERVED` / `ARTIFACT_AUDIT_PROCESS_OBSERVED`数量前后仍为2/1/1，没有追加skip event。只读status重建出四阶段全部COMPLETED且`complete: true`。Manifest、四份stage receipt、verification、production receipt、disk admission与final receipt共9个self-hash全部独立重算通过；Node syntax、targeted ESLint与diff check通过。
 
 该development probe现在支持正常路径的完整终态closure与closed-job zero-process resume，但仍不是B58 formal verdict。尚缺exit-86 post-compile recovery、真native Blender interruption后的fresh-attempt retry、live-process WAIT/REFUSE实验以及official single-use preflight/runner/independent auditor的34/34 gate与至少64/72 attacks。下一动作先提交推送本完整证据，然后使用不变的tool-freeze bytes在fresh roots运行受控故障开发矩阵。
+
+## J-319 · B58 exit-86 post-compile recovery development preflight接受
+
+Date: 2026-08-28 · Type: DEVELOPMENT FAULT-INJECTION PREFLIGHT · New Blender processes: 0 · New Blender renders: 0
+
+Full-chain baseline evidence commit `30f209b3a95d666b2943fb37d2b8f041114cb03c` 与`origin/main` exact后，为B01 post-compile crash window创建fresh disjoint preflight/output/production-attempt/job roots。Preferred production preflight返回ACCEPTED，BuildPlan hash保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`；preflight file SHA/self-hash为 `143b09199f94226ac34fa1b35f2a415c7b2262b30ccf715c2074424adb62dcc9` / `c8757cfeeb074c65d031e401a19b27ebbd9ae6fb7efcf5837ab0d360005cd64c`。真实available为109,330,673,664 bytes，projection后108,793,802,752 bytes，高于100 GiB reserve；Blender/render/model/network/Docker均为0。
+
+Self-hashed job request file SHA/requestHash为 `5201175e61e761d7a7251a44660d744aeb8498f3086f0c977f4ee81ae30888dc` / `8af13ec108ab7114237ff096ed114d9baecd135ba406d300f4391b5edc00e823`。它绑定不变的tool-freeze commit `37fb87791b829f3b275c249f9e09ccec64636726`与ledger/orchestrator hashes，只注册一个normal compile candidate，并把`orchestratorFault`冻结为`EXIT_AFTER_PRODUCTION_COMPILE`。Expected first invocation必须在compile completed receipt与对应ledger event durable之后、VERIFY_RECEIPT start之前返回exit code 86；随后新进程resume必须对compile只写verified skip，不得新启native compile Blender，但应正常启动preferred verifier与audit Blender并完成FINALIZE。
+
+Execution roots与三个official B58 roots继续不存在。下一动作只提交推送该preflight/request与本entry；远端exact后才允许first invocation。
