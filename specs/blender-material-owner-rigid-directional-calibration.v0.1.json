@@ -1,0 +1,347 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerRigidDirectionalCalibration.v0.1",
+  "experimentId": "B52-D12.14-C2",
+  "title": "World-space rigid realizability calibration for Material-owner TOP, BOTTOM and NEITHER domains",
+  "status": "PREREGISTERED_AFTER_DISCLOSED_PILOT_BEFORE_FORMAL_TOOL_OR_OUTPUT",
+  "question": "Within a frozen world-space grid, can two independent 3D ray-plane oracles and real Blender 5.2 zero-render RNA probes derive TOP, BOTTOM and NEITHER structural-domain fixtures using one unchanged-size rigid foreground plane across both frames?",
+  "decisionRole": "post-failure fixture calibration; a derived result may provide geometry parameters for a separately preregistered fresh-render holdout but cannot validate a temporal algorithm, quality gate or production compiler",
+  "scientificClassification": {
+    "supersedesInvalidDesign": "B52-D12.14-C1 remains preserved but may not create a formal root because its 1e-9-pixel Blender projection gate was falsified before tool freeze and its independent projected rectangles did not prove same-owner rigid realizability.",
+    "pilotInformed": "The search bounds, robustness axes and Blender projection tolerance are informed by disclosed zero-render pilots run before this specification. This is calibration, not a blind confirmatory test.",
+    "rigidOwner": "Each candidate uses one foreground mesh with fixed local vertices and fixed size [8,7]. Only its XYZ location and XYZ Euler rotation differ between frames; scaling and per-frame mesh replacement are forbidden.",
+    "zeroRender": "Scalar oracles analytically ray-cast and project. Blender probes construct RNA data and inspect transforms/projections only. Render Result, bpy.ops.render, EXR, Cycles ray rendering, model and network calls are forbidden.",
+    "futureFreshness": "Calibration parameters and masks are development data. A future rendered holdout must freeze new raster sizes, material signals, pass tokens and output paths after this result and cannot count these analytic cells as confirmatory measurements."
+  },
+  "parents": {
+    "failedCalibrationSpec": {
+      "uri": "specs/blender-material-owner-directional-fixture-calibration.v0.1.json",
+      "sha256": "fd3fe2808346c49a87183b3ed215b07abcbaf4058df13d055cc893b482ae30f5",
+      "experimentId": "B52-D12.14-C1",
+      "gitCommit": "9b20091"
+    },
+    "failedCalibrationReport": {
+      "uri": "research/2026-08-28-b52-d12-14-c1-directional-calibration-preregistered-gate-falsification.md",
+      "sha256": "93c7ff41d7b4a1ea87ff105c5aa95ef46c0b1daec64e093538b2b10e366f6076",
+      "gitCommit": "ff779cf"
+    },
+    "rejectedHoldoutSpec": {
+      "uri": "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+      "sha256": "b0defadbd120f77dfe81bfa16d9dfd4e3a4d4a15ad1c8ddd1176d21f2e13b648",
+      "experimentId": "B52-D12.12-H1"
+    },
+    "rejectedHoldoutResult": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1/results.json",
+      "sha256": "175c6c568b60b29332954c9bd3f24634c4028aaf8a5c221fd999ad01acc9c0a7",
+      "resultHash": "c3c84f825b78ff4302fc6e65ff04956ac783a65dcc5ccf99fc1688bd5d15fdee",
+      "verdict": "MATERIAL_OWNER_ONE_SIDED_CURVATURE_HOLDOUT_REJECTED"
+    },
+    "rejectedHoldoutFormalRoot": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1",
+      "gitCommit": "d20fa589c919605fd44a61ee555c76ae63c87596",
+      "gitTree": "de1ac6a394a3963a158d0e3432d5dfb89aaf9a87"
+    }
+  },
+  "disclosedPilot": {
+    "classification": "UNSAVED_PREFORMAL_PARAMETER_FEASIBILITY_OBSERVATION",
+    "persistentOutputCreated": false,
+    "operationCounts": {"blenderProcesses": 1, "blenderRenderCalls": 0, "cyclesRayRenders": 0, "exrFiles": 0, "modelCalls": 0, "networkCalls": 0},
+    "feasibleExamples": [
+      {
+        "target": "TOP_MISSING_BOTTOM_AVAILABLE",
+        "currentLocation": [0.0, -3.0, 4.0],
+        "previousLocation": [0.0, -2.5, 0.0],
+        "rotationEulerBothFrames": [0.0, 0.0, 0.0],
+        "targetWitnesses": 187,
+        "minimumAcrossAdjacentDeltaY": 187,
+        "nonTargetOneSided": 0
+      },
+      {
+        "target": "BOTTOM_MISSING_TOP_AVAILABLE",
+        "currentLocation": [0.0, 2.0, 3.0],
+        "previousLocation": [0.0, 2.0, 0.0],
+        "rotationEulerBothFrames": [0.0, 0.0, 0.0],
+        "targetWitnesses": 189,
+        "minimumAcrossAdjacentDeltaY": 189,
+        "nonTargetOneSided": 0
+      },
+      {
+        "target": "NEITHER_HORIZONTAL_AVAILABLE",
+        "currentLocation": [0.0, 0.0, 4.0],
+        "currentRotationEuler": [0.0, 0.0, 0.0],
+        "previousLocation": [0.0, 0.0, 0.0],
+        "previousRotationEulerDegrees": [0.0, 89.5, 0.0],
+        "targetWitnesses": 12192,
+        "minimumAcrossPreviousZMinus1ZeroPlus1": 12192,
+        "nonTargetOneSided": 0
+      }
+    ],
+    "blenderCornerProjectionMaximumAbsoluteErrorObserved": 0.000012781884947798972,
+    "frozenProjectionToleranceRationale": "The hard tolerance is frozen at exactly 1/32768 pixel = 0.000030517578125, 2.387 times the disclosed pilot maximum. It is not evidence of raster identity and may not be relaxed after this commit."
+  },
+  "freshness": {
+    "requirements": [
+      "This specification, every new C2 tool path and the formal output root are absent when preregistration begins.",
+      "This exact specification is committed and pushed before any C2 tool byte or formal output exists.",
+      "All five C2 tools are committed and pushed in a later tool-freeze commit before the formal root exists.",
+      "The runner may create the root only when parent hashes/tree, spec, executable identities and committed tool bytes match the frozen plan.",
+      "No owner size, transform grid, Euler convention, raster, ray-plane rule, visibility rule, directional class, robustness axis, selection rule, tolerance, attack family or verdict mapping may change after this commit."
+    ],
+    "newToolPaths": [
+      "blender/probe_b52_d12_14_c2_rigid_directional_calibration.py",
+      "scripts/calibrate-b52-d12-14-c2-rigid-directional.py",
+      "scripts/calibrate-b52-d12-14-c2-rigid-directional.mjs",
+      "scripts/audit-b52-d12-14-c2-rigid-directional.py",
+      "scripts/run-b52-d12-14-c2-rigid-directional.py"
+    ],
+    "formalRoot": "experiments/blender-material-owner-rigid-directional-calibration-v0-1"
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "version": "v26.5.0"
+    },
+    "environmentAllowlist": ["PATH", "LANG", "LC_ALL", "TMPDIR", "BLENDER_USER_CONFIG", "BLENDER_USER_SCRIPTS"]
+  },
+  "sceneContract": {
+    "frames": {"previous": 0, "current": 1},
+    "eulerOrder": "XYZ",
+    "camera": {
+      "type": "PERSP",
+      "location": [0.0, 0.0, 11.0],
+      "rotationEuler": [0.0, 0.0, 0.0],
+      "lensMm": 53.0,
+      "sensorWidthMm": 36.0,
+      "sensorFit": "HORIZONTAL",
+      "clipStart": 0.1,
+      "clipEnd": 100.0
+    },
+    "foreground": {
+      "analyticOwnerId": "D1214C2_FOREGROUND",
+      "materialToken": 24101,
+      "objectToken": 24000,
+      "sizeWorld": [8.0, 7.0],
+      "localVertices": [[-4.0, -3.5, 0.0], [4.0, -3.5, 0.0], [4.0, 3.5, 0.0], [-4.0, 3.5, 0.0]],
+      "scaleByFrame": {"0": [1.0, 1.0, 1.0], "1": [1.0, 1.0, 1.0]},
+      "meshReplacementForbidden": true
+    },
+    "background": {
+      "analyticOwnerId": "D1214C2_BACKGROUND",
+      "materialToken": 24102,
+      "objectToken": 24000,
+      "sizeWorld": [30.0, 20.0],
+      "locationByFrame": {"0": [0.0, 0.0, -2.0], "1": [0.0, 0.0, -2.0]},
+      "rotationEulerByFrame": {"0": [0.0, 0.0, 0.0], "1": [0.0, 0.0, 0.0]},
+      "scaleByFrame": {"0": [1.0, 1.0, 1.0], "1": [1.0, 1.0, 1.0]}
+    },
+    "sharedObjectIndexNegativeControl": "Foreground and background intentionally share Object Index 24000; only the analytic owner/material token participates in domain classification."
+  },
+  "projectionOracle": {
+    "pixelCenter": "top-left integer pixel (x,y) denotes center ((x+0.5)/W,1-(y+0.5)/H)",
+    "rotationXYZ": "R = Rz*Ry*Rx using binary64 sin/cos of radians; local-to-world is location + R*local and world-to-local is transpose(R)*(world-location)",
+    "cameraRay": "camera-local direction = (((u-0.5)*sensorWidth/lens),((vBottom-0.5)*sensorHeight/lens),-1); camera rotation is identity",
+    "surface": "intersect the ray with each bounded foreground/background plane, reject nonpositive distance and select the minimum positive camera depth",
+    "project": {
+      "sensorHeightMm": "sensorWidthMm*H/W",
+      "x": "(0.5+lens*cameraX/(-cameraZ*sensorWidth))*W-0.5",
+      "yTop": "(0.5-lens*cameraY/(-cameraZ*sensorHeight))*H-0.5"
+    },
+    "reprojection": "intersect the current pixel with the current foreground, retain its exact owner-local point, transform that same local point by the previous foreground rigid transform and project it through the previous camera",
+    "previousOwnerRaster": "independently ray-cast every previous pixel center and assign the nearest bounded owner token",
+    "floatingPoint": "binary64 only; no epsilon, snapping, image sampling or Blender API is allowed in the Python/Node scalar oracles"
+  },
+  "structuralContract": {
+    "measurementDomain": "current foreground pixels whose Chebyshev-radius-2 current neighbors are all foreground",
+    "bilinearSupport": "all four floor-based previous taps are in bounds and equal the foreground owner token",
+    "outerSupport": {
+      "left": "both rows' x0-1 taps are foreground",
+      "right": "both rows' x0+2 taps are foreground",
+      "top": "both columns' y0-1 taps are foreground",
+      "bottom": "both columns' y0+2 taps are foreground"
+    },
+    "classes": {
+      "LEFT_MISSING_RIGHT_AVAILABLE": "not left and right and top and bottom",
+      "RIGHT_MISSING_LEFT_AVAILABLE": "left and not right and top and bottom",
+      "TOP_MISSING_BOTTOM_AVAILABLE": "left and right and not top and bottom",
+      "BOTTOM_MISSING_TOP_AVAILABLE": "left and right and top and not bottom",
+      "NEITHER_HORIZONTAL_AVAILABLE": "at least one bilinear row has neither its left nor right outer tap",
+      "FULL_STENCIL": "left and right and top and bottom"
+    },
+    "arrayOrder": "row-major y then x"
+  },
+  "searchSpace": {
+    "enumeration": "For each target, arrays are nested left-to-right with the last listed parameter varying fastest. Candidate IDs are target prefix plus a zero-based six-digit ordinal.",
+    "vertical": {
+      "targets": ["TOP_MISSING_BOTTOM_AVAILABLE", "BOTTOM_MISSING_TOP_AVAILABLE"],
+      "resolutionByTarget": {
+        "TOP_MISSING_BOTTOM_AVAILABLE": [191, 127],
+        "BOTTOM_MISSING_TOP_AVAILABLE": [193, 129]
+      },
+      "currentX": [0.0],
+      "currentYByTarget": {
+        "TOP_MISSING_BOTTOM_AVAILABLE": [-1.0, -2.0, -3.0],
+        "BOTTOM_MISSING_TOP_AVAILABLE": [1.0, 2.0, 3.0]
+      },
+      "currentZ": [3.0, 4.0, 5.0],
+      "previousX": [0.0],
+      "previousYDeltaFromCurrent": [-1.0, -0.5, 0.0, 0.5, 1.0],
+      "previousZ": [-1.0, 0.0, 1.0, 2.0],
+      "rotationEulerBothFrames": [0.0, 0.0, 0.0],
+      "candidateCountPerTarget": 180,
+      "robustnessAxis": "all available immediately adjacent previousYDeltaFromCurrent entries at identical target/currentY/currentZ/previousZ"
+    },
+    "neither": {
+      "target": "NEITHER_HORIZONTAL_AVAILABLE",
+      "resolution": [197, 131],
+      "currentLocation": [0.0, 0.0, 4.0],
+      "currentRotationEulerDegrees": [0.0, 0.0, 0.0],
+      "previousX": [-0.5, -0.25, 0.0, 0.25, 0.5],
+      "previousY": [0.0],
+      "previousZ": [-1.0, 0.0, 1.0, 2.0],
+      "previousRotationYDegrees": [87.0, 88.0, 89.0, 89.25, 89.5, 89.65, 89.75],
+      "previousRotationXDegrees": [0.0],
+      "previousRotationZDegrees": [0.0],
+      "candidateCount": 140,
+      "robustnessAxis": "all available immediately adjacent previousZ entries at identical previousX and previousRotationYDegrees"
+    },
+    "totalCandidateCount": 500
+  },
+  "measurementContract": {
+    "verticalTargetMinimumWitnesses": 64,
+    "verticalNeighborhoodMinimumWitnesses": 16,
+    "neitherTargetMinimumWitnesses": 1024,
+    "neitherNeighborhoodMinimumWitnesses": 1024,
+    "minimumCurrentForegroundRadius2": 1024,
+    "minimumBilinearSupport": 64,
+    "maximumNonTargetOneSidedWitnesses": 0,
+    "selection": [
+      "Discard candidates failing target, neighborhood, current-domain, bilinear-support or non-target gates.",
+      "For each target independently maximize minimum target witnesses across the frozen robustness axis.",
+      "Then maximize the candidate's target witnesses.",
+      "For vertical targets then minimize abs(previousYDeltaFromCurrent); for NEITHER then minimize abs(90-previousRotationYDegrees) followed by abs(previousX).",
+      "Finally select the lowest candidateId."
+    ],
+    "requiredSelectedTargets": ["TOP_MISSING_BOTTOM_AVAILABLE", "BOTTOM_MISSING_TOP_AVAILABLE", "NEITHER_HORIZONTAL_AVAILABLE"]
+  },
+  "blenderProbeContract": {
+    "oneProcessPerTarget": true,
+    "construction": "factory-empty scene; one camera, one foreground mesh datablock/object and one background mesh datablock/object; the foreground object is set to the selected frame-0 and frame-1 transforms sequentially without replacing its data",
+    "checks": [
+      "Foreground local vertex coordinates, mesh datablock identity and scale remain unchanged between frames.",
+      "Blender RNA location/rotation values match selected parameters within 1e-7 per component.",
+      "For both frames, Blender world-space corners and world_to_camera_view projections match an independent scalar Rz*Ry*Rx transform and pinhole projection within the frozen pixel tolerance.",
+      "The selected scalar target mask is not recomputed with Blender and remains analysis-only.",
+      "Render Result is absent, bpy.ops.render is never called and the formal root contains zero EXR files."
+    ],
+    "projectionMaximumAbsoluteErrorPixels": 0.000030517578125,
+    "rnaTransformMaximumAbsoluteError": 0.0000001
+  },
+  "requiredOutputs": {
+    "executionPlan": "execution-plan.json",
+    "pythonOracle": "oracles/python/{report.json,candidates.bin,selected/{target}/{mask}.u8}",
+    "nodeOracle": "oracles/node/{report.json,candidates.bin,selected/{target}/{mask}.u8}",
+    "blenderProbes": "blender-probes/{target}/report.json",
+    "result": "results.json",
+    "audit": "audit.json",
+    "execution": "execution.json",
+    "receipt": "receipt.json"
+  },
+  "processMatrix": {
+    "pythonOracleProcesses": 1,
+    "nodeOracleProcesses": 1,
+    "blenderProbeProcesses": 3,
+    "auditProcesses": 1,
+    "totalUniqueChildProcesses": 6,
+    "allChildrenUniquePid": true,
+    "allChildrenExitZeroRequired": true,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "hardGates": {
+    "parentHashesAndFormalTreeExact": true,
+    "specToolRuntimeAndProcessIdentity": true,
+    "pythonNodeCandidateRosterAndMetricBytesExact": true,
+    "pythonNodeSelectedTargetAndMaskBytesExact": true,
+    "selectionRuleIndependentReplay": true,
+    "allThreeTargetsSelected": true,
+    "sameForegroundMeshAndScaleAcrossFrames": true,
+    "blenderProjectionMaximumAbsoluteErrorPixels": 0.000030517578125,
+    "blenderRnaTransformMaximumAbsoluteError": 0.0000001,
+    "formalRootExrCount": 0,
+    "minimumConcreteSemanticAttacks": 64,
+    "blenderRenderCalls": 0,
+    "cyclesRayRenders": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "attackFamilies": [
+    "SPEC_IDENTITY",
+    "C1_FALSIFICATION_IDENTITY",
+    "H1_RESULT_IDENTITY",
+    "H1_FORMAL_TREE_IDENTITY",
+    "TOOL_IDENTITY",
+    "PROCESS_IDENTITY",
+    "CANDIDATE_ORDER",
+    "EULER_ORDER",
+    "DEGREES_TO_RADIANS",
+    "CAMERA_RAY_Y_SIGN",
+    "CAMERA_PROJECTION_Y_SIGN",
+    "RAY_PLANE_DENOMINATOR",
+    "NEAREST_SURFACE",
+    "OWNER_LOCAL_BOUNDS",
+    "LOCAL_POINT_REPROJECTION",
+    "PREVIOUS_VISIBILITY",
+    "PIXEL_CENTER",
+    "BILINEAR_FLOOR",
+    "RADIUS2_DOMAIN",
+    "OUTER_TAP_CLASS",
+    "TARGET_COUNT",
+    "NON_TARGET_ZERO",
+    "ROBUSTNESS_AXIS",
+    "SELECTION_TIE_BREAK",
+    "PYTHON_NODE_ARRAY_IDENTITY",
+    "FOREGROUND_MESH_IDENTITY",
+    "FOREGROUND_SCALE_IDENTITY",
+    "BLENDER_RNA_TRANSFORM",
+    "BLENDER_CORNER_PROJECTION",
+    "RENDER_ZERO",
+    "EXR_ZERO",
+    "RECEIPT_BINDING"
+  ],
+  "decision": {
+    "derivedVerdict": "MATERIAL_OWNER_RIGID_DIRECTIONAL_CALIBRATION_CANDIDATES_DERIVED",
+    "derivedWhen": "Every identity, cross-language, target, robustness, selection, same-mesh, Blender projection, process, zero-operation, audit and attack gate passes and exactly one candidate is selected for each target.",
+    "notDerivedVerdict": "MATERIAL_OWNER_RIGID_DIRECTIONAL_CALIBRATION_CANDIDATES_NOT_DERIVED",
+    "notDerivedWhen": "The evidence chain is valid but at least one target has no candidate passing the frozen grid and robustness gates.",
+    "invalidVerdict": "MATERIAL_OWNER_RIGID_DIRECTIONAL_CALIBRATION_INVALID",
+    "invalidWhen": "Any identity, oracle agreement, Blender realizability, process, zero-render, audit-totality or attack gate fails.",
+    "promotionBoundary": "A derived result authorizes only a separately preregistered fresh Blender 5.2 render holdout that binds the selected world transforms but uses new raster sizes, signals, tokens and outputs. It does not repair H1, validate factor 1, alter D12.13-D1 or enter the production compiler."
+  },
+  "diskAdmission": {
+    "observedFreeBytesBeforePreregistration": 109670588416,
+    "projectedMaximumWriteBytes": 67108864,
+    "minimumReserveBytesAfterWrite": 107374182400,
+    "admitted": true
+  },
+  "nonClaims": [
+    "Analytic ray-plane agreement does not prove Cycles edge rasterization, pass vectors, Material Index bytes or RGB reconstruction quality.",
+    "The calibration is pilot-informed and not a blind generalization test.",
+    "The Blender projection tolerance is a disclosed engineering tolerance, not pixel identity.",
+    "Rigid planar opaque geometry does not establish behavior for curved, deforming, transparent, hair, volume, motion-blurred, depth-of-field, lit or denoised scenes.",
+    "No result from this calibration can be promoted directly into the production compiler."
+  ]
+}

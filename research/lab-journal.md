@@ -3442,3 +3442,17 @@ Date: 2026-08-28 · Type: PREFORMAL DESIGN FALSIFICATION · New Blender renders:
 另一个设计缺口也在 tool freeze 前被识别：NEITHER 的 `58.5366×` 投影尺度差尚未证明能由同一尺寸刚体平面的双帧 transforms 实现；当前 probe 只是分别反解两个矩形。因而原 spec 必须保留而不能事后放宽，formal root 不得创建。下一步应使用新 experiment ID 预登记 world-space rigid-realizability calibration，直接冻结 owner size、camera/owner transforms、Euler rotations、3D ray-plane oracle 与基于本次已披露量化观察的新容差。
 
 Artifact: `research/2026-08-28-b52-d12-14-c1-directional-calibration-preregistered-gate-falsification.md`。
+
+## J-236 · D12.14-C2 world-space rigid directional calibration 预登记
+
+Date: 2026-08-28 · Type: PILOT-INFORMED RIGID FIXTURE CALIBRATION PREREGISTRATION · New Blender renders: 0
+
+在 C2 spec、五个新 tool paths 与 formal root 全部不存在时，先用不落盘的 scalar pilot 检查 world-space 可行域，再冻结 `B52-D12.14-C2`。与已失效的 C1 不同，C2 每个候选只允许一个固定 local mesh：foreground 尺寸恒为 `[8,7]`、scale 恒为 `[1,1,1]`，两帧只能改变 location 与 XYZ Euler rotation。背景同样为固定刚体平面；foreground/background 继续共享 Object Index，owner domain 仅由 Material/analytic token 区分。
+
+已披露 pilot 找到三个同一刚体平面可行例：TOP 187、BOTTOM 189、NEITHER 12,192 个 target witnesses，non-target one-sided 均为 0；TOP/BOTTOM 分别对相邻 Y displacement 保持 target，NEITHER 对 previous Z `-1/0/+1` 保持 12,192。真实 Blender 5.2 zero-render corner pilot 的最大 scalar-vs-Blender error 为 `1.2781884947798972e-5 pixel`，所以新 spec 在观察之后、正式工具之前把 hard tolerance 冻结为精确 `1/32768 = 3.0517578125e-5 pixel`。这不是 pixel identity，也不得在 formal run 后继续放宽。
+
+正式搜索共 500 个 world-space candidates：TOP/BOTTOM 各 180，NEITHER 140。Python/Node 必须独立实现 binary64 Euler XYZ、ray-plane nearest visibility、current-local → previous-world reprojection、previous owner raster、radius-2、bilinear floor 与 directional outer taps，并对 candidate metrics/selected masks byte exact。三个选中 target 各由独立 Blender factory-empty process 复核同一 mesh datablock、恒定 scale、RNA transforms 与 corner projection；加上 independent audit，总计 6 个唯一子进程，render/EXR/model/network 必须全为 0。
+
+这是 pilot-informed calibration，不是 blind holdout。即使 derived，也只授权另行预登记 fresh-render test；不能修复 D12.12-H1、改变 D12.13-D1 或进入 compiler。Spec SHA-256: `e123b80fdba40c7e7e396e1aad149573e1e123c57198a21fa8af944320d7e4c3`。
+
+Artifact: `specs/blender-material-owner-rigid-directional-calibration.v0.1.json`。下一动作必须先提交并推送 exact spec，然后才实现五个 C2 tools；formal root 在 tool-freeze commit 前必须不存在。
