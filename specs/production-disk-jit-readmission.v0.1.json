@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "bfs.productionDiskJitReadmissionExperiment.v0.1",
+  "experimentId": "B57-E1",
+  "title": "Production native-compile just-in-time disk readmission",
+  "date": "2026-08-28",
+  "status": "PREREGISTERED",
+  "hypothesis": "Immediately before the production runner spawns the restricted native compiler, it can re-observe the real repository filesystem, enforce the unchanged 100 GiB reserve plus 0.5 GiB projected write, durably record the decision, and bind an accepted observation into the production receipt without changing SceneSpec, BuildPlan, restricted compiler or Blender structure semantics.",
+  "causalGap": {
+    "parentExperiment": "B56-E1",
+    "observation": "The accepted production preflight records disk capacity, but the production runner does not re-observe disk before native compilation. A delayed invocation can therefore act on stale capacity evidence.",
+    "classification": "TIME_OF_CHECK_TO_TIME_OF_USE",
+    "parentVerdictUnaffected": true,
+    "sameIdRepairForbidden": true
+  },
+  "parentEvidence": {
+    "commit": "208a898394b856409fc09685605b31014c2a41df",
+    "results": { "uri": "experiments/production-compiler-entry-promotion-v0-1/results.json", "sha256": "9a55513ac1e2aa049a392e122c1a9b09866f74808151b1918061750d6cbec228", "resultHash": "cb9fe4260c97b8ba2cf12537a2bbfe10f90495c642cca89ce8154527ec49479d" },
+    "audit": { "uri": "experiments/production-compiler-entry-promotion-v0-1/audit.json", "sha256": "41281dd92f1833e4ca5f549713c81a7ce01aa157a30f898d3728f1dc3b193c79", "auditHash": "07e829a8ecf4480e62784e5c161241d38d9cbb7e83efee1f15a116a64b282328" },
+    "receipt": { "uri": "experiments/production-compiler-entry-promotion-v0-1/receipt.json", "sha256": "4d9979160a70d06cde416f35526d8dab0e08d5680fd7205b87162210e554693d", "receiptHash": "c9508dfa04c08ea1c713176668f94574d87e62856e27008703957aa05ef38d04" },
+    "observed": { "verdict": "PRODUCTION_COMPILER_ENTRY_PROMOTION_SUPPORTED", "gatesPassed": 27, "gatesTotal": 27, "attacksRejected": 64, "nativeCompiles": 4, "renderCalls": 0 }
+  },
+  "beforeIdentities": {
+    "releaseManifest": { "uri": "specs/production-compiler-entry.v0.1.json", "sha256": "010cb8bbfc4acd56c1f766cf014b1bdbf9652b3d35f92ed89e8891a51a8e43cf" },
+    "productionPreflight": { "uri": "scripts/preflight-production-blender-compile.mjs", "sha256": "e2a542b318d0c29ad4f23fccfea7dc3b28d65a489e69e90f4b0418dc621de4d2" },
+    "productionRunner": { "uri": "scripts/run-production-blender-compile.mjs", "sha256": "ab5f9b2d73e6f60235dd5b07c68540bd49f0649dac2078a203cdc39703352fc6" },
+    "productionReceiptLibrary": { "uri": "scripts/lib/production-compile-receipt.mjs", "sha256": "e695fb624faec50991af301f91e9dfb3fcd8dc04e6bdced642710377aa7f90cd" },
+    "productionVerifier": { "uri": "scripts/verify-production-compile-receipt.mjs", "sha256": "c2ce9bb630a1104c92aae216914743946ca20ca6acf1e6e089002d68c30f943c" },
+    "package": { "uri": "package.json", "sha256": "a2235a7558d420c86acb62eafda2c52fbfc1620c1de934fa88e02eea27381520" }
+  },
+  "intervention": {
+    "releaseManifest": "Create an additive v0.2 release manifest; retain v0.1 unchanged as B56 evidence.",
+    "runner": [
+      "After immutable BuildPlan persistence and immediately before restricted compiler spawn, call statfs on the repository root.",
+      "Apply the unchanged 100 GiB minimum reserve and 0.5 GiB projected write with no release-entry override.",
+      "Durably write sequence-5 native-compile-disk-admission.json before any restricted or Blender process is spawned.",
+      "On rejection, preserve the rejected disk record and invalidation evidence, start zero restricted/native compiler processes, and return nonzero.",
+      "Permit a test ceiling only when it lowers the real observed available bytes; it may force rejection but can never manufacture acceptance."
+    ],
+    "receipt": "Upgrade the production receipt and verifier contract to bind the exact accepted sequence-5 disk-admission file, its self-hash, real observation, effective observation, reserve, projection and zero-override policy.",
+    "packageAliases": "The three preferred alias names and command strings remain byte-exact.",
+    "unchangedControls": [
+      "scripts/compile-build-plan.mjs",
+      "scripts/run-restricted-blender-compile.mjs",
+      "scripts/lib/budgeted-process.mjs",
+      "scripts/lib/compile-receipt.mjs",
+      "scripts/verify-compile-receipt.mjs",
+      "blender/compile_scene.py",
+      "blender/audit_compiled_artifact.py",
+      "specs/disk-space-policy.v0.1.json",
+      "specs/restricted-compile-budget.v0.1.json"
+    ]
+  },
+  "diskPolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "acceptWhen": "effectiveAvailableBytes - projectedWriteBytes >= minimumReserveBytes",
+    "overrideAllowedByReleaseEntry": false,
+    "observationTarget": "repositoryRoot",
+    "latestPreregistrationObservation": { "availableBytes": "108723322880", "freeAfterProjectedBytes": "108186451968", "status": "PASS" }
+  },
+  "freshness": {
+    "preflightRoot": "experiments/production-disk-jit-readmission-preflight-v0-1",
+    "attemptRoot": "experiments/production-disk-jit-readmission-attempt-v0-1",
+    "formalRoot": "experiments/production-disk-jit-readmission-v0-1",
+    "allMustBeAbsentBeforeToolImplementation": true,
+    "formalRootMustRemainAbsentUntilAcceptedPreflightEvidenceIsPushed": true,
+    "failedOrInvalidatedRootsMustNeverBeReused": true
+  },
+  "preflightContract": {
+    "blenderProcesses": 0,
+    "renderCalls": 0,
+    "requirements": [
+      "B56 parent results, audit and receipt file/self hashes exact",
+      "v0.1 release and five before identities exact",
+      "additive v0.2 release and all B57 tools frozen at a pushed tool-freeze commit",
+      "the three package alias names and commands unchanged",
+      "real disk gate passes at the official preflight",
+      "a deterministic one-byte-below threshold case is rejected by the new JIT evaluator without Blender",
+      "SceneSpec suite remains 22/22 and B01/B02 dual BuildPlan bytes remain exact",
+      "formal roots are fresh and absent"
+    ]
+  },
+  "formalMatrix": {
+    "acceptedRuns": ["B01-A", "B01-B", "B02-A", "B02-B"],
+    "forcedStaleCapacityCase": {
+      "id": "LOW_DISK_AFTER_ACCEPTED_PREFLIGHT",
+      "preflightMustBeAccepted": true,
+      "jitEffectiveAvailableBytes": "107911053311",
+      "expectedStatus": "INVALIDATED",
+      "expectedPhase": "NATIVE_COMPILE_DISK_ADMISSION",
+      "restrictedCompilerProcesses": 0,
+      "nativeBlenderProcesses": 0,
+      "requestedOutputMayContainOnlyDurableAuthorizationBuildPlanDiskRejectionAndInvalidationEvidence": true
+    },
+    "acceptedRunRequirements": [
+      "four real JIT observations are accepted and durably bound before wrapper spawn",
+      "four preferred compile aliases and four preferred verifiers pass",
+      "four production receipts verify the new disk binding plus all B56 bindings",
+      "four current CompileReceipts continue to pass 19 checks",
+      "four native Blender PIDs remain positive and bound",
+      "B01/B02 plan and canonical structure A/B bytes remain exact",
+      "no rendered pixels, model calls, network calls or Docker operations"
+    ]
+  },
+  "gates": [
+    "B56_SUPPORTED_PARENT_BOUND_EXACT",
+    "V0_1_RELEASE_AND_BEFORE_IDENTITIES_EXACT",
+    "V0_2_RELEASE_AND_B57_TOOL_FREEZE_EXACT",
+    "PACKAGE_ALIASES_UNCHANGED_EXACT",
+    "JIT_POLICY_EQUALS_PREFLIGHT_POLICY_EXACT",
+    "JIT_TEST_CEILING_CAN_ONLY_LOWER_REAL_OBSERVATION",
+    "OFFICIAL_PREFLIGHT_ZERO_BLENDER_ACCEPTED_AND_PUSHED",
+    "SCENESPEC_SUITE_22_OF_22",
+    "B01_B02_BUILDPLAN_PAIR_BYTES_EXACT",
+    "STALE_CAPACITY_CASE_REJECTED_BEFORE_RESTRICTED_SPAWN",
+    "STALE_CAPACITY_REJECTION_EVIDENCE_DURABLE_AND_SELF_HASH_EXACT",
+    "FOUR_PREFERRED_PRODUCTION_ALIAS_COMPILES_PASS",
+    "FOUR_JIT_DISK_ADMISSIONS_ACCEPTED_BEFORE_WRAPPER_SPAWN",
+    "FOUR_PRODUCTION_RECEIPTS_BIND_JIT_DISK_EVIDENCE",
+    "FOUR_PREFERRED_PRODUCTION_VERIFIERS_PASS",
+    "FOUR_CURRENT_COMPILE_RECEIPTS_VERIFY_19_CHECKS",
+    "FOUR_NATIVE_PID_RECEIPTS_EXACT",
+    "B01_B02_PLAN_HASHES_FROZEN",
+    "B01_B02_STRUCTURE_PAIR_BYTES_EXACT",
+    "B01_B02_STRUCTURE_HASHES_FROZEN",
+    "FOUR_BLEND_EMBEDDED_BINDINGS_EXACT",
+    "NO_UNBOUND_OR_BACKUP_OUTPUT_FILES",
+    "DIRECT_PROCESS_AND_OPERATION_COUNTS_EXACT",
+    "MODEL_NETWORK_DOCKER_AND_RENDER_ZERO",
+    "INDEPENDENT_AUDIT_AND_SEMANTIC_ATTACKS_MINIMUM_56",
+    "VERDICT_MAPPING_OUTCOME_NEUTRAL"
+  ],
+  "decision": {
+    "supportedWhen": "All 26 gates pass.",
+    "boundedWhen": "The stale-capacity case fails closed before restricted spawn but at least one accepted-run regression gate fails.",
+    "rejectedWhen": "The stale-capacity case starts a restricted/native process, a ceiling can raise capacity, the policy is weakened, evidence is not durable/bound, or any safety gate fails.",
+    "invalidWhen": "Tool identity, parent identity, freshness, pushed-evidence ordering or preregistered operation accounting cannot be established."
+  },
+  "auditContract": {
+    "independentAuditorMustNotImportProductionOrB57ExecutionModules": true,
+    "minimumSemanticAttacks": 56,
+    "requiredAttacks": [
+      "missing disk admission",
+      "rejected disk admission changed to accepted",
+      "real available bytes changed",
+      "effective available bytes raised above real",
+      "reserve lowered by one byte",
+      "projection lowered by one byte",
+      "target changed away from repository root",
+      "test ceiling flag removed or inverted",
+      "disk admission sequence changed",
+      "disk file hash changed without receipt update",
+      "disk self-hash changed without file update",
+      "wrapper PID moved before disk-admission timestamp",
+      "stale-capacity compiler process count changed from zero",
+      "production receipt disk binding removed"
+    ]
+  },
+  "nonClaims": [
+    "This does not modify or rerun B56-E1.",
+    "This cannot make disk space immutable after observation; it narrows and receipts the time window.",
+    "This does not reserve filesystem blocks or guarantee against concurrent external writers after the JIT observation.",
+    "This does not render pixels or establish cinematic image quality.",
+    "This does not establish deterministic .blend container bytes, signatures or remote attestation.",
+    "B01/B02 remain minimal structural benchmarks rather than full production-scene coverage."
+  ],
+  "nextBoundary": "If supported, evaluate whether filesystem space must be actively reserved or whether the bounded observation-to-spawn interval is sufficient for the current single-host production threat model."
+}

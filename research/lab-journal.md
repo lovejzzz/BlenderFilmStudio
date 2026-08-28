@@ -4065,3 +4065,29 @@ Independent auditor不import production/B56 execution modules，直接重开所�
 Attempt/admission/attempt-receipt file SHA/self-hash为 `ece54da746c63fe33845054553e1ecd674c53d263005af01eafd0078b2494b7e` / `4f4ba9a26bbc81dc93b5f185764a1f37295affc214834548ebfd651e619d2f84`、`43d462638dc4ff16665241f2f92e5ded2a8ecb113a48e13f8922d814e022cb66` / `ba3cddd1d88e65fb08d768b5e971940b2e348f9713b9dd604f70e32cb972bbce`、`e9490f979404a548ebaf184dcfb71d08ccf7cbdc4022143b17f8d98ff2a6fd4f` / `743e0823666ceb689d5d94397fcfcd2e666423d91d56bbe3f5a767d0458da1c9`。Formal-start/audit/results/operation/receipt file SHA/self-hash分别为 `b41d67d1468ce8ce06b1964b1dd3ee2234108a86931e382b224257f6adfea06d` / `d6f65e90224cf00030047fbdbe004b182425ae0c5b6dbbe205543e931fa68af1`、`41281dd92f1833e4ca5f549713c81a7ce01aa157a30f898d3728f1dc3b193c79` / `07e829a8ecf4480e62784e5c161241d38d9cbb7e83efee1f15a116a64b282328`、`9a55513ac1e2aa049a392e122c1a9b09866f74808151b1918061750d6cbec228` / `cb9fe4260c97b8ba2cf12537a2bbfe10f90495c642cca89ce8154527ec49479d`、`ceb8c18fbc88b7d57d7ac819f9f8c654bab6ab2aa7dd4ad2a4dbf9dbb00e7c50` / `e029af57247edc7e8e2fe737adb0f4560935400f02377e5fd37f8b83feade148`、`4d9979160a70d06cde416f35526d8dab0e08d5680fd7205b87162210e554693d` / `c9508dfa04c08ea1c713176668f94574d87e62856e27008703957aa05ef38d04`。Built-in-only readback复算9/9顶层self-hashes、4/4 production receipts与全部rosters通过。B56-E1同一ID现已封闭，禁止修改或重跑；下一动作只提交推送exact evidence与本entry，然后发布研究页。
 
 本次SUPPORTED只证明preferred production entry在冻结preflight到紧随其后的formal run边界内成立。Production runner本身尚未在native compile前重新观察disk；若accepted preflight长期搁置，host free space可能在两者之间变化。该TOCTOU不是B56已注册gate，不能事后改判B56，但必须作为发布后的下一项separately preregistered production-safety correction，且不得降低100 GiB reserve。
+
+## J-291 · B56-E1 研究页双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE / NON-BROWSER VERIFICATION · New Blender renders: 0
+
+B56 evidence已在commit `208a898394b856409fc09685605b31014c2a41df`推送后保持封闭；研究页source commit `4e9598c20ef7984bb496bc0ef52fdff9cf5dcacb` 与 `origin/main` exact。页面直接读取frozen promotion spec、release manifest、official preflight、results、audit与formal receipt，展示three preferred aliases、seven-step authorization、4/4 native compiles、27/27 gates、64/64 attacks、B01/B02 plan/structure identities与zero-render claim boundary；B55页、homepage、web journal和Pages sparse checkout同步链接B56。
+
+Targeted ESLint、TypeScript、GitHub Pages 91-route static build与Vinext/Sites production build全部通过。GitHub Pages workflow `33187954821` 的build/deploy completed/success，公开exact route `https://lovejzzz.github.io/BlenderFilmStudio/production-compiler-entry-promotion-v0-1/` 返回HTTP 200并包含`27 PASS + 0 FAIL`与`disk TOCTOU`边界。
+
+同一source commit推送到Sites source repository，hosting helper archive保存为version 82；server archive content hash为 `sha256:2eb0f39218e871da0fa3ba9065adc7ef2dc00e6a5a34688cc35428fed235d753`，共376 files、29,245,440 bytes。Owner-only deployment `appgdep_6a91b167fe108191868ca306cdac536a` succeeded，exact route为 `https://blender-film-studio-research.skylab.chatgpt.site/production-compiler-entry-promotion-v0-1/`；发布前重新验证current user owner、custom access、exactly one allowed owner account、external visitors 0、workspace/tenant groups empty，匿名route返回HTTP 401。
+
+遵守J-284 crash guard，没有browser handoff、截图、DOM、点击、resize或视觉QA，也没有新增用户可见tab。临时发布archive已精确删除；用户README修改和三份未跟踪research drafts未被stage。B56 publication至此封闭，下一实验只处理已公开的native-spawn前disk TOCTOU。
+
+## J-292 · B57-E1 native-compile disk JIT readmission 预登记
+
+Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+B57 machine-readable spec与human protocol SHA-256分别为 `fa91173f1e824b8b9f1689d401586100a04e2632817895f6e209ace007833ecf` / `6258f7fe6880842ab54dcc40a729b9fc377d24c92e587a8ffd322400754b0ff0`。
+
+B56-E1 parent保持`PRODUCTION_COMPILER_ENTRY_PROMOTION_SUPPORTED`、27/27 gates、64/64 attacks、4 native compiles与0 renders；results/audit/receipt file SHA分别为 `9a55513ac1e2aa049a392e122c1a9b09866f74808151b1918061750d6cbec228`、`41281dd92f1833e4ca5f549713c81a7ce01aa157a30f898d3728f1dc3b193c79`、`4d9979160a70d06cde416f35526d8dab0e08d5680fd7205b87162210e554693d`。Current v0.1 release、preflight、runner、receipt library、verifier与package before hashes冻结为 `010cb8…`、`e2a542…`、`ab5f9b…`、`e695fb…`、`c2ce9b…`、`a2235a…`；v0.1 release必须保留为B56 evidence。
+
+B57只修复一个因果缺口：accepted preflight的disk observation可能在formal invocation前过期。冻结intervention是在immutable BuildPlan持久化后、restricted wrapper spawn前重新`statfs(repositoryRoot)`，继续使用100 GiB reserve与0.5 GiB projected write、禁止override，并先fsync sequence-5 `native-compile-disk-admission.json`。Accepted decision必须由升级后的production receipt/verifier绑定；rejected decision必须保留self-hashed disk record与invalidation，restricted/native process count为0。
+
+正式负例冻结为正常accepted preflight之后把effective available ceiling设为107,911,053,311 bytes，即required reserve+projection少1 byte；ceiling只能降低真实观察，不能制造acceptance。正式正例仍为B01-A/B、B02-A/B四个fresh preferred-alias compiles，并要求四份JIT disk admission、四份production verifier、四份19-check current receipt、native PID、plan/structure/blend bindings全部通过；render/model/network/Docker为0。Independent auditor不得import execution modules，至少拒绝56项semantic attacks；26-gate outcome mapping已在spec/protocol中冻结。
+
+预登记时repository filesystem available为108,723,322,880 bytes，projection后108,186,451,968 bytes，高于107,374,182,400-byte reserve。下一动作只能提交并推送exact spec、protocol与本entry形成preregistration commit；远端一致前不得创建v0.2 release、修改production tool byte或创建任何B57 root。
