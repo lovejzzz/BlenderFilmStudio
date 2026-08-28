@@ -4487,3 +4487,13 @@ Date: 2026-08-28 · Type: GOAL CORRECTION / CRASH CONTAINMENT · New Blender pro
 项目执行目标现改为“稳定、可恢复、可审计的Blender 5.2电影生产系统”，并按Gate 0宿主稳定性、Gate 1工作流正确性、Gate 2电影质量与成本顺序推进。Gate 0通过前，B58 official formal run暂停；只允许低风险静态检查、证据整理、轻量实现和稳定性诊断。默认防线包括最少浏览器标签、大输出落盘只回传摘要、低频状态更新、严格磁盘余量、精确PID回收、断点续作，以及每次实验的资源预算和停止条件。
 
 完整执行宪章保存为 `research/2026-08-28-stability-first-goal-v0.1.zh-CN.md`。本次没有启动Blender、渲染、模型、网络或Docker工作负载。
+
+## J-331 · B59-G0 Codex宿主稳定性有界基线预注册
+
+Date: 2026-08-28 · Type: STABILITY BASELINE PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+在B58 official run暂停后，先预注册一个不主动复现崩溃的只读宿主基线。Spec冻结用户崩溃报告SHA-256 `035649c3c49d8d95385f5221f968fd2824132d30184399ab204341542ef6d4b8`、252,628 bytes、1,323 lines及`Chrome_IOThread` / `EXC_BREAKPOINT (SIGTRAP)` / `v8::ValueSerializer::WriteValue`签名，但明确不把它解释为唯一根因。
+
+B59-G0冻结20个gates、24个mutation attacks、8 KiB stdout和64 KiB receipt上限。Formal runner只允许最多12个短时本地读取子进程，禁止Blender、render、浏览器自动化、网络、模型、Docker、清理、信号与重启。磁盘准入比B58更严：100 GiB核心reserve + 0.5 GiB B58 projection + 4 GiB稳定余量，共要求至少112,205,053,952 available bytes；不降低原production门槛。
+
+当前formal root和两个tool paths在预注册时均不存在，parent commit与`origin/main`均为 `098276e590f73cfef90906a80d41886c79c56adc`。下一动作只提交推送spec/protocol/journal，再实现有界runner和仅用Node built-ins的独立auditor。
