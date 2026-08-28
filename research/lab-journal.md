@@ -3384,3 +3384,17 @@ Commit `59945d9` 冻结并推送四个预登记工具：独立 Python consumer�
 四工具 SHA-256（按 spec 顺序）为 `b70c7e963788d41de9ff956df800ccf21ed7fb00fe81cd499600bee0e374b33a`、`4b642014ef63d6d4e6765f1e6bfbe8e53c0703a87d6ba01bf88a718f85e5645c`、`2b25adbecf346cc95a083d794c6a6743879f83105b7ab88f995588ab5f3e2952`、`4dbc1415f7b29ccdccef57dc282c2334a0c48ff6bc6f86e0eedcd9a2274740dd`。固定解释器 Python syntax、Node syntax 与 formal-root absence gate 通过。
 
 一次性 `/tmp` smoke 对 LEFT/R1 的 2 个 shared arrays 和 5×2 threshold arrays 完成 12/12 Python/Node byte identity 后已清除。该预正式自检按冻结阈值得到 accepted counts `13668 / 11742 / 9482 / 6810 / 5333`；其中最大阈值 `32768 Q30` 的 13668/16892 retention 已明显低于 0.97 gate。这不是正式六-fixture结论，也不得据此修改阈值族或 coverage gate；下一动作仍是从 frozen commit 启动完整 26-process derivation，让“无 candidate”作为合法可证伪结果被审计。
+
+## J-231 · D12.13-D1 证据链通过，global threshold candidate 未导出
+
+Date: 2026-08-28 · Type: POST-HOC DERIVATION NOT DERIVED / AUDIT ACCEPTED · New Blender renders: 0
+
+第一次 26-process run 的 analyzer hard checks 19/19 且已经给出 no-candidate，但 independent auditor 为 baseline 19/19、attacks 87/88，runner 因而拒绝创建 evidence receipt。失败并非 threshold 科学结果：`FALLBACK_FROM_H1` attack 在 fixture loop 后误用了最后一个 STATIC cell，其 current/reconstruction 按设计 byte identical，所以没有实际 mutation。完整 attempt 保存在 `experiments/blender-material-owner-quality-coupling-derivation-v0-1-attempt0-audit-tool-bug/`。Commit `bbc8192` 只把 witness 固定到非静态 LEFT/R1；没有改 threshold、gate、input、metric 或 verdict。
+
+修复后从空 formal root 重跑：26/26 unique child processes exit 0，analyzer hard checks 19/19，auditor baseline 19/19、semantic attacks 88/88，receipt hash `984ed1922979face344d6d387a835bc565f5c69d9519c8c88d83f544e16703f2`。Python/Node every-array、repeat、fallback 与 H1 eligible/risk binding 均 exact；Blender render/model/network calls 仍为 0。Attempt 0 与 rerun 排除 process/tool identity 后的全部 candidate metrics/cells exact。
+
+五档 threshold 均通过 safety/quality，但均失败 primary cell coverage 与 owner retention，因此 verdict 为 `MATERIAL_OWNER_QUALITY_COUPLED_THRESHOLD_CANDIDATE_NOT_DERIVED`。`32768 Q30` 的 accepted RGB max 仅 `7.510185241699219e-06`，但最低 cell coverage 只有 `0.6472908000648263`，最低 owner retention 只有 `0.5340755013202027`；更小阈值只继续恶化 coverage。结论：H1 risk upper bound 可保持安全，却对全局 quality-coupled acceptance 过于保守；只调一个 global threshold 无法同时满足 quality 与 coverage。
+
+Result / audit / execution / receipt file SHA-256 为 `66a1598e2b4f0dee1ee7773b566c1bf5085a2a02fc911e050b873bdcfa28ca19` / `cc761d726c409d54cbf84faa07a7a600e35a2ab5d65e58dadee50fb9f6d0d988` / `206b69e5e2ba9d52d79b6dcd709a88f5c62a0683766173c970b4fd7dd0cf8009` / `a7448121ef15947edd2beed24f2222792672b43a06afcd67e7807b68d10c0caa`；对应 self-hash 为 `c0e43d0acac844939457f0fdec0b8eda7fa850d0fed26720b873401aa88a4737` / `fcbd74e2ae5b2dc62e226b24b58c45b2c5753c35aff1058829055f0445f6579a` / `8bca7f38c5907d9097691db443ab943bfc074b705b92405a40554226ebdd4545` / `984ed1922979face344d6d387a835bc565f5c69d9519c8c88d83f544e16703f2`。
+
+Artifact: `research/2026-08-28-b52-d12-13-d1-quality-coupled-threshold-derivation-result.md`。下一动作是在不修改本结果的前提下，分别预登记 directional fixture calibration 与 risk-tightness decomposition；前者修复实验域，后者研究机制而非继续调 threshold。

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerQualityCouplingFailedAttemptSummary.v0.1",
+  "experimentId": "B52-D12.13-D1",
+  "attempt": 0,
+  "classification": "AUDIT_TOOL_WITNESS_SCOPE_BUG_NOT_A_SCIENTIFIC_RESULT",
+  "formalResultWasProduced": true,
+  "formalEvidenceReceiptWasProduced": false,
+  "analyzer": {
+    "analysisValid": true,
+    "verdict": "MATERIAL_OWNER_QUALITY_COUPLED_THRESHOLD_CANDIDATE_NOT_DERIVED",
+    "selectedThresholdQ30": null,
+    "resultSha256": "814ba6822e062c16ed4a286c4450ad92792760fcf7cfbf8248aaec0ffbed6269",
+    "resultHash": "66a4eec02f8969ca80c525be2fb4c465c22a95a3158aef84b3651deba6cdd120"
+  },
+  "audit": {
+    "passed": false,
+    "baselinePassed": 19,
+    "baselineTotal": 19,
+    "attacksPassed": 87,
+    "attacksTotal": 88,
+    "failedAttack": "FALLBACK_FROM_H1",
+    "auditSha256": "b3b06eeeeabb673b190dc31b237ecbd19db5d684b4ecee0583af1ca842cdf558",
+    "auditHash": "2d345595c8fd25cd25ac86615814f45edb5815dbd67cc25928835d96c06d0abc"
+  },
+  "rootCause": "The mutation attack read current/reconstruction payload variables after the fixture loop, so they referred to the final STATIC cell where the two payloads are intentionally equal. The attack therefore created no mutation and correctly failed the attack-count gate.",
+  "repair": {
+    "gitCommit": "bbc8192",
+    "scope": "Capture the fallback mutation witness inside the frozen first non-static LEFT/R1 cell and consume only that boolean after the loop.",
+    "thresholdsGatesInputsMetricsChanged": false,
+    "repairedAuditorSha256": "6dcdf79ca215e1276c2dd057b6bfce2122146b72c02bc5dc73bb64577f41ce52"
+  },
+  "rerun": {
+    "formalRoot": "experiments/blender-material-owner-quality-coupling-derivation-v0-1",
+    "scientificMetricsByteEquivalentAfterRemovingProcessAndToolIdentity": true
+  }
+}
