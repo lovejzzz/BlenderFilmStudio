@@ -4253,3 +4253,13 @@ B58冻结单机append-only orchestration contract：immutable job manifest、has
 正式矩阵冻结四个cells：B01 baseline；在compile completed receipt和ledger event落盘后、verify开始前exit 86，下一独立invocation必须0 additional Blender恢复；B02真实native Blender受控SIGTERM，失败attempt不得promote，恢复只重试compile而不重跑已完成plan；以及live exact child identity阻止duplicate spawn。上限为4 production compiler/native Blender starts、3 successful compiles、1 controlled interruption、3 preferred verifiers及0 render/model/network/Docker。Independent auditor不得import orchestrator execution modules，必须重开全部authoritative bytes；SUPPORTED要求34/34 gates与至少64/72 frozen one-field attacks，任何completed-stage duplicate spawn、dirty attempt promotion、unsafe live-process处理或B57 disk门降低都直接REJECTED。
 
 预登记时filesystem available为108,261,376,000 bytes，扣除536,870,912 projected write后为107,724,505,088，仅比100 GiB reserve高350,322,688 bytes。该余量很薄：正式preflight或任何native-spawn readmission若跌破原门槛，必须先安全恢复容量，禁止降低reserve。下一动作只提交推送spec、protocol与本entry；远端exact前不得创建B58 tools或任何B58 root。
+
+## J-310 · B58 durable ledger library实现checkpoint
+
+Date: 2026-08-28 · Type: RESTART-SAFE IMPLEMENTATION CHECKPOINT / DEVELOPMENT ONLY · New Blender processes: 0 · New Blender renders: 0
+
+B58 preregistration commit `9fe37d7c8b3d2e6b3ea522ba9c2e4515a100d99b` 已推送到`origin/main`后，才创建冻结path `scripts/lib/restart-safe-job-ledger.mjs`。Candidate SHA-256为 `05032a4532d96170476479a352842399d463d2ee16687f2e2a0a2ac50a4592fa`。实现包括canonical JSON限制、SHA-256/self-hash、exclusive-create + file/directory fsync、contained non-symlink path、immutable manifest、canonical six-digit hash-chained ledger、stage completion receipt cross-binding、DAG state reducer、macOS process start/executable/argv identity以及atomic writer lease/live-writer拒绝/dead-lease quarantine primitives。
+
+第一轮仅位于系统temporary root的development integration test暴露两个实现错误：macOS `/tmp` → `/private/tmp`根别名被误判成root内部symlink traversal；随后writer identity局部变量遮蔽全局`process`导致`ReferenceError`。两者均在临时root保留终端反例后修正；没有创建B58 formal roots、没有改动B57 production surface，也没有启动Blender。修正后的positive probe创建manifest、3-event contiguous ledger、PLAN_BIND completed receipt，重新derive为COMPLETED，并成功获取/释放writer lease。Negative probe确认第二writer得到`LIVE_WRITER`，单字段ledger payload mutation得到`LEDGER_EVENT_HASH`。
+
+`node --check`、targeted ESLint、`git diff --check`与两组temporary probes现全部通过，temporary roots已精确清理。本文件仍只是unfrozen implementation candidate，不是tool-freeze、official preflight或restart-safety verdict。下一动作先提交推送library checkpoint，再实现同一预登记path的`job:production` orchestrator；正式根继续禁止创建。
