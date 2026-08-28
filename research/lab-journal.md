@@ -3784,3 +3784,13 @@ Date: 2026-08-28 · Type: FORMAL PREREGISTRATION · New Blender renders: 0
 正式实现限定为dependency-free Node admission library、single-use runner与不import前两者的independent auditor。Runner只可创建isolated local fixture Git repo和local bare origin；Blender、Docker/Colima、network、model、render与external repository全部禁止。Audit必须重开fixture、复算hash/path/Git ancestry/process boundary并执行至少32项one-field semantic attacks。Spec SHA-256为 `d85c450e4f927a684a630324da3ee5281b0cd57f3fcd23cdccf5d4cfe3f2b4f5`；protocol SHA-256为 `d3470821f5d4ae3d31fa2f3a2d218db0cfc2bb66e7c576eee9d7a80313d031a5`。
 
 下一动作只能提交并推送exact spec、protocol与本entry；远端preregistration commit形成前不得创建任何B53-E1 tool byte或output root。Supported verdict只授权未来新实验采用admission module；production compiler orchestration变更仍必须重跑B01/B02 structure regression。
+
+## J-266 · B53-E1 Codex 升级重启前实现断点
+
+Date: 2026-08-28 · Type: OPERATIONAL CHECKPOINT / UNFROZEN IMPLEMENTATION · New Blender renders: 0
+
+用户准备升级并重启 Codex，因此在B53-E1正式工具冻结前主动停止。preregistration commit `ae7e57ff86d8a5f735e5a32d3b80755edb6b8f4d` 已与 `origin/main` 一致；此后仅创建dependency-free Node admission library候选 `scripts/lib/formal-run-admission.mjs`，未创建runner、independent auditor或formal output root，也未执行任何B53-E1 case、Git fixture、Blender、Docker/Colima、network、model或render工作。
+
+当前library候选为183行，SHA-256 `382a06e82c815b69539edf6211bd3d9db28a05c2aa49d1f7a6ddaed61f18f67a`；`node --check` 与 `git diff --check`通过。该文件只是可恢复的实现checkpoint，不是tool-freeze，不构成formal evidence或admission结论。其path、Git ancestry、self-hash、tool binding和output containment逻辑尚须由runner matrix与不import该library的auditor验证。
+
+重启后的恢复入口：确认本checkpoint commit与远端一致；先实现 `scripts/run-b53-e1-formal-runner-admission-path-totality.mjs` 与 `scripts/audit-b53-e1-formal-runner-admission-path-totality.mjs`，再对三条工具做syntax和仅位于临时目录的development probes。只有审读与零formal-output验证通过后，才能记录exact tool hashes并形成独立tool-freeze commit；tool-freeze推送前不得创建 `experiments/formal-runner-admission-path-totality-v0-1`。用户原有 `README.md` 修改与三份未跟踪research drafts继续排除于提交之外。
