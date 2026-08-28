@@ -3284,3 +3284,25 @@ Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
 全仓 ESLint 为 0 errors / 31 warnings。30 个属于此前路径；第 31 个来自已冻结 D12.12 Node consumer 的 expression warning，不能为了 lint 数字改写实验工具字节。Vinext/Sites production build 成功，识别 79 条 routes 并包含 D12.12；GitHub Pages Next static build 成功生成 81/81 pages，并将新增 route 明确认定为 static。
 
 下一动作是只提交本轮 exporter、代理图/manifest、研究页、CSS、两处导航与 J-219/J-220；不得包含 README 或三份用户未提交研究稿。推送后必须等待 GitHub Pages 对 exact commit 成功，并在 Sites 发布前重新核验 owner-only access。
+
+## J-221 · D12.12-D1 双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
+
+Validated source commit `5ebd3bfc449d4e3e798320fa9496cd4dc623c518` 已推送。GitHub Pages workflow `33154307777` completed/success 且绑定同一 head SHA；公开精确 route 返回 HTTP 200。Sites 发布前重新核验 current user 为 owner、access mode 为 custom、唯一 allowed account user 为当前 owner、external visitors 为 0、workspace/tenant groups 均为空；从 exact source commit 重建并保存 version 72 后完成 private deployment，匿名精确 route 返回 401。
+
+公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-owner-one-sided-curvature-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-owner-one-sided-curvature-v0-1/`。
+
+## J-222 · D12.12-H1 directional one-sided curvature 新鲜 holdout 预登记
+
+Date: 2026-08-28 · Type: CONFIRMATORY HOLDOUT PREREGISTRATION · Formal tools/renders: 0
+
+在新 spec、八个 formal/preflight 工具路径与两份输出 root 全部不存在时，D12.12-H1 冻结六个 unseen Blender 5.2 fixtures：四个单向 projective-expansion cells 分别测试 `LEFT_MISSING_RIGHT_AVAILABLE`、`RIGHT_MISSING_LEFT_AVAILABLE`、`TOP_MISSING_BOTTOM_AVAILABLE`、`BOTTOM_MISSING_TOP_AVAILABLE`；一个大角度刚体旋转 cell 要求 common bilinear Material support 存在但 horizontal 两侧 second difference 都不可用且 accepted=0；一个 static cell 要求 full-stencil byte identity 与 accepted delta=0。
+
+六个 raster、相机、owner transforms、Generated emission 系数、共享 Object Index 负对照与 12 个 compiler-assigned Material Index tokens 全部写死。Factor 固定为 1，不允许搜索；D12.11 Material identity、Q30/Q24、131072 inclusive threshold、3.0517578125e-5 maximum/RMSE、exact fallback 与原 0.97 cell / 0.95 per-owner coverage denominators 保持不变。四个 primary directional fixture 每个至少需要 8 个严格方向 witnesses、1 个 accepted、≥50% directional acceptance；neither-side 至少需要 1 个 witness 且 accepted 必须为 0。
+
+Formal matrix 冻结为 6 fixtures × 2 frames × 2 clean repeats = 24 个新 Cycles CPU renders，总计 110 个唯一 child processes；要求 source、adapter、Python/Node every-array、decision 与 repeats byte exact，并由不 import pipeline 的 auditor 执行至少 80 个真实 semantic attacks。即使全部通过，也只允许进入另行预登记的 nonplanar/lit holdout，不能进入 production compiler。
+
+预登记时 observed free bytes 为 110,389,080,064；projected write 201,326,592 bytes 后仍高于冻结的 100 GiB reserve。Spec SHA-256: `b0defadbd120f77dfe81bfa16d9dfd4e3a4d4a15ad1c8ddd1176d21f2e13b648`。
+
+Artifact: `specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json`.
