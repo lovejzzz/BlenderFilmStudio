@@ -83,11 +83,13 @@ function parseProcesses(stdout) {
 function summarizeProcesses(processes) {
   const codexPrefix = '/Applications/ChatGPT.app/Contents/';
   const mainPath = '/Applications/ChatGPT.app/Contents/MacOS/ChatGPT';
+  const mainProcesses = processes.filter((item) => item.command === mainPath);
   const renderers = processes.filter((item) => item.command.includes('/Codex (Renderer).app/Contents/MacOS/Codex (Renderer)'));
   const codexTree = processes.filter((item) => item.command.startsWith(codexPrefix));
   const crashpads = processes.filter((item) => item.command.includes('/browser_crashpad_handler'));
   return {
-    mainCodexProcessCount: processes.filter((item) => item.command === mainPath).length,
+    mainCodexProcessCount: mainProcesses.length,
+    mainCodexPids: mainProcesses.map((item) => item.pid).sort((left, right) => left - right),
     rendererCount: renderers.length,
     maximumRendererRssBytes: Math.max(0, ...renderers.map((item) => item.rssBytes)),
     codexTreeRssBytes: codexTree.reduce((sum, item) => sum + item.rssBytes, 0),
@@ -140,7 +142,14 @@ function expectedGateVector(candidate) {
       && candidate.disk.headroomBytes === candidate.disk.availableBytes - candidate.disk.minimumAvailableBytes
       && candidate.disk.availableBytes >= candidate.disk.minimumAvailableBytes,
     MEMORY_PRESSURE: candidate.memory.minimumFreePercent === spec.resourcePolicy.minimumMemoryFreePercent && candidate.memory.systemWideFreePercent >= candidate.memory.minimumFreePercent,
-    CODEX_MAIN_PROCESS_COUNT: candidate.processes.mainCodexProcessCount === spec.processPolicy.requiredMainCodexProcessCount,
+    CODEX_MAIN_PROCESS_COUNT: candidate.processes.mainCodexProcessCount === spec.processPolicy.requiredMainCodexProcessCount
+      && (spec.restartBoundary ? candidate.restartBoundary?.previousMainPid === spec.restartBoundary.previousMainPid
+        && canonical(candidate.restartBoundary.currentMainPids) === canonical(candidate.processes.mainCodexPids)
+        && candidate.restartBoundary.currentMainPids.length === spec.restartBoundary.requiredCurrentMainProcessCount
+        && !candidate.restartBoundary.currentMainPids.includes(spec.restartBoundary.previousMainPid)
+        && candidate.restartBoundary.oldPidPresent === false
+        && candidate.restartBoundary.currentPidDifferent === true
+        && candidate.restartBoundary.valid === true : candidate.restartBoundary === null),
     CODEX_RENDERER_COUNT: candidate.processes.rendererCount <= spec.resourcePolicy.maximumCodexRendererCount,
     SINGLE_RENDERER_RSS: candidate.processes.maximumRendererRssBytes <= spec.resourcePolicy.maximumSingleRendererRssBytes,
     CODEX_TREE_RSS: candidate.processes.codexTreeRssBytes <= spec.resourcePolicy.maximumCodexTreeRssBytes,
@@ -185,6 +194,19 @@ function makeSyntheticAdmissibleControl(observed) {
   control.memory.minimumFreePercent = spec.resourcePolicy.minimumMemoryFreePercent;
   control.memory.systemWideFreePercent = spec.resourcePolicy.minimumMemoryFreePercent;
   control.processes.mainCodexProcessCount = spec.processPolicy.requiredMainCodexProcessCount;
+  if (spec.restartBoundary) {
+    const syntheticPid = spec.restartBoundary.previousMainPid + 1;
+    control.processes.mainCodexPids = [syntheticPid];
+    control.restartBoundary = {
+      previousMainPid: spec.restartBoundary.previousMainPid,
+      currentMainPids: [syntheticPid],
+      oldPidPresent: false,
+      currentPidDifferent: true,
+      valid: true
+    };
+  } else {
+    control.restartBoundary = null;
+  }
   control.processes.rendererCount = 0;
   control.processes.maximumRendererRssBytes = 0;
   control.processes.codexTreeRssBytes = 0;
@@ -231,6 +253,8 @@ const memoryMatch = memoryOutput.match(/System-wide memory free percentage:\s*(\
 if (!memoryMatch) throw new Error('memory replay missing free percentage');
 const replayMemoryPercent = Number(memoryMatch[1]);
 const replayProcesses = summarizeProcesses(parseProcesses(runBounded('/bin/ps', ['-axo', 'pid=,ppid=,rss=,etime=,command='], 'process-snapshot')));
+const replayRestartBoundaryValid = spec.restartBoundary ? replayProcesses.mainCodexPids.length === spec.restartBoundary.requiredCurrentMainProcessCount
+  && !replayProcesses.mainCodexPids.includes(spec.restartBoundary.previousMainPid) : true;
 const filesystem = statfsSync('/');
 const replayAvailableBytes = Number(filesystem.bavail * filesystem.bsize);
 const appPlist = '/Applications/ChatGPT.app/Contents/Info.plist';
@@ -249,7 +273,9 @@ const integrityChecks = {
   CURRENT_VERSION_REPLAY: replayVersion === results.currentRuntime.codexVersion,
   DISK_GATE_REPLAY: (replayAvailableBytes >= spec.resourcePolicy.minimumAvailableBytes) === results.gates.DISK_STABILITY_MARGIN,
   MEMORY_GATE_REPLAY: (replayMemoryPercent >= spec.resourcePolicy.minimumMemoryFreePercent) === results.gates.MEMORY_PRESSURE,
-  MAIN_PROCESS_GATE_REPLAY: (replayProcesses.mainCodexProcessCount === spec.processPolicy.requiredMainCodexProcessCount) === results.gates.CODEX_MAIN_PROCESS_COUNT,
+  MAIN_PROCESS_GATE_REPLAY: (replayProcesses.mainCodexProcessCount === spec.processPolicy.requiredMainCodexProcessCount && replayRestartBoundaryValid) === results.gates.CODEX_MAIN_PROCESS_COUNT,
+  RESTART_BOUNDARY_REPLAY: spec.restartBoundary ? replayRestartBoundaryValid === results.restartBoundary.valid
+    && canonical(replayProcesses.mainCodexPids) === canonical(results.restartBoundary.currentMainPids) : results.restartBoundary === null,
   RENDERER_COUNT_GATE_REPLAY: (replayProcesses.rendererCount <= spec.resourcePolicy.maximumCodexRendererCount) === results.gates.CODEX_RENDERER_COUNT,
   SINGLE_RENDERER_GATE_REPLAY: (replayProcesses.maximumRendererRssBytes <= spec.resourcePolicy.maximumSingleRendererRssBytes) === results.gates.SINGLE_RENDERER_RSS,
   CODEX_TREE_GATE_REPLAY: (replayProcesses.codexTreeRssBytes <= spec.resourcePolicy.maximumCodexTreeRssBytes) === results.gates.CODEX_TREE_RSS,
@@ -288,6 +314,13 @@ const attacks = [
   ['A23_RECEIPT_SIZE_ABOVE_CEILING', (x) => { x.receiptBytes = spec.resourcePolicy.maximumReceiptBytes + 1; }],
   ['A24_RECEIPT_SELF_HASH_MUTATION', (x) => { x.selfHash = '0'.repeat(64); }, false]
 ];
+if (spec.restartBoundary) {
+  attacks.push(['A25_RESTART_BOUNDARY_MUTATION', (x) => {
+    x.processes.mainCodexPids = [spec.restartBoundary.previousMainPid];
+    x.restartBoundary.currentMainPids = [spec.restartBoundary.previousMainPid];
+    x.restartBoundary.oldPidPresent = true;
+  }]);
+}
 
 const attackResults = attacks.map(([id, mutate, shouldReseal = true]) => {
   const candidate = structuredClone(syntheticControl);

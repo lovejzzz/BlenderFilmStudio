@@ -4613,3 +4613,13 @@ Date: 2026-08-28 · Type: POST-RESTART READMISSION PREREGISTRATION · New Blende
 R2冻结fresh root `experiments/codex-host-stability-post-restart-readmission-v0-1`及restart boundary：exactly one current main、current PID必须不同于92848、旧PID必须不存在。原20 gates及全部资源阈值不变；`CODEX_MAIN_PROCESS_COUNT`在R2中同时承载restart boundary。新增A25 `RESTART_BOUNDARY_MUTATION`，因此R2要求25/25 attacks；baseline/R1仍保持原24 attacks语义。
 
 下一动作先提交推送R2 spec/protocol/journal，再实现main PID投影、独立replay及conditional A25。旧PID仍存在时不得运行R2 formal root。
+
+## J-344 · B59-G0-R2 restart boundary与conditional A25实现
+
+Date: 2026-08-28 · Type: POST-RESTART TOOL IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+R2 preregistration commit `bd32c15` 推送后，runner/auditor的process summary增加排序后的main Codex PID列表。只有selected spec包含`restartBoundary`时，runner才记录previous/current PID、old PID presence、PID difference与boundary verdict，并把它合入`CODEX_MAIN_PROCESS_COUNT`；baseline/R1无restart boundary时仍沿用原语义。
+
+Auditor独立重采main PID列表并要求与receipt exact一致。Synthetic admissible control在R2中使用一个不同于旧PID的合成PID；A25把resealed candidate的current PID改回92848并标记old PID present，必须被semantic validator拒绝。R2为25 attacks，旧spec仍为24。
+
+Runner/auditor新SHA为 `46127189b5491622923fef33d655b69fa699cad375113d241ac756e85b126b8a` / `14bd615626de8667e5a0f5dc091db70e630f901bf988ed6b771896e7750e49ff`。Node syntax、zero-warning targeted ESLint与diff check通过，真实R2 formal root仍不存在。下一动作提交推送工具字节，再在旧PID仍存活的fresh临时clone证明R2 fail-closed且25/25 attacks完整；不消费真实R2 root。

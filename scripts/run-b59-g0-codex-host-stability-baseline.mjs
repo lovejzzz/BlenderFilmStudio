@@ -83,6 +83,7 @@ function parseProcesses(stdout) {
 function summarizeProcesses(processes) {
   const codexPrefix = '/Applications/ChatGPT.app/Contents/';
   const mainPath = '/Applications/ChatGPT.app/Contents/MacOS/ChatGPT';
+  const mainProcesses = processes.filter((item) => item.command === mainPath);
   const renderers = processes.filter((item) => item.command.includes('/Codex (Renderer).app/Contents/MacOS/Codex (Renderer)'));
   const codexTree = processes.filter((item) => item.command.startsWith(codexPrefix));
   const crashpads = processes.filter((item) => item.command.includes('/browser_crashpad_handler'));
@@ -90,7 +91,8 @@ function summarizeProcesses(processes) {
   const b58 = processes.filter((item) => /(?:run-restart-safe-production-job|preflight-b58-e1|run-b58-e1|audit-b58-e1)[.]mjs/.test(item.command));
   const browserAutomation = processes.filter((item) => /(?:^|[/ ])(?:agent-browser|chromedriver)(?:$|[/ ])|playwright/.test(item.command));
   return {
-    mainCodexProcessCount: processes.filter((item) => item.command === mainPath).length,
+    mainCodexProcessCount: mainProcesses.length,
+    mainCodexPids: mainProcesses.map((item) => item.pid).sort((left, right) => left - right),
     rendererCount: renderers.length,
     maximumRendererRssBytes: Math.max(0, ...renderers.map((item) => item.rssBytes)),
     codexTreeRssBytes: codexTree.reduce((sum, item) => sum + item.rssBytes, 0),
@@ -181,6 +183,14 @@ const memory = { systemWideFreePercent: Number(memoryMatch[1]), minimumFreePerce
 
 const processes = parseProcesses(runBounded('/bin/ps', ['-axo', 'pid=,ppid=,rss=,etime=,command='], 'process-snapshot'));
 const processSummary = summarizeProcesses(processes);
+const restartBoundary = spec.restartBoundary ? {
+  previousMainPid: spec.restartBoundary.previousMainPid,
+  currentMainPids: processSummary.mainCodexPids,
+  oldPidPresent: processSummary.mainCodexPids.includes(spec.restartBoundary.previousMainPid),
+  currentPidDifferent: processSummary.mainCodexPids.length === 1 && processSummary.mainCodexPids[0] !== spec.restartBoundary.previousMainPid,
+  valid: processSummary.mainCodexPids.length === spec.restartBoundary.requiredCurrentMainProcessCount
+    && !processSummary.mainCodexPids.includes(spec.restartBoundary.previousMainPid)
+} : null;
 
 const capturedAt = new Date().toISOString();
 const specSha256 = sha256File(specPath);
@@ -199,7 +209,7 @@ const gates = {
   SNAPSHOT_FRESHNESS: true,
   DISK_STABILITY_MARGIN: disk.availableBytes >= disk.minimumAvailableBytes,
   MEMORY_PRESSURE: memory.systemWideFreePercent >= memory.minimumFreePercent,
-  CODEX_MAIN_PROCESS_COUNT: processSummary.mainCodexProcessCount === spec.processPolicy.requiredMainCodexProcessCount,
+  CODEX_MAIN_PROCESS_COUNT: processSummary.mainCodexProcessCount === spec.processPolicy.requiredMainCodexProcessCount && (restartBoundary?.valid ?? true),
   CODEX_RENDERER_COUNT: processSummary.rendererCount <= spec.resourcePolicy.maximumCodexRendererCount,
   SINGLE_RENDERER_RSS: processSummary.maximumRendererRssBytes <= spec.resourcePolicy.maximumSingleRendererRssBytes,
   CODEX_TREE_RSS: processSummary.codexTreeRssBytes <= spec.resourcePolicy.maximumCodexTreeRssBytes,
@@ -240,6 +250,7 @@ const results = {
   disk,
   memory,
   processes: processSummary,
+  restartBoundary,
   commandRecords,
   resourceAccounting: {
     childProcesses: commandRecords.length,
