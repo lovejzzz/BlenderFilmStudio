@@ -3019,6 +3019,20 @@ C1 analyzer 一次运行得到 16/16 checks、30/30 targeted mutations 与 `TEMP
 
 Artifact: `research/2026-08-28-b52-d12-10-c1-audit-d1-failure.md`.
 
+## J-200 · C1 修正审计通过，owner alias 与 stencil loss 已分离
+
+Date: 2026-08-28 · Type: CORRECTED POST-HOC LOCALIZATION RESULT · New Blender renders: 0
+
+新路径 Node auditor 绑定 C1 result file SHA，不再假设 Python/JavaScript 数值 JSON 是同一 canonical format；它独立重放所有 set/ratio 方程、逐字节比较 40 个 payload、核对 D1 classification identity，并以 11 个语义 mutation 重验边界。结果 10/10 checks、11/11 attacks，通过；失败的首次 audit 继续保留。
+
+Rotated sweep 与 camera parallax 的 true-owner bilinear mismatch 都是 0；其 146 / 152 个 support losses 全在对称 4×4 stencil 的 extra-owner 区域。Same-index crossing 有 17 个 Object Index bilinear aliases，其中 15 个被 H1 接受；正确分解为 `13,717 = 13,702 within-bilinear + 15 outside`，且 `13,702 = 13,652 full-stencil + 50 extra-stencil`。所有 ratio 都落在 `[0,1]`。
+
+因此下一干预被拆成两条独立、可证伪路径：真实 Blender 的 compiler-controlled per-owner token 负责 same-index identity；owner-aware/one-sided curvature support 负责 moving stencil opportunity。前者先测 Material Index 与 custom AOV 的离散性、EXR 读回、边缘语义和净进程复现，不直接假定任一路径可用。
+
+Result SHA-256: `90e8a4d72c0224e4195cd6a52ea193d93211d6dfe368ed7efdd1c3d421d393c8`; analysis hash: `e0f9c8417357ef0d08a75c45ce108d650fe8df22b7a6f3140ea4c3e787ddc719`; corrected audit SHA-256: `7bea1f8db8bf15a41384fa3b1e9a8be5bc44b35ce71b34f18ea51e7549f705c2`; audit hash: `88c4f6081b80e2b62b535e7d4bb364a3b52c45d8b23ded48e30b69060e338e57`。
+
+Artifact: `research/2026-08-28-b52-d12-10-c1-temporal-owner-support-localization-result.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
