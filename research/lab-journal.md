@@ -4193,3 +4193,15 @@ C2 bounded evidence与production verifier cross-binding correction commit `c621c
 Meta preflight file SHA/self-hash为 `2aff716a18a4d54acf07f81e206b7da1f0e3dd1b4282feca2e4d80083bf2c7ed` / `3450f9a9f428064d2d585fcfdf4393a7c18e741de3f533401b5998d72f69c520`。真实available为108,594,233,344 bytes，扣除536,870,912 projected bytes后为108,057,362,432 bytes，高于107,374,182,400-byte reserve；forced negative 107,911,053,311 bytes仍比threshold精确少1 byte且只会降低真实观察。LOW-DISK、B01-A/B、B02-A/B五份nested preflight均ACCEPTED，operation count为五个production preflight processes、0 Blender/render/model/network/Docker。
 
 Bound C3 attempt/formal roots仍不存在。下一动作只提交推送该preflight与本entry，再用Git读取的exact evidence commit调用single-use C3 runner一次。C3是完整彩排而非official B57；只有26/26 gates与56/56 attacks均通过，才允许后续冻结最终tool commit并创建三个预登记的official roots。
+
+## J-305 · B57 C3完整彩排关闭disk receipt cross-binding缺口
+
+Date: 2026-08-28 · Type: FULL REHEARSAL SUPPORTED / TOOL-FREEZE CANDIDATE · New Blender compilations: 4 · New Blender renders: 0
+
+C3 accepted preflight evidence commit `5639cb8e83cad4ca3696827bb14f64e83f96a389` 与 `origin/main` exact后，single-use runner只调用一次并完成完整矩阵。LOW-DISK真实观察108,571,279,360 bytes后应用冻结ceiling 107,911,053,311 bytes，扣除projected write后为107,374,182,399，精确低于100 GiB reserve 1 byte；sequence-5 disk admission以`FREE_AFTER_PROJECTED_WRITE_BELOW_RESERVE`拒绝，disk/invalidation self-hash为 `909c4993b1b6f4efe02643013613e6e787b7a586ec860fb11e9f626ea8f14449` / `fc08e7ec1b905811d30223049e60e531b1c72713afdec2babb68185146292563`，restricted/native processes均0。
+
+B01-A/B、B02-A/B四次preferred production compile与verifier全部PASS；wrapper/native PID分别为52998/53001、53105/53107、53231/53234、53337/53340。B01 plan/structure pair保持 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf` / `c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b`；B02保持 `a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687` / `025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856`。四份actual disk record与receipt投影的disk hash逐份exact，disk/receipt self-hash全部exact，root/restricted rosters无多余文件。
+
+Independent auditor给出 `PRODUCTION_DISK_JIT_READMISSION_SUPPORTED`：26/26 gates、56/56 resealed semantic attacks、0 escaped。C2暴露的四个`DISK_HASH` attacks现全部被实际disk record外部交叉绑定拒绝。Formal-start/operation/audit/results/receipt file SHA-256分别为 `883b00864902215a2bcd7df20f1cb1900a2af4ed4bb46914049844bd1941e9e4`、`117bfb4e054d95edd132f0f89570194decea9328c385a60e1406b46768b899d5`、`ef2e3d2f83c147d284c0ac4d972a18cae732cb1d393cc7471cf46f2fbc55646b`、`7a886e9c8c4a26f957b272486b856f5519cf9ddb786a15f7c01f4a426f205bb2`、`77be6ff68e05842d1c7dd97da9a82c3eacc1ecb76711d291cb23f6c1d6e4db43`；formal receipt self-hash为 `2cfe230eb6f217023cec36a185e60183894f9e117b0e97b1c479e6f2d5d2a4f4`。45个formal files中只有四份`.blend`，无EXR/image/video/`.blend1`；render/model/network/Docker均0。
+
+C3只证明最终tool bytes在隔离彩排中可达全部冻结门槛，不替代official B57。下一动作先提交推送C3 attempt/formal evidence与本entry；该exact evidence commit将作为final tool-freeze commit。随后只允许在预登记的三个official roots执行一次zero-Blender preflight，推送后再执行一次official runner。
