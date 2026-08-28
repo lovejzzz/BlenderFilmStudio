@@ -3364,3 +3364,13 @@ Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
 Validated source commit `8426ce43bb31c766da08adb910d00bea3d98340c` 已推送。GitHub Pages workflow `33157542705` completed/success，公开精确 route 返回 HTTP 200。Sites 发布前复核 current user 为 owner、access mode 为 custom、唯一 allowed account user 为当前 owner、external visitors 为 0、workspace/tenant groups 均为空；随后从 exact source commit 保存 version 73 并完成 private deployment，匿名精确 route 返回 401。
 
 公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-owner-one-sided-curvature-holdout-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-owner-one-sided-curvature-holdout-v0-1/`。
+
+## J-229 · D12.13-D1 quality-coupled threshold derivation 预登记
+
+Date: 2026-08-28 · Type: POST-HOC DERIVATION PREREGISTRATION · New Blender renders: 0
+
+在四个新工具路径与输出 root 均不存在时，冻结 `B52-D12.13-D1`。本实验只读取 D12.12-H1 已提交且不可变的 Blender 5.2 arrays，不启动 Blender render、模型或网络调用；它不能修改或推翻已经被拒绝的 H1，只用于导出或拒绝一个供未来 fresh holdout 检验的全局 threshold candidate。
+
+预登记固定原始 `131072 Q30` 为诊断基线、`32768 Q30 = 3.0517578125e-5` 为精确 quality gate，并按 `[32768, 24576, 16384, 8192, 4096]` 的降序机械选择最大合格阈值。每个 candidate 必须同时满足零 risk underbound、accepted maximum/RMSE quality、0.97 primary cell coverage、0.95 per-Material-owner retention、static/repeat/cross-language exactness 与 fallback/current-RGB decision isolation；任一 coverage 或 safety gate 不通过就不能被导出。TOP/BOTTOM/NEITHER directional masks 仅 report，因为 H1 已证明这些 fixtures 没有形成预期 stress domain。
+
+父 spec/result/audit/receipt 文件 SHA-256、H1 formal commit/tree、固定 Python/Node executable SHA 与版本已逐项复核；四个 tool paths 和 output root 仍不存在。预登记 spec SHA-256 为 `e9d79a2ec54acaf36a0df1168ea71102b0b94ab66f4e10f1cda56dbd1ea70c00`。重启后的下一动作是从此已推送 spec 实现两个独立 consumer、analyzer、mutation auditor 与 26-process runner；在 tool-freeze commit 之前不得创建 output root 或观察 threshold 结果。

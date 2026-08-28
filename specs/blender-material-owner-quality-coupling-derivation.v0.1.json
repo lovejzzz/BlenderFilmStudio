@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "bfs.blenderMaterialOwnerQualityCouplingDerivationSpec.v0.1",
+  "experimentId": "B52-D12.13-D1",
+  "title": "Post-hoc derivation of a quality-coupled Q30 acceptance threshold",
+  "status": "PREREGISTERED_BEFORE_NEW_TOOL_BYTES",
+  "scientificClassification": "POST_HOC_DERIVATION_NOT_A_FRESH_HOLDOUT",
+  "question": "On the immutable D12.12-H1 Blender 5.2 arrays, does a globally quality-coupled risk threshold at or below 32768 Q30 remove every accepted quality violation while retaining the unchanged 0.97 cell and 0.95 per-owner coverage gates?",
+  "decisionRole": "Derive or reject a threshold candidate for a separately preregistered future holdout. This experiment cannot repair or reverse the rejected D12.12-H1 verdict.",
+  "parents": {
+    "h1Spec": {
+      "uri": "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+      "sha256": "b0defadbd120f77dfe81bfa16d9dfd4e3a4d4a15ad1c8ddd1176d21f2e13b648",
+      "experimentId": "B52-D12.12-H1"
+    },
+    "h1Result": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1/results.json",
+      "sha256": "175c6c568b60b29332954c9bd3f24634c4028aaf8a5c221fd999ad01acc9c0a7",
+      "resultHash": "c3c84f825b78ff4302fc6e65ff04956ac783a65dcc5ccf99fc1688bd5d15fdee",
+      "verdict": "MATERIAL_OWNER_ONE_SIDED_CURVATURE_HOLDOUT_REJECTED"
+    },
+    "h1Audit": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1/audit.json",
+      "sha256": "d983482d6d0d752e268273487592a42a7700b121c8769195d49001bb2742c4e1",
+      "auditHash": "bc7e90af03a631c6ae799581ff3e84a855f149bab28e1ba59fc43c709e922ab4",
+      "verdict": "MATERIAL_OWNER_ONE_SIDED_CURVATURE_HOLDOUT_AUDIT_ACCEPTED"
+    },
+    "h1Receipt": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1/receipt.json",
+      "sha256": "9b692d8945821c2458a41952cc3cecde73066703d603455a484d9d4d8b7d9b14",
+      "receiptHash": "55c122a7ecd748b07cf2803b4694ba05d77b1f0833d9c4295d2fbbdc4d5a6830",
+      "passed": true
+    },
+    "h1FormalRoot": {
+      "uri": "experiments/blender-material-owner-one-sided-curvature-holdout-v0-1",
+      "gitCommit": "d20fa589c919605fd44a61ee555c76ae63c87596",
+      "gitTree": "de1ac6a394a3963a158d0e3432d5dfb89aaf9a87"
+    }
+  },
+  "freshness": {
+    "requirements": [
+      "This spec, all four new tool paths and the output root are absent when preregistration begins.",
+      "This exact spec is committed and pushed before any new tool byte exists.",
+      "All four tools are committed before the output root exists.",
+      "No Blender render, model call or network call occurs.",
+      "Only immutable D12.12-H1 adapter and consumer arrays are measurement inputs.",
+      "D12.12-H1 formal Git tree remains exact before and after this derivation.",
+      "No threshold, gate, denominator, selection order or verdict mapping changes after this commit."
+    ],
+    "newToolPaths": [
+      "scripts/derive-b52-d12-13-quality-coupled-threshold.py",
+      "scripts/derive-b52-d12-13-quality-coupled-threshold.mjs",
+      "scripts/audit-b52-d12-13-quality-coupled-threshold.py",
+      "scripts/run-b52-d12-13-quality-coupled-threshold.py"
+    ],
+    "outputRoot": "experiments/blender-material-owner-quality-coupling-derivation-v0-1"
+  },
+  "inputContract": {
+    "fixtures": [
+      "LEFT_OUTER_MISSING_EXPANSION_173X107",
+      "RIGHT_OUTER_MISSING_EXPANSION_181X109",
+      "TOP_OUTER_MISSING_EXPANSION_169X113",
+      "BOTTOM_OUTER_MISSING_EXPANSION_177X115",
+      "NEITHER_HORIZONTAL_STRIP_185X117",
+      "STATIC_FULL_STENCIL_CONTROL_163X101"
+    ],
+    "repeats": [1, 2],
+    "sourceArrays": [
+      "current.rgba32",
+      "current-owner.f32",
+      "radius2-interior.u8",
+      "full-stencil.u8",
+      "direction-left.u8",
+      "direction-right.u8",
+      "direction-top.u8",
+      "direction-bottom.u8",
+      "neither-horizontal.u8",
+      "analytic-valid-history.u8",
+      "one-sided-eligible.u8",
+      "risk.q30.u32",
+      "reconstructed.rgba32"
+    ],
+    "parentProducer": "D12.12-H1 Python consumer arrays, already byte-exact to Node and independently replayed",
+    "forbiddenInputs": [
+      "fixture ID in a per-pixel decision",
+      "directional class in a per-pixel decision",
+      "current RGB in accepted/risk decisions",
+      "future RGB",
+      "measured reconstruction error in a decision",
+      "a threshold selected after inspecting this derivation output"
+    ]
+  },
+  "thresholdFamily": {
+    "diagnosticBaselineQ30": 131072,
+    "qualityGateSceneLinear": 0.000030517578125,
+    "qualityGateQ30Exact": 32768,
+    "candidateThresholdsQ30Descending": [32768, 24576, 16384, 8192, 4096],
+    "selectionRule": "Select the largest candidate threshold, in the frozen descending order, that passes every safety, quality, primary coverage, per-owner retention, static, repeat and cross-language gate. If none passes, derive no candidate.",
+    "mathematicalCoupling": "When measured risk underbound count is zero, accepted iff eligible and max(riskQ30)<=T, and T<=32768, every accepted RGB error is <=32768/2^30=3.0517578125e-5.",
+    "factor": 1,
+    "riskArraysImmutable": true,
+    "reconstruction": "Reuse the immutable H1 reconstruction at newly accepted pixels; all newly rejected pixels must fall back byte-exactly to current RGBA.",
+    "globalPolicyScope": "Thresholding applies to full-stencil and one-sided eligible pixels alike. It intentionally tests a global quality-safe risk policy, not a one-sided-only exception."
+  },
+  "hardGates": {
+    "parentBytesAndFormalTreeExact": true,
+    "toolRuntimeAndProcessIdentity": true,
+    "pythonNodeEveryArrayByteExact": true,
+    "repeatEveryArrayByteExact": true,
+    "thresholdOrderAndLabelsExact": true,
+    "acceptedSubsetOfH1Eligible": true,
+    "riskArraysByteExactToH1": true,
+    "riskUnderboundRgbSamplesMaximum": 0,
+    "acceptedRgbMaximum": 0.000030517578125,
+    "acceptedRgbRmseMaximum": 0.000030517578125,
+    "falseInvalidHistoryAcceptsMaximum": 0,
+    "acceptedMaterialAliasesMaximum": 0,
+    "fallbackExact": true,
+    "currentRgbDecisionMetamorphism": true,
+    "staticControlMinimumAcceptedToRadius2": 0.99,
+    "staticControlAcceptedDeltaFromBaselineMaximum": 0,
+    "minimumConcreteSemanticAttacks": 64,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "coverageGates": {
+    "primaryFixtures": [
+      "LEFT_OUTER_MISSING_EXPANSION_173X107",
+      "RIGHT_OUTER_MISSING_EXPANSION_181X109",
+      "TOP_OUTER_MISSING_EXPANSION_169X113",
+      "BOTTOM_OUTER_MISSING_EXPANSION_177X115"
+    ],
+    "minimumAcceptedToRadius2PerPrimaryFixture": 0.97,
+    "minimumAcceptedRetentionPerMaterialOwner": 0.95,
+    "denominator": "Every immutable H1 radius-2 current Material-owner cell. No support, risk, error or fixture-class reject may be removed.",
+    "reportSeparately": [
+      "each fixture and repeat",
+      "each Material Index owner",
+      "full-stencil accepted",
+      "one-sided accepted",
+      "risk rejected",
+      "quality-violating accepts",
+      "left/right/top/bottom/neither diagnostic masks"
+    ]
+  },
+  "directionalDiagnostics": {
+    "decisionRole": "report-only; never a selection gate because H1 proved TOP/BOTTOM/NEITHER fixtures did not generate their target domains",
+    "leftAndRightCountsMustRemainBoundToH1": true,
+    "topBottomAndNeitherMissingWitnessesRemainASeparateFixtureFailure": true,
+    "forbiddenClaim": "A threshold candidate cannot repair the D12.12-H1 directional or neither-side verdict."
+  },
+  "processMatrix": {
+    "pythonConsumerProcesses": 12,
+    "nodeConsumerProcesses": 12,
+    "analyzerProcesses": 1,
+    "auditProcesses": 1,
+    "totalUniqueChildProcessesIncludingAudit": 26,
+    "allChildrenUniquePid": true,
+    "allChildrenExitZeroRequired": true,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0
+  },
+  "requiredOutputs": {
+    "perThresholdArrays": [
+      "accepted.u8",
+      "reconstructed.rgba32"
+    ],
+    "sharedArrays": [
+      "eligible.u8",
+      "risk.q30.u32"
+    ],
+    "analysis": [
+      "results.json",
+      "audit.json",
+      "execution.json",
+      "receipt.json"
+    ]
+  },
+  "attacks": {
+    "minimumConcreteSemanticAttacks": 64,
+    "mutationNonceCounts": false,
+    "requiredFamilies": [
+      "H1 parent byte and formal-tree mutation",
+      "spec, tool, runtime, process and operation-count mutation",
+      "eligible, risk, reconstruction and current-RGBA payload mutation",
+      "threshold insertion, deletion, reorder, relabel and hidden search",
+      "inclusive comparison, Q30 scale and quality-coupling mutation",
+      "accepted set, fallback, risk-underbound, maximum and RMSE mutation",
+      "coverage denominator and per-owner retention mutation",
+      "current RGB decision dependence and future-error leakage",
+      "cross-language, repeat, result, execution and receipt mutation"
+    ],
+    "independence": "The auditor may use Python standard library and NumPy but may not import either consumer, analyzer or runner. Every counted attack mutates an isolated in-memory semantic payload and must fail at least one named gate."
+  },
+  "runtime": {
+    "python": {
+      "executable": "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+      "sha256": "cc5df0ba27960cb244d0cd98edc1c2b867570bc313b9e287e8e5c9c15d8faf35",
+      "numpy": "2.3.4"
+    },
+    "node": {
+      "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+      "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+      "version": "v26.5.0"
+    }
+  },
+  "decision": {
+    "derivedVerdict": "MATERIAL_OWNER_QUALITY_COUPLED_THRESHOLD_CANDIDATE_DERIVED",
+    "notDerivedVerdict": "MATERIAL_OWNER_QUALITY_COUPLED_THRESHOLD_CANDIDATE_NOT_DERIVED",
+    "derivedWhen": "At least one frozen candidate threshold passes every hard and coverage gate, and the mechanically selected value is the largest passing candidate.",
+    "promotionBoundary": "A derived threshold is only a post-hoc candidate for a separately preregistered fresh holdout with repaired directional fixtures and a normalized-container determinism contract. It does not alter D12.12-H1 and does not enter the production compiler."
+  },
+  "nonClaims": [
+    "fresh holdout support",
+    "repair of D12.12-H1",
+    "valid TOP/BOTTOM or neither-side stress",
+    "raw EXR byte determinism",
+    "nonplanar, lit, transparent, deforming or production-pass safety",
+    "perceptual equivalence or cinema quality",
+    "production compiler readiness"
+  ]
+}
