@@ -4371,3 +4371,17 @@ Exit-86 preflight/request commit的真实full SHA为 `44d9efeb5b404a1998f8cc7171
 对该started job使用独立resume时，reducer先验证并追加一条PLAN_BIND `STAGE_SKIPPED_VERIFIED`，随后因dead wrapper没有durable native Blender identity返回`REFUSE_RECOVERY: ... orphan state is ambiguous`，没有spawn任何新进程。Ledger因此从5 events增为6 events，compile仍STARTED，VERIFY仍PENDING。这是预登记fail-closed规则的真实负例，不在原job/attempt root修补或重试。
 
 C1 request改用fresh job `B58-DEV-EXIT86-B01-C1`与fresh production-attempt root，保持原accepted preflight绑定的仍未创建output root。C1 request file SHA/requestHash为 `001b419ce6d28f70d46b7c50c114554439f40f440bbac14b4f1e9a1826501e8f` / `b2fe2457e1d25254eef1d250cada0e3422dc87e96c0aec7c7c75f04e03a4e250`，tool-freeze bytes与exit-86语义不变。下一动作先提交推送本失败证据与C1 request，然后必须用`git log -1 --format=%H -- <preflight-root>`读取的exact SHA，不再手写commit身份。
+
+## J-321 · B58 exit-86 post-compile新进程恢复且零重复native compile通过
+
+Date: 2026-08-28 · Type: DEVELOPMENT REAL-BLENDER CRASH-RECOVERY PROBE · New Blender processes: 2 · New Blender renders: 0
+
+C1 assembly/evidence commit `07e469ee1c52340f53d067a52fa8625390d34dbb` 与`origin/main` exact后，命令不再接受手写SHA，而是直接读取preflight的last-affecting commit `44d9efeb5b404a1998f8cc7171ca9c83b95e823a`。C1 first invocation完成一次B01真native Blender compile，wrapper/native PID为85253/85383；PRODUCTION_COMPILE stage receipt self-hash为 `adeae65286f4216c321d889b7a182f14c60351a6f3ca2214ce233d271adf1f03`，production receipt file SHA/self-hash为 `3bcb865194d7a810437d243206b0ddd84f614e7db1a2cd754c36eae5e41c1975` / `f58f607e0a3822528a4c1e40c797651665ffddb71a851badb26b9047c98dd855`。
+
+First invocation随后精确以exit code 86结束。此时ledger共8 events：sequence 7是compile `STAGE_COMPLETED`，sequence 8是`ORCHESTRATOR_FAULT_TRIGGERED`，boundary为`AFTER_COMPILE_RECEIPT_BEFORE_VERIFY_START`；VERIFY_RECEIPT仍PENDING且其receipt不存在，final receipt不存在。这证明fault不是在compile receipt durable前停机，也没有越过verify start边界。
+
+第二个独立orchestrator invocation使用`resume`：先后写入PLAN_BIND与PRODUCTION_COMPILE的`STAGE_SKIPPED_VERIFIED`，再启动一次preferred verifier及一次artifact-audit Blender，完成VERIFY、FINALIZE与terminal closure。Ledger从8增为17 events，`NATIVE_PROCESS_OBSERVED`计数在resume前后保持1→1，因此recovery additional native compile Blender精确为0；`PROCESS_STARTED`从1→2只增加verifier wrapper，`ARTIFACT_AUDIT_PROCESS_OBSERVED`从0→1。Verifier wrapper/current child/audit Blender PID为85438/85474/85621，verification 11/11与current receipt 19/19 checks通过，verification self-hash为 `9b85ee75dcb68b3b77a6f6a9d5fe64892ac778707bc6df95fef97eb2c6165355`，仍绑定原native PID 85383。
+
+Final receipt file SHA/self-hash为 `fd8364db1bd31f94d98ac8fde51a8285faa75643714f1af50b8792b58647bfc6` / `ca47deaa329da7f4a748bd554bb446e2d27ba4fd94358c5d501801a291cfb09b`，resource totals为1 production compiler、1 native compile Blender、1 successful compile、1 preferred verifier、1 current verifier child、1 artifact-audit Blender，total Blender starts 2，render/model/network/Docker为0。第三个closed-job resume返回`ALREADY_FINALIZED`，final file SHA与17-event ledger均byte-exact不变。Manifest、四份stage receipts、verification、production receipt、disk admission与final receipt共9个self-hash全部独立重算通过；Node syntax、targeted ESLint与diff check通过。
+
+该development probe现在支持B58的post-compile crash recovery与zero-additional-native-compile命题，但仍不是formal verdict。下一个最高价值缺口是B02真native Blender受控SIGTERM：failed attempt必须不可promote，新invocation只能使用fresh attempt/output重试compile，PLAN不得重跑。
