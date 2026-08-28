@@ -3047,6 +3047,14 @@ Spec SHA-256: `7eb76c00baad8cbc4f996ec7a139e6a3cb1fd90c1c02391a531d8c2637abd4be`
 
 Artifact: `specs/blender-owner-token-pass-probe.v0.1.json`.
 
+## J-202 · P1 预登记后零渲染 Blender RNA 开发探针
+
+Date: 2026-08-28 · Type: DEVELOPMENT API OBSERVATION · Blender renders: 0
+
+一个 factory-startup Blender 5.2 进程在绑定 OCIO 下只查询 RNA，没有建 formal root 或写实验 artifact。实测 `ViewLayer.use_pass_material_index` 与 `ViewLayer.aovs` 存在，AOV collection 暴露 `add/remove`，`ShaderNodeOutputAOV` 存在且输入为 `Color/Value`；新增 AOV 默认 type 为 `COLOR`，可显式设为 `VALUE`。`Material.pass_index` 的 hard range 为 0–32767。
+
+该观察只用于把已经预登记的 source tool 写到真实 API，不是 pass transport 证据。五个新工具随后通过 system Python 与 Blender Python 的 syntax compilation；尚未运行 preflight 或 render。下一步先把工具 bytes 固定到 Git commit，再允许 preflight 产生首个 output root。
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
