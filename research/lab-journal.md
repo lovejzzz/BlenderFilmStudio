@@ -4497,3 +4497,13 @@ Date: 2026-08-28 · Type: STABILITY BASELINE PREREGISTRATION · New Blender proc
 B59-G0冻结20个gates、24个mutation attacks、8 KiB stdout和64 KiB receipt上限。Formal runner只允许最多12个短时本地读取子进程，禁止Blender、render、浏览器自动化、网络、模型、Docker、清理、信号与重启。磁盘准入比B58更严：100 GiB核心reserve + 0.5 GiB B58 projection + 4 GiB稳定余量，共要求至少112,205,053,952 available bytes；不降低原production门槛。
 
 当前formal root和两个tool paths在预注册时均不存在，parent commit与`origin/main`均为 `098276e590f73cfef90906a80d41886c79c56adc`。下一动作只提交推送spec/protocol/journal，再实现有界runner和仅用Node built-ins的独立auditor。
+
+## J-332 · B59-G0有界runner与独立auditor实现冻结
+
+Date: 2026-08-28 · Type: STABILITY TOOL IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+在预注册commit `e98b569` 推送后，实现只读runner与不import runner的独立auditor。Runner SHA-256为 `fbfea40c3d4184b0dadd6ebaa7fc63ad5e3434a80b4f7893a6262bd54600e5b3`，270 lines / 12,489 bytes；auditor SHA-256为 `269a745a88d85150b88aa6300fa6c62c4b016c0ca610b6dbad1e7d2a50f23fc6`，297 lines / 17,645 bytes。
+
+Runner只使用bounded `git`、`memory_pressure`和`ps`读取子进程，直接从plist与`statfs`读取版本和磁盘；原始process table与252 KB crash report均不输出。Auditor独立重算receipt语义、自哈希、即时资源门并对24个resealed mutations逐项验证拒绝。两者均对stdout施加8 KiB上限，对receipt施加64 KiB上限，formal ceilings保持零Blender/render/browser automation/network/model/Docker/cleanup/signal/restart。
+
+Node syntax、zero-warning targeted ESLint和diff check通过；formal root仍不存在。下一动作只提交推送工具字节，再在临时clone中排练，不消费正式single-use root。
