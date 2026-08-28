@@ -3456,3 +3456,13 @@ Date: 2026-08-28 · Type: PILOT-INFORMED RIGID FIXTURE CALIBRATION PREREGISTRATI
 这是 pilot-informed calibration，不是 blind holdout。即使 derived，也只授权另行预登记 fresh-render test；不能修复 D12.12-H1、改变 D12.13-D1 或进入 compiler。Spec SHA-256: `e123b80fdba40c7e7e396e1aad149573e1e123c57198a21fa8af944320d7e4c3`。
 
 Artifact: `specs/blender-material-owner-rigid-directional-calibration.v0.1.json`。下一动作必须先提交并推送 exact spec，然后才实现五个 C2 tools；formal root 在 tool-freeze commit 前必须不存在。
+
+## J-237 · D12.14-C2 五工具待冻结检查点
+
+Date: 2026-08-28 · Type: FORMAL TOOL IMPLEMENTATION CHECKPOINT · New Blender renders: 0
+
+预登记 commit `d1f4d9a` 之后才创建五个 C2 tool paths：Blender rigid probe、独立 scalar Python/Node 3D oracles、independent auditor 与 six-process runner。两套 oracle 都从 world-space camera rays 开始，独立执行前景/背景 bounded ray-plane nearest visibility、current local point 到 previous rigid transform、previous owner raster、radius-2、bilinear floor 与五类 directional masks；不 import 旧 C1 prototype 或彼此实现。
+
+`/tmp` smoke 对冻结的 500 candidates 达到 candidate table 与 selected masks byte exact，table SHA-256 为 `d92fc7a9ec26ce0186f0879c209d715d2281d5d715e1171b7cefbb1d48a7ba5f`。两者机械选择相同三项：`TOP-000153`（target/neighborhood 187，non-target 0）、`BOTTOM-000069`（189/189，0）、`NEITHER-000113`（15,113/15,113，0）。三次真实 Blender 5.2 factory-empty probe 均保持同一 foreground mesh datablock、local-vertex hash 与 `[1,1,1]` scale；maximum projection errors 分别为 `1.0908596152603423e-5`、`1.2781884947798972e-5`、`5.573793135482674e-6 pixel`，均低于预登记 `3.0517578125e-5`。NEITHER RNA rotation error为 `3.003596038553269e-9`，world-corner error为 `5.4045198982777265e-8`；其余两项为 0。Render Result、EXR、render/model/network calls 均为 0，临时目录已清除。
+
+五工具 SHA-256（按 spec 顺序）为 `b98150ec8dbd85acf3076af427e8656039651dd93ab62ab0ea9af429e75c9b39`、`43693be502e89ed35d9083798a086590643fde3ae354e7a352fb4b767b503e04`、`2344c46247f650c1ea3f4640c85dd98acd4dc5fe7199c49ffa680e7d5ab48dff`、`d745e5e00d81733bf55bdd1725a3f075cab65c0b766417953aa5b27a75421eda`、`35b7351bb0313fbcd80d496ea71b61842a87457dba9a91d64301ac03e0ef95c5`。固定 Python/Node syntax checks 通过；formal root 仍不存在。下一动作必须将这些 exact bytes 与本 journal entry 提交为 tool-freeze commit，随后 runner 才可创建正式输出。
