@@ -4603,3 +4603,13 @@ Release commit `9ca67eba93e6937657b1d8b34519d8718961c5e2` 与`origin/main` exact
 Final verdict为可信`BLOCKED_HOST_STABILITY`，19/20 gates。磁盘已通过：available 112,269,066,240 bytes，比不变门槛高63,045,632 bytes。唯一失败为`CODEX_TREE_RSS`：5,069,733,888 bytes，超过4 GiB ceiling 774,766,592 bytes；system-wide memory free仍85%，1 main、4 renderers、最大renderer 1,191,804,928 bytes。In-app browser检查为0 tabs，没有可关闭对象。
 
 当前安全断点完整：全部变化与证据已落盘，未运行B58/Blender。不得杀承载本任务的renderer或在同一失败root重试。下一动作需要用户重启Codex；重启后先预注册fresh R2 post-restart readmission，再运行同一20-gate/24-attack有界链。只有R2通过才进入重复稳定性观察阶段。
+
+## J-343 · B59-G0-R2 post-restart readmission预注册
+
+Date: 2026-08-28 · Type: POST-RESTART READMISSION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+自动续作时只读确认Codex尚未重启：main PID仍为92848，local start `Fri Aug 28 10:55:25 2026`，已运行约3小时35分；Codex tree RSS 4,687,347,712 bytes，仍超4 GiB ceiling 392,380,416 bytes。磁盘available 112,269,209,600 bytes，仍比稳定门高63,188,992 bytes。没有据此复用R1 root或宣称post-restart。
+
+R2冻结fresh root `experiments/codex-host-stability-post-restart-readmission-v0-1`及restart boundary：exactly one current main、current PID必须不同于92848、旧PID必须不存在。原20 gates及全部资源阈值不变；`CODEX_MAIN_PROCESS_COUNT`在R2中同时承载restart boundary。新增A25 `RESTART_BOUNDARY_MUTATION`，因此R2要求25/25 attacks；baseline/R1仍保持原24 attacks语义。
+
+下一动作先提交推送R2 spec/protocol/journal，再实现main PID投影、独立replay及conditional A25。旧PID仍存在时不得运行R2 formal root。
