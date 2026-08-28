@@ -3580,3 +3580,19 @@ Date: 2026-08-28 · Type: FAILURE EVIDENCE PRESERVATION COMPLETE · New Blender 
 完整 partial root、machine-readable failure record、研究说明与 J-246 已在 commit `6dec6a3ede714d56fcddc39dd9841ada0c8de827` 推送到远端 `main`。Formal partial-root Git tree 为 `7c29757a99d197a56641dde70338d1a73e6441aa`；`failure.json` file SHA-256 为 `8a5caef198ee65ac35a932f26d2a74604fff833ce978407c1a6526132fa6f953`，内部 self-hash 为 `6629e437b37bb4c7b10be22967a57f978830d515d680cac173c7d912b8ddaef3`；研究说明 file SHA-256 为 `11c67946936d26661a4c214d6bb5e3025c560011dc7933e624c4f4c09fc666ce`。
 
 H1 至此封闭，不再修改或重跑。下一阶段必须使用新 ID，把 270-witness NEITHER 观察和 EXR metadata variation 当作已披露 pilot inputs，先寻找仍满足 1,024 witness minimum 的 fresh raster/transform；在新 spec 提交前不得创建修复工具或新 formal root。
+
+## J-248 · D12.14-H1 工具失败研究页双站点发布与重启检查点
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE / RESTART-SAFE CHECKPOINT · New Blender renders: 0
+
+H1 页面以 `NO SCIENTIFIC VERDICT` 为首要结论，公开呈现 12 次真实 Blender 5.2 Cycles renders、54 个成功 children、第 55 个冻结 analyzer 的 `KeyError: 'subdivisions'`、未启动 audit，以及 repeat EXR container bytes 与 decoded pass arrays 的不同身份语义。页面没有把 TOP/BOTTOM 的非决定性数值或 NEITHER 的 zero acceptance 冒充正式 verdict；它明确说明相同 experiment ID 不得修复后重跑。
+
+站点 source commit `72f779fde27d3e22eddbbdd7378c24ec165fdd70` 已推送。新页、C2 邻接页与首页定向 ESLint 为 0 errors；Vinext/Sites production build 成功并发现 83 个 CDN warmup paths；GitHub Pages static build 成功生成 85/85 pages。GitHub Pages workflow `33166896578` 的 build 与 deploy 均 completed/success，公开首页与精确 H1 route 均返回 HTTP 200。
+
+Sites 发布前复核 current user role 为 owner、access mode 为 custom、唯一 allowed account 为当前 owner、external visitors 为 0、workspace/tenant groups 均为空。同一 source commit 被保存为 Sites version 76；archive content hash 为 `sha256:4d6c944f9ad88d91d4536f34f37f28ba35eefc93aaeafe3fb628ffbd21c4a950`，deployment `appgdep_6a917012b9d881919e4cc6cde1e80fac` succeeded。匿名访问 owner-only 精确 route 返回 HTTP 401。按发布规范未执行未请求的截图、DOM、点击或视觉 QA。
+
+公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-owner-rigid-directional-render-holdout-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-owner-rigid-directional-render-holdout-v0-1/`。
+
+重启后的精确续接顺序已经冻结为：先对 H1 partial arrays 做只读取证，分解 NEITHER 270 witnesses 的 reason-code、owner、Vector、current Depth 与 previous-support 损失；再用全新实验 ID 预登记 H2。H2 至少增加 analyzer-on-probe-shaped-report schema smoke、canonical decoded-pass digest、容许且单独报告的 container metadata 差异、可在 child failure 时仍写 immutable failure execution/receipt 的 finally-path，并选择真实 pass pilot 支持至少 1,024 个 NEITHER witnesses 的 fresh raster/transform。新 spec 提交前不得创建 H2 tool bytes、output root 或 formal render。之后才返回主目标 SceneSpec → immutable BuildPlan → Blender 5.2 compiler 的 B01/B02 净构建复现。
+
+用户原有未提交内容 `README.md` 与三份 2026-08-26 Physis/Remainder Room research drafts 均未纳入本检查点，也未被改写。
