@@ -3502,3 +3502,15 @@ Checkpoint 恢复后完成 `/blender-material-owner-rigid-directional-calibratio
 站点 proxy 重放首先暴露一个可复现性缺口：PNG 已 byte exact，但 exporter 把临时输出目录写入 manifest 的 `outputs[].uri`，导致相同证据在不同目录产生不同 manifest hash。修复将该字段固定为公开逻辑 URI，不改变任何像素、source URI、source hash 或分类；随后从新临时目录重放得到 PNG SHA-256 `5a1d12e39178922344cc268c41ef352cab542d3afca2948c8fa3cf4100e6e9d7` 与 manifest SHA-256 `35906b4956eaf08ac7f7a15aa8f44a2436e856de4c168632b9af5181f8aef92a`，两者均与 checkpoint 资产逐字节一致，manifest internal hash 仍为 `2af904965f56cddebb04cd5044887bda24aa9929bc46955f29f829a8c217b669`。
 
 新页、首页和 D12.13 页定向 ESLint 为 0 errors；导出器在 Blender 5.2 bundled Python 下 syntax check 通过；精确 local route 返回 HTTP 200。Vinext/Sites production build 成功并发现 82 个 CDN warmup paths；GitHub Pages static build 成功生成 84/84 pages，新 route 被确认 static。按发布规范未执行未请求的截图、DOM、点击或视觉 QA。下一动作是把 exact validated source 合入 `main`，等待公开 Pages exact route 成功，再将同一 source commit 发布到经复核仍为 owner-only 的 Sites。
+
+## J-241 · D12.14-C2 刚体校准页双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
+
+Validated source commit `9ed2e59733d4fd1a5f34c3cba45e98cf59300b5e` 已 fast-forward 合入并推送 `main`。GitHub Pages workflow `33164288341` 的 build 与 deploy jobs 均 completed/success，公开精确 route 返回 HTTP 200。
+
+Sites 发布前再次复核 current user role 为 owner、access mode 为 custom、唯一 allowed account user 为当前 owner、external visitors 为 0、workspace/tenant groups 均为空。随后将同一 source commit 推送到受控 source repository，以成功的本地 Vinext build archive 保存 version 75，并完成 private deployment `appgdep_6a91666a1540819193f8b13c3f7271ca`。匿名访问精确 route 返回 HTTP 401；本地开发服务与临时 archive 均已关闭或清除。
+
+公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-owner-rigid-directional-calibration-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-owner-rigid-directional-calibration-v0-1/`。
+
+下一阶段不再修改 calibration 结论。必须使用新 experiment ID 预登记 fresh Blender render holdout：固定 C2 导出的三条 world transforms，但重新冻结 Material/Object tokens、Generated/Vector/Depth signals、EXR outputs、两次 clean repeats 与 quality/directional/fallback gates；calibration masks 只能用于 fixture construction，不能充当 confirmatory denominator。
