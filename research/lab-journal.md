@@ -3572,3 +3572,11 @@ Passing preflight commit `5c6bacad87c9db72078ef4b7497d2da5bd929081` 后，runner
 非决定性取证得到：TOP 每次 189/189 accepted、quality max `2.4020671844482422e-5`；BOTTOM 每次 189/189、quality max `1.9103288650512695e-5`；两者 risk-underbound RGB samples 为 0。NEITHER 每次 accepted 0，但正式 witnesses 仅 270，低于冻结 minimum 1,024。它们只能指导新 ID 的 pilot-informed 设计，不能补造 H1 verdict。
 
 Machine failure self-hash: `6629e437b37bb4c7b10be22967a57f978830d515d680cac173c7d912b8ddaef3`。Artifact: `research/2026-08-28-b52-d12-14-h1-rendered-holdout-frozen-tool-failure.md`。下一步是提交并推送完整 partial root 与 failure record，再预登记新 experiment ID；新 spec 必须包含 analyzer-on-probe schema smoke、canonical decoded-pass repeat identity、fresh signal/tokens/output，以及 runner failure receipt finally-path。
+
+## J-247 · D12.14-H1 失败证据树已封存并推送
+
+Date: 2026-08-28 · Type: FAILURE EVIDENCE PRESERVATION COMPLETE · New Blender renders: 0
+
+完整 partial root、machine-readable failure record、研究说明与 J-246 已在 commit `6dec6a3ede714d56fcddc39dd9841ada0c8de827` 推送到远端 `main`。Formal partial-root Git tree 为 `7c29757a99d197a56641dde70338d1a73e6441aa`；`failure.json` file SHA-256 为 `8a5caef198ee65ac35a932f26d2a74604fff833ce978407c1a6526132fa6f953`，内部 self-hash 为 `6629e437b37bb4c7b10be22967a57f978830d515d680cac173c7d912b8ddaef3`；研究说明 file SHA-256 为 `11c67946936d26661a4c214d6bb5e3025c560011dc7933e624c4f4c09fc666ce`。
+
+H1 至此封闭，不再修改或重跑。下一阶段必须使用新 ID，把 270-witness NEITHER 观察和 EXR metadata variation 当作已披露 pilot inputs，先寻找仍满足 1,024 witness minimum 的 fresh raster/transform；在新 spec 提交前不得创建修复工具或新 formal root。
