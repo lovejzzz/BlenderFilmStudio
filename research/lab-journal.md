@@ -4295,3 +4295,13 @@ PLAN_BIND checkpoint commit `9ad4804db0b7461b735dd793a26e91c0f7388870` 与`origi
 所有probe仍只使用temporary zero-Blender roots。Reducer probe证明FAILED COMPILE-1后可用new COMPILE-2进入STARTED，同时PLAN_BIND保持COMPLETED；missing preflight probe在任何compile/process event前拒绝spawn，ledger保持3 events且compile PENDING；synthetic dead-wrapper/no-native-identity probe精确返回`REFUSE_RECOVERY`。Node syntax、targeted ESLint和diff check通过，temporary roots已删除，三个B58 formal roots仍不存在。当前filesystem available为109,272,715,264 bytes，扣除projected write后高于100 GiB reserve约1.36 GiB。
 
 本checkpoint尚未用真实production preflight或Blender验证process-tree observation与fault path，不是tool-freeze或B58 verdict。下一动作只提交推送代码与本entry；随后创建、提交并推送一组独立development B01 production preflight/job request，确认disk门后才允许一次真实compile-stage probe。
+
+## J-314 · B58 B01 compile-stage development preflight接受
+
+Date: 2026-08-28 · Type: DEVELOPMENT PREFLIGHT EVIDENCE · New Blender processes: 0 · New Blender renders: 0
+
+Compile-stage candidate commit `4fedacbc78cd3f940ccabca87d606130b4c04a48` 与`origin/main` exact后，为独立development B01 cell调用现有preferred `preflight:production`一次。Preflight绑定SceneSpec、fresh output `experiments/restart-safe-production-orchestrator-development-b01-output-v0-1`与同一pushed release commit，返回ACCEPTED；plan hash为 `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`，Blender/render/model/network/Docker全部0。
+
+Preflight file SHA/self-hash为 `2c7012078f1a325612c0abc2f5e4e2a50d0f19a430ca9c9cb79ad17a777c6b8b` / `c82ba7adcb3d2cd2b888a02c1020b773b1765a291f8ebcd15b56300af20240fb`。真实available为109,405,233,152 bytes，扣除536,870,912 projected write后为108,868,362,240 bytes，高于107,374,182,400-byte reserve。Self-hashed job request file SHA/requestHash为 `fd7fe9d3c28d0f3ede47b87be00d86e2da3d85cbfd641ade24c2f425191e4314` / `2a07ae38d430a9dcc5e7515178ced80677984d59c89aefd4a65b57c885c017a4`，冻结one normal compile candidate、disjoint preflight/production-attempt/output/job roots及C1资源口径。
+
+Production attempt、output与job roots继续全部不存在，三个official B58 roots也不存在。下一动作只提交推送development preflight、request与本entry；远端exact后，使用该evidence commit调用`job:production start --development-stop-after-compile`一次。该probe预计启动1 production wrapper与1 native compile Blender、0 verifier/audit Blender、0 render；任何native identity observation或receipt binding失败都保留为development counterexample，不在原root修补。
