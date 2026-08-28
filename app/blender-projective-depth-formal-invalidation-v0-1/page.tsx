@@ -3,6 +3,7 @@ import Link from 'next/link';
 import preflight from '../../experiments/blender-material-owner-projective-depth-holdout-preflight-v0-1/preflight.json';
 import failure from '../../experiments/blender-material-owner-projective-depth-holdout-formal-invocation-failure-v0-1/failure.json';
 import failureReceipt from '../../experiments/blender-material-owner-projective-depth-holdout-formal-invocation-failure-v0-1/receipt.json';
+import admissionResult from '../../experiments/formal-runner-admission-path-totality-v0-1/results.json';
 
 const canonical = 'https://lovejzzz.github.io/BlenderFilmStudio/blender-projective-depth-formal-invalidation-v0-1/';
 
@@ -28,10 +29,10 @@ const repo = 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/';
 const gates = preflight.evidenceChecks;
 
 const admissionCases = [
-  ['RELATIVE PATH', 'repo/path', '未覆盖', 'formal invocation 的实际输入形状'],
-  ['ABSOLUTE PATH', '/repo/path', '内部假定', 'runner 的 relative_to 基准'],
-  ['FRESH OUTPUT', 'absent → create', '未到达', 'formal root 保持不存在'],
-  ['FAILURE RECEIPT', 'finally boundary', '未到达', '错误发生在 try/finally 之前'],
+  ['RELATIVE PATH', 'repo/path', 'B53-E1 · PASS', '与dot-segment、absolute归一为同一identity'],
+  ['ABSOLUTE PATH', '/repo/path', 'B53-E1 · PASS', '不再依赖caller spelling或host prefix'],
+  ['FRESH OUTPUT', 'absent → return', '17 / 17 exact', 'admission返回target但不物化formal output'],
+  ['FAILURE RECEIPT', 'attempt ledger', '14 / 14 bound', '每个拒绝在formal work前留下failure与receipt'],
 ] as const;
 
 export default function ProjectiveDepthFormalInvalidationPage() {
@@ -124,6 +125,7 @@ export default function ProjectiveDepthFormalInvalidationPage() {
         {admissionCases.map(([name, shape, status, note]) => <article key={name}><span>{name}</span><strong>{shape}</strong><code>{status}</code><p>{note}</p></article>)}
       </div>
       <div className="d1214h2-rule"><span>NEW INVARIANT</span><strong>admission must be total before render authorization</strong><p>relative/absolute equivalence · containment · fresh root · pushed evidence lookup · failure receipt reachability</p></div>
+      <div className="d1214h2-followup"><span>OBSERVED NEXT EXPERIMENT</span><strong>{admissionResult.gatePassed}/{admissionResult.gateTotal} gates · B53-E1 supported</strong><p>H2仍保持null verdict；新的B53-E1只验证独立formal admission instrument，不追溯修复旧实验。</p><Link href="/formal-runner-admission-totality-v0-1">打开完整17-case证据 →</Link></div>
     </section>
 
     <section className="section d1214h2-core" id="core">

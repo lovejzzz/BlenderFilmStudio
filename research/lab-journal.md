@@ -3820,3 +3820,13 @@ P01 relative、P02 dot-segment与P03 absolute均ACCEPT，三者canonical evidenc
 formal-start、execution、audit、results、receipt的file SHA-256依次为 `13d1e6912927f2789b340ad85b50451fc504c0d8399d16101dfb323c78569e22`、`f1c8ac9177b2cd27bd7ba7dd41791f4dcdb3c4175c2c3b6e0b6f5dafed48ac31`、`bd330841231065c1217f7eda3e02892788b737c5e5eb6fe3953e284c108f6968`、`a5e58a5d925a1e3222ba5ee51f4b4d4db973ffcdef0dac64e6d1c2c4bdfb0c48`、`e8655510dd49b3522af2ebc7b57b3c8a512bb3c55a48efc3950c9aa9c38da68e`；对应self-hashes为 `9c021b95836becdba9f471d740e0871a547b3f10d88d96c420bc7296a5f305c0`、`de07aa440861288ad40709e28b95e9e92d160b51897e513a4c71adc626493e63`、`fe270af055104a20e49194cff2d5833c600348a6fc52a573504c9cb28162241a`、`1b5d1dfd36de6689e2692c6fee3e3f853ca278523917c53aba61bbbd932ce33f`、`82169fc5a46681c4ba1b3a995e574eb372809eceb3f96047a284a2d54d5880b9`。
 
 正式调用后另做一次不import formal tools的只读离线复核；首个inline命令有未闭合括号并在解析阶段退出，未读取或修改evidence。修正后的命令验证8/8顶层self-hash、51/51 case self-hash、17/17 case file bindings、17/17 frozen outcome/reason、17/17 output unchanged、tool/result/receipt bindings、fixture deletion和no-invalidation全部为true。B53-E1同一ID现已封闭，禁止修复或重跑。下一动作只提交推送exact formal root与本entry；随后发布研究页，并在任何production orchestration adoption前预登记integration且重跑B01/B02 structure regressions。
+
+## J-269 · B53-E1 研究页完成本地验证
+
+Date: 2026-08-28 · Type: WEBSITE SOURCE VALIDATED · New Blender renders: 0
+
+formal evidence commit `ed65023` 推送后，新增 `formal-runner-admission-totality-v0-1` 研究页。页面直接读取frozen spec、audit、results与receipt，展示B42→H1→H2→B53失败链、relative/dot-segment/absolute三路径汇入同一canonical identity、14个exact negative reasons、attempt→failure→receipt ledger、14个gates、34个semantic attacks、224个Git children及全部forbidden operation为0。Claim boundary明确保留H2 null verdict，并要求未来production adoption重新预登记和复跑B01/B02 structure regressions。
+
+首页新增 `B53-E1 准入总路径` tab；H2失效页把此前future admission contract更新为observed B53-E1 follow-up，但没有更改H2的null verdict。GitHub Pages sparse checkout只加入页面实际import的spec、audit、results与receipt。新页、H2页和首页定向ESLint为0 errors；React best-practices复核确认新增页保持纯Server Component，无hooks、client data waterfall、第三方bundle或hydration state。
+
+本地dev server上新页、H2页与首页exact routes均返回HTTP 200。Vinext/Sites production build成功，发现86个CDN warmup paths；GitHub Pages Next static build成功生成88/88 pages，新route明确为static。按Sites验证边界，没有执行截图、DOM、点击、resize或视觉QA。下一动作只提交推送本页、CSS、导航、Pages workflow与本entry；随后确认GitHub Pages exact source commit，再以owner-only access发布同一source commit到Sites。
