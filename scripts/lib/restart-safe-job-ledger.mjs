@@ -315,6 +315,28 @@ export async function verifyStageCompletionReference(jobRoot, event) {
   return { path, receipt: value, sha256 };
 }
 
+export async function verifyAttemptTerminalReference(jobRoot, event) {
+  if (!['STAGE_FAILED', 'STAGE_ABANDONED'].includes(event.eventType)) {
+    throw new RestartSafeStateError('STAGE_EVENT_TYPE', 'Attempt terminal verification requires STAGE_FAILED or STAGE_ABANDONED');
+  }
+  const reference = event.payload?.receipt;
+  if (!reference || typeof reference.uri !== 'string' || !HASH_PATTERN.test(reference.sha256 ?? '') || !HASH_PATTERN.test(reference.receiptHash ?? '')) {
+    throw new RestartSafeStateError('ATTEMPT_RECEIPT_REFERENCE', `Malformed attempt receipt reference for ${event.stageId}`);
+  }
+  const path = await resolveContainedPath(jobRoot, reference.uri);
+  const { value, sha256 } = await readJson(path);
+  const expectedStatus = event.eventType === 'STAGE_FAILED' ? 'FAILED' : 'ABANDONED';
+  if (value.schemaVersion !== 'bfs.restartSafeProductionAttemptReceipt.v0.1'
+    || sha256 !== reference.sha256 || value.receiptHash !== reference.receiptHash || !validSelfHash(value, 'receiptHash')) {
+    throw new RestartSafeStateError('ATTEMPT_RECEIPT_REFERENCE', `Attempt receipt reference mismatch for ${event.stageId}`);
+  }
+  if (value.jobId !== event.jobId || value.stageId !== event.stageId || value.attemptId !== event.attemptId
+    || value.status !== expectedStatus || value.promotable !== false) {
+    throw new RestartSafeStateError('ATTEMPT_RECEIPT_SEMANTICS', `Invalid ${expectedStatus} receipt semantics for ${event.stageId}`);
+  }
+  return { path, receipt: value, sha256 };
+}
+
 export async function deriveJobState(jobRoot) {
   const { manifest, sha256: manifestFileSha256 } = await readManifest(jobRoot);
   const ledger = await readLedger(jobRoot, manifest.jobId);
@@ -335,8 +357,10 @@ export async function deriveJobState(jobRoot) {
     } else if (['STAGE_FAILED', 'STAGE_ABANDONED'].includes(event.eventType)) {
       const attempt = stage.attempts.find(item => item.attemptId === event.attemptId);
       if (!attempt || attempt.status !== 'STARTED') throw new RestartSafeStateError('ATTEMPT_TRANSITION', `Invalid ${event.eventType} transition for ${event.stageId}`);
+      const terminal = await verifyAttemptTerminalReference(jobRoot, event);
       attempt.status = event.eventType === 'STAGE_FAILED' ? 'FAILED' : 'ABANDONED';
       attempt.terminalEventHash = event.eventHash;
+      attempt.terminalReceipt = terminal;
       stage.status = attempt.status;
     } else if (event.eventType === 'STAGE_COMPLETED') {
       const attempt = stage.attempts.find(item => item.attemptId === event.attemptId);

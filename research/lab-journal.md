@@ -4283,3 +4283,15 @@ B58-C1 correction commit `fc01f6fb74d3ad0517d27b2639e1bc057a3d44cb` 与`origin/m
 Temporary B01 development job从fresh root创建manifest与`JOB_CREATED`，PLAN_BIND两次编译得到byte-identical plan hash `316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf`，落盘two plan artifacts、completed stage receipt和3-event ledger。随后独立resume重新验证receipt，只追加`STAGE_SKIPPED_VERIFIED`，ledger变为4 events；PLAN_BIND attempt count仍exactly 1，child/Blender/render/model/network/Docker均0。两次status只读且未改变ledger。
 
 `node --check`、targeted ESLint与`git diff --check`通过，temporary request/job root已精确删除，三个formal roots继续不存在。本文件和library仍未冻结。下一动作先提交推送该checkpoint，再实现PRODUCTION_COMPILE stage的bounded child capture、native fault observation、failed-attempt quarantine与completed receipt；在development preflight存在前不得启动Blender。
+
+## J-313 · B58 PRODUCTION_COMPILE状态机与orphan拒绝checkpoint
+
+Date: 2026-08-28 · Type: COMPILE-STAGE IMPLEMENTATION CHECKPOINT / ZERO-BLENDER DEVELOPMENT · New Blender processes: 0 · New Blender renders: 0
+
+PLAN_BIND checkpoint commit `9ad4804db0b7461b735dd793a26e91c0f7388870` 与`origin/main` exact后，扩展ledger library和`job:production` candidate。当前SHA-256分别为 `0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13` / `1b1d4c4dde6a7bd5690524cbedadd151bb8281cbcbd993a2599510ef42f46cb3`。新增failed/abandoned attempt receipt cross-binding、registered root disjointness、accepted production preflight/fresh attempt/output spawn gate、4 MiB bounded stdout/stderr hash capture、wrapper/native process identity、controlled SIGTERM hook、failure quarantine、fresh candidate retry、basic B57 receipt/disk/current-receipt/PID binding及post-compile exit-86 boundary。
+
+审读中拒绝了“只记录npm wrapper PID”的初始实现方向：budget supervisor让native Blender使用独立process group；若wrapper先死，Blender可能成为orphan，单看wrapper会产生duplicate compile风险。Candidate现要求每次compile在等待terminal前先持久化native Blender PID、process start identity、executable与argv hash。恢复时wrapper或native任一exact process仍live都返回`WAIT_LIVE_PROCESS`；PID reuse/change或dead wrapper但缺少native identity均`REFUSE_RECOVERY`，不得把歧义当dead并spawn新attempt。Successful production receipt中的native PID必须回绑同一observed PID。
+
+所有probe仍只使用temporary zero-Blender roots。Reducer probe证明FAILED COMPILE-1后可用new COMPILE-2进入STARTED，同时PLAN_BIND保持COMPLETED；missing preflight probe在任何compile/process event前拒绝spawn，ledger保持3 events且compile PENDING；synthetic dead-wrapper/no-native-identity probe精确返回`REFUSE_RECOVERY`。Node syntax、targeted ESLint和diff check通过，temporary roots已删除，三个B58 formal roots仍不存在。当前filesystem available为109,272,715,264 bytes，扣除projected write后高于100 GiB reserve约1.36 GiB。
+
+本checkpoint尚未用真实production preflight或Blender验证process-tree observation与fault path，不是tool-freeze或B58 verdict。下一动作只提交推送代码与本entry；随后创建、提交并推送一组独立development B01 production preflight/job request，确认disk门后才允许一次真实compile-stage probe。
