@@ -206,6 +206,7 @@ export async function runB57Preflight(argv) {
     preregistrationCommit: PREREGISTRATION_COMMIT,
     parent,
     toolFreeze,
+    toolHashes: toolFreeze.hashes,
     suite,
     plans,
     disk,

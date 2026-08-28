@@ -4157,3 +4157,11 @@ Date: 2026-08-28 · Type: ISOLATED FORMAL-PREFLIGHT REHEARSAL · New Blender pro
 Candidate commit实际SHA为 `2e5cb9cb975fa4751c9c786ecb3a691cd6cd50e6`。首轮命令却再次手写了错误full SHA，meta preflight因此9/12 REJECTED：tool-freeze、release/tool freeze与five production preflights三项失败；五份nested production preflight全部在release identity层拒绝，Blender=0。Rejected meta file SHA/self-hash为 `eaaae73c8f436f6cbf7dad58f009cc32a4ec35059b4b9bbfcf2d3058adebfed5` / `48ffbe4df96f7282acb26bf68fde97552161b7eba844e9e7aaf9bbe97add633c`。该root保留，不在原ID修补。
 
 C1使用Git读取的exact SHA与三组fresh roots后，B57 meta preflight 12/12 ACCEPTED；B56 parent、v0.1/v0.2 releases、31 frozen files、三条B57 tools、aliases、SceneSpec 22/22、B01/B02 BuildPlan pair、real disk与one-byte boundary全部exact。LOW-DISK、B01-A/B、B02-A/B五份preferred production preflight均ACCEPTED且zero Blender。C1 meta file SHA/self-hash为 `2fd94d2f370d1d641b0ee73492b8b845632077315cafe5b58abcd8590f79af15` / `3a20692c0af81fba792aa96dc31704fe4c0fdfb24d579d910ddda3829df89077`。正式B57 roots继续不存在。下一动作先推送rehearsal preflight evidence，再用C1 bound attempt/formal roots运行完整single-use runner；该运行仍是rehearsal，不是official B57。
+
+## J-301 · B57 formal rehearsal在meta tool-hash接口前拒绝
+
+Date: 2026-08-28 · Type: REHEARSAL ADMISSION FAILURE / MECHANICAL CORRECTION · New Blender processes: 0 · New Blender renders: 0
+
+C1 accepted rehearsal preflight evidence commit `eb72f8d835e5c5a6293573106c843cd0b26ff14f` 与 `origin/main` exact后，single-use runner创建sequence-1 meta attempt，但unchanged `admitFormalRun()`立即返回`TOOL_HASH`，formal root保持不存在、Blender=0。原因是B57 meta preflight只保存了`toolFreeze.hashes`，而既有admission contract要求同一映射同时投影到顶层`toolHashes`；因此不是JIT磁盘假设或production compile失败。
+
+Rejected attempt/failure/receipt file SHA分别为 `b895eee2904879954f7b0c2e9ad6bf739d05f45fbbcb0dd101fb7fcc34fdad40`、`0138f9b00a130b8e2bd6c899db4ef72820921df4c4716ff15b95ef4e7e3c98db`、`d82065faa6a767ac60c0527d11d80480463359ed53af93b3fe02327bbadb8a5b`，失败root保留。唯一correction是在meta preflight body增加`toolHashes: toolFreeze.hashes`，不改变任何hash集合、实验门、生产release或runner/auditor语义。该修改使preflight tool byte变化，因此旧C1 preflight不得复用；下一步提交推送correction与failure evidence后，必须使用C2三组fresh roots重新运行全部五份zero-Blender preflights。
