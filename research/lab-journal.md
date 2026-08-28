@@ -3067,6 +3067,20 @@ Date: 2026-08-28 · Type: PREREGISTERED PREFLIGHT · Formal Blender renders: 0
 
 Artifact: `experiments/blender-owner-token-pass-probe-preflight-v0-1/preflight.json`.
 
+## J-204 · P1 八次 render 成功，但冻结 analyzer 的正交投影错误
+
+Date: 2026-08-28 · Type: RETAINED FORMAL ANALYSIS FAILURE · Real Blender renders: 8
+
+八个 Blender 5.2 Cycles CPU source children 全部 exit zero，四个预期 EXR parts 都存在，data-pass arrays 在显示设置与净进程 repeats 间 byte exact。第九个 child analyzer 写出 8/9、24/24 的结果后 exit one；runner 因而保留 formal root 与 failure receipt，未启动 audit。
+
+失败不是 pass 缺失，而是 analyzer 把 landscape orthographic `ortho_scale=8` 错当可见高度。Blender 的实际可见宽度为 8、高度为 `8×127/193`；raw Material Index 的真实前景 bbox 是 x `[43,131]`、y `[23,97]`，即 89×75 pixels，精确符合修正公式。错误 background mask 因此吞入 F0 的 3,100 个 Material Index 23 pixels 与 3,433 个 AOV 0.75 pixels。
+
+第二个工具缺陷是 `projection_ok` 把“两个机制都 viable”写成 measurement consistency 条件，使任何单候选或负 verdict 都无法通过。原 result 的 `NO_TESTED_OWNER_TOKEN_PASS_VIABLE` 不可推广。下一步必须先提交整个失败 root，再以新 spec/tool/output 做只读机械修正；禁止重渲染或改变任何 gate。
+
+Result SHA-256: `e5916494d80dca03b6ba039817c49ad42a4365e67473f7afdb0ef77c622ae903`; failure SHA-256: `e6b5f47cf46a61c36acff3ab0a8d3f55c0929e2fe3f43eb22273939f62696591`; failure hash: `45eb5d34ed973402b316eb52ed9b550de58b0d2d16739dd60a733a247625733b`。
+
+Artifact: `research/2026-08-28-b52-d12-10-p1-formal-analysis-failure.md`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
