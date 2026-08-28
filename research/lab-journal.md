@@ -2959,6 +2959,18 @@ Evidence hash: `cb9f68251a0016634a0580decc5f898732172eee9eddd560a42dccb493490f16
 
 Artifact: `research/2026-08-28-b52-d12-9-h1-motion-aware-curvature-risk-holdout-result.md`.
 
+## J-195 · 标量阈值反事实不能同时修复覆盖与质量
+
+Date: 2026-08-28 · Type: POST-HOC FAILURE LOCALIZATION · New Blender renders: 0
+
+独立脚本绑定正式 result/audit/receipt SHA 后，从 R1 raw adapter 与 Q30 payload 重算每个 support-eligible pixel 的 bilinear error，并寻找每个 cell 刚好达到 97% coverage 的最小 counterfactual threshold。该分析只解释正式失败，不改 verdict、不选择新阈值，也不把 H1 数据重新称为 holdout。
+
+Rotated sweep 需要再接纳 253 个 risk-rejected pixels，最小 Q30 threshold `140559`，但 accepted RGB max 随即达到 `3.260374e-5`，超过冻结的 `2^-15`。Same-index crossing 只差 18 pixels，却要到 Q30 `31569966` 才达到 97%；RGB max 为 `1.230001e-3`，约 40 倍质量上限。Camera 与 static 在原阈值已经通过。
+
+因此当前证据反对“调大一个 scalar threshold”这条修复。下一假设转向 compiler-controlled temporal owner identity 与 target/support/interior 三个 typed domains；同时保留 accepted/registered 总覆盖，防止缩小 denominator 后虚构成功。Analysis hash: `56a04de570ca33dc271bc7d4a62400bb0fa98bcb3760885435c77df3ae79d516`。
+
+Artifact: `experiments/blender-motion-aware-curvature-risk-holdout-coverage-analysis-v0-1/results.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:

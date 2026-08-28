@@ -87,3 +87,5 @@ Object Index alone cannot distinguish two analytic owners that deliberately shar
 - Receipt hash: `c794bd2c79a584b6ade138d8b09d4bc516f68778c1bf8f6c6d29926424cf3fe8`
 
 Machine evidence: `experiments/blender-motion-aware-curvature-risk-holdout-v0-1/`.
+
+Post-hoc coverage analysis: `experiments/blender-motion-aware-curvature-risk-holdout-coverage-analysis-v0-1/results.json`; analysis hash `56a04de570ca33dc271bc7d4a62400bb0fa98bcb3760885435c77df3ae79d516`.
