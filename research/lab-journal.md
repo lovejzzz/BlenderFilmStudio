@@ -3324,3 +3324,11 @@ Date: 2026-08-28 · Type: FORMAL TOOL FREEZE · New Blender renders: 0
 Commit `8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026` 将八个预登记 formal tool path 的最终状态冻结并推送。新增的独立 Node consumer 不调用 Python consumer；analyzer 第三次重算 analytic projection/visibility、结构域、四种方向、neither-side、Q30 risk、reason 与 reconstruction；auditor 不 import source/adapter/consumer/analyzer/runner，并准备 92 个隔离的真实 payload/semantic mutations；runner 固定 24 Blender + 12 adapter + 12 Python + 12 Node + 24 Python envelope + 24 Node envelope + 1 analyzer + 1 audit = 110 个子进程。
 
 八工具 SHA-256（按 spec 顺序）为 `efdebaf2a6ba153bded03c2d28a5151ad196392952c2fde71e57a227d188e2ba`、`bf5b9e72c27d2c8fd5aedad0cdaea4a7fda077543123e4ff644f96c85e24ce99`、`42a654afc729e66db2627e48f7ff153048e21d06e29506501fe4484d5341db25`、`9fa6b68d6fabf0fbab3a341cc3c43e6422fe1ae14cb07106e43ad6682994f8fd`、`f519ef952b04385b5c9440067912a56c294d32a63b37412d3f3802b06d6e9954`、`086455e1ed0a156b1c2da2905a17413ebc91c7fe6261fd14cbae929f9168b1ad`、`a01b04134816973aa46d1525a764e7a23ccd499839b46c3c6c7047ab39237e41`、`8e1a5acb3712f07a7b6340c7e4e3d0f699cc4a966127be849c5913bd185e77e9`。固定 Blender Python 对七个 Python 工具的 syntax compile、固定 Node 对 `.mjs` 的 syntax check、六类合成方向分支和一个 Q30 算术例均通过；仍未创建 preflight/formal root，正式 holdout 结论继续保持未知。
+
+## J-225 · D12.12-H1 zero-render preflight 通过
+
+Date: 2026-08-28 · Type: PREFLIGHT ACCEPTED · New Blender renders: 0
+
+在 tool-freeze commit `8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026` 后创建预登记 preflight root。六个 fixture 分别由真实 Blender 5.2 clean process 构造 frame 1 场景，逐一确认两位 owner、12 个 Material tokens 的 fixture 子集、每 fixture 共享 Object Index、Combined/Depth/Vector/Object Index/Material Index passes 与 probe-only operation count；没有执行 `bpy.ops.render`，root 内 EXR 文件数为 0。
+
+14/14 checks 通过：spec/tools/runtimes/OCIO、parent bytes/两棵 formal Git trees、固定解释器 syntax、六场景 RNA、zero-render、六类合成方向与 Q30 示例、current-RGB decision isolation、disk reserve、formal-root absence、model/network zero。Preflight process count 为 8（2 syntax + 6 Blender probes），preflight hash `da081ce7def449eaa90b0df6f232fab6eb4b5d0705757b8820ae14b3b4817648`，receipt hash `f2c83ff907d5d35b20516c30859bae196a758882ac924dcb6e587733fa1c73e3`。此结果只授权启动冻结的 24-render formal matrix，不是 holdout measurement 或 candidate 通过声明。

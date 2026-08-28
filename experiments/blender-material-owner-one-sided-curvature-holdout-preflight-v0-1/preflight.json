@@ -1,0 +1,539 @@
+{
+  "checks": [
+    {
+      "id": "SPEC_IDENTITY",
+      "passed": true
+    },
+    {
+      "id": "TOOLS_COMMITTED_AND_CLEAN",
+      "passed": true
+    },
+    {
+      "id": "RUNTIME_IDENTITIES",
+      "passed": true
+    },
+    {
+      "id": "PARENT_BYTES",
+      "passed": true
+    },
+    {
+      "id": "PARENT_FORMAL_TREES",
+      "passed": true
+    },
+    {
+      "id": "TOOL_SYNTAX",
+      "passed": true
+    },
+    {
+      "id": "ALL_SCENES_CONSTRUCT",
+      "passed": true
+    },
+    {
+      "id": "ZERO_RENDER",
+      "passed": true
+    },
+    {
+      "id": "SYNTHETIC_DIRECTION_AND_Q_ARITHMETIC",
+      "passed": true
+    },
+    {
+      "id": "CURRENT_RGB_DECISION_ISOLATION",
+      "passed": true
+    },
+    {
+      "id": "DISK_RESERVE",
+      "passed": true
+    },
+    {
+      "id": "FORMAL_ROOT_ABSENT",
+      "passed": true
+    },
+    {
+      "id": "MODEL_CALLS_ZERO",
+      "passed": true
+    },
+    {
+      "id": "NETWORK_CALLS_ZERO",
+      "passed": true
+    }
+  ],
+  "checksPassed": 14,
+  "checksTotal": 14,
+  "children": [
+    {
+      "category": "syntax",
+      "command": [
+        "/Applications/Blender.app/Contents/Resources/5.2/python/bin/python3.13",
+        "-m",
+        "py_compile",
+        "blender/render_b52_d12_12_h1_one_sided_source.py",
+        "scripts/adapt-b52-d12-12-h1-one-sided-source.py",
+        "scripts/reconstruct-b52-d12-12-h1-one-sided.py",
+        "scripts/analyze-b52-d12-12-h1-one-sided.py",
+        "scripts/audit-b52-d12-12-h1-one-sided.py",
+        "scripts/preflight-b52-d12-12-h1-one-sided.py",
+        "scripts/run-b52-d12-12-h1-one-sided.py"
+      ],
+      "elapsedSeconds": 0.034951,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "category": "syntax",
+      "command": [
+        "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "--check",
+        "scripts/reconstruct-b52-d12-12-h1-one-sided.mjs"
+      ],
+      "elapsedSeconds": 0.023938,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_12_h1_one_sided_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+        "--fixture",
+        "LEFT_OUTER_MISSING_EXPANSION_173X107",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/LEFT_OUTER_MISSING_EXPANSION_173X107/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.006961,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:205: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.004  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.055  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.055  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.055  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.055  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.055  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.509  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.509  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.509  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.509  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.509  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1212H1_SOURCE_OK fixture=LEFT_OUTER_MISSING_EXPANSION_173X107 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_12_h1_one_sided_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+        "--fixture",
+        "RIGHT_OUTER_MISSING_EXPANSION_181X109",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/RIGHT_OUTER_MISSING_EXPANSION_181X109/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 2.997955,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:205: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.004  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.054  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.502  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.502  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.502  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.502  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.502  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1212H1_SOURCE_OK fixture=RIGHT_OUTER_MISSING_EXPANSION_181X109 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_12_h1_one_sided_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+        "--fixture",
+        "TOP_OUTER_MISSING_EXPANSION_169X113",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/TOP_OUTER_MISSING_EXPANSION_169X113/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.033277,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:205: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.004  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.054  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.532  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.532  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.532  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.532  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.532  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1212H1_SOURCE_OK fixture=TOP_OUTER_MISSING_EXPANSION_169X113 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_12_h1_one_sided_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+        "--fixture",
+        "BOTTOM_OUTER_MISSING_EXPANSION_177X115",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/BOTTOM_OUTER_MISSING_EXPANSION_177X115/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.03349,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:205: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.054  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.509  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.509  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.509  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.509  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.509  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1212H1_SOURCE_OK fixture=BOTTOM_OUTER_MISSING_EXPANSION_177X115 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_12_h1_one_sided_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+        "--fixture",
+        "NEITHER_HORIZONTAL_STRIP_185X117",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/NEITHER_HORIZONTAL_STRIP_185X117/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.121286,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:205: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.058  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.058  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.058  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.058  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.058  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.577  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.577  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.577  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.577  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.577  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1212H1_SOURCE_OK fixture=NEITHER_HORIZONTAL_STRIP_185X117 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    },
+    {
+      "category": "blenderProbe",
+      "command": [
+        "/Applications/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--disable-autoexec",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "blender/render_b52_d12_12_h1_one_sided_source.py",
+        "--",
+        "--spec",
+        "specs/blender-material-owner-one-sided-curvature-holdout.v0.1.json",
+        "--fixture",
+        "STATIC_FULL_STENCIL_CONTROL_163X101",
+        "--frame",
+        "1",
+        "--repeat",
+        "1",
+        "--report",
+        "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/STATIC_FULL_STENCIL_CONTROL_163X101/report.json",
+        "--probe-only"
+      ],
+      "elapsedSeconds": 3.033408,
+      "exitCode": 0,
+      "pid": null,
+      "stderr": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:205: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0\n  world.use_nodes = True\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b52_d12_12_h1_one_sided_source.py:65: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  material.use_nodes = True\n",
+      "stdout": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.054  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.054  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.054  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:01.527  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:01.527  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:01.527  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:01.527  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:01.527  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\nBFS_B52_D1212H1_SOURCE_OK fixture=STATIC_FULL_STENCIL_CONTROL_163X101 frame=1 repeat=1 probe=True\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n"
+    }
+  ],
+  "disk": {
+    "freeBytes": 110407467008,
+    "requiredBeforeFormal": 107575508992
+  },
+  "experimentId": "B52-D12.12-H1",
+  "operationCounts": {
+    "blenderProbeProcesses": 6,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "preflightProcesses": 8
+  },
+  "parentChecks": {
+    "derivationAudit": true,
+    "derivationReceipt": true,
+    "derivationResult": true,
+    "derivationSpec": true,
+    "materialOwnerAdversarialResult": true,
+    "materialOwnerSpec": true,
+    "typedEnvelopeNode": true,
+    "typedEnvelopePython": true
+  },
+  "parentTrees": {
+    "derivationFormalRoot": "608ced9edeab16c55f99ca60063ad49432c6667e",
+    "materialOwnerFormalRoot": "d1d50c211d4a94321ef7c051e9b066ff700a36d8"
+  },
+  "passed": true,
+  "preflightHash": "da081ce7def449eaa90b0df6f232fab6eb4b5d0705757b8820ae14b3b4817648",
+  "probeReports": [
+    {
+      "fixtureId": "LEFT_OUTER_MISSING_EXPANSION_173X107",
+      "materialTokens": [
+        22101,
+        22102
+      ],
+      "objectTokens": [
+        22111
+      ],
+      "ownerCount": 2,
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1212H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/LEFT_OUTER_MISSING_EXPANSION_173X107/report.json",
+      "selfHash": true,
+      "sha256": "bc2c6e955e3a1b31faa1b567224ba2934a4aa4bb2849b42c9dbcdebe382b7be1",
+      "zeroRender": true
+    },
+    {
+      "fixtureId": "RIGHT_OUTER_MISSING_EXPANSION_181X109",
+      "materialTokens": [
+        22201,
+        22202
+      ],
+      "objectTokens": [
+        22222
+      ],
+      "ownerCount": 2,
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1212H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/RIGHT_OUTER_MISSING_EXPANSION_181X109/report.json",
+      "selfHash": true,
+      "sha256": "2baacefc855358d0415930c582cc4f8558d9b40e7f3ec1e4eed2d7862d043c99",
+      "zeroRender": true
+    },
+    {
+      "fixtureId": "TOP_OUTER_MISSING_EXPANSION_169X113",
+      "materialTokens": [
+        22301,
+        22302
+      ],
+      "objectTokens": [
+        22333
+      ],
+      "ownerCount": 2,
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1212H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/TOP_OUTER_MISSING_EXPANSION_169X113/report.json",
+      "selfHash": true,
+      "sha256": "b4f5671f8d3b40d400ee97c0e0ebf7de827011b6300dc0e5d596a096b322755d",
+      "zeroRender": true
+    },
+    {
+      "fixtureId": "BOTTOM_OUTER_MISSING_EXPANSION_177X115",
+      "materialTokens": [
+        22401,
+        22402
+      ],
+      "objectTokens": [
+        22444
+      ],
+      "ownerCount": 2,
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1212H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/BOTTOM_OUTER_MISSING_EXPANSION_177X115/report.json",
+      "selfHash": true,
+      "sha256": "e3cc6e0c7bd5637fbb5eff752679a75b03ba70ccea3f1816ff45b57b9a4b9526",
+      "zeroRender": true
+    },
+    {
+      "fixtureId": "NEITHER_HORIZONTAL_STRIP_185X117",
+      "materialTokens": [
+        22501,
+        22502
+      ],
+      "objectTokens": [
+        22555
+      ],
+      "ownerCount": 2,
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1212H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/NEITHER_HORIZONTAL_STRIP_185X117/report.json",
+      "selfHash": true,
+      "sha256": "f9c679a8746704db239dd973ce03ea1ca10b6700ab65ef36a64c4491e367887f",
+      "zeroRender": true
+    },
+    {
+      "fixtureId": "STATIC_FULL_STENCIL_CONTROL_163X101",
+      "materialTokens": [
+        22601,
+        22602
+      ],
+      "objectTokens": [
+        22666
+      ],
+      "ownerCount": 2,
+      "passes": {
+        "Combined": true,
+        "Depth": true,
+        "Material Index": true,
+        "Object Index": true,
+        "Vector": true,
+        "passAlphaThreshold": 0.5,
+        "viewLayer": "BFS_D1212H1_MASTER"
+      },
+      "probeOnly": true,
+      "report": "experiments/blender-material-owner-one-sided-curvature-holdout-preflight-v0-1/probes/STATIC_FULL_STENCIL_CONTROL_163X101/report.json",
+      "selfHash": true,
+      "sha256": "60011b0f82db22726b53e8b0afb489ae1bb8d79b267a60f7e53233e4f20b737a",
+      "zeroRender": true
+    }
+  ],
+  "runtimeChecks": {
+    "blender": true,
+    "node": true,
+    "ocio": true,
+    "python": true
+  },
+  "schemaVersion": "bfs.blenderMaterialOwnerOneSidedCurvatureHoldoutPreflight.v0.1",
+  "specSha256": "b0defadbd120f77dfe81bfa16d9dfd4e3a4d4a15ad1c8ddd1176d21f2e13b648",
+  "synthetic": {
+    "cases": {
+      "BOTTOM_MISSING_TOP_AVAILABLE": {
+        "bottom": true,
+        "eligible": true,
+        "left": false,
+        "neither": false,
+        "right": false,
+        "top": false
+      },
+      "FULL_STENCIL": {
+        "bottom": false,
+        "eligible": true,
+        "left": false,
+        "neither": false,
+        "right": false,
+        "top": false
+      },
+      "LEFT_MISSING_RIGHT_AVAILABLE": {
+        "bottom": false,
+        "eligible": true,
+        "left": true,
+        "neither": false,
+        "right": false,
+        "top": false
+      },
+      "NEITHER_HORIZONTAL_AVAILABLE": {
+        "bottom": false,
+        "eligible": false,
+        "left": false,
+        "neither": true,
+        "right": false,
+        "top": false
+      },
+      "RIGHT_MISSING_LEFT_AVAILABLE": {
+        "bottom": false,
+        "eligible": true,
+        "left": false,
+        "neither": false,
+        "right": true,
+        "top": false
+      },
+      "TOP_MISSING_BOTTOM_AVAILABLE": {
+        "bottom": false,
+        "eligible": true,
+        "left": false,
+        "neither": false,
+        "right": false,
+        "top": true
+      }
+    },
+    "riskExampleQ30": 3328,
+    "riskExpectedQ30": 3328
+  },
+  "toolCommits": {
+    "blender/render_b52_d12_12_h1_one_sided_source.py": "8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026",
+    "scripts/adapt-b52-d12-12-h1-one-sided-source.py": "21941f2d775b10666ea1ab1a0cfecaf6697ef4bb",
+    "scripts/analyze-b52-d12-12-h1-one-sided.py": "8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026",
+    "scripts/audit-b52-d12-12-h1-one-sided.py": "8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026",
+    "scripts/preflight-b52-d12-12-h1-one-sided.py": "8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026",
+    "scripts/reconstruct-b52-d12-12-h1-one-sided.mjs": "8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026",
+    "scripts/reconstruct-b52-d12-12-h1-one-sided.py": "21941f2d775b10666ea1ab1a0cfecaf6697ef4bb",
+    "scripts/run-b52-d12-12-h1-one-sided.py": "8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026"
+  },
+  "toolHashes": {
+    "blender/render_b52_d12_12_h1_one_sided_source.py": "efdebaf2a6ba153bded03c2d28a5151ad196392952c2fde71e57a227d188e2ba",
+    "scripts/adapt-b52-d12-12-h1-one-sided-source.py": "bf5b9e72c27d2c8fd5aedad0cdaea4a7fda077543123e4ff644f96c85e24ce99",
+    "scripts/analyze-b52-d12-12-h1-one-sided.py": "f519ef952b04385b5c9440067912a56c294d32a63b37412d3f3802b06d6e9954",
+    "scripts/audit-b52-d12-12-h1-one-sided.py": "086455e1ed0a156b1c2da2905a17413ebc91c7fe6261fd14cbae929f9168b1ad",
+    "scripts/preflight-b52-d12-12-h1-one-sided.py": "a01b04134816973aa46d1525a764e7a23ccd499839b46c3c6c7047ab39237e41",
+    "scripts/reconstruct-b52-d12-12-h1-one-sided.mjs": "9fa6b68d6fabf0fbab3a341cc3c43e6422fe1ae14cb07106e43ad6682994f8fd",
+    "scripts/reconstruct-b52-d12-12-h1-one-sided.py": "42a654afc729e66db2627e48f7ff153048e21d06e29506501fe4484d5341db25",
+    "scripts/run-b52-d12-12-h1-one-sided.py": "8e1a5acb3712f07a7b6340c7e4e3d0f699cc4a966127be849c5913bd185e77e9"
+  }
+}
