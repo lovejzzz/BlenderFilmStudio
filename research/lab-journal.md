@@ -3129,6 +3129,18 @@ Formal matrix 预登记为 16 次新 Blender 5.2 Cycles CPU renders、74 个唯�
 
 Artifact: `specs/blender-material-index-owner-integration.v0.1.json`.
 
+## J-209 · D12.11-I1 零渲染 preflight 准入
+
+Date: 2026-08-28 · Type: PREREGISTERED PREFLIGHT · New formal Blender renders: 0
+
+八个 formal tools 在 commit `402957afdcc23a595d08b1482b942f692ff17e17` 冻结；preflight 反查 spec commit `eac5af41f11aaf9f90b49c919c23d07f24a98b39`，证明当时八个路径全部不存在。11/11 checks 通过：parent/runtime/tool identity、formal root absence、100 GiB disk reserve、analyzer import independence、四个 fixture 的 factory-startup scene construction，以及 Python/Node synthetic branch identity。
+
+四个 Blender 5.2 probes 均为 zero-render。它们保留 H1 Object Index `14111/14222`、`14333/14444`、critical `14555/14555`、`14666/14777`，同时实测 Material Index 分别为 `21101/21102`、`21201/21202`、`21301/21302`、`21401/21402`。Synthetic dual consumer payload byte exact，产生 9,870 accepted pixels并命中 1 个预定 risk-rejection branch。磁盘测得 projected write 后 `110121951232` bytes free，高于 `107374182400` reserve。
+
+Preflight hash: `d4a8db392659b557fca6eea9842dbcf87a81be0814e03a3b643adb03ba998b3a`; file SHA-256: `c0c7da22ae0a6aa00c5deac0667d457f8b60b8f93771c5d372c910aca39e09ac`。
+
+Artifact: `experiments/blender-material-index-owner-integration-preflight-v0-1/frozen-tool-preflight.json`.
+
 ## Active goal experimental contract
 
 This contract is part of the active BlenderFilmStudio goal and applies to every subsequent stage:
