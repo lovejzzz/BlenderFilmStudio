@@ -3332,3 +3332,17 @@ Date: 2026-08-28 · Type: PREFLIGHT ACCEPTED · New Blender renders: 0
 在 tool-freeze commit `8a7dc9e02ec63f9b15f742d0213c0c6f7cdc8026` 后创建预登记 preflight root。六个 fixture 分别由真实 Blender 5.2 clean process 构造 frame 1 场景，逐一确认两位 owner、12 个 Material tokens 的 fixture 子集、每 fixture 共享 Object Index、Combined/Depth/Vector/Object Index/Material Index passes 与 probe-only operation count；没有执行 `bpy.ops.render`，root 内 EXR 文件数为 0。
 
 14/14 checks 通过：spec/tools/runtimes/OCIO、parent bytes/两棵 formal Git trees、固定解释器 syntax、六场景 RNA、zero-render、六类合成方向与 Q30 示例、current-RGB decision isolation、disk reserve、formal-root absence、model/network zero。Preflight process count 为 8（2 syntax + 6 Blender probes），preflight hash `da081ce7def449eaa90b0df6f232fab6eb4b5d0705757b8820ae14b3b4817648`，receipt hash `f2c83ff907d5d35b20516c30859bae196a758882ac924dcb6e587733fa1c73e3`。此结果只授权启动冻结的 24-render formal matrix，不是 holdout measurement 或 candidate 通过声明。
+
+## J-226 · D12.12-H1 证据链通过审计，factor-1 holdout 被拒绝
+
+Date: 2026-08-28 · Type: CONFIRMATORY HOLDOUT REJECTED / AUDIT ACCEPTED · New Blender renders: 24
+
+冻结 formal matrix 完整执行 110 个唯一 PID，全部退出 0；D12.11 与 D12.12-D1 parent trees 前后不变。Python/Node every-array、两次 adapter/consumer repeat、typed envelopes、第三 analyzer replay 全部 exact；独立 auditor baseline 21/21、concrete semantic attacks 93/93，最终 evidence receipt 有效。但 result verdict 为 `MATERIAL_OWNER_ONE_SIDED_CURVATURE_HOLDOUT_REJECTED`，不能提升 candidate。
+
+三个独立反例：其一，neither fixture 的最坏 accepted RGB error `6.693601608276367e-05` 超过 `3.0517578125e-05`；对应 risk `125489 Q30` 正确上界实际误差但仍低于冻结 `131072` acceptance threshold，说明 threshold/quality policy 本身不闭合。其二，LEFT/RIGHT 分别形成 89/91 个 primary witnesses 并 100% accepted，但 TOP/BOTTOM 均为 0 witness，radius-2 域全部退化为 full stencil。其三，neither fixture 形成 0 个 neither-horizontal witness，而是在 region 中形成 297 个 right-missing cells。
+
+Raw EXR repeat SHA 不同亦触发 hard gate；10 个 canonical pixel arrays 则全部 repeat byte exact。OpenImageIO metadata diff 将 container 差异定位为动态 `Date`、含 repeat 名称的 `Scene`，以及一个 frame 的 `RenderTime`。这要求未来把 pixel determinism 与 metadata-normalized container determinism 分层，不能事后放宽本次 raw-byte gate。
+
+Result / audit / execution / receipt file SHA-256 分别为 `175c6c568b60b29332954c9bd3f24634c4028aaf8a5c221fd999ad01acc9c0a7` / `d983482d6d0d752e268273487592a42a7700b121c8769195d49001bb2742c4e1` / `babddc5c9849004c901d99d0c86f8b09d7d5696ad3b9149d5b5a5c99bcc6c935` / `9b692d8945821c2458a41952cc3cecde73066703d603455a484d9d4d8b7d9b14`；对应 self-hash 为 `c3c84f825b78ff4302fc6e65ff04956ac783a65dcc5ccf99fc1688bd5d15fdee` / `bc7e90af03a631c6ae799581ff3e84a855f149bab28e1ba59fc43c709e922ab4` / `0798b9edf859d9e5cc19a9b5b5190383737e272388cf716be5fca0ef63c747ee` / `55c122a7ecd748b07cf2803b4694ba05d77b1f0833d9c4295d2fbbdc4d5a6830`。
+
+Artifact: `research/2026-08-28-b52-d12-12-h1-one-sided-curvature-holdout-result.md`.
