@@ -321,7 +321,7 @@ def main() -> None:
     }
     render_seconds = 0.0
     if not cli.probe_only:
-        cli.output_exr.parent.mkdir(parents=True, exist_ok=False)
+        cli.output_exr.parent.mkdir(parents=True, exist_ok=True)
         render_started = time.monotonic()
         outcome = bpy.ops.render.render(write_still=False)
         if "FINISHED" not in outcome:
