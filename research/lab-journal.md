@@ -3356,3 +3356,11 @@ Date: 2026-08-28 · Type: PUBLICATION VALIDATION · New Blender renders: 0
 只读 exporter 从已提交 R1 arrays 生成方向 2×2 matrix 与 neither quality counterexample 两张 nearest-neighbor 分类图。Manifest internal hash `f24511e8f2bd2ff80fcc7d067fcc8cd587f2f38222492c82c377b01ba11436fc`，文件 SHA-256 `4b706ef2840480be23a0e0921207babec234d5cb7e2dd8d43360e5a3da8c293f`；direction / quality PNG SHA-256 为 `08d78466e557df2ce2da976edd95d04d129f35d6a85b27d3a9f52eec3d7d75fd` / `40947278064494b4a45fcef44eeb9e1167430f935490048415354f720da82aa0`。分类固定为 `SOURCE_BOUND_VISUALIZATION_NOT_DECISIONAL_EVIDENCE`。
 
 精确 local route 返回 HTTP 200；定向 ESLint 为 0/0，完整 lint 为 0 errors / 31 个既有 warnings。Vinext/Sites production build 成功并发现 80 个 warmup paths；GitHub Pages Next static build 成功生成 82/82 pages，并把新 route 明确认定为 static。没有执行未请求的截图、DOM 或交互 QA。下一动作是只提交 exporter、manifest/PNGs、新页、CSS、导航与本 journal entry，随后等待公开 Pages exact commit 成功，并在 owner-only Sites access 复核后发布同一 source commit。
+
+## J-228 · D12.12-H1 rejection tab 双站点发布完成
+
+Date: 2026-08-28 · Type: PUBLICATION COMPLETE · New Blender renders: 0
+
+Validated source commit `8426ce43bb31c766da08adb910d00bea3d98340c` 已推送。GitHub Pages workflow `33157542705` completed/success，公开精确 route 返回 HTTP 200。Sites 发布前复核 current user 为 owner、access mode 为 custom、唯一 allowed account user 为当前 owner、external visitors 为 0、workspace/tenant groups 均为空；随后从 exact source commit 保存 version 73 并完成 private deployment，匿名精确 route 返回 401。
+
+公开 route: `https://lovejzzz.github.io/BlenderFilmStudio/blender-material-owner-one-sided-curvature-holdout-v0-1/`。Owner-only route: `https://blender-film-studio-research.skylab.chatgpt.site/blender-material-owner-one-sided-curvature-holdout-v0-1/`。
