@@ -5127,3 +5127,13 @@ Date: 2026-08-29 · Type: DIAGNOSTIC PASS / FORMAL CORRECTION PREREGISTRATION ·
 D3 tool-freeze commit `567e70c5a4fecbe100ed7ee2bc091f011433498c`推送后，zero-Blender reconciliation PASS。Bundled Python原canonical hash exact为`5d502545…`；finite-integral-float normalized hash exact等于Node的`e0c9c275…`。所有retained process/log/result语义门通过，支持verdict `BLENDER_BUNDLED_OPENIMAGEIO_COMBINED_RGBA_DECODER_SUPPORTED`。Result file SHA/self-hash为`ff7be927163fc1774888df3349c42d13a4e2c7b4eecbad4e2f1b6fbc3fb922b1 / 7d83021daf035c0daa854c874da3aee50f8f20ab8cf1a4683ecfb64d120e2bb7`；receipt file SHA/self-hash为`ebf220f832e22a45b6fda098ec84d71b805e55bf2fbc21ae7e119d73c37b0315 / 802a0553aa34e642131cd46ed265c653b703541a796776b829b078ea14988fc4`。Operations为0 Blender/render/model/network/Docker、1 bundled-Python，0.0188秒。
 
 C2据此只授权：两段Blender Python改用exact bundled OIIO 3.1.13.1/NumPy 2.3.4 decoder；Python canonical hash规范finite integral float；三段Node supervision绑定C2/D2/D3与fresh v0.3 roots。multilayer half/ZIP、像素exact、18 render、16 gates/10 attacks及全部资源门不变。下一动作提交推送D3 evidence/C2，再实现工具。
+
+## J-396 · B61-C2 formal工具候选
+
+Date: 2026-08-29 · Type: FORMAL CORRECTION TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+C2 preregistration commit `a8ef00e`推送后，render与independent audit两段Python均实现D2已证明的exact decoder：要求OIIO 3.1.13.1/NumPy 2.3.4，枚举subimages，只接受唯一`.Combined` RGBA quartet，float32读取并转为C-contiguous little-endian RGBA bytes。两段canonical hash统一在序列化前仅规范finite integral float。Pixel report现在记录decoder module/version/subimage/prefix/channel names/indices，独立auditor逐帧回传并与render report exact绑定。
+
+三段Node supervision改用fresh v0.3 roots，tool freeze加入C2 protocol与D3 evidence；preflight重算v0.2 retained trees/failure、D2真实decoder result和D3 result/receipt；Node auditor新增每帧decoder runtime/channel gate。所有渲染、像素、资源及16 gates/10 attacks不变。
+
+Render/audit-python/preflight/runner/auditor SHA-256为`b3aa8d4d20a5efb2eaac454c20c6b36bcd50f1016af94ddf411bbaaeac34527b / f3e998f9418917bf198424984630f9ad666ab439270a5d363b4e98f6ead54339 / d01ec7721e968d348f4d65c013ff184283c8af6c1cc24a8dc4b3b4196682cc49 / a213d7714771e957e4ac64a9f2dd05f49f58d98f7cbb64dbc80e4b93f55b3787 / 38d0a901853d4af1380809207705c93ee6dfef91ae1f116c859386340951d8c2`。Node/Python syntax、targeted ESLint zero-warning与diff check通过；v0.3 roots仍不存在。下一动作提交推送tool freeze，再做fresh-clone zero-Blender preflight rehearsal。

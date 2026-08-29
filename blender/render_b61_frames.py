@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import array
 import hashlib
 import json
 import math
@@ -14,6 +13,12 @@ import sys
 import time
 
 import bpy
+import numpy
+import OpenImageIO as oiio
+
+
+EXPECTED_OIIO_VERSION = "3.1.13.1"
+EXPECTED_NUMPY_VERSION = "2.3.4"
 
 
 def parse_args() -> argparse.Namespace:
@@ -27,8 +32,19 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def normalize_canonical_numbers(value: object) -> object:
+    if isinstance(value, float) and math.isfinite(value) and value.is_integer():
+        return int(value)
+    if isinstance(value, list):
+        return [normalize_canonical_numbers(item) for item in value]
+    if isinstance(value, dict):
+        return {key: normalize_canonical_numbers(item) for key, item in value.items()}
+    return value
+
+
 def canonical(value: object) -> bytes:
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    normalized = normalize_canonical_numbers(value)
+    return json.dumps(normalized, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -89,49 +105,53 @@ def require_below(root: Path, candidate: Path, label: str) -> Path:
     return resolved
 
 
-def pixels_as_float32(image: bpy.types.Image) -> array.array:
-    count = len(image.pixels)
-    values = array.array("f", [0.0]) * count
-    try:
-        image.pixels.foreach_get(values)
-    except AttributeError:
-        values = array.array("f", image.pixels[:])
-    if sys.byteorder != "little":
-        values.byteswap()
-    return values
-
-
 def pixel_projection(exr_path: Path) -> dict:
-    image = bpy.data.images.load(str(exr_path), check_existing=False)
+    if oiio.VERSION_STRING != EXPECTED_OIIO_VERSION or numpy.__version__ != EXPECTED_NUMPY_VERSION:
+        raise RuntimeError("Bundled OpenImageIO/NumPy version mismatch")
+    image_input = oiio.ImageInput.open(str(exr_path))
+    if image_input is None:
+        raise RuntimeError("OpenImageIO could not open multilayer EXR")
     try:
-        width, height = image.size
-        values = pixels_as_float32(image)
-        expected = width * height * 4
-        if len(values) != expected:
-            raise RuntimeError(f"Decoded Combined RGBA float count mismatch: {len(values)} != {expected}")
-        minima = [math.inf] * 4
-        maxima = [-math.inf] * 4
-        sums = [0.0] * 4
-        finite_count = 0
-        non_finite_count = 0
-        for index, value in enumerate(values):
-            channel = index % 4
-            if math.isfinite(value):
-                finite_count += 1
-                minima[channel] = min(minima[channel], value)
-                maxima[channel] = max(maxima[channel], value)
-                sums[channel] += value
-            else:
-                non_finite_count += 1
-        per_channel_count = width * height
-        means = [value / per_channel_count for value in sums]
+        candidates = []
+        subimage = 0
+        while image_input.seek_subimage(subimage, 0):
+            spec = image_input.spec()
+            names = list(spec.channelnames)
+            positions = {name: index for index, name in enumerate(names)}
+            for name in names:
+                if not name.endswith(".R"):
+                    continue
+                prefix = name[:-2]
+                if prefix.split(".")[-1] != "Combined":
+                    continue
+                wanted = [f"{prefix}.{component}" for component in "RGBA"]
+                if all(channel in positions for channel in wanted):
+                    candidates.append((subimage, spec.width, spec.height, spec.nchannels, prefix, wanted, [positions[channel] for channel in wanted]))
+            subimage += 1
+        if len(candidates) != 1:
+            raise RuntimeError(f"Expected one Combined RGBA quartet, found {len(candidates)}")
+        subimage, width, height, channel_count, prefix, names, indices = candidates[0]
+        pixels = image_input.read_image(subimage, 0, 0, channel_count, oiio.FLOAT)
+        if pixels is None:
+            raise RuntimeError(f"OpenImageIO read_image failed: {image_input.geterror()}")
+        array_value = numpy.asarray(pixels)
+        if tuple(array_value.shape) != (height, width, channel_count):
+            raise RuntimeError(f"Decoded shape mismatch: {array_value.shape}")
+        values = numpy.ascontiguousarray(array_value[..., indices], dtype=numpy.dtype("<f4"))
+        finite = numpy.isfinite(values)
+        minima = [float(value) for value in values.min(axis=(0, 1))]
+        maxima = [float(value) for value in values.max(axis=(0, 1))]
+        means = [float(value) for value in values.mean(axis=(0, 1), dtype=numpy.float64)]
+        finite_count = int(finite.sum())
+        non_finite_count = int(values.size - finite_count)
         return {
             "projection": "DECODED_COMBINED_RGBA_FLOAT32_LE",
+            "decoder": {"module": "OpenImageIO", "version": oiio.VERSION_STRING, "numpyVersion": numpy.__version__, "subimage": subimage, "prefix": prefix, "channelNames": names, "channelIndices": indices},
             "width": width,
             "height": height,
             "channels": 4,
-            "floatCount": len(values),
-            "sha256": sha256_bytes(values.tobytes()),
+            "floatCount": int(values.size),
+            "sha256": sha256_bytes(values.tobytes(order="C")),
             "finiteCount": finite_count,
             "nonFiniteCount": non_finite_count,
             "minimum": minima,
@@ -140,7 +160,7 @@ def pixel_projection(exr_path: Path) -> dict:
             "rgbDynamicRange": max(maxima[:3]) - min(minima[:3]),
         }
     finally:
-        bpy.data.images.remove(image)
+        image_input.close()
 
 
 def file_identity(path: Path, root: Path) -> dict:

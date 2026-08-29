@@ -10,8 +10,8 @@ import { repositoryRoot } from './lib/scene-spec.mjs';
 
 const execFileAsync = promisify(execFile);
 const CONTRACT_URI = 'specs/cinematic-render-repro-cost.v0.1.json';
-const CORRECTION_URI = 'specs/cinematic-render-repro-cost-c1-terminal-observability-correction.v0.1.json';
-const EXPECTED = { preflightRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-2', attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-2', formalRoot: 'experiments/cinematic-render-repro-cost-v0-2' };
+const CORRECTION_URI = 'specs/cinematic-render-repro-cost-c2-multilayer-exr-decoder-correction.v0.1.json';
+const EXPECTED = { preflightRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-3', attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-3', formalRoot: 'experiments/cinematic-render-repro-cost-v0-3' };
 
 function parseArguments(argv) {
   const parsed = {};
@@ -60,6 +60,9 @@ function validateDataset(rows, contract) {
       && row.report.settings.ocioConfigSha256 === contract.runtime.ocio.sha256, `${row.id} render/OCIO settings drift`);
     requireValue(row.report.decodedCombined.nonFiniteCount === 0 && row.report.decodedCombined.rgbDynamicRange > 1e-6, `${row.id} invalid pixels`);
     requireValue(row.report.decodedCombined.width === 1920 && row.report.decodedCombined.height === 1080, `${row.id} dimensions drift`);
+    requireValue(row.report.decodedCombined.decoder?.module === 'OpenImageIO' && row.report.decodedCombined.decoder.version === '3.1.13.1'
+      && row.report.decodedCombined.decoder.numpyVersion === '2.3.4' && row.report.decodedCombined.decoder.prefix.endsWith('.Combined')
+      && canonicalJson(row.report.decodedCombined.decoder.channelNames.map(name => name.split('.').at(-1))) === canonicalJson(['R', 'G', 'B', 'A']), `${row.id} decoder binding drift`);
   }
   for (const shot of contract.shots) for (const frame of contract.render.frames) {
     const pair = rows.filter(row => row.shot === shot.label && row.frame === frame);
@@ -96,7 +99,7 @@ function negativeControls(rows, contract) {
 export async function auditB61(argv) {
   const parsed = parseArguments(argv);
   const contractRecord = await json(CONTRACT_URI); const contract = contractRecord.value;
-  const correction = await json(CORRECTION_URI); requireValue(correction.value.status === 'PREREGISTERED', 'B61 C1 correction invalid');
+  const correction = await json(CORRECTION_URI); requireValue(correction.value.status === 'PREREGISTERED', 'B61 C2 correction invalid');
   const preflight = await json(`${parsed.preflightRoot}/preflight.json`);
   requireValue(validSelfHash(preflight.value, 'preflightHash') && preflight.value.status === 'ACCEPTED', 'B61 preflight invalid');
   const reopen = await json(`${parsed.formalRoot}/exr-reopen-audit.json`);
@@ -124,7 +127,9 @@ export async function auditB61(argv) {
       requireValue(exrInfo.includes('OpenEXR image data') && exrInfo.includes('(1919 1079)') && exrInfo.includes('compression: zip'), `${id}-${frame} EXR header mismatch`);
       requireValue(pngInfo.includes('PNG image data, 1920 x 1080'), `${id}-${frame} PNG header mismatch`);
       const reopened = reopen.value.rows.find(item => item.shot === shot.label && item.repetition === repetition && item.frame === frame);
-      requireValue(reopened?.pixelSha256 === report.decodedCombined.sha256, `${id}-${frame} independent reopen mismatch`);
+      requireValue(reopened?.pixelSha256 === report.decodedCombined.sha256 && reopened.decoder?.version === '3.1.13.1'
+        && reopened.decoder.prefix === report.decodedCombined.decoder.prefix
+        && canonicalJson(reopened.decoder.channelNames) === canonicalJson(report.decodedCombined.decoder.channelNames), `${id}-${frame} independent reopen mismatch`);
       rows.push({ id: `${id}-${frame}`, shot: shot.label, repetition, frame, pixelSha256: report.decodedCombined.sha256, report, reportBytes: (await stat(reportRecord.path)).size, run: run.value, process: process.value, sourceReceiptHash: shot.productionReceipt.receiptHash });
     }
   }

@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import array
 import hashlib
 import json
 import math
@@ -13,6 +12,12 @@ from pathlib import Path
 import sys
 
 import bpy
+import numpy
+import OpenImageIO as oiio
+
+
+EXPECTED_OIIO_VERSION = "3.1.13.1"
+EXPECTED_NUMPY_VERSION = "2.3.4"
 
 
 def parse_args() -> argparse.Namespace:
@@ -25,8 +30,19 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def normalize_canonical_numbers(value: object) -> object:
+    if isinstance(value, float) and math.isfinite(value) and value.is_integer():
+        return int(value)
+    if isinstance(value, list):
+        return [normalize_canonical_numbers(item) for item in value]
+    if isinstance(value, dict):
+        return {key: normalize_canonical_numbers(item) for key, item in value.items()}
+    return value
+
+
 def canonical(value: object) -> bytes:
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    normalized = normalize_canonical_numbers(value)
+    return json.dumps(normalized, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -50,29 +66,51 @@ def write_hashed(path: Path, body: dict, hash_field: str) -> dict:
 
 
 def decoded_digest(path: Path) -> dict:
-    image = bpy.data.images.load(str(path), check_existing=False)
+    if oiio.VERSION_STRING != EXPECTED_OIIO_VERSION or numpy.__version__ != EXPECTED_NUMPY_VERSION:
+        raise RuntimeError("Bundled OpenImageIO/NumPy version mismatch")
+    image_input = oiio.ImageInput.open(str(path))
+    if image_input is None:
+        raise RuntimeError("OpenImageIO could not open multilayer EXR")
     try:
-        width, height = image.size
-        count = len(image.pixels)
-        values = array.array("f", [0.0]) * count
-        try:
-            image.pixels.foreach_get(values)
-        except AttributeError:
-            values = array.array("f", image.pixels[:])
-        if sys.byteorder != "little":
-            values.byteswap()
-        non_finite = sum(1 for value in values if not math.isfinite(value))
+        candidates = []
+        subimage = 0
+        while image_input.seek_subimage(subimage, 0):
+            spec = image_input.spec()
+            names = list(spec.channelnames)
+            positions = {name: index for index, name in enumerate(names)}
+            for name in names:
+                if not name.endswith(".R"):
+                    continue
+                prefix = name[:-2]
+                if prefix.split(".")[-1] != "Combined":
+                    continue
+                wanted = [f"{prefix}.{component}" for component in "RGBA"]
+                if all(channel in positions for channel in wanted):
+                    candidates.append((subimage, spec.width, spec.height, spec.nchannels, prefix, wanted, [positions[channel] for channel in wanted]))
+            subimage += 1
+        if len(candidates) != 1:
+            raise RuntimeError(f"Expected one Combined RGBA quartet, found {len(candidates)}")
+        subimage, width, height, channel_count, prefix, names, indices = candidates[0]
+        pixels = image_input.read_image(subimage, 0, 0, channel_count, oiio.FLOAT)
+        if pixels is None:
+            raise RuntimeError(f"OpenImageIO read_image failed: {image_input.geterror()}")
+        array_value = numpy.asarray(pixels)
+        if tuple(array_value.shape) != (height, width, channel_count):
+            raise RuntimeError(f"Decoded shape mismatch: {array_value.shape}")
+        values = numpy.ascontiguousarray(array_value[..., indices], dtype=numpy.dtype("<f4"))
+        non_finite = int(values.size - numpy.isfinite(values).sum())
         return {
             "projection": "DECODED_COMBINED_RGBA_FLOAT32_LE",
+            "decoder": {"module": "OpenImageIO", "version": oiio.VERSION_STRING, "numpyVersion": numpy.__version__, "subimage": subimage, "prefix": prefix, "channelNames": names, "channelIndices": indices},
             "width": width,
             "height": height,
             "channels": 4,
-            "floatCount": count,
-            "sha256": sha256_bytes(values.tobytes()),
+            "floatCount": int(values.size),
+            "sha256": sha256_bytes(values.tobytes(order="C")),
             "nonFiniteCount": non_finite,
         }
     finally:
-        bpy.data.images.remove(image)
+        image_input.close()
 
 
 def main() -> None:
@@ -112,6 +150,7 @@ def main() -> None:
                     "pixelSha256": observed["sha256"],
                     "width": observed["width"],
                     "height": observed["height"],
+                    "decoder": observed["decoder"],
                     "reportHash": report["reportHash"],
                 })
     record = write_hashed(output, {
