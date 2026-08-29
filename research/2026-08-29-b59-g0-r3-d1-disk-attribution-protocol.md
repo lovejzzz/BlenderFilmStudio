@@ -24,6 +24,10 @@ The first disposable rehearsal showed that Colima emits its status lines on stde
 
 The C1 rehearsal captured the stream but parsed `aarch64"` and `docker"` from Colima's `msg="..."` envelope. Before formal D1, C2 freezes the field token as non-whitespace characters excluding `"`. No expected value or gate changes.
 
+### Preregistered correction C3: aggregate-claim attack sealing
+
+The C2 rehearsal passed all observed gates but A06/A07 were neutralized because the generic resealer recomputed the forged aggregate. Before formal D1, C3 seals those forged result claims without recomputing them, so independent replay must reject the mismatch. No producer or attribution rule changes.
+
 The next due time is anchored to the preceding actual capture, using the R3 C1 correction. Samples cannot be overwritten. Final results bind ordered sample hashes and the blocked R3 evidence; the auditor replays current identities and tests ten mutations.
 
 ## Frozen interpretation
