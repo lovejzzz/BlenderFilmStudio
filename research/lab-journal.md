@@ -4883,3 +4883,11 @@ C6 preregistration/evidence commit `542aecaa882133eac8b3609def0d25403bd97e18`推
 B58 preflight/runner/auditor现在把C6 spec/protocol与13-file v0.2 failure tree纳入hash/commit scope，重算tree SHA `ac133875…`，只接受v0.3 exact roots。C5 retained v0.1与v0.2 historical root authorization仍作为历史攻击独立复核；C6新增5/5 attacks覆盖tree、两个parent、terminal retention与v0.2 reuse。Formal denominator仍34。
 
 Orchestrator/preflight/runner/auditor SHA-256分别为`ee321de2cc025f502b5a845ccda7f7042bb18dbf0181fb2515f95783bd1502ef` / `e0309ecee5022b97856a64c9dd41a054c130fdffe00a16dfbc0942ba15850725` / `69828fafab17cd679a35f4396dbc849e99c5e017ef286d2909d67d37471f0c2a` / `a1d186a8007005fe3d467b38b9adcc87f8e5b57338a1209d80a7dfb178a1521a`；ledger保持`0946685b…`。四工具Node syntax、targeted ESLint zero-warning及diff check通过；v0.3 roots仍不存在。下一动作提交推送tool-freeze，再在fresh clone生成并运行v0.3 zero-Blender preflight。
+
+## J-370 · B58-C6 fresh rehearsal与official v0.3 preflight接受
+
+Date: 2026-08-29 · Type: B58 OFFICIAL PREFLIGHT ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+C6 tool-freeze commit `7eeafb9`与origin exact后，fresh clone以Git动态解析full HEAD运行v0.3：`ACCEPTED 18/18`，self-hash `9bcb1e0cfcc32e79c59ae0e9ce190d91b866869fbed0a45c7dad52ff63a4462e`。主仓库确认三条v0.3 roots absent后运行official preflight，同样`ACCEPTED 18/18`；file SHA/self-hash为`0c2fb6da88002ca862409f831ce0a5dc357b3bad8651c4c7970482b129646ed7` / `a4d85378d80b52fb429a1a77f73ac22623e99a18ccd973a087ecfe77d8d51301`。
+
+Official root含10 files：5/5 production preflights accepted、4/4 job requests self-hashed及outer receipt。v0.1 failure exact，v0.2 13-file tree exact `ac133875…`；Gate 0 live sampleCount 8、age 36,232 ms、HEALTHY、available 312,724,525,056 bytes、browser 20,480 bytes、alert absent。Operations仍为zero Blender/render/model/network/Docker。下一动作提交推送这10 files与本entry形成v0.3 evidence commit，然后formal runner才可创建v0.3 attempt/formal roots。

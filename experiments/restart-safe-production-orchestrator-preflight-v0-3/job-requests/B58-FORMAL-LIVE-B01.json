@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobRequest.v0.1",
+  "jobId": "B58-FORMAL-LIVE-B01",
+  "jobRoot": "experiments/restart-safe-production-orchestrator-v0-3/jobs/B58-FORMAL-LIVE-B01",
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B01.scene.json",
+    "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+  },
+  "expectedBuildPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "7eeafb9e97fb60a1ea6e3ea3e8d8a929ca62edd1",
+  "toolHashes": {
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/run-restart-safe-production-job.mjs": "ee321de2cc025f502b5a845ccda7f7042bb18dbf0181fb2515f95783bd1502ef"
+  },
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "LIVE-COMPILE-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-preflight-v0-3/production-preflights/LIVE_B01",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-attempt-v0-3/production-attempts/LIVE_B01",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-v0-3/outputs/LIVE_B01",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": null,
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "requestHash": "5b6bd820b7117a450e6f1e16f795738c69669e8fa9b09fd4a871c93c30ae1916"
+}
