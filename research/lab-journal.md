@@ -5181,3 +5181,11 @@ Date: 2026-08-29 · Type: FORMAL CORRECTION TOOL-FREEZE CANDIDATE · New Blender
 C3 preregistration commit `0b69ca8`推送后，render script在生产scene完成multilayer/half/ZIP配置后snapshot三项image settings，创建process-local isolated review scene，复制display/view/look/exposure/gamma并配置PNG/RGBA/8-bit。每帧PNG只通过`Render Result.save_render(..., scene=review_scene)`输出；pixel report要求production settings exact未变并记录`ISOLATED_REVIEW_SCENE`；成功run report后删除review scene。EXR render和OIIO decoder未改。
 
 Preflight/runner/auditor切到fresh v0.4 roots，freeze同时覆盖C2/C3、D3与D4 evidence；preflight复核v0.3 failure trees及D4 result/receipt；auditor逐帧要求review context与production settings unchanged。Render/audit-python/preflight/runner/auditor SHA为`ddc94499cfe9c36db4eeb868679a0f7d9d0b4c7c0e4a2d16182b1aa8221ecfee / f3e998f9418917bf198424984630f9ad666ab439270a5d363b4e98f6ead54339 / 438b6e7ca7408d60e22221b59392343d03522f80d435053cd7bab40ae741b42a / d28dbee4d4fe56794b170ab1763d7bd6c6e1df0d708b3a47db6de380bd0293a0 / 2f8b6624e5b642d635b3853418518cbb4a68021db4de2abe693e7695633685df`。静态检查全过，v0.4 roots不存在。下一动作提交推送freeze并做fresh-clone preflight rehearsal。
+
+## J-402 · B61-C3 fresh-clone与official v0.4 preflight接受
+
+Date: 2026-08-29 · Type: CORRECTED OFFICIAL PREFLIGHT ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+Tool-freeze `9a84cfdcdbca17ce88ef87e85ce00f0c5cd6e3d4`推送后，fresh clone通过临时只读node_modules symlink运行同构preflight，返回`ACCEPTED 9/9`、self-hash `cf8e1142f1c24aa798f2ad51a914df3dd563c287973fd95b66ccd4ff788dd6e9`；临时clone/symlink随后validated depth-first删除。
+
+主仓库确认v0.4三根fresh后official preflight同样9/9。File SHA/self-hash为`f249524f87f350436e424b635c3d3ff9a2342e466b77fd2d605ef46ac80ae8c2 / c0b9b39fdd96c813ba3b675cf60171737f77f775844b1fef98e3e8877258cbaa`；v0.3 failure trees与D4 result/receipt exact。Available bytes 318,404,898,816，operations全零；attempt/formal继续不存在。下一动作提交推送preflight evidence，然后运行v0.4正式矩阵。
