@@ -4993,3 +4993,13 @@ v0.1反例/C1 commit `fa705ff`推送后，v0.2 CAL32在exact OCIO environment下
 日志时序证明五条warning全部在目标`blend | Read blend`之前：它们把Blender默认startup scene的built-in sRGB/AgX/Standard迁移到自定义ACES config，而不是目标blend回退。v0.2固定为4 files / 1,382,142 bytes，tree hash `f3c2d8bc…`；failure file SHA/self-hash `b3cb19fd… / efe31eda…`。Operations为1 Blender、1 render、1 frame、zero model/network/Docker。
 
 C2只授权把日志门改成phase-aware：必须验证exact OCIO与目标Read-blend事件；只容忍其之前的startup迁移warning，Read-blend之后任何color warning仍拒绝，并继续要求四项in-process assertions。Fresh v0.3 root当前不存在；所有渲染参数和资源上限不变。下一动作提交推送v0.2失败证据/C2，再运行v0.3两个case。
+
+## J-381 · B61校准v0.3支持64-spp正式预算
+
+Date: 2026-08-29 · Type: RENDER CALIBRATION RESULT · Real Blender processes: 2 · Rendered frames: 2
+
+C2 commit `3258e43`推送后，fresh v0.3重跑CAL32/CAL64。两次均验证exact OCIO config SHA/name、display与view；每次有5条允许的startup-scene migration warning，全部在目标Read-blend之前，之后warning为0，保存事件发生在Read-blend之后。两个进程exit 0，生成1920×1080 OpenEXR v2 scanline ZIP文件。
+
+CAL32/CAL64 wall time为3.54/5.02秒，EXR bytes为1,378,126/1,368,644，SHA为`cfc2aab2… / 8ab8313d…`；maximum resident set size观测约4.159/4.158 GB。Result file SHA/self-hash为`75ddbe2e083c7b571b3160cb1cfb1228bedb92b29388859fd714c15a00f25aab / afe8df5b5698ab2f20abc5971cc41ba08aff488d604f7c7f30e1671a396d09b0`。Operations为2 Blender、2 render、2 frames，zero model/network/Docker。
+
+校准决策冻结为：B61正式矩阵使用64 spp、单次120秒timeout、100 GiB reserve。该结果只证明资源可承受，不证明像素复现、视觉一致或电影质量。下一动作提交推送v0.3证据，然后以64 spp预注册正式B61，而不是继续调整采样数。
