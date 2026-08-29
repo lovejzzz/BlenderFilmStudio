@@ -19,7 +19,7 @@ from mathutils import Vector
 
 EXPERIMENT_ID = "B62-T2-E1"
 SCENE_SHA256 = "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc"
-CAMERAS = ((1, 96, "CAM_WIDE_APPROACH"), (97, 192, "CAM_MEDIUM_CONTACT"), (193, 288, "CAM_CLOSE_MOTION_TERMINAL"))
+CAMERAS = ((1, 96, "SHOT_WIDE_APPROACH", "CAM_WIDE_APPROACH"), (97, 192, "SHOT_MEDIUM_CONTACT", "CAM_MEDIUM_CONTACT"), (193, 288, "SHOT_CLOSE_REFLECTION", "CAM_CLOSE_MOTION_TERMINAL"))
 STATE_FRAMES = (138, 143, 144, 150, 288)
 ANCHORS = ("B62_VISOR", "B62_EYE_SLIT", "B62_CHEST_LIGHT", "B62_HAND_R", "B62_CORE")
 FACE_ANCHORS = {"B62_VISOR", "B62_EYE_SLIT"}
@@ -93,8 +93,8 @@ def write_hashed(path, body):
     return document
 
 
-def expected_camera(frame):
-    return next(name for start, end, name in CAMERAS if start <= frame <= end)
+def expected_route(frame):
+    return next((marker, camera) for start, end, marker, camera in CAMERAS if start <= frame <= end)
 
 
 def object_group(name):
@@ -285,16 +285,18 @@ def main():
     pixels = []
     for frame in range(1, 289):
         scene.frame_set(frame)
-        camera = scene.camera.name if scene.camera else None
-        expected = expected_camera(frame)
-        routing.append({"frame": frame, "camera": camera, "expectedCamera": expected, "exact": camera == expected})
+        expected_marker, expected_camera = expected_route(frame)
+        selected = max((marker for marker in scene.timeline_markers if marker.frame <= frame), key=lambda marker: (marker.frame, marker.name))
+        marker = selected.name
+        camera = selected.camera.name if selected.camera else None
+        routing.append({"frame": frame, "marker": marker, "camera": camera, "expectedMarker": expected_marker, "expectedCamera": expected_camera, "exact": marker == expected_marker and camera == expected_camera})
         row = render_report["frames"][frame - 1]
-        require(row.get("frame") == frame and row.get("camera") == expected, f"render report routing mismatch {frame}")
+        require(row.get("frame") == frame and row.get("marker") == expected_marker and row.get("camera") == expected_camera, f"render report routing mismatch {frame}")
         path = repository / row["png"]["uri"]
         require(path.resolve(strict=True) == path and path.parent == root / "frames", f"unsafe frame path {frame}")
         require(sha256_file(path) == row["png"]["sha256"] and path.stat().st_size == row["png"]["bytes"], f"frame identity mismatch {frame}")
         decoded = decode_png(path)
-        pixels.append({"frame": frame, "camera": camera, "fileSha256": row["png"]["sha256"], **decoded})
+        pixels.append({"frame": frame, "marker": marker, "camera": camera, "fileSha256": row["png"]["sha256"], **decoded})
 
     close_camera = bpy.data.objects.get("CAM_CLOSE_MOTION_TERMINAL")
     require(close_camera is not None and close_camera.type == "CAMERA", "close camera absent")
@@ -322,8 +324,8 @@ def main():
     ]
     decoded_by_frame = {row["frame"]: row["decodedSha256"] for row in pixels}
     shot_distinct = []
-    for start, end, camera in CAMERAS:
-        shot_distinct.append({"camera": camera, "frames": [start, end], "distinctDecodedDigests": len({decoded_by_frame[frame] for frame in range(start, end + 1)})})
+    for start, end, marker, camera in CAMERAS:
+        shot_distinct.append({"marker": marker, "camera": camera, "frames": [start, end], "distinctDecodedDigests": len({decoded_by_frame[frame] for frame in range(start, end + 1)})})
     cut_pairs = [{"frames": [left, right], "different": decoded_by_frame[left] != decoded_by_frame[right]} for left, right in ((96, 97), (192, 193))]
     activation = [row["coreActivation"] for row in causal]
     energies = [row["warmEnergy"] for row in causal]

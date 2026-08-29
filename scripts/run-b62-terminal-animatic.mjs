@@ -11,9 +11,13 @@ import { runBudgetedProcess } from './lib/budgeted-process.mjs';
 const execFileAsync = promisify(execFile);
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const PREREGISTRATION_COMMIT = '3de7040d607a5439d1c556a57a6eaebdae03f65d';
+const CORRECTION_COMMIT = '56cda77c88cd3c6bda873cf62140053f2b258e7e';
 const SPEC_URI = 'specs/b62-terminal-animatic-continuity.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-t2-terminal-animatic-continuity-protocol.md';
-const ROOT_URI = 'experiments/b62-terminal-animatic-continuity-v0-1';
+const CORRECTION_URI = 'specs/b62-terminal-animatic-continuity-c1-explicit-marker-routing.v0.1.json';
+const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-t2-c1-explicit-marker-routing.md';
+const RETAINED_ROOT_URI = 'experiments/b62-terminal-animatic-continuity-v0-1';
+const ROOT_URI = 'experiments/b62-terminal-animatic-continuity-v0-2';
 const OCIO_URI = 'color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio';
 const TOOLS = [
   'blender/render_b62_terminal_animatic.py',
@@ -65,16 +69,23 @@ async function bound(binding, field, semantic) {
 async function main() {
   const freeze = parse();
   experiment = JSON.parse(await readFile(await checkedExisting(SPEC_URI), 'utf8'));
-  req(experiment.experimentId === 'B62-T2-E1' && experiment.statusBeforeToolCreation === 'PREREGISTERED' && experiment.output.formalRoot === ROOT_URI, 'experiment mismatch');
+  const correction = JSON.parse(await readFile(await checkedExisting(CORRECTION_URI), 'utf8'));
+  req(experiment.experimentId === 'B62-T2-E1' && experiment.statusBeforeToolCreation === 'PREREGISTERED' && experiment.output.formalRoot === RETAINED_ROOT_URI, 'experiment mismatch');
+  req(correction.correctionId === 'B62-T2-E1-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.retainedFailure.root === RETAINED_ROOT_URI && correction.authorizedChanges.retryRoot === ROOT_URI, 'correction mismatch');
   const head = (await git(['rev-parse', 'HEAD'])).trim(), origin = (await git(['rev-parse', 'origin/main'])).trim();
   req(head === freeze && origin === freeze, 'tool freeze commit is not pushed HEAD');
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
   req(await hashFile(pathFor(SPEC_URI)) === await committedHash(PREREGISTRATION_COMMIT, SPEC_URI), 'preregistered spec drift');
   req(await hashFile(pathFor(PROTOCOL_URI)) === await committedHash(PREREGISTRATION_COMMIT, PROTOCOL_URI), 'preregistered protocol drift');
-  const scoped = await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, ...TOOLS]);
+  req(await hashFile(pathFor(CORRECTION_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_URI), 'correction spec drift');
+  req(await hashFile(pathFor(CORRECTION_PROTOCOL_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_PROTOCOL_URI), 'correction protocol drift');
+  const scoped = await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, ...TOOLS]);
   req(scoped.trim() === '', 'release-scoped files dirty');
   const root = pathFor(ROOT_URI);
   req(!await exists(root), 'formal root already exists');
+  const retainedTree = await treeIdentity(RETAINED_ROOT_URI);
+  req(canonicalJson(retainedTree) === canonicalJson(correction.retainedFailure.tree), 'retained v0.1 tree drift');
+  for (const binding of [correction.retainedFailure.admission, correction.retainedFailure.failure, correction.retainedFailure.renderProcess, ...Object.values(correction.retainedFailure.frames).filter(value => typeof value === 'object')]) req(await hashFile(await checkedExisting(binding.uri)) === binding.sha256, `retained evidence drift ${binding.uri}`);
 
   const parentTree = await treeIdentity(experiment.parentEvidence.t1Root.uri);
   req(canonicalJson(parentTree) === canonicalJson({ files: experiment.parentEvidence.t1Root.files, bytes: experiment.parentEvidence.t1Root.bytes, treeSha256: experiment.parentEvidence.t1Root.treeSha256 }), 'T1 tree drift');
@@ -99,8 +110,8 @@ async function main() {
   await mkdir(resolve(root, 'reports'));
   await mkdir(resolve(root, 'video'));
   const admission = await writeHashed(resolve(root, 'admission.json'), {
-    schemaVersion: 'bfs.b62TerminalAnimaticAdmission.v0.1', experimentId: experiment.experimentId, status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, toolFreezeCommit: freeze,
-    parentTree, bindings: { tools: toolHashes, scene: { uri: experiment.parentEvidence.scene.uri, sha256: await hashFile(scene) }, runtime: { blender: await hashFile(experiment.runtime.blender.executable), ffmpeg: await hashFile(experiment.runtime.ffmpeg.executable), ffprobe: await hashFile(experiment.runtime.ffprobe.executable), ocio: await hashFile(pathFor(OCIO_URI)) } },
+    schemaVersion: 'bfs.b62TerminalAnimaticAdmission.v0.1', experimentId: experiment.experimentId, status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, toolFreezeCommit: freeze,
+    parentTree, retainedFailureTree: retainedTree, bindings: { tools: toolHashes, scene: { uri: experiment.parentEvidence.scene.uri, sha256: await hashFile(scene) }, runtime: { blender: await hashFile(experiment.runtime.blender.executable), ffmpeg: await hashFile(experiment.runtime.ffmpeg.executable), ffprobe: await hashFile(experiment.runtime.ffprobe.executable), ocio: await hashFile(pathFor(OCIO_URI)) } },
     resources: { availableBytesBefore: available, projectedWriteBytes: experiment.processBudget.projectedWriteBytes, minimumFreeReserveBytes: experiment.processBudget.minimumFreeReserveBytes },
     operations: { restrictedProcessesBeforeAdmission: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },
   }, 'admissionHash');
@@ -120,7 +131,7 @@ async function main() {
   const auditPath = resolve(root, 'audit.json'), audit = JSON.parse(await readFile(auditPath, 'utf8'));
   req(validSelf(audit, 'auditHash') && audit.status === 'PASS' && audit.scientificVerdict, 'final audit invalid');
   const receipt = await writeHashed(resolve(root, 'receipt.json'), {
-    schemaVersion: 'bfs.b62TerminalAnimaticReceipt.v0.1', experimentId: experiment.experimentId, status: 'PASS', scientificVerdict: audit.scientificVerdict, humanReview: 'HUMAN_PENDING', preregistrationCommit: PREREGISTRATION_COMMIT, toolFreezeCommit: freeze,
+    schemaVersion: 'bfs.b62TerminalAnimaticReceipt.v0.1', experimentId: experiment.experimentId, status: 'PASS', scientificVerdict: audit.scientificVerdict, humanReview: 'HUMAN_PENDING', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, toolFreezeCommit: freeze,
     admission: { uri: `${ROOT_URI}/admission.json`, sha256: await hashFile(resolve(root, 'admission.json')), admissionHash: admission.admissionHash },
     audit: { uri: `${ROOT_URI}/audit.json`, sha256: await hashFile(auditPath), auditHash: audit.auditHash },
     renderReport: { uri: `${ROOT_URI}/reports/render-report.json`, sha256: await hashFile(renderReport) }, independentReport: { uri: `${ROOT_URI}/reports/independent-audit.json`, sha256: await hashFile(independentReport) },

@@ -5,7 +5,7 @@ from pathlib import Path
 import bpy
 
 SCENE_SHA="0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc"
-CAMERAS=((1,96,"CAM_WIDE_APPROACH"),(97,192,"CAM_MEDIUM_CONTACT"),(193,288,"CAM_CLOSE_MOTION_TERMINAL"))
+CAMERAS=((1,96,"SHOT_WIDE_APPROACH","CAM_WIDE_APPROACH"),(97,192,"SHOT_MEDIUM_CONTACT","CAM_MEDIUM_CONTACT"),(193,288,"SHOT_CLOSE_REFLECTION","CAM_CLOSE_MOTION_TERMINAL"))
 
 def args():
     tail=sys.argv[sys.argv.index("--")+1:] if "--" in sys.argv else []; p=argparse.ArgumentParser(); p.add_argument("--repository-root",type=Path,required=True); p.add_argument("--formal-root",type=Path,required=True); p.add_argument("--report",type=Path,required=True); return p.parse_args(tail)
@@ -29,8 +29,8 @@ def write(path,body):
     return body
 def png(path):
     b=path.read_bytes()[:24];req(b[:8]==b"\x89PNG\r\n\x1a\n",f"invalid PNG {path}");return int.from_bytes(b[16:20],"big"),int.from_bytes(b[20:24],"big")
-def expected_camera(frame):
-    return next(name for start,end,name in CAMERAS if start<=frame<=end)
+def expected_route(frame):
+    return next((marker,camera) for start,end,marker,camera in CAMERAS if start<=frame<=end)
 def main():
     a=args(); repo=a.repository_root.resolve(strict=True); root=a.formal_root.resolve(); report=a.report.resolve(); loaded=Path(bpy.data.filepath).resolve(strict=True)
     req(root.is_dir() and report==root/"reports/render-report.json","output contract")
@@ -52,9 +52,10 @@ def main():
     req(scene.render.engine=="BLENDER_EEVEE" and scene.eevee.taa_samples==16 and scene.eevee.taa_render_samples==16,"Eevee contract")
     rows=[];started=time.perf_counter()
     for frame in range(1,289):
-        scene.frame_set(frame);path=out/f"frame-{frame:04d}.png";req(not path.exists(),"frame exists");scene.render.filepath=str(path);t=time.perf_counter();bpy.ops.render.render(scene=scene.name,write_still=True);elapsed=time.perf_counter()-t
-        req(png(path)==(640,360),f"dimensions {frame}");camera=scene.camera.name if scene.camera else None;req(camera==expected_camera(frame),f"camera {frame} {camera}")
-        rows.append({"frame":frame,"camera":camera,"seconds":elapsed,"png":{"uri":path.relative_to(repo).as_posix(),"sha256":sha(path),"bytes":path.stat().st_size}})
+        scene.frame_set(frame);expected_marker,expected_camera=expected_route(frame);active=max((m for m in scene.timeline_markers if m.frame<=frame),key=lambda m:(m.frame,m.name));req(active.name==expected_marker and active.camera and active.camera.name==expected_camera,f"marker route {frame}");scene.camera=active.camera;req(scene.camera.name==expected_camera,f"camera application {frame}")
+        path=out/f"frame-{frame:04d}.png";req(not path.exists(),"frame exists");scene.render.filepath=str(path);t=time.perf_counter();bpy.ops.render.render(scene=scene.name,write_still=True);elapsed=time.perf_counter()-t
+        req(png(path)==(640,360),f"dimensions {frame}");camera=scene.camera.name if scene.camera else None;req(camera==expected_camera,f"camera {frame} {camera}")
+        rows.append({"frame":frame,"marker":active.name,"camera":camera,"seconds":elapsed,"png":{"uri":path.relative_to(repo).as_posix(),"sha256":sha(path),"bytes":path.stat().st_size}})
     doc=write(report,{"schemaVersion":"bfs.b62TerminalAnimaticRenderReport.v0.1","experimentId":"B62-T2-E1","status":"PASS","source":{"uri":loaded.relative_to(repo).as_posix(),"sha256":sha(loaded)},"settings":{"engine":scene.render.engine,"engineFamily":"BLENDER_EEVEE_NEXT","resolution":[640,360],"samples":int(scene.eevee.taa_render_samples),"format":"PNG","colorMode":"RGBA","colorDepth":"8","motionBlur":True,"color":{"display":scene.display_settings.display_device,"view":scene.view_settings.view_transform,"look":scene.view_settings.look,"exposure":float(scene.view_settings.exposure),"gamma":float(scene.view_settings.gamma)}},"frames":rows,"elapsedSeconds":time.perf_counter()-started,"operations":{"blenderStarts":1,"renderCalls":288,"eeveeRenderCalls":288,"cyclesRenderCalls":0,"modelCalls":0,"networkCalls":0,"dockerProcesses":0}})
     print(f"BFS_B62_T2_RENDER PASS {len(rows)} {doc['reportHash']}")
 if __name__=="__main__":
