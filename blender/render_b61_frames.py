@@ -53,6 +53,32 @@ def write_hashed(path: Path, body: dict, hash_field: str) -> dict:
     return record
 
 
+class StageLedger:
+    def __init__(self, path: Path) -> None:
+        self.path = path
+        self.sequence = 0
+        self.previous_hash = None
+        with path.open("x", encoding="utf-8") as handle:
+            handle.flush()
+            os.fsync(handle.fileno())
+
+    def append(self, event_type: str, **payload: object) -> dict:
+        self.sequence += 1
+        body = {
+            "sequence": self.sequence,
+            "eventType": event_type,
+            "previousEventHash": self.previous_hash,
+            "payload": payload,
+        }
+        record = {**body, "eventHash": sha256_bytes(canonical(body))}
+        with self.path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(record, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        self.previous_hash = record["eventHash"]
+        return record
+
+
 def require_below(root: Path, candidate: Path, label: str) -> Path:
     root = root.resolve(strict=True)
     resolved = candidate.resolve(strict=candidate.exists())
@@ -170,12 +196,15 @@ def main() -> None:
     scene.render.film_transparent = False
 
     reports = []
+    ledger = StageLedger(output_dir / "stage-events.jsonl")
+    ledger.append("PROCESS_BOUND", shot=args.shot, repetition=args.repetition, sourceBlendSha256=shot["sourceBlend"]["sha256"], ocioSha256=ocio["sha256"])
     process_started = time.perf_counter()
     for frame in render["frames"]:
         stem = f"frame-{frame:04d}"
         exr_path = output_dir / f"{stem}.exr"
         png_path = output_dir / f"{stem}.png"
         report_path = output_dir / f"{stem}.pixel.json"
+        ledger.append("FRAME_STARTED", frame=frame)
         scene.frame_set(frame)
         scene.render.image_settings.file_format = "OPEN_EXR_MULTILAYER"
         scene.render.image_settings.color_depth = "16"
@@ -186,9 +215,12 @@ def main() -> None:
         render_seconds = time.perf_counter() - started
         if not exr_path.is_file() or exr_path.stat().st_size == 0:
             raise RuntimeError(f"Missing EXR for frame {frame}")
+        ledger.append("EXR_WRITTEN", frame=frame, sha256=sha256_file(exr_path), bytes=exr_path.stat().st_size)
         projection = pixel_projection(exr_path)
+        ledger.append("EXR_REOPENED", frame=frame, width=projection["width"], height=projection["height"])
         if projection["nonFiniteCount"] != 0 or projection["rgbDynamicRange"] <= 1e-6:
             raise RuntimeError(f"Invalid decoded pixels for frame {frame}")
+        ledger.append("PIXEL_PROJECTED", frame=frame, sha256=projection["sha256"], nonFiniteCount=projection["nonFiniteCount"])
 
         scene.render.image_settings.file_format = "PNG"
         scene.render.image_settings.color_depth = "8"
@@ -196,6 +228,7 @@ def main() -> None:
         bpy.data.images["Render Result"].save_render(filepath=str(png_path), scene=scene)
         if not png_path.is_file() or png_path.stat().st_size == 0:
             raise RuntimeError(f"Missing PNG for frame {frame}")
+        ledger.append("PNG_WRITTEN", frame=frame, sha256=sha256_file(png_path), bytes=png_path.stat().st_size)
         report = write_hashed(report_path, {
             "schemaVersion": "bfs.cinematicRenderPixelReport.v0.1",
             "shot": args.shot,
@@ -226,8 +259,10 @@ def main() -> None:
             "reportHash": report["reportHash"],
             "pixelSha256": projection["sha256"],
         })
+        ledger.append("PIXEL_REPORT_WRITTEN", frame=frame, reportHash=report["reportHash"], sha256=sha256_file(report_path))
 
-    write_hashed(output_dir / "run-report.json", {
+    run_report_path = output_dir / "run-report.json"
+    run_report = write_hashed(run_report_path, {
         "schemaVersion": "bfs.cinematicRenderRunReport.v0.1",
         "status": "PASS",
         "shot": args.shot,
@@ -241,6 +276,7 @@ def main() -> None:
         "elapsedSeconds": time.perf_counter() - process_started,
         "operations": {"renderCalls": len(reports), "frames": len(reports), "modelCalls": 0, "networkCalls": 0, "dockerProcesses": 0},
     }, "runReportHash")
+    ledger.append("RUN_REPORT_WRITTEN", runReportHash=run_report["runReportHash"], sha256=sha256_file(run_report_path))
     print(f"BFS_B61_RENDER_OK {args.shot}-{args.repetition} frames={len(reports)}")
 
 

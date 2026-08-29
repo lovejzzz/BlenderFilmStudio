@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { execFile } from 'node:child_process';
-import { readFile, statfs } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { readFile, readdir, statfs } from 'node:fs/promises';
+import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isDeepStrictEqual, promisify } from 'node:util';
 import {
@@ -18,16 +18,19 @@ import { repositoryRoot } from './lib/scene-spec.mjs';
 
 const execFileAsync = promisify(execFile);
 const CONTRACT_URI = 'specs/cinematic-render-repro-cost.v0.1.json';
+const CORRECTION_URI = 'specs/cinematic-render-repro-cost-c1-terminal-observability-correction.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b61-e1-cinematic-render-repro-cost-protocol.md';
 const PREREGISTRATION_COMMIT = '06dcbfb9b1bcbbe48cd2f78b018c17cc424ee780';
 const EXPECTED_ROOTS = {
-  outputRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-1',
-  attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-1',
-  formalRoot: 'experiments/cinematic-render-repro-cost-v0-1',
+  outputRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-2',
+  attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-2',
+  formalRoot: 'experiments/cinematic-render-repro-cost-v0-2',
 };
 const TOOL_PATHS = [
   CONTRACT_URI,
+  CORRECTION_URI,
   PROTOCOL_URI,
+  'research/2026-08-29-b61-e1-c1-terminal-observability-correction.md',
   'blender/render_b61_frames.py',
   'blender/audit_b61_exr.py',
   'scripts/preflight-b61-e1-cinematic-render-repro-cost.mjs',
@@ -106,6 +109,44 @@ async function validateInputs(contract) {
   return { rows, calibration: { uri: contract.calibration.uri, sha256: await sha256File(calibrationPath), resultHash: calibration.resultHash }, failures };
 }
 
+async function treeIdentity(uri) {
+  const root = await resolveExistingRepositoryPath(uri, `B61 retained tree ${uri}`, 'directory');
+  async function walk(directory) {
+    const output = [];
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      const path = resolve(directory, entry.name);
+      if (entry.isDirectory()) output.push(...await walk(path));
+      else if (entry.isFile()) output.push(path);
+      else throw new Error(`Unsupported retained-tree entry: ${path}`);
+    }
+    return output;
+  }
+  const files = (await walk(root)).sort();
+  let bytes = 0;
+  let material = '';
+  for (const path of files) {
+    const content = await readFile(path);
+    bytes += content.length;
+    material += `${relative(root, path).split('\\').join('/')}\0${sha256Bytes(content)}\n`;
+  }
+  return { files: files.length, bytes, sha256: sha256Bytes(Buffer.from(material)) };
+}
+
+async function validateCorrection(parsed) {
+  const path = await resolveExistingRepositoryPath(CORRECTION_URI, 'B61 C1 correction');
+  const correction = JSON.parse(await readFile(path, 'utf8'));
+  if (correction.status !== 'PREREGISTERED' || correction.authorizedRetryRoots.preflight !== parsed.outputRoot
+    || correction.authorizedRetryRoots.attempt !== parsed.attemptRoot || correction.authorizedRetryRoots.formal !== parsed.formalRoot) throw new Error('B61 C1 retry-root binding mismatch');
+  const attemptTree = await treeIdentity(correction.failedRun.attemptRoot);
+  const formalTree = await treeIdentity(correction.failedRun.formalRoot);
+  if (!isDeepStrictEqual(attemptTree, correction.failedRun.attemptTree) || !isDeepStrictEqual(formalTree, correction.failedRun.formalTree)) throw new Error('B61 v0.1 retained failure tree mismatch');
+  const summaryPath = await resolveExistingRepositoryPath(correction.failedRun.failureSummary.uri, 'B61 v0.1 failure summary');
+  const summary = JSON.parse(await readFile(summaryPath, 'utf8'));
+  if (await sha256File(summaryPath) !== correction.failedRun.failureSummary.sha256 || !validSelfHash(summary, 'failureHash')
+    || summary.failureHash !== correction.failedRun.failureSummary.failureHash || summary.rootCauseProven !== false) throw new Error('B61 v0.1 failure-summary binding mismatch');
+  return { uri: CORRECTION_URI, sha256: await sha256File(path), attemptTree, formalTree, failureHash: summary.failureHash };
+}
+
 export async function runB61Preflight(argv) {
   const parsed = parseArguments(argv);
   const outputPath = await resolveFreshRepositoryPath(parsed.outputRoot, 'B61 preflight root');
@@ -113,10 +154,10 @@ export async function runB61Preflight(argv) {
   await resolveFreshRepositoryPath(parsed.formalRoot, 'B61 formal root');
   const contractPath = await resolveExistingRepositoryPath(CONTRACT_URI, 'B61 contract');
   const contract = JSON.parse(await readFile(contractPath, 'utf8'));
-  if (contract.schemaVersion !== 'bfs.cinematicRenderReproCost.v0.1' || contract.status !== 'PREREGISTERED'
-    || !isDeepStrictEqual(contract.roots, { preflight: parsed.outputRoot, attempt: parsed.attemptRoot, formal: parsed.formalRoot })) throw new Error('B61 contract binding mismatch');
+  if (contract.schemaVersion !== 'bfs.cinematicRenderReproCost.v0.1' || contract.status !== 'PREREGISTERED') throw new Error('B61 contract binding mismatch');
   const toolHashes = await verifyToolFreeze(parsed.toolFreezeCommit);
   const inputs = await validateInputs(contract);
+  inputs.correction = await validateCorrection(parsed);
   const filesystem = await statfs(repositoryRoot, { bigint: true });
   const availableBytes = filesystem.bavail * filesystem.bsize;
   const reserve = BigInt(contract.resourceCeilings.minimumDiskReserveBytes);
@@ -138,7 +179,7 @@ export async function runB61Preflight(argv) {
   const record = await writeDurableHashed(resolve(outputPath, 'preflight.json'), {
     schemaVersion: 'bfs.cinematicRenderReproCostPreflight.v0.1', status: 'ACCEPTED', reason: null,
     preregistrationCommit: PREREGISTRATION_COMMIT, toolFreezeCommit: parsed.toolFreezeCommit,
-    contract: { uri: CONTRACT_URI, sha256: await sha256File(contractPath) }, roots: contract.roots,
+    contract: { uri: CONTRACT_URI, sha256: await sha256File(contractPath) }, roots: { preflight: parsed.outputRoot, attempt: parsed.attemptRoot, formal: parsed.formalRoot },
     inputs, checks, toolHashes,
     disk: { availableBytes: availableBytes.toString(), projectedBytes: projected.toString(), minimumReserveBytes: reserve.toString() },
     operations: { nodeChildren: 0, blenderProcesses: 0, renderCalls: 0, frames: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },

@@ -5,12 +5,13 @@ import { readFile, readdir, stat, statfs } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import { canonicalJson, resolveExistingRepositoryPath, sha256File, validSelfHash, writeDurableHashed } from './lib/production-compile-receipt.mjs';
+import { canonicalJson, resolveExistingRepositoryPath, sha256Bytes, sha256File, validSelfHash, writeDurableHashed } from './lib/production-compile-receipt.mjs';
 import { repositoryRoot } from './lib/scene-spec.mjs';
 
 const execFileAsync = promisify(execFile);
 const CONTRACT_URI = 'specs/cinematic-render-repro-cost.v0.1.json';
-const EXPECTED = { preflightRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-1', attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-1', formalRoot: 'experiments/cinematic-render-repro-cost-v0-1' };
+const CORRECTION_URI = 'specs/cinematic-render-repro-cost-c1-terminal-observability-correction.v0.1.json';
+const EXPECTED = { preflightRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-2', attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-2', formalRoot: 'experiments/cinematic-render-repro-cost-v0-2' };
 
 function parseArguments(argv) {
   const parsed = {};
@@ -30,6 +31,22 @@ function parseArguments(argv) {
 function requireValue(condition, message) { if (!condition) throw new Error(message); }
 async function json(uri) { const path = await resolveExistingRepositoryPath(uri, uri); return { path, value: JSON.parse(await readFile(path, 'utf8')) }; }
 async function identity(row, label) { const path = await resolveExistingRepositoryPath(row.uri, label); requireValue(await sha256File(path) === row.sha256 && (await stat(path)).size === row.bytes, `${label} identity mismatch`); return path; }
+
+async function validateStageLedger(uri, contract) {
+  const path = await resolveExistingRepositoryPath(uri, 'B61 stage ledger');
+  const events = (await readFile(path, 'utf8')).trim().split('\n').filter(Boolean).map(line => JSON.parse(line));
+  const frameEvents = ['FRAME_STARTED', 'EXR_WRITTEN', 'EXR_REOPENED', 'PIXEL_PROJECTED', 'PNG_WRITTEN', 'PIXEL_REPORT_WRITTEN'];
+  const expected = ['PROCESS_BOUND', ...contract.render.frames.flatMap(() => frameEvents), 'RUN_REPORT_WRITTEN'];
+  requireValue(events.length === expected.length, 'B61 stage-ledger length mismatch');
+  let previous = null;
+  for (const [index, event] of events.entries()) {
+    const body = { sequence: event.sequence, eventType: event.eventType, previousEventHash: event.previousEventHash, payload: event.payload };
+    requireValue(event.sequence === index + 1 && event.eventType === expected[index] && event.previousEventHash === previous
+      && event.eventHash === sha256Bytes(Buffer.from(canonicalJson(body))), 'B61 stage-ledger chain mismatch');
+    previous = event.eventHash;
+  }
+  return { uri, events: events.length, headEventHash: previous, sha256: await sha256File(path) };
+}
 
 function validateDataset(rows, contract) {
   requireValue(rows.length === 18, 'B61 dataset length mismatch');
@@ -79,6 +96,7 @@ function negativeControls(rows, contract) {
 export async function auditB61(argv) {
   const parsed = parseArguments(argv);
   const contractRecord = await json(CONTRACT_URI); const contract = contractRecord.value;
+  const correction = await json(CORRECTION_URI); requireValue(correction.value.status === 'PREREGISTERED', 'B61 C1 correction invalid');
   const preflight = await json(`${parsed.preflightRoot}/preflight.json`);
   requireValue(validSelfHash(preflight.value, 'preflightHash') && preflight.value.status === 'ACCEPTED', 'B61 preflight invalid');
   const reopen = await json(`${parsed.formalRoot}/exr-reopen-audit.json`);
@@ -88,9 +106,15 @@ export async function auditB61(argv) {
     const id = `${shot.label}-${repetition}`; const base = `${parsed.formalRoot}/runs/${id}`;
     const run = await json(`${base}/run-report.json`); const process = await json(`${parsed.attemptRoot}/processes/${id}.json`);
     requireValue(validSelfHash(run.value, 'runReportHash') && run.value.status === 'PASS' && run.value.sourceBlend.sha256 === shot.sourceBlend.sha256, `${id} run report invalid`);
-    requireValue(process.value.exitCode === 0 && process.value.signal === null && process.value.phaseGate.usingFrozenOcio && process.value.phaseGate.postReadWarningCount === 0, `${id} process invalid`);
+    requireValue(process.value.exitCode === 0 && process.value.signal === null && process.value.pythonExitCodeEnforced === true && process.value.phaseGate.usingFrozenOcio && process.value.phaseGate.postReadWarningCount === 0, `${id} process invalid`);
+    for (const kind of ['stdout', 'stderr']) {
+      const log = process.value.logs?.[kind]; const logPath = await resolveExistingRepositoryPath(log?.uri, `${id} ${kind} log`);
+      requireValue((await stat(logPath)).size === log.capturedBytes && await sha256File(logPath) === log.sha256
+        && process.value[kind].sha256 === log.streamSha256 && process.value[kind].bytes === log.bytes, `${id} ${kind} log binding mismatch`);
+    }
     const roster = (await readdir(resolve(repositoryRoot, base))).sort();
-    requireValue(roster.length === 10 && roster.includes('run-report.json'), `${id} roster mismatch`);
+    requireValue(roster.length === 11 && roster.includes('run-report.json') && roster.includes('stage-events.jsonl'), `${id} roster mismatch`);
+    await validateStageLedger(`${base}/stage-events.jsonl`, contract);
     for (const frame of contract.render.frames) {
       const reportRecord = await json(`${base}/frame-${String(frame).padStart(4, '0')}.pixel.json`); const report = reportRecord.value;
       requireValue(validSelfHash(report, 'reportHash'), `${id}-${frame} report self-hash mismatch`);
