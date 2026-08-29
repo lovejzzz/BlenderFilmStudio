@@ -2,7 +2,7 @@
 import { createHash } from 'node:crypto';
 import { closeSync, existsSync, fsyncSync, mkdirSync, openSync, readFileSync, statfsSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repo=resolve(dirname(fileURLToPath(import.meta.url)),'..'),specPath=resolve(repo,'specs/codex-host-disk-attribution.v0.1.json'),spec=JSON.parse(readFileSync(specPath));
@@ -13,8 +13,9 @@ const noHash=v=>{const x=structuredClone(v);delete x.selfHash;return x};
 const seal=v=>{v.selfHash=sha(canonical(noHash(v)));return v};
 function writeExclusive(p,v,max){const text=`${JSON.stringify(seal(v),null,2)}\n`;if(Buffer.byteLength(text)>max)throw Error('evidence byte ceiling');const fd=openSync(p,'wx');try{writeFileSync(fd,text);fsyncSync(fd)}finally{closeSync(fd)}return text}
 function run(cmd,args,label,max=32768){const out=execFileSync(cmd,args,{cwd:repo,encoding:'utf8',timeout:5000,maxBuffer:max,env:{...process.env,LC_ALL:'C'}});commands.push({label,stdoutBytes:Buffer.byteLength(out)});return out}
+function runCombined(cmd,args,label,max=32768){const p=spawnSync(cmd,args,{cwd:repo,encoding:'utf8',timeout:5000,maxBuffer:max,env:{...process.env,LC_ALL:'C'}}),out=`${p.stdout||''}${p.stderr||''}`;if(p.status!==0)throw Error(`${label} exit ${p.status}`);if(Buffer.byteLength(out)>max)throw Error(`${label} bytes`);commands.push({label,stdoutBytes:Buffer.byteLength(out)});return out}
 function tracked(){return Object.fromEntries(Object.entries(spec.trackedFiles).map(([id,path])=>{const s=statSync(path);return[id,{path,device:s.dev,inode:s.ino,logicalBytes:s.size,allocatedBytes:Number(s.blocks)*512,modifiedMs:s.mtimeMs}]}))}
-function capture(index,due,startMs){const fs=statfsSync('/');const status=run('/opt/homebrew/bin/colima',['status'],`s${index}-colima`);const names=run('/opt/homebrew/bin/docker',['--host',`unix://${process.env.HOME}/.colima/default/docker.sock`,'ps','--format','{{.Names}}'],`s${index}-containers`).trim().split('\n').filter(Boolean).sort();const now=Date.now();return{schemaVersion:'bfs.codex-host-disk-attribution-sample.v0.1',experimentId:spec.experimentId,index,scheduledAt:new Date(due).toISOString(),capturedAt:new Date(now).toISOString(),latenessMs:now-due,host:{availableBytes:Number(fs.bavail*fs.bsize)},files:tracked(),colima:{running:/colima is running/.test(status),arch:(status.match(/arch:\s*(\S+)/)||[])[1]||null,runtime:(status.match(/runtime:\s*(\S+)/)||[])[1]||null,containerNames:names,containerCount:names.length},elapsedMs:now-startMs,selfHash:''}}
+function capture(index,due,startMs){const fs=statfsSync('/');const status=runCombined('/opt/homebrew/bin/colima',['status'],`s${index}-colima`);const names=run('/opt/homebrew/bin/docker',['--host',`unix://${process.env.HOME}/.colima/default/docker.sock`,'ps','--format','{{.Names}}'],`s${index}-containers`).trim().split('\n').filter(Boolean).sort();const now=Date.now();return{schemaVersion:'bfs.codex-host-disk-attribution-sample.v0.1',experimentId:spec.experimentId,index,scheduledAt:new Date(due).toISOString(),capturedAt:new Date(now).toISOString(),latenessMs:now-due,host:{availableBytes:Number(fs.bavail*fs.bsize)},files:tracked(),colima:{running:/colima is running/.test(status),arch:(status.match(/arch:\s*(\S+)/)||[])[1]||null,runtime:(status.match(/runtime:\s*(\S+)/)||[])[1]||null,containerNames:names,containerCount:names.length},elapsedMs:now-startMs,selfHash:''}}
 function readSample(i){const p=resolve(root,`sample-${String(i).padStart(3,'0')}.json`),text=readFileSync(p,'utf8'),s=JSON.parse(text);if(s.selfHash!==sha(canonical(noHash(s))))throw Error('sample hash');return{sample:s,text,path:p}}
 const wait=async t=>{while(Date.now()<t)await new Promise(r=>setTimeout(r,Math.min(30000,t-Date.now())))};
 if(existsSync(root))throw Error('formal root not fresh');
