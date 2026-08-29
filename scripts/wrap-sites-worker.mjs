@@ -50,6 +50,7 @@ const bundleResult = await build({
   external: ['node:*', 'cloudflare:*'],
   format: 'esm',
   logLevel: 'warning',
+  mainFields: ['module', 'main'],
   metafile: true,
   platform: 'neutral',
   target: 'es2022',
