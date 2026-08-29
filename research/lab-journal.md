@@ -5785,3 +5785,11 @@ Date: 2026-08-29 · Type: PRE-FREEZE REAL BLENDER DIAGNOSTIC / CONTROLLED INTERR
 随后使用同一个formal renderer core，仅在进程内把WIDE诊断范围收窄为frame 1，完整执行1920×1080、Cycles CPU 64 spp、denoise、fixed seed、motion blur、16-bit half ZIP multilayer EXR → OIIO 3.1.13.1 Combined RGBA → ACEScg generated float image → 8-bit PNG。真实render 33.411秒、process real/user/sys 34.50/478.87/3.32秒、maximum RSS 3,762,028,544 bytes；EXR 13,554,838 bytes/SHA `f9388e06…`，PNG 1,099,199 bytes/SHA `4fad6082…`，decoded digest `d2f02cb1…`，frame report file/self `8d968917…/f9cec8ea…`，shot report self `3c316672…`。exact one render、0 scene save/model/video-model/network/Docker/Colima，source SHA未变。
 
 人工查看诊断PNG确认蓝/珊瑚红terminal wide及正确1920×1080输出；前景黑色rail/curve遮挡很重，继续保留为已知美术局限，不把technical path PASS表述成photoreal或最终审美PASS。临时14,324 KiB诊断root在记录上述hash后删除，不进入formal evidence；正式结果仍必须从fresh roots、frozen tools重建全部288帧。
+
+## J-466 · B62-T3 v0.1 preflight引用失败与C1预注册
+
+Date: 2026-08-29 · Type: RETAINED PRE-JOB FAILURE / PREFLIGHT REFERENCE CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+tool freeze `0ed97f192107fabafd5d598453e1815d64e0c664`推送后首次formal start在约0.07秒退出：runner已写v0.1 durable preflight，但`writeExclusiveDurableHashed`只返回`{record,file}`，代码却把不存在的`preflight.path`传入`repoUri`，触发`ERR_INVALID_ARG_TYPE`。job/formal roots均未创建，0 Blender/render/ffmpeg/model/network/Docker/Colima，scientific verdict为null。
+
+v0.1 preflight file/self为`333d44a3…/4f3bcef6…`，failure file/self为`a4788fa5…/8756f5f1…`，永久保留。C1在任何tool修改前只授权从已知absolute preflight path构造URI、runner/auditor切fresh v0.2，并把correction/protocol与v0.1 exact hashes加入freeze roster；其余T3全部不变。

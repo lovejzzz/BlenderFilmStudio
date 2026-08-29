@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "bfs.b62TerminalCyclesRestartCorrection.v0.1",
+  "experimentId": "B62-T3-E1-C1",
+  "date": "2026-08-29",
+  "statusBeforeToolModification": "PREREGISTERED",
+  "parentToolFreezeCommit": "0ed97f192107fabafd5d598453e1815d64e0c664",
+  "retainedFailure": {
+    "boundary": "AFTER_PREFLIGHT_WRITE_BEFORE_JOB_MANIFEST_CREATION",
+    "preflight": {
+      "uri": "experiments/b62-terminal-cycles-restart-preflight-v0-1/preflight.json",
+      "sha256": "333d44a34fc827b3ba76119f338fc3fa0eef7b19f436729dbf06a113d778afaf",
+      "preflightHash": "4f3bcef6c2a0d3cafd7e5e76f54414feaa0cfbae2c45cfa14267508377903d43"
+    },
+    "failure": {
+      "uri": "experiments/b62-terminal-cycles-restart-preflight-v0-1/failure.json",
+      "sha256": "a4788fa5d8084fe33f1724e5e776d7bbdba5732115ab36fd6b14e4711dd2fb3d",
+      "failureHash": "8756f5f1f2109e436fd2b3df819ab12c52dc11584d8a7947854d61edf05373d3"
+    },
+    "observed": {
+      "nodeRunnerStarts": 1,
+      "blenderStarts": 0,
+      "renderCalls": 0,
+      "jobRootCreated": false,
+      "formalRootCreated": false,
+      "scientificVerdict": null
+    }
+  },
+  "rootCause": "writeExclusiveDurableHashed returns {record,file}; createStart incorrectly passed the nonexistent preflight.path property to repoUri after the durable preflight had already been written.",
+  "authorizedIntervention": {
+    "runner": "Bind the preflight URI from the already-known absolute preflight file path instead of reading a nonexistent helper return property.",
+    "rootConstants": "Move preflight, job and formal constants plus auditor exact-root bindings from v0-1 to fresh v0-2 roots.",
+    "freezeBinding": "Add this correction document and its protocol to the frozen tool roster; bind the retained v0-1 failure hashes in every v0-2 preflight and final audit.",
+    "scope": "No render, restart, artifact, resource, cost, gate, attack, verdict or human-review threshold may change."
+  },
+  "authorizedRetryRoots": {
+    "preflight": "experiments/b62-terminal-cycles-restart-preflight-v0-2",
+    "job": "experiments/b62-terminal-cycles-restart-job-v0-2",
+    "formal": "experiments/b62-terminal-cycles-restart-v0-2"
+  },
+  "freshnessAtPreregistration": {
+    "preflight": "ABSENT",
+    "job": "ABSENT",
+    "formal": "ABSENT"
+  }
+}
