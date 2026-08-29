@@ -5775,3 +5775,13 @@ T2 final root、receipt/audit/human review、T1 production scene、B58 C7 restar
 restart边界分两类且不可替代：首个wide Blender只准入并打印ready，然后在go file创建前被exact SIGTERM，0 accepted render，failed attempt永久non-promotable；新`WIDE-RETRY-0002`完整写1–96与shot receipt。wide checkpoint fsync后记录当前ChatGPT/Codex app-server PID/command/start identity并exit 86；同identity重入必须0 process拒绝。只有用户真实重启后看到旧identity死亡与新identity不同，resume才可verified-skip wide并继续medium/close。不能用同一Node进程restart模拟这个门。
 
 成功输出固定288 EXR+288 PNG+288 frame reports，fresh Blender zero-render重开全部EXR，FFmpeg/ffprobe交付1080p 12秒视频；最终还要repeated resume zero-process byte-exact、24 gates、24 attacks与完整视频人工复核。预算6 GiB projected/8 GiB ceiling、6 GiB RSS/Blender、7200秒/shot、100 GiB reserve，zero model/video-model/network/Docker/Colima；API/video-model marginal cost $0，订阅/硬件/电费不虚构美元值。
+
+## J-465 · B62-T3工具实现期真实中断与单帧Cycles路径诊断
+
+Date: 2026-08-29 · Type: PRE-FREEZE REAL BLENDER DIAGNOSTIC / CONTROLLED INTERRUPTION AND ONE-FRAME FULL-PATH PASS · New Blender processes: 3 · New Blender renders: 1
+
+四个T3 formal tool尚未freeze、三个formal root仍absent时做两类只读source诊断。第一次interrupt probe故意把attempt root放在`/tmp`，Blender 5.2正确读取exact production scene后被renderer containment gate以“outside repository root”拒绝，exit 1、0 render/0 output；这不是formal failure，也不改变预注册阈值。第二次使用仓库内unique temporary root，Blender读取source SHA `0acd4d13…`、验证Cycles/OCIO/active scene/route/settings，打印并flush `BFS_T3_READY_FOR_CONTROLLED_INTERRUPT`，随后收到SIGTERM并exit 143；除supervisor log外没有EXR、PNG或report，证明受控中断边界真实可达。
+
+随后使用同一个formal renderer core，仅在进程内把WIDE诊断范围收窄为frame 1，完整执行1920×1080、Cycles CPU 64 spp、denoise、fixed seed、motion blur、16-bit half ZIP multilayer EXR → OIIO 3.1.13.1 Combined RGBA → ACEScg generated float image → 8-bit PNG。真实render 33.411秒、process real/user/sys 34.50/478.87/3.32秒、maximum RSS 3,762,028,544 bytes；EXR 13,554,838 bytes/SHA `f9388e06…`，PNG 1,099,199 bytes/SHA `4fad6082…`，decoded digest `d2f02cb1…`，frame report file/self `8d968917…/f9cec8ea…`，shot report self `3c316672…`。exact one render、0 scene save/model/video-model/network/Docker/Colima，source SHA未变。
+
+人工查看诊断PNG确认蓝/珊瑚红terminal wide及正确1920×1080输出；前景黑色rail/curve遮挡很重，继续保留为已知美术局限，不把technical path PASS表述成photoreal或最终审美PASS。临时14,324 KiB诊断root在记录上述hash后删除，不进入formal evidence；正式结果仍必须从fresh roots、frozen tools重建全部288帧。
