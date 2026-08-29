@@ -4739,3 +4739,13 @@ R6-C1 admission commit `378765dee04313178936ad68ba593623691ab764`推送后，Gat
 Live门要求哨兵plist byte-exact、launchd loaded/900 seconds/last exit 0、latest age不超过1,200秒、HEALTHY、available至少250 GiB、browser低于64 MiB、history bounded、无alert；Codex须维持PID 26962与同version/hash/bundle，且R6 cutoff后无新crash report。Closeout自身禁止Blender/Docker/network/model/cleanup/service mutation。
 
 Auditor必须独立重读全部parent artifacts和live state；20个attack逐项指定必须翻转的目标gate，避免靠无关hash gate吸收攻击。只有15/15 gates、20/20 attacks才可输出`GATE0_HOST_STABILITY_CLOSED`，且只允许进入独立B58 minimal preflight。
+
+## J-356 · B59-G0 closeout runner与定向攻击auditor实现
+
+Date: 2026-08-29 · Type: GATE 0 CLOSEOUT TOOL IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+Closeout preregistration commit `14fe6ca519ab23e497b683cdc9547d4ed35ba921`推送后，实现只读runner和不import runner的独立auditor。Runner重算19份父证据的file/self hashes、全部positive/negative verdict、D2 operational boundary、live sentinel与Codex/crash边界；正式模式只允许在fresh root exclusive写start/results。Auditor独立重读同一19份证据与live state，并对20个attack逐项要求其指定target gate从true变false。
+
+Runner/auditor SHA为`9464bcd0c49850eb3582e702d05a8f9ebd9db3482a9a053f8b7f1c54ebeabdbd` / `26758d87ff9742ba90deba6f4db07362cbbd255703ee8b425e7489c21efd5479`，209 / 196 lines、19,889 / 21,423 bytes。两者self-test、Node syntax、zero-warning targeted ESLint与diff check通过。Live preflight当前除`SPEC_RELEASE_AND_EVIDENCE_HASHES`外全部门为true；该唯一失败由两份新工具尚未提交导致，evidence hashes exact、sampleCount 5、latest age 776,695 ms、formal root absent。
+
+下一动作只提交推送工具与本entry，再在fresh临时clone执行完整runner+auditor rehearsal；只有15/15与20/20同时通过且当前正式root仍不存在，才运行真实closeout。
