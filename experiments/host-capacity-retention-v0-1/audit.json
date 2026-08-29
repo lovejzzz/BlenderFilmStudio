@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "bfs.host-capacity-retention-audit.v0.1",
+  "experimentId": "B59-G0-R6",
+  "auditedAt": "2026-08-29T06:52:23.547Z",
+  "finalVerdict": "INVALID_UNATTENDED_RETENTION",
+  "fileIntegrity": {
+    "START": true,
+    "SNAPSHOTS": true,
+    "RESULTS": true,
+    "GATE_PROJECTION": true,
+    "RELEASE": true,
+    "PARENT": true,
+    "LIVE_LAUNCHD": true,
+    "LIVE_RUNTIME": true,
+    "NO_ALERT": true
+  },
+  "attackIdsExact": true,
+  "attackResults": [
+    {
+      "id": "A01_SPEC_SHA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A02_PARENT_EVIDENCE_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A03_SAMPLE_REMOVAL",
+      "rejected": true
+    },
+    {
+      "id": "A04_TOTAL_SPAN_SHORTENING",
+      "rejected": true
+    },
+    {
+      "id": "A05_INTERVAL_TOO_SHORT",
+      "rejected": true
+    },
+    {
+      "id": "A06_INTERVAL_TOO_LONG",
+      "rejected": true
+    },
+    {
+      "id": "A07_STALE_LATEST_SAMPLE",
+      "rejected": true
+    },
+    {
+      "id": "A08_DISK_FLOOR_BREACH",
+      "rejected": true
+    },
+    {
+      "id": "A09_DISK_RATE_BREACH",
+      "rejected": false
+    },
+    {
+      "id": "A10_BROWSER_GROWTH_BREACH",
+      "rejected": true
+    },
+    {
+      "id": "A11_COLIMA_GROWTH_BREACH",
+      "rejected": true
+    },
+    {
+      "id": "A12_PROHIBITED_ACTION_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A13_MAIN_PID_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A14_NEW_CRASH_REPORT_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A15_SELF_HASH_MUTATION",
+      "rejected": true
+    }
+  ],
+  "attacksPassed": 14,
+  "attacksTotal": 15,
+  "finalGates": {
+    "SPEC_PARENT_AND_RELEASE_IDENTITY": true,
+    "SOURCE_SELF_HASH_AND_BOUNDS": true,
+    "SAMPLE_COUNT_SPAN_AND_CADENCE": true,
+    "ALL_SAMPLES_CLASSIFY_HEALTHY": true,
+    "DISK_FLOOR_AND_LOSS_RATE": true,
+    "BROWSER_TEMP_BOUNDED": true,
+    "COLIMA_ALLOCATION_GROWTH_BOUNDED": true,
+    "PROHIBITED_ACTIONS_ZERO": true,
+    "LAUNCHD_CONTINUITY": true,
+    "CODEX_RUNTIME_PID_AND_CRASH_CONTINUITY": true,
+    "SNAPSHOT_AND_RESULTS_INTEGRITY": true,
+    "INDEPENDENT_AUDIT_REPLAY": false
+  },
+  "passedGates": 11,
+  "totalGates": 12,
+  "failedGates": [
+    "INDEPENDENT_AUDIT_REPLAY"
+  ],
+  "currentLaunchd": {
+    "loaded": true,
+    "runs": 5,
+    "lastExitCode": 0,
+    "intervalSeconds": 900,
+    "printSha256": "d3c134e90ea759ca21890b5e79999e3020c55bfbdd2355d2b2d410565f35c62b"
+  },
+  "currentRuntime": {
+    "codexVersion": "26.825.32147 (7303)",
+    "appPlistSha256": "4d8b6390cf82eec96777e5cdd22993536f7fc5ef0b44809a6e1c377d0f563ce7",
+    "bundleIdentifier": "com.openai.codex",
+    "main": [
+      {
+        "pid": 26962,
+        "startedAt": "2026-08-29T03:58:05.000Z",
+        "command": "/Applications/ChatGPT.app/Contents/MacOS/ChatGPT"
+      }
+    ],
+    "crashReports": []
+  },
+  "selfHash": "2aa99b87a0ce421a51f2621f298953a8b834939113f09e8896915551cf5391cb"
+}

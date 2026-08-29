@@ -4683,3 +4683,15 @@ R6 runner与independent auditor已在commit `3abfc873feaf687ee2b0c94a0132dace7a5
 LaunchAgent在首样本后自然等待900秒，于06:06:48.444Z写出第二个self-hashed `HEALTHY` sample。相邻间隔为900,223 ms；launchd runs从1精确增为2，last exit仍为0、run interval仍为900秒。Available从320,036,970,496降至319,973,339,136 bytes，900秒正向loss为63,631,360 bytes，折算约0.237 GiB/hour，低于冻结的1 GiB/hour ceiling；browser temp保持20,480 bytes、zero growth；Colima combined allocated仅增加262,144 bytes；全部prohibited-action counters继续为0。
 
 R6 preflight正确返回`WAIT_UNATTENDED_RETENTION`、sampleCount 2、span 900,223 ms、formalRootAbsent true，不因两个健康点提前创建证据或宣布长期稳定。下一动作保持LaunchAgent自然运行，至少积累5个样本与3,600秒first-to-last span后，冻结完整历史并运行12-gate/15-attack独立审计。
+
+## J-351 · R6一小时宿主观察健康，但A09控制反例使审计无效
+
+Date: 2026-08-29 · Type: FORMAL UNATTENDED RETENTION / AUDIT COUNTEREXAMPLE · New Blender processes: 0 · New Blender renders: 0
+
+LaunchAgent无人干预地产生5个样本，四段间隔为900,223 / 900,151 / 900,195 / 900,252 ms，首尾跨度3,600,821 ms。Preflight在sampleCount 5、latest age 27,621 ms、service loaded、fresh formal root、release commit与origin均为`381d434cfad1c9ff640ee5cb539a0c29e40c8bf7`时返回`READY_UNATTENDED_RETENTION`，随后冻结完整历史；没有kickstart、restart、手动采样或历史切片。
+
+Runner的11/11 pre-audit gates全部通过，provisional `ADMITTED_PENDING_AUDIT`。Minimum available为319,742,877,696 bytes；first-to-last loss 294,092,800 bytes，归一化294,025,745.795 bytes/hour；maximum interval loss 95,473,664 bytes。Browser保持20,480 bytes且zero growth；Colima combined allocated growth 602,112 bytes、归一化601,974.716 bytes/hour；五个样本全部`HEALTHY`且prohibited actions为0。Codex仍为同一PID 26962、同version/hash/bundle，首样本后没有新crash report。Results SHA为`1104d6edf251bfbfb041e6f96d482a7fd8968676f2249f8971bfc6b8070e7311`。
+
+Independent audit的START/SNAPSHOTS/RESULTS/GATE_PROJECTION/RELEASE/PARENT/LIVE_LAUNCHD/LIVE_RUNTIME/NO_ALERT九项完整性检查全通过，但15个攻击只拒绝14个。唯一逃逸为`A09_DISK_RATE_BREACH`：它把last available固定成first available减`1 GiB + 1 byte`；真实span比一小时长821 ms，因此归一化rate反而略低于1 GiB/hour，同时相对第四个真实样本的single-interval loss也未超过1 GiB。Auditor据此正确给出11/12 gates的`INVALID_UNATTENDED_RETENTION`，audit SHA为`464eca68fafe518997bd08d80b931a5af422ee44159243dcad1ceef78cfe6f94`。
+
+这不是宿主容量反例，而是mutation-control算法没有按实际span构造严格越界值；生产阈值和健康观测均不改变。失败root原样保留。下一动作先推送该证据，再预注册fresh C1 root，只把A09 loss改为`floor(maxRate * actualSpanHours) + 1`并证明独立重算必然越界；不得复用原root、重写audit或选择更有利的历史子集。

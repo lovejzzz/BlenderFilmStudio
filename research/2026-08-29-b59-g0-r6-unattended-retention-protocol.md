@@ -1,7 +1,7 @@
 # B59-G0-R6 · Unattended capacity-retention protocol
 
 Date: 2026-08-29
-Status: PREREGISTERED — OBSERVATION ACCUMULATING
+Status: COMPLETE — INVALID AUDIT CONTROL, HOST OBSERVATION PRESERVED
 Parent commit: `8bee7c6a4ed0172a7be13a1c29ee0317cdf9840a`
 
 ## Question
@@ -38,3 +38,11 @@ The current-process/start-time check plus absence of a crash report is stronger 
 The runner writes a byte-exact source snapshot plus self-hashed start/results receipts into a fresh formal root. The auditor does not import the runner; it recomputes the history, process, crash and launchd gates and must reject all 15 registered attacks.
 
 Passing R6 establishes `ONE_HOUR_UNATTENDED_RETENTION_ADMITTED`. It is a required Gate 0 closeout input, not the final closeout itself and not permission to skip B58 preflight. A failed gate is retained without relaxing thresholds or selecting a different time slice.
+
+## Recorded outcome
+
+The full five-sample source history spanned 3,600.821 seconds. The runner passed all 11 pre-audit gates with `ADMITTED_PENDING_AUDIT`; host disk loss was 294,092,800 bytes (294,025,745.795 bytes/hour), browser growth was zero, combined Colima allocation growth was 602,112 bytes, all prohibited actions were zero, the required PID remained live and no new crash report appeared.
+
+The independent audit verified every file-integrity and live-continuity check but rejected only 14/15 registered attacks. `A09_DISK_RATE_BREACH` incorrectly used a fixed loss of `maximumDiskLossRateBytesPerHour + 1`; because the real span was slightly longer than one hour, its normalized loss rate remained below the frozen hourly ceiling and its final single-interval loss also remained below the separate 1 GiB limit. The final verdict is therefore `INVALID_UNATTENDED_RETENTION`, not a host failure and not admission. The immutable evidence remains under `experiments/host-capacity-retention-v0-1`.
+
+Any correction must use a fresh formal root and preregister a span-normalized A09 mutation. It may not alter the production thresholds, remove this failed audit, or select a more favorable source-history subset.
