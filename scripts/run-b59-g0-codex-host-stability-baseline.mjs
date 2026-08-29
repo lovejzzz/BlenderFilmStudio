@@ -151,7 +151,7 @@ const crash = {
   lines: crashLineCount,
   processExact: crashText.includes('Process:             ChatGPT [91700]'),
   identifierExact: crashText.includes('Identifier:          com.openai.codex'),
-  versionExact: crashText.includes('Version:             26.820.80927 (7271)'),
+  versionExact: crashText.includes(`Version:             ${spec.crashEvidence.version}`),
   threadExact: crashText.includes('Triggered by Thread: 20  Chrome_IOThread'),
   exceptionExact: crashText.includes('Exception Type:    EXC_BREAKPOINT (SIGTRAP)'),
   serializerSymbolPresent: crashText.includes('v8::ValueSerializer::WriteValue')
@@ -160,6 +160,12 @@ const crash = {
 const appPlist = '/Applications/ChatGPT.app/Contents/Info.plist';
 const systemPlist = '/System/Library/CoreServices/SystemVersion.plist';
 const currentVersion = `${readPlistString(appPlist, 'CFBundleShortVersionString')} (${readPlistString(appPlist, 'CFBundleVersion')})`;
+const expectedCurrentVersion = spec.currentRuntimeExpectation?.codexVersion ?? spec.crashEvidence.version;
+const currentAppPlistSha256 = sha256File(appPlist);
+const currentBundleIdentifier = readPlistString(appPlist, 'CFBundleIdentifier');
+const currentRuntimeIdentityMatches = !spec.currentRuntimeExpectation
+  || (currentAppPlistSha256 === spec.currentRuntimeExpectation.appPlistSha256
+    && currentBundleIdentifier === spec.currentRuntimeExpectation.bundleIdentifier);
 const currentOsVersion = `macOS ${readPlistString(systemPlist, 'ProductUserVisibleVersion')} (${readPlistString(systemPlist, 'ProductBuildVersion')})`;
 
 const filesystem = statfsSync('/');
@@ -205,7 +211,7 @@ const gates = {
   FRESH_FORMAL_ROOT: true,
   CRASH_EVIDENCE_IDENTITY: crash.sha256 === spec.crashEvidence.sha256 && crash.bytes === spec.crashEvidence.bytes && crash.lines === spec.crashEvidence.lines,
   CRASH_SIGNATURE_EXACT: crash.processExact && crash.identifierExact && crash.versionExact && crash.threadExact && crash.exceptionExact && crash.serializerSymbolPresent,
-  CURRENT_CODEX_VERSION_EXACT: currentVersion === spec.crashEvidence.version,
+  CURRENT_CODEX_VERSION_EXACT: currentVersion === expectedCurrentVersion && currentRuntimeIdentityMatches,
   SNAPSHOT_FRESHNESS: true,
   DISK_STABILITY_MARGIN: disk.availableBytes >= disk.minimumAvailableBytes,
   MEMORY_PRESSURE: memory.systemWideFreePercent >= memory.minimumFreePercent,
@@ -246,7 +252,13 @@ const results = {
   formalRoot: spec.formalRoot,
   formalRootFreshAtStart: true,
   crash,
-  currentRuntime: { codexVersion: currentVersion, osVersion: currentOsVersion },
+  currentRuntime: {
+    codexVersion: currentVersion,
+    expectedCodexVersion: expectedCurrentVersion,
+    appPlistSha256: currentAppPlistSha256,
+    bundleIdentifier: currentBundleIdentifier,
+    osVersion: currentOsVersion
+  },
   disk,
   memory,
   processes: processSummary,

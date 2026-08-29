@@ -135,7 +135,11 @@ function expectedGateVector(candidate) {
     FRESH_FORMAL_ROOT: candidate.formalRoot === spec.formalRoot && candidate.formalRootFreshAtStart === true,
     CRASH_EVIDENCE_IDENTITY: signature.sha256 === spec.crashEvidence.sha256 && signature.bytes === spec.crashEvidence.bytes && signature.lines === spec.crashEvidence.lines,
     CRASH_SIGNATURE_EXACT: signature.processExact === true && signature.identifierExact === true && signature.versionExact === true && signature.threadExact === true && signature.exceptionExact === true && signature.serializerSymbolPresent === true,
-    CURRENT_CODEX_VERSION_EXACT: candidate.currentRuntime.codexVersion === spec.crashEvidence.version,
+    CURRENT_CODEX_VERSION_EXACT: candidate.currentRuntime.codexVersion === (spec.currentRuntimeExpectation?.codexVersion ?? spec.crashEvidence.version)
+      && candidate.currentRuntime.expectedCodexVersion === (spec.currentRuntimeExpectation?.codexVersion ?? spec.crashEvidence.version)
+      && (!spec.currentRuntimeExpectation
+        || (candidate.currentRuntime.appPlistSha256 === spec.currentRuntimeExpectation.appPlistSha256
+          && candidate.currentRuntime.bundleIdentifier === spec.currentRuntimeExpectation.bundleIdentifier)),
     SNAPSHOT_FRESHNESS: Number.isFinite(ageMs) && ageMs >= 0 && ageMs <= maximumAgeMs,
     DISK_STABILITY_MARGIN: candidate.disk.minimumAvailableBytes === spec.resourcePolicy.minimumAvailableBytes
       && candidate.disk.minimumAvailableBytes === candidate.disk.minimumCoreDiskReserveBytes + candidate.disk.b58ProjectedWriteBytes + candidate.disk.additionalStabilityMarginBytes
@@ -259,6 +263,8 @@ const filesystem = statfsSync('/');
 const replayAvailableBytes = Number(filesystem.bavail * filesystem.bsize);
 const appPlist = '/Applications/ChatGPT.app/Contents/Info.plist';
 const replayVersion = `${readPlistString(appPlist, 'CFBundleShortVersionString')} (${readPlistString(appPlist, 'CFBundleVersion')})`;
+const replayAppPlistSha256 = sha256File(appPlist);
+const replayBundleIdentifier = readPlistString(appPlist, 'CFBundleIdentifier');
 
 const integrityChecks = {
   SPEC_SHA: results.spec.sha256 === sha256File(specPath),
@@ -270,7 +276,9 @@ const integrityChecks = {
   PARENT_EVIDENCE: spec.parentEvidence ? results.parentEvidence?.valid === true
     && sha256File(resolve(repositoryRoot, spec.parentEvidence.resultsPath)) === spec.parentEvidence.resultsSha256
     && sha256File(resolve(repositoryRoot, spec.parentEvidence.auditPath)) === spec.parentEvidence.auditSha256 : results.parentEvidence === null,
-  CURRENT_VERSION_REPLAY: replayVersion === results.currentRuntime.codexVersion,
+  CURRENT_VERSION_REPLAY: replayVersion === results.currentRuntime.codexVersion
+    && replayAppPlistSha256 === results.currentRuntime.appPlistSha256
+    && replayBundleIdentifier === results.currentRuntime.bundleIdentifier,
   DISK_GATE_REPLAY: (replayAvailableBytes >= spec.resourcePolicy.minimumAvailableBytes) === results.gates.DISK_STABILITY_MARGIN,
   MEMORY_GATE_REPLAY: (replayMemoryPercent >= spec.resourcePolicy.minimumMemoryFreePercent) === results.gates.MEMORY_PRESSURE,
   MAIN_PROCESS_GATE_REPLAY: (replayProcesses.mainCodexProcessCount === spec.processPolicy.requiredMainCodexProcessCount && replayRestartBoundaryValid) === results.gates.CODEX_MAIN_PROCESS_COUNT,

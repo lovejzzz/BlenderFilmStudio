@@ -14,9 +14,19 @@ The pre-restart Codex main process is PID 92848, launched locally at `Fri Aug 28
 
 The runner records current main PIDs and a restart-boundary verdict. The existing `CODEX_MAIN_PROCESS_COUNT` gate now also requires this boundary when the selected spec contains `restartBoundary`. The auditor independently replays the current PID set. New attack A25 reseals a candidate that claims the old PID as current; it must be rejected. Baseline and R1 specs retain their original 24 attacks and behavior.
 
+## Preregistered correction C1: runtime version transition
+
+The restart installed Codex `26.825.32147 (7303)`, while the crash report remains evidence about `26.820.80927 (7271)`. Treating those two identities as equal would reject a valid upgrade and conflate crash provenance with the runtime under test.
+
+Before any formal R2 root existed, C1 added `currentRuntimeExpectation` to the R2 spec. `CRASH_SIGNATURE_EXACT` remains bound to the immutable crash-report version. `CURRENT_CODEX_VERSION_EXACT` is now bound to the separately frozen post-restart runtime version. Baseline and R1 omit the new field and therefore retain their original behavior. Attack A08 still mutates the observed current version and must be rejected.
+
+The current runtime expectation is also bound to `/Applications/ChatGPT.app/Contents/Info.plist`, SHA-256 `4d8b6390cf82eec96777e5cdd22993536f7fc5ef0b44809a6e1c377d0f563ce7`, and bundle identifier `com.openai.codex` as observed at `2026-08-29T04:02:47Z`. This correction changes no resource threshold and grants no admission.
+
 ## Unchanged gates
 
 R2 preserves the same 20 gates, disk/memory/renderer/RSS ceilings, bounded output, parent-evidence binding and zero-operation ceilings. It targets only fresh root `experiments/codex-host-stability-post-restart-readmission-v0-1`. It starts no Blender, browser automation, network, model, Docker, cleanup or signal operation.
+
+Before the formal run, an exact browser temporary-filesystem remediation may be performed under the separately preregistered C1 remediation record. The formal runner must observe the resulting host state; cleanup remains outside the formal experiment and does not alter its zero-operation ceiling.
 
 ## Decision
 
