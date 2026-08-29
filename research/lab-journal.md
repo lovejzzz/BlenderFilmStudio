@@ -5705,3 +5705,13 @@ Date: 2026-08-29 · Type: FULL-TIMELINE ANIMATIC PREREGISTRATION · New Blender 
 T1 v0.3的12-file root、receipt/audit/BuildPlan/independent report与337,411-byte production scene已exact复核；scene SHA为`0acd4d13…`，当前磁盘约303 GiB available。T2在四个新工具与formal root都不存在时冻结下一道门：one Blender fresh render 288帧640×360 Eevee Next 16 spp PNG；one independent Blender zero-render复开，解码288帧并测close 193–288全部96帧的不变D6 geometry template；随后ffmpeg/ffprobe生成并验证12秒MP4，Node做14 gates。
 
 像素门只检测corruption/freeze/routing：每帧finite、dynamic、非纯黑白，三shot各至少2个decoded digests、全片至少10个、两处cut pair必须不同；不把该指标包装成感知电影评分。相机路由逐帧exact，contact/core/warm-light causal state保持。预算2 Blender starts、288 Eevee/0 Cycles renders、128 MiB writes、2 GiB RSS/Blender、100 GiB reserve，zero model/network/Docker/Colima。machine PASS仍为HUMAN_PENDING；只有完整视频人工复核后才授权final Cycles与controlled restart。
+
+## J-458 · B62-T2 v0.1在首个camera cut退出，C1显式marker路由预注册
+
+Date: 2026-08-29 · Type: RETAINED PARTIAL-ANIMATIC FAILURE / CAMERA-MARKER APPLICATION CORRECTION PREREGISTRATION · New Blender processes: 1 · New Blender renders: 97
+
+T2工具以commit `bf56353d467e43dbdfa971e3f1c5e890aa708825`冻结推送后，fresh v0.1通过T1/runtime/capacity admission并启动真实Blender 5.2。BLENDER_RENDER运行10.676秒、peak sampled RSS 463,618,048 bytes，无budget breach，写出exact frame 0001–0097后exit 1；0 independent/ffmpeg/ffprobe/Node audit，scientific verdict为null。root永久保留100 files/25,860,818 bytes/tree `bdd2572775917ae0d4fbe80cd0d422ea273259618fc451b8e66b448b9c6b19d0`。
+
+失败边界恰好是首个cut：96仍属wide，97应切medium。renderer渲染97后发现`scene.camera`仍是wide。既有两个Phase 0 isolated-scene报告也都记录97与193仍为wide，证明`scene.frame_set()`在此路径只评估动画，不会把timeline marker绑定自动写进`scene.camera`；v0.1错误地把marker当成imperative switch。
+
+C1在任何工具改变前只授权每帧从latest marker推导路由、验证冻结name/camera、显式赋`scene.camera=marker.camera`后再render；independent Blender必须从source marker roster独立推导，不能相信mutable camera state。runner/auditor绑定v0.1 failure tree并切fresh v0.2；禁止复用97张partial PNG。三shot、camera transforms、288次Eevee、全部像素/geometry/causal/video阈值、128 MiB/2 GiB/100 GiB预算与HUMAN_PENDING边界全部不变。

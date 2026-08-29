@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "bfs.b62TerminalAnimaticContinuityCorrection.v0.1",
+  "correctionId": "B62-T2-E1-C1",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {
+    "baseSpec": "specs/b62-terminal-animatic-continuity.v0.1.json",
+    "baseProtocol": "research/2026-08-29-b62-t2-terminal-animatic-continuity-protocol.md",
+    "preregistrationCommit": "3de7040d607a5439d1c556a57a6eaebdae03f65d",
+    "failedToolFreezeCommit": "bf56353d467e43dbdfa971e3f1c5e890aa708825"
+  },
+  "retainedFailure": {
+    "root": "experiments/b62-terminal-animatic-continuity-v0-1",
+    "tree": {
+      "files": 100,
+      "bytes": 25860818,
+      "treeSha256": "bdd2572775917ae0d4fbe80cd0d422ea273259618fc451b8e66b448b9c6b19d0"
+    },
+    "admission": {
+      "uri": "experiments/b62-terminal-animatic-continuity-v0-1/admission.json",
+      "sha256": "5d412e3a0193ee9080a9183b776629e861f06e2128233b3b585375b02ae161d9",
+      "admissionHash": "33cc1e1a46dc9b8295cacdefde9ca1e3bbfd0846bd385673fecccbed917e4a01"
+    },
+    "failure": {
+      "uri": "experiments/b62-terminal-animatic-continuity-v0-1/failure.json",
+      "sha256": "3033f6ec17ced3922f078629e696a7f0f4501e443347caedc456b7f06d62d6df",
+      "failureHash": "091c4ae16ff81a72a2be29370b744ea8e6deb59c1738351c9b20ec41c82b9691"
+    },
+    "renderProcess": {
+      "uri": "experiments/b62-terminal-animatic-continuity-v0-1/processes/BLENDER_RENDER.json",
+      "sha256": "85e657f38c60c377b98e1073fa696e3d2fefc0b14d05bb5fdddc57f33df2722d",
+      "processHash": "670f4affd7fb02a6a32e1f1687a07859b2273685be04d9b004f273e1f45d1eb0",
+      "elapsedMs": 10676,
+      "peakSampledRssBytes": 463618048,
+      "breach": null,
+      "exitCode": 1
+    },
+    "frames": {
+      "count": 97,
+      "first": {"uri": "experiments/b62-terminal-animatic-continuity-v0-1/frames/frame-0001.png", "sha256": "289f60897c4f99f5829f98c4d0b961484d30fca581fe6f18cc60738b77d862fe", "bytes": 266515},
+      "lastWide": {"uri": "experiments/b62-terminal-animatic-continuity-v0-1/frames/frame-0096.png", "sha256": "1e49993e4b4baea4c26628261a7e557acf2f179127781a381b8c4c3a9a888f23", "bytes": 266515},
+      "firstAfterCut": {"uri": "experiments/b62-terminal-animatic-continuity-v0-1/frames/frame-0097.png", "sha256": "ce1dbf3c47d009dd74d781df4d0a1bf294a8c18aa27019806ede0d63c352071a", "bytes": 266515}
+    },
+    "scientificVerdict": null
+  },
+  "diagnosis": {
+    "observation": "The render wrote exact frames 1 through 97 and then exited without a budget breach. Frame 97 is the first preregistered camera cut.",
+    "reproducedPriorEvidence": "Both retained Phase 0 isolated-scene animatic reports recorded CAM_WIDE_APPROACH at frames 97 and 193 even though their timeline markers bind medium and close cameras.",
+    "cause": "In this isolated non-active Scene evaluation path, scene.frame_set(frame) evaluates animation but does not apply a timeline marker's camera binding to scene.camera. The v0.1 renderer incorrectly treated the marker as an imperative camera switch and rejected the stale wide camera immediately after rendering frame 97.",
+    "classification": "BLENDER_TIMELINE_MARKER_CAMERA_APPLICATION_SEMANTICS",
+    "pixelDecision": "INVALIDATED_BEFORE_COMPLETE_ROSTER"
+  },
+  "authorizedChanges": {
+    "retryRoot": "experiments/b62-terminal-animatic-continuity-v0-2",
+    "renderer": "For each frame, derive the active marker as the greatest marker.frame not exceeding the frame; require its exact name/camera against the frozen routing; explicitly assign scene.camera to marker.camera before rendering and record both marker and camera.",
+    "independentBlender": "Independently derive per-frame routing from the exact source marker roster rather than reading scene.camera as if markers mutate it. Record selected marker and camera. The geometry implementation may explicitly assign the frozen close camera only for its own measurement.",
+    "runnerAndNodeAuditor": "Bind this correction and the immutable v0.1 failure tree, change only the fresh root to v0.2, and require every render/independent routing row to include the exact selected marker.",
+    "freshExecution": "Render all 288 frames again from the T1 source. Reuse of any v0.1 PNG is forbidden."
+  },
+  "frozenUnchanged": {
+    "sourceSceneSha256": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+    "timeline": "1-288 at 24 fps; cuts 96/97 and 192/193; exact three marker names and cameras",
+    "render": "640x360 Eevee 16 spp RGBA PNG, motion blur, pinned ACES-v2 contract, 288 fresh render calls",
+    "pixelAcceptance": "All corruption, dynamic-range, temporal and cut thresholds unchanged",
+    "closeGeometryAcceptance": "All 96 frames and every D6 threshold unchanged",
+    "causalStateAcceptance": "Frames and core/contact/warm-light values unchanged",
+    "video": "H.264 yuv420p 640x360 24 fps 288 frames 12 seconds fast-start",
+    "budgets": "Two Blender starts, 128 MiB output/projected write, 2 GiB RSS per Blender, 100 GiB reserve; zero model/network/Docker/Colima",
+    "decision": "Fourteen gates, outcome-neutral supported/rejected mapping and HUMAN_PENDING boundary unchanged"
+  },
+  "nonClaims": [
+    "The 97 partial PNGs are not a valid animatic or scientific pixel sample.",
+    "Explicit marker application does not change any camera transform, cut frame or acceptance threshold.",
+    "A successful retry would remain an Eevee continuity test, not final film quality."
+  ]
+}
