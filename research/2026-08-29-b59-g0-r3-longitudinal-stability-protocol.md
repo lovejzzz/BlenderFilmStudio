@@ -18,6 +18,10 @@ The first disposable rehearsal showed that fixed wall-clock due times can produc
 
 The same rehearsal exposed that A05 used a hard-coded 1,000 ms forged interval, which equals rather than violates a one-second rehearsal spec. C1 defines the forged interval as the selected spec's minimum minus one millisecond. The production attack identifier and gate remain unchanged.
 
+### Preregistered correction C2: synthetic-control sealing order
+
+The C1 rehearsal passed all 14 pre-audit gates and all 20 attacks, but the auditor blocked its synthetic admissible control. Diagnosis showed that the control projected `EVIDENCE_BOUNDED_AND_SELF_HASHED` while the aggregate result still carried its pre-projection self-hash; the result was sealed only after projection, leaving a stale false gate in an otherwise valid control. Before any formal R3 root existed, C2 added an intermediate result seal before gate projection, followed by the existing final seal. No observed evidence, attack, threshold or production gate changes.
+
 Each sample records current Codex version and app identity, main PID set, renderer count, maximum renderer RSS, total Codex-tree RSS, system-wide free-memory percentage, available disk bytes, browser temporary-filesystem allocated bytes and entry count, forbidden-process counts, and matching post-start Codex crash reports. Large process listings and file inventories are never returned to the UI.
 
 ## Frozen longitudinal limits

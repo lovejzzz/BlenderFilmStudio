@@ -1,7 +1,7 @@
 # B59-G0-R3-C1 · Actual-capture timing correction
 
 Date: 2026-08-29
-Status: PREREGISTERED — implementation not yet changed
+Status: IMPLEMENTED — timing and A05 validated; independent control blocked by separately preregistered C2
 Formal R3 root at registration: absent
 
 ## Failed rehearsal evidence
