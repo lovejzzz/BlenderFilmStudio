@@ -5189,3 +5189,13 @@ Date: 2026-08-29 · Type: CORRECTED OFFICIAL PREFLIGHT ADMISSION · New Blender 
 Tool-freeze `9a84cfdcdbca17ce88ef87e85ce00f0c5cd6e3d4`推送后，fresh clone通过临时只读node_modules symlink运行同构preflight，返回`ACCEPTED 9/9`、self-hash `cf8e1142f1c24aa798f2ad51a914df3dd563c287973fd95b66ccd4ff788dd6e9`；临时clone/symlink随后validated depth-first删除。
 
 主仓库确认v0.4三根fresh后official preflight同样9/9。File SHA/self-hash为`f249524f87f350436e424b635c3d3ff9a2342e466b77fd2d605ef46ac80ae8c2 / c0b9b39fdd96c813ba3b675cf60171737f77f775844b1fef98e3e8877258cbaa`；v0.3 failure trees与D4 result/receipt exact。Available bytes 318,404,898,816，operations全零；attempt/formal继续不存在。下一动作提交推送preflight evidence，然后运行v0.4正式矩阵。
+
+## J-403 · B61 v0.4证明headless Render Result无data，D5预注册
+
+Date: 2026-08-29 · Type: FORMAL COUNTEREXAMPLE / DIAGNOSTIC PREREGISTRATION · Real Blender processes: 1 · Rendered EXR frames: 1
+
+v0.4首帧再次完成EXR/OIIO projection，digest仍为`192237bd…`，stage停在sequence 5。Isolated review scene已创建并接受PNG，但`Render Result.save_render`抛出`Image Render Result does not have any image data`；这证明C3只解决了format context，headless buffer ownership仍未解决。其余5个render processes与auditors未启动。
+
+Failure summary file SHA/self-hash为`8b83f86d357b9e42adefd05921cd680415e8f780d46c67c86319ac8ccfdd8f20 / 959d9dbda9393f1b90293a9cc011d793b8edfd113821ba278e03f3b1b92895ff`；attempt/formal trees为6 files/7,785 bytes/`55a11af4…`与5 files/1,351,670 bytes/`75d459d5…`。
+
+D5预注册为one-Blender/zero-render 1080p probe：从保留EXR得到exact OIIO RGBA array，创建temporary Blender float image，再经isolated review scene输出PNG并清理。该路径复用已证明的两半，但必须在正式C4前验证完整1920×1080数据量。

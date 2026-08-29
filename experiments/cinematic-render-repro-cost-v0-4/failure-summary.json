@@ -1,0 +1,46 @@
+{
+  "completed": {
+    "exrFrames": 1,
+    "pixelProjections": 1,
+    "pngFrames": 0,
+    "renderBlenderStarts": 1,
+    "renderCalls": 1,
+    "remainingRenderBlenderStarts": 5
+  },
+  "evidence": {
+    "exr": {
+      "bytes": 1345827,
+      "containerSha256": "e13cf4c7a3e8a8a30d1bb7ce7429259504f68b852f7ef1d0840977eb12a30c1f",
+      "decodedCombinedSha256": "192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a",
+      "uri": "experiments/cinematic-render-repro-cost-v0-4/runs/WIDE-A/frame-0001.exr"
+    },
+    "lastStageEvent": {
+      "eventHash": "66d8e1da51505fea47a3cf98fb93508a727872c6ae207b9c6c3cd78d0b509843",
+      "eventType": "PIXEL_PROJECTED",
+      "sequence": 5
+    },
+    "process": {
+      "exitCode": 1,
+      "pythonExitCodeEnforced": true,
+      "sha256": "54a8a5ddcc3f458e685f9e002e969816fd1c1de9fbe15cee64dda663955b238f",
+      "uri": "experiments/cinematic-render-repro-cost-attempt-v0-4/processes/WIDE-A.json"
+    },
+    "stderrSha256": "95af75256fa2e26f5b3c31abf1fdb8f27de4e4df8c964e644756e4eda555e221",
+    "stdoutSha256": "1a921aa02c361186a66a6f699487683ffc7c7227967793ac0bf19914bf0b7554"
+  },
+  "exception": {
+    "type": "RuntimeError",
+    "message": "Image Render Result does not have any image data",
+    "rejectedOperation": "Render Result.save_render using isolated review scene"
+  },
+  "failureHash": "959d9dbda9393f1b90293a9cc011d793b8edfd113821ba278e03f3b1b92895ff",
+  "message": "The isolated review scene accepted PNG, but headless write_still left Render Result without image data for save_render. The OIIO decoded Combined projection remained exact and is the available source for a generated float review image.",
+  "partialEvidenceRetained": true,
+  "preflightEvidenceCommit": "9fcdb55e16da3bb0cb75070b1d0d4c90a30bfe54",
+  "reason": "HEADLESS_RENDER_RESULT_HAS_NO_IMAGE_DATA_FOR_REVIEW_SAVE",
+  "rootCauseProven": true,
+  "schemaVersion": "bfs.cinematicRenderReproCostFailureSummary.v0.4",
+  "scientificVerdict": null,
+  "status": "INVALIDATED",
+  "toolFreezeCommit": "9a84cfdcdbca17ce88ef87e85ce00f0c5cd6e3d4"
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "bfs.cinematicRenderGeneratedReviewImageDiagnostic.v0.1",
+  "diagnosticId": "B61-E1-D5",
+  "status": "PREREGISTERED",
+  "failedRun": {
+    "attemptRoot": "experiments/cinematic-render-repro-cost-attempt-v0-4",
+    "formalRoot": "experiments/cinematic-render-repro-cost-v0-4",
+    "attemptTree": { "files": 6, "bytes": 7785, "sha256": "55a11af4e610974a3baae6feb8d131fa58d08a3aa474e29ab523e525b7c5b725" },
+    "formalTree": { "files": 5, "bytes": 1351670, "sha256": "75d459d54198f5963e6b1d5a552b89853311cf1e981274c8cc63f04e9c2aaf3c" },
+    "failureSummary": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-4/failure-summary.json",
+      "sha256": "8b83f86d357b9e42adefd05921cd680415e8f780d46c67c86319ac8ccfdd8f20",
+      "failureHash": "959d9dbda9393f1b90293a9cc011d793b8edfd113821ba278e03f3b1b92895ff"
+    },
+    "retainedExr": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-4/runs/WIDE-A/frame-0001.exr",
+      "containerSha256": "e13cf4c7a3e8a8a30d1bb7ce7429259504f68b852f7ef1d0840977eb12a30c1f",
+      "decodedCombinedSha256": "192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a"
+    }
+  },
+  "outputRoot": "experiments/b61-generated-review-image-diagnostic-v0-1",
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "timeoutSeconds": 60,
+    "maximumOutputBytes": 16777216
+  },
+  "probe": "Decode retained EXR Combined RGBA with the frozen OpenImageIO algorithm; require the frozen digest; create a temporary 1920x1080 Blender float image from those exact values; save it as PNG through an isolated review scene; verify PNG header/dimensions; remove temporary image and scene; preserve production settings.",
+  "successCriteria": {
+    "decodedDigestExact": true,
+    "generatedFloatImageHasData": true,
+    "pngWidth": 1920,
+    "pngHeight": 1080,
+    "productionSettingsUnchanged": true,
+    "zeroRenderCalls": true
+  },
+  "decisionRule": "PASS authorizes preregistration of C4 to build the review PNG from the already-decoded Combined RGBA array instead of Render Result. It does not authorize formal retry by itself.",
+  "claimBoundary": {
+    "reviewOnly": true,
+    "formalRetryAuthorized": false,
+    "pixelThresholdChanged": false,
+    "qualityThresholdChanged": false
+  }
+}
