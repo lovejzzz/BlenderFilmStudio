@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "bfs.host-capacity-retention-results.v0.1",
+  "experimentId": "B59-G0-R6-C1",
+  "completedAt": "2026-08-29T06:56:04.793Z",
+  "observedAt": "2026-08-29T06:56:04.772Z",
+  "spec": {
+    "path": "specs/host-capacity-retention-c1.v0.1.json",
+    "sha256": "cb7413d1db8c23be3a9eefcc880cd8b3f529ffe0eb225b301205f71fb5ee5c4c"
+  },
+  "startReceipt": {
+    "sha256": "4ee5e1614b2833cf6b75dfa54c48f33c05dbe97e474cdec92b21925dfcdfabca",
+    "bytes": 985,
+    "selfHash": "cba138bd74ec77f2d77845dffea6dd545aff3348e97c926df69c567c8425fe18"
+  },
+  "sourceReceipts": {
+    "history": {
+      "sha256": "caa893e1e2ff52280ff6d43e21c48a9d306d9ee5d01d61943c9a15edd2e5a329",
+      "bytes": 6141,
+      "selfHash": null
+    },
+    "latest": {
+      "sha256": "e885cf0c41e7aee219c84226cc178e28449c32837a474711647d1ae7837024a9",
+      "bytes": 1874,
+      "selfHash": null
+    }
+  },
+  "aggregate": {
+    "sampleCount": 5,
+    "intervalsMs": [
+      900223,
+      900151,
+      900195,
+      900252
+    ],
+    "spanMs": 3600821,
+    "latestAgeMs": 255730,
+    "minimumAvailableBytes": 319742877696,
+    "diskLossBytes": 294092800,
+    "diskLossRateBytesPerHour": 294025745.79519504,
+    "maximumSingleIntervalLossBytes": 95473664,
+    "browserMaximumBytes": 20480,
+    "browserGrowthBytes": 0,
+    "colimaAllocatedGrowthBytes": 602112,
+    "colimaAllocatedGrowthRateBytesPerHour": 601974.7163216388,
+    "severities": [
+      "HEALTHY",
+      "HEALTHY",
+      "HEALTHY",
+      "HEALTHY",
+      "HEALTHY"
+    ]
+  },
+  "launchd": {
+    "target": "gui/501/com.blenderfilmstudio.capacity-sentinel",
+    "loaded": true,
+    "runs": 5,
+    "lastExitCode": 0,
+    "intervalSeconds": 900,
+    "printSha256": "d3c134e90ea759ca21890b5e79999e3020c55bfbdd2355d2b2d410565f35c62b",
+    "printBytes": 1560
+  },
+  "runtime": {
+    "codexVersion": "26.825.32147 (7303)",
+    "appPlistSha256": "4d8b6390cf82eec96777e5cdd22993536f7fc5ef0b44809a6e1c377d0f563ce7",
+    "bundleIdentifier": "com.openai.codex",
+    "main": [
+      {
+        "pid": 26962,
+        "startedAt": "2026-08-29T03:58:05.000Z",
+        "command": "/Applications/ChatGPT.app/Contents/MacOS/ChatGPT"
+      }
+    ],
+    "crashReports": []
+  },
+  "resourceAccounting": {
+    "blenderProcesses": 0,
+    "dockerCalls": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "cleanupOperations": 0,
+    "serviceMutations": 0
+  },
+  "gates": {
+    "SPEC_PARENT_AND_RELEASE_IDENTITY": true,
+    "SOURCE_SELF_HASH_AND_BOUNDS": true,
+    "SAMPLE_COUNT_SPAN_AND_CADENCE": true,
+    "ALL_SAMPLES_CLASSIFY_HEALTHY": true,
+    "DISK_FLOOR_AND_LOSS_RATE": true,
+    "BROWSER_TEMP_BOUNDED": true,
+    "COLIMA_ALLOCATION_GROWTH_BOUNDED": true,
+    "PROHIBITED_ACTIONS_ZERO": true,
+    "LAUNCHD_CONTINUITY": true,
+    "CODEX_RUNTIME_PID_AND_CRASH_CONTINUITY": true,
+    "SNAPSHOT_AND_RESULTS_INTEGRITY": true,
+    "INDEPENDENT_AUDIT_REPLAY": "PENDING"
+  },
+  "failedGates": [],
+  "provisionalVerdict": "ADMITTED_PENDING_AUDIT",
+  "receiptBytes": 3062,
+  "selfHash": "14cd372c94c6063734f66ab9e39273ce46e41c71fea4f3eabb399a73906b13e7"
+}

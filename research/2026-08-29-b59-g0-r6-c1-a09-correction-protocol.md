@@ -1,7 +1,7 @@
 # B59-G0-R6-C1 · Span-normalized A09 correction protocol
 
 Date: 2026-08-29
-Status: PREREGISTERED
+Status: COMPLETE — ADMITTED
 Parent evidence: B59-G0-R6 `INVALID_UNATTENDED_RETENTION`
 
 ## Counterexample being corrected
@@ -29,3 +29,9 @@ The candidate last available value becomes `first.availableBytes - breachLossByt
 - Runner admission still requires all 11 pre-audit gates. Auditor admission still requires all 12 gates and 15/15 attack rejections.
 
 Passing C1 establishes `ONE_HOUR_UNATTENDED_RETENTION_ADMITTED` for the full frozen C1 history. It supplies one required input to Gate 0 closeout; it does not itself close Gate 0 or authorize B58.
+
+## Recorded outcome
+
+C1 froze the same complete five-sample history as R6, preserving the 3,600.821-second observation and all healthy host metrics. The runner passed 11/11 pre-audit gates. The independent auditor passed all nine integrity/live checks and rejected 15/15 attacks, including the corrected span-normalized A09. Final verdict: `ONE_HOUR_UNATTENDED_RETENTION_ADMITTED`.
+
+Results and audit SHA-256 are `f0c246f1b2f295cbf07b0a2dc1f3e948677f2a16c213142551582355b5a81045` and `0643f75e223f35be81dfa11f4255d54044b369dc85da3fcb3bc3dd46565598db`. The original R6 INVALID evidence remains unchanged.

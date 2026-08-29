@@ -4715,3 +4715,15 @@ C1 preregistration commit `1a5a534db7e345d3b2ed811e5bf26d406972867f`推送后，
 Auditor新增唯一的`diskRateBreachLoss`修正：从候选首尾时间重算span，构造`floor(maxRate * spanMs / 3,600,000) + 1` bytes，并在施加mutation前断言重算rate严格大于maxRate。专门的3,600.821-second drift self-test通过；默认R6与C1 spec下的runner/auditor self-tests、Node syntax、zero-warning targeted ESLint及diff check均通过。
 
 Runner/auditor SHA为`a7bf65bef9faf7a10c407fbb0d71d1d1b0213ed3aa4ad4f2122bad6dcad6a642` / `b7638d0c67186ba18a266a48e0a2784ab5215f64036a21af4190a72b27df6ecd`。C1 read-only preflight在5 samples、3,600,821 ms span、latest age 222,438 ms、service loaded、fresh root时返回READY。下一动作只提交推送工具与本entry；随后从HEAD/origin exact的release运行fresh C1 root和独立审计。
+
+## J-354 · R6-C1一小时无人值守容量保留性正式准入
+
+Date: 2026-08-29 · Type: FORMAL UNATTENDED RETENTION READMISSION · New Blender processes: 0 · New Blender renders: 0
+
+Correction tool commit `ce54c4fc808644f11a8aa2501fdd52147b8bafc9`与origin exact后，C1 preflight在完整5-sample history、3,600,821 ms span、latest age 248,594 ms、service loaded、fresh root和父INVALID evidence SHA exact时READY。Fresh runner再次通过11/11 pre-audit gates，未改动原R6 root。
+
+Independent auditor的九项file/live integrity checks全部通过，span-normalized A09及其余14个攻击全部被拒绝，最终12/12 gates、15/15 attacks，verdict `ONE_HOUR_UNATTENDED_RETENTION_ADMITTED`。Results/audit SHA为`f0c246f1b2f295cbf07b0a2dc1f3e948677f2a16c213142551582355b5a81045` / `0643f75e223f35be81dfa11f4255d54044b369dc85da3fcb3bc3dd46565598db`；receipt仅3,062 / 2,922 bytes。
+
+冻结历史的minimum available为319,742,877,696 bytes；host loss 294,092,800 bytes、294,025,745.795 bytes/hour；maximum interval loss 95,473,664 bytes；browser zero growth；Colima growth 602,112 bytes、601,974.716 bytes/hour；5/5 severities HEALTHY、prohibited actions全0。同一Codex PID 26962持续存活且无新crash report，launchd runs 5、last exit 0、interval 900秒。
+
+C1关闭了R6长期无人值守输入，但不单独关闭Gate 0。下一动作提交推送C1证据，然后预注册Gate 0 closeout：只聚合R2 restart readmission、R4 post-reclaim、R5 active sentinel、R6-C1 unattended retention及D2 operational recovery facts，逐项验证hash、verdict、live sentinel与可恢复性，禁止把D2形式失败改写成因果成功。
