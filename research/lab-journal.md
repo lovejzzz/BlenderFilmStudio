@@ -5225,3 +5225,11 @@ Date: 2026-08-29 · Type: FORMAL CORRECTION TOOL-FREEZE CANDIDATE · New Blender
 C4 preregistration commit `e603864`推送后，render-side OIIO函数在计算原有projection receipt的同时返回同一RGBA ndarray。每帧review image只使用该array：flip Y rows、float32 contiguous、ACEScg、generated Blender float image、C3 isolated review scene；写PNG后在finally删除image。Report exact记录pixel source、colorspace、row order与source digest。不存在Render Result读取或EXR二次decode。
 
 Node supervision切换fresh v0.5 roots，freeze覆盖C2/C3/C4与D3/D4/D5 evidence；preflight复核v0.4 failure trees和D5 result/receipt；auditor逐帧绑定generated review source与decoded digest。Render/audit-python/preflight/runner/auditor SHA为`917d8a5dc0a57e2ff7df318fde0288b80906c003ba186267d0bbc7bad1ee491a / f3e998f9418917bf198424984630f9ad666ab439270a5d363b4e98f6ead54339 / 028f287f82ccf1753eed9190c5afba96efcdb6e2c8d59c08addbf40d1a283c30 / ec50d5ff4a0e959dbba0bbca7618923b11c47c8f4ed188f8d01c7cf1668890b7 / 13224333127d420a4f888063507c094c8dfc27d472c67d27a7e7474904505e8d`。静态检查通过，v0.5 roots不存在。下一动作提交推送freeze并运行fresh-clone preflight。
+
+## J-407 · B61-C4 fresh-clone与official v0.5 preflight接受
+
+Date: 2026-08-29 · Type: CORRECTED OFFICIAL PREFLIGHT ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+Tool-freeze `004b7a727c3b12de4228b7f4d175ce22d3484dfa`推送后，fresh clone通过临时只读node_modules symlink运行同构preflight，返回9/9、self-hash `82412dd14ca751efd842f2f1e0574ee045f5b798d7b8102b7656cd13f6cb0cb3`；临时树与symlink随后validated depth-first删除。
+
+主仓库v0.5 official preflight返回`ACCEPTED 9/9`。File SHA/self-hash为`50caa1eeee24806f6e9e57a076bbe35810cc2cb529c71f00c0a2c47d074c0ff6 / 034e71f80c0d3ae52d62fe08985e9166f3b4a733f026ca6b80c1a7a9620fd584`；v0.4 trees/failure与D5 result/receipt exact，available bytes 318,406,385,664，operations全零，attempt/formal roots继续fresh。下一动作提交preflight evidence后启动v0.5 18-frame matrix。
