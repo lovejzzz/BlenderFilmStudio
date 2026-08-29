@@ -20,6 +20,10 @@ D1 captures four immutable samples at least 30 seconds apart over at least 90 se
 
 The first disposable rehearsal showed that Colima emits its status lines on stderr. Before any formal D1 root existed, C1 changed the runner and auditor to capture and parse bounded stdout plus stderr from the fixed `colima status` command. Exit status, byte ceiling and command accounting remain enforced. No observation or interpretation threshold changes.
 
+### Preregistered correction C2: quoted log-field boundary
+
+The C1 rehearsal captured the stream but parsed `aarch64"` and `docker"` from Colima's `msg="..."` envelope. Before formal D1, C2 freezes the field token as non-whitespace characters excluding `"`. No expected value or gate changes.
+
 The next due time is anchored to the preceding actual capture, using the R3 C1 correction. Samples cannot be overwritten. Final results bind ordered sample hashes and the blocked R3 evidence; the auditor replays current identities and tests ten mutations.
 
 ## Frozen interpretation

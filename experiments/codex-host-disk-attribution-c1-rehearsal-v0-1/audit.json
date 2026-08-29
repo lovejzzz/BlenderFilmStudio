@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "bfs.codex-host-disk-attribution-audit.v0.1",
+  "experimentId": "B59-G0-R3-D1-C1-REHEARSAL",
+  "auditedAt": "2026-08-29T04:38:12.968Z",
+  "finalVerdict": "INVALID_ATTRIBUTION_EVIDENCE",
+  "interpretation": "NO_MATERIAL_LOSS_IN_WINDOW",
+  "integrity": {
+    "START_FILE": true,
+    "SAMPLE_FILES": true,
+    "RESULTS_FILE": true,
+    "AGGREGATE_REPLAY": true,
+    "GATE_PROJECTION": true,
+    "PARENT_FILES": true,
+    "RELEASE_REPLAY": true,
+    "COLIMA_REPLAY": true,
+    "AUDIT_COMMAND_CEILING": true
+  },
+  "attackIdsExact": true,
+  "attackResults": [
+    {
+      "id": "A01_SPEC_SHA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A02_PARENT_EVIDENCE_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A03_SAMPLE_REMOVAL",
+      "rejected": true
+    },
+    {
+      "id": "A04_TIMING_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A05_COLIMA_FILE_IDENTITY_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A06_COLIMA_BLOCK_DELTA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A07_HOST_DISK_DELTA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A08_CONTAINER_IDENTITY_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A09_SAMPLE_SELF_HASH_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A10_RESULT_SELF_HASH_MUTATION",
+      "rejected": true
+    }
+  ],
+  "attacksPassed": 10,
+  "attacksTotal": 10,
+  "finalGates": {
+    "SPEC_PARENT_AND_RELEASE_IDENTITY": true,
+    "PARENT_EVIDENCE_IDENTITY": true,
+    "SAMPLE_COUNT_ORDER_AND_TIMING": true,
+    "TRACKED_FILE_IDENTITY": true,
+    "COLIMA_RUNTIME_CONTINUITY": false,
+    "EVIDENCE_BOUNDED_AND_SELF_HASHED": true,
+    "RESOURCE_ACCOUNTING_READ_ONLY": true,
+    "INDEPENDENT_AUDIT_REPLAY": true
+  },
+  "passedGates": 7,
+  "totalGates": 8,
+  "failedGates": [
+    "COLIMA_RUNTIME_CONTINUITY"
+  ],
+  "selfHash": "717a69ba8c2b2c73d75d2ab974ff27b6fa69e22c0f96043853359de6fa3bacce"
+}

@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "bfs.codex-host-disk-attribution-results.v0.1",
+  "experimentId": "B59-G0-R3-D1-C1-REHEARSAL",
+  "completedAt": "2026-08-29T04:38:12.534Z",
+  "spec": {
+    "path": "specs/codex-host-disk-attribution.v0.1.json",
+    "sha256": "06c1e1d0aebd31e7ffa73b1914c9e08bde96c9ca5f44e948a3959d7b3e74d1d2"
+  },
+  "startReceipt": {
+    "sha256": "7352898379d55604ab5fb913a589185ddd62226a52f9744e633554b81585f94b",
+    "selfHash": "1083b483da196ac09b53c453bc3f720634e8f409868bb73a3cd6b7b88f879947",
+    "bytes": 679
+  },
+  "sampleReceipts": [
+    {
+      "index": 1,
+      "sha256": "c5876c919d30a3566f74ac94235c68b5a385bc38ab40b8d9eda3ecf869a39ac4",
+      "selfHash": "8789e118e8fe65b7cb6074907f846399e07b330c6b7c13954df1c9ee444050db",
+      "bytes": 2674
+    },
+    {
+      "index": 2,
+      "sha256": "40c45552c0d4ffa65e3358bb2a7a483ef637fac3d4276c9b09532b604c0be3a2",
+      "selfHash": "ea2ba757d2ae3a0833b4260fc435030e5e4494d75e77e1fc843934fa22d0a623",
+      "bytes": 2675
+    },
+    {
+      "index": 3,
+      "sha256": "2e64eeb3c114dc3a5be7c9e4f5b67cabd4f84762309f9522efe87da6481379ef",
+      "selfHash": "62a7466dabd5216a9149b9ddf52fc7a7e6983023e8f00c07bd494c7cfe6d9233",
+      "bytes": 2675
+    },
+    {
+      "index": 4,
+      "sha256": "6d87cbf8d4b8c549b53fb41f2f09769abad5e25680556ec4e0394f47f7aa1f6d",
+      "selfHash": "89e0e627efd3260b1936ec739b6ac5752e031c1267ce99cfdb5e5a95e99814f6",
+      "bytes": 2675
+    }
+  ],
+  "aggregate": {
+    "intervalsMs": [
+      1402,
+      1395,
+      1421
+    ],
+    "totalSpanMs": 4218,
+    "hostLossBytes": 16384,
+    "colimaGrowthBytes": 0,
+    "otherTrackedGrowthBytes": 0,
+    "residualBytes": 16384,
+    "colimaFractionOfHostLoss": 0,
+    "fileDelta": {
+      "colimaVmDisk": {
+        "allocatedGrowthBytes": 0,
+        "logicalGrowthBytes": 0
+      },
+      "colimaDataDisk": {
+        "allocatedGrowthBytes": 0,
+        "logicalGrowthBytes": 0
+      },
+      "colimaHostAgentLog": {
+        "allocatedGrowthBytes": 0,
+        "logicalGrowthBytes": 100
+      },
+      "codexLogsDatabase": {
+        "allocatedGrowthBytes": 0,
+        "logicalGrowthBytes": 0
+      },
+      "codexThreadHistoryDatabase": {
+        "allocatedGrowthBytes": 0,
+        "logicalGrowthBytes": 0
+      },
+      "codexCurrentSession": {
+        "allocatedGrowthBytes": 0,
+        "logicalGrowthBytes": 0
+      },
+      "codexLocalStorageLog": {
+        "allocatedGrowthBytes": 0,
+        "logicalGrowthBytes": 0
+      }
+    }
+  },
+  "interpretation": "NO_MATERIAL_LOSS_IN_WINDOW",
+  "commands": [
+    {
+      "label": "git-status",
+      "stdoutBytes": 0
+    },
+    {
+      "label": "git-ids",
+      "stdoutBytes": 82
+    },
+    {
+      "label": "git-parent",
+      "stdoutBytes": 0
+    },
+    {
+      "label": "s1-colima",
+      "stdoutBytes": 545
+    },
+    {
+      "label": "s1-containers",
+      "stdoutBytes": 172
+    },
+    {
+      "label": "s2-colima",
+      "stdoutBytes": 545
+    },
+    {
+      "label": "s2-containers",
+      "stdoutBytes": 172
+    },
+    {
+      "label": "s3-colima",
+      "stdoutBytes": 545
+    },
+    {
+      "label": "s3-containers",
+      "stdoutBytes": 172
+    },
+    {
+      "label": "s4-colima",
+      "stdoutBytes": 545
+    },
+    {
+      "label": "s4-containers",
+      "stdoutBytes": 172
+    }
+  ],
+  "resourceAccounting": {
+    "filesystemWritesOutsideFormalRoot": 0,
+    "cleanupOperations": 0,
+    "signalsSent": 0,
+    "containerMutations": 0,
+    "vmMutations": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "observationCommands": 11
+  },
+  "gates": {
+    "SPEC_PARENT_AND_RELEASE_IDENTITY": true,
+    "PARENT_EVIDENCE_IDENTITY": true,
+    "SAMPLE_COUNT_ORDER_AND_TIMING": true,
+    "TRACKED_FILE_IDENTITY": true,
+    "COLIMA_RUNTIME_CONTINUITY": false,
+    "EVIDENCE_BOUNDED_AND_SELF_HASHED": true,
+    "RESOURCE_ACCOUNTING_READ_ONLY": true,
+    "INDEPENDENT_AUDIT_REPLAY": "PENDING"
+  },
+  "failedGates": [
+    "COLIMA_RUNTIME_CONTINUITY"
+  ],
+  "provisionalVerdict": "INVALID_EVIDENCE",
+  "receiptBytes": 4082,
+  "selfHash": "bd59efbc2bff77245e93390e4a3d717155609ccb5801a4ca3dd3a895aa3d3a4c"
+}
