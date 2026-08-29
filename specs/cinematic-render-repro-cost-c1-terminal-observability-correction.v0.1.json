@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "bfs.cinematicRenderReproCostTerminalObservabilityCorrection.v0.1",
+  "correctionId": "B61-E1-C1",
+  "status": "PREREGISTERED",
+  "parentContract": {
+    "uri": "specs/cinematic-render-repro-cost.v0.1.json",
+    "sha256": "31f97230426dbf70cd76d4bd5d87d1a94cabf6f53755f58faab96998c06512e2"
+  },
+  "failedRun": {
+    "preflightRoot": "experiments/cinematic-render-repro-cost-preflight-v0-1",
+    "attemptRoot": "experiments/cinematic-render-repro-cost-attempt-v0-1",
+    "formalRoot": "experiments/cinematic-render-repro-cost-v0-1",
+    "attemptTree": { "files": 4, "bytes": 3102, "sha256": "f6a21fb52adb213f046ffbab0d70b2fbad9b2a27b0e9b23b54176058449cd6b3" },
+    "formalTree": { "files": 4, "bytes": 1348155, "sha256": "bf4829188e4a5e5933af245bc2a3f2acb101b595a34cbb4e5bb4939153aa3c53" },
+    "failureSummary": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-1/failure-summary.json",
+      "sha256": "986e861d6f047caef388ac02a391ec04d15facb648a50b1b7cdf3861cd44625f",
+      "failureHash": "905dc1ee6af5148aa7ce0e643cef5c73b2a04de93f1a190df02ca3147fcc7978"
+    },
+    "lastArtifact": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-1/runs/WIDE-A/frame-0001.exr",
+      "sha256": "679e199ae36998dd3bfcfbf8ffb7ae2bbc1f7e3a301e875a91b14d752b99a646"
+    },
+    "observed": {
+      "renderBlenderStarts": 1,
+      "exrFrames": 1,
+      "pixelReports": 0,
+      "pngFrames": 0,
+      "runReports": 0,
+      "exitCode": 0,
+      "stdoutBytes": 1162,
+      "stderrBytes": 1388,
+      "rawLogContentRetained": false,
+      "rootCauseProven": false
+    }
+  },
+  "authorizedRetryRoots": {
+    "preflight": "experiments/cinematic-render-repro-cost-preflight-v0-2",
+    "attempt": "experiments/cinematic-render-repro-cost-attempt-v0-2",
+    "formal": "experiments/cinematic-render-repro-cost-v0-2"
+  },
+  "authorizedCorrections": {
+    "blenderPythonExitCode": 1,
+    "requiredBlenderArgument": "--python-exit-code 1",
+    "maximumCapturedStdoutBytes": 4194304,
+    "maximumCapturedStderrBytes": 4194304,
+    "durableRawLogs": true,
+    "logWritePrecedesProcessReceipt": true,
+    "renderStageLedger": {
+      "uri": "<run-output>/stage-events.jsonl",
+      "durableAppend": true,
+      "events": [
+        "PROCESS_BOUND",
+        "FRAME_STARTED",
+        "EXR_WRITTEN",
+        "EXR_REOPENED",
+        "PIXEL_PROJECTED",
+        "PNG_WRITTEN",
+        "PIXEL_REPORT_WRITTEN",
+        "RUN_REPORT_WRITTEN"
+      ]
+    },
+    "failurePolicy": "STOP_AFTER_FIRST_NONZERO_OR_MISSING_TERMINAL_RECEIPT_AND_RETAIN_ALL_PARTIAL_EVIDENCE"
+  },
+  "unchanged": [
+    "three shots",
+    "frames 1 72 144",
+    "A B repetitions",
+    "64 samples",
+    "1920x1080",
+    "Cycles CPU",
+    "frozen OCIO",
+    "decoded Combined exact pixel digest",
+    "six render Blender starts",
+    "eighteen render calls",
+    "one EXR reopen Blender",
+    "sixteen gates",
+    "ten negative controls",
+    "120 second timeout",
+    "100 GiB reserve",
+    "1 GiB formal ceiling",
+    "claim boundary"
+  ],
+  "claimBoundary": {
+    "rootCauseOfV01": "UNPROVEN",
+    "authorizationIsObservabilityOnly": true,
+    "qualityThresholdChanged": false,
+    "pixelThresholdChanged": false
+  }
+}

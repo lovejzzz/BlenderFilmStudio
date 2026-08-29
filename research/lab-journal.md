@@ -5037,3 +5037,13 @@ Date: 2026-08-29 · Type: B61 OFFICIAL PREFLIGHT ADMISSION · New Blender proces
 Tool-freeze commit `0e68107`推送后，全新临时clone运行exact-root preflight，返回`ACCEPTED 9/9`、self-hash `c6efbeed…`；三份source/production bindings、v0.3 calibration、v0.1/v0.2 retained failures、五项工具、矩阵与资源上限全部通过，operations全零。临时clone随后以validated `/tmp/bfs-b61-preflight.*` target depth-first删除。
 
 主仓库确认三根fresh后运行official preflight，同样`ACCEPTED 9/9`。File SHA/self-hash为`cb1f222d5a08eafb1253c52678bf64e7641ef6dafa7dd7824202e0ffee2519fe / 6b0bcf86af7a5ddc284186b015bc2bfb330a908566f84908760a3688b3ef5c52`；available 318,655,078,400 bytes，预留1 GiB formal后仍高于100 GiB reserve。Blender/render/frame/model/network/Docker均0，attempt/formal roots继续不存在。下一动作仅提交推送此receipt与本entry形成evidence commit；之后formal runner才可创建18帧矩阵。
+
+## J-386 · B61 v0.1首帧后无终结receipt，C1 observability修正预注册
+
+Date: 2026-08-29 · Type: B61 FORMAL COUNTEREXAMPLE / CORRECTION PREREGISTRATION · Real Blender processes: 1 · Rendered EXR frames: 1
+
+Preflight evidence commit `476cd03`推送后，formal runner启动WIDE-A。进程在frozen OCIO phase gate下约5.07秒写出`frame-0001.exr`，SHA `679e199a…`，随后没有pixel/PNG/run report；其余5个render cases、EXR auditor和Node auditor均未启动。Runner写self-hashed invalidation，file SHA/self-hash `a46698b9… / 459cf821…`。
+
+Invocation缺少`--python-exit-code 1`，且process receipt只保留stdout/stderr 1162/1388 bytes的SHA，没有正文。因而exit 0不能证明Python成功，日志缺口也使具体exception不可恢复；failure summary明确标记`rootCauseProven:false`，file SHA/self-hash `986e861d… / 905dc1ee…`。Attempt tree为4 files/3,102 bytes/`f6a21fb5…`，formal tree为4 files/1,348,155 bytes/`bf482918…`。
+
+C1仅授权fresh v0.2加入Python exit-code、4 MiB bounded durable raw logs和8-stage fsync ledger；所有像素、质量、资源与claim门槛不变。v0.2三根当前不存在。下一动作提交推送C1与完整v0.1失败树，再修改工具；不得覆盖v0.1或直接猜测根因。
