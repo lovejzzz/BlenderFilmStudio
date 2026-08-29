@@ -3,6 +3,7 @@ import hashlib
 import json
 import math
 import os
+import struct
 import sys
 import tempfile
 
@@ -44,6 +45,8 @@ def sha256_file(path):
 def normalize(value):
     if isinstance(value, float) and math.isfinite(value) and value.is_integer():
         return int(value)
+    if isinstance(value, float) and math.isfinite(value):
+        return {"$f64be": struct.pack(">d", value).hex()}
     if isinstance(value, list):
         return [normalize(item) for item in value]
     if isinstance(value, dict):

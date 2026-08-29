@@ -5,6 +5,7 @@ import math
 import os
 from pathlib import Path
 import sys
+import struct
 import time
 
 import bpy
@@ -40,6 +41,7 @@ def sha256_file(path):
 
 def normalize(value):
     if isinstance(value, float) and math.isfinite(value) and value.is_integer(): return int(value)
+    if isinstance(value, float) and math.isfinite(value): return {"$f64be": struct.pack(">d", value).hex()}
     if isinstance(value, list): return [normalize(item) for item in value]
     if isinstance(value, dict): return {key: normalize(item) for key, item in value.items()}
     return value

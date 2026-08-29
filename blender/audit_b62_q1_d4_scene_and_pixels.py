@@ -1,4 +1,4 @@
-import argparse, hashlib, json, math, os, sys, tempfile
+import argparse, hashlib, json, math, os, struct, sys, tempfile
 from pathlib import Path
 import bpy, numpy, OpenImageIO as oiio
 from bpy_extras.object_utils import world_to_camera_view
@@ -21,6 +21,7 @@ def sha(path):
     return h.hexdigest()
 def normalize(v):
     if isinstance(v,float) and math.isfinite(v) and v.is_integer(): return int(v)
+    if isinstance(v,float) and math.isfinite(v): return {"$f64be":struct.pack(">d",v).hex()}
     if isinstance(v,list): return [normalize(x) for x in v]
     if isinstance(v,dict): return {k:normalize(x) for k,x in v.items()}
     return v
