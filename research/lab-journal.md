@@ -5055,3 +5055,13 @@ Date: 2026-08-29 · Type: B61 CORRECTION IMPLEMENTATION · New Blender processes
 C1/evidence commit `67f5bcd`推送后，preflight/runner/auditor改绑fresh v0.2三根，并在创建新root前复核v0.1 attempt/formal tree与failure-summary exact。Runner现在把`--python-exit-code 1`加入render与EXR-audit Blender，先exclusive+fsync写stdout/stderr各最多4 MiB的raw logs，再写含full-stream/captured hashes与truncation状态的process JSON。Render script新增hash-chained、逐append fsync的`stage-events.jsonl`，每帧记录EXR write/reopen、pixel projection、PNG与report终结；Node auditor验证20-event exact chain、raw-log binding和`pythonExitCodeEnforced:true`。
 
 C1 spec/protocol SHA为`57ed5959dd589b8086a5e7b994a0d2272e31eeed3ea4e103028267fecd3a4b11 / 00eb5670cbd306716ea61daf0bf92e4afd0d2706c57956423cb81a51cf01dfcf`。修正后render/audit-python/preflight/runner/auditor SHA为`ee5f149d18f1950b823b0479a137cd7f5523cddf0f687048d9b647282020bbe8 / f60fee8c357d951edcfdb7e1a0d82d8919c0d0a80314bcd10c86980ef8f86767 / 1fee6b79ef995f3a59f31dd230713bcd878f42ece59adeebd0710c956920a108 / d395d6aded438aab05045a332b87577a58a8532d00077e3c79b2cff75d6bcc4d / 1c1ee47e62f335aa7ad08175062b3fb8657e90d5af9df4ef1cc533873e0538b6`。Node/Python syntax、targeted ESLint zero-warning与diff check通过；v0.2 roots仍不存在。下一动作提交推送tool freeze并做fresh-clone zero-Blender preflight。
+
+## J-388 · B61-C1 fresh-clone rehearsal与official v0.2 preflight接受
+
+Date: 2026-08-29 · Type: B61 CORRECTED OFFICIAL PREFLIGHT ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+Tool-freeze commit `d4ee68a48cb0d7382dfe8f5f9317619465d43406`与origin/main exact后，全新临时clone先运行C1 v0.2同构preflight rehearsal。结果`ACCEPTED 9/9`，self-hash `8e508f3613ca8a22f9d1e7a2028d3d671697f1b42d5b78fe3fac7889fe5afee5`；v0.1 attempt/formal tree、failure summary与C1 correction binding全部exact，operations为zero Blender/render/frame/model/network/Docker。临时clone随后仅对validated `/tmp/bfs-b61-c1-preflight.*` target执行depth-first delete，并删除其marker。
+
+主仓库确认v0.2 preflight/attempt/formal三根均不存在后，以同一tool freeze签发official preflight，返回`ACCEPTED 9/9`。File SHA/self-hash为`8126d1ce93f8f8d2e772edd8ff9328b8dc1221a457b8f8afff072452212dd411 / d3f1d57ebe957754917e92ee6a474a1fa2eba33f16f783b177dfc2cf2e76f0b8`；available bytes为318,553,251,840，扣除1 GiB projected formal仍高于100 GiB reserve。记录再次确认C1只改变terminal observability，像素、质量、成本与资源阈值未改变；operations全零，attempt/formal roots继续不存在。
+
+下一动作只提交推送official v0.2 preflight与本entry形成evidence commit。之后formal runner必须同时绑定tool-freeze `d4ee68a48cb0d7382dfe8f5f9317619465d43406`与该exact evidence commit，才允许创建v0.2 attempt/formal roots并启动真实Blender。
