@@ -255,6 +255,7 @@ def main():
                     evaluated_location = close_source.evaluated_get(graph).matrix_world.translation.copy()
                     current_scale = scale_at(frame, start_value, end_value)
                     set_candidate(probe_camera, evaluated_location, current_scale)
+                    bpy.context.view_layer.update()
                     frame_rows.append({"frame": frame, "radialScale": current_scale, **observe_candidate_frame(scene, graph, probe_camera, inventory)})
                 monotonic = all(value >= 0.0 for value in adjacent)
                 maximum_change = max(adjacent)
