@@ -11,15 +11,19 @@ const execFileAsync = promisify(execFile);
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const PREREGISTRATION_COMMIT = '1043af5d7b0767e87d851ea882d859bcacb61bf0';
 const CORRECTION_COMMIT = 'c3f69dbe0c896b61574d483b33ba3a7609e15e5e';
+const CORRECTION_C2_COMMIT = 'd6a96387054e183f1673b319db8abaa97f953d7b';
 const EXPERIMENT_URI = 'specs/b62-terminal-scene-package-compiler.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-terminal-scene-package-compiler-protocol.md';
 const SCENE_SPEC_URI = 'specs/b62-terminal-proof.scene-package.v0.1.json';
 const CORRECTION_URI = 'specs/b62-terminal-scene-package-c1-assembled-master-identity.v0.1.json';
 const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-t1-c1-assembled-master-identity.md';
+const CORRECTION_C2_URI = 'specs/b62-terminal-scene-package-c2-rna-float-optics.v0.1.json';
+const CORRECTION_C2_PROTOCOL_URI = 'research/2026-08-29-b62-t1-c2-rna-float-optics.md';
 const OCIO_URI = 'color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio';
 const OCIO_SHA256 = '24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15';
 const RETAINED_ROOT = 'experiments/b62-terminal-scene-package-v0-1';
-const EXPECTED_ROOT = 'experiments/b62-terminal-scene-package-v0-2';
+const RETAINED_C2_ROOT = 'experiments/b62-terminal-scene-package-v0-2';
+const EXPECTED_ROOT = 'experiments/b62-terminal-scene-package-v0-3';
 const ASSEMBLED_MANIFEST_HASHES = { CHAR_B62_GUARDIAN: 'd03a680766dbd454d2913ae74d66f3cdd2a6fd93fb423de2601049dcb3eba416', PROP_B62_CONSOLE_CORE: '31a11b94cbcf0fafb61d301e9ff3dd5ad97d6b7a2424d4cc21c3403921a07b7e', SET_B62_OBSERVATORY: '758f53592659e76f020feabeb1a5694d36e68000e0ce9c5bb0011aa6d93c3ba1' };
 const TOOLS = ['scripts/compile-b62-terminal-build-plan.mjs', 'blender/compile_b62_terminal_scene.py', 'blender/audit_b62_terminal_scene.py', 'scripts/run-b62-terminal-scene-package.mjs', 'scripts/audit-b62-terminal-scene-package.mjs'];
 
@@ -128,20 +132,28 @@ async function main() {
   const args = parse(), freeze = args['tool-freeze-commit'];
   const experiment = JSON.parse(await readFile(await checkedExistingPath(EXPERIMENT_URI), 'utf8'));
   const correction = JSON.parse(await readFile(await checkedExistingPath(CORRECTION_URI), 'utf8'));
+  const correctionC2 = JSON.parse(await readFile(await checkedExistingPath(CORRECTION_C2_URI), 'utf8'));
   const sceneSpec = JSON.parse(await readFile(await checkedExistingPath(SCENE_SPEC_URI), 'utf8'));
   req(experiment.experimentId === 'B62-T1-E1' && experiment.output.formalRoot === RETAINED_ROOT, 'experiment mismatch');
-  req(correction.correctionId === 'B62-T1-E1-C1' && correction.authorizedChanges.retryRoot === EXPECTED_ROOT, 'correction mismatch');
+  req(correction.correctionId === 'B62-T1-E1-C1' && correction.authorizedChanges.retryRoot === RETAINED_C2_ROOT, 'correction mismatch');
+  req(correctionC2.correctionId === 'B62-T1-E1-C2' && correctionC2.authorizedChanges.retryRoot === EXPECTED_ROOT, 'C2 correction mismatch');
   const head = (await git(['rev-parse', 'HEAD'])).trim(), origin = (await git(['rev-parse', 'origin/main'])).trim();
   const preregExact = (await Promise.all([EXPERIMENT_URI, PROTOCOL_URI, SCENE_SPEC_URI].map(async uri => await hashFile(pathFor(uri)) === await committedHash(PREREGISTRATION_COMMIT, uri)))).every(Boolean);
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
   await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, freeze]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_C2_COMMIT, freeze]);
   const correctionExact = (await Promise.all([CORRECTION_URI, CORRECTION_PROTOCOL_URI].map(async uri => await hashFile(pathFor(uri)) === await committedHash(CORRECTION_COMMIT, uri)))).every(Boolean);
+  const correctionC2Exact = (await Promise.all([CORRECTION_C2_URI, CORRECTION_C2_PROTOCOL_URI].map(async uri => await hashFile(pathFor(uri)) === await committedHash(CORRECTION_C2_COMMIT, uri)))).every(Boolean);
   const toolHashes = {};
   for (const uri of TOOLS) { toolHashes[uri] = await hashFile(await checkedExistingPath(uri)); req(toolHashes[uri] === await committedHash(freeze, uri), `tool drift ${uri}`); }
   req(toolHashes[TOOLS[0]] === correction.frozenUnchanged.buildPlanCompilerSha256, 'BuildPlan compiler changed under C1');
+  req(toolHashes[TOOLS[0]] === correctionC2.frozenUnchanged.buildPlanCompilerSha256 && toolHashes[TOOLS[1]] === correctionC2.frozenUnchanged.blenderCompilerSha256, 'C2 frozen compilers changed');
   const retainedTree = await treeIdentity(RETAINED_ROOT);
   req(canonicalJson(retainedTree) === canonicalJson(correction.retainedFailure.tree), 'retained v0.1 tree drift');
   for (const binding of [correction.retainedFailure.admission, correction.retainedFailure.buildPlan, correction.retainedFailure.failure, ...Object.values(correction.retainedFailure.processes)]) req(await hashFile(await checkedExistingPath(binding.uri)) === binding.sha256, `retained evidence drift ${binding.uri}`);
+  const retainedC2Tree = await treeIdentity(RETAINED_C2_ROOT);
+  req(canonicalJson(retainedC2Tree) === canonicalJson(correctionC2.retainedFailure.tree), 'retained v0.2 tree drift');
+  for (const binding of [correctionC2.retainedFailure.admission, correctionC2.retainedFailure.buildPlan, correctionC2.retainedFailure.compileReport, correctionC2.retainedFailure.derivedScene, correctionC2.retainedFailure.failure, ...Object.values(correctionC2.retainedFailure.processes)]) req(await hashFile(await checkedExistingPath(binding.uri)) === binding.sha256, `retained C2 evidence drift ${binding.uri}`);
   const phase0Generation = await readBound(experiment.parentEvidence.phase0.generation, 'reportHash', 'legacy', value => req(value.status === 'PASS', 'Phase 0 generation invalid'));
   const phase0Audit = await readBound(experiment.parentEvidence.phase0.audit, 'auditHash', 'legacy', value => req(value.status === 'PASS', 'Phase 0 audit invalid'));
   const phase0Receipt = await readBound(experiment.parentEvidence.phase0.receipt, 'receiptHash', 'legacy', value => req(value.status === 'PASS', 'Phase 0 receipt invalid'));
@@ -168,11 +180,12 @@ async function main() {
   const markerRoutingExact = canonicalJson(after.markers) === canonicalJson(plan.timeline.cuts.map(row => ({ name: row.marker, frame: row.frame, camera: row.camera }))) && after.markers[0].camera === before.markers[0].camera && after.markers[1].camera === before.markers[1].camera && before.markers[2].camera === 'CAM_CLOSE_REFLECTION';
   const assembledIdentitiesExact = Object.entries(ASSEMBLED_MANIFEST_HASHES).every(([name, hash]) => before.assets[name]?.identityHash === hash && after.assets[name]?.identityHash === hash);
   const preservationExact = assembledIdentitiesExact && canonicalJson(before.assets) === canonicalJson(after.assets) && canonicalJson(before.actions) === canonicalJson(after.actions) && canonicalJson(before.states) === canonicalJson(after.states);
+  const opticsExact = independent.opticalPlanToleranceAbsolute === correctionC2.authorizedChanges.opticalScalarToleranceAbsolute && independent.opticalCompileToleranceAbsolute === 1e-9 && independent.opticalRows?.length === 3 && independent.opticalRows.every(row => row.planAbsoluteError <= correctionC2.authorizedChanges.opticalScalarToleranceAbsolute && row.compileAbsoluteError <= 1e-9);
   const attacks = runAttacks(mutationFixture({ sceneSpec, experiment, d6Build, toolHashes }), experiment.mutationAttacks);
   const filesystem = await statfs(repositoryRoot), availableNow = Number(filesystem.bavail) * Number(filesystem.bsize);
   const pathsSafe = [EXPERIMENT_URI, PROTOCOL_URI, SCENE_SPEC_URI, OCIO_URI, EXPECTED_ROOT, ...Object.values(experiment.parentEvidence.phase0).map(value => value.uri), ...Object.values(experiment.parentEvidence.d6).map(value => value.uri), ...TOOLS].every(uri => { try { pathFor(uri); return true; } catch { return false; } });
   const gates = [
-    ['G01_PREREGISTRATION_COMMIT_PUSHED_BEFORE_TOOL_CREATION_OR_FORMAL_ROOT', head === freeze && origin === freeze && Boolean(preregExact) && correctionExact && admission.correctionCommit === CORRECTION_COMMIT],
+    ['G01_PREREGISTRATION_COMMIT_PUSHED_BEFORE_TOOL_CREATION_OR_FORMAL_ROOT', head === freeze && origin === freeze && Boolean(preregExact) && correctionExact && correctionC2Exact && admission.correctionCommit === CORRECTION_COMMIT && admission.correctionC2Commit === CORRECTION_C2_COMMIT],
     ['G02_INPUT_SCENE_PACKAGE_SPEC_EXACT_AND_SCHEMA_SUPPORTED', await hashFile(pathFor(SCENE_SPEC_URI)) === experiment.inputSceneSpec.sha256 && sceneSpec.schemaVersion === experiment.inputSceneSpec.schemaVersion],
     ['G03_PHASE0_PARENT_FILES_AND_SELF_HASHES_EXACT_PASS', phase0Generation.status === 'PASS' && phase0Audit.status === 'PASS' && phase0Receipt.status === 'PASS' && masterExact],
     ['G04_D6_PARENT_FILES_SELF_HASHES_MACHINE_VERDICT_AND_HUMAN_SCOPE_EXACT_PASS', d6Build.status === 'PASS' && d6Audit.scientificVerdict === experiment.parentEvidence.d6.audit.scientificVerdict && d6Receipt.scientificVerdict === d6Audit.scientificVerdict && d6Human.scope === experiment.parentEvidence.d6.humanReview.scope],
@@ -188,7 +201,7 @@ async function main() {
     ['G14_THREE_MARKERS_EXACT_AND_ONLY_CLOSE_CAMERA_REROUTED', markerRoutingExact],
     ['G15_96_FRAME_LOCATION_AND_QUATERNION_BAKE_MATCHES_BUILDPLAN_WITHIN_1E_6', independent.poseRows.length === 96 && independent.maximumPoseError <= 1e-6 && independent.checks.all96PosesWithinTolerance],
     ['G16_PHASE0_ASSET_IDENTITY_MOTION_CONTACT_CORE_AND_LIGHT_STATE_PRESERVED', preservationExact && independent.checks.assetIdentityPreserved && independent.checks.contactCoreAndLightStatePreserved],
-    ['G17_TIMELINE_RENDER_EXR_MOTION_BLUR_AND_COLOR_CONTRACT_PRESERVED', canonicalJson(before.timeline) === canonicalJson(after.timeline) && canonicalJson(before.render) === canonicalJson(after.render) && independent.checks.timelineRenderAndColorContractPreserved],
+    ['G17_TIMELINE_RENDER_EXR_MOTION_BLUR_AND_COLOR_CONTRACT_PRESERVED', opticsExact && canonicalJson(before.timeline) === canonicalJson(after.timeline) && canonicalJson(before.render) === canonicalJson(after.render) && independent.checks.timelineRenderAndColorContractPreserved],
     ['G18_INDEPENDENT_FRESH_BLENDER_REOPEN_AGREES', processChecks.BLENDER_INDEPENDENT && independent.status === 'PASS' && Object.values(independent.checks).every(Boolean)],
     ['G19_TWELVE_SEMANTIC_MUTATION_ATTACKS_REJECTED_BEFORE_NATIVE_SPAWN', attacks.length === 12 && attacks.every(row => row.rejectedBeforeNativeSpawn)],
     ['G20_PROCESS_RESOURCE_ROOT_ROSTER_AND_SELF_HASHED_RECEIPTS_EXACT_WITH_ZERO_MODEL_NETWORK_DOCKER', Object.values(processChecks).every(Boolean) && rootSnapshot.bytes <= experiment.processBudget.maximumOutputBytes && compile.operations.modelCalls === 0 && compile.operations.networkCalls === 0 && compile.operations.dockerProcesses === 0 && independent.operations.renderCalls === 0 && independent.operations.modelCalls === 0 && independent.operations.networkCalls === 0 && independent.operations.dockerProcesses === 0],
@@ -197,8 +210,8 @@ async function main() {
   const pass = gates.every(row => row.pass) && attacks.every(row => row.rejectedBeforeNativeSpawn);
   const audit = await writeHashed(resolve(root, experiment.output.audit), {
     schemaVersion: 'bfs.b62TerminalScenePackageAudit.v0.1', experimentId: 'B62-T1-E1', status: pass ? 'PASS' : 'FAIL', scientificVerdict: pass ? experiment.decision.supportedVerdict : null,
-    preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, toolFreezeCommit: freeze, gates, attacks,
-    bindings: { retainedFailureTree: retainedTree, admission: { sha256: await hashFile(resolve(root, 'admission.json')), admissionHash: admission.admissionHash }, buildPlan: { sha256: await hashFile(resolve(root, 'build-plan.json')), planHash: plan.planHash }, compile: { sha256: await hashFile(resolve(root, 'reports/compile-report.json')), reportHash: compile.reportHash }, independent: { sha256: await hashFile(resolve(root, 'reports/independent-audit.json')), reportHash: independent.reportHash }, sourceMaster: { sha256: await hashFile(masterPath) }, derived: { sha256: await hashFile(resolve(root, 'scene/B62_TERMINAL_PRODUCTION.blend')) } },
+    preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, correctionC2Commit: CORRECTION_C2_COMMIT, toolFreezeCommit: freeze, gates, attacks,
+    bindings: { retainedFailureTree: retainedTree, retainedC2FailureTree: retainedC2Tree, admission: { sha256: await hashFile(resolve(root, 'admission.json')), admissionHash: admission.admissionHash }, buildPlan: { sha256: await hashFile(resolve(root, 'build-plan.json')), planHash: plan.planHash }, compile: { sha256: await hashFile(resolve(root, 'reports/compile-report.json')), reportHash: compile.reportHash }, independent: { sha256: await hashFile(resolve(root, 'reports/independent-audit.json')), reportHash: independent.reportHash }, sourceMaster: { sha256: await hashFile(masterPath) }, derived: { sha256: await hashFile(resolve(root, 'scene/B62_TERMINAL_PRODUCTION.blend')) } },
     processChecks, rootBeforeAudit: rootSnapshot, resources: { availableBytesAtAudit: availableNow, maximumOutputBytes: experiment.processBudget.maximumOutputBytes, minimumFreeReserveBytes: experiment.processBudget.minimumFreeReserveBytes },
     operations: { nodeAuditorProcesses: 1, priorBuildPlanCompilerProcesses: 2, priorBlenderStarts: 2, totalRenderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 }, nonClaims: experiment.nonClaims,
   }, 'auditHash');

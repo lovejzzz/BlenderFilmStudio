@@ -274,7 +274,16 @@ def main() -> None:
     camera = bpy.data.objects.get(contract["objectName"])
     require(camera is not None and camera.type == "CAMERA" and camera.data.name == contract["dataName"], "terminal camera missing")
     require(camera.rotation_mode == "QUATERNION" and camera.animation_data and camera.animation_data.action and camera.animation_data.action.name == contract["actionName"], "terminal animation assignment mismatch")
-    require(float(camera.data.lens) == contract["lensMillimeters"] and float(camera.data.clip_start) == contract["clipStart"] and float(camera.data.clip_end) == contract["clipEnd"], "camera optical contract mismatch")
+    optical_plan_tolerance = 1e-6
+    optical_compile_tolerance = 1e-9
+    optical_rows = []
+    for name, observed, planned, compiled in [
+        ("lensMillimeters", float(camera.data.lens), contract["lensMillimeters"], compile_report["terminalCamera"]["lensMillimeters"]),
+        ("clipStart", float(camera.data.clip_start), contract["clipStart"], compile_report["terminalCamera"]["clipStart"]),
+        ("clipEnd", float(camera.data.clip_end), contract["clipEnd"], compile_report["terminalCamera"]["clipEnd"]),
+    ]:
+        optical_rows.append({"name": name, "observed": observed, "planned": planned, "compiledObservation": compiled, "planAbsoluteError": abs(observed - planned), "compileAbsoluteError": abs(observed - compiled)})
+    require(all(row["planAbsoluteError"] <= optical_plan_tolerance and row["compileAbsoluteError"] <= optical_compile_tolerance for row in optical_rows), f"camera optical contract mismatch {optical_rows}")
     require(camera.get("bfs_experiment_id") == EXPERIMENT_ID and camera.get("bfs_package_id") == plan["packageId"] and camera.get("bfs_source_camera") == contract["sourceCamera"] and camera.get("bfs_plan_hash") == plan["planHash"], "camera provenance mismatch")
     action = camera.animation_data.action
     channelbag = anim_utils.animdata_get_channelbag_for_assigned_slot(camera.animation_data)
@@ -334,6 +343,9 @@ def main() -> None:
         "poseTolerance": 1e-6,
         "maximumPoseError": maximum_error,
         "poseRows": pose_rows,
+        "opticalPlanToleranceAbsolute": optical_plan_tolerance,
+        "opticalCompileToleranceAbsolute": optical_compile_tolerance,
+        "opticalRows": optical_rows,
         "operations": {"blenderStarts": 1, "sceneSaves": 0, "renderCalls": 0, "modelCalls": 0, "networkCalls": 0, "dockerProcesses": 0},
     }, "reportHash")
     print(f"BFS_B62_T1_INDEPENDENT PASS {len(pose_rows)} {maximum_error:.9g} {report['reportHash']}")
