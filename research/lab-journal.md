@@ -5447,3 +5447,13 @@ B62 Phase 0研究页、三张Cycles校准PNG与12秒animatic先以commit `5a6b32
 最终v90没有继续要求平台实时SSR这份完全可静态化的研究档案：先由Next输出94个确定性静态页面，再由vinext生成Sites worker/fallback，最后把static export合并到client asset tree。真实本地Wrangler检查首页、B62、Blender 5.2、Journal、PNG与MP4均200；owner-only production deployment `appgdep_6a92c3931e8c8191bc4964eb0be4ec96`成功后，使用Sites身份头重复同一六项探针，全部HTTP 200。v90 source commit为`74827cdab5eb04ea368ef533bbf8193f32866559`，archive content hash为`sha256:e4ccc822a3a5f45eaad5d825cc83a628c58029b8e65b5378ee793f72bbd3de9a`。
 
 发布层结论：研究证据现在同时存在公开GitHub Pages与owner-only Sites；构建成功、部署成功、静态媒体可达和动态页面可达必须分别验证。该闭环不改变J-429的科学边界；下一技术目标仍是camera-quality gate，而不是完整288帧Cycles。
+
+## J-431 · B62-Q1-D1相机近遮挡几何诊断预注册
+
+Date: 2026-08-29 · Type: CAMERA QUALITY DIAGNOSTIC PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+重新以原分辨率查看B62三张校准帧：WIDE与MEDIUM可读，CLOSE frame 240几乎整帧为无语义的平滑近景表面。该观察只形成公开的derivation label，不能直接授权凭眼移动相机。
+
+D1冻结two fresh Blender/zero-render只读诊断。primary与independent Python分别在frames 48/144/240投射64×36 camera rays，记录first-hit owner/distance、0.5 m near-field share、dominant owner、center ray、五个语义anchor exact visibility及角色evaluated-vertex投影。两实现不得互相import，整数roster exact、float tolerance 1e-9；随后独立Node auditor检查input/tool/runtime/process/resource/output与outcome-neutral verdict。
+
+诊断只在CLOSE同时满足dominant share≥0.90、near-field share≥0.90、5 anchors最多1个可见，且两个readable controls均不满足完整signature时，支持`B62_CLOSE_FAILURE_GEOMETRIC_NEAR_OCCLUSION_LOCALIZED`。阈值只用于定位已知反例，不是电影感定义。预算2 Blender starts、0 render、64 MiB writes、100 GiB reserve、zero model/network/Docker。下一动作先提交推送本预注册，再允许创建四个工具。

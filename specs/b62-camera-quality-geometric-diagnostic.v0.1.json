@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityGeometricDiagnostic.v0.1",
+  "experimentId": "B62-Q1-D1",
+  "title": "Read-only Blender 5.2 localization of the B62 close-shot obstruction",
+  "date": "2026-08-29",
+  "question": "Does the rejected CLOSE_REFLECTION calibration frame have a reproducible geometric near-occlusion signature that is absent from the WIDE_APPROACH and MEDIUM_CONTACT controls?",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "parentEvidence": {
+    "phase0Receipt": {
+      "uri": "experiments/b62-phase0-v0-4/receipt.json",
+      "sha256": "fd2ed6275d9152208d0a6860a3f5a2f88ec61b32d4cdff2369ae09355c5e3127",
+      "receiptHash": "462ae5409019fc1dc578dad74e9648ad1e6132641a49cffc9d73a90e770b6986",
+      "verdict": "B62_PHASE0_ASSET_ANIMATIC_AND_CALIBRATION_ADMITTED"
+    },
+    "masterScene": {
+      "uri": "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+      "sha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"
+    },
+    "calibrationPngs": [
+      {
+        "shot": "WIDE_APPROACH",
+        "frame": 48,
+        "uri": "experiments/b62-phase0-v0-4/calibration/WIDE_APPROACH-0048.png",
+        "sha256": "629efa799227c1969872675672404bd845d71458ed8da750685a643e5ec5a3d7",
+        "priorHumanObservation": "READABLE_CONTROL"
+      },
+      {
+        "shot": "MEDIUM_CONTACT",
+        "frame": 144,
+        "uri": "experiments/b62-phase0-v0-4/calibration/MEDIUM_CONTACT-0144.png",
+        "sha256": "5849f2994b324b4bfe9dfc0b32b6ddd55eba8cb3de8ac96b845ddb0f11372265",
+        "priorHumanObservation": "READABLE_CONTROL"
+      },
+      {
+        "shot": "CLOSE_REFLECTION",
+        "frame": 240,
+        "uri": "experiments/b62-phase0-v0-4/calibration/CLOSE_REFLECTION-0240.png",
+        "sha256": "98cb85862eb9c7fd619ff6b3fcb2a8b2b2eb7f8a0978c90ecb9c3616c0e1b439",
+        "priorHumanObservation": "NEARLY_FULL_FRAME_NON_SEMANTIC_SURFACE"
+      }
+    ]
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "version": "Blender 5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"
+    },
+    "launch": ["--background", "--factory-startup", "--disable-autoexec", "<master.blend>", "--python", "<frozen tool>"],
+    "forbidden": ["bpy.ops.render", "image or video generation", "scene save", "source .blend mutation", "model calls", "network access", "Docker or Colima"]
+  },
+  "design": {
+    "shots": [
+      {"id": "WIDE_APPROACH", "frame": 48, "camera": "CAM_WIDE_APPROACH", "role": "READABLE_CONTROL"},
+      {"id": "MEDIUM_CONTACT", "frame": 144, "camera": "CAM_MEDIUM_CONTACT", "role": "READABLE_CONTROL"},
+      {"id": "CLOSE_REFLECTION", "frame": 240, "camera": "CAM_CLOSE_REFLECTION", "role": "REJECTED_DERIVATION_CASE"}
+    ],
+    "screenRayGrid": {"width": 64, "height": 36, "sample": "PIXEL_CENTER", "rayMaximumMeters": 1000.0},
+    "nearFieldThresholdMeters": 0.5,
+    "semanticAnchors": ["B62_VISOR", "B62_EYE_SLIT", "B62_CHEST_LIGHT", "B62_HAND_R", "B62_CORE"],
+    "characterObjects": [
+      "B62_CHEST_LIGHT", "B62_CHEST_PLATE", "B62_EYE_SLIT", "B62_FOOT_L", "B62_FOOT_R",
+      "B62_FOREARM_L", "B62_FOREARM_R", "B62_HAND_L", "B62_HAND_R", "B62_HELMET",
+      "B62_NECK", "B62_PELVIS", "B62_SHIN_L", "B62_SHIN_R", "B62_SHOULDER_L",
+      "B62_SHOULDER_R", "B62_THIGH_L", "B62_THIGH_R", "B62_TORSO", "B62_UPPER_ARM_L",
+      "B62_UPPER_ARM_R", "B62_VISOR"
+    ],
+    "coreObjects": ["B62_CORE", "B62_CORE_RING_A", "B62_CORE_RING_B"],
+    "measurements": [
+      "evaluated camera transform, lens, sensor and clipping planes",
+      "per-grid-ray first-hit object, semantic group and distance",
+      "dominant first-hit object and share",
+      "near-field first-hit share and median hit distance",
+      "center ray first hit",
+      "exact-target visibility ray for each semantic anchor bounding-box center",
+      "character evaluated-vertex projected union bounds and on-screen vertex fraction"
+    ],
+    "primaryAndIndependentImplementations": "Two fresh Blender processes use separate Python files. Neither imports the other. Both must produce exact integer grid counts, exact first-hit object rosters, and floating measurements within 1e-9 absolute tolerance.",
+    "diagnosticSignature": {
+      "closeRequired": {
+        "dominantFirstHitObjectShareMinimum": 0.9,
+        "nearFieldFirstHitShareMinimum": 0.9,
+        "semanticAnchorExactVisibilityMaximum": 1,
+        "semanticAnchorCount": 5
+      },
+      "controlsRequired": "Neither readable control may satisfy all three close-required conditions.",
+      "scope": "These thresholds localize this already-observed failure. They are not a general cinematic-quality threshold and cannot be promoted unchanged to the later holdout."
+    }
+  },
+  "processBudget": {
+    "runnerProcesses": 1,
+    "freshBlenderProcesses": 2,
+    "nodeAuditorProcesses": 1,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "maximumWallSecondsPerBlender": 120,
+    "maximumPeakResidentSetSizeBytesPerBlender": 2147483648,
+    "maximumCombinedLogBytesPerChild": 1048576,
+    "projectedWriteBytes": 67108864,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "toolFreeze": {
+    "requiredNewTools": [
+      "blender/probe_b62_q1_geometric_visibility.py",
+      "blender/audit_b62_q1_geometric_visibility.py",
+      "scripts/run-b62-q1-geometric-diagnostic.mjs",
+      "scripts/audit-b62-q1-geometric-diagnostic.mjs"
+    ],
+    "sequence": [
+      "Commit and push this exact spec and protocol before any required tool exists.",
+      "Implement and statically validate all four tools while the formal root remains absent.",
+      "Commit and push exact tool bytes; the runner requires HEAD equals origin/main and a clean scoped worktree.",
+      "Create one fresh immutable formal root, write admission before spawning Blender, retain every partial output on failure.",
+      "Run the independent Node auditor only after both Blender children exit successfully."
+    ]
+  },
+  "output": {
+    "formalRoot": "experiments/b62-camera-quality-geometric-diagnostic-v0-1",
+    "requiredFiles": [
+      "admission.json", "processes/PRIMARY.json", "processes/INDEPENDENT.json",
+      "primary.json", "independent.json", "comparison.json", "audit.json", "receipt.json"
+    ],
+    "immutableFailurePolicy": "Any failure preserves the root. Repair requires a new correction and a new root."
+  },
+  "decision": {
+    "supportedVerdict": "B62_CLOSE_FAILURE_GEOMETRIC_NEAR_OCCLUSION_LOCALIZED",
+    "supportedWhen": "All input/runtime/tool/process bindings pass, both Blender implementations agree, CLOSE_REFLECTION satisfies the complete diagnostic signature, and neither readable control satisfies it.",
+    "rejectedVerdict": "B62_CLOSE_FAILURE_GEOMETRIC_NEAR_OCCLUSION_NOT_LOCALIZED",
+    "invalidated": "A missing or mismatched input/tool/runtime, child exception, resource breach, render call, output mutation, or auditor failure yields scientificVerdict null."
+  },
+  "nonClaims": [
+    "This diagnostic does not repair any camera.",
+    "This diagnostic does not define cinematic composition or general shot quality.",
+    "This diagnostic does not authorize the full 288-frame Cycles sequence.",
+    "The later correction must freeze its own thresholds and use temporal holdout frames not consulted during camera adjustment.",
+    "Prior human labels are disclosed derivation labels, not blinded review evidence."
+  ]
+}
