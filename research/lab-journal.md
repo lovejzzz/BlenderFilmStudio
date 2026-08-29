@@ -5423,3 +5423,15 @@ Date: 2026-08-29 · Type: ZERO-BLENDER REHEARSAL / OFFICIAL PREFLIGHT · New B62
 三个C12授权Node工具以commit `20c5c4bd07d842a0131e8b14896ae72ed09734fd`冻结推送，绑定C1–C12、retained failures、D2/D4/D5/D6/D7 evidence与D7-frozen production auditor，并切换fresh v0.4 roots。静态syntax、ESLint与diff checks通过。
 
 无`node_modules` fresh clone preflight 9/9 ACCEPTED，self-hash `a6a01d14…`；zero child/Blender/render/model/network/Docker，随后clone移入Trash。主仓库official preflight同一freeze上9/9 ACCEPTED，file/self `ae3a619c7387d5deffdb2a8c7067eb061601efd8898e8e98c481db61a17e9f88 / 6145aa064d0023e2f110993c95561ed47a8d8fceaa13c8c83d27ede8f1423bef`。available 307,508,101,120 bytes，projected 2 GiB/100 GiB reserve通过。下一动作提交推送official evidence后启动v0.4完整formal。
+
+## J-429 · B62 Phase 0 v0.4正式通过，镜头质量门仍开放
+
+Date: 2026-08-29 · Type: FORMAL PHASE-0 PASS / QUALITATIVE COUNTEREVIDENCE · New B62 Blender processes: 6 · New B62 renders: 291
+
+v0.4在tool freeze `20c5c4bd07d842a0131e8b14896ae72ed09734fd`上使用fresh roots完整重跑：generator、288-frame Eevee animatic、ffmpeg/ffprobe、frames 48/144/240三张1080p 64 spp Cycles calibration、独立Blender reopen audit与Node audit全部exit 0。18/18 gates、16/16 mutation attacks、23/23 Blender checks通过，verdict为`B62_PHASE0_ASSET_ANIMATIC_AND_CALIBRATION_ADMITTED`，receipt self-hash `462ae5409019fc1dc578dad74e9648ad1e6132641a49cffc9d73a90e770b6986`。
+
+本轮6次Blender启动、291次render（288 Eevee + 3 Cycles）、1次ffmpeg、1次ffprobe、1次Node audit；model/network/Docker均0。process wall before Node audit 154.7549秒，animatic render 29.8739秒，三张Cycles合计118.0201秒、mean 39.3400秒/frame，peak RSS 3,766,190,080 bytes。机械外推288帧约3.15小时，但明确不是实测sequence成本。attempt tree为30 files/84,420 bytes/`35a57b81…`；formal tree为311 files/122,957,493 bytes/`3de8ee7e…`。
+
+v0.3/v0.4描述性复现中，三张Cycles decoded Combined digests、三张calibration PNG、asset identity、motion action与final MP4均exact；individual animatic PNG container hashes为0/288 exact，未做新的decoded-pixel实验，因此不追加像素exact主张。
+
+人工原分辨率观察与machine verdict分开记录：WIDE与MEDIUM可读，CLOSE frame 240被前景大面积遮挡，构图质量不足。Phase 0只关闭资产、animatic、calibration与审计链，不支持电影级构图、photoreal actor、人类审片或完整288帧Cycles。下一步先预注册camera-quality gate，在关键帧与廉价animatic上拒绝坏镜头，再决定是否支付full Cycles成本。

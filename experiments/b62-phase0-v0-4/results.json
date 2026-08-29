@@ -1,0 +1,223 @@
+{
+  "attacks": [
+    {
+      "id": "N01_UPSTREAM_RECEIPT_HASH_DRIFT",
+      "pass": true,
+      "rejection": "upstream receipt drift"
+    },
+    {
+      "id": "N02_UNPUSHED_PREREGISTRATION_COMMIT",
+      "pass": true,
+      "rejection": "preregistration ancestry drift"
+    },
+    {
+      "id": "N03_ACTOR_IDENTITY_HASH_DRIFT",
+      "pass": true,
+      "rejection": "asset identity drift"
+    },
+    {
+      "id": "N04_FORBIDDEN_DRIVER_OR_SCRIPT_IN_ASSET",
+      "pass": true,
+      "rejection": "forbidden asset behavior"
+    },
+    {
+      "id": "N05_REQUIRED_BONE_MISSING",
+      "pass": true,
+      "rejection": "required bone missing"
+    },
+    {
+      "id": "N06_SHOT_FRAME_RANGE_OR_LENS_DRIFT",
+      "pass": true,
+      "rejection": "shot range or lens drift"
+    },
+    {
+      "id": "N07_RIGHT_HAND_CONTACT_DISTANCE_OVER_LIMIT",
+      "pass": true,
+      "rejection": "contact distance over limit"
+    },
+    {
+      "id": "N08_CORE_TRANSITION_PRECEDES_CONTACT",
+      "pass": true,
+      "rejection": "core transition precedes contact"
+    },
+    {
+      "id": "N09_WARM_STATE_RESETS_IN_CLOSE_SHOT",
+      "pass": true,
+      "rejection": "warm state reset"
+    },
+    {
+      "id": "N10_ANIMATIC_FRAME_MISSING_OR_EXTRA",
+      "pass": true,
+      "rejection": "animatic roster drift"
+    },
+    {
+      "id": "N11_ANIMATIC_VIDEO_DURATION_OR_FPS_DRIFT",
+      "pass": true,
+      "rejection": "video metadata drift"
+    },
+    {
+      "id": "N12_CYCLES_SAMPLE_OR_SEED_DRIFT",
+      "pass": true,
+      "rejection": "Cycles settings drift"
+    },
+    {
+      "id": "N13_EXR_FORMAT_OR_DIMENSION_DRIFT",
+      "pass": true,
+      "rejection": "EXR storage drift"
+    },
+    {
+      "id": "N14_NONFINITE_OR_EMPTY_COMBINED_PIXELS",
+      "pass": true,
+      "rejection": "nonfinite or empty pixels"
+    },
+    {
+      "id": "N15_OUTPUT_ROSTER_SUBSTITUTION",
+      "pass": true,
+      "rejection": "output roster substitution"
+    },
+    {
+      "id": "N16_FINAL_RECEIPT_HASH_MUTATION",
+      "pass": true,
+      "rejection": "receipt self-hash mutation"
+    }
+  ],
+  "audit": {
+    "auditHash": "8c4ca0e8d5ae00db06cf41d64494575631bb0216fcc0e6ae71c01ae88415f849",
+    "sha256": "57dce6a3d3a89e2bcf0deac1a47e024acbc328303a788abc1d8a9ff8805e9e42",
+    "uri": "experiments/b62-phase0-v0-4/audit.json"
+  },
+  "claimBoundary": {
+    "authorizesFormal288FrameRender": false,
+    "cinematicQuality": false,
+    "humanReview": false,
+    "nextStepIfPass": "Freeze promoted asset hashes, formal SceneSpecs, samples, timeouts and projected bytes in a separate B62 formal preregistration.",
+    "photorealHuman": false,
+    "provesAssetAndLookFeasibility": true,
+    "provesThreeShotAnimaticContinuity": true,
+    "providesRealCyclesCalibration": true
+  },
+  "costs": {
+    "animaticRenderSeconds": 29.8739288339857,
+    "bytesBeforeAudit": {
+      "attempt": 82220,
+      "formal": 122939482,
+      "total": 123021702
+    },
+    "calibrationMeanSecondsPerFrame": 39.34003838900632,
+    "calibrationRenderSeconds": 118.02011516701896,
+    "mechanicalProjectionSecondsFor288Frames": 11329.93105603382,
+    "peakResidentSetSizeBytes": 3766190080,
+    "processWallSecondsTotalBeforeNodeAudit": 154.754865541,
+    "projectionBoundary": "MECHANICAL_STILL_FRAME_PROJECTION_ONLY_NOT_A_MEASURED_SEQUENCE_COST"
+  },
+  "experimentId": "B62-P0-E1",
+  "gates": [
+    {
+      "id": "G01_PREREGISTRATION_COMMIT_PUSHED_BEFORE_TOOLS_AND_OUTPUT_ROOTS",
+      "pass": true
+    },
+    {
+      "id": "G02_B58_B60_B61_UPSTREAM_RECEIPTS_EXACT",
+      "pass": true
+    },
+    {
+      "id": "G03_ZERO_BLENDER_PREFLIGHT_AND_CAPACITY_RESERVE_PASS",
+      "pass": true
+    },
+    {
+      "id": "G04_ORIGINAL_ASSET_LIBRARIES_AND_MASTER_BLEND_COMPLETE",
+      "pass": true
+    },
+    {
+      "id": "G05_ASSET_SAFETY_AND_IDENTITY_MANIFEST_EXACT",
+      "pass": true
+    },
+    {
+      "id": "G06_MASTER_TIMELINE_288_FRAMES_24FPS_AND_THREE_SHOT_MARKERS_EXACT",
+      "pass": true
+    },
+    {
+      "id": "G07_CAMERA_LENSES_AND_ANIMATED_TRANSFORMS_MATCH_SHOT_CONTRACT",
+      "pass": true
+    },
+    {
+      "id": "G08_GUARDIAN_RIG_BONES_MATERIALS_AND_VISIBLE_SYSTEMS_COMPLETE",
+      "pass": true
+    },
+    {
+      "id": "G09_RIGHT_HAND_CONTACT_AND_CORE_STATE_CAUSAL_ORDER_PASS",
+      "pass": true
+    },
+    {
+      "id": "G10_COLD_TO_WARM_LIGHT_AND_SHARED_STATE_CONTINUITY_PASS",
+      "pass": true
+    },
+    {
+      "id": "G11_ANIMATIC_288_FRAME_ROSTER_AND_VIDEO_METADATA_EXACT",
+      "pass": true
+    },
+    {
+      "id": "G12_THREE_CYCLES_CALIBRATION_EXR_AND_REVIEW_PNG_PAIRS_COMPLETE",
+      "pass": true
+    },
+    {
+      "id": "G13_CALIBRATION_EXR_FORMAT_COLOR_FINITE_DYNAMIC_AND_NONEMPTY_PASS",
+      "pass": true
+    },
+    {
+      "id": "G14_PROCESS_WALL_CPU_MEMORY_BYTES_AND_COSTS_RECORDED",
+      "pass": true
+    },
+    {
+      "id": "G15_TIMEOUT_DISK_LOG_AND_OUTPUT_ROSTER_BOUNDS_PASS",
+      "pass": true
+    },
+    {
+      "id": "G16_INDEPENDENT_BLENDER_REOPEN_AUDIT_MATCHES_REPORTS",
+      "pass": true
+    },
+    {
+      "id": "G17_SIXTEEN_NEGATIVE_CONTROL_MUTATIONS_REJECTED",
+      "pass": true
+    },
+    {
+      "id": "G18_FINAL_RECEIPT_SELF_HASH_AND_ZERO_MODEL_NETWORK_DOCKER",
+      "pass": true
+    }
+  ],
+  "operations": {
+    "animaticBlenderStarts": 1,
+    "blenderStarts": 6,
+    "calibrationBlenderStarts": 3,
+    "cyclesRenderCalls": 3,
+    "dockerProcesses": 0,
+    "eeveeRenderCalls": 288,
+    "ffmpegProcesses": 1,
+    "ffprobeProcesses": 1,
+    "generatorBlenderStarts": 1,
+    "independentAuditBlenderStarts": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "nodeAuditorProcesses": 1,
+    "renderCalls": 291
+  },
+  "output": {
+    "attempt": {
+      "bytes": 84420,
+      "fileCount": 30,
+      "symlinkCount": 0
+    },
+    "bytes": 123033672,
+    "fileCount": 339,
+    "formal": {
+      "bytes": 122949252,
+      "fileCount": 309,
+      "symlinkCount": 0
+    },
+    "symlinkCount": 0
+  },
+  "resultHash": "bb7e268e3a4d060d20fd2055b18ad33454f747636265332e0608d7aa8c69d8b0",
+  "schemaVersion": "bfs.b62Phase0Results.v0.1",
+  "status": "PASS",
+  "verdict": "B62_PHASE0_ASSET_ANIMATIC_AND_CALIBRATION_ADMITTED"
+}
