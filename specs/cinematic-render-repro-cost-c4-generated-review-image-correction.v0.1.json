@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "bfs.cinematicRenderReproCostGeneratedReviewImageCorrection.v0.1",
+  "correctionId": "B61-E1-C4",
+  "status": "PREREGISTERED",
+  "parentContract": {
+    "uri": "specs/cinematic-render-repro-cost.v0.1.json",
+    "sha256": "31f97230426dbf70cd76d4bd5d87d1a94cabf6f53755f58faab96998c06512e2"
+  },
+  "previousCorrection": {
+    "uri": "specs/cinematic-render-repro-cost-c3-isolated-png-review-correction.v0.1.json",
+    "sha256": "88ebfdcad4426452a78b5f8a120ffd8c2109bd968df7fd4a8937bb73537bcda3"
+  },
+  "failedFormalRun": {
+    "attemptRoot": "experiments/cinematic-render-repro-cost-attempt-v0-4",
+    "formalRoot": "experiments/cinematic-render-repro-cost-v0-4",
+    "attemptTree": { "files": 6, "bytes": 7785, "sha256": "55a11af4e610974a3baae6feb8d131fa58d08a3aa474e29ab523e525b7c5b725" },
+    "formalTree": { "files": 5, "bytes": 1351670, "sha256": "75d459d54198f5963e6b1d5a552b89853311cf1e981274c8cc63f04e9c2aaf3c" },
+    "failureSummary": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-4/failure-summary.json",
+      "sha256": "8b83f86d357b9e42adefd05921cd680415e8f780d46c67c86319ac8ccfdd8f20",
+      "failureHash": "959d9dbda9393f1b90293a9cc011d793b8edfd113821ba278e03f3b1b92895ff"
+    }
+  },
+  "diagnosticEvidence": {
+    "result": {
+      "uri": "experiments/b61-generated-review-image-diagnostic-v0-1/result.json",
+      "sha256": "5445aaf64032b2162f84c8334134132393c0acce431034222bc3f122796d6cf4",
+      "resultHash": "d26a8f21814572864ac847a2513832d5a195f893d1bed7399ccf00a19e510276"
+    },
+    "receipt": {
+      "uri": "experiments/b61-generated-review-image-diagnostic-v0-1/receipt.json",
+      "sha256": "7939f525d0869f445396770174c251dc00b224ac2ffc86ce3169e376426419d7",
+      "receiptHash": "1954de1cd54c7021c07b94b19c93bfd346c3dda17fd0c896003fa44c72c757ed"
+    },
+    "png": {
+      "uri": "experiments/b61-generated-review-image-diagnostic-v0-1/generated-review-1080p.png",
+      "sha256": "91585292e27ba2fa4649ffd095620ea57d11e343cac63ac2872a0d7a39a51410",
+      "width": 1920,
+      "height": 1080
+    },
+    "verdict": "OIIO_RGBA_TO_GENERATED_FLOAT_IMAGE_TO_ISOLATED_PNG_SUPPORTED"
+  },
+  "authorizedRetryRoots": {
+    "preflight": "experiments/cinematic-render-repro-cost-preflight-v0-5",
+    "attempt": "experiments/cinematic-render-repro-cost-attempt-v0-5",
+    "formal": "experiments/cinematic-render-repro-cost-v0-5"
+  },
+  "authorizedCorrections": {
+    "renderScript": {
+      "file": "blender/render_b61_frames.py",
+      "behavior": "Return the exact decoded Combined RGBA float32 array alongside its projection receipt. For review only, flip OIIO Y0-top rows into Blender pixel0-bottom order, fill a temporary 1920x1080 float image, mark it ACEScg, save through the existing isolated review scene, and remove the image in a finally block. Do not read Render Result or decode the EXR a second time."
+    },
+    "supervision": {
+      "files": [
+        "scripts/preflight-b61-e1-cinematic-render-repro-cost.mjs",
+        "scripts/run-b61-e1-cinematic-render-repro-cost.mjs",
+        "scripts/audit-b61-e1-cinematic-render-repro-cost.mjs"
+      ],
+      "behavior": "Bind C4, D5, and retained v0.4 failure evidence; use fresh v0.5 roots; require each pixel report to record the generated-float-image review path and ACEScg/row-order contract."
+    }
+  },
+  "unchanged": [
+    "all C1 observability behavior",
+    "all C2 OpenImageIO pixel projection behavior",
+    "C3 isolated review scene color settings",
+    "three shots and eighteen render calls",
+    "64 spp 1920x1080 Cycles CPU",
+    "frozen OCIO and ACEScg scene-linear role",
+    "multilayer half-float ZIP EXR",
+    "decoded Combined exact pixel digest",
+    "PNG remains review-only",
+    "sixteen gates and ten attacks",
+    "timeout disk reserve formal ceiling and claim boundary"
+  ],
+  "claimBoundary": {
+    "formalV05AuthorizedAfterFreshPreflight": true,
+    "reviewPixelSourceChanged": true,
+    "technicalPixelProjectionChanged": false,
+    "renderFormatChanged": false,
+    "pixelThresholdChanged": false,
+    "qualityThresholdChanged": false
+  }
+}

@@ -5207,3 +5207,13 @@ Date: 2026-08-29 · Type: DIAGNOSTIC TOOL-FREEZE CANDIDATE · New Blender proces
 D5 preregistration commit `b2db213`推送后，实现one-Blender supervisor与probe。Probe绑定v0.4 retained EXR，复用唯一Combined/OIIO 3.1.13.1 decoder并要求`192237bd…`；基于OCIO `scene_linear: ACEScg`把array标记为ACEScg，做`OIIO Y0 top → Blender pixel0 bottom` row conversion，填充1920×1080 float image，再经isolated review scene的完整display/view/look/exposure/gamma输出PNG。生成image/scene在finally删除，production snapshot必须exact。
 
 Supervisor在启动前复核v0.4两棵失败树/failure/EXR，设置frozen OCIO，限定one Blender、zero render/model/network/Docker、60秒与16 MiB。Probe/runner SHA-256为`01ed911880fb207fb2524dfca48d742208f543d37305791d693f796487a933c4 / 3adbb0a5b08c18243c147f63d788bf45d46ca85a5344ccaaa4cfa5e5499e66cd`；spec/protocol SHA为`753b0fe4f013c05f0f28063f97c61b0f8cc5b1b3ff0783ff1b62674ce8814c8b / 6d6dad0111217c50cc89558c59ccb7bbff9a9dd6af20d77097c55bfadd5cc4e4`。Node/Python syntax、targeted ESLint zero-warning与diff check通过；D5 root仍不存在。下一动作提交推送freeze后执行真实Blender D5。
+
+## J-405 · B61-D5关闭1080p review-image门并预注册C4
+
+Date: 2026-08-29 · Type: DIAGNOSTIC PASS / FORMAL CORRECTION PREREGISTRATION · Real Blender processes: 1 · New Blender renders: 0
+
+D5 tool-freeze commit `e36969a`推送后，真实Blender probe PASS。OIIO Combined digest exact保持`192237bd…`；8,294,400 float values填入1920×1080 Blender image，source colorspace ACEScg、row order显式转换，经isolated ACES 2.0 review scene写出118,627-byte PNG。生产scene settings exact不变，operations为one Blender/zero render/model/network/Docker。人工原分辨率检查显示主体方向正确、色彩与照明可读。
+
+Result file SHA/self-hash为`5445aaf64032b2162f84c8334134132393c0acce431034222bc3f122796d6cf4 / d26a8f21814572864ac847a2513832d5a195f893d1bed7399ccf00a19e510276`；receipt file SHA/self-hash为`7939f525d0869f445396770174c251dc00b224ac2ffc86ce3169e376426419d7 / 1954de1cd54c7021c07b94b19c93bfd346c3dda17fd0c896003fa44c72c757ed`；PNG SHA为`91585292…`。
+
+C4只授权从同一次OIIO projection返回RGBA array并生成review float image；禁止Render Result与二次EXR decode。Node supervision绑定D5/v0.4 failure并使用fresh v0.5 roots。下一动作提交D5 evidence/C4，再实现正式工具。
