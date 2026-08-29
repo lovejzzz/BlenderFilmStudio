@@ -1,8 +1,8 @@
 # BlenderFilmStudio — new machine cold start
 
-> **Current decision:** F0.1 passed on the admitted M2 Max host. Continue with
-> F0.2 independent product identity; do not assume the fork is viable until
-> F0.1-F0.7 all close.
+> **Current decision:** F0.1 and F0.2 passed on the admitted M2 Max host.
+> Continue with F0.3 minimum film workspace; do not assume the fork is viable
+> until F0.1-F0.7 all close.
 
 This is the authoritative handoff for a fresh Codex session. The repository is
 both a research notebook and an executable evidence base. Read this page,
@@ -14,11 +14,16 @@ both a research notebook and an executable evidence base. Read this page,
   and fork-maintenance reference; an external shell remains the fallback.
 - **Pinned engine baseline:** official `v5.2.0` at
   `fbe6228777e7d9afefcd61a413844e790ae75db7`.
-- **Active experiment:** `F0-SOURCE-FEASIBILITY`, gate `F0.2`.
-- **Closed gate:** `F0.1 PASS`. Two clean official builds reported Blender
+- **Active experiment:** `F0-SOURCE-FEASIBILITY`, gate `F0.3`.
+- **Closed gates:** `F0.1 PASS` and `F0.2 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
   not byte-for-byte reproducible; the bounded differences are recorded in
   `F0.1-2026-08-29-mac-m2max-attempt-07/comparison.json`.
+- **Independent identity:** the 13-path / 110-line identity patch builds as
+  `Film Studio Engine F0`, uses `studio.ainativefilm.f0`, and resolves user
+  state under `FilmStudioEngineF0`. Save, reset and GUI launch left the
+  official Blender configuration root absent; the accepted receipt is in
+  `F0.2-2026-08-29-mac-m2max-attempt-02/verdict.json`.
 - **Inherited evidence:** B01-B62 cover structured scene compilation, Blender
   execution, safety/admission, pixels, production passes, cost, recovery and a
   three-shot cinematic attempt. These results are evidence, not a claim that
@@ -26,8 +31,8 @@ both a research notebook and an executable evidence base. Read this page,
 - **Most important retained rejection:** B62's latest camera holdout passed all
   technical gates but failed the frozen composition threshold at frame 288.
   Source control does not replace direction or taste.
-- **Unproven:** independent application identity, native film workspace,
-  embedded contract equivalence, merge cost, packaging and `.blend` round-trip
+- **Unproven:** native film workspace, embedded contract equivalence, render
+  receipts inside the product, merge cost, packaging and `.blend` round-trip
   isolation.
 
 ## Read in this order
@@ -86,10 +91,10 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. F0.1 is closed. For F0.2, preregister the smallest identity patch before
-   changing source: product name, bundle id, owned icon/splash and isolated
-   configuration root. Preserve official Blender configuration hashes before
-   and after launch/reset.
+5. F0.1 and F0.2 are closed. For F0.3, preregister one frozen film-workspace
+   task and its official-Blender interaction baseline before changing source.
+   The implementation must expose typed Project / Scene / Shot / Character
+   state, preserve Expert Mode, and survive save, quit and reopen.
 
 ## What not to do
 
@@ -107,12 +112,14 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next machine should push one small, auditable F0.2 checkpoint containing:
+The next machine should push one small, auditable F0.3 checkpoint containing:
 
-- a unique F0.2 experiment root and preregistered patch surface;
-- the `Film Studio Engine F0` name and `studio.ainativefilm.f0` bundle id;
-- project-owned icon/splash provenance;
-- configuration-isolation evidence against official Blender;
+- a unique F0.3 experiment root and a preregistered frozen task;
+- the official Blender 5.2.0 interaction baseline;
+- native Project / Scene / Shot / Character state and one-shot creation;
+- save / quit / reopen persistence evidence;
+- Expert Mode round-trip and missing-optional-state negative controls;
+- at least one measured task with fewer interactions than the baseline;
 - complete success or failure receipts;
 - a journal entry and, if useful, a website update.
 

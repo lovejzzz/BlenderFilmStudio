@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 
 const gates = [
   ['F0.1', '源码复现', '两次 clean build + 负控', 'PASS'],
-  ['F0.2', '独立身份', '名称 / bundle / config 隔离', 'NEXT'],
-  ['F0.3', '电影工作台', 'Project / Scene / Shot / Character', 'LOCKED'],
+  ['F0.2', '独立身份', '名称 / bundle / config 隔离', 'PASS'],
+  ['F0.3', '电影工作台', 'Project / Scene / Shot / Character', 'NEXT'],
   ['F0.4', '合同内嵌', 'SceneSpec → canonical BuildPlan', 'LOCKED'],
   ['F0.5', '渲染收据', 'EEVEE / Cycles / resume / audit', 'LOCKED'],
   ['F0.6', '合并演练', '10 paths / 8 h / 5000 LOC ceiling', 'LOCKED'],
@@ -52,13 +52,13 @@ export default function AiNativeStudioHandoffPage() {
         <div className="handoff-hero-copy">
           <p className="eyebrow"><span /> NEW MACHINE HANDOFF · 2026.08.29</p>
           <h1>换一台电脑，<br />不换一套<span>事实。</span></h1>
-          <p>F0.1 已在 M2 Max 主机完成两次官方源码构建并通过复现审计。新的 Codex 从同一个源码 commit、不可变收据和失败边界，直接进入 F0.2 独立身份。</p>
+          <p>F0.1 与 F0.2 已在 M2 Max 主机通过：官方源码可复现构建，独立名称、bundle ID、品牌资产和配置隔离均有不可变收据。新的 Codex 直接进入 F0.3 最小电影工作台。</p>
           <div className="handoff-hero-actions"><a href="#start">开始交接 ↓</a><Link href="/ai-native-studio-design">为什么做自己的软件</Link></div>
         </div>
         <aside className="handoff-state">
-          <header><span>PROGRAM STATE</span><b>F0.1 PASS</b></header>
-          <div className="handoff-state-main"><small>ACTIVE GATE</small><strong>F0.2</strong><h2>INDEPENDENT<br />PRODUCT IDENTITY</h2></div>
-          <dl><div><dt>ENGINE</dt><dd>Blender v5.2.0</dd></div><div><dt>COMMIT</dt><dd>fbe6228777e7</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>F0.1</dt><dd>PASS</dd></div></dl>
+          <header><span>PROGRAM STATE</span><b>F0.1–F0.2 PASS</b></header>
+          <div className="handoff-state-main"><small>ACTIVE GATE</small><strong>F0.3</strong><h2>MINIMUM FILM<br />WORKSPACE</h2></div>
+          <dl><div><dt>ENGINE</dt><dd>Film Studio Engine F0</dd></div><div><dt>COMMIT</dt><dd>0a25790a1cd6</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>F0.2</dt><dd>PASS</dd></div></dl>
           <footer>FORK IS A HYPOTHESIS · NOT A CONCLUSION</footer>
         </aside>
         <div className="handoff-signal"><span>01</span><b>读取规则</b><i>→</i><span>02</span><b>只读预检</b><i>→</i><span>03</span><b>固定源码</b><i>→</i><span>04</span><b>保存证据</b></div>
@@ -72,14 +72,14 @@ export default function AiNativeStudioHandoffPage() {
           <article><span>01</span><h3>读入口</h3><code>START_HERE.md</code><p>确认目标与禁区，不从旧 B62 继续。</p></article>
           <article><span>02</span><h3>做预检</h3><code>preflight-f0-source-host.mjs</code><p>先获得 ACCEPTED 或 BLOCKED 事实。</p></article>
           <article><span>03</span><h3>预览 bootstrap</h3><code>--workspace /absolute/path</code><p>源码永远放在研究仓库之外。</p></article>
-          <article><span>04</span><h3>建立 evidence root</h3><code>F0.1-…-attempt-01</code><p>所有结果可恢复、不可覆盖。</p></article>
+          <article><span>04</span><h3>建立 evidence root</h3><code>F0.3-…-attempt-01</code><p>所有结果可恢复、不可覆盖。</p></article>
         </div>
       </section>
 
       <section className="handoff-gates" id="gates">
         <div className="section-index light">01 / SOURCE FEASIBILITY</div>
         <div className="handoff-heading light"><div><p className="eyebrow"><span /> SEVEN GATES · ONE DECISION</p><h2>全部关闭，才有资格<br />建立<span>正式引擎仓库。</span></h2></div><p>这不是七项功能清单，而是七个能推翻 thin fork 的实验。失败本身可接受；隐藏失败、挪动阈值或无限扩大 patch 不可接受。</p></div>
-        <div className="handoff-gate-list">{gates.map(([id,title,detail,status],index) => <article className={index === 1 ? 'active' : ''} key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>{status}</b></article>)}</div>
+        <div className="handoff-gate-list">{gates.map(([id,title,detail,status],index) => <article className={index === 2 ? 'active' : ''} key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>{status}</b></article>)}</div>
         <div className="handoff-fork"><article><span>ALL PASS</span><h3>THIN FORK</h3><p>进入独立引擎产品原型；仍维持最小核心 patch。</p></article><i>OR</i><article><span>CEILING EXCEEDED</span><h3>EXTERNAL SHELL</h3><p>保留电影体验和 typed protocol，使用未修改 Blender。</p></article></div>
       </section>
 
@@ -99,8 +99,8 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-checkpoint">
         <span>NEXT PUSH MUST CONTAIN</span>
-        <h2>一个真实 F0.2 结果。</h2>
-        <p>identity patch · bundle inspection · owned icon / splash · isolated config · official Blender before / after hash · journal</p>
+        <h2>一个真实 F0.3 结果。</h2>
+        <p>frozen interaction baseline · typed film state · one-shot task · save / reopen persistence · Expert Mode round-trip · journal</p>
         <div><Link href="/journal">查看实验日志 →</Link><a href="https://github.com/lovejzzz/BlenderFilmStudio" target="_blank" rel="noreferrer">打开 GitHub 仓库 ↗</a></div>
       </section>
 

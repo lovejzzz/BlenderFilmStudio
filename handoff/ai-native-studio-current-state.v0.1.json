@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-29",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_1_PASS_F0_2_ACTIVE",
+  "status": "F0_1_F0_2_PASS_F0_3_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -21,11 +21,11 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "F0.2",
+  "activeGate": "F0.3",
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
     "F0.1": "PASS",
-    "F0.2": "NOT_RUN",
+    "F0.2": "PASS",
     "F0.3": "NOT_RUN",
     "F0.4": "NOT_RUN",
     "F0.5": "NOT_RUN",
@@ -47,6 +47,27 @@
       "bundleResult": "Semantically identical, not byte-for-byte reproducible",
       "differingFiles": 105,
       "negativeControlsPass": true
+    },
+    "F0.2": {
+      "verdict": "PASS",
+      "failedAttempt": "experiments/ai-native-studio-f0/F0.2-2026-08-29-mac-m2max-attempt-01",
+      "acceptedAttempt": "experiments/ai-native-studio-f0/F0.2-2026-08-29-mac-m2max-attempt-02",
+      "verdictReceiptHash": "615c3021227a4f3b4008ec73acca5ddc04511e3283dfc1a7bb7fddfde45192f4",
+      "identitySourceCommit": "0a25790a1cd6feff4bae1b03d81e4c43ec55a0b5",
+      "sourceParent": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+      "dependencyCommit": "5a140a8ccc8c070221b1b06e2c6f89f136c5758d",
+      "distributionName": "Film Studio Engine F0",
+      "bundleIdentifier": "studio.ainativefilm.f0",
+      "configurationNamespace": "FilmStudioEngineF0",
+      "identityPatchPaths": 13,
+      "identityPatchNonGeneratedChangedLines": 110,
+      "buildWallSeconds": 532.768227084,
+      "buildPeakRssBytes": 2048344064,
+      "officialBlenderConfigurationBefore": "ABSENT",
+      "officialBlenderConfigurationAfterSaveResetAndGui": "ABSENT",
+      "officialBlenderConfigurationDigest": "08b6a0bc6906cd596f1458be5ac2911c478709b27e4f3c52e8edd0293e2f4c56",
+      "configurationCollisionNegativeControlPass": true,
+      "negativeControlBlenderProcessStarts": 0
     }
   },
   "inheritedEvidence": {
@@ -71,8 +92,8 @@
   "firstCommands": [
     "git status --short",
     "node scripts/preflight-f0-source-host.mjs",
-    "scripts/bootstrap-f0-blender-source.sh --workspace /absolute/path/to/f0-workspace",
-    "scripts/bootstrap-f0-blender-source.sh --workspace /absolute/path/to/f0-workspace --execute"
+    "cat experiments/ai-native-studio-f0/F0.2-2026-08-29-mac-m2max-attempt-02/verdict.json",
+    "preregister an immutable F0.3 interaction baseline and workspace task before source mutation"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -99,14 +120,13 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "F0.2",
-    "result": "An independently identified Film Studio Engine F0 build with isolated configuration state",
+    "gate": "F0.3",
+    "result": "A minimum native film workspace with typed Project, Scene, Shot and Character state, persistence, Expert Mode round-trip and a measured interaction advantage",
     "requiredArtifacts": [
-      "identity.patch",
-      "bundle-inspection.json",
-      "configuration-isolation.json",
-      "project-owned icon and splash provenance",
-      "official Blender configuration hashes before and after F0 launch/reset",
+      "interaction-baseline.json",
+      "workspace-task.json",
+      "persistence.json",
+      "expert-mode-roundtrip.json",
       "screenshots and journal entry"
     ]
   }

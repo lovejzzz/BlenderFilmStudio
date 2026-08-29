@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "bfs.f0IdentityAuditFreeze.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.2",
+  "status": "FROZEN_BEFORE_F0_APPLICATION_LAUNCH",
+  "frozenAt": "2026-08-29T23:09:41Z",
+  "crossBindings": {
+    "buildReceipt": {
+      "path": "build/receipt.json",
+      "fileSha256": "8ab21b511960e1ebfc920004a50cf6227a42bfe5f050e689e6eb82f21b8e9414",
+      "receiptHash": "852f23be82d6bcdff6caff0cb79b1314ee07ad7dbf6e4cd986746914c1edd32e",
+      "status": "PASS"
+    },
+    "buildRunnerArchive": {
+      "path": "build/runner.mjs",
+      "fileSha256": "3c3724d86241fdc3e643c4bbde475d0616a198207e31c6b1a202aeba66416166"
+    },
+    "auditRunner": {
+      "path": "scripts/run-f0-identity.mjs",
+      "fileSha256": "352a79f2d8dde36a949222625846e7bd47cd53f3808546a92880edab32bb7fba",
+      "correctionFromBuildRunner": "Require save, factory-reset, and post-reset save operators each to return FINISHED; this tightens acceptance before the first F0 app launch."
+    }
+  },
+  "artifact": {
+    "app": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity/bin/Film Studio Engine F0.app",
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "84e65d7b6c9933f00d461a0bec1434c0b66d5c2ef19ee7643674ff06845e4bc4",
+    "bundleNameObserved": "Film Studio Engine F0",
+    "bundleIdentifierObserved": "studio.ainativefilm.f0"
+  },
+  "officialConfigurationBefore": {
+    "root": "/Users/mengyingli/Library/Application Support/Blender",
+    "state": "ABSENT",
+    "entries": 0,
+    "digest": "08b6a0bc6906cd596f1458be5ac2911c478709b27e4f3c52e8edd0293e2f4c56"
+  },
+  "f0ConfigurationBefore": {
+    "root": "/Users/mengyingli/Library/Application Support/FilmStudioEngineF0",
+    "state": "ABSENT"
+  },
+  "auditSequence": [
+    "Run the injected official-config collision negative control and require zero Blender process starts.",
+    "Freshly admit and launch F0 in background with no BLENDER_USER_* overrides.",
+    "Resolve all user roots, toggle one benign preference, save, load factory preferences, save again, and require each operator to finish.",
+    "Hash official Blender configuration state and require it to remain identical.",
+    "Freshly admit and launch the GUI F0 app, capture the actual startup splash from the app framebuffer, and quit.",
+    "Hash official Blender configuration state again and inspect bundle, icon, splash, topbar identity, runtime product line, and source commit."
+  ],
+  "runnerCommand": [
+    "/Users/mengyingli/.hermes/node/bin/node",
+    "scripts/run-f0-identity.mjs",
+    "--stage",
+    "audit",
+    "--source",
+    "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "--workspace",
+    "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace",
+    "--evidence-root",
+    "experiments/ai-native-studio-f0/F0.2-2026-08-29-mac-m2max-attempt-02"
+  ],
+  "admission": {
+    "requiredFreeBytes": "171798691840",
+    "observedFreeKiBImmediatelyBeforeFreeze": "173975276",
+    "freshBeforeEachF0Launch": true,
+    "noUserOverridesForPositiveLaunches": true
+  },
+  "stopRule": "Any failed admission starts zero F0 processes. Any failed operator, path, hash, identity, screenshot, or negative-control check produces FAIL rather than relaxing acceptance."
+}

@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "0.1.0",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.2",
+  "status": "PREREGISTERED",
+  "preregisteredAt": "2026-08-29T22:43:44Z",
+  "purpose": "Prove an independently named macOS research build with owned placeholder identity assets and configuration state isolated from official Blender.",
+  "repositoryCommit": "03b04ce0b6e37e4346ad671aeeade7d36b116a3d",
+  "protocolSha256": "851751da636242428e0c1b3be3209de10237aecc0b18e5d036c49f1818cd3dc3",
+  "specSha256": "2c06e617f9f435fe640ad2bc27e6cbb792820142e75b563ce4f77ade93a50929",
+  "dependsOn": {
+    "path": "../F0.1-2026-08-29-mac-m2max-attempt-07/verdict.json",
+    "fileSha256": "b57e45315d24b924be6885c8068d104c276f355761304be5fc7b853f00b15f9c",
+    "receiptHash": "f4a18aec803a09d2c149222312a8e9f507d1103f95273951af79acaf04ba62cb",
+    "status": "PASS"
+  },
+  "identity": {
+    "distributionName": "Film Studio Engine F0",
+    "bundleIdentifier": "studio.ainativefilm.f0",
+    "thumbnailerBundleIdentifier": "studio.ainativefilm.f0.thumbnailer",
+    "configurationNamespace": "FilmStudioEngineF0",
+    "expectedUserConfigurationRoot": "/Users/mengyingli/Library/Application Support/FilmStudioEngineF0/5.2",
+    "officialBlenderConfigurationRoot": "/Users/mengyingli/Library/Application Support/Blender",
+    "sourceAttributionRule": "Blender may appear only as technical source, file-format, compatibility, license, copyright, or GPL attribution; it must not be the F0 product name."
+  },
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "baselineTag": "v5.2.0",
+    "baselineCommit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "dependencyPath": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src/lib/macos_arm64",
+    "dependencyCommit": "5a140a8ccc8c070221b1b06e2c6f89f136c5758d",
+    "branchToCreate": "codex/f0.2-independent-identity",
+    "requiredParentCommit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "sourceMustBeCleanBeforeAndAfterIdentityCommit": true
+  },
+  "patchSurface": {
+    "maximumPaths": 13,
+    "maximumNonGeneratedChangedLines": 180,
+    "allowedPaths": [
+      "release/darwin/Blender.app/Contents/Info.plist",
+      "release/darwin/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/Info.plist",
+      "release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns",
+      "release/datafiles/splash.png",
+      "intern/ghost/intern/GHOST_SystemPathsCocoa.mm",
+      "source/blender/blenkernel/intern/appdir.cc",
+      "intern/ghost/intern/GHOST_SystemCocoa.mm",
+      "intern/ghost/intern/GHOST_ContextMTL.mm",
+      "source/blender/windowmanager/intern/wm_window.cc",
+      "source/blender/windowmanager/intern/wm_platform_support.cc",
+      "source/blender/windowmanager/intern/wm_splash_screen.cc",
+      "source/creator/creator_args.cc",
+      "scripts/startup/bl_ui/space_topbar.py"
+    ],
+    "userVisibleSurfaces": [
+      "macOS application display name",
+      "macOS application menu and usage permission descriptions",
+      "main and temporary window titles",
+      "top-bar product menu",
+      "startup splash and About panel",
+      "CLI version and help identity"
+    ],
+    "packagingRule": "Keep the internal executable named Blender for the smallest compatible patch, but rename the final bundle directory from Blender.app to Film Studio Engine F0.app before inspection or launch."
+  },
+  "ownedPlaceholderAssets": {
+    "generationTool": "OpenAI image generation tool; backend model identifier is not exposed by the tool",
+    "thirdPartyInputs": [],
+    "iconPrompt": "Create a clean, original square application icon for Film Studio Engine F0: abstract aperture formed by three flowing film-strip arcs around a small luminous frame, deep graphite background, electric teal and warm amber accent, high contrast, simple geometric silhouette, no letters, no words, no logos, no Blender swirl, centered, generous padding, macOS app icon, project-owned placeholder.",
+    "splashPrompt": "Create an original 2:1 cinematic software splash image for Film Studio Engine F0. Abstract film-production scene: dark soundstage horizon, subtle volumetric light beams, a geometric camera gate or frame motif, electric teal and warm amber accents, clean premium minimal composition, ample dark negative space in upper-left for UI, no text, no letters, no logos, no Blender mark, no people, project-owned placeholder. Target 1000 by 500 pixels.",
+    "postprocessing": {
+      "icon": "Center-crop to square when needed; resize the generated master into the standard macOS iconset sizes; compile with iconutil into blender_icon_legacy.icns.",
+      "splash": "Center-crop to 2:1 when needed and resize to exactly 1000x500 RGB PNG without adding text or third-party elements."
+    },
+    "requiredEvidence": [
+      "asset-provenance.json",
+      "assets/icon-source.png",
+      "assets/splash-source.png",
+      "screenshots/icon-preview.png",
+      "screenshots/splash-source.png"
+    ]
+  },
+  "build": {
+    "baselineBuildRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-a",
+    "newBuildRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity",
+    "newBuildRootMustBeAbsent": true,
+    "seedCommand": ["/bin/cp", "-cR", "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-a", "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity"],
+    "compileCommand": ["/usr/bin/make", "BUILD_DIR=/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity", "NPROCS=12"],
+    "finalBundle": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity/bin/Film Studio Engine F0.app",
+    "maximumWallHours": 12,
+    "claimCeiling": "F0.2 identity and configuration isolation only; this incremental identity build does not repeat the F0.1 clean-build reproducibility claim."
+  },
+  "admission": {
+    "requiredFreeBytes": "171798691840",
+    "reservedFreeGiB": 100,
+    "projectedWritesGiB": 60,
+    "justInTimeBefore": [
+      "COW build-root seed",
+      "incremental compilation",
+      "bundle packaging or rename",
+      "each Blender background or GUI launch",
+      "each native screenshot capture"
+    ],
+    "sourceParentMustMatch": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "sourcePatchMustMatchExecutionFreeze": true,
+    "noThresholdRelaxation": true
+  },
+  "configurationIsolation": {
+    "treeDigestAlgorithm": "If absent, record state ABSENT and sha256 of the UTF-8 marker ABSENT. If present, hash a sorted NUL-delimited manifest of relative path, type, mode, symlink target when applicable, size, and SHA-256 content digest for regular files.",
+    "sequence": [
+      "Record official Blender configuration tree state and digest immediately before launch.",
+      "Launch the F0 binary without BLENDER_USER_* overrides and print its resolved CONFIG, SCRIPTS, DATAFILES and EXTENSIONS roots.",
+      "Change one benign F0 preference and save user preferences.",
+      "Load factory preferences, save them, and exit.",
+      "Record the official Blender tree state and digest again.",
+      "Require the F0 configuration root to exist and the official before/after states and digests to be identical."
+    ],
+    "negativeControl": {
+      "injectedBlenderUserConfig": "/Users/mengyingli/Library/Application Support/Blender/5.2/config",
+      "expectedResult": "BLOCKED_CONFIG_NAMESPACE_COLLISION",
+      "expectedBlenderProcessStarts": 0,
+      "method": "Use the same launch supervisor guard that immediately precedes every F0 process start."
+    }
+  },
+  "evidence": [
+    "identity.patch",
+    "build/receipt.json",
+    "bundle-inspection.json",
+    "configuration-isolation.json",
+    "negative-control/receipt.json",
+    "asset-provenance.json",
+    "screenshots/",
+    "verdict.json"
+  ],
+  "acceptance": [
+    "The final application bundle is Film Studio Engine F0.app and its CFBundleName and CFBundleDisplayName are Film Studio Engine F0.",
+    "The main bundle identifier is studio.ainativefilm.f0 and the thumbnailer identifier is studio.ainativefilm.f0.thumbnailer.",
+    "The frozen user-visible identity surfaces present Film Studio Engine F0 rather than Blender as the product brand; technical source and format attribution remains allowed.",
+    "The compiled icon and splash are derived only from the recorded project-owned generated masters and match their provenance hashes.",
+    "The unoverridden F0 application resolves configuration under FilmStudioEngineF0 and creates no state under the official Blender configuration root.",
+    "The official Blender configuration state and digest are identical before and after F0 launch, preference save, factory reset and second preference save.",
+    "The configuration-collision negative control starts zero Blender processes."
+  ],
+  "stopRule": "Emit PASS only when every frozen acceptance item and negative control passes. Preserve any build or inspection failure and emit FAIL; emit BLOCKED only for missing external authority or host capability that prevents measurement."
+}

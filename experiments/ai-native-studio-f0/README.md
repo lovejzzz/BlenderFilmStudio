@@ -19,11 +19,21 @@ The normative acceptance criteria are in
 
 ## Current result
 
-`F0.1` is `PASS` on the 2026-08-29 Apple M2 Max host. Attempts 01-04 retain
+`F0.1` and `F0.2` are `PASS` on the 2026-08-29 Apple M2 Max host. F0.1 attempts 01-04 retain
 preflight, source and dependency acquisition boundaries; attempt 05 contains
 the two successful clean-build receipts; attempt 06 retains a failed auditor
 implementation; attempt 07 cross-binds that failure and contains the accepted
 runtime, comparison, negative-control and verdict receipts.
 
 The accepted comparison claim is **semantically identical, not byte-for-byte
-reproducible**. The next active gate is `F0.2`.
+reproducible**.
+
+F0.2 attempt 01 permanently retains an execution-launcher path failure with
+zero compiler starts. Attempt 02 corrects only that launcher, then records the
+accepted 13-path / 110-line identity patch, clean build, bundle inspection,
+project-owned icon and splash provenance, preference save/reset isolation,
+actual GUI screenshot and collision negative control. The accepted claim is
+**independent research identity and configuration isolation on this host**;
+signing, notarization and final product branding remain outside this gate.
+
+The next active gate is `F0.3` minimum film workspace.

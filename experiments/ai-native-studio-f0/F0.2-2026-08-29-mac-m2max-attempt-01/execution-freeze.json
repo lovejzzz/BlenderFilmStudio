@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "bfs.f0IdentityExecutionFreeze.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.2",
+  "status": "FROZEN_BEFORE_NATIVE_BUILD",
+  "frozenAt": "2026-08-29T22:56:35Z",
+  "crossBindings": {
+    "preregistration": {
+      "path": "preregistration.json",
+      "fileSha256": "9f0f4944a608bfd8a79de0e1921b2775ee5d20036eb154622af470801b67a4e1"
+    },
+    "identityPatch": {
+      "path": "identity.patch",
+      "fileSha256": "1341c02ccf64e973be3abcd3681d573ae625a0e52178a72b23fcaba20d1c0257"
+    },
+    "assetProvenance": {
+      "path": "asset-provenance.json",
+      "fileSha256": "975af8b824bdfb9a0f9147b13725c9b6228996813191d4bc254a1e804819dba8"
+    },
+    "runner": {
+      "path": "scripts/run-f0-identity.mjs",
+      "fileSha256": "3c3724d86241fdc3e643c4bbde475d0616a198207e31c6b1a202aeba66416166"
+    }
+  },
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "branch": "codex/f0.2-independent-identity",
+    "head": "0a25790a1cd6feff4bae1b03d81e4c43ec55a0b5",
+    "parent": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "dependencyCommit": "5a140a8ccc8c070221b1b06e2c6f89f136c5758d",
+    "clean": true,
+    "changedPaths": 13,
+    "nonGeneratedChangedLines": 110
+  },
+  "buildPlanAmendment": {
+    "status": "PREREGISTERED_METHOD_CORRECTION_BEFORE_NATIVE_BUILD",
+    "supersedesOnly": "preregistration.json build.seedCommand",
+    "reason": "The read-only audit found CMAKE_CACHEFILE_DIR in build-a/CMakeCache.txt is absolutely bound to /Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-a. A COW clone could regenerate or write through absolute paths and mutate the accepted F0.1 build artifact.",
+    "correctedMethod": "Do not seed from build-a. Run the already frozen make command into a new absent build-f0.2-identity root, producing a clean identity build.",
+    "baselineBuildMutationAuthorized": false,
+    "thresholdsChanged": false,
+    "acceptanceChanged": false,
+    "claimChanged": false,
+    "resourceCeilingChanged": false
+  },
+  "nativeExecution": {
+    "runnerCommand": [
+      "/opt/homebrew/bin/node",
+      "scripts/run-f0-identity.mjs",
+      "--stage",
+      "build",
+      "--source",
+      "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+      "--workspace",
+      "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace",
+      "--evidence-root",
+      "experiments/ai-native-studio-f0/F0.2-2026-08-29-mac-m2max-attempt-01"
+    ],
+    "compileCommand": [
+      "/usr/bin/make",
+      "BUILD_DIR=/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity",
+      "NPROCS=12"
+    ],
+    "buildRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity",
+    "buildRootObservedAbsent": true,
+    "requiredFreeBytes": "171798691840",
+    "observedFreeKiBImmediatelyBeforeFreeze": "175614228",
+    "maximumWallHours": 12,
+    "jitAdmissionWrittenByRunnerImmediatelyBeforeCompilerJob": true
+  },
+  "stopRule": "If the runner, identity patch, source identity, clean state, dependency identity, absent build root, or 160 GiB free-space admission differs, start zero build jobs and preserve a BLOCKED receipt."
+}

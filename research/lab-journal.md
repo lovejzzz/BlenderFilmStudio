@@ -5823,3 +5823,17 @@ attempt-05在两个不存在的clean build root执行相同命令`/usr/bin/make 
 attempt-07纠正并交叉绑定attempt-06审计器实现失败后正式PASS。两份exact binary均以fresh JIT admission启动并报告`Blender 5.2.0 LTS`、build hash`fbe6228777e7`、Darwin/Release/CMake；唯一运行时字段差异是build time。两个bundle各6,363 entries，路径、类型、mode与size完全一致；5,378个文件byte-exact，105个文件不同。103个Cycles OSL object各只差1 byte，全部在将等长`build-a`/`build-b`输出路径归一为`build-x`后byte-exact。主Mach-O仅154 bytes不同，thumbnailer仅116 bytes不同，差异被限制并记录为build-time字符串、linker UUID/__LINKEDIT元数据及其ad-hoc linker signature。因此正式主张是`semantically identical, not byte-for-byte reproducible`，不是伪称完全字节复现。
 
 负控使用与真实runtime launch相同的`admissionFor`函数：free bytes精确为171,798,691,839（required minus one）时BLOCKED；HEAD注入全零时以`SOURCE_HEAD_MISMATCH` BLOCKED；两项`compilerOrBlenderPids=[]`且restricted native starts为0。最终verdict receipt self hash为`f4a18aec803a09d2c149222312a8e9f507d1103f95273951af79acaf04ba62cb`。F0.1关闭为PASS，active gate转为F0.2 independent identity；这不证明thin fork最终可行，F0.2–F0.7仍未运行。
+
+## J-470 · F0.2 独立产品身份与配置隔离 PASS
+
+Date: 2026-08-29 · Type: F0.2 INDEPENDENT IDENTITY PASS · Host: macOS 25.6.0 / Apple M2 Max / 64 GiB · New Blender source builds: 1
+
+F0.2在F0.1固定官方父提交`fbe6228777e7d9afefcd61a413844e790ae75db7`上建立研究分支`codex/f0.2-independent-identity`，身份提交为`0a25790a1cd6feff4bae1b03d81e4c43ec55a0b5`。attempt-01因冻结的Node launcher `/opt/homebrew/bin/node`不存在而在runner启动前exit 127；该失败永久保留为`EXECUTION_LAUNCHER_PATH_ERROR`，make/compiler启动数为0。attempt-02只把launcher纠正为`/Users/mengyingli/.hermes/node/bin/node` v22.22.3，没有改验收阈值。
+
+身份patch严格限制为13 paths / 110 non-generated changed lines。clean build命令为`/usr/bin/make BUILD_DIR=<build-f0.2-identity> NPROCS=12`，532.768秒完成，peak RSS 2,048,344,064 bytes。产物物理bundle为`Film Studio Engine F0.app`，主bundle id为`studio.ainativefilm.f0`，thumbnailer为`studio.ainativefilm.f0.thumbnailer`，运行时报告`Film Studio Engine F0 5.2.0 LTS`与身份提交；内部可执行文件仍保留`Blender`作为技术兼容名称。二进制SHA-256为`84e65d7b6c9933f00d461a0bec1434c0b66d5c2ef19ee7643674ff06845e4bc4`。
+
+项目自有占位icon与splash均保存原始生成提示、工具和hash provenance，并被编译产物检查交叉绑定。真实应用截图为3456×1918，SHA-256 `0625de2f290be2bb0fb72e6702b17bd37a317674ec7a8e34ff07bcc83b5c9f43`；窗口、topbar与splash均展示F0身份。splash底部保留`Blender Website`与`Donate to Blender`作为上游署名/支持链接，不作为应用产品名，本gate不主张最终商标审查完成。
+
+配置namespace为`FilmStudioEngineF0`，CONFIG/SCRIPTS/DATAFILES/EXTENSIONS全部解析到`~/Library/Application Support/FilmStudioEngineF0/5.2/`之下。preference save、factory reset和reset后再次save均返回`FINISHED`；官方`~/Library/Application Support/Blender`在测试前、save/reset后和GUI launch后均为`ABSENT`，共同digest为`08b6a0bc6906cd596f1458be5ac2911c478709b27e4f3c52e8edd0293e2f4c56`。配置碰撞负控注入官方root后按同一准入路径BLOCKED，Blender启动数为0。
+
+accepted evidence root为`F0.2-2026-08-29-mac-m2max-attempt-02`；最终verdict self hash已独立复算为`615c3021227a4f3b4008ec73acca5ddc04511e3283dfc1a7bb7fddfde45192f4`。F0.2正式关闭为PASS，且只证明本机上的独立研究身份与配置隔离；签名、公证、安装/卸载、最终品牌与完整`.blend`往返仍未证明。active gate转为F0.3 minimum film workspace：必须先冻结官方Blender交互基线，再验证typed Project / Scene / Shot / Character状态、one-shot任务、保存重开、Expert Mode往返和至少一项交互优势。

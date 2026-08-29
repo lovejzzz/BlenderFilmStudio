@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "bfs.f0IdentityCorrectedPreregistration.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.2",
+  "status": "CORRECTED_PREREGISTERED",
+  "preregisteredAt": "2026-08-29T22:57:49Z",
+  "purpose": "Correct only the nonexistent Node launcher path from attempt-01 and execute the unchanged F0.2 identity test.",
+  "priorAttempt": {
+    "path": "../F0.2-2026-08-29-mac-m2max-attempt-01",
+    "verdictPath": "../F0.2-2026-08-29-mac-m2max-attempt-01/verdict.json",
+    "verdictFileSha256": "0cef3858117029cb28bf3ce1eb49b0b583591768f078d432a5fee612f587e8b0",
+    "launcherFailurePath": "../F0.2-2026-08-29-mac-m2max-attempt-01/launcher-failure.json",
+    "launcherFailureFileSha256": "7258c81dfa2f52a1e2c0166f71cc86496d8129a472c6451a6ebf19e2e3c40189",
+    "status": "FAIL",
+    "class": "EXECUTION_LAUNCHER_PATH_ERROR",
+    "makeOrCompilerProcessStarts": 0
+  },
+  "unchangedContract": {
+    "path": "../F0.2-2026-08-29-mac-m2max-attempt-01/preregistration.json",
+    "fileSha256": "9f0f4944a608bfd8a79de0e1921b2775ee5d20036eb154622af470801b67a4e1",
+    "acceptanceChanged": false,
+    "thresholdsChanged": false,
+    "sourcePatchChanged": false,
+    "assetsChanged": false,
+    "claimChanged": false
+  },
+  "correction": {
+    "attempt01FrozenLauncher": "/opt/homebrew/bin/node",
+    "observedFailure": "ENOENT / exit 127 before the runner process started",
+    "attempt02FrozenLauncher": "/Users/mengyingli/.hermes/node/bin/node",
+    "launcherVersion": "v22.22.3",
+    "launcherExists": true,
+    "onlyChangedField": "nativeExecution.runnerCommand[0]"
+  },
+  "crossBindings": {
+    "identityPatch": {
+      "sourcePath": "../F0.2-2026-08-29-mac-m2max-attempt-01/identity.patch",
+      "fileSha256": "1341c02ccf64e973be3abcd3681d573ae625a0e52178a72b23fcaba20d1c0257"
+    },
+    "assetProvenance": {
+      "sourcePath": "../F0.2-2026-08-29-mac-m2max-attempt-01/asset-provenance.json",
+      "fileSha256": "975af8b824bdfb9a0f9147b13725c9b6228996813191d4bc254a1e804819dba8"
+    },
+    "runner": {
+      "path": "scripts/run-f0-identity.mjs",
+      "fileSha256": "3c3724d86241fdc3e643c4bbde475d0616a198207e31c6b1a202aeba66416166"
+    }
+  },
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "branch": "codex/f0.2-independent-identity",
+    "head": "0a25790a1cd6feff4bae1b03d81e4c43ec55a0b5",
+    "parent": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "dependencyCommit": "5a140a8ccc8c070221b1b06e2c6f89f136c5758d",
+    "clean": true
+  },
+  "build": {
+    "method": "Clean build into a new absent root; do not seed or mutate F0.1 build-a.",
+    "buildRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity",
+    "buildRootMustBeAbsent": true,
+    "compileCommand": [
+      "/usr/bin/make",
+      "BUILD_DIR=/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity",
+      "NPROCS=12"
+    ],
+    "maximumWallHours": 12,
+    "requiredFreeBytes": "171798691840"
+  },
+  "runnerCommand": [
+    "/Users/mengyingli/.hermes/node/bin/node",
+    "scripts/run-f0-identity.mjs",
+    "--stage",
+    "build",
+    "--source",
+    "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "--workspace",
+    "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace",
+    "--evidence-root",
+    "experiments/ai-native-studio-f0/F0.2-2026-08-29-mac-m2max-attempt-02"
+  ],
+  "stopRule": "Any difference beyond the launcher executable path, or any failed JIT admission, starts zero compiler jobs and is preserved as a new failure."
+}

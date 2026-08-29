@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "bfs.f0IdentityExecutionFreeze.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.2",
+  "status": "FROZEN_BEFORE_NATIVE_BUILD",
+  "frozenAt": "2026-08-29T22:59:16Z",
+  "crossBindings": {
+    "preregistration": {
+      "path": "preregistration.json",
+      "fileSha256": "e21bd6db69970ed1310c1fa9f98e92f1f2ee40a52a8b7a81da7bfabe512af0e0"
+    },
+    "priorFailedVerdict": {
+      "path": "../F0.2-2026-08-29-mac-m2max-attempt-01/verdict.json",
+      "fileSha256": "0cef3858117029cb28bf3ce1eb49b0b583591768f078d432a5fee612f587e8b0"
+    },
+    "runner": {
+      "path": "scripts/run-f0-identity.mjs",
+      "fileSha256": "3c3724d86241fdc3e643c4bbde475d0616a198207e31c6b1a202aeba66416166"
+    },
+    "identityPatch": {
+      "path": "identity.patch",
+      "fileSha256": "1341c02ccf64e973be3abcd3681d573ae625a0e52178a72b23fcaba20d1c0257"
+    },
+    "assetProvenance": {
+      "path": "asset-provenance.json",
+      "fileSha256": "975af8b824bdfb9a0f9147b13725c9b6228996813191d4bc254a1e804819dba8"
+    }
+  },
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "branch": "codex/f0.2-independent-identity",
+    "head": "0a25790a1cd6feff4bae1b03d81e4c43ec55a0b5",
+    "parent": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "dependencyCommit": "5a140a8ccc8c070221b1b06e2c6f89f136c5758d",
+    "clean": true
+  },
+  "nativeExecution": {
+    "runnerExecutable": "/Users/mengyingli/.hermes/node/bin/node",
+    "runnerVersion": "v22.22.3",
+    "runnerExecutableObservedPresent": true,
+    "runnerCommand": [
+      "/Users/mengyingli/.hermes/node/bin/node",
+      "scripts/run-f0-identity.mjs",
+      "--stage",
+      "build",
+      "--source",
+      "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+      "--workspace",
+      "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace",
+      "--evidence-root",
+      "experiments/ai-native-studio-f0/F0.2-2026-08-29-mac-m2max-attempt-02"
+    ],
+    "compileCommand": [
+      "/usr/bin/make",
+      "BUILD_DIR=/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.2-identity",
+      "NPROCS=12"
+    ],
+    "buildMethod": "clean build in an absent build root; no F0.1 build artifact is copied or mutated",
+    "buildRootObservedAbsent": true,
+    "requiredFreeBytes": "171798691840",
+    "observedFreeKiBImmediatelyBeforeFreeze": "175608040",
+    "maximumWallHours": 12,
+    "jitAdmissionWrittenByRunnerImmediatelyBeforeCompilerJob": true
+  },
+  "correctionScope": {
+    "launcherPathOnly": true,
+    "acceptanceChanged": false,
+    "thresholdsChanged": false,
+    "sourceChanged": false,
+    "assetsChanged": false,
+    "runnerChanged": false
+  },
+  "stopRule": "If any frozen identity or admission check fails, start zero compiler jobs and preserve the result."
+}

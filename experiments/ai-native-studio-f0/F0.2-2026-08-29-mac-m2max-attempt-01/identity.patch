@@ -1,0 +1,379 @@
+diff --git a/intern/ghost/intern/GHOST_ContextMTL.mm b/intern/ghost/intern/GHOST_ContextMTL.mm
+index 3a30c90a..0f0f08be 100644
+--- a/intern/ghost/intern/GHOST_ContextMTL.mm
++++ b/intern/ghost/intern/GHOST_ContextMTL.mm
+@@ -33,7 +33,7 @@ static void ghost_fatal_error_dialog(const char *msg)
+ 
+     NSAlert *alert = [[NSAlert alloc] init];
+ 
+-    alert.messageText = @"Blender";
++    alert.messageText = @"Film Studio Engine F0";
+     alert.informativeText = message;
+     alert.alertStyle = NSAlertStyleCritical;
+ 
+diff --git a/intern/ghost/intern/GHOST_SystemCocoa.mm b/intern/ghost/intern/GHOST_SystemCocoa.mm
+index 5a6d8b11..fd0c21b6 100644
+--- a/intern/ghost/intern/GHOST_SystemCocoa.mm
++++ b/intern/ghost/intern/GHOST_SystemCocoa.mm
+@@ -583,14 +583,14 @@ - (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app
+         NSMenu *appMenu;
+ 
+         /* Create the application menu. */
+-        appMenu = [[NSMenu alloc] initWithTitle:@"Blender"];
++        appMenu = [[NSMenu alloc] initWithTitle:@"Film Studio Engine F0"];
+ 
+-        [appMenu addItemWithTitle:@"About Blender"
++        [appMenu addItemWithTitle:@"About Film Studio Engine F0"
+                            action:@selector(orderFrontStandardAboutPanel:)
+                     keyEquivalent:@""];
+         [appMenu addItem:[NSMenuItem separatorItem]];
+ 
+-        menuItem = [appMenu addItemWithTitle:@"Hide Blender"
++        menuItem = [appMenu addItemWithTitle:@"Hide Film Studio Engine F0"
+                                       action:@selector(hide:)
+                                keyEquivalent:@"h"];
+         menuItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
+@@ -605,7 +605,7 @@ - (BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app
+                            action:@selector(unhideAllApplications:)
+                     keyEquivalent:@""];
+ 
+-        menuItem = [appMenu addItemWithTitle:@"Quit Blender"
++        menuItem = [appMenu addItemWithTitle:@"Quit Film Studio Engine F0"
+                                       action:@selector(terminate:)
+                                keyEquivalent:@"q"];
+         menuItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
+diff --git a/intern/ghost/intern/GHOST_SystemPathsCocoa.mm b/intern/ghost/intern/GHOST_SystemPathsCocoa.mm
+index 762e0726..a931efb0 100644
+--- a/intern/ghost/intern/GHOST_SystemPathsCocoa.mm
++++ b/intern/ghost/intern/GHOST_SystemPathsCocoa.mm
+@@ -17,6 +17,7 @@
+ 
+ static const char *GetApplicationSupportDir(const char *versionstr,
+                                             const NSSearchPathDomainMask mask,
++                                            const char *applicationName,
+                                             char *tempPath,
+                                             const std::size_t len_tempPath)
+ {
+@@ -30,8 +31,9 @@
+ 
+     snprintf(tempPath,
+              len_tempPath,
+-             "%s/Blender/%s",
++             "%s/%s/%s",
+              [basePath cStringUsingEncoding:NSASCIIStringEncoding],
++             applicationName,
+              versionstr);
+   }
+   return tempPath;
+@@ -40,13 +42,15 @@
+ const char *GHOST_SystemPathsCocoa::getSystemDir(int /* version */, const char *versionstr) const
+ {
+   static char tempPath[512] = "";
+-  return GetApplicationSupportDir(versionstr, NSLocalDomainMask, tempPath, sizeof(tempPath));
++  return GetApplicationSupportDir(
++      versionstr, NSLocalDomainMask, "Blender", tempPath, sizeof(tempPath));
+ }
+ 
+ const char *GHOST_SystemPathsCocoa::getUserDir(int /* version */, const char *versionstr) const
+ {
+   static char tempPath[512] = "";
+-  return GetApplicationSupportDir(versionstr, NSUserDomainMask, tempPath, sizeof(tempPath));
++  return GetApplicationSupportDir(
++      versionstr, NSUserDomainMask, "FilmStudioEngineF0", tempPath, sizeof(tempPath));
+ }
+ 
+ std::optional<std::string> GHOST_SystemPathsCocoa::getUserSpecialDir(
+diff --git a/release/darwin/Blender.app/Contents/Info.plist b/release/darwin/Blender.app/Contents/Info.plist
+index 12bb271d..5d6f0551 100644
+--- a/release/darwin/Blender.app/Contents/Info.plist
++++ b/release/darwin/Blender.app/Contents/Info.plist
+@@ -34,19 +34,18 @@
+ 	<key>CFBundleExecutable</key>
+ 	<string>Blender</string>
+ 	<key>CFBundleGetInfoString</key>
+-	<string>${MACOSX_BUNDLE_LONG_VERSION_STRING}, Blender Foundation</string>
+-	<!-- Legacy, non-Liquid Glass icon, used on pre-Tahoe / 26 macOS versions. -->
++	<string>Film Studio Engine F0 ${MACOSX_BUNDLE_LONG_VERSION_STRING}; based on Blender (GPL)</string>
++	<!-- Project-owned F0 placeholder icon. -->
+ 	<key>CFBundleIconFile</key>
+ 	<string>blender_icon_legacy.icns</string>
+-	<!-- Modern Liquid Glass icon, the app bundle Asset.car file needs to be regenerated in Xcode on modification -->
+-	<key>CFBundleIconName</key>
+-	<string>blender_liquid_glass</string>
+ 	<key>CFBundleIdentifier</key>
+-	<string>org.blenderfoundation.blender</string>
++	<string>studio.ainativefilm.f0</string>
+ 	<key>CFBundleInfoDictionaryVersion</key>
+ 	<string>6.0</string>
++	<key>CFBundleDisplayName</key>
++	<string>Film Studio Engine F0</string>
+ 	<key>CFBundleName</key>
+-	<string>Blender</string>
++	<string>Film Studio Engine F0</string>
+ 	<key>CFBundlePackageType</key>
+ 	<string>APPL</string>
+ 	<key>CFBundleShortVersionString</key>
+@@ -60,11 +59,11 @@
+ 	<key>NSHighResolutionCapable</key>
+ 	<true/>
+ 	<key>NSMicrophoneUsageDescription</key>
+-	<string>A Blender extension wants to access your microphone.</string>
++	<string>A Film Studio Engine F0 extension wants to access your microphone.</string>
+ 	<key>NSCameraUsageDescription</key>
+-	<string>A Blender extension wants to access your camera.</string>
++	<string>A Film Studio Engine F0 extension wants to access your camera.</string>
+ 	<key>NSAudioCaptureUsageDescription</key>
+-	<string>A Blender extension wants to capture your system audio.</string>
++	<string>A Film Studio Engine F0 extension wants to capture your system audio.</string>
+ 	<key>UTExportedTypeDeclarations</key>
+ 	<array>
+ 		<dict>
+diff --git a/release/darwin/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/Info.plist b/release/darwin/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/Info.plist
+index 079d10ac..51c256fb 100644
+--- a/release/darwin/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/Info.plist
++++ b/release/darwin/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/Info.plist
+@@ -5,13 +5,13 @@
+ 		<key>CFBundleDevelopmentRegion</key>
+ 		<string>en</string>
+ 		<key>CFBundleName</key>
+-		<string>blender-thumbnailer</string>
++		<string>Film Studio Engine F0 Thumbnailer</string>
+ 		<key>CFBundleDisplayName</key>
+-		<string>Blender Thumbnailer</string>
++		<string>Film Studio Engine F0 Thumbnailer</string>
+ 		<key>CFBundleExecutable</key>
+ 		<string>blender-thumbnailer</string>
+ 		<key>CFBundleIdentifier</key>
+-		<string>org.blenderfoundation.blender.thumbnailer</string>
++		<string>studio.ainativefilm.f0.thumbnailer</string>
+ 		<key>CFBundleInfoDictionaryVersion</key>
+ 		<string>6.0</string>
+ 		<key>CFBundlePackageType</key>
+@@ -25,7 +25,7 @@
+ 		<key>CFBundleVersion</key>
+ 		<string>${MACOSX_BUNDLE_SHORT_VERSION_STRING}</string>
+ 		<key>CFBundleGetInfoString</key>
+-		<string>${MACOSX_BUNDLE_LONG_VERSION_STRING}, Blender Foundation</string>
++		<string>Film Studio Engine F0 ${MACOSX_BUNDLE_LONG_VERSION_STRING}; based on Blender (GPL)</string>
+ 		<key>LSMinimumSystemVersion</key>
+ 		<string>11.2</string>
+ 		<key>NSExtension</key>
+diff --git a/release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns b/release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns
+index 240f4938..aefcb317 100644
+--- a/release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns
++++ b/release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns
+@@ -1,3 +1,3 @@
+ version https://git-lfs.github.com/spec/v1
+-oid sha256:33e48793f1c77d972688b420db258c22373f2bc392b2a5f022440fd86ee630db
+-size 229520
++oid sha256:be94271b6759adbe6fa7dc96dbce6cf68a371f0212757a4d28667c535586a468
++size 2135147
+diff --git a/release/datafiles/splash.png b/release/datafiles/splash.png
+index 02dd9436..b6690227 100644
+--- a/release/datafiles/splash.png
++++ b/release/datafiles/splash.png
+@@ -1,3 +1,3 @@
+ version https://git-lfs.github.com/spec/v1
+-oid sha256:74254f8b518df67f262a5f884dcb6da109924e5f6ec0540714553f8dd5d3ab53
+-size 1022039
++oid sha256:5d8b343b125aca7161dcf4e753b9fb39498c182667aa522252dcd9a9f56982cf
++size 565997
+diff --git a/scripts/startup/bl_ui/space_topbar.py b/scripts/startup/bl_ui/space_topbar.py
+index 9be93c38..1b6a0cd0 100644
+--- a/scripts/startup/bl_ui/space_topbar.py
++++ b/scripts/startup/bl_ui/space_topbar.py
+@@ -112,9 +112,9 @@ class TOPBAR_MT_editor_menus(Menu):
+ 
+         # Allow calling this menu directly (this might not be a header area).
+         if getattr(context.area, "show_menus", False):
+-            layout.menu("TOPBAR_MT_blender", text="", icon='BLENDER')
++            layout.menu("TOPBAR_MT_blender", text="Film Studio Engine F0")
+         else:
+-            layout.menu("TOPBAR_MT_blender", text="Blender")
++            layout.menu("TOPBAR_MT_blender", text="Film Studio Engine F0")
+ 
+         layout.menu("TOPBAR_MT_file")
+         layout.menu("TOPBAR_MT_edit")
+@@ -126,7 +126,7 @@ class TOPBAR_MT_editor_menus(Menu):
+ 
+ 
+ class TOPBAR_MT_blender(Menu):
+-    bl_label = "Blender"
++    bl_label = "Film Studio Engine F0"
+ 
+     def draw(self, _context):
+         layout = self.layout
+@@ -320,7 +320,9 @@ class TOPBAR_MT_file_defaults(Menu):
+         layout.operator("wm.save_homefile")
+         if app_template:
+             display_name = bpy.path.display_name(iface_(app_template))
+-            props = layout.operator("wm.read_factory_settings", text="Load Factory Blender Settings")
++            props = layout.operator(
++                "wm.read_factory_settings", text="Load Factory Film Studio Engine F0 Settings"
++            )
+             props.app_template = app_template
+             props = layout.operator(
+                 "wm.read_factory_settings",
+diff --git a/source/blender/blenkernel/intern/appdir.cc b/source/blender/blenkernel/intern/appdir.cc
+index a2c90560..9341ae7c 100644
+--- a/source/blender/blenkernel/intern/appdir.cc
++++ b/source/blender/blenkernel/intern/appdir.cc
+@@ -225,7 +225,7 @@ void BKE_appdir_folder_caches(char *path, const size_t path_maxncpy)
+                 "Cache",
+                 SEP_STR);
+ #elif defined(__APPLE__)
+-  BLI_path_join(path, path_maxncpy, caches_root_path->c_str(), "Blender", SEP_STR);
++  BLI_path_join(path, path_maxncpy, caches_root_path->c_str(), "FilmStudioEngineF0", SEP_STR);
+ #else /* __linux__ */
+   BLI_path_join(path, path_maxncpy, caches_root_path->c_str(), "blender", SEP_STR);
+ #endif
+diff --git a/source/blender/windowmanager/intern/wm_platform_support.cc b/source/blender/windowmanager/intern/wm_platform_support.cc
+index a5fd7aad..b537a00d 100644
+--- a/source/blender/windowmanager/intern/wm_platform_support.cc
++++ b/source/blender/windowmanager/intern/wm_platform_support.cc
+@@ -143,7 +143,7 @@ bool WM_platform_support_perform_checks()
+ 
+     case GPU_SUPPORT_LEVEL_LIMITED: {
+       size_t slen = 0;
+-      STR_CONCAT(title, slen, "Blender - ");
++      STR_CONCAT(title, slen, "Film Studio Engine F0 - ");
+       STR_CONCAT(
+           title, slen, CTX_IFACE_(BLT_I18NCONTEXT_ID_WINDOWMANAGER, "Limited Platform Support"));
+       slen = 0;
+@@ -174,7 +174,7 @@ bool WM_platform_support_perform_checks()
+ 
+     case GPU_SUPPORT_LEVEL_UNSUPPORTED: {
+       size_t slen = 0;
+-      STR_CONCAT(title, slen, "Blender - ");
++      STR_CONCAT(title, slen, "Film Studio Engine F0 - ");
+       STR_CONCAT(
+           title, slen, CTX_IFACE_(BLT_I18NCONTEXT_ID_WINDOWMANAGER, "Platform Unsupported"));
+       slen = 0;
+diff --git a/source/blender/windowmanager/intern/wm_splash_screen.cc b/source/blender/windowmanager/intern/wm_splash_screen.cc
+index 92d1fdce..e5e2bf4b 100644
+--- a/source/blender/windowmanager/intern/wm_splash_screen.cc
++++ b/source/blender/windowmanager/intern/wm_splash_screen.cc
+@@ -452,32 +452,9 @@ static ui::Block *wm_block_about_create(bContext *C, ARegion *region, void * /*a
+                                         0,
+                                         style);
+ 
+-/* Blender logo. */
+-#ifndef WITH_HEADLESS
+-  constexpr bool show_color = false;
+-  const float size = 0.2f * dialog_width;
+-
+-  ImBuf *ibuf = ui::svg_icon_bitmap(ICON_BLENDER_LOGO_LARGE, size, show_color);
+-
+-  if (ibuf) {
+-    bTheme *btheme = ui::theme::theme_get();
+-    const uchar *color = btheme->tui.wcol_menu_back.text_sel;
+-
+-    /* The top margin. */
+-    layout.row(false).separator(0.2f);
+-
+-    /* The logo image. */
+-    layout.row(false).alignment_set(ui::LayoutAlign::Left);
+-    uiDefButImage(block, ibuf, 0, U.widget_unit, ibuf->x, ibuf->y, show_color ? nullptr : color);
+-
+-    /* Padding below the logo. */
+-    layout.row(false).separator(2.7f);
+-  }
+-#endif /* !WITH_HEADLESS */
+-
+   ui::Layout &col = layout.column(true);
+ 
+-  uiItemL_ex(&col, IFACE_("Blender"), ICON_NONE, true, false);
++  uiItemL_ex(&col, IFACE_("Film Studio Engine F0"), ICON_NONE, true, false);
+ 
+   MenuType *mt = WM_menutype_find("WM_MT_splash_about", true);
+   if (mt) {
+@@ -500,9 +477,9 @@ static wmOperatorStatus wm_splash_about_invoke(bContext *C,
+ 
+ void WM_OT_splash_about(wmOperatorType *ot)
+ {
+-  ot->name = "About Blender";
++  ot->name = "About Film Studio Engine F0";
+   ot->idname = "WM_OT_splash_about";
+-  ot->description = "Open a window with information about Blender";
++  ot->description = "Open a window with information about Film Studio Engine F0";
+ 
+   ot->invoke = wm_splash_about_invoke;
+   ot->poll = WM_operator_winactive;
+diff --git a/source/blender/windowmanager/intern/wm_window.cc b/source/blender/windowmanager/intern/wm_window.cc
+index 4c0aa2cd..a2796b35 100644
+--- a/source/blender/windowmanager/intern/wm_window.cc
++++ b/source/blender/windowmanager/intern/wm_window.cc
+@@ -607,7 +607,7 @@ static std::string wm_window_title_text(
+     if (is_single && area && area->spacetype != SPACE_EMPTY) {
+       return IFACE_(ED_area_name(area).c_str());
+     }
+-    return "Blender";
++    return "Film Studio Engine F0";
+   }
+ 
+   /* This path may contain invalid UTF8 byte sequences on UNIX systems,
+@@ -690,7 +690,7 @@ static std::string wm_window_title_text(
+     }
+   }
+ 
+-  win_title.append(fmt::format(" - Blender {}", BKE_blender_version_string()));
++  win_title.append(fmt::format(" - Film Studio Engine F0 {}", BKE_blender_version_string()));
+ 
+   return win_title;
+ }
+diff --git a/source/creator/creator_args.cc b/source/creator/creator_args.cc
+index fceee3f3..0bb4a2fa 100644
+--- a/source/creator/creator_args.cc
++++ b/source/creator/creator_args.cc
+@@ -604,7 +604,7 @@ static void arg_py_context_restore(bContext *C, BlendePyContextStore *c_py)
+ 
+ static void print_version_full()
+ {
+-  printf("Blender %s\n", BKE_blender_version_string());
++  printf("Film Studio Engine F0 %s (Blender source)\n", BKE_blender_version_string());
+ #  ifdef BUILD_DATE
+   printf("\tbuild date: %s\n", build_date);
+   printf("\tbuild time: %s\n", build_time);
+@@ -626,19 +626,19 @@ static void print_version_short()
+ #  ifdef BUILD_DATE
+   /* NOTE: We include built time since sometimes we need to tell broken from
+    * working built of the same hash. */
+-  printf("Blender %s (hash %s built %s %s)\n",
++  printf("Film Studio Engine F0 %s (Blender source hash %s built %s %s)\n",
+          BKE_blender_version_string(),
+          build_hash,
+          build_date,
+          build_time);
+ #  else
+-  printf("Blender %s\n", BKE_blender_version_string());
++  printf("Film Studio Engine F0 %s (Blender source)\n", BKE_blender_version_string());
+ #  endif
+ }
+ 
+ static const char arg_handle_print_version_doc[] =
+     "\n\t"
+-    "Print Blender version and exit.";
++    "Print Film Studio Engine F0 version and exit.";
+ static int arg_handle_print_version(int /*argc*/, const char ** /*argv*/, void * /*data*/)
+ {
+   print_version_full();
+@@ -661,8 +661,8 @@ static void print_help(bArgs *ba, bool all)
+ 
+ #  define PRINT(...) BLI_args_printf(ba, __VA_ARGS__)
+ 
+-  PRINT("Blender %s\n", BKE_blender_version_string());
+-  PRINT("Usage: blender [args ...] [file] [args ...]\n");
++  PRINT("Film Studio Engine F0 %s (Blender source)\n", BKE_blender_version_string());
++  PRINT("Usage: Film Studio Engine F0 [args ...] [file] [args ...]\n");
+   PRINT("\n");
+ 
+   PRINT("Render Options:\n");
+@@ -1369,7 +1369,7 @@ static const char arg_handle_debug_mode_set_doc[] =
+ static int arg_handle_debug_mode_set(int /*argc*/, const char ** /*argv*/, void *data)
+ {
+   G.debug |= G_DEBUG;
+-  printf("Blender %s\n", BKE_blender_version_string());
++  printf("Film Studio Engine F0 %s (Blender source)\n", BKE_blender_version_string());
+   MEM_set_memory_debug();
+ #  ifndef NDEBUG
+   BLI_mempool_set_memory_debug();
