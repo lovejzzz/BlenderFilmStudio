@@ -1,26 +1,71 @@
 #!/usr/bin/env node
 
 import { execFile } from 'node:child_process';
-import { access, readFile, statfs } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { access, lstat, mkdir, open, readFile, realpath, statfs } from 'node:fs/promises';
 import { constants } from 'node:fs';
-import { pathToFileURL } from 'node:url';
+import { dirname, isAbsolute, normalize, relative, resolve, sep } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import {
-  durableMkdir,
-  resolveExistingRepositoryPath,
-  resolveFreshRepositoryPath,
-  sha256Bytes,
-  sha256File,
-  validSelfHash,
-  writeDurableHashed,
-} from './lib/production-compile-receipt.mjs';
-import { repositoryRoot } from './lib/scene-spec.mjs';
+
+export const repositoryRoot = resolve(fileURLToPath(new URL('../', import.meta.url)));
+const repositoryRealRoot = await realpath(repositoryRoot);
+
+export function sortValue(value) {
+  if (Array.isArray(value)) return value.map(sortValue);
+  if (value && typeof value === 'object') return Object.fromEntries(Object.keys(value).sort().map(key => [key, sortValue(value[key])]));
+  return value;
+}
+export function canonicalJson(value) { return JSON.stringify(sortValue(value)); }
+export function sha256Bytes(value) { return createHash('sha256').update(value).digest('hex'); }
+export function canonicalHash(value) { return sha256Bytes(Buffer.from(canonicalJson(value))); }
+export async function sha256File(path) { return sha256Bytes(await readFile(path)); }
+export function repoUri(path) { return relative(repositoryRoot, path).split(sep).join('/'); }
+export function validSelfHash(record, field) {
+  if (!record || typeof record !== 'object' || typeof record[field] !== 'string') return false;
+  const body = structuredClone(record); delete body[field]; return record[field] === canonicalHash(body);
+}
+function requireRelativeSpelling(spelling, label) {
+  if (typeof spelling !== 'string' || !spelling || isAbsolute(spelling) || spelling.includes('\\')) throw new Error(`${label} must be repository-relative POSIX`);
+  if (normalize(spelling).split(sep).join('/') !== spelling || spelling === '.' || spelling.startsWith('../')) throw new Error(`${label} spelling is not normalized`);
+}
+async function pathState(path) { try { return await lstat(path); } catch (error) { if (error.code === 'ENOENT') return null; throw error; } }
+async function requireContained(path, label, allowRoot = false) {
+  const actual = await realpath(path); const fromRoot = relative(repositoryRealRoot, actual);
+  if ((!allowRoot && fromRoot === '') || fromRoot === '..' || fromRoot.startsWith(`..${sep}`) || actual !== path) throw new Error(`${label} escapes or traverses a symlink`);
+}
+export async function resolveExistingRepositoryPath(spelling, label, expected = 'file') {
+  requireRelativeSpelling(spelling, label); const path = resolve(repositoryRoot, spelling); const metadata = await pathState(path);
+  if (!metadata || metadata.isSymbolicLink()) throw new Error(`${label} is missing or symbolic`);
+  await requireContained(path, label);
+  if (expected === 'file' && !metadata.isFile()) throw new Error(`${label} is not a file`);
+  if (expected === 'directory' && !metadata.isDirectory()) throw new Error(`${label} is not a directory`);
+  return path;
+}
+export async function resolveFreshRepositoryPath(spelling, label) {
+  requireRelativeSpelling(spelling, label); const path = resolve(repositoryRoot, spelling);
+  if (await pathState(path)) throw new Error(`${label} already exists`);
+  let ancestor = dirname(path); let metadata = await pathState(ancestor);
+  while (!metadata) { const parent = dirname(ancestor); if (parent === ancestor) throw new Error(`${label} has no contained ancestor`); ancestor = parent; metadata = await pathState(ancestor); }
+  if (metadata.isSymbolicLink() || !metadata.isDirectory()) throw new Error(`${label} ancestor is untrusted`);
+  await requireContained(ancestor, `${label} ancestor`, ancestor === repositoryRoot); return path;
+}
+async function syncDirectory(path) { const handle = await open(path, 'r'); try { await handle.sync(); } finally { await handle.close(); } }
+export async function durableMkdir(path) { await mkdir(path, { recursive: false }); await syncDirectory(path); await syncDirectory(dirname(path)); }
+export async function writeDurableJson(path, value) {
+  const handle = await open(path, 'wx', 0o600);
+  try { await handle.writeFile(`${JSON.stringify(sortValue(value), null, 2)}\n`, 'utf8'); await handle.sync(); } finally { await handle.close(); }
+  await syncDirectory(dirname(path));
+}
+export async function writeDurableHashed(path, body, field) { const record = { ...body, [field]: canonicalHash(body) }; await writeDurableJson(path, record); return record; }
 
 const execFileAsync = promisify(execFile);
 const CONTRACT_URI = 'specs/b62-phase0-asset-animatic-calibration.v0.1.json';
 const CORRECTION_URI = 'specs/b62-phase0-c1-ffprobe-accounting-correction.v0.1.json';
+const CORRECTION_2_URI = 'specs/b62-phase0-c2-fresh-clone-node-dependency-correction.v0.1.json';
 const PREREGISTRATION_COMMIT = 'de57b63';
 const CORRECTION_COMMIT = '9173ede';
+const CORRECTION_2_COMMIT = '9c3aba7';
 const EXPECTED = {
   outputRoot: 'experiments/b62-phase0-preflight-v0-1',
   attemptRoot: 'experiments/b62-phase0-attempt-v0-1',
@@ -29,9 +74,11 @@ const EXPECTED = {
 const TOOL_PATHS = [
   CONTRACT_URI,
   CORRECTION_URI,
+  CORRECTION_2_URI,
   'research/2026-08-29-b62-terminal-cinematic-proof-goal.md',
   'research/2026-08-29-b62-phase0-asset-animatic-calibration-protocol.md',
   'research/2026-08-29-b62-phase0-c1-ffprobe-accounting-correction.md',
+  'research/2026-08-29-b62-phase0-c2-fresh-clone-node-dependency-correction.md',
   'blender/generate_b62_phase0_assets.py',
   'blender/render_b62_phase0.py',
   'blender/audit_b62_phase0.py',
@@ -69,6 +116,7 @@ async function verifyFreeze(commit) {
   if (head !== commit || origin !== commit) throw new Error('B62 tool freeze must equal pushed HEAD and origin/main');
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, commit]);
   await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, commit]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_2_COMMIT, commit]);
   const hashes = {};
   for (const uri of TOOL_PATHS) {
     const path = await resolveExistingRepositoryPath(uri, `B62 frozen tool ${uri}`);
@@ -99,10 +147,13 @@ export async function runB62Preflight(argv) {
   await resolveFreshRepositoryPath(parsed.formalRoot, 'B62 formal root');
   const contractPath = await resolveExistingRepositoryPath(CONTRACT_URI, 'B62 contract');
   const correctionPath = await resolveExistingRepositoryPath(CORRECTION_URI, 'B62 C1 correction');
+  const correction2Path = await resolveExistingRepositoryPath(CORRECTION_2_URI, 'B62 C2 correction');
   const contract = JSON.parse(await readFile(contractPath, 'utf8'));
   const correction = JSON.parse(await readFile(correctionPath, 'utf8'));
+  const correction2 = JSON.parse(await readFile(correction2Path, 'utf8'));
   if (contract.schemaVersion !== 'bfs.b62Phase0AssetAnimaticCalibration.v0.1' || contract.statusBeforeExecution !== 'PREREGISTERED') throw new Error('B62 contract invalid');
   if (correction.statusBeforeExecution !== 'PREREGISTERED' || correction.parent.contractSha256 !== await sha256File(contractPath)) throw new Error('B62 C1 binding invalid');
+  if (correction2.statusBeforeRetry !== 'PREREGISTERED' || correction2.parent.c1Sha256 !== await sha256File(correctionPath)) throw new Error('B62 C2 binding invalid');
   const toolHashes = await verifyFreeze(parsed.toolFreezeCommit);
   const upstream = await verifyUpstream(contract);
   for (const binary of ['/Applications/Blender.app/Contents/MacOS/Blender', '/opt/homebrew/bin/ffmpeg', '/opt/homebrew/bin/ffprobe']) await access(binary, constants.X_OK);
@@ -112,7 +163,7 @@ export async function runB62Preflight(argv) {
   const reserveBytes = BigInt(contract.processBudget.minimumFreeReserveBytes);
   if (availableBytes - projectedBytes < reserveBytes) throw new Error('B62 disk reserve admission failed');
   const checks = [
-    ['PREREGISTRATION_AND_C1_ANCESTRY', true],
+    ['PREREGISTRATION_C1_C2_ANCESTRY', true],
     ['TOOL_FREEZE_EQUALS_PUSHED_HEAD', Object.keys(toolHashes).length === TOOL_PATHS.length],
     ['UPSTREAM_RECEIPTS_EXACT', upstream.length === 3],
     ['ROOTS_FRESH', true],
@@ -130,6 +181,7 @@ export async function runB62Preflight(argv) {
     roots: { preflight: parsed.outputRoot, attempt: parsed.attemptRoot, formal: parsed.formalRoot },
     contract: { uri: CONTRACT_URI, sha256: await sha256File(contractPath) },
     correction: { uri: CORRECTION_URI, sha256: await sha256File(correctionPath) },
+    correction2: { uri: CORRECTION_2_URI, sha256: await sha256File(correction2Path) },
     upstream, toolHashes, checks,
     disk: { availableBytes: availableBytes.toString(), projectedBytes: projectedBytes.toString(), minimumReserveBytes: reserveBytes.toString() },
     operations: { childProcesses: 0, blenderStarts: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },

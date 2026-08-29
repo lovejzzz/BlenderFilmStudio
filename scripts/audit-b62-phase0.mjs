@@ -2,17 +2,19 @@
 
 import { readFile, readdir, stat, statfs } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 import { measureOutput } from './lib/budgeted-process.mjs';
 import {
   canonicalHash, resolveExistingRepositoryPath, sha256File,
   validSelfHash, writeDurableHashed,
-} from './lib/production-compile-receipt.mjs';
-import { repositoryRoot } from './lib/scene-spec.mjs';
+} from './preflight-b62-phase0.mjs';
+
+const repositoryRoot = resolve(fileURLToPath(new URL('../', import.meta.url)));
 
 const CONTRACT_URI = 'specs/b62-phase0-asset-animatic-calibration.v0.1.json';
 const CORRECTION_URI = 'specs/b62-phase0-c1-ffprobe-accounting-correction.v0.1.json';
+const CORRECTION_2_URI = 'specs/b62-phase0-c2-fresh-clone-node-dependency-correction.v0.1.json';
 const EXPECTED = {
   preflightRoot: 'experiments/b62-phase0-preflight-v0-1',
   attemptRoot: 'experiments/b62-phase0-attempt-v0-1',
@@ -151,11 +153,13 @@ export async function auditB62(argv) {
   const parsed = parseArguments(argv);
   const contractRecord = await json(CONTRACT_URI); const contract = contractRecord.value;
   const correctionRecord = await json(CORRECTION_URI); const correction = correctionRecord.value;
+  const correction2Record = await json(CORRECTION_2_URI); const correction2 = correction2Record.value;
   const preflight = await json(`${parsed.preflightRoot}/preflight.json`);
   requireValue(validSelfHash(preflight.value, 'preflightHash') && preflight.value.status === 'ACCEPTED', 'B62 preflight invalid');
   requireValue(preflight.value.contract.sha256 === await sha256File(contractRecord.path)
     && preflight.value.correction.sha256 === await sha256File(correctionRecord.path)
-    && correction.correction.ffprobeMetadataProcesses === 1, 'B62 contract/C1 binding mismatch');
+    && preflight.value.correction2.sha256 === await sha256File(correction2Record.path)
+    && correction.correction.ffprobeMetadataProcesses === 1 && correction2.statusBeforeRetry === 'PREREGISTERED', 'B62 contract/correction binding mismatch');
   const generation = await json(`${parsed.formalRoot}/reports/generation-report.json`);
   requireValue(validSelfHash(generation.value, 'reportHash') && generation.value.status === 'PASS', 'B62 generation report invalid');
   const generationFiles = [
@@ -292,7 +296,8 @@ export async function auditB62(argv) {
   const output = resolve(repositoryRoot, parsed.output);
   const record = await writeDurableHashed(output, {
     schemaVersion: 'bfs.b62Phase0Audit.v0.1', experimentId: contract.experimentId, status: 'PASS', verdict: contract.passVerdict,
-    contract: { uri: CONTRACT_URI, sha256: await sha256File(contractRecord.path) }, correction: { uri: CORRECTION_URI, sha256: await sha256File(correctionRecord.path) },
+    contract: { uri: CONTRACT_URI, sha256: await sha256File(contractRecord.path) },
+    corrections: [{ uri: CORRECTION_URI, sha256: await sha256File(correctionRecord.path) }, { uri: CORRECTION_2_URI, sha256: await sha256File(correction2Record.path) }],
     preflight: { uri: `${parsed.preflightRoot}/preflight.json`, sha256: await sha256File(preflight.path), preflightHash: preflight.value.preflightHash },
     generation: { reportHash: generation.value.reportHash, assetIdentityHashes: Object.fromEntries(Object.entries(generation.value.manifests).map(([id, row]) => [id, row.identityHash])) },
     blenderAudit: { uri: `${parsed.formalRoot}/reports/blender-audit.json`, sha256: await sha256File(blenderAudit.path), auditHash: blenderAudit.value.auditHash },
