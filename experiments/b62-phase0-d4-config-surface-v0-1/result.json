@@ -1,0 +1,124 @@
+{
+  "checks": [
+    {
+      "id": "BLENDER_BUILD_EXACT",
+      "pass": true
+    },
+    {
+      "id": "NO_CAPTURED_SURFACE_ERRORS",
+      "pass": true
+    },
+    {
+      "id": "COLOR_SURFACE_EXACT",
+      "pass": true
+    },
+    {
+      "id": "CYCLES_SURFACE_EXACT",
+      "pass": true
+    },
+    {
+      "id": "LEGACY_EEVEE_NAME_REJECTED",
+      "pass": true
+    },
+    {
+      "id": "CURRENT_EEVEE_EXACT",
+      "pass": true
+    },
+    {
+      "id": "MOTION_BLUR_EXACT",
+      "pass": true
+    },
+    {
+      "id": "EXR_SURFACE_EXACT",
+      "pass": true
+    },
+    {
+      "id": "ZERO_RENDER_EXTERNAL_CALLS",
+      "pass": true
+    }
+  ],
+  "correction": {
+    "sha256": "2cd6773905e577d0a6b19ce56342f8be8cb103db7643f31135961cf626e6d4b4",
+    "uri": "specs/b62-phase0-c7-eevee-engine-runtime-correction.v0.1.json"
+  },
+  "experimentId": "B62-P0-D4",
+  "probe": {
+    "blender": {
+      "buildHash": "fbe6228777e7",
+      "version": "5.2.0 LTS"
+    },
+    "color": {
+      "display": "sRGB - Display",
+      "exposure": 0,
+      "gamma": 1,
+      "look": "None",
+      "oldLookError": "TypeError: bpy_struct: item.attr = val: enum \"Medium High Contrast\" not found in ('None', 'ACES 1.3 Reference Gamut Compression')",
+      "oldLookRejected": true,
+      "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+    },
+    "cycles": {
+      "animatedSeed": false,
+      "denoise": true,
+      "device": "CPU",
+      "engine": "CYCLES",
+      "samples": 64,
+      "seed": 62001
+    },
+    "eevee": {
+      "engine": "BLENDER_EEVEE",
+      "hasSettings": true,
+      "legacyEngineError": "TypeError: bpy_struct: item.attr = val: enum \"BLENDER_EEVEE_NEXT\" not found in ('BLENDER_EEVEE', 'BLENDER_WORKBENCH', 'CYCLES')",
+      "legacyEngineRejected": true,
+      "renderSamples": 16,
+      "viewportSamples": 16
+    },
+    "errors": [],
+    "exr": {
+      "colorDepth": "16",
+      "colorMode": "RGBA",
+      "exrCodec": "ZIP",
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "mediaType": "MULTI_LAYER_IMAGE"
+    },
+    "motionBlur": {
+      "enabled": true
+    },
+    "operations": {
+      "blenderStarts": 1,
+      "dockerProcesses": 0,
+      "modelCalls": 0,
+      "networkCalls": 0,
+      "renderCalls": 0
+    },
+    "schemaVersion": "bfs.b62Phase0D4Probe.v0.1"
+  },
+  "process": {
+    "elapsedSeconds": 0.469123208,
+    "exitCode": 0,
+    "stderr": {
+      "bytes": 753,
+      "sha256": "cc7b4e60416365772613ac309ddbcb884c916a7b183fafd7372a70946ca36198",
+      "uri": "experiments/b62-phase0-d4-config-surface-v0-1/stderr.log"
+    },
+    "stdout": {
+      "bytes": 1854,
+      "sha256": "a668ae92b663bb27fb166e3105c1bdb5979e9b78367b9236beb2110a4add1859",
+      "uri": "experiments/b62-phase0-d4-config-surface-v0-1/stdout.log"
+    },
+    "timing": {
+      "maximumResidentSetSizeBytes": 237944832,
+      "realSeconds": 0.46,
+      "systemSeconds": 0.05,
+      "userSeconds": 0.35
+    }
+  },
+  "resultHash": "2e09fe113f0d916639611873d54f34d191d4d3cbf2486b8be18f25e1d45a495d",
+  "schemaVersion": "bfs.b62Phase0D4Result.v0.1",
+  "status": "PASS",
+  "toolFreezeCommit": "2b81b26f24995e941e82edc773359500938c1dd2",
+  "toolHashes": {
+    "blender/probe_b62_d4_config_surface.py": "fa3ee9fb2e380647bfdb8a236346ff60e094f806075b5db37cd890f29f148368",
+    "scripts/audit-b62-d4-config-surface.mjs": "b30beab8b22189e1a42e922d76ee90472a788f4b3012d106f7ff44a387309cfd",
+    "scripts/run-b62-d4-config-surface.mjs": "49ea29eb33909782f4c92c07bc8a47611db74682dfa4aa5aee5d46f82207fdf7"
+  }
+}

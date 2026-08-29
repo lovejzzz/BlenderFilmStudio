@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C8",
+  "date": "2026-08-29",
+  "statusBeforeProductionToolChange": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "c7": {"uri": "specs/b62-phase0-c7-eevee-engine-runtime-correction.v0.1.json", "sha256": "2cd6773905e577d0a6b19ce56342f8be8cb103db7643f31135961cf626e6d4b4"}
+  },
+  "promotingEvidence": {
+    "id": "B62-P0-D4",
+    "root": "experiments/b62-phase0-d4-config-surface-v0-1",
+    "tree": {"files": 4, "bytes": 6718, "treeSha256": "be5ed8d4be385388c49b7d8a1c769e8b3bdf613ff528b6d0c9ded89050518f42"},
+    "result": {"sha256": "8c911957d9b03862e892dd83f46a1acb85ff8b837fb64f3f8aabab0133857c2a", "resultHash": "2e09fe113f0d916639611873d54f34d191d4d3cbf2486b8be18f25e1d45a495d", "status": "PASS"},
+    "receipt": {"sha256": "c7fd3bbadb08f1d4cd89df8274ab1a408863b6799707d6624022b7130e3a3148", "receiptHash": "67b951e0a316134d2f2578a4309413cfba942d9057a9f49a48cfbeaa4fdd0df5", "status": "PASS", "verdict": "BLENDER52_COMPLETE_CONFIG_SURFACE_PROVEN"},
+    "checks": "9/9",
+    "renderCalls": 0
+  },
+  "authorizedProductionChanges": {
+    "blender/generate_b62_phase0_assets.py": "Set display sRGB - Display, view ACES 2.0 - SDR 100 nits (Rec.709), look None, exposure 0 and gamma 1 before master save.",
+    "blender/render_b62_phase0.py": "Use BLENDER_EEVEE runtime engine for animatic, retain 16 final samples, and require/report the D4 neutral color transform.",
+    "forbidden": "Any light, material, geometry, camera, animation, frame, resolution, samples, seed, denoise, compression or threshold change."
+  },
+  "authorizedGeneratorSmoke": {
+    "id": "B62-P0-D5",
+    "root": "experiments/b62-phase0-d5-generator-smoke-v0-1",
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "maximumWriteBytes": 536870912,
+    "minimumReserveBytes": 107374182400,
+    "toolPaths": [
+      "scripts/run-b62-d5-generator-smoke.mjs",
+      "scripts/audit-b62-d5-generator-smoke.mjs"
+    ],
+    "usesFrozenProductionGenerator": true,
+    "requiredOutputs": [
+      "three asset blend libraries",
+      "one motion blend library",
+      "one master blend",
+      "valid generation-report with zero renders"
+    ]
+  },
+  "promotionRule": "Only D5 PASS plus independent Node audit authorizes a later C9 v0.3 formal binding.",
+  "candidateV03Roots": {"preflight": "experiments/b62-phase0-preflight-v0-3", "attempt": "experiments/b62-phase0-attempt-v0-3", "formal": "experiments/b62-phase0-v0-3"},
+  "formalBudgetsAndClaimsUnchanged": true
+}

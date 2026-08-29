@@ -5355,3 +5355,11 @@ Date: 2026-08-29 · Type: RETAINED DIAGNOSTIC FAILURE / RUNTIME ENUM PREREGISTRA
 D3在structured marker前exit 1，只留下stdout/stderr 2 files/2,218 bytes/tree `408c555f…`；file hashes `92594064…/ba40ddf2…`。color neutral与Cycles赋值已执行未抛错，停止点为`BLENDER_EEVEE_NEXT`不在runtime enum；Blender 5.2列出的当前engine是`BLENDER_EEVEE`。zero render。
 
 C7预注册D4 one-Blender/zero-render：catch并记录旧name reject，要求新`BLENDER_EEVEE`accept、taa_render_samples 16 accept，再完成全部C6 color/Cycles/motion/EXR surface checks。仅完整PASS才允许runtime engine与neutral color override；formal dose/budgets/claims不变。
+
+## J-422 · B62 D4完整配置表面PASS与C8 generator smoke预注册
+
+Date: 2026-08-29 · Type: DIAGNOSTIC PASS / PRODUCTION-SMOKE PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+D4 tool freeze `2b81b26…`；one Blender 0.46秒/peak RSS 237,944,832 bytes，captured surface errors zero。9/9 checks与独立audit PASS：neutral display/view/look exact，Cycles CPU/64/denoise/fixed seed exact，旧Eevee name reject、`BLENDER_EEVEE`+16 viewport/final samples accept，motion blur与MLEXR/HALF/ZIP exact，zero render/external calls。result/receipt file/self hashes为`8c911957…/2e09fe11…`和`c7fd3bba…/67b951e0…`。
+
+C8在production code未改前授权两项runtime-only更正，并预注册D5真实generator smoke：冻结production generator，one Blender/zero render，独立root，512 MiB write/100 GiB reserve；必须完整生成3 assets+motion+master+valid report。D5通过前不更新formal Node tools、不运行v0.3。
