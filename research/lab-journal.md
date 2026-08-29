@@ -5507,3 +5507,11 @@ C1 retry以tool freeze `029913a1b9fd8e43559387cc31a4e82c4677ab50`在fresh v0.2 r
 原始baseline在derivation frames不合格；96 cells仅`AZ_M045_R200_L065`一个候选三帧全合格：绕target −45°、radial distance ×2、65 mm。frames 216/240/264的helmet share为0.25/0.12847/0.16840，character share 0.43924/0.27778/0.34375，on-screen vertex fraction 0.29283/0.37744/0.32676，clamped area 0.80054/0.48127/0.60346；每帧均exact可见visor、eye slit、chest light与core。verdict为`B62_CLOSE_CAMERA_BOUNDED_FEASIBLE_CANDIDATE_FOUND`。
 
 D4在任何新工具创建前冻结该唯一候选，并只在admission后解封frames 193/204/228/252/276/288。候选将按每个integer frame采样原camera后变换并bake到新camera，保存derived `.blend`；原camera保留作paired control。第二Blender以960×540、Cycles CPU 16 spp渲染6×2 EXR/PNG，第三Blender独立复开检查bake、几何与像素。corrected六帧必须全过D3 template、original六帧必须全拒绝，12 EXR必须finite/non-empty且每pair不同。即使technical PASS，六组原图仍需人眼审查；不得直接宣称电影感。
+
+## J-437 · B62-Q1-D4 v0.1 Blender 5.2 layered Action API失败与C1预注册
+
+Date: 2026-08-29 · Type: RETAINED BUILD FAILURE / API CORRECTION PREREGISTRATION · New Blender processes: 1 · New Blender renders: 0
+
+D4 tool freeze `d074402bb2ad80b6f6885feaed9be83af08f75de`运行后，BUILD Blender在0.486秒、peak sampled RSS 225,935,360 bytes失败；未创建derived scene，render calls为0。错误是builder访问`Action.fcurves`，但Blender 5.2 layered Action必须通过assigned-slot channelbag访问。v0.1永久保留3 files/7,084 bytes/tree `8538b1bc…`，failure file/self `c6ff5399…/7f3c1849…`。
+
+C1在工具修改前只授权builder使用`anim_utils.animdata_get_channelbag_for_assigned_slot(...).fcurves`，runner/auditor绑定failure并切换fresh v0.2。render tool hash `e20efbad…`与independent audit hash `c39a39bb…`固定；候选、96-frame bake、六个holdout、12 render、所有阈值和预算不变。

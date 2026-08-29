@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityProcessReceipt.v0.1",
+  "experimentId": "B62-Q1-D4",
+  "processId": "BUILD",
+  "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+  "args": [
+    "--background",
+    "--factory-startup",
+    "--disable-autoexec",
+    "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "blender/build_b62_q1_d4_corrected_scene.py",
+    "--",
+    "--output-scene",
+    "experiments/b62-camera-quality-holdout-render-v0-1/scene/B62_PHASE0_D4_CAMERA_CORRECTED.blend",
+    "--report",
+    "experiments/b62-camera-quality-holdout-render-v0-1/build.json",
+    "--master-sha256",
+    "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"
+  ],
+  "result": {
+    "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+    "version": "0.2.0",
+    "outcome": "CHILD_FAILED",
+    "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "args": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/build_b62_q1_d4_corrected_scene.py",
+      "--",
+      "--output-scene",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-holdout-render-v0-1/scene/B62_PHASE0_D4_CAMERA_CORRECTED.blend",
+      "--report",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-holdout-render-v0-1/build.json",
+      "--master-sha256",
+      "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"
+    ],
+    "budgets": {
+      "wallTimeMs": 180000,
+      "maxRssBytes": 6442450944,
+      "maxLogBytes": 4194304,
+      "maxOutputFiles": 256,
+      "maxOutputBytes": 2147483648,
+      "sampleIntervalMs": 100
+    },
+    "metrics": {
+      "elapsedMs": 486,
+      "peakSampledRssBytes": 225935360,
+      "logBytes": 1897,
+      "output": {
+        "fileCount": 1,
+        "bytes": 2135,
+        "symlinkCount": 0
+      }
+    },
+    "breach": null,
+    "child": {
+      "pid": 85292,
+      "exitCode": 1,
+      "signal": null,
+      "spawnError": null
+    },
+    "termination": {
+      "requested": false,
+      "awaited": true
+    },
+    "logSha256": "71f8947ea119662fd95b902dea290cedea34b6d9f753ca8d2bc7dc90a6178bc9",
+    "outputPreview": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.063  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.063  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.063  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.063  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.063  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:00.256  blend            | Read blend: \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend\"\nTraceback (most recent call last):\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/build_b62_q1_d4_corrected_scene.py\", line 161, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/build_b62_q1_d4_corrected_scene.py\", line 100, in main\n    \"sourceAnimation\": animation_snapshot(source),\n                       ~~~~~~~~~~~~~~~~~~^^^^^^^^\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/build_b62_q1_d4_corrected_scene.py\", line 81, in animation_snapshot\n    for curve in sorted(action.fcurves, key=lambda item: (item.data_path, item.array_index)):\n                        ^^^^^^^^^^^^^^\nAttributeError: 'Action' object has no attribute 'fcurves'\n\nError: script failed, file: '/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/build_b62_q1_d4_corrected_scene.py', exiting.\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n",
+    "outputPreviewTruncated": false
+  },
+  "processHash": "f4276b1d42ff6d8d38a5028ce7280983e18f51c024d8223167218d1882cc0ed5"
+}

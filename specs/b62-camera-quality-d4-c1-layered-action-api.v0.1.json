@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityHoldoutCorrection.v0.1",
+  "correctionId": "B62-Q1-D4-C1",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {"experimentId": "B62-Q1-D4", "spec": "specs/b62-camera-quality-holdout-render-validation.v0.1.json", "preregistrationCommit": "c2941a1", "toolFreezeCommit": "d074402bb2ad80b6f6885feaed9be83af08f75de"},
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-holdout-render-v0-1",
+    "tree": {"files": 3, "bytes": 7084, "treeSha256": "8538b1bca56740101e0b19d63ba024f519e26f5a07cb6f3006afccaf73ba8e91"},
+    "failure": {"uri": "experiments/b62-camera-quality-holdout-render-v0-1/failure.json", "sha256": "c6ff53993c9197fd687a15ac0902332e1673869abad3014318d1b0e8e3507440", "failureHash": "7f3c18492cdd66d818aea71b9cf4561ed5fccd0551a1a7d8ca7745afb4f6b5dc"},
+    "buildProcess": {"uri": "experiments/b62-camera-quality-holdout-render-v0-1/processes/BUILD.json", "sha256": "1bae180bcde99c75009dbe1aaca1e41a4c9d83f4afe345e2d136eebf6864971d", "outcome": "CHILD_FAILED", "renderCalls": 0}
+  },
+  "rootCause": "The D4 builder accessed Action.fcurves, an API surface absent from Blender 5.2 layered Actions. Blender 5.2 requires anim_utils.animdata_get_channelbag_for_assigned_slot(animation_data).fcurves.",
+  "authorizedChanges": {
+    "builder": "Import bpy_extras.anim_utils and replace all three Action.fcurves reads with the assigned-slot channelbag fcurves. Require the channelbag to exist; no fallback or legacy branch.",
+    "runner": "Bind this correction and immutable v0.1 failure, then use fresh root experiments/b62-camera-quality-holdout-render-v0-2.",
+    "nodeAuditor": "Bind this correction and require the fresh v0.2 root.",
+    "retryRoot": "experiments/b62-camera-quality-holdout-render-v0-2"
+  },
+  "frozen": {
+    "renderTool": {"uri": "blender/render_b62_q1_d4_holdout_pairs.py", "sha256": "e20efbad46d42766e2f916a6fa65cfad96c948c32b295fcd4e3c59209e33bca6"},
+    "independentAuditTool": {"uri": "blender/audit_b62_q1_d4_scene_and_pixels.py", "sha256": "c39a39bb66ff565172b99f6ab0f9b849a4580ebfc4d3105c364f70e72594ccde"},
+    "candidateAndBake": "unchanged",
+    "sixHoldoutFramesAndPairedConditions": "unchanged",
+    "geometryTemplate": "unchanged",
+    "CyclesSettingsAndTwelveRenderCalls": "unchanged",
+    "processResourceAndClaimBoundaries": "unchanged"
+  },
+  "nonClaims": ["No D4 image was rendered in v0.1.", "C1 changes only Blender 5.2 Action-channel access and retry bindings.", "The retry receives no information about sealed holdout outcomes from v0.1."]
+}
