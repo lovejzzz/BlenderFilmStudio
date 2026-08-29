@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C2",
+  "date": "2026-08-29",
+  "statusBeforeRetry": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "contractUri": "specs/b62-phase0-asset-animatic-calibration.v0.1.json",
+    "contractSha256": "22cc057e0142704e4242a184b3c610a719d800b3649b2b0274b9323690995ac6",
+    "c1Uri": "specs/b62-phase0-c1-ffprobe-accounting-correction.v0.1.json",
+    "c1Sha256": "5b98de78bf7c5535655991fa40deff7849eab374a2c2fc03e49aa6d445006c57",
+    "failedToolFreezeCommit": "37d95241c5b50bb2c67360314378170d052d9a9f"
+  },
+  "failedRehearsal": {
+    "kind": "FRESH_LOCAL_CLONE_ZERO_BLENDER_PREFLIGHT",
+    "repositoryPath": "/tmp/b62-rehearsal-37d9524",
+    "failureClass": "ERR_MODULE_NOT_FOUND",
+    "missingPackage": "ajv",
+    "failedBeforePreflightRootCreation": true,
+    "blenderStarts": 0,
+    "renderCalls": 0,
+    "formalOutputs": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0
+  },
+  "rootCause": "The three B62 Node entry points imported repositoryRoot from the general SceneSpec module. That module imports Ajv, even though B62 root discovery does not use schema validation. A clean clone without node_modules therefore failed before preflight logic began.",
+  "authorizedCorrection": {
+    "scope": "B62_NODE_ENTRYPOINT_ROOT_DISCOVERY_ONLY",
+    "files": [
+      "scripts/preflight-b62-phase0.mjs",
+      "scripts/run-b62-phase0.mjs",
+      "scripts/audit-b62-phase0.mjs"
+    ],
+    "change": "Derive repositoryRoot from each entry point import.meta.url using only Node built-ins; bind this C2 document in tool hashes and ancestry checks.",
+    "forbidden": [
+      "installing or symlinking node_modules in the rehearsal clone",
+      "changing assets, frames, render settings, thresholds, gates, attacks or verdicts",
+      "reusing the failed temporary clone as official evidence"
+    ]
+  },
+  "authorizedRootsUnchanged": {
+    "preflight": "experiments/b62-phase0-preflight-v0-1",
+    "attempt": "experiments/b62-phase0-attempt-v0-1",
+    "formal": "experiments/b62-phase0-v0-1"
+  },
+  "budgetsAndClaimBoundaryUnchanged": true
+}

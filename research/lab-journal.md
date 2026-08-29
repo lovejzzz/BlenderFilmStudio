@@ -5289,3 +5289,11 @@ Date: 2026-08-29 · Type: TOOL IMPLEMENTATION BEFORE FREEZE · New B62 Blender p
 静态审查发现并在tool freeze前修正三类会造成伪PASS的风险：Eevee final render必须写`taa_render_samples=16`而不是只写viewport samples；frame 143新增zero activation key，使frame 144 contact与transition同帧发生而非Bezier预亮；asset identity必须在master-only IK/socket constraint加入前冻结。生成报告现在含mesh topology、material node parameter、rig rest pose与motion action-key digests；独立Blender不导入生成/渲染工具，重新append三份asset library与motion action、重算digests、检查摄影机action ranges、contact/state、288 PNG及三份EXR decoded Combined pixels。
 
 Node auditor将18个machine gates逐一映射到实际观测，并对冻结的16个negative controls逐个复制观测后注入mutation，只有全部被拒绝才允许写audit。最终receipt仍由runner在audit之后生成并立即重算self-hash，避免audit↔receipt循环依赖。三份Python通过`py_compile`，三份Node通过`node --check`与ESLint，`git diff --check` clean；正式preflight/attempt/formal roots仍不存在。下一动作是提交推送tool-freeze，再做fresh-clone zero-Blender rehearsal。
+
+## J-414 · B62 Phase 0 fresh-clone rehearsal失败与C2预注册
+
+Date: 2026-08-29 · Type: RETAINED REHEARSAL FAILURE / CORRECTION PREREGISTRATION · New B62 Blender processes: 0 · New B62 renders: 0
+
+tool freeze `37d9524…`推送后，从本机仓库创建fresh clone `/tmp/b62-rehearsal-37d9524`。zero-Blender preflight在模块加载时因`ERR_MODULE_NOT_FOUND: ajv`退出；clone与official preflight roots均absent，attempt/formal absent，没有Blender、render、model、network或Docker操作。根因为三个B62 Node入口只为读取`repositoryRoot`却导入通用SceneSpec模块，后者顶层依赖Ajv；主工作树已有node_modules掩盖了缺陷。
+
+C2在retry前只授权三个Node入口用Node built-ins从`import.meta.url`推导repository root，并把C2加入tool hashes/ancestry。明确禁止给clone安装或symlink node_modules，也禁止改变任何资产、镜头、render dose、timeout、预算、gate、attack或verdict。修正后必须新的tool freeze与新的fresh clone；失败clone不作为official evidence。
