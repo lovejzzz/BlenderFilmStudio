@@ -5715,3 +5715,13 @@ T2工具以commit `bf56353d467e43dbdfa971e3f1c5e890aa708825`冻结推送后，fr
 失败边界恰好是首个cut：96仍属wide，97应切medium。renderer渲染97后发现`scene.camera`仍是wide。既有两个Phase 0 isolated-scene报告也都记录97与193仍为wide，证明`scene.frame_set()`在此路径只评估动画，不会把timeline marker绑定自动写进`scene.camera`；v0.1错误地把marker当成imperative switch。
 
 C1在任何工具改变前只授权每帧从latest marker推导路由、验证冻结name/camera、显式赋`scene.camera=marker.camera`后再render；independent Blender必须从source marker roster独立推导，不能相信mutable camera state。runner/auditor绑定v0.1 failure tree并切fresh v0.2；禁止复用97张partial PNG。三shot、camera transforms、288次Eevee、全部像素/geometry/causal/video阈值、128 MiB/2 GiB/100 GiB预算与HUMAN_PENDING边界全部不变。
+
+## J-459 · B62-T2 v0.2事后camera状态断言失败，C2预注册
+
+Date: 2026-08-29 · Type: RETAINED PARTIAL-ANIMATIC FAILURE / POST-RENDER RECEIPT CORRECTION PREREGISTRATION · New Blender processes: 1 · New Blender renders: 97
+
+C1 tool freeze `171e1534303eeb7f4a10a320e15dd8f9ca74a61d`在fresh v0.2再次运行10.756秒、peak sampled RSS 463,437,824 bytes，无budget breach，写出exact 0001–0097后exit 1。root永久保留100 files/25,861,042 bytes/tree `0428f1e9c1eb5be89f453e8bccdc5d7f25824955bbee4bb54d0f90676e393489`；scientific verdict仍为null。
+
+但C1 intervention并非无效：v0.2 frame97 SHA `610094ea…`与v0.1 `ce1dbf3c…`不同，直接有标签诊断也显示不同像素状态。失败来自renderer在`bpy.ops.render`返回后重新读取mutable `scene.camera`并要求它仍等于medium；render/context evaluation会恢复或重评该属性，它不是已应用camera的receipt。
+
+C2只授权在render前捕获并断言latest marker、bound camera与assigned `scene.camera`，逐帧report记录这份pre-render application；render后只验证immutable PNG path/header/hash/size，事后camera可描述但不作为predicate。runner/auditor绑定v0.1/v0.2两棵失败树并切fresh v0.3；288帧全量重建，所有科学阈值、预算与HUMAN_PENDING不变。

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "bfs.b62TerminalAnimaticContinuityCorrection.v0.1",
+  "correctionId": "B62-T2-E1-C2",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {
+    "baseSpec": "specs/b62-terminal-animatic-continuity.v0.1.json",
+    "c1": "specs/b62-terminal-animatic-continuity-c1-explicit-marker-routing.v0.1.json",
+    "c1Commit": "56cda77c88cd3c6bda873cf62140053f2b258e7e",
+    "failedC1ToolFreezeCommit": "171e1534303eeb7f4a10a320e15dd8f9ca74a61d"
+  },
+  "retainedFailure": {
+    "root": "experiments/b62-terminal-animatic-continuity-v0-2",
+    "tree": {"files": 100, "bytes": 25861042, "treeSha256": "0428f1e9c1eb5be89f453e8bccdc5d7f25824955bbee4bb54d0f90676e393489"},
+    "admission": {"uri": "experiments/b62-terminal-animatic-continuity-v0-2/admission.json", "sha256": "45a0e35caffe96622d42acb64ba13d280dcb38a0c78364fd59a7eda65a12bfa2", "admissionHash": "a22852c1e5b143fba6509e06dbca0ee854b95a5f0fb6a6a2b4b2441d5f7ee604"},
+    "failure": {"uri": "experiments/b62-terminal-animatic-continuity-v0-2/failure.json", "sha256": "3033f6ec17ced3922f078629e696a7f0f4501e443347caedc456b7f06d62d6df", "failureHash": "091c4ae16ff81a72a2be29370b744ea8e6deb59c1738351c9b20ec41c82b9691"},
+    "renderProcess": {"uri": "experiments/b62-terminal-animatic-continuity-v0-2/processes/BLENDER_RENDER.json", "sha256": "5013cd7acd221c50d0ba4fab5a10cdcd576cc045738df57d7dc94b24d4f3e8b1", "processHash": "47578ee834d93863c3e5294bce6d07693e778c7ec659edccd9fc45d18c0a47d9", "elapsedMs": 10756, "peakSampledRssBytes": 463437824, "exitCode": 1, "breach": null},
+    "frames": {
+      "count": 97,
+      "first": {"uri": "experiments/b62-terminal-animatic-continuity-v0-2/frames/frame-0001.png", "sha256": "9a2e2621eeabf40fb334f858f592d1a856ba225997a4be27437f5ed5567fb639", "bytes": 266515},
+      "lastWide": {"uri": "experiments/b62-terminal-animatic-continuity-v0-2/frames/frame-0096.png", "sha256": "c4a8fcd323234db1430f5e59f6d56c71bb07dcd32f9e2b4758beceb420f8e1c7", "bytes": 266515},
+      "firstAfterCut": {"uri": "experiments/b62-terminal-animatic-continuity-v0-2/frames/frame-0097.png", "sha256": "610094ea6d9f1d1772da36e6ce4655ee51071d973b3dbf6898c1857296e58bc4", "bytes": 266515},
+      "firstAfterCutDiffersFromV0_1": true
+    },
+    "scientificVerdict": null
+  },
+  "diagnosis": {
+    "observation": "C1 again wrote exact frames 1 through 97 and exited immediately after the first cut with no budget breach, but its frame 97 bytes and visible state differ from v0.1 frame 97.",
+    "cause": "C1 applied the selected marker camera before bpy.ops.render and thereby changed the rendered frame, but then re-read mutable scene.camera after the render operator returned. Blender restored or reevaluated that state, so the post-render assertion rejected an operation that had already used the explicitly applied route.",
+    "classification": "POST_RENDER_MUTABLE_SCENE_STATE_IS_NOT_A_RENDER_RECEIPT",
+    "c1Finding": "EXPLICIT_PRE_RENDER_APPLICATION_EFFECTIVE; POST_RENDER_ASSERTION_INVALID",
+    "pixelDecision": "INVALIDATED_BEFORE_COMPLETE_ROSTER"
+  },
+  "authorizedChanges": {
+    "retryRoot": "experiments/b62-terminal-animatic-continuity-v0-3",
+    "renderer": "Capture and assert marker and scene.camera immediately before bpy.ops.render. Record those captured values as marker/camera in the frame row. After render, validate only the immutable PNG path/header/hash/size; scene.camera after the operator may be recorded descriptively but is not an acceptance predicate.",
+    "runnerAndNodeAuditor": "Bind C2 plus both immutable v0.1 and v0.2 trees, move to fresh v0.3, and continue to require exact marker/camera values from the pre-render application record plus independent source-marker derivation and cut-pixel differences.",
+    "freshExecution": "Render all 288 frames from source again. Reuse of v0.1 or v0.2 PNGs is forbidden."
+  },
+  "frozenUnchanged": {
+    "sourceAndTimeline": "Exact T1 scene, three cameras, marker names, cut frames, camera transforms and 1-288 timeline unchanged",
+    "renderAndVideo": "288 fresh Eevee calls, 640x360 16 spp RGBA PNG, pinned color, H.264 delivery contract unchanged",
+    "scientificAcceptance": "All pixel, temporal, cut, 96-frame geometry and causal-state thresholds unchanged",
+    "resources": "Two Blender starts, 128 MiB output/projected write, 2 GiB RSS per Blender, 100 GiB reserve; zero model/network/Docker/Colima",
+    "decision": "Fourteen gates, supported/rejected mapping and HUMAN_PENDING unchanged"
+  },
+  "nonClaims": [
+    "The visual difference between two invalidated frame-0097 files is diagnostic evidence only.",
+    "C2 does not waive per-frame camera routing; it changes which state is a valid receipt for the applied route.",
+    "No partial PNG is admitted to the retry."
+  ]
+}
