@@ -1,7 +1,7 @@
 # B59-G0-R5 · Active host-capacity sentinel protocol
 
 Date: 2026-08-29
-Status: PREREGISTERED — TOOL AND INSTALLATION ABSENT
+Status: COMPLETED — INSTALLATION REJECTED AND ROLLED BACK
 Parent commit: `5f1515cab482b5339084ae3ca5f1a16ae37fbc43`
 
 ## Gap
@@ -53,3 +53,16 @@ D2 demonstrates that exact Colima stop/start restoration can be guarded when sep
 Before installation, pure self-tests must cover every capacity boundary, rapid/long loss, stale history, browser thresholds, 192-sample truncation and state-size ceiling. The independent auditor must reject all 15 registered mutations. A dry installation audit must match label, interval, absolute runtime paths, arguments and state root exactly.
 
 After tools and template are committed and pushed, the installer may create the fresh formal root `experiments/host-capacity-sentinel-v0-1`, place the one exact plist in `~/Library/LaunchAgents`, bootstrap it into `gui/501`, trigger one live sample and bind that sample plus the installed bytes into `install.json`. The independent auditor verifies the launchd service, state self-hashes, file bounds and zero prohibited actions before writing `audit.json`. Passing R5 establishes an active capacity warning mechanism; it does not by itself prove long-term retention or close Gate 0.
+
+## Formal attempt result
+
+Release commit `2aa0273167c4faddb7f7083b6c7e9476e4ef1c97` passed the exact preflight. `launchctl bootstrap` loaded the service and `RunAtLoad` successfully produced one self-hashed `HEALTHY` sample at `2026-08-29T05:48:36.664Z`, with `319,974,277,120` available bytes and a 20,480-byte browser temporary filesystem. The installer then redundantly issued `launchctl kickstart -k`; the bounded command exceeded its 10-second timeout and returned no diagnostic text.
+
+The installation therefore failed closed. Rollback booted out only `gui/501/com.blenderfilmstudio.capacity-sentinel` and removed only the newly installed plist. A post-rollback check found no service, plist or sentinel process. The one healthy state sample was retained under the v0.1 state root, and the formal root contains `start.json` plus `failure.json`, with no passing install or audit receipt.
+
+- `start.json` SHA-256: `d736f46e3f39130f328dba2d194253a3fd159735475d489955d0bcdb13ca7512`
+- `failure.json` SHA-256: `49a3df8e6ed24317fd82327a07efab8da2530cc447c8f8a330a1cfac1bd9b860`
+- retained `latest.json` SHA-256: `04efe31d3f562f893fe5391eb0a8411466fa9bc22fd26cfdc8b9e821991b28ed`
+- retained `history.json` SHA-256: `0ee558f37cc946d45582c490c45c2509556f274df65489f357d51b5845fe85a3`
+
+Local `launchctl` documentation confirms that `bootstrap` loads the definition, `RunAtLoad` starts it as configured, and `kickstart` is an independent request to run the service immediately. Because the first live sample proves `RunAtLoad` already executed, a corrected attempt may remove the redundant kickstart requirement. It must use fresh v0.2 formal and state roots; v0.1 evidence is immutable and must not be deleted or reused.

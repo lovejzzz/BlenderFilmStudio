@@ -4653,3 +4653,13 @@ Date: 2026-08-29 · Type: FORMAL POST-RECLAIM LONGITUDINAL STABILITY · New Blen
 正式R4完成7/7样本，跨度720,161 ms。Available从320,158,425,088降至320,027,803,648 bytes，loss为130,621,440 bytes，仅为1 GiB ceiling约12.2%；最低available仍为320,027,803,648。Codex tree RSS first-to-last减少27,344,896 bytes，最大3,842,129,920；最大renderer RSS 975,994,880；memory free最低87%；browser temp保持20,480 bytes且zero growth；main PID全程26962，new crash reports为0。
 
 Producer 14/14 pre-audit gates，independent auditor 15/15 final gates、20/20 attacks，final verdict `ADMITTED_FOR_GATE0_CLOSEOUT`。Results/audit SHA为 `4f7b7dbe2881b20301bee3a7c0897bfad43f7808b5788a09e22b7d247195bfe7` / `f696592bfd8386d6b5696998072a987296655d252cd3b2384eeeefa2f67eb773`。这把Gate 0从`BLOCKED_DISK_RETENTION`提升为`SHORT_WINDOW_READMITTED`，但不把12分钟冒充长期稳定；B58仍等待更长无人值守保留性证明与主动容量防线。
+
+## J-348 · R5容量哨兵首次安装在冗余kickstart处安全回滚
+
+Date: 2026-08-29 · Type: CAPACITY SENTINEL INSTALLATION COUNTEREXAMPLE · New Blender processes: 0 · New Blender renders: 0
+
+R5冻结15分钟user LaunchAgent、250/180/140 GiB warning/critical/emergency floors、10 GiB/10–30 minute与25 GiB/18–30 hour loss detectors、192-sample/48-hour bounded history、256 KiB state ceiling及zero automatic deletion/cleanup/restart。Existing per-job 100 GiB reserve guard不变。Core/auditor self-tests分别9 cases和15 registered attacks，plist lint、Node syntax、targeted ESLint与dry-run通过；preinstall确认formal/state/plist/service targets全部不存在。工具commit `2aa0273167c4faddb7f7083b6c7e9476e4ef1c97`与origin exact后执行一次正式安装。
+
+`launchctl bootstrap`与`RunAtLoad`实际成功，05:48:36Z写出一个self-hashed `HEALTHY` sample：available 319,974,277,120 bytes、browser temp 20,480 bytes、所有prohibited action counters为0。安装器随后要求第二次`kickstart -k`，该命令超过10秒timeout且无stderr，因而formal attempt fail-closed。Rollback精确bootout该label并移除新plist；事后service print exit 113、plist不存在、无sentinel process。v0.1 state保留，formal root只含start/failure且无install/audit。
+
+本机launchctl文档与实测共同说明RunAtLoad已经完成首次执行，额外kickstart不是安装成立所必需。下一动作不复用v0.1 root，不删除失败state；预注册fresh v0.2 formal/state roots，把bootstrap+RunAtLoad fresh sample作为唯一首次触发，并继续要求exact reversible uninstall与independent audit。
