@@ -5597,3 +5597,13 @@ Date: 2026-08-29 · Type: PRE-ADMISSION REJECTION / METADATA TYPO CORRECTION PRE
 C2工具实现完成静态检查并冻结推送后，首次v0.3调用在创建formal root与启动Blender之前被`retained D5 v0.2 evidence drift`拒绝。核查表明retained bytes、tree和Git状态均未漂移；C2人工记录`comparison.json` SHA-256时，第53个hex字符把实际`d`转录成`f`。实际file hash为`38a725b4371e6b1c54f80c9875bd9fb4a176d10aea5a65585d77d119d87628ef`，C2错误值为`...65585d77f119...`。
 
 C3在Node工具修改前只授权runner/auditor绑定这项one-character metadata correction；C2和全部retained evidence保持immutable。v0.3目录仍不存在，本次0 Blender/0 render/0 model/network/Docker，因此同一fresh root可在C3工具冻结后使用。候选、frame、pose/geometry baseline、阈值、selection与sealed边界完全不变。
+
+## J-447 · B62-Q1-D5 v0.3 quaternion表示原语不一致与C4预注册
+
+Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / RECORD-PRIMITIVE CORRECTION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+绑定C3后的fresh v0.3完成两次14×9 Blender搜索。PRIMARY/INDEPENDENT分别2.703/2.710秒、peak sampled RSS 255,508,480/255,295,488 bytes；两实现comparison PASS，D3 contamination保持exact 30项，D4六帧geometry 0 mismatch，九帧camera location 0 mismatch。唯一失败是D4 pose的36个quaternion components，幅度约6e-8至1.8e-7；scientific verdict保持null。
+
+D4 build report记录对象赋值后的`corrected.rotation_quaternion`；C2 D5记录`camera.matrix_world.to_quaternion()`，后者经过world-matrix float32归一化重构，方向等价但不是同一数值原语。v0.3永久保留9 files/727,626 bytes/tree `ed4b9fe2e47a3f46d8167a678373f7579535ac0c11694fd083e86b4ca0a9636f`；failure file/self `19481735…/d6498b08…`，audit file/self `d5b33bc9…/5d3dac06…`。
+
+C4拒绝放宽1e-9，只授权两份Blender工具保留evaluated matrix location，同时把quaternion字段改为post-sync对象属性`assignedCameraQuaternion`，与D4原始记录like-for-like比较；runner/auditor绑定v0.3并切fresh v0.4。相机transform、geometry、候选、frame、阈值、selection、预算与sealed边界全部不变，v0.3的12候选/`RS_S200_E225`仍不准入。

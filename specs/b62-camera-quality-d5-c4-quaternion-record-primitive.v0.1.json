@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareSearchCorrection.v0.4",
+  "correctionId": "B62-Q1-D5-C4",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-motion-aware-search-v0-3",
+    "tree": {"files": 9, "bytes": 727626, "treeSha256": "ed4b9fe2e47a3f46d8167a678373f7579535ac0c11694fd083e86b4ca0a9636f"},
+    "failure": {"uri": "experiments/b62-camera-quality-motion-aware-search-v0-3/failure.json", "sha256": "19481735d0c2b15c918ff27346ed9aab25a5dc7855c9586d47fbbef7049483a1", "failureHash": "d6498b08451e2b7bc5139adca827637cbc2a4e33fcb6a8dbf796dc03f3874fcd"},
+    "audit": {"uri": "experiments/b62-camera-quality-motion-aware-search-v0-3/audit.json", "sha256": "d5b33bc9d2140691da6309e61c0d94c53875b4c13e261dc6e5c0e224d36d23ee", "auditHash": "5d3dac06adda557515118508efb4991655abed1bbfe352bbd619f942aaf802ef", "onlyFailedCheck": "STATIC_BASELINE_POSE_REPRODUCES_D4_BAKE_9"},
+    "comparison": {"uri": "experiments/b62-camera-quality-motion-aware-search-v0-3/comparison.json", "sha256": "59323e6b8cc863901d1feecade0b126ccef9d1577ecb735a937793fbcdfed536", "comparisonHash": "e5c73914f2c43cf57d0a0af1780e8d1c4f6fcb18a9d26ec4875b23ceee26a915", "locationMismatchCount": 0, "quaternionMismatchCount": 36, "d4GeometryMismatchCount": 0}
+  },
+  "diagnosis": {
+    "d4RecordedPrimitive": "The D4 build report serialized corrected.rotation_quaternion immediately after assignment.",
+    "d5RecordedPrimitive": "C2 serialized camera.matrix_world.to_quaternion() after view-layer synchronization.",
+    "difference": "Blender reconstructs and normalizes a quaternion from the world matrix. The orientation is equivalent, but 36 components differ by approximately 6e-8 to 1.8e-7, above the unchanged 1e-9 same-primitive comparison tolerance.",
+    "notAFix": "Increasing tolerance would compare different numeric representations and is not authorized."
+  },
+  "frozenBeforeCorrection": {
+    "toolFreezeCommit": "c73aa281941d28237334754608b9cb222c2a3796",
+    "primaryBlenderToolSha256": "2ce55fe148960c3180da2b5598a65ff3e5b4124247bbfb9e17352e8546747d79",
+    "independentBlenderToolSha256": "ed9a3f8e2f5af09b4419adde5cdaca87d6091917ac44113a8f53f871a5bf6f31",
+    "runnerSha256": "703833243e78484bda63d40d3ac60c009b9d982ff5c203851c03441d012de113",
+    "auditorSha256": "e7d5185d592cd49a4aaaab86d150f5f4e786286d68da3dcf57a65d1fb5505213"
+  },
+  "authorizedChanges": {
+    "primaryBlenderTool": "Keep evaluatedCameraLocation from camera.matrix_world.translation. Replace evaluatedCameraQuaternion from matrix_world.to_quaternion() with assignedCameraQuaternion from camera.rotation_quaternion after synchronization.",
+    "independentBlenderTool": "Make the same independently written record-primitive replacement; no new frame or measurement.",
+    "runner": "Bind C4 and immutable v0.3, prove the exact two Blender source replacements, then use the fresh retry root.",
+    "auditor": "Bind C4 and immutable v0.3, compare assignedCameraQuaternion to the D4 build report's correctedQuaternion under the unchanged 1e-9 tolerance, and use the fresh retry root.",
+    "retryRoot": "experiments/b62-camera-quality-motion-aware-search-v0-4"
+  },
+  "unchanged": [
+    "The synchronized camera transform used for every geometry measurement",
+    "Evaluated world-matrix location recording and D4 location comparison",
+    "All C1-C3 bindings and retained failures",
+    "The 14 candidates, nine derivation frames, eight sealed validation frames and 126 measured cells",
+    "All path and geometry thresholds, 1e-9 tolerance, selection and verdict mapping",
+    "Two Blender processes, zero render/model/network/Docker/scene-save calls and all budgets"
+  ],
+  "scientificBoundary": "C4 aligns record primitives and cannot change any geometry, feasibility result or candidate selection. v0.3 candidate outcomes remain unadmitted."
+}
