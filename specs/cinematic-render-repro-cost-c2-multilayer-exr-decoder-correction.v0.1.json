@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "bfs.cinematicRenderReproCostMultilayerExrDecoderCorrection.v0.1",
+  "correctionId": "B61-E1-C2",
+  "status": "PREREGISTERED",
+  "parentContract": {
+    "uri": "specs/cinematic-render-repro-cost.v0.1.json",
+    "sha256": "31f97230426dbf70cd76d4bd5d87d1a94cabf6f53755f58faab96998c06512e2"
+  },
+  "previousCorrection": {
+    "uri": "specs/cinematic-render-repro-cost-c1-terminal-observability-correction.v0.1.json",
+    "sha256": "57ed5959dd589b8086a5e7b994a0d2272e31eeed3ea4e103028267fecd3a4b11"
+  },
+  "failedFormalRun": {
+    "attemptRoot": "experiments/cinematic-render-repro-cost-attempt-v0-2",
+    "formalRoot": "experiments/cinematic-render-repro-cost-v0-2",
+    "attemptTree": {
+      "files": 6,
+      "bytes": 6864,
+      "sha256": "46e5744c66322b9d2cd3e44bdde7bcb5ed2e283ca4ed36b6aa420175dbffd1f7"
+    },
+    "formalTree": {
+      "files": 5,
+      "bytes": 1351590,
+      "sha256": "440a8802e474cda2091ece6902b459981c0238f03198e2ddd059c69ff4849eda"
+    },
+    "failureSummary": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-2/failure-summary.json",
+      "sha256": "2c32bef58fe631f63c64778c7f548bf66ad84aca3b61b10262de0ea1944eb27a",
+      "failureHash": "54666b30f13b664ee4aa0e8efc9725da823c98d9de8938869366903f00e0af39",
+      "reason": "MULTILAYER_EXR_BPY_IMAGE_PIXELS_EMPTY",
+      "rootCauseProven": true
+    }
+  },
+  "decoderEvidence": {
+    "realBlenderResult": {
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-2/result.json",
+      "sha256": "939e054c317c4f20ce1071fa0c2f348b730a8d59519e83332aa69f09b04e2649",
+      "projectionSha256": "192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a",
+      "blenderVersion": "5.2.0 LTS",
+      "blenderBuildHash": "fbe6228777e7",
+      "openImageIoVersion": "3.1.13.1"
+    },
+    "reconciliation": {
+      "resultUri": "experiments/b61-exr-reopen-reconciliation-v0-1/result.json",
+      "resultSha256": "ff7be927163fc1774888df3349c42d13a4e2c7b4eecbad4e2f1b6fbc3fb922b1",
+      "resultHash": "7d83021daf035c0daa854c874da3aee50f8f20ab8cf1a4683ecfb64d120e2bb7",
+      "receiptUri": "experiments/b61-exr-reopen-reconciliation-v0-1/receipt.json",
+      "receiptSha256": "ebf220f832e22a45b6fda098ec84d71b805e55bf2fbc21ae7e119d73c37b0315",
+      "receiptHash": "802a0553aa34e642131cd46ed265c653b703541a796776b829b078ea14988fc4"
+    }
+  },
+  "authorizedRetryRoots": {
+    "preflight": "experiments/cinematic-render-repro-cost-preflight-v0-3",
+    "attempt": "experiments/cinematic-render-repro-cost-attempt-v0-3",
+    "formal": "experiments/cinematic-render-repro-cost-v0-3"
+  },
+  "authorizedCorrections": {
+    "decoder": {
+      "files": [
+        "blender/render_b61_frames.py",
+        "blender/audit_b61_exr.py"
+      ],
+      "removeBehavior": "Decode multilayer EXR Combined RGBA through bpy.data.images.load(...).pixels.",
+      "addBehavior": "Use Blender-bundled OpenImageIO 3.1.13.1, enumerate subimages, require one unique channel prefix ending in .Combined with exact R/G/B/A channels, read float32, select RGBA in that order, convert to C-contiguous little-endian float32 bytes, and hash those exact bytes.",
+      "requiredRuntime": {
+        "module": "OpenImageIO",
+        "version": "3.1.13.1",
+        "numpyVersion": "2.3.4"
+      }
+    },
+    "crossRuntimeCanonicalNumbers": {
+      "files": [
+        "blender/render_b61_frames.py",
+        "blender/audit_b61_exr.py"
+      ],
+      "behavior": "Before Python canonical JSON hashing, recursively normalize only finite integral float values to integers; preserve all other values. This exact normalization was shown by D3 to make the complete retained result hash equal Node canonical hashing."
+    },
+    "supervision": {
+      "files": [
+        "scripts/preflight-b61-e1-cinematic-render-repro-cost.mjs",
+        "scripts/run-b61-e1-cinematic-render-repro-cost.mjs",
+        "scripts/audit-b61-e1-cinematic-render-repro-cost.mjs"
+      ],
+      "behavior": "Bind C2, D2 real-Blender decoder evidence, D3 reconciliation, the retained v0.2 failure trees, and fresh v0.3 roots; add exact decoder runtime/channel assertions without changing any pass threshold."
+    }
+  },
+  "unchanged": [
+    "three shots",
+    "frames 1 72 144",
+    "A B repetitions",
+    "64 samples",
+    "1920x1080",
+    "Cycles CPU",
+    "frozen OCIO",
+    "multilayer half-float ZIP EXR",
+    "decoded Combined exact pixel digest",
+    "six render Blender starts",
+    "eighteen render calls",
+    "one EXR reopen Blender",
+    "sixteen gates",
+    "ten negative controls",
+    "120 second timeout",
+    "100 GiB reserve",
+    "1 GiB formal ceiling",
+    "C1 Python exit-code raw logs and stage ledger",
+    "claim boundary"
+  ],
+  "claimBoundary": {
+    "formalV03AuthorizedAfterFreshPreflight": true,
+    "renderFormatChanged": false,
+    "renderSettingsChanged": false,
+    "pixelThresholdChanged": false,
+    "qualityThresholdChanged": false,
+    "decoderImplementationChanged": true,
+    "crossRuntimeEnvelopeChanged": true
+  }
+}

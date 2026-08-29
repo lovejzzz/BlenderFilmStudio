@@ -5119,3 +5119,11 @@ Date: 2026-08-29 · Type: RECONCILIATION TOOL-FREEZE CANDIDATE · New Blender pr
 D3 preregistration commit `9d7df10`推送后，实现单一Node supervisor。它在任何输出前验证tool freeze、D2 tree/failure/result/process/raw logs；重现Node canonical mismatch；只启动一次Blender-bundled standalone Python 3.13重算原Python hash与finite-integral-float normalized hash；最后直接检查bpy empty-pixel、唯一Combined quartet、projection shape/finite/repeat digest和zero-render operations。它不导入bpy、不启动Blender、不重解码EXR。
 
 Runner SHA-256为`20fc21328d97f41bf25e6aae6d0dac4a148fd6e89ddf65f96f3cc2a82433c2a1`；D3 spec/protocol SHA为`a6d63ed6984ba1c07574a3daafc4e29e8c8066743d56075868d8df1766ab5c82 / e28ea39d6313e0edf231fd34cce1d778c8858961bf2692817e26f64876643f90`。Node syntax、targeted ESLint zero-warning与diff check通过，D3 output root仍不存在。下一动作提交推送freeze；随后才允许创建fresh D3 output root并执行zero-Blender reconciliation。
+
+## J-395 · B61-D3关闭decoder诊断门并预注册C2 formal修正
+
+Date: 2026-08-29 · Type: DIAGNOSTIC PASS / FORMAL CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+D3 tool-freeze commit `567e70c5a4fecbe100ed7ee2bc091f011433498c`推送后，zero-Blender reconciliation PASS。Bundled Python原canonical hash exact为`5d502545…`；finite-integral-float normalized hash exact等于Node的`e0c9c275…`。所有retained process/log/result语义门通过，支持verdict `BLENDER_BUNDLED_OPENIMAGEIO_COMBINED_RGBA_DECODER_SUPPORTED`。Result file SHA/self-hash为`ff7be927163fc1774888df3349c42d13a4e2c7b4eecbad4e2f1b6fbc3fb922b1 / 7d83021daf035c0daa854c874da3aee50f8f20ab8cf1a4683ecfb64d120e2bb7`；receipt file SHA/self-hash为`ebf220f832e22a45b6fda098ec84d71b805e55bf2fbc21ae7e119d73c37b0315 / 802a0553aa34e642131cd46ed265c653b703541a796776b829b078ea14988fc4`。Operations为0 Blender/render/model/network/Docker、1 bundled-Python，0.0188秒。
+
+C2据此只授权：两段Blender Python改用exact bundled OIIO 3.1.13.1/NumPy 2.3.4 decoder；Python canonical hash规范finite integral float；三段Node supervision绑定C2/D2/D3与fresh v0.3 roots。multilayer half/ZIP、像素exact、18 render、16 gates/10 attacks及全部资源门不变。下一动作提交推送D3 evidence/C2，再实现工具。
