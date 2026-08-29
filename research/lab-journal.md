@@ -5245,3 +5245,19 @@ Preflight evidence commit `0b2cb76`推送后，formal runner绑定C4 tool-freeze
 18帧render operator总计109.506秒、均值6.084秒；6个process wall总计121.366秒，实测峰值RSS约4.50–4.54 GB。EXR合计91,620,900 bytes，PNG合计4,864,796 bytes。按当前still-frame样本机械外推为146.008 wall seconds/finished second，或约8,760.494秒（2.433小时）/finished minute at 24 fps；该值不包含全序列时间连续性、启动摊销变化或影院级资产成本。
 
 人工检查九张A-run review PNG接触表：方向正确、颜色/照明可读、WIDE→MEDIUM→CLOSE景别明确、三帧运动状态不同，无空白或翻转。但资产刻意为低多边形测试几何，因此本PASS只关闭同机同build技术像素复现与成本门，不支持电影感、真人身份、跨硬件、全144帧连续性、完整成片成本或影院显示校准。v0.1–v0.4的四轮失败、raw logs、stage ledger和修正预注册全部保留。下一动作是提交推送formal evidence与结果说明、公开结果页，然后预注册真实英雄角色三镜头的电影质量与一致性门。
+
+## J-409 · B61证据与图文结果双站发布完成
+
+Date: 2026-08-29 · Type: EVIDENCE PUBLICATION / DEPLOYMENT RECOVERY · New Blender processes: 0 · New Blender renders: 0
+
+B61 attempt/formal trees、J-408与结果说明以commit `a92c88c`推送；图文页与九张真实A-run review PNG以`04c4387`推送。页面主视觉明确写出“像素复现了，电影感还没有”，展示WIDE/MEDIUM/CLOSE × frames 1/72/144、9/9 decoded-pixel identity、0/9 EXR-container identity、六进程时间/RSS、成本外推、四轮失败与声明边界。vinext生产构建通过。
+
+Sites owner-only production version 85发布成功。GitHub Pages第一次因sparse checkout没有包含新页面引用的B61 audit/receipt而在module resolution处失败；没有部署错误页面。只把两份小型JSON加入既有稀疏清单后，本机exact `GITHUB_PAGES=true next build`生成93/93 static pages，修正commit `ca120c7`推送，GitHub build/deploy均成功。公开B61 route非浏览器HTTP检查返回200、44,316 bytes，并找到`B61-E1 / 9/9 / 像素复现了`标记。遵守browser crash guard，未打开或自动操作新的内置浏览器tab。
+
+## J-410 · B62终局样片goal freeze
+
+Date: 2026-08-29 · Type: TERMINAL GOAL FREEZE · New Blender processes: 0 · New Blender renders: 0
+
+下一目标冻结为12秒/24 fps/288帧原创短场景《守夜人点亮观测核心》：机械守夜人在废弃轨道观测站接近控制台、完成右手接触并点亮核心，最后在面罩上形成反射。三镜头固定为35 mm WIDE_APPROACH、65 mm MEDIUM_CONTACT、100 mm CLOSE_REFLECTION，各96帧。选择机械角色是显式边界：先完成可审计的stylized-realism角色/环境/接触/灯光/摄影/动画管线，不冒充已解决真人皮肤、毛发与微表演。
+
+终局验收要求clean root单入口、SceneSpec→immutable BuildPlan→Blender、共享asset/look/state hashes、multilayer EXR与12秒交付视频；首镜完成后受控终止orchestrator与Codex工作回合，必须从verified receipts恢复且不重做已完成stage。所有输出、进程、资源和失败均可独立审计，0 generative-video pixel calls。自动门不能宣布电影感；必须留下匿名人类审片response。该goal freeze不授权288帧formal render；下一动作是有界Phase 0资产manifest、animatic、接触/灯光状态机和真实Cycles校准，再单独预注册正式B62。
