@@ -4795,3 +4795,13 @@ Tool-freeze前静态审查还发现machine-readable B58 spec已冻结`job:produc
 当前package/preflight/runner/auditor SHA为`6d13fa59a730d1b418208bfb7d28bc319b20d120aef98433e60a531fd20960af` / `11bc9221a23cac6f32c01cc1173f399bf435e7edf392b1779a815b25da866d10` / `29cad215ace783490641b12fc52a628fc631754c7fe17238a3a5d3f34afee794` / `f8571196cd4c425a987545b3b52ce7a5cf97bc572ca9a94311312a8de0ad9d53`；ledger/orchestrator保持`0946685b…` / `d8f3126f…`。三份formal scripts的Node syntax、zero-warning targeted ESLint、diff check及alias assertion通过，Gate 0与sentinel hashes也由B58自身canonicalizer验证。
 
 下一动作提交推送package、三份formal tools和本entry形成tool-freeze commit；之后在fresh临时clone先跑official preflight rehearsal，验证Gate 0 fail/pass binding、zero Blender和五份production preflight，再决定是否消费真实preflight root。
+
+## J-361 · B58 zero-Blender rehearsal发现package alias与B57 freeze冲突，C3预注册
+
+Date: 2026-08-29 · Type: B58 PREFLIGHT COUNTEREXAMPLE / CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+Tool-freeze candidate commit `52b91bda366d732640632cd0ac49e3a770d7ba7a`与origin exact后，fresh clone首次因无`node_modules/ajv`在module load前退出且未创建root；链接主仓库只读依赖后重跑，B58 preflight通过Gate 0读取，但第一个B01 preferred production preflight未生成accepted receipt。单独复现得到self-hashed `REJECTED / RELEASE_BLOB`，message `Release hash mismatch for package.json`，receipt SHA/self-hash为`618aece343a3c01c39e85c2f965201763bb567c5efda26546d72a009f8765aa5` / `ce633332f017f3c51fae469eb90811d7af3d7b2ccf497f69059307021348a8bb`，Blender/render/model/network/Docker全0。
+
+根因是B57把package冻结为`a2235a7558…`，而新增`job:production` alias使其变成`6d13fa59…`。原B58 convenience alias要求与B57 byte-exact production surface不可同时成立，且parent安全门优先。三个official roots仍不存在。
+
+C3唯一授权修正是恢复package到B57 exact bytes，并把effective entry冻结为alias原本会调用的同一direct command `node scripts/run-restart-safe-production-job.mjs`。新增2项攻击分别变异package hash与direct command；B58 orchestrator bytes/modes、34 gates、72+C1+C2 attacks、DAG、process ceilings和disk门不变。下一动作先提交推送C3，再执行package恢复和tool检查。

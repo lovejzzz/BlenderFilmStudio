@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorEntryCorrection.v0.1",
+  "correctionId": "B58-E1-C3",
+  "status": "PREREGISTERED_AFTER_ZERO_BLENDER_REHEARSAL_FAILURE_BEFORE_OFFICIAL_OUTPUT",
+  "date": "2026-08-29",
+  "counterexample": {
+    "toolFreezeCommit": "52b91bda366d732640632cd0ac49e3a770d7ba7a",
+    "temporaryPreflightSha256": "618aece343a3c01c39e85c2f965201763bb567c5efda26546d72a009f8765aa5",
+    "temporaryPreflightSelfHash": "ce633332f017f3c51fae469eb90811d7af3d7b2ccf497f69059307021348a8bb",
+    "status": "REJECTED",
+    "reason": "RELEASE_BLOB",
+    "message": "Release hash mismatch for package.json",
+    "blenderProcesses": 0
+  },
+  "conflict": {
+    "b58RequestedAlias": "job:production",
+    "b58RequestedCommand": "node scripts/run-restart-safe-production-job.mjs",
+    "b57FrozenPackageSha256": "a2235a7558d420c86acb62eafda2c52fbfc1620c1de934fa88e02eea27381520",
+    "aliasAddedPackageSha256": "6d13fa59a730d1b418208bfb7d28bc319b20d120aef98433e60a531fd20960af",
+    "finding": "Adding the alias mutates a file frozen by the B57 production release, so the B58 alias requirement and B57 byte-exact production surface cannot both hold."
+  },
+  "authorizedCorrection": {
+    "restorePackageJsonToB57FrozenBytes": true,
+    "effectiveProductionEntry": "node scripts/run-restart-safe-production-job.mjs",
+    "packageAliasRequired": false,
+    "reason": "The direct command is byte-identical to the command that the requested alias would dispatch, while preserving the stronger frozen B57 production surface.",
+    "effectiveGate": "RESTART_SAFE_DIRECT_ENTRY_AND_B57_PACKAGE_EXACT"
+  },
+  "additionalSemanticAttacks": [
+    "C3_A01_B57_PACKAGE_HASH_MUTATION",
+    "C3_A02_DIRECT_ENTRY_COMMAND_MUTATION"
+  ],
+  "unchanged": [
+    "B58 orchestrator script bytes and modes",
+    "B57 compiler, verifier, receipt and disk policy",
+    "B58 34-gate denominator, 72 attacks, C1 and C2 attacks",
+    "all process ceilings, DAG and recovery rules",
+    "all official roots"
+  ]
+}
