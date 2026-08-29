@@ -5157,3 +5157,11 @@ Preflight evidence commit `2992f2f1c59d6d95343383e565e0ccdb54df2a1b`推送后，
 随后active production scene把`image_settings.file_format`从`OPEN_EXR_MULTILAYER`赋为`PNG`时，Blender 5.2只报告允许枚举`('OPEN_EXR_MULTILAYER')`并抛TypeError。Process exit 1，其他5个render processes与两级auditor未启动。Failure summary file SHA/self-hash为`51f5797d1049e041b9aa511e9f2180a110a22b9cfab00e2e7eb218843b5ac722 / 67c65a3f9137538b1f06f450082db94071f97b349457375bce807cd6e9bae346`；attempt/formal trees为6 files/7,141 bytes/`e6812631…`与5 files/1,352,271 bytes/`76f7d849…`。
 
 D4只预注册一个zero-render Blender probe：复现active scene枚举锁，测试isolated review scene能否设置PNG并用generated 2×2 image写出有效PNG，同时要求production settings不变。PNG仍只用于review，技术像素门和所有render设置不变。
+
+## J-399 · B61-D4 PNG context探针候选
+
+Date: 2026-08-29 · Type: DIAGNOSTIC TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+D4 preregistration commit `85e74ee`推送后，实现一个Blender probe与bounded supervisor。Probe在production blend内snapshot active render/image/color settings，尝试并记录multilayer-to-PNG assignment；随后创建isolated review scene与2×2 generated float image，以`Image.save_render(..., scene=review)`写PNG，验证header/dimensions，删除临时数据并要求production snapshot exact。Supervisor在一个Blender start前重算v0.3两棵失败树与failure self-hash，限定zero render/model/network/Docker、30秒与1 MiB。
+
+Probe/runner SHA-256为`07d8451ddacd604dd4a7f5daf620351538d19c03f6ecc6bbd7ab692aaf99ef47 / 4a47185132a6a59bab0e500ec73e5915df51a3aab8607d1421e28d4cf9854d4e`；spec/protocol SHA为`41a9e96c011bd234b02349db34e9e45ae21e4d8e51edae4a7dda274c886aad9f / 0dbe73d063e7bfdee1c214880fad1b11a415c7cdf00bea7ed1cfac594c131c33`。Node/Python syntax、targeted ESLint zero-warning与diff check通过，D4 root仍不存在。下一动作提交推送tool freeze；只有origin exact后才执行D4。
