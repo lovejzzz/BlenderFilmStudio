@@ -5111,3 +5111,11 @@ D2 tool-freeze commit `10f8dc0efc6a52fb19551ad392ca7180d2e8ffcf`推送后，Blen
 Probe result内部status PASS、Python canonical self-hash `5d502545…`；Node supervisor重算为`e0c9c275…`并拒绝写receipt。独立静态重算证明，Python原hash与stored exact；只把finite integral floats（如alpha统计中的`1.0`）规范为integer后，Python hash exact变为Node hash。因此D2整体标记INVALIDATED，不能直接当作accepted diagnostic，但decoder observations完整保留。D2 failure file SHA/self-hash为`7e1cf6761dfccb134d81bec4b3f1007d2daab3fe367e239137a01ea769ec024f / b0e4adf8c3acc90c0dd110f2f33080fa548ecc3e36f82a9e2db982c2ccc4751f`，root为5 files/10,386 bytes/`4e89e722…`。
 
 D3预注册为zero-Blender reconciliation：绑定immutable D2 tree，用Blender bundled standalone Python重算原self-hash，Node重现mismatch并证明仅integral-float normalization即可收敛，同时独立验证process/log/result所有语义门。D3不重解码、不改threshold，也不授权formal retry。
+
+## J-394 · B61-D3 zero-Blender reconciliation工具候选
+
+Date: 2026-08-29 · Type: RECONCILIATION TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+D3 preregistration commit `9d7df10`推送后，实现单一Node supervisor。它在任何输出前验证tool freeze、D2 tree/failure/result/process/raw logs；重现Node canonical mismatch；只启动一次Blender-bundled standalone Python 3.13重算原Python hash与finite-integral-float normalized hash；最后直接检查bpy empty-pixel、唯一Combined quartet、projection shape/finite/repeat digest和zero-render operations。它不导入bpy、不启动Blender、不重解码EXR。
+
+Runner SHA-256为`20fc21328d97f41bf25e6aae6d0dac4a148fd6e89ddf65f96f3cc2a82433c2a1`；D3 spec/protocol SHA为`a6d63ed6984ba1c07574a3daafc4e29e8c8066743d56075868d8df1766ab5c82 / e28ea39d6313e0edf231fd34cce1d778c8858961bf2692817e26f64876643f90`。Node syntax、targeted ESLint zero-warning与diff check通过，D3 output root仍不存在。下一动作提交推送freeze；随后才允许创建fresh D3 output root并执行zero-Blender reconciliation。
