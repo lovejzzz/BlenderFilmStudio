@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorNestedPreflightCorrection.v0.1",
+  "correctionId": "B58-E1-C4",
+  "status": "PREREGISTERED_AFTER_ZERO_BLENDER_REHEARSAL_FAILURE_BEFORE_OFFICIAL_OUTPUT",
+  "date": "2026-08-29",
+  "counterexample": {
+    "toolFreezeCommit": "8f8a07d41c8237575011d1480baff0e45fa5289b",
+    "outerFailure": {
+      "classification": "MISSING_CHILD_RECEIPT",
+      "stderrSha256": "91ba680702818d9f56c03b317fbf4af1eb522e5e5898a6d4011fde2762c2dc58"
+    },
+    "directChildFailure": {
+      "classification": "NESTED_PARENT_ABSENT",
+      "stderrSha256": "590727f67f0260937d4684669ac2925d8bab7d3b05eb958758deaf94c1c0dfb2",
+      "message": "ENOENT while creating the nested production-preflight root"
+    },
+    "blenderProcesses": 0,
+    "officialRootsAbsent": true
+  },
+  "cause": {
+    "callerRootShape": "<b58-preflight-root>/production-preflights/<case-id>",
+    "childDirectoryContract": "The production preflight creates only its final root and requires the immediate parent to exist.",
+    "diagnosticDefect": "The B58 caller read preflight.json without first checking the child exit code and receipt existence."
+  },
+  "authorizedCorrection": {
+    "prepareExactParent": "<b58-preflight-root>/production-preflights",
+    "preparationTiming": "after all B58 admission checks and before the first production-preflight child",
+    "recursivePreparationAllowed": true,
+    "childRootContractUnchanged": true,
+    "onChildFailure": "stop before later children, preserve bounded stdout/stderr and classify the failed case without attempting to read a missing receipt",
+    "officialPreflightReceiptStillExclusive": true
+  },
+  "additionalSemanticAttacks": [
+    "C4_A01_NESTED_PARENT_PREPARATION_REMOVED",
+    "C4_A02_CHILD_FAILURE_PROPAGATION_BYPASSED"
+  ],
+  "unchanged": [
+    "B57 production preflight, compiler, verifier, receipt and disk policy bytes",
+    "B58 restart-safe orchestrator and ledger bytes",
+    "B58 34-gate denominator, 72 attacks and all C1-C3 attacks",
+    "all DAG, process ceilings, recovery rules and verdict thresholds",
+    "all official roots"
+  ]
+}

@@ -4815,3 +4815,13 @@ C3 preregistration commit `fd808bffd0a02109dff349d9d821d9ec0ad4df3d`推送后，
 修正后preflight/runner/auditor SHA为`4f70246ad2b6d015fbe1592939ce99b4f576b3f0a377b95651c3420ded6178d6` / `689f9b4d1cd0402dde7b22a772b912514d38fcdc6ec200225405ef8d37466f39` / `3bba47733e7c58a84296b1616c29b0d67b84a973739db14f2507b5a36d9adbee`。Node syntax、zero-warning targeted ESLint、diff check、package hash与alias-absence assertions全部通过。
 
 下一动作提交推送这一有效tool-freeze，然后用fresh clone重跑official preflight rehearsal；前一临时failure保留为C3反例，不复用其root。
+
+## J-363 · B58 fresh-clone rehearsal发现nested preflight parent contract，C4预注册
+
+Date: 2026-08-29 · Type: B58 PREFLIGHT COUNTEREXAMPLE / CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+C3有效tool-freeze commit `8f8a07d41c8237575011d1480baff0e45fa5289b`与origin exact后，fresh clone中的flat production preflight返回`ACCEPTED`且operations全0；B58 exact nested layout `<preflight-root>/production-preflights/BASELINE_B01`却在创建最终目录时返回`ENOENT`。根因不是release、Gate 0或磁盘门，而是B57 production preflight的持久化目录接口只创建最终一级，要求immediate parent预先存在。B58 caller没有准备`production-preflights` parent；它随后未检查child exit就读取不存在的receipt，又用第二个`ENOENT`遮住原始原因。
+
+Direct child与outer stderr line hashes分别为`590727f67f0260937d4684669ac2925d8bab7d3b05eb958758deaf94c1c0dfb2` / `91ba680702818d9f56c03b317fbf4af1eb522e5e5898a6d4011fde2762c2dc58`。两次调用均为zero Blender/render/model/network/Docker；三个official roots仍不存在。
+
+C4仅授权B58在所有既有admission checks之后、首个child之前durably创建exact parent `<b58-preflight-root>/production-preflights`，并在读取receipt前检查child exit/receipt presence，失败时停止后续children并传播bounded stdout/stderr。B57 bytes、case final-root exclusive creation、34 gates、72+C1-C3 attacks、DAG/process/disk/recovery/verdict均不变；新增2项攻击覆盖parent preparation removal和child-failure propagation bypass。下一动作先单独提交推送C4 spec/protocol/journal，再改candidate tools。
