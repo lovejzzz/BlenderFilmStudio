@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "bfs.cinematicRenderReproCostIsolatedPngReviewCorrection.v0.1",
+  "correctionId": "B61-E1-C3",
+  "status": "PREREGISTERED",
+  "parentContract": {
+    "uri": "specs/cinematic-render-repro-cost.v0.1.json",
+    "sha256": "31f97230426dbf70cd76d4bd5d87d1a94cabf6f53755f58faab96998c06512e2"
+  },
+  "previousCorrection": {
+    "uri": "specs/cinematic-render-repro-cost-c2-multilayer-exr-decoder-correction.v0.1.json",
+    "sha256": "33e7fd8fca5e8e793209141947632d2d3b576ec88c154c5bf42014e705c57d10"
+  },
+  "failedFormalRun": {
+    "attemptRoot": "experiments/cinematic-render-repro-cost-attempt-v0-3",
+    "formalRoot": "experiments/cinematic-render-repro-cost-v0-3",
+    "attemptTree": {
+      "files": 6,
+      "bytes": 7141,
+      "sha256": "e6812631c034162261ec77e41b6ef5d12f06026833d4bb4b3773237171a0e435"
+    },
+    "formalTree": {
+      "files": 5,
+      "bytes": 1352271,
+      "sha256": "76f7d849bb238b61a016cbd749c368813a62b773b8504851ce934dddafb274b9"
+    },
+    "failureSummary": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-3/failure-summary.json",
+      "sha256": "51f5797d1049e041b9aa511e9f2180a110a22b9cfab00e2e7eb218843b5ac722",
+      "failureHash": "67c65a3f9137538b1f06f450082db94071f97b349457375bce807cd6e9bae346"
+    }
+  },
+  "diagnosticEvidence": {
+    "result": {
+      "uri": "experiments/b61-png-export-context-diagnostic-v0-1/result.json",
+      "sha256": "ba05262f3b7937ea0e3d2fcab50534b5de4f767184310e2ad7e345c6e02e5271",
+      "resultHash": "7186f6f1b32dab34e0f52114fa2c6f3d7b9ff0815567e18a7b78f5f330c4f468"
+    },
+    "receipt": {
+      "uri": "experiments/b61-png-export-context-diagnostic-v0-1/receipt.json",
+      "sha256": "bff263a9455b9c03947e4196fc5793e6880bd703326eab226dd12bf891a3e5a1",
+      "receiptHash": "8d72ea94d7cc43d836fa2edf8217d8511ef3ba7b3a18d82671517e279280d505"
+    },
+    "verdict": "ISOLATED_REVIEW_SCENE_PNG_EXPORT_SUPPORTED"
+  },
+  "authorizedRetryRoots": {
+    "preflight": "experiments/cinematic-render-repro-cost-preflight-v0-4",
+    "attempt": "experiments/cinematic-render-repro-cost-attempt-v0-4",
+    "formal": "experiments/cinematic-render-repro-cost-v0-4"
+  },
+  "authorizedCorrections": {
+    "renderScript": {
+      "file": "blender/render_b61_frames.py",
+      "removeBehavior": "Mutate the active production scene image_settings from OPEN_EXR_MULTILAYER to PNG.",
+      "addBehavior": "Create one temporary isolated review scene per render process, copy exact display/view/look/exposure/gamma settings, configure its image settings to PNG RGBA 8-bit, pass it only to Render Result.save_render, and remove it in a finally block. Never mutate production image settings after EXR configuration."
+    },
+    "supervision": {
+      "files": [
+        "scripts/preflight-b61-e1-cinematic-render-repro-cost.mjs",
+        "scripts/run-b61-e1-cinematic-render-repro-cost.mjs",
+        "scripts/audit-b61-e1-cinematic-render-repro-cost.mjs"
+      ],
+      "behavior": "Bind C3 and D4 evidence, verify retained v0.3 trees, and use fresh v0.4 roots."
+    }
+  },
+  "unchanged": [
+    "all C1 observability behavior",
+    "all C2 OpenImageIO decoder behavior",
+    "three shots and eighteen render calls",
+    "64 spp 1920x1080 Cycles CPU",
+    "frozen OCIO",
+    "multilayer half-float ZIP EXR",
+    "decoded Combined exact pixel digest",
+    "PNG remains review-only",
+    "sixteen gates and ten attacks",
+    "timeout disk reserve and formal ceiling",
+    "claim boundary"
+  ],
+  "claimBoundary": {
+    "formalV04AuthorizedAfterFreshPreflight": true,
+    "reviewExportContextChanged": true,
+    "renderFormatChanged": false,
+    "pixelThresholdChanged": false,
+    "qualityThresholdChanged": false
+  }
+}

@@ -5165,3 +5165,11 @@ Date: 2026-08-29 · Type: DIAGNOSTIC TOOL-FREEZE CANDIDATE · New Blender proces
 D4 preregistration commit `85e74ee`推送后，实现一个Blender probe与bounded supervisor。Probe在production blend内snapshot active render/image/color settings，尝试并记录multilayer-to-PNG assignment；随后创建isolated review scene与2×2 generated float image，以`Image.save_render(..., scene=review)`写PNG，验证header/dimensions，删除临时数据并要求production snapshot exact。Supervisor在一个Blender start前重算v0.3两棵失败树与failure self-hash，限定zero render/model/network/Docker、30秒与1 MiB。
 
 Probe/runner SHA-256为`07d8451ddacd604dd4a7f5daf620351538d19c03f6ecc6bbd7ab692aaf99ef47 / 4a47185132a6a59bab0e500ec73e5915df51a3aab8607d1421e28d4cf9854d4e`；spec/protocol SHA为`41a9e96c011bd234b02349db34e9e45ae21e4d8e51edae4a7dda274c886aad9f / 0dbe73d063e7bfdee1c214880fad1b11a415c7cdf00bea7ed1cfac594c131c33`。Node/Python syntax、targeted ESLint zero-warning与diff check通过，D4 root仍不存在。下一动作提交推送tool freeze；只有origin exact后才执行D4。
+
+## J-400 · B61-D4关闭PNG context诊断并预注册C3
+
+Date: 2026-08-29 · Type: DIAGNOSTIC PASS / FORMAL CORRECTION PREREGISTRATION · Real Blender processes: 1 · New Blender renders: 0
+
+D4 tool-freeze commit `8a685b2`推送后，one Blender/zero-render probe PASS。Active production scene从multilayer改PNG的assignment failure exact复现；isolated review scene接受PNG/RGBA/8-bit并写出265-byte、2×2有效PNG，生产scene before/after snapshot exact。Result file SHA/self-hash为`ba05262f3b7937ea0e3d2fcab50534b5de4f767184310e2ad7e345c6e02e5271 / 7186f6f1b32dab34e0f52114fa2c6f3d7b9ff0815567e18a7b78f5f330c4f468`；receipt file SHA/self-hash为`bff263a9455b9c03947e4196fc5793e6880bd703326eab226dd12bf891a3e5a1 / 8d72ea94d7cc43d836fa2edf8217d8511ef3ba7b3a18d82671517e279280d505`。
+
+C3只授权render process创建isolated review scene，复制color settings并传给`Render Result.save_render`，finally删除；生产image settings不再改动。Node supervision绑定D4/v0.3 failure并使用fresh v0.4 roots。下一动作提交D4 evidence/C3，再实现工具。
