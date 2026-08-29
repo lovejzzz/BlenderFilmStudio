@@ -4951,3 +4951,17 @@ Tool-freeze commit `0b21584c0acc653f879c2711dc76d92028bf2d70`与origin exact后�
 主仓库确认preflight/attempt/formal三根均不存在后，用同一tool freeze运行official preflight。结果`ACCEPTED 9/9`，6份child preflight全部`ACCEPTED`且各自BuildPlan hash匹配预注册值；outer file SHA/self-hash为`076c6bf7916c5283bf1431943fcdc25f095e61e5cfcb7842af54e22f9ce5c80e` / `10162d643aa784c6bae6184be8c8c3740c7276acddfe3bf48f32e39c7674678c`。七份receipt全部通过独立self-hash重算；available bytes为318,863,503,360，高于107,374,182,400 reserve。Blender/render/model/network/Docker均0，结束后无Blender进程；attempt与formal roots继续不存在。
 
 下一动作只提交推送official preflight七份文件与本entry形成preflight evidence commit。Formal runner必须绑定该exact commit；在此之前不得创建attempt或formal root。
+
+## J-377 · B60六次真实Blender编译支持三镜头结构一致性
+
+Date: 2026-08-29 · Type: B60 COMPLETE FORMAL / INDEPENDENT AUDIT · Real Blender processes: 6 · New Blender renders: 0
+
+Preflight evidence commit `c6a8849`推送且attempt/formal roots fresh后，formal runner绑定tool freeze `0b21584c0acc653f879c2711dc76d92028bf2d70`入场。WIDE/MEDIUM/CLOSE各执行A/B两次production compile，六个wrapper exit 0/signal null，六个native Blender child PID为`72780/72799/72813/72827/72841/72855`且互异。独立auditor返回15/15 gates、10/10 single-field mutation attacks，verdict `CINEMATIC_SEQUENCE_DETERMINISTIC_COMPILE_AND_SHARED_STATE_SUPPORTED`。
+
+外部只读复核重算49个self-hashed records与六份production receipt全部file identities。三组A/B BuildPlan SHA分别为`af06d37b… / 15d64a77… / 9efd903f…`且组内exact；三组structure SHA为`f08f9b78… / 23b5b24d… / 38cdd44a…`且组内exact。跨六次shared BuildPlan/structure/non-camera projection各只有一个hash：`58747e63… / b158aa70… / d808fef7…`。正式树无EXR/PNG/JPG/MP4，render/model/network/Docker均0，结束后无Blender存活。
+
+六个production wrapper合计7.293574833秒；native budget elapsed合计3029 ms、均值504.83 ms，最大sampled RSS 235,077,632 bytes，artifact bytes合计870,206。Attempt/formal tree为28/58 files、57,147/1,117,680 bytes；磁盘仍约297 GiB available。
+
+必须保留的边界发现：同镜头A/B的压缩`.blend` SHA不同，但canonical BuildPlan与structure相同。`nativeBlendBytesDeterministic:false`已在正式运行前冻结，因此没有放宽门槛；结果只支持确定的结构语义，不支持容器字节确定或像素结论。Audit file SHA/self-hash为`526625a3… / 32f65b51…`，results为`2ba5dc63… / 36f87f76…`，receipt为`12937d85… / 312060d8…`。
+
+B60由此关闭输入确定编译门，并关闭跨镜头一致性的结构/契约层；视觉/像素层与影院级渲染成本门仍未关闭。下一阶段必须实际渲染预注册EXR帧，不能继续用compile-only证据外推电影质量。

@@ -1,0 +1,120 @@
+{
+  "documentType": "BFS_COMPILE_RECEIPT",
+  "version": "0.1.0",
+  "createdAtUtc": "2026-08-29T08:04:51.037Z",
+  "executionIdentity": {
+    "buildPlan": {
+      "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-B/build-plan.json",
+      "sha256": "15d64a77207f6b9621b8726a6cf1a7799aea34053e29b6a9d43b641f7af4eed0",
+      "bytes": 21051,
+      "planHash": "5213b1b34db3fb262747d586c5503ee507cc122f3e398265ed764eea9fca3e53",
+      "planVersion": "0.2.0",
+      "sourceSceneCanonicalSha256": "b2b888c5a5642b970b96a0ecdea605921de075d2cdaed60b331b8c0e274bb39b",
+      "shotId": "SHOT_6002"
+    },
+    "tools": {
+      "sceneCompiler": {
+        "uri": "blender/compile_scene.py",
+        "sha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240",
+        "bytes": 51286
+      },
+      "restrictedCli": {
+        "uri": "scripts/run-restricted-blender-compile.mjs",
+        "sha256": "4cd49d91e7f396f04876b8fcb14ac3a10ff19fbba11309cae1cdc6911740b2af",
+        "bytes": 5757
+      },
+      "budgetSupervisor": {
+        "uri": "scripts/lib/budgeted-process.mjs",
+        "sha256": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d",
+        "bytes": 6306
+      },
+      "receiptGenerator": {
+        "uri": "scripts/lib/compile-receipt.mjs",
+        "sha256": "6fbe9a2394acbc0712ac73451db2602ec1aed8d23e49dde87bb124be2c07de95",
+        "bytes": 8203
+      },
+      "receiptFormat": {
+        "uri": "scripts/lib/receipt-format.mjs",
+        "sha256": "a7b3be629daf5ebc50b023eea367a4e525ca66b58acafb8b23107cb6bdb4aebc",
+        "bytes": 1251
+      }
+    },
+    "configuration": {
+      "budgetProfile": {
+        "uri": "specs/restricted-compile-budget.v0.1.json",
+        "sha256": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe",
+        "bytes": 457
+      },
+      "ocio": {
+        "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "bytes": 32807
+      }
+    },
+    "runtime": {
+      "blender": {
+        "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+        "bytes": 183237520,
+        "version": "Blender 5.2.0 LTS",
+        "buildHash": "fbe6228777e7",
+        "buildBranch": "blender-v5.2-release",
+        "buildPlatform": "Darwin",
+        "buildType": "Release",
+        "binaryName": "Blender"
+      },
+      "node": {
+        "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+        "bytes": 50320,
+        "version": "v26.5.0",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "binaryName": "node"
+      }
+    }
+  },
+  "run": {
+    "budgetReport": {
+      "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-B/restricted/budget.report.json",
+      "sha256": "2e4165bd4a17f4edf118a0490099d56d2e0853c4e2108cad5af1e731dc0198bc",
+      "bytes": 3196,
+      "outcome": "PASS",
+      "metrics": {
+        "elapsedMs": 512,
+        "peakSampledRssBytes": 226213888,
+        "logBytes": 1132,
+        "output": {
+          "fileCount": 3,
+          "bytes": 145050,
+          "symlinkCount": 0
+        }
+      }
+    },
+    "sceneManifest": {
+      "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-B/restricted/scene.manifest.json",
+      "sha256": "d0e58ff922b7ce734f7a8e703c0f07109eeefcc7ef34708c82112b22503bb21a",
+      "bytes": 18046,
+      "manifestVersion": "0.2.0",
+      "planHash": "5213b1b34db3fb262747d586c5503ee507cc122f3e398265ed764eea9fca3e53",
+      "structureHash": "23b5b24dad67f3441a8e2723d67fc4b92dffb39e48ae5591e94edab497df1571"
+    },
+    "sceneStructureCanonical": {
+      "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-B/restricted/scene.structure.canonical.json",
+      "sha256": "23b5b24dad67f3441a8e2723d67fc4b92dffb39e48ae5591e94edab497df1571",
+      "bytes": 7435,
+      "structureHash": "23b5b24dad67f3441a8e2723d67fc4b92dffb39e48ae5591e94edab497df1571"
+    },
+    "sceneBlend": {
+      "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-B/restricted/scene.blend",
+      "sha256": "20fe97b0d05d6903f3e69c17bf719b89e706fc5b813de096e4e17839e2ea984f",
+      "bytes": 119569
+    }
+  },
+  "claims": {
+    "exactArtifactBinding": true,
+    "semanticStructureBinding": true,
+    "signed": false,
+    "remotelyAttested": false
+  },
+  "executionIdentityHash": "0a97f8c127c2fbebc154dac2e8e061185078d4bdbcdd10cf1ba69f527a94863d",
+  "receiptHash": "a719f93f53cef5d8691733b93c54536fd6ebc3c4f3f52f1dbc3e1a756414784a"
+}
