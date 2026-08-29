@@ -144,7 +144,7 @@ def pixel_projection(exr_path: Path) -> dict:
         means = [float(value) for value in values.mean(axis=(0, 1), dtype=numpy.float64)]
         finite_count = int(finite.sum())
         non_finite_count = int(values.size - finite_count)
-        return {
+        projection = {
             "projection": "DECODED_COMBINED_RGBA_FLOAT32_LE",
             "decoder": {"module": "OpenImageIO", "version": oiio.VERSION_STRING, "numpyVersion": numpy.__version__, "subimage": subimage, "prefix": prefix, "channelNames": names, "channelIndices": indices},
             "width": width,
@@ -159,6 +159,7 @@ def pixel_projection(exr_path: Path) -> dict:
             "mean": means,
             "rgbDynamicRange": max(maxima[:3]) - min(minima[:3]),
         }
+        return projection, values
     finally:
         image_input.close()
 
@@ -251,13 +252,23 @@ def main() -> None:
         if not exr_path.is_file() or exr_path.stat().st_size == 0:
             raise RuntimeError(f"Missing EXR for frame {frame}")
         ledger.append("EXR_WRITTEN", frame=frame, sha256=sha256_file(exr_path), bytes=exr_path.stat().st_size)
-        projection = pixel_projection(exr_path)
+        projection, review_pixels = pixel_projection(exr_path)
         ledger.append("EXR_REOPENED", frame=frame, width=projection["width"], height=projection["height"])
         if projection["nonFiniteCount"] != 0 or projection["rgbDynamicRange"] <= 1e-6:
             raise RuntimeError(f"Invalid decoded pixels for frame {frame}")
         ledger.append("PIXEL_PROJECTED", frame=frame, sha256=projection["sha256"], nonFiniteCount=projection["nonFiniteCount"])
 
-        bpy.data.images["Render Result"].save_render(filepath=str(png_path), scene=review_scene)
+        review_image = bpy.data.images.new(f"BFS_B61_REVIEW_{args.shot}_{args.repetition}_{frame}", width=projection["width"], height=projection["height"], alpha=True, float_buffer=True)
+        try:
+            review_image.colorspace_settings.name = "ACEScg"
+            blender_rows = numpy.ascontiguousarray(numpy.flipud(review_pixels), dtype=numpy.float32)
+            review_image.pixels.foreach_set(blender_rows.reshape(-1))
+            review_image.update()
+            if not review_image.has_data or len(review_image.pixels) != projection["floatCount"]:
+                raise RuntimeError(f"Generated review image has no data for frame {frame}")
+            review_image.save_render(filepath=str(png_path), scene=review_scene)
+        finally:
+            bpy.data.images.remove(review_image)
         if not png_path.is_file() or png_path.stat().st_size == 0:
             raise RuntimeError(f"Missing PNG for frame {frame}")
         ledger.append("PNG_WRITTEN", frame=frame, sha256=sha256_file(png_path), bytes=png_path.stat().st_size)
@@ -279,6 +290,10 @@ def main() -> None:
                 "compression": "ZIP_LOSSLESS",
                 "ocioConfigSha256": ocio["sha256"],
                 "pngExportContext": "ISOLATED_REVIEW_SCENE",
+                "pngPixelSource": "GENERATED_FLOAT_IMAGE_FROM_DECODED_COMBINED",
+                "pngSourceColorSpace": "ACEScg",
+                "pngRowOrderConversion": "OIIO_Y0_TOP_TO_BLENDER_PIXEL0_BOTTOM",
+                "pngSourcePixelSha256": projection["sha256"],
                 "productionImageSettingsUnchanged": production_image_settings == {
                     "fileFormat": scene.render.image_settings.file_format,
                     "colorDepth": scene.render.image_settings.color_depth,

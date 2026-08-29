@@ -5217,3 +5217,11 @@ D5 tool-freeze commit `e36969a`推送后，真实Blender probe PASS。OIIO Combi
 Result file SHA/self-hash为`5445aaf64032b2162f84c8334134132393c0acce431034222bc3f122796d6cf4 / d26a8f21814572864ac847a2513832d5a195f893d1bed7399ccf00a19e510276`；receipt file SHA/self-hash为`7939f525d0869f445396770174c251dc00b224ac2ffc86ce3169e376426419d7 / 1954de1cd54c7021c07b94b19c93bfd346c3dda17fd0c896003fa44c72c757ed`；PNG SHA为`91585292…`。
 
 C4只授权从同一次OIIO projection返回RGBA array并生成review float image；禁止Render Result与二次EXR decode。Node supervision绑定D5/v0.4 failure并使用fresh v0.5 roots。下一动作提交D5 evidence/C4，再实现正式工具。
+
+## J-406 · B61-C4 formal工具候选
+
+Date: 2026-08-29 · Type: FORMAL CORRECTION TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+C4 preregistration commit `e603864`推送后，render-side OIIO函数在计算原有projection receipt的同时返回同一RGBA ndarray。每帧review image只使用该array：flip Y rows、float32 contiguous、ACEScg、generated Blender float image、C3 isolated review scene；写PNG后在finally删除image。Report exact记录pixel source、colorspace、row order与source digest。不存在Render Result读取或EXR二次decode。
+
+Node supervision切换fresh v0.5 roots，freeze覆盖C2/C3/C4与D3/D4/D5 evidence；preflight复核v0.4 failure trees和D5 result/receipt；auditor逐帧绑定generated review source与decoded digest。Render/audit-python/preflight/runner/auditor SHA为`917d8a5dc0a57e2ff7df318fde0288b80906c003ba186267d0bbc7bad1ee491a / f3e998f9418917bf198424984630f9ad666ab439270a5d363b4e98f6ead54339 / 028f287f82ccf1753eed9190c5afba96efcdb6e2c8d59c08addbf40d1a283c30 / ec50d5ff4a0e959dbba0bbca7618923b11c47c8f4ed188f8d01c7cf1668890b7 / 13224333127d420a4f888063507c094c8dfc27d472c67d27a7e7474904505e8d`。静态检查通过，v0.5 roots不存在。下一动作提交推送freeze并运行fresh-clone preflight。
