@@ -5137,3 +5137,13 @@ C2 preregistration commit `a8ef00e`推送后，render与independent audit两段P
 三段Node supervision改用fresh v0.3 roots，tool freeze加入C2 protocol与D3 evidence；preflight重算v0.2 retained trees/failure、D2真实decoder result和D3 result/receipt；Node auditor新增每帧decoder runtime/channel gate。所有渲染、像素、资源及16 gates/10 attacks不变。
 
 Render/audit-python/preflight/runner/auditor SHA-256为`b3aa8d4d20a5efb2eaac454c20c6b36bcd50f1016af94ddf411bbaaeac34527b / f3e998f9418917bf198424984630f9ad666ab439270a5d363b4e98f6ead54339 / d01ec7721e968d348f4d65c013ff184283c8af6c1cc24a8dc4b3b4196682cc49 / a213d7714771e957e4ac64a9f2dd05f49f58d98f7cbb64dbc80e4b93f55b3787 / 38d0a901853d4af1380809207705c93ee6dfef91ae1f116c859386340951d8c2`。Node/Python syntax、targeted ESLint zero-warning与diff check通过；v0.3 roots仍不存在。下一动作提交推送tool freeze，再做fresh-clone zero-Blender preflight rehearsal。
+
+## J-397 · B61-C2 fresh-clone rehearsal与official v0.3 preflight接受
+
+Date: 2026-08-29 · Type: CORRECTED OFFICIAL PREFLIGHT ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+Tool-freeze `5e1ad6c5203338daed07d08f54868a26a5df4d84`与origin exact后，全新临时clone第一次因未安装AJV在模块加载期退出，尚未执行preflight或创建证据；保留同一干净clone，仅把主仓库已安装`node_modules`以临时symlink提供给Node，随后同构preflight返回`ACCEPTED 9/9`、self-hash `a38f11bed091e180dade81f4bdac6f6fb5957e1dae52f1dc4b83efc651a55f31`。该symlink与整个validated `/tmp/bfs-b61-c2-preflight.*`临时树随后depth-first删除。
+
+主仓库确认v0.3三根fresh后签发official preflight，同样`ACCEPTED 9/9`。File SHA/self-hash为`1d802cb1887a5f906847169436ae4100ab1ceb1f8e5a05ca3a196a5f58d75865 / c942b0d596a1eaa6923ce9cb9331fe4a8b87e76c43972561c7633a5f9475ecb8`；C2 failure trees、D2 projection `192237bd…`与D3 receipt `802a0553…`全部exact。Available bytes为318,452,441,088，扣除1 GiB projected后仍高于100 GiB reserve；operations全零，attempt/formal roots继续不存在。
+
+下一动作只提交推送official v0.3 preflight与本entry形成evidence commit；之后runner必须绑定tool freeze与该exact evidence commit才可启动18帧正式矩阵。
