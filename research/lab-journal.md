@@ -4911,3 +4911,13 @@ C7 preregistration/evidence commit `9de260ff992301a106f81656e7e1faa879d3ea50`推
 新`run-b58-e1-c7-reaudit.mjs`只用Node built-ins，要求tool-freeze commit等于HEAD/origin，重算141-file evidence tree与old audit/results/receipt hashes，创建独立fresh output，spawn一次Node auditor，前后比较evidence tree byte identity，再写self-hashed results/receipt；operations冻结为1 Node auditor、0 Blender/render/model/network/Docker。
 
 未冻结隔离rehearsal输出到`/tmp`，返回34/34、72/72、C1 8/8、C2 6/6、C3 2/2、C4 2/2、C5 2/2、C6 5/5、C7 2/2，verdict `RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED`，无failed gates/attacks。Auditor/runner SHA-256为`0e414af9a713796ce079735f8f39f2dc53aec68ea6a19edbb88d84e16672be1a` / `663e64d1044dd59058519d2438be00b1438eecb513ff99767563ddc5fb77dadf`；syntax、targeted ESLint zero-warning及diff check通过。正式reaudit root仍不存在。下一动作提交推送工具与本entry形成tool-freeze，再运行一次正式zero-Blender C7 re-audit。
+
+## J-373 · B58-C7正式immutable re-audit支持restart-safe production orchestrator
+
+Date: 2026-08-29 · Type: B58 CORRECTED FINAL AUDIT · New Blender processes: 0 · New Blender renders: 0
+
+C7 tool-freeze commit `026bf1d04a73847427824c6b0d91c3328343cb8e`与origin exact、reaudit root fresh时，runner重算v0.3 141-file evidence tree为`c7f5ed6bddd030be24d86a8592e5dd80e24832de0ac72e0cd6fad1cf87bbae89`，old audit/results/receipt hashes exact，随后只spawn一次Node auditor。Re-audit前后tree fileCount/hash byte exact，未启动Blender。
+
+Corrected independent audit通过34/34 gates、72/72 original attacks、C1 8/8、C2 6/6、C3 2/2、C4 2/2、C5 2/2、C6 5/5、C7 2/2；无failed gates或attacks，final verdict `RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED`。Audit file SHA/self-hash为`6b1f1f8c0d59ecb38d69384dea9633f74f8e8d20fdb79b0efab78a9b10966242` / `bcac6697c735d1cc6572839efb9b870cdf348ac8f0ebe039b0950c1cb3d83c90`；results SHA/self-hash为`f1c5341de4a06f17fa9ae632a4f7b17e3b2a21dd2f5ce3558de86d97c81f96f6` / `3c69da6d5713dd881d6e321a7ba54503465c247a3d9825b15db5a369f46d0f80`；receipt SHA/self-hash为`f6112e89c068207379c0a30cf390822144110d41367a7849e179de6f2b0e9894` / `eef5dbff57191110ea9ca57d58c1c9bb68b5833682a2d16670d94b65a11767d9`。
+
+结论边界：B58现在支持可重启生产编排、持久化stage ledger、exit-86恢复、native Blender受控中断保留/新root重试、live PID拒绝duplicate spawn、3份B01/B02 compile+artifact audit与zero-render操作计数。它不证明最终影院级像素质量、跨镜头角色一致性或成本目标；下一主阶段进入三道生产门，而不是把B58扩大解释为成片完成。
