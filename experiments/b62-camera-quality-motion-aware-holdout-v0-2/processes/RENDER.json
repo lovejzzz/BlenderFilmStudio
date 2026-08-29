@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityProcessReceipt.v0.1",
+  "experimentId": "B62-Q1-D6",
+  "processId": "RENDER",
+  "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+  "args": [
+    "--background",
+    "--factory-startup",
+    "--disable-autoexec",
+    "experiments/b62-camera-quality-motion-aware-holdout-v0-2/scene/B62_PHASE0_D6_MOTION_AWARE.blend",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "blender/render_b62_q1_d6_motion_aware_holdout_pairs.py",
+    "--",
+    "--output-dir",
+    "experiments/b62-camera-quality-motion-aware-holdout-v0-2/renders",
+    "--report",
+    "experiments/b62-camera-quality-motion-aware-holdout-v0-2/render.json",
+    "--derived-sha256",
+    "1b2b888cca3c9dc72ae4d3cbccde0a573eca4a0cc7f0eb7c236d0cd07939eea8"
+  ],
+  "result": {
+    "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+    "version": "0.2.0",
+    "outcome": "CHILD_FAILED",
+    "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "args": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-motion-aware-holdout-v0-2/scene/B62_PHASE0_D6_MOTION_AWARE.blend",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b62_q1_d6_motion_aware_holdout_pairs.py",
+      "--",
+      "--output-dir",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-motion-aware-holdout-v0-2/renders",
+      "--report",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-motion-aware-holdout-v0-2/render.json",
+      "--derived-sha256",
+      "1b2b888cca3c9dc72ae4d3cbccde0a573eca4a0cc7f0eb7c236d0cd07939eea8"
+    ],
+    "budgets": {
+      "wallTimeMs": 300000,
+      "maxRssBytes": 2147483648,
+      "maxLogBytes": 2097152,
+      "maxOutputFiles": 256,
+      "maxOutputBytes": 134217728,
+      "sampleIntervalMs": 100
+    },
+    "metrics": {
+      "elapsedMs": 523,
+      "peakSampledRssBytes": 262471680,
+      "logBytes": 1032,
+      "output": {
+        "fileCount": 4,
+        "bytes": 579446,
+        "symlinkCount": 0
+      }
+    },
+    "breach": null,
+    "child": {
+      "pid": 91963,
+      "exitCode": 1,
+      "signal": null,
+      "spawnError": null
+    },
+    "termination": {
+      "requested": false,
+      "awaited": true
+    },
+    "logSha256": "289e7f165bdb5fa946f13305f3cb4bb913b2aa6135034c343869db8adc50c4c0",
+    "outputPreview": "00:00.261  blend            | Read blend: \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-motion-aware-holdout-v0-2/scene/B62_PHASE0_D6_MOTION_AWARE.blend\"\nTraceback (most recent call last):\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b62_q1_d6_motion_aware_holdout_pairs.py\", line 164, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b62_q1_d6_motion_aware_holdout_pairs.py\", line 124, in main\n    scene.view_settings.look = \"Medium High Contrast\"\n    ^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: bpy_struct: item.attr = val: enum \"Medium High Contrast\" not found in ('None', 'ACES 2.0 - Reference Gamut Compression')\n\nError: script failed, file: '/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b62_q1_d6_motion_aware_holdout_pairs.py', exiting.\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n",
+    "outputPreviewTruncated": false
+  },
+  "processHash": "e901e19b0002f465b69464db93cc66f97c16ee712ed731d79ced5067a7e01fe5"
+}

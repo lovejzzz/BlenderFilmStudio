@@ -5627,3 +5627,13 @@ D6 tool freeze `667e66f7cbc45dd0e17a06dd0978d1b71d218479`推送后，BUILD Blend
 v0.1永久保留6 files/584,079 bytes/tree `8cd9da10dbf8c038e32ed05edc89a3fad3c9a31682789e88075f2c4a89420a8a`；failure file/self `ff13fea8…/e2d33064…`，build file/self `c599deeb…/2e0aa531…`。本轮没有validation pixel或geometry observation，scientific verdict为null。
 
 C1在任何工具修改前只授权runner删除Blender child的`OCIO`环境覆盖，使用Blender 5.2 bundled color config；auditor绑定retained v0.1并切fresh v0.2。三份Blender Python bytes、相机、frames、16 renders、AgX/Medium High Contrast、EXR、geometry/pixel阈值与预算全部不变。
+
+## J-450 · B62-Q1-D6 v0.2证伪AgX原生假设，C2预注册ACES 2.0
+
+Date: 2026-08-29 · Type: RETAINED PRE-RENDER FAILURE / BLENDER 5.2 COLOR-CONTRACT CORRECTION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+C1 tool freeze `3c7e61992d0ce20ac74987a9ed28a44b67debe34`在fresh v0.2再次完成BUILD并创建342,973-byte derived scene `1b2b888c…`。RENDER在0.523秒、peak sampled RSS 262,471,680 bytes处退出，0 render完成、无预算breach；scientific verdict保持null。v0.2永久保留6 files/583,560 bytes/tree `0b0b58933df7d07b62bcdc589a339d1d6e8218731d97bf4bca2ecc68718e8876`；failure file/self `7a710861…/bd52ee7c…`，build file/self `0813d8ca…/607d1816…`，render-process file/self `1f4a63c1…/e901e19b…`。
+
+清空环境并使用同一Blender 5.2 LTS `fbe6228777e7`做factory-startup复核，loaded scene报告`ACES 2.0 / None`；`Medium High Contrast`仍非法。Blender官方5.x手册也明确bundled config包含ACES 2.0，且ACES view transform面向photoreal film/TV。C1“去掉外部OCIO即可恢复AgX roster”的假设被证伪，而不是环境变量未清干净。
+
+C2在任何工具修改前只替换base D6两个已不兼容5.2的字段：`AgX / Medium High Contrast`改为原生`ACES 2.0 / None`。renderer只可显式设置并报告这两个值；runner/auditor只可绑定C2、retained v0.2和fresh v0.3。builder/independent bytes、candidate、96-frame bake、8×2 roster、16次960×540 Cycles CPU 16 spp、32-bit multilayer EXR、全部geometry/pixel/资源/verdict门与HUMAN_PENDING边界不变。

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareHoldoutCorrection.v0.1",
+  "correctionId": "B62-Q1-D6-C2",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "supersedes": {
+    "correctionId": "B62-Q1-D6-C1",
+    "uri": "specs/b62-camera-quality-d6-c1-native-ocio-runtime.v0.1.json"
+  },
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-motion-aware-holdout-v0-2",
+    "tree": {
+      "files": 6,
+      "bytes": 583560,
+      "treeSha256": "0b0b58933df7d07b62bcdc589a339d1d6e8218731d97bf4bca2ecc68718e8876"
+    },
+    "failure": {
+      "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-2/failure.json",
+      "sha256": "7a710861f89ae0b26d5ad9c0623c21759dc80711534a302090917dd6e88be4cc",
+      "failureHash": "bd52ee7c13f77bbff378da68b95f9b3483fbf6a87b7a104e518db0bc156724a5"
+    },
+    "build": {
+      "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-2/build.json",
+      "sha256": "0813d8cae32ac51a2ddd70dd52865c1de657db253bd2e0147f1b7a581b758232",
+      "reportHash": "607d18165da3e2ca5d7cf69293c58759aeb058717e7ec3dea167bf338698e6a7",
+      "status": "PASS"
+    },
+    "renderProcess": {
+      "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-2/processes/RENDER.json",
+      "sha256": "1f4a63c1f837c499b1049f1b738b1ce177e6e1ee37d5b32d0e3cd7d19ed0731a",
+      "processHash": "e901e19b0002f465b69464db93cc66f97c16ee712ed731d79ced5067a7e01fe5",
+      "outcome": "CHILD_FAILED",
+      "elapsedMs": 523,
+      "peakSampledRssBytes": 262471680,
+      "renderCallsCompleted": 0
+    }
+  },
+  "diagnosis": {
+    "c1Hypothesis": "Removing the repository OCIO override would restore AgX and Medium High Contrast in Blender 5.2.",
+    "observedRuntime": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "version": "Blender 5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "bundledViewTransform": "ACES 2.0",
+      "bundledLook": "None"
+    },
+    "finding": "A clean environment and factory startup still reject Medium High Contrast. Blender 5.x bundled color management uses ACES 2.0 as its native photoreal view transform; the base D6 AgX look pair is not a legal Blender 5.2 native selection.",
+    "boundary": "The second failure occurred before the first render call; no validation pixel or validation geometry was observed."
+  },
+  "primarySources": [
+    "https://docs.blender.org/manual/en/5.0/render/color_management/displays_views.html",
+    "https://docs.blender.org/manual/en/5.0/render/color_management/opencolorio.html",
+    "https://developer.blender.org/docs/release_notes/5.2/rendering/"
+  ],
+  "frozenBeforeCorrection": {
+    "toolFreezeCommit": "3c7e61992d0ce20ac74987a9ed28a44b67debe34",
+    "builderSha256": "31738bf4a4f34e562fd5182235f6ee16e7d6bef282fd0d3828777be827f4485d",
+    "renderSha256": "9553f7a2f74af7da37718a0b00549d01117f064e8d5e0bbdc8a0268f7968e4e4",
+    "independentSha256": "3ae58ef4be3532e507ab72cafcd8e045feed977287d71b459a0d926b38a5f359",
+    "runnerSha256": "edf965665b7ed456dee9bce041e0a52a87c49c80740be87aa677c58ca37e157b",
+    "auditorSha256": "1d56cdfbb6baac996f37ae96c612e2a22935f7374e19ab8bccc6956cfa49f5b5"
+  },
+  "authorizedChanges": {
+    "renderTool": "Explicitly select ACES 2.0 and None instead of Medium High Contrast, and report the observed values. No other Blender render behavior may change.",
+    "runner": "Bind C2 and immutable v0.2, preserve the clean Blender child environment, require builder and independent tool hashes to remain exact, and use the fresh retry root.",
+    "auditor": "Bind C2 and immutable v0.2, treat C2 replacementColorContract as the expected view transform and look, bind the changed renderer hash through admission, and use the fresh retry root.",
+    "retryRoot": "experiments/b62-camera-quality-motion-aware-holdout-v0-3"
+  },
+  "replacementColorContract": {
+    "viewTransform": "ACES 2.0",
+    "look": "None",
+    "scope": "Supersedes only specs/b62-camera-quality-motion-aware-holdout-validation.v0.1.json render.viewTransform and render.look."
+  },
+  "unchanged": [
+    "Blender 5.2 executable and build identity",
+    "Builder and independent Blender Python tool bytes",
+    "Fresh master build and both 96-frame camera bakes",
+    "Eight validation frames, two conditions and 16 Cycles renders",
+    "960x540, CPU, 16 spp, 32-bit multilayer EXR and PNG previews",
+    "All geometry, pixel, routing, process, resource, verdict and human-review gates",
+    "Zero model/network/Docker calls and immutable-failure policy"
+  ]
+}
