@@ -168,7 +168,7 @@ async function inspectJob(root, operationJob) {
     && final.manifest.manifestHash === manifest.manifestHash
     && final.ledgerPrefix.eventCount === ledger.events.length - 1
     && ledger.events.at(-1)?.eventType === 'JOB_FINALIZED'
-    && ledger.events.at(-1)?.payload?.finalReceipt?.receiptHash === final.receiptHash);
+    && ledger.events.at(-1)?.payload?.receipt?.receiptHash === final.receiptHash);
   return {
     id: operationJob.id,
     operation: operationJob,
@@ -255,7 +255,7 @@ function validLiveAttack(model) {
 function validAccountingAttack(model) {
   return Number.isSafeInteger(model.wrapperPid) && model.wrapperPid > 0
     && Number.isSafeInteger(model.nativePid) && model.nativePid > 0 && model.nativePid !== model.wrapperPid
-    && model.exitCode === 0 && model.signal === null && HASH_PATTERN.test(model.logSha256)
+    && model.exitCode === 0 && model.signal === null && HASH_PATTERN.test(model.logSha256) && model.logSha256 === model.expectedLogSha256
     && Number.isSafeInteger(model.logBytes) && model.logBytes >= 0
     && Number.isSafeInteger(model.outputBytes) && model.outputBytes > 0
     && Number.isSafeInteger(model.peakRssBytes) && model.peakRssBytes > 0
@@ -416,6 +416,7 @@ function semanticAttacks(spec, evidence) {
     exitCode: baselineProcess.terminal.exitCode,
     signal: baselineProcess.terminal.signal,
     logSha256: baselineProcess.terminal.stdout.sha256,
+    expectedLogSha256: baselineProcess.terminal.stdout.sha256,
     logBytes: baselineProcess.terminal.stdout.bytes + baselineProcess.terminal.stderr.bytes,
     outputBytes: evidence.baseline.compile.budget.metrics.output.bytes,
     peakRssBytes: evidence.baseline.compile.budget.metrics.peakSampledRssBytes,
@@ -597,6 +598,22 @@ function runtimeParentCorrectionAttacks(correction, preflight, parsed, treeSha25
   return mutations.map(([id, mutate]) => ({ id, rejected: mutated(base, mutate, valid) }));
 }
 
+function reAuditCorrectionAttacks(correction, evidence) {
+  const base = {
+    finalEventReceiptHash: evidence.baseline.ledger.events.at(-1)?.payload?.receipt?.receiptHash,
+    finalReceiptHash: evidence.baseline.final?.receiptHash,
+    logSha256: evidence.baseline.stages.PRODUCTION_COMPILE.receipt.process.terminal.stdout.sha256,
+    expectedLogSha256: evidence.baseline.stages.PRODUCTION_COMPILE.receipt.process.terminal.stdout.sha256,
+  };
+  const valid = row => row.finalEventReceiptHash === row.finalReceiptHash && row.logSha256 === row.expectedLogSha256
+    && correction.authorizedCorrection.executionEvidenceMayChange === false;
+  const mutations = [
+    ['C7_A01_FINAL_EVENT_PAYLOAD_FIELD_MUTATION', row => { row.finalEventReceiptHash = '0'.repeat(64); }],
+    ['C7_A02_LOG_HASH_EQUALITY_MUTATION', row => { row.logSha256 = '0'.repeat(64); }],
+  ];
+  return mutations.map(([id, mutate]) => ({ id, rejected: mutated(base, mutate, valid) }));
+}
+
 async function audit(parsed) {
   const root = parsed.repositoryRoot;
   const preflight = await json(resolve(root, parsed.preflightRoot, 'preflight.json'));
@@ -607,6 +624,7 @@ async function audit(parsed) {
   const nestedPreflightCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-nested-preflight-correction.v0.1.json'));
   const retryRootCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-retry-root-correction.v0.1.json'));
   const runtimeParentCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-runtime-parent-correction.v0.1.json'));
+  const reAuditCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-reaudit-correction.v0.1.json'));
   const failedOfficialReceiptText = await readFile(resolve(root, retryRootCorrection.failedOfficialPreflight.receipt), 'utf8');
   const failedOfficialReceipt = JSON.parse(failedOfficialReceiptText);
   const failedOfficialExact = hashBytes(Buffer.from(failedOfficialReceiptText)) === retryRootCorrection.failedOfficialPreflight.sha256
@@ -643,6 +661,7 @@ async function audit(parsed) {
   const nestedPreflightCorrectionRows = nestedPreflightCorrectionAttacks(nestedPreflightCorrection, preflight, preflightSource);
   const retryRootCorrectionRows = retryRootCorrectionAttacks(retryRootCorrection, preflight, failedOfficialReceiptText, failedOfficialReceipt);
   const runtimeParentCorrectionRows = runtimeParentCorrectionAttacks(runtimeParentCorrection, preflight, parsed, failedFormalV02TreeSha256, source);
+  const reAuditCorrectionRows = reAuditCorrectionAttacks(reAuditCorrection, evidence);
   const aggregateFinals = [baseline.final, exit86.final, interrupted.final];
   const outputRoots = preflight.productionPreflights.map(row => row.outputRoot);
   const uniquePids = new Set([
@@ -702,7 +721,7 @@ async function audit(parsed) {
       && resourceTotals.nativeCompileBlenderStarts === 4 && resourceTotals.artifactAuditBlenderStarts === 3,
     ARTIFACT_AND_RECEIPT_ROSTERS_EXACT: [baseline, exit86, interrupted].every(row => row.compile.exact),
     PROCESS_AND_ATTEMPT_IDENTITIES_UNIQUE: uniquePids.size === 9 && new Set(outputRoots).size === outputRoots.length,
-    SEMANTIC_ATTACKS_MINIMUM_64: attacks.length === 72 && attacks.filter(row => row.rejected).length >= 64 && correctionRows.every(row => row.rejected) && gate0CorrectionRows.every(row => row.rejected) && entryCorrectionRows.every(row => row.rejected) && nestedPreflightCorrectionRows.every(row => row.rejected) && retryRootCorrectionRows.every(row => row.rejected) && runtimeParentCorrectionRows.every(row => row.rejected),
+    SEMANTIC_ATTACKS_MINIMUM_64: attacks.length === 72 && attacks.filter(row => row.rejected).length >= 64 && correctionRows.every(row => row.rejected) && gate0CorrectionRows.every(row => row.rejected) && entryCorrectionRows.every(row => row.rejected) && nestedPreflightCorrectionRows.every(row => row.rejected) && retryRootCorrectionRows.every(row => row.rejected) && runtimeParentCorrectionRows.every(row => row.rejected) && reAuditCorrectionRows.every(row => row.rejected),
     ZERO_RENDER_MODEL_NETWORK_DOCKER: ['renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses'].every(key => operation.semanticOperations[key] === 0)
       && aggregateFinals.every(receipt => ['renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses'].every(key => receipt.resourceTotals[key] === 0)),
   };
@@ -714,13 +733,14 @@ async function audit(parsed) {
   const nestedPreflightCorrectionRejected = nestedPreflightCorrectionRows.filter(row => row.rejected).length;
   const retryRootCorrectionRejected = retryRootCorrectionRows.filter(row => row.rejected).length;
   const runtimeParentCorrectionRejected = runtimeParentCorrectionRows.filter(row => row.rejected).length;
+  const reAuditCorrectionRejected = reAuditCorrectionRows.filter(row => row.rejected).length;
   const critical = [
     gates.LIVE_MATCHING_PROCESS_BLOCKS_DUPLICATE_SPAWN,
     gates.INTERRUPTED_ATTEMPT_TERMINAL_AND_NON_PROMOTABLE,
     gates.RECOVERY_STARTS_ZERO_ADDITIONAL_NATIVE_COMPILE_BLENDER_AFTER_COMPILE_CHECKPOINT,
     gates.DISK_RESERVE_AND_JIT_READMISSION_UNCHANGED,
   ].every(Boolean);
-  const scientificVerdict = gatePassed === 34 && attackRejected >= 64 && correctionRejected === 8 && gate0CorrectionRejected === 6 && entryCorrectionRejected === 2 && nestedPreflightCorrectionRejected === 2 && retryRootCorrectionRejected === 2 && runtimeParentCorrectionRejected === 5
+  const scientificVerdict = gatePassed === 34 && attackRejected === 72 && correctionRejected === 8 && gate0CorrectionRejected === 6 && entryCorrectionRejected === 2 && nestedPreflightCorrectionRejected === 2 && retryRootCorrectionRejected === 2 && runtimeParentCorrectionRejected === 5 && reAuditCorrectionRejected === 2
     ? 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED'
     : critical ? 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED' : 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_REJECTED';
   const body = {
@@ -748,6 +768,8 @@ async function audit(parsed) {
     failedFormalV02: { exact: failedFormalV02Exact, fileCount: failedFormalV02Rows.length, treeSha256: failedFormalV02TreeSha256 },
     runtimeParentCorrectionAttacks: runtimeParentCorrectionRows,
     runtimeParentCorrectionAttackSummary: { total: runtimeParentCorrectionRows.length, rejected: runtimeParentCorrectionRejected },
+    reAuditCorrectionAttacks: reAuditCorrectionRows,
+    reAuditCorrectionAttackSummary: { total: reAuditCorrectionRows.length, rejected: reAuditCorrectionRejected },
     gates,
     gatePassed,
     gateTotal: Object.keys(gates).length,
@@ -768,7 +790,7 @@ export async function runAudit(argv) {
   const parsed = parseArguments(argv);
   const result = await audit(parsed);
   await writeExclusive(parsed.output, result);
-  process.stdout.write(`BFS_B58_AUDIT ${result.gatePassed}/${result.gateTotal} attacks=${result.attackSummary.rejected}/${result.attackSummary.total} correction=${result.correctionAttackSummary.rejected}/${result.correctionAttackSummary.total} gate0=${result.gate0CorrectionAttackSummary.rejected}/${result.gate0CorrectionAttackSummary.total} entry=${result.entryCorrectionAttackSummary.rejected}/${result.entryCorrectionAttackSummary.total} nested=${result.nestedPreflightCorrectionAttackSummary.rejected}/${result.nestedPreflightCorrectionAttackSummary.total} retry=${result.retryRootCorrectionAttackSummary.rejected}/${result.retryRootCorrectionAttackSummary.total} runtime=${result.runtimeParentCorrectionAttackSummary.rejected}/${result.runtimeParentCorrectionAttackSummary.total} ${result.scientificVerdict}\n`);
+  process.stdout.write(`BFS_B58_AUDIT ${result.gatePassed}/${result.gateTotal} attacks=${result.attackSummary.rejected}/${result.attackSummary.total} correction=${result.correctionAttackSummary.rejected}/${result.correctionAttackSummary.total} gate0=${result.gate0CorrectionAttackSummary.rejected}/${result.gate0CorrectionAttackSummary.total} entry=${result.entryCorrectionAttackSummary.rejected}/${result.entryCorrectionAttackSummary.total} nested=${result.nestedPreflightCorrectionAttackSummary.rejected}/${result.nestedPreflightCorrectionAttackSummary.total} retry=${result.retryRootCorrectionAttackSummary.rejected}/${result.retryRootCorrectionAttackSummary.total} runtime=${result.runtimeParentCorrectionAttackSummary.rejected}/${result.runtimeParentCorrectionAttackSummary.total} reaudit=${result.reAuditCorrectionAttackSummary.rejected}/${result.reAuditCorrectionAttackSummary.total} ${result.scientificVerdict}\n`);
   return result;
 }
 

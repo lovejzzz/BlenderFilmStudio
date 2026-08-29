@@ -4901,3 +4901,13 @@ v0.3 evidence commit `6d8532b`与origin exact后，formal runner完整结束并�
 Old verdict为`RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED`：31/34 gates、71/72 original attacks；C1 8/8、C2 6/6、C3 2/2、C4 2/2、C5 2/2、C6 5/5。三项gate失败同源：terminal event实际字段为`payload.receipt`，auditor错误读取`payload.finalReceipt`；A64失败是validator只检查64-hex形状，未要求log hash等于immutable observation。
 
 v0.3 attempt/formal tree共141 files、约1.1 MiB，canonical tree SHA `c7f5ed6bddd030be24d86a8592e5dd80e24832de0ac72e0cd6fad1cf87bbae89`。Old audit file SHA/self-hash `ca162c4b…` / `f52076d5…`，results SHA/self-hash `0cf05356…` / `72cb12e6…`，receipt SHA/self-hash `de96e875…` / `45710ecf…`。C7只授权修独立auditor的两处binding并新增zero-Blender re-audit runner；不得改141-file evidence。下一动作提交推送C7 spec/protocol、完整v0.3 evidence与本entry，再实现新工具；reaudit root在此之前必须不存在。
+
+## J-372 · B58-C7 corrected auditor与immutable re-audit runner候选
+
+Date: 2026-08-29 · Type: B58 VERIFIER CORRECTION IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+C7 preregistration/evidence commit `9de260ff992301a106f81656e7e1faa879d3ea50`推送后，independent auditor只做两处授权修改：final exact读取actual frozen `JOB_FINALIZED.payload.receipt.receiptHash`；accounting validator新增`logSha256 === expectedLogSha256`。新增2项C7 attacks分别变异终结receipt binding与log equality。Scientific support现在要求exact 34/34、72/72及C7 2/2；C1-C6要求不变。
+
+新`run-b58-e1-c7-reaudit.mjs`只用Node built-ins，要求tool-freeze commit等于HEAD/origin，重算141-file evidence tree与old audit/results/receipt hashes，创建独立fresh output，spawn一次Node auditor，前后比较evidence tree byte identity，再写self-hashed results/receipt；operations冻结为1 Node auditor、0 Blender/render/model/network/Docker。
+
+未冻结隔离rehearsal输出到`/tmp`，返回34/34、72/72、C1 8/8、C2 6/6、C3 2/2、C4 2/2、C5 2/2、C6 5/5、C7 2/2，verdict `RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED`，无failed gates/attacks。Auditor/runner SHA-256为`0e414af9a713796ce079735f8f39f2dc53aec68ea6a19edbb88d84e16672be1a` / `663e64d1044dd59058519d2438be00b1438eecb513ff99767563ddc5fb77dadf`；syntax、targeted ESLint zero-warning及diff check通过。正式reaudit root仍不存在。下一动作提交推送工具与本entry形成tool-freeze，再运行一次正式zero-Blender C7 re-audit。
