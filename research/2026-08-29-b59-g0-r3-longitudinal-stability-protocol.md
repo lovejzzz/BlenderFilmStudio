@@ -26,6 +26,10 @@ The C1 rehearsal passed all 14 pre-audit gates and all 20 attacks, but the audit
 
 The C2 rehearsal proved that an intermediate seal cannot solve the deeper circularity: a result cannot use a gate stored inside itself to prove the validity of its own final hash, because changing that gate changes the hashed content. Before any formal R3 root existed, C3 aligned the auditor with the runner: `EVIDENCE_BOUNDED_AND_SELF_HASHED` projects start/sample bounds and hashes, while final-result byte count and self-hash are verified by the independent file-integrity layer and by candidate validation outside the result's own gate vector. Mutation A20 and direct self-hash validation remain fail-closed.
 
+### Preregistered correction C4: spec-relative total-span mutation
+
+The C3 rehearsal passed its synthetic control, 14/14 pre-audit gates and 19/20 attacks. A06 used a hard-coded forged span of 100 seconds, which violates the 360-second production spec but exceeds the three-second rehearsal minimum. Before any formal R3 root existed, C4 changed A06 to the selected spec's minimum total span minus one millisecond. The production threshold and attack identifier remain unchanged.
+
 Each sample records current Codex version and app identity, main PID set, renderer count, maximum renderer RSS, total Codex-tree RSS, system-wide free-memory percentage, available disk bytes, browser temporary-filesystem allocated bytes and entry count, forbidden-process counts, and matching post-start Codex crash reports. Large process listings and file inventories are never returned to the UI.
 
 ## Frozen longitudinal limits

@@ -1,7 +1,7 @@
 # B59-G0-R3-C3 · Non-circular final-result integrity correction
 
 Date: 2026-08-29
-Status: PREREGISTERED — implementation not yet changed
+Status: IMPLEMENTED — synthetic control validated; A06 fixture blocked by separately preregistered C4
 Formal R3 root at registration: absent
 
 ## Trigger
