@@ -1,7 +1,7 @@
 # B59-G0-R3-C2 · Synthetic-control sealing-order correction
 
 Date: 2026-08-29
-Status: PREREGISTERED — implementation not yet changed
+Status: IMPLEMENTED — insufficient due to circular result-integrity dependency; superseded by C3
 Formal R3 root at registration: absent
 
 ## Trigger

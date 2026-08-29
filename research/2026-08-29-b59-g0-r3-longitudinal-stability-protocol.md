@@ -22,6 +22,10 @@ The same rehearsal exposed that A05 used a hard-coded 1,000 ms forged interval, 
 
 The C1 rehearsal passed all 14 pre-audit gates and all 20 attacks, but the auditor blocked its synthetic admissible control. Diagnosis showed that the control projected `EVIDENCE_BOUNDED_AND_SELF_HASHED` while the aggregate result still carried its pre-projection self-hash; the result was sealed only after projection, leaving a stale false gate in an otherwise valid control. Before any formal R3 root existed, C2 added an intermediate result seal before gate projection, followed by the existing final seal. No observed evidence, attack, threshold or production gate changes.
 
+### Preregistered correction C3: non-circular result integrity
+
+The C2 rehearsal proved that an intermediate seal cannot solve the deeper circularity: a result cannot use a gate stored inside itself to prove the validity of its own final hash, because changing that gate changes the hashed content. Before any formal R3 root existed, C3 aligned the auditor with the runner: `EVIDENCE_BOUNDED_AND_SELF_HASHED` projects start/sample bounds and hashes, while final-result byte count and self-hash are verified by the independent file-integrity layer and by candidate validation outside the result's own gate vector. Mutation A20 and direct self-hash validation remain fail-closed.
+
 Each sample records current Codex version and app identity, main PID set, renderer count, maximum renderer RSS, total Codex-tree RSS, system-wide free-memory percentage, available disk bytes, browser temporary-filesystem allocated bytes and entry count, forbidden-process counts, and matching post-start Codex crash reports. Large process listings and file inventories are never returned to the UI.
 
 ## Frozen longitudinal limits
