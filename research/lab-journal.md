@@ -5363,3 +5363,13 @@ Date: 2026-08-29 · Type: DIAGNOSTIC PASS / PRODUCTION-SMOKE PREREGISTRATION · 
 D4 tool freeze `2b81b26…`；one Blender 0.46秒/peak RSS 237,944,832 bytes，captured surface errors zero。9/9 checks与独立audit PASS：neutral display/view/look exact，Cycles CPU/64/denoise/fixed seed exact，旧Eevee name reject、`BLENDER_EEVEE`+16 viewport/final samples accept，motion blur与MLEXR/HALF/ZIP exact，zero render/external calls。result/receipt file/self hashes为`8c911957…/2e09fe11…`和`c7fd3bba…/67b951e0…`。
 
 C8在production code未改前授权两项runtime-only更正，并预注册D5真实generator smoke：冻结production generator，one Blender/zero render，独立root，512 MiB write/100 GiB reserve；必须完整生成3 assets+motion+master+valid report。D5通过前不更新formal Node tools、不运行v0.3。
+
+## J-423 · B62 D5生产generator smoke PASS与C9 v0.3预注册
+
+Date: 2026-08-29 · Type: PRODUCTION GENERATOR SMOKE PASS / FORMAL RETRY PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+D5 tool freeze `2288a2edd2aa15085da99bbc2bdb50ccc873619d`推送后，真实Blender 5.2 production generator在0.729秒、peak RSS 268,468,224 bytes内完成。它生成三份asset libraries、motion library与master blend；timeline为1–288/24 fps/三镜头，neutral ACES transform exact。8/8 checks与独立Node audit均PASS，zero render/model/network/Docker。
+
+D5 root共10 files/895,636 bytes/tree `023e5c5c…`；result file/self `ce348efb…/a7157c11…`，receipt file/self `8ad9c755…/7f0fc9e6…`，verdict为`B62_PRODUCTION_GENERATOR_SMOKE_PROVEN`。磁盘仍约290 GiB available。
+
+C9在formal Node工具修改前绑定C6–C9、retained v0.2/D3、D4/D5 PASS与D5-frozen production Blender tools。只允许三个Node工具切换v0.3 fresh roots、要求`BLENDER_EEVEE`与neutral color exact；18 gates/16 attacks、6 Blender/291 renders、2 GiB/100 GiB及claim boundary不变。下一动作提交推送D5+C9，再实现Node binding、fresh-clone rehearsal和official preflight。
