@@ -5617,3 +5617,13 @@ C4 retry以tool freeze `758177c`在fresh v0.4 root运行。PRIMARY/INDEPENDENT�
 12个candidate在九帧全合格；按冻结selection选择`RS_S200_E225`：start 2.0、end 2.25、maximum adjacent integer delta 0.00394722、mean absolute scale deviation 0.125。frame288 clamped area从static 0.933787降至0.777446；motion-aware九帧clamped area范围0.464256–0.777446，全部低于不变0.90。正式verdict为`B62_CLOSE_CAMERA_MOTION_AWARE_BOUNDED_CANDIDATE_FOUND`。root 9 files/726,466 bytes/tree `22bbe021a67027186290229ca4fbbc6d6ca6ad25d8939eb3e22003eef40536bd`；receipt file/self `68777a48…/db007e5b…`，audit file/self `861e10fc…/ccba90d9…`。
 
 D6在任何新工具创建前解封198/210/222/234/246/258/270/282八帧。fresh master内同时bake STATIC scale2与MOTION_AWARE 2→2.25 cameras；第二Blender只在8×2 roster渲染960×540 Cycles CPU 16 spp EXR/PNG；第三Blender独立复开、验证96-frame bake、只测八个validation frames并解码16 EXR。motion必须8/8通过原geometry template，16像素finite/non-empty、每pair different；静态结果描述性保留。即使machine supported，仍需原分辨率人工复核，不能称最终电影画质。
+
+## J-449 · B62-Q1-D6 v0.1外部OCIO冲突与C1预注册
+
+Date: 2026-08-29 · Type: RETAINED PRE-RENDER FAILURE / RUNTIME CONFIG CORRECTION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+D6 tool freeze `667e66f7cbc45dd0e17a06dd0978d1b71d218479`推送后，BUILD Blender成功创建双camera/双action、96-frame bake与343,292-byte fresh derived scene `bbd49686…`；RENDER Blender在0.528秒、peak sampled RSS 261,046,272 bytes处退出，0 render完成。错误为`Medium High Contrast`不在当前look enum；日志同时证明runner强制使用repo ACES-v2 OCIO，该配置只暴露`None`与`ACES 1.3 Reference Gamut Compression`，与D6冻结的Blender-native AgX合同冲突。
+
+v0.1永久保留6 files/584,079 bytes/tree `8cd9da10dbf8c038e32ed05edc89a3fad3c9a31682789e88075f2c4a89420a8a`；failure file/self `ff13fea8…/e2d33064…`，build file/self `c599deeb…/2e0aa531…`。本轮没有validation pixel或geometry observation，scientific verdict为null。
+
+C1在任何工具修改前只授权runner删除Blender child的`OCIO`环境覆盖，使用Blender 5.2 bundled color config；auditor绑定retained v0.1并切fresh v0.2。三份Blender Python bytes、相机、frames、16 renders、AgX/Medium High Contrast、EXR、geometry/pixel阈值与预算全部不变。

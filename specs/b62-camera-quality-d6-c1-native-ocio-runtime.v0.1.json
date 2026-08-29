@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareHoldoutCorrection.v0.1",
+  "correctionId": "B62-Q1-D6-C1",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-motion-aware-holdout-v0-1",
+    "tree": {"files": 6, "bytes": 584079, "treeSha256": "8cd9da10dbf8c038e32ed05edc89a3fad3c9a31682789e88075f2c4a89420a8a"},
+    "failure": {"uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-1/failure.json", "sha256": "ff13fea81e2cda43ade1f8cae02c95d1e73706a4dd875bc7fc0777a603e2ec4e", "failureHash": "e2d33064e919dbc9c4627a436524addd0403c730d5b2d3ffd93b7a0726410c3d"},
+    "build": {"uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-1/build.json", "sha256": "c599deeb224ced37336a39a8e8b9d31ad366a67696224f1ed189597d5a2e1e7d", "reportHash": "2e0aa53101f9566c51a8dcf82502e4a6bcd519ffbf6a4a254e0d48ccb6c8bf75", "status": "PASS"},
+    "renderProcess": {"outcome": "CHILD_FAILED", "elapsedMs": 528, "renderCallsCompleted": 0, "reason": "enum Medium High Contrast not found in external ACES-v2 OCIO look roster"}
+  },
+  "diagnosis": {
+    "baseContract": "D6 freezes Blender-native AgX with Medium High Contrast.",
+    "implementationConflict": "The D6 runner inherited an explicit OCIO environment override pointing to the repository ACES-v2 config. Under that config Blender exposed only None and ACES 1.3 Reference Gamut Compression looks, so the frozen Blender-native look could not be selected.",
+    "boundary": "No render call began and no validation pixel or geometry was observed."
+  },
+  "frozenBeforeCorrection": {
+    "toolFreezeCommit": "667e66f7cbc45dd0e17a06dd0978d1b71d218479",
+    "builderSha256": "31738bf4a4f34e562fd5182235f6ee16e7d6bef282fd0d3828777be827f4485d",
+    "renderSha256": "9553f7a2f74af7da37718a0b00549d01117f064e8d5e0bbdc8a0268f7968e4e4",
+    "independentSha256": "3ae58ef4be3532e507ab72cafcd8e045feed977287d71b459a0d926b38a5f359",
+    "runnerSha256": "7b535b220ea573aeb9944b88fd01d23155de96b6a5bee7d791bb6cdb88d0cd3a",
+    "auditorSha256": "4d8c3dd11e21d431c5258d8d86294ed3a86b148184bdecb74cdbd4e4b909a723"
+  },
+  "authorizedChanges": {
+    "runner": "Remove only the OCIO environment override from D6 Blender child processes, bind C1 and retained v0.1, and use the fresh retry root.",
+    "auditor": "Bind C1 and retained v0.1, require the three Blender Python tools to remain byte-identical, and use the fresh retry root.",
+    "retryRoot": "experiments/b62-camera-quality-motion-aware-holdout-v0-2"
+  },
+  "unchanged": [
+    "All three Blender Python tool bytes",
+    "Blender 5.2 executable and build identity",
+    "Fresh master build and both 96-frame camera bakes",
+    "Eight validation frames, two conditions and 16 Cycles renders",
+    "AgX, Medium High Contrast, 960x540, CPU, 16 spp and 32-bit multilayer EXR",
+    "All geometry, pixel, routing, process, resource, verdict and human-review gates",
+    "Zero model/network/Docker calls and immutable-failure policy"
+  ]
+}

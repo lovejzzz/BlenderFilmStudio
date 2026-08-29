@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityProcessReceipt.v0.1",
+  "experimentId": "B62-Q1-D6",
+  "processId": "RENDER",
+  "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+  "args": [
+    "--background",
+    "--factory-startup",
+    "--disable-autoexec",
+    "experiments/b62-camera-quality-motion-aware-holdout-v0-1/scene/B62_PHASE0_D6_MOTION_AWARE.blend",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "blender/render_b62_q1_d6_motion_aware_holdout_pairs.py",
+    "--",
+    "--output-dir",
+    "experiments/b62-camera-quality-motion-aware-holdout-v0-1/renders",
+    "--report",
+    "experiments/b62-camera-quality-motion-aware-holdout-v0-1/render.json",
+    "--derived-sha256",
+    "bbd496863ae16c0df0c0d1e9bf04ab4b5cd872a08aee310fe0d626a33a918eef"
+  ],
+  "result": {
+    "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+    "version": "0.2.0",
+    "outcome": "CHILD_FAILED",
+    "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "args": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-motion-aware-holdout-v0-1/scene/B62_PHASE0_D6_MOTION_AWARE.blend",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b62_q1_d6_motion_aware_holdout_pairs.py",
+      "--",
+      "--output-dir",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-motion-aware-holdout-v0-1/renders",
+      "--report",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-motion-aware-holdout-v0-1/render.json",
+      "--derived-sha256",
+      "bbd496863ae16c0df0c0d1e9bf04ab4b5cd872a08aee310fe0d626a33a918eef"
+    ],
+    "budgets": {
+      "wallTimeMs": 300000,
+      "maxRssBytes": 2147483648,
+      "maxLogBytes": 2097152,
+      "maxOutputFiles": 256,
+      "maxOutputBytes": 134217728,
+      "sampleIntervalMs": 100
+    },
+    "metrics": {
+      "elapsedMs": 528,
+      "peakSampledRssBytes": 261046272,
+      "logBytes": 1738,
+      "output": {
+        "fileCount": 4,
+        "bytes": 579235,
+        "symlinkCount": 0
+      }
+    },
+    "breach": null,
+    "child": {
+      "pid": 91698,
+      "exitCode": 1,
+      "signal": null,
+      "spawnError": null
+    },
+    "termination": {
+      "requested": false,
+      "awaited": true
+    },
+    "logSha256": "7e5f60fba25a50deeb29be6c07406b9237bdeb12f1b89674ffc6c41f9c3fb155",
+    "outputPreview": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.060  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.060  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.060  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.060  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.060  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:00.254  blend            | Read blend: \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-motion-aware-holdout-v0-1/scene/B62_PHASE0_D6_MOTION_AWARE.blend\"\nTraceback (most recent call last):\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b62_q1_d6_motion_aware_holdout_pairs.py\", line 164, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b62_q1_d6_motion_aware_holdout_pairs.py\", line 124, in main\n    scene.view_settings.look = \"Medium High Contrast\"\n    ^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: bpy_struct: item.attr = val: enum \"Medium High Contrast\" not found in ('None', 'ACES 1.3 Reference Gamut Compression')\n\nError: script failed, file: '/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/render_b62_q1_d6_motion_aware_holdout_pairs.py', exiting.\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n",
+    "outputPreviewTruncated": false
+  },
+  "processHash": "a7b573f94be7f91c8d24971832d3abda93a043fcd509a651994b3dff4afc8f50"
+}
