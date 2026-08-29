@@ -5647,3 +5647,13 @@ C2 tool freeze `7622c31636e4016998862c9d5f34c6fc7d4c010c`让v0.3成功进入Blen
 v0.3永久保留27 files/141,080,094 bytes/tree `6f3516b5ad2957de578b66929f5b5973d2a51887fb8320130424293aa049db06`；failure file/self `bb6df76f…/ac124c52…`，build file/self `55c54386…/baed0c5b…`，render-process file/self `67c78365…/f77a723d…`。partial images明确invalidated，不打开、不用于相机或阈值调优。
 
 11份EXR共133,786,016 bytes，最大12,168,649 bytes；按最大值投影16份为194,698,384 bytes，PNG投影约10.7 MB。C3在任何工具修改前只授权runner/auditor把`projectedWriteBytes/maxOutputBytes`从128 MiB改为有界256 MiB，100 GiB minimum free reserve不变，并绑定retained v0.3、切fresh v0.4。三份Blender Python bytes、16-render全量重跑、ACES 2.0、camera/frame/geometry/pixel/verdict与其他资源门全部不变。
+
+## J-452 · B62-Q1-D6 v0.4机器与人类工程复核共同PASS
+
+Date: 2026-08-29 · Type: FORMAL SEALED VALIDATION PASS / LABELED HUMAN ENGINEERING REVIEW · New Blender processes: 3 · New Blender renders: 16
+
+C3 retry以tool freeze `7b0b942a5c9d0f3f5ea4fc6851ec3a4d406a37fc`在fresh v0.4全量执行。BUILD 0.533秒、peak RSS 266,665,984 bytes；RENDER 40.585秒、peak RSS 1,372,553,216 bytes、output 205,901,268 bytes；INDEPENDENT 5.182秒、peak RSS 314,490,880 bytes；Node auditor 0.149秒。四个进程均PASS、无breach，20/20 checks通过，16次Cycles、16 EXR+16 PNG、96-frame双camera bake、独立复开/EXR解码、zero model/network/Docker全部成立。
+
+motion-aware在198/210/222/234/246/258/270/282八个新解封帧全部通过不变geometry template；STATIC前七帧通过，282以clamped area 0.921816超过冻结0.90失败。正式scientific verdict为`B62_CLOSE_CAMERA_MOTION_AWARE_PASSES_SEALED_VALIDATION`。receipt file/self `b123ffef…/553ce830…`，audit file/self `59d8e937…/820d0c56…`；human-review写入前formal root为43 files/205,982,158 bytes/tree `8c31fa4a…`。
+
+随后逐张打开全部16张960×540 PNG做有标签工程复核。198–210差异极小且无退化；222开始略增呼吸空间；234–258逐步保留更多头盔边界、肩部与背景；270差异显著；282的STATIC明显过紧，MOTION_AWARE保持主体与环境可读。人工方向与machine verdict一致，camera engineering review PASS。边界不变：低模角色、16 spp诊断柔化、单镜头抽帧不证明电影级资产、最终调色、叙事或连续时间稳定性。
