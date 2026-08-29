@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorGate0BindingCorrection.v0.1",
+  "correctionId": "B58-E1-C2",
+  "status": "PREREGISTERED_AFTER_CANDIDATE_TOOLING_BEFORE_TOOL_FREEZE_OR_OFFICIAL_OUTPUT",
+  "date": "2026-08-29",
+  "parent": {
+    "b58Spec": ["specs/restart-safe-production-orchestrator.v0.1.json", "a1ea52598d66263989c56f9737917b7ff297122b6731ec31d6f535cacc32cf41"],
+    "b58Protocol": ["research/2026-08-28-b58-e1-restart-safe-production-orchestrator-protocol.md", "50c3d8f8e61ea894e4dadf0d1f2a2ff92e793de56bacfe1f2d01d48951d35f81"],
+    "c1Spec": ["specs/restart-safe-production-orchestrator-verifier-accounting-correction.v0.1.json", "1a8f17bda34e7d1f7c683b742e93a2f32d1b9c3a1651388c68efddf566f9c3cd"],
+    "c1Protocol": ["research/2026-08-28-b58-e1-c1-verifier-process-accounting-correction.md", "e297c5b2396aac39409fc0eeb8185d2d19deace0ebf10bfb347aa6091aff7b34"]
+  },
+  "gate0": {
+    "evidenceCommit": "5d7d307cbc389592b765b6ad021a9796f232f432",
+    "results": ["experiments/gate0-closeout-v0-1/results.json", "588da9723eb7cfd7c611e2eb8122da1e6d29a93bee19e55c36eae85fbf0db54a"],
+    "audit": ["experiments/gate0-closeout-v0-1/audit.json", "6d3a372f5fc3f07a3a154d22b8e9d124b264a8d4532db2fd5a777f3ed6395af7"],
+    "requiredVerdict": "GATE0_HOST_STABILITY_CLOSED",
+    "requiredGates": 15,
+    "requiredAttacks": 20,
+    "liveSentinel": {
+      "historyPath": "/Users/tianxing/.local/state/BlenderFilmStudio/capacity-sentinel-v0-2/history.json",
+      "latestPath": "/Users/tianxing/.local/state/BlenderFilmStudio/capacity-sentinel-v0-2/latest.json",
+      "alertPath": "/Users/tianxing/.local/state/BlenderFilmStudio/capacity-sentinel-v0-2/alert.json",
+      "maximumAgeSeconds": 1200,
+      "minimumAvailableBytes": 268435456000,
+      "maximumBrowserBytes": 67108864
+    }
+  },
+  "authorizedCorrection": {
+    "parentGateReplaced": "PREREGISTRATION_AND_TOOL_FREEZE_PUSHED",
+    "effectiveGate": "PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED",
+    "denominatorRemains": 34,
+    "preflightRequirement": "Gate 0 results/audit hashes, self-hashes, verdict, 15/15 gates, 20/20 attacks and a fresh HEALTHY live sentinel must all pass before any B58 production preflight subprocess is created.",
+    "formalRequirement": "The single-use runner and independent auditor must bind and revalidate the same Gate 0 evidence carried by the accepted B58 preflight."
+  },
+  "additionalSemanticAttacks": [
+    "C2_A01_GATE0_RESULTS_SHA_MUTATION",
+    "C2_A02_GATE0_AUDIT_SHA_MUTATION",
+    "C2_A03_GATE0_VERDICT_MUTATION",
+    "C2_A04_GATE0_GATE_COUNT_MUTATION",
+    "C2_A05_GATE0_ATTACK_COUNT_MUTATION",
+    "C2_A06_GATE0_LIVE_SENTINEL_STALE"
+  ],
+  "unchanged": [
+    "B57 parent identity and production surface",
+    "four-stage B58 DAG and all recovery semantics",
+    "C1 disjoint process accounting and operation ceilings",
+    "34-gate denominator and 72 parent attacks",
+    "100 GiB reserve plus 0.5 GiB projected write",
+    "zero render, model, network and Docker operations",
+    "all three official formal root identities"
+  ],
+  "formalRootsRemainAbsentAtRegistration": [
+    "experiments/restart-safe-production-orchestrator-preflight-v0-1",
+    "experiments/restart-safe-production-orchestrator-attempt-v0-1",
+    "experiments/restart-safe-production-orchestrator-v0-1"
+  ]
+}

@@ -4773,3 +4773,13 @@ Final verdict为`GATE0_HOST_STABILITY_CLOSED`。Results/audit SHA为`588da9723eb
 Audit时live sentinel为HEALTHY、latest age 882,411 ms、available 319,742,877,696 bytes、browser temp 20,480 bytes、无alert；launchd loaded、runs 5、last exit 0、interval 900 seconds。Codex仍为PID 26962、expected version/hash/bundle且无新crash report。Closeout自身Blender/Docker/network/model/cleanup/service mutation全0。
 
 Gate 0现在从`SHORT_WINDOW_READMITTED`正式提升为`CLOSED_WITH_ACTIVE_SENTINEL_AND_TESTED_RECOVERY`。这只解除宿主安全阻断；下一动作提交推送证据后执行独立B58 minimal preflight，只有preflight通过才允许恢复B58生产编排验证。
+
+## J-359 · B58-E1-C2 Gate 0绑定修正预注册
+
+Date: 2026-08-29 · Type: B58 PREREGISTRATION CORRECTION · New Blender processes: 0 · New Blender renders: 0
+
+Gate 0 evidence commit `5d7d307cbc389592b765b6ad021a9796f232f432`与origin exact后，静态审查确认B58三份formal candidate tools是在J-309–J-329 development matrix后、J-330暂停点留下的未跟踪候选；三个official roots仍全部不存在。Candidate绑定B57与C1，但尚未绑定后来成为硬前置的Gate 0，不能原样执行official preflight。
+
+C2冻结唯一修正：把原34门中的`PREREGISTRATION_AND_TOOL_FREEZE_PUSHED`有效解释替换为`PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED`，denominator仍34。Official preflight必须在创建任何五个production preflight children之前验证Gate 0 results/audit exact SHA、自哈希、`GATE0_HOST_STABILITY_CLOSED`、15/15 gates、20/20 attacks，以及fresh self-hashed HEALTHY sentinel、250 GiB floor、64 MiB browser ceiling与无alert；runner/auditor必须绑定同一receipt。
+
+新增6项C2攻击覆盖results/audit SHA、verdict、gate/attack counts和stale sentinel；原72 attacks、C1 8 attacks、DAG、process ceilings、100 GiB+0.5 GiB disk门及zero render/model/network/Docker均不变。下一动作先提交推送C2 spec/protocol/journal，再修改未冻结candidate tools；正式根继续禁止创建。
