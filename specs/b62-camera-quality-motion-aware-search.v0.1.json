@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareSearch.v0.1",
+  "experimentId": "B62-Q1-D5",
+  "title": "Bounded motion-aware radial-scale search after static close-camera holdout rejection",
+  "date": "2026-08-29",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "question": "Can a smooth, monotonic radial-scale path preserve the D4 occlusion fix while preventing the corrected subject from growing beyond the unchanged geometry template across the close shot?",
+  "parentEvidence": {
+    "d4Formal": {
+      "root": "experiments/b62-camera-quality-holdout-render-v0-5",
+      "tree": {
+        "files": 35,
+        "bytes": 54124627,
+        "treeSha256": "f1f25fa48d1ab4ad54970ae0e599e8cd66c7684d1b5677fc3053b7a894d5dec7"
+      },
+      "receipt": {
+        "uri": "experiments/b62-camera-quality-holdout-render-v0-5/receipt.json",
+        "sha256": "8a7c6cd045eaf9d180cc332bb909fc73efc518703b8cd60e5f09d066ab4bbe64",
+        "receiptHash": "119c1028e2a3e079af6ca0497cd3da3ac60a4ac690d984d77f377b8087e1d73b"
+      },
+      "audit": {
+        "uri": "experiments/b62-camera-quality-holdout-render-v0-5/audit.json",
+        "sha256": "97fcca32776027335c9c104d4c5995af28cf17cc241a042c5f2e154f0a442cd9",
+        "auditHash": "e832532c2046dede02403d3546c3a46978b6aa509a7416d970a330888f058b87",
+        "status": "PASS",
+        "scientificVerdict": "B62_CLOSE_CAMERA_CORRECTION_FAILS_FROZEN_HOLDOUT"
+      },
+      "independent": {
+        "uri": "experiments/b62-camera-quality-holdout-render-v0-5/independent.json",
+        "sha256": "28adf8ec024bfa807b1f9ee1b1f924c584d0c7d32e7198b23890638cecd186d8",
+        "originalFailedFrames": [193, 204, 228, 252, 276, 288],
+        "correctedPassedFrames": [193, 204, 228, 252, 276],
+        "correctedFailedFrames": [288],
+        "frame288ClampedArea": 0.93378717684983
+      }
+    },
+    "d3Search": {
+      "root": "experiments/b62-camera-quality-bounded-candidate-search-v0-2",
+      "tree": {
+        "files": 9,
+        "bytes": 1250026,
+        "treeSha256": "94e04a659177b36506f8be161068379b5583b0bcf1160dfe0895494fa02856b8"
+      },
+      "selectedCandidateId": "AZ_M045_R200_L065",
+      "derivationFrames": [216, 240, 264]
+    },
+    "masterScene": {
+      "uri": "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+      "sha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"
+    }
+  },
+  "hypothesis": "At least one candidate with radial scale 2.0 at the shot start and a larger end scale will pass the unchanged geometry template on all nine exposed derivation frames while remaining monotonic and changing by at most 0.02 scale units per integer frame.",
+  "cameraFamily": {
+    "sourceCamera": "CAM_CLOSE_REFLECTION",
+    "lookAtTarget": [0.0, 0.67, 1.72],
+    "azimuthDegreesAroundWorldZ": -45,
+    "lensMillimeters": 65.0,
+    "framesInclusive": [193, 288],
+    "normalizedTime": "u=(frame-193)/(288-193)",
+    "interpolation": "smoothstep(u)=3*u^2-2*u^3",
+    "radialScale": "s(frame)=startScale+(endScale-startScale)*smoothstep(u)",
+    "transform": "For evaluated source camera position C and target T, set C'=T+Matrix.Rotation(-45 degrees, Z)@(C-T)*s(frame), then track -Z to T with Y up.",
+    "startScaleGrid": [1.75, 2.0, 2.25],
+    "endScaleGrid": [2.0, 2.25, 2.5, 2.75, 3.0],
+    "candidateFilter": "endScale >= startScale",
+    "expectedCandidateCount": 14,
+    "baselineCandidate": "RS_S200_E200",
+    "maximumPerIntegerFrameScaleDelta": 0.02,
+    "otherCameraChangesAllowed": false
+  },
+  "derivation": {
+    "frames": [193, 204, 216, 228, 240, 252, 264, 276, 288],
+    "priorStatus": "EXPOSED_BY_D3_OR_D4",
+    "baselineReproduction": "RS_S200_E200 must reproduce the retained D3 selected-candidate observations at frames 216/240/264 and retained D4 corrected observations at frames 193/204/228/252/276/288 within 1e-9 for compared floats and exactly for discrete fields.",
+    "geometryTemplate": {
+      "faceAnchorsExact": ["B62_VISOR", "B62_EYE_SLIT"],
+      "helmetVisualBlockerShareMaximum": 0.7,
+      "characterVisualBlockerShareMinimum": 0.2,
+      "characterVisualBlockerShareMaximum": 0.9,
+      "characterOnScreenVertexFractionMinimum": 0.1,
+      "characterOnScreenVertexFractionMaximum": 0.6,
+      "characterClampedUnionAreaFractionMinimum": 0.35,
+      "characterClampedUnionAreaFractionMaximum": 0.9,
+      "visibleSemanticAnchorCountMinimum": 2
+    },
+    "candidateFeasibleWhen": "The candidate passes the complete unchanged template on all nine derivation frames, is monotonic nondecreasing, and its maximum adjacent integer-frame scale delta is at most 0.02.",
+    "selectionOrder": [
+      "feasible candidates only",
+      "minimum absolute startScale minus 2.0",
+      "minimum absolute endScale minus 2.0",
+      "minimum mean absolute per-frame scale deviation from 2.0 across frames 193 through 288",
+      "candidateId lexical ascending"
+    ]
+  },
+  "sealedValidation": {
+    "frames": [198, 210, 222, 234, 246, 258, 270, 282],
+    "status": "SEALED_AND_NOT_EVALUATED_FOR_D5",
+    "exclusionFromD5": "Neither D5 Blender search process nor its Node auditor may evaluate, project, ray-cast, render or derive feasibility on these frames.",
+    "futureUse": "Only a later preregistered fresh-scene paired Cycles validation may unseal them after the D5 candidate, if any, is frozen and pushed."
+  },
+  "independentImplementation": {
+    "blenderProcesses": 2,
+    "primaryAndIndependentMustNotImportEachOther": true,
+    "sharedNumericPrimitive": "Both implementations use Blender mathutils.Matrix.Rotation for the frozen world-Z rotation; all traversal, projection, roster and selection code remains independently authored.",
+    "agreement": "Candidate IDs, frame rosters, feasibility, selected candidate and discrete fields exact; compared finite floats within 1e-9."
+  },
+  "runtime": {
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "version": "Blender 5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"
+    },
+    "forbidden": ["render calls", "model calls", "network access", "Docker or Colima", "scene save", "sealed-validation evaluation"]
+  },
+  "processBudget": {
+    "runnerProcesses": 1,
+    "freshBlenderProcesses": 2,
+    "nodeAuditorProcesses": 1,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "maximumWallSecondsPerBlender": 180,
+    "maximumPeakResidentSetSizeBytesPerBlender": 2147483648,
+    "maximumCombinedLogBytesPerChild": 2097152,
+    "projectedWriteBytes": 134217728,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "toolFreeze": {
+    "requiredNewTools": [
+      "blender/search_b62_q1_d5_motion_aware_camera.py",
+      "blender/search_b62_q1_d5_motion_aware_camera_independent.py",
+      "scripts/run-b62-q1-d5-motion-aware-search.mjs",
+      "scripts/audit-b62-q1-d5-motion-aware-search.mjs"
+    ],
+    "sequence": [
+      "Commit and push this spec, protocol and journal while all four tools and the D5 root are absent.",
+      "Implement and statically validate all four tools without evaluating sealed frames.",
+      "Commit and push exact tool bytes.",
+      "Create fresh admission, run two Blender searches, then run the independent Node audit. Retain every failure."
+    ]
+  },
+  "output": {
+    "formalRoot": "experiments/b62-camera-quality-motion-aware-search-v0-1",
+    "immutableFailurePolicy": "Any failure preserves all partial outputs and requires a separately preregistered correction plus a fresh root."
+  },
+  "decision": {
+    "supportedVerdict": "B62_CLOSE_CAMERA_MOTION_AWARE_BOUNDED_CANDIDATE_FOUND",
+    "supportedWhen": "Both independent searches agree, the static baseline reproduces retained evidence and fails, at least one motion-aware candidate passes all nine derivation frames, the selected candidate follows the frozen order, sealed frames remain unobserved and every process/resource gate passes.",
+    "rejectedVerdict": "B62_CLOSE_CAMERA_MOTION_AWARE_BOUNDED_CANDIDATE_NOT_FOUND",
+    "rejectedWhen": "The complete admitted candidate family is evaluated correctly but no motion-aware candidate passes all nine derivation frames.",
+    "invalidated": "Any parent, tool, runtime, process, baseline-reproduction, candidate-roster, independent-agreement, resource or sealed-frame boundary failure yields scientificVerdict null."
+  },
+  "nonClaims": [
+    "D5 is a zero-render derivation search and cannot admit image quality or cinematic merit.",
+    "A derivation candidate cannot be promoted until a later fresh-scene paired Cycles experiment passes the eight sealed validation frames.",
+    "The grid does not optimize arbitrary camera motion, target position, lens, sensor, shift, depth of field or storytelling preference.",
+    "The unchanged 0.90 maximum may not be relaxed after any D5 observation."
+  ]
+}

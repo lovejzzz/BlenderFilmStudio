@@ -5553,3 +5553,19 @@ C4 retry以tool freeze `6c78738`在fresh v0.5 root全量执行。BUILD 0.530秒�
 随后逐张打开全部12张960×540 PNG做有标签工程复核。六张ORIGINAL均为头盔表面近乎占满画面，角色动作与环境关系不可读。CORRECTED在193–228显著恢复visor/eye、上身、手臂和chamber lights，252开始变紧，276–288头盔/肩部持续扩张、环境和身体信息减少，288缺少呼吸空间。人工观察与机械拒绝方向一致，但不改变machine verdict，也不是blind preference evidence。
 
 D4关闭了“静态有界修正能否覆盖全shot”的问题：能修复灾难性遮挡，但不能稳定覆盖运动中的整段构图。下一实验必须保留0.90门槛，预登记motion-aware camera path或scale compensation；不得推广v0.5 camera、删除frame288或把16 spp诊断图称为最终电影画质。
+
+## J-442 · B62 D4反例双站发布
+
+Date: 2026-08-29 · Type: EVIDENCE PUBLICATION · New Blender processes: 0 · New Blender renders: 0
+
+新增`/b62-camera-quality-holdout-v0-1/`研究页，公开六组ORIGINAL/CORRECTED Cycles PNG、0.90冻结门、frame288 0.933787反例、18/18 technical checks、实测执行成本与有标签人工复核边界。页面明确写为“修正生效、科学拒绝”，没有把5/6包装成晋级。
+
+GitHub Pages workflow在commit `9ab0d465642188302f17456a6a81afb73c3e9c92`成功；公开页面与首尾媒体HTTP 200。owner-only Sites保存v91并部署成功；站点身份验证首页、Journal、新页及首尾媒体全部HTTP 200。Sites继续只有owner一名允许用户、zero external visitor/group；浏览器自动化仍为0。
+
+## J-443 · B62-Q1-D5 motion-aware radial-scale搜索预注册
+
+Date: 2026-08-29 · Type: MOTION-AWARE CAMERA DERIVATION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+D4静态transform在前五帧改善但随shot推进持续变紧，因此D5只检验一个更窄假设：保持target、−45° azimuth和65 mm不变，让radial scale以smoothstep从start平滑过渡到end。start grid为1.75/2.0/2.25，end grid为2.0/2.25/2.5/2.75/3.0且end≥start，共14 candidates；相邻integer frame scale delta必须≤0.02。
+
+Derivation只允许使用已曝光的193/204/216/228/240/252/264/276/288九帧，并先要求constant `RS_S200_E200`复现D3/D4 retained geometry。198/210/222/234/246/258/270/282八帧在本entry中封存；D5 two-Blender zero-render search和Node auditor均禁止读取。完整几何template包括0.90 maximum不变；若找到候选也只能进入后续fresh-scene paired Cycles验证，不能直接推广。
