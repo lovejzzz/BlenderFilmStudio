@@ -16,6 +16,10 @@ During a new bounded read-only window, does host available-space loss quantitati
 
 D1 captures four immutable samples at least 30 seconds apart over at least 90 seconds. Each records host available bytes, logical and allocated bytes plus identity metadata for seven frozen files, Colima profile status, active VM-disk opener identity, running container names/count, and self-hash. It performs only read-only status/inspection calls and writes only its bounded formal evidence.
 
+### Preregistered correction C1: Colima status stream capture
+
+The first disposable rehearsal showed that Colima emits its status lines on stderr. Before any formal D1 root existed, C1 changed the runner and auditor to capture and parse bounded stdout plus stderr from the fixed `colima status` command. Exit status, byte ceiling and command accounting remain enforced. No observation or interpretation threshold changes.
+
 The next due time is anchored to the preceding actual capture, using the R3 C1 correction. Samples cannot be overwritten. Final results bind ordered sample hashes and the blocked R3 evidence; the auditor replays current identities and tests ten mutations.
 
 ## Frozen interpretation
