@@ -251,7 +251,7 @@ def main():
                     configure(camera, baseline, scale)
                     bpy.context.view_layer.update()
                     evaluated_matrix = camera.matrix_world.copy()
-                    frames.append({"frame": frame, "radialScale": scale, "evaluatedCameraLocation": [float(value) for value in evaluated_matrix.translation], "evaluatedCameraQuaternion": [float(value) for value in evaluated_matrix.to_quaternion()], **measure(scene, graph, camera, inventory)})
+                    frames.append({"frame": frame, "radialScale": scale, "evaluatedCameraLocation": [float(value) for value in evaluated_matrix.translation], "assignedCameraQuaternion": [float(value) for value in camera.rotation_quaternion], **measure(scene, graph, camera, inventory)})
                 monotonic = all(delta >= 0.0 for delta in deltas)
                 maximum_delta = max(deltas)
                 path_ok = monotonic and maximum_delta <= 0.02
