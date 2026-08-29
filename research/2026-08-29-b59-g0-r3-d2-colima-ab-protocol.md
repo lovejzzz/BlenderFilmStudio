@@ -1,7 +1,7 @@
 # B59-G0-R3-D2 · Controlled Colima disk A/B protocol
 
 Date: 2026-08-29  
-Status: PREREGISTERED — MUTATION NOT YET RUN  
+Status: COMPLETED — OPERATIONALLY RESTORED; FORMAL EVIDENCE INVALID
 Parent commit: `d1150093beeaf4c74b4d27312622ffe7267ebc49`
 
 ## Authority and question
@@ -58,3 +58,11 @@ Allocated sparse-disk deltas are reported alongside host-space deltas but do not
 The formal root must not exist before execution. The release-scoped files must be clean, HEAD must equal `origin/main`, and the parent evidence hashes must match. Initial state must match the frozen manifest. The independent auditor replays aggregates, identities, evidence hashes and 13 registered mutations.
 
 A passing evidence audit does not itself prove Colima caused R3. It proves only that the authorized intervention, observations and restoration are intact enough to support the frozen interpretation label. Regardless of label, D2 does not authorize cleanup or relaxation of the R3 disk-retention gate.
+
+## Closeout
+
+The controlled transition ran once. `colima stop default` completed successfully in 13.590 seconds; `colima start default` completed successfully in 12.891 seconds. All nine planned samples were captured with three samples and at least 60 seconds per phase. The four exact container IDs returned automatically, so no explicit `docker start` was needed. The authoritative `colima.yaml`, profile/runtime/mount type, container metadata, and sparse-disk identities were preserved.
+
+The final formal gate nevertheless rejected the run because Colima regenerated its internal `_lima/colima/lima.yaml` during normal start, changing its byte hash from `59daf66c…` to `29ffdf82…`. Treating this generated runtime file as immutable was an invalid manifest assumption. The runner retained `failure.json` and `recovery.json`; no `results.json` or passing audit was produced. The evidence must therefore not be cited as preregistered causal proof.
+
+Descriptively, none of the three 60-second phases reproduced material disk loss. Host available space instead changed by +1,015,808 bytes in active baseline, +1,094,262,784 bytes while stopped, and +161,163,218,944 bytes in the restored phase. Across the whole sampled window it increased by 171,732,672,512 bytes, while the two Colima sparse files together reduced their allocated APFS blocks by 3,208,155,136 bytes. The much larger host-space recovery cannot be assigned to Colima alone from this experiment. Full interpretation and restoration evidence are recorded in the closeout journal.
