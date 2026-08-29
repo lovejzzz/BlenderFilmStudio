@@ -5415,3 +5415,11 @@ D7 tool freeze `0402f2476c7259cef3c4c85ced7bf80553f458a7`推送后，corrected p
 D7 runner与独立Node audit均8/8 PASS。root 5 files/134,507 bytes/tree `7b5e6194…`；audit file/self `6c223524…/8183f498…`，result file/self `f4ff4c68…/59078802…`，receipt file/self `b42b905c…/31903a70…`，verdict为`CORRECTED_PRODUCTION_AUDITOR_PROVEN`。
 
 C12在formal Node工具修改前授权绑定C10–C12、retained v0.3、D6/D7 PASS与D7-frozen auditor，并使用fresh v0.4 roots。Node audit必须直接复核locality rows；其余生产工具、291 renders、18 gates/16 attacks、预算与claims不变。下一动作提交推送D7+C12，再做tool freeze、fresh-clone rehearsal、official preflight和完整v0.4重跑。
+
+## J-428 · B62 Phase 0 v0.4 fresh-clone与official preflight PASS
+
+Date: 2026-08-29 · Type: ZERO-BLENDER REHEARSAL / OFFICIAL PREFLIGHT · New B62 Blender processes: 0 · New B62 renders: 0
+
+三个C12授权Node工具以commit `20c5c4bd07d842a0131e8b14896ae72ed09734fd`冻结推送，绑定C1–C12、retained failures、D2/D4/D5/D6/D7 evidence与D7-frozen production auditor，并切换fresh v0.4 roots。静态syntax、ESLint与diff checks通过。
+
+无`node_modules` fresh clone preflight 9/9 ACCEPTED，self-hash `a6a01d14…`；zero child/Blender/render/model/network/Docker，随后clone移入Trash。主仓库official preflight同一freeze上9/9 ACCEPTED，file/self `ae3a619c7387d5deffdb2a8c7067eb061601efd8898e8e98c481db61a17e9f88 / 6145aa064d0023e2f110993c95561ed47a8d8fceaa13c8c83d27ede8f1423bef`。available 307,508,101,120 bytes，projected 2 GiB/100 GiB reserve通过。下一动作提交推送official evidence后启动v0.4完整formal。
