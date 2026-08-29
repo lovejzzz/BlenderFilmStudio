@@ -5607,3 +5607,13 @@ Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / RECORD-PRIMITIVE CORRECTION 
 D4 build report记录对象赋值后的`corrected.rotation_quaternion`；C2 D5记录`camera.matrix_world.to_quaternion()`，后者经过world-matrix float32归一化重构，方向等价但不是同一数值原语。v0.3永久保留9 files/727,626 bytes/tree `ed4b9fe2e47a3f46d8167a678373f7579535ac0c11694fd083e86b4ca0a9636f`；failure file/self `19481735…/d6498b08…`，audit file/self `d5b33bc9…/5d3dac06…`。
 
 C4拒绝放宽1e-9，只授权两份Blender工具保留evaluated matrix location，同时把quaternion字段改为post-sync对象属性`assignedCameraQuaternion`，与D4原始记录like-for-like比较；runner/auditor绑定v0.3并切fresh v0.4。相机transform、geometry、候选、frame、阈值、selection、预算与sealed边界全部不变，v0.3的12候选/`RS_S200_E225`仍不准入。
+
+## J-448 · B62-Q1-D5 v0.4正式PASS与D6 sealed Cycles预注册
+
+Date: 2026-08-29 · Type: MOTION-AWARE SEARCH PASS / SEALED RENDER VALIDATION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+C4 retry以tool freeze `758177c`在fresh v0.4 root运行。PRIMARY/INDEPENDENT分别2.768/2.733秒、peak sampled RSS 254,623,744/254,672,896 bytes；Node auditor 0.062秒。23/23 checks、14-candidate roster、126 derivation cells、D3 contamination 30项显式保留、D4九帧pose与六帧geometry baseline、两实现1e-9 comparison、zero render/model/network/Docker/scene-save全部PASS。
+
+12个candidate在九帧全合格；按冻结selection选择`RS_S200_E225`：start 2.0、end 2.25、maximum adjacent integer delta 0.00394722、mean absolute scale deviation 0.125。frame288 clamped area从static 0.933787降至0.777446；motion-aware九帧clamped area范围0.464256–0.777446，全部低于不变0.90。正式verdict为`B62_CLOSE_CAMERA_MOTION_AWARE_BOUNDED_CANDIDATE_FOUND`。root 9 files/726,466 bytes/tree `22bbe021a67027186290229ca4fbbc6d6ca6ad25d8939eb3e22003eef40536bd`；receipt file/self `68777a48…/db007e5b…`，audit file/self `861e10fc…/ccba90d9…`。
+
+D6在任何新工具创建前解封198/210/222/234/246/258/270/282八帧。fresh master内同时bake STATIC scale2与MOTION_AWARE 2→2.25 cameras；第二Blender只在8×2 roster渲染960×540 Cycles CPU 16 spp EXR/PNG；第三Blender独立复开、验证96-frame bake、只测八个validation frames并解码16 EXR。motion必须8/8通过原geometry template，16像素finite/non-empty、每pair different；静态结果描述性保留。即使machine supported，仍需原分辨率人工复核，不能称最终电影画质。

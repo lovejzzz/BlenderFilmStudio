@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareHoldoutValidation.v0.1",
+  "experimentId": "B62-Q1-D6",
+  "title": "Fresh-scene paired Cycles validation of the D5 motion-aware close camera",
+  "date": "2026-08-29",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "question": "Does the frozen RS_S200_E225 camera pass the unchanged geometry template on all eight previously sealed frames when baked into a fresh scene, while producing finite, non-empty Cycles pixels distinct from the static-scale control?",
+  "parentEvidence": {
+    "d5Formal": {
+      "root": "experiments/b62-camera-quality-motion-aware-search-v0-4",
+      "tree": {"files": 9, "bytes": 726466, "treeSha256": "22bbe021a67027186290229ca4fbbc6d6ca6ad25d8939eb3e22003eef40536bd"},
+      "receipt": {"uri": "experiments/b62-camera-quality-motion-aware-search-v0-4/receipt.json", "sha256": "68777a480a1e803e9596928de363e0a731b2db7a45b25ab851edb54b702a1087", "receiptHash": "db007e5b678f27b2aef64c3186b75ab5cd3d721d8b02946042d8f6ac93b2b8f0"},
+      "audit": {"uri": "experiments/b62-camera-quality-motion-aware-search-v0-4/audit.json", "sha256": "861e10fc720866f0d6437408e8a1f3c43ba2558acad9cf267c6d5469be21e976", "auditHash": "ccba90d9c91e7ca24fd5e4b1166a333993ac099a86fd0b592b86e87f22605ea4", "status": "PASS", "scientificVerdict": "B62_CLOSE_CAMERA_MOTION_AWARE_BOUNDED_CANDIDATE_FOUND", "selectedCandidateId": "RS_S200_E225", "feasibleCandidateCount": 12}
+    },
+    "masterScene": {"uri": "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend", "sha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"}
+  },
+  "selectedIntervention": {
+    "candidateId": "RS_S200_E225",
+    "sourceCamera": "CAM_CLOSE_REFLECTION",
+    "staticCamera": "CAM_CLOSE_STATIC_D6",
+    "motionCamera": "CAM_CLOSE_MOTION_D6",
+    "lookAtTarget": [0.0, 0.67, 1.72],
+    "azimuthDegreesAroundWorldZ": -45.0,
+    "lensMillimeters": 65.0,
+    "framesInclusive": [193, 288],
+    "staticScale": 2.0,
+    "motionStartScale": 2.0,
+    "motionEndScale": 2.25,
+    "motionInterpolation": "u=(frame-193)/95; w=3*u^2-2*u^3; scale=2.0+0.25*w",
+    "maximumAdjacentIntegerFrameScaleDelta": 0.003947222627204816
+  },
+  "validation": {
+    "newlyUnsealedFrames": [198, 210, 222, 234, 246, 258, 270, 282],
+    "derivationFramesForbiddenForValidationMeasurement": [193, 204, 216, 228, 240, 252, 264, 276, 288],
+    "conditions": ["STATIC", "MOTION_AWARE"],
+    "geometryTemplate": {
+      "faceAnchorsExact": ["B62_VISOR", "B62_EYE_SLIT"],
+      "helmetVisualBlockerShareMaximum": 0.7,
+      "characterVisualBlockerShareMinimum": 0.2,
+      "characterVisualBlockerShareMaximum": 0.9,
+      "characterOnScreenVertexFractionMinimum": 0.1,
+      "characterOnScreenVertexFractionMaximum": 0.6,
+      "characterClampedUnionAreaFractionMinimum": 0.35,
+      "characterClampedUnionAreaFractionMaximum": 0.9,
+      "visibleSemanticAnchorCountMinimum": 2
+    },
+    "motionAcceptance": "MOTION_AWARE passes the complete unchanged geometry template on all eight newly unsealed frames.",
+    "staticControl": "STATIC is measured and rendered on the same eight frames. Its pass/fail pattern is descriptive and cannot replace the motion acceptance gate.",
+    "pixelAcceptance": "Every one of 16 Combined passes is finite, non-empty and has positive RGB dynamic range; every same-frame STATIC/MOTION_AWARE decoded Combined digest differs.",
+    "humanBoundary": "All 16 native 960x540 PNGs require labeled human engineering review after the machine result. Machine PASS alone does not claim cinematic merit."
+  },
+  "freshSceneProtocol": {
+    "buildBlender": "Open the master with factory startup and auto-exec disabled; create two new camera data/object/action triples; bake both transforms on all 96 integer frames; preserve source camera/action/markers; save one fresh derived blend.",
+    "renderBlender": "Open only the fresh derived blend; route both scene.camera and the active close-shot timeline marker per condition; render the eight-by-two roster with the frozen Cycles settings; restore routing after each render.",
+    "independentBlender": "Independently reopen the derived blend, verify both 96-frame bakes and scene invariants, measure geometry only on the eight unsealed frames, and independently decode all 16 EXR Combined passes.",
+    "nodeAuditor": "Bind all parent/tool/runtime/process/resource identities, recompute roster, bake equations, geometry verdict, pixel pairing and outcome-neutral scientific mapping."
+  },
+  "render": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "samples": 16,
+    "resolution": [960, 540],
+    "resolutionPercentage": 100,
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorDepth": "32",
+    "exrCodec": "ZIP",
+    "previewFormat": "PNG",
+    "previewColorMode": "RGBA",
+    "previewColorDepth": "8",
+    "filmTransparent": false,
+    "viewTransform": "AgX",
+    "look": "Medium High Contrast"
+  },
+  "runtime": {
+    "blender": {"executable": "/Applications/Blender.app/Contents/MacOS/Blender", "version": "Blender 5.2.0 LTS", "buildHash": "fbe6228777e7", "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"},
+    "forbidden": ["model calls", "network access", "Docker or Colima", "validation measurement on derivation frames", "reuse of a prior derived scene"]
+  },
+  "processBudget": {
+    "runnerProcesses": 1,
+    "freshBlenderProcesses": 3,
+    "nodeAuditorProcesses": 1,
+    "blenderRenderCalls": 16,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "maximumBuildWallSeconds": 180,
+    "maximumRenderWallSeconds": 300,
+    "maximumIndependentWallSeconds": 180,
+    "maximumPeakResidentSetSizeBytesPerBlender": 2147483648,
+    "maximumCombinedLogBytesPerChild": 2097152,
+    "projectedWriteBytes": 134217728,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "toolFreeze": {
+    "requiredNewTools": [
+      "blender/build_b62_q1_d6_motion_aware_scene.py",
+      "blender/render_b62_q1_d6_motion_aware_holdout_pairs.py",
+      "blender/audit_b62_q1_d6_motion_aware_scene_and_pixels.py",
+      "scripts/run-b62-q1-d6-motion-aware-holdout.mjs",
+      "scripts/audit-b62-q1-d6-motion-aware-holdout.mjs"
+    ],
+    "sequence": [
+      "Commit and push the complete D5 v0.4 evidence plus this D6 spec/protocol/journal while all five D6 tools and the D6 root are absent.",
+      "Implement and statically validate all tools without reading validation geometry or pixels.",
+      "Commit and push exact tool bytes.",
+      "Create fresh admission, build, render, independently audit and retain every failure."
+    ]
+  },
+  "output": {"formalRoot": "experiments/b62-camera-quality-motion-aware-holdout-v0-1", "immutableFailurePolicy": "Any failure preserves the entire partial root and requires a separately preregistered correction plus fresh root."},
+  "decision": {
+    "supportedVerdict": "B62_CLOSE_CAMERA_MOTION_AWARE_PASSES_SEALED_VALIDATION",
+    "supportedWhen": "All technical gates pass and MOTION_AWARE passes the unchanged geometry template on all eight newly unsealed frames.",
+    "rejectedVerdict": "B62_CLOSE_CAMERA_MOTION_AWARE_FAILS_SEALED_VALIDATION",
+    "rejectedWhen": "The full admitted run is valid but MOTION_AWARE fails at least one newly unsealed frame.",
+    "invalidated": "Any parent, tool, runtime, process, resource, fresh-scene, roster, bake, routing, independent-agreement, geometry-accounting or pixel-accounting failure yields scientificVerdict null."
+  },
+  "nonClaims": [
+    "D6 does not test the nine D5 derivation frames again and does not optimize a new camera.",
+    "D6 does not establish D3 grid uniqueness, cinematic storytelling, final-film photorealism or full-sequence Cycles stability.",
+    "Sixteen 16-spp diagnostic renders are not final delivery quality.",
+    "Even a supported machine verdict remains HUMAN_PENDING until all 16 native PNGs are reviewed."
+  ]
+}
