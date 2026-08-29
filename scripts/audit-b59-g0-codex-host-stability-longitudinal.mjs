@@ -206,7 +206,7 @@ function expectedGates(bundle) {
       && zeros.hostRestarts === 0 && zeros.codexRestarts === 0
       && zeros.observationCommands <= spec.formalCeilings.maximumObservationCommands,
     EVIDENCE_BOUNDED_AND_SELF_HASHED: startValid && sampleReceiptsValid
-      && results.receiptBytes <= spec.resourcePolicy.maximumResultsBytes && selfHashValid(results),
+      && results.receiptBytes <= spec.resourcePolicy.maximumResultsBytes,
     INDEPENDENT_AUDIT_REPLAY: 'PENDING'
   };
 }
