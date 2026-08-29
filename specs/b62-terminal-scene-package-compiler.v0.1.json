@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "bfs.b62TerminalScenePackageCompilerExperiment.v0.1",
+  "experimentId": "B62-T1-E1",
+  "title": "Admission-gated terminal SceneSpec to immutable BuildPlan to Blender scene compilation",
+  "date": "2026-08-29",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "question": "Can the exact admitted B62 Phase 0 master and exact D6 motion-camera evidence be expressed as a narrow ScenePackageSpec, deterministically compiled into one immutable BuildPlan, applied by real Blender 5.2 without rendering, and independently reopened with only the authorized camera/action/marker delta?",
+  "claimScope": "B62-specific precompiled scene-package dialect; this is a terminal production bridge, not a general SceneSpec v0.6 implementation.",
+  "inputSceneSpec": {
+    "uri": "specs/b62-terminal-proof.scene-package.v0.1.json",
+    "sha256": "3b82d7c84074442bbfa37793e0632c1dad194ea12fcdac7ecd4cfd6954387a7e",
+    "schemaVersion": "bfs.b62TerminalScenePackageSpec.v0.1"
+  },
+  "parentEvidence": {
+    "phase0": {
+      "master": {
+        "uri": "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+        "sha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"
+      },
+      "generation": {
+        "uri": "experiments/b62-phase0-v0-4/reports/generation-report.json",
+        "sha256": "3a2f615191a714b7a5b781cb736134117420fcb09d2cb001c09b3e692b09d41f",
+        "reportHash": "0953844c971d46c0831e7d4461b817205646b46c56e8b16002d675696a0cb402"
+      },
+      "audit": {
+        "uri": "experiments/b62-phase0-v0-4/audit.json",
+        "sha256": "57dce6a3d3a89e2bcf0deac1a47e024acbc328303a788abc1d8a9ff8805e9e42",
+        "auditHash": "8c4ca0e8d5ae00db06cf41d64494575631bb0216fcc0e6ae71c01ae88415f849",
+        "status": "PASS",
+        "verdict": "B62_PHASE0_ASSET_ANIMATIC_AND_CALIBRATION_ADMITTED"
+      },
+      "receipt": {
+        "uri": "experiments/b62-phase0-v0-4/receipt.json",
+        "sha256": "fd2ed6275d9152208d0a6860a3f5a2f88ec61b32d4cdff2369ae09355c5e3127",
+        "receiptHash": "462ae5409019fc1dc578dad74e9648ad1e6132641a49cffc9d73a90e770b6986",
+        "status": "PASS"
+      }
+    },
+    "d6": {
+      "build": {
+        "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-4/build.json",
+        "sha256": "a8a9cffb54e0ae4122aff6c9ce9e7e4b0f0e66020afc8de2bfa0beeacc0373c6",
+        "reportHash": "64bf8c93e5ad106f6bce56e169d8c8a5541082c15177948212c911aff1aabe65",
+        "bakeCount": 96
+      },
+      "audit": {
+        "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-4/audit.json",
+        "sha256": "59d8e9379a43473c505128c3f45fa05cbfbad533d3889931d5b4e659d45ec8de",
+        "auditHash": "820d0c56390988a1237c6d3c807af0149680b70e9428fae79fc9c6f12a1edfa7",
+        "status": "PASS",
+        "scientificVerdict": "B62_CLOSE_CAMERA_MOTION_AWARE_PASSES_SEALED_VALIDATION"
+      },
+      "receipt": {
+        "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-4/receipt.json",
+        "sha256": "b123ffefacfde409c79125d658820538b94b219f42b1a82c1ac1e144eea99799",
+        "receiptHash": "553ce830513de80b5c5eea65d91780f4807ce97c4f1e12c695f740500a05a3dd",
+        "status": "PASS"
+      },
+      "humanReview": {
+        "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-4/human-review.json",
+        "sha256": "b3dd4e71b9002d0ed9a4883e9dda07b0455e298a8d6af1f5ecf9dbd54f26bf50",
+        "reviewHash": "69f4ca7c72ec24a05d288cc9d9f1399519c9c4ad4c04d609ffbef721c1ae2948",
+        "status": "PASS",
+        "scope": "LABELED_CAMERA_ENGINEERING_REVIEW"
+      }
+    }
+  },
+  "buildPlanContract": {
+    "schemaVersion": "bfs.b62TerminalScenePackageBuildPlan.v0.1",
+    "determinism": "Compile the admitted ScenePackageSpec twice in separate Node processes; canonical JSON bytes and SHA-256 must be exact.",
+    "sourceBinding": "Bind the exact source master, Phase 0 receipt/audit/generation and D6 build/receipt/audit/human-review file hashes plus self hashes.",
+    "timeline": {
+      "frameStart": 1,
+      "frameEnd": 288,
+      "fps": 24,
+      "cuts": [
+        {"marker": "SHOT_WIDE_APPROACH", "frame": 1, "camera": "CAM_WIDE_APPROACH"},
+        {"marker": "SHOT_MEDIUM_CONTACT", "frame": 97, "camera": "CAM_MEDIUM_CONTACT"},
+        {"marker": "SHOT_CLOSE_REFLECTION", "frame": 193, "camera": "CAM_CLOSE_MOTION_TERMINAL"}
+      ]
+    },
+    "camera": {
+      "name": "CAM_CLOSE_MOTION_TERMINAL",
+      "dataName": "CAM_CLOSE_MOTION_TERMINAL_DATA",
+      "actionName": "B62_TERMINAL_CLOSE_CAMERA_ACTION",
+      "sourceCamera": "CAM_CLOSE_REFLECTION",
+      "lensMillimeters": 65.0,
+      "rotationMode": "QUATERNION",
+      "interpolation": "LINEAR",
+      "framesInclusive": [193, 288],
+      "sampleCount": 96,
+      "sampleSource": "Copy only frame, motionLocation and motionQuaternion from the exact D6 build in ascending frame order. No recomputation, smoothing or threshold reuse is authorized.",
+      "curves": 7,
+      "keysPerCurve": 96
+    },
+    "authorizedDelta": "Add exactly one camera object, one camera datablock and one seven-curve action; reroute only SHOT_CLOSE_REFLECTION; preserve all prior IDs and state; save a new blend.",
+    "immutability": "BuildPlan is created with exclusive creation, contains a self hash, and is never modified or overwritten after admission."
+  },
+  "realBlenderProtocol": {
+    "compiler": "Start Blender 5.2 with factory startup and auto-exec disabled, open the exact master, reject runtime or source drift, apply only the BuildPlan-authorized delta, save scene/B62_TERMINAL_PRODUCTION.blend, write a self-hashed compile report, and perform zero renders.",
+    "independentAuditor": "A separate fresh Blender process reopens only the derived scene, independently verifies the exact 96-frame camera pose at tolerance 1e-6, marker routing, timeline, render/color contract, object/data/action deltas, asset identities, source-camera preservation, motion/contact/core/light preservation, and zero render calls.",
+    "nodeAuditor": "Independently recompute file identities, BuildPlan canonical hash, process/resource accounting, root roster, Blender reports, acceptance gates and mutation attacks; write outcome-neutral audit and receipt with self hashes."
+  },
+  "acceptanceGates": [
+    "G01_PREREGISTRATION_COMMIT_PUSHED_BEFORE_TOOL_CREATION_OR_FORMAL_ROOT",
+    "G02_INPUT_SCENE_PACKAGE_SPEC_EXACT_AND_SCHEMA_SUPPORTED",
+    "G03_PHASE0_PARENT_FILES_AND_SELF_HASHES_EXACT_PASS",
+    "G04_D6_PARENT_FILES_SELF_HASHES_MACHINE_VERDICT_AND_HUMAN_SCOPE_EXACT_PASS",
+    "G05_ALL_INPUT_AND_OUTPUT_PATHS_REPOSITORY_RELATIVE_NORMALIZED_NO_SYMLINK_ESCAPE",
+    "G06_FRESH_OUTPUT_ROOT_AND_EXCLUSIVE_WRITES",
+    "G07_CAPACITY_RESERVE_AND_PROJECTED_WRITES_ADMITTED_BEFORE_NATIVE_SPAWN",
+    "G08_TOOL_AND_RUNTIME_IDENTITIES_EXACT",
+    "G09_TWO_INDEPENDENT_BUILDPLAN_COMPILATIONS_CANONICAL_BYTE_EXACT",
+    "G10_BUILDPLAN_COPIES_EXACT_D6_96_FRAME_MOTION_BAKE",
+    "G11_REAL_BLENDER_COMPILE_EXIT_ZERO_WITH_ZERO_RENDER_CALLS",
+    "G12_DERIVED_BLEND_EXISTS_FINITE_SIZE_AND_SOURCE_MASTER_UNCHANGED",
+    "G13_ONLY_ONE_CAMERA_OBJECT_ONE_CAMERA_DATA_ONE_ACTION_ADDED",
+    "G14_THREE_MARKERS_EXACT_AND_ONLY_CLOSE_CAMERA_REROUTED",
+    "G15_96_FRAME_LOCATION_AND_QUATERNION_BAKE_MATCHES_BUILDPLAN_WITHIN_1E_6",
+    "G16_PHASE0_ASSET_IDENTITY_MOTION_CONTACT_CORE_AND_LIGHT_STATE_PRESERVED",
+    "G17_TIMELINE_RENDER_EXR_MOTION_BLUR_AND_COLOR_CONTRACT_PRESERVED",
+    "G18_INDEPENDENT_FRESH_BLENDER_REOPEN_AGREES",
+    "G19_TWELVE_SEMANTIC_MUTATION_ATTACKS_REJECTED_BEFORE_NATIVE_SPAWN",
+    "G20_PROCESS_RESOURCE_ROOT_ROSTER_AND_SELF_HASHED_RECEIPTS_EXACT_WITH_ZERO_MODEL_NETWORK_DOCKER"
+  ],
+  "mutationAttacks": [
+    "A01_SOURCE_MASTER_SHA_MUTATION",
+    "A02_PHASE0_RECEIPT_SELF_HASH_MUTATION",
+    "A03_D6_BUILD_FILE_SHA_MUTATION",
+    "A04_D6_BUILD_REPORT_HASH_MUTATION",
+    "A05_D6_SAMPLE_FRAME_MUTATION",
+    "A06_D6_SAMPLE_LOCATION_MUTATION",
+    "A07_D6_SAMPLE_QUATERNION_MUTATION",
+    "A08_CLOSE_CUT_CAMERA_MUTATION",
+    "A09_TERMINAL_LENS_MUTATION",
+    "A10_INPUT_PATH_TRAVERSAL",
+    "A11_EXISTING_OUTPUT_ROOT",
+    "A12_TOOL_IDENTITY_MUTATION"
+  ],
+  "runtime": {
+    "nodeMinimum": "22.0.0",
+    "blender": {
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+      "version": "Blender 5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "launchFlags": ["--background", "--factory-startup", "--disable-autoexec", "--python-exit-code", "1"]
+    },
+    "forbidden": ["render calls", "model calls", "network access", "Docker or Colima", "embedded-script auto execution", "reuse of any derived scene or formal output root"]
+  },
+  "processBudget": {
+    "runnerProcesses": 1,
+    "buildPlanCompilerProcesses": 2,
+    "freshBlenderProcesses": 2,
+    "nodeAuditorProcesses": 1,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "maximumCompileWallSeconds": 180,
+    "maximumIndependentWallSeconds": 180,
+    "maximumPeakResidentSetSizeBytesPerBlender": 2147483648,
+    "maximumCombinedLogBytesPerChild": 2097152,
+    "maximumOutputBytes": 67108864,
+    "projectedWriteBytes": 67108864,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "toolFreeze": {
+    "requiredNewTools": [
+      "scripts/compile-b62-terminal-build-plan.mjs",
+      "blender/compile_b62_terminal_scene.py",
+      "blender/audit_b62_terminal_scene.py",
+      "scripts/run-b62-terminal-scene-package.mjs",
+      "scripts/audit-b62-terminal-scene-package.mjs"
+    ],
+    "sequence": [
+      "Commit and push this experiment spec, protocol, input ScenePackageSpec and journal while all five tools and the formal root are absent.",
+      "Implement and statically validate exact tool bytes without creating the formal root or starting Blender.",
+      "Commit and push exact tool bytes.",
+      "Run from the fresh immutable root, retain every failure, and require a separately preregistered correction plus a new root after any failure."
+    ]
+  },
+  "output": {
+    "formalRoot": "experiments/b62-terminal-scene-package-v0-1",
+    "buildPlan": "build-plan.json",
+    "scene": "scene/B62_TERMINAL_PRODUCTION.blend",
+    "compileReport": "reports/compile-report.json",
+    "independentReport": "reports/independent-audit.json",
+    "audit": "audit.json",
+    "receipt": "receipt.json",
+    "immutableFailurePolicy": "Any failure preserves the entire partial root. No output is overwritten, reused or silently repaired."
+  },
+  "decision": {
+    "supportedVerdict": "B62_TERMINAL_SCENESPEC_BUILDPLAN_AND_SCENE_COMPILATION_SUPPORTED",
+    "supportedWhen": "All 20 acceptance gates and all 12 mutation attacks pass under the exact admitted runtime and budgets.",
+    "invalidated": "Any parent, path, tool, runtime, determinism, compile, preservation, independent-reopen, process, resource, roster or receipt failure yields status FAIL and scientificVerdict null."
+  },
+  "nextAuthorization": "A supported T1 authorizes only a separately preregistered 288-frame low-cost animatic/full-timeline audit of the compiled scene. It does not authorize the final 288-frame Cycles render by itself.",
+  "nonClaims": [
+    "This experiment does not prove a universal SceneSpec v0.6 or import arbitrary user assets.",
+    "This experiment does not render or inspect any new image and therefore does not prove temporal image continuity, final-film quality or delivery encoding.",
+    "This experiment does not test interruption/restart of the final render job.",
+    "The Phase 0 assets remain stylized diagnostic assets; preserving them does not establish photorealism."
+  ]
+}

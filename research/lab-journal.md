@@ -5657,3 +5657,13 @@ C3 retry以tool freeze `7b0b942a5c9d0f3f5ea4fc6851ec3a4d406a37fc`在fresh v0.4�
 motion-aware在198/210/222/234/246/258/270/282八个新解封帧全部通过不变geometry template；STATIC前七帧通过，282以clamped area 0.921816超过冻结0.90失败。正式scientific verdict为`B62_CLOSE_CAMERA_MOTION_AWARE_PASSES_SEALED_VALIDATION`。receipt file/self `b123ffef…/553ce830…`，audit file/self `59d8e937…/820d0c56…`；human-review写入前formal root为43 files/205,982,158 bytes/tree `8c31fa4a…`。
 
 随后逐张打开全部16张960×540 PNG做有标签工程复核。198–210差异极小且无退化；222开始略增呼吸空间；234–258逐步保留更多头盔边界、肩部与背景；270差异显著；282的STATIC明显过紧，MOTION_AWARE保持主体与环境可读。人工方向与machine verdict一致，camera engineering review PASS。边界不变：低模角色、16 spp诊断柔化、单镜头抽帧不证明电影级资产、最终调色、叙事或连续时间稳定性。
+
+## J-453 · B62-T1终局场景包编译器预注册
+
+Date: 2026-08-29 · Type: TERMINAL SCENE COMPILATION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+Gate 0、B57与B58已经关闭，B62 Phase 0也已提供288帧三镜头master；D6则以sealed render与人工工程复核证明motion-aware close camera方向成立。当前真正缺口是把这两份已准入证据确定性合并为最终渲染会消费的生产scene，而不是继续扩展相机研究。
+
+现有general SceneSpec不能诚实表达B62 master：资产位于实验根且内含action，master还具有contact IK、camera markers、材质与灯光状态动画。因此T1冻结一个明确受限的`bfs.b62TerminalScenePackageSpec.v0.1`，hash-pin完整Phase 0 master与D6 build。它不是通用SceneSpec v0.6主张。
+
+在五个新工具与formal root均不存在时，冻结two-process deterministic BuildPlan、one real Blender compile、one independent Blender reopen、zero render、20 gates与12 mutation attacks。唯一允许delta为新增one camera object/data/action、复制D6的96帧location/quaternion、只把close marker改路由至terminal camera。角色/场景/动作/contact/core/light/render/color状态必须保持；64 MiB writes、2 GiB/Blender RSS、100 GiB reserve，zero model/network/Docker/Colima。T1 PASS只授权下一步288帧廉价animatic与全时间线审计，不直接授权最终Cycles。

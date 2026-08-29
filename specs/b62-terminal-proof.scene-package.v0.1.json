@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "bfs.b62TerminalScenePackageSpec.v0.1",
+  "packageId": "B62-TERMINAL-PROOF",
+  "title": "守夜人点亮观测核心",
+  "intent": "Compile the admitted B62 Phase 0 master and the sealed D6 motion-aware close-camera evidence into one immutable three-shot Blender production scene without rendering.",
+  "scope": "NARROW_PRECOMPILED_SCENE_PACKAGE_DIALECT",
+  "sourceMaster": {
+    "uri": "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+    "sha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"
+  },
+  "timeline": {
+    "frameStart": 1,
+    "frameEnd": 288,
+    "fps": 24,
+    "cuts": [
+      {
+        "marker": "SHOT_WIDE_APPROACH",
+        "frame": 1,
+        "camera": "CAM_WIDE_APPROACH"
+      },
+      {
+        "marker": "SHOT_MEDIUM_CONTACT",
+        "frame": 97,
+        "camera": "CAM_MEDIUM_CONTACT"
+      },
+      {
+        "marker": "SHOT_CLOSE_REFLECTION",
+        "frame": 193,
+        "camera": "CAM_CLOSE_MOTION_TERMINAL"
+      }
+    ]
+  },
+  "cameraIntervention": {
+    "evidence": {
+      "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-4/build.json",
+      "sha256": "a8a9cffb54e0ae4122aff6c9ce9e7e4b0f0e66020afc8de2bfa0beeacc0373c6",
+      "reportHash": "64bf8c93e5ad106f6bce56e169d8c8a5541082c15177948212c911aff1aabe65"
+    },
+    "sourceCamera": "CAM_CLOSE_REFLECTION",
+    "outputCamera": "CAM_CLOSE_MOTION_TERMINAL",
+    "outputAction": "B62_TERMINAL_CLOSE_CAMERA_ACTION",
+    "framesInclusive": [193, 288],
+    "sampleFields": ["frame", "motionLocation", "motionQuaternion"],
+    "expectedSampleCount": 96,
+    "rotationMode": "QUATERNION",
+    "interpolation": "LINEAR",
+    "lensMillimeters": 65.0,
+    "clipStart": 0.05,
+    "clipEnd": 200.0
+  },
+  "preservation": {
+    "phase0GenerationReport": {
+      "uri": "experiments/b62-phase0-v0-4/reports/generation-report.json",
+      "sha256": "3a2f615191a714b7a5b781cb736134117420fcb09d2cb001c09b3e692b09d41f",
+      "reportHash": "0953844c971d46c0831e7d4461b817205646b46c56e8b16002d675696a0cb402"
+    },
+    "assetIdentityHashes": {
+      "CHAR_B62_GUARDIAN": "1b96e0a9b06ecded5fe1b726a62380d87aa694fb4fcecabc1a81e06c5456f53b",
+      "PROP_B62_CONSOLE_CORE": "5539ed6ca0bcac432a94678acf59ddda2a15d70277362fda2fd9d14368450856",
+      "SET_B62_OBSERVATORY": "e0621bd52c53a796d7cf4b16e66e97839dee4b6056d68156e564939b5b302a72"
+    },
+    "motionAction": "B62_GUARDIAN_PERFORMANCE",
+    "contactFrame": 144,
+    "contactObjects": ["CONSOLE_TOUCH", "HAND_R_SOCKET", "B62_PHASE0_IK_HAND_R_TARGET", "B62_PHASE0_IK_HAND_R_POLE"],
+    "coreObject": "B62_CORE",
+    "coreActivationProperty": "bfs_core_activation",
+    "warmLight": "LIGHT_CORE_WARM",
+    "renderContract": {
+      "engine": "CYCLES",
+      "device": "CPU",
+      "samples": 64,
+      "resolution": [1920, 1080],
+      "resolutionPercentage": 100,
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "colorDepth": "16",
+      "exrCodec": "ZIP",
+      "filmTransparent": false,
+      "motionBlur": true,
+      "colorManagement": {
+        "config": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "display": "sRGB - Display",
+        "view": "ACES 2.0 - SDR 100 nits (Rec.709)",
+        "look": "None",
+        "exposure": 0.0,
+        "gamma": 1.0
+      }
+    }
+  },
+  "authorizedMutation": {
+    "addObjects": ["CAM_CLOSE_MOTION_TERMINAL"],
+    "addCameraData": ["CAM_CLOSE_MOTION_TERMINAL_DATA"],
+    "addActions": ["B62_TERMINAL_CLOSE_CAMERA_ACTION"],
+    "rerouteMarkers": ["SHOT_CLOSE_REFLECTION"],
+    "saveAs": "scene/B62_TERMINAL_PRODUCTION.blend"
+  },
+  "forbiddenMutation": [
+    "delete or rename an existing object, collection, material, action, camera or marker",
+    "modify the source master in place",
+    "modify any existing animation curve or key",
+    "modify the wide or medium camera routing",
+    "modify scene timing, render settings, color management, contact IK, core state, light state or asset identity",
+    "execute embedded Python, drivers, handlers or auto-run scripts",
+    "render any frame"
+  ]
+}
