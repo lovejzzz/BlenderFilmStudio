@@ -31,8 +31,10 @@ const FFMPEG = '/opt/homebrew/bin/ffmpeg';
 const FFPROBE = '/opt/homebrew/bin/ffprobe';
 const SPEC_URI = 'specs/b62-terminal-cycles-restart.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-t3-terminal-cycles-restart-protocol.md';
-const CORRECTION_URI = 'specs/b62-terminal-cycles-restart-c1-preflight-reference.v0.1.json';
-const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-t3-c1-preflight-reference.md';
+const CORRECTION_C1_URI = 'specs/b62-terminal-cycles-restart-c1-preflight-reference.v0.1.json';
+const CORRECTION_C1_PROTOCOL_URI = 'research/2026-08-29-b62-t3-c1-preflight-reference.md';
+const CORRECTION_C2_URI = 'specs/b62-terminal-cycles-restart-c2-failed-receipt-reference.v0.1.json';
+const CORRECTION_C2_PROTOCOL_URI = 'research/2026-08-29-b62-t3-c2-failed-receipt-reference.md';
 const RENDER_URI = 'blender/render_b62_terminal_cycles_shot.py';
 const EXR_AUDITOR_URI = 'blender/audit_b62_terminal_cycles_exr.py';
 const ORCHESTRATOR_URI = 'scripts/run-b62-terminal-cycles-restart.mjs';
@@ -40,12 +42,12 @@ const FINAL_AUDITOR_URI = 'scripts/audit-b62-terminal-cycles-restart.mjs';
 const LEDGER_URI = 'scripts/lib/restart-safe-job-ledger.mjs';
 const BUDGET_URI = 'scripts/lib/budgeted-process.mjs';
 const SCENE_URI = 'experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend';
-const PREFLIGHT_URI = 'experiments/b62-terminal-cycles-restart-preflight-v0-2';
-const JOB_URI = 'experiments/b62-terminal-cycles-restart-job-v0-2';
-const FORMAL_URI = 'experiments/b62-terminal-cycles-restart-v0-2';
+const PREFLIGHT_URI = 'experiments/b62-terminal-cycles-restart-preflight-v0-3';
+const JOB_URI = 'experiments/b62-terminal-cycles-restart-job-v0-3';
+const FORMAL_URI = 'experiments/b62-terminal-cycles-restart-v0-3';
 const JOB_ID = 'B62-TERMINAL-CYCLES-RESTART-J01';
 const OCIO_URI = 'color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio';
-const TOOL_PATHS = [SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, RENDER_URI, EXR_AUDITOR_URI, ORCHESTRATOR_URI, FINAL_AUDITOR_URI, LEDGER_URI, BUDGET_URI];
+const TOOL_PATHS = [SPEC_URI, PROTOCOL_URI, CORRECTION_C1_URI, CORRECTION_C1_PROTOCOL_URI, CORRECTION_C2_URI, CORRECTION_C2_PROTOCOL_URI, RENDER_URI, EXR_AUDITOR_URI, ORCHESTRATOR_URI, FINAL_AUDITOR_URI, LEDGER_URI, BUDGET_URI];
 const RESTRICTED_COMMANDS = [BLENDER, FFMPEG, FFPROBE, FINAL_AUDITOR_URI];
 const MINIMUM_RESERVE = 107374182400;
 const PROJECTED_WRITE = 6442450944;
@@ -196,17 +198,18 @@ async function controlledInterruption(jobRoot) {
   const stderrFile = await durableBuffer(resolve(attemptRoot, 'stderr.log'), Buffer.concat(stderr));
   const reportState = await lstat(report).catch(error => error.code === 'ENOENT' ? null : Promise.reject(error));
   require(terminal.signal === 'SIGTERM' && reportState === null && !(await measureOutput(attemptRoot)).symlinkCount, 'controlled Blender did not terminate by SIGTERM');
-  const failed = await writeExclusiveDurableHashed(resolve(attemptRoot, 'receipt.json'), {
+  const failedReceiptPath = resolve(attemptRoot, 'receipt.json');
+  const failed = await writeExclusiveDurableHashed(failedReceiptPath, {
     schemaVersion: 'bfs.restartSafeProductionAttemptReceipt.v0.1', jobId: JOB_ID, stageId, attemptId,
     status: 'FAILED', promotable: false, reason: 'CONTROLLED_SIGTERM_BEFORE_RENDER', process: processIdentity,
     terminal, marker: 'BFS_T3_READY_FOR_CONTROLLED_INTERRUPT', acceptedRenderCalls: 0,
     outputsBeforeLogs: { fileCount: 0, bytes: 0 }, logs: { stdout: stdoutFile, stderr: stderrFile },
   }, 'receiptHash');
-  await appendLedgerEvent(jobRoot, { eventType: 'STAGE_FAILED', stageId, attemptId, payload: { receipt: { uri: relative(jobRoot, failed.path).replaceAll('\\', '/'), sha256: failed.file.sha256, receiptHash: failed.record.receiptHash } } });
+  await appendLedgerEvent(jobRoot, { eventType: 'STAGE_FAILED', stageId, attemptId, payload: { receipt: { uri: relative(jobRoot, failedReceiptPath).replaceAll('\\', '/'), sha256: failed.file.sha256, receiptHash: failed.record.receiptHash } } });
   const verifyAttempt = 'WIDE-INTERRUPTION-VERIFIED-0002';
   await startStage(jobRoot, stageId, verifyAttempt, { failedAttemptId: attemptId });
   return finishStage(jobRoot, stageId, verifyAttempt, {
-    controlledInterruption: { failedReceipt: { uri: repoUri(failed.path), sha256: failed.file.sha256, receiptHash: failed.record.receiptHash }, process: processIdentity, terminal, acceptedRenderCalls: 0 },
+    controlledInterruption: { failedReceipt: { uri: repoUri(failedReceiptPath), sha256: failed.file.sha256, receiptHash: failed.record.receiptHash }, process: processIdentity, terminal, acceptedRenderCalls: 0 },
     operations: { blenderStarts: 1, renderCalls: 0, modelCalls: 0, videoModelCalls: 0, networkCalls: 0, dockerProcesses: 0, colimaProcesses: 0 },
   });
 }
@@ -369,15 +372,18 @@ async function createStart(parsed, spec) {
   const capacity = await requireCapacity(PROJECTED_WRITE);
   await durableMkdir(resolve(repositoryRoot, PREFLIGHT_URI));
   const preflightPath = resolve(repositoryRoot, PREFLIGHT_URI, 'preflight.json');
-  const correctionPath = resolve(repositoryRoot, CORRECTION_URI); const correction = JSON.parse(await readFile(correctionPath, 'utf8'));
-  require(correction.statusBeforeToolModification === 'PREREGISTERED' && correction.authorizedRetryRoots.preflight === PREFLIGHT_URI && correction.authorizedRetryRoots.job === JOB_URI && correction.authorizedRetryRoots.formal === FORMAL_URI, 'C1 correction binding mismatch');
-  const retainedPreflight = await readJson(resolve(repositoryRoot, correction.retainedFailure.preflight.uri));
-  const retainedFailure = await readJson(resolve(repositoryRoot, correction.retainedFailure.failure.uri));
-  require(retainedPreflight.sha256 === correction.retainedFailure.preflight.sha256 && retainedPreflight.value.preflightHash === correction.retainedFailure.preflight.preflightHash && validSelfHash(retainedPreflight.value, 'preflightHash'), 'retained v0.1 preflight mismatch');
-  require(retainedFailure.sha256 === correction.retainedFailure.failure.sha256 && retainedFailure.value.failureHash === correction.retainedFailure.failure.failureHash && validSelfHash(retainedFailure.value, 'failureHash'), 'retained v0.1 failure mismatch');
-  const preflight = await writeExclusiveDurableHashed(preflightPath, { schemaVersion: 'bfs.b62TerminalCyclesRestartPreflight.v0.2', status: 'ACCEPTED', toolFreezeCommit: freeze.commit, originMain: freeze.origin, toolHashes: freeze.hashes, correction: { uri: CORRECTION_URI, sha256: await sha256File(correctionPath) }, retainedFailure: { preflight: correction.retainedFailure.preflight, failure: correction.retainedFailure.failure }, capacity, source: spec.parents.sceneCompilation.scene, stageDag: spec.stageDag }, 'preflightHash');
+  const correctionC1Path = resolve(repositoryRoot, CORRECTION_C1_URI); const correctionC1 = JSON.parse(await readFile(correctionC1Path, 'utf8'));
+  const correctionC2Path = resolve(repositoryRoot, CORRECTION_C2_URI); const correctionC2 = JSON.parse(await readFile(correctionC2Path, 'utf8'));
+  require(correctionC1.statusBeforeToolModification === 'PREREGISTERED', 'C1 correction binding mismatch');
+  require(correctionC2.statusBeforeToolModification === 'PREREGISTERED' && correctionC2.authorizedRetryRoots.preflight === PREFLIGHT_URI && correctionC2.authorizedRetryRoots.job === JOB_URI && correctionC2.authorizedRetryRoots.formal === FORMAL_URI, 'C2 correction binding mismatch');
+  for (const [reference, field] of [[correctionC1.retainedFailure.preflight, 'preflightHash'], [correctionC1.retainedFailure.failure, 'failureHash'], [correctionC2.retainedFailure.preflight, 'preflightHash'], [correctionC2.retainedFailure.manifest, 'manifestHash'], [correctionC2.retainedFailure.interruptedAttempt, 'receiptHash'], [correctionC2.retainedFailure.invalidation, 'invalidationHash']]) {
+    const item = await readJson(resolve(repositoryRoot, reference.uri));
+    require(item.sha256 === reference.sha256 && item.value[field] === reference[field] && validSelfHash(item.value, field), `retained correction evidence mismatch ${reference.uri}`);
+  }
+  const corrections = [{ uri: CORRECTION_C1_URI, sha256: await sha256File(correctionC1Path) }, { uri: CORRECTION_C2_URI, sha256: await sha256File(correctionC2Path) }];
+  const preflight = await writeExclusiveDurableHashed(preflightPath, { schemaVersion: 'bfs.b62TerminalCyclesRestartPreflight.v0.3', status: 'ACCEPTED', toolFreezeCommit: freeze.commit, originMain: freeze.origin, toolHashes: freeze.hashes, corrections, retainedFailures: [correctionC1.retainedFailure, correctionC2.retainedFailure], capacity, source: spec.parents.sceneCompilation.scene, stageDag: spec.stageDag }, 'preflightHash');
   const jobRoot = resolve(repositoryRoot, JOB_URI);
-  await createManifest(jobRoot, { jobId: JOB_ID, experimentId: spec.experimentId, toolFreezeCommit: freeze.commit, preflight: { uri: repoUri(preflightPath), sha256: preflight.file.sha256, preflightHash: preflight.record.preflightHash }, source: spec.parents.sceneCompilation.scene, spec: { uri: SPEC_URI, sha256: await sha256File(resolve(repositoryRoot, SPEC_URI)) }, correction: { uri: CORRECTION_URI, sha256: await sha256File(correctionPath) }, stageDag: spec.stageDag });
+  await createManifest(jobRoot, { jobId: JOB_ID, experimentId: spec.experimentId, toolFreezeCommit: freeze.commit, preflight: { uri: repoUri(preflightPath), sha256: preflight.file.sha256, preflightHash: preflight.record.preflightHash }, source: spec.parents.sceneCompilation.scene, spec: { uri: SPEC_URI, sha256: await sha256File(resolve(repositoryRoot, SPEC_URI)) }, corrections, stageDag: spec.stageDag });
   await appendLedgerEvent(jobRoot, { eventType: 'JOB_CREATED', payload: { mode: 'start' } });
   return jobRoot;
 }
