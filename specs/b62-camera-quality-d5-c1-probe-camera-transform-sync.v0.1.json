@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareSearchCorrection.v0.1",
+  "correctionId": "B62-Q1-D5-C1",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-motion-aware-search-v0-1",
+    "tree": {
+      "files": 9,
+      "bytes": 639448,
+      "treeSha256": "64cfc318de4fc04fe621f878f4a1e1f64885f951a0e107c9453cb277ff0ebde3"
+    },
+    "failure": {
+      "uri": "experiments/b62-camera-quality-motion-aware-search-v0-1/failure.json",
+      "sha256": "7b3c4f36b33459f89d3931b351ff80095f25c3e53d40e60c7500daab5bb09e6a",
+      "failureHash": "963dcb6acf7e3f50186edef55c83be36e30db6e3ea40a4e3c86eeda95246ccfe"
+    },
+    "audit": {
+      "uri": "experiments/b62-camera-quality-motion-aware-search-v0-1/audit.json",
+      "sha256": "bef28e64ec787e9ab0d50a20a5fe2aaf0f81581664eddbdb1ac4b9761cd58593",
+      "auditHash": "4acac6094d2301238177eb0caf7e852e21407eb4ca70ac3d04e1ea6019b4cef4",
+      "failedCheck": "STATIC_BASELINE_REPRODUCES_D3_D4"
+    },
+    "comparison": {
+      "uri": "experiments/b62-camera-quality-motion-aware-search-v0-1/comparison.json",
+      "sha256": "fb864c85a7385b47b4ce4c6cea59f09eb31defbe2a1c8592601a4365b073b39c",
+      "comparisonHash": "f166cf5d22e93b17c0085ec27d470d818c5863d46c02f13b102410b60fa9436f",
+      "primaryIndependentStatus": "PASS",
+      "feasibleCandidateCountNotAdmitted": 6,
+      "selectedCandidateIdNotAdmitted": "RS_S200_E250"
+    }
+  },
+  "diagnosis": {
+    "symptom": "Both independent implementations agree with each other, but the constant RS_S200_E200 baseline differs from retained D3 and D4 at every compared frame.",
+    "mechanism": "Each probe camera receives location and quaternion assignments after the evaluated dependency graph is updated. Measurement then reads camera.matrix_world without an intervening view-layer update, so the matrix can retain the previously evaluated candidate or frame transform.",
+    "evidencePattern": "The first baseline frame resembles the preceding candidate's end-scale state and later baseline frames resemble a one-step transform lag. This is an implementation invalidation, not evidence for or against any candidate."
+  },
+  "frozenBeforeCorrection": {
+    "toolFreezeCommit": "db694a5f2971290842b930e98ec8772ef509515a",
+    "primaryBlenderTool": {
+      "uri": "blender/search_b62_q1_d5_motion_aware_camera.py",
+      "sha256": "5f29220b7874aa7dad6a21289bc64180aa1fd842a16827e41f9c2f4135a4a0f8"
+    },
+    "independentBlenderTool": {
+      "uri": "blender/search_b62_q1_d5_motion_aware_camera_independent.py",
+      "sha256": "2bba164db73c0eace85446287097eccae06077b22b4bcae6c6c3fd0e662cf2bc"
+    },
+    "runner": {
+      "uri": "scripts/run-b62-q1-d5-motion-aware-search.mjs",
+      "sha256": "fd569c6d57bf43e5a59b1c3742448da7e221b3654fd0e61b214d21e3c2e00ef7"
+    },
+    "auditor": {
+      "uri": "scripts/audit-b62-q1-d5-motion-aware-search.mjs",
+      "sha256": "368479219dc5f692c90b440321389e532a86efcd1948fc1c76d22b7ebc36fde9"
+    }
+  },
+  "authorizedChanges": {
+    "primaryBlenderTool": "Immediately after configuring the probe camera and before any geometry measurement, call bpy.context.view_layer.update() so camera.matrix_world reflects the just-assigned transform.",
+    "independentBlenderTool": "Independently add the same Blender view-layer synchronization at the corresponding boundary; do not import the primary implementation.",
+    "runner": "Bind this correction and the exact retained v0.1 failure tree, require all correction-time frozen hashes, and use the fresh retry root.",
+    "auditor": "Bind this correction and retained v0.1 failure tree, require both corrected Blender tools to differ from their frozen hashes only by the admitted synchronization, and use the fresh retry root.",
+    "retryRoot": "experiments/b62-camera-quality-motion-aware-search-v0-2"
+  },
+  "unchanged": [
+    "The base D5 spec and protocol bytes",
+    "The 14-candidate start/end grid and candidate order",
+    "The nine derivation frames and eight sealed validation frames",
+    "The smoothstep equation, 0.02 path bound and selection order",
+    "The complete D3/D4 geometry template and 1e-9 comparison tolerance",
+    "The requirement that RS_S200_E200 reproduce retained D3/D4 and fail",
+    "Two independent Blender processes and zero render/model/network/Docker/scene-save calls",
+    "All process, disk and output budgets",
+    "Outcome-neutral verdict mapping and all non-claims"
+  ],
+  "retryAcceptance": "The retry is valid only if the fresh static baseline reproduces retained D3 and D4, both corrected implementations agree, every original D5 gate passes, and the scientific verdict is derived from the unchanged candidate family. v0.1 candidate counts and selection may not be copied into the retry.",
+  "nonClaims": [
+    "The six apparently feasible v0.1 candidates are not admitted evidence because the baseline contract failed.",
+    "Camera synchronization does not authorize any threshold, candidate, frame, render or selection change.",
+    "A D5 retry candidate, if found, still requires a later preregistered paired Cycles validation on the eight sealed frames."
+  ]
+}

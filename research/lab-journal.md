@@ -5569,3 +5569,13 @@ Date: 2026-08-29 · Type: MOTION-AWARE CAMERA DERIVATION PREREGISTRATION · New 
 D4静态transform在前五帧改善但随shot推进持续变紧，因此D5只检验一个更窄假设：保持target、−45° azimuth和65 mm不变，让radial scale以smoothstep从start平滑过渡到end。start grid为1.75/2.0/2.25，end grid为2.0/2.25/2.5/2.75/3.0且end≥start，共14 candidates；相邻integer frame scale delta必须≤0.02。
 
 Derivation只允许使用已曝光的193/204/216/228/240/252/264/276/288九帧，并先要求constant `RS_S200_E200`复现D3/D4 retained geometry。198/210/222/234/246/258/270/282八帧在本entry中封存；D5 two-Blender zero-render search和Node auditor均禁止读取。完整几何template包括0.90 maximum不变；若找到候选也只能进入后续fresh-scene paired Cycles验证，不能直接推广。
+
+## J-444 · B62-Q1-D5 v0.1探针相机矩阵滞后与C1预注册
+
+Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / TRANSFORM-SYNCHRONIZATION CORRECTION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+D5 tools以commit `db694a5f2971290842b930e98ec8772ef509515a`冻结推送后，PRIMARY与INDEPENDENT分别约2.822/2.747秒、peak sampled RSS 252,936,192/255,066,112 bytes完成14 candidates×9 derivation frames；两实现comparison PASS、zero render/model/network/Docker/scene-save。Node audit 19项中18项PASS，只有`STATIC_BASELINE_REPRODUCES_D3_D4`失败，因此scientific verdict为null。
+
+v0.1永久保留9 files/639,448 bytes/tree `64cfc318de4fc04fe621f878f4a1e1f64885f951a0e107c9453cb277ff0ebde3`；failure file/self为`7b3c4f36…/963dcb6a…`，audit file/self为`bef28e64…/4acac609…`。两实现都报告6个feasible与`RS_S200_E250`，但这些字段在baseline gate失败后明确不是科学证据，禁止复制到retry。
+
+根因是两份工具都在更新depsgraph后才给临时probe camera赋location/quaternion，随后未同步view layer便从`camera.matrix_world`测量，读到了prior candidate/frame的evaluated matrix。C1在任何工具修改前只授权两份Blender实现各自在configure与measure之间调用`bpy.context.view_layer.update()`；runner/auditor只可绑定C1、retained v0.1并切fresh v0.2。14候选、九个derivation、八个sealed validation、smoothstep、0.02、全套geometry template、1e-9、selection、预算与zero-render边界全部不变。
