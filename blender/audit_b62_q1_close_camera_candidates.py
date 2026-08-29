@@ -7,7 +7,7 @@ import tempfile
 
 import bpy
 from bpy_extras.object_utils import world_to_camera_view
-from mathutils import Vector
+from mathutils import Matrix, Vector
 
 
 DERIVATION = [216, 240, 264]
@@ -170,9 +170,7 @@ def identifier(angle, scale, lens):
 
 def set_candidate(camera, original_location, angle, scale, lens):
     offset = original_location - LOOK_TARGET
-    radians = math.radians(angle)
-    cosine, sine = math.cos(radians), math.sin(radians)
-    rotated = Vector((cosine * offset.x - sine * offset.y, sine * offset.x + cosine * offset.y, offset.z))
+    rotated = Matrix.Rotation(math.radians(angle), 4, "Z") @ offset
     camera.location = LOOK_TARGET + rotated * scale
     camera.rotation_mode = "QUATERNION"
     camera.rotation_quaternion = (LOOK_TARGET - camera.location).to_track_quat("-Z", "Y")

@@ -12,9 +12,13 @@ const execFileAsync = promisify(execFile);
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const SPEC_URI = 'specs/b62-camera-quality-bounded-candidate-search.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-close-camera-bounded-search-protocol.md';
-const ROOT_URI = 'experiments/b62-camera-quality-bounded-candidate-search-v0-1';
+const CORRECTION_URI = 'specs/b62-camera-quality-bounded-search-c1-rotation-primitive.v0.1.json';
+const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-d3-c1-rotation-primitive-correction.md';
+const ROOT_URI = 'experiments/b62-camera-quality-bounded-candidate-search-v0-2';
+const RETAINED_ROOT = 'experiments/b62-camera-quality-bounded-candidate-search-v0-1';
 const PARENT_ROOT = 'experiments/b62-camera-quality-material-aware-framing-v0-1';
 const PREREGISTRATION_COMMIT = 'ae089e5';
+const CORRECTION_COMMIT = 'ab66df5';
 const TOOLS = ['blender/search_b62_q1_close_camera_candidates.py', 'blender/audit_b62_q1_close_camera_candidates.py', 'scripts/run-b62-q1-close-camera-search.mjs', 'scripts/audit-b62-q1-close-camera-search.mjs'];
 
 function canonicalize(value) { if (Array.isArray(value)) return value.map(canonicalize); if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, child]) => [key, canonicalize(child)])); return value; }
@@ -52,16 +56,25 @@ async function blenderChild(root, id, tool, output, master, masterSha, spec) {
 async function main() {
   const freeze = parseArgs();
   const spec = JSON.parse(await readFile(localPath(SPEC_URI), 'utf8'));
-  requireValue(spec.experimentId === 'B62-Q1-D3' && spec.statusBeforeToolCreation === 'PREREGISTERED' && spec.output.formalRoot === ROOT_URI, 'spec mismatch');
+  const correction = JSON.parse(await readFile(localPath(CORRECTION_URI), 'utf8'));
+  requireValue(spec.experimentId === 'B62-Q1-D3' && spec.statusBeforeToolCreation === 'PREREGISTERED', 'spec mismatch');
+  requireValue(correction.correctionId === 'B62-Q1-D3-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.retainedFailure.root === spec.output.formalRoot && correction.authorizedChanges.retryRoot === ROOT_URI, 'correction mismatch');
   requireValue(!await exists(localPath(ROOT_URI)), 'formal root exists');
   const head = (await git(['rev-parse', 'HEAD'])).trim(), origin = (await git(['rev-parse', 'origin/main'])).trim();
   requireValue(head === freeze && origin === freeze, 'freeze not pushed HEAD');
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, freeze]);
   requireValue(await hashFile(localPath(SPEC_URI)) === await committedHash(PREREGISTRATION_COMMIT, SPEC_URI), 'spec drift');
   requireValue(await hashFile(localPath(PROTOCOL_URI)) === await committedHash(PREREGISTRATION_COMMIT, PROTOCOL_URI), 'protocol drift');
+  requireValue(await hashFile(localPath(CORRECTION_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_URI), 'correction drift');
+  requireValue(await hashFile(localPath(CORRECTION_PROTOCOL_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_PROTOCOL_URI), 'correction protocol drift');
   const toolHashes = {};
   for (const uri of TOOLS) { toolHashes[uri] = await hashFile(localPath(uri)); requireValue(toolHashes[uri] === await committedHash(freeze, uri), `tool drift ${uri}`); }
-  requireValue((await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, PARENT_ROOT, ...TOOLS])).trim() === '', 'scoped dirty');
+  requireValue((await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, PARENT_ROOT, RETAINED_ROOT, ...TOOLS])).trim() === '', 'scoped dirty');
+  const retainedTree = await treeIdentity(RETAINED_ROOT);
+  requireValue(canonicalJson(retainedTree) === canonicalJson(correction.retainedFailure.tree), 'retained v0.1 tree drift');
+  requireValue(await hashFile(localPath(correction.retainedFailure.failure.uri)) === correction.retainedFailure.failure.sha256, 'retained failure drift');
+  requireValue(toolHashes['blender/search_b62_q1_close_camera_candidates.py'] === correction.frozen.primaryBlenderTool.sha256, 'primary tool changed under C1');
   const parentTree = await treeIdentity(PARENT_ROOT);
   requireValue(canonicalJson(parentTree) === canonicalJson(spec.parentEvidence.d2.tree), 'D2 tree drift');
   const parentReceiptPath = localPath(spec.parentEvidence.d2.receipt.uri);
@@ -74,7 +87,7 @@ async function main() {
   const filesystem = await statfs(repositoryRoot); const available = Number(filesystem.bavail) * Number(filesystem.bsize);
   requireValue(available - spec.processBudget.projectedWriteBytes >= spec.processBudget.minimumFreeReserveBytes, 'disk reserve');
   const root = localPath(ROOT_URI); await mkdir(resolve(root, 'processes'), { recursive: true, mode: 0o700 });
-  const admission = await writeHashed(resolve(root, 'admission.json'), { schemaVersion: 'bfs.b62CameraQualityAdmission.v0.1', experimentId: 'B62-Q1-D3', status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, toolFreezeCommit: freeze, bindings: { spec: { uri: SPEC_URI, sha256: await hashFile(localPath(SPEC_URI)) }, protocol: { uri: PROTOCOL_URI, sha256: await hashFile(localPath(PROTOCOL_URI)) }, parentTree, parentReceiptSha256: await hashFile(parentReceiptPath), master: { uri: spec.parentEvidence.masterScene.uri, sha256: masterSha }, generatorSha256: await hashFile(localPath(spec.parentEvidence.generatorSource.uri)), blenderSha256: await hashFile(spec.runtime.blender.executable), tools: toolHashes }, resources: { availableBytesBefore: available, projectedWriteBytes: spec.processBudget.projectedWriteBytes, minimumFreeReserveBytes: spec.processBudget.minimumFreeReserveBytes }, operations: { blenderStartsBeforeAdmission: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 } }, 'admissionHash');
+  const admission = await writeHashed(resolve(root, 'admission.json'), { schemaVersion: 'bfs.b62CameraQualityAdmission.v0.1', experimentId: 'B62-Q1-D3', status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, toolFreezeCommit: freeze, bindings: { spec: { uri: SPEC_URI, sha256: await hashFile(localPath(SPEC_URI)) }, protocol: { uri: PROTOCOL_URI, sha256: await hashFile(localPath(PROTOCOL_URI)) }, correction: { uri: CORRECTION_URI, sha256: await hashFile(localPath(CORRECTION_URI)) }, correctionProtocol: { uri: CORRECTION_PROTOCOL_URI, sha256: await hashFile(localPath(CORRECTION_PROTOCOL_URI)) }, retainedFailureTree: retainedTree, parentTree, parentReceiptSha256: await hashFile(parentReceiptPath), master: { uri: spec.parentEvidence.masterScene.uri, sha256: masterSha }, generatorSha256: await hashFile(localPath(spec.parentEvidence.generatorSource.uri)), blenderSha256: await hashFile(spec.runtime.blender.executable), tools: toolHashes }, resources: { availableBytesBefore: available, projectedWriteBytes: spec.processBudget.projectedWriteBytes, minimumFreeReserveBytes: spec.processBudget.minimumFreeReserveBytes }, operations: { blenderStartsBeforeAdmission: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 } }, 'admissionHash');
   try {
     const primaryProcess = await blenderChild(root, 'PRIMARY', TOOLS[0], 'primary.json', master, masterSha, spec);
     const independentProcess = await blenderChild(root, 'INDEPENDENT', TOOLS[1], 'independent.json', master, masterSha, spec);
