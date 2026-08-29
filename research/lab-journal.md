@@ -5199,3 +5199,11 @@ v0.4首帧再次完成EXR/OIIO projection，digest仍为`192237bd…`，stage停
 Failure summary file SHA/self-hash为`8b83f86d357b9e42adefd05921cd680415e8f780d46c67c86319ac8ccfdd8f20 / 959d9dbda9393f1b90293a9cc011d793b8edfd113821ba278e03f3b1b92895ff`；attempt/formal trees为6 files/7,785 bytes/`55a11af4…`与5 files/1,351,670 bytes/`75d459d5…`。
 
 D5预注册为one-Blender/zero-render 1080p probe：从保留EXR得到exact OIIO RGBA array，创建temporary Blender float image，再经isolated review scene输出PNG并清理。该路径复用已证明的两半，但必须在正式C4前验证完整1920×1080数据量。
+
+## J-404 · B61-D5 1080p generated review探针候选
+
+Date: 2026-08-29 · Type: DIAGNOSTIC TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+D5 preregistration commit `b2db213`推送后，实现one-Blender supervisor与probe。Probe绑定v0.4 retained EXR，复用唯一Combined/OIIO 3.1.13.1 decoder并要求`192237bd…`；基于OCIO `scene_linear: ACEScg`把array标记为ACEScg，做`OIIO Y0 top → Blender pixel0 bottom` row conversion，填充1920×1080 float image，再经isolated review scene的完整display/view/look/exposure/gamma输出PNG。生成image/scene在finally删除，production snapshot必须exact。
+
+Supervisor在启动前复核v0.4两棵失败树/failure/EXR，设置frozen OCIO，限定one Blender、zero render/model/network/Docker、60秒与16 MiB。Probe/runner SHA-256为`01ed911880fb207fb2524dfca48d742208f543d37305791d693f796487a933c4 / 3adbb0a5b08c18243c147f63d788bf45d46ca85a5344ccaaa4cfa5e5499e66cd`；spec/protocol SHA为`753b0fe4f013c05f0f28063f97c61b0f8cc5b1b3ff0783ff1b62674ce8814c8b / 6d6dad0111217c50cc89558c59ccb7bbff9a9dd6af20d77097c55bfadd5cc4e4`。Node/Python syntax、targeted ESLint zero-warning与diff check通过；D5 root仍不存在。下一动作提交推送freeze后执行真实Blender D5。
