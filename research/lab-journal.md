@@ -4891,3 +4891,13 @@ Date: 2026-08-29 · Type: B58 OFFICIAL PREFLIGHT ADMISSION · New Blender proces
 C6 tool-freeze commit `7eeafb9`与origin exact后，fresh clone以Git动态解析full HEAD运行v0.3：`ACCEPTED 18/18`，self-hash `9bcb1e0cfcc32e79c59ae0e9ce190d91b866869fbed0a45c7dad52ff63a4462e`。主仓库确认三条v0.3 roots absent后运行official preflight，同样`ACCEPTED 18/18`；file SHA/self-hash为`0c2fb6da88002ca862409f831ce0a5dc357b3bad8651c4c7970482b129646ed7` / `a4d85378d80b52fb429a1a77f73ac22623e99a18ccd973a087ecfe77d8d51301`。
 
 Official root含10 files：5/5 production preflights accepted、4/4 job requests self-hashed及outer receipt。v0.1 failure exact，v0.2 13-file tree exact `ac133875…`；Gate 0 live sampleCount 8、age 36,232 ms、HEALTHY、available 312,724,525,056 bytes、browser 20,480 bytes、alert absent。Operations仍为zero Blender/render/model/network/Docker。下一动作提交推送这10 files与本entry形成v0.3 evidence commit，然后formal runner才可创建v0.3 attempt/formal roots。
+
+## J-371 · B58 v0.3完整真实Blender矩阵为BOUNDED，C7预注册immutable re-audit
+
+Date: 2026-08-29 · Type: B58 COMPLETE FORMAL / VERIFIER COUNTEREXAMPLE · Real Blender processes: 7 · New Blender renders: 0
+
+v0.3 evidence commit `6d8532b`与origin exact后，formal runner完整结束并产出operation/audit/results/receipt。真实计数为4 native compile Blender starts（3 success + 1 controlled interruption）、3 artifact-audit Blender starts、合计7；三份completed jobs final receipt均为self-hashed `PASS/promotable:true`，exit-86恢复未重复compile，B02失败attempt retained/non-promotable且新attempt/output重试，live process拒绝duplicate spawn。Render/model/network/Docker全0，结束后无Blender存活。
+
+Old verdict为`RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED`：31/34 gates、71/72 original attacks；C1 8/8、C2 6/6、C3 2/2、C4 2/2、C5 2/2、C6 5/5。三项gate失败同源：terminal event实际字段为`payload.receipt`，auditor错误读取`payload.finalReceipt`；A64失败是validator只检查64-hex形状，未要求log hash等于immutable observation。
+
+v0.3 attempt/formal tree共141 files、约1.1 MiB，canonical tree SHA `c7f5ed6bddd030be24d86a8592e5dd80e24832de0ac72e0cd6fad1cf87bbae89`。Old audit file SHA/self-hash `ca162c4b…` / `f52076d5…`，results SHA/self-hash `0cf05356…` / `72cb12e6…`，receipt SHA/self-hash `de96e875…` / `45710ecf…`。C7只授权修独立auditor的两处binding并新增zero-Blender re-audit runner；不得改141-file evidence。下一动作提交推送C7 spec/protocol、完整v0.3 evidence与本entry，再实现新工具；reaudit root在此之前必须不存在。

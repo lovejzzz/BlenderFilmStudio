@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorReauditCorrection.v0.1",
+  "correctionId": "B58-E1-C7",
+  "status": "PREREGISTERED_AFTER_COMPLETE_BOUNDED_FORMAL_BEFORE_REAUDIT_OUTPUT",
+  "date": "2026-08-29",
+  "immutableFormalV03": {
+    "attemptRoot": "experiments/restart-safe-production-orchestrator-attempt-v0-3",
+    "formalRoot": "experiments/restart-safe-production-orchestrator-v0-3",
+    "fileCount": 141,
+    "canonicalTreeSha256": "c7f5ed6bddd030be24d86a8592e5dd80e24832de0ac72e0cd6fad1cf87bbae89",
+    "operationDraftSha256": "30f73d5f4bb0689ca59c06378ca4820ba58d47a2fb9b8a8125aa263632ad4e65",
+    "oldAudit": {
+      "sha256": "ca162c4bfd75383fe76ef5fce6e283e494d7eb5198c8d3551c86ee8f7f0e5eb2",
+      "auditHash": "f52076d543be8697bb11d967ead2781eb112f12898d738cc3024d8efbe93b46d",
+      "verdict": "RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED",
+      "gates": "31/34",
+      "attacks": "71/72"
+    },
+    "oldResults": {
+      "sha256": "0cf05356e0e5c235e4587d106cb38d8dce3bcc18d9c1d5ec2ef251fc85c766ea",
+      "resultHash": "72cb12e6c3d2500a9ba5cce661455e461cea27b287da8662e1521c1538f2eba6"
+    },
+    "oldReceipt": {
+      "sha256": "de96e87598709b4ad257cca3d64b458dcf3cd05e097f0d71b554b6a02bbd4ddc",
+      "receiptHash": "45710ecfb12756dcfa4efcbc2c0d543c2db54703abe640bf67ada442228aa87b"
+    },
+    "realOperations": {
+      "totalBlenderStarts": 7,
+      "nativeCompileBlenderStarts": 4,
+      "successfulNativeCompiles": 3,
+      "artifactAuditBlenderStarts": 3,
+      "renderCalls": 0,
+      "modelCalls": 0,
+      "networkCalls": 0,
+      "dockerProcesses": 0
+    }
+  },
+  "verifierDefects": [
+    {
+      "id": "C7-D1-FINAL_EVENT_FIELD",
+      "observed": "Auditor reads payload.finalReceipt.receiptHash",
+      "actualFrozenEvent": "payload.receipt.receiptHash",
+      "effect": "Three valid PASS final receipts are marked inexact, failing three gates."
+    },
+    {
+      "id": "C7-D2-LOG_HASH_REGEX_ONLY",
+      "observed": "A64 mutation remains a syntactically valid 64-hex hash",
+      "required": "Mutated log hash must equal the immutable observed log hash",
+      "effect": "A64 is not rejected."
+    }
+  ],
+  "authorizedCorrection": {
+    "executionEvidenceMayChange": false,
+    "newBlenderProcesses": 0,
+    "finalEventBinding": "ledger.events.at(-1).payload.receipt.receiptHash equals final.receiptHash",
+    "logHashBinding": "accounting model logSha256 equals expectedLogSha256 captured from immutable evidence",
+    "reauditOutputRoot": "experiments/restart-safe-production-orchestrator-c7-reaudit-v0-1",
+    "correctedAuditOutput": "experiments/restart-safe-production-orchestrator-c7-reaudit-v0-1/audit.json",
+    "runner": "scripts/run-b58-e1-c7-reaudit.mjs"
+  },
+  "additionalSemanticAttacks": [
+    "C7_A01_FINAL_EVENT_PAYLOAD_FIELD_MUTATION",
+    "C7_A02_LOG_HASH_EQUALITY_MUTATION"
+  ],
+  "admission": {
+    "requiredGates": 34,
+    "requiredOriginalAttacks": 72,
+    "requiredC7Attacks": 2,
+    "requiredVerdict": "RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED"
+  },
+  "unchanged": [
+    "all 141 immutable v0.3 evidence files",
+    "B57 and B58 execution tools, DAG, process accounting and recovery behavior",
+    "all C1-C6 corrections and attacks",
+    "34-gate denominator and 72 original-attack denominator"
+  ]
+}

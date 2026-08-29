@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobManifest.v0.1",
+  "jobId": "B58-FORMAL-EXIT86-B01",
+  "request": {
+    "uri": "experiments/restart-safe-production-orchestrator-preflight-v0-3/job-requests/B58-FORMAL-EXIT86-B01.json",
+    "sha256": "853aaa8bbf0242e0120f899a2eb0a536ff756c42208b3c3dbe50315df6ab92e8",
+    "requestHash": "440b86416f804051310a165a1252d995e5fbed9bff2c03ad0a96db4844dbbc93"
+  },
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B01.scene.json",
+    "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+  },
+  "expectedBuildPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "7eeafb9e97fb60a1ea6e3ea3e8d8a929ca62edd1",
+  "toolHashes": {
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/run-restart-safe-production-job.mjs": "ee321de2cc025f502b5a845ccda7f7042bb18dbf0181fb2515f95783bd1502ef"
+  },
+  "preflightEvidenceCommit": "6d8532b0600b60269f5e2ffbfa3197a60fcf335f",
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "EXIT86-COMPILE-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-preflight-v0-3/production-preflights/EXIT86_B01",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-attempt-v0-3/production-attempts/EXIT86_B01",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-v0-3/outputs/EXIT86_B01",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": "EXIT_AFTER_PRODUCTION_COMPILE",
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "manifestHash": "ee3894f07d49a26073569513f5a008ea879ec6ea954fb64e86b190a5cd9893c1"
+}

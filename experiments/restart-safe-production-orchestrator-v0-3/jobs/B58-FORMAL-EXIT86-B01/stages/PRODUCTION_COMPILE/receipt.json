@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionStageReceipt.v0.1",
+  "jobId": "B58-FORMAL-EXIT86-B01",
+  "stageId": "PRODUCTION_COMPILE",
+  "attemptId": "EXIT86-COMPILE-0001",
+  "status": "COMPLETED",
+  "promotable": true,
+  "inputs": {
+    "sceneSpec": {
+      "uri": "specs/benchmarks/B01.scene.json",
+      "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+    },
+    "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+    "productionRelease": {
+      "uri": "specs/production-compiler-entry.v0.2.json",
+      "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+    },
+    "preflightRoot": "experiments/restart-safe-production-orchestrator-preflight-v0-3/production-preflights/EXIT86_B01",
+    "preflightEvidenceCommit": "6d8532b0600b60269f5e2ffbfa3197a60fcf335f"
+  },
+  "outputs": {
+    "receipt": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/EXIT86_B01/production-receipt.json",
+      "sha256": "3d88e37b1ebdd73980988e9003d2cf547de4cfee7c29b6648045768723f4d706",
+      "receiptHash": "094089461f607b190631ec78263897ba1c9742bd9f9bad8bee208d2bbb836f8e"
+    },
+    "diskAdmission": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/EXIT86_B01/native-compile-disk-admission.json",
+      "sha256": "ec5273e35176d39957398dde50b1404b9b1f9b1b15971dcace60436d1e811fdb",
+      "diskAdmissionHash": "602b01fb553aa9ada88e6351f70c0b59eddb2d899551cdedae53402c6314268f"
+    },
+    "currentReceipt": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/EXIT86_B01/restricted/compile-receipt.json",
+      "sha256": "251c1b3b1ad8b26b019cc3c571752cf36783282c986a269eff3bb37baaf76e97",
+      "receiptHash": "477b2633c0df6787af54087ae0c1822d476a675afcb232ca639cdcea24a8ea6a"
+    },
+    "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+    "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+    "nativePid": 27006
+  },
+  "process": {
+    "wrapper": {
+      "pid": 26849,
+      "parentPid": 26829,
+      "start": "Sat Aug 29 03:38:10 2026",
+      "executable": "node",
+      "argv": "node /opt/homebrew/bin/npm run compile:production -- --scene-spec specs/benchmarks/B01.scene.json --preflight-root experiments/restart-safe-production-orchestrator-preflight-v0-3/production-preflights/EXIT86_B01 --attempt-root experiments/restart-safe-production-orchestrator-attempt-v0-3/production-attempts/EXIT86_B01 --output-root experiments/restart-safe-production-orchestrator-v0-3/outputs/EXIT86_B01 --preflight-evidence-commit 6d8532b0600b60269f5e2ffbfa3197a60fcf335f",
+      "argvSha256": "4f61ead1210c852e3c19d3a832d00852b7c508e0bd8e54b6c9d8399bd26c4689",
+      "live": true,
+      "identityHash": "4a4165f9086b1086f67c83fa19706957829f36fba55116878b3773a591eeac25"
+    },
+    "native": {
+      "pid": 27006,
+      "parentPid": 26969,
+      "start": "Sat Aug 29 03:38:11 2026",
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "argv": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_scene.py -- --plan /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/EXIT86_B01/build-plan.json --repository-root /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio --output-dir /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/EXIT86_B01/restricted",
+      "argvSha256": "5b42cacbf8fbb70881c856d6ab22a015ee92686ece7c1bfef917de38666adcf6",
+      "live": true,
+      "identityHash": "8c7ac3877f5c185bdfd0aa3443eb547f4e25f5b3310b8fea320e279cba9b32df"
+    },
+    "terminal": {
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "elapsedNanoseconds": 1346820084,
+      "stdout": {
+        "bytes": 754,
+        "capturedBytes": 754,
+        "sha256": "20c7abcd6047c99769c2ede10fd144707df7224de944e3bd1a4982f2c4dd7811",
+        "truncated": false
+      },
+      "stderr": {
+        "bytes": 0,
+        "capturedBytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false
+      }
+    },
+    "fault": null
+  },
+  "resources": {
+    "productionCompilerStarts": 1,
+    "nativeCompileBlenderStarts": 1,
+    "successfulNativeCompiles": 1,
+    "preferredVerifierStarts": 0,
+    "artifactAuditBlenderStarts": 0,
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0
+  },
+  "receiptHash": "4034dd09f94b09f85b3938c8c4caa2a36a16ff2a880e342bba740e1f33113c63"
+}

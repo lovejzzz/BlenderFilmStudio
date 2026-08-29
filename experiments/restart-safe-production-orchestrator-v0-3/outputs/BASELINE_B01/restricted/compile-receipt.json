@@ -1,0 +1,120 @@
+{
+  "documentType": "BFS_COMPILE_RECEIPT",
+  "version": "0.1.0",
+  "createdAtUtc": "2026-08-29T07:38:08.691Z",
+  "executionIdentity": {
+    "buildPlan": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/BASELINE_B01/build-plan.json",
+      "sha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+      "bytes": 7345,
+      "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+      "planVersion": "0.1.0",
+      "sourceSceneCanonicalSha256": "10d8ef02fbe71c0b44ca6fc93a25f7952cff605b31d40fc04f9c6029ee7119b0",
+      "shotId": "SHOT_101"
+    },
+    "tools": {
+      "sceneCompiler": {
+        "uri": "blender/compile_scene.py",
+        "sha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240",
+        "bytes": 51286
+      },
+      "restrictedCli": {
+        "uri": "scripts/run-restricted-blender-compile.mjs",
+        "sha256": "4cd49d91e7f396f04876b8fcb14ac3a10ff19fbba11309cae1cdc6911740b2af",
+        "bytes": 5757
+      },
+      "budgetSupervisor": {
+        "uri": "scripts/lib/budgeted-process.mjs",
+        "sha256": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d",
+        "bytes": 6306
+      },
+      "receiptGenerator": {
+        "uri": "scripts/lib/compile-receipt.mjs",
+        "sha256": "6fbe9a2394acbc0712ac73451db2602ec1aed8d23e49dde87bb124be2c07de95",
+        "bytes": 8203
+      },
+      "receiptFormat": {
+        "uri": "scripts/lib/receipt-format.mjs",
+        "sha256": "a7b3be629daf5ebc50b023eea367a4e525ca66b58acafb8b23107cb6bdb4aebc",
+        "bytes": 1251
+      }
+    },
+    "configuration": {
+      "budgetProfile": {
+        "uri": "specs/restricted-compile-budget.v0.1.json",
+        "sha256": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe",
+        "bytes": 457
+      },
+      "ocio": {
+        "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+        "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+        "bytes": 32807
+      }
+    },
+    "runtime": {
+      "blender": {
+        "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2",
+        "bytes": 183237520,
+        "version": "Blender 5.2.0 LTS",
+        "buildHash": "fbe6228777e7",
+        "buildBranch": "blender-v5.2-release",
+        "buildPlatform": "Darwin",
+        "buildType": "Release",
+        "binaryName": "Blender"
+      },
+      "node": {
+        "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+        "bytes": 50320,
+        "version": "v26.5.0",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "binaryName": "node"
+      }
+    }
+  },
+  "run": {
+    "budgetReport": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/BASELINE_B01/restricted/budget.report.json",
+      "sha256": "f5008632bc6549a959aa48fe1943fac2f0cd59103eedb0b6482c3d58b5a1ed89",
+      "bytes": 3235,
+      "outcome": "PASS",
+      "metrics": {
+        "elapsedMs": 1114,
+        "peakSampledRssBytes": 242647040,
+        "logBytes": 1144,
+        "output": {
+          "fileCount": 3,
+          "bytes": 129054,
+          "symlinkCount": 0
+        }
+      }
+    },
+    "sceneManifest": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/BASELINE_B01/restricted/scene.manifest.json",
+      "sha256": "acee96448f45b8e758c1300588974b0a1bcbc8cd4fd9b432bed04859b5250078",
+      "bytes": 8182,
+      "manifestVersion": "0.2.0",
+      "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+      "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b"
+    },
+    "sceneStructureCanonical": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/BASELINE_B01/restricted/scene.structure.canonical.json",
+      "sha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+      "bytes": 3130,
+      "structureHash": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b"
+    },
+    "sceneBlend": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/BASELINE_B01/restricted/scene.blend",
+      "sha256": "909c608e7b656b725944913671b5ece502822c694abfc0e7f9aeb5be65012da1",
+      "bytes": 117742
+    }
+  },
+  "claims": {
+    "exactArtifactBinding": true,
+    "semanticStructureBinding": true,
+    "signed": false,
+    "remotelyAttested": false
+  },
+  "executionIdentityHash": "1e6659e7c561716cc44f3598c2f32caa7511e501b92dd5de084efca98ac20c49",
+  "receiptHash": "e065bab4ace283f1b1df0a9bfc6565e9942f63ec230c9607130f43847c4e9d01"
+}

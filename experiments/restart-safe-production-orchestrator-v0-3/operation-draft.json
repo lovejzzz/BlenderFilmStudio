@@ -1,0 +1,415 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorOperationDraft.v0.1",
+  "experimentId": "B58-E1",
+  "jobs": [
+    {
+      "id": "BASELINE_B01",
+      "request": {
+        "id": "BASELINE_B01",
+        "jobId": "B58-FORMAL-BASELINE-B01",
+        "jobRoot": "experiments/restart-safe-production-orchestrator-v0-3/jobs/B58-FORMAL-BASELINE-B01",
+        "uri": "experiments/restart-safe-production-orchestrator-preflight-v0-3/job-requests/B58-FORMAL-BASELINE-B01.json",
+        "sha256": "490b385442ac56be3f189737d531e47fbb0723e8288573e0eee04ac634150907",
+        "requestHash": "a7c9bd236d009c307070f2973bc7024cef5d606516bd87573f51013c1d40d8e7"
+      },
+      "invocations": {
+        "start": {
+          "pid": 26298,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 3461663708,
+          "stdoutBytes": 1124,
+          "stderrBytes": 0,
+          "stdoutSha256": "3f5e030c58f608d4ce6f382bf7f4e036620ed3c90b41c3046200e60a199a3b18",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "closedResume": {
+          "pid": 26819,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 239175666,
+          "stdoutBytes": 1133,
+          "stderrBytes": 0,
+          "stdoutSha256": "cc6ecb5b893aa1cd0504908d336298320883c44808cb7e024943c2c6aa39462a",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "eventCount": 14,
+      "finalReceipt": {
+        "uri": "experiments/restart-safe-production-orchestrator-v0-3/jobs/B58-FORMAL-BASELINE-B01/final-receipt.json",
+        "sha256": "6e7228728e55d5ffa5a611ea7117df7a84cbfe5412603ca02048819e0a33cea1",
+        "receiptHash": "d7f2789edf4426aab22036f7ab56eb0dfd7a311a118e3eaf201255e5e9d2395d",
+        "value": {
+          "schemaVersion": "bfs.restartSafeProductionFinalReceipt.v0.1",
+          "jobId": "B58-FORMAL-BASELINE-B01",
+          "status": "PASS",
+          "promotable": true,
+          "manifest": {
+            "uri": "job-manifest.json",
+            "sha256": "06ab95467a80991f26ffb2b952d9a49638d63a8a5f01e7fc0cd47ec99ee7d343",
+            "manifestHash": "4e263c30509b9125cdf332d3f3510b35359477de420879ca8ba1c8da4beb16ad"
+          },
+          "ledgerPrefix": {
+            "eventCount": 13,
+            "headEventHash": "7f6b999239380882fc158014e8975b6624047457889da287b7a427bde6db57f2"
+          },
+          "stages": {
+            "PLAN_BIND": {
+              "uri": "stages/PLAN_BIND/receipt.json",
+              "sha256": "1ca62b713b076c62c922cd45baba0b74fb22131d6c599b4ec20ffd4a6d7270fe",
+              "receiptHash": "6df36ad8c513ab609e0444e8d33b46f782f632834fd8f0e74dff19dccb8f3b95"
+            },
+            "PRODUCTION_COMPILE": {
+              "uri": "stages/PRODUCTION_COMPILE/receipt.json",
+              "sha256": "f54e8784e371264641a6a144989e9ab6e26237fe4aaf5244a8a0819e5f48b46f",
+              "receiptHash": "48e029da31b1fbc377fe57c76d172d25574fab6ffd57bbb083b3b44d47cfd943"
+            },
+            "VERIFY_RECEIPT": {
+              "uri": "stages/VERIFY_RECEIPT/receipt.json",
+              "sha256": "33f5eccc73ddd4207d71406c085f583b49ecacfaee8d12c93c70535b6bd34a6e",
+              "receiptHash": "d8eeea85d9d96a02b9efea5dfa92a943906a4d2fecb0e5e6c3291ac73ec0093d"
+            },
+            "FINALIZE": {
+              "uri": "stages/FINALIZE/receipt.json",
+              "sha256": "1ace882ca84db8ce779fedfd9faed12c484483c3fcc77edc0b443c19d5730d2f",
+              "receiptHash": "0c174cb7d999bf66ac0415520f30391cc89621db2058275a91eaa624a3d01eff"
+            }
+          },
+          "resourceTotals": {
+            "productionCompilerStarts": 1,
+            "nativeCompileBlenderStarts": 1,
+            "successfulNativeCompiles": 1,
+            "preferredVerifierStarts": 1,
+            "currentReceiptVerifierNodeChildren": 1,
+            "artifactAuditBlenderStarts": 1,
+            "renderCalls": 0,
+            "modelCalls": 0,
+            "networkCalls": 0,
+            "dockerProcesses": 0,
+            "totalBlenderStarts": 2
+          },
+          "operations": {
+            "renderCalls": 0,
+            "modelCalls": 0,
+            "networkCalls": 0,
+            "dockerProcesses": 0
+          },
+          "closureRule": "Final receipt binds the completed-stage ledger prefix; the terminal JOB_FINALIZED event binds this receipt.",
+          "receiptHash": "d7f2789edf4426aab22036f7ab56eb0dfd7a311a118e3eaf201255e5e9d2395d"
+        }
+      }
+    },
+    {
+      "id": "ORCHESTRATOR_EXIT_AFTER_COMPILE_B01",
+      "request": {
+        "id": "ORCHESTRATOR_EXIT_AFTER_COMPILE_B01",
+        "jobId": "B58-FORMAL-EXIT86-B01",
+        "jobRoot": "experiments/restart-safe-production-orchestrator-v0-3/jobs/B58-FORMAL-EXIT86-B01",
+        "uri": "experiments/restart-safe-production-orchestrator-preflight-v0-3/job-requests/B58-FORMAL-EXIT86-B01.json",
+        "sha256": "853aaa8bbf0242e0120f899a2eb0a536ff756c42208b3c3dbe50315df6ab92e8",
+        "requestHash": "440b86416f804051310a165a1252d995e5fbed9bff2c03ad0a96db4844dbbc93"
+      },
+      "invocations": {
+        "checkpoint": {
+          "pid": 26829,
+          "exitCode": 86,
+          "signal": null,
+          "elapsedNanoseconds": 1745245917,
+          "stdoutBytes": 909,
+          "stderrBytes": 0,
+          "stdoutSha256": "bedcabfb9333e1b696958950dd8d97916a7b40b6fad5cf7f63397f8f16178587",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recovery": {
+          "pid": 27059,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 1465455375,
+          "stdoutBytes": 1120,
+          "stderrBytes": 0,
+          "stdoutSha256": "beb2c5e6cebbf1ad2e257fbf8b496a5c1b54f4e48e345c4b43dcce308e447f6e",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "closedResume": {
+          "pid": 27326,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 261378875,
+          "stdoutBytes": 1129,
+          "stderrBytes": 0,
+          "stdoutSha256": "1ee93b4a6f6c8a75032c7a55a2a9b90a2999f5b83e945a771cc0bba44a0a568e",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "eventCounts": {
+        "before": 8,
+        "after": 17
+      },
+      "nativeObservations": {
+        "before": 1,
+        "after": 1
+      },
+      "finalReceipt": {
+        "uri": "experiments/restart-safe-production-orchestrator-v0-3/jobs/B58-FORMAL-EXIT86-B01/final-receipt.json",
+        "sha256": "208051a24237ecc33db845eb947f8c9371586db477e48a45f5e7688424051cb3",
+        "receiptHash": "e2fa23dfb34d3b6b26cfd39a5a2f4b7fe2ce3a2cdadb1e6eb5463da8cfd6a373",
+        "value": {
+          "schemaVersion": "bfs.restartSafeProductionFinalReceipt.v0.1",
+          "jobId": "B58-FORMAL-EXIT86-B01",
+          "status": "PASS",
+          "promotable": true,
+          "manifest": {
+            "uri": "job-manifest.json",
+            "sha256": "5321efeb8347271fc364fa4a71fed9f6684251996051ec883d7cf60088204e81",
+            "manifestHash": "ee3894f07d49a26073569513f5a008ea879ec6ea954fb64e86b190a5cd9893c1"
+          },
+          "ledgerPrefix": {
+            "eventCount": 16,
+            "headEventHash": "34907b0e02f252c16ba5ea452416d838608bd80b4b2bc1ef4c8a0ea6108cb988"
+          },
+          "stages": {
+            "PLAN_BIND": {
+              "uri": "stages/PLAN_BIND/receipt.json",
+              "sha256": "fcc01579651fbfd3c1d259bb97c66580c75efbcb43d2b28f74aa84fbfabc43fd",
+              "receiptHash": "28d4d86e5a9594f4e82785b9dd25755325db1639b9e5944197a979e67ebd8d75"
+            },
+            "PRODUCTION_COMPILE": {
+              "uri": "stages/PRODUCTION_COMPILE/receipt.json",
+              "sha256": "afc4e6f453ab9ddba9050a8edee83ef43092c6a2aae9ca3aa785a018da2aa414",
+              "receiptHash": "4034dd09f94b09f85b3938c8c4caa2a36a16ff2a880e342bba740e1f33113c63"
+            },
+            "VERIFY_RECEIPT": {
+              "uri": "stages/VERIFY_RECEIPT/receipt.json",
+              "sha256": "60c5425387ca05ecb0449c413cd9166d3e2ff6bba25798ec27636f4696f14f06",
+              "receiptHash": "649f6b3946cc85f8127e4df886f7bbd23de97676b7098283ef2c88fcdc635ac3"
+            },
+            "FINALIZE": {
+              "uri": "stages/FINALIZE/receipt.json",
+              "sha256": "39d6e4a9f3dbb97bf44b05b24b6ef996d7cbf8e636d7cb9d1918370a665f3f73",
+              "receiptHash": "9976fb25685b7b23dc7b04b46e472ed9a30713401919216c9b5f7ad4893ee23c"
+            }
+          },
+          "resourceTotals": {
+            "productionCompilerStarts": 1,
+            "nativeCompileBlenderStarts": 1,
+            "successfulNativeCompiles": 1,
+            "preferredVerifierStarts": 1,
+            "currentReceiptVerifierNodeChildren": 1,
+            "artifactAuditBlenderStarts": 1,
+            "renderCalls": 0,
+            "modelCalls": 0,
+            "networkCalls": 0,
+            "dockerProcesses": 0,
+            "totalBlenderStarts": 2
+          },
+          "operations": {
+            "renderCalls": 0,
+            "modelCalls": 0,
+            "networkCalls": 0,
+            "dockerProcesses": 0
+          },
+          "closureRule": "Final receipt binds the completed-stage ledger prefix; the terminal JOB_FINALIZED event binds this receipt.",
+          "receiptHash": "e2fa23dfb34d3b6b26cfd39a5a2f4b7fe2ce3a2cdadb1e6eb5463da8cfd6a373"
+        }
+      }
+    },
+    {
+      "id": "BLENDER_INTERRUPTED_B02",
+      "request": {
+        "id": "BLENDER_INTERRUPTED_B02",
+        "jobId": "B58-FORMAL-INTERRUPTED-B02",
+        "jobRoot": "experiments/restart-safe-production-orchestrator-v0-3/jobs/B58-FORMAL-INTERRUPTED-B02",
+        "uri": "experiments/restart-safe-production-orchestrator-preflight-v0-3/job-requests/B58-FORMAL-INTERRUPTED-B02.json",
+        "sha256": "0548f3658b4e34515e25275f4a96648a63152c8dc43b84372ba5804ac27181d6",
+        "requestHash": "5fabb4159cf0f170ff4efdfa04d09b70e9104035dbd14bcd04c595e3aaa6bb54"
+      },
+      "invocations": {
+        "interrupted": {
+          "pid": 27335,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 940915917,
+          "stdoutBytes": 847,
+          "stderrBytes": 0,
+          "stdoutSha256": "9aa03c10d21966d50f5dcddb52f04231d6c2bba7657409ff529955b2dcf3ec1b",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recovery": {
+          "pid": 27515,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 2880453334,
+          "stdoutBytes": 1183,
+          "stderrBytes": 0,
+          "stdoutSha256": "298912a3b82ec6065f5106e6f569b6481dd287d22ad7ab61809b086480af05c9",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "closedResume": {
+          "pid": 27967,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 260477708,
+          "stdoutBytes": 1192,
+          "stderrBytes": 0,
+          "stdoutSha256": "2c3bec49bacdefa7df2cd951f686a1f6f98d4ee380f87b3f5ca72f5fb1baff4b",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "eventCounts": {
+        "before": 8,
+        "after": 20
+      },
+      "nativeObservations": {
+        "before": 1,
+        "after": 2
+      },
+      "finalReceipt": {
+        "uri": "experiments/restart-safe-production-orchestrator-v0-3/jobs/B58-FORMAL-INTERRUPTED-B02/final-receipt.json",
+        "sha256": "77f9c34a662163a9b9bd971bfe874b3b0b1d117de2257bb63bbf30cb9d6efc01",
+        "receiptHash": "f65b9cf0c74ecc931d641f789d8ac26766aa1aafbf8076ebfb409eadc3250b7b",
+        "value": {
+          "schemaVersion": "bfs.restartSafeProductionFinalReceipt.v0.1",
+          "jobId": "B58-FORMAL-INTERRUPTED-B02",
+          "status": "PASS",
+          "promotable": true,
+          "manifest": {
+            "uri": "job-manifest.json",
+            "sha256": "07bac78fa5004596b448f5b37fb965b147abd26d12fa186e213a8069241f0dc9",
+            "manifestHash": "616e6b5b148852b0d2e86055a9e1b7f9d24c45c8d008c99688267c0c34caee7b"
+          },
+          "ledgerPrefix": {
+            "eventCount": 19,
+            "headEventHash": "9140070ffcf133b3dd63fb51e4a19d4f7658af01a6953b9168b85b4a500e1634"
+          },
+          "stages": {
+            "PLAN_BIND": {
+              "uri": "stages/PLAN_BIND/receipt.json",
+              "sha256": "786ce19d8f75f63d2b5074af20e3f91038232f73fe6cf68a58af691e46eda754",
+              "receiptHash": "d0621508403940d0160dbc4f296be6d65aa3bd830f2d3f755ba2d07ced03c0dd"
+            },
+            "PRODUCTION_COMPILE": {
+              "uri": "stages/PRODUCTION_COMPILE/receipt.json",
+              "sha256": "64ca4a757f8df116fe75dfa8d6d0b6de659f3c2bd25c74407c4b62a8130da36d",
+              "receiptHash": "a4897b310c47ea718ec673fd7888278f6d715845ce01522b789360a4d266a3db"
+            },
+            "VERIFY_RECEIPT": {
+              "uri": "stages/VERIFY_RECEIPT/receipt.json",
+              "sha256": "720b0246832505a47fd0cb71a66daef7be230cb53965c974d3b94f3195fd6c71",
+              "receiptHash": "3792323fee722ffde26111177f63584565d5b018a38b96f28fcbb4e6fbe05db5"
+            },
+            "FINALIZE": {
+              "uri": "stages/FINALIZE/receipt.json",
+              "sha256": "1d51293e5d6bae352ee3425ded00044fa8887dc46b56144fa8a4e77628c1cbe0",
+              "receiptHash": "e48440017249a870461ca118b9d14b81485bae7bae97c093e5c6e1f5523b5c51"
+            }
+          },
+          "resourceTotals": {
+            "productionCompilerStarts": 2,
+            "nativeCompileBlenderStarts": 2,
+            "successfulNativeCompiles": 1,
+            "preferredVerifierStarts": 1,
+            "currentReceiptVerifierNodeChildren": 1,
+            "artifactAuditBlenderStarts": 1,
+            "renderCalls": 0,
+            "modelCalls": 0,
+            "networkCalls": 0,
+            "dockerProcesses": 0,
+            "totalBlenderStarts": 3
+          },
+          "operations": {
+            "renderCalls": 0,
+            "modelCalls": 0,
+            "networkCalls": 0,
+            "dockerProcesses": 0
+          },
+          "closureRule": "Final receipt binds the completed-stage ledger prefix; the terminal JOB_FINALIZED event binds this receipt.",
+          "receiptHash": "f65b9cf0c74ecc931d641f789d8ac26766aa1aafbf8076ebfb409eadc3250b7b"
+        }
+      }
+    },
+    {
+      "id": "LIVE_PROCESS_REFUSAL",
+      "request": {
+        "id": "LIVE_PROCESS_REFUSAL",
+        "jobId": "B58-FORMAL-LIVE-B01",
+        "jobRoot": "experiments/restart-safe-production-orchestrator-v0-3/jobs/B58-FORMAL-LIVE-B01",
+        "uri": "experiments/restart-safe-production-orchestrator-preflight-v0-3/job-requests/B58-FORMAL-LIVE-B01.json",
+        "sha256": "16f432cbfecb579f6c3ac26406c3e3330dcbf26af44cd0d101143550c26a4d45",
+        "requestHash": "5b6bd820b7117a450e6f1e16f795738c69669e8fa9b09fd4a871c93c30ae1916"
+      },
+      "invocations": {
+        "plan": {
+          "pid": 27976,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 373285958,
+          "stdoutBytes": 783,
+          "stderrBytes": 0,
+          "stdoutSha256": "0517ece66b4f1a2a2307033422355c47e16de85364ecc0c36a5b208475722564",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "wait": {
+          "pid": 28001,
+          "exitCode": 0,
+          "signal": null,
+          "elapsedNanoseconds": 303464708,
+          "stdoutBytes": 1219,
+          "stderrBytes": 0,
+          "stdoutSha256": "aef47d3835238c19914364275a213b85f7a1bde9eaafa23c29e3927fa51b07f4",
+          "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "controlledProcess": {
+        "pid": 27996,
+        "parentPid": 26272,
+        "start": "Sat Aug 29 03:38:18 2026",
+        "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "argv": "/opt/homebrew/Cellar/node/26.5.0/bin/node -e setInterval(() => {}, 1000)",
+        "argvSha256": "4bb5f27d07bb20d2daafd19be718499320b362716b69a02fa55e8f68d25d83d1",
+        "live": true,
+        "identityHash": "87797176af908dfaf745e4371748113646475c95fb102a636e12799ff0c994e4"
+      },
+      "waitProcess": {
+        "pid": 27996,
+        "parentPid": 26272,
+        "start": "Sat Aug 29 03:38:18 2026",
+        "executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+        "argv": "/opt/homebrew/Cellar/node/26.5.0/bin/node -e setInterval(() => {}, 1000)",
+        "argvSha256": "4bb5f27d07bb20d2daafd19be718499320b362716b69a02fa55e8f68d25d83d1",
+        "live": true,
+        "identityHash": "87797176af908dfaf745e4371748113646475c95fb102a636e12799ff0c994e4"
+      },
+      "eventCounts": {
+        "before": 5,
+        "after": 6
+      },
+      "processStarts": {
+        "before": 1,
+        "after": 1
+      },
+      "nativeStarts": {
+        "before": 0,
+        "after": 0
+      },
+      "outputMaterialized": false
+    }
+  ],
+  "counts": {
+    "productionCompilerStarts": 4,
+    "nativeCompileBlenderStarts": 4,
+    "successfulNativeCompiles": 3,
+    "controlledInterruptedNativeCompiles": 1,
+    "preferredVerifierStarts": 3,
+    "currentReceiptVerifierNodeChildren": 3,
+    "artifactAuditBlenderStarts": 3,
+    "totalBlenderStarts": 7,
+    "controlledLiveNodeStarts": 1
+  },
+  "semanticOperations": {
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0
+  },
+  "operationHash": "9519e2bebf88955bcaf79c27e74d12b9ff66b17b474bc46755df3d80d2b3f03d"
+}

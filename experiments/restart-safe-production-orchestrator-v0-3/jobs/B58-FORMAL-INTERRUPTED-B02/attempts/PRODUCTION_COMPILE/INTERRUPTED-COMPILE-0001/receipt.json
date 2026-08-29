@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionAttemptReceipt.v0.1",
+  "jobId": "B58-FORMAL-INTERRUPTED-B02",
+  "stageId": "PRODUCTION_COMPILE",
+  "attemptId": "INTERRUPTED-COMPILE-0001",
+  "status": "FAILED",
+  "promotable": false,
+  "reason": "CONTROLLED_NATIVE_INTERRUPTION",
+  "candidate": {
+    "attemptId": "INTERRUPTED-COMPILE-0001",
+    "preflightRoot": "experiments/restart-safe-production-orchestrator-preflight-v0-3/production-preflights/INTERRUPTED_B02_1",
+    "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-attempt-v0-3/production-attempts/INTERRUPTED_B02_1",
+    "outputRoot": "experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1",
+    "fault": "INTERRUPT_NATIVE_AFTER_OBSERVED"
+  },
+  "process": {
+    "wrapper": {
+      "pid": 27354,
+      "parentPid": 27335,
+      "start": "Sat Aug 29 03:38:13 2026",
+      "executable": "node",
+      "argv": "node /opt/homebrew/bin/npm run compile:production -- --scene-spec specs/benchmarks/B02.scene.json --preflight-root experiments/restart-safe-production-orchestrator-preflight-v0-3/production-preflights/INTERRUPTED_B02_1 --attempt-root experiments/restart-safe-production-orchestrator-attempt-v0-3/production-attempts/INTERRUPTED_B02_1 --output-root experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1 --preflight-evidence-commit 6d8532b0600b60269f5e2ffbfa3197a60fcf335f",
+      "argvSha256": "cc127ea628931f264b8e491b60ec0ca019bafa89ef304cb169645e5c5c9974b5",
+      "live": true,
+      "identityHash": "9a2dc93a98a611ba8d7ca1a47bdfd83b1e5c959f91e1b3601d5f5c8588870a4f"
+    },
+    "native": {
+      "pid": 27497,
+      "parentPid": 27471,
+      "start": "Sat Aug 29 03:38:14 2026",
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "argv": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_scene.py -- --plan /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1/build-plan.json --repository-root /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio --output-dir /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1/restricted",
+      "argvSha256": "03653d6c938c289eec4c8c34afa1376a97424a5eea9662107061a9ed80bf272b",
+      "live": true,
+      "identityHash": "61daff73cf8d7dcf3f845e055e7ca4ffd13207c7b3eb943668f9840112f8381e"
+    },
+    "terminal": {
+      "exitCode": 1,
+      "signal": null,
+      "spawnError": null,
+      "elapsedNanoseconds": 569460083,
+      "stdout": {
+        "bytes": 552,
+        "capturedBytes": 552,
+        "sha256": "abcb18641218dd7a1d741e6bd4bc68444eb36e5484076b6e9eb092edfd6e5e02",
+        "truncated": false
+      },
+      "stderr": {
+        "bytes": 133,
+        "capturedBytes": 133,
+        "sha256": "ca5d48833c4b685a66115d195f2a6dbc6e3d9dfbda289535726e4edd9c9ab086",
+        "truncated": false
+      }
+    },
+    "fault": {
+      "type": "INTERRUPT_NATIVE_AFTER_OBSERVED",
+      "nativeProcess": {
+        "pid": 27497,
+        "parentPid": 27471,
+        "start": "Sat Aug 29 03:38:14 2026",
+        "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+        "argv": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_scene.py -- --plan /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1/build-plan.json --repository-root /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio --output-dir /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1/restricted",
+        "argvSha256": "03653d6c938c289eec4c8c34afa1376a97424a5eea9662107061a9ed80bf272b",
+        "live": true,
+        "identityHash": "61daff73cf8d7dcf3f845e055e7ca4ffd13207c7b3eb943668f9840112f8381e"
+      },
+      "signal": "SIGTERM",
+      "signalSent": true
+    }
+  },
+  "evidence": {
+    "invalidation": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1/invalidation.json",
+      "sha256": "c8e73718a7dade62c141089334c1113f982f02283e476971ebcff229bc798245",
+      "invalidationHash": "270c9da8def525371e05c9ab8ca768f056abd2cbefc40ced9b909e1b07c46268"
+    },
+    "productionAttemptRoster": [
+      "admission.json",
+      "attempt.json",
+      "receipt.json"
+    ],
+    "outputRoster": [
+      "build-plan.json",
+      "formal-start.json",
+      "invalidation.json",
+      "native-compile-disk-admission.json",
+      "restricted"
+    ]
+  },
+  "resources": {
+    "productionCompilerStarts": 1,
+    "nativeCompileBlenderStarts": 1,
+    "successfulNativeCompiles": 0,
+    "preferredVerifierStarts": 0,
+    "artifactAuditBlenderStarts": 0,
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0
+  },
+  "receiptHash": "5d7dd1d5767897a1972b23452b9f677c9bbe44fdabe263679158db58fae3ebc5"
+}

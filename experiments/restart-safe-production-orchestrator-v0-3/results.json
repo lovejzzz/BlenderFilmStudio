@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorResult.v0.1",
+  "experimentId": "B58-E1",
+  "spec": {
+    "uri": "specs/restart-safe-production-orchestrator.v0.1.json",
+    "sha256": "a1ea52598d66263989c56f9737917b7ff297122b6731ec31d6f535cacc32cf41"
+  },
+  "correction": {
+    "uri": "specs/restart-safe-production-orchestrator-verifier-accounting-correction.v0.1.json",
+    "sha256": "1a8f17bda34e7d1f7c683b742e93a2f32d1b9c3a1651388c68efddf566f9c3cd"
+  },
+  "gate0Correction": {
+    "uri": "specs/restart-safe-production-orchestrator-gate0-binding-correction.v0.1.json",
+    "sha256": "180eff8d30e2b6ca8cdf0f71f1434ec2b3fe9279cdf539043ebe2f988c3a0785"
+  },
+  "gate0": {
+    "exact": true,
+    "evidenceCommit": "5d7d307cbc389592b765b6ad021a9796f232f432",
+    "results": {
+      "uri": "experiments/gate0-closeout-v0-1/results.json",
+      "sha256": "588da9723eb7cfd7c611e2eb8122da1e6d29a93bee19e55c36eae85fbf0db54a",
+      "selfHash": "f8a182469a66152347acda8147c792cf8db113e8d0de1494d8a4b4898d933704"
+    },
+    "audit": {
+      "uri": "experiments/gate0-closeout-v0-1/audit.json",
+      "sha256": "6d3a372f5fc3f07a3a154d22b8e9d124b264a8d4532db2fd5a777f3ed6395af7",
+      "selfHash": "bc88c1677a8fa352c62c464ca4001e6dcbec50ae8826de4bc031b6c7d0b7859d",
+      "verdict": "GATE0_HOST_STABILITY_CLOSED",
+      "gates": "15/15",
+      "attacks": "20/20"
+    },
+    "live": {
+      "sampleCount": 8,
+      "latestAgeMs": 36232,
+      "severity": "HEALTHY",
+      "availableBytes": 312724525056,
+      "browserBytes": 20480,
+      "alertAbsent": true,
+      "exact": true
+    }
+  },
+  "entryCorrection": {
+    "uri": "specs/restart-safe-production-orchestrator-entry-correction.v0.1.json",
+    "sha256": "97cfb3c9b01fe6b06173d77bbab65a41ec974015836c61fd1cde762a80cd137e",
+    "effectiveProductionEntry": "node scripts/run-restart-safe-production-job.mjs"
+  },
+  "nestedPreflightCorrection": {
+    "uri": "specs/restart-safe-production-orchestrator-nested-preflight-correction.v0.1.json",
+    "sha256": "a2e5422adf7603cb0a6d25ca2dc06e2eb9115a633c3ecf3d90a9be1f390ed022",
+    "parent": "experiments/restart-safe-production-orchestrator-preflight-v0-3/production-preflights",
+    "childFailurePolicy": "STOP_BEFORE_RECEIPT_READ"
+  },
+  "retryRootCorrection": {
+    "uri": "specs/restart-safe-production-orchestrator-retry-root-correction.v0.1.json",
+    "sha256": "8f02d5c9514a61cea9b744d8e3550bceba07f60c80ee3cc8f7e3d1bd2689a0be",
+    "roots": {
+      "preflight": "experiments/restart-safe-production-orchestrator-preflight-v0-2",
+      "attempt": "experiments/restart-safe-production-orchestrator-attempt-v0-2",
+      "formal": "experiments/restart-safe-production-orchestrator-v0-2"
+    }
+  },
+  "failedOfficialPreflight": {
+    "exact": true,
+    "uri": "experiments/restart-safe-production-orchestrator-preflight-v0-1/production-preflights/BASELINE_B01/preflight.json",
+    "sha256": "5b49bd337055e088efa091dba3228b4296c66861108294e0d86d0cd28ec8cec5",
+    "preflightHash": "151776edd83415305481eb9e19a7e5386fbb8d54e657309a2dcd98a045e427a9",
+    "status": "REJECTED",
+    "reason": "RELEASE_COMMIT",
+    "submittedCommit": "c8647647743e5e0ba55eb94b4b330ee693d8997a",
+    "outerAbsent": true,
+    "operations": {
+      "blenderProcesses": 0,
+      "dockerProcesses": 0,
+      "modelCalls": 0,
+      "networkCalls": 0,
+      "renderCalls": 0
+    }
+  },
+  "runtimeParentCorrection": {
+    "uri": "specs/restart-safe-production-orchestrator-runtime-parent-correction.v0.1.json",
+    "sha256": "afcef120237515d51c952a9259d41467e73de1f8df59a6ee7fb085181e03cbd3",
+    "roots": {
+      "preflight": "experiments/restart-safe-production-orchestrator-preflight-v0-3",
+      "attempt": "experiments/restart-safe-production-orchestrator-attempt-v0-3",
+      "formal": "experiments/restart-safe-production-orchestrator-v0-3"
+    }
+  },
+  "failedFormalV02": {
+    "exact": true,
+    "fileCount": 13,
+    "treeSha256": "ac13387581ecdd0293fe8b16e7e579fe1f32ab02207657d90d284171797b5b72",
+    "lastEvent": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/events/000005-PROCESS_STARTED.json",
+      "sha256": "118f91d384c59b5f8359ecbf9c85d0c1d6e450fe14cfda767a33b5ff638ffd12",
+      "eventHash": "456d11d33b36a1af17cb49a4f4c3ad6b44a4c8b05128d4b31dee348a474358b4",
+      "role": "PRODUCTION_COMPILER_WRAPPER",
+      "pid": 9206
+    },
+    "blenderProcessesStarted": 0
+  },
+  "preflight": {
+    "uri": "experiments/restart-safe-production-orchestrator-preflight-v0-3/preflight.json",
+    "sha256": "0c2fb6da88002ca862409f831ce0a5dc357b3bad8651c4c7970482b129646ed7",
+    "preflightHash": "a4d85378d80b52fb429a1a77f73ac22623e99a18ccd973a087ecfe77d8d51301"
+  },
+  "operation": {
+    "uri": "experiments/restart-safe-production-orchestrator-v0-3/operation-draft.json",
+    "sha256": "30f73d5f4bb0689ca59c06378ca4820ba58d47a2fb9b8a8125aa263632ad4e65",
+    "operationHash": "9519e2bebf88955bcaf79c27e74d12b9ff66b17b474bc46755df3d80d2b3f03d"
+  },
+  "audit": {
+    "uri": "experiments/restart-safe-production-orchestrator-v0-3/audit.json",
+    "sha256": "ca162c4bfd75383fe76ef5fce6e283e494d7eb5198c8d3551c86ee8f7f0e5eb2",
+    "auditHash": "f52076d543be8697bb11d967ead2781eb112f12898d738cc3024d8efbe93b46d"
+  },
+  "gates": {
+    "ARTIFACT_AND_RECEIPT_ROSTERS_EXACT": true,
+    "B02_RECOVERY_COMPILE_AND_VERIFY_VALID": false,
+    "BASELINE_B01_COMPLETE": false,
+    "BASELINE_OPERATION_COUNTS_EXACT": true,
+    "COMPILE_RECEIPT_DURABLE_BEFORE_ORCHESTRATOR_EXIT": true,
+    "DISK_RESERVE_AND_JIT_READMISSION_UNCHANGED": true,
+    "FORMAL_ROOTS_FRESH_AND_DISJOINT": true,
+    "INTERRUPTED_ATTEMPT_RETAINED": true,
+    "INTERRUPTED_ATTEMPT_TERMINAL_AND_NON_PROMOTABLE": true,
+    "JOB_MANIFEST_SELF_HASH_AND_INPUT_BINDINGS": true,
+    "LEDGER_EXCLUSIVE_CREATE_AND_DIRECTORY_FSYNC": true,
+    "LEDGER_PREVIOUS_HASH_CHAIN_EXACT": true,
+    "LEDGER_SEQUENCE_CONTIGUOUS": true,
+    "LIVE_MATCHING_PROCESS_BLOCKS_DUPLICATE_SPAWN": true,
+    "NATIVE_BLENDER_INTERRUPTION_OBSERVED": true,
+    "ORCHESTRATOR_EXIT_86_AT_FROZEN_BOUNDARY": true,
+    "PARENT_B57_EXACT": true,
+    "PID_IDENTITY_AMBIGUITY_FAILS_CLOSED": true,
+    "PREFLIGHT_ZERO_BLENDER_ACCEPTED": true,
+    "PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED": true,
+    "PROCESS_AND_ATTEMPT_IDENTITIES_UNIQUE": true,
+    "PRODUCTION_SURFACE_EXACT": true,
+    "RECOVERY_FINAL_RECEIPT_VALID": false,
+    "RECOVERY_RUNS_EXACTLY_ONE_VERIFIER": true,
+    "RECOVERY_SKIPS_COMPLETED_COMPILE": true,
+    "RECOVERY_SKIPS_COMPLETED_PLAN": true,
+    "RECOVERY_STARTS_ZERO_ADDITIONAL_NATIVE_COMPILE_BLENDER_AFTER_COMPILE_CHECKPOINT": true,
+    "REPEATED_FINAL_RESUME_ZERO_PROCESS_AND_BYTE_EXACT": true,
+    "RESOURCE_TOTALS_RECOMPUTE_EXACT": true,
+    "RETRY_DOES_NOT_RERUN_COMPLETED_PLAN": true,
+    "RETRY_USES_NEW_ATTEMPT_ID_AND_EMPTY_ROOT": true,
+    "SEMANTIC_ATTACKS_MINIMUM_64": true,
+    "STAGE_DAG_EXACT": true,
+    "ZERO_RENDER_MODEL_NETWORK_DOCKER": true
+  },
+  "attackSummary": {
+    "rejected": 71,
+    "total": 72
+  },
+  "correctionAttackSummary": {
+    "rejected": 8,
+    "total": 8
+  },
+  "gate0CorrectionAttackSummary": {
+    "rejected": 6,
+    "total": 6
+  },
+  "entryCorrectionAttackSummary": {
+    "rejected": 2,
+    "total": 2
+  },
+  "nestedPreflightCorrectionAttackSummary": {
+    "rejected": 2,
+    "total": 2
+  },
+  "retryRootCorrectionAttackSummary": {
+    "rejected": 2,
+    "total": 2
+  },
+  "runtimeParentCorrectionAttackSummary": {
+    "rejected": 5,
+    "total": 5
+  },
+  "scientificVerdict": "RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED",
+  "resultHash": "72cb12e6c3d2500a9ba5cce661455e461cea27b287da8662e1521c1538f2eba6"
+}

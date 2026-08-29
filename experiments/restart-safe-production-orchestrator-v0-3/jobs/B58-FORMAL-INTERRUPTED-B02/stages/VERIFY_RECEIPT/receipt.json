@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionStageReceipt.v0.1",
+  "jobId": "B58-FORMAL-INTERRUPTED-B02",
+  "stageId": "VERIFY_RECEIPT",
+  "attemptId": "VERIFY_RECEIPT-0001",
+  "status": "COMPLETED",
+  "promotable": true,
+  "inputs": {
+    "productionReceipt": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_2/production-receipt.json",
+      "sha256": "4b55f80b5e9ba6ec52bb4c4971bc689023738eea5188661b98037f6ecb7d63c1",
+      "receiptHash": "568a8a6d00fa4393b8645098088d9f3ebbec178188d4a8cda73e8da15a70a7d1"
+    },
+    "compileStageReceiptHash": "a4897b310c47ea718ec673fd7888278f6d715845ce01522b789360a4d266a3db"
+  },
+  "outputs": {
+    "verification": {
+      "uri": "attempts/VERIFY_RECEIPT/VERIFY_RECEIPT-0001/verification.json",
+      "sha256": "45f6e5666154263df1cc70f0e4d80091646e15c4b2f071b6fcc10cf2f96e281e",
+      "verificationHash": "b091124041df5480b6623eb2ef251b19048f0d767c882347e5167d3b654de21e"
+    },
+    "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+    "structureHash": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856",
+    "nativeChildPid": 27678,
+    "currentReceiptVerifierPid": 27774,
+    "artifactAuditBlenderPid": 27939,
+    "checkCount": 11
+  },
+  "process": {
+    "wrapper": {
+      "pid": 27728,
+      "parentPid": 27515,
+      "start": "Sat Aug 29 03:38:16 2026",
+      "executable": "/usr/bin/env",
+      "argv": "node /opt/homebrew/bin/npm run verify:production-receipt -- --receipt experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_2/production-receipt.json",
+      "argvSha256": "ded6952d51710f6c8ed63db5c3fe45d07cacc6e6275bedd7dc609c0a5b53f103",
+      "live": true,
+      "identityHash": "a8fa47bed702bcf31465292990209c84d7ade92ea9b53c3a16e363b47aa9c471"
+    },
+    "artifactAuditBlender": {
+      "pid": 27939,
+      "parentPid": 27748,
+      "start": "Sat Aug 29 03:38:16 2026",
+      "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "argv": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/audit_compiled_artifact.py -- --input /Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_2/restricted/scene.blend --output /tmp/bfs-production-verifier-KjLggZ/blend-audit.json",
+      "argvSha256": "09a91af93326805b989ac289c475f7846207eaa71e61a5cbc8642b60bb4a2ab6",
+      "live": true,
+      "identityHash": "7bac6c12db3165b88b7ae3a16f0f652d142aa0d4ec7d2aa5fe9746f7a2fd9c12"
+    },
+    "terminal": {
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null,
+      "elapsedNanoseconds": 1090877125,
+      "stdout": {
+        "bytes": 2863,
+        "capturedBytes": 2863,
+        "sha256": "9a6c0d6a3e9d7b073ced88b9750ec2b519848905211c60647ee6a76a5e7baa57",
+        "truncated": false
+      },
+      "stderr": {
+        "bytes": 0,
+        "capturedBytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "truncated": false
+      }
+    }
+  },
+  "resources": {
+    "productionCompilerStarts": 0,
+    "nativeCompileBlenderStarts": 0,
+    "successfulNativeCompiles": 0,
+    "preferredVerifierStarts": 1,
+    "currentReceiptVerifierNodeChildren": 1,
+    "artifactAuditBlenderStarts": 1,
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0
+  },
+  "receiptHash": "3792323fee722ffde26111177f63584565d5b018a38b96f28fcbb4e6fbe05db5"
+}

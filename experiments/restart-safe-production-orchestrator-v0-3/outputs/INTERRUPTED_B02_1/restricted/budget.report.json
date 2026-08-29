@@ -1,0 +1,68 @@
+{
+  "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+  "version": "0.2.0",
+  "outcome": "CHILD_FAILED",
+  "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+  "args": [
+    "--background",
+    "--factory-startup",
+    "--disable-autoexec",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_scene.py",
+    "--",
+    "--plan",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1/build-plan.json",
+    "--repository-root",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio",
+    "--output-dir",
+    "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/restart-safe-production-orchestrator-v0-3/outputs/INTERRUPTED_B02_1/restricted"
+  ],
+  "budgets": {
+    "documentType": "BFS_RESTRICTED_COMPILE_BUDGET",
+    "version": "0.1.0",
+    "scope": "BLENDER_SCENE_COMPILE_ONLY",
+    "wallTimeMs": 30000,
+    "maxRssBytes": 2147483648,
+    "maxLogBytes": 2097152,
+    "maxOutputFiles": 32,
+    "maxOutputBytes": 134217728,
+    "sampleIntervalMs": 100,
+    "nonClaims": [
+      "kernel hard memory limit",
+      "descendant process RSS accounting",
+      "GPU VRAM containment",
+      "network isolation",
+      "final frame render budget"
+    ]
+  },
+  "metrics": {
+    "elapsedMs": 28,
+    "peakSampledRssBytes": 360448,
+    "logBytes": 0,
+    "output": {
+      "fileCount": 0,
+      "bytes": 0,
+      "symlinkCount": 0
+    }
+  },
+  "breach": null,
+  "child": {
+    "pid": 27497,
+    "exitCode": null,
+    "signal": "SIGTERM",
+    "spawnError": null
+  },
+  "termination": {
+    "requested": false,
+    "awaited": true
+  },
+  "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "outputPreview": "",
+  "outputPreviewTruncated": false,
+  "budgetProfile": {
+    "uri": "specs/restricted-compile-budget.v0.1.json",
+    "sha256": "9203aba815c5a1b9063c288219219df1d4801eec598aa6cb1dc01729ff32eebe"
+  }
+}
