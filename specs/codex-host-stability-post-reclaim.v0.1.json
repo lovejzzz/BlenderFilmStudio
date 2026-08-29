@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "bfs.codex-host-stability-post-reclaim.v0.1",
+  "experimentId": "B59-G0-R4",
+  "status": "PREREGISTERED",
+  "parentCommit": "bcd0ee441a2178b8fd01b8a1477cafecc6619411",
+  "parentEvidence": {
+    "resultsPath": "experiments/codex-host-disk-colima-ab-v0-1/failure.json",
+    "resultsSha256": "7a69715a21f40889f6310b0c853c12a2b1a1b100aec065c91398d3e27e995bb3",
+    "auditPath": "experiments/codex-host-disk-colima-ab-v0-1/recovery.json",
+    "auditSha256": "15a2d4f3b9028ddf24012cc45de62eb93a15c64edcd1c86a1fc16aa456ce0f12",
+    "verdict": "OPERATIONALLY_RESTORED_INVALID_FORMAL_EVIDENCE"
+  },
+  "formalRoot": "experiments/codex-host-stability-post-reclaim-v0-1",
+  "toolPaths": {
+    "runner": "scripts/run-b59-g0-codex-host-stability-longitudinal.mjs",
+    "auditor": "scripts/audit-b59-g0-codex-host-stability-longitudinal.mjs"
+  },
+  "releasePaths": [
+    "specs/codex-host-stability-post-reclaim.v0.1.json",
+    "research/2026-08-29-b59-g0-r4-post-reclaim-retention-protocol.md",
+    "scripts/run-b59-g0-codex-host-stability-longitudinal.mjs",
+    "scripts/audit-b59-g0-codex-host-stability-longitudinal.mjs"
+  ],
+  "runtimeExpectation": {
+    "codexVersion": "26.825.32147 (7303)",
+    "appPlistPath": "/Applications/ChatGPT.app/Contents/Info.plist",
+    "appPlistSha256": "4d8b6390cf82eec96777e5cdd22993536f7fc5ef0b44809a6e1c377d0f563ce7",
+    "bundleIdentifier": "com.openai.codex",
+    "requiredMainPid": 26962,
+    "forbiddenPreviousMainPid": 92848
+  },
+  "observationPolicy": {
+    "requiredSampleCount": 7,
+    "minimumIntervalSeconds": 120,
+    "minimumTotalSpanSeconds": 720,
+    "maximumSampleLatenessSeconds": 15,
+    "maximumCodexTreeRssGrowthBytes": 268435456,
+    "maximumDiskLossBytes": 1073741824,
+    "maximumBrowserTempFilesystemBytes": 67108864,
+    "maximumBrowserTempFilesystemGrowthBytes": 67108864,
+    "browserTempFilesystemPath": "/Users/tianxing/Library/Application Support/Codex/Default/Partitions/codex-browser-app/File System",
+    "diagnosticReportsPath": "/Users/tianxing/Library/Logs/DiagnosticReports",
+    "maximumFilesystemEntries": 10000
+  },
+  "resourcePolicy": {
+    "minimumAvailableBytes": 268435456000,
+    "minimumMemoryFreePercent": 25,
+    "maximumCodexRendererCount": 6,
+    "maximumSingleRendererRssBytes": 1610612736,
+    "maximumCodexTreeRssBytes": 4294967296,
+    "maximumSampleBytes": 16384,
+    "maximumResultsBytes": 65536,
+    "maximumAuditBytes": 65536,
+    "maximumStdoutBytes": 8192
+  },
+  "processPolicy": {
+    "requiredMainCodexProcessCount": 1,
+    "requiredActiveBlenderProcessCount": 0,
+    "requiredActiveB58WorkerProcessCount": 0,
+    "requiredBrowserAutomationProcessCount": 0
+  },
+  "requiredGates": [
+    "SPEC_PARENT_AND_RELEASE_IDENTITY",
+    "PARENT_EVIDENCE_IDENTITY",
+    "SAMPLE_COUNT_AND_ORDER",
+    "TIMING_WINDOW",
+    "RUNTIME_IDENTITY",
+    "MAIN_PROCESS_CONTINUITY",
+    "PER_SAMPLE_RESOURCE_CEILINGS",
+    "RSS_GROWTH_BOUNDED",
+    "DISK_RETENTION_BOUNDED",
+    "BROWSER_TEMP_FILESYSTEM_BOUNDED",
+    "NO_FORBIDDEN_PROCESS",
+    "NO_NEW_CODEX_CRASH_REPORT",
+    "RESOURCE_ACCOUNTING_ZERO",
+    "EVIDENCE_BOUNDED_AND_SELF_HASHED",
+    "INDEPENDENT_AUDIT_REPLAY"
+  ],
+  "registeredAttacks": [
+    "A01_SPEC_SHA_MUTATION",
+    "A02_PARENT_EVIDENCE_MUTATION",
+    "A03_SAMPLE_REMOVAL",
+    "A04_SAMPLE_REORDER",
+    "A05_INTERVAL_BELOW_MINIMUM",
+    "A06_TOTAL_SPAN_BELOW_MINIMUM",
+    "A07_RUNTIME_VERSION_MUTATION",
+    "A08_MAIN_PID_MUTATION",
+    "A09_OLD_PID_RESURRECTION",
+    "A10_DISK_BELOW_FLOOR",
+    "A11_DISK_LOSS_ABOVE_CEILING",
+    "A12_MEMORY_BELOW_FLOOR",
+    "A13_RENDERER_OR_RSS_ABOVE_CEILING",
+    "A14_RSS_GROWTH_ABOVE_CEILING",
+    "A15_BROWSER_TEMP_SIZE_ABOVE_CEILING",
+    "A16_BROWSER_TEMP_GROWTH_ABOVE_CEILING",
+    "A17_FORBIDDEN_PROCESS_PRESENT",
+    "A18_NEW_CRASH_REPORT",
+    "A19_SAMPLE_SELF_HASH_MUTATION",
+    "A20_EVIDENCE_SIZE_ABOVE_CEILING"
+  ],
+  "formalCeilings": {
+    "blenderProcesses": 0,
+    "renderProcesses": 0,
+    "browserAutomationCalls": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "dockerCalls": 0,
+    "cleanupOperations": 0,
+    "signalsSent": 0,
+    "hostRestarts": 0,
+    "codexRestarts": 0,
+    "maximumObservationCommands": 25,
+    "maximumAuditCommands": 4
+  }
+}
