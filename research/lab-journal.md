@@ -5637,3 +5637,13 @@ C1 tool freeze `3c7e61992d0ce20ac74987a9ed28a44b67debe34`在fresh v0.2再次完�
 清空环境并使用同一Blender 5.2 LTS `fbe6228777e7`做factory-startup复核，loaded scene报告`ACES 2.0 / None`；`Medium High Contrast`仍非法。Blender官方5.x手册也明确bundled config包含ACES 2.0，且ACES view transform面向photoreal film/TV。C1“去掉外部OCIO即可恢复AgX roster”的假设被证伪，而不是环境变量未清干净。
 
 C2在任何工具修改前只替换base D6两个已不兼容5.2的字段：`AgX / Medium High Contrast`改为原生`ACES 2.0 / None`。renderer只可显式设置并报告这两个值；runner/auditor只可绑定C2、retained v0.2和fresh v0.3。builder/independent bytes、candidate、96-frame bake、8×2 roster、16次960×540 Cycles CPU 16 spp、32-bit multilayer EXR、全部geometry/pixel/资源/verdict门与HUMAN_PENDING边界不变。
+
+## J-451 · B62-Q1-D6 v0.3被受控写盘上限终止，C3预注册
+
+Date: 2026-08-29 · Type: RETAINED PARTIAL-RENDER FAILURE / MEASURED OUTPUT-BUDGET CORRECTION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 11
+
+C2 tool freeze `7622c31636e4016998862c9d5f34c6fc7d4c010c`让v0.3成功进入Blender 5.2原生`ACES 2.0 / None`渲染。BUILD通过；RENDER运行27.074秒、peak sampled RSS 1,357,365,248 bytes，写出11 EXR和10 PNG后，root达到141,074,598 bytes，超过冻结134,217,728-byte上限。守护器按设计SIGTERM，outcome为`BUDGET_EXCEEDED / OUTPUT_BYTES`，无Blender crash、RSS、wall或log breach，scientific verdict为null。
+
+v0.3永久保留27 files/141,080,094 bytes/tree `6f3516b5ad2957de578b66929f5b5973d2a51887fb8320130424293aa049db06`；failure file/self `bb6df76f…/ac124c52…`，build file/self `55c54386…/baed0c5b…`，render-process file/self `67c78365…/f77a723d…`。partial images明确invalidated，不打开、不用于相机或阈值调优。
+
+11份EXR共133,786,016 bytes，最大12,168,649 bytes；按最大值投影16份为194,698,384 bytes，PNG投影约10.7 MB。C3在任何工具修改前只授权runner/auditor把`projectedWriteBytes/maxOutputBytes`从128 MiB改为有界256 MiB，100 GiB minimum free reserve不变，并绑定retained v0.3、切fresh v0.4。三份Blender Python bytes、16-render全量重跑、ACES 2.0、camera/frame/geometry/pixel/verdict与其他资源门全部不变。

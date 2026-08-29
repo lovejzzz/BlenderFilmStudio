@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareHoldoutCorrection.v0.1",
+  "correctionId": "B62-Q1-D6-C3",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "supersedes": {
+    "correctionId": "B62-Q1-D6-C2",
+    "uri": "specs/b62-camera-quality-d6-c2-blender-5-2-aces2-color.v0.1.json"
+  },
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-motion-aware-holdout-v0-3",
+    "tree": {
+      "files": 27,
+      "bytes": 141080094,
+      "treeSha256": "6f3516b5ad2957de578b66929f5b5973d2a51887fb8320130424293aa049db06"
+    },
+    "failure": {
+      "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-3/failure.json",
+      "sha256": "bb6df76ff4986ac5fb89adb29f308029806094ad364e9dec99f80591c01930c7",
+      "failureHash": "ac124c520926e2c1c8233de243309d5f551bf70d624925c8652fee2450c9b5b6"
+    },
+    "build": {
+      "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-3/build.json",
+      "sha256": "55c5438672e142b585bac60e144804fa1cfc8255759f72e45a6c06765e0cd37f",
+      "reportHash": "baed0c5b68231a6d5c5bd767d6bd153da5233bf3c6697a18534b30897d497537",
+      "status": "PASS"
+    },
+    "renderProcess": {
+      "uri": "experiments/b62-camera-quality-motion-aware-holdout-v0-3/processes/RENDER.json",
+      "sha256": "67c78365acf0b44b50ebc3c0cecee15ee5b482dd75ed5c729ee6cbe37d073dd2",
+      "processHash": "f77a723db266129f92ccf9e822082fbcb29845c6b7be5fec93a47aaba25dc79d",
+      "outcome": "BUDGET_EXCEEDED",
+      "breach": {
+        "reason": "OUTPUT_BYTES",
+        "observed": 141074598,
+        "limit": 134217728
+      },
+      "elapsedMs": 27074,
+      "peakSampledRssBytes": 1357365248,
+      "completedFiles": {
+        "exr": 11,
+        "png": 10
+      }
+    }
+  },
+  "diagnosis": {
+    "finding": "The ACES 2.0 correction crossed color setup and rendered eleven 32-bit multilayer EXRs. The budget guard then terminated Blender exactly as designed because the full evidence root exceeded the preregistered 128 MiB output ceiling.",
+    "projection": {
+      "largestObservedExrBytes": 12168649,
+      "projectedSixteenExrBytes": 194698384,
+      "observedTenPngBytes": 6708248,
+      "projectedSixteenPngBytesAtObservedMean": 10733197,
+      "selectedBinaryCeilingBytes": 268435456,
+      "rationale": "A 256 MiB ceiling covers the measured 16-pair projection, scene and JSON receipts with more than 20 percent margin while preserving the unchanged 100 GiB free-space reserve."
+    },
+    "scientificBoundary": "Partial v0.3 images are invalidated. They may not be inspected or used to modify camera, geometry, frame roster, render settings, thresholds or verdict mapping."
+  },
+  "frozenBeforeCorrection": {
+    "toolFreezeCommit": "7622c31636e4016998862c9d5f34c6fc7d4c010c",
+    "builderSha256": "31738bf4a4f34e562fd5182235f6ee16e7d6bef282fd0d3828777be827f4485d",
+    "renderSha256": "44733ccdfc336061fdef7b0861f565567916390147c0120b28a9bca2d625c0be",
+    "independentSha256": "3ae58ef4be3532e507ab72cafcd8e045feed977287d71b459a0d926b38a5f359",
+    "runnerSha256": "14687b6a917c53be6569416b4b0f17e8b57ea077883739230a9ed08d83d8ecf5",
+    "auditorSha256": "5656861bd708eb1a978d980dfd55573bdeb3df768ef89be16abecb22d84453ff"
+  },
+  "authorizedChanges": {
+    "runner": "Bind C3 and immutable v0.3, replace only the output-byte projection and maxOutputBytes with 268435456, preserve minimumFreeReserveBytes at 107374182400, and use the fresh retry root.",
+    "auditor": "Bind C3 and immutable v0.3, require all three Blender Python tools to remain byte-identical, require every child process receipt to use the C3 output ceiling, and use the fresh retry root.",
+    "retryRoot": "experiments/b62-camera-quality-motion-aware-holdout-v0-4"
+  },
+  "replacementProcessBudget": {
+    "projectedWriteBytes": 268435456,
+    "maximumOutputBytesPerChild": 268435456,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "unchanged": [
+    "All three Blender Python tool bytes",
+    "Blender 5.2 executable, ACES 2.0 and None color contract",
+    "Fresh master build and both 96-frame camera bakes",
+    "Eight validation frames, two conditions and 16 Cycles renders",
+    "960x540, CPU, 16 spp, 32-bit multilayer EXR and PNG previews",
+    "All geometry, pixel, routing, wall-time, RSS, log, verdict and human-review gates",
+    "Zero model/network/Docker calls and immutable-failure policy"
+  ]
+}
