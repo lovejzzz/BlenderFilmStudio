@@ -5801,3 +5801,13 @@ Date: 2026-08-29 · Type: RETAINED POST-SIGTERM FAILURE / EXHAUSTIVE HELPER-RETU
 C1 tool freeze `d081b25030aeb47ac976786d2d562f15f7270ed2`越过preflight/manifest/ADMIT_PLAN并执行真实controlled Blender：source/OCIO/context准入后打印ready，SIGTERM退出，0 render，failed receipt为non-promotable。但runner在随后构造`STAGE_FAILED` reference时仍读取不存在的`failed.path`，约0.69秒退出；scientific verdict为null。ledger已补写与durable receipt exact绑定的terminal event，job明确invalidated且禁止resume。
 
 v0.2 interrupted receipt file/self `5267a58b…/7d63a447…`，invalidation file/self `18d294b4…/23006418…`；job 11 files/10,723 bytes/tree `78955d32…`。C2在工具修改前穷尽枚举helper返回值，确认仅剩同一failed receipt的两处无效`.path`，只授权显式path与fresh v0.3；全部T3门槛不变。
+
+## J-468 · B62-T3 v0.3完成WIDE并停在真实Codex restart checkpoint
+
+Date: 2026-08-29 · Type: DURABLE MID-RUN CHECKPOINT / REAL RESTART REQUIRED · New Blender processes: 2 · New Blender renders: 96
+
+C2 tool freeze `69056b8eb853572804f47c9831b4fda4441edef7`在fresh v0.3完整越过历史失败。第一个native Blender读取exact scene并flush ready marker后被SIGTERM，0 accepted render；failed attempt永久non-promotable，ledger随后用新attempt完成interrupt verification。第二个native Blender在`WIDE-RETRY-0002`完成frame 1–96：96 EXR、96 PNG、96 self-hashed frame reports，exact 96 Cycles calls、0 scene save/model/video-model/network/Docker/Colima。
+
+WIDE Blender real/user/sys为3555.99/48329.6/277.5秒，maximum RSS 3,896,508,416 bytes；renderer累计3507.461秒，shot report self `4aca85e9…`，stage receipt self `3d401afa…`。checkpoint记录ChatGPT/Codex app-server PID 27025、start `Fri Aug 28 23:58:08 2026`、identity `db166660…`，receipt self `d6e2a38d…`，runner按协议exit 86。
+
+同一host identity再次resume得到`LIVE_MATCH`并exit 86，restricted processes 0；refusal proof file/self `8df2c827…/8c2761f5…`。checkpoint evidence共313 files、约1.3 GB，commit `926e00451361017da547051fb4eca3ce515aecd0`已推送。下一步必须由用户真实重启Codex/ChatGPT，使旧identity死亡且新identity不同；resume才可verified-skip WIDE并启动MEDIUM，禁止在当前host继续。
