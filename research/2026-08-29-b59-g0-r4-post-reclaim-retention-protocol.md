@@ -1,7 +1,7 @@
 # B59-G0-R4 · Post-reclaim host-retention protocol
 
 Date: 2026-08-29
-Status: PREREGISTERED — FORMAL ROOT ABSENT
+Status: COMPLETED — ADMITTED FOR GATE 0 CLOSEOUT
 Parent commit: `bcd0ee441a2178b8fd01b8a1477cafecc6619411`
 
 ## Trigger
@@ -43,3 +43,19 @@ The disk-loss threshold is unchanged from R3. Raising the per-sample floor from 
 A complete independent pass proves only a bounded 12-minute post-reclaim retention window. It is necessary but not sufficient for the goal's longer-term stability claim. Gate 0 may advance from `BLOCKED_DISK_RETENTION` to `SHORT_WINDOW_READMITTED`, after which a longer unattended observation and capacity guard must still be demonstrated before production rendering resumes.
 
 Any failed gate is retained without threshold relaxation. If disk loss recurs, the exact sample window becomes the next attribution target. If the run passes, D2 is not retroactively converted into valid causal evidence.
+
+## Formal result
+
+R4 completed seven samples over `720,161` ms. The producer passed all 14 pre-audit gates, and the independent auditor passed all 15 final gates plus 20/20 registered mutation attacks. Final verdict: `ADMITTED_FOR_GATE0_CLOSEOUT`.
+
+- Available-space loss: `130,621,440` bytes, approximately 12.2% of the 1 GiB ceiling.
+- Minimum available space: `320,027,803,648` bytes, above the 250 GiB floor.
+- Codex tree RSS change: `−27,344,896` bytes; maximum observed tree RSS `3,842,129,920` bytes.
+- Maximum renderer RSS: `975,994,880` bytes across four renderers.
+- Browser temporary filesystem: `20,480` bytes in every sample; growth `0`.
+- Memory free percentage: minimum `87%`.
+- Main process: PID `26962` in every sample; no new crash report.
+- Results SHA-256: `4f7b7dbe2881b20301bee3a7c0897bfad43f7808b5788a09e22b7d247195bfe7`.
+- Audit SHA-256: `f696592bfd8386d6b5696998072a987296655d252cd3b2384eeeefa2f67eb773`.
+
+This closes the immediate R3 regression: under the restored workload, the same six-minute point no longer showed multi-gigabyte loss, and the full 12-minute window remained inside the frozen bound. Gate 0 is now `SHORT_WINDOW_READMITTED`, not fully closed. A longer unattended retention proof and an active capacity guard remain required before B58 production rendering resumes.

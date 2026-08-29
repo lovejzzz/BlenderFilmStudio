@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "bfs.codex-host-stability-longitudinal-audit.v0.1",
+  "experimentId": "B59-G0-R4",
+  "auditedAt": "2026-08-29T05:37:28.030Z",
+  "finalVerdict": "ADMITTED_FOR_GATE0_CLOSEOUT",
+  "fileIntegrity": {
+    "SPEC_SHA": true,
+    "START_SHA": true,
+    "SAMPLE_FILES": true,
+    "RESULTS_BYTES": true,
+    "SELF_HASHES": true,
+    "PARENT_FILES": true,
+    "RELEASE_REPLAY": true,
+    "RUNTIME_REPLAY": true,
+    "PID_REPLAY": true,
+    "CRASH_REPLAY": true,
+    "OBSERVED_GATE_PROJECTION": true,
+    "AUDIT_COMMAND_CEILING": true
+  },
+  "syntheticAdmissibleControl": {
+    "valid": true,
+    "selfHash": "9feffe6515675074032e7f7045b410b7f56cc3d20267180292f37ce87ecaa188"
+  },
+  "attackIdsExact": true,
+  "attackResults": [
+    {
+      "id": "A01_SPEC_SHA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A02_PARENT_EVIDENCE_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A03_SAMPLE_REMOVAL",
+      "rejected": true
+    },
+    {
+      "id": "A04_SAMPLE_REORDER",
+      "rejected": true
+    },
+    {
+      "id": "A05_INTERVAL_BELOW_MINIMUM",
+      "rejected": true
+    },
+    {
+      "id": "A06_TOTAL_SPAN_BELOW_MINIMUM",
+      "rejected": true
+    },
+    {
+      "id": "A07_RUNTIME_VERSION_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A08_MAIN_PID_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A09_OLD_PID_RESURRECTION",
+      "rejected": true
+    },
+    {
+      "id": "A10_DISK_BELOW_FLOOR",
+      "rejected": true
+    },
+    {
+      "id": "A11_DISK_LOSS_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A12_MEMORY_BELOW_FLOOR",
+      "rejected": true
+    },
+    {
+      "id": "A13_RENDERER_OR_RSS_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A14_RSS_GROWTH_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A15_BROWSER_TEMP_SIZE_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A16_BROWSER_TEMP_GROWTH_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A17_FORBIDDEN_PROCESS_PRESENT",
+      "rejected": true
+    },
+    {
+      "id": "A18_NEW_CRASH_REPORT",
+      "rejected": true
+    },
+    {
+      "id": "A19_SAMPLE_SELF_HASH_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A20_EVIDENCE_SIZE_ABOVE_CEILING",
+      "rejected": true
+    }
+  ],
+  "attacksPassed": 20,
+  "attacksTotal": 20,
+  "auditCommands": [
+    {
+      "label": "audit-git-status",
+      "stdoutBytes": 0
+    },
+    {
+      "label": "audit-git-identities",
+      "stdoutBytes": 82
+    },
+    {
+      "label": "audit-processes",
+      "stdoutBytes": 138489
+    }
+  ],
+  "replay": {
+    "codexVersion": "26.825.32147 (7303)",
+    "processes": {
+      "mainCodexProcessCount": 1,
+      "mainCodexPids": [
+        26962
+      ],
+      "rendererCount": 4,
+      "maximumRendererRssBytes": 923484160,
+      "codexTreeRssBytes": 3791421440,
+      "activeBlenderProcessCount": 0,
+      "activeB58WorkerProcessCount": 0,
+      "browserAutomationProcessCount": 0
+    },
+    "newCrashReports": []
+  },
+  "finalGates": {
+    "SPEC_PARENT_AND_RELEASE_IDENTITY": true,
+    "PARENT_EVIDENCE_IDENTITY": true,
+    "SAMPLE_COUNT_AND_ORDER": true,
+    "TIMING_WINDOW": true,
+    "RUNTIME_IDENTITY": true,
+    "MAIN_PROCESS_CONTINUITY": true,
+    "PER_SAMPLE_RESOURCE_CEILINGS": true,
+    "RSS_GROWTH_BOUNDED": true,
+    "DISK_RETENTION_BOUNDED": true,
+    "BROWSER_TEMP_FILESYSTEM_BOUNDED": true,
+    "NO_FORBIDDEN_PROCESS": true,
+    "NO_NEW_CODEX_CRASH_REPORT": true,
+    "RESOURCE_ACCOUNTING_ZERO": true,
+    "EVIDENCE_BOUNDED_AND_SELF_HASHED": true,
+    "INDEPENDENT_AUDIT_REPLAY": true
+  },
+  "passedGates": 15,
+  "totalGates": 15,
+  "failedGates": [],
+  "selfHash": "f2f284c3b13169dceb9cd9257b1b2a2ff84cceeceae64e28bc3bff29ec99940c"
+}
