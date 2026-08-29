@@ -4727,3 +4727,15 @@ Independent auditor的九项file/live integrity checks全部通过，span-normal
 冻结历史的minimum available为319,742,877,696 bytes；host loss 294,092,800 bytes、294,025,745.795 bytes/hour；maximum interval loss 95,473,664 bytes；browser zero growth；Colima growth 602,112 bytes、601,974.716 bytes/hour；5/5 severities HEALTHY、prohibited actions全0。同一Codex PID 26962持续存活且无新crash report，launchd runs 5、last exit 0、interval 900秒。
 
 C1关闭了R6长期无人值守输入，但不单独关闭Gate 0。下一动作提交推送C1证据，然后预注册Gate 0 closeout：只聚合R2 restart readmission、R4 post-reclaim、R5 active sentinel、R6-C1 unattended retention及D2 operational recovery facts，逐项验证hash、verdict、live sentinel与可恢复性，禁止把D2形式失败改写成因果成功。
+
+## J-355 · B59-G0宿主稳定性closeout预注册
+
+Date: 2026-08-29 · Type: GATE 0 CLOSEOUT PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+R6-C1 admission commit `378765dee04313178936ad68ba593623691ab764`推送后，Gate 0 closeout冻结fresh root `experiments/gate0-closeout-v0-1`、15 gates和20个定向攻击。正证据为R2 20/20+25/25 post-restart、R4 15/15+20/20 post-reclaim、R5-C1 10/10+15/15 active sentinel及R6-C1 12/12+15/15 one-hour retention；所有results/audit paths与SHA逐个冻结。
+
+反证据也成为硬门：R3的`DISK_RETENTION_BOUNDED`失败、R5-v0.1的kickstart failure与exact rollback、原R6的14/15 invalid audit均必须存在、hash exact且不得重标为成功。D2继续是formal failure；closeout只允许从start/stop/start/failure/recovery receipts验证一次stop/start、exact four IDs、authoritative config、profile/runtime与disk identity的操作恢复，同时必须保留generated `lima.yaml` hash mismatch，不得宣称Colima因果归因。
+
+Live门要求哨兵plist byte-exact、launchd loaded/900 seconds/last exit 0、latest age不超过1,200秒、HEALTHY、available至少250 GiB、browser低于64 MiB、history bounded、无alert；Codex须维持PID 26962与同version/hash/bundle，且R6 cutoff后无新crash report。Closeout自身禁止Blender/Docker/network/model/cleanup/service mutation。
+
+Auditor必须独立重读全部parent artifacts和live state；20个attack逐项指定必须翻转的目标gate，避免靠无关hash gate吸收攻击。只有15/15 gates、20/20 attacks才可输出`GATE0_HOST_STABILITY_CLOSED`，且只允许进入独立B58 minimal preflight。
