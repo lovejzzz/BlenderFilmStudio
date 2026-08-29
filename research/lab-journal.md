@@ -5305,3 +5305,13 @@ Date: 2026-08-29 · Type: ZERO-BLENDER REHEARSAL · New B62 Blender processes: 0
 C2实现只修改三个Node入口：移除SceneSpec/Ajv传递依赖，以Node built-ins执行canonical hash、durable JSON与repository-contained path checks；tool freeze `21d49742…`推送且HEAD/origin exact。另建fresh local clone `/tmp/b62-rehearsal-21d4974`，没有安装或symlink node_modules。
 
 clean clone preflight得到9/9 ACCEPTED，self-hash `ca53e2ce4d83391e49c8e18a6b6d56c3c139682b7b74a9a1d1bf89ae61b43960`；upstream receipts、prereg/C1/C2 ancestry、tool hashes、runtime executables、291 render budget、18/16 rosters与disk reserve均exact。观测available `313,538,138,112` bytes，projected 2 GiB，reserve 100 GiB；operations明确为0 child/Blender/render/model/network/Docker。该clone只作rehearsal，随后移出`/tmp`，其preflight不作为official evidence。下一动作是在主仓库相同tool freeze上生成official zero-Blender preflight并提交推送。
+
+## J-416 · B62 Phase 0 v0.1 generator正式失败与C3预注册
+
+Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / CORRECTION PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+official preflight `ad7bc82…`以evidence commit `ea88148…`推送后，v0.1 runner完成durable admission并启动01-GENERATOR。Blender 5.2.0 LTS `fbe6228777e7`在0.752秒、peak RSS 260,882,432 bytes后exit 1；未timeout、未termination、logs未截断、render 0。错误为factory scene在`media_type=IMAGE`时，`file_format`枚举没有`OPEN_EXR_MULTILAYER`。
+
+失败保持`B62_PHASE0_INVALIDATED`：attempt 7 files/7,519 bytes/tree `f27179c8…`，formal 5 files/493,005 bytes/tree `f71e288a…`，failure file/self `8cb9c5cd…/dc47c06a…`。没有进入animatic/calibration，不得覆盖v0.1。
+
+B61同build成功的差异是其source blend已保存multilayer media状态；C3预注册D1 one-Blender/zero-render probe，测试factory默认、错误顺序reject、先`MULTI_LAYER_IMAGE`再`OPEN_EXR_MULTILAYER`accept及HALF/ZIP。只有D1 PASS才允许两份Blender工具增加显式media_type设置；其余参数完全不变，retry使用全新v0.2三棵roots。

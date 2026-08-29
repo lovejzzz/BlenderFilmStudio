@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C3",
+  "date": "2026-08-29",
+  "statusBeforeDiagnostic": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "failedToolFreezeCommit": "21d49742a0ecfd2acd5f8b2ebde968259fa9bc94",
+    "preflightEvidenceCommit": "ea881483a74b195a781fc7a44ee2fdfa117c91ee",
+    "preflight": {
+      "uri": "experiments/b62-phase0-preflight-v0-1/preflight.json",
+      "sha256": "4fe5605dadf7908224bc89d219ca4844a115c1dfcf26df7331c07e65a9f6c904",
+      "preflightHash": "ad7bc82d56b2a77218acad3a679f487098c5b7d007228284a0dcb28fffbe40ee"
+    },
+    "c2Uri": "specs/b62-phase0-c2-fresh-clone-node-dependency-correction.v0.1.json",
+    "c2Sha256": "0278cd435aae6ae4ec3921744726aef5c8efa85504f25d6e6dc5047b7ddb37e6"
+  },
+  "retainedFailure": {
+    "attemptRoot": "experiments/b62-phase0-attempt-v0-1",
+    "attemptTree": {
+      "files": 7,
+      "bytes": 7519,
+      "treeSha256": "f27179c8438dc5ff174128e0908f7be66b9986e1fa11d57ef0318812cb377a56"
+    },
+    "formalRoot": "experiments/b62-phase0-v0-1",
+    "formalTree": {
+      "files": 5,
+      "bytes": 493005,
+      "treeSha256": "f71e288afeeea46c0b5996efae1fb07cca73cc1dd88de91d56a18054e05130b1"
+    },
+    "failure": {
+      "uri": "experiments/b62-phase0-attempt-v0-1/failure.json",
+      "sha256": "8cb9c5cd6cf7de0588cade4eb1599917e6175ab9932bb89ab50bd690aa147b78",
+      "failureHash": "dc47c06ad3216ee14accd6b2e03db9bd8b9b5c331a306cef674a6d2c62640c73",
+      "status": "INVALIDATED"
+    },
+    "generatorProcess": {
+      "exitCode": 1,
+      "elapsedSeconds": 0.751546166,
+      "renderCalls": 0,
+      "stdoutSha256": "f4183d3322cea226cc010e09a49de8f8cd0004c27e46ba4d7c2f6f5ce559399a",
+      "stderrSha256": "3267c11c3215b0c39bb7d06e8eea068d913817c18aa7d286d981fc14e71ff9df",
+      "error": "enum OPEN_EXR_MULTILAYER not found while media_type remained IMAGE"
+    }
+  },
+  "hypothesis": "In Blender 5.2 factory state, ImageFormatSettings.file_format exposes OPEN_EXR_MULTILAYER only after ImageFormatSettings.media_type is set to MULTI_LAYER_IMAGE.",
+  "authorizedDiagnostic": {
+    "id": "B62-P0-D1",
+    "root": "experiments/b62-phase0-d1-exr-media-type-v0-1",
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "toolPaths": [
+      "blender/probe_b62_d1_exr_media_type.py",
+      "scripts/run-b62-d1-exr-media-type.mjs",
+      "scripts/audit-b62-d1-exr-media-type.mjs"
+    ],
+    "writes": ["result.json", "receipt.json", "stdout.log", "stderr.log"],
+    "tests": [
+      "factory default media_type and file_format enum roster",
+      "OPEN_EXR_MULTILAYER assignment before media_type must reject",
+      "MULTI_LAYER_IMAGE then OPEN_EXR_MULTILAYER must accept",
+      "color depth 16 and ZIP codec assignments must accept"
+    ]
+  },
+  "authorizedToolCorrectionIfDiagnosticPasses": {
+    "files": ["blender/generate_b62_phase0_assets.py", "blender/render_b62_phase0.py"],
+    "change": "Set image_settings.media_type to MULTI_LAYER_IMAGE immediately before every OPEN_EXR_MULTILAYER assignment and record mediaType in calibration settings.",
+    "forbidden": "Any change to creative content, frames, samples, seed, denoise, resolution, compression, gates, attacks, budgets or verdicts."
+  },
+  "authorizedRetryRoots": {
+    "preflight": "experiments/b62-phase0-preflight-v0-2",
+    "attempt": "experiments/b62-phase0-attempt-v0-2",
+    "formal": "experiments/b62-phase0-v0-2"
+  },
+  "formalBudgetsUnchanged": true,
+  "claimBoundaryUnchanged": true
+}
