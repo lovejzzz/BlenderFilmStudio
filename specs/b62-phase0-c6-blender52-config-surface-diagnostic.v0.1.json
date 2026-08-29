@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C6",
+  "date": "2026-08-29",
+  "statusBeforeDiagnostic": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "c5": {"uri": "specs/b62-phase0-c5-v02-retry-binding.v0.1.json", "sha256": "ffe4be1cbe4daae0124e71ec35c76478e023c137fb240515205ae02efbbd3597"},
+    "v02ToolFreezeCommit": "50f26d400ac56a43516a56429956d2b4b68dc0ea",
+    "v02PreflightEvidenceCommit": "4ae9076395974dc19cf6ee04d15a4fc921e00c1f",
+    "v02Preflight": {"sha256": "508a6ca4dcefb98f4eb9022b11833c02cadf51445afa7cd934f490a28edeadec", "preflightHash": "bdf4d0e7314048a869d67cf43498bdb3be9b4fe9160a013d4132917d7a6f8aab"}
+  },
+  "retainedV02Failure": {
+    "attemptRoot": "experiments/b62-phase0-attempt-v0-2",
+    "attemptTree": {"files": 7, "bytes": 8541, "treeSha256": "affb94dc11deef9e634a6924d0021dc62b37dff1117d18f26f8c16655ca8535a"},
+    "formalRoot": "experiments/b62-phase0-v0-2",
+    "formalTree": {"files": 5, "bytes": 493162, "treeSha256": "ee02554c116210c0722c48516327e2de90a42a324ea47fd819da64a1dd09504e"},
+    "failure": {"sha256": "e93877efb60fc9f86fecdf64cff2a429691eb333d60f22f3a40084170d1c22ae", "failureHash": "e5bdfba213c31cf8d2200945e15b1f142b07da327f10294813c7165c79a3705d", "status": "INVALIDATED"},
+    "generator": {"exitCode": 1, "elapsedSeconds": 0.709496708, "peakRssBytes": 262062080, "renderCalls": 0, "stdoutSha256": "b73f1e230f4b271137899951d28770b310bd0422c32205134dea1ebd8a457107", "stderrSha256": "cc14843bcbc3b5e0468245e7a57165d6a3b8e9dcd5ec3ee5897f7e8462b69e98"},
+    "error": "view_settings.look Medium High Contrast is unavailable; valid values were None and ACES 1.3 Reference Gamut Compression"
+  },
+  "hypothesis": "The frozen Blender 5.2 plus ACES 2.0 OCIO runtime supports the required render engines and numeric settings, but the parent reviewColor names must use the runtime-exact display/view and neutral look None.",
+  "authorizedDiagnostic": {
+    "id": "B62-P0-D3",
+    "root": "experiments/b62-phase0-d3-config-surface-v0-1",
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "ocioUri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+    "toolPaths": [
+      "blender/probe_b62_d3_config_surface.py",
+      "scripts/run-b62-d3-config-surface.mjs",
+      "scripts/audit-b62-d3-config-surface.mjs"
+    ],
+    "requiredChecks": [
+      "display sRGB - Display accepts",
+      "view ACES 2.0 - SDR 100 nits (Rec.709) accepts",
+      "Medium High Contrast rejects and None accepts",
+      "Cycles CPU/64/denoise/fixed seed accepts",
+      "Eevee Next/16 final samples accepts",
+      "motion blur accepts",
+      "MULTI_LAYER_IMAGE/OPEN_EXR_MULTILAYER/HALF/ZIP accepts"
+    ]
+  },
+  "authorizedOverrideIfD3Passes": {
+    "reviewColor": {"display": "sRGB - Display", "view": "ACES 2.0 - SDR 100 nits (Rec.709)", "look": "None", "exposure": 0, "gamma": 1},
+    "reason": "Use the runtime-exact neutral transform. Phase 0 does not claim cinematic grading quality.",
+    "forbidden": "Changing scene lighting/material values or adding a compensating grade after seeing rendered pixels."
+  },
+  "nextRetryRootsIfPromoted": {"preflight": "experiments/b62-phase0-preflight-v0-3", "attempt": "experiments/b62-phase0-attempt-v0-3", "formal": "experiments/b62-phase0-v0-3"},
+  "formalBudgetsAndClaimsUnchanged": true
+}

@@ -5339,3 +5339,11 @@ Date: 2026-08-29 · Type: ZERO-BLENDER RETRY REHEARSAL · New B62 Blender proces
 五个C5授权文件修改后，v0.2 tool freeze `50f26d400ac56a43516a56429956d2b4b68dc0ea` pushed且HEAD/origin exact。fresh local clone `/tmp/b62-rehearsal-50f26d4`未安装node_modules，v0.2 roots初始absent。
 
 preflight 9/9 ACCEPTED，self-hash `79bbde89542a5faa59dcd584eac2f93e536aac0d2c6884131199f2ab32f82de3`。除C1–C5 ancestry/tool hashes/upstream/runtime/disk外，它重新计算v0.1 attempt/formal与D1 retained trees，并exact绑定D2 result/receipt self-hashes `6d26de07…/c342ff04…`。available 311,752,810,496 bytes，2 GiB projected与100 GiB reserve通过；0 child/Blender/render/model/network/Docker。clone随后移出`/tmp`，不作为official evidence。下一动作主仓库official v0.2 preflight。
+
+## J-420 · B62 Phase 0 v0.2 color-look正式失败与C6预注册
+
+Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / CONFIG-SURFACE PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+official v0.2 preflight `bdf4d0e…`以commit `4ae9076…`推送后，01-GENERATOR越过MLEXR设置，在0.709秒、peak RSS 262,062,080 bytes后因`Medium High Contrast`不属于当前look enum退出；zero render，未timeout/termination/log truncation。attempt 7 files/8,541 bytes/tree `affb94dc…`，formal 5 files/493,162 bytes/tree `ee02554c…`，failure file/self `e93877ef…/e5bdfba2…`，永久保留。
+
+C6不再逐一猜API，预注册D3 one-Blender/zero-render配置表面探针，一次检查runtime display/view/look、Cycles、Eevee final samples、motion blur与MLEXR/HALF/ZIP。若全部PASS，只允许neutral runtime override `sRGB - Display / ACES 2.0 - SDR 100 nits (Rec.709) / None`；不允许看像素后补偿调色。后续候选root为v0.3，formal budgets/claims不变。
