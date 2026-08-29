@@ -4633,3 +4633,23 @@ R2 tool commit `ce62f76` 推送后，在旧Codex仍存活时用fresh临时sparse
 Auditor final为可信`BLOCKED_HOST_STABILITY`，18/20 gates，25/25 attacks，synthetic control有效、integrity failures与failed attacks均为0、合计8/12 children，禁用资源全部为0。Results/audit SHA为 `0789d8f551bcef0de9e8f5beea88f9dccbe28320b2eb76748d9de13b12537e08` / `766915b2572bbb639360b5bc924a0953912226723e2cc6045a58a03603b76e90`。
 
 该负控证明新turn、RSS波动或renderer变化不能伪装成重启。真实R2 root仍不存在。下一动作只接受完整Codex重启后出现不同main PID，再从已推送release运行真实R2；当前旧进程不再增加实验负担。
+
+## J-346 · R2通过、R3磁盘反例与D1/D2受控归因链
+
+Date: 2026-08-29 · Type: HOST-STABILITY READMISSION / DISK ATTRIBUTION / CONTROLLED INTERVENTION · New Blender processes: 0 · New Blender renders: 0
+
+Codex重启后main PID从92848变为26962。真实R2 post-restart readmission最终20/20 gates、25/25 attacks通过；results/audit SHA为 `2bb7ecc7be213dac754d2c81a19da24630659b0d34cba53d308ac424056c4519` / `02a28904b285348c20fe6e24c14c57e127c5cc59e736d40b01e430e5294f8810`。随后R3四样本360.135秒纵向观察保持PID、RSS、browser temp与crash稳定，但available减少3,327,586,304 bytes，唯一失败门为`DISK_RETENTION_BOUNDED`；15 gates中14通过且20/20 attacks，证据有效但host稳定性仍blocked。
+
+D1用四个30秒间隔只读样本跟踪Colima两块稀疏盘及五个Codex/host文件。91.290秒内host loss仅8,941,568 bytes，低于64 MiB material threshold；Colima allocated growth仅16,384 bytes、占host loss约0.18%，不能解释R3的3.33 GB事件。D1为8/8 gates、10/10 attacks的`VALID_ATTRIBUTION_EVIDENCE`，结果只能标记`COLIMA_CONTRIBUTION_OBSERVED`，不得宣称primary attribution。
+
+用户随后明确授权一次`default` Colima及四容器的受控停启。D2完成运行、停止、恢复三段各三个样本；stop/start分别13.590/12.891秒，原四个full container IDs由`unless-stopped`自动恢复，显式container starts为0。全窗口available增加171,732,672,512 bytes，而两块Colima sparse files allocated合计减少3,208,155,136 bytes，绝大部分回收不能归因给Colima。D2形式门因错误要求自动生成的`_lima/colima/lima.yaml`字节哈希不变而保守失败；权威`colima.yaml`、runtime、四容器、disk device/inode/logical size均恢复。Evidence保留failure/recovery而无results/audit，不把operational success伪装成formal causal pass。
+
+## J-347 · R4 post-reclaim 12分钟保留性观察重新准入
+
+Date: 2026-08-29 · Type: FORMAL POST-RECLAIM LONGITUDINAL STABILITY · New Blender processes: 0 · New Blender renders: 0
+
+在D2恢复后的约320 GB available新基线上，R4预注册七个样本、120秒最小间隔、720秒总跨度；沿用R3的1 GiB first-to-last disk-loss ceiling，并把每样本disk floor提高到250 GiB以保护新回收容量。既有R3 runner/auditor只增加显式repository-relative `BFS_STABILITY_SPEC`选择，默认历史R3行为不变；路径越界负控与selected-spec identity自测通过。
+
+正式R4完成7/7样本，跨度720,161 ms。Available从320,158,425,088降至320,027,803,648 bytes，loss为130,621,440 bytes，仅为1 GiB ceiling约12.2%；最低available仍为320,027,803,648。Codex tree RSS first-to-last减少27,344,896 bytes，最大3,842,129,920；最大renderer RSS 975,994,880；memory free最低87%；browser temp保持20,480 bytes且zero growth；main PID全程26962，new crash reports为0。
+
+Producer 14/14 pre-audit gates，independent auditor 15/15 final gates、20/20 attacks，final verdict `ADMITTED_FOR_GATE0_CLOSEOUT`。Results/audit SHA为 `4f7b7dbe2881b20301bee3a7c0897bfad43f7808b5788a09e22b7d247195bfe7` / `f696592bfd8386d6b5696998072a987296655d252cd3b2384eeeefa2f67eb773`。这把Gate 0从`BLOCKED_DISK_RETENTION`提升为`SHORT_WINDOW_READMITTED`，但不把12分钟冒充长期稳定；B58仍等待更长无人值守保留性证明与主动容量防线。
