@@ -1,0 +1,219 @@
+{
+  "checks": [
+    {
+      "id": "PREREGISTRATION_COMMIT_ANCESTRY",
+      "pass": true
+    },
+    {
+      "id": "TOOL_FREEZE_EXACT",
+      "pass": true
+    },
+    {
+      "id": "INPUT_HASHES_EXACT",
+      "pass": true
+    },
+    {
+      "id": "BUILD_PLANS_REPEAT_EXACT",
+      "pass": true
+    },
+    {
+      "id": "SHARED_PLAN_PROJECTION_EXACT",
+      "pass": true
+    },
+    {
+      "id": "CAMERAS_CONTRACT_EXACT_DISTINCT",
+      "pass": true
+    },
+    {
+      "id": "PRODUCTION_PREFLIGHTS_ACCEPTED",
+      "pass": true
+    },
+    {
+      "id": "ZERO_BLENDER_PREFLIGHT",
+      "pass": true
+    },
+    {
+      "id": "DISK_RESERVE_PASS",
+      "pass": true
+    }
+  ],
+  "contract": {
+    "sha256": "f1ae9979c870f049aa022c5c5a46fd77714c31ff80eb18c25a691d6651088e0a",
+    "uri": "specs/cinematic-sequence-consistency.v0.1.json"
+  },
+  "disk": {
+    "availableBytes": "318863503360",
+    "minimumReserveBytes": "107374182400"
+  },
+  "operations": {
+    "blenderProcesses": 0,
+    "dockerProcesses": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "nodeChildren": 6,
+    "renderCalls": 0
+  },
+  "plans": [
+    {
+      "canonicalSha256": "6afbdb7133ec33b94452646ad2bda78ae248b306c9d32e38e2ce7ab6d7630aa8",
+      "label": "WIDE",
+      "planHash": "518bfd62f3074b9b5c20af8476c4eddfec4fbc5605349afaa8d4cce2a4addb9a",
+      "sceneSpec": {
+        "sha256": "0135944b6d7952aa4950db137e77092dfdd57bfb3a61caadb737484976cebe0a",
+        "uri": "specs/benchmarks/B60-wide.scene.json"
+      }
+    },
+    {
+      "canonicalSha256": "9c00e5741f0a01eb720d4cca1b74cae39d78340bc750ca8e7ed2ee24e85a16a4",
+      "label": "MEDIUM",
+      "planHash": "5213b1b34db3fb262747d586c5503ee507cc122f3e398265ed764eea9fca3e53",
+      "sceneSpec": {
+        "sha256": "64a6ce2af356d81a09abcc02fea97cd35a3eed09140cc542f2497c77f425f00d",
+        "uri": "specs/benchmarks/B60-medium.scene.json"
+      }
+    },
+    {
+      "canonicalSha256": "9abcddce3001664057646c70f8073a7003a62e1733ea17271288ff66067bb10e",
+      "label": "CLOSE",
+      "planHash": "a06895071df4be742abb6da98617d0df51c12e032a0151076cc37d601ea9ca23",
+      "sceneSpec": {
+        "sha256": "c38e2b317f792cc2f2d19c1345dce27d8cd845bbb8a1b45a1aec82e841bc0501",
+        "uri": "specs/benchmarks/B60-close.scene.json"
+      }
+    }
+  ],
+  "preflightHash": "10162d643aa784c6bae6184be8c8c3740c7276acddfe3bf48f32e39c7674678c",
+  "preregistrationCommit": "97e3afee8fc44695a4a3277265a051dd1a3cf272",
+  "productionPreflights": [
+    {
+      "child": {
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "b0f34ad67f717fcb1b3271ee99a2ac7e3e654418e6765afc5fb25f6470142add"
+      },
+      "expectedPlanHash": "518bfd62f3074b9b5c20af8476c4eddfec4fbc5605349afaa8d4cce2a4addb9a",
+      "id": "WIDE-A",
+      "label": "WIDE",
+      "outputRoot": "experiments/cinematic-sequence-consistency-v0-1/runs/WIDE-A",
+      "preflightRoot": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/WIDE-A",
+      "receipt": {
+        "preflightHash": "c88e3529bc52d67364f01067113fffa1f5f045cebd69bc99d9f5985df95ca8cb",
+        "sha256": "fe12baa596395e7fbc87fe1306cea8433569e2422bec93a352bc473c0fd7b521",
+        "uri": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/WIDE-A/preflight.json"
+      },
+      "repetition": "A",
+      "sceneSpec": "specs/benchmarks/B60-wide.scene.json"
+    },
+    {
+      "child": {
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "b0f34ad67f717fcb1b3271ee99a2ac7e3e654418e6765afc5fb25f6470142add"
+      },
+      "expectedPlanHash": "518bfd62f3074b9b5c20af8476c4eddfec4fbc5605349afaa8d4cce2a4addb9a",
+      "id": "WIDE-B",
+      "label": "WIDE",
+      "outputRoot": "experiments/cinematic-sequence-consistency-v0-1/runs/WIDE-B",
+      "preflightRoot": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/WIDE-B",
+      "receipt": {
+        "preflightHash": "eeb9185e06e56d27b1b9c3387f158d2fb790a69093a3ba0d30cdf4573c159e80",
+        "sha256": "8990fffef92571a2bbb6fa138220044bd7ba68f795e188411bc666cb054be06a",
+        "uri": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/WIDE-B/preflight.json"
+      },
+      "repetition": "B",
+      "sceneSpec": "specs/benchmarks/B60-wide.scene.json"
+    },
+    {
+      "child": {
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "73cb1d38b1f0533439eeb0f0cd1a43daaf45a8fe9fcee7f1b508bbe5ab4246d9"
+      },
+      "expectedPlanHash": "5213b1b34db3fb262747d586c5503ee507cc122f3e398265ed764eea9fca3e53",
+      "id": "MEDIUM-A",
+      "label": "MEDIUM",
+      "outputRoot": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-A",
+      "preflightRoot": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/MEDIUM-A",
+      "receipt": {
+        "preflightHash": "a434ee9e0da1b5becf802f5079d1cb89950fb47777385b8097b02644a2e0eb0a",
+        "sha256": "956afea31c129f7a26ca93ca99fdbb897e21e056ea6a78bce203d94ba5f68147",
+        "uri": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/MEDIUM-A/preflight.json"
+      },
+      "repetition": "A",
+      "sceneSpec": "specs/benchmarks/B60-medium.scene.json"
+    },
+    {
+      "child": {
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "73cb1d38b1f0533439eeb0f0cd1a43daaf45a8fe9fcee7f1b508bbe5ab4246d9"
+      },
+      "expectedPlanHash": "5213b1b34db3fb262747d586c5503ee507cc122f3e398265ed764eea9fca3e53",
+      "id": "MEDIUM-B",
+      "label": "MEDIUM",
+      "outputRoot": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-B",
+      "preflightRoot": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/MEDIUM-B",
+      "receipt": {
+        "preflightHash": "9fd9ded7b8d54c69abb78979e2650554b33898eed01d8491d72322894703717e",
+        "sha256": "df3fb0912ca40055506d3f576b3a4abab3921a5c49c5499f15e09b592979aef9",
+        "uri": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/MEDIUM-B/preflight.json"
+      },
+      "repetition": "B",
+      "sceneSpec": "specs/benchmarks/B60-medium.scene.json"
+    },
+    {
+      "child": {
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "9f120338f35dab4b05e863cb433af97be041d5d9f7defca0e0a59a34605661e0"
+      },
+      "expectedPlanHash": "a06895071df4be742abb6da98617d0df51c12e032a0151076cc37d601ea9ca23",
+      "id": "CLOSE-A",
+      "label": "CLOSE",
+      "outputRoot": "experiments/cinematic-sequence-consistency-v0-1/runs/CLOSE-A",
+      "preflightRoot": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/CLOSE-A",
+      "receipt": {
+        "preflightHash": "e41dd0ca80f2c8678644037a752666a3f06cc76f6ae6f23b4a8b346803633697",
+        "sha256": "ec4be0db36c4eb4ca7994790e7a05c5dacc58c0ca795de1aae17c75824f94315",
+        "uri": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/CLOSE-A/preflight.json"
+      },
+      "repetition": "A",
+      "sceneSpec": "specs/benchmarks/B60-close.scene.json"
+    },
+    {
+      "child": {
+        "exitCode": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "9f120338f35dab4b05e863cb433af97be041d5d9f7defca0e0a59a34605661e0"
+      },
+      "expectedPlanHash": "a06895071df4be742abb6da98617d0df51c12e032a0151076cc37d601ea9ca23",
+      "id": "CLOSE-B",
+      "label": "CLOSE",
+      "outputRoot": "experiments/cinematic-sequence-consistency-v0-1/runs/CLOSE-B",
+      "preflightRoot": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/CLOSE-B",
+      "receipt": {
+        "preflightHash": "4828237d631390a925abcc89a1bedba89a57acad692aa5c88f9b89403b7f7488",
+        "sha256": "28be7f10e9ba15eafac41420c36b165d5d3ad86b0990de31c0008f5b702f5112",
+        "uri": "experiments/cinematic-sequence-consistency-preflight-v0-1/cases/CLOSE-B/preflight.json"
+      },
+      "repetition": "B",
+      "sceneSpec": "specs/benchmarks/B60-close.scene.json"
+    }
+  ],
+  "reason": null,
+  "roots": {
+    "attempt": "experiments/cinematic-sequence-consistency-attempt-v0-1",
+    "formal": "experiments/cinematic-sequence-consistency-v0-1",
+    "preflight": "experiments/cinematic-sequence-consistency-preflight-v0-1"
+  },
+  "schemaVersion": "bfs.cinematicSequenceConsistencyPreflight.v0.1",
+  "status": "ACCEPTED",
+  "toolFreezeCommit": "0b21584c0acc653f879c2711dc76d92028bf2d70",
+  "toolHashes": {
+    "research/2026-08-29-b60-e1-cinematic-sequence-consistency-protocol.md": "8b2af7f03b6a0ed52c50021a8de0dcbb232182c777acc9f1e0d8fa99fae4412b",
+    "scripts/audit-b60-e1-cinematic-sequence-consistency.mjs": "912e8df044543af94ee936348e50f18eef2d4a3f9c7c53d00268562ac5dd7a70",
+    "scripts/preflight-b60-e1-cinematic-sequence-consistency.mjs": "075ac274673b79b728f626a3bf65d8871e4cc992186fda068326a8d693a8a961",
+    "scripts/run-b60-e1-cinematic-sequence-consistency.mjs": "894f960bdc955a3f0317d04cc558d2a3dc6b14a43ee8245001ab190217006ab0",
+    "specs/cinematic-sequence-consistency.v0.1.json": "f1ae9979c870f049aa022c5c5a46fd77714c31ff80eb18c25a691d6651088e0a"
+  }
+}

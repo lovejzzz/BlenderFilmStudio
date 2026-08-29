@@ -4941,3 +4941,13 @@ Date: 2026-08-29 · Type: B60 TOOL-FREEZE CANDIDATE · New Blender processes: 0 
 Formal runner绑定独立的tool-freeze commit与后续preflight-evidence commit，先写self-hashed attempt/admission/receipt，再为六个case各调用一次已准入production compiler，最后只调用一次独立auditor。Auditor不信任runner汇总：它重开七份输入、outer/child preflight、18份authorization records、六份production receipt、BuildPlan、canonical structure、manifest、budget/compile receipt和blend identity，直接验证A/B重复、跨镜头共享投影、camera contract、runtime、root roster与self/file hashes；10项负控均为内存单字段mutation，不改正式证据、不启Blender。
 
 Preflight/runner/auditor SHA-256为`075ac274673b79b728f626a3bf65d8871e4cc992186fda068326a8d693a8a961` / `894f960bdc955a3f0317d04cc558d2a3dc6b14a43ee8245001ab190217006ab0` / `912e8df044543af94ee936348e50f18eef2d4a3f9c7c53d00268562ac5dd7a70`。三工具Node syntax、targeted ESLint zero-warning及diff check通过；三条official roots仍不存在。下一动作提交推送这些exact bytes形成tool freeze，再用fresh clone运行zero-Blender rehearsal；主仓库official preflight在rehearsal成功前不得创建。
+
+## J-376 · B60 fresh-clone rehearsal与official preflight接受
+
+Date: 2026-08-29 · Type: B60 OFFICIAL PREFLIGHT ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+Tool-freeze commit `0b21584c0acc653f879c2711dc76d92028bf2d70`与origin exact后，全新临时clone先运行同构rehearsal：9/9 outer checks与6/6 production preflights均接受，outer self-hash `7618db3e…`，operations为zero Blender/render/model/network/Docker。第一次用absolute script path的rehearsal invocation因CLI entry identity条件未触发而没有执行，也没有创建主仓库或clone证据；改为clone工作目录内的repository-relative entry后才得到上述有效结果。临时clone随后以validated `/tmp/bfs-b60-preflight.*` target用depth-first delete完整清理。
+
+主仓库确认preflight/attempt/formal三根均不存在后，用同一tool freeze运行official preflight。结果`ACCEPTED 9/9`，6份child preflight全部`ACCEPTED`且各自BuildPlan hash匹配预注册值；outer file SHA/self-hash为`076c6bf7916c5283bf1431943fcdc25f095e61e5cfcb7842af54e22f9ce5c80e` / `10162d643aa784c6bae6184be8c8c3740c7276acddfe3bf48f32e39c7674678c`。七份receipt全部通过独立self-hash重算；available bytes为318,863,503,360，高于107,374,182,400 reserve。Blender/render/model/network/Docker均0，结束后无Blender进程；attempt与formal roots继续不存在。
+
+下一动作只提交推送official preflight七份文件与本entry形成preflight evidence commit。Formal runner必须绑定该exact commit；在此之前不得创建attempt或formal root。
