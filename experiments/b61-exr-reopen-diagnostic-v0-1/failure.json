@@ -1,0 +1,36 @@
+{
+  "completed": {
+    "blenderProcesses": 1,
+    "dockerProcesses": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "openImageIoImports": 0,
+    "renderCalls": 0
+  },
+  "evidence": {
+    "process": {
+      "exitCode": 2,
+      "pythonExitCodeEnforced": true,
+      "sha256": "5d19c3d27c4ec72150cd0d74d45bf666fdf23a2a60207f7cf4064c1bae567af3",
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-1/process.json"
+    },
+    "stderr": {
+      "bytes": 940,
+      "sha256": "49331acb8dd2e7b7348950027b2b2d57f82828bacb7e4034a562d03679f84257",
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-1/stderr.log"
+    },
+    "stdout": {
+      "bytes": 64,
+      "sha256": "7df440c8cddbb597f86e33a17a8e42e9e146b604caec9e31a276017e82cbcae3",
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-1/stdout.log"
+    }
+  },
+  "failureHash": "13eaa2c5728de8b94d632236d210e28128e27203fdece1e8487b523ec3bb0dba",
+  "message": "The Blender process received the probe script and the post-double-dash arguments, but the script called argparse.parse_args() on Blender's complete sys.argv instead of slicing after the final -- token. Argparse therefore reported all three probe arguments missing before any EXR or OpenImageIO probe ran.",
+  "reason": "BLENDER_POST_DOUBLE_DASH_ARGUMENT_SLICE_MISSING",
+  "rootCauseProven": true,
+  "schemaVersion": "bfs.b61ExrReopenDiagnosticFailure.v0.1",
+  "scientificVerdict": null,
+  "status": "INVALIDATED",
+  "toolFreezeCommit": "e4300113eba493ac9c03f45dfa4fb2642b487ac9"
+}

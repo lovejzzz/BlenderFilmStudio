@@ -5085,3 +5085,11 @@ Date: 2026-08-29 · Type: DIAGNOSTIC TOOL-FREEZE CANDIDATE · New Blender proces
 D1预注册commit `9d5cc09`推送后，实现一个Blender-side probe和一个bounded Node supervisor。Probe首先使用bpy重开保留EXR并记录Image identity/RNA/pixel count，再导入Blender 5.2随附OpenImageIO与NumPy；它枚举所有subimages/channels，只接受唯一以`Combined`结尾的RGBA quartet，以float32读取并显式转换为little-endian contiguous RGBA bytes，独立重开解码两次。Supervisor在启动前重算v0.2两棵失败树、failure self-hash与EXR binding，限定一个带`--python-exit-code 1`的Blender process、30秒、zero render/model/network/Docker和1 MiB输出。
 
 Probe/runner SHA-256为`25573038f7c163c689d7f198c187ca3e2752261e811ce90bb86448c12aba6fb8 / 0bf2c25e9d57035bae82df6007d1249c72599b10a587d963bd41fd4e80fbacc8`；spec/protocol SHA为`c7c3c71ea85512a77815d3bc85d9cd61b66818ba2bfb4cff8b90a1c1c09fe431 / e3f950f48c1a59e980b344caf297a3b3937ca6787b28ed00c975b65a7b835528`。Node syntax、targeted ESLint zero-warning、Python syntax与diff check通过，正式D1 output root仍不存在。下一动作提交推送形成tool freeze；在tool freeze与origin exact之前不得创建`experiments/b61-exr-reopen-diagnostic-v0-1`或启动诊断Blender。
+
+## J-391 · B61-D1参数入口反例与D2最小修正预注册
+
+Date: 2026-08-29 · Type: DIAGNOSTIC COUNTEREXAMPLE / CORRECTION PREREGISTRATION · Real Blender processes: 1 · New Blender renders: 0
+
+D1 tool-freeze commit `e4300113eba493ac9c03f45dfa4fb2642b487ac9`推送后，一个Blender background process在0.4546秒以exit 2终止。Raw stderr证明argparse报告`--repository-root / --spec / --output`全部missing；probe在EXR binding与OpenImageIO import前终止。原因是脚本直接调用`parse_args()`解析Blender完整argv，没有显式截取最后一个`--`后的参数。这不反驳OpenImageIO候选，但D1已消耗其唯一Blender start，因此结果必须INVALIDATED且原root不得复用。
+
+D1 failure file SHA/self-hash为`e9c555c213a7b252f515373ea82bddaea897da78631414230898085931779a5d / 13eaa2c5728de8b94d632236d210e28128e27203fdece1e8487b523ec3bb0dba`；完整root为4 files/2,844 bytes/`bcbd13ae…`，operations为1 Blender、zero render/model/network/Docker。D2只授权argv-after-double-dash切片、绑定该失败树并使用fresh v0.2 root；输入、decoder、接受条件和资源上限不变。下一动作先提交推送失败证据与D2，再修改工具。

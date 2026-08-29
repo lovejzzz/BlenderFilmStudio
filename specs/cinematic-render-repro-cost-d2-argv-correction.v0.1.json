@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "bfs.cinematicRenderReproCostDiagnosticArgvCorrection.v0.1",
+  "correctionId": "B61-E1-D2",
+  "status": "PREREGISTERED",
+  "parentDiagnostic": {
+    "uri": "specs/cinematic-render-repro-cost-d1-exr-reopen-diagnostic.v0.1.json",
+    "sha256": "c7c3c71ea85512a77815d3bc85d9cd61b66818ba2bfb4cff8b90a1c1c09fe431"
+  },
+  "failedDiagnostic": {
+    "root": "experiments/b61-exr-reopen-diagnostic-v0-1",
+    "tree": {
+      "files": 4,
+      "bytes": 2844,
+      "sha256": "bcbd13ae4ad773113504466fc03afaee7c149943a88daf563484da2d4806e3bd"
+    },
+    "failure": {
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-1/failure.json",
+      "sha256": "e9c555c213a7b252f515373ea82bddaea897da78631414230898085931779a5d",
+      "failureHash": "13eaa2c5728de8b94d632236d210e28128e27203fdece1e8487b523ec3bb0dba",
+      "reason": "BLENDER_POST_DOUBLE_DASH_ARGUMENT_SLICE_MISSING",
+      "rootCauseProven": true
+    },
+    "operations": {
+      "blenderProcesses": 1,
+      "renderCalls": 0,
+      "openImageIoImports": 0
+    }
+  },
+  "authorizedOutputRoot": "experiments/b61-exr-reopen-diagnostic-v0-2",
+  "authorizedCorrection": {
+    "file": "blender/probe_b61_exr_reopen.py",
+    "behavior": "Pass only sys.argv elements after the final -- token to argparse.parse_args().",
+    "runnerChanges": [
+      "Bind and verify this correction spec and retained D1 failure tree.",
+      "Use the fresh v0.2 diagnostic output root."
+    ]
+  },
+  "unchanged": [
+    "retained EXR bytes and SHA-256",
+    "one Blender start",
+    "zero render calls",
+    "30 second timeout",
+    "1 MiB output ceiling",
+    "bpy empty-pixel reproduction",
+    "unique Combined RGBA resolution",
+    "1920x1080x4 float32 little-endian projection",
+    "all finite values",
+    "same-process repeat exact digest",
+    "zero model network and Docker operations",
+    "diagnostic-only claim boundary"
+  ],
+  "claimBoundary": {
+    "formalRetryAuthorized": false,
+    "decoderBehaviorChanged": false,
+    "pixelThresholdChanged": false,
+    "qualityThresholdChanged": false
+  }
+}
