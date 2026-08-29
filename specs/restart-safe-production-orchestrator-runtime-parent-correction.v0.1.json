@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorRuntimeParentCorrection.v0.1",
+  "correctionId": "B58-E1-C6",
+  "status": "PREREGISTERED_AFTER_FORMAL_V02_FAILURE_BEFORE_V03_OUTPUT",
+  "date": "2026-08-29",
+  "failedFormalV02": {
+    "attemptRoot": "experiments/restart-safe-production-orchestrator-attempt-v0-2",
+    "formalRoot": "experiments/restart-safe-production-orchestrator-v0-2",
+    "fileCount": 13,
+    "canonicalTreeSha256": "ac13387581ecdd0293fe8b16e7e579fe1f32ab02207657d90d284171797b5b72",
+    "lastEvent": {
+      "uri": "experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/events/000005-PROCESS_STARTED.json",
+      "sha256": "118f91d384c59b5f8359ecbf9c85d0c1d6e450fe14cfda767a33b5ff638ffd12",
+      "eventHash": "456d11d33b36a1af17cb49a4f4c3ad6b44a4c8b05128d4b31dee348a474358b4",
+      "role": "PRODUCTION_COMPILER_WRAPPER",
+      "pid": 9206
+    },
+    "nativeProcessObservedEvents": 0,
+    "productionAttemptRootsCreated": 0,
+    "productionOutputRootsCreated": 0,
+    "blenderProcessesStarted": 0,
+    "auditCreated": false,
+    "outerReceiptCreated": false
+  },
+  "diagnosticReproduction": {
+    "environment": "fresh clone at evidence commit ea2ccc26bad60de83e45d0052d046b70e2b83bb7",
+    "directProductionCompilerExitCode": 1,
+    "elapsedSeconds": 0.31,
+    "classification": "PRODUCTION_ATTEMPT_IMMEDIATE_PARENT_ABSENT",
+    "message": "ENOENT while creating the nested production-attempt final root",
+    "blenderProcessesStarted": 0
+  },
+  "authorizedCorrection": {
+    "beforeProductionCompilerSpawn": [
+      "durably create dirname(candidate.productionAttemptRoot)",
+      "durably create dirname(candidate.outputRoot)"
+    ],
+    "childFinalRootsRemainFreshAndExclusivelyCreatedByB57": true,
+    "wrapperExitBeforeNativeObservation": "persist a FAILED non-promotable attempt receipt with bounded wrapper terminal stdout/stderr before surfacing the failure",
+    "nativeObservationRequirementAfterSuccessfulSpawn": "unchanged"
+  },
+  "authorizedRetryRoots": {
+    "preflight": "experiments/restart-safe-production-orchestrator-preflight-v0-3",
+    "attempt": "experiments/restart-safe-production-orchestrator-attempt-v0-3",
+    "formal": "experiments/restart-safe-production-orchestrator-v0-3"
+  },
+  "additionalSemanticAttacks": [
+    "C6_A01_FAILED_V02_TREE_MUTATED",
+    "C6_A02_PRODUCTION_ATTEMPT_PARENT_PREPARATION_REMOVED",
+    "C6_A03_PRODUCTION_OUTPUT_PARENT_PREPARATION_REMOVED",
+    "C6_A04_WRAPPER_FAILURE_TERMINAL_RETENTION_BYPASSED",
+    "C6_A05_RETRY_ROOT_REUSES_V02"
+  ],
+  "unchanged": [
+    "B57 production preflight, compiler, receipt, verifier and disk policy bytes",
+    "B58 DAG, process ceilings, fault injection and recovery decisions after a real child spawn",
+    "B58 34-gate denominator, 72 attacks and all C1-C5 attacks",
+    "all render, model, network and Docker zero-operation requirements"
+  ]
+}

@@ -4863,3 +4863,13 @@ C5 tool-freeze commit `9276afbfd61c078d199050e0cd1f82ed145d4de8`与origin exact�
 主仓库随后同样用Git动态读取full HEAD，先验证三条v0.2 roots absent，再运行一次official preflight。结果`ACCEPTED 17/17`；preflight file SHA/self-hash为`b2eb355738425d448b8ab4442eaa80886ce0476efaedc2e292d62a7738de7aa1` / `d0ba9a6f717f83d8c5921b0c1d387688cd2248530f66440751d1da8fc77d87ef`。共10份文件：outer receipt、5份accepted child receipts与4份job requests。Gate 0 live sampleCount 7、age 439,997 ms、HEALTHY、available 316,820,500,480 bytes、browser 20,480 bytes、alert absent；Blender/render/model/network/Docker均0。
 
 下一动作只提交推送v0.2 official preflight 10 files与本entry形成evidence commit。Formal runner必须以该exact evidence commit入场；在此之前v0.2 attempt/formal roots继续不存在。
+
+## J-368 · B58 formal v0.2启动前失败，C6预注册runtime parents与v0.3 retry
+
+Date: 2026-08-29 · Type: B58 FORMAL COUNTEREXAMPLE / CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+Official preflight evidence commit `ea2ccc26bad60de83e45d0052d046b70e2b83bb7`与origin exact后，formal admission成功并创建self-hashed attempt/admission/receipt及AUTHORIZED formal-start。Baseline job完成PLAN_BIND，随后记录npm production wrapper PID 9206，但没有`NATIVE_PROCESS_OBSERVED`、production attempt/output、audit或outer result receipt；runner fail-closed返回`Native Blender completed or failed before durable process identity observation`。进程检查无Blender存活。
+
+Fresh clone隔离诊断直接运行同一B57命令，0.31秒、exit 1、明确返回`ENOENT`创建nested production-attempt final root失败。因此不是短Blender漏采，而是Blender从未启动：B58创建了v0.2 attempt/formal roots，却未创建它传给B57的immediate parents `production-attempts`与`outputs`；B57 final-root-only durable mkdir contract按设计拒绝。B58又在native observation为空时丢弃已完成wrapper terminal，导致误分类。
+
+Retained v0.2 attempt/formal tree共13 files，canonical tree SHA `ac13387581ecdd0293fe8b16e7e579fe1f32ab02207657d90d284171797b5b72`；last PROCESS_STARTED file SHA/event hash为`118f91d384c59b5f8359ecbf9c85d0c1d6e450fe14cfda767a33b5ff638ffd12` / `456d11d33b36a1af17cb49a4f4c3ad6b44a4c8b05128d4b31dee348a474358b4`。C6授权B58在spawn前durably创建两个exact parent，保留B57 exclusive final roots；wrapper先结束时必须先写FAILED non-promotable terminal receipt。v0.2永久失败，只允许fresh/disjoint v0.3三根重试。新增5项攻击；34 gates、72+C1-C5 attacks、Blender ceiling及所有生产语义不变。下一动作先提交推送C6、13-file failure tree与本entry，v0.3 roots在此之前禁止创建。

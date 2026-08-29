@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobManifest.v0.1",
+  "jobId": "B58-FORMAL-BASELINE-B01",
+  "request": {
+    "uri": "experiments/restart-safe-production-orchestrator-preflight-v0-2/job-requests/B58-FORMAL-BASELINE-B01.json",
+    "sha256": "b954784187c69c8f72589bf723f0920a5faca1b6cbc56c302bd5e72ca6d2e376",
+    "requestHash": "75e4d9cd0e24f1ca4fbbbd099a5bf4427373eb837770cab472601f8bcb650bb0"
+  },
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B01.scene.json",
+    "sha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4"
+  },
+  "expectedBuildPlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "9276afbfd61c078d199050e0cd1f82ed145d4de8",
+  "toolHashes": {
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/run-restart-safe-production-job.mjs": "d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a"
+  },
+  "preflightEvidenceCommit": "ea2ccc26bad60de83e45d0052d046b70e2b83bb7",
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "BASELINE-COMPILE-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-preflight-v0-2/production-preflights/BASELINE_B01",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-attempt-v0-2/production-attempts/BASELINE_B01",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-v0-2/outputs/BASELINE_B01",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": null,
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "manifestHash": "946878496010c9ef23cfd48c6fcbb8a716f27d98fc5a4a552aea635bd681b4e0"
+}
