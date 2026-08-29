@@ -628,6 +628,7 @@ def configure_scene(scene: bpy.types.Scene) -> None:
     scene.render.resolution_x = 1920
     scene.render.resolution_y = 1080
     scene.render.resolution_percentage = 100
+    scene.render.image_settings.media_type = "MULTI_LAYER_IMAGE"
     scene.render.image_settings.file_format = "OPEN_EXR_MULTILAYER"
     scene.render.image_settings.color_mode = "RGBA"
     scene.render.image_settings.color_depth = "16"
@@ -638,6 +639,7 @@ def configure_scene(scene: bpy.types.Scene) -> None:
     scene.cycles.seed = 62001
     scene.render.film_transparent = False
     scene.render.use_motion_blur = True
+    scene.render.image_settings.media_type = "MULTI_LAYER_IMAGE"
     scene.render.image_settings.file_format = "OPEN_EXR_MULTILAYER"
     scene.view_settings.look = "Medium High Contrast"
     scene["bfs_experiment_id"] = "B62-P0-E1"

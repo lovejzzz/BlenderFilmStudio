@@ -15,10 +15,13 @@ const repositoryRoot = resolve(fileURLToPath(new URL('../', import.meta.url)));
 const CONTRACT_URI = 'specs/b62-phase0-asset-animatic-calibration.v0.1.json';
 const CORRECTION_URI = 'specs/b62-phase0-c1-ffprobe-accounting-correction.v0.1.json';
 const CORRECTION_2_URI = 'specs/b62-phase0-c2-fresh-clone-node-dependency-correction.v0.1.json';
+const CORRECTION_3_URI = 'specs/b62-phase0-c3-blender52-multilayer-media-correction.v0.1.json';
+const CORRECTION_4_URI = 'specs/b62-phase0-c4-dynamic-exr-setter-correction.v0.1.json';
+const CORRECTION_5_URI = 'specs/b62-phase0-c5-v02-retry-binding.v0.1.json';
 const EXPECTED = {
-  preflightRoot: 'experiments/b62-phase0-preflight-v0-1',
-  attemptRoot: 'experiments/b62-phase0-attempt-v0-1',
-  formalRoot: 'experiments/b62-phase0-v0-1',
+  preflightRoot: 'experiments/b62-phase0-preflight-v0-2',
+  attemptRoot: 'experiments/b62-phase0-attempt-v0-2',
+  formalRoot: 'experiments/b62-phase0-v0-2',
 };
 const PROCESS_IDS = [
   '01-GENERATOR', '02-ANIMATIC', '03-FFMPEG', '04-FFPROBE',
@@ -154,12 +157,20 @@ export async function auditB62(argv) {
   const contractRecord = await json(CONTRACT_URI); const contract = contractRecord.value;
   const correctionRecord = await json(CORRECTION_URI); const correction = correctionRecord.value;
   const correction2Record = await json(CORRECTION_2_URI); const correction2 = correction2Record.value;
+  const correction3Record = await json(CORRECTION_3_URI); const correction3 = correction3Record.value;
+  const correction4Record = await json(CORRECTION_4_URI); const correction4 = correction4Record.value;
+  const correction5Record = await json(CORRECTION_5_URI); const correction5 = correction5Record.value;
   const preflight = await json(`${parsed.preflightRoot}/preflight.json`);
   requireValue(validSelfHash(preflight.value, 'preflightHash') && preflight.value.status === 'ACCEPTED', 'B62 preflight invalid');
   requireValue(preflight.value.contract.sha256 === await sha256File(contractRecord.path)
     && preflight.value.correction.sha256 === await sha256File(correctionRecord.path)
     && preflight.value.correction2.sha256 === await sha256File(correction2Record.path)
-    && correction.correction.ffprobeMetadataProcesses === 1 && correction2.statusBeforeRetry === 'PREREGISTERED', 'B62 contract/correction binding mismatch');
+    && preflight.value.correction3.sha256 === await sha256File(correction3Record.path)
+    && preflight.value.correction4.sha256 === await sha256File(correction4Record.path)
+    && preflight.value.correction5.sha256 === await sha256File(correction5Record.path)
+    && correction.correction.ffprobeMetadataProcesses === 1 && correction2.statusBeforeRetry === 'PREREGISTERED'
+    && correction3.statusBeforeDiagnostic === 'PREREGISTERED' && correction4.statusBeforeDiagnostic === 'PREREGISTERED'
+    && correction5.statusBeforeProductionToolChange === 'PREREGISTERED', 'B62 contract/correction binding mismatch');
   const generation = await json(`${parsed.formalRoot}/reports/generation-report.json`);
   requireValue(validSelfHash(generation.value, 'reportHash') && generation.value.status === 'PASS', 'B62 generation report invalid');
   const generationFiles = [
@@ -211,7 +222,7 @@ export async function auditB62(argv) {
   const stream = streams[0];
   const cyclesSettingsExact = calibration.every(row => row.settings.engine === 'CYCLES' && row.settings.device === 'CPU'
     && isDeepStrictEqual(row.settings.resolution, [1920, 1080]) && row.settings.samples === 64 && row.settings.denoise === true
-    && row.settings.seed === 62001 && row.settings.animatedSeed === false && row.settings.format === 'OPEN_EXR_MULTILAYER'
+    && row.settings.seed === 62001 && row.settings.animatedSeed === false && row.settings.mediaType === 'MULTI_LAYER_IMAGE' && row.settings.format === 'OPEN_EXR_MULTILAYER'
     && row.settings.pixelType === 'HALF' && row.settings.compression === 'ZIP');
   const independentCalibration = blenderAudit.value.calibration;
   const exrStorageAndDimensionsExact = independentCalibration.every(row => row.decoded.width === 1920 && row.decoded.height === 1080
@@ -297,7 +308,11 @@ export async function auditB62(argv) {
   const record = await writeDurableHashed(output, {
     schemaVersion: 'bfs.b62Phase0Audit.v0.1', experimentId: contract.experimentId, status: 'PASS', verdict: contract.passVerdict,
     contract: { uri: CONTRACT_URI, sha256: await sha256File(contractRecord.path) },
-    corrections: [{ uri: CORRECTION_URI, sha256: await sha256File(correctionRecord.path) }, { uri: CORRECTION_2_URI, sha256: await sha256File(correction2Record.path) }],
+    corrections: [
+      { uri: CORRECTION_URI, sha256: await sha256File(correctionRecord.path) }, { uri: CORRECTION_2_URI, sha256: await sha256File(correction2Record.path) },
+      { uri: CORRECTION_3_URI, sha256: await sha256File(correction3Record.path) }, { uri: CORRECTION_4_URI, sha256: await sha256File(correction4Record.path) },
+      { uri: CORRECTION_5_URI, sha256: await sha256File(correction5Record.path) },
+    ],
     preflight: { uri: `${parsed.preflightRoot}/preflight.json`, sha256: await sha256File(preflight.path), preflightHash: preflight.value.preflightHash },
     generation: { reportHash: generation.value.reportHash, assetIdentityHashes: Object.fromEntries(Object.entries(generation.value.manifests).map(([id, row]) => [id, row.identityHash])) },
     blenderAudit: { uri: `${parsed.formalRoot}/reports/blender-audit.json`, sha256: await sha256File(blenderAudit.path), auditHash: blenderAudit.value.auditHash },

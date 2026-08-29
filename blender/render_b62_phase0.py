@@ -263,6 +263,7 @@ def render_calibration(repository_root: Path, formal_root: Path, master: bpy.typ
     scene.render.resolution_x = 1920
     scene.render.resolution_y = 1080
     scene.render.resolution_percentage = 100
+    scene.render.image_settings.media_type = "MULTI_LAYER_IMAGE"
     scene.render.image_settings.file_format = "OPEN_EXR_MULTILAYER"
     scene.render.image_settings.color_mode = "RGBA"
     scene.render.image_settings.color_depth = "16"
@@ -284,7 +285,7 @@ def render_calibration(repository_root: Path, formal_root: Path, master: bpy.typ
         "frame": frame,
         "camera": scene.camera.name if scene.camera else None,
         "master": file_identity(master_path, repository_root),
-        "settings": {"engine": scene.render.engine, "device": scene.cycles.device, "resolution": [1920, 1080], "samples": scene.cycles.samples, "denoise": scene.cycles.use_denoising, "seed": scene.cycles.seed, "animatedSeed": scene.cycles.use_animated_seed, "format": "OPEN_EXR_MULTILAYER", "pixelType": "HALF", "compression": "ZIP"},
+        "settings": {"engine": scene.render.engine, "device": scene.cycles.device, "resolution": [1920, 1080], "samples": scene.cycles.samples, "denoise": scene.cycles.use_denoising, "seed": scene.cycles.seed, "animatedSeed": scene.cycles.use_animated_seed, "mediaType": scene.render.image_settings.media_type, "format": "OPEN_EXR_MULTILAYER", "pixelType": "HALF", "compression": "ZIP"},
         "renderSeconds": render_seconds,
         "exr": file_identity(exr_path, repository_root),
         "png": file_identity(png_path, repository_root),

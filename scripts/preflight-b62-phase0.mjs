@@ -2,11 +2,11 @@
 
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { access, lstat, mkdir, open, readFile, realpath, statfs } from 'node:fs/promises';
+import { access, lstat, mkdir, open, readFile, readdir, realpath, statfs } from 'node:fs/promises';
 import { constants } from 'node:fs';
 import { dirname, isAbsolute, normalize, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { promisify } from 'node:util';
+import { isDeepStrictEqual, promisify } from 'node:util';
 
 export const repositoryRoot = resolve(fileURLToPath(new URL('../', import.meta.url)));
 const repositoryRealRoot = await realpath(repositoryRoot);
@@ -63,22 +63,36 @@ const execFileAsync = promisify(execFile);
 const CONTRACT_URI = 'specs/b62-phase0-asset-animatic-calibration.v0.1.json';
 const CORRECTION_URI = 'specs/b62-phase0-c1-ffprobe-accounting-correction.v0.1.json';
 const CORRECTION_2_URI = 'specs/b62-phase0-c2-fresh-clone-node-dependency-correction.v0.1.json';
+const CORRECTION_3_URI = 'specs/b62-phase0-c3-blender52-multilayer-media-correction.v0.1.json';
+const CORRECTION_4_URI = 'specs/b62-phase0-c4-dynamic-exr-setter-correction.v0.1.json';
+const CORRECTION_5_URI = 'specs/b62-phase0-c5-v02-retry-binding.v0.1.json';
 const PREREGISTRATION_COMMIT = 'de57b63';
 const CORRECTION_COMMIT = '9173ede';
 const CORRECTION_2_COMMIT = '9c3aba7';
+const CORRECTION_3_COMMIT = 'b3b7ec6';
+const CORRECTION_4_COMMIT = 'a9e98c7';
+const CORRECTION_5_COMMIT = 'a08ab25';
 const EXPECTED = {
-  outputRoot: 'experiments/b62-phase0-preflight-v0-1',
-  attemptRoot: 'experiments/b62-phase0-attempt-v0-1',
-  formalRoot: 'experiments/b62-phase0-v0-1',
+  outputRoot: 'experiments/b62-phase0-preflight-v0-2',
+  attemptRoot: 'experiments/b62-phase0-attempt-v0-2',
+  formalRoot: 'experiments/b62-phase0-v0-2',
 };
 const TOOL_PATHS = [
   CONTRACT_URI,
   CORRECTION_URI,
   CORRECTION_2_URI,
+  CORRECTION_3_URI,
+  CORRECTION_4_URI,
+  CORRECTION_5_URI,
   'research/2026-08-29-b62-terminal-cinematic-proof-goal.md',
   'research/2026-08-29-b62-phase0-asset-animatic-calibration-protocol.md',
   'research/2026-08-29-b62-phase0-c1-ffprobe-accounting-correction.md',
   'research/2026-08-29-b62-phase0-c2-fresh-clone-node-dependency-correction.md',
+  'research/2026-08-29-b62-phase0-c3-blender52-multilayer-media-correction.md',
+  'research/2026-08-29-b62-phase0-c4-dynamic-exr-setter-correction.md',
+  'research/2026-08-29-b62-phase0-c5-v02-retry-binding.md',
+  'experiments/b62-phase0-d2-exr-media-state-ab-v0-1/result.json',
+  'experiments/b62-phase0-d2-exr-media-state-ab-v0-1/receipt.json',
   'blender/generate_b62_phase0_assets.py',
   'blender/render_b62_phase0.py',
   'blender/audit_b62_phase0.py',
@@ -117,6 +131,9 @@ async function verifyFreeze(commit) {
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, commit]);
   await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, commit]);
   await git(['merge-base', '--is-ancestor', CORRECTION_2_COMMIT, commit]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_3_COMMIT, commit]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_4_COMMIT, commit]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_5_COMMIT, commit]);
   const hashes = {};
   for (const uri of TOOL_PATHS) {
     const path = await resolveExistingRepositoryPath(uri, `B62 frozen tool ${uri}`);
@@ -140,6 +157,15 @@ async function verifyUpstream(contract) {
   return rows;
 }
 
+async function treeIdentity(uri) {
+  const root = await resolveExistingRepositoryPath(uri, `B62 retained tree ${uri}`, 'directory');
+  const files = [];
+  async function walk(directory) { for (const entry of await readdir(directory, { withFileTypes: true })) { const path = resolve(directory, entry.name); if (entry.isDirectory()) await walk(path); else if (entry.isFile()) files.push(path); else throw new Error(`Unsupported retained entry: ${path}`); } }
+  await walk(root); files.sort(); let bytes = 0; let material = '';
+  for (const path of files) { const content = await readFile(path); bytes += content.length; material += `${relative(root, path).split('\\').join('/')}\0${sha256Bytes(content)}\n`; }
+  return { files: files.length, bytes, treeSha256: sha256Bytes(Buffer.from(material)) };
+}
+
 export async function runB62Preflight(argv) {
   const parsed = parseArguments(argv);
   const outputPath = await resolveFreshRepositoryPath(parsed.outputRoot, 'B62 preflight root');
@@ -148,12 +174,31 @@ export async function runB62Preflight(argv) {
   const contractPath = await resolveExistingRepositoryPath(CONTRACT_URI, 'B62 contract');
   const correctionPath = await resolveExistingRepositoryPath(CORRECTION_URI, 'B62 C1 correction');
   const correction2Path = await resolveExistingRepositoryPath(CORRECTION_2_URI, 'B62 C2 correction');
+  const correction3Path = await resolveExistingRepositoryPath(CORRECTION_3_URI, 'B62 C3 correction');
+  const correction4Path = await resolveExistingRepositoryPath(CORRECTION_4_URI, 'B62 C4 correction');
+  const correction5Path = await resolveExistingRepositoryPath(CORRECTION_5_URI, 'B62 C5 correction');
   const contract = JSON.parse(await readFile(contractPath, 'utf8'));
   const correction = JSON.parse(await readFile(correctionPath, 'utf8'));
   const correction2 = JSON.parse(await readFile(correction2Path, 'utf8'));
+  const correction3 = JSON.parse(await readFile(correction3Path, 'utf8'));
+  const correction4 = JSON.parse(await readFile(correction4Path, 'utf8'));
+  const correction5 = JSON.parse(await readFile(correction5Path, 'utf8'));
   if (contract.schemaVersion !== 'bfs.b62Phase0AssetAnimaticCalibration.v0.1' || contract.statusBeforeExecution !== 'PREREGISTERED') throw new Error('B62 contract invalid');
   if (correction.statusBeforeExecution !== 'PREREGISTERED' || correction.parent.contractSha256 !== await sha256File(contractPath)) throw new Error('B62 C1 binding invalid');
   if (correction2.statusBeforeRetry !== 'PREREGISTERED' || correction2.parent.c1Sha256 !== await sha256File(correctionPath)) throw new Error('B62 C2 binding invalid');
+  if (correction3.statusBeforeDiagnostic !== 'PREREGISTERED' || correction4.statusBeforeDiagnostic !== 'PREREGISTERED' || correction5.statusBeforeProductionToolChange !== 'PREREGISTERED'
+    || correction5.authorizedRoots.preflight !== parsed.outputRoot || correction5.authorizedRoots.attempt !== parsed.attemptRoot || correction5.authorizedRoots.formal !== parsed.formalRoot) throw new Error('B62 C3/C4/C5 status/root invalid');
+  for (const [uri, expected] of [['experiments/b62-phase0-attempt-v0-1', correction3.retainedFailure.attemptTree], ['experiments/b62-phase0-v0-1', correction3.retainedFailure.formalTree], [correction4.retainedD1.root, correction4.retainedD1.tree]]) {
+    if (!isDeepStrictEqual(await treeIdentity(uri), expected)) throw new Error(`B62 retained failure tree drift: ${uri}`);
+  }
+  const d2ResultPath = await resolveExistingRepositoryPath('experiments/b62-phase0-d2-exr-media-state-ab-v0-1/result.json', 'B62 D2 result');
+  const d2ReceiptPath = await resolveExistingRepositoryPath('experiments/b62-phase0-d2-exr-media-state-ab-v0-1/receipt.json', 'B62 D2 receipt');
+  const d2Result = JSON.parse(await readFile(d2ResultPath, 'utf8')); const d2Receipt = JSON.parse(await readFile(d2ReceiptPath, 'utf8'));
+  if (await sha256File(d2ResultPath) !== correction5.promotingEvidence.result.sha256 || !validSelfHash(d2Result, 'resultHash') || d2Result.status !== 'PASS'
+    || d2Result.resultHash !== correction5.promotingEvidence.result.resultHash
+    || await sha256File(d2ReceiptPath) !== correction5.promotingEvidence.receipt.sha256 || !validSelfHash(d2Receipt, 'receiptHash') || d2Receipt.status !== 'PASS'
+    || d2Receipt.receiptHash !== correction5.promotingEvidence.receipt.receiptHash
+    || !isDeepStrictEqual(await treeIdentity(correction5.promotingEvidence.root), correction5.promotingEvidence.tree)) throw new Error('B62 D2 promoting evidence invalid');
   const toolHashes = await verifyFreeze(parsed.toolFreezeCommit);
   const upstream = await verifyUpstream(contract);
   for (const binary of ['/Applications/Blender.app/Contents/MacOS/Blender', '/opt/homebrew/bin/ffmpeg', '/opt/homebrew/bin/ffprobe']) await access(binary, constants.X_OK);
@@ -163,7 +208,7 @@ export async function runB62Preflight(argv) {
   const reserveBytes = BigInt(contract.processBudget.minimumFreeReserveBytes);
   if (availableBytes - projectedBytes < reserveBytes) throw new Error('B62 disk reserve admission failed');
   const checks = [
-    ['PREREGISTRATION_C1_C2_ANCESTRY', true],
+    ['PREREGISTRATION_C1_TO_C5_ANCESTRY', true],
     ['TOOL_FREEZE_EQUALS_PUSHED_HEAD', Object.keys(toolHashes).length === TOOL_PATHS.length],
     ['UPSTREAM_RECEIPTS_EXACT', upstream.length === 3],
     ['ROOTS_FRESH', true],
@@ -182,6 +227,10 @@ export async function runB62Preflight(argv) {
     contract: { uri: CONTRACT_URI, sha256: await sha256File(contractPath) },
     correction: { uri: CORRECTION_URI, sha256: await sha256File(correctionPath) },
     correction2: { uri: CORRECTION_2_URI, sha256: await sha256File(correction2Path) },
+    correction3: { uri: CORRECTION_3_URI, sha256: await sha256File(correction3Path) },
+    correction4: { uri: CORRECTION_4_URI, sha256: await sha256File(correction4Path) },
+    correction5: { uri: CORRECTION_5_URI, sha256: await sha256File(correction5Path) },
+    diagnostics: { d2ResultHash: d2Result.resultHash, d2ReceiptHash: d2Receipt.receiptHash },
     upstream, toolHashes, checks,
     disk: { availableBytes: availableBytes.toString(), projectedBytes: projectedBytes.toString(), minimumReserveBytes: reserveBytes.toString() },
     operations: { childProcesses: 0, blenderStarts: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },
