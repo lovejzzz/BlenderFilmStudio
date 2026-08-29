@@ -163,6 +163,7 @@ def main() -> None:
     scene.cycles.samples = render["samples"]
     scene.cycles.use_animated_seed = render["animatedSeed"]
     scene.cycles.seed = render["seed"]
+    scene.cycles.use_denoising = render["denoise"]
     scene.render.image_settings.file_format = "OPEN_EXR_MULTILAYER"
     scene.render.image_settings.color_depth = "16"
     scene.render.image_settings.exr_codec = "ZIP"
@@ -207,7 +208,11 @@ def main() -> None:
                 "samples": scene.cycles.samples,
                 "seed": scene.cycles.seed,
                 "animatedSeed": scene.cycles.use_animated_seed,
-                "denoise": render["denoise"],
+                "denoise": scene.cycles.use_denoising,
+                "format": "OPEN_EXR_MULTILAYER",
+                "pixelType": "HALF_16",
+                "compression": "ZIP_LOSSLESS",
+                "ocioConfigSha256": ocio["sha256"],
             },
             "renderSeconds": render_seconds,
             "exr": file_identity(exr_path, repository_root),

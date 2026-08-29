@@ -5021,3 +5021,11 @@ Date: 2026-08-29 · Type: B61 ALGORITHM IMPLEMENTATION · New Blender processes:
 预注册commit `06dcbfb`推送后，实现两段Blender-side candidate。`render_b61_frames.py`对一个shot/repetition验证source blend、Blender build、frozen OCIO environment/custom props/display/view，固定64-spp render contract，依次渲染1/72/144；每帧写multilayer EXR，从磁盘重开后取得decoded Combined RGBA float32 LE digest与finite/channel/dynamic统计，再从同一Render Result保存PNG并写self-hashed pixel/run reports。它不以container hash冒充pixel digest。
 
 `audit_b61_exr.py`在独立Blender进程中重开18个EXR，重算同一decoded projection并与18份self-hashed render report逐一匹配；不调用render。两文件SHA为`d13590ee27da8283c08d927efb86ded9fcf4ee12792ed50cbdb79e6176693bbd / f60fee8c357d951edcfdb7e1a0d82d8919c0d0a80314bcd10c86980ef8f86767`，静态Python syntax和diff check通过。尚未用正式B61 Blender验证multilayer EXR reopen API，不能据此宣称运行成功；三个official roots继续不存在。下一动作实现Node preflight/runner/auditor，再一起冻结并在fresh clone rehearsal。
+
+## J-384 · B61完整tool-freeze候选
+
+Date: 2026-08-29 · Type: B61 TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+完成三项Node candidate。Preflight要求pushed HEAD/origin exact，重开三份source blend/production receipts、OCIO、v0.3 calibration与v0.1/v0.2 retained failures，验证1 GiB projected output仍保留100 GiB reserve，全程zero Blender。Runner写attempt/admission/receipt后按WIDE/MEDIUM/CLOSE×A/B启动6个受120秒限制的Blender进程，每进程渲染3帧；之后只启动1个EXR reopen Blender和1个Node auditor，失败时写self-hashed invalidation并保留partial root。Node auditor直接重开18组EXR/PNG/pixel reports、6份run/process reports和Blender reopen audit，验证A/B decoded pixel exact、EXR/PNG headers、finite/dynamic pixels、成本、disk/bytes与10项mutations。
+
+为避免空gate，render report新增实际half/ZIP/multilayer、denoise、OCIO字段；auditor新增对应exact检查、最终disk reserve与formal byte ceiling。最终render/audit-python/preflight/runner/auditor SHA为`e47198e9d5e0487d644128683dfdb29eedf2d462922e593878684f2ff9725dfc / f60fee8c357d951edcfdb7e1a0d82d8919c0d0a80314bcd10c86980ef8f86767 / 50eba33dbf48445055f7fa6290ae5328b769c57650932105bb9302a754dc6c0a / 84f0b60c140820dcdbced72964541c427f4d3ea4e0eb0acf42e3de88a8dcf317 / 8d66e353a54925bd4f83b3cc54c405b2c6ef162470bc5bf819adfd2985ee1a73`。Node syntax、targeted ESLint zero-warning、Python syntax与diff check通过；official roots仍不存在。下一动作提交推送tool freeze，fresh clone先跑zero-Blender preflight，再决定是否执行18帧rehearsal。
