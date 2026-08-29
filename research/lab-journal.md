@@ -4845,3 +4845,11 @@ C4 tool-freeze commit `c86476405af442b419141e69609bfaed59c7f3cd`推送后，fres
 失败receipt固定在`experiments/restart-safe-production-orchestrator-preflight-v0-1/production-preflights/BASELINE_B01/preflight.json`，SHA/self-hash为`5b49bd337055e088efa091dba3228b4296c66861108294e0d86d0cd28ec8cec5` / `151776edd83415305481eb9e19a7e5386fbb8d54e657309a2dcd98a045e427a9`，operations证明Blender/render/model/network/Docker均0。Outer receipt、v0.1 attempt root和v0.1 formal root不存在。
 
 不得覆盖或清理v0.1失败。C5授权exactly one retry使用fresh/disjoint v0.2 preflight/attempt/formal roots，并要求preflight、runner、independent auditor都重开并验证v0.1失败证据与v0.2 root binding；新增2项攻击覆盖失败证据消失/变异及v0.1 root复用。原34 gates、72+C1-C4 attacks及所有生产语义不变。下一动作提交推送C5 spec/protocol、失败receipt与本entry，然后实现三工具binding；v0.2 roots在此之前不得创建。
+
+## J-366 · B58-C5 retained failure与v0.2 root binding实现候选
+
+Date: 2026-08-29 · Type: B58 TOOL-FREEZE CORRECTION IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+C5 preregistration/evidence commit `52e7e6e56169151bcf339bd8dbc794f5748170f1`推送后，preflight仅接受correction中三条exact v0.2 roots；在创建新root前重开v0.1失败receipt，验证SHA/self-hash、`REJECTED / RELEASE_COMMIT`、错误submitted commit、outer receipt absent及operations全0，并把C5 spec/protocol/failure receipt纳入tool-freeze blob scope。Runner在创建v0.2 attempt root前再次验证同一failure和三根binding；independent auditor第三次直接重开failed receipt并执行2项C5 mutations。
+
+Formal gate denominator保持34；semantic gate现同时要求72 original attacks、C1 8、C2 6、C3 2、C4 2、C5 2。新的preflight/runner/auditor SHA-256为`cdf04560605bfad99113f6f9bd4d2dc01fb9f1fce579e4dbd34c4701fe539fb3` / `61a3030ea80ffd574853022799da00a14633542b27cf3fd4a2a03da1e309c6c1` / `b1139156ecfb526a10dfdf136b3250432b944b40fc3e87233e0772c9a45553b5`。Node syntax、targeted ESLint zero-warning及diff check通过；v0.2 roots仍不存在。下一动作提交推送这些exact bytes，fresh clone rehearsal必须使用git解析出的完整HEAD，而不是手写SHA。

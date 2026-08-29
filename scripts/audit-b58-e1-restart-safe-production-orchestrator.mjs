@@ -533,6 +533,27 @@ function nestedPreflightCorrectionAttacks(correction, preflight, source) {
   return mutations.map(([id, mutate]) => ({ id, rejected: mutated(base, mutate, valid) }));
 }
 
+function retryRootCorrectionAttacks(correction, preflight, parsed, receiptText, receipt) {
+  const base = {
+    receiptSha256: hashBytes(Buffer.from(receiptText)),
+    receiptSelfHash: receipt.preflightHash,
+    receiptStatus: receipt.status,
+    receiptReason: receipt.reason,
+    preflightRoot: parsed.preflightRoot,
+    attemptRoot: parsed.attemptRoot,
+    formalRoot: parsed.formalRoot,
+  };
+  const valid = row => row.receiptSha256 === correction.failedOfficialPreflight.sha256
+    && row.receiptSelfHash === correction.failedOfficialPreflight.preflightHash && row.receiptStatus === 'REJECTED' && row.receiptReason === 'RELEASE_COMMIT'
+    && row.preflightRoot === correction.authorizedRetryRoots.preflight && row.attemptRoot === correction.authorizedRetryRoots.attempt
+    && row.formalRoot === correction.authorizedRetryRoots.formal && preflight.failedOfficialPreflight?.exact === true;
+  const mutations = [
+    ['C5_A01_FAILED_V01_RECEIPT_REMOVED_OR_MUTATED', row => { row.receiptSha256 = '0'.repeat(64); }],
+    ['C5_A02_RETRY_ROOT_REUSES_V01', row => { row.preflightRoot = correction.failedOfficialPreflight.root; }],
+  ];
+  return mutations.map(([id, mutate]) => ({ id, rejected: mutated(base, mutate, valid) }));
+}
+
 async function audit(parsed) {
   const root = parsed.repositoryRoot;
   const preflight = await json(resolve(root, parsed.preflightRoot, 'preflight.json'));
@@ -541,6 +562,13 @@ async function audit(parsed) {
   const gate0Correction = await json(resolve(root, 'specs/restart-safe-production-orchestrator-gate0-binding-correction.v0.1.json'));
   const entryCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-entry-correction.v0.1.json'));
   const nestedPreflightCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-nested-preflight-correction.v0.1.json'));
+  const retryRootCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-retry-root-correction.v0.1.json'));
+  const failedOfficialReceiptText = await readFile(resolve(root, retryRootCorrection.failedOfficialPreflight.receipt), 'utf8');
+  const failedOfficialReceipt = JSON.parse(failedOfficialReceiptText);
+  const failedOfficialExact = hashBytes(Buffer.from(failedOfficialReceiptText)) === retryRootCorrection.failedOfficialPreflight.sha256
+    && validHash(failedOfficialReceipt, 'preflightHash') && failedOfficialReceipt.preflightHash === retryRootCorrection.failedOfficialPreflight.preflightHash
+    && failedOfficialReceipt.status === 'REJECTED' && failedOfficialReceipt.reason === 'RELEASE_COMMIT'
+    && Object.values(failedOfficialReceipt.operations).every(value => value === 0);
   const gate0 = await inspectGate0(root, gate0Correction, preflight);
   const operation = await json(resolve(root, parsed.formalRoot, 'operation-draft.json'));
   const metaAttempt = await json(resolve(root, parsed.attemptRoot, 'attempt.json'));
@@ -564,6 +592,7 @@ async function audit(parsed) {
   const gate0CorrectionRows = gate0CorrectionAttacks(gate0Correction, gate0);
   const entryCorrectionRows = entryCorrectionAttacks(entryCorrection, preflight, spec);
   const nestedPreflightCorrectionRows = nestedPreflightCorrectionAttacks(nestedPreflightCorrection, preflight, preflightSource);
+  const retryRootCorrectionRows = retryRootCorrectionAttacks(retryRootCorrection, preflight, parsed, failedOfficialReceiptText, failedOfficialReceipt);
   const aggregateFinals = [baseline.final, exit86.final, interrupted.final];
   const outputRoots = preflight.productionPreflights.map(row => row.outputRoot);
   const uniquePids = new Set([
@@ -581,7 +610,8 @@ async function audit(parsed) {
   const gates = {
     PARENT_B57_EXACT: preflight.parent.exact === true,
     PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED: preflight.toolFreeze.exact === true && gate0.exact === true && preflight.checks.RESTART_SAFE_DIRECT_ENTRY_AND_B57_PACKAGE_EXACT === true
-      && preflight.checks.NESTED_PREFLIGHT_PARENT_AND_FAILURE_PROPAGATION_EXACT === true,
+      && preflight.checks.NESTED_PREFLIGHT_PARENT_AND_FAILURE_PROPAGATION_EXACT === true
+      && preflight.checks.FAILED_V01_RETAINED_AND_V02_RETRY_ROOTS_EXACT === true && failedOfficialExact,
     FORMAL_ROOTS_FRESH_AND_DISJOINT: metaAttempt.formalOutputAbsent === true && metaAdmission.status === 'ACCEPTED',
     PREFLIGHT_ZERO_BLENDER_ACCEPTED: preflight.status === 'ACCEPTED' && preflight.operations.blenderProcesses === 0,
     PRODUCTION_SURFACE_EXACT: preflight.toolFreeze.releaseExact === true,
@@ -621,7 +651,7 @@ async function audit(parsed) {
       && resourceTotals.nativeCompileBlenderStarts === 4 && resourceTotals.artifactAuditBlenderStarts === 3,
     ARTIFACT_AND_RECEIPT_ROSTERS_EXACT: [baseline, exit86, interrupted].every(row => row.compile.exact),
     PROCESS_AND_ATTEMPT_IDENTITIES_UNIQUE: uniquePids.size === 9 && new Set(outputRoots).size === outputRoots.length,
-    SEMANTIC_ATTACKS_MINIMUM_64: attacks.length === 72 && attacks.filter(row => row.rejected).length >= 64 && correctionRows.every(row => row.rejected) && gate0CorrectionRows.every(row => row.rejected) && entryCorrectionRows.every(row => row.rejected) && nestedPreflightCorrectionRows.every(row => row.rejected),
+    SEMANTIC_ATTACKS_MINIMUM_64: attacks.length === 72 && attacks.filter(row => row.rejected).length >= 64 && correctionRows.every(row => row.rejected) && gate0CorrectionRows.every(row => row.rejected) && entryCorrectionRows.every(row => row.rejected) && nestedPreflightCorrectionRows.every(row => row.rejected) && retryRootCorrectionRows.every(row => row.rejected),
     ZERO_RENDER_MODEL_NETWORK_DOCKER: ['renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses'].every(key => operation.semanticOperations[key] === 0)
       && aggregateFinals.every(receipt => ['renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses'].every(key => receipt.resourceTotals[key] === 0)),
   };
@@ -631,13 +661,14 @@ async function audit(parsed) {
   const gate0CorrectionRejected = gate0CorrectionRows.filter(row => row.rejected).length;
   const entryCorrectionRejected = entryCorrectionRows.filter(row => row.rejected).length;
   const nestedPreflightCorrectionRejected = nestedPreflightCorrectionRows.filter(row => row.rejected).length;
+  const retryRootCorrectionRejected = retryRootCorrectionRows.filter(row => row.rejected).length;
   const critical = [
     gates.LIVE_MATCHING_PROCESS_BLOCKS_DUPLICATE_SPAWN,
     gates.INTERRUPTED_ATTEMPT_TERMINAL_AND_NON_PROMOTABLE,
     gates.RECOVERY_STARTS_ZERO_ADDITIONAL_NATIVE_COMPILE_BLENDER_AFTER_COMPILE_CHECKPOINT,
     gates.DISK_RESERVE_AND_JIT_READMISSION_UNCHANGED,
   ].every(Boolean);
-  const scientificVerdict = gatePassed === 34 && attackRejected >= 64 && correctionRejected === 8 && gate0CorrectionRejected === 6 && entryCorrectionRejected === 2 && nestedPreflightCorrectionRejected === 2
+  const scientificVerdict = gatePassed === 34 && attackRejected >= 64 && correctionRejected === 8 && gate0CorrectionRejected === 6 && entryCorrectionRejected === 2 && nestedPreflightCorrectionRejected === 2 && retryRootCorrectionRejected === 2
     ? 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED'
     : critical ? 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED' : 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_REJECTED';
   const body = {
@@ -659,6 +690,9 @@ async function audit(parsed) {
     entryCorrectionAttackSummary: { total: entryCorrectionRows.length, rejected: entryCorrectionRejected },
     nestedPreflightCorrectionAttacks: nestedPreflightCorrectionRows,
     nestedPreflightCorrectionAttackSummary: { total: nestedPreflightCorrectionRows.length, rejected: nestedPreflightCorrectionRejected },
+    failedOfficialPreflight: { uri: retryRootCorrection.failedOfficialPreflight.receipt, exact: failedOfficialExact, sha256: hashBytes(Buffer.from(failedOfficialReceiptText)), preflightHash: failedOfficialReceipt.preflightHash, status: failedOfficialReceipt.status, reason: failedOfficialReceipt.reason },
+    retryRootCorrectionAttacks: retryRootCorrectionRows,
+    retryRootCorrectionAttackSummary: { total: retryRootCorrectionRows.length, rejected: retryRootCorrectionRejected },
     gates,
     gatePassed,
     gateTotal: Object.keys(gates).length,
@@ -679,7 +713,7 @@ export async function runAudit(argv) {
   const parsed = parseArguments(argv);
   const result = await audit(parsed);
   await writeExclusive(parsed.output, result);
-  process.stdout.write(`BFS_B58_AUDIT ${result.gatePassed}/${result.gateTotal} attacks=${result.attackSummary.rejected}/${result.attackSummary.total} correction=${result.correctionAttackSummary.rejected}/${result.correctionAttackSummary.total} gate0=${result.gate0CorrectionAttackSummary.rejected}/${result.gate0CorrectionAttackSummary.total} entry=${result.entryCorrectionAttackSummary.rejected}/${result.entryCorrectionAttackSummary.total} nested=${result.nestedPreflightCorrectionAttackSummary.rejected}/${result.nestedPreflightCorrectionAttackSummary.total} ${result.scientificVerdict}\n`);
+  process.stdout.write(`BFS_B58_AUDIT ${result.gatePassed}/${result.gateTotal} attacks=${result.attackSummary.rejected}/${result.attackSummary.total} correction=${result.correctionAttackSummary.rejected}/${result.correctionAttackSummary.total} gate0=${result.gate0CorrectionAttackSummary.rejected}/${result.gate0CorrectionAttackSummary.total} entry=${result.entryCorrectionAttackSummary.rejected}/${result.entryCorrectionAttackSummary.total} nested=${result.nestedPreflightCorrectionAttackSummary.rejected}/${result.nestedPreflightCorrectionAttackSummary.total} retry=${result.retryRootCorrectionAttackSummary.rejected}/${result.retryRootCorrectionAttackSummary.total} ${result.scientificVerdict}\n`);
   return result;
 }
 
