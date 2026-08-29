@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "bfs.host-capacity-sentinel-audit.v0.1",
+  "experimentId": "B59-G0-R5-C1",
+  "auditedAt": "2026-08-29T05:51:54.678Z",
+  "finalVerdict": "ACTIVE_CAPACITY_SENTINEL_ADMITTED",
+  "liveSeverity": "HEALTHY",
+  "gates": {
+    "SPEC_AND_PARENT_IDENTITY": true,
+    "PURE_CLASSIFIER_BOUNDARIES": true,
+    "RAPID_AND_LONG_LOSS_DETECTION": true,
+    "HISTORY_IS_BOUNDED": true,
+    "STATE_WRITES_ARE_ATOMIC_AND_BOUNDED": true,
+    "NO_AUTOMATIC_DELETION_OR_RESTART": true,
+    "LAUNCHD_TEMPLATE_EXACT": true,
+    "INSTALLATION_EXACT_AND_REVERSIBLE": true,
+    "LIVE_SAMPLE_VALID": true,
+    "INDEPENDENT_AUDIT_REPLAY": true
+  },
+  "passedGates": 10,
+  "totalGates": 10,
+  "failedGates": [],
+  "attackIdsExact": true,
+  "attackResults": [
+    {
+      "id": "A01_SPEC_SHA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A02_PARENT_EVIDENCE_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A03_WARNING_FLOOR_BYPASS",
+      "rejected": true
+    },
+    {
+      "id": "A04_CRITICAL_FLOOR_BYPASS",
+      "rejected": true
+    },
+    {
+      "id": "A05_EMERGENCY_FLOOR_BYPASS",
+      "rejected": true
+    },
+    {
+      "id": "A06_RAPID_LOSS_BYPASS",
+      "rejected": true
+    },
+    {
+      "id": "A07_LONG_LOSS_BYPASS",
+      "rejected": true
+    },
+    {
+      "id": "A08_HISTORY_OVERFLOW",
+      "rejected": true
+    },
+    {
+      "id": "A09_STALE_SAMPLE_ACCEPTANCE",
+      "rejected": true
+    },
+    {
+      "id": "A10_BROWSER_CRITICAL_BYPASS",
+      "rejected": true
+    },
+    {
+      "id": "A11_SELF_HASH_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A12_LAUNCHD_LABEL_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A13_LAUNCHD_INTERVAL_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A14_RUNTIME_PATH_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A15_AUTOMATIC_CLEANUP_MUTATION",
+      "rejected": true
+    }
+  ],
+  "attacksPassed": 15,
+  "attacksTotal": 15,
+  "liveState": {
+    "latestSha256": "c3808175a59238ab2911e4adf5500ec460fdf9ae811dcae6302d089384785e85",
+    "historySha256": "33b132bfee320d16efa6d9a72ed86a7ab51e74ad54953635e6ad08654e5fed85",
+    "historySamples": 1,
+    "serviceTarget": "gui/501/com.blenderfilmstudio.capacity-sentinel",
+    "servicePrintSha256": "a9e44dd99304d4b97f668b47486e7c7acf1672fd086d9a570641af0d77d4af99"
+  },
+  "selfHash": "f23712f18b0e4c1c6c77d0f2a0efc09a57ae7a56863997c311c1514c35f79c99"
+}

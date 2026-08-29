@@ -1,7 +1,7 @@
 # B59-G0-R5-C1 · RunAtLoad-only installation correction
 
 Date: 2026-08-29
-Status: PREREGISTERED — FRESH V0.2 ROOTS ABSENT
+Status: COMPLETED — ACTIVE CAPACITY SENTINEL ADMITTED
 Parent commit: `a4254c22af54f1591dd877273fb1ac4c0936a779`
 
 ## Counterexample
@@ -22,3 +22,22 @@ The attempt uses fresh roots:
 - state: `/Users/tianxing/.local/state/BlenderFilmStudio/capacity-sentinel-v0-2`
 
 The retained v0.1 state and formal evidence are read-only parents and are not reused. Passing C1 admits the installed warning mechanism only; long-term retention and Gate 0 closeout remain separate.
+
+## Formal result
+
+C1 release commit `570b0079b4fbb56f5457137b839d37823ef1fdb4` passed the fresh-target and exact-release preflight. One `launchctl bootstrap` loaded the service; `RunAtLoad` produced a fresh live sample without any kickstart. The installed plist is byte-exact with the repository template, the service remains loaded at `gui/501/com.blenderfilmstudio.capacity-sentinel`, its first run exited 0, and launchd records a 900-second interval.
+
+The first v0.2 sample at `2026-08-29T05:51:48.221Z` classified `HEALTHY`:
+
+- available bytes: `320,036,970,496`
+- browser temporary allocation: `20,480` bytes across 24 entries
+- Colima VM/data sparse allocations: `1,552,670,720` / `7,346,622,464` bytes
+- history samples: 1
+- prohibited actions: all zero
+
+Installation actions were exactly one plist create and one bootstrap, with zero kickstarts, deletions, cleanup, service restarts, Docker calls, Blender processes, network calls or model calls. Independent audit passed 10/10 gates and 15/15 attacks with final verdict `ACTIVE_CAPACITY_SENTINEL_ADMITTED`.
+
+- `install.json` SHA-256: `b1ec4be0c7a4097648ef1104a3156d146cb35552c28b53116d22d2f23d9b4e94`
+- `audit.json` SHA-256: `3e971023a840497d29647f29bf9eff3d3e885e2890665f6f07642c00890b3532`
+
+The service is a one-shot periodic job, so `state = not running` between samples is expected; admission requires the loaded definition, run count, last exit 0, exact interval and fresh state rather than a permanently resident process. The next Gate 0 step is to let this admitted sentinel accumulate unattended samples and audit their cadence, retention and capacity trend.

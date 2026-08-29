@@ -4663,3 +4663,13 @@ R5冻结15分钟user LaunchAgent、250/180/140 GiB warning/critical/emergency fl
 `launchctl bootstrap`与`RunAtLoad`实际成功，05:48:36Z写出一个self-hashed `HEALTHY` sample：available 319,974,277,120 bytes、browser temp 20,480 bytes、所有prohibited action counters为0。安装器随后要求第二次`kickstart -k`，该命令超过10秒timeout且无stderr，因而formal attempt fail-closed。Rollback精确bootout该label并移除新plist；事后service print exit 113、plist不存在、无sentinel process。v0.1 state保留，formal root只含start/failure且无install/audit。
 
 本机launchctl文档与实测共同说明RunAtLoad已经完成首次执行，额外kickstart不是安装成立所必需。下一动作不复用v0.1 root，不删除失败state；预注册fresh v0.2 formal/state roots，把bootstrap+RunAtLoad fresh sample作为唯一首次触发，并继续要求exact reversible uninstall与independent audit。
+
+## J-349 · R5-C1主动容量哨兵安装与独立审计通过
+
+Date: 2026-08-29 · Type: ACTIVE CAPACITY SENTINEL ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+C1只把首次触发从`bootstrap + RunAtLoad + kickstart`修正为`bootstrap + RunAtLoad`，其余250/180/140 GiB capacity floors、10 GiB rapid/25 GiB long loss、browser 64 MiB/1 GiB、15-minute interval、192-sample bounded history、256 KiB state ceiling、zero automatic cleanup/restart及15 attacks不变。Fresh v0.2 formal/state roots在release commit `570b0079b4fbb56f5457137b839d37823ef1fdb4`与origin exact后安装。
+
+正式动作只有1 plist create和1 bootstrap；RunAtLoad在05:51:48Z写出`HEALTHY` sample，available 320,036,970,496 bytes、browser temp 20,480 bytes/24 entries、Colima VM/data allocated 1,552,670,720 / 7,346,622,464 bytes。Kickstart/deletion/cleanup/service restart/Docker/Blender/network/model均为0。Installed plist与repo template byte-exact；launchd label保持loaded、runs=1、last exit=0、run interval=900 seconds。Periodic one-shot在样本间`not running`是预期状态，不要求常驻进程。
+
+Independent audit通过10/10 gates、15/15 attacks，final `ACTIVE_CAPACITY_SENTINEL_ADMITTED`。Install/audit SHA为 `b1ec4be0c7a4097648ef1104a3156d146cb35552c28b53116d22d2f23d9b4e94` / `3e971023a840497d29647f29bf9eff3d3e885e2890665f6f07642c00890b3532`。容量预警机制现在已主动运行，但Gate 0仍等待它积累无人值守样本并审计cadence与趋势；B58继续暂停。
