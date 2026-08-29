@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
-    "build:sites": "vinext build && node scripts/wrap-sites-worker.mjs",
+    "build:sites": "GITHUB_PAGES=false next build && vinext build && node scripts/wrap-sites-worker.mjs",
     "build:pages": "GITHUB_PAGES=true next build",
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",

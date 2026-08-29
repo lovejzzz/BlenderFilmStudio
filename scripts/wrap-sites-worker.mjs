@@ -1,10 +1,12 @@
-import { existsSync, renameSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, renameSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
 
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
+const staticExportDirectory = join(repositoryRoot, 'out');
 const serverDirectory = join(repositoryRoot, 'dist', 'server');
+const clientDirectory = join(repositoryRoot, 'dist', 'client');
 const workerEntry = join(serverDirectory, 'index.js');
 const vinextEntry = join(serverDirectory, 'vinext-handler.js');
 const ssrEntry = join(serverDirectory, 'ssr', 'index.js');
@@ -13,12 +15,17 @@ const bundledSsrEntry = join(serverDirectory, 'ssr', 'sites-ssr.js');
 if (!existsSync(workerEntry)) {
   throw new Error(`Sites worker adapter: missing ${workerEntry}`);
 }
+if (!existsSync(staticExportDirectory)) {
+  throw new Error(`Sites worker adapter: missing static export ${staticExportDirectory}`);
+}
 if (existsSync(vinextEntry)) {
   throw new Error(`Sites worker adapter: refusing to overwrite ${vinextEntry}`);
 }
 if (!existsSync(ssrEntry)) {
   throw new Error(`Sites worker adapter: missing ${ssrEntry}`);
 }
+
+cpSync(staticExportDirectory, clientDirectory, { recursive: true });
 
 renameSync(workerEntry, vinextEntry);
 writeFileSync(workerEntry, `import handler from './vinext-handler.js';
