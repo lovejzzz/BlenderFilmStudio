@@ -5697,3 +5697,11 @@ C2 retry以tool freeze `59499ee5fb2ef48d0fc332f769691eb4a36f0412`在fresh v0.3�
 Node auditor 0.265秒完成20/20 gates与12/12 mutation attacks，zero render/model/network/Docker/Colima。正式verdict为`B62_TERMINAL_SCENESPEC_BUILDPLAN_AND_SCENE_COMPILATION_SUPPORTED`。audit file/self `4b8b1dd0…/002244a4…`，receipt file/self `a4294cdd…/62d6ddbb…`；最终root 12 files/842,849 bytes/tree `b75190c6bdb3d7581acf4457b154ae831dcc2652d6ba626d4e98ab6e7f2f968e`，audit时free 303,449,231,360 bytes。
 
 边界保持：这是B62-specific precompiled scene-package dialect，不是general SceneSpec v0.6；尚未产生新pixels、验证288帧连续图像、final Cycles成本、delivery video或render restart。T1只授权下一步对compiled scene做fresh 288-frame廉价animatic与全时间线审计，再决定是否准入昂贵final render。
+
+## J-457 · B62-T2 288帧终局animatic与连续性审计预注册
+
+Date: 2026-08-29 · Type: FULL-TIMELINE ANIMATIC PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+T1 v0.3的12-file root、receipt/audit/BuildPlan/independent report与337,411-byte production scene已exact复核；scene SHA为`0acd4d13…`，当前磁盘约303 GiB available。T2在四个新工具与formal root都不存在时冻结下一道门：one Blender fresh render 288帧640×360 Eevee Next 16 spp PNG；one independent Blender zero-render复开，解码288帧并测close 193–288全部96帧的不变D6 geometry template；随后ffmpeg/ffprobe生成并验证12秒MP4，Node做14 gates。
+
+像素门只检测corruption/freeze/routing：每帧finite、dynamic、非纯黑白，三shot各至少2个decoded digests、全片至少10个、两处cut pair必须不同；不把该指标包装成感知电影评分。相机路由逐帧exact，contact/core/warm-light causal state保持。预算2 Blender starts、288 Eevee/0 Cycles renders、128 MiB writes、2 GiB RSS/Blender、100 GiB reserve，zero model/network/Docker/Colima。machine PASS仍为HUMAN_PENDING；只有完整视频人工复核后才授权final Cycles与controlled restart。

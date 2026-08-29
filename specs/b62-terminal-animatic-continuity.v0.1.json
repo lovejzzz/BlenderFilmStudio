@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "bfs.b62TerminalAnimaticContinuityExperiment.v0.1",
+  "experimentId": "B62-T2-E1",
+  "date": "2026-08-29",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "title": "Full 288-frame animatic and continuity audit of the compiled terminal production scene",
+  "question": "Does the exact T1-compiled production scene render a complete 12-second three-shot animatic with correct per-frame camera routing, valid non-frozen pixels, preserved causal state and an all-frame admissible motion-aware close composition?",
+  "parentEvidence": {
+    "t1Root": {"uri": "experiments/b62-terminal-scene-package-v0-3", "files": 12, "bytes": 842849, "treeSha256": "b75190c6bdb3d7581acf4457b154ae831dcc2652d6ba626d4e98ab6e7f2f968e"},
+    "receipt": {"uri": "experiments/b62-terminal-scene-package-v0-3/receipt.json", "sha256": "a4294cddcde4ba48ef613605af10c961b9eb246251850f4adfafe465087d291f", "receiptHash": "62d6ddbb903331f930f6fd9c94887752e90bae022eb0048003254780841e1366", "status": "PASS", "scientificVerdict": "B62_TERMINAL_SCENESPEC_BUILDPLAN_AND_SCENE_COMPILATION_SUPPORTED"},
+    "audit": {"uri": "experiments/b62-terminal-scene-package-v0-3/audit.json", "sha256": "4b8b1dd0a7b80c277896814fab0cab8fabcca8e3cf276797ce042850fe524e8d", "auditHash": "002244a4a0f1916dc347306e2587728e9bded965a53e1aca7ffcf4d827decd42", "gates": 20, "attacks": 12},
+    "buildPlan": {"uri": "experiments/b62-terminal-scene-package-v0-3/build-plan.json", "sha256": "88b626acd826ffab4c3f3571419c711335ef6775c8bece56def28c7c3ad830be", "planHash": "87de2507affa85e59a29eb848a1db45cace98977f3bc64532465c7465bf957db"},
+    "scene": {"uri": "experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend", "sha256": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc"},
+    "independent": {"uri": "experiments/b62-terminal-scene-package-v0-3/reports/independent-audit.json", "sha256": "996a8cad9a37fef80249d943222680ed72d29785a347265327c6332451a717cb", "reportHash": "720093c20e2252e60c0f53b8268794384681938849d768bcb242146b077e14fa", "maximumPoseError": 0.0}
+  },
+  "timeline": {
+    "frameStart": 1,
+    "frameEnd": 288,
+    "fps": 24,
+    "durationSeconds": 12,
+    "shots": [
+      {"id": "WIDE_APPROACH", "framesInclusive": [1, 96], "camera": "CAM_WIDE_APPROACH"},
+      {"id": "MEDIUM_CONTACT", "framesInclusive": [97, 192], "camera": "CAM_MEDIUM_CONTACT"},
+      {"id": "CLOSE_REFLECTION", "framesInclusive": [193, 288], "camera": "CAM_CLOSE_MOTION_TERMINAL"}
+    ],
+    "cutPairs": [[96, 97], [192, 193]]
+  },
+  "render": {
+    "engine": "BLENDER_EEVEE",
+    "engineFamily": "BLENDER_EEVEE_NEXT",
+    "resolution": [640, 360],
+    "resolutionPercentage": 100,
+    "samples": 16,
+    "fileFormat": "PNG",
+    "colorMode": "RGBA",
+    "colorDepth": "8",
+    "filmTransparent": false,
+    "motionBlur": true,
+    "color": {"display": "sRGB - Display", "view": "ACES 2.0 - SDR 100 nits (Rec.709)", "look": "None", "exposure": 0.0, "gamma": 1.0}
+  },
+  "pixelAcceptance": {
+    "frameRosterExact": "Exactly frame-0001.png through frame-0288.png; no additional image.",
+    "dimensionsExact": [640, 360],
+    "decodedChannels": "RGBA float32 through bundled OpenImageIO 3.1.13.1 and NumPy 2.3.4",
+    "perFrame": {"nonFiniteCount": 0, "rgbDynamicRangeMinimumExclusive": 0.00392156862745098, "meanRgbMinimumExclusive": 0.0001, "meanRgbMaximumExclusive": 0.9999},
+    "temporal": {"minimumDistinctDecodedDigestsPerShot": 2, "minimumDistinctDecodedDigestsWholeSequence": 10, "cutPairDecodedDigestsMustDiffer": true},
+    "interpretation": "These are corruption/freeze/cut-routing gates, not perceptual cinema-quality scores. Repeated frames within a shot are allowed."
+  },
+  "closeGeometryAcceptance": {
+    "frames": "Every integer frame 193 through 288",
+    "faceAnchorsExact": ["B62_VISOR", "B62_EYE_SLIT"],
+    "helmetVisualBlockerShareMaximum": 0.7,
+    "characterVisualBlockerShareMinimum": 0.2,
+    "characterVisualBlockerShareMaximum": 0.9,
+    "characterOnScreenVertexFractionMinimum": 0.1,
+    "characterOnScreenVertexFractionMaximum": 0.6,
+    "characterClampedUnionAreaFractionMinimum": 0.35,
+    "characterClampedUnionAreaFractionMaximum": 0.9,
+    "visibleSemanticAnchorCountMinimum": 2,
+    "materialAwareTraversal": "Skip an owner only when every material slot is Volume-linked and Surface-unlinked; advance 10 micrometers; maximum 64 intersections.",
+    "decision": "All 96 close frames must pass without changing the D6 geometry template."
+  },
+  "causalStateAcceptance": {
+    "frames": [138, 143, 144, 150, 288],
+    "coreActivation": [0.0, 0.0, 0.5, 1.0, 1.0],
+    "contactAtFrame144MaximumMeters": 0.02,
+    "warmLight": "zero at 138/143, positive at 144, higher at 150 and held through 288"
+  },
+  "video": {"encoder": "ffmpeg 8.1.2", "codec": "libx264", "pixelFormat": "yuv420p", "fastStart": true, "width": 640, "height": 360, "fps": 24, "frames": 288, "durationSeconds": 12.0},
+  "runtime": {
+    "blender": {"executable": "/Applications/Blender.app/Contents/MacOS/Blender", "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2", "version": "Blender 5.2.0 LTS", "buildHash": "fbe6228777e7"},
+    "ffmpeg": {"executable": "/opt/homebrew/bin/ffmpeg", "sha256": "1332dc2de372bade9a8a63da0d6cdfab9de97fcefbae707bcc0b0506e1203327", "version": "8.1.2"},
+    "ffprobe": {"executable": "/opt/homebrew/bin/ffprobe", "sha256": "4322275c1c2ac6ba15c695b288788bc1204e75211b3d5c030e5812c82a6dff73"},
+    "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+    "forbidden": ["Cycles render", "model calls", "network access", "Docker or Colima", "reuse of Phase 0 animatic frames", "reuse of any prior derived render root"]
+  },
+  "processBudget": {
+    "runnerProcesses": 1,
+    "freshBlenderProcesses": 2,
+    "eeveeRenderCalls": 288,
+    "cyclesRenderCalls": 0,
+    "ffmpegProcesses": 1,
+    "ffprobeProcesses": 1,
+    "nodeAuditorProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "maximumRenderWallSeconds": 900,
+    "maximumIndependentWallSeconds": 300,
+    "maximumPeakResidentSetSizeBytesPerBlender": 2147483648,
+    "maximumCombinedLogBytesPerChild": 4194304,
+    "maximumOutputBytes": 134217728,
+    "projectedWriteBytes": 134217728,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "toolFreeze": {
+    "requiredNewTools": ["blender/render_b62_terminal_animatic.py", "blender/audit_b62_terminal_animatic.py", "scripts/run-b62-terminal-animatic.mjs", "scripts/audit-b62-terminal-animatic.mjs"],
+    "sequence": ["Commit and push T1 evidence plus this spec/protocol/journal while all four tools and formal root are absent.", "Implement and statically validate without rendering.", "Commit and push exact tool bytes.", "Run once from the fresh root; retain every failure and require preregistered correction plus new root."]
+  },
+  "acceptanceGates": [
+    "G01_PREREGISTRATION_AND_T1_PARENT_EXACT",
+    "G02_RUNTIME_TOOL_OCIO_AND_CAPACITY_ADMISSION_EXACT",
+    "G03_FRESH_ROOT_EXCLUSIVE_WRITES_AND_NO_SYMLINKS",
+    "G04_RENDER_BLENDER_EXIT_ZERO_AND_288_EEVEE_CALLS",
+    "G05_FRAME_ROSTER_DIMENSIONS_AND_CAMERA_ROUTING_EXACT",
+    "G06_ALL_288_DECODED_PIXELS_FINITE_DYNAMIC_AND_NONEMPTY",
+    "G07_THREE_SHOTS_AND_WHOLE_SEQUENCE_NOT_FROZEN",
+    "G08_BOTH_CUT_PAIR_DIGESTS_DIFFER",
+    "G09_INDEPENDENT_FRESH_BLENDER_REOPEN_EXACT",
+    "G10_ALL_96_CLOSE_FRAMES_PASS_UNCHANGED_GEOMETRY_TEMPLATE",
+    "G11_CONTACT_CORE_AND_WARM_LIGHT_CAUSAL_STATE_EXACT",
+    "G12_FFMPEG_AND_FFPROBE_DELIVERY_METADATA_EXACT",
+    "G13_PROCESS_RESOURCE_AND_OUTPUT_BUDGETS_PASS",
+    "G14_SELF_HASHED_REPORTS_RECEIPT_AND_ZERO_FORBIDDEN_OPERATIONS"
+  ],
+  "output": {"formalRoot": "experiments/b62-terminal-animatic-continuity-v0-1", "frames": "frames/frame-%04d.png", "video": "video/B62_TERMINAL_ANIMATIC.mp4", "humanReview": "HUMAN_PENDING", "immutableFailurePolicy": "Retain every partial root; never overwrite or reuse."},
+  "decision": {
+    "supportedVerdict": "B62_TERMINAL_288_FRAME_ANIMATIC_AND_CONTINUITY_SUPPORTED",
+    "supportedWhen": "All 14 gates pass, including every close frame, then the machine result remains HUMAN_PENDING.",
+    "rejectedVerdict": "B62_TERMINAL_288_FRAME_ANIMATIC_OR_CONTINUITY_REJECTED",
+    "rejectedWhen": "A fully admitted and technically valid run exposes a pixel, temporal, geometry or causal-state failure.",
+    "invalidated": "Any parent, runtime, process, resource, output, independent-agreement or receipt failure yields scientificVerdict null."
+  },
+  "nextAuthorization": "Machine PASS plus labeled full-video human review authorizes preregistration of the final 288-frame Cycles EXR render with controlled interruption and receipt-based resume.",
+  "nonClaims": ["Eevee 640x360 is not final film quality.", "Simple corruption/freeze metrics are not perceptual continuity scores.", "T2 does not prove final Cycles cost, bit depth, delivery color or restart-safe render resume.", "The stylized Phase 0 assets do not establish photorealism."]
+}
