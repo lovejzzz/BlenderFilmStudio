@@ -7,11 +7,11 @@ const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin']
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://lovejzzz.github.io/BlenderFilmStudio/'),
-  title: 'Blender Film Studio｜AI → Blender 电影工作流技术基线',
-  description: '截至 2026-08-25，对 AI 驱动 Blender 电影生产链逐环节进行可行性、成熟度、证据与缺口调查。',
+  title: 'BlenderFilmStudio｜AI 原生电影软件研究',
+  description: '最新方向：以 Blender 官方开源内核构建独立品牌、GPL 合规、可审计的 AI 原生电影制作软件，并用真实 Blender 实验验证。',
   openGraph: {
-    title: 'Blender Film Studio｜AI → 3D → Cinema',
-    description: '15 个技术环节的可行性、成熟度、证据与缺口调查。研究截点：2026-08-25。',
+    title: 'BlenderFilmStudio｜AI Native Film Studio',
+    description: '从 AI 操作 Blender，升级为 Blender 内核上的 AI 原生电影软件。设计、证据、许可证与源码可行性研究。',
     type: 'website',
     locale: 'zh_CN',
     url: 'https://lovejzzz.github.io/BlenderFilmStudio/',
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blender Film Studio｜AI → 3D → Cinema',
-    description: 'AI 驱动 Blender 电影工作流技术基线研究。',
+    title: 'BlenderFilmStudio｜AI Native Film Studio',
+    description: 'Blender 开源内核上的 AI 原生电影软件研究。',
     images: ['https://lovejzzz.github.io/BlenderFilmStudio/og.png'],
   },
 };
