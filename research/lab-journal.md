@@ -5687,3 +5687,13 @@ C1 tool freeze `51c6af101d1623d1e747bff5f402a9f5976d86ad`在fresh v0.2通过dual
 精确差异仅为BuildPlan `clipStart=0.05`经Blender RNA float32存储后变成`0.05000000074505806`，绝对误差约7.45e-10；lens 65与clipEnd 200 exact。compiler post-assignment已经记录同一float32值，fresh reopen复现。v0.2永久保留9 files/651,534 bytes/tree `3ed5e9d04406786e829af6fb686cae87fbd80ad84d0ef76bd10feab99bbcc6ea`；failure file/self `ea48ef66…/88e1b076…`，scientific verdict为null。
 
 C2在工具修改前只授权independent optics对BuildPlan使用absolute 1e-6，并同时对compile report observed value使用1e-9；三项observed/error必须写入report。runner/auditor绑定v0.2并切fresh v0.3。BuildPlan compiler与Blender compiler bytes、camera数值、96 pose samples与1e-6 pose tolerance、20 gates、12 attacks、预算和verdict全部不变。
+
+## J-456 · B62-T1 v0.3终局场景包编译链正式PASS
+
+Date: 2026-08-29 · Type: TERMINAL SCENE COMPILATION FORMAL PASS · New Blender processes: 2 · New Blender renders: 0
+
+C2 retry以tool freeze `59499ee5fb2ef48d0fc332f769691eb4a36f0412`在fresh v0.3完成。两个独立BuildPlan进程分别49/45 ms并exact同意96-sample plan `87de2507…`；Blender compile 0.633秒、peak RSS 262,799,360 bytes，新增exact one camera object/data/action、只改close marker并写出337,411-byte scene `0acd4d13…`；independent Blender 0.575秒、peak RSS 252,231,680 bytes，fresh reopen 14/14 checks全部PASS。96帧location/quaternion maximum error为0；lens/clipEnd exact，clipStart相对plan误差7.45e-10且相对compiler observation误差0。
+
+Node auditor 0.265秒完成20/20 gates与12/12 mutation attacks，zero render/model/network/Docker/Colima。正式verdict为`B62_TERMINAL_SCENESPEC_BUILDPLAN_AND_SCENE_COMPILATION_SUPPORTED`。audit file/self `4b8b1dd0…/002244a4…`，receipt file/self `a4294cdd…/62d6ddbb…`；最终root 12 files/842,849 bytes/tree `b75190c6bdb3d7581acf4457b154ae831dcc2652d6ba626d4e98ab6e7f2f968e`，audit时free 303,449,231,360 bytes。
+
+边界保持：这是B62-specific precompiled scene-package dialect，不是general SceneSpec v0.6；尚未产生新pixels、验证288帧连续图像、final Cycles成本、delivery video或render restart。T1只授权下一步对compiled scene做fresh 288-frame廉价animatic与全时间线审计，再决定是否准入昂贵final render。
