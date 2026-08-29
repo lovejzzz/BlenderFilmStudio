@@ -349,7 +349,10 @@ const attacks = [
     x.samples[1].capturedAt = new Date(Date.parse(x.samples[0].capturedAt) + spec.observationPolicy.minimumIntervalSeconds * 1000 - 1).toISOString();
     x.samples[1].latenessMs = 0;
   }],
-  ['A06_TOTAL_SPAN_BELOW_MINIMUM', (x) => { x.samples.at(-1).capturedAt = new Date(Date.parse(x.samples[0].capturedAt) + 100000).toISOString(); x.samples.at(-1).latenessMs = 0; }],
+  ['A06_TOTAL_SPAN_BELOW_MINIMUM', (x) => {
+    x.samples.at(-1).capturedAt = new Date(Date.parse(x.samples[0].capturedAt) + spec.observationPolicy.minimumTotalSpanSeconds * 1000 - 1).toISOString();
+    x.samples.at(-1).latenessMs = 0;
+  }],
   ['A07_RUNTIME_VERSION_MUTATION', (x) => { x.samples[0].runtime.codexVersion = '0.0.0 (0)'; }],
   ['A08_MAIN_PID_MUTATION', (x) => { x.samples[0].processes.mainCodexPids = [1]; }],
   ['A09_OLD_PID_RESURRECTION', (x) => { x.samples[0].processes.mainCodexPids = [spec.runtimeExpectation.forbiddenPreviousMainPid]; }],
