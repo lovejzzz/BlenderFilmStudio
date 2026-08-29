@@ -4965,3 +4965,11 @@ Preflight evidence commit `c6a8849`推送且attempt/formal roots fresh后，form
 必须保留的边界发现：同镜头A/B的压缩`.blend` SHA不同，但canonical BuildPlan与structure相同。`nativeBlendBytesDeterministic:false`已在正式运行前冻结，因此没有放宽门槛；结果只支持确定的结构语义，不支持容器字节确定或像素结论。Audit file SHA/self-hash为`526625a3… / 32f65b51…`，results为`2ba5dc63… / 36f87f76…`，receipt为`12937d85… / 312060d8…`。
 
 B60由此关闭输入确定编译门，并关闭跨镜头一致性的结构/契约层；视觉/像素层与影院级渲染成本门仍未关闭。下一阶段必须实际渲染预注册EXR帧，不能继续用compile-only证据外推电影质量。
+
+## J-378 · B61前置真实Cycles资源校准预注册
+
+Date: 2026-08-29 · Type: RENDER CALIBRATION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+B60正式证据commit `f04919c`推送后，预注册一个非准入校准：绑定WIDE-A已审计scene.blend SHA `9019e6dc…`与production receipt file/self-hash `98d6ab29… / 9cd68189…`，固定frame 72、1920×1080、Cycles CPU、multilayer half-float EXR，分别用32与64 samples启动两个独立Blender进程。输出根`experiments/b61-render-calibration-v0-1`当前不存在。
+
+校准只用于冻结B61正式矩阵的samples、timeout与容量预算；不产生像素复现、视觉一致或电影质量结论。上限为2 Blender starts、2 render calls、2 frames、单进程300秒，100 GiB reserve，zero model/network/Docker。失败文件与日志必须保留，不得覆盖重跑。下一动作先提交推送本协议，再执行两个case。
