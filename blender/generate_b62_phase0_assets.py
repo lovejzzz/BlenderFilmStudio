@@ -641,7 +641,11 @@ def configure_scene(scene: bpy.types.Scene) -> None:
     scene.render.use_motion_blur = True
     scene.render.image_settings.media_type = "MULTI_LAYER_IMAGE"
     scene.render.image_settings.file_format = "OPEN_EXR_MULTILAYER"
-    scene.view_settings.look = "Medium High Contrast"
+    scene.display_settings.display_device = "sRGB - Display"
+    scene.view_settings.view_transform = "ACES 2.0 - SDR 100 nits (Rec.709)"
+    scene.view_settings.look = "None"
+    scene.view_settings.exposure = 0
+    scene.view_settings.gamma = 1
     scene["bfs_experiment_id"] = "B62-P0-E1"
     scene["bfs_master_frame_count"] = 288
     scene["bfs_no_generative_video"] = True
@@ -739,6 +743,7 @@ def main() -> None:
             "fps": scene.render.fps,
             "markers": [{"name": marker.name, "frame": marker.frame, "camera": marker.camera.name if marker.camera else None} for marker in scene.timeline_markers],
         },
+        "color": {"display": scene.display_settings.display_device, "view": scene.view_settings.view_transform, "look": scene.view_settings.look, "exposure": scene.view_settings.exposure, "gamma": scene.view_settings.gamma},
         "contact": {
             "handSocket": "HAND_R_SOCKET",
             "consoleSocket": touch.name,

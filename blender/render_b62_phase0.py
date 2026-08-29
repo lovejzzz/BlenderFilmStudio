@@ -78,6 +78,8 @@ def require_master(formal_root: Path) -> tuple[bpy.types.Scene, Path]:
         raise RuntimeError("B62 master scene binding is absent")
     if scene.frame_start != 1 or scene.frame_end != 288 or scene.render.fps != 24:
         raise RuntimeError("B62 master timeline drift")
+    if scene.display_settings.display_device != "sRGB - Display" or scene.view_settings.view_transform != "ACES 2.0 - SDR 100 nits (Rec.709)" or scene.view_settings.look != "None" or scene.view_settings.exposure != 0 or scene.view_settings.gamma != 1:
+        raise RuntimeError("B62 runtime color transform drift")
     return scene, path
 
 
@@ -202,7 +204,7 @@ def render_animatic(repository_root: Path, formal_root: Path, master: bpy.types.
     output_dir = formal_root / "animatic"
     output_dir.mkdir(parents=True, exist_ok=False)
     scene = make_isolated_scene(master, "B62_PHASE0_ANIMATIC")
-    scene.render.engine = "BLENDER_EEVEE_NEXT"
+    scene.render.engine = "BLENDER_EEVEE"
     scene.render.resolution_x = 640
     scene.render.resolution_y = 360
     scene.render.resolution_percentage = 100
@@ -231,7 +233,7 @@ def render_animatic(repository_root: Path, formal_root: Path, master: bpy.types.
         "schemaVersion": "bfs.b62Phase0AnimaticRenderReport.v0.1",
         "status": "PASS",
         "master": file_identity(master_path, repository_root),
-        "settings": {"engine": scene.render.engine, "resolution": [640, 360], "samples": scene.eevee.taa_render_samples, "format": "PNG", "fps": 24},
+        "settings": {"engine": scene.render.engine, "resolution": [640, 360], "samples": scene.eevee.taa_render_samples, "format": "PNG", "fps": 24, "color": {"display": scene.display_settings.display_device, "view": scene.view_settings.view_transform, "look": scene.view_settings.look, "exposure": scene.view_settings.exposure, "gamma": scene.view_settings.gamma}},
         "frames": frames,
         "elapsedSeconds": time.perf_counter() - started,
         "operations": {"blenderStarts": 1, "renderCalls": 288, "modelCalls": 0, "networkCalls": 0, "dockerProcesses": 0},
@@ -285,7 +287,7 @@ def render_calibration(repository_root: Path, formal_root: Path, master: bpy.typ
         "frame": frame,
         "camera": scene.camera.name if scene.camera else None,
         "master": file_identity(master_path, repository_root),
-        "settings": {"engine": scene.render.engine, "device": scene.cycles.device, "resolution": [1920, 1080], "samples": scene.cycles.samples, "denoise": scene.cycles.use_denoising, "seed": scene.cycles.seed, "animatedSeed": scene.cycles.use_animated_seed, "mediaType": scene.render.image_settings.media_type, "format": "OPEN_EXR_MULTILAYER", "pixelType": "HALF", "compression": "ZIP"},
+        "settings": {"engine": scene.render.engine, "device": scene.cycles.device, "resolution": [1920, 1080], "samples": scene.cycles.samples, "denoise": scene.cycles.use_denoising, "seed": scene.cycles.seed, "animatedSeed": scene.cycles.use_animated_seed, "mediaType": scene.render.image_settings.media_type, "format": "OPEN_EXR_MULTILAYER", "pixelType": "HALF", "compression": "ZIP", "color": {"display": scene.display_settings.display_device, "view": scene.view_settings.view_transform, "look": scene.view_settings.look, "exposure": scene.view_settings.exposure, "gamma": scene.view_settings.gamma}},
         "renderSeconds": render_seconds,
         "exr": file_identity(exr_path, repository_root),
         "png": file_identity(png_path, repository_root),
