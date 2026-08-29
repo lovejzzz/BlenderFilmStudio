@@ -1,0 +1,78 @@
+{
+  "cases": [
+    {
+      "colorManagementWarningCount": 4,
+      "exitCode": 0,
+      "id": "CAL32",
+      "maximumResidentSetSizeBytes": 4159619072,
+      "outputs": {
+        "exr": {
+          "sha256": "28cfd825806c82c5061ddb0027109b5cace038e946616c9e5ba351cf760a2c2c",
+          "uri": "experiments/b61-render-calibration-v0-1/CAL32/frame-0072.exr"
+        },
+        "stdout": {
+          "sha256": "7d677867e4b08dd1a4c21fcfb99f3e495e259c4b8c020e9588baced4b2fa3892",
+          "uri": "experiments/b61-render-calibration-v0-1/CAL32/stdout.log"
+        },
+        "timing": {
+          "sha256": "e959ed94d285773f37bb5280640f83bc66636d5307957c761186301af859da14",
+          "uri": "experiments/b61-render-calibration-v0-1/CAL32/time-stderr.log"
+        }
+      },
+      "realSeconds": 3.53,
+      "samples": 32
+    },
+    {
+      "colorManagementWarningCount": 4,
+      "exitCode": 0,
+      "id": "CAL64",
+      "maximumResidentSetSizeBytes": 4152639488,
+      "outputs": {
+        "exr": {
+          "sha256": "dd62e99ad2109eaa1fc918d634826fe61e815cfe5eba06a813b763cde2d9324d",
+          "uri": "experiments/b61-render-calibration-v0-1/CAL64/frame-0072.exr"
+        },
+        "stdout": {
+          "sha256": "cf957011e074234b90acebd563692c18cc1edf6ae57627733f12b7f32a65ab2a",
+          "uri": "experiments/b61-render-calibration-v0-1/CAL64/stdout.log"
+        },
+        "timing": {
+          "sha256": "52d04a9a31c7a41b4e7dd9b9eea1be48506d846781a89d912615d7a44bf0dd98",
+          "uri": "experiments/b61-render-calibration-v0-1/CAL64/time-stderr.log"
+        }
+      },
+      "realSeconds": 4.99,
+      "samples": 64
+    }
+  ],
+  "claimBoundary": {
+    "cinematicQuality": false,
+    "pixelEvidenceAdmissible": false,
+    "timingRepresentativeOfFrozenOcioPipeline": false
+  },
+  "failureHash": "52322c6ef2f8e8442d7ab13341c3f9fd562a75c41bd3697059b50593c705ad38",
+  "message": "Both renders emitted four color-management fallback warnings; Blender did not reopen the compiled scene under its frozen ACES 2 OCIO configuration.",
+  "observedFallbacks": [
+    "display sRGB - Display -> sRGB",
+    "scene view ACES 2.0 - SDR 100 nits (Rec.709) -> ACES 2.0",
+    "scene output display sRGB - Display -> sRGB",
+    "scene output view Un-tone-mapped -> Standard"
+  ],
+  "operations": {
+    "blenderProcesses": 2,
+    "dockerProcesses": 0,
+    "framesWritten": 2,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "renderCalls": 2
+  },
+  "partialEvidenceRetained": true,
+  "reason": "OCIO_RUNTIME_NOT_PINNED",
+  "schemaVersion": "bfs.renderCalibrationFailure.v0.1",
+  "scientificVerdict": null,
+  "sourceBlend": {
+    "sha256": "9019e6dcc370dc8f9432061f144f2834497d4617afc560d2f02a2b18f1e51b29",
+    "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/WIDE-A/restricted/scene.blend"
+  },
+  "status": "INVALIDATED"
+}

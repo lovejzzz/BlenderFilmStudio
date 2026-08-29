@@ -4973,3 +4973,13 @@ Date: 2026-08-29 · Type: RENDER CALIBRATION PREREGISTRATION · New Blender proc
 B60正式证据commit `f04919c`推送后，预注册一个非准入校准：绑定WIDE-A已审计scene.blend SHA `9019e6dc…`与production receipt file/self-hash `98d6ab29… / 9cd68189…`，固定frame 72、1920×1080、Cycles CPU、multilayer half-float EXR，分别用32与64 samples启动两个独立Blender进程。输出根`experiments/b61-render-calibration-v0-1`当前不存在。
 
 校准只用于冻结B61正式矩阵的samples、timeout与容量预算；不产生像素复现、视觉一致或电影质量结论。上限为2 Blender starts、2 render calls、2 frames、单进程300秒，100 GiB reserve，zero model/network/Docker。失败文件与日志必须保留，不得覆盖重跑。下一动作先提交推送本协议，再执行两个case。
+
+## J-379 · B61校准v0.1颜色管线反例与C1预注册
+
+Date: 2026-08-29 · Type: RENDER CALIBRATION COUNTEREXAMPLE / CORRECTION PREREGISTRATION · Real Blender processes: 2 · Rendered frames: 2
+
+校准协议commit `4f377ca`推送后，CAL32/CAL64分别exit 0并在3.53/4.99秒写出约1.3 MiB multilayer EXR；但两次stdout均出现4条color-management fallback warnings。冻结的`sRGB - Display / ACES 2.0 - SDR 100 nits (Rec.709) / Un-tone-mapped`被自动替换为系统可用的`sRGB / ACES 2.0 / Standard`。因此这两个EXR不可作为冻结ACES管线的像素或timing证据。
+
+根因是production compiler通过`OCIO`环境变量加载verified config，而独立render invocation遗漏该环境；`.blend`不打包配置。v0.1保留7 files / 2,752,881 bytes，tree hash `2c0623c3…`；failure file SHA/self-hash为`e5ab5bfa… / 52322c6e…`，status `INVALIDATED / OCIO_RUNTIME_NOT_PINNED`。Blender/render/frame计数2/2/2，model/network/Docker为0，磁盘约297 GiB available。
+
+C1只授权在fresh v0.2 root启动前设置exact `OCIO`绝对路径，并先验证config SHA `24ec8184…`；source/frame/resolution/32+64 samples/engine/device/format/timeout与上限均不变。新增四项in-process color assertions与zero color-warning门。下一动作提交推送v0.1完整失败证据、C1与本entry，随后才创建v0.2 root。
