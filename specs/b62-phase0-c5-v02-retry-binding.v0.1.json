@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C5",
+  "date": "2026-08-29",
+  "statusBeforeProductionToolChange": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "c3": {"uri": "specs/b62-phase0-c3-blender52-multilayer-media-correction.v0.1.json", "sha256": "a7986296e019be90abd94e2392eb065e5596e4b110af5a19186fbd95f3149970"},
+    "c4": {"uri": "specs/b62-phase0-c4-dynamic-exr-setter-correction.v0.1.json", "sha256": "56bf8cfb5c4a9c0e0d3f6cb223fc4a1fd9b2aeb03fc627696da66a6b459c25cd"}
+  },
+  "promotingEvidence": {
+    "id": "B62-P0-D2",
+    "root": "experiments/b62-phase0-d2-exr-media-state-ab-v0-1",
+    "tree": {"files": 4, "bytes": 11487, "treeSha256": "15177c77e043e3707bd69f96bd8818ee8ca561e83070f980ffe23410c2ace883"},
+    "result": {"sha256": "1537b1783a6e0dc3d20ecd4fbf72ece7970f84898cdfe87d67a20d539fd09688", "resultHash": "6d26de07e8fb3738f0297225714d811988bbe5c68e12a1465ff8c30da839fe22", "status": "PASS"},
+    "receipt": {"sha256": "1d5296407aac7497fdd42c007c2a8b5ffb95221d4887b3115a75f4f0b8d63875", "receiptHash": "c342ff0443b776ed2fd6b0036b07848ebff8083d909088d83699cb224d2f9121", "status": "PASS", "verdict": "BLENDER52_DYNAMIC_MULTILAYER_SETTER_ORDER_PROVEN"},
+    "setterOutcomes": "9/9",
+    "renderCalls": 0
+  },
+  "retainedInvalidEvidence": [
+    "experiments/b62-phase0-attempt-v0-1",
+    "experiments/b62-phase0-v0-1",
+    "experiments/b62-phase0-d1-exr-media-type-v0-1"
+  ],
+  "authorizedChanges": {
+    "blenderTools": {
+      "files": ["blender/generate_b62_phase0_assets.py", "blender/render_b62_phase0.py"],
+      "exactChange": "Set image_settings.media_type=MULTI_LAYER_IMAGE before OPEN_EXR_MULTILAYER and record mediaType in calibration settings."
+    },
+    "nodeTools": {
+      "files": ["scripts/preflight-b62-phase0.mjs", "scripts/run-b62-phase0.mjs", "scripts/audit-b62-phase0.mjs"],
+      "exactChange": "Bind C3/C4/C5 and D2 PASS, bind retained v0.1 failure trees, and replace only the authorized preflight/attempt/formal roots with v0.2."
+    }
+  },
+  "authorizedRoots": {
+    "preflight": "experiments/b62-phase0-preflight-v0-2",
+    "attempt": "experiments/b62-phase0-attempt-v0-2",
+    "formal": "experiments/b62-phase0-v0-2"
+  },
+  "requiredSequence": [
+    "commit and push D2 plus this C5 while production tools remain unchanged",
+    "implement only authorized changes",
+    "new tool-freeze commit and push",
+    "fresh-clone zero-Blender rehearsal on v0.2 roots",
+    "official v0.2 preflight evidence commit and push",
+    "one v0.2 formal attempt"
+  ],
+  "unchanged": {
+    "blenderStarts": 6,
+    "renderCalls": 291,
+    "ffmpegProcesses": 1,
+    "ffprobeProcesses": 1,
+    "nodeAuditorProcesses": 1,
+    "projectedWriteBytes": 2147483648,
+    "minimumReserveBytes": 107374182400,
+    "acceptanceGates": 18,
+    "negativeControls": 16,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "claimBoundaryUnchanged": true
+  }
+}

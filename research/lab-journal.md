@@ -5323,3 +5323,11 @@ Date: 2026-08-29 · Type: RETAINED DIAGNOSTIC FAILURE / FOLLOW-UP PREREGISTRATIO
 D1 Blender probe本身exit 0、0.468秒、peak RSS 241,074,176 bytes、zero render/external calls。它观察到factory `media_type=IMAGE`时multilayer setter TypeError；切到`MULTI_LAYER_IMAGE`后setter、HALF、ZIP全部成功。但RNA `enum_items`在两状态都返回包含`OPEN_EXR_MULTILAYER`的static superset，导致预注册8 checks中`MULTILAYER_ENUM_ABSENT_BEFORE_MEDIA_TYPE`唯一false。result/receipt status均FAIL，root 4 files/6,238 bytes/tree `a0194426…`，不得改判。
 
 C4把失败归因为static metadata不是dynamic assignability的有效proxy，预注册D2 one-Blender/zero-render、3 repetitions A→B→A setter实验：每轮IMAGE reject、MULTI accept、回IMAGE reject，共9/9 outcomes；判决明确忽略enum roster。只有D2 PASS才能实施C3限定的media_type production correction与v0.2 retry。
+
+## J-418 · B62 D2 dynamic setter PASS与C5 v0.2 retry预注册
+
+Date: 2026-08-29 · Type: DIAGNOSTIC PASS / RETRY PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+D2 tool freeze `356f93c…` pushed；one Blender在0.46秒、peak RSS 239,124,480 bytes完成3 repetitions A→B→A。所有A1/A2 `IMAGE`赋值均TypeError reject，所有B `MULTI_LAYER_IMAGE`均accept，9/9 outcomes exact；final MLEXR/RGBA/HALF/ZIP exact，zero render/model/network/Docker。8/8 runner checks与独立audit PASS，result/receipt file/self hashes exact为`1537b178…/6d26de07…`与`1d529640…/c342ff04…`。
+
+C5在production tools未改前冻结v0.2策略：两份Blender工具只加media_type顺序与report字段；三个Node工具只绑定C3/C4/C5、D2 PASS、v0.1 retained trees并换用v0.2 roots。six Blender/291 renders/2 GiB/100 GiB/18 gates/16 attacks与所有claims不变。下一动作先提交推送D2+C5，再实现五文件限定修改与新tool freeze。

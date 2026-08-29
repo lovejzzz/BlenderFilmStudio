@@ -1,0 +1,193 @@
+{
+  "checks": [
+    {
+      "id": "BLENDER_BUILD_EXACT",
+      "pass": true
+    },
+    {
+      "id": "THREE_REPETITIONS_NINE_ROWS_EXACT",
+      "pass": true
+    },
+    {
+      "id": "ALL_A1_IMAGE_ASSIGNMENTS_REJECT",
+      "pass": true
+    },
+    {
+      "id": "ALL_B_MULTI_ASSIGNMENTS_ACCEPT",
+      "pass": true
+    },
+    {
+      "id": "ALL_A2_IMAGE_ASSIGNMENTS_REJECT",
+      "pass": true
+    },
+    {
+      "id": "DECISION_IGNORES_ENUM_ITEMS",
+      "pass": true
+    },
+    {
+      "id": "FINAL_MEDIA_EXR_HALF_ZIP_EXACT",
+      "pass": true
+    },
+    {
+      "id": "ZERO_RENDER_EXTERNAL_CALLS",
+      "pass": true
+    }
+  ],
+  "correction": {
+    "sha256": "56bf8cfb5c4a9c0e0d3f6cb223fc4a1fd9b2aeb03fc627696da66a6b459c25cd",
+    "uri": "specs/b62-phase0-c4-dynamic-exr-setter-correction.v0.1.json"
+  },
+  "experimentId": "B62-P0-D2",
+  "probe": {
+    "blender": {
+      "buildHash": "fbe6228777e7",
+      "version": "5.2.0 LTS"
+    },
+    "decisionUsesEnumItems": false,
+    "final": {
+      "colorDepth": "16",
+      "colorMode": "RGBA",
+      "exrCodec": "ZIP",
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "mediaType": "MULTI_LAYER_IMAGE"
+    },
+    "operations": {
+      "blenderStarts": 1,
+      "dockerProcesses": 0,
+      "modelCalls": 0,
+      "networkCalls": 0,
+      "renderCalls": 0
+    },
+    "rows": [
+      {
+        "accepted": false,
+        "error": "TypeError: bpy_struct: item.attr = val: enum \"OPEN_EXR_MULTILAYER\" not found in ('AVIF', 'JPEG', 'OPEN_EXR', 'PNG', 'WEBP', 'BMP', 'CINEON', 'DPX', 'IRIS', 'JPEG2000', 'HDR', 'TARGA', 'TARGA_RAW', 'TIFF')",
+        "expectedAccepted": false,
+        "fileFormatAfter": "PNG",
+        "fileFormatBefore": "PNG",
+        "mediaType": "IMAGE",
+        "outcomeExact": true,
+        "phase": "A1_IMAGE_REJECT",
+        "repetition": 1
+      },
+      {
+        "accepted": true,
+        "error": null,
+        "expectedAccepted": true,
+        "fileFormatAfter": "OPEN_EXR_MULTILAYER",
+        "fileFormatBefore": "OPEN_EXR_MULTILAYER",
+        "mediaType": "MULTI_LAYER_IMAGE",
+        "outcomeExact": true,
+        "phase": "B_MULTI_ACCEPT",
+        "repetition": 1
+      },
+      {
+        "accepted": false,
+        "error": "TypeError: bpy_struct: item.attr = val: enum \"OPEN_EXR_MULTILAYER\" not found in ('AVIF', 'JPEG', 'OPEN_EXR', 'PNG', 'WEBP', 'BMP', 'CINEON', 'DPX', 'IRIS', 'JPEG2000', 'HDR', 'TARGA', 'TARGA_RAW', 'TIFF')",
+        "expectedAccepted": false,
+        "fileFormatAfter": "PNG",
+        "fileFormatBefore": "PNG",
+        "mediaType": "IMAGE",
+        "outcomeExact": true,
+        "phase": "A2_IMAGE_REJECT",
+        "repetition": 1
+      },
+      {
+        "accepted": false,
+        "error": "TypeError: bpy_struct: item.attr = val: enum \"OPEN_EXR_MULTILAYER\" not found in ('AVIF', 'JPEG', 'OPEN_EXR', 'PNG', 'WEBP', 'BMP', 'CINEON', 'DPX', 'IRIS', 'JPEG2000', 'HDR', 'TARGA', 'TARGA_RAW', 'TIFF')",
+        "expectedAccepted": false,
+        "fileFormatAfter": "PNG",
+        "fileFormatBefore": "PNG",
+        "mediaType": "IMAGE",
+        "outcomeExact": true,
+        "phase": "A1_IMAGE_REJECT",
+        "repetition": 2
+      },
+      {
+        "accepted": true,
+        "error": null,
+        "expectedAccepted": true,
+        "fileFormatAfter": "OPEN_EXR_MULTILAYER",
+        "fileFormatBefore": "OPEN_EXR_MULTILAYER",
+        "mediaType": "MULTI_LAYER_IMAGE",
+        "outcomeExact": true,
+        "phase": "B_MULTI_ACCEPT",
+        "repetition": 2
+      },
+      {
+        "accepted": false,
+        "error": "TypeError: bpy_struct: item.attr = val: enum \"OPEN_EXR_MULTILAYER\" not found in ('AVIF', 'JPEG', 'OPEN_EXR', 'PNG', 'WEBP', 'BMP', 'CINEON', 'DPX', 'IRIS', 'JPEG2000', 'HDR', 'TARGA', 'TARGA_RAW', 'TIFF')",
+        "expectedAccepted": false,
+        "fileFormatAfter": "PNG",
+        "fileFormatBefore": "PNG",
+        "mediaType": "IMAGE",
+        "outcomeExact": true,
+        "phase": "A2_IMAGE_REJECT",
+        "repetition": 2
+      },
+      {
+        "accepted": false,
+        "error": "TypeError: bpy_struct: item.attr = val: enum \"OPEN_EXR_MULTILAYER\" not found in ('AVIF', 'JPEG', 'OPEN_EXR', 'PNG', 'WEBP', 'BMP', 'CINEON', 'DPX', 'IRIS', 'JPEG2000', 'HDR', 'TARGA', 'TARGA_RAW', 'TIFF')",
+        "expectedAccepted": false,
+        "fileFormatAfter": "PNG",
+        "fileFormatBefore": "PNG",
+        "mediaType": "IMAGE",
+        "outcomeExact": true,
+        "phase": "A1_IMAGE_REJECT",
+        "repetition": 3
+      },
+      {
+        "accepted": true,
+        "error": null,
+        "expectedAccepted": true,
+        "fileFormatAfter": "OPEN_EXR_MULTILAYER",
+        "fileFormatBefore": "OPEN_EXR_MULTILAYER",
+        "mediaType": "MULTI_LAYER_IMAGE",
+        "outcomeExact": true,
+        "phase": "B_MULTI_ACCEPT",
+        "repetition": 3
+      },
+      {
+        "accepted": false,
+        "error": "TypeError: bpy_struct: item.attr = val: enum \"OPEN_EXR_MULTILAYER\" not found in ('AVIF', 'JPEG', 'OPEN_EXR', 'PNG', 'WEBP', 'BMP', 'CINEON', 'DPX', 'IRIS', 'JPEG2000', 'HDR', 'TARGA', 'TARGA_RAW', 'TIFF')",
+        "expectedAccepted": false,
+        "fileFormatAfter": "PNG",
+        "fileFormatBefore": "PNG",
+        "mediaType": "IMAGE",
+        "outcomeExact": true,
+        "phase": "A2_IMAGE_REJECT",
+        "repetition": 3
+      }
+    ],
+    "schemaVersion": "bfs.b62Phase0D2Probe.v0.1"
+  },
+  "process": {
+    "elapsedSeconds": 0.4678745,
+    "exitCode": 0,
+    "stderr": {
+      "bytes": 753,
+      "sha256": "6ce5958b13f51394167e1a6ebc302c731da6000ac419eebbf6433a1099904209",
+      "uri": "experiments/b62-phase0-d2-exr-media-state-ab-v0-1/stderr.log"
+    },
+    "stdout": {
+      "bytes": 3502,
+      "sha256": "75d6143f75d2da566d4333b026d7207f98faefa4bce09fb5d21abcade43fc59f",
+      "uri": "experiments/b62-phase0-d2-exr-media-state-ab-v0-1/stdout.log"
+    },
+    "timing": {
+      "maximumResidentSetSizeBytes": 239124480,
+      "realSeconds": 0.46,
+      "systemSeconds": 0.05,
+      "userSeconds": 0.35
+    }
+  },
+  "resultHash": "6d26de07e8fb3738f0297225714d811988bbe5c68e12a1465ff8c30da839fe22",
+  "schemaVersion": "bfs.b62Phase0D2Result.v0.1",
+  "status": "PASS",
+  "toolFreezeCommit": "356f93c514c8b32905a831d263be0405dbc178e4",
+  "toolHashes": {
+    "blender/probe_b62_d2_exr_media_state_ab.py": "9d04c19529de7b517fc9fb0bbe347b735c30758663e64867e1885d2a9fb723c1",
+    "scripts/audit-b62-d2-exr-media-state-ab.mjs": "82f5113391ab89c901157801c730a043b40e5067f9dd0d9ebe24fa3144501027",
+    "scripts/run-b62-d2-exr-media-state-ab.mjs": "ea954a252f3a28b80f95684015b8f8f11f8e38050b0fa19ea9dbf1b633206598"
+  }
+}
