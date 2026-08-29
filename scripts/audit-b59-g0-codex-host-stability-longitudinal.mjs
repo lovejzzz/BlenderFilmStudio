@@ -9,7 +9,8 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const specRelativePath = 'specs/codex-host-stability-longitudinal.v0.1.json';
+const specRelativePath = process.env.BFS_STABILITY_SPEC || 'specs/codex-host-stability-longitudinal.v0.1.json';
+if (specRelativePath.startsWith('/') || specRelativePath.split('/').includes('..')) throw new Error('BFS_STABILITY_SPEC must be a repository-relative path');
 const specPath = resolve(repositoryRoot, specRelativePath);
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const formalRoot = resolve(repositoryRoot, spec.formalRoot);
@@ -17,6 +18,11 @@ const startPath = resolve(formalRoot, 'start.json');
 const resultsPath = resolve(formalRoot, 'results.json');
 const auditPath = resolve(formalRoot, 'audit.json');
 const auditCommands = [];
+
+if (process.argv.includes('--describe-spec')) {
+  process.stdout.write(`${JSON.stringify({ experimentId: spec.experimentId, specPath: specRelativePath, formalRoot: spec.formalRoot })}\n`);
+  process.exit(0);
+}
 
 function canonical(value) {
   if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`;
