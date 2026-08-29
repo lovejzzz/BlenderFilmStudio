@@ -5793,3 +5793,11 @@ Date: 2026-08-29 · Type: RETAINED PRE-JOB FAILURE / PREFLIGHT REFERENCE CORRECT
 tool freeze `0ed97f192107fabafd5d598453e1815d64e0c664`推送后首次formal start在约0.07秒退出：runner已写v0.1 durable preflight，但`writeExclusiveDurableHashed`只返回`{record,file}`，代码却把不存在的`preflight.path`传入`repoUri`，触发`ERR_INVALID_ARG_TYPE`。job/formal roots均未创建，0 Blender/render/ffmpeg/model/network/Docker/Colima，scientific verdict为null。
 
 v0.1 preflight file/self为`333d44a3…/4f3bcef6…`，failure file/self为`a4788fa5…/8756f5f1…`，永久保留。C1在任何tool修改前只授权从已知absolute preflight path构造URI、runner/auditor切fresh v0.2，并把correction/protocol与v0.1 exact hashes加入freeze roster；其余T3全部不变。
+
+## J-467 · B62-T3 v0.2受控中断receipt引用失败与C2预注册
+
+Date: 2026-08-29 · Type: RETAINED POST-SIGTERM FAILURE / EXHAUSTIVE HELPER-RETURN CORRECTION PREREGISTRATION · New Blender processes: 1 · New Blender renders: 0
+
+C1 tool freeze `d081b25030aeb47ac976786d2d562f15f7270ed2`越过preflight/manifest/ADMIT_PLAN并执行真实controlled Blender：source/OCIO/context准入后打印ready，SIGTERM退出，0 render，failed receipt为non-promotable。但runner在随后构造`STAGE_FAILED` reference时仍读取不存在的`failed.path`，约0.69秒退出；scientific verdict为null。ledger已补写与durable receipt exact绑定的terminal event，job明确invalidated且禁止resume。
+
+v0.2 interrupted receipt file/self `5267a58b…/7d63a447…`，invalidation file/self `18d294b4…/23006418…`；job 11 files/10,723 bytes/tree `78955d32…`。C2在工具修改前穷尽枚举helper返回值，确认仅剩同一failed receipt的两处无效`.path`，只授权显式path与fresh v0.3；全部T3门槛不变。

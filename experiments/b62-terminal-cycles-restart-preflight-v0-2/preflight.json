@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "bfs.b62TerminalCyclesRestartPreflight.v0.2",
+  "status": "ACCEPTED",
+  "toolFreezeCommit": "d081b25030aeb47ac976786d2d562f15f7270ed2",
+  "originMain": "d081b25030aeb47ac976786d2d562f15f7270ed2",
+  "toolHashes": {
+    "specs/b62-terminal-cycles-restart.v0.1.json": "252ded5e969708737df8a47e5d68974dd6b28c2c9f265c5c611ece28a42f7f53",
+    "research/2026-08-29-b62-t3-terminal-cycles-restart-protocol.md": "dce45c0a0e1c7c0bd6a86af7f61bf0f9ee6c170660f5cce227c879b3d5cac3b2",
+    "specs/b62-terminal-cycles-restart-c1-preflight-reference.v0.1.json": "dd4dcc4ff3a22dbf6a68380ce0de600add6141a0d451ad38f038c60cdf3a30aa",
+    "research/2026-08-29-b62-t3-c1-preflight-reference.md": "3871f1be8688a690d705bb5864ab92cc9138c9d4019f92bfcc3cc3ab1fbe5dbb",
+    "blender/render_b62_terminal_cycles_shot.py": "c22669af942c602aa41bfcbab36b5aaf2b8d4b05f23ea737a4ff476863df96b9",
+    "blender/audit_b62_terminal_cycles_exr.py": "03ff99e72cb7ee53ea645b21e06d9b3db43641d5cd1c3f24733f6dd6bb2d7c9d",
+    "scripts/run-b62-terminal-cycles-restart.mjs": "bac7bb89e68cdc99f84d14f552427ee416b2fcd68e26b66a4399608221a4dfc7",
+    "scripts/audit-b62-terminal-cycles-restart.mjs": "2ef754f60523d4d2cee3661439f6400ae21b0486a4fb689f6b07e98522477f63",
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/lib/budgeted-process.mjs": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d"
+  },
+  "correction": {
+    "uri": "specs/b62-terminal-cycles-restart-c1-preflight-reference.v0.1.json",
+    "sha256": "dd4dcc4ff3a22dbf6a68380ce0de600add6141a0d451ad38f038c60cdf3a30aa"
+  },
+  "retainedFailure": {
+    "preflight": {
+      "uri": "experiments/b62-terminal-cycles-restart-preflight-v0-1/preflight.json",
+      "sha256": "333d44a34fc827b3ba76119f338fc3fa0eef7b19f436729dbf06a113d778afaf",
+      "preflightHash": "4f3bcef6c2a0d3cafd7e5e76f54414feaa0cfbae2c45cfa14267508377903d43"
+    },
+    "failure": {
+      "uri": "experiments/b62-terminal-cycles-restart-preflight-v0-1/failure.json",
+      "sha256": "a4788fa5d8084fe33f1724e5e776d7bbdba5732115ab36fd6b14e4711dd2fb3d",
+      "failureHash": "8756f5f1f2109e436fd2b3df819ab12c52dc11584d8a7947854d61edf05373d3"
+    }
+  },
+  "capacity": {
+    "freeBytes": 302528831488,
+    "projectedBytes": 6442450944,
+    "requiredPostWriteReserveBytes": 107374182400
+  },
+  "source": {
+    "uri": "experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend",
+    "sha256": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc"
+  },
+  "stageDag": [
+    {
+      "id": "ADMIT_PLAN",
+      "dependsOn": []
+    },
+    {
+      "id": "INTERRUPT_WIDE_PROBE",
+      "dependsOn": [
+        "ADMIT_PLAN"
+      ]
+    },
+    {
+      "id": "RENDER_WIDE",
+      "dependsOn": [
+        "INTERRUPT_WIDE_PROBE"
+      ]
+    },
+    {
+      "id": "CODEX_RESTART_CHECKPOINT",
+      "dependsOn": [
+        "RENDER_WIDE"
+      ]
+    },
+    {
+      "id": "POST_RESTART_ATTEST",
+      "dependsOn": [
+        "CODEX_RESTART_CHECKPOINT"
+      ]
+    },
+    {
+      "id": "RENDER_MEDIUM",
+      "dependsOn": [
+        "POST_RESTART_ATTEST"
+      ]
+    },
+    {
+      "id": "RENDER_CLOSE",
+      "dependsOn": [
+        "RENDER_MEDIUM"
+      ]
+    },
+    {
+      "id": "INDEPENDENT_EXR_AUDIT",
+      "dependsOn": [
+        "RENDER_CLOSE"
+      ]
+    },
+    {
+      "id": "DELIVERY",
+      "dependsOn": [
+        "INDEPENDENT_EXR_AUDIT"
+      ]
+    },
+    {
+      "id": "FINAL_AUDIT",
+      "dependsOn": [
+        "DELIVERY"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "FINAL_AUDIT"
+      ]
+    }
+  ],
+  "preflightHash": "2fc756794198af563a212429fc5aee1d931e81c31c61f1c5b6440827410a43ed"
+}
