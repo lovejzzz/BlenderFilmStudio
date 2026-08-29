@@ -112,6 +112,10 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=False)
     for _condition, camera_name in CONDITIONS:
         require(bpy.data.objects.get(camera_name) is not None, f"missing camera {camera_name}")
+    close_markers = [marker for marker in scene.timeline_markers if marker.name == "SHOT_CLOSE_REFLECTION" and marker.frame == 193]
+    require(len(close_markers) == 1 and close_markers[0].camera is not None and close_markers[0].camera.name == "CAM_CLOSE_REFLECTION", "close camera marker mismatch")
+    close_marker = close_markers[0]
+    original_marker_camera = close_marker.camera
     scene.render.engine = "CYCLES"
     scene.cycles.device = "CPU"
     scene.cycles.samples = 16
@@ -127,6 +131,7 @@ def main():
     for frame in FRAMES:
         for condition, camera_name in CONDITIONS:
             scene.frame_set(frame)
+            close_marker.camera = bpy.data.objects[camera_name]
             scene.camera = bpy.data.objects[camera_name]
             stem = f"{frame:04d}-{condition.lower()}"
             exr_path = args.output_dir / f"{stem}.exr"
@@ -149,7 +154,9 @@ def main():
             scene.render.image_settings.color_depth = "8"
             bpy.data.images["Render Result"].save_render(filepath=str(png_path), scene=scene)
             require(png_size(png_path) == [960, 540], "PNG dimensions mismatch")
-            rows.append({"frame": frame, "condition": condition, "camera": camera_name, "renderSeconds": elapsed, "exr": file_identity(exr_path, args.report.parent), "png": file_identity(png_path, args.report.parent), "combined": projection})
+            rows.append({"frame": frame, "condition": condition, "camera": camera_name, "timelineMarker": close_marker.name, "timelineMarkerCamera": close_marker.camera.name, "renderSeconds": elapsed, "exr": file_identity(exr_path, args.report.parent), "png": file_identity(png_path, args.report.parent), "combined": projection})
+    close_marker.camera = original_marker_camera
+    scene.camera = original_marker_camera
     pairs = []
     for frame in FRAMES:
         original = next(row for row in rows if row["frame"] == frame and row["condition"] == "ORIGINAL")

@@ -27,13 +27,19 @@ const SPEC_URI = "specs/b62-camera-quality-holdout-render-validation.v0.1.json",
     "specs/b62-camera-quality-d4-c2-cross-runtime-float-canonicalization.v0.1.json",
   CORRECTION2_PROTOCOL_URI =
     "research/2026-08-29-b62-d4-c2-cross-runtime-float-canonicalization.md",
-  ROOT_URI = "experiments/b62-camera-quality-holdout-render-v0-3",
+  CORRECTION3_URI =
+    "specs/b62-camera-quality-d4-c3-timeline-marker-camera-routing.v0.1.json",
+  CORRECTION3_PROTOCOL_URI =
+    "research/2026-08-29-b62-d4-c3-timeline-marker-camera-routing.md",
+  ROOT_URI = "experiments/b62-camera-quality-holdout-render-v0-4",
   RETAINED_ROOT = "experiments/b62-camera-quality-holdout-render-v0-1",
   RETAINED2_ROOT = "experiments/b62-camera-quality-holdout-render-v0-2",
+  RETAINED3_ROOT = "experiments/b62-camera-quality-holdout-render-v0-3",
   PARENT_ROOT = "experiments/b62-camera-quality-bounded-candidate-search-v0-2",
   PREREGISTRATION_COMMIT = "c2941a1",
   CORRECTION_COMMIT = "f55bf45",
-  CORRECTION2_COMMIT = "633bed8";
+  CORRECTION2_COMMIT = "633bed8",
+  CORRECTION3_COMMIT = "2c10b2d";
 const TOOLS = [
   "blender/build_b62_q1_d4_corrected_scene.py",
   "blender/render_b62_q1_d4_holdout_pairs.py",
@@ -240,6 +246,9 @@ async function main() {
   const correction2 = JSON.parse(
     await readFile(pathFor(CORRECTION2_URI), "utf8"),
   );
+  const correction3 = JSON.parse(
+    await readFile(pathFor(CORRECTION3_URI), "utf8"),
+  );
   req(
     spec.experimentId === "B62-Q1-D4" &&
       spec.statusBeforeToolCreation === "PREREGISTERED",
@@ -256,8 +265,15 @@ async function main() {
     correction2.correctionId === "B62-Q1-D4-C2" &&
       correction2.statusBeforeToolChange === "PREREGISTERED" &&
       correction2.retainedFailure.root === RETAINED2_ROOT &&
-      correction2.authorizedChanges.retryRoot === ROOT_URI,
+      correction2.authorizedChanges.retryRoot === RETAINED3_ROOT,
     "C2 correction",
+  );
+  req(
+    correction3.correctionId === "B62-Q1-D4-C3" &&
+      correction3.statusBeforeToolChange === "PREREGISTERED" &&
+      correction3.retainedFailure.root === RETAINED3_ROOT &&
+      correction3.authorizedChanges.retryRoot === ROOT_URI,
+    "C3 correction",
   );
   req(!(await exists(pathFor(ROOT_URI))), "root exists");
   const head = (await git(["rev-parse", "HEAD"])).trim(),
@@ -266,6 +282,7 @@ async function main() {
   await git(["merge-base", "--is-ancestor", PREREGISTRATION_COMMIT, freeze]);
   await git(["merge-base", "--is-ancestor", CORRECTION_COMMIT, freeze]);
   await git(["merge-base", "--is-ancestor", CORRECTION2_COMMIT, freeze]);
+  await git(["merge-base", "--is-ancestor", CORRECTION3_COMMIT, freeze]);
   req(
     (await hashFile(pathFor(SPEC_URI))) ===
       (await committedHash(PREREGISTRATION_COMMIT, SPEC_URI)),
@@ -296,11 +313,28 @@ async function main() {
       (await committedHash(CORRECTION2_COMMIT, CORRECTION2_PROTOCOL_URI)),
     "C2 protocol drift",
   );
+  req(
+    (await hashFile(pathFor(CORRECTION3_URI))) ===
+      (await committedHash(CORRECTION3_COMMIT, CORRECTION3_URI)),
+    "C3 drift",
+  );
+  req(
+    (await hashFile(pathFor(CORRECTION3_PROTOCOL_URI))) ===
+      (await committedHash(CORRECTION3_COMMIT, CORRECTION3_PROTOCOL_URI)),
+    "C3 protocol drift",
+  );
   const toolHashes = {};
   for (const uri of TOOLS) {
     toolHashes[uri] = await hashFile(pathFor(uri));
     req(toolHashes[uri] === (await committedHash(freeze, uri)), `tool ${uri}`);
   }
+  req(
+    toolHashes[correction3.frozen.builder.uri] ===
+        correction3.frozen.builder.sha256 &&
+      toolHashes[correction3.frozen.independentAudit.uri] ===
+        correction3.frozen.independentAudit.sha256,
+    "C3 frozen tools",
+  );
   req(
     (
       await git([
@@ -313,8 +347,11 @@ async function main() {
         CORRECTION_PROTOCOL_URI,
         CORRECTION2_URI,
         CORRECTION2_PROTOCOL_URI,
+        CORRECTION3_URI,
+        CORRECTION3_PROTOCOL_URI,
         RETAINED_ROOT,
         RETAINED2_ROOT,
+        RETAINED3_ROOT,
         PARENT_ROOT,
         ...TOOLS,
       ])
@@ -330,6 +367,11 @@ async function main() {
   req(
     canonical(retained2Tree) === canonical(correction2.retainedFailure.tree),
     "retained C2 tree",
+  );
+  const retained3Tree = await treeIdentity(RETAINED3_ROOT);
+  req(
+    canonical(retained3Tree) === canonical(correction3.retainedFailure.tree),
+    "retained C3 tree",
   );
   const parentTree = await treeIdentity(PARENT_ROOT);
   req(
@@ -375,6 +417,7 @@ async function main() {
       preregistrationCommit: PREREGISTRATION_COMMIT,
       correctionCommit: CORRECTION_COMMIT,
       correction2Commit: CORRECTION2_COMMIT,
+      correction3Commit: CORRECTION3_COMMIT,
       toolFreezeCommit: freeze,
       bindings: {
         spec: { uri: SPEC_URI, sha256: await hashFile(pathFor(SPEC_URI)) },
@@ -398,8 +441,17 @@ async function main() {
           uri: CORRECTION2_PROTOCOL_URI,
           sha256: await hashFile(pathFor(CORRECTION2_PROTOCOL_URI)),
         },
+        correction3: {
+          uri: CORRECTION3_URI,
+          sha256: await hashFile(pathFor(CORRECTION3_URI)),
+        },
+        correction3Protocol: {
+          uri: CORRECTION3_PROTOCOL_URI,
+          sha256: await hashFile(pathFor(CORRECTION3_PROTOCOL_URI)),
+        },
         retainedFailureTree: retainedTree,
         retainedFailureTreeC2: retained2Tree,
+        retainedFailureTreeC3: retained3Tree,
         parentTree,
         parentReceiptSha256: await hashFile(
           pathFor(spec.parentEvidence.d3Retry.receipt.uri),
@@ -602,6 +654,7 @@ async function main() {
           ...spec.nonClaims,
           ...correction.nonClaims,
           ...correction2.nonClaims,
+          ...correction3.nonClaims,
         ],
       },
       "receiptHash",

@@ -15,7 +15,11 @@ const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url))),
     "specs/b62-camera-quality-d4-c2-cross-runtime-float-canonicalization.v0.1.json",
   CORRECTION2_PROTOCOL_URI =
     "research/2026-08-29-b62-d4-c2-cross-runtime-float-canonicalization.md",
-  ROOT_URI = "experiments/b62-camera-quality-holdout-render-v0-3";
+  CORRECTION3_URI =
+    "specs/b62-camera-quality-d4-c3-timeline-marker-camera-routing.v0.1.json",
+  CORRECTION3_PROTOCOL_URI =
+    "research/2026-08-29-b62-d4-c3-timeline-marker-camera-routing.md",
+  ROOT_URI = "experiments/b62-camera-quality-holdout-render-v0-4";
 const TOOLS = [
   "blender/build_b62_q1_d4_corrected_scene.py",
   "blender/render_b62_q1_d4_holdout_pairs.py",
@@ -111,6 +115,7 @@ export async function audit(argv) {
     spec = await json(SPEC_URI),
     correction = await json(CORRECTION_URI),
     correction2 = await json(CORRECTION2_URI),
+    correction3 = await json(CORRECTION3_URI),
     admission = await json(`${ROOT_URI}/admission.json`),
     build = await json(`${ROOT_URI}/build.json`),
     render = await json(`${ROOT_URI}/render.json`),
@@ -131,8 +136,14 @@ export async function audit(argv) {
   );
   req(
     correction2.correctionId === "B62-Q1-D4-C2" &&
-      correction2.authorizedChanges.retryRoot === ROOT_URI,
+      correction2.authorizedChanges.retryRoot ===
+        "experiments/b62-camera-quality-holdout-render-v0-3",
     "C2 correction",
+  );
+  req(
+    correction3.correctionId === "B62-Q1-D4-C3" &&
+      correction3.authorizedChanges.retryRoot === ROOT_URI,
+    "C3 correction",
   );
   req(
     validSelf(admission, "admissionHash") &&
@@ -151,7 +162,11 @@ export async function audit(argv) {
       admission.bindings.correction2.sha256 ===
         (await hashFile(pathFor(CORRECTION2_URI))) &&
       admission.bindings.correction2Protocol.sha256 ===
-        (await hashFile(pathFor(CORRECTION2_PROTOCOL_URI))),
+        (await hashFile(pathFor(CORRECTION2_PROTOCOL_URI))) &&
+      admission.bindings.correction3.sha256 ===
+        (await hashFile(pathFor(CORRECTION3_URI))) &&
+      admission.bindings.correction3Protocol.sha256 ===
+        (await hashFile(pathFor(CORRECTION3_PROTOCOL_URI))),
     "spec binding",
   );
   req(
@@ -164,11 +179,23 @@ export async function audit(argv) {
       canonical(correction2.retainedFailure.tree),
     "retained C2 binding",
   );
+  req(
+    canonical(admission.bindings.retainedFailureTreeC3) ===
+      canonical(correction3.retainedFailure.tree),
+    "retained C3 binding",
+  );
   for (const uri of TOOLS)
     req(
       admission.bindings.tools[uri] === (await hashFile(pathFor(uri))),
       `tool ${uri}`,
     );
+  req(
+    admission.bindings.tools[correction3.frozen.builder.uri] ===
+        correction3.frozen.builder.sha256 &&
+      admission.bindings.tools[correction3.frozen.independentAudit.uri] ===
+        correction3.frozen.independentAudit.sha256,
+    "C3 frozen tools",
+  );
   req(
     validSelf(build, "reportHash") &&
       validSelf(render, "reportHash") &&
@@ -236,6 +263,16 @@ export async function audit(argv) {
   );
   const pairDifferent =
     render.pairs.length === 6 && render.pairs.every((row) => row.different);
+  const cameraByCondition = {
+      ORIGINAL: "CAM_CLOSE_REFLECTION",
+      CORRECTED: "CAM_CLOSE_REFLECTION_CORRECTED",
+    },
+    timelineRoutingExact = render.renders.every(
+      (row) =>
+        row.timelineMarker === "SHOT_CLOSE_REFLECTION" &&
+        row.camera === cameraByCondition[row.condition] &&
+        row.timelineMarkerCamera === cameraByCondition[row.condition],
+    );
   const correctedAllPass = independent.outcome.correctedAllPass === true,
     originalAllFail = independent.outcome.originalAllFail === true;
   const supported = correctedAllPass && originalAllFail && pairDifferent;
@@ -243,9 +280,9 @@ export async function audit(argv) {
     ? spec.decision.supportedVerdict
     : spec.decision.rejectedVerdict;
   const checks = [
-    ["SPEC_C1_C2_ADMISSION_PARENT_BOUND", true],
+    ["SPEC_C1_C2_C3_ADMISSION_PARENT_BOUND", true],
     ["TOOL_FREEZE_HASHES_EXACT", true],
-    ["C1_FROZEN_RENDER_AND_AUDIT_TOOLS_EXACT", true],
+    ["C3_FROZEN_BUILDER_AND_INDEPENDENT_AUDIT_EXACT", true],
     ["THREE_FRESH_BLENDER_PROCESSES_PASS", true],
     [
       "BLENDER_IDENTITY_EXACT",
@@ -265,6 +302,7 @@ export async function audit(argv) {
     ],
     ["HOLDOUT_RENDER_ROSTER_12_EXACT", renderRoster],
     ["HOLDOUT_GEOMETRY_ROSTER_12_EXACT", geometryRoster],
+    ["TIMELINE_MARKER_CAMERA_ROUTING_EXACT", timelineRoutingExact],
     [
       "CYCLES_SETTINGS_EXACT",
       render.settings.engine === "CYCLES" &&
@@ -339,6 +377,22 @@ export async function audit(argv) {
           uri: CORRECTION_PROTOCOL_URI,
           sha256: await hashFile(pathFor(CORRECTION_PROTOCOL_URI)),
         },
+        correction2: {
+          uri: CORRECTION2_URI,
+          sha256: await hashFile(pathFor(CORRECTION2_URI)),
+        },
+        correction2Protocol: {
+          uri: CORRECTION2_PROTOCOL_URI,
+          sha256: await hashFile(pathFor(CORRECTION2_PROTOCOL_URI)),
+        },
+        correction3: {
+          uri: CORRECTION3_URI,
+          sha256: await hashFile(pathFor(CORRECTION3_URI)),
+        },
+        correction3Protocol: {
+          uri: CORRECTION3_PROTOCOL_URI,
+          sha256: await hashFile(pathFor(CORRECTION3_PROTOCOL_URI)),
+        },
         build: {
           sha256: await hashFile(resolve(root, "build.json")),
           reportHash: build.reportHash,
@@ -352,19 +406,12 @@ export async function audit(argv) {
           reportHash: independent.reportHash,
         },
       },
-      correction2: {
-        uri: CORRECTION2_URI,
-        sha256: await hashFile(pathFor(CORRECTION2_URI)),
-      },
-      correction2Protocol: {
-        uri: CORRECTION2_PROTOCOL_URI,
-        sha256: await hashFile(pathFor(CORRECTION2_PROTOCOL_URI)),
-      },
       humanReviewStatus: "PENDING",
       nonClaims: [
         ...spec.nonClaims,
         ...correction.nonClaims,
         ...correction2.nonClaims,
+        ...correction3.nonClaims,
       ],
     },
     "auditHash",
