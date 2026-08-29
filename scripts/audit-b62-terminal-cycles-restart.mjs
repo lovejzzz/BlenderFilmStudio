@@ -17,9 +17,10 @@ import {
 import { repositoryRoot } from './lib/scene-spec.mjs';
 
 const SPEC_URI = 'specs/b62-terminal-cycles-restart.v0.1.json';
-const PREFLIGHT_URI = 'experiments/b62-terminal-cycles-restart-preflight-v0-1';
-const EXPECTED_JOB_URI = 'experiments/b62-terminal-cycles-restart-job-v0-1';
-const EXPECTED_FORMAL_URI = 'experiments/b62-terminal-cycles-restart-v0-1';
+const CORRECTION_URI = 'specs/b62-terminal-cycles-restart-c1-preflight-reference.v0.1.json';
+const PREFLIGHT_URI = 'experiments/b62-terminal-cycles-restart-preflight-v0-2';
+const EXPECTED_JOB_URI = 'experiments/b62-terminal-cycles-restart-job-v0-2';
+const EXPECTED_FORMAL_URI = 'experiments/b62-terminal-cycles-restart-v0-2';
 const SCENE_URI = 'experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend';
 const SHOTS = {
   WIDE: { stage: 'RENDER_WIDE', attempt: 'WIDE-RETRY-0002', first: 1, last: 96, marker: 'SHOT_WIDE_APPROACH', camera: 'CAM_WIDE_APPROACH' },
@@ -111,6 +112,7 @@ export async function auditB62({ jobRootUri, formalRootUri, outputUri }) {
   require(jobRootUri === EXPECTED_JOB_URI && formalRootUri === EXPECTED_FORMAL_URI && outputUri === `${EXPECTED_FORMAL_URI}/audit.json`, 'formal root binding mismatch');
   const jobRoot = resolve(repositoryRoot, jobRootUri); const formalRoot = resolve(repositoryRoot, formalRootUri); const output = resolve(repositoryRoot, outputUri);
   const specPath = resolve(repositoryRoot, SPEC_URI); const spec = JSON.parse(await readFile(specPath, 'utf8'));
+  const correctionPath = resolve(repositoryRoot, CORRECTION_URI); const correction = JSON.parse(await readFile(correctionPath, 'utf8'));
   const state = await deriveJobState(jobRoot); const gates = []; const attacks = [];
 
   const parentChecks = [];
@@ -125,7 +127,10 @@ export async function auditB62({ jobRootUri, formalRootUri, outputUri }) {
   gate(gates, spec.acceptanceGates[0], parentChecks.length === 5, { parentChecks, source: spec.parents.sceneCompilation.scene });
 
   const preflight = await exactJsonReference(state.manifest.preflight, 'preflightHash');
-  require(preflight.value.status === 'ACCEPTED' && preflight.value.toolFreezeCommit === state.manifest.toolFreezeCommit, 'preflight not accepted');
+  require(preflight.value.schemaVersion === 'bfs.b62TerminalCyclesRestartPreflight.v0.2' && preflight.value.status === 'ACCEPTED' && preflight.value.toolFreezeCommit === state.manifest.toolFreezeCommit, 'preflight not accepted');
+  require(preflight.value.correction.uri === CORRECTION_URI && preflight.value.correction.sha256 === await sha256File(correctionPath), 'C1 correction mismatch');
+  await exactJsonReference(correction.retainedFailure.preflight, 'preflightHash');
+  await exactJsonReference(correction.retainedFailure.failure, 'failureHash');
   for (const [uri, hash] of Object.entries(preflight.value.toolHashes)) {
     require(await sha256File(resolve(repositoryRoot, uri)) === hash, `tool freeze mismatch ${uri}`);
   }
