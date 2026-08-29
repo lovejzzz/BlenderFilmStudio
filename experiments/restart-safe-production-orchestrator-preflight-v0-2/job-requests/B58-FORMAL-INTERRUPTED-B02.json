@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobRequest.v0.1",
+  "jobId": "B58-FORMAL-INTERRUPTED-B02",
+  "jobRoot": "experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-INTERRUPTED-B02",
+  "sceneSpec": {
+    "uri": "specs/benchmarks/B02.scene.json",
+    "sha256": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16"
+  },
+  "expectedBuildPlanHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+  "productionRelease": {
+    "uri": "specs/production-compiler-entry.v0.2.json",
+    "sha256": "77cefbc95a20d641e140f7d2c3385af27ef7ce801063872d5bfa812a82f56252"
+  },
+  "toolFreezeCommit": "9276afbfd61c078d199050e0cd1f82ed145d4de8",
+  "toolHashes": {
+    "scripts/lib/restart-safe-job-ledger.mjs": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13",
+    "scripts/run-restart-safe-production-job.mjs": "d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a"
+  },
+  "stageDag": [
+    {
+      "id": "PLAN_BIND",
+      "dependsOn": []
+    },
+    {
+      "id": "PRODUCTION_COMPILE",
+      "dependsOn": [
+        "PLAN_BIND"
+      ]
+    },
+    {
+      "id": "VERIFY_RECEIPT",
+      "dependsOn": [
+        "PRODUCTION_COMPILE"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "VERIFY_RECEIPT"
+      ]
+    }
+  ],
+  "compileAttempts": [
+    {
+      "attemptId": "INTERRUPTED-COMPILE-0001",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-preflight-v0-2/production-preflights/INTERRUPTED_B02_1",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-attempt-v0-2/production-attempts/INTERRUPTED_B02_1",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-v0-2/outputs/INTERRUPTED_B02_1",
+      "fault": "INTERRUPT_NATIVE_AFTER_OBSERVED"
+    },
+    {
+      "attemptId": "RETRY-COMPILE-0002",
+      "preflightRoot": "experiments/restart-safe-production-orchestrator-preflight-v0-2/production-preflights/INTERRUPTED_B02_2",
+      "productionAttemptRoot": "experiments/restart-safe-production-orchestrator-attempt-v0-2/production-attempts/INTERRUPTED_B02_2",
+      "outputRoot": "experiments/restart-safe-production-orchestrator-v0-2/outputs/INTERRUPTED_B02_2",
+      "fault": null
+    }
+  ],
+  "orchestratorFault": null,
+  "resourcePolicy": {
+    "minimumReserveBytes": "107374182400",
+    "projectedWriteBytes": "536870912",
+    "overrideAllowed": false
+  },
+  "requestHash": "72e4a6471e9c3a93f0b9c62ccbfdf5156dd75f3cd67a91dbe82d47fb941aae09"
+}

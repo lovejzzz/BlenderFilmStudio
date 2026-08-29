@@ -4853,3 +4853,13 @@ Date: 2026-08-29 · Type: B58 TOOL-FREEZE CORRECTION IMPLEMENTATION · New Blend
 C5 preregistration/evidence commit `52e7e6e56169151bcf339bd8dbc794f5748170f1`推送后，preflight仅接受correction中三条exact v0.2 roots；在创建新root前重开v0.1失败receipt，验证SHA/self-hash、`REJECTED / RELEASE_COMMIT`、错误submitted commit、outer receipt absent及operations全0，并把C5 spec/protocol/failure receipt纳入tool-freeze blob scope。Runner在创建v0.2 attempt root前再次验证同一failure和三根binding；independent auditor第三次直接重开failed receipt并执行2项C5 mutations。
 
 Formal gate denominator保持34；semantic gate现同时要求72 original attacks、C1 8、C2 6、C3 2、C4 2、C5 2。新的preflight/runner/auditor SHA-256为`cdf04560605bfad99113f6f9bd4d2dc01fb9f1fce579e4dbd34c4701fe539fb3` / `61a3030ea80ffd574853022799da00a14633542b27cf3fd4a2a03da1e309c6c1` / `b1139156ecfb526a10dfdf136b3250432b944b40fc3e87233e0772c9a45553b5`。Node syntax、targeted ESLint zero-warning及diff check通过；v0.2 roots仍不存在。下一动作提交推送这些exact bytes，fresh clone rehearsal必须使用git解析出的完整HEAD，而不是手写SHA。
+
+## J-367 · B58-C5 fresh rehearsal与official v0.2 preflight接受
+
+Date: 2026-08-29 · Type: B58 OFFICIAL PREFLIGHT ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+C5 tool-freeze commit `9276afbfd61c078d199050e0cd1f82ed145d4de8`与origin exact后，在fresh clone用`git rev-parse HEAD`生成SHA并运行v0.2 exact roots：17/17 checks、5/5 B57 production preflights与4/4 self-hashed job requests全部接受，preflight self-hash `90244caf5cd8abe678955657a0b0e25734aa1ae325bf9394e6c30fd9815025d7`，operations全0。Retained v0.1 failure再次验证SHA/self-hash/status/reason exact。
+
+主仓库随后同样用Git动态读取full HEAD，先验证三条v0.2 roots absent，再运行一次official preflight。结果`ACCEPTED 17/17`；preflight file SHA/self-hash为`b2eb355738425d448b8ab4442eaa80886ce0476efaedc2e292d62a7738de7aa1` / `d0ba9a6f717f83d8c5921b0c1d387688cd2248530f66440751d1da8fc77d87ef`。共10份文件：outer receipt、5份accepted child receipts与4份job requests。Gate 0 live sampleCount 7、age 439,997 ms、HEALTHY、available 316,820,500,480 bytes、browser 20,480 bytes、alert absent；Blender/render/model/network/Docker均0。
+
+下一动作只提交推送v0.2 official preflight 10 files与本entry形成evidence commit。Formal runner必须以该exact evidence commit入场；在此之前v0.2 attempt/formal roots继续不存在。
