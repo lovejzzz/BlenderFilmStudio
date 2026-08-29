@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "bfs.b62TerminalCyclesRestartSpec.v0.1",
+  "experimentId": "B62-T3-E1",
+  "date": "2026-08-29",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "question": "Can the exact T2-approved 12-second three-shot scene complete a high-bit-depth 1920x1080 Cycles render after one controlled native-Blender interruption and one real Codex host restart, resume only from durable verified receipts without rerendering the completed wide shot, and finish independently audited EXR and delivery-video outputs with exact resource and cost accounting?",
+  "preregistrationParentCommit": "36105b70fd470fda25fccce8aecd04f2bddb8651",
+  "parents": {
+    "sceneCompilation": {
+      "verdict": "B62_TERMINAL_SCENESPEC_BUILDPLAN_AND_SCENE_COMPILATION_SUPPORTED",
+      "scene": {"uri": "experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend", "sha256": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc"}
+    },
+    "fullTimelineContinuity": {
+      "verdict": "B62_TERMINAL_288_FRAME_ANIMATIC_AND_CONTINUITY_SUPPORTED",
+      "root": {"uri": "experiments/b62-terminal-animatic-continuity-v0-6", "files": 301, "bytes": 42219385, "treeSha256": "9717fdca98df4af8618b94a6a288f23424eea959c8c568f3388427f23788932b"},
+      "receipt": {"uri": "experiments/b62-terminal-animatic-continuity-v0-6/receipt.json", "sha256": "5fc9b1502221bba76325c60dbd2d9544a36c6f78d23bb9ac7c89dddfc91b04a2", "receiptHash": "4e8c0eca18f6f468f8847fc6a3b29807f29c799cead48cc4851df010d02d4fdc"},
+      "audit": {"uri": "experiments/b62-terminal-animatic-continuity-v0-6/audit.json", "sha256": "3ef56849ee2381a83fa2036788dd71500c9a418c75f4be36c850830e647016e1", "auditHash": "8ae8ef95cd7b3708d8e348ab3a21ca10731b8307df9b94bdb56fdf54d3786291"},
+      "humanReview": {"uri": "experiments/b62-terminal-animatic-continuity-v0-6/human-review.json", "sha256": "c147932f22f305a8093fe96ab5882e0f8d7114551f8e7887082337dca06c4ec3", "reviewHash": "760fa74bd5b915c41cf9838a2222dfc36d759e0424464430d5b93779783b3635"}
+    },
+    "restartOrchestrator": {
+      "verdict": "RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED",
+      "receipt": {"uri": "experiments/restart-safe-production-orchestrator-c7-reaudit-v0-1/receipt.json", "sha256": "f6112e89c068207379c0a30cf390822144110d41367a7849e179de6f2b0e9894", "receiptHash": "eef5dbff57191110ea9ca57d58c1c9bb68b5833682a2d16670d94b65a11767d9"}
+    },
+    "cyclesReproCost": {
+      "verdict": "TECHNICAL_REPRODUCIBILITY_AND_COST_SUPPORTED",
+      "receipt": {"uri": "experiments/cinematic-render-repro-cost-v0-5/receipt.json", "sha256": "9ab3b2cfb1aef3829abff6292aab285226a6b51cf9f376b60214de85626766de", "receiptHash": "18bc3a53e45e353d87304e165e821d5b94c9e30c510da6c76b943a83f6fe3244"},
+      "observed": {"resolution": [1920, 1080], "samples": 64, "meanRenderSecondsPerFrame": 6.084, "observedPeakResidentSetSizeBytesUpper": 4540000000, "meanExrPlusPngBytesPerFrame": 5362834}
+    }
+  },
+  "frozenRuntime": {
+    "node": {"executable": "/opt/homebrew/Cellar/node/26.5.0/bin/node", "version": "v26.5.0", "sha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8"},
+    "blender": {"executable": "/Applications/Blender.app/Contents/MacOS/Blender", "version": "5.2.0 LTS", "buildHash": "fbe6228777e7", "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"},
+    "ffmpeg": {"executable": "/opt/homebrew/bin/ffmpeg", "sha256": "1332dc2de372bade9a8a63da0d6cdfab9de97fcefbae707bcc0b0506e1203327"},
+    "ffprobe": {"executable": "/opt/homebrew/bin/ffprobe", "sha256": "4322275c1c2ac6ba15c695b288788bc1204e75211b3d5c030e5812c82a6dff73"},
+    "ocio": {"uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio", "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"},
+    "ledgerLibrary": {"uri": "scripts/lib/restart-safe-job-ledger.mjs", "sha256": "0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13"},
+    "budgetSupervisor": {"uri": "scripts/lib/budgeted-process.mjs", "sha256": "cda932ce86069524173066426365a5e8c60e0747c21187115d85defde5061c7d"},
+    "decoder": {"openImageIO": "3.1.13.1", "numpy": "2.3.4"}
+  },
+  "renderContract": {
+    "timeline": {"frameStart": 1, "frameEnd": 288, "fps": 24, "durationSeconds": 12},
+    "shots": [
+      {"id": "WIDE", "frames": [1, 96], "marker": "SHOT_WIDE_APPROACH", "camera": "CAM_WIDE_APPROACH"},
+      {"id": "MEDIUM", "frames": [97, 192], "marker": "SHOT_MEDIUM_CONTACT", "camera": "CAM_MEDIUM_CONTACT"},
+      {"id": "CLOSE", "frames": [193, 288], "marker": "SHOT_CLOSE_REFLECTION", "camera": "CAM_CLOSE_MOTION_TERMINAL"}
+    ],
+    "engine": "CYCLES",
+    "device": "CPU",
+    "resolution": [1920, 1080],
+    "resolutionPercentage": 100,
+    "samples": 64,
+    "denoise": true,
+    "seed": 24082960,
+    "animatedSeed": false,
+    "motionBlur": true,
+    "filmTransparent": false,
+    "productionMediaType": "MULTI_LAYER_IMAGE",
+    "fileFormat": "OPEN_EXR_MULTILAYER",
+    "colorMode": "RGBA",
+    "colorDepth": "16",
+    "exrCodec": "ZIP",
+    "displayOutput": {"format": "PNG", "colorMode": "RGBA", "colorDepth": "8", "source": "OIIO_COMBINED_RGBA_TO_TEMPORARY_ACESCG_FLOAT_IMAGE"},
+    "color": {"display": "sRGB - Display", "view": "ACES 2.0 - SDR 100 nits (Rec.709)", "look": "None", "exposure": 0.0, "gamma": 1.0}
+  },
+  "restartContract": {
+    "stateAuthority": "Only the immutable self-hashed manifest, contiguous append-only hash-chained events, immutable stage receipts and exact artifact hashes may determine resume state.",
+    "singleWriter": true,
+    "controlledBlenderInterruption": {
+      "stage": "INTERRUPT_WIDE_PROBE",
+      "attemptId": "WIDE-INTERRUPTED-0001",
+      "mechanism": "The Blender child opens the exact source scene, validates runtime/render/context bindings, prints and flushes BFS_T3_READY_FOR_CONTROLLED_INTERRUPT, then waits for a go file. The supervisor records exact native identity and sends SIGTERM before creating the go file.",
+      "acceptedRenderCalls": 0,
+      "requiredTerminalState": "RETAINED_NON_PROMOTABLE_CONTROLLED_INTERRUPTION",
+      "retryAttemptId": "WIDE-RETRY-0002"
+    },
+    "codexRestartCheckpoint": {
+      "boundary": "After WIDE-RETRY-0002 has an immutable PASS shot receipt for frames 1-96 and before MEDIUM starts.",
+      "firstInvocationExitCode": 86,
+      "hostIdentity": "Record the exact local ChatGPT/Codex app-server PID, executable command and process start identity observed at the checkpoint.",
+      "realRestartRequired": "Resume must observe that the recorded app-server identity is no longer live and a different current app-server identity exists. Reinvocation under the same host identity must return CODEX_RESTART_REQUIRED and spawn zero Blender/FFmpeg/auditor processes.",
+      "postRestartRule": "Verify and skip ADMIT_PLAN, INTERRUPT_WIDE_PROBE and RENDER_WIDE from receipts; render no WIDE frame again."
+    },
+    "repeatedCompletedResume": "Return the existing final receipt byte-exactly and spawn zero processes."
+  },
+  "stageDag": [
+    {"id": "ADMIT_PLAN", "dependsOn": []},
+    {"id": "INTERRUPT_WIDE_PROBE", "dependsOn": ["ADMIT_PLAN"]},
+    {"id": "RENDER_WIDE", "dependsOn": ["INTERRUPT_WIDE_PROBE"]},
+    {"id": "CODEX_RESTART_CHECKPOINT", "dependsOn": ["RENDER_WIDE"]},
+    {"id": "POST_RESTART_ATTEST", "dependsOn": ["CODEX_RESTART_CHECKPOINT"]},
+    {"id": "RENDER_MEDIUM", "dependsOn": ["POST_RESTART_ATTEST"]},
+    {"id": "RENDER_CLOSE", "dependsOn": ["RENDER_MEDIUM"]},
+    {"id": "INDEPENDENT_EXR_AUDIT", "dependsOn": ["RENDER_CLOSE"]},
+    {"id": "DELIVERY", "dependsOn": ["INDEPENDENT_EXR_AUDIT"]},
+    {"id": "FINAL_AUDIT", "dependsOn": ["DELIVERY"]},
+    {"id": "FINALIZE", "dependsOn": ["FINAL_AUDIT"]}
+  ],
+  "artifactContract": {
+    "successfulShotAttemptOutputs": "Each successful immutable shot attempt retains 96 EXR, 96 PNG and 96 self-hashed frame reports plus one shot receipt. Failed or interrupted attempt roots remain disjoint and non-promotable.",
+    "exrCount": 288,
+    "pngCount": 288,
+    "frameReportCount": 288,
+    "delivery": {"codec": "h264", "pixelFormat": "yuv420p", "width": 1920, "height": 1080, "fps": 24, "frames": 288, "durationSeconds": 12, "fastStart": true},
+    "independentAudit": "One fresh Blender process reopens all 288 EXRs through pinned OpenImageIO, finds exactly one Combined RGBA quartet per frame, verifies dimensions/finite/dynamic pixels and exact render-report decoded digests, while performing zero render calls.",
+    "sourceSceneUnchanged": true
+  },
+  "resourceBudget": {
+    "projectedWriteBytes": 6442450944,
+    "maximumJobOutputBytes": 8589934592,
+    "minimumFreeReserveBytes": 107374182400,
+    "maximumPeakResidentSetSizeBytesPerBlender": 6442450944,
+    "maximumWallSecondsPerSuccessfulShotBlender": 7200,
+    "maximumWallSecondsIndependentAudit": 1800,
+    "maximumCombinedLogBytesPerChild": 16777216,
+    "maximumNativeBlenderStarts": 5,
+    "successfulRenderBlenderStarts": 3,
+    "controlledInterruptedBlenderStarts": 1,
+    "independentAuditBlenderStarts": 1,
+    "cyclesRenderCalls": 288,
+    "modelCalls": 0,
+    "videoModelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "colimaProcesses": 0
+  },
+  "costContract": {
+    "record": ["per-shot render operator seconds", "per-process wall/user/system seconds", "peak sampled RSS", "EXR/PNG/report/log bytes", "total wall seconds", "seconds per finished second", "bytes per finished second", "native process counts"],
+    "marginalApiCostUsd": 0,
+    "marginalVideoModelCostUsd": 0,
+    "subscriptionTreatment": "Codex interactions are covered by the user's existing subscription and are not converted into an invented per-run dollar amount.",
+    "hardwareTreatment": "Local CPU, electricity and hardware depreciation are reported as unpriced limitations unless directly metered; wall time and resource usage remain exact."
+  },
+  "formalTools": [
+    "blender/render_b62_terminal_cycles_shot.py",
+    "blender/audit_b62_terminal_cycles_exr.py",
+    "scripts/run-b62-terminal-cycles-restart.mjs",
+    "scripts/audit-b62-terminal-cycles-restart.mjs"
+  ],
+  "formalRoots": {
+    "preflight": "experiments/b62-terminal-cycles-restart-preflight-v0-1",
+    "job": "experiments/b62-terminal-cycles-restart-job-v0-1",
+    "formal": "experiments/b62-terminal-cycles-restart-v0-1"
+  },
+  "acceptanceGates": [
+    "G01_ALL_PARENT_EVIDENCE_AND_SOURCE_TREE_EXACT",
+    "G02_PREREGISTRATION_TOOL_FREEZE_RUNTIME_AND_OCIO_EXACT",
+    "G03_FRESH_DISJOINT_ROOTS_SINGLE_WRITER_AND_NO_SYMLINKS",
+    "G04_PREFLIGHT_CAPACITY_PROJECTED_WRITE_AND_100_GIB_RESERVE",
+    "G05_MANIFEST_STAGE_DAG_AND_APPEND_ONLY_LEDGER_HASH_CHAIN_EXACT",
+    "G06_CONTROLLED_NATIVE_BLENDER_SIGTERM_BEFORE_ANY_ACCEPTED_RENDER",
+    "G07_INTERRUPTED_ATTEMPT_RETAINED_NON_PROMOTABLE_AND_RETRY_ROOT_NEW",
+    "G08_WIDE_RETRY_96_FRAME_RECEIPT_EXACT_BEFORE_RESTART_CHECKPOINT",
+    "G09_REAL_CODEX_HOST_IDENTITY_CHANGED_AND_OLD_IDENTITY_DEAD",
+    "G10_POST_RESTART_RESUME_VERIFIES_AND_SKIPS_WIDE_WITH_ZERO_RERENDER",
+    "G11_MEDIUM_AND_CLOSE_EACH_COMPLETE_96_EXACT_FRAMES",
+    "G12_EXACT_288_CYCLES_CALLS_IN_THREE_SUCCESSFUL_SHOT_PROCESSES",
+    "G13_1920X1080_64_SPP_CPU_DENOISE_SEED_MOTION_COLOR_EXACT",
+    "G14_288_MULTILAYER_HALF_ZIP_EXR_AND_288_REVIEW_PNG_ROSTER_EXACT",
+    "G15_ALL_FRAME_REPORT_SELF_HASH_ROUTE_SOURCE_AND_OUTPUT_BINDINGS_EXACT",
+    "G16_INDEPENDENT_FRESH_BLENDER_REOPENS_ALL_288_EXR_ZERO_RENDER",
+    "G17_ALL_COMBINED_PIXELS_FINITE_DYNAMIC_NONEMPTY_AND_TEMPORALLY_DISTINCT",
+    "G18_BOTH_CUT_PAIRS_DIFFER_AND_T2_GEOMETRY_CAUSAL_PARENT_REMAINS_EXACT",
+    "G19_H264_1080P_24FPS_288_FRAME_12_SECOND_FASTSTART_DELIVERY_EXACT",
+    "G20_SOURCE_BLEND_BYTE_EXACT_AND_ZERO_SCENE_SAVE",
+    "G21_PROCESS_RESOURCE_OUTPUT_RESERVE_AND_COST_LEDGER_EXACT",
+    "G22_REPEATED_COMPLETED_RESUME_ZERO_PROCESS_AND_RECEIPT_BYTE_EXACT",
+    "G23_ZERO_MODEL_VIDEO_MODEL_NETWORK_DOCKER_AND_COLIMA",
+    "G24_SELF_HASHED_FINAL_AUDIT_RECEIPT_AND_ALL_MUTATION_ATTACKS_REJECT"
+  ],
+  "mutationAttacks": [
+    "A01_PARENT_RECEIPT_HASH",
+    "A02_SOURCE_BLEND_HASH",
+    "A03_TOOL_FREEZE_COMMIT",
+    "A04_RUNTIME_BINARY_HASH",
+    "A05_MANIFEST_SELF_HASH",
+    "A06_STAGE_DAG_ORDER",
+    "A07_LEDGER_SEQUENCE_GAP",
+    "A08_LEDGER_PREVIOUS_HASH",
+    "A09_INTERRUPTION_SIGNAL",
+    "A10_INTERRUPTED_ATTEMPT_PROMOTABLE",
+    "A11_RETRY_ATTEMPT_ROOT_REUSED",
+    "A12_WIDE_RECEIPT_SELF_HASH",
+    "A13_CODEX_HOST_IDENTITY_UNCHANGED",
+    "A14_POST_RESTART_WIDE_DUPLICATE_RENDER",
+    "A15_MISSING_EXR",
+    "A16_EXTRA_EXR",
+    "A17_EXR_FILE_HASH",
+    "A18_EXR_DECODED_COMBINED_HASH",
+    "A19_PNG_FILE_HASH",
+    "A20_FRAME_ROUTE_CAMERA",
+    "A21_RENDER_SETTING_SAMPLE_COUNT",
+    "A22_DELIVERY_FRAME_COUNT",
+    "A23_COST_TOTALS",
+    "A24_FINAL_RECEIPT_SELF_HASH"
+  ],
+  "decision": {
+    "supportedVerdict": "B62_TERMINAL_CYCLES_EXR_RESTART_SAFE_PROOF_SUPPORTED",
+    "supportedWhen": "All 24 gates and all 24 mutation attacks pass after a real Codex host identity change; the machine result remains HUMAN_PENDING until the complete final delivery is watched and labeled.",
+    "rejectedVerdict": "B62_TERMINAL_CYCLES_EXR_OR_CONTINUITY_REJECTED",
+    "invalidated": "Any parent, tool/runtime, capacity, interruption, actual-restart, receipt, process, EXR, delivery, resource or independent-audit failure yields scientificVerdict null."
+  },
+  "nonClaims": [
+    "The stylized low-detail Phase 0 assets are not photoreal people or production-finished art.",
+    "A machine PASS does not establish audience preference, theatrical mastering, HDR projection or final sound design.",
+    "Exact decoded pixels are an integrity and reproducibility surface, not an aesthetic score.",
+    "This is a single-host local restart contract, not a distributed render farm claim."
+  ]
+}

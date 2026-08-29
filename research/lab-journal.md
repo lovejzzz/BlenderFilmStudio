@@ -5765,3 +5765,13 @@ C5 retry以tool freeze `99956b3faa5cc73af403a76c01ec38defc096706`在fresh v0.6�
 随后用QuickTime准确打开formal MP4，从00:00无seek连续播放至timeline 00:12终点；播放内五次画面采样覆盖三shot，另以九张原始PNG和24-frame contact sheet复核。角色、房间、终端、蓝/珊瑚光色、两cut与动作/光照因果连续，没有可见冻结、asset swap或teleport，工程review PASS。human review file/self `c147932f…/760fa74b…`；final root 301 files/42,219,385 bytes/tree `9717fdca…`。
 
 缺点同步保留：wide开场前景遮挡过重，medium长期背向且过紧，Eevee 640×360/16 spp与低模资产不代表最终电影画质，且没有音频。T2只授权下一步预注册288帧Cycles EXR final render、一次受控Blender interruption、Codex restart与receipt-only resume；这些未完成前不关闭terminal cinematic proof。
+
+## J-464 · B62-T3终局Cycles EXR与真实Codex restart预注册
+
+Date: 2026-08-29 · Type: TERMINAL CYCLES / CONTROLLED INTERRUPTION / REAL CODEX RESTART PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+T2 final root、receipt/audit/human review、T1 production scene、B58 C7 restart receipt和B61真实Cycles成本均重新核验exact；新T3四个工具与preflight/job/formal roots全部absent，当前约282 GiB available。T3冻结同一288帧scene的1920×1080 Cycles CPU 64 spp、denoise、fixed seed、motion blur、ACES、16-bit half ZIP multilayer EXR及review PNG，不再改camera/asset/light。
+
+restart边界分两类且不可替代：首个wide Blender只准入并打印ready，然后在go file创建前被exact SIGTERM，0 accepted render，failed attempt永久non-promotable；新`WIDE-RETRY-0002`完整写1–96与shot receipt。wide checkpoint fsync后记录当前ChatGPT/Codex app-server PID/command/start identity并exit 86；同identity重入必须0 process拒绝。只有用户真实重启后看到旧identity死亡与新identity不同，resume才可verified-skip wide并继续medium/close。不能用同一Node进程restart模拟这个门。
+
+成功输出固定288 EXR+288 PNG+288 frame reports，fresh Blender zero-render重开全部EXR，FFmpeg/ffprobe交付1080p 12秒视频；最终还要repeated resume zero-process byte-exact、24 gates、24 attacks与完整视频人工复核。预算6 GiB projected/8 GiB ceiling、6 GiB RSS/Blender、7200秒/shot、100 GiB reserve，zero model/video-model/network/Docker/Colima；API/video-model marginal cost $0，订阅/硬件/电费不虚构美元值。
