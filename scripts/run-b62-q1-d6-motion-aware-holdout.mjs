@@ -16,13 +16,17 @@ const CORRECTION_URI = 'specs/b62-camera-quality-d6-c1-native-ocio-runtime.v0.1.
 const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-d6-c1-native-ocio-runtime.md';
 const CORRECTION_C2_URI = 'specs/b62-camera-quality-d6-c2-blender-5-2-aces2-color.v0.1.json';
 const CORRECTION_C2_PROTOCOL_URI = 'research/2026-08-29-b62-d6-c2-blender-5-2-aces2-color.md';
-const ROOT_URI = 'experiments/b62-camera-quality-motion-aware-holdout-v0-3';
+const CORRECTION_C3_URI = 'specs/b62-camera-quality-d6-c3-output-budget.v0.1.json';
+const CORRECTION_C3_PROTOCOL_URI = 'research/2026-08-29-b62-d6-c3-output-budget.md';
+const ROOT_URI = 'experiments/b62-camera-quality-motion-aware-holdout-v0-4';
 const C1_RETAINED_ROOT = 'experiments/b62-camera-quality-motion-aware-holdout-v0-1';
-const RETAINED_ROOT = 'experiments/b62-camera-quality-motion-aware-holdout-v0-2';
+const C2_RETAINED_ROOT = 'experiments/b62-camera-quality-motion-aware-holdout-v0-2';
+const RETAINED_ROOT = 'experiments/b62-camera-quality-motion-aware-holdout-v0-3';
 const PARENT_ROOT = 'experiments/b62-camera-quality-motion-aware-search-v0-4';
 const PREREGISTRATION_COMMIT = 'd33b0144e231e663303848167e1758af4b9022bc';
 const CORRECTION_COMMIT = '3d1c1f0c92c53fbf833612028353cd0693a74298';
 const CORRECTION_C2_COMMIT = 'aa3c25f41f7445e2ec8bf152bbd0728f9d251dc1';
+const CORRECTION_C3_COMMIT = 'ea82cecb75ab87578344d305d32aa367839bc087';
 const TOOLS = ['blender/build_b62_q1_d6_motion_aware_scene.py', 'blender/render_b62_q1_d6_motion_aware_holdout_pairs.py', 'blender/audit_b62_q1_d6_motion_aware_scene_and_pixels.py', 'scripts/run-b62-q1-d6-motion-aware-holdout.mjs', 'scripts/audit-b62-q1-d6-motion-aware-holdout.mjs'];
 
 function normalize(value) { if (typeof value === 'number' && Number.isFinite(value) && Number.isInteger(value)) return value; if (typeof value === 'number' && Number.isFinite(value)) { const bytes = Buffer.alloc(8); bytes.writeDoubleBE(value); return { $f64be: bytes.toString('hex') }; } if (Array.isArray(value)) return value.map(normalize); if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, child]) => [key, normalize(child)])); return value; }
@@ -40,11 +44,11 @@ async function treeIdentity(uri) { const root = pathFor(uri), files = []; async 
 function parse() { const args = process.argv.slice(2); req(args.length === 2 && args[0] === '--tool-freeze-commit' && /^[0-9a-f]{40}$/.test(args[1]), 'usage: --tool-freeze-commit <sha>'); return args[1]; }
 async function processReceipt(root, id, command, args, result) { return writeHashed(resolve(root, 'processes', `${id}.json`), { schemaVersion: 'bfs.b62CameraQualityProcessReceipt.v0.1', experimentId: 'B62-Q1-D6', processId: id, command, args, result }, 'processHash'); }
 
-let spec;
+let spec, outputBudgetBytes;
 async function blenderChild({ root, id, scene, tool, args, wallSeconds }) {
   const command = spec.runtime.blender.executable;
   const full = ['--background', '--factory-startup', '--disable-autoexec', scene, '--python-exit-code', '1', '--python', pathFor(tool), '--', ...args];
-  const result = await runBudgetedProcess({ command, args: full, cwd: repositoryRoot, env: { PATH: '/usr/bin:/bin', LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8' }, outputRoot: root, budgets: { wallTimeMs: wallSeconds * 1000, maxRssBytes: spec.processBudget.maximumPeakResidentSetSizeBytesPerBlender, maxLogBytes: spec.processBudget.maximumCombinedLogBytesPerChild, maxOutputFiles: 256, maxOutputBytes: spec.processBudget.projectedWriteBytes, sampleIntervalMs: 100 } });
+  const result = await runBudgetedProcess({ command, args: full, cwd: repositoryRoot, env: { PATH: '/usr/bin:/bin', LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8' }, outputRoot: root, budgets: { wallTimeMs: wallSeconds * 1000, maxRssBytes: spec.processBudget.maximumPeakResidentSetSizeBytesPerBlender, maxLogBytes: spec.processBudget.maximumCombinedLogBytesPerChild, maxOutputFiles: 256, maxOutputBytes: outputBudgetBytes, sampleIntervalMs: 100 } });
   const receipt = await processReceipt(root, id, command, full.map(value => value.startsWith(repositoryRoot) ? relative(repositoryRoot, value).split('\\').join('/') : value), result);
   req(result.outcome === 'PASS' && result.child.exitCode === 0 && result.breach === null, `${id} failed`);
   return receipt;
@@ -55,26 +59,33 @@ async function main() {
   spec = JSON.parse(await readFile(pathFor(SPEC_URI), 'utf8'));
   const correction = JSON.parse(await readFile(pathFor(CORRECTION_URI), 'utf8'));
   const correctionC2 = JSON.parse(await readFile(pathFor(CORRECTION_C2_URI), 'utf8'));
+  const correctionC3 = JSON.parse(await readFile(pathFor(CORRECTION_C3_URI), 'utf8'));
   req(spec.experimentId === 'B62-Q1-D6' && spec.statusBeforeToolCreation === 'PREREGISTERED' && spec.output.formalRoot === C1_RETAINED_ROOT, 'spec mismatch');
-  req(correction.correctionId === 'B62-Q1-D6-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.retainedFailure.root === C1_RETAINED_ROOT && correction.authorizedChanges.retryRoot === RETAINED_ROOT, 'C1 mismatch');
-  req(correctionC2.correctionId === 'B62-Q1-D6-C2' && correctionC2.statusBeforeToolChange === 'PREREGISTERED' && correctionC2.retainedFailure.root === RETAINED_ROOT && correctionC2.authorizedChanges.retryRoot === ROOT_URI && correctionC2.replacementColorContract.viewTransform === 'ACES 2.0' && correctionC2.replacementColorContract.look === 'None', 'C2 mismatch');
+  req(correction.correctionId === 'B62-Q1-D6-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.retainedFailure.root === C1_RETAINED_ROOT && correction.authorizedChanges.retryRoot === C2_RETAINED_ROOT, 'C1 mismatch');
+  req(correctionC2.correctionId === 'B62-Q1-D6-C2' && correctionC2.statusBeforeToolChange === 'PREREGISTERED' && correctionC2.retainedFailure.root === C2_RETAINED_ROOT && correctionC2.authorizedChanges.retryRoot === RETAINED_ROOT && correctionC2.replacementColorContract.viewTransform === 'ACES 2.0' && correctionC2.replacementColorContract.look === 'None', 'C2 mismatch');
+  req(correctionC3.correctionId === 'B62-Q1-D6-C3' && correctionC3.statusBeforeToolChange === 'PREREGISTERED' && correctionC3.retainedFailure.root === RETAINED_ROOT && correctionC3.authorizedChanges.retryRoot === ROOT_URI && correctionC3.replacementProcessBudget.projectedWriteBytes === 268435456 && correctionC3.replacementProcessBudget.maximumOutputBytesPerChild === 268435456 && correctionC3.replacementProcessBudget.minimumFreeReserveBytes === spec.processBudget.minimumFreeReserveBytes, 'C3 mismatch');
+  outputBudgetBytes = correctionC3.replacementProcessBudget.maximumOutputBytesPerChild;
   req(!await exists(pathFor(ROOT_URI)), 'formal root exists');
   const head = (await git(['rev-parse', 'HEAD'])).trim(), origin = (await git(['rev-parse', 'origin/main'])).trim();
   req(head === freeze && origin === freeze, 'freeze not pushed HEAD');
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
   await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, freeze]);
   await git(['merge-base', '--is-ancestor', CORRECTION_C2_COMMIT, freeze]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_C3_COMMIT, freeze]);
   req(await hashFile(pathFor(SPEC_URI)) === await committedHash(PREREGISTRATION_COMMIT, SPEC_URI) && await hashFile(pathFor(PROTOCOL_URI)) === await committedHash(PREREGISTRATION_COMMIT, PROTOCOL_URI), 'preregistration drift');
   req(await hashFile(pathFor(CORRECTION_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_URI) && await hashFile(pathFor(CORRECTION_PROTOCOL_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_PROTOCOL_URI), 'correction drift');
   req(await hashFile(pathFor(CORRECTION_C2_URI)) === await committedHash(CORRECTION_C2_COMMIT, CORRECTION_C2_URI) && await hashFile(pathFor(CORRECTION_C2_PROTOCOL_URI)) === await committedHash(CORRECTION_C2_COMMIT, CORRECTION_C2_PROTOCOL_URI), 'C2 drift');
+  req(await hashFile(pathFor(CORRECTION_C3_URI)) === await committedHash(CORRECTION_C3_COMMIT, CORRECTION_C3_URI) && await hashFile(pathFor(CORRECTION_C3_PROTOCOL_URI)) === await committedHash(CORRECTION_C3_COMMIT, CORRECTION_C3_PROTOCOL_URI), 'C3 drift');
   const toolHashes = {};
   for (const uri of TOOLS) { toolHashes[uri] = await hashFile(pathFor(uri)); req(toolHashes[uri] === await committedHash(freeze, uri), `tool drift ${uri}`); }
-  req(toolHashes[TOOLS[0]] === correctionC2.frozenBeforeCorrection.builderSha256 && toolHashes[TOOLS[2]] === correctionC2.frozenBeforeCorrection.independentSha256 && toolHashes[TOOLS[1]] !== correctionC2.frozenBeforeCorrection.renderSha256, 'C2 Blender tool boundary');
-  req((await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, CORRECTION_C2_URI, CORRECTION_C2_PROTOCOL_URI, C1_RETAINED_ROOT, RETAINED_ROOT, PARENT_ROOT, ...TOOLS])).trim() === '', 'scoped dirty');
+  req(toolHashes[TOOLS[0]] === correctionC3.frozenBeforeCorrection.builderSha256 && toolHashes[TOOLS[1]] === correctionC3.frozenBeforeCorrection.renderSha256 && toolHashes[TOOLS[2]] === correctionC3.frozenBeforeCorrection.independentSha256, 'C3 frozen Blender tools changed');
+  req((await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, CORRECTION_C2_URI, CORRECTION_C2_PROTOCOL_URI, CORRECTION_C3_URI, CORRECTION_C3_PROTOCOL_URI, C1_RETAINED_ROOT, C2_RETAINED_ROOT, RETAINED_ROOT, PARENT_ROOT, ...TOOLS])).trim() === '', 'scoped dirty');
   const c1RetainedTree = await treeIdentity(C1_RETAINED_ROOT);
   req(canonicalJson(c1RetainedTree) === canonicalJson(correction.retainedFailure.tree), 'retained v0.1 drift');
+  const c2RetainedTree = await treeIdentity(C2_RETAINED_ROOT);
+  req(canonicalJson(c2RetainedTree) === canonicalJson(correctionC2.retainedFailure.tree), 'retained v0.2 drift');
   const retainedTree = await treeIdentity(RETAINED_ROOT);
-  req(canonicalJson(retainedTree) === canonicalJson(correctionC2.retainedFailure.tree) && await hashFile(pathFor(correctionC2.retainedFailure.failure.uri)) === correctionC2.retainedFailure.failure.sha256 && await hashFile(pathFor(correctionC2.retainedFailure.build.uri)) === correctionC2.retainedFailure.build.sha256 && await hashFile(pathFor(correctionC2.retainedFailure.renderProcess.uri)) === correctionC2.retainedFailure.renderProcess.sha256, 'retained v0.2 drift');
+  req(canonicalJson(retainedTree) === canonicalJson(correctionC3.retainedFailure.tree) && await hashFile(pathFor(correctionC3.retainedFailure.failure.uri)) === correctionC3.retainedFailure.failure.sha256 && await hashFile(pathFor(correctionC3.retainedFailure.build.uri)) === correctionC3.retainedFailure.build.sha256 && await hashFile(pathFor(correctionC3.retainedFailure.renderProcess.uri)) === correctionC3.retainedFailure.renderProcess.sha256, 'retained v0.3 drift');
   const parentTree = await treeIdentity(PARENT_ROOT);
   req(canonicalJson(parentTree) === canonicalJson(spec.parentEvidence.d5Formal.tree), 'D5 tree drift');
   const parentReceiptPath = pathFor(spec.parentEvidence.d5Formal.receipt.uri), parentAuditPath = pathFor(spec.parentEvidence.d5Formal.audit.uri);
@@ -84,10 +95,10 @@ async function main() {
   const master = pathFor(spec.parentEvidence.masterScene.uri), masterSha = await hashFile(master);
   req(masterSha === spec.parentEvidence.masterScene.sha256 && await hashFile(spec.runtime.blender.executable) === spec.runtime.blender.sha256, 'runtime/source drift');
   const filesystem = await statfs(repositoryRoot), available = Number(filesystem.bavail) * Number(filesystem.bsize);
-  req(available - spec.processBudget.projectedWriteBytes >= spec.processBudget.minimumFreeReserveBytes, 'disk reserve');
+  req(available - correctionC3.replacementProcessBudget.projectedWriteBytes >= correctionC3.replacementProcessBudget.minimumFreeReserveBytes, 'disk reserve');
   const root = pathFor(ROOT_URI);
   await mkdir(resolve(root, 'processes'), { recursive: true, mode: 0o700 });
-  const admission = await writeHashed(resolve(root, 'admission.json'), { schemaVersion: 'bfs.b62CameraQualityMotionAwareHoldoutAdmission.v0.1', experimentId: spec.experimentId, status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, correctionC2Commit: CORRECTION_C2_COMMIT, toolFreezeCommit: freeze, bindings: { spec: { uri: SPEC_URI, sha256: await hashFile(pathFor(SPEC_URI)) }, protocol: { uri: PROTOCOL_URI, sha256: await hashFile(pathFor(PROTOCOL_URI)) }, correction: { uri: CORRECTION_URI, sha256: await hashFile(pathFor(CORRECTION_URI)) }, correctionProtocol: { uri: CORRECTION_PROTOCOL_URI, sha256: await hashFile(pathFor(CORRECTION_PROTOCOL_URI)) }, correctionC2: { uri: CORRECTION_C2_URI, sha256: await hashFile(pathFor(CORRECTION_C2_URI)) }, correctionC2Protocol: { uri: CORRECTION_C2_PROTOCOL_URI, sha256: await hashFile(pathFor(CORRECTION_C2_PROTOCOL_URI)) }, c1RetainedFailureTree: c1RetainedTree, retainedFailureTree: retainedTree, retainedFailureSha256: await hashFile(pathFor(correctionC2.retainedFailure.failure.uri)), retainedBuildSha256: await hashFile(pathFor(correctionC2.retainedFailure.build.uri)), retainedRenderProcessSha256: await hashFile(pathFor(correctionC2.retainedFailure.renderProcess.uri)), parentTree, parentReceiptSha256: await hashFile(parentReceiptPath), parentAuditSha256: await hashFile(parentAuditPath), master: { uri: spec.parentEvidence.masterScene.uri, sha256: masterSha }, blenderSha256: await hashFile(spec.runtime.blender.executable), tools: toolHashes }, resources: { availableBytesBefore: available, projectedWriteBytes: spec.processBudget.projectedWriteBytes, minimumFreeReserveBytes: spec.processBudget.minimumFreeReserveBytes }, operations: { blenderStartsBeforeAdmission: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 } }, 'admissionHash');
+  const admission = await writeHashed(resolve(root, 'admission.json'), { schemaVersion: 'bfs.b62CameraQualityMotionAwareHoldoutAdmission.v0.1', experimentId: spec.experimentId, status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, correctionC2Commit: CORRECTION_C2_COMMIT, correctionC3Commit: CORRECTION_C3_COMMIT, toolFreezeCommit: freeze, bindings: { spec: { uri: SPEC_URI, sha256: await hashFile(pathFor(SPEC_URI)) }, protocol: { uri: PROTOCOL_URI, sha256: await hashFile(pathFor(PROTOCOL_URI)) }, correction: { uri: CORRECTION_URI, sha256: await hashFile(pathFor(CORRECTION_URI)) }, correctionProtocol: { uri: CORRECTION_PROTOCOL_URI, sha256: await hashFile(pathFor(CORRECTION_PROTOCOL_URI)) }, correctionC2: { uri: CORRECTION_C2_URI, sha256: await hashFile(pathFor(CORRECTION_C2_URI)) }, correctionC2Protocol: { uri: CORRECTION_C2_PROTOCOL_URI, sha256: await hashFile(pathFor(CORRECTION_C2_PROTOCOL_URI)) }, correctionC3: { uri: CORRECTION_C3_URI, sha256: await hashFile(pathFor(CORRECTION_C3_URI)) }, correctionC3Protocol: { uri: CORRECTION_C3_PROTOCOL_URI, sha256: await hashFile(pathFor(CORRECTION_C3_PROTOCOL_URI)) }, c1RetainedFailureTree: c1RetainedTree, c2RetainedFailureTree: c2RetainedTree, retainedFailureTree: retainedTree, retainedFailureSha256: await hashFile(pathFor(correctionC3.retainedFailure.failure.uri)), retainedBuildSha256: await hashFile(pathFor(correctionC3.retainedFailure.build.uri)), retainedRenderProcessSha256: await hashFile(pathFor(correctionC3.retainedFailure.renderProcess.uri)), parentTree, parentReceiptSha256: await hashFile(parentReceiptPath), parentAuditSha256: await hashFile(parentAuditPath), master: { uri: spec.parentEvidence.masterScene.uri, sha256: masterSha }, blenderSha256: await hashFile(spec.runtime.blender.executable), tools: toolHashes }, resources: { availableBytesBefore: available, projectedWriteBytes: correctionC3.replacementProcessBudget.projectedWriteBytes, minimumFreeReserveBytes: correctionC3.replacementProcessBudget.minimumFreeReserveBytes }, operations: { blenderStartsBeforeAdmission: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 } }, 'admissionHash');
   try {
     const derived = resolve(root, 'scene/B62_PHASE0_D6_MOTION_AWARE.blend'), buildPath = resolve(root, 'build.json');
     const build = await blenderChild({ root, id: 'BUILD', scene: master, tool: TOOLS[0], args: ['--output-scene', derived, '--report', buildPath, '--master-sha256', masterSha], wallSeconds: spec.processBudget.maximumBuildWallSeconds });
@@ -102,7 +113,7 @@ async function main() {
     const independentDoc = JSON.parse(await readFile(independentPath, 'utf8'));
     req(validSelf(independentDoc, 'reportHash') && independentDoc.status === 'PASS', 'independent output invalid');
     const auditorArgs = [pathFor(TOOLS[4]), '--root', ROOT_URI, '--tool-freeze-commit', freeze];
-    const auditorResult = await runBudgetedProcess({ command: process.execPath, args: auditorArgs, cwd: repositoryRoot, env: { PATH: '/usr/bin:/bin', LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8' }, outputRoot: root, budgets: { wallTimeMs: 60000, maxRssBytes: 1073741824, maxLogBytes: 1048576, maxOutputFiles: 256, maxOutputBytes: spec.processBudget.projectedWriteBytes, sampleIntervalMs: 100 } });
+    const auditorResult = await runBudgetedProcess({ command: process.execPath, args: auditorArgs, cwd: repositoryRoot, env: { PATH: '/usr/bin:/bin', LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8' }, outputRoot: root, budgets: { wallTimeMs: 60000, maxRssBytes: 1073741824, maxLogBytes: 1048576, maxOutputFiles: 256, maxOutputBytes: outputBudgetBytes, sampleIntervalMs: 100 } });
     const auditor = await processReceipt(root, 'AUDITOR', process.execPath, auditorArgs.map(value => value.startsWith(repositoryRoot) ? relative(repositoryRoot, value).split('\\').join('/') : value), auditorResult);
     req(auditorResult.outcome === 'PASS' && auditorResult.child.exitCode === 0 && auditorResult.breach === null, 'auditor failed');
     const auditPath = resolve(root, 'audit.json'), audit = JSON.parse(await readFile(auditPath, 'utf8'));
