@@ -5725,3 +5725,13 @@ C1 tool freeze `171e1534303eeb7f4a10a320e15dd8f9ca74a61d`在fresh v0.2再次运�
 但C1 intervention并非无效：v0.2 frame97 SHA `610094ea…`与v0.1 `ce1dbf3c…`不同，直接有标签诊断也显示不同像素状态。失败来自renderer在`bpy.ops.render`返回后重新读取mutable `scene.camera`并要求它仍等于medium；render/context evaluation会恢复或重评该属性，它不是已应用camera的receipt。
 
 C2只授权在render前捕获并断言latest marker、bound camera与assigned `scene.camera`，逐帧report记录这份pre-render application；render后只验证immutable PNG path/header/hash/size，事后camera可描述但不作为predicate。runner/auditor绑定v0.1/v0.2两棵失败树并切fresh v0.3；288帧全量重建，所有科学阈值、预算与HUMAN_PENDING不变。
+
+## J-460 · B62-T2 v0.3技术链完整PASS但288帧像素冻结，C3预注册
+
+Date: 2026-08-29 · Type: FORMAL TECHNICAL PASS / VALID SCIENTIFIC REJECTION / ACTIVE-SCENE RENDER INTERVENTION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 288
+
+C2 tool freeze `f9157de198d2572c840a77c1e992170d81ca0dbd`在fresh v0.3完成全链：BLENDER_RENDER 30.764秒/peak RSS 463,634,432 bytes，INDEPENDENT 13.304秒/283,492,352 bytes，FFmpeg 0.171秒，ffprobe 0.061秒，Node audit 0.319秒。300-file root共77,344,386 bytes/tree `7e89013f9fd5f5fa076a82a80a2fc85193708fc421edbbcdef189c569871ff47`；12/14 gates PASS，receipt self `6912f42c…`。
+
+科学结果按冻结规则为`B62_TERMINAL_288_FRAME_ANIMATIC_OR_CONTINUITY_REJECTED`：每帧finite/dynamic/nonempty、96/96 close geometry和causal state均PASS，但三个shot distinct count全为1、whole为1、两cut pair均相同。FFmpeg对全部288帧独立解码也得到同一raw-frame MD5 `54ec01ea…`，证实不是OIIO误读；MP4只是12秒单帧carrier。
+
+根因是renderer推进了一个非活动isolated Scene，再用`bpy.ops.render.render(scene=name)`；named Scene被渲染，但operator消费的animation/camera/light evaluation仍绑定active context初态。C3不推翻v0.3有效拒绝，只预注册新的renderer intervention：直接用exact loaded T1 production Scene作为active context，在内存设置Eevee/frame/marker/camera，active view-layer update后用无scene override的render operator；全程不save，并前后hash证明source bytes不变。fresh v0.4全量重渲染，阈值与预算不变。

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "bfs.b62TerminalAnimaticContinuityCorrection.v0.1",
+  "correctionId": "B62-T2-E1-C3",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {
+    "baseSpec": "specs/b62-terminal-animatic-continuity.v0.1.json",
+    "c1": "specs/b62-terminal-animatic-continuity-c1-explicit-marker-routing.v0.1.json",
+    "c2": "specs/b62-terminal-animatic-continuity-c2-post-render-camera-state.v0.1.json",
+    "c2Commit": "79bf37fe3771fff8eafd0a060866d9ad84e6a916",
+    "rejectedToolFreezeCommit": "f9157de198d2572c840a77c1e992170d81ca0dbd"
+  },
+  "retainedResult": {
+    "root": "experiments/b62-terminal-animatic-continuity-v0-3",
+    "tree": {"files": 300, "bytes": 77344386, "treeSha256": "7e89013f9fd5f5fa076a82a80a2fc85193708fc421edbbcdef189c569871ff47"},
+    "status": "PASS",
+    "scientificVerdict": "B62_TERMINAL_288_FRAME_ANIMATIC_OR_CONTINUITY_REJECTED",
+    "audit": {"uri": "experiments/b62-terminal-animatic-continuity-v0-3/audit.json", "sha256": "85a4336e948896bb939aa91b9a0c4dbe1e8f6ac667498364f3a01810af0a46ab", "auditHash": "f2f555f35f9e9555c441b93113053dd53bf00b910ae4183a9a3963a5042c9ae6", "passedGates": 12, "totalGates": 14},
+    "receipt": {"uri": "experiments/b62-terminal-animatic-continuity-v0-3/receipt.json", "sha256": "2396676f2012b407e25db66e57022ad45bc261407ed59a943d9a581cf92b13ef", "receiptHash": "6912f42c7310083ae91b91ff2340670e6bccb86f223d432f541c4f50d24722ef"},
+    "renderReport": {"uri": "experiments/b62-terminal-animatic-continuity-v0-3/reports/render-report.json", "sha256": "e8411b3ea3a89483fbb28778cea0409248694866a7e4729da3198619047a45c7", "reportHash": "0c9de29b3904650e7b3fb31b9ea6cce0195675666c1ab252d621ba9354d8f096"},
+    "independentReport": {"uri": "experiments/b62-terminal-animatic-continuity-v0-3/reports/independent-audit.json", "sha256": "4ec548603862014c379f16666f966f33dfe8b31c8f9a6222ff5f727b7a7b901d", "reportHash": "d09c31915d1d395af09713a33c854f47cf311ebcf4b6945628ec0cd4800d286e"},
+    "video": {"uri": "experiments/b62-terminal-animatic-continuity-v0-3/video/B62_TERMINAL_ANIMATIC.mp4", "sha256": "7e8a2060e5d310f2fc62c9ce1150296e2e4583426a3e541cad2ea45934efbfb7", "bytes": 67256},
+    "outcome": {"distinctDecodedDigestsPerShot": [1, 1, 1], "wholeDistinctDecodedDigests": 1, "cutPairsDiffer": [false, false], "allPixelsFiniteDynamicNonempty": true, "all96CloseGeometryPass": true, "causalStatePass": true}
+  },
+  "diagnosis": {
+    "independentCrossCheck": "FFmpeg decoded all 288 PNGs to the same raw-frame MD5 54ec01ea1df4d1a447d83af35a1c2a18; nine representative RGBA raw-frame SHA-256 values were all 6b98542ed82c2cf177caf34601e2ef02764cfc5ad8258a604536f9ff8b723048.",
+    "renderReportState": "The renderer recorded correct pre-render marker/camera applications, but sceneCameraAfterRender was CAM_WIDE_APPROACH for every inspected medium and close frame.",
+    "cause": "The isolated Scene was passed through bpy.ops.render.render(scene=name), but it was not the active Blender context Scene. Its scene.frame_set calls therefore did not drive the evaluated animation/camera/light context consumed by the render operator, yielding a frozen frame while PNG container bytes varied.",
+    "classification": "NON_ACTIVE_SCENE_RENDER_CONTEXT_FREEZES_EVALUATION",
+    "v0_3Decision": "VALID_SCIENTIFIC_REJECTION_OF_THE_ISOLATED_SCENE_RENDERER"
+  },
+  "authorizedChanges": {
+    "retryRoot": "experiments/b62-terminal-animatic-continuity-v0-4",
+    "renderer": "Remove the newly created isolated render Scene. Use the exact loaded T1 production Scene in memory, require it to be bpy.context.scene and the active window Scene when a window exists, apply the frozen Eevee/color/output settings without saving, set frame and update the active view layer, derive and assign exact marker/camera, then call bpy.ops.render.render(write_still=True) without the scene-name override.",
+    "sourceIntegrity": "Hash the source .blend before rendering and again after all renders; require byte identity and record it. The operator may mutate only in-memory Scene render settings, frame and active camera. It may not save the Scene.",
+    "frameReceipt": "Every row additionally records contextScene and contextFrame immediately before render. Node requires exact production Scene name, frame number, marker and camera for all 288 rows.",
+    "runnerAndNodeAuditor": "Bind C3 and immutable v0.1, v0.2 and v0.3 trees, move to fresh v0.4, and retain the original 14 gates and outcome-neutral mapping.",
+    "freshExecution": "Render all 288 frames again from the source. No image, report or video from v0.1-v0.3 may be reused."
+  },
+  "frozenUnchanged": {
+    "sourceSceneSha256": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+    "timelineAndCameras": "All marker names, cut frames, camera identities/transforms and 1-288 timeline unchanged",
+    "renderAndVideo": "288 Eevee calls, 640x360 16 spp RGBA PNG, pinned ACES-v2 color and H.264 delivery unchanged",
+    "scientificAcceptance": "All per-frame pixel, shot distinctness, whole distinctness, cut, 96-frame geometry and causal-state thresholds unchanged",
+    "resources": "Two Blender starts, 128 MiB output/projected write, 2 GiB RSS per Blender, 100 GiB reserve; zero model/network/Docker/Colima",
+    "decision": "Fourteen gates, supported/rejected mapping and HUMAN_PENDING unchanged"
+  },
+  "nonClaims": [
+    "v0.3 remains a valid rejection and is not retroactively invalidated.",
+    "A context-correct retry tests a new renderer implementation against the same frozen scene and thresholds.",
+    "Eevee continuity success would not establish final Cycles film quality."
+  ]
+}
