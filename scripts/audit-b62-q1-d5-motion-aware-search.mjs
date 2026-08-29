@@ -8,10 +8,13 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const SPEC_URI = 'specs/b62-camera-quality-motion-aware-search.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-d5-motion-aware-camera-search-protocol.md';
-const CORRECTION_URI = 'specs/b62-camera-quality-d5-c1-probe-camera-transform-sync.v0.1.json';
-const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-d5-c1-probe-camera-transform-sync.md';
-const ROOT_URI = 'experiments/b62-camera-quality-motion-aware-search-v0-2';
-const RETAINED_ROOT = 'experiments/b62-camera-quality-motion-aware-search-v0-1';
+const C1_URI = 'specs/b62-camera-quality-d5-c1-probe-camera-transform-sync.v0.1.json';
+const C1_PROTOCOL_URI = 'research/2026-08-29-b62-d5-c1-probe-camera-transform-sync.md';
+const C2_URI = 'specs/b62-camera-quality-d5-c2-retire-contaminated-d3-baseline.v0.1.json';
+const C2_PROTOCOL_URI = 'research/2026-08-29-b62-d5-c2-retire-contaminated-d3-baseline.md';
+const ROOT_URI = 'experiments/b62-camera-quality-motion-aware-search-v0-3';
+const V0_1_ROOT = 'experiments/b62-camera-quality-motion-aware-search-v0-1';
+const V0_2_ROOT = 'experiments/b62-camera-quality-motion-aware-search-v0-2';
 const D4_ROOT = 'experiments/b62-camera-quality-holdout-render-v0-5';
 const D3_ROOT = 'experiments/b62-camera-quality-bounded-candidate-search-v0-2';
 const TOOLS = [
@@ -49,26 +52,40 @@ function frameTemplate(row) {
   return visible.has('B62_VISOR') && visible.has('B62_EYE_SLIT') && row.helmetVisualBlockerShare <= 0.70 && row.characterVisualBlockerShare >= 0.20 && row.characterVisualBlockerShare <= 0.90 && row.characterProjection.onScreenVertexFraction >= 0.10 && row.characterProjection.onScreenVertexFraction <= 0.60 && row.characterProjection.clampedUnionAreaFraction >= 0.35 && row.characterProjection.clampedUnionAreaFraction <= 0.90 && row.visibleAnchorCount >= 2;
 }
 function winner(candidates) { const feasible = candidates.filter(row => row.feasible); feasible.sort((a, b) => Math.abs(a.startScale - 2) - Math.abs(b.startScale - 2) || Math.abs(a.endScale - 2) - Math.abs(b.endScale - 2) || a.meanAbsoluteIntegerFrameScaleDeviationFromTwo - b.meanAbsoluteIntegerFrameScaleDeviationFromTwo || a.candidateId.localeCompare(b.candidateId)); return feasible[0]?.candidateId ?? null; }
-function withoutRadialScale(row) { const clone = structuredClone(row); delete clone.radialScale; return clone; }
+function withoutPoseAndScale(row) { const clone = structuredClone(row); delete clone.radialScale; delete clone.evaluatedCameraLocation; delete clone.evaluatedCameraQuaternion; return clone; }
 function d4ComparableFromD5(row) { return { objectCounts: row.objectCounts, groupCounts: row.groupCounts, helmetVisualBlockerShare: row.helmetVisualBlockerShare, characterVisualBlockerShare: row.characterVisualBlockerShare, visibleAnchors: row.visibleAnchors, visibleAnchorCount: row.visibleAnchorCount, characterProjection: row.characterProjection, feasible: row.feasible }; }
 function d4Comparable(row) { return { objectCounts: row.objectCounts, groupCounts: row.groupCounts, helmetVisualBlockerShare: row.helmetVisualBlockerShare, characterVisualBlockerShare: row.characterVisualBlockerShare, visibleAnchors: row.visibleAnchors, visibleAnchorCount: row.visibleAnchorCount, characterProjection: row.characterProjection, feasible: row.feasible }; }
-async function correctionOnly(uri, frozenHash) { const source = await readFile(localPath(uri), 'utf8'); const insertion = '                    bpy.context.view_layer.update()\n'; requireValue(source.split(insertion).length === 2, `correction count ${uri}`); return hashBytes(source.replace(insertion, '')) === frozenHash; }
+async function c2CorrectionOnly(uri, frozenHash, implementation) {
+  let source = await readFile(localPath(uri), 'utf8');
+  if (implementation === 'PRIMARY') {
+    const added = '                    evaluated_matrix = camera.matrix_world.copy()\n                    frames.append({"frame": frame, "radialScale": scale, "evaluatedCameraLocation": [float(value) for value in evaluated_matrix.translation], "evaluatedCameraQuaternion": [float(value) for value in evaluated_matrix.to_quaternion()], **measure';
+    requireValue(source.split(added).length === 2, `C2 primary correction count ${uri}`);
+    source = source.replace(added, '                    frames.append({"frame": frame, "radialScale": scale, **measure');
+  } else {
+    const added = '                    evaluated_transform = probe_camera.matrix_world.copy()\n                    frame_rows.append({"frame": frame, "radialScale": current_scale, "evaluatedCameraLocation": [float(value) for value in evaluated_transform.translation], "evaluatedCameraQuaternion": [float(value) for value in evaluated_transform.to_quaternion()], **observe_candidate_frame';
+    requireValue(source.split(added).length === 2, `C2 independent correction count ${uri}`);
+    source = source.replace(added, '                    frame_rows.append({"frame": frame, "radialScale": current_scale, **observe_candidate_frame');
+  }
+  return hashBytes(source) === frozenHash;
+}
 
 export async function audit(argv) {
   const freeze = parseArgs(argv), root = localPath(ROOT_URI);
-  const spec = await json(SPEC_URI), correction = await json(CORRECTION_URI), admission = await json(`${ROOT_URI}/admission.json`), primary = await json(`${ROOT_URI}/primary.json`), independent = await json(`${ROOT_URI}/independent.json`);
+  const spec = await json(SPEC_URI), c1 = await json(C1_URI), c2 = await json(C2_URI), admission = await json(`${ROOT_URI}/admission.json`), primary = await json(`${ROOT_URI}/primary.json`), independent = await json(`${ROOT_URI}/independent.json`);
   const primaryProcess = await json(`${ROOT_URI}/processes/PRIMARY.json`), independentProcess = await json(`${ROOT_URI}/processes/INDEPENDENT.json`);
-  const d3Primary = await json(`${D3_ROOT}/primary.json`), d4Independent = await json(`${D4_ROOT}/independent.json`);
-  requireValue(spec.experimentId === 'B62-Q1-D5' && spec.statusBeforeToolCreation === 'PREREGISTERED' && spec.output.formalRoot === RETAINED_ROOT, 'spec mismatch');
-  requireValue(correction.correctionId === 'B62-Q1-D5-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.retainedFailure.root === RETAINED_ROOT && correction.authorizedChanges.retryRoot === ROOT_URI, 'correction mismatch');
+  const d3Primary = await json(`${D3_ROOT}/primary.json`), d4Independent = await json(`${D4_ROOT}/independent.json`), d4Build = await json(c2.authoritativeBaseline.d4BuildReport.uri);
+  requireValue(spec.experimentId === 'B62-Q1-D5' && spec.statusBeforeToolCreation === 'PREREGISTERED' && spec.output.formalRoot === V0_1_ROOT, 'spec mismatch');
+  requireValue(c1.correctionId === 'B62-Q1-D5-C1' && c1.statusBeforeToolChange === 'PREREGISTERED' && c1.retainedFailure.root === V0_1_ROOT && c1.authorizedChanges.retryRoot === V0_2_ROOT, 'C1 mismatch');
+  requireValue(c2.correctionId === 'B62-Q1-D5-C2' && c2.statusBeforeToolChange === 'PREREGISTERED' && c2.retainedFailures.v0_1.root === V0_1_ROOT && c2.retainedFailures.v0_2.root === V0_2_ROOT && c2.authorizedChanges.retryRoot === ROOT_URI, 'C2 mismatch');
   requireValue(validSelfHash(admission, 'admissionHash') && admission.status === 'ADMITTED' && admission.toolFreezeCommit === freeze, 'admission mismatch');
   requireValue(admission.bindings.spec.sha256 === await hashFile(localPath(SPEC_URI)) && admission.bindings.protocol.sha256 === await hashFile(localPath(PROTOCOL_URI)), 'protocol binding mismatch');
-  requireValue(admission.bindings.correction.sha256 === await hashFile(localPath(CORRECTION_URI)) && admission.bindings.correctionProtocol.sha256 === await hashFile(localPath(CORRECTION_PROTOCOL_URI)), 'correction binding mismatch');
-  requireValue(canonicalJson(admission.bindings.retainedFailureTree) === canonicalJson(correction.retainedFailure.tree) && admission.bindings.retainedFailureSha256 === correction.retainedFailure.failure.sha256 && admission.bindings.retainedAuditSha256 === correction.retainedFailure.audit.sha256 && admission.bindings.retainedComparisonSha256 === correction.retainedFailure.comparison.sha256, 'retained failure binding mismatch');
-  requireValue(admission.bindings.correctionScopeExact === true && admission.bindings.frozenToolHashes[TOOLS[0]] === correction.frozenBeforeCorrection.primaryBlenderTool.sha256 && admission.bindings.frozenToolHashes[TOOLS[1]] === correction.frozenBeforeCorrection.independentBlenderTool.sha256, 'correction scope binding mismatch');
-  requireValue(await correctionOnly(TOOLS[0], correction.frozenBeforeCorrection.primaryBlenderTool.sha256) && await correctionOnly(TOOLS[1], correction.frozenBeforeCorrection.independentBlenderTool.sha256), 'Blender correction scope exceeded');
+  requireValue(admission.bindings.c1.sha256 === await hashFile(localPath(C1_URI)) && admission.bindings.c1Protocol.sha256 === await hashFile(localPath(C1_PROTOCOL_URI)) && admission.bindings.c2.sha256 === await hashFile(localPath(C2_URI)) && admission.bindings.c2Protocol.sha256 === await hashFile(localPath(C2_PROTOCOL_URI)), 'correction binding mismatch');
+  requireValue(canonicalJson(admission.bindings.retainedV01Tree) === canonicalJson(c2.retainedFailures.v0_1.tree) && canonicalJson(admission.bindings.retainedV02Tree) === canonicalJson(c2.retainedFailures.v0_2.tree) && admission.bindings.retainedV02FailureSha256 === c2.retainedFailures.v0_2.failure.sha256 && admission.bindings.retainedV02AuditSha256 === c2.retainedFailures.v0_2.audit.sha256 && admission.bindings.retainedV02ComparisonSha256 === c2.retainedFailures.v0_2.comparison.sha256, 'retained failure binding mismatch');
+  requireValue(admission.bindings.correctionScopeExact === true && admission.bindings.c2FrozenToolHashes[TOOLS[0]] === c2.frozenBeforeCorrection.primaryBlenderToolSha256 && admission.bindings.c2FrozenToolHashes[TOOLS[1]] === c2.frozenBeforeCorrection.independentBlenderToolSha256, 'C2 scope binding mismatch');
+  requireValue(await c2CorrectionOnly(TOOLS[0], c2.frozenBeforeCorrection.primaryBlenderToolSha256, 'PRIMARY') && await c2CorrectionOnly(TOOLS[1], c2.frozenBeforeCorrection.independentBlenderToolSha256, 'INDEPENDENT'), 'C2 Blender correction scope exceeded');
   requireValue(canonicalJson(admission.bindings.d4Tree) === canonicalJson(spec.parentEvidence.d4Formal.tree) && canonicalJson(admission.bindings.d3Tree) === canonicalJson(spec.parentEvidence.d3Search.tree), 'parent tree binding mismatch');
   requireValue(admission.bindings.d4ReceiptSha256 === spec.parentEvidence.d4Formal.receipt.sha256 && admission.bindings.d4AuditSha256 === spec.parentEvidence.d4Formal.audit.sha256, 'D4 binding mismatch');
+  requireValue(admission.bindings.d4BuildSha256 === c2.authoritativeBaseline.d4BuildReport.sha256 && await hashFile(localPath(c2.authoritativeBaseline.d4BuildReport.uri)) === c2.authoritativeBaseline.d4BuildReport.sha256 && d4Build.reportHash === c2.authoritativeBaseline.d4BuildReport.reportHash, 'D4 build binding mismatch');
   requireValue(admission.bindings.master.sha256 === spec.parentEvidence.masterScene.sha256 && admission.bindings.blenderSha256 === spec.runtime.blender.sha256, 'runtime binding mismatch');
   for (const uri of TOOLS) requireValue(admission.bindings.tools[uri] === await hashFile(localPath(uri)), `tool mismatch ${uri}`);
   requireValue(processPass(primaryProcess, 'PRIMARY', spec) && processPass(independentProcess, 'INDEPENDENT', spec), 'process mismatch');
@@ -111,15 +128,21 @@ export async function audit(argv) {
   }
 
   const baseline = primary.candidates.find(row => row.candidateId === spec.cameraFamily.baselineCandidate);
-  const baselineMismatches = [];
+  const d3ContaminationMismatches = [], d4PoseMismatches = [], d4GeometryMismatches = [];
   const d3Selected = d3Primary.candidates.find(row => row.candidateId === spec.parentEvidence.d3Search.selectedCandidateId);
   for (const retained of d3Selected.frames) {
     const observed = baseline.frames.find(row => row.frame === retained.frame);
-    compare(withoutRadialScale(observed), retained, `D3.frame${retained.frame}`, baselineMismatches);
+    compare(withoutPoseAndScale(observed), retained, `D3.frame${retained.frame}`, d3ContaminationMismatches);
+  }
+  for (const frame of c2.authoritativeBaseline.poseFramesAllowedForD5) {
+    const observed = baseline.frames.find(row => row.frame === frame);
+    const retained = d4Build.bake.find(row => row.frame === frame);
+    compare(observed.evaluatedCameraLocation, retained.correctedLocation, `D4_POSE.frame${frame}.location`, d4PoseMismatches);
+    compare(observed.evaluatedCameraQuaternion, retained.correctedQuaternion, `D4_POSE.frame${frame}.quaternion`, d4PoseMismatches);
   }
   for (const retained of d4Independent.geometry.filter(row => row.condition === 'CORRECTED')) {
     const observed = baseline.frames.find(row => row.frame === retained.frame);
-    compare(d4ComparableFromD5(observed), d4Comparable(retained), `D4.frame${retained.frame}`, baselineMismatches);
+    compare(d4ComparableFromD5(observed), d4Comparable(retained), `D4_GEOMETRY.frame${retained.frame}`, d4GeometryMismatches);
   }
 
   const selected = winner(primary.candidates), feasibleCount = primary.candidates.filter(row => row.feasible).length;
@@ -128,15 +151,15 @@ export async function audit(argv) {
     schemaVersion: 'bfs.b62CameraQualityMotionAwareComparison.v0.1', experimentId: spec.experimentId,
     status: implementationMismatches.length === 0 ? 'PASS' : 'FAIL', toleranceAbsolute: TOLERANCE,
     comparedCandidateCount: primary.candidateCount, comparedCandidateFrameCount: allFrameRows.length,
-    implementationMismatches, baselineReproductionMismatches: baselineMismatches,
+    implementationMismatches, d3ContaminationMismatches, d4PoseMismatches, d4GeometryMismatches,
     pathMismatches, feasibilityMismatches, feasibleCandidateCount: feasibleCount,
     baselineCandidateId: baseline?.candidateId ?? null, baselineFeasible: baseline?.feasible ?? null,
     selectedCandidateId: selected, scientificVerdict,
   }, 'comparisonHash');
 
   const checks = [
-    ['SPEC_CORRECTION_ADMISSION_PARENTS_BOUND', true], ['RETAINED_V0_1_FAILURE_BOUND', true],
-    ['CORRECTION_SCOPE_EXACT_ONE_SYNC_PER_IMPLEMENTATION', true], ['TOOL_FREEZE_HASHES_EXACT', true],
+    ['SPEC_C1_C2_ADMISSION_PARENTS_BOUND', true], ['RETAINED_V0_1_V0_2_FAILURES_BOUND', true],
+    ['C2_SCOPE_EXACT_POSE_FIELDS_ONLY', true], ['TOOL_FREEZE_HASHES_EXACT', true],
     ['TWO_FRESH_BLENDER_PROCESSES_PASS', true], ['BLENDER_5_2_IDENTITY_EXACT', true],
     ['ZERO_RENDER_MODEL_NETWORK_DOCKER_SCENE_SAVE', true], ['DERIVATION_FRAMES_9_EXACT', derivationExact],
     ['SEALED_VALIDATION_ROSTER_8_EXACT', sealedExact], ['NO_SEALED_FRAME_ACCESSED', noSealed],
@@ -145,7 +168,9 @@ export async function audit(argv) {
     ['SMOOTHSTEP_PATH_RECOMPUTED', pathMismatches.length === 0],
     ['GEOMETRY_TEMPLATE_RECOMPUTED', feasibilityMismatches.length === 0],
     ['ATMOSPHERE_VOLUME_ONLY_PASS_THROUGH', atmosphereExact(primary.materialAwareAtmosphere) && atmosphereExact(independent.materialAwareAtmosphere)],
-    ['STATIC_BASELINE_REPRODUCES_D3_D4', baselineMismatches.length === 0],
+    ['D3_CONTAMINATION_RETAINED_EXPLICIT', d3ContaminationMismatches.length === c2.retainedFailures.v0_2.comparison.d3GeometryMismatchCount && d3ContaminationMismatches.every(row => row.path.startsWith('D3.'))],
+    ['STATIC_BASELINE_POSE_REPRODUCES_D4_BAKE_9', d4PoseMismatches.length === 0],
+    ['STATIC_BASELINE_GEOMETRY_REPRODUCES_D4_6', d4GeometryMismatches.length === 0],
     ['STATIC_BASELINE_FAILS', baseline?.feasible === false && primary.baselineFeasible === false],
     ['PRIMARY_INDEPENDENT_AGREE', implementationMismatches.length === 0],
     ['FEASIBLE_COUNT_RECOMPUTED', primary.feasibleCandidateCount === feasibleCount],
@@ -163,12 +188,16 @@ export async function audit(argv) {
     inputs: {
       spec: { uri: SPEC_URI, sha256: await hashFile(localPath(SPEC_URI)) },
       protocol: { uri: PROTOCOL_URI, sha256: await hashFile(localPath(PROTOCOL_URI)) },
-      correction: { uri: CORRECTION_URI, sha256: await hashFile(localPath(CORRECTION_URI)) },
-      correctionProtocol: { uri: CORRECTION_PROTOCOL_URI, sha256: await hashFile(localPath(CORRECTION_PROTOCOL_URI)) },
-      retainedFailure: { uri: correction.retainedFailure.failure.uri, sha256: await hashFile(localPath(correction.retainedFailure.failure.uri)), failureHash: correction.retainedFailure.failure.failureHash },
+      c1: { uri: C1_URI, sha256: await hashFile(localPath(C1_URI)) },
+      c1Protocol: { uri: C1_PROTOCOL_URI, sha256: await hashFile(localPath(C1_PROTOCOL_URI)) },
+      c2: { uri: C2_URI, sha256: await hashFile(localPath(C2_URI)) },
+      c2Protocol: { uri: C2_PROTOCOL_URI, sha256: await hashFile(localPath(C2_PROTOCOL_URI)) },
+      retainedV01Failure: { uri: c1.retainedFailure.failure.uri, sha256: await hashFile(localPath(c1.retainedFailure.failure.uri)), failureHash: c1.retainedFailure.failure.failureHash },
+      retainedV02Failure: { uri: c2.retainedFailures.v0_2.failure.uri, sha256: await hashFile(localPath(c2.retainedFailures.v0_2.failure.uri)), failureHash: c2.retainedFailures.v0_2.failure.failureHash },
       admission: { uri: `${ROOT_URI}/admission.json`, sha256: await hashFile(resolve(root, 'admission.json')), admissionHash: admission.admissionHash },
       d3Primary: { uri: `${D3_ROOT}/primary.json`, sha256: await hashFile(localPath(`${D3_ROOT}/primary.json`)) },
       d4Independent: { uri: `${D4_ROOT}/independent.json`, sha256: await hashFile(localPath(`${D4_ROOT}/independent.json`)) },
+      d4Build: { uri: c2.authoritativeBaseline.d4BuildReport.uri, sha256: await hashFile(localPath(c2.authoritativeBaseline.d4BuildReport.uri)), reportHash: c2.authoritativeBaseline.d4BuildReport.reportHash },
       primary: { uri: `${ROOT_URI}/primary.json`, sha256: await hashFile(resolve(root, 'primary.json')) },
       independent: { uri: `${ROOT_URI}/independent.json`, sha256: await hashFile(resolve(root, 'independent.json')) },
       comparison: { uri: `${ROOT_URI}/comparison.json`, sha256: await hashFile(resolve(root, 'comparison.json')), comparisonHash: comparison.comparisonHash },

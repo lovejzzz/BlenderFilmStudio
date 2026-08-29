@@ -12,15 +12,19 @@ const execFileAsync = promisify(execFile);
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const SPEC_URI = 'specs/b62-camera-quality-motion-aware-search.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-d5-motion-aware-camera-search-protocol.md';
-const CORRECTION_URI = 'specs/b62-camera-quality-d5-c1-probe-camera-transform-sync.v0.1.json';
-const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-d5-c1-probe-camera-transform-sync.md';
-const ROOT_URI = 'experiments/b62-camera-quality-motion-aware-search-v0-2';
-const RETAINED_ROOT = 'experiments/b62-camera-quality-motion-aware-search-v0-1';
+const C1_URI = 'specs/b62-camera-quality-d5-c1-probe-camera-transform-sync.v0.1.json';
+const C1_PROTOCOL_URI = 'research/2026-08-29-b62-d5-c1-probe-camera-transform-sync.md';
+const C2_URI = 'specs/b62-camera-quality-d5-c2-retire-contaminated-d3-baseline.v0.1.json';
+const C2_PROTOCOL_URI = 'research/2026-08-29-b62-d5-c2-retire-contaminated-d3-baseline.md';
+const ROOT_URI = 'experiments/b62-camera-quality-motion-aware-search-v0-3';
+const V0_1_ROOT = 'experiments/b62-camera-quality-motion-aware-search-v0-1';
+const V0_2_ROOT = 'experiments/b62-camera-quality-motion-aware-search-v0-2';
 const D4_ROOT = 'experiments/b62-camera-quality-holdout-render-v0-5';
 const D3_ROOT = 'experiments/b62-camera-quality-bounded-candidate-search-v0-2';
 const PREREGISTRATION_COMMIT = '4011fb8bcb231931d495052ea213fdf044ddc3b1';
-const CORRECTION_COMMIT = 'f341fec5b215d9f66dbfcdacbd963ab1a9340178';
-const FAILED_TOOL_FREEZE_COMMIT = 'db694a5f2971290842b930e98ec8772ef509515a';
+const C1_COMMIT = 'f341fec5b215d9f66dbfcdacbd963ab1a9340178';
+const C2_COMMIT = '3ca15d0af78bc646db1837f7358f5416d245cefb';
+const C1_TOOL_FREEZE_COMMIT = '65e72d7f3c1454b01a7f6d52724c12a8d569f171';
 const TOOLS = [
   'blender/search_b62_q1_d5_motion_aware_camera.py',
   'blender/search_b62_q1_d5_motion_aware_camera_independent.py',
@@ -69,33 +73,36 @@ async function blenderChild(root, id, tool, output, master, masterSha, spec) {
 async function main() {
   const freeze = parseArgs();
   const spec = JSON.parse(await readFile(localPath(SPEC_URI), 'utf8'));
-  const correction = JSON.parse(await readFile(localPath(CORRECTION_URI), 'utf8'));
-  requireValue(spec.experimentId === 'B62-Q1-D5' && spec.statusBeforeToolCreation === 'PREREGISTERED' && spec.output.formalRoot === RETAINED_ROOT, 'spec mismatch');
-  requireValue(correction.correctionId === 'B62-Q1-D5-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.retainedFailure.root === RETAINED_ROOT && correction.authorizedChanges.retryRoot === ROOT_URI, 'correction mismatch');
+  const c1 = JSON.parse(await readFile(localPath(C1_URI), 'utf8'));
+  const c2 = JSON.parse(await readFile(localPath(C2_URI), 'utf8'));
+  requireValue(spec.experimentId === 'B62-Q1-D5' && spec.statusBeforeToolCreation === 'PREREGISTERED' && spec.output.formalRoot === V0_1_ROOT, 'spec mismatch');
+  requireValue(c1.correctionId === 'B62-Q1-D5-C1' && c1.statusBeforeToolChange === 'PREREGISTERED' && c1.retainedFailure.root === V0_1_ROOT && c1.authorizedChanges.retryRoot === V0_2_ROOT, 'C1 mismatch');
+  requireValue(c2.correctionId === 'B62-Q1-D5-C2' && c2.statusBeforeToolChange === 'PREREGISTERED' && c2.retainedFailures.v0_1.root === V0_1_ROOT && c2.retainedFailures.v0_2.root === V0_2_ROOT && c2.authorizedChanges.retryRoot === ROOT_URI, 'C2 mismatch');
   requireValue(!await exists(localPath(ROOT_URI)), 'formal root exists');
   const head = (await git(['rev-parse', 'HEAD'])).trim(), origin = (await git(['rev-parse', 'origin/main'])).trim();
   requireValue(head === freeze && origin === freeze, 'freeze not pushed HEAD');
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
-  await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, freeze]);
+  await git(['merge-base', '--is-ancestor', C1_COMMIT, freeze]);
+  await git(['merge-base', '--is-ancestor', C2_COMMIT, freeze]);
   requireValue(await hashFile(localPath(SPEC_URI)) === await committedHash(PREREGISTRATION_COMMIT, SPEC_URI), 'spec drift');
   requireValue(await hashFile(localPath(PROTOCOL_URI)) === await committedHash(PREREGISTRATION_COMMIT, PROTOCOL_URI), 'protocol drift');
-  requireValue(await hashFile(localPath(CORRECTION_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_URI), 'correction drift');
-  requireValue(await hashFile(localPath(CORRECTION_PROTOCOL_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_PROTOCOL_URI), 'correction protocol drift');
+  requireValue(await hashFile(localPath(C1_URI)) === await committedHash(C1_COMMIT, C1_URI) && await hashFile(localPath(C1_PROTOCOL_URI)) === await committedHash(C1_COMMIT, C1_PROTOCOL_URI), 'C1 drift');
+  requireValue(await hashFile(localPath(C2_URI)) === await committedHash(C2_COMMIT, C2_URI) && await hashFile(localPath(C2_PROTOCOL_URI)) === await committedHash(C2_COMMIT, C2_PROTOCOL_URI), 'C2 drift');
   const toolHashes = {};
   for (const uri of TOOLS) { toolHashes[uri] = await hashFile(localPath(uri)); requireValue(toolHashes[uri] === await committedHash(freeze, uri), `tool drift ${uri}`); }
-  requireValue(correction.frozenBeforeCorrection.toolFreezeCommit === FAILED_TOOL_FREEZE_COMMIT, 'failed tool freeze mismatch');
-  requireValue(await committedHash(FAILED_TOOL_FREEZE_COMMIT, TOOLS[0]) === correction.frozenBeforeCorrection.primaryBlenderTool.sha256 && await committedHash(FAILED_TOOL_FREEZE_COMMIT, TOOLS[1]) === correction.frozenBeforeCorrection.independentBlenderTool.sha256, 'frozen Blender tool mismatch');
-  const oldPrimary = (await committedBytes(FAILED_TOOL_FREEZE_COMMIT, TOOLS[0])).toString('utf8');
-  const oldIndependent = (await committedBytes(FAILED_TOOL_FREEZE_COMMIT, TOOLS[1])).toString('utf8');
-  const expectedPrimary = oldPrimary.replace('                    configure(camera, baseline, scale)\n                    frames.append', '                    configure(camera, baseline, scale)\n                    bpy.context.view_layer.update()\n                    frames.append');
-  const expectedIndependent = oldIndependent.replace('                    set_candidate(probe_camera, evaluated_location, current_scale)\n                    frame_rows.append', '                    set_candidate(probe_camera, evaluated_location, current_scale)\n                    bpy.context.view_layer.update()\n                    frame_rows.append');
-  requireValue(expectedPrimary !== oldPrimary && expectedIndependent !== oldIndependent, 'correction insertion anchor missing');
-  requireValue((await readFile(localPath(TOOLS[0]), 'utf8')) === expectedPrimary && (await readFile(localPath(TOOLS[1]), 'utf8')) === expectedIndependent, 'Blender correction scope exceeded');
-  requireValue((await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, RETAINED_ROOT, D4_ROOT, D3_ROOT, ...TOOLS])).trim() === '', 'scoped dirty');
+  requireValue(c2.frozenBeforeCorrection.toolFreezeCommit === C1_TOOL_FREEZE_COMMIT, 'C2 tool freeze mismatch');
+  requireValue(await committedHash(C1_TOOL_FREEZE_COMMIT, TOOLS[0]) === c2.frozenBeforeCorrection.primaryBlenderToolSha256 && await committedHash(C1_TOOL_FREEZE_COMMIT, TOOLS[1]) === c2.frozenBeforeCorrection.independentBlenderToolSha256, 'C2 frozen Blender tools mismatch');
+  const oldPrimary = (await committedBytes(C1_TOOL_FREEZE_COMMIT, TOOLS[0])).toString('utf8');
+  const oldIndependent = (await committedBytes(C1_TOOL_FREEZE_COMMIT, TOOLS[1])).toString('utf8');
+  const expectedPrimary = oldPrimary.replace('                    bpy.context.view_layer.update()\n                    frames.append({"frame": frame, "radialScale": scale, **measure', '                    bpy.context.view_layer.update()\n                    evaluated_matrix = camera.matrix_world.copy()\n                    frames.append({"frame": frame, "radialScale": scale, "evaluatedCameraLocation": [float(value) for value in evaluated_matrix.translation], "evaluatedCameraQuaternion": [float(value) for value in evaluated_matrix.to_quaternion()], **measure');
+  const expectedIndependent = oldIndependent.replace('                    bpy.context.view_layer.update()\n                    frame_rows.append({"frame": frame, "radialScale": current_scale, **observe_candidate_frame', '                    bpy.context.view_layer.update()\n                    evaluated_transform = probe_camera.matrix_world.copy()\n                    frame_rows.append({"frame": frame, "radialScale": current_scale, "evaluatedCameraLocation": [float(value) for value in evaluated_transform.translation], "evaluatedCameraQuaternion": [float(value) for value in evaluated_transform.to_quaternion()], **observe_candidate_frame');
+  requireValue(expectedPrimary !== oldPrimary && expectedIndependent !== oldIndependent, 'C2 insertion anchor missing');
+  requireValue((await readFile(localPath(TOOLS[0]), 'utf8')) === expectedPrimary && (await readFile(localPath(TOOLS[1]), 'utf8')) === expectedIndependent, 'C2 Blender correction scope exceeded');
+  requireValue((await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, C1_URI, C1_PROTOCOL_URI, C2_URI, C2_PROTOCOL_URI, V0_1_ROOT, V0_2_ROOT, D4_ROOT, D3_ROOT, ...TOOLS])).trim() === '', 'scoped dirty');
 
-  const retainedTree = await treeIdentity(RETAINED_ROOT);
-  requireValue(canonicalJson(retainedTree) === canonicalJson(correction.retainedFailure.tree), 'retained D5 tree drift');
-  requireValue(await hashFile(localPath(correction.retainedFailure.failure.uri)) === correction.retainedFailure.failure.sha256 && await hashFile(localPath(correction.retainedFailure.audit.uri)) === correction.retainedFailure.audit.sha256 && await hashFile(localPath(correction.retainedFailure.comparison.uri)) === correction.retainedFailure.comparison.sha256, 'retained D5 evidence drift');
+  const retainedV01Tree = await treeIdentity(V0_1_ROOT), retainedV02Tree = await treeIdentity(V0_2_ROOT);
+  requireValue(canonicalJson(retainedV01Tree) === canonicalJson(c2.retainedFailures.v0_1.tree) && canonicalJson(retainedV02Tree) === canonicalJson(c2.retainedFailures.v0_2.tree), 'retained D5 tree drift');
+  requireValue(await hashFile(localPath(c2.retainedFailures.v0_2.failure.uri)) === c2.retainedFailures.v0_2.failure.sha256 && await hashFile(localPath(c2.retainedFailures.v0_2.audit.uri)) === c2.retainedFailures.v0_2.audit.sha256 && await hashFile(localPath(c2.retainedFailures.v0_2.comparison.uri)) === c2.retainedFailures.v0_2.comparison.sha256, 'retained D5 v0.2 evidence drift');
 
   const d4Tree = await treeIdentity(D4_ROOT);
   requireValue(canonicalJson(d4Tree) === canonicalJson(spec.parentEvidence.d4Formal.tree), 'D4 tree drift');
@@ -105,6 +112,9 @@ async function main() {
   const d4Receipt = JSON.parse(await readFile(d4ReceiptPath, 'utf8'));
   const d4Audit = JSON.parse(await readFile(d4AuditPath, 'utf8'));
   requireValue(d4Receipt.receiptHash === spec.parentEvidence.d4Formal.receipt.receiptHash && d4Audit.auditHash === spec.parentEvidence.d4Formal.audit.auditHash && d4Audit.scientificVerdict === spec.parentEvidence.d4Formal.audit.scientificVerdict, 'D4 evidence invalid');
+  const d4BuildPath = localPath(c2.authoritativeBaseline.d4BuildReport.uri);
+  const d4Build = JSON.parse(await readFile(d4BuildPath, 'utf8'));
+  requireValue(await hashFile(d4BuildPath) === c2.authoritativeBaseline.d4BuildReport.sha256 && d4Build.reportHash === c2.authoritativeBaseline.d4BuildReport.reportHash && d4Build.candidateId === c2.authoritativeBaseline.d4BuildReport.candidateId && d4Build.bake.length === c2.authoritativeBaseline.d4BuildReport.bakeFrameCount, 'D4 build baseline drift');
   const d3Tree = await treeIdentity(D3_ROOT);
   requireValue(canonicalJson(d3Tree) === canonicalJson(spec.parentEvidence.d3Search.tree), 'D3 tree drift');
   const d3Primary = JSON.parse(await readFile(localPath(`${D3_ROOT}/primary.json`), 'utf8'));
@@ -119,21 +129,25 @@ async function main() {
   await mkdir(resolve(root, 'processes'), { recursive: true, mode: 0o700 });
   const admission = await writeHashed(resolve(root, 'admission.json'), {
     schemaVersion: 'bfs.b62CameraQualityMotionAwareAdmission.v0.1', experimentId: spec.experimentId, status: 'ADMITTED',
-    preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, toolFreezeCommit: freeze,
+    preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommits: [C1_COMMIT, C2_COMMIT], toolFreezeCommit: freeze,
     bindings: {
       spec: { uri: SPEC_URI, sha256: await hashFile(localPath(SPEC_URI)) },
       protocol: { uri: PROTOCOL_URI, sha256: await hashFile(localPath(PROTOCOL_URI)) },
-      correction: { uri: CORRECTION_URI, sha256: await hashFile(localPath(CORRECTION_URI)) },
-      correctionProtocol: { uri: CORRECTION_PROTOCOL_URI, sha256: await hashFile(localPath(CORRECTION_PROTOCOL_URI)) },
-      retainedFailureTree: retainedTree, retainedFailureSha256: await hashFile(localPath(correction.retainedFailure.failure.uri)),
-      retainedAuditSha256: await hashFile(localPath(correction.retainedFailure.audit.uri)), retainedComparisonSha256: await hashFile(localPath(correction.retainedFailure.comparison.uri)),
-      correctionScopeExact: true, frozenToolHashes: {
-        [TOOLS[0]]: correction.frozenBeforeCorrection.primaryBlenderTool.sha256,
-        [TOOLS[1]]: correction.frozenBeforeCorrection.independentBlenderTool.sha256,
-        [TOOLS[2]]: correction.frozenBeforeCorrection.runner.sha256,
-        [TOOLS[3]]: correction.frozenBeforeCorrection.auditor.sha256,
+      c1: { uri: C1_URI, sha256: await hashFile(localPath(C1_URI)) },
+      c1Protocol: { uri: C1_PROTOCOL_URI, sha256: await hashFile(localPath(C1_PROTOCOL_URI)) },
+      c2: { uri: C2_URI, sha256: await hashFile(localPath(C2_URI)) },
+      c2Protocol: { uri: C2_PROTOCOL_URI, sha256: await hashFile(localPath(C2_PROTOCOL_URI)) },
+      retainedV01Tree, retainedV02Tree,
+      retainedV02FailureSha256: await hashFile(localPath(c2.retainedFailures.v0_2.failure.uri)),
+      retainedV02AuditSha256: await hashFile(localPath(c2.retainedFailures.v0_2.audit.uri)),
+      retainedV02ComparisonSha256: await hashFile(localPath(c2.retainedFailures.v0_2.comparison.uri)),
+      correctionScopeExact: true, c2FrozenToolHashes: {
+        [TOOLS[0]]: c2.frozenBeforeCorrection.primaryBlenderToolSha256,
+        [TOOLS[1]]: c2.frozenBeforeCorrection.independentBlenderToolSha256,
+        [TOOLS[2]]: c2.frozenBeforeCorrection.runnerSha256,
+        [TOOLS[3]]: c2.frozenBeforeCorrection.auditorSha256,
       },
-      d4Tree, d4ReceiptSha256: await hashFile(d4ReceiptPath), d4AuditSha256: await hashFile(d4AuditPath),
+      d4Tree, d4ReceiptSha256: await hashFile(d4ReceiptPath), d4AuditSha256: await hashFile(d4AuditPath), d4BuildSha256: await hashFile(d4BuildPath),
       d3Tree, d3PrimarySha256: await hashFile(localPath(`${D3_ROOT}/primary.json`)),
       master: { uri: spec.parentEvidence.masterScene.uri, sha256: masterSha },
       blenderSha256: await hashFile(spec.runtime.blender.executable), tools: toolHashes,
