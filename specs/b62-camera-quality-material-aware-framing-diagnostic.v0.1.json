@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMaterialAwareFramingDiagnostic.v0.1",
+  "experimentId": "B62-Q1-D2",
+  "title": "Material-aware Blender 5.2 localization of the B62 close-shot framing failure",
+  "date": "2026-08-29",
+  "question": "After volume-only geometry is traversed instead of treated as an opaque surface, does CLOSE_REFLECTION have a reproducible extreme-helmet-framing signature that is absent from both readable controls?",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "derivationDisclosure": {
+    "sourceExperiment": {
+      "root": "experiments/b62-camera-quality-geometric-diagnostic-v0-2",
+      "tree": {"files": 9, "bytes": 1535498, "treeSha256": "d0c80437a478669d81d1f3afef6e0d7a60ff2bdcf9d13762218719622bd6db3b"},
+      "receipt": {"uri": "experiments/b62-camera-quality-geometric-diagnostic-v0-2/receipt.json", "sha256": "bec3a277086c0ce5a7dc9745fa9b5a8dfb6a66c3d3f4134abaf870d689c36eb4", "receiptHash": "2a5dc2aa5157cb16c0a303329fd7da8b5b68273ba9406ad8e841c947fba76f80"},
+      "technicalStatus": "PASS",
+      "scientificVerdict": "B62_CLOSE_FAILURE_GEOMETRIC_NEAR_OCCLUSION_NOT_LOCALIZED"
+    },
+    "observationsUsedToDeriveThisDiagnostic": {
+      "WIDE_APPROACH": {"ordinaryRaycastDominant": "B62_ATMOSPHERE", "dominantShare": 1.0, "nearFieldShare": 0.99609375, "characterOnScreenVertexFraction": 1.0, "characterClampedUnionAreaFraction": 0.14287563252360158},
+      "MEDIUM_CONTACT": {"ordinaryRaycastDominant": "B62_TORSO", "dominantShare": 0.2191840277777778, "nearFieldShare": 0.0, "characterOnScreenVertexFraction": 0.6564885496183206, "characterClampedUnionAreaFraction": 0.7560867369174957},
+      "CLOSE_REFLECTION": {"ordinaryRaycastDominant": "B62_HELMET", "dominantShare": 1.0, "nearFieldShare": 0.0, "characterOnScreenVertexFraction": 0.07548770144189991, "characterClampedUnionAreaFraction": 1.0}
+    },
+    "knownConfound": "B62_ATMOSPHERE is a closed mesh whose sole material has a linked Volume socket and no linked Surface socket. Blender scene.ray_cast reports its geometric boundary even though it is not an opaque visual surface.",
+    "status": "OPEN_DERIVATION_DIAGNOSTIC_NOT_HOLDOUT"
+  },
+  "parentEvidence": {
+    "masterScene": {"uri": "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend", "sha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"},
+    "calibrationPngs": [
+      {"shot": "WIDE_APPROACH", "frame": 48, "uri": "experiments/b62-phase0-v0-4/calibration/WIDE_APPROACH-0048.png", "sha256": "629efa799227c1969872675672404bd845d71458ed8da750685a643e5ec5a3d7", "disclosedHumanLabel": "READABLE_CONTROL"},
+      {"shot": "MEDIUM_CONTACT", "frame": 144, "uri": "experiments/b62-phase0-v0-4/calibration/MEDIUM_CONTACT-0144.png", "sha256": "5849f2994b324b4bfe9dfc0b32b6ddd55eba8cb3de8ac96b845ddb0f11372265", "disclosedHumanLabel": "READABLE_CONTROL"},
+      {"shot": "CLOSE_REFLECTION", "frame": 240, "uri": "experiments/b62-phase0-v0-4/calibration/CLOSE_REFLECTION-0240.png", "sha256": "98cb85862eb9c7fd619ff6b3fcb2a8b2b2eb7f8a0978c90ecb9c3616c0e1b439", "disclosedHumanLabel": "REJECTED_DERIVATION_CASE"}
+    ]
+  },
+  "runtime": {
+    "blender": {"executable": "/Applications/Blender.app/Contents/MacOS/Blender", "version": "Blender 5.2.0 LTS", "buildHash": "fbe6228777e7", "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"},
+    "launch": ["--background", "--factory-startup", "--disable-autoexec", "<master.blend>", "--python", "<frozen tool>"],
+    "forbidden": ["bpy.ops.render", "image or video generation", "scene save", "source .blend mutation", "model calls", "network access", "Docker or Colima"]
+  },
+  "design": {
+    "shots": [
+      {"id": "WIDE_APPROACH", "frame": 48, "camera": "CAM_WIDE_APPROACH", "role": "READABLE_CONTROL"},
+      {"id": "MEDIUM_CONTACT", "frame": 144, "camera": "CAM_MEDIUM_CONTACT", "role": "READABLE_CONTROL"},
+      {"id": "CLOSE_REFLECTION", "frame": 240, "camera": "CAM_CLOSE_REFLECTION", "role": "REJECTED_DERIVATION_CASE"}
+    ],
+    "screenRayGrid": {"width": 64, "height": 36, "sample": "PIXEL_CENTER", "rayMaximumMeters": 1000.0},
+    "materialAwareTraversal": {
+      "passThroughDefinition": "An object is VOLUME_ONLY_PASS_THROUGH only when every non-empty material slot uses nodes, has a Material Output node with linked Volume input, and has no Material Output node with linked Surface input. All other hit objects are VISUAL_BLOCKER.",
+      "advanceEpsilonMeters": 0.00001,
+      "maximumIntersectionsPerRay": 64,
+      "failureOnExhaustion": true,
+      "requiredDisclosedObject": {"object": "B62_ATMOSPHERE", "classification": "VOLUME_ONLY_PASS_THROUGH", "material": "MAT_B62_VOLUME", "surfaceLinked": false, "volumeLinked": true}
+    },
+    "semanticAnchors": ["B62_VISOR", "B62_EYE_SLIT", "B62_CHEST_LIGHT", "B62_HAND_R", "B62_CORE"],
+    "characterObjects": ["B62_CHEST_LIGHT", "B62_CHEST_PLATE", "B62_EYE_SLIT", "B62_FOOT_L", "B62_FOOT_R", "B62_FOREARM_L", "B62_FOREARM_R", "B62_HAND_L", "B62_HAND_R", "B62_HELMET", "B62_NECK", "B62_PELVIS", "B62_SHIN_L", "B62_SHIN_R", "B62_SHOULDER_L", "B62_SHOULDER_R", "B62_THIGH_L", "B62_THIGH_R", "B62_TORSO", "B62_UPPER_ARM_L", "B62_UPPER_ARM_R", "B62_VISOR"],
+    "measurements": [
+      "exact material-slot and Material Output Surface/Volume linkage roster for every ray-hit owner",
+      "per-grid-ray skipped pass-through intersections and first visual-blocker owner/group/distance",
+      "dominant visual-blocker owner/share and character visual-blocker share",
+      "center-ray pass-through chain and first visual blocker",
+      "material-aware exact-target visibility for each semantic anchor",
+      "character evaluated-vertex unclamped projection bounds, on-screen vertex fraction and clamped union area"
+    ],
+    "primaryAndIndependentImplementations": "Two fresh Blender processes use separate Python files and may not import each other. They must agree on exact integer rosters, names and classifications; floating measurements use absolute tolerance 1e-9.",
+    "diagnosticSignature": {
+      "closeRequired": {
+        "dominantVisualBlockerObject": "B62_HELMET",
+        "dominantVisualBlockerShareMinimum": 0.95,
+        "characterVisualBlockerShareMinimum": 0.95,
+        "characterOnScreenVertexFractionMaximum": 0.10,
+        "characterClampedUnionAreaFractionMinimum": 0.95,
+        "semanticAnchorExactVisibilityMaximum": 1,
+        "semanticAnchorCount": 5
+      },
+      "controlsRequired": "Neither readable control may satisfy every close-required condition.",
+      "scope": "The thresholds are openly derived from D1 and localize this one known failed frame. They are not a general composition score, a production threshold, or holdout evidence."
+    }
+  },
+  "processBudget": {
+    "runnerProcesses": 1,
+    "freshBlenderProcesses": 2,
+    "nodeAuditorProcesses": 1,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "maximumWallSecondsPerBlender": 120,
+    "maximumPeakResidentSetSizeBytesPerBlender": 2147483648,
+    "maximumCombinedLogBytesPerChild": 1048576,
+    "projectedWriteBytes": 67108864,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "toolFreeze": {
+    "requiredNewTools": ["blender/probe_b62_q1_material_aware_framing.py", "blender/audit_b62_q1_material_aware_framing.py", "scripts/run-b62-q1-material-aware-framing.mjs", "scripts/audit-b62-q1-material-aware-framing.mjs"],
+    "sequence": [
+      "Commit and push D1 v0.2 evidence, this exact spec and its protocol while all four new tools and the formal root are absent.",
+      "Implement and statically validate two independent Blender observers plus runner and Node auditor.",
+      "Commit and push exact tool bytes; require synchronized origin/main and clean scoped paths.",
+      "Create one fresh immutable root, write admission before child launch and retain every failure.",
+      "Run the independent Node auditor only after both Blender children pass."
+    ]
+  },
+  "output": {
+    "formalRoot": "experiments/b62-camera-quality-material-aware-framing-v0-1",
+    "requiredFiles": ["admission.json", "processes/PRIMARY.json", "processes/INDEPENDENT.json", "primary.json", "independent.json", "comparison.json", "audit.json", "receipt.json"],
+    "immutableFailurePolicy": "Any failure preserves the root. Repair requires a preregistered correction and a fresh root."
+  },
+  "decision": {
+    "supportedVerdict": "B62_CLOSE_FAILURE_MATERIAL_AWARE_EXTREME_HELMET_FRAMING_LOCALIZED",
+    "supportedWhen": "All bindings and budgets pass, both Blender implementations agree, B62_ATMOSPHERE is proven volume-only pass-through, CLOSE satisfies the complete signature, and neither readable control does.",
+    "rejectedVerdict": "B62_CLOSE_FAILURE_MATERIAL_AWARE_EXTREME_HELMET_FRAMING_NOT_LOCALIZED",
+    "invalidated": "Any input/tool/runtime/process/resource/output mismatch, traversal exhaustion, render call, mutation or auditor failure yields scientificVerdict null."
+  },
+  "nonClaims": [
+    "This experiment does not correct a camera or authorize camera changes.",
+    "Volume-only traversal is a diagnostic visibility rule, not a physically based volume integrator.",
+    "The openly derived thresholds cannot serve as an independent holdout or a general cinematic-quality gate.",
+    "No claim is made about motion, temporal occlusion, complete-sequence quality, photorealism or human preference."
+  ]
+}

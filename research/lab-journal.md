@@ -5467,3 +5467,13 @@ D1 tool freeze `76fd3b3…`推送后，PRIMARY与INDEPENDENT Blender均在约0.7
 根因是spec冻结CLI字符串`Blender 5.2.0 LTS`，而两份bpy observation按API真实返回`5.2.0 LTS`；build hash均为正确的`fbe6228777e7`。v0.1永久保留7 files/1,527,639 bytes/tree `bbd77737…`，failure file/self `758e2187…/38e36cdd…`。
 
 C1在Node工具修改前只允许auditor比较`Blender ${bpyVersion}`并继续exact检查build hash，同时允许runner绑定v0.1 retained tree后使用fresh v0.2 root。两份Blender工具bytes、ray grid、frames/cameras、anchors、0.5 m、0.90/0.90/1-of-5 signature、process/resource budgets与zero-render边界全部不变；v0.1几何字段不得复制到retry，也未用于改阈值。
+
+## J-433 · B62-Q1-D1科学否定与D2材质感知构图诊断预注册
+
+Date: 2026-08-29 · Type: DIAGNOSTIC TECHNICAL PASS / SCIENTIFIC REJECTION / NEXT DIAGNOSTIC PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+D1 C1 retry以tool freeze `9e17cd798732098c089aabe083b037c076f2c705`运行。PRIMARY与INDEPENDENT分别约0.584/0.558秒、peak sampled RSS 256,032,768/254,951,424 bytes，独立Node auditor约0.063秒；两实现exact同意，12/12 technical checks PASS，zero render/model/network/Docker。v0.2 immutable root为9 files/1,535,498 bytes/tree `d0c80437a478669d81d1f3afef6e0d7a60ff2bdcf9d13762218719622bd6db3b`，receipt file/self为`bec3a277…/2a5dc2aa…`。
+
+科学结论按预注册原样REJECTED：`CLOSE_REFLECTION`的near-field share为0，不满足0.5 m阈值；`WIDE_APPROACH`反而满足complete signature。原因不是控制帧视觉失败，而是普通`scene.ray_cast`把只有Volume连接、没有Surface连接的`B62_ATMOSPHERE`闭合网格边界当成opaque first hit。因此不得改0.5 m或删除WIDE反例，verdict保留为`B62_CLOSE_FAILURE_GEOMETRIC_NEAR_OCCLUSION_NOT_LOCALIZED`。
+
+D1同时暴露另一条待检信号：CLOSE 2,304/2,304 rays均first-hit `B62_HELMET`，角色on-screen vertex fraction仅0.07549，unclamped bounds大幅越界而clamped union area为1.0；WIDE/MEDIUM分别为1.0/0.65649 on-screen。D2在任何新工具创建前冻结material-aware traversal：仅跳过每个material slot都Volume-linked且Surface-unlinked的owner，10 μm推进、最多64 intersections；two independent Blender重新测三帧。CLOSE必须同时满足helmet dominant≥0.95、character blocker≥0.95、on-screen vertices≤0.10、clamped area≥0.95、anchors≤1/5，且两controls不满足全条件。阈值明确由D1导出，只能定位该失败，不能宣称通用电影构图或holdout通过。

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityGeometricAudit.v0.1",
+  "experimentId": "B62-Q1-D1",
+  "status": "PASS",
+  "scientificVerdict": "B62_CLOSE_FAILURE_GEOMETRIC_NEAR_OCCLUSION_NOT_LOCALIZED",
+  "toolFreezeCommit": "9e17cd798732098c089aabe083b037c076f2c705",
+  "inputs": {
+    "spec": {
+      "uri": "specs/b62-camera-quality-geometric-diagnostic.v0.1.json",
+      "sha256": "3d7d9fb80dd0e574d72acc8d0ce410e873c4aeef89b4f3fccec5d69ab3099f81"
+    },
+    "protocol": {
+      "uri": "research/2026-08-29-b62-camera-quality-geometric-diagnostic-protocol.md",
+      "sha256": "53fc2fd27a38e4c35cf2089914350834b29047d7153245439459596f92896c20"
+    },
+    "correction": {
+      "uri": "specs/b62-camera-quality-c1-version-normalization.v0.1.json",
+      "sha256": "5f91377cf4ce16426d7bc6cbe245af653011cf95c9e0611e41e19d7fe1e8cf39"
+    },
+    "primary": {
+      "uri": "experiments/b62-camera-quality-geometric-diagnostic-v0-2/primary.json",
+      "sha256": "0610d683244985df47f92c4ae88fdf3c9f7abe449633e2dce0c854c9baa06166"
+    },
+    "independent": {
+      "uri": "experiments/b62-camera-quality-geometric-diagnostic-v0-2/independent.json",
+      "sha256": "44e6d77e5a58a43bde8e9cf73c1ff79e3559192033c824a5a4d867d1782d90b1"
+    },
+    "comparison": {
+      "uri": "experiments/b62-camera-quality-geometric-diagnostic-v0-2/comparison.json",
+      "sha256": "e91c98bbbaa972e1028584700d77b75dc1de43ebcdf3610cc18137c5fef82378",
+      "comparisonHash": "e15eacfe9584bb119dcdf635be6730fd67f26e708630451440d7ced85f1b2a6f"
+    }
+  },
+  "checks": [
+    {
+      "id": "SPEC_AND_ADMISSION_BOUND",
+      "pass": true
+    },
+    {
+      "id": "PARENT_RECEIPT_AND_MASTER_BOUND",
+      "pass": true
+    },
+    {
+      "id": "CALIBRATION_PNGS_BOUND",
+      "pass": true
+    },
+    {
+      "id": "TOOL_FREEZE_HASHES_EXACT",
+      "pass": true
+    },
+    {
+      "id": "TWO_FRESH_BLENDER_PROCESSES_PASS",
+      "pass": true
+    },
+    {
+      "id": "BLENDER_IDENTITY_EXACT",
+      "pass": true
+    },
+    {
+      "id": "ZERO_RENDER_MODEL_NETWORK_DOCKER",
+      "pass": true
+    },
+    {
+      "id": "THREE_SHOT_ROSTER_EXACT",
+      "pass": true
+    },
+    {
+      "id": "GRID_64_BY_36_EXACT",
+      "pass": true
+    },
+    {
+      "id": "SEMANTIC_ANCHOR_ROSTER_EXACT",
+      "pass": true
+    },
+    {
+      "id": "PRIMARY_INDEPENDENT_AGREE",
+      "pass": true
+    },
+    {
+      "id": "OUTCOME_NEUTRAL_VERDICT_MAPPED",
+      "pass": true
+    }
+  ],
+  "signatures": [
+    {
+      "shot": "WIDE_APPROACH",
+      "frame": 48,
+      "conditions": {
+        "dominantFirstHitObjectShare": true,
+        "nearFieldFirstHitShare": true,
+        "semanticAnchorExactVisibility": true
+      },
+      "complete": true
+    },
+    {
+      "shot": "MEDIUM_CONTACT",
+      "frame": 144,
+      "conditions": {
+        "dominantFirstHitObjectShare": false,
+        "nearFieldFirstHitShare": false,
+        "semanticAnchorExactVisibility": true
+      },
+      "complete": false
+    },
+    {
+      "shot": "CLOSE_REFLECTION",
+      "frame": 240,
+      "conditions": {
+        "dominantFirstHitObjectShare": true,
+        "nearFieldFirstHitShare": false,
+        "semanticAnchorExactVisibility": true
+      },
+      "complete": false
+    }
+  ],
+  "nonClaims": [
+    "This diagnostic does not repair any camera.",
+    "This diagnostic does not define cinematic composition or general shot quality.",
+    "This diagnostic does not authorize the full 288-frame Cycles sequence.",
+    "The later correction must freeze its own thresholds and use temporal holdout frames not consulted during camera adjustment.",
+    "Prior human labels are disclosed derivation labels, not blinded review evidence."
+  ],
+  "auditHash": "027620b08252a79dc4a30c470c7c9702faf6ac09bc0cc344e9f81a2268ab665e"
+}
