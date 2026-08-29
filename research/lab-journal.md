@@ -4673,3 +4673,13 @@ C1只把首次触发从`bootstrap + RunAtLoad + kickstart`修正为`bootstrap + 
 正式动作只有1 plist create和1 bootstrap；RunAtLoad在05:51:48Z写出`HEALTHY` sample，available 320,036,970,496 bytes、browser temp 20,480 bytes/24 entries、Colima VM/data allocated 1,552,670,720 / 7,346,622,464 bytes。Kickstart/deletion/cleanup/service restart/Docker/Blender/network/model均为0。Installed plist与repo template byte-exact；launchd label保持loaded、runs=1、last exit=0、run interval=900 seconds。Periodic one-shot在样本间`not running`是预期状态，不要求常驻进程。
 
 Independent audit通过10/10 gates、15/15 attacks，final `ACTIVE_CAPACITY_SENTINEL_ADMITTED`。Install/audit SHA为 `b1ec4be0c7a4097648ef1104a3156d146cb35552c28b53116d22d2f23d9b4e94` / `3e971023a840497d29647f29bf9eff3d3e885e2890665f6f07642c00890b3532`。容量预警机制现在已主动运行，但Gate 0仍等待它积累无人值守样本并审计cadence与趋势；B58继续暂停。
+
+## J-350 · R6首次自然周期证明LaunchAgent无人干预续跑
+
+Date: 2026-08-29 · Type: UNATTENDED RETENTION INTERIM OBSERVATION · New Blender processes: 0 · New Blender renders: 0
+
+R6 runner与independent auditor已在commit `3abfc873feaf687ee2b0c94a0132dace7a587191`实现并推送；两者self-test分别通过5-sample/3,600-second aggregate与15 registered attacks。正式root `experiments/host-capacity-retention-v0-1`保持不存在，观察期间没有使用`kickstart`、restart或任何手动采样。
+
+LaunchAgent在首样本后自然等待900秒，于06:06:48.444Z写出第二个self-hashed `HEALTHY` sample。相邻间隔为900,223 ms；launchd runs从1精确增为2，last exit仍为0、run interval仍为900秒。Available从320,036,970,496降至319,973,339,136 bytes，900秒正向loss为63,631,360 bytes，折算约0.237 GiB/hour，低于冻结的1 GiB/hour ceiling；browser temp保持20,480 bytes、zero growth；Colima combined allocated仅增加262,144 bytes；全部prohibited-action counters继续为0。
+
+R6 preflight正确返回`WAIT_UNATTENDED_RETENTION`、sampleCount 2、span 900,223 ms、formalRootAbsent true，不因两个健康点提前创建证据或宣布长期稳定。下一动作保持LaunchAgent自然运行，至少积累5个样本与3,600秒first-to-last span后，冻结完整历史并运行12-gate/15-attack独立审计。
