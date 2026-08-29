@@ -5271,3 +5271,11 @@ B58 C7、B60、B61 receipt file/self-hash重新核验exact为`f6112e89…/eef5db
 B62-P0-E1冻结12秒/288帧三镜头资产与look admission：one generator Blender生成原创机械守夜人、观测站、控制台核心、三段动作与master blend；one Eevee process输出288帧640×360 animatic；three fresh Cycles processes以固定64 spp/1080p渲染frames 48/144/240；one independent Blender zero-render reopen audit。上限6 Blender starts/291 renders/one ffmpeg/one Node auditor/2 GiB projected writes/100 GiB reserve，zero model/network/Docker。
 
 机器判决要求18/18 gates、16/16 mutation controls，特别检查完整rig/material/asset identity、三镜头frame/lens、frame144右手接触≤2 cm、核心cold→warm因果顺序、close镜warm状态不重置、288帧/24fps/12秒视频、三份multilayer EXR、独立重开与资源收据。即使PASS也只得到`B62_PHASE0_ASSET_ANIMATIC_AND_CALIBRATION_ADMITTED`；不授权288帧正式Cycles，不宣布电影感或真人质量。下一动作提交推送预注册，随后才允许实现六个工具。
+
+## J-412 · B62 Phase 0 C1 ffprobe进程记账更正
+
+Date: 2026-08-29
+
+实现独立auditor时发现父协议明确要求ffprobe验证animatic为24 fps/288 frames/12秒，但父process budget只列one ffmpeg encoder与one Node auditor，漏记只读metadata probe。此时六个工具尚未tool-freeze，preflight/attempt/formal roots仍absent，也没有启动B62 Blender或产生正式输出。
+
+C1在执行前显式增加且只增加one ffprobe zero-output read-only process；six Blender starts、291 renders、one ffmpeg encoding、one Node auditor、2 GiB writes、100 GiB reserve、18 gates/16 attacks以及zero model/network/Docker均不变。preflight、runner与auditor必须同时绑定父合同和C1，不得把探针隐藏在Node进程统计中。

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C1",
+  "date": "2026-08-29",
+  "statusBeforeExecution": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "preregistrationCommit": "de57b63",
+    "contractUri": "specs/b62-phase0-asset-animatic-calibration.v0.1.json",
+    "contractSha256": "22cc057e0142704e4242a184b3c610a719d800b3649b2b0274b9323690995ac6",
+    "protocolUri": "research/2026-08-29-b62-phase0-asset-animatic-calibration-protocol.md",
+    "protocolSha256": "2ad60ff82d5a9624133e84bc64639da5ce4cc0c5e94e4f9ff5826f80ba0bc360"
+  },
+  "discovery": {
+    "phase": "TOOL_IMPLEMENTATION_BEFORE_TOOL_FREEZE_AND_BEFORE_ANY_OUTPUT_ROOT",
+    "issue": "The parent protocol requires ffprobe metadata for the animatic, but the parent process budget names only the encoding ffmpeg process and the Node auditor.",
+    "rootCause": "The metadata probe was specified as an acceptance observation but omitted from the explicit external-process accounting table."
+  },
+  "correction": {
+    "ffmpegEncodingProcesses": 1,
+    "ffprobeMetadataProcesses": 1,
+    "nodeAuditorProcesses": 1,
+    "ffprobeMode": "READ_ONLY_ZERO_OUTPUT_MEDIA_METADATA",
+    "ffprobeRequiredObservations": {
+      "videoStreams": 1,
+      "averageFrameRate": "24/1",
+      "decodedFrameCount": 288,
+      "durationSeconds": 12
+    },
+    "totalBlenderStartsUnchanged": 6,
+    "totalRenderCallsUnchanged": 291,
+    "projectedWriteBytesUnchanged": 2147483648,
+    "modelCallsUnchanged": 0,
+    "networkCallsUnchanged": 0,
+    "dockerProcessesUnchanged": 0
+  },
+  "authorizedRootsUnchanged": {
+    "preflight": "experiments/b62-phase0-preflight-v0-1",
+    "attempt": "experiments/b62-phase0-attempt-v0-1",
+    "formal": "experiments/b62-phase0-v0-1"
+  },
+  "claimBoundary": "This correction repairs process accounting only. It does not change assets, frames, render settings, thresholds, verdicts, or authorize the formal 288-frame Cycles render."
+}
