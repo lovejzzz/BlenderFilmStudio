@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "bfs.b62TerminalScenePackageCorrection.v0.1",
+  "correctionId": "B62-T1-E1-C2",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "title": "Compare Blender RNA float32 camera optics with an explicit bounded tolerance",
+  "parentCorrection": {
+    "uri": "specs/b62-terminal-scene-package-c1-assembled-master-identity.v0.1.json",
+    "commit": "c3f69dbe0c896b61574d483b33ba3a7609e15e5e"
+  },
+  "retainedFailure": {
+    "root": "experiments/b62-terminal-scene-package-v0-2",
+    "tree": {
+      "files": 9,
+      "bytes": 651534,
+      "treeSha256": "3ed5e9d04406786e829af6fb686cae87fbd80ad84d0ef76bd10feab99bbcc6ea"
+    },
+    "admission": {
+      "uri": "experiments/b62-terminal-scene-package-v0-2/admission.json",
+      "sha256": "866d93c09f49b0aab8f762e8dc4c93a4e827d708b83927b9f2b102e217f0d4d8",
+      "admissionHash": "52f48695692ba11bec4b72f95ffe47bed2fe02943ab346e603f740a65b84c72b"
+    },
+    "buildPlan": {
+      "uri": "experiments/b62-terminal-scene-package-v0-2/build-plan.json",
+      "sha256": "15a54d323f127b7614f59471d2ebddf023946159dfb8fa668bd3297e2987b8b9",
+      "planHash": "35a3afe830ea6e0148610873e7ffbcff887a8f32bdd514989abac87ecb7637eb"
+    },
+    "compileReport": {
+      "uri": "experiments/b62-terminal-scene-package-v0-2/reports/compile-report.json",
+      "sha256": "61ded199914a310cc19aa477dded2f84b68e92453fbfc70cbb61812c1e9ecc78",
+      "reportHash": "364f0f58e0c5a0762ec82a9816315a9dcc726f7b2d8d648b556aac6b8ca9e7a8",
+      "status": "PASS"
+    },
+    "derivedScene": {
+      "uri": "experiments/b62-terminal-scene-package-v0-2/scene/B62_TERMINAL_PRODUCTION.blend",
+      "sha256": "313c471e4f188f70f525216981a29d245117462b4619d0f4fd1bc4d48d2a12d6"
+    },
+    "failure": {
+      "uri": "experiments/b62-terminal-scene-package-v0-2/failure.json",
+      "sha256": "ea48ef6627fd5d652f27e7814e8a7453cb6a04f0fc6f837bb8c7b79a2cb8f179",
+      "failureHash": "88e1b076e574fe742814ff6dba16ef0fbf0daf7db2b86b96be6bdce7eac7ccd1",
+      "status": "INVALIDATED",
+      "scientificVerdict": null,
+      "reason": "BLENDER_INDEPENDENT failed"
+    },
+    "processes": {
+      "buildPlanA": {"uri": "experiments/b62-terminal-scene-package-v0-2/processes/BUILDPLAN_A.json", "sha256": "d228dbfe1984002cc2ff28dde289797f3df50660d665cdb5cc71f1fe5a06daaf"},
+      "buildPlanB": {"uri": "experiments/b62-terminal-scene-package-v0-2/processes/BUILDPLAN_B.json", "sha256": "b80e220487a2147c29ab4aa7091dc426d1e85df81a89bdbc8b950cddc794ed1d"},
+      "blenderCompile": {"uri": "experiments/b62-terminal-scene-package-v0-2/processes/BLENDER_COMPILE.json", "sha256": "44e905287740bb961689d704350f7055141a1c6bafc856c0e4da1c2fe4c02938", "outcome": "PASS", "renderCalls": 0},
+      "blenderIndependent": {"uri": "experiments/b62-terminal-scene-package-v0-2/processes/BLENDER_INDEPENDENT.json", "sha256": "62283c633dcef57a0baef1e94029b4a6ac7f530a28137657af34a386324d3143", "outcome": "CHILD_FAILED", "exitCode": 1, "elapsedMs": 495, "peakSampledRssBytes": 227491840, "renderCalls": 0}
+    }
+  },
+  "diagnosis": {
+    "failedPredicate": "The independent auditor required exact JavaScript/Python decimal equality for Blender camera data lens, clip_start and clip_end.",
+    "plannedOptics": {"lensMillimeters": 65.0, "clipStart": 0.05, "clipEnd": 200.0},
+    "compiledBlenderObservation": {"lensMillimeters": 65.0, "clipStart": 0.05000000074505806, "clipEnd": 200.0},
+    "absoluteClipStartDifference": 7.450580569168253e-10,
+    "cause": "Camera.clip_start is stored through Blender RNA as float32; 0.05 is not exactly representable. The compiler report recorded the post-assignment Blender value before save, and the fresh reopen reproduced it.",
+    "evidenceBoundary": "No pixel, render or scientific camera result was observed. The failure concerns only scalar representation at independent reopen."
+  },
+  "authorizedChanges": {
+    "retryRoot": "experiments/b62-terminal-scene-package-v0-3",
+    "opticalScalarToleranceAbsolute": 0.000001,
+    "independentAuditor": [
+      "Compare lens, clip_start and clip_end to BuildPlan values with maximum absolute error 1e-6.",
+      "Also require each reopened optical scalar to match the compile report's post-assignment Blender observation within 1e-9.",
+      "Record all three observed values and errors in the independent report."
+    ],
+    "runner": [
+      "Bind C2 and exact retained v0.2 evidence before admission.",
+      "Use only the fresh v0.3 root."
+    ],
+    "nodeAuditor": [
+      "Require the independent optical rows and both frozen tolerances while preserving every original gate and attack."
+    ]
+  },
+  "frozenUnchanged": {
+    "buildPlanCompilerSha256": "41312dffa2422579d00efc071332592901036a4e495f9cf11ccb305abfc831e5",
+    "blenderCompilerSha256": "b827cb685021d18f3e05cce212fc9d3a66abea170e53201361a0cc33f7179e33",
+    "inputScenePackageSpecSha256": "3b82d7c84074442bbfa37793e0632c1dad194ea12fcdac7ecd4cfd6954387a7e",
+    "sourceMasterSha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66",
+    "assembledManifestHashes": {
+      "CHAR_B62_GUARDIAN": "d03a680766dbd454d2913ae74d66f3cdd2a6fd93fb423de2601049dcb3eba416",
+      "PROP_B62_CONSOLE_CORE": "31a11b94cbcf0fafb61d301e9ff3dd5ad97d6b7a2424d4cc21c3403921a07b7e",
+      "SET_B62_OBSERVATORY": "758f53592659e76f020feabeb1a5694d36e68000e0ce9c5bb0011aa6d93c3ba1"
+    },
+    "cameraPoseTolerance": 0.000001,
+    "cameraSamples": 96,
+    "acceptanceGates": 20,
+    "mutationAttacks": 12,
+    "blenderProcesses": 2,
+    "renderCalls": 0,
+    "maximumOutputBytes": 67108864,
+    "minimumFreeReserveBytes": 107374182400,
+    "supportedVerdict": "B62_TERMINAL_SCENESPEC_BUILDPLAN_AND_SCENE_COMPILATION_SUPPORTED"
+  },
+  "invalidated": "The v0.2 run remains permanently invalidated. Any optical error above the frozen bounds or any other original failure yields scientificVerdict null."
+}

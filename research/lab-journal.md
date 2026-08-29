@@ -5677,3 +5677,13 @@ T1工具以commit `ee6452e797442a3f0dbc9db2dc3e4463e8907a9c`冻结推送。两�
 随后两个交互式只读Blender诊断均0 save/0 render；第一因factory-startup未含repo Python path而只产生import failure，第二成功。三个master manifest分别为guardian `d03a6807…`、prop `31a11b94…`、set `758f5359…`，均与library hash不同；guardian明确多出master-only `HAND_R_SOCKET COPY_LOCATION` contact constraint，三个collection还反映装配后的material/animation state。master文件仍exact匹配`b177f8ba…`，因此是身份层级混淆，不是资产漂移。
 
 C1在任何工具修改前冻结双层身份：Phase 0 library hashes继续证明来源，exact master SHA与三个assembled manifest hashes证明生产装配输入；编译前后仍必须完整manifest、existing actions、contact/core/light、timeline、render/color逐项不变。只授权compiler/independent/runner/Node auditor落实该解释并使用fresh v0.2；BuildPlan compiler bytes、96 samples、20 gates、12 attacks、预算与verdict全部不变。
+
+## J-455 · B62-T1 v0.2 Blender RNA float精度拒绝与C2预注册
+
+Date: 2026-08-29 · Type: RETAINED INDEPENDENT-REOPEN FAILURE / FLOAT REPRESENTATION CORRECTION PREREGISTRATION · New formal Blender processes: 2 · New formal Blender renders: 0
+
+C1 tool freeze `51c6af101d1623d1e747bff5f402a9f5976d86ad`在fresh v0.2通过dual BuildPlan与real Blender compile。compile约0.655秒、peak RSS 262,275,072 bytes，成功写出337,418-byte derived scene `313c471e…`及PASS report `364f0f58…`；source master与全部assembled preservation gate通过。independent Blender约0.495秒、peak RSS 227,491,840 bytes，在optical scalar gate退出，尚未完成pose/Node audit；0 render/model/network/Docker。
+
+精确差异仅为BuildPlan `clipStart=0.05`经Blender RNA float32存储后变成`0.05000000074505806`，绝对误差约7.45e-10；lens 65与clipEnd 200 exact。compiler post-assignment已经记录同一float32值，fresh reopen复现。v0.2永久保留9 files/651,534 bytes/tree `3ed5e9d04406786e829af6fb686cae87fbd80ad84d0ef76bd10feab99bbcc6ea`；failure file/self `ea48ef66…/88e1b076…`，scientific verdict为null。
+
+C2在工具修改前只授权independent optics对BuildPlan使用absolute 1e-6，并同时对compile report observed value使用1e-9；三项observed/error必须写入report。runner/auditor绑定v0.2并切fresh v0.3。BuildPlan compiler与Blender compiler bytes、camera数值、96 pose samples与1e-6 pose tolerance、20 gates、12 attacks、预算和verdict全部不变。
