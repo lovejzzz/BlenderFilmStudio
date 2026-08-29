@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareSearchCorrection.v0.3",
+  "correctionId": "B62-Q1-D5-C3",
+  "date": "2026-08-29",
+  "statusBeforeNodeToolChange": "PREREGISTERED",
+  "scope": "Correct one manually transcribed hexadecimal character in the C2 retained-v0.2 comparison file hash. C2 remains immutable.",
+  "preAdmissionRejection": {
+    "formalRoot": "experiments/b62-camera-quality-motion-aware-search-v0-3",
+    "formalRootCreated": false,
+    "blenderStarts": 0,
+    "renderCalls": 0,
+    "error": "retained D5 v0.2 evidence drift"
+  },
+  "incorrectC2Value": {
+    "jsonPointer": "/retainedFailures/v0_2/comparison/sha256",
+    "value": "38a725b4371e6b1c54f80c9875bd9fb4a176d10aea5a65585d77f119d87628ef"
+  },
+  "correctValue": {
+    "uri": "experiments/b62-camera-quality-motion-aware-search-v0-2/comparison.json",
+    "sha256": "38a725b4371e6b1c54f80c9875bd9fb4a176d10aea5a65585d77d119d87628ef",
+    "derivation": "SHA-256 of the retained comparison.json bytes already included in the C2-frozen v0.2 tree; the only difference from the C2 transcription is character 53, d rather than f."
+  },
+  "bindings": {
+    "c2Uri": "specs/b62-camera-quality-d5-c2-retire-contaminated-d3-baseline.v0.1.json",
+    "c2Commit": "3ca15d0af78bc646db1837f7358f5416d245cefb",
+    "retainedV02TreeSha256": "48069dc4799bf980a548d208174af4177dbe049c116bdc72d92742bc23ef147b",
+    "retainedV02ComparisonSelfHash": "d5216c214601e15ce73e5830891395681e6dd2c7a868a3ed7e75df6816e18b84"
+  },
+  "authorizedChanges": {
+    "runner": "Bind C3 and use C3.correctValue.sha256 when validating and admitting the retained v0.2 comparison file.",
+    "auditor": "Bind C3 and require both the actual retained comparison bytes and admission binding to equal C3.correctValue.sha256.",
+    "retryRoot": "experiments/b62-camera-quality-motion-aware-search-v0-3"
+  },
+  "unchanged": [
+    "All C1 and C2 Blender changes",
+    "Both retained D5 trees and every retained byte",
+    "The D4 authoritative pose-plus-geometry baseline",
+    "All candidates, frames, thresholds, selection, verdicts and budgets",
+    "The sealed validation boundary and zero-render/model/network/Docker boundary"
+  ]
+}

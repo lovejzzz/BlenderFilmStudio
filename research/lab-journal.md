@@ -5589,3 +5589,11 @@ C1 tool freeze `65e72d7f3c1454b01a7f6d52724c12a8d569f171`上，两份Blender实�
 这次baseline mismatch精确局限到D3 frames 216/240/264共30项；D4 frames 193/204/228/252/276/288的全部corrected geometry字段为0 mismatch。结论是C1同步修正有效，而D3两份旧search tool共享了同一stale probe-camera matrix缺陷；D3当年的互相同意不能再证明candidate geometry或唯一性。v0.2永久保留9 files/631,419 bytes/tree `48069dc4799bf980a548d208174af4177dbe049c116bdc72d92742bc23ef147b`；failure file/self `a82996e8…/753109fc…`，audit file/self `b2413205…/95814db8…`。
 
 C2在任何新修改前退休D3 geometry作为acceptance truth，但不删除历史。fresh v0.3的constant baseline必须在九个已曝光derivation frames用post-sync pose复现D4 frozen 96-frame bake，并在六个D4 frames继续复现independent corrected geometry；D3只保留显式contamination finding。两份Blender工具仅可向既有frame row增加evaluated location/quaternion；14候选、sealed 8帧、全部路径/geometry阈值、selection、1e-9和zero-render预算不变。此修正不恢复D3“唯一候选”主张，D5只研究D4已实际证明过的相机族。
+
+## J-446 · B62-Q1-D5 v0.3准入前哈希转录拒绝与C3预注册
+
+Date: 2026-08-29 · Type: PRE-ADMISSION REJECTION / METADATA TYPO CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+C2工具实现完成静态检查并冻结推送后，首次v0.3调用在创建formal root与启动Blender之前被`retained D5 v0.2 evidence drift`拒绝。核查表明retained bytes、tree和Git状态均未漂移；C2人工记录`comparison.json` SHA-256时，第53个hex字符把实际`d`转录成`f`。实际file hash为`38a725b4371e6b1c54f80c9875bd9fb4a176d10aea5a65585d77d119d87628ef`，C2错误值为`...65585d77f119...`。
+
+C3在Node工具修改前只授权runner/auditor绑定这项one-character metadata correction；C2和全部retained evidence保持immutable。v0.3目录仍不存在，本次0 Blender/0 render/0 model/network/Docker，因此同一fresh root可在C3工具冻结后使用。候选、frame、pose/geometry baseline、阈值、selection与sealed边界完全不变。
