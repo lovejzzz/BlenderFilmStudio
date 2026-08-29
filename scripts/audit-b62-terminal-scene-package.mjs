@@ -10,12 +10,17 @@ import { promisify } from 'node:util';
 const execFileAsync = promisify(execFile);
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const PREREGISTRATION_COMMIT = '1043af5d7b0767e87d851ea882d859bcacb61bf0';
+const CORRECTION_COMMIT = 'c3f69dbe0c896b61574d483b33ba3a7609e15e5e';
 const EXPERIMENT_URI = 'specs/b62-terminal-scene-package-compiler.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-terminal-scene-package-compiler-protocol.md';
 const SCENE_SPEC_URI = 'specs/b62-terminal-proof.scene-package.v0.1.json';
+const CORRECTION_URI = 'specs/b62-terminal-scene-package-c1-assembled-master-identity.v0.1.json';
+const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-t1-c1-assembled-master-identity.md';
 const OCIO_URI = 'color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio';
 const OCIO_SHA256 = '24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15';
-const EXPECTED_ROOT = 'experiments/b62-terminal-scene-package-v0-1';
+const RETAINED_ROOT = 'experiments/b62-terminal-scene-package-v0-1';
+const EXPECTED_ROOT = 'experiments/b62-terminal-scene-package-v0-2';
+const ASSEMBLED_MANIFEST_HASHES = { CHAR_B62_GUARDIAN: 'd03a680766dbd454d2913ae74d66f3cdd2a6fd93fb423de2601049dcb3eba416', PROP_B62_CONSOLE_CORE: '31a11b94cbcf0fafb61d301e9ff3dd5ad97d6b7a2424d4cc21c3403921a07b7e', SET_B62_OBSERVATORY: '758f53592659e76f020feabeb1a5694d36e68000e0ce9c5bb0011aa6d93c3ba1' };
 const TOOLS = ['scripts/compile-b62-terminal-build-plan.mjs', 'blender/compile_b62_terminal_scene.py', 'blender/audit_b62_terminal_scene.py', 'scripts/run-b62-terminal-scene-package.mjs', 'scripts/audit-b62-terminal-scene-package.mjs'];
 
 function req(condition, message) { if (!condition) throw new Error(message); }
@@ -46,6 +51,11 @@ async function collectRoot(root) {
   await walk(root);
   rows.sort((a, b) => a.uri.localeCompare(b.uri));
   return { files: rows, symlinks, fileCount: rows.length, bytes: rows.reduce((sum, row) => sum + row.bytes, 0), treeSha256: hashBytes(Buffer.from(rows.map(row => `${row.uri}\0${row.sha256}\n`).join(''))) };
+}
+
+async function treeIdentity(uri) {
+  const snapshot = await collectRoot(pathFor(uri));
+  return { files: snapshot.fileCount, bytes: snapshot.bytes, treeSha256: snapshot.treeSha256 };
 }
 
 async function readBound(binding, field, mode, semantic) {
@@ -117,13 +127,21 @@ function runAttacks(base, ids) {
 async function main() {
   const args = parse(), freeze = args['tool-freeze-commit'];
   const experiment = JSON.parse(await readFile(await checkedExistingPath(EXPERIMENT_URI), 'utf8'));
+  const correction = JSON.parse(await readFile(await checkedExistingPath(CORRECTION_URI), 'utf8'));
   const sceneSpec = JSON.parse(await readFile(await checkedExistingPath(SCENE_SPEC_URI), 'utf8'));
-  req(experiment.experimentId === 'B62-T1-E1' && experiment.output.formalRoot === EXPECTED_ROOT, 'experiment mismatch');
+  req(experiment.experimentId === 'B62-T1-E1' && experiment.output.formalRoot === RETAINED_ROOT, 'experiment mismatch');
+  req(correction.correctionId === 'B62-T1-E1-C1' && correction.authorizedChanges.retryRoot === EXPECTED_ROOT, 'correction mismatch');
   const head = (await git(['rev-parse', 'HEAD'])).trim(), origin = (await git(['rev-parse', 'origin/main'])).trim();
   const preregExact = (await Promise.all([EXPERIMENT_URI, PROTOCOL_URI, SCENE_SPEC_URI].map(async uri => await hashFile(pathFor(uri)) === await committedHash(PREREGISTRATION_COMMIT, uri)))).every(Boolean);
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, freeze]);
+  const correctionExact = (await Promise.all([CORRECTION_URI, CORRECTION_PROTOCOL_URI].map(async uri => await hashFile(pathFor(uri)) === await committedHash(CORRECTION_COMMIT, uri)))).every(Boolean);
   const toolHashes = {};
   for (const uri of TOOLS) { toolHashes[uri] = await hashFile(await checkedExistingPath(uri)); req(toolHashes[uri] === await committedHash(freeze, uri), `tool drift ${uri}`); }
+  req(toolHashes[TOOLS[0]] === correction.frozenUnchanged.buildPlanCompilerSha256, 'BuildPlan compiler changed under C1');
+  const retainedTree = await treeIdentity(RETAINED_ROOT);
+  req(canonicalJson(retainedTree) === canonicalJson(correction.retainedFailure.tree), 'retained v0.1 tree drift');
+  for (const binding of [correction.retainedFailure.admission, correction.retainedFailure.buildPlan, correction.retainedFailure.failure, ...Object.values(correction.retainedFailure.processes)]) req(await hashFile(await checkedExistingPath(binding.uri)) === binding.sha256, `retained evidence drift ${binding.uri}`);
   const phase0Generation = await readBound(experiment.parentEvidence.phase0.generation, 'reportHash', 'legacy', value => req(value.status === 'PASS', 'Phase 0 generation invalid'));
   const phase0Audit = await readBound(experiment.parentEvidence.phase0.audit, 'auditHash', 'legacy', value => req(value.status === 'PASS', 'Phase 0 audit invalid'));
   const phase0Receipt = await readBound(experiment.parentEvidence.phase0.receipt, 'receiptHash', 'legacy', value => req(value.status === 'PASS', 'Phase 0 receipt invalid'));
@@ -148,12 +166,13 @@ async function main() {
   const before = compile.stateBefore, after = compile.stateAfter;
   const idDeltaExact = after.rosters.objects.join('\0') === [...before.rosters.objects, plan.camera.objectName].sort().join('\0') && after.rosters.cameras.join('\0') === [...before.rosters.cameras, plan.camera.dataName].sort().join('\0') && independent.terminalAction.name === plan.camera.actionName && independent.terminalAction.slots.flatMap(slot => slot.curves).length === 7;
   const markerRoutingExact = canonicalJson(after.markers) === canonicalJson(plan.timeline.cuts.map(row => ({ name: row.marker, frame: row.frame, camera: row.camera }))) && after.markers[0].camera === before.markers[0].camera && after.markers[1].camera === before.markers[1].camera && before.markers[2].camera === 'CAM_CLOSE_REFLECTION';
-  const preservationExact = canonicalJson(before.assets) === canonicalJson(after.assets) && canonicalJson(before.actions) === canonicalJson(after.actions) && canonicalJson(before.states) === canonicalJson(after.states);
+  const assembledIdentitiesExact = Object.entries(ASSEMBLED_MANIFEST_HASHES).every(([name, hash]) => before.assets[name]?.identityHash === hash && after.assets[name]?.identityHash === hash);
+  const preservationExact = assembledIdentitiesExact && canonicalJson(before.assets) === canonicalJson(after.assets) && canonicalJson(before.actions) === canonicalJson(after.actions) && canonicalJson(before.states) === canonicalJson(after.states);
   const attacks = runAttacks(mutationFixture({ sceneSpec, experiment, d6Build, toolHashes }), experiment.mutationAttacks);
   const filesystem = await statfs(repositoryRoot), availableNow = Number(filesystem.bavail) * Number(filesystem.bsize);
   const pathsSafe = [EXPERIMENT_URI, PROTOCOL_URI, SCENE_SPEC_URI, OCIO_URI, EXPECTED_ROOT, ...Object.values(experiment.parentEvidence.phase0).map(value => value.uri), ...Object.values(experiment.parentEvidence.d6).map(value => value.uri), ...TOOLS].every(uri => { try { pathFor(uri); return true; } catch { return false; } });
   const gates = [
-    ['G01_PREREGISTRATION_COMMIT_PUSHED_BEFORE_TOOL_CREATION_OR_FORMAL_ROOT', head === freeze && origin === freeze && Boolean(preregExact)],
+    ['G01_PREREGISTRATION_COMMIT_PUSHED_BEFORE_TOOL_CREATION_OR_FORMAL_ROOT', head === freeze && origin === freeze && Boolean(preregExact) && correctionExact && admission.correctionCommit === CORRECTION_COMMIT],
     ['G02_INPUT_SCENE_PACKAGE_SPEC_EXACT_AND_SCHEMA_SUPPORTED', await hashFile(pathFor(SCENE_SPEC_URI)) === experiment.inputSceneSpec.sha256 && sceneSpec.schemaVersion === experiment.inputSceneSpec.schemaVersion],
     ['G03_PHASE0_PARENT_FILES_AND_SELF_HASHES_EXACT_PASS', phase0Generation.status === 'PASS' && phase0Audit.status === 'PASS' && phase0Receipt.status === 'PASS' && masterExact],
     ['G04_D6_PARENT_FILES_SELF_HASHES_MACHINE_VERDICT_AND_HUMAN_SCOPE_EXACT_PASS', d6Build.status === 'PASS' && d6Audit.scientificVerdict === experiment.parentEvidence.d6.audit.scientificVerdict && d6Receipt.scientificVerdict === d6Audit.scientificVerdict && d6Human.scope === experiment.parentEvidence.d6.humanReview.scope],
@@ -178,8 +197,8 @@ async function main() {
   const pass = gates.every(row => row.pass) && attacks.every(row => row.rejectedBeforeNativeSpawn);
   const audit = await writeHashed(resolve(root, experiment.output.audit), {
     schemaVersion: 'bfs.b62TerminalScenePackageAudit.v0.1', experimentId: 'B62-T1-E1', status: pass ? 'PASS' : 'FAIL', scientificVerdict: pass ? experiment.decision.supportedVerdict : null,
-    preregistrationCommit: PREREGISTRATION_COMMIT, toolFreezeCommit: freeze, gates, attacks,
-    bindings: { admission: { sha256: await hashFile(resolve(root, 'admission.json')), admissionHash: admission.admissionHash }, buildPlan: { sha256: await hashFile(resolve(root, 'build-plan.json')), planHash: plan.planHash }, compile: { sha256: await hashFile(resolve(root, 'reports/compile-report.json')), reportHash: compile.reportHash }, independent: { sha256: await hashFile(resolve(root, 'reports/independent-audit.json')), reportHash: independent.reportHash }, sourceMaster: { sha256: await hashFile(masterPath) }, derived: { sha256: await hashFile(resolve(root, 'scene/B62_TERMINAL_PRODUCTION.blend')) } },
+    preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, toolFreezeCommit: freeze, gates, attacks,
+    bindings: { retainedFailureTree: retainedTree, admission: { sha256: await hashFile(resolve(root, 'admission.json')), admissionHash: admission.admissionHash }, buildPlan: { sha256: await hashFile(resolve(root, 'build-plan.json')), planHash: plan.planHash }, compile: { sha256: await hashFile(resolve(root, 'reports/compile-report.json')), reportHash: compile.reportHash }, independent: { sha256: await hashFile(resolve(root, 'reports/independent-audit.json')), reportHash: independent.reportHash }, sourceMaster: { sha256: await hashFile(masterPath) }, derived: { sha256: await hashFile(resolve(root, 'scene/B62_TERMINAL_PRODUCTION.blend')) } },
     processChecks, rootBeforeAudit: rootSnapshot, resources: { availableBytesAtAudit: availableNow, maximumOutputBytes: experiment.processBudget.maximumOutputBytes, minimumFreeReserveBytes: experiment.processBudget.minimumFreeReserveBytes },
     operations: { nodeAuditorProcesses: 1, priorBuildPlanCompilerProcesses: 2, priorBlenderStarts: 2, totalRenderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 }, nonClaims: experiment.nonClaims,
   }, 'auditHash');

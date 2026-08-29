@@ -20,6 +20,11 @@ EXPERIMENT_ID = "B62-T1-E1"
 PLAN_SCHEMA = "bfs.b62TerminalScenePackageBuildPlan.v0.1"
 SOURCE_MASTER_NAME = "B62_PHASE0_MASTER.blend"
 ASSET_COLLECTIONS = ["CHAR_B62_GUARDIAN", "PROP_B62_CONSOLE_CORE", "SET_B62_OBSERVATORY"]
+ASSEMBLED_MANIFEST_HASHES = {
+    "CHAR_B62_GUARDIAN": "d03a680766dbd454d2913ae74d66f3cdd2a6fd93fb423de2601049dcb3eba416",
+    "PROP_B62_CONSOLE_CORE": "31a11b94cbcf0fafb61d301e9ff3dd5ad97d6b7a2424d4cc21c3403921a07b7e",
+    "SET_B62_OBSERVATORY": "758f53592659e76f020feabeb1a5694d36e68000e0ce9c5bb0011aa6d93c3ba1",
+}
 STATE_FRAMES = [138, 143, 144, 150, 288]
 
 
@@ -297,8 +302,9 @@ def main() -> None:
         {"name": "SHOT_CLOSE_REFLECTION", "frame": 193, "camera": "CAM_CLOSE_REFLECTION"},
     ], "source markers mismatch")
     require(before["render"] == expected_render_contract(plan), f"source render contract mismatch {before['render']}")
-    for name, expected_hash in plan["preservation"]["assetIdentityHashes"].items():
-        require(before["assets"][name]["identityHash"] == expected_hash, f"asset identity mismatch {name}")
+    require(set(plan["preservation"]["assetIdentityHashes"]) == set(ASSEMBLED_MANIFEST_HASHES), "asset provenance roster mismatch")
+    for name, expected_hash in ASSEMBLED_MANIFEST_HASHES.items():
+        require(before["assets"][name]["identityHash"] == expected_hash, f"assembled master identity mismatch {name}")
     require(before["texts"] == [] and before["externalLibraries"] == [], "source contains text or linked libraries")
 
     source = bpy.data.objects.get(camera_contract["sourceCamera"])

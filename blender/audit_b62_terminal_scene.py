@@ -19,6 +19,11 @@ from bpy_extras import anim_utils
 EXPERIMENT_ID = "B62-T1-E1"
 PLAN_SCHEMA = "bfs.b62TerminalScenePackageBuildPlan.v0.1"
 ASSET_COLLECTIONS = ["CHAR_B62_GUARDIAN", "PROP_B62_CONSOLE_CORE", "SET_B62_OBSERVATORY"]
+ASSEMBLED_MANIFEST_HASHES = {
+    "CHAR_B62_GUARDIAN": "d03a680766dbd454d2913ae74d66f3cdd2a6fd93fb423de2601049dcb3eba416",
+    "PROP_B62_CONSOLE_CORE": "31a11b94cbcf0fafb61d301e9ff3dd5ad97d6b7a2424d4cc21c3403921a07b7e",
+    "SET_B62_OBSERVATORY": "758f53592659e76f020feabeb1a5694d36e68000e0ce9c5bb0011aa6d93c3ba1",
+}
 STATE_FRAMES = [138, 143, 144, 150, 288]
 
 
@@ -294,8 +299,9 @@ def main() -> None:
     expected_render = plan["preservation"]["renderContract"]
     expected_render_reduced = {**expected_render, "colorManagement": {key: expected_render["colorManagement"][key] for key in ["display", "view", "look", "exposure", "gamma"]}}
     require(observed_state["render"] == expected_render_reduced, "render/color contract mismatch")
-    for name, expected_hash in plan["preservation"]["assetIdentityHashes"].items():
-        require(observed_state["assets"][name]["identityHash"] == expected_hash, f"asset identity mismatch {name}")
+    require(set(plan["preservation"]["assetIdentityHashes"]) == set(ASSEMBLED_MANIFEST_HASHES), "asset provenance roster mismatch")
+    for name, expected_hash in ASSEMBLED_MANIFEST_HASHES.items():
+        require(observed_state["assets"][name]["identityHash"] == expected_hash, f"assembled master identity mismatch {name}")
     require(observed_state["texts"] == [] and observed_state["externalLibraries"] == [], "text or linked library present")
     terminal_manifest = action_manifest(action)
     require(terminal_manifest == compile_report["terminalCamera"]["action"], "terminal action manifest mismatch")
