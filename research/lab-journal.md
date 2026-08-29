@@ -5065,3 +5065,15 @@ Tool-freeze commit `d4ee68a48cb0d7382dfe8f5f9317619465d43406`与origin/main exac
 主仓库确认v0.2 preflight/attempt/formal三根均不存在后，以同一tool freeze签发official preflight，返回`ACCEPTED 9/9`。File SHA/self-hash为`8126d1ce93f8f8d2e772edd8ff9328b8dc1221a457b8f8afff072452212dd411 / d3f1d57ebe957754917e92ee6a474a1fa2eba33f16f783b177dfc2cf2e76f0b8`；available bytes为318,553,251,840，扣除1 GiB projected formal仍高于100 GiB reserve。记录再次确认C1只改变terminal observability，像素、质量、成本与资源阈值未改变；operations全零，attempt/formal roots继续不存在。
 
 下一动作只提交推送official v0.2 preflight与本entry形成evidence commit。之后formal runner必须同时绑定tool-freeze `d4ee68a48cb0d7382dfe8f5f9317619465d43406`与该exact evidence commit，才允许创建v0.2 attempt/formal roots并启动真实Blender。
+
+## J-389 · B61 v0.2证明multilayer EXR的bpy pixel路径失效，D1预注册
+
+Date: 2026-08-29 · Type: B61 FORMAL COUNTEREXAMPLE / DIAGNOSTIC PREREGISTRATION · Real Blender processes: 1 · Rendered EXR frames: 1
+
+Official preflight evidence commit `eb068607899af4b0bc197ba96dbe7d0d36b655fd`推送后，第一次runner invocation使用了不存在的手写full commit并在任何root创建或Blender启动前由Git拒绝；确认v0.2 attempt/formal仍fresh后，使用`git rev-parse`取得的exact commit才进入正式路径。
+
+WIDE-A约5.02秒完成frame 1 EXR durable write，随后`pixel_projection()`在`bpy.data.images.load()`重开的multilayer image上观测到零个pixel values，抛出`ZeroDivisionError: float division by zero`。`--python-exit-code 1`把它正确转换为process exit 1；4 MiB bounded raw stdout/stderr完整保留且未截断，stage ledger终止于sequence 3 `EXR_WRITTEN`。其余5个render processes、EXR auditor与Node auditor均未启动。
+
+Failure summary file SHA/self-hash为`2c32bef58fe631f63c64778c7f548bf66ad84aca3b61b10262de0ea1944eb27a / 54666b30f13b664ee4aa0e8efc9725da823c98d9de8938869366903f00e0af39`，明确`rootCauseProven:true`。Attempt tree为6 files/6,864 bytes/`46e5744c…`；加入failure summary后的formal tree为5 files/1,351,590 bytes/`440a8802…`；retained EXR SHA为`a094fcae…`。
+
+由于修正decoder前仍需证明Blender 5.2内可用的磁盘EXR接口，D1只预注册一个30秒、1 Blender start、zero-render诊断：复现bpy空pixel路径，枚举Image RNA，并测试Blender随附OpenImageIO能否唯一解析Combined RGBA及两次float32-LE exact digest。D1不授权formal retry；只有PASS后才能另行预注册C2和fresh v0.3 roots。

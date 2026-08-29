@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "bfs.cinematicRenderReproCostExrReopenDiagnostic.v0.1",
+  "diagnosticId": "B61-E1-D1",
+  "status": "PREREGISTERED",
+  "failedRun": {
+    "attemptRoot": "experiments/cinematic-render-repro-cost-attempt-v0-2",
+    "formalRoot": "experiments/cinematic-render-repro-cost-v0-2",
+    "attemptTree": {
+      "files": 6,
+      "bytes": 6864,
+      "sha256": "46e5744c66322b9d2cd3e44bdde7bcb5ed2e283ca4ed36b6aa420175dbffd1f7"
+    },
+    "formalTree": {
+      "files": 5,
+      "bytes": 1351590,
+      "sha256": "440a8802e474cda2091ece6902b459981c0238f03198e2ddd059c69ff4849eda"
+    },
+    "failureSummary": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-2/failure-summary.json",
+      "sha256": "2c32bef58fe631f63c64778c7f548bf66ad84aca3b61b10262de0ea1944eb27a",
+      "failureHash": "54666b30f13b664ee4aa0e8efc9725da823c98d9de8938869366903f00e0af39",
+      "reason": "MULTILAYER_EXR_BPY_IMAGE_PIXELS_EMPTY",
+      "rootCauseProven": true
+    },
+    "retainedExr": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-2/runs/WIDE-A/frame-0001.exr",
+      "bytes": 1345827,
+      "sha256": "a094fcae0245b5f136d7ddb3b4dc12aa097bbe78b7cf93008b420c0b15ea0cff"
+    }
+  },
+  "outputRoot": "experiments/b61-exr-reopen-diagnostic-v0-1",
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "timeoutSeconds": 30,
+    "maximumOutputBytes": 1048576
+  },
+  "probes": [
+    "bpy image identity type size channels depth and pixel-value count",
+    "Blender Image RNA properties related to layers passes pixels and buffers",
+    "Blender-bundled OpenImageIO import and exact library version",
+    "OpenImageIO subimage and channel inventory",
+    "OpenImageIO decoded Combined RGBA float32 little-endian projection",
+    "repeat decode exact digest within the same process"
+  ],
+  "successCriteria": {
+    "retainedExrBindingExact": true,
+    "bpyEmptyPixelSequenceReproduced": true,
+    "combinedRgbaChannelsUniquelyResolved": true,
+    "decodedWidth": 1920,
+    "decodedHeight": 1080,
+    "decodedChannels": 4,
+    "decodedValueCount": 8294400,
+    "allValuesFinite": true,
+    "repeatDigestExact": true,
+    "zeroRenderCalls": true
+  },
+  "decisionRule": "Only a PASS may authorize a later correction that replaces the broken bpy Image.pixels multilayer decoder with the exact proven Blender-bundled OpenImageIO projection. A failed or ambiguous probe authorizes no formal retry.",
+  "claimBoundary": {
+    "diagnosticOnly": true,
+    "formalRetryAuthorized": false,
+    "pixelThresholdChanged": false,
+    "qualityThresholdChanged": false,
+    "renderFormatChanged": false
+  }
+}

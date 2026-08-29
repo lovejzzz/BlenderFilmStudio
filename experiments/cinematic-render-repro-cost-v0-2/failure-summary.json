@@ -1,0 +1,62 @@
+{
+  "completed": {
+    "exrAuditBlenderStarts": 0,
+    "exrFrames": 1,
+    "nodeAuditorStarts": 0,
+    "pixelReports": 0,
+    "pngFrames": 0,
+    "remainingRenderBlenderStarts": 5,
+    "renderBlenderStarts": 1,
+    "renderCalls": 1,
+    "runReports": 0
+  },
+  "evidence": {
+    "exr": {
+      "bytes": 1345827,
+      "sha256": "a094fcae0245b5f136d7ddb3b4dc12aa097bbe78b7cf93008b420c0b15ea0cff",
+      "uri": "experiments/cinematic-render-repro-cost-v0-2/runs/WIDE-A/frame-0001.exr"
+    },
+    "lastStageEvent": {
+      "eventHash": "b7d0e0e1a23ee112adb1d71e408a8fd1ea094a0a32ea142750e74a434a7c764c",
+      "eventType": "EXR_WRITTEN",
+      "sequence": 3,
+      "uri": "experiments/cinematic-render-repro-cost-v0-2/runs/WIDE-A/stage-events.jsonl"
+    },
+    "process": {
+      "exitCode": 1,
+      "pythonExitCodeEnforced": true,
+      "sha256": "d2ea7563972680e9a73d3af5735699e9da279acbb4abc7acb153d150ed117e49",
+      "uri": "experiments/cinematic-render-repro-cost-attempt-v0-2/processes/WIDE-A.json"
+    },
+    "stderr": {
+      "bytes": 1527,
+      "sha256": "864117ec5d7f00896f57e4393d71a18e7e81ed0a6d5204bedb4b47a087130c61",
+      "truncated": false,
+      "uri": "experiments/cinematic-render-repro-cost-attempt-v0-2/logs/WIDE-A.stderr.log"
+    },
+    "stdout": {
+      "bytes": 1162,
+      "sha256": "fa514f0b73ac051aaf30eb565ee244f8bcd963a183bc6054e4cbe2f9e6dc5823",
+      "truncated": false,
+      "uri": "experiments/cinematic-render-repro-cost-attempt-v0-2/logs/WIDE-A.stdout.log"
+    }
+  },
+  "exception": {
+    "file": "blender/render_b61_frames.py",
+    "function": "pixel_projection",
+    "line": 127,
+    "type": "ZeroDivisionError",
+    "message": "float division by zero",
+    "observedPixelValueCount": 0
+  },
+  "failureHash": "54666b30f13b664ee4aa0e8efc9725da823c98d9de8938869366903f00e0af39",
+  "message": "The first WIDE-A EXR was durably written, then Blender's bpy.data.images.load multilayer path exposed an empty pixel sequence. pixel_projection divided by a zero per-channel count. C1 retained the exact nonzero Python exit, raw logs, and final durable stage event, so this root cause is proven.",
+  "partialEvidenceRetained": true,
+  "preflightEvidenceCommit": "eb068607899af4b0bc197ba96dbe7d0d36b655fd",
+  "reason": "MULTILAYER_EXR_BPY_IMAGE_PIXELS_EMPTY",
+  "rootCauseProven": true,
+  "schemaVersion": "bfs.cinematicRenderReproCostFailureSummary.v0.2",
+  "scientificVerdict": null,
+  "status": "INVALIDATED",
+  "toolFreezeCommit": "d4ee68a48cb0d7382dfe8f5f9317619465d43406"
+}
