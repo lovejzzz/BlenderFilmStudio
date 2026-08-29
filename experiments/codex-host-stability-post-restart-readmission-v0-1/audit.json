@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "bfs.codex-host-stability-baseline-audit.v0.1",
+  "experimentId": "B59-G0-R2",
+  "auditedAt": "2026-08-29T04:06:48.202Z",
+  "results": {
+    "path": "experiments/codex-host-stability-post-restart-readmission-v0-1/results.json",
+    "sha256": "2bb7ecc7be213dac754d2c81a19da24630659b0d34cba53d308ac424056c4519",
+    "selfHash": "ad9b109e129ad9b769d4c5a4324c6c4c5ab3914ada034f5ae1f7af96a1cd2f78"
+  },
+  "replay": {
+    "availableBytes": 153949335552,
+    "memoryFreePercent": 85,
+    "processes": {
+      "mainCodexProcessCount": 1,
+      "mainCodexPids": [
+        26962
+      ],
+      "rendererCount": 4,
+      "maximumRendererRssBytes": 845479936,
+      "codexTreeRssBytes": 3917627392,
+      "activeBlenderProcessCount": 0,
+      "activeB58WorkerProcessCount": 0,
+      "browserAutomationProcessCount": 0,
+      "crashpadHandlerCount": 8,
+      "orphanCrashpadHandlerCount": 8
+    },
+    "codexVersion": "26.825.32147 (7303)"
+  },
+  "integrityChecks": {
+    "SPEC_SHA": true,
+    "SELECTED_SPEC_PATH": true,
+    "RECEIPT_FILE_SIZE": true,
+    "RECEIPT_SELF_HASH": true,
+    "SCOPED_RELEASE_CLEAN": true,
+    "CRASH_REPORT_SHA": true,
+    "PARENT_EVIDENCE": true,
+    "CURRENT_VERSION_REPLAY": true,
+    "DISK_GATE_REPLAY": true,
+    "MEMORY_GATE_REPLAY": true,
+    "MAIN_PROCESS_GATE_REPLAY": true,
+    "RESTART_BOUNDARY_REPLAY": true,
+    "RENDERER_COUNT_GATE_REPLAY": true,
+    "SINGLE_RENDERER_GATE_REPLAY": true,
+    "CODEX_TREE_GATE_REPLAY": true,
+    "NO_BLENDER_GATE_REPLAY": true,
+    "NO_B58_GATE_REPLAY": true,
+    "NO_BROWSER_AUTOMATION_GATE_REPLAY": true,
+    "BASE_SEMANTIC_MODEL": true
+  },
+  "syntheticAdmissibleControl": {
+    "valid": true,
+    "selfHash": "a001d987a3b625513bc3ff70a84723f0b6f7247d8ab225273df45a1629bdbd5d"
+  },
+  "attackIdsExact": true,
+  "attackResults": [
+    {
+      "id": "A01_SPEC_SHA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A02_PARENT_COMMIT_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A03_DIRTY_FORMAL_ROOT",
+      "rejected": true
+    },
+    {
+      "id": "A04_CRASH_REPORT_SHA_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A05_CRASH_REPORT_BYTE_COUNT_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A06_CRASH_THREAD_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A07_CRASH_EXCEPTION_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A08_CODEX_VERSION_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A09_STALE_CAPTURE_TIME",
+      "rejected": true
+    },
+    {
+      "id": "A10_DISK_AVAILABLE_BELOW_MARGIN",
+      "rejected": true
+    },
+    {
+      "id": "A11_DISK_PROJECTION_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A12_MEMORY_FREE_BELOW_FLOOR",
+      "rejected": true
+    },
+    {
+      "id": "A13_MAIN_PROCESS_COUNT_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A14_RENDERER_COUNT_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A15_SINGLE_RENDERER_RSS_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A16_CODEX_TREE_RSS_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A17_ACTIVE_BLENDER_PROCESS",
+      "rejected": true
+    },
+    {
+      "id": "A18_ACTIVE_B58_WORKER",
+      "rejected": true
+    },
+    {
+      "id": "A19_BROWSER_AUTOMATION_PROCESS",
+      "rejected": true
+    },
+    {
+      "id": "A20_NONZERO_NETWORK_OR_MODEL_OR_DOCKER",
+      "rejected": true
+    },
+    {
+      "id": "A21_NONZERO_SIGNAL_OR_CLEANUP",
+      "rejected": true
+    },
+    {
+      "id": "A22_STDOUT_SIZE_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A23_RECEIPT_SIZE_ABOVE_CEILING",
+      "rejected": true
+    },
+    {
+      "id": "A24_RECEIPT_SELF_HASH_MUTATION",
+      "rejected": true
+    },
+    {
+      "id": "A25_RESTART_BOUNDARY_MUTATION",
+      "rejected": true
+    }
+  ],
+  "attacksPassed": 25,
+  "attacksTotal": 25,
+  "auditCommands": [
+    {
+      "label": "git-scoped-status",
+      "exitCode": 0,
+      "stdoutBytes": 0,
+      "durationMs": 13
+    },
+    {
+      "label": "memory-pressure",
+      "exitCode": 0,
+      "stdoutBytes": 110,
+      "durationMs": 2
+    },
+    {
+      "label": "process-snapshot",
+      "exitCode": 0,
+      "stdoutBytes": 146539,
+      "durationMs": 22
+    }
+  ],
+  "combinedChildProcesses": 8,
+  "finalGates": {
+    "SPEC_AND_PARENT_IDENTITY": true,
+    "FRESH_FORMAL_ROOT": true,
+    "CRASH_EVIDENCE_IDENTITY": true,
+    "CRASH_SIGNATURE_EXACT": true,
+    "CURRENT_CODEX_VERSION_EXACT": true,
+    "SNAPSHOT_FRESHNESS": true,
+    "DISK_STABILITY_MARGIN": true,
+    "MEMORY_PRESSURE": true,
+    "CODEX_MAIN_PROCESS_COUNT": true,
+    "CODEX_RENDERER_COUNT": true,
+    "SINGLE_RENDERER_RSS": true,
+    "CODEX_TREE_RSS": true,
+    "NO_ACTIVE_BLENDER": true,
+    "NO_ACTIVE_B58_WORKER": true,
+    "NO_BROWSER_AUTOMATION_PROCESS": true,
+    "RESOURCE_CEILINGS_ZERO": true,
+    "STDOUT_BOUNDED": true,
+    "RECEIPT_BOUNDED": true,
+    "RECEIPT_SELF_HASH": true,
+    "INDEPENDENT_AUDIT_REPLAY": true
+  },
+  "passedGates": 20,
+  "totalGates": 20,
+  "failedGates": [],
+  "finalVerdict": "ADMITTED_FOR_LIGHTWEIGHT_WORK",
+  "receiptBytes": 5211,
+  "selfHash": "fa52da571ea7084de3cb83a2bfce6fefe746fc0fabb7e4ee1da23af85999c1a3"
+}

@@ -1,7 +1,7 @@
 # B59-G0-R2 · Post-restart Codex host readmission protocol
 
 Date: 2026-08-28
-Status: PREREGISTERED
+Status: COMPLETED — ADMITTED FOR LIGHTWEIGHT WORK
 Parent commit: `6e02fc2e7729ecfd57380adf27953350f95e2270`
 
 ## Purpose
@@ -31,3 +31,23 @@ Before the formal run, an exact browser temporary-filesystem remediation may be 
 ## Decision
 
 `ADMITTED_FOR_LIGHTWEIGHT_WORK` requires 20/20 gates, 25/25 attacks, exact old-PID absence, a valid synthetic control and complete independent replay. Admission permits only the next preregistered repeated-observation phase; it does not close Gate 0 or authorize B58.
+
+## Formal result
+
+The single-use formal R2 run was captured at `2026-08-29T04:06:48.122Z` and independently audited without rerun or overwrite.
+
+- Final verdict: `ADMITTED_FOR_LIGHTWEIGHT_WORK`
+- Gates: `20/20`
+- Registered attacks rejected: `25/25`
+- Failed gates: none
+- Current Codex: `26.825.32147 (7303)`, main PID `26962`
+- Previous PID `92848`: absent
+- Codex-tree RSS: `3,917,627,392` bytes
+- Maximum renderer RSS: `845,479,936` bytes across four renderers
+- Available disk: `153,949,310,976` bytes
+- Disk headroom above the frozen threshold: `41,743,290,368` bytes
+- System-wide memory free: `85%`
+- `results.json` SHA-256: `2bb7ecc7be213dac754d2c81a19da24630659b0d34cba53d308ac424056c4519`
+- `audit.json` SHA-256: `02a28904b285348c20fe6e24c14c57e127c5cc59e736d40b01e430e5294f8810`
+
+This result opens only the preregistered repeated-observation phase. It does not establish long-horizon RSS stability, prevent recurrence of browser temporary-file leakage, or authorize Blender/B58 execution.
