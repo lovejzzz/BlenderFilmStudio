@@ -5735,3 +5735,11 @@ C2 tool freeze `f9157de198d2572c840a77c1e992170d81ca0dbd`在fresh v0.3完成全�
 科学结果按冻结规则为`B62_TERMINAL_288_FRAME_ANIMATIC_OR_CONTINUITY_REJECTED`：每帧finite/dynamic/nonempty、96/96 close geometry和causal state均PASS，但三个shot distinct count全为1、whole为1、两cut pair均相同。FFmpeg对全部288帧独立解码也得到同一raw-frame MD5 `54ec01ea…`，证实不是OIIO误读；MP4只是12秒单帧carrier。
 
 根因是renderer推进了一个非活动isolated Scene，再用`bpy.ops.render.render(scene=name)`；named Scene被渲染，但operator消费的animation/camera/light evaluation仍绑定active context初态。C3不推翻v0.3有效拒绝，只预注册新的renderer intervention：直接用exact loaded T1 production Scene作为active context，在内存设置Eevee/frame/marker/camera，active view-layer update后用无scene override的render operator；全程不save，并前后hash证明source bytes不变。fresh v0.4全量重渲染，阈值与预算不变。
+
+## J-461 · B62-T2 v0.4 production多层格式拒绝PNG，C4输出adapter预注册
+
+Date: 2026-08-29 · Type: RETAINED PRE-RENDER FAILURE / RENDER-RESULT PNG ADAPTER PREREGISTRATION · New Blender processes: 1 · New Blender renders: 0
+
+C3 tool freeze `aba4107dc0ce814875a4775d973bff4e1d4fe009`在fresh v0.4通过全部admission后，BLENDER_RENDER于0.485秒、peak sampled RSS 227,459,072 bytes退出，0 render/0 frame、无budget breach。Blender精确错误为production Scene的dynamic file-format enum只有`OPEN_EXR_MULTILAYER`，不接受`PNG`。root永久保留3 files/6,503 bytes/tree `3266adce2e1a643ab3fadfbea3c814d89cf2d58e171c78821c1048df38618780`，scientific verdict为null；C3 active-context假设尚未进入像素测试。
+
+C4复用仓库B61已实验证明的边界：production Scene继续是唯一active evaluation/render context，且不改其multilayer file format；每帧`write_still=false`只生成内存Render Result，另建non-active output-only Scene配置PNG/RGBA/8与同一color contract，再由`Render Result.save_render`写盘，adapter本身0 render并在末尾删除。runner/auditor绑定v0.1–v0.4并切fresh v0.5；288 render、所有科学阈值与预算不变。
