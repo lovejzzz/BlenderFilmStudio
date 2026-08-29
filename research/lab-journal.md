@@ -5541,3 +5541,15 @@ C3 retry以tool freeze `b6dd0c74953f25ec0a48d14833e06da17942a608`运行。BUILD 
 Node audit 17项通过、仅`TIMELINE_MARKER_CAMERA_ROUTING_EXACT`失败，scientific verdict因此保持null。根因是C3新增审计表硬编码`CAM_CLOSE_REFLECTION_CORRECTED`，遗漏base spec和三份Blender工具早已冻结的`_D4`后缀；12条render记录的`camera`与`timelineMarkerCamera`都正确为`CAM_CLOSE_REFLECTION_CORRECTED_D4`。v0.4永久保留35 files/54,119,323 bytes/tree `365b4bc64267575bbdbcb92f7390c9690f18514e5c08c10bcc56f584003e885e`。
 
 C4在任何工具修改前只授权Node auditor从`spec.selectedIntervention.sourceCamera/correctedCamera`读取期望名，并授权runner/auditor绑定v0.4后切换fresh v0.5。三份Blender Python bytes、候选、96-frame bake、六帧、全部阈值、12-render Cycles设置和scientific mapping不变；v0.5必须全量新建场、重渲染和独立复开，禁止复用v0.4。若技术链通过，当前冻结数据预计产生合法的scientific REJECTED，而不是PASS。
+
+## J-441 · B62-Q1-D4 v0.5技术链PASS、科学拒绝与原分辨率人工复核
+
+Date: 2026-08-29 · Type: FORMAL TECHNICAL PASS / SCIENTIFIC REJECTION / HUMAN ENGINEERING REVIEW · New Blender processes: 3 · New Blender renders: 12
+
+C4 retry以tool freeze `6c78738`在fresh v0.5 root全量执行。BUILD 0.530秒、peak RSS 260,800,512 bytes；RENDER 34.089秒、peak RSS 1,332,363,264 bytes；INDEPENDENT 2.425秒、peak RSS 302,792,704 bytes；Node auditor 0.083秒。18/18 checks全部PASS，六组像素pair不同，三份Blender Python hash与Blender 5.2 build identity exact，96-frame bake、12份EXR/PNG、独立解码、zero model/network/Docker全部成立。
+
+正式scientific verdict按预登记为`B62_CLOSE_CAMERA_CORRECTION_FAILS_FROZEN_HOLDOUT`：original 6/6失败，corrected frames 193/204/228/252/276通过，frame 288以clamped union area 0.933787超过冻结0.90，故correctedAllPass=false。receipt file/self为`8a7c6cd…/119c1028…`，audit file/self为`97fcca32…/e832532c…`；root 35 files/54,124,627 bytes/tree `f1f25fa4…`。
+
+随后逐张打开全部12张960×540 PNG做有标签工程复核。六张ORIGINAL均为头盔表面近乎占满画面，角色动作与环境关系不可读。CORRECTED在193–228显著恢复visor/eye、上身、手臂和chamber lights，252开始变紧，276–288头盔/肩部持续扩张、环境和身体信息减少，288缺少呼吸空间。人工观察与机械拒绝方向一致，但不改变machine verdict，也不是blind preference evidence。
+
+D4关闭了“静态有界修正能否覆盖全shot”的问题：能修复灾难性遮挡，但不能稳定覆盖运动中的整段构图。下一实验必须保留0.90门槛，预登记motion-aware camera path或scale compensation；不得推广v0.5 camera、删除frame288或把16 spp诊断图称为最终电影画质。
