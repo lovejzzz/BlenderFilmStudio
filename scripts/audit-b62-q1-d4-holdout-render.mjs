@@ -19,7 +19,11 @@ const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url))),
     "specs/b62-camera-quality-d4-c3-timeline-marker-camera-routing.v0.1.json",
   CORRECTION3_PROTOCOL_URI =
     "research/2026-08-29-b62-d4-c3-timeline-marker-camera-routing.md",
-  ROOT_URI = "experiments/b62-camera-quality-holdout-render-v0-4";
+  CORRECTION4_URI =
+    "specs/b62-camera-quality-d4-c4-corrected-camera-name-contract.v0.1.json",
+  CORRECTION4_PROTOCOL_URI =
+    "research/2026-08-29-b62-d4-c4-corrected-camera-name-contract.md",
+  ROOT_URI = "experiments/b62-camera-quality-holdout-render-v0-5";
 const TOOLS = [
   "blender/build_b62_q1_d4_corrected_scene.py",
   "blender/render_b62_q1_d4_holdout_pairs.py",
@@ -116,6 +120,7 @@ export async function audit(argv) {
     correction = await json(CORRECTION_URI),
     correction2 = await json(CORRECTION2_URI),
     correction3 = await json(CORRECTION3_URI),
+    correction4 = await json(CORRECTION4_URI),
     admission = await json(`${ROOT_URI}/admission.json`),
     build = await json(`${ROOT_URI}/build.json`),
     render = await json(`${ROOT_URI}/render.json`),
@@ -142,8 +147,14 @@ export async function audit(argv) {
   );
   req(
     correction3.correctionId === "B62-Q1-D4-C3" &&
-      correction3.authorizedChanges.retryRoot === ROOT_URI,
+      correction3.authorizedChanges.retryRoot ===
+        "experiments/b62-camera-quality-holdout-render-v0-4",
     "C3 correction",
+  );
+  req(
+    correction4.correctionId === "B62-Q1-D4-C4" &&
+      correction4.authorizedChanges.retryRoot === ROOT_URI,
+    "C4 correction",
   );
   req(
     validSelf(admission, "admissionHash") &&
@@ -166,7 +177,11 @@ export async function audit(argv) {
       admission.bindings.correction3.sha256 ===
         (await hashFile(pathFor(CORRECTION3_URI))) &&
       admission.bindings.correction3Protocol.sha256 ===
-        (await hashFile(pathFor(CORRECTION3_PROTOCOL_URI))),
+        (await hashFile(pathFor(CORRECTION3_PROTOCOL_URI))) &&
+      admission.bindings.correction4.sha256 ===
+        (await hashFile(pathFor(CORRECTION4_URI))) &&
+      admission.bindings.correction4Protocol.sha256 ===
+        (await hashFile(pathFor(CORRECTION4_PROTOCOL_URI))),
     "spec binding",
   );
   req(
@@ -184,17 +199,24 @@ export async function audit(argv) {
       canonical(correction3.retainedFailure.tree),
     "retained C3 binding",
   );
+  req(
+    canonical(admission.bindings.retainedFailureTreeC4) ===
+      canonical(correction4.retainedFailure.tree),
+    "retained C4 binding",
+  );
   for (const uri of TOOLS)
     req(
       admission.bindings.tools[uri] === (await hashFile(pathFor(uri))),
       `tool ${uri}`,
     );
   req(
-    admission.bindings.tools[correction3.frozen.builder.uri] ===
-        correction3.frozen.builder.sha256 &&
-      admission.bindings.tools[correction3.frozen.independentAudit.uri] ===
-        correction3.frozen.independentAudit.sha256,
-    "C3 frozen tools",
+    admission.bindings.tools[correction4.frozen.builder.uri] ===
+        correction4.frozen.builder.sha256 &&
+      admission.bindings.tools[correction4.frozen.render.uri] ===
+        correction4.frozen.render.sha256 &&
+      admission.bindings.tools[correction4.frozen.independentAudit.uri] ===
+        correction4.frozen.independentAudit.sha256,
+    "C4 frozen Blender tools",
   );
   req(
     validSelf(build, "reportHash") &&
@@ -264,8 +286,8 @@ export async function audit(argv) {
   const pairDifferent =
     render.pairs.length === 6 && render.pairs.every((row) => row.different);
   const cameraByCondition = {
-      ORIGINAL: "CAM_CLOSE_REFLECTION",
-      CORRECTED: "CAM_CLOSE_REFLECTION_CORRECTED",
+      ORIGINAL: spec.selectedIntervention.sourceCamera,
+      CORRECTED: spec.selectedIntervention.correctedCamera,
     },
     timelineRoutingExact = render.renders.every(
       (row) =>
@@ -280,9 +302,9 @@ export async function audit(argv) {
     ? spec.decision.supportedVerdict
     : spec.decision.rejectedVerdict;
   const checks = [
-    ["SPEC_C1_C2_C3_ADMISSION_PARENT_BOUND", true],
+    ["SPEC_C1_C2_C3_C4_ADMISSION_PARENT_BOUND", true],
     ["TOOL_FREEZE_HASHES_EXACT", true],
-    ["C3_FROZEN_BUILDER_AND_INDEPENDENT_AUDIT_EXACT", true],
+    ["C4_FROZEN_BLENDER_TOOLS_EXACT", true],
     ["THREE_FRESH_BLENDER_PROCESSES_PASS", true],
     [
       "BLENDER_IDENTITY_EXACT",
@@ -393,6 +415,14 @@ export async function audit(argv) {
           uri: CORRECTION3_PROTOCOL_URI,
           sha256: await hashFile(pathFor(CORRECTION3_PROTOCOL_URI)),
         },
+        correction4: {
+          uri: CORRECTION4_URI,
+          sha256: await hashFile(pathFor(CORRECTION4_URI)),
+        },
+        correction4Protocol: {
+          uri: CORRECTION4_PROTOCOL_URI,
+          sha256: await hashFile(pathFor(CORRECTION4_PROTOCOL_URI)),
+        },
         build: {
           sha256: await hashFile(resolve(root, "build.json")),
           reportHash: build.reportHash,
@@ -412,6 +442,7 @@ export async function audit(argv) {
         ...correction.nonClaims,
         ...correction2.nonClaims,
         ...correction3.nonClaims,
+        ...correction4.nonClaims,
       ],
     },
     "auditHash",

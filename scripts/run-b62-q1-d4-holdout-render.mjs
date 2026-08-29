@@ -31,15 +31,21 @@ const SPEC_URI = "specs/b62-camera-quality-holdout-render-validation.v0.1.json",
     "specs/b62-camera-quality-d4-c3-timeline-marker-camera-routing.v0.1.json",
   CORRECTION3_PROTOCOL_URI =
     "research/2026-08-29-b62-d4-c3-timeline-marker-camera-routing.md",
-  ROOT_URI = "experiments/b62-camera-quality-holdout-render-v0-4",
+  CORRECTION4_URI =
+    "specs/b62-camera-quality-d4-c4-corrected-camera-name-contract.v0.1.json",
+  CORRECTION4_PROTOCOL_URI =
+    "research/2026-08-29-b62-d4-c4-corrected-camera-name-contract.md",
+  ROOT_URI = "experiments/b62-camera-quality-holdout-render-v0-5",
   RETAINED_ROOT = "experiments/b62-camera-quality-holdout-render-v0-1",
   RETAINED2_ROOT = "experiments/b62-camera-quality-holdout-render-v0-2",
   RETAINED3_ROOT = "experiments/b62-camera-quality-holdout-render-v0-3",
+  RETAINED4_ROOT = "experiments/b62-camera-quality-holdout-render-v0-4",
   PARENT_ROOT = "experiments/b62-camera-quality-bounded-candidate-search-v0-2",
   PREREGISTRATION_COMMIT = "c2941a1",
   CORRECTION_COMMIT = "f55bf45",
   CORRECTION2_COMMIT = "633bed8",
-  CORRECTION3_COMMIT = "2c10b2d";
+  CORRECTION3_COMMIT = "2c10b2d",
+  CORRECTION4_COMMIT = "95adb32";
 const TOOLS = [
   "blender/build_b62_q1_d4_corrected_scene.py",
   "blender/render_b62_q1_d4_holdout_pairs.py",
@@ -249,6 +255,9 @@ async function main() {
   const correction3 = JSON.parse(
     await readFile(pathFor(CORRECTION3_URI), "utf8"),
   );
+  const correction4 = JSON.parse(
+    await readFile(pathFor(CORRECTION4_URI), "utf8"),
+  );
   req(
     spec.experimentId === "B62-Q1-D4" &&
       spec.statusBeforeToolCreation === "PREREGISTERED",
@@ -272,8 +281,15 @@ async function main() {
     correction3.correctionId === "B62-Q1-D4-C3" &&
       correction3.statusBeforeToolChange === "PREREGISTERED" &&
       correction3.retainedFailure.root === RETAINED3_ROOT &&
-      correction3.authorizedChanges.retryRoot === ROOT_URI,
+      correction3.authorizedChanges.retryRoot === RETAINED4_ROOT,
     "C3 correction",
+  );
+  req(
+    correction4.correctionId === "B62-Q1-D4-C4" &&
+      correction4.statusBeforeToolChange === "PREREGISTERED" &&
+      correction4.retainedFailure.root === RETAINED4_ROOT &&
+      correction4.authorizedChanges.retryRoot === ROOT_URI,
+    "C4 correction",
   );
   req(!(await exists(pathFor(ROOT_URI))), "root exists");
   const head = (await git(["rev-parse", "HEAD"])).trim(),
@@ -283,6 +299,7 @@ async function main() {
   await git(["merge-base", "--is-ancestor", CORRECTION_COMMIT, freeze]);
   await git(["merge-base", "--is-ancestor", CORRECTION2_COMMIT, freeze]);
   await git(["merge-base", "--is-ancestor", CORRECTION3_COMMIT, freeze]);
+  await git(["merge-base", "--is-ancestor", CORRECTION4_COMMIT, freeze]);
   req(
     (await hashFile(pathFor(SPEC_URI))) ===
       (await committedHash(PREREGISTRATION_COMMIT, SPEC_URI)),
@@ -323,17 +340,29 @@ async function main() {
       (await committedHash(CORRECTION3_COMMIT, CORRECTION3_PROTOCOL_URI)),
     "C3 protocol drift",
   );
+  req(
+    (await hashFile(pathFor(CORRECTION4_URI))) ===
+      (await committedHash(CORRECTION4_COMMIT, CORRECTION4_URI)),
+    "C4 drift",
+  );
+  req(
+    (await hashFile(pathFor(CORRECTION4_PROTOCOL_URI))) ===
+      (await committedHash(CORRECTION4_COMMIT, CORRECTION4_PROTOCOL_URI)),
+    "C4 protocol drift",
+  );
   const toolHashes = {};
   for (const uri of TOOLS) {
     toolHashes[uri] = await hashFile(pathFor(uri));
     req(toolHashes[uri] === (await committedHash(freeze, uri)), `tool ${uri}`);
   }
   req(
-    toolHashes[correction3.frozen.builder.uri] ===
-        correction3.frozen.builder.sha256 &&
-      toolHashes[correction3.frozen.independentAudit.uri] ===
-        correction3.frozen.independentAudit.sha256,
-    "C3 frozen tools",
+    toolHashes[correction4.frozen.builder.uri] ===
+        correction4.frozen.builder.sha256 &&
+      toolHashes[correction4.frozen.render.uri] ===
+        correction4.frozen.render.sha256 &&
+      toolHashes[correction4.frozen.independentAudit.uri] ===
+        correction4.frozen.independentAudit.sha256,
+    "C4 frozen Blender tools",
   );
   req(
     (
@@ -349,9 +378,12 @@ async function main() {
         CORRECTION2_PROTOCOL_URI,
         CORRECTION3_URI,
         CORRECTION3_PROTOCOL_URI,
+        CORRECTION4_URI,
+        CORRECTION4_PROTOCOL_URI,
         RETAINED_ROOT,
         RETAINED2_ROOT,
         RETAINED3_ROOT,
+        RETAINED4_ROOT,
         PARENT_ROOT,
         ...TOOLS,
       ])
@@ -372,6 +404,11 @@ async function main() {
   req(
     canonical(retained3Tree) === canonical(correction3.retainedFailure.tree),
     "retained C3 tree",
+  );
+  const retained4Tree = await treeIdentity(RETAINED4_ROOT);
+  req(
+    canonical(retained4Tree) === canonical(correction4.retainedFailure.tree),
+    "retained C4 tree",
   );
   const parentTree = await treeIdentity(PARENT_ROOT);
   req(
@@ -418,6 +455,7 @@ async function main() {
       correctionCommit: CORRECTION_COMMIT,
       correction2Commit: CORRECTION2_COMMIT,
       correction3Commit: CORRECTION3_COMMIT,
+      correction4Commit: CORRECTION4_COMMIT,
       toolFreezeCommit: freeze,
       bindings: {
         spec: { uri: SPEC_URI, sha256: await hashFile(pathFor(SPEC_URI)) },
@@ -449,9 +487,18 @@ async function main() {
           uri: CORRECTION3_PROTOCOL_URI,
           sha256: await hashFile(pathFor(CORRECTION3_PROTOCOL_URI)),
         },
+        correction4: {
+          uri: CORRECTION4_URI,
+          sha256: await hashFile(pathFor(CORRECTION4_URI)),
+        },
+        correction4Protocol: {
+          uri: CORRECTION4_PROTOCOL_URI,
+          sha256: await hashFile(pathFor(CORRECTION4_PROTOCOL_URI)),
+        },
         retainedFailureTree: retainedTree,
         retainedFailureTreeC2: retained2Tree,
         retainedFailureTreeC3: retained3Tree,
+        retainedFailureTreeC4: retained4Tree,
         parentTree,
         parentReceiptSha256: await hashFile(
           pathFor(spec.parentEvidence.d3Retry.receipt.uri),
@@ -655,6 +702,7 @@ async function main() {
           ...correction.nonClaims,
           ...correction2.nonClaims,
           ...correction3.nonClaims,
+          ...correction4.nonClaims,
         ],
       },
       "receiptHash",
