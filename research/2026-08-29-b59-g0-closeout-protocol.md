@@ -1,7 +1,7 @@
 # B59-G0 · Gate 0 host-stability closeout protocol
 
 Date: 2026-08-29
-Status: PREREGISTERED
+Status: COMPLETE — GATE 0 CLOSED
 Parent commit: `378765dee04313178936ad68ba593623691ab764`
 
 ## Decision question
@@ -34,3 +34,11 @@ Codex must remain version/hash/bundle exact with exactly one main process at PID
 The runner is read-only except for a fresh, exclusive formal receipt. It may call only bounded `git`, `launchctl` and `ps` reads; Blender, Docker, network, models, cleanup and service mutations remain zero. An independent auditor must re-read every parent artifact and live boundary, replay all 15 gates and reject 20 directed attacks. Every attack names the gate it must flip so rejection cannot be credited only to an unrelated hash failure.
 
 Only 15/15 gates and 20/20 attacks establish `GATE0_HOST_STABILITY_CLOSED`. Passing permits a separate minimal B58 preflight. It does not authorize a Blender render until that preflight itself passes.
+
+## Recorded outcome
+
+The formal runner passed all 14 pre-audit gates. The independent auditor passed 15/15 final gates, all eight integrity/live checks and 20/20 directed attacks. Final verdict: `GATE0_HOST_STABILITY_CLOSED`.
+
+At audit time the sentinel was `HEALTHY`, latest age 882,411 ms, available space 319,742,877,696 bytes, browser temporary allocation 20,480 bytes and no alert. Launchd remained loaded with five runs, 900-second interval and last exit 0. Codex remained PID 26962 with the expected version/hash/bundle and no new crash report. No Blender, Docker, network, model, cleanup or service mutation occurred.
+
+Results and audit SHA-256 are `588da9723eb7cfd7c611e2eb8122da1e6d29a93bee19e55c36eae85fbf0db54a` and `6d3a372f5fc3f07a3a154d22b8e9d124b264a8d4532db2fd5a777f3ed6395af7`. Gate 0 closure permits only the separately gated B58 minimal preflight.

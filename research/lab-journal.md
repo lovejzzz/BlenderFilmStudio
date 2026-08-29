@@ -4761,3 +4761,15 @@ Runner通过14/14 pre-audit gates；independent auditor通过15/15 final gates�
 Rehearsal start/results/audit SHA为`8285207745b43b393f566a2f6d25ceacd012473004b446dde3517df381c48191` / `9d93a7c9401eb22027251f3d208e9885918d0859e1d417070bcaf1847878c475` / `83f713c48ff4aec0d3565565633621d25c4b28127d3ffa52a1a5ae450ad2bb32`，bytes为6,858 / 10,385 / 6,241，均远低于64 KiB ceiling。临时目录随后用exact target逐项删除并验证不存在；第一次`rm -rf`请求被安全层拒绝且未执行。真实formal root仍不存在。
 
 下一动作提交推送本entry，然后在HEAD/origin exact且live sentinel仍fresh时运行单次正式Gate 0 closeout。
+
+## J-358 · B59-G0宿主稳定性Gate 0正式关闭
+
+Date: 2026-08-29 · Type: FORMAL GATE 0 HOST-STABILITY CLOSEOUT · New Blender processes: 0 · New Blender renders: 0
+
+Rehearsal journal commit `063ecef58b4ef289b3505a78295ea2517d90a0e9`与origin exact后，真实preflight在19份evidence hashes exact、sampleCount 5、latest age 875,237 ms、release clean及fresh formal root时READY。Single-use runner通过14/14 pre-audit gates，独立auditor通过15/15 final gates、20/20 targeted attacks和八项integrity/live checks。
+
+Final verdict为`GATE0_HOST_STABILITY_CLOSED`。Results/audit SHA为`588da9723eb7cfd7c611e2eb8122da1e6d29a93bee19e55c36eae85fbf0db54a` / `6d3a372f5fc3f07a3a154d22b8e9d124b264a8d4532db2fd5a777f3ed6395af7`；start SHA为`977ff21d31efb5fb6a82f69d4a60ed6a459cf5a1d195a01e57483fa4a5e720f4`。
+
+Audit时live sentinel为HEALTHY、latest age 882,411 ms、available 319,742,877,696 bytes、browser temp 20,480 bytes、无alert；launchd loaded、runs 5、last exit 0、interval 900 seconds。Codex仍为PID 26962、expected version/hash/bundle且无新crash report。Closeout自身Blender/Docker/network/model/cleanup/service mutation全0。
+
+Gate 0现在从`SHORT_WINDOW_READMITTED`正式提升为`CLOSED_WITH_ACTIVE_SENTINEL_AND_TESTED_RECOVERY`。这只解除宿主安全阻断；下一动作提交推送证据后执行独立B58 minimal preflight，只有preflight通过才允许恢复B58生产编排验证。
