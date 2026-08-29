@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityVersionNormalizationCorrection.v0.1",
+  "correctionId": "B62-Q1-D1-C1",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-Q1-D1",
+    "spec": "specs/b62-camera-quality-geometric-diagnostic.v0.1.json",
+    "protocol": "research/2026-08-29-b62-camera-quality-geometric-diagnostic-protocol.md",
+    "preregistrationCommit": "3383cf9",
+    "toolFreezeCommit": "76fd3b3ee3b0374ec1f4d91a3bdb0720198dda01"
+  },
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-geometric-diagnostic-v0-1",
+    "tree": {"files": 7, "bytes": 1527639, "treeSha256": "bbd777378b268958d914a4512a4dc94cca471c698c2d943dc3714223c24201ce"},
+    "admission": {"sha256": "821ef90152d74fcdf7b9c2320f0ee0194dd5fd0025556cb50503fe97c2b1ce43"},
+    "primary": {"sha256": "0610d683244985df47f92c4ae88fdf3c9f7abe449633e2dce0c854c9baa06166", "processSha256": "aadad7a38963f37c543b639add2b4dc1a2ede80e2952fc8ab2718adbcb153670", "observedVersion": "5.2.0 LTS", "buildHash": "fbe6228777e7", "exitCode": 0, "renderCalls": 0},
+    "independent": {"sha256": "44e6d77e5a58a43bde8e9cf73c1ff79e3559192033c824a5a4d867d1782d90b1", "processSha256": "4d26c87903c488900571159f5e648252ef4d8d7a8f33dec9644b717e7c6bebb9", "observedVersion": "5.2.0 LTS", "buildHash": "fbe6228777e7", "exitCode": 0, "renderCalls": 0},
+    "auditor": {"processSha256": "3b4f7c9c025a34e6175c48db29c02138d8363c8a15af285e08b895da346b0876", "exitCode": 1, "error": "PRIMARY Blender identity mismatch"},
+    "failure": {"sha256": "758e2187dcf1c0a51a786b9950344a427193c26d28d696a24440b507da764d7b", "failureHash": "38e36cddafe26f7aa76c57ba7e8fddbc176d716221e9ccab0d7968af6f2997c1"}
+  },
+  "diagnosis": {
+    "specCliVersion": "Blender 5.2.0 LTS",
+    "bpyVersionString": "5.2.0 LTS",
+    "error": "The auditor compared bpy.app.version_string directly to a CLI-style string that includes the Blender prefix.",
+    "evidenceBoundary": "Both Blender observations completed before the auditor rejected them. Their geometric fields are retained but are not used to change any threshold, ray grid, anchor, process budget or verdict rule."
+  },
+  "authorizedChanges": {
+    "blenderTools": "No changes. Their frozen SHA-256 values remain exact.",
+    "auditor": "Compare `Blender ${document.blender.version}` to the frozen CLI-style version while continuing to require the exact build hash.",
+    "runner": "Bind this correction, retain and re-hash the v0.1 tree, and use the fresh v0.2 root.",
+    "retryRoot": "experiments/b62-camera-quality-geometric-diagnostic-v0-2",
+    "unchanged": ["64x36 ray grid", "three frames and cameras", "0.5 m near field", "five anchors", "0.90/0.90/1-of-5 signature", "two Blender starts", "zero renders", "resource budgets", "outcome-neutral verdict mapping"]
+  },
+  "frozenBlenderToolHashes": {
+    "blender/probe_b62_q1_geometric_visibility.py": "02a3afb912af979ccab5838bf181234dff25b4636f19040f533acd8e1ac03d55",
+    "blender/audit_b62_q1_geometric_visibility.py": "4edd3bde133775f58d47715b39bf1233429afeeb081d478ff1a4efad1c0f7c15"
+  },
+  "retrySequence": [
+    "Commit and push the retained v0.1 failure, this correction and journal before changing runner or auditor bytes.",
+    "Change only the two authorized Node files and freeze them in a pushed commit.",
+    "Require the v0.1 retained tree and all listed hashes exact before creating v0.2.",
+    "Rerun both fresh Blender observations and the independent Node audit in v0.2; do not copy v0.1 observations into the retry."
+  ],
+  "nonClaims": ["C1 does not validate or inspect the geometric outcome.", "C1 does not repair the camera.", "C1 does not relax any scientific or resource threshold."]
+}

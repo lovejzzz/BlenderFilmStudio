@@ -5457,3 +5457,13 @@ Date: 2026-08-29 · Type: CAMERA QUALITY DIAGNOSTIC PREREGISTRATION · New Blend
 D1冻结two fresh Blender/zero-render只读诊断。primary与independent Python分别在frames 48/144/240投射64×36 camera rays，记录first-hit owner/distance、0.5 m near-field share、dominant owner、center ray、五个语义anchor exact visibility及角色evaluated-vertex投影。两实现不得互相import，整数roster exact、float tolerance 1e-9；随后独立Node auditor检查input/tool/runtime/process/resource/output与outcome-neutral verdict。
 
 诊断只在CLOSE同时满足dominant share≥0.90、near-field share≥0.90、5 anchors最多1个可见，且两个readable controls均不满足完整signature时，支持`B62_CLOSE_FAILURE_GEOMETRIC_NEAR_OCCLUSION_LOCALIZED`。阈值只用于定位已知反例，不是电影感定义。预算2 Blender starts、0 render、64 MiB writes、100 GiB reserve、zero model/network/Docker。下一动作先提交推送本预注册，再允许创建四个工具。
+
+## J-432 · B62-Q1-D1 v0.1版本字符串合同失效与C1预注册
+
+Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / CONTRACT NORMALIZATION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+D1 tool freeze `76fd3b3…`推送后，PRIMARY与INDEPENDENT Blender均在约0.72/0.55秒、peak sampled RSS约254/253 MiB内exit 0，各完成3 frames×2,304 rays与五anchor/角色投影观察，render/model/network/Docker均0。独立Node auditor在47 ms后exit 1，错误为`PRIMARY Blender identity mismatch`，因此没有comparison/audit/receipt，scientific verdict为null。
+
+根因是spec冻结CLI字符串`Blender 5.2.0 LTS`，而两份bpy observation按API真实返回`5.2.0 LTS`；build hash均为正确的`fbe6228777e7`。v0.1永久保留7 files/1,527,639 bytes/tree `bbd77737…`，failure file/self `758e2187…/38e36cdd…`。
+
+C1在Node工具修改前只允许auditor比较`Blender ${bpyVersion}`并继续exact检查build hash，同时允许runner绑定v0.1 retained tree后使用fresh v0.2 root。两份Blender工具bytes、ray grid、frames/cameras、anchors、0.5 m、0.90/0.90/1-of-5 signature、process/resource budgets与zero-render边界全部不变；v0.1几何字段不得复制到retry，也未用于改阈值。
