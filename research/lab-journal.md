@@ -5435,3 +5435,15 @@ v0.4在tool freeze `20c5c4bd07d842a0131e8b14896ae72ed09734fd`上使用fresh root
 v0.3/v0.4描述性复现中，三张Cycles decoded Combined digests、三张calibration PNG、asset identity、motion action与final MP4均exact；individual animatic PNG container hashes为0/288 exact，未做新的decoded-pixel实验，因此不追加像素exact主张。
 
 人工原分辨率观察与machine verdict分开记录：WIDE与MEDIUM可读，CLOSE frame 240被前景大面积遮挡，构图质量不足。Phase 0只关闭资产、animatic、calibration与审计链，不支持电影级构图、photoreal actor、人类审片或完整288帧Cycles。下一步先预注册camera-quality gate，在关键帧与廉价animatic上拒绝坏镜头，再决定是否支付full Cycles成本。
+
+## J-430 · B62证据双站发布闭环与Sites运行时A/B
+
+Date: 2026-08-29 · Type: EVIDENCE PUBLICATION / RETAINED DEPLOYMENT FAILURES · New Blender processes: 0 · New Blender renders: 0
+
+B62 Phase 0研究页、三张Cycles校准PNG与12秒animatic先以commit `5a6b321…`提交。首轮GitHub Pages因sparse checkout缺少页面直接导入的6份JSON而失败；commit `4b94250…`把exact audit/receipt/pixel evidence加入checkout后，Pages恢复。随后各发布修正触发的Pages workflows全部成功；最终公开探针验证研究页、PNG与MP4均HTTP 200。
+
+私有Sites保留全部失败版本，不把“deployment succeeded”等同于“page works”。直接推送约118 MiB全仓库与浅clone均遇到provider HTTP 500，因此改用与Pages证据选择一致的轻量source snapshot。v86因vinext default export不是`{fetch}`而deployment failed；v87增加adapter后部署成功、静态媒体200，但动态页因缺失`react/jsx-runtime`返回500；v88把全部runtime依赖绑定进单一entry，部署成功但Worker启动即Cloudflare 1101，页面与静态媒体全500；v89改为轻量worker entry与lazy bundled SSR，静态PNG/MP4恢复200，但页面SSR仍1101。
+
+最终v90没有继续要求平台实时SSR这份完全可静态化的研究档案：先由Next输出94个确定性静态页面，再由vinext生成Sites worker/fallback，最后把static export合并到client asset tree。真实本地Wrangler检查首页、B62、Blender 5.2、Journal、PNG与MP4均200；owner-only production deployment `appgdep_6a92c3931e8c8191bc4964eb0be4ec96`成功后，使用Sites身份头重复同一六项探针，全部HTTP 200。v90 source commit为`74827cdab5eb04ea368ef533bbf8193f32866559`，archive content hash为`sha256:e4ccc822a3a5f45eaad5d825cc83a628c58029b8e65b5378ee793f72bbd3de9a`。
+
+发布层结论：研究证据现在同时存在公开GitHub Pages与owner-only Sites；构建成功、部署成功、静态媒体可达和动态页面可达必须分别验证。该闭环不改变J-429的科学边界；下一技术目标仍是camera-quality gate，而不是完整288帧Cycles。
