@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
 import { spawn } from 'node:child_process';
 import { readFile, readdir } from 'node:fs/promises';
-import { relative, resolve, sep } from 'node:path';
+import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isDeepStrictEqual, promisify } from 'node:util';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -17,6 +17,7 @@ import {
   compareRecordedProcess,
   createManifest,
   deriveJobState,
+  durableMkdir,
   readJson,
   readManifest,
   readProcessIdentity,
@@ -482,6 +483,8 @@ async function runProductionCompileStage(jobRoot, manifest, candidate) {
   const stageId = 'PRODUCTION_COMPILE';
   const attemptId = candidate.attemptId;
   const candidateAdmission = await validateCompileCandidateForSpawn(jobRoot, manifest, candidate);
+  await durableMkdir(dirname(resolve(repositoryRoot, candidate.productionAttemptRoot)));
+  await durableMkdir(dirname(resolve(repositoryRoot, candidate.outputRoot)));
   await appendLedgerEvent(jobRoot, {
     eventType: 'STAGE_STARTED', stageId, attemptId,
     payload: { candidate: { preflightRoot: candidate.preflightRoot, productionAttemptRoot: candidate.productionAttemptRoot, outputRoot: candidate.outputRoot, fault: candidate.fault ?? null }, candidateAdmission },
@@ -524,7 +527,24 @@ async function runProductionCompileStage(jobRoot, manifest, candidate) {
     });
   }
   const wrapper = await launched.completion;
-  if (!nativeObserved) throw new Error('Native Blender completed or failed before durable process identity observation; recovery must fail closed');
+  if (!nativeObserved) {
+    await writeAttemptTerminal(jobRoot, stageId, attemptId, 'FAILED', {
+      failure: { classification: 'WRAPPER_EXITED_BEFORE_NATIVE_OBSERVATION', message: 'Native Blender was not durably observed; wrapper terminal evidence retained before fail-closed propagation' },
+      process: {
+        wrapper: wrapperIdentity,
+        native: null,
+        terminal: {
+          exitCode: wrapper.exitCode,
+          signal: wrapper.signal,
+          spawnError: wrapper.spawnError,
+          elapsedNanoseconds: wrapper.elapsedNanoseconds,
+          stdout: wrapper.stdout,
+          stderr: wrapper.stderr,
+        },
+      },
+    });
+    throw new Error(`Native Blender was not durably observed; wrapper terminal retained: ${wrapper.stderrText || wrapper.stdoutText || 'NO_TERMINAL_TEXT'}`);
+  }
   const processRecord = {
     wrapper: wrapperIdentity,
     native: nativeObserved,

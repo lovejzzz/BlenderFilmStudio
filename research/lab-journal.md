@@ -4873,3 +4873,13 @@ Official preflight evidence commit `ea2ccc26bad60de83e45d0052d046b70e2b83bb7`与
 Fresh clone隔离诊断直接运行同一B57命令，0.31秒、exit 1、明确返回`ENOENT`创建nested production-attempt final root失败。因此不是短Blender漏采，而是Blender从未启动：B58创建了v0.2 attempt/formal roots，却未创建它传给B57的immediate parents `production-attempts`与`outputs`；B57 final-root-only durable mkdir contract按设计拒绝。B58又在native observation为空时丢弃已完成wrapper terminal，导致误分类。
 
 Retained v0.2 attempt/formal tree共13 files，canonical tree SHA `ac13387581ecdd0293fe8b16e7e579fe1f32ab02207657d90d284171797b5b72`；last PROCESS_STARTED file SHA/event hash为`118f91d384c59b5f8359ecbf9c85d0c1d6e450fe14cfda767a33b5ff638ffd12` / `456d11d33b36a1af17cb49a4f4c3ad6b44a4c8b05128d4b31dee348a474358b4`。C6授权B58在spawn前durably创建两个exact parent，保留B57 exclusive final roots；wrapper先结束时必须先写FAILED non-promotable terminal receipt。v0.2永久失败，只允许fresh/disjoint v0.3三根重试。新增5项攻击；34 gates、72+C1-C5 attacks、Blender ceiling及所有生产语义不变。下一动作先提交推送C6、13-file failure tree与本entry，v0.3 roots在此之前禁止创建。
+
+## J-369 · B58-C6 runtime parent与terminal failure retention实现候选
+
+Date: 2026-08-29 · Type: B58 TOOL-FREEZE CORRECTION IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+C6 preregistration/evidence commit `542aecaa882133eac8b3609def0d25403bd97e18`推送后，restart-safe job在candidate final-root freshness/overlap验证之后、npm spawn之前，用ledger durable recursive mkdir创建`dirname(productionAttemptRoot)`与`dirname(outputRoot)`；B57仍exclusive-create两个final roots。若wrapper先于native observation终止，job先写`FAILED`、`promotable:false` attempt receipt，保存wrapper identity及bounded terminal hashes/exit/signal，再fail-closed传播；成功路径仍必须有live native identity。
+
+B58 preflight/runner/auditor现在把C6 spec/protocol与13-file v0.2 failure tree纳入hash/commit scope，重算tree SHA `ac133875…`，只接受v0.3 exact roots。C5 retained v0.1与v0.2 historical root authorization仍作为历史攻击独立复核；C6新增5/5 attacks覆盖tree、两个parent、terminal retention与v0.2 reuse。Formal denominator仍34。
+
+Orchestrator/preflight/runner/auditor SHA-256分别为`ee321de2cc025f502b5a845ccda7f7042bb18dbf0181fb2515f95783bd1502ef` / `e0309ecee5022b97856a64c9dd41a054c130fdffe00a16dfbc0942ba15850725` / `69828fafab17cd679a35f4396dbc849e99c5e017ef286d2909d67d37471f0c2a` / `a1d186a8007005fe3d467b38b9adcc87f8e5b57338a1209d80a7dfb178a1521a`；ledger保持`0946685b…`。四工具Node syntax、targeted ESLint zero-warning及diff check通过；v0.3 roots仍不存在。下一动作提交推送tool-freeze，再在fresh clone生成并运行v0.3 zero-Blender preflight。

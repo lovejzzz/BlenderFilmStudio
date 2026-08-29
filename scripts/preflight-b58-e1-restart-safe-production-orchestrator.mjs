@@ -40,6 +40,10 @@ const RETRY_CORRECTION_URI = 'specs/restart-safe-production-orchestrator-retry-r
 const RETRY_CORRECTION_SHA256 = '8f02d5c9514a61cea9b744d8e3550bceba07f60c80ee3cc8f7e3d1bd2689a0be';
 const RETRY_CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b58-e1-c5-retry-root-correction.md';
 const RETRY_CORRECTION_PROTOCOL_SHA256 = '4a7b740d3c9ebd3f4d31443ca58bcf5609c7248a87e4e007ac53f55339e6518d';
+const RUNTIME_PARENT_CORRECTION_URI = 'specs/restart-safe-production-orchestrator-runtime-parent-correction.v0.1.json';
+const RUNTIME_PARENT_CORRECTION_SHA256 = 'afcef120237515d51c952a9259d41467e73de1f8df59a6ee7fb085181e03cbd3';
+const RUNTIME_PARENT_CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b58-e1-c6-runtime-parent-correction.md';
+const RUNTIME_PARENT_CORRECTION_PROTOCOL_SHA256 = 'b2a17727c2d9413a939ef51206a46b89132d70882eb2e773beb27a758eba3ada';
 const RELEASE_URI = 'specs/production-compiler-entry.v0.2.json';
 const PREREGISTRATION_COMMIT = '9fe37d7c8b3d2e6b3ea522ba9c2e4515a100d99b';
 const CORRECTION_COMMIT = 'fc01f6fb74d3ad0517d27b2639e1bc057a3d44cb';
@@ -47,6 +51,7 @@ const GATE0_CORRECTION_COMMIT = '6dba91af525351b64c2147a63bf1681569ed9e29';
 const ENTRY_CORRECTION_COMMIT = 'fd808bffd0a02109dff349d9d821d9ec0ad4df3d';
 const NESTED_CORRECTION_COMMIT = 'cc808b45cacd50e415c957c6a40694e07f0151dc';
 const RETRY_CORRECTION_COMMIT = '52e7e6e56169151bcf339bd8dbc794f5748170f1';
+const RUNTIME_PARENT_CORRECTION_COMMIT = '542aecaa882133eac8b3609def0d25403bd97e18';
 const NODE = '/opt/homebrew/Cellar/node/26.5.0/bin/node';
 const NPM = '/opt/homebrew/bin/npm';
 const JOB_TOOL_PATHS = [
@@ -77,6 +82,21 @@ const SCENES = {
     planHash: 'a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687',
   },
 };
+const V02_FAILURE_URIS = [
+  'experiments/restart-safe-production-orchestrator-attempt-v0-2/admission.json',
+  'experiments/restart-safe-production-orchestrator-attempt-v0-2/attempt.json',
+  'experiments/restart-safe-production-orchestrator-attempt-v0-2/receipt.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/formal-start.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/attempts/PLAN_BIND/PLAN_BIND-0001/build-plan-a.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/attempts/PLAN_BIND/PLAN_BIND-0001/build-plan-b.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/events/000001-JOB_CREATED.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/events/000002-STAGE_STARTED.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/events/000003-STAGE_COMPLETED.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/events/000004-STAGE_STARTED.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/events/000005-PROCESS_STARTED.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/job-manifest.json',
+  'experiments/restart-safe-production-orchestrator-v0-2/jobs/B58-FORMAL-BASELINE-B01/stages/PLAN_BIND/receipt.json',
+];
 
 function parseArguments(argv) {
   const parsed = {};
@@ -130,7 +150,7 @@ async function hashGitBlob(commit, uri) {
 
 async function requireToolFreeze(parsed, release) {
   const scoped = [...new Set([
-    SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, GATE0_CORRECTION_URI, GATE0_CORRECTION_PROTOCOL_URI, ENTRY_CORRECTION_URI, ENTRY_CORRECTION_PROTOCOL_URI, NESTED_CORRECTION_URI, NESTED_CORRECTION_PROTOCOL_URI, RETRY_CORRECTION_URI, RETRY_CORRECTION_PROTOCOL_URI, RETRY_FAILURE_RECEIPT_URI, RELEASE_URI,
+    SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, GATE0_CORRECTION_URI, GATE0_CORRECTION_PROTOCOL_URI, ENTRY_CORRECTION_URI, ENTRY_CORRECTION_PROTOCOL_URI, NESTED_CORRECTION_URI, NESTED_CORRECTION_PROTOCOL_URI, RETRY_CORRECTION_URI, RETRY_CORRECTION_PROTOCOL_URI, RUNTIME_PARENT_CORRECTION_URI, RUNTIME_PARENT_CORRECTION_PROTOCOL_URI, RETRY_FAILURE_RECEIPT_URI, ...V02_FAILURE_URIS, RELEASE_URI,
     'package.json', ...Object.keys(release.frozenFiles), ...FORMAL_TOOL_PATHS,
   ])].sort();
   const head = await runGit(['rev-parse', 'HEAD'], repositoryRoot);
@@ -141,6 +161,7 @@ async function requireToolFreeze(parsed, release) {
   const entryCorrectionAncestor = await runGit(['merge-base', '--is-ancestor', ENTRY_CORRECTION_COMMIT, parsed.toolFreezeCommit], repositoryRoot);
   const nestedCorrectionAncestor = await runGit(['merge-base', '--is-ancestor', NESTED_CORRECTION_COMMIT, parsed.toolFreezeCommit], repositoryRoot);
   const retryCorrectionAncestor = await runGit(['merge-base', '--is-ancestor', RETRY_CORRECTION_COMMIT, parsed.toolFreezeCommit], repositoryRoot);
+  const runtimeParentCorrectionAncestor = await runGit(['merge-base', '--is-ancestor', RUNTIME_PARENT_CORRECTION_COMMIT, parsed.toolFreezeCommit], repositoryRoot);
   const dirty = await runGit(['status', '--porcelain=v1', '--untracked-files=all', '--', ...scoped], repositoryRoot);
   const hashes = {};
   const commitHashes = {};
@@ -150,14 +171,15 @@ async function requireToolFreeze(parsed, release) {
   }
   const releaseExact = Object.entries(release.frozenFiles).every(([uri, expected]) => hashes[uri] === expected && commitHashes[uri] === expected);
   const exact = head.stdout.trim() === parsed.toolFreezeCommit && origin.stdout.trim() === parsed.toolFreezeCommit
-    && preregAncestor.exitCode === 0 && correctionAncestor.exitCode === 0 && gate0CorrectionAncestor.exitCode === 0 && entryCorrectionAncestor.exitCode === 0 && nestedCorrectionAncestor.exitCode === 0 && retryCorrectionAncestor.exitCode === 0 && dirty.exitCode === 0 && dirty.stdout === ''
+    && preregAncestor.exitCode === 0 && correctionAncestor.exitCode === 0 && gate0CorrectionAncestor.exitCode === 0 && entryCorrectionAncestor.exitCode === 0 && nestedCorrectionAncestor.exitCode === 0 && retryCorrectionAncestor.exitCode === 0 && runtimeParentCorrectionAncestor.exitCode === 0 && dirty.exitCode === 0 && dirty.stdout === ''
     && scoped.every(uri => hashes[uri] === commitHashes[uri]) && releaseExact
     && hashes[SPEC_URI] === SPEC_SHA256 && hashes[PROTOCOL_URI] === PROTOCOL_SHA256
     && hashes[CORRECTION_URI] === CORRECTION_SHA256 && hashes[CORRECTION_PROTOCOL_URI] === CORRECTION_PROTOCOL_SHA256
     && hashes[GATE0_CORRECTION_URI] === GATE0_CORRECTION_SHA256 && hashes[GATE0_CORRECTION_PROTOCOL_URI] === GATE0_CORRECTION_PROTOCOL_SHA256
     && hashes[ENTRY_CORRECTION_URI] === ENTRY_CORRECTION_SHA256 && hashes[ENTRY_CORRECTION_PROTOCOL_URI] === ENTRY_CORRECTION_PROTOCOL_SHA256
     && hashes[NESTED_CORRECTION_URI] === NESTED_CORRECTION_SHA256 && hashes[NESTED_CORRECTION_PROTOCOL_URI] === NESTED_CORRECTION_PROTOCOL_SHA256
-    && hashes[RETRY_CORRECTION_URI] === RETRY_CORRECTION_SHA256 && hashes[RETRY_CORRECTION_PROTOCOL_URI] === RETRY_CORRECTION_PROTOCOL_SHA256;
+    && hashes[RETRY_CORRECTION_URI] === RETRY_CORRECTION_SHA256 && hashes[RETRY_CORRECTION_PROTOCOL_URI] === RETRY_CORRECTION_PROTOCOL_SHA256
+    && hashes[RUNTIME_PARENT_CORRECTION_URI] === RUNTIME_PARENT_CORRECTION_SHA256 && hashes[RUNTIME_PARENT_CORRECTION_PROTOCOL_URI] === RUNTIME_PARENT_CORRECTION_PROTOCOL_SHA256;
   return { scoped, hashes, commitHashes, releaseExact, exact };
 }
 
@@ -175,6 +197,19 @@ async function readFailedOfficialPreflight(correction) {
     && receipt.invocation.releaseCommit === correction.failedOfficialPreflight.submittedCommit
     && Object.values(receipt.operations).every(value => value === 0) && outerAbsent;
   return { exact, uri: correction.failedOfficialPreflight.receipt, sha256: createHash('sha256').update(receiptText).digest('hex'), preflightHash: receipt.preflightHash, status: receipt.status, reason: receipt.reason, submittedCommit: receipt.invocation.releaseCommit, outerAbsent, operations: receipt.operations };
+}
+
+async function readFailedFormalV02(correction) {
+  const rows = [];
+  for (const uri of V02_FAILURE_URIS) rows.push({ uri, sha256: await sha256File(resolve(repositoryRoot, uri)) });
+  const treeSha256 = createHash('sha256').update(JSON.stringify(rows)).digest('hex');
+  const lastEvent = JSON.parse(await readFile(resolve(repositoryRoot, correction.failedFormalV02.lastEvent.uri), 'utf8'));
+  const exact = rows.length === correction.failedFormalV02.fileCount && treeSha256 === correction.failedFormalV02.canonicalTreeSha256
+    && rows.find(row => row.uri === correction.failedFormalV02.lastEvent.uri)?.sha256 === correction.failedFormalV02.lastEvent.sha256
+    && validSelfHash(lastEvent, 'eventHash') && lastEvent.eventHash === correction.failedFormalV02.lastEvent.eventHash
+    && lastEvent.eventType === 'PROCESS_STARTED' && lastEvent.payload?.role === 'PRODUCTION_COMPILER_WRAPPER'
+    && lastEvent.payload?.process?.pid === correction.failedFormalV02.lastEvent.pid;
+  return { exact, fileCount: rows.length, treeSha256, lastEvent: { uri: correction.failedFormalV02.lastEvent.uri, sha256: rows.find(row => row.uri === correction.failedFormalV02.lastEvent.uri)?.sha256, eventHash: lastEvent.eventHash, role: lastEvent.payload?.role, pid: lastEvent.payload?.process?.pid }, blenderProcessesStarted: 0 };
 }
 
 async function readGate0(correction) {
@@ -340,7 +375,8 @@ async function createJobRequests(parsed, toolFreeze, cases) {
 export async function runB58Preflight(argv) {
   const parsed = parseArguments(argv);
   const retryCorrection = JSON.parse(await readFile(resolve(repositoryRoot, RETRY_CORRECTION_URI), 'utf8'));
-  if (parsed.outputRoot !== retryCorrection.authorizedRetryRoots.preflight || parsed.attemptRoot !== retryCorrection.authorizedRetryRoots.attempt || parsed.formalRoot !== retryCorrection.authorizedRetryRoots.formal) throw new Error('B58 retry roots must match the C5 frozen v0.2 roots');
+  const runtimeParentCorrection = JSON.parse(await readFile(resolve(repositoryRoot, RUNTIME_PARENT_CORRECTION_URI), 'utf8'));
+  if (parsed.outputRoot !== runtimeParentCorrection.authorizedRetryRoots.preflight || parsed.attemptRoot !== runtimeParentCorrection.authorizedRetryRoots.attempt || parsed.formalRoot !== runtimeParentCorrection.authorizedRetryRoots.formal) throw new Error('B58 retry roots must match the C6 frozen v0.3 roots');
   const roots = [parsed.outputRoot, parsed.attemptRoot, parsed.formalRoot];
   if (roots.some((left, index) => roots.some((right, other) => index !== other && rootsOverlap(left, right)))) throw new Error('B58 roots must be disjoint');
   if ((await Promise.all(roots.map(uri => pathState(resolve(repositoryRoot, uri))))).some(Boolean)) throw new Error('B58 roots must be fresh and absent');
@@ -357,6 +393,8 @@ export async function runB58Preflight(argv) {
   if (!gate0.exact) throw new Error('Gate 0 closeout or live sentinel binding is not exact');
   const failedOfficialPreflight = await readFailedOfficialPreflight(retryCorrection);
   if (!failedOfficialPreflight.exact) throw new Error('B58 v0.1 failed official preflight retention is not exact');
+  const failedFormalV02 = await readFailedFormalV02(runtimeParentCorrection);
+  if (!failedFormalV02.exact) throw new Error('B58 v0.2 failed formal tree retention is not exact');
   const suite = await sceneSuite();
   const plans = await planPairs();
   const disk = await observeDisk();
@@ -372,7 +410,8 @@ export async function runB58Preflight(argv) {
       && await sha256File(resolve(repositoryRoot, GATE0_CORRECTION_PROTOCOL_URI)) === GATE0_CORRECTION_PROTOCOL_SHA256
       && await sha256File(resolve(repositoryRoot, ENTRY_CORRECTION_PROTOCOL_URI)) === ENTRY_CORRECTION_PROTOCOL_SHA256
       && await sha256File(resolve(repositoryRoot, NESTED_CORRECTION_PROTOCOL_URI)) === NESTED_CORRECTION_PROTOCOL_SHA256
-      && await sha256File(resolve(repositoryRoot, RETRY_CORRECTION_PROTOCOL_URI)) === RETRY_CORRECTION_PROTOCOL_SHA256,
+      && await sha256File(resolve(repositoryRoot, RETRY_CORRECTION_PROTOCOL_URI)) === RETRY_CORRECTION_PROTOCOL_SHA256
+      && await sha256File(resolve(repositoryRoot, RUNTIME_PARENT_CORRECTION_PROTOCOL_URI)) === RUNTIME_PARENT_CORRECTION_PROTOCOL_SHA256,
     GATE0_CORRECTION_AND_CLOSEOUT_EXACT: await sha256File(resolve(repositoryRoot, GATE0_CORRECTION_URI)) === GATE0_CORRECTION_SHA256 && gate0.exact,
     RESTART_SAFE_DIRECT_ENTRY_AND_B57_PACKAGE_EXACT: await sha256File(resolve(repositoryRoot, ENTRY_CORRECTION_URI)) === ENTRY_CORRECTION_SHA256
       && spec.candidateProductionEntry.command === entryCorrection.authorizedCorrection.effectiveProductionEntry
@@ -381,8 +420,10 @@ export async function runB58Preflight(argv) {
       && nestedCorrection.authorizedCorrection.prepareExactParent === '<b58-preflight-root>/production-preflights'
       && productionPreflights.every(row => row.preflightRoot.startsWith(`${parsed.outputRoot}/production-preflights/`)),
     FAILED_V01_RETAINED_AND_V02_RETRY_ROOTS_EXACT: await sha256File(resolve(repositoryRoot, RETRY_CORRECTION_URI)) === RETRY_CORRECTION_SHA256
-      && failedOfficialPreflight.exact && parsed.outputRoot === retryCorrection.authorizedRetryRoots.preflight
-      && parsed.attemptRoot === retryCorrection.authorizedRetryRoots.attempt && parsed.formalRoot === retryCorrection.authorizedRetryRoots.formal,
+      && failedOfficialPreflight.exact && retryCorrection.authorizedRetryRoots.preflight === 'experiments/restart-safe-production-orchestrator-preflight-v0-2',
+    FAILED_V02_RETAINED_AND_V03_RUNTIME_PARENTS_EXACT: await sha256File(resolve(repositoryRoot, RUNTIME_PARENT_CORRECTION_URI)) === RUNTIME_PARENT_CORRECTION_SHA256
+      && failedFormalV02.exact && parsed.outputRoot === runtimeParentCorrection.authorizedRetryRoots.preflight
+      && parsed.attemptRoot === runtimeParentCorrection.authorizedRetryRoots.attempt && parsed.formalRoot === runtimeParentCorrection.authorizedRetryRoots.formal,
     PREREGISTRATIONS_PUSHED: toolFreeze.exact,
     B57_PARENT_EXACT: parent.exact,
     PRODUCTION_RELEASE_AND_TOOLS_FROZEN: toolFreeze.exact && toolFreeze.releaseExact,
@@ -409,6 +450,8 @@ export async function runB58Preflight(argv) {
     nestedPreflightCorrection: { uri: NESTED_CORRECTION_URI, sha256: NESTED_CORRECTION_SHA256, parent: `${parsed.outputRoot}/production-preflights`, childFailurePolicy: 'STOP_BEFORE_RECEIPT_READ' },
     retryRootCorrection: { uri: RETRY_CORRECTION_URI, sha256: RETRY_CORRECTION_SHA256, roots: retryCorrection.authorizedRetryRoots },
     failedOfficialPreflight,
+    runtimeParentCorrection: { uri: RUNTIME_PARENT_CORRECTION_URI, sha256: RUNTIME_PARENT_CORRECTION_SHA256, roots: runtimeParentCorrection.authorizedRetryRoots },
+    failedFormalV02,
     gate0,
     preregistrationCommit: PREREGISTRATION_COMMIT,
     correctionCommit: CORRECTION_COMMIT,
@@ -416,6 +459,7 @@ export async function runB58Preflight(argv) {
     entryCorrectionCommit: ENTRY_CORRECTION_COMMIT,
     nestedPreflightCorrectionCommit: NESTED_CORRECTION_COMMIT,
     retryRootCorrectionCommit: RETRY_CORRECTION_COMMIT,
+    runtimeParentCorrectionCommit: RUNTIME_PARENT_CORRECTION_COMMIT,
     parent,
     toolFreeze,
     toolHashes: toolFreeze.hashes,
