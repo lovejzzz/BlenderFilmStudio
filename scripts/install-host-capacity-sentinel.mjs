@@ -10,7 +10,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const specPath = resolve(repositoryRoot, 'specs/host-capacity-sentinel.v0.1.json');
+const specPath = resolve(repositoryRoot, 'specs/host-capacity-sentinel.v0.2.json');
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const sourcePlist = resolve(repositoryRoot, 'launchd/com.blenderfilmstudio.capacity-sentinel.plist');
 const installedPlist = '/Users/tianxing/Library/LaunchAgents/com.blenderfilmstudio.capacity-sentinel.plist';
@@ -137,11 +137,7 @@ try {
   const bootstrap = run('/bin/launchctl', ['bootstrap', domainTarget, installedPlist]);
   if (bootstrap.exitCode !== 0) throw new Error(`launchctl bootstrap failed: ${bootstrap.stderr.trim()}`);
   bootstrapped = true;
-  const firstLatestPath = await waitForLatest(installedAt);
-  const firstLatestModifiedMs = statSync(firstLatestPath).mtimeMs;
-  const kickstart = run('/bin/launchctl', ['kickstart', '-k', serviceTarget]);
-  if (kickstart.exitCode !== 0) throw new Error(`launchctl kickstart failed: ${kickstart.stderr.trim()}`);
-  const latestPath = await waitForLatest(firstLatestModifiedMs + 1);
+  const latestPath = await waitForLatest(installedAt);
   await sleep(1000);
   const historyPath = resolve(spec.state.root, spec.state.historyFile);
   const latestText = readFileSync(latestPath, 'utf8');
@@ -159,7 +155,7 @@ try {
       latest: { path: latestPath, sha256: sha256(latestText), selfHash: latest.selfHash, bytes: Buffer.byteLength(latestText), severity: latest.classification?.severity },
       history: { path: historyPath, sha256: sha256(historyText), selfHash: history.selfHash, bytes: Buffer.byteLength(historyText), samples: history.samples?.length },
     },
-    actions: { plistCreates: 1, bootstrapCalls: 1, kickstartCalls: 1, deletions: 0, cleanupOperations: 0, serviceRestarts: 0, dockerCalls: 0, blenderProcesses: 0, networkCalls: 0, modelCalls: 0 },
+    actions: { plistCreates: 1, bootstrapCalls: 1, kickstartCalls: 0, deletions: 0, cleanupOperations: 0, serviceRestarts: 0, dockerCalls: 0, blenderProcesses: 0, networkCalls: 0, modelCalls: 0 },
     reversible: { uninstallCommand: `${spec.runtime.nodeExecutable} ${spec.runtime.repositoryRoot}/scripts/install-host-capacity-sentinel.mjs --uninstall`, stateRetainedOnUninstall: true },
     selfHash: '',
   };

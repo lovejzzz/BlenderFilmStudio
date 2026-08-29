@@ -9,7 +9,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const specPath = resolve(repositoryRoot, 'specs/host-capacity-sentinel.v0.1.json');
+const specPath = resolve(repositoryRoot, 'specs/host-capacity-sentinel.v0.2.json');
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const root = resolve(repositoryRoot, spec.formalRoot);
 const auditPath = resolve(root, 'audit.json');
@@ -153,7 +153,7 @@ const gates = {
   RAPID_AND_LONG_LOSS_DETECTION: boundaries.RAPID_AND_LONG_LOSS_DETECTION,
   HISTORY_IS_BOUNDED: validateHistory(history),
   STATE_WRITES_ARE_ATOMIC_AND_BOUNDED: noTemps && boundedFiles && Buffer.byteLength(latestText) <= spec.state.maximumStateFileBytes && Buffer.byteLength(historyText) <= spec.state.maximumStateFileBytes,
-  NO_AUTOMATIC_DELETION_OR_RESTART: install.actions.plistCreates === 1 && install.actions.bootstrapCalls === 1 && install.actions.kickstartCalls === 1
+  NO_AUTOMATIC_DELETION_OR_RESTART: install.actions.plistCreates === 1 && install.actions.bootstrapCalls === 1 && install.actions.kickstartCalls === 0
     && install.actions.deletions === 0 && install.actions.cleanupOperations === 0 && install.actions.serviceRestarts === 0
     && install.actions.dockerCalls === 0 && install.actions.blenderProcesses === 0 && install.actions.networkCalls === 0 && install.actions.modelCalls === 0
     && spec.policy.automaticDeletion === false && spec.policy.automaticCleanup === false && spec.policy.automaticServiceRestart === false,

@@ -10,7 +10,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const spec = JSON.parse(readFileSync(resolve(repositoryRoot, 'specs/host-capacity-sentinel.v0.1.json'), 'utf8'));
+const spec = JSON.parse(readFileSync(resolve(repositoryRoot, 'specs/host-capacity-sentinel.v0.2.json'), 'utf8'));
 const canonical = value => Array.isArray(value)
   ? `[${value.map(canonical).join(',')}]`
   : value && typeof value === 'object'
