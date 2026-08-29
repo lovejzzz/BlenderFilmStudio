@@ -5013,3 +5013,11 @@ Date: 2026-08-29 · Type: B61 FORMAL PREREGISTRATION · New Blender processes: 0
 复现判据不是EXR container hash，而是每次保存后用Blender重开EXR，对decoded Combined RGBA float32 little-endian bytes求SHA；九组shot/frame A/B必须exact，独立audit重算也必须exact。PNG只用于后续review，不进入技术verdict。协议冻结16 gates、10 single-field attacks与1 GiB formal ceiling；任何pixel pair不同都fail，不设置事后容差。
 
 WIDE/MEDIUM/CLOSE source blend SHA为`9019e6dc… / 61618765… / ce11abd1…`，分别绑定B60 production receipt self-hash与structure hash。五项candidate tools和三条official roots当前均不存在。即使B61通过也不支持全序列、跨硬件、时间连续、真人视觉身份或电影感。下一动作提交推送本预注册，再实现render/audit工具；正式root在tool freeze与zero-Blender preflight前不得创建。
+
+## J-383 · B61 Blender-side render与EXR reopen算法候选
+
+Date: 2026-08-29 · Type: B61 ALGORITHM IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+预注册commit `06dcbfb`推送后，实现两段Blender-side candidate。`render_b61_frames.py`对一个shot/repetition验证source blend、Blender build、frozen OCIO environment/custom props/display/view，固定64-spp render contract，依次渲染1/72/144；每帧写multilayer EXR，从磁盘重开后取得decoded Combined RGBA float32 LE digest与finite/channel/dynamic统计，再从同一Render Result保存PNG并写self-hashed pixel/run reports。它不以container hash冒充pixel digest。
+
+`audit_b61_exr.py`在独立Blender进程中重开18个EXR，重算同一decoded projection并与18份self-hashed render report逐一匹配；不调用render。两文件SHA为`d13590ee27da8283c08d927efb86ded9fcf4ee12792ed50cbdb79e6176693bbd / f60fee8c357d951edcfdb7e1a0d82d8919c0d0a80314bcd10c86980ef8f86767`，静态Python syntax和diff check通过。尚未用正式B61 Blender验证multilayer EXR reopen API，不能据此宣称运行成功；三个official roots继续不存在。下一动作实现Node preflight/runner/auditor，再一起冻结并在fresh clone rehearsal。
