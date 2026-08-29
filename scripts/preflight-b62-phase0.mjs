@@ -70,6 +70,9 @@ const CORRECTION_6_URI = 'specs/b62-phase0-c6-blender52-config-surface-diagnosti
 const CORRECTION_7_URI = 'specs/b62-phase0-c7-eevee-engine-runtime-correction.v0.1.json';
 const CORRECTION_8_URI = 'specs/b62-phase0-c8-runtime-config-promotion-and-generator-smoke.v0.1.json';
 const CORRECTION_9_URI = 'specs/b62-phase0-c9-v03-formal-binding.v0.1.json';
+const CORRECTION_10_URI = 'specs/b62-phase0-c10-library-locality-diagnostic.v0.1.json';
+const CORRECTION_11_URI = 'specs/b62-phase0-c11-auditor-library-locality-correction.v0.1.json';
+const CORRECTION_12_URI = 'specs/b62-phase0-c12-v04-formal-retry-binding.v0.1.json';
 const PREREGISTRATION_COMMIT = 'de57b63';
 const CORRECTION_COMMIT = '9173ede';
 const CORRECTION_2_COMMIT = '9c3aba7';
@@ -80,10 +83,13 @@ const CORRECTION_6_COMMIT = '89316e0';
 const CORRECTION_7_COMMIT = 'eb9bcd6';
 const CORRECTION_8_COMMIT = 'c5b2ba9';
 const CORRECTION_9_COMMIT = '8492351';
+const CORRECTION_10_COMMIT = '1ce8ffd';
+const CORRECTION_11_COMMIT = '7060fbf';
+const CORRECTION_12_COMMIT = 'aa066ca';
 const EXPECTED = {
-  outputRoot: 'experiments/b62-phase0-preflight-v0-3',
-  attemptRoot: 'experiments/b62-phase0-attempt-v0-3',
-  formalRoot: 'experiments/b62-phase0-v0-3',
+  outputRoot: 'experiments/b62-phase0-preflight-v0-4',
+  attemptRoot: 'experiments/b62-phase0-attempt-v0-4',
+  formalRoot: 'experiments/b62-phase0-v0-4',
 };
 const TOOL_PATHS = [
   CONTRACT_URI,
@@ -96,6 +102,9 @@ const TOOL_PATHS = [
   CORRECTION_7_URI,
   CORRECTION_8_URI,
   CORRECTION_9_URI,
+  CORRECTION_10_URI,
+  CORRECTION_11_URI,
+  CORRECTION_12_URI,
   'research/2026-08-29-b62-terminal-cinematic-proof-goal.md',
   'research/2026-08-29-b62-phase0-asset-animatic-calibration-protocol.md',
   'research/2026-08-29-b62-phase0-c1-ffprobe-accounting-correction.md',
@@ -107,12 +116,21 @@ const TOOL_PATHS = [
   'research/2026-08-29-b62-phase0-c7-eevee-engine-runtime-correction.md',
   'research/2026-08-29-b62-phase0-c8-runtime-config-promotion-and-generator-smoke.md',
   'research/2026-08-29-b62-phase0-c9-v03-formal-binding.md',
+  'research/2026-08-29-b62-phase0-c10-library-locality-diagnostic.md',
+  'research/2026-08-29-b62-phase0-c11-auditor-library-locality-correction.md',
+  'research/2026-08-29-b62-phase0-c12-v04-formal-retry-binding.md',
   'experiments/b62-phase0-d2-exr-media-state-ab-v0-1/result.json',
   'experiments/b62-phase0-d2-exr-media-state-ab-v0-1/receipt.json',
   'experiments/b62-phase0-d4-config-surface-v0-1/result.json',
   'experiments/b62-phase0-d4-config-surface-v0-1/receipt.json',
   'experiments/b62-phase0-d5-generator-smoke-v0-1/result.json',
   'experiments/b62-phase0-d5-generator-smoke-v0-1/receipt.json',
+  'experiments/b62-phase0-d6-library-locality-v0-1/probe.json',
+  'experiments/b62-phase0-d6-library-locality-v0-1/result.json',
+  'experiments/b62-phase0-d6-library-locality-v0-1/receipt.json',
+  'experiments/b62-phase0-d7-corrected-auditor-smoke-v0-1/blender-audit.json',
+  'experiments/b62-phase0-d7-corrected-auditor-smoke-v0-1/result.json',
+  'experiments/b62-phase0-d7-corrected-auditor-smoke-v0-1/receipt.json',
   'blender/generate_b62_phase0_assets.py',
   'blender/render_b62_phase0.py',
   'blender/audit_b62_phase0.py',
@@ -158,6 +176,9 @@ async function verifyFreeze(commit) {
   await git(['merge-base', '--is-ancestor', CORRECTION_7_COMMIT, commit]);
   await git(['merge-base', '--is-ancestor', CORRECTION_8_COMMIT, commit]);
   await git(['merge-base', '--is-ancestor', CORRECTION_9_COMMIT, commit]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_10_COMMIT, commit]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_11_COMMIT, commit]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_12_COMMIT, commit]);
   const hashes = {};
   for (const uri of TOOL_PATHS) {
     const path = await resolveExistingRepositoryPath(uri, `B62 frozen tool ${uri}`);
@@ -205,6 +226,9 @@ export async function runB62Preflight(argv) {
   const correction7Path = await resolveExistingRepositoryPath(CORRECTION_7_URI, 'B62 C7 correction');
   const correction8Path = await resolveExistingRepositoryPath(CORRECTION_8_URI, 'B62 C8 correction');
   const correction9Path = await resolveExistingRepositoryPath(CORRECTION_9_URI, 'B62 C9 correction');
+  const correction10Path = await resolveExistingRepositoryPath(CORRECTION_10_URI, 'B62 C10 correction');
+  const correction11Path = await resolveExistingRepositoryPath(CORRECTION_11_URI, 'B62 C11 correction');
+  const correction12Path = await resolveExistingRepositoryPath(CORRECTION_12_URI, 'B62 C12 correction');
   const contract = JSON.parse(await readFile(contractPath, 'utf8'));
   const correction = JSON.parse(await readFile(correctionPath, 'utf8'));
   const correction2 = JSON.parse(await readFile(correction2Path, 'utf8'));
@@ -215,6 +239,9 @@ export async function runB62Preflight(argv) {
   const correction7 = JSON.parse(await readFile(correction7Path, 'utf8'));
   const correction8 = JSON.parse(await readFile(correction8Path, 'utf8'));
   const correction9 = JSON.parse(await readFile(correction9Path, 'utf8'));
+  const correction10 = JSON.parse(await readFile(correction10Path, 'utf8'));
+  const correction11 = JSON.parse(await readFile(correction11Path, 'utf8'));
+  const correction12 = JSON.parse(await readFile(correction12Path, 'utf8'));
   if (contract.schemaVersion !== 'bfs.b62Phase0AssetAnimaticCalibration.v0.1' || contract.statusBeforeExecution !== 'PREREGISTERED') throw new Error('B62 contract invalid');
   if (correction.statusBeforeExecution !== 'PREREGISTERED' || correction.parent.contractSha256 !== await sha256File(contractPath)) throw new Error('B62 C1 binding invalid');
   if (correction2.statusBeforeRetry !== 'PREREGISTERED' || correction2.parent.c1Sha256 !== await sha256File(correctionPath)) throw new Error('B62 C2 binding invalid');
@@ -224,8 +251,12 @@ export async function runB62Preflight(argv) {
     || correction7.parent.c6.sha256 !== await sha256File(correction6Path) || correction8.parent.c7.sha256 !== await sha256File(correction7Path)
     || correction9.parent.c6.sha256 !== await sha256File(correction6Path) || correction9.parent.c7.sha256 !== await sha256File(correction7Path)
     || correction9.parent.c8.sha256 !== await sha256File(correction8Path)
-    || correction9.authorizedFormalToolChanges.roots.preflight !== parsed.outputRoot || correction9.authorizedFormalToolChanges.roots.attempt !== parsed.attemptRoot
-    || correction9.authorizedFormalToolChanges.roots.formal !== parsed.formalRoot) throw new Error('B62 C3-C9 status/binding/root invalid');
+    || correction9.authorizedFormalToolChanges.roots.preflight !== 'experiments/b62-phase0-preflight-v0-3' || correction9.authorizedFormalToolChanges.roots.attempt !== 'experiments/b62-phase0-attempt-v0-3'
+    || correction9.authorizedFormalToolChanges.roots.formal !== 'experiments/b62-phase0-v0-3'
+    || correction10.statusBeforeDiagnostic !== 'PREREGISTERED' || correction11.statusBeforeAuditorChange !== 'PREREGISTERED' || correction12.statusBeforeFormalToolChange !== 'PREREGISTERED'
+    || correction11.parent.c10.sha256 !== await sha256File(correction10Path) || correction12.parent.c10.sha256 !== await sha256File(correction10Path) || correction12.parent.c11.sha256 !== await sha256File(correction11Path)
+    || correction12.authorizedFormalToolChanges.roots.preflight !== parsed.outputRoot || correction12.authorizedFormalToolChanges.roots.attempt !== parsed.attemptRoot
+    || correction12.authorizedFormalToolChanges.roots.formal !== parsed.formalRoot) throw new Error('B62 C3-C12 status/binding/root invalid');
   for (const [uri, expected] of [['experiments/b62-phase0-attempt-v0-1', correction3.retainedFailure.attemptTree], ['experiments/b62-phase0-v0-1', correction3.retainedFailure.formalTree], [correction4.retainedD1.root, correction4.retainedD1.tree]]) {
     if (!isDeepStrictEqual(await treeIdentity(uri), expected)) throw new Error(`B62 retained failure tree drift: ${uri}`);
   }
@@ -251,6 +282,22 @@ export async function runB62Preflight(argv) {
       || await sha256File(receiptPath) !== expected.receipt.sha256 || !validSelfHash(receipt, 'receiptHash') || receipt.receiptHash !== expected.receipt.receiptHash || receipt.status !== 'PASS') throw new Error(`B62 ${id.toUpperCase()} promoting evidence invalid`);
     promoted[id] = { resultHash: result.resultHash, receiptHash: receipt.receiptHash };
   }
+  for (const [uri, expected] of [[correction12.retainedV03.attemptRoot, correction12.retainedV03.attemptTree], [correction12.retainedV03.formalRoot, correction12.retainedV03.formalTree]]) {
+    if (!isDeepStrictEqual(await treeIdentity(uri), expected)) throw new Error(`B62 C12 retained tree drift: ${uri}`);
+  }
+  const d6Expected = correction11.promotingEvidence;
+  if (!isDeepStrictEqual(await treeIdentity(d6Expected.root), d6Expected.tree)) throw new Error('B62 D6 tree invalid');
+  for (const [name, field] of [['probe', 'probeHash'], ['result', 'resultHash'], ['receipt', 'receiptHash']]) {
+    const path = await resolveExistingRepositoryPath(`${d6Expected.root}/${name}.json`, `B62 D6 ${name}`); const value = JSON.parse(await readFile(path, 'utf8'));
+    if (await sha256File(path) !== d6Expected[name].sha256 || !validSelfHash(value, field) || value[field] !== d6Expected[name][field] || value.status !== 'PASS') throw new Error(`B62 D6 ${name} invalid`);
+  }
+  const d7Expected = correction12.promotingEvidence.d7;
+  if (!isDeepStrictEqual(await treeIdentity(d7Expected.root), d7Expected.tree)) throw new Error('B62 D7 tree invalid');
+  for (const [name, file, field] of [['audit', 'blender-audit.json', 'auditHash'], ['result', 'result.json', 'resultHash'], ['receipt', 'receipt.json', 'receiptHash']]) {
+    const path = await resolveExistingRepositoryPath(`${d7Expected.root}/${file}`, `B62 D7 ${name}`); const value = JSON.parse(await readFile(path, 'utf8'));
+    if (await sha256File(path) !== d7Expected[name].sha256 || !validSelfHash(value, field) || value[field] !== d7Expected[name][field] || value.status !== 'PASS') throw new Error(`B62 D7 ${name} invalid`);
+  }
+  promoted.d6 = { receiptHash: d6Expected.receipt.receiptHash }; promoted.d7 = { receiptHash: d7Expected.receipt.receiptHash, auditHash: d7Expected.audit.auditHash };
   const toolHashes = await verifyFreeze(parsed.toolFreezeCommit);
   const upstream = await verifyUpstream(contract);
   for (const binary of ['/Applications/Blender.app/Contents/MacOS/Blender', '/opt/homebrew/bin/ffmpeg', '/opt/homebrew/bin/ffprobe']) await access(binary, constants.X_OK);
@@ -260,7 +307,7 @@ export async function runB62Preflight(argv) {
   const reserveBytes = BigInt(contract.processBudget.minimumFreeReserveBytes);
   if (availableBytes - projectedBytes < reserveBytes) throw new Error('B62 disk reserve admission failed');
   const checks = [
-    ['PREREGISTRATION_C1_TO_C9_ANCESTRY', true],
+    ['PREREGISTRATION_C1_TO_C12_ANCESTRY', true],
     ['TOOL_FREEZE_EQUALS_PUSHED_HEAD', Object.keys(toolHashes).length === TOOL_PATHS.length],
     ['UPSTREAM_RECEIPTS_EXACT', upstream.length === 3],
     ['ROOTS_FRESH', true],
@@ -286,7 +333,10 @@ export async function runB62Preflight(argv) {
     correction7: { uri: CORRECTION_7_URI, sha256: await sha256File(correction7Path) },
     correction8: { uri: CORRECTION_8_URI, sha256: await sha256File(correction8Path) },
     correction9: { uri: CORRECTION_9_URI, sha256: await sha256File(correction9Path) },
-    diagnostics: { d2ResultHash: d2Result.resultHash, d2ReceiptHash: d2Receipt.receiptHash, d4: promoted.d4, d5: promoted.d5 },
+    correction10: { uri: CORRECTION_10_URI, sha256: await sha256File(correction10Path) },
+    correction11: { uri: CORRECTION_11_URI, sha256: await sha256File(correction11Path) },
+    correction12: { uri: CORRECTION_12_URI, sha256: await sha256File(correction12Path) },
+    diagnostics: { d2ResultHash: d2Result.resultHash, d2ReceiptHash: d2Receipt.receiptHash, d4: promoted.d4, d5: promoted.d5, d6: promoted.d6, d7: promoted.d7 },
     upstream, toolHashes, checks,
     disk: { availableBytes: availableBytes.toString(), projectedBytes: projectedBytes.toString(), minimumReserveBytes: reserveBytes.toString() },
     operations: { childProcesses: 0, blenderStarts: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },

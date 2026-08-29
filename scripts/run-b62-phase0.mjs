@@ -24,14 +24,18 @@ const CORRECTION_6_URI = 'specs/b62-phase0-c6-blender52-config-surface-diagnosti
 const CORRECTION_7_URI = 'specs/b62-phase0-c7-eevee-engine-runtime-correction.v0.1.json';
 const CORRECTION_8_URI = 'specs/b62-phase0-c8-runtime-config-promotion-and-generator-smoke.v0.1.json';
 const CORRECTION_9_URI = 'specs/b62-phase0-c9-v03-formal-binding.v0.1.json';
+const CORRECTION_10_URI = 'specs/b62-phase0-c10-library-locality-diagnostic.v0.1.json';
+const CORRECTION_11_URI = 'specs/b62-phase0-c11-auditor-library-locality-correction.v0.1.json';
+const CORRECTION_12_URI = 'specs/b62-phase0-c12-v04-formal-retry-binding.v0.1.json';
 const EXPECTED = {
-  preflightRoot: 'experiments/b62-phase0-preflight-v0-3',
-  attemptRoot: 'experiments/b62-phase0-attempt-v0-3',
-  formalRoot: 'experiments/b62-phase0-v0-3',
+  preflightRoot: 'experiments/b62-phase0-preflight-v0-4',
+  attemptRoot: 'experiments/b62-phase0-attempt-v0-4',
+  formalRoot: 'experiments/b62-phase0-v0-4',
 };
 const TOOL_PATHS = [
   CONTRACT_URI, CORRECTION_URI, CORRECTION_2_URI, CORRECTION_3_URI, CORRECTION_4_URI, CORRECTION_5_URI,
   CORRECTION_6_URI, CORRECTION_7_URI, CORRECTION_8_URI, CORRECTION_9_URI,
+  CORRECTION_10_URI, CORRECTION_11_URI, CORRECTION_12_URI,
   'research/2026-08-29-b62-terminal-cinematic-proof-goal.md',
   'research/2026-08-29-b62-phase0-asset-animatic-calibration-protocol.md',
   'research/2026-08-29-b62-phase0-c1-ffprobe-accounting-correction.md',
@@ -43,12 +47,21 @@ const TOOL_PATHS = [
   'research/2026-08-29-b62-phase0-c7-eevee-engine-runtime-correction.md',
   'research/2026-08-29-b62-phase0-c8-runtime-config-promotion-and-generator-smoke.md',
   'research/2026-08-29-b62-phase0-c9-v03-formal-binding.md',
+  'research/2026-08-29-b62-phase0-c10-library-locality-diagnostic.md',
+  'research/2026-08-29-b62-phase0-c11-auditor-library-locality-correction.md',
+  'research/2026-08-29-b62-phase0-c12-v04-formal-retry-binding.md',
   'experiments/b62-phase0-d2-exr-media-state-ab-v0-1/result.json',
   'experiments/b62-phase0-d2-exr-media-state-ab-v0-1/receipt.json',
   'experiments/b62-phase0-d4-config-surface-v0-1/result.json',
   'experiments/b62-phase0-d4-config-surface-v0-1/receipt.json',
   'experiments/b62-phase0-d5-generator-smoke-v0-1/result.json',
   'experiments/b62-phase0-d5-generator-smoke-v0-1/receipt.json',
+  'experiments/b62-phase0-d6-library-locality-v0-1/probe.json',
+  'experiments/b62-phase0-d6-library-locality-v0-1/result.json',
+  'experiments/b62-phase0-d6-library-locality-v0-1/receipt.json',
+  'experiments/b62-phase0-d7-corrected-auditor-smoke-v0-1/blender-audit.json',
+  'experiments/b62-phase0-d7-corrected-auditor-smoke-v0-1/result.json',
+  'experiments/b62-phase0-d7-corrected-auditor-smoke-v0-1/receipt.json',
   'blender/generate_b62_phase0_assets.py', 'blender/render_b62_phase0.py', 'blender/audit_b62_phase0.py',
   'scripts/preflight-b62-phase0.mjs', 'scripts/run-b62-phase0.mjs', 'scripts/audit-b62-phase0.mjs',
 ];
@@ -187,6 +200,9 @@ export async function runB62(argv) {
   const correction7 = JSON.parse(await readFile(await resolveExistingRepositoryPath(CORRECTION_7_URI, 'B62 C7'), 'utf8'));
   const correction8 = JSON.parse(await readFile(await resolveExistingRepositoryPath(CORRECTION_8_URI, 'B62 C8'), 'utf8'));
   const correction9 = JSON.parse(await readFile(await resolveExistingRepositoryPath(CORRECTION_9_URI, 'B62 C9'), 'utf8'));
+  const correction10 = JSON.parse(await readFile(await resolveExistingRepositoryPath(CORRECTION_10_URI, 'B62 C10'), 'utf8'));
+  const correction11 = JSON.parse(await readFile(await resolveExistingRepositoryPath(CORRECTION_11_URI, 'B62 C11'), 'utf8'));
+  const correction12 = JSON.parse(await readFile(await resolveExistingRepositoryPath(CORRECTION_12_URI, 'B62 C12'), 'utf8'));
   const preflight = JSON.parse(await readFile(preflightPath, 'utf8'));
   if (!validSelfHash(preflight, 'preflightHash') || preflight.status !== 'ACCEPTED' || preflight.toolFreezeCommit !== parsed.toolFreezeCommit) throw new Error('B62 preflight invalid');
   if (correction.statusBeforeExecution !== 'PREREGISTERED' || correction.correction.ffprobeMetadataProcesses !== 1) throw new Error('B62 C1 invalid');
@@ -194,8 +210,10 @@ export async function runB62(argv) {
   if (correction3.statusBeforeDiagnostic !== 'PREREGISTERED' || correction4.statusBeforeDiagnostic !== 'PREREGISTERED'
     || correction5.statusBeforeProductionToolChange !== 'PREREGISTERED' || correction6.statusBeforeDiagnostic !== 'PREREGISTERED'
     || correction7.statusBeforeDiagnostic !== 'PREREGISTERED' || correction8.statusBeforeProductionToolChange !== 'PREREGISTERED'
-    || correction9.statusBeforeFormalToolChange !== 'PREREGISTERED' || correction9.authorizedFormalToolChanges.roots.preflight !== parsed.preflightRoot
-    || correction9.authorizedFormalToolChanges.roots.attempt !== parsed.attemptRoot || correction9.authorizedFormalToolChanges.roots.formal !== parsed.formalRoot) throw new Error('B62 C3-C9 invalid');
+    || correction9.statusBeforeFormalToolChange !== 'PREREGISTERED' || correction10.statusBeforeDiagnostic !== 'PREREGISTERED'
+    || correction11.statusBeforeAuditorChange !== 'PREREGISTERED' || correction12.statusBeforeFormalToolChange !== 'PREREGISTERED'
+    || correction12.authorizedFormalToolChanges.roots.preflight !== parsed.preflightRoot || correction12.authorizedFormalToolChanges.roots.attempt !== parsed.attemptRoot
+    || correction12.authorizedFormalToolChanges.roots.formal !== parsed.formalRoot) throw new Error('B62 C3-C12 invalid');
   const toolHashes = await verifyFreeze(parsed, preflightPath);
   await durableMkdir(attemptPath);
   const attempt = await writeDurableHashed(resolve(attemptPath, 'attempt.json'), {
@@ -215,7 +233,7 @@ export async function runB62(argv) {
   await durableMkdir(resolve(formalPath, 'reports'));
   await writeDurableHashed(resolve(formalPath, 'formal-start.json'), {
     schemaVersion: 'bfs.b62Phase0FormalStart.v0.1', sequence: 4, status: 'AUTHORIZED', attemptReceiptHash: attemptReceipt.receiptHash,
-    contract: CONTRACT_URI, corrections: [CORRECTION_URI, CORRECTION_2_URI, CORRECTION_3_URI, CORRECTION_4_URI, CORRECTION_5_URI, CORRECTION_6_URI, CORRECTION_7_URI, CORRECTION_8_URI, CORRECTION_9_URI], toolFreezeCommit: parsed.toolFreezeCommit, preflightEvidenceCommit: parsed.preflightEvidenceCommit,
+    contract: CONTRACT_URI, corrections: [CORRECTION_URI, CORRECTION_2_URI, CORRECTION_3_URI, CORRECTION_4_URI, CORRECTION_5_URI, CORRECTION_6_URI, CORRECTION_7_URI, CORRECTION_8_URI, CORRECTION_9_URI, CORRECTION_10_URI, CORRECTION_11_URI, CORRECTION_12_URI], toolFreezeCommit: parsed.toolFreezeCommit, preflightEvidenceCommit: parsed.preflightEvidenceCommit,
   }, 'formalStartHash');
   const env = { PATH: '/opt/homebrew/bin:/usr/bin:/bin', LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8', OCIO: resolve(repositoryRoot, 'color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio') };
   const maxLog = contract.processBudget.maximumCapturedLogBytesPerProcess;

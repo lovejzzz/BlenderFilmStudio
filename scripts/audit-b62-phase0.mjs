@@ -22,10 +22,13 @@ const CORRECTION_6_URI = 'specs/b62-phase0-c6-blender52-config-surface-diagnosti
 const CORRECTION_7_URI = 'specs/b62-phase0-c7-eevee-engine-runtime-correction.v0.1.json';
 const CORRECTION_8_URI = 'specs/b62-phase0-c8-runtime-config-promotion-and-generator-smoke.v0.1.json';
 const CORRECTION_9_URI = 'specs/b62-phase0-c9-v03-formal-binding.v0.1.json';
+const CORRECTION_10_URI = 'specs/b62-phase0-c10-library-locality-diagnostic.v0.1.json';
+const CORRECTION_11_URI = 'specs/b62-phase0-c11-auditor-library-locality-correction.v0.1.json';
+const CORRECTION_12_URI = 'specs/b62-phase0-c12-v04-formal-retry-binding.v0.1.json';
 const EXPECTED = {
-  preflightRoot: 'experiments/b62-phase0-preflight-v0-3',
-  attemptRoot: 'experiments/b62-phase0-attempt-v0-3',
-  formalRoot: 'experiments/b62-phase0-v0-3',
+  preflightRoot: 'experiments/b62-phase0-preflight-v0-4',
+  attemptRoot: 'experiments/b62-phase0-attempt-v0-4',
+  formalRoot: 'experiments/b62-phase0-v0-4',
 };
 const PROCESS_IDS = [
   '01-GENERATOR', '02-ANIMATIC', '03-FFMPEG', '04-FFPROBE',
@@ -169,6 +172,9 @@ export async function auditB62(argv) {
   const correction7Record = await json(CORRECTION_7_URI); const correction7 = correction7Record.value;
   const correction8Record = await json(CORRECTION_8_URI); const correction8 = correction8Record.value;
   const correction9Record = await json(CORRECTION_9_URI); const correction9 = correction9Record.value;
+  const correction10Record = await json(CORRECTION_10_URI); const correction10 = correction10Record.value;
+  const correction11Record = await json(CORRECTION_11_URI); const correction11 = correction11Record.value;
+  const correction12Record = await json(CORRECTION_12_URI); const correction12 = correction12Record.value;
   const preflight = await json(`${parsed.preflightRoot}/preflight.json`);
   requireValue(validSelfHash(preflight.value, 'preflightHash') && preflight.value.status === 'ACCEPTED', 'B62 preflight invalid');
   requireValue(preflight.value.contract.sha256 === await sha256File(contractRecord.path)
@@ -181,11 +187,15 @@ export async function auditB62(argv) {
     && preflight.value.correction7.sha256 === await sha256File(correction7Record.path)
     && preflight.value.correction8.sha256 === await sha256File(correction8Record.path)
     && preflight.value.correction9.sha256 === await sha256File(correction9Record.path)
+    && preflight.value.correction10.sha256 === await sha256File(correction10Record.path)
+    && preflight.value.correction11.sha256 === await sha256File(correction11Record.path)
+    && preflight.value.correction12.sha256 === await sha256File(correction12Record.path)
     && correction.correction.ffprobeMetadataProcesses === 1 && correction2.statusBeforeRetry === 'PREREGISTERED'
     && correction3.statusBeforeDiagnostic === 'PREREGISTERED' && correction4.statusBeforeDiagnostic === 'PREREGISTERED'
     && correction5.statusBeforeProductionToolChange === 'PREREGISTERED' && correction6.statusBeforeDiagnostic === 'PREREGISTERED'
     && correction7.statusBeforeDiagnostic === 'PREREGISTERED' && correction8.statusBeforeProductionToolChange === 'PREREGISTERED'
-    && correction9.statusBeforeFormalToolChange === 'PREREGISTERED', 'B62 contract/correction binding mismatch');
+    && correction9.statusBeforeFormalToolChange === 'PREREGISTERED' && correction10.statusBeforeDiagnostic === 'PREREGISTERED'
+    && correction11.statusBeforeAuditorChange === 'PREREGISTERED' && correction12.statusBeforeFormalToolChange === 'PREREGISTERED', 'B62 contract/correction binding mismatch');
   const generation = await json(`${parsed.formalRoot}/reports/generation-report.json`);
   requireValue(validSelfHash(generation.value, 'reportHash') && generation.value.status === 'PASS'
     && isDeepStrictEqual(generation.value.color, NEUTRAL_COLOR), 'B62 generation report invalid');
@@ -224,6 +234,14 @@ export async function auditB62(argv) {
   const blenderAudit = await json(`${parsed.formalRoot}/reports/blender-audit.json`);
   requireValue(validSelfHash(blenderAudit.value, 'auditHash') && blenderAudit.value.status === 'PASS'
     && Object.values(blenderAudit.value.checks).every(Boolean), 'B62 independent Blender audit invalid');
+  const localityExact = blenderAudit.value.masterLocality.libraries.length === 0 && blenderAudit.value.masterLocality.linkedIds.length === 0
+    && blenderAudit.value.assetLibraries.length === 3 && blenderAudit.value.assetLibraries.every(row => row.findings.length === 0
+      && row.locality.appendedIds.length > 0 && row.locality.appendedIds.every(item => item.library === null)
+      && row.locality.sourceDescriptors.length === 1 && row.locality.sourceDescriptors[0].isMissing === false
+      && row.locality.sourceDescriptors[0].filepath === resolve(repositoryRoot, parsed.formalRoot, 'assets', `${row.assetId}.blend`)
+      && row.locality.descriptorRemovalErrors.length === 0 && row.locality.afterDescriptorRemoval.every(item => item.present && item.library === null)
+      && Object.values(row.locality.cleanup).every(Boolean));
+  requireValue(localityExact, 'B62 independent Blender locality evidence invalid');
 
   const processes = [];
   for (const id of PROCESS_IDS) processes.push(await verifyProcess(parsed, id));
@@ -250,7 +268,7 @@ export async function auditB62(argv) {
     upstreamExact: preflight.value.upstream.length === 3,
     preregistrationPushed: preflight.value.checks.every(row => row.pass) && /^[0-9a-f]{40}$/.test(preflight.value.toolFreezeCommit),
     assetIdentityExact: blenderAudit.value.checks.assetIdentityAndTopologyExact,
-    assetSafe: blenderAudit.value.checks.assetLibrariesSafe && blenderAudit.value.checks.masterTextBlocksZero && blenderAudit.value.checks.masterDriversZero && blenderAudit.value.checks.masterExternalLibrariesZero,
+    assetSafe: blenderAudit.value.checks.assetLibrariesSafe && blenderAudit.value.checks.masterTextBlocksZero && blenderAudit.value.checks.masterDriversZero && blenderAudit.value.checks.masterExternalLibrariesZero && localityExact,
     requiredBonesExact: blenderAudit.value.checks.requiredBonesExact,
     shotContractExact,
     contactDistanceM: contact.contactDistanceM,
@@ -331,6 +349,8 @@ export async function auditB62(argv) {
       { uri: CORRECTION_5_URI, sha256: await sha256File(correction5Record.path) },
       { uri: CORRECTION_6_URI, sha256: await sha256File(correction6Record.path) }, { uri: CORRECTION_7_URI, sha256: await sha256File(correction7Record.path) },
       { uri: CORRECTION_8_URI, sha256: await sha256File(correction8Record.path) }, { uri: CORRECTION_9_URI, sha256: await sha256File(correction9Record.path) },
+      { uri: CORRECTION_10_URI, sha256: await sha256File(correction10Record.path) }, { uri: CORRECTION_11_URI, sha256: await sha256File(correction11Record.path) },
+      { uri: CORRECTION_12_URI, sha256: await sha256File(correction12Record.path) },
     ],
     preflight: { uri: `${parsed.preflightRoot}/preflight.json`, sha256: await sha256File(preflight.path), preflightHash: preflight.value.preflightHash },
     generation: { reportHash: generation.value.reportHash, assetIdentityHashes: Object.fromEntries(Object.entries(generation.value.manifests).map(([id, row]) => [id, row.identityHash])) },
