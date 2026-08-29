@@ -5077,3 +5077,11 @@ WIDE-A约5.02秒完成frame 1 EXR durable write，随后`pixel_projection()`在`
 Failure summary file SHA/self-hash为`2c32bef58fe631f63c64778c7f548bf66ad84aca3b61b10262de0ea1944eb27a / 54666b30f13b664ee4aa0e8efc9725da823c98d9de8938869366903f00e0af39`，明确`rootCauseProven:true`。Attempt tree为6 files/6,864 bytes/`46e5744c…`；加入failure summary后的formal tree为5 files/1,351,590 bytes/`440a8802…`；retained EXR SHA为`a094fcae…`。
 
 由于修正decoder前仍需证明Blender 5.2内可用的磁盘EXR接口，D1只预注册一个30秒、1 Blender start、zero-render诊断：复现bpy空pixel路径，枚举Image RNA，并测试Blender随附OpenImageIO能否唯一解析Combined RGBA及两次float32-LE exact digest。D1不授权formal retry；只有PASS后才能另行预注册C2和fresh v0.3 roots。
+
+## J-390 · B61-D1零渲染EXR decoder探针候选
+
+Date: 2026-08-29 · Type: DIAGNOSTIC TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+D1预注册commit `9d5cc09`推送后，实现一个Blender-side probe和一个bounded Node supervisor。Probe首先使用bpy重开保留EXR并记录Image identity/RNA/pixel count，再导入Blender 5.2随附OpenImageIO与NumPy；它枚举所有subimages/channels，只接受唯一以`Combined`结尾的RGBA quartet，以float32读取并显式转换为little-endian contiguous RGBA bytes，独立重开解码两次。Supervisor在启动前重算v0.2两棵失败树、failure self-hash与EXR binding，限定一个带`--python-exit-code 1`的Blender process、30秒、zero render/model/network/Docker和1 MiB输出。
+
+Probe/runner SHA-256为`25573038f7c163c689d7f198c187ca3e2752261e811ce90bb86448c12aba6fb8 / 0bf2c25e9d57035bae82df6007d1249c72599b10a587d963bd41fd4e80fbacc8`；spec/protocol SHA为`c7c3c71ea85512a77815d3bc85d9cd61b66818ba2bfb4cff8b90a1c1c09fe431 / e3f950f48c1a59e980b344caf297a3b3937ca6787b28ed00c975b65a7b835528`。Node syntax、targeted ESLint zero-warning、Python syntax与diff check通过，正式D1 output root仍不存在。下一动作提交推送形成tool freeze；在tool freeze与origin exact之前不得创建`experiments/b61-exr-reopen-diagnostic-v0-1`或启动诊断Blender。
