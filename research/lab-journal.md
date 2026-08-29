@@ -5477,3 +5477,13 @@ D1 C1 retry以tool freeze `9e17cd798732098c089aabe083b037c076f2c705`运行。PRI
 科学结论按预注册原样REJECTED：`CLOSE_REFLECTION`的near-field share为0，不满足0.5 m阈值；`WIDE_APPROACH`反而满足complete signature。原因不是控制帧视觉失败，而是普通`scene.ray_cast`把只有Volume连接、没有Surface连接的`B62_ATMOSPHERE`闭合网格边界当成opaque first hit。因此不得改0.5 m或删除WIDE反例，verdict保留为`B62_CLOSE_FAILURE_GEOMETRIC_NEAR_OCCLUSION_NOT_LOCALIZED`。
 
 D1同时暴露另一条待检信号：CLOSE 2,304/2,304 rays均first-hit `B62_HELMET`，角色on-screen vertex fraction仅0.07549，unclamped bounds大幅越界而clamped union area为1.0；WIDE/MEDIUM分别为1.0/0.65649 on-screen。D2在任何新工具创建前冻结material-aware traversal：仅跳过每个material slot都Volume-linked且Surface-unlinked的owner，10 μm推进、最多64 intersections；two independent Blender重新测三帧。CLOSE必须同时满足helmet dominant≥0.95、character blocker≥0.95、on-screen vertices≤0.10、clamped area≥0.95、anchors≤1/5，且两controls不满足全条件。阈值明确由D1导出，只能定位该失败，不能宣称通用电影构图或holdout通过。
+
+## J-434 · B62-Q1-D2材质感知定位PASS与D3有界相机搜索预注册
+
+Date: 2026-08-29 · Type: DIAGNOSTIC SCIENTIFIC PASS / CAMERA SEARCH PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+D2以tool freeze `8a898331c531e4115dd9f10ff1285473f739950b`运行，PRIMARY/INDEPENDENT分别0.665/0.644秒、peak sampled RSS 258,179,072/265,748,480 bytes，Node auditor 0.086秒。13/13 checks与完整observation在1e-9内同意；root为9 files/5,153,731 bytes/tree `d1f21b573b6f6bb5579106bfd6100afeadf7acf1b7b72e39dec6c44659775cf9`，receipt file/self为`b0faa652…/d9554b57…`，zero render/model/network/Docker。
+
+`B62_ATMOSPHERE`被两实现exact证明为`MAT_B62_VOLUME`、one Material Output、Volume linked、Surface unlinked，并按冻结规则穿透。WIDE的visual blocker因此恢复为多对象场景，dominant为floor 0.17014、character share 0.03993；MEDIUM为torso 0.21918、character share 0.56033。CLOSE仍是2,304/2,304 helmet、character share 1.0、on-screen vertex fraction 0.07549、clamped area 1.0、anchors 1/5；只有CLOSE满足六项完整signature。scientific verdict为`B62_CLOSE_FAILURE_MATERIAL_AWARE_EXTREME_HELMET_FRAMING_LOCALIZED`。
+
+D3在任何search工具创建前冻结96-cell相机族：8个绕target的world-Z azimuth × 3个radial scale × 4个lens，只读测frames 216/240/264；frames 193/204/228/252/276/288预先封存为后续holdout。two independent Blender必须搜索完整288 cells。候选需在三帧都露出visor+eye，helmet≤0.70、character blockers 0.20–0.90、on-screen vertices 0.10–0.60、clamped area 0.35–0.90、visible anchors≥2；原始baseline必须失败。通过只证明有界族内存在eligible correction，不等于渲染或电影感通过。

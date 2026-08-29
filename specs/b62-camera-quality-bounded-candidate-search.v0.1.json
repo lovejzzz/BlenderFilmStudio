@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityBoundedCandidateSearch.v0.1",
+  "experimentId": "B62-Q1-D3",
+  "title": "Bounded material-aware camera candidate search for CLOSE_REFLECTION",
+  "date": "2026-08-29",
+  "question": "Does a frozen 96-cell camera grid contain a conservative CLOSE_REFLECTION candidate that exposes the face, avoids the D2 extreme-framing signature, and remains valid across three disclosed derivation frames?",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "parentEvidence": {
+    "d2": {
+      "root": "experiments/b62-camera-quality-material-aware-framing-v0-1",
+      "tree": {"files": 9, "bytes": 5153731, "treeSha256": "d1f21b573b6f6bb5579106bfd6100afeadf7acf1b7b72e39dec6c44659775cf9"},
+      "receipt": {"uri": "experiments/b62-camera-quality-material-aware-framing-v0-1/receipt.json", "sha256": "b0faa652b068647331cfc62d4de3e7e55612161ece766c01544b4d09c49465d5", "receiptHash": "d9554b5714ef0c1a46cc67a9e9ab02b5dc6932c3a996e273bcede1138a58d195"},
+      "verdict": "B62_CLOSE_FAILURE_MATERIAL_AWARE_EXTREME_HELMET_FRAMING_LOCALIZED"
+    },
+    "masterScene": {"uri": "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend", "sha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"},
+    "generatorSource": {"uri": "blender/generate_b62_phase0_assets.py", "sha256": "e56054823bc68a80151c4f2d9ae14fcae9ae365b36a16e132051f5948df223ec"},
+    "originalCloseCamera": {
+      "camera": "CAM_CLOSE_REFLECTION",
+      "lensMillimeters": 100.0,
+      "startFrame": 193,
+      "endFrame": 288,
+      "startLocation": [1.25, 1.42, 1.82],
+      "endLocation": [0.82, 1.04, 1.76],
+      "lookAtTarget": [0.0, 0.67, 1.72]
+    }
+  },
+  "runtime": {
+    "blender": {"executable": "/Applications/Blender.app/Contents/MacOS/Blender", "version": "Blender 5.2.0 LTS", "buildHash": "fbe6228777e7", "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"},
+    "forbidden": ["bpy.ops.render", "scene save", "source .blend mutation", "model calls", "network access", "Docker or Colima"]
+  },
+  "design": {
+    "derivationFrames": [216, 240, 264],
+    "sealedHoldoutFrames": [193, 204, 228, 252, 276, 288],
+    "holdoutRule": "No D3 Blender tool may set, measure, render or emit any sealed holdout frame. Those frames remain reserved for the later correction-validation experiment.",
+    "candidateGrid": {
+      "azimuthDegreesAroundWorldZ": [-180, -135, -90, -45, 0, 45, 90, 135],
+      "radialScaleFromTarget": [1.0, 1.5, 2.0],
+      "lensMillimeters": [50.0, 65.0, 85.0, 100.0],
+      "candidateCount": 96,
+      "transform": "At each derivation frame, read the original evaluated camera location C and frozen target T. Rotate (C-T) around world Z by azimuth, multiply the full rotated vector by radialScale, set candidate location to T plus that vector, set lens, and recompute rotation with -Z tracking T and Y up.",
+      "baselineCandidate": {"azimuthDegrees": 0, "radialScale": 1.0, "lensMillimeters": 100.0}
+    },
+    "measurement": {
+      "screenRayGrid": {"width": 32, "height": 18, "sample": "PIXEL_CENTER", "rayMaximumMeters": 1000.0},
+      "materialAwareTraversal": {"definition": "Identical to D2: skip only owners whose every populated material slot is node-based, Volume-linked and Surface-unlinked.", "advanceEpsilonMeters": 0.00001, "maximumIntersectionsPerRay": 64},
+      "semanticAnchors": ["B62_VISOR", "B62_EYE_SLIT", "B62_CHEST_LIGHT", "B62_HAND_R", "B62_CORE"],
+      "faceAnchors": ["B62_VISOR", "B62_EYE_SLIT"],
+      "perCandidatePerFrame": ["first visual-blocker object/group roster", "helmet and character blocker share", "five exact anchor visibility values", "character projected-vertex on-screen fraction", "character clamped union area"]
+    },
+    "feasibilityConjunctionAtEveryDerivationFrame": {
+      "faceAnchorExactVisibility": "both B62_VISOR and B62_EYE_SLIT",
+      "helmetVisualBlockerShareMaximum": 0.70,
+      "characterVisualBlockerShareMinimum": 0.20,
+      "characterVisualBlockerShareMaximum": 0.90,
+      "characterOnScreenVertexFractionMinimum": 0.10,
+      "characterOnScreenVertexFractionMaximum": 0.60,
+      "characterClampedUnionAreaFractionMinimum": 0.35,
+      "characterClampedUnionAreaFractionMaximum": 0.90,
+      "visibleSemanticAnchorCountMinimum": 2
+    },
+    "selection": {
+      "baselineMustBeInfeasible": true,
+      "winnerPool": "All candidates satisfying the complete conjunction at all three derivation frames.",
+      "deterministicOrder": [
+        "smallest interventionCost = abs(azimuthDegrees)/180 + abs(radialScale-1) + abs(lensMillimeters-100)/100",
+        "largest minimum visible-semantic-anchor count across derivation frames",
+        "smallest maximum helmet blocker share across derivation frames",
+        "largest minimum face-anchor visibility count across derivation frames",
+        "lexicographically smallest candidateId"
+      ],
+      "boundary": "This selection encodes a close-shot engineering template. It is not learned from audience preference and does not establish cinematic merit."
+    },
+    "independence": "Two fresh Blender processes implement the full 96×3 search separately, do not import each other, and must agree on the entire candidate roster, selected candidate, exact integer observations and all floats within 1e-9."
+  },
+  "processBudget": {
+    "runnerProcesses": 1,
+    "freshBlenderProcesses": 2,
+    "nodeAuditorProcesses": 1,
+    "blenderRenderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "maximumWallSecondsPerBlender": 300,
+    "maximumPeakResidentSetSizeBytesPerBlender": 2147483648,
+    "maximumCombinedLogBytesPerChild": 1048576,
+    "projectedWriteBytes": 134217728,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "toolFreeze": {
+    "requiredNewTools": ["blender/search_b62_q1_close_camera_candidates.py", "blender/audit_b62_q1_close_camera_candidates.py", "scripts/run-b62-q1-close-camera-search.mjs", "scripts/audit-b62-q1-close-camera-search.mjs"],
+    "sequence": ["Commit and push D2 evidence plus this spec/protocol while all four tools and the formal root are absent.", "Implement and statically validate all four tools.", "Commit and push exact tool bytes.", "Run one immutable formal root with two fresh Blender processes and an independent Node auditor; retain every failure."]
+  },
+  "output": {
+    "formalRoot": "experiments/b62-camera-quality-bounded-candidate-search-v0-1",
+    "requiredFiles": ["admission.json", "processes/PRIMARY.json", "processes/INDEPENDENT.json", "primary.json", "independent.json", "comparison.json", "audit.json", "receipt.json"]
+  },
+  "decision": {
+    "supportedVerdict": "B62_CLOSE_CAMERA_BOUNDED_FEASIBLE_CANDIDATE_FOUND",
+    "supportedWhen": "The baseline is infeasible, at least one grid candidate is feasible across all derivation frames, both implementations agree and every technical gate passes.",
+    "rejectedVerdict": "B62_CLOSE_CAMERA_BOUNDED_GRID_HAS_NO_FEASIBLE_CANDIDATE",
+    "invalidated": "Any binding, identity, process, resource, holdout-access, traversal, agreement or audit failure yields scientificVerdict null."
+  },
+  "nonClaims": ["D3 does not change or save the master scene.", "D3 does not render or visually approve a candidate.", "D3 does not inspect its sealed holdout frames.", "A feasible candidate is only eligible for a later render-and-holdout correction experiment.", "The frozen template thresholds are engineering requirements, not a human cinematic-quality model."]
+}

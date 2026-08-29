@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMaterialAwareFramingAudit.v0.1",
+  "experimentId": "B62-Q1-D2",
+  "status": "PASS",
+  "scientificVerdict": "B62_CLOSE_FAILURE_MATERIAL_AWARE_EXTREME_HELMET_FRAMING_LOCALIZED",
+  "toolFreezeCommit": "8a898331c531e4115dd9f10ff1285473f739950b",
+  "inputs": {
+    "spec": {
+      "uri": "specs/b62-camera-quality-material-aware-framing-diagnostic.v0.1.json",
+      "sha256": "aa3d8b3ae61f4d642f986b60f737aa4b1cd1d15f7d97babd984fdcc0c868dc34"
+    },
+    "protocol": {
+      "uri": "research/2026-08-29-b62-camera-quality-material-aware-framing-diagnostic-protocol.md",
+      "sha256": "f97dd06c112f8997d7dbe7c078e785ffbdd7ec7351f70637b3a9cd61aa5d9764"
+    },
+    "primary": {
+      "uri": "experiments/b62-camera-quality-material-aware-framing-v0-1/primary.json",
+      "sha256": "2d89998aa6150cec39d1b6a4221e1caf452bf09fb6ed9d49ca6a91dea2ea7f6a"
+    },
+    "independent": {
+      "uri": "experiments/b62-camera-quality-material-aware-framing-v0-1/independent.json",
+      "sha256": "bb4c48f3c4a88b0488fee4816fc93d2d8fcbf892eca400ea3a0f6ba89dc694b9"
+    },
+    "comparison": {
+      "uri": "experiments/b62-camera-quality-material-aware-framing-v0-1/comparison.json",
+      "sha256": "9986b54956bb53b6de02a5e981564844028c45461ba403e607ba9d3bda7d85ad",
+      "comparisonHash": "7c2fe298b95f813efabaa913c902fc72e5c1459decccb58a96c06a590b1dae30"
+    }
+  },
+  "checks": [
+    {
+      "id": "SPEC_ADMISSION_AND_DERIVATION_BOUND",
+      "pass": true
+    },
+    {
+      "id": "MASTER_AND_CALIBRATION_IDENTITIES_BOUND",
+      "pass": true
+    },
+    {
+      "id": "TOOL_FREEZE_HASHES_EXACT",
+      "pass": true
+    },
+    {
+      "id": "TWO_FRESH_BLENDER_PROCESSES_PASS",
+      "pass": true
+    },
+    {
+      "id": "BLENDER_5_2_IDENTITY_EXACT",
+      "pass": true
+    },
+    {
+      "id": "ZERO_RENDER_MODEL_NETWORK_DOCKER",
+      "pass": true
+    },
+    {
+      "id": "SHOT_ROSTER_EXACT",
+      "pass": true
+    },
+    {
+      "id": "GRID_64_BY_36_EXACT",
+      "pass": true
+    },
+    {
+      "id": "NO_TRAVERSAL_EXHAUSTION",
+      "pass": true
+    },
+    {
+      "id": "ATMOSPHERE_VOLUME_ONLY_PASS_THROUGH_PROVEN",
+      "pass": true
+    },
+    {
+      "id": "SEMANTIC_ANCHOR_ROSTER_EXACT",
+      "pass": true
+    },
+    {
+      "id": "PRIMARY_INDEPENDENT_AGREE",
+      "pass": true
+    },
+    {
+      "id": "OUTCOME_NEUTRAL_VERDICT_MAPPED",
+      "pass": true
+    }
+  ],
+  "materialAwareAtmosphere": {
+    "classification": "VOLUME_ONLY_PASS_THROUGH",
+    "materials": [
+      {
+        "material": "MAT_B62_VOLUME",
+        "outputCount": 1,
+        "surfaceLinked": false,
+        "usesNodes": true,
+        "volumeLinked": true
+      }
+    ],
+    "object": "B62_ATMOSPHERE"
+  },
+  "signatures": [
+    {
+      "shot": "WIDE_APPROACH",
+      "frame": 48,
+      "conditions": {
+        "dominantVisualBlockerObject": false,
+        "dominantVisualBlockerShare": false,
+        "characterVisualBlockerShare": false,
+        "characterOnScreenVertexFraction": false,
+        "characterClampedUnionAreaFraction": false,
+        "semanticAnchorExactVisibility": true
+      },
+      "complete": false
+    },
+    {
+      "shot": "MEDIUM_CONTACT",
+      "frame": 144,
+      "conditions": {
+        "dominantVisualBlockerObject": false,
+        "dominantVisualBlockerShare": false,
+        "characterVisualBlockerShare": false,
+        "characterOnScreenVertexFraction": false,
+        "characterClampedUnionAreaFraction": false,
+        "semanticAnchorExactVisibility": true
+      },
+      "complete": false
+    },
+    {
+      "shot": "CLOSE_REFLECTION",
+      "frame": 240,
+      "conditions": {
+        "dominantVisualBlockerObject": true,
+        "dominantVisualBlockerShare": true,
+        "characterVisualBlockerShare": true,
+        "characterOnScreenVertexFraction": true,
+        "characterClampedUnionAreaFraction": true,
+        "semanticAnchorExactVisibility": true
+      },
+      "complete": true
+    }
+  ],
+  "nonClaims": [
+    "This experiment does not correct a camera or authorize camera changes.",
+    "Volume-only traversal is a diagnostic visibility rule, not a physically based volume integrator.",
+    "The openly derived thresholds cannot serve as an independent holdout or a general cinematic-quality gate.",
+    "No claim is made about motion, temporal occlusion, complete-sequence quality, photorealism or human preference."
+  ],
+  "auditHash": "2aa69cbc91fa46e3b1e5243505c3450c88e98b3e7ea8c3570e41020c90ced378"
+}
