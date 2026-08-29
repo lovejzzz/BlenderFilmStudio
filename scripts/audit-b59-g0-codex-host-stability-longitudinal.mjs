@@ -344,7 +344,10 @@ const attacks = [
   ['A02_PARENT_EVIDENCE_MUTATION', (x) => { x.results.parentEvidence.resultsSha256 = '0'.repeat(64); }],
   ['A03_SAMPLE_REMOVAL', (x) => { x.samples.pop(); }],
   ['A04_SAMPLE_REORDER', (x) => { [x.samples[0], x.samples[1]] = [x.samples[1], x.samples[0]]; }],
-  ['A05_INTERVAL_BELOW_MINIMUM', (x) => { x.samples[1].capturedAt = new Date(Date.parse(x.samples[0].capturedAt) + 1000).toISOString(); x.samples[1].latenessMs = 0; }],
+  ['A05_INTERVAL_BELOW_MINIMUM', (x) => {
+    x.samples[1].capturedAt = new Date(Date.parse(x.samples[0].capturedAt) + spec.observationPolicy.minimumIntervalSeconds * 1000 - 1).toISOString();
+    x.samples[1].latenessMs = 0;
+  }],
   ['A06_TOTAL_SPAN_BELOW_MINIMUM', (x) => { x.samples.at(-1).capturedAt = new Date(Date.parse(x.samples[0].capturedAt) + 100000).toISOString(); x.samples.at(-1).latenessMs = 0; }],
   ['A07_RUNTIME_VERSION_MUTATION', (x) => { x.samples[0].runtime.codexVersion = '0.0.0 (0)'; }],
   ['A08_MAIN_PID_MUTATION', (x) => { x.samples[0].processes.mainCodexPids = [1]; }],

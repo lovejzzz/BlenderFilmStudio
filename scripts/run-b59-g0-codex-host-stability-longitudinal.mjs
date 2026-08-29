@@ -305,8 +305,11 @@ if (!existsSync(formalRoot)) {
 }
 
 const startedAtMs = Date.parse(start.startedAt);
+let previousCapturedAtMs = null;
 for (let index = 1; index <= spec.observationPolicy.requiredSampleCount; index += 1) {
-  const dueMs = startedAtMs + (index - 1) * spec.observationPolicy.minimumIntervalSeconds * 1000;
+  const intervalMs = spec.observationPolicy.minimumIntervalSeconds * 1000;
+  const fixedSlotMs = startedAtMs + (index - 1) * intervalMs;
+  const dueMs = previousCapturedAtMs === null ? fixedSlotMs : Math.max(fixedSlotMs, previousCapturedAtMs + intervalMs);
   const path = samplePath(index);
   if (!existsSync(path)) {
     await waitUntil(dueMs);
@@ -314,7 +317,8 @@ for (let index = 1; index <= spec.observationPolicy.requiredSampleCount; index +
     writeExclusiveDurable(path, serializeSelfHashed(sample, spec.resourcePolicy.maximumSampleBytes, `sample ${index}`));
     process.stderr.write(`R3 sample ${index}/${spec.observationPolicy.requiredSampleCount} captured\n`);
   }
-  readAndVerifySample(index);
+  const verified = readAndVerifySample(index);
+  previousCapturedAtMs = Date.parse(verified.sample.capturedAt);
 }
 
 const sampleReceipts = [];
