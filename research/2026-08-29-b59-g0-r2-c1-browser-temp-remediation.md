@@ -1,7 +1,7 @@
 # B59-G0-R2-C1 · Runtime transition correction and browser temporary-filesystem remediation
 
 Date: 2026-08-29
-Status: PREREGISTERED — remediation not yet executed
+Status: EXECUTED AND VERIFIED
 Formal R2 root at registration: absent
 
 ## Trigger
@@ -46,3 +46,18 @@ The operation is an out-of-band remediation under the user's prior cache-cleanup
 ## Fail-closed rule
 
 Do not create the formal R2 root unless all of the following hold simultaneously: exact target deletion verified; available disk meets the frozen threshold; the old PID is absent; one new Codex main PID exists; current runtime matches the corrected expectation; scoped release files are committed and equal to `origin/main`; and all remaining preflight gates are satisfiable.
+
+## Execution record
+
+Executed at approximately `2026-08-29T04:08Z` using depth-first deletion on each exact preregistered `t` path; no recursive wildcard or parent-directory deletion was used.
+
+- Target directories found and removed: `16/16`
+- Target directories remaining: `0/16`
+- Available bytes immediately before: `107,018,625,024`
+- Available bytes immediately after: `153,958,375,424`
+- Reclaimed bytes: `46,939,750,400` (about 43.72 GiB)
+- `File System` size after: `20` KiB
+- R2 disk threshold: `112,206,020,608` bytes
+- Immediate post-remediation headroom: `41,752,354,816` bytes (about 38.89 GiB)
+
+Preservation checks passed for `File System/Origins`, `models--Qwen--Qwen3-4B`, GPT Bot `Pilots`, and `.colima`. The formal R2 root remained absent during remediation.
