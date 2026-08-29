@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "bfs.codex-host-disk-attribution.v0.1",
+  "experimentId": "B59-G0-R3-D1",
+  "status": "PREREGISTERED",
+  "parentCommit": "e48d9af17f648cab6cfbf2353f28e4d42d079d2c",
+  "parentEvidence": {
+    "resultsPath": "experiments/codex-host-stability-longitudinal-v0-1/results.json",
+    "resultsSha256": "e22542041fe1be1a7bd140567df0c657dda6a528754b75d21a6faf1a07407d95",
+    "auditPath": "experiments/codex-host-stability-longitudinal-v0-1/audit.json",
+    "auditSha256": "f85158a93341f62d14c59aee4b251eb373d901a953391f0c728e1a66fca15439",
+    "failedGate": "DISK_RETENTION_BOUNDED",
+    "observedDiskLossBytes": 3327586304
+  },
+  "formalRoot": "experiments/codex-host-disk-attribution-v0-1",
+  "toolPaths": {
+    "runner": "scripts/run-b59-g0-codex-host-disk-attribution.mjs",
+    "auditor": "scripts/audit-b59-g0-codex-host-disk-attribution.mjs"
+  },
+  "releasePaths": [
+    "specs/codex-host-disk-attribution.v0.1.json",
+    "research/2026-08-29-b59-g0-r3-d1-disk-attribution-protocol.md",
+    "scripts/run-b59-g0-codex-host-disk-attribution.mjs",
+    "scripts/audit-b59-g0-codex-host-disk-attribution.mjs"
+  ],
+  "observationPolicy": {
+    "requiredSampleCount": 4,
+    "minimumIntervalSeconds": 30,
+    "minimumTotalSpanSeconds": 90,
+    "maximumLatenessSeconds": 10,
+    "minimumMaterialHostLossBytes": 67108864,
+    "minimumPrimaryAttributionFraction": 0.8,
+    "maximumPrimaryResidualBytes": 536870912
+  },
+  "trackedFiles": {
+    "colimaVmDisk": "/Users/tianxing/.colima/_lima/colima/disk",
+    "colimaDataDisk": "/Users/tianxing/.colima/_lima/_disks/colima/datadisk",
+    "colimaHostAgentLog": "/Users/tianxing/.colima/_lima/colima/ha.stderr.log",
+    "codexLogsDatabase": "/Users/tianxing/.codex/logs_2.sqlite",
+    "codexThreadHistoryDatabase": "/Users/tianxing/.codex/thread_history_1.sqlite",
+    "codexCurrentSession": "/Users/tianxing/.codex/sessions/2026/08/25/rollout-2026-08-25T16-29-26-01a03a9d-0e29-7fa1-8e45-df6117ff3916.jsonl",
+    "codexLocalStorageLog": "/Users/tianxing/Library/Application Support/Codex/Default/Local Storage/leveldb/018476.log"
+  },
+  "expectedRuntime": {
+    "colimaProfile": "default",
+    "colimaArch": "aarch64",
+    "colimaRuntime": "docker",
+    "requiredRunningContainerNamePrefix": "gpt-bot-agent-",
+    "minimumRunningContainerCount": 1
+  },
+  "requiredGates": [
+    "SPEC_PARENT_AND_RELEASE_IDENTITY",
+    "PARENT_EVIDENCE_IDENTITY",
+    "SAMPLE_COUNT_ORDER_AND_TIMING",
+    "TRACKED_FILE_IDENTITY",
+    "COLIMA_RUNTIME_CONTINUITY",
+    "EVIDENCE_BOUNDED_AND_SELF_HASHED",
+    "RESOURCE_ACCOUNTING_READ_ONLY",
+    "INDEPENDENT_AUDIT_REPLAY"
+  ],
+  "registeredAttacks": [
+    "A01_SPEC_SHA_MUTATION",
+    "A02_PARENT_EVIDENCE_MUTATION",
+    "A03_SAMPLE_REMOVAL",
+    "A04_TIMING_MUTATION",
+    "A05_COLIMA_FILE_IDENTITY_MUTATION",
+    "A06_COLIMA_BLOCK_DELTA_MUTATION",
+    "A07_HOST_DISK_DELTA_MUTATION",
+    "A08_CONTAINER_IDENTITY_MUTATION",
+    "A09_SAMPLE_SELF_HASH_MUTATION",
+    "A10_RESULT_SELF_HASH_MUTATION"
+  ],
+  "byteCeilings": {
+    "sample": 16384,
+    "results": 65536,
+    "audit": 65536,
+    "stdout": 8192
+  },
+  "formalCeilings": {
+    "filesystemWritesOutsideFormalRoot": 0,
+    "cleanupOperations": 0,
+    "signalsSent": 0,
+    "containerMutations": 0,
+    "vmMutations": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "maximumObservationCommands": 12,
+    "maximumAuditCommands": 4
+  }
+}
