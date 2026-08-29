@@ -28,10 +28,15 @@ const GATE0_CORRECTION_URI = 'specs/restart-safe-production-orchestrator-gate0-b
 const GATE0_CORRECTION_SHA256 = '180eff8d30e2b6ca8cdf0f71f1434ec2b3fe9279cdf539043ebe2f988c3a0785';
 const GATE0_CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b58-e1-c2-gate0-binding-correction.md';
 const GATE0_CORRECTION_PROTOCOL_SHA256 = 'bd50f4e34017a6ddfefd9ae4c7262cc446ed8715ebb19f1c3c75c8995e34e837';
+const ENTRY_CORRECTION_URI = 'specs/restart-safe-production-orchestrator-entry-correction.v0.1.json';
+const ENTRY_CORRECTION_SHA256 = '97cfb3c9b01fe6b06173d77bbab65a41ec974015836c61fd1cde762a80cd137e';
+const ENTRY_CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b58-e1-c3-entry-correction.md';
+const ENTRY_CORRECTION_PROTOCOL_SHA256 = 'b5dfe47a7e8999b3d468dc0a22cec98897b01925f0a5c6463a4f574a1fb43d07';
 const RELEASE_URI = 'specs/production-compiler-entry.v0.2.json';
 const PREREGISTRATION_COMMIT = '9fe37d7c8b3d2e6b3ea522ba9c2e4515a100d99b';
 const CORRECTION_COMMIT = 'fc01f6fb74d3ad0517d27b2639e1bc057a3d44cb';
 const GATE0_CORRECTION_COMMIT = '6dba91af525351b64c2147a63bf1681569ed9e29';
+const ENTRY_CORRECTION_COMMIT = 'fd808bffd0a02109dff349d9d821d9ec0ad4df3d';
 const NODE = '/opt/homebrew/Cellar/node/26.5.0/bin/node';
 const NPM = '/opt/homebrew/bin/npm';
 const JOB_TOOL_PATHS = [
@@ -115,7 +120,7 @@ async function hashGitBlob(commit, uri) {
 
 async function requireToolFreeze(parsed, release) {
   const scoped = [...new Set([
-    SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, GATE0_CORRECTION_URI, GATE0_CORRECTION_PROTOCOL_URI, RELEASE_URI,
+    SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, GATE0_CORRECTION_URI, GATE0_CORRECTION_PROTOCOL_URI, ENTRY_CORRECTION_URI, ENTRY_CORRECTION_PROTOCOL_URI, RELEASE_URI,
     'package.json', ...Object.keys(release.frozenFiles), ...FORMAL_TOOL_PATHS,
   ])].sort();
   const head = await runGit(['rev-parse', 'HEAD'], repositoryRoot);
@@ -123,6 +128,7 @@ async function requireToolFreeze(parsed, release) {
   const preregAncestor = await runGit(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, parsed.toolFreezeCommit], repositoryRoot);
   const correctionAncestor = await runGit(['merge-base', '--is-ancestor', CORRECTION_COMMIT, parsed.toolFreezeCommit], repositoryRoot);
   const gate0CorrectionAncestor = await runGit(['merge-base', '--is-ancestor', GATE0_CORRECTION_COMMIT, parsed.toolFreezeCommit], repositoryRoot);
+  const entryCorrectionAncestor = await runGit(['merge-base', '--is-ancestor', ENTRY_CORRECTION_COMMIT, parsed.toolFreezeCommit], repositoryRoot);
   const dirty = await runGit(['status', '--porcelain=v1', '--untracked-files=all', '--', ...scoped], repositoryRoot);
   const hashes = {};
   const commitHashes = {};
@@ -132,11 +138,12 @@ async function requireToolFreeze(parsed, release) {
   }
   const releaseExact = Object.entries(release.frozenFiles).every(([uri, expected]) => hashes[uri] === expected && commitHashes[uri] === expected);
   const exact = head.stdout.trim() === parsed.toolFreezeCommit && origin.stdout.trim() === parsed.toolFreezeCommit
-    && preregAncestor.exitCode === 0 && correctionAncestor.exitCode === 0 && gate0CorrectionAncestor.exitCode === 0 && dirty.exitCode === 0 && dirty.stdout === ''
+    && preregAncestor.exitCode === 0 && correctionAncestor.exitCode === 0 && gate0CorrectionAncestor.exitCode === 0 && entryCorrectionAncestor.exitCode === 0 && dirty.exitCode === 0 && dirty.stdout === ''
     && scoped.every(uri => hashes[uri] === commitHashes[uri]) && releaseExact
     && hashes[SPEC_URI] === SPEC_SHA256 && hashes[PROTOCOL_URI] === PROTOCOL_SHA256
     && hashes[CORRECTION_URI] === CORRECTION_SHA256 && hashes[CORRECTION_PROTOCOL_URI] === CORRECTION_PROTOCOL_SHA256
-    && hashes[GATE0_CORRECTION_URI] === GATE0_CORRECTION_SHA256 && hashes[GATE0_CORRECTION_PROTOCOL_URI] === GATE0_CORRECTION_PROTOCOL_SHA256;
+    && hashes[GATE0_CORRECTION_URI] === GATE0_CORRECTION_SHA256 && hashes[GATE0_CORRECTION_PROTOCOL_URI] === GATE0_CORRECTION_PROTOCOL_SHA256
+    && hashes[ENTRY_CORRECTION_URI] === ENTRY_CORRECTION_SHA256 && hashes[ENTRY_CORRECTION_PROTOCOL_URI] === ENTRY_CORRECTION_PROTOCOL_SHA256;
   return { scoped, hashes, commitHashes, releaseExact, exact };
 }
 
@@ -304,6 +311,7 @@ export async function runB58Preflight(argv) {
   const spec = JSON.parse(await readFile(resolve(repositoryRoot, SPEC_URI), 'utf8'));
   const correction = JSON.parse(await readFile(resolve(repositoryRoot, CORRECTION_URI), 'utf8'));
   const gate0Correction = JSON.parse(await readFile(resolve(repositoryRoot, GATE0_CORRECTION_URI), 'utf8'));
+  const entryCorrection = JSON.parse(await readFile(resolve(repositoryRoot, ENTRY_CORRECTION_URI), 'utf8'));
   const packageRecord = JSON.parse(await readFile(resolve(repositoryRoot, 'package.json'), 'utf8'));
   const release = JSON.parse(await readFile(resolve(repositoryRoot, RELEASE_URI), 'utf8'));
   const parent = await readParent(spec);
@@ -322,9 +330,12 @@ export async function runB58Preflight(argv) {
       && await sha256File(resolve(repositoryRoot, CORRECTION_URI)) === CORRECTION_SHA256,
     PROTOCOLS_EXACT: await sha256File(resolve(repositoryRoot, PROTOCOL_URI)) === PROTOCOL_SHA256
       && await sha256File(resolve(repositoryRoot, CORRECTION_PROTOCOL_URI)) === CORRECTION_PROTOCOL_SHA256
-      && await sha256File(resolve(repositoryRoot, GATE0_CORRECTION_PROTOCOL_URI)) === GATE0_CORRECTION_PROTOCOL_SHA256,
+      && await sha256File(resolve(repositoryRoot, GATE0_CORRECTION_PROTOCOL_URI)) === GATE0_CORRECTION_PROTOCOL_SHA256
+      && await sha256File(resolve(repositoryRoot, ENTRY_CORRECTION_PROTOCOL_URI)) === ENTRY_CORRECTION_PROTOCOL_SHA256,
     GATE0_CORRECTION_AND_CLOSEOUT_EXACT: await sha256File(resolve(repositoryRoot, GATE0_CORRECTION_URI)) === GATE0_CORRECTION_SHA256 && gate0.exact,
-    JOB_PRODUCTION_ALIAS_EXACT: packageRecord.scripts?.['job:production'] === 'node scripts/run-restart-safe-production-job.mjs',
+    RESTART_SAFE_DIRECT_ENTRY_AND_B57_PACKAGE_EXACT: await sha256File(resolve(repositoryRoot, ENTRY_CORRECTION_URI)) === ENTRY_CORRECTION_SHA256
+      && spec.candidateProductionEntry.command === entryCorrection.authorizedCorrection.effectiveProductionEntry
+      && toolFreeze.hashes['package.json'] === release.frozenFiles['package.json'] && packageRecord.scripts?.['job:production'] === undefined,
     PREREGISTRATIONS_PUSHED: toolFreeze.exact,
     B57_PARENT_EXACT: parent.exact,
     PRODUCTION_RELEASE_AND_TOOLS_FROZEN: toolFreeze.exact && toolFreeze.releaseExact,
@@ -347,10 +358,12 @@ export async function runB58Preflight(argv) {
     spec: { uri: SPEC_URI, sha256: SPEC_SHA256 },
     correction: { uri: CORRECTION_URI, sha256: CORRECTION_SHA256 },
     gate0Correction: { uri: GATE0_CORRECTION_URI, sha256: GATE0_CORRECTION_SHA256 },
+    entryCorrection: { uri: ENTRY_CORRECTION_URI, sha256: ENTRY_CORRECTION_SHA256, effectiveProductionEntry: entryCorrection.authorizedCorrection.effectiveProductionEntry },
     gate0,
     preregistrationCommit: PREREGISTRATION_COMMIT,
     correctionCommit: CORRECTION_COMMIT,
     gate0CorrectionCommit: GATE0_CORRECTION_COMMIT,
+    entryCorrectionCommit: ENTRY_CORRECTION_COMMIT,
     parent,
     toolFreeze,
     toolHashes: toolFreeze.hashes,

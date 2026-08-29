@@ -20,6 +20,7 @@ const NODE = '/opt/homebrew/Cellar/node/26.5.0/bin/node';
 const ORCHESTRATOR = 'scripts/run-restart-safe-production-job.mjs';
 const AUDITOR = 'scripts/audit-b58-e1-restart-safe-production-orchestrator.mjs';
 const GATE0_CORRECTION = 'specs/restart-safe-production-orchestrator-gate0-binding-correction.v0.1.json';
+const ENTRY_CORRECTION = 'specs/restart-safe-production-orchestrator-entry-correction.v0.1.json';
 
 async function verifyGate0Binding(preflight) {
   const correctionPath = resolve(repositoryRoot, GATE0_CORRECTION);
@@ -37,6 +38,18 @@ async function verifyGate0Binding(preflight) {
     && audit.attacksPassed === correction.gate0.requiredAttacks && audit.attacksTotal === correction.gate0.requiredAttacks && audit.failedGates.length === 0;
   if (!exact) throw new Error('B58 Gate 0 binding mismatch');
   return preflight.gate0;
+}
+
+async function verifyEntryBinding(preflight) {
+  const correctionPath = resolve(repositoryRoot, ENTRY_CORRECTION);
+  const correction = JSON.parse(await readFile(correctionPath, 'utf8'));
+  const packagePath = resolve(repositoryRoot, 'package.json');
+  const exact = preflight.entryCorrection?.uri === ENTRY_CORRECTION && preflight.entryCorrection.sha256 === await sha256File(correctionPath)
+    && preflight.entryCorrection.effectiveProductionEntry === correction.authorizedCorrection.effectiveProductionEntry
+    && preflight.checks?.RESTART_SAFE_DIRECT_ENTRY_AND_B57_PACKAGE_EXACT === true
+    && await sha256File(packagePath) === correction.conflict.b57FrozenPackageSha256;
+  if (!exact) throw new Error('B58 direct-entry or B57 package binding mismatch');
+  return preflight.entryCorrection;
 }
 
 function parseArguments(argv) {
@@ -269,6 +282,7 @@ export async function runB58Formal(argv) {
   if (preflight.schemaVersion !== 'bfs.restartSafeProductionOrchestratorPreflight.v0.1' || preflight.status !== 'ACCEPTED' || !validSelfHash(preflight, 'preflightHash')) throw new Error('B58 preflight is not accepted and exact');
   if (preflight.invocation.attemptRoot !== parsed.attemptRoot || preflight.invocation.formalRoot !== parsed.formalRoot) throw new Error('B58 root binding mismatch');
   const gate0 = await verifyGate0Binding(preflight);
+  const entry = await verifyEntryBinding(preflight);
   preflight.evidenceCommit = parsed.preflightEvidenceCommit;
   await durableMkdir(resolve(repositoryRoot, parsed.attemptRoot));
   const attemptPath = resolve(repositoryRoot, parsed.attemptRoot, 'attempt.json');
@@ -307,7 +321,7 @@ export async function runB58Formal(argv) {
   await writeExclusiveDurableHashed(formalStartPath, {
     schemaVersion: 'bfs.restartSafeProductionOrchestratorFormalStart.v0.1', sequence: 4, status: 'AUTHORIZED',
     attemptReceipt: { uri: `${parsed.attemptRoot}/receipt.json`, sha256: await sha256File(attemptReceiptPath), receiptHash: attemptReceipt.receiptHash },
-    gate0, formalRoot: parsed.formalRoot, blenderProcessesStarted: 0,
+    gate0, entry, formalRoot: parsed.formalRoot, blenderProcessesStarted: 0,
   }, 'formalStartHash');
 
   const jobs = [];
@@ -341,11 +355,11 @@ export async function runB58Formal(argv) {
   const resultsPath = resolve(repositoryRoot, parsed.formalRoot, 'results.json');
   const { record: results } = await writeExclusiveDurableHashed(resultsPath, {
     schemaVersion: 'bfs.restartSafeProductionOrchestratorResult.v0.1', experimentId: 'B58-E1',
-    spec: preflight.spec, correction: preflight.correction, gate0Correction: preflight.gate0Correction, gate0,
+    spec: preflight.spec, correction: preflight.correction, gate0Correction: preflight.gate0Correction, gate0, entryCorrection: preflight.entryCorrection,
     preflight: { uri: `${parsed.preflightRoot}/preflight.json`, sha256: await sha256File(preflightPath), preflightHash: preflight.preflightHash },
     operation: { uri: `${parsed.formalRoot}/operation-draft.json`, sha256: await sha256File(operationPath), operationHash: operation.operationHash },
     audit: { uri: `${parsed.formalRoot}/audit.json`, sha256: await sha256File(auditPath), auditHash: audit.auditHash },
-    gates: audit.gates, attackSummary: audit.attackSummary, correctionAttackSummary: audit.correctionAttackSummary, gate0CorrectionAttackSummary: audit.gate0CorrectionAttackSummary,
+    gates: audit.gates, attackSummary: audit.attackSummary, correctionAttackSummary: audit.correctionAttackSummary, gate0CorrectionAttackSummary: audit.gate0CorrectionAttackSummary, entryCorrectionAttackSummary: audit.entryCorrectionAttackSummary,
     scientificVerdict: audit.scientificVerdict,
   }, 'resultHash');
   const receiptPath = resolve(repositoryRoot, parsed.formalRoot, 'receipt.json');
@@ -355,7 +369,7 @@ export async function runB58Formal(argv) {
     audit: { uri: `${parsed.formalRoot}/audit.json`, sha256: await sha256File(auditPath), auditHash: audit.auditHash },
     scientificVerdict: audit.scientificVerdict, sameIdRepairAndRerunForbidden: true,
   }, 'receiptHash');
-  process.stdout.write(`BFS_B58_FORMAL ${audit.scientificVerdict} gates=${audit.gatePassed}/${audit.gateTotal} attacks=${audit.attackSummary.rejected}/${audit.attackSummary.total} correction=${audit.correctionAttackSummary.rejected}/${audit.correctionAttackSummary.total} gate0=${audit.gate0CorrectionAttackSummary.rejected}/${audit.gate0CorrectionAttackSummary.total} ${receipt.receiptHash}\n`);
+  process.stdout.write(`BFS_B58_FORMAL ${audit.scientificVerdict} gates=${audit.gatePassed}/${audit.gateTotal} attacks=${audit.attackSummary.rejected}/${audit.attackSummary.total} correction=${audit.correctionAttackSummary.rejected}/${audit.correctionAttackSummary.total} gate0=${audit.gate0CorrectionAttackSummary.rejected}/${audit.gate0CorrectionAttackSummary.total} entry=${audit.entryCorrectionAttackSummary.rejected}/${audit.entryCorrectionAttackSummary.total} ${receipt.receiptHash}\n`);
   return { status: 'COMPLETE', scientificVerdict: audit.scientificVerdict, receipt };
 }
 

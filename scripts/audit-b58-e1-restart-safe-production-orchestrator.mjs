@@ -501,12 +501,23 @@ function gate0CorrectionAttacks(correction, observed) {
   return mutations.map(([id, mutate]) => ({ id, rejected: mutated(observed, mutate, valid) }));
 }
 
+function entryCorrectionAttacks(correction, preflight, spec) {
+  const base = { packageSha256: preflight.toolFreeze.hashes['package.json'], command: spec.candidateProductionEntry.command };
+  const valid = row => row.packageSha256 === correction.conflict.b57FrozenPackageSha256 && row.command === correction.authorizedCorrection.effectiveProductionEntry;
+  const mutations = [
+    ['C3_A01_B57_PACKAGE_HASH_MUTATION', row => { row.packageSha256 = '0'.repeat(64); }],
+    ['C3_A02_DIRECT_ENTRY_COMMAND_MUTATION', row => { row.command = 'node scripts/other.mjs'; }],
+  ];
+  return mutations.map(([id, mutate]) => ({ id, rejected: mutated(base, mutate, valid) }));
+}
+
 async function audit(parsed) {
   const root = parsed.repositoryRoot;
   const preflight = await json(resolve(root, parsed.preflightRoot, 'preflight.json'));
   const spec = await json(resolve(root, 'specs/restart-safe-production-orchestrator.v0.1.json'));
   const correction = await json(resolve(root, 'specs/restart-safe-production-orchestrator-verifier-accounting-correction.v0.1.json'));
   const gate0Correction = await json(resolve(root, 'specs/restart-safe-production-orchestrator-gate0-binding-correction.v0.1.json'));
+  const entryCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-entry-correction.v0.1.json'));
   const gate0 = await inspectGate0(root, gate0Correction, preflight);
   const operation = await json(resolve(root, parsed.formalRoot, 'operation-draft.json'));
   const metaAttempt = await json(resolve(root, parsed.attemptRoot, 'attempt.json'));
@@ -527,6 +538,7 @@ async function audit(parsed) {
   const attacks = semanticAttacks(spec, evidence);
   const correctionRows = correctionAttacks(correction, operation.counts, live.operation);
   const gate0CorrectionRows = gate0CorrectionAttacks(gate0Correction, gate0);
+  const entryCorrectionRows = entryCorrectionAttacks(entryCorrection, preflight, spec);
   const aggregateFinals = [baseline.final, exit86.final, interrupted.final];
   const outputRoots = preflight.productionPreflights.map(row => row.outputRoot);
   const uniquePids = new Set([
@@ -543,7 +555,7 @@ async function audit(parsed) {
     && source.indexOf("auditComparison.state === 'LIVE_MATCH'") < source.lastIndexOf("wrapperComparison.state === 'LIVE_MATCH'");
   const gates = {
     PARENT_B57_EXACT: preflight.parent.exact === true,
-    PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED: preflight.toolFreeze.exact === true && gate0.exact === true && preflight.checks.JOB_PRODUCTION_ALIAS_EXACT === true,
+    PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED: preflight.toolFreeze.exact === true && gate0.exact === true && preflight.checks.RESTART_SAFE_DIRECT_ENTRY_AND_B57_PACKAGE_EXACT === true,
     FORMAL_ROOTS_FRESH_AND_DISJOINT: metaAttempt.formalOutputAbsent === true && metaAdmission.status === 'ACCEPTED',
     PREFLIGHT_ZERO_BLENDER_ACCEPTED: preflight.status === 'ACCEPTED' && preflight.operations.blenderProcesses === 0,
     PRODUCTION_SURFACE_EXACT: preflight.toolFreeze.releaseExact === true,
@@ -583,7 +595,7 @@ async function audit(parsed) {
       && resourceTotals.nativeCompileBlenderStarts === 4 && resourceTotals.artifactAuditBlenderStarts === 3,
     ARTIFACT_AND_RECEIPT_ROSTERS_EXACT: [baseline, exit86, interrupted].every(row => row.compile.exact),
     PROCESS_AND_ATTEMPT_IDENTITIES_UNIQUE: uniquePids.size === 9 && new Set(outputRoots).size === outputRoots.length,
-    SEMANTIC_ATTACKS_MINIMUM_64: attacks.length === 72 && attacks.filter(row => row.rejected).length >= 64 && correctionRows.every(row => row.rejected) && gate0CorrectionRows.every(row => row.rejected),
+    SEMANTIC_ATTACKS_MINIMUM_64: attacks.length === 72 && attacks.filter(row => row.rejected).length >= 64 && correctionRows.every(row => row.rejected) && gate0CorrectionRows.every(row => row.rejected) && entryCorrectionRows.every(row => row.rejected),
     ZERO_RENDER_MODEL_NETWORK_DOCKER: ['renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses'].every(key => operation.semanticOperations[key] === 0)
       && aggregateFinals.every(receipt => ['renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses'].every(key => receipt.resourceTotals[key] === 0)),
   };
@@ -591,13 +603,14 @@ async function audit(parsed) {
   const attackRejected = attacks.filter(row => row.rejected).length;
   const correctionRejected = correctionRows.filter(row => row.rejected).length;
   const gate0CorrectionRejected = gate0CorrectionRows.filter(row => row.rejected).length;
+  const entryCorrectionRejected = entryCorrectionRows.filter(row => row.rejected).length;
   const critical = [
     gates.LIVE_MATCHING_PROCESS_BLOCKS_DUPLICATE_SPAWN,
     gates.INTERRUPTED_ATTEMPT_TERMINAL_AND_NON_PROMOTABLE,
     gates.RECOVERY_STARTS_ZERO_ADDITIONAL_NATIVE_COMPILE_BLENDER_AFTER_COMPILE_CHECKPOINT,
     gates.DISK_RESERVE_AND_JIT_READMISSION_UNCHANGED,
   ].every(Boolean);
-  const scientificVerdict = gatePassed === 34 && attackRejected >= 64 && correctionRejected === 8 && gate0CorrectionRejected === 6
+  const scientificVerdict = gatePassed === 34 && attackRejected >= 64 && correctionRejected === 8 && gate0CorrectionRejected === 6 && entryCorrectionRejected === 2
     ? 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED'
     : critical ? 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED' : 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_REJECTED';
   const body = {
@@ -615,6 +628,8 @@ async function audit(parsed) {
     gate0,
     gate0CorrectionAttacks: gate0CorrectionRows,
     gate0CorrectionAttackSummary: { total: gate0CorrectionRows.length, rejected: gate0CorrectionRejected },
+    entryCorrectionAttacks: entryCorrectionRows,
+    entryCorrectionAttackSummary: { total: entryCorrectionRows.length, rejected: entryCorrectionRejected },
     gates,
     gatePassed,
     gateTotal: Object.keys(gates).length,
@@ -635,7 +650,7 @@ export async function runAudit(argv) {
   const parsed = parseArguments(argv);
   const result = await audit(parsed);
   await writeExclusive(parsed.output, result);
-  process.stdout.write(`BFS_B58_AUDIT ${result.gatePassed}/${result.gateTotal} attacks=${result.attackSummary.rejected}/${result.attackSummary.total} correction=${result.correctionAttackSummary.rejected}/${result.correctionAttackSummary.total} gate0=${result.gate0CorrectionAttackSummary.rejected}/${result.gate0CorrectionAttackSummary.total} ${result.scientificVerdict}\n`);
+  process.stdout.write(`BFS_B58_AUDIT ${result.gatePassed}/${result.gateTotal} attacks=${result.attackSummary.rejected}/${result.attackSummary.total} correction=${result.correctionAttackSummary.rejected}/${result.correctionAttackSummary.total} gate0=${result.gate0CorrectionAttackSummary.rejected}/${result.gate0CorrectionAttackSummary.total} entry=${result.entryCorrectionAttackSummary.rejected}/${result.entryCorrectionAttackSummary.total} ${result.scientificVerdict}\n`);
   return result;
 }
 

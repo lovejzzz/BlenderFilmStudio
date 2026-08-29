@@ -4805,3 +4805,13 @@ Tool-freeze candidate commit `52b91bda366d732640632cd0ac49e3a770d7ba7a`与origin
 根因是B57把package冻结为`a2235a7558…`，而新增`job:production` alias使其变成`6d13fa59…`。原B58 convenience alias要求与B57 byte-exact production surface不可同时成立，且parent安全门优先。三个official roots仍不存在。
 
 C3唯一授权修正是恢复package到B57 exact bytes，并把effective entry冻结为alias原本会调用的同一direct command `node scripts/run-restart-safe-production-job.mjs`。新增2项攻击分别变异package hash与direct command；B58 orchestrator bytes/modes、34 gates、72+C1+C2 attacks、DAG、process ceilings和disk门不变。下一动作先提交推送C3，再执行package恢复和tool检查。
+
+## J-362 · B58-C3恢复B57 package并冻结direct entry
+
+Date: 2026-08-29 · Type: B58 TOOL-FREEZE CORRECTION IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+C3 preregistration commit `fd808bffd0a02109dff349d9d821d9ec0ad4df3d`推送后，移除新增alias，使`package.json`恢复B57 exact SHA `a2235a7558d420c86acb62eafda2c52fbfc1620c1de934fa88e02eea27381520`。Preflight把C3 spec/protocol与commit加入tool-freeze ancestry/hash scope，并要求B58 spec command exact等于`node scripts/run-restart-safe-production-job.mjs`且package无新增alias；runner在attempt root前复核；auditor新增2个定向攻击。
+
+修正后preflight/runner/auditor SHA为`4f70246ad2b6d015fbe1592939ce99b4f576b3f0a377b95651c3420ded6178d6` / `689f9b4d1cd0402dde7b22a772b912514d38fcdc6ec200225405ef8d37466f39` / `3bba47733e7c58a84296b1616c29b0d67b84a973739db14f2507b5a36d9adbee`。Node syntax、zero-warning targeted ESLint、diff check、package hash与alias-absence assertions全部通过。
+
+下一动作提交推送这一有效tool-freeze，然后用fresh clone重跑official preflight rehearsal；前一临时failure保留为C3反例，不复用其root。
