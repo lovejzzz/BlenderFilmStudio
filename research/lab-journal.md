@@ -5279,3 +5279,13 @@ Date: 2026-08-29
 实现独立auditor时发现父协议明确要求ffprobe验证animatic为24 fps/288 frames/12秒，但父process budget只列one ffmpeg encoder与one Node auditor，漏记只读metadata probe。此时六个工具尚未tool-freeze，preflight/attempt/formal roots仍absent，也没有启动B62 Blender或产生正式输出。
 
 C1在执行前显式增加且只增加one ffprobe zero-output read-only process；six Blender starts、291 renders、one ffmpeg encoding、one Node auditor、2 GiB writes、100 GiB reserve、18 gates/16 attacks以及zero model/network/Docker均不变。preflight、runner与auditor必须同时绑定父合同和C1，不得把探针隐藏在Node进程统计中。
+
+## J-413 · B62 Phase 0六工具实现与静态审查
+
+Date: 2026-08-29 · Type: TOOL IMPLEMENTATION BEFORE FREEZE · New B62 Blender processes: 0 · New B62 renders: 0
+
+完成六个预注册工具：procedural asset/master generator、Eevee animatic与Cycles calibration renderer、独立Blender re-open auditor、zero-Blender preflight、bounded runner、独立Node auditor。runner使用先attempt/admission/receipt、后formal-root的durable授权顺序；每个logical child都有独立stdout/stderr hash、wall/user/system/peak-RSS、timeout、combined-log ceiling与process-group TERM→KILL控制。输出预算同时覆盖attempt与formal，ffmpeg和C1新增的只读ffprobe分别记账。
+
+静态审查发现并在tool freeze前修正三类会造成伪PASS的风险：Eevee final render必须写`taa_render_samples=16`而不是只写viewport samples；frame 143新增zero activation key，使frame 144 contact与transition同帧发生而非Bezier预亮；asset identity必须在master-only IK/socket constraint加入前冻结。生成报告现在含mesh topology、material node parameter、rig rest pose与motion action-key digests；独立Blender不导入生成/渲染工具，重新append三份asset library与motion action、重算digests、检查摄影机action ranges、contact/state、288 PNG及三份EXR decoded Combined pixels。
+
+Node auditor将18个machine gates逐一映射到实际观测，并对冻结的16个negative controls逐个复制观测后注入mutation，只有全部被拒绝才允许写audit。最终receipt仍由runner在audit之后生成并立即重算self-hash，避免audit↔receipt循环依赖。三份Python通过`py_compile`，三份Node通过`node --check`与ESLint，`git diff --check` clean；正式preflight/attempt/formal roots仍不存在。下一动作是提交推送tool-freeze，再做fresh-clone zero-Blender rehearsal。
