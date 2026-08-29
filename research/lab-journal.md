@@ -5383,3 +5383,15 @@ Date: 2026-08-29 · Type: ZERO-BLENDER RETRY REHEARSAL / OFFICIAL PREFLIGHT · N
 fresh local clone无`node_modules`。首次用`/tmp`绝对script path调用时，macOS将module URL规范化为`/private/tmp`，入口guard未触发，未创建root、未启动child；改为clone内相对入口后preflight 9/9 ACCEPTED，self-hash `31e2f53e…`，zero child/Blender/render/model/network/Docker，随后clone移入Trash。
 
 主仓库official preflight同一freeze上9/9 ACCEPTED；file/self hashes为`126a31a159c92416413f2231b6820d712a5b4484fefbd19181ba0332b759ab4c / 37aece8774d5d88ce049ad7b60e36a4fea4843bdc7fdef9e7b890f7f840a82cd`。D2/D4/D5 self-hashes exact，available 310,012,510,208 bytes，projected 2 GiB/100 GiB reserve通过。下一动作提交推送official evidence后启动v0.3 formal attempt。
+
+## J-425 · B62 Phase 0 v0.3完成291 renders但独立library gate失败
+
+Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / LOCALITY DIAGNOSTIC PREREGISTRATION · New B62 Blender processes: 6 · New B62 renders: 291
+
+v0.3完成generator、288-frame Eevee animatic、ffmpeg、ffprobe与frames 48/144/240三张1080p/64 spp Cycles calibration。阶段wall time约0.73/32.32/0.19/0.06/35.02/41.14/44.92秒；Cycles peak RSS约3.75–3.76 GiB。生成、timeline、neutral color、288-frame/24 fps/12 s video、三份MLEXR/HALF/ZIP及decoded finite/dynamic pixels均成功，zero model/network/Docker。
+
+第六个Blender即独立auditor在1.91秒完成观察后exit 1。23 checks中21项PASS，只有`masterExternalLibrariesZero`与`assetLibrariesSafe`false；每份asset唯一finding均为`EXTERNAL_LIBRARY`，但其identity/topology/rig仍exact，motion action也exact。v0.3保持INVALIDATED：attempt 28 files/81,121 bytes/tree `c08a3422…`，formal 308 files/122,895,659 bytes/tree `a2ca78e3…`，failure file/self `5aaf7b9e…/f934bc8d…`，audit file/self `6a346c9f…/9aebbe68…`。
+
+代码审查发现可能的temporal contamination：auditor在三次append之后才读取master library总数，并把append新增descriptor直接视为外链，未检查appended IDs的`.library`。C10预注册D6 one-Blender/zero-render locality probe；在D6证明前禁止放宽安全门或重用v0.3作为PASS。
+
+人工原分辨率抽查：wide与medium能读出cold→warm机械守夜人场景；close frame 240大面积被前景遮挡，构图质量不足。该观察不是当前machine verdict的一部分，必须后续另立camera-quality实验，不能事后修改本轮门槛。

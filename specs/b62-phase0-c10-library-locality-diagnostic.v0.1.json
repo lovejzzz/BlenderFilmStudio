@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C10",
+  "date": "2026-08-29",
+  "statusBeforeDiagnostic": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "c9": {"uri": "specs/b62-phase0-c9-v03-formal-binding.v0.1.json", "sha256": "1246bba3b167eaa65bbc614c317a5626ce29dd3e6b9d3f6a2cf6809c97c97ce5"},
+    "v03ToolFreezeCommit": "ee6ffff37852fcb38fbf9de81146552a4d162ffc",
+    "v03PreflightEvidenceCommit": "b496725e54e11f11b137f4e39d541c1a754e0265",
+    "v03Preflight": {"sha256": "126a31a159c92416413f2231b6820d712a5b4484fefbd19181ba0332b759ab4c", "preflightHash": "37aece8774d5d88ce049ad7b60e36a4fea4843bdc7fdef9e7b890f7f840a82cd"}
+  },
+  "retainedV03Failure": {
+    "attemptRoot": "experiments/b62-phase0-attempt-v0-3",
+    "attemptTree": {"files": 28, "bytes": 81121, "treeSha256": "c08a342223a1206b989c65184f5f692590bb15f06a8abd7f1199b15523291a55"},
+    "formalRoot": "experiments/b62-phase0-v0-3",
+    "formalTree": {"files": 308, "bytes": 122895659, "treeSha256": "a2ca78e33397e6ca634f969d02c79f75cb3ac7e3a646ddc24db863372a7a56f9"},
+    "failure": {"sha256": "5aaf7b9e815ddb569881094e19ebe4e9d9c4b6e8c3fb50e7938049159c0889c2", "failureHash": "f934bc8dc56e0fe203255463ec24fd241eb3753454770a0fd95f00993a797c48", "status": "INVALIDATED"},
+    "blenderAudit": {"sha256": "6a346c9f1be8b8b1aeac49f45f7f721a1ab5efd686d3e18eb594dd7edf760a42", "auditHash": "9aebbe68d37a75c08cae139890c15a2f9bd82dce220c9b0bb9d08d2ff32d5fbc", "status": "FAIL", "passedChecks": 21, "totalChecks": 23, "failedChecks": ["masterExternalLibrariesZero", "assetLibrariesSafe"]},
+    "completedProduction": {"generator": true, "animaticFrames": 288, "videoFrames": 288, "cyclesCalibrationFrames": 3, "renderCalls": 291},
+    "operationsBeforeFailure": {"blenderStarts": 6, "renderCalls": 291, "ffmpegProcesses": 1, "ffprobeProcesses": 1, "modelCalls": 0, "networkCalls": 0, "dockerProcesses": 0}
+  },
+  "observedPattern": {
+    "allThreeAssetFindings": ["EXTERNAL_LIBRARY"],
+    "identityTopologyAndRigStillExact": true,
+    "motionActionExact": true,
+    "possibleTemporalContamination": "The auditor evaluates masterExternalLibrariesZero after its own three append inspections, and each inspection classifies any new bpy.data.libraries descriptor as an external dependency without testing the appended IDs' library ownership."
+  },
+  "authorizedDiagnostic": {
+    "id": "B62-P0-D6",
+    "root": "experiments/b62-phase0-d6-library-locality-v0-1",
+    "sourceMaster": "experiments/b62-phase0-v0-3/scene/B62_PHASE0_MASTER.blend",
+    "assetRoot": "experiments/b62-phase0-v0-3/assets",
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "maximumWriteBytes": 16777216,
+    "minimumReserveBytes": 107374182400,
+    "requiredObservations": [
+      "master bpy.data.libraries roster and all pre-existing ID.library ownership before any append",
+      "per-asset library roster before, during and after link=false append",
+      "library ownership for every appended collection, object, mesh, armature and material",
+      "whether removing the source descriptor changes or removes locally appended IDs",
+      "cleanup returns the transient audit process to its pre-append ID and library rosters"
+    ],
+    "toolPaths": [
+      "blender/probe_b62_d6_library_locality.py",
+      "scripts/run-b62-d6-library-locality.mjs",
+      "scripts/audit-b62-d6-library-locality.mjs"
+    ]
+  },
+  "decisionRule": {
+    "LOCAL_APPEND_SOURCE_DESCRIPTOR_ONLY": "Initial master has zero libraries; every appended ID has library=null; any new library entries resolve only to the exact source asset; removing those descriptors preserves appended local IDs; cleanup is exact. This authorizes a later C11 auditor-only temporal/locality correction and no rerender reuse unless separately preregistered.",
+    "TRUE_EXTERNAL_LINK_OR_MASTER_DEPENDENCY": "Any initial master library exists, any appended ID remains linked, any descriptor points outside the exact asset source, descriptor removal destroys an alleged local ID, or cleanup drifts. Retain D6 FAIL and do not relax either safety gate."
+  },
+  "humanSpotCheckNonGateObservation": "The retained CLOSE_REFLECTION frame 240 review PNG is largely occluded and visually weak. This is not used to change the preregistered machine verdict and requires a separate later camera-quality experiment.",
+  "productionToolsAndFormalClaimsUnchanged": true
+}
