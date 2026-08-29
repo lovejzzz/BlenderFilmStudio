@@ -18,16 +18,21 @@ const CORRECTION_2_URI = 'specs/b62-phase0-c2-fresh-clone-node-dependency-correc
 const CORRECTION_3_URI = 'specs/b62-phase0-c3-blender52-multilayer-media-correction.v0.1.json';
 const CORRECTION_4_URI = 'specs/b62-phase0-c4-dynamic-exr-setter-correction.v0.1.json';
 const CORRECTION_5_URI = 'specs/b62-phase0-c5-v02-retry-binding.v0.1.json';
+const CORRECTION_6_URI = 'specs/b62-phase0-c6-blender52-config-surface-diagnostic.v0.1.json';
+const CORRECTION_7_URI = 'specs/b62-phase0-c7-eevee-engine-runtime-correction.v0.1.json';
+const CORRECTION_8_URI = 'specs/b62-phase0-c8-runtime-config-promotion-and-generator-smoke.v0.1.json';
+const CORRECTION_9_URI = 'specs/b62-phase0-c9-v03-formal-binding.v0.1.json';
 const EXPECTED = {
-  preflightRoot: 'experiments/b62-phase0-preflight-v0-2',
-  attemptRoot: 'experiments/b62-phase0-attempt-v0-2',
-  formalRoot: 'experiments/b62-phase0-v0-2',
+  preflightRoot: 'experiments/b62-phase0-preflight-v0-3',
+  attemptRoot: 'experiments/b62-phase0-attempt-v0-3',
+  formalRoot: 'experiments/b62-phase0-v0-3',
 };
 const PROCESS_IDS = [
   '01-GENERATOR', '02-ANIMATIC', '03-FFMPEG', '04-FFPROBE',
   '05-CALIBRATION-48', '06-CALIBRATION-144', '07-CALIBRATION-240', '08-BLENDER-AUDITOR',
 ];
 const CALIBRATION = [['WIDE_APPROACH', 48], ['MEDIUM_CONTACT', 144], ['CLOSE_REFLECTION', 240]];
+const NEUTRAL_COLOR = { display: 'sRGB - Display', view: 'ACES 2.0 - SDR 100 nits (Rec.709)', look: 'None', exposure: 0, gamma: 1 };
 
 function parseArguments(argv) {
   const parsed = {};
@@ -160,6 +165,10 @@ export async function auditB62(argv) {
   const correction3Record = await json(CORRECTION_3_URI); const correction3 = correction3Record.value;
   const correction4Record = await json(CORRECTION_4_URI); const correction4 = correction4Record.value;
   const correction5Record = await json(CORRECTION_5_URI); const correction5 = correction5Record.value;
+  const correction6Record = await json(CORRECTION_6_URI); const correction6 = correction6Record.value;
+  const correction7Record = await json(CORRECTION_7_URI); const correction7 = correction7Record.value;
+  const correction8Record = await json(CORRECTION_8_URI); const correction8 = correction8Record.value;
+  const correction9Record = await json(CORRECTION_9_URI); const correction9 = correction9Record.value;
   const preflight = await json(`${parsed.preflightRoot}/preflight.json`);
   requireValue(validSelfHash(preflight.value, 'preflightHash') && preflight.value.status === 'ACCEPTED', 'B62 preflight invalid');
   requireValue(preflight.value.contract.sha256 === await sha256File(contractRecord.path)
@@ -168,11 +177,18 @@ export async function auditB62(argv) {
     && preflight.value.correction3.sha256 === await sha256File(correction3Record.path)
     && preflight.value.correction4.sha256 === await sha256File(correction4Record.path)
     && preflight.value.correction5.sha256 === await sha256File(correction5Record.path)
+    && preflight.value.correction6.sha256 === await sha256File(correction6Record.path)
+    && preflight.value.correction7.sha256 === await sha256File(correction7Record.path)
+    && preflight.value.correction8.sha256 === await sha256File(correction8Record.path)
+    && preflight.value.correction9.sha256 === await sha256File(correction9Record.path)
     && correction.correction.ffprobeMetadataProcesses === 1 && correction2.statusBeforeRetry === 'PREREGISTERED'
     && correction3.statusBeforeDiagnostic === 'PREREGISTERED' && correction4.statusBeforeDiagnostic === 'PREREGISTERED'
-    && correction5.statusBeforeProductionToolChange === 'PREREGISTERED', 'B62 contract/correction binding mismatch');
+    && correction5.statusBeforeProductionToolChange === 'PREREGISTERED' && correction6.statusBeforeDiagnostic === 'PREREGISTERED'
+    && correction7.statusBeforeDiagnostic === 'PREREGISTERED' && correction8.statusBeforeProductionToolChange === 'PREREGISTERED'
+    && correction9.statusBeforeFormalToolChange === 'PREREGISTERED', 'B62 contract/correction binding mismatch');
   const generation = await json(`${parsed.formalRoot}/reports/generation-report.json`);
-  requireValue(validSelfHash(generation.value, 'reportHash') && generation.value.status === 'PASS', 'B62 generation report invalid');
+  requireValue(validSelfHash(generation.value, 'reportHash') && generation.value.status === 'PASS'
+    && isDeepStrictEqual(generation.value.color, NEUTRAL_COLOR), 'B62 generation report invalid');
   const generationFiles = [
     [generation.value.files.master, `${parsed.formalRoot}/scene/B62_PHASE0_MASTER.blend`],
     [generation.value.files.motion, `${parsed.formalRoot}/motion/B62_GUARDIAN_PERFORMANCE.blend`],
@@ -184,9 +200,10 @@ export async function auditB62(argv) {
   }
   const animatic = await json(`${parsed.formalRoot}/animatic/animatic-render-report.json`);
   requireValue(validSelfHash(animatic.value, 'reportHash') && animatic.value.status === 'PASS' && animatic.value.frames.length === 288, 'B62 animatic report invalid');
-  const animaticSettingsExact = animatic.value.settings.engine === 'BLENDER_EEVEE_NEXT'
+  const animaticSettingsExact = animatic.value.settings.engine === 'BLENDER_EEVEE'
     && isDeepStrictEqual(animatic.value.settings.resolution, [640, 360]) && animatic.value.settings.samples === 16
-    && animatic.value.settings.format === 'PNG' && animatic.value.settings.fps === 24;
+    && animatic.value.settings.format === 'PNG' && animatic.value.settings.fps === 24
+    && isDeepStrictEqual(animatic.value.settings.color, NEUTRAL_COLOR);
   requireValue(animaticSettingsExact, 'B62 animatic settings drift');
   const expectedFrames = Array.from({ length: 288 }, (_, index) => index + 1);
   requireValue(isDeepStrictEqual(animatic.value.frames.map(row => row.frame), expectedFrames), 'B62 animatic frame indices drift');
@@ -223,7 +240,7 @@ export async function auditB62(argv) {
   const cyclesSettingsExact = calibration.every(row => row.settings.engine === 'CYCLES' && row.settings.device === 'CPU'
     && isDeepStrictEqual(row.settings.resolution, [1920, 1080]) && row.settings.samples === 64 && row.settings.denoise === true
     && row.settings.seed === 62001 && row.settings.animatedSeed === false && row.settings.mediaType === 'MULTI_LAYER_IMAGE' && row.settings.format === 'OPEN_EXR_MULTILAYER'
-    && row.settings.pixelType === 'HALF' && row.settings.compression === 'ZIP');
+    && row.settings.pixelType === 'HALF' && row.settings.compression === 'ZIP' && isDeepStrictEqual(row.settings.color, NEUTRAL_COLOR));
   const independentCalibration = blenderAudit.value.calibration;
   const exrStorageAndDimensionsExact = independentCalibration.every(row => row.decoded.width === 1920 && row.decoded.height === 1080
     && row.decoded.pixelFormat === 'half' && String(row.decoded.compression).toLowerCase() === 'zip' && row.pngDimensionsExact && row.decodedMatchesReport);
@@ -312,6 +329,8 @@ export async function auditB62(argv) {
       { uri: CORRECTION_URI, sha256: await sha256File(correctionRecord.path) }, { uri: CORRECTION_2_URI, sha256: await sha256File(correction2Record.path) },
       { uri: CORRECTION_3_URI, sha256: await sha256File(correction3Record.path) }, { uri: CORRECTION_4_URI, sha256: await sha256File(correction4Record.path) },
       { uri: CORRECTION_5_URI, sha256: await sha256File(correction5Record.path) },
+      { uri: CORRECTION_6_URI, sha256: await sha256File(correction6Record.path) }, { uri: CORRECTION_7_URI, sha256: await sha256File(correction7Record.path) },
+      { uri: CORRECTION_8_URI, sha256: await sha256File(correction8Record.path) }, { uri: CORRECTION_9_URI, sha256: await sha256File(correction9Record.path) },
     ],
     preflight: { uri: `${parsed.preflightRoot}/preflight.json`, sha256: await sha256File(preflight.path), preflightHash: preflight.value.preflightHash },
     generation: { reportHash: generation.value.reportHash, assetIdentityHashes: Object.fromEntries(Object.entries(generation.value.manifests).map(([id, row]) => [id, row.identityHash])) },
