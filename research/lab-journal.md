@@ -5579,3 +5579,13 @@ D5 tools以commit `db694a5f2971290842b930e98ec8772ef509515a`冻结推送后，PR
 v0.1永久保留9 files/639,448 bytes/tree `64cfc318de4fc04fe621f878f4a1e1f64885f951a0e107c9453cb277ff0ebde3`；failure file/self为`7b3c4f36…/963dcb6a…`，audit file/self为`bef28e64…/4acac609…`。两实现都报告6个feasible与`RS_S200_E250`，但这些字段在baseline gate失败后明确不是科学证据，禁止复制到retry。
 
 根因是两份工具都在更新depsgraph后才给临时probe camera赋location/quaternion，随后未同步view layer便从`camera.matrix_world`测量，读到了prior candidate/frame的evaluated matrix。C1在任何工具修改前只授权两份Blender实现各自在configure与measure之间调用`bpy.context.view_layer.update()`；runner/auditor只可绑定C1、retained v0.1并切fresh v0.2。14候选、九个derivation、八个sealed validation、smoothstep、0.02、全套geometry template、1e-9、selection、预算与zero-render边界全部不变。
+
+## J-445 · B62-Q1-D5 v0.2证明D3历史基线受污染，C2预注册
+
+Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / PARENT-EVIDENCE CORRECTION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+C1 tool freeze `65e72d7f3c1454b01a7f6d52724c12a8d569f171`上，两份Blender实现各只增加一行`view_layer.update()`后在fresh v0.2完成。PRIMARY/INDEPENDENT分别2.736/2.770秒、peak sampled RSS 251,936,768/252,854,272 bytes；两实现comparison仍PASS，zero render/model/network/Docker/scene-save。21项audit中20项PASS，唯一失败仍为baseline reproduction，scientific verdict继续为null。
+
+这次baseline mismatch精确局限到D3 frames 216/240/264共30项；D4 frames 193/204/228/252/276/288的全部corrected geometry字段为0 mismatch。结论是C1同步修正有效，而D3两份旧search tool共享了同一stale probe-camera matrix缺陷；D3当年的互相同意不能再证明candidate geometry或唯一性。v0.2永久保留9 files/631,419 bytes/tree `48069dc4799bf980a548d208174af4177dbe049c116bdc72d92742bc23ef147b`；failure file/self `a82996e8…/753109fc…`，audit file/self `b2413205…/95814db8…`。
+
+C2在任何新修改前退休D3 geometry作为acceptance truth，但不删除历史。fresh v0.3的constant baseline必须在九个已曝光derivation frames用post-sync pose复现D4 frozen 96-frame bake，并在六个D4 frames继续复现independent corrected geometry；D3只保留显式contamination finding。两份Blender工具仅可向既有frame row增加evaluated location/quaternion；14候选、sealed 8帧、全部路径/geometry阈值、selection、1e-9和zero-render预算不变。此修正不恢复D3“唯一候选”主张，D5只研究D4已实际证明过的相机族。

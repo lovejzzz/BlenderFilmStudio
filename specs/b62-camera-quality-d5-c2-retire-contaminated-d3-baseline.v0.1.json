@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityMotionAwareSearchCorrection.v0.2",
+  "correctionId": "B62-Q1-D5-C2",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "supersedesBaselineClause": "The D5 base-spec clause requiring RS_S200_E200 geometry to reproduce both D3 and D4 is impossible because D3 search observations were measured through the same stale probe-camera matrix defect proven by D5 v0.1/v0.2.",
+  "retainedFailures": {
+    "v0_1": {
+      "root": "experiments/b62-camera-quality-motion-aware-search-v0-1",
+      "tree": {"files": 9, "bytes": 639448, "treeSha256": "64cfc318de4fc04fe621f878f4a1e1f64885f951a0e107c9453cb277ff0ebde3"},
+      "failureSha256": "7b3c4f36b33459f89d3931b351ff80095f25c3e53d40e60c7500daab5bb09e6a"
+    },
+    "v0_2": {
+      "root": "experiments/b62-camera-quality-motion-aware-search-v0-2",
+      "tree": {"files": 9, "bytes": 631419, "treeSha256": "48069dc4799bf980a548d208174af4177dbe049c116bdc72d92742bc23ef147b"},
+      "failure": {
+        "uri": "experiments/b62-camera-quality-motion-aware-search-v0-2/failure.json",
+        "sha256": "a82996e8f607e94ec3b83de390734d312f9d619644ddaeb3a8259c2270d7d21b",
+        "failureHash": "753109fc8df3b8b216653a4cae41e328697aae3eb1dae5d09f3131407b12ad47"
+      },
+      "audit": {
+        "uri": "experiments/b62-camera-quality-motion-aware-search-v0-2/audit.json",
+        "sha256": "b2413205e3348478b7e12bcbb4a65bf0adeb637e071aa57ae9642b95ce8c3b41",
+        "auditHash": "95814db85995410a2876d818c570d286038dee897836f7c1414588888fddeee0",
+        "passedChecks": 20,
+        "failedChecks": ["STATIC_BASELINE_REPRODUCES_D3_D4"]
+      },
+      "comparison": {
+        "uri": "experiments/b62-camera-quality-motion-aware-search-v0-2/comparison.json",
+        "sha256": "38a725b4371e6b1c54f80c9875bd9fb4a176d10aea5a65585d77f119d87628ef",
+        "comparisonHash": "d5216c214601e15ce73e5830891395681e6dd2c7a868a3ed7e75df6816e18b84",
+        "primaryIndependentStatus": "PASS",
+        "d4GeometryMismatchCount": 0,
+        "d3GeometryMismatchCount": 30,
+        "feasibleCandidateCountNotAdmitted": 12,
+        "selectedCandidateIdNotAdmitted": "RS_S200_E225"
+      }
+    }
+  },
+  "diagnosis": {
+    "c1Result": "After the exact one-line view-layer synchronization, both D5 implementations still agree and the constant baseline reproduces every retained D4 corrected-geometry field on all six D4 frames.",
+    "remainingContradiction": "Only the three retained D3 selected-candidate rows disagree, with 30 mismatches across frames 216, 240 and 264.",
+    "conclusion": "D3 candidate geometry and its uniqueness claim are contaminated historical evidence. D4's independently reopened baked-camera scene, six corrected geometry observations and six paired renders remain valid evidence that the actual -45 degree, scale-2, 65 mm transform improves five of six exposed frames."
+  },
+  "authoritativeBaseline": {
+    "d4BuildReport": {
+      "uri": "experiments/b62-camera-quality-holdout-render-v0-5/build.json",
+      "sha256": "bcd4b25a7ec9579625bdd04c05573acc5a441e18dc58edc251b3807c6fbb6bba",
+      "reportHash": "ba319d5de046c6c312ca9d883991e3389299c189cf5abbcef77d92a53bb3b5c2",
+      "candidateId": "AZ_M045_R200_L065",
+      "bakeFrameCount": 96
+    },
+    "poseFramesAllowedForD5": [193, 204, 216, 228, 240, 252, 264, 276, 288],
+    "geometryFrames": [193, 204, 228, 252, 276, 288],
+    "contract": "RS_S200_E200 evaluated camera location and quaternion must reproduce D4 build bake rows on the nine exposed D5 derivation frames within 1e-9. Its geometry must reproduce D4 independent corrected rows on the six D4 frames within 1e-9/exact. No D3 geometry row is an acceptance reference."
+  },
+  "frozenBeforeCorrection": {
+    "toolFreezeCommit": "65e72d7f3c1454b01a7f6d52724c12a8d569f171",
+    "primaryBlenderToolSha256": "fb5d3ee65047c1374b640dde5c9b992a8c12051b7c87fdc5d46068f20fe088d8",
+    "independentBlenderToolSha256": "3856ca0cefb15733cd8e86d69c28ca33613b000eeb5a6ca9f801bc53627b996d",
+    "runnerSha256": "8432365355a84f80fa19e5cb8991e48a9abfa608511aa73908fceed00964edce",
+    "auditorSha256": "031df55628af67be3a8f2c098edea60a6e0cb3947e28f9bfcb2c8d2140e34d2b"
+  },
+  "authorizedChanges": {
+    "primaryBlenderTool": "Add evaluatedCameraLocation and evaluatedCameraQuaternion to each already-permitted derivation frame row after the C1 synchronization. No extra scene.frame_set or measurement is allowed.",
+    "independentBlenderTool": "Independently add the same two post-synchronization pose fields; do not import the primary implementation.",
+    "runner": "Bind C2, both retained D5 failures and the exact D4 build report; preserve C1 scope proof and use the fresh retry root.",
+    "auditor": "Replace only the impossible D3 geometry baseline gate with the authoritative D4 pose-plus-geometry contract, retain an explicit D3 contamination finding, bind C2 and use the fresh retry root.",
+    "retryRoot": "experiments/b62-camera-quality-motion-aware-search-v0-3"
+  },
+  "unchanged": [
+    "Both C1 view-layer synchronizations",
+    "The 14 candidates, nine derivation frames and eight sealed validation frames",
+    "All smoothstep, path, geometry feasibility and selection calculations",
+    "The 0.02 path bound, 0.90 maximum clamped area and every other threshold",
+    "The 1e-9 numeric comparison tolerance",
+    "Two fresh Blender processes, zero render/model/network/Docker/scene-save calls and all budgets",
+    "Outcome-neutral FOUND/NOT_FOUND mapping and later sealed paired-Cycles requirement"
+  ],
+  "scientificBoundary": "C2 repairs an impossible reference contract; it does not retroactively validate D3 candidate uniqueness. D5 v0.3 evaluates only the D4-demonstrated camera family and cannot claim global or D3-grid optimality."
+}
