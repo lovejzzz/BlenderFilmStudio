@@ -233,6 +233,7 @@ function resealBundle(bundle, shouldProject = true) {
     selfHash: sample.selfHash,
     bytes: Buffer.byteLength(serialized(sample))
   }));
+  reseal(bundle.results);
   if (shouldProject) project(bundle);
   reseal(bundle.results);
   return bundle;
