@@ -4749,3 +4749,15 @@ Closeout preregistration commit `14fe6ca519ab23e497b683cdc9547d4ed35ba921`推送
 Runner/auditor SHA为`9464bcd0c49850eb3582e702d05a8f9ebd9db3482a9a053f8b7f1c54ebeabdbd` / `26758d87ff9742ba90deba6f4db07362cbbd255703ee8b425e7489c21efd5479`，209 / 196 lines、19,889 / 21,423 bytes。两者self-test、Node syntax、zero-warning targeted ESLint与diff check通过。Live preflight当前除`SPEC_RELEASE_AND_EVIDENCE_HASHES`外全部门为true；该唯一失败由两份新工具尚未提交导致，evidence hashes exact、sampleCount 5、latest age 776,695 ms、formal root absent。
 
 下一动作只提交推送工具与本entry，再在fresh临时clone执行完整runner+auditor rehearsal；只有15/15与20/20同时通过且当前正式root仍不存在，才运行真实closeout。
+
+## J-357 · B59-G0 closeout fresh-clone全链排练通过
+
+Date: 2026-08-29 · Type: GATE 0 CLOSEOUT REHEARSAL · New Blender processes: 0 · New Blender renders: 0
+
+Tool commit `04e00ef782ffb8846c1171e58bd4f9d0dfe25ec6`与origin exact后，在fresh shared clone `/tmp/bfs-g0-rehearsal.GFetIF/repo`执行完整preflight、runner与auditor，未消费真实formal root。Preflight在19份evidence hashes exact、sampleCount 5、latest age 837,730 ms和release clean时READY。
+
+Runner通过14/14 pre-audit gates；independent auditor通过15/15 final gates、20/20 targeted attacks与START/RESULTS/SPEC/EVIDENCE_RECEIPTS/RELEASE/GATE_PROJECTION/LIVE_SENTINEL/LIVE_RUNTIME八项integrity checks。Final rehearsal verdict为`GATE0_HOST_STABILITY_CLOSED`，resource accounting对Blender/Docker/network/model/cleanup/service mutations全部为0。
+
+Rehearsal start/results/audit SHA为`8285207745b43b393f566a2f6d25ceacd012473004b446dde3517df381c48191` / `9d93a7c9401eb22027251f3d208e9885918d0859e1d417070bcaf1847878c475` / `83f713c48ff4aec0d3565565633621d25c4b28127d3ffa52a1a5ae450ad2bb32`，bytes为6,858 / 10,385 / 6,241，均远低于64 KiB ceiling。临时目录随后用exact target逐项删除并验证不存在；第一次`rm -rf`请求被安全层拒绝且未执行。真实formal root仍不存在。
+
+下一动作提交推送本entry，然后在HEAD/origin exact且live sentinel仍fresh时运行单次正式Gate 0 closeout。
