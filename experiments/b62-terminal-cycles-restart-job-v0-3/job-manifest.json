@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionJobManifest.v0.1",
+  "jobId": "B62-TERMINAL-CYCLES-RESTART-J01",
+  "experimentId": "B62-T3-E1",
+  "toolFreezeCommit": "69056b8eb853572804f47c9831b4fda4441edef7",
+  "preflight": {
+    "uri": "experiments/b62-terminal-cycles-restart-preflight-v0-3/preflight.json",
+    "sha256": "ab9008825ab57d6f9ad7953f057ffea635fc727adc503d221b18cca6f851ea69",
+    "preflightHash": "04bd07ec6ea38f758f858c2729962768014223ac101abbea82879af2bd268040"
+  },
+  "source": {
+    "uri": "experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend",
+    "sha256": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc"
+  },
+  "spec": {
+    "uri": "specs/b62-terminal-cycles-restart.v0.1.json",
+    "sha256": "252ded5e969708737df8a47e5d68974dd6b28c2c9f265c5c611ece28a42f7f53"
+  },
+  "corrections": [
+    {
+      "uri": "specs/b62-terminal-cycles-restart-c1-preflight-reference.v0.1.json",
+      "sha256": "dd4dcc4ff3a22dbf6a68380ce0de600add6141a0d451ad38f038c60cdf3a30aa"
+    },
+    {
+      "uri": "specs/b62-terminal-cycles-restart-c2-failed-receipt-reference.v0.1.json",
+      "sha256": "4609b97fbd0e9c95739e5d79627ca8ec2c11e3a8741a4c909fa701645e008493"
+    }
+  ],
+  "stageDag": [
+    {
+      "id": "ADMIT_PLAN",
+      "dependsOn": []
+    },
+    {
+      "id": "INTERRUPT_WIDE_PROBE",
+      "dependsOn": [
+        "ADMIT_PLAN"
+      ]
+    },
+    {
+      "id": "RENDER_WIDE",
+      "dependsOn": [
+        "INTERRUPT_WIDE_PROBE"
+      ]
+    },
+    {
+      "id": "CODEX_RESTART_CHECKPOINT",
+      "dependsOn": [
+        "RENDER_WIDE"
+      ]
+    },
+    {
+      "id": "POST_RESTART_ATTEST",
+      "dependsOn": [
+        "CODEX_RESTART_CHECKPOINT"
+      ]
+    },
+    {
+      "id": "RENDER_MEDIUM",
+      "dependsOn": [
+        "POST_RESTART_ATTEST"
+      ]
+    },
+    {
+      "id": "RENDER_CLOSE",
+      "dependsOn": [
+        "RENDER_MEDIUM"
+      ]
+    },
+    {
+      "id": "INDEPENDENT_EXR_AUDIT",
+      "dependsOn": [
+        "RENDER_CLOSE"
+      ]
+    },
+    {
+      "id": "DELIVERY",
+      "dependsOn": [
+        "INDEPENDENT_EXR_AUDIT"
+      ]
+    },
+    {
+      "id": "FINAL_AUDIT",
+      "dependsOn": [
+        "DELIVERY"
+      ]
+    },
+    {
+      "id": "FINALIZE",
+      "dependsOn": [
+        "FINAL_AUDIT"
+      ]
+    }
+  ],
+  "manifestHash": "a32021c83329539440e231e2fd57cdd98c789c296c1b6f089c427d7336cb96a5"
+}
