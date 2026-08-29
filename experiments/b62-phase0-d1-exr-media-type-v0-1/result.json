@@ -1,0 +1,137 @@
+{
+  "checks": [
+    {
+      "id": "BLENDER_BUILD_EXACT",
+      "pass": true
+    },
+    {
+      "id": "FACTORY_MEDIA_TYPE_IMAGE",
+      "pass": true
+    },
+    {
+      "id": "MULTILAYER_ENUM_ABSENT_BEFORE_MEDIA_TYPE",
+      "pass": false
+    },
+    {
+      "id": "WRONG_ORDER_REJECTED",
+      "pass": true
+    },
+    {
+      "id": "MEDIA_TYPE_SWITCH_EXACT",
+      "pass": true
+    },
+    {
+      "id": "MULTILAYER_ENUM_PRESENT_AFTER_MEDIA_TYPE",
+      "pass": true
+    },
+    {
+      "id": "FINAL_HALF_ZIP_EXACT",
+      "pass": true
+    },
+    {
+      "id": "ZERO_RENDER_EXTERNAL_CALLS",
+      "pass": true
+    }
+  ],
+  "correction": {
+    "sha256": "a7986296e019be90abd94e2392eb065e5596e4b110af5a19186fbd95f3149970",
+    "uri": "specs/b62-phase0-c3-blender52-multilayer-media-correction.v0.1.json"
+  },
+  "experimentId": "B62-P0-D1",
+  "probe": {
+    "afterMediaType": {
+      "fileFormatBeforeAssignment": "OPEN_EXR_MULTILAYER",
+      "fileFormatEnums": [
+        "AVIF",
+        "JPEG",
+        "OPEN_EXR",
+        "PNG",
+        "WEBP",
+        "BMP",
+        "CINEON",
+        "DPX",
+        "IRIS",
+        "JPEG2000",
+        "HDR",
+        "TARGA",
+        "TARGA_RAW",
+        "TIFF",
+        "OPEN_EXR_MULTILAYER",
+        "FFMPEG"
+      ],
+      "mediaType": "MULTI_LAYER_IMAGE"
+    },
+    "assignmentBeforeMediaTypeError": "TypeError: bpy_struct: item.attr = val: enum \"OPEN_EXR_MULTILAYER\" not found in ('AVIF', 'JPEG', 'OPEN_EXR', 'PNG', 'WEBP', 'BMP', 'CINEON', 'DPX', 'IRIS', 'JPEG2000', 'HDR', 'TARGA', 'TARGA_RAW', 'TIFF')",
+    "assignmentBeforeMediaTypeRejected": true,
+    "blender": {
+      "buildHash": "fbe6228777e7",
+      "version": "5.2.0 LTS"
+    },
+    "default": {
+      "fileFormat": "PNG",
+      "fileFormatEnums": [
+        "AVIF",
+        "JPEG",
+        "OPEN_EXR",
+        "PNG",
+        "WEBP",
+        "BMP",
+        "CINEON",
+        "DPX",
+        "IRIS",
+        "JPEG2000",
+        "HDR",
+        "TARGA",
+        "TARGA_RAW",
+        "TIFF",
+        "OPEN_EXR_MULTILAYER",
+        "FFMPEG"
+      ],
+      "mediaType": "IMAGE"
+    },
+    "final": {
+      "colorDepth": "16",
+      "colorMode": "RGBA",
+      "exrCodec": "ZIP",
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "mediaType": "MULTI_LAYER_IMAGE"
+    },
+    "operations": {
+      "blenderStarts": 1,
+      "dockerProcesses": 0,
+      "modelCalls": 0,
+      "networkCalls": 0,
+      "renderCalls": 0
+    },
+    "schemaVersion": "bfs.b62Phase0D1Probe.v0.1"
+  },
+  "process": {
+    "elapsedSeconds": 0.468017125,
+    "exitCode": 0,
+    "stderr": {
+      "bytes": 753,
+      "sha256": "c547cebe23561463d92aafa337022822e9e229579537c14affcaa34f94f19def",
+      "uri": "experiments/b62-phase0-d1-exr-media-type-v0-1/stderr.log"
+    },
+    "stdout": {
+      "bytes": 1191,
+      "sha256": "618ce5b38e5399253a300a64f1c86e79532419cf1c61410c68e0f2046e9c6959",
+      "uri": "experiments/b62-phase0-d1-exr-media-type-v0-1/stdout.log"
+    },
+    "timing": {
+      "maximumResidentSetSizeBytes": 241074176,
+      "realSeconds": 0.46,
+      "systemSeconds": 0.05,
+      "userSeconds": 0.34
+    }
+  },
+  "resultHash": "b44e9ae772a75da2358ffe10f4c27d4f2cbae74f327c8594d15f67dc732a9a2e",
+  "schemaVersion": "bfs.b62Phase0D1Result.v0.1",
+  "status": "FAIL",
+  "toolFreezeCommit": "3a191e5273af2d0c63a4d3ce1f847c18a6a45d9a",
+  "toolHashes": {
+    "blender/probe_b62_d1_exr_media_type.py": "66db61621316b28d1a222d9f1178f717f5c86fa866cb92ac20a374a689033b64",
+    "scripts/audit-b62-d1-exr-media-type.mjs": "2407704fddaf3986776adf61767b14863b7859b92597f4a1cead9e99e4676570",
+    "scripts/run-b62-d1-exr-media-type.mjs": "5abcf59de243ac23ebc62db5734d1d5b2a630f58dac59d0b2ac2edcdc03bdf82"
+  }
+}

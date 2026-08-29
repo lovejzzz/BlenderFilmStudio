@@ -5315,3 +5315,11 @@ official preflight `ad7bc82…`以evidence commit `ea88148…`推送后，v0.1 r
 失败保持`B62_PHASE0_INVALIDATED`：attempt 7 files/7,519 bytes/tree `f27179c8…`，formal 5 files/493,005 bytes/tree `f71e288a…`，failure file/self `8cb9c5cd…/dc47c06a…`。没有进入animatic/calibration，不得覆盖v0.1。
 
 B61同build成功的差异是其source blend已保存multilayer media状态；C3预注册D1 one-Blender/zero-render probe，测试factory默认、错误顺序reject、先`MULTI_LAYER_IMAGE`再`OPEN_EXR_MULTILAYER`accept及HALF/ZIP。只有D1 PASS才允许两份Blender工具增加显式media_type设置；其余参数完全不变，retry使用全新v0.2三棵roots。
+
+## J-417 · B62 D1 retained FAIL与C4动态setter预注册
+
+Date: 2026-08-29 · Type: RETAINED DIAGNOSTIC FAILURE / FOLLOW-UP PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+D1 Blender probe本身exit 0、0.468秒、peak RSS 241,074,176 bytes、zero render/external calls。它观察到factory `media_type=IMAGE`时multilayer setter TypeError；切到`MULTI_LAYER_IMAGE`后setter、HALF、ZIP全部成功。但RNA `enum_items`在两状态都返回包含`OPEN_EXR_MULTILAYER`的static superset，导致预注册8 checks中`MULTILAYER_ENUM_ABSENT_BEFORE_MEDIA_TYPE`唯一false。result/receipt status均FAIL，root 4 files/6,238 bytes/tree `a0194426…`，不得改判。
+
+C4把失败归因为static metadata不是dynamic assignability的有效proxy，预注册D2 one-Blender/zero-render、3 repetitions A→B→A setter实验：每轮IMAGE reject、MULTI accept、回IMAGE reject，共9/9 outcomes；判决明确忽略enum roster。只有D2 PASS才能实施C3限定的media_type production correction与v0.2 retry。

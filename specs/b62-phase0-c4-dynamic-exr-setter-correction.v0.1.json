@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C4",
+  "date": "2026-08-29",
+  "statusBeforeDiagnostic": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "c3Uri": "specs/b62-phase0-c3-blender52-multilayer-media-correction.v0.1.json",
+    "c3PreregistrationCommit": "b3b7ec60d537df46e65a36672b6bf81e43f2d4b4",
+    "d1ToolFreezeCommit": "3a191e5273af2d0c63a4d3ce1f847c18a6a45d9a"
+  },
+  "retainedD1": {
+    "root": "experiments/b62-phase0-d1-exr-media-type-v0-1",
+    "tree": {"files": 4, "bytes": 6238, "treeSha256": "a01944267bb7c36edffb02b27e11cebdaaf56b45b47703764a6f4425e01d9263"},
+    "result": {"sha256": "08839a8bdfb33c72f0b11edb05051064b330f4af34078ec3e21b62affa8e1e1b", "resultHash": "b44e9ae772a75da2358ffe10f4c27d4f2cbae74f327c8594d15f67dc732a9a2e", "status": "FAIL"},
+    "receipt": {"sha256": "3ceecd12287c8b9421433b338d5ef058f78f78dd52c02e242ce5a6b4cdc82e9c", "receiptHash": "6c702b80c5c305b7b5965f3492c4b76df450ada84b2a4e4cb0e56dacded6e994", "status": "FAIL"},
+    "passedInterventions": ["IMAGE setter rejected OPEN_EXR_MULTILAYER", "MULTI_LAYER_IMAGE setter accepted OPEN_EXR_MULTILAYER", "HALF and ZIP assignments accepted"],
+    "failedObservation": "RNA enum_items was assumed context-conditioned but returned a static superset containing OPEN_EXR_MULTILAYER in both states."
+  },
+  "rootCause": "The D1 enum roster gate measured static RNA metadata rather than the dynamic setter domain. It was not a valid proxy for assignability.",
+  "authorizedDiagnostic": {
+    "id": "B62-P0-D2",
+    "root": "experiments/b62-phase0-d2-exr-media-state-ab-v0-1",
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "repetitions": 3,
+    "sequencePerRepetition": ["A_IMAGE_ASSIGN_REJECT", "B_MULTI_LAYER_IMAGE_ASSIGN_ACCEPT", "A_IMAGE_ASSIGN_REJECT"],
+    "ignoresEnumItemsForDecision": true,
+    "toolPaths": [
+      "blender/probe_b62_d2_exr_media_state_ab.py",
+      "scripts/run-b62-d2-exr-media-state-ab.mjs",
+      "scripts/audit-b62-d2-exr-media-state-ab.mjs"
+    ]
+  },
+  "promotionRule": "Only 9/9 expected setter outcomes plus final MULTI_LAYER_IMAGE/OPEN_EXR_MULTILAYER/HALF/ZIP and zero renders authorize the C3 production-tool correction.",
+  "authorizedRetryRootsAfterD2Pass": {
+    "preflight": "experiments/b62-phase0-preflight-v0-2",
+    "attempt": "experiments/b62-phase0-attempt-v0-2",
+    "formal": "experiments/b62-phase0-v0-2"
+  },
+  "formalBudgetsAndClaimsUnchanged": true
+}
