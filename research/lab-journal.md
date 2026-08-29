@@ -4695,3 +4695,13 @@ Runner的11/11 pre-audit gates全部通过，provisional `ADMITTED_PENDING_AUDIT
 Independent audit的START/SNAPSHOTS/RESULTS/GATE_PROJECTION/RELEASE/PARENT/LIVE_LAUNCHD/LIVE_RUNTIME/NO_ALERT九项完整性检查全通过，但15个攻击只拒绝14个。唯一逃逸为`A09_DISK_RATE_BREACH`：它把last available固定成first available减`1 GiB + 1 byte`；真实span比一小时长821 ms，因此归一化rate反而略低于1 GiB/hour，同时相对第四个真实样本的single-interval loss也未超过1 GiB。Auditor据此正确给出11/12 gates的`INVALID_UNATTENDED_RETENTION`，audit SHA为`464eca68fafe518997bd08d80b931a5af422ee44159243dcad1ceef78cfe6f94`。
 
 这不是宿主容量反例，而是mutation-control算法没有按实际span构造严格越界值；生产阈值和健康观测均不改变。失败root原样保留。下一动作先推送该证据，再预注册fresh C1 root，只把A09 loss改为`floor(maxRate * actualSpanHours) + 1`并证明独立重算必然越界；不得复用原root、重写audit或选择更有利的历史子集。
+
+## J-352 · R6-C1跨度归一化A09修正预注册
+
+Date: 2026-08-29 · Type: AUDIT CONTROL CORRECTION PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+R6 INVALID evidence commit `10842726f48d2a3a24c22a30b7ee44be45958638`推送后，C1冻结fresh root `experiments/host-capacity-retention-c1-v0-1`并绑定原results/audit SHA `1104d6ed…` / `464eca68…`。原root、原audit和原`INVALID_UNATTENDED_RETENTION` verdict不修改。
+
+C1完整复用R6的source、runtime identity、250 GiB floor、1 GiB/hour host与Colima rate ceilings、1 GiB maximum interval loss、browser bounds、900-second launchd cadence、12 gates、15 attack IDs及所有byte/resource ceilings。唯一允许的语义修正是A09 mutation：`breachLossBytes = floor(maximumRate * actualSpanMs / 3,600,000) + 1`，并要求auditor在计数前独立证明重算rate严格大于门槛。
+
+Runner/auditor只允许增加安全的repository-relative `--spec specs/name.json`选择；无参数仍绑定原R6 spec。下一动作先提交推送本预注册，再实现selector、A09 helper和over-one-hour drift self-test；在工具commit与origin exact、fresh C1 root及live history仍满足资格后才可执行。
