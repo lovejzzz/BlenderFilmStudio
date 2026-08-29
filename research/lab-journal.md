@@ -5523,3 +5523,11 @@ Date: 2026-08-29 · Type: RETAINED REPORT-ADMISSION FAILURE / CANONICALIZATION P
 C1 BUILD在0.527秒、peak sampled RSS 262,012,928 bytes通过，新增camera/data/action各1，bake 96 frames并产生337,606-byte derived blend `3784fc48…`。runner随后拒绝build report：Python self hash为`f78897b1…`，Node按同一数值对象重算为`a98f3bf1…`。根因是极小非整数浮点的JSON exponent拼写`e-08` vs `e-8`；数值round-trip相同，canonical bytes不同。无render发生，v0.2保留5 files/469,558 bytes/tree `eb62dd16…`。
 
 C2在工具变更前冻结跨语言representation：非整数finite float转为`{"$f64be":16-hex IEEE-754 binary64 bits}`参与hash，整数float转integer；持久化科学字段仍为number。三份Python与两份Node只改canonical helper和fresh v0.3 bindings；候选、bake、holdout、几何、Cycles、12 render与预算不变，v0.2 scene禁止复用。
+
+## J-439 · B62-Q1-D4 v0.3 timeline marker路由失败与C3预注册
+
+Date: 2026-08-29 · Type: RETAINED FULL-RENDER FAILURE / CAMERA ROUTING CORRECTION PREREGISTRATION · New Blender processes: 3 · New Blender renders: 12
+
+C2 retry完成BUILD 0.529秒、RENDER 38.587秒、INDEPENDENT 2.414秒；RENDER peak sampled RSS 1,321,336,832 bytes。12次960×540 Cycles CPU 16 spp均生成finite EXR/PNG，独立解码通过。但六组original/corrected Combined digest逐组exact相同。根因是derived scene保留frame-193 `SHOT_CLOSE_REFLECTION` camera marker；render evaluation把脚本设置的corrected camera再次覆盖为original。Node audit仅`PAIR_PIXEL_DIGESTS_DIFFER`失败，v0.3 verdict为null；root保留35 files/53,694,719 bytes/tree `5e0ebd67…`。
+
+独立几何同时给出不能隐藏的holdout信号：original 6/6失败；corrected frames 193/204/228/252/276通过，但frame 288 clamped area 0.933787超过冻结0.90，因此correctedAllPass=false。C3只授权render时同时设置active marker与scene.camera、结束后恢复marker，并切换fresh v0.4；builder/audit bytes固定，frame288不得删除或放宽。正确路由后允许technical PASS但scientific REJECTED。

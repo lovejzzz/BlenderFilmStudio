@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityHoldoutCorrection.v0.1",
+  "correctionId": "B62-Q1-D4-C3",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {"experimentId": "B62-Q1-D4", "spec": "specs/b62-camera-quality-holdout-render-validation.v0.1.json", "c2": "specs/b62-camera-quality-d4-c2-cross-runtime-float-canonicalization.v0.1.json", "c2ToolFreezeCommit": "4e34954d6f9d8895facf59c950fc0a9dec21dd06"},
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-holdout-render-v0-3",
+    "tree": {"files": 35, "bytes": 53694719, "treeSha256": "5e0ebd67dd2e6a30d74ac56b3a5c8283a5386000ca7c13318a03f7654e60beb6"},
+    "failure": {"uri": "experiments/b62-camera-quality-holdout-render-v0-3/failure.json", "sha256": "f32ba15e188cfb3134f80ee50e0983bae4ca51581cd27867a0c99bb71793a04b", "failureHash": "ce9e05baa54cf44d643ade3b3b124dfdb4f7ca61f92396a23facd8ef73053fc1"},
+    "audit": {"uri": "experiments/b62-camera-quality-holdout-render-v0-3/audit.json", "sha256": "2a773704600fd04c4cad58ed9fbeb60f3ae0665ebb035c63d9c7d4c148188425", "status": "FAIL", "scientificVerdict": null},
+    "render": {"uri": "experiments/b62-camera-quality-holdout-render-v0-3/render.json", "sha256": "67729eb0655f1c77e66b7e478abafae8c30ec44a2bca2661adde58c3c21b8b6e", "renderCalls": 12, "allSixCombinedPairsIdentical": true},
+    "independent": {"uri": "experiments/b62-camera-quality-holdout-render-v0-3/independent.json", "sha256": "8bcb1ff758a85f1fbf329e6d31d8647e44aa91a46dfd39813913114279868c8a", "originalFailedFrames": [193,204,228,252,276,288], "correctedPassedFrames": [193,204,228,252,276], "correctedFailedFrames": [288], "frame288ClampedArea": 0.93378717684983, "frozenMaximum": 0.90}
+  },
+  "rootCause": "The derived scene retains the SHOT_CLOSE_REFLECTION timeline camera marker at frame 193. Blender render evaluation uses that marker and reselects CAM_CLOSE_REFLECTION, overriding the script's scene.camera assignment; therefore both labelled render conditions used the original camera.",
+  "authorizedChanges": {
+    "renderTool": "Before every render, set the active frame-193 SHOT_CLOSE_REFLECTION marker camera and scene.camera to the condition's exact camera. Record both names in the render row. Restore the marker to CAM_CLOSE_REFLECTION after all renders.",
+    "runnerAndNodeAuditor": "Bind C3 and retained v0.3, then use fresh root experiments/b62-camera-quality-holdout-render-v0-4.",
+    "retryRoot": "experiments/b62-camera-quality-holdout-render-v0-4"
+  },
+  "frozen": {
+    "builder": {"uri": "blender/build_b62_q1_d4_corrected_scene.py", "sha256": "c4f16872e208b4a904842091e4abac08e901c75d4b82cef6de8c423d84d3f699"},
+    "independentAudit": {"uri": "blender/audit_b62_q1_d4_scene_and_pixels.py", "sha256": "be0eabe40201bba3f350486b988cef0f21a6587d894cbbbc2ac19d1402e6161f"},
+    "holdoutGeometryAndThresholds": "unchanged including frame-288 area maximum 0.90",
+    "CyclesSettingsAndRenderCount": "unchanged 12 renders",
+    "outcomeRule": "A correctly routed technical package may yield the preregistered REJECTED verdict. Frame 288 may not be excluded or relaxed."
+  },
+  "nonClaims": ["The five corrected geometry passes in invalid v0.3 do not admit the correction.", "C3 does not alter the candidate or frame-288 threshold.", "A v0.4 technical PASS with scientific REJECTED is an expected valid outcome."]
+}
