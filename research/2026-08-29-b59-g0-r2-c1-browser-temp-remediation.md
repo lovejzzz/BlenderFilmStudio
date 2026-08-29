@@ -61,3 +61,14 @@ Executed at approximately `2026-08-29T04:08Z` using depth-first deletion on each
 - Immediate post-remediation headroom: `41,752,354,816` bytes (about 38.89 GiB)
 
 Preservation checks passed for `File System/Origins`, `models--Qwen--Qwen3-4B`, GPT Bot `Pilots`, and `.colima`. The formal R2 root remained absent during remediation.
+
+## Disposable shadow rehearsal
+
+After the remediation and code correction, a disposable spec variant redirected output to a non-formal rehearsal root. It returned `ADMITTED_FOR_LIGHTWEIGHT_WORK`, `20/20` gates and `25/25` attacks with no failed gate. Observed values included one new main PID (`26962`), old PID absent, Codex-tree RSS `3,917,840,384` bytes, available disk `153,939,959,808` bytes, and current version `26.825.32147 (7303)`.
+
+Before deletion, the rehearsal result hashes were:
+
+- `results.json`: `05f21b6783f7513b3c426b1fb0dcf53833ba1054644fabb5f2435c0d125013ba`
+- `audit.json`: `e89347afbd4b3da5584e21deba061c3f2c6286bec2a9aafb17b7b51b9660bf71`
+
+The disposable root was then removed and the formal spec restored byte-for-byte to its committed form. The formal R2 root remained absent. The rehearsal proves tool-path coherence only; it is not admission evidence.
