@@ -1,7 +1,7 @@
 # B59-G0-R3 · Longitudinal Codex host stability protocol
 
 Date: 2026-08-29
-Status: PREREGISTERED
+Status: COMPLETED — BLOCKED ON DISK RETENTION
 Parent commit: `bc9d5b66815ccd507383e43981b44513d7f522e4`
 
 ## Question
@@ -55,3 +55,21 @@ R3 starts no Blender, render, browser automation, network, model or Docker opera
 ## Decision boundary
 
 `ADMITTED_FOR_GATE0_CLOSEOUT` requires 15/15 gates and 20/20 attacks. Passing R3 permits a separate Gate 0 closeout audit and a minimal B58 preflight; it does not itself authorize Blender execution. Failing R3 returns to targeted remediation with the frozen evidence intact.
+
+## Formal result
+
+The single-use formal run spanned `360,135` ms across four immutable samples. Independent audit returned `BLOCKED_HOST_STABILITY`, 14/15 gates and 20/20 attacks. The synthetic positive control and every file/live integrity check passed. The sole failed gate was `DISK_RETENTION_BOUNDED`.
+
+- Actual intervals: `120,029`, `120,057`, `120,049` ms
+- Codex-tree RSS: `3,998,285,824` → `4,008,902,656` bytes; growth `10,616,832` bytes
+- Maximum renderer RSS across samples: `874,987,520` bytes
+- Memory-free range: 83%–86%
+- Browser temporary filesystem: `20,480` bytes at all four samples; growth `0`
+- Main PID: `26962` at all four samples; old PID absent
+- New matching crash reports: `0`
+- Available disk: `150,641,623,040` → `147,314,036,736` bytes
+- Disk loss: `3,327,586,304` bytes, above the 1 GiB ceiling by `2,253,844,480` bytes
+- `results.json` SHA-256: `e22542041fe1be1a7bd140567df0c657dda6a528754b75d21a6faf1a07407d95`
+- `audit.json` SHA-256: `f85158a93341f62d14c59aee4b251eb373d901a953391f0c728e1a66fca15439`
+
+This result supports post-restart Codex RSS stability and containment of the previously leaked browser temporary filesystem over the measured window. It does not close Gate 0 because the multi-GiB disk change is unexplained. The next phase is a read-only attribution experiment; no threshold relaxation or R3 rerun is authorized.
