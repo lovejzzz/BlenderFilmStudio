@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "0.1.0",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.1",
+  "status": "F0_HOST_PREFLIGHT_BLOCKED",
+  "observedAt": "2026-08-29T21:05:18.072Z",
+  "readOnly": true,
+  "host": {
+    "hostname": "Mac",
+    "platform": "darwin",
+    "release": "25.6.0",
+    "architecture": "arm64",
+    "cpuModel": "Apple M2 Max",
+    "logicalCpuCount": 12,
+    "memoryGiB": 64,
+    "node": "v22.22.3"
+  },
+  "disk": {
+    "checkedPath": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio",
+    "freeBytes": "163629887488",
+    "freeGiB": 152,
+    "reservedFreeGiB": 100,
+    "projectedWritesGiB": 60,
+    "requiredFreeGiB": 160
+  },
+  "tools": {
+    "git": { "found": true, "path": "/usr/bin/git", "version": "git version 2.50.1 (Apple Git-155)" },
+    "gitLfs": { "found": false, "path": null, "version": null, "error": "Command failed: /usr/bin/env sh -c command -v git-lfs" },
+    "cmake": { "found": true, "path": "/opt/homebrew/bin/cmake", "version": "cmake version 4.3.1" },
+    "ninja": { "found": false, "path": null, "version": null, "error": "Command failed: /usr/bin/env sh -c command -v ninja" },
+    "python3": { "found": true, "path": "/opt/homebrew/bin/python3", "version": "Python 3.14.3" },
+    "make": { "found": true, "path": "/usr/bin/make", "version": "GNU Make 3.81" },
+    "svn": { "found": false, "path": null, "version": null, "error": "Command failed: /usr/bin/env sh -c command -v svn" },
+    "clang": { "found": true, "path": "/usr/bin/clang", "version": "Apple clang version 17.0.0 (clang-1700.6.3.2)" },
+    "xcodeSelect": { "found": true, "path": "/usr/bin/xcode-select", "version": "/Library/Developer/CommandLineTools" }
+  },
+  "sourceBaseline": {
+    "tag": "v5.2.0",
+    "commit": "fbe6228777e7d9afefcd61a413844e790ae75db7"
+  },
+  "failures": [
+    "required tool not found: gitLfs",
+    "free disk must be >=160 GiB, observed 152 GiB"
+  ],
+  "warnings": [
+    "ninja is optional; Blender can use the default build generator",
+    "svn is not listed as a current macOS prerequisite; record it only if a dependency step requests it"
+  ],
+  "note": "This is a read-only host screen, not the just-in-time admission for a build."
+}

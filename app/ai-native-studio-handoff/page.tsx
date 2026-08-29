@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 };
 
 const gates = [
-  ['F0.1', '源码复现', '两次 clean build + 负控', 'NEXT'],
-  ['F0.2', '独立身份', '名称 / bundle / config 隔离', 'LOCKED'],
+  ['F0.1', '源码复现', '两次 clean build + 负控', 'PASS'],
+  ['F0.2', '独立身份', '名称 / bundle / config 隔离', 'NEXT'],
   ['F0.3', '电影工作台', 'Project / Scene / Shot / Character', 'LOCKED'],
   ['F0.4', '合同内嵌', 'SceneSpec → canonical BuildPlan', 'LOCKED'],
   ['F0.5', '渲染收据', 'EEVEE / Cycles / resume / audit', 'LOCKED'],
@@ -52,13 +52,13 @@ export default function AiNativeStudioHandoffPage() {
         <div className="handoff-hero-copy">
           <p className="eyebrow"><span /> NEW MACHINE HANDOFF · 2026.08.29</p>
           <h1>换一台电脑，<br />不换一套<span>事实。</span></h1>
-          <p>新的 Codex 打开仓库后，不需要翻 400 多篇记录猜下一步。它会从同一个源码 commit、同一份预注册、同一组失败边界，直接进入 F0.1。</p>
+          <p>F0.1 已在 M2 Max 主机完成两次官方源码构建并通过复现审计。新的 Codex 从同一个源码 commit、不可变收据和失败边界，直接进入 F0.2 独立身份。</p>
           <div className="handoff-hero-actions"><a href="#start">开始交接 ↓</a><Link href="/ai-native-studio-design">为什么做自己的软件</Link></div>
         </div>
         <aside className="handoff-state">
-          <header><span>PROGRAM STATE</span><b>PREREGISTERED</b></header>
-          <div className="handoff-state-main"><small>ACTIVE GATE</small><strong>F0.1</strong><h2>REPRODUCIBLE<br />SOURCE BUILD</h2></div>
-          <dl><div><dt>ENGINE</dt><dd>Blender v5.2.0</dd></div><div><dt>COMMIT</dt><dd>fbe6228777e7</dd></div><div><dt>HOST</dt><dd>macOS · Apple Silicon</dd></div><div><dt>VERDICT</dt><dd>NOT RUN</dd></div></dl>
+          <header><span>PROGRAM STATE</span><b>F0.1 PASS</b></header>
+          <div className="handoff-state-main"><small>ACTIVE GATE</small><strong>F0.2</strong><h2>INDEPENDENT<br />PRODUCT IDENTITY</h2></div>
+          <dl><div><dt>ENGINE</dt><dd>Blender v5.2.0</dd></div><div><dt>COMMIT</dt><dd>fbe6228777e7</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>F0.1</dt><dd>PASS</dd></div></dl>
           <footer>FORK IS A HYPOTHESIS · NOT A CONCLUSION</footer>
         </aside>
         <div className="handoff-signal"><span>01</span><b>读取规则</b><i>→</i><span>02</span><b>只读预检</b><i>→</i><span>03</span><b>固定源码</b><i>→</i><span>04</span><b>保存证据</b></div>
@@ -79,7 +79,7 @@ export default function AiNativeStudioHandoffPage() {
       <section className="handoff-gates" id="gates">
         <div className="section-index light">01 / SOURCE FEASIBILITY</div>
         <div className="handoff-heading light"><div><p className="eyebrow"><span /> SEVEN GATES · ONE DECISION</p><h2>全部关闭，才有资格<br />建立<span>正式引擎仓库。</span></h2></div><p>这不是七项功能清单，而是七个能推翻 thin fork 的实验。失败本身可接受；隐藏失败、挪动阈值或无限扩大 patch 不可接受。</p></div>
-        <div className="handoff-gate-list">{gates.map(([id,title,detail,status],index) => <article className={index === 0 ? 'active' : ''} key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>{status}</b></article>)}</div>
+        <div className="handoff-gate-list">{gates.map(([id,title,detail,status],index) => <article className={index === 1 ? 'active' : ''} key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>{status}</b></article>)}</div>
         <div className="handoff-fork"><article><span>ALL PASS</span><h3>THIN FORK</h3><p>进入独立引擎产品原型；仍维持最小核心 patch。</p></article><i>OR</i><article><span>CEILING EXCEEDED</span><h3>EXTERNAL SHELL</h3><p>保留电影体验和 typed protocol，使用未修改 Blender。</p></article></div>
       </section>
 
@@ -99,8 +99,8 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-checkpoint">
         <span>NEXT PUSH MUST CONTAIN</span>
-        <h2>一个真实 F0.1 结果。</h2>
-        <p>host receipt · source identity · toolchain · exact command · time / memory / disk · binary or failure · journal</p>
+        <h2>一个真实 F0.2 结果。</h2>
+        <p>identity patch · bundle inspection · owned icon / splash · isolated config · official Blender before / after hash · journal</p>
         <div><Link href="/journal">查看实验日志 →</Link><a href="https://github.com/lovejzzz/BlenderFilmStudio" target="_blank" rel="noreferrer">打开 GitHub 仓库 ↗</a></div>
       </section>
 

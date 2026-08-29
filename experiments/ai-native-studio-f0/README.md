@@ -16,3 +16,14 @@ verdict. A retry creates a new root and cross-binds the earlier receipt.
 
 The normative acceptance criteria are in
 `specs/ai-native-studio-f0.v0.1.json`.
+
+## Current result
+
+`F0.1` is `PASS` on the 2026-08-29 Apple M2 Max host. Attempts 01-04 retain
+preflight, source and dependency acquisition boundaries; attempt 05 contains
+the two successful clean-build receipts; attempt 06 retains a failed auditor
+implementation; attempt 07 cross-binds that failure and contains the accepted
+runtime, comparison, negative-control and verdict receipts.
+
+The accepted comparison claim is **semantically identical, not byte-for-byte
+reproducible**. The next active gate is `F0.2`.

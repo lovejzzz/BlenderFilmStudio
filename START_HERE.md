@@ -1,8 +1,8 @@
 # BlenderFilmStudio — new machine cold start
 
-> **Current decision:** validate an AI-native film application built as a thin,
-> independently branded fork of the official Blender engine. Do not assume the
-> fork is viable until F0.1-F0.7 close.
+> **Current decision:** F0.1 passed on the admitted M2 Max host. Continue with
+> F0.2 independent product identity; do not assume the fork is viable until
+> F0.1-F0.7 all close.
 
 This is the authoritative handoff for a fresh Codex session. The repository is
 both a research notebook and an executable evidence base. Read this page,
@@ -14,7 +14,11 @@ both a research notebook and an executable evidence base. Read this page,
   and fork-maintenance reference; an external shell remains the fallback.
 - **Pinned engine baseline:** official `v5.2.0` at
   `fbe6228777e7d9afefcd61a413844e790ae75db7`.
-- **Active experiment:** `F0-SOURCE-FEASIBILITY`.
+- **Active experiment:** `F0-SOURCE-FEASIBILITY`, gate `F0.2`.
+- **Closed gate:** `F0.1 PASS`. Two clean official builds reported Blender
+  5.2.0 and the pinned source hash. The bundles are semantically identical but
+  not byte-for-byte reproducible; the bounded differences are recorded in
+  `F0.1-2026-08-29-mac-m2max-attempt-07/comparison.json`.
 - **Inherited evidence:** B01-B62 cover structured scene compilation, Blender
   execution, safety/admission, pixels, production passes, cost, recovery and a
   three-shot cinematic attempt. These results are evidence, not a claim that
@@ -22,9 +26,9 @@ both a research notebook and an executable evidence base. Read this page,
 - **Most important retained rejection:** B62's latest camera holdout passed all
   technical gates but failed the frozen composition threshold at frame 288.
   Source control does not replace direction or taste.
-- **Unproven:** repeatable source build on the new host, independent application
-  identity, native film workspace, embedded contract equivalence, merge cost,
-  packaging and `.blend` round-trip isolation.
+- **Unproven:** independent application identity, native film workspace,
+  embedded contract equivalence, merge cost, packaging and `.blend` round-trip
+  isolation.
 
 ## Read in this order
 
@@ -82,8 +86,10 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. Close F0.1 before beginning branding or UI work. The first result should be a
-   reproducible native Blender binary and receipt, not a mockup.
+5. F0.1 is closed. For F0.2, preregister the smallest identity patch before
+   changing source: product name, bundle id, owned icon/splash and isolated
+   configuration root. Preserve official Blender configuration hashes before
+   and after launch/reset.
 
 ## What not to do
 
@@ -101,13 +107,13 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next machine should push one small, auditable checkpoint containing:
+The next machine should push one small, auditable F0.2 checkpoint containing:
 
-- a unique F0.1 experiment root;
-- host preflight receipt;
-- pinned source and dependency identities;
-- exact build command and toolchain;
-- success or complete failure evidence with time, disk and peak-memory data;
+- a unique F0.2 experiment root and preregistered patch surface;
+- the `Film Studio Engine F0` name and `studio.ainativefilm.f0` bundle id;
+- project-owned icon/splash provenance;
+- configuration-isolation evidence against official Blender;
+- complete success or failure receipts;
 - a journal entry and, if useful, a website update.
 
 The scientific result may be `PASS`, `FAIL`, or `BLOCKED`. “Still working” is

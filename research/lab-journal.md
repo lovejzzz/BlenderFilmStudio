@@ -5811,3 +5811,15 @@ C2 tool freeze `69056b8eb853572804f47c9831b4fda4441edef7`在fresh v0.3完整越�
 WIDE Blender real/user/sys为3555.99/48329.6/277.5秒，maximum RSS 3,896,508,416 bytes；renderer累计3507.461秒，shot report self `4aca85e9…`，stage receipt self `3d401afa…`。checkpoint记录ChatGPT/Codex app-server PID 27025、start `Fri Aug 28 23:58:08 2026`、identity `db166660…`，receipt self `d6e2a38d…`，runner按协议exit 86。
 
 同一host identity再次resume得到`LIVE_MATCH`并exit 86，restricted processes 0；refusal proof file/self `8df2c827…/8c2761f5…`。checkpoint evidence共313 files、约1.3 GB，commit `926e00451361017da547051fb4eca3ce515aecd0`已推送。下一步必须由用户真实重启Codex/ChatGPT，使旧identity死亡且新identity不同；resume才可verified-skip WIDE并启动MEDIUM，禁止在当前host继续。
+
+## J-469 · F0.1 官方 Blender 5.2.0 双构建与复现审计 PASS
+
+Date: 2026-08-29 · Type: F0.1 FORMAL SOURCE BUILD AND REPRODUCIBILITY PASS · Host: macOS 25.6.0 / Apple M2 Max / 64 GiB · New Blender source builds: 2
+
+新主机从空仓库取回`c083ac37029efa6245b3b6da969492bca8013ee1`，完整读取`AGENTS.md`、`START_HERE.md`、状态、设计、F0协议与规范。源码在仓库外以detached HEAD固定为官方`v5.2.0` / `fbe6228777e7d9afefcd61a413844e790ae75db7`；Git LFS 3.8.0完整拉取6,659个对象，macOS arm64依赖固定为`5a140a8ccc8c070221b1b06e2c6f89f136c5758d`。主机准入坚持160 GiB精确阈值；不足时保留BLOCKED并保持0 native start，没有降低阈值。
+
+attempt-05在两个不存在的clean build root执行相同命令`/usr/bin/make BUILD_DIR=<build-a|build-b> NPROCS=12`。A为624.028秒、peak RSS 2,039,627,776 bytes、workspace growth 2,363,207,680 bytes；B为538.473秒、peak RSS 2,045,116,416 bytes、growth 2,358,767,616 bytes。两次均exit 0，源码前后clean且保持fixed HEAD，产出183,117,128-byte原生Blender binary。
+
+attempt-07纠正并交叉绑定attempt-06审计器实现失败后正式PASS。两份exact binary均以fresh JIT admission启动并报告`Blender 5.2.0 LTS`、build hash`fbe6228777e7`、Darwin/Release/CMake；唯一运行时字段差异是build time。两个bundle各6,363 entries，路径、类型、mode与size完全一致；5,378个文件byte-exact，105个文件不同。103个Cycles OSL object各只差1 byte，全部在将等长`build-a`/`build-b`输出路径归一为`build-x`后byte-exact。主Mach-O仅154 bytes不同，thumbnailer仅116 bytes不同，差异被限制并记录为build-time字符串、linker UUID/__LINKEDIT元数据及其ad-hoc linker signature。因此正式主张是`semantically identical, not byte-for-byte reproducible`，不是伪称完全字节复现。
+
+负控使用与真实runtime launch相同的`admissionFor`函数：free bytes精确为171,798,691,839（required minus one）时BLOCKED；HEAD注入全零时以`SOURCE_HEAD_MISMATCH` BLOCKED；两项`compilerOrBlenderPids=[]`且restricted native starts为0。最终verdict receipt self hash为`f4a18aec803a09d2c149222312a8e9f507d1103f95273951af79acaf04ba62cb`。F0.1关闭为PASS，active gate转为F0.2 independent identity；这不证明thin fork最终可行，F0.2–F0.7仍未运行。

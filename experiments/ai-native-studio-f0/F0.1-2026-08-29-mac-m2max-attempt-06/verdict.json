@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "bfs.f0GateVerdict.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.1",
+  "status": "FAIL",
+  "observedAt": "2026-08-29T22:01:13.700Z",
+  "runnerSha256": "275cdda9e161bb1ad4bf8385ad4b7f48c6411ac8e2205a8207d3e91b2635cc0c",
+  "completedEvidence": {
+    "runtimeAReceipt": {
+      "path": "runtime-a/receipt.json",
+      "fileSha256": "9a4f08198125e51131ea5bbf122c2e03acc22392c11eda66f7be9d9786b9f405"
+    },
+    "runtimeBReceipt": {
+      "path": "runtime-b/receipt.json",
+      "fileSha256": "663eb237ee8ed336a72d967dfc25d79ddbd9cb1f045769c89b7b60ad13cc87f2"
+    },
+    "comparison": {
+      "path": "comparison.json",
+      "fileSha256": "da3af1b5de8d7dc620916afba223ae727bcc9894bd0a099ccfb4131d4d1d5f84",
+      "status": "FAIL"
+    }
+  },
+  "failure": {
+    "class": "AUDITOR_IMPLEMENTATION_ERROR",
+    "message": "ReferenceError: restrictedNativeProcessStarts is not defined",
+    "stage": "writeNegativeControls",
+    "negativeControlReceiptWritten": false,
+    "additionalDiagnostic": "The runtime first-line timestamp was incorrectly parsed as a key/value field because the parser did not require indentation."
+  },
+  "nativeProcessAccounting": {
+    "blenderStarts": 2,
+    "negativeControlCompilerOrBlenderStarts": 0
+  },
+  "correction": {
+    "required": true,
+    "reuseThisRoot": false,
+    "nextAttemptMustCrossBind": true
+  }
+}

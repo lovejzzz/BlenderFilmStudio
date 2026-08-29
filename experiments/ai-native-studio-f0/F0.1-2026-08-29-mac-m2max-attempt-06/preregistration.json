@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "0.1.0",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.1",
+  "purpose": "Immutable post-build runtime, bundle-comparison, and negative-control audit of attempt-05",
+  "repositoryCommit": "c083ac37029efa6245b3b6da969492bca8013ee1",
+  "protocolSha256": "851751da636242428e0c1b3be3209de10237aecc0b18e5d036c49f1818cd3dc3",
+  "specSha256": "2c06e617f9f435fe640ad2bc27e6cbb792820142e75b563ce4f77ade93a50929",
+  "runnerPath": "scripts/audit-f0-reproducible-builds.mjs",
+  "runnerSha256": "275cdda9e161bb1ad4bf8385ad4b7f48c6411ac8e2205a8207d3e91b2635cc0c",
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "tag": "v5.2.0",
+    "commit": "fbe6228777e7d9afefcd61a413844e790ae75db7"
+  },
+  "priorAttempt": "../F0.1-2026-08-29-mac-m2max-attempt-05",
+  "priorBuildReceipts": {
+    "buildA": {
+      "path": "../F0.1-2026-08-29-mac-m2max-attempt-05/build-a/receipt.json",
+      "fileSha256": "5e6bd03510b6c13652b16cdf20eeb9b3914a88fa8fa637d4b1382e5f1f5c310f",
+      "receiptHash": "6da23fdc4ceed63091c56574ed16175ca2ff6566f2995869c69bce3beaf75ae2"
+    },
+    "buildB": {
+      "path": "../F0.1-2026-08-29-mac-m2max-attempt-05/build-b/receipt.json",
+      "fileSha256": "cc63671246952f6800226bc58be2ebee7cc26c0cf6cb59050e2b35f43514e8c4",
+      "receiptHash": "0c975af221a79a641d762031e35c98b1a5af88694c82b7eb614d1f38d7b341a0"
+    }
+  },
+  "artifacts": {
+    "buildAApp": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-a/bin/Blender.app",
+    "buildBApp": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-b/bin/Blender.app"
+  },
+  "runtimeCommand": [
+    "<exact-build-binary>",
+    "--background",
+    "--factory-startup",
+    "--version"
+  ],
+  "admission": {
+    "requiredFreeBytes": "171798691840",
+    "sourceHead": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "sourceTag": "v5.2.0",
+    "sourceMustBeClean": true,
+    "justInTimeBeforeEachBlenderLaunch": true
+  },
+  "frozenDifferenceHypotheses": [
+    {
+      "paths": [
+        "Contents/MacOS/Blender",
+        "Contents/PlugIns/blender-thumbnailer.appex/Contents/MacOS/blender-thumbnailer"
+      ],
+      "allowedExplanation": "bounded build-time strings, Mach-O linker UUID/link metadata, and resulting ad-hoc linker signature",
+      "requiredEvidence": "exact differing-byte spans, __LINKEDIT and code-signature offsets, UUIDs, signing identity, and runtime build fields"
+    },
+    {
+      "pathPattern": "Contents/Resources/5.2/scripts/addons_core/cycles/shader/*.oso",
+      "allowedExplanation": "embedded absolute -o build output path",
+      "requiredEvidence": "each object becomes byte-identical after equal-length build-a/build-b to build-x normalization"
+    }
+  ],
+  "negativeControls": {
+    "disk": {
+      "requiredFreeBytes": "171798691840",
+      "injectedFreeBytes": "171798691839",
+      "expected": "BLOCKED with zero compiler/Blender PID"
+    },
+    "source": {
+      "injectedHead": "0000000000000000000000000000000000000000",
+      "expected": "BLOCKED before native launch"
+    },
+    "method": "Pass deterministic injected values through the exact admission function used immediately before each runtime launch"
+  },
+  "acceptance": [
+    "Both exact build binaries exit zero and report Blender 5.2.0 plus the pinned source identity",
+    "Bundle path sets and file metadata are identical",
+    "Every content difference is confined to a frozen path class and satisfies its frozen explanation check",
+    "Runtime identity differs only in build date/time",
+    "Both negative controls block with zero restricted native process starts"
+  ],
+  "claimCeiling": "Semantically identical, not byte-for-byte reproducible"
+}

@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-29",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_PREREGISTERED_NOT_STARTED",
+  "status": "F0_1_PASS_F0_2_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -21,16 +21,33 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "F0.1",
+  "activeGate": "F0.2",
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
-    "F0.1": "NOT_RUN",
+    "F0.1": "PASS",
     "F0.2": "NOT_RUN",
     "F0.3": "NOT_RUN",
     "F0.4": "NOT_RUN",
     "F0.5": "NOT_RUN",
     "F0.6": "NOT_RUN",
     "F0.7": "NOT_RUN"
+  },
+  "completedGateEvidence": {
+    "F0.1": {
+      "verdict": "PASS",
+      "buildAttempt": "experiments/ai-native-studio-f0/F0.1-2026-08-29-mac-m2max-attempt-05",
+      "auditAttempt": "experiments/ai-native-studio-f0/F0.1-2026-08-29-mac-m2max-attempt-07",
+      "verdictReceiptHash": "f4a18aec803a09d2c149222312a8e9f507d1103f95273951af79acaf04ba62cb",
+      "sourceCommit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+      "dependencyCommit": "5a140a8ccc8c070221b1b06e2c6f89f136c5758d",
+      "builds": [
+        {"label": "A", "wallSeconds": 624.027860541, "peakRssBytes": 2039627776},
+        {"label": "B", "wallSeconds": 538.472787667, "peakRssBytes": 2045116416}
+      ],
+      "bundleResult": "Semantically identical, not byte-for-byte reproducible",
+      "differingFiles": 105,
+      "negativeControlsPass": true
+    }
   },
   "inheritedEvidence": {
     "range": "B01-B62",
@@ -82,16 +99,15 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "F0.1",
-    "result": "A reproducible native Blender 5.2.0 source build or a bounded failure with full evidence",
+    "gate": "F0.2",
+    "result": "An independently identified Film Studio Engine F0 build with isolated configuration state",
     "requiredArtifacts": [
-      "host preflight receipt",
-      "source and dependency identity",
-      "toolchain identity",
-      "exact build command",
-      "timing and resource measurements",
-      "binary identity or failure logs",
-      "journal entry"
+      "identity.patch",
+      "bundle-inspection.json",
+      "configuration-isolation.json",
+      "project-owned icon and splash provenance",
+      "official Blender configuration hashes before and after F0 launch/reset",
+      "screenshots and journal entry"
     ]
   }
 }
