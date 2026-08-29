@@ -10,7 +10,10 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const specPath = resolve(repo, 'specs/host-capacity-retention.v0.1.json');
+const specIndex = process.argv.indexOf('--spec');
+const specRelative = specIndex === -1 ? 'specs/host-capacity-retention.v0.1.json' : process.argv[specIndex + 1];
+if (!specRelative || !/^specs\/[A-Za-z0-9][A-Za-z0-9._-]*[.]json$/.test(specRelative)) throw new Error('invalid --spec path');
+const specPath = resolve(repo, specRelative);
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const root = resolve(repo, spec.formalRoot);
 const canonical = value => Array.isArray(value) ? `[${value.map(canonical).join(',')}]`
@@ -191,7 +194,7 @@ const gates = {
 const baseNames = spec.requiredGates.filter(name => !['SNAPSHOT_AND_RESULTS_INTEGRITY', 'INDEPENDENT_AUDIT_REPLAY'].includes(name));
 const results = {
   schemaVersion: 'bfs.host-capacity-retention-results.v0.1', experimentId: spec.experimentId,
-  completedAt: new Date().toISOString(), observedAt: new Date(observedAtMs).toISOString(), spec: { path: 'specs/host-capacity-retention.v0.1.json', sha256: shaFile(specPath) },
+  completedAt: new Date().toISOString(), observedAt: new Date(observedAtMs).toISOString(), spec: { path: specRelative, sha256: shaFile(specPath) },
   startReceipt, sourceReceipts: { history: historyReceipt, latest: latestReceipt }, aggregate: agg, launchd, runtime,
   resourceAccounting: { blenderProcesses: 0, dockerCalls: 0, networkCalls: 0, modelCalls: 0, cleanupOperations: 0, serviceMutations: 0 },
   gates, failedGates: baseNames.filter(name => gates[name] !== true), provisionalVerdict: '', receiptBytes: 0, selfHash: '',

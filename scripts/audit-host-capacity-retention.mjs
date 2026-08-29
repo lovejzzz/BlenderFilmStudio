@@ -7,7 +7,10 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const repo = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const specPath = resolve(repo, 'specs/host-capacity-retention.v0.1.json');
+const specIndex = process.argv.indexOf('--spec');
+const specRelative = specIndex === -1 ? 'specs/host-capacity-retention.v0.1.json' : process.argv[specIndex + 1];
+if (!specRelative || !/^specs\/[A-Za-z0-9][A-Za-z0-9._-]*[.]json$/.test(specRelative)) throw new Error('invalid --spec path');
+const specPath = resolve(repo, specRelative);
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const sentinelSpec = JSON.parse(readFileSync(resolve(repo, 'specs/host-capacity-sentinel.v0.2.json'), 'utf8'));
 const root = resolve(repo, spec.formalRoot);
@@ -64,6 +67,15 @@ function aggregate(samples, observedAt) {
     colimaAllocatedGrowthBytes: colimaGrowth, colimaAllocatedGrowthRateBytesPerHour: hours > 0 ? colimaGrowth / hours : Infinity,
     severities: samples.map((sample, index) => severity(samples.slice(0, index), sample)),
   };
+}
+
+function diskRateBreachLoss(samples) {
+  const spanMs = Date.parse(samples.at(-1).capturedAt) - Date.parse(samples[0].capturedAt);
+  if (!(spanMs > 0)) throw new Error('A09 requires a positive sample span');
+  const maximumRate = spec.observationPolicy.maximumDiskLossRateBytesPerHour;
+  const lossBytes = Math.floor(maximumRate * spanMs / 3600000) + 1;
+  if (!(lossBytes / (spanMs / 3600000) > maximumRate)) throw new Error('A09 failed to construct a strict rate breach');
+  return lossBytes;
 }
 
 function readPlistString(path, key) {
@@ -153,7 +165,12 @@ if (process.argv.includes('--self-test')) {
   const samples = Array.from({ length: 5 }, (_, index) => seal({ capturedAt: new Date(start + index * 900000).toISOString(), availableBytes: 300 * 1024 ** 3, browserTempFilesystem: { allocatedBytes: 20480 }, colima: { vmDisk: { allocatedBytes: 1024 ** 3 }, dataDisk: { allocatedBytes: 7 * 1024 ** 3 } }, prohibitedActions: { deletions: 0, cleanupOperations: 0, serviceRestarts: 0, dockerCalls: 0, blenderProcesses: 0, networkCalls: 0, modelCalls: 0 }, selfHash: '' }));
   const agg = aggregate(samples, new Date(start + 3600000).toISOString());
   if (agg.spanMs !== 3600000 || agg.severities.some(value => value !== 'HEALTHY') || spec.registeredAttacks.length !== 15) throw new Error('retention auditor self-test failed');
-  process.stdout.write('{"selfTest":"PASS","independentAggregate":true,"registeredAttacks":15}\n');
+  const drifted = structuredClone(samples);
+  drifted.at(-1).capturedAt = new Date(start + 3600821).toISOString();
+  const breachLossBytes = diskRateBreachLoss(drifted);
+  const breachRate = breachLossBytes / (3600821 / 3600000);
+  if (!(breachRate > spec.observationPolicy.maximumDiskLossRateBytesPerHour)) throw new Error('span-normalized A09 self-test failed');
+  process.stdout.write(`${JSON.stringify({ selfTest: 'PASS', independentAggregate: true, registeredAttacks: 15, driftSpanMs: 3600821, spanNormalizedA09: true })}\n`);
   process.exit(0);
 }
 
@@ -187,7 +204,7 @@ const attacks = [
   ['A06_INTERVAL_TOO_LONG', bundle => { bundle.history.samples[1].capturedAt = new Date(Date.parse(bundle.history.samples[0].capturedAt) + 1200001).toISOString(); }],
   ['A07_STALE_LATEST_SAMPLE', bundle => { bundle.results.observedAt = new Date(Date.parse(bundle.history.samples.at(-1).capturedAt) + 1200001).toISOString(); }],
   ['A08_DISK_FLOOR_BREACH', bundle => { bundle.history.samples[0].availableBytes = spec.observationPolicy.minimumAvailableBytes - 1; }],
-  ['A09_DISK_RATE_BREACH', bundle => { bundle.history.samples.at(-1).availableBytes = bundle.history.samples[0].availableBytes - spec.observationPolicy.maximumDiskLossRateBytesPerHour - 1; }],
+  ['A09_DISK_RATE_BREACH', bundle => { bundle.history.samples.at(-1).availableBytes = bundle.history.samples[0].availableBytes - diskRateBreachLoss(bundle.history.samples); }],
   ['A10_BROWSER_GROWTH_BREACH', bundle => { bundle.history.samples.at(-1).browserTempFilesystem.allocatedBytes = bundle.history.samples[0].browserTempFilesystem.allocatedBytes + spec.observationPolicy.maximumBrowserGrowthBytes + 1; }],
   ['A11_COLIMA_GROWTH_BREACH', bundle => { bundle.history.samples.at(-1).colima.dataDisk.allocatedBytes += spec.observationPolicy.maximumColimaAllocatedGrowthRateBytesPerHour + 1; }],
   ['A12_PROHIBITED_ACTION_MUTATION', bundle => { bundle.history.samples[0].prohibitedActions.deletions = 1; }],

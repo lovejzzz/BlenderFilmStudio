@@ -4705,3 +4705,13 @@ R6 INVALID evidence commit `10842726f48d2a3a24c22a30b7ee44be45958638`推送后�
 C1完整复用R6的source、runtime identity、250 GiB floor、1 GiB/hour host与Colima rate ceilings、1 GiB maximum interval loss、browser bounds、900-second launchd cadence、12 gates、15 attack IDs及所有byte/resource ceilings。唯一允许的语义修正是A09 mutation：`breachLossBytes = floor(maximumRate * actualSpanMs / 3,600,000) + 1`，并要求auditor在计数前独立证明重算rate严格大于门槛。
 
 Runner/auditor只允许增加安全的repository-relative `--spec specs/name.json`选择；无参数仍绑定原R6 spec。下一动作先提交推送本预注册，再实现selector、A09 helper和over-one-hour drift self-test；在工具commit与origin exact、fresh C1 root及live history仍满足资格后才可执行。
+
+## J-353 · R6-C1 spec选择与跨度归一化A09实现
+
+Date: 2026-08-29 · Type: AUDIT CONTROL CORRECTION IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+C1 preregistration commit `1a5a534db7e345d3b2ed811e5bf26d406972867f`推送后，runner/auditor增加严格匹配`specs/[safe-name].json`的显式`--spec`接口；未提供时仍选择原R6 spec，`../`路径负控以exit 1拒绝。Runner输出中的spec path现在绑定实际selected spec。
+
+Auditor新增唯一的`diskRateBreachLoss`修正：从候选首尾时间重算span，构造`floor(maxRate * spanMs / 3,600,000) + 1` bytes，并在施加mutation前断言重算rate严格大于maxRate。专门的3,600.821-second drift self-test通过；默认R6与C1 spec下的runner/auditor self-tests、Node syntax、zero-warning targeted ESLint及diff check均通过。
+
+Runner/auditor SHA为`a7bf65bef9faf7a10c407fbb0d71d1d1b0213ed3aa4ad4f2122bad6dcad6a642` / `b7638d0c67186ba18a266a48e0a2784ab5215f64036a21af4190a72b27df6ecd`。C1 read-only preflight在5 samples、3,600,821 ms span、latest age 222,438 ms、service loaded、fresh root时返回READY。下一动作只提交推送工具与本entry；随后从HEAD/origin exact的release运行fresh C1 root和独立审计。
