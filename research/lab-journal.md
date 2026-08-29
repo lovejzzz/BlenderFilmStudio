@@ -5395,3 +5395,13 @@ v0.3完成generator、288-frame Eevee animatic、ffmpeg、ffprobe与frames 48/14
 代码审查发现可能的temporal contamination：auditor在三次append之后才读取master library总数，并把append新增descriptor直接视为外链，未检查appended IDs的`.library`。C10预注册D6 one-Blender/zero-render locality probe；在D6证明前禁止放宽安全门或重用v0.3作为PASS。
 
 人工原分辨率抽查：wide与medium能读出cold→warm机械守夜人场景；close frame 240大面积被前景遮挡，构图质量不足。该观察不是当前machine verdict的一部分，必须后续另立camera-quality实验，不能事后修改本轮门槛。
+
+## J-426 · B62 D6证明append-locality并预注册C11 corrected-auditor smoke
+
+Date: 2026-08-29 · Type: DIAGNOSTIC PASS / AUDITOR-ONLY CORRECTION PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+D6 tool freeze `e843840c97084011601eeb4f4092745139adb78f`推送后，one Blender在0.494秒、peak RSS 255,377,408 bytes完成。master初始library与linked IDs均为0；三份asset分别append 54/84/16个tracked IDs，全部`.library=null`。每份只新增一个descriptor且路径exact指向对应source blend；descriptor删除成功且local IDs全部存活，逐项cleanup与最终roster exact。
+
+8/8 runner checks与独立Node audit PASS，zero render/model/network/Docker。D6 root 5 files/48,753 bytes/tree `d507bf6b…`；probe file/self `84c11998…/49713805…`，result file/self `8bc69dce…/1952f4bd…`，receipt file/self `c7b11368…/150fb110…`，verdict为`LOCAL_APPEND_SOURCE_DESCRIPTOR_ONLY`。
+
+C11在production auditor修改前只授权temporal/locality更正：master gate读取append前snapshot；asset gate要求ID local、descriptor exact-source、移除后存活、cleanup exact。既有23 checks不减，v0.3仍INVALIDATED。下一动作提交推送D6+C11，实现auditor并以D7 one-Blender/zero-render独立root验证。
