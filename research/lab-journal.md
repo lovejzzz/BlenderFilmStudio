@@ -5531,3 +5531,13 @@ Date: 2026-08-29 · Type: RETAINED FULL-RENDER FAILURE / CAMERA ROUTING CORRECTI
 C2 retry完成BUILD 0.529秒、RENDER 38.587秒、INDEPENDENT 2.414秒；RENDER peak sampled RSS 1,321,336,832 bytes。12次960×540 Cycles CPU 16 spp均生成finite EXR/PNG，独立解码通过。但六组original/corrected Combined digest逐组exact相同。根因是derived scene保留frame-193 `SHOT_CLOSE_REFLECTION` camera marker；render evaluation把脚本设置的corrected camera再次覆盖为original。Node audit仅`PAIR_PIXEL_DIGESTS_DIFFER`失败，v0.3 verdict为null；root保留35 files/53,694,719 bytes/tree `5e0ebd67…`。
 
 独立几何同时给出不能隐藏的holdout信号：original 6/6失败；corrected frames 193/204/228/252/276通过，但frame 288 clamped area 0.933787超过冻结0.90，因此correctedAllPass=false。C3只授权render时同时设置active marker与scene.camera、结束后恢复marker，并切换fresh v0.4；builder/audit bytes固定，frame288不得删除或放宽。正确路由后允许technical PASS但scientific REJECTED。
+
+## J-440 · B62-Q1-D4 v0.4已正确路由但Node相机名合同失败，C4预注册
+
+Date: 2026-08-29 · Type: RETAINED FULL-RENDER FAILURE / AUDITOR NAME-CONTRACT CORRECTION PREREGISTRATION · New Blender processes: 3 · New Blender renders: 12
+
+C3 retry以tool freeze `b6dd0c74953f25ec0a48d14833e06da17942a608`运行。BUILD 0.523秒；RENDER 34.072秒、peak sampled RSS 1,328,889,856 bytes；INDEPENDENT 2.423秒。12次960×540 Cycles CPU 16 spp全部生成finite EXR/PNG，六组ORIGINAL/CORRECTED Combined digest逐组不同，证明timeline marker与scene camera双路由已经生效。独立Blender报告original 6/6失败；corrected前五帧通过，frame 288仍只因clamped area 0.933787超过冻结0.90而失败。
+
+Node audit 17项通过、仅`TIMELINE_MARKER_CAMERA_ROUTING_EXACT`失败，scientific verdict因此保持null。根因是C3新增审计表硬编码`CAM_CLOSE_REFLECTION_CORRECTED`，遗漏base spec和三份Blender工具早已冻结的`_D4`后缀；12条render记录的`camera`与`timelineMarkerCamera`都正确为`CAM_CLOSE_REFLECTION_CORRECTED_D4`。v0.4永久保留35 files/54,119,323 bytes/tree `365b4bc64267575bbdbcb92f7390c9690f18514e5c08c10bcc56f584003e885e`。
+
+C4在任何工具修改前只授权Node auditor从`spec.selectedIntervention.sourceCamera/correctedCamera`读取期望名，并授权runner/auditor绑定v0.4后切换fresh v0.5。三份Blender Python bytes、候选、96-frame bake、六帧、全部阈值、12-render Cycles设置和scientific mapping不变；v0.5必须全量新建场、重渲染和独立复开，禁止复用v0.4。若技术链通过，当前冻结数据预计产生合法的scientific REJECTED，而不是PASS。

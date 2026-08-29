@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityHoldoutCorrection.v0.1",
+  "correctionId": "B62-Q1-D4-C4",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-Q1-D4",
+    "spec": "specs/b62-camera-quality-holdout-render-validation.v0.1.json",
+    "c3": "specs/b62-camera-quality-d4-c3-timeline-marker-camera-routing.v0.1.json",
+    "c3ToolFreezeCommit": "b6dd0c74953f25ec0a48d14833e06da17942a608"
+  },
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-holdout-render-v0-4",
+    "tree": {
+      "files": 35,
+      "bytes": 54119323,
+      "treeSha256": "365b4bc64267575bbdbcb92f7390c9690f18514e5c08c10bcc56f584003e885e"
+    },
+    "failure": {
+      "uri": "experiments/b62-camera-quality-holdout-render-v0-4/failure.json",
+      "sha256": "71ea19abc2a3f3218c55fab9f2eeaf7c15eb29f2819ba6c03d6baaac82b1e89a",
+      "failureHash": "060b9acefa6eccaf1690cc58bb67132cd555c54ea552b79275b41b8412d6edd7"
+    },
+    "audit": {
+      "uri": "experiments/b62-camera-quality-holdout-render-v0-4/audit.json",
+      "sha256": "20cea6dff52a5910034a0378423961f5b5bca6d87e3bebfb9ca6d5f3b18fafb2",
+      "auditHash": "e53070265e0fefddfba856baa65192ddb931517d4174e979da1c9d34d011a46b",
+      "status": "FAIL",
+      "scientificVerdict": null,
+      "onlyFailedCheck": "TIMELINE_MARKER_CAMERA_ROUTING_EXACT"
+    },
+    "render": {
+      "uri": "experiments/b62-camera-quality-holdout-render-v0-4/render.json",
+      "sha256": "1c242ac73fe5a40eb1bc834a95826285499b92ce1a6bb099229065f05d3b5667",
+      "reportHash": "f5547792f7cbef4038db2fa0d360be4ea94b98e8ace71b7c4e67204dbfd17bf6",
+      "renderCalls": 12,
+      "allSixCombinedPairsDifferent": true,
+      "recordedCorrectedCamera": "CAM_CLOSE_REFLECTION_CORRECTED_D4"
+    },
+    "independent": {
+      "uri": "experiments/b62-camera-quality-holdout-render-v0-4/independent.json",
+      "sha256": "326ef1ce01df3c30ae2e190a9cecc86d0cfee8dec0808b7e0b22902c0a66b1ad",
+      "reportHash": "dad9f07fc13d05c33de3e441e2df7f46be0129b11b39cd9fa10de974f0628b27",
+      "originalFailedFrames": [193, 204, 228, 252, 276, 288],
+      "correctedPassedFrames": [193, 204, 228, 252, 276],
+      "correctedFailedFrames": [288],
+      "frame288ClampedArea": 0.93378717684983,
+      "frozenMaximum": 0.9
+    }
+  },
+  "rootCause": "The C3 Node auditor's new expected-camera table hard-coded CAM_CLOSE_REFLECTION_CORRECTED, omitting the _D4 suffix. The base spec, builder, render tool, independent audit and all six corrected render rows agree on the authoritative name CAM_CLOSE_REFLECTION_CORRECTED_D4, so the routing check rejected correctly routed evidence.",
+  "authorizedChanges": {
+    "nodeAuditor": "Derive the ORIGINAL and CORRECTED expected camera names from spec.selectedIntervention.sourceCamera and spec.selectedIntervention.correctedCamera instead of a duplicated literal.",
+    "runnerAndNodeAuditor": "Bind C4 and the retained v0.4 tree, then use fresh root experiments/b62-camera-quality-holdout-render-v0-5.",
+    "retryRoot": "experiments/b62-camera-quality-holdout-render-v0-5"
+  },
+  "frozen": {
+    "builder": {
+      "uri": "blender/build_b62_q1_d4_corrected_scene.py",
+      "sha256": "c4f16872e208b4a904842091e4abac08e901c75d4b82cef6de8c423d84d3f699"
+    },
+    "render": {
+      "uri": "blender/render_b62_q1_d4_holdout_pairs.py",
+      "sha256": "515bb91c42ca7523049e78bac2dd6c5c77823b1220c2da23aefcd54ae88fc25a"
+    },
+    "independentAudit": {
+      "uri": "blender/audit_b62_q1_d4_scene_and_pixels.py",
+      "sha256": "be0eabe40201bba3f350486b988cef0f21a6587d894cbbbc2ac19d1402e6161f"
+    },
+    "holdoutGeometryAndThresholds": "unchanged including frame-288 area maximum 0.90",
+    "CyclesSettingsAndRenderCount": "unchanged full fresh build plus 12 renders plus independent reopen",
+    "outcomeRule": "A technically valid v0.5 with correctedAllPass false maps to the preregistered scientific REJECTED verdict; neither frame 288 nor its threshold may change."
+  },
+  "nonClaims": [
+    "The technically complete but invalid v0.4 does not become formal passing evidence after this correction.",
+    "C4 does not change any camera, image, geometry observation, threshold, frame or scientific mapping.",
+    "The v0.5 retry must rerun all three Blender processes and all 12 Cycles renders from a fresh root.",
+    "A technical PASS with scientific REJECTED still requires separate native-resolution human review before any later camera redesign."
+  ]
+}
