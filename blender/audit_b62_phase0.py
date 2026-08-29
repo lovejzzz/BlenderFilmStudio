@@ -28,6 +28,14 @@ REQUIRED_BONES = [
 ]
 ASSETS = ["CHAR_B62_GUARDIAN", "SET_B62_OBSERVATORY", "PROP_B62_CONSOLE_CORE"]
 CALIBRATION = [("WIDE_APPROACH", 48), ("MEDIUM_CONTACT", 144), ("CLOSE_REFLECTION", 240)]
+TRACKED_LOCALITY = ["collections", "objects", "meshes", "armatures", "materials"]
+ALL_ID_COLLECTIONS = [
+    "actions", "armatures", "cache_files", "cameras", "collections", "curves", "fonts",
+    "grease_pencils", "images", "lattices", "lights", "lightprobes", "linestyles",
+    "masks", "materials", "meshes", "metaballs", "movieclips", "node_groups", "objects",
+    "palettes", "particles", "pointclouds", "scenes", "shape_keys", "sounds", "speakers",
+    "texts", "textures", "volumes", "worlds", "workspaces",
+]
 
 
 def parse_args() -> argparse.Namespace:
@@ -62,6 +70,54 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def library_path(item: object) -> str | None:
+    library = getattr(item, "library", None)
+    return str(Path(bpy.path.abspath(library.filepath)).resolve()) if library else None
+
+
+def library_roster() -> list[dict]:
+    return sorted([
+        {"name": library.name, "filepath": str(Path(bpy.path.abspath(library.filepath)).resolve()), "isMissing": bool(library.is_missing)}
+        for library in bpy.data.libraries
+    ], key=lambda row: (row["filepath"], row["name"]))
+
+
+def linked_ids() -> list[dict]:
+    rows = []
+    for collection_name in ALL_ID_COLLECTIONS:
+        collection = getattr(bpy.data, collection_name, None)
+        if collection is None:
+            continue
+        for item in collection:
+            path = library_path(item)
+            if path:
+                rows.append({"type": collection_name, "name": item.name, "library": path})
+    return sorted(rows, key=lambda row: (row["type"], row["name"], row["library"]))
+
+
+def locality_roster() -> dict[str, list[str]]:
+    return {name: sorted(item.name for item in getattr(bpy.data, name)) for name in TRACKED_LOCALITY}
+
+
+def locality_sets() -> dict[str, set]:
+    return {name: set(getattr(bpy.data, name)) for name in TRACKED_LOCALITY}
+
+
+def resolve_locality_item(kind: str, name: str) -> object | None:
+    return getattr(bpy.data, kind).get(name)
+
+
+def remove_appended_ids(before: dict[str, set]) -> None:
+    for item in set(bpy.data.objects) - before["objects"]:
+        bpy.data.objects.remove(item, do_unlink=True)
+    for item in set(bpy.data.collections) - before["collections"]:
+        bpy.data.collections.remove(item)
+    for kind in ["armatures", "meshes", "materials"]:
+        collection = getattr(bpy.data, kind)
+        for item in set(collection) - before[kind]:
+            collection.remove(item)
 
 
 def valid_self_hash(document: dict, field: str) -> bool:
@@ -254,10 +310,11 @@ def inspect_motion_library(path: Path, expected: dict) -> dict:
 
 
 def inspect_asset_library(path: Path, asset_id: str, expected_manifest: dict) -> dict:
-    before_objects = set(bpy.data.objects)
-    before_collections = set(bpy.data.collections)
+    before_sets = locality_sets()
+    before_roster = locality_roster()
     before_texts = set(bpy.data.texts)
     before_libraries = set(bpy.data.libraries)
+    before_linked = linked_ids()
     with bpy.data.libraries.load(str(path), link=False, recursive=True) as (source, target):
         if source.collections != [asset_id]:
             raise RuntimeError(f"Asset collection roster drift for {asset_id}: {source.collections}")
@@ -283,11 +340,35 @@ def inspect_asset_library(path: Path, asset_id: str, expected_manifest: dict) ->
                 if bone.constraints:
                     findings.append(f"{obj.name}.{bone.name}:POSE_CONSTRAINTS")
     new_texts = set(bpy.data.texts) - before_texts
-    new_libraries = set(bpy.data.libraries) - before_libraries
+    after_sets = locality_sets()
+    appended_ids = []
+    for kind in TRACKED_LOCALITY:
+        for item in sorted(after_sets[kind] - before_sets[kind], key=lambda row: row.name):
+            appended_ids.append({"type": kind, "name": item.name, "library": library_path(item)})
+    appended_identity = [(row["type"], row["name"]) for row in appended_ids]
+    new_libraries = sorted(set(bpy.data.libraries) - before_libraries, key=lambda item: item.name)
+    descriptors = [{"name": item.name, "filepath": str(Path(bpy.path.abspath(item.filepath)).resolve()), "isMissing": bool(item.is_missing)} for item in new_libraries]
     if new_texts:
         findings.append("TEXT_DATABLOCK")
-    if new_libraries:
-        findings.append("EXTERNAL_LIBRARY")
+    if any(row["library"] is not None for row in appended_ids):
+        findings.append("LINKED_APPENDED_ID")
+    expected_source = str(path.resolve())
+    if not descriptors or any(row["filepath"] != expected_source or row["isMissing"] for row in descriptors):
+        findings.append("UNEXPECTED_SOURCE_DESCRIPTOR")
+    descriptor_removal_errors = []
+    for library in new_libraries:
+        try:
+            bpy.data.libraries.remove(library)
+        except Exception as error:
+            descriptor_removal_errors.append(f"{type(error).__name__}: {error}")
+    if descriptor_removal_errors:
+        findings.append("DESCRIPTOR_REMOVAL_FAILED")
+    survived = []
+    for kind, name in appended_identity:
+        item = resolve_locality_item(kind, name)
+        survived.append({"type": kind, "name": name, "present": item is not None, "library": library_path(item) if item else None})
+    if not all(row["present"] and row["library"] is None for row in survived):
+        findings.append("LOCAL_ID_DID_NOT_SURVIVE_DESCRIPTOR_REMOVAL")
     result = {
         "assetId": asset_id,
         "sha256": sha256_file(path),
@@ -299,11 +380,23 @@ def inspect_asset_library(path: Path, asset_id: str, expected_manifest: dict) ->
         "topologyMatchesGeneration": derived_manifest.get("meshTopologyHashes") == expected_manifest.get("meshTopologyHashes"),
         "rig": derived_rig,
         "rigMatchesGeneration": derived_rig == expected_manifest.get("rig") if asset_id == "CHAR_B62_GUARDIAN" else derived_rig is None,
+        "locality": {
+            "appendedIds": appended_ids,
+            "sourceDescriptors": descriptors,
+            "descriptorRemovalErrors": descriptor_removal_errors,
+            "afterDescriptorRemoval": survived,
+        },
     }
-    for obj in set(bpy.data.objects) - before_objects:
-        bpy.data.objects.remove(obj, do_unlink=True)
-    for collection_item in set(bpy.data.collections) - before_collections:
-        bpy.data.collections.remove(collection_item)
+    remove_appended_ids(before_sets)
+    cleanup = {
+        "rosterExact": locality_roster() == before_roster,
+        "librariesExact": set(bpy.data.libraries) == before_libraries,
+        "linkedIdsExact": linked_ids() == before_linked,
+    }
+    result["locality"]["cleanup"] = cleanup
+    if not all(cleanup.values()):
+        result["findings"].append("CLEANUP_DRIFT")
+        result["findings"].sort()
     return result
 
 
@@ -322,6 +415,7 @@ def main() -> None:
     scene = bpy.data.scenes.get("B62_PHASE0_MASTER")
     if scene is None:
         raise RuntimeError("Master scene is absent")
+    master_locality = {"libraries": library_roster(), "linkedIds": linked_ids()}
 
     marker_rows = [{"name": marker.name, "frame": marker.frame, "camera": marker.camera.name if marker.camera else None, "lens": marker.camera.data.lens if marker.camera else None} for marker in scene.timeline_markers]
     expected_markers = [
@@ -413,7 +507,7 @@ def main() -> None:
         "requiredMaterialsPresent": all(bpy.data.materials.get(name) is not None for name in required_materials),
         "masterTextBlocksZero": len(bpy.data.texts) == 0,
         "masterDriversZero": animation_driver_count() == 0,
-        "masterExternalLibrariesZero": len(bpy.data.libraries) == 0,
+        "masterExternalLibrariesZero": len(master_locality["libraries"]) == 0 and len(master_locality["linkedIds"]) == 0,
         "assetLibrariesSafe": all(len(row["findings"]) == 0 for row in asset_rows),
         "assetIdentityAndTopologyExact": all(row["identityMatchesGeneration"] and row["topologyMatchesGeneration"] and row["rigMatchesGeneration"] for row in asset_rows),
         "motionActionKeyDigestExact": motion_row["matchesGeneration"],
@@ -437,6 +531,7 @@ def main() -> None:
         "markers": marker_rows,
         "cameraAnimation": camera_animation,
         "bones": bones,
+        "masterLocality": master_locality,
         "assetLibraries": asset_rows,
         "motionLibrary": motion_row,
         "coreState": state_rows,
