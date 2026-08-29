@@ -5667,3 +5667,13 @@ Gate 0、B57与B58已经关闭，B62 Phase 0也已提供288帧三镜头master；
 现有general SceneSpec不能诚实表达B62 master：资产位于实验根且内含action，master还具有contact IK、camera markers、材质与灯光状态动画。因此T1冻结一个明确受限的`bfs.b62TerminalScenePackageSpec.v0.1`，hash-pin完整Phase 0 master与D6 build。它不是通用SceneSpec v0.6主张。
 
 在五个新工具与formal root均不存在时，冻结two-process deterministic BuildPlan、one real Blender compile、one independent Blender reopen、zero render、20 gates与12 mutation attacks。唯一允许delta为新增one camera object/data/action、复制D6的96帧location/quaternion、只把close marker改路由至terminal camera。角色/场景/动作/contact/core/light/render/color状态必须保持；64 MiB writes、2 GiB/Blender RSS、100 GiB reserve，zero model/network/Docker/Colima。T1 PASS只授权下一步288帧廉价animatic与全时间线审计，不直接授权最终Cycles。
+
+## J-454 · B62-T1 v0.1装配身份合同失败与C1预注册
+
+Date: 2026-08-29 · Type: RETAINED PRE-SAVE FAILURE / IDENTITY-LAYER CORRECTION PREREGISTRATION · New formal Blender processes: 1 · New formal Blender renders: 0
+
+T1工具以commit `ee6452e797442a3f0dbc9db2dc3e4463e8907a9c`冻结推送。两个独立Node BuildPlan过程均PASS并byte-exact得到96 samples、plan hash `980f8a55…`。首个Blender在0.565秒、peak RSS 251,265,024 bytes、0 render处停止；尚未新增camera或保存scene。失败是compiler要求assembled master collection identity等于pre-assembly asset-library identity。v0.1永久保留6 files/50,822 bytes/tree `2943c903e15da5456ca5a7ba7bdca9da5030fa2b292a660e631a8572b7a1e729`，failure file/self `d4520886…/715b9e6a…`，scientific verdict为null。
+
+随后两个交互式只读Blender诊断均0 save/0 render；第一因factory-startup未含repo Python path而只产生import failure，第二成功。三个master manifest分别为guardian `d03a6807…`、prop `31a11b94…`、set `758f5359…`，均与library hash不同；guardian明确多出master-only `HAND_R_SOCKET COPY_LOCATION` contact constraint，三个collection还反映装配后的material/animation state。master文件仍exact匹配`b177f8ba…`，因此是身份层级混淆，不是资产漂移。
+
+C1在任何工具修改前冻结双层身份：Phase 0 library hashes继续证明来源，exact master SHA与三个assembled manifest hashes证明生产装配输入；编译前后仍必须完整manifest、existing actions、contact/core/light、timeline、render/color逐项不变。只授权compiler/independent/runner/Node auditor落实该解释并使用fresh v0.2；BuildPlan compiler bytes、96 samples、20 gates、12 attacks、预算与verdict全部不变。

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "bfs.b62TerminalScenePackageCorrection.v0.1",
+  "correctionId": "B62-T1-E1-C1",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "title": "Separate immutable asset-library provenance from assembled-master preservation identity",
+  "retainedFailure": {
+    "root": "experiments/b62-terminal-scene-package-v0-1",
+    "tree": {
+      "files": 6,
+      "bytes": 50822,
+      "treeSha256": "2943c903e15da5456ca5a7ba7bdca9da5030fa2b292a660e631a8572b7a1e729"
+    },
+    "admission": {
+      "uri": "experiments/b62-terminal-scene-package-v0-1/admission.json",
+      "sha256": "c9b2818ab1d850567ad64d32ca89c827e3853288548873b134a3fdabc6b61fbd",
+      "admissionHash": "91cbc639fbf148300c4e65131c0d6976986c20e8170fab61785f07eb5f7a421f"
+    },
+    "buildPlan": {
+      "uri": "experiments/b62-terminal-scene-package-v0-1/build-plan.json",
+      "sha256": "6ed91351262436717105fb8a985350f73aa49c5e201a76dc71c37753890d2fc2",
+      "planHash": "980f8a55097e217fc433c2db892fe6cd0417cd3c2818873fbf43669a897c3cfc"
+    },
+    "failure": {
+      "uri": "experiments/b62-terminal-scene-package-v0-1/failure.json",
+      "sha256": "d452088616402c86640149e920372568939841b0116292297c747e12f14313d7",
+      "failureHash": "715b9e6a0ac38dee9b2b28cd8089e5d216cb3deab3f58e81848ad69e8fa4dc93",
+      "status": "INVALIDATED",
+      "scientificVerdict": null,
+      "reason": "BLENDER_COMPILE failed"
+    },
+    "processes": {
+      "buildPlanA": {
+        "uri": "experiments/b62-terminal-scene-package-v0-1/processes/BUILDPLAN_A.json",
+        "sha256": "265bcb8eaf070a164d99e7cf6d6171b8ae60467465a1a585b67745de7add1903"
+      },
+      "buildPlanB": {
+        "uri": "experiments/b62-terminal-scene-package-v0-1/processes/BUILDPLAN_B.json",
+        "sha256": "c6d99d51ef587eca96fa7c0eea889d8cbb8ea3279b673aef969d4a499326c03f"
+      },
+      "blenderCompile": {
+        "uri": "experiments/b62-terminal-scene-package-v0-1/processes/BLENDER_COMPILE.json",
+        "sha256": "b6b14b88d1cb5cc06f210270329804b493555df4e1cd4501c5658a0abd575489",
+        "outcome": "CHILD_FAILED",
+        "exitCode": 1,
+        "elapsedMs": 565,
+        "peakSampledRssBytes": 251265024,
+        "logBytes": 1277,
+        "renderCalls": 0
+      }
+    }
+  },
+  "diagnosis": {
+    "failedGate": "Compiler compared assembled master collection manifests directly to pre-assembly asset-library identity hashes.",
+    "libraryIdentityMeaning": "The Phase 0 generation hashes bind the three immutable asset-library sources before master-only assembly changes.",
+    "assembledMasterIdentityMeaning": "The exact admitted B62_PHASE0_MASTER.blend SHA-256 binds the complete assembled state, including contact constraints and animated material/light state.",
+    "readOnlyBlenderObservations": [
+      {
+        "collection": "CHAR_B62_GUARDIAN",
+        "libraryIdentityHash": "1b96e0a9b06ecded5fe1b726a62380d87aa694fb4fcecabc1a81e06c5456f53b",
+        "assembledMasterManifestHash": "d03a680766dbd454d2913ae74d66f3cdd2a6fd93fb423de2601049dcb3eba416",
+        "knownAssemblyDifference": "HAND_R_SOCKET has the master-only COPY_LOCATION contact constraint; material parameters and mesh signatures reflect assembled state."
+      },
+      {
+        "collection": "PROP_B62_CONSOLE_CORE",
+        "libraryIdentityHash": "5539ed6ca0bcac432a94678acf59ddda2a15d70277362fda2fd9d14368450856",
+        "assembledMasterManifestHash": "31a11b94cbcf0fafb61d301e9ff3dd5ad97d6b7a2424d4cc21c3403921a07b7e",
+        "knownAssemblyDifference": "Animated core/material state exists in the assembled master."
+      },
+      {
+        "collection": "SET_B62_OBSERVATORY",
+        "libraryIdentityHash": "e0621bd52c53a796d7cf4b16e66e97839dee4b6056d68156e564939b5b302a72",
+        "assembledMasterManifestHash": "758f53592659e76f020feabeb1a5694d36e68000e0ce9c5bb0011aa6d93c3ba1",
+        "knownAssemblyDifference": "Animated/material state exists in the assembled master."
+      }
+    ],
+    "diagnosticProcesses": {
+      "blenderStarts": 2,
+      "successfulReadOnlyInspections": 1,
+      "failedImportOnlyAttempts": 1,
+      "sceneSaves": 0,
+      "renderCalls": 0,
+      "modelCalls": 0,
+      "networkCalls": 0,
+      "dockerProcesses": 0
+    }
+  },
+  "authorizedChanges": {
+    "retryRoot": "experiments/b62-terminal-scene-package-v0-2",
+    "compiler": [
+      "Keep exact source-master SHA admission and the three library provenance hashes.",
+      "Require the three assembled-master manifest hashes above at compile entry.",
+      "Remove only the invalid equality between assembled-master manifests and pre-assembly library manifests.",
+      "Continue requiring the complete assembled manifests, existing actions, contact/core/light samples and all other state to remain exact before versus after the authorized camera delta."
+    ],
+    "independentAuditor": [
+      "Require the three assembled-master manifest hashes above after fresh reopen.",
+      "Continue exact comparison with the compile report stateBefore/stateAfter and all existing preservation checks."
+    ],
+    "runner": [
+      "Bind this correction and the exact retained v0.1 tree and files before admission.",
+      "Use only the fresh v0.2 root."
+    ],
+    "nodeAuditor": [
+      "Interpret library hashes as immutable provenance and assembled-master hashes as compiled-state preservation targets.",
+      "Keep G16 and every other gate and attack; no threshold or count changes."
+    ]
+  },
+  "frozenUnchanged": {
+    "inputScenePackageSpecSha256": "3b82d7c84074442bbfa37793e0632c1dad194ea12fcdac7ecd4cfd6954387a7e",
+    "buildPlanCompilerSha256": "41312dffa2422579d00efc071332592901036a4e495f9cf11ccb305abfc831e5",
+    "sourceMasterSha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66",
+    "cameraSamples": 96,
+    "timelineFrames": [1, 288],
+    "fps": 24,
+    "acceptanceGates": 20,
+    "mutationAttacks": 12,
+    "blenderProcesses": 2,
+    "renderCalls": 0,
+    "maximumOutputBytes": 67108864,
+    "minimumFreeReserveBytes": 107374182400,
+    "supportedVerdict": "B62_TERMINAL_SCENESPEC_BUILDPLAN_AND_SCENE_COMPILATION_SUPPORTED"
+  },
+  "invalidated": "The v0.1 run remains permanently invalidated. Any retry drift outside the authorized identity interpretation, any assembled-master mismatch, or any original gate/attack/resource failure yields scientificVerdict null."
+}

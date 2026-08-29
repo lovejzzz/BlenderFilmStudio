@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "bfs.b62TerminalProcessReceipt.v0.1",
+  "experimentId": "B62-T1-E1",
+  "processId": "BLENDER_COMPILE",
+  "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+  "args": [
+    "--background",
+    "--factory-startup",
+    "--disable-autoexec",
+    "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "blender/compile_b62_terminal_scene.py",
+    "--",
+    "--build-plan",
+    "experiments/b62-terminal-scene-package-v0-1/build-plan.json",
+    "--output-scene",
+    "experiments/b62-terminal-scene-package-v0-1/scene/B62_TERMINAL_PRODUCTION.blend",
+    "--report",
+    "experiments/b62-terminal-scene-package-v0-1/reports/compile-report.json"
+  ],
+  "result": {
+    "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+    "version": "0.2.0",
+    "outcome": "CHILD_FAILED",
+    "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "args": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_b62_terminal_scene.py",
+      "--",
+      "--build-plan",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-terminal-scene-package-v0-1/build-plan.json",
+      "--output-scene",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-terminal-scene-package-v0-1/scene/B62_TERMINAL_PRODUCTION.blend",
+      "--report",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-terminal-scene-package-v0-1/reports/compile-report.json"
+    ],
+    "budgets": {
+      "wallTimeMs": 180000,
+      "maxRssBytes": 2147483648,
+      "maxLogBytes": 2097152,
+      "maxOutputFiles": 96,
+      "maxOutputBytes": 67108864,
+      "sampleIntervalMs": 100
+    },
+    "metrics": {
+      "elapsedMs": 565,
+      "peakSampledRssBytes": 251265024,
+      "logBytes": 1277,
+      "output": {
+        "fileCount": 4,
+        "bytes": 46387,
+        "symlinkCount": 0
+      }
+    },
+    "breach": null,
+    "child": {
+      "pid": 94378,
+      "exitCode": 1,
+      "signal": null,
+      "spawnError": null
+    },
+    "termination": {
+      "requested": false,
+      "awaited": true
+    },
+    "logSha256": "868510ef9357ab7d542c14f81f21e57b4127d67b871d498005fc456eee2b39f5",
+    "outputPreview": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.062  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.062  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.062  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.062  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.062  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:00.259  blend            | Read blend: \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend\"\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/compile_b62_terminal_scene.py:103: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  if not material.use_nodes or material.node_tree is None:\nBFS_B62_T1_COMPILE_ERROR RuntimeError: asset identity mismatch CHAR_B62_GUARDIAN\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n",
+    "outputPreviewTruncated": false
+  },
+  "processHash": "5cda589471c746bf0611ca55cde6648ba438a7d1d4ae05b636aa831be915565c"
+}
