@@ -13,15 +13,19 @@ const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const PREREGISTRATION_COMMIT = '3de7040d607a5439d1c556a57a6eaebdae03f65d';
 const CORRECTION_COMMIT = '56cda77c88cd3c6bda873cf62140053f2b258e7e';
 const CORRECTION_C2_COMMIT = '79bf37fe3771fff8eafd0a060866d9ad84e6a916';
+const CORRECTION_C3_COMMIT = 'ff58742e60d607038ac3fd2d4a5bf2b85f8b30b2';
 const SPEC_URI = 'specs/b62-terminal-animatic-continuity.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-t2-terminal-animatic-continuity-protocol.md';
 const CORRECTION_URI = 'specs/b62-terminal-animatic-continuity-c1-explicit-marker-routing.v0.1.json';
 const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-t2-c1-explicit-marker-routing.md';
 const CORRECTION_C2_URI = 'specs/b62-terminal-animatic-continuity-c2-post-render-camera-state.v0.1.json';
 const CORRECTION_C2_PROTOCOL_URI = 'research/2026-08-29-b62-t2-c2-post-render-camera-state.md';
+const CORRECTION_C3_URI = 'specs/b62-terminal-animatic-continuity-c3-active-scene-render-context.v0.1.json';
+const CORRECTION_C3_PROTOCOL_URI = 'research/2026-08-29-b62-t2-c3-active-scene-render-context.md';
 const RETAINED_ROOT_URI = 'experiments/b62-terminal-animatic-continuity-v0-1';
 const RETAINED_C2_ROOT_URI = 'experiments/b62-terminal-animatic-continuity-v0-2';
-const ROOT_URI = 'experiments/b62-terminal-animatic-continuity-v0-3';
+const RETAINED_C3_ROOT_URI = 'experiments/b62-terminal-animatic-continuity-v0-3';
+const ROOT_URI = 'experiments/b62-terminal-animatic-continuity-v0-4';
 const OCIO_URI = 'color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio';
 const TOOLS = [
   'blender/render_b62_terminal_animatic.py',
@@ -75,9 +79,11 @@ async function main() {
   experiment = JSON.parse(await readFile(await checkedExisting(SPEC_URI), 'utf8'));
   const correction = JSON.parse(await readFile(await checkedExisting(CORRECTION_URI), 'utf8'));
   const correctionC2 = JSON.parse(await readFile(await checkedExisting(CORRECTION_C2_URI), 'utf8'));
+  const correctionC3 = JSON.parse(await readFile(await checkedExisting(CORRECTION_C3_URI), 'utf8'));
   req(experiment.experimentId === 'B62-T2-E1' && experiment.statusBeforeToolCreation === 'PREREGISTERED' && experiment.output.formalRoot === RETAINED_ROOT_URI, 'experiment mismatch');
   req(correction.correctionId === 'B62-T2-E1-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.retainedFailure.root === RETAINED_ROOT_URI && correction.authorizedChanges.retryRoot === RETAINED_C2_ROOT_URI, 'correction mismatch');
-  req(correction.authorizedChanges.retryRoot === RETAINED_C2_ROOT_URI && correctionC2.correctionId === 'B62-T2-E1-C2' && correctionC2.statusBeforeToolChange === 'PREREGISTERED' && correctionC2.retainedFailure.root === RETAINED_C2_ROOT_URI && correctionC2.authorizedChanges.retryRoot === ROOT_URI, 'C2 mismatch');
+  req(correction.authorizedChanges.retryRoot === RETAINED_C2_ROOT_URI && correctionC2.correctionId === 'B62-T2-E1-C2' && correctionC2.statusBeforeToolChange === 'PREREGISTERED' && correctionC2.retainedFailure.root === RETAINED_C2_ROOT_URI && correctionC2.authorizedChanges.retryRoot === RETAINED_C3_ROOT_URI, 'C2 mismatch');
+  req(correctionC3.correctionId === 'B62-T2-E1-C3' && correctionC3.statusBeforeToolChange === 'PREREGISTERED' && correctionC3.retainedResult.root === RETAINED_C3_ROOT_URI && correctionC3.authorizedChanges.retryRoot === ROOT_URI, 'C3 mismatch');
   const head = (await git(['rev-parse', 'HEAD'])).trim(), origin = (await git(['rev-parse', 'origin/main'])).trim();
   req(head === freeze && origin === freeze, 'tool freeze commit is not pushed HEAD');
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
@@ -87,7 +93,9 @@ async function main() {
   req(await hashFile(pathFor(CORRECTION_PROTOCOL_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_PROTOCOL_URI), 'correction protocol drift');
   req(await hashFile(pathFor(CORRECTION_C2_URI)) === await committedHash(CORRECTION_C2_COMMIT, CORRECTION_C2_URI), 'C2 spec drift');
   req(await hashFile(pathFor(CORRECTION_C2_PROTOCOL_URI)) === await committedHash(CORRECTION_C2_COMMIT, CORRECTION_C2_PROTOCOL_URI), 'C2 protocol drift');
-  const scoped = await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, CORRECTION_C2_URI, CORRECTION_C2_PROTOCOL_URI, ...TOOLS]);
+  req(await hashFile(pathFor(CORRECTION_C3_URI)) === await committedHash(CORRECTION_C3_COMMIT, CORRECTION_C3_URI), 'C3 spec drift');
+  req(await hashFile(pathFor(CORRECTION_C3_PROTOCOL_URI)) === await committedHash(CORRECTION_C3_COMMIT, CORRECTION_C3_PROTOCOL_URI), 'C3 protocol drift');
+  const scoped = await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, CORRECTION_C2_URI, CORRECTION_C2_PROTOCOL_URI, CORRECTION_C3_URI, CORRECTION_C3_PROTOCOL_URI, ...TOOLS]);
   req(scoped.trim() === '', 'release-scoped files dirty');
   const root = pathFor(ROOT_URI);
   req(!await exists(root), 'formal root already exists');
@@ -97,6 +105,9 @@ async function main() {
   const retainedC2Tree = await treeIdentity(RETAINED_C2_ROOT_URI);
   req(canonicalJson(retainedC2Tree) === canonicalJson(correctionC2.retainedFailure.tree), 'retained v0.2 tree drift');
   for (const binding of [correctionC2.retainedFailure.admission, correctionC2.retainedFailure.failure, correctionC2.retainedFailure.renderProcess, ...Object.values(correctionC2.retainedFailure.frames).filter(value => typeof value === 'object')]) req(await hashFile(await checkedExisting(binding.uri)) === binding.sha256, `retained C2 evidence drift ${binding.uri}`);
+  const retainedC3Tree = await treeIdentity(RETAINED_C3_ROOT_URI);
+  req(canonicalJson(retainedC3Tree) === canonicalJson(correctionC3.retainedResult.tree), 'retained v0.3 tree drift');
+  for (const binding of [correctionC3.retainedResult.audit, correctionC3.retainedResult.receipt, correctionC3.retainedResult.renderReport, correctionC3.retainedResult.independentReport, correctionC3.retainedResult.video]) req(await hashFile(await checkedExisting(binding.uri)) === binding.sha256, `retained C3 evidence drift ${binding.uri}`);
 
   const parentTree = await treeIdentity(experiment.parentEvidence.t1Root.uri);
   req(canonicalJson(parentTree) === canonicalJson({ files: experiment.parentEvidence.t1Root.files, bytes: experiment.parentEvidence.t1Root.bytes, treeSha256: experiment.parentEvidence.t1Root.treeSha256 }), 'T1 tree drift');
@@ -121,8 +132,8 @@ async function main() {
   await mkdir(resolve(root, 'reports'));
   await mkdir(resolve(root, 'video'));
   const admission = await writeHashed(resolve(root, 'admission.json'), {
-    schemaVersion: 'bfs.b62TerminalAnimaticAdmission.v0.1', experimentId: experiment.experimentId, status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, correctionC2Commit: CORRECTION_C2_COMMIT, toolFreezeCommit: freeze,
-    parentTree, retainedFailureTree: retainedTree, retainedC2FailureTree: retainedC2Tree, bindings: { tools: toolHashes, scene: { uri: experiment.parentEvidence.scene.uri, sha256: await hashFile(scene) }, runtime: { blender: await hashFile(experiment.runtime.blender.executable), ffmpeg: await hashFile(experiment.runtime.ffmpeg.executable), ffprobe: await hashFile(experiment.runtime.ffprobe.executable), ocio: await hashFile(pathFor(OCIO_URI)) } },
+    schemaVersion: 'bfs.b62TerminalAnimaticAdmission.v0.1', experimentId: experiment.experimentId, status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, correctionC2Commit: CORRECTION_C2_COMMIT, correctionC3Commit: CORRECTION_C3_COMMIT, toolFreezeCommit: freeze,
+    parentTree, retainedFailureTree: retainedTree, retainedC2FailureTree: retainedC2Tree, retainedC3ResultTree: retainedC3Tree, bindings: { tools: toolHashes, scene: { uri: experiment.parentEvidence.scene.uri, sha256: await hashFile(scene) }, runtime: { blender: await hashFile(experiment.runtime.blender.executable), ffmpeg: await hashFile(experiment.runtime.ffmpeg.executable), ffprobe: await hashFile(experiment.runtime.ffprobe.executable), ocio: await hashFile(pathFor(OCIO_URI)) } },
     resources: { availableBytesBefore: available, projectedWriteBytes: experiment.processBudget.projectedWriteBytes, minimumFreeReserveBytes: experiment.processBudget.minimumFreeReserveBytes },
     operations: { restrictedProcessesBeforeAdmission: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 },
   }, 'admissionHash');
@@ -142,7 +153,7 @@ async function main() {
   const auditPath = resolve(root, 'audit.json'), audit = JSON.parse(await readFile(auditPath, 'utf8'));
   req(validSelf(audit, 'auditHash') && audit.status === 'PASS' && audit.scientificVerdict, 'final audit invalid');
   const receipt = await writeHashed(resolve(root, 'receipt.json'), {
-    schemaVersion: 'bfs.b62TerminalAnimaticReceipt.v0.1', experimentId: experiment.experimentId, status: 'PASS', scientificVerdict: audit.scientificVerdict, humanReview: 'HUMAN_PENDING', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, correctionC2Commit: CORRECTION_C2_COMMIT, toolFreezeCommit: freeze,
+    schemaVersion: 'bfs.b62TerminalAnimaticReceipt.v0.1', experimentId: experiment.experimentId, status: 'PASS', scientificVerdict: audit.scientificVerdict, humanReview: 'HUMAN_PENDING', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, correctionC2Commit: CORRECTION_C2_COMMIT, correctionC3Commit: CORRECTION_C3_COMMIT, toolFreezeCommit: freeze,
     admission: { uri: `${ROOT_URI}/admission.json`, sha256: await hashFile(resolve(root, 'admission.json')), admissionHash: admission.admissionHash },
     audit: { uri: `${ROOT_URI}/audit.json`, sha256: await hashFile(auditPath), auditHash: audit.auditHash },
     renderReport: { uri: `${ROOT_URI}/reports/render-report.json`, sha256: await hashFile(renderReport) }, independentReport: { uri: `${ROOT_URI}/reports/independent-audit.json`, sha256: await hashFile(independentReport) },

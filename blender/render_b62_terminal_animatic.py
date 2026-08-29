@@ -40,23 +40,22 @@ def main():
     markers=sorted((m.name,int(m.frame),m.camera.name if m.camera else None) for m in master.timeline_markers)
     req(markers==[("SHOT_CLOSE_REFLECTION",193,"CAM_CLOSE_MOTION_TERMINAL"),("SHOT_MEDIUM_CONTACT",97,"CAM_MEDIUM_CONTACT"),("SHOT_WIDE_APPROACH",1,"CAM_WIDE_APPROACH")],"markers")
     out=root/"frames";out.mkdir(parents=True,exist_ok=False)
-    scene=bpy.data.scenes.new("B62_TERMINAL_ANIMATIC_RENDER")
-    content=bpy.data.collections.get("B62_PHASE0_CONTENT");req(content is not None,"content")
-    scene.collection.children.link(content);scene.world=master.world;scene.frame_start=1;scene.frame_end=288;scene.render.fps=24;scene.render.fps_base=master.render.fps_base
+    scene=master;req(scene.name=="B62_PHASE0_MASTER","production scene name")
+    if bpy.context.window is not None:bpy.context.window.scene=scene
+    req(bpy.context.scene==scene,"production scene is not active context")
     scene.display_settings.display_device="sRGB - Display";scene.view_settings.view_transform="ACES 2.0 - SDR 100 nits (Rec.709)";scene.view_settings.look="None";scene.view_settings.exposure=0;scene.view_settings.gamma=1
-    for marker in master.timeline_markers:
-        clone=scene.timeline_markers.new(marker.name,frame=marker.frame);clone.camera=marker.camera
     scene.camera=bpy.data.objects["CAM_WIDE_APPROACH"]
     scene.render.engine="BLENDER_EEVEE";scene.render.resolution_x=640;scene.render.resolution_y=360;scene.render.resolution_percentage=100;scene.render.image_settings.file_format="PNG";scene.render.image_settings.color_mode="RGBA";scene.render.image_settings.color_depth="8";scene.render.film_transparent=False;scene.render.use_motion_blur=True
     req(hasattr(scene,"eevee"),"Eevee settings");scene.eevee.taa_samples=16;scene.eevee.taa_render_samples=16
     req(scene.render.engine=="BLENDER_EEVEE" and scene.eevee.taa_samples==16 and scene.eevee.taa_render_samples==16,"Eevee contract")
     rows=[];started=time.perf_counter()
     for frame in range(1,289):
-        scene.frame_set(frame);expected_marker,expected_camera=expected_route(frame);active=max((m for m in scene.timeline_markers if m.frame<=frame),key=lambda m:(m.frame,m.name));req(active.name==expected_marker and active.camera and active.camera.name==expected_camera,f"marker route {frame}");scene.camera=active.camera;req(scene.camera.name==expected_camera,f"camera application {frame}");applied_marker=active.name;applied_camera=scene.camera.name
-        path=out/f"frame-{frame:04d}.png";req(not path.exists(),"frame exists");scene.render.filepath=str(path);t=time.perf_counter();bpy.ops.render.render(scene=scene.name,write_still=True);elapsed=time.perf_counter()-t
+        scene.frame_set(frame);bpy.context.view_layer.update();expected_marker,expected_camera=expected_route(frame);active=max((m for m in scene.timeline_markers if m.frame<=frame),key=lambda m:(m.frame,m.name));req(active.name==expected_marker and active.camera and active.camera.name==expected_camera,f"marker route {frame}");scene.camera=active.camera;req(bpy.context.scene==scene and scene.frame_current==frame and scene.camera.name==expected_camera,f"active render context {frame}");applied_marker=active.name;applied_camera=scene.camera.name;context_scene=bpy.context.scene.name;context_frame=int(bpy.context.scene.frame_current)
+        path=out/f"frame-{frame:04d}.png";req(not path.exists(),"frame exists");scene.render.filepath=str(path);t=time.perf_counter();bpy.ops.render.render(write_still=True);elapsed=time.perf_counter()-t
         req(png(path)==(640,360),f"dimensions {frame}");camera_after=scene.camera.name if scene.camera else None
-        rows.append({"frame":frame,"marker":applied_marker,"camera":applied_camera,"sceneCameraAfterRender":camera_after,"seconds":elapsed,"png":{"uri":path.relative_to(repo).as_posix(),"sha256":sha(path),"bytes":path.stat().st_size}})
-    doc=write(report,{"schemaVersion":"bfs.b62TerminalAnimaticRenderReport.v0.1","experimentId":"B62-T2-E1","status":"PASS","source":{"uri":loaded.relative_to(repo).as_posix(),"sha256":sha(loaded)},"settings":{"engine":scene.render.engine,"engineFamily":"BLENDER_EEVEE_NEXT","resolution":[640,360],"samples":int(scene.eevee.taa_render_samples),"format":"PNG","colorMode":"RGBA","colorDepth":"8","motionBlur":True,"color":{"display":scene.display_settings.display_device,"view":scene.view_settings.view_transform,"look":scene.view_settings.look,"exposure":float(scene.view_settings.exposure),"gamma":float(scene.view_settings.gamma)}},"frames":rows,"elapsedSeconds":time.perf_counter()-started,"operations":{"blenderStarts":1,"renderCalls":288,"eeveeRenderCalls":288,"cyclesRenderCalls":0,"modelCalls":0,"networkCalls":0,"dockerProcesses":0}})
+        rows.append({"frame":frame,"contextScene":context_scene,"contextFrame":context_frame,"marker":applied_marker,"camera":applied_camera,"sceneCameraAfterRender":camera_after,"seconds":elapsed,"png":{"uri":path.relative_to(repo).as_posix(),"sha256":sha(path),"bytes":path.stat().st_size}})
+    source_after=sha(loaded);req(source_after==SCENE_SHA,"source changed")
+    doc=write(report,{"schemaVersion":"bfs.b62TerminalAnimaticRenderReport.v0.1","experimentId":"B62-T2-E1","status":"PASS","source":{"uri":loaded.relative_to(repo).as_posix(),"sha256":SCENE_SHA,"sha256AfterRender":source_after,"unchanged":source_after==SCENE_SHA},"settings":{"engine":scene.render.engine,"engineFamily":"BLENDER_EEVEE_NEXT","resolution":[640,360],"samples":int(scene.eevee.taa_render_samples),"format":"PNG","colorMode":"RGBA","colorDepth":"8","motionBlur":True,"color":{"display":scene.display_settings.display_device,"view":scene.view_settings.view_transform,"look":scene.view_settings.look,"exposure":float(scene.view_settings.exposure),"gamma":float(scene.view_settings.gamma)}},"frames":rows,"elapsedSeconds":time.perf_counter()-started,"operations":{"blenderStarts":1,"sceneSaves":0,"renderCalls":288,"eeveeRenderCalls":288,"cyclesRenderCalls":0,"modelCalls":0,"networkCalls":0,"dockerProcesses":0}})
     print(f"BFS_B62_T2_RENDER PASS {len(rows)} {doc['reportHash']}")
 if __name__=="__main__":
     try:main()
