@@ -5487,3 +5487,13 @@ D2以tool freeze `8a898331c531e4115dd9f10ff1285473f739950b`运行，PRIMARY/INDE
 `B62_ATMOSPHERE`被两实现exact证明为`MAT_B62_VOLUME`、one Material Output、Volume linked、Surface unlinked，并按冻结规则穿透。WIDE的visual blocker因此恢复为多对象场景，dominant为floor 0.17014、character share 0.03993；MEDIUM为torso 0.21918、character share 0.56033。CLOSE仍是2,304/2,304 helmet、character share 1.0、on-screen vertex fraction 0.07549、clamped area 1.0、anchors 1/5；只有CLOSE满足六项完整signature。scientific verdict为`B62_CLOSE_FAILURE_MATERIAL_AWARE_EXTREME_HELMET_FRAMING_LOCALIZED`。
 
 D3在任何search工具创建前冻结96-cell相机族：8个绕target的world-Z azimuth × 3个radial scale × 4个lens，只读测frames 216/240/264；frames 193/204/228/252/276/288预先封存为后续holdout。two independent Blender必须搜索完整288 cells。候选需在三帧都露出visor+eye，helmet≤0.70、character blockers 0.20–0.90、on-screen vertices 0.10–0.60、clamped area 0.35–0.90、visible anchors≥2；原始baseline必须失败。通过只证明有界族内存在eligible correction，不等于渲染或电影感通过。
+
+## J-435 · B62-Q1-D3 v0.1浮点原语失配与C1预注册
+
+Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / NUMERIC PRIMITIVE CORRECTION PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+D3 tool freeze `d5c198ec9224d06925041311c203168f84e6ea40`运行后，两份Blender都完成96 candidates×3 derivation frames、zero render/model/network/Docker，并都报告baseline infeasible、feasible count 1、selected `AZ_M045_R200_L065`。但是Node audit只通过14/15 checks：91个`clampedUnionAreaFraction`差异超过冻结的1e-9，最大量级约1e-7；因此scientific verdict按合同为null，不能用相同candidate ID补救。
+
+根因是PRIMARY使用Blender `Matrix.Rotation`，INDEPENDENT手写Python `sin/cos`构造同一world-Z rotation；微小coordinate差传播到projection bounds。v0.1永久保留9 files/1,262,543 bytes/tree `6f4d2928…`，failure file/self `56371264…/d1848261…`。
+
+C1在工具修改前只授权INDEPENDENT改用同一Blender rotation primitive，并授权runner/auditor绑定retained failure后使用fresh v0.2 root。PRIMARY hash `146a45da…`固定；96 cells、frames 216/240/264、六个sealed holdouts、全部feasibility bounds、selection order、1e-9 tolerance与zero-render预算均不变。

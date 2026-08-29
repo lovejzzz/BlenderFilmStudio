@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityProcessReceipt.v0.1",
+  "experimentId": "B62-Q1-D3",
+  "processId": "PRIMARY",
+  "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+  "args": [
+    "--background",
+    "--factory-startup",
+    "--disable-autoexec",
+    "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "blender/search_b62_q1_close_camera_candidates.py",
+    "--",
+    "--output",
+    "experiments/b62-camera-quality-bounded-candidate-search-v0-1/primary.json",
+    "--master-sha256",
+    "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"
+  ],
+  "result": {
+    "documentType": "BFS_BUDGETED_PROCESS_RESULT",
+    "version": "0.2.0",
+    "outcome": "PASS",
+    "command": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "args": [
+      "--background",
+      "--factory-startup",
+      "--disable-autoexec",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend",
+      "--python-exit-code",
+      "1",
+      "--python",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/search_b62_q1_close_camera_candidates.py",
+      "--",
+      "--output",
+      "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-camera-quality-bounded-candidate-search-v0-1/primary.json",
+      "--master-sha256",
+      "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"
+    ],
+    "budgets": {
+      "wallTimeMs": 300000,
+      "maxRssBytes": 2147483648,
+      "maxLogBytes": 1048576,
+      "maxOutputFiles": 64,
+      "maxOutputBytes": 134217728,
+      "sampleIntervalMs": 100
+    },
+    "metrics": {
+      "elapsedMs": 5387,
+      "peakSampledRssBytes": 256720896,
+      "logBytes": 1943,
+      "output": {
+        "fileCount": 2,
+        "bytes": 611526,
+        "symlinkCount": 0
+      }
+    },
+    "breach": null,
+    "child": {
+      "pid": 84477,
+      "exitCode": 0,
+      "signal": null,
+      "spawnError": null
+    },
+    "termination": {
+      "requested": false,
+      "awaited": true
+    },
+    "logSha256": "7531bb9960cf11adfb6c868e953c8a8b7fa4407a966646a8e583082608e1d294",
+    "outputPreview": "00:00.005  color_management | Using OCIO=/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio\n00:00.062  color_management | WARNING Display \"sRGB\" used by scene not found, setting to \"sRGB - Display\".\n00:00.062  color_management | WARNING scene view \"AgX\" not found, setting to \"ACES 2.0 - SDR 100 nits (Rec.709)\".\n00:00.062  color_management | WARNING Display \"sRGB\" used by scene output not found, setting to \"sRGB - Display\".\n00:00.062  color_management | WARNING scene output view \"Standard\" not found, setting to \"Un-tone-mapped\".\n00:00.062  color_management | WARNING sequencer colorspace \"sRGB\" not found, will use default instead.\n00:00.256  blend            | Read blend: \"/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend\"\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/search_b62_q1_close_camera_candidates.py:80: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  outputs = sorted([node for node in material.node_tree.nodes if node.type == \"OUTPUT_MATERIAL\"], key=lambda node: node.name) if material.use_nodes and material.node_tree else []\n/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio/blender/search_b62_q1_close_camera_candidates.py:81: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0\n  rows.append({\"material\": material.name, \"usesNodes\": bool(material.use_nodes), \"outputCount\": len(outputs), \"surfaceLinked\": any(bool(node.inputs.get(\"Surface\") and node.inputs[\"Surface\"].is_linked) for node in outputs), \"volumeLinked\": any(bool(node.inputs.get(\"Volume\") and node.inputs[\"Volume\"].is_linked) for node in outputs)})\nBFS_B62_Q1_D3_PRIMARY OBSERVED candidates=96 feasible=1 render=0\nBlender 5.2.0 LTS (hash fbe6228777e7 built 2026-07-14 01:31:22)\n\nBlender quit\n",
+    "outputPreviewTruncated": false
+  },
+  "processHash": "17e29acba79cfd54bacd2b3b37bea7c1e7dba93c48aa1e6b7ce344a8f5a35148"
+}

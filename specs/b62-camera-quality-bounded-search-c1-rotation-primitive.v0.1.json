@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityBoundedSearchCorrection.v0.1",
+  "correctionId": "B62-Q1-D3-C1",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {"experimentId": "B62-Q1-D3", "spec": "specs/b62-camera-quality-bounded-candidate-search.v0.1.json", "preregistrationCommit": "ae089e5", "toolFreezeCommit": "d5c198ec9224d06925041311c203168f84e6ea40"},
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-bounded-candidate-search-v0-1",
+    "tree": {"files": 9, "bytes": 1262543, "treeSha256": "6f4d2928c853723ef83e28af78bcac27305146fef5e62652c6e99415a2876ec3"},
+    "failure": {"uri": "experiments/b62-camera-quality-bounded-candidate-search-v0-1/failure.json", "sha256": "563712644b239fb4fc6b4df6226f3bfaad0dd393f277899c76a326d70161dacc", "failureHash": "d1848261d2aca816fd6cad4528a8bb5448b5132cf086de29b93a27b2a6cdff81"},
+    "comparison": {"uri": "experiments/b62-camera-quality-bounded-candidate-search-v0-1/comparison.json", "sha256": "d645df8bf8cbf54de89d2aca0f4a08402c9e5561f71c263380228c37d2d9a9a8", "mismatchCount": 91},
+    "audit": {"uri": "experiments/b62-camera-quality-bounded-candidate-search-v0-1/audit.json", "sha256": "5e736f3730e280abfc67d3ba7c1a19315c69e88f134d55e5bb28a85ae61a1a57", "status": "FAIL", "scientificVerdict": null},
+    "observationalConcordanceNotAClaim": {"primarySelectedCandidateId": "AZ_M045_R200_L065", "independentSelectedCandidateId": "AZ_M045_R200_L065", "primaryFeasibleCount": 1, "independentFeasibleCount": 1}
+  },
+  "rootCause": "The primary computed world-Z rotation with mathutils.Matrix.Rotation while the independent implementation expanded the rotation with Python math.sin/cos. Equivalent transforms differed by roughly 1e-7 in some projected-area results, exceeding the frozen 1e-9 agreement tolerance.",
+  "authorizedChanges": {
+    "independentBlenderTool": "Replace only the hand-expanded sin/cos world-Z rotation with mathutils.Matrix.Rotation using the same radians, 4x4 dimension and Z axis already used by primary.",
+    "runner": "Bind this correction and the immutable v0.1 failure tree, then use fresh root experiments/b62-camera-quality-bounded-candidate-search-v0-2.",
+    "nodeAuditor": "Bind this correction, require the fresh v0.2 root and continue the exact frozen 1e-9 comparison.",
+    "retryRoot": "experiments/b62-camera-quality-bounded-candidate-search-v0-2"
+  },
+  "frozen": {
+    "primaryBlenderTool": {"uri": "blender/search_b62_q1_close_camera_candidates.py", "sha256": "146a45dad70f9f7b808598ea78f11f0c37282355d5f6fa45a3517d042a12ecb8"},
+    "candidateGrid": "unchanged 96 cells",
+    "derivationFrames": [216, 240, 264],
+    "sealedHoldoutFrames": [193, 204, 228, 252, 276, 288],
+    "agreementToleranceAbsolute": 1e-9,
+    "allFeasibilityThresholds": "unchanged",
+    "selectionOrder": "unchanged",
+    "processAndResourceBudgets": "unchanged",
+    "renderModelNetworkDockerCalls": 0
+  },
+  "nonClaims": ["The matching candidate IDs in the invalid v0.1 run do not rescue its null verdict.", "C1 does not loosen numeric agreement.", "A successful retry remains a no-render derivation search, not shot approval."]
+}
