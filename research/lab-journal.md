@@ -4825,3 +4825,13 @@ C3有效tool-freeze commit `8f8a07d41c8237575011d1480baff0e45fa5289b`与origin e
 Direct child与outer stderr line hashes分别为`590727f67f0260937d4684669ac2925d8bab7d3b05eb958758deaf94c1c0dfb2` / `91ba680702818d9f56c03b317fbf4af1eb522e5e5898a6d4011fde2762c2dc58`。两次调用均为zero Blender/render/model/network/Docker；三个official roots仍不存在。
 
 C4仅授权B58在所有既有admission checks之后、首个child之前durably创建exact parent `<b58-preflight-root>/production-preflights`，并在读取receipt前检查child exit/receipt presence，失败时停止后续children并传播bounded stdout/stderr。B57 bytes、case final-root exclusive creation、34 gates、72+C1-C3 attacks、DAG/process/disk/recovery/verdict均不变；新增2项攻击覆盖parent preparation removal和child-failure propagation bypass。下一动作先单独提交推送C4 spec/protocol/journal，再改candidate tools。
+
+## J-364 · B58-C4 nested parent与child failure propagation实现候选
+
+Date: 2026-08-29 · Type: B58 TOOL-FREEZE CORRECTION IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+C4 preregistration commit `cc808b45cacd50e415c957c6a40694e07f0151dc`推送后，B58 preflight现在在Gate 0、release、paths、disk及scene/plan检查完成后durably创建exact parent `<output-root>/production-preflights`，各B57 child仍exclusive-create自己的case final root。每个child返回后先检查exit code和receipt presence；失败时以case id、exit/signal及最多4096 bytes stdout/stderr停止序列，不再读取缺失receipt，也不启动后续children。
+
+Runner在materialize attempt root之前复核C4 spec hash、parent spelling、policy、5份nested accepted receipts；independent auditor直接重开B58 preflight source和evidence，2项C4攻击分别变异parent preparation与failure-before-read ordering。原34 gates、72 attacks、C1 8、C2 6、C3 2和所有B57 bytes不变。
+
+新的preflight/runner/auditor SHA-256为`e5a5f119bd036557a667be840bc52b2e6ed18ed6d4501dae31c0cf00fce47242` / `7b87b0fcf719ef2c8a9bd50e4f89cc42b515484f2ee152808c9aab26a0dfae22` / `dba355aaed6f12c64858e8d8c40cf194b2d12a3f60f6c79997a3722dcc74ca17`；ledger/orchestrator保持`0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13` / `d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a`。三工具Node syntax、targeted ESLint zero-warning与diff check通过；official roots仍不存在。下一动作提交推送这组exact bytes，再在fresh clone运行zero-Blender rehearsal。

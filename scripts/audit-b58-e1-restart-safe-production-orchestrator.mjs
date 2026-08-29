@@ -511,6 +511,28 @@ function entryCorrectionAttacks(correction, preflight, spec) {
   return mutations.map(([id, mutate]) => ({ id, rejected: mutated(base, mutate, valid) }));
 }
 
+function nestedPreflightCorrectionAttacks(correction, preflight, source) {
+  const expectedParent = `${preflight.invocation.outputRoot}/production-preflights`;
+  const prepareNeedle = "await durableMkdir(resolve(repositoryRoot, parsed.outputRoot, 'production-preflights'))";
+  const childNeedle = "if (child.exitCode !== 0 || !(await pathState(absolutePath)))";
+  const readNeedle = "const record = JSON.parse(await readFile(absolutePath, 'utf8'))";
+  const base = {
+    parent: preflight.nestedPreflightCorrection?.parent,
+    policy: preflight.nestedPreflightCorrection?.childFailurePolicy,
+    allNested: preflight.productionPreflights.every(row => row.preflightRoot.startsWith(`${expectedParent}/`)),
+    prepareBeforeChildren: source.indexOf(prepareNeedle) >= 0 && source.indexOf(prepareNeedle) < source.indexOf('const productionPreflights = await createProductionPreflights'),
+    childFailureBeforeReceiptRead: source.indexOf(childNeedle) >= 0 && source.indexOf(childNeedle) < source.indexOf(readNeedle),
+  };
+  const valid = row => row.parent === expectedParent && row.policy === 'STOP_BEFORE_RECEIPT_READ' && row.allNested
+    && row.prepareBeforeChildren && row.childFailureBeforeReceiptRead
+    && correction.authorizedCorrection.prepareExactParent === '<b58-preflight-root>/production-preflights';
+  const mutations = [
+    ['C4_A01_NESTED_PARENT_PREPARATION_REMOVED', row => { row.prepareBeforeChildren = false; }],
+    ['C4_A02_CHILD_FAILURE_PROPAGATION_BYPASSED', row => { row.childFailureBeforeReceiptRead = false; }],
+  ];
+  return mutations.map(([id, mutate]) => ({ id, rejected: mutated(base, mutate, valid) }));
+}
+
 async function audit(parsed) {
   const root = parsed.repositoryRoot;
   const preflight = await json(resolve(root, parsed.preflightRoot, 'preflight.json'));
@@ -518,6 +540,7 @@ async function audit(parsed) {
   const correction = await json(resolve(root, 'specs/restart-safe-production-orchestrator-verifier-accounting-correction.v0.1.json'));
   const gate0Correction = await json(resolve(root, 'specs/restart-safe-production-orchestrator-gate0-binding-correction.v0.1.json'));
   const entryCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-entry-correction.v0.1.json'));
+  const nestedPreflightCorrection = await json(resolve(root, 'specs/restart-safe-production-orchestrator-nested-preflight-correction.v0.1.json'));
   const gate0 = await inspectGate0(root, gate0Correction, preflight);
   const operation = await json(resolve(root, parsed.formalRoot, 'operation-draft.json'));
   const metaAttempt = await json(resolve(root, parsed.attemptRoot, 'attempt.json'));
@@ -525,6 +548,7 @@ async function audit(parsed) {
   const metaReceipt = await json(resolve(root, parsed.attemptRoot, 'receipt.json'));
   const formalStart = await json(resolve(root, parsed.formalRoot, 'formal-start.json'));
   const source = await readFile(resolve(root, 'scripts/run-restart-safe-production-job.mjs'), 'utf8');
+  const preflightSource = await readFile(resolve(root, 'scripts/preflight-b58-e1-restart-safe-production-orchestrator.mjs'), 'utf8');
   const jobs = {};
   for (const row of operation.jobs) jobs[row.id] = await inspectJob(root, row);
   const baseline = jobs.BASELINE_B01;
@@ -539,6 +563,7 @@ async function audit(parsed) {
   const correctionRows = correctionAttacks(correction, operation.counts, live.operation);
   const gate0CorrectionRows = gate0CorrectionAttacks(gate0Correction, gate0);
   const entryCorrectionRows = entryCorrectionAttacks(entryCorrection, preflight, spec);
+  const nestedPreflightCorrectionRows = nestedPreflightCorrectionAttacks(nestedPreflightCorrection, preflight, preflightSource);
   const aggregateFinals = [baseline.final, exit86.final, interrupted.final];
   const outputRoots = preflight.productionPreflights.map(row => row.outputRoot);
   const uniquePids = new Set([
@@ -555,7 +580,8 @@ async function audit(parsed) {
     && source.indexOf("auditComparison.state === 'LIVE_MATCH'") < source.lastIndexOf("wrapperComparison.state === 'LIVE_MATCH'");
   const gates = {
     PARENT_B57_EXACT: preflight.parent.exact === true,
-    PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED: preflight.toolFreeze.exact === true && gate0.exact === true && preflight.checks.RESTART_SAFE_DIRECT_ENTRY_AND_B57_PACKAGE_EXACT === true,
+    PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED: preflight.toolFreeze.exact === true && gate0.exact === true && preflight.checks.RESTART_SAFE_DIRECT_ENTRY_AND_B57_PACKAGE_EXACT === true
+      && preflight.checks.NESTED_PREFLIGHT_PARENT_AND_FAILURE_PROPAGATION_EXACT === true,
     FORMAL_ROOTS_FRESH_AND_DISJOINT: metaAttempt.formalOutputAbsent === true && metaAdmission.status === 'ACCEPTED',
     PREFLIGHT_ZERO_BLENDER_ACCEPTED: preflight.status === 'ACCEPTED' && preflight.operations.blenderProcesses === 0,
     PRODUCTION_SURFACE_EXACT: preflight.toolFreeze.releaseExact === true,
@@ -595,7 +621,7 @@ async function audit(parsed) {
       && resourceTotals.nativeCompileBlenderStarts === 4 && resourceTotals.artifactAuditBlenderStarts === 3,
     ARTIFACT_AND_RECEIPT_ROSTERS_EXACT: [baseline, exit86, interrupted].every(row => row.compile.exact),
     PROCESS_AND_ATTEMPT_IDENTITIES_UNIQUE: uniquePids.size === 9 && new Set(outputRoots).size === outputRoots.length,
-    SEMANTIC_ATTACKS_MINIMUM_64: attacks.length === 72 && attacks.filter(row => row.rejected).length >= 64 && correctionRows.every(row => row.rejected) && gate0CorrectionRows.every(row => row.rejected) && entryCorrectionRows.every(row => row.rejected),
+    SEMANTIC_ATTACKS_MINIMUM_64: attacks.length === 72 && attacks.filter(row => row.rejected).length >= 64 && correctionRows.every(row => row.rejected) && gate0CorrectionRows.every(row => row.rejected) && entryCorrectionRows.every(row => row.rejected) && nestedPreflightCorrectionRows.every(row => row.rejected),
     ZERO_RENDER_MODEL_NETWORK_DOCKER: ['renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses'].every(key => operation.semanticOperations[key] === 0)
       && aggregateFinals.every(receipt => ['renderCalls', 'modelCalls', 'networkCalls', 'dockerProcesses'].every(key => receipt.resourceTotals[key] === 0)),
   };
@@ -604,13 +630,14 @@ async function audit(parsed) {
   const correctionRejected = correctionRows.filter(row => row.rejected).length;
   const gate0CorrectionRejected = gate0CorrectionRows.filter(row => row.rejected).length;
   const entryCorrectionRejected = entryCorrectionRows.filter(row => row.rejected).length;
+  const nestedPreflightCorrectionRejected = nestedPreflightCorrectionRows.filter(row => row.rejected).length;
   const critical = [
     gates.LIVE_MATCHING_PROCESS_BLOCKS_DUPLICATE_SPAWN,
     gates.INTERRUPTED_ATTEMPT_TERMINAL_AND_NON_PROMOTABLE,
     gates.RECOVERY_STARTS_ZERO_ADDITIONAL_NATIVE_COMPILE_BLENDER_AFTER_COMPILE_CHECKPOINT,
     gates.DISK_RESERVE_AND_JIT_READMISSION_UNCHANGED,
   ].every(Boolean);
-  const scientificVerdict = gatePassed === 34 && attackRejected >= 64 && correctionRejected === 8 && gate0CorrectionRejected === 6 && entryCorrectionRejected === 2
+  const scientificVerdict = gatePassed === 34 && attackRejected >= 64 && correctionRejected === 8 && gate0CorrectionRejected === 6 && entryCorrectionRejected === 2 && nestedPreflightCorrectionRejected === 2
     ? 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED'
     : critical ? 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_BOUNDED' : 'RESTART_SAFE_PRODUCTION_ORCHESTRATOR_REJECTED';
   const body = {
@@ -630,6 +657,8 @@ async function audit(parsed) {
     gate0CorrectionAttackSummary: { total: gate0CorrectionRows.length, rejected: gate0CorrectionRejected },
     entryCorrectionAttacks: entryCorrectionRows,
     entryCorrectionAttackSummary: { total: entryCorrectionRows.length, rejected: entryCorrectionRejected },
+    nestedPreflightCorrectionAttacks: nestedPreflightCorrectionRows,
+    nestedPreflightCorrectionAttackSummary: { total: nestedPreflightCorrectionRows.length, rejected: nestedPreflightCorrectionRejected },
     gates,
     gatePassed,
     gateTotal: Object.keys(gates).length,
@@ -650,7 +679,7 @@ export async function runAudit(argv) {
   const parsed = parseArguments(argv);
   const result = await audit(parsed);
   await writeExclusive(parsed.output, result);
-  process.stdout.write(`BFS_B58_AUDIT ${result.gatePassed}/${result.gateTotal} attacks=${result.attackSummary.rejected}/${result.attackSummary.total} correction=${result.correctionAttackSummary.rejected}/${result.correctionAttackSummary.total} gate0=${result.gate0CorrectionAttackSummary.rejected}/${result.gate0CorrectionAttackSummary.total} entry=${result.entryCorrectionAttackSummary.rejected}/${result.entryCorrectionAttackSummary.total} ${result.scientificVerdict}\n`);
+  process.stdout.write(`BFS_B58_AUDIT ${result.gatePassed}/${result.gateTotal} attacks=${result.attackSummary.rejected}/${result.attackSummary.total} correction=${result.correctionAttackSummary.rejected}/${result.correctionAttackSummary.total} gate0=${result.gate0CorrectionAttackSummary.rejected}/${result.gate0CorrectionAttackSummary.total} entry=${result.entryCorrectionAttackSummary.rejected}/${result.entryCorrectionAttackSummary.total} nested=${result.nestedPreflightCorrectionAttackSummary.rejected}/${result.nestedPreflightCorrectionAttackSummary.total} ${result.scientificVerdict}\n`);
   return result;
 }
 
