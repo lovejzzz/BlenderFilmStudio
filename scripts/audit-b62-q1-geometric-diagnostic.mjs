@@ -8,6 +8,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const SPEC_URI = 'specs/b62-camera-quality-geometric-diagnostic.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-camera-quality-geometric-diagnostic-protocol.md';
+const CORRECTION_URI = 'specs/b62-camera-quality-c1-version-normalization.v0.1.json';
 const TOOL_URIS = [
   'blender/probe_b62_q1_geometric_visibility.py',
   'blender/audit_b62_q1_geometric_visibility.py',
@@ -138,14 +139,17 @@ export async function audit(argv) {
   const { rootUri, freeze } = parseArgs(argv);
   const rootPath = containedPath(rootUri);
   const spec = await readJson(SPEC_URI);
+  const correction = await readJson(CORRECTION_URI);
   const admission = await readJson(`${rootUri}/admission.json`);
   const primary = await readJson(`${rootUri}/primary.json`);
   const independent = await readJson(`${rootUri}/independent.json`);
   const primaryProcess = await readJson(`${rootUri}/processes/PRIMARY.json`);
   const independentProcess = await readJson(`${rootUri}/processes/INDEPENDENT.json`);
   requireValue(spec.experimentId === 'B62-Q1-D1' && spec.statusBeforeToolCreation === 'PREREGISTERED', 'spec identity mismatch');
+  requireValue(correction.correctionId === 'B62-Q1-D1-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.authorizedChanges.retryRoot === rootUri, 'C1 correction mismatch');
   requireValue(validSelfHash(admission, 'admissionHash') && admission.status === 'ACCEPTED', 'admission invalid');
   requireValue(admission.toolFreezeCommit === freeze && admission.spec.sha256 === await sha256File(containedPath(SPEC_URI)), 'admission freeze/spec mismatch');
+  requireValue(admission.correction.uri === CORRECTION_URI && admission.correction.sha256 === await sha256File(containedPath(CORRECTION_URI)), 'admission correction mismatch');
   for (const uri of TOOL_URIS) requireValue(admission.toolHashes[uri] === await sha256File(containedPath(uri)), `tool hash mismatch ${uri}`);
   requireValue(admission.protocol.sha256 === await sha256File(containedPath(PROTOCOL_URI)), 'protocol hash mismatch');
   for (const row of [spec.parentEvidence.phase0Receipt, spec.parentEvidence.masterScene, ...spec.parentEvidence.calibrationPngs]) {
@@ -157,7 +161,7 @@ export async function audit(argv) {
   for (const [document, implementation] of [[primary, 'PRIMARY'], [independent, 'INDEPENDENT']]) {
     requireValue(document.schemaVersion === 'bfs.b62CameraQualityGeometricObservation.v0.1' && document.experimentId === spec.experimentId && document.implementation === implementation && document.status === 'OBSERVED', `${implementation} observation identity mismatch`);
     requireValue(document.master.expectedSha256 === spec.parentEvidence.masterScene.sha256, `${implementation} master binding mismatch`);
-    requireValue(document.blender.version === spec.runtime.blender.version && document.blender.buildHash === spec.runtime.blender.buildHash, `${implementation} Blender identity mismatch`);
+    requireValue(`Blender ${document.blender.version}` === spec.runtime.blender.version && document.blender.buildHash === spec.runtime.blender.buildHash, `${implementation} Blender identity mismatch`);
     requireValue(document.operations.blenderStarts === 1 && document.operations.renderCalls === 0 && document.operations.modelCalls === 0 && document.operations.networkCalls === 0 && document.operations.dockerProcesses === 0, `${implementation} operation mismatch`);
     requireValue(document.shots.length === spec.design.shots.length, `${implementation} shot count mismatch`);
   }
@@ -203,6 +207,7 @@ export async function audit(argv) {
     inputs: {
       spec: { uri: SPEC_URI, sha256: await sha256File(containedPath(SPEC_URI)) },
       protocol: { uri: PROTOCOL_URI, sha256: await sha256File(containedPath(PROTOCOL_URI)) },
+      correction: { uri: CORRECTION_URI, sha256: await sha256File(containedPath(CORRECTION_URI)) },
       primary: { uri: `${rootUri}/primary.json`, sha256: await sha256File(resolve(rootPath, 'primary.json')) },
       independent: { uri: `${rootUri}/independent.json`, sha256: await sha256File(resolve(rootPath, 'independent.json')) },
       comparison: { uri: `${rootUri}/comparison.json`, sha256: await sha256File(resolve(rootPath, 'comparison.json')), comparisonHash: comparison.comparisonHash },

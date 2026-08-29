@@ -2,7 +2,7 @@
 
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { lstat, mkdir, open, readFile, statfs } from 'node:fs/promises';
+import { lstat, mkdir, open, readFile, readdir, statfs } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
@@ -12,8 +12,11 @@ const execFileAsync = promisify(execFile);
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const SPEC_URI = 'specs/b62-camera-quality-geometric-diagnostic.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-camera-quality-geometric-diagnostic-protocol.md';
-const ROOT_URI = 'experiments/b62-camera-quality-geometric-diagnostic-v0-1';
+const CORRECTION_URI = 'specs/b62-camera-quality-c1-version-normalization.v0.1.json';
+const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-camera-quality-c1-version-normalization.md';
+const ROOT_URI = 'experiments/b62-camera-quality-geometric-diagnostic-v0-2';
 const PREREGISTRATION_COMMIT = '3383cf9';
+const CORRECTION_COMMIT = '44acc2b';
 const TOOL_URIS = [
   'blender/probe_b62_q1_geometric_visibility.py',
   'blender/audit_b62_q1_geometric_visibility.py',
@@ -91,6 +94,29 @@ async function git(args, encoding = 'utf8') {
 
 async function committedFileHash(commit, uri) {
   return sha256Bytes(await git(['show', `${commit}:${uri}`], null));
+}
+
+async function treeIdentity(rootUri) {
+  const rootPath = containedPath(rootUri);
+  const files = [];
+  async function walk(directory) {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      const path = resolve(directory, entry.name);
+      if (entry.isDirectory()) await walk(path);
+      else if (entry.isFile()) files.push(path);
+      else throw new Error(`retained tree special file ${path}`);
+    }
+  }
+  await walk(rootPath);
+  files.sort();
+  let bytes = 0;
+  let material = '';
+  for (const path of files) {
+    const content = await readFile(path);
+    bytes += content.length;
+    material += `${relative(rootPath, path).split('\\').join('/')}\0${sha256Bytes(content)}\n`;
+  }
+  return { files: files.length, bytes, treeSha256: sha256Bytes(Buffer.from(material)) };
 }
 
 function parseArgs(argv) {
@@ -171,12 +197,17 @@ export async function run(argv) {
   const origin = (await git(['rev-parse', 'origin/main'])).trim();
   requireValue(head === freeze && origin === freeze, `tool freeze is not current pushed HEAD: head=${head} origin=${origin}`);
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, freeze]);
   const specPath = containedPath(SPEC_URI);
   const protocolPath = containedPath(PROTOCOL_URI);
+  const correctionPath = containedPath(CORRECTION_URI);
+  const correctionProtocolPath = containedPath(CORRECTION_PROTOCOL_URI);
   const spec = JSON.parse(await readFile(specPath, 'utf8'));
+  const correction = JSON.parse(await readFile(correctionPath, 'utf8'));
   requireValue(spec.experimentId === 'B62-Q1-D1' && spec.statusBeforeToolCreation === 'PREREGISTERED', 'spec state mismatch');
-  requireValue(spec.output.formalRoot === ROOT_URI, 'formal root mismatch');
-  const allFrozenUris = [SPEC_URI, PROTOCOL_URI, ...TOOL_URIS];
+  requireValue(correction.correctionId === 'B62-Q1-D1-C1' && correction.statusBeforeToolChange === 'PREREGISTERED', 'C1 state mismatch');
+  requireValue(spec.output.formalRoot === correction.retainedFailure.root && correction.authorizedChanges.retryRoot === ROOT_URI, 'formal/retry root mismatch');
+  const allFrozenUris = [SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, ...TOOL_URIS];
   const toolHashes = {};
   for (const uri of allFrozenUris) {
     const current = await sha256File(containedPath(uri));
@@ -184,6 +215,17 @@ export async function run(argv) {
     requireValue(current === committed, `scoped working byte drift ${uri}`);
     if (TOOL_URIS.includes(uri)) toolHashes[uri] = current;
   }
+  requireValue(canonicalJson(await treeIdentity(correction.retainedFailure.root)) === canonicalJson(correction.retainedFailure.tree), 'retained v0.1 tree mismatch');
+  for (const [uri, expected] of [
+    [`${correction.retainedFailure.root}/admission.json`, correction.retainedFailure.admission.sha256],
+    [`${correction.retainedFailure.root}/primary.json`, correction.retainedFailure.primary.sha256],
+    [`${correction.retainedFailure.root}/independent.json`, correction.retainedFailure.independent.sha256],
+    [`${correction.retainedFailure.root}/processes/PRIMARY.json`, correction.retainedFailure.primary.processSha256],
+    [`${correction.retainedFailure.root}/processes/INDEPENDENT.json`, correction.retainedFailure.independent.processSha256],
+    [`${correction.retainedFailure.root}/processes/AUDITOR.json`, correction.retainedFailure.auditor.processSha256],
+    [`${correction.retainedFailure.root}/failure.json`, correction.retainedFailure.failure.sha256],
+  ]) requireValue(await sha256File(containedPath(uri)) === expected, `retained v0.1 file mismatch ${uri}`);
+  for (const [uri, expected] of Object.entries(correction.frozenBlenderToolHashes)) requireValue(toolHashes[uri] === expected, `frozen Blender tool changed ${uri}`);
   for (const row of [spec.parentEvidence.phase0Receipt, spec.parentEvidence.masterScene, ...spec.parentEvidence.calibrationPngs]) {
     requireValue(await sha256File(containedPath(row.uri)) === row.sha256, `parent evidence drift ${row.uri}`);
   }
@@ -205,6 +247,8 @@ export async function run(argv) {
     toolFreezeCommit: freeze,
     spec: { uri: SPEC_URI, sha256: await sha256File(specPath) },
     protocol: { uri: PROTOCOL_URI, sha256: await sha256File(protocolPath) },
+    correction: { uri: CORRECTION_URI, sha256: await sha256File(correctionPath) },
+    correctionProtocol: { uri: CORRECTION_PROTOCOL_URI, sha256: await sha256File(correctionProtocolPath) },
     toolHashes,
     parent: {
       receipt: { uri: spec.parentEvidence.phase0Receipt.uri, sha256: spec.parentEvidence.phase0Receipt.sha256, receiptHash: parentReceipt.receiptHash },
