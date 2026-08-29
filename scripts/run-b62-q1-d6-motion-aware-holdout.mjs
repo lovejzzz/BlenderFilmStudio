@@ -12,9 +12,13 @@ const execFileAsync = promisify(execFile);
 const repositoryRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const SPEC_URI = 'specs/b62-camera-quality-motion-aware-holdout-validation.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b62-d6-motion-aware-holdout-validation-protocol.md';
-const ROOT_URI = 'experiments/b62-camera-quality-motion-aware-holdout-v0-1';
+const CORRECTION_URI = 'specs/b62-camera-quality-d6-c1-native-ocio-runtime.v0.1.json';
+const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b62-d6-c1-native-ocio-runtime.md';
+const ROOT_URI = 'experiments/b62-camera-quality-motion-aware-holdout-v0-2';
+const RETAINED_ROOT = 'experiments/b62-camera-quality-motion-aware-holdout-v0-1';
 const PARENT_ROOT = 'experiments/b62-camera-quality-motion-aware-search-v0-4';
 const PREREGISTRATION_COMMIT = 'd33b0144e231e663303848167e1758af4b9022bc';
+const CORRECTION_COMMIT = '3d1c1f0c92c53fbf833612028353cd0693a74298';
 const TOOLS = ['blender/build_b62_q1_d6_motion_aware_scene.py', 'blender/render_b62_q1_d6_motion_aware_holdout_pairs.py', 'blender/audit_b62_q1_d6_motion_aware_scene_and_pixels.py', 'scripts/run-b62-q1-d6-motion-aware-holdout.mjs', 'scripts/audit-b62-q1-d6-motion-aware-holdout.mjs'];
 
 function normalize(value) { if (typeof value === 'number' && Number.isFinite(value) && Number.isInteger(value)) return value; if (typeof value === 'number' && Number.isFinite(value)) { const bytes = Buffer.alloc(8); bytes.writeDoubleBE(value); return { $f64be: bytes.toString('hex') }; } if (Array.isArray(value)) return value.map(normalize); if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, child]) => [key, normalize(child)])); return value; }
@@ -36,7 +40,7 @@ let spec;
 async function blenderChild({ root, id, scene, tool, args, wallSeconds }) {
   const command = spec.runtime.blender.executable;
   const full = ['--background', '--factory-startup', '--disable-autoexec', scene, '--python-exit-code', '1', '--python', pathFor(tool), '--', ...args];
-  const result = await runBudgetedProcess({ command, args: full, cwd: repositoryRoot, env: { PATH: '/usr/bin:/bin', LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8', OCIO: resolve(repositoryRoot, 'color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio') }, outputRoot: root, budgets: { wallTimeMs: wallSeconds * 1000, maxRssBytes: spec.processBudget.maximumPeakResidentSetSizeBytesPerBlender, maxLogBytes: spec.processBudget.maximumCombinedLogBytesPerChild, maxOutputFiles: 256, maxOutputBytes: spec.processBudget.projectedWriteBytes, sampleIntervalMs: 100 } });
+  const result = await runBudgetedProcess({ command, args: full, cwd: repositoryRoot, env: { PATH: '/usr/bin:/bin', LANG: 'C.UTF-8', LC_ALL: 'C.UTF-8' }, outputRoot: root, budgets: { wallTimeMs: wallSeconds * 1000, maxRssBytes: spec.processBudget.maximumPeakResidentSetSizeBytesPerBlender, maxLogBytes: spec.processBudget.maximumCombinedLogBytesPerChild, maxOutputFiles: 256, maxOutputBytes: spec.processBudget.projectedWriteBytes, sampleIntervalMs: 100 } });
   const receipt = await processReceipt(root, id, command, full.map(value => value.startsWith(repositoryRoot) ? relative(repositoryRoot, value).split('\\').join('/') : value), result);
   req(result.outcome === 'PASS' && result.child.exitCode === 0 && result.breach === null, `${id} failed`);
   return receipt;
@@ -45,15 +49,22 @@ async function blenderChild({ root, id, scene, tool, args, wallSeconds }) {
 async function main() {
   const freeze = parse();
   spec = JSON.parse(await readFile(pathFor(SPEC_URI), 'utf8'));
-  req(spec.experimentId === 'B62-Q1-D6' && spec.statusBeforeToolCreation === 'PREREGISTERED' && spec.output.formalRoot === ROOT_URI, 'spec mismatch');
+  const correction = JSON.parse(await readFile(pathFor(CORRECTION_URI), 'utf8'));
+  req(spec.experimentId === 'B62-Q1-D6' && spec.statusBeforeToolCreation === 'PREREGISTERED' && spec.output.formalRoot === RETAINED_ROOT, 'spec mismatch');
+  req(correction.correctionId === 'B62-Q1-D6-C1' && correction.statusBeforeToolChange === 'PREREGISTERED' && correction.retainedFailure.root === RETAINED_ROOT && correction.authorizedChanges.retryRoot === ROOT_URI, 'correction mismatch');
   req(!await exists(pathFor(ROOT_URI)), 'formal root exists');
   const head = (await git(['rev-parse', 'HEAD'])).trim(), origin = (await git(['rev-parse', 'origin/main'])).trim();
   req(head === freeze && origin === freeze, 'freeze not pushed HEAD');
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, freeze]);
+  await git(['merge-base', '--is-ancestor', CORRECTION_COMMIT, freeze]);
   req(await hashFile(pathFor(SPEC_URI)) === await committedHash(PREREGISTRATION_COMMIT, SPEC_URI) && await hashFile(pathFor(PROTOCOL_URI)) === await committedHash(PREREGISTRATION_COMMIT, PROTOCOL_URI), 'preregistration drift');
+  req(await hashFile(pathFor(CORRECTION_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_URI) && await hashFile(pathFor(CORRECTION_PROTOCOL_URI)) === await committedHash(CORRECTION_COMMIT, CORRECTION_PROTOCOL_URI), 'correction drift');
   const toolHashes = {};
   for (const uri of TOOLS) { toolHashes[uri] = await hashFile(pathFor(uri)); req(toolHashes[uri] === await committedHash(freeze, uri), `tool drift ${uri}`); }
-  req((await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, PARENT_ROOT, ...TOOLS])).trim() === '', 'scoped dirty');
+  req(toolHashes[TOOLS[0]] === correction.frozenBeforeCorrection.builderSha256 && toolHashes[TOOLS[1]] === correction.frozenBeforeCorrection.renderSha256 && toolHashes[TOOLS[2]] === correction.frozenBeforeCorrection.independentSha256, 'frozen Blender tools changed');
+  req((await git(['status', '--porcelain=v1', '--', SPEC_URI, PROTOCOL_URI, CORRECTION_URI, CORRECTION_PROTOCOL_URI, RETAINED_ROOT, PARENT_ROOT, ...TOOLS])).trim() === '', 'scoped dirty');
+  const retainedTree = await treeIdentity(RETAINED_ROOT);
+  req(canonicalJson(retainedTree) === canonicalJson(correction.retainedFailure.tree) && await hashFile(pathFor(correction.retainedFailure.failure.uri)) === correction.retainedFailure.failure.sha256 && await hashFile(pathFor(correction.retainedFailure.build.uri)) === correction.retainedFailure.build.sha256, 'retained v0.1 drift');
   const parentTree = await treeIdentity(PARENT_ROOT);
   req(canonicalJson(parentTree) === canonicalJson(spec.parentEvidence.d5Formal.tree), 'D5 tree drift');
   const parentReceiptPath = pathFor(spec.parentEvidence.d5Formal.receipt.uri), parentAuditPath = pathFor(spec.parentEvidence.d5Formal.audit.uri);
@@ -66,7 +77,7 @@ async function main() {
   req(available - spec.processBudget.projectedWriteBytes >= spec.processBudget.minimumFreeReserveBytes, 'disk reserve');
   const root = pathFor(ROOT_URI);
   await mkdir(resolve(root, 'processes'), { recursive: true, mode: 0o700 });
-  const admission = await writeHashed(resolve(root, 'admission.json'), { schemaVersion: 'bfs.b62CameraQualityMotionAwareHoldoutAdmission.v0.1', experimentId: spec.experimentId, status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, toolFreezeCommit: freeze, bindings: { spec: { uri: SPEC_URI, sha256: await hashFile(pathFor(SPEC_URI)) }, protocol: { uri: PROTOCOL_URI, sha256: await hashFile(pathFor(PROTOCOL_URI)) }, parentTree, parentReceiptSha256: await hashFile(parentReceiptPath), parentAuditSha256: await hashFile(parentAuditPath), master: { uri: spec.parentEvidence.masterScene.uri, sha256: masterSha }, blenderSha256: await hashFile(spec.runtime.blender.executable), tools: toolHashes }, resources: { availableBytesBefore: available, projectedWriteBytes: spec.processBudget.projectedWriteBytes, minimumFreeReserveBytes: spec.processBudget.minimumFreeReserveBytes }, operations: { blenderStartsBeforeAdmission: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 } }, 'admissionHash');
+  const admission = await writeHashed(resolve(root, 'admission.json'), { schemaVersion: 'bfs.b62CameraQualityMotionAwareHoldoutAdmission.v0.1', experimentId: spec.experimentId, status: 'ADMITTED', preregistrationCommit: PREREGISTRATION_COMMIT, correctionCommit: CORRECTION_COMMIT, toolFreezeCommit: freeze, bindings: { spec: { uri: SPEC_URI, sha256: await hashFile(pathFor(SPEC_URI)) }, protocol: { uri: PROTOCOL_URI, sha256: await hashFile(pathFor(PROTOCOL_URI)) }, correction: { uri: CORRECTION_URI, sha256: await hashFile(pathFor(CORRECTION_URI)) }, correctionProtocol: { uri: CORRECTION_PROTOCOL_URI, sha256: await hashFile(pathFor(CORRECTION_PROTOCOL_URI)) }, retainedFailureTree: retainedTree, retainedFailureSha256: await hashFile(pathFor(correction.retainedFailure.failure.uri)), retainedBuildSha256: await hashFile(pathFor(correction.retainedFailure.build.uri)), parentTree, parentReceiptSha256: await hashFile(parentReceiptPath), parentAuditSha256: await hashFile(parentAuditPath), master: { uri: spec.parentEvidence.masterScene.uri, sha256: masterSha }, blenderSha256: await hashFile(spec.runtime.blender.executable), tools: toolHashes }, resources: { availableBytesBefore: available, projectedWriteBytes: spec.processBudget.projectedWriteBytes, minimumFreeReserveBytes: spec.processBudget.minimumFreeReserveBytes }, operations: { blenderStartsBeforeAdmission: 0, renderCalls: 0, modelCalls: 0, networkCalls: 0, dockerProcesses: 0 } }, 'admissionHash');
   try {
     const derived = resolve(root, 'scene/B62_PHASE0_D6_MOTION_AWARE.blend'), buildPath = resolve(root, 'build.json');
     const build = await blenderChild({ root, id: 'BUILD', scene: master, tool: TOOLS[0], args: ['--output-scene', derived, '--report', buildPath, '--master-sha256', masterSha], wallSeconds: spec.processBudget.maximumBuildWallSeconds });
