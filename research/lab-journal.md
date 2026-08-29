@@ -5347,3 +5347,11 @@ Date: 2026-08-29 · Type: RETAINED FORMAL FAILURE / CONFIG-SURFACE PREREGISTRATI
 official v0.2 preflight `bdf4d0e…`以commit `4ae9076…`推送后，01-GENERATOR越过MLEXR设置，在0.709秒、peak RSS 262,062,080 bytes后因`Medium High Contrast`不属于当前look enum退出；zero render，未timeout/termination/log truncation。attempt 7 files/8,541 bytes/tree `affb94dc…`，formal 5 files/493,162 bytes/tree `ee02554c…`，failure file/self `e93877ef…/e5bdfba2…`，永久保留。
 
 C6不再逐一猜API，预注册D3 one-Blender/zero-render配置表面探针，一次检查runtime display/view/look、Cycles、Eevee final samples、motion blur与MLEXR/HALF/ZIP。若全部PASS，只允许neutral runtime override `sRGB - Display / ACES 2.0 - SDR 100 nits (Rec.709) / None`；不允许看像素后补偿调色。后续候选root为v0.3，formal budgets/claims不变。
+
+## J-421 · B62 D3 retained engine-enum失败与C7预注册
+
+Date: 2026-08-29 · Type: RETAINED DIAGNOSTIC FAILURE / RUNTIME ENUM PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+D3在structured marker前exit 1，只留下stdout/stderr 2 files/2,218 bytes/tree `408c555f…`；file hashes `92594064…/ba40ddf2…`。color neutral与Cycles赋值已执行未抛错，停止点为`BLENDER_EEVEE_NEXT`不在runtime enum；Blender 5.2列出的当前engine是`BLENDER_EEVEE`。zero render。
+
+C7预注册D4 one-Blender/zero-render：catch并记录旧name reject，要求新`BLENDER_EEVEE`accept、taa_render_samples 16 accept，再完成全部C6 color/Cycles/motion/EXR surface checks。仅完整PASS才允许runtime engine与neutral color override；formal dose/budgets/claims不变。

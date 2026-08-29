@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C7",
+  "date": "2026-08-29",
+  "statusBeforeDiagnostic": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "c6": {"uri": "specs/b62-phase0-c6-blender52-config-surface-diagnostic.v0.1.json", "sha256": "ba44228f09eeacab47e892e0ee860106585447cc25d22df16ca5ee3c35971886"},
+    "d3ToolFreezeCommit": "fb1d0426e2f2c2b259df2942324cdd623d6aba13"
+  },
+  "retainedD3Failure": {
+    "root": "experiments/b62-phase0-d3-config-surface-v0-1",
+    "tree": {"files": 2, "bytes": 2218, "treeSha256": "408c555f44b17f0a2b26155b4d8a3b16b47665fb40ceb5b4ee829adb2209e1d3"},
+    "stdoutSha256": "9259406462dc7e5efc77d8bc8a459ccce4fa3ca44340e502d2f04d93d7119d8a",
+    "stderrSha256": "ba40ddf226929a1a616e4009777cebab3c026e7059562206b3ed199583975969",
+    "blenderExitCode": 1,
+    "renderCalls": 0,
+    "error": "BLENDER_EEVEE_NEXT rejected; runtime enum was BLENDER_EEVEE, BLENDER_WORKBENCH, CYCLES"
+  },
+  "rootCause": "The Blender 5.2 LTS runtime identifies the current Eevee engine as BLENDER_EEVEE rather than the parent contract's BLENDER_EEVEE_NEXT spelling.",
+  "authorizedDiagnostic": {
+    "id": "B62-P0-D4",
+    "root": "experiments/b62-phase0-d4-config-surface-v0-1",
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "requiredInterventions": [
+      "BLENDER_EEVEE_NEXT assignment rejects",
+      "BLENDER_EEVEE assignment accepts",
+      "taa_render_samples=16 accepts",
+      "all C6 color/Cycles/motion-blur/EXR checks complete"
+    ],
+    "toolPaths": [
+      "blender/probe_b62_d4_config_surface.py",
+      "scripts/run-b62-d4-config-surface.mjs",
+      "scripts/audit-b62-d4-config-surface.mjs"
+    ]
+  },
+  "authorizedOverrideIfD4Passes": {
+    "animaticEngine": "BLENDER_EEVEE",
+    "semanticMeaning": "Blender 5.2 current Eevee engine",
+    "samples": 16,
+    "reviewColor": {"display": "sRGB - Display", "view": "ACES 2.0 - SDR 100 nits (Rec.709)", "look": "None", "exposure": 0, "gamma": 1}
+  },
+  "formalBudgetsAndClaimsUnchanged": true
+}
