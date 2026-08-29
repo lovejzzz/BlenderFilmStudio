@@ -5261,3 +5261,13 @@ Date: 2026-08-29 · Type: TERMINAL GOAL FREEZE · New Blender processes: 0 · Ne
 下一目标冻结为12秒/24 fps/288帧原创短场景《守夜人点亮观测核心》：机械守夜人在废弃轨道观测站接近控制台、完成右手接触并点亮核心，最后在面罩上形成反射。三镜头固定为35 mm WIDE_APPROACH、65 mm MEDIUM_CONTACT、100 mm CLOSE_REFLECTION，各96帧。选择机械角色是显式边界：先完成可审计的stylized-realism角色/环境/接触/灯光/摄影/动画管线，不冒充已解决真人皮肤、毛发与微表演。
 
 终局验收要求clean root单入口、SceneSpec→immutable BuildPlan→Blender、共享asset/look/state hashes、multilayer EXR与12秒交付视频；首镜完成后受控终止orchestrator与Codex工作回合，必须从verified receipts恢复且不重做已完成stage。所有输出、进程、资源和失败均可独立审计，0 generative-video pixel calls。自动门不能宣布电影感；必须留下匿名人类审片response。该goal freeze不授权288帧formal render；下一动作是有界Phase 0资产manifest、animatic、接触/灯光状态机和真实Cycles校准，再单独预注册正式B62。
+
+## J-411 · B62 Phase 0资产、Animatic与Cycles校准预注册
+
+Date: 2026-08-29 · Type: TERMINAL PROOF PHASE-0 PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+B58 C7、B60、B61 receipt file/self-hash重新核验exact为`f6112e89…/eef5dbff…`、`12937d85…/312060d8…`、`9ab3b2cf…/18bc3a53…`。宿主约296 GiB可用，capacity sentinel最近exit 0，无活动render/orchestrator Blender；六个B62工具和preflight/attempt/formal三棵root全部absent。
+
+B62-P0-E1冻结12秒/288帧三镜头资产与look admission：one generator Blender生成原创机械守夜人、观测站、控制台核心、三段动作与master blend；one Eevee process输出288帧640×360 animatic；three fresh Cycles processes以固定64 spp/1080p渲染frames 48/144/240；one independent Blender zero-render reopen audit。上限6 Blender starts/291 renders/one ffmpeg/one Node auditor/2 GiB projected writes/100 GiB reserve，zero model/network/Docker。
+
+机器判决要求18/18 gates、16/16 mutation controls，特别检查完整rig/material/asset identity、三镜头frame/lens、frame144右手接触≤2 cm、核心cold→warm因果顺序、close镜warm状态不重置、288帧/24fps/12秒视频、三份multilayer EXR、独立重开与资源收据。即使PASS也只得到`B62_PHASE0_ASSET_ANIMATIC_AND_CALIBRATION_ADMITTED`；不授权288帧正式Cycles，不宣布电影感或真人质量。下一动作提交推送预注册，随后才允许实现六个工具。

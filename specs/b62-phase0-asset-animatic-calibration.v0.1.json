@@ -1,0 +1,269 @@
+{
+  "schemaVersion": "bfs.b62Phase0AssetAnimaticCalibration.v0.1",
+  "experimentId": "B62-P0-E1",
+  "title": "Terminal cinematic proof asset, animatic and Cycles calibration admission",
+  "statusBeforeExecution": "PREREGISTERED",
+  "terminalGoal": {
+    "title": "守夜人点亮观测核心",
+    "durationSeconds": 12,
+    "frameRate": 24,
+    "frameStart": 1,
+    "frameEnd": 288,
+    "deliveryFrameCount": 288,
+    "generativeVideoCalls": 0,
+    "goalUri": "research/2026-08-29-b62-terminal-cinematic-proof-goal.md"
+  },
+  "upstreamEvidence": [
+    {
+      "id": "B58_C7_REAUDIT",
+      "uri": "experiments/restart-safe-production-orchestrator-c7-reaudit-v0-1/receipt.json",
+      "sha256": "f6112e89c068207379c0a30cf390822144110d41367a7849e179de6f2b0e9894",
+      "selfHashField": "receiptHash",
+      "selfHash": "eef5dbff57191110ea9ca57d58c1c9bb68b5833682a2d16670d94b65a11767d9"
+    },
+    {
+      "id": "B60_SHARED_STATE",
+      "uri": "experiments/cinematic-sequence-consistency-v0-1/receipt.json",
+      "sha256": "12937d8519dff8a31cd7cd64477d6262ab829bb886e80efd69dbedec210e9baa",
+      "selfHashField": "receiptHash",
+      "selfHash": "312060d8c0ed962642792c99f37862161ff3be969bf950394dccbb2852ccc70a"
+    },
+    {
+      "id": "B61_PIXEL_REPRO_COST",
+      "uri": "experiments/cinematic-render-repro-cost-v0-5/receipt.json",
+      "sha256": "9ab3b2cfb1aef3829abff6292aab285226a6b51cf9f376b60214de85626766de",
+      "selfHashField": "receiptHash",
+      "selfHash": "18bc3a53e45e353d87304e165e821d5b94c9e30c510da6c76b943a83f6fe3244"
+    }
+  ],
+  "creativeContract": {
+    "style": "STYLIZED_REALISM",
+    "actor": {
+      "id": "CHAR_B62_GUARDIAN",
+      "kind": "ORIGINAL_MECHANICAL_GUARDIAN",
+      "heightM": 1.82,
+      "identityLock": true,
+      "requiredVisibleSystems": [
+        "segmented helmet and reflective visor",
+        "emissive eye slit",
+        "layered chest and shoulder armor",
+        "articulated arms, hands, legs and feet",
+        "warm chest status light"
+      ]
+    },
+    "environment": {
+      "id": "SET_B62_OBSERVATORY",
+      "kind": "ORIGINAL_ORBITAL_OBSERVATORY_CONTROL_ROOM",
+      "requiredVisibleSystems": [
+        "circular observation chamber",
+        "raised control console",
+        "central observation core",
+        "window or aperture structure",
+        "floor and wall practical lights"
+      ]
+    },
+    "prop": {
+      "id": "PROP_B62_CONSOLE_CORE",
+      "contactSocket": "CONSOLE_TOUCH",
+      "stateMachine": ["DORMANT_COLD", "CONTACT_TRANSITION", "ACTIVE_WARM"]
+    },
+    "look": {
+      "worldLinear": [0.0015, 0.003, 0.008],
+      "coldLightLinear": [0.12, 0.38, 1],
+      "warmCoreLinear": [1, 0.28, 0.055],
+      "requiresVolume": true,
+      "requiresDepthOfField": true,
+      "requiresMotionBlur": true,
+      "forbidsNeuralPixelReplacement": true
+    }
+  },
+  "shots": [
+    {
+      "id": "WIDE_APPROACH",
+      "frameStart": 1,
+      "frameEnd": 96,
+      "lensMm": 35,
+      "calibrationFrame": 48,
+      "intent": "Establish the guardian, observatory and cold dormant core while the camera slowly advances."
+    },
+    {
+      "id": "MEDIUM_CONTACT",
+      "frameStart": 97,
+      "frameEnd": 192,
+      "lensMm": 65,
+      "calibrationFrame": 144,
+      "intent": "Show the right hand reaching and making causal contact as the core changes from cold to warm."
+    },
+    {
+      "id": "CLOSE_REFLECTION",
+      "frameStart": 193,
+      "frameEnd": 288,
+      "lensMm": 100,
+      "calibrationFrame": 240,
+      "intent": "Resolve on visor reflection, eye line and the active warm core without resetting shared state."
+    }
+  ],
+  "animationContract": {
+    "requiredBones": [
+      "root",
+      "pelvis",
+      "spine",
+      "chest",
+      "neck",
+      "head",
+      "upper_arm.L",
+      "forearm.L",
+      "hand.L",
+      "upper_arm.R",
+      "forearm.R",
+      "hand.R",
+      "thigh.L",
+      "shin.L",
+      "foot.L",
+      "thigh.R",
+      "shin.R",
+      "foot.R"
+    ],
+    "rightHandContactFrame": 144,
+    "maxContactDistanceM": 0.02,
+    "coreTransitionFrames": [139, 149],
+    "stateContinuity": {
+      "frame138": "DORMANT_COLD",
+      "frame144": "CONTACT_TRANSITION",
+      "frame150": "ACTIVE_WARM",
+      "frame288": "ACTIVE_WARM"
+    }
+  },
+  "phase0Outputs": {
+    "attemptRoot": "experiments/b62-phase0-attempt-v0-1",
+    "formalRoot": "experiments/b62-phase0-v0-1",
+    "preflightRoot": "experiments/b62-phase0-preflight-v0-1",
+    "masterBlend": "experiments/b62-phase0-v0-1/scene/B62_PHASE0_MASTER.blend",
+    "assetLibraries": [
+      "experiments/b62-phase0-v0-1/assets/CHAR_B62_GUARDIAN.blend",
+      "experiments/b62-phase0-v0-1/assets/SET_B62_OBSERVATORY.blend",
+      "experiments/b62-phase0-v0-1/assets/PROP_B62_CONSOLE_CORE.blend"
+    ],
+    "motionLibrary": "experiments/b62-phase0-v0-1/motion/B62_GUARDIAN_PERFORMANCE.blend",
+    "animaticFrames": "experiments/b62-phase0-v0-1/animatic/frame-####.png",
+    "animaticVideo": "experiments/b62-phase0-v0-1/animatic/B62_PHASE0_ANIMATIC.mp4",
+    "calibrationFrames": [
+      "experiments/b62-phase0-v0-1/calibration/WIDE_APPROACH-0048.exr",
+      "experiments/b62-phase0-v0-1/calibration/MEDIUM_CONTACT-0144.exr",
+      "experiments/b62-phase0-v0-1/calibration/CLOSE_REFLECTION-0240.exr"
+    ]
+  },
+  "renderContract": {
+    "animatic": {
+      "engine": "BLENDER_EEVEE_NEXT",
+      "resolution": [640, 360],
+      "samples": 16,
+      "fileFormat": "PNG",
+      "colorMode": "RGBA",
+      "frames": 288
+    },
+    "calibration": {
+      "engine": "CYCLES",
+      "device": "CPU",
+      "resolution": [1920, 1080],
+      "samples": 64,
+      "denoise": true,
+      "seed": 62001,
+      "animatedSeed": false,
+      "fileFormat": "OPEN_EXR_MULTILAYER",
+      "pixelType": "HALF",
+      "compression": "ZIP",
+      "frames": [48, 144, 240]
+    },
+    "reviewColor": {
+      "display": "sRGB",
+      "view": "ACES 2.0",
+      "look": "Medium High Contrast",
+      "exposure": 0,
+      "gamma": 1
+    }
+  },
+  "processBudget": {
+    "blenderStarts": 6,
+    "generatorBlenderStarts": 1,
+    "animaticBlenderStarts": 1,
+    "calibrationBlenderStarts": 3,
+    "independentAuditBlenderStarts": 1,
+    "renderCalls": 291,
+    "eeveeRenderCalls": 288,
+    "cyclesRenderCalls": 3,
+    "ffmpegProcesses": 1,
+    "nodeAuditorProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeReserveBytes": 107374182400,
+    "maximumCapturedLogBytesPerProcess": 16777216,
+    "timeoutsSeconds": {
+      "generator": 180,
+      "animatic": 900,
+      "calibrationPerFrame": 240,
+      "independentAudit": 180,
+      "nodeAudit": 60
+    }
+  },
+  "toolPaths": [
+    "blender/generate_b62_phase0_assets.py",
+    "blender/render_b62_phase0.py",
+    "blender/audit_b62_phase0.py",
+    "scripts/preflight-b62-phase0.mjs",
+    "scripts/run-b62-phase0.mjs",
+    "scripts/audit-b62-phase0.mjs"
+  ],
+  "acceptanceGates": [
+    "G01_PREREGISTRATION_COMMIT_PUSHED_BEFORE_TOOLS_AND_OUTPUT_ROOTS",
+    "G02_B58_B60_B61_UPSTREAM_RECEIPTS_EXACT",
+    "G03_ZERO_BLENDER_PREFLIGHT_AND_CAPACITY_RESERVE_PASS",
+    "G04_ORIGINAL_ASSET_LIBRARIES_AND_MASTER_BLEND_COMPLETE",
+    "G05_ASSET_SAFETY_AND_IDENTITY_MANIFEST_EXACT",
+    "G06_MASTER_TIMELINE_288_FRAMES_24FPS_AND_THREE_SHOT_MARKERS_EXACT",
+    "G07_CAMERA_LENSES_AND_ANIMATED_TRANSFORMS_MATCH_SHOT_CONTRACT",
+    "G08_GUARDIAN_RIG_BONES_MATERIALS_AND_VISIBLE_SYSTEMS_COMPLETE",
+    "G09_RIGHT_HAND_CONTACT_AND_CORE_STATE_CAUSAL_ORDER_PASS",
+    "G10_COLD_TO_WARM_LIGHT_AND_SHARED_STATE_CONTINUITY_PASS",
+    "G11_ANIMATIC_288_FRAME_ROSTER_AND_VIDEO_METADATA_EXACT",
+    "G12_THREE_CYCLES_CALIBRATION_EXR_AND_REVIEW_PNG_PAIRS_COMPLETE",
+    "G13_CALIBRATION_EXR_FORMAT_COLOR_FINITE_DYNAMIC_AND_NONEMPTY_PASS",
+    "G14_PROCESS_WALL_CPU_MEMORY_BYTES_AND_COSTS_RECORDED",
+    "G15_TIMEOUT_DISK_LOG_AND_OUTPUT_ROSTER_BOUNDS_PASS",
+    "G16_INDEPENDENT_BLENDER_REOPEN_AUDIT_MATCHES_REPORTS",
+    "G17_SIXTEEN_NEGATIVE_CONTROL_MUTATIONS_REJECTED",
+    "G18_FINAL_RECEIPT_SELF_HASH_AND_ZERO_MODEL_NETWORK_DOCKER"
+  ],
+  "negativeControls": [
+    "N01_UPSTREAM_RECEIPT_HASH_DRIFT",
+    "N02_UNPUSHED_PREREGISTRATION_COMMIT",
+    "N03_ACTOR_IDENTITY_HASH_DRIFT",
+    "N04_FORBIDDEN_DRIVER_OR_SCRIPT_IN_ASSET",
+    "N05_REQUIRED_BONE_MISSING",
+    "N06_SHOT_FRAME_RANGE_OR_LENS_DRIFT",
+    "N07_RIGHT_HAND_CONTACT_DISTANCE_OVER_LIMIT",
+    "N08_CORE_TRANSITION_PRECEDES_CONTACT",
+    "N09_WARM_STATE_RESETS_IN_CLOSE_SHOT",
+    "N10_ANIMATIC_FRAME_MISSING_OR_EXTRA",
+    "N11_ANIMATIC_VIDEO_DURATION_OR_FPS_DRIFT",
+    "N12_CYCLES_SAMPLE_OR_SEED_DRIFT",
+    "N13_EXR_FORMAT_OR_DIMENSION_DRIFT",
+    "N14_NONFINITE_OR_EMPTY_COMBINED_PIXELS",
+    "N15_OUTPUT_ROSTER_SUBSTITUTION",
+    "N16_FINAL_RECEIPT_HASH_MUTATION"
+  ],
+  "passVerdict": "B62_PHASE0_ASSET_ANIMATIC_AND_CALIBRATION_ADMITTED",
+  "failVerdict": "B62_PHASE0_INVALIDATED",
+  "claimBoundary": {
+    "authorizesFormal288FrameRender": false,
+    "cinematicQuality": false,
+    "humanReview": false,
+    "photorealHuman": false,
+    "provesAssetAndLookFeasibility": true,
+    "provesThreeShotAnimaticContinuity": true,
+    "providesRealCyclesCalibration": true,
+    "nextStepIfPass": "Freeze promoted asset hashes, formal SceneSpecs, samples, timeouts and projected bytes in a separate B62 formal preregistration."
+  }
+}
