@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "bfs.codex-host-disk-colima-ab.v0.1",
+  "experimentId": "B59-G0-R3-D2",
+  "status": "PREREGISTERED",
+  "parentCommit": "d1150093beeaf4c74b4d27312622ffe7267ebc49",
+  "parentEvidence": {
+    "resultsPath": "experiments/codex-host-disk-attribution-v0-1/results.json",
+    "resultsSha256": "37a6306e740ee0549fdfaedb8b2070049fc4af3131fbf1219cebb8a678b6d4d4",
+    "auditPath": "experiments/codex-host-disk-attribution-v0-1/audit.json",
+    "auditSha256": "d7d78555226c8e73c2c68e86484ee974914ed69c630a49b14fbc6708eab2fce4",
+    "interpretation": "COLIMA_CONTRIBUTION_OBSERVED",
+    "observedHostLossBytes": 8941568,
+    "observedColimaGrowthBytes": 16384
+  },
+  "formalRoot": "experiments/codex-host-disk-colima-ab-v0-1",
+  "toolPaths": {
+    "runner": "scripts/run-b59-g0-r3-d2-colima-ab.mjs",
+    "auditor": "scripts/audit-b59-g0-r3-d2-colima-ab.mjs"
+  },
+  "releasePaths": [
+    "specs/codex-host-disk-colima-ab.v0.1.json",
+    "research/2026-08-29-b59-g0-r3-d2-colima-ab-protocol.md",
+    "scripts/run-b59-g0-r3-d2-colima-ab.mjs",
+    "scripts/audit-b59-g0-r3-d2-colima-ab.mjs"
+  ],
+  "profile": {
+    "name": "default",
+    "colimaBinary": "/opt/homebrew/bin/colima",
+    "dockerBinary": "/opt/homebrew/bin/docker",
+    "dockerSocket": "unix:///Users/tianxing/.colima/default/docker.sock",
+    "arch": "aarch64",
+    "runtime": "docker",
+    "mountType": "virtiofs"
+  },
+  "restoreManifest": {
+    "capturedAt": "2026-08-29T01:06:36-04:00",
+    "containers": [
+      {
+        "id": "656ace940483450d32802eb98523a50176f741b52df0b2a5b2caa7540edf0be4",
+        "name": "gpt-bot-agent-f87a4fc4fbb14afd8ea37ba604ce",
+        "image": "gpt-bot-agent-computer:2.8",
+        "restartPolicy": "unless-stopped",
+        "autoRemove": false
+      },
+      {
+        "id": "baaef476f835b4e68ac8bc183cace91de0675a543dce76f52b84b8d33e617365",
+        "name": "gpt-bot-agent-98c9350bc46542d3b83780997a00",
+        "image": "gpt-bot-agent-computer:2.8",
+        "restartPolicy": "unless-stopped",
+        "autoRemove": false
+      },
+      {
+        "id": "2675985ebcd9a4ad4961d72df5c0d146f77eb597fbe38b5ece68c8f8233b1837",
+        "name": "gpt-bot-agent-aa20bfe304854dfab53bbb5087cc",
+        "image": "gpt-bot-agent-computer:2.8",
+        "restartPolicy": "unless-stopped",
+        "autoRemove": false
+      },
+      {
+        "id": "0a581b1a626ac0502c3e01d55176ac7f4261c693db12681547bb64e0c06c6470",
+        "name": "gpt-bot-agent-94812fa95c82484fae4aee414aaf",
+        "image": "gpt-bot-agent-computer:2.8",
+        "restartPolicy": "unless-stopped",
+        "autoRemove": false
+      }
+    ],
+    "configFiles": {
+      "colimaConfig": {
+        "path": "/Users/tianxing/.colima/default/colima.yaml",
+        "sha256": "861be8798d34fd2ad6fae5ddf68c30071a6e08eec872004b90816a7ff53f89d8"
+      },
+      "limaConfig": {
+        "path": "/Users/tianxing/.colima/_lima/colima/lima.yaml",
+        "sha256": "59daf66c525f1ca2d5a08f5a404e26624979b2a442d6c3e96f7f0e091c0ca412"
+      }
+    },
+    "diskFiles": {
+      "vmDisk": {
+        "path": "/Users/tianxing/.colima/_lima/colima/disk",
+        "device": 16777233,
+        "inode": 224554643,
+        "logicalBytes": 21474836480
+      },
+      "dataDisk": {
+        "path": "/Users/tianxing/.colima/_lima/_disks/colima/datadisk",
+        "device": 16777233,
+        "inode": 224554600,
+        "logicalBytes": 21474836480
+      }
+    }
+  },
+  "observationPolicy": {
+    "phaseOrder": ["ACTIVE_BASELINE", "STOPPED", "RESTORED"],
+    "samplesPerPhase": 3,
+    "minimumIntervalSeconds": 30,
+    "minimumPhaseSpanSeconds": 60,
+    "maximumLatenessSeconds": 10,
+    "minimumMaterialHostLossBytes": 67108864,
+    "maximumSuppressedHostLossBytes": 16777216,
+    "maximumSuppressedFraction": 0.25,
+    "stopTimeoutSeconds": 120,
+    "startTimeoutSeconds": 120,
+    "containerRestoreTimeoutSeconds": 120,
+    "recoveryAttempts": 2
+  },
+  "interpretations": [
+    "ACTIVE_STOPPED_RESTORED_MATCH",
+    "ACTIVE_ONLY_STOPPED_SUPPRESSION",
+    "STOPPED_NOT_SUPPRESSED",
+    "NO_MATERIAL_LOSS_REPRODUCED",
+    "MIXED_OR_INCONCLUSIVE"
+  ],
+  "requiredGates": [
+    "SPEC_PARENT_AND_RELEASE_IDENTITY",
+    "PARENT_EVIDENCE_IDENTITY",
+    "INITIAL_MANIFEST_MATCH",
+    "PHASE_COUNT_ORDER_AND_TIMING",
+    "STOPPED_STATE_CONFIRMED",
+    "RESTORED_PROFILE_RUNTIME_MATCH",
+    "EXACT_CONTAINER_SET_RESTORED_RUNNING",
+    "CONFIG_AND_DISK_IDENTITY_PRESERVED",
+    "TRANSITIONS_BOUNDED_AND_ACCOUNTED",
+    "EVIDENCE_BOUNDED_AND_SELF_HASHED",
+    "NO_UNAUTHORIZED_MUTATION",
+    "INDEPENDENT_AUDIT_REPLAY"
+  ],
+  "registeredAttacks": [
+    "A01_SPEC_SHA_MUTATION",
+    "A02_PARENT_EVIDENCE_MUTATION",
+    "A03_PHASE_SAMPLE_REMOVAL",
+    "A04_PHASE_ORDER_MUTATION",
+    "A05_TIMING_MUTATION",
+    "A06_STOP_CONFIRMATION_MUTATION",
+    "A07_CONTAINER_SET_MUTATION",
+    "A08_CONFIG_HASH_MUTATION",
+    "A09_DISK_IDENTITY_MUTATION",
+    "A10_AGGREGATE_MUTATION",
+    "A11_TRANSITION_RECEIPT_MUTATION",
+    "A12_SAMPLE_SELF_HASH_MUTATION",
+    "A13_RESULT_SELF_HASH_MUTATION"
+  ],
+  "byteCeilings": {
+    "sample": 16384,
+    "transition": 32768,
+    "results": 98304,
+    "audit": 98304,
+    "stdout": 8192
+  },
+  "formalCeilings": {
+    "filesystemWritesOutsideFormalRoot": 0,
+    "cleanupOperations": 0,
+    "profileConfigurationMutations": 0,
+    "containerCreates": 0,
+    "containerRemoves": 0,
+    "imageOrVolumeMutations": 0,
+    "signalsSent": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "maximumStopCommands": 1,
+    "maximumStartCommandsIncludingRecovery": 2,
+    "maximumExplicitContainerStarts": 4
+  }
+}
