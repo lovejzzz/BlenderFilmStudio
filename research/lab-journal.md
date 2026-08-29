@@ -5373,3 +5373,13 @@ D5 tool freeze `2288a2edd2aa15085da99bbc2bdb50ccc873619d`推送后，真实Blend
 D5 root共10 files/895,636 bytes/tree `023e5c5c…`；result file/self `ce348efb…/a7157c11…`，receipt file/self `8ad9c755…/7f0fc9e6…`，verdict为`B62_PRODUCTION_GENERATOR_SMOKE_PROVEN`。磁盘仍约290 GiB available。
 
 C9在formal Node工具修改前绑定C6–C9、retained v0.2/D3、D4/D5 PASS与D5-frozen production Blender tools。只允许三个Node工具切换v0.3 fresh roots、要求`BLENDER_EEVEE`与neutral color exact；18 gates/16 attacks、6 Blender/291 renders、2 GiB/100 GiB及claim boundary不变。下一动作提交推送D5+C9，再实现Node binding、fresh-clone rehearsal和official preflight。
+
+## J-424 · B62 Phase 0 v0.3 fresh-clone与official preflight PASS
+
+Date: 2026-08-29 · Type: ZERO-BLENDER RETRY REHEARSAL / OFFICIAL PREFLIGHT · New B62 Blender processes: 0 · New B62 renders: 0
+
+三个C9授权Node工具以commit `ee6ffff37852fcb38fbf9de81146552a4d162ffc`冻结并推送。工具绑定C1–C9 ancestry、retained v0.1/v0.2/D1/D3 trees、D2/D4/D5 PASS evidence以及production Blender tools；formal expectations切到`BLENDER_EEVEE`和D4-proven neutral color，v0.3 roots fresh。
+
+fresh local clone无`node_modules`。首次用`/tmp`绝对script path调用时，macOS将module URL规范化为`/private/tmp`，入口guard未触发，未创建root、未启动child；改为clone内相对入口后preflight 9/9 ACCEPTED，self-hash `31e2f53e…`，zero child/Blender/render/model/network/Docker，随后clone移入Trash。
+
+主仓库official preflight同一freeze上9/9 ACCEPTED；file/self hashes为`126a31a159c92416413f2231b6820d712a5b4484fefbd19181ba0332b759ab4c / 37aece8774d5d88ce049ad7b60e36a4fea4843bdc7fdef9e7b890f7f840a82cd`。D2/D4/D5 self-hashes exact，available 310,012,510,208 bytes，projected 2 GiB/100 GiB reserve通过。下一动作提交推送official evidence后启动v0.3 formal attempt。
