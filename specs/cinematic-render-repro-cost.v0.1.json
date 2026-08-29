@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "bfs.cinematicRenderReproCost.v0.1",
+  "experimentId": "B61-E1",
+  "status": "PREREGISTERED",
+  "title": "Three-shot Cycles EXR pixel reproducibility and cost gate",
+  "claim": "For three structurally admitted shots, Blender 5.2 can render three preregistered frames twice in independent processes under a frozen ACES configuration, producing exact decoded Combined-pixel digests and complete per-frame resource/cost receipts.",
+  "roots": {
+    "preflight": "experiments/cinematic-render-repro-cost-preflight-v0-1",
+    "attempt": "experiments/cinematic-render-repro-cost-attempt-v0-1",
+    "formal": "experiments/cinematic-render-repro-cost-v0-1"
+  },
+  "runtime": {
+    "blenderVersion": "Blender 5.2.0 LTS",
+    "blenderBuildHash": "fbe6228777e7",
+    "blenderBinary": "/Applications/Blender.app/Contents/MacOS/Blender",
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "sha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "name": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+      "display": "sRGB - Display",
+      "view": "ACES 2.0 - SDR 100 nits (Rec.709)"
+    }
+  },
+  "calibration": {
+    "uri": "experiments/b61-render-calibration-v0-3/result.json",
+    "sha256": "75ddbe2e083c7b571b3160cb1cfb1228bedb92b29388859fd714c15a00f25aab",
+    "resultHash": "afe8df5b5698ab2f20abc5971cc41ba08aff488d604f7c7f30e1671a396d09b0",
+    "retainedFailures": [
+      "experiments/b61-render-calibration-v0-1/failure.json",
+      "experiments/b61-render-calibration-v0-2/failure.json"
+    ]
+  },
+  "render": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "resolution": { "width": 1920, "height": 1080, "percentage": 100 },
+    "samples": 64,
+    "denoise": true,
+    "seed": 24082960,
+    "animatedSeed": false,
+    "format": "OPEN_EXR_MULTILAYER",
+    "pixelType": "HALF_16",
+    "compression": "ZIP_LOSSLESS",
+    "frames": [1, 72, 144],
+    "repetitions": ["A", "B"],
+    "decodedPixelProjection": "Combined RGBA loaded back from each EXR by Blender 5.2 and hashed as little-endian float32 values",
+    "reviewProxy": "8-bit PNG saved from the same Render Result without another render call"
+  },
+  "shots": [
+    {
+      "label": "WIDE",
+      "sourceBlend": { "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/WIDE-A/restricted/scene.blend", "sha256": "9019e6dcc370dc8f9432061f144f2834497d4617afc560d2f02a2b18f1e51b29" },
+      "productionReceipt": { "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/WIDE-A/production-receipt.json", "sha256": "98d6ab290f425f042f62641a3b7efe826fb15a77bf49d56c70ee5ec3fc3f8232", "receiptHash": "9cd68189453861b98e449a8840f519cb7d857f51d4e2e8c5fdb3094bc6ef4742" },
+      "planHash": "518bfd62f3074b9b5c20af8476c4eddfec4fbc5605349afaa8d4cce2a4addb9a",
+      "structureHash": "f08f9b788dfed51067d42d46b0a9ab3fcb28b603c66a49c924a90d95b8877f0e"
+    },
+    {
+      "label": "MEDIUM",
+      "sourceBlend": { "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-A/restricted/scene.blend", "sha256": "61618765e48ce78bc5d897f44439c2503c7a0353a22e233476cf99f470f43427" },
+      "productionReceipt": { "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/MEDIUM-A/production-receipt.json", "sha256": "6631be91de1cbdd61e0fd45d9b742cd8ae5ae2bf5c32838ac98e2d466110451d", "receiptHash": "ae60666a6efb9409510b9106fff6cdac9ebb0e5d55c62b458d861d160447b385" },
+      "planHash": "5213b1b34db3fb262747d586c5503ee507cc122f3e398265ed764eea9fca3e53",
+      "structureHash": "23b5b24dad67f3441a8e2723d67fc4b92dffb39e48ae5591e94edab497df1571"
+    },
+    {
+      "label": "CLOSE",
+      "sourceBlend": { "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/CLOSE-A/restricted/scene.blend", "sha256": "ce11abd1189d541056d2dd8c77dd92fb3712ee6823c4f8c11c31ffc36e531c97" },
+      "productionReceipt": { "uri": "experiments/cinematic-sequence-consistency-v0-1/runs/CLOSE-A/production-receipt.json", "sha256": "e54759291fb0c6c0ba0444e44ca11877b7fdb8513e101fd7eed13b478d782056", "receiptHash": "90ee093fe540ac9f5fe5a3395f135a229b56a0caf8372ca050c2b8e72119d7b0" },
+      "planHash": "a06895071df4be742abb6da98617d0df51c12e032a0151076cc37d601ea9ca23",
+      "structureHash": "38cdd44a98e615f28c838956df9f8e72bc2e8e8f5e79df9daee4e822dd5bb282"
+    }
+  ],
+  "gates": [
+    "G01_PREREGISTRATION_PUSHED_BEFORE_OUTPUT_ROOTS",
+    "G02_ALL_SOURCE_BLEND_RECEIPT_STRUCTURE_AND_OCIO_HASHES_EXACT",
+    "G03_CALIBRATION_PASS_AND_TWO_FAILURES_RETAINED",
+    "G04_ZERO_BLENDER_PREFLIGHT_AND_DISK_RESERVE_PASS",
+    "G05_SIX_RENDER_PROCESSES_AND_EIGHTEEN_RENDER_CALLS_COMPLETE",
+    "G06_EVERY_PROCESS_USES_FROZEN_OCIO_WITH_ZERO_POST_READ_WARNING",
+    "G07_EIGHTEEN_EXR_AND_PNG_AND_PIXEL_REPORT_TRIPLES_COMPLETE",
+    "G08_NINE_A_B_DECODED_COMBINED_PIXEL_DIGESTS_EXACT",
+    "G09_EXR_DIMENSIONS_HALF_ZIP_AND_MULTILAYER_CONTRACT_EXACT",
+    "G10_ALL_PIXEL_REPORTS_FINITE_NONEMPTY_AND_DYNAMIC",
+    "G11_SOURCE_PLAN_STRUCTURE_CAMERA_AND_IDENTITY_BINDINGS_RETAINED",
+    "G12_PER_FRAME_WALL_CPU_MEMORY_BYTES_AND_COST_EXTRAPOLATIONS_COMPLETE",
+    "G13_TIMEOUT_DISK_AND_OUTPUT_ROSTER_BOUNDS_PASS",
+    "G14_TEN_NEGATIVE_CONTROL_MUTATIONS_REJECTED",
+    "G15_INDEPENDENT_BLENDER_EXR_REOPEN_AUDIT_MATCHES_RENDER_REPORTS",
+    "G16_FINAL_RECEIPT_SELF_HASH_AND_ZERO_MODEL_NETWORK_DOCKER"
+  ],
+  "negativeControls": [
+    "N01_SOURCE_BLEND_HASH_DRIFT",
+    "N02_PRODUCTION_RECEIPT_HASH_DRIFT",
+    "N03_OCIO_ENVIRONMENT_MISSING",
+    "N04_POST_READ_COLOR_WARNING",
+    "N05_SAMPLE_COUNT_DRIFT",
+    "N06_RESOLUTION_DRIFT",
+    "N07_ANIMATED_SEED_ENABLED",
+    "N08_PIXEL_DIGEST_MUTATION",
+    "N09_FRAME_ROSTER_MISSING_OR_EXTRA",
+    "N10_EXR_CONTAINER_HASH_SUBSTITUTED_FOR_DECODED_PIXEL_DIGEST"
+  ],
+  "resourceCeilings": {
+    "renderBlenderStarts": 6,
+    "independentExrAuditBlenderStarts": 1,
+    "renderCalls": 18,
+    "frames": 18,
+    "perRenderProcessTimeoutSeconds": 120,
+    "minimumDiskReserveBytes": 107374182400,
+    "maximumFormalBytes": 1073741824,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0
+  },
+  "passVerdict": "CINEMATIC_RENDER_TECHNICAL_REPRODUCIBILITY_AND_COST_SUPPORTED",
+  "failVerdict": "CINEMATIC_RENDER_TECHNICAL_REPRODUCIBILITY_OR_COST_NOT_SUPPORTED",
+  "claimBoundary": {
+    "sameHostSameBuildDecodedCombinedPixelReproducibility": true,
+    "exrContainerBytesDeterministic": false,
+    "crossHardwareReproducibility": false,
+    "full144FrameSequence": false,
+    "temporalContinuity": false,
+    "humanVisualIdentityJudgment": false,
+    "cinematicQuality": false,
+    "theatricalDisplayCalibration": false,
+    "fullSequenceRenderCost": false
+  }
+}

@@ -5003,3 +5003,13 @@ C2 commit `3258e43`推送后，fresh v0.3重跑CAL32/CAL64。两次均验证exac
 CAL32/CAL64 wall time为3.54/5.02秒，EXR bytes为1,378,126/1,368,644，SHA为`cfc2aab2… / 8ab8313d…`；maximum resident set size观测约4.159/4.158 GB。Result file SHA/self-hash为`75ddbe2e083c7b571b3160cb1cfb1228bedb92b29388859fd714c15a00f25aab / afe8df5b5698ab2f20abc5971cc41ba08aff488d604f7c7f30e1671a396d09b0`。Operations为2 Blender、2 render、2 frames，zero model/network/Docker。
 
 校准决策冻结为：B61正式矩阵使用64 spp、单次120秒timeout、100 GiB reserve。该结果只证明资源可承受，不证明像素复现、视觉一致或电影质量。下一动作提交推送v0.3证据，然后以64 spp预注册正式B61，而不是继续调整采样数。
+
+## J-382 · B61三镜头EXR像素复现与成本门预注册
+
+Date: 2026-08-29 · Type: B61 FORMAL PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+校准结果commit `0d4e966`推送后，正式B61-E1冻结为三镜头×frames 1/72/144×A/B独立重复：6 render Blender starts、18 render calls/EXR/PNG/pixel reports，另允许1次独立EXR reopen audit Blender。所有case固定1920×1080、Cycles CPU、64 spp、half-float ZIP multilayer EXR、denoise on、seed 24082960、animated seed false、frozen ACES config、单process 120秒与100 GiB reserve。
+
+复现判据不是EXR container hash，而是每次保存后用Blender重开EXR，对decoded Combined RGBA float32 little-endian bytes求SHA；九组shot/frame A/B必须exact，独立audit重算也必须exact。PNG只用于后续review，不进入技术verdict。协议冻结16 gates、10 single-field attacks与1 GiB formal ceiling；任何pixel pair不同都fail，不设置事后容差。
+
+WIDE/MEDIUM/CLOSE source blend SHA为`9019e6dc… / 61618765… / ce11abd1…`，分别绑定B60 production receipt self-hash与structure hash。五项candidate tools和三条official roots当前均不存在。即使B61通过也不支持全序列、跨硬件、时间连续、真人视觉身份或电影感。下一动作提交推送本预注册，再实现render/audit工具；正式root在tool freeze与zero-Blender preflight前不得创建。
