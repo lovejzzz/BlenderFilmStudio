@@ -5743,3 +5743,13 @@ Date: 2026-08-29 · Type: RETAINED PRE-RENDER FAILURE / RENDER-RESULT PNG ADAPTE
 C3 tool freeze `aba4107dc0ce814875a4775d973bff4e1d4fe009`在fresh v0.4通过全部admission后，BLENDER_RENDER于0.485秒、peak sampled RSS 227,459,072 bytes退出，0 render/0 frame、无budget breach。Blender精确错误为production Scene的dynamic file-format enum只有`OPEN_EXR_MULTILAYER`，不接受`PNG`。root永久保留3 files/6,503 bytes/tree `3266adce2e1a643ab3fadfbea3c814d89cf2d58e171c78821c1048df38618780`，scientific verdict为null；C3 active-context假设尚未进入像素测试。
 
 C4复用仓库B61已实验证明的边界：production Scene继续是唯一active evaluation/render context，且不改其multilayer file format；每帧`write_still=false`只生成内存Render Result，另建non-active output-only Scene配置PNG/RGBA/8与同一color contract，再由`Render Result.save_render`写盘，adapter本身0 render并在末尾删除。runner/auditor绑定v0.1–v0.4并切fresh v0.5；288 render、所有科学阈值与预算不变。
+
+## J-462 · B62-T2 v0.5复现headless Render Result无数据，C5文件桥预注册
+
+Date: 2026-08-29 · Type: RETAINED POST-RENDER EXPORT FAILURE / FILE-BACKED OIIO ADAPTER PREREGISTRATION · New Blender processes: 1 · New Blender renders: 1
+
+C4 tool freeze `29c263c752a77410e82f6de6428db7a601430cca`在fresh v0.5通过admission并保持production Scene为active context。Blender完成frame 1的一次Eevee render后，在`Render Result.save_render(..., scene=outputScene)`退出：`Image 'Render Result' does not have any image data`。进程0.687秒、peak sampled RSS 427,900,928 bytes、无budget breach；没有retained pixel，scientific verdict为null。v0.5永久保留3 files/6,709 bytes/tree `698cfbfdcae5967697be7ddc4d4a79341c1819c7cd96245b6c7388b7b3363086`；render-process file/self为`7d2f62ce…/f77d95a0…`。
+
+这次失败暴露了C4推理错误：B61-D4只证明isolated Scene能保存一个已经具有pixel data的generated image，不能推出headless `Render Result`也具有可保存数据；B61-D5实际上早已明确证明后者无数据，并验证完整替代桥为multilayer EXR→OIIO Combined RGBA→ACEScg generated float image→isolated PNG。isolated output Scene本身有效，错误的是source-image假设。
+
+C5在任何工具修改前只授权复用这条已验证文件桥。production Scene继续active且每帧exact one Eevee render，但用`write_still=true`写入formal root内至多同时存在一个的`scratch/current-frame.exr`；固定OIIO 3.1.13.1/NumPy 2.3.4解码并记录Combined float digest，逐帧创建/删除generated image，写PNG后删除EXR，末尾删除scratch与output Scene。runner/auditor绑定v0.1–v0.5并切fresh v0.6，要求288 render/EXR write/decode/generated-image、0 adapter render、0 retained scratch；原14 gates、128 MiB retained output、2 GiB RSS、100 GiB reserve与HUMAN_PENDING不变。

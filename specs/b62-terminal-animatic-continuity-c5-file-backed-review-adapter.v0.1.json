@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "bfs.b62TerminalAnimaticContinuityCorrection.v0.1",
+  "correctionId": "B62-T2-E1-C5",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {
+    "baseSpec": "specs/b62-terminal-animatic-continuity.v0.1.json",
+    "c4": "specs/b62-terminal-animatic-continuity-c4-render-result-png-adapter.v0.1.json",
+    "c4Commit": "e40c61476e8abd12e65e22b9a51f19dc832f4e13",
+    "failedC4ToolFreezeCommit": "29c263c752a77410e82f6de6428db7a601430cca"
+  },
+  "retainedFailure": {
+    "root": "experiments/b62-terminal-animatic-continuity-v0-5",
+    "tree": {"files": 3, "bytes": 6709, "treeSha256": "698cfbfdcae5967697be7ddc4d4a79341c1819c7cd96245b6c7388b7b3363086"},
+    "admission": {"uri": "experiments/b62-terminal-animatic-continuity-v0-5/admission.json", "sha256": "e6e0d3b48a5cb4c247e62e550b6a6ee9fe0ca8ae8bb045e04c2813a9c23c6681", "admissionHash": "e73a7da1c23c3c788711530da7c3e74b649d3838d269337a0101477a59f4334c"},
+    "failure": {"uri": "experiments/b62-terminal-animatic-continuity-v0-5/failure.json", "sha256": "3033f6ec17ced3922f078629e696a7f0f4501e443347caedc456b7f06d62d6df", "failureHash": "091c4ae16ff81a72a2be29370b744ea8e6deb59c1738351c9b20ec41c82b9691"},
+    "renderProcess": {"uri": "experiments/b62-terminal-animatic-continuity-v0-5/processes/BLENDER_RENDER.json", "sha256": "7d2f62cea9ce832e6a4473c20ccc1b06d08e4c96965fef0dd2285fdf5dca610a", "processHash": "f77d95a0e4856d218c727b42d649ceb3aacbf6329dff8aee1e8f19e0452bb4ed", "elapsedMs": 687, "peakSampledRssBytes": 427900928, "exitCode": 1, "breach": null},
+    "renderCalls": 1,
+    "retainedPixelFiles": 0,
+    "scientificVerdict": null,
+    "error": "RuntimeError: Image 'Render Result' does not have any image data"
+  },
+  "diagnosis": {
+    "cause": "The active production Scene completed the first headless render with write_still=false, but Blender 5.2 exposed the Render Result data-block without image data that Image.save_render could consume.",
+    "priorRepositoryEvidence": "B61-D5 already proved this exact headless Render Result limitation and separately proved that an OIIO-decoded Combined RGBA array can populate a generated Blender float image which an isolated review Scene can encode as PNG.",
+    "correctionToC4Reasoning": "C4 incorrectly generalized the B61-D4 isolated-Scene storage proof from a generated image with data to the headless Render Result without data. The isolated Scene was valid; the assumed source image was not.",
+    "classification": "HEADLESS_RENDER_RESULT_REQUIRES_FILE_BACKED_OIIO_RECONSTRUCTION",
+    "activeContextTemporalHypothesisTested": false
+  },
+  "authorizedChanges": {
+    "retryRoot": "experiments/b62-terminal-animatic-continuity-v0-6",
+    "renderer": "Keep the exact production Scene as the active evaluation and render context. For each frame, render exactly once with write_still=true through its unchanged OPEN_EXR_MULTILAYER settings into one fresh scratch/current-frame.exr. Decode the exact Combined RGBA subimage with Blender-bundled OpenImageIO 3.1.13.1 and NumPy 2.3.4; create one temporary float image in ACEScg with the proven OIIO-top-row to Blender-bottom-row conversion; save that generated image through the non-active PNG/RGBA/8 output Scene; then remove the generated image and scratch EXR before the next frame. Remove the empty scratch directory and output Scene at completion.",
+    "receipt": "Report production file/media format, adapter identity PRODUCTION_MULTILAYER_EXR_OIIO_GENERATED_FLOAT_IMAGE_ISOLATED_PNG, exact OIIO and NumPy versions, 288 production render calls, 288 temporary EXR writes and decodes, 288 generated images, zero output-adapter render calls, zero retained scratch files, exact context Scene/frame/marker/camera, per-frame decoded Combined digest and source byte identity before/after.",
+    "runnerAndNodeAuditor": "Bind C5 plus immutable v0.1-v0.5 roots, move to fresh v0.6, require the exact adapter/counts and an unchanged final root roster with no scratch entry, and retain the original fourteen gates.",
+    "freshExecution": "Render all 288 frames again. Reuse of any pixel from v0.1-v0.5 is forbidden."
+  },
+  "frozenUnchanged": {
+    "activeContextIntervention": "The C3 active production Scene/frame/view-layer/marker/camera intervention is unchanged",
+    "renderAndVideo": "Exactly 288 Eevee calls, 640x360 16 spp RGBA 8-bit retained PNG outputs, pinned color and H.264 delivery unchanged",
+    "scientificAcceptance": "All pixel, temporal, cut, geometry and causal-state thresholds unchanged",
+    "resources": "Two Blender starts, 128 MiB retained output/projected write, 2 GiB RSS per Blender, 100 GiB reserve; zero model/network/Docker/Colima. At most one transient 640x360 EXR exists at a time inside the bounded root.",
+    "decision": "Fourteen gates, supported/rejected mapping and HUMAN_PENDING unchanged"
+  },
+  "nonClaims": [
+    "The single v0.5 render produced no retained pixel and does not test temporal variation or a camera cut.",
+    "The temporary EXR is a file-backed transport required by Blender's headless image API; it is not a retained high-bit-depth delivery master.",
+    "No acceptance threshold is changed."
+  ]
+}
