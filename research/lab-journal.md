@@ -5029,3 +5029,11 @@ Date: 2026-08-29 · Type: B61 TOOL-FREEZE CANDIDATE · New Blender processes: 0 
 完成三项Node candidate。Preflight要求pushed HEAD/origin exact，重开三份source blend/production receipts、OCIO、v0.3 calibration与v0.1/v0.2 retained failures，验证1 GiB projected output仍保留100 GiB reserve，全程zero Blender。Runner写attempt/admission/receipt后按WIDE/MEDIUM/CLOSE×A/B启动6个受120秒限制的Blender进程，每进程渲染3帧；之后只启动1个EXR reopen Blender和1个Node auditor，失败时写self-hashed invalidation并保留partial root。Node auditor直接重开18组EXR/PNG/pixel reports、6份run/process reports和Blender reopen audit，验证A/B decoded pixel exact、EXR/PNG headers、finite/dynamic pixels、成本、disk/bytes与10项mutations。
 
 为避免空gate，render report新增实际half/ZIP/multilayer、denoise、OCIO字段；auditor新增对应exact检查、最终disk reserve与formal byte ceiling。最终render/audit-python/preflight/runner/auditor SHA为`e47198e9d5e0487d644128683dfdb29eedf2d462922e593878684f2ff9725dfc / f60fee8c357d951edcfdb7e1a0d82d8919c0d0a80314bcd10c86980ef8f86767 / 50eba33dbf48445055f7fa6290ae5328b769c57650932105bb9302a754dc6c0a / 84f0b60c140820dcdbced72964541c427f4d3ea4e0eb0acf42e3de88a8dcf317 / 8d66e353a54925bd4f83b3cc54c405b2c6ef162470bc5bf819adfd2985ee1a73`。Node syntax、targeted ESLint zero-warning、Python syntax与diff check通过；official roots仍不存在。下一动作提交推送tool freeze，fresh clone先跑zero-Blender preflight，再决定是否执行18帧rehearsal。
+
+## J-385 · B61 fresh-clone rehearsal与official preflight接受
+
+Date: 2026-08-29 · Type: B61 OFFICIAL PREFLIGHT ADMISSION · New Blender processes: 0 · New Blender renders: 0
+
+Tool-freeze commit `0e68107`推送后，全新临时clone运行exact-root preflight，返回`ACCEPTED 9/9`、self-hash `c6efbeed…`；三份source/production bindings、v0.3 calibration、v0.1/v0.2 retained failures、五项工具、矩阵与资源上限全部通过，operations全零。临时clone随后以validated `/tmp/bfs-b61-preflight.*` target depth-first删除。
+
+主仓库确认三根fresh后运行official preflight，同样`ACCEPTED 9/9`。File SHA/self-hash为`cb1f222d5a08eafb1253c52678bf64e7641ef6dafa7dd7824202e0ffee2519fe / 6b0bcf86af7a5ddc284186b015bc2bfb330a908566f84908760a3688b3ef5c52`；available 318,655,078,400 bytes，预留1 GiB formal后仍高于100 GiB reserve。Blender/render/frame/model/network/Docker均0，attempt/formal roots继续不存在。下一动作仅提交推送此receipt与本entry形成evidence commit；之后formal runner才可创建18帧矩阵。
