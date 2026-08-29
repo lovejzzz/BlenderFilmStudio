@@ -5497,3 +5497,13 @@ D3 tool freeze `d5c198ec9224d06925041311c203168f84e6ea40`运行后，两份Blend
 根因是PRIMARY使用Blender `Matrix.Rotation`，INDEPENDENT手写Python `sin/cos`构造同一world-Z rotation；微小coordinate差传播到projection bounds。v0.1永久保留9 files/1,262,543 bytes/tree `6f4d2928…`，failure file/self `56371264…/d1848261…`。
 
 C1在工具修改前只授权INDEPENDENT改用同一Blender rotation primitive，并授权runner/auditor绑定retained failure后使用fresh v0.2 root。PRIMARY hash `146a45da…`固定；96 cells、frames 216/240/264、六个sealed holdouts、全部feasibility bounds、selection order、1e-9 tolerance与zero-render预算均不变。
+
+## J-436 · B62-Q1-D3 v0.2唯一候选PASS与D4 holdout渲染预注册
+
+Date: 2026-08-29 · Type: BOUNDED SEARCH PASS / SEALED HOLDOUT RENDER PREREGISTRATION · New Blender processes: 2 · New Blender renders: 0
+
+C1 retry以tool freeze `029913a1b9fd8e43559387cc31a4e82c4677ab50`在fresh v0.2 root运行。PRIMARY/INDEPENDENT分别5.378/5.387秒、peak sampled RSS 255,180,800/255,082,496 bytes；Node audit 0.061秒。16/16 checks、96-cell roster、288 candidate-frame cells与1e-9 comparison全部PASS，zero render/model/network/Docker。root 9 files/1,250,026 bytes/tree `94e04a65…`，receipt file/self `3d00ed2d…/1111e6fa…`。
+
+原始baseline在derivation frames不合格；96 cells仅`AZ_M045_R200_L065`一个候选三帧全合格：绕target −45°、radial distance ×2、65 mm。frames 216/240/264的helmet share为0.25/0.12847/0.16840，character share 0.43924/0.27778/0.34375，on-screen vertex fraction 0.29283/0.37744/0.32676，clamped area 0.80054/0.48127/0.60346；每帧均exact可见visor、eye slit、chest light与core。verdict为`B62_CLOSE_CAMERA_BOUNDED_FEASIBLE_CANDIDATE_FOUND`。
+
+D4在任何新工具创建前冻结该唯一候选，并只在admission后解封frames 193/204/228/252/276/288。候选将按每个integer frame采样原camera后变换并bake到新camera，保存derived `.blend`；原camera保留作paired control。第二Blender以960×540、Cycles CPU 16 spp渲染6×2 EXR/PNG，第三Blender独立复开检查bake、几何与像素。corrected六帧必须全过D3 template、original六帧必须全拒绝，12 EXR必须finite/non-empty且每pair不同。即使technical PASS，六组原图仍需人眼审查；不得直接宣称电影感。

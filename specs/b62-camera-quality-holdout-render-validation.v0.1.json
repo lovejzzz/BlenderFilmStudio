@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityHoldoutRenderValidation.v0.1",
+  "experimentId": "B62-Q1-D4",
+  "title": "Fresh-scene compilation and paired Cycles holdout validation of the selected close camera",
+  "date": "2026-08-29",
+  "question": "When the sole D3 candidate is compiled into a new Blender scene, does it pass the frozen geometry template on all six previously sealed frames and produce valid paired Cycles images while the original camera remains rejected?",
+  "statusBeforeToolCreation": "PREREGISTERED",
+  "parentEvidence": {
+    "d3Retry": {
+      "root": "experiments/b62-camera-quality-bounded-candidate-search-v0-2",
+      "tree": {"files": 9, "bytes": 1250026, "treeSha256": "94e04a659177b36506f8be161068379b5583b0bcf1160dfe0895494fa02856b8"},
+      "receipt": {"uri": "experiments/b62-camera-quality-bounded-candidate-search-v0-2/receipt.json", "sha256": "3d00ed2d98a18e134d325e9855badc8fbae082f604d729c47efa59a6ab4d21c3", "receiptHash": "1111e6fac5e6c19e40413faf2429a507e77eda451f615f18bf39f5d969a4d93f"},
+      "audit": {"uri": "experiments/b62-camera-quality-bounded-candidate-search-v0-2/audit.json", "sha256": "a5c60104342743d5aa3e929176160ddd071d544278e01b01cc6be534d2cb5f42", "auditHash": "b41cbfb920547146d681e686a46cd2c866a21cabf61bfcbd18d866f402517d9d"},
+      "verdict": "B62_CLOSE_CAMERA_BOUNDED_FEASIBLE_CANDIDATE_FOUND",
+      "selectedCandidateId": "AZ_M045_R200_L065"
+    },
+    "masterScene": {"uri": "experiments/b62-phase0-v0-4/scene/B62_PHASE0_MASTER.blend", "sha256": "b177f8ba4830bcc2861207902f1193fe8cc30f4add0fba1e7937851c2e98eb66"}
+  },
+  "selectedIntervention": {
+    "sourceCamera": "CAM_CLOSE_REFLECTION",
+    "correctedCamera": "CAM_CLOSE_REFLECTION_CORRECTED_D4",
+    "lookAtTarget": [0.0, 0.67, 1.72],
+    "azimuthDegreesAroundWorldZ": -45,
+    "radialScaleFromTarget": 2.0,
+    "lensMillimeters": 65.0,
+    "bakeFramesInclusive": [193, 288],
+    "bakeRule": "For each integer frame, evaluate source position C, compute T + Matrix.Rotation(-45°, Z) @ (C-T) * 2, track -Z to T with Y up, and key location plus quaternion. Use linear interpolation and preserve sensor, shift and clipping settings.",
+    "otherSceneChangesAllowed": false
+  },
+  "holdout": {
+    "frames": [193, 204, 228, 252, 276, 288],
+    "priorStatus": "SEALED_BY_D3_AND_NOT_EVALUATED",
+    "unsealMoment": "Only after D4 admission is durably written and frozen tool identities pass.",
+    "pairedConditions": ["ORIGINAL", "CORRECTED"],
+    "geometryTemplate": {
+      "faceAnchorsExact": ["B62_VISOR", "B62_EYE_SLIT"],
+      "helmetVisualBlockerShareMaximum": 0.70,
+      "characterVisualBlockerShareMinimum": 0.20,
+      "characterVisualBlockerShareMaximum": 0.90,
+      "characterOnScreenVertexFractionMinimum": 0.10,
+      "characterOnScreenVertexFractionMaximum": 0.60,
+      "characterClampedUnionAreaFractionMinimum": 0.35,
+      "characterClampedUnionAreaFractionMaximum": 0.90,
+      "visibleSemanticAnchorCountMinimum": 2
+    },
+    "requiredOutcome": "CORRECTED passes the complete template on all six frames; ORIGINAL fails it on all six frames."
+  },
+  "render": {
+    "engine": "CYCLES",
+    "device": "CPU",
+    "resolution": [960, 540],
+    "samples": 16,
+    "denoise": true,
+    "seed": 62004,
+    "animatedSeed": false,
+    "renderCalls": 12,
+    "outputsPerRender": ["16-bit ZIP multilayer OpenEXR", "8-bit review PNG", "decoded finite/dynamic-range pixel report"],
+    "pairRequirement": "Each original/corrected pair must decode successfully, have exact dimensions, zero non-finite Combined values, RGB dynamic range above 1e-6, and non-identical Combined pixel digest.",
+    "scope": "These are economical composition holdouts, not final 1080p/2K production masters."
+  },
+  "runtime": {
+    "blender": {"executable": "/Applications/Blender.app/Contents/MacOS/Blender", "version": "Blender 5.2.0 LTS", "buildHash": "fbe6228777e7", "sha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"},
+    "forbidden": ["model calls", "network access", "Docker or Colima", "mutation of the parent master scene"]
+  },
+  "independentAudit": {
+    "freshBlenderReopen": "Open the derived .blend in a third Blender process; verify camera bake roster/transforms/lens and independently repeat material-aware geometry on all paired holdout frames.",
+    "pixelAudit": "Independently decode every EXR Combined layer and bind its digest, dimensions, finite count and dynamic range to the render report.",
+    "nodeAudit": "Verify source/tool/process/resource/output identities, compare render and independent observations, and map outcome without inspecting image aesthetics."
+  },
+  "processBudget": {
+    "runnerProcesses": 1,
+    "freshBlenderProcesses": 3,
+    "blenderRenderCalls": 12,
+    "nodeAuditorProcesses": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "maximumWallSecondsBuild": 180,
+    "maximumWallSecondsRender": 900,
+    "maximumWallSecondsIndependentAudit": 300,
+    "maximumPeakResidentSetSizeBytesPerBlender": 6442450944,
+    "maximumCombinedLogBytesPerChild": 4194304,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "toolFreeze": {
+    "requiredNewTools": ["blender/build_b62_q1_d4_corrected_scene.py", "blender/render_b62_q1_d4_holdout_pairs.py", "blender/audit_b62_q1_d4_scene_and_pixels.py", "scripts/run-b62-q1-d4-holdout-render.mjs", "scripts/audit-b62-q1-d4-holdout-render.mjs"],
+    "sequence": ["Commit and push D3 v0.2 evidence plus this spec/protocol while all five tools and the D4 root are absent.", "Implement and statically validate all tools.", "Commit and push exact tool bytes.", "Write admission, then build derived scene, render 12 paired images, independently reopen/audit, and run Node audit. Retain every failure."]
+  },
+  "output": {"formalRoot": "experiments/b62-camera-quality-holdout-render-v0-1", "derivedScene": "scene/B62_PHASE0_D4_CAMERA_CORRECTED.blend", "immutableFailurePolicy": "Any failure preserves all partial outputs and requires a preregistered correction plus fresh root."},
+  "decision": {
+    "supportedVerdict": "B62_CLOSE_CAMERA_CORRECTION_HOLDOUT_RENDER_MECHANICALLY_ADMITTED",
+    "supportedWhen": "All three Blender processes and Node audit pass, corrected geometry passes all six holdouts, originals fail all six, all 12 Cycles outputs are valid and every pair differs.",
+    "rejectedVerdict": "B62_CLOSE_CAMERA_CORRECTION_FAILS_FROZEN_HOLDOUT",
+    "invalidated": "Any binding, bake, process, resource, output, independent-agreement or audit failure yields scientificVerdict null."
+  },
+  "humanReviewBoundary": "After a technical PASS, all six paired PNGs must still be viewed at native resolution. Human review is recorded separately and cannot be synthesized from machine geometry or pixel validity.",
+  "nonClaims": ["D4 does not prove cinematic merit, reflection storytelling, final lighting, temporal motion quality or human preference.", "D4 does not modify the production generator or promote the derived scene into the main workflow.", "16 spp 960×540 holdouts are diagnostic renders, not final deliverables.", "A technical PASS only authorizes a later camera-quality promotion decision after explicit human review."]
+}
