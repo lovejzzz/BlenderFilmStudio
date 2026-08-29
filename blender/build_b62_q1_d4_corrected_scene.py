@@ -7,6 +7,7 @@ import sys
 import tempfile
 
 import bpy
+from bpy_extras import anim_utils
 from mathutils import Matrix, Vector
 
 
@@ -77,8 +78,10 @@ def animation_snapshot(obj):
     action = obj.animation_data.action if obj.animation_data and obj.animation_data.action else None
     if action is None:
         return None
+    channelbag = anim_utils.animdata_get_channelbag_for_assigned_slot(obj.animation_data)
+    require(channelbag is not None, f"assigned channelbag missing for {obj.name}")
     rows = []
-    for curve in sorted(action.fcurves, key=lambda item: (item.data_path, item.array_index)):
+    for curve in sorted(channelbag.fcurves, key=lambda item: (item.data_path, item.array_index)):
         rows.append({"dataPath": curve.data_path, "arrayIndex": curve.array_index, "points": [[float(point.co.x), float(point.co.y), point.interpolation] for point in curve.keyframe_points]})
     return {"action": action.name, "curves": rows, "sha256": hashlib.sha256(canonical(rows)).hexdigest()}
 
@@ -123,7 +126,9 @@ def main():
     action = corrected.animation_data.action
     require(action is not None, "corrected action missing")
     action.name = "B62_D4_CLOSE_CAMERA_BAKE"
-    for curve in action.fcurves:
+    corrected_channelbag = anim_utils.animdata_get_channelbag_for_assigned_slot(corrected.animation_data)
+    require(corrected_channelbag is not None, "corrected assigned channelbag missing")
+    for curve in corrected_channelbag.fcurves:
         for point in curve.keyframe_points:
             point.interpolation = "LINEAR"
     scene.frame_set(START_FRAME)
@@ -139,7 +144,7 @@ def main():
     require(set(after["objects"]) - set(before["objects"]) == {CORRECTED_NAME}, "unexpected object addition")
     require(set(after["cameras"]) - set(before["cameras"]) == {DATA_NAME}, "unexpected camera-data addition")
     require(set(after["actions"]) - set(before["actions"]) == {"B62_D4_CLOSE_CAMERA_BAKE"}, "unexpected action addition")
-    require(len(bake) == 96 and len(action.fcurves) == 7 and all(len(curve.keyframe_points) == 96 for curve in action.fcurves), "bake roster mismatch")
+    require(len(bake) == 96 and len(corrected_channelbag.fcurves) == 7 and all(len(curve.keyframe_points) == 96 for curve in corrected_channelbag.fcurves), "bake roster mismatch")
     output_scene = os.path.abspath(args.output_scene)
     os.makedirs(os.path.dirname(output_scene), exist_ok=True)
     require(not os.path.exists(output_scene), "output scene exists")
