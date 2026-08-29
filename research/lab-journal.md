@@ -5297,3 +5297,11 @@ Date: 2026-08-29 · Type: RETAINED REHEARSAL FAILURE / CORRECTION PREREGISTRATIO
 tool freeze `37d9524…`推送后，从本机仓库创建fresh clone `/tmp/b62-rehearsal-37d9524`。zero-Blender preflight在模块加载时因`ERR_MODULE_NOT_FOUND: ajv`退出；clone与official preflight roots均absent，attempt/formal absent，没有Blender、render、model、network或Docker操作。根因为三个B62 Node入口只为读取`repositoryRoot`却导入通用SceneSpec模块，后者顶层依赖Ajv；主工作树已有node_modules掩盖了缺陷。
 
 C2在retry前只授权三个Node入口用Node built-ins从`import.meta.url`推导repository root，并把C2加入tool hashes/ancestry。明确禁止给clone安装或symlink node_modules，也禁止改变任何资产、镜头、render dose、timeout、预算、gate、attack或verdict。修正后必须新的tool freeze与新的fresh clone；失败clone不作为official evidence。
+
+## J-415 · B62 Phase 0 C2 fresh-clone rehearsal PASS
+
+Date: 2026-08-29 · Type: ZERO-BLENDER REHEARSAL · New B62 Blender processes: 0 · New B62 renders: 0
+
+C2实现只修改三个Node入口：移除SceneSpec/Ajv传递依赖，以Node built-ins执行canonical hash、durable JSON与repository-contained path checks；tool freeze `21d49742…`推送且HEAD/origin exact。另建fresh local clone `/tmp/b62-rehearsal-21d4974`，没有安装或symlink node_modules。
+
+clean clone preflight得到9/9 ACCEPTED，self-hash `ca53e2ce4d83391e49c8e18a6b6d56c3c139682b7b74a9a1d1bf89ae61b43960`；upstream receipts、prereg/C1/C2 ancestry、tool hashes、runtime executables、291 render budget、18/16 rosters与disk reserve均exact。观测available `313,538,138,112` bytes，projected 2 GiB，reserve 100 GiB；operations明确为0 child/Blender/render/model/network/Docker。该clone只作rehearsal，随后移出`/tmp`，其preflight不作为official evidence。下一动作是在主仓库相同tool freeze上生成official zero-Blender preflight并提交推送。
