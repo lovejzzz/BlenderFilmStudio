@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "bfs.host-capacity-sentinel.v0.1",
+  "experimentId": "B59-G0-R5",
+  "status": "PREREGISTERED",
+  "parentCommit": "5f1515cab482b5339084ae3ca5f1a16ae37fbc43",
+  "parentEvidence": {
+    "resultsPath": "experiments/codex-host-stability-post-reclaim-v0-1/results.json",
+    "resultsSha256": "4f7b7dbe2881b20301bee3a7c0897bfad43f7808b5788a09e22b7d247195bfe7",
+    "auditPath": "experiments/codex-host-stability-post-reclaim-v0-1/audit.json",
+    "auditSha256": "f696592bfd8386d6b5696998072a987296655d252cd3b2384eeeefa2f67eb773",
+    "verdict": "ADMITTED_FOR_GATE0_CLOSEOUT"
+  },
+  "releasePaths": [
+    "specs/host-capacity-sentinel.v0.1.json",
+    "research/2026-08-29-b59-g0-r5-capacity-sentinel-protocol.md",
+    "scripts/host-capacity-sentinel.mjs",
+    "scripts/install-host-capacity-sentinel.mjs",
+    "scripts/audit-host-capacity-sentinel.mjs",
+    "launchd/com.blenderfilmstudio.capacity-sentinel.plist"
+  ],
+  "runtime": {
+    "nodeExecutable": "/opt/homebrew/Cellar/node/26.5.0/bin/node",
+    "nodeSha256": "70851490e028b3d699a8d6d4e1de909af2a989359ae807974c92af9c6580a8e8",
+    "repositoryRoot": "/Users/tianxing/CodexProjects/FilmMaking/Reference/BlenderFilmStudio",
+    "volumeTarget": "/"
+  },
+  "schedule": {
+    "launchdLabel": "com.blenderfilmstudio.capacity-sentinel",
+    "intervalSeconds": 900,
+    "runAtLoad": true,
+    "maximumExpectedLagSeconds": 300,
+    "notificationRepeatSeconds": 21600
+  },
+  "state": {
+    "root": "/Users/tianxing/.local/state/BlenderFilmStudio/capacity-sentinel-v0-1",
+    "latestFile": "latest.json",
+    "historyFile": "history.json",
+    "alertFile": "alert.json",
+    "maximumHistorySamples": 192,
+    "maximumStateFileBytes": 262144,
+    "maximumBrowserEntries": 10000
+  },
+  "tracked": {
+    "browserTempFilesystemPath": "/Users/tianxing/Library/Application Support/Codex/Default/Partitions/codex-browser-app/File System",
+    "colimaVmDiskPath": "/Users/tianxing/.colima/_lima/colima/disk",
+    "colimaDataDiskPath": "/Users/tianxing/.colima/_lima/_disks/colima/datadisk"
+  },
+  "thresholds": {
+    "warningAvailableBytes": 268435456000,
+    "criticalAvailableBytes": 193273528320,
+    "emergencyAvailableBytes": 150323855360,
+    "rapidLossBytes": 10737418240,
+    "rapidLossMinimumSpanSeconds": 600,
+    "rapidLossMaximumSpanSeconds": 1800,
+    "longLossBytes": 26843545600,
+    "longLossMinimumSpanSeconds": 64800,
+    "longLossMaximumSpanSeconds": 108000,
+    "browserWarningBytes": 67108864,
+    "browserCriticalBytes": 1073741824
+  },
+  "severityOrder": [
+    "HEALTHY",
+    "WARNING_RAPID_LOSS",
+    "WARNING_CAPACITY",
+    "CRITICAL_CAPACITY",
+    "EMERGENCY_CAPACITY",
+    "SENSOR_ERROR"
+  ],
+  "policy": {
+    "automaticDeletion": false,
+    "automaticCleanup": false,
+    "automaticServiceRestart": false,
+    "networkCalls": false,
+    "modelCalls": false,
+    "blenderProcesses": false,
+    "dockerCalls": false,
+    "localNotificationOnTransition": true,
+    "productionRecommendationFailClosedAt": "WARNING_RAPID_LOSS"
+  },
+  "requiredGates": [
+    "SPEC_AND_PARENT_IDENTITY",
+    "PURE_CLASSIFIER_BOUNDARIES",
+    "RAPID_AND_LONG_LOSS_DETECTION",
+    "HISTORY_IS_BOUNDED",
+    "STATE_WRITES_ARE_ATOMIC_AND_BOUNDED",
+    "NO_AUTOMATIC_DELETION_OR_RESTART",
+    "LAUNCHD_TEMPLATE_EXACT",
+    "INSTALLATION_EXACT_AND_REVERSIBLE",
+    "LIVE_SAMPLE_VALID",
+    "INDEPENDENT_AUDIT_REPLAY"
+  ],
+  "registeredAttacks": [
+    "A01_SPEC_SHA_MUTATION",
+    "A02_PARENT_EVIDENCE_MUTATION",
+    "A03_WARNING_FLOOR_BYPASS",
+    "A04_CRITICAL_FLOOR_BYPASS",
+    "A05_EMERGENCY_FLOOR_BYPASS",
+    "A06_RAPID_LOSS_BYPASS",
+    "A07_LONG_LOSS_BYPASS",
+    "A08_HISTORY_OVERFLOW",
+    "A09_STALE_SAMPLE_ACCEPTANCE",
+    "A10_BROWSER_CRITICAL_BYPASS",
+    "A11_SELF_HASH_MUTATION",
+    "A12_LAUNCHD_LABEL_MUTATION",
+    "A13_LAUNCHD_INTERVAL_MUTATION",
+    "A14_RUNTIME_PATH_MUTATION",
+    "A15_AUTOMATIC_CLEANUP_MUTATION"
+  ]
+}
