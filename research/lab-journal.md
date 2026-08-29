@@ -4931,3 +4931,13 @@ B58关闭后，下一项正式实验冻结为B60-E1：同一B03人物资产、Ac
 第一次静态输入尝试使用非数字shot ID，被SceneSpec v0.2 schema在BuildPlan前正确拒绝；Blender启动0。正式输入已改为合法数字ID，三份静态BuildPlan成功。人物资产、ActorSpec与动作文件哈希保持`10feb54a… / 4299388f… / 165ea0b9…`；Blender实机版本为`5.2.0 LTS / fbe6228777e7`，磁盘可用约297 GiB，高于100 GiB reserve。
 
 正式协议预注册15项gate、10项单字段负控、六次production compiler/native Blender上限和zero-render/model/network/Docker边界。共享投影覆盖actor/asset/target/light/world、除目录外的render、output/security与真实scene structure；唯一允许变化为shot标识、camera和两个planned output-root字段。三项candidate tools及三条official roots当前均不存在。下一动作是提交推送本协议与三份SceneSpec，随后才实现preflight/runner/independent auditor。
+
+## J-375 · B60 outer preflight、formal runner与独立auditor候选
+
+Date: 2026-08-29 · Type: B60 TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+预注册commit `97e3afee8fc44695a4a3277265a051dd1a3cf272`推送后，新增三项candidate tools。Outer preflight要求tool-freeze commit等于pushed HEAD/origin，重开七份冻结输入，三份BuildPlan各生成两次，验证identity locks、共享投影与摄影机差异，然后调用六个production preflight children；正式根和attempt根保持fresh。
+
+Formal runner绑定独立的tool-freeze commit与后续preflight-evidence commit，先写self-hashed attempt/admission/receipt，再为六个case各调用一次已准入production compiler，最后只调用一次独立auditor。Auditor不信任runner汇总：它重开七份输入、outer/child preflight、18份authorization records、六份production receipt、BuildPlan、canonical structure、manifest、budget/compile receipt和blend identity，直接验证A/B重复、跨镜头共享投影、camera contract、runtime、root roster与self/file hashes；10项负控均为内存单字段mutation，不改正式证据、不启Blender。
+
+Preflight/runner/auditor SHA-256为`075ac274673b79b728f626a3bf65d8871e4cc992186fda068326a8d693a8a961` / `894f960bdc955a3f0317d04cc558d2a3dc6b14a43ee8245001ab190217006ab0` / `912e8df044543af94ee936348e50f18eef2d4a3f9c7c53d00268562ac5dd7a70`。三工具Node syntax、targeted ESLint zero-warning及diff check通过；三条official roots仍不存在。下一动作提交推送这些exact bytes形成tool freeze，再用fresh clone运行zero-Blender rehearsal；主仓库official preflight在rehearsal成功前不得创建。
