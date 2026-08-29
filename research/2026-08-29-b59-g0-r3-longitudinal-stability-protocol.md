@@ -12,6 +12,12 @@ After R2 admitted one post-restart snapshot, can the same Codex process remain i
 
 R3 captures exactly four immutable samples. Adjacent samples must be at least 120 seconds apart and the first-to-last span must be at least 360 seconds. A sample more than 15 seconds late fails the timing gate; the runner may resume an interrupted observation but may neither backdate nor replace an existing sample.
 
+### Preregistered correction C1: actual-capture interval anchoring
+
+The first disposable rehearsal showed that fixed wall-clock due times can produce adjacent actual captures a few milliseconds below the minimum because the preceding sample itself finishes after its scheduled time. Before any formal R3 root existed, C1 changed each next due time to the later of its original wall-clock slot or the preceding sample's actual capture time plus the frozen minimum interval. This preserves the 120-second minimum and 360-second total span without changing either threshold.
+
+The same rehearsal exposed that A05 used a hard-coded 1,000 ms forged interval, which equals rather than violates a one-second rehearsal spec. C1 defines the forged interval as the selected spec's minimum minus one millisecond. The production attack identifier and gate remain unchanged.
+
 Each sample records current Codex version and app identity, main PID set, renderer count, maximum renderer RSS, total Codex-tree RSS, system-wide free-memory percentage, available disk bytes, browser temporary-filesystem allocated bytes and entry count, forbidden-process counts, and matching post-start Codex crash reports. Large process listings and file inventories are never returned to the UI.
 
 ## Frozen longitudinal limits
