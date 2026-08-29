@@ -4983,3 +4983,13 @@ Date: 2026-08-29 · Type: RENDER CALIBRATION COUNTEREXAMPLE / CORRECTION PREREGI
 根因是production compiler通过`OCIO`环境变量加载verified config，而独立render invocation遗漏该环境；`.blend`不打包配置。v0.1保留7 files / 2,752,881 bytes，tree hash `2c0623c3…`；failure file SHA/self-hash为`e5ab5bfa… / 52322c6e…`，status `INVALIDATED / OCIO_RUNTIME_NOT_PINNED`。Blender/render/frame计数2/2/2，model/network/Docker为0，磁盘约297 GiB available。
 
 C1只授权在fresh v0.2 root启动前设置exact `OCIO`绝对路径，并先验证config SHA `24ec8184…`；source/frame/resolution/32+64 samples/engine/device/format/timeout与上限均不变。新增四项in-process color assertions与zero color-warning门。下一动作提交推送v0.1完整失败证据、C1与本entry，随后才创建v0.2 root。
+
+## J-380 · B61校准v0.2 startup warning反例与C2预注册
+
+Date: 2026-08-29 · Type: RENDER CALIBRATION COUNTEREXAMPLE / AUDIT-PHASE CORRECTION · Real Blender processes: 1 · Rendered frames: 1
+
+v0.1反例/C1 commit `fa705ff`推送后，v0.2 CAL32在exact OCIO environment下启动。四项target-scene assertions全部通过，3.50秒写出EXR；但stdout仍有5条color warning，触发预注册zero-warning gate，runner因此未启动CAL64。v0.2按协议判`INVALIDATED / PREREGISTERED_ZERO_COLOR_WARNING_GATE_FAILED`，不能把CAL32当作成功校准。
+
+日志时序证明五条warning全部在目标`blend | Read blend`之前：它们把Blender默认startup scene的built-in sRGB/AgX/Standard迁移到自定义ACES config，而不是目标blend回退。v0.2固定为4 files / 1,382,142 bytes，tree hash `f3c2d8bc…`；failure file SHA/self-hash `b3cb19fd… / efe31eda…`。Operations为1 Blender、1 render、1 frame、zero model/network/Docker。
+
+C2只授权把日志门改成phase-aware：必须验证exact OCIO与目标Read-blend事件；只容忍其之前的startup迁移warning，Read-blend之后任何color warning仍拒绝，并继续要求四项in-process assertions。Fresh v0.3 root当前不存在；所有渲染参数和资源上限不变。下一动作提交推送v0.2失败证据/C2，再运行v0.3两个case。
