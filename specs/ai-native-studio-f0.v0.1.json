@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovejzzz.github.io/BlenderFilmStudio/specs/ai-native-studio-f0.v0.1.json",
+  "title": "AI Native Film Studio F0 Source Feasibility",
+  "version": "0.1.0",
+  "status": "PREREGISTERED",
+  "preregisteredAt": "2026-08-29",
+  "question": "Does modifying official Blender source create enough reliable film-native control to justify the ownership, merge and distribution cost of a thin fork?",
+  "baseline": {
+    "repository": "https://projects.blender.org/blender/blender.git",
+    "tag": "v5.2.0",
+    "commit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "hostClass": "macOS Apple Silicon",
+    "distributionName": "Film Studio Engine F0",
+    "bundleIdentifier": "studio.ainativefilm.f0",
+    "configurationNamespace": "FilmStudioEngineF0"
+  },
+  "resources": {
+    "minimumFreeGiB": 160,
+    "reservedFreeGiB": 100,
+    "projectedWritesGiB": 60,
+    "sourceAndBuildLocation": "absolute path outside BlenderFilmStudio repository",
+    "maximumSingleGateWallHours": 12
+  },
+  "verdicts": ["PASS", "FAIL", "BLOCKED"],
+  "gates": [
+    {
+      "id": "F0.1",
+      "name": "Reproducible source build",
+      "dependsOn": [],
+      "requiredRuns": 2,
+      "acceptance": [
+        "Two clean builds from the pinned source on the admitted host exit successfully",
+        "Both binaries report Blender 5.2.0 and the pinned source identity",
+        "Binary bundles are semantically identical; any byte difference is localized and explained",
+        "Receipt records source, dependencies, toolchain, commands, wall time, peak memory and disk delta",
+        "A deliberate one-byte-below disk admission case launches no compiler or Blender process"
+      ],
+      "negativeControls": ["disk free bytes below admission threshold", "source HEAD differs from pinned commit"],
+      "evidence": ["host-preflight.json", "build-a/receipt.json", "build-b/receipt.json", "comparison.json", "negative-control/receipt.json"]
+    },
+    {
+      "id": "F0.2",
+      "name": "Independent product identity",
+      "dependsOn": ["F0.1"],
+      "acceptance": [
+        "User-visible product name is Film Studio Engine F0 and does not present Blender as the product brand",
+        "macOS bundle identifier is studio.ainativefilm.f0",
+        "Icon and splash are project-owned placeholders with recorded provenance",
+        "Configuration root is isolated from official Blender",
+        "Launching and resetting the F0 app does not mutate official Blender preferences"
+      ],
+      "negativeControls": ["official Blender configuration hash before and after F0 launch"],
+      "evidence": ["identity.patch", "bundle-inspection.json", "configuration-isolation.json", "screenshots/"]
+    },
+    {
+      "id": "F0.3",
+      "name": "Minimum film workspace",
+      "dependsOn": ["F0.2"],
+      "acceptance": [
+        "A native start surface exposes Project, Scene, Shot and Character objects",
+        "A user can create and select one shot without navigating the generic DCC layout",
+        "Expert Mode exposes the complete Blender workspace without data conversion",
+        "Workspace state survives save, quit and reopen",
+        "At least one task requires fewer interactions than the frozen official-Blender baseline"
+      ],
+      "negativeControls": ["reopen with missing optional workspace state", "switch to Expert Mode and back"],
+      "evidence": ["interaction-baseline.json", "workspace-task.json", "persistence.json", "expert-mode-roundtrip.json"]
+    },
+    {
+      "id": "F0.4",
+      "name": "Embedded typed contract",
+      "dependsOn": ["F0.3"],
+      "acceptance": [
+        "The product accepts the frozen SceneSpec fixture without arbitrary generated Python",
+        "Embedded and external compilers produce canonical-exact BuildPlan bytes",
+        "B01 and B02 fixtures build successfully in isolated clean roots",
+        "Invalid schema, semantic and path fixtures are rejected before scene mutation",
+        "Proposal diff and approval scope are visible before execution"
+      ],
+      "negativeControls": ["unknown field", "path escape", "non-finite number", "unapproved mutation"],
+      "evidence": ["canonical-comparison.json", "b01/receipt.json", "b02/receipt.json", "negative-fixtures.json"]
+    },
+    {
+      "id": "F0.5",
+      "name": "Headless render and receipts",
+      "dependsOn": ["F0.4"],
+      "acceptance": [
+        "One approved job produces EEVEE preview and Cycles multilayer EXR without mouse input",
+        "Decoded pixel and pass semantics are independently audited",
+        "Process, timing, peak memory, disk and output identities are cross-bound",
+        "An interrupted stage resumes only from verified immutable receipts",
+        "A rejected admission launches no native renderer"
+      ],
+      "negativeControls": ["renderer interruption", "tampered receipt", "insufficient disk"],
+      "evidence": ["job-manifest.json", "preview/receipt.json", "final/receipt.json", "audit.json", "recovery.json"]
+    },
+    {
+      "id": "F0.6",
+      "name": "Pinned upstream merge drill",
+      "dependsOn": ["F0.5"],
+      "mergeTargetCommit": "9e2066aef7ef7e20c142ad7bd3303138a4304c93",
+      "acceptance": [
+        "Merge target and test corpus are frozen before the merge begins",
+        "No more than 10 source paths require manual conflict resolution",
+        "Manual conflict resolution takes no more than 8 person-hours",
+        "Fork-owned source patch is no more than 5000 non-generated changed lines",
+        "All F0.1-F0.5 conformance fixtures retain their prior verdicts"
+      ],
+      "fallbackTrigger": "Any numeric ceiling is exceeded or a core patch cannot be isolated without weakening a frozen contract",
+      "evidence": ["merge-preregistration.json", "conflicts.json", "time-log.json", "patch-surface.json", "regression.json"]
+    },
+    {
+      "id": "F0.7",
+      "name": "macOS package and round trip",
+      "dependsOn": ["F0.6"],
+      "acceptance": [
+        "Unsigned research package installs and uninstalls without touching official Blender",
+        "Signing and notarization commands, credentials boundary and expected cost are documented",
+        "One official-Blender `.blend` file opens and re-saves without semantic regression",
+        "One F0-created `.blend` file opens in official Blender with declared graceful degradation",
+        "Preferences and caches remain in the independent configuration namespace"
+      ],
+      "negativeControls": ["missing optional Film Studio metadata", "uninstall with official Blender installed"],
+      "evidence": ["package-manifest.json", "install-uninstall.json", "signing-path.md", "roundtrip.json", "configuration-isolation.json"]
+    }
+  ],
+  "programDecision": {
+    "thinFork": "Adopt only if all seven gates pass and no fallback trigger fires",
+    "externalShell": "Recommend if F0.6 or F0.7 exceeds its ceiling, or source changes add no measured control/UX advantage",
+    "inconclusive": "Keep status BLOCKED when required external authority or hardware is absent; do not relabel as PASS"
+  }
+}

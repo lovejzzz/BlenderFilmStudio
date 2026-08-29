@@ -1,45 +1,79 @@
 # BlenderFilmStudio agent operating rules
 
+## Read this first
+
+The authoritative cold-start entry is [`START_HERE.md`](./START_HERE.md). Read
+it before changing code, running Blender, or extending the research catalog.
+Then read the machine-readable snapshot at
+[`handoff/ai-native-studio-current-state.v0.1.json`](./handoff/ai-native-studio-current-state.v0.1.json).
+
 ## Current operating goal
 
-Build BlenderFilmStudio into a low-cost, restart-safe and independently
-auditable Blender 5.2 film-production pipeline, then use it to deliver one
-finished cinematic proof rather than indefinitely expanding the research
-catalog.
+Execute `F0-SOURCE-FEASIBILITY`: determine, with real Blender 5.2 source code
+and reproducible evidence, whether BlenderFilmStudio should become a thin fork
+of the official Blender engine or remain an external studio shell.
 
-The terminal acceptance artifact is a 10–20 second sequence containing at
-least three continuous shots with a consistent character and environment. A
-single command from a clean output root must be able to compile the frozen
-shot brief through `SceneSpec -> immutable BuildPlan -> Blender`, survive one
-controlled Blender interruption and a Codex restart, resume only from verified
-receipts, and finish the EXR and delivery-video outputs. The asset, structure,
-cost, process and output receipts must be independently replayable. The code,
-failures, journal, evidence and research page must all be pushed and published.
-No generative video model participates in the image pipeline.
+The selected hypothesis is an independently branded, GPL-compliant, AI-native
+film application built on the official Blender source. Bforartists is a design
+and maintenance reference, not the source baseline. The fallback is an external
+Film Studio process controlling an unmodified Blender build.
 
-The work is ordered by four gates:
+Do not resume B62 as the primary goal. B01-B62 are inherited evidence and the
+future conformance suite. They may be rerun only when an F0 gate names them as a
+fixture or regression.
 
-1. **Control-plane stability.** Terminal-first operation, bounded tool output,
-   the in-app-browser guard below, at least 100 GiB free-space reserve plus
-   projected writes, native-spawn just-in-time admission, unique immutable
-   output roots, and an immediate journal/commit/push checkpoint after every
-   atomic result.
-2. **B57 closure.** Prove the disk readmission and receipt cross-binding with
-   26/26 formal gates, at least 56/56 semantic attacks, four real clean Blender
-   compilations, and a one-byte-below negative case that launches no restricted
-   or native process.
-3. **Restart-safe orchestration.** Add a durable job manifest, stage
-   checkpoints, idempotent recovery, resource accounting and fault injection so
-   a crash or restart loses no accepted evidence and never reruns a completed
-   immutable stage.
-4. **Cinematic proof.** Compile the real character, environment, animation,
-   camera, lighting, materials and render, verify cross-shot consistency, then
-   publish the finished proof and its exact limitations.
+The work is ordered by seven gates defined in
+[`specs/ai-native-studio-f0.v0.1.json`](./specs/ai-native-studio-f0.v0.1.json):
 
-Reaching gate 4 is the stopping condition. At that point, stop creating new
-research IDs for adjacent questions and issue a final boundary report. Until
-then, prioritize the next unmet gate over new website tabs, broad surveys or
-unrelated experiments.
+1. **F0.1 Reproducible source build.** Build the pinned official Blender 5.2.0
+   source commit on the new host and produce a binary plus source, dependency,
+   toolchain, timing and resource receipts.
+2. **F0.2 Independent identity.** Prove a separate name, bundle identifier,
+   icon, splash and configuration root without using Blender as the product
+   brand.
+3. **F0.3 Film workspace.** Implement the smallest Project / Scene / Shot /
+   Character workspace while preserving an explicit Expert Mode.
+4. **F0.4 Embedded contract.** Accept the frozen SceneSpec and produce a
+   BuildPlan canonical-exact with the existing external compiler before
+   building the B01/B02 fixtures.
+5. **F0.5 Render and receipts.** Without mouse interaction, produce an EEVEE
+   preview, Cycles EXR and independently auditable process, pixel, cost and
+   failure receipts.
+6. **F0.6 Upstream merge drill.** Merge a preregistered later Blender commit
+   interval and measure conflicts, patch surface, human time and regressions.
+7. **F0.7 Package and round trip.** Install and uninstall the macOS app, define
+   signing/notarization, isolate configuration and pass `.blend` round trips.
+
+F0 is complete only when every gate has an evidence root and an explicit
+`PASS`, `FAIL`, or `BLOCKED` verdict. A failed gate is a valid scientific
+result. If source ownership is not justified by measured UX/control benefits,
+or merge/package cost crosses the preregistered ceiling, recommend the external
+shell rather than expanding the fork.
+
+## Cold-start execution rules
+
+- First run the read-only host check:
+  `node scripts/preflight-f0-source-host.mjs`.
+- Keep Blender source, dependencies and builds outside this research repository.
+  Never vendor a Blender checkout or generated build tree here.
+- Use official Blender source tag `v5.2.0`, commit
+  `fbe6228777e7d9afefcd61a413844e790ae75db7`, until a versioned protocol
+  amendment changes it.
+- Preregister each gate before the first mutation. Freeze inputs, expected
+  outputs, thresholds, negative controls, resource ceiling and stop rule.
+- Use unique immutable evidence roots. Never overwrite a failed or accepted
+  run; corrections must cross-bind the prior receipt.
+- Preserve at least 100 GiB free disk plus all projected writes before native
+  builds or renders. No source build begins if the admission check fails.
+- Record the exact Git commit, Blender source commit, host/toolchain identity,
+  commands, timings, peak resources, artifacts, hashes and negative results.
+- After each atomic result: update the journal/protocol, commit only related
+  files, push, and verify the public route with a non-browser HTTP request.
+- Do not weaken frozen thresholds to convert a rejection into a pass.
+- Do not modify historical specs, receipts or experiment outputs in place. Add
+  a versioned correction or a new experiment root.
+- Do not make broad cleanup changes. The worktree may contain user-owned files;
+  inspect and preserve them.
 
 ## In-app browser stability guard
 

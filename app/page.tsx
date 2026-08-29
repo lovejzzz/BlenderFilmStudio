@@ -275,7 +275,7 @@ export default function Home() {
           <p className="eyebrow"><span /> RESEARCH DOSSIER · 研究基线 01</p>
           <h1>AI 能否把导演意图<br />编译成<span>影院级 Blender 镜头？</span></h1>
           <p className="dek">一份面向实际制作的技术可行性调查：逐环节区分“已经可生产”、“需要人工监督”、“仍属研究阶段”和“尚不可可靠实现”。</p>
-          <div className="hero-actions"><Link className="primary-button" href="/ai-native-studio-design">最新方向：AI 原生 Studio <span>→</span></Link><a className="text-link" href="#pipeline">查看技术链</a></div>
+          <div className="hero-actions"><Link className="primary-button" href="/ai-native-studio-handoff">新机器交接 <span>→</span></Link><Link className="text-link" href="/ai-native-studio-design">AI 原生 Studio 设计</Link><a className="text-link" href="#pipeline">查看技术链</a></div>
         </div>
         <aside className="hypothesis">
           <p className="card-kicker">核心假设</p>
@@ -287,7 +287,7 @@ export default function Home() {
 
       <section className="direction-launch" aria-labelledby="direction-title">
         <div><span>LATEST DIRECTION · ADR-001</span><h2 id="direction-title">从 AI 操作 Blender，<br />升级为 Blender 内核上的<br /><b>AI 原生电影软件。</b></h2></div>
-        <div><p>我们将直接研究 Blender 官方开源代码，建立独立品牌和电影工作台；既有 SceneSpec、BuildPlan、准入、收据、恢复、像素与成本实验全部成为新软件的符合性测试。</p><ul><li>Direct Blender thin fork</li><li>Typed AI action protocol</li><li>GPL engine + separated model adapters</li><li>7 个源码可行性 Gate</li></ul><Link href="/ai-native-studio-design">阅读完整 Design Doc →</Link></div>
+        <div><p>我们将直接研究 Blender 官方开源代码，建立独立品牌和电影工作台；既有 SceneSpec、BuildPlan、准入、收据、恢复、像素与成本实验全部成为新软件的符合性测试。</p><ul><li>Direct Blender thin fork</li><li>Typed AI action protocol</li><li>GPL engine + separated model adapters</li><li>7 个源码可行性 Gate</li></ul><Link href="/ai-native-studio-handoff">新机器从这里开始 →</Link><Link href="/ai-native-studio-design">阅读完整 Design Doc →</Link></div>
       </section>
 
       <section className="section thesis" id="verdict">

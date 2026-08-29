@@ -122,7 +122,7 @@ export default function AiNativeStudioDesignPage() {
     <main className="ain-page">
       <header className="topbar ain-topbar">
         <Link className="brand" href="/" aria-label="返回研究首页"><span className="brand-mark">BFS</span><span>Blender Film Studio</span></Link>
-        <nav aria-label="AI Native Studio 设计导航"><a href="#decision">决策</a><a href="#evidence">已有证据</a><a href="#architecture">架构</a><a href="#experience">产品</a><a href="#source">源码</a><a href="#license">许可</a><a href="#gates">F0</a><Link href="/journal">实验日志</Link></nav>
+        <nav aria-label="AI Native Studio 设计导航"><Link href="/ai-native-studio-handoff">新机器交接</Link><a href="#decision">决策</a><a href="#evidence">已有证据</a><a href="#architecture">架构</a><a href="#experience">产品</a><a href="#source">源码</a><a href="#license">许可</a><a href="#gates">F0</a><Link href="/journal">实验日志</Link></nav>
         <span className="edition ain-edition">Direction · ADR-001</span>
       </header>
 
@@ -246,10 +246,10 @@ export default function AiNativeStudioDesignPage() {
         <div className="section-index light">11 / PRIMARY SOURCES</div>
         <div className="ain-section-heading light"><div><p className="eyebrow"><span /> RESEARCH BASIS</p><h2>许可证决定边界。<br /><span>真实实验决定主张。</span></h2></div><p>外部来源用于确认源码、构建、架构、商标和许可证；产品可靠性结论只来自本仓库冻结协议下的真实 Blender 实验。</p></div>
         <ol className="ain-source-list">{sources.map(([author,title,href],index) => <li key={href}><span>{String(index + 1).padStart(2,'0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
-        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>F0-SOURCE-FEASIBILITY</h3><p>先冻结 Blender source commit、依赖、构建环境、磁盘预算、允许修改文件、应用身份和上游 merge 区间，再运行真实源码构建。F0.1–F0.7 全部关闭后，才创建正式引擎仓库。</p></div></div>
+        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>F0-SOURCE-FEASIBILITY</h3><p>源码已冻结为 Blender v5.2.0 / fbe6228777e7。新机器先执行只读 host preflight，再进入两次 clean source build。F0.1–F0.7 全部关闭后，才创建正式引擎仓库。</p><Link href="/ai-native-studio-handoff">打开新机器冷启动包 →</Link></div></div>
       </section>
 
-      <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · Design Doc v0.1</b></div><p>Direction adopted · Implementation gated · Snapshot 2026-08-29</p><Link href="/journal">继续查看真实 Blender 实验 →</Link></footer>
+      <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · Design Doc v0.1</b></div><p>Direction adopted · Implementation gated · Snapshot 2026-08-29</p><Link href="/ai-native-studio-handoff">新机器从这里开始 →</Link></footer>
     </main>
   );
 }

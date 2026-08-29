@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "0.1.0",
+  "snapshotDate": "2026-08-29",
+  "project": "BlenderFilmStudio",
+  "activeProgram": "AI Native Film Studio",
+  "status": "F0_PREREGISTERED_NOT_STARTED",
+  "decision": {
+    "id": "ADR-001",
+    "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
+    "referenceOnly": "Bforartists for UI and fork-maintenance study",
+    "fallback": "External Film Studio shell controlling an unmodified Blender build",
+    "forkDecisionFinal": false
+  },
+  "sourceBaseline": {
+    "upstream": "https://projects.blender.org/blender/blender.git",
+    "mirror": "https://github.com/blender/blender.git",
+    "tag": "v5.2.0",
+    "commit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "releaseBranchObservedCommit": "9e2066aef7ef7e20c142ad7bd3303138a4304c93",
+    "verifiedAt": "2026-08-29",
+    "sourceCheckoutMustRemainOutsideThisRepository": true
+  },
+  "activeGate": "F0.1",
+  "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
+  "gateVerdicts": {
+    "F0.1": "NOT_RUN",
+    "F0.2": "NOT_RUN",
+    "F0.3": "NOT_RUN",
+    "F0.4": "NOT_RUN",
+    "F0.5": "NOT_RUN",
+    "F0.6": "NOT_RUN",
+    "F0.7": "NOT_RUN"
+  },
+  "inheritedEvidence": {
+    "range": "B01-B62",
+    "role": "conformance and regression evidence, not the active product goal",
+    "supported": [
+      "typed SceneSpec to immutable BuildPlan compilation",
+      "real Blender execution with audit receipts",
+      "cross-shot shared-state controls",
+      "float pixels, sequences and production EXR passes",
+      "resource admission, process receipts and restart-safe orchestration"
+    ],
+    "retainedRejection": "B62 camera Q1 passed 18/18 technical gates but frame 288 failed the preregistered composition threshold"
+  },
+  "authoritativeFiles": [
+    "AGENTS.md",
+    "START_HERE.md",
+    "research/2026-08-29-ai-native-film-studio-design-v0.1.zh-CN.md",
+    "research/2026-08-29-ai-native-film-studio-f0-source-feasibility-protocol-v0.1.zh-CN.md",
+    "specs/ai-native-studio-f0.v0.1.json"
+  ],
+  "firstCommands": [
+    "git status --short",
+    "node scripts/preflight-f0-source-host.mjs",
+    "scripts/bootstrap-f0-blender-source.sh --workspace /absolute/path/to/f0-workspace",
+    "scripts/bootstrap-f0-blender-source.sh --workspace /absolute/path/to/f0-workspace --execute"
+  ],
+  "resourcePolicy": {
+    "freeSpaceReserveGiB": 100,
+    "initialProjectedWriteGiB": 60,
+    "minimumFreeBeforeBootstrapGiB": 160,
+    "nativeMutationRequiresFreshAdmission": true
+  },
+  "evidencePolicy": {
+    "immutableRoots": true,
+    "retainFailures": true,
+    "crossBindCorrections": true,
+    "recordExactCommands": true,
+    "recordHostAndToolchain": true,
+    "commitAndPushAtomicCheckpoints": true,
+    "allowedVerdicts": ["PASS", "FAIL", "BLOCKED"]
+  },
+  "prohibitions": [
+    "Do not resume B62 as the primary goal",
+    "Do not vendor Blender source or builds into this repository",
+    "Do not create the permanent engine repository before F0 closes",
+    "Do not weaken thresholds after observing results",
+    "Do not overwrite historical receipts or failed runs",
+    "Do not use in-app browser automation while the AGENTS.md crash guard is active",
+    "Do not stage unrelated owner changes"
+  ],
+  "nextExpectedCheckpoint": {
+    "gate": "F0.1",
+    "result": "A reproducible native Blender 5.2.0 source build or a bounded failure with full evidence",
+    "requiredArtifacts": [
+      "host preflight receipt",
+      "source and dependency identity",
+      "toolchain identity",
+      "exact build command",
+      "timing and resource measurements",
+      "binary identity or failure logs",
+      "journal entry"
+    ]
+  }
+}
