@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "bfs.restartSafeProductionOrchestratorRetryRootCorrection.v0.1",
+  "correctionId": "B58-E1-C5",
+  "status": "PREREGISTERED_AFTER_OFFICIAL_PREFLIGHT_REJECTION_BEFORE_RETRY_OUTPUT",
+  "date": "2026-08-29",
+  "failedOfficialPreflight": {
+    "root": "experiments/restart-safe-production-orchestrator-preflight-v0-1",
+    "receipt": "experiments/restart-safe-production-orchestrator-preflight-v0-1/production-preflights/BASELINE_B01/preflight.json",
+    "sha256": "5b49bd337055e088efa091dba3228b4296c66861108294e0d86d0cd28ec8cec5",
+    "preflightHash": "151776edd83415305481eb9e19a7e5386fbb8d54e657309a2dcd98a045e427a9",
+    "status": "REJECTED",
+    "reason": "RELEASE_COMMIT",
+    "submittedCommit": "c8647647743e5e0ba55eb94b4b330ee693d8997a",
+    "actualToolFreezeCommit": "c86476405af442b419141e69609bfaed59c7f3cd",
+    "outerReceiptAbsent": true,
+    "attemptRootAbsent": true,
+    "formalRootAbsent": true,
+    "blenderProcesses": 0
+  },
+  "authorizedRetryRoots": {
+    "preflight": "experiments/restart-safe-production-orchestrator-preflight-v0-2",
+    "attempt": "experiments/restart-safe-production-orchestrator-attempt-v0-2",
+    "formal": "experiments/restart-safe-production-orchestrator-v0-2"
+  },
+  "retryRequirements": {
+    "failedV01ReceiptRetainedAndExact": true,
+    "v01RootNeverReused": true,
+    "allV02RootsFreshBeforeRetry": true,
+    "toolFreezeCommitMustResolveAndEqualHeadAndOriginMain": true,
+    "retryCount": 1
+  },
+  "additionalSemanticAttacks": [
+    "C5_A01_FAILED_V01_RECEIPT_REMOVED_OR_MUTATED",
+    "C5_A02_RETRY_ROOT_REUSES_V01"
+  ],
+  "unchanged": [
+    "B57 production surface and all B58 orchestration semantics",
+    "B58 34-gate denominator, 72 attacks and all C1-C4 attacks",
+    "all DAG, process ceilings, disk rules, recovery rules and verdict thresholds"
+  ]
+}

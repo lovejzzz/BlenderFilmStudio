@@ -4835,3 +4835,13 @@ C4 preregistration commit `cc808b45cacd50e415c957c6a40694e07f0151dc`推送后，
 Runner在materialize attempt root之前复核C4 spec hash、parent spelling、policy、5份nested accepted receipts；independent auditor直接重开B58 preflight source和evidence，2项C4攻击分别变异parent preparation与failure-before-read ordering。原34 gates、72 attacks、C1 8、C2 6、C3 2和所有B57 bytes不变。
 
 新的preflight/runner/auditor SHA-256为`e5a5f119bd036557a667be840bc52b2e6ed18ed6d4501dae31c0cf00fce47242` / `7b87b0fcf719ef2c8a9bd50e4f89cc42b515484f2ee152808c9aab26a0dfae22` / `dba355aaed6f12c64858e8d8c40cf194b2d12a3f60f6c79997a3722dcc74ca17`；ledger/orchestrator保持`0946685b991c588fb1ecd6417445c1da42e544026d864d205f3ca69971e07d13` / `d8f3126f34c15d6adb1c6c2324b640fa9aa0756733d008d3087a5b5ab7b5b41a`。三工具Node syntax、targeted ESLint zero-warning与diff check通过；official roots仍不存在。下一动作提交推送这组exact bytes，再在fresh clone运行zero-Blender rehearsal。
+
+## J-365 · B58 official preflight拒绝错误commit输入，C5保留失败并预注册v0.2 retry roots
+
+Date: 2026-08-29 · Type: B58 OFFICIAL PREFLIGHT INPUT FAILURE / RETRY PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+C4 tool-freeze commit `c86476405af442b419141e69609bfaed59c7f3cd`推送后，fresh clone rehearsal通过16/16、5/5 production preflights、4/4 job requests且operations全0。随后第一次official invocation误传了不存在的40位SHA `c8647647743e5e0ba55eb94b4b330ee693d8997a`。首个B57 child正确产生self-hashed `REJECTED / RELEASE_COMMIT`，message为`Release commit is missing: fatal: Needed a single revision`；C4在读取前检测exit 1并停止，未启动其余children。
+
+失败receipt固定在`experiments/restart-safe-production-orchestrator-preflight-v0-1/production-preflights/BASELINE_B01/preflight.json`，SHA/self-hash为`5b49bd337055e088efa091dba3228b4296c66861108294e0d86d0cd28ec8cec5` / `151776edd83415305481eb9e19a7e5386fbb8d54e657309a2dcd98a045e427a9`，operations证明Blender/render/model/network/Docker均0。Outer receipt、v0.1 attempt root和v0.1 formal root不存在。
+
+不得覆盖或清理v0.1失败。C5授权exactly one retry使用fresh/disjoint v0.2 preflight/attempt/formal roots，并要求preflight、runner、independent auditor都重开并验证v0.1失败证据与v0.2 root binding；新增2项攻击覆盖失败证据消失/变异及v0.1 root复用。原34 gates、72+C1-C4 attacks及所有生产语义不变。下一动作提交推送C5 spec/protocol、失败receipt与本entry，然后实现三工具binding；v0.2 roots在此之前不得创建。
