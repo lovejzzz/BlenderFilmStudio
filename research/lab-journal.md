@@ -5331,3 +5331,11 @@ Date: 2026-08-29 · Type: DIAGNOSTIC PASS / RETRY PREREGISTRATION · New B62 Ble
 D2 tool freeze `356f93c…` pushed；one Blender在0.46秒、peak RSS 239,124,480 bytes完成3 repetitions A→B→A。所有A1/A2 `IMAGE`赋值均TypeError reject，所有B `MULTI_LAYER_IMAGE`均accept，9/9 outcomes exact；final MLEXR/RGBA/HALF/ZIP exact，zero render/model/network/Docker。8/8 runner checks与独立audit PASS，result/receipt file/self hashes exact为`1537b178…/6d26de07…`与`1d529640…/c342ff04…`。
 
 C5在production tools未改前冻结v0.2策略：两份Blender工具只加media_type顺序与report字段；三个Node工具只绑定C3/C4/C5、D2 PASS、v0.1 retained trees并换用v0.2 roots。six Blender/291 renders/2 GiB/100 GiB/18 gates/16 attacks与所有claims不变。下一动作先提交推送D2+C5，再实现五文件限定修改与新tool freeze。
+
+## J-419 · B62 Phase 0 v0.2 fresh-clone rehearsal PASS
+
+Date: 2026-08-29 · Type: ZERO-BLENDER RETRY REHEARSAL · New B62 Blender processes: 0 · New B62 renders: 0
+
+五个C5授权文件修改后，v0.2 tool freeze `50f26d400ac56a43516a56429956d2b4b68dc0ea` pushed且HEAD/origin exact。fresh local clone `/tmp/b62-rehearsal-50f26d4`未安装node_modules，v0.2 roots初始absent。
+
+preflight 9/9 ACCEPTED，self-hash `79bbde89542a5faa59dcd584eac2f93e536aac0d2c6884131199f2ab32f82de3`。除C1–C5 ancestry/tool hashes/upstream/runtime/disk外，它重新计算v0.1 attempt/formal与D1 retained trees，并exact绑定D2 result/receipt self-hashes `6d26de07…/c342ff04…`。available 311,752,810,496 bytes，2 GiB projected与100 GiB reserve通过；0 child/Blender/render/model/network/Docker。clone随后移出`/tmp`，不作为official evidence。下一动作主仓库official v0.2 preflight。
