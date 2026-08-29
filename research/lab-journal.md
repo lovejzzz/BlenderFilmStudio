@@ -4921,3 +4921,13 @@ C7 tool-freeze commit `026bf1d04a73847427824c6b0d91c3328343cb8e`与origin exact�
 Corrected independent audit通过34/34 gates、72/72 original attacks、C1 8/8、C2 6/6、C3 2/2、C4 2/2、C5 2/2、C6 5/5、C7 2/2；无failed gates或attacks，final verdict `RESTART_SAFE_PRODUCTION_ORCHESTRATOR_SUPPORTED`。Audit file SHA/self-hash为`6b1f1f8c0d59ecb38d69384dea9633f74f8e8d20fdb79b0efab78a9b10966242` / `bcac6697c735d1cc6572839efb9b870cdf348ac8f0ebe039b0950c1cb3d83c90`；results SHA/self-hash为`f1c5341de4a06f17fa9ae632a4f7b17e3b2a21dd2f5ce3558de86d97c81f96f6` / `3c69da6d5713dd881d6e321a7ba54503465c247a3d9825b15db5a369f46d0f80`；receipt SHA/self-hash为`f6112e89c068207379c0a30cf390822144110d41367a7849e179de6f2b0e9894` / `eef5dbff57191110ea9ca57d58c1c9bb68b5833682a2d16670d94b65a11767d9`。
 
 结论边界：B58现在支持可重启生产编排、持久化stage ledger、exit-86恢复、native Blender受控中断保留/新root重试、live PID拒绝duplicate spawn、3份B01/B02 compile+artifact audit与zero-render操作计数。它不证明最终影院级像素质量、跨镜头角色一致性或成本目标；下一主阶段进入三道生产门，而不是把B58扩大解释为成片完成。
+
+## J-374 · B60三镜头确定编译与共享状态门预注册
+
+Date: 2026-08-29 · Type: B60 PREREGISTRATION · New Blender processes: 0 · New Blender renders: 0
+
+B58关闭后，下一项正式实验冻结为B60-E1：同一B03人物资产、ActorSpec、144帧表演、targets、双灯与world组成wide/medium/close三镜头；每镜头独立production compile两次，共六次真实Blender编译。三份输入为`SHOT_6001 / 40 mm`、`SHOT_6002 / 72 mm`、`SHOT_6003 / 100 mm`。各自BuildPlan在预注册前仅做schema/canonical静态检查，expected plan hash为`518bfd62…`、`5213b1b3…`、`a0689507…`。
+
+第一次静态输入尝试使用非数字shot ID，被SceneSpec v0.2 schema在BuildPlan前正确拒绝；Blender启动0。正式输入已改为合法数字ID，三份静态BuildPlan成功。人物资产、ActorSpec与动作文件哈希保持`10feb54a… / 4299388f… / 165ea0b9…`；Blender实机版本为`5.2.0 LTS / fbe6228777e7`，磁盘可用约297 GiB，高于100 GiB reserve。
+
+正式协议预注册15项gate、10项单字段负控、六次production compiler/native Blender上限和zero-render/model/network/Docker边界。共享投影覆盖actor/asset/target/light/world、除目录外的render、output/security与真实scene structure；唯一允许变化为shot标识、camera和两个planned output-root字段。三项candidate tools及三条official roots当前均不存在。下一动作是提交推送本协议与三份SceneSpec，随后才实现preflight/runner/independent auditor。
