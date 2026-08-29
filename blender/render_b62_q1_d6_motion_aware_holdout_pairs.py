@@ -121,7 +121,8 @@ def main():
     scene.render.resolution_x, scene.render.resolution_y = 960, 540
     scene.render.resolution_percentage = 100
     scene.render.film_transparent = False
-    scene.view_settings.look = "Medium High Contrast"
+    scene.view_settings.view_transform = "ACES 2.0"
+    scene.view_settings.look = "None"
     rows = []
     started = time.perf_counter()
     for frame in FRAMES:
