@@ -1,0 +1,63 @@
+{
+  "completed": {
+    "exrAuditBlenderStarts": 0,
+    "exrFrames": 1,
+    "nodeAuditorStarts": 0,
+    "pixelProjections": 1,
+    "pixelReports": 0,
+    "pngFrames": 0,
+    "remainingRenderBlenderStarts": 5,
+    "renderBlenderStarts": 1,
+    "renderCalls": 1,
+    "runReports": 0
+  },
+  "evidence": {
+    "exr": {
+      "bytes": 1345827,
+      "containerSha256": "36908a0435f91c9e343ca26c6e78943b22c5f1c681431d59e7c9626cefa662ce",
+      "decodedCombinedSha256": "192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a",
+      "nonFiniteCount": 0,
+      "uri": "experiments/cinematic-render-repro-cost-v0-3/runs/WIDE-A/frame-0001.exr"
+    },
+    "lastStageEvent": {
+      "eventHash": "5e53a92bd13b8a9c6872aa192326dcc8e9d05a973005b6244a3a4c82cfc13556",
+      "eventType": "PIXEL_PROJECTED",
+      "sequence": 5,
+      "uri": "experiments/cinematic-render-repro-cost-v0-3/runs/WIDE-A/stage-events.jsonl"
+    },
+    "process": {
+      "exitCode": 1,
+      "pythonExitCodeEnforced": true,
+      "sha256": "caafac7915f8ed2f5f6a64f342efd9231dac116e6e7f58de040d8010fc01ef11",
+      "uri": "experiments/cinematic-render-repro-cost-attempt-v0-3/processes/WIDE-A.json"
+    },
+    "stderr": {
+      "sha256": "c3960b51cb7e73885cde8dabfa4f938af9038c24119e2978b8cfdd4eb48a1489",
+      "truncated": false,
+      "uri": "experiments/cinematic-render-repro-cost-attempt-v0-3/logs/WIDE-A.stderr.log"
+    },
+    "stdout": {
+      "sha256": "fd66a6842f20bfeec474ac100f4297d0e7602c15b0d52bb3668072158d2eac60",
+      "truncated": false,
+      "uri": "experiments/cinematic-render-repro-cost-attempt-v0-3/logs/WIDE-A.stdout.log"
+    }
+  },
+  "exception": {
+    "file": "blender/render_b61_frames.py",
+    "function": "main",
+    "line": 245,
+    "type": "TypeError",
+    "message": "bpy_struct: item.attr = val: enum PNG not found in (OPEN_EXR_MULTILAYER)",
+    "rejectedAssignment": "scene.render.image_settings.file_format = PNG"
+  },
+  "failureHash": "67c65a3f9137538b1f06f450082db94071f97b349457375bce807cd6e9bae346",
+  "message": "C2 successfully reopened and projected the first multilayer EXR with the proven digest. Blender then refused to change the active production scene's image format from OPEN_EXR_MULTILAYER to PNG, so review export did not run. The process exited nonzero and C1 retained the exact traceback and stage boundary.",
+  "partialEvidenceRetained": true,
+  "preflightEvidenceCommit": "2992f2f1c59d6d95343383e565e0ccdb54df2a1b",
+  "reason": "ACTIVE_PRODUCTION_SCENE_IMAGE_FORMAT_ENUM_LOCKED_TO_MULTILAYER",
+  "rootCauseProven": true,
+  "schemaVersion": "bfs.cinematicRenderReproCostFailureSummary.v0.3",
+  "scientificVerdict": null,
+  "status": "INVALIDATED",
+  "toolFreezeCommit": "5e1ad6c5203338daed07d08f54868a26a5df4d84"
+}

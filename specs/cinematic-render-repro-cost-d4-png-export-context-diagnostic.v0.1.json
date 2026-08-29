@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "bfs.cinematicRenderPngExportContextDiagnostic.v0.1",
+  "diagnosticId": "B61-E1-D4",
+  "status": "PREREGISTERED",
+  "failedRun": {
+    "attemptRoot": "experiments/cinematic-render-repro-cost-attempt-v0-3",
+    "formalRoot": "experiments/cinematic-render-repro-cost-v0-3",
+    "attemptTree": {
+      "files": 6,
+      "bytes": 7141,
+      "sha256": "e6812631c034162261ec77e41b6ef5d12f06026833d4bb4b3773237171a0e435"
+    },
+    "formalTree": {
+      "files": 5,
+      "bytes": 1352271,
+      "sha256": "76f7d849bb238b61a016cbd749c368813a62b773b8504851ce934dddafb274b9"
+    },
+    "failureSummary": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-3/failure-summary.json",
+      "sha256": "51f5797d1049e041b9aa511e9f2180a110a22b9cfab00e2e7eb218843b5ac722",
+      "failureHash": "67c65a3f9137538b1f06f450082db94071f97b349457375bce807cd6e9bae346",
+      "reason": "ACTIVE_PRODUCTION_SCENE_IMAGE_FORMAT_ENUM_LOCKED_TO_MULTILAYER",
+      "rootCauseProven": true
+    },
+    "retainedExr": {
+      "uri": "experiments/cinematic-render-repro-cost-v0-3/runs/WIDE-A/frame-0001.exr",
+      "containerSha256": "36908a0435f91c9e343ca26c6e78943b22c5f1c681431d59e7c9626cefa662ce",
+      "decodedCombinedSha256": "192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a"
+    }
+  },
+  "outputRoot": "experiments/b61-png-export-context-diagnostic-v0-1",
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "renderCalls": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "timeoutSeconds": 30,
+    "maximumOutputBytes": 1048576
+  },
+  "probes": [
+    "active production scene OPEN_EXR_MULTILAYER to PNG assignment result and enum items",
+    "new isolated review scene PNG assignment result and enum items",
+    "generated 2x2 float image save_render to PNG using isolated review scene",
+    "PNG header and dimensions",
+    "production scene render/image settings unchanged after isolated export"
+  ],
+  "successCriteria": {
+    "activeScenePngAssignmentFailureReproduced": true,
+    "isolatedReviewSceneAcceptsPng": true,
+    "isolatedReviewSceneWritesValidPng": true,
+    "productionSettingsUnchanged": true,
+    "zeroRenderCalls": true
+  },
+  "decisionRule": "PASS authorizes preregistration of a C3 correction that creates a temporary isolated review scene for Render Result.save_render PNG output and removes it afterward. No render or pixel gate may change.",
+  "claimBoundary": {
+    "diagnosticOnly": true,
+    "formalRetryAuthorized": false,
+    "reviewArtifactOnly": true,
+    "pixelThresholdChanged": false,
+    "qualityThresholdChanged": false
+  }
+}

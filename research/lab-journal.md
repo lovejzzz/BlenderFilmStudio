@@ -5147,3 +5147,13 @@ Tool-freeze `5e1ad6c5203338daed07d08f54868a26a5df4d84`与origin exact后，全�
 主仓库确认v0.3三根fresh后签发official preflight，同样`ACCEPTED 9/9`。File SHA/self-hash为`1d802cb1887a5f906847169436ae4100ab1ceb1f8e5a05ca3a196a5f58d75865 / c942b0d596a1eaa6923ce9cb9331fe4a8b87e76c43972561c7633a5f9475ecb8`；C2 failure trees、D2 projection `192237bd…`与D3 receipt `802a0553…`全部exact。Available bytes为318,452,441,088，扣除1 GiB projected后仍高于100 GiB reserve；operations全零，attempt/formal roots继续不存在。
 
 下一动作只提交推送official v0.3 preflight与本entry形成evidence commit；之后runner必须绑定tool freeze与该exact evidence commit才可启动18帧正式矩阵。
+
+## J-398 · B61 v0.3穿过C2 decoder后在PNG review context失效，D4预注册
+
+Date: 2026-08-29 · Type: FORMAL COUNTEREXAMPLE / DIAGNOSTIC PREREGISTRATION · Real Blender processes: 1 · Rendered EXR frames: 1
+
+Preflight evidence commit `2992f2f1c59d6d95343383e565e0ccdb54df2a1b`推送后，WIDE-A完成首帧EXR write、OpenImageIO reopen与pixel projection。Stage ledger终止于sequence 5 `PIXEL_PROJECTED`，decoded digest exact为D2已证明的`192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a`、nonfinite 0；这直接证明C2正式decoder路径已经工作。EXR container SHA为新的`36908a04…`，再次说明container bytes不是pixel identity。
+
+随后active production scene把`image_settings.file_format`从`OPEN_EXR_MULTILAYER`赋为`PNG`时，Blender 5.2只报告允许枚举`('OPEN_EXR_MULTILAYER')`并抛TypeError。Process exit 1，其他5个render processes与两级auditor未启动。Failure summary file SHA/self-hash为`51f5797d1049e041b9aa511e9f2180a110a22b9cfab00e2e7eb218843b5ac722 / 67c65a3f9137538b1f06f450082db94071f97b349457375bce807cd6e9bae346`；attempt/formal trees为6 files/7,141 bytes/`e6812631…`与5 files/1,352,271 bytes/`76f7d849…`。
+
+D4只预注册一个zero-render Blender probe：复现active scene枚举锁，测试isolated review scene能否设置PNG并用generated 2×2 image写出有效PNG，同时要求production settings不变。PNG仍只用于review，技术像素门和所有render设置不变。
