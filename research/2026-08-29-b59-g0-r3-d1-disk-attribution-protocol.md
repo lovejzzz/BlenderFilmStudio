@@ -1,7 +1,7 @@
 # B59-G0-R3-D1 · Disk-loss attribution protocol
 
 Date: 2026-08-29
-Status: PREREGISTERED
+Status: COMPLETED — VALID EVIDENCE, PRIMARY CAUSE UNRESOLVED
 Parent commit: `e48d9af17f648cab6cfbf2353f28e4d42d079d2c`
 
 ## Trigger
@@ -45,3 +45,16 @@ These labels describe association within one bounded window, not an internal fil
 ## Stop and authority boundary
 
 D1 does not stop Colima, containers or orphaned Lima processes; prune images/volumes; compact sparse disks; delete files; or start Blender. Any such remediation requires a separate exact target and authority decision. Regardless of outcome, the formal evidence is retained and no R3 threshold is relaxed.
+
+## Formal result
+
+The 91.290-second formal window passed 8/8 gates and 10/10 attacks with `VALID_ATTRIBUTION_EVIDENCE`. Its frozen interpretation label was `COLIMA_CONTRIBUTION_OBSERVED`, because the active VM disk allocated 16,384 additional bytes. This is not a primary attribution:
+
+- Host available-space loss: `8,941,568` bytes, below the 64 MiB material-loss threshold.
+- Colima allocated-block growth: `16,384` bytes.
+- Colima fraction of host loss: `0.00183234` (about 0.18%).
+- Other tracked allocated-block growth: `0` bytes.
+- `results.json` SHA-256: `37a6306e740ee0549fdfaedb8b2070049fc4af3131fbf1219cebb8a678b6d4d4`
+- `audit.json` SHA-256: `d7d78555226c8e73c2c68e86484ee974914ed69c630a49b14fbc6708eab2fce4`
+
+D1 therefore does not explain the 3.33 GB R3 event and does not support `COLIMA_PRIMARY_MATCH`. A controlled running/stopped Colima A/B would have higher discriminatory value, but stopping the four active GPT Bot containers and VM is outside this protocol and requires explicit authority.
