@@ -1,0 +1,157 @@
+{
+  "attacks": [
+    {
+      "id": "N01_SOURCE_BLEND_HASH_DRIFT",
+      "message": "source binding drift",
+      "pass": true
+    },
+    {
+      "id": "N02_PRODUCTION_RECEIPT_HASH_DRIFT",
+      "message": "source binding drift",
+      "pass": true
+    },
+    {
+      "id": "N03_OCIO_ENVIRONMENT_MISSING",
+      "message": "OCIO phase drift",
+      "pass": true
+    },
+    {
+      "id": "N04_POST_READ_COLOR_WARNING",
+      "message": "OCIO phase drift",
+      "pass": true
+    },
+    {
+      "id": "N05_SAMPLE_COUNT_DRIFT",
+      "message": "WIDE-A-1 samples drift",
+      "pass": true
+    },
+    {
+      "id": "N06_RESOLUTION_DRIFT",
+      "message": "WIDE-A-1 resolution drift",
+      "pass": true
+    },
+    {
+      "id": "N07_ANIMATED_SEED_ENABLED",
+      "message": "WIDE-A-1 seed drift",
+      "pass": true
+    },
+    {
+      "id": "N08_PIXEL_DIGEST_MUTATION",
+      "message": "WIDE-1 A/B pixel mismatch",
+      "pass": true
+    },
+    {
+      "id": "N09_FRAME_ROSTER_MISSING_OR_EXTRA",
+      "message": "B61 dataset length mismatch",
+      "pass": true
+    },
+    {
+      "id": "N10_EXR_CONTAINER_HASH_SUBSTITUTED_FOR_DECODED_PIXEL_DIGEST",
+      "message": "WIDE-1 A/B pixel mismatch",
+      "pass": true
+    }
+  ],
+  "audit": {
+    "auditHash": "ad8b6c10296178bcef912b74b10a08aba93e7cd0dac061157f420bc76592fe3f",
+    "sha256": "7bef5611b7c1c14cb8a6c67c320a28b33e5c30cb12964c616cdccfd4bd39fe67",
+    "uri": "experiments/cinematic-render-repro-cost-v0-5/audit.json"
+  },
+  "claimBoundary": {
+    "cinematicQuality": false,
+    "crossHardwareReproducibility": false,
+    "exrContainerBytesDeterministic": false,
+    "full144FrameSequence": false,
+    "fullSequenceRenderCost": false,
+    "humanVisualIdentityJudgment": false,
+    "sameHostSameBuildDecodedCombinedPixelReproducibility": true,
+    "temporalContinuity": false,
+    "theatricalDisplayCalibration": false
+  },
+  "costs": {
+    "bytesTotal": 96531022,
+    "estimatedWallSecondsPerFinishedMinute24Fps": 8760.493799909018,
+    "estimatedWallSecondsPerFinishedSecond24Fps": 146.00822999848364,
+    "processWallSecondsTotal": 121.36611700000002,
+    "renderSecondsMean": 6.083676249936818,
+    "renderSecondsTotal": 109.50617249886272
+  },
+  "gates": [
+    {
+      "id": "G01_PREREGISTRATION_PUSHED_BEFORE_OUTPUT_ROOTS",
+      "pass": true
+    },
+    {
+      "id": "G02_ALL_SOURCE_BLEND_RECEIPT_STRUCTURE_AND_OCIO_HASHES_EXACT",
+      "pass": true
+    },
+    {
+      "id": "G03_CALIBRATION_PASS_AND_TWO_FAILURES_RETAINED",
+      "pass": true
+    },
+    {
+      "id": "G04_ZERO_BLENDER_PREFLIGHT_AND_DISK_RESERVE_PASS",
+      "pass": true
+    },
+    {
+      "id": "G05_SIX_RENDER_PROCESSES_AND_EIGHTEEN_RENDER_CALLS_COMPLETE",
+      "pass": true
+    },
+    {
+      "id": "G06_EVERY_PROCESS_USES_FROZEN_OCIO_WITH_ZERO_POST_READ_WARNING",
+      "pass": true
+    },
+    {
+      "id": "G07_EIGHTEEN_EXR_AND_PNG_AND_PIXEL_REPORT_TRIPLES_COMPLETE",
+      "pass": true
+    },
+    {
+      "id": "G08_NINE_A_B_DECODED_COMBINED_PIXEL_DIGESTS_EXACT",
+      "pass": true
+    },
+    {
+      "id": "G09_EXR_DIMENSIONS_HALF_ZIP_AND_MULTILAYER_CONTRACT_EXACT",
+      "pass": true
+    },
+    {
+      "id": "G10_ALL_PIXEL_REPORTS_FINITE_NONEMPTY_AND_DYNAMIC",
+      "pass": true
+    },
+    {
+      "id": "G11_SOURCE_PLAN_STRUCTURE_CAMERA_AND_IDENTITY_BINDINGS_RETAINED",
+      "pass": true
+    },
+    {
+      "id": "G12_PER_FRAME_WALL_CPU_MEMORY_BYTES_AND_COST_EXTRAPOLATIONS_COMPLETE",
+      "pass": true
+    },
+    {
+      "id": "G13_TIMEOUT_DISK_AND_OUTPUT_ROSTER_BOUNDS_PASS",
+      "pass": true
+    },
+    {
+      "id": "G14_TEN_NEGATIVE_CONTROL_MUTATIONS_REJECTED",
+      "pass": true
+    },
+    {
+      "id": "G15_INDEPENDENT_BLENDER_EXR_REOPEN_AUDIT_MATCHES_RENDER_REPORTS",
+      "pass": true
+    },
+    {
+      "id": "G16_FINAL_RECEIPT_SELF_HASH_AND_ZERO_MODEL_NETWORK_DOCKER",
+      "pass": true
+    }
+  ],
+  "operations": {
+    "dockerProcesses": 0,
+    "exrAuditBlenderStarts": 1,
+    "frames": 18,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "renderBlenderStarts": 6,
+    "renderCalls": 18
+  },
+  "resultsHash": "b3730720fcae2f09700575472b34ca1bf8bf6101367123738fdbd2a36fbed747",
+  "schemaVersion": "bfs.cinematicRenderReproCostResults.v0.1",
+  "status": "PASS",
+  "verdict": "CINEMATIC_RENDER_TECHNICAL_REPRODUCIBILITY_AND_COST_SUPPORTED"
+}

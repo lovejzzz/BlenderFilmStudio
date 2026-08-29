@@ -5233,3 +5233,15 @@ Date: 2026-08-29 · Type: CORRECTED OFFICIAL PREFLIGHT ADMISSION · New Blender 
 Tool-freeze `004b7a727c3b12de4228b7f4d175ce22d3484dfa`推送后，fresh clone通过临时只读node_modules symlink运行同构preflight，返回9/9、self-hash `82412dd14ca751efd842f2f1e0574ee045f5b798d7b8102b7656cd13f6cb0cb3`；临时树与symlink随后validated depth-first删除。
 
 主仓库v0.5 official preflight返回`ACCEPTED 9/9`。File SHA/self-hash为`50caa1eeee24806f6e9e57a076bbe35810cc2cb529c71f00c0a2c47d074c0ff6 / 034e71f80c0d3ae52d62fe08985e9166f3b4a733f026ca6b80c1a7a9620fd584`；v0.4 trees/failure与D5 result/receipt exact，available bytes 318,406,385,664，operations全零，attempt/formal roots继续fresh。下一动作提交preflight evidence后启动v0.5 18-frame matrix。
+
+## J-408 · B61 v0.5正式关闭同机像素复现与成本门
+
+Date: 2026-08-29 · Type: FORMAL PASS / REAL BLENDER RENDER MATRIX · Real Blender processes: 7 · Render calls: 18
+
+Preflight evidence commit `0b2cb76`推送后，formal runner绑定C4 tool-freeze `004b7a727c3b12de4228b7f4d175ce22d3484dfa`并完成WIDE/MEDIUM/CLOSE × frames 1/72/144 × A/B矩阵。6个独立render Blender processes全部exit 0并留下terminal `BFS_B61_RENDER_OK`，共18次1920×1080 Cycles CPU 64-spp render；第7个Blender独立重开18份multilayer EXR，不调用render。16/16 frozen gates、10/10 negative controls全部通过，zero model/network/Docker，formal verdict为`CINEMATIC_RENDER_TECHNICAL_REPRODUCIBILITY_AND_COST_SUPPORTED`。
+
+九组A/B decoded Combined RGBA float32-LE digest全部exact；PNG container hash也逐对exact，但EXR container hash九组均不相等，因此正式identity surface明确是decoded pixel，而不是容器字节。18份pixel reports的self-hash均有效，独立EXR reopen与render report exact匹配；所有目标blend read后的颜色警告为0。Formal audit/results/receipt file SHA分别为`7bef5611… / 1477cc00… / 9ab3b2cf…`，self-hash分别为`ad8b6c10… / b3730720… / 18bc3a53…`；EXR auditor file/self-hash为`9af1fb4b… / 95535d55…`。Attempt tree为27 files/30,131 bytes/`4ee442ff…`；formal tree为71 files/96,621,748 bytes/`21ddfcfb…`。
+
+18帧render operator总计109.506秒、均值6.084秒；6个process wall总计121.366秒，实测峰值RSS约4.50–4.54 GB。EXR合计91,620,900 bytes，PNG合计4,864,796 bytes。按当前still-frame样本机械外推为146.008 wall seconds/finished second，或约8,760.494秒（2.433小时）/finished minute at 24 fps；该值不包含全序列时间连续性、启动摊销变化或影院级资产成本。
+
+人工检查九张A-run review PNG接触表：方向正确、颜色/照明可读、WIDE→MEDIUM→CLOSE景别明确、三帧运动状态不同，无空白或翻转。但资产刻意为低多边形测试几何，因此本PASS只关闭同机同build技术像素复现与成本门，不支持电影感、真人身份、跨硬件、全144帧连续性、完整成片成本或影院显示校准。v0.1–v0.4的四轮失败、raw logs、stage ledger和修正预注册全部保留。下一动作是提交推送formal evidence与结果说明、公开结果页，然后预注册真实英雄角色三镜头的电影质量与一致性门。
