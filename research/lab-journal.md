@@ -5515,3 +5515,11 @@ Date: 2026-08-29 · Type: RETAINED BUILD FAILURE / API CORRECTION PREREGISTRATIO
 D4 tool freeze `d074402bb2ad80b6f6885feaed9be83af08f75de`运行后，BUILD Blender在0.486秒、peak sampled RSS 225,935,360 bytes失败；未创建derived scene，render calls为0。错误是builder访问`Action.fcurves`，但Blender 5.2 layered Action必须通过assigned-slot channelbag访问。v0.1永久保留3 files/7,084 bytes/tree `8538b1bc…`，failure file/self `c6ff5399…/7f3c1849…`。
 
 C1在工具修改前只授权builder使用`anim_utils.animdata_get_channelbag_for_assigned_slot(...).fcurves`，runner/auditor绑定failure并切换fresh v0.2。render tool hash `e20efbad…`与independent audit hash `c39a39bb…`固定；候选、96-frame bake、六个holdout、12 render、所有阈值和预算不变。
+
+## J-438 · B62-Q1-D4 v0.2跨语言浮点canonical失败与C2预注册
+
+Date: 2026-08-29 · Type: RETAINED REPORT-ADMISSION FAILURE / CANONICALIZATION PREREGISTRATION · New Blender processes: 1 · New Blender renders: 0
+
+C1 BUILD在0.527秒、peak sampled RSS 262,012,928 bytes通过，新增camera/data/action各1，bake 96 frames并产生337,606-byte derived blend `3784fc48…`。runner随后拒绝build report：Python self hash为`f78897b1…`，Node按同一数值对象重算为`a98f3bf1…`。根因是极小非整数浮点的JSON exponent拼写`e-08` vs `e-8`；数值round-trip相同，canonical bytes不同。无render发生，v0.2保留5 files/469,558 bytes/tree `eb62dd16…`。
+
+C2在工具变更前冻结跨语言representation：非整数finite float转为`{"$f64be":16-hex IEEE-754 binary64 bits}`参与hash，整数float转integer；持久化科学字段仍为number。三份Python与两份Node只改canonical helper和fresh v0.3 bindings；候选、bake、holdout、几何、Cycles、12 render与预算不变，v0.2 scene禁止复用。

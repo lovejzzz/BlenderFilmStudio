@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "bfs.b62CameraQualityHoldoutCorrection.v0.1",
+  "correctionId": "B62-Q1-D4-C2",
+  "date": "2026-08-29",
+  "statusBeforeToolChange": "PREREGISTERED",
+  "parent": {"experimentId": "B62-Q1-D4", "spec": "specs/b62-camera-quality-holdout-render-validation.v0.1.json", "c1": "specs/b62-camera-quality-d4-c1-layered-action-api.v0.1.json", "c1ToolFreezeCommit": "a071271cc6ccf27d50a35009021c8de46d6f748e"},
+  "retainedFailure": {
+    "root": "experiments/b62-camera-quality-holdout-render-v0-2",
+    "tree": {"files": 5, "bytes": 469558, "treeSha256": "eb62dd168e000a8be3fdb932ab1daa11f3501420c6e5024f4b22663a07bcf779"},
+    "failure": {"uri": "experiments/b62-camera-quality-holdout-render-v0-2/failure.json", "sha256": "3b09077d856c703adbaf92436816afd511cc4e9ad9aee7f4d9c415590d29bd7f", "failureHash": "fc26ff3b886b1864439feae3963bce3db12ba5e3751ec9ebe160238b8b427031"},
+    "derivedScene": {"uri": "experiments/b62-camera-quality-holdout-render-v0-2/scene/B62_PHASE0_D4_CAMERA_CORRECTED.blend", "sha256": "3784fc4864864273a23b137c837e1ae8635ec09bbb818255b6755608430c5252", "status": "BUILT_NOT_ADMITTED"},
+    "buildReport": {"uri": "experiments/b62-camera-quality-holdout-render-v0-2/build.json", "sha256": "437451930be8363dfb7e1650fbdbd6b30317c0cc18128c3a2e4f3dc3842c58da", "pythonReportHash": "f78897b1b48fd3349681e114e1fe483d4e1101ccd8fbb010bda1f6ecffe16491"},
+    "renderCalls": 0
+  },
+  "rootCause": "Python json.dumps emits small exponents such as e-08 while ECMAScript JSON.stringify emits e-8. The parsed IEEE-754 values are identical, but textual canonical bytes differ, so Node correctly refused the Python report self-hash.",
+  "authorizedChanges": {
+    "canonicalEncoding": "Before sorted-key JSON hashing, finite non-integral floats become {\"$f64be\": <16 lowercase hex digits of the IEEE-754 binary64 big-endian bits>}; integral-valued floats become integers. Python uses struct.pack('>d'); Node uses DataView.setFloat64(..., false).",
+    "scope": "Apply only to the canonical self-hash helpers in the three D4 Python tools and two D4 Node tools. Persisted scientific fields stay numeric and unchanged.",
+    "runnerAndAuditor": "Bind C2, both retained failures, and use fresh root experiments/b62-camera-quality-holdout-render-v0-3.",
+    "retryRoot": "experiments/b62-camera-quality-holdout-render-v0-3"
+  },
+  "frozen": {"candidateBakeHoldoutsGeometryCyclesAndBudgets": "unchanged", "twelveRenderCalls": 12, "priorDerivedSceneMayNotBeReused": true, "freshBlenderProcesses": 3},
+  "nonClaims": ["v0.2 did not reach any holdout render.", "C2 changes evidence canonicalization only.", "The v0.3 builder must create a fresh derived scene rather than copying v0.2."]
+}
