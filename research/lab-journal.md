@@ -5405,3 +5405,13 @@ D6 tool freeze `e843840c97084011601eeb4f4092745139adb78f`推送后，one Blender
 8/8 runner checks与独立Node audit PASS，zero render/model/network/Docker。D6 root 5 files/48,753 bytes/tree `d507bf6b…`；probe file/self `84c11998…/49713805…`，result file/self `8bc69dce…/1952f4bd…`，receipt file/self `c7b11368…/150fb110…`，verdict为`LOCAL_APPEND_SOURCE_DESCRIPTOR_ONLY`。
 
 C11在production auditor修改前只授权temporal/locality更正：master gate读取append前snapshot；asset gate要求ID local、descriptor exact-source、移除后存活、cleanup exact。既有23 checks不减，v0.3仍INVALIDATED。下一动作提交推送D6+C11，实现auditor并以D7 one-Blender/zero-render独立root验证。
+
+## J-427 · B62 D7 corrected production auditor 23/23 PASS与C12 v0.4预注册
+
+Date: 2026-08-29 · Type: CORRECTED AUDITOR SMOKE PASS / FRESH FORMAL RETRY PREREGISTRATION · New B62 Blender processes: 1 · New B62 renders: 0
+
+D7 tool freeze `0402f2476c7259cef3c4c85ced7bf80553f458a7`推送后，corrected production auditor只读重开retained v0.3，在1.865秒、peak RSS 433,881,088 bytes完成。原有23 checks全部PASS；master locality初始空，三份asset无findings，54/84/16 appended IDs全local，descriptor exact-source、移除后存活、cleanup exact。zero render/model/network/Docker。
+
+D7 runner与独立Node audit均8/8 PASS。root 5 files/134,507 bytes/tree `7b5e6194…`；audit file/self `6c223524…/8183f498…`，result file/self `f4ff4c68…/59078802…`，receipt file/self `b42b905c…/31903a70…`，verdict为`CORRECTED_PRODUCTION_AUDITOR_PROVEN`。
+
+C12在formal Node工具修改前授权绑定C10–C12、retained v0.3、D6/D7 PASS与D7-frozen auditor，并使用fresh v0.4 roots。Node audit必须直接复核locality rows；其余生产工具、291 renders、18 gates/16 attacks、预算与claims不变。下一动作提交推送D7+C12，再做tool freeze、fresh-clone rehearsal、official preflight和完整v0.4重跑。

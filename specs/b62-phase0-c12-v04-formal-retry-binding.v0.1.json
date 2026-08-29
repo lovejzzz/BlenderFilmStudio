@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "bfs.b62Phase0Correction.v0.1",
+  "correctionId": "B62-P0-E1-C12",
+  "date": "2026-08-29",
+  "statusBeforeFormalToolChange": "PREREGISTERED",
+  "parent": {
+    "experimentId": "B62-P0-E1",
+    "c10": {"uri": "specs/b62-phase0-c10-library-locality-diagnostic.v0.1.json", "sha256": "fcad00be78b9218c126209c8679220ebba18a440288cbbc31bb21e5d5e501cfd"},
+    "c11": {"uri": "specs/b62-phase0-c11-auditor-library-locality-correction.v0.1.json", "sha256": "7b5a92f20d179c026224d4f573116c06185cbf12dce6bbef51514c6b5a657fd2"}
+  },
+  "retainedV03": {
+    "attemptRoot": "experiments/b62-phase0-attempt-v0-3",
+    "attemptTree": {"files": 28, "bytes": 81121, "treeSha256": "c08a342223a1206b989c65184f5f692590bb15f06a8abd7f1199b15523291a55"},
+    "formalRoot": "experiments/b62-phase0-v0-3",
+    "formalTree": {"files": 308, "bytes": 122895659, "treeSha256": "a2ca78e33397e6ca634f969d02c79f75cb3ac7e3a646ddc24db863372a7a56f9"},
+    "failureHash": "f934bc8dc56e0fe203255463ec24fd241eb3753454770a0fd95f00993a797c48",
+    "status": "INVALIDATED"
+  },
+  "promotingEvidence": {
+    "d6": {"root": "experiments/b62-phase0-d6-library-locality-v0-1", "tree": {"files": 5, "bytes": 48753, "treeSha256": "d507bf6b786b19292c41b8757b7ddac0b270aa89e209b4106212367a3122143e"}, "receiptHash": "150fb110877316df54053650baed202f2ab73b2d7832af0528f6470861f79bfe", "status": "PASS"},
+    "d7": {
+      "root": "experiments/b62-phase0-d7-corrected-auditor-smoke-v0-1",
+      "tree": {"files": 5, "bytes": 134507, "treeSha256": "7b5e619429293c7cfc4f32c0ad6bd992922db1ffdfb29529d5dee8b2f6cccc97"},
+      "toolFreezeCommit": "0402f2476c7259cef3c4c85ced7bf80553f458a7",
+      "audit": {"sha256": "6c22352438afd70eb58a4634cd94763b4034d6883f1930374a3a366c867c0d82", "auditHash": "8183f498e5a55fdd2d874aa31c15125d7170d4cf467d0697f11dcd9f72566378", "status": "PASS", "checks": "23/23"},
+      "result": {"sha256": "f4ff4c688540e964e9f2594282f2cc535f61f46d9712ab7588a708b16d3f87f5", "resultHash": "59078802379585c572012f19262bf97a5fdef406c97513433c2d375d1f866903", "status": "PASS"},
+      "receipt": {"sha256": "b42b905c707f1171510b45ae4ac42478c1bbb32d892cca21196a7fa9d7ae3c87", "receiptHash": "31903a70af63ae5a80330553153fcbca91d00cc6b1956df172d29459f5a8ce3d", "status": "PASS", "verdict": "CORRECTED_PRODUCTION_AUDITOR_PROVEN"},
+      "renderCalls": 0
+    }
+  },
+  "authorizedFormalToolChanges": {
+    "files": ["scripts/preflight-b62-phase0.mjs", "scripts/run-b62-phase0.mjs", "scripts/audit-b62-phase0.mjs"],
+    "requiredBindings": ["C10, C11 and C12 ancestry and file identities", "retained v0.3 tree and failure identity", "D6 and D7 PASS tree/result/receipt identities", "D7-frozen corrected production auditor"],
+    "nodeAuditLocalityRequirement": "Require initial master libraries and linked IDs zero; require three asset locality rows with no findings, all appended IDs local, one exact source descriptor, descriptor-removal survival and exact cleanup.",
+    "roots": {"preflight": "experiments/b62-phase0-preflight-v0-4", "attempt": "experiments/b62-phase0-attempt-v0-4", "formal": "experiments/b62-phase0-v0-4"},
+    "forbidden": "Any generator, renderer, asset, camera, animation, light, material, dose, budget, gate, attack, verdict or claim-boundary change."
+  },
+  "executionOrder": ["commit and push D7 evidence plus C12", "implement only three Node binding changes", "new pushed tool freeze", "dependency-free fresh-clone zero-Blender rehearsal", "official v0.4 preflight commit", "fresh v0.4 formal execution"],
+  "formalBudgetsAndClaimsUnchanged": true,
+  "passVerdictUnchanged": "B62_PHASE0_ASSET_ANIMATIC_AND_CALIBRATION_ADMITTED"
+}
