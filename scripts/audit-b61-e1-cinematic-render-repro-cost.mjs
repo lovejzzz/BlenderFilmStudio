@@ -10,8 +10,8 @@ import { repositoryRoot } from './lib/scene-spec.mjs';
 
 const execFileAsync = promisify(execFile);
 const CONTRACT_URI = 'specs/cinematic-render-repro-cost.v0.1.json';
-const CORRECTION_URI = 'specs/cinematic-render-repro-cost-c2-multilayer-exr-decoder-correction.v0.1.json';
-const EXPECTED = { preflightRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-3', attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-3', formalRoot: 'experiments/cinematic-render-repro-cost-v0-3' };
+const CORRECTION_URI = 'specs/cinematic-render-repro-cost-c3-isolated-png-review-correction.v0.1.json';
+const EXPECTED = { preflightRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-4', attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-4', formalRoot: 'experiments/cinematic-render-repro-cost-v0-4' };
 
 function parseArguments(argv) {
   const parsed = {};
@@ -58,6 +58,7 @@ function validateDataset(rows, contract) {
     requireValue(row.report.settings.format === contract.render.format && row.report.settings.pixelType === contract.render.pixelType
       && row.report.settings.compression === contract.render.compression && row.report.settings.denoise === contract.render.denoise
       && row.report.settings.ocioConfigSha256 === contract.runtime.ocio.sha256, `${row.id} render/OCIO settings drift`);
+    requireValue(row.report.settings.pngExportContext === 'ISOLATED_REVIEW_SCENE' && row.report.settings.productionImageSettingsUnchanged === true, `${row.id} PNG review context drift`);
     requireValue(row.report.decodedCombined.nonFiniteCount === 0 && row.report.decodedCombined.rgbDynamicRange > 1e-6, `${row.id} invalid pixels`);
     requireValue(row.report.decodedCombined.width === 1920 && row.report.decodedCombined.height === 1080, `${row.id} dimensions drift`);
     requireValue(row.report.decodedCombined.decoder?.module === 'OpenImageIO' && row.report.decodedCombined.decoder.version === '3.1.13.1'
@@ -99,7 +100,7 @@ function negativeControls(rows, contract) {
 export async function auditB61(argv) {
   const parsed = parseArguments(argv);
   const contractRecord = await json(CONTRACT_URI); const contract = contractRecord.value;
-  const correction = await json(CORRECTION_URI); requireValue(correction.value.status === 'PREREGISTERED', 'B61 C2 correction invalid');
+  const correction = await json(CORRECTION_URI); requireValue(correction.value.status === 'PREREGISTERED', 'B61 C3 correction invalid');
   const preflight = await json(`${parsed.preflightRoot}/preflight.json`);
   requireValue(validSelfHash(preflight.value, 'preflightHash') && preflight.value.status === 'ACCEPTED', 'B61 preflight invalid');
   const reopen = await json(`${parsed.formalRoot}/exr-reopen-audit.json`);

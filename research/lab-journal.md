@@ -5173,3 +5173,11 @@ Date: 2026-08-29 · Type: DIAGNOSTIC PASS / FORMAL CORRECTION PREREGISTRATION ·
 D4 tool-freeze commit `8a685b2`推送后，one Blender/zero-render probe PASS。Active production scene从multilayer改PNG的assignment failure exact复现；isolated review scene接受PNG/RGBA/8-bit并写出265-byte、2×2有效PNG，生产scene before/after snapshot exact。Result file SHA/self-hash为`ba05262f3b7937ea0e3d2fcab50534b5de4f767184310e2ad7e345c6e02e5271 / 7186f6f1b32dab34e0f52114fa2c6f3d7b9ff0815567e18a7b78f5f330c4f468`；receipt file SHA/self-hash为`bff263a9455b9c03947e4196fc5793e6880bd703326eab226dd12bf891a3e5a1 / 8d72ea94d7cc43d836fa2edf8217d8511ef3ba7b3a18d82671517e279280d505`。
 
 C3只授权render process创建isolated review scene，复制color settings并传给`Render Result.save_render`，finally删除；生产image settings不再改动。Node supervision绑定D4/v0.3 failure并使用fresh v0.4 roots。下一动作提交D4 evidence/C3，再实现工具。
+
+## J-401 · B61-C3 formal工具候选
+
+Date: 2026-08-29 · Type: FORMAL CORRECTION TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+C3 preregistration commit `0b69ca8`推送后，render script在生产scene完成multilayer/half/ZIP配置后snapshot三项image settings，创建process-local isolated review scene，复制display/view/look/exposure/gamma并配置PNG/RGBA/8-bit。每帧PNG只通过`Render Result.save_render(..., scene=review_scene)`输出；pixel report要求production settings exact未变并记录`ISOLATED_REVIEW_SCENE`；成功run report后删除review scene。EXR render和OIIO decoder未改。
+
+Preflight/runner/auditor切到fresh v0.4 roots，freeze同时覆盖C2/C3、D3与D4 evidence；preflight复核v0.3 failure trees及D4 result/receipt；auditor逐帧要求review context与production settings unchanged。Render/audit-python/preflight/runner/auditor SHA为`ddc94499cfe9c36db4eeb868679a0f7d9d0b4c7c0e4a2d16182b1aa8221ecfee / f3e998f9418917bf198424984630f9ad666ab439270a5d363b4e98f6ead54339 / 438b6e7ca7408d60e22221b59392343d03522f80d435053cd7bab40ae741b42a / d28dbee4d4fe56794b170ab1763d7bd6c6e1df0d708b3a47db6de380bd0293a0 / 2f8b6624e5b642d635b3853418518cbb4a68021db4de2abe693e7695633685df`。静态检查全过，v0.4 roots不存在。下一动作提交推送freeze并做fresh-clone preflight rehearsal。

@@ -215,6 +215,21 @@ def main() -> None:
     scene.render.image_settings.exr_codec = "ZIP"
     scene.render.film_transparent = False
 
+    production_image_settings = {
+        "fileFormat": scene.render.image_settings.file_format,
+        "colorDepth": scene.render.image_settings.color_depth,
+        "exrCodec": scene.render.image_settings.exr_codec,
+    }
+    review_scene = bpy.data.scenes.new("BFS_B61_ISOLATED_REVIEW")
+    review_scene.display_settings.display_device = scene.display_settings.display_device
+    review_scene.view_settings.view_transform = scene.view_settings.view_transform
+    review_scene.view_settings.look = scene.view_settings.look
+    review_scene.view_settings.exposure = scene.view_settings.exposure
+    review_scene.view_settings.gamma = scene.view_settings.gamma
+    review_scene.render.image_settings.file_format = "PNG"
+    review_scene.render.image_settings.color_depth = "8"
+    review_scene.render.image_settings.color_mode = "RGBA"
+
     reports = []
     ledger = StageLedger(output_dir / "stage-events.jsonl")
     ledger.append("PROCESS_BOUND", shot=args.shot, repetition=args.repetition, sourceBlendSha256=shot["sourceBlend"]["sha256"], ocioSha256=ocio["sha256"])
@@ -242,10 +257,7 @@ def main() -> None:
             raise RuntimeError(f"Invalid decoded pixels for frame {frame}")
         ledger.append("PIXEL_PROJECTED", frame=frame, sha256=projection["sha256"], nonFiniteCount=projection["nonFiniteCount"])
 
-        scene.render.image_settings.file_format = "PNG"
-        scene.render.image_settings.color_depth = "8"
-        scene.render.image_settings.color_mode = "RGBA"
-        bpy.data.images["Render Result"].save_render(filepath=str(png_path), scene=scene)
+        bpy.data.images["Render Result"].save_render(filepath=str(png_path), scene=review_scene)
         if not png_path.is_file() or png_path.stat().st_size == 0:
             raise RuntimeError(f"Missing PNG for frame {frame}")
         ledger.append("PNG_WRITTEN", frame=frame, sha256=sha256_file(png_path), bytes=png_path.stat().st_size)
@@ -266,6 +278,12 @@ def main() -> None:
                 "pixelType": "HALF_16",
                 "compression": "ZIP_LOSSLESS",
                 "ocioConfigSha256": ocio["sha256"],
+                "pngExportContext": "ISOLATED_REVIEW_SCENE",
+                "productionImageSettingsUnchanged": production_image_settings == {
+                    "fileFormat": scene.render.image_settings.file_format,
+                    "colorDepth": scene.render.image_settings.color_depth,
+                    "exrCodec": scene.render.image_settings.exr_codec,
+                },
             },
             "renderSeconds": render_seconds,
             "exr": file_identity(exr_path, repository_root),
@@ -297,6 +315,7 @@ def main() -> None:
         "operations": {"renderCalls": len(reports), "frames": len(reports), "modelCalls": 0, "networkCalls": 0, "dockerProcesses": 0},
     }, "runReportHash")
     ledger.append("RUN_REPORT_WRITTEN", runReportHash=run_report["runReportHash"], sha256=sha256_file(run_report_path))
+    bpy.data.scenes.remove(review_scene)
     print(f"BFS_B61_RENDER_OK {args.shot}-{args.repetition} frames={len(reports)}")
 
 

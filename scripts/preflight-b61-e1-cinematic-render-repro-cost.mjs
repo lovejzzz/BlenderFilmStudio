@@ -18,22 +18,26 @@ import { repositoryRoot } from './lib/scene-spec.mjs';
 
 const execFileAsync = promisify(execFile);
 const CONTRACT_URI = 'specs/cinematic-render-repro-cost.v0.1.json';
-const CORRECTION_URI = 'specs/cinematic-render-repro-cost-c2-multilayer-exr-decoder-correction.v0.1.json';
+const CORRECTION_URI = 'specs/cinematic-render-repro-cost-c3-isolated-png-review-correction.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b61-e1-cinematic-render-repro-cost-protocol.md';
-const PREREGISTRATION_COMMIT = 'a8ef00e';
+const PREREGISTRATION_COMMIT = '0b69ca8';
 const EXPECTED_ROOTS = {
-  outputRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-3',
-  attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-3',
-  formalRoot: 'experiments/cinematic-render-repro-cost-v0-3',
+  outputRoot: 'experiments/cinematic-render-repro-cost-preflight-v0-4',
+  attemptRoot: 'experiments/cinematic-render-repro-cost-attempt-v0-4',
+  formalRoot: 'experiments/cinematic-render-repro-cost-v0-4',
 };
 const TOOL_PATHS = [
   CONTRACT_URI,
+  'specs/cinematic-render-repro-cost-c2-multilayer-exr-decoder-correction.v0.1.json',
   CORRECTION_URI,
   PROTOCOL_URI,
   'research/2026-08-29-b61-e1-c1-terminal-observability-correction.md',
   'research/2026-08-29-b61-e1-c2-multilayer-exr-decoder-correction.md',
+  'research/2026-08-29-b61-e1-c3-isolated-png-review-correction.md',
   'experiments/b61-exr-reopen-reconciliation-v0-1/result.json',
   'experiments/b61-exr-reopen-reconciliation-v0-1/receipt.json',
+  'experiments/b61-png-export-context-diagnostic-v0-1/result.json',
+  'experiments/b61-png-export-context-diagnostic-v0-1/receipt.json',
   'blender/render_b61_frames.py',
   'blender/audit_b61_exr.py',
   'scripts/preflight-b61-e1-cinematic-render-repro-cost.mjs',
@@ -136,31 +140,26 @@ async function treeIdentity(uri) {
 }
 
 async function validateCorrection(parsed) {
-  const path = await resolveExistingRepositoryPath(CORRECTION_URI, 'B61 C2 correction');
+  const path = await resolveExistingRepositoryPath(CORRECTION_URI, 'B61 C3 correction');
   const correction = JSON.parse(await readFile(path, 'utf8'));
   if (correction.status !== 'PREREGISTERED' || correction.authorizedRetryRoots.preflight !== parsed.outputRoot
-    || correction.authorizedRetryRoots.attempt !== parsed.attemptRoot || correction.authorizedRetryRoots.formal !== parsed.formalRoot) throw new Error('B61 C2 retry-root binding mismatch');
+    || correction.authorizedRetryRoots.attempt !== parsed.attemptRoot || correction.authorizedRetryRoots.formal !== parsed.formalRoot) throw new Error('B61 C3 retry-root binding mismatch');
   const attemptTree = await treeIdentity(correction.failedFormalRun.attemptRoot);
   const formalTree = await treeIdentity(correction.failedFormalRun.formalRoot);
-  if (!isDeepStrictEqual(attemptTree, correction.failedFormalRun.attemptTree) || !isDeepStrictEqual(formalTree, correction.failedFormalRun.formalTree)) throw new Error('B61 v0.2 retained failure tree mismatch');
-  const summaryPath = await resolveExistingRepositoryPath(correction.failedFormalRun.failureSummary.uri, 'B61 v0.2 failure summary');
+  if (!isDeepStrictEqual(attemptTree, correction.failedFormalRun.attemptTree) || !isDeepStrictEqual(formalTree, correction.failedFormalRun.formalTree)) throw new Error('B61 v0.3 retained failure tree mismatch');
+  const summaryPath = await resolveExistingRepositoryPath(correction.failedFormalRun.failureSummary.uri, 'B61 v0.3 failure summary');
   const summary = JSON.parse(await readFile(summaryPath, 'utf8'));
   if (await sha256File(summaryPath) !== correction.failedFormalRun.failureSummary.sha256 || !validSelfHash(summary, 'failureHash')
-    || summary.failureHash !== correction.failedFormalRun.failureSummary.failureHash || summary.rootCauseProven !== true) throw new Error('B61 v0.2 failure-summary binding mismatch');
-  const decoderPath = await resolveExistingRepositoryPath(correction.decoderEvidence.realBlenderResult.uri, 'B61 D2 decoder evidence');
-  const decoder = JSON.parse(await readFile(decoderPath, 'utf8'));
-  if (await sha256File(decoderPath) !== correction.decoderEvidence.realBlenderResult.sha256 || decoder.status !== 'PASS'
-    || decoder.firstProjection.sha256 !== correction.decoderEvidence.realBlenderResult.projectionSha256 || decoder.repeatDigestExact !== true
-    || decoder.runtime.openImageIoVersion !== correction.decoderEvidence.realBlenderResult.openImageIoVersion) throw new Error('B61 D2 decoder evidence mismatch');
-  const resultPath = await resolveExistingRepositoryPath(correction.decoderEvidence.reconciliation.resultUri, 'B61 D3 result');
+    || summary.failureHash !== correction.failedFormalRun.failureSummary.failureHash || summary.rootCauseProven !== true) throw new Error('B61 v0.3 failure-summary binding mismatch');
+  const resultPath = await resolveExistingRepositoryPath(correction.diagnosticEvidence.result.uri, 'B61 D4 result');
   const result = JSON.parse(await readFile(resultPath, 'utf8'));
-  const receiptPath = await resolveExistingRepositoryPath(correction.decoderEvidence.reconciliation.receiptUri, 'B61 D3 receipt');
+  const receiptPath = await resolveExistingRepositoryPath(correction.diagnosticEvidence.receipt.uri, 'B61 D4 receipt');
   const receipt = JSON.parse(await readFile(receiptPath, 'utf8'));
-  if (await sha256File(resultPath) !== correction.decoderEvidence.reconciliation.resultSha256 || !validSelfHash(result, 'resultHash')
-    || result.resultHash !== correction.decoderEvidence.reconciliation.resultHash || result.status !== 'PASS'
-    || await sha256File(receiptPath) !== correction.decoderEvidence.reconciliation.receiptSha256 || !validSelfHash(receipt, 'receiptHash')
-    || receipt.receiptHash !== correction.decoderEvidence.reconciliation.receiptHash || receipt.status !== 'PASS') throw new Error('B61 D3 reconciliation mismatch');
-  return { uri: CORRECTION_URI, sha256: await sha256File(path), attemptTree, formalTree, failureHash: summary.failureHash, decoderProjectionSha256: decoder.firstProjection.sha256, reconciliationReceiptHash: receipt.receiptHash };
+  if (await sha256File(resultPath) !== correction.diagnosticEvidence.result.sha256 || !validSelfHash(result, 'resultHash')
+    || result.resultHash !== correction.diagnosticEvidence.result.resultHash || result.status !== 'PASS' || result.productionSettingsUnchanged !== true
+    || await sha256File(receiptPath) !== correction.diagnosticEvidence.receipt.sha256 || !validSelfHash(receipt, 'receiptHash')
+    || receipt.receiptHash !== correction.diagnosticEvidence.receipt.receiptHash || receipt.status !== 'PASS') throw new Error('B61 D4 evidence mismatch');
+  return { uri: CORRECTION_URI, sha256: await sha256File(path), attemptTree, formalTree, failureHash: summary.failureHash, pngDiagnosticResultHash: result.resultHash, pngDiagnosticReceiptHash: receipt.receiptHash };
 }
 
 export async function runB61Preflight(argv) {
