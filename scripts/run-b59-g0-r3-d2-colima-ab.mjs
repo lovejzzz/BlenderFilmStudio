@@ -28,7 +28,7 @@ function writeExclusive(path, value, ceiling) {
   return { path, text, sha256: sha(text), selfHash: value.selfHash, bytes: Buffer.byteLength(text) };
 }
 
-function command(binary, args, timeoutMs = 5000) {
+function command(binary, args, timeoutMs = 5000, captureLimit = 32768) {
   const started = Date.now();
   const result = spawnSync(binary, args, {
     cwd: repo,
@@ -37,8 +37,8 @@ function command(binary, args, timeoutMs = 5000) {
     maxBuffer: 1024 * 1024,
     env: { ...process.env, LC_ALL: 'C' }
   });
-  const stdout = (result.stdout || '').slice(0, 32768);
-  const stderr = (result.stderr || '').slice(0, 32768);
+  const stdout = (result.stdout || '').slice(0, captureLimit);
+  const stderr = (result.stderr || '').slice(0, captureLimit);
   return {
     binary,
     args,
@@ -84,7 +84,7 @@ function containerState() {
   const ps = command(spec.profile.dockerBinary, ['--host', spec.profile.dockerSocket, 'ps', '--no-trunc', '--format', '{{.ID}}']);
   if (ps.exitCode !== 0) return { socketReachable: false, runningIds: [], containers: [], command: { exitCode: ps.exitCode, errorCode: ps.errorCode } };
   const runningIds = ps.stdout.trim().split('\n').filter(Boolean).sort();
-  const result = command(spec.profile.dockerBinary, ['--host', spec.profile.dockerSocket, 'inspect', ...ids]);
+  const result = command(spec.profile.dockerBinary, ['--host', spec.profile.dockerSocket, 'inspect', ...ids], 5000, 1024 * 1024);
   if (result.exitCode !== 0) return { socketReachable: true, runningIds, containers: [], command: { exitCode: result.exitCode, errorCode: result.errorCode } };
   let parsed;
   try { parsed = JSON.parse(result.stdout); } catch { return { socketReachable: true, runningIds, parseError: true, containers: [], command: { exitCode: result.exitCode } }; }

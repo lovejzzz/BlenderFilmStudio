@@ -10,6 +10,10 @@ The user authorized temporarily stopping the `default` Colima profile and its fo
 
 This is a bounded causal intervention, not cleanup. It does not prune, delete, compact, recreate, upgrade, reconfigure, or signal any workload.
 
+### Preregistered correction C1: complete inspect capture
+
+The first formal attempt was rejected by the initial-manifest gate before the evidence root was created and before any stop or mutation. The Docker inspect response for four containers exceeded the runner's 32 KiB diagnostic-output slice, leaving truncated JSON even though the underlying 1 MiB process buffer and command succeeded. C1 permits up to 1 MiB only for this internal read-only inspect response; the runner still extracts and retains only the bounded manifest fields. No transition, sample, threshold, interpretation, or evidence ceiling changes.
+
 ## Frozen restore manifest
 
 Immediately before preregistration, `default` was running on `aarch64`, Docker and `virtiofs`. The exact four running container IDs are:
