@@ -5753,3 +5753,15 @@ C4 tool freeze `29c263c752a77410e82f6de6428db7a601430cca`在fresh v0.5通过admi
 这次失败暴露了C4推理错误：B61-D4只证明isolated Scene能保存一个已经具有pixel data的generated image，不能推出headless `Render Result`也具有可保存数据；B61-D5实际上早已明确证明后者无数据，并验证完整替代桥为multilayer EXR→OIIO Combined RGBA→ACEScg generated float image→isolated PNG。isolated output Scene本身有效，错误的是source-image假设。
 
 C5在任何工具修改前只授权复用这条已验证文件桥。production Scene继续active且每帧exact one Eevee render，但用`write_still=true`写入formal root内至多同时存在一个的`scratch/current-frame.exr`；固定OIIO 3.1.13.1/NumPy 2.3.4解码并记录Combined float digest，逐帧创建/删除generated image，写PNG后删除EXR，末尾删除scratch与output Scene。runner/auditor绑定v0.1–v0.5并切fresh v0.6，要求288 render/EXR write/decode/generated-image、0 adapter render、0 retained scratch；原14 gates、128 MiB retained output、2 GiB RSS、100 GiB reserve与HUMAN_PENDING不变。
+
+## J-463 · B62-T2 v0.6机器14/14与完整视频工程复核共同PASS
+
+Date: 2026-08-29 · Type: FORMAL FULL-TIMELINE PASS / LABELED FULL-VIDEO ENGINEERING REVIEW · New Blender processes: 2 · New Blender renders: 288
+
+C5 retry以tool freeze `99956b3faa5cc73af403a76c01ec38defc096706`在fresh v0.6完成全链。RENDER 41.352秒/peak RSS 522,780,672 bytes，INDEPENDENT 12.863秒/285,229,056 bytes，FFmpeg 0.256秒，ffprobe 0.097秒，Node audit 0.423秒；全部进程PASS且无breach。adapter exact执行288 production Eevee renders、288 temporary multilayer EXR writes、288 OIIO decodes、288 ACEScg generated float images、0 extra render、0 retained scratch；source scene byte-exact未保存。
+
+14/14 gates PASS：三个shot各96/96 distinct decoded digests，全片288/288 distinct，两cut pair不同，288/288 pixel finite/dynamic/nonempty，96/96 close geometry及causal state exact。外部FFmpeg raw RGBA framemd5也得到288 frames/288 unique。正式verdict为`B62_TERMINAL_288_FRAME_ANIMATIC_AND_CONTINUITY_SUPPORTED`；receipt file/self `5fc9b150…/4e8c0eca…`，audit file/self `3ef56849…/8ae8ef95…`。machine root为300 files/42,214,658 bytes/tree `e7d9fc6d…`；audit时可用303,239,876,608 bytes。
+
+随后用QuickTime准确打开formal MP4，从00:00无seek连续播放至timeline 00:12终点；播放内五次画面采样覆盖三shot，另以九张原始PNG和24-frame contact sheet复核。角色、房间、终端、蓝/珊瑚光色、两cut与动作/光照因果连续，没有可见冻结、asset swap或teleport，工程review PASS。human review file/self `c147932f…/760fa74b…`；final root 301 files/42,219,385 bytes/tree `9717fdca…`。
+
+缺点同步保留：wide开场前景遮挡过重，medium长期背向且过紧，Eevee 640×360/16 spp与低模资产不代表最终电影画质，且没有音频。T2只授权下一步预注册288帧Cycles EXR final render、一次受控Blender interruption、Codex restart与receipt-only resume；这些未完成前不关闭terminal cinematic proof。
