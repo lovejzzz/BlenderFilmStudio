@@ -5101,3 +5101,13 @@ Date: 2026-08-29 · Type: DIAGNOSTIC CORRECTION TOOL-FREEZE CANDIDATE · New Ble
 D2 preregistration commit `172735c`推送后，probe唯一算法变化是要求`sys.argv`中存在`--`并把其后的slice交给argparse。Supervisor改绑fresh v0.2 output root，把D2 correction/protocol加入tool freeze，并在启动前额外重算D1 retained tree与failure self-hash。EXR decoder、channel选择、projection、接受条件和资源上限均未修改。
 
 Probe/runner SHA-256为`aa0cc85b95ffb9afa5ed731d19b7edc7628c5e95f5997758d67bd0bd27736749 / 21e968c799fcbd3473e67f7ac5aee94bf9f5cb9049ec398384245afc4fd691d2`；D2 spec/protocol SHA为`fc97b4da288f5bcf1dcd4d154ee7d8a934913faa356de81fa4bef6a743a08982 / 2f4a7da7694b93c96014ba0fc45bca2fe6b97a42bde508d1ff71354b810007be`。Node/Python syntax、targeted ESLint zero-warning与diff check通过，v0.2 output root仍不存在。下一动作提交推送形成tool freeze；只有tool-freeze与origin exact后才允许第二个诊断Blender start。
+
+## J-393 · B61-D2真实decoder成功但跨运行时self-hash未准入，D3预注册
+
+Date: 2026-08-29 · Type: DECODER RESULT / ENVELOPE COUNTEREXAMPLE / RECONCILIATION PREREGISTRATION · Real Blender processes: 1 · New Blender renders: 0
+
+D2 tool-freeze commit `10f8dc0efc6a52fb19551ad392ca7180d2e8ffcf`推送后，Blender process exit 0。它复现bpy image size/channels/depth/pixel count均为0，并由Blender随附OpenImageIO 3.1.13.1枚举8个EXR subimages；唯一Combined quartet是`BFS_MASTER.Combined.R/G/B/A`。两次独立open均得到1920×1080×4、8,294,400个finite float32-LE values，digest exact为`192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a`。
+
+Probe result内部status PASS、Python canonical self-hash `5d502545…`；Node supervisor重算为`e0c9c275…`并拒绝写receipt。独立静态重算证明，Python原hash与stored exact；只把finite integral floats（如alpha统计中的`1.0`）规范为integer后，Python hash exact变为Node hash。因此D2整体标记INVALIDATED，不能直接当作accepted diagnostic，但decoder observations完整保留。D2 failure file SHA/self-hash为`7e1cf6761dfccb134d81bec4b3f1007d2daab3fe367e239137a01ea769ec024f / b0e4adf8c3acc90c0dd110f2f33080fa548ecc3e36f82a9e2db982c2ccc4751f`，root为5 files/10,386 bytes/`4e89e722…`。
+
+D3预注册为zero-Blender reconciliation：绑定immutable D2 tree，用Blender bundled standalone Python重算原self-hash，Node重现mismatch并证明仅integral-float normalization即可收敛，同时独立验证process/log/result所有语义门。D3不重解码、不改threshold，也不授权formal retry。

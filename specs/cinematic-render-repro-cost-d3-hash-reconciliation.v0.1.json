@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "bfs.cinematicRenderReproCostDiagnosticHashReconciliation.v0.1",
+  "diagnosticId": "B61-E1-D3",
+  "status": "PREREGISTERED",
+  "failedDiagnostic": {
+    "root": "experiments/b61-exr-reopen-diagnostic-v0-2",
+    "tree": {
+      "files": 5,
+      "bytes": 10386,
+      "sha256": "4e89e722f69d32c7ca75a19a3af52df30a46b93bf2abc397a79612748eeaa0bd"
+    },
+    "failure": {
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-2/failure.json",
+      "sha256": "7e1cf6761dfccb134d81bec4b3f1007d2daab3fe367e239137a01ea769ec024f",
+      "failureHash": "b0e4adf8c3acc90c0dd110f2f33080fa548ecc3e36f82a9e2db982c2ccc4751f",
+      "reason": "CROSS_RUNTIME_CANONICAL_NUMBER_SPELLING_MISMATCH",
+      "rootCauseProven": true
+    },
+    "result": {
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-2/result.json",
+      "sha256": "939e054c317c4f20ce1071fa0c2f348b730a8d59519e83332aa69f09b04e2649",
+      "storedPythonCanonicalHash": "5d502545162a6a27b367a9fc0bc9416985b63b0c383ca8a892ea550e2f34a3ce",
+      "nodeCanonicalHash": "e0c9c27589095704ba0cfe48407496680b915e4d631ca44c8265ef73d5076864",
+      "projectionSha256": "192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a"
+    }
+  },
+  "outputRoot": "experiments/b61-exr-reopen-reconciliation-v0-1",
+  "resourceCeilings": {
+    "blenderStarts": 0,
+    "renderCalls": 0,
+    "bundledPythonStarts": 1,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "dockerProcesses": 0,
+    "timeoutSeconds": 15,
+    "maximumOutputBytes": 1048576
+  },
+  "checks": [
+    "retained D2 tree and failure self-hash exact",
+    "process exit zero and raw-log hashes exact",
+    "result status PASS and operation counters exact",
+    "bpy empty pixel sequence reproduced",
+    "one unique Combined RGBA quartet",
+    "1920x1080x4 and 8294400 decoded float values",
+    "all decoded values finite",
+    "two independent opens have exact projection digest",
+    "Blender-bundled Python recomputes stored resultHash exact",
+    "Node mismatch is reproduced",
+    "normalizing only finite integral floats makes Python and Node canonical hashes exact"
+  ],
+  "decisionRule": "PASS supports the D1 decoder verdict from retained D2 Blender evidence and authorizes preregistration of a B61 C2 formal decoder correction. It does not itself authorize a formal retry.",
+  "claimBoundary": {
+    "usesRetainedRealBlenderEvidence": true,
+    "newBlenderProcess": false,
+    "newDecode": false,
+    "formalRetryAuthorized": false,
+    "pixelThresholdChanged": false,
+    "qualityThresholdChanged": false
+  }
+}

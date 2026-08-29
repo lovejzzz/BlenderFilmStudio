@@ -1,0 +1,58 @@
+{
+  "completed": {
+    "blenderProcesses": 1,
+    "combinedRgbaDecoded": true,
+    "dockerProcesses": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "renderCalls": 0,
+    "repeatDigestExact": true
+  },
+  "crossRuntimeHash": {
+    "nodeCanonicalHash": "e0c9c27589095704ba0cfe48407496680b915e4d631ca44c8265ef73d5076864",
+    "nodeValidSelfHash": false,
+    "pythonCanonicalHash": "5d502545162a6a27b367a9fc0bc9416985b63b0c383ca8a892ea550e2f34a3ce",
+    "pythonHashMatchesStored": true,
+    "pythonIntegralFloatNormalizedHash": "e0c9c27589095704ba0cfe48407496680b915e4d631ca44c8265ef73d5076864",
+    "rootCause": "Python json.dumps preserves integral floats such as 1.0 while JavaScript JSON.stringify emits 1; normalizing only finite integral floats makes the hashes exact."
+  },
+  "evidence": {
+    "decodedProjection": {
+      "allValuesFinite": true,
+      "height": 1080,
+      "repeatDigestExact": true,
+      "sha256": "192237bde2f628e9f554b7bbb480090d2139e3bcf04a198772ecf564c4c1409a",
+      "valueCount": 8294400,
+      "width": 1920
+    },
+    "process": {
+      "exitCode": 0,
+      "pythonExitCodeEnforced": true,
+      "sha256": "928babad50a149b8e0d33c40678cd08dc027041c72cf8bae5856724c099b95bb",
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-2/process.json"
+    },
+    "result": {
+      "resultHash": "5d502545162a6a27b367a9fc0bc9416985b63b0c383ca8a892ea550e2f34a3ce",
+      "sha256": "939e054c317c4f20ce1071fa0c2f348b730a8d59519e83332aa69f09b04e2649",
+      "status": "PASS",
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-2/result.json",
+      "verdict": "BLENDER_BUNDLED_OPENIMAGEIO_COMBINED_RGBA_DECODER_SUPPORTED"
+    },
+    "stderr": {
+      "sha256": "2e3586113e255edf90031181f6d72b740698c70611f98fb3f69804d7253a27dc",
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-2/stderr.log"
+    },
+    "stdout": {
+      "sha256": "409706f5c003bd4ab6ba799745ac7695d18bb733b777f5bd7fd0ad93c711155b",
+      "uri": "experiments/b61-exr-reopen-diagnostic-v0-2/stdout.log"
+    }
+  },
+  "failureHash": "b0e4adf8c3acc90c0dd110f2f33080fa548ecc3e36f82a9e2db982c2ccc4751f",
+  "message": "The Blender probe completed successfully and wrote a semantically passing result, but the Node supervisor rejected the Python-authored self-hash because the two runtimes serialize finite integral floats differently. D2 therefore has no accepted receipt even though its decoder observations are retained.",
+  "reason": "CROSS_RUNTIME_CANONICAL_NUMBER_SPELLING_MISMATCH",
+  "rootCauseProven": true,
+  "schemaVersion": "bfs.b61ExrReopenDiagnosticFailure.v0.2",
+  "scientificVerdict": null,
+  "status": "INVALIDATED",
+  "toolFreezeCommit": "10f8dc0efc6a52fb19551ad392ca7180d2e8ffcf"
+}
