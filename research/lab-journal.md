@@ -4783,3 +4783,15 @@ Gate 0 evidence commit `5d7d307cbc389592b765b6ad021a9796f232f432`与origin exact
 C2冻结唯一修正：把原34门中的`PREREGISTRATION_AND_TOOL_FREEZE_PUSHED`有效解释替换为`PREREGISTRATION_TOOL_FREEZE_AND_GATE0_CLOSED`，denominator仍34。Official preflight必须在创建任何五个production preflight children之前验证Gate 0 results/audit exact SHA、自哈希、`GATE0_HOST_STABILITY_CLOSED`、15/15 gates、20/20 attacks，以及fresh self-hashed HEALTHY sentinel、250 GiB floor、64 MiB browser ceiling与无alert；runner/auditor必须绑定同一receipt。
 
 新增6项C2攻击覆盖results/audit SHA、verdict、gate/attack counts和stale sentinel；原72 attacks、C1 8 attacks、DAG、process ceilings、100 GiB+0.5 GiB disk门及zero render/model/network/Docker均不变。下一动作先提交推送C2 spec/protocol/journal，再修改未冻结candidate tools；正式根继续禁止创建。
+
+## J-360 · B58-C2 Gate 0绑定与formal tool-freeze候选实现
+
+Date: 2026-08-29 · Type: B58 FORMAL TOOL IMPLEMENTATION · New Blender processes: 0 · New Blender renders: 0
+
+C2 preregistration commit `6dba91af525351b64c2147a63bf1681569ed9e29`推送后，official preflight现在在创建任何production-preflight child之前重读Gate 0 results/audit及live sentinel，验证exact hashes/self-hashes、15/15、20/20、HEALTHY、freshness、250 GiB floor、browser ceiling与无alert；receipt进入preflight。Formal runner在创建attempt root前复核同一binding，independent auditor再次重开evidence/live state并要求6/6 C2 attacks。
+
+Tool-freeze前静态审查还发现machine-readable B58 spec已冻结`job:production` alias，但package尚无该键；现补为exact命令`node scripts/run-restart-safe-production-job.mjs`并纳入preflight hash scope。Auditor里一个原candidate从未读取的`allCompletedExact`局部赋值被机械删除，不改变任何gate或结果。
+
+当前package/preflight/runner/auditor SHA为`6d13fa59a730d1b418208bfb7d28bc319b20d120aef98433e60a531fd20960af` / `11bc9221a23cac6f32c01cc1173f399bf435e7edf392b1779a815b25da866d10` / `29cad215ace783490641b12fc52a628fc631754c7fe17238a3a5d3f34afee794` / `f8571196cd4c425a987545b3b52ce7a5cf97bc572ca9a94311312a8de0ad9d53`；ledger/orchestrator保持`0946685b…` / `d8f3126f…`。三份formal scripts的Node syntax、zero-warning targeted ESLint、diff check及alias assertion通过，Gate 0与sentinel hashes也由B58自身canonicalizer验证。
+
+下一动作提交推送package、三份formal tools和本entry形成tool-freeze commit；之后在fresh临时clone先跑official preflight rehearsal，验证Gate 0 fail/pass binding、zero Blender和五份production preflight，再决定是否消费真实preflight root。
