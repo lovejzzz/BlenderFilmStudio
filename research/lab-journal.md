@@ -5093,3 +5093,11 @@ Date: 2026-08-29 · Type: DIAGNOSTIC COUNTEREXAMPLE / CORRECTION PREREGISTRATION
 D1 tool-freeze commit `e4300113eba493ac9c03f45dfa4fb2642b487ac9`推送后，一个Blender background process在0.4546秒以exit 2终止。Raw stderr证明argparse报告`--repository-root / --spec / --output`全部missing；probe在EXR binding与OpenImageIO import前终止。原因是脚本直接调用`parse_args()`解析Blender完整argv，没有显式截取最后一个`--`后的参数。这不反驳OpenImageIO候选，但D1已消耗其唯一Blender start，因此结果必须INVALIDATED且原root不得复用。
 
 D1 failure file SHA/self-hash为`e9c555c213a7b252f515373ea82bddaea897da78631414230898085931779a5d / 13eaa2c5728de8b94d632236d210e28128e27203fdece1e8487b523ec3bb0dba`；完整root为4 files/2,844 bytes/`bcbd13ae…`，operations为1 Blender、zero render/model/network/Docker。D2只授权argv-after-double-dash切片、绑定该失败树并使用fresh v0.2 root；输入、decoder、接受条件和资源上限不变。下一动作先提交推送失败证据与D2，再修改工具。
+
+## J-392 · B61-D2 argv correction工具候选
+
+Date: 2026-08-29 · Type: DIAGNOSTIC CORRECTION TOOL-FREEZE CANDIDATE · New Blender processes: 0 · New Blender renders: 0
+
+D2 preregistration commit `172735c`推送后，probe唯一算法变化是要求`sys.argv`中存在`--`并把其后的slice交给argparse。Supervisor改绑fresh v0.2 output root，把D2 correction/protocol加入tool freeze，并在启动前额外重算D1 retained tree与failure self-hash。EXR decoder、channel选择、projection、接受条件和资源上限均未修改。
+
+Probe/runner SHA-256为`aa0cc85b95ffb9afa5ed731d19b7edc7628c5e95f5997758d67bd0bd27736749 / 21e968c799fcbd3473e67f7ac5aee94bf9f5cb9049ec398384245afc4fd691d2`；D2 spec/protocol SHA为`fc97b4da288f5bcf1dcd4d154ee7d8a934913faa356de81fa4bef6a743a08982 / 2f4a7da7694b93c96014ba0fc45bca2fe6b97a42bde508d1ff71354b810007be`。Node/Python syntax、targeted ESLint zero-warning与diff check通过，v0.2 output root仍不存在。下一动作提交推送形成tool freeze；只有tool-freeze与origin exact后才允许第二个诊断Blender start。

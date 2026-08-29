@@ -3,6 +3,7 @@ import hashlib
 import json
 import math
 import os
+import sys
 from pathlib import Path
 
 import bpy
@@ -137,7 +138,9 @@ def main():
     parser.add_argument("--repository-root", required=True)
     parser.add_argument("--spec", required=True)
     parser.add_argument("--output", required=True)
-    args = parser.parse_args()
+    if "--" not in sys.argv:
+        raise RuntimeError("Blender post-double-dash argument boundary is missing")
+    args = parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
 
     repository_root = Path(args.repository_root).resolve(strict=True)
     spec_path = contained_file(repository_root, args.spec)

@@ -14,11 +14,13 @@ import { repositoryRoot } from './lib/scene-spec.mjs';
 
 const execFileAsync = promisify(execFile);
 const SPEC_URI = 'specs/cinematic-render-repro-cost-d1-exr-reopen-diagnostic.v0.1.json';
+const CORRECTION_URI = 'specs/cinematic-render-repro-cost-d2-argv-correction.v0.1.json';
 const PROTOCOL_URI = 'research/2026-08-29-b61-e1-d1-exr-reopen-diagnostic.md';
+const CORRECTION_PROTOCOL_URI = 'research/2026-08-29-b61-e1-d2-argv-correction.md';
 const PROBE_URI = 'blender/probe_b61_exr_reopen.py';
 const RUNNER_URI = 'scripts/run-b61-d1-exr-reopen-diagnostic.mjs';
-const EXPECTED_OUTPUT = 'experiments/b61-exr-reopen-diagnostic-v0-1';
-const PREREGISTRATION_COMMIT = '9d5cc09';
+const EXPECTED_OUTPUT = 'experiments/b61-exr-reopen-diagnostic-v0-2';
+const PREREGISTRATION_COMMIT = '172735c';
 
 function parseArguments(argv) {
   const parsed = {};
@@ -79,7 +81,7 @@ export async function runD1(argv) {
   if (head !== parsed.toolFreezeCommit || origin !== parsed.toolFreezeCommit) throw new Error('D1 freeze must equal pushed HEAD/origin');
   await git(['merge-base', '--is-ancestor', PREREGISTRATION_COMMIT, parsed.toolFreezeCommit]);
   const toolHashes = {};
-  for (const uri of [SPEC_URI, PROTOCOL_URI, PROBE_URI, RUNNER_URI]) {
+  for (const uri of [SPEC_URI, CORRECTION_URI, PROTOCOL_URI, CORRECTION_PROTOCOL_URI, PROBE_URI, RUNNER_URI]) {
     const path = await resolveExistingRepositoryPath(uri, `D1 frozen ${uri}`);
     const current = await sha256File(path);
     const frozen = sha256Bytes(await git(['show', `${parsed.toolFreezeCommit}:${uri}`], null));
@@ -88,6 +90,9 @@ export async function runD1(argv) {
   }
   const specPath = await resolveExistingRepositoryPath(SPEC_URI, 'D1 spec');
   const spec = JSON.parse(await readFile(specPath, 'utf8'));
+  const correctionPath = await resolveExistingRepositoryPath(CORRECTION_URI, 'D2 correction');
+  const correction = JSON.parse(await readFile(correctionPath, 'utf8'));
+  if (correction.status !== 'PREREGISTERED' || correction.authorizedOutputRoot !== parsed.outputRoot) throw new Error('D2 correction binding mismatch');
   for (const key of ['attemptTree', 'formalTree']) {
     const uri = key === 'attemptTree' ? spec.failedRun.attemptRoot : spec.failedRun.formalRoot;
     if (canonicalHash(await treeIdentity(uri)) !== canonicalHash(spec.failedRun[key])) throw new Error(`D1 retained ${key} mismatch`);
@@ -98,6 +103,11 @@ export async function runD1(argv) {
     || failure.failureHash !== spec.failedRun.failureSummary.failureHash || failure.rootCauseProven !== true) throw new Error('D1 failure binding mismatch');
   const exrPath = await resolveExistingRepositoryPath(spec.failedRun.retainedExr.uri, 'D1 retained EXR');
   if (await sha256File(exrPath) !== spec.failedRun.retainedExr.sha256) throw new Error('D1 retained EXR mismatch');
+  if (canonicalHash(await treeIdentity(correction.failedDiagnostic.root)) !== canonicalHash(correction.failedDiagnostic.tree)) throw new Error('D2 retained D1 tree mismatch');
+  const d1FailurePath = await resolveExistingRepositoryPath(correction.failedDiagnostic.failure.uri, 'D2 retained D1 failure');
+  const d1Failure = JSON.parse(await readFile(d1FailurePath, 'utf8'));
+  if (await sha256File(d1FailurePath) !== correction.failedDiagnostic.failure.sha256 || !validSelfHash(d1Failure, 'failureHash')
+    || d1Failure.failureHash !== correction.failedDiagnostic.failure.failureHash || d1Failure.rootCauseProven !== true) throw new Error('D2 retained D1 failure mismatch');
 
   const outputRoot = await resolveFreshRepositoryPath(parsed.outputRoot, 'D1 output root');
   await durableMkdir(outputRoot);
