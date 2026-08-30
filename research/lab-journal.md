@@ -5837,3 +5837,17 @@ F0.2在F0.1固定官方父提交`fbe6228777e7d9afefcd61a413844e790ae75db7`上建
 配置namespace为`FilmStudioEngineF0`，CONFIG/SCRIPTS/DATAFILES/EXTENSIONS全部解析到`~/Library/Application Support/FilmStudioEngineF0/5.2/`之下。preference save、factory reset和reset后再次save均返回`FINISHED`；官方`~/Library/Application Support/Blender`在测试前、save/reset后和GUI launch后均为`ABSENT`，共同digest为`08b6a0bc6906cd596f1458be5ac2911c478709b27e4f3c52e8edd0293e2f4c56`。配置碰撞负控注入官方root后按同一准入路径BLOCKED，Blender启动数为0。
 
 accepted evidence root为`F0.2-2026-08-29-mac-m2max-attempt-02`；最终verdict self hash已独立复算为`615c3021227a4f3b4008ec73acca5ddc04511e3283dfc1a7bb7fddfde45192f4`。F0.2正式关闭为PASS，且只证明本机上的独立研究身份与配置隔离；签名、公证、安装/卸载、最终品牌与完整`.blend`往返仍未证明。active gate转为F0.3 minimum film workspace：必须先冻结官方Blender交互基线，再验证typed Project / Scene / Shot / Character状态、one-shot任务、保存重开、Expert Mode往返和至少一项交互优势。
+
+## J-471 · F0.3 最小电影工作台与一键 Shot 任务 PASS
+
+Date: 2026-08-30 · Type: F0.3 MINIMUM FILM WORKSPACE PASS · Host: macOS 25.6.0 / Apple M2 Max / 64 GiB · New Blender source builds: 1 · Formal native process starts: 6
+
+F0.3在F0.2身份提交`0a25790a1cd6feff4bae1b03d81e4c43ec55a0b5`上建立`codex/f0.3-minimum-film-workspace`，源码提交为`4f1446f780c2b7e23bc66f584b36f6254ecd985c`。源patch严格限制为3 paths / 190 non-generated lines：版本化`bfs.filmWorkspace.v0.1` RNA state持久化Project `PRJ_REMAINDER`、Scene `SC01`、Character `CHR_GUARDIAN`和Shot collection；Film Mode顶部直接显示四类对象，`Create Shot`创建并选择真实Camera `SHOT_SH010_WIDE`；Expert Mode只切换界面，不复制或转换场景数据。
+
+官方Blender冻结语义代理需要依次创建并命名Project/Scene/Character三个Empty与Shot Camera，真实可见UI测得24次操作、0错误、18,539 ms。F0正式UI从同一起始语义只点击一次`Create Shot`，1,306 ms后顶部显示`Shot SH010`、Outliner选中`SHOT_SH010_WIDE`且report确认创建；交互减少23次（95.83%），没有通用DCC导航或Python console。随后两次独立点击完成Expert Mode→Film Mode往返：完整Blender菜单与11个workspace tabs可见，返回后typed identifiers、Shot与Camera保持精确。
+
+clean build在fresh root运行649.571秒、peak RSS 2,064,171,008 bytes，产物binary SHA-256为`eedf94e75571b78d83e916f2530630b83ab59927173d784e615392c528107695`。四个独立headless进程分别完成create/save、退出后reopen、移除可选Shot状态、再次reopen并恢复；持久化`.blend`为`e2b0f4bf…`，缺失可选状态负控为`c93e0765…`。每次原生启动前都fresh admit，最低观察free bytes为175,417,856,000，高于160 GiB阈值；并发native job最多1。
+
+可见UI第一次准入后因macOS锁屏在应用发现前暂停，原生启动数0；用户解锁后按相同阈值重新准入，未放宽科学标准。官方Blender配置在官方基线后只含两个空目录；所有F0运行前后digest保持`c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf`。最终verdict self hash为`472abf5df3c66dba375e46fe7e9a0e152cc3d6c37966ab13f6d7e2601fea0390`，F0.3关闭为PASS。
+
+边界保持：F0.3只证明最小typed电影工作台、冻结任务的交互优势、持久化与Expert往返；尚未证明SceneSpec内嵌、render receipt、上游merge成本、安装/卸载或生产就绪。active gate转为F0.4 embedded typed contract：必须先冻结同一SceneSpec与外部compiler bytes，要求内嵌BuildPlan canonical-exact、B01/B02隔离构建、proposal diff/approval scope可见，并在scene mutation前拒绝unknown field、path escape、non-finite number与unapproved mutation。

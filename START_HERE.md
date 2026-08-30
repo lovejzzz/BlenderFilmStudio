@@ -1,7 +1,7 @@
 # BlenderFilmStudio — new machine cold start
 
-> **Current decision:** F0.1 and F0.2 passed on the admitted M2 Max host.
-> Continue with F0.3 minimum film workspace; do not assume the fork is viable
+> **Current decision:** F0.1, F0.2 and F0.3 passed on the admitted M2 Max host.
+> Continue with F0.4 embedded typed contract; do not assume the fork is viable
 > until F0.1-F0.7 all close.
 
 This is the authoritative handoff for a fresh Codex session. The repository is
@@ -14,8 +14,8 @@ both a research notebook and an executable evidence base. Read this page,
   and fork-maintenance reference; an external shell remains the fallback.
 - **Pinned engine baseline:** official `v5.2.0` at
   `fbe6228777e7d9afefcd61a413844e790ae75db7`.
-- **Active experiment:** `F0-SOURCE-FEASIBILITY`, gate `F0.3`.
-- **Closed gates:** `F0.1 PASS` and `F0.2 PASS`. Two clean official builds reported Blender
+- **Active experiment:** `F0-SOURCE-FEASIBILITY`, gate `F0.4`.
+- **Closed gates:** `F0.1 PASS`, `F0.2 PASS` and `F0.3 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
   not byte-for-byte reproducible; the bounded differences are recorded in
   `F0.1-2026-08-29-mac-m2max-attempt-07/comparison.json`.
@@ -24,6 +24,12 @@ both a research notebook and an executable evidence base. Read this page,
   state under `FilmStudioEngineF0`. Save, reset and GUI launch left the
   official Blender configuration root absent; the accepted receipt is in
   `F0.2-2026-08-29-mac-m2max-attempt-02/verdict.json`.
+- **Minimum film workspace:** the 3-path / 190-line F0.3 patch adds versioned
+  typed Project / Scene / Shot / Character RNA state, a one-click SH010 Camera
+  task, persistent `.blend` state and a lossless Expert Mode round-trip. The
+  frozen UI task required 1 interaction versus 24 in official Blender; the
+  accepted receipt is in
+  `F0.3-2026-08-30-mac-m2max-attempt-01/verdict.json`.
 - **Inherited evidence:** B01-B62 cover structured scene compilation, Blender
   execution, safety/admission, pixels, production passes, cost, recovery and a
   three-shot cinematic attempt. These results are evidence, not a claim that
@@ -31,7 +37,7 @@ both a research notebook and an executable evidence base. Read this page,
 - **Most important retained rejection:** B62's latest camera holdout passed all
   technical gates but failed the frozen composition threshold at frame 288.
   Source control does not replace direction or taste.
-- **Unproven:** native film workspace, embedded contract equivalence, render
+- **Unproven:** embedded contract equivalence, render
   receipts inside the product, merge cost, packaging and `.blend` round-trip
   isolation.
 
@@ -91,10 +97,11 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. F0.1 and F0.2 are closed. For F0.3, preregister one frozen film-workspace
-   task and its official-Blender interaction baseline before changing source.
-   The implementation must expose typed Project / Scene / Shot / Character
-   state, preserve Expert Mode, and survive save, quit and reopen.
+5. F0.1-F0.3 are closed. For F0.4, preregister the exact SceneSpec fixture,
+   external compiler bytes, canonical BuildPlan comparison and proposal/approval
+   scope before changing source. The embedded path must build isolated B01/B02
+   roots and reject unknown fields, path escape, non-finite values and
+   unapproved mutations before scene mutation.
 
 ## What not to do
 
@@ -112,14 +119,14 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next machine should push one small, auditable F0.3 checkpoint containing:
+The next machine should push one small, auditable F0.4 checkpoint containing:
 
-- a unique F0.3 experiment root and a preregistered frozen task;
-- the official Blender 5.2.0 interaction baseline;
-- native Project / Scene / Shot / Character state and one-shot creation;
-- save / quit / reopen persistence evidence;
-- Expert Mode round-trip and missing-optional-state negative controls;
-- at least one measured task with fewer interactions than the baseline;
+- a unique F0.4 experiment root and a preregistered frozen SceneSpec fixture;
+- canonical-exact external-versus-embedded BuildPlan bytes;
+- isolated clean B01 and B02 build receipts;
+- proposal diff and approval scope visible before execution;
+- pre-mutation rejection of unknown fields, path escape, non-finite values and
+  unapproved mutation;
 - complete success or failure receipts;
 - a journal entry and, if useful, a website update.
 
