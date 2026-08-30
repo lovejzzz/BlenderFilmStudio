@@ -14,7 +14,7 @@ import { resolve } from 'node:path';
 import process from 'node:process';
 
 const FROZEN_PATH = '/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin';
-const SPEC_RELATIVE = 'specs/ai-native-studio-repository-readiness.v0.1.json';
+const SPEC_RELATIVE = 'specs/ai-native-studio-repository-readiness.v0.2.json';
 
 function canonicalize(value) {
   if (Array.isArray(value)) return value.map(canonicalize);
@@ -216,6 +216,19 @@ async function main() {
   addCheck(checks, 'runner-verdict-status', verdict.status === 'PASS', verdict.status, 'PASS');
   addCheck(checks, 'runner-claim', verdict.claim === 'NO_EXTERNAL_WRITE_REPOSITORY_READINESS_REHEARSAL_SUPPORTED', verdict.claim, 'NO_EXTERNAL_WRITE_REPOSITORY_READINESS_REHEARSAL_SUPPORTED');
 
+  const retainedFailurePath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'failure.json');
+  const retainedInventoryPath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'source-inventory.json');
+  const retainedFailure = await readHashedJson(retainedFailurePath);
+  const retainedInventory = await readHashedJson(retainedInventoryPath);
+  addCheck(checks, 'retained-failure-file-hash', retainedFailure.fileSha256 === spec.correction.retainedFailureFileSha256, retainedFailure.fileSha256, spec.correction.retainedFailureFileSha256);
+  addCheck(checks, 'retained-failure-receipt-hash', retainedFailure.record.receiptHash === spec.correction.retainedFailureReceiptHash && retainedFailure.receiptHashValid, retainedFailure.record.receiptHash, spec.correction.retainedFailureReceiptHash);
+  addCheck(checks, 'retained-inventory-receipt-hash', retainedInventory.record.receiptHash === spec.correction.retainedSourceInventoryReceiptHash && retainedInventory.receiptHashValid, retainedInventory.record.receiptHash, spec.correction.retainedSourceInventoryReceiptHash);
+  addCheck(checks, 'retained-bundle-hash', await sha256File(spec.paths.retainedBundle) === spec.correction.retainedBundleSha256, await sha256File(spec.paths.retainedBundle), spec.correction.retainedBundleSha256);
+  const retainedMirrorShallow = git(spec.paths.retainedFullMirror, ['rev-parse', '--is-shallow-repository']) === 'true';
+  const retainedMirrorOrigin = git(spec.paths.retainedFullMirror, ['remote', 'get-url', 'origin']);
+  addCheck(checks, 'retained-mirror-not-shallow', !retainedMirrorShallow, retainedMirrorShallow, false);
+  addCheck(checks, 'retained-mirror-origin', retainedMirrorOrigin === spec.network.readOnlyFullHistorySource, retainedMirrorOrigin, spec.network.readOnlyFullHistorySource);
+
   const sourceHead = git(sourceRoot, ['rev-parse', 'HEAD']);
   const sourceTree = git(sourceRoot, ['rev-parse', 'HEAD^{tree}']);
   const sourceTreeListingSha256 = sha256Bytes(gitBuffer(sourceRoot, ['ls-tree', '-r', '-z', 'HEAD']));
@@ -278,6 +291,9 @@ async function main() {
   addCheck(checks, 'mirror-candidate-head', mirrorCandidateHead === spec.bindings.sourceHead, mirrorCandidateHead, spec.bindings.sourceHead);
   addCheck(checks, 'mirror-candidate-tree', mirrorCandidateTree === spec.bindings.sourceTree, mirrorCandidateTree, spec.bindings.sourceTree);
   addCheck(checks, 'mirror-target-present', git(mirrorRoot, ['cat-file', '-t', spec.bindings.upstreamTarget]) === 'commit', spec.bindings.upstreamTarget, 'commit exists');
+  addCheck(checks, 'attempt02-mirror-mode', rehearsal.clone.mode === 'RETAINED_FULL_MIRROR_LOCAL_CLONE', rehearsal.clone.mode, 'RETAINED_FULL_MIRROR_LOCAL_CLONE');
+  addCheck(checks, 'attempt02-mirror-source', rehearsal.clone.source === spec.paths.retainedFullMirror, rehearsal.clone.source, spec.paths.retainedFullMirror);
+  addCheck(checks, 'attempt02-bundle-matches-retained', rehearsal.bundle.sha256 === spec.correction.retainedBundleSha256, rehearsal.bundle.sha256, spec.correction.retainedBundleSha256);
 
   const destinationHead = git(destinationRoot, ['rev-parse', 'refs/heads/main']);
   const destinationTree = git(destinationRoot, ['rev-parse', 'refs/heads/main^{tree}']);
@@ -323,7 +339,8 @@ async function main() {
   };
   for (const [key, expected] of Object.entries(expectedZeros)) addCheck(checks, `counter:${key}`, counters[key] === expected, counters[key], expected);
   addCheck(checks, 'one-local-file-push', counters.localFilePushes === 1, counters.localFilePushes, 1);
-  addCheck(checks, 'one-read-only-mirror', counters.readOnlyFullMirrorClones === 1, counters.readOnlyFullMirrorClones, 1);
+  addCheck(checks, 'no-second-network-mirror', counters.readOnlyFullMirrorClones === spec.network.expectedReadOnlyFullMirrorClones, counters.readOnlyFullMirrorClones, spec.network.expectedReadOnlyFullMirrorClones);
+  addCheck(checks, 'one-retained-local-mirror', counters.retainedFullMirrorLocalClones === spec.network.expectedRetainedFullMirrorLocalClones, counters.retainedFullMirrorLocalClones, spec.network.expectedRetainedFullMirrorLocalClones);
   addCheck(checks, 'commands-no-external-mutation', network.commands.every(command => command.externalMutation === false), network.commands.filter(command => command.externalMutation), []);
   const flattenedCommands = network.commands.map(command => command.command.join(' ')).join('\n');
   const forbiddenCommand = /\b(?:repo create|lfs push|push --mirror|api .*\/forks|curl .*--request\s+(?:POST|PUT|PATCH|DELETE))\b/i;

@@ -17,8 +17,9 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import process from 'node:process';
 
 const FROZEN_PATH = '/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin';
-const SPEC_RELATIVE = 'specs/ai-native-studio-repository-readiness.v0.1.json';
+const SPEC_RELATIVE = 'specs/ai-native-studio-repository-readiness.v0.2.json';
 const PROTOCOL_RELATIVE = 'research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md';
+const CORRECTION_RELATIVE = 'research/2026-08-30-post-f0-repository-readiness-c1-bundle-context.md';
 const CHARTER_RELATIVE = 'research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md';
 const POST_F0_CONTRACT_RELATIVE = 'specs/ai-native-studio-post-f0-phase-b.v0.1.json';
 const STATE_RELATIVE = 'handoff/ai-native-studio-current-state.v0.1.json';
@@ -269,6 +270,7 @@ async function collectPreflight({ repositoryRoot, spec, queryCandidate = true })
   const charterPath = resolve(repositoryRoot, CHARTER_RELATIVE);
   const postF0ContractPath = resolve(repositoryRoot, POST_F0_CONTRACT_RELATIVE);
   const protocolPath = resolve(repositoryRoot, PROTOCOL_RELATIVE);
+  const correctionPath = resolve(repositoryRoot, CORRECTION_RELATIVE);
   const specPath = resolve(repositoryRoot, SPEC_RELATIVE);
   const statePath = resolve(repositoryRoot, STATE_RELATIVE);
   const failures = [];
@@ -296,6 +298,40 @@ async function collectPreflight({ repositoryRoot, spec, queryCandidate = true })
     spec.network.lfsUploadAuthorized,
   ];
   if (authValues.some(Boolean)) failures.push('EXTERNAL_AUTHORIZATION_SENTINEL_NOT_FALSE');
+  let retainedInput = null;
+  if (spec.correction?.reuseRetainedFullMirrorLocally) {
+    const retainedFailurePath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'failure.json');
+    const retainedInventoryPath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'source-inventory.json');
+    const retainedMirrorExists = await exists(spec.paths.retainedFullMirror);
+    const retainedBundleExists = await exists(spec.paths.retainedBundle);
+    const retainedFailureExists = await exists(retainedFailurePath);
+    const retainedInventoryExists = await exists(retainedInventoryPath);
+    if (!retainedMirrorExists) failures.push('RETAINED_FULL_MIRROR_MISSING');
+    if (!retainedBundleExists) failures.push('RETAINED_BUNDLE_MISSING');
+    if (!retainedFailureExists) failures.push('RETAINED_FAILURE_EVIDENCE_MISSING');
+    if (!retainedInventoryExists) failures.push('RETAINED_INVENTORY_EVIDENCE_MISSING');
+    if (retainedMirrorExists && git(spec.paths.retainedFullMirror, ['rev-parse', '--is-shallow-repository']) !== 'false') failures.push('RETAINED_FULL_MIRROR_IS_SHALLOW');
+    if (retainedMirrorExists && git(spec.paths.retainedFullMirror, ['remote', 'get-url', 'origin']) !== spec.network.readOnlyFullHistorySource) failures.push('RETAINED_FULL_MIRROR_ORIGIN_MISMATCH');
+    if (retainedBundleExists && await sha256File(spec.paths.retainedBundle) !== spec.correction.retainedBundleSha256) failures.push('RETAINED_BUNDLE_HASH_MISMATCH');
+    if (retainedFailureExists && await sha256File(retainedFailurePath) !== spec.correction.retainedFailureFileSha256) failures.push('RETAINED_FAILURE_FILE_HASH_MISMATCH');
+    const retainedFailure = retainedFailureExists ? JSON.parse(await readFile(retainedFailurePath, 'utf8')) : null;
+    const retainedInventory = retainedInventoryExists ? JSON.parse(await readFile(retainedInventoryPath, 'utf8')) : null;
+    if (retainedFailure?.receiptHash !== spec.correction.retainedFailureReceiptHash) failures.push('RETAINED_FAILURE_RECEIPT_HASH_MISMATCH');
+    if (retainedInventory?.receiptHash !== spec.correction.retainedSourceInventoryReceiptHash) failures.push('RETAINED_INVENTORY_RECEIPT_HASH_MISMATCH');
+    retainedInput = {
+      mirror: spec.paths.retainedFullMirror,
+      mirrorExists: retainedMirrorExists,
+      mirrorShallow: retainedMirrorExists ? git(spec.paths.retainedFullMirror, ['rev-parse', '--is-shallow-repository']) === 'true' : null,
+      mirrorOrigin: retainedMirrorExists ? git(spec.paths.retainedFullMirror, ['remote', 'get-url', 'origin']) : null,
+      mirrorShowRefSha256: retainedMirrorExists ? sha256Bytes(gitBuffer(spec.paths.retainedFullMirror, ['show-ref'])) : null,
+      bundle: spec.paths.retainedBundle,
+      bundleExists: retainedBundleExists,
+      bundleSha256: retainedBundleExists ? await sha256File(spec.paths.retainedBundle) : null,
+      failureFileSha256: retainedFailureExists ? await sha256File(retainedFailurePath) : null,
+      failureReceiptHash: retainedFailure?.receiptHash ?? null,
+      inventoryReceiptHash: retainedInventory?.receiptHash ?? null,
+    };
+  }
   const parentCommits = [spec.bindings.parentCharterCommit, spec.bindings.parentStateCommit];
   for (const commit of parentCommits) {
     const result = execResult('/usr/bin/git', ['-C', repositoryRoot, 'merge-base', '--is-ancestor', commit, researchHead]);
@@ -311,6 +347,8 @@ async function collectPreflight({ repositoryRoot, spec, queryCandidate = true })
       clean: researchClean,
       protocolPath,
       protocolSha256: await sha256File(protocolPath),
+      correctionPath,
+      correctionSha256: await sha256File(correctionPath),
       specPath,
       specSha256: await sha256File(specPath),
       statePath,
@@ -334,6 +372,7 @@ async function collectPreflight({ repositoryRoot, spec, queryCandidate = true })
       maximumProjectedWriteBytes: String(spec.acceptance.maximumProjectedWriteBytes),
     },
     candidate,
+    retainedInput,
     authorization: {
       ownerAuthorized: spec.network.candidateOwnerIsAuthorized,
       visibilityAuthorized: spec.network.candidateVisibilityIsAuthorized,
@@ -595,16 +634,21 @@ async function formalRun({ repositoryRoot, spec, preflight }) {
   const mirrorRoot = spec.paths.fullMirror;
   const cloneStdout = resolve(evidenceRoot, 'mirror-clone.stdout.log');
   const cloneStderr = resolve(evidenceRoot, 'mirror-clone.stderr.log');
+  const reuseRetainedMirror = spec.correction?.reuseRetainedFullMirrorLocally === true;
+  const mirrorCloneSource = reuseRetainedMirror ? spec.paths.retainedFullMirror : spec.network.readOnlyFullHistorySource;
+  const mirrorCloneArgs = reuseRetainedMirror
+    ? ['clone', '--mirror', '--local', mirrorCloneSource, mirrorRoot]
+    : ['clone', '--mirror', mirrorCloneSource, mirrorRoot];
   commandLog.push({
     stage: 'RR.4',
-    operation: 'full Git mirror acquisition',
-    command: ['/usr/bin/git', 'clone', '--mirror', spec.network.readOnlyFullHistorySource, mirrorRoot],
-    network: 'READ_ONLY',
+    operation: reuseRetainedMirror ? 'retained full mirror local clone' : 'full Git mirror acquisition',
+    command: ['/usr/bin/git', ...mirrorCloneArgs],
+    network: reuseRetainedMirror ? 'NONE' : 'READ_ONLY',
     externalMutation: false,
   });
   const clone = await runLogged({
     command: '/usr/bin/git',
-    args: ['clone', '--mirror', spec.network.readOnlyFullHistorySource, mirrorRoot],
+    args: mirrorCloneArgs,
     cwd: externalRoot,
     stdoutPath: cloneStdout,
     stderrPath: cloneStderr,
@@ -613,6 +657,16 @@ async function formalRun({ repositoryRoot, spec, preflight }) {
   });
   if (clone.exitCode !== 0 || clone.timedOut || clone.resourceExceeded) {
     throw new Error(`FULL_MIRROR_CLONE_FAILED exit=${clone.exitCode} timeout=${clone.timedOut} resource=${clone.resourceExceeded}`);
+  }
+  if (reuseRetainedMirror) {
+    commandLog.push({
+      stage: 'RR.4',
+      operation: 'restore official fetch origin on local work mirror',
+      command: ['/usr/bin/git', '-C', mirrorRoot, 'remote', 'set-url', 'origin', spec.network.readOnlyFullHistorySource],
+      network: 'NONE',
+      externalMutation: false,
+    });
+    exec('/usr/bin/git', ['-C', mirrorRoot, 'remote', 'set-url', 'origin', spec.network.readOnlyFullHistorySource]);
   }
   const mirrorShallow = git(mirrorRoot, ['rev-parse', '--is-shallow-repository']) === 'true';
   const targetPresent = execResult('/usr/bin/git', ['-C', mirrorRoot, 'cat-file', '-e', `${spec.bindings.upstreamTarget}^{commit}`]).exitCode === 0;
@@ -716,6 +770,8 @@ async function formalRun({ repositoryRoot, spec, preflight }) {
     observedAt: new Date().toISOString(),
     clone: {
       ...clone,
+      mode: reuseRetainedMirror ? 'RETAINED_FULL_MIRROR_LOCAL_CLONE' : 'READ_ONLY_NETWORK_FULL_MIRROR_CLONE',
+      source: mirrorCloneSource,
       stdoutSha256: await sha256File(cloneStdout),
       stderrSha256: await sha256File(cloneStderr),
     },
@@ -777,7 +833,8 @@ async function formalRun({ repositoryRoot, spec, preflight }) {
     commands: commandLog,
     counters: {
       authenticatedMetadataQueries: 1,
-      readOnlyFullMirrorClones: 1,
+      readOnlyFullMirrorClones: reuseRetainedMirror ? 0 : 1,
+      retainedFullMirrorLocalClones: reuseRetainedMirror ? 1 : 0,
       externalRepositoryCreates: 0,
       externalGitPushes: 0,
       localFilePushes: 1,
@@ -815,7 +872,7 @@ async function formalRun({ repositoryRoot, spec, preflight }) {
   const verdictPath = resolve(evidenceRoot, 'verdict.json');
   const verdict = await writeJsonExclusive(verdictPath, {
     schemaVersion: 'bfs.repositoryReadinessVerdict.v0.1',
-    protocol: 'AI-NATIVE-STUDIO-REPOSITORY-READINESS-v0.1',
+    protocol: 'AI-NATIVE-STUDIO-REPOSITORY-READINESS-v0.2-C1',
     observedAt: new Date().toISOString(),
     status: Object.values(finalChecks).every(Boolean) ? 'PASS' : 'FAIL',
     claim: 'NO_EXTERNAL_WRITE_REPOSITORY_READINESS_REHEARSAL_SUPPORTED',
