@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "bfs.f0WorkspacePersistence.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.3",
+  "status": "PASS",
+  "observedAt": "2026-08-30T02:45:55Z",
+  "method": "One native process created and saved the typed workspace, exited, and a second independently admitted native process reopened and audited the saved blend.",
+  "artifact": {
+    "path": "artifacts/f0.3-workspace-persistence.blend",
+    "sha256": "e2b0f4bf7e76041ea23214143b5ddc96ae950e276a5c48082db633fd9c6a43f3"
+  },
+  "processes": [
+    {
+      "stage": "create-save",
+      "admissionReceiptHash": "79d91007fbd461a21de9b57110eb624c3abf4a86b1aa57fcdf9339eb2c57c4fb",
+      "receiptHash": "3b9c8b07cf389bf2b07f72f318ebfdffc93d51d0b9c28c9ed0d531f511b0ec6c",
+      "nativeJobStarts": 1,
+      "operations": {
+        "createShot": "FINISHED",
+        "save": "FINISHED"
+      }
+    },
+    {
+      "stage": "reopen",
+      "admissionReceiptHash": "9c05a8f16d327baf4754f897281b8be855ae25d129e1a34346eacabe0fc718b6",
+      "receiptHash": "67630d08bab78804b348ef8133ef438aef8b4595df79ee8e3bec9d1fc1d73f18",
+      "nativeJobStarts": 1
+    }
+  ],
+  "reopenedState": {
+    "schemaVersion": "bfs.filmWorkspace.v0.1",
+    "project": {
+      "identifier": "PRJ_REMAINDER",
+      "name": "Remainder"
+    },
+    "scene": {
+      "identifier": "SC01",
+      "name": "The Room"
+    },
+    "character": {
+      "identifier": "CHR_GUARDIAN",
+      "name": "Guardian"
+    },
+    "shot": {
+      "identifier": "SH010",
+      "name": "WIDE",
+      "camera": "SHOT_SH010_WIDE"
+    },
+    "activeShotIndex": 0,
+    "expertMode": false,
+    "activeObject": "SHOT_SH010_WIDE",
+    "selectedObjects": [
+      "SHOT_SH010_WIDE"
+    ],
+    "sceneCamera": "SHOT_SH010_WIDE"
+  },
+  "checks": {
+    "saveFinished": true,
+    "firstProcessExited": true,
+    "secondProcessReopenedExactFile": true,
+    "typedIdentifiersExact": true,
+    "activeShotPersisted": true,
+    "selectedCameraPersisted": true,
+    "sceneCameraBindingPersisted": true,
+    "filmModePersisted": true,
+    "officialConfigurationUnchanged": true
+  },
+  "failures": [],
+  "receiptHash": "4f6c153fff0baec07b42546a4c20798457c96ef1af38cbf52c37ab3bb6935bb9"
+}

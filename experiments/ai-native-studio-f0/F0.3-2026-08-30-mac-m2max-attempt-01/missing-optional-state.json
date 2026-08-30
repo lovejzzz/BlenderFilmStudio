@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "bfs.f0MissingOptionalWorkspaceState.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.3",
+  "status": "PASS",
+  "observedAt": "2026-08-30T02:45:55Z",
+  "method": "A native process removed only Shot and camera state from a valid typed workspace and saved a separate blend; a second independently admitted process reopened it and invoked the frozen recovery action.",
+  "artifact": {
+    "path": "artifacts/f0.3-workspace-missing-optional.blend",
+    "sha256": "c93e07653fd4ba58c3c583c96dd71a6abae5e4216119b615436d273b1a00fca4"
+  },
+  "processes": [
+    {
+      "stage": "missing-prepare",
+      "admissionReceiptHash": "0ea2a51c38cb67638d19f757eaa9568248b3586b672fbbaeb13e47ba56b9edfa",
+      "receiptHash": "a8a539e6b3353ad9bccb58f6dbd98f78e7b88adc55d8bd51f14e0cf29cdf903b",
+      "nativeJobStarts": 1
+    },
+    {
+      "stage": "missing-reopen",
+      "admissionReceiptHash": "a6c9702f69e14b540a078ed906fc151d094ed168cd8c82d7faaa18f9b059d14e",
+      "receiptHash": "ad2826ccc3f3117ec0edd335b322a0066165d6386b7f8a85761b8f8b8ed3da08",
+      "nativeJobStarts": 1,
+      "recoveryCreateShot": "FINISHED"
+    }
+  ],
+  "stateBeforeRecovery": {
+    "schemaVersion": "bfs.filmWorkspace.v0.1",
+    "project": "PRJ_REMAINDER",
+    "scene": "SC01",
+    "character": "CHR_GUARDIAN",
+    "shots": [],
+    "activeShotIndex": -1,
+    "sceneCamera": null,
+    "createShotOperatorAvailable": true
+  },
+  "stateAfterRecovery": {
+    "shot": "SH010",
+    "camera": "SHOT_SH010_WIDE",
+    "activeShotIndex": 0,
+    "cameraSelected": true,
+    "cameraIsSceneCamera": true
+  },
+  "checks": {
+    "missingOptionalFileReopened": true,
+    "coreProjectSceneCharacterExact": true,
+    "missingShotDidNotBlockLoad": true,
+    "createShotActionRemainedAvailable": true,
+    "recoveryFinished": true,
+    "recoveredShotAndCameraExact": true,
+    "officialConfigurationUnchanged": true
+  },
+  "failures": [],
+  "receiptHash": "8ce95c5edde31d1021c11d468bf6c6894fcc33ebe8098f01ae4359f73b82bc08"
+}
