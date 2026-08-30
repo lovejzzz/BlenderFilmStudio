@@ -17,8 +17,8 @@ const gates = [
   ['F0.2', '独立身份', '名称 / bundle / config 隔离', 'PASS'],
   ['F0.3', '电影工作台', 'Project / Scene / Shot / Character', 'PASS'],
   ['F0.4', '合同内嵌', 'plan exact；B01/B02 + identity-v2 audit', 'PASS'],
-  ['F0.5', '渲染收据', 'EEVEE / Cycles / process / pixel / cost', 'PREREG'],
-  ['F0.6', '合并演练', '10 paths / 8 h / 5000 LOC ceiling', 'LOCKED'],
+  ['F0.5', '渲染收据', 'EEVEE / Cycles / process / pixel / cost', 'PASS'],
+  ['F0.6', '合并演练', '10 paths / 8 h / 5000 LOC ceiling', 'PREREG'],
   ['F0.7', '安装往返', 'package / identity / .blend', 'LOCKED'],
 ];
 
@@ -52,13 +52,13 @@ export default function AiNativeStudioHandoffPage() {
         <div className="handoff-hero-copy">
           <p className="eyebrow"><span /> NEW MACHINE HANDOFF · 2026.08.29</p>
           <h1>换一台电脑，<br />不换一套<span>事实。</span></h1>
-          <p>F0.1–F0.4 已在 M2 Max 主机通过。F0.4 attempt-03 在保留前两次失败的同时，以 manifest v0.3 分离 semantic structure 与 exact product provenance；B01/B02 隔离构建、独立 `.blend` 重开审计和四个分离攻击全部通过。下一步只能先预注册 F0.5。</p>
+          <p>F0.1–F0.5 已在 M2 Max 主机通过。F0.5 attempt-02 在保留 attempt-01 失败的同时，完成 EEVEE preview、Cycles multilayer EXR、受控中断、receipt-only recovery 与独立像素/通道审计。下一步只能先预注册 F0.6 merge drill。</p>
           <div className="handoff-hero-actions"><a href="#start">开始交接 ↓</a><Link href="/ai-native-studio-design">为什么做自己的软件</Link></div>
         </div>
         <aside className="handoff-state">
-          <header><span>PROGRAM STATE</span><b>F0.1–F0.4 PASS</b></header>
-          <div className="handoff-state-main"><small>ACTIVE GATE</small><strong>F0.5</strong><h2>RENDER &amp;<br />RECEIPTS</h2></div>
-          <dl><div><dt>ENGINE</dt><dd>Film Studio Engine F0</dd></div><div><dt>COMMIT</dt><dd>b47eae224b6d</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>RESULT</dt><dd>2 builds · audit PASS</dd></div></dl>
+          <header><span>PROGRAM STATE</span><b>F0.1–F0.5 PASS</b></header>
+          <div className="handoff-state-main"><small>ACTIVE GATE</small><strong>F0.6</strong><h2>UPSTREAM<br />MERGE DRILL</h2></div>
+          <dl><div><dt>ENGINE</dt><dd>Film Studio Engine F0</dd></div><div><dt>COMMIT</dt><dd>b47eae224b6d</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>RESULT</dt><dd>2 renders · audit PASS</dd></div></dl>
           <footer>FORK IS A HYPOTHESIS · NOT A CONCLUSION</footer>
         </aside>
         <div className="handoff-signal"><span>01</span><b>读取规则</b><i>→</i><span>02</span><b>只读预检</b><i>→</i><span>03</span><b>固定源码</b><i>→</i><span>04</span><b>保存证据</b></div>
@@ -72,14 +72,14 @@ export default function AiNativeStudioHandoffPage() {
           <article><span>01</span><h3>读入口</h3><code>START_HERE.md</code><p>确认目标与禁区，不从旧 B62 继续。</p></article>
           <article><span>02</span><h3>做预检</h3><code>preflight-f0-source-host.mjs</code><p>先获得 ACCEPTED 或 BLOCKED 事实。</p></article>
           <article><span>03</span><h3>预览 bootstrap</h3><code>--workspace /absolute/path</code><p>源码永远放在研究仓库之外。</p></article>
-          <article><span>04</span><h3>预注册 F0.5</h3><code>F0.5-…-attempt-01</code><p>先冻结 preview、EXR、pixel、cost 与 failure receipts。</p></article>
+          <article><span>04</span><h3>预注册 F0.6</h3><code>F0.6-…-attempt-01</code><p>先冻结 target、corpus、计时与三项 merge ceilings。</p></article>
         </div>
       </section>
 
       <section className="handoff-gates" id="gates">
         <div className="section-index light">01 / SOURCE FEASIBILITY</div>
         <div className="handoff-heading light"><div><p className="eyebrow"><span /> SEVEN GATES · ONE DECISION</p><h2>全部关闭，才有资格<br />建立<span>正式引擎仓库。</span></h2></div><p>这不是七项功能清单，而是七个能推翻 thin fork 的实验。失败本身可接受；隐藏失败、挪动阈值或无限扩大 patch 不可接受。</p></div>
-        <div className="handoff-gate-list">{gates.map(([id,title,detail,status],index) => <article className={index === 4 ? 'active' : ''} key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>{status}</b></article>)}</div>
+        <div className="handoff-gate-list">{gates.map(([id,title,detail,status],index) => <article className={index === 5 ? 'active' : ''} key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>{status}</b></article>)}</div>
         <div className="handoff-fork"><article><span>ALL PASS</span><h3>THIN FORK</h3><p>进入独立引擎产品原型；仍维持最小核心 patch。</p></article><i>OR</i><article><span>CEILING EXCEEDED</span><h3>EXTERNAL SHELL</h3><p>保留电影体验和 typed protocol，使用未修改 Blender。</p></article></div>
       </section>
 
@@ -99,8 +99,8 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-checkpoint">
         <span>NEXT PUSH MUST CONTAIN</span>
-        <h2>F0.4 通过，两个失败仍保留。</h2>
-        <p>2 exact BuildPlans · 4 / 4 negatives · 2 isolated builds · 2 reopened blends · 4 / 4 identity attacks · audit PASS</p>
+        <h2>F0.5 通过，一次失败仍保留。</h2>
+        <p>1 EEVEE preview · 1 Cycles multilayer EXR · 1 controlled interruption · receipt-only recovery · decoded audit PASS</p>
         <div><Link href="/journal">查看实验日志 →</Link><a href="https://github.com/lovejzzz/BlenderFilmStudio" target="_blank" rel="noreferrer">打开 GitHub 仓库 ↗</a></div>
       </section>
 

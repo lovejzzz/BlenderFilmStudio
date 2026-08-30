@@ -88,8 +88,8 @@ const gates = [
   ['F0.2', '独立身份', '新名称、bundle id、图标、启动画面和配置目录；不把 Blender 商标作为产品名。', 'PASS'],
   ['F0.3', '电影工作台', '最小 Project / Scene / Shot / Character 界面可用，且能进入 Expert Mode。', 'PASS'],
   ['F0.4', '合同内嵌', 'BuildPlan canonical exact；B01/B02 隔离构建与 semantic/provenance 独立审计通过。', 'PASS'],
-  ['F0.5', '渲染与收据', '无鼠标完成 EEVEE preview、Cycles EXR、像素/成本/失败收据。', 'PREREG'],
-  ['F0.6', '上游合并演练', '合并后续 Blender commit 区间，公开冲突面、人工成本与回归。', 'LOCKED'],
+  ['F0.5', '渲染与收据', '无鼠标完成 EEVEE preview、Cycles EXR、像素/成本/失败收据。', 'PASS'],
+  ['F0.6', '上游合并演练', '合并后续 Blender commit 区间，公开冲突面、人工成本与回归。', 'PREREG'],
   ['F0.7', '安装与往返', '可安装/卸载，签名与公证路径明确；`.blend` 往返和配置隔离通过。', 'LOCKED'],
 ];
 
@@ -246,7 +246,7 @@ export default function AiNativeStudioDesignPage() {
         <div className="section-index light">11 / PRIMARY SOURCES</div>
         <div className="ain-section-heading light"><div><p className="eyebrow"><span /> RESEARCH BASIS</p><h2>许可证决定边界。<br /><span>真实实验决定主张。</span></h2></div><p>外部来源用于确认源码、构建、架构、商标和许可证；产品可靠性结论只来自本仓库冻结协议下的真实 Blender 实验。</p></div>
         <ol className="ain-source-list">{sources.map(([author,title,href],index) => <li key={href}><span>{String(index + 1).padStart(2,'0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
-        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>F0.5 · RENDER &amp; RECEIPTS PREREGISTRATION</h3><p>F0.1–F0.4 已通过。F0.4 attempt-03 以 manifest v0.3 分离 semantic structure 与 exact product provenance，B01/B02 隔离构建、两份 `.blend` 重开与四个分离攻击全部 PASS；attempts 01/02 仍作为失败保留。下一步只能先冻结 mouse-free EEVEE preview、Cycles EXR、process/pixel/cost/failure receipts 与资源停止规则，再允许首次 render。</p><Link href="/ai-native-studio-handoff">打开新机器冷启动包 →</Link></div></div>
+        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>F0.6 · UPSTREAM MERGE DRILL PREREGISTRATION</h3><p>F0.1–F0.5 已通过。F0.5 attempt-02 完成 EEVEE preview、Cycles multilayer EXR、受控中断、receipt-only recovery 与独立像素/通道审计；attempt-01 的媒体类型设置失败继续保留。下一步只能先冻结 merge target、test corpus、人工计时、10-path / 8-hour / 5000-line ceilings 与 F0.1–F0.5 回归矩阵，再允许首次 merge mutation。</p><Link href="/ai-native-studio-handoff">打开新机器冷启动包 →</Link></div></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · Design Doc v0.1</b></div><p>Direction adopted · Implementation gated · Snapshot 2026-08-29</p><Link href="/ai-native-studio-handoff">新机器从这里开始 →</Link></footer>

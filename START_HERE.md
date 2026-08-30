@@ -1,12 +1,14 @@
 # BlenderFilmStudio — new machine cold start
 
-> **Current decision:** F0.1 through F0.4 passed on the admitted M2 Max host.
+> **Current decision:** F0.1 through F0.5 passed on the admitted M2 Max host.
 > F0.4 attempts 01 and 02 remain retained `FAIL` results. Attempt-01 proved
 > canonical-exact B01/B02 BuildPlans and all four negative controls, then found
 > a missing OCIO launch binding. Attempt-02 fixed only that binding and built
 > B01, but the frozen full structure hash differed because it includes the
 > product build hash. Attempt-03 versioned semantic structure separately from
-> exact product provenance and closed F0.4 as `PASS`. F0.5 is next; do not
+> exact product provenance and closed F0.4 as `PASS`. F0.5 attempt-01 remains
+> a retained preview setup `FAIL`; attempt-02 preserved the same thresholds and
+> closed F0.5 as `PASS`. F0.6 is next; do not
 > assume the fork is viable until F0.1-F0.7 all close.
 
 This is the authoritative handoff for a fresh Codex session. The repository is
@@ -19,10 +21,10 @@ both a research notebook and an executable evidence base. Read this page,
   and fork-maintenance reference; an external shell remains the fallback.
 - **Pinned engine baseline:** official `v5.2.0` at
   `fbe6228777e7d9afefcd61a413844e790ae75db7`.
-- **Active experiment:** `F0-SOURCE-FEASIBILITY`, F0.5 render-and-receipt
-  preregistration. No F0.5 render is authorized before its inputs, resource
-  budgets, pixel gates, cost receipts and failure controls are frozen.
-- **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS` and `F0.4 PASS`. Two clean official builds reported Blender
+- **Active experiment:** `F0-SOURCE-FEASIBILITY`, F0.6 upstream merge-drill
+  preregistration. No merge is authorized before the target/corpus, timing
+  method, conflict ceiling, patch-surface ceiling and regression matrix are frozen.
+- **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS` and `F0.5 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
   not byte-for-byte reproducible; the bounded differences are recorded in
   `F0.1-2026-08-29-mac-m2max-attempt-07/comparison.json`.
@@ -57,6 +59,20 @@ both a research notebook and an executable evidence base. Read this page,
   product process reopened both `.blend` files, cross-bound attempts 01/02 and
   passed four identity-separation attacks. Verdict self hash is
   `f2888a3b4c89df3370c13fbf28097ecb4d83a3f11f325588a12321d27f7666a3`.
+- **Retained F0.5 attempt-01:** the insufficient-disk control rejected with zero
+  product starts, then the first admitted preview exited before any render call
+  because the harness selected PNG while the source still had
+  `media_type=MULTI_LAYER_IMAGE`. No render artifact was written and the stop
+  rule skipped every later stage. Verdict self hash is
+  `e36afca30fc3567368ae72466c682a32ab54723300b2aa063667382b5b06c617`.
+- **Accepted F0.5 attempt-02:** the preregistered correction set the preview and
+  final media types explicitly without changing profiles or thresholds. Four
+  admitted product starts produced one EEVEE PNG, one controlled pre-render
+  SIGTERM, one recovered Cycles multilayer EXR and one zero-render independent
+  audit. Expected/observed render calls were exact at 2, the preview was not
+  rerendered, Combined/Depth/Normal decoded successfully, and both unsafe
+  admission controls rejected before an additional product start. Verdict self
+  hash is `a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71`.
 - **Inherited evidence:** B01-B62 cover structured scene compilation, Blender
   execution, safety/admission, pixels, production passes, cost, recovery and a
   three-shot cinematic attempt. These results are evidence, not a claim that
@@ -64,8 +80,8 @@ both a research notebook and an executable evidence base. Read this page,
 - **Most important retained rejection:** B62's latest camera holdout passed all
   technical gates but failed the frozen composition threshold at frame 288.
   Source control does not replace direction or taste.
-- **Unproven:** mouse-free EEVEE preview, Cycles EXR and render receipts inside
-  the product, merge cost, packaging and `.blend` round-trip isolation.
+- **Unproven:** upstream merge cost, packaging, signing/notarization path and
+  `.blend` round-trip isolation.
 
 ## Read in this order
 
@@ -123,12 +139,12 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. F0.1-F0.4 are closed. Before any F0.5 product start, create a new immutable
-   evidence root and preregister exact B01/B02 source `.blend` identities,
-   EEVEE preview and Cycles EXR settings, mouse-free commands, render-count and
-   disk ceilings, process/pixel/cost/failure receipts, negative controls and
-   stop rules. Cross-bind the accepted F0.4 verdict and never overwrite its two
-   retained failures.
+5. F0.1-F0.5 are closed. Before any F0.6 merge mutation, create a new immutable
+   evidence root and freeze the exact fork head, upstream target
+   `9e2066aef7ef7e20c142ad7bd3303138a4304c93`, merge corpus, timing method,
+   conflict-path accounting, 8 person-hour / 10 path / 5000 non-generated line
+   ceilings and the complete F0.1-F0.5 regression matrix. Cross-bind the
+   accepted F0.5 verdict and retain its failed attempt.
 
 ## What not to do
 
@@ -146,15 +162,17 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next machine should push one small, auditable F0.5 preregistration checkpoint containing:
+The next machine should push one small, auditable F0.6 preregistration checkpoint containing:
 
-- a unique F0.5 evidence root that cross-binds accepted F0.4 attempt-03;
-- exact B01/B02 `.blend`, manifest, semantic structure, product and OCIO identities;
-- one frozen EEVEE preview profile and one frozen Cycles EXR profile;
-- mouse-free invocation, render-count, time, RSS, disk and output-byte ceilings;
-- independently specified process, pixel, cost, restart/failure and artifact receipts;
-- negative controls for identity mismatch, output escape, invalid render state
-  and incomplete receipt;
+- a unique F0.6 evidence root that cross-binds accepted F0.5 attempt-02;
+- exact fork head, merge base and upstream target identities;
+- a frozen merge command, test corpus and human-time accounting method;
+- ceilings of 10 manually resolved paths, 8 person-hours and 5000
+  non-generated fork-owned changed lines;
+- a regression matrix that replays every accepted F0.1-F0.5 fixture without
+  weakening prior verdicts;
+- a fallback trigger that recommends the external shell if any numeric ceiling
+  is exceeded;
 - a journal entry and, if useful, a website update.
 
 The scientific result may be `PASS`, `FAIL`, or `BLOCKED`. “Still working” is

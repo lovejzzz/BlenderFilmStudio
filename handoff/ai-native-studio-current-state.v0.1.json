@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-30",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_1_F0_2_F0_3_F0_4_PASS_F0_5_PREREGISTRATION_REQUIRED",
+  "status": "F0_1_F0_2_F0_3_F0_4_F0_5_PASS_F0_6_PREREGISTRATION_REQUIRED",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -21,14 +21,14 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "F0.5",
+  "activeGate": "F0.6",
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
     "F0.1": "PASS",
     "F0.2": "PASS",
     "F0.3": "PASS",
     "F0.4": "PASS",
-    "F0.5": "NOT_RUN",
+    "F0.5": "PASS",
     "F0.6": "NOT_RUN",
     "F0.7": "NOT_RUN"
   },
@@ -144,6 +144,56 @@
       },
       "sameIdRepairPerformed": false,
       "officialBlenderConfigurationDigestBeforeAndAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf"
+    },
+    "F0.5": {
+      "verdict": "PASS",
+      "verdictReceiptHash": "a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71",
+      "acceptedAttempt": "experiments/ai-native-studio-f0/F0.5-2026-08-30-mac-m2max-attempt-02",
+      "retainedFailedAttempts": [
+        {
+          "experiment": "experiments/ai-native-studio-f0/F0.5-2026-08-30-mac-m2max-attempt-01",
+          "failure": "PREVIEW_OUTPUT_MEDIA_TYPE_NOT_RESET",
+          "verdictReceiptHash": "e36afca30fc3567368ae72466c682a32ab54723300b2aa063667382b5b06c617",
+          "actualRenderCalls": 0
+        }
+      ],
+      "jobId": "F05-B01-RENDER-001",
+      "sourceBlendSha256": "648ba4e5c0be2620f0da85dd8fdc0a23d878c39054e61e69029221b5457da942",
+      "formalProductStarts": 4,
+      "rendererStarts": 3,
+      "expectedRenderCalls": 2,
+      "observedRenderCalls": 2,
+      "maximumConcurrentNativeProcesses": 1,
+      "preview": {
+        "engine": "BLENDER_EEVEE",
+        "resolution": [640, 360],
+        "samples": 16,
+        "bytes": 231205,
+        "sha256": "9c2b1f986aaf89ff6b7f12619ea9e14dcbb49b3d70ab5b3d58173ac90a4da0c2",
+        "decodedSha256": "30f789c77e1dde79910c11d37412ab6d2b915f3de1eae3904e2af28ea06219d9"
+      },
+      "final": {
+        "engine": "CYCLES",
+        "device": "CPU",
+        "resolution": [640, 360],
+        "samples": 32,
+        "bytes": 1533576,
+        "sha256": "849955e9e9865766e0236e1fc9ee65f5f2a1e77108b7012a4bebfd5df8bc5377",
+        "decodedCombinedSha256": "aa013f972916738737a15c8c34fea61e52f9e97a4ad53afffe5fdf053beb559f",
+        "requiredPasses": ["Combined", "Depth", "Normal"]
+      },
+      "controlledInterruptionBeforeRenderCall": true,
+      "previewRerenderCount": 0,
+      "onlyFinalRecovered": true,
+      "insufficientDiskZeroStartRejection": true,
+      "tamperedReceiptZeroAdditionalStartRejection": true,
+      "independentAuditHash": "53e997ffa47d2fca2a78ab363fc7137b3ae51feb2e41e900d9b9963829b60606",
+      "completionHash": "7a5871ac00446d6041d5e499666d9d0f5c17f2d215d98e99fe095d95419a52c0",
+      "peakResidentSetSizeBytes": 447709184,
+      "totalFormalBytes": 2002944,
+      "monetaryCostUsd": 0,
+      "sourceBlendUnchanged": true,
+      "officialBlenderConfigurationDigestBeforeAndAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf"
     }
   },
   "inheritedEvidence": {
@@ -168,8 +218,8 @@
   "firstCommands": [
     "git status --short",
     "node scripts/preflight-f0-source-host.mjs",
-    "cat experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-03/verdict.json",
-    "preregister a new immutable F0.5 root that cross-binds accepted F0.4 and freezes render, receipt, resource, pixel and failure controls before any render"
+    "cat experiments/ai-native-studio-f0/F0.5-2026-08-30-mac-m2max-attempt-02/verdict.json",
+    "preregister a new immutable F0.6 root that cross-binds accepted F0.5 and freezes merge target, corpus, timing, ceilings and the F0.1-F0.5 regression matrix before any merge mutation"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -196,16 +246,17 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "F0.5",
-    "result": "A preregistered mouse-free EEVEE preview and Cycles EXR experiment with independently auditable process, pixel, cost and failure receipts",
+    "gate": "F0.6",
+    "result": "A preregistered upstream merge drill with exact conflict, human-time, patch-surface and F0.1-F0.5 regression accounting",
     "requiredArtifacts": [
-      "cross-binding to F0.4 attempt-03 verdict f2888a3b4c89df3370c13fbf28097ecb4d83a3f11f325588a12321d27f7666a3",
-      "frozen EEVEE preview and Cycles EXR profiles",
-      "process-receipt.json",
-      "pixel-receipt.json",
-      "cost-receipt.json",
-      "failure-receipt.json",
-      "independent audit and journal entry"
+      "cross-binding to F0.5 attempt-02 verdict a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71",
+      "merge-preregistration.json with fork head, merge base and target 9e2066aef7ef7e20c142ad7bd3303138a4304c93",
+      "frozen merge corpus and command",
+      "10 manual conflict path ceiling",
+      "8 person-hour manual resolution ceiling",
+      "5000 non-generated fork-owned changed-line ceiling",
+      "F0.1-F0.5 regression matrix and fallback trigger",
+      "journal entry"
     ]
   }
 }
