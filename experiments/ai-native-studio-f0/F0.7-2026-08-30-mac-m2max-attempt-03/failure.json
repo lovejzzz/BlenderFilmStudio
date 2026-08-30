@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "bfs.f0.7.failureReceipt.v0.1",
+  "experimentId": "F0.7-2026-08-30-mac-m2max-attempt-03",
+  "status": "FAIL",
+  "failureId": "E08_INSTALL_RECEIPT_VARIABLE_NAME",
+  "observedAtUtc": "2026-08-30T07:37:51Z",
+  "firstAttempt03PackageMutationOccurred": true,
+  "sameIdRepairPermitted": false,
+  "failedStep": "08_WRITE_INSTALL_UNINSTALL_RECEIPT",
+  "cause": "After six successful product starts and a completed safe uninstall, the frozen runner referenced the nonexistent JavaScript identifier installedPayloadBeforeUninstall instead of the existing installedBeforeUninstall while assembling the receipt.",
+  "executionCompletedBeforeFailure": {
+    "packageImportAndReadOnlyAudit": "PASS",
+    "installAndExpectedGatekeeperRejection": "PASS",
+    "formalProductStarts": 6,
+    "officialToF0ToOfficial": "PASS",
+    "f0ToOfficial": "PASS",
+    "coreSemanticSha256": "139852cf091bc79b78f7dd73430912d7988b0f54a3089b010dd87a26211a2300",
+    "coreSemanticExactAtAllSixBoundaries": true,
+    "metadataDisposition": "PRESERVED_EXACT",
+    "typedMetadataSha256": "93daa8d5b61d8d4c663a65427eeeb27d5c5ec6fc848e722668f9b31a937850a7",
+    "safeUninstallExecuted": true,
+    "postUninstallConfigurationChecksReachedAndPassed": true,
+    "independentFinalAuditStarted": false
+  },
+  "evidence": {
+    "packageManifest": {
+      "uri": "package-manifest.json",
+      "fileSha256": "8a382bc72dd91ab6d1203f6cc736d6573fcb306508b4f75e003f718227071773",
+      "manifestHash": "dae2ec84753ce85f0223d034b4d993043ee3ae71de4e0656f778ce765dd7cb30"
+    },
+    "roundtrip": {
+      "uri": "roundtrip.json",
+      "fileSha256": "aa40c5cfa9f5ae4b1c8496a6803b4f03293bafe2a2a58905b015c6fc81d9ad44",
+      "roundtripHash": "f37d65cb722ac4954ac73b0aa49ee5a06881903bb7bc6c1a4692e729c996d647"
+    },
+    "postcheck": {
+      "uri": "failure-postcheck.json",
+      "fileSha256": "fdf6c3e40145084fd3c134362f3ec3909a28d6081c13e5333aed9ff1043922a6",
+      "postcheckHash": "5dc97254e70f8b7786b4b8647e758bafbc1689b9337430f29ec26036e2f8208f",
+      "status": "PASS",
+      "checks": 100
+    }
+  },
+  "processes": [
+    {
+      "sequence": 1,
+      "id": "official-create",
+      "processHash": "2428a4035f0cae5509f7a2aa3580aaac64a3cb0a4358bc3692dc230d721c673f"
+    },
+    {
+      "sequence": 2,
+      "id": "f0-open-official",
+      "processHash": "e007845ddf8b6b5378b7a5f44e4e0a76d4a36e8c1a4166562e171071185974c8"
+    },
+    {
+      "sequence": 3,
+      "id": "official-reopen-f0",
+      "processHash": "50e20304785e08cee4b73fb52824c4595b2dd5eb7a88072786639f481b5deac7"
+    },
+    {
+      "sequence": 4,
+      "id": "f0-create",
+      "processHash": "35f5c35be49f3773770fac1d4006b7a3620cde1a857eedf2a6c23efa159597c7"
+    },
+    {
+      "sequence": 5,
+      "id": "official-open-f0",
+      "processHash": "a1af91caf552dd453e3dec0494c08e507a8190cf2f87ddba5cccb5c25b775245"
+    },
+    {
+      "sequence": 6,
+      "id": "f0-reopen-official",
+      "processHash": "48bd26774c67a88f9dc9dcb7a3f2e569791b8b35f12c1dac8b7a11f4bb9e6a28"
+    }
+  ],
+  "safety": {
+    "installDestinationAbsent": true,
+    "mountpointAbsent": true,
+    "sourceProductUnchanged": true,
+    "installedOfficialBlenderUnchanged": true,
+    "officialConfigurationBaselineUnchanged": true,
+    "officialUserWritesSandboxed": true,
+    "f0ConfigurationRootsUnchanged": true,
+    "freeBytesAfterFailure": "171948056576"
+  },
+  "correctiveActionForNewAttempt": "Use the existing installedBeforeUninstall identifier in the install/uninstall receipt, retain every prior failure, create a new experiment, and rerun the complete frozen workflow before final independent audit.",
+  "failureHash": "b4abb58540aaf15f176bc8334b5e7e600a841b76aab2b65ea8cb3f9a9afd2c51"
+}
