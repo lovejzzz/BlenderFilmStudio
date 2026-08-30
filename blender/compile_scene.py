@@ -833,7 +833,6 @@ def build_structure(
 
     structure = {
         "compilerVersion": plan["compiler"]["version"],
-        "blender": {"version": bpy.app.version_string, "buildHash": bpy.app.build_hash.decode("ascii")},
         "planHash": wrapper["planHash"],
         "shot": plan["shot"],
         "managedCollection": {"name": managed.name, "objects": managed_objects},
@@ -946,8 +945,11 @@ def main() -> None:
     structure_hash = sha256_bytes(structure_canonical_bytes)
     structure_canonical_path = artifact_root / "scene.structure.canonical.json"
     structure_canonical_path.write_bytes(structure_canonical_bytes)
+    product_build_hash = bpy.app.build_hash.decode("utf-8") if isinstance(bpy.app.build_hash, bytes) else str(bpy.app.build_hash)
     scene["bfs_structure_hash"] = structure_hash
-    scene["bfs_manifest_version"] = "0.2.0"
+    scene["bfs_structure_identity_version"] = "bfs.semanticSceneStructure.v0.2"
+    scene["bfs_product_build_hash"] = product_build_hash
+    scene["bfs_manifest_version"] = "0.3.0"
     blend_path = artifact_root / "scene.blend"
     save_result = bpy.ops.wm.save_as_mainfile(filepath=str(blend_path), check_existing=False, compress=True, relative_remap=True)
     if "FINISHED" not in save_result:
@@ -955,7 +957,8 @@ def main() -> None:
 
     manifest = {
         "documentType": "BFS_SCENE_MANIFEST",
-        "manifestVersion": "0.2.0",
+        "manifestVersion": "0.3.0",
+        "structureIdentityVersion": "bfs.semanticSceneStructure.v0.2",
         "execution": {
             "planHash": wrapper["planHash"],
             "planVersion": wrapper["planVersion"],
@@ -963,7 +966,7 @@ def main() -> None:
             "compiler": plan["compiler"],
             "blender": {
                 "version": bpy.app.version_string,
-                "buildHash": bpy.app.build_hash.decode("utf-8") if isinstance(bpy.app.build_hash, bytes) else str(bpy.app.build_hash),
+                "buildHash": product_build_hash,
                 "buildBranch": bpy.app.build_branch.decode("utf-8") if isinstance(bpy.app.build_branch, bytes) else str(bpy.app.build_branch),
                 "buildPlatform": bpy.app.build_platform.decode("utf-8") if isinstance(bpy.app.build_platform, bytes) else str(bpy.app.build_platform),
             },
