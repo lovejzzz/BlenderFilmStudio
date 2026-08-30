@@ -30,8 +30,8 @@ both a research notebook and an executable evidence base. Read this page,
   official `v5.2.1` commit `9e2066aef7ef7e20c142ad7bd3303138a4304c93`.
 - **Completed experiment:** `F0-SOURCE-FEASIBILITY`. All seven gates are
   `PASS`. The post-F0 repository/Phase B charter is frozen at commit
-  `6a38ca3b…`; the next checkpoint is explicit authorization to create and make
-  the first push to a permanent engine repository, not an eighth F0 gate.
+  `6a38ca3b…`; repository creation was later authorized, while Phase B remains
+  unauthorized.
 - **Repository readiness:** the current F0 checkout is shallow (1,165 reachable
   commits), so direct push from it was rejected as a full-history strategy.
   A read-only GitHub Blender mirror plus local-only graft/push rehearsal closed
@@ -39,15 +39,19 @@ both a research notebook and an executable evidence base. Read this page,
   exact HEAD `fa1b578b…`, exact tree `4d761fb7…`, merge base `9e2066ae…` and a
   clean full `git fsck`. Runner/auditor self hashes are `dc1cc768…` and
   `b841e519…` (93/93). External repository creates/pushes and LFS uploads were 0.
-- **Topology decision ready:** `PUBLIC_GITHUB_FORK` is
-  `READY_FOR_EXPLICIT_AUTHORIZATION`; `PRIVATE_STANDALONE_MIRROR` remains
-  blocked pending visibility, full-LFS transfer, billing and owner approval.
-  The recommended exact choice is owner `lovejzzz`, public fork of
-  `blender/blender`, requested name `film-studio-engine`, then first push of
-  exact F0 head `fa1b578b…` as `main`. The external authorization must also
-  name the lease-protected replacement of the fresh fork's generated `main`
-  and the two fork-owned LFS uploads (2,701,144 bytes total, with possible
-  GitHub LFS billing).
+- **Repository publication attempt retained:** owner authorization v0.2 changed
+  the name to `film-engine`. The runner created public fork
+  `lovejzzz/film-engine`, verified parent `blender/blender`, one generated
+  `main`, zero PRs/releases, then GitHub rejected both new brand LFS objects at
+  0/2 and 0 bytes: `can not upload new objects to public fork`. Stop rules held:
+  external create/LFS upload/ref update/release/Phase B counts are
+  `1/0/0/0/0`; independent failure audit is 33/33 PASS. Live `main` remains
+  generated upstream OID `08bed5b5…`, not F0 `fa1b578b…`.
+- **Active publication correction:** C1 recommends one new commit with parent
+  exact `fa1b578b…`, changing only `.gitattributes`, the icon and splash so the
+  same 2,701,144 bytes become ordinary Git blobs. That new source commit and
+  lease-protected main update are not yet authorized. Do not retry LFS, push
+  broken pointers, delete/recreate/rename the fork, or begin Phase B.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -162,6 +166,11 @@ both a research notebook and an executable evidence base. Read this page,
 10. [`research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md`](./research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md)
     and [`specs/ai-native-studio-repository-authorization-request.v0.1.json`](./specs/ai-native-studio-repository-authorization-request.v0.1.json)
     — exact public-fork, two-object LFS, billing and fresh-main lease request.
+11. [`research/2026-08-30-film-engine-public-fork-c1-github-lfs-policy.md`](./research/2026-08-30-film-engine-public-fork-c1-github-lfs-policy.md),
+    [`specs/ai-native-studio-repository-publication-c1.v0.3.json`](./specs/ai-native-studio-repository-publication-c1.v0.3.json)
+    and [`audit-failure.json`](./experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json)
+    — retained GitHub public-fork LFS policy failure, 33/33 audit and the
+    unapproved minimal ordinary-blob correction.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
@@ -205,17 +214,19 @@ contract name instead of reading everything.
    another machine's root.
 
 5. F0.1-F0.7 and the no-external-write repository rehearsal are closed. Verify
-   F0.7 attempt-05 plus repository-readiness attempt-03 verdict/audit. Do not
-   mutate retained DMG, evidence, failures or frozen contracts. Do not push the
-   shallow F0 checkout as full history. Wait for explicit public-fork owner /
-   visibility / create / first-push authorization.
+   F0.7 attempt-05, repository-readiness attempt-03, and repository-publication
+   attempt-01 failure/audit. Do not mutate retained DMG, evidence, failures or
+   frozen contracts. Do not push the shallow F0 checkout as full history. The
+   public fork exists but its product publication is blocked; wait for a
+   superseding C1 authorization.
 
 ## What not to do
 
 - Do not restart B62 or create a new rendering side quest as the main task.
 - Do not clone Blender inside this repository or commit build products.
-- Do not create or publish a permanent engine repository without an explicit
-  post-F0 repository charter and authorization.
+- Do not retry LFS, update a remote ref, delete/recreate/rename the existing
+  `lovejzzz/film-engine` fork, or create a replacement repository without a
+  superseding versioned authorization.
 - Do not copy Bforartists as a second upstream; inspect it as a reference.
 - Do not give a model unrestricted `bpy`, shell or filesystem authority.
 - Do not hide failed builds, relax thresholds after seeing results, or overwrite
@@ -227,25 +238,16 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The post-F0 decision package and no-write rehearsal are frozen and pushed. The
-rehearsal recommends one exact topology. The next checkpoint must record the
-user's explicit choices:
+The next useful checkpoint is an owner decision on C1. The recommended exact
+authorization is stored in
+`specs/ai-native-studio-repository-publication-c1.v0.3.json`: retain the current
+public fork; create one `fa1b…`-parent publication-compatibility commit limited
+to `.gitattributes`, icon and splash; preserve both binary SHA-256/bytes; upload
+no LFS; and update only `main` with the frozen generated-OID lease.
 
-- owner `lovejzzz`;
-- visibility `public`;
-- permission to create a GitHub fork named `film-studio-engine` from
-  `blender/blender`;
-- permission to make the first external push of exact F0 head
-  `fa1b578bb421bbc82b3106b7d4223e11e65fae1d` as `main`.
-- permission to upload exactly the two allowlisted fork-owned LFS objects
-  totaling 2,701,144 bytes, with acceptance of possible GitHub LFS billing;
-- permission to replace only the freshly generated fork `main` using an
-  explicit lease bound to its observed OID, provided no owner-authored commit
-  exists.
-
-Choosing `private` is not a cosmetic switch: it selects the currently blocked
-standalone mirror route and requires a new authorization for full Git LFS
-fetch/push, storage/bandwidth billing and complete transfer evidence.
+Choosing standalone/private is not a cosmetic switch: it selects the still
+blocked full-LFS mirror route and also requires an explicit decision about the
+already-created fork, full transfer, billing and complete evidence.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

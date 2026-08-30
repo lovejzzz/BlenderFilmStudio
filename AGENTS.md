@@ -26,9 +26,9 @@ The post-F0 contract is frozen at commit
 `6a38ca3bdd93219ec6dcd001fa72143df7d80a10`:
 `research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md`
 and `specs/ai-native-studio-post-f0-phase-b.v0.1.json`. Do not edit v0.1 in
-place. The next action requires explicit repository owner, visibility,
-create-repository and first-push authorization; until then, no permanent
-repository or Phase B source mutation is allowed.
+place. Repository creation authorization was later granted and exercised only
+through the fail-closed v0.2 publication runner. Phase B source mutation remains
+unauthorized.
 
 The accepted repository-readiness root is
 `experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03`.
@@ -37,17 +37,21 @@ Its runner verdict self hash is
 and independent audit self hash is
 `b841e519cd1d2ce55e2f373a50918b802e90b5244c8dcd7df38ae24fbc64273e`.
 The current F0 checkout is shallow and must never be described or pushed as a
-full-history standalone source. The recommended topology is an explicitly
-authorized public GitHub fork of `blender/blender`, owner `lovejzzz`, requested
-name `film-studio-engine`; the private standalone mirror remains blocked on
-full LFS transfer, billing and owner approval.
+full-history standalone source. Owner authorization v0.2 changed the requested
+name to `film-engine`. The authorized run created public fork
+`lovejzzz/film-engine`, but GitHub rejected both new brand LFS objects before
+any object bytes or Git ref were written. The retained attempt-01 failure is
+independently audited 33/33; live `main` remains the GitHub-generated upstream
+OID `08bed5b5b42ec017e8dcc87b76f6c373c322b086`, not F0 head `fa1b578b…`.
 
-The exact external-action request is
-`research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md`.
-It separately requires approval for a lease-protected update of the fresh
-fork's generated `main` and upload of exactly two fork-owned LFS objects
-(2,701,144 bytes) with possible GitHub LFS billing. General permission to
-continue does not satisfy this external-mutation gate.
+The active correction is
+`research/2026-08-30-film-engine-public-fork-c1-github-lfs-policy.md` with
+machine contract `specs/ai-native-studio-repository-publication-c1.v0.3.json`.
+Do not retry LFS, push `fa1b…` with broken pointers, delete/recreate/rename the
+fork, or mutate any ref. The recommended C1 converts only the two same-content
+brand assets to ordinary Git blobs in one three-path publication-compatibility
+commit, but that new commit and its lease-protected push are not authorized.
+General permission to continue does not satisfy this superseding gate.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

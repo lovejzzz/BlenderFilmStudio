@@ -5995,3 +5995,15 @@ owner在当前Codex任务中给出完整外部动作授权，并把v0.1请求名
 实时GitHub只读门确认active login为`lovejzzz`、`lovejzzz/film-engine`为404 absent、owner没有`blender/blender` fork。local full-history source保持non-shallow、162,917 commits、单一`refs/heads/main`、exact head/tree/parents；两个LFS data objects的size与SHA-256 exact；repository-readiness 8/8负控重新通过。
 
 新增fail-closed runner与独立auditor。runner默认只读，显式`--execute`才允许一次fork create、两项allowlisted LFS push和一次绑定generated-main OID的`--force-with-lease` ref update；每个副作用后立即写exclusive receipt，任何失败保留repo/evidence且禁止delete/recreate。10项publication negative controls与LFS dry-run parser通过；两个脚本ESLint与Node syntax通过。正式外部mutation只能发生在本预注册提交推送、research worktree clean和实时preflight再次`ACCEPTED`之后。
+
+## J-485 · Public fork 创建成功，GitHub 新 LFS 对象策略 FAIL
+
+Date: 2026-08-30 · Type: RETAINED EXTERNAL PUBLICATION FAILURE · Repository create / LFS uploads / Git ref updates / releases / Phase B: 1 / 0 / 0 / 0 / 0
+
+v0.2预注册提交`26e7b98104a589bb9b4c6cde21611b1f571c77eb`推送后，正式preflight重新确认active login `lovejzzz`、candidate absent、无existing Blender fork、source exact/clean、full-history bare source non-shallow且162,917 commits、full fsck clean、两个local LFS objects SHA/bytes exact和176 GiB free，状态`ACCEPTED`。执行器随后调用一次GitHub fork API，创建public `lovejzzz/film-engine`（repository id `1351574987`、parent `blender/blender`、仅`main`、0 PR、0 release）。generated main exact为create前观察到的upstream `08bed5b5b42ec017e8dcc87b76f6c373c322b086`，无owner-authored commit。
+
+LFS dry-run只列出allowlisted icon/splash OID，2/2 exact。正式`git lfs push --object-id`在0/2与0 bytes时被GitHub服务端拒绝：`@lovejzzz can not upload new objects to public fork lovejzzz/film-engine`。Runner按冻结stop rule没有进入LFS readback、lease recheck或Git push；没有把缺少data objects的`fa1b…` pointer tree发布出去，也没有delete/recreate/rename、release或Phase B mutation。Live fork保持generated upstream main。
+
+根因是public-fork新LFS object server policy。Blender checkout的LFS endpoint来自official `projects.blender.org` remote；GitHub mirror network不能让本fork首次播种两个品牌OID。五份runner receipt self hash复算exact；独立failure auditor不import runner，验证live metadata/ref、stage absence、source clean与副作用计数，33/33 PASS。failure/audit receipt hashes为`31cb9ed7db300281d0f76d6a78bd726b435265a7e8eb6e2a3aac2a4438720d7f` / `eb8e9ec13eef1b767f9315ed4c0aee195f14e07c41f65ddc2320ff75e3fe7c0f`。
+
+C1冻结推荐但未授权的最小修正：保留现有fork；新增一个以`fa1b…`为唯一parent的publication compatibility commit，只修改`.gitattributes`、icon、splash，把内容SHA/bytes不变的两个资产改为ordinary Git blobs（2.1 MiB / 0.55 MiB）；fresh no-smudge clone必须直接materialize完整文件，然后只用generated `08bed5b5…` OID lease更新main。这个new source commit与ref update超出v0.2 exact-head授权，必须等待owner给出`specs/ai-native-studio-repository-publication-c1.v0.3.json`中的新授权句。LFS retry、delete/recreate/rename、standalone replacement、other refs/tags、release、签名、公证、DMG分发和Phase B仍禁止。

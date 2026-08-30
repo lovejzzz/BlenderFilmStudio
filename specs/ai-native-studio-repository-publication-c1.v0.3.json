@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "0.3.0",
+  "correctionId": "FILM-ENGINE-PUBLICATION-C1-GITHUB-LFS-POLICY",
+  "status": "BLOCKED_AWAITING_SUPERSEDING_AUTHORIZATION",
+  "snapshotDate": "2026-08-30",
+  "parentAuthorization": {
+    "spec": "specs/ai-native-studio-repository-authorization-request.v0.2.json",
+    "specSha256": "322386075cc2dcca468f3895e557983f3d9f8b53f3850596abef6567fde8b093",
+    "freezeCommit": "26e7b98104a589bb9b4c6cde21611b1f571c77eb"
+  },
+  "retainedFailure": {
+    "evidenceRoot": "experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01",
+    "failedStage": "LFS_UPLOAD",
+    "serverError": "batch response: @lovejzzz can not upload new objects to public fork lovejzzz/film-engine",
+    "failureFileSha256": "e978e1858b54da37bff1c9714bd0949e62ee092cfcef50b5c7b6e43a5dcc725d",
+    "failureReceiptHash": "31cb9ed7db300281d0f76d6a78bd726b435265a7e8eb6e2a3aac2a4438720d7f",
+    "auditFileSha256": "6c030fe602748e1f60dce4024b83a79e93f27c70af943163508c25a6582e67d8",
+    "auditReceiptHash": "eb8e9ec13eef1b767f9315ed4c0aee195f14e07c41f65ddc2320ff75e3fe7c0f",
+    "auditChecksPassed": 33,
+    "auditChecksTotal": 33
+  },
+  "liveRepository": {
+    "fullName": "lovejzzz/film-engine",
+    "htmlUrl": "https://github.com/lovejzzz/film-engine",
+    "repositoryId": 1351574987,
+    "fork": true,
+    "parent": "blender/blender",
+    "visibility": "public",
+    "defaultBranch": "main",
+    "generatedMainOid": "08bed5b5b42ec017e8dcc87b76f6c373c322b086",
+    "branchNames": ["main"],
+    "pullRequestCount": 0,
+    "releaseCount": 0
+  },
+  "observedExternalMutationCounts": {
+    "repositoryCreates": 1,
+    "lfsUploads": 0,
+    "gitRefUpdates": 0,
+    "releases": 0,
+    "phaseBMutations": 0,
+    "deletions": 0,
+    "renames": 0
+  },
+  "rootCause": {
+    "class": "GITHUB_PUBLIC_FORK_NEW_LFS_OBJECT_SERVER_POLICY",
+    "sourceLfsEndpoint": "https://projects.blender.org/blender/blender.git/info/lfs",
+    "githubForkLfsEndpoint": "https://github.com/lovejzzz/film-engine.git/info/lfs",
+    "quotaFailure": false,
+    "authenticationFailure": false,
+    "fileSizeFailure": false,
+    "leaseFailure": false
+  },
+  "recommendedCorrection": {
+    "id": "C1_TWO_BRAND_ASSETS_AS_ORDINARY_GIT_BLOBS",
+    "authorized": false,
+    "classification": "publication compatibility commit, not Phase B feature work",
+    "requiredParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+    "allowedChangedPaths": [
+      ".gitattributes",
+      "release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns",
+      "release/datafiles/splash.png"
+    ],
+    "attributeOverrides": [
+      "release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns -filter -diff -merge -text",
+      "release/datafiles/splash.png -filter -diff -merge -text"
+    ],
+    "ordinaryBlobs": [
+      {
+        "path": "release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns",
+        "contentSha256": "be94271b6759adbe6fa7dc96dbce6cf68a371f0212757a4d28667c535586a468",
+        "bytes": 2135147,
+        "gitBlobOidSha1": "497c866c67f1dd5f2ba08ed2ae4c93d5ad1e7256"
+      },
+      {
+        "path": "release/datafiles/splash.png",
+        "contentSha256": "5d8b343b125aca7161dcf4e753b9fb39498c182667aa522252dcd9a9f56982cf",
+        "bytes": 565997,
+        "gitBlobOidSha1": "9af8454bd891d834f10e2ebf072186e567fc7b3e"
+      }
+    ],
+    "requiredRemoteLease": "--force-with-lease=refs/heads/main:08bed5b5b42ec017e8dcc87b76f6c373c322b086",
+    "lfsUploadsAuthorizedOrRequired": 0,
+    "maximumChangedPaths": 3,
+    "maximumOrdinaryBlobBytes": 2135147,
+    "requiredVerification": [
+      "New commit has exact fa1b578bb421bbc82b3106b7d4223e11e65fae1d as its only parent",
+      "Only the three allowlisted paths differ",
+      "Both binary content SHA-256 values and byte sizes remain exact",
+      "Both paths have filter/diff/merge unset and text unset",
+      "Fresh GIT_LFS_SKIP_SMUDGE=1 clone materializes both full binary files without LFS fetch",
+      "Remote main is updated only with the exact generated-main lease",
+      "Remote has one branch, zero pull requests and zero releases"
+    ]
+  },
+  "stillUnauthorized": [
+    "The recommended C1 source commit",
+    "Any retry of the rejected LFS upload",
+    "Deleting, recreating or renaming lovejzzz/film-engine",
+    "Creating a standalone replacement repository or LFS host",
+    "Uploading any LFS object",
+    "Updating any remote ref",
+    "Creating a release",
+    "Signing, notarization or unsigned DMG distribution",
+    "Phase B source mutation"
+  ],
+  "exactRecommendedAuthorizationTextZhCN": "我授权在保留 lovejzzz/film-engine public fork、不删除/重建/重命名的前提下，创建一个以 fa1b578bb421bbc82b3106b7d4223e11e65fae1d 为唯一父提交的 publication compatibility commit；只允许修改 .gitattributes、blender_icon_legacy.icns 和 splash.png 三个路径，把两个内容 SHA-256/bytes 不变的品牌资产从 LFS pointer 改为 ordinary Git blob；验证通过后，仅使用 --force-with-lease=refs/heads/main:08bed5b5b42ec017e8dcc87b76f6c373c322b086 更新 main。仍不授权任何 LFS upload、其他 ref/tag、release、签名、公证、DMG 分发或 Phase B mutation。"
+}

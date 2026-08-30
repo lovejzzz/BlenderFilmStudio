@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-30",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_READINESS_PASS_AWAITING_PUBLIC_FORK_AUTHORIZATION",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_BLOCKED_GITHUB_PUBLIC_FORK_LFS_POLICY",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -98,28 +98,61 @@
     "externalGitPushes": 0,
     "lfsUploads": 0,
     "topologyVerdicts": {
-      "PUBLIC_GITHUB_FORK": "READY_FOR_EXPLICIT_AUTHORIZATION",
+      "PUBLIC_GITHUB_FORK": "CREATED_BUT_PRODUCT_PUBLICATION_BLOCKED_GITHUB_NEW_LFS_OBJECT_POLICY",
       "PRIVATE_STANDALONE_MIRROR": "BLOCKED_PENDING_OWNER_VISIBILITY_LFS_COST_AND_FULL_LFS_TRANSFER_AUTHORIZATION"
     },
     "recommendedAuthorization": {
       "owner": "lovejzzz",
       "visibility": "public",
-      "create": "GitHub fork named film-studio-engine from blender/blender",
-      "lfsUpload": "exactly two allowlisted fork-owned objects totaling 2701144 bytes with possible GitHub LFS billing",
-      "firstPush": "replace only the freshly generated fork main using --force-with-lease bound to its observed OID, then publish exact fa1b578bb421bbc82b3106b7d4223e11e65fae1d as main",
-      "authorized": false
+      "create": "GitHub fork lovejzzz/film-engine from blender/blender created",
+      "lfsUpload": "server rejected both allowlisted objects at 0/2 and 0 bytes",
+      "firstPush": "not performed; generated main remains 08bed5b5b42ec017e8dcc87b76f6c373c322b086",
+      "authorized": true,
+      "result": "STOPPED_AT_GITHUB_PUBLIC_FORK_LFS_POLICY"
     }
   },
   "repositoryAuthorizationRequest": {
-    "status": "REQUESTED_NOT_AUTHORIZED",
-    "document": "research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md",
-    "documentSha256": "81f56ef09dacfa11f1767b7a9c3d59c3398151613b7133bd1a9adbcb67070128",
-    "machineRequest": "specs/ai-native-studio-repository-authorization-request.v0.1.json",
-    "machineRequestSha256": "9c9ce21e7b10acd8bfea087c546112d9f49a70263be4aac4fc1786ef2d831415",
+    "status": "GRANTED_AND_EXECUTED_STOPPED_AT_LFS_UPLOAD",
+    "document": "research/2026-08-30-film-engine-public-fork-execution-authorization-v0.2.zh-CN.md",
+    "documentSha256": "480afd3c7ca3039d4509c0933e252d1df97d202788508482bccc0168be4b5538",
+    "machineRequest": "specs/ai-native-studio-repository-authorization-request.v0.2.json",
+    "machineRequestSha256": "322386075cc2dcca468f3895e557983f3d9f8b53f3850596abef6567fde8b093",
     "forkOwnedLfsObjectCount": 2,
     "forkOwnedLfsBytes": 2701144,
     "freshMainUpdateRequiresObservedLease": true,
-    "authorizationGranted": false
+    "authorizationGranted": true
+  },
+  "repositoryPublication": {
+    "status": "FAIL_RETAINED_BLOCKED_PENDING_C1_AUTHORIZATION",
+    "repository": "lovejzzz/film-engine",
+    "repositoryUrl": "https://github.com/lovejzzz/film-engine",
+    "forkParent": "blender/blender",
+    "visibility": "public",
+    "generatedMainOid": "08bed5b5b42ec017e8dcc87b76f6c373c322b086",
+    "desiredF0HeadNotPushed": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+    "evidenceRoot": "experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01",
+    "failedStage": "LFS_UPLOAD",
+    "serverError": "batch response: @lovejzzz can not upload new objects to public fork lovejzzz/film-engine",
+    "failureReceiptHash": "31cb9ed7db300281d0f76d6a78bd726b435265a7e8eb6e2a3aac2a4438720d7f",
+    "failureFileSha256": "e978e1858b54da37bff1c9714bd0949e62ee092cfcef50b5c7b6e43a5dcc725d",
+    "failureAuditReceiptHash": "eb8e9ec13eef1b767f9315ed4c0aee195f14e07c41f65ddc2320ff75e3fe7c0f",
+    "failureAuditFileSha256": "6c030fe602748e1f60dce4024b83a79e93f27c70af943163508c25a6582e67d8",
+    "failureAuditChecksPassed": 33,
+    "externalMutationCounts": {
+      "repositoryCreates": 1,
+      "lfsUploads": 0,
+      "gitRefUpdates": 0,
+      "releases": 0,
+      "phaseBMutations": 0,
+      "deletions": 0,
+      "renames": 0
+    },
+    "activeCorrection": "research/2026-08-30-film-engine-public-fork-c1-github-lfs-policy.md",
+    "activeCorrectionSha256": "9ceb78bb17006307be133b05074325bb58cc0a113a3a2b8efbaa6f6de78551a9",
+    "machineCorrection": "specs/ai-native-studio-repository-publication-c1.v0.3.json",
+    "machineCorrectionSha256": "555d42c8adc60c65530bc0f7a9aeec9dfcdf4ce687be719bb6715cb76662fe64",
+    "recommendedCorrection": "one fa1b-parent commit changing only .gitattributes, icon and splash to preserve exact bytes as ordinary Git blobs",
+    "correctionAuthorized": false
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
@@ -421,7 +454,12 @@
     "research/2026-08-30-post-f0-repository-readiness-c2-bundle-argv.md",
     "specs/ai-native-studio-repository-readiness.v0.3.json",
     "research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md",
-    "specs/ai-native-studio-repository-authorization-request.v0.1.json"
+    "specs/ai-native-studio-repository-authorization-request.v0.1.json",
+    "research/2026-08-30-film-engine-public-fork-execution-authorization-v0.2.zh-CN.md",
+    "specs/ai-native-studio-repository-authorization-request.v0.2.json",
+    "research/2026-08-30-film-engine-public-fork-c1-github-lfs-policy.md",
+    "specs/ai-native-studio-repository-publication-c1.v0.3.json",
+    "experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json"
   ],
   "firstCommands": [
     "git status --short",
@@ -431,8 +469,10 @@
     "cat specs/ai-native-studio-post-f0-phase-b.v0.1.json",
     "cat experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/verdict.json",
     "cat experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/audit.json",
-    "cat specs/ai-native-studio-repository-authorization-request.v0.1.json",
-    "obtain explicit authorization for owner=lovejzzz, visibility=public, fork creation, exactly two allowlisted LFS uploads with billing acceptance, and lease-protected publication of exact fa1b578bb421 as main"
+    "cat experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/failure.json",
+    "cat experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json",
+    "cat specs/ai-native-studio-repository-publication-c1.v0.3.json",
+    "obtain explicit superseding authorization for the three-path ordinary-Git-blob C1 commit and its generated-main-OID lease; otherwise leave the fork untouched"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -452,7 +492,9 @@
   "prohibitions": [
     "Do not resume B62 as the primary goal",
     "Do not vendor Blender source or builds into this repository",
-    "Do not create or publish the permanent engine repository without an explicitly authorized post-F0 charter",
+    "Do not retry the rejected GitHub LFS upload or push broken LFS pointers",
+    "Do not delete, recreate or rename lovejzzz/film-engine",
+    "Do not update any film-engine ref without superseding C1 authorization",
     "Do not push the current shallow F0 checkout as a full-history source",
     "Do not treat private visibility as equivalent to the ready public-fork route; private standalone mirroring requires new full-LFS and billing authorization",
     "Do not weaken thresholds after observing results",
@@ -461,15 +503,14 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "REPOSITORY_CREATION_AUTHORIZATION",
-    "result": "An explicit user decision authorizing or declining permanent engine repository creation and first push",
+    "gate": "REPOSITORY_PUBLICATION_C1_AUTHORIZATION",
+    "result": "An explicit user decision authorizing or declining the minimal ordinary-Git-blob publication correction",
     "requiredArtifacts": [
-      "owner lovejzzz",
-      "public visibility",
-      "explicit permission to create a GitHub fork named film-studio-engine from blender/blender",
-      "explicit permission to upload exactly two allowlisted fork-owned LFS objects totaling 2701144 bytes and acceptance of possible GitHub LFS billing",
-      "explicit permission to replace only the freshly generated fork main with --force-with-lease bound to its observed OID and publish exact fa1b578bb421bbc82b3106b7d4223e11e65fae1d as main",
-      "confirmation that signing, notarization, unsigned-DMG distribution and Phase B mutation remain unauthorized unless separately granted"
+      "retain existing public fork lovejzzz/film-engine without delete, recreate or rename",
+      "explicit permission for one commit whose only parent is fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+      "limit changes to .gitattributes, blender_icon_legacy.icns and splash.png while preserving both binary SHA-256 values and byte sizes",
+      "explicit permission to replace generated main only with --force-with-lease=refs/heads/main:08bed5b5b42ec017e8dcc87b76f6c373c322b086",
+      "confirmation that LFS upload, other refs/tags, release, signing, notarization, DMG distribution and Phase B remain unauthorized"
     ]
   }
 }

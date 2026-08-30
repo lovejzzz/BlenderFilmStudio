@@ -6,13 +6,13 @@ Researching a reproducible **AI → structured 3D scene → Blender → cinema m
 
 ## Current checkpoint
 
-F0.1–F0.7 are complete. A no-external-write repository rehearsal also passed:
-the exact Film Studio Engine F0 head was grafted onto a non-shallow Blender Git
-graph, pushed only to a local `file://` bare repository, and independently
-audited 93/93. The recommended next topology is a public GitHub fork of
-`blender/blender` named `film-studio-engine`; creation and the first external
-push—including two allowlisted LFS objects and a lease-protected fresh-main
-update—remain explicitly unauthorized until the owner approves them. Start with
+F0.1–F0.7 are complete, and the no-external-write full-history rehearsal passed
+93/93. Owner authorization then created public fork
+[`lovejzzz/film-engine`](https://github.com/lovejzzz/film-engine), but GitHub
+rejected both new brand LFS objects before any bytes or Git ref were written.
+The failure is retained and independently audited 33/33; the fork still points
+to GitHub's generated upstream `main`. A minimal three-path ordinary-Git-blob
+publication correction is specified but not authorized. Start with
 [`START_HERE.md`](START_HERE.md).
 
 ## Baseline 01

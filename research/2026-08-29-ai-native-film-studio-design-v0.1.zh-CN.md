@@ -415,3 +415,5 @@ film-studio/
 因此建议路线已具体化为：owner `lovejzzz`、visibility `public`、从`blender/blender`创建requested name `film-studio-engine`的GitHub fork，再首次push exact F0 head为`main`。public fork路线状态为`READY_FOR_EXPLICIT_AUTHORIZATION`；private standalone mirror不是同一动作，它仍因6,671个HEAD LFS paths、全历史LFS传输、storage/bandwidth billing与owner接受而`BLOCKED`。用户明确授权前不执行fork/create/push。
 
 最终外部动作请求进一步明示两个不可隐含的side effects：只上传两个fork-owned LFS branding objects（2,701,144 bytes，并接受可能的GitHub LFS计费），以及只在fresh fork无owner-authored commit时，用观察到的generated `main` OID执行显式`--force-with-lease`更新。无lease force、其他ref/tag、release、签名、公证、DMG分发与Phase B仍不在授权内。
+
+Owner随后把候选名称改为`film-engine`并给出上述完整授权。Fail-closed runner创建public fork `lovejzzz/film-engine`后，GitHub在0/2与0 bytes时拒绝两个新LFS对象：`can not upload new objects to public fork`。因此没有Git ref update，live `main`仍是GitHub生成的upstream `08bed5b5…`，create/LFS/ref/release/Phase B计数为1/0/0/0/0；独立failure audit 33/33 PASS。C1现冻结最小ordinary-blob路线：只以`fa1b…`为父新增一个三路径publication compatibility commit，保持icon/splash内容SHA与bytes不变，并用`08bed5b5…` lease更新main。该new commit与push等待独立owner授权；不从原exact-head授权推断。
