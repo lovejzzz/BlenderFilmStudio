@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "bfs.f0GatePreregistration.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.3",
+  "attempt": "F0.3-2026-08-30-mac-m2max-attempt-01",
+  "frozenAt": "2026-08-30T00:25:49Z",
+  "status": "PREREGISTERED",
+  "dependsOn": {
+    "gate": "F0.2",
+    "verdict": "PASS",
+    "receiptHash": "615c3021227a4f3b4008ec73acca5ddc04511e3283dfc1a7bb7fddfde45192f4",
+    "sourceCommit": "0a25790a1cd6feff4bae1b03d81e4c43ec55a0b5"
+  },
+  "frozenTask": {
+    "id": "F0.3-T1-CREATE-SELECT-SHOT",
+    "project": {"identifier": "PRJ_REMAINDER", "name": "Remainder"},
+    "scene": {"identifier": "SC01", "name": "The Room"},
+    "character": {"identifier": "CHR_GUARDIAN", "name": "Guardian"},
+    "shot": {"identifier": "SH010", "name": "WIDE", "cameraObject": "SHOT_SH010_WIDE"},
+    "completion": "The shot exists, is the active typed shot, its camera is the selected active object, and the scene camera points to it"
+  },
+  "officialBaseline": {
+    "app": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-a/bin/Blender.app",
+    "binarySha256": "cf0fa6bb8cca9621d39637dfbcfa9990abcbf9ccaafc5edd8306967d9aaaad3e",
+    "sourceCommit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "semanticProxy": "Four generic scene objects named PROJECT_PRJ_REMAINDER, SCENE_SC01, CHARACTER_CHR_GUARDIAN and SHOT_SH010_WIDE; the shot proxy is a Camera and is selected",
+    "route": "For each proxy use Search, enter the add command, confirm, Rename, enter the frozen name, confirm",
+    "plannedInteractions": 24,
+    "arbitraryPythonConsoleForbidden": true
+  },
+  "f0Target": {
+    "app": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace/bin/Film Studio Engine F0.app",
+    "taskRoute": "One visible Create Shot action on the native Film Mode start surface",
+    "maximumTaskInteractions": 1,
+    "requiredTypedState": ["Project", "Scene", "Shot", "Character"],
+    "strictInteractionAdvantage": "actual F0 task interactions must be less than actual official baseline interactions"
+  },
+  "interactionCounting": {
+    "counted": "Every deliberate click, key chord, text entry, or confirmation sent to the application is one interaction",
+    "notCounted": ["application launch", "startup wait", "splash dismissal", "screenshot capture", "audit-only background process"],
+    "errors": "Any unintended operator, correction, undo, or failed UI action increments errorCount",
+    "timing": "Monotonic wall time begins at the first counted input and ends when the frozen completion state is visibly reached"
+  },
+  "allowedSourcePatch": [
+    "scripts/startup/bl_operators/film_studio_workspace.py",
+    "scripts/startup/bl_operators/__init__.py",
+    "scripts/startup/bl_ui/space_topbar.py"
+  ],
+  "implementationContract": {
+    "stateStorage": "Versioned RNA PropertyGroup state attached to Scene and serialized in .blend",
+    "filmMode": "Topbar start surface directly exposes frozen Project, Scene, Character and active Shot plus Create Shot and Expert Mode actions",
+    "expertMode": "Restores the complete Blender menus and workspace tabs without copying or converting scene state",
+    "shotCreation": "Creates a real Camera and cross-binds it to the typed shot, active object and scene camera"
+  },
+  "negativeControls": [
+    "Open a valid .blend after removing optional Film Studio shot entries; core Project, Scene and Character state must load and the UI must offer Create Shot without error",
+    "Switch Film Mode to Expert Mode and back; canonical typed state and camera identity must remain exact"
+  ],
+  "persistence": "Save, quit, reopen and independently audit the exact typed identifiers, selected shot and camera binding",
+  "resources": {
+    "minimumFreeGiBBeforeNativeStart": 160,
+    "reservedFreeGiB": 100,
+    "projectedIncrementalBuildGiB": 5,
+    "maximumGateWallHours": 12
+  },
+  "requiredEvidence": [
+    "interaction-baseline.json",
+    "workspace-task.json",
+    "persistence.json",
+    "expert-mode-roundtrip.json",
+    "missing-optional-state.json",
+    "workspace.patch",
+    "screenshots/",
+    "audit.json",
+    "verdict.json"
+  ],
+  "stopRules": [
+    "Do not mutate source before this preregistration is committed and pushed",
+    "Do not launch a native Blender process below 160 GiB free",
+    "Do not count Python console or audit scripts as user interaction",
+    "Do not pass if state is only labels, custom layout or hidden menus without typed persistent state",
+    "Do not weaken the one-interaction F0 target or the strict less-than baseline rule after observing results"
+  ]
+}
