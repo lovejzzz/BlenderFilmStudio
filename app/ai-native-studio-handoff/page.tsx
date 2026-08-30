@@ -16,7 +16,7 @@ const gates = [
   ['F0.1', '源码复现', '两次 clean build + 负控', 'PASS'],
   ['F0.2', '独立身份', '名称 / bundle / config 隔离', 'PASS'],
   ['F0.3', '电影工作台', 'Project / Scene / Shot / Character', 'PASS'],
-  ['F0.4', '合同内嵌', 'canonical exact；OCIO build gate failed', 'FAIL / RETRY'],
+  ['F0.4', '合同内嵌', 'plan exact；structure identity contract needs v2', 'FAIL / RETRY'],
   ['F0.5', '渲染收据', 'EEVEE / Cycles / resume / audit', 'LOCKED'],
   ['F0.6', '合并演练', '10 paths / 8 h / 5000 LOC ceiling', 'LOCKED'],
   ['F0.7', '安装往返', 'package / identity / .blend', 'LOCKED'],
@@ -52,13 +52,13 @@ export default function AiNativeStudioHandoffPage() {
         <div className="handoff-hero-copy">
           <p className="eyebrow"><span /> NEW MACHINE HANDOFF · 2026.08.29</p>
           <h1>换一台电脑，<br />不换一套<span>事实。</span></h1>
-          <p>F0.1–F0.3 已在 M2 Max 主机通过。F0.4 attempt-01 又证明了内嵌 B01/B02 BuildPlan canonical exact 与四项负控，但首个隔离 B01 build 因 OCIO config name 为空而正式 FAIL。新的 Codex 只能从交叉绑定该失败的新 evidence root 继续。</p>
+          <p>F0.1–F0.3 已在 M2 Max 主机通过。F0.4 attempt-01 证明内嵌 B01/B02 BuildPlan canonical exact 与四项负控；attempt-02 修正 OCIO 后真实建出 B01，但冻结 structure hash 因包含产品 build hash 而不同。新的 Codex 只能从交叉绑定两个失败的新 evidence root 继续。</p>
           <div className="handoff-hero-actions"><a href="#start">开始交接 ↓</a><Link href="/ai-native-studio-design">为什么做自己的软件</Link></div>
         </div>
         <aside className="handoff-state">
-          <header><span>PROGRAM STATE</span><b>F0.4 ATTEMPT-01 FAIL</b></header>
-          <div className="handoff-state-main"><small>ACTIVE CORRECTION</small><strong>F0.4</strong><h2>OCIO-BOUND<br />RETRY</h2></div>
-          <dl><div><dt>ENGINE</dt><dd>Film Studio Engine F0</dd></div><div><dt>COMMIT</dt><dd>b47eae224b6d</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>RESULT</dt><dd>2 exact · build FAIL</dd></div></dl>
+          <header><span>PROGRAM STATE</span><b>F0.4 ATTEMPT-02 FAIL</b></header>
+          <div className="handoff-state-main"><small>ACTIVE CORRECTION</small><strong>F0.4</strong><h2>STRUCTURE ID<br />CONTRACT V2</h2></div>
+          <dl><div><dt>ENGINE</dt><dd>Film Studio Engine F0</dd></div><div><dt>COMMIT</dt><dd>b47eae224b6d</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>RESULT</dt><dd>scene exact · provenance differs</dd></div></dl>
           <footer>FORK IS A HYPOTHESIS · NOT A CONCLUSION</footer>
         </aside>
         <div className="handoff-signal"><span>01</span><b>读取规则</b><i>→</i><span>02</span><b>只读预检</b><i>→</i><span>03</span><b>固定源码</b><i>→</i><span>04</span><b>保存证据</b></div>
@@ -72,7 +72,7 @@ export default function AiNativeStudioHandoffPage() {
           <article><span>01</span><h3>读入口</h3><code>START_HERE.md</code><p>确认目标与禁区，不从旧 B62 继续。</p></article>
           <article><span>02</span><h3>做预检</h3><code>preflight-f0-source-host.mjs</code><p>先获得 ACCEPTED 或 BLOCKED 事实。</p></article>
           <article><span>03</span><h3>预览 bootstrap</h3><code>--workspace /absolute/path</code><p>源码永远放在研究仓库之外。</p></article>
-          <article><span>04</span><h3>建立 correction root</h3><code>F0.4-…-attempt-02</code><p>交叉绑定 attempt-01，冻结 OCIO 环境。</p></article>
+          <article><span>04</span><h3>建立 correction root</h3><code>F0.4-…-attempt-03</code><p>交叉绑定 attempts 01/02，分离场景语义与产品 provenance。</p></article>
         </div>
       </section>
 
@@ -99,8 +99,8 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-checkpoint">
         <span>NEXT PUSH MUST CONTAIN</span>
-        <h2>一个被保留的 F0.4 失败。</h2>
-        <p>2 canonical-exact BuildPlans · 4 / 4 negative controls · B01 OCIO mismatch · B02 not run · same-ID repair forbidden</p>
+        <h2>两个被保留的 F0.4 失败。</h2>
+        <p>2 exact BuildPlans · 4 / 4 negatives · OCIO fixed · B01 built · only $.blender.buildHash differed · B02 stopped</p>
         <div><Link href="/journal">查看实验日志 →</Link><a href="https://github.com/lovejzzz/BlenderFilmStudio" target="_blank" rel="noreferrer">打开 GitHub 仓库 ↗</a></div>
       </section>
 

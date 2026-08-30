@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "bfs.f0.4.correctionIsolatedBuildReceipt.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.4",
+  "id": "B01",
+  "status": "FAIL",
+  "observedAt": "2026-08-30T05:05:24Z",
+  "formalProductStart": 1,
+  "correction": "C1_OCIO_LAUNCH_ENVIRONMENT_BINDING",
+  "admission": {
+    "uri": "admissions/01-b01-ocio-build.json",
+    "status": "ACCEPTED",
+    "freeBytes": "173693861888",
+    "requiredBytes": "171798691840",
+    "runningBlenderPidsBefore": [],
+    "outputAbsentBefore": true
+  },
+  "command": {
+    "environment": {
+      "OCIO": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio"
+    },
+    "executable": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "args": [
+      "--background",
+      "--factory-startup",
+      "--python",
+      "blender/compile_scene.py",
+      "--",
+      "--plan",
+      "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01/embedded/B01.build-plan.json",
+      "--repository-root",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio",
+      "--output-dir",
+      "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-02/b01/artifacts"
+    ],
+    "cwd": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio"
+  },
+  "result": {
+    "exitCode": 0,
+    "signal": null,
+    "elapsedSeconds": 0.547332625,
+    "compilerStatus": "BFS_COMPILE_OK",
+    "logUri": "b01/product-output.log"
+  },
+  "artifacts": {
+    "scene.blend": {
+      "bytes": 117759,
+      "sha256": "de12084f084f8a30d262b700f646bf27ba360be88642ba9b774e162789e9d57b"
+    },
+    "scene.manifest.json": {
+      "bytes": 8190,
+      "sha256": "a7e51c06d2154a4e640b91df83672cd1c6d92ec89c3860a37c50324499ed57ef"
+    },
+    "scene.structure.canonical.json": {
+      "bytes": 3130,
+      "sha256": "6084df518e1526690e17293d48cace4d82502bbb0cf291842105b33dbda3a5f4"
+    }
+  },
+  "checks": {
+    "admissionAccepted": true,
+    "embeddedPlanHashExact": true,
+    "ocioConfigNameExact": true,
+    "ocioConfigSha256Exact": true,
+    "sceneBuildCompleted": true,
+    "canonicalStructureHashReproduced": false,
+    "structureEqualAfterRemovingProductBuildHash": true
+  },
+  "structureComparison": {
+    "expectedFrozenSha256": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+    "actualSha256": "6084df518e1526690e17293d48cace4d82502bbb0cf291842105b33dbda3a5f4",
+    "differingJsonPaths": ["$.blender.buildHash"],
+    "expectedProductBuildHash": "fbe6228777e7",
+    "actualProductBuildHash": "b47eae224b6d",
+    "normalizedSha256WithoutProductBuildHash": "0bb1caf9966e9e64b71d586274b00a783bc003dcb9f3240b9a655ece21ff73aa"
+  },
+  "failure": {
+    "id": "B01_FROZEN_STRUCTURE_HASH_MISMATCH",
+    "reason": "The canonical structure embeds Blender build provenance, so the independently branded fork produced a different full structure hash even though the only JSON difference was $.blender.buildHash."
+  },
+  "stopRule": {
+    "triggered": true,
+    "sameIdRepairPermitted": false,
+    "subsequentFormalProductStartsPermitted": false,
+    "reason": "B01 did not reproduce the preregistered exact structure hash after formal-start.json was frozen."
+  },
+  "receiptHash": "077a4792dceb95ff36ee793e0c625fea680817b57fc62d68a1835420eaf162cc"
+}

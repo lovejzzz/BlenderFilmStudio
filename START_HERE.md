@@ -1,11 +1,12 @@
 # BlenderFilmStudio — new machine cold start
 
 > **Current decision:** F0.1, F0.2 and F0.3 passed on the admitted M2 Max host.
-> F0.4 attempt-01 is a retained `FAIL`: embedded B01/B02 BuildPlans were
-> canonical-exact and all four negative controls passed, but the first isolated
-> B01 build stopped on an empty OCIO config identity. Continue only in a new,
-> cross-bound F0.4 evidence root; do not assume the fork is viable until
-> F0.1-F0.7 all close.
+> F0.4 attempts 01 and 02 are retained `FAIL` results. Attempt-01 proved
+> canonical-exact B01/B02 BuildPlans and all four negative controls, then found
+> a missing OCIO launch binding. Attempt-02 fixed only that binding and built
+> B01, but the frozen full structure hash differed because it includes the
+> product build hash. Continue only in a new, cross-bound F0.4 evidence root;
+> do not assume the fork is viable until F0.1-F0.7 all close.
 
 This is the authoritative handoff for a fresh Codex session. The repository is
 both a research notebook and an executable evidence base. Read this page,
@@ -17,8 +18,8 @@ both a research notebook and an executable evidence base. Read this page,
   and fork-maintenance reference; an external shell remains the fallback.
 - **Pinned engine baseline:** official `v5.2.0` at
   `fbe6228777e7d9afefcd61a413844e790ae75db7`.
-- **Active experiment:** `F0-SOURCE-FEASIBILITY`, bounded F0.4 correction after
-  the immutable attempt-01 `FAIL`.
+- **Active experiment:** `F0-SOURCE-FEASIBILITY`, bounded F0.4 contract-version
+  correction after immutable attempt-01 and attempt-02 `FAIL` results.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS` and `F0.3 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
   not byte-for-byte reproducible; the bounded differences are recorded in
@@ -34,12 +35,19 @@ both a research notebook and an executable evidence base. Read this page,
   frozen UI task required 1 interaction versus 24 in official Blender; the
   accepted receipt is in
   `F0.3-2026-08-30-mac-m2max-attempt-01/verdict.json`.
-- **Retained F0.4 failure:** attempt-01 proved canonical-exact embedded B01/B02
+- **Retained F0.4 attempt-01:** attempt-01 proved canonical-exact embedded B01/B02
   BuildPlans, approval ordering and four pre-mutation rejections, then failed
   formal product start 3 because `ocio.GetCurrentConfig().getName()` returned
   an empty string instead of the frozen ACES 2 config name. B02 and the fifth
   product audit were not run. The self-hashed verdict is in
   `F0.4-2026-08-30-mac-m2max-attempt-01/verdict.json`; same-ID repair is forbidden.
+- **Retained F0.4 attempt-02:** the preregistered ACES 2 `OCIO` launch binding
+  was exact and B01 built successfully with the frozen planHash. Its full
+  structure SHA was `6084df51…`, not frozen `c699fc27…`; the sole JSON
+  difference was `$.blender.buildHash` (`b47eae224b6d` versus official
+  `fbe6228777e7`). Removing that provenance field made both semantic structures
+  byte-exact at `0bb1caf9…`. The stop rule skipped B02 and the product audit;
+  verdict self hash is `279028206e81c40ffede744313f6b40f4d97fe03d6b5d4a5d40bd0e6867651cb`.
 - **Inherited evidence:** B01-B62 cover structured scene compilation, Blender
   execution, safety/admission, pixels, production passes, cost, recovery and a
   three-shot cinematic attempt. These results are evidence, not a claim that
@@ -47,9 +55,9 @@ both a research notebook and an executable evidence base. Read this page,
 - **Most important retained rejection:** B62's latest camera holdout passed all
   technical gates but failed the frozen composition threshold at frame 288.
   Source control does not replace direction or taste.
-- **Unproven:** embedded contract equivalence, render
-  receipts inside the product, merge cost, packaging and `.blend` round-trip
-  isolation.
+- **Unproven:** a versioned semantic-structure versus product-provenance
+  identity contract, complete B01/B02 isolated construction, render receipts
+  inside the product, merge cost, packaging and `.blend` round-trip isolation.
 
 ## Read in this order
 
@@ -108,9 +116,10 @@ contract name instead of reading everything.
    another machine's root.
 
 5. F0.1-F0.3 are closed. Before another F0.4 product start, create a new
-   immutable evidence root that cross-binds attempt-01, freeze the exact OCIO
-   environment binding, and preserve all prior SceneSpec/compiler/approval
-   fixtures and thresholds. Never repair attempt-01 in place.
+   immutable evidence root that cross-binds attempts 01 and 02. Preregister a
+   versioned identity contract that keeps exact product provenance separate
+   from the semantic scene-structure hash; keep the OCIO binding and all prior
+   SceneSpec/compiler/approval fixtures frozen. Never repair either failed root.
 
 ## What not to do
 
@@ -132,12 +141,15 @@ The next machine should push one small, auditable corrected F0.4 checkpoint cont
 
 - a unique F0.4 experiment root and a preregistered frozen SceneSpec fixture;
 - canonical-exact external-versus-embedded BuildPlan bytes;
+- a versioned semantic-structure hash plus separately exact Blender product
+  provenance, justified by attempt-02's one-path diff;
 - isolated clean B01 and B02 build receipts;
 - proposal diff and approval scope visible before execution;
 - pre-mutation rejection of unknown fields, path escape, non-finite values and
   unapproved mutation;
 - complete success or failure receipts;
-- an explicit cross-binding to the attempt-01 OCIO mismatch verdict;
+- explicit cross-bindings to attempt-01's OCIO mismatch and attempt-02's frozen
+  structure-hash mismatch verdicts;
 - a journal entry and, if useful, a website update.
 
 The scientific result may be `PASS`, `FAIL`, or `BLOCKED`. “Still working” is

@@ -5861,3 +5861,15 @@ F0.4在冻结协议、harness与正式启动记录后运行，源码提交为`b4
 正式启动3在fresh admission后进入隔离B01 build。free bytes为173,718,777,856，启动前无Blender进程，artifact root不存在；真实产品binary SHA-256为`5a453816…`。`blender/compile_scene.py`在颜色配置身份门读取`ocio.GetCurrentConfig().getName()`，实际得到空字符串，而BuildPlan要求`cg-config-v4.0.0_aces-v2.0_ocio-v2.5`，因此exit 1。失败只留下`b01/artifacts/frames`空目录，0文件、0 `.blend`、0 manifest、0 structure receipt。协议停止规则随即触发：没有同ID修复，没有启动B02或第五个产品审计；最大并发仍为1，官方Blender配置digest前后均为`c97e9a5f…`。
 
 Computer Use同时暴露一个证据工具问题：按同名display name选择了较旧F0.2 bundle，因此该PNG被明确降级为`DIAGNOSTIC_ONLY`，不冒充正式产品截图；正式产品自己的`runtime-ui/inspection.json`仍记录`APPROVED_READY`、execute enabled、未执行且输出不存在。attempt-01最终verdict为`FAIL`，self hash `c0822b046f74920ef81155a3cc268aa2833ab991b5ae08dfdaa575d94f4fb2db`。下一步只能建立新immutable root，交叉绑定本失败，并在首次产品启动前冻结和验证OCIO环境绑定；F0.5继续锁定。
+
+## J-473 · F0.4 OCIO 纠正有效，但 structure identity 混入产品 provenance
+
+Date: 2026-08-30 · Type: F0.4 C1 CORRECTION RETAINED FAIL · Host: macOS 25.6.0 / Apple M2 Max / 64 GiB · Formal product starts: 1 / 3
+
+attempt-02 在产品启动前以commit `4ae936e619be90db37ddd263af485d7a0d64c79e`预登记并推送，随后以`abb37fc5f3aa047eea30abd8561e7c5f50e42166`冻结正式开始。它交叉绑定attempt-01，只授权把`OCIO`设置为绝对冻结路径；SceneSpec、B01/B02 BuildPlan、compiler、源码patch、fixture和阈值全部保持不变。正式启动1准入观察free bytes 173,693,861,888，输出root absent、Blender进程0、并发上限1。
+
+真实`Film Studio Engine F0`进程加载exact ACES 2 config SHA `24ec8184…`，以exit 0保存117,759-byte `scene.blend`、8,190-byte manifest与3,130-byte canonical structure。planHash保持`316114f1…`，OCIO name/SHA均精确，证明attempt-01的环境绑定假设成立。但正式输出structure SHA为`6084df518e1526690e17293d48cace4d82502bbb0cf291842105b33dbda3a5f4`，未复现冻结`c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b`，因此按预注册门槛FAIL并立即停止；B02与独立产品审计未启动，同ID没有修补。
+
+独立JSON diff证明两个structure只有一个路径不同：`$.blender.buildHash`从官方基线`fbe6228777e7`变为当前fork产品`b47eae224b6d`。删除这一product provenance字段后，两份场景结构canonical bytes具有同一SHA `0bb1caf9966e9e64b71d586274b00a783bc003dcb9f3240b9a655ece21ff73aa`；几何、材质、灯光、相机、render contract、shot与planHash均未变化。这一观察不能把attempt-02升级为PASS，它只定位到identity contract把semantic structure与product provenance混层。
+
+B01/B02/audit/verdict四份self hash均独立复算通过，最终verdict self hash为`279028206e81c40ffede744313f6b40f4d97fe03d6b5d4a5d40bd0e6867651cb`；官方Blender config digest前后仍为`c97e9a5f…`。下一次只允许在fresh、cross-bound evidence root中预登记versioned structure identity contract，分别精确哈希scene semantics与product provenance，再运行B01/B02和独立审计。F0.5继续锁定。

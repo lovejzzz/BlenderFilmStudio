@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "bfs.f0.4.correctionPreservationAudit.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.4",
+  "status": "FAIL",
+  "observedAt": "2026-08-30T05:05:24Z",
+  "independence": "Preservation audit performed without importing the compiler or contract runner and without starting another product process after the stop rule triggered.",
+  "crossBoundFailure": {
+    "experiment": "F0.4-2026-08-30-mac-m2max-attempt-01",
+    "verdictFileSha256": "788ad1014a58cc5446ba00d0abaf6131d4143fd4062157e26457adeaf120ee89",
+    "verdictReceiptHash": "c0822b046f74920ef81155a3cc268aa2833ab991b5ae08dfdaa575d94f4fb2db",
+    "retained": true
+  },
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "branch": "codex/f0.4-embedded-contract",
+    "head": "b47eae224b6d3e71559b55df85fd20ae87d3f92b",
+    "parent": "4f1446f780c2b7e23bc66f584b36f6254ecd985c",
+    "clean": true,
+    "gateOwnedAddedLines": 602,
+    "gateOwnedDeletedLines": 1,
+    "ceiling": 900
+  },
+  "product": {
+    "binarySha256": "5a4538163d1fce6c531f2ad76a15232fc1d1d4bbff483d54778a290b4c37cb40",
+    "binaryBytes": 182654792,
+    "version": "5.2.0 LTS",
+    "buildHash": "b47eae224b6d"
+  },
+  "formalProductAccounting": {
+    "maximumAllowed": 3,
+    "completed": 1,
+    "maximumConcurrentObserved": 1,
+    "runningAtAudit": [],
+    "skippedByStopRule": [
+      "02_B02_ISOLATED_BUILD_WITH_FROZEN_OCIO",
+      "03_INDEPENDENT_CROSS_BOUND_AUDIT"
+    ]
+  },
+  "results": {
+    "B01Build": {
+      "status": "FAIL",
+      "reason": "B01_FROZEN_STRUCTURE_HASH_MISMATCH",
+      "compilerExitCode": 0,
+      "sceneBuildCompleted": true,
+      "fullStructureExact": false,
+      "semanticStructureExactAfterRemovingProductBuildHash": true
+    },
+    "B02Build": {
+      "status": "NOT_RUN_STOP_RULE"
+    },
+    "independentProductAudit": {
+      "status": "NOT_RUN_STOP_RULE"
+    }
+  },
+  "officialConfiguration": {
+    "root": "/Users/mengyingli/Library/Application Support/Blender",
+    "entries": 2,
+    "files": 0,
+    "digestBefore": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "digestAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "unchanged": true
+  },
+  "checks": {
+    "preregisteredAndPushedBeforeFormalStart": true,
+    "formalStartPushedBeforeProductStart": true,
+    "onlyFrozenOcioBindingAdded": true,
+    "allCompletedAdmissionsAccepted": true,
+    "B01OcioIdentityExact": true,
+    "B01PlanHashExact": true,
+    "B01FullStructureHashExact": false,
+    "B02FullStructureHashExact": false,
+    "officialConfigurationUnchanged": true,
+    "noProductProcessRemaining": true,
+    "stopRuleHonored": true,
+    "allAcceptanceCriteriaPassed": false
+  },
+  "failures": [
+    {
+      "id": "B01_FROZEN_STRUCTURE_HASH_MISMATCH",
+      "expected": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+      "actual": "6084df518e1526690e17293d48cace4d82502bbb0cf291842105b33dbda3a5f4",
+      "onlyDifferingJsonPath": "$.blender.buildHash",
+      "source": "b01/receipt.json"
+    }
+  ],
+  "boundedNextExperiment": {
+    "required": true,
+    "sameIdRepair": false,
+    "newEvidenceRoot": true,
+    "crossBindThisFailure": true,
+    "preregisteredChange": "Version the structure identity contract so semantic scene structure and product build provenance are hashed separately, while preserving both exact values."
+  },
+  "receiptHash": "bd5a0286e4cf27f509efd5c7abf2a27e196e57fb3ac1a4da8e33fca0c3fd8481"
+}

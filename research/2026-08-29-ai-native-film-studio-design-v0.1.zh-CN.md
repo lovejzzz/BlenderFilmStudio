@@ -313,6 +313,8 @@ film-studio/
 
 任何一项失败都保留原始证据，并可能改变架构。例如 F0.6 成本过高时，退回“未修改 Blender + 外部 Studio shell”；不以愿景为由继续扩大分叉。
 
+截至 2026-08-30，F0.1–F0.3 已 PASS，F0.4 保留两次 FAIL。attempt-01 证明 BuildPlan canonical exact、4/4 pre-mutation 负控与 proposal approval 顺序，但发现产品启动遗漏 OCIO 绑定。attempt-02 只纠正该环境绑定并成功创建 B01 `.blend`；冻结 full structure hash 仍不相等，独立 diff 显示唯一不同字段是 `$.blender.buildHash`。这说明当前 structure identity 将场景语义与产品 provenance 混在同一哈希中。下一次只能用版本化协议在新 evidence root 中分离两者，同时继续精确保存并验证产品 provenance；不能改写前两次失败或把删除字段冒充原门槛已通过。
+
 ## 14. 阶段路线
 
 ### Phase A：Source Feasibility
@@ -405,4 +407,3 @@ film-studio/
 ## 20. 下一项授权实验
 
 下一步不是立即维护一个永久 fork，而是预注册并执行 `F0-SOURCE-FEASIBILITY`。它必须先固定 Blender source commit、依赖、构建环境、磁盘预算、允许修改文件、应用身份和上游 merge 区间，再运行真实源码构建。只有 F0.1–F0.7 关闭，才创建正式引擎仓库和产品路线。
-
