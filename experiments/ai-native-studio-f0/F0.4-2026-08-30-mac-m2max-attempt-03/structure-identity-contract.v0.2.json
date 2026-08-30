@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "bfs.structureIdentityContract.v0.2",
+  "semanticStructure": {
+    "version": "bfs.semanticSceneStructure.v0.2",
+    "canonicalization": "UTF-8 JSON, recursively sorted object keys, compact separators, array order preserved",
+    "includes": "Scene topology, typed objects, transforms, cameras, lights, assets, render contract, shot and BuildPlan identity emitted by build_structure.",
+    "excludes": ["Blender version", "Blender build hash", "Blender build branch", "Blender build platform"],
+    "B01Sha256": "e8c55fb73737f1871ac0008faa705dc204ebfe5bac471323cbb0a2d31435b4f8",
+    "B02Sha256": "d197b024c3b1de19c7fa981912c584de51d6d4884ef78b10e29db598ce979954"
+  },
+  "productProvenance": {
+    "location": "manifest.execution.blender and .blend custom property bfs_product_build_hash",
+    "requiredExact": {
+      "version": "5.2.0 LTS",
+      "buildHash": "b47eae224b6d",
+      "buildBranch": "codex/f0.4-embedded-contract",
+      "buildPlatform": "Darwin",
+      "binarySha256": "5a4538163d1fce6c531f2ad76a15232fc1d1d4bbff483d54778a290b4c37cb40"
+    }
+  },
+  "separationInvariants": [
+    "Changing only product provenance cannot change semanticStructureSha256.",
+    "Changing semantic structure cannot be hidden by exact product provenance.",
+    "Both semantic structure and product provenance must pass; neither substitutes for the other."
+  ],
+  "historicalBinding": {
+    "B13Protocol": "research/2026-08-26-b13-compile-receipt-protocol.md",
+    "B13Intent": "Blender version/build identity outside the structure object",
+    "attempt02OnlyDifferingPath": "$.blender.buildHash"
+  }
+}
