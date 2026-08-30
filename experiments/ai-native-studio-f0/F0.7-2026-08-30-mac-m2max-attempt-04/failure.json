@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "bfs.f0.7.failureReceipt.v0.1",
+  "experimentId": "F0.7-2026-08-30-mac-m2max-attempt-04",
+  "status": "FAIL",
+  "failureId": "E08_NORMALIZED_INSTALL_RECEIPT_VARIABLE_NAME",
+  "observedAtUtc": "2026-08-30T07:43:24Z",
+  "firstAttempt04PackageMutationOccurred": true,
+  "sameIdRepairPermitted": false,
+  "failedStep": "08_WRITE_INSTALL_UNINSTALL_RECEIPT",
+  "cause": "After six successful product starts and completed safe uninstall, the frozen runner referenced installedPayloadBeforeUninstallNormalized instead of the existing installedBeforeUninstallNormalized while assembling the receipt.",
+  "completedBeforeFailure": {
+    "packageStatus": "PASS_UNSIGNED_RESEARCH_PACKAGE",
+    "formalProductStarts": 6,
+    "roundtripStatus": "PASS",
+    "coreSemanticSha256": "139852cf091bc79b78f7dd73430912d7988b0f54a3089b010dd87a26211a2300",
+    "coreSemanticExactAtAllSixBoundaries": true,
+    "metadataDisposition": "PRESERVED_EXACT",
+    "safeUninstallExecuted": true,
+    "postUninstallConfigurationChecksReachedAndPassed": true,
+    "independentFinalAuditStarted": false
+  },
+  "evidence": {
+    "packageManifest": {
+      "uri": "package-manifest.json",
+      "fileSha256": "068b96d4b954f3c31e74d2c79ab9d77dffc1ae93c24f91eef16d9f75cf53a7aa",
+      "manifestHash": "f15649628d8fbf4a327793a9957f251eef46369698f8aa412a748ae0f3a287a5"
+    },
+    "roundtrip": {
+      "uri": "roundtrip.json",
+      "fileSha256": "0f7238e81b012ede7fa9ab3344683a5c6817c53dfd336d3a852e91a72602ffc6",
+      "roundtripHash": "8fa1ffe8081cc1c7f25b00b04ed0971f92255d5c535b6947095f0d3304f56bf8"
+    },
+    "postcheck": {
+      "uri": "failure-postcheck.json",
+      "fileSha256": "601ede0292698f4463f9dec6140f5868779da1bfcc1b0922ed2ccc9566b5734a",
+      "postcheckHash": "be7e0690134ae5a2a0fd003ee9be883ee8170d794dae63c7e7fc6dbfdbf93a9f",
+      "status": "PASS",
+      "checks": 100
+    }
+  },
+  "safety": {
+    "installDestinationAbsent": true,
+    "mountpointAbsent": true,
+    "sourceProductUnchanged": true,
+    "installedOfficialBlenderUnchanged": true,
+    "officialConfigurationBaselineUnchanged": true,
+    "officialUserWritesSandboxed": true,
+    "f0ConfigurationRootsUnchanged": true,
+    "freeBytesAfterFailure": "171926908928"
+  },
+  "correctiveActionForNewAttempt": "Bind both receipt keys explicitly to installedBeforeUninstall and installedBeforeUninstallNormalized, then run ESLint no-undef before tool freeze and rerun the complete workflow in a new experiment.",
+  "failureHash": "1ba55429de296d45aafc6203d90d922d037719da624c802282e591f63430e78a"
+}
