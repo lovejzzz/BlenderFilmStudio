@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioF0.4CorrectionProtocol.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.4",
+  "experimentId": "F0.4-2026-08-30-mac-m2max-attempt-02",
+  "status": "PREREGISTERED",
+  "correctionClass": "C1_OCIO_LAUNCH_ENVIRONMENT_BINDING",
+  "crossBoundFailure": {
+    "experiment": "F0.4-2026-08-30-mac-m2max-attempt-01",
+    "verdictUri": "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01/verdict.json",
+    "verdictFileSha256": "788ad1014a58cc5446ba00d0abaf6131d4143fd4062157e26457adeaf120ee89",
+    "verdictReceiptHash": "c0822b046f74920ef81155a3cc268aa2833ab991b5ae08dfdaa575d94f4fb2db",
+    "failure": "B01_OCIO_CONFIG_MISMATCH"
+  },
+  "question": "Does binding the already frozen ACES 2 OCIO file in the admitted product launch environment allow the unchanged canonical-exact B01/B02 BuildPlans to reproduce their frozen isolated structure hashes?",
+  "hypothesis": "The attempt-01 build failure is an environment-binding omission rather than a SceneSpec, BuildPlan, source patch or compiler defect; adding only the exact OCIO environment variable will allow both isolated builds and an independent audit to pass.",
+  "authorizedChangeFromAttempt01": {
+    "onlyChange": "Set OCIO to the absolute frozen config path for each product process.",
+    "sourceChanges": 0,
+    "buildPlanChanges": 0,
+    "thresholdChanges": 0,
+    "compilerChanges": 0,
+    "sceneFixtureChanges": 0,
+    "sameIdRepair": false
+  },
+  "frozenInputs": {
+    "B01BuildPlan": {
+      "uri": "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01/embedded/B01.build-plan.json",
+      "fileSha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+      "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf"
+    },
+    "B02BuildPlan": {
+      "uri": "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01/embedded/B02.build-plan.json",
+      "fileSha256": "8595f30c78b3d2d0266c94d05e2e37b8d90c7864d2c904b6c2e58abc164f187d",
+      "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687"
+    },
+    "ocio": {
+      "uri": "color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "absolutePath": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/color/ocio/cg-config-v4.0.0_aces-v2.0_ocio-v2.5.ocio",
+      "fileSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+      "configName": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5"
+    },
+    "compiler": {
+      "uri": "blender/compile_scene.py",
+      "fileSha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240"
+    }
+  },
+  "expectedStructures": {
+    "B01": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+    "B02": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+  },
+  "formalRun": {
+    "productBinary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "productBinarySha256": "5a4538163d1fce6c531f2ad76a15232fc1d1d4bbff483d54778a290b4c37cb40",
+    "sourceCommit": "b47eae224b6d3e71559b55df85fd20ae87d3f92b",
+    "fixedOrder": [
+      "01_B01_ISOLATED_BUILD_WITH_FROZEN_OCIO",
+      "02_B02_ISOLATED_BUILD_WITH_FROZEN_OCIO",
+      "03_INDEPENDENT_CROSS_BOUND_AUDIT"
+    ],
+    "maximumConcurrentProductProcesses": 1,
+    "maximumFormalProductStarts": 3,
+    "minimumFreeBytesBeforeProductStart": "171798691840"
+  },
+  "acceptance": [
+    "Attempt-01 canonical comparison, negative suite, proposal order and formal UI inspection remain byte-bound and PASS.",
+    "B01 and B02 each build exactly once in a distinct absent-before-run root using only the frozen OCIO environment addition.",
+    "Each build reproduces the frozen planHash, structure hash, OCIO config SHA and embedded scene properties.",
+    "An independent product process imports neither compiler nor contract runner and audits both .blend files plus all attempt-01 cross-bindings.",
+    "Official Blender configuration remains byte-exact, all admissions retain 160 GiB free, concurrency remains one and no more than three product starts occur."
+  ],
+  "stopRules": [
+    "If free bytes are below 171798691840, a product process is already running, a target output root exists or any frozen hash differs, record BLOCKED and start no product process.",
+    "If B01, B02 or the independent audit fails after formal-start.json is frozen, preserve evidence and record FAIL without same-ID repair.",
+    "Do not change source, BuildPlan, SceneSpec, OCIO bytes, thresholds or compile_scene.py in this attempt."
+  ],
+  "claimCeiling": "A PASS can correct only the isolated-build portion of F0.4 by cross-binding attempt-01. It cannot erase the retained failure, prove F0.5 rendering, general scenes, packaging, merge cost or production readiness."
+}
