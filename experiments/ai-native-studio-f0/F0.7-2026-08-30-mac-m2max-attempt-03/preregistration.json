@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "bfs.f0.7.preregistration.v0.1",
+  "status": "FROZEN_BEFORE_PACKAGE_INSTALL_OR_ROUNDTRIP_MUTATION",
+  "observedAtUtc": "2026-08-30T07:30:19Z",
+  "passRule": "The exact normalized payload and unsigned DMG are independently audited; the payload installs at the absent per-user destination and uninstalls without changing installed official Blender; official configuration remains exact; all F0 paths remain independent; both frozen round-trip rows preserve exact core semantic bytes and explicitly report optional-metadata degradation.",
+  "failureRule": "Any protocol stop-rule condition is FAIL with immutable evidence and no same-ID repair after the first package mutation.",
+  "packageMutationStartsBeforeFreeze": 0,
+  "nativeRoundtripStartsBeforeFreeze": 0,
+  "profilesOrThresholdsChanged": true,
+  "newAttemptCorrection": {
+    "priorExperiment": "F0.7-2026-08-30-mac-m2max-attempt-02",
+    "priorFailureId": "R02_CORE_SNAPSHOT_PRE_SAVE_DEPSGRAPH_STALE",
+    "change": "Refresh the dependency graph before every semantic snapshot; sandbox all official-runtime user paths; normalize only runtime .pyc/__pycache__ additions when proving the generated install target safe to uninstall; independently reuse the exact package that passed in attempt 02.",
+    "passRulesWeakened": false
+  },
+  "expectedFormalOutputsAbsent": [
+    "package-manifest.json",
+    "install-uninstall.json",
+    "configuration-isolation.json",
+    "roundtrip.json",
+    "audit.json",
+    "verdict.json"
+  ]
+}
