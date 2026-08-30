@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioF0.5Protocol.v0.2",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.5",
+  "experimentId": "F0.5-2026-08-30-mac-m2max-attempt-02",
+  "status": "PREREGISTERED",
+  "question": "Can the unchanged approved B01 job pass the frozen F0.5 workflow after the bounded media-type and observed-render-call harness correction?",
+  "dependsOn": {
+    "gate": "F0.4",
+    "status": "PASS",
+    "experiment": "F0.4-2026-08-30-mac-m2max-attempt-03",
+    "receiptHash": "f2888a3b4c89df3370c13fbf28097ecb4d83a3f11f325588a12321d27f7666a3"
+  },
+  "retainedFailure": {
+    "experiment": "F0.5-2026-08-30-mac-m2max-attempt-01",
+    "status": "FAIL",
+    "verdictFileSha256": "525e48be2b3394996e414e7cce80978ab5440559930263c7e61e3d48b4021ccc",
+    "verdictReceiptHash": "e36afca30fc3567368ae72466c682a32ab54723300b2aa063667382b5b06c617",
+    "failure": "PREVIEW_OUTPUT_MEDIA_TYPE_NOT_RESET"
+  },
+  "approvedJob": {
+    "id": "F05-B01-RENDER-001",
+    "manifest": "job-manifest.json",
+    "approval": "approval.json",
+    "mouseInteractions": 0,
+    "modelCalls": 0,
+    "networkCalls": 0,
+    "sourceBlendSaved": false
+  },
+  "frozenSource": {
+    "blendUri": "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-03/b01/artifacts/scene.blend",
+    "blendSha256": "648ba4e5c0be2620f0da85dd8fdc0a23d878c39054e61e69029221b5457da942",
+    "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+    "semanticStructureSha256": "e8c55fb73737f1871ac0008faa705dc204ebfe5bac471323cbb0a2d31435b4f8",
+    "productBuildHash": "b47eae224b6d",
+    "productBinarySha256": "5a4538163d1fce6c531f2ad76a15232fc1d1d4bbff483d54778a290b4c37cb40",
+    "ocioConfigSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15"
+  },
+  "renderProfiles": {
+    "preview": {"engine": "BLENDER_EEVEE", "frame": 1, "resolution": [640, 360, 100], "samples": 16, "mediaType": "IMAGE", "fileFormat": "PNG", "colorMode": "RGBA", "colorDepth": "8", "output": "preview/preview.png", "requiredRenderCalls": 1},
+    "final": {"engine": "CYCLES", "device": "CPU", "frame": 1, "resolution": [640, 360, 100], "samples": 32, "seed": 24082601, "animatedSeed": false, "denoising": false, "threadsMode": "FIXED", "threads": 8, "mediaType": "MULTI_LAYER_IMAGE", "fileFormat": "OPEN_EXR_MULTILAYER", "colorDepth": "16", "exrCodec": "ZIP", "requiredPassPrefixes": ["Combined", "Depth", "Normal"], "output": "final/final.exr", "requiredRenderCalls": 1}
+  },
+  "pixelAcceptance": {
+    "width": 640,
+    "height": 360,
+    "previewMinimumBytes": 1024,
+    "finalMinimumBytes": 4096,
+    "allDecodedValuesFinite": true,
+    "combinedDynamicRangeMinimum": 0.01,
+    "combinedNonzeroRgbPixelsMinimum": 1000,
+    "requiredFinalPasses": ["Combined", "Depth", "Normal"]
+  },
+  "resourceCeilings": {
+    "minimumFreeBytesBeforeNativeStart": "171798691840",
+    "reserveBytes": "107374182400",
+    "positiveProjectedWriteBytes": "536870912",
+    "insufficientDiskNegativeProjectedWriteBytes": "85899345920",
+    "maximumWallSecondsPerNativeProcess": 120,
+    "maximumPeakResidentSetSizeBytesPerNativeProcess": 8589934592,
+    "maximumCombinedFormalOutputBytes": 268435456,
+    "maximumConcurrentNativeProcesses": 1,
+    "maximumFormalProductStarts": 4,
+    "maximumRendererStarts": 3,
+    "maximumObservedRenderCalls": 2
+  },
+  "fixedOrder": [
+    "N1_INSUFFICIENT_DISK_ADMISSION_REJECTS_WITH_ZERO_PRODUCT_STARTS",
+    "01_EEVEE_PREVIEW_RENDER",
+    "02_CYCLES_FINAL_CONTROLLED_INTERRUPT_BEFORE_RENDER_CALL",
+    "N2_TAMPERED_PREVIEW_RECEIPT_REJECTS_RECOVERY_WITH_ZERO_ADDITIONAL_PRODUCT_STARTS",
+    "03_CYCLES_FINAL_RECEIPT_ONLY_RECOVERY_RENDER",
+    "04_INDEPENDENT_PIXEL_PASS_AND_RECEIPT_AUDIT"
+  ],
+  "recoveryContract": {
+    "interruptionPoint": "After source/profile validation and READY_FOR_RENDER marker, before the RENDER_CALL_BEGIN marker and bpy.ops.render.render.",
+    "interruptedStageExpectedObservedRenderCalls": 0,
+    "interruptedStageExpectedFinalArtifact": "ABSENT",
+    "resumeRequires": ["job manifest self hash", "preview receipt self hash", "preview artifact SHA-256", "interruption receipt self hash", "source identities"],
+    "resumeSkipsVerifiedPreview": true,
+    "resumeRunsOnlyFinalStage": true
+  },
+  "negativeControls": {
+    "rendererInterruption": "Supervisor sends SIGTERM only after READY_FOR_RENDER and verifies zero observed render calls and no final EXR or success receipt.",
+    "tamperedReceipt": "An in-memory copy of the preview receipt is modified without a valid self hash; recovery rejects it before a product start.",
+    "insufficientDisk": "Actual free space is evaluated against an 80 GiB projected write plus the 100 GiB reserve; rejection occurs before a product start."
+  },
+  "acceptance": [
+    "One approved job produces the frozen EEVEE preview and Cycles multilayer EXR with zero mouse interactions.",
+    "Independent product audit decodes preview and EXR pixels, verifies required pass semantics, finite values, nonempty signal and frozen identities.",
+    "Process exit, wall/user/system time, peak RSS, disk, artifact bytes, SHA-256 and expected/observed render calls are cross-bound in self-hashed receipts.",
+    "The final-stage interruption has zero observed render calls and recovery reruns only final after verifying immutable preview and interruption receipts.",
+    "Insufficient disk and tampered receipt controls each reject before launching a native product process.",
+    "Source .blend bytes and official Blender configuration remain unchanged."
+  ],
+  "stopRules": [
+    "If any preregistered source, product, OCIO, manifest, tool or job identity differs, record BLOCKED and launch no product process.",
+    "If any positive admission observes less than 160 GiB free, another Blender process, an existing target output or a projected reserve breach, record BLOCKED.",
+    "If preview, interruption, recovery final or independent audit violates a frozen gate after formal start, preserve the root and record FAIL without same-ID repair.",
+    "Do not change profiles, pixel thresholds, process budgets or pass requirements after observing formal output."
+  ],
+  "claimCeiling": "A PASS proves one bounded B01 headless preview/final/recovery workflow and its receipts on this product/host. It does not prove animation, GPU rendering, cross-host pixels, cinematic quality, F0.6 merge cost, F0.7 packaging or production readiness."
+}

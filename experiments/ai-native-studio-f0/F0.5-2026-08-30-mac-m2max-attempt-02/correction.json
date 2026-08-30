@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "bfs.f0.5.harnessCorrection.v0.1",
+  "status": "PREREGISTERED_BEFORE_TOOL_MUTATION",
+  "baseHarness": {
+    "commit": "d4352a905effa2df6e20002d49dc601be8b20be5",
+    "runF05Sha256": "7b8fa461b7541c6c504cc22aacb47b3c490cfbc37e2d7f1f1c219f2f1db5cb4c",
+    "renderStageSha256": "e1996bb7817cc8496653c222b64b6e6840b04cc9e8a6d2c9027e0c70dec4332e",
+    "auditF05Sha256": "931bc29bddd7c4d24a5ac10018ea9c75dce7f445b72caef35536c9c27ce5c4bb"
+  },
+  "permittedChanges": [
+    "In render-stage.py set preview media_type to IMAGE before selecting PNG.",
+    "In render-stage.py set final media_type to MULTI_LAYER_IMAGE before selecting OPEN_EXR_MULTILAYER.",
+    "Print one RENDER_CALL_BEGIN marker immediately before each actual bpy.ops.render.render invocation.",
+    "In run-f05.mjs distinguish expectedRenderCalls from observedRenderCalls by counting the frozen begin marker.",
+    "Bind recovery, cost, audit and completion checks to observedRenderCalls.",
+    "Update only evidence-root paths and attempt cross-bindings required by the new immutable root."
+  ],
+  "forbiddenChanges": [
+    "No render profile, resolution, samples, seed, engine, device, output type or pass change.",
+    "No pixel, time, RSS, disk, process-count, renderer-count or render-call threshold change.",
+    "No source .blend, product binary, OCIO config, job manifest semantics, order or authority change.",
+    "No attempt-01 evidence mutation or same-ID repair."
+  ],
+  "expectedOutcome": "The unchanged approved job passes the same F0.5 acceptance criteria with precise observed render-call receipts."
+}

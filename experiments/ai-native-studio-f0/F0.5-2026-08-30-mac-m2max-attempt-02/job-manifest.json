@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "bfs.f0.5.approvedRenderJob.v0.1",
+  "jobId": "F05-B01-RENDER-001",
+  "status": "APPROVED",
+  "source": {
+    "blendUri": "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-03/b01/artifacts/scene.blend",
+    "blendSha256": "648ba4e5c0be2620f0da85dd8fdc0a23d878c39054e61e69029221b5457da942",
+    "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+    "semanticStructureSha256": "e8c55fb73737f1871ac0008faa705dc204ebfe5bac471323cbb0a2d31435b4f8",
+    "productBuildHash": "b47eae224b6d"
+  },
+  "stages": [
+    {
+      "id": "PREVIEW",
+      "engine": "BLENDER_EEVEE",
+      "frame": 1,
+      "resolution": [640, 360],
+      "samples": 16,
+      "output": "preview/preview.png",
+      "dependsOn": []
+    },
+    {
+      "id": "FINAL",
+      "engine": "CYCLES",
+      "device": "CPU",
+      "frame": 1,
+      "resolution": [640, 360],
+      "samples": 32,
+      "output": "final/final.exr",
+      "dependsOn": ["PREVIEW_RECEIPT_VERIFIED"]
+    }
+  ],
+  "authority": {
+    "modelMayGeneratePython": false,
+    "mouseInteractions": 0,
+    "filesystemScope": "Only the immutable evidence root outputs named by this manifest.",
+    "networkAllowed": false,
+    "sourceBlendMayBeSaved": false
+  },
+  "approvalScope": {
+    "approvedStages": ["PREVIEW", "FINAL", "INDEPENDENT_AUDIT"],
+    "approvedNegativeControls": ["INSUFFICIENT_DISK", "CONTROLLED_INTERRUPT", "TAMPERED_RECEIPT"],
+    "changesAfterApproval": "FORBIDDEN"
+  },
+  "manifestHash": "41a16a9c77896b44203bd2d53961be96df4681b2e95f97312778c11fd7ed254c"
+}
