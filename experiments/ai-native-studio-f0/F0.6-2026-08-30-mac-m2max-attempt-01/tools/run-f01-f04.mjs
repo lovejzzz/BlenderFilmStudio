@@ -208,8 +208,12 @@ function plist(key, path = resolve(app, 'Contents', 'Info.plist')) {
   return execFileSync('/usr/libexec/PlistBuddy', ['-c', `Print :${key}`, path], { encoding: 'utf8' }).trim();
 }
 
-if (existsSync(regression)) throw new Error('Regression evidence root already exists');
-mkdirExact(regression);
+if (existsSync(regression)) {
+  const existing = readdirSync(regression).sort();
+  if (JSON.stringify(existing) !== JSON.stringify(['.gitkeep'])) throw new Error(`Regression evidence root is not pristine: ${existing}`);
+} else {
+  mkdirExact(regression);
+}
 for (const name of ['admissions', 'processes', 'f03', 'f04']) mkdirExact(resolve(regression, name));
 mkdirExact(resolve(regression, 'f03', 'artifacts'));
 for (const name of ['external', 'embedded', 'proposals', 'approvals', 'negative-inputs', 'negative-outputs', 'runtime-contract', 'b01', 'b02']) mkdirExact(resolve(regression, 'f04', name));
