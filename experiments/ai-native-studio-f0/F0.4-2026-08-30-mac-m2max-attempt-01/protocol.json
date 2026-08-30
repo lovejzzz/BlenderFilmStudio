@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioF0.4Protocol.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.4",
+  "experimentId": "F0.4-2026-08-30-mac-m2max-attempt-01",
+  "status": "PREREGISTERED",
+  "preregisteredBeforeBlenderSourceMutation": true,
+  "question": "Can the independently branded Blender 5.2 fork embed the frozen typed SceneSpec v0.1 contract, produce BuildPlan bytes canonical-exact with the existing external compiler, expose the proposal diff and approval scope before execution, build B01/B02 in isolated roots, and reject invalid or unapproved inputs before scene mutation?",
+  "hypothesis": "A small additive Python contract module plus Film Studio UI bridge can preserve the external B01/B02 compiler identities without accepting arbitrary generated Python or weakening path, schema, hash or approval boundaries.",
+  "source": {
+    "repository": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "startingBranch": "codex/f0.3-minimum-film-workspace",
+    "startingCommit": "4f1446f780c2b7e23bc66f584b36f6254ecd985c",
+    "officialBaselineCommit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "maximumGateOwnedNonGeneratedAddedLines": 900
+  },
+  "frozenInputs": {
+    "sceneSpecs": [
+      {
+        "id": "B01",
+        "uri": "specs/benchmarks/B01.scene.json",
+        "fileSha256": "1e3192aff070ac244f89b2cef96078e0d88c93a0d043e679e45f210f8d3cfde4",
+        "canonicalSha256": "10d8ef02fbe71c0b44ca6fc93a25f7952cff605b31d40fc04f9c6029ee7119b0"
+      },
+      {
+        "id": "B02",
+        "uri": "specs/benchmarks/B02.scene.json",
+        "fileSha256": "774415a396bec91598ea8fac407443f04b6a630bdee046b15a14fae5fcad6c16",
+        "canonicalSha256": "db7a07b7afd5b2bde14a63ccaea48632ffcaab721c48cdb2717bb8445c18c37d"
+      }
+    ],
+    "externalCompiler": {
+      "entryUri": "scripts/compile-build-plan.mjs",
+      "entrySha256": "d765d5e5850772d1cfac3e20c5f184461492c47fb5acd88de629783307580413",
+      "sceneLibraryUri": "scripts/lib/scene-spec.mjs",
+      "sceneLibrarySha256": "778607884f2481037bf11ed442b053e3fc72187d12b9f2731363822e21ae588c"
+    },
+    "schema": {
+      "uri": "specs/scene-spec.v0.1.schema.json",
+      "sha256": "b308c7832d4f4b02e16f930f19dcf1baae7475d2f283aee3cb453f05a2224a"
+    },
+    "outputSpec": {
+      "uri": "specs/output-spec.v0.1.json",
+      "sha256": "d492cfcf6a3ec1b5539735b4a46052456e330acea2b6e47c5ab5efcced6b9705"
+    },
+    "ocioSha256": "24ec81841048fc5db160a7bad882263246183385c5d49d0e86e11464917ead15",
+    "proposals": ["proposals/B01.proposal.json", "proposals/B02.proposal.json"],
+    "approvals": ["approvals/B01.approval.json", "approvals/B02.approval.json"],
+    "negativeFixtureSpec": "negative-fixture-spec.json"
+  },
+  "expectedBuildPlans": {
+    "B01": {
+      "fileSha256": "b6ab475728481a7ff6850c2eee1585bab9ac532f49b875a6016cad4be1ffc8be",
+      "bytes": 7345,
+      "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf"
+    },
+    "B02": {
+      "fileSha256": "8595f30c78b3d2d0266c94d05e2e37b8d90c7864d2c904b6c2e58abc164f187d",
+      "bytes": 8466,
+      "planHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687"
+    }
+  },
+  "expectedStructures": {
+    "B01": "c699fc27230d8dc378a9d4e6aa23a6425cc7007c0ee33a3172b6928f8e1b7f0b",
+    "B02": "025c6fa50dcacef3c6c30ea9ec7ed97ce09bce0a9f51157887bc73c3981fa856"
+  },
+  "approvalBoundary": {
+    "proposalMayContain": "versioned typed JSON only",
+    "approvedOperationExact": "COMPILE_BUILD_PLAN",
+    "approvedMutationScopeExact": ["WRITE_BUILD_PLAN"],
+    "sceneMutationAuthorized": false,
+    "arbitraryPythonAuthorized": false,
+    "networkAccessAuthorized": false,
+    "uiOrder": ["INSPECT_PROPOSAL_DIFF", "DISPLAY_APPROVAL_SCOPE", "EXECUTE_APPROVED_COMPILE"]
+  },
+  "formalRun": {
+    "buildRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace",
+    "productApp": "bin/Film Studio Engine F0.app",
+    "maximumConcurrentProductProcesses": 1,
+    "maximumFormalProductStarts": 5,
+    "minimumFreeBytesBeforeBuildOrProductStart": "171798691840",
+    "minimumFreeGiB": 160,
+    "isolatedBuildRoots": ["b01/artifacts", "b02/artifacts"],
+    "officialBlenderConfigMustRemainExact": true
+  },
+  "acceptance": [
+    "External and embedded serialized B01 BuildPlan files are byte-exact and equal the frozen file SHA-256, byte count and planHash.",
+    "External and embedded serialized B02 BuildPlan files are byte-exact and equal the frozen file SHA-256, byte count and planHash.",
+    "The embedded entry accepts only a typed proposal plus a separately hash-bound approval and executes no proposal-supplied Python, shell or network operation.",
+    "The Film Studio UI displays the proposal diff and exact approval scope before the execute control is enabled.",
+    "B01 and B02 each build once in a distinct absent-before-run artifact root and reproduce the frozen canonical structure hash.",
+    "All four preregistered negative cases return their exact reason before a BuildPlan write or scene mutation.",
+    "The official Blender configuration root remains byte-exact, no more than one product process runs concurrently, no more than five formal product starts occur, and the gate-owned non-generated source addition stays at or below 900 lines."
+  ],
+  "negativeControls": ["N_UNKNOWN_FIELD", "N_PATH_ESCAPE", "N_NONFINITE", "N_UNAPPROVED_MUTATION"],
+  "stopRules": [
+    "If free bytes are below 171798691840 before a native build or product start, record BLOCKED and start no new native process.",
+    "If the embedded compiler needs arbitrary generated Python, shell access, network access or broader approval than WRITE_BUILD_PLAN, record FAIL.",
+    "If either canonical comparison, isolated structure build, UI ordering, configuration isolation, patch ceiling or any negative control fails after formal-start.json is frozen, preserve evidence and record FAIL without same-ID repair.",
+    "Implementation and compile diagnostics before formal-start.json are development work; preserve them in development-log.json and do not count them as a formal scientific run."
+  ],
+  "requiredArtifacts": [
+    "canonical-comparison.json",
+    "b01/receipt.json",
+    "b02/receipt.json",
+    "negative-fixtures.json",
+    "proposal-diff.json",
+    "audit.json",
+    "verdict.json"
+  ],
+  "claimCeiling": "F0.4 can prove only typed SceneSpec v0.1 contract embedding, B01/B02 canonical parity, bounded approval visibility and pre-mutation rejection on this product build. It does not prove arbitrary-scene coverage, model quality, rendering receipts, merge cost, packaging, signing or production readiness."
+}

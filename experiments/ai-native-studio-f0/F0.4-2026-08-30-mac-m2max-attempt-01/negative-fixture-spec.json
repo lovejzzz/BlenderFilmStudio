@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "bfs.f0.4.negativeFixtureSpec.v0.1",
+  "frozenBeforeSourceMutation": true,
+  "baseProposal": "proposals/B01.proposal.json",
+  "baseApproval": "approvals/B01.approval.json",
+  "cases": [
+    {
+      "id": "N_UNKNOWN_FIELD",
+      "mutation": "Add root field unexpectedField=true to the B01 SceneSpec.",
+      "expectedReason": "SCHEMA_ADDITIONAL_PROPERTY"
+    },
+    {
+      "id": "N_PATH_ESCAPE",
+      "mutation": "Replace the first asset URI with ../outside.blend.",
+      "expectedReason": "PATH_ESCAPE"
+    },
+    {
+      "id": "N_NONFINITE",
+      "mutation": "Replace the first light energy JSON token with NaN.",
+      "expectedReason": "NONFINITE_NUMBER"
+    },
+    {
+      "id": "N_UNAPPROVED_MUTATION",
+      "mutation": "Request MUTATE_SCENE in addition to WRITE_BUILD_PLAN while retaining the frozen approval.",
+      "expectedReason": "APPROVAL_SCOPE"
+    }
+  ],
+  "commonExpected": {
+    "accepted": false,
+    "buildPlanFilesWritten": 0,
+    "sceneMutations": 0,
+    "sceneCompilerProcessesStarted": 0,
+    "networkCalls": 0,
+    "arbitraryPythonFromProposalExecuted": 0
+  }
+}
