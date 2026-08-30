@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "bfs.f0.7.failureReceipt.v0.1",
+  "experimentId": "F0.7-2026-08-30-mac-m2max-attempt-01",
+  "status": "FAIL",
+  "failureId": "P02_DMG_CREATE_TIMEOUT_60S",
+  "observedAtUtc": "2026-08-30T07:16:06Z",
+  "firstPackageMutationOccurred": true,
+  "sameIdRepairPermitted": false,
+  "failedStep": "02_CREATE_AND_AUDIT_UNSIGNED_DMG",
+  "cause": "The frozen runner sent SIGKILL when hdiutil create had not exited after 60 seconds.",
+  "evidence": {
+    "normalizationReceipt": {
+      "uri": "package/01-normalization.json",
+      "fileSha256": "a12acdd37ae8399eac996463a130dc11934582adf129a554c5501980b6d8310e",
+      "normalizationHash": "1156eb957d9488ac84d610c3e78485661a9457a6ff01e03cf00fdb0ebe5989af"
+    },
+    "createAdmission": {
+      "uri": "package/02-create-dmg-admission.json",
+      "fileSha256": "2be8597c8f44307423131a6ff6b9c5e9a7adf63a385a042bdd4f03410e85d394",
+      "admissionHash": "65731aea5f0edd522eb20fbe4fda04796c2d1eeb42091c63d05849655e598c1f"
+    },
+    "createProcess": {
+      "uri": "package/02-create-dmg.json",
+      "fileSha256": "f159816cad07a59f73f3f358fe41ba8a264bb4a59ab543558debc88f31333874",
+      "processHash": "84e3b6b5d3a83dd4dde8947f6eb08376ce4bda197c0a60b25248429899cb9af0",
+      "exitCode": null,
+      "signal": "SIGKILL",
+      "timeout": true,
+      "observedElapsedSeconds": 60.013872209
+    }
+  },
+  "retainedArtifacts": {
+    "normalizedStagingPayload": {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/F0.7-packages/staging/Film Studio Engine F0.app",
+      "files": 5487,
+      "logicalBytes": 909391442,
+      "treeDigest": "c0deb1c7b27d0c4a8639e87235e0a8c94c484b1985c5e081add23d2651e8410a"
+    },
+    "partialDmg": {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/F0.7-packages/Film-Studio-Engine-F0-5.2.1-unsigned.dmg",
+      "bytes": 335768212,
+      "sha256": "974d135cd9382f540aa5956bc1a5ca54727246482a06b0499656a5dbdf72d87c",
+      "usableOrVerified": false
+    }
+  },
+  "safety": {
+    "formalProductStarts": 0,
+    "installDestinationAbsent": true,
+    "sourceProductBinarySha256After": "58d5c984c58d986d3cf44622ad5876052a67890d0b077dafd4977f6e2b24a71d",
+    "installedOfficialBlenderBinarySha256After": "e0b80264bea559673212e0afc819fb33f3cef8b3dcfcc8d994b195132857ac8a",
+    "freeBytesAfterFailure": "172051902464"
+  },
+  "correctiveActionForNewAttempt": "Keep the 60-second limit for each Blender round-trip process, but define a separate evidence-backed 180-second limit for the one-time hdiutil compression process; use a new experiment and external package root.",
+  "failureHash": "ddb820b378c15f37dcc76b930033dbadb5a5594a068b90d974cb415cf449507e"
+}
