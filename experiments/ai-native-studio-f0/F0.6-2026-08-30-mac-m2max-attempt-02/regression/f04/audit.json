@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "bfs.f0.6.f04IndependentAudit.v0.1",
+  "status": "PASS",
+  "independence": "Imports neither film_studio_contract nor compile_scene.py.",
+  "expectedProvenance": {
+    "version": "5.2.1 LTS",
+    "buildHash": "fa1b578bb421",
+    "buildBranch": "codex/f0.6-upstream-merge-drill",
+    "buildPlatform": "Darwin"
+  },
+  "builds": [
+    {
+      "id": "B01",
+      "status": "PASS",
+      "checks": {
+        "manifestVersion": true,
+        "structureIdentityVersion": true,
+        "planHash": true,
+        "semanticHash": true,
+        "semanticExcludesProvenance": true,
+        "productProvenanceExact": true,
+        "blendProductBuildHashExact": true,
+        "ocioExact": true
+      },
+      "blendSha256": "719eeff69bb1e3bb13c5227f107f20617ae64b7ac12cf319b3d52f25b3a0ff08"
+    },
+    {
+      "id": "B02",
+      "status": "PASS",
+      "checks": {
+        "manifestVersion": true,
+        "structureIdentityVersion": true,
+        "planHash": true,
+        "semanticHash": true,
+        "semanticExcludesProvenance": true,
+        "productProvenanceExact": true,
+        "blendProductBuildHashExact": true,
+        "ocioExact": true
+      },
+      "blendSha256": "be97b29fa868fcd6d60e8638667c6082edb4f3ad22df462e5ac2f9f8de093cbb"
+    }
+  ],
+  "separationAttacks": [
+    {
+      "id": "B01_PROVENANCE",
+      "passed": true
+    },
+    {
+      "id": "B01_SEMANTIC",
+      "passed": true
+    },
+    {
+      "id": "B02_PROVENANCE",
+      "passed": true
+    },
+    {
+      "id": "B02_SEMANTIC",
+      "passed": true
+    }
+  ],
+  "renderCalls": 0,
+  "auditHash": "b6a432d0632f97c2682dc1d3c20f2b19a46ab39526afb5ee922159f525744739"
+}

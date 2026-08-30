@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioF0.6CorrectionProtocol.v0.2",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.6",
+  "experimentId": "F0.6-2026-08-30-mac-m2max-attempt-03",
+  "status": "PREREGISTERED_BEFORE_CORRECTIVE_AUDIT_AND_F0.5_PRODUCT_START",
+  "question": "Do the exact successful attempt-02 F0.1-F0.4 process artifacts pass an order-insensitive independent re-aggregation, and does the unchanged merged product pass the frozen F0.5 render/recovery corpus?",
+  "crossBoundFailure": {
+    "experiment": "F0.6-2026-08-30-mac-m2max-attempt-02",
+    "verdictFileSha256": "312156bce521d8574189bc4dde29d8180375efb794dfdd970192aba4525c0600",
+    "verdictReceiptHash": "4b2d08355c22a27cfc61b19b14dbcf97d0d1daf8927e682d7d6372ae7af669cd",
+    "regressionFileSha256": "9d0f42cbd1dfdd3be9fab9825b9d533776e950dc5385db371c06034a968a4914",
+    "failureId": "F04_PROVENANCE_OBJECT_KEY_ORDER",
+    "sameIdRepair": false
+  },
+  "immutableSuccessfulInputs": {
+    "F0.1-F0.2": "cc323221303b00ca682b13b1a50d757784a3242f10eb50c59bf39a5e53a18477",
+    "F0.3": "a4ada01f52607154c0c369385b540fc97f7c546aa0a5a2b3b547b1c5ac1bf1a8",
+    "F0.4AggregateFailure": "17b6c67e2b51174c897c58b139b37ea4254026c8f916047fefc172513085f885",
+    "F0.4IndependentAuditPass": "5ee9b99b4894ebc7f3b3100bb6e69284a9feedb228930d2503c977c305066073",
+    "B01Blend": "719eeff69bb1e3bb13c5227f107f20617ae64b7ac12cf319b3d52f25b3a0ff08",
+    "B02Blend": "be97b29fa868fcd6d60e8638667c6082edb4f3ad22df462e5ac2f9f8de093cbb"
+  },
+  "boundedCorrection": {
+    "allowed": "Compare the four exact provenance properties by name/value or canonical sorted-key JSON, then cross-bind the already PASS independent audit and all ten PASS process receipts.",
+    "notAllowed": [
+      "Changing expected provenance values",
+      "Changing semantic hashes or BuildPlans",
+      "Changing render profiles or thresholds",
+      "Treating a failed product process as PASS",
+      "Mutating attempt-02 evidence"
+    ]
+  },
+  "freshWork": {
+    "F0.1-F0.4ProductStarts": 0,
+    "F0.4CorrectiveAuditProcesses": 1,
+    "F0.5ProductStarts": 4,
+    "F0.5RendererStarts": 3,
+    "F0.5ObservedRenderCalls": 2
+  },
+  "frozenRegressionMatrix": {
+    "uri": "../F0.6-2026-08-30-mac-m2max-attempt-01/regression-matrix.json",
+    "fileSha256": "ee839e9abfae4aedb498e7832802cbe184d8fe52ddb74f13d5665366cef0ca9e"
+  },
+  "claimCeiling": "A PASS validates only the exact merged v5.2.1 product and frozen local corpus on this host."
+}
