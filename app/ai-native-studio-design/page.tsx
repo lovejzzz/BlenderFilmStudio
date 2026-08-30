@@ -141,7 +141,7 @@ export default function AiNativeStudioDesignPage() {
           <footer>Direction adopted ≠ implementation proven</footer>
         </aside>
         <div className="ain-stats">
-          <article><strong>482</strong><span>真实实验日志编号</span><small>负结果同样保留</small></article>
+          <article><strong>483</strong><span>真实实验日志编号</span><small>负结果同样保留</small></article>
           <article><strong>B01–B62</strong><span>符合性证据范围</span><small>结构 → 像素 → 恢复 → 镜头</small></article>
           <article><strong>4</strong><span>产品平面</span><small>体验 · 意图 · 引擎 · 证据</small></article>
           <article><strong>7</strong><span>源码可行性门</span><small>全部通过才正式立项</small></article>
@@ -161,7 +161,7 @@ export default function AiNativeStudioDesignPage() {
 
       <section className="section ain-evidence" id="evidence">
         <div className="section-index light">01 / INHERITED EVIDENCE</div>
-        <div className="ain-section-heading light"><div><p className="eyebrow"><span /> RESEARCH BECOMES PRODUCT</p><h2>不是重新开始。<br /><span>482 条日志成为测试资产。</span></h2></div><p>每一项“支持”都有范围；每一项“拒绝”都限制产品承诺。新软件第一天就继承真实 Blender 行为、失败路径和冻结阈值，而不是从演示开始。</p></div>
+        <div className="ain-section-heading light"><div><p className="eyebrow"><span /> RESEARCH BECOMES PRODUCT</p><h2>不是重新开始。<br /><span>483 条日志成为测试资产。</span></h2></div><p>每一项“支持”都有范围；每一项“拒绝”都限制产品承诺。新软件第一天就继承真实 Blender 行为、失败路径和冻结阈值，而不是从演示开始。</p></div>
         <div className="ain-evidence-list">{evidence.map(item => <article className={item.tone} key={item.id}><aside><span>{item.id}</span><b>{item.state}</b></aside><div><h3>{item.title}</h3><p>{item.result}</p><footer><span>产品化结论</span><strong>{item.product}</strong></footer></div></article>)}</div>
         <div className="ain-boundary"><strong>当前最重要的边界</strong><p>B62 的技术执行链已经很强，但最新镜头留出实验仍被构图门拒绝。新方向不能把“拥有 Blender 源码”误写成“电影审美已经自动解决”。源码控制让我们更准确地表达和检查意图，不替代导演。</p><Link href="/b62-camera-quality-holdout-v0-1">查看 B62 Camera Q1 负结果 →</Link></div>
       </section>
@@ -246,7 +246,7 @@ export default function AiNativeStudioDesignPage() {
         <div className="section-index light">11 / PRIMARY SOURCES</div>
         <div className="ain-section-heading light"><div><p className="eyebrow"><span /> RESEARCH BASIS</p><h2>许可证决定边界。<br /><span>真实实验决定主张。</span></h2></div><p>外部来源用于确认源码、构建、架构、商标和许可证；产品可靠性结论只来自本仓库冻结协议下的真实 Blender 实验。</p></div>
         <ol className="ain-source-list">{sources.map(([author,title,href],index) => <li key={href}><span>{String(index + 1).padStart(2,'0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
-        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>PUBLIC FORK CREATION · EXPLICIT AUTHORIZATION</h3><p>Repository-readiness C2 attempt-03 已完成 exact local full-history rehearsal：162,917 reachable commits、fa1b578b/tree exact、8/8负控、93/93独立audit，external create/push/LFS upload均为0。建议明确授权 owner `lovejzzz`、public、从 `blender/blender` 创建 requested name `film-studio-engine` 的fork，并首次push exact F0 head为main。Private standalone仍因full LFS与billing为BLOCKED；签名、公证、DMG distribution与Phase B mutation不自动包含。</p><Link href="/ai-native-studio-handoff">打开授权边界 →</Link></div></div>
+        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>PUBLIC FORK CREATION · EXPLICIT AUTHORIZATION</h3><p>Repository-readiness C2 attempt-03 已完成 exact local full-history rehearsal：162,917 commits、8/8负控、93/93独立audit，external writes为0。授权请求现在明示 owner `lovejzzz`、public `film-studio-engine` fork、只上传2个fork-owned LFS objects（2,701,144 bytes并接受可能计费），以及只对fresh无owner commit的generated main执行OID-bound `--force-with-lease`。Private standalone、release、签名、公证、DMG distribution与Phase B仍未授权。</p><Link href="/ai-native-studio-handoff">打开授权边界 →</Link></div></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · Design Doc v0.1</b></div><p>Direction adopted · Implementation gated · Snapshot 2026-08-29</p><Link href="/ai-native-studio-handoff">新机器从这里开始 →</Link></footer>

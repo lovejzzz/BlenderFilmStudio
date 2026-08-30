@@ -42,6 +42,13 @@ authorized public GitHub fork of `blender/blender`, owner `lovejzzz`, requested
 name `film-studio-engine`; the private standalone mirror remains blocked on
 full LFS transfer, billing and owner approval.
 
+The exact external-action request is
+`research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md`.
+It separately requires approval for a lease-protected update of the fresh
+fork's generated `main` and upload of exactly two fork-owned LFS objects
+(2,701,144 bytes) with possible GitHub LFS billing. General permission to
+continue does not satisfy this external-mutation gate.
+
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
 and maintenance reference, not the source baseline. The fallback is an external

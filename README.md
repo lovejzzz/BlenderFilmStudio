@@ -11,7 +11,8 @@ the exact Film Studio Engine F0 head was grafted onto a non-shallow Blender Git
 graph, pushed only to a local `file://` bare repository, and independently
 audited 93/93. The recommended next topology is a public GitHub fork of
 `blender/blender` named `film-studio-engine`; creation and the first external
-push remain explicitly unauthorized until the owner approves them. Start with
+push—including two allowlisted LFS objects and a lease-protected fresh-main
+update—remain explicitly unauthorized until the owner approves them. Start with
 [`START_HERE.md`](START_HERE.md).
 
 ## Baseline 01

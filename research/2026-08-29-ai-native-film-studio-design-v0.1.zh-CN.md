@@ -413,3 +413,5 @@ film-studio/
 随后完成的repository-readiness实验把这个授权问题缩成两个不可混称的拓扑。当前F0 checkout是shallow，只能遍历1,165 commits，所以从它直接创建standalone remote不能满足“完整Blender历史”。只读取得GitHub `blender/blender` full mirror后，C2 attempt-03把4个fork commits接入non-shallow graph，只向本地`file://` bare repository push；destination `main` exact为`fa1b578b…`、tree `4d761fb7…`、162,917 reachable commits、merge base `9e2066ae…`，full `git fsck`通过。8/8 negative controls与独立93/93 audit通过，runner/audit self hashes为`dc1cc768…` / `b841e519…`；external repository creates、external pushes与LFS uploads全部为0。
 
 因此建议路线已具体化为：owner `lovejzzz`、visibility `public`、从`blender/blender`创建requested name `film-studio-engine`的GitHub fork，再首次push exact F0 head为`main`。public fork路线状态为`READY_FOR_EXPLICIT_AUTHORIZATION`；private standalone mirror不是同一动作，它仍因6,671个HEAD LFS paths、全历史LFS传输、storage/bandwidth billing与owner接受而`BLOCKED`。用户明确授权前不执行fork/create/push。
+
+最终外部动作请求进一步明示两个不可隐含的side effects：只上传两个fork-owned LFS branding objects（2,701,144 bytes，并接受可能的GitHub LFS计费），以及只在fresh fork无owner-authored commit时，用观察到的generated `main` OID执行显式`--force-with-lease`更新。无lease force、其他ref/tag、release、签名、公证、DMG分发与Phase B仍不在授权内。

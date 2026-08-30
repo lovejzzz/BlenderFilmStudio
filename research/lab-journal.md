@@ -5975,3 +5975,11 @@ C2 attempt-03实际verify argv与冻结数组exact，在fresh work mirror接入F
 8/8负控全部在mutation前拒绝：shallow source、HEAD mismatch、non-file/credential URL、nonfresh destination、missing COPYING、synthetic secrets、100 MiB ordinary blob与external authorization sentinel。独立auditor不import runner，重算source/LFS/licenses/secrets、两个retained failures、mirror/destination graph、receipts、command log与fsck，93/93 PASS。runner verdict self `dc1cc7682ae2dd1cf47160e385ada9067fbe1b02e684a8079069f27c020e5266`；audit self `b841e519cd1d2ce55e2f373a50918b802e90b5244c8dcd7df38ae24fbc64273e`；evidence commit `ede7ffc7…`。
 
 最终拓扑结论：`PUBLIC_GITHUB_FORK`为`READY_FOR_EXPLICIT_AUTHORIZATION`，推荐owner `lovejzzz`、public、从`blender/blender`创建requested name `film-studio-engine`并首次push exact F0 head为main；`PRIVATE_STANDALONE_MIRROR`继续因full LFS transfer/billing/owner approval为BLOCKED。没有用户明确授权时不执行任何外部mutation，Phase B也保持未授权。
+
+## J-483 · Public fork exact external-action authorization request
+
+Date: 2026-08-30 · Type: AUTHORIZATION BOUNDARY REFINEMENT · External mutations: 0
+
+最终交接复核把笼统“first push”拆开为两个必须明示的副作用。F0 fork实际改变两个LFS品牌资产：icon OID `be94271b…` / 2,135,147 bytes与splash OID `5d8b343b…` / 565,997 bytes，总计2,701,144 bytes；它们需要上传到new fork LFS endpoint并可能产生owner storage/bandwidth计费。GitHub fork创建还会生成自己的`main`，要让产品default exact为`fa1b578b…`，必须先记录generated OID、确认fresh fork无owner-authored commit，再用显式`--force-with-lease`更新，不能用无lease force。
+
+新增human/machine authorization request列出唯一两项LFS allowlist、fresh-fork gates、exact owner/public/name/head/tree/parents和仍未授权动作。下一次用户授权必须明确包含fork creation、两个LFS对象与可能计费、lease-protected fresh-main update；一般“继续”不满足。没有执行GitHub create、push或LFS upload。

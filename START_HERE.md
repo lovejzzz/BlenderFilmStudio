@@ -44,7 +44,10 @@ both a research notebook and an executable evidence base. Read this page,
   blocked pending visibility, full-LFS transfer, billing and owner approval.
   The recommended exact choice is owner `lovejzzz`, public fork of
   `blender/blender`, requested name `film-studio-engine`, then first push of
-  exact F0 head `fa1b578b…` as `main`.
+  exact F0 head `fa1b578b…` as `main`. The external authorization must also
+  name the lease-protected replacement of the fresh fork's generated `main`
+  and the two fork-owned LFS uploads (2,701,144 bytes total, with possible
+  GitHub LFS billing).
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -156,6 +159,9 @@ both a research notebook and an executable evidence base. Read this page,
 9. [`experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/verdict.json`](./experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/verdict.json)
    and [`audit.json`](./experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/audit.json)
    — accepted local full-history rehearsal and independent 93-check audit.
+10. [`research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md`](./research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md)
+    and [`specs/ai-native-studio-repository-authorization-request.v0.1.json`](./specs/ai-native-studio-repository-authorization-request.v0.1.json)
+    — exact public-fork, two-object LFS, billing and fresh-main lease request.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
@@ -231,6 +237,11 @@ user's explicit choices:
   `blender/blender`;
 - permission to make the first external push of exact F0 head
   `fa1b578bb421bbc82b3106b7d4223e11e65fae1d` as `main`.
+- permission to upload exactly the two allowlisted fork-owned LFS objects
+  totaling 2,701,144 bytes, with acceptance of possible GitHub LFS billing;
+- permission to replace only the freshly generated fork `main` using an
+  explicit lease bound to its observed OID, provided no owner-authored commit
+  exists.
 
 Choosing `private` is not a cosmetic switch: it selects the currently blocked
 standalone mirror route and requires a new authorization for full Git LFS

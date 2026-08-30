@@ -34,6 +34,7 @@ const documents = [
   ['09', 'Repository readiness', 'public fork / private mirror 双拓扑、完整历史门与 8 项负控。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md'],
   ['10', 'Readiness spec v0.3', 'C2 exact argv、fresh roots、0 external write 与授权 sentinel。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-repository-readiness.v0.3.json'],
   ['11', 'Readiness verdict', '本地 full-history rehearsal PASS 与独立 93/93 audit。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/verdict.json'],
+  ['12', 'Exact authorization request', 'public fork、2个LFS对象、billing接受与fresh-main lease。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md'],
 ];
 
 const inherited = [
@@ -57,7 +58,7 @@ export default function AiNativeStudioHandoffPage() {
         <div className="handoff-hero-copy">
           <p className="eyebrow"><span /> NEW MACHINE HANDOFF · 2026.08.30</p>
           <h1>换一台电脑，<br />不换一套<span>事实。</span></h1>
-          <p>F0.1–F0.7 已全部通过。Repository-readiness C2 又把 exact F0 branch 接入 non-shallow Blender graph，仅向本地 bare remote push，并由独立 auditor 93/93 复算。Public fork 路线已 READY；下一步只等待 owner `lovejzzz`、public、create fork 与 first push 的明确授权。</p>
+          <p>F0.1–F0.7 与 repository-readiness C2 已通过：exact F0 branch 接入 non-shallow Blender graph，仅向本地 bare remote push，独立 auditor 93/93。Public fork 路线已 READY；下一步等待 owner `lovejzzz` 明确授权 public fork、2个LFS对象（2,701,144 bytes）与 fresh-main lease-protected first publish。</p>
           <div className="handoff-hero-actions"><a href="#start">开始交接 ↓</a><Link href="/ai-native-studio-design">为什么做自己的软件</Link></div>
         </div>
         <aside className="handoff-state">
@@ -90,7 +91,7 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-map" id="map">
         <div className="section-index">02 / REPOSITORY MAP</div>
-        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> ELEVEN AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议、修正链与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
+        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> TWELVE AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议、修正链、授权请求与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
         <div className="handoff-docs">{documents.map(([id,title,detail,href]) => <a href={href} target="_blank" rel="noreferrer" key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>OPEN ↗</b></a>)}</div>
         <div className="handoff-storage"><span>REPOSITORY BOUNDARY</span><div><code>BlenderFilmStudio</code><b>rules · protocols · evidence · site</b></div><i>≠</i><div><code>external F0 workspace</code><b>source · dependencies · builds</b></div></div>
       </section>
@@ -105,7 +106,7 @@ export default function AiNativeStudioHandoffPage() {
       <section className="handoff-checkpoint">
         <span>LATEST CLOSED CHECKPOINT</span>
         <h2>Public fork 路线 READY，两次 harness 失败仍保留。</h2>
-        <p>Non-shallow · 162,917 commits · exact fa1b578b · fsck clean · 8 / 8 negative controls · 93 / 93 audit</p>
+        <p>Non-shallow · 162,917 commits · exact fa1b578b · fsck clean · 8 / 8 controls · 93 / 93 audit · 2 LFS objects explicitly gated</p>
         <div><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/audit.json" target="_blank" rel="noreferrer">读取 Readiness Audit ↗</a><Link href="/journal">查看实验日志 →</Link></div>
       </section>
 
