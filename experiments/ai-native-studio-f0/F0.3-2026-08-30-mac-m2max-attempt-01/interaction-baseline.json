@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "bfs.f0InteractionBaseline.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.3",
+  "task": "F0.3-T1-CREATE-SELECT-SHOT",
+  "status": "PASS",
+  "observedAt": "2026-08-30T00:28:17.595Z",
+  "application": {
+    "name": "Blender 5.2.0 LTS",
+    "app": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-a/bin/Blender.app",
+    "binarySha256": "cf0fa6bb8cca9621d39637dfbcfa9990abcbf9ccaafc5edd8306967d9aaaad3e",
+    "sourceCommit": "fbe6228777e7d9afefcd61a413844e790ae75db7"
+  },
+  "route": {
+    "description": "Create four generic DCC proxies because official Blender has no typed Project, film Scene, Character or Shot state",
+    "arbitraryPythonConsoleUsed": false,
+    "actions": [
+      "Open operator search for Project proxy",
+      "Enter Add Empty command",
+      "Confirm Add Empty",
+      "Open rename for Project proxy",
+      "Enter PROJECT_PRJ_REMAINDER",
+      "Confirm Project proxy name",
+      "Open operator search for Scene proxy",
+      "Enter Add Empty command for Scene",
+      "Confirm Scene Empty",
+      "Open rename for Scene proxy",
+      "Enter SCENE_SC01",
+      "Confirm Scene proxy name",
+      "Open operator search for Character proxy",
+      "Enter Add Empty command for Character",
+      "Confirm Character Empty",
+      "Open rename for Character proxy",
+      "Enter CHARACTER_CHR_GUARDIAN",
+      "Confirm Character proxy name",
+      "Open operator search for Shot proxy",
+      "Enter Add Camera command",
+      "Confirm Shot Camera",
+      "Open rename for Shot proxy",
+      "Enter SHOT_SH010_WIDE",
+      "Confirm Shot proxy name"
+    ]
+  },
+  "measurement": {
+    "taskStartedAt": "2026-08-30T00:27:59.056Z",
+    "taskCompletedAt": "2026-08-30T00:28:17.595Z",
+    "wallMilliseconds": 18539,
+    "plannedInteractions": 24,
+    "actualInteractions": 24,
+    "errorCount": 0,
+    "setupActionsExcluded": ["application launch", "Quick Setup Continue"]
+  },
+  "result": {
+    "projectProxy": "PROJECT_PRJ_REMAINDER",
+    "sceneProxy": "SCENE_SC01",
+    "characterProxy": "CHARACTER_CHR_GUARDIAN",
+    "shotProxy": "SHOT_SH010_WIDE",
+    "shotProxyType": "CAMERA",
+    "shotProxySelected": true,
+    "typedFilmStateAvailable": false
+  },
+  "officialConfigurationAfterBaseline": {
+    "root": "/Users/mengyingli/Library/Application Support/Blender",
+    "state": "PRESENT",
+    "entries": 2,
+    "digest": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "files": 0,
+    "note": "The official first-run Quick Setup created only 5.2/config directories; no preference file was written"
+  },
+  "evidence": {
+    "screenshot": "screenshots/official-baseline.png",
+    "screenshotSha256": "3c8bf7f742bab579fefa122fab1d9e0d83d5c7d0c17881bb3aa72ad45211b4a7",
+    "screenshotDimensions": {"width": 1340, "height": 768}
+  },
+  "claimCeiling": "This is a measured visible-UI semantic proxy baseline. It does not claim that generic Blender objects are equivalent to typed film state."
+}
