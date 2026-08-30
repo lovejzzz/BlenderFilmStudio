@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "bfs.f0.7.failureReceipt.v0.1",
+  "experimentId": "F0.7-2026-08-30-mac-m2max-attempt-02",
+  "status": "FAIL",
+  "failureId": "R02_CORE_SNAPSHOT_PRE_SAVE_DEPSGRAPH_STALE",
+  "secondaryFailureId": "OFFICIAL_CONFIG_EMPTY_DIRECTORY_DRIFT",
+  "observedAtUtc": "2026-08-30T07:25:48Z",
+  "firstPackageMutationOccurred": true,
+  "sameIdRepairPermitted": false,
+  "failedStep": "05_RUN_OFFICIAL_TO_F0_TO_OFFICIAL / process 02",
+  "primaryCause": "The harness captured matrix_world before a view-layer dependency-graph update in the official-create process. The saved file resolved the configured camera/light transforms on reopen, so the installed F0 correctly observed a different semantic hash than the stale pre-save baseline.",
+  "primaryEvidence": {
+    "officialCreateProcess": {
+      "uri": "processes/01-official-create.json",
+      "fileSha256": "3c8e3f4cd4302ef6b2b382f1a74a495a103d2760bb39a231180fe32ca03cd1c9",
+      "processHash": "a60d5820dac52c946f36c7ed4913bb669a189254caf899a2a54391441b4ce00b",
+      "status": "PASS"
+    },
+    "officialCreateReport": {
+      "uri": "roundtrip/official-to-f0/01-official-report.json",
+      "fileSha256": "ec161b3361d3be00e990f78a98b2a3aefab416744b7d3f2451f61e4ebd63dcff",
+      "reportHash": "962f36266063dc2929cb2a19560eaadd46ae9ceb3a7f1c6d284d464c24487b0c",
+      "staleCoreSemanticSha256": "04fbb28ec0da382735b9a585dccb6279749ddf4117cdf90597d72fa8bd4647b6"
+    },
+    "f0OpenProcess": {
+      "uri": "processes/02-f0-open-official.json",
+      "fileSha256": "400ee23d2d137879061e629f97633378ebe9c1ae388d820db7d92661ac886a06",
+      "processHash": "70f2a6a341bd6bbcaf27b9e54adb298a830ca06026924217515c79e74bf63cd9",
+      "status": "FAIL",
+      "exitCode": 1,
+      "observedResolvedCoreSemanticSha256": "139852cf091bc79b78f7dd73430912d7988b0f54a3089b010dd87a26211a2300",
+      "realSeconds": 3.51,
+      "maximumResidentSetSizeBytes": 267517952
+    }
+  },
+  "secondaryEvidence": {
+    "postcheck": {
+      "uri": "failure-postcheck.json",
+      "fileSha256": "3e41a947c6459ce17d9dab791925dbe28f07cded6a0d8d764e11692cdacd2ea7",
+      "postcheckHash": "d78e58efe7452d60c0dbbfd92939cc1b89efedf9e613cda9f955a73304717418",
+      "status": "FAIL"
+    },
+    "officialApplicationSupportDigestBefore": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "officialApplicationSupportDigestAfter": "455fea8df82bcba3c0503eb4abd346295620bb471179045e29aa1c8eaa4f1107",
+    "observedChange": "Official Blender 5.2.0 created the empty directory ~/Library/Application Support/Blender/5.2/config during process 01; the existing compat.dat file remained byte-exact.",
+    "cleanupPerformedOnOfficialRoot": false
+  },
+  "packageResult": {
+    "status": "PASS_UNSIGNED_RESEARCH_PACKAGE",
+    "manifestFileSha256": "6a32cedbf248dec0abfdddb100665b608a2855c314ed67182a6d2d3d651d600f",
+    "manifestHash": "fc3c6dbd7188958b5d92608675e16dad28ab97d3413df5aa43a4aadb1fa3d6e8",
+    "dmg": {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/F0.7-packages-attempt-02/Film-Studio-Engine-F0-5.2.1-unsigned.dmg",
+      "bytes": 341069106,
+      "sha256": "20a8aefd177fe41190b95ea7bbe7e75fb828ecd7ee5d9b7ffcd2c336a1f34a42",
+      "hdiutilCreateRealSeconds": 65.56,
+      "hdiutilVerified": true
+    }
+  },
+  "safetyCleanup": {
+    "uri": "failure-cleanup.json",
+    "fileSha256": "8ad100af86dfc09879d9ecfdcfada6f10d8bfa157f37efa0f260bbb55dab11c1",
+    "cleanupHash": "9bdc2c3efe0260a5ceaab857cad3adb9104feb854ecc884e3f0013862361c0e1",
+    "installedTargetRemoved": true,
+    "allowedRuntimeCacheDriftOnly": {
+      "pycFiles": 427,
+      "pycacheDirectories": 58
+    }
+  },
+  "safety": {
+    "formalProductStarts": 2,
+    "renderCalls": 0,
+    "installDestinationAbsentAfterCleanup": true,
+    "sourceProductUnchanged": true,
+    "installedOfficialBlenderUnchanged": true,
+    "f0ConfigurationRootsUnchanged": true,
+    "officialCacheUnchanged": true
+  },
+  "correctiveActionForNewAttempt": "Call bpy.context.view_layer.update() before every core snapshot; route official-runtime user config/scripts/extensions/datafiles into an evidence-owned sandbox; freeze the current official configuration digest as the new baseline; retain the successful package findings without reusing this failed attempt.",
+  "failureHash": "29c0500b74d96b226cd02febf7cbed1c0df18a6ee4c85e7bf966611ad4e911cc"
+}
