@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "bfs.repositoryReadinessNetworkMutationLog.v0.1",
+  "observedAt": "2026-08-30T08:44:03.259Z",
+  "commands": [
+    {
+      "stage": "RR.1",
+      "operation": "authenticated repository metadata query",
+      "command": [
+        "/opt/homebrew/bin/gh",
+        "api",
+        "repos/lovejzzz/film-studio-engine",
+        "--silent"
+      ],
+      "network": "READ_ONLY",
+      "externalMutation": false
+    },
+    {
+      "stage": "RR.4",
+      "operation": "retained full mirror local clone",
+      "command": [
+        "/usr/bin/git",
+        "clone",
+        "--mirror",
+        "--local",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-02/blender-github-full-mirror.git",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/blender-github-full-mirror.git"
+      ],
+      "network": "NONE",
+      "externalMutation": false
+    },
+    {
+      "stage": "RR.4",
+      "operation": "restore official fetch origin on local work mirror",
+      "command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/blender-github-full-mirror.git",
+        "remote",
+        "set-url",
+        "origin",
+        "https://github.com/blender/blender.git"
+      ],
+      "network": "NONE",
+      "externalMutation": false
+    },
+    {
+      "stage": "RR.5",
+      "operation": "local F0 commit bundle",
+      "command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+        "bundle",
+        "create",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/f0-source.bundle",
+        "HEAD",
+        "^9e2066aef7ef7e20c142ad7bd3303138a4304c93"
+      ],
+      "network": "NONE",
+      "externalMutation": false
+    },
+    {
+      "stage": "RR.5",
+      "operation": "verify F0 bundle in work mirror context",
+      "command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/blender-github-full-mirror.git",
+        "bundle",
+        "verify",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/f0-source.bundle"
+      ],
+      "network": "NONE",
+      "externalMutation": false
+    },
+    {
+      "stage": "RR.5",
+      "operation": "local bundle fetch into full mirror",
+      "command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/blender-github-full-mirror.git",
+        "fetch",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/f0-source.bundle",
+        "HEAD:refs/heads/film-studio-f0-candidate"
+      ],
+      "network": "NONE",
+      "externalMutation": false
+    },
+    {
+      "stage": "RR.5",
+      "operation": "initialize local bare destination",
+      "command": [
+        "/usr/bin/git",
+        "init",
+        "--bare",
+        "--initial-branch=main",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/film-studio-engine-local.git"
+      ],
+      "network": "NONE",
+      "externalMutation": false
+    },
+    {
+      "stage": "RR.5",
+      "operation": "push exact candidate to local file destination",
+      "command": [
+        "/usr/bin/git",
+        "-C",
+        "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/blender-github-full-mirror.git",
+        "push",
+        "--porcelain",
+        "file:///Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/repository-readiness-attempt-03/film-studio-engine-local.git",
+        "refs/heads/film-studio-f0-candidate:refs/heads/main"
+      ],
+      "network": "NONE_FILE_ONLY",
+      "externalMutation": false
+    }
+  ],
+  "counters": {
+    "authenticatedMetadataQueries": 1,
+    "readOnlyFullMirrorClones": 0,
+    "retainedFullMirrorLocalClones": 1,
+    "externalRepositoryCreates": 0,
+    "externalGitPushes": 0,
+    "localFilePushes": 1,
+    "lfsUploads": 0,
+    "phaseBMutations": 0,
+    "dmgDistributions": 0,
+    "credentialMaterialReadsOrEmissions": 0,
+    "blenderStarts": 0,
+    "renders": 0,
+    "modelCalls": 0
+  },
+  "status": "PASS",
+  "receiptHash": "cbd15100046d0985b594792773f695984e1eab01308519cdf36d9787c6814141"
+}
