@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioF0.6Protocol.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.6",
+  "experimentId": "F0.6-2026-08-30-mac-m2max-attempt-01",
+  "status": "PREREGISTERED",
+  "question": "Can the bounded F0 fork merge Blender v5.2.1 within 10 manual paths, 8 person-hours and 5000 fork-owned changed lines while retaining all F0.1-F0.5 conformance fixtures?",
+  "dependsOn": {
+    "gate": "F0.5",
+    "status": "PASS",
+    "experiment": "F0.5-2026-08-30-mac-m2max-attempt-02",
+    "verdictFileSha256": "98e3cc34aef7dc564ea4c820badf15f3fad201966cbef5bd1351fed4efc2c3be",
+    "verdictReceiptHash": "a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71"
+  },
+  "frozenInputs": {
+    "mergePreregistration": "merge-preregistration.json",
+    "regressionMatrix": "regression-matrix.json",
+    "hostPreflight": "host-preflight.json",
+    "f0SpecSha256": "2c06e617f9f435fe640ad2bc27e6cbb792820142e75b563ce4f77ade93a50929",
+    "f0ProtocolSha256": "851751da636242428e0c1b3be3209de10237aecc0b18e5d036c49f1818cd3dc3"
+  },
+  "requiredEvidence": ["merge-fetch.json", "conflicts.json", "time-log.json", "patch-surface.json", "build/receipt.json", "regression.json", "verdict.json"],
+  "fallbackTrigger": "Any numeric ceiling is exceeded or a core patch cannot be isolated without weakening a frozen F0.1-F0.5 contract.",
+  "claimCeiling": "A PASS measures this exact v5.2.0-to-v5.2.1 merge drill and conformance corpus on one host. It does not prove future merges, package viability, cross-platform maintenance or production readiness."
+}

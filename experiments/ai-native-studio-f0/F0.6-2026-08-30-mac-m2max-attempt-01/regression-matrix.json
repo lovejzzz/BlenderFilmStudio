@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "bfs.f0.6.regressionMatrix.v0.1",
+  "status": "FROZEN_BEFORE_MERGE",
+  "acceptedInputs": {
+    "F0.1": {"verdictFileSha256": "b57e45315d24b924be6885c8068d104c276f355761304be5fc7b853f00b15f9c", "verdictReceiptHash": "f4a18aec803a09d2c149222312a8e9f507d1103f95273951af79acaf04ba62cb"},
+    "F0.2": {"verdictFileSha256": "2c060e565a330cd8e7665c4ad8d76f79dcd86b424b7ef62c3d418d93ff111fff", "verdictReceiptHash": "615c3021227a4f3b4008ec73acca5ddc04511e3283dfc1a7bb7fddfde45192f4"},
+    "F0.3": {"verdictFileSha256": "866e8b0dc64f8e9bd07a9cdf3d0bca3fc8cb4cf4c25e5a3e606f4a583b8d45a0", "verdictReceiptHash": "472abf5df3c66dba375e46fe7e9a0e152cc3d6c37966ab13f6d7e2601fea0390"},
+    "F0.4": {"verdictFileSha256": "2a7d916b1d60956d2a193e643ef6438432eb259416203930c741913503a0595a", "verdictReceiptHash": "f2888a3b4c89df3370c13fbf28097ecb4d83a3f11f325588a12321d27f7666a3"},
+    "F0.5": {"verdictFileSha256": "98e3cc34aef7dc564ea4c820badf15f3fad201966cbef5bd1351fed4efc2c3be", "verdictReceiptHash": "a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71"}
+  },
+  "build": {
+    "root": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.6-merge-drill",
+    "mustBeAbsentBeforeStart": true,
+    "command": ["/usr/bin/make", "BUILD_DIR=/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.6-merge-drill", "NPROCS=12"],
+    "expectedVersion": "5.2.1",
+    "expectedBuildHash": "the first 12 hex characters of the recorded merge commit",
+    "mustProduceIndependentFilmStudioBundle": true
+  },
+  "fixtures": [
+    {
+      "gate": "F0.1",
+      "checks": ["clean merged-source build exits zero", "native arm64 product launches headless", "runtime version/build hash matches merge receipt", "source remains clean", "timing/RSS/disk receipts pass"]
+    },
+    {
+      "gate": "F0.2",
+      "checks": ["Film Studio Engine F0 product name", "studio.ainativefilm.f0 bundle id", "FilmStudioEngineF0 configuration namespace", "official Blender configuration digest unchanged", "configuration collision rejects before product start"]
+    },
+    {
+      "gate": "F0.3",
+      "checks": ["bfs.filmWorkspace.v0.1 typed Project/Scene/Shot/Character state", "Create Shot semantic operation", "save and independent reopen persistence", "missing optional state recovery", "Expert Mode state round-trip without scene duplication"]
+    },
+    {
+      "gate": "F0.4",
+      "checks": ["B01/B02 embedded BuildPlan bytes canonical-exact with frozen external compiler", "unknown/path/non-finite/unapproved controls reject before mutation", "B01/B02 isolated builds pass semantic structure", "exact merged product provenance is separate", "independent reopen audit passes"]
+    },
+    {
+      "gate": "F0.5",
+      "checks": ["same B01 EEVEE 640x360 16 spp PNG profile", "same B01 Cycles CPU 640x360 32 spp HALF ZIP multilayer EXR profile", "Combined/Depth/Normal independently decode finite dynamic pixels", "controlled interruption has zero observed render calls", "receipt-only recovery skips preview", "insufficient disk and tampered receipt reject before additional native start"]
+    }
+  ],
+  "identityAdaptationRule": "Only target-derived Blender version and exact merge-commit provenance may change. SceneSpec, BuildPlan, semantic scene structures, product identity, workspace schema, render profiles, thresholds and negative-control reasons remain frozen.",
+  "passRule": "Every listed fixture check passes without changing any prior acceptance threshold."
+}

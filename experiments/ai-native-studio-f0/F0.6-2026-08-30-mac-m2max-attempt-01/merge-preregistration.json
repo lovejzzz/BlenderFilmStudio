@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "bfs.f0.6.mergePreregistration.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.6",
+  "experimentId": "F0.6-2026-08-30-mac-m2max-attempt-01",
+  "status": "PREREGISTERED_BEFORE_FETCH_OR_MERGE",
+  "sourceRepository": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "remote": "https://projects.blender.org/blender/blender.git",
+    "shallowBefore": true,
+    "shallowBoundary": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "workingTreeClean": true
+  },
+  "fork": {
+    "branch": "codex/f0.4-embedded-contract",
+    "head": "b47eae224b6d3e71559b55df85fd20ae87d3f92b",
+    "headTree": "3e85c5f369cf7bf604ebbd14ecf9f9745890b6a5",
+    "baseline": "fbe6228777e7d9afefcd61a413844e790ae75db7",
+    "baselineTree": "8a0e127915a507f86fe2852c8d3f4529b4369eb7",
+    "binaryDiffSha256": "d0f6364aff47fa8a8ceda67e6725c2fb5ab485de51bbdee3ca74483d38be31e5",
+    "changedPathListSha256": "48bef36b30b57708fcb9a9dd5f016468f06ec62bbddfb9637411dc42c5cffe94",
+    "changedPaths": 16,
+    "addedLines": 841,
+    "deletedLines": 68
+  },
+  "target": {
+    "commit": "9e2066aef7ef7e20c142ad7bd3303138a4304c93",
+    "remoteBranch": "refs/heads/blender-v5.2-release",
+    "remoteTag": "refs/tags/v5.2.1",
+    "remoteBranchObservedExact": true,
+    "remoteTagObservedExact": true,
+    "localObjectAbsentBeforePreregistration": true
+  },
+  "frozenFetch": {
+    "command": ["git", "fetch", "--no-tags", "--deepen=1000", "origin", "refs/heads/blender-v5.2-release:refs/remotes/origin/blender-v5.2-release"],
+    "postconditions": [
+      "refs/remotes/origin/blender-v5.2-release equals the frozen target",
+      "target commit object exists locally",
+      "merge-base(fork head,target) equals the frozen v5.2.0 baseline",
+      "source working tree and fork head remain unchanged"
+    ],
+    "failureAction": "BLOCKED_WITH_ZERO_MERGE_MUTATION"
+  },
+  "frozenMerge": {
+    "drillBranch": "codex/f0.6-upstream-merge-drill",
+    "branchCommand": ["git", "switch", "-c", "codex/f0.6-upstream-merge-drill", "b47eae224b6d3e71559b55df85fd20ae87d3f92b"],
+    "mergeCommand": ["git", "merge", "--no-ff", "--no-commit", "9e2066aef7ef7e20c142ad7bd3303138a4304c93"],
+    "commitMessage": "Merge Blender v5.2.1 for F0.6 drill",
+    "pushSourceBranch": false,
+    "maximumConcurrentBuilds": 1
+  },
+  "timeAccounting": {
+    "mergeMachineElapsed": "Monotonic wall time from merge process spawn through exit.",
+    "manualResolutionStarts": "First human-authored edit after the initial unmerged path snapshot.",
+    "manualResolutionEnds": "Last human-authored conflict resolution edit before the resolved index is verified.",
+    "noInitialConflictsMeansPersonSeconds": 0,
+    "pausesExcluded": false,
+    "maximumPersonSeconds": 28800
+  },
+  "ceilings": {
+    "maximumManualConflictPaths": 10,
+    "maximumManualResolutionPersonSeconds": 28800,
+    "maximumForkOwnedNonGeneratedChangedLines": 5000,
+    "minimumFreeBytesBeforeBuild": "115964116992",
+    "reserveBytes": "107374182400",
+    "projectedBuildAndEvidenceBytes": "8589934592",
+    "maximumBuildWallSeconds": 1800,
+    "maximumBuildPeakResidentSetSizeBytes": 4294967296
+  },
+  "stopRules": [
+    "If fetch identities or merge base differ, record BLOCKED and perform no merge mutation.",
+    "Snapshot unmerged paths immediately after the frozen merge command before any resolution edit.",
+    "If more than 10 paths conflict, abort no further work and recommend the external shell.",
+    "If manual resolution exceeds 8 person-hours, stop and recommend the external shell.",
+    "If fork-owned non-generated changed lines exceed 5000, stop and recommend the external shell.",
+    "If any frozen F0.1-F0.5 regression fails, retain FAIL without weakening that fixture."
+  ]
+}
