@@ -29,8 +29,9 @@ both a research notebook and an executable evidence base. Read this page,
   `fbe6228777e7d9afefcd61a413844e790ae75db7`; the admitted F0.6 merge target is
   official `v5.2.1` commit `9e2066aef7ef7e20c142ad7bd3303138a4304c93`.
 - **Completed experiment:** `F0-SOURCE-FEASIBILITY`. All seven gates are
-  `PASS`; the next checkpoint is a separately authorized formal repository and
-  Phase B product-prototype charter, not an eighth F0 gate.
+  `PASS`. The post-F0 repository/Phase B charter is frozen at commit
+  `6a38ca3b…`; the next checkpoint is explicit authorization to create and make
+  the first push to a permanent engine repository, not an eighth F0 gate.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -131,6 +132,9 @@ both a research notebook and an executable evidence base. Read this page,
 6. [`app/ai-native-studio-design/page.tsx`](./app/ai-native-studio-design/page.tsx)
    and [`app/ai-native-studio-handoff/page.tsx`](./app/ai-native-studio-handoff/page.tsx)
    — public explanation and live handoff dashboard.
+7. [`research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md`](./research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md)
+   and [`specs/ai-native-studio-post-f0-phase-b.v0.1.json`](./specs/ai-native-studio-post-f0-phase-b.v0.1.json)
+   — frozen permanent-repository boundary and PB.1–PB.7 contract.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
@@ -173,10 +177,10 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. F0.1-F0.7 are closed. Verify the accepted F0.7 attempt-05 verdict and audit
-   before planning new work. Do not mutate the retained DMG, accepted evidence
-   root or attempts 01–04. The next product phase needs a new preregistration
-   and explicit repository charter.
+5. F0.1-F0.7 are closed. Verify the accepted F0.7 attempt-05 verdict/audit and
+   the post-F0 contract commit `6a38ca3b…`. Do not mutate the retained DMG,
+   accepted evidence, failures or v0.1 charter. Wait for explicit repository
+   owner / visibility / create / first-push authorization.
 
 ## What not to do
 
@@ -195,21 +199,19 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next machine should prepare one small, auditable post-F0 decision package:
+The post-F0 decision package is frozen and pushed. It binds seven accepted
+verdicts, 15 retained outcomes, the proposed `film-studio-engine` boundary and
+PB.1–PB.7. The next checkpoint must record the user's explicit choices:
 
-- cross-bind all seven accepted verdicts and every retained F0 failure;
-- state that direct thin fork is supported only for a product prototype;
-- define the proposed `film-studio-engine` repository boundary, GPL source and
-  notice obligations, upstream remote policy and release artifact policy;
-- freeze the Phase B vertical slice around B01/B02 and the B62 three-shot case,
-  including typed proposal, approval, preview, receipt and human-review gates;
-- keep Developer ID signing/notarization and public distribution as separate,
-  credential-dependent release work;
-- require explicit authorization before creating or publishing the new
-  repository.
+- repository owner;
+- private or public visibility;
+- permission to create the repository;
+- permission to push the full Blender history and F0 source branch for the
+  first time.
 
-F0 is finished. New work must start with a new versioned contract rather than
-quietly extending the completed F0 evidence.
+No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
+implied by repository authorization. Any change to the frozen charter requires
+a new version, not an in-place edit.
 
 ## Public routes
 

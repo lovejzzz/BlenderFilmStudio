@@ -20,6 +20,14 @@ checkpoint: repository charter, licensing/release boundary, Phase B vertical
 slice and its preregistered acceptance criteria. Do not create or publish a new
 permanent repository until that scope is explicitly authorized.
 
+The post-F0 contract is frozen at commit
+`6a38ca3bdd93219ec6dcd001fa72143df7d80a10`:
+`research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md`
+and `specs/ai-native-studio-post-f0-phase-b.v0.1.json`. Do not edit v0.1 in
+place. The next action requires explicit repository owner, visibility,
+create-repository and first-push authorization; until then, no permanent
+repository or Phase B source mutation is allowed.
+
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
 and maintenance reference, not the source baseline. The fallback is an external

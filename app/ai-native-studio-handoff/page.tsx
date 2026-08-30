@@ -29,6 +29,8 @@ const documents = [
   ['04', 'F0 protocol', '完整预注册：竞争假设、固定输入、资源门、负控和停止规则。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-29-ai-native-film-studio-f0-source-feasibility-protocol-v0.1.zh-CN.md'],
   ['05', 'F0 spec.json', '七道门的机器验收合同、证据清单和 fallback trigger。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-f0.v0.1.json'],
   ['06', 'Design Doc v0.1', '产品、架构、GPL 边界、已有研究与长期路线。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-29-ai-native-film-studio-design-v0.1.zh-CN.md'],
+  ['07', 'Post-F0 Charter', '永久仓库、GPL/release 边界与 PB.1–PB.7 垂直切片。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md'],
+  ['08', 'Phase B spec.json', '7 个 accepted、15 个 retained outcome 与关闭的授权矩阵。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-post-f0-phase-b.v0.1.json'],
 ];
 
 const inherited = [
@@ -52,12 +54,12 @@ export default function AiNativeStudioHandoffPage() {
         <div className="handoff-hero-copy">
           <p className="eyebrow"><span /> NEW MACHINE HANDOFF · 2026.08.30</p>
           <h1>换一台电脑，<br />不换一套<span>事实。</span></h1>
-          <p>F0.1–F0.7 已在 M2 Max 主机全部通过。F0.7 attempt-05 验证 unsigned DMG、隔离安装/卸载和两条 same-host `.blend` round trip；六个边界的核心语义 exact，typed metadata 精确保留。direct thin fork 现在只被支持进入有界产品原型。</p>
+          <p>F0.1–F0.7 已在 M2 Max 主机全部通过。Post-F0 charter 已在 commit `6a38ca3b…` 冻结 7 个 accepted、15 个 retained outcome 和 PB.1–PB.7。下一步只等待 repository owner、visibility、create 与 full-history first-push 的明确授权。</p>
           <div className="handoff-hero-actions"><a href="#start">开始交接 ↓</a><Link href="/ai-native-studio-design">为什么做自己的软件</Link></div>
         </div>
         <aside className="handoff-state">
           <header><span>PROGRAM STATE</span><b>F0.1–F0.7 PASS</b></header>
-          <div className="handoff-state-main"><small>NEXT CHECKPOINT</small><strong>POST-F0</strong><h2>PRODUCT<br />CHARTER</h2></div>
+          <div className="handoff-state-main"><small>NEXT CHECKPOINT</small><strong>AUTH</strong><h2>REPOSITORY<br />CREATE</h2></div>
           <dl><div><dt>ENGINE</dt><dd>Film Studio Engine F0</dd></div><div><dt>COMMIT</dt><dd>fa1b578bb421</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>RESULT</dt><dd>7 / 7 gates PASS</dd></div></dl>
           <footer>PROTOTYPE SUPPORTED · PUBLIC RELEASE UNPROVEN</footer>
         </aside>
@@ -72,7 +74,7 @@ export default function AiNativeStudioHandoffPage() {
           <article><span>01</span><h3>读入口</h3><code>START_HERE.md</code><p>确认目标与禁区，不从旧 B62 继续。</p></article>
           <article><span>02</span><h3>做预检</h3><code>preflight-f0-source-host.mjs</code><p>先获得 ACCEPTED 或 BLOCKED 事实。</p></article>
           <article><span>03</span><h3>核验 F0 结论</h3><code>F0.7-…-attempt-05</code><p>确认 7/7 PASS 与 attempts 01–04 retained。</p></article>
-          <article><span>04</span><h3>冻结下一阶段</h3><code>POST-F0 CHARTER</code><p>获得授权后再创建正式仓库与 Phase B 合同。</p></article>
+          <article><span>04</span><h3>读取授权边界</h3><code>POST-F0 CHARTER</code><p>owner / visibility / create / first push 均需明确。</p></article>
         </div>
       </section>
 
@@ -85,7 +87,7 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-map" id="map">
         <div className="section-index">02 / REPOSITORY MAP</div>
-        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> SIX AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
+        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> EIGHT AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
         <div className="handoff-docs">{documents.map(([id,title,detail,href]) => <a href={href} target="_blank" rel="noreferrer" key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>OPEN ↗</b></a>)}</div>
         <div className="handoff-storage"><span>REPOSITORY BOUNDARY</span><div><code>BlenderFilmStudio</code><b>rules · protocols · evidence · site</b></div><i>≠</i><div><code>external F0 workspace</code><b>source · dependencies · builds</b></div></div>
       </section>
@@ -101,7 +103,7 @@ export default function AiNativeStudioHandoffPage() {
         <span>LATEST CLOSED CHECKPOINT</span>
         <h2>F0.7 通过，四次失败仍保留。</h2>
         <p>Unsigned DMG · 6 / 6 starts · core semantics exact · metadata preserved · 103-check independent audit</p>
-        <div><Link href="/journal">查看实验日志 →</Link><a href="https://github.com/lovejzzz/BlenderFilmStudio" target="_blank" rel="noreferrer">打开 GitHub 仓库 ↗</a></div>
+        <div><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md" target="_blank" rel="noreferrer">读取 Post-F0 Charter ↗</a><Link href="/journal">查看实验日志 →</Link></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · New Machine Handoff</b></div><p>One repository · One source identity · Seven falsifiable gates</p><Link href="/ai-native-studio-design">返回 Design Doc →</Link></footer>

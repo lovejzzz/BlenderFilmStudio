@@ -5931,3 +5931,13 @@ accepted package交叉绑定attempt-02已完成的341,069,106-byte UDZO DMG，SH
 安装目标执行前不存在；从mounted payload安装后允许三次F0启动生成429 `.pyc` / 59 `__pycache__`，uninstall前先按冻结规则归一化回staging exact，再只删除exact generated target，结束时目标重新ABSENT。`/Applications/Blender.app`、官方config/cache与独立F0 config/cache前后digest exact。独立auditor不import runner/stage，103 checks全部PASS；audit file SHA/self hash为`f83f3447…` / `0768a6c2…`。最终verdict file SHA/self hash为`76bf2568…` / `626ea953fefd6fb1b8c3044248c653c7ce0cbc18a69a2e8eff5bb37e78a2d94a`，evidence commit `e39d17c647f3d3bbefa699e0827acf894be3e8e4`已推送。
 
 F0.1–F0.7至此全部PASS且没有fallback trigger，冻结协议支持建议创建正式`film-studio-engine`产品原型仓库。边界保持：F0.7只证明一份unsigned local research package与两条same-host frozen `.blend` round trip；不证明签名、公证、Gatekeeper接受、公开发行、production support、跨版本/平台generalization或法律充分性。下一动作必须先形成post-F0 repository/Phase B charter并获得明确授权；不新增未经定义的F0.8。
+
+## J-478 · Post-F0 repository / Phase B charter 冻结
+
+Date: 2026-08-30 · Type: POST-F0 PREREGISTRATION · Parent research commit: `463d76f0325223430c00ab7ea1a8fd167db7392a` · Blender starts/renders/model: 0 / 0 / 0 · Network: existing research Git push only
+
+在任何永久仓库创建、source history push或Phase B mutation前，v0.1 charter冻结direct thin-fork只进入有界产品原型。机器合同逐字节绑定7份accepted F0 verdict与15份retained `BLOCKED`/`FAIL` verdict；复算全部22个verdict file SHA-256 exact。拟议`film-studio-engine`从Blender 5.2.1 merge commit `fa1b578bb421bbc82b3106b7d4223e11e65fae1d`保留完整上游历史，生成build/DMG/evidence不进engine Git，官方Blender remote只用于fetch/merge。
+
+Phase B冻结PB.1 repository/source identity、PB.2 typed proposal/approval boundary、PB.3 canonical compile/editable workspace、PB.4 preview/final receipts、PB.5 restart-safe job control、PB.6 B62 three-shot vertical slice和PB.7 human review/bounded verdict。B62 frame-288 composition rejection继续是不能放宽的边界；模型仍无unrestricted `bpy`/shell/filesystem authority。
+
+Charter与machine contract首次提交为`6a38ca3bdd93219ec6dcd001fa72143df7d80a10`并已推送；SHA-256分别为`18465a4abb264419923e1895348e80a83912cfcaba4dba45dc11558a47ff62bb`与`7280a7d131d8821c7f0196e008c3c2d6961a3f713e02fc82c70028384d420098`。授权矩阵明确保持repository creation/publication、first push、Developer ID/notary credentials、unsigned DMG distribution和Phase B mutation全部false。下一动作只等待用户明确owner、private/public visibility、create与full-history first-push权限；没有授权时停止。

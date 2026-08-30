@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-30",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_1_THROUGH_F0_7_PASS_SOURCE_FEASIBILITY_COMPLETE",
+  "status": "F0_COMPLETE_POST_F0_CHARTER_PREREGISTERED_AWAITING_REPOSITORY_AUTHORIZATION",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -26,6 +26,19 @@
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
   "activeGate": null,
+  "postF0Charter": {
+    "status": "PREREGISTERED_BEFORE_REPOSITORY_CREATION_OR_PHASE_B_MUTATION",
+    "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
+    "document": "research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md",
+    "documentSha256": "18465a4abb264419923e1895348e80a83912cfcaba4dba45dc11558a47ff62bb",
+    "machineContract": "specs/ai-native-studio-post-f0-phase-b.v0.1.json",
+    "machineContractSha256": "7280a7d131d8821c7f0196e008c3c2d6961a3f713e02fc82c70028384d420098",
+    "acceptedF0Bindings": 7,
+    "retainedOutcomeBindings": 15,
+    "phaseBGates": ["PB.1", "PB.2", "PB.3", "PB.4", "PB.5", "PB.6", "PB.7"],
+    "repositoryCreationAuthorized": false,
+    "phaseBMutationAuthorized": false
+  },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
     "F0.1": "PASS",
@@ -318,14 +331,17 @@
     "START_HERE.md",
     "research/2026-08-29-ai-native-film-studio-design-v0.1.zh-CN.md",
     "research/2026-08-29-ai-native-film-studio-f0-source-feasibility-protocol-v0.1.zh-CN.md",
-    "specs/ai-native-studio-f0.v0.1.json"
+    "specs/ai-native-studio-f0.v0.1.json",
+    "research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md",
+    "specs/ai-native-studio-post-f0-phase-b.v0.1.json"
   ],
   "firstCommands": [
     "git status --short",
     "node scripts/preflight-f0-source-host.mjs",
     "cat experiments/ai-native-studio-f0/F0.7-2026-08-30-mac-m2max-attempt-05/verdict.json",
     "cat experiments/ai-native-studio-f0/F0.7-2026-08-30-mac-m2max-attempt-05/audit.json",
-    "prepare a versioned post-F0 repository and Phase B charter; obtain explicit authorization before creating or publishing a permanent engine repository"
+    "cat specs/ai-native-studio-post-f0-phase-b.v0.1.json",
+    "obtain explicit repository owner, visibility, create and first-push authorization before any permanent repository action"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -352,15 +368,14 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "POST_F0_DECISION",
-    "result": "An explicitly authorized repository charter and preregistered Phase B product-prototype vertical slice",
+    "gate": "REPOSITORY_CREATION_AUTHORIZATION",
+    "result": "An explicit user decision authorizing or declining permanent engine repository creation and first push",
     "requiredArtifacts": [
-      "cross-binding to all seven accepted F0 verdicts and all retained failures",
-      "film-studio-engine repository boundary, GPL source/notices obligations, upstream remote and release artifact policy",
-      "Phase B vertical-slice contract for B01/B02 and the B62 three-shot case",
-      "typed proposal, approval, preview, receipt, recovery and human-review acceptance criteria",
-      "separate credential-dependent Developer ID signing, notarization and public-distribution plan",
-      "explicit user authorization before repository creation or publication"
+      "repository owner",
+      "repository visibility: private or public",
+      "explicit permission to create the repository",
+      "explicit permission for the first push of full Blender history and the F0 source branch",
+      "confirmation that signing, notarization, unsigned-DMG distribution and Phase B mutation remain unauthorized unless separately granted"
     ]
   }
 }
