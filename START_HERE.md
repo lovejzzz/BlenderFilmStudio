@@ -1,6 +1,6 @@
 # BlenderFilmStudio — new machine cold start
 
-> **Current decision:** F0.1 through F0.5 passed on the admitted M2 Max host.
+> **Current decision:** F0.1 through F0.6 passed on the admitted M2 Max host.
 > F0.4 attempts 01 and 02 remain retained `FAIL` results. Attempt-01 proved
 > canonical-exact B01/B02 BuildPlans and all four negative controls, then found
 > a missing OCIO launch binding. Attempt-02 fixed only that binding and built
@@ -8,7 +8,9 @@
 > product build hash. Attempt-03 versioned semantic structure separately from
 > exact product provenance and closed F0.4 as `PASS`. F0.5 attempt-01 remains
 > a retained preview setup `FAIL`; attempt-02 preserved the same thresholds and
-> closed F0.5 as `PASS`. F0.6 is next; do not
+> closed F0.5 as `PASS`. F0.6 attempts 01 and 02 remain retained harness
+> `FAIL` results; attempt-03 preserved them, passed the fixed merge ceilings and
+> the complete F0.1–F0.5 regression corpus, and closed F0.6 as `PASS`. F0.7 is next; do not
 > assume the fork is viable until F0.1-F0.7 all close.
 
 This is the authoritative handoff for a fresh Codex session. The repository is
@@ -20,11 +22,14 @@ both a research notebook and an executable evidence base. Read this page,
 - **Latest direction:** direct official Blender thin fork; Bforartists is a UI
   and fork-maintenance reference; an external shell remains the fallback.
 - **Pinned engine baseline:** official `v5.2.0` at
-  `fbe6228777e7d9afefcd61a413844e790ae75db7`.
-- **Active experiment:** `F0-SOURCE-FEASIBILITY`, F0.6 upstream merge-drill
-  preregistration. No merge is authorized before the target/corpus, timing
-  method, conflict ceiling, patch-surface ceiling and regression matrix are frozen.
-- **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS` and `F0.5 PASS`. Two clean official builds reported Blender
+  `fbe6228777e7d9afefcd61a413844e790ae75db7`; the admitted F0.6 merge target is
+  official `v5.2.1` commit `9e2066aef7ef7e20c142ad7bd3303138a4304c93`.
+- **Active experiment:** `F0-SOURCE-FEASIBILITY`, F0.7 macOS package and
+  `.blend` round-trip preregistration. No package/install mutation is authorized
+  before paths, identities, configuration snapshots, round-trip matrix,
+  uninstall negative control and signing/notarization evidence are frozen.
+- **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`
+  and `F0.6 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
   not byte-for-byte reproducible; the bounded differences are recorded in
   `F0.1-2026-08-29-mac-m2max-attempt-07/comparison.json`.
@@ -73,6 +78,18 @@ both a research notebook and an executable evidence base. Read this page,
   rerendered, Combined/Depth/Normal decoded successfully, and both unsafe
   admission controls rejected before an additional product start. Verdict self
   hash is `a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71`.
+- **Retained F0.6 attempts 01/02:** the merge and native build passed in both
+  cases, but attempt-01 bound the F0.4 approval to the wrong evidence root and
+  attempt-02 used insertion-order-sensitive JSON comparison for exact
+  provenance. Their failures remain immutable as `F04_EVIDENCE_ROOT_BINDING`
+  and `F04_PROVENANCE_OBJECT_KEY_ORDER`; neither was repaired in place.
+- **Accepted F0.6 attempt-03:** the frozen `v5.2.1` merge completed with 0 manual
+  conflict paths, 0 person-hours and 909 non-generated fork-owned changed lines,
+  below ceilings of 10, 8 hours and 5000 lines. The native arm64 product reports
+  build `fa1b578bb421`; an order-insensitive exact provenance audit cross-bound
+  all ten prior F0.1–F0.4 processes, and the unchanged product then passed the
+  full four-start F0.5 corpus. Verdict self hash is
+  `e67b9b942f772b9aef096c4b5cd988dfac7be2e1a3bfec7ad5a28a51111693d3`.
 - **Inherited evidence:** B01-B62 cover structured scene compilation, Blender
   execution, safety/admission, pixels, production passes, cost, recovery and a
   three-shot cinematic attempt. These results are evidence, not a claim that
@@ -80,8 +97,8 @@ both a research notebook and an executable evidence base. Read this page,
 - **Most important retained rejection:** B62's latest camera holdout passed all
   technical gates but failed the frozen composition threshold at frame 288.
   Source control does not replace direction or taste.
-- **Unproven:** upstream merge cost, packaging, signing/notarization path and
-  `.blend` round-trip isolation.
+- **Unproven:** packaging/install/uninstall isolation, signing/notarization path
+  and official↔F0 `.blend` round trips.
 
 ## Read in this order
 
@@ -139,12 +156,12 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. F0.1-F0.5 are closed. Before any F0.6 merge mutation, create a new immutable
-   evidence root and freeze the exact fork head, upstream target
-   `9e2066aef7ef7e20c142ad7bd3303138a4304c93`, merge corpus, timing method,
-   conflict-path accounting, 8 person-hour / 10 path / 5000 non-generated line
-   ceilings and the complete F0.1-F0.5 regression matrix. Cross-bind the
-   accepted F0.5 verdict and retain its failed attempt.
+5. F0.1-F0.6 are closed. Before any F0.7 package or install mutation, create a
+   new immutable evidence root and cross-bind F0.6 attempt-03 verdict
+   `e67b9b94…`. Freeze the unsigned package identity and destination, official
+   Blender/F0 configuration snapshots, uninstall-with-official-installed
+   negative control, both `.blend` round-trip fixtures, graceful-degradation
+   rule, and the signing/notarization commands, credential boundary and cost.
 
 ## What not to do
 
@@ -162,17 +179,19 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next machine should push one small, auditable F0.6 preregistration checkpoint containing:
+The next machine should push one small, auditable F0.7 preregistration checkpoint containing:
 
-- a unique F0.6 evidence root that cross-binds accepted F0.5 attempt-02;
-- exact fork head, merge base and upstream target identities;
-- a frozen merge command, test corpus and human-time accounting method;
-- ceilings of 10 manually resolved paths, 8 person-hours and 5000
-  non-generated fork-owned changed lines;
-- a regression matrix that replays every accepted F0.1-F0.5 fixture without
-  weakening prior verdicts;
-- a fallback trigger that recommends the external shell if any numeric ceiling
-  is exceeded;
+- a unique F0.7 evidence root that cross-binds accepted F0.6 attempt-03 and its
+  two retained failures;
+- exact merged product, package and official-Blender identities plus fresh host
+  and disk admission;
+- frozen install/uninstall paths and before/after configuration-tree digests;
+- official→F0→official and F0→official `.blend` round-trip fixtures with
+  semantic checks and an explicit missing-metadata degradation rule;
+- signing/notarization commands, credentials boundary and expected cost without
+  storing secrets;
+- a fallback trigger if independent distribution cannot be made safe and
+  explainable;
 - a journal entry and, if useful, a website update.
 
 The scientific result may be `PASS`, `FAIL`, or `BLOCKED`. “Still working” is

@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-30",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_1_F0_2_F0_3_F0_4_F0_5_PASS_F0_6_PREREGISTRATION_REQUIRED",
+  "status": "F0_1_THROUGH_F0_6_PASS_F0_7_PREREGISTRATION_REQUIRED",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -18,10 +18,12 @@
     "tag": "v5.2.0",
     "commit": "fbe6228777e7d9afefcd61a413844e790ae75db7",
     "releaseBranchObservedCommit": "9e2066aef7ef7e20c142ad7bd3303138a4304c93",
+    "admittedMergeCommit": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+    "admittedMergeVersion": "5.2.1 LTS",
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "F0.6",
+  "activeGate": "F0.7",
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
     "F0.1": "PASS",
@@ -29,7 +31,7 @@
     "F0.3": "PASS",
     "F0.4": "PASS",
     "F0.5": "PASS",
-    "F0.6": "NOT_RUN",
+    "F0.6": "PASS",
     "F0.7": "NOT_RUN"
   },
   "completedGateEvidence": {
@@ -194,6 +196,46 @@
       "monetaryCostUsd": 0,
       "sourceBlendUnchanged": true,
       "officialBlenderConfigurationDigestBeforeAndAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf"
+    },
+    "F0.6": {
+      "verdict": "PASS",
+      "acceptedAttempt": "experiments/ai-native-studio-f0/F0.6-2026-08-30-mac-m2max-attempt-03",
+      "verdictFileSha256": "f3b27ce4dc4e4da161365478c3c0aa12a646ef1c4bc797722f0e57cfc4699723",
+      "verdictReceiptHash": "e67b9b942f772b9aef096c4b5cd988dfac7be2e1a3bfec7ad5a28a51111693d3",
+      "retainedFailedAttempts": [
+        {
+          "experiment": "experiments/ai-native-studio-f0/F0.6-2026-08-30-mac-m2max-attempt-01",
+          "failure": "F04_EVIDENCE_ROOT_BINDING",
+          "verdictReceiptHash": "db38cc8ea3d27202b6d8df7b26eca74140ec714b5bb9bf8cc40e0ebe074160bc"
+        },
+        {
+          "experiment": "experiments/ai-native-studio-f0/F0.6-2026-08-30-mac-m2max-attempt-02",
+          "failure": "F04_PROVENANCE_OBJECT_KEY_ORDER",
+          "verdictReceiptHash": "4b2d08355c22a27cfc61b19b14dbcf97d0d1daf8927e682d7d6372ae7af669cd"
+        }
+      ],
+      "forkHeadBefore": "b47eae224b6d3e71559b55df85fd20ae87d3f92b",
+      "upstreamTarget": "9e2066aef7ef7e20c142ad7bd3303138a4304c93",
+      "mergeCommit": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+      "dependencyCommit": "a76ef917b4849ba2b1b1deb1a643e131a884a63b",
+      "manualConflictPaths": 0,
+      "maximumManualConflictPaths": 10,
+      "manualPersonHours": 0,
+      "maximumManualPersonHours": 8,
+      "forkOwnedNonGeneratedChangedLines": 909,
+      "maximumForkOwnedNonGeneratedChangedLines": 5000,
+      "buildWallSeconds": 616.26,
+      "buildPeakRssBytes": 2049589248,
+      "productVersion": "5.2.1 LTS",
+      "productBuildHash": "fa1b578bb421",
+      "productBinarySha256": "58d5c984c58d986d3cf44622ad5876052a67890d0b077dafd4977f6e2b24a71d",
+      "crossBoundF01F04ProductStarts": 10,
+      "freshF05ProductStarts": 4,
+      "freshF05RendererStarts": 3,
+      "freshF05ObservedRenderCalls": 2,
+      "allFrozenRegressionGatesPassed": true,
+      "sameIdRepairPerformed": false,
+      "officialBlenderConfigurationDigestBeforeAndAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf"
     }
   },
   "inheritedEvidence": {
@@ -218,8 +260,8 @@
   "firstCommands": [
     "git status --short",
     "node scripts/preflight-f0-source-host.mjs",
-    "cat experiments/ai-native-studio-f0/F0.5-2026-08-30-mac-m2max-attempt-02/verdict.json",
-    "preregister a new immutable F0.6 root that cross-binds accepted F0.5 and freezes merge target, corpus, timing, ceilings and the F0.1-F0.5 regression matrix before any merge mutation"
+    "cat experiments/ai-native-studio-f0/F0.6-2026-08-30-mac-m2max-attempt-03/verdict.json",
+    "preregister a new immutable F0.7 root that cross-binds accepted F0.6, then freezes package/install identities, configuration snapshots, round-trip fixtures, graceful degradation, uninstall negative control and signing/notarization evidence before mutation"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -246,16 +288,16 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "F0.6",
-    "result": "A preregistered upstream merge drill with exact conflict, human-time, patch-surface and F0.1-F0.5 regression accounting",
+    "gate": "F0.7",
+    "result": "A preregistered unsigned macOS package, install/uninstall isolation and official-to-F0 round-trip experiment",
     "requiredArtifacts": [
-      "cross-binding to F0.5 attempt-02 verdict a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71",
-      "merge-preregistration.json with fork head, merge base and target 9e2066aef7ef7e20c142ad7bd3303138a4304c93",
-      "frozen merge corpus and command",
-      "10 manual conflict path ceiling",
-      "8 person-hour manual resolution ceiling",
-      "5000 non-generated fork-owned changed-line ceiling",
-      "F0.1-F0.5 regression matrix and fallback trigger",
+      "cross-binding to F0.6 attempt-03 verdict e67b9b942f772b9aef096c4b5cd988dfac7be2e1a3bfec7ad5a28a51111693d3 and both retained F0.6 failures",
+      "package-manifest.json with exact merged source, binary, bundle and install destination identities",
+      "install-uninstall.json with official Blender present and unchanged",
+      "configuration-isolation.json with official and independent configuration/cache tree digests",
+      "roundtrip.json covering official-to-F0-to-official and F0-to-official fixtures plus missing-metadata degradation",
+      "signing-path.md with commands, credentials boundary and expected cost but no secrets",
+      "fallback trigger when independent distribution is not safe or explainable",
       "journal entry"
     ]
   }

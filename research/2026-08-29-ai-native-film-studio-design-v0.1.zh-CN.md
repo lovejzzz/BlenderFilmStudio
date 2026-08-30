@@ -313,7 +313,7 @@ film-studio/
 
 任何一项失败都保留原始证据，并可能改变架构。例如 F0.6 成本过高时，退回“未修改 Blender + 外部 Studio shell”；不以愿景为由继续扩大分叉。
 
-截至 2026-08-30，F0.1–F0.5 已 PASS，所有失败仍保留。F0.4 attempt-03 以 manifest v0.3 把 semantic structure 与 exact product provenance 分层，在保留前两次失败的同时通过 B01/B02 隔离构建、两份 `.blend` 独立重开和四个 separation attacks。F0.5 attempt-01 在任何 render call 前发现 preview harness 没有把 production media type 从 multilayer 切至 image；attempt-02 不改 profile 或阈值，只显式设置 preview/final media type并精确记录 expected/observed render calls，随后完成 EEVEE PNG、Cycles multilayer EXR、受控中断、receipt-only final recovery 和独立 decoded pixel/pass audit。F0.5 PASS 不证明 merge、package 或生产就绪；active gate 转为 F0.6 upstream merge drill preregistration。
+截至 2026-08-30，F0.1–F0.6 已 PASS，所有失败仍保留。F0.4 attempt-03 以 manifest v0.3 把 semantic structure 与 exact product provenance 分层，在保留前两次失败的同时通过 B01/B02 隔离构建、两份 `.blend` 独立重开和四个 separation attacks。F0.5 attempt-02 不改 profile 或阈值，完成 EEVEE PNG、Cycles multilayer EXR、受控中断、receipt-only final recovery 和独立 decoded pixel/pass audit。F0.6 把 thin fork 合并到固定 Blender v5.2.1 target：0 个人工冲突路径、0 person-hours、909 行非生成 fork patch；attempt-03 保留两次 harness 失败后让冻结 F0.1–F0.5 corpus 全部保持 PASS。F0.6 PASS 不证明 package、独立发行或生产就绪；active gate 转为 F0.7 macOS package and round-trip preregistration。
 
 ## 14. 阶段路线
 
@@ -406,4 +406,4 @@ film-studio/
 
 ## 20. 下一项授权实验
 
-`F0-SOURCE-FEASIBILITY` 的 F0.1–F0.5 已在冻结协议下关闭为 PASS；F0.5 同时保留一次预览输出媒体类型设置失败。下一项授权实验是 F0.6 上游合并演练的预注册：先固定当前 fork head、后续提交 `9e2066aef7ef7e20c142ad7bd3303138a4304c93`、测试语料、人工计时方法、10 个冲突路径 / 8 person-hours / 5000 非生成变更行上限，以及 F0.1–F0.5 的完整回归矩阵。只有 F0.1–F0.7 全部关闭，才创建正式引擎仓库和产品路线。
+`F0-SOURCE-FEASIBILITY` 的 F0.1–F0.6 已在冻结协议下关闭为 PASS；F0.6 同时保留两次 harness failure。下一项授权实验是 F0.7 macOS package and round-trip 的预注册：先固定 merged product/package/install identities、官方与独立配置快照、uninstall-with-official-installed 负控、official→F0→official 与 F0→official `.blend` fixtures、缺失 metadata 的 graceful degradation，以及签名/公证命令、凭证边界和成本，再允许首次 package/install mutation。只有 F0.1–F0.7 全部关闭，才创建正式引擎仓库和产品路线。

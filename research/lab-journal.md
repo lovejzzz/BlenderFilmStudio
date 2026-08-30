@@ -5899,3 +5899,19 @@ EEVEE生成231,205-byte PNG `9c2b1f98…`，decoded 640×360 RGBA、0 non-finite
 19份pretty self-hash回执与独立canonical audit hash全部复算通过。总formal bytes为2,002,944，monetary cost记录为本机owned-host `$0`（不虚构电费）；source `.blend` SHA `648ba4e5…`、OCIO SHA `24ec8184…`与官方Blender config digest `c97e9a5f…`前后不变。最终F0.5 verdict self hash为`a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71`，completion self hash为`7a5871ac…`，independent audit hash为`53e997ff…`。
 
 边界保持：F0.5只证明一个B01 job在本产品/主机上的headless preview/final、中断恢复、decoded pixels/passes与收据链；不证明animation、GPU、跨主机像素、cinematic quality、merge成本、package或production readiness。active gate转为F0.6 upstream merge drill preregistration：merge mutation前必须固定fork head、target `9e2066aef7ef7e20c142ad7bd3303138a4304c93`、test corpus、人工计时和10 paths / 8 person-hours / 5000 non-generated lines ceilings，并保证F0.1–F0.5已通过fixture不回归。
+
+## J-476 · F0.6 固定 Blender v5.2.1 合并与完整回归 PASS
+
+Date: 2026-08-30 · Type: F0.6 PINNED UPSTREAM MERGE DRILL PASS · Host: macOS 25.6.0 / Apple M2 Max / 64 GiB · Merge conflicts: 0 · Manual person-hours: 0 · Attempt-03 formal product starts: 4
+
+F0.6在首次merge mutation前固定fork head `b47eae224b6d3e71559b55df85fd20ae87d3f92b`、官方target `9e2066aef7ef7e20c142ad7bd3303138a4304c93`、完整F0.1–F0.5 regression matrix、计时方法与10 conflict paths / 8 person-hours / 5000 non-generated changed lines上限。`git merge --no-commit --no-ff`自动完成，无unmerged path、无人工编辑；最终merge commit为`fa1b578bb421bbc82b3106b7d4223e11e65fae1d`，依赖固定为`a76ef917b4849ba2b1b1deb1a643e131a884a63b`。相对target的fork surface保持16 paths、841 additions、68 deletions、909 changed lines，没有因merge扩大。
+
+fresh build在外部root运行`make BUILD_DIR=<build-f0.6-merge-drill> NPROCS=12`，616.26秒完成，peak RSS 2,049,589,248 bytes，源码/依赖前后exact且clean。产物是arm64 `Film Studio Engine F0.app`，version `5.2.1 LTS`、build `fa1b578bb421`、bundle id `studio.ainativefilm.f0`，binary SHA-256 `58d5c984c58d986d3cf44622ad5876052a67890d0b077dafd4977f6e2b24a71d`。构建后为维持160 GiB正式启动门，只删除build root中可重新生成且与最终product分离的`source/blender` object directory；源码、bundle与全部证据保留，disk readmission另有收据。
+
+attempt-01先保留两次zero-start preflight拒绝，随后F0.1–F0.3六次产品进程通过；F0.4第七次启动因proposal/approval URI仍指向旧`regression/f04`而不是fresh `regression-attempt-02/f04`退出。该root最终保持`F04_EVIDENCE_ROOT_BINDING` FAIL，verdict self hash `db38cc8ea3d27202b6d8df7b26eca74140ec714b5bb9bf8cc40e0ebe074160bc`，没有same-ID repair。
+
+attempt-02纠正path binding后完成十次fresh-admitted产品启动：F0.1–F0.3全部PASS；F0.4 B01/B02 canonical BuildPlan、两份`.blend`、四个负控、proposal inspection与independent product audit全部PASS。aggregate唯一失败是JavaScript `JSON.stringify`按object insertion order比较provenance；manifest和expected的version/buildHash/buildBranch/buildPlatform四个name/value精确相同。该root仍按协议保持`F04_PROVENANCE_OBJECT_KEY_ORDER` FAIL，verdict self hash `4b2d08355c22a27cfc61b19b14dbcf97d0d1daf8927e682d7d6372ae7af669cd`。
+
+attempt-03在工具创建前冻结只允许sorted-key exact provenance reaggregation和不变F0.5 profile。zero-product独立audit精确绑定attempt-02十份admission/process receipts、B01/B02 manifests/blends、canonical plans、四项negative controls、proposal与independent audit，14项checks全部PASS。随后合并产品完成fresh F0.5：四次产品启动、三次renderer、两次render call；EEVEE PNG为`3b1ddf77…`，Cycles multilayer EXR为`46b20539…`，受控SIGTERM发生在render call前，tampered receipt与insufficient disk均zero-additional-start拒绝，恢复只执行FINAL。独立OIIO/NumPy audit验证Combined/Depth/Normal以及额外Vector/CryptoObject passes；peak RSS 443,023,360 bytes，formal output 1,912,832 bytes，source blend、OCIO、merged source和official config digest均不变。
+
+最终F0.6 verdict为PASS，self hash `e67b9b942f772b9aef096c4b5cd988dfac7be2e1a3bfec7ad5a28a51111693d3`，evidence commit `41b5e995`已推送。边界保持：本gate只证明固定v5.2.1 interval上的merge/build/F0.1–F0.5 regression成本低于冻结上限；不证明package、签名、公证、安装/卸载隔离或`.blend`双向往返。active gate转为F0.7；首次package/install mutation前必须preregister unsigned package identity/destination、official与F0 config/cache snapshots、uninstall-with-official-installed负控、official→F0→official与F0→official fixtures、missing metadata degradation，以及不含secret的signing/notarization command/cost boundary。
