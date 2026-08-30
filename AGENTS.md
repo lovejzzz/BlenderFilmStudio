@@ -62,6 +62,16 @@ Do not retry LFS, delete/recreate/rename the fork, mutate another ref, create a
 release, sign/notarize/distribute a DMG, or begin Phase B without a new explicit
 authorization and versioned protocol.
 
+The next prepared gate is PB.1 validation-only, versioned in
+`research/2026-08-30-ai-native-studio-pb1-validation-only-authorization-request-v0.2.zh-CN.md`
+and `specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json`.
+It binds live `main=4061e12b…` while retaining `fa1b578b…` as its sole parent
+and F0 product-code identity. It is not authorized. General permission to
+continue does not authorize the formal PB.1 roots, engine clone/LFS
+materialization, dependency clone, native build or product starts. Await the
+exact bounded owner authorization in v0.2. Even if granted, it permits no
+engine source edit or remote write and does not authorize PB.2–PB.7.
+
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
 and maintenance reference, not the source baseline. The fallback is an external

@@ -177,6 +177,10 @@ both a research notebook and an executable evidence base. Read this page,
     [`verdict.json`](./experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/verdict.json)
     and [`audit.json`](./experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json)
     — accepted C1 publication, exact one-ref update and independent 59/59 audit.
+13. [`research/2026-08-30-ai-native-studio-pb1-validation-only-authorization-request-v0.2.zh-CN.md`](./research/2026-08-30-ai-native-studio-pb1-validation-only-authorization-request-v0.2.zh-CN.md)
+    and [`specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json`](./specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json)
+    — exact authorization boundary for a no-source-edit/no-engine-write PB.1
+    history, identity, license and clean-build validation.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
@@ -245,11 +249,13 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next useful checkpoint is a separate owner decision on Phase B. C1 closed
-source publication compatibility only; PB.1–PB.7 remain frozen in the post-F0
-charter and source mutation is still unauthorized. Any proposed Phase B start
-must version its implementation protocol and keep release/signing/notarization/
-distribution decisions separate.
+The next useful checkpoint is an explicit owner decision on the prepared PB.1
+validation-only request. It permits only one read-only public-engine clone,
+local-only dependency/LFS materialization, one clean native build, at most two
+zero-render identity/configuration starts and research evidence publication.
+It permits no engine source edit or remote write and does not start PB.2–PB.7.
+The exact authorization sentence is stored in
+`specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json`.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

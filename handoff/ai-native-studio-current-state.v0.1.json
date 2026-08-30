@@ -176,6 +176,24 @@
     "correctionAuthorized": true,
     "phaseBMutationAuthorized": false
   },
+  "phaseBPreparation": {
+    "status": "PB1_VALIDATION_ONLY_BLOCKED_AWAITING_EXPLICIT_OWNER_AUTHORIZATION",
+    "gate": "PB.1",
+    "mode": "VALIDATION_ONLY_NO_ENGINE_SOURCE_MUTATION_NO_ENGINE_REMOTE_WRITE",
+    "document": "research/2026-08-30-ai-native-studio-pb1-validation-only-authorization-request-v0.2.zh-CN.md",
+    "documentSha256": "85c691272267d61053ac0ab9c0b03aa54aa44eeec1057ab0db07f702969078dd",
+    "machineContract": "specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json",
+    "machineContractSha256": "333944ee8d6ee8945cebd0278c5ce3f410b16342dda29e4d0d666f1a54b26ec7",
+    "publicationHead": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "f0CodeIdentityParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+    "authorized": false,
+    "maximumNativeBuildsIfAuthorized": 1,
+    "maximumProductStartsIfAuthorized": 2,
+    "maximumRendersIfAuthorized": 0,
+    "engineSourceEditsAuthorized": 0,
+    "engineRemoteWritesAuthorized": 0,
+    "pb2ThroughPb7Authorized": false
+  },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
     "F0.1": "PASS",
@@ -486,7 +504,9 @@
     "specs/ai-native-studio-repository-publication-c1-execution.v0.4.json",
     "research/2026-08-30-film-engine-publication-c1-pass.md",
     "experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/verdict.json",
-    "experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json"
+    "experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json",
+    "research/2026-08-30-ai-native-studio-pb1-validation-only-authorization-request-v0.2.zh-CN.md",
+    "specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json"
   ],
   "firstCommands": [
     "git status --short",
@@ -500,7 +520,8 @@
     "cat experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json",
     "cat experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/verdict.json",
     "cat experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json",
-    "obtain a new explicit authorization and versioned protocol before any Phase B source mutation"
+    "cat specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json",
+    "obtain the exact bounded PB.1 validation-only authorization before creating formal roots, cloning, building or starting the product"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -533,13 +554,15 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PHASE_B_EXPLICIT_AUTHORIZATION",
-    "result": "An explicit owner decision authorizing or declining a separately versioned Phase B implementation protocol",
+    "gate": "PB1_VALIDATION_ONLY_EXPLICIT_AUTHORIZATION",
+    "result": "An explicit owner decision authorizing or declining the v0.2 PB.1 validation-only protocol",
     "requiredArtifacts": [
-      "a new versioned protocol selecting a bounded first Phase B gate",
-      "explicit permission for the exact source mutation surface and remote update policy",
-      "preserve the accepted C1 publication commit and retained failures",
-      "keep release, signing, notarization and DMG distribution as separate authorization decisions"
-    ]
+      "one public engine read-only clone at exact main 4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+      "local-only LFS materialization and exact dependency clone with zero network LFS transfer",
+      "one clean native arm64 build and at most two zero-render identity/configuration starts",
+      "research evidence commit and push only",
+      "zero film-engine source edits, commits, refs, tags, releases, signing, notarization, DMG actions or PB.2-PB.7 work"
+    ],
+    "exactAuthorizationTextSource": "specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json#exactRequestedAuthorizationTextZhCN"
   }
 }

@@ -40,6 +40,8 @@ const documents = [
   ['15', 'C1 execution v0.4', 'owner exact授权、三路径、ordinary blobs与generated-main lease。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-repository-publication-c1-execution.v0.4.json'],
   ['16', 'C1 publication outcome', 'main 4061e12b；single parent；一次ref update；LFS 0。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-film-engine-publication-c1-pass.md'],
   ['17', 'C1 independent audit', 'fresh local/remote clones、live API与59/59独立检查。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json'],
+  ['18', 'PB.1 validation request', 'no-source-edit/no-engine-write首门与exact owner授权句。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-ai-native-studio-pb1-validation-only-authorization-request-v0.2.zh-CN.md'],
+  ['19', 'PB.1 machine contract', '4061/fa1b双层identity、一次build、2 starts、0 renders。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json'],
 ];
 
 const inherited = [
@@ -68,7 +70,7 @@ export default function AiNativeStudioHandoffPage() {
         </div>
         <aside className="handoff-state">
           <header><span>PROGRAM STATE</span><b>F0.1–F0.7 PASS</b></header>
-          <div className="handoff-state-main"><small>NEXT CHECKPOINT</small><strong>PB</strong><h2>EXPLICIT PHASE B<br />OWNER DECISION</h2></div>
+          <div className="handoff-state-main"><small>NEXT CHECKPOINT</small><strong>PB.1</strong><h2>VALIDATION ONLY<br />OWNER DECISION</h2></div>
           <dl><div><dt>REPO</dt><dd>lovejzzz/film-engine</dd></div><div><dt>LIVE MAIN</dt><dd>4061e12bd45a</dd></div><div><dt>ONLY PARENT</dt><dd>fa1b578bb421</dd></div><div><dt>C1 AUDIT</dt><dd>59 / 59 PASS</dd></div></dl>
           <footer>C1 PASS · LFS 0 · REF UPDATE 1</footer>
         </aside>
@@ -83,7 +85,7 @@ export default function AiNativeStudioHandoffPage() {
           <article><span>01</span><h3>读入口</h3><code>START_HERE.md</code><p>确认目标与禁区，不从旧 B62 继续。</p></article>
           <article><span>02</span><h3>做预检</h3><code>preflight-f0-source-host.mjs</code><p>先获得 ACCEPTED 或 BLOCKED 事实。</p></article>
           <article><span>03</span><h3>核验 F0 结论</h3><code>F0.7-…-attempt-05</code><p>确认 7/7 PASS 与 attempts 01–04 retained。</p></article>
-          <article><span>04</span><h3>读取当前边界</h3><code>PHASE B</code><p>C1已通过；source mutation仍需新授权。</p></article>
+          <article><span>04</span><h3>读取当前边界</h3><code>PB.1 VALIDATION</code><p>一次build；0 engine edits/writes；仍需授权。</p></article>
         </div>
       </section>
 
@@ -96,7 +98,7 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-map" id="map">
         <div className="section-index">02 / REPOSITORY MAP</div>
-        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> SEVENTEEN AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议、修正链、授权请求与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
+        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> NINETEEN AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议、修正链、授权请求与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
         <div className="handoff-docs">{documents.map(([id,title,detail,href]) => <a href={href} target="_blank" rel="noreferrer" key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>OPEN ↗</b></a>)}</div>
         <div className="handoff-storage"><span>REPOSITORY BOUNDARY</span><div><code>BlenderFilmStudio</code><b>rules · protocols · evidence · site</b></div><i>≠</i><div><code>external F0 workspace</code><b>source · dependencies · builds</b></div></div>
       </section>
@@ -110,9 +112,9 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-checkpoint">
         <span>LATEST CLOSED CHECKPOINT</span>
-        <h2>Public fork C1 已发布；Phase B 尚未授权。</h2>
-        <p>Live main 4061e12b · only parent fa1b578b · push/ref/LFS 1/1/0 · releases 0 · Phase B 0 · independent audit 59 / 59</p>
-        <div><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json" target="_blank" rel="noreferrer">读取 C1 Audit ↗</a><Link href="/journal">查看实验日志 →</Link></div>
+        <h2>PB.1 validation-only 已冻结；等待明确授权。</h2>
+        <p>Baseline 4061e12b · F0 parent fa1b578b · engine edits/writes 0/0 · planned builds/starts/renders 1/2/0 · PB.2–PB.7 unauthorized</p>
+        <div><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json" target="_blank" rel="noreferrer">读取 PB.1 Contract ↗</a><Link href="/journal">查看实验日志 →</Link></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · New Machine Handoff</b></div><p>One repository · One source identity · Seven falsifiable gates</p><Link href="/ai-native-studio-design">返回 Design Doc →</Link></footer>

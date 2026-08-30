@@ -6029,3 +6029,13 @@ v0.4 prereg/tool commit `09c26b19ef7caa931afd076f3ef932a87cb3df4c`先推送并�
 lease recheck仍为`08bed5b5…`后，从显式empty hooks的bare副本只发起一次`--force-with-lease=refs/heads/main:08bed5b5…` push并成功。fresh GitHub no-smudge clone直接materialize两份完整binary，live repo仍是public `blender/blender` fork、仅`main`、0 tag/PR/release。Runner verdict self hash为`f20c18aa…`；不import runner的独立auditor复算对象、路径、两次clone、exact command、live API与全部副作用，59/59 PASS，self hash `71d6e9d581c65fd56242385b18e4aa9c3287d771d583931662571154c6b41cd6`。
 
 本次新增副作用仅Git push attempt / main ref update = `1 / 1`；repository create、LFS upload、other ref、tag、release、Phase B、delete/recreate/rename全部0。C1关闭source publication compatibility，不授权Phase B、release、签名、公证或DMG分发。
+
+## J-488 · PB.1 validation-only 授权请求
+
+Date: 2026-08-30 · Type: PHASE B AUTHORIZATION REQUEST · Engine source mutations / engine remote writes / native builds: 0 / 0 / 0
+
+一般“继续”不足以跨越冻结Phase B gate，因此先把最小PB.1收缩为validation-only：验证live public fork full history、C1/F0双层source identity、GPL/notices、0 generated products、独立品牌和一次clean native build，不做功能源码修改。C1使live HEAD合法变为`4061e12b…`，v0.2保留其sole parent `fa1b578b…`作为F0 product-code identity，不回写charter v0.1。
+
+只读盘点确认live repo仍为public `blender/blender` fork、single main `4061e12b…`、0 tag/PR/release；完整图为162,918 reachable commits、5 fork commits、merge base `9e2066ae…`。相对merge base为17 paths、839/64 text additions/deletions和2 binary paths；C1相对`fa1b…`仍exact三路径且0 code/config change。retained dependency为clean `a76ef917…`；F0 inventory已下载全部6,671 LFS paths并绑定815,089,197 bytes，PB.1只允许本地复用、0 network LFS download/upload。host read-only admission在172 GiB free下通过。
+
+机器合同冻结一次public engine read-only clone、一次local LFS materialization、一次local dependency clone、一次fresh native build、最多2 product starts / 0 renders、9项negative controls、12 GiB external / 32 MiB evidence ceilings。`film-engine` source edits/commits/refs/tags、release、签名、公证、DMG和PB.2–PB.7继续false。下一动作只等待owner逐项授权；在此之前不创建formal PB.1 roots、不clone/build/start product。
