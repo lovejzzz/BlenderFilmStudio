@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "bfs.f0.7.toolFreeze.v0.1",
+  "status": "FROZEN_BEFORE_FIRST_ATTEMPT_05_PACKAGE_MUTATION",
+  "observedAtUtc": "2026-08-30T07:50:46Z",
+  "preFreezeCommit": "f9eef3bedde2021619d40fae3e023a7fd1feb1ae",
+  "newAttemptCorrection": "Bind both install/uninstall receipt fields to existing variables and add an explicit ESLint no-undef gate; no thresholds, semantic rules, package identities or process matrix changed.",
+  "tools": {
+    "roundtripStage": {
+      "uri": "tools/roundtrip-stage.py",
+      "sha256": "6d5789e9b7d6624ff443d69ecfad92e717b1b653f0d0208212c7158a7f0b220b"
+    },
+    "runner": {
+      "uri": "tools/run-f07.mjs",
+      "sha256": "9e4d3cbc45df54995fbd2dda7551960fa1a6f179ccb35ffb0ab467abf1b00dd7"
+    },
+    "independentAudit": {
+      "uri": "tools/audit-f07.mjs",
+      "sha256": "29fa8a376c79bd76b93f8095b251748af4fafd7d80805c23803dde6ad6e96eb4"
+    }
+  },
+  "frozenInputs": {
+    "protocolSha256": "54f98eaed0a340af9659aae35a29d0bb8ac9beea0086dfb97991a584ad5c9fb4",
+    "preregistrationSha256": "d7ae5486950570cd6b25805192f00c0cb8da065bf12eb89d3a649bd0db318bb8",
+    "approvalSha256": "6325ae28a55d58cdfe611b3fdeb8b5346773e9f01038ae16f9978a40f05cf63f"
+  },
+  "crossBoundPackage": {
+    "manifestFileSha256": "6a32cedbf248dec0abfdddb100665b608a2855c314ed67182a6d2d3d651d600f",
+    "manifestHash": "fc3c6dbd7188958b5d92608675e16dad28ab97d3413df5aa43a4aadb1fa3d6e8",
+    "dmgSha256": "20a8aefd177fe41190b95ea7bbe7e75fb828ecd7ee5d9b7ffcd2c336a1f34a42"
+  },
+  "staticChecks": {
+    "nodeRunnerSyntax": "PASS",
+    "nodeIndependentAuditSyntax": "PASS",
+    "pythonRoundtripStageCompile": "PASS",
+    "eslintVersion": "9.39.4",
+    "eslintNoUndefCommand": "./node_modules/.bin/eslint --no-ignore --rule 'no-undef: error' <runner> <independent-audit>",
+    "eslintNoUndef": "PASS",
+    "generatedPycacheRetained": false
+  },
+  "attempt05PackageMutationsBeforeFreeze": 0,
+  "nativeRoundtripStartsBeforeFreeze": 0,
+  "freezeHash": "43239d18d7aa43f91be5a63672af2b8750a18acea750049c0d354d2e023a19e0"
+}
