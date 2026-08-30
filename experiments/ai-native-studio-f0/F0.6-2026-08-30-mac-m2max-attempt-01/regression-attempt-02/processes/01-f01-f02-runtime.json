@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "bfs.f0.6.nativeProcessReceipt.v0.1",
+  "id": "f01-f02-runtime",
+  "formalProductStart": 1,
+  "status": "PASS",
+  "startedAtUtc": "2026-08-30T06:28:43Z",
+  "endedAtUtc": "2026-08-30T06:28:47Z",
+  "command": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.6-merge-drill/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+  "args": [
+    "--background",
+    "--factory-startup",
+    "--python-exit-code",
+    "90",
+    "--python-expr",
+    "import bpy,json;kinds=('CONFIG','SCRIPTS','DATAFILES','EXTENSIONS');paths={kind:bpy.utils.user_resource(kind,create=True) for kind in kinds};runtime={'version':bpy.app.version_string,'buildHash':bpy.app.build_hash.decode(),'buildBranch':bpy.app.build_branch.decode(),'buildPlatform':bpy.app.build_platform.decode(),'binaryPath':bpy.app.binary_path,'paths':paths};print('F06_RUNTIME='+json.dumps(runtime,sort_keys=True),flush=True);bpy.context.preferences.view.show_splash=not bpy.context.preferences.view.show_splash;saved=sorted(bpy.ops.wm.save_userpref());reset=sorted(bpy.ops.wm.read_factory_userpref());saved_after=sorted(bpy.ops.wm.save_userpref());print('F06_CONFIG_ACTIONS='+json.dumps({'saved':saved,'reset':reset,'savedAfterReset':saved_after},sort_keys=True),flush=True)"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "timedOut": false,
+  "timing": {
+    "realSeconds": 3.64,
+    "userSeconds": 1.27,
+    "systemSeconds": 0.26,
+    "maximumResidentSetSizeBytes": 269565952,
+    "observedElapsedSeconds": 3.653111584
+  },
+  "limits": {
+    "maximumSeconds": 180,
+    "maximumResidentSetSizeBytes": 8589934592
+  },
+  "logs": {
+    "stdout": {
+      "uri": "processes/01-f01-f02-runtime.stdout.log",
+      "bytes": 1935,
+      "sha256": "823a67a3304cc6043a9d37fd0b5bc605b74d9f20376318f7ecef9fe965bffc3d"
+    },
+    "stderr": {
+      "uri": "processes/01-f01-f02-runtime.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "timing": {
+      "uri": "processes/01-f01-f02-runtime.timing.log",
+      "bytes": 753,
+      "sha256": "78216a73f858952b2f20b6f35692f29f76253e2521b7c228b262b09602b5a62e"
+    }
+  },
+  "processHash": "e25de1b0146c223097a5392cf9dbe8dc797da70ed17d896f6c28a8dec4170b61"
+}

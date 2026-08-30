@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioF0.6CorrectionProtocol.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.6",
+  "experimentId": "F0.6-2026-08-30-mac-m2max-attempt-02",
+  "status": "PREREGISTERED_BEFORE_CORRECTIVE_TOOL_EDIT",
+  "question": "Does the unchanged v5.2.1 merged product retain every frozen F0.1-F0.5 conformance fixture when the regression evidence root is bound consistently?",
+  "crossBoundFailure": {
+    "experiment": "F0.6-2026-08-30-mac-m2max-attempt-01",
+    "verdictFileSha256": "5aff3c35e14cb019904e97b566c0247d61752c7fec62417fecf36836999c93f8",
+    "regressionFileSha256": "37ece44518712d47e86bd3568cb766387e91b17455d9997d15da4d19f0ac340b",
+    "failureId": "F04_EVIDENCE_ROOT_BINDING",
+    "formalProductStarts": 7,
+    "sameIdRepair": false
+  },
+  "immutableMergeAndBuildInputs": {
+    "mergeCommit": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+    "mergeReceiptFileSha256": "bd5a829d968147e5fe6d80b2fb7ff0fd9734ce349b0745c77a165655b7c7aefb",
+    "buildReceiptFileSha256": "7d5662596320b910dc0b0296884560228a13604100bc9cbff1b9b0cc1b8e7979",
+    "productBinarySha256": "58d5c984c58d986d3cf44622ad5876052a67890d0b077dafd4977f6e2b24a71d",
+    "version": "5.2.1 LTS",
+    "buildHash": "fa1b578bb421",
+    "rerunMerge": false,
+    "rerunBuild": false
+  },
+  "boundedCorrection": {
+    "allowed": "Derive the F0.4 evidence root, proposal URI, approval URI and embedded output URI from one repository-relative path.",
+    "notAllowed": [
+      "Product source changes",
+      "Product binary changes",
+      "SceneSpec or BuildPlan changes",
+      "Semantic hash changes",
+      "Render profile or threshold changes",
+      "Use of attempt-01 partial outputs as attempt-02 PASS evidence"
+    ]
+  },
+  "frozenRegressionMatrix": {
+    "uri": "../F0.6-2026-08-30-mac-m2max-attempt-01/regression-matrix.json",
+    "fileSha256": "ee839e9abfae4aedb498e7832802cbe184d8fe52ddb74f13d5665366cef0ca9e",
+    "identityAdaptationRuleUnchanged": true
+  },
+  "requiredEvidence": [
+    "host-readmission.json",
+    "tool-freeze.json",
+    "formal-start.json",
+    "regression/f01-f02.json",
+    "regression/f03/receipt.json",
+    "regression/f04/receipt.json",
+    "regression/f05/verdict.json",
+    "regression.json",
+    "verdict.json"
+  ],
+  "claimCeiling": "A PASS validates only this unchanged merged binary and frozen local conformance corpus on this host."
+}
