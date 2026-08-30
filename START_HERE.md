@@ -1,6 +1,6 @@
 # BlenderFilmStudio — new machine cold start
 
-> **Current decision:** F0.1 through F0.6 passed on the admitted M2 Max host.
+> **Current decision:** F0.1 through F0.7 passed on the admitted M2 Max host.
 > F0.4 attempts 01 and 02 remain retained `FAIL` results. Attempt-01 proved
 > canonical-exact B01/B02 BuildPlans and all four negative controls, then found
 > a missing OCIO launch binding. Attempt-02 fixed only that binding and built
@@ -10,8 +10,12 @@
 > a retained preview setup `FAIL`; attempt-02 preserved the same thresholds and
 > closed F0.5 as `PASS`. F0.6 attempts 01 and 02 remain retained harness
 > `FAIL` results; attempt-03 preserved them, passed the fixed merge ceilings and
-> the complete F0.1–F0.5 regression corpus, and closed F0.6 as `PASS`. F0.7 is next; do not
-> assume the fork is viable until F0.1-F0.7 all close.
+> the complete F0.1–F0.5 regression corpus, and closed F0.6 as `PASS`. F0.7
+> attempts 01–04 remain retained `FAIL` results; attempt-05 produced the
+> unsigned research DMG, passed isolated install/uninstall and two frozen
+> same-host `.blend` round trips, and closed F0.7 as `PASS`. The direct thin
+> fork is now supported for a product prototype, within the recorded claim
+> ceiling.
 
 This is the authoritative handoff for a fresh Codex session. The repository is
 both a research notebook and an executable evidence base. Read this page,
@@ -24,12 +28,11 @@ both a research notebook and an executable evidence base. Read this page,
 - **Pinned engine baseline:** official `v5.2.0` at
   `fbe6228777e7d9afefcd61a413844e790ae75db7`; the admitted F0.6 merge target is
   official `v5.2.1` commit `9e2066aef7ef7e20c142ad7bd3303138a4304c93`.
-- **Active experiment:** `F0-SOURCE-FEASIBILITY`, F0.7 macOS package and
-  `.blend` round-trip preregistration. No package/install mutation is authorized
-  before paths, identities, configuration snapshots, round-trip matrix,
-  uninstall negative control and signing/notarization evidence are frozen.
-- **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`
-  and `F0.6 PASS`. Two clean official builds reported Blender
+- **Completed experiment:** `F0-SOURCE-FEASIBILITY`. All seven gates are
+  `PASS`; the next checkpoint is a separately authorized formal repository and
+  Phase B product-prototype charter, not an eighth F0 gate.
+- **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
+  `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
   not byte-for-byte reproducible; the bounded differences are recorded in
   `F0.1-2026-08-29-mac-m2max-attempt-07/comparison.json`.
@@ -90,6 +93,19 @@ both a research notebook and an executable evidence base. Read this page,
   all ten prior F0.1–F0.4 processes, and the unchanged product then passed the
   full four-start F0.5 corpus. Verdict self hash is
   `e67b9b942f772b9aef096c4b5cd988dfac7be2e1a3bfec7ad5a28a51111693d3`.
+- **Retained F0.7 attempts 01–04:** attempt-01 timed out while creating the DMG;
+  attempt-02 exposed a pre-save depsgraph snapshot defect and official-config
+  empty-directory drift; attempts 03/04 completed both round trips but failed
+  closed while assembling the final install receipt because of two distinct
+  undefined variable names. Every root and self-hashed verdict remains public.
+- **Accepted F0.7 attempt-05:** the retained 341,069,106-byte unsigned DMG has
+  SHA-256 `20a8aefd…`; `hdiutil verify` and its read-only mounted payload passed.
+  Six product starts preserved core scene semantics at `139852cf…`; typed F0
+  metadata was preserved exactly and absent optional metadata degraded
+  gracefully. The exact generated install target was removed, official Blender
+  and both configuration namespaces remained unchanged, and an independent
+  103-check audit passed. Verdict self hash is
+  `626ea953fefd6fb1b8c3044248c653c7ce0cbc18a69a2e8eff5bb37e78a2d94a`.
 - **Inherited evidence:** B01-B62 cover structured scene compilation, Blender
   execution, safety/admission, pixels, production passes, cost, recovery and a
   three-shot cinematic attempt. These results are evidence, not a claim that
@@ -97,8 +113,9 @@ both a research notebook and an executable evidence base. Read this page,
 - **Most important retained rejection:** B62's latest camera holdout passed all
   technical gates but failed the frozen composition threshold at frame 288.
   Source control does not replace direction or taste.
-- **Unproven:** packaging/install/uninstall isolation, signing/notarization path
-  and official↔F0 `.blend` round trips.
+- **Still unproven:** Developer ID signing, notarization, Gatekeeper acceptance,
+  public distribution, production support, cross-version/platform
+  generalization and legal sufficiency. F0.7 made no such claim.
 
 ## Read in this order
 
@@ -156,18 +173,17 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. F0.1-F0.6 are closed. Before any F0.7 package or install mutation, create a
-   new immutable evidence root and cross-bind F0.6 attempt-03 verdict
-   `e67b9b94…`. Freeze the unsigned package identity and destination, official
-   Blender/F0 configuration snapshots, uninstall-with-official-installed
-   negative control, both `.blend` round-trip fixtures, graceful-degradation
-   rule, and the signing/notarization commands, credential boundary and cost.
+5. F0.1-F0.7 are closed. Verify the accepted F0.7 attempt-05 verdict and audit
+   before planning new work. Do not mutate the retained DMG, accepted evidence
+   root or attempts 01–04. The next product phase needs a new preregistration
+   and explicit repository charter.
 
 ## What not to do
 
 - Do not restart B62 or create a new rendering side quest as the main task.
 - Do not clone Blender inside this repository or commit build products.
-- Do not begin a permanent engine repository before all F0 gates have verdicts.
+- Do not create or publish a permanent engine repository without an explicit
+  post-F0 repository charter and authorization.
 - Do not copy Bforartists as a second upstream; inspect it as a reference.
 - Do not give a model unrestricted `bpy`, shell or filesystem authority.
 - Do not hide failed builds, relax thresholds after seeing results, or overwrite
@@ -179,23 +195,21 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next machine should push one small, auditable F0.7 preregistration checkpoint containing:
+The next machine should prepare one small, auditable post-F0 decision package:
 
-- a unique F0.7 evidence root that cross-binds accepted F0.6 attempt-03 and its
-  two retained failures;
-- exact merged product, package and official-Blender identities plus fresh host
-  and disk admission;
-- frozen install/uninstall paths and before/after configuration-tree digests;
-- official→F0→official and F0→official `.blend` round-trip fixtures with
-  semantic checks and an explicit missing-metadata degradation rule;
-- signing/notarization commands, credentials boundary and expected cost without
-  storing secrets;
-- a fallback trigger if independent distribution cannot be made safe and
-  explainable;
-- a journal entry and, if useful, a website update.
+- cross-bind all seven accepted verdicts and every retained F0 failure;
+- state that direct thin fork is supported only for a product prototype;
+- define the proposed `film-studio-engine` repository boundary, GPL source and
+  notice obligations, upstream remote policy and release artifact policy;
+- freeze the Phase B vertical slice around B01/B02 and the B62 three-shot case,
+  including typed proposal, approval, preview, receipt and human-review gates;
+- keep Developer ID signing/notarization and public distribution as separate,
+  credential-dependent release work;
+- require explicit authorization before creating or publishing the new
+  repository.
 
-The scientific result may be `PASS`, `FAIL`, or `BLOCKED`. “Still working” is
-not a gate verdict; “failed with preserved evidence and a bounded next test” is.
+F0 is finished. New work must start with a new versioned contract rather than
+quietly extending the completed F0 evidence.
 
 ## Public routes
 

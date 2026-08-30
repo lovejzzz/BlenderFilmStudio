@@ -313,7 +313,7 @@ film-studio/
 
 任何一项失败都保留原始证据，并可能改变架构。例如 F0.6 成本过高时，退回“未修改 Blender + 外部 Studio shell”；不以愿景为由继续扩大分叉。
 
-截至 2026-08-30，F0.1–F0.6 已 PASS，所有失败仍保留。F0.4 attempt-03 以 manifest v0.3 把 semantic structure 与 exact product provenance 分层，在保留前两次失败的同时通过 B01/B02 隔离构建、两份 `.blend` 独立重开和四个 separation attacks。F0.5 attempt-02 不改 profile 或阈值，完成 EEVEE PNG、Cycles multilayer EXR、受控中断、receipt-only final recovery 和独立 decoded pixel/pass audit。F0.6 把 thin fork 合并到固定 Blender v5.2.1 target：0 个人工冲突路径、0 person-hours、909 行非生成 fork patch；attempt-03 保留两次 harness 失败后让冻结 F0.1–F0.5 corpus 全部保持 PASS。F0.6 PASS 不证明 package、独立发行或生产就绪；active gate 转为 F0.7 macOS package and round-trip preregistration。
+截至 2026-08-30，F0.1–F0.7 已全部 PASS，所有失败仍保留。F0.4 attempt-03 以 manifest v0.3 把 semantic structure 与 exact product provenance 分层，在保留前两次失败的同时通过 B01/B02 隔离构建、两份 `.blend` 独立重开和四个 separation attacks。F0.5 attempt-02 不改 profile 或阈值，完成 EEVEE PNG、Cycles multilayer EXR、受控中断、receipt-only final recovery 和独立 decoded pixel/pass audit。F0.6 把 thin fork 合并到固定 Blender v5.2.1 target：0 个人工冲突路径、0 person-hours、909 行非生成 fork patch；attempt-03 保留两次 harness 失败后让冻结 F0.1–F0.5 corpus 全部保持 PASS。F0.7 attempt-05 在保留四次失败后验证341,069,106-byte unsigned DMG、read-only mount、isolated install/uninstall、官方配置隔离以及两条same-host `.blend` round trip；六个边界的core semantic hash exact，typed metadata exact preserved，independent audit 103 checks PASS。F0完成支持进入direct thin-fork产品原型，但不证明Developer ID签名、公证、Gatekeeper接受、公开发行、生产就绪或跨版本/平台通用性。
 
 ## 14. 阶段路线
 
@@ -382,7 +382,7 @@ film-studio/
 - 产品采用独立品牌，遵守 GPL，并把用户输出权利写入产品政策。
 - 默认采用 hybrid architecture，模型没有 unrestricted Blender 执行权。
 
-### 待 F0 决定
+### F0 后仍待决定
 
 - 最终产品名与品牌。
 - Film Workspace 先用 Python UI 还是直接创建原生 Editor。
@@ -406,4 +406,6 @@ film-studio/
 
 ## 20. 下一项授权实验
 
-`F0-SOURCE-FEASIBILITY` 的 F0.1–F0.6 已在冻结协议下关闭为 PASS；F0.6 同时保留两次 harness failure。下一项授权实验是 F0.7 macOS package and round-trip 的预注册：先固定 merged product/package/install identities、官方与独立配置快照、uninstall-with-official-installed 负控、official→F0→official 与 F0→official `.blend` fixtures、缺失 metadata 的 graceful degradation，以及签名/公证命令、凭证边界和成本，再允许首次 package/install mutation。只有 F0.1–F0.7 全部关闭，才创建正式引擎仓库和产品路线。
+`F0-SOURCE-FEASIBILITY` 的 F0.1–F0.7 已在冻结协议下全部关闭为 PASS。F0.7 attempt-05 的 verdict self hash 为 `626ea953fefd6fb1b8c3044248c653c7ce0cbc18a69a2e8eff5bb37e78a2d94a`；attempts 01–04 仍分别以 DMG timeout、pre-save depsgraph stale、两次 receipt variable-name failure 保留。协议的总体判定条件已满足，因此建议 direct Blender thin fork 进入有界产品原型。
+
+下一项授权工作不是新增 F0.8，而是先冻结 post-F0 repository/Phase B charter：交叉绑定全部七个 accepted verdict 与所有 retained failures；定义 `film-studio-engine` 的 GPL source/notices、upstream remote、release artifact 和 control-plane 边界；把 B01/B02 与 B62 三镜头 vertical slice 写成 typed proposal → approval → preview → receipt/recovery → human review 的可证伪合同。创建或公开永久仓库需要单独明确授权；Developer ID、notarization 与 public distribution 继续是独立、凭证相关的release gate。

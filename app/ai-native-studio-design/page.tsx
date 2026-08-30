@@ -90,7 +90,7 @@ const gates = [
   ['F0.4', '合同内嵌', 'BuildPlan canonical exact；B01/B02 隔离构建与 semantic/provenance 独立审计通过。', 'PASS'],
   ['F0.5', '渲染与收据', '无鼠标完成 EEVEE preview、Cycles EXR、像素/成本/失败收据。', 'PASS'],
   ['F0.6', '上游合并演练', 'v5.2.1：0 冲突路径、0 人工小时、909 行 patch；F0.1–F0.5 回归通过。', 'PASS'],
-  ['F0.7', '安装与往返', '可安装/卸载，签名与公证路径明确；`.blend` 往返和配置隔离通过。', 'PREREG'],
+  ['F0.7', '安装与往返', 'unsigned DMG 可验证；隔离安装/卸载、双向 `.blend` 往返和配置边界通过。', 'PASS'],
 ];
 
 const risks = [
@@ -246,7 +246,7 @@ export default function AiNativeStudioDesignPage() {
         <div className="section-index light">11 / PRIMARY SOURCES</div>
         <div className="ain-section-heading light"><div><p className="eyebrow"><span /> RESEARCH BASIS</p><h2>许可证决定边界。<br /><span>真实实验决定主张。</span></h2></div><p>外部来源用于确认源码、构建、架构、商标和许可证；产品可靠性结论只来自本仓库冻结协议下的真实 Blender 实验。</p></div>
         <ol className="ain-source-list">{sources.map(([author,title,href],index) => <li key={href}><span>{String(index + 1).padStart(2,'0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
-        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>F0.7 · MACOS PACKAGE AND ROUND-TRIP PREREGISTRATION</h3><p>F0.1–F0.6 已通过。F0.6 将 thin fork 合并到 Blender v5.2.1，0 个冲突路径、0 人工小时、909 行 fork patch，完整 F0.1–F0.5 回归保持 PASS；两次 harness failure 继续保留。下一步只能先冻结 package/install identity、官方与独立配置快照、uninstall 负控、双向 `.blend` fixtures、graceful degradation 与签名/公证证据，再允许首次 package mutation。</p><Link href="/ai-native-studio-handoff">打开新机器冷启动包 →</Link></div></div>
+        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>POST-F0 · REPOSITORY AND PHASE B CHARTER</h3><p>F0.1–F0.7 已全部通过。attempt-05 验证 341 MB unsigned DMG、隔离安装/卸载、六次 same-host round-trip starts、核心语义 exact、typed metadata 精确保留和 103-check independent audit；四次失败继续公开。下一步先冻结正式仓库的 GPL/release 边界与 B01/B02 + B62 vertical slice 合同，获得明确授权后再创建或发布仓库。签名、公证与公开发行仍是独立 release gate。</p><Link href="/ai-native-studio-handoff">打开完成态交接包 →</Link></div></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · Design Doc v0.1</b></div><p>Direction adopted · Implementation gated · Snapshot 2026-08-29</p><Link href="/ai-native-studio-handoff">新机器从这里开始 →</Link></footer>

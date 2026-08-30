@@ -9,9 +9,16 @@ Then read the machine-readable snapshot at
 
 ## Current operating goal
 
-Execute `F0-SOURCE-FEASIBILITY`: determine, with real Blender 5.2 source code
-and reproducible evidence, whether BlenderFilmStudio should become a thin fork
-of the official Blender engine or remain an external studio shell.
+`F0-SOURCE-FEASIBILITY` is complete: F0.1 through F0.7 all closed as `PASS`
+on the admitted M2 Max host. The measured result supports advancing the direct
+official-Blender thin fork into a product prototype; it does not prove public
+distribution, production readiness, cross-platform support, or autonomous
+filmmaking.
+
+Preserve the completed F0 evidence and prepare the next explicit decision
+checkpoint: repository charter, licensing/release boundary, Phase B vertical
+slice and its preregistered acceptance criteria. Do not create or publish a new
+permanent repository until that scope is explicitly authorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
@@ -49,6 +56,12 @@ F0 is complete only when every gate has an evidence root and an explicit
 result. If source ownership is not justified by measured UX/control benefits,
 or merge/package cost crosses the preregistered ceiling, recommend the external
 shell rather than expanding the fork.
+
+The accepted F0.7 root is
+`experiments/ai-native-studio-f0/F0.7-2026-08-30-mac-m2max-attempt-05`.
+It proves one unsigned local research DMG, isolated install/uninstall and two
+same-host `.blend` round trips. Attempts 01–04 remain retained failures. No
+Developer ID signing, notarization or Gatekeeper bypass was performed.
 
 ## Cold-start execution rules
 
