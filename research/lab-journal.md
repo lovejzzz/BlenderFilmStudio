@@ -5983,3 +5983,15 @@ Date: 2026-08-30 · Type: AUTHORIZATION BOUNDARY REFINEMENT · External mutation
 最终交接复核把笼统“first push”拆开为两个必须明示的副作用。F0 fork实际改变两个LFS品牌资产：icon OID `be94271b…` / 2,135,147 bytes与splash OID `5d8b343b…` / 565,997 bytes，总计2,701,144 bytes；它们需要上传到new fork LFS endpoint并可能产生owner storage/bandwidth计费。GitHub fork创建还会生成自己的`main`，要让产品default exact为`fa1b578b…`，必须先记录generated OID、确认fresh fork无owner-authored commit，再用显式`--force-with-lease`更新，不能用无lease force。
 
 新增human/machine authorization request列出唯一两项LFS allowlist、fresh-fork gates、exact owner/public/name/head/tree/parents和仍未授权动作。下一次用户授权必须明确包含fork creation、两个LFS对象与可能计费、lease-protected fresh-main update；一般“继续”不满足。没有执行GitHub create、push或LFS upload。
+
+## J-484 · `film-engine` owner 授权与首次发布工具冻结前记录
+
+Date: 2026-08-30 · Type: AUTHORIZED PUBLIC-FORK EXECUTION PREREGISTRATION · External creates/pushes/LFS uploads at freeze: 0 / 0 / 0
+
+owner在当前Codex任务中给出完整外部动作授权，并把v0.1请求名称从`film-studio-engine`明确改为`film-engine`。v0.2不回写父请求，只版本化名称、授权原文和执行边界；owner/public、upstream `blender/blender`、exact head `fa1b578b…`、tree `4d761fb7…`、两个LFS OID / 2,701,144 bytes、possible billing接受和fresh-main lease要求保持不变。签名、公证、unsigned DMG分发、release与Phase B mutation仍未授权。
+
+只读盘点先发现155 GiB free，低于通用F0新构建160 GiB门；owner授权清理后，只删除无open file且2026-07-20后未更新的Coursemapper Chrome device-profile cache `tutor-gbnf-v45-chrome`（22,044,484 KiB）。该可再生cache未进Trash、不能直接恢复；Hugging Face models、Codex runtimes、CoreSimulator、Blender source/builds与全部evidence未动。free space升至176 GiB，host check恢复`F0_HOST_PREFLIGHT_ACCEPTED`。
+
+实时GitHub只读门确认active login为`lovejzzz`、`lovejzzz/film-engine`为404 absent、owner没有`blender/blender` fork。local full-history source保持non-shallow、162,917 commits、单一`refs/heads/main`、exact head/tree/parents；两个LFS data objects的size与SHA-256 exact；repository-readiness 8/8负控重新通过。
+
+新增fail-closed runner与独立auditor。runner默认只读，显式`--execute`才允许一次fork create、两项allowlisted LFS push和一次绑定generated-main OID的`--force-with-lease` ref update；每个副作用后立即写exclusive receipt，任何失败保留repo/evidence且禁止delete/recreate。10项publication negative controls与LFS dry-run parser通过；两个脚本ESLint与Node syntax通过。正式外部mutation只能发生在本预注册提交推送、research worktree clean和实时preflight再次`ACCEPTED`之后。
