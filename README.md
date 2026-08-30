@@ -4,6 +4,16 @@ Researching a reproducible **AI → structured 3D scene → Blender → cinema m
 
 **Published report:** https://lovejzzz.github.io/BlenderFilmStudio/
 
+## Current checkpoint
+
+F0.1–F0.7 are complete. A no-external-write repository rehearsal also passed:
+the exact Film Studio Engine F0 head was grafted onto a non-shallow Blender Git
+graph, pushed only to a local `file://` bare repository, and independently
+audited 93/93. The recommended next topology is a public GitHub fork of
+`blender/blender` named `film-studio-engine`; creation and the first external
+push remain explicitly unauthorized until the owner approves them. Start with
+[`START_HERE.md`](START_HERE.md).
+
 ## Baseline 01
 
 - Snapshot date: 2026-08-25

@@ -15,10 +15,12 @@ official-Blender thin fork into a product prototype; it does not prove public
 distribution, production readiness, cross-platform support, or autonomous
 filmmaking.
 
-Preserve the completed F0 evidence and prepare the next explicit decision
-checkpoint: repository charter, licensing/release boundary, Phase B vertical
-slice and its preregistered acceptance criteria. Do not create or publish a new
-permanent repository until that scope is explicitly authorized.
+Preserve the completed F0 evidence and the completed no-external-write
+repository-readiness rehearsal. Attempt-01 and attempt-02 are retained harness
+failures; C2 attempt-03 is `PASS` with an independent 93/93 audit. It proves
+the exact F0 branch can be grafted onto a non-shallow Blender graph and pushed
+to a local `file://` bare repository. It did not create or mutate a GitHub
+repository.
 
 The post-F0 contract is frozen at commit
 `6a38ca3bdd93219ec6dcd001fa72143df7d80a10`:
@@ -27,6 +29,18 @@ and `specs/ai-native-studio-post-f0-phase-b.v0.1.json`. Do not edit v0.1 in
 place. The next action requires explicit repository owner, visibility,
 create-repository and first-push authorization; until then, no permanent
 repository or Phase B source mutation is allowed.
+
+The accepted repository-readiness root is
+`experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03`.
+Its runner verdict self hash is
+`dc1cc7682ae2dd1cf47160e385ada9067fbe1b02e684a8079069f27c020e5266`
+and independent audit self hash is
+`b841e519cd1d2ce55e2f373a50918b802e90b5244c8dcd7df38ae24fbc64273e`.
+The current F0 checkout is shallow and must never be described or pushed as a
+full-history standalone source. The recommended topology is an explicitly
+authorized public GitHub fork of `blender/blender`, owner `lovejzzz`, requested
+name `film-studio-engine`; the private standalone mirror remains blocked on
+full LFS transfer, billing and owner approval.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
@@ -77,6 +91,9 @@ Developer ID signing, notarization or Gatekeeper bypass was performed.
   `node scripts/preflight-f0-source-host.mjs`.
 - Keep Blender source, dependencies and builds outside this research repository.
   Never vendor a Blender checkout or generated build tree here.
+- Never use the current 1,165-commit shallow F0 checkout as the source of a
+  purported full-history remote. Read the repository-readiness v0.3 contract
+  and its retained failures before any authorized repository action.
 - Use official Blender source tag `v5.2.0`, commit
   `fbe6228777e7d9afefcd61a413844e790ae75db7`, until a versioned protocol
   amendment changes it.

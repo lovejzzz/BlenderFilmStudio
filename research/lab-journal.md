@@ -5941,3 +5941,37 @@ Date: 2026-08-30 · Type: POST-F0 PREREGISTRATION · Parent research commit: `46
 Phase B冻结PB.1 repository/source identity、PB.2 typed proposal/approval boundary、PB.3 canonical compile/editable workspace、PB.4 preview/final receipts、PB.5 restart-safe job control、PB.6 B62 three-shot vertical slice和PB.7 human review/bounded verdict。B62 frame-288 composition rejection继续是不能放宽的边界；模型仍无unrestricted `bpy`/shell/filesystem authority。
 
 Charter与machine contract首次提交为`6a38ca3bdd93219ec6dcd001fa72143df7d80a10`并已推送；SHA-256分别为`18465a4abb264419923e1895348e80a83912cfcaba4dba45dc11558a47ff62bb`与`7280a7d131d8821c7f0196e008c3c2d6961a3f713e02fc82c70028384d420098`。授权矩阵明确保持repository creation/publication、first push、Developer ID/notary credentials、unsigned DMG distribution和Phase B mutation全部false。下一动作只等待用户明确owner、private/public visibility、create与full-history first-push权限；没有授权时停止。
+
+## J-479 · Post-F0 repository readiness 双拓扑预注册
+
+Date: 2026-08-30 · Type: REPOSITORY READINESS PREREGISTRATION · External repository mutations: 0
+
+在任何GitHub create/fork/first push前，只读审计发现F0 source checkout为shallow，仅1,165 reachable commits；因此不能把现有目录直接push后声称保留完整Blender历史。HEAD含6,671个LFS paths、815,089,197 bytes；最大普通blob 11,425,316 bytes。相对`9e2066ae…`的产品surface仍为4 commits、16 paths、841 additions / 68 deletions / 909 changed lines；两个fork-owned LFS branding objects均在本地，19个license/notice paths被编目，fork textual diff高置信secret findings为0。
+
+v0.1协议冻结两条互斥路线：public GitHub fork共享upstream Git object network，建议但等待明确owner/public/create/first-push授权；private standalone mirror要求完整Git+LFS duplication、storage/bandwidth cost接受，先保持BLOCKED。正式门固定110 GiB free、5 GiB external/8 MiB evidence、8项negative controls、0 external writes。协议/spec commit为`79fc6922…`，tool freeze为`6b15e68f…`。
+
+## J-480 · Repository readiness attempt-01 bundle context failure
+
+Date: 2026-08-30 · Type: RETAINED HARNESS FAILURE · Network full mirror reads: 1 · External writes: 0
+
+attempt-01通过source inventory并从exact GitHub upstream完成non-shallow bare mirror：2,244,857 objects、1.39 GiB pack、431 refs、273 tags，baseline `fbe62287…`与target `9e2066ae…`都存在。16 KiB F0 bundle SHA-256 `8018e8b4…`正确声明两个prerequisites。
+
+runner却在research repository context执行`git bundle verify`，因此合理报告缺prerequisites；同一bundle在full mirror context立即`is okay`。local destination未创建，external repository create/push/LFS upload均0。failure file/self为`dbb26a4f…` / `3d88f56a…`。C1先冻结只允许fresh root、本地复用retained mirror和verify context修正。
+
+## J-481 · Repository readiness attempt-02 C1 argv implementation failure
+
+Date: 2026-08-30 · Type: RETAINED CORRECTION IMPLEMENTATION FAILURE · Second network mirror clones: 0 · External writes: 0
+
+attempt-02正确从retained mirror做本地mirror clone并恢复official origin，但实现只改了verify结果捕获，没有把`-C <work-mirror>`真正加入argv；因此在同一错误context再次fail closed。手工只读命令加上`-C`立即通过。local destination仍ABSENT；failure file/self为`376b1940…` / `a7f60c83…`。
+
+C2在tool mutation前把actual argv作为machine-contract数组冻结，并要求self-test、runner command log和independent auditor逐项exact；其余阈值和授权false不变。C2 prereg/tool freeze commits为`8b2aa63e…` / `93275366…`。
+
+## J-482 · Repository readiness C2 local full-history rehearsal PASS
+
+Date: 2026-08-30 · Type: NO-EXTERNAL-WRITE REPOSITORY REHEARSAL PASS · External creates/pushes/LFS uploads: 0 / 0 / 0
+
+C2 attempt-03实际verify argv与冻结数组exact，在fresh work mirror接入F0 bundle并仅向fresh `file://` bare repository push。destination `main`为`fa1b578bb421bbc82b3106b7d4223e11e65fae1d`，tree `4d761fb73d2b10e051905daedd25cc15da702c27`、tree-listing SHA `bb1bc72b…`、merge parents exact、merge base `9e2066ae…`、4 fork commits、162,917 reachable commits、non-shallow且full fsck clean。external root 2,841,071,616 bytes，evidence audit前36,864 bytes，低于5 GiB / 8 MiB ceilings。
+
+8/8负控全部在mutation前拒绝：shallow source、HEAD mismatch、non-file/credential URL、nonfresh destination、missing COPYING、synthetic secrets、100 MiB ordinary blob与external authorization sentinel。独立auditor不import runner，重算source/LFS/licenses/secrets、两个retained failures、mirror/destination graph、receipts、command log与fsck，93/93 PASS。runner verdict self `dc1cc7682ae2dd1cf47160e385ada9067fbe1b02e684a8079069f27c020e5266`；audit self `b841e519cd1d2ce55e2f373a50918b802e90b5244c8dcd7df38ae24fbc64273e`；evidence commit `ede7ffc7…`。
+
+最终拓扑结论：`PUBLIC_GITHUB_FORK`为`READY_FOR_EXPLICIT_AUTHORIZATION`，推荐owner `lovejzzz`、public、从`blender/blender`创建requested name `film-studio-engine`并首次push exact F0 head为main；`PRIVATE_STANDALONE_MIRROR`继续因full LFS transfer/billing/owner approval为BLOCKED。没有用户明确授权时不执行任何外部mutation，Phase B也保持未授权。

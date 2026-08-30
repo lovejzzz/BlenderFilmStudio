@@ -31,6 +31,9 @@ const documents = [
   ['06', 'Design Doc v0.1', '产品、架构、GPL 边界、已有研究与长期路线。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-29-ai-native-film-studio-design-v0.1.zh-CN.md'],
   ['07', 'Post-F0 Charter', '永久仓库、GPL/release 边界与 PB.1–PB.7 垂直切片。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md'],
   ['08', 'Phase B spec.json', '7 个 accepted、15 个 retained outcome 与关闭的授权矩阵。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-post-f0-phase-b.v0.1.json'],
+  ['09', 'Repository readiness', 'public fork / private mirror 双拓扑、完整历史门与 8 项负控。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md'],
+  ['10', 'Readiness spec v0.3', 'C2 exact argv、fresh roots、0 external write 与授权 sentinel。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-repository-readiness.v0.3.json'],
+  ['11', 'Readiness verdict', '本地 full-history rehearsal PASS 与独立 93/93 audit。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/verdict.json'],
 ];
 
 const inherited = [
@@ -54,14 +57,14 @@ export default function AiNativeStudioHandoffPage() {
         <div className="handoff-hero-copy">
           <p className="eyebrow"><span /> NEW MACHINE HANDOFF · 2026.08.30</p>
           <h1>换一台电脑，<br />不换一套<span>事实。</span></h1>
-          <p>F0.1–F0.7 已在 M2 Max 主机全部通过。Post-F0 charter 已在 commit `6a38ca3b…` 冻结 7 个 accepted、15 个 retained outcome 和 PB.1–PB.7。下一步只等待 repository owner、visibility、create 与 full-history first-push 的明确授权。</p>
+          <p>F0.1–F0.7 已全部通过。Repository-readiness C2 又把 exact F0 branch 接入 non-shallow Blender graph，仅向本地 bare remote push，并由独立 auditor 93/93 复算。Public fork 路线已 READY；下一步只等待 owner `lovejzzz`、public、create fork 与 first push 的明确授权。</p>
           <div className="handoff-hero-actions"><a href="#start">开始交接 ↓</a><Link href="/ai-native-studio-design">为什么做自己的软件</Link></div>
         </div>
         <aside className="handoff-state">
           <header><span>PROGRAM STATE</span><b>F0.1–F0.7 PASS</b></header>
-          <div className="handoff-state-main"><small>NEXT CHECKPOINT</small><strong>AUTH</strong><h2>REPOSITORY<br />CREATE</h2></div>
-          <dl><div><dt>ENGINE</dt><dd>Film Studio Engine F0</dd></div><div><dt>COMMIT</dt><dd>fa1b578bb421</dd></div><div><dt>HOST</dt><dd>macOS · M2 Max</dd></div><div><dt>RESULT</dt><dd>7 / 7 gates PASS</dd></div></dl>
-          <footer>PROTOTYPE SUPPORTED · PUBLIC RELEASE UNPROVEN</footer>
+          <div className="handoff-state-main"><small>NEXT CHECKPOINT</small><strong>AUTH</strong><h2>PUBLIC FORK<br />+ FIRST PUSH</h2></div>
+          <dl><div><dt>ENGINE</dt><dd>Film Studio Engine F0</dd></div><div><dt>COMMIT</dt><dd>fa1b578bb421</dd></div><div><dt>HISTORY</dt><dd>162,917 commits</dd></div><div><dt>AUDIT</dt><dd>93 / 93 PASS</dd></div></dl>
+          <footer>LOCAL REHEARSAL PASS · EXTERNAL MUTATION 0</footer>
         </aside>
         <div className="handoff-signal"><span>01</span><b>读取规则</b><i>→</i><span>02</span><b>只读预检</b><i>→</i><span>03</span><b>固定源码</b><i>→</i><span>04</span><b>保存证据</b></div>
       </section>
@@ -74,7 +77,7 @@ export default function AiNativeStudioHandoffPage() {
           <article><span>01</span><h3>读入口</h3><code>START_HERE.md</code><p>确认目标与禁区，不从旧 B62 继续。</p></article>
           <article><span>02</span><h3>做预检</h3><code>preflight-f0-source-host.mjs</code><p>先获得 ACCEPTED 或 BLOCKED 事实。</p></article>
           <article><span>03</span><h3>核验 F0 结论</h3><code>F0.7-…-attempt-05</code><p>确认 7/7 PASS 与 attempts 01–04 retained。</p></article>
-          <article><span>04</span><h3>读取授权边界</h3><code>POST-F0 CHARTER</code><p>owner / visibility / create / first push 均需明确。</p></article>
+          <article><span>04</span><h3>读取授权边界</h3><code>READINESS v0.3</code><p>public fork READY；private standalone 仍 BLOCKED。</p></article>
         </div>
       </section>
 
@@ -87,7 +90,7 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-map" id="map">
         <div className="section-index">02 / REPOSITORY MAP</div>
-        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> EIGHT AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
+        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> ELEVEN AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议、修正链与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
         <div className="handoff-docs">{documents.map(([id,title,detail,href]) => <a href={href} target="_blank" rel="noreferrer" key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>OPEN ↗</b></a>)}</div>
         <div className="handoff-storage"><span>REPOSITORY BOUNDARY</span><div><code>BlenderFilmStudio</code><b>rules · protocols · evidence · site</b></div><i>≠</i><div><code>external F0 workspace</code><b>source · dependencies · builds</b></div></div>
       </section>
@@ -101,9 +104,9 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-checkpoint">
         <span>LATEST CLOSED CHECKPOINT</span>
-        <h2>F0.7 通过，四次失败仍保留。</h2>
-        <p>Unsigned DMG · 6 / 6 starts · core semantics exact · metadata preserved · 103-check independent audit</p>
-        <div><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md" target="_blank" rel="noreferrer">读取 Post-F0 Charter ↗</a><Link href="/journal">查看实验日志 →</Link></div>
+        <h2>Public fork 路线 READY，两次 harness 失败仍保留。</h2>
+        <p>Non-shallow · 162,917 commits · exact fa1b578b · fsck clean · 8 / 8 negative controls · 93 / 93 audit</p>
+        <div><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/audit.json" target="_blank" rel="noreferrer">读取 Readiness Audit ↗</a><Link href="/journal">查看实验日志 →</Link></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · New Machine Handoff</b></div><p>One repository · One source identity · Seven falsifiable gates</p><Link href="/ai-native-studio-design">返回 Design Doc →</Link></footer>

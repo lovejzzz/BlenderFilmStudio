@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-30",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_POST_F0_CHARTER_PREREGISTERED_AWAITING_REPOSITORY_AUTHORIZATION",
+  "status": "F0_COMPLETE_REPOSITORY_READINESS_PASS_AWAITING_PUBLIC_FORK_AUTHORIZATION",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -38,6 +38,75 @@
     "phaseBGates": ["PB.1", "PB.2", "PB.3", "PB.4", "PB.5", "PB.6", "PB.7"],
     "repositoryCreationAuthorized": false,
     "phaseBMutationAuthorized": false
+  },
+  "repositoryReadiness": {
+    "status": "PASS_NO_EXTERNAL_WRITE_AWAITING_EXPLICIT_AUTHORIZATION",
+    "baseProtocol": "research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md",
+    "baseProtocolSha256": "8d5b3dafee5c5917fb5edf1aa744e4cb5099c09a1f89b289c4672f89b8ba43f1",
+    "activeCorrection": "research/2026-08-30-post-f0-repository-readiness-c2-bundle-argv.md",
+    "activeCorrectionSha256": "ff8f6ca7bb138cc8ebf564ffab0e5f83f4c22b9349e7563167645bb94bfb4e28",
+    "machineContract": "specs/ai-native-studio-repository-readiness.v0.3.json",
+    "machineContractSha256": "2f32018fab378e8cc57c0a59cd0ad37662e05017a87efb89296fe370ca099860",
+    "toolFreezeCommit": "932753662d07d42c0778eee608239e44f4772c47",
+    "evidenceCommit": "ede7ffc7da0a1eb7387102d37f93bbfdfd451035",
+    "acceptedAttempt": "experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03",
+    "verdictFileSha256": "8ab766f50fe50f72484b2984934d6d4c31818562ac243e9bab6c0d87c62a8b8a",
+    "verdictReceiptHash": "dc1cc7682ae2dd1cf47160e385ada9067fbe1b02e684a8079069f27c020e5266",
+    "auditFileSha256": "1394a57fe7387b9166b657a847dace2edff71a26b03751e72428a58b14d49d30",
+    "auditReceiptHash": "b841e519cd1d2ce55e2f373a50918b802e90b5244c8dcd7df38ae24fbc64273e",
+    "auditChecksPassed": 93,
+    "retainedFailedAttempts": [
+      {
+        "attempt": "experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-01",
+        "failure": "BUNDLE_VERIFY_REPOSITORY_CONTEXT",
+        "receiptHash": "3d88f56a63e6731b3ab03b71733fd816d8c5237c9c05540160931bc4bee0ddbc"
+      },
+      {
+        "attempt": "experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-02",
+        "failure": "BUNDLE_VERIFY_ARGV_CONTEXT",
+        "receiptHash": "a7f60c832443d2e59d3af425892c4d610a2fe52b51a19d5500cab1debcf9021b"
+      }
+    ],
+    "currentSourceCheckout": {
+      "shallow": true,
+      "reachableCommitCount": 1165,
+      "mustNotBeUsedAsFullHistorySource": true
+    },
+    "localFullHistoryDestination": {
+      "head": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+      "tree": "4d761fb73d2b10e051905daedd25cc15da702c27",
+      "treeListingSha256": "bb1bc72b201a92ded9c9948e2d3438f995b2db72c971c07c443a3d471662177c",
+      "shallow": false,
+      "reachableCommitCount": 162917,
+      "forkCommitCount": 4,
+      "mergeBase": "9e2066aef7ef7e20c142ad7bd3303138a4304c93",
+      "fullFsckPass": true
+    },
+    "sourceInventory": {
+      "forkChangedPaths": 16,
+      "forkChangedLines": 909,
+      "headLfsPaths": 6671,
+      "headLfsBytes": 815089197,
+      "forkOwnedLfsPaths": 2,
+      "licenseNoticePaths": 19,
+      "forkOwnedSecretFindings": 0,
+      "largestOrdinaryBlobBytes": 11425316
+    },
+    "negativeControlsPassed": 8,
+    "externalRepositoryCreates": 0,
+    "externalGitPushes": 0,
+    "lfsUploads": 0,
+    "topologyVerdicts": {
+      "PUBLIC_GITHUB_FORK": "READY_FOR_EXPLICIT_AUTHORIZATION",
+      "PRIVATE_STANDALONE_MIRROR": "BLOCKED_PENDING_OWNER_VISIBILITY_LFS_COST_AND_FULL_LFS_TRANSFER_AUTHORIZATION"
+    },
+    "recommendedAuthorization": {
+      "owner": "lovejzzz",
+      "visibility": "public",
+      "create": "GitHub fork named film-studio-engine from blender/blender",
+      "firstPush": "exact fa1b578bb421bbc82b3106b7d4223e11e65fae1d as main",
+      "authorized": false
+    }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
@@ -333,7 +402,11 @@
     "research/2026-08-29-ai-native-film-studio-f0-source-feasibility-protocol-v0.1.zh-CN.md",
     "specs/ai-native-studio-f0.v0.1.json",
     "research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md",
-    "specs/ai-native-studio-post-f0-phase-b.v0.1.json"
+    "specs/ai-native-studio-post-f0-phase-b.v0.1.json",
+    "research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md",
+    "research/2026-08-30-post-f0-repository-readiness-c1-bundle-context.md",
+    "research/2026-08-30-post-f0-repository-readiness-c2-bundle-argv.md",
+    "specs/ai-native-studio-repository-readiness.v0.3.json"
   ],
   "firstCommands": [
     "git status --short",
@@ -341,7 +414,9 @@
     "cat experiments/ai-native-studio-f0/F0.7-2026-08-30-mac-m2max-attempt-05/verdict.json",
     "cat experiments/ai-native-studio-f0/F0.7-2026-08-30-mac-m2max-attempt-05/audit.json",
     "cat specs/ai-native-studio-post-f0-phase-b.v0.1.json",
-    "obtain explicit repository owner, visibility, create and first-push authorization before any permanent repository action"
+    "cat experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/verdict.json",
+    "cat experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/audit.json",
+    "obtain explicit authorization for owner=lovejzzz, visibility=public, GitHub fork creation named film-studio-engine, and the first push of exact fa1b578bb421 as main"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -362,6 +437,8 @@
     "Do not resume B62 as the primary goal",
     "Do not vendor Blender source or builds into this repository",
     "Do not create or publish the permanent engine repository without an explicitly authorized post-F0 charter",
+    "Do not push the current shallow F0 checkout as a full-history source",
+    "Do not treat private visibility as equivalent to the ready public-fork route; private standalone mirroring requires new full-LFS and billing authorization",
     "Do not weaken thresholds after observing results",
     "Do not overwrite historical receipts or failed runs",
     "Do not use in-app browser automation while the AGENTS.md crash guard is active",
@@ -371,10 +448,10 @@
     "gate": "REPOSITORY_CREATION_AUTHORIZATION",
     "result": "An explicit user decision authorizing or declining permanent engine repository creation and first push",
     "requiredArtifacts": [
-      "repository owner",
-      "repository visibility: private or public",
-      "explicit permission to create the repository",
-      "explicit permission for the first push of full Blender history and the F0 source branch",
+      "owner lovejzzz",
+      "public visibility",
+      "explicit permission to create a GitHub fork named film-studio-engine from blender/blender",
+      "explicit permission for the first push of exact fa1b578bb421bbc82b3106b7d4223e11e65fae1d as main",
       "confirmation that signing, notarization, unsigned-DMG distribution and Phase B mutation remain unauthorized unless separately granted"
     ]
   }

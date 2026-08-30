@@ -32,6 +32,19 @@ both a research notebook and an executable evidence base. Read this page,
   `PASS`. The post-F0 repository/Phase B charter is frozen at commit
   `6a38ca3b…`; the next checkpoint is explicit authorization to create and make
   the first push to a permanent engine repository, not an eighth F0 gate.
+- **Repository readiness:** the current F0 checkout is shallow (1,165 reachable
+  commits), so direct push from it was rejected as a full-history strategy.
+  A read-only GitHub Blender mirror plus local-only graft/push rehearsal closed
+  as `PASS` in C2 attempt-03. Its destination contains 162,917 reachable commits,
+  exact HEAD `fa1b578b…`, exact tree `4d761fb7…`, merge base `9e2066ae…` and a
+  clean full `git fsck`. Runner/auditor self hashes are `dc1cc768…` and
+  `b841e519…` (93/93). External repository creates/pushes and LFS uploads were 0.
+- **Topology decision ready:** `PUBLIC_GITHUB_FORK` is
+  `READY_FOR_EXPLICIT_AUTHORIZATION`; `PRIVATE_STANDALONE_MIRROR` remains
+  blocked pending visibility, full-LFS transfer, billing and owner approval.
+  The recommended exact choice is owner `lovejzzz`, public fork of
+  `blender/blender`, requested name `film-studio-engine`, then first push of
+  exact F0 head `fa1b578b…` as `main`.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -135,6 +148,14 @@ both a research notebook and an executable evidence base. Read this page,
 7. [`research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md`](./research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md)
    and [`specs/ai-native-studio-post-f0-phase-b.v0.1.json`](./specs/ai-native-studio-post-f0-phase-b.v0.1.json)
    — frozen permanent-repository boundary and PB.1–PB.7 contract.
+8. [`research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md`](./research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md),
+   [`research/2026-08-30-post-f0-repository-readiness-c2-bundle-argv.md`](./research/2026-08-30-post-f0-repository-readiness-c2-bundle-argv.md)
+   and [`specs/ai-native-studio-repository-readiness.v0.3.json`](./specs/ai-native-studio-repository-readiness.v0.3.json)
+   — public-fork/private-mirror topology, retained corrections, no-write gates
+   and the exact authorization sentence.
+9. [`experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/verdict.json`](./experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/verdict.json)
+   and [`audit.json`](./experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/audit.json)
+   — accepted local full-history rehearsal and independent 93-check audit.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
@@ -177,10 +198,11 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. F0.1-F0.7 are closed. Verify the accepted F0.7 attempt-05 verdict/audit and
-   the post-F0 contract commit `6a38ca3b…`. Do not mutate the retained DMG,
-   accepted evidence, failures or v0.1 charter. Wait for explicit repository
-   owner / visibility / create / first-push authorization.
+5. F0.1-F0.7 and the no-external-write repository rehearsal are closed. Verify
+   F0.7 attempt-05 plus repository-readiness attempt-03 verdict/audit. Do not
+   mutate retained DMG, evidence, failures or frozen contracts. Do not push the
+   shallow F0 checkout as full history. Wait for explicit public-fork owner /
+   visibility / create / first-push authorization.
 
 ## What not to do
 
@@ -199,15 +221,20 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The post-F0 decision package is frozen and pushed. It binds seven accepted
-verdicts, 15 retained outcomes, the proposed `film-studio-engine` boundary and
-PB.1–PB.7. The next checkpoint must record the user's explicit choices:
+The post-F0 decision package and no-write rehearsal are frozen and pushed. The
+rehearsal recommends one exact topology. The next checkpoint must record the
+user's explicit choices:
 
-- repository owner;
-- private or public visibility;
-- permission to create the repository;
-- permission to push the full Blender history and F0 source branch for the
-  first time.
+- owner `lovejzzz`;
+- visibility `public`;
+- permission to create a GitHub fork named `film-studio-engine` from
+  `blender/blender`;
+- permission to make the first external push of exact F0 head
+  `fa1b578bb421bbc82b3106b7d4223e11e65fae1d` as `main`.
+
+Choosing `private` is not a cosmetic switch: it selects the currently blocked
+standalone mirror route and requires a new authorization for full Git LFS
+fetch/push, storage/bandwidth billing and complete transfer evidence.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires
