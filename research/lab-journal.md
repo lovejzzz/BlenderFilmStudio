@@ -5851,3 +5851,13 @@ clean build在fresh root运行649.571秒、peak RSS 2,064,171,008 bytes，产物
 可见UI第一次准入后因macOS锁屏在应用发现前暂停，原生启动数0；用户解锁后按相同阈值重新准入，未放宽科学标准。官方Blender配置在官方基线后只含两个空目录；所有F0运行前后digest保持`c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf`。最终verdict self hash为`472abf5df3c66dba375e46fe7e9a0e152cc3d6c37966ab13f6d7e2601fea0390`，F0.3关闭为PASS。
 
 边界保持：F0.3只证明最小typed电影工作台、冻结任务的交互优势、持久化与Expert往返；尚未证明SceneSpec内嵌、render receipt、上游merge成本、安装/卸载或生产就绪。active gate转为F0.4 embedded typed contract：必须先冻结同一SceneSpec与外部compiler bytes，要求内嵌BuildPlan canonical-exact、B01/B02隔离构建、proposal diff/approval scope可见，并在scene mutation前拒绝unknown field、path escape、non-finite number与unapproved mutation。
+
+## J-472 · F0.4 内嵌合同 canonical exact，但 B01 OCIO 身份门失败
+
+Date: 2026-08-30 · Type: F0.4 EMBEDDED CONTRACT RETAINED FAIL · Host: macOS 25.6.0 / Apple M2 Max / 64 GiB · Formal product starts: 3 / 5
+
+F0.4在冻结协议、harness与正式启动记录后运行，源码提交为`b47eae224b6d3e71559b55df85fd20ae87d3f92b`，patch保持602 added / 1 deleted lines，低于900-line ceiling。内嵌compiler对B01/B02分别生成7,345与8,466 bytes，文件SHA-256精确为`b6ab4757…`与`8595f30c…`，与既有外部compiler逐字节相同；planHash分别为`316114f1…`与`a9022bf6…`。unknown field、path escape、non-finite number、unapproved mutation四项负控全部在BuildPlan写入和scene mutation前返回预注册reason；scene fingerprint保持精确，proposal diff/approval scope顺序收据为PASS。
+
+正式启动3在fresh admission后进入隔离B01 build。free bytes为173,718,777,856，启动前无Blender进程，artifact root不存在；真实产品binary SHA-256为`5a453816…`。`blender/compile_scene.py`在颜色配置身份门读取`ocio.GetCurrentConfig().getName()`，实际得到空字符串，而BuildPlan要求`cg-config-v4.0.0_aces-v2.0_ocio-v2.5`，因此exit 1。失败只留下`b01/artifacts/frames`空目录，0文件、0 `.blend`、0 manifest、0 structure receipt。协议停止规则随即触发：没有同ID修复，没有启动B02或第五个产品审计；最大并发仍为1，官方Blender配置digest前后均为`c97e9a5f…`。
+
+Computer Use同时暴露一个证据工具问题：按同名display name选择了较旧F0.2 bundle，因此该PNG被明确降级为`DIAGNOSTIC_ONLY`，不冒充正式产品截图；正式产品自己的`runtime-ui/inspection.json`仍记录`APPROVED_READY`、execute enabled、未执行且输出不存在。attempt-01最终verdict为`FAIL`，self hash `c0822b046f74920ef81155a3cc268aa2833ab991b5ae08dfdaa575d94f4fb2db`。下一步只能建立新immutable root，交叉绑定本失败，并在首次产品启动前冻结和验证OCIO环境绑定；F0.5继续锁定。

@@ -1,8 +1,11 @@
 # BlenderFilmStudio — new machine cold start
 
 > **Current decision:** F0.1, F0.2 and F0.3 passed on the admitted M2 Max host.
-> Continue with F0.4 embedded typed contract; do not assume the fork is viable
-> until F0.1-F0.7 all close.
+> F0.4 attempt-01 is a retained `FAIL`: embedded B01/B02 BuildPlans were
+> canonical-exact and all four negative controls passed, but the first isolated
+> B01 build stopped on an empty OCIO config identity. Continue only in a new,
+> cross-bound F0.4 evidence root; do not assume the fork is viable until
+> F0.1-F0.7 all close.
 
 This is the authoritative handoff for a fresh Codex session. The repository is
 both a research notebook and an executable evidence base. Read this page,
@@ -14,7 +17,8 @@ both a research notebook and an executable evidence base. Read this page,
   and fork-maintenance reference; an external shell remains the fallback.
 - **Pinned engine baseline:** official `v5.2.0` at
   `fbe6228777e7d9afefcd61a413844e790ae75db7`.
-- **Active experiment:** `F0-SOURCE-FEASIBILITY`, gate `F0.4`.
+- **Active experiment:** `F0-SOURCE-FEASIBILITY`, bounded F0.4 correction after
+  the immutable attempt-01 `FAIL`.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS` and `F0.3 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
   not byte-for-byte reproducible; the bounded differences are recorded in
@@ -30,6 +34,12 @@ both a research notebook and an executable evidence base. Read this page,
   frozen UI task required 1 interaction versus 24 in official Blender; the
   accepted receipt is in
   `F0.3-2026-08-30-mac-m2max-attempt-01/verdict.json`.
+- **Retained F0.4 failure:** attempt-01 proved canonical-exact embedded B01/B02
+  BuildPlans, approval ordering and four pre-mutation rejections, then failed
+  formal product start 3 because `ocio.GetCurrentConfig().getName()` returned
+  an empty string instead of the frozen ACES 2 config name. B02 and the fifth
+  product audit were not run. The self-hashed verdict is in
+  `F0.4-2026-08-30-mac-m2max-attempt-01/verdict.json`; same-ID repair is forbidden.
 - **Inherited evidence:** B01-B62 cover structured scene compilation, Blender
   execution, safety/admission, pixels, production passes, cost, recovery and a
   three-shot cinematic attempt. These results are evidence, not a claim that
@@ -97,11 +107,10 @@ contract name instead of reading everything.
    the preflight output before the first build mutation. Never reuse or replace
    another machine's root.
 
-5. F0.1-F0.3 are closed. For F0.4, preregister the exact SceneSpec fixture,
-   external compiler bytes, canonical BuildPlan comparison and proposal/approval
-   scope before changing source. The embedded path must build isolated B01/B02
-   roots and reject unknown fields, path escape, non-finite values and
-   unapproved mutations before scene mutation.
+5. F0.1-F0.3 are closed. Before another F0.4 product start, create a new
+   immutable evidence root that cross-binds attempt-01, freeze the exact OCIO
+   environment binding, and preserve all prior SceneSpec/compiler/approval
+   fixtures and thresholds. Never repair attempt-01 in place.
 
 ## What not to do
 
@@ -119,7 +128,7 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next machine should push one small, auditable F0.4 checkpoint containing:
+The next machine should push one small, auditable corrected F0.4 checkpoint containing:
 
 - a unique F0.4 experiment root and a preregistered frozen SceneSpec fixture;
 - canonical-exact external-versus-embedded BuildPlan bytes;
@@ -128,6 +137,7 @@ The next machine should push one small, auditable F0.4 checkpoint containing:
 - pre-mutation rejection of unknown fields, path escape, non-finite values and
   unapproved mutation;
 - complete success or failure receipts;
+- an explicit cross-binding to the attempt-01 OCIO mismatch verdict;
 - a journal entry and, if useful, a website update.
 
 The scientific result may be `PASS`, `FAIL`, or `BLOCKED`. “Still working” is

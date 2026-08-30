@@ -87,7 +87,7 @@ const gates = [
   ['F0.1', '源码构建', '固定官方 Blender stable/LTS commit，在当前 Apple Silicon Mac 形成可重复 binary 与构建收据。', 'PASS'],
   ['F0.2', '独立身份', '新名称、bundle id、图标、启动画面和配置目录；不把 Blender 商标作为产品名。', 'PASS'],
   ['F0.3', '电影工作台', '最小 Project / Scene / Shot / Character 界面可用，且能进入 Expert Mode。', 'PASS'],
-  ['F0.4', '合同内嵌', '同一 SceneSpec 生成与现有外部 compiler canonical exact 的 BuildPlan，并构建 B01/B02。', 'NEXT'],
+  ['F0.4', '合同内嵌', 'BuildPlan 已 canonical exact；attempt-01 在 B01 OCIO 身份门失败，需新 root 纠正。', 'FAIL / RETRY'],
   ['F0.5', '渲染与收据', '无鼠标完成 EEVEE preview、Cycles EXR、像素/成本/失败收据。', 'LOCKED'],
   ['F0.6', '上游合并演练', '合并后续 Blender commit 区间，公开冲突面、人工成本与回归。', 'LOCKED'],
   ['F0.7', '安装与往返', '可安装/卸载，签名与公证路径明确；`.blend` 往返和配置隔离通过。', 'LOCKED'],
@@ -246,7 +246,7 @@ export default function AiNativeStudioDesignPage() {
         <div className="section-index light">11 / PRIMARY SOURCES</div>
         <div className="ain-section-heading light"><div><p className="eyebrow"><span /> RESEARCH BASIS</p><h2>许可证决定边界。<br /><span>真实实验决定主张。</span></h2></div><p>外部来源用于确认源码、构建、架构、商标和许可证；产品可靠性结论只来自本仓库冻结协议下的真实 Blender 实验。</p></div>
         <ol className="ain-source-list">{sources.map(([author,title,href],index) => <li key={href}><span>{String(index + 1).padStart(2,'0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
-        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>F0.4 · EMBEDDED TYPED CONTRACT</h3><p>F0.1–F0.3 已通过。Film Studio Engine F0 现在具备独立身份、typed Project / Scene / Shot / Character、单击 Shot 创建、持久化和完整 Expert Mode 往返；正式产品名仍未决定。下一步冻结同一 SceneSpec 与外部 compiler bytes，要求内嵌 compiler 生成 canonical-exact BuildPlan、隔离构建 B01/B02，并在 scene mutation 前拒绝无效或未批准输入；F0.1–F0.7 全部关闭后，才创建正式引擎仓库。</p><Link href="/ai-native-studio-handoff">打开新机器冷启动包 →</Link></div></div>
+        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>F0.4 · OCIO-BOUND CORRECTED ATTEMPT</h3><p>F0.1–F0.3 已通过。F0.4 attempt-01 的内嵌 compiler 已对 B01/B02 生成 canonical-exact BuildPlan，四项 pre-mutation 负控也全部通过；但隔离 B01 build 读取到空 OCIO config name，因此正式 verdict 为 FAIL，B02 未运行。下一步只能建立新 immutable root，交叉绑定该失败并在首次 product start 前冻结 ACES 2 OCIO 环境；F0.5 继续锁定。</p><Link href="/ai-native-studio-handoff">打开新机器冷启动包 →</Link></div></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · Design Doc v0.1</b></div><p>Direction adopted · Implementation gated · Snapshot 2026-08-29</p><Link href="/ai-native-studio-handoff">新机器从这里开始 →</Link></footer>

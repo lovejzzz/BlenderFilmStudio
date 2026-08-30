@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "bfs.f0.4.audit.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.4",
+  "status": "FAIL",
+  "observedAt": "2026-08-30T04:45:32Z",
+  "independence": "Preservation audit performed without importing the embedded contract module and without starting another product process after the stop rule triggered.",
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "branch": "codex/f0.4-embedded-contract",
+    "head": "b47eae224b6d3e71559b55df85fd20ae87d3f92b",
+    "parent": "4f1446f780c2b7e23bc66f584b36f6254ecd985c",
+    "clean": true,
+    "gateOwnedAddedLines": 602,
+    "gateOwnedDeletedLines": 1,
+    "ceiling": 900
+  },
+  "product": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "5a4538163d1fce6c531f2ad76a15232fc1d1d4bbff483d54778a290b4c37cb40",
+    "binaryBytes": 182654792,
+    "version": "5.2.0 LTS",
+    "buildHash": "b47eae224b6d"
+  },
+  "formalProductAccounting": {
+    "maximumAllowed": 5,
+    "completed": 3,
+    "maximumConcurrentObserved": 1,
+    "runningAtAudit": [],
+    "skippedByStopRule": [
+      "04_B02_ISOLATED_BUILD",
+      "05_INDEPENDENT_PRODUCT_AUDIT"
+    ]
+  },
+  "results": {
+    "formalUiInspection": {
+      "status": "APPROVED_READY",
+      "executeEnabled": true,
+      "executed": false,
+      "outputExists": false,
+      "receipt": "runtime-ui/inspection.json"
+    },
+    "uiScreenshot": {
+      "status": "DIAGNOSTIC_ONLY",
+      "reason": "Computer Use selected an older same-name bundle; the PNG is excluded from formal evidence.",
+      "provenance": "runtime-ui/screenshot-provenance.json"
+    },
+    "canonicalComparison": {
+      "status": "PASS",
+      "B01ByteExact": true,
+      "B02ByteExact": true,
+      "comparisonHash": "74f34701c277dcb46de464dd17e8d1e490a75d943559b5e066430f93667864c1"
+    },
+    "negativeControls": {
+      "status": "PASS",
+      "passed": 4,
+      "total": 4,
+      "negativeHash": "de0310d54a490069e9e45ffe248c33ac82c4abf5b02fc526a552383be28a8383"
+    },
+    "proposalApprovalOrder": {
+      "status": "PASS",
+      "proposalDiffHash": "dbf9edbdc9c92926e11aa406279989e536a25c181add0f8637ba402a072abe42"
+    },
+    "B01Build": {
+      "status": "FAIL",
+      "receiptHash": "34a23209521af598c6478b1b339c9983249b9d3cef2b5d9721cff2c8e334d21c",
+      "reason": "OCIO_CONFIG_MISMATCH"
+    },
+    "B02Build": {
+      "status": "NOT_RUN_STOP_RULE",
+      "receiptHash": "fde60e052df2bb9a4b3a4325f76e06de74594e000bc31727a2533a22ca6fa3fd"
+    }
+  },
+  "officialConfiguration": {
+    "root": "/Users/mengyingli/Library/Application Support/Blender",
+    "state": "PRESENT",
+    "entries": 2,
+    "files": 0,
+    "digestBefore": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "digestAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "unchanged": true
+  },
+  "checks": {
+    "preregisteredBeforeSourceMutation": true,
+    "sourcePatchWithinCeiling": true,
+    "sourceWorktreeClean": true,
+    "binaryHashVerified": true,
+    "allAdmissionsAccepted": true,
+    "canonicalBuildPlansExact": true,
+    "allNegativeControlsPassed": true,
+    "proposalApprovalOrderPassed": true,
+    "B01IsolatedBuildPassed": false,
+    "B02IsolatedBuildPassed": false,
+    "officialConfigurationUnchanged": true,
+    "noProductProcessRemaining": true,
+    "stopRuleHonored": true,
+    "allAcceptanceCriteriaPassed": false
+  },
+  "failures": [
+    {
+      "id": "B01_OCIO_CONFIG_MISMATCH",
+      "expected": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+      "actual": "",
+      "source": "b01/receipt.json",
+      "effect": "B01 scene build aborted before a .blend, manifest or structure receipt was written."
+    }
+  ],
+  "boundedNextExperiment": {
+    "required": true,
+    "sameIdRepair": false,
+    "newEvidenceRoot": true,
+    "crossBindThisFailure": true,
+    "preregisteredChange": "Bind the frozen OCIO file through the product launch environment and assert its config name before the first isolated build."
+  },
+  "receiptHash": "9bc1db76eba7ee89d32cb09ea563c3d3dc392d4e95a80d58ed5542d25a76c1d1"
+}

@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-30",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_1_F0_2_F0_3_PASS_F0_4_ACTIVE",
+  "status": "F0_1_F0_2_F0_3_PASS_F0_4_ATTEMPT_01_FAIL_CORRECTION_REQUIRED",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -27,7 +27,7 @@
     "F0.1": "PASS",
     "F0.2": "PASS",
     "F0.3": "PASS",
-    "F0.4": "NOT_RUN",
+    "F0.4": "FAIL",
     "F0.5": "NOT_RUN",
     "F0.6": "NOT_RUN",
     "F0.7": "NOT_RUN"
@@ -88,6 +88,25 @@
       "expertModeRoundtripPass": true,
       "missingOptionalStateNegativeControlPass": true,
       "officialBlenderConfigurationDigestBeforeAndAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf"
+    },
+    "F0.4": {
+      "verdict": "FAIL",
+      "failedAttempt": "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01",
+      "verdictReceiptHash": "c0822b046f74920ef81155a3cc268aa2833ab991b5ae08dfdaa575d94f4fb2db",
+      "contractSourceCommit": "b47eae224b6d3e71559b55df85fd20ae87d3f92b",
+      "sourceParent": "4f1446f780c2b7e23bc66f584b36f6254ecd985c",
+      "gateOwnedAddedLines": 602,
+      "gateOwnedDeletedLines": 1,
+      "embeddedB01CanonicalExact": true,
+      "embeddedB02CanonicalExact": true,
+      "negativeControlsPassed": 4,
+      "negativeControlsTotal": 4,
+      "proposalApprovalOrderPass": true,
+      "failedFormalProductStart": 3,
+      "failure": "B01 OCIO config name was empty instead of cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+      "B02NotRunByStopRule": true,
+      "sameIdRepairPerformed": false,
+      "officialBlenderConfigurationDigestBeforeAndAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf"
     }
   },
   "inheritedEvidence": {
@@ -112,8 +131,8 @@
   "firstCommands": [
     "git status --short",
     "node scripts/preflight-f0-source-host.mjs",
-    "cat experiments/ai-native-studio-f0/F0.3-2026-08-30-mac-m2max-attempt-01/verdict.json",
-    "preregister immutable F0.4 external-versus-embedded canonical BuildPlan fixtures before source mutation"
+    "cat experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01/verdict.json",
+    "preregister a new immutable F0.4 root that cross-binds attempt-01 and freezes the OCIO launch environment before any product start"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -141,8 +160,9 @@
   ],
   "nextExpectedCheckpoint": {
     "gate": "F0.4",
-    "result": "An embedded typed contract that produces canonical-exact BuildPlan bytes, builds B01/B02 in isolated roots and rejects invalid or unapproved inputs before scene mutation",
+    "result": "A new immutable, cross-bound F0.4 attempt that preserves the canonical-exact contract result and binds the frozen ACES 2 OCIO config before isolated B01/B02 builds",
     "requiredArtifacts": [
+      "cross-binding to F0.4 attempt-01 verdict c0822b046f74920ef81155a3cc268aa2833ab991b5ae08dfdaa575d94f4fb2db",
       "canonical-comparison.json",
       "b01/receipt.json",
       "b02/receipt.json",

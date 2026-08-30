@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "bfs.f0GateVerdict.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.4",
+  "status": "FAIL",
+  "observedAt": "2026-08-30T04:45:32Z",
+  "dependsOn": {
+    "gate": "F0.3",
+    "status": "PASS",
+    "receiptHash": "472abf5df3c66dba375e46fe7e9a0e152cc3d6c37966ab13f6d7e2601fea0390",
+    "sourceCommit": "4f1446f780c2b7e23bc66f584b36f6254ecd985c"
+  },
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "branch": "codex/f0.4-embedded-contract",
+    "head": "b47eae224b6d3e71559b55df85fd20ae87d3f92b",
+    "parent": "4f1446f780c2b7e23bc66f584b36f6254ecd985c",
+    "clean": true,
+    "gateOwnedAddedLines": 602,
+    "gateOwnedDeletedLines": 1,
+    "ceiling": 900
+  },
+  "product": {
+    "app": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace/bin/Film Studio Engine F0.app",
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "5a4538163d1fce6c531f2ad76a15232fc1d1d4bbff483d54778a290b4c37cb40",
+    "binaryBytes": 182654792,
+    "version": "5.2.0 LTS",
+    "buildHash": "b47eae224b6d"
+  },
+  "evidence": {
+    "experiment": "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01",
+    "preregistrationCommit": "70be29059e71c4e3275bb0b013d6d343f6d412ca",
+    "harnessCommit": "902298896251cfed9bc0bbc4bd2d2c164dd4b93f",
+    "canonicalComparisonHash": "74f34701c277dcb46de464dd17e8d1e490a75d943559b5e066430f93667864c1",
+    "negativeHash": "de0310d54a490069e9e45ffe248c33ac82c4abf5b02fc526a552383be28a8383",
+    "proposalDiffHash": "dbf9edbdc9c92926e11aa406279989e536a25c181add0f8637ba402a072abe42",
+    "contractRuntimeReceiptHash": "bf71ae0b868c3f40d8fd0452176278ecfa68cf27d3020cdcd9297f598199b040",
+    "B01ReceiptHash": "34a23209521af598c6478b1b339c9983249b9d3cef2b5d9721cff2c8e334d21c",
+    "B02ReceiptHash": "fde60e052df2bb9a4b3a4325f76e06de74594e000bc31727a2533a22ca6fa3fd",
+    "auditReceiptHash": "9bc1db76eba7ee89d32cb09ea563c3d3dc392d4e95a80d58ed5542d25a76c1d1"
+  },
+  "checks": {
+    "embeddedB01CanonicalExact": true,
+    "embeddedB02CanonicalExact": true,
+    "proposalDiffAndApprovalScopeInspectedBeforeExecution": true,
+    "unknownFieldRejectedBeforeMutation": true,
+    "pathEscapeRejectedBeforeMutation": true,
+    "nonfiniteNumberRejectedBeforeMutation": true,
+    "unapprovedMutationRejectedBeforeMutation": true,
+    "B01IsolatedBuildReproducedFrozenStructure": false,
+    "B02IsolatedBuildReproducedFrozenStructure": false,
+    "sourcePatchWithinCeiling": true,
+    "allFormalProductStartsAdmittedAbove160GiB": true,
+    "maximumConcurrentProductProcessesWasOne": true,
+    "officialBlenderConfigurationUnchanged": true,
+    "stopRuleHonored": true,
+    "allRequiredAcceptanceCriteriaPassed": false
+  },
+  "measurements": {
+    "formalProductStartsCompleted": 3,
+    "formalProductStartsMaximum": 5,
+    "minimumFreeBytesAcrossCompletedAdmissions": "173718777856",
+    "canonicalExactPlans": 2,
+    "negativeControlsPassed": 4,
+    "negativeControlsTotal": 4,
+    "isolatedBuildsPassed": 0,
+    "isolatedBuildsRequired": 2,
+    "sourceGateOwnedAddedLines": 602,
+    "sourceGateOwnedDeletedLines": 1
+  },
+  "failure": {
+    "id": "B01_OCIO_CONFIG_MISMATCH",
+    "expectedOcioConfigName": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+    "actualOcioConfigName": "",
+    "formalProductStart": 3,
+    "sameIdRepairPerformed": false,
+    "laterFormalProductStartsPerformed": false
+  },
+  "officialConfiguration": {
+    "root": "/Users/mengyingli/Library/Application Support/Blender",
+    "entries": 2,
+    "files": 0,
+    "digestBefore": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "digestAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "unchanged": true
+  },
+  "boundedNextExperiment": {
+    "sameIdRepair": false,
+    "newImmutableEvidenceRootRequired": true,
+    "crossBindThisVerdict": true,
+    "change": "Preregister and bind the frozen OCIO config path in the product launch environment before repeating the isolated B01/B02 builds."
+  },
+  "claimCeiling": "This failed F0.4 attempt proves canonical-exact embedded B01/B02 BuildPlan compilation and all four preregistered pre-mutation rejection controls on the admitted product build. It does not prove isolated scene construction because B01 stopped at the frozen OCIO identity check; B02 and the fifth product audit were not run.",
+  "receiptHash": "c0822b046f74920ef81155a3cc268aa2833ab991b5ae08dfdaa575d94f4fb2db"
+}

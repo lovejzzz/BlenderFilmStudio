@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "bfs.f0.4.isolatedBuildReceipt.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.4",
+  "id": "B01",
+  "status": "FAIL",
+  "observedAt": "2026-08-30T04:45:32Z",
+  "formalProductStart": 3,
+  "admission": {
+    "uri": "admissions/03-b01-build.json",
+    "status": "ACCEPTED",
+    "freeBytes": "173718777856",
+    "requiredBytes": "171798691840",
+    "runningBlenderPidsBefore": [],
+    "outputAbsentBefore": true
+  },
+  "command": {
+    "executable": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "args": [
+      "--background",
+      "--factory-startup",
+      "--python",
+      "blender/compile_scene.py",
+      "--",
+      "--plan",
+      "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01/embedded/B01.build-plan.json",
+      "--repository-root",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio",
+      "--output-dir",
+      "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01/b01/artifacts"
+    ],
+    "cwd": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio"
+  },
+  "result": {
+    "exitCode": 1,
+    "signal": null,
+    "elapsedSeconds": 0.573635334,
+    "errorCode": "OCIO_CONFIG_MISMATCH",
+    "expectedOcioConfigName": "cg-config-v4.0.0_aces-v2.0_ocio-v2.5",
+    "actualOcioConfigName": "",
+    "logUri": "b01/failure.log"
+  },
+  "artifacts": {
+    "root": "b01/artifacts",
+    "rootAbsentBefore": true,
+    "entriesAfterFailure": [
+      "frames"
+    ],
+    "filesAfterFailure": 0,
+    "sceneBlendExists": false,
+    "manifestExists": false,
+    "structureReceiptExists": false
+  },
+  "checks": {
+    "admissionAccepted": true,
+    "embeddedPlanHashExact": true,
+    "ocioConfigExact": false,
+    "sceneBuildCompleted": false,
+    "canonicalStructureHashReproduced": false
+  },
+  "stopRule": {
+    "triggered": true,
+    "sameIdRepairPermitted": false,
+    "subsequentFormalProductStartsPermitted": false,
+    "reason": "A formal isolated structure build failed after formal-start.json was frozen."
+  },
+  "receiptHash": "34a23209521af598c6478b1b339c9983249b9d3cef2b5d9721cff2c8e334d21c"
+}
