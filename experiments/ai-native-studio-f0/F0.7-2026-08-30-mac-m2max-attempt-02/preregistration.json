@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "bfs.f0.7.preregistration.v0.1",
+  "status": "FROZEN_BEFORE_PACKAGE_INSTALL_OR_ROUNDTRIP_MUTATION",
+  "observedAtUtc": "2026-08-30T07:18:11Z",
+  "passRule": "The exact normalized payload and unsigned DMG are independently audited; the payload installs at the absent per-user destination and uninstalls without changing installed official Blender; official configuration remains exact; all F0 paths remain independent; both frozen round-trip rows preserve exact core semantic bytes and explicitly report optional-metadata degradation.",
+  "failureRule": "Any protocol stop-rule condition is FAIL with immutable evidence and no same-ID repair after the first package mutation.",
+  "packageMutationStartsBeforeFreeze": 0,
+  "nativeRoundtripStartsBeforeFreeze": 0,
+  "profilesOrThresholdsChanged": true,
+  "newAttemptCorrection": {
+    "priorExperiment": "F0.7-2026-08-30-mac-m2max-attempt-01",
+    "priorFailureId": "P02_DMG_CREATE_TIMEOUT_60S",
+    "change": "Separate the one-time hdiutil compression limit (180 seconds) from the unchanged six Blender process limit (60 seconds each), and use a fresh package root.",
+    "passRulesWeakened": false
+  },
+  "expectedFormalOutputsAbsent": [
+    "package-manifest.json",
+    "install-uninstall.json",
+    "configuration-isolation.json",
+    "roundtrip.json",
+    "audit.json",
+    "verdict.json"
+  ]
+}
