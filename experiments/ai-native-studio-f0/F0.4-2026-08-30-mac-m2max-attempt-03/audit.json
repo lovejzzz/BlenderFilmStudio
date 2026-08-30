@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "bfs.f0.4.identityV2IndependentAudit.v0.1",
+  "formalProductStart": 3,
+  "correction": "C2_VERSIONED_SEMANTIC_STRUCTURE_AND_PRODUCT_PROVENANCE",
+  "independence": "Imports neither film_studio_contract, compile_scene.py nor a formal contract runner.",
+  "crossBoundFiles": {
+    "attempt01Verdict": true,
+    "attempt01CanonicalComparison": true,
+    "attempt01NegativeFixtures": true,
+    "attempt01ProposalDiff": true,
+    "attempt02Verdict": true,
+    "attempt02B01Receipt": true,
+    "B13HistoricalIntent": true,
+    "correctedCompiler": true
+  },
+  "crossBoundSemantics": {
+    "attempt01FailureRetained": true,
+    "attempt02FailureRetained": true,
+    "attempt01ContractEvidencePassed": true,
+    "attempt02OnlyProductBuildHashDiffered": true
+  },
+  "builds": [
+    {
+      "id": "B01",
+      "checks": {
+        "manifestVersion": true,
+        "structureIdentityVersion": true,
+        "planHash": true,
+        "semanticStructureHash": true,
+        "semanticStructureExcludesProductProvenance": true,
+        "productProvenance": true,
+        "blendProductBuildHash": true,
+        "ocioConfig": true,
+        "receiptSelfHash": true
+      },
+      "passed": true,
+      "blendSha256": "648ba4e5c0be2620f0da85dd8fdc0a23d878c39054e61e69029221b5457da942"
+    },
+    {
+      "id": "B02",
+      "checks": {
+        "manifestVersion": true,
+        "structureIdentityVersion": true,
+        "planHash": true,
+        "semanticStructureHash": true,
+        "semanticStructureExcludesProductProvenance": true,
+        "productProvenance": true,
+        "blendProductBuildHash": true,
+        "ocioConfig": true,
+        "receiptSelfHash": true
+      },
+      "passed": true,
+      "blendSha256": "981a8581e128907eacbc417e9b3ac7063fdf4b9cb477ff9aa7cae42a9310be19"
+    }
+  ],
+  "separationAttacks": [
+    {
+      "id": "B01_PROVENANCE_MUTATION",
+      "semanticHashUnchanged": true,
+      "productProvenanceRejected": true,
+      "passed": true
+    },
+    {
+      "id": "B01_SEMANTIC_MUTATION",
+      "semanticHashRejected": true,
+      "productProvenanceUnchanged": true,
+      "passed": true
+    },
+    {
+      "id": "B02_PROVENANCE_MUTATION",
+      "semanticHashUnchanged": true,
+      "productProvenanceRejected": true,
+      "passed": true
+    },
+    {
+      "id": "B02_SEMANTIC_MUTATION",
+      "semanticHashRejected": true,
+      "productProvenanceUnchanged": true,
+      "passed": true
+    }
+  ],
+  "status": "PASS",
+  "auditHash": "93f1758c56903faf526930ac1f84178b5f9927c9187202df45f408506cfe403d"
+}

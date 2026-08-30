@@ -5873,3 +5873,15 @@ attempt-02 在产品启动前以commit `4ae936e619be90db37ddd263af485d7a0d64c79e
 独立JSON diff证明两个structure只有一个路径不同：`$.blender.buildHash`从官方基线`fbe6228777e7`变为当前fork产品`b47eae224b6d`。删除这一product provenance字段后，两份场景结构canonical bytes具有同一SHA `0bb1caf9966e9e64b71d586274b00a783bc003dcb9f3240b9a655ece21ff73aa`；几何、材质、灯光、相机、render contract、shot与planHash均未变化。这一观察不能把attempt-02升级为PASS，它只定位到identity contract把semantic structure与product provenance混层。
 
 B01/B02/audit/verdict四份self hash均独立复算通过，最终verdict self hash为`279028206e81c40ffede744313f6b40f4d97fe03d6b5d4a5d40bd0e6867651cb`；官方Blender config digest前后仍为`c97e9a5f…`。下一次只允许在fresh、cross-bound evidence root中预登记versioned structure identity contract，分别精确哈希scene semantics与product provenance，再运行B01/B02和独立审计。F0.5继续锁定。
+
+## J-474 · F0.4 identity-v2 B01/B02 与独立审计 PASS
+
+Date: 2026-08-30 · Type: F0.4 EMBEDDED CONTRACT PASS · Host: macOS 25.6.0 / Apple M2 Max / 64 GiB · Formal product starts: 3 / 3
+
+attempt-03在任何工具修改前以commit `3b63a57ee2da88c8f1b2a748e002a64efd959a9a`预登记并推送，明确交叉绑定attempt-01 OCIO失败与attempt-02 full structure失败。版本化合同依据B13既有预注册文字，把Blender version/build provenance移出semantic structure；它没有改变F0 spec acceptance、SceneSpec、BuildPlan、product source、OCIO、asset、render参数或900-line source ceiling。`blender/compile_scene.py`只改7 added / 4 deleted lines，SHA从`25ebfdfc…`变为`d38cc057…`；产品源码保持`b47eae224b6d3e71559b55df85fd20ae87d3f92b`且没有重建。
+
+formal-start commit `ec05c74bc94cbc85c28c38570db202ea60b83324`推送后，三个正式启动均fresh admitted，最低free bytes为173,716,008,960，高于160 GiB阈值，启动前输出均absent、Blender进程0，最大并发1。B01以exact planHash `316114f1…`产生118,220-byte `.blend`与semantic structure `e8c55fb73737f1871ac0008faa705dc204ebfe5bac471323cbb0a2d31435b4f8`；B02以planHash `a9022bf6…`产生107,111-byte `.blend`与semantic structure `d197b024c3b1de19c7fa981912c584de51d6d4884ef78b10e29db598ce979954`。两份manifest均为v0.3，product provenance分别独立要求version `5.2.0 LTS`、build `b47eae224b6d`、branch `codex/f0.4-embedded-contract`、platform `Darwin`，OCIO仍为`24ec8184…`。
+
+第三个真实产品进程imports neither compiler nor contract runner，分别重开B01/B02 `.blend`并验证scene custom properties、manifest、semantic bytes、product provenance、OCIO与两份self-hashed build receipt。它还执行四个内存attack：对B01/B02各自篡改product build hash时semantic hash必须不变且provenance拒绝；篡改shot title时semantic hash必须拒绝且provenance保持精确。4/4 attacks通过，cross-bound attempts 01/02 files与semantics全部精确，audit hash为`93f1758c56903faf526930ac1f84178b5f9927c9187202df45f408506cfe403d`。
+
+最终F0.4 verdict为PASS，self hash `f2888a3b4c89df3370c13fbf28097ecb4d83a3f11f325588a12321d27f7666a3`；attempts 01/02仍保留为FAIL，官方Blender config digest前后继续为`c97e9a5f…`。F0.4只证明SceneSpec→canonical BuildPlan、四项pre-mutation rejection、approval order、B01/B02 isolated construction与semantic/provenance identity；F0.5 render、F0.6 merge和F0.7 package均未证明。下一步只能先预注册F0.5 render/receipt实验，不能直接开始渲染。

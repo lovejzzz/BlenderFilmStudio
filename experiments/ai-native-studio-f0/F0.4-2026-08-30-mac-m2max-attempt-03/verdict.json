@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "bfs.f0GateCorrectionVerdict.v0.2",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.4",
+  "experimentId": "F0.4-2026-08-30-mac-m2max-attempt-03",
+  "status": "PASS",
+  "observedAt": "2026-08-30T05:20:40Z",
+  "correction": "C2_VERSIONED_SEMANTIC_STRUCTURE_AND_PRODUCT_PROVENANCE",
+  "dependsOn": {
+    "gate": "F0.3",
+    "status": "PASS",
+    "receiptHash": "472abf5df3c66dba375e46fe7e9a0e152cc3d6c37966ab13f6d7e2601fea0390",
+    "sourceCommit": "4f1446f780c2b7e23bc66f584b36f6254ecd985c"
+  },
+  "retainedFailures": [
+    {
+      "experiment": "F0.4-2026-08-30-mac-m2max-attempt-01",
+      "status": "FAIL",
+      "failure": "B01_OCIO_CONFIG_MISMATCH",
+      "verdictFileSha256": "788ad1014a58cc5446ba00d0abaf6131d4143fd4062157e26457adeaf120ee89",
+      "verdictReceiptHash": "c0822b046f74920ef81155a3cc268aa2833ab991b5ae08dfdaa575d94f4fb2db"
+    },
+    {
+      "experiment": "F0.4-2026-08-30-mac-m2max-attempt-02",
+      "status": "FAIL",
+      "failure": "B01_FROZEN_STRUCTURE_HASH_MISMATCH",
+      "verdictFileSha256": "6db72890e649e18de68926459947edd490d1c651188ff986ccc230da581ef764",
+      "verdictReceiptHash": "279028206e81c40ffede744313f6b40f4d97fe03d6b5d4a5d40bd0e6867651cb"
+    }
+  ],
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src",
+    "branch": "codex/f0.4-embedded-contract",
+    "head": "b47eae224b6d3e71559b55df85fd20ae87d3f92b",
+    "parent": "4f1446f780c2b7e23bc66f584b36f6254ecd985c",
+    "clean": true,
+    "gateOwnedAddedLines": 602,
+    "gateOwnedDeletedLines": 1,
+    "ceiling": 900
+  },
+  "identityContractCorrection": {
+    "historicalIntent": "B13 preregistered Blender version/build provenance outside the semantic structure object.",
+    "compilerBeforeSha256": "25ebfdfcd5d34a3dac9d74676a90ad8c095a96fd35fa0d4663b844f743f58240",
+    "compilerAfterSha256": "d38cc0579397f7e985b197f2a4725ae1c26eb3509166c8030198fa246cccee19",
+    "compilerAddedLines": 7,
+    "compilerDeletedLines": 4,
+    "blenderSourceChanges": 0,
+    "manifestVersion": "0.3.0",
+    "semanticStructureVersion": "bfs.semanticSceneStructure.v0.2"
+  },
+  "product": {
+    "app": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.3-workspace/bin/Film Studio Engine F0.app",
+    "binarySha256": "5a4538163d1fce6c531f2ad76a15232fc1d1d4bbff483d54778a290b4c37cb40",
+    "binaryBytes": 182654792,
+    "version": "5.2.0 LTS",
+    "buildHash": "b47eae224b6d",
+    "buildBranch": "codex/f0.4-embedded-contract",
+    "buildPlatform": "Darwin"
+  },
+  "evidence": {
+    "experiment": "experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-03",
+    "preregistrationCommit": "3b63a57ee2da88c8f1b2a748e002a64efd959a9a",
+    "harnessCommit": "0a641962f16ec54e84d5134140258cdfcd49466c",
+    "formalStartCommit": "ec05c74bc94cbc85c28c38570db202ea60b83324",
+    "formalStartFileSha256": "f707dd29b7e08a35ec5d5e47651bd269228523b219724d605b02bb01582fae82",
+    "B01ReceiptFileSha256": "a211adc14f3a9a7bd5605e06794c4836d5ce2e8c6895b60a49300368e0e2076a",
+    "B01ReceiptHash": "c09cc44bfd88e6e88b0661a48e6b7f75851bc54599ae6d75d74925fa9aa376bf",
+    "B02ReceiptFileSha256": "cf219f962b4a800ddb7a45c247b068798f3ce252e5a500e8ee9c0b20f9d5e2b1",
+    "B02ReceiptHash": "38abed7eb09e5d85ccc1db1c05cc7ec48f1fd712fa694d096364101892e14a67",
+    "auditFileSha256": "2021acc5c48b8b41a423a57dc27d13b7e28ac60081c28bc4199bc97b2890e479",
+    "auditHash": "93f1758c56903faf526930ac1f84178b5f9927c9187202df45f408506cfe403d"
+  },
+  "combinedGateEvidence": {
+    "canonicalComparisonHash": "74f34701c277dcb46de464dd17e8d1e490a75d943559b5e066430f93667864c1",
+    "negativeHash": "de0310d54a490069e9e45ffe248c33ac82c4abf5b02fc526a552383be28a8383",
+    "proposalDiffHash": "dbf9edbdc9c92926e11aa406279989e536a25c181add0f8637ba402a072abe42",
+    "contractRuntimeReceiptHash": "bf71ae0b868c3f40d8fd0452176278ecfa68cf27d3020cdcd9297f598199b040"
+  },
+  "checks": {
+    "productAcceptsFrozenSceneSpecWithoutArbitraryGeneratedPython": true,
+    "embeddedB01BuildPlanCanonicalExact": true,
+    "embeddedB02BuildPlanCanonicalExact": true,
+    "proposalDiffAndApprovalScopeInspectedBeforeExecution": true,
+    "unknownFieldRejectedBeforeMutation": true,
+    "pathEscapeRejectedBeforeMutation": true,
+    "nonfiniteNumberRejectedBeforeMutation": true,
+    "unapprovedMutationRejectedBeforeMutation": true,
+    "B01IsolatedBuildPassed": true,
+    "B02IsolatedBuildPassed": true,
+    "B01SemanticStructureExact": true,
+    "B02SemanticStructureExact": true,
+    "productProvenanceExactAndSeparate": true,
+    "identitySeparationAttacksPassed": true,
+    "independentProductAuditPassed": true,
+    "sourcePatchWithinCeiling": true,
+    "allFormalProductStartsAdmittedAbove160GiB": true,
+    "maximumConcurrentProductProcessesWasOne": true,
+    "officialBlenderConfigurationUnchanged": true,
+    "retainedFailuresCrossBound": true,
+    "allRequiredAcceptanceCriteriaPassed": true
+  },
+  "measurements": {
+    "formalProductStartsCompleted": 3,
+    "formalProductStartsMaximum": 3,
+    "minimumFreeBytesAcrossCompletedAdmissions": "173716008960",
+    "isolatedBuildsPassed": 2,
+    "isolatedBuildsRequired": 2,
+    "canonicalExactPlans": 2,
+    "preMutationNegativeControlsPassed": 4,
+    "preMutationNegativeControlsTotal": 4,
+    "identitySeparationAttacksPassed": 4,
+    "identitySeparationAttacksTotal": 4,
+    "B01SemanticStructureSha256": "e8c55fb73737f1871ac0008faa705dc204ebfe5bac471323cbb0a2d31435b4f8",
+    "B02SemanticStructureSha256": "d197b024c3b1de19c7fa981912c584de51d6d4884ef78b10e29db598ce979954"
+  },
+  "officialConfiguration": {
+    "root": "/Users/mengyingli/Library/Application Support/Blender",
+    "entries": 2,
+    "files": 0,
+    "digestBefore": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "digestAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "unchanged": true
+  },
+  "nextGate": {
+    "id": "F0.5",
+    "status": "AUTHORIZED_TO_PREREGISTER_ONLY",
+    "required": "Freeze mouse-free EEVEE preview, Cycles EXR, process, pixel, cost and failure receipts before any render."
+  },
+  "claimCeiling": "F0.4 PASS proves the frozen SceneSpec-to-canonical-BuildPlan contract, four pre-mutation rejections, visible approval ordering, isolated B01/B02 construction and independently audited separation of semantic structure from exact product provenance. It retains attempts 01/02 as failures and does not prove rendering, merge cost, packaging, arbitrary scenes or production readiness.",
+  "receiptHash": "f2888a3b4c89df3370c13fbf28097ecb4d83a3f11f325588a12321d27f7666a3"
+}

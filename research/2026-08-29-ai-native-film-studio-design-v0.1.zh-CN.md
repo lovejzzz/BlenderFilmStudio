@@ -313,7 +313,7 @@ film-studio/
 
 任何一项失败都保留原始证据，并可能改变架构。例如 F0.6 成本过高时，退回“未修改 Blender + 外部 Studio shell”；不以愿景为由继续扩大分叉。
 
-截至 2026-08-30，F0.1–F0.3 已 PASS，F0.4 保留两次 FAIL。attempt-01 证明 BuildPlan canonical exact、4/4 pre-mutation 负控与 proposal approval 顺序，但发现产品启动遗漏 OCIO 绑定。attempt-02 只纠正该环境绑定并成功创建 B01 `.blend`；冻结 full structure hash 仍不相等，独立 diff 显示唯一不同字段是 `$.blender.buildHash`。这说明当前 structure identity 将场景语义与产品 provenance 混在同一哈希中。下一次只能用版本化协议在新 evidence root 中分离两者，同时继续精确保存并验证产品 provenance；不能改写前两次失败或把删除字段冒充原门槛已通过。
+截至 2026-08-30，F0.1–F0.4 已 PASS，F0.4 的前两次 FAIL 仍保留。attempt-01 证明 BuildPlan canonical exact、4/4 pre-mutation 负控与 proposal approval 顺序，但发现产品启动遗漏 OCIO 绑定。attempt-02 只纠正该环境绑定并成功创建 B01 `.blend`；冻结 full structure hash 仍不相等，独立 diff 显示唯一不同字段是 `$.blender.buildHash`。attempt-03 根据此前 B13 预注册意图，以 manifest v0.3 把 semantic structure 与 exact product provenance 分层；B01/B02 隔离构建、两份 `.blend` 独立重开、交叉绑定与四个 separation attacks 全部通过，因此关闭 F0.4。此 PASS 不改写前两次失败，也不证明 render receipt、merge、package 或生产就绪；active gate 转为 F0.5。
 
 ## 14. 阶段路线
 
