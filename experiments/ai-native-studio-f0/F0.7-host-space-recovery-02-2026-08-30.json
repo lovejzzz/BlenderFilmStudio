@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "bfs.f0.7.hostSpaceRecovery.v0.1",
+  "status": "PASS",
+  "observedAtUtc": "2026-08-30T07:48:55Z",
+  "reason": "Restore the unchanged 160 GiB initial admission threshold after retained F0.7 evidence and undo the transient dependency installation footprint without deleting any source, product, package or evidence.",
+  "removed": [
+    {
+      "path": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/node_modules",
+      "classification": "Generated npm dependency installation; package.json and package-lock.json remain exact.",
+      "allocatedKiBBefore": 767504,
+      "recoverableBy": "npm ci"
+    },
+    {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.6-merge-drill",
+      "classification": "Remaining post-link CMake intermediates; retained bin is the only remaining child.",
+      "removedAllocatedKiB": 242940,
+      "retained": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.6-merge-drill/bin"
+    },
+    {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-a/lib",
+      "classification": "Official-source post-link static libraries, not referenced by the retained runtime binary.",
+      "files": 153,
+      "allocatedKiBBefore": 275012,
+      "recoverableBy": "Reconfigure and rebuild from the retained official source and dependency trees."
+    }
+  ],
+  "runtimeSafety": {
+    "f0ProductBinarySha256After": "58d5c984c58d986d3cf44622ad5876052a67890d0b077dafd4977f6e2b24a71d",
+    "officialRoundtripBinarySha256After": "cf0fa6bb8cca9621d39637dfbcfa9990abcbf9ccaafc5edd8306967d9aaaad3e",
+    "otoolReferencesToRemovedStaticLibraryRootsBefore": 0,
+    "sourceTreesRetained": true,
+    "productBundlesRetained": true,
+    "failedAttemptPackagesRetained": true,
+    "failedAttemptEvidenceRetained": true
+  },
+  "freeBytesBefore": "170766241792",
+  "freeBytesAfter": "171861352448",
+  "requiredInitialFreeBytes": "171798691840",
+  "receiptHash": "f0c4a0f3a81cde61616921a0a6be73e93a2ea0b3021520fc10dc3b4718981706"
+}
