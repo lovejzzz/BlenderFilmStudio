@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "bfs.f0GateVerdict.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.5",
+  "experimentId": "F0.5-2026-08-30-mac-m2max-attempt-01",
+  "status": "FAIL",
+  "observedAt": "2026-08-30T05:39:28Z",
+  "dependsOn": {
+    "gate": "F0.4",
+    "status": "PASS",
+    "experiment": "F0.4-2026-08-30-mac-m2max-attempt-03",
+    "receiptHash": "f2888a3b4c89df3370c13fbf28097ecb4d83a3f11f325588a12321d27f7666a3"
+  },
+  "product": {
+    "binarySha256": "5a4538163d1fce6c531f2ad76a15232fc1d1d4bbff483d54778a290b4c37cb40",
+    "version": "5.2.0 LTS",
+    "buildHash": "b47eae224b6d"
+  },
+  "evidence": {
+    "experiment": "experiments/ai-native-studio-f0/F0.5-2026-08-30-mac-m2max-attempt-01",
+    "preregistrationCommit": "528de05163aee900733e7767d3b71d3a7f474d78",
+    "toolFreezeCommit": "d4352a905effa2df6e20002d49dc601be8b20be5",
+    "formalStartCommit": "09f9806e2883da2448edc2e8484250ec5ec8b6ec",
+    "formalStartFileSha256": "47aee440ee2a8291809319268eaf041e59bb7600a618d15b3a58983698e12bb5",
+    "insufficientDiskAdmissionFileSha256": "c2eaae9f7a159cf156461a91370453d58c69042d2cc332b6d213c22ae78eb9cc",
+    "previewAdmissionFileSha256": "bbf3d83fadad8e5ce9f01bcc8f2fe70d029eed61b81407492ee5ce4671788019",
+    "previewProcessFileSha256": "e642db4c6c100320ae3c51ef31394288caf4e8d102680cf0e5b6dd9b3b93fdb4",
+    "previewProcessHash": "d54f8e0918f38a20c628d6c47dd095efb4eabd56254d8302feef9ba04739d384"
+  },
+  "checks": {
+    "frozenSourceIdentityExact": true,
+    "frozenProductIdentityExact": true,
+    "frozenOcioIdentityExact": true,
+    "insufficientDiskRejectedBeforeProductStart": true,
+    "previewAdmissionAcceptedAbove160GiB": true,
+    "previewProcessExitedZero": false,
+    "previewArtifactProduced": false,
+    "cyclesFinalProduced": false,
+    "independentPixelAuditPassed": false,
+    "sourceBlendUnchanged": true,
+    "officialBlenderConfigurationUnchanged": true,
+    "stopRuleHonored": true,
+    "sameIdRepairPerformed": false,
+    "allRequiredAcceptanceCriteriaPassed": false
+  },
+  "measurements": {
+    "formalProductStartsCompleted": 1,
+    "formalProductStartsMaximum": 4,
+    "rendererStartsCompleted": 1,
+    "actualRenderCallsObserved": 0,
+    "minimumFreeBytesAcrossCompletedAdmissions": "173687324672",
+    "previewExitCode": 1,
+    "previewRealSeconds": 0.64,
+    "previewMaximumResidentSetSizeBytes": 242958336,
+    "formalRenderArtifactsProduced": 0
+  },
+  "failure": {
+    "id": "PREVIEW_OUTPUT_MEDIA_TYPE_NOT_RESET",
+    "formalProductStart": 1,
+    "stage": "PREVIEW",
+    "exception": "TypeError: bpy_struct: item.attr = val: enum PNG not found in ('OPEN_EXR_MULTILAYER')",
+    "cause": "The frozen B01 source carries media_type MULTI_LAYER_IMAGE. The preview harness attempted to select PNG without first changing media_type to IMAGE, so the file_format enum remained restricted to OPEN_EXR_MULTILAYER.",
+    "failurePoint": "Before bpy.ops.render.render",
+    "previewArtifactAbsent": true,
+    "previewSuccessReceiptAbsent": true,
+    "laterFormalProductStartsPerformed": false
+  },
+  "officialConfiguration": {
+    "root": "/Users/mengyingli/Library/Application Support/Blender",
+    "entries": 2,
+    "files": 0,
+    "digestBefore": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "digestAfter": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "unchanged": true
+  },
+  "boundedNextExperiment": {
+    "sameIdRepair": false,
+    "newImmutableEvidenceRootRequired": true,
+    "crossBindThisVerdict": true,
+    "change": "In a new preregistered root, set preview media_type to IMAGE before PNG and final media_type to MULTI_LAYER_IMAGE before OPEN_EXR_MULTILAYER; distinguish expected from observed render calls in process receipts; retain all other profiles, thresholds and order."
+  },
+  "claimCeiling": "Attempt-01 proves exact admission and the insufficient-disk zero-start rejection, then preserves a preview setup failure before any render call. It does not pass F0.5 and makes no claim about preview pixels, Cycles output, recovery or independent audit.",
+  "receiptHash": "e36afca30fc3567368ae72466c682a32ab54723300b2aa063667382b5b06c617"
+}
