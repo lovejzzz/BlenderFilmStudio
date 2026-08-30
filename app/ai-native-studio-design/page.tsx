@@ -212,7 +212,7 @@ export default function AiNativeStudioDesignPage() {
         <div className="section-index">06 / SOURCE INTERVENTION</div>
         <div className="ain-section-heading"><div><p className="eyebrow dark"><span /> CHANGE THE SMALLEST CORRECT LAYER</p><h2>拥有全部代码，<br />不代表要<span>修改全部代码。</span></h2></div><p>源码控制是安全阀，而不是改动 KPI。每深入一级，都需要一个无法在更浅层可靠解决的实验反例。</p></div>
         <div className="ain-source-levels">{sourceLevels.map(([id,title,detail,policy]) => <article key={id}><aside><span>{id}</span><small>{policy}</small></aside><div><h3>{title}</h3><p>{detail}</p></div></article>)}</div>
-        <div className="ain-repo-map"><header><span>REPOSITORY STRATEGY</span><b>研究证据与多 GiB 引擎历史分离</b></header><div><code>BlenderFilmStudio / research + protocols + evidence</code><i>→</i><code>film-engine / Blender thin fork · GPL</code><i>+</i><code>film-studio-control / adapters + services</code></div><footer>Public fork已创建；GitHub拒绝新LFS对象，product main仍未发布，等待ordinary-blob C1授权。</footer></div>
+        <div className="ain-repo-map"><header><span>REPOSITORY STRATEGY</span><b>研究证据与多 GiB 引擎历史分离</b></header><div><code>BlenderFilmStudio / research + protocols + evidence</code><i>→</i><code>film-engine / Blender thin fork · GPL</code><i>+</i><code>film-studio-control / adapters + services</code></div><footer>Public fork C1已发布：main 4061e12b…，三路径ordinary blobs，独立审计59/59；Phase B仍未授权。</footer></div>
       </section>
 
       <section className="section ain-license" id="license">
@@ -246,7 +246,7 @@ export default function AiNativeStudioDesignPage() {
         <div className="section-index light">11 / PRIMARY SOURCES</div>
         <div className="ain-section-heading light"><div><p className="eyebrow"><span /> RESEARCH BASIS</p><h2>许可证决定边界。<br /><span>真实实验决定主张。</span></h2></div><p>外部来源用于确认源码、构建、架构、商标和许可证；产品可靠性结论只来自本仓库冻结协议下的真实 Blender 实验。</p></div>
         <ol className="ain-source-list">{sources.map(([author,title,href],index) => <li key={href}><span>{String(index + 1).padStart(2,'0')}</span><div><small>{author}</small><a href={href} target="_blank" rel="noreferrer">{title} ↗</a></div></li>)}</ol>
-        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>PUBLICATION C1 · ORDINARY GIT BLOBS</h3><p>授权执行已创建 `lovejzzz/film-engine`，但GitHub服务端在0/2 bytes拒绝public fork的新LFS对象；Git ref update保持0，独立failure audit 33/33。推荐C1只新增一个以`fa1b…`为父的publication compatibility commit，限定`.gitattributes`、icon、splash三路径，保持两个binary SHA/bytes exact，再用generated `08bed5b5…` lease更新main。该commit与push仍等待新授权；release、签名、公证、DMG distribution与Phase B仍未授权。</p><Link href="/ai-native-studio-handoff">打开C1边界 →</Link></div></div>
+        <div className="ain-next"><span>NEXT AUTHORIZED RESEARCH</span><div><h3>PHASE B · SEPARATE OWNER DECISION</h3><p>`lovejzzz/film-engine` C1已完成：commit `4061e12b…`以`fa1b…`为唯一parent，只改变`.gitattributes`、icon、splash；两份binary SHA/bytes exact。一次`08bed5b5…` lease push只更新main，LFS/other refs/tags/release/Phase B均为0；fresh remote clone与独立59/59 audit通过。下一步不是自动开始开发，而是为首个有界Phase B gate版本化协议并取得独立授权。</p><Link href="/ai-native-studio-handoff">打开当前边界 →</Link></div></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · Design Doc v0.1</b></div><p>Direction adopted · Implementation gated · Snapshot 2026-08-29</p><Link href="/ai-native-studio-handoff">新机器从这里开始 →</Link></footer>

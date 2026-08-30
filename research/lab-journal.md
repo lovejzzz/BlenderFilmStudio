@@ -6017,3 +6017,15 @@ owner在当前Codex任务中逐字给出v0.3所要求的superseding authorizatio
 执行前只读复核确认host preflight accepted，free 175 GiB；retained F0 checkout clean、HEAD/tree/parents exact；icon与splash仍为2,135,147 / 565,997 bytes且SHA-256 exact；full-history local source为162,917 commits；live `lovejzzz/film-engine`仍是repository id `1351574987`的public `blender/blender` fork，只有`main`，live OID仍为lease的`08bed5b5…`，0 PR、0 release、0 tag。
 
 v0.4把一次性执行收紧为fresh bare local clone中的Git object/index plumbing：候选commit只在new local object database构造，先经fresh no-smudge local clone验证；push显式绑定empty hooks目录且runner中禁止任何`git lfs`调用。lease变化、路径/哈希/attributes不符或任何push failure均立即停止且不重试。正式外部mutation只能在本预注册文档、machine contract、runner与independent auditor提交并推送、research worktree恢复clean后进行。
+
+## J-487 · C1 three-path publication compatibility PASS
+
+Date: 2026-08-30 · Type: AUTHORIZED PUBLICATION PASS · Git push attempts / ref updates / LFS uploads: 1 / 1 / 0
+
+v0.4 prereg/tool commit `09c26b19ef7caa931afd076f3ef932a87cb3df4c`先推送并恢复clean；正式preflight再次确认full-history fsck、162,917 commits、source/assets、live fork identity、single generated main `08bed5b5…`、0 tag/PR/release和175 GiB free，状态`ACCEPTED`。
+
+执行器在fresh bare副本中用object/index plumbing生成commit `4061e12bd45a2bec83e68d0cf49abbf56d4738f6`、tree `5f0cb3eb964f4d747ca3a5c9fcb8545cee6773ba`，唯一parent exact为`fa1b578b…`。相对parent只变化`.gitattributes`、icon、splash；ordinary blob OID exact为`497c866c…` / `9af8454b…`，两份binary的SHA-256与2,135,147 / 565,997 bytes均不变，attributes全为unset。fresh local no-smudge clone先通过。
+
+lease recheck仍为`08bed5b5…`后，从显式empty hooks的bare副本只发起一次`--force-with-lease=refs/heads/main:08bed5b5…` push并成功。fresh GitHub no-smudge clone直接materialize两份完整binary，live repo仍是public `blender/blender` fork、仅`main`、0 tag/PR/release。Runner verdict self hash为`f20c18aa…`；不import runner的独立auditor复算对象、路径、两次clone、exact command、live API与全部副作用，59/59 PASS，self hash `71d6e9d581c65fd56242385b18e4aa9c3287d771d583931662571154c6b41cd6`。
+
+本次新增副作用仅Git push attempt / main ref update = `1 / 1`；repository create、LFS upload、other ref、tag、release、Phase B、delete/recreate/rename全部0。C1关闭source publication compatibility，不授权Phase B、release、签名、公证或DMG分发。

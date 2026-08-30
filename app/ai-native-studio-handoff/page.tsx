@@ -37,6 +37,9 @@ const documents = [
   ['12', 'Exact authorization request', 'public fork、2个LFS对象、billing接受与fresh-main lease。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-film-studio-engine-public-fork-authorization-request-v0.1.zh-CN.md'],
   ['13', 'Authorized publication v0.2', 'owner将名称改为film-engine；fail-closed create/LFS/lease执行边界。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-film-engine-public-fork-execution-authorization-v0.2.zh-CN.md'],
   ['14', 'GitHub LFS policy C1', 'public fork已创建；新LFS对象被拒，33/33 failure audit与最小修正。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-film-engine-public-fork-c1-github-lfs-policy.md'],
+  ['15', 'C1 execution v0.4', 'owner exact授权、三路径、ordinary blobs与generated-main lease。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/specs/ai-native-studio-repository-publication-c1-execution.v0.4.json'],
+  ['16', 'C1 publication outcome', 'main 4061e12b；single parent；一次ref update；LFS 0。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/research/2026-08-30-film-engine-publication-c1-pass.md'],
+  ['17', 'C1 independent audit', 'fresh local/remote clones、live API与59/59独立检查。', 'https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json'],
 ];
 
 const inherited = [
@@ -60,14 +63,14 @@ export default function AiNativeStudioHandoffPage() {
         <div className="handoff-hero-copy">
           <p className="eyebrow"><span /> NEW MACHINE HANDOFF · 2026.08.30</p>
           <h1>换一台电脑，<br />不换一套<span>事实。</span></h1>
-          <p>F0.1–F0.7 与 repository-readiness C2 已通过。授权执行已创建 public fork `lovejzzz/film-engine`，但 GitHub 在 0/2 bytes 时拒绝向 public fork 播种两个新品牌 LFS OID；runner在任何ref update前停止，failure audit 33/33。现有fork仍是generated upstream main；下一步等待三路径ordinary-blob C1的独立授权。</p>
+          <p>F0.1–F0.7、repository-readiness C2与public-fork C1均已通过。`lovejzzz/film-engine` live main为`4061e12b…`，唯一parent `fa1b…`；只有`.gitattributes`、icon、splash变化，两份binary内容不变。一次exact lease push只更新main，LFS/other refs/tags/release/Phase B为0；独立审计59/59。下一步必须单独决定是否授权Phase B。</p>
           <div className="handoff-hero-actions"><a href="#start">开始交接 ↓</a><Link href="/ai-native-studio-design">为什么做自己的软件</Link></div>
         </div>
         <aside className="handoff-state">
           <header><span>PROGRAM STATE</span><b>F0.1–F0.7 PASS</b></header>
-          <div className="handoff-state-main"><small>NEXT CHECKPOINT</small><strong>C1</strong><h2>ORDINARY BLOBS<br />+ LEASED MAIN</h2></div>
-          <dl><div><dt>REPO</dt><dd>lovejzzz/film-engine</dd></div><div><dt>LIVE MAIN</dt><dd>08bed5b5b42e</dd></div><div><dt>DESIRED PARENT</dt><dd>fa1b578bb421</dd></div><div><dt>FAIL AUDIT</dt><dd>33 / 33 PASS</dd></div></dl>
-          <footer>FORK CREATED · LFS 0 · REF UPDATE 0</footer>
+          <div className="handoff-state-main"><small>NEXT CHECKPOINT</small><strong>PB</strong><h2>EXPLICIT PHASE B<br />OWNER DECISION</h2></div>
+          <dl><div><dt>REPO</dt><dd>lovejzzz/film-engine</dd></div><div><dt>LIVE MAIN</dt><dd>4061e12bd45a</dd></div><div><dt>ONLY PARENT</dt><dd>fa1b578bb421</dd></div><div><dt>C1 AUDIT</dt><dd>59 / 59 PASS</dd></div></dl>
+          <footer>C1 PASS · LFS 0 · REF UPDATE 1</footer>
         </aside>
         <div className="handoff-signal"><span>01</span><b>读取规则</b><i>→</i><span>02</span><b>只读预检</b><i>→</i><span>03</span><b>固定源码</b><i>→</i><span>04</span><b>保存证据</b></div>
       </section>
@@ -80,7 +83,7 @@ export default function AiNativeStudioHandoffPage() {
           <article><span>01</span><h3>读入口</h3><code>START_HERE.md</code><p>确认目标与禁区，不从旧 B62 继续。</p></article>
           <article><span>02</span><h3>做预检</h3><code>preflight-f0-source-host.mjs</code><p>先获得 ACCEPTED 或 BLOCKED 事实。</p></article>
           <article><span>03</span><h3>核验 F0 结论</h3><code>F0.7-…-attempt-05</code><p>确认 7/7 PASS 与 attempts 01–04 retained。</p></article>
-          <article><span>04</span><h3>读取当前阻塞</h3><code>PUBLICATION C1</code><p>fork已创建；LFS policy BLOCKED；ref未更新。</p></article>
+          <article><span>04</span><h3>读取当前边界</h3><code>PHASE B</code><p>C1已通过；source mutation仍需新授权。</p></article>
         </div>
       </section>
 
@@ -93,7 +96,7 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-map" id="map">
         <div className="section-index">02 / REPOSITORY MAP</div>
-        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> FOURTEEN AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议、修正链、授权请求与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
+        <div className="handoff-heading"><div><p className="eyebrow dark"><span /> SEVENTEEN AUTHORITATIVE FILES</p><h2>给人看的解释，<br />和给机器读的<span>状态同样重要。</span></h2></div><p>入口、设计、实验协议、修正链、授权请求与机器规范各司其职。状态变化时必须同步，而不是只在聊天记录里留下一个新方向。</p></div>
         <div className="handoff-docs">{documents.map(([id,title,detail,href]) => <a href={href} target="_blank" rel="noreferrer" key={id}><span>{id}</span><div><h3>{title}</h3><p>{detail}</p></div><b>OPEN ↗</b></a>)}</div>
         <div className="handoff-storage"><span>REPOSITORY BOUNDARY</span><div><code>BlenderFilmStudio</code><b>rules · protocols · evidence · site</b></div><i>≠</i><div><code>external F0 workspace</code><b>source · dependencies · builds</b></div></div>
       </section>
@@ -107,9 +110,9 @@ export default function AiNativeStudioHandoffPage() {
 
       <section className="handoff-checkpoint">
         <span>LATEST CLOSED CHECKPOINT</span>
-        <h2>Public fork 已创建；GitHub LFS policy failure被保留。</h2>
-        <p>Generated main 08bed5b5 · LFS 0/2 · Git ref updates 0 · releases 0 · Phase B 0 · independent failure audit 33 / 33</p>
-        <div><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json" target="_blank" rel="noreferrer">读取 Failure Audit ↗</a><Link href="/journal">查看实验日志 →</Link></div>
+        <h2>Public fork C1 已发布；Phase B 尚未授权。</h2>
+        <p>Live main 4061e12b · only parent fa1b578b · push/ref/LFS 1/1/0 · releases 0 · Phase B 0 · independent audit 59 / 59</p>
+        <div><a href="https://github.com/lovejzzz/BlenderFilmStudio/blob/main/experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json" target="_blank" rel="noreferrer">读取 C1 Audit ↗</a><Link href="/journal">查看实验日志 →</Link></div>
       </section>
 
       <footer className="ain-footer"><div><span className="brand-mark">BFS</span><b>AI Native Film Studio · New Machine Handoff</b></div><p>One repository · One source identity · Seven falsifiable gates</p><Link href="/ai-native-studio-design">返回 Design Doc →</Link></footer>

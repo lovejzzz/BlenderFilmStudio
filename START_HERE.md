@@ -39,19 +39,20 @@ both a research notebook and an executable evidence base. Read this page,
   exact HEAD `fa1b578b…`, exact tree `4d761fb7…`, merge base `9e2066ae…` and a
   clean full `git fsck`. Runner/auditor self hashes are `dc1cc768…` and
   `b841e519…` (93/93). External repository creates/pushes and LFS uploads were 0.
-- **Repository publication attempt retained:** owner authorization v0.2 changed
+- **Repository publication failure retained:** owner authorization v0.2 changed
   the name to `film-engine`. The runner created public fork
   `lovejzzz/film-engine`, verified parent `blender/blender`, one generated
   `main`, zero PRs/releases, then GitHub rejected both new brand LFS objects at
   0/2 and 0 bytes: `can not upload new objects to public fork`. Stop rules held:
   external create/LFS upload/ref update/release/Phase B counts are
-  `1/0/0/0/0`; independent failure audit is 33/33 PASS. Live `main` remains
-  generated upstream OID `08bed5b5…`, not F0 `fa1b578b…`.
-- **Active publication correction:** C1 recommends one new commit with parent
-  exact `fa1b578b…`, changing only `.gitattributes`, the icon and splash so the
-  same 2,701,144 bytes become ordinary Git blobs. That new source commit and
-  lease-protected main update are not yet authorized. Do not retry LFS, push
-  broken pointers, delete/recreate/rename the fork, or begin Phase B.
+  `1/0/0/0/0`; independent failure audit is 33/33 PASS.
+- **Repository publication C1 accepted:** owner authorized the exact three-path
+  ordinary-blob correction. One commit, `4061e12b…` / tree `5f0cb3eb…`, has
+  sole parent `fa1b578b…` and changes only `.gitattributes`, icon and splash.
+  Fresh local and GitHub no-smudge clones materialized both unchanged binaries.
+  One exact `08bed5b5…`-bound lease push updated only `main`; LFS uploads,
+  other refs/tags, releases and Phase B were 0. Independent audit is 59/59
+  PASS with self hash `71d6e9d5…`. Phase B remains unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -170,7 +171,12 @@ both a research notebook and an executable evidence base. Read this page,
     [`specs/ai-native-studio-repository-publication-c1.v0.3.json`](./specs/ai-native-studio-repository-publication-c1.v0.3.json)
     and [`audit-failure.json`](./experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json)
     — retained GitHub public-fork LFS policy failure, 33/33 audit and the
-    unapproved minimal ordinary-blob correction.
+    original minimal ordinary-blob correction.
+12. [`research/2026-08-30-film-engine-publication-c1-pass.md`](./research/2026-08-30-film-engine-publication-c1-pass.md),
+    [`specs/ai-native-studio-repository-publication-c1-execution.v0.4.json`](./specs/ai-native-studio-repository-publication-c1-execution.v0.4.json),
+    [`verdict.json`](./experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/verdict.json)
+    and [`audit.json`](./experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json)
+    — accepted C1 publication, exact one-ref update and independent 59/59 audit.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
@@ -217,16 +223,17 @@ contract name instead of reading everything.
    F0.7 attempt-05, repository-readiness attempt-03, and repository-publication
    attempt-01 failure/audit. Do not mutate retained DMG, evidence, failures or
    frozen contracts. Do not push the shallow F0 checkout as full history. The
-   public fork exists but its product publication is blocked; wait for a
-   superseding C1 authorization.
+   public fork C1 publication is closed as PASS. Do not infer Phase B authority
+   from that result.
 
 ## What not to do
 
 - Do not restart B62 or create a new rendering side quest as the main task.
 - Do not clone Blender inside this repository or commit build products.
-- Do not retry LFS, update a remote ref, delete/recreate/rename the existing
-  `lovejzzz/film-engine` fork, or create a replacement repository without a
-  superseding versioned authorization.
+- Do not retry LFS, update another remote ref, delete/recreate/rename the
+  existing `lovejzzz/film-engine` fork, or create a replacement repository.
+- Do not create a release, sign/notarize/distribute a DMG or begin Phase B
+  without a new explicit authorization and versioned protocol.
 - Do not copy Bforartists as a second upstream; inspect it as a reference.
 - Do not give a model unrestricted `bpy`, shell or filesystem authority.
 - Do not hide failed builds, relax thresholds after seeing results, or overwrite
@@ -238,16 +245,11 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next useful checkpoint is an owner decision on C1. The recommended exact
-authorization is stored in
-`specs/ai-native-studio-repository-publication-c1.v0.3.json`: retain the current
-public fork; create one `fa1b…`-parent publication-compatibility commit limited
-to `.gitattributes`, icon and splash; preserve both binary SHA-256/bytes; upload
-no LFS; and update only `main` with the frozen generated-OID lease.
-
-Choosing standalone/private is not a cosmetic switch: it selects the still
-blocked full-LFS mirror route and also requires an explicit decision about the
-already-created fork, full transfer, billing and complete evidence.
+The next useful checkpoint is a separate owner decision on Phase B. C1 closed
+source publication compatibility only; PB.1–PB.7 remain frozen in the post-F0
+charter and source mutation is still unauthorized. Any proposed Phase B start
+must version its implementation protocol and keep release/signing/notarization/
+distribution decisions separate.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

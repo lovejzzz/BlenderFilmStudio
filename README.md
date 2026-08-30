@@ -10,9 +10,11 @@ F0.1–F0.7 are complete, and the no-external-write full-history rehearsal passe
 93/93. Owner authorization then created public fork
 [`lovejzzz/film-engine`](https://github.com/lovejzzz/film-engine), but GitHub
 rejected both new brand LFS objects before any bytes or Git ref were written.
-The failure is retained and independently audited 33/33; the fork still points
-to GitHub's generated upstream `main`. A minimal three-path ordinary-Git-blob
-publication correction is specified but not authorized. Start with
+That failure remains independently audited 33/33. The authorized C1 then
+published one `fa1b578b…`-parent compatibility commit changing only
+`.gitattributes`, icon and splash; live `main` is `4061e12b…`, with no LFS
+upload, tag, release or Phase B mutation. Independent C1 audit passed 59/59.
+Start with
 [`START_HERE.md`](START_HERE.md).
 
 ## Baseline 01

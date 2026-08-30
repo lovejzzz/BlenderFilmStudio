@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-30",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_BLOCKED_GITHUB_PUBLIC_FORK_LFS_POLICY",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PHASE_B_UNAUTHORIZED",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -27,7 +27,7 @@
   },
   "activeGate": null,
   "postF0Charter": {
-    "status": "PREREGISTERED_BEFORE_REPOSITORY_CREATION_OR_PHASE_B_MUTATION",
+    "status": "REPOSITORY_PUBLISHED_PHASE_B_REMAINS_PREREGISTERED_AND_UNAUTHORIZED",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
     "document": "research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md",
     "documentSha256": "18465a4abb264419923e1895348e80a83912cfcaba4dba45dc11558a47ff62bb",
@@ -36,11 +36,11 @@
     "acceptedF0Bindings": 7,
     "retainedOutcomeBindings": 15,
     "phaseBGates": ["PB.1", "PB.2", "PB.3", "PB.4", "PB.5", "PB.6", "PB.7"],
-    "repositoryCreationAuthorized": false,
+    "repositoryCreationAuthorized": true,
     "phaseBMutationAuthorized": false
   },
   "repositoryReadiness": {
-    "status": "PASS_NO_EXTERNAL_WRITE_AWAITING_EXPLICIT_AUTHORIZATION",
+    "status": "PASS_NO_EXTERNAL_WRITE_REHEARSAL_RETAINED_PUBLICATION_C1_COMPLETE",
     "baseProtocol": "research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md",
     "baseProtocolSha256": "8d5b3dafee5c5917fb5edf1aa744e4cb5099c09a1f89b289c4672f89b8ba43f1",
     "activeCorrection": "research/2026-08-30-post-f0-repository-readiness-c2-bundle-argv.md",
@@ -98,7 +98,7 @@
     "externalGitPushes": 0,
     "lfsUploads": 0,
     "topologyVerdicts": {
-      "PUBLIC_GITHUB_FORK": "CREATED_BUT_PRODUCT_PUBLICATION_BLOCKED_GITHUB_NEW_LFS_OBJECT_POLICY",
+      "PUBLIC_GITHUB_FORK": "PUBLISHED_C1_PASS",
       "PRIVATE_STANDALONE_MIRROR": "BLOCKED_PENDING_OWNER_VISIBILITY_LFS_COST_AND_FULL_LFS_TRANSFER_AUTHORIZATION"
     },
     "recommendedAuthorization": {
@@ -106,13 +106,13 @@
       "visibility": "public",
       "create": "GitHub fork lovejzzz/film-engine from blender/blender created",
       "lfsUpload": "server rejected both allowlisted objects at 0/2 and 0 bytes",
-      "firstPush": "not performed; generated main remains 08bed5b5b42ec017e8dcc87b76f6c373c322b086",
+      "firstPush": "superseded C1 published 4061e12bd45a2bec83e68d0cf49abbf56d4738f6 with exact generated-main lease",
       "authorized": true,
-      "result": "STOPPED_AT_GITHUB_PUBLIC_FORK_LFS_POLICY"
+      "result": "INITIAL_LFS_FAILURE_RETAINED_C1_PUBLICATION_PASS"
     }
   },
   "repositoryAuthorizationRequest": {
-    "status": "GRANTED_AND_EXECUTED_STOPPED_AT_LFS_UPLOAD",
+    "status": "GRANTED_AND_EXECUTED_INITIAL_LFS_FAILURE_RETAINED_SUPERSEDED_BY_C1",
     "document": "research/2026-08-30-film-engine-public-fork-execution-authorization-v0.2.zh-CN.md",
     "documentSha256": "480afd3c7ca3039d4509c0933e252d1df97d202788508482bccc0168be4b5538",
     "machineRequest": "specs/ai-native-studio-repository-authorization-request.v0.2.json",
@@ -123,36 +123,58 @@
     "authorizationGranted": true
   },
   "repositoryPublication": {
-    "status": "FAIL_RETAINED_BLOCKED_PENDING_C1_AUTHORIZATION",
+    "status": "PASS_C1_THREE_PATH_ORDINARY_BLOB_PUBLICATION",
     "repository": "lovejzzz/film-engine",
     "repositoryUrl": "https://github.com/lovejzzz/film-engine",
     "forkParent": "blender/blender",
     "visibility": "public",
-    "generatedMainOid": "08bed5b5b42ec017e8dcc87b76f6c373c322b086",
-    "desiredF0HeadNotPushed": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
-    "evidenceRoot": "experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01",
-    "failedStage": "LFS_UPLOAD",
-    "serverError": "batch response: @lovejzzz can not upload new objects to public fork lovejzzz/film-engine",
-    "failureReceiptHash": "31cb9ed7db300281d0f76d6a78bd726b435265a7e8eb6e2a3aac2a4438720d7f",
-    "failureFileSha256": "e978e1858b54da37bff1c9714bd0949e62ee092cfcef50b5c7b6e43a5dcc725d",
-    "failureAuditReceiptHash": "eb8e9ec13eef1b767f9315ed4c0aee195f14e07c41f65ddc2320ff75e3fe7c0f",
-    "failureAuditFileSha256": "6c030fe602748e1f60dce4024b83a79e93f27c70af943163508c25a6582e67d8",
-    "failureAuditChecksPassed": 33,
+    "generatedMainOidBeforeC1": "08bed5b5b42ec017e8dcc87b76f6c373c322b086",
+    "publicationParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
+    "publicationCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "publicationTree": "5f0cb3eb964f4d747ca3a5c9fcb8545cee6773ba",
+    "liveMainOid": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "changedPaths": [
+      ".gitattributes",
+      "release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns",
+      "release/datafiles/splash.png"
+    ],
+    "authorizationDocument": "research/2026-08-30-film-engine-publication-c1-execution-authorization-v0.4.zh-CN.md",
+    "authorizationDocumentSha256": "27eaf37cfcd7db5ec358b347cc7ebe399106c9fa94501a4d7a655f8eb0d3e081",
+    "machineContract": "specs/ai-native-studio-repository-publication-c1-execution.v0.4.json",
+    "machineContractSha256": "a466f6bf94aa026782b511e1de026cdc3cf8029579480c9efa37d9ad4efe5e59",
+    "toolFreezeCommit": "09c26b19ef7caa931afd076f3ef932a87cb3df4c",
+    "evidenceRoot": "experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01",
+    "verdictFileSha256": "cbc0b03ece30a1cec71ed2161c41f3f2d33ad34d50caef61e945429203f6bfd2",
+    "verdictReceiptHash": "f20c18aaacaae8835ea7ed7c18cade90c2d31757f54a84f3a92c3e28b827b0b0",
+    "auditFileSha256": "eccd2f13bc418c8f93ec567b557c35df5bbac26ba0e3e01833dcd43ef81dc1fd",
+    "auditReceiptHash": "71d6e9d581c65fd56242385b18e4aa9c3287d771d583931662571154c6b41cd6",
+    "auditChecksPassed": 59,
+    "localNoSmudgeVerification": "PASS",
+    "remoteNoSmudgeVerification": "PASS",
     "externalMutationCounts": {
-      "repositoryCreates": 1,
+      "repositoryCreates": 0,
       "lfsUploads": 0,
-      "gitRefUpdates": 0,
+      "gitPushAttempts": 1,
+      "gitRefUpdates": 1,
+      "otherRefUpdates": 0,
+      "tagUpdates": 0,
       "releases": 0,
       "phaseBMutations": 0,
       "deletions": 0,
+      "recreations": 0,
       "renames": 0
     },
-    "activeCorrection": "research/2026-08-30-film-engine-public-fork-c1-github-lfs-policy.md",
-    "activeCorrectionSha256": "9ceb78bb17006307be133b05074325bb58cc0a113a3a2b8efbaa6f6de78551a9",
-    "machineCorrection": "specs/ai-native-studio-repository-publication-c1.v0.3.json",
-    "machineCorrectionSha256": "555d42c8adc60c65530bc0f7a9aeec9dfcdf4ce687be719bb6715cb76662fe64",
-    "recommendedCorrection": "one fa1b-parent commit changing only .gitattributes, icon and splash to preserve exact bytes as ordinary Git blobs",
-    "correctionAuthorized": false
+    "retainedInitialFailure": {
+      "evidenceRoot": "experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01",
+      "failedStage": "LFS_UPLOAD",
+      "serverError": "batch response: @lovejzzz can not upload new objects to public fork lovejzzz/film-engine",
+      "failureReceiptHash": "31cb9ed7db300281d0f76d6a78bd726b435265a7e8eb6e2a3aac2a4438720d7f",
+      "failureAuditReceiptHash": "eb8e9ec13eef1b767f9315ed4c0aee195f14e07c41f65ddc2320ff75e3fe7c0f",
+      "failureAuditChecksPassed": 33
+    },
+    "outcomeDocument": "research/2026-08-30-film-engine-publication-c1-pass.md",
+    "correctionAuthorized": true,
+    "phaseBMutationAuthorized": false
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
   "gateVerdicts": {
@@ -459,7 +481,12 @@
     "specs/ai-native-studio-repository-authorization-request.v0.2.json",
     "research/2026-08-30-film-engine-public-fork-c1-github-lfs-policy.md",
     "specs/ai-native-studio-repository-publication-c1.v0.3.json",
-    "experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json"
+    "experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json",
+    "research/2026-08-30-film-engine-publication-c1-execution-authorization-v0.4.zh-CN.md",
+    "specs/ai-native-studio-repository-publication-c1-execution.v0.4.json",
+    "research/2026-08-30-film-engine-publication-c1-pass.md",
+    "experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/verdict.json",
+    "experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json"
   ],
   "firstCommands": [
     "git status --short",
@@ -471,8 +498,9 @@
     "cat experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03/audit.json",
     "cat experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/failure.json",
     "cat experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json",
-    "cat specs/ai-native-studio-repository-publication-c1.v0.3.json",
-    "obtain explicit superseding authorization for the three-path ordinary-Git-blob C1 commit and its generated-main-OID lease; otherwise leave the fork untouched"
+    "cat experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/verdict.json",
+    "cat experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json",
+    "obtain a new explicit authorization and versioned protocol before any Phase B source mutation"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -494,7 +522,9 @@
     "Do not vendor Blender source or builds into this repository",
     "Do not retry the rejected GitHub LFS upload or push broken LFS pointers",
     "Do not delete, recreate or rename lovejzzz/film-engine",
-    "Do not update any film-engine ref without superseding C1 authorization",
+    "Do not update another film-engine ref or repeat the completed main update",
+    "Do not create a release, sign, notarize or distribute a DMG without separate authorization",
+    "Do not begin Phase B source mutation without new explicit authorization and a versioned protocol",
     "Do not push the current shallow F0 checkout as a full-history source",
     "Do not treat private visibility as equivalent to the ready public-fork route; private standalone mirroring requires new full-LFS and billing authorization",
     "Do not weaken thresholds after observing results",
@@ -503,14 +533,13 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "REPOSITORY_PUBLICATION_C1_AUTHORIZATION",
-    "result": "An explicit user decision authorizing or declining the minimal ordinary-Git-blob publication correction",
+    "gate": "PHASE_B_EXPLICIT_AUTHORIZATION",
+    "result": "An explicit owner decision authorizing or declining a separately versioned Phase B implementation protocol",
     "requiredArtifacts": [
-      "retain existing public fork lovejzzz/film-engine without delete, recreate or rename",
-      "explicit permission for one commit whose only parent is fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
-      "limit changes to .gitattributes, blender_icon_legacy.icns and splash.png while preserving both binary SHA-256 values and byte sizes",
-      "explicit permission to replace generated main only with --force-with-lease=refs/heads/main:08bed5b5b42ec017e8dcc87b76f6c373c322b086",
-      "confirmation that LFS upload, other refs/tags, release, signing, notarization, DMG distribution and Phase B remain unauthorized"
+      "a new versioned protocol selecting a bounded first Phase B gate",
+      "explicit permission for the exact source mutation surface and remote update policy",
+      "preserve the accepted C1 publication commit and retained failures",
+      "keep release, signing, notarization and DMG distribution as separate authorization decisions"
     ]
   }
 }
