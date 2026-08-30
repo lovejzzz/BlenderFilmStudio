@@ -6007,3 +6007,13 @@ LFS dry-run只列出allowlisted icon/splash OID，2/2 exact。正式`git lfs pus
 根因是public-fork新LFS object server policy。Blender checkout的LFS endpoint来自official `projects.blender.org` remote；GitHub mirror network不能让本fork首次播种两个品牌OID。五份runner receipt self hash复算exact；独立failure auditor不import runner，验证live metadata/ref、stage absence、source clean与副作用计数，33/33 PASS。failure/audit receipt hashes为`31cb9ed7db300281d0f76d6a78bd726b435265a7e8eb6e2a3aac2a4438720d7f` / `eb8e9ec13eef1b767f9315ed4c0aee195f14e07c41f65ddc2320ff75e3fe7c0f`。
 
 C1冻结推荐但未授权的最小修正：保留现有fork；新增一个以`fa1b…`为唯一parent的publication compatibility commit，只修改`.gitattributes`、icon、splash，把内容SHA/bytes不变的两个资产改为ordinary Git blobs（2.1 MiB / 0.55 MiB）；fresh no-smudge clone必须直接materialize完整文件，然后只用generated `08bed5b5…` OID lease更新main。这个new source commit与ref update超出v0.2 exact-head授权，必须等待owner给出`specs/ai-native-studio-repository-publication-c1.v0.3.json`中的新授权句。LFS retry、delete/recreate/rename、standalone replacement、other refs/tags、release、签名、公证、DMG分发和Phase B仍禁止。
+
+## J-486 · C1 owner 授权与v0.4执行预注册
+
+Date: 2026-08-30 · Type: AUTHORIZED PUBLICATION COMPATIBILITY PREREGISTRATION · External mutations at freeze: 0
+
+owner在当前Codex任务中逐字给出v0.3所要求的superseding authorization：保留现有public fork；以`fa1b578bb421bbc82b3106b7d4223e11e65fae1d`为唯一parent生成一个publication compatibility commit；只修改`.gitattributes`、icon和splash；两份品牌资产的内容SHA-256/bytes不变并改为ordinary Git blobs；通过验证后只用`--force-with-lease=refs/heads/main:08bed5b5b42ec017e8dcc87b76f6c373c322b086`更新`main`。LFS upload、其他ref/tag、release、签名、公证、DMG分发和Phase B mutation继续未授权。
+
+执行前只读复核确认host preflight accepted，free 175 GiB；retained F0 checkout clean、HEAD/tree/parents exact；icon与splash仍为2,135,147 / 565,997 bytes且SHA-256 exact；full-history local source为162,917 commits；live `lovejzzz/film-engine`仍是repository id `1351574987`的public `blender/blender` fork，只有`main`，live OID仍为lease的`08bed5b5…`，0 PR、0 release、0 tag。
+
+v0.4把一次性执行收紧为fresh bare local clone中的Git object/index plumbing：候选commit只在new local object database构造，先经fresh no-smudge local clone验证；push显式绑定empty hooks目录且runner中禁止任何`git lfs`调用。lease变化、路径/哈希/attributes不符或任何push failure均立即停止且不重试。正式外部mutation只能在本预注册文档、machine contract、runner与independent auditor提交并推送、research worktree恢复clean后进行。
