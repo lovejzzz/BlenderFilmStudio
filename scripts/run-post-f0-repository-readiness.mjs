@@ -17,9 +17,9 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import process from 'node:process';
 
 const FROZEN_PATH = '/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin';
-const SPEC_RELATIVE = 'specs/ai-native-studio-repository-readiness.v0.2.json';
+const SPEC_RELATIVE = 'specs/ai-native-studio-repository-readiness.v0.3.json';
 const PROTOCOL_RELATIVE = 'research/2026-08-30-post-f0-repository-readiness-protocol-v0.1.zh-CN.md';
-const CORRECTION_RELATIVE = 'research/2026-08-30-post-f0-repository-readiness-c1-bundle-context.md';
+const CORRECTION_RELATIVE = 'research/2026-08-30-post-f0-repository-readiness-c2-bundle-argv.md';
 const CHARTER_RELATIVE = 'research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md';
 const POST_F0_CONTRACT_RELATIVE = 'specs/ai-native-studio-post-f0-phase-b.v0.1.json';
 const STATE_RELATIVE = 'handoff/ai-native-studio-current-state.v0.1.json';
@@ -233,6 +233,17 @@ function localPushAdmission(fixture) {
   return { accepted: failures.length === 0, failures };
 }
 
+function bundleVerifyCommand(spec) {
+  return [
+    '/usr/bin/git',
+    '-C',
+    spec.paths.fullMirror,
+    'bundle',
+    'verify',
+    resolve(spec.paths.externalRehearsalRoot, 'f0-source.bundle'),
+  ];
+}
+
 async function queryCandidateRepository(candidate) {
   const ghPath = '/opt/homebrew/bin/gh';
   if (!await exists(ghPath)) {
@@ -300,8 +311,9 @@ async function collectPreflight({ repositoryRoot, spec, queryCandidate = true })
   if (authValues.some(Boolean)) failures.push('EXTERNAL_AUTHORIZATION_SENTINEL_NOT_FALSE');
   let retainedInput = null;
   if (spec.correction?.reuseRetainedFullMirrorLocally) {
-    const retainedFailurePath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'failure.json');
-    const retainedInventoryPath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'source-inventory.json');
+    const retainedEvidenceRoot = spec.correction.retainedAttempt02EvidenceRoot ?? spec.correction.retainedAttempt01EvidenceRoot;
+    const retainedFailurePath = resolve(repositoryRoot, retainedEvidenceRoot, 'failure.json');
+    const retainedInventoryPath = resolve(repositoryRoot, retainedEvidenceRoot, 'source-inventory.json');
     const retainedMirrorExists = await exists(spec.paths.retainedFullMirror);
     const retainedBundleExists = await exists(spec.paths.retainedBundle);
     const retainedFailureExists = await exists(retainedFailurePath);
@@ -318,6 +330,14 @@ async function collectPreflight({ repositoryRoot, spec, queryCandidate = true })
     const retainedInventory = retainedInventoryExists ? JSON.parse(await readFile(retainedInventoryPath, 'utf8')) : null;
     if (retainedFailure?.receiptHash !== spec.correction.retainedFailureReceiptHash) failures.push('RETAINED_FAILURE_RECEIPT_HASH_MISMATCH');
     if (retainedInventory?.receiptHash !== spec.correction.retainedSourceInventoryReceiptHash) failures.push('RETAINED_INVENTORY_RECEIPT_HASH_MISMATCH');
+    if (spec.correction.retainedAttempt01FailureFileSha256) {
+      const attempt01FailurePath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'failure.json');
+      const attempt01Failure = await readFile(attempt01FailurePath, 'utf8').then(JSON.parse);
+      if (await sha256File(attempt01FailurePath) !== spec.correction.retainedAttempt01FailureFileSha256) failures.push('ATTEMPT_01_FAILURE_FILE_HASH_MISMATCH');
+      if (attempt01Failure.receiptHash !== spec.correction.retainedAttempt01FailureReceiptHash) failures.push('ATTEMPT_01_FAILURE_RECEIPT_HASH_MISMATCH');
+    }
+    const verifyArgv = bundleVerifyCommand(spec);
+    if (JSON.stringify(verifyArgv) !== JSON.stringify(spec.correction.requiredBundleVerifyArgv)) failures.push('BUNDLE_VERIFY_ARGV_CONTRACT_MISMATCH');
     retainedInput = {
       mirror: spec.paths.retainedFullMirror,
       mirrorExists: retainedMirrorExists,
@@ -682,7 +702,15 @@ async function formalRun({ repositoryRoot, spec, preflight }) {
     externalMutation: false,
   });
   exec('/usr/bin/git', ['-C', sourceRoot, 'bundle', 'create', bundlePath, 'HEAD', `^${spec.bindings.upstreamTarget}`]);
-  const bundleVerifyResult = execResult('/usr/bin/git', ['bundle', 'verify', bundlePath]);
+  const verifyCommand = bundleVerifyCommand(spec);
+  commandLog.push({
+    stage: 'RR.5',
+    operation: 'verify F0 bundle in work mirror context',
+    command: verifyCommand,
+    network: 'NONE',
+    externalMutation: false,
+  });
+  const bundleVerifyResult = execResult(verifyCommand[0], verifyCommand.slice(1));
   const bundleVerify = `${bundleVerifyResult.stdout}\n${bundleVerifyResult.stderr}`.trim();
   if (bundleVerifyResult.exitCode !== 0) throw new Error('F0_BUNDLE_VERIFY_FAILED');
   const candidateRef = 'refs/heads/film-studio-f0-candidate';
@@ -872,7 +900,7 @@ async function formalRun({ repositoryRoot, spec, preflight }) {
   const verdictPath = resolve(evidenceRoot, 'verdict.json');
   const verdict = await writeJsonExclusive(verdictPath, {
     schemaVersion: 'bfs.repositoryReadinessVerdict.v0.1',
-    protocol: 'AI-NATIVE-STUDIO-REPOSITORY-READINESS-v0.2-C1',
+    protocol: 'AI-NATIVE-STUDIO-REPOSITORY-READINESS-v0.3-C2',
     observedAt: new Date().toISOString(),
     status: Object.values(finalChecks).every(Boolean) ? 'PASS' : 'FAIL',
     claim: 'NO_EXTERNAL_WRITE_REPOSITORY_READINESS_REHEARSAL_SUPPORTED',
@@ -907,6 +935,7 @@ async function main() {
   const spec = JSON.parse(await readFile(resolve(repositoryRoot, SPEC_RELATIVE), 'utf8'));
   if (process.argv.includes('--self-test')) {
     const destinationUrl = pathToFileURL(spec.paths.localDestination).href;
+    const verifyArgv = bundleVerifyCommand(spec);
     const controls = runNegativeControls({ spec, localDestinationUrl: destinationUrl });
     const positive = localPushAdmission({
       fullHistorySourceShallow: false,
@@ -922,8 +951,9 @@ async function main() {
       maximumAllowedOrdinaryBlobBytesExclusive: spec.acceptance.maximumOrdinaryBlobBytesExclusive,
       requestedExternalMutation: false,
     });
-    const passed = positive.accepted && controls.length === spec.acceptance.requiredNegativeControls.length && controls.every(control => control.passed);
-    process.stdout.write(`${JSON.stringify({ status: passed ? 'PASS' : 'FAIL', positive, controls }, null, 2)}\n`);
+    const bundleVerifyArgvExact = JSON.stringify(verifyArgv) === JSON.stringify(spec.correction.requiredBundleVerifyArgv);
+    const passed = positive.accepted && bundleVerifyArgvExact && controls.length === spec.acceptance.requiredNegativeControls.length && controls.every(control => control.passed);
+    process.stdout.write(`${JSON.stringify({ status: passed ? 'PASS' : 'FAIL', positive, bundleVerifyArgvExact, verifyArgv, controls }, null, 2)}\n`);
     process.exitCode = passed ? 0 : 1;
     return;
   }

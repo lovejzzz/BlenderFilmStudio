@@ -14,7 +14,7 @@ import { resolve } from 'node:path';
 import process from 'node:process';
 
 const FROZEN_PATH = '/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin';
-const SPEC_RELATIVE = 'specs/ai-native-studio-repository-readiness.v0.2.json';
+const SPEC_RELATIVE = 'specs/ai-native-studio-repository-readiness.v0.3.json';
 
 function canonicalize(value) {
   if (Array.isArray(value)) return value.map(canonicalize);
@@ -216,13 +216,18 @@ async function main() {
   addCheck(checks, 'runner-verdict-status', verdict.status === 'PASS', verdict.status, 'PASS');
   addCheck(checks, 'runner-claim', verdict.claim === 'NO_EXTERNAL_WRITE_REPOSITORY_READINESS_REHEARSAL_SUPPORTED', verdict.claim, 'NO_EXTERNAL_WRITE_REPOSITORY_READINESS_REHEARSAL_SUPPORTED');
 
-  const retainedFailurePath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'failure.json');
-  const retainedInventoryPath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'source-inventory.json');
+  const retainedEvidenceRoot = spec.correction.retainedAttempt02EvidenceRoot ?? spec.correction.retainedAttempt01EvidenceRoot;
+  const retainedFailurePath = resolve(repositoryRoot, retainedEvidenceRoot, 'failure.json');
+  const retainedInventoryPath = resolve(repositoryRoot, retainedEvidenceRoot, 'source-inventory.json');
   const retainedFailure = await readHashedJson(retainedFailurePath);
   const retainedInventory = await readHashedJson(retainedInventoryPath);
   addCheck(checks, 'retained-failure-file-hash', retainedFailure.fileSha256 === spec.correction.retainedFailureFileSha256, retainedFailure.fileSha256, spec.correction.retainedFailureFileSha256);
   addCheck(checks, 'retained-failure-receipt-hash', retainedFailure.record.receiptHash === spec.correction.retainedFailureReceiptHash && retainedFailure.receiptHashValid, retainedFailure.record.receiptHash, spec.correction.retainedFailureReceiptHash);
   addCheck(checks, 'retained-inventory-receipt-hash', retainedInventory.record.receiptHash === spec.correction.retainedSourceInventoryReceiptHash && retainedInventory.receiptHashValid, retainedInventory.record.receiptHash, spec.correction.retainedSourceInventoryReceiptHash);
+  const attempt01FailurePath = resolve(repositoryRoot, spec.correction.retainedAttempt01EvidenceRoot, 'failure.json');
+  const attempt01Failure = await readHashedJson(attempt01FailurePath);
+  addCheck(checks, 'attempt01-failure-file-hash', attempt01Failure.fileSha256 === spec.correction.retainedAttempt01FailureFileSha256, attempt01Failure.fileSha256, spec.correction.retainedAttempt01FailureFileSha256);
+  addCheck(checks, 'attempt01-failure-receipt-hash', attempt01Failure.record.receiptHash === spec.correction.retainedAttempt01FailureReceiptHash && attempt01Failure.receiptHashValid, attempt01Failure.record.receiptHash, spec.correction.retainedAttempt01FailureReceiptHash);
   addCheck(checks, 'retained-bundle-hash', await sha256File(spec.paths.retainedBundle) === spec.correction.retainedBundleSha256, await sha256File(spec.paths.retainedBundle), spec.correction.retainedBundleSha256);
   const retainedMirrorShallow = git(spec.paths.retainedFullMirror, ['rev-parse', '--is-shallow-repository']) === 'true';
   const retainedMirrorOrigin = git(spec.paths.retainedFullMirror, ['remote', 'get-url', 'origin']);
@@ -352,6 +357,9 @@ async function main() {
     addCheck(checks, 'local-push-file-protocol', Boolean(destinationArgument), destinationArgument ?? null, 'file:// destination');
     addCheck(checks, 'local-push-no-credentials', destinationArgument && !/@/.test(destinationArgument), destinationArgument ?? null, 'no @ credential component');
   }
+  const bundleVerify = network.commands.find(command => command.operation === 'verify F0 bundle in work mirror context');
+  addCheck(checks, 'bundle-verify-command-present', Boolean(bundleVerify), Boolean(bundleVerify), true);
+  addCheck(checks, 'bundle-verify-argv-exact', Boolean(bundleVerify) && JSON.stringify(bundleVerify.command) === JSON.stringify(spec.correction.requiredBundleVerifyArgv), bundleVerify?.command ?? null, spec.correction.requiredBundleVerifyArgv);
 
   for (const binding of verdict.evidenceBindings) {
     const observed = records[binding.file];
