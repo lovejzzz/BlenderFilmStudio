@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "bfs.f0WorkspaceAuditFreeze.v0.1",
+  "protocol": "F0-SOURCE-FEASIBILITY",
+  "gate": "F0.3",
+  "status": "FROZEN_BEFORE_FORMAL_WORKSPACE_AUDIT",
+  "frozenAt": "2026-08-30T00:52:08Z",
+  "bindings": {
+    "preregistration": {
+      "path": "preregistration.json",
+      "fileSha256": "90371f98dc6fe00c9b6348cb8c1fce2da8f16c75a55b45a78de9ca18e527d7ee"
+    },
+    "officialBaseline": {
+      "path": "interaction-baseline.json",
+      "fileSha256": "3147a98e7f0880519734f161ea928bc2abaabc15c3e14bf6356374b00a348489",
+      "screenshotSha256": "3c8bf7f742bab579fefa122fab1d9e0d83d5c7d0c17881bb3aa72ad45211b4a7",
+      "actualTaskInteractions": 24
+    },
+    "build": {
+      "receiptPath": "build/receipt.json",
+      "receiptFileSha256": "b5151cc526374593e2bf57f212cf74a69b521d9aa8a0ae31dce6516c025b2b14",
+      "receiptHash": "7a0fd8b6d2c4dee792e084acca359f9f6eb2f3d758ca6619ea74d63effab038b",
+      "binarySha256": "eedf94e75571b78d83e916f2530630b83ab59927173d784e615392c528107695"
+    },
+    "runtimeRunner": {
+      "path": "scripts/run-f0-workspace-audit.mjs",
+      "sha256": "567a5f3c2f49418d8a6b241e331b9f8302af2b2b8b73e379304e2374c7297536"
+    },
+    "blenderAudit": {
+      "path": "scripts/f0-workspace-audit.py",
+      "sha256": "1d8d481f371a5ad4621c1b0b3d87a54e89c3316951544bbd6050ad8dbee6a4c2"
+    }
+  },
+  "officialConfiguration": {
+    "root": "/Users/mengyingli/Library/Application Support/Blender",
+    "state": "PRESENT",
+    "entries": 2,
+    "digest": "c97e9a5f1d34065925ff034ab03770e38a87676b9ab1bfc0b29aeff43e6b44bf",
+    "mustRemainExactBeforeAndAfterEveryF0Launch": true
+  },
+  "headlessSequence": [
+    "create-save: factory startup, verify typed defaults, invoke create_shot, save persistence blend, exit",
+    "reopen: launch a new process with the saved blend and verify exact typed and selected-camera state",
+    "missing-prepare: launch the persistence blend, remove optional Shot and camera state, save a separate blend, exit",
+    "missing-reopen: launch a new process with missing optional state, verify core state, invoke create_shot, and verify recovery"
+  ],
+  "visibleUiSequence": {
+    "startup": "Launch the exact built app after a fresh 160 GiB admission and dismiss only non-task splash/setup surfaces",
+    "task": "Verify native Project, Scene, Shot and Character start surface, then click Create Shot exactly once",
+    "taskInteractionLimit": 1,
+    "strictComparison": "F0 actual interactions must be less than official actual interactions (24)",
+    "expertRoundtrip": "Click Expert Mode, verify complete Blender menus/workspace tabs and the same open scene, then click Film Mode and verify the same typed state without conversion",
+    "screenshots": [
+      "film-start.png",
+      "film-shot-selected.png",
+      "expert-mode.png",
+      "film-roundtrip.png"
+    ]
+  },
+  "admission": {
+    "minimumFreeGiB": 160,
+    "freshBeforeEveryNativeLaunch": true,
+    "maximumConcurrentNativeJobs": 1,
+    "noBlenderUserOverrides": true
+  },
+  "stopRule": "Any failed admission starts zero native processes. Any failed identity, hash, operator, persistence, optional-state, UI, interaction-count, or isolation check produces FAIL rather than relaxing acceptance."
+}
