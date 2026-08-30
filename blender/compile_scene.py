@@ -104,8 +104,8 @@ def load_verified_plan(plan_path: Path) -> dict:
     actual_hash = sha256_bytes(javascript_canonical_json(wrapper["plan"]).encode("utf-8"))
     if actual_hash != wrapper.get("planHash"):
         raise RuntimeError(f"BuildPlan hash mismatch: expected {wrapper.get('planHash')}, received {actual_hash}")
-    if tuple(bpy.app.version[:3]) != (5, 2, 0):
-        raise RuntimeError(f"Blender 5.2.0 is required, received {bpy.app.version_string}")
+    if tuple(bpy.app.version[:3]) not in {(5, 2, 0), (5, 2, 1)}:
+        raise RuntimeError(f"Blender 5.2.0 or frozen merge target 5.2.1 is required, received {bpy.app.version_string}")
     if wrapper["plan"]["compiler"]["version"] not in SUPPORTED_COMPILER_VERSIONS:
         raise RuntimeError("Compiler version does not match BuildPlan")
     if wrapper["plan"]["compiler"]["version"] != wrapper["planVersion"]:
