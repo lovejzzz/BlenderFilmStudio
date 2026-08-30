@@ -19,7 +19,7 @@ const repository = resolve(process.argv[2]);
 if (!repository) throw new Error('Usage: run-f01-f04.mjs <repository-root>');
 const experimentRelative = 'experiments/ai-native-studio-f0/F0.6-2026-08-30-mac-m2max-attempt-01';
 const experiment = resolve(repository, experimentRelative);
-const regression = resolve(experiment, 'regression');
+const regression = resolve(experiment, 'regression-attempt-02');
 const source = '/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/blender-v5.2.0-src';
 const product = '/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-F0-workspace/build-f0.6-merge-drill/bin/Film Studio Engine F0.app/Contents/MacOS/Blender';
 const app = dirname(dirname(dirname(product)));
@@ -103,7 +103,7 @@ function sourceIdentity() {
     clean: status === '',
     status,
     dependency,
-    dependencyExactAndClean: dependency === ` ${expectedDependency} lib/macos_arm64 (v5.2.1)`,
+    dependencyExactAndClean: dependency === `${expectedDependency} lib/macos_arm64 (v5.2.1)`,
   };
 }
 function admission(id, expectedOutputs = []) {
