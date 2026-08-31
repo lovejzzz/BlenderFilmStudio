@@ -14,9 +14,9 @@ import time
 from pathlib import Path
 
 
-EXECUTION_SCHEMA = "bfs.aiNativeStudioPb2ValidationOnlyExecutionC1.v0.5"
+EXECUTION_SCHEMA = "bfs.aiNativeStudioPb2ValidationOnlyExecutionC2.v0.6"
 EXECUTION_STATUS = "AUTHORIZED_FOR_ONE_FORMAL_RUN"
-CORRECTION_SCHEMA = "bfs.aiNativeStudioPb2ValidationToolCorrectionC1.v0.5"
+CORRECTION_SCHEMA = "bfs.aiNativeStudioPb2ValidationToolCorrectionC2.v0.6"
 BASE_RUNNER_URI = "scripts/run-ai-native-studio-pb2-validation.py"
 
 
@@ -123,8 +123,6 @@ def main() -> int:
     committed_execution = git(["show", f"HEAD:{execution_uri}"], root, binary=True)
     if committed_execution != execution_path.read_bytes():
         raise RuntimeError("HEAD does not contain exact execution contract bytes")
-    if execution["executionCommit"] != head:
-        raise RuntimeError("executionCommit does not equal current HEAD")
     if sha256(Path(__file__).read_bytes()) != execution["runnerSha256"]:
         raise RuntimeError("C1 runner SHA-256 mismatch")
     auditor_path = root / correction["independentAuditor"]["uri"]
@@ -211,9 +209,9 @@ def main() -> int:
         raise RuntimeError("engine source changed during execution")
 
     body = {
-        "schemaVersion": "bfs.aiNativeStudioPb2ValidationReceiptC1.v0.2",
+        "schemaVersion": "bfs.aiNativeStudioPb2ValidationReceiptC2.v0.3",
         "status": "PASS" if positive_pass and negative_pass else "FAIL",
-        "mode": "TYPED_CONTRACT_ONLY_ZERO_BLENDER_C1",
+        "mode": "TYPED_CONTRACT_ONLY_ZERO_BLENDER_C2",
         "executionCommit": head,
         "executionParentResearchCommit": parent,
         "engineHead": freeze["engineSource"]["head"],
@@ -234,7 +232,7 @@ def main() -> int:
     }
     body["receiptHash"] = sha256(canonical(body))
     base.write_exclusive(evidence_root / "receipt.json", body)
-    print(f"PB2_VALIDATION_C1 {body['status']} positives={len(positives)} negatives={len(negatives)} receiptHash={body['receiptHash']}")
+    print(f"PB2_VALIDATION_C2 {body['status']} positives={len(positives)} negatives={len(negatives)} receiptHash={body['receiptHash']}")
     return 0 if body["status"] == "PASS" else 1
 
 

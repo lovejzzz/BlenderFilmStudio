@@ -112,6 +112,11 @@ both a research notebook and an executable evidence base. Read this page,
   execution parent, current HEAD and exact committed contract bytes. Static C1
   tool audit passes 16/16 after retaining one 15/16 audit-harness failure. The
   formal roots remain absent pending the committed execution contract.
+- **PB.2 C2 tool correction accepted:** C1 still placed current HEAD inside the
+  contract body. C2 removes that last self-reference; current HEAD is derived
+  and written only to the receipt, then independently re-audited through Git.
+  Static C2 tool audit passed 17/17. The v0.4/v0.5 execution shapes are retained
+  as non-executable protocol failures.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but

@@ -112,8 +112,18 @@ Static C1 tool attempt-01 is retained at 15/16; its sole audit defect ignored
 the wrapper's exact base-runner `write_exclusive` delegation. Attempt-02 passes
 16/16 with self hash
 `093f957a3a112b27187a9942854b0fc0ffaf7f82f3263b40fa62cda95cf59097`.
-The next atomic action is one committed v0.5 execution contract whose parent is
-the C1 tool commit; formal roots must remain absent until that commit is public.
+The proposed v0.5 execution contract was not created: its body would still have
+contained current HEAD and remained self-referential. Formal roots stayed absent.
+
+C2 v0.6 supersedes only C1's remaining self-reference: the execution contract
+must not contain `executionCommit`. The runner derives current HEAD and writes
+it to the receipt; the independent auditor uses that receipt OID to recompute
+the parent and exact committed contract bytes. Static C2 audit passes 17/17
+with self hash
+`7946dda3aa5aadcf1845c5a027987edd618cc7f5fe491a1c1175802daa6c78ba`.
+Use `specs/ai-native-studio-pb2-validation-only-execution-c2.v0.6.json` as the
+only future execution contract. The prior v0.4/v0.5 execution shapes are
+non-executable retained protocol failures.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

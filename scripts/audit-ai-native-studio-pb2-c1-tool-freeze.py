@@ -87,14 +87,17 @@ def main() -> int:
     )
     checks["noBpyOrNetworkImports"] = not ({"bpy", "socket", "urllib", "requests", "httpx"} & (imports(runner_tree) | imports(auditor_tree)))
     checks["auditorDoesNotImportEngineContract"] = "film_studio_contract" not in imports(auditor_tree)
-    checks["runnerRequiresV05Authority"] = 'EXECUTION_SCHEMA = "bfs.aiNativeStudioPb2ValidationOnlyExecutionC1.v0.5"' in runner_source and 'EXECUTION_STATUS = "AUTHORIZED_FOR_ONE_FORMAL_RUN"' in runner_source
+    checks["runnerRequiresV06Authority"] = 'EXECUTION_SCHEMA = "bfs.aiNativeStudioPb2ValidationOnlyExecutionC2.v0.6"' in runner_source and 'EXECUTION_STATUS = "AUTHORIZED_FOR_ONE_FORMAL_RUN"' in runner_source
     authority = runner_source.index("validate_authority(parsed, root, freeze, correction, execution)")
     module_load = runner_source.index("base = load_base_runner", authority)
     root_check = runner_source.index("work_root = base.require_fresh_absolute", module_load)
     root_create = runner_source.index("work_root.mkdir()", root_check)
     checks["authorityAndCommitBeforeRoots"] = authority < module_load < root_check < root_create
     checks["nonCircularChecksPresent"] = all(token in runner_source for token in [
-        'git(["rev-parse", "HEAD^"]', 'git(["show", f"HEAD:{execution_uri}"]', 'execution["executionCommit"] != head', 'git(["status", "--porcelain=v1"], root)',
+        'git(["rev-parse", "HEAD^"]', 'git(["show", f"HEAD:{execution_uri}"]', '"executionCommit": head', 'git(["status", "--porcelain=v1"], root)',
+    ]) and 'execution["executionCommit"]' not in runner_source
+    checks["auditorRecomputesCommitBinding"] = all(token in auditor_source for token in [
+        'git(["show", f"{receipt[\'executionCommit\']}:{execution_uri}"]', 'git(["rev-parse", f"{receipt[\'executionCommit\']}^"]',
     ])
     checks["exclusiveEvidence"] = "base.write_exclusive" in runner_source and "os.O_EXCL" in base_source and "os.O_EXCL" in auditor_source
 

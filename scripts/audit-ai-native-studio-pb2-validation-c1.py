@@ -8,6 +8,7 @@ import ast
 import hashlib
 import json
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -52,6 +53,11 @@ def write_exclusive(path: Path, value: dict) -> None:
         os.close(descriptor)
 
 
+def git(arguments: list[str], cwd: Path, binary: bool = False):
+    result = subprocess.run(["git", *arguments], cwd=cwd, check=True, capture_output=True)
+    return result.stdout if binary else result.stdout.decode().strip()
+
+
 def main() -> int:
     parsed = args()
     root = parsed.repository_root.resolve(strict=True)
@@ -72,7 +78,11 @@ def main() -> int:
     checks["baseFreezeBinding"] = receipt["baseToolFreeze"]["sha256"] == sha256(parsed.freeze_contract.read_bytes())
     checks["correctionBinding"] = receipt["toolCorrection"]["sha256"] == sha256(parsed.correction_contract.read_bytes())
     checks["executionBinding"] = receipt["executionContract"]["sha256"] == sha256(parsed.execution_contract.read_bytes())
-    checks["commitBindingNonCircular"] = receipt["executionCommit"] == execution["executionCommit"] and receipt["executionParentResearchCommit"] == execution["executionParentResearchCommit"]
+    execution_uri = receipt["executionContract"]["uri"]
+    committed_execution = git(["show", f"{receipt['executionCommit']}:{execution_uri}"], root, binary=True)
+    committed_parent = git(["rev-parse", f"{receipt['executionCommit']}^"], root)
+    checks["commitBindingNonCircular"] = committed_execution == parsed.execution_contract.read_bytes()
+    checks["commitBindingNonCircular"] &= committed_parent == receipt["executionParentResearchCommit"] == execution["executionParentResearchCommit"]
     checks["sourceIdentity"] = receipt["engineHead"] == freeze["engineSource"]["head"]
     checks["twoExactPositives"] = [row["id"] for row in receipt["positives"]] == ["B01", "B02"]
     checks["positiveExact"] = all(
@@ -109,7 +119,7 @@ def main() -> int:
     passed = sum(checks.values())
     total = len(checks)
     body = {
-        "schemaVersion": "bfs.aiNativeStudioPb2ValidationIndependentAuditC1.v0.2",
+        "schemaVersion": "bfs.aiNativeStudioPb2ValidationIndependentAuditC2.v0.3",
         "status": "PASS" if passed == total else "FAIL",
         "independence": "Does not import or execute film_studio_contract and does not start Blender.",
         "checks": checks,
@@ -119,7 +129,7 @@ def main() -> int:
     }
     body["auditHash"] = sha256(canonical(body))
     write_exclusive(parsed.output, body)
-    print(f"PB2_AUDIT_C1 {body['status']} {passed}/{total} auditHash={body['auditHash']}")
+    print(f"PB2_AUDIT_C2 {body['status']} {passed}/{total} auditHash={body['auditHash']}")
     return 0 if body["status"] == "PASS" else 1
 
 
