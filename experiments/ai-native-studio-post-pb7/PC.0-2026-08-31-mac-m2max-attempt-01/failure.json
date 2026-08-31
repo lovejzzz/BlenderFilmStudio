@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "bfs.pc0RetainedFailure.v0.1",
+  "status": "FAIL",
+  "gate": "PC.0",
+  "attempt": "attempt-01",
+  "recordedAtUtc": "2026-08-31T21:15:06Z",
+  "failureStage": "PROCESS_ENVIRONMENT_ASSEMBLY",
+  "errorExact": "BFS_PC0_RUN_REJECTED Cannot access 'process' before initialization",
+  "rootCause": {
+    "class": "JAVASCRIPT_TEMPORAL_DEAD_ZONE",
+    "file": "scripts/run-ai-native-studio-pc0.mjs",
+    "description": "A function-local const named process shadowed the global process object, so process.env was accessed inside that binding's temporal dead zone before runProcess could be called.",
+    "correctionCeiling": "Rename only the function-local process result binding and its direct references; do not change the probe, acceptance criteria, operation ceilings or resource ceilings."
+  },
+  "bindings": {
+    "repositoryCommit": "47891a91edaa96048c21aec45c3885f814c21e93",
+    "program": {
+      "uri": "specs/ai-native-studio-post-pb7-improvement-program.v0.1.json",
+      "sha256": "0893ff7519a8e0607d5cfbe60946983256b379592f20d0a1d769784db798d75f",
+      "specHash": "b1743a2d4cdaa8fec6c9cbe8308c8a409a2fe01a8b3ba795c725b49974cddc33"
+    },
+    "toolFreeze": {
+      "uri": "specs/ai-native-studio-pc0-tool-freeze.v0.1.json",
+      "sha256": "620bf47e18c2f389384783ee234f6a4cf8afd30a4404bad30b862441915fdc36",
+      "specHash": "d29d178e1f5d850bedbae987ce786bfbc9a1132a2116dcf9773ddb87dc1c430f"
+    },
+    "runner": {
+      "uri": "scripts/run-ai-native-studio-pc0.mjs",
+      "sha256": "2d03688ac2b727fe8cc40fefe2ebbb59cb8d2c621835ddbef4acabeddf0ed0b8"
+    }
+  },
+  "command": {
+    "executable": "node",
+    "argv": [
+      "scripts/run-ai-native-studio-pc0.mjs",
+      "--spec",
+      "specs/ai-native-studio-post-pb7-improvement-program.v0.1.json",
+      "--tool-freeze",
+      "specs/ai-native-studio-pc0-tool-freeze.v0.1.json",
+      "--evidence-root",
+      "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-01",
+      "--work-root",
+      "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-01"
+    ]
+  },
+  "roots": {
+    "evidence": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-01",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-01",
+    "evidenceFilesBeforeFailureRecord": 0,
+    "workFiles": 0,
+    "emptyDirectories": [
+      "evidence/logs",
+      "work/config",
+      "work/home",
+      "work/scripts",
+      "work/tmp"
+    ]
+  },
+  "baseline": {
+    "scene": {
+      "uri": "experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend",
+      "sha256Before": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+      "sha256After": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+      "bytes": 337411
+    },
+    "binary": {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+      "sha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6",
+      "bytes": 182300520
+    }
+  },
+  "operations": {
+    "BlenderStarts": 0,
+    "renderCalls": 0,
+    "sceneSaves": 0,
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "mouseInteractions": 0
+  },
+  "retention": {
+    "immutable": true,
+    "cleanupPerformed": false,
+    "nextAttemptMustUseFreshRoots": true
+  },
+  "failureHash": "7ccd63885cfe788cbfa76722035daa536ab0831b8b7cb35f296743c6bbb174ba"
+}

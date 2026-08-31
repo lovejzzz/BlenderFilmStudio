@@ -996,11 +996,11 @@
         "renders": 0
       },
       "nextGate": "PC.0",
-      "nextGateStatus": "POST_PB7_PROGRAM_PREREGISTERED_PC0_TOOL_FREEZE_PENDING"
+      "nextGateStatus": "PC0_ATTEMPT_01_RETAINED_ZERO_START_FAILURE_C1_ATTEMPT_02_FROZEN"
     }
   },
   "postPb7ImprovementProgram": {
-    "status": "PC0_TOOL_FREEZE_READY_NOT_RUN",
+    "status": "PC0_C1_TOOL_FREEZE_READY_AFTER_RETAINED_FAILURE",
     "program": "POST-PB7-MODELING-ACTION-QUALITY",
     "spec": "specs/ai-native-studio-post-pb7-improvement-program.v0.1.json",
     "specHash": "b1743a2d4cdaa8fec6c9cbe8308c8a409a2fe01a8b3ba795c725b49974cddc33",
@@ -1014,16 +1014,25 @@
     "gateOrder": ["PC.0", "PC.1", "PC.2", "PC.3"],
     "activeGate": "PC.0",
     "pc0": {
-      "status": "TOOL_FREEZE_READY_NOT_RUN",
-      "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-01",
-      "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-01",
+      "status": "ATTEMPT_01_FAIL_C1_ATTEMPT_02_FROZEN_NOT_RUN",
+      "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-02",
+      "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-02",
       "evidenceRootExists": false,
       "workRootExists": false,
-      "toolFreeze": "specs/ai-native-studio-pc0-tool-freeze.v0.1.json",
-      "toolFreezeHash": "d29d178e1f5d850bedbae987ce786bfbc9a1132a2116dcf9773ddb87dc1c430f",
-      "toolFreezeFileSha256": "620bf47e18c2f389384783ee234f6a4cf8afd30a4404bad30b862441915fdc36",
-      "toolFreezeDocument": "research/2026-08-31-ai-native-studio-pc0-tool-freeze.md",
-      "toolFreezeDocumentFileSha256": "102177bc09b907221babcca33e03fd7acd2fad384aa96837c92a9869796d6c8a",
+      "toolFreeze": "specs/ai-native-studio-pc0-tool-freeze-c1.v0.2.json",
+      "toolFreezeHash": "958847332ac7aa16a249242b378221cdd4f066834c069a73d63062cd4928815b",
+      "toolFreezeFileSha256": "ea2c97ef102963f92279ce053d1ae0961c8c9b4177e0864cce7493b2ed000fd2",
+      "toolFreezeDocument": "research/2026-08-31-ai-native-studio-pc0-c1-tool-freeze.md",
+      "toolFreezeDocumentFileSha256": "b20d5eb9d7f877888db26dff406054ed82e3cd5d54369b1b2ed0ee04e9b06274",
+      "retainedAttempt01": {
+        "status": "FAIL_BEFORE_PROCESS_CREATION",
+        "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-01",
+        "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-01",
+        "failureHash": "7ccd63885cfe788cbfa76722035daa536ab0831b8b7cb35f296743c6bbb174ba",
+        "manifestHash": "1f77c2ffa9bfd3f8e47fa44a06f95f918dbafc32dee1a0dc2b6b889a94ae0378",
+        "blenderStarts": 0,
+        "immutable": true
+      },
       "toolTests": "14/14 PASS",
       "allowedBlenderStarts": 1,
       "renderCalls": 0,
@@ -1407,7 +1416,7 @@
   ],
   "nextExpectedCheckpoint": {
     "gate": "PC0_READ_ONLY_HERO_ASSET_AND_ACTION_INVENTORY",
-    "result": "Post-PB.7 improvement program is preregistered; freeze and audit one zero-render/zero-save inventory tool before the first PC.0 start",
+    "result": "PC.0 attempt-01 is a retained zero-start harness failure; execute and independently audit the frozen C1 attempt-02 zero-render/zero-save inventory",
     "acceptedPb6Evidence": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
     "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
     "audit": "15/15 PASS independent 288-frame/camera/video/attack audit",
@@ -1419,7 +1428,7 @@
       "bind PB.6 machine receipts, 288-frame output, review MP4, contact sheet, five failures and independent audit",
       "retain PB.7 human response, 27/27 audit and bounded PASS immutable",
       "retain the preregistered modeling-detail and action-complexity floors before any new source or render mutation",
-      "freeze an exact PC.0 inventory tool and fresh evidence root before its one allowed product start",
+      "retain PC.0 attempt-01 failure/work roots immutable and execute only the frozen C1 tool in fresh attempt-02 roots",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]
   }

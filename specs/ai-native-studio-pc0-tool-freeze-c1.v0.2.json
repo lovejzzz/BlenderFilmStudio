@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc0ToolFreezeCorrection.v0.2",
+  "status": "FROZEN_BEFORE_PC0_START",
+  "gate": "PC.0",
+  "correction": "C1",
+  "title": "One-start read-only inventory with temporal-dead-zone correction",
+  "program": {
+    "uri": "specs/ai-native-studio-post-pb7-improvement-program.v0.1.json",
+    "sha256": "0893ff7519a8e0607d5cfbe60946983256b379592f20d0a1d769784db798d75f",
+    "specHash": "b1743a2d4cdaa8fec6c9cbe8308c8a409a2fe01a8b3ba795c725b49974cddc33"
+  },
+  "baseFreeze": {
+    "uri": "specs/ai-native-studio-pc0-tool-freeze.v0.1.json",
+    "sha256": "620bf47e18c2f389384783ee234f6a4cf8afd30a4404bad30b862441915fdc36",
+    "specHash": "d29d178e1f5d850bedbae987ce786bfbc9a1132a2116dcf9773ddb87dc1c430f"
+  },
+  "retainedAttempt01": {
+    "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-01",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-01",
+    "failure": {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-01/failure.json",
+      "sha256": "2ee7029bc3edc30df4f83ffd0cc96369f7afbeb4de600931d0ddd45e4e9eb227",
+      "failureHash": "7ccd63885cfe788cbfa76722035daa536ab0831b8b7cb35f296743c6bbb174ba"
+    },
+    "rootManifest": {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-01/root-manifest.json",
+      "sha256": "8aecc60f22462699259b9e05abbea8938e219b1d42c862ba21c5d51cabc8ea50",
+      "manifestHash": "1f77c2ffa9bfd3f8e47fa44a06f95f918dbafc32dee1a0dc2b6b889a94ae0378"
+    },
+    "blenderStarts": 0,
+    "immutable": true
+  },
+  "allowedCorrection": {
+    "cause": "The attempt-01 runner's function-local const process shadowed global process and placed process.env in a temporal dead zone.",
+    "semanticLogicChange": "Rename the local runProcess result binding from process to execution and rename only its direct references.",
+    "attemptVersioningChanges": [
+      "Use this C1 freeze URI.",
+      "Use the unique fresh attempt-02 evidence root.",
+      "Use the unique fresh attempt-02 external work root."
+    ],
+    "probeChanged": false,
+    "inventoryScopeChanged": false,
+    "acceptanceChanged": false,
+    "resourceCeilingsChanged": false,
+    "operationCeilingsChanged": false
+  },
+  "probe": {
+    "uri": "scripts/probe-ai-native-studio-pc0.py",
+    "sha256": "a4e1f6f7f1b06d0b3da031bc6917918c89b3faf3d840d718b3c569418715735e"
+  },
+  "tools": [
+    {
+      "uri": "scripts/probe-ai-native-studio-pc0.py",
+      "sha256": "a4e1f6f7f1b06d0b3da031bc6917918c89b3faf3d840d718b3c569418715735e",
+      "role": "unchanged Blender read-only inventory producer"
+    },
+    {
+      "uri": "scripts/run-ai-native-studio-pc0-c1.mjs",
+      "sha256": "b37f53dcb1b7ff69e471866e592ee7e45c107325ceca8d69fd92ccb0e59b7510",
+      "role": "C1 fresh-root admission and one-start runner"
+    },
+    {
+      "uri": "scripts/audit-ai-native-studio-pc0-c1.mjs",
+      "sha256": "7ae52f554acc04f5e4a2ec3910267b9d5de9117a98b55b2223e9309b75c5229f",
+      "role": "C1 independent inventory/process/resource auditor"
+    },
+    {
+      "uri": "scripts/test-ai-native-studio-pc0-tools.mjs",
+      "sha256": "659d23fcfeb12e74e7f8c7e7c0c82b84d607e4db9ee137122af92af2cadd63eb",
+      "role": "unchanged synthetic inventory and attack checks"
+    }
+  ],
+  "formalRoots": {
+    "evidence": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-02",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-02",
+    "bothMustBeAbsentBeforeRunner": true,
+    "symlinksAllowed": false
+  },
+  "exactProcess": {
+    "wrapper": "/usr/bin/time",
+    "wrapperArguments": [
+      "-l"
+    ],
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6",
+    "blenderArguments": [
+      "--background",
+      "--factory-startup",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend",
+      "--python",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/scripts/probe-ai-native-studio-pc0.py",
+      "--",
+      "--output",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-02/inventory.json"
+    ],
+    "allowedBlenderStarts": 1
+  },
+  "isolatedEnvironment": {
+    "HOME": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-02/home",
+    "TMPDIR": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-02/tmp/",
+    "BLENDER_USER_CONFIG": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-02/config",
+    "BLENDER_USER_SCRIPTS": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-02/scripts",
+    "PYTHONNOUSERSITE": "1",
+    "LC_ALL": "C",
+    "LANG": "C"
+  },
+  "staticAudit": {
+    "pythonAst": "PASS",
+    "nodeSyntax": "PASS",
+    "forbiddenProbePatterns": 0,
+    "testCommand": "node scripts/test-ai-native-studio-pc0-tools.mjs",
+    "testResult": "BFS_PC0_TOOL_TEST PASS 14/14"
+  },
+  "expectedPreAuditRoster": [
+    "inventory.json",
+    "logs",
+    "process.json",
+    "receipt.json"
+  ],
+  "expectedFinalRoster": [
+    "audit.json",
+    "inventory.json",
+    "logs",
+    "process.json",
+    "receipt.json",
+    "root-manifest.json"
+  ],
+  "resourceCeilings": {
+    "evidenceBytes": 16777216,
+    "workBytes": 67108864,
+    "wallSeconds": 300,
+    "peakRssBytes": 2147483648,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "operationCeilings": {
+    "BlenderStarts": 1,
+    "renderCalls": 0,
+    "sceneSaves": 0,
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "mouseInteractions": 0
+  },
+  "stopRules": [
+    "Retain attempt-01 roots byte-for-byte.",
+    "Stop before root creation when program, source, binary or any C1 tool hash differs.",
+    "Stop before process creation unless both exact attempt-02 roots are absent and disk admission passes.",
+    "Retain FAIL on timeout, nonzero exit, missing inventory, missing RSS measurement, resource excess, source hash drift or any render-like artifact.",
+    "Do not save the blend, call a render operator, mutate engine source, use network/model authority or begin PC.1."
+  ],
+  "formalEvidenceRootExistsAtFreeze": false,
+  "formalWorkRootExistsAtFreeze": false,
+  "specHash": "958847332ac7aa16a249242b378221cdd4f066834c069a73d63062cd4928815b"
+}

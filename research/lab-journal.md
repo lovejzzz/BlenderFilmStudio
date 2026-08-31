@@ -6451,3 +6451,19 @@ Date: 2026-08-31 · Type: ZERO-RENDER TOOL FREEZE · Formal Blender starts / ren
 Probe冻结complete object/mesh/material/modifier/constraint/action/F-curve/keyframe与9 sentinel state inventory；static Python/Node checks PASS、forbidden probe patterns 0、synthetic inventory/attack 14/14。Runner binds exact source/binary/tools/fresh roots并以`time -l`测wall/RSS；auditor独立复核totals、streams、source immutability与全roots零render artifacts。
 
 Formal evidence/work roots冻结时均absent。Ceilings为1 Blender start、0 render/save/engine/network/model/mouse，16 MiB evidence、64 MiB work、300秒、2 GiB RSS；PC.1仍未开始。
+
+## J-535 · PC.0 attempt-01 retained pre-start failure
+
+Date: 2026-08-31 · Type: RETAINED HARNESS FAILURE · Blender starts / renders / saves: 0 / 0 / 0
+
+Formal runner在fresh roots创建后、process creation前停止：`BFS_PC0_RUN_REJECTED Cannot access 'process' before initialization`。根因为function-local `const process`遮蔽Node global `process`，使前一行`process.env`在temporal dead zone内被访问。
+
+Source/binary SHA-256保持`0acd4d13...` / `8a380289...`；attempt-01 evidence/work roots保留，0 files，仅5个预期empty directories。C1只允许重命名该local result binding及direct references，必须使用fresh attempt-02；inventory scope、thresholds、ceilings不变，PC.1仍禁止启动。
+
+## J-536 · PC.0 C1 attempt-02 tool freeze
+
+Date: 2026-08-31 · Type: CORRECTED ZERO-RENDER TOOL FREEZE · Formal Blender starts / renders / saves: 0 / 0 / 0
+
+C1 semantic correction仅把runner local subprocess result binding从`process`改为`execution`及其direct references；versioned path changes仅绑定C1 freeze与fresh attempt-02 roots。Original frozen runner恢复exact historical hash `2d03688a...`，attempt-01 failure/manifest self hashes `7ccd6388...` / `1f77c2ff...`被C1逐项绑定。
+
+Probe、inventory scope、acceptance与全部operation/resource ceilings未变；Node syntax与synthetic 14/14 PASS，attempt-02 evidence/work roots在freeze时absent。PC.1仍禁止启动。
