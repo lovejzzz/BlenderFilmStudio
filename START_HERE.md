@@ -94,6 +94,13 @@ both a research notebook and an executable evidence base. Read this page,
   combined readiness 19/19. Blender starts, BuildPlan writes, engine/remote
   mutations and network calls were all 0. PB.2 itself remains not started and
   unauthorized.
+- **PB.2 formal tools frozen, still inert:** v0.3 freezes a system-Python runner,
+  an auditor that does not import the product contract module, exact B01/B02
+  inputs, eight negative cases, fresh roots and zero Blender/write ceilings.
+  Static attempt-01 is retained at `FAIL 27/28` for a filename/import false
+  positive; C1 passed 10/10 and makes combined tool readiness 28/28. No runner,
+  proposal or Blender process was started, and both formal roots remain absent.
+  A separate committed v0.4 execution contract is still required.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but

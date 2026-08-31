@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPb2ValidationToolFreezeAuditC1.v0.1",
+  "status": "PASS",
+  "mode": "STATIC_C1_ONLY_NO_RUNNER_NO_PROPOSAL_NO_BLENDER",
+  "correctionContract": {
+    "uri": "specs/ai-native-studio-pb2-validation-tool-freeze-audit-c1.v0.3.1.json",
+    "sha256": "7c62e5c476821e61048c9843f046bcd00777f65cf99b4db5cd44e1fba4b5381e"
+  },
+  "retainedAttempt01": {
+    "uri": "experiments/ai-native-studio-phase-b/PB.2-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+    "fileSha256": "9c2b0563e6cfde278f7ae9035dece76062d19a694ff8682d29a6c84db314ffc6",
+    "auditHash": "bbef3338f8e6bb16011cb476e67db43517d3454401fbfb8a001e9538511efc6f",
+    "status": "FAIL",
+    "checks": "27/28",
+    "onlyFailedCheck": "auditorDoesNotImportEngineContract",
+    "rootCause": "A raw substring search treated the formal auditor's read-only film_studio_contract.py filename as an import"
+  },
+  "checks": {
+    "correctionStatusClosed": true,
+    "toolFreezeExact": true,
+    "retainedFailureFileExact": true,
+    "retainedFailureSelfExact": true,
+    "retainedFailureShapeExact": true,
+    "retainedOnlyFailedCheckExact": true,
+    "retainedZeroExecutionCounts": true,
+    "astShowsNoEngineContractImport": true,
+    "formalAuditorStillExact": true,
+    "freshFormalRootsRemainAbsent": true
+  },
+  "counts": {
+    "passed": 10,
+    "total": 10,
+    "combinedPassed": 28,
+    "combinedTotal": 28,
+    "runnerStarts": 0,
+    "proposalInspections": 0,
+    "proposalExecutions": 0,
+    "blenderStarts": 0,
+    "renders": 0,
+    "buildPlanWrites": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "observation": {
+    "formalAuditorImportedModules": [
+      "__future__",
+      "argparse",
+      "ast",
+      "hashlib",
+      "json",
+      "os",
+      "pathlib",
+      "sys"
+    ],
+    "filmStudioContractImported": false,
+    "sourceFilenameMayBeReadAsData": true
+  },
+  "claimCeiling": "A C1 PASS corrects only static tool-freeze readiness. It does not execute the runner, inspect or execute a proposal, start Blender, start PB.2 or grant PB.2 authority.",
+  "auditHash": "b46193daf3e693badabfbc099e4edef25e1e56998f2ccbf9d22bb03021c32702"
+}

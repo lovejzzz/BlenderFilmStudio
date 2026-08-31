@@ -80,6 +80,18 @@ writes or network calls. Its audit self hash is
 `bc70c982c3c90e92aff1fd014b93fe05d14f43ce683f77823875056293ef8e2a`.
 This is not PB.2 PASS and grants no PB.2 execution authority.
 
+The next PB.2 formal toolchain is frozen at
+`specs/ai-native-studio-pb2-validation-tool-freeze.v0.3.json` with SHA-256
+`8f8ff370e82b3c1fe4c0e975967e3b83408a7dc9b8f7472fb709a9d3a601cc29`.
+Its runner is inert unless a separate committed v0.4 contract has status
+`AUTHORIZED_FOR_ONE_FORMAL_RUN`; that contract does not exist. Static audit
+attempt-01 is retained at 27/28 after a filename/import false positive. C1
+passes 10/10, giving combined tool readiness 28/28 with self hash
+`b46193daf3e693badabfbc099e4edef25e1e56998f2ccbf9d22bb03021c32702`.
+The formal work and evidence roots remain absent. Do not run the formal runner
+from the v0.3 request or create those roots before an exact v0.4 execution
+contract is authorized and committed.
+
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
 and maintenance reference, not the source baseline. The fallback is an external

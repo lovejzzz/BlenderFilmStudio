@@ -307,6 +307,35 @@
         "auditHash": "bc70c982c3c90e92aff1fd014b93fe05d14f43ce683f77823875056293ef8e2a",
         "auditFileSha256": "0ddcd7065d325de613b3a0990d8d252f427e578e992cb82f590602e7281039d8"
       },
+      "formalToolFreeze": {
+        "status": "FROZEN_INERT_NOT_AUTHORIZED",
+        "contract": "specs/ai-native-studio-pb2-validation-tool-freeze.v0.3.json",
+        "contractFileSha256": "8f8ff370e82b3c1fe4c0e975967e3b83408a7dc9b8f7472fb709a9d3a601cc29",
+        "authorizationRequest": "specs/ai-native-studio-pb2-validation-only-authorization-request.v0.3.json",
+        "authorizationRequestFileSha256": "c0d93a18dc89e62c44f5d352687b0b939060cecd4779cc5d2a68e0a9f1cdf8c0",
+        "runner": "scripts/run-ai-native-studio-pb2-validation.py",
+        "runnerFileSha256": "ed59e8dfcf9bf9e529e778a911c49c2a03ae1cf6bbdcf531a048b3d003aeb57d",
+        "independentAuditor": "scripts/audit-ai-native-studio-pb2-validation.py",
+        "independentAuditorFileSha256": "e0c788b22425d61a65d1ef94219f6505ab84c14e730fd56814432a285f37bd61",
+        "retainedStaticAttempt01": {
+          "status": "FAIL",
+          "checks": "27/28",
+          "auditHash": "bbef3338f8e6bb16011cb476e67db43517d3454401fbfb8a001e9538511efc6f",
+          "auditFileSha256": "9c2b0563e6cfde278f7ae9035dece76062d19a694ff8682d29a6c84db314ffc6"
+        },
+        "acceptedStaticC1": {
+          "status": "PASS",
+          "checks": "10/10",
+          "combinedChecks": "28/28",
+          "auditHash": "b46193daf3e693badabfbc099e4edef25e1e56998f2ccbf9d22bb03021c32702",
+          "auditFileSha256": "a03e67741360837e4dd68eb8c5efb36ccf28d910ff9890f2da087b7bc21ebe96"
+        },
+        "requiredExecutionContract": "specs/ai-native-studio-pb2-validation-only-execution.v0.4.json",
+        "requiredExecutionStatus": "AUTHORIZED_FOR_ONE_FORMAL_RUN",
+        "executionContractExists": false,
+        "formalWorkRootExists": false,
+        "formalEvidenceRootExists": false
+      },
       "blenderStarts": 0,
       "renders": 0,
       "proposalsExecuted": 0,
@@ -323,7 +352,7 @@
       "phaseBSourceMutationAuthorized": false,
       "pb2ThroughPb7Authorized": false,
       "nextGate": "PB.2",
-      "nextGateStatus": "READINESS_PASS_NOT_STARTED_UNAUTHORIZED"
+      "nextGateStatus": "READINESS_AND_TOOL_FREEZE_PASS_NOT_STARTED_UNAUTHORIZED"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],

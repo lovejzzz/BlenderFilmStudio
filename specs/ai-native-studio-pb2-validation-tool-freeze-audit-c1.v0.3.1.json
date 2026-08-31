@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb2ValidationToolFreezeAuditC1.v0.3.1",
+  "contractId": "AI-NATIVE-STUDIO-PB2-VALIDATION-TOOL-FREEZE-AUDIT-C1-v0.3.1",
+  "status": "PREREGISTERED_STATIC_AUDIT_CORRECTION_NO_PB2_EXECUTION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "9bfd4bc1350f63760e4a3390ff4e53e3245cf0db",
+  "toolFreeze": {
+    "uri": "specs/ai-native-studio-pb2-validation-tool-freeze.v0.3.json",
+    "sha256": "8f8ff370e82b3c1fe4c0e975967e3b83408a7dc9b8f7472fb709a9d3a601cc29"
+  },
+  "retainedAttempt01": {
+    "uri": "experiments/ai-native-studio-phase-b/PB.2-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+    "fileSha256": "9c2b0563e6cfde278f7ae9035dece76062d19a694ff8682d29a6c84db314ffc6",
+    "auditHash": "bbef3338f8e6bb16011cb476e67db43517d3454401fbfb8a001e9538511efc6f",
+    "status": "FAIL",
+    "checks": "27/28",
+    "onlyFailedCheck": "auditorDoesNotImportEngineContract",
+    "rootCause": "A raw substring search treated the formal auditor's read-only film_studio_contract.py filename as an import"
+  },
+  "correction": {
+    "rule": "Parse the exact formal auditor with Python ast and reject only Import or ImportFrom modules named film_studio_contract or ending .film_studio_contract",
+    "formalAuditorSourceMayReadEngineContractAsData": true,
+    "formalAuditorMayImportEngineContract": false
+  },
+  "c1Auditor": {
+    "uri": "scripts/audit-ai-native-studio-pb2-tool-freeze-c1.py",
+    "sha256": "fa428f42e8b676bb8109a37579a5790a322504ce142f8f4143f28a03c713eda1"
+  },
+  "freshEvidenceRoot": "experiments/ai-native-studio-phase-b/PB.2-tool-freeze-2026-08-31-mac-m2max-attempt-02",
+  "authorization": {
+    "runnerStarts": 0,
+    "proposalInspections": 0,
+    "proposalExecutions": 0,
+    "blenderStarts": 0,
+    "renders": 0,
+    "buildPlanWrites": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0,
+    "pb2FormalExecution": false
+  },
+  "acceptance": "Exact retained failure plus AST correction pass, yielding combined static tool readiness 28/28 while both formal roots remain absent.",
+  "claimCeiling": "A C1 PASS corrects only static tool-freeze readiness. It does not execute the runner, inspect or execute a proposal, start Blender, start PB.2 or grant PB.2 authority.",
+  "stopRule": "Any mismatch records FAIL in the fresh attempt-02 audit root without editing v0.3, attempt-01 or any F0/PB.1 evidence."
+}
