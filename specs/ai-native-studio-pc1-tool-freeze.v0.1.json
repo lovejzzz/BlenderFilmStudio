@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc1ToolFreeze.v0.1",
+  "status": "FROZEN_BEFORE_PC1_START",
+  "gate": "PC.1",
+  "preregistration": {
+    "uri": "specs/ai-native-studio-pc1-modeling-detail-preregistration-c1.v0.2.json",
+    "sha256": "dd2bd2f2ca31a6bb590b43a653ecc4639afb0bb345d19815d7b2d8d5c7d2527d",
+    "specHash": "28ac7a88c25a6da004c5b9fd996e3dcd69188b3e2665b577fdc2263aef1f3206"
+  },
+  "builder": {
+    "uri": "scripts/build-ai-native-studio-pc1.py",
+    "sha256": "a91ff29ff4d7ea06be2ae28da22cec45539cdd50a998c2de7adb80a5d8e947a9"
+  },
+  "semanticAuditor": {
+    "uri": "scripts/audit-ai-native-studio-pc1.py",
+    "sha256": "1bdec75e49465c5881e6698bc50cbc1189124a2ce9b9aa18b311286d63ead270"
+  },
+  "tools": [
+    {"uri": "scripts/build-ai-native-studio-pc1.py", "sha256": "a91ff29ff4d7ea06be2ae28da22cec45539cdd50a998c2de7adb80a5d8e947a9", "role": "single-save detail builder and baseline/derived renderer"},
+    {"uri": "scripts/audit-ai-native-studio-pc1.py", "sha256": "1bdec75e49465c5881e6698bc50cbc1189124a2ce9b9aa18b311286d63ead270", "role": "reopen semantic and independent pixel-metric probe"},
+    {"uri": "scripts/run-ai-native-studio-pc1.py", "sha256": "889685aead49488ec418086ac07ba666e9de37c9497f1c48e3c1e4318194c736", "role": "fresh-root admission and exact two-start runner"},
+    {"uri": "scripts/audit-ai-native-studio-pc1.mjs", "sha256": "2eae74a7b8771ef9cdbf3d8e1721fb15ac114d0881ff1df778da2a8c507e6d88", "role": "independent file/process/resource final auditor"}
+  ],
+  "formalRoots": {
+    "evidence": "experiments/ai-native-studio-post-pb7/PC.1-2026-08-31-mac-m2max-attempt-01",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.1-2026-08-31-mac-m2max-attempt-01",
+    "bothAbsentAtFreeze": true,
+    "symlinksAllowed": false
+  },
+  "exactProcesses": [
+    {"index": 1, "name": "build", "source": "frozen B62 blend", "renderCalls": 6, "derivedSceneSaves": 1},
+    {"index": 2, "name": "semantic-audit", "source": "fresh PC1 derived blend", "renderCalls": 0, "sceneSaves": 0}
+  ],
+  "staticAudit": {
+    "pythonCompile": "PASS",
+    "nodeSyntax": "PASS",
+    "builderAndSemanticAuditorNetworkOrSubprocessPatterns": 0,
+    "builderExactComponentRosterCount": 26,
+    "semanticAuditorUsesIndependentImagePixelReadback": true,
+    "finalAuditorWritesManifestLast": true
+  },
+  "resourceCeilings": {
+    "evidenceBytes": 268435456,
+    "workBytes": 268435456,
+    "wallSeconds": 600,
+    "peakRssBytesPerProcess": 2147483648,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "stopRules": [
+    "Stop before root creation on any preregistration, tool, source or binary hash mismatch.",
+    "Stop before process creation unless both exact formal roots are absent and disk admission passes.",
+    "Retain FAIL on any nonzero process, missing semantic roster, protected-state drift, action drift, insufficient visible views, resource excess or source hash drift.",
+    "Never overwrite the frozen source, a failed root or accepted PB/PC evidence.",
+    "Do not start PC.2 before final PC.1 audit PASS."
+  ],
+  "specHash": "e7e86dc26b4f643c5cb2521b2c0d080883f8f561f06f4d4afdbe80088e331a62"
+}

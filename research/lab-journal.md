@@ -6483,3 +6483,17 @@ Date: 2026-08-31 · Type: PREREGISTRATION · PC.1 Blender starts / renders / sav
 PC.1冻结26个guardian/console/core semantic detail IDs与3个new material regions。Protected A/B views为frames 48/144/240；至少2/3须同时达到changed RGB pixel fraction ≥0.001（threshold 2/255）与mean absolute RGB difference ≥0.0005。全部9 sentinel camera/light states canonical exact，action/keyframe roster exact，source save 0。
 
 Formal ceiling为2 Blender starts、6 EEVEE renders、1 derived save、256 MiB evidence/work、600s、2 GiB peak RSS/process；工具与fresh roots必须在首次start前另行冻结，PC.2仍禁止。
+
+## J-539 · PC.1 modeling-detail tool freeze
+
+Date: 2026-08-31 · Type: TOOL FREEZE · Formal Blender starts / renders / saves: 0 / 0 / 0
+
+Exact builder、reopen semantic/pixel auditor、two-start runner与final independent auditor冻结。Builder执行3 baseline + 3 derived EEVEE stills与1 derived save；second start 0 render/save并独立读取pixels验证visible-change floors。Python compile、Node syntax、builder/auditor forbidden network/subprocess patterns均PASS/0。
+
+Formal attempt-01 evidence/work roots在freeze时absent；source/binary、26 detail IDs、3 material regions、9 sentinel camera/light states、action roster及resource ceilings保持prereg exact。PC.2仍禁止。
+
+## J-540 · PC.1 preregistration C1 runtime enum correction
+
+Date: 2026-08-31 · Type: PRE-START VERSIONED CORRECTION · PC.1 Blender starts / renders / saves: 0 / 0 / 0
+
+Static runtime evidence显示accepted Blender使用current enum `BLENDER_EEVEE`并拒绝`BLENDER_EEVEE_NEXT`。Published v0.1保留；C1 v0.2仅修改`/renderProfile/engine`该JSON leaf并绑定v0.1 file/self hashes。26 components、3 materials、pixel floors、sentinels、operations/resources全不变；tool freeze只绑定C1。
