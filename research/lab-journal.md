@@ -6405,3 +6405,9 @@ Date: 2026-08-31 · Type: ACCEPTED PB.6 VALIDATION · Clean builds / incremental
 Engine source `aa4fff39...`在三Python paths累计345 additions / 4 deletions。Clean arm64 build 603.27秒；receipt-backed reopen correction在同build tree增量安装18.70秒，accepted binary SHA `8a380289...`。Formal product start-1 inspect零render；start-2 visible operator完成WIDE/MEDIUM/CLOSE 96/96/96；start-3零render重建COMPLETE typed state；start-4五攻击与independent audit零render。
 
 Validation 9/9、independent audit 15/15 PASS，self hashes `f8e1cc9d...` / `2f7b08ee...`。三个shot各96 distinct decoded frames，cuts exact不同；MP4为640×360/24fps/288帧，SHA `2aa51303...`。Retained frame288 `0.93378717684983 > 0.90` rejection exact不变。接触表机器可读但human review继续`PENDING_UNTIL_PB7`；0 network/model/mouse/release/sign/notary/distribution。
+
+## J-529 · PB.6 validated engine fast-forward published
+
+Date: 2026-08-31 · Type: ORDINARY ENGINE PUBLICATION · Push attempts / ref updates / force / tags / releases: 1 / 1 / 0 / 0 / 0
+
+PB.6 evidence公开验证后，只读确认`film-engine/main=373881e1...`为validated two-commit increment的祖先。一次ordinary non-force push快进至`aa4fff39...`，remote OID与三个changed paths raw SHA exact。Other refs、LFS uploads、release、binary distribution、signing/notarization全0；publication receipt self hash `11ec70c6...`。

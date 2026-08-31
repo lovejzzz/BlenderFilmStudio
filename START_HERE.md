@@ -219,7 +219,8 @@ not rewritten; new adapters must bind the standing charter explicitly.
   9/9 and independent audit 15/15 with receipt/audit hashes `f8e1cc9d…` /
   `2f7b08ee…`. Five attacks rejected with zero render calls. The historical
   frame-288 `0.93378717684983 > 0.90` rejection remains exact; human review is
-  intentionally pending until PB.7.
+  intentionally pending until PB.7. The validated two-commit increment was
+  published to `lovejzzz/film-engine/main` by one ordinary non-force fast-forward.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
