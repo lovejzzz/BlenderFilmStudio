@@ -68,7 +68,8 @@ two explicit-path, zero-render identity/configuration starts. C4 verdict self
 hash is `bc64dd1a…`; accepted C1 audit is 15/15 with self hash `f59242af…`.
 The first C4 auditor remains retained at 13/14 due only to a self-matching import
 check. Attempts 01–04 and the observed real FilmStudioEngineF0 preference side
-effect remain immutable. PB.2–PB.7 remain unauthorized.
+effect remain immutable. PB.2 validation-only was later explicitly authorized
+and is now closed `PASS`; PB.3–PB.7 remain unauthorized.
 
 PB.2 readiness-only is now preregistered without starting PB.2. Attempt-01 is a
 retained `FAIL` 16/19 caused by three audit-contract errors, with every execution
@@ -80,11 +81,12 @@ writes or network calls. Its audit self hash is
 `bc70c982c3c90e92aff1fd014b93fe05d14f43ce683f77823875056293ef8e2a`.
 This is not PB.2 PASS and grants no PB.2 execution authority.
 
-The next PB.2 formal toolchain is frozen at
+The base PB.2 formal toolchain was frozen at
 `specs/ai-native-studio-pb2-validation-tool-freeze.v0.3.json` with SHA-256
 `8f8ff370e82b3c1fe4c0e975967e3b83408a7dc9b8f7472fb709a9d3a601cc29`.
-Its runner is inert unless a separate committed v0.4 contract has status
-`AUTHORIZED_FOR_ONE_FORMAL_RUN`; that contract does not exist. Static audit
+Its original runner was inert unless a separate committed v0.4 contract had
+status `AUTHORIZED_FOR_ONE_FORMAL_RUN`; that original contract was never
+created. Static audit
 attempt-01 is retained at 27/28 after a filename/import false positive. C1
 passes 10/10, giving combined tool readiness 28/28 with self hash
 `b46193daf3e693badabfbc099e4edef25e1e56998f2ccbf9d22bb03021c32702`.
@@ -97,10 +99,8 @@ Its status is `DRAFT_NON_EXECUTABLE_AUTHORIZATION_MISSING`; authorization text,
 authorization hash/time and `researchCommit` are deliberately null. Static
 preflight passes 23/23 with self hash
 `1cc396c2f22eefcd5cf87807fc50cf26d84bbcb7323a6a68c1f8d5ef0dacd61d`.
-The template must never be renamed or edited into authority. After explicit
-PB.2 authorization, copy it to the exact v0.4 execution-contract path, bind the
-user text and containing research commit, commit/verify that new file, and only
-then use the frozen argv.
+The historical template must never be renamed or edited into authority; the C2
+v0.6 contract below is the only executed authority.
 
 Explicit PB.2 validation-only authorization is now recorded at
 `research/2026-08-31-ai-native-studio-pb2-validation-execution-authorization-v0.5.zh-CN.md`.
@@ -123,8 +123,13 @@ with self hash
 Use `specs/ai-native-studio-pb2-validation-only-execution-c2.v0.6.json` as the
 only execution contract. It now binds the exact user authorization, C2 tools,
 parent commit and unique attempt-01 roots with status
-`AUTHORIZED_FOR_ONE_FORMAL_RUN`; commit it with parent `f3a8f869...`, then run
-the frozen runner and independent auditor exactly once. The prior v0.4/v0.5
+`AUTHORIZED_FOR_ONE_FORMAL_RUN`. Execution commit `7237f8b9...` has exact
+parent `f3a8f869...`. Formal attempt-01 passed two exact positive inspections
+and eight fail-closed negative controls; receipt self hash is `ffb845af...` and
+the independent audit is 19/19 with self hash `0a57ccf7...`. All Blender,
+render, proposal execution, BuildPlan write, scene mutation, network, engine
+source edit and engine remote write counts are zero. The authorization is
+consumed; do not rerun it. PB.3–PB.7 remain unauthorized. The prior v0.4/v0.5
 execution shapes are non-executable retained protocol failures.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native

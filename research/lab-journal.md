@@ -6123,3 +6123,13 @@ Date: 2026-08-31 · Type: PB.1 VALIDATION-ONLY PASS · New clone / materializati
 C4 preflight在tool commit `80b68d897b4b17268b3dc997fd0de5fb1022197d`推送且worktree clean后ACCEPTED，绑定attempt-04 PASS build、39/39 failure audit与binary `4d7f1744…`。Recovery显式设置四个`BLENDER_USER_*`路径到fresh root；version与background preference-save两次进程均exit 0，version/buildHash/binaryPath/paths/save exact，renderCalls=0。Official Blender与真实FilmStudioEngineF0 config before/after digest不变，fresh recovery config存在。
 
 Runner verdict PASS self hash `bc64dd1aead3f2f8a24970e2fb160ba7d861ec2745b96a8e6303f8d704cd46c0`。首个auditor因自检字符串匹配自身保留13/14 FAIL；不import runner或failed auditor的C1重算全部证据与live remote，15/15 PASS，self hash `f59242aff7c96d15d98e8a3e6b05635b0211f8b6e464ba51646441ce4a15485e`。PB.1由attempt-04 accepted clean build与C4 runtime recovery组合关闭PASS；不授权PB.2–PB.7。
+
+## J-498 · PB.2 validation-only PASS
+
+Date: 2026-08-31 · Type: PB.2 VALIDATION-ONLY PASS · Positive inspections / negative controls / Blender starts / proposal executions / BuildPlan writes: 2 / 8 / 0 / 0 / 0
+
+Owner逐字批准linked PB.2 validation-only scope。v0.4 template与v0.5 C1 execution shape先后暴露Git commit self-reference，均作为未执行协议失败保留；C2 v0.6改为合同只绑定parent，runner从已提交HEAD派生execution commit，auditor再以receipt OID独立读取exact committed bytes。Static C2 audit 17/17 PASS。正式合同SHA-256 `25aa2519…`提交为`7237f8b99fb0e4548d016aee57c896fb2d92536f`，parent exact为`f3a8f869…`，raw GitHub bytes复验一致。
+
+唯一formal attempt-01对B01/B02做只读typed proposal/approval inspection，plan hashes exact为`316114f1…`与`a9022bf6…`；八个负控分别以冻结reason在写入前拒绝。Runner PASS self hash `ffb845af421c79eca25e6374bf15578a25052a1f03a9862156ff059cc827d8d5`；不import/执行product contract且不启动Blender的独立auditor 19/19 PASS，self hash `0a57ccf75ea764db0e6fcf9a14e4730cbb84bc39a038f0816cf0046e01169396`。
+
+Proposal execution、BuildPlan write、Blender start、render、scene mutation、proposal Python/shell/network、engine source edit与engine remote write全部0。Retained source和GitHub `film-engine/main`均保持`4061e12b…`，无tag。PB.2 validation-only关闭PASS且一次性授权已消耗；它不证明PB.3、scene build、任意proposal、model quality、production或distribution readiness。PB.3–PB.7继续未授权。

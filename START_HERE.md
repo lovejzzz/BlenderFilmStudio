@@ -94,13 +94,12 @@ both a research notebook and an executable evidence base. Read this page,
   combined readiness 19/19. Blender starts, BuildPlan writes, engine/remote
   mutations and network calls were all 0. This readiness result is not the
   formal PB.2 verdict.
-- **PB.2 formal tools frozen, still inert:** v0.3 freezes a system-Python runner,
+- **PB.2 base formal tools retained:** v0.3 froze a system-Python runner,
   an auditor that does not import the product contract module, exact B01/B02
   inputs, eight negative cases, fresh roots and zero Blender/write ceilings.
   Static attempt-01 is retained at `FAIL 27/28` for a filename/import false
-  positive; C1 passed 10/10 and makes combined tool readiness 28/28. No runner,
-  proposal or Blender process was started, and both formal roots remain absent.
-  A separate committed v0.4 execution contract is still required.
+  positive; C1 passed 10/10 and makes combined tool readiness 28/28. At this
+  base-freeze checkpoint no runner, proposal or Blender process was started.
 - **PB.2 execution template ready, non-executable:** the v0.4 template binds the
   frozen commit, tools, paths, cases and future argv, while authorization fields
   and `researchCommit` remain null. Static preflight passed 23/23 without
@@ -117,13 +116,18 @@ both a research notebook and an executable evidence base. Read this page,
   and written only to the receipt, then independently re-audited through Git.
   Static C2 tool audit passed 17/17. The v0.4/v0.5 execution shapes are retained
   as non-executable protocol failures.
-- **PB.2 validation-only execution authorized and frozen:** the exact user
+- **PB.2 validation-only PASS:** the exact user
   approval is bound in
   `specs/ai-native-studio-pb2-validation-only-execution-c2.v0.6.json` together
   with the C2 tools, parent commit, unique attempt-01 roots, two positive
   inspections, eight negative controls and zero Blender/render/write/network
-  ceilings. Its file SHA-256 is `25aa2519c...`; current HEAD is deliberately
-  derived only after commit and recorded in the formal receipt.
+  ceilings. Its file SHA-256 is `25aa2519c...`; execution commit is
+  `7237f8b9...`. Attempt-01 passed both positive inspections and all eight
+  negative controls; receipt self hash is `ffb845af...`, and the independent
+  audit passed 19/19 with self hash `0a57ccf7...`. Blender, render, proposal
+  execution, BuildPlan write, scene mutation, network and engine-write counts
+  were all zero. The one-run authorization is consumed; PB.3–PB.7 remain
+  unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -336,11 +340,11 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-Commit the authorized PB.2 C2 execution contract with its preregistered parent,
-run its pure-Python validation once in the unique fresh roots, run the independent
-auditor, and publish the immutable PASS or FAIL evidence. Do not start Blender,
-execute proposals, write BuildPlans, mutate `film-engine`, use proposal-originated
-network/filesystem authority, or begin PB.3–PB.7.
+PB.2 validation-only is closed `PASS`. The next checkpoint is a separately
+versioned PB.3 scope and preregistration; PB.3–PB.7 are not yet authorized. Do
+not start Blender, execute proposals, write BuildPlans, mutate `film-engine`,
+or use proposal-originated network/filesystem authority under the consumed PB.2
+authorization.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

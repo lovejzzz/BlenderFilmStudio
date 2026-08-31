@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_READINESS_PASS",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -177,14 +177,16 @@
     "phaseBMutationAuthorized": false
   },
   "phaseBPreparation": {
-    "status": "PB1_VALIDATION_PASS_ATTEMPT04_BUILD_PLUS_C4_RUNTIME_RECOVERY",
-    "gate": "PB.1",
+    "status": "PB1_VALIDATION_PASS_PB2_VALIDATION_PASS",
+    "gate": "PB.2",
     "mode": "VALIDATION_ONLY_NO_ENGINE_SOURCE_MUTATION_NO_ENGINE_REMOTE_WRITE",
     "publicationHead": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
     "f0CodeIdentityParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
     "engineSourceEditsAuthorized": 0,
     "engineRemoteWritesAuthorized": 0,
     "pb2ThroughPb7Authorized": false,
+    "pb2ValidationOnlyAuthorized": true,
+    "pb3ThroughPb7Authorized": false,
     "attempt01": {
       "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.1-2026-08-30-mac-m2max-attempt-01",
       "status": "FAIL",
@@ -370,7 +372,7 @@
           "statusAfterC2": "SUPERSEDED_RETAINED_EXECUTION_SHAPE_FAILURE"
         },
         "c2DerivedHeadCorrection": {
-          "status": "PASS_STATIC_TOOL_READY_EXECUTION_CONTRACT_AUTHORIZED_PENDING_RUN",
+          "status": "PASS_FORMAL_VALIDATION_COMPLETE",
           "contract": "specs/ai-native-studio-pb2-validation-tool-c2-derived-head-binding.v0.6.json",
           "contractFileSha256": "c00b8de975c8a45c8c08bfe2a2ea8b1fff5ec9731aa81359918707907fb2e32a",
           "runner": "scripts/run-ai-native-studio-pb2-validation-c1.py",
@@ -387,10 +389,37 @@
           "executionContractFileSha256": "25aa2519c658593effe9cb6ff46629758a8cc70e76fd30f3a90d42de4da69da9",
           "executionParentResearchCommit": "f3a8f86949462148935027008e89460f6b9033c4",
           "executionContractCommitDerivation": "current HEAD is derived after commit and recorded only in the formal receipt",
-          "formalRootsExist": false
+          "executionCommit": "7237f8b99fb0e4548d016aee57c896fb2d92536f",
+          "formalRootsExist": true,
+          "formalAttempt01": {
+            "status": "PASS",
+            "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.2-2026-08-31-mac-m2max-attempt-01",
+            "externalRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.2-2026-08-31-mac-m2max-attempt-01",
+            "outcomeDocument": "research/2026-08-31-ai-native-studio-pb2-validation-only-pass.md",
+            "outcomeDocumentSha256": "c6c96dfb7b74d7d4cfad1d82f3d48984845d6b0423e66e27416da320b3d976ba",
+            "receiptFileSha256": "fb4c4100b9476f0ac37de35ec9c9a526438f0558c20df0b3e04a9ad57253018c",
+            "receiptHash": "ffb845af421c79eca25e6374bf15578a25052a1f03a9862156ff059cc827d8d5",
+            "auditFileSha256": "3b5bc3fca3d879fb25cbf3704f020337b4fc77e0f7c6707be4d450b88de0967e",
+            "auditHash": "0a57ccf75ea764db0e6fcf9a14e4730cbb84bc39a038f0816cf0046e01169396",
+            "auditChecks": "19/19",
+            "positiveInspections": 2,
+            "negativeCases": 8,
+            "b01PlanHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+            "b02PlanHash": "a9022bf6f881b1c8d7b7866813d22454c81f72de9190e05af82c10bf62a26687",
+            "proposalExecutions": 0,
+            "buildPlanFilesWritten": 0,
+            "blenderStarts": 0,
+            "renders": 0,
+            "sceneMutations": 0,
+            "networkCalls": 0,
+            "engineSourceEdits": 0,
+            "engineRemoteWrites": 0,
+            "workRootBytes": 1458396,
+            "wallSeconds": 0.4755333339999197
+          }
         },
         "explicitAuthorization": {
-          "status": "AUTHORIZED_PB2_VALIDATION_ONLY",
+          "status": "AUTHORIZED_PB2_VALIDATION_ONLY_CONSUMED_ONE_FORMAL_RUN",
           "document": "research/2026-08-31-ai-native-studio-pb2-validation-execution-authorization-v0.5.zh-CN.md",
           "documentFileSha256": "6edf2795ba849b24868ac0a1b92c3419f2189ec4b527bb146627a0241ce2dfcd",
           "exactUserTextSha256": "ec9955750a6cca1b69bdcd2ec8e3a1a7d46dd2744e0073dfb0a2aa1058f668a0",
@@ -404,16 +433,17 @@
       "engineSourceEdits": 0,
       "engineRemoteWrites": 0,
       "networkCalls": 0,
-      "pb2FormalExecutionAuthorized": true
+      "pb2FormalExecutionAuthorized": false,
+      "pb2FormalExecutionAuthorizationConsumed": true
     },
     "activeCorrection": {
-      "status": "PB1_CLOSED_PASS",
-      "basis": "Attempt-04 accepted clean source/dependency/build evidence plus C4 fresh runtime isolation recovery",
+      "status": "PB2_CLOSED_VALIDATION_PASS",
+      "basis": "B01/B02 exact typed proposal/approval inspection plus eight fail-closed zero-write negative controls and independent 19/19 audit",
       "retainedAttemptsMustRemainImmutable": ["attempt01", "attempt02", "attempt03", "attempt04"],
       "phaseBSourceMutationAuthorized": false,
       "pb2ThroughPb7Authorized": false,
-      "nextGate": "PB.2",
-      "nextGateStatus": "PB2_VALIDATION_AUTHORIZED_C2_CONTRACT_FROZEN_PENDING_ONE_RUN"
+      "nextGate": "PB.3",
+      "nextGateStatus": "PB3_NOT_STARTED_UNAUTHORIZED"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
