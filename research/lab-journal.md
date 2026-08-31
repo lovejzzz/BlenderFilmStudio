@@ -6361,3 +6361,9 @@ Date: 2026-08-31 · Type: ACCEPTED PB.4 VALIDATION · New builds / Blender start
 C1将attempt-01全root 28 files / 4,227,345 bytes绑定为manifest SHA `8fcc9535...`，确认retained final wrapper确实只有`pixelPassAudit`一个false，并以Python producer声明的canonical JSON规则exact复算audit hash `1dfc7459...`。四份process receipts、八份logs、三份failure receipts、两份stage receipts、preview/final artifact、source、binary、cost和resource bindings全部独立通过。
 
 Fresh attempt-02 audit为25/25 PASS，file/self SHA `50afd3e4...` / `65e95266...`；receipt file/self SHA `09dfc2c0...` / `687f2759...`。PB.4由attempt-01真实product/render evidence与attempt-02 audit-only correction组合关闭PASS。Accepted preview/final SHA分别为`bcdaf54d...` / `93955cfb...`，engine source commit为`df5c2967...`。Claim只限一个B01、一个admitted arm64 host和冻结profiles；下一gate为PB.5 restart-safe job control。
+
+## J-523 · PB.4 validated engine fast-forward published
+
+Date: 2026-08-31 · Type: ORDINARY ENGINE PUBLICATION · Push attempts / ref updates / force / tags / releases: 1 / 1 / 0 / 0 / 0
+
+在research composite PASS并公开验证后，只读`ls-remote`确认`lovejzzz/film-engine main`仍为expected parent `4061e12b...`。随后一次ordinary non-force push将唯一ref `main`快进至validated PB.4 commit `df5c2967...`。推送后remote OID exact，三个raw source files通过non-browser HTTP与本地SHA逐字一致。LFS upload、other refs、tags、release、binary distribution、Developer ID signing和notarization全0。

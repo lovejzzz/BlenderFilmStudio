@@ -16,3 +16,5 @@ Accepted artifact bindings:
 - Accepted PB.3 B01 source remains `64026648bde5f6128e2642797a8c8a4aa867286f20c633c80717a7093b1c012b`.
 
 Claim ceiling: this proves one frozen B01 preview/final path and receipts on one admitted arm64 host. It does not establish public binary distribution, production readiness, cross-platform support or autonomous filmmaking. The next gate is PB.5 restart-safe job control.
+
+After composite acceptance, the validated engine commit was published to `lovejzzz/film-engine` by one ordinary fast-forward of `main` from `4061e12bd45a2bec83e68d0cf49abbf56d4738f6` to `df5c296789a8d57cd84f4f8fb586bb28243f3fa5`. A read-only remote query and non-browser raw-file checks verified the OID and all three source hashes. No force push, other ref, tag, release, LFS upload or binary distribution was performed.
