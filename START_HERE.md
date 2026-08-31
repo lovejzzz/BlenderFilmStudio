@@ -21,6 +21,16 @@ This is the authoritative handoff for a fresh Codex session. The repository is
 both a research notebook and an executable evidence base. Read this page,
 `AGENTS.md`, and the machine-readable state before doing anything expensive.
 
+Owner standing autonomy is now active through
+`specs/ai-native-studio-standing-autonomy-charter.v1.0.json`. Safe, in-scope,
+reversible project edits, builds, Blender runs/renders, evidence creation,
+ordinary commits and non-force fast-forward pushes no longer require repeated
+per-attempt authorization. Purchases/new charges, destructive or force actions,
+public binary releases/DMG distribution, signing/notarization, credential or
+account changes, third-party/legal commitments and material scope/resource
+expansion still require specific confirmation. Historical frozen evidence is
+not rewritten; new adapters must bind the standing charter explicitly.
+
 ## Where the project stands
 
 - **Latest direction:** direct official Blender thin fork; Bforartists is a UI
@@ -166,10 +176,11 @@ both a research notebook and an executable evidence base. Read this page,
   ceiling. Attempt-03 failure audit passed 22/22. C5 then froze exact-array,
   retained-attempt and real receipt-field binding. Its first static attempt is
   retained at 29/30 for callback arity; the versioned C2 runner changes one
-  signature line and now passes static/negative audit 30/30. The active request
+  signature line and now passes static/negative audit 30/30. The former request
   is `specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json`.
-  Attempt-04 roots remain absent; attempts 01–03 are immutable and PB.4–PB.7
-  remain unauthorized.
+  It remains historical. The active next step is a versioned standing-authority
+  adapter for attempt-04; no repeated owner sentence is required. Attempt-04
+  roots remain absent and attempts 01–03 are immutable.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -387,10 +398,12 @@ attempt-03 are retained harness failures. Attempt-02 completed all four zero-
 render semantic processes; attempt-03 stopped before creating a work root or
 starting Blender. The C5-C2 inert correction now passes 30/30 static checks and
 keeps the C4 semantic/helper corrections, exact no-render-artifact threshold,
-three retained attempts and zero-network ceiling frozen. The next checkpoint
-is exact C5-C2 attempt-04 authorization. Attempt-04 roots remain absent and no
-fresh execution is authorized. Do not retry a retained formal root, query the
-engine remote during admission, mutate `film-engine`, or begin PB.4–PB.7.
+three retained attempts and zero-network ceiling frozen. The next checkpoint is
+a standing-authority adapter and fresh C5-C2 attempt-04 execution. Attempt-04
+roots remain absent until that adapter is statically audited and committed. Do
+not retry a retained formal root or query the engine remote during admission.
+After PB.3 closes, later PB gates may proceed under versioned protocols and the
+standing charter without another authorization sentence.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

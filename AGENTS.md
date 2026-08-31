@@ -7,6 +7,27 @@ it before changing code, running Blender, or extending the research catalog.
 Then read the machine-readable snapshot at
 [`handoff/ai-native-studio-current-state.v0.1.json`](./handoff/ai-native-studio-current-state.v0.1.json).
 
+## Standing autonomy
+
+Owner standing authority is active at
+`specs/ai-native-studio-standing-autonomy-charter.v1.0.json`, SHA-256
+`6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0`.
+For safe, in-scope, reversible BlenderFilmStudio/film-engine work, proceed
+autonomously: edit, build, test, run Blender/render/audits, create fresh bounded
+evidence roots, commit, and perform ordinary non-force fast-forward pushes to
+the two existing project repositories without requesting another per-attempt
+authorization sentence. Continue to preregister experiments and retain failed
+evidence; standing authority removes repeated prompts, not scientific controls.
+
+Specific confirmation remains required for purchases/new charges, destructive
+data or repository actions, force-push/history rewrite/ref deletion, public
+binary releases or DMG distribution, signing/notarization/Gatekeeper changes,
+credential/account/access-control changes, third-party commitments/legal terms,
+or material scope/resource expansion. OpenAI platform/system/tool policies
+remain non-overrideable. Historical frozen contracts and receipts remain
+unchanged; use versioned standing-authority adapters rather than claiming an old
+exact authorization sentence was supplied.
+
 ## Current operating goal
 
 `F0-SOURCE-FEASIBILITY` is complete: F0.1 through F0.7 all closed as `PASS`
@@ -209,11 +230,14 @@ The versioned C2 runner changes exactly one signature line by accepting an
 unused `_c3` argument. Tool freeze
 `specs/ai-native-studio-pb3-validation-c5-c2-execution-tool-freeze.v1.10.json`
 now passes static/negative audit 30/30 with self hash `e2af854d...`; attempt-04
-roots remain absent and every formal count is zero. The active exact request is
+roots remain absent and every formal count is zero. The former exact request is
 `specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json`.
-General continuation is insufficient; attempt-04 and PB.4–PB.7 remain
-unauthorized. Do not perform a remote admission query for the future formal
-attempt.
+It remains historical and must not be falsely populated. The standing-autonomy
+charter supersedes repeated exact authorization for future in-scope work; use a
+new versioned adapter that binds the charter and owner message before running
+attempt-04. Do not perform an engine-remote admission query for that formal
+attempt. PB.4–PB.7 may advance later under versioned protocols and the same
+standing charter without another authorization sentence.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

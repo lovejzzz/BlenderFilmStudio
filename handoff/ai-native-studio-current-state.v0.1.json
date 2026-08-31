@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_02_03_RETAINED_FAIL_C5_C2_TOOL_FREEZE_PASS_ATTEMPT04_UNAUTHORIZED",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_02_03_RETAINED_FAIL_STANDING_AUTONOMY_ACTIVE_C6_ADAPTER_PENDING",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -13,6 +13,28 @@
     "forkDecisionFinal": true,
     "result": "Direct thin fork supported for a bounded product prototype",
     "claimCeiling": "F0 supports prototype entry only; it does not establish public distribution, production readiness, cross-platform support or autonomous filmmaking"
+  },
+  "standingAutonomy": {
+    "status": "ACTIVE_STANDING_AUTHORITY",
+    "contract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "contractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "researchDocument": "research/2026-08-31-ai-native-studio-standing-autonomy-charter-v1.0.zh-CN.md",
+    "researchDocumentFileSha256": "d5c867fa41b6d04c9bb21e215d5a8656b7c899292461394372b3131d69425956",
+    "ownerExactTextSha256": "29c77f160ddcca6419e5922a882d10265ec834bf01b2b2513708e4298c927506",
+    "repeatedPerAttemptAuthorizationRequired": false,
+    "historicalFrozenEvidenceMutable": false,
+    "ordinaryValidatedFastForwardPushesAuthorized": true,
+    "specificConfirmationStillRequiredFor": [
+      "purchases or new charges",
+      "destructive repository/data actions",
+      "force-push/history rewrite/ref deletion",
+      "public binary releases or DMG distribution",
+      "signing/notarization/Gatekeeper changes",
+      "credential/account/access-control changes",
+      "third-party/legal commitments",
+      "material scope or resource expansion"
+    ],
+    "currentAdapterStatus": "PB3_C6_STANDING_AUTHORITY_ADAPTER_NOT_YET_FROZEN"
   },
   "sourceBaseline": {
     "upstream": "https://projects.blender.org/blender/blender.git",
@@ -27,7 +49,7 @@
   },
   "activeGate": null,
   "postF0Charter": {
-    "status": "REPOSITORY_PUBLISHED_PHASE_B_REMAINS_PREREGISTERED_AND_UNAUTHORIZED",
+    "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
     "document": "research/2026-08-30-ai-native-film-studio-post-f0-repository-phase-b-charter-v0.1.zh-CN.md",
     "documentSha256": "18465a4abb264419923e1895348e80a83912cfcaba4dba45dc11558a47ff62bb",
@@ -37,7 +59,8 @@
     "retainedOutcomeBindings": 15,
     "phaseBGates": ["PB.1", "PB.2", "PB.3", "PB.4", "PB.5", "PB.6", "PB.7"],
     "repositoryCreationAuthorized": true,
-    "phaseBMutationAuthorized": false
+    "phaseBMutationAuthorized": true,
+    "phaseBMutationAuthority": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json"
   },
   "repositoryReadiness": {
     "status": "PASS_NO_EXTERNAL_WRITE_REHEARSAL_RETAINED_PUBLICATION_C1_COMPLETE",
@@ -174,19 +197,21 @@
     },
     "outcomeDocument": "research/2026-08-30-film-engine-publication-c1-pass.md",
     "correctionAuthorized": true,
-    "phaseBMutationAuthorized": false
+    "phaseBMutationAuthorizedAtPublication": false,
+    "phaseBMutationAuthorizedNow": true,
+    "phaseBMutationAuthority": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json"
   },
   "phaseBPreparation": {
-    "status": "PB1_VALIDATION_PASS_PB2_VALIDATION_PASS",
-    "gate": "PB.2",
-    "mode": "VALIDATION_ONLY_NO_ENGINE_SOURCE_MUTATION_NO_ENGINE_REMOTE_WRITE",
+    "status": "PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_STANDING_AUTHORITY_ADAPTER_PENDING",
+    "gate": "PB.3",
+    "mode": "STANDING_AUTONOMY_WITH_VERSIONED_PROTOCOLS",
     "publicationHead": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
     "f0CodeIdentityParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
-    "engineSourceEditsAuthorized": 0,
-    "engineRemoteWritesAuthorized": 0,
-    "pb2ThroughPb7Authorized": false,
+    "engineSourceEditsAuthorized": true,
+    "engineRemoteWritesAuthorized": "ORDINARY_VALIDATED_NON_FORCE_FAST_FORWARD_ONLY",
+    "pb2ThroughPb7Authorized": true,
     "pb2ValidationOnlyAuthorized": true,
-    "pb3ThroughPb7Authorized": false,
+    "pb3ThroughPb7Authorized": true,
     "attempt01": {
       "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.1-2026-08-30-mac-m2max-attempt-01",
       "status": "FAIL",
@@ -762,10 +787,11 @@
         "networkCalls": 1
       },
       "retainedAttemptsMustRemainImmutable": ["attempt01", "attempt02", "attempt03"],
-      "phaseBSourceMutationAuthorized": false,
-      "pb2ThroughPb7Authorized": false,
+      "phaseBSourceMutationAuthorized": true,
+      "phaseBSourceMutationAuthority": "STANDING_CHARTER_REQUIRES_VERSIONED_PROTOCOL_AND_VALIDATION",
+      "pb2ThroughPb7Authorized": true,
       "nextGate": "PB.3",
-      "nextGateStatus": "PB3_C5_C2_TOOL_FREEZE_PASS_AWAITING_EXPLICIT_ATTEMPT04_AUTHORIZATION"
+      "nextGateStatus": "PB3_C5_C2_TOOL_FREEZE_PASS_C6_STANDING_AUTHORITY_ADAPTER_PENDING"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1141,12 +1167,13 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB3_VALIDATION_ONLY_C5_C2_ATTEMPT04_AUTHORIZATION",
-    "result": "C5-C2 inert correction passes 30/30; await exact fresh attempt-04 authorization before root creation or Blender start",
+    "gate": "PB3_VALIDATION_ONLY_C6_STANDING_AUTHORITY_ADAPTER_AND_ATTEMPT04",
+    "result": "Standing autonomy supersedes repeated authorization; freeze a C6 adapter without altering historical C5 exactText, then execute fresh attempt-04",
     "requiredArtifacts": [
       "retain attempt-01, attempt-02 and attempt-03 work/evidence states unchanged",
-      "bind the frozen C5-C2 runner, C5 auditor, unchanged C4 helper and corrected tool",
-      "bind the exact fresh attempt-04 authorization text in a single-path execution contract",
+      "bind the standing-autonomy charter and exact owner delegation message in a versioned C6 adapter",
+      "bind the frozen C5-C2 runner, C5 auditor, unchanged C4 helper and corrected tool without claiming the historical C5 exactText was supplied",
+      "commit the fresh attempt-04 execution contract as a single path under standing authority",
       "preserve the 30/30 static audit, unchanged thresholds and fresh attempt-04 roots until authority",
       "zero film-engine source/ref/tag/release mutation, engine remote write, network, rendering, signing, notarization, DMG work or PB.4-PB.7 work"
     ],
@@ -1156,7 +1183,9 @@
     "formalAttempt02AuthorizationConsumed": true,
     "formalAttempt03Authorized": false,
     "formalAttempt03AuthorizationConsumed": true,
-    "formalAttempt04Authorized": false,
-    "exactAuthorizationTextSource": "specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json#/requestedAuthorization/exactText"
+    "formalAttempt04Authorized": true,
+    "formalAttempt04AuthoritySource": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
+    "historicalExactAuthorizationTextSource": "specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json#/requestedAuthorization/exactText",
+    "historicalExactTextMustNotBeClaimedAsSupplied": true
   }
 }
