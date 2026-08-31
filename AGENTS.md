@@ -132,6 +132,16 @@ source edit and engine remote write counts are zero. The authorization is
 consumed; do not rerun it. PB.3–PB.7 remain unauthorized. The prior v0.4/v0.5
 execution shapes are non-executable retained protocol failures.
 
+PB.3 readiness is preregistered at
+`specs/ai-native-studio-pb3-readiness-preregistration.v0.1.json`, SHA-256
+`6ab0dd3a9631091f6210f54215cfdf5bebf97a13dd2330cebff73665aa0c71b7`.
+The read-only inventory binds the PB.1 binary/source, PB.2 PASS, F0.3 typed
+workspace persistence and F0.4 B01/B02 canonical/semantic evidence. Current
+source contains both the contract bridge and typed workspace, but no accepted
+same-run evidence combines those facts. PB.3 formal roots, Blender starts,
+proposal executions, BuildPlan writes, scene mutations, renders, engine writes
+and network calls remain zero. This is not PB.3 authority or a PB.3 verdict.
+
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
 and maintenance reference, not the source baseline. The fallback is an external

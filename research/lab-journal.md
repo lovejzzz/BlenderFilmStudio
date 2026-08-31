@@ -6133,3 +6133,11 @@ Owner逐字批准linked PB.2 validation-only scope。v0.4 template与v0.5 C1 exe
 唯一formal attempt-01对B01/B02做只读typed proposal/approval inspection，plan hashes exact为`316114f1…`与`a9022bf6…`；八个负控分别以冻结reason在写入前拒绝。Runner PASS self hash `ffb845af421c79eca25e6374bf15578a25052a1f03a9862156ff059cc827d8d5`；不import/执行product contract且不启动Blender的独立auditor 19/19 PASS，self hash `0a57ccf75ea764db0e6fcf9a14e4730cbb84bc39a038f0816cf0046e01169396`。
 
 Proposal execution、BuildPlan write、Blender start、render、scene mutation、proposal Python/shell/network、engine source edit与engine remote write全部0。Retained source和GitHub `film-engine/main`均保持`4061e12b…`，无tag。PB.2 validation-only关闭PASS且一次性授权已消耗；它不证明PB.3、scene build、任意proposal、model quality、production或distribution readiness。PB.3–PB.7继续未授权。
+
+## J-499 · PB.3 read-only readiness preregistration
+
+Date: 2026-08-31 · Type: PB.3 READINESS ONLY · Blender starts / proposal executions / BuildPlan writes / scene mutations / renders: 0 / 0 / 0 / 0 / 0
+
+PB.2关闭后只读盘点PB.3继承面。F0.3已独立证明typed Project/Scene/Shot/Character persistence和lossless Expert Mode；F0.4已独立证明B01/B02 canonical plan hashes `316114f1…` / `a9022bf6…`与semantic hashes `e8c55fb7…` / `d197b024…`；PB.2已证明exact proposal/approval inspection和八个pre-write rejects。Current clean source `4061e12b…`同时包含pure contract module与workspace contract bridge。
+
+缺失证据被明确冻结：尚无accepted same-run在PB.1 binary上同时完成approved compile、exact semantic/provenance identity、typed workspace mapping/persistence与Expert Mode roundtrip。v0.1只绑定这些继承哈希和gap，不创建formal root，不授权PB.3 execution。Engine source/remote write与network同样为0；PB.4–PB.7继续未授权。
