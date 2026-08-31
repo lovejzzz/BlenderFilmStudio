@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pb7HumanReviewToolFreeze.v0.2",
+  "status": "FROZEN_BEFORE_HUMAN_RESPONSE",
+  "gate": "PB.7",
+  "purpose": "Record the project owner's exact allowed-answer tokens without normalization, independently recompute the frozen human and overall verdict mappings, revalidate all bound PB.6 evidence, and emit a self-hashed immutable evidence roster.",
+  "authority": {
+    "source": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
+    "humanResponseIsEvaluationNotAuthorization": true,
+    "modelMayNotAuthorHumanAnswers": true
+  },
+  "preregistration": {
+    "uri": "specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json",
+    "sha256": "071b2cc73cc210d097e2d63df9212894a88e2206f7249b649f24c65f0b09880d",
+    "specHash": "524419346bb8d0ec0623bece90447159ffb56f2960135c6dd02c9bc35b5df846"
+  },
+  "correction": {
+    "uri": "specs/ai-native-studio-pb7-human-review-preregistration-c1.v0.2.json",
+    "sha256": "db41cae4465133ab18472d1814c7fda2eafd7e9e88fb73684cb23ba70d08a386",
+    "specHash": "7b8e08f1153feec32ab621bbb6e01c475738496857e3952e31a39413831a806d"
+  },
+  "tools": [
+    {
+      "uri": "scripts/lib/ai-native-studio-pb7.mjs",
+      "sha256": "def0dcfee14938de93a90cc717e13d72e7fbcfad558a20ad34e45b5328f05c16",
+      "role": "strict input validation and recorder-side mapping reference"
+    },
+    {
+      "uri": "scripts/record-ai-native-studio-pb7-review.mjs",
+      "sha256": "499462122db4de04cf7324d6ad05c88787cc65b357b5dee9681a27dc1f58c163",
+      "role": "exclusive fresh-root human response recorder"
+    },
+    {
+      "uri": "scripts/audit-ai-native-studio-pb7.mjs",
+      "sha256": "2bc9a7d671b28a6a67ff8ee99dcb97c7f538cdbb8b8fdb7c707cd77343cdf590",
+      "role": "independent mapping, machine evidence and manifest auditor"
+    },
+    {
+      "uri": "scripts/test-ai-native-studio-pb7-tools.mjs",
+      "sha256": "5a50c2ccc4a4c1d35088a5f0f4d67b8957a209954b7f1a76de49069408a8a7f3",
+      "role": "static mapping and fail-closed input test"
+    }
+  ],
+  "inputContract": {
+    "schemaVersion": "bfs.pb7HumanReviewInput.v0.1",
+    "exactTopLevelKeys": ["answers", "optionalNotes", "reviewerRole", "schemaVersion", "sourceMessageText"],
+    "exactAnswerKeys": ["Q1", "Q2", "Q3", "Q4"],
+    "allowedAnswerTokens": ["YES", "NO", "UNCERTAIN", "UNVIEWABLE"],
+    "normalizationAllowed": false,
+    "sourceMessageStoredVerbatim": true,
+    "optionalNotesAffectVerdict": false
+  },
+  "recorder": {
+    "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.7-2026-08-31-human-review-attempt-01",
+    "requiresRootAbsent": true,
+    "exclusiveWrites": ["human-review.json"],
+    "verifiesOwnAndAuditorHashesBeforeWriting": true,
+    "writesHumanVerdict": false
+  },
+  "independentAuditor": {
+    "preAuditRoster": ["human-review.json"],
+    "exclusiveWrites": ["audit.json", "verdict.json", "root-manifest.json"],
+    "reimplementsAnswerValidationAndMappingWithoutRecorderModule": true,
+    "revalidatesPB6ReceiptAuditSliceVideoAndContactSheet": true,
+    "revalidatesHistoricalFrame288Boundary": true,
+    "finalRoster": ["audit.json", "human-review.json", "root-manifest.json", "verdict.json"]
+  },
+  "staticTests": {
+    "command": "node scripts/test-ai-native-studio-pb7-tools.mjs",
+    "expected": "BFS_PB7_TOOL_TEST PASS 20/20",
+    "cases": [
+      "all YES maps to PASS in both implementations",
+      "any NO maps to FAIL in both implementations",
+      "UNCERTAIN without NO maps to BLOCKED in both implementations",
+      "UNVIEWABLE without NO maps to BLOCKED in both implementations",
+      "NO dominates UNCERTAIN and UNVIEWABLE",
+      "missing answer rejects",
+      "lowercase token rejects",
+      "extra top-level input key rejects",
+      "extra answer key rejects independently",
+      "invalid token rejects independently"
+    ]
+  },
+  "humanResponseRecorded": false,
+  "formalEvidenceRootExistsAtFreeze": false,
+  "operationCountsAtFreeze": {
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0,
+    "nativeBuilds": 0,
+    "BlenderStarts": 0,
+    "renderCalls": 0,
+    "ffmpegProcesses": 0,
+    "networkCallsDuringReview": 0,
+    "modelCallsToAnswerQuestions": 0
+  },
+  "stopRules": [
+    "Refuse any answer token outside the four preregistered uppercase tokens.",
+    "Refuse missing or extra answer keys and any extra input field.",
+    "Refuse an existing formal evidence root.",
+    "Do not infer an answer, normalize text or let optional notes change the verdict.",
+    "Do not modify or regenerate PB.6 media or machine evidence.",
+    "Do not change the frozen questions, mappings, disclosure order, frame-288 boundary or claim ceiling."
+  ],
+  "specHash": "60c5acaef03217b59f8d41b8e7c8717c36020fd6b865ece7b63bedc34af15f1c"
+}

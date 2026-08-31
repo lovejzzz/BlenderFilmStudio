@@ -272,7 +272,13 @@ preregistered before any human response at
 `specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json`. The four
 human questions, allowed answers, verdict mapping, disclosure ordering and
 prototype-only claim ceiling are frozen; the current owner response is still
-pending. This is product evaluation, not another authorization gate.
+pending. The recorder and independent auditor are frozen by
+`specs/ai-native-studio-pb7-human-review-tool-freeze.v0.2.json`; static tests
+pass 20/20 and the final isolated synthetic end-to-end audit passes 27/27. C1
+corrects only the v0.1 independent-audit self-hash field semantics
+(`receiptHash` label versus retained `auditHash`) without changing its value or
+any review criterion. The formal root remains absent. This is product
+evaluation, not another authorization gate.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

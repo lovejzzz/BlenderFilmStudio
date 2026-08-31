@@ -221,7 +221,10 @@ not rewritten; new adapters must bind the standing charter explicitly.
   frame-288 `0.93378717684983 > 0.90` rejection remains exact; human review is
   intentionally pending until PB.7. PB.7's four questions, allowed answers,
   delayed-disclosure ordering and verdict mapping are now preregistered before
-  any human response. The validated two-commit increment was
+  any human response. Its strict recorder and independent auditor are also
+  frozen, with 20/20 static checks and a final 27/27 isolated synthetic audit.
+  C1 corrects only the v0.1 independent-audit self-hash field semantics; no
+  question, value or verdict mapping changed. The validated two-commit increment was
   published to `lovejzzz/film-engine/main` by one ordinary non-force fast-forward.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
@@ -447,7 +450,9 @@ three-shot product slice with human review still pending. Do not repair or rerun
 any retained root. PB.7 is preregistered before the response at
 `specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json`: machine
 evidence, four review questions, allowed answers and final mapping are frozen.
-The next checkpoint is the owner's real viewing response, followed by an
+The exact-token recorder and independent auditor are frozen and tested; the
+formal evidence root remains absent. The next checkpoint is the owner's real
+viewing response, followed by an
 immutable `PASS`, `FAIL` or `BLOCKED` receipt without expanding into a
 production-readiness or autonomous-filmmaking claim. The response is evaluation,
 not another authorization sentence.

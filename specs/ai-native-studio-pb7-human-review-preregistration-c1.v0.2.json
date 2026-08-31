@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pb7HumanReviewPreregistrationCorrectionC1.v0.2",
+  "status": "FROZEN_BEFORE_HUMAN_RESPONSE",
+  "gate": "PB.7",
+  "base": {
+    "uri": "specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json",
+    "sha256": "071b2cc73cc210d097e2d63df9212894a88e2206f7249b649f24c65f0b09880d",
+    "specHash": "524419346bb8d0ec0623bece90447159ffb56f2960135c6dd02c9bc35b5df846"
+  },
+  "defect": {
+    "path": "$.machineEvidence.independentAudit.receiptHash",
+    "declaredValue": "2f7b08ee0c624cdc3580dfbcdcb2efc520280814ce4b3386e36eedd8ca3605cf",
+    "actualHistoricalJsonSelfHashField": "auditHash",
+    "rootCause": "The v0.1 preregistration used the generic receiptHash key for the exact independent-audit self-hash value even though the retained JSON document names that field auditHash."
+  },
+  "correction": {
+    "semanticAlias": "Interpret machineEvidence.independentAudit.receiptHash as the exact expected value of independent-audit.json#auditHash.",
+    "valueChanged": false,
+    "fileChanged": false,
+    "questionChanged": false,
+    "answerTokenChanged": false,
+    "verdictMappingChanged": false,
+    "disclosureOrderChanged": false,
+    "mediaChanged": false,
+    "frame288BoundaryChanged": false,
+    "claimCeilingChanged": false
+  },
+  "allowedImplementationChange": {
+    "recorder": "Require this correction's exact file SHA-256 and self hash through the tool freeze before writing evidence.",
+    "auditor": "For the independentAudit input only, validate the retained document's auditHash field against the unchanged v0.1 declared value.",
+    "allOtherInputs": "Continue using the field names and values declared by v0.1 without reinterpretation."
+  },
+  "formalEvidenceRootExistsAtCorrection": false,
+  "humanResponseRecordedAtCorrection": false,
+  "specHash": "7b8e08f1153feec32ab621bbb6e01c475738496857e3952e31a39413831a806d"
+}
