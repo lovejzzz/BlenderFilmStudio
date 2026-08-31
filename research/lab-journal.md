@@ -6585,3 +6585,9 @@ PC.3冻结accepted PC.2 source `81453bff…`，以accepted PB.6 video `2aa51303�
 Date: 2026-08-31 · Type: TOOL FREEZE · Formal PC.3 starts / renders / video processes: 0 / 0 / 0
 
 Exact 288-frame EXR→PNG renderer、zero-render reopen A/B auditor、ffmpeg/ffprobe runner与final machine auditor冻结。每frame temporary EXR立即删除；second start读取576 A/B frames并复核identity/pixel floors。Python/Node static checks PASS，source save 0；ffmpeg/ffprobe exact hashes绑定。Fresh attempt-01 roots在freeze时absent；machine root sealed前human review关闭。
+
+## J-555 · PC.3 attempt-01 machine PASS, human pending
+
+Date: 2026-08-31 · Type: SEALED INTEGRATED REVIEW MACHINE PASS · Blender starts / renders / video processes: 2 / 288 / 2
+
+Fresh attempt-01 runner `0eff3b11…`与independent 16/16 machine audit `be0e1366…` PASS，sealed manifest `94f6280d…`。288/288 unique frame hashes，287/287 dynamic pairs，288/288 visibly different frames，median MAD 0.019747；exact 96/96/96 camera routing、accepted PC.2 source/protected state、zero EXR。Integrated B MP4 SHA `8c6afc36…`。Machine status为`MACHINE_PASS_HUMAN_PENDING`；owner四问现开放，model不得代答。

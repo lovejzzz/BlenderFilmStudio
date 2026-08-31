@@ -495,8 +495,11 @@ hashes are `f99fc297…` / `b68b6600…` / `15aeacec…`. Geometry/materials,
 camera/lights and shot markers remained exact. PC.2 is closed; PC.3 integrated
 video and delayed visual comparison is the active gate. PC.3 preregistration
 and exact render/video/audit tools are frozen at `4a7a1f84…` / `d9cce851…`;
-fresh attempt-01 roots remain absent. It must produce and seal a 288-frame
-machine PASS before the four owner A/B questions are opened.
+fresh attempt-01 is now `MACHINE_PASS_HUMAN_PENDING`. All 288 frame hashes are
+unique, 287/287 consecutive pairs are dynamic, all 288 frames visibly differ
+from A, and median RGB MAD is 0.019747. Receipt/audit/manifest self hashes are
+`0eff3b11…` / `be0e1366…` / `94f6280d…`; integrated video SHA is `8c6afc36…`.
+The four owner A/B questions are now open; the model must not answer them.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
