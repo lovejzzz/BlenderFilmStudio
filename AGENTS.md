@@ -92,6 +92,17 @@ The formal work and evidence roots remain absent. Do not run the formal runner
 from the v0.3 request or create those roots before an exact v0.4 execution
 contract is authorized and committed.
 
+The non-executable v0.4 execution template is frozen at
+`specs/ai-native-studio-pb2-validation-only-execution-template.v0.4.json`.
+Its status is `DRAFT_NON_EXECUTABLE_AUTHORIZATION_MISSING`; authorization text,
+authorization hash/time and `researchCommit` are deliberately null. Static
+preflight passes 23/23 with self hash
+`1cc396c2f22eefcd5cf87807fc50cf26d84bbcb7323a6a68c1f8d5ef0dacd61d`.
+The template must never be renamed or edited into authority. After explicit
+PB.2 authorization, copy it to the exact v0.4 execution-contract path, bind the
+user text and containing research commit, commit/verify that new file, and only
+then use the frozen argv.
+
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
 and maintenance reference, not the source baseline. The fallback is an external

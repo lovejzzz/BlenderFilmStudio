@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb2ValidationOnlyExecution.v0.4",
+  "contractId": "AI-NATIVE-STUDIO-PB2-VALIDATION-ONLY-EXECUTION-TEMPLATE-v0.4",
+  "status": "DRAFT_NON_EXECUTABLE_AUTHORIZATION_MISSING",
+  "snapshotDate": "2026-08-31",
+  "templateOnly": true,
+  "toolFreeze": {
+    "uri": "specs/ai-native-studio-pb2-validation-tool-freeze.v0.3.json",
+    "sha256": "8f8ff370e82b3c1fe4c0e975967e3b83408a7dc9b8f7472fb709a9d3a601cc29",
+    "commit": "92d1aa1508db4515112ee133011df51f7c45d7a0"
+  },
+  "authorizationRequest": {
+    "uri": "specs/ai-native-studio-pb2-validation-only-authorization-request.v0.3.json",
+    "sha256": "c0d93a18dc89e62c44f5d352687b0b939060cecd4779cc5d2a68e0a9f1cdf8c0"
+  },
+  "authorization": {
+    "exactUserText": null,
+    "exactUserTextSha256": null,
+    "authorizedAtUtc": null,
+    "explicitPb2ScopePresent": false
+  },
+  "researchCommit": null,
+  "runnerSha256": "ed59e8dfcf9bf9e529e778a911c49c2a03ae1cf6bbdcf531a048b3d003aeb57d",
+  "auditorSha256": "e0c788b22425d61a65d1ef94219f6505ab84c14e730fd56814432a285f37bd61",
+  "authorizedRun": {
+    "repositoryRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio",
+    "engineSource": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/source",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.2-2026-08-31-mac-m2max-attempt-01",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.2-2026-08-31-mac-m2max-attempt-01",
+    "positiveInspections": 2,
+    "negativeCases": [
+      "N_REJECTED_PROPOSAL",
+      "N_TAMPERED_PROPOSAL",
+      "N_UNAPPROVED_PROPOSAL",
+      "N_WRONG_ORDER",
+      "N_UNAUTHORIZED_SCOPE",
+      "N_UNKNOWN_FIELD",
+      "N_PATH_ESCAPE",
+      "N_NONFINITE"
+    ],
+    "blenderStarts": 0,
+    "renders": 0,
+    "proposalExecutions": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "commandsAfterAuthorization": {
+    "runnerArgv": [
+      "python3",
+      "scripts/run-ai-native-studio-pb2-validation.py",
+      "--repository-root",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio",
+      "--engine-source",
+      "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/source",
+      "--work-root",
+      "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.2-2026-08-31-mac-m2max-attempt-01",
+      "--evidence-root",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.2-2026-08-31-mac-m2max-attempt-01",
+      "--freeze-contract",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/specs/ai-native-studio-pb2-validation-tool-freeze.v0.3.json",
+      "--execution-contract",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/specs/ai-native-studio-pb2-validation-only-execution.v0.4.json"
+    ],
+    "auditorArgv": [
+      "python3",
+      "scripts/audit-ai-native-studio-pb2-validation.py",
+      "--repository-root",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio",
+      "--engine-source",
+      "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/source",
+      "--receipt",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.2-2026-08-31-mac-m2max-attempt-01/receipt.json",
+      "--freeze-contract",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/specs/ai-native-studio-pb2-validation-tool-freeze.v0.3.json",
+      "--execution-contract",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/specs/ai-native-studio-pb2-validation-only-execution.v0.4.json",
+      "--output",
+      "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.2-2026-08-31-mac-m2max-attempt-01/audit.json"
+    ]
+  },
+  "stillUnauthorized": [
+    "film-engine source, commit, ref, tag, release or remote mutation",
+    "Blender start, scene mutation, render, BuildPlan write or proposal execution",
+    "proposal-originated Python, shell, network or filesystem authority",
+    "LFS upload or download, signing, notarization, DMG creation or distribution",
+    "PB.3 through PB.7"
+  ],
+  "conversionRequirements": [
+    "Copy this template to specs/ai-native-studio-pb2-validation-only-execution.v0.4.json; never rename or edit the template in place",
+    "Set contractId to AI-NATIVE-STUDIO-PB2-VALIDATION-ONLY-EXECUTION-v0.4",
+    "Set status to AUTHORIZED_FOR_ONE_FORMAL_RUN only after explicit PB.2 authorization",
+    "Copy the exact user authorization text, its SHA-256 and authorization time",
+    "Set researchCommit to the commit containing the exact execution contract",
+    "Recompute and bind runner/auditor/tool-freeze file hashes without changing the frozen scope",
+    "Commit and publicly verify the execution contract before running either argv"
+  ],
+  "claimCeiling": "This template proves only that the final one-run contract and argv can be generated deterministically. It is deliberately rejected by the runner and grants no PB.2 authority.",
+  "stopRule": "Do not copy or convert this template, create either formal root, or invoke either argv before explicit PB.2 authorization."
+}

@@ -101,6 +101,11 @@ both a research notebook and an executable evidence base. Read this page,
   positive; C1 passed 10/10 and makes combined tool readiness 28/28. No runner,
   proposal or Blender process was started, and both formal roots remain absent.
   A separate committed v0.4 execution contract is still required.
+- **PB.2 execution template ready, non-executable:** the v0.4 template binds the
+  frozen commit, tools, paths, cases and future argv, while authorization fields
+  and `researchCommit` remain null. Static preflight passed 23/23 without
+  invoking the runner. The template cannot be used as the execution contract;
+  explicit PB.2 authority must be copied into a new committed file.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
