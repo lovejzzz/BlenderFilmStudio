@@ -6039,3 +6039,13 @@ Date: 2026-08-30 · Type: PHASE B AUTHORIZATION REQUEST · Engine source mutatio
 只读盘点确认live repo仍为public `blender/blender` fork、single main `4061e12b…`、0 tag/PR/release；完整图为162,918 reachable commits、5 fork commits、merge base `9e2066ae…`。相对merge base为17 paths、839/64 text additions/deletions和2 binary paths；C1相对`fa1b…`仍exact三路径且0 code/config change。retained dependency为clean `a76ef917…`；F0 inventory已下载全部6,671 LFS paths并绑定815,089,197 bytes，PB.1只允许本地复用、0 network LFS download/upload。host read-only admission在172 GiB free下通过。
 
 机器合同冻结一次public engine read-only clone、一次local LFS materialization、一次local dependency clone、一次fresh native build、最多2 product starts / 0 renders、9项negative controls、12 GiB external / 32 MiB evidence ceilings。`film-engine` source edits/commits/refs/tags、release、签名、公证、DMG和PB.2–PB.7继续false。下一动作只等待owner逐项授权；在此之前不创建formal PB.1 roots、不clone/build/start product。
+
+## J-489 · PB.1 validation-only owner 授权与 v0.3 执行预注册
+
+Date: 2026-08-31 · Type: PB.1 AUTHORIZED VALIDATION-ONLY PREREGISTRATION · Engine source mutations / engine remote writes / native builds at freeze: 0 / 0 / 0
+
+owner在当前Codex任务中逐字授予v0.2请求的完整有界权限：以public fork `lovejzzz/film-engine` single `main=4061e12bd45a2bec83e68d0cf49abbf56d4738f6`为验证HEAD；只允许一次public engine read-only clone、一次retained local LFS storage零网络materialization、一次exact `a76ef917b4849ba2b1b1deb1a643e131a884a63b` dependency local clone、一次clean native arm64 build、最多两个zero-render identity/configuration starts，以及PB.1 research evidence commit/push。engine source/ref/tag、LFS network transfer、release、签名、公证、DMG与PB.2–PB.7继续为0/false。
+
+正式root创建前只读复核确认research HEAD与upstream exact且worktree clean；live fork仍是repository id `1351574987`的public `blender/blender` fork，只有`main=4061e12b…`、0 tag/PR/release；retained source与dependency exact且clean，本地LFS object storage存在；host为arm64 M2 Max且free disk约172 GiB，高于160 GiB门。v0.3保持C1双层身份：publication HEAD的唯一parent为F0 code identity `fa1b578b…`，C1只允许三路径普通blob兼容性差异。
+
+执行合同固定九项负控、12 GiB external / 32 MiB evidence、1,200秒 / 4 GiB build ceilings、一次build与两次zero-render starts。runner默认只读；只有显式`--execute`且研究仓库clean/pushed、formal roots absent、negative controls全PASS时才可正式clone/materialize/build。独立auditor必须不import runner并复算live remote、graph、LFS/source/license/dependency/build/runtime/receipts和zero engine write。正式执行必须等本预注册、runner和auditor先提交推送并恢复clean。
