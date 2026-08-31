@@ -6343,3 +6343,13 @@ Date: 2026-08-31 · Type: PRODUCT MUTATION PREREGISTRATION · PB.4 render calls:
 PB.4 v0.1不复用F0.5 pixels冒充产品结果。它绑定film-engine `4061e12b...`、PB.3 receipt/audit与B01 accepted `.blend` SHA `64026648...`，只允许三个Python source paths与≤600 added lines：product-owned render contract、workspace Render Job state/operator、visible panel。
 
 冻结profile为640×360 EEVEE 16-sample PNG与Cycles CPU 32-sample multilayer EXR（Combined/Depth/Normal）；冻结process/pixel/pass/cost/failure receipts和三个pre-render负控。Fresh external source/build/work与research evidence roots，最多1 clean build、4 product starts、2 render calls、2 GiB work、512 MiB evidence。Standing charter覆盖该有界开发和ordinary fast-forward publication；release/sign/notary/charges/force/PB.5不授权。
+
+## J-521 · PB.4 attempt-01 retained canonicalization FAIL
+
+Date: 2026-08-31 · Type: RETAINED HARNESS FAILURE · Clean builds / product starts / render calls: 1 / 4 / 2
+
+Attempt-01产品路径与真实输出均成功：visible Render Job inspect和typed-state reopen PASS，三个负控均在render前拒绝；EEVEE preview与Cycles CPU multilayer EXR分别SHA `bcdaf54d...` / `93955cfb...`。四份process receipts全PASS，独立OpenImageIO audit的source/process/pixel/pass/failure checks全部true，audit status PASS/self hash `1dfc7459...`。
+
+最终Node wrapper唯一false为`pixelPassAudit`：Python producer canonical JSON保留`0.0`，Node parse/reserialize变成`0`，造成跨runtime hash mismatch。Python-native独立复算exact命中declared hash；这不是产品、像素、pass或receipt content failure。Final FAIL receipt file/self SHA为`90cc68a6...` / `dcf5b086...`。
+
+Attempt-01全部work/evidence永久保留。C1只能在fresh audit-only root中绑定retained bytes并按producer-declared Python canonicalization复核；clean build、Blender start、render、source mutation、remote write、network、release/sign/notary/distribution全部为0。
