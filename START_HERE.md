@@ -188,8 +188,9 @@ not rewritten; new adapters must bind the standing charter explicitly.
   C6-C2 directly verifies the retained attempt and passes 32/32. Attempt-05
   completed all semantic processes but retained two HOME thumbnails and failed
   the unchanged work-root artifact gate. C6-C3 moves only HOME into bounded,
-  resource-accounted evidence storage and passes static 32/32. The next formal
-  retry uses fresh attempt-06 roots without another owner sentence.
+  resource-accounted evidence storage and passes static 32/32. Attempt-06 is the
+  accepted PB.3 `PASS`: base audit 18/18 and C6 audit 29/29, with all four
+  semantic processes exact and zero work-root render-like artifacts.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -409,8 +410,8 @@ starting Blender. C5-C2 passes 30/30 static checks and the C6 standing-authority
 adapter passes 32/32 while keeping the C4 semantic/helper corrections, exact
 no-render-artifact threshold, retained attempts and zero-network ceiling
 frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
-The C6-C3 HOME-isolation correction now passes static/negative audit 32/32.
-The next checkpoint is its single-path contract and fresh attempt-06 execution.
+PB.3 is closed `PASS` by C6-C3 attempt-06. The next checkpoint is a versioned
+PB.4 preregistration under the standing-autonomy charter.
 Do not retry a retained formal root or query the engine remote during admission.
 After PB.3 closes, later PB gates may proceed under versioned protocols and the
 standing charter without another authorization sentence.

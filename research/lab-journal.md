@@ -6325,3 +6325,13 @@ Date: 2026-08-31 · Type: HOME-ISOLATION TOOL FREEZE · Formal Blender starts / 
 C6-C3 entrypoint SHA为`d4bcf1ffb0d0e5447757f49f192a8ecd0727229069a40cbbe47f740063cf3853`。它在nested base environment创建后只把`HOME`重定向至`evidenceRoot/isolation/<fixture>/home`；BLENDER config/scripts/data/extensions、TMPDIR、OCIO与process argv全部不改。Attempt-05 work/evidence manifests在self-test和formal admission前exact复核，attempt-06 roots fresh。
 
 Tool freeze/template SHA为`857edd4bcf414bfc5091e09c7cfe679ee4f46f732846cc8ad31685bdc93090ff` / `c79d0d251f2fd19afe53776ffa7335ba074ffd4cd953fa3e5db3c183599f442b`。Static/negative audit 32/32 PASS，file/self SHA为`dbcbc8a49cb5654c83cc3ed6dfbbbeefddcd7a859738aa1441ef351f0b41a6b8` / `57c2206e9bea7d5fc0a9bd523ef1a5a174ddd176f889f72ff9a0915e5825f7f3`。Full-work-root no-artifact predicate、2 GiB / 64 MiB、4/2/2/2/2/2及zero network/render/engine writes不变。下一步单路径attempt-06 contract与formal run。
+
+## J-519 · PB.3 C6-C3 attempt-06 accepted PASS
+
+Date: 2026-08-31 · Type: ACCEPTED PB.3 VALIDATION · Blender starts / proposal executions / BuildPlan writes / renders: 4 / 2 / 2 / 0
+
+Attempt-06在standing-authority single-path commit下完成B01/B02各一次approved proposal/BuildPlan/semantic scene/workspace save与一次reopen/Expert-state roundtrip。四个offline Blender processes全部exit 0，scene/save/reopen均2，render/network/engine edit/remote write均0。Receipt file/self SHA为`cd0917652b8e67bc4e254af69dde62b173b9592f35328e57c4981665df36a552` / `a52eb563852bd77042a47ea1b63f6427cf9ec1064ece90fb8b69f07d61637e9f`。
+
+Base semantic audit 18/18 PASS，file/self SHA为`7f4327f2026005a27faece82abfafaa948863c2dcebbd70ad27f5a8f4d5c96dc` / `8c80e78153502419fed30119029574138ebfee35bbd7a4d77aa549a3206376d1`；C6 independent audit 29/29 PASS，file/self SHA为`9bf010ece3f0e737d07e0950be4f44edd54b988d04e2359554c5cc2f5480874a` / `83e23d986e1a0caa160b5e7c21715e5e54210e4bfa242c7209ea4963b8dc8b11`。
+
+Work root 27 files / 833,455 bytes / manifest `44861c50...`，全root零EXR/PNG/JPG/JPEG/MOV/MP4。Evidence root 17 files / 55,442 bytes / manifest `7a0473bb...`；两个Blender file thumbnails仅在evidence-bounded HOME并计入64 MiB ceiling。PB.3据此关闭PASS；claim仅限冻结B01/B02 canonical compile、semantic/provenance identity、typed workspace persistence与background Expert-state lossless roundtrip，不包含arbitrary proposal、visible UI、render、model quality、production或distribution readiness。
