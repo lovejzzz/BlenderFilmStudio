@@ -62,16 +62,16 @@ Do not retry LFS, delete/recreate/rename the fork, mutate another ref, create a
 release, sign/notarize/distribute a DMG, or begin Phase B without a new explicit
 authorization and versioned protocol.
 
-PB.1 validation-only is active but not closed. Attempt-01 and C1 attempt-02 are
-retained harness `FAIL` results. Attempt-02 used exact v0.5 owner authorization,
-passed formal preflight and 9/9 negative controls, then consumed one local-only
-clone and stopped before materialization because skip-smudge checkout had created
-6,424 empty LFS hash directories before the frozen runner tried to install its
-`objects` symlink. Its C1 failure audit is 24/24 `PASS`. LFS materializations,
-dependency clones, builds, product starts, renders and every forbidden external
-mutation were 0. A fresh attempt-03 is not authorized. General permission to
-continue does not authorize another clone/materialization/build/start, and PB.2–PB.7
-remain unauthorized.
+PB.1 validation-only is active but not closed. Attempts 01–03 are retained
+harness `FAIL` results. C2 attempt-03 used exact v0.7 authorization and its
+checkout-before-symlink correction worked: engine LFS materialization, history,
+corrected metric, licenses and dependency identity all passed. The clean build
+then stopped because the fresh dependency clone left all 622 dependency LFS
+paths as pointers; the linker rejected the 131-byte `libzstd.a` pointer. Its
+independent failure audit is 36/36 `PASS`. Product starts, renders and every
+forbidden external mutation were 0. Do not repair or retry attempt-03 in place.
+The next fresh correction may only add local dependency-LFS object access and
+one zero-network dependency materialization; PB.2–PB.7 remain unauthorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

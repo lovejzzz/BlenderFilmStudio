@@ -6079,3 +6079,23 @@ Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL FREEZE · Attempt-02 external o
 新增C1 runner接受显式`--contract`，所以当前v0.4 request保持`authorization.granted=false`时默认preflight fail-closed；未来owner授权只需新增execution contract，不必临时修改工具。runner只实现两项冻结修正：14 text paths=837/64加两个exact pointer object transitions，以及fresh local LFS storage中只把`objects` symlink指向retained immutable objects、tmp留在attempt-02。正式计数固定local engine clone/symlink/materialization/dependency/build/starts为1/1/1/1/1/2，public network clone/render/engine write/LFS network/release/sign/notary/DMG/PB.2–PB.7/model均0。
 
 runner/auditor SHA-256分别为`8b9489d625a5865f3e4304c01480dbcc966ab033e69a80054fe9ab87cf94ec9c`与`58b1b3b0971d22a31d113de8a25384be3e8807e4d99a0f74739a54caede9ec7c`。runner pure self-test 9/9、independent auditor self-test 5/5、Node syntax与ESLint全部PASS。tool freeze期间attempt-02 external/evidence roots继续absent，local clone/materialization/dependency/build/product start全部0。
+
+## J-493 · PB.1 C1 attempt-02 ordering failure and C2 freeze
+
+Date: 2026-08-31 · Type: RETAINED PB.1 HARNESS FAILURE / CORRECTION FREEZE
+
+Exact v0.5授权、formal preflight与9/9负控通过后，attempt-02消耗一次local no-checkout clone，但publication checkout在runner安装objects symlink前创建6,424个空LFS hash directories。runner按停止规则在LFS checkout前停止；dependency/build/start和全部禁止计数均0。首个failure audit因把空gitlink directory误判为dependency clone而保留29/30 FAIL；C1独立审计确认0 object files / 0 bytes / 0 symlinks并通过24/24，self hash `f8c5b4d04e9aa2ddff5cd3a28c0c49a5fd7675b2d14675cfeb63e7cdd8b7baec`。
+
+C2只把objects symlink移动到no-checkout local clone之后、publication checkout之前；metric、资源、负控与权限边界不变。冻结runner/auditor SHA为`b4169ab6e97b8caef412afedbd8cee9381db70ea95f319a9cd34aa3e2e9fdd50` / `c4b43343d59639cb8ddf4f0360cdddee2971cdce4ccfa0069b7d997c8d78c7b9`，self-tests 10/10与6/6 PASS。
+
+## J-494 · PB.1 C2 attempt-03 dependency-LFS build failure
+
+Date: 2026-08-31 · Type: RETAINED PB.1 HARNESS FAILURE · Local engine clone / engine LFS materialization / dependency clone / build / starts: 1 / 1 / 1 / 1 / 0
+
+Owner exact授权固化为v0.7，commit `640b21ff6f3a9acf9d21a542f169bb1ce51b00f7`推送并经raw GitHub SHA验证。Formal preflight在约168 GiB free时`ACCEPTED`：fresh roots、retained source/LFS/dependency、single live main、0 tag/PR/release和9/9负控全部通过。
+
+C2校正成功越过attempt-02失败点：checkout前engine objects symlink exact，一次zero-network checkout materialize 6,669 paths / 812,388,053 bytes；retained engine LFS whole tree未变。Full strict fsck、162,918 commits、5 fork commits、14 text paths=837/64加两个exact former-pointer transitions、license/generated inventory和exact dependency identity全部PASS。
+
+Clean build在47.20秒、peak RSS 1,069,449,216 bytes时以exit 2停止。根因是dependency clone使用`--no-checkout`且全局`GIT_LFS_SKIP_SMUDGE=1`，却未接入retained dependency LFS store：fresh dependency的622/622 LFS paths全为pointer、local objects为0 files。Linker首次读取131-byte `zstd/lib/libzstd.a` pointer即拒绝；pointer OID `b7063197…` / 624,344 bytes与retained有效archive content exact。此结果不是film-engine source rejection。
+
+不import runner的failure auditor重算九份JSON receipt、三份build log、source/engine LFS/dependency LFS/live remote与attempt-01/02 preservation，36/36 PASS；failure/verdict/build/audit self hashes为`8d624f8f…` / `a55c70c…` / `0eba23eb…` / `5cba3132…`。Product start/render与public clone/engine write/ref/LFS network/release/sign/notary/DMG/PB.2–PB.7全部0。Attempt-03永久保留，不原地materialize或重试；C3只允许在fresh dependency checkout前链接retained dependency objects并做一次zero-network dependency checkout。

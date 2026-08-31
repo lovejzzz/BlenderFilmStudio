@@ -1,0 +1,373 @@
+{
+  "schemaVersion": "bfs.pb1ValidationOnlyC2Attempt03FailureAudit.v0.8",
+  "gate": "PB.1",
+  "mode": "VALIDATION_ONLY_C2_ATTEMPT03_FAILURE",
+  "observedAt": "2026-08-31T02:53:46.394Z",
+  "status": "PASS",
+  "classification": "RETAINED_HARNESS_DEPENDENCY_LFS_MATERIALIZATION_FAILURE",
+  "runnerRootCause": "The exact local dependency clone used --no-checkout under GIT_LFS_SKIP_SMUDGE=1 but did not link or materialize the retained dependency LFS object store. All 622 dependency LFS worktree paths remained pointers; the first linker use rejected the 131-byte libzstd.a pointer.",
+  "correctionRequirement": "A fresh correction may add one dependency-local objects symlink to the retained dependency LFS object store before dependency checkout and one zero-network dependency git lfs checkout, with retained dependency objects immutable. Attempt-03 must remain unchanged and must not be retried in place.",
+  "auditor": {
+    "path": "scripts/audit-ai-native-studio-pb1-validation-only-c2-attempt03-failure.mjs",
+    "sha256": "f5fa99cdb4ab01cf887efe3cea1e8f15ee1a9654665fd4806e1ecfdf7d7d2e95",
+    "importsRunner": false
+  },
+  "runner": {
+    "path": "scripts/run-ai-native-studio-pb1-validation-only-c2.mjs",
+    "sha256": "b4169ab6e97b8caef412afedbd8cee9381db70ea95f319a9cd34aa3e2e9fdd50"
+  },
+  "specification": {
+    "path": "specs/ai-native-studio-pb1-validation-only-c2-execution.v0.7.json",
+    "sha256": "ee58b570b03ce85dd66c0561e4d314d0285167ae42e2240b8f639ca27d7840f7"
+  },
+  "request": {
+    "path": "specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json",
+    "sha256": "2c1747ef1b70c73b4fa3ec24b744c77afaa93d5b25e853602f22e99bbf77b3fb"
+  },
+  "failureReceiptHash": "8d624f8fbf8a295f6f00eef71408593b8335bc55992408b1d726fc5044c62cce",
+  "verdictReceiptHash": "a55c70c0a644c210fbc3e3569ba5c51b664f3aeab02daceb535719bbee0e078b",
+  "buildReceiptHash": "0eba23eb89bebabd75fb0009adf21b0afcd6a9424ad8d62f24924618445c4f2c",
+  "checksPassed": 36,
+  "checksTotal": 36,
+  "checks": [
+    {
+      "id": "AUDITOR_INDEPENDENT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "AUTHORIZATION_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "CONTRACT_REQUEST_RUNNER_BINDINGS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_preflight.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_negative-controls.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_lfs-materialization.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_remote-and-history.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_license-and-generated-paths.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_dependency.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_build.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_failure.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_verdict.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PREFLIGHT_AND_NEGATIVE_CONTROLS_PASS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ENGINE_LFS_MATERIALIZATION_PASS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "HISTORY_METRIC_PASS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LICENSE_AND_GENERATED_PASS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "DEPENDENCY_IDENTITY_PASS_ONLY",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "EXPECTED_BUILD_FAILURE_AND_STOP",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "BUILD_LOG_HASHES_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LINKER_REJECTED_ZSTD_POINTER",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FRESH_DEPENDENCY_ZSTD_POINTER_EXACT",
+      "pass": true,
+      "observed": {
+        "fileBytes": 131,
+        "oid": "b7063197d587191be8e8a475735bd8af3d805c265a6696b9a44b6b1ec6ba2006",
+        "bytes": 624344
+      },
+      "expected": true
+    },
+    {
+      "id": "RETAINED_ZSTD_CONTENT_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FRESH_DEPENDENCY_ALL_POINTERS_NO_LFS_OBJECTS",
+      "pass": true,
+      "observed": {
+        "worktree": {
+          "tracked": 622,
+          "pointers": 622,
+          "pointerBytes": 81300,
+          "materialized": 0,
+          "materializedBytes": 0
+        },
+        "objects": {
+          "directories": 853,
+          "files": 0,
+          "bytes": 0,
+          "symlinks": 0
+        }
+      },
+      "expected": true
+    },
+    {
+      "id": "RETAINED_DEPENDENCY_MATERIALIZED_EXACT",
+      "pass": true,
+      "observed": {
+        "worktree": {
+          "tracked": 622,
+          "pointers": 0,
+          "pointerBytes": 0,
+          "materialized": 622,
+          "materializedBytes": 1102333263
+        },
+        "objects": {
+          "state": "PRESENT",
+          "files": 618,
+          "bytes": 1070190055,
+          "manifestSha256": "e180738d406f6ba91d5f2fa315232efaac3d45c0e1f55c03b2fab98bf5ee5447"
+        }
+      },
+      "expected": true
+    },
+    {
+      "id": "SOURCE_IDENTITY_AND_NETWORK_DISABLE_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ENGINE_OBJECT_LINK_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RETAINED_ENGINE_LFS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ATTEMPT02_RETAINED_EXACT",
+      "pass": true,
+      "observed": {
+        "directories": 6424,
+        "files": 0,
+        "bytes": 0,
+        "symlinks": 0
+      },
+      "expected": true
+    },
+    {
+      "id": "LIVE_PUBLIC_FORK_AND_REFSET_EXACT",
+      "pass": true,
+      "observed": {
+        "id": 1351574987,
+        "fullName": "lovejzzz/film-engine",
+        "fork": true,
+        "parent": "blender/blender",
+        "visibility": "public",
+        "private": false,
+        "heads": [
+          {
+            "oid": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+            "ref": "refs/heads/main"
+          }
+        ],
+        "tags": [],
+        "main": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+        "pulls": 0,
+        "releases": 0
+      },
+      "expected": true
+    },
+    {
+      "id": "AUTHORIZED_COUNTERS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FORBIDDEN_COUNTERS_ZERO",
+      "pass": true,
+      "observed": {
+        "publicEngineNetworkClones": 0,
+        "localEngineClones": 1,
+        "freshObjectsSymlinks": 1,
+        "localLfsMaterializations": 1,
+        "localDependencyClones": 1,
+        "nativeBuilds": 1,
+        "productStarts": 0,
+        "renders": 0,
+        "engineRemoteWrites": 0,
+        "engineRefUpdates": 0,
+        "lfsNetworkDownloads": 0,
+        "lfsUploads": 0,
+        "releases": 0,
+        "signing": 0,
+        "notarization": 0,
+        "dmg": 0,
+        "pb2ThroughPb7": 0,
+        "modelCalls": 0
+      },
+      "expected": true
+    },
+    {
+      "id": "NO_RUNTIME_OR_PRODUCT_START",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "NO_NATIVE_PROCESS_REMAINS",
+      "pass": true,
+      "observed": [],
+      "expected": []
+    },
+    {
+      "id": "PREAUDIT_FILESET_EXACT",
+      "pass": true,
+      "observed": [
+        "build.json",
+        "build.stderr.log",
+        "build.stdout.log",
+        "build.timing.log",
+        "dependency.json",
+        "failure.json",
+        "lfs-materialization.json",
+        "license-and-generated-paths.json",
+        "negative-controls.json",
+        "preflight.json",
+        "remote-and-history.json",
+        "verdict.json"
+      ],
+      "expected": [
+        "build.json",
+        "build.stderr.log",
+        "build.stdout.log",
+        "build.timing.log",
+        "dependency.json",
+        "failure.json",
+        "lfs-materialization.json",
+        "license-and-generated-paths.json",
+        "negative-controls.json",
+        "preflight.json",
+        "remote-and-history.json",
+        "verdict.json"
+      ]
+    },
+    {
+      "id": "ROOTS_WITHIN_CEILINGS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "STOP_RULE_PRESERVED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    }
+  ],
+  "failures": [],
+  "counters": {
+    "publicEngineNetworkClones": 0,
+    "localEngineClones": 1,
+    "freshObjectsSymlinks": 1,
+    "localLfsMaterializations": 1,
+    "localDependencyClones": 1,
+    "nativeBuilds": 1,
+    "productStarts": 0,
+    "renders": 0,
+    "engineRemoteWrites": 0,
+    "engineRefUpdates": 0,
+    "lfsNetworkDownloads": 0,
+    "lfsUploads": 0,
+    "releases": 0,
+    "signing": 0,
+    "notarization": 0,
+    "dmg": 0,
+    "pb2ThroughPb7": 0,
+    "modelCalls": 0
+  },
+  "externalMutationsPerformedByAuditor": 0,
+  "stopRulePreserved": true,
+  "receiptHash": "5cba3132fb3cda14776291750a9d89a86ab365e32f14a5799387e14024b87e3c"
+}

@@ -66,8 +66,15 @@ both a research notebook and an executable evidence base. Read this page,
   stopped before LFS checkout because skip-smudge publication checkout had created an
   empty 6,424-directory `.git/lfs/objects` skeleton before symlink installation. LFS
   materialization, dependency clone, build, product starts and all forbidden mutations
-  remained 0. The first audit is retained at 29/30; its C1 audit passed 24/24. A fresh
-  attempt-03 is not authorized.
+  remained 0. The first audit is retained at 29/30; its C1 audit passed 24/24.
+- **PB.1 C2 attempt-03 retained failure:** exact v0.7 authorization and preflight
+  passed. The checkout-before-symlink correction worked: all 6,669 engine LFS paths,
+  full history, corrected metric, license inventory and dependency identity passed.
+  The single clean build stopped after 47.20 seconds because the fresh dependency
+  clone left all 622 dependency LFS paths as pointers; the linker rejected the
+  131-byte `libzstd.a` pointer. No product start/render or forbidden mutation occurred.
+  Independent failure audit passed 36/36. Attempt-03 is immutable; the next fresh
+  correction is limited to zero-network dependency-LFS materialization.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -205,9 +212,10 @@ both a research notebook and an executable evidence base. Read this page,
     [`verdict.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/verdict.json)
     and [`audit-failure-c1.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/audit-failure-c1.json)
     — retained pre-materialization ordering failure and accepted 24/24 failure audit.
-16. [`research/2026-08-31-ai-native-studio-pb1-validation-only-c2-authorization-request-v0.6.zh-CN.md`](./research/2026-08-31-ai-native-studio-pb1-validation-only-c2-authorization-request-v0.6.zh-CN.md)
-    and [`specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json`](./specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json)
-    — exact fresh attempt-03 request and the only active PB.1 correction gate.
+16. [`research/2026-08-31-ai-native-studio-pb1-attempt-03-retained-failure.md`](./research/2026-08-31-ai-native-studio-pb1-attempt-03-retained-failure.md),
+    [`verdict.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-03/verdict.json)
+    and [`audit-failure.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-03/audit-failure.json)
+    — retained dependency-LFS materialization failure and accepted 36/36 failure audit.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
