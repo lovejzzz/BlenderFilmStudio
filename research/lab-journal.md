@@ -6307,3 +6307,13 @@ Date: 2026-08-31 · Type: STANDING-AUTHORITY TOOL FREEZE · Formal Blender start
 C6-C2 thin entrypoint SHA为`424fa76505481ceb634b4ed267c9822811a5e8c51022988488960e0b36cfb986`。Self-test不再调用obsolete C5 attempt-04 freshness断言，而是直接验证attempt-04 work absent、两文件evidence manifest exact及attempt-05 roots fresh；formal path仍绑定并委托C6-C1 `73431f60...`，closure-guarded authority和全部semantic gates不改。
 
 新tool freeze/template SHA为`f88a758fa050f423acf8c8452056869b19cf61e557159e38a6affe7d5aa192dd` / `02f8d11f5038c45cca2927d9376fd622be90c4cd0435c6cb6b866d33a256f951`。Static/negative audit 32/32 PASS，file/self SHA为`4973d996058a63198ec7e1ed9065fe4aa54c241edc0453a7b4f046f9667c051d` / `07b1919c3d26e72750eebe213d35ac25a3cedc449dcf45973b06e82f9244be24`。Attempt-05 roots仍absent，formal counts全0。下一步standing authority下单路径提交attempt-05 contract并执行。
+
+## J-517 · PB.3 C6-C2 attempt-05 retained artifact FAIL
+
+Date: 2026-08-31 · Type: RETAINED FORMAL FAILURE · Blender starts / proposal executions / BuildPlan writes / renders: 4 / 2 / 2 / 0
+
+Attempt-05完成四个offline Blender process，B01/B02 proposal compile、BuildPlan、semantic scene、workspace save、reopen与Expert roundtrip全部exact，receipt PASS/self hash `6837c132fcca83e5e26678cbfc6ef15f170b6054d888732d34a8ed397e547570`。所有process exit 0，八份logs hash exact，network/engine writes/renders全0。
+
+最终C4 full-work-root predicate发现B01/B02各一个`isolation/*/home/.thumbnails/large/*.png`，因此runner FAIL。Base audit 17/18、C6 audit 27/29，唯一实质失败均为no-render-artifact（C6另因base FAIL连带一项）；self hashes为`94ae24c9052ed03d58fcd37a01e413de767b4c174800b5fac469129e597da13c` / `52d8bd8617bfc3c4dbf5feffdc27f6143b5a14e2cdf4d1ea41e9c0bc46c4ba30`。这证明save前`file_preview_type=NONE`不阻止command-line reopen在HOME生成filesystem thumbnail。
+
+Attempt-05永久保留，不删除或豁免PNG。C6-C3只允许把HOME从work root移到bounded evidence-root isolation目录，其余config/scripts/data/tmp isolation不变；evidence resource accounting必须包含这些文件，full-work-root forbidden-extension predicate不改。任何重跑必须使用fresh attempt-06。

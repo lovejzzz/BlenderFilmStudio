@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC6C3HomeIsolation.v1.23",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-C6-C3-HOME-ISOLATION-v1.23",
+  "status": "PREREGISTERED_INERT_HOME_ISOLATION_CORRECTION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "41b20460",
+  "retainedAttempt05": {
+    "status": "FAIL_NO_RENDER_ARTIFACT_PREDICATE",
+    "executionCommit": "41b20460",
+    "workManifest": {"regularFiles": 29, "regularFileBytes": 839308, "manifestSha256": "881c1168c3cc6d8a839a0ef70d65238dc67bfa1b6b88864c372432e486ba5629"},
+    "evidenceManifest": {"regularFiles": 15, "regularFileBytes": 49516, "manifestSha256": "c14161d55cc17524e80b3e15c737711b278c1ed42a5b24d7127c182024bb34c7"},
+    "receiptFileSha256": "a6fad689781d9c4419195f85684961eed8409b7c120ca173a02dbdbbc170aee5",
+    "receiptHash": "6837c132fcca83e5e26678cbfc6ef15f170b6054d888732d34a8ed397e547570",
+    "baseAudit": "17/18 FAIL",
+    "baseAuditHash": "94ae24c9052ed03d58fcd37a01e413de767b4c174800b5fac469129e597da13c",
+    "c6Audit": "27/29 FAIL",
+    "c6AuditHash": "52d8bd8617bfc3c4dbf5feffdc27f6143b5a14e2cdf4d1ea41e9c0bc46c4ba30"
+  },
+  "observedArtifacts": [
+    {"fixture": "B01", "pathSuffix": "isolation/b01/home/.thumbnails/large/c9fb7119bb79f629d4f1f5e8f98019c4.png", "sha256": "98c4bfcf3b79389eaf45e848cec9b436de3a2d2c8a4f04a83c437791db484460"},
+    {"fixture": "B02", "pathSuffix": "isolation/b02/home/.thumbnails/large/ed2afb74f5384bcace7ae603ff941562.png", "sha256": "d18d24c5048e08ab25c5b4b9264cd7d48e39bcbecf3758d84fb1e4c82d6ba083"}
+  ],
+  "finding": "Setting Blender file_preview_type to NONE before save does not prevent command-line reopen from writing freedesktop-style thumbnails under HOME. Both build and reopen semantics otherwise passed exactly.",
+  "allowedChange": "In a versioned entrypoint, retain all existing isolated config/scripts/data/tmp paths but move only HOME from the work root to a bounded evidence-root isolation directory before any Blender process. Evidence resource accounting must include those files; the unchanged full-work-root forbidden-extension predicate must still find zero artifacts.",
+  "freshAttempt06": {
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-06",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-06"
+  },
+  "forbidden": [
+    "Do not delete, ignore or exempt the attempt-05 PNG files.",
+    "Do not relax the full-work-root noRenderArtifacts predicate.",
+    "Do not change proposal, scene, workspace, counts, resource ceilings or network/engine-write rules."
+  ],
+  "claimCeiling": "Harness filesystem isolation correction only. The two retained thumbnails remain negative evidence and are not classified as renders."
+}
