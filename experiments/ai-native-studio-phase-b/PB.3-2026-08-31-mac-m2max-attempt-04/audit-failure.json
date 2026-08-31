@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC6FailureAudit.v0.1",
+  "status": "PASS",
+  "checks": {
+    "failureSchemaStatusStage": true,
+    "failureSelfHash": true,
+    "executionContractHash": true,
+    "executionCommitExact": true,
+    "executionParentExact": true,
+    "executionSinglePath": true,
+    "standingCharterBindingExact": true,
+    "frozenToolHashes": true,
+    "c6RunnerAdaptsC5Authority": true,
+    "c3StillDelegatesToBaseAuthority": true,
+    "baseHistoricalStatusRejectionExact": true,
+    "workRootAbsent": true,
+    "evidenceBeforeAuditExact": true,
+    "noFormalReceiptOrLogs": true,
+    "noRenderLikeArtifacts": true,
+    "zeroBlenderAndMutationCounts": true,
+    "zeroNetworkCalls": true,
+    "sourceIdentityClean": true,
+    "binaryIdentityExact": true
+  },
+  "counts": {
+    "passed": 19,
+    "total": 19,
+    "formalRunnerInvocations": 1,
+    "workRootsCreated": 0,
+    "evidenceRootsCreatedByRunner": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "failure": {
+    "uri": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-04/failure.json",
+    "fileSha256": "3c805b9c3c19e71578ec7e5e26003433a11719a1fe8150ddf3b9b37cf3715525",
+    "failureHash": "79fc1fb6e1f6059bc7785c8d0c20d8fdfcbc56b49a40e43f14c391e47f7fcade"
+  },
+  "evidenceManifestBeforeAudit": {
+    "regularFiles": 1,
+    "regularFileBytes": 3290,
+    "manifestSha256": "bcee63e1a88612e913346a8d0622bae3202f84d307d67fe460482e534190bac7"
+  },
+  "cause": {
+    "c6Observed": "C6 replaces c5_module.validate_c5_authority before delegating.",
+    "c3Observed": "C3 validates the patched outer authority, then loads and calls the unchanged base runner.",
+    "baseObserved": "The base runner separately requires the historical execution schema/status and emitted the exact retained rejection."
+  },
+  "claimCeiling": "Independent retained-failure proof only. No Blender process, work root, network call, render or engine mutation occurred. This audit grants no authority to reuse attempt-04.",
+  "auditHash": "74317f6429ab0fd64b9257f3d24915ae8c5e6a38686e223cfcd81d89f44faa55"
+}

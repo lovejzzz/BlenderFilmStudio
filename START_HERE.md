@@ -180,9 +180,11 @@ not rewritten; new adapters must bind the standing charter explicitly.
   is `specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json`.
   It remains historical. The versioned C6 standing-authority adapter now passes
   static/negative audit 32/32 without claiming the historical exact sentence.
-  The active next step is the single-path attempt-04 execution contract and
-  formal C6 run; no repeated owner sentence is required. Attempt-04 roots remain
-  absent and attempts 01–03 are immutable.
+  Its single-path attempt-04 contract passed outer standing-authority checks but
+  the nested base runner retained a second historical status check and stopped
+  before root creation or Blender start. Attempt-04 is now an immutable 19/19-
+  audited harness failure. C6-C1 may adapt only that nested authority function;
+  any formal retry uses fresh attempt-05 roots without another owner sentence.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -400,10 +402,11 @@ attempt-03 are retained harness failures. Attempt-02 completed all four zero-
 render semantic processes; attempt-03 stopped before creating a work root or
 starting Blender. C5-C2 passes 30/30 static checks and the C6 standing-authority
 adapter passes 32/32 while keeping the C4 semantic/helper corrections, exact
-no-render-artifact threshold, three retained attempts and zero-network ceiling
-frozen. The next checkpoint is a single-path C6 execution contract and fresh
-attempt-04 execution. Do not retry a retained formal root or query the engine
-remote during admission.
+no-render-artifact threshold, retained attempts and zero-network ceiling
+frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
+The next checkpoint is the closure-guarded C6-C1 correction, static audit,
+single-path contract and fresh attempt-05 execution. Do not retry a retained
+formal root or query the engine remote during admission.
 After PB.3 closes, later PB gates may proceed under versioned protocols and the
 standing charter without another authorization sentence.
 

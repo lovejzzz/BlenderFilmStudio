@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_02_03_RETAINED_FAIL_STANDING_AUTONOMY_ACTIVE_C6_TOOL_FREEZE_PASS_ATTEMPT04_PENDING",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_02_03_04_RETAINED_FAIL_STANDING_AUTONOMY_ACTIVE_C6_C1_PENDING",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -34,7 +34,7 @@
       "third-party/legal commitments",
       "material scope or resource expansion"
     ],
-    "currentAdapterStatus": "PB3_C6_STANDING_AUTHORITY_TOOL_FREEZE_PASS_32_OF_32"
+    "currentAdapterStatus": "PB3_C6_ATTEMPT04_PRE_ROOT_FAIL_C6_C1_NESTED_BASE_AUTHORITY_PENDING"
   },
   "sourceBaseline": {
     "upstream": "https://projects.blender.org/blender/blender.git",
@@ -801,7 +801,22 @@
           "researchDocument": "research/2026-08-31-ai-native-studio-pb3-c6-standing-authority-tool-freeze-v1.13.md",
           "researchDocumentFileSha256": "34fe9e1e81be07406f5719dcaade48dcd8f6c433021cda3a9c1dbd3e47f9b51c",
           "historicalExactTextClaimed": false,
-          "attempt04RootsExist": false
+          "attempt04RootsExist": false,
+          "attempt04": {
+            "status": "FAIL_PRE_ROOT_PRE_BLENDER_NESTED_BASE_AUTHORITY",
+            "executionCommit": "2cee2969bb3fcc7087c5f3bbcd9eface8cb8467d",
+            "executionContract": "specs/ai-native-studio-pb3-validation-standing-execution-c6.v1.15.json",
+            "executionContractFileSha256": "a82243004b06383d8c50120e20003eedebbaf1a69b893fb5868ee8c3285bcc05",
+            "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-04",
+            "failureFileSha256": "3c805b9c3c19e71578ec7e5e26003433a11719a1fe8150ddf3b9b37cf3715525",
+            "failureHash": "79fc1fb6e1f6059bc7785c8d0c20d8fdfcbc56b49a40e43f14c391e47f7fcade",
+            "auditFileSha256": "2050d027ab7c976733814b378853e123012dc8d9f1bf72d48970e63ce70bcf8b",
+            "auditHash": "74317f6429ab0fd64b9257f3d24915ae8c5e6a38686e223cfcd81d89f44faa55",
+            "checks": "19/19",
+            "blenderStarts": 0,
+            "networkCalls": 0
+          },
+          "c1Correction": "specs/ai-native-studio-pb3-validation-c6-c1-nested-base-authority.v1.16.json"
         },
         "blenderStarts": 0,
         "renders": 0,
@@ -814,7 +829,7 @@
       "phaseBSourceMutationAuthority": "STANDING_CHARTER_REQUIRES_VERSIONED_PROTOCOL_AND_VALIDATION",
       "pb2ThroughPb7Authorized": true,
       "nextGate": "PB.3",
-      "nextGateStatus": "PB3_C6_TOOL_FREEZE_PASS_ATTEMPT04_SINGLE_PATH_EXECUTION_CONTRACT_PENDING"
+      "nextGateStatus": "PB3_C6_ATTEMPT04_RETAINED_PRE_ROOT_FAIL_C6_C1_ATTEMPT05_PENDING"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1190,14 +1205,15 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB3_VALIDATION_ONLY_C6_STANDING_AUTHORITY_ATTEMPT04",
-    "result": "C6 standing-authority adapter is frozen and static 32/32 PASS; commit the single-path execution contract, then execute fresh attempt-04",
+    "gate": "PB3_VALIDATION_ONLY_C6_C1_STANDING_AUTHORITY_ATTEMPT05",
+    "result": "Attempt-04 is a retained pre-root nested-authority harness failure; adapt only the nested base authority after outer standing validation, then execute fresh attempt-05",
     "requiredArtifacts": [
       "retain attempt-01, attempt-02 and attempt-03 work/evidence states unchanged",
       "preserve the 32/32 C6 standing-authority static audit and frozen tool hashes",
       "bind the frozen C5-C2 runner, C5 auditor, unchanged C4 helper and corrected tool without claiming the historical C5 exactText was supplied",
-      "commit the fresh attempt-04 execution contract as a single path under standing authority",
-      "preserve unchanged thresholds and fresh attempt-04 roots until the single-path execution contract commit",
+      "retain attempt-04 failure/audit unchanged and never reuse its roots",
+      "commit the fresh attempt-05 execution contract as a single path under standing authority",
+      "preserve unchanged thresholds and fresh attempt-05 roots until the single-path execution contract commit",
       "zero film-engine source/ref/tag/release mutation, engine remote write, network, rendering, signing, notarization, DMG work or PB.4-PB.7 work"
     ],
     "formalAttempt01Authorized": false,
@@ -1206,7 +1222,9 @@
     "formalAttempt02AuthorizationConsumed": true,
     "formalAttempt03Authorized": false,
     "formalAttempt03AuthorizationConsumed": true,
-    "formalAttempt04Authorized": true,
+    "formalAttempt04Authorized": false,
+    "formalAttempt04AuthorizationConsumed": true,
+    "formalAttempt05Authorized": true,
     "formalAttempt04AuthoritySource": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
     "historicalExactAuthorizationTextSource": "specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json#/requestedAuthorization/exactText",
     "historicalExactTextMustNotBeClaimedAsSupplied": true

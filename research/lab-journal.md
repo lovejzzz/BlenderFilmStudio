@@ -6281,3 +6281,13 @@ C6只替换C5-C2的authority validator：绑定active standing charter及owner d
 Runner / independent auditor / static auditor SHA依次为`606838d5817cf32c323cf0035e02031f0c18533583656118aee537e82c2b7909` / `48fe5e0d77b732da86147a085a21396a283042190ad33bc457d6fda6ef009fb5` / `24c133ad1d7e2716070a905eca80b8c8642f292fb79c3090e62f673b2453f16c`。Tool freeze/template SHA为`44d23436711c0b40d265773c14ab729c17720359c56c2ea38971612a10536da7` / `e2eb0996196cc4168b4449ff6428847666c440f00a179c21cd2822278b7521d7`。
 
 Static/negative audit 32/32 PASS，file/self SHA为`a4e401a8f937174ba548198deabf58e4d8f45a940b0c9f30f0ab928288eb1065` / `6ed1a64251f1b2e96926335fc53d8194e8b16e60b217f4de0f79cc5f94aab313`。Inert template在root创建前以safe status gate拒绝；attempt-04 roots保持absent，全部formal counts为0。下一步依据standing authority单路径提交fresh execution contract并直接运行，无需再次询问owner。
+
+## J-514 · PB.3 C6 attempt-04 retained pre-root FAIL
+
+Date: 2026-08-31 · Type: RETAINED HARNESS FAILURE · Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+Standing-authority execution contract是commit `2cee2969bb3fcc7087c5f3bbcd9eface8cb8467d`唯一变更路径。C6外层authority验证通过后，冻结C3又调用base runner；base拥有第二个historical execution status validator，仍要求旧schema/status并以`PB.3 execution is not authorized`拒绝。正式work/evidence roots均未由runner创建，Blender/proposal/BuildPlan/scene/save/reopen/render/network/engine mutation全0。
+
+Attempt-04 evidence仅事后保留failure与independent audit。Failure file/self SHA为`3c805b9c3c19e71578ec7e5e26003433a11719a1fe8150ddf3b9b37cf3715525` / `79fc1fb6e1f6059bc7785c8d0c20d8fdfcbc56b49a40e43f14c391e47f7fcade`；audit 19/19 PASS，file/self SHA为`2050d027ab7c976733814b378853e123012dc8d9f1bf72d48970e63ce70bcf8b` / `74317f6429ab0fd64b9257f3d24915ae8c5e6a38686e223cfcd81d89f44faa55`。
+
+C6-C1只允许在outer standing authority完全通过后，以closure flag保护的adapter满足nested base authority并返回已验证execution commit；semantic/resources/artifact gates不改。Attempt-04永久保留，后续只能使用fresh attempt-05，且standing charter无需owner重复授权。

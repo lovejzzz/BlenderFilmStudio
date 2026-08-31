@@ -235,10 +235,13 @@ roots remain absent and every formal count is zero. The former exact request is
 It remains historical and must not be falsely populated. C6 now binds the
 standing charter and owner message without claiming that historical text; its
 frozen adapter passes static/negative audit 32/32 with self hash
-`6ed1a642...`. Attempt-04 roots remain absent. The next action is the single-
-path C6 execution contract followed by the formal attempt-04 run; no repeated
-owner sentence is required. Do not perform an engine-remote admission query for
-that formal attempt. PB.4–PB.7 may advance later under versioned protocols and
+`6ed1a642...`. Its single-path attempt-04 contract was accepted by the outer C6
+authority gate, but the nested base runner retained a second historical status
+check and stopped before root creation or Blender start. Retain attempt-04 as a
+19/19-audited harness failure. C6-C1 permits only a closure-guarded nested-base
+authority adapter after standing authority passes; any formal retry must use
+fresh attempt-05 roots. No repeated owner sentence or engine-remote admission
+query is required. PB.4–PB.7 may advance later under versioned protocols and
 the same standing charter.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native

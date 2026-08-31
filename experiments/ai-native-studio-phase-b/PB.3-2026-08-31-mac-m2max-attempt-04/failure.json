@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC6Failure.v0.1",
+  "status": "FAIL",
+  "failedStage": "PRE_ROOT_NESTED_BASE_AUTHORITY_COMPATIBILITY",
+  "recordedAtUtc": "2026-08-31T16:49:59Z",
+  "executionCommit": "2cee2969bb3fcc7087c5f3bbcd9eface8cb8467d",
+  "executionParentResearchCommit": "d3a38d001fa6884bca5ab768869412d6993d3b57",
+  "executionContract": {
+    "uri": "specs/ai-native-studio-pb3-validation-standing-execution-c6.v1.15.json",
+    "sha256": "a82243004b06383d8c50120e20003eedebbaf1a69b893fb5868ee8c3285bcc05"
+  },
+  "toolBindings": {
+    "c6": {
+      "uri": "specs/ai-native-studio-pb3-validation-c6-execution-tool-freeze.v1.13.json",
+      "sha256": "44d23436711c0b40d265773c14ab729c17720359c56c2ea38971612a10536da7"
+    },
+    "c5": {
+      "uri": "specs/ai-native-studio-pb3-validation-c5-c2-execution-tool-freeze.v1.10.json",
+      "sha256": "0e8c3d339ee4bb2fc82683637ae9458c43b94016becc13faab6106ed38a6a58e"
+    },
+    "correctedTool": {
+      "uri": "specs/ai-native-studio-pb3-validation-tool-freeze-c4-corrected.v1.2.json",
+      "sha256": "24baa8e6a03d62fa2559c939209cfe05fb7a9cdbdbe82ec08267aa1bc9ad827d"
+    },
+    "runner": {
+      "uri": "scripts/run-ai-native-studio-pb3-validation-c6.py",
+      "sha256": "606838d5817cf32c323cf0035e02031f0c18533583656118aee537e82c2b7909"
+    }
+  },
+  "failure": {
+    "type": "NESTED_BASE_AUTHORITY_VALIDATOR_NOT_ADAPTED",
+    "runnerMessage": "PB3_VALIDATION_C6_STOP RuntimeError: PB.3 execution is not authorized",
+    "cause": "C6 replaced the C5/C4/C3 authority callback, but the frozen C3 runner subsequently delegated to the base runner whose separate validate_authority function still required the historical execution schema/status.",
+    "standingAuthorityValidatedBeforeStop": true,
+    "semanticAuthorityExpanded": false
+  },
+  "identityAtStop": {
+    "engineSourceHead": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "engineSourceClean": true,
+    "binarySha256": "4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59"
+  },
+  "rootStateAtStop": {
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-04",
+    "workRootCreated": false,
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-04",
+    "evidenceRootCreatedByRunner": false,
+    "evidenceRootCreatedOnlyToRetainFailure": true,
+    "processLogs": 0,
+    "renderLikeArtifacts": 0
+  },
+  "counts": {
+    "formalRunnerInvocations": 1,
+    "workRootsCreated": 0,
+    "evidenceRootsCreatedByRunner": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "stopRule": "Retain attempt-04 failure evidence immutable; do not amend the execution commit, edit the contract in place or retry attempt-04 roots.",
+  "claimCeiling": "This is a pre-root, pre-Blender nested harness compatibility failure. It is not evidence against PB.3 product behavior and grants no authority to reuse attempt-04.",
+  "failureHash": "79fc1fb6e1f6059bc7785c8d0c20d8fdfcbc56b49a40e43f14c391e47f7fcade"
+}
