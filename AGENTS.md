@@ -88,9 +88,8 @@ Its runner is inert unless a separate committed v0.4 contract has status
 attempt-01 is retained at 27/28 after a filename/import false positive. C1
 passes 10/10, giving combined tool readiness 28/28 with self hash
 `b46193daf3e693badabfbc099e4edef25e1e56998f2ccbf9d22bb03021c32702`.
-The formal work and evidence roots remain absent. Do not run the formal runner
-from the v0.3 request or create those roots before an exact v0.4 execution
-contract is authorized and committed.
+The v0.4 shape was later superseded by the C2 v0.6 correction described below.
+Do not use the v0.3 request, v0.4 template or v0.5 shape as execution authority.
 
 The non-executable v0.4 execution template is frozen at
 `specs/ai-native-studio-pb2-validation-only-execution-template.v0.4.json`.
@@ -122,8 +121,11 @@ the parent and exact committed contract bytes. Static C2 audit passes 17/17
 with self hash
 `7946dda3aa5aadcf1845c5a027987edd618cc7f5fe491a1c1175802daa6c78ba`.
 Use `specs/ai-native-studio-pb2-validation-only-execution-c2.v0.6.json` as the
-only future execution contract. The prior v0.4/v0.5 execution shapes are
-non-executable retained protocol failures.
+only execution contract. It now binds the exact user authorization, C2 tools,
+parent commit and unique attempt-01 roots with status
+`AUTHORIZED_FOR_ONE_FORMAL_RUN`; commit it with parent `f3a8f869...`, then run
+the frozen runner and independent auditor exactly once. The prior v0.4/v0.5
+execution shapes are non-executable retained protocol failures.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
