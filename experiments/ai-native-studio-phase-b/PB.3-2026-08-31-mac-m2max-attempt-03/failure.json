@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC4Failure.v0.1",
+  "status": "FAIL",
+  "failedStage": "PRE_ROOT_AUTHORIZED_SCOPE_BINDING",
+  "recordedAtUtc": "2026-08-31T08:28:45Z",
+  "executionCommit": "54965fc86a5ea4d867f394f31e87a7e58219272b",
+  "executionParentResearchCommit": "b44b041eb05a3792714aa469ad93d0118422b64f",
+  "executionContract": {
+    "uri": "specs/ai-native-studio-pb3-validation-only-execution-c4.v1.5.json",
+    "sha256": "2c566f94b5963821dbc880239a80f58c5961a549b992b4603e5cb2446a284051"
+  },
+  "toolBindings": {
+    "c4": {
+      "uri": "specs/ai-native-studio-pb3-validation-c4-c1-execution-tool-freeze.v1.3.json",
+      "sha256": "cd02bb9264b951c52217d2cdbdd4f5e237a95c071e7533c75eeabdd5f00792c2"
+    },
+    "correctedTool": {
+      "uri": "specs/ai-native-studio-pb3-validation-tool-freeze-c4-corrected.v1.2.json",
+      "sha256": "24baa8e6a03d62fa2559c939209cfe05fb7a9cdbdbe82ec08267aa1bc9ad827d"
+    },
+    "runner": {
+      "uri": "scripts/run-ai-native-studio-pb3-validation-c4.py",
+      "sha256": "eb670c264cc240b792a55cd9fd3e6a517fcf58a451a4499168a6bd85f7fb929b"
+    }
+  },
+  "failure": {
+    "type": "EXECUTION_CONTRACT_STILL_UNAUTHORIZED_SCOPE_TRANSCRIPTION",
+    "runnerMessage": "PB3_VALIDATION_C4_STOP RuntimeError: unauthorized scope differs",
+    "jsonPath": "$.stillUnauthorized[0]",
+    "frozenExpected": "PB.3 formal root creation or Blender start without a separately committed exact execution contract",
+    "executionObserved": "PB.3 formal root creation or Blender start without this separately committed exact execution contract",
+    "differingToken": "this ",
+    "otherStillUnauthorizedItemsExact": 4,
+    "semanticAuthorityExpanded": false
+  },
+  "identityAtStop": {
+    "engineSourceHead": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "engineSourceClean": true,
+    "binarySha256": "4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59",
+    "liveFilmEngineMain": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6"
+  },
+  "protocolDeviation": {
+    "type": "READ_ONLY_REMOTE_IDENTITY_CHECK_OUTSIDE_FORMAL_RUNNER",
+    "operation": "git ls-remote https://github.com/lovejzzz/film-engine.git refs/heads/main",
+    "observedOid": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "remoteWrites": 0,
+    "networkCalls": 1,
+    "assessment": "The admission check was read-only but exceeded the frozen zero-network ceiling; attempt-03 therefore remains FAIL independently of the execution-contract mismatch."
+  },
+  "rootStateAtStop": {
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-03",
+    "workRootCreated": false,
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-03",
+    "evidenceRootCreatedByRunner": false,
+    "evidenceRootCreatedOnlyToRetainFailure": true,
+    "processLogs": 0,
+    "renderLikeArtifacts": 0
+  },
+  "retainedAttemptsReverified": {
+    "attempt01": {
+      "workManifestSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "evidenceManifestSha256": "cc50ac9fc2366965cca73db9e1d1240c9d31d435c20fdfda05f03ca50c432754"
+    },
+    "attempt02": {
+      "workManifestSha256": "6b12f0b8f2545a3463902638540a87981542a7f202b3cef161ad482458c97ca8",
+      "evidenceManifestSha256": "4d0930b596128fcaf3019777cc586046f4c5b10fc1a11bf60536a12c9620262e"
+    }
+  },
+  "counts": {
+    "formalRunnerInvocations": 1,
+    "workRootsCreated": 0,
+    "evidenceRootsCreatedByRunner": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 1
+  },
+  "stopRule": "Retain attempt-03 failure evidence immutable; do not amend the execution commit, edit the contract in place, or retry attempt-03 roots.",
+  "claimCeiling": "This is a pre-root, pre-Blender execution-contract transcription failure with one disclosed read-only remote identity call outside the runner. It is not evidence against PB.3 product behavior and grants no fresh execution authority.",
+  "failureHash": "248fb2bd86ecd42bca1ca269e1d2ce53e4ef20e11dd99db39f59e63b43c63413"
+}

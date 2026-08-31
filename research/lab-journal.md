@@ -6231,3 +6231,13 @@ C1 static auditor与失败版只有一个message substring差异，SHA-256 `1e40
 Static/negative audit 32/32 PASS，file/self SHA为`d9df9f62d0b3f8bfa18b7cb7b6b00146708f759acae7ed41afec95a89aefca7d` / `c323b9ce28ebbb4b709d46fe22dfa6041f2389a401606cd0420009ca06634cc5`，root 1 file / 3,095 bytes / manifest `b6eea16a...`。它复核helper exact two-line diff、tool exact two-field diff、normalize-before-delegate、auditor六种全root forbidden extensions、13/13 inputs、两个retained roots、source/binary、resources、self-test与inert rejection。Attempt-03 roots前后absent，所有formal counts为0。
 
 Active exact request为`specs/ai-native-studio-pb3-validation-only-authorization-request-c4.v1.2.json`，template为`specs/ai-native-studio-pb3-validation-execution-c4-c1-template.v1.4.json`。General continue或旧PB.3 authority不足以创建attempt-03；必须等owner逐字批准后再单路径提交execution contract。PB.4–PB.7仍locked。
+
+## J-509 · PB.3 C4 attempt-03 retained pre-root FAIL
+
+Date: 2026-08-31 · Type: RETAINED PB.3 HARNESS FAILURE · Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+Owner逐字批准C4 request；execution contract以唯一变更路径提交为`54965fc86a5ea4d867f394f31e87a7e58219272b`。Formal runner在创建任何attempt-03 root及启动Blender前，以`unauthorized scope differs` fail-closed：execution `stillUnauthorized[0]`比corrected tool冻结值多一个`this`，其余四项exact。该措辞没有扩大authority，但违反逐字相等门，因此attempt-03已消耗且不得amend或same-root retry。
+
+正式runner的Blender/proposal/BuildPlan/scene/save/reopen/render/engine edit/engine remote write计数全部0。Admission阶段另做过一次只读`git ls-remote`核对film-engine main；结果为expected `4061e12b...`且0 write，但超过zero-network ceiling，已按1次network call透明保留，所以attempt-03独立于scope mismatch也必须FAIL。
+
+Failure file/self SHA为`fa422b7336d87f95782d2fdd16a4ef9cd9c5d0d822724f47c62e63509b3ab200` / `248fb2bd86ecd42bca1ca269e1d2ce53e4ef20e11dd99db39f59e63b43c63413`。不import formal runner的failure auditor复核single-path commit、exact mismatch、absent work root、0 logs/artifacts、source/binary和attempt-01/02 manifests，22/22 PASS；audit file/self SHA为`aecda60ef9675024b6cdf116b490e9a62938cab9a771643037c633f99e16fdfc` / `9c6c1cd7bc830b7ba23f95afe503d88a74ceeb9ec6cc3a802951feb397c081c7`。下一步只允许为fresh attempt-04冻结execution-contract exact-array copy correction；C4 semantic tools与thresholds不变，新formal run仍需新exact authority。
