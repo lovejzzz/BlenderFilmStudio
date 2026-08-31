@@ -233,8 +233,20 @@
       "rootCause": "Publication checkout ran before the fresh objects symlink was created; skip-smudge checkout created an empty hash-directory skeleton and the runner stopped before LFS checkout"
     },
     "activeCorrection": {
-      "status": "C2_ORDERING_CORRECTION_AND_EXACT_OWNER_AUTHORIZATION_REQUIRED",
+      "status": "C2_TOOLS_FROZEN_AWAITING_EXACT_OWNER_AUTHORIZATION",
       "requiredChange": "Create the exact retained-objects symlink after no-checkout local clone and before publication checkout",
+      "authorizationRequest": "specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json",
+      "authorizationRequestSha256": "2c1747ef1b70c73b4fa3ec24b744c77afaa93d5b25e853602f22e99bbf77b3fb",
+      "authorizationDocument": "research/2026-08-31-ai-native-studio-pb1-validation-only-c2-authorization-request-v0.6.zh-CN.md",
+      "authorizationDocumentSha256": "f31d21329e56bef2e8651db24993e85ac6c8a9ea8c7f520b296fd5aa857bc836",
+      "toolFreezeDocument": "research/2026-08-31-ai-native-studio-pb1-validation-only-c2-tool-freeze-v0.7.md",
+      "toolFreezeDocumentSha256": "81ebfd8a72e1c2fb654ddf0a20474f5a9fb1f7174814321a99e8840ce5c3c60e",
+      "runner": "scripts/run-ai-native-studio-pb1-validation-only-c2.mjs",
+      "runnerSha256": "b4169ab6e97b8caef412afedbd8cee9381db70ea95f319a9cd34aa3e2e9fdd50",
+      "runnerSelfTest": "PASS_10_OF_10",
+      "independentAuditor": "scripts/audit-ai-native-studio-pb1-validation-only-c2.mjs",
+      "independentAuditorSha256": "c4b43343d59639cb8ddf4f0360cdddee2971cdce4ccfa0069b7d997c8d78c7b9",
+      "independentAuditorSelfTest": "PASS_6_OF_6",
       "attempt02MustRemainImmutable": true,
       "attempt03FormalRootAuthorized": false,
       "anotherLocalEngineCloneAuthorized": false,
@@ -563,7 +575,10 @@
     "specs/ai-native-studio-pb1-validation-only-c1-execution.v0.5.json",
     "research/2026-08-31-ai-native-studio-pb1-attempt-02-retained-failure.md",
     "experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/verdict.json",
-    "experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/audit-failure-c1.json"
+    "experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/audit-failure-c1.json",
+    "research/2026-08-31-ai-native-studio-pb1-validation-only-c2-authorization-request-v0.6.zh-CN.md",
+    "specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json",
+    "research/2026-08-31-ai-native-studio-pb1-validation-only-c2-tool-freeze-v0.7.md"
   ],
   "firstCommands": [
     "git status --short",
@@ -579,6 +594,7 @@
     "cat experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json",
     "cat experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/verdict.json",
     "cat experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/audit-failure-c1.json",
+    "cat specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json",
     "read the PB.1 attempt-02 retained failure and obtain a new exact C2 authorization before creating attempt-03 roots, cloning, materializing, building or starting the product"
   ],
   "resourcePolicy": {
@@ -621,6 +637,7 @@
       "one clean native arm64 build and at most two zero-render identity/configuration starts only if exactly authorized",
       "zero film-engine source edits, commits, refs, tags, releases, signing, notarization, DMG actions or PB.2-PB.7 work"
     ],
-    "formalAttempt03Authorized": false
+    "formalAttempt03Authorized": false,
+    "exactAuthorizationTextSource": "specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json#exactRequestedAuthorizationTextZhCN"
   }
 }

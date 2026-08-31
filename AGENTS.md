@@ -140,6 +140,13 @@ checkout. Tool preparation may not create a formal root. A new exact owner grant
 required before attempt-03 may consume another local clone, materialization,
 dependency clone, build or product start.
 
+The active C2 request is
+`specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json`.
+Its runner and independent auditor are frozen at SHA-256 `b4169ab6…` and
+`c4b43343…`, with 10/10 and 6/6 self-tests. The request permits no action by
+itself. Require its exact bounded attempt-03 authorization text; general permission
+to continue is insufficient.
+
 ## Cold-start execution rules
 
 - First run the read-only host check:

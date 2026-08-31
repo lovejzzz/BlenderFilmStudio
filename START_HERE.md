@@ -201,6 +201,13 @@ both a research notebook and an executable evidence base. Read this page,
     and [`audit-failure-c1.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-30-mac-m2max-attempt-01/audit-failure-c1.json)
     — retained pre-build metric failure, retained first auditor failure and accepted
     29/29 failure audit.
+15. [`research/2026-08-31-ai-native-studio-pb1-attempt-02-retained-failure.md`](./research/2026-08-31-ai-native-studio-pb1-attempt-02-retained-failure.md),
+    [`verdict.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/verdict.json)
+    and [`audit-failure-c1.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/audit-failure-c1.json)
+    — retained pre-materialization ordering failure and accepted 24/24 failure audit.
+16. [`research/2026-08-31-ai-native-studio-pb1-validation-only-c2-authorization-request-v0.6.zh-CN.md`](./research/2026-08-31-ai-native-studio-pb1-validation-only-c2-authorization-request-v0.6.zh-CN.md)
+    and [`specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json`](./specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json)
+    — exact fresh attempt-03 request and the only active PB.1 correction gate.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
@@ -275,7 +282,8 @@ before its symlink, LFS materialization, dependency clone, native build or produ
 starts. C2 must move symlink creation before publication checkout, preserve attempt-02
 unchanged, use a fresh attempt-03 root, and retain every no-network/no-engine-write/
 zero-render/PB.2-PB.7 prohibition. General permission to continue does not authorize
-the new formal root or any of those still-unconsumed operations.
+the new formal root or any of those still-unconsumed operations. The exact request is
+frozen in `specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json`.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires
