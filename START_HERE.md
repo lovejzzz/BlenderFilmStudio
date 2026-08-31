@@ -138,8 +138,12 @@ both a research notebook and an executable evidence base. Read this page,
   compile → semantic scene → typed workspace save → reopen/Expert-state oracle.
   A future exact run is capped at four zero-render Blender starts and two
   proposal/BuildPlan writes. Static audit passed 28/28; the non-authorized v0.3
-  template was rejected before root creation. The exact authorization scope is
-  frozen, but PB.3 formal execution and PB.4–PB.7 remain unauthorized.
+  template was rejected before root creation. C1 v0.3 then closes a completion-
+  audit finding by enforcing exclusive logs, rejecting symlinks and independently
+  recomputing the unchanged 2 GiB / 64 MiB root ceilings. C1 static audit passed
+  25/25; its v0.4 template is also inert. The superseding exact authorization
+  request is `specs/ai-native-studio-pb3-validation-only-authorization-request-c1.v0.3.json`;
+  PB.3 formal execution and PB.4–PB.7 remain unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -352,12 +356,13 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-PB.2 validation-only is closed `PASS`; PB.3 readiness and inert formal tools are
-frozen. The next checkpoint is an exact committed PB.3 execution contract after
-explicit PB.3 authorization, followed by one fresh attempt and its independent
-audit. PB.3–PB.7 formal execution is not yet authorized. Do not start Blender,
-execute proposals, write BuildPlans, mutate `film-engine`, or use
-proposal-originated network/filesystem authority under the consumed PB.2 scope.
+PB.2 validation-only is closed `PASS`; PB.3 readiness and the C1-hardened inert
+formal tools are frozen. The next checkpoint is an exact committed PB.3 C1
+execution contract after explicit PB.3 C1 authorization, followed by one fresh
+attempt and its independent audit. PB.3–PB.7 formal execution is not yet
+authorized. Do not start Blender, execute proposals, write BuildPlans, mutate
+`film-engine`, or use proposal-originated network/filesystem authority under the
+consumed PB.2 scope.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

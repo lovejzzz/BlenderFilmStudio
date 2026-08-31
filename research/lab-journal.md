@@ -6149,3 +6149,13 @@ Date: 2026-08-31 · Type: PB.3 PRE-AUTHORIZATION TOOL FREEZE · Formal Blender s
 v0.2把combined oracle收敛为每个benchmark两个stage：build stage完成inspect、exact approved BuildPlan write、semantic scene build、typed workspace mapping、background Expert-state roundtrip与save；reopen stage复核canonical/semantic/provenance identity、workspace persistence并再次roundtrip。B01/B02总上限固定为4 starts / 2 proposal executions / 2 BuildPlan writes / 2 scene builds / 2 saves / 2 reopens，render/network/engine write为0。空actors映射到exact Character sentinel `NONE / No Character`。
 
 Runner只有同时具备`--execute`、exact v0.3 execution status、显式PB.3原文、parent+committed-bytes绑定、clean source/research、exact binary/tools和fresh roots才会越过authority gate。独立static auditor验证五份tool hash、AST no-network、offline/disable-autoexec、exclusive writes、self-test和draft template拒绝，28/28 PASS，self hash `db8e287f59b55fa741970422277b7588aa6533972fda31116da8e40a901079bb`。Formal roots仍absent，所有formal计数为0。PB.3 exact authorization request已冻结；general continue不构成formal authority。
+
+## J-501 · PB.3 C1 resource-enforcement tool freeze PASS
+
+Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL CORRECTION · Formal Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+完成性审计发现v0.2虽然声明work root 2 GiB与evidence root 64 MiB上限，runner没有实际执行，independent auditor也没有独立重算。由于formal roots从未创建、Blender从未启动，该缺口未污染任何正式结果；v0.2 combined oracle和28/28静态证据保留。
+
+C1 wrapper固定base runner/auditor exact hashes，增加四组process logs exclusive-create、两个root全树symlink拒绝、regular-file byte精确计算、PASS receipt写入前projection与2 GiB / 64 MiB fail-closed上限。C1 independent wrapper重算work/evidence bytes、验证runner projection并在自己的audit写入前执行同一evidence ceiling。Runner self-test通过；不import formal runner/auditor的static auditor验证base/C1/tool hashes、AST no-network/no-bpy、身份、fresh-root absence与全部零计数，25/25 PASS，audit self hash `1eecc7dd22dc4af4bd5196294ab81b99604334c38e33c43c1e1c146e30683b05`。
+
+Superseding C1 authorization request为`specs/ai-native-studio-pb3-validation-only-authorization-request-c1.v0.3.json`。其execution template仍为`DRAFT_AUTHORIZATION_MISSING`；general continue、PB.2授权或模板自身均不能创建PB.3 authority。PB.3 formal roots和PB.4–PB.7继续为0/unauthorized。

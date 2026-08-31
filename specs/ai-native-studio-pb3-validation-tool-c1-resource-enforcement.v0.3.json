@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationToolC1ResourceEnforcement.v0.3",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-TOOL-C1-RESOURCE-ENFORCEMENT-v0.3",
+  "status": "FROZEN_INERT_C1_RESOURCE_ENFORCEMENT",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "bfa41f5a49c2b0425c13d9b1a0ed9939063c97ba",
+  "finding": {
+    "id": "PB3_V02_RESOURCE_CEILINGS_DECLARED_NOT_ENFORCED",
+    "severity": "TOOLING_CORRECTION_REQUIRED_BEFORE_FORMAL_EXECUTION",
+    "description": "The v0.2 contract declared work/evidence size ceilings, but the runner did not enforce them and the independent auditor did not recompute them.",
+    "formalRunsAffected": 0,
+    "blenderStartsAffected": 0
+  },
+  "base": {
+    "toolFreeze": "specs/ai-native-studio-pb3-validation-tool-freeze.v0.2.json",
+    "toolFreezeSha256": "52e2dda7a6d0846ad1ed2c89d466b4b848165cb38763621d17cbf08bc583009a",
+    "runner": "scripts/run-ai-native-studio-pb3-validation.py",
+    "runnerSha256": "5457b77ea4bea13d7fa3a1c123b859dadda2946e68b178d116c4f2eaa46a54f4",
+    "independentAuditor": "scripts/audit-ai-native-studio-pb3-validation.py",
+    "independentAuditorSha256": "cc3fe2a9f7739085606bf4ea4ed5b239ab2f5da7ae142c16d5a004a826e5c4c0"
+  },
+  "tools": {
+    "runnerWrapper": "scripts/run-ai-native-studio-pb3-validation-c1.py",
+    "runnerWrapperSha256": "4261866539a404766027fbe1fe737686857529f811a03bd8691db008e35b133a",
+    "independentAuditorWrapper": "scripts/audit-ai-native-studio-pb3-validation-c1.py",
+    "independentAuditorWrapperSha256": "ccbfaa084499985ef1e25411b239f0ddb21d2c79cfcdc4bc8b8e197e67c66556",
+    "staticAuditor": "scripts/audit-ai-native-studio-pb3-tool-freeze-c1.py",
+    "staticAuditorSha256": "cd20a1e2ca4923a3172cf03b06f43d1cfa8195da7ec70a49e2a74a0b8b6ee271"
+  },
+  "source": {
+    "head": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6"
+  },
+  "binary": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "sha256": "4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59"
+  },
+  "paths": {
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-01",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-01"
+  },
+  "resourceEnforcement": {
+    "maximumWorkRootBytes": 2147483648,
+    "maximumEvidenceRootBytes": 67108864
+  },
+  "corrections": [
+    "Write all four formal Blender stdout/stderr logs with O_CREAT|O_EXCL.",
+    "Reject symbolic paths anywhere below work or evidence roots.",
+    "Compute exact regular-file bytes before the final runner receipt.",
+    "Project the final receipt bytes and stop before a PASS write if either root exceeds its frozen ceiling.",
+    "Record the exact work bytes, pre-receipt evidence bytes, receipt bytes and projected final evidence bytes.",
+    "Have the independent auditor recompute the root sizes, verify the receipt projection, project its own audit bytes and enforce the unchanged ceiling."
+  ],
+  "unchanged": {
+    "combinedOracle": true,
+    "fixturesAndHashes": true,
+    "maximumBlenderStarts": 4,
+    "maximumProposalExecutions": 2,
+    "maximumBuildPlanWrites": 2,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0,
+    "authorizationRequired": true
+  },
+  "currentCounts": {
+    "pb3FormalRootsCreated": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "executionTemplate": "specs/ai-native-studio-pb3-validation-execution-c1-template.v0.4.json",
+  "claimCeiling": "C1 proves only that the unchanged PB.3 v0.2 formal design now enforces and independently audits its declared work/evidence byte ceilings and exclusive log writes. It grants no PB.3 execution authority and starts no Blender process."
+}

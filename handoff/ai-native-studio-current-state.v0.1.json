@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_C1_TOOL_FREEZE_PASS",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -437,7 +437,7 @@
       "pb2FormalExecutionAuthorizationConsumed": true
     },
     "pb3Readiness": {
-      "status": "READINESS_PREREGISTERED_TOOL_FREEZE_PASS_FORMAL_EXECUTION_UNAUTHORIZED",
+    "status": "READINESS_PREREGISTERED_C1_TOOL_FREEZE_PASS_FORMAL_EXECUTION_UNAUTHORIZED",
       "contract": "specs/ai-native-studio-pb3-readiness-preregistration.v0.1.json",
       "contractFileSha256": "6ab0dd3a9631091f6210f54215cfdf5bebf97a13dd2330cebff73665aa0c71b7",
       "researchDocument": "research/2026-08-31-ai-native-studio-pb3-readiness-preregistration-v0.1.zh-CN.md",
@@ -485,7 +485,32 @@
           "engineRemoteWrites": 0,
           "networkCalls": 0
         },
+      "formalRootsExist": false,
+      "c1ResourceEnforcement": {
+        "status": "PASS_STATIC_25_OF_25_INERT",
+        "finding": "PB3_V02_RESOURCE_CEILINGS_DECLARED_NOT_ENFORCED",
+        "contract": "specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json",
+        "contractFileSha256": "b7b4c77009ccaf7dfa17efd9fa9559cbc402b25f91f9cc9af1bd5e0e4ca4a1c0",
+        "researchDocument": "research/2026-08-31-ai-native-studio-pb3-c1-resource-enforcement-v0.3.zh-CN.md",
+        "researchDocumentFileSha256": "a392d3f6fc2e850972de2f0e3dfbb124accb90449d6412b4bbfbffa9895edcd7",
+        "runner": "scripts/run-ai-native-studio-pb3-validation-c1.py",
+        "runnerFileSha256": "4261866539a404766027fbe1fe737686857529f811a03bd8691db008e35b133a",
+        "independentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c1.py",
+        "independentAuditorFileSha256": "ccbfaa084499985ef1e25411b239f0ddb21d2c79cfcdc4bc8b8e197e67c66556",
+        "staticAuditor": "scripts/audit-ai-native-studio-pb3-tool-freeze-c1.py",
+        "staticAuditorFileSha256": "cd20a1e2ca4923a3172cf03b06f43d1cfa8195da7ec70a49e2a74a0b8b6ee271",
+        "executionTemplate": "specs/ai-native-studio-pb3-validation-execution-c1-template.v0.4.json",
+        "executionTemplateFileSha256": "2d0447d025a7c7a2d7a619a61734c9c86dc7140318f364e3bf6e7cbe64f18abb",
+        "staticAudit": "experiments/ai-native-studio-phase-b/PB.3-c1-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+        "staticAuditFileSha256": "2ce3741249e6d9ad1627f0c6b80274302f66cfeef4b96c46dd17a64aacade09d",
+        "staticAuditHash": "1eecc7dd22dc4af4bd5196294ab81b99604334c38e33c43c1e1c146e30683b05",
+        "checks": "25/25",
+        "maximumWorkRootBytes": 2147483648,
+        "maximumEvidenceRootBytes": 67108864,
+        "authorizationRequest": "specs/ai-native-studio-pb3-validation-only-authorization-request-c1.v0.3.json",
+        "authorizationRequestFileSha256": "6543bd0994135a68ce244157a20db829de58014b0c4f684a11e8393458bfe20e",
         "formalRootsExist": false
+      }
       }
     },
     "activeCorrection": {
@@ -495,7 +520,7 @@
       "phaseBSourceMutationAuthorized": false,
       "pb2ThroughPb7Authorized": false,
       "nextGate": "PB.3",
-      "nextGateStatus": "PB3_TOOL_FREEZE_PASS_AWAITING_EXPLICIT_FORMAL_AUTHORIZATION"
+    "nextGateStatus": "PB3_C1_TOOL_FREEZE_PASS_AWAITING_EXPLICIT_FORMAL_AUTHORIZATION"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -871,16 +896,16 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB1_VALIDATION_ONLY_C2_AUTHORIZATION",
-    "result": "A frozen C2 ordering correction plus an explicit owner decision for fresh attempt-03",
+    "gate": "PB3_VALIDATION_ONLY_C1_AUTHORIZATION",
+    "result": "An exact committed PB.3 C1 execution contract followed by one fresh bounded attempt and independent audit",
     "requiredArtifacts": [
-      "versioned runner that installs the exact retained-objects symlink before publication checkout",
-      "fresh attempt-03 roots and one additional local-only engine clone only if exactly authorized",
-      "zero-network LFS materialization and exact local dependency clone only if exactly authorized",
-      "one clean native arm64 build and at most two zero-render identity/configuration starts only if exactly authorized",
-      "zero film-engine source edits, commits, refs, tags, releases, signing, notarization, DMG actions or PB.2-PB.7 work"
+      "explicit owner authorization matching the superseding C1 request",
+      "new immutable execution contract binding the committed C1 correction and wrappers",
+      "one fresh work root capped at 2147483648 bytes and one fresh evidence root capped at 67108864 bytes",
+      "at most four zero-render Blender starts and two exact B01/B02 proposal/BuildPlan executions",
+      "zero film-engine source/ref/tag/release mutation, engine remote write, network, rendering, signing, notarization, DMG work or PB.4-PB.7 work"
     ],
-    "formalAttempt03Authorized": false,
-    "exactAuthorizationTextSource": "specs/ai-native-studio-pb1-validation-only-c2-authorization-request.v0.6.json#exactRequestedAuthorizationTextZhCN"
+    "formalAttempt01Authorized": false,
+    "exactAuthorizationTextSource": "specs/ai-native-studio-pb3-validation-only-authorization-request-c1.v0.3.json#requestedAuthorization.exactText"
   }
 }

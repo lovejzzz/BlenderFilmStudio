@@ -149,9 +149,16 @@ The combined oracle allows a future exact maximum of four zero-render Blender
 starts, two B01/B02 proposal executions, two BuildPlan writes, two semantic
 scene builds, two workspace saves and two reopens. Static audit passes 28/28
 with self hash `db8e287f...`; the draft execution template was rejected before
-root creation. The exact authorization request is
-`specs/ai-native-studio-pb3-validation-only-authorization-request.v0.2.json`.
-Do not turn the template into authority or create PB.3 formal roots from a
+root creation. A completion audit then found that v0.2 declared but did not
+enforce its work/evidence byte ceilings. The active C1 correction is
+`specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json`,
+SHA-256 `b7b4c770...`. It adds exclusive process logs, symlink rejection and
+independently recomputed 2 GiB / 64 MiB ceilings without changing the combined
+oracle or run counts. Its static audit passes 25/25 with self hash
+`1eecc7dd...`; formal roots and all formal counts remain zero. The superseding
+exact authorization request is
+`specs/ai-native-studio-pb3-validation-only-authorization-request-c1.v0.3.json`.
+Do not turn either template into authority or create PB.3 formal roots from a
 general continue instruction. PB.3 formal execution and PB.4–PB.7 remain
 unauthorized.
 
