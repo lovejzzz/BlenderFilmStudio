@@ -6071,3 +6071,11 @@ v0.4把attempt-01的两个harness结论转成最小、可独立复算的correcti
 LFS correction不再把fresh clone的storage root直接绑定retained storage；拟议attempt-02只在fresh local storage的`objects`位置建立一个指向retained immutable objects的symlink，使checkout tmp留在fresh root。retained object subtree固定6,488 files / 810,236,112 bytes / manifest `f392cbbc…`，attempt-01现有3,918个零字节tmp files完整保留且不授权清理。
 
 由于原授权的一次public clone与一次materialization已经消耗，新请求明确禁止第二次public network clone，只请求一次从retained attempt-01 source的local-only Git clone、一个fresh objects symlink、一次additional zero-network materialization，以及尚未使用的一次dependency clone/build与最多两次zero-render starts。engine source/commit/ref/tag、remote write、LFS network、release/sign/notary/DMG和PB.2–PB.7继续0/false。没有owner逐字授权时，attempt-02 roots保持absent。
+
+## J-492 · PB.1 C1 local-only runner / auditor tool freeze
+
+Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL FREEZE · Attempt-02 external operations: 0
+
+新增C1 runner接受显式`--contract`，所以当前v0.4 request保持`authorization.granted=false`时默认preflight fail-closed；未来owner授权只需新增execution contract，不必临时修改工具。runner只实现两项冻结修正：14 text paths=837/64加两个exact pointer object transitions，以及fresh local LFS storage中只把`objects` symlink指向retained immutable objects、tmp留在attempt-02。正式计数固定local engine clone/symlink/materialization/dependency/build/starts为1/1/1/1/1/2，public network clone/render/engine write/LFS network/release/sign/notary/DMG/PB.2–PB.7/model均0。
+
+runner/auditor SHA-256分别为`8b9489d625a5865f3e4304c01480dbcc966ab033e69a80054fe9ab87cf94ec9c`与`58b1b3b0971d22a31d113de8a25384be3e8807e4d99a0f74739a54caede9ec7c`。runner pure self-test 9/9、independent auditor self-test 5/5、Node syntax与ESLint全部PASS。tool freeze期间attempt-02 external/evidence roots继续absent，local clone/materialization/dependency/build/product start全部0。

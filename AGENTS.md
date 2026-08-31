@@ -132,6 +132,11 @@ It permits no action by itself. General permission to continue does not authoriz
 another checkout or materialization; require the exact bounded C1 attempt-02 owner
 authorization before creating its external or evidence root.
 
+The proposed v0.5 C1 runner and independent auditor are frozen and self-tested,
+but tool availability is not authorization. They accept a separate versioned
+`--contract`; do not execute them until a new contract records the exact owner grant
+and the research tool-freeze commit is pushed and clean.
+
 ## Cold-start execution rules
 
 - First run the read-only host check:
