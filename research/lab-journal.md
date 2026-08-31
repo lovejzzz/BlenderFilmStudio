@@ -6251,3 +6251,13 @@ C5/C5-C1先冻结attempt-03 exact-array correction和C4 auditor不存在`c4Corre
 Static audit 29/30 FAIL，唯一false为`inertTemplateRejected`。Runner确实nonzero退出，但C5 local authority callback只接受2个参数，而unchanged C4 runner以`(c3, c4_path, c4_contract)`调用3个参数，先触发`TypeError`，未到expected safe status rejection。Audit file/self SHA为`26216389760bf6e5499cadb1f9697265ae590d1cd193c2849d72abf3b320a7cb` / `0d8cdbccf81c4d55b1fc6211454905ac5b011218773a34888b9f1e4b152c3ce6`。Attempt-04 roots前后absent，所有formal counts为0。
 
 下一版本只允许创建versioned C2 runner，在callback signature增加一个unused C3参数；不得编辑failed runner或evidence，不得改变auditor、helper、corrected tool、threshold或authority。Attempt-04仍未授权。
+
+## J-511 · PB.3 C5-C2 inert tool freeze PASS
+
+Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL FREEZE · Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C2 versioned runner相对retained failed C5 runner只有一行差异：`c5_authority` callback增加未使用的`_c3`参数以匹配unchanged C4 caller；runner SHA为`9b70c3171ce05d811bda767a11b78b82a17a953ae556b93f3200f7cc968fdf15`。Independent C5 auditor与static auditor保持原hash `6b1983ef...` / `2344da21...`，C4 helper、corrected tool和所有semantic/resource/no-artifact阈值不变。
+
+新tool freeze/template/request SHA依次为`0e8c3d339ee4bb2fc82683637ae9458c43b94016becc13faab6106ed38a6a58e` / `34fa18da24e641d4d63999afed578c869332690e2ac76f1aa81ffb2b18e56bf0` / `3ef853ff7b8293d0347390f8445b35faba32947451fdf30b91f3061aa11f1d14`。Static/negative audit 30/30 PASS；file/self SHA为`6567e98fb9c0aa94115226c68a46ef548fe71e8b7a834158cbf43c4daa911660` / `e2af854d4ec613a0397520e0ed1d12c4275b667d09817d8a06a13988e365ffa3`，second fresh `/tmp` rerun byte-identical。Attempt-04 roots前后absent，Blender/proposal/BuildPlan/render/network/engine writes全0。
+
+Active exact request升级为`specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json`。Template仍inert；general permission或已消耗C4 authority均不足以启动attempt-04，PB.4-PB.7继续locked。

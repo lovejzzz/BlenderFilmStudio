@@ -191,25 +191,29 @@ the C3 audit is 21/23 because its argv reconstruction expected an absolute
 `--tool-contract` while the recorded processes used the authorized relative
 spelling. Read
 `research/2026-08-31-ai-native-studio-pb3-c3-attempt-02-retained-failure.md`.
-Do not alter or rerun attempt-01/attempt-02. A future correction must preserve
-all thresholds, normalize the runner argv spelling before spawn, and prevent
-thumbnail creation by setting Blender file preview type to `NONE`; it requires
-a new inert tool freeze and fresh authorization. That boundary is preregistered
-at `specs/ai-native-studio-pb3-validation-c4-harness-correction.v1.1.json`,
-SHA-256 `194d3e9d...`. It grants no execution authority; the future attempt-03
-roots must remain absent through tool/static-audit freeze. Initial C4 static
-audit is a retained 31/32 failure: the draft execution was safely rejected at
-the earlier status gate, while the static test expected a later authorization-
-text message. C1 v1.3 permits only that message assertion correction in a new
-static-auditor path; runner, independent auditor, helper, tool and thresholds
-remain frozen. C4-C1 v1.3 now passes static audit 32/32 with self hash
-`c323b9ce...`; it proves the exact two-line helper diff, two-field tool diff,
-absolute-path normalization, unchanged all-root artifact rejection, both
-retained manifests and zero formal counts. Attempt-03 roots remain absent. The
-active exact request is
-`specs/ai-native-studio-pb3-validation-only-authorization-request-c4.v1.2.json`.
-General continuation is insufficient; attempt-03 and PB.4–PB.7 remain
-unauthorized.
+Do not alter or rerun attempt-01/attempt-02. C4 froze absolute tool-contract
+argv and file-preview suppression without relaxing thresholds, then passed its
+inert static audit 32/32. Its exact request was approved and consumed by
+attempt-03, which stopped before root creation or Blender start because the
+execution contract added one `this` token to `stillUnauthorized[0]`. Admission
+also made one disclosed read-only remote identity query, exceeding the zero-
+network ceiling. Retain attempt-03 evidence immutable; its independent failure
+audit passes 22/22 with self hash `9c6c1cd7...`.
+
+The active inert correction is now C5-C2. It preserves the unchanged C4
+semantic runner/helper and all thresholds, copies the corrected tool's
+`stillUnauthorized` array exactly, independently binds the real
+`c3CorrectionSha256` receipt field, and verifies retained attempt-01/02/03.
+The first C5 static attempt is retained at 29/30 for a callback-arity defect.
+The versioned C2 runner changes exactly one signature line by accepting an
+unused `_c3` argument. Tool freeze
+`specs/ai-native-studio-pb3-validation-c5-c2-execution-tool-freeze.v1.10.json`
+now passes static/negative audit 30/30 with self hash `e2af854d...`; attempt-04
+roots remain absent and every formal count is zero. The active exact request is
+`specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json`.
+General continuation is insufficient; attempt-04 and PB.4–PB.7 remain
+unauthorized. Do not perform a remote admission query for the future formal
+attempt.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

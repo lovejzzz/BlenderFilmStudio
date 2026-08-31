@@ -159,8 +159,17 @@ both a research notebook and an executable evidence base. Read this page,
   B01/B02 semantic/workspace operations completed, but the run is retained
   `FAIL`: base audit 17/18 found two automatic isolated-HOME thumbnail PNGs;
   C3 audit 21/23 also found relative-versus-absolute `--tool-contract` argv
-  spelling. Attempt-01 and attempt-02 are immutable; PB.4–PB.7 remain
-  unauthorized.
+  spelling. C4 corrected those two harness defects and passed static 32/32, but
+  its approved attempt-03 stopped before root creation because the execution
+  contract added one token to the frozen `stillUnauthorized` array. One
+  disclosed read-only remote admission query also exceeded the zero-network
+  ceiling. Attempt-03 failure audit passed 22/22. C5 then froze exact-array,
+  retained-attempt and real receipt-field binding. Its first static attempt is
+  retained at 29/30 for callback arity; the versioned C2 runner changes one
+  signature line and now passes static/negative audit 30/30. The active request
+  is `specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json`.
+  Attempt-04 roots remain absent; attempts 01–03 are immutable and PB.4–PB.7
+  remain unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -373,15 +382,15 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-PB.2 validation-only is closed `PASS`; PB.3 attempt-01 and attempt-02 are
-retained harness failures. Attempt-02 completed all four zero-render semantic
-processes but failed frozen postconditions at 17/18 base and 21/23 C3 audit.
-The C4-C1 inert correction now passes 32/32 static checks: exact argv
-normalization and thumbnail prevention are frozen without relaxing the
-no-render-artifact threshold. The next checkpoint is exact C4 attempt-03
-authorization. Attempt-03 roots remain absent and no fresh execution is
-authorized. Do not retry either formal root, mutate `film-engine`, or begin
-PB.4–PB.7.
+PB.2 validation-only is closed `PASS`; PB.3 attempt-01, attempt-02 and
+attempt-03 are retained harness failures. Attempt-02 completed all four zero-
+render semantic processes; attempt-03 stopped before creating a work root or
+starting Blender. The C5-C2 inert correction now passes 30/30 static checks and
+keeps the C4 semantic/helper corrections, exact no-render-artifact threshold,
+three retained attempts and zero-network ceiling frozen. The next checkpoint
+is exact C5-C2 attempt-04 authorization. Attempt-04 roots remain absent and no
+fresh execution is authorized. Do not retry a retained formal root, query the
+engine remote during admission, mutate `film-engine`, or begin PB.4–PB.7.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires
