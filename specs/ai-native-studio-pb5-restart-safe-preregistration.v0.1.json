@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pb5RestartSafePreregistration.v0.1",
+  "contractId": "PB5-RESTART-SAFE-JOB-CONTROL-2026-08-31",
+  "snapshotDate": "2026-08-31",
+  "status": "PREREGISTERED_BEFORE_PRODUCT_MUTATION",
+  "parentResearchCommit": "806f61c0872fae93cee96612e44543c2273c7a78",
+  "question": "Can the product resume an interrupted approved render job by executing only the first unfinished immutable stage, then make a completed resume a zero-render no-op, while stale, forged and out-of-budget state rejects before any render call?",
+  "standingAuthority": {
+    "contract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "repeatedOwnerSentenceRequired": false
+  },
+  "baselines": {
+    "filmEngineMain": "df5c296789a8d57cd84f4f8fb586bb28243f3fa5",
+    "pb4": {
+      "acceptedEvidenceRoot": "experiments/ai-native-studio-phase-b/PB.4-2026-08-31-mac-m2max-attempt-02",
+      "receiptHash": "687f2759637b45e5354264283fcc4b8e7539394ae773b8c74a14c6211356078a",
+      "publicationReceiptHash": "e7b94dfe97534de3c3de8b16816ac0495dc8bd1ea15c710e2ebe0c6128b96453",
+      "previewSha256": "bcdaf54d543a6c7805024931f998ae910b635fa7c0b9789c3d6ab7b4a8d0c24e",
+      "finalSha256": "93955cfbf2abf885e04ac39a811f1e1e293275c3a968053085b40282458b6964"
+    },
+    "fixture": {
+      "id": "B01",
+      "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-06/b01/artifacts/scene.blend",
+      "sourceBlendSha256": "64026648bde5f6128e2642797a8c8a4aa867286f20c633c80717a7093b1c012b",
+      "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+      "semanticStructureSha256": "e8c55fb73737f1871ac0008faa705dc204ebfe5bac471323cbb0a2d31435b4f8",
+      "mustRemainByteExact": true
+    }
+  },
+  "productIncrement": {
+    "goal": "A visible Resume Next Approved Stage control backed by a product-owned immutable-stage planner, not an external runner convention.",
+    "allowedSourcePaths": [
+      "scripts/modules/film_studio_render.py",
+      "scripts/startup/bl_operators/film_studio_workspace.py",
+      "scripts/startup/bl_ui/space_topbar.py"
+    ],
+    "maximumChangedPaths": 3,
+    "maximumAddedLines": 500,
+    "cOrCppPathsAllowed": 0,
+    "maximumEngineCommitsBeforePublication": 1,
+    "requiredCapabilities": [
+      "A v0.2 approved job binds an exact validity window, maximum two render calls, maximum 83886080 artifact bytes and immutable PREVIEW then FINAL order.",
+      "Resume planning verifies the manifest, source, completed stage receipts and artifact hashes before selecting the first unfinished stage.",
+      "A valid PREVIEW receipt makes resume select FINAL without rerendering PREVIEW; valid PREVIEW and FINAL receipts make resume COMPLETE with zero render calls.",
+      "The visible Film workspace exposes resume status, next stage, completed stages and last decision hash.",
+      "Stale authorization, forged completed-stage receipt and zero remaining render budget reject before bpy.ops.render.render."
+    ]
+  },
+  "jobControl": {
+    "schemaVersion": "bfs.filmStudioRenderJob.v0.2",
+    "notBefore": "2026-08-31T00:00:00Z",
+    "validUntil": "2027-08-31T23:59:59Z",
+    "maximumRenderCalls": 2,
+    "maximumArtifactBytes": 83886080,
+    "stageOrder": ["PREVIEW", "FINAL"],
+    "completedStagesImmutable": true,
+    "completeResumeIsNoOp": true
+  },
+  "formalSequence": [
+    {
+      "productStart": 1,
+      "action": "RESUME_NEXT",
+      "expectedStage": "PREVIEW",
+      "expectedRenderCalls": 1,
+      "expectedExitCode": 75,
+      "controlledInterruption": "after fsynced PREVIEW artifact, stage receipt and resume-decision receipt"
+    },
+    {
+      "productStart": 2,
+      "action": "RESUME_NEXT",
+      "expectedStage": "FINAL",
+      "expectedRenderCalls": 1,
+      "mustPreservePreviewBytesAndHash": true
+    },
+    {
+      "productStart": 3,
+      "action": "RESUME_NEXT",
+      "expectedStage": "COMPLETE",
+      "expectedRenderCalls": 0,
+      "mustPreserveBothArtifacts": true
+    },
+    {
+      "productStart": 4,
+      "action": "NEGATIVE_CONTROLS_AND_INDEPENDENT_AUDIT",
+      "expectedRenderCalls": 0
+    }
+  ],
+  "negativeControls": [
+    {
+      "id": "STALE_AUTHORIZATION",
+      "mutation": "self-valid manifest with validUntil before the observation time",
+      "expectedReason": "JOB_EXPIRED"
+    },
+    {
+      "id": "FORGED_COMPLETED_STAGE",
+      "mutation": "PREVIEW receipt content differs from its declared self hash",
+      "expectedReason": "PREVIEW_RECEIPT_INVALID"
+    },
+    {
+      "id": "OUT_OF_BUDGET",
+      "mutation": "self-valid approved job has maximumRenderCalls=0",
+      "expectedReason": "RENDER_BUDGET_EXHAUSTED"
+    }
+  ],
+  "renderProfiles": {
+    "preview": {
+      "engine": "BLENDER_EEVEE",
+      "frame": 1,
+      "resolution": [640, 360, 100],
+      "samples": 16,
+      "format": "PNG",
+      "colorMode": "RGBA",
+      "colorDepth": "8",
+      "output": "preview/preview.png"
+    },
+    "final": {
+      "engine": "CYCLES",
+      "device": "CPU",
+      "frame": 1,
+      "resolution": [640, 360, 100],
+      "samples": 32,
+      "seed": 24082601,
+      "animatedSeed": false,
+      "denoising": false,
+      "threadsMode": "FIXED",
+      "threads": 8,
+      "format": "OPEN_EXR_MULTILAYER",
+      "colorDepth": "16",
+      "codec": "ZIP",
+      "requiredPasses": ["Combined", "Depth", "Normal"],
+      "output": "final/final.exr"
+    }
+  },
+  "freshRoots": {
+    "externalRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.5-2026-08-31-mac-m2max-attempt-01",
+    "sourceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.5-2026-08-31-mac-m2max-attempt-01/source",
+    "buildRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.5-2026-08-31-mac-m2max-attempt-01/build",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.5-2026-08-31-mac-m2max-attempt-01/work",
+    "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.5-2026-08-31-mac-m2max-attempt-01"
+  },
+  "resourceCeilings": {
+    "observedFreeBytesAtPreregistration": 168626667520,
+    "minimumFreeReserveBytes": 107374182400,
+    "projectedSourceBuildAndRunBytes": 12884901888,
+    "requiredAdmissionBytes": 120259084288,
+    "maximumExternalRootBytes": 12884901888,
+    "maximumWorkBytes": 2147483648,
+    "maximumEvidenceBytes": 536870912,
+    "maximumConcurrentNativeProcesses": 1,
+    "maximumCleanBuilds": 1,
+    "maximumProductStarts": 4,
+    "maximumRenderCalls": 2,
+    "maximumBuildWallSeconds": 1200,
+    "maximumPreviewWallSeconds": 120,
+    "maximumFinalWallSeconds": 180
+  },
+  "receiptContract": {
+    "required": [
+      "source-and-build",
+      "four process receipts and eight exclusive logs",
+      "three immutable resume-decision receipts",
+      "preview and final stage receipts",
+      "interruption receipt",
+      "stale, forged and out-of-budget failure receipts",
+      "pixel and pass audit",
+      "cost receipt",
+      "work and evidence root manifests"
+    ],
+    "selfHashed": true,
+    "independentAuditMustNotImportProductRenderModule": true
+  },
+  "acceptance": [
+    "The three-path product patch stays within 500 added lines and builds cleanly from full-history film-engine main.",
+    "Start 1 exits 75 only after one PREVIEW render and fsynced immutable receipts; start 2 executes FINAL only and preserves PREVIEW byte-for-byte.",
+    "Start 3 returns COMPLETE with zero render calls and preserves both artifacts and receipts byte-for-byte.",
+    "Start 4 proves all three attacks reject before a render call and independently decodes the accepted pixels/passes without importing the product module.",
+    "Exactly one clean build, four product starts and two render calls occur; source, official configuration, roots and resources satisfy all frozen bounds."
+  ],
+  "publication": {
+    "engineBranch": "codex/pb5-restart-safe",
+    "ordinaryFastForwardMainPushAfterPass": true,
+    "forcePush": false,
+    "otherRefs": 0,
+    "tags": 0,
+    "releases": 0,
+    "lfsUploads": 0,
+    "binaryDistribution": 0
+  },
+  "stopRules": [
+    "Do not mutate PB.1, PB.3 or PB.4 retained roots.",
+    "Any source path outside the three allowed Python paths, any C/C++ path or more than 500 added lines stops before build.",
+    "Do not begin the clean build unless current free bytes exceed the 100 GiB reserve plus the full 12 GiB PB.5 projection.",
+    "Any source, manifest, completed-stage receipt, artifact, binary, OCIO or root mismatch stops before another render call.",
+    "Do not weaken timing, budget, stage-order, pixel/pass, negative-control or resource thresholds after observing output.",
+    "Do not begin PB.6, force-push, create another ref/tag/release, upload LFS, sign, notarize or distribute a binary."
+  ],
+  "specHash": "94546134cfda11cb66ee96ea0a688ee493cbfeff7bd7b3ea429a2b76725880e1"
+}

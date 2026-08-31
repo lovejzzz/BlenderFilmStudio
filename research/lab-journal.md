@@ -6367,3 +6367,11 @@ Fresh attempt-02 audit为25/25 PASS，file/self SHA `50afd3e4...` / `65e95266...
 Date: 2026-08-31 · Type: ORDINARY ENGINE PUBLICATION · Push attempts / ref updates / force / tags / releases: 1 / 1 / 0 / 0 / 0
 
 在research composite PASS并公开验证后，只读`ls-remote`确认`lovejzzz/film-engine main`仍为expected parent `4061e12b...`。随后一次ordinary non-force push将唯一ref `main`快进至validated PB.4 commit `df5c2967...`。推送后remote OID exact，三个raw source files通过non-browser HTTP与本地SHA逐字一致。LFS upload、other refs、tags、release、binary distribution、Developer ID signing和notarization全0。
+
+## J-524 · PB.5 restart-safe job control preregistration
+
+Date: 2026-08-31 · Type: PRODUCT MUTATION PREREGISTRATION · PB.5 builds / starts / renders: 0 / 0 / 0
+
+PB.5冻结product-owned immutable-stage resume planner与visible `Resume Next Approved Stage`：start-1完成并fsync PREVIEW后exit 75受控中断，start-2必须skip PREVIEW只做FINAL，start-3 COMPLETE no-op，start-4以零render复核stale/forged/out-of-budget三攻击并独立decode pixels/passes。总计上限1 clean build / 4 starts / 2 renders。
+
+源码仍限三个Python paths、≤500 additions、零C/C++。Fresh external/evidence roots，work/evidence 2 GiB / 512 MiB。Legacy F0 preflight因157 GiB < 160 GiB正确显示BLOCKED；PB.5 JIT projection冻结为12 GiB，100 GiB reserve + projection = 112 GiB，当前admitted但build前必须重算。Force/other refs/tags/releases/LFS/sign/notary/distribution/PB.6均0。
