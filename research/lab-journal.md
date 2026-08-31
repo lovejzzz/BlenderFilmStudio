@@ -6159,3 +6159,13 @@ Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL CORRECTION · Formal Blender st
 C1 wrapper固定base runner/auditor exact hashes，增加四组process logs exclusive-create、两个root全树symlink拒绝、regular-file byte精确计算、PASS receipt写入前projection与2 GiB / 64 MiB fail-closed上限。C1 independent wrapper重算work/evidence bytes、验证runner projection并在自己的audit写入前执行同一evidence ceiling。Runner self-test通过；不import formal runner/auditor的static auditor验证base/C1/tool hashes、AST no-network/no-bpy、身份、fresh-root absence与全部零计数，25/25 PASS，audit self hash `1eecc7dd22dc4af4bd5196294ab81b99604334c38e33c43c1e1c146e30683b05`。
 
 Superseding C1 authorization request为`specs/ai-native-studio-pb3-validation-only-authorization-request-c1.v0.3.json`。其execution template仍为`DRAFT_AUTHORIZATION_MISSING`；general continue、PB.2授权或模板自身均不能创建PB.3 authority。PB.3 formal roots和PB.4–PB.7继续为0/unauthorized。
+
+## J-502 · PB.3 C2 exact authority / evidence binding PASS
+
+Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL CORRECTION · Formal Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+继续完成性审计发现三项C1未独立证明条件：base authority gate只要求user text含`PB.3`而不绑定冻结逐字request；auditor未把receipt roots反向绑定`execution.authorizedRun`；auditor未重建四组exact argv或读取八份process logs。由于formal roots从未创建且Blender starts仍0，不影响任何正式结果。
+
+C2 runner在C1之前要求exact request text+SHA、explicit scope+time、execution commit单路径、request/C2 bytes已冻结于parent、五个formal arguments exact；C1 PASS后复核四组argv与八份log hashes。C2 auditor先运行完整C1/base audit，再独立复核authority/root/commit/process evidence，生成work/evidence canonical manifests并把最终audit纳入64 MiB projection。纯函数负控另证明runner/auditor argv exact一致且root/descendant symlink均fail-closed。
+
+Static auditor不import engine、不启动Blender，执行self-test和一次inert template rejection，29/29 PASS，audit self hash `f7babc9e28ed37ed53bdaff43e2cad0dbbf735e653c0fa614bf565960c2adffb`。Active exact request升级为`specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json`；general continue仍不足以创建PB.3 authority，PB.4–PB.7继续locked。

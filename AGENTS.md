@@ -155,10 +155,18 @@ enforce its work/evidence byte ceilings. The active C1 correction is
 SHA-256 `b7b4c770...`. It adds exclusive process logs, symlink rejection and
 independently recomputed 2 GiB / 64 MiB ceilings without changing the combined
 oracle or run counts. Its static audit passes 25/25 with self hash
-`1eecc7dd...`; formal roots and all formal counts remain zero. The superseding
-exact authorization request is
-`specs/ai-native-studio-pb3-validation-only-authorization-request-c1.v0.3.json`.
-Do not turn either template into authority or create PB.3 formal roots from a
+`1eecc7dd...`; formal roots and all formal counts remain zero.
+
+A second completion audit found that C1 did not exactly bind the frozen user
+authorization, receipt roots to `authorizedRun`, or the four argv/eight log
+files in the independent audit. The active C2 correction is
+`specs/ai-native-studio-pb3-validation-tool-c2-evidence-binding.v0.5.json`,
+SHA-256 `55642b2d...`. It requires exact authorization text/hash, a single-path
+execution commit, exact formal roots, argv/log verification and work/evidence
+manifests. Static audit passes 29/29 with self hash `f7babc9e...`. The
+superseding exact authorization request is
+`specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json`.
+Do not turn any template into authority or create PB.3 formal roots from a
 general continue instruction. PB.3 formal execution and PB.4–PB.7 remain
 unauthorized.
 

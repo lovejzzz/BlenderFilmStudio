@@ -142,7 +142,11 @@ both a research notebook and an executable evidence base. Read this page,
   audit finding by enforcing exclusive logs, rejecting symlinks and independently
   recomputing the unchanged 2 GiB / 64 MiB root ceilings. C1 static audit passed
   25/25; its v0.4 template is also inert. The superseding exact authorization
-  request is `specs/ai-native-studio-pb3-validation-only-authorization-request-c1.v0.3.json`;
+  request was then replaced by C2 after a second completion audit. C2 binds the
+  exact authorization text/hash, a single-path execution commit, authorized
+  roots, four exact argv, eight process logs and two root manifests. Its static
+  audit passed 29/29; the active request is
+  `specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json`.
   PB.3 formal execution and PB.4–PB.7 remain unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
@@ -356,9 +360,9 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-PB.2 validation-only is closed `PASS`; PB.3 readiness and the C1-hardened inert
-formal tools are frozen. The next checkpoint is an exact committed PB.3 C1
-execution contract after explicit PB.3 C1 authorization, followed by one fresh
+PB.2 validation-only is closed `PASS`; PB.3 readiness and the C2-hardened inert
+formal tools are frozen. The next checkpoint is an exact committed PB.3 C2
+execution contract after explicit PB.3 C2 authorization, followed by one fresh
 attempt and its independent audit. PB.3–PB.7 formal execution is not yet
 authorized. Do not start Blender, execute proposals, write BuildPlans, mutate
 `film-engine`, or use proposal-originated network/filesystem authority under the

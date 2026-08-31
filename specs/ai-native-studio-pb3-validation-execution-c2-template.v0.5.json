@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationExecution.v0.3",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-EXECUTION-C2-TEMPLATE-v0.5",
+  "status": "DRAFT_AUTHORIZATION_MISSING",
+  "snapshotDate": "2026-08-31",
+  "executionParentResearchCommit": null,
+  "toolFreeze": {
+    "uri": "specs/ai-native-studio-pb3-validation-tool-freeze.v0.2.json",
+    "sha256": "52e2dda7a6d0846ad1ed2c89d466b4b848165cb38763621d17cbf08bc583009a"
+  },
+  "toolCorrection": {
+    "uri": "specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json",
+    "sha256": "b7b4c77009ccaf7dfa17efd9fa9559cbc402b25f91f9cc9af1bd5e0e4ca4a1c0"
+  },
+  "toolC2Correction": {
+    "uri": "specs/ai-native-studio-pb3-validation-tool-c2-evidence-binding.v0.5.json",
+    "sha256": "55642b2d549811ef35bcda3b91c941a0584d1698d3354de842a426de04990cec"
+  },
+  "authorizationRequest": {
+    "uri": "specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json",
+    "sha256": "44e52a5619967d79e26258ebfcc123a28401f69afc05159174f2b911a4a963ab"
+  },
+  "authorization": {
+    "exactUserText": null,
+    "exactUserTextSha256": null,
+    "authorizedAtUtc": null,
+    "explicitPb3ScopePresent": false
+  },
+  "authorizedRun": {
+    "repositoryRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio",
+    "engineSource": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/source",
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-01",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-01",
+    "benchmarks": [
+      "B01",
+      "B02"
+    ],
+    "blenderStarts": 4,
+    "proposalExecutions": 2,
+    "buildPlanWrites": 2,
+    "sceneBuilds": 2,
+    "workspaceSaves": 2,
+    "reopens": 2,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "runner": {
+    "path": "scripts/run-ai-native-studio-pb3-validation-c2.py",
+    "c2Argument": "specs/ai-native-studio-pb3-validation-tool-c2-evidence-binding.v0.5.json",
+    "c1Argument": "specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json"
+  },
+  "independentAuditor": {
+    "path": "scripts/audit-ai-native-studio-pb3-validation-c2.py",
+    "c2Argument": "specs/ai-native-studio-pb3-validation-tool-c2-evidence-binding.v0.5.json",
+    "c1Argument": "specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json",
+    "intermediateOutput": "audit-c1.json",
+    "finalOutput": "audit.json"
+  },
+  "resourceEnforcement": {
+    "maximumWorkRootBytes": 2147483648,
+    "maximumEvidenceRootBytes": 67108864,
+    "allProcessLogsExclusive": true,
+    "symbolicPathsAllowed": false
+  },
+  "evidenceBinding": {
+    "exactAuthorizationText": true,
+    "executionCommitSingleChangedPath": true,
+    "authorizedRootsExact": true,
+    "processArgvExact": 4,
+    "processLogsHashed": 8,
+    "workAndEvidenceManifests": true
+  },
+  "stillUnauthorized": [
+    "PB.3 formal root creation or Blender start without a separately committed exact execution contract",
+    "film-engine source, commit, ref, tag, release or remote mutation",
+    "rendering, PB.4 through PB.7, signing, notarization or DMG work",
+    "proposal-originated Python, shell, network or filesystem authority",
+    "more than two exact B01/B02 approved BuildPlan writes or any arbitrary proposal"
+  ],
+  "claimCeiling": "This C2 template is non-executable and carries no PB.3 authority. It cannot be edited or renamed in place into an execution contract."
+}

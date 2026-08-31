@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationToolC2EvidenceBinding.v0.5",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-TOOL-C2-EVIDENCE-BINDING-v0.5",
+  "status": "FROZEN_INERT_C2_AUTHORIZATION_AND_EVIDENCE_BINDING",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "fe1d47abd0f6e5971eca460196bf5621176bf71f",
+  "findings": [
+    {
+      "id": "PB3_C1_AUTHORIZATION_TEXT_NOT_EXACTLY_BOUND",
+      "description": "The base authority gate required only that user text contain PB.3; it did not bind the frozen exact authorization request."
+    },
+    {
+      "id": "PB3_C1_AUDIT_ROOTS_NOT_BOUND_TO_AUTHORIZED_RUN",
+      "description": "The independent auditor consumed receipt roots without proving that they were the exact roots in execution.authorizedRun."
+    },
+    {
+      "id": "PB3_C1_PROCESS_ARGV_AND_LOG_FILES_NOT_INDEPENDENTLY_VERIFIED",
+      "description": "The independent auditor checked offline flags and process counts but did not reconstruct exact argv or hash the eight process log files."
+    }
+  ],
+  "formalRunsAffected": 0,
+  "blenderStartsAffected": 0,
+  "baseC1": {
+    "toolFreeze": "specs/ai-native-studio-pb3-validation-tool-freeze.v0.2.json",
+    "toolFreezeSha256": "52e2dda7a6d0846ad1ed2c89d466b4b848165cb38763621d17cbf08bc583009a",
+    "correction": "specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json",
+    "correctionSha256": "b7b4c77009ccaf7dfa17efd9fa9559cbc402b25f91f9cc9af1bd5e0e4ca4a1c0",
+    "runner": "scripts/run-ai-native-studio-pb3-validation-c1.py",
+    "runnerSha256": "4261866539a404766027fbe1fe737686857529f811a03bd8691db008e35b133a",
+    "independentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c1.py",
+    "independentAuditorSha256": "ccbfaa084499985ef1e25411b239f0ddb21d2c79cfcdc4bc8b8e197e67c66556"
+  },
+  "authorizationRequest": {
+    "uri": "specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json",
+    "sha256": "44e52a5619967d79e26258ebfcc123a28401f69afc05159174f2b911a4a963ab"
+  },
+  "tools": {
+    "runner": "scripts/run-ai-native-studio-pb3-validation-c2.py",
+    "runnerSha256": "f7384b59178cb8d312800108ce614c05cf1ba8fa89840667e3a95a7bf947f31b",
+    "independentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c2.py",
+    "independentAuditorSha256": "e2af556008ea2426e3b86d443f1dcc202ff2455215a4c4f9d94b836a88242e72",
+    "staticAuditor": "scripts/audit-ai-native-studio-pb3-tool-freeze-c2.py",
+    "staticAuditorSha256": "97d7c45b5b04f1ab84c9de74a88b77c613600b98220abd6c604229c192b97d51"
+  },
+  "source": {
+    "head": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6"
+  },
+  "binary": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "sha256": "4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59"
+  },
+  "paths": {
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-01",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-01"
+  },
+  "resources": {
+    "maximumWorkRootBytes": 2147483648,
+    "maximumEvidenceRootBytes": 67108864
+  },
+  "evidenceBinding": {
+    "exactAuthorizationTextAndSha256": true,
+    "authorizationRequestFrozenInExecutionParent": true,
+    "c2CorrectionFrozenInExecutionParent": true,
+    "executionCommitChangedPaths": [
+      "one exact future execution contract"
+    ],
+    "authorizedRootArgumentsExact": true,
+    "formalProcesses": 4,
+    "processLogFiles": 8,
+    "exactProcessArgv": true,
+    "processLogSha256": true,
+    "workRootManifest": true,
+    "evidenceRootManifest": true
+  },
+  "unchanged": {
+    "combinedOracle": true,
+    "fixturesAndHashes": true,
+    "maximumBlenderStarts": 4,
+    "maximumProposalExecutions": 2,
+    "maximumBuildPlanWrites": 2,
+    "maximumSceneBuilds": 2,
+    "maximumWorkspaceSaves": 2,
+    "maximumReopens": 2,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0,
+    "authorizationRequired": true
+  },
+  "currentCounts": {
+    "pb3FormalRootsCreated": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "executionTemplate": "specs/ai-native-studio-pb3-validation-execution-c2-template.v0.5.json",
+  "claimCeiling": "C2 is an inert tooling correction. It proves only that a future exact PB.3 run must bind the frozen authorization, a single-path execution commit, exact roots, four argv, eight log hashes and two root manifests. It grants no execution authority and starts no Blender process."
+}
