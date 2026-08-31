@@ -183,8 +183,10 @@ not rewritten; new adapters must bind the standing charter explicitly.
   Its single-path attempt-04 contract passed outer standing-authority checks but
   the nested base runner retained a second historical status check and stopped
   before root creation or Blender start. Attempt-04 is now an immutable 19/19-
-  audited harness failure. C6-C1 may adapt only that nested authority function;
-  any formal retry uses fresh attempt-05 roots without another owner sentence.
+  audited harness failure. C6-C1 adapts only that nested authority function; its
+  first static run is retained 31/32 for an obsolete C5 freshness self-test.
+  C6-C2 directly verifies the retained attempt and now passes 32/32. The formal
+  retry uses fresh attempt-05 roots without another owner sentence.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -404,9 +406,9 @@ starting Blender. C5-C2 passes 30/30 static checks and the C6 standing-authority
 adapter passes 32/32 while keeping the C4 semantic/helper corrections, exact
 no-render-artifact threshold, retained attempts and zero-network ceiling
 frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
-The next checkpoint is the closure-guarded C6-C1 correction, static audit,
-single-path contract and fresh attempt-05 execution. Do not retry a retained
-formal root or query the engine remote during admission.
+The closure-guarded C6-C2 correction now passes static/negative audit 32/32.
+The next checkpoint is its single-path contract and fresh attempt-05 execution.
+Do not retry a retained formal root or query the engine remote during admission.
 After PB.3 closes, later PB gates may proceed under versioned protocols and the
 standing charter without another authorization sentence.
 

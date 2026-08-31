@@ -6299,3 +6299,11 @@ Date: 2026-08-31 · Type: RETAINED STATIC FAILURE · Formal Blender starts / pro
 C6-C1实现closure-guarded nested-base authority后，static audit为31/32 FAIL。唯一false为`runnerSelfTestPass`：新runner将self-test委托给冻结C5，而C5仍要求historical attempt-04 evidence path absent；C6 attempt-04 failure现已按规则保留在该路径，因此旧freshness断言必然失败。Inert execution负控仍正确以status gate拒绝，attempt-05 roots保持absent，所有formal counts为0。
 
 Retained static audit self hash为`c95e281972099c8a6e801137ae346e8be57cbf12143c5067d1c7ece5d5e057da`。C6-C2只允许一个thin entrypoint：self-test直接复核attempt-04 exact retained manifest与attempt-05 fresh roots；formal path必须byte-exact委托C6-C1，并绑定两层runner hashes。不得编辑failed C1 files或改变任何semantic/resource/artifact门。
+
+## J-516 · PB.3 C6-C2 inert tool freeze PASS
+
+Date: 2026-08-31 · Type: STANDING-AUTHORITY TOOL FREEZE · Formal Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C6-C2 thin entrypoint SHA为`424fa76505481ceb634b4ed267c9822811a5e8c51022988488960e0b36cfb986`。Self-test不再调用obsolete C5 attempt-04 freshness断言，而是直接验证attempt-04 work absent、两文件evidence manifest exact及attempt-05 roots fresh；formal path仍绑定并委托C6-C1 `73431f60...`，closure-guarded authority和全部semantic gates不改。
+
+新tool freeze/template SHA为`f88a758fa050f423acf8c8452056869b19cf61e557159e38a6affe7d5aa192dd` / `02f8d11f5038c45cca2927d9376fd622be90c4cd0435c6cb6b866d33a256f951`。Static/negative audit 32/32 PASS，file/self SHA为`4973d996058a63198ec7e1ed9065fe4aa54c241edc0453a7b4f046f9667c051d` / `07b1919c3d26e72750eebe213d35ac25a3cedc449dcf45973b06e82f9244be24`。Attempt-05 roots仍absent，formal counts全0。下一步standing authority下单路径提交attempt-05 contract并执行。
