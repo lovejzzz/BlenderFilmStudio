@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC5C1AuditorReceiptBinding.v1.7",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-C5-C1-AUDITOR-RECEIPT-BINDING-v1.7",
+  "status": "PREREGISTERED_INERT_AUDITOR_CORRECTION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "c9f3fd5c74ee36043ba8be31f9a4e8334af760b0",
+  "baseC5Correction": {
+    "uri": "specs/ai-native-studio-pb3-validation-c5-execution-contract-correction.v1.6.json",
+    "sha256": "577d94cba0758a3cb3e4e1988a95f2f6dbcddb07cffe5eb7da71647e640c6ed1"
+  },
+  "finding": {
+    "frozenAuditor": "scripts/audit-ai-native-studio-pb3-validation-c4.py",
+    "frozenAuditorSha256": "a212b64b3b74b8056478ce70f5f981c51f23d8ea849650720235f34651b22d4e",
+    "jsonPath": "$.checks.c4CorrectionBinding",
+    "auditorExpectedReceiptField": "resourceEnforcement.c4CorrectionSha256",
+    "unchangedReceiptWriterField": "resourceEnforcement.c3CorrectionSha256",
+    "receiptWriter": "scripts/run-ai-native-studio-pb3-validation-c3.py",
+    "receiptWriterSha256": "80fafdc044f149d08b0d03fe71b4037e461bd88066a5c5ca2be5e4a8a50df76e",
+    "attempt02ObservedField": "resourceEnforcement.c3CorrectionSha256",
+    "attempt02ObservedValue": "2711b7fd7f5cc4cc026978921414e35554fc2dab077448fad3e9ca00ba3f1724",
+    "impact": "An otherwise successful future C4 semantic run would receive a false independent-audit failure because the demanded C4 receipt field is never written."
+  },
+  "supersedingAuditorRule": {
+    "delegateFrozenBaseSemanticAuditor": true,
+    "delegateFrozenC4Auditor": false,
+    "independentlyVerify": [
+      "C5 exact authorization request and text",
+      "C5 and C4 tool hashes frozen in the execution parent",
+      "corrected tool and 13-input roster",
+      "execution single-path commit and exact stillUnauthorized array",
+      "four absolute argv records and eight exclusive process logs",
+      "work/evidence resource manifests and ceilings",
+      "retained attempt-01/02/03 manifests",
+      "zero EXR/PNG/JPG/JPEG/MOV/MP4 across the full work root",
+      "zero render, network, engine edit, and engine remote write receipt counts"
+    ],
+    "receiptBinding": {
+      "requireC3CorrectionSha256": "2711b7fd7f5cc4cc026978921414e35554fc2dab077448fad3e9ca00ba3f1724",
+      "bindC4ThroughExecutionAndFrozenParent": true,
+      "inventOrRequireUnwrittenC4ReceiptField": false
+    }
+  },
+  "unchanged": {
+    "runner": true,
+    "helper": true,
+    "correctedTool": true,
+    "baseSemanticAuditor": true,
+    "semanticAndWorkspaceThresholds": true,
+    "resourceCeilings": true,
+    "noRenderArtifactPredicate": true,
+    "operationCounts": true,
+    "permissions": true
+  },
+  "currentCounts": {
+    "attempt04RootsCreated": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0
+  },
+  "authorization": {
+    "attempt04Authorized": false,
+    "generalContinueIsInsufficient": true,
+    "exactAuthorizationRequiredAfterCompleteStaticToolFreeze": true
+  },
+  "claimCeiling": "C5-C1 corrects only an impossible independent-auditor receipt-field expectation before any attempt-04 execution. It does not change product semantics, thresholds, receipts, permissions, or grant execution authority."
+}
