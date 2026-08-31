@@ -475,10 +475,12 @@ but final audit rejected a Python `1.0` versus Node `1` canonicalization mismatc
 it remains sealed (`7722b9de…` / `f1d44dc4…`). C3 normalized integer-valued
 floats and reproduced the same accepted product metrics, but attempt-03 remained
 FAIL because Python `8e-08` and Node `8e-8` spell the same finite number
-differently; it is sealed (`f65073be…` / `562ffd0c…`). C4 changes only final
-Node self-hash verification, has already validated retained attempt-03 offline,
-and is frozen at `cf2e7667…`; fresh attempt-04 roots remain absent until
-execution. PC.2 must not start.
+differently; it is sealed (`f65073be…` / `562ffd0c…`). C4 changed only final
+Node self-hash verification. Fresh attempt-04 is now accepted `PASS`: 26 exact
+details, three material regions and all three visible-view floors passed while
+camera/light sentinels, actions and source SHA remained exact. Receipt/audit/
+manifest self hashes are `2a60c050…` / `69cca7c8…` / `ce2279e1…`. PC.1 is
+closed; PC.2 action complexity is the active gate.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

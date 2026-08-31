@@ -6537,3 +6537,9 @@ C3 product/semantic结果再次PASS且三view metrics exact复现。Final audit�
 Date: 2026-08-31 · Type: VERSIONED AUDITOR-ONLY TOOL FREEZE · Formal attempt-04 starts / renders / saves: 0 / 0 / 0
 
 C4仅在final Node auditor中复现Python finite JSON number spelling，包括科学计数法指数补足两位；对retained attempt-03离线复核已验证exact build self hash `9422649c…`。C3 builder与semantic auditor不变，product/scene/26/3/EXR-PNG/pixels/sentinels/actions/operations/resources均不变。Attempts 01/02/03 failure+manifest file/self hashes逐项绑定；fresh attempt-04 roots在freeze时absent。
+
+## J-547 · PC.1 C4 attempt-04 accepted PASS
+
+Date: 2026-08-31 · Type: ACCEPTED MODELING-DETAIL INCREMENT · Blender starts / renders / saves: 2 / 6 / 1
+
+Fresh attempt-04 runner receipt `2a60c050…`与independent 18/18 audit `69cca7c8…`均PASS，sealed manifest `ce2279e1…`。Exact 26 details与3 hero materials把counts从78/66/15,734提高到104/92/19,810 objects/meshes/polygons；WIDE/MEDIUM/CLOSE changed-pixel fractions为0.02464/0.12429/0.17949，3/3 visible views PASS。Source SHA、camera/light sentinels与complete action roster exact；零retained EXR，零network/model/engine mutation。Visual inspection将结果限定为有意义的first detail pass而非final asset quality。PC.1关闭PASS，PC.2 action complexity成为active gate。
