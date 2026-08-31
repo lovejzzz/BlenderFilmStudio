@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_PB2_PB3_PB4_PB5_PB6_VALIDATION_PASS_STANDING_AUTONOMY_ACTIVE",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_POST_PB7_PC0_PASS_STANDING_AUTONOMY_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "PC.0",
+  "activeGate": "PC.1",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -995,12 +995,12 @@
         "productStarts": 0,
         "renders": 0
       },
-      "nextGate": "PC.0",
-      "nextGateStatus": "PC0_ATTEMPT_01_RETAINED_ZERO_START_FAILURE_C1_ATTEMPT_02_FROZEN"
+      "nextGate": "PC.1",
+      "nextGateStatus": "PC0_C1_ATTEMPT_02_PASS_PC1_PROTOCOL_PENDING"
     }
   },
   "postPb7ImprovementProgram": {
-    "status": "PC0_C1_TOOL_FREEZE_READY_AFTER_RETAINED_FAILURE",
+    "status": "PC0_PASS_PC1_PROTOCOL_PENDING",
     "program": "POST-PB7-MODELING-ACTION-QUALITY",
     "spec": "specs/ai-native-studio-post-pb7-improvement-program.v0.1.json",
     "specHash": "b1743a2d4cdaa8fec6c9cbe8308c8a409a2fe01a8b3ba795c725b49974cddc33",
@@ -1012,13 +1012,13 @@
       "improvementPriorities": ["modeling detail", "action complexity"]
     },
     "gateOrder": ["PC.0", "PC.1", "PC.2", "PC.3"],
-    "activeGate": "PC.0",
+    "activeGate": "PC.1",
     "pc0": {
-      "status": "ATTEMPT_01_FAIL_C1_ATTEMPT_02_FROZEN_NOT_RUN",
+      "status": "PASS",
       "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-02",
       "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.0-2026-08-31-mac-m2max-attempt-02",
-      "evidenceRootExists": false,
-      "workRootExists": false,
+      "evidenceRootExists": true,
+      "workRootExists": true,
       "toolFreeze": "specs/ai-native-studio-pc0-tool-freeze-c1.v0.2.json",
       "toolFreezeHash": "958847332ac7aa16a249242b378221cdd4f066834c069a73d63062cd4928815b",
       "toolFreezeFileSha256": "ea2c97ef102963f92279ce053d1ae0961c8c9b4177e0864cce7493b2ed000fd2",
@@ -1033,6 +1033,36 @@
         "blenderStarts": 0,
         "immutable": true
       },
+      "acceptedAttempt02": {
+        "status": "PASS",
+        "receiptFileSha256": "a14526b3e208028ecd769a1796932086f515556077a382b11af5e90d269bbf7e",
+        "receiptHash": "c2a979f59ad67a6b5c460aa10ebe6ab460c3c7057231ef4d88b08731ca3e93e0",
+        "auditFileSha256": "384b32fc1df8d1d312ee4508229c21fd0efc1c9e7095ceec8d9c2c71bc80cd1f",
+        "auditHash": "ece09ea45704dced622e39300f585a08a3fa712fa6ea9705770bcc891bc3dca8",
+        "auditChecks": "27/27 PASS",
+        "manifestFileSha256": "d40d20fc15903807f99ca06dd895555323fdf9c7be73c74f7b11f7bf765ffebb",
+        "manifestHash": "b33e720f67c5df84761d39199559887808c32f48805be3184dc7c9ce95afc6b8",
+        "inventoryFileSha256": "164dec15e10fdc5fe3be8e4c067b57777155abe6cf0dc6fbcfb35c11429f7383",
+        "sourceSha256BeforeAfter": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+        "counts": {
+          "objects": 78,
+          "meshes": 66,
+          "polygons": 15734,
+          "materials": 12,
+          "modifiers": 0,
+          "actions": 12,
+          "fcurves": 67,
+          "keyframes": 968,
+          "animatedTargets": 9
+        },
+        "wallSeconds": 0.943,
+        "peakRssBytes": 256475136,
+        "workFiles": 0,
+        "renderArtifacts": 0,
+        "blenderStarts": 1
+      },
+      "outcomeDocument": "research/2026-08-31-ai-native-studio-pc0-inventory-pass.md",
+      "outcomeDocumentFileSha256": "890cefb8c779a4bcd0a3b83d981c399fa265aa9b6f71c5f9b70cfe4a72fa15e6",
       "toolTests": "14/14 PASS",
       "allowedBlenderStarts": 1,
       "renderCalls": 0,
@@ -1040,6 +1070,14 @@
       "engineSourceEdits": 0,
       "networkCalls": 0,
       "modelCalls": 0
+    },
+    "pc1": {
+      "status": "MODELING_DETAIL_PROTOCOL_PENDING",
+      "minimumNewSemanticDetailComponents": 12,
+      "minimumNewHeroMaterialRegions": 3,
+      "minimumProtectedViewsWithVisibleImprovement": 2,
+      "cameraAndLightSentinelsMustRemainExact": true,
+      "pc2MayStart": false
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1415,8 +1453,8 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PC0_READ_ONLY_HERO_ASSET_AND_ACTION_INVENTORY",
-    "result": "PC.0 attempt-01 is a retained zero-start harness failure; execute and independently audit the frozen C1 attempt-02 zero-render/zero-save inventory",
+    "gate": "PC1_MODELING_DETAIL_INCREMENT_PROTOCOL",
+    "result": "PC.0 C1 attempt-02 is accepted 27/27 PASS; preregister and freeze a measurable modeling-detail increment before derived-scene mutation",
     "acceptedPb6Evidence": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
     "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
     "audit": "15/15 PASS independent 288-frame/camera/video/attack audit",
@@ -1428,7 +1466,8 @@
       "bind PB.6 machine receipts, 288-frame output, review MP4, contact sheet, five failures and independent audit",
       "retain PB.7 human response, 27/27 audit and bounded PASS immutable",
       "retain the preregistered modeling-detail and action-complexity floors before any new source or render mutation",
-      "retain PC.0 attempt-01 failure/work roots immutable and execute only the frozen C1 tool in fresh attempt-02 roots",
+      "retain PC.0 attempt-01 failure and accepted attempt-02 evidence/work roots immutable",
+      "bind the PC.1 modeling increment to at least 12 semantic detail components, 3 new hero material regions and 2 visibly improved protected views",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]
   }

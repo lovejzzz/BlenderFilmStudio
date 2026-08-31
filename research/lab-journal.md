@@ -6467,3 +6467,11 @@ Date: 2026-08-31 · Type: CORRECTED ZERO-RENDER TOOL FREEZE · Formal Blender st
 C1 semantic correction仅把runner local subprocess result binding从`process`改为`execution`及其direct references；versioned path changes仅绑定C1 freeze与fresh attempt-02 roots。Original frozen runner恢复exact historical hash `2d03688a...`，attempt-01 failure/manifest self hashes `7ccd6388...` / `1f77c2ff...`被C1逐项绑定。
 
 Probe、inventory scope、acceptance与全部operation/resource ceilings未变；Node syntax与synthetic 14/14 PASS，attempt-02 evidence/work roots在freeze时absent。PC.1仍禁止启动。
+
+## J-537 · PC.0 C1 attempt-02 inventory PASS
+
+Date: 2026-08-31 · Type: ACCEPTED READ-ONLY BASELINE · Blender starts / renders / saves: 1 / 0 / 0
+
+Fresh attempt-02 runner receipt `c2a979f5...`，independent audit 27/27 self `ece09ea4...`，sealed manifest `b33e720f...`。Source前后SHA `0acd4d13...`，work files/render artifacts均0；wall 0.943s，peak RSS 256,475,136 bytes。
+
+Inventory量出78 objects、66 meshes、15,734 polygons、12 materials、0 modifiers；33个meshes为98 polygons，所有materials均2 nodes。Actions为12/67 F-curves/968 keyframes，但9 animated object targets中4为camera，non-camera causal targets集中在guardian rig/core/hand socket/two IK controls。结果支持owner的rough-modeling/simple-action诊断。PC.1下一步先冻结≥12 semantic detail components、≥3 new hero material regions、≥2 protected views visible improvement，且camera/light sentinels exact。

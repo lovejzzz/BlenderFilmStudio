@@ -457,13 +457,14 @@ product-prototype phase. The next checkpoint is a versioned improvement program
 for the two weaknesses named by the owner—modeling detail and action
 complexity—without expanding the result into a production-readiness or
 autonomous-filmmaking claim. That program is now preregistered; the immediate
-gate is a one-start, zero-render, zero-save PC.0 hero-asset/action inventory.
-Attempt-01 is a retained zero-start harness failure: a local `process` binding
-shadowed Node's global environment object before process creation. Its failure
-and manifest self hashes are `7ccd6388…` and `1f77c2ff…`. C1 changes only that
-local binding name plus versioned attempt paths; the probe, acceptance criteria
-and ceilings remain exact. Static inventory checks pass 14/14, and both fresh
-attempt-02 formal roots remain absent until execution.
+gate PC.0 is closed `PASS`. Attempt-01 remains a retained zero-start harness
+failure with failure/manifest self hashes `7ccd6388…` / `1f77c2ff…`. C1
+attempt-02 used one zero-render, zero-save start and passed an independent 27/27
+audit (`ece09ea4…`); receipt and manifest self hashes are `c2a979f5…` and
+`b33e720f…`. It measured 78 objects, 66 meshes, 15,734 polygons, 12 materials,
+0 modifiers, 12 actions and 9 animated object targets while preserving the
+source SHA exactly. The immediate gate is PC.1: preregister a modeling-detail
+increment and auditor before any derived-scene mutation; PC.2 must not start.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
