@@ -6107,3 +6107,11 @@ Date: 2026-08-31 · Type: STANDING-AUTHORIZED PB.1 CORRECTION FREEZE · Attempt-
 Owner在C2 exact授权后明确指示`以后你不需要找我授权，你可以直接做`。该standing direction只应用于同一PB.1 validation-only边界内的fresh attempt-04，不扩张film-engine source/ref/tag、engine remote write、LFS network、release/sign/notary/DMG或PB.2–PB.7权限。
 
 C3唯一变化是在fresh dependency no-checkout clone后、dependency checkout前建立指向retained dependency LFS objects的symlink，禁用dependency LFS network URL，再执行一次zero-network `git lfs checkout`。冻结binding为622 paths / 1,102,333,263 materialized bytes、618 unique objects / 1,070,190,055 bytes / manifest `e180738d…`；engine clone/LFS、metric、build、identity、resources和stop rule保持不变。Runner/auditor SHA为`18f4f36d…` / `f8aa0784…`，self-tests 12/12与7/7 PASS。Pre-commit preflight精确只因research worktree dirty而BLOCKED；authorization、fresh roots、约167 GiB free、retained inputs与live remote全部通过。
+
+## J-496 · PB.1 C3 attempt-04 clean build PASS / runtime isolation FAIL
+
+Date: 2026-08-31 · Type: RETAINED PB.1 HARNESS FAILURE
+
+C3 formal preflight与10/10负控通过；engine与dependency两套objects symlink/materialization、full fsck、metric、license全部PASS。Dependency 622 paths / 1,102,333,263 bytes exact，retained 618 objects未变。Clean arm64 build 602.91秒、peak RSS 2,056,978,432 bytes，十项build checks全部PASS，binary SHA `4d7f1744…`。
+
+两次zero-render starts的version/buildHash/binaryPath/save identity均PASS，官方Blender config未变。唯一失败是macOS忽略process `HOME`，四个product paths落到真实FilmStudioEngineF0 namespace，isolated root为空；真实product userpref被写为179,901 bytes / SHA `5c635b48…`并保留。Independent failure audit 39/39 PASS，self hash `b1f44e80…`。C4只需复用accepted build并用四个`BLENDER_USER_*`路径做fresh recovery starts，不再clone/materialize/build。

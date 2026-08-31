@@ -75,6 +75,12 @@ both a research notebook and an executable evidence base. Read this page,
   131-byte `libzstd.a` pointer. No product start/render or forbidden mutation occurred.
   Independent failure audit passed 36/36. Attempt-03 is immutable; the next fresh
   correction is limited to zero-network dependency-LFS materialization.
+- **PB.1 C3 attempt-04 retained failure:** the dependency correction and clean
+  arm64 build passed, including a 602.91-second build and exact product identity.
+  The two zero-render starts failed only configuration isolation because macOS
+  ignored the process `HOME` override and used the real FilmStudioEngineF0 root.
+  Independent failure audit passed 39/39. C4 may reuse this build with explicit
+  Blender user paths; it must not rebuild or modify attempt-04.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but

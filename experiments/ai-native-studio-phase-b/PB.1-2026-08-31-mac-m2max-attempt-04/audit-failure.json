@@ -1,0 +1,297 @@
+{
+  "schemaVersion": "bfs.pb1ValidationOnlyC3Attempt04FailureAudit.v0.10",
+  "gate": "PB.1",
+  "mode": "VALIDATION_ONLY_C3_ATTEMPT04_FAILURE",
+  "observedAt": "2026-08-31T03:20:04.824Z",
+  "status": "PASS",
+  "classification": "RETAINED_HARNESS_MACOS_HOME_ISOLATION_FAILURE_AFTER_ACCEPTED_BUILD",
+  "rootCause": "The product ignored the process HOME override for macOS application-support resolution and used the real user FilmStudioEngineF0 root. Build and product identity passed; only isolated path equality and isolated product-root presence failed.",
+  "correctionRequirement": "Reuse the accepted attempt-04 build in a fresh recovery evidence root and set the four BLENDER_USER_* paths explicitly to fresh isolated directories for at most two zero-render starts. Do not rebuild or modify attempt-04.",
+  "globalProductConfigObserved": {
+    "root": "/Users/mengyingli/Library/Application Support/FilmStudioEngineF0/5.2",
+    "userpref": "/Users/mengyingli/Library/Application Support/FilmStudioEngineF0/5.2/config/userpref.blend",
+    "bytes": 179901,
+    "sha256": "5c635b481c675f3a4fc4a95ae851ab8a68442ed690d6014597477df9aa320dc1"
+  },
+  "auditor": {
+    "path": "scripts/audit-ai-native-studio-pb1-validation-only-c3-attempt04-failure.mjs",
+    "sha256": "917579d6fa59e1cb6422f98c5a3b54b44a47fff9692e8c5d57c608561148b28e",
+    "importsRunner": false
+  },
+  "runner": {
+    "path": "scripts/run-ai-native-studio-pb1-validation-only-c3.mjs",
+    "sha256": "18f4f36d3825353cf0eb2e071e856d4083df25e21aa63e73c6dd231998985848"
+  },
+  "contract": {
+    "path": "specs/ai-native-studio-pb1-validation-only-c3-execution.v0.9.json",
+    "sha256": "49f8367481ab790336d4d1dca2beb5e3f0d3e762c600049de970b7a98ac6aae7"
+  },
+  "buildReceiptHash": "fb8bac482df0c7ee0dff73fe5b481fa85bac9af4eeb0545993231f513c654049",
+  "runtimeReceiptHash": "f5ca6f7aee006774c6382e8d7fbfc548bd2faa0018031e79efa25976fd49f298",
+  "failureReceiptHash": "4b1d47b4e1678a9246cb5107bff7da74db253d7e218de20f52c5c59184f222ba",
+  "verdictReceiptHash": "6c44c24a0989c8fdb8741a6e839f0cb8c52e11079afdb833aef2d03dd8cd1c91",
+  "checksPassed": 39,
+  "checksTotal": 39,
+  "checks": [
+    {
+      "id": "AUDITOR_INDEPENDENT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "AUTHORIZATION_BOUND",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "CONTRACT_REQUEST_RUNNER_BOUND",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_preflight.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_negative-controls.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_lfs-materialization.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_remote-and-history.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_license-and-generated-paths.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_dependency.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_build.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_runtime-identity.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_failure.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_verdict.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PRE_RUNTIME_PASS_negative-controls.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PRE_RUNTIME_PASS_lfs-materialization.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PRE_RUNTIME_PASS_remote-and-history.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PRE_RUNTIME_PASS_license-and-generated-paths.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PRE_RUNTIME_PASS_dependency.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PRE_RUNTIME_PASS_build.json",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PREFLIGHT_ACCEPTED_10_CONTROLS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "EXPECTED_RUNTIME_FAILURE_STOP",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "BUILD_PASS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "BUILD_ARTIFACT_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "BUILD_LOG_HASHES_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "TWO_STARTS_ZERO_RENDER_IDENTITY_PASS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOLE_RUNTIME_FAILURES_ARE_ISOLATION",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "OFFICIAL_CONFIG_UNCHANGED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ISOLATED_ROOTS_ABSENT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "GLOBAL_PRODUCT_PATH_OBSERVED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RUNTIME_LOGS_BOUND",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_DEPENDENCY_CLEAN",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LOCAL_OBJECT_LINKS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LIVE_REMOTE_UNCHANGED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "COUNTERS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FORBIDDEN_ZERO",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "NO_NATIVE_PROCESS_REMAINS",
+      "pass": true,
+      "observed": [],
+      "expected": []
+    },
+    {
+      "id": "PREAUDIT_FILESET_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ROOTS_WITHIN_CEILINGS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "STOP_RULE_PRESERVED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    }
+  ],
+  "failures": [],
+  "counters": {
+    "publicEngineNetworkClones": 0,
+    "localEngineClones": 1,
+    "freshObjectsSymlinks": 1,
+    "localLfsMaterializations": 1,
+    "localDependencyClones": 1,
+    "freshDependencyObjectsSymlinks": 1,
+    "localDependencyLfsMaterializations": 1,
+    "nativeBuilds": 1,
+    "productStarts": 2,
+    "renders": 0,
+    "engineRemoteWrites": 0,
+    "engineRefUpdates": 0,
+    "lfsNetworkDownloads": 0,
+    "lfsUploads": 0,
+    "releases": 0,
+    "signing": 0,
+    "notarization": 0,
+    "dmg": 0,
+    "pb2ThroughPb7": 0,
+    "modelCalls": 0
+  },
+  "externalMutationsPerformedByAuditor": 0,
+  "stopRulePreserved": true,
+  "receiptHash": "b1f44e80d548979bdd07bd5fc273cfa8421997cbbd0eec7b64cf30b4e8928b29"
+}
