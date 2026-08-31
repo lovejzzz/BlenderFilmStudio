@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.filmStudioRenderJob.v0.2",
+  "status": "APPROVED",
+  "jobId": "PB5-B01-RESTART-2026-08-31-attempt-01",
+  "approvalId": "standing-autonomy-v1.0-pb5-preregistered",
+  "authorizedEvidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.5-2026-08-31-mac-m2max-attempt-01",
+  "authority": {
+    "approvedStages": ["PREVIEW", "FINAL"],
+    "modelMayGeneratePython": false,
+    "networkAllowed": false,
+    "sourceBlendMayBeSaved": false,
+    "outputScope": "AUTHORIZED_EVIDENCE_ROOT_ONLY"
+  },
+  "profiles": {
+    "PREVIEW": {
+      "engine": "BLENDER_EEVEE",
+      "frame": 1,
+      "resolution": [640, 360, 100],
+      "samples": 16,
+      "format": "PNG",
+      "colorMode": "RGBA",
+      "colorDepth": "8",
+      "output": "preview/preview.png"
+    },
+    "FINAL": {
+      "engine": "CYCLES",
+      "device": "CPU",
+      "frame": 1,
+      "resolution": [640, 360, 100],
+      "samples": 32,
+      "seed": 24082601,
+      "animatedSeed": false,
+      "denoising": false,
+      "threadsMode": "FIXED",
+      "threads": 8,
+      "format": "OPEN_EXR_MULTILAYER",
+      "colorDepth": "16",
+      "codec": "ZIP",
+      "requiredPasses": ["Combined", "Depth", "Normal"],
+      "output": "final/final.exr"
+    }
+  },
+  "source": {
+    "fixture": "B01",
+    "absolutePath": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-06/b01/artifacts/scene.blend",
+    "sha256": "64026648bde5f6128e2642797a8c8a4aa867286f20c633c80717a7093b1c012b",
+    "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+    "semanticStructureSha256": "e8c55fb73737f1871ac0008faa705dc204ebfe5bac471323cbb0a2d31435b4f8"
+  },
+  "jobControl": {
+    "notBefore": "2026-08-31T00:00:00Z",
+    "validUntil": "2027-08-31T23:59:59Z",
+    "maximumRenderCalls": 2,
+    "maximumArtifactBytes": 83886080,
+    "stageOrder": ["PREVIEW", "FINAL"],
+    "completedStagesImmutable": true,
+    "completeResumeIsNoOp": true
+  },
+  "baselines": {
+    "engineSourceCommit": "373881e1ee659a962e0015c2dac26f7fa981b1bf",
+    "engineSourceParent": "df5c296789a8d57cd84f4f8fb586bb28243f3fa5",
+    "binarySha256": "8b9e680b97015c2a6b71da404df3d4dcd3148dfe63b8f6a3534cc0e12390c592",
+    "pb4ReceiptHash": "687f2759637b45e5354264283fcc4b8e7539394ae773b8c74a14c6211356078a",
+    "preregistrationSha256": "94546134cfda11cb66ee96ea0a688ee493cbfeff7bd7b3ea429a2b76725880e1",
+    "toolFreezeCommit": "06052869f7f6fea3748432ce9065e6e9b1d7c9b0"
+  },
+  "tools": {
+    "auditHelperSha256": "f8e2a0652b567430455d2e8692acd10b6dd3312dd79c619f15919485f35f9a91",
+    "productHelperSha256": "e4b60ea07922d1da71dbf2d0e3297c4cff8784c2dbf3fcec6ed91b67c235ed04",
+    "runnerSha256": "de7be37273fe7aea8b6e1fdfb55484ff1c7410dcec2700d75bc295a73db0e0f6"
+  },
+  "correction": {
+    "supersedes": "specs/ai-native-studio-pb5-render-job-attempt-01.v0.2.json",
+    "reason": "v0.2 was frozen before its manifestHash was recomputed after the final tool-freeze binding; it was never executed."
+  },
+  "manifestHash": "77f378468f97d87693ad6b8afe6e7e6d4df5493f8ddfc6b9f11829e1d5bc94c4"
+}
