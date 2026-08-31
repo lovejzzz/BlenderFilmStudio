@@ -463,8 +463,10 @@ attempt-02 used one zero-render, zero-save start and passed an independent 27/27
 audit (`ece09ea4…`); receipt and manifest self hashes are `c2a979f5…` and
 `b33e720f…`. It measured 78 objects, 66 meshes, 15,734 polygons, 12 materials,
 0 modifiers, 12 actions and 9 animated object targets while preserving the
-source SHA exactly. The immediate gate is PC.1: preregister a modeling-detail
-increment and auditor before any derived-scene mutation; PC.2 must not start.
+source SHA exactly. PC.1 is now preregistered with 26 semantic details, three
+new material regions and frames 48/144/240 A/B checks. The immediate checkpoint
+is freezing its exact builder/runner/auditors before any derived-scene
+mutation; PC.2 must not start.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

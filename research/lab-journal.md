@@ -6475,3 +6475,11 @@ Date: 2026-08-31 · Type: ACCEPTED READ-ONLY BASELINE · Blender starts / render
 Fresh attempt-02 runner receipt `c2a979f5...`，independent audit 27/27 self `ece09ea4...`，sealed manifest `b33e720f...`。Source前后SHA `0acd4d13...`，work files/render artifacts均0；wall 0.943s，peak RSS 256,475,136 bytes。
 
 Inventory量出78 objects、66 meshes、15,734 polygons、12 materials、0 modifiers；33个meshes为98 polygons，所有materials均2 nodes。Actions为12/67 F-curves/968 keyframes，但9 animated object targets中4为camera，non-camera causal targets集中在guardian rig/core/hand socket/two IK controls。结果支持owner的rough-modeling/simple-action诊断。PC.1下一步先冻结≥12 semantic detail components、≥3 new hero material regions、≥2 protected views visible improvement，且camera/light sentinels exact。
+
+## J-538 · PC.1 modeling-detail increment preregistration
+
+Date: 2026-08-31 · Type: PREREGISTRATION · PC.1 Blender starts / renders / saves: 0 / 0 / 0
+
+PC.1冻结26个guardian/console/core semantic detail IDs与3个new material regions。Protected A/B views为frames 48/144/240；至少2/3须同时达到changed RGB pixel fraction ≥0.001（threshold 2/255）与mean absolute RGB difference ≥0.0005。全部9 sentinel camera/light states canonical exact，action/keyframe roster exact，source save 0。
+
+Formal ceiling为2 Blender starts、6 EEVEE renders、1 derived save、256 MiB evidence/work、600s、2 GiB peak RSS/process；工具与fresh roots必须在首次start前另行冻结，PC.2仍禁止。
