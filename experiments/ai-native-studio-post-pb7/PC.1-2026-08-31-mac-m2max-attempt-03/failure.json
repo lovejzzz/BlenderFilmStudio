@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "bfs.pc1RetainedFailure.v0.3",
+  "status": "FAIL",
+  "gate": "PC.1",
+  "attempt": "attempt-03",
+  "failureStage": "FINAL_CROSS_LANGUAGE_SCIENTIFIC_NOTATION_AUDIT",
+  "errorExact": "BFS_PC1_AUDIT_REJECTED AUDIT_17_OF_18_SELF_HASHES",
+  "rootCause": "C3 normalized integer-valued floats, but Python scientific notation pads single-digit exponents (8e-08) while JSON.stringify emits 8e-8. The stored buildHash remains independently valid under the documented Python canonicalization.",
+  "productResult": {"runnerStatus": "PASS", "receiptHash": "d20f62d75464bdb95b865c1358069b50901c68b3df53203e620f5228a2014d63", "semanticAuditHash": "533afeb5285bfad7220cd604f697a9db7b43e59f143f89033c5082127fd51a2b", "detailComponents": 26, "materialRegions": 3, "visibleViewsPassed": 3, "temporaryExrFilesRetained": 0},
+  "correctionCeiling": "Change only the independent Node auditor's build self-hash canonicalizer to reproduce Python's finite-number spelling, including zero-padded single-digit exponents; prove it against retained attempt-03 before a fresh attempt-04. Keep all product tools, thresholds and operations exact.",
+  "bindings": {
+    "repositoryCommit": "44741482a608bd4278844b008aa025c5f5f1dbe7",
+    "toolFreezeSpecHash": "0a3e8bd1c1360c50aa25dd7605cce73ce0b6be640d83702b1e6d0d63d973af69",
+    "build": {"sha256": "957a2499ebf63d2ac6ba74a605214453bd361bf2ad21ee7cf2dce011e91cf547", "buildHash": "9422649c0eb37481c95487d12607255869cc67bb00a755aa1fd39f3940d3151c", "pythonSelfHashValid": true, "nodeJsonStringifySelfHashValid": false},
+    "semanticAudit": {"sha256": "cb4ee9ffe040c6f06a82fe474e3f211afd5d8695047fc9407ddb751a39fcf403", "auditHash": "533afeb5285bfad7220cd604f697a9db7b43e59f143f89033c5082127fd51a2b"},
+    "receipt": {"sha256": "a43122303fe9367e47be2d7c8f6f744ed48fd5beeef961619109408df647736f", "receiptHash": "d20f62d75464bdb95b865c1358069b50901c68b3df53203e620f5228a2014d63"}
+  },
+  "operations": {"BlenderStarts": 2, "renderCalls": 6, "derivedSceneSaves": 1, "sourceSceneSaves": 0, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0},
+  "sourceSha256BeforeAfter": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+  "retention": {"immutable": true, "cleanupPerformed": false, "nextAttemptMustUseFreshRoots": true},
+  "failureHash": "f65073be5f91925fe19a56ff136b113b27e0b4209e0a86b8ba733021e080b306"
+}

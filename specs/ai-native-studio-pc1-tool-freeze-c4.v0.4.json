@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc1ToolFreezeCorrection.v0.4",
+  "status": "FROZEN_BEFORE_PC1_START",
+  "gate": "PC.1",
+  "correction": "C4",
+  "preregistration": {"uri": "specs/ai-native-studio-pc1-modeling-detail-preregistration-c1.v0.2.json", "sha256": "dd2bd2f2ca31a6bb590b43a653ecc4639afb0bb345d19815d7b2d8d5c7d2527d", "specHash": "28ac7a88c25a6da004c5b9fd996e3dcd69188b3e2665b577fdc2263aef1f3206"},
+  "baseFreeze": {"uri": "specs/ai-native-studio-pc1-tool-freeze-c3.v0.3.json", "sha256": "9a3112fb1bb15e42b3b7a0ffe77be0075df9e17399e0e82790ca3f0d8156fa52", "specHash": "0a3e8bd1c1360c50aa25dd7605cce73ce0b6be640d83702b1e6d0d63d973af69"},
+  "retainedAttempts": [
+    {"id": "attempt-01", "failureFileSha256": "16c226564e801026a30eb549c6519cbf10a6fff336a81195e068784b1068cccc", "failureHash": "dcd59081b924ae78928de18375da3c331c4a16720f100d79cb149886bf0e814b", "manifestFileSha256": "7f63c236c594a36f01b8082852ba89663793b2b3826c2e374cbd9b11b08895d1", "manifestHash": "ffec4a498111517614d26e119d7969db05520da42b755076f67f592997ee6dc4"},
+    {"id": "attempt-02", "failureFileSha256": "b7adcba1932e576c27b718b987468b269936bfca4e0bf3984d934253b9a0a380", "failureHash": "7722b9deb913b21f812cc4569c9f1ab146015989f0d653bfedc9010c3f3ed35a", "manifestFileSha256": "d88b002881884c45894f0b84671c919f054326f5d4fa9c8a560b4225f9b61bfc", "manifestHash": "f1d44dc47fc69a6ec150c0117c994005a8841550521ac723c69d7855fb0d062d"},
+    {"id": "attempt-03", "failureFileSha256": "2607ac4b49ee58c2bb6519670b284b48d14610da7b31c490412e5374c2ec1e0d", "failureHash": "f65073be5f91925fe19a56ff136b113b27e0b4209e0a86b8ba733021e080b306", "manifestFileSha256": "9f40c3d3ada305134392194dc152b11b6843de349bf3af87ef6e7db664aba674", "manifestHash": "562ffd0ca19a1c4ff0b6e6570bb2f651096447d2e0ec7caccd1b2eaa126ab68b"}
+  ],
+  "allowedCorrection": {
+    "location": "final Node auditor build.json self-hash verification only",
+    "change": "Serialize finite JSON numbers with Python-compatible integer and zero-padded scientific-exponent spelling before validating buildHash.",
+    "offlineProof": {"input": "retained attempt-03 build.json", "expectedBuildHash": "9422649c0eb37481c95487d12607255869cc67bb00a755aa1fd39f3940d3151c", "observedValid": true},
+    "builderSceneRenderOutputSemanticPixelSentinelActionOperationAndResourceLogicChanged": false,
+    "expectedCrossLanguageEffect": "The final Node audit accepts the already-valid Python build self hash without changing any product output."
+  },
+  "builder": {"uri": "scripts/build-ai-native-studio-pc1-c3.py", "sha256": "bf4d6b31f965a29d6006e9696e1bad19985963f8ae63bfb134ff709d5e478f42"},
+  "semanticAuditor": {"uri": "scripts/audit-ai-native-studio-pc1.py", "sha256": "1bdec75e49465c5881e6698bc50cbc1189124a2ce9b9aa18b311286d63ead270"},
+  "tools": [
+    {"uri": "scripts/build-ai-native-studio-pc1-c3.py", "sha256": "bf4d6b31f965a29d6006e9696e1bad19985963f8ae63bfb134ff709d5e478f42", "role": "unchanged C3 normalized-record detail builder"},
+    {"uri": "scripts/audit-ai-native-studio-pc1.py", "sha256": "1bdec75e49465c5881e6698bc50cbc1189124a2ce9b9aa18b311286d63ead270", "role": "unchanged semantic/pixel auditor"},
+    {"uri": "scripts/run-ai-native-studio-pc1-c4.py", "sha256": "7c7465c42c1b9ee52a44b592d672c5f93a254ec4b944739aa0657cf5695b79ac", "role": "C4 fresh attempt-04 runner"},
+    {"uri": "scripts/audit-ai-native-studio-pc1-c4.mjs", "sha256": "8cfc3612e4cbbbfc2e17cf80ca4f5324a08ad5d2dd92f36333e85c9dc0bfd163", "role": "C4 Python-number-compatible final auditor"}
+  ],
+  "formalRoots": {"evidence": "experiments/ai-native-studio-post-pb7/PC.1-2026-08-31-mac-m2max-attempt-04", "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.1-2026-08-31-mac-m2max-attempt-04", "bothAbsentAtFreeze": true, "symlinksAllowed": false},
+  "resourceCeilings": {"evidenceBytes": 268435456, "workBytes": 268435456, "wallSeconds": 600, "peakRssBytesPerProcess": 2147483648, "minimumFreeReserveBytes": 107374182400},
+  "operationCeilings": {"BlenderStarts": 2, "renderCalls": 6, "derivedSceneSaves": 1, "sourceSceneSaves": 0, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0},
+  "stopRules": ["Retain attempts 01, 02 and 03 byte-for-byte.", "Stop before attempt-04 root creation on any binding drift.", "Retain FAIL for any product, hash, pixel, sentinel, action, source, EXR-residue or resource rejection.", "Do not start PC.2 before final PC.1 PASS."],
+  "specHash": "cf2e7667eabf5b085bedcfae3d596ce2048c46313c9d2b58d49b75a4b039abdd"
+}

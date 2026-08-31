@@ -6525,3 +6525,15 @@ Final Node audit停在17/18 `SELF_HASHES`：Python canonical spelling保留integ
 Date: 2026-08-31 · Type: VERSIONED TOOL FREEZE · Formal attempt-03 starts / renders / saves: 0 / 0 / 0
 
 C3只在build record write/hash boundary递归将finite integer-valued floats写为JSON integers，使Python/Node canonical bytes一致。Product/scene/26/3/EXR-PNG/pixels/sentinels/actions/operations/resources全部不变。Attempts 01/02 failure+manifest file/self hashes逐项绑定；fresh attempt-03 roots在freeze时absent。
+
+## J-545 · PC.1 attempt-03 retained exponent-format failure
+
+Date: 2026-08-31 · Type: RETAINED FINAL-AUDIT FAILURE · Blender starts / renders / saves: 2 / 6 / 1
+
+C3 product/semantic结果再次PASS且三view metrics exact复现。Final audit仍17/18：integer normalization已生效，但Python科学计数法`8e-08`与Node `8e-8`不同；Python验证build self hash有效。Attempt-03仍FAIL。C4仅允许final Node auditor复现Python finite-number spelling并先对retained attempt-03离线证明，fresh attempt-04；product tools/thresholds/operations不变。
+
+## J-546 · PC.1 C4 Python-number auditor freeze
+
+Date: 2026-08-31 · Type: VERSIONED AUDITOR-ONLY TOOL FREEZE · Formal attempt-04 starts / renders / saves: 0 / 0 / 0
+
+C4仅在final Node auditor中复现Python finite JSON number spelling，包括科学计数法指数补足两位；对retained attempt-03离线复核已验证exact build self hash `9422649c…`。C3 builder与semantic auditor不变，product/scene/26/3/EXR-PNG/pixels/sentinels/actions/operations/resources均不变。Attempts 01/02/03 failure+manifest file/self hashes逐项绑定；fresh attempt-04 roots在freeze时absent。

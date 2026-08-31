@@ -472,9 +472,13 @@ only internal multilayer EXR, not direct PNG; it used 1 start, 0 render and 0
 save, and remains sealed (`dcd59081…` / `ffec4a49…`). The immediate checkpoint
 C2 attempt-02 completed the product increment and all three visible-view floors,
 but final audit rejected a Python `1.0` versus Node `1` canonicalization mismatch;
-it remains sealed (`7722b9de…` / `f1d44dc4…`). C3 changes only build-record
-integer-float normalization and is frozen at `0a3e8bd1…`; fresh attempt-03 roots
-remain absent until execution. PC.2 must not start.
+it remains sealed (`7722b9de…` / `f1d44dc4…`). C3 normalized integer-valued
+floats and reproduced the same accepted product metrics, but attempt-03 remained
+FAIL because Python `8e-08` and Node `8e-8` spell the same finite number
+differently; it is sealed (`f65073be…` / `562ffd0c…`). C4 changes only final
+Node self-hash verification, has already validated retained attempt-03 offline,
+and is frozen at `cf2e7667…`; fresh attempt-04 roots remain absent until
+execution. PC.2 must not start.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
