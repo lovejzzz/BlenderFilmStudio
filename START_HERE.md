@@ -456,7 +456,8 @@ audit is 27/27 with self hash `e02c1dc4…`. PB.1–PB.7 now close this bounded
 product-prototype phase. The next checkpoint is a versioned improvement program
 for the two weaknesses named by the owner—modeling detail and action
 complexity—without expanding the result into a production-readiness or
-autonomous-filmmaking claim.
+autonomous-filmmaking claim. That program is now preregistered; the immediate
+gate is a one-start, zero-render, zero-save PC.0 hero-asset/action inventory.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

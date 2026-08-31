@@ -6435,3 +6435,11 @@ Date: 2026-08-31 · Type: ACCEPTED HUMAN REVIEW · Machine / human / overall: PA
 Owner在观看exact frozen PB.6 video后先给出qualitative note：光影与镜头感好，建模粗糙、动作简单，但潜力很大；随后exact回答`YES YES YES YES`。Recorder原样保存message与四token，normalization false，model-authored answers 0，review self hash `0d806411...`。
 
 Independent auditor不复用recorder mapping，27/27复核prereg/C1、人审来源、PB.6三JSON file/self hashes/PASS、video/contact sheet与frame-288 rejection。Human与machine均PASS，final bounded verdict self hash `4be072cc...`，audit `e02c1dc4...`，manifest `f888b173...`。Phase B PB.1–PB.7关闭PASS；claim仅为single-slice arm64 prototype。Next improvement priorities由human evidence冻结为modeling detail与action complexity。
+
+## J-533 · Post-PB.7 modeling/action improvement program preregistration
+
+Date: 2026-08-31 · Type: IMPROVEMENT PROGRAM PREREGISTRATION · New Blender starts / renders / engine edits: 0 / 0 / 0
+
+Owner human evidence同时冻结accepted strengths（lighting/camera language）与weaknesses（rough modeling/simple action）。Program依次为PC.0 read-only inventory、PC.1 modeling detail、PC.2 action complexity、PC.3 integrated slice + delayed A/B review。
+
+未来floor预注册为≥12 semantic detail components、≥3 hero material regions、≥2 protected views visible improvement，以及≥4 independent non-camera action channels、4 semantic phases、≥6 animated non-camera targets。PC.0先只允许1 zero-render/zero-save start、16 MiB evidence、300秒、2 GiB RSS；audit PASS前不得开始PC.1。

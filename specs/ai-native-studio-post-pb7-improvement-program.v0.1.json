@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.postPb7ImprovementProgram.v0.1",
+  "status": "PREREGISTERED_BEFORE_POST_PB7_INSPECTION_OR_MUTATION",
+  "program": "POST-PB7-MODELING-ACTION-QUALITY",
+  "title": "Preserve accepted lighting and camera language while improving modeling detail and action complexity",
+  "authority": {
+    "source": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
+    "repeatedOwnerAuthorizationRequired": false,
+    "specificConfirmationBoundariesUnchanged": true
+  },
+  "humanEvidence": {
+    "pb7EvidenceRoot": "experiments/ai-native-studio-phase-b/PB.7-2026-08-31-human-review-attempt-01",
+    "humanReviewHash": "0d806411f0845e11134d0d190525e732d8b7898f8185f192fa2e507344cbfc70",
+    "auditHash": "e02c1dc4e0ba8ff1fe08d88a37e1e97f6738ed0ef0c90f0060dd57653b57c721",
+    "verdictHash": "4be072cc1b483e552c001976434f42a14f72259ada07c72a8dea700b7fe0f6ab",
+    "answers": {"Q1": "YES", "Q2": "YES", "Q3": "YES", "Q4": "YES"},
+    "qualitativeFeedbackExact": "我看了视频了，说实话光影和镜头感很好，就是建模太粗糙，动作太简单了。但是我看到非常大的潜力。",
+    "protectedStrengths": ["lighting", "camera language and shot progression"],
+    "improvementPriorities": ["modeling detail", "action complexity"]
+  },
+  "frozenBaseline": {
+    "engineCommit": "aa4fff39ca5d5c4030dec2b8d0d4f576138787ad",
+    "binary": {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+      "sha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6",
+      "bytes": 182300520,
+      "architecture": "arm64"
+    },
+    "scene": {
+      "uri": "experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend",
+      "sha256": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+      "bytes": 337411
+    },
+    "reviewVideoSha256": "2aa51303912f920540e55638b0e21590735d73485362d75616c3dc96e22adf42",
+    "contactSheetSha256": "2fc02d11103742167cd793dc8d6bdbb8beccb10b1bfb05e1da77d20284152aab",
+    "shots": [
+      {"id": "WIDE", "framesInclusive": [1, 96], "camera": "CAM_WIDE_APPROACH"},
+      {"id": "MEDIUM", "framesInclusive": [97, 192], "camera": "CAM_MEDIUM_CONTACT"},
+      {"id": "CLOSE", "framesInclusive": [193, 288], "camera": "CAM_CLOSE_MOTION_TERMINAL"}
+    ]
+  },
+  "gates": [
+    {
+      "id": "PC.0",
+      "title": "Read-only hero-asset and action inventory",
+      "status": "PREREGISTERED_NOT_RUN",
+      "acceptance": "One zero-render start inventories exact hero meshes, topology, materials, modifiers, constraints, actions, F-curves, keyframes, animated targets and nine sentinel-frame transforms without saving or mutating the source."
+    },
+    {
+      "id": "PC.1",
+      "title": "Modeling-detail product increment",
+      "status": "NOT_RUN",
+      "acceptance": "Add meaningful silhouette, surface and material-region detail to the guardian and console/core, not subdivision-only inflation, while all protected camera and lighting identities pass regression."
+    },
+    {
+      "id": "PC.2",
+      "title": "Action-complexity product increment",
+      "status": "NOT_RUN",
+      "acceptance": "Add multiple causally timed non-camera action channels and secondary motion across approach, contact, activation and reflection without changing the accepted shot ranges or weakening recovery and receipt controls."
+    },
+    {
+      "id": "PC.3",
+      "title": "Integrated review slice and delayed A/B human review",
+      "status": "NOT_RUN",
+      "acceptance": "A fresh integrated slice passes machine regressions and a preregistered delayed human comparison judges modeling and action improvements while checking that lighting and camera strengths were retained."
+    }
+  ],
+  "pc0FormalAttempt": {
+    "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-01",
+    "mustBeFresh": true,
+    "allowedBlenderStarts": 1,
+    "renderCalls": 0,
+    "sceneSaves": 0,
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "mouseInteractions": 0,
+    "requiredMeasurements": [
+      "complete object/type/parent/collection roster",
+      "per-mesh vertices, edges, polygons, material slots and modifiers",
+      "guardian and console/core component roster and bounding boxes",
+      "materials and node counts used by hero assets",
+      "actions, slots, F-curves, keyframes, constraints and animated target roster",
+      "object and pose transforms at frames 1, 48, 96, 97, 144, 192, 193, 240 and 288",
+      "camera transforms/lenses and light transforms/energy/color at the same sentinel frames",
+      "source file SHA-256 before and after the process",
+      "process argv, stdout/stderr, operation counters and self-hashed root manifest"
+    ]
+  },
+  "futureMeasurableFloors": {
+    "modeling": {
+      "minimumNewSemanticDetailComponents": 12,
+      "minimumNewHeroMaterialRegions": 3,
+      "minimumProtectedViewsWithVisibleSilhouetteOrSurfaceDetail": 2,
+      "subdivisionOnlyDoesNotCount": true
+    },
+    "action": {
+      "minimumIndependentNonCameraActionChannels": 4,
+      "minimumSemanticTemporalPhases": 4,
+      "minimumAnimatedNonCameraTargets": 6,
+      "requiredPhases": ["approach", "contact", "activation", "reflection/settle"]
+    },
+    "regression": {
+      "shotRangesAndCameraNamesExact": true,
+      "cameraTransformsAndLensesAtSentinelsMustRemainExactUnlessLaterPreregistered": true,
+      "lightTransformsEnergyColorAtSentinelsMustRemainExactUnlessLaterPreregistered": true,
+      "PB5RestartSafetyMustRemainPass": true,
+      "PB6HistoricalFrame288RejectionMustRemainExact": true
+    }
+  },
+  "resourceCeilings": {
+    "minimumFreeReserveBytes": 107374182400,
+    "pc0EvidenceBytes": 16777216,
+    "pc0WallSeconds": 300,
+    "pc0PeakRssBytes": 2147483648
+  },
+  "stopRules": [
+    "Do not begin PC.1 source or render mutation until PC.0 evidence and an independent inventory audit pass.",
+    "Do not modify or save the frozen B62 source scene during PC.0.",
+    "Do not count invisible topology inflation or subdivision alone as modeling improvement.",
+    "Do not count camera motion, light animation or existing core pulse alone as added action complexity.",
+    "Do not degrade the accepted lighting/camera result to make modeling or action metrics easier.",
+    "Do not overwrite PB.6/PB.7 media, evidence or verdicts.",
+    "Do not create releases, distribute binaries or DMGs, sign, notarize, force-push, update other refs, upload LFS or make account/legal changes."
+  ],
+  "claimCeiling": "This program may show measurable improvement for one inherited stylized B62 slice on one admitted arm64 host. It does not prove final-film quality, general asset quality, production readiness, public distribution, cross-platform behavior or autonomous filmmaking.",
+  "specHash": "b1743a2d4cdaa8fec6c9cbe8308c8a409a2fe01a8b3ba795c725b49974cddc33"
+}

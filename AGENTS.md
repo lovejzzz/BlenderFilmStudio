@@ -283,7 +283,11 @@ and camera work while identifying rough modeling and simple action, and the
 independent audit passes 27/27. Final verdict self hash is `4be072cc…`; human
 receipt self hash is `0d806411…`. PB.1–PB.7 are closed for the bounded product
 prototype. Modeling detail and action complexity are the next evidence-backed
-improvement priorities; no production-readiness claim follows.
+improvement priorities; no production-readiness claim follows. The post-PB.7
+program is preregistered at
+`specs/ai-native-studio-post-pb7-improvement-program.v0.1.json`. Its first gate
+is one zero-render/zero-save PC.0 inventory; PC.1 mutation must not begin before
+that inventory and independent audit pass.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
