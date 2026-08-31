@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc3ToolFreeze.v0.1",
+  "status": "FROZEN_BEFORE_PC3_RENDER",
+  "gate": "PC.3",
+  "preregistration": {"uri": "specs/ai-native-studio-pc3-integrated-review-preregistration.v0.1.json", "sha256": "7362f836c658428704c1a3456c58e5ac81afaa38e4d6183627c2f0dcb57e4d91", "specHash": "4a7a1f8472f8a81fc01041538ec8a08d3e165b0b2fe6bcc9e64a00de8d98548c"},
+  "binary": {"path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender", "sha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6", "bytes": 182300520, "architecture": "arm64"},
+  "ffmpeg": {"path": "/opt/homebrew/bin/ffmpeg", "sha256": "5cc8f6fabfe9a6ac1fe51f1679bc9d063653801575874016409127f78a014c97"},
+  "ffprobe": {"path": "/opt/homebrew/bin/ffprobe", "sha256": "008d2de26bd19f7fa497d0b7d9d45880e0240de46dc984916be759fd35bdd135"},
+  "renderer": {"uri": "scripts/render-ai-native-studio-pc3.py", "sha256": "76638be763fd659bf4dd44f5251e736cd86176cd613c262233326c6260fc382a"},
+  "semanticAuditor": {"uri": "scripts/audit-ai-native-studio-pc3.py", "sha256": "7ac240c132fb0b3bcd1d7b58fd463435faf94a607f87e5fe0004829f2e0f809f"},
+  "tools": [
+    {"uri": "scripts/render-ai-native-studio-pc3.py", "sha256": "76638be763fd659bf4dd44f5251e736cd86176cd613c262233326c6260fc382a", "role": "288-frame EXR-to-PNG renderer and A/B contact sheet"},
+    {"uri": "scripts/audit-ai-native-studio-pc3.py", "sha256": "7ac240c132fb0b3bcd1d7b58fd463435faf94a607f87e5fe0004829f2e0f809f", "role": "reopen semantic/pixel A/B auditor"},
+    {"uri": "scripts/run-ai-native-studio-pc3.py", "sha256": "ef643245c6f740c0ba57ceae594a4fda3308b2a816c8430719283f7a07565706", "role": "render, ffmpeg, ffprobe and reopen runner"},
+    {"uri": "scripts/audit-ai-native-studio-pc3.mjs", "sha256": "d55fcfa4920f4a1984db23acca9ace98ee57f1749dfb92ed5c18d7db3c26df5f", "role": "independent machine auditor and root sealer"}
+  ],
+  "staticChecks": {"pythonCompile": "PASS", "nodeSyntax": "PASS", "rendererRenderCalls": 288, "semanticAuditorRenderCalls": 0, "sourceSceneSaves": 0, "rendererExternalProcessOrNetworkAuthorities": 0, "auditorExternalProcessOrNetworkAuthorities": 0},
+  "formalRoots": {"evidence": "experiments/ai-native-studio-post-pb7/PC.3-2026-08-31-mac-m2max-attempt-01", "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.3-2026-08-31-mac-m2max-attempt-01", "bothAbsentAtFreeze": true, "symlinksAllowed": false},
+  "operationCeilings": {"BlenderStarts": 2, "renderCalls": 288, "ffmpegProcesses": 1, "ffprobeProcesses": 1, "sceneSaves": 0, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0},
+  "resourceCeilings": {"minimumFreeReserveBytes": 107374182400, "evidenceBytes": 268435456, "workBytes": 1073741824, "wallSecondsPerBlenderProcess": 600, "peakRssBytesPerProcess": 2147483648},
+  "stopRules": ["Stop before root creation on any source, baseline, binary, tool or preregistration drift.", "Retain attempt-01 unchanged for FAIL or MACHINE_PASS_HUMAN_PENDING.", "Do not open human review until independent machine audit seals the root.", "Do not answer owner questions on the owner's behalf."],
+  "specHash": "d9cce851a9d12f1b3504b748c6f1a383e0c3f53e6549ddaf87efcd1637f14d16"
+}

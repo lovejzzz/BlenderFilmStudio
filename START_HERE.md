@@ -493,7 +493,10 @@ four channels and ten non-camera signal targets passed 19/19 after reopen;
 exactly six PC.1 detail objects gained animation. Receipt/audit/manifest self
 hashes are `f99fc297…` / `b68b6600…` / `15aeacec…`. Geometry/materials,
 camera/lights and shot markers remained exact. PC.2 is closed; PC.3 integrated
-video and delayed visual comparison is the active gate.
+video and delayed visual comparison is the active gate. PC.3 preregistration
+and exact render/video/audit tools are frozen at `4a7a1f84…` / `d9cce851…`;
+fresh attempt-01 roots remain absent. It must produce and seal a 288-frame
+machine PASS before the four owner A/B questions are opened.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

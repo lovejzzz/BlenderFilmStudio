@@ -6579,3 +6579,9 @@ Fresh attempt-02 runner `f99fc297…`与independent 19/19 audit `b68b6600…` PA
 Date: 2026-08-31 · Type: PREREGISTRATION · PC.3 Blender starts / renders / video processes: 0 / 0 / 0
 
 PC.3冻结accepted PC.2 source `81453bff…`，以accepted PB.6 video `2aa51303…`为A，fresh 288-frame integrated video为B。Machine floors包括288 unique hashes、≥280 dynamic pairs、≥192 visibly changed frames、median MAD ≥0.001、exact 96/96/96 cameras、PC.2 identity exact与zero retained EXR。Machine PASS后才开放owner四问；model不得代答，PC.3 final verdict需exact owner answers。
+
+## J-554 · PC.3 integrated render tool freeze
+
+Date: 2026-08-31 · Type: TOOL FREEZE · Formal PC.3 starts / renders / video processes: 0 / 0 / 0
+
+Exact 288-frame EXR→PNG renderer、zero-render reopen A/B auditor、ffmpeg/ffprobe runner与final machine auditor冻结。每frame temporary EXR立即删除；second start读取576 A/B frames并复核identity/pixel floors。Python/Node static checks PASS，source save 0；ffmpeg/ffprobe exact hashes绑定。Fresh attempt-01 roots在freeze时absent；machine root sealed前human review关闭。
