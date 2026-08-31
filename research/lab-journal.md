@@ -6505,3 +6505,9 @@ Date: 2026-08-31 · Type: RETAINED HARNESS FAILURE · Blender starts / renders /
 Formal builder在first render前设置direct PNG时被product output contract正确拒绝：runtime仅暴露`OPEN_EXR_MULTILAYER`。Source SHA仍`0acd4d13...`；无detail creation/save/render/network/model/mouse。Process self hash `0aeaff0a...`，wall 0.637s，RSS 252,477,440 bytes。
 
 Attempt-01 roots保留。C2只允许复用既有temporary multilayer EXR→local PNG adapter，最终仍exact six PNG且retained EXR=0；其余26/3/pixel/sentinel/action/operations/resources thresholds不变。PC.2仍禁止。
+
+## J-542 · PC.1 C2 output-adapter tool freeze
+
+Date: 2026-08-31 · Type: VERSIONED TOOL FREEZE · Formal attempt-02 starts / renders / saves: 0 / 0 / 0
+
+C2 builder对每个protected render写1 temporary multilayer EXR，独立定位唯一Combined RGBA，经isolated output scene写PNG后立即删除EXR；总计6/6/6，retained EXR=0。Explicit repository ACES OCIO binding加入runner。Attempt-01 file/self hashes、26/3/pixel/sentinel/action/operations/resources均exact。Fresh attempt-02 roots在freeze时absent。

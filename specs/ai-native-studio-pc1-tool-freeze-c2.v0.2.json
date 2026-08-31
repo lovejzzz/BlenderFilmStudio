@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc1ToolFreezeCorrection.v0.2",
+  "status": "FROZEN_BEFORE_PC1_START",
+  "gate": "PC.1",
+  "correction": "C2",
+  "preregistration": {
+    "uri": "specs/ai-native-studio-pc1-modeling-detail-preregistration-c1.v0.2.json",
+    "sha256": "dd2bd2f2ca31a6bb590b43a653ecc4639afb0bb345d19815d7b2d8d5c7d2527d",
+    "specHash": "28ac7a88c25a6da004c5b9fd996e3dcd69188b3e2665b577fdc2263aef1f3206"
+  },
+  "baseFreeze": {
+    "uri": "specs/ai-native-studio-pc1-tool-freeze.v0.1.json",
+    "sha256": "9bda7af6f5fc85c71c3d9936f1e0874afb06eaf54dcd2b1babd65fdf3d5e02bf",
+    "specHash": "e7e86dc26b4f643c5cb2521b2c0d080883f8f561f06f4d4afdbe80088e331a62"
+  },
+  "retainedAttempt01": {
+    "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.1-2026-08-31-mac-m2max-attempt-01",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.1-2026-08-31-mac-m2max-attempt-01",
+    "failure": {"sha256": "16c226564e801026a30eb549c6519cbf10a6fff336a81195e068784b1068cccc", "failureHash": "dcd59081b924ae78928de18375da3c331c4a16720f100d79cb149886bf0e814b"},
+    "manifest": {"sha256": "7f63c236c594a36f01b8082852ba89663793b2b3826c2e374cbd9b11b08895d1", "manifestHash": "ffec4a498111517614d26e119d7969db05520da42b755076f67f592997ee6dc4"},
+    "immutable": true
+  },
+  "allowedCorrection": {
+    "productionRenderFormat": "OPEN_EXR_MULTILAYER",
+    "temporaryExrWrites": 6,
+    "oiioCombinedRgbaDecodes": 6,
+    "isolatedGeneratedPngWrites": 6,
+    "temporaryExrFilesRetained": 0,
+    "finalComparisonRosterAndFormatUnchanged": "six PNG",
+    "bindRepositoryAcesOcioConfig": true,
+    "detailMaterialPixelSentinelActionOperationAndResourceThresholdsChanged": false
+  },
+  "builder": {"uri": "scripts/build-ai-native-studio-pc1-c2.py", "sha256": "380dba4bb4cede612b46a90bb2e56ebfb0d2b32472c6d4233cfab78e433908ea"},
+  "semanticAuditor": {"uri": "scripts/audit-ai-native-studio-pc1.py", "sha256": "1bdec75e49465c5881e6698bc50cbc1189124a2ce9b9aa18b311286d63ead270"},
+  "tools": [
+    {"uri": "scripts/build-ai-native-studio-pc1-c2.py", "sha256": "380dba4bb4cede612b46a90bb2e56ebfb0d2b32472c6d4233cfab78e433908ea", "role": "C2 EXR-to-PNG detail builder"},
+    {"uri": "scripts/audit-ai-native-studio-pc1.py", "sha256": "1bdec75e49465c5881e6698bc50cbc1189124a2ce9b9aa18b311286d63ead270", "role": "unchanged semantic/pixel auditor"},
+    {"uri": "scripts/run-ai-native-studio-pc1-c2.py", "sha256": "784afee72f419d2799b1232410a7c85b1b532e5eb0783bf7321cb94953b43c30", "role": "C2 fresh attempt-02 runner"},
+    {"uri": "scripts/audit-ai-native-studio-pc1-c2.mjs", "sha256": "18731746c957fd2bac8482d2d38829542997b7e7f8f695977adbc9f36ee3d3ca", "role": "C2 final auditor"}
+  ],
+  "formalRoots": {
+    "evidence": "experiments/ai-native-studio-post-pb7/PC.1-2026-08-31-mac-m2max-attempt-02",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.1-2026-08-31-mac-m2max-attempt-02",
+    "bothAbsentAtFreeze": true,
+    "symlinksAllowed": false
+  },
+  "resourceCeilings": {
+    "evidenceBytes": 268435456,
+    "workBytes": 268435456,
+    "wallSeconds": 600,
+    "peakRssBytesPerProcess": 2147483648,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "operationCeilings": {"BlenderStarts": 2, "renderCalls": 6, "derivedSceneSaves": 1, "sourceSceneSaves": 0, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0},
+  "stopRules": [
+    "Retain attempt-01 byte-for-byte.",
+    "Stop before attempt-02 root creation on any binding drift.",
+    "Retain FAIL for any EXR residue, decode ambiguity, PNG roster mismatch, threshold failure, sentinel/action drift, source drift or resource excess.",
+    "Do not start PC.2 before final PC.1 PASS."
+  ],
+  "specHash": "47141494b68ac559361bb46568ef9095a3719862ea349a7df97ebac4b8aaf147"
+}

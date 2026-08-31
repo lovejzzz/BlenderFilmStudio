@@ -470,8 +470,9 @@ one-leaf EEVEE C1 correction with self hash `e7e86dc2…`. Attempt-01 then
 stopped before its first render because the product output contract permits
 only internal multilayer EXR, not direct PNG; it used 1 start, 0 render and 0
 save, and remains sealed (`dcd59081…` / `ffec4a49…`). The immediate checkpoint
-is a versioned C2 adapter that converts temporary EXR locally into the same six
-PNG comparisons while retaining zero EXR; PC.2 must not start.
+is now a frozen C2 adapter (`47141494…`) that converts temporary EXR locally
+into the same six PNG comparisons while retaining zero EXR. Fresh attempt-02
+roots remain absent until execution; PC.2 must not start.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
