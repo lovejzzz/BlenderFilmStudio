@@ -376,15 +376,12 @@ contract name instead of reading everything.
 PB.2 validation-only is closed `PASS`; PB.3 attempt-01 and attempt-02 are
 retained harness failures. Attempt-02 completed all four zero-render semantic
 processes but failed frozen postconditions at 17/18 base and 21/23 C3 audit.
-The next checkpoint is an inert versioned correction that normalizes the exact
-tool argv spelling and prevents Blender save-preview thumbnail creation without
-relaxing the no-render-artifact threshold. C4 v1.1 preregisters that exact
-boundary; tooling is not yet implemented and no fresh execution is authorized.
-Initial C4 static audit is retained `FAIL 31/32` because its inert negative
-control expected a later error message than the runner's safe early status
-rejection. C1 v1.3 freezes a one-assertion correction; attempt-03 remains
-absent and unauthorized. Do not retry either formal root, mutate `film-engine`,
-or begin PB.4–PB.7.
+The C4-C1 inert correction now passes 32/32 static checks: exact argv
+normalization and thumbnail prevention are frozen without relaxing the
+no-render-artifact threshold. The next checkpoint is exact C4 attempt-03
+authorization. Attempt-03 roots remain absent and no fresh execution is
+authorized. Do not retry either formal root, mutate `film-engine`, or begin
+PB.4–PB.7.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

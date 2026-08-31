@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPb3C4ToolFreezeStaticAudit.v0.1",
+  "status": "PASS",
+  "checks": {
+    "c4SchemaStatus": true,
+    "staticAuditorSelfBinding": true,
+    "runnerBinding": true,
+    "independentAuditorBinding": true,
+    "preregistrationBinding": true,
+    "authorizationRequestBinding": true,
+    "authorizationStillMissing": true,
+    "correctedToolBinding": true,
+    "helperBinding": true,
+    "toolDiffExactlyTwoFields": true,
+    "helperDiffExactlyTwoLines": true,
+    "helperChangeImmediatelyBeforeSave": true,
+    "runnerNoPowerImports": true,
+    "auditorNoPowerImports": true,
+    "helperOnlyExpectedPowerImport": true,
+    "runnerNormalizesBeforeDelegate": true,
+    "auditorRequiresAbsoluteToolPath": true,
+    "auditorPreservesAllArtifactExtensions": true,
+    "correctedInputRosterExact": true,
+    "retainedAttemptsExact": true,
+    "attempt03RootsAbsentBeforeSelfTest": true,
+    "attempt03RootsAbsentAfterInert": true,
+    "runnerSelfTestPass": true,
+    "inertTemplateRejected": true,
+    "templateInert": true,
+    "sourceIdentity": true,
+    "sourceClean": true,
+    "binaryIdentity": true,
+    "resourcesUnchanged": true,
+    "formalCountsRemainZero": true,
+    "noEngineMutationAuthorized": true,
+    "thresholdsUnchanged": true
+  },
+  "counts": {
+    "passed": 32,
+    "total": 32,
+    "selfTests": 1,
+    "inertInvocations": 1,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0
+  },
+  "toolDiff": [
+    {
+      "path": "tools.blenderProbe",
+      "before": "blender/run_ai_native_studio_pb3_combined.py",
+      "after": "blender/run_ai_native_studio_pb3_combined_c4.py"
+    },
+    {
+      "path": "tools.blenderProbeSha256",
+      "before": "12ce035804ff45d7c4d9f1b410b07929cbce727079f896eb9ccb3c44553bba96",
+      "after": "a516dbe7c06c477fbc1b36e8dcbad7cef0f3992af4e30bf8418c3efa59f91114"
+    }
+  ],
+  "helperAddedLines": [
+    "    bpy.context.preferences.filepaths.file_preview_type = \"NONE\"",
+    "    require(bpy.context.preferences.filepaths.file_preview_type == \"NONE\", \"blend preview suppression failed\")"
+  ],
+  "runnerSelfTest": {
+    "exitCode": 0,
+    "stdoutSha256": "b51f29791978cb3421912a4970082cdf45743ac717e5c016efd6dfc5980da991",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "inertTemplateInvocation": {
+    "exitCode": 1,
+    "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderrSha256": "15ea1dd6d96d4eead7fdc802364ce1eb150316ecbe4bbdb5ae0a203690d0d1a2"
+  },
+  "claimCeiling": "C4-C1 changes only the inert negative-control message assertion while preserving the C4 runner, independent auditor, helper, corrected tool, semantic/resource/no-artifact thresholds and both retained attempts. It grants no attempt-03 authority and starts no Blender process.",
+  "auditHash": "c323b9ce28ebbb4b709d46fe22dfa6041f2389a401606cd0420009ca06634cc5"
+}

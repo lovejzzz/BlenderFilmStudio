@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_AND_ATTEMPT02_RETAINED_FAIL_C4_CORRECTION_REQUIRED",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_AND_ATTEMPT02_RETAINED_FAIL_C4_TOOL_FREEZE_PASS_ATTEMPT03_UNAUTHORIZED",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -655,7 +655,7 @@
       "status": "PB3_ATTEMPT02_RETAINED_POST_SEMANTIC_FAIL_C4_PREREGISTERED_TOOLING_NOT_IMPLEMENTED",
       "basis": "C3 attempt-02 completed semantic operations but base audit failed automatic thumbnail PNGs and C3 argv verification failed relative-versus-absolute tool-contract spelling",
       "c4Preregistration": {
-        "status": "IMPLEMENTED_STATIC_ATTEMPT01_RETAINED_FAIL_C1_PREREGISTERED",
+        "status": "C1_TOOL_FREEZE_PASS_STATIC_32_OF_32_ATTEMPT03_UNAUTHORIZED",
         "contract": "specs/ai-native-studio-pb3-validation-c4-harness-correction.v1.1.json",
         "contractFileSha256": "194d3e9d1be415d29646f59ded6be94371e18db13a383d7a48d57a44aa741ece",
         "researchDocument": "research/2026-08-31-ai-native-studio-pb3-c4-harness-correction-preregistration-v1.1.md",
@@ -679,6 +679,32 @@
           "c1Correction": "specs/ai-native-studio-pb3-validation-c4-c1-static-inert-rejection.v1.3.json",
           "c1CorrectionFileSha256": "cc57d8311dc2bf7cc67434f591ddd44ba5d183731d93dadc5bd648b66442948d"
         },
+        "implementationAttempt02": {
+          "status": "PASS_STATIC_32_OF_32_INERT",
+          "toolFreeze": "specs/ai-native-studio-pb3-validation-c4-c1-execution-tool-freeze.v1.3.json",
+          "toolFreezeFileSha256": "cd02bb9264b951c52217d2cdbdd4f5e237a95c071e7533c75eeabdd5f00792c2",
+          "runner": "scripts/run-ai-native-studio-pb3-validation-c4.py",
+          "runnerFileSha256": "eb670c264cc240b792a55cd9fd3e6a517fcf58a451a4499168a6bd85f7fb929b",
+          "independentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c4.py",
+          "independentAuditorFileSha256": "a212b64b3b74b8056478ce70f5f981c51f23d8ea849650720235f34651b22d4e",
+          "staticAuditor": "scripts/audit-ai-native-studio-pb3-tool-freeze-c4-c1.py",
+          "staticAuditorFileSha256": "1e402b6c8fa8748b24001fa9d4d3615dc7a5a538030db7442a1f3f6a46015f7b",
+          "blenderHelper": "blender/run_ai_native_studio_pb3_combined_c4.py",
+          "blenderHelperFileSha256": "a516dbe7c06c477fbc1b36e8dcbad7cef0f3992af4e30bf8418c3efa59f91114",
+          "correctedTool": "specs/ai-native-studio-pb3-validation-tool-freeze-c4-corrected.v1.2.json",
+          "correctedToolFileSha256": "24baa8e6a03d62fa2559c939209cfe05fb7a9cdbdbe82ec08267aa1bc9ad827d",
+          "executionTemplate": "specs/ai-native-studio-pb3-validation-execution-c4-c1-template.v1.4.json",
+          "executionTemplateFileSha256": "a7ce9b8c09a5b7e688da52347f9e9584349c750e1119294668fbd6967582e1a0",
+          "authorizationRequest": "specs/ai-native-studio-pb3-validation-only-authorization-request-c4.v1.2.json",
+          "authorizationRequestFileSha256": "865ed150d7d0dfc7b26a32111b6e11b53eccc7a6da288f69d0bdd97703e44871",
+          "staticAudit": "experiments/ai-native-studio-phase-b/PB.3-c4-c1-tool-freeze-2026-08-31-mac-m2max-attempt-02/audit.json",
+          "staticAuditFileSha256": "d9df9f62d0b3f8bfa18b7cb7b6b00146708f759acae7ed41afec95a89aefca7d",
+          "staticAuditHash": "c323b9ce28ebbb4b709d46fe22dfa6041f2389a401606cd0420009ca06634cc5",
+          "checks": "32/32",
+          "researchDocument": "research/2026-08-31-ai-native-studio-pb3-c4-c1-tool-freeze-v1.3.md",
+          "researchDocumentFileSha256": "807af50fd4c1e37b6f83078842743757360c80e9d0ed3db82b0ae1e4d64894d3",
+          "attempt03RootsExist": false
+        },
         "blenderStarts": 0,
         "renders": 0,
         "engineSourceEdits": 0,
@@ -689,7 +715,7 @@
       "phaseBSourceMutationAuthorized": false,
       "pb2ThroughPb7Authorized": false,
       "nextGate": "PB.3",
-      "nextGateStatus": "PB3_C4_C1_SINGLE_STATIC_ASSERTION_CORRECTION_REQUIRED_NO_EXECUTION_AUTHORITY"
+      "nextGateStatus": "PB3_C4_C1_TOOL_FREEZE_PASS_AWAITING_EXPLICIT_ATTEMPT03_AUTHORIZATION"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1065,19 +1091,20 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB3_VALIDATION_ONLY_C4_INERT_TOOL_CORRECTION",
-    "result": "Retain C3 attempt-02 FAIL; freeze a no-execution correction for argv normalization and thumbnail prevention without relaxing thresholds",
+    "gate": "PB3_VALIDATION_ONLY_C4_ATTEMPT03_AUTHORIZATION",
+    "result": "C4-C1 inert correction passes 32/32; await exact fresh attempt-03 authorization before root creation or Blender start",
     "requiredArtifacts": [
       "retain attempt-01 and attempt-02 work/evidence roots unchanged",
-      "normalize --tool-contract to one absolute spelling before process creation and audit reconstruction",
-      "set Blender file preview type to NONE before save so no thumbnail-cache PNG is created",
-      "statically prove unchanged semantic thresholds, zero execution and fresh future roots absent",
+      "bind the frozen C4-C1 runner, auditor, helper and corrected tool",
+      "bind the exact fresh attempt-03 authorization text in a single-path execution contract",
+      "preserve the 32/32 static audit, unchanged thresholds and fresh attempt-03 roots until authority",
       "zero film-engine source/ref/tag/release mutation, engine remote write, network, rendering, signing, notarization, DMG work or PB.4-PB.7 work"
     ],
     "formalAttempt01Authorized": false,
     "formalAttempt01AuthorizationConsumed": true,
     "formalAttempt02Authorized": false,
     "formalAttempt02AuthorizationConsumed": true,
-    "exactAuthorizationTextSource": null
+    "formalAttempt03Authorized": false,
+    "exactAuthorizationTextSource": "specs/ai-native-studio-pb3-validation-only-authorization-request-c4.v1.2.json#/requestedAuthorization/exactText"
   }
 }

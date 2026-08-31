@@ -6221,3 +6221,13 @@ C4 versioned helper相对base只增加preview type `NONE`赋值+断言两行；c
 Static audit为31/32 FAIL，唯一false是`inertTemplateRejected`：auditor预期`authorization text differs`，runner实际在更早、更严格的status gate返回`PB.3 C4 execution is not authorized`。Evidence file/self SHA为`890c64e41846c7dca83fa496a593ad0999735e6f45b459e766c82aa49cd757a1` / `f2be8eb9bc4ada141e3137c3563c1ffddbbb636bb82a10db4c56e5c45bc704c5`，root 1 file / 3,084 bytes / manifest `64aaedd8...`，永久保留。
 
 C1 v1.3只允许新static-auditor path把expected substring改为实际safe status rejection，同时继续要求nonzero exit。Runner、independent auditor、helper、corrected tool、request、thresholds和permissions全部不改。Correction SHA为`cc57d8311dc2bf7cc67434f591ddd44ba5d183731d93dadc5bd648b66442948d`；仍不授权attempt-03或Blender start。
+
+## J-508 · PB.3 C4-C1 inert tool freeze PASS
+
+Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL FREEZE · Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C1 static auditor与失败版只有一个message substring差异，SHA-256 `1e402b6c8fa8748b24001fa9d4d3615dc7a5a538030db7442a1f3f6a46015f7b`。新execution-tool freeze `cd02bb92...`绑定该C1、原runner/auditor/helper/corrected tool/request exact hashes、attempt-01/02 manifests、attempt-03 fresh roots与原2 GiB / 64 MiB及4/2/2/2/2/2上限。
+
+Static/negative audit 32/32 PASS，file/self SHA为`d9df9f62d0b3f8bfa18b7cb7b6b00146708f759acae7ed41afec95a89aefca7d` / `c323b9ce28ebbb4b709d46fe22dfa6041f2389a401606cd0420009ca06634cc5`，root 1 file / 3,095 bytes / manifest `b6eea16a...`。它复核helper exact two-line diff、tool exact two-field diff、normalize-before-delegate、auditor六种全root forbidden extensions、13/13 inputs、两个retained roots、source/binary、resources、self-test与inert rejection。Attempt-03 roots前后absent，所有formal counts为0。
+
+Active exact request为`specs/ai-native-studio-pb3-validation-only-authorization-request-c4.v1.2.json`，template为`specs/ai-native-studio-pb3-validation-execution-c4-c1-template.v1.4.json`。General continue或旧PB.3 authority不足以创建attempt-03；必须等owner逐字批准后再单路径提交execution contract。PB.4–PB.7仍locked。

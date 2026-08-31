@@ -202,7 +202,14 @@ audit is a retained 31/32 failure: the draft execution was safely rejected at
 the earlier status gate, while the static test expected a later authorization-
 text message. C1 v1.3 permits only that message assertion correction in a new
 static-auditor path; runner, independent auditor, helper, tool and thresholds
-remain frozen. PB.4–PB.7 remain unauthorized.
+remain frozen. C4-C1 v1.3 now passes static audit 32/32 with self hash
+`c323b9ce...`; it proves the exact two-line helper diff, two-field tool diff,
+absolute-path normalization, unchanged all-root artifact rejection, both
+retained manifests and zero formal counts. Attempt-03 roots remain absent. The
+active exact request is
+`specs/ai-native-studio-pb3-validation-only-authorization-request-c4.v1.2.json`.
+General continuation is insufficient; attempt-03 and PB.4–PB.7 remain
+unauthorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
