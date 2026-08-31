@@ -470,9 +470,11 @@ one-leaf EEVEE C1 correction with self hash `e7e86dc2…`. Attempt-01 then
 stopped before its first render because the product output contract permits
 only internal multilayer EXR, not direct PNG; it used 1 start, 0 render and 0
 save, and remains sealed (`dcd59081…` / `ffec4a49…`). The immediate checkpoint
-is now a frozen C2 adapter (`47141494…`) that converts temporary EXR locally
-into the same six PNG comparisons while retaining zero EXR. Fresh attempt-02
-roots remain absent until execution; PC.2 must not start.
+C2 attempt-02 completed the product increment and all three visible-view floors,
+but final audit rejected a Python `1.0` versus Node `1` canonicalization mismatch;
+it remains sealed (`7722b9de…` / `f1d44dc4…`). C3 changes only build-record
+integer-float normalization and is frozen at `0a3e8bd1…`; fresh attempt-03 roots
+remain absent until execution. PC.2 must not start.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

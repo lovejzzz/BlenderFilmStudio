@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc1ToolFreezeCorrection.v0.3",
+  "status": "FROZEN_BEFORE_PC1_START",
+  "gate": "PC.1",
+  "correction": "C3",
+  "preregistration": {"uri": "specs/ai-native-studio-pc1-modeling-detail-preregistration-c1.v0.2.json", "sha256": "dd2bd2f2ca31a6bb590b43a653ecc4639afb0bb345d19815d7b2d8d5c7d2527d", "specHash": "28ac7a88c25a6da004c5b9fd996e3dcd69188b3e2665b577fdc2263aef1f3206"},
+  "baseFreeze": {"uri": "specs/ai-native-studio-pc1-tool-freeze-c2.v0.2.json", "sha256": "ea9dd14572f1ebff2277622cda900c0528172d52244058c5be92f864af7f56a8", "specHash": "47141494b68ac559361bb46568ef9095a3719862ea349a7df97ebac4b8aaf147"},
+  "retainedAttempts": [
+    {"id": "attempt-01", "failureFileSha256": "16c226564e801026a30eb549c6519cbf10a6fff336a81195e068784b1068cccc", "failureHash": "dcd59081b924ae78928de18375da3c331c4a16720f100d79cb149886bf0e814b", "manifestFileSha256": "7f63c236c594a36f01b8082852ba89663793b2b3826c2e374cbd9b11b08895d1", "manifestHash": "ffec4a498111517614d26e119d7969db05520da42b755076f67f592997ee6dc4"},
+    {"id": "attempt-02", "failureFileSha256": "b7adcba1932e576c27b718b987468b269936bfca4e0bf3984d934253b9a0a380", "failureHash": "7722b9deb913b21f812cc4569c9f1ab146015989f0d653bfedc9010c3f3ed35a", "manifestFileSha256": "d88b002881884c45894f0b84671c919f054326f5d4fa9c8a560b4225f9b61bfc", "manifestHash": "f1d44dc47fc69a6ec150c0117c994005a8841550521ac723c69d7855fb0d062d"}
+  ],
+  "allowedCorrection": {
+    "location": "build record write/hash boundary only",
+    "change": "Recursively normalize finite integer-valued floats to JSON integers before hashing and writing build.json.",
+    "productSceneRenderOutputSemanticPixelSentinelActionOperationAndResourceLogicChanged": false,
+    "expectedCrossLanguageEffect": "Python and Node canonical JSON become byte-identical for build.json."
+  },
+  "builder": {"uri": "scripts/build-ai-native-studio-pc1-c3.py", "sha256": "bf4d6b31f965a29d6006e9696e1bad19985963f8ae63bfb134ff709d5e478f42"},
+  "semanticAuditor": {"uri": "scripts/audit-ai-native-studio-pc1.py", "sha256": "1bdec75e49465c5881e6698bc50cbc1189124a2ce9b9aa18b311286d63ead270"},
+  "tools": [
+    {"uri": "scripts/build-ai-native-studio-pc1-c3.py", "sha256": "bf4d6b31f965a29d6006e9696e1bad19985963f8ae63bfb134ff709d5e478f42", "role": "C3 normalized-record detail builder"},
+    {"uri": "scripts/audit-ai-native-studio-pc1.py", "sha256": "1bdec75e49465c5881e6698bc50cbc1189124a2ce9b9aa18b311286d63ead270", "role": "unchanged semantic/pixel auditor"},
+    {"uri": "scripts/run-ai-native-studio-pc1-c3.py", "sha256": "fc6f38f9591209cbc48e34d308590fb8a81b187d282e8a632f6e00533f6d1379", "role": "C3 fresh attempt-03 runner"},
+    {"uri": "scripts/audit-ai-native-studio-pc1-c3.mjs", "sha256": "87cbc701d3ac4093240c4f42b6741b4b6d81215f4b4eaae83f1476d3adc1b2b8", "role": "C3 final auditor"}
+  ],
+  "formalRoots": {"evidence": "experiments/ai-native-studio-post-pb7/PC.1-2026-08-31-mac-m2max-attempt-03", "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.1-2026-08-31-mac-m2max-attempt-03", "bothAbsentAtFreeze": true, "symlinksAllowed": false},
+  "resourceCeilings": {"evidenceBytes": 268435456, "workBytes": 268435456, "wallSeconds": 600, "peakRssBytesPerProcess": 2147483648, "minimumFreeReserveBytes": 107374182400},
+  "operationCeilings": {"BlenderStarts": 2, "renderCalls": 6, "derivedSceneSaves": 1, "sourceSceneSaves": 0, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0},
+  "stopRules": ["Retain attempts 01 and 02 byte-for-byte.", "Stop before attempt-03 root creation on any binding drift.", "Retain FAIL for any product, hash, pixel, sentinel, action, source, EXR-residue or resource rejection.", "Do not start PC.2 before final PC.1 PASS."],
+  "specHash": "0a3e8bd1c1360c50aa25dd7605cce73ce0b6be640d83702b1e6d0d63d973af69"
+}

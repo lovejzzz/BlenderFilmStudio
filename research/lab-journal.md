@@ -6511,3 +6511,17 @@ Attempt-01 roots保留。C2只允许复用既有temporary multilayer EXR→local
 Date: 2026-08-31 · Type: VERSIONED TOOL FREEZE · Formal attempt-02 starts / renders / saves: 0 / 0 / 0
 
 C2 builder对每个protected render写1 temporary multilayer EXR，独立定位唯一Combined RGBA，经isolated output scene写PNG后立即删除EXR；总计6/6/6，retained EXR=0。Explicit repository ACES OCIO binding加入runner。Attempt-01 file/self hashes、26/3/pixel/sentinel/action/operations/resources均exact。Fresh attempt-02 roots在freeze时absent。
+
+## J-543 · PC.1 attempt-02 retained cross-language hash failure
+
+Date: 2026-08-31 · Type: RETAINED FINAL-AUDIT FAILURE · Blender starts / renders / saves: 2 / 6 / 1
+
+Product execution与semantic audit均PASS：26 details、3 materials、104 objects、92 meshes、19,810 polygons；WIDE/MEDIUM/CLOSE changed fractions为0.02464/0.12429/0.17949，全部超过floor；retained EXR 0，sentinel/action/source exact。Runner receipt `b16c69f8...`，semantic self `533afeb5...`。
+
+Final Node audit停在17/18 `SELF_HASHES`：Python canonical spelling保留integer-valued float `1.0`，Node parse/reserialize为`1`；Python独立验证build self hash有效。Attempt-02仍判FAIL并保留。C3仅允许在build record write/hash前递归把finite integer floats归一成JSON integers，fresh attempt-03；其余逻辑/thresholds exact。
+
+## J-544 · PC.1 C3 normalized-record tool freeze
+
+Date: 2026-08-31 · Type: VERSIONED TOOL FREEZE · Formal attempt-03 starts / renders / saves: 0 / 0 / 0
+
+C3只在build record write/hash boundary递归将finite integer-valued floats写为JSON integers，使Python/Node canonical bytes一致。Product/scene/26/3/EXR-PNG/pixels/sentinels/actions/operations/resources全部不变。Attempts 01/02 failure+manifest file/self hashes逐项绑定；fresh attempt-03 roots在freeze时absent。

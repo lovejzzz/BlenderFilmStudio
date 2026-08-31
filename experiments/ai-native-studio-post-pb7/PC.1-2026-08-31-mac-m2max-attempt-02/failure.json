@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "bfs.pc1RetainedFailure.v0.2",
+  "status": "FAIL",
+  "gate": "PC.1",
+  "attempt": "attempt-02",
+  "failureStage": "FINAL_CROSS_LANGUAGE_SELF_HASH_AUDIT",
+  "errorExact": "BFS_PC1_AUDIT_REJECTED AUDIT_17_OF_18_SELF_HASHES",
+  "rootCause": "build.json was self-hashed with Python JSON numeric spelling, which preserves integer-valued floats such as 1.0; the Node final auditor parsed and canonicalized them as 1, producing a different digest even though Python independently verifies the stored buildHash.",
+  "productResult": {
+    "runnerStatus": "PASS",
+    "receiptHash": "b16c69f89e71ff6e4dc29180d9b0a5bc9e0afc9e4fc5336fe082ce1d6ccdc727",
+    "semanticAuditHash": "533afeb5285bfad7220cd604f697a9db7b43e59f143f89033c5082127fd51a2b",
+    "detailComponents": 26,
+    "materialRegions": 3,
+    "derivedCounts": {"objects": 104, "meshes": 92, "polygons": 19810},
+    "visibleViewsPassed": 3,
+    "visibleViewsRequired": 2,
+    "temporaryExrFilesRetained": 0
+  },
+  "correctionCeiling": "Normalize finite integer-valued floats recursively to JSON integers before hashing and writing build.json; keep the complete product, output-adapter, semantic, pixel, sentinel, action, operation and resource logic unchanged and use fresh attempt-03 roots.",
+  "bindings": {
+    "repositoryCommit": "06ef8dedee46926d400d55506ee0e1d7eb1f8209",
+    "toolFreezeSpecHash": "47141494b68ac559361bb46568ef9095a3719862ea349a7df97ebac4b8aaf147",
+    "build": {"sha256": "e217e9c4a14081bd10f1fd96211c59051db195a280da8a48052573e3cea9f604", "buildHash": "aedd090ee5444db57229dd1884b452fd665b9451796af3ba1d621b14c0217d3f", "pythonSelfHashValid": true, "nodeSelfHashValid": false},
+    "semanticAudit": {"sha256": "cb4ee9ffe040c6f06a82fe474e3f211afd5d8695047fc9407ddb751a39fcf403", "auditHash": "533afeb5285bfad7220cd604f697a9db7b43e59f143f89033c5082127fd51a2b"},
+    "receipt": {"sha256": "c929941b52f6ee2c3bbbf88151947ada694642053ce1d14e6edddc019d412a8a", "receiptHash": "b16c69f89e71ff6e4dc29180d9b0a5bc9e0afc9e4fc5336fe082ce1d6ccdc727"}
+  },
+  "operations": {"BlenderStarts": 2, "renderCalls": 6, "derivedSceneSaves": 1, "sourceSceneSaves": 0, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0, "engineSourceEdits": 0, "engineCommits": 0, "engineRemoteWrites": 0},
+  "sourceSha256BeforeAfter": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+  "retention": {"immutable": true, "cleanupPerformed": false, "nextAttemptMustUseFreshRoots": true},
+  "failureHash": "7722b9deb913b21f812cc4569c9f1ab146015989f0d653bfedc9010c3f3ed35a"
+}
