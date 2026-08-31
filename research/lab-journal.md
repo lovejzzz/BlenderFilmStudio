@@ -6271,3 +6271,13 @@ Owner明确要求取消反复授权并让Codex全权负责：`我没搞懂，为
 仍需specific confirmation的边界仅保留purchase/new charges、destructive repository/data action、force/history rewrite/ref deletion、public binary release/DMG distribution、sign/notary/Gatekeeper、credential/account/access、third-party/legal commitment以及material scope/resource expansion。OpenAI platform/system/tool safety不可由本章程覆盖。
 
 Machine charter为`specs/ai-native-studio-standing-autonomy-charter.v1.0.json`，SHA-256 `6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0`；research document SHA-256为`d5c867fa41b6d04c9bb21e215d5a8656b7c899292461394372b3131d69425956`。历史exact requests/receipts保持immutable；不得伪称旧C5 exactText已由user提供。下一步创建versioned standing-authority adapter并在static PASS后直接运行fresh attempt-04，无需再次询问。
+
+## J-513 · PB.3 C6 standing-authority inert tool freeze PASS
+
+Date: 2026-08-31 · Type: STANDING-AUTHORITY TOOL FREEZE · Formal Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C6只替换C5-C2的authority validator：绑定active standing charter及owner delegation原文，同时明确拒绝`authorization.exactUserText`与top-level `authorizationRequest`，因此不伪称历史C5逐字授权已提供。C5-C2/C4/C3/base semantic flow、13 inputs、4/2/2/2/2/2 counts、2 GiB / 64 MiB、zero network/engine write及全work-root no-artifact predicate全部不变。
+
+Runner / independent auditor / static auditor SHA依次为`606838d5817cf32c323cf0035e02031f0c18533583656118aee537e82c2b7909` / `48fe5e0d77b732da86147a085a21396a283042190ad33bc457d6fda6ef009fb5` / `24c133ad1d7e2716070a905eca80b8c8642f292fb79c3090e62f673b2453f16c`。Tool freeze/template SHA为`44d23436711c0b40d265773c14ab729c17720359c56c2ea38971612a10536da7` / `e2eb0996196cc4168b4449ff6428847666c440f00a179c21cd2822278b7521d7`。
+
+Static/negative audit 32/32 PASS，file/self SHA为`a4e401a8f937174ba548198deabf58e4d8f45a940b0c9f30f0ab928288eb1065` / `6ed1a64251f1b2e96926335fc53d8194e8b16e60b217f4de0f79cc5f94aab313`。Inert template在root创建前以safe status gate拒绝；attempt-04 roots保持absent，全部formal counts为0。下一步依据standing authority单路径提交fresh execution contract并直接运行，无需再次询问owner。

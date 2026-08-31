@@ -221,10 +221,10 @@ also made one disclosed read-only remote identity query, exceeding the zero-
 network ceiling. Retain attempt-03 evidence immutable; its independent failure
 audit passes 22/22 with self hash `9c6c1cd7...`.
 
-The active inert correction is now C5-C2. It preserves the unchanged C4
-semantic runner/helper and all thresholds, copies the corrected tool's
-`stillUnauthorized` array exactly, independently binds the real
-`c3CorrectionSha256` receipt field, and verifies retained attempt-01/02/03.
+The C5-C2 correction preserves the unchanged C4 semantic runner/helper and all
+thresholds, copies the corrected tool's `stillUnauthorized` array exactly,
+independently binds the real `c3CorrectionSha256` receipt field, and verifies
+retained attempt-01/02/03.
 The first C5 static attempt is retained at 29/30 for a callback-arity defect.
 The versioned C2 runner changes exactly one signature line by accepting an
 unused `_c3` argument. Tool freeze
@@ -232,12 +232,14 @@ unused `_c3` argument. Tool freeze
 now passes static/negative audit 30/30 with self hash `e2af854d...`; attempt-04
 roots remain absent and every formal count is zero. The former exact request is
 `specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json`.
-It remains historical and must not be falsely populated. The standing-autonomy
-charter supersedes repeated exact authorization for future in-scope work; use a
-new versioned adapter that binds the charter and owner message before running
-attempt-04. Do not perform an engine-remote admission query for that formal
-attempt. PB.4–PB.7 may advance later under versioned protocols and the same
-standing charter without another authorization sentence.
+It remains historical and must not be falsely populated. C6 now binds the
+standing charter and owner message without claiming that historical text; its
+frozen adapter passes static/negative audit 32/32 with self hash
+`6ed1a642...`. Attempt-04 roots remain absent. The next action is the single-
+path C6 execution contract followed by the formal attempt-04 run; no repeated
+owner sentence is required. Do not perform an engine-remote admission query for
+that formal attempt. PB.4–PB.7 may advance later under versioned protocols and
+the same standing charter.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
