@@ -260,7 +260,7 @@
       "rootCause": "The local no-checkout dependency clone ran with LFS smudge disabled and did not link or materialize the retained dependency LFS object store; the linker rejected a 131-byte libzstd.a pointer"
     },
     "activeCorrection": {
-      "status": "C3_DEPENDENCY_LFS_CORRECTION_NOT_YET_FROZEN",
+      "status": "C3_TOOLS_FROZEN_STANDING_AUTHORIZATION_APPLIED_NOT_YET_EXECUTED",
       "requiredChange": "Install one fresh dependency objects symlink to the retained dependency LFS object store before dependency checkout, then perform one zero-network dependency LFS checkout",
       "attempt01Through03MustRemainImmutable": true,
       "retainedDependencyLfsObjects": {
@@ -268,12 +268,22 @@
         "bytes": 1070190055,
         "manifestSha256": "e180738d406f6ba91d5f2fa315232efaac3d45c0e1f55c03b2fab98bf5ee5447"
       },
-      "attempt04FormalRootAuthorized": false,
-      "anotherLocalEngineCloneAuthorized": false,
-      "anotherEngineLfsMaterializationAuthorized": false,
-      "dependencyLfsMaterializationAuthorized": false,
-      "nativeBuildAuthorized": false,
-      "productStartsAuthorized": 0
+      "authorizationRequest": "specs/ai-native-studio-pb1-validation-only-c3-authorization-request.v0.8.json",
+      "authorizationRequestSha256": "85f622fe4a3f30f17a404bcbd17b5c9cba4fef617cd402f095a750d00d47716c",
+      "executionContract": "specs/ai-native-studio-pb1-validation-only-c3-execution.v0.9.json",
+      "executionContractSha256": "49f8367481ab790336d4d1dca2beb5e3f0d3e762c600049de970b7a98ac6aae7",
+      "runner": "scripts/run-ai-native-studio-pb1-validation-only-c3.mjs",
+      "runnerSha256": "18f4f36d3825353cf0eb2e071e856d4083df25e21aa63e73c6dd231998985848",
+      "runnerSelfTest": "PASS_12_OF_12",
+      "independentAuditor": "scripts/audit-ai-native-studio-pb1-validation-only-c3.mjs",
+      "independentAuditorSha256": "f8aa0784aaf2f3ef57efc86ce93da4bafea8001dc9524637eb36d587fe5d8bbc",
+      "independentAuditorSelfTest": "PASS_7_OF_7",
+      "attempt04FormalRootAuthorized": true,
+      "anotherLocalEngineCloneAuthorized": true,
+      "anotherEngineLfsMaterializationAuthorized": true,
+      "dependencyLfsMaterializationAuthorized": true,
+      "nativeBuildAuthorized": true,
+      "productStartsAuthorized": 2
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],

@@ -6099,3 +6099,11 @@ C2校正成功越过attempt-02失败点：checkout前engine objects symlink exac
 Clean build在47.20秒、peak RSS 1,069,449,216 bytes时以exit 2停止。根因是dependency clone使用`--no-checkout`且全局`GIT_LFS_SKIP_SMUDGE=1`，却未接入retained dependency LFS store：fresh dependency的622/622 LFS paths全为pointer、local objects为0 files。Linker首次读取131-byte `zstd/lib/libzstd.a` pointer即拒绝；pointer OID `b7063197…` / 624,344 bytes与retained有效archive content exact。此结果不是film-engine source rejection。
 
 不import runner的failure auditor重算九份JSON receipt、三份build log、source/engine LFS/dependency LFS/live remote与attempt-01/02 preservation，36/36 PASS；failure/verdict/build/audit self hashes为`8d624f8f…` / `a55c70c…` / `0eba23eb…` / `5cba3132…`。Product start/render与public clone/engine write/ref/LFS network/release/sign/notary/DMG/PB.2–PB.7全部0。Attempt-03永久保留，不原地materialize或重试；C3只允许在fresh dependency checkout前链接retained dependency objects并做一次zero-network dependency checkout。
+
+## J-495 · PB.1 C3 dependency-LFS correction tool freeze
+
+Date: 2026-08-31 · Type: STANDING-AUTHORIZED PB.1 CORRECTION FREEZE · Attempt-04 formal roots: absent
+
+Owner在C2 exact授权后明确指示`以后你不需要找我授权，你可以直接做`。该standing direction只应用于同一PB.1 validation-only边界内的fresh attempt-04，不扩张film-engine source/ref/tag、engine remote write、LFS network、release/sign/notary/DMG或PB.2–PB.7权限。
+
+C3唯一变化是在fresh dependency no-checkout clone后、dependency checkout前建立指向retained dependency LFS objects的symlink，禁用dependency LFS network URL，再执行一次zero-network `git lfs checkout`。冻结binding为622 paths / 1,102,333,263 materialized bytes、618 unique objects / 1,070,190,055 bytes / manifest `e180738d…`；engine clone/LFS、metric、build、identity、resources和stop rule保持不变。Runner/auditor SHA为`18f4f36d…` / `f8aa0784…`，self-tests 12/12与7/7 PASS。Pre-commit preflight精确只因research worktree dirty而BLOCKED；authorization、fresh roots、约167 GiB free、retained inputs与live remote全部通过。

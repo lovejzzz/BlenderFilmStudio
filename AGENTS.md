@@ -70,8 +70,11 @@ then stopped because the fresh dependency clone left all 622 dependency LFS
 paths as pointers; the linker rejected the 131-byte `libzstd.a` pointer. Its
 independent failure audit is 36/36 `PASS`. Product starts, renders and every
 forbidden external mutation were 0. Do not repair or retry attempt-03 in place.
-The next fresh correction may only add local dependency-LFS object access and
-one zero-network dependency materialization; PB.2–PB.7 remain unauthorized.
+The fresh C3 attempt-04 correction is frozen in
+`specs/ai-native-studio-pb1-validation-only-c3-execution.v0.9.json`. It may
+only add local dependency-LFS object access and one zero-network dependency
+materialization. The owner's standing direction is applied only inside this
+PB.1 validation boundary; PB.2–PB.7 remain unauthorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

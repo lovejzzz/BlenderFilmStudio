@@ -216,6 +216,9 @@ both a research notebook and an executable evidence base. Read this page,
     [`verdict.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-03/verdict.json)
     and [`audit-failure.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-03/audit-failure.json)
     — retained dependency-LFS materialization failure and accepted 36/36 failure audit.
+17. [`research/2026-08-31-ai-native-studio-pb1-validation-only-c3-tool-freeze-v0.9.md`](./research/2026-08-31-ai-native-studio-pb1-validation-only-c3-tool-freeze-v0.9.md)
+    and [`specs/ai-native-studio-pb1-validation-only-c3-execution.v0.9.json`](./specs/ai-native-studio-pb1-validation-only-c3-execution.v0.9.json)
+    — standing-authorized fresh attempt-04 contract and dependency-LFS-only correction.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
