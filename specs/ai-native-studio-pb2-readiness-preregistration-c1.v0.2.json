@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb2ReadinessPreregistrationC1.v0.2",
+  "contractId": "AI-NATIVE-STUDIO-PB2-READINESS-PREREGISTRATION-C1-v0.2",
+  "status": "PREREGISTERED_READINESS_CORRECTION_ONLY_PB2_NOT_AUTHORIZED",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "f4289eb213ac6e890343b21286bb82c0544373c9",
+  "baseContract": {
+    "uri": "specs/ai-native-studio-pb2-readiness-preregistration.v0.1.json",
+    "sha256": "1271cf87d9f8c08e3ecf37bd37ecbecb2f228dc35e973cd4aeaa615c5eb3fd0a"
+  },
+  "retainedAttempt01": {
+    "uri": "experiments/ai-native-studio-phase-b/PB.2-readiness-2026-08-31-mac-m2max-attempt-01/audit.json",
+    "fileSha256": "31dbbd5dc52b94dc0f9116e9f309afae94dc53870e325a99df014c69cd382adf",
+    "auditHash": "da386574f4a518ef1d567ae7d9a7081718180a6af838c87a2627dfe6cc534ad7",
+    "status": "FAIL",
+    "passedChecks": 16,
+    "totalChecks": 19,
+    "failedChecks": [
+      "noDynamicProposalExecutionSurface",
+      "f04AcceptedVerdictExact",
+      "typedFixturesExact"
+    ],
+    "zeroMutationCounts": true
+  },
+  "corrections": [
+    {
+      "id": "C1_B02_CANONICAL_HASH_TRANSCRIPTION",
+      "baseValue": "9b0bddc1aac87ddd9ab47d4da6cc5067e40a88f92dda42ad0add403601effa08",
+      "correctedValue": "db7a07b7afd5b2bde14a63ccaea48632ffcaab721c48cdb2717bb8445c18c37d",
+      "authority": "Exact experiments/ai-native-studio-f0/F0.4-2026-08-30-mac-m2max-attempt-01/proposals/B02.proposal.json value"
+    },
+    {
+      "id": "C1_F04_SELF_HASH_FIELD",
+      "baseField": "verdictHash",
+      "correctedField": "receiptHash",
+      "correctedValue": "f2888a3b4c89df3370c13fbf28097ecb4d83a3f11f325588a12321d27f7666a3"
+    },
+    {
+      "id": "C1_NETWORK_IMPORT_STATIC_CHECK",
+      "baseFailure": "Substring search matched the ordinary English word requests in an error message",
+      "correctedRule": "Inspect Python import statements for subprocess, socket, urllib, requests or http.client and inspect callable tokens for standalone eval( or exec("
+    }
+  ],
+  "authorization": {
+    "appliedScope": "Fresh read-only C1 audit in the research repository only",
+    "pb2FormalExecution": false,
+    "engineSourceMutation": false,
+    "engineRemoteWrite": false,
+    "blenderStarts": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "beginPb3ThroughPb7": false
+  },
+  "freshEvidenceRoot": "experiments/ai-native-studio-phase-b/PB.2-readiness-2026-08-31-mac-m2max-attempt-02",
+  "acceptance": [
+    "Base contract and retained attempt-01 identities are exact",
+    "All 16 attempt-01 passing checks remain cross-bound",
+    "The three failed checks pass under the explicit C1 corrections",
+    "The combined readiness result is 19/19 with all mutation and execution counts zero",
+    "PB.2 remains not started and unauthorized"
+  ],
+  "claimCeiling": "C1 may convert only the PB.2 readiness result, not PB.2 itself, to PASS. It performs no proposal execution, Blender start, engine mutation, remote write or network operation and grants no authority for PB.2 or later gates.",
+  "stopRule": "Any mismatch records FAIL in attempt-02 and stops without editing the base contract, attempt-01 or inherited F0/PB.1 evidence."
+}

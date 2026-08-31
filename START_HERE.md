@@ -86,6 +86,14 @@ both a research notebook and an executable evidence base. Read this page,
   explicitly isolated. Product identity, saved preferences, official config and
   the real FilmStudioEngineF0 config were exact/unchanged. Verdict is `PASS`;
   the accepted C1 audit is 15/15. PB.2–PB.7 remain unauthorized.
+- **PB.2 readiness-only accepted:** the inherited F0.4 B01/B02 typed proposals,
+  exact approvals, four pre-mutation controls and current clean `film-engine`
+  contract source were cross-bound without executing a proposal or starting
+  Blender. Attempt-01 is retained at `FAIL 16/19` for three audit-contract
+  errors. C1 corrected those errors in a new version and passed 14/14, producing
+  combined readiness 19/19. Blender starts, BuildPlan writes, engine/remote
+  mutations and network calls were all 0. PB.2 itself remains not started and
+  unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but

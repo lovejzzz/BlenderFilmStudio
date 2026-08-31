@@ -62,14 +62,6 @@ Do not retry LFS, delete/recreate/rename the fork, mutate another ref, create a
 release, sign/notarize/distribute a DMG, or begin Phase B without a new explicit
 authorization and versioned protocol.
 
-PB.1 validation-only is active but not closed. Attempts 01–03 are retained
-harness `FAIL` results. C2 attempt-03 used exact v0.7 authorization and its
-checkout-before-symlink correction worked: engine LFS materialization, history,
-corrected metric, licenses and dependency identity all passed. The clean build
-then stopped because the fresh dependency clone left all 622 dependency LFS
-paths as pointers; the linker rejected the 131-byte `libzstd.a` pointer. Its
-independent failure audit is 36/36 `PASS`. Product starts, renders and every
-forbidden external mutation were 0. Do not repair or retry attempt-03 in place.
 PB.1 validation-only is closed `PASS` by composition: C3 attempt-04 supplies the
 accepted clean source/dependency/build evidence, and C4 fresh recovery supplies
 two explicit-path, zero-render identity/configuration starts. C4 verdict self
@@ -77,6 +69,16 @@ hash is `bc64dd1a…`; accepted C1 audit is 15/15 with self hash `f59242af…`.
 The first C4 auditor remains retained at 13/14 due only to a self-matching import
 check. Attempts 01–04 and the observed real FilmStudioEngineF0 preference side
 effect remain immutable. PB.2–PB.7 remain unauthorized.
+
+PB.2 readiness-only is now preregistered without starting PB.2. Attempt-01 is a
+retained `FAIL` 16/19 caused by three audit-contract errors, with every execution
+and mutation count at zero. C1 v0.2 corrects only the B02 canonical-hash
+transcription, F0.4 self-hash field name and an overbroad static import search.
+Fresh attempt-02 passes 14/14, yielding combined readiness 19/19 with zero
+Blender starts, proposal executions, BuildPlan writes, engine edits, remote
+writes or network calls. Its audit self hash is
+`bc70c982c3c90e92aff1fd014b93fe05d14f43ce683f77823875056293ef8e2a`.
+This is not PB.2 PASS and grants no PB.2 execution authority.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

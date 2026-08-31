@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_READINESS_PASS",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -286,6 +286,36 @@
       "newNativeBuilds": 0,
       "officialAndRealProductConfigurationUnchanged": true
     },
+    "pb2Readiness": {
+      "status": "PASS_READINESS_ONLY_PB2_NOT_STARTED_UNAUTHORIZED",
+      "baseContract": "specs/ai-native-studio-pb2-readiness-preregistration.v0.1.json",
+      "correctionContract": "specs/ai-native-studio-pb2-readiness-preregistration-c1.v0.2.json",
+      "correctionContractFileSha256": "eea959a4b76cd5272c9ca36b827f4f1fcb5b67da11cacd19a62bb9aa4d607d47",
+      "retainedAttempt01": {
+        "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.2-readiness-2026-08-31-mac-m2max-attempt-01",
+        "status": "FAIL",
+        "checks": "16/19",
+        "auditHash": "da386574f4a518ef1d567ae7d9a7081718180a6af838c87a2627dfe6cc534ad7",
+        "fileSha256": "31dbbd5dc52b94dc0f9116e9f309afae94dc53870e325a99df014c69cd382adf",
+        "rootCause": "B02 canonical hash transcription, F0.4 self-hash field name and ordinary-word requests false positive in the static import check"
+      },
+      "acceptedC1": {
+        "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.2-readiness-2026-08-31-mac-m2max-attempt-02",
+        "status": "PASS",
+        "checks": "14/14",
+        "combinedReadinessChecks": "19/19",
+        "auditHash": "bc70c982c3c90e92aff1fd014b93fe05d14f43ce683f77823875056293ef8e2a",
+        "auditFileSha256": "0ddcd7065d325de613b3a0990d8d252f427e578e992cb82f590602e7281039d8"
+      },
+      "blenderStarts": 0,
+      "renders": 0,
+      "proposalsExecuted": 0,
+      "buildPlanFilesWritten": 0,
+      "engineSourceEdits": 0,
+      "engineRemoteWrites": 0,
+      "networkCalls": 0,
+      "pb2FormalExecutionAuthorized": false
+    },
     "activeCorrection": {
       "status": "PB1_CLOSED_PASS",
       "basis": "Attempt-04 accepted clean source/dependency/build evidence plus C4 fresh runtime isolation recovery",
@@ -293,7 +323,7 @@
       "phaseBSourceMutationAuthorized": false,
       "pb2ThroughPb7Authorized": false,
       "nextGate": "PB.2",
-      "nextGateStatus": "NOT_STARTED_UNAUTHORIZED"
+      "nextGateStatus": "READINESS_PASS_NOT_STARTED_UNAUTHORIZED"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
