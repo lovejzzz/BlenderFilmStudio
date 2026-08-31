@@ -106,6 +106,12 @@ both a research notebook and an executable evidence base. Read this page,
   and `researchCommit` remain null. Static preflight passed 23/23 without
   invoking the runner. The template cannot be used as the execution contract;
   explicit PB.2 authority must be copied into a new committed file.
+- **PB.2 execution authorized; C1 identity correction ready:** the user approved
+  the linked validation-only scope. The template's self-referential commit field
+  was impossible to construct, so v0.5 preserves all scope and instead verifies
+  execution parent, current HEAD and exact committed contract bytes. Static C1
+  tool audit passes 16/16 after retaining one 15/16 audit-harness failure. The
+  formal roots remain absent pending the committed execution contract.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but

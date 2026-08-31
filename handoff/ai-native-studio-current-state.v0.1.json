@@ -346,6 +346,34 @@
           "authorizationFieldsNull": true,
           "researchCommitNull": true,
           "runnerStarts": 0
+        },
+        "c1NonCircularCorrection": {
+          "status": "PASS_STATIC_TOOL_READY_NOT_YET_EXECUTED",
+          "contract": "specs/ai-native-studio-pb2-validation-tool-c1-noncircular-commit-binding.v0.5.json",
+          "contractFileSha256": "a544cb48b94bde87eaa5db0c9eeb326ed1cff45c20d8f0993603bd2966d3d36a",
+          "runner": "scripts/run-ai-native-studio-pb2-validation-c1.py",
+          "runnerFileSha256": "757a93bf80bd2b7a8548ab52f676c25d8310163316027f51f3006dc613e5d8db",
+          "independentAuditor": "scripts/audit-ai-native-studio-pb2-validation-c1.py",
+          "independentAuditorFileSha256": "00302898b8fe088e791c6e1eefb45ee4d2b9a9f262c9109f053ae6e47fd3d746",
+          "retainedStaticAttempt01": {
+            "status": "FAIL",
+            "checks": "15/16",
+            "auditHash": "84bc956cc023c061878e2fb37c197f58e9e4993c59f94fe7127e3535bc180af0",
+            "auditFileSha256": "c457b7094348eca19f52838f5ca3a33264f8094b5224c25519bd80e02fc2d5a5"
+          },
+          "acceptedStaticAttempt02": {
+            "status": "PASS",
+            "checks": "16/16",
+            "auditHash": "093f957a3a112b27187a9942854b0fc0ffaf7f82f3263b40fa62cda95cf59097",
+            "auditFileSha256": "ec314506300311185d28f61d64df1f318db807dc8f432244c6a5ca862d1f067d"
+          }
+        },
+        "explicitAuthorization": {
+          "status": "AUTHORIZED_PB2_VALIDATION_ONLY",
+          "document": "research/2026-08-31-ai-native-studio-pb2-validation-execution-authorization-v0.5.zh-CN.md",
+          "documentFileSha256": "6edf2795ba849b24868ac0a1b92c3419f2189ec4b527bb146627a0241ce2dfcd",
+          "exactUserTextSha256": "ec9955750a6cca1b69bdcd2ec8e3a1a7d46dd2744e0073dfb0a2aa1058f668a0",
+          "authorizedAtUtc": "2026-08-31T04:15:50Z"
         }
       },
       "blenderStarts": 0,
@@ -355,7 +383,7 @@
       "engineSourceEdits": 0,
       "engineRemoteWrites": 0,
       "networkCalls": 0,
-      "pb2FormalExecutionAuthorized": false
+      "pb2FormalExecutionAuthorized": true
     },
     "activeCorrection": {
       "status": "PB1_CLOSED_PASS",
@@ -364,7 +392,7 @@
       "phaseBSourceMutationAuthorized": false,
       "pb2ThroughPb7Authorized": false,
       "nextGate": "PB.2",
-      "nextGateStatus": "READINESS_TOOL_FREEZE_AND_TEMPLATE_PASS_NOT_STARTED_UNAUTHORIZED"
+      "nextGateStatus": "PB2_VALIDATION_AUTHORIZED_C1_TOOL_PASS_EXECUTION_CONTRACT_PENDING"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],

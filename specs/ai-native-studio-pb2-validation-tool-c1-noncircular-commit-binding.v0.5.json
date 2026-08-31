@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb2ValidationToolCorrectionC1.v0.5",
+  "contractId": "AI-NATIVE-STUDIO-PB2-VALIDATION-TOOL-C1-NONCIRCULAR-COMMIT-BINDING-v0.5",
+  "status": "FROZEN_CORRECTION_NOT_AUTHORITY",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "b3cac7763e985d9f986e9817b42ce07eb215b402",
+  "cause": "The v0.4 template required the execution contract body to contain the OID of the commit containing that same body, an impossible Git fixed-point self-reference.",
+  "baseToolFreeze": {
+    "uri": "specs/ai-native-studio-pb2-validation-tool-freeze.v0.3.json",
+    "sha256": "8f8ff370e82b3c1fe4c0e975967e3b83408a7dc9b8f7472fb709a9d3a601cc29",
+    "commit": "92d1aa1508db4515112ee133011df51f7c45d7a0"
+  },
+  "baseRunner": {
+    "uri": "scripts/run-ai-native-studio-pb2-validation.py",
+    "sha256": "ed59e8dfcf9bf9e529e778a911c49c2a03ae1cf6bbdcf531a048b3d003aeb57d"
+  },
+  "runner": {
+    "uri": "scripts/run-ai-native-studio-pb2-validation-c1.py",
+    "sha256": "757a93bf80bd2b7a8548ab52f676c25d8310163316027f51f3006dc613e5d8db"
+  },
+  "independentAuditor": {
+    "uri": "scripts/audit-ai-native-studio-pb2-validation-c1.py",
+    "sha256": "00302898b8fe088e791c6e1eefb45ee4d2b9a9f262c9109f053ae6e47fd3d746",
+    "importsEngineContractModule": false,
+    "startsBlender": false
+  },
+  "executionContract": {
+    "uri": "specs/ai-native-studio-pb2-validation-only-execution-c1.v0.5.json",
+    "schemaVersion": "bfs.aiNativeStudioPb2ValidationOnlyExecutionC1.v0.5",
+    "requiredStatus": "AUTHORIZED_FOR_ONE_FORMAL_RUN",
+    "nonCircularBinding": [
+      "executionParentResearchCommit equals the parent of current HEAD",
+      "executionCommit equals current HEAD",
+      "git show HEAD:<execution contract URI> is byte-exact with the worktree file",
+      "the worktree is clean before either fresh root is created"
+    ]
+  },
+  "negativeCases": [
+    "N_REJECTED_PROPOSAL",
+    "N_TAMPERED_PROPOSAL",
+    "N_UNAPPROVED_PROPOSAL",
+    "N_WRONG_ORDER",
+    "N_UNAUTHORIZED_SCOPE",
+    "N_UNKNOWN_FIELD",
+    "N_PATH_ESCAPE",
+    "N_NONFINITE"
+  ],
+  "negativeReasons": [
+    ["N_REJECTED_PROPOSAL", "PROPOSAL_SCHEMA"],
+    ["N_TAMPERED_PROPOSAL", "APPROVAL_BINDING"],
+    ["N_UNAPPROVED_PROPOSAL", "APPROVAL_SCHEMA"],
+    ["N_WRONG_ORDER", "INSPECTION_REQUIRED"],
+    ["N_UNAUTHORIZED_SCOPE", "APPROVAL_SCOPE"],
+    ["N_UNKNOWN_FIELD", "SCHEMA_ADDITIONAL_PROPERTY"],
+    ["N_PATH_ESCAPE", "PATH_ESCAPE"],
+    ["N_NONFINITE", "NONFINITE_NUMBER"]
+  ],
+  "scopeUnchanged": {
+    "positiveInspections": 2,
+    "negativeCases": 8,
+    "blenderStarts": 0,
+    "renders": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneMutations": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "claimCeiling": "A future C1 PASS proves only the frozen B01/B02 typed proposal and approval boundary plus eight pre-write fail-closed controls in pure Python on this exact source. It does not start Blender, build a scene, pass PB.3, prove arbitrary proposals, model quality, production readiness or distribution readiness.",
+  "stopRule": "Without an exact committed v0.5 execution contract at AUTHORIZED_FOR_ONE_FORMAL_RUN, the C1 runner stops before loading the product contract module or creating either fresh root."
+}

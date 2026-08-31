@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb2C1ToolAuditExclusiveDelegation.v0.5.1",
+  "contractId": "AI-NATIVE-STUDIO-PB2-C1-TOOL-AUDIT-EXCLUSIVE-DELEGATION-v0.5.1",
+  "status": "PREREGISTERED_STATIC_AUDIT_CORRECTION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "b3cac7763e985d9f986e9817b42ce07eb215b402",
+  "retainedAttempt01": {
+    "uri": "experiments/ai-native-studio-phase-b/PB.2-c1-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+    "fileSha256": "c457b7094348eca19f52838f5ca3a33264f8094b5224c25519bd80e02fc2d5a5",
+    "auditHash": "84bc956cc023c061878e2fb37c197f58e9e4993c59f94fe7127e3535bc180af0",
+    "status": "FAIL",
+    "checks": "15/16",
+    "onlyFailedCheck": "exclusiveEvidence"
+  },
+  "correction": "Accept C1 wrapper delegation only when the wrapper calls base.write_exclusive, the exact SHA-bound base runner contains os.O_EXCL, and the independent auditor contains os.O_EXCL.",
+  "correctedAuditor": {
+    "uri": "scripts/audit-ai-native-studio-pb2-c1-tool-freeze.py",
+    "sha256": "53ee419c52676988dfc96d751fe833be83b7d5275847e5d5f917f54a14af9969"
+  },
+  "freshEvidenceRoot": "experiments/ai-native-studio-phase-b/PB.2-c1-tool-freeze-2026-08-31-mac-m2max-attempt-02",
+  "claimCeiling": "A PASS corrects only the static exclusivity audit and grants no PB.2 execution authority.",
+  "stopRule": "Retain attempt-01 and do not modify the tool correction, runner, base runner or formal roots."
+}

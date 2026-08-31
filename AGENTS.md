@@ -103,6 +103,18 @@ PB.2 authorization, copy it to the exact v0.4 execution-contract path, bind the
 user text and containing research commit, commit/verify that new file, and only
 then use the frozen argv.
 
+Explicit PB.2 validation-only authorization is now recorded at
+`research/2026-08-31-ai-native-studio-pb2-validation-execution-authorization-v0.5.zh-CN.md`.
+The v0.4 template's containing-commit field was found to be an impossible Git
+self-reference, so C1 v0.5 replaces only that identity proof with parent OID +
+current HEAD + exact `git show HEAD:<contract>` bytes. Scope remains unchanged.
+Static C1 tool attempt-01 is retained at 15/16; its sole audit defect ignored
+the wrapper's exact base-runner `write_exclusive` delegation. Attempt-02 passes
+16/16 with self hash
+`093f957a3a112b27187a9942854b0fc0ffaf7f82f3263b40fa62cda95cf59097`.
+The next atomic action is one committed v0.5 execution contract whose parent is
+the C1 tool commit; formal roots must remain absent until that commit is public.
+
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
 and maintenance reference, not the source baseline. The fallback is an external
