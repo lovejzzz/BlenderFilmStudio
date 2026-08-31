@@ -115,6 +115,17 @@ It proves one unsigned local research DMG, isolated install/uninstall and two
 same-host `.blend` round trips. Attempts 01–04 remain retained failures. No
 Developer ID signing, notarization or Gatekeeper bypass was performed.
 
+PB.1 validation-only attempt-01 is a retained harness `FAIL`. Its one authorized
+public no-smudge clone and local LFS materialization produced the exact full graph
+and exact materialized contents, but the runner compared the F0 parent line count
+under C1 publication attributes and stopped before dependency clone, build or
+product start. The retained failure auditor is 41/42 `FAIL`; its C1 audit is 29/29
+`PASS` and proves immutable LFS objects unchanged while recording 3,918 zero-byte
+materialization temp files. Do not retry attempt-01 or infer permission for another
+checkout/materialization. Read
+`research/2026-08-31-ai-native-studio-pb1-attempt-01-retained-failure.md` before
+any PB.1 correction. PB.2–PB.7 remain unauthorized.
+
 ## Cold-start execution rules
 
 - First run the read-only host check:

@@ -1,0 +1,311 @@
+{
+  "schemaVersion": "bfs.pb1ValidationOnlyFailureAuditC1.v0.4",
+  "gate": "PB.1",
+  "mode": "VALIDATION_ONLY",
+  "observedAt": "2026-08-31T00:30:22.111Z",
+  "status": "PASS",
+  "classification": "RETAINED_RUNNER_METRIC_FAILURE_AND_RETAINED_FAILURE_AUDITOR_STORAGE_SCOPE_FAILURE",
+  "rootCauses": [
+    "The v0.3 F0 parent line metric was evaluated under C1 publication worktree attributes, which classify the two former LFS pointer paths as binary: 837/64 plus two binary paths is the same exact tree whose retained F0 attribute context reports 841/68.",
+    "The v0.3 materializer bound lfs.storage directly to retained storage. git lfs checkout left 3,918 zero-byte tmp files there while all 6,488 immutable object files, 810,236,112 object bytes, mtimes and manifest hash remained exact. The first failure auditor compared the whole storage tree instead of the objects subtree."
+  ],
+  "correctionRequirement": "A new attempt must use a versioned attribute-context-independent F0 metric and a fresh local LFS storage whose objects are read-only-linked to retained objects so tmp files cannot enter retained storage.",
+  "auditor": {
+    "path": "scripts/audit-ai-native-studio-pb1-validation-only-failure-c1.mjs",
+    "sha256": "2b8f099751bf0a861190051c7f2c04bc8f40f611b8f20b3b214cf7d00b6c77d0",
+    "importsRunnerOrFailedAuditor": false
+  },
+  "runner": {
+    "path": "scripts/run-ai-native-studio-pb1-validation-only.mjs",
+    "sha256": "2c64c90aea1cc6127ff8143d04b1d61fbbefbcc17c4f32b980fd17aced3d13d5"
+  },
+  "failedAuditor": {
+    "path": "scripts/audit-ai-native-studio-pb1-validation-only-failure.mjs",
+    "sha256": "e9c4b009862eb190caea4441e28b5853ea3af6d7dc41ff20114e155b633ce95a",
+    "receiptHash": "72f4ed90ef9325504a0339001ceddfdf32dcd9b4a4e379e995ad9682c6ba78c4"
+  },
+  "specification": {
+    "path": "specs/ai-native-studio-pb1-validation-only-execution.v0.3.json",
+    "sha256": "a12a2ac1736aec2e079bb32c617babb67b9efa37b7844792fdf3b8e28f5a99c5"
+  },
+  "failureReceiptHash": "2f994d40bab4647c770b6c90ee93a921be5a72453a26d49525c44b31c5b35083",
+  "verdictReceiptHash": "2887f81e445ad54fb3d555d3f1f55938b95158bdb527b0d2e672ca0419807af4",
+  "checksPassed": 29,
+  "checksTotal": 29,
+  "checks": [
+    {
+      "id": "AUDITOR_INDEPENDENT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_preflight",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_negative",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_history",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_failure",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_verdict",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_failedAudit",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FAILED_AUDIT_RETAINED_41_OF_42",
+      "pass": true,
+      "observed": [
+        "RETAINED_LFS_STORAGE_UNCHANGED"
+      ],
+      "expected": [
+        "RETAINED_LFS_STORAGE_UNCHANGED"
+      ]
+    },
+    {
+      "id": "EXPECTED_RUNNER_FAILURE_RETAINED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "NINE_NEGATIVE_CONTROLS_PASS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ONLY_F0_METRIC_GATE_FAILED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "GRAPH_IDENTITY_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ATTRIBUTE_CONTEXT_STATS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RETAINED_CONTEXT_ADDS_FOUR_FOUR_POINTER_LINES",
+      "pass": true,
+      "observed": [
+        "2\t2\trelease/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns",
+        "2\t2\trelease/datafiles/splash.png"
+      ],
+      "expected": [
+        "2/2",
+        "2/2"
+      ]
+    },
+    {
+      "id": "RETAINED_LFS_OBJECT_FILES_UNCHANGED",
+      "pass": true,
+      "observed": 6488,
+      "expected": 6488
+    },
+    {
+      "id": "RETAINED_LFS_OBJECT_BYTES_UNCHANGED",
+      "pass": true,
+      "observed": 810236112,
+      "expected": 810236112
+    },
+    {
+      "id": "RETAINED_LFS_OBJECT_MANIFEST_UNCHANGED",
+      "pass": true,
+      "observed": "f392cbbc4e6db312a0c1ee704bf24080e18a02889bf6ef02f619e21f2910cafd",
+      "expected": "f392cbbc4e6db312a0c1ee704bf24080e18a02889bf6ef02f619e21f2910cafd"
+    },
+    {
+      "id": "MATERIALIZATION_TMP_DRIFT_ZERO_BYTES",
+      "pass": true,
+      "observed": {
+        "files": 3918,
+        "bytes": 0,
+        "allZeroBytes": true,
+        "pathListSha256": "a16ba92a830918b128e484f128c12178a7359539528280afd1c07f6395203804"
+      },
+      "expected": {
+        "files": 3918,
+        "bytes": 0,
+        "allZeroBytes": true
+      }
+    },
+    {
+      "id": "MATERIALIZED_LFS_EXACT",
+      "pass": true,
+      "observed": {
+        "count": 6669,
+        "bytes": 812388053,
+        "mismatches": []
+      },
+      "expected": {
+        "count": 6669,
+        "bytes": 812388053,
+        "mismatches": []
+      }
+    },
+    {
+      "id": "SOURCE_STILL_EXACT_CLEAN",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LIVE_PUBLIC_FORK_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LIVE_MAIN_AND_REF_SET_UNCHANGED",
+      "pass": true,
+      "observed": {
+        "id": 1351574987,
+        "fullName": "lovejzzz/film-engine",
+        "fork": true,
+        "parent": "blender/blender",
+        "visibility": "public",
+        "private": false,
+        "heads": [
+          {
+            "oid": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+            "ref": "refs/heads/main"
+          }
+        ],
+        "tags": [],
+        "main": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+        "pulls": 0,
+        "releases": 0
+      },
+      "expected": "single exact main, zero tag/PR/release"
+    },
+    {
+      "id": "ONE_CLONE_ONE_MATERIALIZATION",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ZERO_DEPENDENCY_BUILD_START_RENDER",
+      "pass": true,
+      "observed": {
+        "publicEngineNetworkClones": 1,
+        "localLfsMaterializations": 1,
+        "localDependencyClones": 0,
+        "cleanNativeArm64Builds": 0,
+        "productStarts": 0,
+        "renderCalls": 0,
+        "engineRemoteWrites": 0,
+        "engineRefUpdates": 0,
+        "lfsNetworkDownloads": 0,
+        "lfsUploads": 0,
+        "releases": 0,
+        "signingOperations": 0,
+        "notarizationOperations": 0,
+        "dmgOperations": 0,
+        "pb2ThroughPb7Mutations": 0,
+        "modelCalls": 0
+      },
+      "expected": "all zero"
+    },
+    {
+      "id": "ZERO_FORBIDDEN_EXTERNAL_MUTATIONS",
+      "pass": true,
+      "observed": {
+        "publicEngineNetworkClones": 1,
+        "localLfsMaterializations": 1,
+        "localDependencyClones": 0,
+        "cleanNativeArm64Builds": 0,
+        "productStarts": 0,
+        "renderCalls": 0,
+        "engineRemoteWrites": 0,
+        "engineRefUpdates": 0,
+        "lfsNetworkDownloads": 0,
+        "lfsUploads": 0,
+        "releases": 0,
+        "signingOperations": 0,
+        "notarizationOperations": 0,
+        "dmgOperations": 0,
+        "pb2ThroughPb7Mutations": 0,
+        "modelCalls": 0
+      },
+      "expected": "all zero"
+    },
+    {
+      "id": "NO_BUILD_OR_RUNTIME_ROOT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ROOTS_WITHIN_CEILINGS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RUNNER_HAS_NO_ENGINE_PUSH_COMMAND",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "STOP_RULE_PRESERVED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    }
+  ],
+  "failures": [],
+  "counters": {
+    "publicEngineNetworkClones": 1,
+    "localLfsMaterializations": 1,
+    "localDependencyClones": 0,
+    "cleanNativeArm64Builds": 0,
+    "productStarts": 0,
+    "renderCalls": 0,
+    "engineRemoteWrites": 0,
+    "engineRefUpdates": 0,
+    "lfsNetworkDownloads": 0,
+    "lfsUploads": 0,
+    "releases": 0,
+    "signingOperations": 0,
+    "notarizationOperations": 0,
+    "dmgOperations": 0,
+    "pb2ThroughPb7Mutations": 0,
+    "modelCalls": 0
+  },
+  "externalMutationsPerformedByAuditor": 0,
+  "stopRulePreserved": true,
+  "receiptHash": "e0fb3dd1758d0a9dc462acd618f0b95089abfea67f46f2a35e29e07342d82222"
+}

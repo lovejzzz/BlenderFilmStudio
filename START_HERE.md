@@ -53,6 +53,14 @@ both a research notebook and an executable evidence base. Read this page,
   One exact `08bed5b5…`-bound lease push updated only `main`; LFS uploads,
   other refs/tags, releases and Phase B were 0. Independent audit is 59/59
   PASS with self hash `71d6e9d5…`. Phase B remains unauthorized.
+- **PB.1 attempt-01 retained failure:** the authorized public no-smudge clone,
+  complete graph, local-only LFS materialization and 9/9 negative controls passed.
+  The runner stopped before dependency/build/start because the retained F0
+  `841/68` line statistic was evaluated under C1 attributes, where the two old LFS
+  pointer paths are binary (`837/64 + 2 binary`). A first failure audit retained a
+  storage-scope error at 41/42; C1 independently passed 29/29, proving all immutable
+  LFS objects unchanged and recording 3,918 zero-byte tmp files. Another correction
+  checkout/materialization is not authorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -181,6 +189,11 @@ both a research notebook and an executable evidence base. Read this page,
     and [`specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json`](./specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json)
     — exact authorization boundary for a no-source-edit/no-engine-write PB.1
     history, identity, license and clean-build validation.
+14. [`research/2026-08-31-ai-native-studio-pb1-attempt-01-retained-failure.md`](./research/2026-08-31-ai-native-studio-pb1-attempt-01-retained-failure.md),
+    [`verdict.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-30-mac-m2max-attempt-01/verdict.json)
+    and [`audit-failure-c1.json`](./experiments/ai-native-studio-phase-b/PB.1-2026-08-30-mac-m2max-attempt-01/audit-failure-c1.json)
+    — retained pre-build metric failure, retained first auditor failure and accepted
+    29/29 failure audit.
 
 Use `research/`, `specs/`, `scripts/`, `experiments/` and `app/` as the map.
 Historical experiments are intentionally numerous; search by the B-number or
@@ -249,13 +262,14 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next useful checkpoint is an explicit owner decision on the prepared PB.1
-validation-only request. It permits only one read-only public-engine clone,
-local-only dependency/LFS materialization, one clean native build, at most two
-zero-render identity/configuration starts and research evidence publication.
-It permits no engine source edit or remote write and does not start PB.2–PB.7.
-The exact authorization sentence is stored in
-`specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json`.
+The next useful checkpoint is a versioned PB.1 correction authorization. The
+original one public clone and one local materialization were consumed by retained
+attempt-01; dependency clone, native build and product starts remained zero. A
+correction may not start until an exact request authorizes a fresh local-only source
+checkout from retained attempt-01, an additional zero-network materialization with
+tmp isolated in the fresh root, the still-unused dependency/build/start operations,
+and a new immutable evidence root. It permits no engine source edit or remote write
+and does not start PB.2–PB.7.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

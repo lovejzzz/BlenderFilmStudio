@@ -1,0 +1,441 @@
+{
+  "schemaVersion": "bfs.pb1ValidationOnlyFailureAudit.v0.3",
+  "gate": "PB.1",
+  "mode": "VALIDATION_ONLY",
+  "observedAt": "2026-08-31T00:28:04.314Z",
+  "status": "FAIL",
+  "classification": "RETAINED_HARNESS_METRIC_FAILURE_BEFORE_DEPENDENCY_BUILD_OR_PRODUCT_START",
+  "rootCause": "C1 exact-path -diff/-text overrides make the two former LFS pointer paths binary under the publication worktree attribute context, so the F0 parent range reports 837/64 plus two binary paths instead of retained F0-context 841/68. All commit/tree/path/full-history and publication-head identities remain exact.",
+  "auditor": {
+    "path": "scripts/audit-ai-native-studio-pb1-validation-only-failure.mjs",
+    "sha256": "e9c4b009862eb190caea4441e28b5853ea3af6d7dc41ff20114e155b633ce95a",
+    "importsRunner": false
+  },
+  "runner": {
+    "path": "scripts/run-ai-native-studio-pb1-validation-only.mjs",
+    "sha256": "2c64c90aea1cc6127ff8143d04b1d61fbbefbcc17c4f32b980fd17aced3d13d5"
+  },
+  "specification": {
+    "path": "specs/ai-native-studio-pb1-validation-only-execution.v0.3.json",
+    "sha256": "a12a2ac1736aec2e079bb32c617babb67b9efa37b7844792fdf3b8e28f5a99c5"
+  },
+  "failureReceiptHash": "2f994d40bab4647c770b6c90ee93a921be5a72453a26d49525c44b31c5b35083",
+  "verdictReceiptHash": "2887f81e445ad54fb3d555d3f1f55938b95158bdb527b0d2e672ca0419807af4",
+  "liveMain": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+  "checksPassed": 41,
+  "checksTotal": 42,
+  "checks": [
+    {
+      "id": "AUDITOR_DOES_NOT_IMPORT_RUNNER",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_preflight.json",
+      "pass": true,
+      "observed": "82d6a0a6fc55e4d49f3edfe27ccccb28ac21b6d9279d27852fb00c63b0044818",
+      "expected": "82d6a0a6fc55e4d49f3edfe27ccccb28ac21b6d9279d27852fb00c63b0044818"
+    },
+    {
+      "id": "RECEIPT_HASH_negative-controls.json",
+      "pass": true,
+      "observed": "9472cf3bc4a8d25f52964771d6a028385a003e14640868bd1e008a32f706810f",
+      "expected": "9472cf3bc4a8d25f52964771d6a028385a003e14640868bd1e008a32f706810f"
+    },
+    {
+      "id": "RECEIPT_HASH_remote-and-history.json",
+      "pass": true,
+      "observed": "911ec5a3c8c8818d63021d0601a707ef24142ff31d0a79fd16dd0709a7a1bb2c",
+      "expected": "911ec5a3c8c8818d63021d0601a707ef24142ff31d0a79fd16dd0709a7a1bb2c"
+    },
+    {
+      "id": "RECEIPT_HASH_failure.json",
+      "pass": true,
+      "observed": "2f994d40bab4647c770b6c90ee93a921be5a72453a26d49525c44b31c5b35083",
+      "expected": "2f994d40bab4647c770b6c90ee93a921be5a72453a26d49525c44b31c5b35083"
+    },
+    {
+      "id": "RECEIPT_HASH_verdict.json",
+      "pass": true,
+      "observed": "2887f81e445ad54fb3d555d3f1f55938b95158bdb527b0d2e672ca0419807af4",
+      "expected": "2887f81e445ad54fb3d555d3f1f55938b95158bdb527b0d2e672ca0419807af4"
+    },
+    {
+      "id": "PREFLIGHT_ACCEPTED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "NEGATIVE_CONTROLS_9_OF_9",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "EXPECTED_FAILED_STAGE",
+      "pass": true,
+      "observed": "HISTORY_AND_SOURCE_IDENTITY",
+      "expected": "HISTORY_AND_SOURCE_IDENTITY"
+    },
+    {
+      "id": "FAILURE_AND_VERDICT_FAIL",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FAILURE_CROSS_BOUND",
+      "pass": true,
+      "observed": "2f994d40bab4647c770b6c90ee93a921be5a72453a26d49525c44b31c5b35083",
+      "expected": "2f994d40bab4647c770b6c90ee93a921be5a72453a26d49525c44b31c5b35083"
+    },
+    {
+      "id": "ONLY_F0_STAT_CHECK_FAILED",
+      "pass": true,
+      "observed": {
+        "headExact": true,
+        "treeExact": true,
+        "soleParentExact": true,
+        "nonShallow": true,
+        "reachableCommitCountExact": true,
+        "mergeBaseExact": true,
+        "forkCommitCountExact": true,
+        "fullFsckPass": true,
+        "c1PathsExact": true,
+        "f0PatchExact": false,
+        "publicationPatchExact": true
+      },
+      "expected": "only f0PatchExact=false"
+    },
+    {
+      "id": "ALL_GRAPH_IDENTITIES_PASS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "OBSERVED_ATTR_CONTEXT_F0_STATS",
+      "pass": true,
+      "observed": {
+        "paths": [
+          "intern/ghost/intern/GHOST_ContextMTL.mm",
+          "intern/ghost/intern/GHOST_SystemCocoa.mm",
+          "intern/ghost/intern/GHOST_SystemPathsCocoa.mm",
+          "release/darwin/Blender.app/Contents/Info.plist",
+          "release/darwin/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/Info.plist",
+          "release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns",
+          "release/datafiles/splash.png",
+          "scripts/modules/film_studio_contract.py",
+          "scripts/startup/bl_operators/__init__.py",
+          "scripts/startup/bl_operators/film_studio_workspace.py",
+          "scripts/startup/bl_ui/space_topbar.py",
+          "source/blender/blenkernel/intern/appdir.cc",
+          "source/blender/windowmanager/intern/wm_platform_support.cc",
+          "source/blender/windowmanager/intern/wm_splash_screen.cc",
+          "source/blender/windowmanager/intern/wm_window.cc",
+          "source/creator/creator_args.cc"
+        ],
+        "changedPaths": 16,
+        "additions": 837,
+        "deletions": 64,
+        "binaryPaths": 2
+      },
+      "expected": {
+        "changedPaths": 16,
+        "additions": 837,
+        "deletions": 64,
+        "binaryPaths": 2
+      }
+    },
+    {
+      "id": "C1_WORKTREE_ATTRIBUTES_UNSET",
+      "pass": true,
+      "observed": [
+        "release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns: filter: unset\nrelease/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns: diff: unset\nrelease/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns: merge: unset\nrelease/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns: text: unset",
+        "release/datafiles/splash.png: filter: unset\nrelease/datafiles/splash.png: diff: unset\nrelease/datafiles/splash.png: merge: unset\nrelease/datafiles/splash.png: text: unset"
+      ],
+      "expected": "all unset"
+    },
+    {
+      "id": "RETAINED_F0_ATTRIBUTES_LFS",
+      "pass": true,
+      "observed": [
+        "release/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns: filter: lfs\nrelease/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns: diff: lfs\nrelease/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns: merge: lfs\nrelease/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns: text: unset",
+        "release/datafiles/splash.png: filter: lfs\nrelease/datafiles/splash.png: diff: lfs\nrelease/datafiles/splash.png: merge: lfs\nrelease/datafiles/splash.png: text: unset"
+      ],
+      "expected": "filter/diff lfs"
+    },
+    {
+      "id": "RETAINED_F0_ASSETS_COUNT_AS_POINTER_TEXT",
+      "pass": true,
+      "observed": [
+        "2\t2\trelease/darwin/Blender.app/Contents/Resources/blender_icon_legacy.icns",
+        "2\t2\trelease/datafiles/splash.png"
+      ],
+      "expected": [
+        "2/2 icon",
+        "2/2 splash"
+      ]
+    },
+    {
+      "id": "METRIC_DIFFERENCE_EXACTLY_FOUR_FOUR",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PUBLICATION_PATCH_STATS_STILL_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_HEAD_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_TREE_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_CLEAN",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_NON_SHALLOW",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_REACHABLE_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_FSCK_PASS",
+      "pass": true,
+      "observed": "",
+      "expected": ""
+    },
+    {
+      "id": "LOCAL_LFS_COUNT_EXACT",
+      "pass": true,
+      "observed": 6669,
+      "expected": 6669
+    },
+    {
+      "id": "LOCAL_LFS_BYTES_EXACT",
+      "pass": true,
+      "observed": 812388053,
+      "expected": 812388053
+    },
+    {
+      "id": "LOCAL_LFS_MATERIALIZED_HASHES_EXACT",
+      "pass": true,
+      "observed": [],
+      "expected": []
+    },
+    {
+      "id": "RETAINED_LFS_STORAGE_UNCHANGED",
+      "pass": false,
+      "observed": {
+        "state": "PRESENT",
+        "files": 10406,
+        "bytes": 810236112,
+        "manifestSha256": "14fdeec1290344f062a44a4d8a6ba27eae4e77af0a784165c1b21ffe26e090bd"
+      },
+      "expected": {
+        "state": "PRESENT",
+        "files": 6488,
+        "bytes": 810236112,
+        "manifestSha256": "f392cbbc4e6db312a0c1ee704bf24080e18a02889bf6ef02f619e21f2910cafd"
+      }
+    },
+    {
+      "id": "LIVE_PUBLIC_FORK_EXACT",
+      "pass": true,
+      "observed": {
+        "id": 1351574987,
+        "fullName": "lovejzzz/film-engine",
+        "fork": true,
+        "parent": "blender/blender",
+        "visibility": "public",
+        "private": false,
+        "branches": [
+          "main"
+        ],
+        "heads": [
+          {
+            "oid": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+            "ref": "refs/heads/main"
+          }
+        ],
+        "tags": [],
+        "main": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+        "pullRequests": 0,
+        "releases": 0
+      },
+      "expected": "exact public fork"
+    },
+    {
+      "id": "LIVE_MAIN_UNCHANGED",
+      "pass": true,
+      "observed": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+      "expected": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6"
+    },
+    {
+      "id": "LIVE_ONLY_MAIN_ZERO_TAG_PR_RELEASE",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ONE_PUBLIC_CLONE_ONE_LOCAL_MATERIALIZATION",
+      "pass": true,
+      "observed": {
+        "publicEngineNetworkClones": 1,
+        "localLfsMaterializations": 1,
+        "localDependencyClones": 0,
+        "cleanNativeArm64Builds": 0,
+        "productStarts": 0,
+        "renderCalls": 0,
+        "engineRemoteWrites": 0,
+        "engineRefUpdates": 0,
+        "lfsNetworkDownloads": 0,
+        "lfsUploads": 0,
+        "releases": 0,
+        "signingOperations": 0,
+        "notarizationOperations": 0,
+        "dmgOperations": 0,
+        "pb2ThroughPb7Mutations": 0,
+        "modelCalls": 0
+      },
+      "expected": {
+        "publicEngineNetworkClones": 1,
+        "localLfsMaterializations": 1
+      }
+    },
+    {
+      "id": "ZERO_DEPENDENCY_BUILD_START_RENDER",
+      "pass": true,
+      "observed": {
+        "publicEngineNetworkClones": 1,
+        "localLfsMaterializations": 1,
+        "localDependencyClones": 0,
+        "cleanNativeArm64Builds": 0,
+        "productStarts": 0,
+        "renderCalls": 0,
+        "engineRemoteWrites": 0,
+        "engineRefUpdates": 0,
+        "lfsNetworkDownloads": 0,
+        "lfsUploads": 0,
+        "releases": 0,
+        "signingOperations": 0,
+        "notarizationOperations": 0,
+        "dmgOperations": 0,
+        "pb2ThroughPb7Mutations": 0,
+        "modelCalls": 0
+      },
+      "expected": "all zero"
+    },
+    {
+      "id": "ZERO_FORBIDDEN_EXTERNAL_MUTATIONS",
+      "pass": true,
+      "observed": {
+        "publicEngineNetworkClones": 1,
+        "localLfsMaterializations": 1,
+        "localDependencyClones": 0,
+        "cleanNativeArm64Builds": 0,
+        "productStarts": 0,
+        "renderCalls": 0,
+        "engineRemoteWrites": 0,
+        "engineRefUpdates": 0,
+        "lfsNetworkDownloads": 0,
+        "lfsUploads": 0,
+        "releases": 0,
+        "signingOperations": 0,
+        "notarizationOperations": 0,
+        "dmgOperations": 0,
+        "pb2ThroughPb7Mutations": 0,
+        "modelCalls": 0
+      },
+      "expected": "all zero"
+    },
+    {
+      "id": "DEPENDENCY_TARGET_UNPOPULATED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "BUILD_ROOT_ABSENT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RUNTIME_HOME_ABSENT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "EXTERNAL_ROOT_WITHIN_CEILING",
+      "pass": true,
+      "observed": 2486964224,
+      "expected": 12884901888
+    },
+    {
+      "id": "EVIDENCE_WITHIN_CEILING",
+      "pass": true,
+      "observed": 45056,
+      "expected": 33554432
+    },
+    {
+      "id": "RUNNER_HAS_NO_ENGINE_PUSH_COMMAND",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "STOP_RULE_PRESERVED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    }
+  ],
+  "failures": [
+    "RETAINED_LFS_STORAGE_UNCHANGED"
+  ],
+  "counters": {
+    "publicEngineNetworkClones": 1,
+    "localLfsMaterializations": 1,
+    "localDependencyClones": 0,
+    "cleanNativeArm64Builds": 0,
+    "productStarts": 0,
+    "renderCalls": 0,
+    "engineRemoteWrites": 0,
+    "engineRefUpdates": 0,
+    "lfsNetworkDownloads": 0,
+    "lfsUploads": 0,
+    "releases": 0,
+    "signingOperations": 0,
+    "notarizationOperations": 0,
+    "dmgOperations": 0,
+    "pb2ThroughPb7Mutations": 0,
+    "modelCalls": 0
+  },
+  "externalMutationsPerformedByAuditor": 0,
+  "stopRulePreserved": true,
+  "receiptHash": "72f4ed90ef9325504a0339001ceddfdf32dcd9b4a4e379e995ad9682c6ba78c4"
+}

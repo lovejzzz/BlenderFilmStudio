@@ -6049,3 +6049,15 @@ owner在当前Codex任务中逐字授予v0.2请求的完整有界权限：以pub
 正式root创建前只读复核确认research HEAD与upstream exact且worktree clean；live fork仍是repository id `1351574987`的public `blender/blender` fork，只有`main=4061e12b…`、0 tag/PR/release；retained source与dependency exact且clean，本地LFS object storage存在；host为arm64 M2 Max且free disk约172 GiB，高于160 GiB门。v0.3保持C1双层身份：publication HEAD的唯一parent为F0 code identity `fa1b578b…`，C1只允许三路径普通blob兼容性差异。
 
 执行合同固定九项负控、12 GiB external / 32 MiB evidence、1,200秒 / 4 GiB build ceilings、一次build与两次zero-render starts。runner默认只读；只有显式`--execute`且研究仓库clean/pushed、formal roots absent、negative controls全PASS时才可正式clone/materialize/build。独立auditor必须不import runner并复算live remote、graph、LFS/source/license/dependency/build/runtime/receipts和zero engine write。正式执行必须等本预注册、runner和auditor先提交推送并恢复clean。
+
+## J-490 · PB.1 attempt-01 attribute-context metric FAIL
+
+Date: 2026-08-31 · Type: RETAINED PB.1 HARNESS FAILURE · Public read-only clones / local LFS materializations / dependency clones / native builds / product starts: 1 / 1 / 0 / 0 / 0
+
+v0.3工具冻结提交`17d4f8829082e3fab3906d3490392e79d7914329`推送并恢复clean后，正式preflight确认约172 GiB free、fresh roots、live public fork exact、retained dependency/LFS存在且9/9负控在external root absent时PASS。唯一一次public no-smudge clone取得non-shallow完整图：HEAD `4061e12b…`、tree `5f0cb3eb…`、sole parent `fa1b578b…`、merge base `9e2066ae…`、162,918 commits、5 fork commits且full strict fsck PASS。一次local-only LFS checkout materialize 6,669 paths / 812,388,053 bytes，未发生network LFS transfer。
+
+runner在history gate只因`f0PatchExact`失败而停止。根因是v0.3把retained F0 worktree attribute语境的`841/68`统计直接用于C1 publication worktree；C1对两个原LFS品牌路径设置exact `-diff/-text` override，同一exact parent tree因此报告`837/64 + 2 binary`。差值exact是两个旧LFS pointer各2 additions / 2 deletions。HEAD/tree/parent/path/full-history与完整publication `17 paths / 839 / 64 / 2 binary`全部仍精确。failure/verdict self hashes为`2f994d40…` / `2887f81e…`，dependency clone/build/product/render均0，engine remote write/ref/LFS network/release/sign/notary/DMG/PB.2–PB.7全部0。
+
+首个failure auditor另因storage scope过宽保留为41/42 FAIL：直接绑定retained `lfs.storage`使checkout在`tmp/`留下3,918个零字节临时文件。6,488个immutable object files、810,236,112 object bytes、mtime与manifest hash均exact未变。C1 auditor不import runner/failed auditor，区分object subtree与tmp side effect，重哈希全部materialized LFS、复核live remote与zero side effects，29/29 PASS，self hash `e0fb3dd1758d0a9dc462acd618f0b95089abfea67f46f2a35e29e07342d82222`。
+
+attempt-01永久保留，不能same-root retry。新attempt必须冻结attribute-context-independent F0 metric，并让fresh local LFS storage只链接retained immutable objects、把tmp留在fresh root。原授权的一次public clone/materialization已经消耗；任何local-only correction checkout和第二次materialization都需新的exact owner authorization。PB.1保持open，PB.2–PB.7仍锁定。
