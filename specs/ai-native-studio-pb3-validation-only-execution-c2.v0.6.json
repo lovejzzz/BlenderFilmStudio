@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationExecution.v0.3",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-ONLY-EXECUTION-C2-v0.6",
+  "status": "AUTHORIZED_FOR_ONE_FORMAL_RUN",
+  "snapshotDate": "2026-08-31",
+  "executionParentResearchCommit": "52131c677def7c3520063e56e92e2df234248690",
+  "toolFreeze": {
+    "uri": "specs/ai-native-studio-pb3-validation-tool-freeze.v0.2.json",
+    "sha256": "52e2dda7a6d0846ad1ed2c89d466b4b848165cb38763621d17cbf08bc583009a"
+  },
+  "toolCorrection": {
+    "uri": "specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json",
+    "sha256": "b7b4c77009ccaf7dfa17efd9fa9559cbc402b25f91f9cc9af1bd5e0e4ca4a1c0"
+  },
+  "toolC2Correction": {
+    "uri": "specs/ai-native-studio-pb3-validation-tool-c2-evidence-binding.v0.5.json",
+    "sha256": "55642b2d549811ef35bcda3b91c941a0584d1698d3354de842a426de04990cec"
+  },
+  "authorizationRequest": {
+    "uri": "specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json",
+    "sha256": "44e52a5619967d79e26258ebfcc123a28401f69afc05159174f2b911a4a963ab"
+  },
+  "authorization": {
+    "exactUserText": "我授权启动 PB.3 validation-only C2 attempt-01：基线为 lovejzzz/film-engine public fork main=4061e12bd45a2bec83e68d0cf49abbf56d4738f6 和 PB.1 accepted binary SHA-256=4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59；只允许使用冻结的 PB.3 v0.2 base、C1 resource enforcement 和 C2 authorization/evidence-binding tools，在唯一 fresh PB.3 attempt-01 work/evidence roots 中，对冻结的 B01/B02 各进行一次 approved proposal compile/BuildPlan write、一次 zero-render semantic scene build/workspace save 和一次 zero-render reopen/Expert-state roundtrip，合计最多 4 次 Blender start、2 次 proposal execution、2 次 BuildPlan write、2 次 scene build、2 次 workspace save、2 次 reopen；work root 上限 2,147,483,648 bytes，evidence root 上限 67,108,864 bytes；必须逐字绑定本授权、只允许 execution contract 单路径提交，并独立复核 exact roots、四组 argv、八份日志和两个 root manifests；允许提交并推送 PB.3 research evidence。不得修改 film-engine source/commit/ref/tag/release，不得进行 engine remote write、network call、render、任意 proposal、proposal-originated Python/shell/filesystem authority、签名、公证、DMG 或 PB.4–PB.7。",
+    "exactUserTextSha256": "138c4330ee957f599d2cbc4b4bb97a86e79d7aa8a2b7f83ec58b6785d08e4d82",
+    "authorizedAtUtc": "2026-08-31T06:22:17Z",
+    "explicitPb3ScopePresent": true
+  },
+  "authorizedRun": {
+    "repositoryRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio",
+    "engineSource": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/source",
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-04/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-01",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-01",
+    "benchmarks": [
+      "B01",
+      "B02"
+    ],
+    "blenderStarts": 4,
+    "proposalExecutions": 2,
+    "buildPlanWrites": 2,
+    "sceneBuilds": 2,
+    "workspaceSaves": 2,
+    "reopens": 2,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "runner": {
+    "path": "scripts/run-ai-native-studio-pb3-validation-c2.py",
+    "c2Argument": "specs/ai-native-studio-pb3-validation-tool-c2-evidence-binding.v0.5.json",
+    "c1Argument": "specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json"
+  },
+  "independentAuditor": {
+    "path": "scripts/audit-ai-native-studio-pb3-validation-c2.py",
+    "c2Argument": "specs/ai-native-studio-pb3-validation-tool-c2-evidence-binding.v0.5.json",
+    "c1Argument": "specs/ai-native-studio-pb3-validation-tool-c1-resource-enforcement.v0.3.json",
+    "intermediateOutput": "audit-c1.json",
+    "finalOutput": "audit.json"
+  },
+  "resourceEnforcement": {
+    "maximumWorkRootBytes": 2147483648,
+    "maximumEvidenceRootBytes": 67108864,
+    "allProcessLogsExclusive": true,
+    "symbolicPathsAllowed": false
+  },
+  "evidenceBinding": {
+    "exactAuthorizationText": true,
+    "executionCommitSingleChangedPath": true,
+    "authorizedRootsExact": true,
+    "processArgvExact": 4,
+    "processLogsHashed": 8,
+    "workAndEvidenceManifests": true
+  },
+  "stillUnauthorized": [
+    "PB.3 formal root creation or Blender start without a separately committed exact execution contract",
+    "film-engine source, commit, ref, tag, release or remote mutation",
+    "rendering, PB.4 through PB.7, signing, notarization or DMG work",
+    "proposal-originated Python, shell, network or filesystem authority",
+    "more than two exact B01/B02 approved BuildPlan writes or any arbitrary proposal"
+  ],
+  "claimCeiling": "This contract authorizes one exact PB.3 validation-only C2 attempt under the frozen combined oracle and evidence binding. It does not authorize engine mutation, rendering, PB.4, production readiness or distribution."
+}
