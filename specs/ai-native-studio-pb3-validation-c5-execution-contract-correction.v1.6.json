@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC5ExecutionContractCorrection.v1.6",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-C5-EXECUTION-CONTRACT-CORRECTION-v1.6",
+  "status": "PREREGISTERED_INERT_CORRECTION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "c12de92c6602be33e72195dc823206dbd434417b",
+  "retainedC4Attempt03": {
+    "status": "FAIL_PRE_ROOT_SCOPE_BINDING_AND_ZERO_NETWORK_CEILING",
+    "executionCommit": "54965fc86a5ea4d867f394f31e87a7e58219272b",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-03",
+    "workRootAbsent": true,
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-03",
+    "evidenceManifest": {
+      "regularFiles": 2,
+      "regularFileBytes": 7452,
+      "manifestSha256": "b4cdff845e9d419713b3600a03de8dddbd90c400246fcc3b4995e068ab17d274"
+    },
+    "failure": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-03/failure.json",
+      "sha256": "fa422b7336d87f95782d2fdd16a4ef9cd9c5d0d822724f47c62e63509b3ab200",
+      "failureHash": "248fb2bd86ecd42bca1ca269e1d2ce53e4ef20e11dd99db39f59e63b43c63413"
+    },
+    "audit": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-03/audit-failure.json",
+      "sha256": "aecda60ef9675024b6cdf116b490e9a62938cab9a771643037c633f99e16fdfc",
+      "auditHash": "9c6c1cd7bc830b7ba23f95afe503d88a74ceeb9ec6cc3a802951feb397c081c7",
+      "checks": "22/22"
+    },
+    "rootCause": {
+      "jsonPath": "$.stillUnauthorized[0]",
+      "frozenExpected": "PB.3 formal root creation or Blender start without a separately committed exact execution contract",
+      "executionObserved": "PB.3 formal root creation or Blender start without this separately committed exact execution contract",
+      "singleAddedToken": "this ",
+      "readOnlyNetworkCallsOutsideRunner": 1
+    }
+  },
+  "frozenBase": {
+    "c4Tooling": "specs/ai-native-studio-pb3-validation-c4-c1-execution-tool-freeze.v1.3.json",
+    "c4ToolingSha256": "cd02bb9264b951c52217d2cdbdd4f5e237a95c071e7533c75eeabdd5f00792c2",
+    "correctedTool": "specs/ai-native-studio-pb3-validation-tool-freeze-c4-corrected.v1.2.json",
+    "correctedToolSha256": "24baa8e6a03d62fa2559c939209cfe05fb7a9cdbdbe82ec08267aa1bc9ad827d",
+    "c4Runner": "scripts/run-ai-native-studio-pb3-validation-c4.py",
+    "c4RunnerSha256": "eb670c264cc240b792a55cd9fd3e6a517fcf58a451a4499168a6bd85f7fb929b",
+    "c4IndependentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c4.py",
+    "c4IndependentAuditorSha256": "a212b64b3b74b8056478ce70f5f981c51f23d8ea849650720235f34651b22d4e",
+    "helper": "blender/run_ai_native_studio_pb3_combined_c4.py",
+    "helperSha256": "a516dbe7c06c477fbc1b36e8dcbad7cef0f3992af4e30bf8418c3efa59f91114"
+  },
+  "allowedChanges": [
+    "Add a C5 wrapper runner that validates this correction, the exact future authorization, the exact stillUnauthorized array copied from correctedTool, fresh attempt-04 roots, and retained attempt-01/02/03 before delegating unchanged C4 semantics.",
+    "Add a C5 independent wrapper auditor that delegates the unchanged C4 auditor and independently verifies retained attempt-03, exact-array correction, zero-network accounting, and fresh attempt-04 manifests.",
+    "Add an inert attempt-04 execution template whose stillUnauthorized array is byte-for-byte equal to correctedTool.stillUnauthorized.",
+    "Add a new exact attempt-04 authorization request after static and negative-control audits pass."
+  ],
+  "forbiddenChanges": [
+    "No edit to any C3/C4 runner, auditor, helper, corrected tool, threshold, fixture, semantic oracle, or retained root.",
+    "No remote admission query or other network call before, during, or after a future formal runner, except the separately allowed research evidence push after the run.",
+    "No attempt-03 amend, same-root retry, root creation, cleanup, or evidence modification.",
+    "No Blender start, proposal execution, BuildPlan write, render, engine mutation, signing, notarization, DMG, release, or PB.4-PB.7 work during C5 tool preparation."
+  ],
+  "futureAttempt": {
+    "id": "attempt-04",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-04",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-04",
+    "mustBeFreshUntilExactAuthorization": true
+  },
+  "thresholds": {
+    "blenderStarts": 4,
+    "proposalExecutions": 2,
+    "buildPlanWrites": 2,
+    "sceneBuilds": 2,
+    "workspaceSaves": 2,
+    "reopens": 2,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "maximumWorkRootBytes": 2147483648,
+    "maximumEvidenceRootBytes": 67108864,
+    "noRenderArtifactExtensions": [".exr", ".png", ".jpg", ".jpeg", ".mov", ".mp4"]
+  },
+  "currentCounts": {
+    "attempt04RootsCreated": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0
+  },
+  "authorization": {
+    "attempt04Authorized": false,
+    "generalContinueIsInsufficient": true,
+    "newExactAuthorizationRequiredAfterToolFreeze": true
+  },
+  "claimCeiling": "This preregisters a harness-only C5 correction after retained C4 attempt-03. It grants no formal-run authority and cannot be used to infer PB.3 product behavior."
+}
