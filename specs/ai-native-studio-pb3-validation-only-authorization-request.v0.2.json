@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationOnlyAuthorizationRequest.v0.2",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-ONLY-AUTHORIZATION-REQUEST-v0.2",
+  "status": "AWAITING_EXPLICIT_USER_AUTHORIZATION",
+  "snapshotDate": "2026-08-31",
+  "toolFreeze": {
+    "uri": "specs/ai-native-studio-pb3-validation-tool-freeze.v0.2.json",
+    "sha256": "52e2dda7a6d0846ad1ed2c89d466b4b848165cb38763621d17cbf08bc583009a"
+  },
+  "executionTemplate": {
+    "uri": "specs/ai-native-studio-pb3-validation-execution-template.v0.3.json",
+    "sha256": "d61eca5b9fc385687a8be61d96bba5da284df03f8e0a189158f2808532c01291"
+  },
+  "staticAudit": {
+    "uri": "experiments/ai-native-studio-phase-b/PB.3-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+    "fileSha256": "225714063435082302f574608528b4ba4e096f0c238c7754be838e8c8cbc3133",
+    "auditHash": "db8e287f59b55fa741970422277b7588aa6533972fda31116da8e40a901079bb",
+    "checks": "28/28"
+  },
+  "requestedAuthorization": {
+    "exactText": "我授权启动 PB.3 validation-only attempt-01：基线为 lovejzzz/film-engine public fork main=4061e12bd45a2bec83e68d0cf49abbf56d4738f6 和 PB.1 accepted binary SHA-256=4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59；允许在唯一 fresh PB.3 attempt-01 work/evidence roots 中，对冻结的 B01/B02 各进行一次 approved proposal compile/BuildPlan write、一次 zero-render semantic scene build/workspace save 和一次 zero-render reopen/Expert-state roundtrip，合计最多 4 次 Blender start、2 次 proposal execution、2 次 BuildPlan write、2 次 scene build、2 次 workspace save、2 次 reopen；允许提交并推送 PB.3 research evidence。不得修改 film-engine source/commit/ref/tag/release，不得进行 engine remote write、network call、render、任意 proposal、proposal-originated Python/shell/filesystem authority、签名、公证、DMG 或 PB.4–PB.7。",
+    "mustName": ["PB.3", "attempt-01", "4061e12bd45a2bec83e68d0cf49abbf56d4738f6", "4 Blender starts", "2 proposal executions", "2 BuildPlan writes"],
+    "generalContinueIsInsufficient": true
+  },
+  "requestedMaximums": {
+    "blenderStarts": 4,
+    "proposalExecutions": 2,
+    "buildPlanWrites": 2,
+    "sceneBuilds": 2,
+    "workspaceSaves": 2,
+    "reopens": 2,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0
+  },
+  "claimCeiling": "Authorization would permit one exact PB.3 validation-only attempt, not engine mutation, arbitrary proposal execution, rendering, PB.4, production readiness or distribution."
+}

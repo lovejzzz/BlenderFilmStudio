@@ -142,6 +142,19 @@ same-run evidence combines those facts. PB.3 formal roots, Blender starts,
 proposal executions, BuildPlan writes, scene mutations, renders, engine writes
 and network calls remain zero. This is not PB.3 authority or a PB.3 verdict.
 
+PB.3 formal validation tooling is frozen inert at
+`specs/ai-native-studio-pb3-validation-tool-freeze.v0.2.json`, SHA-256
+`52e2dda7a6d0846ad1ed2c89d466b4b848165cb38763621d17cbf08bc583009a`.
+The combined oracle allows a future exact maximum of four zero-render Blender
+starts, two B01/B02 proposal executions, two BuildPlan writes, two semantic
+scene builds, two workspace saves and two reopens. Static audit passes 28/28
+with self hash `db8e287f...`; the draft execution template was rejected before
+root creation. The exact authorization request is
+`specs/ai-native-studio-pb3-validation-only-authorization-request.v0.2.json`.
+Do not turn the template into authority or create PB.3 formal roots from a
+general continue instruction. PB.3 formal execution and PB.4–PB.7 remain
+unauthorized.
+
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
 and maintenance reference, not the source baseline. The fallback is an external

@@ -6141,3 +6141,11 @@ Date: 2026-08-31 · Type: PB.3 READINESS ONLY · Blender starts / proposal execu
 PB.2关闭后只读盘点PB.3继承面。F0.3已独立证明typed Project/Scene/Shot/Character persistence和lossless Expert Mode；F0.4已独立证明B01/B02 canonical plan hashes `316114f1…` / `a9022bf6…`与semantic hashes `e8c55fb7…` / `d197b024…`；PB.2已证明exact proposal/approval inspection和八个pre-write rejects。Current clean source `4061e12b…`同时包含pure contract module与workspace contract bridge。
 
 缺失证据被明确冻结：尚无accepted same-run在PB.1 binary上同时完成approved compile、exact semantic/provenance identity、typed workspace mapping/persistence与Expert Mode roundtrip。v0.1只绑定这些继承哈希和gap，不创建formal root，不授权PB.3 execution。Engine source/remote write与network同样为0；PB.4–PB.7继续未授权。
+
+## J-500 · PB.3 inert formal tool freeze PASS
+
+Date: 2026-08-31 · Type: PB.3 PRE-AUTHORIZATION TOOL FREEZE · Formal Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+v0.2把combined oracle收敛为每个benchmark两个stage：build stage完成inspect、exact approved BuildPlan write、semantic scene build、typed workspace mapping、background Expert-state roundtrip与save；reopen stage复核canonical/semantic/provenance identity、workspace persistence并再次roundtrip。B01/B02总上限固定为4 starts / 2 proposal executions / 2 BuildPlan writes / 2 scene builds / 2 saves / 2 reopens，render/network/engine write为0。空actors映射到exact Character sentinel `NONE / No Character`。
+
+Runner只有同时具备`--execute`、exact v0.3 execution status、显式PB.3原文、parent+committed-bytes绑定、clean source/research、exact binary/tools和fresh roots才会越过authority gate。独立static auditor验证五份tool hash、AST no-network、offline/disable-autoexec、exclusive writes、self-test和draft template拒绝，28/28 PASS，self hash `db8e287f59b55fa741970422277b7588aa6533972fda31116da8e40a901079bb`。Formal roots仍absent，所有formal计数为0。PB.3 exact authorization request已冻结；general continue不构成formal authority。

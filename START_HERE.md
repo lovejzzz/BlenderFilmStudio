@@ -134,6 +134,12 @@ both a research notebook and an executable evidence base. Read this page,
   evidence. Current source contains both the contract bridge and typed
   workspace, but there is no accepted same-run combined proof. Formal roots and
   every Blender/compile/write/render/network/engine-mutation count remain zero.
+- **PB.3 formal tools frozen, still inert:** v0.2 fixes the combined B01/B02
+  compile → semantic scene → typed workspace save → reopen/Expert-state oracle.
+  A future exact run is capped at four zero-render Blender starts and two
+  proposal/BuildPlan writes. Static audit passed 28/28; the non-authorized v0.3
+  template was rejected before root creation. The exact authorization scope is
+  frozen, but PB.3 formal execution and PB.4–PB.7 remain unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -346,10 +352,10 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-PB.2 validation-only is closed `PASS`, and PB.3 readiness is preregistered. The
-next checkpoint is a separately versioned PB.3 formal protocol that freezes the
-combined same-run oracle, process/write counts, fresh roots and independent
-auditor. PB.3–PB.7 formal execution is not yet authorized. Do not start Blender,
+PB.2 validation-only is closed `PASS`; PB.3 readiness and inert formal tools are
+frozen. The next checkpoint is an exact committed PB.3 execution contract after
+explicit PB.3 authorization, followed by one fresh attempt and its independent
+audit. PB.3–PB.7 formal execution is not yet authorized. Do not start Blender,
 execute proposals, write BuildPlans, mutate `film-engine`, or use
 proposal-originated network/filesystem authority under the consumed PB.2 scope.
 
