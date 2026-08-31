@@ -6115,3 +6115,11 @@ Date: 2026-08-31 · Type: RETAINED PB.1 HARNESS FAILURE
 C3 formal preflight与10/10负控通过；engine与dependency两套objects symlink/materialization、full fsck、metric、license全部PASS。Dependency 622 paths / 1,102,333,263 bytes exact，retained 618 objects未变。Clean arm64 build 602.91秒、peak RSS 2,056,978,432 bytes，十项build checks全部PASS，binary SHA `4d7f1744…`。
 
 两次zero-render starts的version/buildHash/binaryPath/save identity均PASS，官方Blender config未变。唯一失败是macOS忽略process `HOME`，四个product paths落到真实FilmStudioEngineF0 namespace，isolated root为空；真实product userpref被写为179,901 bytes / SHA `5c635b48…`并保留。Independent failure audit 39/39 PASS，self hash `b1f44e80…`。C4只需复用accepted build并用四个`BLENDER_USER_*`路径做fresh recovery starts，不再clone/materialize/build。
+
+## J-497 · PB.1 C4 runtime recovery PASS
+
+Date: 2026-08-31 · Type: PB.1 VALIDATION-ONLY PASS · New clone / materialization / dependency clone / build / starts / renders: 0 / 0 / 0 / 0 / 2 / 0
+
+C4 preflight在tool commit `80b68d897b4b17268b3dc997fd0de5fb1022197d`推送且worktree clean后ACCEPTED，绑定attempt-04 PASS build、39/39 failure audit与binary `4d7f1744…`。Recovery显式设置四个`BLENDER_USER_*`路径到fresh root；version与background preference-save两次进程均exit 0，version/buildHash/binaryPath/paths/save exact，renderCalls=0。Official Blender与真实FilmStudioEngineF0 config before/after digest不变，fresh recovery config存在。
+
+Runner verdict PASS self hash `bc64dd1aead3f2f8a24970e2fb160ba7d861ec2745b96a8e6303f8d704cd46c0`。首个auditor因自检字符串匹配自身保留13/14 FAIL；不import runner或failed auditor的C1重算全部证据与live remote，15/15 PASS，self hash `f59242aff7c96d15d98e8a3e6b05635b0211f8b6e464ba51646441ce4a15485e`。PB.1由attempt-04 accepted clean build与C4 runtime recovery组合关闭PASS；不授权PB.2–PB.7。

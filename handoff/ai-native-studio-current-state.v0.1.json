@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_ATTEMPT03_RETAINED_FAIL",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -177,7 +177,7 @@
     "phaseBMutationAuthorized": false
   },
   "phaseBPreparation": {
-    "status": "PB1_ATTEMPT03_RETAINED_FAIL_C3_DEPENDENCY_LFS_CORRECTION_REQUIRED",
+    "status": "PB1_VALIDATION_PASS_ATTEMPT04_BUILD_PLUS_C4_RUNTIME_RECOVERY",
     "gate": "PB.1",
     "mode": "VALIDATION_ONLY_NO_ENGINE_SOURCE_MUTATION_NO_ENGINE_REMOTE_WRITE",
     "publicationHead": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
@@ -259,31 +259,41 @@
       "dependencyLocalObjectFiles": 0,
       "rootCause": "The local no-checkout dependency clone ran with LFS smudge disabled and did not link or materialize the retained dependency LFS object store; the linker rejected a 131-byte libzstd.a pointer"
     },
+    "attempt04": {
+      "status": "FAIL_RUNTIME_ISOLATION_BUILD_ACCEPTED",
+      "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-04",
+      "failedStage": "RUNTIME_IDENTITY_CONFIGURATION",
+      "buildReceiptHash": "fb8bac482df0c7ee0dff73fe5b481fa85bac9af4eeb0545993231f513c654049",
+      "binarySha256": "4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59",
+      "buildWallSeconds": 602.912514209,
+      "buildPeakRssBytes": 2056978432,
+      "failureAuditReceiptHash": "b1f44e80d548979bdd07bd5fc273cfa8421997cbbd0eec7b64cf30b4e8928b29",
+      "failureAuditChecks": 39,
+      "rootCause": "macOS application-support resolution ignored process HOME and used the real FilmStudioEngineF0 root; source build and identity passed"
+    },
+    "acceptedRecovery": {
+      "status": "PASS",
+      "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-05-runtime-recovery",
+      "contract": "specs/ai-native-studio-pb1-validation-only-c4-runtime-recovery.v0.10.json",
+      "attempt04BuildReceiptHash": "fb8bac482df0c7ee0dff73fe5b481fa85bac9af4eeb0545993231f513c654049",
+      "runtimeReceiptHash": "eaabe8cbb5fe5e6364d659ab5f3dbaafd8e0bb54f253e9273beeb5720f495139",
+      "verdictReceiptHash": "bc64dd1aead3f2f8a24970e2fb160ba7d861ec2745b96a8e6303f8d704cd46c0",
+      "retainedFirstAuditReceiptHash": "fb352bba4d06114c628402910aa6d467f0cb8db2a90bf0838bd184009f8ebf0f",
+      "acceptedAuditReceiptHash": "f59242aff7c96d15d98e8a3e6b05635b0211f8b6e464ba51646441ce4a15485e",
+      "acceptedAuditChecks": 15,
+      "productStarts": 2,
+      "renders": 0,
+      "newNativeBuilds": 0,
+      "officialAndRealProductConfigurationUnchanged": true
+    },
     "activeCorrection": {
-      "status": "C3_TOOLS_FROZEN_STANDING_AUTHORIZATION_APPLIED_NOT_YET_EXECUTED",
-      "requiredChange": "Install one fresh dependency objects symlink to the retained dependency LFS object store before dependency checkout, then perform one zero-network dependency LFS checkout",
-      "attempt01Through03MustRemainImmutable": true,
-      "retainedDependencyLfsObjects": {
-        "files": 618,
-        "bytes": 1070190055,
-        "manifestSha256": "e180738d406f6ba91d5f2fa315232efaac3d45c0e1f55c03b2fab98bf5ee5447"
-      },
-      "authorizationRequest": "specs/ai-native-studio-pb1-validation-only-c3-authorization-request.v0.8.json",
-      "authorizationRequestSha256": "85f622fe4a3f30f17a404bcbd17b5c9cba4fef617cd402f095a750d00d47716c",
-      "executionContract": "specs/ai-native-studio-pb1-validation-only-c3-execution.v0.9.json",
-      "executionContractSha256": "49f8367481ab790336d4d1dca2beb5e3f0d3e762c600049de970b7a98ac6aae7",
-      "runner": "scripts/run-ai-native-studio-pb1-validation-only-c3.mjs",
-      "runnerSha256": "18f4f36d3825353cf0eb2e071e856d4083df25e21aa63e73c6dd231998985848",
-      "runnerSelfTest": "PASS_12_OF_12",
-      "independentAuditor": "scripts/audit-ai-native-studio-pb1-validation-only-c3.mjs",
-      "independentAuditorSha256": "f8aa0784aaf2f3ef57efc86ce93da4bafea8001dc9524637eb36d587fe5d8bbc",
-      "independentAuditorSelfTest": "PASS_7_OF_7",
-      "attempt04FormalRootAuthorized": true,
-      "anotherLocalEngineCloneAuthorized": true,
-      "anotherEngineLfsMaterializationAuthorized": true,
-      "dependencyLfsMaterializationAuthorized": true,
-      "nativeBuildAuthorized": true,
-      "productStartsAuthorized": 2
+      "status": "PB1_CLOSED_PASS",
+      "basis": "Attempt-04 accepted clean source/dependency/build evidence plus C4 fresh runtime isolation recovery",
+      "retainedAttemptsMustRemainImmutable": ["attempt01", "attempt02", "attempt03", "attempt04"],
+      "phaseBSourceMutationAuthorized": false,
+      "pb2ThroughPb7Authorized": false,
+      "nextGate": "PB.2",
+      "nextGateStatus": "NOT_STARTED_UNAUTHORIZED"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],

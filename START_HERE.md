@@ -81,6 +81,11 @@ both a research notebook and an executable evidence base. Read this page,
   ignored the process `HOME` override and used the real FilmStudioEngineF0 root.
   Independent failure audit passed 39/39. C4 may reuse this build with explicit
   Blender user paths; it must not rebuild or modify attempt-04.
+- **PB.1 validation-only accepted:** C4 reused the exact attempt-04 binary and
+  performed two fresh zero-render starts with all four `BLENDER_USER_*` paths
+  explicitly isolated. Product identity, saved preferences, official config and
+  the real FilmStudioEngineF0 config were exact/unchanged. Verdict is `PASS`;
+  the accepted C1 audit is 15/15. PB.2–PB.7 remain unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
