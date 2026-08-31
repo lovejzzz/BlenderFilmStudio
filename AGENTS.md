@@ -126,6 +126,12 @@ checkout/materialization. Read
 `research/2026-08-31-ai-native-studio-pb1-attempt-01-retained-failure.md` before
 any PB.1 correction. PB.2–PB.7 remain unauthorized.
 
+The active PB.1 correction request is
+`specs/ai-native-studio-pb1-validation-only-c1-authorization-request.v0.4.json`.
+It permits no action by itself. General permission to continue does not authorize
+another checkout or materialization; require the exact bounded C1 attempt-02 owner
+authorization before creating its external or evidence root.
+
 ## Cold-start execution rules
 
 - First run the read-only host check:

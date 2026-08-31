@@ -6061,3 +6061,13 @@ runner在history gate只因`f0PatchExact`失败而停止。根因是v0.3把retai
 首个failure auditor另因storage scope过宽保留为41/42 FAIL：直接绑定retained `lfs.storage`使checkout在`tmp/`留下3,918个零字节临时文件。6,488个immutable object files、810,236,112 object bytes、mtime与manifest hash均exact未变。C1 auditor不import runner/failed auditor，区分object subtree与tmp side effect，重哈希全部materialized LFS、复核live remote与zero side effects，29/29 PASS，self hash `e0fb3dd1758d0a9dc462acd618f0b95089abfea67f46f2a35e29e07342d82222`。
 
 attempt-01永久保留，不能same-root retry。新attempt必须冻结attribute-context-independent F0 metric，并让fresh local LFS storage只链接retained immutable objects、把tmp留在fresh root。原授权的一次public clone/materialization已经消耗；任何local-only correction checkout和第二次materialization都需新的exact owner authorization。PB.1保持open，PB.2–PB.7仍锁定。
+
+## J-491 · PB.1 C1 attempt-02 correction authorization request
+
+Date: 2026-08-31 · Type: AUTHORIZATION REQUEST · New external operations: 0
+
+v0.4把attempt-01的两个harness结论转成最小、可独立复算的correction。F0 parent不再用受active worktree attributes影响的aggregate numstat：14个非品牌text paths固定path-list SHA `17f6289f…`与837/64；两个former-LFS品牌路径分别固定merge-base和F0-parent pointer Git blob OID、content SHA与bytes。完整publication range仍保持17 paths / 839 / 64 / 2 binary，source object与threshold change均0。
+
+LFS correction不再把fresh clone的storage root直接绑定retained storage；拟议attempt-02只在fresh local storage的`objects`位置建立一个指向retained immutable objects的symlink，使checkout tmp留在fresh root。retained object subtree固定6,488 files / 810,236,112 bytes / manifest `f392cbbc…`，attempt-01现有3,918个零字节tmp files完整保留且不授权清理。
+
+由于原授权的一次public clone与一次materialization已经消耗，新请求明确禁止第二次public network clone，只请求一次从retained attempt-01 source的local-only Git clone、一个fresh objects symlink、一次additional zero-network materialization，以及尚未使用的一次dependency clone/build与最多两次zero-render starts。engine source/commit/ref/tag、remote write、LFS network、release/sign/notary/DMG和PB.2–PB.7继续0/false。没有owner逐字授权时，attempt-02 roots保持absent。

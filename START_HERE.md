@@ -269,7 +269,8 @@ correction may not start until an exact request authorizes a fresh local-only so
 checkout from retained attempt-01, an additional zero-network materialization with
 tmp isolated in the fresh root, the still-unused dependency/build/start operations,
 and a new immutable evidence root. It permits no engine source edit or remote write
-and does not start PB.2–PB.7.
+and does not start PB.2–PB.7. The exact request is frozen in
+`specs/ai-native-studio-pb1-validation-only-c1-authorization-request.v0.4.json`.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires
