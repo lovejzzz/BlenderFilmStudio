@@ -175,9 +175,19 @@ The active inert correction is
 `specs/ai-native-studio-pb3-validation-c3-input-hash-correction.v0.7.json`,
 SHA-256 `701e4076...`. It permits only one future versioned tool-field correction
 for `commonInputs[0].sha256`; source/fixture bytes, thresholds and permissions
-remain unchanged. Attempt-02 is not authorized. Do not retry attempt-01 in
-place or infer another run from the consumed C2 authorization or general
-permission. PB.4–PB.7 remain unauthorized.
+remain unchanged. That correction is now implemented by
+`specs/ai-native-studio-pb3-validation-tool-freeze-c3-corrected.v0.8.json`,
+whose recursive JSON diff from v0.2 is exactly that one leaf. The consolidated
+C3 runner/auditor and inert template are frozen by
+`specs/ai-native-studio-pb3-validation-c3-execution-tool-freeze.v0.8.json`.
+Static audit passes 32/32 with self hash `983d3153...`; it also proves the two
+attempt-02 roots remain absent, retained attempt-01 manifests remain exact and
+all Blender/proposal/BuildPlan/render/network counts remain zero. The active
+exact request is
+`specs/ai-native-studio-pb3-validation-only-authorization-request-c3.v0.8.json`.
+Attempt-02 is not authorized. Do not retry attempt-01 in place or infer another
+run from the consumed C2 authorization or general permission. PB.4–PB.7 remain
+unauthorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

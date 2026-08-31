@@ -6179,3 +6179,15 @@ Owner逐字批准C2 request；execution contract以唯一变更路径提交为`e
 正式runner创建两个attempt-01 roots后，在复制第一个B01 common input前停止。v0.2记录SceneSpec SHA为`b308...f1baae747...`，actual为`b308...f1baaeae747...`，是单字符transcription error。完整13-input roster为12 exact / 1 mismatch；actual file 10,516 bytes，从`a4d376d6...`到execution commit始终同hash，因此不是source mutation。Work root保持0 files；runner停止时evidence 0 files，随后只写failure和independent audit。Blender/proposal/BuildPlan/scene/save/reopen/render/network/engine mutations全0。
 
 Failure self hash `ebf23c3a...`；不import formal runner的独立auditor重算execution single-path commit、三套tool hashes、13 inputs、跨提交source bytes、root state、binary/source identity与zero counts，24/24 PASS，self hash `cf930924c2215f30c871fc58d08363a9f83ae0537097ef3ec03e548b86d93926`。Attempt-01永久保留，不原地重试。C3只冻结`commonInputs[0].sha256`单字段校正；fresh attempt-02尚未授权。
+
+## J-504 · PB.3 C3 corrected tool freeze PASS
+
+Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL CORRECTION · Formal Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C3把v0.7批准的唯一校正落实为`specs/ai-native-studio-pb3-validation-tool-freeze-c3-corrected.v0.8.json`；递归JSON diff证明相对v0.2只改变`commonInputs[0].sha256`，13/13冻结inputs现在全部exact。Source、fixtures、thresholds、run ceilings与permissions均未改变。Corrected tool file SHA为`b86b5de659ebf09761ea8a74bd252d4d11c66073fd50a17680ebb50debf4558d`。
+
+Consolidated C3 runner先复核exact授权、single-path execution commit、corrected 13-input roster、retained attempt-01前后manifests、fresh roots与2 GiB / 64 MiB ceilings，再委托冻结base语义流程；独立auditor先运行base semantic audit，随后独立重建authority、roots、四组argv、八份logs、resources与manifests。Runner/auditor/static auditor SHA依次为`80fafdc044f149d08b0d03fe71b4037e461bd88066a5c5ca2be5e4a8a50df76e` / `aef6338f574cf0e394594d20f9d7e68a37b15e5216d672328f78db68b2f53c2a` / `b2bb3db7b7e771c217718c2522a8bdba12dbdec64c56c1e85ab920129043534e`。
+
+Static auditor仅执行self-test、inert template拒绝、AST/no-network、one-leaf diff、root/symlink负控和retained-manifest复核；32/32 PASS，audit file/self SHA为`6afd9e4849fe2b9511a6051c341b8f4304e13fc382c58a041183f4d1a85dfd8e` / `983d315310c6198dbba0feaaa3109983db7e2d37a0b36775390a3bf037bcd0cf`。Attempt-02 work/evidence roots仍不存在；attempt-01 work保持0 files，evidence保持2 files / 5,091 bytes及原manifest。Blender、proposal、BuildPlan、scene/save/reopen、render、network与engine write计数全部0。
+
+Exact fresh request为`specs/ai-native-studio-pb3-validation-only-authorization-request-c3.v0.8.json`，attempt-02 template仍为`DRAFT_AUTHORIZATION_MISSING`。因此C3 tool freeze关闭PASS，但attempt-02尚未授权；不得从general permission或已消耗C2授权推导新formal run，PB.4–PB.7继续locked。

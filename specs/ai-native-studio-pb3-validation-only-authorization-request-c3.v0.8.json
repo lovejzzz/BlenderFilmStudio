@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationOnlyAuthorizationRequestC3.v0.8",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-ONLY-AUTHORIZATION-REQUEST-C3-v0.8",
+  "status": "AWAITING_EXPLICIT_USER_AUTHORIZATION",
+  "snapshotDate": "2026-08-31",
+  "retainedAttempt01": {
+    "status": "FAIL_PRE_BLENDER_HARNESS_INPUT_HASH",
+    "failureHash": "ebf23c3aaac9bfebc9fff32909fe2b984a875ee4289abdc20968cbba860095c3",
+    "failureAuditHash": "cf930924c2215f30c871fc58d08363a9f83ae0537097ef3ec03e548b86d93926",
+    "mustRemainImmutable": true
+  },
+  "requiredCorrectedTool": {
+    "uri": "specs/ai-native-studio-pb3-validation-tool-freeze-c3-corrected.v0.8.json",
+    "sha256": "b86b5de659ebf09761ea8a74bd252d4d11c66073fd50a17680ebb50debf4558d",
+    "changedFields": [
+      "commonInputs[0].sha256"
+    ]
+  },
+  "requiredTools": {
+    "runner": "scripts/run-ai-native-studio-pb3-validation-c3.py",
+    "runnerSha256": "80fafdc044f149d08b0d03fe71b4037e461bd88066a5c5ca2be5e4a8a50df76e",
+    "independentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c3.py",
+    "independentAuditorSha256": "aef6338f574cf0e394594d20f9d7e68a37b15e5216d672328f78db68b2f53c2a"
+  },
+  "requestedAuthorization": {
+    "exactText": "我授权启动 PB.3 validation-only C3 attempt-02：基线为 lovejzzz/film-engine public fork main=4061e12bd45a2bec83e68d0cf49abbf56d4738f6 和 PB.1 accepted binary SHA-256=4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59；必须保持 retained attempt-01 work/evidence roots 完全不变，只允许使用与 v0.2 相比仅修正 commonInputs[0].sha256 一个 JSON leaf 的 corrected tool 以及冻结的 consolidated C3 runner/auditor，在唯一 fresh PB.3 attempt-02 work/evidence roots 中，对冻结的 B01/B02 各进行一次 approved proposal compile/BuildPlan write、一次 zero-render semantic scene build/workspace save 和一次 zero-render reopen/Expert-state roundtrip，合计最多 4 次 Blender start、2 次 proposal execution、2 次 BuildPlan write、2 次 scene build、2 次 workspace save、2 次 reopen；work root 上限 2,147,483,648 bytes，evidence root 上限 67,108,864 bytes；必须逐字绑定本授权、只允许 execution contract 单路径提交，并独立复核 corrected 13-input roster、exact roots、四组 argv、八份日志、两个 root manifests 和 retained attempt-01；允许提交并推送 PB.3 research evidence。不得修改 film-engine source/commit/ref/tag/release，不得进行 engine remote write、network call、render、任意 proposal、proposal-originated Python/shell/filesystem authority、签名、公证、DMG 或 PB.4–PB.7。",
+    "mustName": [
+      "PB.3",
+      "C3 attempt-02",
+      "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+      "4 Blender starts",
+      "2 proposal executions",
+      "2 BuildPlan writes",
+      "2,147,483,648 bytes",
+      "67,108,864 bytes",
+      "retained attempt-01",
+      "commonInputs[0].sha256"
+    ],
+    "generalContinueIsInsufficient": true
+  },
+  "requestedMaximums": {
+    "blenderStarts": 4,
+    "proposalExecutions": 2,
+    "buildPlanWrites": 2,
+    "sceneBuilds": 2,
+    "workspaceSaves": 2,
+    "reopens": 2,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0,
+    "workRootBytes": 2147483648,
+    "evidenceRootBytes": 67108864
+  },
+  "claimCeiling": "Authorization would permit one exact PB.3 validation-only C3 attempt-02 with one corrected input hash and unchanged oracle/permissions. It would not authorize attempt-01 mutation, engine mutation, arbitrary proposals, rendering, PB.4, production readiness or distribution."
+}

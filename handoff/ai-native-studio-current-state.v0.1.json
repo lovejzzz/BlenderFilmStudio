@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_RETAINED_FAIL_C3_FROZEN",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_RETAINED_FAIL_C3_TOOL_FREEZE_PASS_ATTEMPT02_UNAUTHORIZED",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -570,7 +570,7 @@
         "networkCalls": 0
       },
       "c3InputHashCorrection": {
-        "status": "FROZEN_INERT_ATTEMPT02_UNAUTHORIZED",
+        "status": "TOOL_FREEZE_PASS_STATIC_32_OF_32_ATTEMPT02_UNAUTHORIZED",
         "contract": "specs/ai-native-studio-pb3-validation-c3-input-hash-correction.v0.7.json",
         "contractFileSha256": "701e40769ad731d5d2ec2724aded1776b81268be2a13f6d798982afa2abaf634",
         "changedFields": [
@@ -579,17 +579,43 @@
         "sourceBytesChanged": 0,
         "fixtureBytesChanged": 0,
         "permissionsExpanded": false,
-        "attempt02RootsExist": false
+        "attempt02RootsExist": false,
+        "executionToolFreeze": {
+          "status": "PASS_STATIC_32_OF_32_INERT",
+          "correctedTool": "specs/ai-native-studio-pb3-validation-tool-freeze-c3-corrected.v0.8.json",
+          "correctedToolFileSha256": "b86b5de659ebf09761ea8a74bd252d4d11c66073fd50a17680ebb50debf4558d",
+          "runner": "scripts/run-ai-native-studio-pb3-validation-c3.py",
+          "runnerFileSha256": "80fafdc044f149d08b0d03fe71b4037e461bd88066a5c5ca2be5e4a8a50df76e",
+          "independentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c3.py",
+          "independentAuditorFileSha256": "aef6338f574cf0e394594d20f9d7e68a37b15e5216d672328f78db68b2f53c2a",
+          "staticAuditor": "scripts/audit-ai-native-studio-pb3-tool-freeze-c3.py",
+          "staticAuditorFileSha256": "b2bb3db7b7e771c217718c2522a8bdba12dbdec64c56c1e85ab920129043534e",
+          "toolFreezeContract": "specs/ai-native-studio-pb3-validation-c3-execution-tool-freeze.v0.8.json",
+          "toolFreezeContractFileSha256": "2711b7fd7f5cc4cc026978921414e35554fc2dab077448fad3e9ca00ba3f1724",
+          "executionTemplate": "specs/ai-native-studio-pb3-validation-execution-c3-template.v0.9.json",
+          "executionTemplateFileSha256": "b21d57cd64a825ebcdb40af53b7fd29e4c4d51f8198a8764abd6ac5467ea24ed",
+          "authorizationRequest": "specs/ai-native-studio-pb3-validation-only-authorization-request-c3.v0.8.json",
+          "authorizationRequestFileSha256": "184e30445e917c00e6a07ee9c4cfde9f6c4b0c17db3a774098d8aa571693e252",
+          "researchDocument": "research/2026-08-31-ai-native-studio-pb3-c3-tool-freeze-v0.8.md",
+          "researchDocumentFileSha256": "b99649f4563b962f6338a825df1e459abb2f70394819fdcbd17b3587ad9ca116",
+          "staticAudit": "experiments/ai-native-studio-phase-b/PB.3-c3-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+          "staticAuditFileSha256": "6afd9e4849fe2b9511a6051c341b8f4304e13fc382c58a041183f4d1a85dfd8e",
+          "staticAuditHash": "983d315310c6198dbba0feaaa3109983db7e2d37a0b36775390a3bf037bcd0cf",
+          "checks": "32/32",
+          "attempt02WorkRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-02",
+          "attempt02EvidenceRoot": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-02",
+          "attempt02RootsExist": false
+        }
       }
     },
     "activeCorrection": {
-      "status": "PB3_ATTEMPT01_RETAINED_PRESTART_FAIL_C3_FROZEN",
+      "status": "PB3_ATTEMPT01_RETAINED_PRESTART_FAIL_C3_TOOL_FREEZE_PASS",
       "basis": "One v0.2 SceneSpec SHA-256 transcription error; 13-input audit 12 exact / 1 mismatch and independent retained-failure audit 24/24",
       "retainedAttemptsMustRemainImmutable": ["attempt01", "attempt02", "attempt03", "attempt04"],
       "phaseBSourceMutationAuthorized": false,
       "pb2ThroughPb7Authorized": false,
       "nextGate": "PB.3",
-      "nextGateStatus": "PB3_C3_CORRECTION_FROZEN_ATTEMPT02_TOOLING_AND_AUTHORIZATION_REQUIRED"
+      "nextGateStatus": "PB3_C3_TOOL_FREEZE_PASS_AWAITING_EXPLICIT_ATTEMPT02_AUTHORIZATION"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -965,18 +991,18 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB3_VALIDATION_ONLY_C3_TOOL_FREEZE",
-    "result": "A complete inert C3 runner/auditor freeze implementing only the corrected commonInputs[0].sha256, followed by a fresh attempt-02 authorization request",
+    "gate": "PB3_VALIDATION_ONLY_C3_ATTEMPT02_AUTHORIZATION",
+    "result": "The inert C3 runner/auditor freeze passed 32/32; await the exact fresh attempt-02 authorization before creating roots or starting Blender",
     "requiredArtifacts": [
       "retain attempt-01 work/evidence roots unchanged",
-      "versioned C3 runner and auditor changing only the frozen SceneSpec input SHA",
-      "independent static tool audit with attempt-02 roots absent and zero Blender starts",
-      "a new exact attempt-02 authorization request only after C3 tools pass",
+      "use the frozen C3 runner and auditor changing only the frozen SceneSpec input SHA",
+      "preserve the 32/32 static tool audit with attempt-02 roots absent and zero Blender starts",
+      "bind the exact fresh attempt-02 authorization text to a single-path execution contract commit",
       "zero film-engine source/ref/tag/release mutation, engine remote write, network, rendering, signing, notarization, DMG work or PB.4-PB.7 work"
     ],
     "formalAttempt01Authorized": false,
     "formalAttempt01AuthorizationConsumed": true,
     "formalAttempt02Authorized": false,
-    "exactAuthorizationTextSource": null
+    "exactAuthorizationTextSource": "specs/ai-native-studio-pb3-validation-only-authorization-request-c3.v0.8.json#/requestedAuthorization/exactText"
   }
 }
