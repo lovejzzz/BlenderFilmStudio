@@ -164,11 +164,20 @@ files in the independent audit. The active C2 correction is
 SHA-256 `55642b2d...`. It requires exact authorization text/hash, a single-path
 execution commit, exact formal roots, argv/log verification and work/evidence
 manifests. Static audit passes 29/29 with self hash `f7babc9e...`. The
-superseding exact authorization request is
-`specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json`.
-Do not turn any template into authority or create PB.3 formal roots from a
-general continue instruction. PB.3 formal execution and PB.4–PB.7 remain
-unauthorized.
+superseding request was approved and consumed by execution commit
+`ee68a977...` for attempt-01. The formal runner stopped before copying an input
+or starting Blender because v0.2 contains one transcribed SceneSpec SHA:
+expected `b308...f1baae747...`, actual `b308...f1baaeae747...`. The complete
+13-path input audit found 12 exact and this sole mismatch. Retain attempt-01
+roots immutable; its failure audit passes 24/24 with self hash `cf930924...`.
+
+The active inert correction is
+`specs/ai-native-studio-pb3-validation-c3-input-hash-correction.v0.7.json`,
+SHA-256 `701e4076...`. It permits only one future versioned tool-field correction
+for `commonInputs[0].sha256`; source/fixture bytes, thresholds and permissions
+remain unchanged. Attempt-02 is not authorized. Do not retry attempt-01 in
+place or infer another run from the consumed C2 authorization or general
+permission. PB.4–PB.7 remain unauthorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

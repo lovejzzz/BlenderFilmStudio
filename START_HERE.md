@@ -147,7 +147,12 @@ both a research notebook and an executable evidence base. Read this page,
   roots, four exact argv, eight process logs and two root manifests. Its static
   audit passed 29/29; the active request is
   `specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json`.
-  PB.3 formal execution and PB.4–PB.7 remain unauthorized.
+  That request was approved and consumed by attempt-01, which stopped before
+  any Blender start because v0.2 contains one SceneSpec SHA transcription
+  error. The 13-input audit found 12 exact and one mismatch; independent
+  retained-failure audit passed 24/24. Attempt-01 roots are immutable. Active
+  C3 permits only a versioned correction of `commonInputs[0].sha256`; fresh
+  attempt-02 and PB.4–PB.7 remain unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -360,13 +365,13 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-PB.2 validation-only is closed `PASS`; PB.3 readiness and the C2-hardened inert
-formal tools are frozen. The next checkpoint is an exact committed PB.3 C2
-execution contract after explicit PB.3 C2 authorization, followed by one fresh
-attempt and its independent audit. PB.3–PB.7 formal execution is not yet
-authorized. Do not start Blender, execute proposals, write BuildPlans, mutate
-`film-engine`, or use proposal-originated network/filesystem authority under the
-consumed PB.2 scope.
+PB.2 validation-only is closed `PASS`; PB.3 attempt-01 is a retained pre-start
+harness `FAIL` with 24/24 independent audit. The next checkpoint is a complete
+inert C3 tool freeze implementing only the corrected SceneSpec SHA, followed by
+an exact fresh attempt-02 authorization request. PB.3 attempt-02 and PB.4–PB.7
+are not authorized. Do not retry attempt-01, start Blender, execute proposals,
+write BuildPlans, mutate `film-engine`, or use proposal-originated authority
+under the consumed C2 scope.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

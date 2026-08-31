@@ -6169,3 +6169,13 @@ Date: 2026-08-31 · Type: PRE-AUTHORIZATION TOOL CORRECTION · Formal Blender st
 C2 runner在C1之前要求exact request text+SHA、explicit scope+time、execution commit单路径、request/C2 bytes已冻结于parent、五个formal arguments exact；C1 PASS后复核四组argv与八份log hashes。C2 auditor先运行完整C1/base audit，再独立复核authority/root/commit/process evidence，生成work/evidence canonical manifests并把最终audit纳入64 MiB projection。纯函数负控另证明runner/auditor argv exact一致且root/descendant symlink均fail-closed。
 
 Static auditor不import engine、不启动Blender，执行self-test和一次inert template rejection，29/29 PASS，audit self hash `f7babc9e28ed37ed53bdaff43e2cad0dbbf735e653c0fa614bf565960c2adffb`。Active exact request升级为`specs/ai-native-studio-pb3-validation-only-authorization-request-c2.v0.4.json`；general continue仍不足以创建PB.3 authority，PB.4–PB.7继续locked。
+
+## J-503 · PB.3 C2 attempt-01 pre-Blender harness FAIL
+
+Date: 2026-08-31 · Type: RETAINED PB.3 HARNESS FAILURE · Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+Owner逐字批准C2 request；execution contract以唯一变更路径提交为`ee68a977a018a1e94c4161674f5173d23a85f93e`并通过public raw hash复验。Admission在约174.4 GB free、research/source clean、binary与remote heads exact、fresh roots时PASS；missing-`--execute`负控在root创建前拒绝。
+
+正式runner创建两个attempt-01 roots后，在复制第一个B01 common input前停止。v0.2记录SceneSpec SHA为`b308...f1baae747...`，actual为`b308...f1baaeae747...`，是单字符transcription error。完整13-input roster为12 exact / 1 mismatch；actual file 10,516 bytes，从`a4d376d6...`到execution commit始终同hash，因此不是source mutation。Work root保持0 files；runner停止时evidence 0 files，随后只写failure和independent audit。Blender/proposal/BuildPlan/scene/save/reopen/render/network/engine mutations全0。
+
+Failure self hash `ebf23c3a...`；不import formal runner的独立auditor重算execution single-path commit、三套tool hashes、13 inputs、跨提交source bytes、root state、binary/source identity与zero counts，24/24 PASS，self hash `cf930924c2215f30c871fc58d08363a9f83ae0537097ef3ec03e548b86d93926`。Attempt-01永久保留，不原地重试。C3只冻结`commonInputs[0].sha256`单字段校正；fresh attempt-02尚未授权。
