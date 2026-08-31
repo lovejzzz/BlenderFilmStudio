@@ -6397,3 +6397,11 @@ Date: 2026-08-31 · Type: PRODUCT MUTATION PREREGISTRATION · PB.6 builds / star
 PB.6绑定exact T1 terminal scene SHA `0acd4d13...`、state hash `bb9e0d1c...`、T2 288-frame receipt `4e8c0eca...`以及D4 retained frame-288 rejection与D6 threshold-preserving motion-aware correction。产品必须从source scene生成fresh WIDE/MEDIUM/CLOSE 96/96/96 review frames与24 fps MP4，不得复制T2 artifacts。
 
 冻结1 clean build / 4 product starts / 288 EEVEE renders / 1 ffmpeg、三Python paths/≤500 additions、2 GiB work/512 MiB evidence、100 GiB reserve + 13 GiB projected writes。五攻击包括source、shot roster、shared identity、删除frame-288 rejection与把0.90放宽到0.91，全部必须pre-render reject。人审保持PB.7 pending；0 model/network/mouse/release/LFS/force/sign/notary。
+
+## J-528 · PB.6 B62 three-shot vertical slice PASS
+
+Date: 2026-08-31 · Type: ACCEPTED PB.6 VALIDATION · Clean builds / incremental installs / starts / renders: 1 / 1 / 4 / 288
+
+Engine source `aa4fff39...`在三Python paths累计345 additions / 4 deletions。Clean arm64 build 603.27秒；receipt-backed reopen correction在同build tree增量安装18.70秒，accepted binary SHA `8a380289...`。Formal product start-1 inspect零render；start-2 visible operator完成WIDE/MEDIUM/CLOSE 96/96/96；start-3零render重建COMPLETE typed state；start-4五攻击与independent audit零render。
+
+Validation 9/9、independent audit 15/15 PASS，self hashes `f8e1cc9d...` / `2f7b08ee...`。三个shot各96 distinct decoded frames，cuts exact不同；MP4为640×360/24fps/288帧，SHA `2aa51303...`。Retained frame288 `0.93378717684983 > 0.90` rejection exact不变。接触表机器可读但human review继续`PENDING_UNTIL_PB7`；0 network/model/mouse/release/sign/notary/distribution。

@@ -212,6 +212,14 @@ not rewritten; new adapters must bind the standing charter explicitly.
   `a18a32c3…`. The unexecuted v0.2 stale-self-hash manifest is retained; v0.3
   is the accepted corrected binding. The validated commit was then published
   to `lovejzzz/film-engine/main` by one ordinary non-force fast-forward.
+- **PB.6 B62 three-shot vertical slice PASS:** the three-path / 345-addition
+  product increment built as native arm64 commit `aa4fff39…`. The visible
+  product workflow produced a fresh WIDE/MEDIUM/CLOSE 96/96/96-frame EEVEE
+  review slice, a 640×360/24 fps/288-frame MP4 and contact sheet. Validation is
+  9/9 and independent audit 15/15 with receipt/audit hashes `f8e1cc9d…` /
+  `2f7b08ee…`. Five attacks rejected with zero render calls. The historical
+  frame-288 `0.93378717684983 > 0.90` rejection remains exact; human review is
+  intentionally pending until PB.7.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -431,16 +439,16 @@ starting Blender. C5-C2 passes 30/30 static checks and the C6 standing-authority
 adapter passes 32/32 while keeping the C4 semantic/helper corrections, exact
 no-render-artifact threshold, retained attempts and zero-network ceiling
 frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
-PB.3 is closed `PASS` by C6-C3 attempt-06. PB.4 is closed `PASS` by retained
-attempt-01 product/render evidence plus C1 audit-only attempt-02. PB.5 is closed
-`PASS` by restart-safe attempt-01. Do not repair or rerun any retained root. The
-next checkpoint is PB.6 preregistration for the B62 wide / medium / close
-vertical slice: all three shots must share frozen non-camera state, produce a
-reviewable output, and retain the frame-288 composition rejection without
-weakening the human-quality boundary. PB.6 may proceed under a versioned
-protocol and the standing charter without another authorization sentence.
+PB.3, PB.4, PB.5 and PB.6 are closed `PASS`; PB.6 is the accepted B62
+three-shot product slice with human review still pending. Do not repair or rerun
+any retained root. The next checkpoint is PB.7 human review and bounded
+prototype verdict: machine evidence and delayed human review must both be
+recorded, and the final verdict may be only `PASS`, `FAIL` or `BLOCKED` without
+expanding into a production-readiness or autonomous-filmmaking claim. PB.7 may
+proceed under a versioned protocol and the standing charter without another
+authorization sentence.
 
-No Developer ID, notarization or unsigned-DMG distribution is implied by PB.5.
+No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
 
 ## Public routes

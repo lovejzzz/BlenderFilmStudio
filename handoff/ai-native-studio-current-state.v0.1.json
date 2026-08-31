@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_PB2_PB3_PB4_PB5_VALIDATION_PASS_STANDING_AUTONOMY_ACTIVE",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_PB2_PB3_PB4_PB5_PB6_VALIDATION_PASS_STANDING_AUTONOMY_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "PB.6",
+  "activeGate": "PB.7",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -231,8 +231,8 @@
     }
   },
   "phaseBPreparation": {
-    "status": "PB1_PB2_PB3_PB4_PB5_VALIDATION_PASS_PB6_PREREGISTRATION_PENDING",
-    "gate": "PB.6",
+    "status": "PB1_PB2_PB3_PB4_PB5_PB6_VALIDATION_PASS_PB7_PREREGISTRATION_PENDING",
+    "gate": "PB.7",
     "mode": "STANDING_AUTONOMY_WITH_VERSIONED_PROTOCOLS",
     "publicationHead": "373881e1ee659a962e0015c2dac26f7fa981b1bf",
     "f0CodeIdentityParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
@@ -908,8 +908,31 @@
         "researchDocument": "research/2026-08-31-ai-native-studio-pb5-restart-safe-job-control-pass.md",
         "researchDocumentFileSha256": "ced0d5b6713e1e460ce78dce4d0bda6242499dfc82366667cfb8376dc4c41acc"
       },
-      "nextGate": "PB.6",
-      "nextGateStatus": "PB6_B62_THREE_SHOT_VERTICAL_SLICE_PREREGISTRATION_PENDING"
+      "pb6": {
+        "status": "PASS_HUMAN_REVIEW_PENDING_UNTIL_PB7",
+        "engineSourceCommit": "aa4fff39ca5d5c4030dec2b8d0d4f576138787ad",
+        "engineSourceParent": "373881e1ee659a962e0015c2dac26f7fa981b1bf",
+        "binarySha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6",
+        "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
+        "manifest": "specs/ai-native-studio-pb6-b62-three-shot-attempt-01.v0.1.json",
+        "manifestHash": "657bc504036645bb1a22a2408491c26b24411d5552d41809709d69fde8a9ea7a",
+        "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
+        "auditHash": "2f7b08ee0c624cdc3580dfbcdcb2efc520280814ce4b3386e36eedd8ca3605cf",
+        "sliceReceiptHash": "cd9f8c4fa9b7b6fddb9086e703c070b69e7c783e34a552a04671c877d172140b",
+        "reviewVideoSha256": "2aa51303912f920540e55638b0e21590735d73485362d75616c3dc96e22adf42",
+        "checks": "9/9 validation plus 15/15 independent audit",
+        "cleanBuilds": 1,
+        "incrementalInstalls": 1,
+        "productStarts": 4,
+        "renderCalls": 288,
+        "shotFrames": {"WIDE": 96, "MEDIUM": 96, "CLOSE": 96},
+        "negativeControls": ["SOURCE_HASH_MISMATCH", "SHOT_ROSTER_INVALID", "SHARED_IDENTITY_MISMATCH", "HISTORICAL_BOUNDARY_MISSING", "HUMAN_BOUNDARY_MUTATED"],
+        "historicalFrame288Boundary": {"observed": 0.93378717684983, "maximum": 0.9, "verdict": "B62_CLOSE_CAMERA_CORRECTION_FAILS_FROZEN_HOLDOUT"},
+        "researchDocument": "research/2026-08-31-ai-native-studio-pb6-b62-three-shot-pass.md",
+        "researchDocumentFileSha256": "35021458d350d117c461817775ff1078190a55c96c0fbb7a95e31471f4e52ad3"
+      },
+      "nextGate": "PB.7",
+      "nextGateStatus": "PB7_HUMAN_REVIEW_AND_BOUNDED_PROTOTYPE_VERDICT_PREREGISTRATION_PENDING"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1285,19 +1308,19 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB6_B62_THREE_SHOT_VERTICAL_SLICE_PREREGISTRATION",
-    "result": "PB.5 is closed PASS; preregister B62 wide/medium/close shared non-camera identity, reviewable output and retained frame-288 composition rejection before PB.6 mutation",
-    "acceptedPb5Evidence": "experiments/ai-native-studio-phase-b/PB.5-2026-08-31-mac-m2max-attempt-01",
-    "receiptHash": "1baa24ee3f70539bc992f8a7177d5f0a478affe3d68f7b26d65e8dd617079220",
-    "audit": "PASS independent source/receipt/resume/failure/pixel/pass audit",
-    "auditHash": "a18a32c3b25b4d4f8deceda88784498d51ad291568e0bf4c2f6810c5d35527dd",
+    "gate": "PB7_HUMAN_REVIEW_AND_BOUNDED_PROTOTYPE_VERDICT_PREREGISTRATION",
+    "result": "PB.6 is closed machine PASS with human review pending; preregister delayed human review disclosure and the final bounded PASS/FAIL/BLOCKED prototype verdict",
+    "acceptedPb6Evidence": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
+    "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
+    "audit": "15/15 PASS independent 288-frame/camera/video/attack audit",
+    "auditHash": "2f7b08ee0c624cdc3580dfbcdcb2efc520280814ce4b3386e36eedd8ca3605cf",
     "authoritySource": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
     "repeatedOwnerAuthorizationRequired": false,
     "requiredArtifacts": [
-      "retain PB.3 attempts 01-06, PB.4 attempts 01-02 and PB.5 attempt-01 immutable",
-      "bind PB.5 interruption, resume, stage, process, attack, cost and independent audit receipts",
-      "preregister exact B62 wide, medium and close inputs plus shared non-camera identity",
-      "retain the frozen frame-288 composition rejection and prohibit automatic threshold relaxation",
+      "retain PB.3 attempts 01-06, PB.4 attempts 01-02, PB.5 attempt-01 and PB.6 attempt-01 immutable",
+      "bind PB.6 machine receipts, 288-frame output, review MP4, contact sheet, five failures and independent audit",
+      "preregister delayed human review questions, reviewer independence and disclosure ordering before recording answers",
+      "allow only PASS, FAIL or BLOCKED and preserve the prototype-only claim ceiling",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]
   }

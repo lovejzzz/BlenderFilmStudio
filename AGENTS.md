@@ -263,10 +263,14 @@ one controlled PREVIEW interruption resumed FINAL only, completed resume was a
 no-op, and stale/forged/out-of-budget attacks rejected with zero render calls.
 Its validation receipt self hash is `1baa24ee…`; independent audit self hash is
 `a18a32c3…`. Retain the unexecuted invalid-self-hash v0.2 manifest and accepted
-v0.3/evidence root unchanged. The next gate is PB.6 B62 three-shot vertical
-slice; preregister shared non-camera state, review output and the unchanged
-frame-288 composition rejection. PB.6–PB.7 may advance under versioned
-protocols and the standing charter without another owner sentence.
+v0.3/evidence root unchanged. PB.6 is closed `PASS` at engine commit
+`aa4fff39…`: the product generated a fresh 96/96/96-frame B62 review animatic,
+validation passed 9/9 and independent audit 15/15 with self hashes
+`f8e1cc9d…` / `2f7b08ee…`. Five attacks rejected before render and the frozen
+frame-288 `0.93378717684983 > 0.90` rejection remains unchanged. Human review
+is pending. The next gate is PB.7 human review and bounded prototype verdict;
+it may advance under a versioned protocol and the standing charter without
+another owner sentence.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
