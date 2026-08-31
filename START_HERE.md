@@ -499,7 +499,10 @@ fresh attempt-01 is now `MACHINE_PASS_HUMAN_PENDING`. All 288 frame hashes are
 unique, 287/287 consecutive pairs are dynamic, all 288 frames visibly differ
 from A, and median RGB MAD is 0.019747. Receipt/audit/manifest self hashes are
 `0eff3b11…` / `be0e1366…` / `94f6280d…`; integrated video SHA is `8c6afc36…`.
-The four owner A/B questions are now open; the model must not answer them.
+The four owner A/B questions are now open; the model must not answer them. The
+strict response recorder and independent auditor are frozen before any answer
+at self hash `1846f9a2…`; their 23/23 static tests pass and the unique formal
+human-review root remains absent.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc3HumanReviewToolFreeze.v0.1",
+  "status": "FROZEN_BEFORE_HUMAN_RESPONSE",
+  "gate": "PC.3",
+  "purpose": "Record the project owner's exact allowed-answer tokens without normalization, independently recompute the frozen PC.3 human verdict, revalidate the sealed machine evidence and emit a self-hashed immutable evidence roster.",
+  "authority": {
+    "source": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
+    "humanResponseIsEvaluationNotAuthorization": true,
+    "modelMayNotAuthorHumanAnswers": true
+  },
+  "preregistration": {
+    "uri": "specs/ai-native-studio-pc3-integrated-review-preregistration.v0.1.json",
+    "sha256": "7362f836c658428704c1a3456c58e5ac81afaa38e4d6183627c2f0dcb57e4d91",
+    "specHash": "4a7a1f8472f8a81fc01041538ec8a08d3e165b0b2fe6bcc9e64a00de8d98548c"
+  },
+  "tools": [
+    {
+      "uri": "scripts/lib/ai-native-studio-pc3-review.mjs",
+      "sha256": "28f7ffba02bd7883965ae0491bcef764db21a6e1b9ee3482a2a3a74454cebc45",
+      "role": "strict input validation and recorder-side mapping reference"
+    },
+    {
+      "uri": "scripts/record-ai-native-studio-pc3-review.mjs",
+      "sha256": "1114a0fe3d975fea7cc04ca35ac7f5924c5fa45753f26aae6fb2d558db2e04e6",
+      "role": "exclusive fresh-root human response recorder"
+    },
+    {
+      "uri": "scripts/audit-ai-native-studio-pc3-review.mjs",
+      "sha256": "0f755fb06ce1626430b27ab7c31564e8fdfa411c9718c6adb2e5ee3ea913eb97",
+      "role": "independent answer mapping, machine evidence and manifest auditor"
+    },
+    {
+      "uri": "scripts/test-ai-native-studio-pc3-review-tools.mjs",
+      "sha256": "871bb5707088e36131c471aaafe58e1a1cc6d9c392f92dc653532dbf3ff75bad",
+      "role": "static mapping and fail-closed input test"
+    }
+  ],
+  "machineEvidence": {
+    "machineReceipt": {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.3-2026-08-31-mac-m2max-attempt-01/receipt.json",
+      "sha256": "436498bdc1861a98b9b5afe6f9057099baefac7180fc775d4d07085d9e44887d",
+      "bytes": 3630,
+      "selfField": "receiptHash",
+      "selfHash": "0eff3b111df515311e13f518a7bd0ad7c5d6448ed3703178821f92b607973431",
+      "pythonCanonical": true,
+      "status": "MACHINE_PASS_HUMAN_PENDING"
+    },
+    "machineAudit": {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.3-2026-08-31-mac-m2max-attempt-01/machine-audit.json",
+      "sha256": "3561202d4c6651d5b7f41c7948bdcead0cf9a04a9b743af4af2c32828b1b7cec",
+      "bytes": 6421,
+      "selfField": "auditHash",
+      "selfHash": "be0e13660d5b6b04781e5988fca8c4b8a862476604a58ca7452e8a507089132e",
+      "pythonCanonical": false,
+      "status": "MACHINE_PASS_HUMAN_PENDING"
+    },
+    "machineManifest": {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.3-2026-08-31-mac-m2max-attempt-01/root-manifest.json",
+      "sha256": "23eb6d342806e1e4cc5146afc5ecd624299a57e0287c8a807bed7209b84cfcd9",
+      "bytes": 48595,
+      "selfField": "manifestHash",
+      "selfHash": "94f6280d5e3b69b4633a91cf17bc178efc4443c9b2918ffff6dd7d91ccfb7f9b",
+      "pythonCanonical": false,
+      "status": "MACHINE_PASS_HUMAN_PENDING"
+    },
+    "integratedVideo": {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.3-2026-08-31-mac-m2max-attempt-01/review/PC3-INTEGRATED-THREE-SHOT.mp4",
+      "sha256": "8c6afc36673ad41ab0e019fcf7c5974e2188bfea1da0e31d70bad07dc9084886",
+      "bytes": 469237
+    },
+    "contactSheet": {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.3-2026-08-31-mac-m2max-attempt-01/review/AB-contact-sheet.png",
+      "sha256": "a7f902967171e948a3814818a35b23e12a049636641f415a41ce31e9d0442e9e",
+      "bytes": 981711
+    },
+    "baselineVideo": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01/review/B62-PB6-THREE-SHOT.mp4",
+      "sha256": "2aa51303912f920540e55638b0e21590735d73485362d75616c3dc96e22adf42",
+      "bytes": 362063
+    }
+  },
+  "machineGate": {
+    "status": "PASS",
+    "auditChecks": "16/16 PASS",
+    "frameCount": 288,
+    "uniqueFrameHashes": 288,
+    "dynamicConsecutivePairs": 287,
+    "visiblyDifferentFrames": 288,
+    "medianMeanAbsoluteRgbDifference": 0.019747030921280384
+  },
+  "inputContract": {
+    "schemaVersion": "bfs.pc3HumanReviewInput.v0.1",
+    "exactTopLevelKeys": ["answers", "optionalNotes", "reviewerRole", "schemaVersion", "sourceMessageText"],
+    "exactAnswerKeys": ["Q1", "Q2", "Q3", "Q4"],
+    "allowedAnswerTokens": ["YES", "NO"],
+    "normalizationAllowed": false,
+    "sourceMessageStoredVerbatim": true,
+    "optionalNotesAffectVerdict": false,
+    "verdictMapping": {"allFourYes": "PASS", "anyNo": "FAIL"}
+  },
+  "recorder": {
+    "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.3-2026-08-31-human-review-attempt-01",
+    "requiresRootAbsent": true,
+    "exclusiveWrites": ["human-review.json"],
+    "verifiesPreregistrationToolAndMachineEvidenceBeforeWriting": true,
+    "writesHumanVerdict": false
+  },
+  "independentAuditor": {
+    "preAuditRoster": ["human-review.json"],
+    "exclusiveWrites": ["audit.json", "verdict.json", "root-manifest.json"],
+    "reimplementsAnswerValidationAndMappingWithoutRecorderModule": true,
+    "revalidatesMachineReceiptAuditManifestVideosAndContactSheet": true,
+    "finalRoster": ["audit.json", "human-review.json", "root-manifest.json", "verdict.json"]
+  },
+  "staticTests": {
+    "command": "node scripts/test-ai-native-studio-pc3-review-tools.mjs",
+    "expected": "BFS_PC3_REVIEW_TOOL_TEST PASS 23/23",
+    "cases": [
+      "all YES maps to PASS in both implementations",
+      "each individual NO maps to FAIL in both implementations",
+      "lowercase and unregistered tokens reject",
+      "missing or extra answer keys reject",
+      "missing or extra top-level input keys reject"
+    ]
+  },
+  "humanResponseRecorded": false,
+  "formalEvidenceRootExistsAtFreeze": false,
+  "operationCountsAtFreeze": {
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0,
+    "nativeBuilds": 0,
+    "BlenderStarts": 0,
+    "renderCalls": 0,
+    "ffmpegProcesses": 0,
+    "networkCallsDuringReview": 0,
+    "modelCallsToAnswerQuestions": 0
+  },
+  "stopRules": [
+    "Refuse any answer token outside YES or NO.",
+    "Refuse missing or extra answer keys and any extra input field.",
+    "Refuse an existing formal evidence root.",
+    "Do not infer an answer, normalize text or let optional notes change the verdict.",
+    "Do not modify or regenerate the PC.3 machine evidence or review media.",
+    "Do not change the frozen questions, mappings, comparison artifacts or claim ceiling."
+  ],
+  "specHash": "1846f9a209e49f17d5c24352ef9b382aca220e8355509fe0ad3820bf9eb9d95a"
+}

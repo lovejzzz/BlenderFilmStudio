@@ -6591,3 +6591,9 @@ Exact 288-frame EXR→PNG renderer、zero-render reopen A/B auditor、ffmpeg/ffp
 Date: 2026-08-31 · Type: SEALED INTEGRATED REVIEW MACHINE PASS · Blender starts / renders / video processes: 2 / 288 / 2
 
 Fresh attempt-01 runner `0eff3b11…`与independent 16/16 machine audit `be0e1366…` PASS，sealed manifest `94f6280d…`。288/288 unique frame hashes，287/287 dynamic pairs，288/288 visibly different frames，median MAD 0.019747；exact 96/96/96 camera routing、accepted PC.2 source/protected state、zero EXR。Integrated B MP4 SHA `8c6afc36…`。Machine status为`MACHINE_PASS_HUMAN_PENDING`；owner四问现开放，model不得代答。
+
+## J-556 · PC.3 human review recorder/auditor freeze
+
+Date: 2026-08-31 · Type: HUMAN-RESPONSE TOOL FREEZE · Review responses / Blender starts / renders: 0 / 0 / 0
+
+在任何PC.3 owner answer出现前，strict recorder与independent auditor冻结于spec self hash `1846f9a2…`。四问只接受原样uppercase `YES`/`NO`；全YES为PASS，任一NO为FAIL，lowercase、未注册token、missing/extra fields全部拒绝。Static negative/mapping tests 23/23 PASS。Recorder只可在唯一fresh root写`human-review.json`，auditor独立重算mapping并重验machine receipt/audit/manifest、A/B videos与contact sheet后才可写final roster。Formal human root在freeze时absent；model-authored answers为0。
