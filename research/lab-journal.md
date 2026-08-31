@@ -6543,3 +6543,9 @@ C4仅在final Node auditor中复现Python finite JSON number spelling，包括�
 Date: 2026-08-31 · Type: ACCEPTED MODELING-DETAIL INCREMENT · Blender starts / renders / saves: 2 / 6 / 1
 
 Fresh attempt-04 runner receipt `2a60c050…`与independent 18/18 audit `69cca7c8…`均PASS，sealed manifest `ce2279e1…`。Exact 26 details与3 hero materials把counts从78/66/15,734提高到104/92/19,810 objects/meshes/polygons；WIDE/MEDIUM/CLOSE changed-pixel fractions为0.02464/0.12429/0.17949，3/3 visible views PASS。Source SHA、camera/light sentinels与complete action roster exact；零retained EXR，零network/model/engine mutation。Visual inspection将结果限定为有意义的first detail pass而非final asset quality。PC.1关闭PASS，PC.2 action complexity成为active gate。
+
+## J-548 · PC.2 causal action-complexity preregistration
+
+Date: 2026-08-31 · Type: PREREGISTRATION · PC.2 Blender starts / renders / saves: 0 / 0 / 0
+
+PC.2冻结四条causal channels：approach weight transfer、contact reach/lock、activation recoil + core mechanism、reflection/breath/shoulder settle。Ten authorized non-camera targets中至少6个须animate，四phase均须通过显式amplitude floor。Accepted PC.1 blend `36389e8f…`为唯一source；其104/92/19,810 geometry、26 detail/3 material roster、camera/light sentinels与shot ranges exact。Formal run为2 starts、0 renders、1 derived save；PC.3前必须independent PASS。

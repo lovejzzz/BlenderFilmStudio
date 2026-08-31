@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc2ActionComplexityPreregistration.v0.1",
+  "status": "PREREGISTERED_BEFORE_PC2_ACTION_MUTATION",
+  "gate": "PC.2",
+  "title": "Causally phased character, contact, mechanism and secondary-motion increment",
+  "authority": {"source": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority", "repeatedOwnerAuthorizationRequired": false, "specificConfirmationBoundariesUnchanged": true},
+  "humanEvidence": {"verdictHash": "4be072cc1b483e552c001976434f42a14f72259ada07c72a8dea700b7fe0f6ab", "qualitativeFeedbackExact": "我看了视频了，说实话光影和镜头感很好，就是建模太粗糙，动作太简单了。但是我看到非常大的潜力。", "protectedStrengths": ["lighting", "camera language and shot progression"], "targetWeakness": "action complexity"},
+  "acceptedPc1Baseline": {
+    "sourcePath": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.1-2026-08-31-mac-m2max-attempt-04/PC1_MODELING_DETAIL.blend",
+    "sha256": "36389e8ff5d4a02fdae899a4ca9c1c031278095fff6203af82e5b534721268f5",
+    "bytes": 376974,
+    "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.1-2026-08-31-mac-m2max-attempt-04",
+    "receiptHash": "2a60c05093e60f9c8ecbc52fe9841be0b62845bfd5e287236012d4162542d324",
+    "auditHash": "69cca7c8a16e1de9a868a857b4db0c1f7376eefdb3e8f97ee886a8802fdd235b",
+    "manifestHash": "ce2279e10f2af80e8e0e95472dcf2fda164383f16b628d43cd2f765d9bf0f20f",
+    "counts": {"objects": 104, "meshes": 92, "polygons": 19810},
+    "detailRosterCanonicalSha256": "e386ef20c27e525d867176f4133a392d52e0482831703d5511e01f2b30aafd59",
+    "materialRosterCanonicalSha256": "bc171d3da2ef9cfb033a410ed7dc0e0fffc33a3af1f5be4f20c7aa228186eefb",
+    "actionSummaryCanonicalSha256": "460c3d6c39fad74775ccdf70318c0afcfc071590e456897c184aa4575cd0f208",
+    "cameraLightSentinelsCanonicalSha256": "f1937323baa5f9666ccc151e0729c78869480eb93104a94ced03a89c28d1f949"
+  },
+  "shots": [
+    {"id": "WIDE", "framesInclusive": [1, 96], "camera": "CAM_WIDE_APPROACH"},
+    {"id": "MEDIUM", "framesInclusive": [97, 192], "camera": "CAM_MEDIUM_CONTACT"},
+    {"id": "CLOSE", "framesInclusive": [193, 288], "camera": "CAM_CLOSE_MOTION_TERMINAL"}
+  ],
+  "semanticPhases": [
+    {"id": "APPROACH_WEIGHT_TRANSFER", "storyPhase": "approach", "frames": [1, 17, 33, 49, 65, 81, 96], "targets": ["RIG_B62_GUARDIAN"], "requiredSignal": "pelvis/chest counter-motion with nonzero vertical weight transfer", "minimumPeakToPeak": {"rootLocationZMeters": 0.025, "chestRollRadians": 0.04}},
+    {"id": "CONTACT_REACH_ARC", "storyPhase": "contact", "frames": [97, 108, 118, 126, 132, 150, 176, 192], "targets": ["B62_PHASE0_IK_HAND_R_TARGET", "B62_PHASE0_IK_HAND_R_POLE", "HAND_R_SOCKET"], "requiredSignal": "anticipation, overshoot, contact lock and settle", "minimumPeakToPeak": {"targetLocationMeters": 0.08, "poleLocationMeters": 0.05, "socketInfluence": 0.9}},
+    {"id": "ACTIVATION_MECHANICAL_RECOIL", "storyPhase": "activation", "frames": [138, 144, 150, 160, 176, 192], "targets": ["PC1_CORE_GIMBAL_00", "PC1_CORE_GIMBAL_01", "PC1_CORE_GIMBAL_02", "PC1_CORE_GIMBAL_03", "RIG_B62_GUARDIAN"], "requiredSignal": "staggered gimbal spin plus body recoil after core onset", "minimumPeakToPeak": {"eachGimbalRotationRadians": 0.45, "chestPitchRadians": 0.05}},
+    {"id": "REFLECTION_BREATH_SETTLE", "storyPhase": "reflection/settle", "frames": [193, 208, 224, 240, 264, 288], "targets": ["RIG_B62_GUARDIAN", "PC1_GUARDIAN_SHOULDER_FIN_L", "PC1_GUARDIAN_SHOULDER_FIN_R"], "requiredSignal": "head/chest reflection beat, one breath cycle and asymmetric shoulder release", "minimumPeakToPeak": {"chestPitchRadians": 0.035, "eachShoulderFinRotationRadians": 0.06}}
+  ],
+  "independentActionChannels": ["body weight and breath", "IK reach/contact", "core gimbal mechanism", "shoulder-fin secondary settle"],
+  "authorizedAnimatedNonCameraTargets": ["RIG_B62_GUARDIAN", "B62_PHASE0_IK_HAND_R_TARGET", "B62_PHASE0_IK_HAND_R_POLE", "HAND_R_SOCKET", "PC1_CORE_GIMBAL_00", "PC1_CORE_GIMBAL_01", "PC1_CORE_GIMBAL_02", "PC1_CORE_GIMBAL_03", "PC1_GUARDIAN_SHOULDER_FIN_L", "PC1_GUARDIAN_SHOULDER_FIN_R"],
+  "acceptance": {
+    "minimumIndependentNonCameraActionChannels": 4,
+    "minimumSemanticTemporalPhases": 4,
+    "minimumAnimatedNonCameraTargets": 6,
+    "requiredStoryPhases": ["approach", "contact", "activation", "reflection/settle"],
+    "allPhaseFrameAndAmplitudeFloorsPass": true,
+    "authorizedTargetsOnly": true,
+    "cameraAndLightSentinelsCanonicalExact": true,
+    "shotRangesAndCameraNamesExact": true,
+    "pc1ObjectMeshMaterialGeometryCanonicalExact": true,
+    "sourceSceneSha256BeforeAfterExact": true,
+    "reopenRoundtripExact": true,
+    "retainedRenderArtifacts": 0
+  },
+  "formalAttempt": {
+    "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.2-2026-08-31-mac-m2max-attempt-01",
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.2-2026-08-31-mac-m2max-attempt-01",
+    "mustBeFresh": true,
+    "allowedBlenderStarts": 2,
+    "renderCalls": 0,
+    "derivedSceneSaves": 1,
+    "sourceSceneSaves": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "mouseInteractions": 0,
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {"minimumFreeReserveBytes": 107374182400, "evidenceBytes": 67108864, "workBytes": 134217728, "wallSeconds": 300, "peakRssBytesPerProcess": 2147483648},
+  "negativeControls": ["camera or light animation cannot count toward an action channel or target floor", "existing core pulse alone cannot satisfy activation", "keyframes without measured nonzero amplitude cannot satisfy a phase", "geometry, material or modifier changes fail PC.2", "render output anywhere in the formal roots fails PC.2"],
+  "stopRules": ["Freeze exact builder, reopen auditor, runner and final auditor before the first Blender start.", "Retain the first formal root as PASS or FAIL without overwrite.", "Do not weaken phase, target, amplitude, geometry or protected-state thresholds after observing results.", "Do not start PC.3 before PC.2 independent audit PASS."],
+  "claimCeiling": "PC.2 may prove a measured action-complexity increment for one accepted stylized slice. It does not prove final animation quality, physical realism, general character-animation capability or autonomous filmmaking.",
+  "specHash": "48bdfa56a480f25b2a894d66edb3fdea3d3037ae2e2ff2e03e2d66a5b74e830e"
+}

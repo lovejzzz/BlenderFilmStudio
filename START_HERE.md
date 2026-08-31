@@ -480,7 +480,11 @@ Node self-hash verification. Fresh attempt-04 is now accepted `PASS`: 26 exact
 details, three material regions and all three visible-view floors passed while
 camera/light sentinels, actions and source SHA remained exact. Receipt/audit/
 manifest self hashes are `2a60c050…` / `69cca7c8…` / `ce2279e1…`. PC.1 is
-closed; PC.2 action complexity is the active gate.
+closed; PC.2 action complexity is the active gate. Its v0.1 preregistration is
+frozen at `48bdfa56…`: four causal phases, four independent channels and ten
+authorized non-camera targets, with at least six required to animate. PC.1
+geometry/materials and all protected camera/light states remain exact; tools
+must be frozen before the first zero-render PC.2 start.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
