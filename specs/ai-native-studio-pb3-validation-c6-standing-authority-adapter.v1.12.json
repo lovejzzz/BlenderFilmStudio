@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC6StandingAuthorityAdapter.v1.12",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-C6-STANDING-AUTHORITY-ADAPTER-v1.12",
+  "status": "PREREGISTERED_INERT_AUTHORITY_ADAPTER",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "dbec76ed56d94e9faa76fd3ad54953faeb12dba3",
+  "standingAuthority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "status": "ACTIVE_STANDING_AUTHORITY",
+    "ownerExactTextSha256": "29c77f160ddcca6419e5922a882d10265ec834bf01b2b2513708e4298c927506"
+  },
+  "historicalRequest": {
+    "uri": "specs/ai-native-studio-pb3-validation-only-authorization-request-c5-c2.v1.10.json",
+    "sha256": "3ef853ff7b8293d0347390f8445b35faba32947451fdf30b91f3061aa11f1d14",
+    "exactTextWasNotSupplied": true,
+    "mustRemainUnchanged": true
+  },
+  "frozenBase": {
+    "c5C2ToolFreeze": "specs/ai-native-studio-pb3-validation-c5-c2-execution-tool-freeze.v1.10.json",
+    "c5C2ToolFreezeSha256": "0e8c3d339ee4bb2fc82683637ae9458c43b94016becc13faab6106ed38a6a58e",
+    "c5C2Runner": "scripts/run-ai-native-studio-pb3-validation-c5-c2.py",
+    "c5C2RunnerSha256": "9b70c3171ce05d811bda767a11b78b82a17a953ae556b93f3200f7cc968fdf15",
+    "c5IndependentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c5.py",
+    "c5IndependentAuditorSha256": "6b1983efbd14b8560d6d3c5de168a6e6f9adb3a5d2b3b52ba1e2b15241b032f3",
+    "correctedTool": "specs/ai-native-studio-pb3-validation-tool-freeze-c4-corrected.v1.2.json",
+    "correctedToolSha256": "24baa8e6a03d62fa2559c939209cfe05fb7a9cdbdbe82ec08267aa1bc9ad827d",
+    "c4Helper": "blender/run_ai_native_studio_pb3_combined_c4.py",
+    "c4HelperSha256": "a516dbe7c06c477fbc1b36e8dcbad7cef0f3992af4e30bf8418c3efa59f91114"
+  },
+  "allowedChanges": [
+    "Add a C6 wrapper runner that replaces only the C5 exact-request authority validator with standing-charter validation before delegating unchanged C5-C2/C4/C3/base execution semantics.",
+    "Add a C6 independent auditor that delegates the same frozen base semantic auditor and validates the real standing charter instead of the unsupplied historical C5 exactText.",
+    "Add an inert standing-authority execution template and a frozen C6 tool contract.",
+    "After complete static/negative audit passes, create one single-path standing-authority attempt-04 execution contract and run it without another owner prompt."
+  ],
+  "executionAuthorizationShape": {
+    "schemaVersion": "bfs.aiNativeStudioPb3StandingAuthorityExecution.v1.0",
+    "status": "AUTHORIZED_UNDER_STANDING_AUTHORITY_FOR_ONE_FORMAL_RUN",
+    "authorizationMode": "STANDING_AUTONOMY",
+    "mustBindOwnerExactTextFromCharter": true,
+    "mustNotUseHistoricalExactUserTextField": true,
+    "executionCommitSinglePath": true
+  },
+  "unchangedThresholds": {
+    "blenderStarts": 4,
+    "proposalExecutions": 2,
+    "buildPlanWrites": 2,
+    "sceneBuilds": 2,
+    "workspaceSaves": 2,
+    "reopens": 2,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "maximumWorkRootBytes": 2147483648,
+    "maximumEvidenceRootBytes": 67108864,
+    "noRenderArtifactExtensions": [".exr", ".png", ".jpg", ".jpeg", ".mov", ".mp4"]
+  },
+  "attempt04": {
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-04",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-04",
+    "mustRemainFreshUntilExecutionContractCommit": true
+  },
+  "retainedAttempts": [
+    {"id": "attempt-01", "immutable": true},
+    {"id": "attempt-02", "immutable": true},
+    {"id": "attempt-03", "immutable": true, "workRootAbsent": true}
+  ],
+  "currentCounts": {
+    "attempt04RootsCreated": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0
+  },
+  "forbidden": [
+    "Do not modify historical C5/C4/C3/base tools, contracts, requests, receipts or evidence.",
+    "Do not claim the historical C5 exact authorization sentence was supplied.",
+    "Do not change semantic, provenance, workspace, resource, count or no-artifact thresholds.",
+    "Do not create attempt-04 roots or start Blender until the inert C6 static audit passes and the execution contract is the only path in its commit.",
+    "Do not perform an engine remote identity query, render, engine mutation, public release, signing, notarization, DMG distribution or PB.4-PB.7 work during this PB.3 validation run."
+  ],
+  "claimCeiling": "C6 changes only the truthful authorization source from an unsupplied historical exact request to the active standing-autonomy charter. It does not change PB.3 product semantics, thresholds or claim ceiling."
+}
