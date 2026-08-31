@@ -92,7 +92,7 @@ def resume_action(args, events):
     }
     print("PB5_PRODUCT=" + json.dumps(payload, sort_keys=True), flush=True)
     if args.action == "INTERRUPT_AFTER_PREVIEW":
-        raise SystemExit(75)
+        os._exit(75)
 
 
 def expect_rejection(function, expected):

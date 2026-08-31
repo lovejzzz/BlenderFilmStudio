@@ -71,7 +71,8 @@ def run_product(index, name, action, expected_exit, maximum_seconds, with_audit=
     started_at = time.time(); result = subprocess.run(["/usr/bin/time", "-l", *args], cwd=BUILD_ROOT, env={**os.environ, "HOME": str(home)}, text=True, capture_output=True, timeout=maximum_seconds)
     wall = time.time() - started_at
     stdout_path = EVIDENCE / "logs" / f"0{index}-{name}.stdout.log"; stderr_path = EVIDENCE / "logs" / f"0{index}-{name}.stderr.log"
-    stdout_path.write_text(result.stdout, encoding="utf-8"); stderr_path.write_text(result.stderr, encoding="utf-8")
+    with stdout_path.open("x", encoding="utf-8") as handle: handle.write(result.stdout)
+    with stderr_path.open("x", encoding="utf-8") as handle: handle.write(result.stderr)
     rss_match = re.search(r"\n\s*(\d+)\s+maximum resident set size", result.stderr)
     payload = marker(result.stdout + "\n" + result.stderr, "PB5_NEGATIVE=" if action == "NEGATIVE" else "PB5_PRODUCT=")
     audit_payload = marker(result.stdout + "\n" + result.stderr, "PB5_AUDIT=") if with_audit else None
