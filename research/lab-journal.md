@@ -6383,3 +6383,9 @@ Date: 2026-08-31 · Type: ACCEPTED PB.5 VALIDATION · Builds / starts / renders:
 三个Python产品路径的274 additions / 10 deletions clean build为native arm64，binary SHA `8b9e680b...`。正式start-1在fsynced PREVIEW后exit 75；start-2只续跑FINAL且preview exact immutable；start-3 COMPLETE no-op；start-4以零render拒绝stale、forged和zero-budget攻击并完成独立OpenImageIO audit。总receipt 13/13 PASS，self hash `1baa24ee...`；audit self hash `a18a32c...`。Preview/final SHA分别为`90d2cf9e...` / `947d2217...`。
 
 v0.2 manifest在任何formal root/product start前暴露最后tool-freeze绑定后的stale self hash，作为未执行冻结清单保留；v0.3只做versioned binding correction并由runner fail-closed校验。0 model/network/mouse/release/sign/notary/distribution。PB.5 closed；下一gate为PB.6 B62 three-shot vertical slice preregistration，frame-288构图拒绝不得放宽。
+
+## J-526 · PB.5 validated engine fast-forward published
+
+Date: 2026-08-31 · Type: ORDINARY ENGINE PUBLICATION · Push attempts / ref updates / force / tags / releases: 1 / 1 / 0 / 0 / 0
+
+Research PASS与public raw receipt已先发布验证。随后以explicit public URL只读确认`film-engine/main=df5c2967...`为PB.5 source的唯一父提交，并一次ordinary non-force push快进到`373881e1...`。远端OID和三个changed paths的raw SHA均与本地exact。Local validation clone的disabled pushurl保护未被修改。Other refs、LFS uploads、release、binary distribution、Developer ID signing与notarization全0；publication receipt self hash为`9ca8f9ad...`。

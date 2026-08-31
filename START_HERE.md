@@ -210,7 +210,8 @@ not rewritten; new adapters must bind the standing charter explicitly.
   produced immutable PNG `90d2cf9e…` and EXR `947d2217…`; the 13/13 validation
   receipt self hash is `1baa24ee…` and the independent audit self hash is
   `a18a32c3…`. The unexecuted v0.2 stale-self-hash manifest is retained; v0.3
-  is the accepted corrected binding.
+  is the accepted corrected binding. The validated commit was then published
+  to `lovejzzz/film-engine/main` by one ordinary non-force fast-forward.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
