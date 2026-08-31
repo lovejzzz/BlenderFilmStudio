@@ -219,7 +219,9 @@ not rewritten; new adapters must bind the standing charter explicitly.
   9/9 and independent audit 15/15 with receipt/audit hashes `f8e1cc9d…` /
   `2f7b08ee…`. Five attacks rejected with zero render calls. The historical
   frame-288 `0.93378717684983 > 0.90` rejection remains exact; human review is
-  intentionally pending until PB.7. The validated two-commit increment was
+  intentionally pending until PB.7. PB.7's four questions, allowed answers,
+  delayed-disclosure ordering and verdict mapping are now preregistered before
+  any human response. The validated two-commit increment was
   published to `lovejzzz/film-engine/main` by one ordinary non-force fast-forward.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
@@ -442,12 +444,13 @@ no-render-artifact threshold, retained attempts and zero-network ceiling
 frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
 PB.3, PB.4, PB.5 and PB.6 are closed `PASS`; PB.6 is the accepted B62
 three-shot product slice with human review still pending. Do not repair or rerun
-any retained root. The next checkpoint is PB.7 human review and bounded
-prototype verdict: machine evidence and delayed human review must both be
-recorded, and the final verdict may be only `PASS`, `FAIL` or `BLOCKED` without
-expanding into a production-readiness or autonomous-filmmaking claim. PB.7 may
-proceed under a versioned protocol and the standing charter without another
-authorization sentence.
+any retained root. PB.7 is preregistered before the response at
+`specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json`: machine
+evidence, four review questions, allowed answers and final mapping are frozen.
+The next checkpoint is the owner's real viewing response, followed by an
+immutable `PASS`, `FAIL` or `BLOCKED` receipt without expanding into a
+production-readiness or autonomous-filmmaking claim. The response is evaluation,
+not another authorization sentence.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

@@ -246,7 +246,7 @@
     }
   },
   "phaseBPreparation": {
-    "status": "PB1_PB2_PB3_PB4_PB5_PB6_VALIDATION_PASS_PB7_PREREGISTRATION_PENDING",
+    "status": "PB1_PB2_PB3_PB4_PB5_PB6_VALIDATION_PASS_PB7_PREREGISTERED_HUMAN_RESPONSE_PENDING",
     "gate": "PB.7",
     "mode": "STANDING_AUTONOMY_WITH_VERSIONED_PROTOCOLS",
     "publicationHead": "aa4fff39ca5d5c4030dec2b8d0d4f576138787ad",
@@ -946,8 +946,28 @@
         "researchDocument": "research/2026-08-31-ai-native-studio-pb6-b62-three-shot-pass.md",
         "researchDocumentFileSha256": "35021458d350d117c461817775ff1078190a55c96c0fbb7a95e31471f4e52ad3"
       },
+      "pb7": {
+        "status": "PREREGISTERED_HUMAN_RESPONSE_PENDING",
+        "preregistration": "specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json",
+        "preregistrationHash": "524419346bb8d0ec0623bece90447159ffb56f2960135c6dd02c9bc35b5df846",
+        "researchDocument": "research/2026-08-31-ai-native-studio-pb7-human-review-preregistration.md",
+        "researchDocumentFileSha256": "e83c4a6cc6d5407ae116220531879560dc12c08c9a4e89049421fdea74bd7a16",
+        "machineReceiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
+        "machineAuditHash": "2f7b08ee0c624cdc3580dfbcdcb2efc520280814ce4b3386e36eedd8ca3605cf",
+        "reviewVideoSha256": "2aa51303912f920540e55638b0e21590735d73485362d75616c3dc96e22adf42",
+        "contactSheetSha256": "2fc02d11103742167cd793dc8d6bdbb8beccb10b1bfb05e1da77d20284152aab",
+        "allowedAnswers": ["YES", "NO", "UNCERTAIN", "UNVIEWABLE"],
+        "humanPassRule": "Q1-Q4 all YES",
+        "humanFailRule": "any Q1-Q4 NO",
+        "humanBlockedRule": "no NO and any UNCERTAIN/UNVIEWABLE or incomplete response",
+        "humanResponseRecorded": false,
+        "engineEdits": 0,
+        "builds": 0,
+        "productStarts": 0,
+        "renders": 0
+      },
       "nextGate": "PB.7",
-      "nextGateStatus": "PB7_HUMAN_REVIEW_AND_BOUNDED_PROTOTYPE_VERDICT_PREREGISTRATION_PENDING"
+      "nextGateStatus": "PB7_PREREGISTERED_HUMAN_RESPONSE_PENDING"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1323,8 +1343,8 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB7_HUMAN_REVIEW_AND_BOUNDED_PROTOTYPE_VERDICT_PREREGISTRATION",
-    "result": "PB.6 is closed machine PASS with human review pending; preregister delayed human review disclosure and the final bounded PASS/FAIL/BLOCKED prototype verdict",
+    "gate": "PB7_HUMAN_REVIEW_AND_BOUNDED_PROTOTYPE_VERDICT",
+    "result": "PB.7 is preregistered before any human response; collect the owner's frozen four-question viewing response and issue an immutable bounded PASS/FAIL/BLOCKED verdict",
     "acceptedPb6Evidence": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
     "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
     "audit": "15/15 PASS independent 288-frame/camera/video/attack audit",
@@ -1334,7 +1354,7 @@
     "requiredArtifacts": [
       "retain PB.3 attempts 01-06, PB.4 attempts 01-02, PB.5 attempt-01 and PB.6 attempt-01 immutable",
       "bind PB.6 machine receipts, 288-frame output, review MP4, contact sheet, five failures and independent audit",
-      "preregister delayed human review questions, reviewer independence and disclosure ordering before recording answers",
+      "retain the preregistered human review questions, reviewer independence and disclosure ordering exactly while recording answers",
       "allow only PASS, FAIL or BLOCKED and preserve the prototype-only claim ceiling",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]

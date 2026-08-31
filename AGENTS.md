@@ -267,10 +267,12 @@ v0.3/evidence root unchanged. PB.6 is closed `PASS` at engine commit
 `aa4fff39…`: the product generated a fresh 96/96/96-frame B62 review animatic,
 validation passed 9/9 and independent audit 15/15 with self hashes
 `f8e1cc9d…` / `2f7b08ee…`. Five attacks rejected before render and the frozen
-frame-288 `0.93378717684983 > 0.90` rejection remains unchanged. Human review
-is pending. The next gate is PB.7 human review and bounded prototype verdict;
-it may advance under a versioned protocol and the standing charter without
-another owner sentence.
+frame-288 `0.93378717684983 > 0.90` rejection remains unchanged. PB.7 is now
+preregistered before any human response at
+`specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json`. The four
+human questions, allowed answers, verdict mapping, disclosure ordering and
+prototype-only claim ceiling are frozen; the current owner response is still
+pending. This is product evaluation, not another authorization gate.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

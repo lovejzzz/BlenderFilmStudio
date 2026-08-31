@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pb7HumanReviewPreregistration.v0.1",
+  "status": "PREREGISTERED_BEFORE_HUMAN_RESPONSE",
+  "gate": "PB.7",
+  "title": "Delayed human review and bounded prototype verdict",
+  "question": "Does the already-frozen PB.6 three-shot review slice communicate its bounded story action, shot progression and close ending clearly enough to close this one prototype slice without expanding the claim?",
+  "authority": {
+    "source": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
+    "repeatedOwnerAuthorizationRequired": false,
+    "humanResponseIsEvaluationNotAuthorization": true,
+    "specificConfirmationBoundariesUnchanged": true
+  },
+  "machineEvidence": {
+    "status": "PASS_FROZEN_BEFORE_HUMAN_RESPONSE",
+    "engineCommit": "aa4fff39ca5d5c4030dec2b8d0d4f576138787ad",
+    "binarySha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6",
+    "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
+    "receipt": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01/receipt.json",
+      "fileSha256": "363744bbe1894acf5d64ead7c86c70069dd135786faa6cc862c81e416f30bab5",
+      "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
+      "checks": "9/9"
+    },
+    "independentAudit": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01/independent-audit.json",
+      "fileSha256": "2207763b69ab117d13f2b9d8b937f5417ee03b467d453e960e9d4b0780ac3677",
+      "receiptHash": "2f7b08ee0c624cdc3580dfbcdcb2efc520280814ce4b3386e36eedd8ca3605cf",
+      "checks": "15/15"
+    },
+    "sliceReceipt": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01/slice/receipt.json",
+      "fileSha256": "1ffc6f783bce784055ec361b8335e3e1c7a31eecdce36a7067f86bd66ffc7c46",
+      "receiptHash": "cd9f8c4fa9b7b6fddb9086e703c070b69e7c783e34a552a04671c877d172140b"
+    },
+    "reviewVideo": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01/review/B62-PB6-THREE-SHOT.mp4",
+      "sha256": "2aa51303912f920540e55638b0e21590735d73485362d75616c3dc96e22adf42",
+      "bytes": 362063,
+      "width": 640,
+      "height": 360,
+      "fps": 24,
+      "frames": 288
+    },
+    "contactSheet": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01/review/contact-sheet.png",
+      "sha256": "2fc02d11103742167cd793dc8d6bdbb8beccb10b1bfb05e1da77d20284152aab",
+      "bytes": 604351
+    },
+    "shots": [
+      {"id": "WIDE", "framesInclusive": [1, 96]},
+      {"id": "MEDIUM", "framesInclusive": [97, 192]},
+      {"id": "CLOSE", "framesInclusive": [193, 288]}
+    ],
+    "negativeControls": ["SOURCE_HASH_MISMATCH", "SHOT_ROSTER_INVALID", "SHARED_IDENTITY_MISMATCH", "HISTORICAL_BOUNDARY_MISSING", "HUMAN_BOUNDARY_MUTATED"],
+    "historicalFrame288Boundary": {
+      "observed": 0.93378717684983,
+      "maximum": 0.9,
+      "verdict": "B62_CLOSE_CAMERA_CORRECTION_FAILS_FROZEN_HOLDOUT",
+      "mustRemainRejected": true
+    }
+  },
+  "reviewer": {
+    "role": "project owner and human viewer",
+    "identity": "the current user, self-asserted when submitting the response",
+    "responseOrigin": "human-authored current-thread response",
+    "mustNotBeGeneratedOrAnsweredByTheModel": true,
+    "mustViewFrozenVideoBeforeAnswering": true
+  },
+  "disclosureOrder": {
+    "machineEvidenceFrozenBeforeHumanResponse": true,
+    "reviewQuestionsFrozenBeforeHumanResponse": true,
+    "answerMappingFrozenBeforeHumanResponse": true,
+    "humanResponseRecordedAtPreregistration": false,
+    "knownVisualObservationsDisclosed": [
+      "The wide shot has notable foreground structural occlusion.",
+      "The medium shot presents the core at a relatively large scale."
+    ],
+    "rule": "Do not change the media, questions, allowed answers, mappings, PB.6 evidence or frame-288 boundary after the human response."
+  },
+  "allowedAnswers": ["YES", "NO", "UNCERTAIN", "UNVIEWABLE"],
+  "questions": [
+    {
+      "id": "Q1",
+      "prompt": "Is the story action legible: the guardian approaches, makes contact, the core lights, and the close ending reads as an intentional final beat?"
+    },
+    {
+      "id": "Q2",
+      "prompt": "Are the WIDE, MEDIUM and CLOSE progression and both cuts clearly distinguishable?"
+    },
+    {
+      "id": "Q3",
+      "prompt": "Is the close ending readable and not dominated by accidental occlusion?"
+    },
+    {
+      "id": "Q4",
+      "prompt": "Is this acceptable as a bounded product-prototype demonstration, without treating it as final-film quality?"
+    }
+  ],
+  "optionalQuestion": {
+    "id": "Q5",
+    "prompt": "Optional defect notes in the reviewer's own words.",
+    "affectsVerdict": false
+  },
+  "humanVerdictMapping": {
+    "PASS": "All Q1-Q4 answers are YES.",
+    "FAIL": "At least one Q1-Q4 answer is NO.",
+    "BLOCKED": "There is no NO, but at least one Q1-Q4 answer is UNCERTAIN or UNVIEWABLE, or no complete response is available."
+  },
+  "overallVerdictMapping": {
+    "PASS": "PB.6 machine verdict is PASS and PB.7 human verdict is PASS.",
+    "FAIL": "The machine verdict is FAIL or the human verdict is FAIL.",
+    "BLOCKED": "PB.6 machine verdict is PASS and the human verdict is BLOCKED or unavailable."
+  },
+  "formalEvidence": {
+    "root": "experiments/ai-native-studio-phase-b/PB.7-2026-08-31-human-review-attempt-01",
+    "mustBeFreshBeforeResponse": true,
+    "humanResponseReceipt": "human-review.json",
+    "independentMergeAudit": "audit.json",
+    "finalVerdict": "verdict.json",
+    "rootManifest": "root-manifest.json",
+    "immutableAfterPublication": true
+  },
+  "operationCeilings": {
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0,
+    "nativeBuilds": 0,
+    "BlenderStarts": 0,
+    "renderCalls": 0,
+    "ffmpegProcesses": 0,
+    "networkCallsDuringReview": 0,
+    "modelCallsToAnswerQuestions": 0,
+    "researchEvidenceWrites": "Only the fresh PB.7 evidence root and versioned research state may be written."
+  },
+  "stopRules": [
+    "Do not alter, regenerate, trim, replace or rerender the PB.6 video or contact sheet after preregistration.",
+    "Do not coach, infer, fabricate or normalize the human answers; record the reviewer's own allowed-answer tokens and optional notes.",
+    "Do not weaken a NO, UNCERTAIN or UNVIEWABLE into YES and do not omit an unfavorable answer.",
+    "If human review fails, retain FAIL and create only a later versioned improvement program; never rewrite PB.6 or PB.7 attempt-01.",
+    "Do not change the historical frame-288 threshold or reinterpret its rejection.",
+    "Do not create a release, distribute a binary or DMG, sign, notarize, force-push, update another ref, upload LFS or make account/legal changes."
+  ],
+  "claimCeiling": "A PASS closes only this one inherited stylized B62 three-shot product prototype on one admitted arm64 host with one delayed human review. It does not prove final-film quality, photorealism, production readiness, public distribution, cross-platform behavior or autonomous filmmaking.",
+  "specHash": "524419346bb8d0ec0623bece90447159ffb56f2960135c6dd02c9bc35b5df846"
+}

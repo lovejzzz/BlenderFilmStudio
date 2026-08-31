@@ -6411,3 +6411,11 @@ Validation 9/9、independent audit 15/15 PASS，self hashes `f8e1cc9d...` / `2f7
 Date: 2026-08-31 · Type: ORDINARY ENGINE PUBLICATION · Push attempts / ref updates / force / tags / releases: 1 / 1 / 0 / 0 / 0
 
 PB.6 evidence公开验证后，只读确认`film-engine/main=373881e1...`为validated two-commit increment的祖先。一次ordinary non-force push快进至`aa4fff39...`，remote OID与三个changed paths raw SHA exact。Other refs、LFS uploads、release、binary distribution、signing/notarization全0；publication receipt self hash `11ec70c6...`。
+
+## J-530 · PB.7 delayed human review preregistration
+
+Date: 2026-08-31 · Type: HUMAN REVIEW PREREGISTRATION · Engine edits / builds / Blender starts / renders: 0 / 0 / 0 / 0
+
+PB.7在任何human response之前冻结PB.6 receipt/audit/video/contact sheet exact hashes、四个YES/NO/UNCERTAIN/UNVIEWABLE问题、human与overall verdict mapping、delayed disclosure ordering和prototype-only claim ceiling。四项全YES才PASS；任一NO为FAIL；无NO但含UNCERTAIN/UNVIEWABLE或缺少完整回答为BLOCKED。
+
+审片回答是evaluation而非authorization。媒体、问题、映射、frame-288 `0.93378717684983 > 0.90` rejection与PB.6 machine evidence在回答后均不得更改。PB.7上限为0 engine/build/Blender/render/ffmpeg/network/model-authored answer，只允许fresh evidence与versioned research state。
