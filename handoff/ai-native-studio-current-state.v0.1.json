@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_RETAINED_FAIL_C3_TOOL_FREEZE_PASS_ATTEMPT02_UNAUTHORIZED",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_ATTEMPT01_AND_ATTEMPT02_RETAINED_FAIL_C4_CORRECTION_REQUIRED",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -437,7 +437,7 @@
       "pb2FormalExecutionAuthorizationConsumed": true
     },
     "pb3Readiness": {
-      "status": "FORMAL_ATTEMPT01_RETAINED_PRESTART_FAIL_C3_CORRECTION_FROZEN",
+      "status": "FORMAL_ATTEMPT01_AND_ATTEMPT02_RETAINED_FAIL_C4_CORRECTION_REQUIRED",
       "contract": "specs/ai-native-studio-pb3-readiness-preregistration.v0.1.json",
       "contractFileSha256": "6ab0dd3a9631091f6210f54215cfdf5bebf97a13dd2330cebff73665aa0c71b7",
       "researchDocument": "research/2026-08-31-ai-native-studio-pb3-readiness-preregistration-v0.1.zh-CN.md",
@@ -449,11 +449,11 @@
       "workspacePersistenceEvidencePresent": true,
       "expertModeLosslessEvidencePresent": true,
       "combinedSameRunEvidencePresent": false,
-      "formalRootsCreated": 1,
-      "blenderStarts": 0,
-      "proposalExecutions": 0,
-      "buildPlanWrites": 0,
-      "sceneMutations": 0,
+      "formalRootsCreated": 2,
+      "blenderStarts": 4,
+      "proposalExecutions": 2,
+      "buildPlanWrites": 2,
+      "sceneMutations": 2,
       "renders": 0,
       "engineSourceEdits": 0,
       "engineRemoteWrites": 0,
@@ -570,7 +570,7 @@
         "networkCalls": 0
       },
       "c3InputHashCorrection": {
-        "status": "TOOL_FREEZE_PASS_STATIC_32_OF_32_ATTEMPT02_UNAUTHORIZED",
+        "status": "ATTEMPT02_AUTHORITY_CONSUMED_RETAINED_FAIL",
         "contract": "specs/ai-native-studio-pb3-validation-c3-input-hash-correction.v0.7.json",
         "contractFileSha256": "701e40769ad731d5d2ec2724aded1776b81268be2a13f6d798982afa2abaf634",
         "changedFields": [
@@ -579,7 +579,7 @@
         "sourceBytesChanged": 0,
         "fixtureBytesChanged": 0,
         "permissionsExpanded": false,
-        "attempt02RootsExist": false,
+        "attempt02RootsExist": true,
         "executionToolFreeze": {
           "status": "PASS_STATIC_32_OF_32_INERT",
           "correctedTool": "specs/ai-native-studio-pb3-validation-tool-freeze-c3-corrected.v0.8.json",
@@ -604,18 +604,61 @@
           "checks": "32/32",
           "attempt02WorkRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-02",
           "attempt02EvidenceRoot": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-02",
-          "attempt02RootsExist": false
+          "attempt02RootsExist": true
         }
+      },
+      "formalAttempt02": {
+        "status": "FAIL_HARNESS_POST_SEMANTIC_EXECUTION",
+        "executionCommit": "e8d5a62476436f308bc996e4885ac1d906066350",
+        "executionParentResearchCommit": "8dd8e2128e042b874f21e3eafb577a7f8037e798",
+        "executionContract": "specs/ai-native-studio-pb3-validation-only-execution-c3.v1.0.json",
+        "executionContractFileSha256": "2bcc7d75bd678b0f6ca5d992fbad7f78098bb9aabc04ac0eca37b14e31603258",
+        "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-02",
+        "workManifest": {
+          "regularFiles": 29,
+          "regularFileBytes": 842437,
+          "manifestSha256": "6b12f0b8f2545a3463902638540a87981542a7f202b3cef161ad482458c97ca8"
+        },
+        "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-02",
+        "evidenceManifest": {
+          "regularFiles": 15,
+          "regularFileBytes": 47794,
+          "manifestSha256": "4d0930b596128fcaf3019777cc586046f4c5b10fc1a11bf60536a12c9620262e"
+        },
+        "receiptFileSha256": "e5bd63251d51ab31a3f9def21cc296c39ac1c2005600bfaf5d36b058742d4397",
+        "receiptHash": "b8c0616b3c7fb14c2b7b418ce561b1981126dcd4a0535adea5b4b0147277acc0",
+        "baseAuditFileSha256": "08d715d5787e273b26e95acef6be597bcab6ef94eae62e12c26b952df2946797",
+        "baseAuditHash": "b002779715ce73064bf9436eb6b7e922165290afe6aacafc2af25e2dfac908ef",
+        "baseAuditChecks": "17/18",
+        "auditFileSha256": "b4fde05a2c20ed66a720a087c2cbfd86f5a66e9577c401c056fd68f51272cc84",
+        "auditHash": "d85dd5896fd7bfa1848b9367b136a0d0844d9ca8aa1dc02dea7982fa5081908b",
+        "auditChecks": "21/23",
+        "failedChecks": [
+          "baseAuditPass:noRenderArtifacts",
+          "processArgvAndLogsExact:tool-contract-relative-versus-absolute"
+        ],
+        "researchDocument": "research/2026-08-31-ai-native-studio-pb3-c3-attempt-02-retained-failure.md",
+        "researchDocumentFileSha256": "d6b4260a9dd3000e0f98facc82ac3c3b611aa8099b7599182e4ebe29fd46c86a",
+        "blenderStarts": 4,
+        "proposalExecutions": 2,
+        "buildPlanWrites": 2,
+        "sceneBuilds": 2,
+        "workspaceSaves": 2,
+        "reopens": 2,
+        "renders": 0,
+        "engineSourceEdits": 0,
+        "engineRemoteWrites": 0,
+        "networkCalls": 0
       }
     },
     "activeCorrection": {
-      "status": "PB3_ATTEMPT01_RETAINED_PRESTART_FAIL_C3_TOOL_FREEZE_PASS",
-      "basis": "One v0.2 SceneSpec SHA-256 transcription error; 13-input audit 12 exact / 1 mismatch and independent retained-failure audit 24/24",
+      "status": "PB3_ATTEMPT02_RETAINED_POST_SEMANTIC_FAIL_C4_CORRECTION_REQUIRED",
+      "basis": "C3 attempt-02 completed semantic operations but base audit failed automatic thumbnail PNGs and C3 argv verification failed relative-versus-absolute tool-contract spelling",
       "retainedAttemptsMustRemainImmutable": ["attempt01", "attempt02", "attempt03", "attempt04"],
       "phaseBSourceMutationAuthorized": false,
       "pb2ThroughPb7Authorized": false,
       "nextGate": "PB.3",
-      "nextGateStatus": "PB3_C3_TOOL_FREEZE_PASS_AWAITING_EXPLICIT_ATTEMPT02_AUTHORIZATION"
+      "nextGateStatus": "PB3_C4_INERT_TOOL_CORRECTION_REQUIRED_NO_EXECUTION_AUTHORITY"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -991,18 +1034,19 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB3_VALIDATION_ONLY_C3_ATTEMPT02_AUTHORIZATION",
-    "result": "The inert C3 runner/auditor freeze passed 32/32; await the exact fresh attempt-02 authorization before creating roots or starting Blender",
+    "gate": "PB3_VALIDATION_ONLY_C4_INERT_TOOL_CORRECTION",
+    "result": "Retain C3 attempt-02 FAIL; freeze a no-execution correction for argv normalization and thumbnail prevention without relaxing thresholds",
     "requiredArtifacts": [
-      "retain attempt-01 work/evidence roots unchanged",
-      "use the frozen C3 runner and auditor changing only the frozen SceneSpec input SHA",
-      "preserve the 32/32 static tool audit with attempt-02 roots absent and zero Blender starts",
-      "bind the exact fresh attempt-02 authorization text to a single-path execution contract commit",
+      "retain attempt-01 and attempt-02 work/evidence roots unchanged",
+      "normalize --tool-contract to one absolute spelling before process creation and audit reconstruction",
+      "set Blender file preview type to NONE before save so no thumbnail-cache PNG is created",
+      "statically prove unchanged semantic thresholds, zero execution and fresh future roots absent",
       "zero film-engine source/ref/tag/release mutation, engine remote write, network, rendering, signing, notarization, DMG work or PB.4-PB.7 work"
     ],
     "formalAttempt01Authorized": false,
     "formalAttempt01AuthorizationConsumed": true,
     "formalAttempt02Authorized": false,
-    "exactAuthorizationTextSource": "specs/ai-native-studio-pb3-validation-only-authorization-request-c3.v0.8.json#/requestedAuthorization/exactText"
+    "formalAttempt02AuthorizationConsumed": true,
+    "exactAuthorizationTextSource": null
   }
 }

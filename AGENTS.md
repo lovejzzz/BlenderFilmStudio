@@ -181,13 +181,20 @@ whose recursive JSON diff from v0.2 is exactly that one leaf. The consolidated
 C3 runner/auditor and inert template are frozen by
 `specs/ai-native-studio-pb3-validation-c3-execution-tool-freeze.v0.8.json`.
 Static audit passes 32/32 with self hash `983d3153...`; it also proves the two
-attempt-02 roots remain absent, retained attempt-01 manifests remain exact and
-all Blender/proposal/BuildPlan/render/network counts remain zero. The active
-exact request is
-`specs/ai-native-studio-pb3-validation-only-authorization-request-c3.v0.8.json`.
-Attempt-02 is not authorized. Do not retry attempt-01 in place or infer another
-run from the consumed C2 authorization or general permission. PB.4–PB.7 remain
-unauthorized.
+attempt-02 roots were absent before authority, retained attempt-01 manifests
+were exact and all pre-run counts were zero. The exact request was then approved
+and consumed by execution commit `e8d5a624...`. Retain C3 attempt-02 as a
+post-semantic harness `FAIL`: all four authorized zero-render Blender processes
+exited zero and B01/B02 semantic/workspace checks passed, but the base audit is
+17/18 because Blender save produced two isolated HOME thumbnail-cache PNGs, and
+the C3 audit is 21/23 because its argv reconstruction expected an absolute
+`--tool-contract` while the recorded processes used the authorized relative
+spelling. Read
+`research/2026-08-31-ai-native-studio-pb3-c3-attempt-02-retained-failure.md`.
+Do not alter or rerun attempt-01/attempt-02. A future correction must preserve
+all thresholds, normalize the runner argv spelling before spawn, and prevent
+thumbnail creation by setting Blender file preview type to `NONE`; it requires
+a new inert tool freeze and fresh authorization. PB.4–PB.7 remain unauthorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

@@ -154,9 +154,13 @@ both a research notebook and an executable evidence base. Read this page,
   C3 permits only a versioned correction of `commonInputs[0].sha256`. The
   corrected v0.8 tool differs from v0.2 at exactly that one JSON leaf; the
   consolidated C3 runner/auditor, inert attempt-02 template and exact request
-  are now frozen. Static audit passed 32/32 with zero Blender starts and proved
-  attempt-02 roots absent plus retained attempt-01 manifests unchanged. Fresh
-  attempt-02 and PB.4–PB.7 remain unauthorized.
+  were frozen. Static audit passed 32/32 before execution. The exact request was
+  approved and consumed by attempt-02. Its four zero-render Blender starts and
+  B01/B02 semantic/workspace operations completed, but the run is retained
+  `FAIL`: base audit 17/18 found two automatic isolated-HOME thumbnail PNGs;
+  C3 audit 21/23 also found relative-versus-absolute `--tool-contract` argv
+  spelling. Attempt-01 and attempt-02 are immutable; PB.4–PB.7 remain
+  unauthorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -369,13 +373,13 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-PB.2 validation-only is closed `PASS`; PB.3 attempt-01 is a retained pre-start
-harness `FAIL` with 24/24 independent audit. The inert C3 tool freeze is closed
-`PASS` with 32/32 static checks and an exact fresh attempt-02 authorization
-request. The next checkpoint is that exact authorization; PB.3 attempt-02 and
-PB.4–PB.7 are not authorized. Do not retry attempt-01, start Blender, execute
-proposals, write BuildPlans, mutate `film-engine`, or use proposal-originated
-authority under the consumed C2 scope.
+PB.2 validation-only is closed `PASS`; PB.3 attempt-01 and attempt-02 are
+retained harness failures. Attempt-02 completed all four zero-render semantic
+processes but failed frozen postconditions at 17/18 base and 21/23 C3 audit.
+The next checkpoint is an inert versioned correction that normalizes the exact
+tool argv spelling and prevents Blender save-preview thumbnail creation without
+relaxing the no-render-artifact threshold. No fresh execution is authorized.
+Do not retry either root, mutate `film-engine`, or begin PB.4–PB.7.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

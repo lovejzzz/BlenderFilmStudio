@@ -6191,3 +6191,15 @@ Consolidated C3 runner先复核exact授权、single-path execution commit、corr
 Static auditor仅执行self-test、inert template拒绝、AST/no-network、one-leaf diff、root/symlink负控和retained-manifest复核；32/32 PASS，audit file/self SHA为`6afd9e4849fe2b9511a6051c341b8f4304e13fc382c58a041183f4d1a85dfd8e` / `983d315310c6198dbba0feaaa3109983db7e2d37a0b36775390a3bf037bcd0cf`。Attempt-02 work/evidence roots仍不存在；attempt-01 work保持0 files，evidence保持2 files / 5,091 bytes及原manifest。Blender、proposal、BuildPlan、scene/save/reopen、render、network与engine write计数全部0。
 
 Exact fresh request为`specs/ai-native-studio-pb3-validation-only-authorization-request-c3.v0.8.json`，attempt-02 template仍为`DRAFT_AUTHORIZATION_MISSING`。因此C3 tool freeze关闭PASS，但attempt-02尚未授权；不得从general permission或已消耗C2授权推导新formal run，PB.4–PB.7继续locked。
+
+## J-505 · PB.3 C3 attempt-02 retained post-semantic harness FAIL
+
+Date: 2026-08-31 · Type: RETAINED PB.3 HARNESS FAILURE · Blender starts / proposal executions / BuildPlan writes / renders: 4 / 2 / 2 / 0
+
+Owner逐字批准C3 request；execution contract以唯一变更路径提交为`e8d5a62476436f308bc996e4885ac1d906066350`，file SHA为`2bcc7d75bd678b0f6ca5d992fbad7f78098bb9aabc04ac0eca37b14e31603258`。Admission复核exact授权、single-path commit、13/13 inputs、retained attempt-01、clean source/binary/remote与fresh roots后通过。
+
+Base runner完成B01/B02各一次build和reopen：四个Blender process全exit 0，proposal/BuildPlan/scene/save/reopen计数为2/2/2/2/2，render/network/engine writes全0。Receipt file/self SHA为`e5bd63251d51ab31a3f9def21cc296c39ac1c2005600bfaf5d36b058742d4397` / `b8c0616b3c7fb14c2b7b418ce561b1981126dcd4a0535adea5b4b0147277acc0`。Work root为29 files / 842,437 bytes / manifest `6b12f0b8...`，evidence root为15 files / 47,794 bytes / manifest `4d0930b5...`，均低于冻结上限。
+
+C3 runner在base PASS receipt之后因`process argv differs`停止。四组recorded argv的`--tool-contract`值是repo-relative，C3重建时将同一输入resolve为absolute；八份log本身全部hash exact。Base independent audit另以17/18 FAIL：两次`.blend` save在isolated HOME各生成一个2,949-byte `.thumbnails/large/*.png`，触发冻结的any-PNG no-render-artifact门。Consolidated audit 21/23 FAIL，file/self SHA为`b4fde05a2c20ed66a720a087c2cbfd86f5a66e9577c401c056fd68f51272cc84` / `d85dd5896fd7bfa1848b9367b136a0d0844d9ca8aa1dc02dea7982fa5081908b`。
+
+Attempt-02永久保留且不重跑。下一个有界校正不放宽任何threshold：在spawn前把`--tool-contract`统一为absolute；在save前将`preferences.filepaths.file_preview_type`设为`NONE`以阻止thumbnail产生。必须先经新inert tool freeze/static audit，然后再寻求fresh-run authorization；PB.4–PB.7仍locked。
