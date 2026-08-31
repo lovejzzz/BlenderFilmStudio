@@ -6335,3 +6335,11 @@ Attempt-06在standing-authority single-path commit下完成B01/B02各一次appro
 Base semantic audit 18/18 PASS，file/self SHA为`7f4327f2026005a27faece82abfafaa948863c2dcebbd70ad27f5a8f4d5c96dc` / `8c80e78153502419fed30119029574138ebfee35bbd7a4d77aa549a3206376d1`；C6 independent audit 29/29 PASS，file/self SHA为`9bf010ece3f0e737d07e0950be4f44edd54b988d04e2359554c5cc2f5480874a` / `83e23d986e1a0caa160b5e7c21715e5e54210e4bfa242c7209ea4963b8dc8b11`。
 
 Work root 27 files / 833,455 bytes / manifest `44861c50...`，全root零EXR/PNG/JPG/JPEG/MOV/MP4。Evidence root 17 files / 55,442 bytes / manifest `7a0473bb...`；两个Blender file thumbnails仅在evidence-bounded HOME并计入64 MiB ceiling。PB.3据此关闭PASS；claim仅限冻结B01/B02 canonical compile、semantic/provenance identity、typed workspace persistence与background Expert-state lossless roundtrip，不包含arbitrary proposal、visible UI、render、model quality、production或distribution readiness。
+
+## J-520 · PB.4 product render/receipt preregistration
+
+Date: 2026-08-31 · Type: PRODUCT MUTATION PREREGISTRATION · PB.4 render calls: 0
+
+PB.4 v0.1不复用F0.5 pixels冒充产品结果。它绑定film-engine `4061e12b...`、PB.3 receipt/audit与B01 accepted `.blend` SHA `64026648...`，只允许三个Python source paths与≤600 added lines：product-owned render contract、workspace Render Job state/operator、visible panel。
+
+冻结profile为640×360 EEVEE 16-sample PNG与Cycles CPU 32-sample multilayer EXR（Combined/Depth/Normal）；冻结process/pixel/pass/cost/failure receipts和三个pre-render负控。Fresh external source/build/work与research evidence roots，最多1 clean build、4 product starts、2 render calls、2 GiB work、512 MiB evidence。Standing charter覆盖该有界开发和ordinary fast-forward publication；release/sign/notary/charges/force/PB.5不授权。

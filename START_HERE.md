@@ -410,8 +410,10 @@ starting Blender. C5-C2 passes 30/30 static checks and the C6 standing-authority
 adapter passes 32/32 while keeping the C4 semantic/helper corrections, exact
 no-render-artifact threshold, retained attempts and zero-network ceiling
 frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
-PB.3 is closed `PASS` by C6-C3 attempt-06. The next checkpoint is a versioned
-PB.4 preregistration under the standing-autonomy charter.
+PB.3 is closed `PASS` by C6-C3 attempt-06. PB.4 v0.1 is preregistered before
+mutation with a three-Python-path / 600-line ceiling. The next checkpoint is a
+fresh external source clone, product-owned Render Job implementation, clean
+build and static audit before the formal B01 preview/final run.
 Do not retry a retained formal root or query the engine remote during admission.
 After PB.3 closes, later PB gates may proceed under versioned protocols and the
 standing charter without another authorization sentence.

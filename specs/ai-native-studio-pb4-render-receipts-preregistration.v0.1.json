@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb4RenderReceiptsPreregistration.v0.1",
+  "contractId": "AI-NATIVE-STUDIO-PB4-RENDER-RECEIPTS-PREREGISTRATION-v0.1",
+  "status": "PREREGISTERED_UNDER_STANDING_AUTHORITY_BEFORE_PB4_MUTATION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "28319a8e3f59a081d3dc461ee46f1e6d7dd304c7",
+  "question": "Can the real Film Studio product connect the accepted PB.3 typed B01 workspace to an approved, bounded render job that emits an EEVEE preview, a Cycles multilayer EXR and independently auditable process, pixel, pass, cost and failure receipts?",
+  "standingAuthority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "specificConfirmationRequired": false,
+    "reason": "The work is local, bounded, reversible product development plus ordinary validated fast-forward publication in the two existing repositories."
+  },
+  "baselines": {
+    "filmEngineMain": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "pb1BinarySha256": "4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59",
+    "pb3": {
+      "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-06",
+      "receiptFileSha256": "cd0917652b8e67bc4e254af69dde62b173b9592f35328e57c4981665df36a552",
+      "receiptHash": "a52eb563852bd77042a47ea1b63f6427cf9ec1064ece90fb8b69f07d61637e9f",
+      "auditFileSha256": "9bf010ece3f0e737d07e0950be4f44edd54b988d04e2359554c5cc2f5480874a",
+      "auditHash": "83e23d986e1a0caa160b5e7c21715e5e54210e4bfa242c7209ea4963b8dc8b11"
+    },
+    "f05": {
+      "verdict": "experiments/ai-native-studio-f0/F0.5-2026-08-30-mac-m2max-attempt-02/verdict.json",
+      "verdictFileSha256": "98e3cc34aef7dc564ea4c820badf15f3fad201966cbef5bd1351fed4efc2c3be",
+      "receiptHash": "a85a2d64bb080b89051986ad83b6489317909a6f0b7ad75b5c194a252a375e71",
+      "reuse": "Profiles and audit semantics only; PB.4 must run through new product-owned code on the PB.3 workspace and cannot claim the historical pixels as PB.4 output."
+    }
+  },
+  "fixture": {
+    "id": "B01",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-06/b01/artifacts/scene.blend",
+    "sourceBlendSha256": "64026648bde5f6128e2642797a8c8a4aa867286f20c633c80717a7093b1c012b",
+    "planHash": "316114f10d4ec3a2b9e6b569e39476a143fc1b1db10e1603ba54d37dc73c3eaf",
+    "semanticStructureSha256": "e8c55fb73737f1871ac0008faa705dc204ebfe5bac471323cbb0a2d31435b4f8",
+    "workspaceSchema": "bfs.filmWorkspace.v0.1",
+    "mustRemainByteExact": true
+  },
+  "productIncrement": {
+    "goal": "A visible Render Job panel and product-owned bounded render contract, not an external-only research script.",
+    "allowedSourcePaths": [
+      "scripts/modules/film_studio_render.py",
+      "scripts/startup/bl_operators/film_studio_workspace.py",
+      "scripts/startup/bl_ui/space_topbar.py"
+    ],
+    "maximumChangedPaths": 3,
+    "maximumAddedLines": 600,
+    "cOrCppPathsAllowed": 0,
+    "requiredCapabilities": [
+      "Typed render-manifest inspection with self-hash, approval, exact source, stage, output-root and profile validation before rendering.",
+      "Film workspace fields expose job id, manifest, bounded evidence root, status and last receipt hash.",
+      "A visible product operator inspects an approved render job without rendering and exposes explicit Preview and Final stage status.",
+      "Product-owned stage execution accepts only PREVIEW or FINAL and writes self-hashed stage/failure receipts inside the authorized evidence root.",
+      "No proposal-originated Python, shell, network path, arbitrary output path or source .blend save authority."
+    ]
+  },
+  "renderProfiles": {
+    "preview": {
+      "engine": "BLENDER_EEVEE",
+      "frame": 1,
+      "resolution": [640, 360, 100],
+      "samples": 16,
+      "format": "PNG",
+      "colorMode": "RGBA",
+      "colorDepth": "8",
+      "output": "preview/preview.png"
+    },
+    "final": {
+      "engine": "CYCLES",
+      "device": "CPU",
+      "frame": 1,
+      "resolution": [640, 360, 100],
+      "samples": 32,
+      "seed": 24082601,
+      "animatedSeed": false,
+      "denoising": false,
+      "threadsMode": "FIXED",
+      "threads": 8,
+      "format": "OPEN_EXR_MULTILAYER",
+      "colorDepth": "16",
+      "codec": "ZIP",
+      "requiredPasses": ["Combined", "Depth", "Normal"],
+      "output": "final/final.exr"
+    }
+  },
+  "receiptContract": {
+    "process": ["argv", "pid", "exitCode", "wallSeconds", "maximumResidentSetSizeBytes", "stdoutSha256", "stderrSha256"],
+    "pixel": ["width", "height", "channels", "nonFiniteValues", "rgbDynamicRange", "nonzeroRgbPixels", "decodedSha256"],
+    "pass": ["subimages", "channels", "formats", "requiredPassesPresent"],
+    "cost": ["monetaryCostUsd", "basis", "renderSeconds", "peakResidentSetSizeBytes", "artifactBytes", "productStarts", "renderCalls"],
+    "failure": ["reason", "stage", "renderCalls", "artifactAbsent", "sourceUnchanged"],
+    "selfHashed": true,
+    "independentAuditMustNotImportProductRenderModule": true
+  },
+  "pixelAcceptance": {
+    "width": 640,
+    "height": 360,
+    "previewMinimumBytes": 1024,
+    "finalMinimumBytes": 4096,
+    "allDecodedValuesFinite": true,
+    "combinedDynamicRangeMinimum": 0.01,
+    "combinedNonzeroRgbPixelsMinimum": 1000,
+    "requiredFinalPasses": ["Combined", "Depth", "Normal"]
+  },
+  "negativeControls": [
+    "A manifest whose self hash or approval is altered must write a bounded failure receipt and reject before a render call.",
+    "An output path escaping the exact evidence root must write a bounded failure receipt and reject before a render call.",
+    "A FINAL request without an exact verified PREVIEW receipt must reject before a render call."
+  ],
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.4-2026-08-31-mac-m2max-attempt-01",
+    "source": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.4-2026-08-31-mac-m2max-attempt-01/source",
+    "build": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.4-2026-08-31-mac-m2max-attempt-01/build",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.4-2026-08-31-mac-m2max-attempt-01/work",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.4-2026-08-31-mac-m2max-attempt-01"
+  },
+  "resourceCeilings": {
+    "minimumFreeReserveBytes": 107374182400,
+    "projectedSourceBuildAndRunBytes": 21474836480,
+    "maximumWorkBytes": 2147483648,
+    "maximumEvidenceBytes": 536870912,
+    "maximumConcurrentNativeProcesses": 1,
+    "maximumCleanBuilds": 1,
+    "maximumProductStarts": 4,
+    "maximumRenderCalls": 2,
+    "maximumPreviewWallSeconds": 120,
+    "maximumFinalWallSeconds": 180
+  },
+  "publication": {
+    "engineBranch": "codex/pb4-render-receipts",
+    "maximumEngineCommitsBeforeMerge": 1,
+    "ordinaryFastForwardMainPushAfterPass": true,
+    "forcePush": false,
+    "tags": 0,
+    "releases": 0,
+    "binaryDistribution": 0
+  },
+  "acceptance": [
+    "The three-path product patch builds cleanly from full-history film-engine baseline and preserves independent identity and PB.1/PB.3 source invariants.",
+    "The visible product panel inspects the exact approved job and persists typed render-job status without rendering.",
+    "The product renders exactly one frozen EEVEE preview and one Cycles multilayer EXR from the accepted PB.3 B01 workspace with zero mouse, model and network calls.",
+    "All process, pixel, pass, cost and failure receipts are self-hashed, mutually bound and independently audited.",
+    "All three negative controls reject before a render call and write no escaped artifact.",
+    "The source .blend and official Blender configuration remain unchanged; work/evidence remain within ceilings."
+  ],
+  "stopRules": [
+    "Do not mutate the retained PB.1 source/build or any PB.3 work/evidence root.",
+    "Any source change outside the three allowed paths, any C/C++ change, or a patch over the line ceiling stops PB.4 before build.",
+    "Any baseline, manifest, source scene, build, OCIO, free-space or output-root mismatch stops before rendering.",
+    "Any positive render or independent audit failure retains attempt-01 and forbids same-root repair.",
+    "Do not weaken render profiles, pixel/pass thresholds, negative controls or resource ceilings after observing output.",
+    "Do not begin PB.5, create a release, distribute a binary, sign, notarize, force-push or incur a new charge."
+  ],
+  "claimCeiling": "A PASS can prove one product-owned B01 preview/final render job and its receipts on this host. It cannot prove restart-safe PB.5 control, B62 quality, arbitrary scenes, GPU/cross-host pixels, production readiness or public distribution."
+}
