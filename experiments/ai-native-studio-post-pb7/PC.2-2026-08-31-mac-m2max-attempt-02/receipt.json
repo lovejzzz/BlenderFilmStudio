@@ -1,0 +1,332 @@
+{
+  "schemaVersion": "bfs.pc2ValidationReceipt.v0.1",
+  "status": "PASS",
+  "gate": "PC.2",
+  "preregistration": {
+    "uri": "specs/ai-native-studio-pc2-action-complexity-preregistration.v0.1.json",
+    "sha256": "22f64a770657be9967cde23e734d4f731a0a25240336e9e8505f2989386db565",
+    "specHash": "48bdfa56a480f25b2a894d66edb3fdea3d3037ae2e2ff2e03e2d66a5b74e830e"
+  },
+  "toolFreeze": {
+    "uri": "specs/ai-native-studio-pc2-tool-freeze-c1.v0.2.json",
+    "sha256": "c9ac2c27b361cc200014bf40620f734770b73124a2c1bd8edef4a153940416ed",
+    "specHash": "26d100c496a5b76db21585a78e2f36edea7609523f89d2b0b74d06872bcea7c5"
+  },
+  "source": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.1-2026-08-31-mac-m2max-attempt-04/PC1_MODELING_DETAIL.blend",
+    "beforeSha256": "36389e8ff5d4a02fdae899a4ca9c1c031278095fff6203af82e5b534721268f5",
+    "afterSha256": "36389e8ff5d4a02fdae899a4ca9c1c031278095fff6203af82e5b534721268f5"
+  },
+  "build": {
+    "uri": "experiments/ai-native-studio-post-pb7/PC.2-2026-08-31-mac-m2max-attempt-02/build.json",
+    "sha256": "4608a64efb2c6201e7e5e0f6467789796bd7e30738f62ea471f171ff589dd4c9",
+    "buildHash": "a38ccebd65039bb1109e0490b4f3df15fd0d24f848ab8b0546e7da5226bd513b"
+  },
+  "semanticAudit": {
+    "uri": "experiments/ai-native-studio-post-pb7/PC.2-2026-08-31-mac-m2max-attempt-02/semantic-audit.json",
+    "sha256": "ffdf9e6ffe04732c6a13e348813699e51e88dac98bb6c17b7661171d732f84ea",
+    "auditHash": "051b553479a1d75ecb8020e80e1f44ac044ed6ab4c397e11b238a9efe982157c"
+  },
+  "processes": [
+    {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.2-2026-08-31-mac-m2max-attempt-02/processes/01-build.json",
+      "processHash": "c0ce530afbeaf433d1f7e4dbf4029173bb006bdc29e02146b0b6a7b4a9c8daeb"
+    },
+    {
+      "uri": "experiments/ai-native-studio-post-pb7/PC.2-2026-08-31-mac-m2max-attempt-02/processes/02-semantic-audit.json",
+      "processHash": "5f6c74e9e3147f910070447d2dafdf9f80edad873379a595b263ebe4005e1e09"
+    }
+  ],
+  "phases": [
+    "ACTIVATION_MECHANICAL_RECOIL",
+    "APPROACH_WEIGHT_TRANSFER",
+    "CONTACT_REACH_ARC",
+    "REFLECTION_BREATH_SETTLE"
+  ],
+  "signalTargets": [
+    "B62_PHASE0_IK_HAND_R_POLE",
+    "B62_PHASE0_IK_HAND_R_TARGET",
+    "HAND_R_SOCKET",
+    "PC1_CORE_GIMBAL_00",
+    "PC1_CORE_GIMBAL_01",
+    "PC1_CORE_GIMBAL_02",
+    "PC1_CORE_GIMBAL_03",
+    "PC1_GUARDIAN_SHOULDER_FIN_L",
+    "PC1_GUARDIAN_SHOULDER_FIN_R",
+    "RIG_B62_GUARDIAN"
+  ],
+  "signalChecks": [
+    {
+      "phase": "APPROACH_WEIGHT_TRANSFER",
+      "target": "RIG_B62_GUARDIAN",
+      "dataPath": "location",
+      "arrayIndex": 2,
+      "frames": [
+        1,
+        17,
+        33,
+        49,
+        65,
+        81,
+        96
+      ],
+      "peakToPeak": 0.035,
+      "minimumPeakToPeak": 0.025,
+      "passed": true
+    },
+    {
+      "phase": "APPROACH_WEIGHT_TRANSFER",
+      "target": "RIG_B62_GUARDIAN",
+      "dataPath": "pose.bones[\"chest\"].rotation_euler",
+      "arrayIndex": 2,
+      "frames": [
+        1,
+        17,
+        33,
+        49,
+        65,
+        81,
+        96
+      ],
+      "peakToPeak": 0.059999999,
+      "minimumPeakToPeak": 0.04,
+      "passed": true
+    },
+    {
+      "phase": "CONTACT_REACH_ARC",
+      "target": "B62_PHASE0_IK_HAND_R_TARGET",
+      "dataPath": "location",
+      "arrayIndex": 2,
+      "frames": [
+        97,
+        108,
+        118,
+        126,
+        132,
+        150,
+        176,
+        192
+      ],
+      "peakToPeak": 0.167381763,
+      "minimumPeakToPeak": 0.08,
+      "passed": true
+    },
+    {
+      "phase": "CONTACT_REACH_ARC",
+      "target": "B62_PHASE0_IK_HAND_R_POLE",
+      "dataPath": "location",
+      "arrayIndex": 0,
+      "frames": [
+        97,
+        108,
+        118,
+        126,
+        132,
+        150,
+        176,
+        192
+      ],
+      "peakToPeak": 0.075000048,
+      "minimumPeakToPeak": 0.05,
+      "passed": true
+    },
+    {
+      "phase": "CONTACT_REACH_ARC",
+      "target": "HAND_R_SOCKET",
+      "dataPath": "constraints[\"B62_PHASE0_CONTACT_SOCKET_LOCK\"].influence",
+      "arrayIndex": 0,
+      "frames": [
+        97,
+        108,
+        118,
+        126,
+        132,
+        150,
+        176,
+        192
+      ],
+      "peakToPeak": 1,
+      "minimumPeakToPeak": 0.9,
+      "passed": true
+    },
+    {
+      "phase": "ACTIVATION_MECHANICAL_RECOIL",
+      "target": "PC1_CORE_GIMBAL_00",
+      "dataPath": "rotation_euler",
+      "arrayIndex": 2,
+      "frames": [
+        138,
+        144,
+        150,
+        160,
+        176,
+        192
+      ],
+      "peakToPeak": 1.179999948,
+      "minimumPeakToPeak": 0.45,
+      "passed": true
+    },
+    {
+      "phase": "ACTIVATION_MECHANICAL_RECOIL",
+      "target": "PC1_CORE_GIMBAL_01",
+      "dataPath": "rotation_euler",
+      "arrayIndex": 2,
+      "frames": [
+        138,
+        144,
+        150,
+        160,
+        176,
+        192
+      ],
+      "peakToPeak": 1.249999945,
+      "minimumPeakToPeak": 0.45,
+      "passed": true
+    },
+    {
+      "phase": "ACTIVATION_MECHANICAL_RECOIL",
+      "target": "PC1_CORE_GIMBAL_02",
+      "dataPath": "rotation_euler",
+      "arrayIndex": 2,
+      "frames": [
+        138,
+        144,
+        150,
+        160,
+        176,
+        192
+      ],
+      "peakToPeak": 1.320000052,
+      "minimumPeakToPeak": 0.45,
+      "passed": true
+    },
+    {
+      "phase": "ACTIVATION_MECHANICAL_RECOIL",
+      "target": "PC1_CORE_GIMBAL_03",
+      "dataPath": "rotation_euler",
+      "arrayIndex": 2,
+      "frames": [
+        138,
+        144,
+        150,
+        160,
+        176,
+        192
+      ],
+      "peakToPeak": 1.39000005,
+      "minimumPeakToPeak": 0.45,
+      "passed": true
+    },
+    {
+      "phase": "ACTIVATION_MECHANICAL_RECOIL",
+      "target": "RIG_B62_GUARDIAN",
+      "dataPath": "pose.bones[\"chest\"].rotation_euler",
+      "arrayIndex": 0,
+      "frames": [
+        138,
+        144,
+        150,
+        160,
+        176,
+        192
+      ],
+      "peakToPeak": 0.08211817,
+      "minimumPeakToPeak": 0.05,
+      "passed": true
+    },
+    {
+      "phase": "REFLECTION_BREATH_SETTLE",
+      "target": "RIG_B62_GUARDIAN",
+      "dataPath": "pose.bones[\"chest\"].rotation_euler",
+      "arrayIndex": 0,
+      "frames": [
+        193,
+        208,
+        224,
+        240,
+        264,
+        288
+      ],
+      "peakToPeak": 0.07185673,
+      "minimumPeakToPeak": 0.035,
+      "passed": true
+    },
+    {
+      "phase": "REFLECTION_BREATH_SETTLE",
+      "target": "RIG_B62_GUARDIAN",
+      "dataPath": "pose.bones[\"head\"].rotation_euler",
+      "arrayIndex": 2,
+      "frames": [
+        193,
+        208,
+        224,
+        240,
+        264,
+        288
+      ],
+      "peakToPeak": 0.207173049,
+      "minimumPeakToPeak": 0.06,
+      "passed": true
+    },
+    {
+      "phase": "REFLECTION_BREATH_SETTLE",
+      "target": "PC1_GUARDIAN_SHOULDER_FIN_L",
+      "dataPath": "rotation_euler",
+      "arrayIndex": 1,
+      "frames": [
+        193,
+        208,
+        224,
+        240,
+        264,
+        288
+      ],
+      "peakToPeak": 0.1,
+      "minimumPeakToPeak": 0.06,
+      "passed": true
+    },
+    {
+      "phase": "REFLECTION_BREATH_SETTLE",
+      "target": "PC1_GUARDIAN_SHOULDER_FIN_R",
+      "dataPath": "rotation_euler",
+      "arrayIndex": 1,
+      "frames": [
+        193,
+        208,
+        224,
+        240,
+        264,
+        288
+      ],
+      "peakToPeak": 0.1,
+      "minimumPeakToPeak": 0.06,
+      "passed": true
+    }
+  ],
+  "resources": {
+    "freeBytesAtAdmission": 156630818816,
+    "workBytes": 380592,
+    "evidenceBytesBeforeReceipt": 109262,
+    "processWallSeconds": [
+      0.931704044342041,
+      0.790524959564209
+    ],
+    "peakRssBytes": [
+      282230784,
+      276332544
+    ]
+  },
+  "operations": {
+    "BlenderStarts": 2,
+    "renderCalls": 0,
+    "derivedSceneSaves": 1,
+    "sourceSceneSaves": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "mouseInteractions": 0,
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0
+  },
+  "receiptHash": "f99fc29742490c54b3c7152ad70b3d4807e137338652bb6f6c321c8a4722e5f2"
+}

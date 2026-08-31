@@ -488,8 +488,12 @@ are frozen at `83e0ba88…` before the first zero-render PC.2 start. Fresh
 attempt-01 stopped before action mutation on another Node/Python number-spelling
 hash mismatch and is sealed (`01b43e04…` / `4bb70807…`). C1 binds accepted
 PC.1 `build.json` and compares the same camera/light state structurally; it is
-frozen at `26d100c4…` for fresh attempt-02 roots. No phase, amplitude, target,
-geometry/material or protected-state value was relaxed.
+frozen at `26d100c4…`. Fresh C1 attempt-02 is accepted `PASS`: four phases,
+four channels and ten non-camera signal targets passed 19/19 after reopen;
+exactly six PC.1 detail objects gained animation. Receipt/audit/manifest self
+hashes are `f99fc297…` / `b68b6600…` / `15aeacec…`. Geometry/materials,
+camera/lights and shot markers remained exact. PC.2 is closed; PC.3 integrated
+video and delayed visual comparison is the active gate.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

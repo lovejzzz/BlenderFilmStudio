@@ -6567,3 +6567,9 @@ First process在任何keyframe insertion前停止于`BASELINE_PROTECTED_STATE`�
 Date: 2026-08-31 · Type: VERSIONED TOOL FREEZE · Formal attempt-02 starts / renders / saves: 0 / 0 / 0
 
 C1绑定accepted PC.1 build file SHA `a9082991…`，仅将三个protected-state comparison boundaries改为direct structure equality。四个versioned wrappers先验证base tool exact hashes与single patch sites；action phases/amplitudes/targets、geometry/material、camera/light values、shot state、operations/resources全不变。Attempt-01 failure/manifest file+self hashes逐项绑定；fresh attempt-02 roots在freeze时absent。
+
+## J-552 · PC.2 C1 attempt-02 accepted PASS
+
+Date: 2026-08-31 · Type: ACCEPTED ACTION-COMPLEXITY INCREMENT · Blender starts / renders / saves: 2 / 0 / 1
+
+Fresh attempt-02 runner `f99fc297…`与independent 19/19 audit `b68b6600…` PASS，sealed manifest `15aeacec…`。Four causal phases/channels、ten signal targets与全部frame/amplitude floors经reopen exact通过；four core gimbals + two shoulder fins为exact six newly animated objects。Geometry/material保持104/92/19,810，camera/light + shot markers structural exact，source SHA `36389e8f…` exact，zero media artifacts。PC.2为semantic action PASS，不作visual-quality claim；PC.3必须render integrated slice并delayed compare。
