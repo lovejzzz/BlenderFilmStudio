@@ -458,6 +458,8 @@ for the two weaknesses named by the owner—modeling detail and action
 complexity—without expanding the result into a production-readiness or
 autonomous-filmmaking claim. That program is now preregistered; the immediate
 gate is a one-start, zero-render, zero-save PC.0 hero-asset/action inventory.
+Its exact runner/probe/auditor are frozen and static inventory checks pass
+14/14; both formal roots remain absent until execution.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

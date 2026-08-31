@@ -287,7 +287,9 @@ improvement priorities; no production-readiness claim follows. The post-PB.7
 program is preregistered at
 `specs/ai-native-studio-post-pb7-improvement-program.v0.1.json`. Its first gate
 is one zero-render/zero-save PC.0 inventory; PC.1 mutation must not begin before
-that inventory and independent audit pass.
+that inventory and independent audit pass. PC.0 tools are frozen at
+`specs/ai-native-studio-pc0-tool-freeze.v0.1.json`; static checks pass and both
+formal roots remain absent before the one allowed start.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

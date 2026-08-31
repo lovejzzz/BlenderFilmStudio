@@ -6443,3 +6443,11 @@ Date: 2026-08-31 · Type: IMPROVEMENT PROGRAM PREREGISTRATION · New Blender sta
 Owner human evidence同时冻结accepted strengths（lighting/camera language）与weaknesses（rough modeling/simple action）。Program依次为PC.0 read-only inventory、PC.1 modeling detail、PC.2 action complexity、PC.3 integrated slice + delayed A/B review。
 
 未来floor预注册为≥12 semantic detail components、≥3 hero material regions、≥2 protected views visible improvement，以及≥4 independent non-camera action channels、4 semantic phases、≥6 animated non-camera targets。PC.0先只允许1 zero-render/zero-save start、16 MiB evidence、300秒、2 GiB RSS；audit PASS前不得开始PC.1。
+
+## J-534 · PC.0 inventory tool freeze
+
+Date: 2026-08-31 · Type: ZERO-RENDER TOOL FREEZE · Formal Blender starts / renders / saves: 0 / 0 / 0
+
+Probe冻结complete object/mesh/material/modifier/constraint/action/F-curve/keyframe与9 sentinel state inventory；static Python/Node checks PASS、forbidden probe patterns 0、synthetic inventory/attack 14/14。Runner binds exact source/binary/tools/fresh roots并以`time -l`测wall/RSS；auditor独立复核totals、streams、source immutability与全roots零render artifacts。
+
+Formal evidence/work roots冻结时均absent。Ceilings为1 Blender start、0 render/save/engine/network/model/mouse，16 MiB evidence、64 MiB work、300秒、2 GiB RSS；PC.1仍未开始。
