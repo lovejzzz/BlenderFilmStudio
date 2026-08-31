@@ -6241,3 +6241,13 @@ Owner逐字批准C4 request；execution contract以唯一变更路径提交为`5
 正式runner的Blender/proposal/BuildPlan/scene/save/reopen/render/engine edit/engine remote write计数全部0。Admission阶段另做过一次只读`git ls-remote`核对film-engine main；结果为expected `4061e12b...`且0 write，但超过zero-network ceiling，已按1次network call透明保留，所以attempt-03独立于scope mismatch也必须FAIL。
 
 Failure file/self SHA为`fa422b7336d87f95782d2fdd16a4ef9cd9c5d0d822724f47c62e63509b3ab200` / `248fb2bd86ecd42bca1ca269e1d2ce53e4ef20e11dd99db39f59e63b43c63413`。不import formal runner的failure auditor复核single-path commit、exact mismatch、absent work root、0 logs/artifacts、source/binary和attempt-01/02 manifests，22/22 PASS；audit file/self SHA为`aecda60ef9675024b6cdf116b490e9a62938cab9a771643037c633f99e16fdfc` / `9c6c1cd7bc830b7ba23f95afe503d88a74ceeb9ec6cc3a802951feb397c081c7`。下一步只允许为fresh attempt-04冻结execution-contract exact-array copy correction；C4 semantic tools与thresholds不变，新formal run仍需新exact authority。
+
+## J-510 · PB.3 C5 tool-freeze attempt-01 static FAIL
+
+Date: 2026-08-31 · Type: RETAINED STATIC TOOL FAILURE · Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C5/C5-C1先冻结attempt-03 exact-array correction和C4 auditor不存在`c4CorrectionSha256` receipt field的false expectation；新runner/auditor/template/request保持unchanged C4 semantic helper、13 inputs、4/2/2/2/2/2 ceilings、2 GiB / 64 MiB、full-root no-artifact与zero network/engine write。
+
+Static audit 29/30 FAIL，唯一false为`inertTemplateRejected`。Runner确实nonzero退出，但C5 local authority callback只接受2个参数，而unchanged C4 runner以`(c3, c4_path, c4_contract)`调用3个参数，先触发`TypeError`，未到expected safe status rejection。Audit file/self SHA为`26216389760bf6e5499cadb1f9697265ae590d1cd193c2849d72abf3b320a7cb` / `0d8cdbccf81c4d55b1fc6211454905ac5b011218773a34888b9f1e4b152c3ce6`。Attempt-04 roots前后absent，所有formal counts为0。
+
+下一版本只允许创建versioned C2 runner，在callback signature增加一个unused C3参数；不得编辑failed runner或evidence，不得改变auditor、helper、corrected tool、threshold或authority。Attempt-04仍未授权。
