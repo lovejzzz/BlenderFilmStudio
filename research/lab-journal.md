@@ -6573,3 +6573,9 @@ C1绑定accepted PC.1 build file SHA `a9082991…`，仅将三个protected-state
 Date: 2026-08-31 · Type: ACCEPTED ACTION-COMPLEXITY INCREMENT · Blender starts / renders / saves: 2 / 0 / 1
 
 Fresh attempt-02 runner `f99fc297…`与independent 19/19 audit `b68b6600…` PASS，sealed manifest `15aeacec…`。Four causal phases/channels、ten signal targets与全部frame/amplitude floors经reopen exact通过；four core gimbals + two shoulder fins为exact six newly animated objects。Geometry/material保持104/92/19,810，camera/light + shot markers structural exact，source SHA `36389e8f…` exact，zero media artifacts。PC.2为semantic action PASS，不作visual-quality claim；PC.3必须render integrated slice并delayed compare。
+
+## J-553 · PC.3 integrated video + delayed review preregistration
+
+Date: 2026-08-31 · Type: PREREGISTRATION · PC.3 Blender starts / renders / video processes: 0 / 0 / 0
+
+PC.3冻结accepted PC.2 source `81453bff…`，以accepted PB.6 video `2aa51303…`为A，fresh 288-frame integrated video为B。Machine floors包括288 unique hashes、≥280 dynamic pairs、≥192 visibly changed frames、median MAD ≥0.001、exact 96/96/96 cameras、PC.2 identity exact与zero retained EXR。Machine PASS后才开放owner四问；model不得代答，PC.3 final verdict需exact owner answers。

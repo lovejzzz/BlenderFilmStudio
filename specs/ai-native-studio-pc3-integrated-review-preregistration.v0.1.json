@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc3IntegratedReviewPreregistration.v0.1",
+  "status": "PREREGISTERED_BEFORE_PC3_RENDER",
+  "gate": "PC.3",
+  "title": "Integrated modeling-plus-action slice and delayed human A/B review",
+  "authority": {"source": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority", "repeatedOwnerAuthorizationRequired": false, "specificConfirmationBoundariesUnchanged": true},
+  "humanEvidence": {"verdictHash": "4be072cc1b483e552c001976434f42a14f72259ada07c72a8dea700b7fe0f6ab", "qualitativeFeedbackExact": "我看了视频了，说实话光影和镜头感很好，就是建模太粗糙，动作太简单了。但是我看到非常大的潜力。", "protectedStrengths": ["lighting", "camera language and shot progression"], "targetWeaknesses": ["modeling detail", "action complexity"]},
+  "source": {"path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.2-2026-08-31-mac-m2max-attempt-02/PC2_ACTION_COMPLEXITY.blend", "sha256": "81453bff0448939e258e19f4acce9752b78b763255ea3be6b18e4082d58db7c9", "pc2ReceiptHash": "f99fc29742490c54b3c7152ad70b3d4807e137338652bb6f6c321c8a4722e5f2", "pc2AuditHash": "b68b66009caa7566ac7df0f4f9f254452a6bb6bd88ca4246ad9214d9da78fec7"},
+  "baselineA": {"framesRoot": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01/frames", "videoUri": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01/review/B62-PB6-THREE-SHOT.mp4", "videoSha256": "2aa51303912f920540e55638b0e21590735d73485362d75616c3dc96e22adf42", "receiptFileSha256": "363744bbe1894acf5d64ead7c86c70069dd135786faa6cc862c81e416f30bab5", "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1", "auditFileSha256": "2207763b69ab117d13f2b9d8b937f5417ee03b467d453e960e9d4b0780ac3677", "auditHash": "2f7b08ee0c624cdc3580dfbcdcb2efc520280814ce4b3386e36eedd8ca3605cf"},
+  "shots": [
+    {"id": "WIDE", "framesInclusive": [1, 96], "camera": "CAM_WIDE_APPROACH"},
+    {"id": "MEDIUM", "framesInclusive": [97, 192], "camera": "CAM_MEDIUM_CONTACT"},
+    {"id": "CLOSE", "framesInclusive": [193, 288], "camera": "CAM_CLOSE_MOTION_TERMINAL"}
+  ],
+  "renderProfile": {"engine": "BLENDER_EEVEE", "resolution": [640, 360, 100], "samples": 16, "framesInclusive": [1, 288], "renderCalls": 288, "productionFormat": "OPEN_EXR_MULTILAYER", "finalFrameFormat": "PNG", "colorMode": "RGBA", "colorDepth": "8", "fps": 24, "reviewVideo": "review/PC3-INTEGRATED-THREE-SHOT.mp4"},
+  "machineAcceptance": {
+    "exactFrameCount": 288,
+    "allFramesFinite640x360Rgba": true,
+    "minimumUniqueFrameHashes": 288,
+    "minimumDynamicConsecutivePairs": 280,
+    "minimumFramesVisiblyDifferentFromBaselineA": 192,
+    "visibleDifferenceRgbThreshold": 0.00784313725490196,
+    "minimumChangedPixelFractionPerPassingFrame": 0.001,
+    "minimumMedianMeanAbsoluteRgbDifference": 0.001,
+    "exactCameraRouting96PerShot": true,
+    "cameraLightStateEqualsAcceptedPc2": true,
+    "geometryMaterialAndActionIdentityEqualsAcceptedPc2": true,
+    "videoWidth": 640,
+    "videoHeight": 360,
+    "videoFrames": 288,
+    "videoFps": 24,
+    "temporaryExrRetained": 0,
+    "sourceSha256BeforeAfterExact": true
+  },
+  "delayedHumanReview": {
+    "statusBeforeMachinePass": "NOT_OPEN",
+    "artifacts": ["baseline A video", "integrated B video", "six-panel A/B contact sheet"],
+    "questions": [
+      {"id": "Q1", "text": "Compared with A, does B materially improve modeling detail?", "answers": ["YES", "NO"]},
+      {"id": "Q2", "text": "Compared with A, does B make the character and mechanism action feel more layered and intentional?", "answers": ["YES", "NO"]},
+      {"id": "Q3", "text": "Does B retain the lighting and camera strengths you liked in A?", "answers": ["YES", "NO"]},
+      {"id": "Q4", "text": "Do you prefer B overall as the next project baseline?", "answers": ["YES", "NO"]}
+    ],
+    "modelMayAnswerForOwner": false,
+    "allFourAnswersRequiredForFinalPc3Verdict": true
+  },
+  "formalAttempt": {"evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.3-2026-08-31-mac-m2max-attempt-01", "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.3-2026-08-31-mac-m2max-attempt-01", "mustBeFresh": true, "BlenderStarts": 2, "renderCalls": 288, "ffmpegProcesses": 1, "ffprobeProcesses": 1, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0},
+  "resourceCeilings": {"minimumFreeReserveBytes": 107374182400, "evidenceBytes": 268435456, "workBytes": 1073741824, "wallSecondsPerBlenderProcess": 600, "peakRssBytesPerProcess": 2147483648},
+  "negativeControls": ["missing, duplicate, non-finite or wrong-size frame fails", "wrong camera routing fails", "retained EXR fails", "source or accepted PC.2 identity drift fails", "machine metrics cannot substitute for owner answers", "human questions cannot open before a sealed machine PASS"],
+  "stopRules": ["Freeze exact render, reopen/pixel audit, runner and final machine auditor before first render.", "Retain the first formal root as PASS, FAIL or HUMAN_PENDING without overwrite.", "Do not change thresholds after viewing the integrated frames or video.", "Do not claim final PC.3 PASS until exact owner answers are recorded and independently audited."],
+  "claimCeiling": "Machine PASS may prove one integrated 288-frame arm64 review slice with exact identities and measurable difference from A. Final PC.3 may only add the owner's bounded A/B judgment; neither proves final-film quality, production readiness or autonomous filmmaking.",
+  "specHash": "4a7a1f8472f8a81fc01041538ec8a08d3e165b0b2fe6bcc9e64a00de8d98548c"
+}
