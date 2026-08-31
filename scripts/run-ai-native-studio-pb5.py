@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PREREG = ROOT / "specs/ai-native-studio-pb5-restart-safe-preregistration.v0.1.json"
-MANIFEST_URI = "specs/ai-native-studio-pb5-render-job-attempt-01.v0.2.json"
+MANIFEST_URI = "specs/ai-native-studio-pb5-render-job-attempt-01.v0.3.json"
 MANIFEST = ROOT / MANIFEST_URI
 SOURCE_ROOT = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.5-2026-08-31-mac-m2max-attempt-01/source")
 BUILD_ROOT = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.5-2026-08-31-mac-m2max-attempt-01/build")
