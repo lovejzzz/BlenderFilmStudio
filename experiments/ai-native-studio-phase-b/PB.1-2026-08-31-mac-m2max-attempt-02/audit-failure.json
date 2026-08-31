@@ -1,0 +1,375 @@
+{
+  "schemaVersion": "bfs.pb1ValidationOnlyC1Attempt02FailureAudit.v0.6",
+  "gate": "PB.1",
+  "mode": "VALIDATION_ONLY_C1_ATTEMPT02_FAILURE",
+  "observedAt": "2026-08-31T02:10:59.631Z",
+  "status": "FAIL",
+  "classification": "RETAINED_HARNESS_ORDERING_FAILURE_BEFORE_LFS_MATERIALIZATION",
+  "rootCause": "The exact publication checkout ran before the fresh objects symlink was created. Even with smudge skipped, Git LFS created an empty 6,424-directory hash skeleton under .git/lfs/objects; the runner then correctly rejected the non-absent path before any LFS checkout.",
+  "correctionRequirement": "A new versioned runner must assert .git/lfs/objects absent immediately after the no-checkout local clone, create the exact retained-objects symlink, and only then checkout the publication HEAD. It must not delete, repair or retry attempt-02 in place.",
+  "auditor": {
+    "path": "scripts/audit-ai-native-studio-pb1-validation-only-c1-attempt02-failure.mjs",
+    "sha256": "164b164ef9b0a078d5281c4e62f3ed442eac186d07d8d3764be86db829e013ea",
+    "importsRunner": false
+  },
+  "runner": {
+    "path": "scripts/run-ai-native-studio-pb1-validation-only-c1.mjs",
+    "sha256": "8b9489d625a5865f3e4304c01480dbcc966ab033e69a80054fe9ab87cf94ec9c"
+  },
+  "specification": {
+    "path": "specs/ai-native-studio-pb1-validation-only-c1-execution.v0.5.json",
+    "sha256": "69faa7f9699a96745b1da2bce234cef3fcd97da44ad28ee36fb4b841c0aee912"
+  },
+  "request": {
+    "path": "specs/ai-native-studio-pb1-validation-only-c1-authorization-request.v0.4.json",
+    "sha256": "b639ea9c9c02528abefb4268f16b27cb1a7cf17bad4cec592b47c55e8e62ab93"
+  },
+  "failureReceiptHash": "9df179aded8181e770d13ad83b1985c56dc562e601b46051de6658e3bdb6d654",
+  "verdictReceiptHash": "2ab9aeb68184c06c23d2d05501c3a7e57eeda3faa267543f94372284957b3f74",
+  "sourceObjectsSkeleton": {
+    "directories": 6424,
+    "files": 0,
+    "bytes": 0,
+    "symlinks": 0,
+    "directoryListSha256": "45277a6629caee63caf23c68e8c8959bec1e6478bdca657e6511209191c7b654"
+  },
+  "lfsSummary": {
+    "count": 6669,
+    "contentBytes": 812388053,
+    "downloadedCount": 0,
+    "checkoutCount": 1
+  },
+  "retainedWholeTree": {
+    "state": "PRESENT",
+    "files": 10406,
+    "bytes": 810236112,
+    "manifestSha256": "14fdeec1290344f062a44a4d8a6ba27eae4e77af0a784165c1b21ffe26e090bd"
+  },
+  "retainedObjects": {
+    "state": "PRESENT",
+    "files": 6488,
+    "bytes": 810236112,
+    "manifestSha256": "f392cbbc4e6db312a0c1ee704bf24080e18a02889bf6ef02f619e21f2910cafd"
+  },
+  "retainedTmp": {
+    "files": 3918,
+    "bytes": 0,
+    "pathListSha256": "a16ba92a830918b128e484f128c12178a7359539528280afd1c07f6395203804"
+  },
+  "liveRemote": {
+    "id": 1351574987,
+    "fullName": "lovejzzz/film-engine",
+    "fork": true,
+    "parent": "blender/blender",
+    "visibility": "public",
+    "private": false,
+    "heads": [
+      {
+        "oid": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+        "ref": "refs/heads/main"
+      }
+    ],
+    "tags": [],
+    "main": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "pulls": 0,
+    "releases": 0
+  },
+  "checksPassed": 29,
+  "checksTotal": 30,
+  "checks": [
+    {
+      "id": "AUDITOR_INDEPENDENT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "AUTHORIZATION_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "CONTRACT_REQUEST_RUNNER_BINDINGS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_preflight",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_negative",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_failure",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_verdict",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "PREFLIGHT_ACCEPTED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "NINE_NEGATIVE_CONTROLS_PASS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "EXPECTED_STOP_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_HEAD_TREE_PARENT_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_CLEAN_NONSHALLOW_COMPLETE",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_LOCAL_FETCH_REMOTE_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_PUSH_DISABLED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_LFS_NETWORK_DISABLED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LFS_OBJECT_PATH_IS_DIRECTORY_NOT_LINK",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LFS_OBJECT_SKELETON_EMPTY",
+      "pass": true,
+      "observed": {
+        "directories": 6424,
+        "files": 0,
+        "bytes": 0,
+        "symlinks": 0,
+        "directoryListSha256": "45277a6629caee63caf23c68e8c8959bec1e6478bdca657e6511209191c7b654"
+      },
+      "expected": "nonzero empty directories and zero files/bytes/symlinks"
+    },
+    {
+      "id": "NO_LFS_OBJECT_DOWNLOADED",
+      "pass": true,
+      "observed": {
+        "count": 6669,
+        "contentBytes": 812388053,
+        "downloadedCount": 0,
+        "checkoutCount": 1
+      },
+      "expected": {
+        "count": 6669,
+        "contentBytes": 812388053,
+        "downloadedCount": 0
+      }
+    },
+    {
+      "id": "RETAINED_WHOLE_STORAGE_UNCHANGED",
+      "pass": true,
+      "observed": {
+        "state": "PRESENT",
+        "files": 10406,
+        "bytes": 810236112,
+        "manifestSha256": "14fdeec1290344f062a44a4d8a6ba27eae4e77af0a784165c1b21ffe26e090bd"
+      },
+      "expected": {
+        "state": "PRESENT",
+        "files": 10406,
+        "bytes": 810236112,
+        "manifestSha256": "14fdeec1290344f062a44a4d8a6ba27eae4e77af0a784165c1b21ffe26e090bd"
+      }
+    },
+    {
+      "id": "RETAINED_OBJECTS_EXACT",
+      "pass": true,
+      "observed": {
+        "state": "PRESENT",
+        "files": 6488,
+        "bytes": 810236112,
+        "manifestSha256": "f392cbbc4e6db312a0c1ee704bf24080e18a02889bf6ef02f619e21f2910cafd"
+      },
+      "expected": {
+        "files": 6488,
+        "bytes": 810236112,
+        "manifestSha256": "f392cbbc4e6db312a0c1ee704bf24080e18a02889bf6ef02f619e21f2910cafd"
+      }
+    },
+    {
+      "id": "RETAINED_TMP_PRESERVED",
+      "pass": true,
+      "observed": {
+        "files": 3918,
+        "bytes": 0,
+        "pathListSha256": "a16ba92a830918b128e484f128c12178a7359539528280afd1c07f6395203804"
+      },
+      "expected": {
+        "files": 3918,
+        "bytes": 0,
+        "pathListSha256": "a16ba92a830918b128e484f128c12178a7359539528280afd1c07f6395203804"
+      }
+    },
+    {
+      "id": "LIVE_PUBLIC_FORK_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "LIVE_MAIN_REFSET_UNCHANGED",
+      "pass": true,
+      "observed": {
+        "id": 1351574987,
+        "fullName": "lovejzzz/film-engine",
+        "fork": true,
+        "parent": "blender/blender",
+        "visibility": "public",
+        "private": false,
+        "heads": [
+          {
+            "oid": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+            "ref": "refs/heads/main"
+          }
+        ],
+        "tags": [],
+        "main": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+        "pulls": 0,
+        "releases": 0
+      },
+      "expected": "single exact main; zero tags, PRs and releases"
+    },
+    {
+      "id": "ONLY_ONE_LOCAL_CLONE_CONSUMED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "ALL_FORBIDDEN_COUNTERS_ZERO",
+      "pass": true,
+      "observed": {
+        "publicEngineNetworkClones": 0,
+        "localEngineClones": 1,
+        "freshObjectsSymlinks": 0,
+        "localLfsMaterializations": 0,
+        "localDependencyClones": 0,
+        "nativeBuilds": 0,
+        "productStarts": 0,
+        "renders": 0,
+        "engineRemoteWrites": 0,
+        "engineRefUpdates": 0,
+        "lfsNetworkDownloads": 0,
+        "lfsUploads": 0,
+        "releases": 0,
+        "signing": 0,
+        "notarization": 0,
+        "dmg": 0,
+        "pb2ThroughPb7": 0,
+        "modelCalls": 0
+      },
+      "expected": "all forbidden counters zero"
+    },
+    {
+      "id": "NO_DEPENDENCY_BUILD_OR_RUNTIME_ROOT",
+      "pass": false,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "NO_NATIVE_PROCESS_REMAINS",
+      "pass": true,
+      "observed": [],
+      "expected": []
+    },
+    {
+      "id": "EVIDENCE_PREAUDIT_FILESET_EXACT",
+      "pass": true,
+      "observed": [
+        "failure.json",
+        "negative-controls.json",
+        "preflight.json",
+        "verdict.json"
+      ],
+      "expected": [
+        "failure.json",
+        "negative-controls.json",
+        "preflight.json",
+        "verdict.json"
+      ]
+    },
+    {
+      "id": "ROOTS_WITHIN_CEILINGS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "STOP_RULE_PRESERVED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    }
+  ],
+  "failures": [
+    "NO_DEPENDENCY_BUILD_OR_RUNTIME_ROOT"
+  ],
+  "counters": {
+    "publicEngineNetworkClones": 0,
+    "localEngineClones": 1,
+    "freshObjectsSymlinks": 0,
+    "localLfsMaterializations": 0,
+    "localDependencyClones": 0,
+    "nativeBuilds": 0,
+    "productStarts": 0,
+    "renders": 0,
+    "engineRemoteWrites": 0,
+    "engineRefUpdates": 0,
+    "lfsNetworkDownloads": 0,
+    "lfsUploads": 0,
+    "releases": 0,
+    "signing": 0,
+    "notarization": 0,
+    "dmg": 0,
+    "pb2ThroughPb7": 0,
+    "modelCalls": 0
+  },
+  "externalMutationsPerformedByAuditor": 0,
+  "stopRulePreserved": true,
+  "receiptHash": "7dcc68e07355d85a6dd14abc9f17fd68daec09d72ba4fc88b6a3739949f634ec"
+}

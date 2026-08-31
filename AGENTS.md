@@ -62,15 +62,16 @@ Do not retry LFS, delete/recreate/rename the fork, mutate another ref, create a
 release, sign/notarize/distribute a DMG, or begin Phase B without a new explicit
 authorization and versioned protocol.
 
-The next prepared gate is PB.1 validation-only, versioned in
-`research/2026-08-30-ai-native-studio-pb1-validation-only-authorization-request-v0.2.zh-CN.md`
-and `specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json`.
-It binds live `main=4061e12b…` while retaining `fa1b578b…` as its sole parent
-and F0 product-code identity. It is not authorized. General permission to
-continue does not authorize the formal PB.1 roots, engine clone/LFS
-materialization, dependency clone, native build or product starts. Await the
-exact bounded owner authorization in v0.2. Even if granted, it permits no
-engine source edit or remote write and does not authorize PB.2–PB.7.
+PB.1 validation-only is active but not closed. Attempt-01 and C1 attempt-02 are
+retained harness `FAIL` results. Attempt-02 used exact v0.5 owner authorization,
+passed formal preflight and 9/9 negative controls, then consumed one local-only
+clone and stopped before materialization because skip-smudge checkout had created
+6,424 empty LFS hash directories before the frozen runner tried to install its
+`objects` symlink. Its C1 failure audit is 24/24 `PASS`. LFS materializations,
+dependency clones, builds, product starts, renders and every forbidden external
+mutation were 0. A fresh attempt-03 is not authorized. General permission to
+continue does not authorize another clone/materialization/build/start, and PB.2–PB.7
+remain unauthorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design
@@ -126,16 +127,18 @@ checkout/materialization. Read
 `research/2026-08-31-ai-native-studio-pb1-attempt-01-retained-failure.md` before
 any PB.1 correction. PB.2–PB.7 remain unauthorized.
 
-The active PB.1 correction request is
-`specs/ai-native-studio-pb1-validation-only-c1-authorization-request.v0.4.json`.
-It permits no action by itself. General permission to continue does not authorize
-another checkout or materialization; require the exact bounded C1 attempt-02 owner
-authorization before creating its external or evidence root.
+PB.1 validation-only attempt-02 is also a retained harness `FAIL`. Read
+`research/2026-08-31-ai-native-studio-pb1-attempt-02-retained-failure.md` before
+any correction. The runner stopped at `FRESH_LOCAL_LFS_MATERIALIZATION` because
+publication checkout preceded symlink creation. The source contains an empty
+6,424-directory `.git/lfs/objects` skeleton and no LFS object files. Do not delete,
+repair or retry attempt-02 in place.
 
-The proposed v0.5 C1 runner and independent auditor are frozen and self-tested,
-but tool availability is not authorization. They accept a separate versioned
-`--contract`; do not execute them until a new contract records the exact owner grant
-and the research tool-freeze commit is pushed and clean.
+The next admissible correction is a versioned C2 ordering change that creates the
+exact retained-objects symlink after no-checkout clone and before publication
+checkout. Tool preparation may not create a formal root. A new exact owner grant is
+required before attempt-03 may consume another local clone, materialization,
+dependency clone, build or product start.
 
 ## Cold-start execution rules
 

@@ -61,6 +61,13 @@ both a research notebook and an executable evidence base. Read this page,
   storage-scope error at 41/42; C1 independently passed 29/29, proving all immutable
   LFS objects unchanged and recording 3,918 zero-byte tmp files. Another correction
   checkout/materialization is not authorized.
+- **PB.1 C1 attempt-02 retained failure:** exact v0.5 authorization, formal preflight
+  and 9/9 negative controls passed. One local-only clone was consumed, then the runner
+  stopped before LFS checkout because skip-smudge publication checkout had created an
+  empty 6,424-directory `.git/lfs/objects` skeleton before symlink installation. LFS
+  materialization, dependency clone, build, product starts and all forbidden mutations
+  remained 0. The first audit is retained at 29/30; its C1 audit passed 24/24. A fresh
+  attempt-03 is not authorized.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -262,15 +269,13 @@ contract name instead of reading everything.
 
 ## Definition of a useful next checkpoint
 
-The next useful checkpoint is a versioned PB.1 correction authorization. The
-original one public clone and one local materialization were consumed by retained
-attempt-01; dependency clone, native build and product starts remained zero. A
-correction may not start until an exact request authorizes a fresh local-only source
-checkout from retained attempt-01, an additional zero-network materialization with
-tmp isolated in the fresh root, the still-unused dependency/build/start operations,
-and a new immutable evidence root. It permits no engine source edit or remote write
-and does not start PB.2–PB.7. The exact request is frozen in
-`specs/ai-native-studio-pb1-validation-only-c1-authorization-request.v0.4.json`.
+The next useful checkpoint is a versioned PB.1 C2 correction request and exact owner
+authorization for attempt-03. Attempt-02 consumed one local-only clone but stopped
+before its symlink, LFS materialization, dependency clone, native build or product
+starts. C2 must move symlink creation before publication checkout, preserve attempt-02
+unchanged, use a fresh attempt-03 root, and retain every no-network/no-engine-write/
+zero-render/PB.2-PB.7 prohibition. General permission to continue does not authorize
+the new formal root or any of those still-unconsumed operations.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

@@ -1,0 +1,294 @@
+{
+  "schemaVersion": "bfs.pb1ValidationOnlyC1Attempt02FailureAuditC1.v0.7",
+  "gate": "PB.1",
+  "mode": "VALIDATION_ONLY_C1_ATTEMPT02_FAILURE",
+  "observedAt": "2026-08-31T02:12:28.034Z",
+  "status": "PASS",
+  "classification": "RETAINED_HARNESS_ORDERING_FAILURE_BEFORE_LFS_MATERIALIZATION",
+  "retainedFailedAudit": {
+    "path": "audit-failure.json",
+    "receiptHash": "7dcc68e07355d85a6dd14abc9f17fd68daec09d72ba4fc88b6a3739949f634ec",
+    "checksPassed": 29,
+    "checksTotal": 30,
+    "soleFailure": "NO_DEPENDENCY_BUILD_OR_RUNTIME_ROOT"
+  },
+  "failedAuditRootCause": "The first auditor treated the tracked empty gitlink worktree directory lib/macos_arm64 as a completed dependency clone. It contained no .git and no files; the dependency-clone counter, build counter and product-start counter were all zero.",
+  "runnerRootCause": "Publication checkout preceded fresh objects-symlink creation. Git LFS skip-smudge created exactly 6,424 empty hash directories and zero object files/bytes; the runner stopped before LFS checkout.",
+  "correctionRequirement": "A new runner must create the exact objects symlink after no-checkout clone and before publication checkout, with no deletion or retry in attempt-02. A fresh attempt requires a new exact owner authorization.",
+  "auditor": {
+    "path": "scripts/audit-ai-native-studio-pb1-validation-only-c1-attempt02-failure-c1.mjs",
+    "sha256": "e0e2de7ad1056e0f9ffba7f92038e80f023a4af38a9db6ba9969cfe5a0004fee",
+    "importsRunnerOrFailedAuditor": false
+  },
+  "failedAuditor": {
+    "path": "scripts/audit-ai-native-studio-pb1-validation-only-c1-attempt02-failure.mjs",
+    "sha256": "164b164ef9b0a078d5281c4e62f3ed442eac186d07d8d3764be86db829e013ea",
+    "receiptHash": "7dcc68e07355d85a6dd14abc9f17fd68daec09d72ba4fc88b6a3739949f634ec"
+  },
+  "runner": {
+    "path": "scripts/run-ai-native-studio-pb1-validation-only-c1.mjs",
+    "sha256": "8b9489d625a5865f3e4304c01480dbcc966ab033e69a80054fe9ab87cf94ec9c"
+  },
+  "specification": {
+    "path": "specs/ai-native-studio-pb1-validation-only-c1-execution.v0.5.json",
+    "sha256": "69faa7f9699a96745b1da2bce234cef3fcd97da44ad28ee36fb4b841c0aee912"
+  },
+  "request": {
+    "path": "specs/ai-native-studio-pb1-validation-only-c1-authorization-request.v0.4.json",
+    "sha256": "b639ea9c9c02528abefb4268f16b27cb1a7cf17bad4cec592b47c55e8e62ab93"
+  },
+  "failureReceiptHash": "9df179aded8181e770d13ad83b1985c56dc562e601b46051de6658e3bdb6d654",
+  "verdictReceiptHash": "2ab9aeb68184c06c23d2d05501c3a7e57eeda3faa267543f94372284957b3f74",
+  "checksPassed": 24,
+  "checksTotal": 24,
+  "checks": [
+    {
+      "id": "AUDITOR_INDEPENDENT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FAILED_AUDITOR_RETAINED_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FAILED_AUDIT_29_OF_30_SOLE_SCOPE_ERROR",
+      "pass": true,
+      "observed": [
+        "NO_DEPENDENCY_BUILD_OR_RUNTIME_ROOT"
+      ],
+      "expected": [
+        "NO_DEPENDENCY_BUILD_OR_RUNTIME_ROOT"
+      ]
+    },
+    {
+      "id": "AUTHORIZATION_AND_BINDINGS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_preflight",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_negative",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_failure",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RECEIPT_HASH_verdict",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "EXPECTED_FAILURE_AND_STOP",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "SOURCE_IDENTITY_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "NETWORK_WRITES_DISABLED_LOCALLY",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "DEPENDENCY_PATH_IS_EMPTY_TRACKED_GITLINK",
+      "pass": true,
+      "observed": "160000 a76ef917b4849ba2b1b1deb1a643e131a884a63b 0\tlib/macos_arm64",
+      "expected": "160000 a76ef917b4849ba2b1b1deb1a643e131a884a63b 0\tlib/macos_arm64"
+    },
+    {
+      "id": "NO_DEPENDENCY_CLONE_BUILD_OR_RUNTIME",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "EMPTY_LFS_SKELETON_ONLY",
+      "pass": true,
+      "observed": {
+        "directories": 6424,
+        "files": 0,
+        "bytes": 0,
+        "symlinks": 0
+      },
+      "expected": {
+        "directories": 6424,
+        "files": 0,
+        "bytes": 0,
+        "symlinks": 0
+      }
+    },
+    {
+      "id": "RETAINED_WHOLE_STORAGE_UNCHANGED",
+      "pass": true,
+      "observed": {
+        "state": "PRESENT",
+        "files": 10406,
+        "bytes": 810236112,
+        "manifestSha256": "14fdeec1290344f062a44a4d8a6ba27eae4e77af0a784165c1b21ffe26e090bd"
+      },
+      "expected": {
+        "state": "PRESENT",
+        "files": 10406,
+        "bytes": 810236112,
+        "manifestSha256": "14fdeec1290344f062a44a4d8a6ba27eae4e77af0a784165c1b21ffe26e090bd"
+      }
+    },
+    {
+      "id": "RETAINED_OBJECTS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "RETAINED_TMP_EXACT",
+      "pass": true,
+      "observed": {
+        "files": 3918,
+        "bytes": 0,
+        "pathListSha256": "a16ba92a830918b128e484f128c12178a7359539528280afd1c07f6395203804"
+      },
+      "expected": {
+        "files": 3918,
+        "bytes": 0,
+        "pathListSha256": "a16ba92a830918b128e484f128c12178a7359539528280afd1c07f6395203804"
+      }
+    },
+    {
+      "id": "LIVE_PUBLIC_FORK_AND_REFSET_EXACT",
+      "pass": true,
+      "observed": {
+        "id": 1351574987,
+        "fullName": "lovejzzz/film-engine",
+        "fork": true,
+        "parent": "blender/blender",
+        "visibility": "public",
+        "private": false,
+        "heads": [
+          {
+            "oid": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+            "ref": "refs/heads/main"
+          }
+        ],
+        "tags": [],
+        "main": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+        "pulls": 0,
+        "releases": 0
+      },
+      "expected": "exact public fork and single unchanged main"
+    },
+    {
+      "id": "COUNTERS_EXACT",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "FORBIDDEN_COUNTERS_ZERO",
+      "pass": true,
+      "observed": {
+        "publicEngineNetworkClones": 0,
+        "localEngineClones": 1,
+        "freshObjectsSymlinks": 0,
+        "localLfsMaterializations": 0,
+        "localDependencyClones": 0,
+        "nativeBuilds": 0,
+        "productStarts": 0,
+        "renders": 0,
+        "engineRemoteWrites": 0,
+        "engineRefUpdates": 0,
+        "lfsNetworkDownloads": 0,
+        "lfsUploads": 0,
+        "releases": 0,
+        "signing": 0,
+        "notarization": 0,
+        "dmg": 0,
+        "pb2ThroughPb7": 0,
+        "modelCalls": 0
+      },
+      "expected": "all forbidden counters zero"
+    },
+    {
+      "id": "NO_NATIVE_PROCESS_REMAINS",
+      "pass": true,
+      "observed": [],
+      "expected": []
+    },
+    {
+      "id": "EVIDENCE_PREAUDIT_FILESET_EXACT",
+      "pass": true,
+      "observed": [
+        "audit-failure.json",
+        "failure.json",
+        "negative-controls.json",
+        "preflight.json",
+        "verdict.json"
+      ],
+      "expected": [
+        "audit-failure.json",
+        "failure.json",
+        "negative-controls.json",
+        "preflight.json",
+        "verdict.json"
+      ]
+    },
+    {
+      "id": "ROOTS_WITHIN_CEILINGS",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    },
+    {
+      "id": "STOP_RULE_PRESERVED",
+      "pass": true,
+      "observed": null,
+      "expected": true
+    }
+  ],
+  "failures": [],
+  "counters": {
+    "publicEngineNetworkClones": 0,
+    "localEngineClones": 1,
+    "freshObjectsSymlinks": 0,
+    "localLfsMaterializations": 0,
+    "localDependencyClones": 0,
+    "nativeBuilds": 0,
+    "productStarts": 0,
+    "renders": 0,
+    "engineRemoteWrites": 0,
+    "engineRefUpdates": 0,
+    "lfsNetworkDownloads": 0,
+    "lfsUploads": 0,
+    "releases": 0,
+    "signing": 0,
+    "notarization": 0,
+    "dmg": 0,
+    "pb2ThroughPb7": 0,
+    "modelCalls": 0
+  },
+  "externalMutationsPerformedByAuditor": 0,
+  "stopRulePreserved": true,
+  "receiptHash": "f8c5b4d04e9aa2ddff5cd3a28c0c49a5fd7675b2d14675cfeb63e7cdd8b7baec"
+}

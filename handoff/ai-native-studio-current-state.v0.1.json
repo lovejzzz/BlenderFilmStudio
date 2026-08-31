@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_ATTEMPT01_RETAINED_FAIL",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_ATTEMPT02_RETAINED_FAIL",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -177,21 +177,11 @@
     "phaseBMutationAuthorized": false
   },
   "phaseBPreparation": {
-    "status": "PB1_ATTEMPT01_RETAINED_FAIL_CORRECTION_AUTHORIZATION_REQUIRED",
+    "status": "PB1_ATTEMPT02_RETAINED_FAIL_C2_AUTHORIZATION_REQUIRED",
     "gate": "PB.1",
     "mode": "VALIDATION_ONLY_NO_ENGINE_SOURCE_MUTATION_NO_ENGINE_REMOTE_WRITE",
-    "authorizationRequest": "specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json",
-    "authorizationRequestSha256": "333944ee8d6ee8945cebd0278c5ce3f410b16342dda29e4d0d666f1a54b26ec7",
-    "document": "research/2026-08-31-ai-native-studio-pb1-validation-only-execution-authorization-v0.3.zh-CN.md",
-    "documentSha256": "68984168fb6575b06b89bf9af28ea8ef8f8818dd47d138394e65066cdbf5998c",
-    "machineContract": "specs/ai-native-studio-pb1-validation-only-execution.v0.3.json",
-    "machineContractSha256": "a12a2ac1736aec2e079bb32c617babb67b9efa37b7844792fdf3b8e28f5a99c5",
     "publicationHead": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
     "f0CodeIdentityParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
-    "authorized": true,
-    "maximumNativeBuildsIfAuthorized": 1,
-    "maximumProductStartsIfAuthorized": 2,
-    "maximumRendersIfAuthorized": 0,
     "engineSourceEditsAuthorized": 0,
     "engineRemoteWritesAuthorized": 0,
     "pb2ThroughPb7Authorized": false,
@@ -201,7 +191,6 @@
       "failedStage": "HISTORY_AND_SOURCE_IDENTITY",
       "failureReceiptHash": "2f994d40bab4647c770b6c90ee93a921be5a72453a26d49525c44b31c5b35083",
       "verdictReceiptHash": "2887f81e445ad54fb3d555d3f1f55938b95158bdb527b0d2e672ca0419807af4",
-      "failedAuditReceiptHash": "72f4ed90ef9325504a0339001ceddfdf32dcd9b4a4e379e995ad9682c6ba78c4",
       "acceptedFailureAuditReceiptHash": "e0fb3dd1758d0a9dc462acd618f0b95089abfea67f46f2a35e29e07342d82222",
       "acceptedFailureAuditChecks": 29,
       "publicEngineNetworkClones": 1,
@@ -211,36 +200,47 @@
       "productStarts": 0,
       "renders": 0,
       "engineRemoteWrites": 0,
-      "rootCause": "F0 parent numstat was evaluated under C1 exact-path attributes; exact former pointer paths became binary, yielding 837/64 plus two binary paths instead of retained-context 841/68",
-      "correctionAuthorized": false
+      "rootCause": "F0 parent numstat was evaluated under C1 exact-path attributes; exact former pointer paths became binary, yielding 837/64 plus two binary paths instead of retained-context 841/68"
     },
-    "activeCorrectionRequest": {
-      "status": "BLOCKED_AWAITING_EXPLICIT_OWNER_AUTHORIZATION",
-      "document": "research/2026-08-31-ai-native-studio-pb1-validation-only-c1-authorization-request-v0.4.zh-CN.md",
-      "documentSha256": "c038fcda3d6922d7e11832565f25d5372846417071777600e7e82366a7d4a413",
-      "machineContract": "specs/ai-native-studio-pb1-validation-only-c1-authorization-request.v0.4.json",
-      "machineContractSha256": "b639ea9c9c02528abefb4268f16b27cb1a7cf17bad4cec592b47c55e8e62ab93",
-      "publicEngineNetworkClonesRequested": 0,
-      "localEngineClonesRequested": 1,
-      "additionalLocalLfsMaterializationsRequested": 1,
-      "localDependencyClonesRequested": 1,
-      "nativeBuildsRequested": 1,
-      "maximumProductStartsRequested": 2,
-      "rendersRequested": 0,
-      "engineRemoteWritesRequested": 0,
-      "pb2ThroughPb7Requested": false,
-      "authorized": false,
-      "toolFreezePrepared": {
-        "document": "research/2026-08-31-ai-native-studio-pb1-validation-only-c1-tool-freeze-v0.5.md",
-        "documentSha256": "1b5ee58327c9de6b63333ce5105fa8353e7ee1232cd6bbea0d449c53a4a94cb9",
-        "runner": "scripts/run-ai-native-studio-pb1-validation-only-c1.mjs",
-        "runnerSha256": "8b9489d625a5865f3e4304c01480dbcc966ab033e69a80054fe9ab87cf94ec9c",
-        "runnerSelfTest": "PASS_9_OF_9",
-        "auditor": "scripts/audit-ai-native-studio-pb1-validation-only-c1.mjs",
-        "auditorSha256": "58b1b3b0971d22a31d113de8a25384be3e8807e4d99a0f74739a54caede9ec7c",
-        "auditorSelfTest": "PASS_5_OF_5",
-        "formalExecutionAuthorized": false
-      }
+    "attempt02": {
+      "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02",
+      "externalRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-31-mac-m2max-attempt-02",
+      "status": "FAIL",
+      "authorizationResearchCommit": "02672681d1bb1c984be3cb77952d7feccc54a47c",
+      "authorizationDocument": "research/2026-08-31-ai-native-studio-pb1-validation-only-c1-execution-authorization-v0.5.zh-CN.md",
+      "authorizationDocumentSha256": "70078cc2e5b940561a0208e7d0d7d428b44853612e0e942e58c9f9912b95db9a",
+      "executionContract": "specs/ai-native-studio-pb1-validation-only-c1-execution.v0.5.json",
+      "executionContractSha256": "69faa7f9699a96745b1da2bce234cef3fcd97da44ad28ee36fb4b841c0aee912",
+      "failedStage": "FRESH_LOCAL_LFS_MATERIALIZATION",
+      "failureReceiptHash": "9df179aded8181e770d13ad83b1985c56dc562e601b46051de6658e3bdb6d654",
+      "verdictReceiptHash": "2ab9aeb68184c06c23d2d05501c3a7e57eeda3faa267543f94372284957b3f74",
+      "failedAuditReceiptHash": "7dcc68e07355d85a6dd14abc9f17fd68daec09d72ba4fc88b6a3739949f634ec",
+      "failedAuditChecks": "29/30",
+      "acceptedFailureAuditReceiptHash": "f8c5b4d04e9aa2ddff5cd3a28c0c49a5fd7675b2d14675cfeb63e7cdd8b7baec",
+      "acceptedFailureAuditChecks": 24,
+      "localEngineClones": 1,
+      "freshObjectsSymlinks": 0,
+      "localLfsMaterializations": 0,
+      "localDependencyClones": 0,
+      "nativeBuilds": 0,
+      "productStarts": 0,
+      "renders": 0,
+      "publicEngineNetworkClones": 0,
+      "engineRemoteWrites": 0,
+      "emptyLfsObjectDirectories": 6424,
+      "localLfsObjectFiles": 0,
+      "localLfsObjectBytes": 0,
+      "rootCause": "Publication checkout ran before the fresh objects symlink was created; skip-smudge checkout created an empty hash-directory skeleton and the runner stopped before LFS checkout"
+    },
+    "activeCorrection": {
+      "status": "C2_ORDERING_CORRECTION_AND_EXACT_OWNER_AUTHORIZATION_REQUIRED",
+      "requiredChange": "Create the exact retained-objects symlink after no-checkout local clone and before publication checkout",
+      "attempt02MustRemainImmutable": true,
+      "attempt03FormalRootAuthorized": false,
+      "anotherLocalEngineCloneAuthorized": false,
+      "anotherLocalLfsMaterializationAuthorized": false,
+      "nativeBuildAuthorized": false,
+      "productStartsAuthorized": 0
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -555,7 +555,15 @@
     "experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/verdict.json",
     "experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json",
     "research/2026-08-30-ai-native-studio-pb1-validation-only-authorization-request-v0.2.zh-CN.md",
-    "specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json"
+    "specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json",
+    "research/2026-08-31-ai-native-studio-pb1-attempt-01-retained-failure.md",
+    "research/2026-08-31-ai-native-studio-pb1-validation-only-c1-authorization-request-v0.4.zh-CN.md",
+    "specs/ai-native-studio-pb1-validation-only-c1-authorization-request.v0.4.json",
+    "research/2026-08-31-ai-native-studio-pb1-validation-only-c1-execution-authorization-v0.5.zh-CN.md",
+    "specs/ai-native-studio-pb1-validation-only-c1-execution.v0.5.json",
+    "research/2026-08-31-ai-native-studio-pb1-attempt-02-retained-failure.md",
+    "experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/verdict.json",
+    "experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/audit-failure-c1.json"
   ],
   "firstCommands": [
     "git status --short",
@@ -569,8 +577,9 @@
     "cat experiments/ai-native-studio-post-f0/repository-publication-2026-08-30-mac-m2max-attempt-01/audit-failure.json",
     "cat experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/verdict.json",
     "cat experiments/ai-native-studio-post-f0/repository-publication-c1-2026-08-30-mac-m2max-attempt-01/audit.json",
-    "cat specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json",
-    "obtain the exact bounded PB.1 validation-only authorization before creating formal roots, cloning, building or starting the product"
+    "cat experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/verdict.json",
+    "cat experiments/ai-native-studio-phase-b/PB.1-2026-08-31-mac-m2max-attempt-02/audit-failure-c1.json",
+    "read the PB.1 attempt-02 retained failure and obtain a new exact C2 authorization before creating attempt-03 roots, cloning, materializing, building or starting the product"
   ],
   "resourcePolicy": {
     "freeSpaceReserveGiB": 100,
@@ -603,15 +612,15 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB1_VALIDATION_ONLY_EXPLICIT_AUTHORIZATION",
-    "result": "An explicit owner decision authorizing or declining the v0.2 PB.1 validation-only protocol",
+    "gate": "PB1_VALIDATION_ONLY_C2_AUTHORIZATION",
+    "result": "A frozen C2 ordering correction plus an explicit owner decision for fresh attempt-03",
     "requiredArtifacts": [
-      "one public engine read-only clone at exact main 4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
-      "local-only LFS materialization and exact dependency clone with zero network LFS transfer",
-      "one clean native arm64 build and at most two zero-render identity/configuration starts",
-      "research evidence commit and push only",
+      "versioned runner that installs the exact retained-objects symlink before publication checkout",
+      "fresh attempt-03 roots and one additional local-only engine clone only if exactly authorized",
+      "zero-network LFS materialization and exact local dependency clone only if exactly authorized",
+      "one clean native arm64 build and at most two zero-render identity/configuration starts only if exactly authorized",
       "zero film-engine source edits, commits, refs, tags, releases, signing, notarization, DMG actions or PB.2-PB.7 work"
     ],
-    "exactAuthorizationTextSource": "specs/ai-native-studio-pb1-validation-only-authorization-request.v0.2.json#exactRequestedAuthorizationTextZhCN"
+    "formalAttempt03Authorized": false
   }
 }
