@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC4C1StaticInertRejection.v1.3",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-C4-C1-STATIC-INERT-REJECTION-v1.3",
+  "status": "PREREGISTERED_SINGLE_STATIC_ASSERTION_CORRECTION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "700c3179c636b3edd24f537748352ced98836337",
+  "failedToolFreeze": {
+    "uri": "specs/ai-native-studio-pb3-validation-c4-execution-tool-freeze.v1.2.json",
+    "sha256": "78d53431b6838032c12c0535e932e3cc307e18f83a2635963a90ec0829ec8c1d"
+  },
+  "failedStaticAuditor": {
+    "uri": "scripts/audit-ai-native-studio-pb3-tool-freeze-c4.py",
+    "sha256": "83c9e27abd8c6af3c54ccb4df7150ffa6931f1da784724b4182aa97a0cc65f42"
+  },
+  "failedEvidence": {
+    "uri": "experiments/ai-native-studio-phase-b/PB.3-c4-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+    "sha256": "890c64e41846c7dca83fa496a593ad0999735e6f45b459e766c82aa49cd757a1",
+    "selfHash": "f2be8eb9bc4ada141e3137c3563c1ffddbbb636bb82a10db4c56e5c45bc704c5",
+    "checks": "31/32",
+    "rootManifest": {
+      "regularFiles": 1,
+      "regularFileBytes": 3084,
+      "manifestSha256": "64aaedd8de5e45d55ecf72b5805ba1d1b41a5d35501f64754354cbb718a9a813"
+    }
+  },
+  "observed": {
+    "inertExitCode": 1,
+    "actualMessage": "PB.3 C4 execution is not authorized",
+    "incorrectExpectedSubstring": "authorization text differs",
+    "attempt03RootsCreated": 0,
+    "blenderStarts": 0
+  },
+  "selectedIntervention": {
+    "newStaticAuditor": "scripts/audit-ai-native-studio-pb3-tool-freeze-c4-c1.py",
+    "onlyAllowedSourceChange": "Change the inertTemplateRejected message predicate to require PB.3 C4 execution is not authorized while preserving the nonzero exit requirement.",
+    "runnerChanged": false,
+    "independentAuditorChanged": false,
+    "blenderHelperChanged": false,
+    "correctedToolChanged": false,
+    "authorizationRequestChanged": false,
+    "semanticThresholdChanged": false
+  },
+  "futureToolFreeze": "specs/ai-native-studio-pb3-validation-c4-c1-execution-tool-freeze.v1.3.json",
+  "futureTemplate": "specs/ai-native-studio-pb3-validation-execution-c4-c1-template.v1.4.json",
+  "futureStaticEvidenceRoot": "experiments/ai-native-studio-phase-b/PB.3-c4-c1-tool-freeze-2026-08-31-mac-m2max-attempt-02",
+  "stillUnauthorized": [
+    "editing or deleting the failed static audit root",
+    "creating attempt-03 work or evidence roots",
+    "any Blender start, proposal execution, BuildPlan write, render, network call or engine mutation",
+    "weakening any C4 semantic, no-artifact, resource or count threshold"
+  ],
+  "claimCeiling": "C1 corrects one static negative-control message assertion. It provides no new evidence about Blender behavior and grants no formal-run authority."
+}

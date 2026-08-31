@@ -380,7 +380,11 @@ The next checkpoint is an inert versioned correction that normalizes the exact
 tool argv spelling and prevents Blender save-preview thumbnail creation without
 relaxing the no-render-artifact threshold. C4 v1.1 preregisters that exact
 boundary; tooling is not yet implemented and no fresh execution is authorized.
-Do not retry either root, mutate `film-engine`, or begin PB.4–PB.7.
+Initial C4 static audit is retained `FAIL 31/32` because its inert negative
+control expected a later error message than the runner's safe early status
+rejection. C1 v1.3 freezes a one-assertion correction; attempt-03 remains
+absent and unauthorized. Do not retry either formal root, mutate `film-engine`,
+or begin PB.4–PB.7.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
 implied by repository authorization. Any change to the frozen charter requires

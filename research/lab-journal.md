@@ -6211,3 +6211,13 @@ Date: 2026-08-31 · Type: PRE-AUTHORIZATION CORRECTION PREREGISTRATION · Blende
 C4 v1.1在任何tool实现前冻结两项且仅两项intervention：第一，新runner在authority validation/process spawn前把唯一`--tool-contract`值resolve为absolute，保证recorded/reconstructed argv同一拼写；第二，versioned Blender helper在`save_as_mainfile`前设置并断言`preferences.filepaths.file_preview_type == NONE`，从源头阻止OS thumbnail PNG，不删除或豁免attempt-02观察。
 
 Machine contract为`specs/ai-native-studio-pb3-validation-c4-harness-correction.v1.1.json`，SHA-256 `194d3e9d1be415d29646f59ded6be94371e18db13a383d7a48d57a44aa741ece`。Base `noRenderArtifacts`的全work-root extension predicate不改；B01/B02 semantic/provenance/workspace/Expert、4/2/2/2/2/2上限、2 GiB / 64 MiB和zero render/network/engine write全部不改。Attempt-01/02保持immutable，future attempt-03 roots absent，本次计数全0。下一步只实现inert tools与static/negative audit，不启动Blender。
+
+## J-507 · PB.3 C4 tool-freeze attempt-01 static FAIL
+
+Date: 2026-08-31 · Type: RETAINED STATIC TOOL FAILURE · Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C4 versioned helper相对base只增加preview type `NONE`赋值+断言两行；corrected tool只改`tools.blenderProbe`/hash两字段；runner在delegate前normalize absolute tool path；independent auditor保持全root no-render-artifact predicate。Runner self-test PASS，inert template exit 1，attempt-03 roots前后absent。
+
+Static audit为31/32 FAIL，唯一false是`inertTemplateRejected`：auditor预期`authorization text differs`，runner实际在更早、更严格的status gate返回`PB.3 C4 execution is not authorized`。Evidence file/self SHA为`890c64e41846c7dca83fa496a593ad0999735e6f45b459e766c82aa49cd757a1` / `f2be8eb9bc4ada141e3137c3563c1ffddbbb636bb82a10db4c56e5c45bc704c5`，root 1 file / 3,084 bytes / manifest `64aaedd8...`，永久保留。
+
+C1 v1.3只允许新static-auditor path把expected substring改为实际safe status rejection，同时继续要求nonzero exit。Runner、independent auditor、helper、corrected tool、request、thresholds和permissions全部不改。Correction SHA为`cc57d8311dc2bf7cc67434f591ddd44ba5d183731d93dadc5bd648b66442948d`；仍不授权attempt-03或Blender start。

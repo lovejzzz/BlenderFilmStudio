@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationOnlyAuthorizationRequestC4.v1.2",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-ONLY-AUTHORIZATION-REQUEST-C4-v1.2",
+  "status": "AWAITING_EXPLICIT_USER_AUTHORIZATION",
+  "snapshotDate": "2026-08-31",
+  "requestedAuthorization": {
+    "exactText": "我授权启动 PB.3 validation-only C4 attempt-03：基线为 lovejzzz/film-engine public fork main=4061e12bd45a2bec83e68d0cf49abbf56d4738f6 和 PB.1 accepted binary SHA-256=4d7f1744aca10f4edba527af6dd6a2fa12e78725d8c6887b90dbbce5f2b78a59；必须保持 retained PB.3 attempt-01 与 attempt-02 work/evidence roots 完全不变，只允许使用 C4 corrected tool、versioned helper 与冻结的 C4 runner/auditor，且相对 C3 只能在 process creation 前将 --tool-contract 统一为 resolved absolute path，以及在 workspace save 前将 bpy.context.preferences.filepaths.file_preview_type 设为 NONE 并断言；不得放宽 noRenderArtifacts 或任何 semantic/provenance/workspace/resource/count threshold。允许在唯一 fresh PB.3 attempt-03 work/evidence roots 中，对冻结的 B01/B02 各进行一次 approved proposal compile/BuildPlan write、一次 zero-render semantic scene build/workspace save 和一次 zero-render reopen/Expert-state roundtrip，合计最多 4 次 Blender start、2 次 proposal execution、2 次 BuildPlan write、2 次 scene build、2 次 workspace save、2 次 reopen；work root 上限 2,147,483,648 bytes，evidence root 上限 67,108,864 bytes；必须逐字绑定本授权、只允许 execution contract 单路径提交，并独立复核 corrected 13-input roster、exact roots、四组 absolute argv、八份日志、两个 fresh root manifests、两个 retained attempt manifests 以及全work root中零 EXR/PNG/JPG/JPEG/MOV/MP4；允许提交并推送 PB.3 research evidence。不得修改 film-engine source/commit/ref/tag/release，不得进行 engine remote write、network call、render、任意 proposal、proposal-originated Python/shell/filesystem authority、签名、公证、DMG 或 PB.4–PB.7。",
+    "mustName": [
+      "PB.3",
+      "C4 attempt-03",
+      "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+      "retained PB.3 attempt-01 and attempt-02",
+      "--tool-contract resolved absolute path",
+      "file_preview_type NONE",
+      "4 Blender starts",
+      "2 proposal executions",
+      "2 BuildPlan writes",
+      "2,147,483,648 bytes",
+      "67,108,864 bytes",
+      "zero EXR/PNG/JPG/JPEG/MOV/MP4"
+    ],
+    "generalContinueIsInsufficient": true
+  },
+  "requestedMaximums": {
+    "blenderStarts": 4,
+    "proposalExecutions": 2,
+    "buildPlanWrites": 2,
+    "sceneBuilds": 2,
+    "workspaceSaves": 2,
+    "reopens": 2,
+    "renders": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "networkCalls": 0,
+    "workRootBytes": 2147483648,
+    "evidenceRootBytes": 67108864
+  },
+  "requiredInterventions": [
+    "NORMALIZE_TOOL_CONTRACT_ARGV_BEFORE_DELEGATION",
+    "DISABLE_BLEND_FILE_PREVIEW_BEFORE_SAVE"
+  ],
+  "retainedAttempts": [
+    {
+      "id": "attempt-01",
+      "status": "FAIL_PRE_BLENDER_HARNESS_INPUT_HASH",
+      "mustRemainImmutable": true
+    },
+    {
+      "id": "attempt-02",
+      "status": "FAIL_HARNESS_POST_SEMANTIC_EXECUTION",
+      "mustRemainImmutable": true
+    }
+  ],
+  "claimCeiling": "This request seeks one exact PB.3 C4 validation-only attempt. It carries no authority unless the owner supplies exactText verbatim after the complete inert C4 tool freeze passes."
+}
