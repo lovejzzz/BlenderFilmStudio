@@ -224,7 +224,10 @@ not rewritten; new adapters must bind the standing charter explicitly.
   any human response. Its strict recorder and independent auditor are also
   frozen, with 20/20 static checks and a final 27/27 isolated synthetic audit.
   C1 corrects only the v0.1 independent-audit self-hash field semantics; no
-  question, value or verdict mapping changed. The validated two-commit increment was
+  question, value or verdict mapping changed. PB.7 is now accepted `PASS` from
+  exact owner answers `YES YES YES YES` and a 27/27 independent audit. Owner
+  feedback preserves the strengths (lighting/camera) and identifies the next
+  improvement priorities (modeling detail/action complexity). The validated two-commit increment was
   published to `lovejzzz/film-engine/main` by one ordinary non-force fast-forward.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
@@ -447,15 +450,13 @@ no-render-artifact threshold, retained attempts and zero-network ceiling
 frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
 PB.3, PB.4, PB.5 and PB.6 are closed `PASS`; PB.6 is the accepted B62
 three-shot product slice with human review still pending. Do not repair or rerun
-any retained root. PB.7 is preregistered before the response at
-`specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json`: machine
-evidence, four review questions, allowed answers and final mapping are frozen.
-The exact-token recorder and independent auditor are frozen and tested; the
-formal evidence root remains absent. The next checkpoint is the owner's real
-viewing response, followed by an
-immutable `PASS`, `FAIL` or `BLOCKED` receipt without expanding into a
-production-readiness or autonomous-filmmaking claim. The response is evaluation,
-not another authorization sentence.
+any retained root. PB.7 is closed `PASS`: exact owner answers are
+`YES YES YES YES`, human receipt self hash is `0d806411…`, and the independent
+audit is 27/27 with self hash `e02c1dc4…`. PB.1–PB.7 now close this bounded
+product-prototype phase. The next checkpoint is a versioned improvement program
+for the two weaknesses named by the owner—modeling detail and action
+complexity—without expanding the result into a production-readiness or
+autonomous-filmmaking claim.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

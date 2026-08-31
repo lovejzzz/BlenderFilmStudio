@@ -277,8 +277,13 @@ pending. The recorder and independent auditor are frozen by
 pass 20/20 and the final isolated synthetic end-to-end audit passes 27/27. C1
 corrects only the v0.1 independent-audit self-hash field semantics
 (`receiptHash` label versus retained `auditHash`) without changing its value or
-any review criterion. The formal root remains absent. This is product
-evaluation, not another authorization gate.
+any review criterion. PB.7 formal attempt-01 is now accepted `PASS`: the owner
+answered `YES YES YES YES`, qualitative feedback explicitly praises lighting
+and camera work while identifying rough modeling and simple action, and the
+independent audit passes 27/27. Final verdict self hash is `4be072cc…`; human
+receipt self hash is `0d806411…`. PB.1–PB.7 are closed for the bounded product
+prototype. Modeling detail and action complexity are the next evidence-backed
+improvement priorities; no production-readiness claim follows.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "PB.7",
+  "activeGate": "POST_PB7_IMPROVEMENT_PROGRAM_PREREGISTRATION",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -246,8 +246,8 @@
     }
   },
   "phaseBPreparation": {
-    "status": "PB1_PB2_PB3_PB4_PB5_PB6_VALIDATION_PASS_PB7_PREREGISTERED_HUMAN_RESPONSE_PENDING",
-    "gate": "PB.7",
+    "status": "PB1_PB2_PB3_PB4_PB5_PB6_PB7_BOUNDED_PROTOTYPE_PASS",
+    "gate": "COMPLETE",
     "mode": "STANDING_AUTONOMY_WITH_VERSIONED_PROTOCOLS",
     "publicationHead": "aa4fff39ca5d5c4030dec2b8d0d4f576138787ad",
     "f0CodeIdentityParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
@@ -924,7 +924,7 @@
         "researchDocumentFileSha256": "ced0d5b6713e1e460ce78dce4d0bda6242499dfc82366667cfb8376dc4c41acc"
       },
       "pb6": {
-        "status": "PASS_HUMAN_REVIEW_PENDING_UNTIL_PB7",
+        "status": "PASS_HUMAN_REVIEW_COMPLETED_BY_PB7",
         "engineSourceCommit": "aa4fff39ca5d5c4030dec2b8d0d4f576138787ad",
         "engineSourceParent": "373881e1ee659a962e0015c2dac26f7fa981b1bf",
         "binarySha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6",
@@ -947,7 +947,7 @@
         "researchDocumentFileSha256": "35021458d350d117c461817775ff1078190a55c96c0fbb7a95e31471f4e52ad3"
       },
       "pb7": {
-        "status": "PREREGISTERED_HUMAN_RESPONSE_PENDING",
+        "status": "PASS",
         "preregistration": "specs/ai-native-studio-pb7-human-review-preregistration.v0.1.json",
         "preregistrationHash": "524419346bb8d0ec0623bece90447159ffb56f2960135c6dd02c9bc35b5df846",
         "researchDocument": "research/2026-08-31-ai-native-studio-pb7-human-review-preregistration.md",
@@ -970,15 +970,33 @@
         "humanPassRule": "Q1-Q4 all YES",
         "humanFailRule": "any Q1-Q4 NO",
         "humanBlockedRule": "no NO and any UNCERTAIN/UNVIEWABLE or incomplete response",
-        "humanResponseRecorded": false,
-        "formalEvidenceRootExists": false,
+        "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.7-2026-08-31-human-review-attempt-01",
+        "humanReviewFileSha256": "68dc74681b38c8fc82ebe3f0a89c04e1af7523b35a1a610214d4b3080d8ead5b",
+        "humanReviewHash": "0d806411f0845e11134d0d190525e732d8b7898f8185f192fa2e507344cbfc70",
+        "auditFileSha256": "ffe3ae1e205f328bf75d1827d79a9777187df003f55f9f205c0abfb02b4fb7d8",
+        "auditHash": "e02c1dc4e0ba8ff1fe08d88a37e1e97f6738ed0ef0c90f0060dd57653b57c721",
+        "auditChecks": "27/27",
+        "verdictFileSha256": "f1032f12fdf45ac639bc17b407e0448be3746b0f21f436c4de8e52f54e27ff95",
+        "verdictHash": "4be072cc1b483e552c001976434f42a14f72259ada07c72a8dea700b7fe0f6ab",
+        "manifestFileSha256": "038ee73cbbe6bdc1bcea07c82c0c490b180bbcd872489aba4681052a17f021a9",
+        "manifestHash": "f888b173b4d38bbd5418cbe87f0670db31222279698f7b9d10e51607af2dfbad",
+        "humanAnswers": {"Q1": "YES", "Q2": "YES", "Q3": "YES", "Q4": "YES"},
+        "humanVerdict": "PASS",
+        "machineVerdict": "PASS",
+        "overallVerdict": "PASS",
+        "qualitativeFeedback": "我看了视频了，说实话光影和镜头感很好，就是建模太粗糙，动作太简单了。但是我看到非常大的潜力。",
+        "nextImprovementPriorities": ["modeling detail", "action complexity"],
+        "outcomeDocument": "research/2026-08-31-ai-native-studio-pb7-human-review-pass.md",
+        "outcomeDocumentFileSha256": "49cbf99ac44db917bde91b4928d6d1111365703dab9be1ae2bcd083a72e7c465",
+        "humanResponseRecorded": true,
+        "formalEvidenceRootExists": true,
         "engineEdits": 0,
         "builds": 0,
         "productStarts": 0,
         "renders": 0
       },
-      "nextGate": "PB.7",
-      "nextGateStatus": "PB7_PREREGISTERED_HUMAN_RESPONSE_PENDING"
+      "nextGate": "POST_PB7_IMPROVEMENT_PROGRAM_PREREGISTRATION",
+      "nextGateStatus": "PENDING_VERSIONED_MODELING_AND_ACTION_IMPROVEMENT_PROGRAM"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1354,8 +1372,8 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB7_HUMAN_REVIEW_AND_BOUNDED_PROTOTYPE_VERDICT",
-    "result": "PB.7 is preregistered before any human response; collect the owner's frozen four-question viewing response and issue an immutable bounded PASS/FAIL/BLOCKED verdict",
+    "gate": "POST_PB7_IMPROVEMENT_PROGRAM_PREREGISTRATION",
+    "result": "PB.1-PB.7 close bounded prototype PASS; preregister the next versioned improvement program around owner-identified modeling detail and action complexity while retaining lighting/camera strengths",
     "acceptedPb6Evidence": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
     "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
     "audit": "15/15 PASS independent 288-frame/camera/video/attack audit",
@@ -1365,8 +1383,8 @@
     "requiredArtifacts": [
       "retain PB.3 attempts 01-06, PB.4 attempts 01-02, PB.5 attempt-01 and PB.6 attempt-01 immutable",
       "bind PB.6 machine receipts, 288-frame output, review MP4, contact sheet, five failures and independent audit",
-      "retain the preregistered human review questions, reviewer independence and disclosure ordering exactly while recording answers",
-      "allow only PASS, FAIL or BLOCKED and preserve the prototype-only claim ceiling",
+      "retain PB.7 human response, 27/27 audit and bounded PASS immutable",
+      "freeze measurable modeling-detail and action-complexity targets before any new source or render mutation",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]
   }
