@@ -484,7 +484,8 @@ closed; PC.2 action complexity is the active gate. Its v0.1 preregistration is
 frozen at `48bdfa56…`: four causal phases, four independent channels and ten
 authorized non-camera targets, with at least six required to animate. PC.1
 geometry/materials and all protected camera/light states remain exact; tools
-must be frozen before the first zero-render PC.2 start.
+are frozen at `83e0ba88…` before the first zero-render PC.2 start. Fresh
+attempt-01 evidence/work roots remain absent until execution.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

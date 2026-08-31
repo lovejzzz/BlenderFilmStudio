@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc2ToolFreeze.v0.1",
+  "status": "FROZEN_BEFORE_PC2_START",
+  "gate": "PC.2",
+  "preregistration": {"uri": "specs/ai-native-studio-pc2-action-complexity-preregistration.v0.1.json", "sha256": "22f64a770657be9967cde23e734d4f731a0a25240336e9e8505f2989386db565", "specHash": "48bdfa56a480f25b2a894d66edb3fdea3d3037ae2e2ff2e03e2d66a5b74e830e"},
+  "binary": {"path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender", "sha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6", "bytes": 182300520, "architecture": "arm64"},
+  "builder": {"uri": "scripts/build-ai-native-studio-pc2.py", "sha256": "2f0c7abd6f5f861ef6bf9608f31e621f43a25ad73d6fe00dcee9c9f725395a83"},
+  "semanticAuditor": {"uri": "scripts/audit-ai-native-studio-pc2.py", "sha256": "2891f7be72ee744a376b6d281760fcf3111c54d2179d1d6be05e44afcde07da7"},
+  "tools": [
+    {"uri": "scripts/build-ai-native-studio-pc2.py", "sha256": "2f0c7abd6f5f861ef6bf9608f31e621f43a25ad73d6fe00dcee9c9f725395a83", "role": "action builder and one derived save"},
+    {"uri": "scripts/audit-ai-native-studio-pc2.py", "sha256": "2891f7be72ee744a376b6d281760fcf3111c54d2179d1d6be05e44afcde07da7", "role": "zero-save reopen F-curve and identity auditor"},
+    {"uri": "scripts/run-ai-native-studio-pc2.py", "sha256": "b4574e86b8e21c6231af104c207334cd777b55c9d542ad3ba649561db2e51a0f", "role": "two-start fail-closed runner"},
+    {"uri": "scripts/audit-ai-native-studio-pc2.mjs", "sha256": "82cc4d9ee00c8919894a6fff513d216b0c4f738b4f6a797c06427bfcc6e1448c", "role": "independent final auditor and root sealer"}
+  ],
+  "staticChecks": {"pythonCompile": "PASS", "nodeSyntax": "PASS", "builderRenderCalls": 0, "auditorRenderCalls": 0, "builderExternalProcessOrNetworkAuthorities": 0, "auditorExternalProcessOrNetworkAuthorities": 0},
+  "formalRoots": {"evidence": "experiments/ai-native-studio-post-pb7/PC.2-2026-08-31-mac-m2max-attempt-01", "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.2-2026-08-31-mac-m2max-attempt-01", "bothAbsentAtFreeze": true, "symlinksAllowed": false},
+  "operationCeilings": {"BlenderStarts": 2, "renderCalls": 0, "derivedSceneSaves": 1, "sourceSceneSaves": 0, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0},
+  "resourceCeilings": {"minimumFreeReserveBytes": 107374182400, "evidenceBytes": 67108864, "workBytes": 134217728, "wallSeconds": 300, "peakRssBytesPerProcess": 2147483648},
+  "stopRules": ["Stop before root creation on any preregistration, source, binary or tool hash drift.", "Retain attempt-01 unchanged for PASS or FAIL.", "Reject any media artifact, unauthorized target, sub-floor signal, geometry/material drift or protected camera/light/shot drift.", "Do not start PC.3 before a sealed independent PC.2 PASS."],
+  "specHash": "83e0ba8802e1bfea65af4438c0f922523168463c2dcaa3fcf885365a5e865369"
+}

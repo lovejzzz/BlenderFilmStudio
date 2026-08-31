@@ -6549,3 +6549,9 @@ Fresh attempt-04 runner receipt `2a60c050…`与independent 18/18 audit `69cca7c
 Date: 2026-08-31 · Type: PREREGISTRATION · PC.2 Blender starts / renders / saves: 0 / 0 / 0
 
 PC.2冻结四条causal channels：approach weight transfer、contact reach/lock、activation recoil + core mechanism、reflection/breath/shoulder settle。Ten authorized non-camera targets中至少6个须animate，四phase均须通过显式amplitude floor。Accepted PC.1 blend `36389e8f…`为唯一source；其104/92/19,810 geometry、26 detail/3 material roster、camera/light sentinels与shot ranges exact。Formal run为2 starts、0 renders、1 derived save；PC.3前必须independent PASS。
+
+## J-549 · PC.2 zero-render tool freeze
+
+Date: 2026-08-31 · Type: TOOL FREEZE · Formal PC.2 starts / renders / saves: 0 / 0 / 0
+
+Exact builder、reopen F-curve/identity auditor、two-start runner与final independent auditor冻结。Builder只修改preregistered rig/IK/socket、four gimbals与two shoulder fins的action curves并save one derivative；reopen逐点验证frames/amplitudes。Static compile/syntax PASS，builder/auditor render与external-process/network authorities均0。Fresh attempt-01 roots在freeze时absent；geometry/material/camera/light/shot drift或任意media artifact均FAIL。
