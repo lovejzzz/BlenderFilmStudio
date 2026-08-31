@@ -6555,3 +6555,15 @@ PC.2冻结四条causal channels：approach weight transfer、contact reach/lock�
 Date: 2026-08-31 · Type: TOOL FREEZE · Formal PC.2 starts / renders / saves: 0 / 0 / 0
 
 Exact builder、reopen F-curve/identity auditor、two-start runner与final independent auditor冻结。Builder只修改preregistered rig/IK/socket、four gimbals与two shoulder fins的action curves并save one derivative；reopen逐点验证frames/amplitudes。Static compile/syntax PASS，builder/auditor render与external-process/network authorities均0。Fresh attempt-01 roots在freeze时absent；geometry/material/camera/light/shot drift或任意media artifact均FAIL。
+
+## J-550 · PC.2 attempt-01 retained pre-mutation hash failure
+
+Date: 2026-08-31 · Type: RETAINED HARNESS FAILURE · Blender starts / renders / saves: 1 / 0 / 0
+
+First process在任何keyframe insertion前停止于`BASELINE_PROTECTED_STATE`。Accepted PC.1 camera/light JSON结构未变，但Node number spelling hash为`f1937323…`，Python为`bb02b287…`。Source SHA exact，work files 0，action mutation 0。C1只允许按exact file SHA读取accepted PC.1 `build.json`并对`protectedStateAfter`做structural exact compare；fresh attempt-02，其他thresholds/logic/ceilings不变。
+
+## J-551 · PC.2 C1 structural-baseline tool freeze
+
+Date: 2026-08-31 · Type: VERSIONED TOOL FREEZE · Formal attempt-02 starts / renders / saves: 0 / 0 / 0
+
+C1绑定accepted PC.1 build file SHA `a9082991…`，仅将三个protected-state comparison boundaries改为direct structure equality。四个versioned wrappers先验证base tool exact hashes与single patch sites；action phases/amplitudes/targets、geometry/material、camera/light values、shot state、operations/resources全不变。Attempt-01 failure/manifest file+self hashes逐项绑定；fresh attempt-02 roots在freeze时absent。

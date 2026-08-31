@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc2ToolFreezeCorrection.v0.2",
+  "status": "FROZEN_BEFORE_PC2_START",
+  "gate": "PC.2",
+  "correction": "C1",
+  "preregistration": {"uri": "specs/ai-native-studio-pc2-action-complexity-preregistration.v0.1.json", "sha256": "22f64a770657be9967cde23e734d4f731a0a25240336e9e8505f2989386db565", "specHash": "48bdfa56a480f25b2a894d66edb3fdea3d3037ae2e2ff2e03e2d66a5b74e830e"},
+  "baseFreeze": {"uri": "specs/ai-native-studio-pc2-tool-freeze.v0.1.json", "sha256": "e51601f56f058d647e361aa8d675c816725fc861404b7243147c3b9d62441bbf", "specHash": "83e0ba8802e1bfea65af4438c0f922523168463c2dcaa3fcf885365a5e865369"},
+  "retainedAttempt01": {"evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.2-2026-08-31-mac-m2max-attempt-01", "failureFileSha256": "d85bd8fb711fc82f409c58df3ba68625cc8cb1dbf9d064dca96a6d144bfe2ef0", "failureHash": "01b43e045ab448b437d92fcbd914788cbf6f381109dbb6b321ac1429b9d13216", "manifestFileSha256": "a31bc6554d8c18416cafa1033fb197d459f1f1a8c12478cb39fc74194c9029cf", "manifestHash": "4bb70807d0a2e9c988740af87f525d6eb6189567737935856e90ae6ba332ebc1", "immutable": true},
+  "acceptedPc1BuildEvidence": {"uri": "experiments/ai-native-studio-post-pb7/PC.1-2026-08-31-mac-m2max-attempt-04/build.json", "sha256": "a908299143cc4ce62cd135126884c67cee438f7a3f0d937cca1a22738d3d2be5", "buildHash": "4afd893328ef075194bb4e7fc7c3e3a596667a569239a55448708bd5537c8f30"},
+  "binary": {"path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender", "sha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6", "bytes": 182300520, "architecture": "arm64"},
+  "allowedCorrection": {"location": "accepted PC.1 protected camera/light baseline comparison boundaries only", "change": "Bind accepted PC.1 build.json by exact file SHA and compare protectedStateAfter structurally instead of comparing Node- and Python-spelled numeric hashes.", "actionGeometryMaterialCameraLightShotThresholdOperationAndResourceLogicChanged": false},
+  "builder": {"uri": "scripts/build-ai-native-studio-pc2-c1.py", "sha256": "546f801f6fe75a3419fa86521338a2fbb120529f5b444cee36105e57682909cb"},
+  "semanticAuditor": {"uri": "scripts/audit-ai-native-studio-pc2-c1.py", "sha256": "056d2d395cc72fc63bb9949d57ecf5032b4ee2afc087806c5add9dece20e889a"},
+  "tools": [
+    {"uri": "scripts/build-ai-native-studio-pc2.py", "sha256": "2f0c7abd6f5f861ef6bf9608f31e621f43a25ad73d6fe00dcee9c9f725395a83", "role": "frozen base builder"},
+    {"uri": "scripts/audit-ai-native-studio-pc2.py", "sha256": "2891f7be72ee744a376b6d281760fcf3111c54d2179d1d6be05e44afcde07da7", "role": "frozen base semantic auditor"},
+    {"uri": "scripts/run-ai-native-studio-pc2.py", "sha256": "b4574e86b8e21c6231af104c207334cd777b55c9d542ad3ba649561db2e51a0f", "role": "frozen base runner"},
+    {"uri": "scripts/audit-ai-native-studio-pc2.mjs", "sha256": "82cc4d9ee00c8919894a6fff513d216b0c4f738b4f6a797c06427bfcc6e1448c", "role": "frozen base final auditor"},
+    {"uri": "scripts/build-ai-native-studio-pc2-c1.py", "sha256": "546f801f6fe75a3419fa86521338a2fbb120529f5b444cee36105e57682909cb", "role": "single-site structural-baseline builder wrapper"},
+    {"uri": "scripts/audit-ai-native-studio-pc2-c1.py", "sha256": "056d2d395cc72fc63bb9949d57ecf5032b4ee2afc087806c5add9dece20e889a", "role": "single-site structural-baseline semantic wrapper"},
+    {"uri": "scripts/run-ai-native-studio-pc2-c1.py", "sha256": "c8b8ef1a7a3dede27ef2a3204cfe6372ebc99c7637b4796747cad796b8ea7a1d", "role": "fresh attempt-02 runner wrapper"},
+    {"uri": "scripts/audit-ai-native-studio-pc2-c1.mjs", "sha256": "21ed4d641d2c3f5881ff2c7e44f7dbb21e4a7290cd174c483ebfb814fda6b707", "role": "structural-baseline attempt-02 final auditor wrapper"}
+  ],
+  "formalRoots": {"evidence": "experiments/ai-native-studio-post-pb7/PC.2-2026-08-31-mac-m2max-attempt-02", "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.2-2026-08-31-mac-m2max-attempt-02", "bothAbsentAtFreeze": true, "symlinksAllowed": false},
+  "operationCeilings": {"BlenderStarts": 2, "renderCalls": 0, "derivedSceneSaves": 1, "sourceSceneSaves": 0, "networkCalls": 0, "modelCalls": 0, "mouseInteractions": 0},
+  "resourceCeilings": {"minimumFreeReserveBytes": 107374182400, "evidenceBytes": 67108864, "workBytes": 134217728, "wallSeconds": 300, "peakRssBytesPerProcess": 2147483648},
+  "stopRules": ["Retain attempt-01 byte-for-byte.", "Stop before attempt-02 root creation on any binding drift.", "Retain attempt-02 for PASS or FAIL without overwrite.", "Do not start PC.3 before sealed independent PC.2 PASS."],
+  "specHash": "26d100c496a5b76db21585a78e2f36edea7609523f89d2b0b74d06872bcea7c5"
+}

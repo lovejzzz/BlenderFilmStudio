@@ -485,7 +485,11 @@ frozen at `48bdfa56…`: four causal phases, four independent channels and ten
 authorized non-camera targets, with at least six required to animate. PC.1
 geometry/materials and all protected camera/light states remain exact; tools
 are frozen at `83e0ba88…` before the first zero-render PC.2 start. Fresh
-attempt-01 evidence/work roots remain absent until execution.
+attempt-01 stopped before action mutation on another Node/Python number-spelling
+hash mismatch and is sealed (`01b43e04…` / `4bb70807…`). C1 binds accepted
+PC.1 `build.json` and compares the same camera/light state structurally; it is
+frozen at `26d100c4…` for fresh attempt-02 roots. No phase, amplitude, target,
+geometry/material or protected-state value was relaxed.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
