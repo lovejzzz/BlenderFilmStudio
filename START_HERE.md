@@ -203,6 +203,14 @@ not rewritten; new adapters must bind the standing charter explicitly.
   produced different audit hashes. C1 attempt-02 performed no build, Blender
   start or render and independently closed that verifier defect at 25/25 PASS;
   composite receipt hash is `687f2759…`. Both roots are immutable.
+- **PB.5 restart-safe job control PASS:** the three-path / 274-addition product
+  increment built cleanly as native arm64 commit `373881e1…`. Four starts proved
+  PREVIEW + exit-75 interruption, FINAL-only resume, COMPLETE no-op, and three
+  zero-render stale/forged/out-of-budget rejections. Exactly two render calls
+  produced immutable PNG `90d2cf9e…` and EXR `947d2217…`; the 13/13 validation
+  receipt self hash is `1baa24ee…` and the independent audit self hash is
+  `a18a32c3…`. The unexecuted v0.2 stale-self-hash manifest is retained; v0.3
+  is the accepted corrected binding.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -423,14 +431,15 @@ adapter passes 32/32 while keeping the C4 semantic/helper corrections, exact
 no-render-artifact threshold, retained attempts and zero-network ceiling
 frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
 PB.3 is closed `PASS` by C6-C3 attempt-06. PB.4 is closed `PASS` by retained
-attempt-01 product/render evidence plus C1 audit-only attempt-02. Do not repair
-or rerun either retained root. The next checkpoint is PB.5 preregistration for
-restart-safe job control: a controlled interruption may resume only unfinished
-immutable stages, while stale, forged and out-of-budget receipts must reject
-before additional Blender work. PB.5 may proceed under a versioned protocol and
-the standing charter without another authorization sentence.
+attempt-01 product/render evidence plus C1 audit-only attempt-02. PB.5 is closed
+`PASS` by restart-safe attempt-01. Do not repair or rerun any retained root. The
+next checkpoint is PB.6 preregistration for the B62 wide / medium / close
+vertical slice: all three shots must share frozen non-camera state, produce a
+reviewable output, and retain the frame-288 composition rejection without
+weakening the human-quality boundary. PB.6 may proceed under a versioned
+protocol and the standing charter without another authorization sentence.
 
-No Developer ID, notarization or unsigned-DMG distribution is implied by PB.4.
+No Developer ID, notarization or unsigned-DMG distribution is implied by PB.5.
 Any change to the frozen charter requires a new version, not an in-place edit.
 
 ## Public routes

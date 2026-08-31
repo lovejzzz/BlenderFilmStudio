@@ -6375,3 +6375,11 @@ Date: 2026-08-31 · Type: PRODUCT MUTATION PREREGISTRATION · PB.5 builds / star
 PB.5冻结product-owned immutable-stage resume planner与visible `Resume Next Approved Stage`：start-1完成并fsync PREVIEW后exit 75受控中断，start-2必须skip PREVIEW只做FINAL，start-3 COMPLETE no-op，start-4以零render复核stale/forged/out-of-budget三攻击并独立decode pixels/passes。总计上限1 clean build / 4 starts / 2 renders。
 
 源码仍限三个Python paths、≤500 additions、零C/C++。Fresh external/evidence roots，work/evidence 2 GiB / 512 MiB。Legacy F0 preflight因157 GiB < 160 GiB正确显示BLOCKED；PB.5 JIT projection冻结为12 GiB，100 GiB reserve + projection = 112 GiB，当前admitted但build前必须重算。Force/other refs/tags/releases/LFS/sign/notary/distribution/PB.6均0。
+
+## J-525 · PB.5 restart-safe job control PASS
+
+Date: 2026-08-31 · Type: ACCEPTED PB.5 VALIDATION · Builds / starts / renders: 1 / 4 / 2
+
+三个Python产品路径的274 additions / 10 deletions clean build为native arm64，binary SHA `8b9e680b...`。正式start-1在fsynced PREVIEW后exit 75；start-2只续跑FINAL且preview exact immutable；start-3 COMPLETE no-op；start-4以零render拒绝stale、forged和zero-budget攻击并完成独立OpenImageIO audit。总receipt 13/13 PASS，self hash `1baa24ee...`；audit self hash `a18a32c...`。Preview/final SHA分别为`90d2cf9e...` / `947d2217...`。
+
+v0.2 manifest在任何formal root/product start前暴露最后tool-freeze绑定后的stale self hash，作为未执行冻结清单保留；v0.3只做versioned binding correction并由runner fail-closed校验。0 model/network/mouse/release/sign/notary/distribution。PB.5 closed；下一gate为PB.6 B62 three-shot vertical slice preregistration，frame-288构图拒绝不得放宽。

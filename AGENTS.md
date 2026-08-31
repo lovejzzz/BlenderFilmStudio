@@ -258,9 +258,14 @@ Python serialized `0.0` while Node reserialized the same JSON number as `0`.
 C1 audit-only attempt-02 validates the producer-native hash and the complete
 retained root at 25/25 with receipt hash `687f2759…`; it performed zero builds,
 Blender starts, renders, source mutations or network calls. Never repair either
-PB.4 root in place. The next gate is PB.5 restart-safe job control: preregister
-controlled interruption/resume and stale/forged/out-of-budget pre-work
-rejections before any PB.5 mutation. PB.5–PB.7 may advance under versioned
+PB.4 root in place. PB.5 is also closed `PASS` at engine commit `373881e1…`:
+one controlled PREVIEW interruption resumed FINAL only, completed resume was a
+no-op, and stale/forged/out-of-budget attacks rejected with zero render calls.
+Its validation receipt self hash is `1baa24ee…`; independent audit self hash is
+`a18a32c3…`. Retain the unexecuted invalid-self-hash v0.2 manifest and accepted
+v0.3/evidence root unchanged. The next gate is PB.6 B62 three-shot vertical
+slice; preregister shared non-camera state, review output and the unchanged
+frame-288 composition rejection. PB.6–PB.7 may advance under versioned
 protocols and the standing charter without another owner sentence.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
