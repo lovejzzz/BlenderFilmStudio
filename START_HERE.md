@@ -40,8 +40,8 @@ not rewritten; new adapters must bind the standing charter explicitly.
   official `v5.2.1` commit `9e2066aef7ef7e20c142ad7bd3303138a4304c93`.
 - **Completed experiment:** `F0-SOURCE-FEASIBILITY`. All seven gates are
   `PASS`. The post-F0 repository/Phase B charter is frozen at commit
-  `6a38ca3b…`; repository creation was later authorized, while Phase B remains
-  unauthorized.
+  `6a38ca3b…`; repository creation was later authorized, and Phase B is now
+  governed by the active standing-autonomy charter plus versioned protocols.
 - **Repository readiness:** the current F0 checkout is shallow (1,165 reachable
   commits), so direct push from it was rejected as a full-history strategy.
   A read-only GitHub Blender mirror plus local-only graft/push rehearsal closed
@@ -62,7 +62,8 @@ not rewritten; new adapters must bind the standing charter explicitly.
   Fresh local and GitHub no-smudge clones materialized both unchanged binaries.
   One exact `08bed5b5…`-bound lease push updated only `main`; LFS uploads,
   other refs/tags, releases and Phase B were 0. Independent audit is 59/59
-  PASS with self hash `71d6e9d5…`. Phase B remains unauthorized.
+  PASS with self hash `71d6e9d5…`. Later Phase B work is governed by standing
+  autonomy and versioned protocols.
 - **PB.1 attempt-01 retained failure:** the authorized public no-smudge clone,
   complete graph, local-only LFS materialization and 9/9 negative controls passed.
   The runner stopped before dependency/build/start because the retained F0
@@ -191,6 +192,17 @@ not rewritten; new adapters must bind the standing charter explicitly.
   resource-accounted evidence storage and passes static 32/32. Attempt-06 is the
   accepted PB.3 `PASS`: base audit 18/18 and C6 audit 29/29, with all four
   semantic processes exact and zero work-root render-like artifacts.
+- **PB.4 product render/receipts PASS:** the three-path / 382-line product
+  increment built cleanly as arm64 commit `df5c2967…`. Attempt-01 passed the
+  visible Render Job inspection and persisted typed status, rejected all three
+  negative controls before rendering, then produced one 640×360 EEVEE PNG
+  (`bcdaf54d…`) and one CPU Cycles multilayer EXR (`93955cfb…`) with exactly two
+  render calls. The independent OpenImageIO audit passed every source, process,
+  pixel, pass and failure check. Its final Node wrapper remains a retained
+  `FAIL` only because Python `0.0` and Node `0` canonical number spellings
+  produced different audit hashes. C1 attempt-02 performed no build, Blender
+  start or render and independently closed that verifier defect at 25/25 PASS;
+  composite receipt hash is `687f2759…`. Both roots are immutable.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -410,17 +422,16 @@ starting Blender. C5-C2 passes 30/30 static checks and the C6 standing-authority
 adapter passes 32/32 while keeping the C4 semantic/helper corrections, exact
 no-render-artifact threshold, retained attempts and zero-network ceiling
 frozen. Attempt-04 then stopped pre-root at a nested historical authority check.
-PB.3 is closed `PASS` by C6-C3 attempt-06. PB.4 v0.1 is preregistered before
-mutation with a three-Python-path / 600-line ceiling. The next checkpoint is a
-fresh external source clone, product-owned Render Job implementation, clean
-build and static audit before the formal B01 preview/final run.
-Do not retry a retained formal root or query the engine remote during admission.
-After PB.3 closes, later PB gates may proceed under versioned protocols and the
-standing charter without another authorization sentence.
+PB.3 is closed `PASS` by C6-C3 attempt-06. PB.4 is closed `PASS` by retained
+attempt-01 product/render evidence plus C1 audit-only attempt-02. Do not repair
+or rerun either retained root. The next checkpoint is PB.5 preregistration for
+restart-safe job control: a controlled interruption may resume only unfinished
+immutable stages, while stale, forged and out-of-budget receipts must reject
+before additional Blender work. PB.5 may proceed under a versioned protocol and
+the standing charter without another authorization sentence.
 
-No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
-implied by repository authorization. Any change to the frozen charter requires
-a new version, not an in-place edit.
+No Developer ID, notarization or unsigned-DMG distribution is implied by PB.4.
+Any change to the frozen charter requires a new version, not an in-place edit.
 
 ## Public routes
 

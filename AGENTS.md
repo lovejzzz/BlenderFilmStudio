@@ -50,7 +50,8 @@ and `specs/ai-native-studio-post-f0-phase-b.v0.1.json`. Do not edit v0.1 in
 place. Repository creation authorization was later granted and exercised by
 the fail-closed v0.2 runner; the superseding three-path publication correction
 was later granted and exercised by the fail-closed v0.4 runner. Phase B source
-mutation remains unauthorized.
+mutation is now governed by the active standing-autonomy charter and a
+versioned gate protocol; it no longer requires a repeated owner sentence.
 
 The accepted repository-readiness root is
 `experiments/ai-native-studio-post-f0/repository-readiness-2026-08-30-mac-m2max-attempt-03`.
@@ -80,8 +81,8 @@ independent audit self hash is
 with 59/59 checks. The only external mutation was one lease-protected update
 of `refs/heads/main`; LFS uploads, other refs/tags, releases and Phase B were 0.
 Do not retry LFS, delete/recreate/rename the fork, mutate another ref, create a
-release, sign/notarize/distribute a DMG, or begin Phase B without a new explicit
-authorization and versioned protocol.
+release, sign/notarize/distribute a DMG, or perform Phase B work outside the
+active standing charter and a versioned protocol.
 
 PB.1 validation-only is closed `PASS` by composition: C3 attempt-04 supplies the
 accepted clean source/dependency/build evidence, and C4 fresh recovery supplies
@@ -247,13 +248,20 @@ Blender reopen wrote two thumbnails under the work-root HOME. C6-C3 moved only
 HOME to bounded, resource-accounted evidence storage while preserving the full-
 work-root zero-artifact predicate. Attempt-06 is accepted `PASS`: base semantic
 audit 18/18 and C6 independent audit 29/29, with 4/2/2/2/2/2 operations and zero
-render/network/engine writes. PB.3 is closed. PB.4 v0.1 is now preregistered
-before mutation: one product-owned Render Job surface, bounded render contract,
-fresh B01 preview/final pixels and process/pixel/pass/cost/failure receipts,
-limited to three Python paths and 600 added lines. Use only the fresh PB.4
-external source/build/work roots; never mutate retained PB.1/PB.3 roots. PB.4–
-PB.7 may advance under versioned protocols and the same standing charter
-without another owner sentence.
+render/network/engine writes. PB.3 is closed. PB.4 is also closed `PASS` by a
+composite result. Attempt-01 retains the one clean arm64 build, product commit
+`df5c296789a8d57cd84f4f8fb586bb28243f3fa5`, four PASS product processes,
+three pre-render rejections, EEVEE PNG `bcdaf54d…`, Cycles multilayer EXR
+`93955cfb…`, and a Python-native independent pixel/pass audit whose embedded
+checks all pass. Its Node wrapper remains immutable `FAIL` solely because
+Python serialized `0.0` while Node reserialized the same JSON number as `0`.
+C1 audit-only attempt-02 validates the producer-native hash and the complete
+retained root at 25/25 with receipt hash `687f2759…`; it performed zero builds,
+Blender starts, renders, source mutations or network calls. Never repair either
+PB.4 root in place. The next gate is PB.5 restart-safe job control: preregister
+controlled interruption/resume and stale/forged/out-of-budget pre-work
+rejections before any PB.5 mutation. PB.5–PB.7 may advance under versioned
+protocols and the standing charter without another owner sentence.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

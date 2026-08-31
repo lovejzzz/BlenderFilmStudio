@@ -4,7 +4,7 @@
   "snapshotDate": "2026-08-31",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_VALIDATION_PASS_STANDING_AUTONOMY_ACTIVE",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_PB2_PB3_PB4_VALIDATION_PASS_STANDING_AUTONOMY_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": null,
+  "activeGate": "PB.5",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -202,8 +202,8 @@
     "phaseBMutationAuthority": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json"
   },
   "phaseBPreparation": {
-    "status": "PB1_VALIDATION_PASS_PB2_VALIDATION_PASS_PB3_STANDING_AUTHORITY_ADAPTER_PENDING",
-    "gate": "PB.3",
+    "status": "PB1_PB2_PB3_PB4_VALIDATION_PASS_PB5_PREREGISTRATION_PENDING",
+    "gate": "PB.5",
     "mode": "STANDING_AUTONOMY_WITH_VERSIONED_PROTOCOLS",
     "publicationHead": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
     "f0CodeIdentityParent": "fa1b578bb421bbc82b3106b7d4223e11e65fae1d",
@@ -824,12 +824,41 @@
         "engineRemoteWrites": 0,
         "networkCalls": 1
       },
-      "retainedAttemptsMustRemainImmutable": ["attempt01", "attempt02", "attempt03"],
+      "retainedAttemptsMustRemainImmutable": ["attempt01", "attempt02", "attempt03", "attempt04", "attempt05", "attempt06"],
       "phaseBSourceMutationAuthorized": true,
       "phaseBSourceMutationAuthority": "STANDING_CHARTER_REQUIRES_VERSIONED_PROTOCOL_AND_VALIDATION",
       "pb2ThroughPb7Authorized": true,
-      "nextGate": "PB.4",
-      "nextGateStatus": "PB4_RENDER_RECEIPTS_PREREGISTERED_MUTATION_PENDING"
+      "pb4": {
+        "status": "PASS_COMPOSITE_ATTEMPT01_PRODUCT_OUTPUT_PLUS_ATTEMPT02_C1_CANONICAL_AUDIT",
+        "engineSourceCommit": "df5c296789a8d57cd84f4f8fb586bb28243f3fa5",
+        "engineSourceParent": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+        "binarySha256": "54810b426d73cf6649c0f5c9b5c763b2ce59e7f1c0a2f6245bc065b906fda636",
+        "attempt01": {
+          "status": "RETAINED_WRAPPER_FAIL_PRODUCT_AND_INDEPENDENT_AUDIT_PASS",
+          "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.4-2026-08-31-mac-m2max-attempt-01",
+          "receiptFileSha256": "90cc68a66e991b99904a69c3dab97b8d7fe05ca094a43d621cd9f52b92a84378",
+          "receiptHash": "dcf5b08606b6530f596a59abf230653d9444b11b3cfba1a7a701450854392afe",
+          "soleFailedCheck": "pixelPassAudit",
+          "pixelAuditHash": "1dfc745926239d12ffa9bdd83f315979aba354f0ff93a5f006e2fb48a0ce5864",
+          "previewSha256": "bcdaf54d543a6c7805024931f998ae910b635fa7c0b9789c3d6ab7b4a8d0c24e",
+          "finalSha256": "93955cfbf2abf885e04ac39a811f1e1e293275c3a968053085b40282458b6964",
+          "cleanBuilds": 1,
+          "productStarts": 4,
+          "renderCalls": 2
+        },
+        "attempt02": {
+          "status": "PASS",
+          "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.4-2026-08-31-mac-m2max-attempt-02",
+          "checks": "25/25",
+          "auditHash": "65e952665943b7545b8fced7d86cdd4bbf5e3a29c7b7ffe2fd5dfd5b2d23cd1b",
+          "receiptHash": "687f2759637b45e5354264283fcc4b8e7539394ae773b8c74a14c6211356078a",
+          "newBuilds": 0,
+          "blenderStarts": 0,
+          "renderCalls": 0
+        }
+      },
+      "nextGate": "PB.5",
+      "nextGateStatus": "PB5_RESTART_SAFE_JOB_CONTROL_PREREGISTRATION_PENDING"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1205,21 +1234,19 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PB4_RENDER_RECEIPTS_PRODUCT_INCREMENT",
-    "result": "PB.4 product render/receipt increment is preregistered before mutation; implement only the frozen three-path Python surface in fresh external roots",
-    "acceptedPb3Evidence": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-06",
-    "receiptHash": "a52eb563852bd77042a47ea1b63f6427cf9ec1064ece90fb8b69f07d61637e9f",
-    "baseAudit": "18/18 PASS",
-    "baseAuditHash": "8c80e78153502419fed30119029574138ebfee35bbd7a4d77aa549a3206376d1",
-    "c6Audit": "29/29 PASS",
-    "c6AuditHash": "83e23d986e1a0caa160b5e7c21715e5e54210e4bfa242c7209ea4963b8dc8b11",
+    "gate": "PB5_RESTART_SAFE_JOB_CONTROL_PREREGISTRATION",
+    "result": "PB.4 is closed PASS; preregister controlled interruption/resume and stale, forged and out-of-budget receipt rejections before PB.5 product mutation",
+    "acceptedPb4Evidence": "experiments/ai-native-studio-phase-b/PB.4-2026-08-31-mac-m2max-attempt-02",
+    "receiptHash": "687f2759637b45e5354264283fcc4b8e7539394ae773b8c74a14c6211356078a",
+    "audit": "25/25 PASS",
+    "auditHash": "65e952665943b7545b8fced7d86cdd4bbf5e3a29c7b7ffe2fd5dfd5b2d23cd1b",
     "authoritySource": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
     "repeatedOwnerAuthorizationRequired": false,
     "requiredArtifacts": [
-      "retain PB.3 attempts 01-06 and all tool/static failures immutable",
-      "preserve PB.4 v0.1 preregistration and its three-path/600-line mutation ceiling",
-      "bind accepted PB.1 binary and PB.3 evidence",
-      "freeze product hypothesis, exact mutation surface, fixtures, thresholds, resources, negative controls and stop rule",
+      "retain PB.3 attempts 01-06 and PB.4 attempts 01-02 immutable",
+      "bind PB.4 preview/final stage receipts, process receipts, failure receipts, cost receipt and C1 audit",
+      "preregister the PB.5 interruption point, resume identity and immutable completed-stage rule",
+      "freeze stale, forged and out-of-budget receipt attacks before additional Blender work",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]
   }

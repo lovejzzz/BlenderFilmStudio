@@ -6353,3 +6353,11 @@ Attempt-01产品路径与真实输出均成功：visible Render Job inspect和ty
 最终Node wrapper唯一false为`pixelPassAudit`：Python producer canonical JSON保留`0.0`，Node parse/reserialize变成`0`，造成跨runtime hash mismatch。Python-native独立复算exact命中declared hash；这不是产品、像素、pass或receipt content failure。Final FAIL receipt file/self SHA为`90cc68a6...` / `dcf5b086...`。
 
 Attempt-01全部work/evidence永久保留。C1只能在fresh audit-only root中绑定retained bytes并按producer-declared Python canonicalization复核；clean build、Blender start、render、source mutation、remote write、network、release/sign/notary/distribution全部为0。
+
+## J-522 · PB.4 C1 attempt-02 composite PASS
+
+Date: 2026-08-31 · Type: ACCEPTED PB.4 VALIDATION · New builds / Blender starts / render calls: 0 / 0 / 0
+
+C1将attempt-01全root 28 files / 4,227,345 bytes绑定为manifest SHA `8fcc9535...`，确认retained final wrapper确实只有`pixelPassAudit`一个false，并以Python producer声明的canonical JSON规则exact复算audit hash `1dfc7459...`。四份process receipts、八份logs、三份failure receipts、两份stage receipts、preview/final artifact、source、binary、cost和resource bindings全部独立通过。
+
+Fresh attempt-02 audit为25/25 PASS，file/self SHA `50afd3e4...` / `65e95266...`；receipt file/self SHA `09dfc2c0...` / `687f2759...`。PB.4由attempt-01真实product/render evidence与attempt-02 audit-only correction组合关闭PASS。Accepted preview/final SHA分别为`bcdaf54d...` / `93955cfb...`，engine source commit为`df5c2967...`。Claim只限一个B01、一个admitted arm64 host和冻结profiles；下一gate为PB.5 restart-safe job control。
