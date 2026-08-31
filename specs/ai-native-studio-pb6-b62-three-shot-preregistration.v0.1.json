@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pb6B62ThreeShotPreregistration.v0.1",
+  "status": "PREREGISTERED_BEFORE_PB6_MUTATION",
+  "gate": "PB.6",
+  "title": "B62 three-shot vertical slice in the Film Studio product workflow",
+  "question": "Can the validated Film Studio product admit the exact B62 terminal scene, preserve one frozen non-camera asset/state identity across wide, medium and close, create a fresh reviewable 288-frame three-shot animatic, and retain the historical frame-288 rejection without relaxing its 0.90 threshold?",
+  "authority": {
+    "source": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
+    "repeatedOwnerAuthorizationRequired": false,
+    "specificConfirmationBoundariesUnchanged": true
+  },
+  "baselines": {
+    "engineRepository": "https://github.com/lovejzzz/film-engine",
+    "engineMain": "373881e1ee659a962e0015c2dac26f7fa981b1bf",
+    "pb5Evidence": "experiments/ai-native-studio-phase-b/PB.5-2026-08-31-mac-m2max-attempt-01/receipt.json",
+    "pb5ReceiptHash": "1baa24ee3f70539bc992f8a7177d5f0a478affe3d68f7b26d65e8dd617079220",
+    "pb5BinarySha256": "8b9e680b97015c2a6b71da404df3d4dcd3148dfe63b8f6a3534cc0e12390c592"
+  },
+  "inheritedB62": {
+    "scene": {
+      "uri": "experiments/b62-terminal-scene-package-v0-3/scene/B62_TERMINAL_PRODUCTION.blend",
+      "sha256": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+      "bytes": 337411
+    },
+    "scenePackage": {
+      "receiptUri": "experiments/b62-terminal-scene-package-v0-3/receipt.json",
+      "receiptFileSha256": "a4294cddcde4ba48ef613605af10c961b9eb246251850f4adfafe465087d291f",
+      "receiptHash": "62d6ddbb903331f930f6fd9c94887752e90bae022eb0048003254780841e1366",
+      "independentReportHash": "720093c20e2252e60c0f53b8268794384681938849d768bcb242146b077e14fa",
+      "stateHash": "bb9e0d1c29ddd871f04e082cfca13c28c1d0a5b885eb04a38899aa6c84564d8d"
+    },
+    "animatic": {
+      "receiptUri": "experiments/b62-terminal-animatic-continuity-v0-6/receipt.json",
+      "receiptFileSha256": "5fc9b1502221bba76325c60dbd2d9544a36c6f78d23bb9ac7c89dddfc91b04a2",
+      "receiptHash": "4e8c0eca18f6f468f8847fc6a3b29807f29c799cead48cc4851df010d02d4fdc",
+      "auditHash": "8ae8ef95cd7b3708d8e348ab3a21ca10731b8307df9b94bdb56fdf54d3786291",
+      "referenceVideoSha256": "5203307a1c94e1b7a52cda6687d17e03143e6666ddb1f1078dd07ed6e8bbe332"
+    },
+    "frozenHistoricalRejection": {
+      "receiptUri": "experiments/b62-camera-quality-holdout-render-v0-5/receipt.json",
+      "receiptFileSha256": "8a7c6cd045eaf9d180cc332bb909fc73efc518703b8cd60e5f09d066ab4bbe64",
+      "receiptHash": "119c1028e2a3e079af6ca0497cd3da3ac60a4ac690d984d77f377b8087e1d73b",
+      "verdict": "B62_CLOSE_CAMERA_CORRECTION_FAILS_FROZEN_HOLDOUT",
+      "frame": 288,
+      "metric": "clampedUnionAreaFraction",
+      "observed": 0.93378717684983,
+      "maximum": 0.9,
+      "mustRemainRejected": true
+    },
+    "motionAwareCorrection": {
+      "receiptUri": "experiments/b62-camera-quality-motion-aware-holdout-v0-4/receipt.json",
+      "receiptFileSha256": "b123ffefacfde409c79125d658820538b94b219f42b1a82c1ac1e144eea99799",
+      "receiptHash": "553ce830513de80b5c5eea65d91780f4807ce97c4f1e12c695f740500a05a3dd",
+      "verdict": "B62_CLOSE_CAMERA_MOTION_AWARE_PASSES_SEALED_VALIDATION",
+      "thresholdChanged": false
+    }
+  },
+  "sharedNonCameraIdentity": {
+    "stateHash": "bb9e0d1c29ddd871f04e082cfca13c28c1d0a5b885eb04a38899aa6c84564d8d",
+    "assetIdentityHashes": {
+      "CHAR_B62_GUARDIAN": "d03a680766dbd454d2913ae74d66f3cdd2a6fd93fb423de2601049dcb3eba416",
+      "PROP_B62_CONSOLE_CORE": "31a11b94cbcf0fafb61d301e9ff3dd5ad97d6b7a2424d4cc21c3403921a07b7e",
+      "SET_B62_OBSERVATORY": "758f53592659e76f020feabeb1a5694d36e68000e0ce9c5bb0011aa6d93c3ba1"
+    },
+    "rule": "All three shots come from the same exact source blend and retain these asset, material, topology, action, contact/core/light and provenance identities; only the timeline-selected camera may vary by shot."
+  },
+  "shots": [
+    {"id": "WIDE", "name": "WIDE_APPROACH", "framesInclusive": [1, 96], "marker": "SHOT_WIDE_APPROACH", "camera": "CAM_WIDE_APPROACH"},
+    {"id": "MEDIUM", "name": "MEDIUM_CONTACT", "framesInclusive": [97, 192], "marker": "SHOT_MEDIUM_CONTACT", "camera": "CAM_MEDIUM_CONTACT"},
+    {"id": "CLOSE", "name": "CLOSE_REFLECTION", "framesInclusive": [193, 288], "marker": "SHOT_CLOSE_REFLECTION", "camera": "CAM_CLOSE_MOTION_TERMINAL"}
+  ],
+  "productIncrement": {
+    "allowedPaths": [
+      "scripts/modules/film_studio_render.py",
+      "scripts/startup/bl_operators/film_studio_workspace.py",
+      "scripts/startup/bl_ui/space_topbar.py"
+    ],
+    "maximumAddedLines": 500,
+    "cOrCppChanges": 0,
+    "requiredVisibleControl": "Build B62 Review Animatic",
+    "requiredTypedState": ["slice status", "current shot", "completed frames", "shared identity", "frame-288 historical boundary"],
+    "modelGeneratedPython": false,
+    "proposalOriginatedShellOrFilesystemAuthority": false
+  },
+  "reviewProfile": {
+    "engine": "BLENDER_EEVEE",
+    "resolution": [640, 360, 100],
+    "samples": 16,
+    "frames": [1, 288],
+    "renderCalls": 288,
+    "format": "PNG",
+    "colorMode": "RGBA",
+    "colorDepth": "8",
+    "fps": 24,
+    "reviewVideo": "review/B62-PB6-THREE-SHOT.mp4",
+    "humanReviewStatus": "PENDING_UNTIL_PB7"
+  },
+  "formalSequence": [
+    "start-1: zero-render product inspection binds manifest, source, shared identity, shot roster and historical rejection",
+    "start-2: visible product operator renders exactly frames 1-288 once into fresh evidence and writes per-shot/process/stage receipts",
+    "one bounded local ffmpeg process creates the review MP4 from accepted PNG frames",
+    "start-3: zero-render reopen verifies persisted typed product state, source unchanged and all outputs exact",
+    "start-4: zero-render negative controls plus an auditor independent of the product module re-decode frames/video and recompute all bindings"
+  ],
+  "negativeControls": [
+    {"id": "TAMPERED_SOURCE_HASH", "reason": "SOURCE_HASH_MISMATCH"},
+    {"id": "SHOT_RANGE_OVERLAP", "reason": "SHOT_ROSTER_INVALID"},
+    {"id": "SHARED_ASSET_IDENTITY_MUTATION", "reason": "SHARED_IDENTITY_MISMATCH"},
+    {"id": "FRAME_288_REJECTION_REMOVED", "reason": "HISTORICAL_BOUNDARY_MISSING"},
+    {"id": "FRAME_288_THRESHOLD_RELAXED_TO_0_91", "reason": "HUMAN_BOUNDARY_MUTATED"}
+  ],
+  "resourceCeilings": {
+    "minimumFreeReserveBytes": 107374182400,
+    "projectedNativeBuildBytes": 12884901888,
+    "projectedFormalOutputBytes": 1073741824,
+    "requiredAdmissionBytes": 121332826112,
+    "cleanNativeBuilds": 1,
+    "productStarts": 4,
+    "renderCalls": 288,
+    "ffmpegProcesses": 1,
+    "workRootBytes": 2147483648,
+    "evidenceRootBytes": 536870912,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "mouseInteractions": 0
+  },
+  "formalRoots": {
+    "externalRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01",
+    "evidenceRoot": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
+    "mustBeFresh": true,
+    "failedOrAcceptedRootsImmutable": true
+  },
+  "acceptance": [
+    "exact current engine parent, exact B62 parents and exact product/tool identities",
+    "one clean native arm64 build and no changes outside the three allowed Python paths",
+    "one exact source blend and shared non-camera identity across all three shots",
+    "exactly 288 fresh finite dynamic 640x360 PNG frames with correct 96/96/96 camera routing",
+    "one independently decodable 24 fps three-shot MP4 and a three-keyframe review sheet",
+    "historical frame-288 0.93378717684983 > 0.90 rejection retained verbatim while the separate motion-aware correction remains threshold-preserving",
+    "all five attacks reject before render, source or completed evidence mutation",
+    "independent audit PASS and all resource/counter/config/source invariants PASS"
+  ],
+  "stopRules": [
+    "Do not create a formal root before source/tool freeze and fresh-root/resource admission pass.",
+    "Do not reuse inherited T2 frames as PB.6 product output.",
+    "Do not modify the B62 source blend or any retained B62/PB evidence.",
+    "Do not remove frame 288, change 0.90, reinterpret 0.93378717684983 as PASS or substitute the later motion-aware result for the retained rejection.",
+    "Stop and retain FAIL on wrong camera routing, shared identity drift, duplicate/missing/frozen frames, non-finite pixels, output/resource excess or any unexpected render.",
+    "Do not create releases, distribute binaries, sign/notarize, force-push, update other refs, upload LFS, use network during validation or begin PB.7."
+  ],
+  "claimCeiling": "A PASS proves only one inherited stylized B62 scene, one admitted arm64 host, one fresh 640x360 review animatic and the frozen machine/human boundary. It does not prove final-film quality, photorealism, cross-platform behavior, production readiness or autonomous filmmaking.",
+  "specHash": "fb74eff91a6e2d6e737d95bd5653526d35bf176c3ae948ced3a7a5b77b54a9df"
+}

@@ -6389,3 +6389,11 @@ v0.2 manifest在任何formal root/product start前暴露最后tool-freeze绑定�
 Date: 2026-08-31 · Type: ORDINARY ENGINE PUBLICATION · Push attempts / ref updates / force / tags / releases: 1 / 1 / 0 / 0 / 0
 
 Research PASS与public raw receipt已先发布验证。随后以explicit public URL只读确认`film-engine/main=df5c2967...`为PB.5 source的唯一父提交，并一次ordinary non-force push快进到`373881e1...`。远端OID和三个changed paths的raw SHA均与本地exact。Local validation clone的disabled pushurl保护未被修改。Other refs、LFS uploads、release、binary distribution、Developer ID signing与notarization全0；publication receipt self hash为`9ca8f9ad...`。
+
+## J-527 · PB.6 B62 three-shot product slice preregistration
+
+Date: 2026-08-31 · Type: PRODUCT MUTATION PREREGISTRATION · PB.6 builds / starts / renders: 0 / 0 / 0
+
+PB.6绑定exact T1 terminal scene SHA `0acd4d13...`、state hash `bb9e0d1c...`、T2 288-frame receipt `4e8c0eca...`以及D4 retained frame-288 rejection与D6 threshold-preserving motion-aware correction。产品必须从source scene生成fresh WIDE/MEDIUM/CLOSE 96/96/96 review frames与24 fps MP4，不得复制T2 artifacts。
+
+冻结1 clean build / 4 product starts / 288 EEVEE renders / 1 ffmpeg、三Python paths/≤500 additions、2 GiB work/512 MiB evidence、100 GiB reserve + 13 GiB projected writes。五攻击包括source、shot roster、shared identity、删除frame-288 rejection与把0.90放宽到0.91，全部必须pre-render reject。人审保持PB.7 pending；0 model/network/mouse/release/LFS/force/sign/notary。
