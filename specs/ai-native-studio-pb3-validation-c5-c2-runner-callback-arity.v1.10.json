@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC5C2RunnerCallbackArity.v1.10",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-C5-C2-RUNNER-CALLBACK-ARITY-v1.10",
+  "status": "PREREGISTERED_INERT_RUNNER_CORRECTION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "19e9f36656f437523ac076d6289bccf84830bbcf",
+  "retainedStaticFailure": {
+    "root": "experiments/ai-native-studio-phase-b/PB.3-c5-tool-freeze-2026-08-31-mac-m2max-attempt-01",
+    "audit": "experiments/ai-native-studio-phase-b/PB.3-c5-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+    "auditSha256": "26216389760bf6e5499cadb1f9697265ae590d1cd193c2849d72abf3b320a7cb",
+    "auditHash": "0d8cdbccf81c4d55b1fc6211454905ac5b011218773a34888b9f1e4b152c3ce6",
+    "checks": "29/30",
+    "onlyFalseCheck": "inertTemplateRejected",
+    "observedError": "PB3_VALIDATION_C5_STOP TypeError: main.<locals>.c5_authority() takes 2 positional arguments but 3 were given"
+  },
+  "failedRunner": {
+    "uri": "scripts/run-ai-native-studio-pb3-validation-c5.py",
+    "sha256": "84edda71387eb15480732ddb3fc282daae02f62dab20b8e1e34e956e99340de6"
+  },
+  "allowedCorrection": {
+    "newVersionedRunnerRequired": true,
+    "changedFunction": "main.<locals>.c5_authority",
+    "oldSignature": "def c5_authority(c4_path_arg: Path, c4_contract: dict) -> None:",
+    "newSignature": "def c5_authority(_c3, c4_path_arg: Path, c4_contract: dict) -> None:",
+    "addedParameter": "_c3",
+    "addedParameterMustRemainUnused": true,
+    "expectedChangedLines": 1,
+    "expectedSemanticChanges": 0
+  },
+  "mustRemainExact": [
+    "scripts/audit-ai-native-studio-pb3-validation-c5.py",
+    "scripts/audit-ai-native-studio-pb3-tool-freeze-c5.py",
+    "scripts/run-ai-native-studio-pb3-validation-c4.py",
+    "scripts/audit-ai-native-studio-pb3-validation.py",
+    "blender/run_ai_native_studio_pb3_combined_c4.py",
+    "specs/ai-native-studio-pb3-validation-tool-freeze-c4-corrected.v1.2.json",
+    "all retained PB.3 roots and thresholds"
+  ],
+  "futureStaticAttempt": {
+    "root": "experiments/ai-native-studio-phase-b/PB.3-c5-c2-tool-freeze-2026-08-31-mac-m2max-attempt-02",
+    "mustBeFresh": true,
+    "blenderStarts": 0,
+    "networkCalls": 0
+  },
+  "currentCounts": {
+    "attempt04RootsCreated": 0,
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0
+  },
+  "authorization": {
+    "attempt04Authorized": false,
+    "newExactRequestRequiredAfterStaticPass": true
+  },
+  "claimCeiling": "C5-C2 permits one callback-arity line in a new versioned runner and no formal execution. It does not modify product semantics, thresholds, permissions, or retained evidence."
+}
