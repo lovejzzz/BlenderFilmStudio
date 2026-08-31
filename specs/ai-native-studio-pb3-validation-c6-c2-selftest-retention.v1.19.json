@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC6C2SelftestRetention.v1.19",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-C6-C2-SELFTEST-RETENTION-v1.19",
+  "status": "PREREGISTERED_INERT_SELFTEST_CORRECTION",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "0f2e6bf3a8fe9bdb23d4485dfd3cc2be80403e6f",
+  "retainedStaticFailure": {
+    "toolFreeze": "specs/ai-native-studio-pb3-validation-c6-c1-execution-tool-freeze.v1.17.json",
+    "runner": "scripts/run-ai-native-studio-pb3-validation-c6-c1.py",
+    "audit": "experiments/ai-native-studio-phase-b/PB.3-c6-c1-tool-freeze-2026-08-31-mac-m2max-attempt-01/audit.json",
+    "auditHash": "c95e281972099c8a6e801137ae346e8be57cbf12143c5067d1c7ece5d5e057da",
+    "checks": "31/32",
+    "onlyFailure": "runnerSelfTestPass"
+  },
+  "observedCause": "The delegated frozen C5 self-test still requires its historical attempt-04 evidence path to be absent, but C6 attempt-04 is now correctly retained at that path.",
+  "allowedChange": "Add a thin versioned entrypoint. Its self-test must verify the retained attempt-04 manifest and fresh attempt-05 roots directly instead of invoking the obsolete C5 freshness assertion. Formal execution must delegate byte-exact to the frozen C6-C1 runner after binding both entrypoint hashes.",
+  "forbidden": [
+    "Do not edit the failed C6-C1 runner, tool freeze, template or audit.",
+    "Do not change the closure-guarded formal authority path or any semantic/resource/artifact threshold.",
+    "Do not create attempt-05 roots before a new static PASS and single-path execution contract."
+  ],
+  "claimCeiling": "Static self-test correction only; it grants no formal execution and changes no PB.3 product behavior."
+}

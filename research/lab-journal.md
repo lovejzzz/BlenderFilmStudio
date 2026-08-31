@@ -6291,3 +6291,11 @@ Standing-authority execution contract是commit `2cee2969bb3fcc7087c5f3bbcd9eface
 Attempt-04 evidence仅事后保留failure与independent audit。Failure file/self SHA为`3c805b9c3c19e71578ec7e5e26003433a11719a1fe8150ddf3b9b37cf3715525` / `79fc1fb6e1f6059bc7785c8d0c20d8fdfcbc56b49a40e43f14c391e47f7fcade`；audit 19/19 PASS，file/self SHA为`2050d027ab7c976733814b378853e123012dc8d9f1bf72d48970e63ce70bcf8b` / `74317f6429ab0fd64b9257f3d24915ae8c5e6a38686e223cfcd81d89f44faa55`。
 
 C6-C1只允许在outer standing authority完全通过后，以closure flag保护的adapter满足nested base authority并返回已验证execution commit；semantic/resources/artifact gates不改。Attempt-04永久保留，后续只能使用fresh attempt-05，且standing charter无需owner重复授权。
+
+## J-515 · PB.3 C6-C1 static tool attempt-01 retained FAIL
+
+Date: 2026-08-31 · Type: RETAINED STATIC FAILURE · Formal Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C6-C1实现closure-guarded nested-base authority后，static audit为31/32 FAIL。唯一false为`runnerSelfTestPass`：新runner将self-test委托给冻结C5，而C5仍要求historical attempt-04 evidence path absent；C6 attempt-04 failure现已按规则保留在该路径，因此旧freshness断言必然失败。Inert execution负控仍正确以status gate拒绝，attempt-05 roots保持absent，所有formal counts为0。
+
+Retained static audit self hash为`c95e281972099c8a6e801137ae346e8be57cbf12143c5067d1c7ece5d5e057da`。C6-C2只允许一个thin entrypoint：self-test直接复核attempt-04 exact retained manifest与attempt-05 fresh roots；formal path必须byte-exact委托C6-C1，并绑定两层runner hashes。不得编辑failed C1 files或改变任何semantic/resource/artifact门。
