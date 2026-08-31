@@ -242,9 +242,13 @@ check and stopped before root creation or Blender start. Retain attempt-04 as a
 authority adapter after standing authority passes. Its first static run is
 retained 31/32 because the old C5 self-test expected attempt-04 evidence absent;
 C6-C2 now checks the retained attempt-04 manifest directly and passes 32/32.
-The next action is a single-path attempt-05 contract and formal run. No repeated
-owner sentence or engine-remote admission query is required. PB.4–PB.7 may
-advance later under versioned protocols and the same standing charter.
+Attempt-05 completed all four semantic processes but is retained `FAIL` because
+Blender reopen wrote two thumbnails under the work-root HOME. C6-C3 moves only
+HOME to bounded, resource-accounted evidence storage and passes static 32/32;
+the full-work-root zero-artifact predicate is unchanged. The next action is a
+single-path attempt-06 contract and formal run. No repeated owner sentence or
+engine-remote admission query is required. PB.4–PB.7 may advance later under
+versioned protocols and the same standing charter.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

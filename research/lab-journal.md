@@ -6317,3 +6317,11 @@ Attempt-05完成四个offline Blender process，B01/B02 proposal compile、Build
 最终C4 full-work-root predicate发现B01/B02各一个`isolation/*/home/.thumbnails/large/*.png`，因此runner FAIL。Base audit 17/18、C6 audit 27/29，唯一实质失败均为no-render-artifact（C6另因base FAIL连带一项）；self hashes为`94ae24c9052ed03d58fcd37a01e413de767b4c174800b5fac469129e597da13c` / `52d8bd8617bfc3c4dbf5feffdc27f6143b5a14e2cdf4d1ea41e9c0bc46c4ba30`。这证明save前`file_preview_type=NONE`不阻止command-line reopen在HOME生成filesystem thumbnail。
 
 Attempt-05永久保留，不删除或豁免PNG。C6-C3只允许把HOME从work root移到bounded evidence-root isolation目录，其余config/scripts/data/tmp isolation不变；evidence resource accounting必须包含这些文件，full-work-root forbidden-extension predicate不改。任何重跑必须使用fresh attempt-06。
+
+## J-518 · PB.3 C6-C3 inert tool freeze PASS
+
+Date: 2026-08-31 · Type: HOME-ISOLATION TOOL FREEZE · Formal Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C6-C3 entrypoint SHA为`d4bcf1ffb0d0e5447757f49f192a8ecd0727229069a40cbbe47f740063cf3853`。它在nested base environment创建后只把`HOME`重定向至`evidenceRoot/isolation/<fixture>/home`；BLENDER config/scripts/data/extensions、TMPDIR、OCIO与process argv全部不改。Attempt-05 work/evidence manifests在self-test和formal admission前exact复核，attempt-06 roots fresh。
+
+Tool freeze/template SHA为`857edd4bcf414bfc5091e09c7cfe679ee4f46f732846cc8ad31685bdc93090ff` / `c79d0d251f2fd19afe53776ffa7335ba074ffd4cd953fa3e5db3c183599f442b`。Static/negative audit 32/32 PASS，file/self SHA为`dbcbc8a49cb5654c83cc3ed6dfbbbeefddcd7a859738aa1441ef351f0b41a6b8` / `57c2206e9bea7d5fc0a9bd523ef1a5a174ddd176f889f72ff9a0915e5825f7f3`。Full-work-root no-artifact predicate、2 GiB / 64 MiB、4/2/2/2/2/2及zero network/render/engine writes不变。下一步单路径attempt-06 contract与formal run。
