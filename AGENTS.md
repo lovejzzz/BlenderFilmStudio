@@ -194,7 +194,11 @@ spelling. Read
 Do not alter or rerun attempt-01/attempt-02. A future correction must preserve
 all thresholds, normalize the runner argv spelling before spawn, and prevent
 thumbnail creation by setting Blender file preview type to `NONE`; it requires
-a new inert tool freeze and fresh authorization. PB.4–PB.7 remain unauthorized.
+a new inert tool freeze and fresh authorization. That boundary is preregistered
+at `specs/ai-native-studio-pb3-validation-c4-harness-correction.v1.1.json`,
+SHA-256 `194d3e9d...`. It grants no execution authority; the future attempt-03
+roots must remain absent through tool/static-audit freeze. PB.4–PB.7 remain
+unauthorized.
 
 The selected hypothesis is an independently branded, GPL-compliant, AI-native
 film application built on the official Blender source. Bforartists is a design

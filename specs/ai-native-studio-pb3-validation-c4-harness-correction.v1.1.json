@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioPb3ValidationC4HarnessCorrection.v1.1",
+  "contractId": "AI-NATIVE-STUDIO-PB3-VALIDATION-C4-HARNESS-CORRECTION-v1.1",
+  "status": "PREREGISTERED_INERT_TOOLING_NOT_IMPLEMENTED_EXECUTION_UNAUTHORIZED",
+  "snapshotDate": "2026-08-31",
+  "parentResearchCommit": "553a097913ca2f06b5604f59c47eb96efb3fdc88",
+  "basis": {
+    "retainedAttempt": "PB.3-2026-08-31-mac-m2max-attempt-02",
+    "resultDocument": {
+      "uri": "research/2026-08-31-ai-native-studio-pb3-c3-attempt-02-retained-failure.md",
+      "sha256": "d6b4260a9dd3000e0f98facc82ac3c3b611aa8099b7599182e4ebe29fd46c86a"
+    },
+    "receipt": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-02/receipt.json",
+      "sha256": "e5bd63251d51ab31a3f9def21cc296c39ac1c2005600bfaf5d36b058742d4397",
+      "selfHash": "b8c0616b3c7fb14c2b7b418ce561b1981126dcd4a0535adea5b4b0147277acc0"
+    },
+    "independentAudit": {
+      "uri": "experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-02/audit.json",
+      "sha256": "b4fde05a2c20ed66a720a087c2cbfd86f5a66e9577c401c056fd68f51272cc84",
+      "selfHash": "d85dd5896fd7bfa1848b9367b136a0d0844d9ca8aa1dc02dea7982fa5081908b",
+      "checks": "21/23"
+    },
+    "workManifest": {
+      "regularFiles": 29,
+      "regularFileBytes": 842437,
+      "manifestSha256": "6b12f0b8f2545a3463902638540a87981542a7f202b3cef161ad482458c97ca8"
+    },
+    "evidenceManifest": {
+      "regularFiles": 15,
+      "regularFileBytes": 47794,
+      "manifestSha256": "4d0930b596128fcaf3019777cc586046f4c5b10fc1a11bf60536a12c9620262e"
+    }
+  },
+  "observedFindings": [
+    {
+      "id": "PB3_C3_ARGV_RELATIVE_ABSOLUTE_DIVERGENCE",
+      "observed": "All four process receipts record the repository-relative --tool-contract spelling while the C3 verifier resolves the same option before reconstruction.",
+      "affectedChecks": [
+        "processArgvAndLogsExact"
+      ]
+    },
+    {
+      "id": "PB3_C3_BLEND_SAVE_THUMBNAIL_CACHE_PNG",
+      "observed": "Each background workspace save created one 2949-byte .thumbnails/large PNG below the isolated HOME.",
+      "affectedChecks": [
+        "noRenderArtifacts",
+        "baseAuditPass"
+      ]
+    }
+  ],
+  "selectedInterventions": [
+    {
+      "id": "NORMALIZE_TOOL_CONTRACT_ARGV_BEFORE_DELEGATION",
+      "allowedChange": "The versioned C4 runner must replace the single --tool-contract option value with its resolved absolute path before any base/C3 authority validation or process creation.",
+      "acceptance": "All four future recorded argv arrays and the independent reconstruction contain the same absolute tool-contract path."
+    },
+    {
+      "id": "DISABLE_BLEND_FILE_PREVIEW_BEFORE_SAVE",
+      "allowedChange": "A versioned PB.3 Blender helper must set bpy.context.preferences.filepaths.file_preview_type to NONE and assert NONE immediately before bpy.ops.wm.save_as_mainfile.",
+      "acceptance": "The future work root contains no EXR, PNG, JPG, JPEG, MOV or MP4 file anywhere; the existing noRenderArtifacts predicate remains byte-for-byte unchanged."
+    }
+  ],
+  "frozenControls": {
+    "c3Tool": {
+      "uri": "specs/ai-native-studio-pb3-validation-tool-freeze-c3-corrected.v0.8.json",
+      "sha256": "b86b5de659ebf09761ea8a74bd252d4d11c66073fd50a17680ebb50debf4558d"
+    },
+    "c3Runner": {
+      "uri": "scripts/run-ai-native-studio-pb3-validation-c3.py",
+      "sha256": "80fafdc044f149d08b0d03fe71b4037e461bd88066a5c5ca2be5e4a8a50df76e"
+    },
+    "c3Auditor": {
+      "uri": "scripts/audit-ai-native-studio-pb3-validation-c3.py",
+      "sha256": "aef6338f574cf0e394594d20f9d7e68a37b15e5216d672328f78db68b2f53c2a"
+    },
+    "baseBlenderHelper": {
+      "uri": "blender/run_ai_native_studio_pb3_combined.py",
+      "sha256": "12ce035804ff45d7c4d9f1b410b07929cbce727079f896eb9ccb3c44553bba96"
+    }
+  },
+  "futureToolPaths": {
+    "correctedTool": "specs/ai-native-studio-pb3-validation-tool-freeze-c4-corrected.v1.2.json",
+    "blenderHelper": "blender/run_ai_native_studio_pb3_combined_c4.py",
+    "runner": "scripts/run-ai-native-studio-pb3-validation-c4.py",
+    "independentAuditor": "scripts/audit-ai-native-studio-pb3-validation-c4.py",
+    "staticAuditor": "scripts/audit-ai-native-studio-pb3-tool-freeze-c4.py",
+    "executionToolFreeze": "specs/ai-native-studio-pb3-validation-c4-execution-tool-freeze.v1.2.json",
+    "executionTemplate": "specs/ai-native-studio-pb3-validation-execution-c4-template.v1.3.json",
+    "authorizationRequest": "specs/ai-native-studio-pb3-validation-only-authorization-request-c4.v1.2.json"
+  },
+  "futureFreshRoots": {
+    "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.3-2026-08-31-mac-m2max-attempt-03",
+    "evidenceRoot": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/ai-native-studio-phase-b/PB.3-2026-08-31-mac-m2max-attempt-03",
+    "currentlyExist": false
+  },
+  "unchangedAcceptance": {
+    "benchmarks": [
+      "B01",
+      "B02"
+    ],
+    "maximumBlenderStarts": 4,
+    "maximumProposalExecutions": 2,
+    "maximumBuildPlanWrites": 2,
+    "maximumSceneBuilds": 2,
+    "maximumWorkspaceSaves": 2,
+    "maximumReopens": 2,
+    "maximumWorkRootBytes": 2147483648,
+    "maximumEvidenceRootBytes": 67108864,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "noRenderArtifactExtensions": [
+      ".exr",
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".mov",
+      ".mp4"
+    ]
+  },
+  "preregistrationCounts": {
+    "blenderStarts": 0,
+    "proposalExecutions": 0,
+    "buildPlanWrites": 0,
+    "sceneBuilds": 0,
+    "workspaceSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0
+  },
+  "stillUnauthorized": [
+    "creation of PB.3 attempt-03 work or evidence roots",
+    "any Blender start, proposal execution, BuildPlan write, scene build, workspace save or reopen",
+    "editing or deleting retained attempt-01 or attempt-02",
+    "weakening noRenderArtifacts or any semantic, provenance, workspace, resource or count threshold",
+    "film-engine source, commit, ref, tag, release or remote mutation",
+    "rendering, network calls, signing, notarization, DMG work or PB.4 through PB.7"
+  ],
+  "stopRule": "Stop after an inert C4 tool freeze, negative/static audit and an exact fresh authorization request. Do not create attempt-03 roots or start Blender without a separately committed execution contract bound to new exact owner authorization.",
+  "claimCeiling": "This contract preregisters two harness corrections observed in retained C3 attempt-02. It grants no execution authority and does not convert the retained failure into a pass."
+}

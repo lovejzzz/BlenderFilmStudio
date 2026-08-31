@@ -6203,3 +6203,11 @@ Base runner完成B01/B02各一次build和reopen：四个Blender process全exit 0
 C3 runner在base PASS receipt之后因`process argv differs`停止。四组recorded argv的`--tool-contract`值是repo-relative，C3重建时将同一输入resolve为absolute；八份log本身全部hash exact。Base independent audit另以17/18 FAIL：两次`.blend` save在isolated HOME各生成一个2,949-byte `.thumbnails/large/*.png`，触发冻结的any-PNG no-render-artifact门。Consolidated audit 21/23 FAIL，file/self SHA为`b4fde05a2c20ed66a720a087c2cbfd86f5a66e9577c401c056fd68f51272cc84` / `d85dd5896fd7bfa1848b9367b136a0d0844d9ca8aa1dc02dea7982fa5081908b`。
 
 Attempt-02永久保留且不重跑。下一个有界校正不放宽任何threshold：在spawn前把`--tool-contract`统一为absolute；在save前将`preferences.filepaths.file_preview_type`设为`NONE`以阻止thumbnail产生。必须先经新inert tool freeze/static audit，然后再寻求fresh-run authorization；PB.4–PB.7仍locked。
+
+## J-506 · PB.3 C4 harness correction preregistration
+
+Date: 2026-08-31 · Type: PRE-AUTHORIZATION CORRECTION PREREGISTRATION · Blender starts / proposal executions / BuildPlan writes / renders: 0 / 0 / 0 / 0
+
+C4 v1.1在任何tool实现前冻结两项且仅两项intervention：第一，新runner在authority validation/process spawn前把唯一`--tool-contract`值resolve为absolute，保证recorded/reconstructed argv同一拼写；第二，versioned Blender helper在`save_as_mainfile`前设置并断言`preferences.filepaths.file_preview_type == NONE`，从源头阻止OS thumbnail PNG，不删除或豁免attempt-02观察。
+
+Machine contract为`specs/ai-native-studio-pb3-validation-c4-harness-correction.v1.1.json`，SHA-256 `194d3e9d1be415d29646f59ded6be94371e18db13a383d7a48d57a44aa741ece`。Base `noRenderArtifacts`的全work-root extension predicate不改；B01/B02 semantic/provenance/workspace/Expert、4/2/2/2/2/2上限、2 GiB / 64 MiB和zero render/network/engine write全部不改。Attempt-01/02保持immutable，future attempt-03 roots absent，本次计数全0。下一步只实现inert tools与static/negative audit，不启动Blender。

@@ -378,7 +378,8 @@ retained harness failures. Attempt-02 completed all four zero-render semantic
 processes but failed frozen postconditions at 17/18 base and 21/23 C3 audit.
 The next checkpoint is an inert versioned correction that normalizes the exact
 tool argv spelling and prevents Blender save-preview thumbnail creation without
-relaxing the no-render-artifact threshold. No fresh execution is authorized.
+relaxing the no-render-artifact threshold. C4 v1.1 preregisters that exact
+boundary; tooling is not yet implemented and no fresh execution is authorized.
 Do not retry either root, mutate `film-engine`, or begin PB.4–PB.7.
 
 No Developer ID, notarization, unsigned-DMG distribution or Phase B mutation is
