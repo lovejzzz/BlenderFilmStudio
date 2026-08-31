@@ -6497,3 +6497,11 @@ Formal attempt-01 evidence/work roots在freeze时absent；source/binary、26 det
 Date: 2026-08-31 · Type: PRE-START VERSIONED CORRECTION · PC.1 Blender starts / renders / saves: 0 / 0 / 0
 
 Static runtime evidence显示accepted Blender使用current enum `BLENDER_EEVEE`并拒绝`BLENDER_EEVEE_NEXT`。Published v0.1保留；C1 v0.2仅修改`/renderProfile/engine`该JSON leaf并绑定v0.1 file/self hashes。26 components、3 materials、pixel floors、sentinels、operations/resources全不变；tool freeze只绑定C1。
+
+## J-541 · PC.1 attempt-01 retained output-contract failure
+
+Date: 2026-08-31 · Type: RETAINED HARNESS FAILURE · Blender starts / renders / saves: 1 / 0 / 0
+
+Formal builder在first render前设置direct PNG时被product output contract正确拒绝：runtime仅暴露`OPEN_EXR_MULTILAYER`。Source SHA仍`0acd4d13...`；无detail creation/save/render/network/model/mouse。Process self hash `0aeaff0a...`，wall 0.637s，RSS 252,477,440 bytes。
+
+Attempt-01 roots保留。C2只允许复用既有temporary multilayer EXR→local PNG adapter，最终仍exact six PNG且retained EXR=0；其余26/3/pixel/sentinel/action/operations/resources thresholds不变。PC.2仍禁止。

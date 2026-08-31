@@ -466,8 +466,12 @@ audit (`ece09ea4…`); receipt and manifest self hashes are `c2a979f5…` and
 source SHA exactly. PC.1 is now preregistered with 26 semantic details, three
 new material regions and frames 48/144/240 A/B checks. Its exact builder,
 reopen semantic/pixel auditor, runner and final auditor are frozen against the
-one-leaf EEVEE C1 correction with self hash `e7e86dc2…`; both formal roots remain absent. The immediate checkpoint is
-executing that bounded attempt and retaining its result; PC.2 must not start.
+one-leaf EEVEE C1 correction with self hash `e7e86dc2…`. Attempt-01 then
+stopped before its first render because the product output contract permits
+only internal multilayer EXR, not direct PNG; it used 1 start, 0 render and 0
+save, and remains sealed (`dcd59081…` / `ffec4a49…`). The immediate checkpoint
+is a versioned C2 adapter that converts temporary EXR locally into the same six
+PNG comparisons while retaining zero EXR; PC.2 must not start.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

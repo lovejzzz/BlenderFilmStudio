@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "bfs.pc1RetainedFailure.v0.1",
+  "status": "FAIL",
+  "gate": "PC.1",
+  "attempt": "attempt-01",
+  "failureStage": "RENDER_OUTPUT_CONFIGURATION_BEFORE_FIRST_RENDER",
+  "errorExact": "TypeError: bpy_struct: item.attr = val: enum \"PNG\" not found in ('OPEN_EXR_MULTILAYER')",
+  "rootCause": "The product engine's enforced render-output contract exposes only OPEN_EXR_MULTILAYER; the frozen builder attempted to select PNG directly before its first render call.",
+  "correctionCeiling": "Use OPEN_EXR_MULTILAYER for each internal render, decode the combined result locally to the same six final PNG comparison artifacts, retain no EXR, and do not change detail, material, pixel, sentinel, operation or resource thresholds.",
+  "bindings": {
+    "repositoryCommit": "9263a148d13374638bdae6628d2c3779209c6924",
+    "preregistrationSpecHash": "28ac7a88c25a6da004c5b9fd996e3dcd69188b3e2665b577fdc2263aef1f3206",
+    "toolFreezeSpecHash": "e7e86dc26b4f643c5cb2521b2c0d080883f8f561f06f4d4afdbe80088e331a62",
+    "process": {
+      "uri": "processes/01-build.json",
+      "sha256": "ed711b307efcff4134cfb508ecdf1e633d3079a5ebd872cfae8e92671fa32c01",
+      "processHash": "0aeaff0a07e2f651acc9089fd8820a3941e99963cc73bda1b8056f6010eda23c"
+    }
+  },
+  "baseline": {
+    "sourceSha256Before": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+    "sourceSha256After": "0acd4d135c9bac9a7928a9a38da1a0e2f4838fd052a87a9663cef83cb2c373dc",
+    "binarySha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6"
+  },
+  "operations": {
+    "BlenderStarts": 1,
+    "renderCalls": 0,
+    "derivedSceneSaves": 0,
+    "sourceSceneSaves": 0,
+    "networkCalls": 0,
+    "modelCalls": 0,
+    "mouseInteractions": 0,
+    "engineSourceEdits": 0,
+    "engineCommits": 0,
+    "engineRemoteWrites": 0
+  },
+  "resources": {
+    "wallSeconds": 0.6374201774597168,
+    "peakRssBytes": 252477440
+  },
+  "retention": {
+    "immutable": true,
+    "cleanupPerformed": false,
+    "nextAttemptMustUseFreshRoots": true
+  },
+  "failureHash": "dcd59081b924ae78928de18375da3c331c4a16720f100d79cb149886bf0e814b"
+}
