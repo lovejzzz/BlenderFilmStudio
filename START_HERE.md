@@ -830,6 +830,15 @@ it changes only the actor, ramp and gate initial locations to the accepted RC2
 metric derivation. H1 and every authority, acceptance and resource rule remain
 unchanged. The active contract is RC3 preregistration v0.2.
 
+RC3 C3 attempt-03 now passes the zero-render machine development stage. D1
+contact/response is frame 52 with a 98.80388412° gate peak; H1 contact/response
+is frame 16 and all three bottles respond, but only two finish near 90° while
+one finishes upright. That asymmetry is retained as a solver result, not
+corrected into choreography. Both saves reopen below `8e-9` m, sixteen negative
+controls pass, and independent audit is 21/21. Candidate product commit is
+`5f595fe3…`; it is not public. Direct still/clip review is the active gate, then
+a clean native build is required before any publication.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>

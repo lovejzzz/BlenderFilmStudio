@@ -6876,3 +6876,16 @@ non-choreographed outcome. Maximum reopen deltas remain below `8e-9` m and
 validation; the canonicalizer correctly raised but the case was not recorded.
 C3 changes only that synthetic test call and replays unchanged product/fixtures
 in fresh roots.
+
+## J-593 · RC3 C3 same-compiler machine development PASS
+
+Date: 2026-09-01 · Type: MACHINE DEVELOPMENT PASS · Binary starts / scene mutations / renders: 5 / 2 / 0
+
+Fresh attempt-03 passes all 11 runner checks and an independent 21/21 audit.
+D1 and H1 use exact module SHA `6135a3c0…` with distinct graph hashes. D1
+contact/response is frame 52 and gate peak is 98.80388412°. H1 contact/response
+is frame 16; all three bottles respond, two finish near 90° and one upright.
+All outcome authority remains zero and both blends reopen below nanometric
+recorded tolerances. Candidate product commit `5f595fe3…` contains exactly the
+two preregistered paths. Publication remains blocked on direct visual review
+and clean-native formal validation.

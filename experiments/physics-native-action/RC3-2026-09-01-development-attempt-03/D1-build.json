@@ -1,0 +1,3065 @@
+{
+  "blend": {
+    "bytes": 212679,
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC3-development-attempt-03/runtime/RC3_D1_PHYSICS_ACTION.blend",
+    "sha256": "dbbc71f35586f3cce71a8b18e8f695c0ebb1a8ad4442c4d01947242dbcbe8576"
+  },
+  "case": "D1",
+  "counts": {
+    "blendSaves": 1,
+    "networkCalls": 0,
+    "renders": 0,
+    "sceneMutatingExecutions": 1
+  },
+  "inspection": {
+    "actorFactory": "GROOVED_CERAMIC_SPHERE",
+    "cameraFitSource": "MEASURED_CAUSE_CONTACT_EFFECT_SEMANTIC_BOUNDS",
+    "collisionShapes": [
+      "SPHERE",
+      "BOX"
+    ],
+    "compiledGraph": {
+      "beats": [
+        {
+          "deriveFrom": "BEFORE_RELATION_EVENT",
+          "id": "cause",
+          "offsetFrames": -18,
+          "relation": "primary_impact"
+        },
+        {
+          "deriveFrom": "FIRST_CONTACT",
+          "id": "contact",
+          "relation": "primary_impact"
+        },
+        {
+          "afterBeat": "contact",
+          "deriveFrom": "PEAK_ANGULAR_RESPONSE",
+          "id": "effect",
+          "node": "light_gate"
+        }
+      ],
+      "nodes": [
+        {
+          "factory": "GROOVED_CERAMIC_SPHERE",
+          "id": "rolling_actor",
+          "role": "initiator"
+        },
+        {
+          "factory": "METRIC_WEDGE_WITH_SIDE_RAILS",
+          "id": "ramp",
+          "role": "motion_path"
+        },
+        {
+          "factory": "HINGED_OCCLUDER_IN_ARCHITECTURAL_APERTURE",
+          "id": "light_gate",
+          "role": "physical_responder"
+        },
+        {
+          "factory": "MATTE_RELIEF_SIGNAL_WALL",
+          "id": "signal_receiver",
+          "role": "revealed_subject"
+        },
+        {
+          "factory": "STATIC_AREA_LIGHT",
+          "id": "reveal_light",
+          "role": "static_light_source"
+        }
+      ],
+      "relations": [
+        {
+          "id": "rolling_path",
+          "source": "rolling_actor",
+          "target": "ramp",
+          "type": "ROLLS_ON"
+        },
+        {
+          "contactToleranceMeters": 0.002,
+          "id": "primary_impact",
+          "source": "rolling_actor",
+          "target": "light_gate",
+          "type": "COLLIDES_WITH"
+        },
+        {
+          "axis": "WORLD_Z",
+          "id": "gate_hinge",
+          "limitsDegrees": [
+            -3.0,
+            108.0
+          ],
+          "passiveStopOffsetFromUpperLimitDegrees": 5.0,
+          "solverIterations": 120,
+          "source": "light_gate",
+          "type": "HINGED_TO_WORLD"
+        },
+        {
+          "id": "light_occlusion",
+          "source": "light_gate",
+          "target": "signal_receiver",
+          "type": "OCCLUDES_LIGHT_TO",
+          "via": "reveal_light"
+        }
+      ]
+    },
+    "compiledGraphHash": "4abefac844510ff3b7e34765d0c3fdaf937fecb19bbd194b4baba2ae2eb0ccb2",
+    "fileSha256": "2dd74b3de696571255443c689affbd6d72b348065ddef4e96053e0519a4cba8f",
+    "finalPoseSource": "BLENDER_BULLET_EVALUATED_ACTION_GRAPH",
+    "inspectionToken": "15f9908263ed50197b01e0097a15fec78b3601e3c0c47c61fee5a035b077ea13",
+    "sceneId": "RC3-D1-SIGNAL-GATE-GRAPH",
+    "sceneSpecHash": "0d03778492f9abb61b14b39255732a6b2bc444e9ab6d7d85ef5dfdc9c93f98f3",
+    "status": "APPROVED_READY",
+    "targetCount": 1,
+    "targetFactory": "HINGED_OCCLUDER_IN_ARCHITECTURAL_APERTURE"
+  },
+  "result": {
+    "authority": {
+      "arbitraryExecutableAuthority": 0,
+      "authoredContactResponsePeakOrFinalFrames": 0,
+      "authoredOutcomeFields": 0,
+      "cameraFrameSource": "MEASURED_PHYSICS_BEATS",
+      "finalPoseSource": "BLENDER_BULLET_EVALUATED_ACTION_GRAPH",
+      "lightAnimationChannels": 0,
+      "networkCalls": 0,
+      "postReleaseTransformKeyframes": 0
+    },
+    "cinematography": {
+      "cause": {
+        "camera": "ACTION_CAM_CAUSE",
+        "cameraLocation": [
+          -6.95266485,
+          -4.71620369,
+          3.38777924
+        ],
+        "frame": 34,
+        "negativeSpaceMargin": 0.10964486,
+        "occupancy": 0.66,
+        "source": "EVALUATED_FRAME_SEMANTIC_WORLD_BOUNDS_AND_LANDMARKS"
+      },
+      "contact": {
+        "camera": "ACTION_CAM_CONTACT",
+        "cameraLocation": [
+          -1.54799783,
+          -2.73359704,
+          1.20385492
+        ],
+        "frame": 54,
+        "negativeSpaceMargin": 0.15584919,
+        "occupancy": 0.67999998,
+        "source": "EVALUATED_FRAME_SEMANTIC_WORLD_BOUNDS_AND_LANDMARKS"
+      },
+      "effect": {
+        "camera": "ACTION_CAM_EFFECT",
+        "cameraLocation": [
+          -6.62603283,
+          -1.07318389,
+          4.41479063
+        ],
+        "frame": 81,
+        "negativeSpaceMargin": 0.11451883,
+        "occupancy": 0.65999996,
+        "source": "EVALUATED_FRAME_SEMANTIC_WORLD_BOUNDS_AND_LANDMARKS"
+      },
+      "motionBlur": {
+        "achievedMedianBlurPixels": 4.80546351,
+        "compositorOrPostprocessBlur": false,
+        "computedShutterFrames": 0.5,
+        "measurementFrame": 54,
+        "medianMovingPixelsPerFrame": 9.61092702,
+        "nativeTransformMotionBlur": true,
+        "objectPixelsPerFrame": {
+          "ACTION_HINGED_RESPONDER": 8.68195613,
+          "ACTION_INITIATOR": 10.53989791
+        },
+        "position": "CENTER",
+        "source": "BULLET_EVALUATED_PROJECTED_MOTION",
+        "targetBlurPixels": 6.0
+      }
+    },
+    "compiledGraph": {
+      "beats": [
+        {
+          "deriveFrom": "BEFORE_RELATION_EVENT",
+          "id": "cause",
+          "offsetFrames": -18,
+          "relation": "primary_impact"
+        },
+        {
+          "deriveFrom": "FIRST_CONTACT",
+          "id": "contact",
+          "relation": "primary_impact"
+        },
+        {
+          "afterBeat": "contact",
+          "deriveFrom": "PEAK_ANGULAR_RESPONSE",
+          "id": "effect",
+          "node": "light_gate"
+        }
+      ],
+      "nodes": [
+        {
+          "factory": "GROOVED_CERAMIC_SPHERE",
+          "id": "rolling_actor",
+          "role": "initiator"
+        },
+        {
+          "factory": "METRIC_WEDGE_WITH_SIDE_RAILS",
+          "id": "ramp",
+          "role": "motion_path"
+        },
+        {
+          "factory": "HINGED_OCCLUDER_IN_ARCHITECTURAL_APERTURE",
+          "id": "light_gate",
+          "role": "physical_responder"
+        },
+        {
+          "factory": "MATTE_RELIEF_SIGNAL_WALL",
+          "id": "signal_receiver",
+          "role": "revealed_subject"
+        },
+        {
+          "factory": "STATIC_AREA_LIGHT",
+          "id": "reveal_light",
+          "role": "static_light_source"
+        }
+      ],
+      "relations": [
+        {
+          "id": "rolling_path",
+          "source": "rolling_actor",
+          "target": "ramp",
+          "type": "ROLLS_ON"
+        },
+        {
+          "contactToleranceMeters": 0.002,
+          "id": "primary_impact",
+          "source": "rolling_actor",
+          "target": "light_gate",
+          "type": "COLLIDES_WITH"
+        },
+        {
+          "axis": "WORLD_Z",
+          "id": "gate_hinge",
+          "limitsDegrees": [
+            -3.0,
+            108.0
+          ],
+          "passiveStopOffsetFromUpperLimitDegrees": 5.0,
+          "solverIterations": 120,
+          "source": "light_gate",
+          "type": "HINGED_TO_WORLD"
+        },
+        {
+          "id": "light_occlusion",
+          "source": "light_gate",
+          "target": "signal_receiver",
+          "type": "OCCLUDES_LIGHT_TO",
+          "via": "reveal_light"
+        }
+      ]
+    },
+    "compiledGraphHash": "4abefac844510ff3b7e34765d0c3fdaf937fecb19bbd194b4baba2ae2eb0ccb2",
+    "contractVersion": "bfs.filmStudioPhysicsAction.v0.1",
+    "illumination": {
+      "changeSource": "SIMULATED_OCCLUDER_GEOMETRY_ONLY",
+      "hingeStopDegrees": 103.0,
+      "primaryLightColorLinearRgb": [
+        1.0,
+        0.41999998688697815,
+        0.1599999964237213
+      ],
+      "primaryLightPowerWatts": 1050.0
+    },
+    "mechanism": {
+      "activeRigidBodyCount": 2,
+      "factoryIds": [
+        "GROOVED_CERAMIC_SPHERE",
+        "METRIC_WEDGE_WITH_SIDE_RAILS",
+        "HINGED_OCCLUDER_IN_ARCHITECTURAL_APERTURE",
+        "MATTE_RELIEF_SIGNAL_WALL",
+        "STATIC_AREA_LIGHT"
+      ],
+      "nodeCount": 5,
+      "relationCount": 4,
+      "rigidBodyConstraintCount": 1
+    },
+    "physics": {
+      "actorTravelMeters": 4.19088622,
+      "contactFrame": 52,
+      "directionReversalFrame": null,
+      "firstResponseDelayFrames": 0,
+      "firstShutterResponseFrame": 52,
+      "medianRollingSlipRatio": 1.79e-06,
+      "peakOpenFrame": 81,
+      "peakShutterOpenDegrees": 98.80388412,
+      "samples": [
+        {
+          "actorLocation": [
+            -2.37357283,
+            0.169,
+            0.67938983
+          ],
+          "actorQuaternion": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "actorStepMeters": 0.0,
+          "frame": 1,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 0.0,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.09607305
+        },
+        {
+          "actorLocation": [
+            -2.3725307,
+            0.169,
+            0.67709684
+          ],
+          "actorQuaternion": [
+            0.9999944,
+            0.0,
+            0.00336335,
+            0.0
+          ],
+          "actorStepMeters": 0.0025187,
+          "frame": 2,
+          "rollingArcStepMeters": 0.0010712,
+          "rollingSlipRatio": 0.57470217,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.09503092
+        },
+        {
+          "actorLocation": [
+            -2.36850619,
+            0.169,
+            0.67616808
+          ],
+          "actorQuaternion": [
+            0.99986762,
+            0.0,
+            0.01627048,
+            0.0
+          ],
+          "actorStepMeters": 0.00413028,
+          "frame": 3,
+          "rollingArcStepMeters": 0.00412958,
+          "rollingSlipRatio": 0.00016941,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.09100634
+        },
+        {
+          "actorLocation": [
+            -2.36182761,
+            0.169,
+            0.67462689
+          ],
+          "actorQuaternion": [
+            0.99928987,
+            0.0,
+            0.03768075,
+            0.0
+          ],
+          "actorStepMeters": 0.0068541,
+          "frame": 4,
+          "rollingArcStepMeters": 0.0068529,
+          "rollingSlipRatio": 0.00017554,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.08432773
+        },
+        {
+          "actorLocation": [
+            -2.35250139,
+            0.169,
+            0.67247468
+          ],
+          "actorQuaternion": [
+            0.99771595,
+            0.0,
+            0.06754856,
+            0.0
+          ],
+          "actorStepMeters": 0.00957133,
+          "frame": 5,
+          "rollingArcStepMeters": 0.00957123,
+          "rollingSlipRatio": 1.069e-05,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.07500151
+        },
+        {
+          "actorLocation": [
+            -2.34053326,
+            0.169,
+            0.66971278
+          ],
+          "actorQuaternion": [
+            0.994389,
+            0.0,
+            0.10578523,
+            0.0
+          ],
+          "actorStepMeters": 0.01228269,
+          "frame": 6,
+          "rollingArcStepMeters": 0.01228204,
+          "rollingSlipRatio": 5.228e-05,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.06303339
+        },
+        {
+          "actorLocation": [
+            -2.32592893,
+            0.169,
+            0.66634256
+          ],
+          "actorQuaternion": [
+            0.98834556,
+            0.0,
+            0.15222734,
+            0.0
+          ],
+          "actorStepMeters": 0.01498816,
+          "frame": 7,
+          "rollingArcStepMeters": 0.01498794,
+          "rollingSlipRatio": 1.481e-05,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.04842903
+        },
+        {
+          "actorLocation": [
+            -2.30869436,
+            0.169,
+            0.66236532
+          ],
+          "actorQuaternion": [
+            0.97842622,
+            0.0,
+            0.20659666,
+            0.0
+          ],
+          "actorStepMeters": 0.01768753,
+          "frame": 8,
+          "rollingArcStepMeters": 0.01768717,
+          "rollingSlipRatio": 2.019e-05,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.03119452
+        },
+        {
+          "actorLocation": [
+            -2.28883505,
+            0.169,
+            0.65778244
+          ],
+          "actorQuaternion": [
+            0.9632929,
+            0.0,
+            0.26845261,
+            0.0
+          ],
+          "actorStepMeters": 0.02038125,
+          "frame": 9,
+          "rollingArcStepMeters": 0.02038105,
+          "rollingSlipRatio": 9.81e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 3.01133526
+        },
+        {
+          "actorLocation": [
+            -2.26635718,
+            0.169,
+            0.65259522
+          ],
+          "actorQuaternion": [
+            0.94145501,
+            0.0,
+            0.33713871,
+            0.0
+          ],
+          "actorStepMeters": 0.02306863,
+          "frame": 10,
+          "rollingArcStepMeters": 0.02306842,
+          "rollingSlipRatio": 9.2e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.9888573
+        },
+        {
+          "actorLocation": [
+            -2.24126625,
+            0.169,
+            0.64680505
+          ],
+          "actorQuaternion": [
+            0.91130823,
+            0.0,
+            0.41172475,
+            0.0
+          ],
+          "actorStepMeters": 0.02575036,
+          "frame": 11,
+          "rollingArcStepMeters": 0.02575029,
+          "rollingSlipRatio": 2.65e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.96376639
+        },
+        {
+          "actorLocation": [
+            -2.21356821,
+            0.169,
+            0.64041317
+          ],
+          "actorQuaternion": [
+            0.871189,
+            0.0,
+            0.49094787,
+            0.0
+          ],
+          "actorStepMeters": 0.028426,
+          "frame": 12,
+          "rollingArcStepMeters": 0.0284258,
+          "rollingSlipRatio": 6.98e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.93606831
+        },
+        {
+          "actorLocation": [
+            -2.18326855,
+            0.169,
+            0.63342094
+          ],
+          "actorQuaternion": [
+            0.81944627,
+            0.0,
+            0.57315606,
+            0.0
+          ],
+          "actorStepMeters": 0.03109599,
+          "frame": 13,
+          "rollingArcStepMeters": 0.03109577,
+          "rollingSlipRatio": 7.03e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.90576877
+        },
+        {
+          "actorLocation": [
+            -2.15037322,
+            0.169,
+            0.6258297
+          ],
+          "actorQuaternion": [
+            0.75453466,
+            0.0,
+            0.65626019,
+            0.0
+          ],
+          "actorStepMeters": 0.03375988,
+          "frame": 14,
+          "rollingArcStepMeters": 0.03375987,
+          "rollingSlipRatio": 4.6e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.87287345
+        },
+        {
+          "actorLocation": [
+            -2.11488795,
+            0.169,
+            0.61764079
+          ],
+          "actorQuaternion": [
+            0.67512852,
+            0.0,
+            0.73770022,
+            0.0
+          ],
+          "actorStepMeters": 0.03641789,
+          "frame": 15,
+          "rollingArcStepMeters": 0.03641768,
+          "rollingSlipRatio": 5.51e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.83738818
+        },
+        {
+          "actorLocation": [
+            -2.07681847,
+            0.169,
+            0.60885549
+          ],
+          "actorQuaternion": [
+            0.58025736,
+            0.0,
+            0.81443322,
+            0.0
+          ],
+          "actorStepMeters": 0.03907003,
+          "frame": 16,
+          "rollingArcStepMeters": 0.03907004,
+          "rollingSlipRatio": 2.4e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.79931858
+        },
+        {
+          "actorLocation": [
+            -2.03617024,
+            0.169,
+            0.59947515
+          ],
+          "actorQuaternion": [
+            0.46946132,
+            0.0,
+            0.88295305,
+            0.0
+          ],
+          "actorStepMeters": 0.04171653,
+          "frame": 17,
+          "rollingArcStepMeters": 0.04171638,
+          "rollingSlipRatio": 3.68e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.75867037
+        },
+        {
+          "actorLocation": [
+            -1.99294913,
+            0.169,
+            0.58950108
+          ],
+          "actorQuaternion": [
+            0.34295875,
+            0.0,
+            0.93935049,
+            0.0
+          ],
+          "actorStepMeters": 0.04435704,
+          "frame": 18,
+          "rollingArcStepMeters": 0.04435697,
+          "rollingSlipRatio": 1.61e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.7154491
+        },
+        {
+          "actorLocation": [
+            -1.94716084,
+            0.169,
+            0.57893455
+          ],
+          "actorQuaternion": [
+            0.20181999,
+            0.0,
+            0.97942269,
+            0.0
+          ],
+          "actorStepMeters": 0.04699169,
+          "frame": 19,
+          "rollingArcStepMeters": 0.0469915,
+          "rollingSlipRatio": 4.02e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.66966092
+        },
+        {
+          "actorLocation": [
+            -1.89881098,
+            0.169,
+            0.56777686
+          ],
+          "actorQuaternion": [
+            0.04813276,
+            0.0,
+            0.99884099,
+            0.0
+          ],
+          "actorStepMeters": 0.04962059,
+          "frame": 20,
+          "rollingArcStepMeters": 0.04962049,
+          "rollingSlipRatio": 1.96e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.62131103
+        },
+        {
+          "actorLocation": [
+            -1.84790516,
+            0.169,
+            0.55602938
+          ],
+          "actorQuaternion": [
+            0.11485615,
+            -0.0,
+            -0.99338216,
+            -0.0
+          ],
+          "actorStepMeters": 0.05224372,
+          "frame": 21,
+          "rollingArcStepMeters": 0.05224355,
+          "rollingSlipRatio": 3.28e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.57040536
+        },
+        {
+          "actorLocation": [
+            -1.79444909,
+            0.169,
+            0.54369336
+          ],
+          "actorQuaternion": [
+            0.28264543,
+            -0.0,
+            -0.95922446,
+            -0.0
+          ],
+          "actorStepMeters": 0.05486099,
+          "frame": 22,
+          "rollingArcStepMeters": 0.05486103,
+          "rollingSlipRatio": 7e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.51694931
+        },
+        {
+          "actorLocation": [
+            -1.73844826,
+            0.169,
+            0.53077012
+          ],
+          "actorQuaternion": [
+            0.44945279,
+            -0.0,
+            -0.89330411,
+            -0.0
+          ],
+          "actorStepMeters": 0.05747263,
+          "frame": 23,
+          "rollingArcStepMeters": 0.05747246,
+          "rollingSlipRatio": 2.96e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.4609483
+        },
+        {
+          "actorLocation": [
+            -1.67990851,
+            0.169,
+            0.51726091
+          ],
+          "actorQuaternion": [
+            0.60828447,
+            -0.0,
+            -0.79371911,
+            -0.0
+          ],
+          "actorStepMeters": 0.06007829,
+          "frame": 24,
+          "rollingArcStepMeters": 0.06007823,
+          "rollingSlipRatio": 1.1e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.40240872
+        },
+        {
+          "actorLocation": [
+            -1.61883521,
+            0.169,
+            0.50316709
+          ],
+          "actorQuaternion": [
+            0.75112677,
+            0.0,
+            -0.66015804,
+            0.0
+          ],
+          "actorStepMeters": 0.06267842,
+          "frame": 25,
+          "rollingArcStepMeters": 0.06267822,
+          "rollingSlipRatio": 3.1e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.34133536
+        },
+        {
+          "actorLocation": [
+            -1.55523419,
+            0.169,
+            0.4884899
+          ],
+          "actorQuaternion": [
+            0.86928016,
+            0.0,
+            -0.49431974,
+            0.0
+          ],
+          "actorStepMeters": 0.06527258,
+          "frame": 26,
+          "rollingArcStepMeters": 0.06527272,
+          "rollingSlipRatio": 2.22e-06,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.27773435
+        },
+        {
+          "actorLocation": [
+            -1.48911071,
+            0.169,
+            0.47323066
+          ],
+          "actorQuaternion": [
+            0.95385128,
+            0.0,
+            -0.30027941,
+            0.0
+          ],
+          "actorStepMeters": 0.06786133,
+          "frame": 27,
+          "rollingArcStepMeters": 0.06786133,
+          "rollingSlipRatio": 1e-08,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.21161083
+        },
+        {
+          "actorLocation": [
+            -1.4204706,
+            0.169,
+            0.45739064
+          ],
+          "actorQuaternion": [
+            0.99640256,
+            0.0,
+            -0.08474593,
+            0.0
+          ],
+          "actorStepMeters": 0.0704441,
+          "frame": 28,
+          "rollingArcStepMeters": 0.07044406,
+          "rollingSlipRatio": 5.2e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.14297063
+        },
+        {
+          "actorLocation": [
+            -1.34931934,
+            0.169,
+            0.44097111
+          ],
+          "actorQuaternion": [
+            0.98974389,
+            0.0,
+            0.14285347,
+            0.0
+          ],
+          "actorStepMeters": 0.07302125,
+          "frame": 29,
+          "rollingArcStepMeters": 0.07302127,
+          "rollingSlipRatio": 3.8e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 2.07181935
+        },
+        {
+          "actorLocation": [
+            -1.27566242,
+            0.169,
+            0.42397335
+          ],
+          "actorQuaternion": [
+            0.92882359,
+            0.0,
+            0.37052235,
+            0.0
+          ],
+          "actorStepMeters": 0.07559276,
+          "frame": 30,
+          "rollingArcStepMeters": 0.07559269,
+          "rollingSlipRatio": 8.4e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.99816258
+        },
+        {
+          "actorLocation": [
+            -1.19950533,
+            0.169,
+            0.40639862
+          ],
+          "actorQuaternion": [
+            0.81165475,
+            0.0,
+            0.58413744,
+            0.0
+          ],
+          "actorStepMeters": 0.07815864,
+          "frame": 31,
+          "rollingArcStepMeters": 0.07815857,
+          "rollingSlipRatio": 8.9e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.92200548
+        },
+        {
+          "actorLocation": [
+            -1.12085366,
+            0.169,
+            0.38824826
+          ],
+          "actorQuaternion": [
+            0.64018053,
+            0.0,
+            0.76822454,
+            0.0
+          ],
+          "actorStepMeters": 0.08071877,
+          "frame": 32,
+          "rollingArcStepMeters": 0.08071876,
+          "rollingSlipRatio": 2.2e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.84335388
+        },
+        {
+          "actorLocation": [
+            -1.03971291,
+            0.169,
+            0.36952347
+          ],
+          "actorQuaternion": [
+            0.42096061,
+            0.0,
+            0.90707892,
+            0.0
+          ],
+          "actorStepMeters": 0.08327329,
+          "frame": 33,
+          "rollingArcStepMeters": 0.0832733,
+          "rollingSlipRatio": 1e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.76221296
+        },
+        {
+          "actorLocation": [
+            -0.95608819,
+            0.16899422,
+            0.3502194
+          ],
+          "actorQuaternion": [
+            0.16553235,
+            8e-07,
+            0.98620433,
+            2.143e-05
+          ],
+          "actorStepMeters": 0.0858239,
+          "frame": 34,
+          "rollingArcStepMeters": 0.08582589,
+          "rollingSlipRatio": 2.326e-05,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.67858815
+        },
+        {
+          "actorLocation": [
+            -0.86997819,
+            0.16897807,
+            0.33035392
+          ],
+          "actorQuaternion": [
+            0.10964309,
+            -1.03e-06,
+            -0.99397105,
+            -7.672e-05
+          ],
+          "actorStepMeters": 0.08837177,
+          "frame": 35,
+          "rollingArcStepMeters": 0.08837171,
+          "rollingSlipRatio": 6.8e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.59247828
+        },
+        {
+          "actorLocation": [
+            -0.78139687,
+            0.16896194,
+            0.30991206
+          ],
+          "actorQuaternion": [
+            0.38384429,
+            -1.86e-06,
+            -0.92339784,
+            -0.00012586
+          ],
+          "actorStepMeters": 0.09090941,
+          "frame": 36,
+          "rollingArcStepMeters": 0.0909094,
+          "rollingSlipRatio": 1.5e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.50389694
+        },
+        {
+          "actorLocation": [
+            -0.69034833,
+            0.16894586,
+            0.28890085
+          ],
+          "actorQuaternion": [
+            0.63341647,
+            -3.63e-06,
+            -0.77381104,
+            -0.00016449
+          ],
+          "actorStepMeters": 0.09344146,
+          "frame": 37,
+          "rollingArcStepMeters": 0.09344149,
+          "rollingSlipRatio": 2.3e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.41284835
+        },
+        {
+          "actorLocation": [
+            -0.59683806,
+            0.16892982,
+            0.26732156
+          ],
+          "actorQuaternion": [
+            0.83374739,
+            -6.49e-06,
+            -0.55214602,
+            -0.00018871
+          ],
+          "actorStepMeters": 0.0959679,
+          "frame": 38,
+          "rollingArcStepMeters": 0.09596796,
+          "rollingSlipRatio": 6.7e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.31933804
+        },
+        {
+          "actorLocation": [
+            -0.50087142,
+            0.1689138,
+            0.24517542
+          ],
+          "actorQuaternion": [
+            0.96183681,
+            -1.036e-05,
+            -0.2736237,
+            -0.00019555
+          ],
+          "actorStepMeters": 0.09848882,
+          "frame": 39,
+          "rollingArcStepMeters": 0.09848876,
+          "rollingSlipRatio": 5.9e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.22337149
+        },
+        {
+          "actorLocation": [
+            -0.40245384,
+            0.16889782,
+            0.22246367
+          ],
+          "actorQuaternion": [
+            0.99925977,
+            -1.487e-05,
+            0.03846999,
+            -0.00018349
+          ],
+          "actorStepMeters": 0.10100418,
+          "frame": 40,
+          "rollingArcStepMeters": 0.10100409,
+          "rollingSlipRatio": 9.3e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.12495383
+        },
+        {
+          "actorLocation": [
+            -0.30159077,
+            0.16888188,
+            0.19918758
+          ],
+          "actorQuaternion": [
+            0.93520439,
+            -1.942e-05,
+            0.35410845,
+            -0.00015283
+          ],
+          "actorStepMeters": 0.10351394,
+          "frame": 41,
+          "rollingArcStepMeters": 0.10351392,
+          "rollingSlipRatio": 2.1e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 1.02409074
+        },
+        {
+          "actorLocation": [
+            -0.19866821,
+            0.16886561,
+            0.19599999
+          ],
+          "actorQuaternion": [
+            0.77464479,
+            -2.463e-05,
+            0.63239664,
+            -0.00010749
+          ],
+          "actorStepMeters": 0.10297191,
+          "frame": 42,
+          "rollingArcStepMeters": 0.10325842,
+          "rollingSlipRatio": 0.0027747,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.92116815
+        },
+        {
+          "actorLocation": [
+            -0.09586063,
+            0.1688493,
+            0.19599999
+          ],
+          "actorQuaternion": [
+            0.53531402,
+            -2.76e-05,
+            0.84465313,
+            -5.144e-05
+          ],
+          "actorStepMeters": 0.10280758,
+          "frame": 43,
+          "rollingArcStepMeters": 0.10280757,
+          "rollingSlipRatio": 1.5e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.81836071
+        },
+        {
+          "actorLocation": [
+            0.00672025,
+            0.16883303,
+            0.19599999
+          ],
+          "actorQuaternion": [
+            0.24189089,
+            -2.773e-05,
+            0.97030342,
+            9.73e-06
+          ],
+          "actorStepMeters": 0.10258089,
+          "frame": 44,
+          "rollingArcStepMeters": 0.10258081,
+          "rollingSlipRatio": 6.9e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.71577979
+        },
+        {
+          "actorLocation": [
+            0.10907493,
+            0.1688168,
+            0.19599999
+          ],
+          "actorQuaternion": [
+            0.07547234,
+            2.503e-05,
+            -0.99714792,
+            -6.978e-05
+          ],
+          "actorStepMeters": 0.10235468,
+          "frame": 45,
+          "rollingArcStepMeters": 0.10235471,
+          "rollingSlipRatio": 3.2e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.61342509
+        },
+        {
+          "actorLocation": [
+            0.2112039,
+            0.16880061,
+            0.19599999
+          ],
+          "actorQuaternion": [
+            0.3845287,
+            1.979e-05,
+            -0.92311305,
+            -0.00012265
+          ],
+          "actorStepMeters": 0.10212898,
+          "frame": 46,
+          "rollingArcStepMeters": 0.10212896,
+          "rollingSlipRatio": 1.3e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.51129618
+        },
+        {
+          "actorLocation": [
+            0.31310767,
+            0.16878445,
+            0.19599999
+          ],
+          "actorQuaternion": [
+            0.65421665,
+            1.254e-05,
+            -0.75630724,
+            -0.00016306
+          ],
+          "actorStepMeters": 0.10190377,
+          "frame": 47,
+          "rollingArcStepMeters": 0.10190368,
+          "rollingSlipRatio": 9.1e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.40939239
+        },
+        {
+          "actorLocation": [
+            0.4148007,
+            0.16876833,
+            0.19137146
+          ],
+          "actorQuaternion": [
+            0.85770243,
+            4.05e-06,
+            -0.51414639,
+            -0.00018705
+          ],
+          "actorStepMeters": 0.10179831,
+          "frame": 48,
+          "rollingArcStepMeters": 0.10164403,
+          "rollingSlipRatio": 0.00151558,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.30769932
+        },
+        {
+          "actorLocation": [
+            0.51631916,
+            0.16875224,
+            0.1703182
+          ],
+          "actorQuaternion": [
+            0.97513604,
+            -4.82e-06,
+            -0.22160706,
+            -0.00019233
+          ],
+          "actorStepMeters": 0.10367852,
+          "frame": 49,
+          "rollingArcStepMeters": 0.10129597,
+          "rollingSlipRatio": 0.02298021,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.20618087
+        },
+        {
+          "actorLocation": [
+            0.61757946,
+            0.16873619,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.99571031,
+            -1.32e-05,
+            0.092526,
+            -0.00017857
+          ],
+          "actorStepMeters": 0.10178465,
+          "frame": 50,
+          "rollingArcStepMeters": 0.10115856,
+          "rollingSlipRatio": 0.0061511,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.10492056
+        },
+        {
+          "actorLocation": [
+            0.71858746,
+            0.16872017,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.91779369,
+            -2.026e-05,
+            0.39705762,
+            -0.0001472
+          ],
+          "actorStepMeters": 0.101008,
+          "frame": 51,
+          "rollingArcStepMeters": 0.10100801,
+          "rollingSlipRatio": 1.6e-07,
+          "shutterAngleDegrees": 0.0,
+          "spherePanelGapMeters": 0.00391256
+        },
+        {
+          "actorLocation": [
+            0.76409137,
+            0.16890793,
+            0.17471321
+          ],
+          "actorQuaternion": [
+            0.85508537,
+            -0.00064338,
+            0.51848572,
+            0.00108241
+          ],
+          "actorStepMeters": 0.04782384,
+          "frame": 52,
+          "rollingArcStepMeters": 0.0437689,
+          "rollingSlipRatio": 0.08478914,
+          "shutterAngleDegrees": 3.87792741,
+          "spherePanelGapMeters": 0.0
+        },
+        {
+          "actorLocation": [
+            0.80693018,
+            0.16912326,
+            0.17346293
+          ],
+          "actorQuaternion": [
+            0.78194761,
+            -0.00132754,
+            0.62333858,
+            0.002283
+          ],
+          "actorStepMeters": 0.04285759,
+          "frame": 53,
+          "rollingArcStepMeters": 0.04093931,
+          "rollingSlipRatio": 0.04475945,
+          "shutterAngleDegrees": 7.91658711,
+          "spherePanelGapMeters": 0.0
+        },
+        {
+          "actorLocation": [
+            0.84945089,
+            0.1693396,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.69600886,
+            -0.00205939,
+            0.71802247,
+            0.00333281
+          ],
+          "actorStepMeters": 0.04460165,
+          "frame": 54,
+          "rollingArcStepMeters": 0.04094813,
+          "rollingSlipRatio": 0.08191442,
+          "shutterAngleDegrees": 11.94358553,
+          "spherePanelGapMeters": 0.00011789
+        },
+        {
+          "actorLocation": [
+            0.89142346,
+            0.16951735,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.59611493,
+            -0.00295968,
+            0.80288315,
+            0.0041146
+          ],
+          "actorStepMeters": 0.04197295,
+          "frame": 55,
+          "rollingArcStepMeters": 0.04197499,
+          "rollingSlipRatio": 4.858e-05,
+          "shutterAngleDegrees": 15.95012413,
+          "spherePanelGapMeters": 0.00087994
+        },
+        {
+          "actorLocation": [
+            0.93330342,
+            0.16969469,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.48623171,
+            -0.00380595,
+            0.87380832,
+            0.00482319
+          ],
+          "actorStepMeters": 0.04188033,
+          "frame": 56,
+          "rollingArcStepMeters": 0.04188258,
+          "rollingSlipRatio": 5.383e-05,
+          "shutterAngleDegrees": 19.93575978,
+          "spherePanelGapMeters": 0.00222939
+        },
+        {
+          "actorLocation": [
+            0.9750911,
+            0.16987166,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.36829939,
+            -0.004584,
+            0.92967999,
+            0.00544717
+          ],
+          "actorStepMeters": 0.04178806,
+          "frame": 57,
+          "rollingArcStepMeters": 0.04179011,
+          "rollingSlipRatio": 4.918e-05,
+          "shutterAngleDegrees": 23.90076997,
+          "spherePanelGapMeters": 0.00453913
+        },
+        {
+          "actorLocation": [
+            1.01678658,
+            0.17004822,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.24437389,
+            -0.00528095,
+            0.9696483,
+            0.0059767
+          ],
+          "actorStepMeters": 0.04169585,
+          "frame": 58,
+          "rollingArcStepMeters": 0.04169803,
+          "rollingSlipRatio": 5.234e-05,
+          "shutterAngleDegrees": 27.84520251,
+          "spherePanelGapMeters": 0.00815987
+        },
+        {
+          "actorLocation": [
+            1.05839014,
+            0.17022441,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.11659027,
+            -0.00588549,
+            0.99314201,
+            0.00640365
+          ],
+          "actorStepMeters": 0.04160394,
+          "frame": 59,
+          "rollingArcStepMeters": 0.0416059,
+          "rollingSlipRatio": 4.709e-05,
+          "shutterAngleDegrees": 31.76916326,
+          "spherePanelGapMeters": 0.01341614
+        },
+        {
+          "actorLocation": [
+            1.09990191,
+            0.1704002,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.01287487,
+            0.00638801,
+            -0.99987411,
+            -0.00672172
+          ],
+          "actorStepMeters": 0.04151215,
+          "frame": 60,
+          "rollingArcStepMeters": 0.04151418,
+          "rollingSlipRatio": 4.892e-05,
+          "shutterAngleDegrees": 35.67282128,
+          "spherePanelGapMeters": 0.02060457
+        },
+        {
+          "actorLocation": [
+            1.14132214,
+            0.1705756,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.14184038,
+            0.00678074,
+            -0.98984206,
+            -0.00692652
+          ],
+          "actorStepMeters": 0.04142059,
+          "frame": 61,
+          "rollingArcStepMeters": 0.04142263,
+          "rollingSlipRatio": 4.929e-05,
+          "shutterAngleDegrees": 39.55622096,
+          "spherePanelGapMeters": 0.02999183
+        },
+        {
+          "actorLocation": [
+            1.18265116,
+            0.17075062,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.26815757,
+            0.00705788,
+            -0.96332365,
+            -0.00701558
+          ],
+          "actorStepMeters": 0.0413294,
+          "frame": 62,
+          "rollingArcStepMeters": 0.04133136,
+          "rollingSlipRatio": 4.756e-05,
+          "shutterAngleDegrees": 43.41948182,
+          "spherePanelGapMeters": 0.04181301
+        },
+        {
+          "actorLocation": [
+            1.22388887,
+            0.17092526,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.38974512,
+            0.00721561,
+            -0.92086798,
+            -0.00698841
+          ],
+          "actorStepMeters": 0.04123808,
+          "frame": 63,
+          "rollingArcStepMeters": 0.04124034,
+          "rollingSlipRatio": 5.485e-05,
+          "shutterAngleDegrees": 47.26271657,
+          "spherePanelGapMeters": 0.05627054
+        },
+        {
+          "actorLocation": [
+            1.26503575,
+            0.1710995,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.504623,
+            0.00725219,
+            -0.8632822,
+            -0.00684641
+          ],
+          "actorStepMeters": 0.04114724,
+          "frame": 64,
+          "rollingArcStepMeters": 0.04114927,
+          "rollingSlipRatio": 4.921e-05,
+          "shutterAngleDegrees": 51.08602082,
+          "spherePanelGapMeters": 0.07353258
+        },
+        {
+          "actorLocation": [
+            1.3060919,
+            0.17127337,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.6109435,
+            0.0071679,
+            -0.79161435,
+            -0.00659288
+          ],
+          "actorStepMeters": 0.04105652,
+          "frame": 65,
+          "rollingArcStepMeters": 0.04105859,
+          "rollingSlipRatio": 5.027e-05,
+          "shutterAngleDegrees": 54.88947996,
+          "spherePanelGapMeters": 0.09373292
+        },
+        {
+          "actorLocation": [
+            1.34705746,
+            0.17144684,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.70701975,
+            0.00696504,
+            -0.70713198,
+            -0.00623287
+          ],
+          "actorStepMeters": 0.04096593,
+          "frame": 66,
+          "rollingArcStepMeters": 0.04096801,
+          "rollingSlipRatio": 5.084e-05,
+          "shutterAngleDegrees": 58.67325108,
+          "spherePanelGapMeters": 0.11697026
+        },
+        {
+          "actorLocation": [
+            1.38793266,
+            0.17161994,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.7913509,
+            0.00664784,
+            -0.61129886,
+            -0.00577313
+          ],
+          "actorStepMeters": 0.04087556,
+          "frame": 67,
+          "rollingArcStepMeters": 0.04087753,
+          "rollingSlipRatio": 4.809e-05,
+          "shutterAngleDegrees": 62.43740932,
+          "spherePanelGapMeters": 0.14330848
+        },
+        {
+          "actorLocation": [
+            1.42871785,
+            0.17179266,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.86264378,
+            0.00622235,
+            -0.50574672,
+            -0.00522193
+          ],
+          "actorStepMeters": 0.04078556,
+          "frame": 68,
+          "rollingArcStepMeters": 0.04078745,
+          "rollingSlipRatio": 4.633e-05,
+          "shutterAngleDegrees": 66.18202638,
+          "spherePanelGapMeters": 0.17277628
+        },
+        {
+          "actorLocation": [
+            1.46941304,
+            0.17196499,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.9198305,
+            0.00569635,
+            -0.39224789,
+            -0.00458889
+          ],
+          "actorStepMeters": 0.04069556,
+          "frame": 69,
+          "rollingArcStepMeters": 0.04069747,
+          "rollingSlipRatio": 4.704e-05,
+          "shutterAngleDegrees": 69.90723887,
+          "spherePanelGapMeters": 0.20536858
+        },
+        {
+          "actorLocation": [
+            1.51001847,
+            0.17213693,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.96208274,
+            0.00507916,
+            -0.27268288,
+            -0.00388485
+          ],
+          "actorStepMeters": 0.04060579,
+          "frame": 70,
+          "rollingArcStepMeters": 0.04060775,
+          "rollingSlipRatio": 4.823e-05,
+          "shutterAngleDegrees": 73.61313559,
+          "spherePanelGapMeters": 0.2410461
+        },
+        {
+          "actorLocation": [
+            1.55053437,
+            0.17230852,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.98882115,
+            0.00438147,
+            -0.14900933,
+            -0.00312165
+          ],
+          "actorStepMeters": 0.04051626,
+          "frame": 71,
+          "rollingArcStepMeters": 0.04051813,
+          "rollingSlipRatio": 4.6e-05,
+          "shutterAngleDegrees": 77.29981216,
+          "spherePanelGapMeters": 0.27973744
+        },
+        {
+          "actorLocation": [
+            1.59096086,
+            0.1724797,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.99972093,
+            0.00361515,
+            -0.02322907,
+            -0.00231189
+          ],
+          "actorStepMeters": 0.04042685,
+          "frame": 72,
+          "rollingArcStepMeters": 0.04042876,
+          "rollingSlipRatio": 4.719e-05,
+          "shutterAngleDegrees": 80.96738469,
+          "spherePanelGapMeters": 0.32133937
+        },
+        {
+          "actorLocation": [
+            1.6312983,
+            0.17265053,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.99471319,
+            0.00279304,
+            0.10264435,
+            -0.00146879
+          ],
+          "actorStepMeters": 0.04033781,
+          "frame": 73,
+          "rollingArcStepMeters": 0.04033966,
+          "rollingSlipRatio": 4.599e-05,
+          "shutterAngleDegrees": 84.61592831,
+          "spherePanelGapMeters": 0.3657185
+        },
+        {
+          "actorLocation": [
+            1.67154682,
+            0.17282097,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.97398162,
+            0.00192871,
+            0.22661804,
+            -0.00060589
+          ],
+          "actorStepMeters": 0.04024887,
+          "frame": 74,
+          "rollingArcStepMeters": 0.04025066,
+          "rollingSlipRatio": 4.446e-05,
+          "shutterAngleDegrees": 88.24555913,
+          "spherePanelGapMeters": 0.41271301
+        },
+        {
+          "actorLocation": [
+            1.71170652,
+            0.17299104,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.93795669,
+            0.00103626,
+            0.3467508,
+            0.0002631
+          ],
+          "actorStepMeters": 0.04016006,
+          "frame": 75,
+          "rollingArcStepMeters": 0.04016208,
+          "rollingSlipRatio": 5.028e-05,
+          "shutterAngleDegrees": 91.85637279,
+          "spherePanelGapMeters": 0.46213415
+        },
+        {
+          "actorLocation": [
+            1.75177765,
+            0.17316073,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.88730425,
+            0.00013007,
+            0.46118325,
+            0.00112457
+          ],
+          "actorStepMeters": 0.04007149,
+          "frame": 76,
+          "rollingArcStepMeters": 0.0400733,
+          "rollingSlipRatio": 4.529e-05,
+          "shutterAngleDegrees": 95.44845807,
+          "spherePanelGapMeters": 0.51376786
+        },
+        {
+          "actorLocation": [
+            1.78499997,
+            0.17330174,
+            0.16171783
+          ],
+          "actorQuaternion": [
+            0.83192539,
+            -0.0006814,
+            0.55488425,
+            0.0017707
+          ],
+          "actorStepMeters": 0.033267,
+          "frame": 77,
+          "rollingArcStepMeters": 0.03484818,
+          "rollingSlipRatio": 0.04537335,
+          "shutterAngleDegrees": 98.8038568,
+          "spherePanelGapMeters": 0.56336704
+        },
+        {
+          "actorLocation": [
+            1.78499997,
+            0.17330882,
+            0.16155997
+          ],
+          "actorQuaternion": [
+            0.81330085,
+            -0.00104346,
+            0.58184057,
+            0.00148509
+          ],
+          "actorStepMeters": 0.00015802,
+          "frame": 78,
+          "rollingArcStepMeters": 0.01048611,
+          "rollingSlipRatio": 0.9849304,
+          "shutterAngleDegrees": 98.80387046,
+          "spherePanelGapMeters": 0.56337425
+        },
+        {
+          "actorLocation": [
+            1.78499997,
+            0.17335439,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043702,
+            -0.00120002,
+            0.585823,
+            0.00134504
+          ],
+          "actorStepMeters": 0.00156064,
+          "frame": 79,
+          "rollingArcStepMeters": 0.0015664,
+          "rollingSlipRatio": 0.00368027,
+          "shutterAngleDegrees": 98.80387046,
+          "spherePanelGapMeters": 0.56341932
+        },
+        {
+          "actorLocation": [
+            1.78499997,
+            0.17340674,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.8104369,
+            -0.00131974,
+            0.58582318,
+            0.00123141
+          ],
+          "actorStepMeters": 5.235e-05,
+          "frame": 80,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80387046,
+          "spherePanelGapMeters": 0.56347098
+        },
+        {
+          "actorLocation": [
+            1.78499985,
+            0.17345896,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043673,
+            -0.00143921,
+            0.5858233,
+            0.00111806
+          ],
+          "actorStepMeters": 5.223e-05,
+          "frame": 81,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80388412,
+          "spherePanelGapMeters": 0.56352255
+        },
+        {
+          "actorLocation": [
+            1.78499985,
+            0.17351109,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043667,
+            -0.00155843,
+            0.58582336,
+            0.00100498
+          ],
+          "actorStepMeters": 5.212e-05,
+          "frame": 82,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80386363,
+          "spherePanelGapMeters": 0.56357404
+        },
+        {
+          "actorLocation": [
+            1.78499973,
+            0.17356309,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043655,
+            -0.0016774,
+            0.58582336,
+            0.00089217
+          ],
+          "actorStepMeters": 5.201e-05,
+          "frame": 83,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80386363,
+          "spherePanelGapMeters": 0.56362544
+        },
+        {
+          "actorLocation": [
+            1.78499973,
+            0.17361498,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043637,
+            -0.00179613,
+            0.58582342,
+            0.00077964
+          ],
+          "actorStepMeters": 5.189e-05,
+          "frame": 84,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80386363,
+          "spherePanelGapMeters": 0.56367667
+        },
+        {
+          "actorLocation": [
+            1.78499973,
+            0.17366675,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043607,
+            -0.00191461,
+            0.5858236,
+            0.00066737
+          ],
+          "actorStepMeters": 5.177e-05,
+          "frame": 85,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80386363,
+          "spherePanelGapMeters": 0.56372782
+        },
+        {
+          "actorLocation": [
+            1.78499961,
+            0.17371841,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043589,
+            -0.00203285,
+            0.5858236,
+            0.00055538
+          ],
+          "actorStepMeters": 5.166e-05,
+          "frame": 86,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.8038568,
+          "spherePanelGapMeters": 0.56377871
+        },
+        {
+          "actorLocation": [
+            1.78499961,
+            0.17376995,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043565,
+            -0.00215084,
+            0.58582354,
+            0.00044365
+          ],
+          "actorStepMeters": 5.154e-05,
+          "frame": 87,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.8038568,
+          "spherePanelGapMeters": 0.56382969
+        },
+        {
+          "actorLocation": [
+            1.78499949,
+            0.17382139,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043547,
+            -0.00226858,
+            0.58582348,
+            0.00033219
+          ],
+          "actorStepMeters": 5.144e-05,
+          "frame": 88,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.8038568,
+          "spherePanelGapMeters": 0.56388045
+        },
+        {
+          "actorLocation": [
+            1.78499949,
+            0.17387269,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043518,
+            -0.00238609,
+            0.58582348,
+            0.000221
+          ],
+          "actorStepMeters": 5.13e-05,
+          "frame": 89,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.8038568,
+          "spherePanelGapMeters": 0.56393113
+        },
+        {
+          "actorLocation": [
+            1.78499949,
+            0.17392391,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043482,
+            -0.00250335,
+            0.58582348,
+            0.00011007
+          ],
+          "actorStepMeters": 5.122e-05,
+          "frame": 90,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.8038568,
+          "spherePanelGapMeters": 0.56398168
+        },
+        {
+          "actorLocation": [
+            1.78499937,
+            0.17397499,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043452,
+            -0.00262036,
+            0.58582348,
+            -5.9e-07
+          ],
+          "actorStepMeters": 5.108e-05,
+          "frame": 91,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80386363,
+          "spherePanelGapMeters": 0.56403211
+        },
+        {
+          "actorLocation": [
+            1.78499937,
+            0.17402598,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043422,
+            -0.00273713,
+            0.5858233,
+            -0.00011098
+          ],
+          "actorStepMeters": 5.099e-05,
+          "frame": 92,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80386363,
+          "spherePanelGapMeters": 0.56408249
+        },
+        {
+          "actorLocation": [
+            1.78499925,
+            0.17407684,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043386,
+            -0.00285367,
+            0.58582318,
+            -0.00022111
+          ],
+          "actorStepMeters": 5.086e-05,
+          "frame": 93,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80386363,
+          "spherePanelGapMeters": 0.56413266
+        },
+        {
+          "actorLocation": [
+            1.78499925,
+            0.17412759,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043345,
+            -0.00296996,
+            0.58582306,
+            -0.00033097
+          ],
+          "actorStepMeters": 5.075e-05,
+          "frame": 94,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80386363,
+          "spherePanelGapMeters": 0.56418278
+        },
+        {
+          "actorLocation": [
+            1.78499925,
+            0.17417824,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043303,
+            -0.00308601,
+            0.58582306,
+            -0.00044057
+          ],
+          "actorStepMeters": 5.065e-05,
+          "frame": 95,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80382948,
+          "spherePanelGapMeters": 0.56423299
+        },
+        {
+          "actorLocation": [
+            1.78499913,
+            0.17422877,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043261,
+            -0.00320182,
+            0.58582288,
+            -0.0005499
+          ],
+          "actorStepMeters": 5.053e-05,
+          "frame": 96,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80382948,
+          "spherePanelGapMeters": 0.56428286
+        },
+        {
+          "actorLocation": [
+            1.78499913,
+            0.17427918,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043214,
+            -0.00331738,
+            0.58582282,
+            -0.00065898
+          ],
+          "actorStepMeters": 5.041e-05,
+          "frame": 97,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80383631,
+          "spherePanelGapMeters": 0.56433265
+        },
+        {
+          "actorLocation": [
+            1.78499913,
+            0.17432949,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043172,
+            -0.00343271,
+            0.58582252,
+            -0.00076779
+          ],
+          "actorStepMeters": 5.031e-05,
+          "frame": 98,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80383631,
+          "spherePanelGapMeters": 0.56438235
+        },
+        {
+          "actorLocation": [
+            1.78499901,
+            0.17437969,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043124,
+            -0.0035478,
+            0.58582234,
+            -0.00087634
+          ],
+          "actorStepMeters": 5.02e-05,
+          "frame": 99,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80383631,
+          "spherePanelGapMeters": 0.56443192
+        },
+        {
+          "actorLocation": [
+            1.78499901,
+            0.17442977,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043077,
+            -0.00366266,
+            0.58582222,
+            -0.00098463
+          ],
+          "actorStepMeters": 5.008e-05,
+          "frame": 100,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80382948,
+          "spherePanelGapMeters": 0.56448133
+        },
+        {
+          "actorLocation": [
+            1.78499889,
+            0.17447975,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81043023,
+            -0.00377727,
+            0.58582199,
+            -0.00109266
+          ],
+          "actorStepMeters": 4.998e-05,
+          "frame": 101,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80382948,
+          "spherePanelGapMeters": 0.56453065
+        },
+        {
+          "actorLocation": [
+            1.78499889,
+            0.17452963,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042963,
+            -0.00389164,
+            0.58582187,
+            -0.00120044
+          ],
+          "actorStepMeters": 4.987e-05,
+          "frame": 102,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80383631,
+          "spherePanelGapMeters": 0.56457989
+        },
+        {
+          "actorLocation": [
+            1.78499889,
+            0.17457938,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.8104291,
+            -0.00400578,
+            0.58582157,
+            -0.00130795
+          ],
+          "actorStepMeters": 4.975e-05,
+          "frame": 103,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80383631,
+          "spherePanelGapMeters": 0.56462903
+        },
+        {
+          "actorLocation": [
+            1.78499877,
+            0.17462902,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042856,
+            -0.00411968,
+            0.58582133,
+            -0.00141521
+          ],
+          "actorStepMeters": 4.964e-05,
+          "frame": 104,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80383631,
+          "spherePanelGapMeters": 0.5646781
+        },
+        {
+          "actorLocation": [
+            1.78499877,
+            0.17467856,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.8104279,
+            -0.00423335,
+            0.58582109,
+            -0.0015222
+          ],
+          "actorStepMeters": 4.955e-05,
+          "frame": 105,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80382265,
+          "spherePanelGapMeters": 0.56472703
+        },
+        {
+          "actorLocation": [
+            1.78499877,
+            0.17472799,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042725,
+            -0.00434678,
+            0.58582091,
+            -0.00162895
+          ],
+          "actorStepMeters": 4.943e-05,
+          "frame": 106,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80382265,
+          "spherePanelGapMeters": 0.56477585
+        },
+        {
+          "actorLocation": [
+            1.78499866,
+            0.17477731,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042671,
+            -0.00445997,
+            0.5858205,
+            -0.00173543
+          ],
+          "actorStepMeters": 4.932e-05,
+          "frame": 107,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80382265,
+          "spherePanelGapMeters": 0.56482461
+        },
+        {
+          "actorLocation": [
+            1.78499866,
+            0.17482652,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042606,
+            -0.00457293,
+            0.58582026,
+            -0.00184166
+          ],
+          "actorStepMeters": 4.92e-05,
+          "frame": 108,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80383631,
+          "spherePanelGapMeters": 0.56487313
+        },
+        {
+          "actorLocation": [
+            1.78499854,
+            0.17487562,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.8104254,
+            -0.00468565,
+            0.5858199,
+            -0.00194764
+          ],
+          "actorStepMeters": 4.91e-05,
+          "frame": 109,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80383631,
+          "spherePanelGapMeters": 0.5649216
+        },
+        {
+          "actorLocation": [
+            1.78499854,
+            0.17492461,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042469,
+            -0.00479814,
+            0.5858196,
+            -0.00205336
+          ],
+          "actorStepMeters": 4.9e-05,
+          "frame": 110,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380899,
+          "spherePanelGapMeters": 0.56496998
+        },
+        {
+          "actorLocation": [
+            1.78499854,
+            0.1749735,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042397,
+            -0.0049104,
+            0.58581924,
+            -0.00215883
+          ],
+          "actorStepMeters": 4.889e-05,
+          "frame": 111,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380899,
+          "spherePanelGapMeters": 0.56501833
+        },
+        {
+          "actorLocation": [
+            1.78499842,
+            0.17502227,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042325,
+            -0.00502243,
+            0.58581895,
+            -0.00226404
+          ],
+          "actorStepMeters": 4.877e-05,
+          "frame": 112,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380899,
+          "spherePanelGapMeters": 0.5650665
+        },
+        {
+          "actorLocation": [
+            1.78499842,
+            0.17507094,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042254,
+            -0.00513422,
+            0.58581859,
+            -0.00236901
+          ],
+          "actorStepMeters": 4.867e-05,
+          "frame": 113,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380899,
+          "spherePanelGapMeters": 0.56511459
+        },
+        {
+          "actorLocation": [
+            1.78499842,
+            0.1751195,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042182,
+            -0.00524577,
+            0.58581817,
+            -0.00247372
+          ],
+          "actorStepMeters": 4.856e-05,
+          "frame": 114,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80382265,
+          "spherePanelGapMeters": 0.56516243
+        },
+        {
+          "actorLocation": [
+            1.7849983,
+            0.17516796,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042099,
+            -0.0053571,
+            0.58581775,
+            -0.00257818
+          ],
+          "actorStepMeters": 4.846e-05,
+          "frame": 115,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380216,
+          "spherePanelGapMeters": 0.56521039
+        },
+        {
+          "actorLocation": [
+            1.7849983,
+            0.1752163,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81042022,
+            -0.0054682,
+            0.5858174,
+            -0.00268239
+          ],
+          "actorStepMeters": 4.834e-05,
+          "frame": 116,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380216,
+          "spherePanelGapMeters": 0.56525818
+        },
+        {
+          "actorLocation": [
+            1.78499818,
+            0.17526455,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81041944,
+            -0.00557906,
+            0.58581692,
+            -0.00278635
+          ],
+          "actorStepMeters": 4.825e-05,
+          "frame": 117,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380216,
+          "spherePanelGapMeters": 0.56530584
+        },
+        {
+          "actorLocation": [
+            1.78499818,
+            0.17531268,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81041861,
+            -0.0056897,
+            0.5858165,
+            -0.00289006
+          ],
+          "actorStepMeters": 4.813e-05,
+          "frame": 118,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380216,
+          "spherePanelGapMeters": 0.5653533
+        },
+        {
+          "actorLocation": [
+            1.78499818,
+            0.17536071,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81041771,
+            -0.0058001,
+            0.58581609,
+            -0.00299353
+          ],
+          "actorStepMeters": 4.803e-05,
+          "frame": 119,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80380216,
+          "spherePanelGapMeters": 0.5654008
+        },
+        {
+          "actorLocation": [
+            1.78499806,
+            0.17540863,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81041688,
+            -0.00591028,
+            0.58581561,
+            -0.00309674
+          ],
+          "actorStepMeters": 4.792e-05,
+          "frame": 120,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80379533,
+          "spherePanelGapMeters": 0.565448
+        },
+        {
+          "actorLocation": [
+            1.78499806,
+            0.17545645,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.8104161,
+            -0.00602023,
+            0.58581507,
+            -0.00319971
+          ],
+          "actorStepMeters": 4.782e-05,
+          "frame": 121,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80379533,
+          "spherePanelGapMeters": 0.56549528
+        },
+        {
+          "actorLocation": [
+            1.78499806,
+            0.17550416,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81041515,
+            -0.00612995,
+            0.58581465,
+            -0.00330243
+          ],
+          "actorStepMeters": 4.771e-05,
+          "frame": 122,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80379533,
+          "spherePanelGapMeters": 0.56554244
+        },
+        {
+          "actorLocation": [
+            1.78499794,
+            0.17555177,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81041425,
+            -0.00623944,
+            0.58581418,
+            -0.00340491
+          ],
+          "actorStepMeters": 4.761e-05,
+          "frame": 123,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80379533,
+          "spherePanelGapMeters": 0.56558947
+        },
+        {
+          "actorLocation": [
+            1.78499794,
+            0.17559928,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.8104133,
+            -0.0063487,
+            0.58581376,
+            -0.00350714
+          ],
+          "actorStepMeters": 4.75e-05,
+          "frame": 124,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80379533,
+          "spherePanelGapMeters": 0.56563637
+        },
+        {
+          "actorLocation": [
+            1.78499782,
+            0.17564668,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81041235,
+            -0.00645773,
+            0.58581322,
+            -0.00360912
+          ],
+          "actorStepMeters": 4.74e-05,
+          "frame": 125,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80378167,
+          "spherePanelGapMeters": 0.56568315
+        },
+        {
+          "actorLocation": [
+            1.78499782,
+            0.17569396,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81041145,
+            -0.00656654,
+            0.58581263,
+            -0.00371087
+          ],
+          "actorStepMeters": 4.728e-05,
+          "frame": 126,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56572989
+        },
+        {
+          "actorLocation": [
+            1.78499782,
+            0.17574115,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.8104105,
+            -0.00667513,
+            0.58581209,
+            -0.00381236
+          ],
+          "actorStepMeters": 4.719e-05,
+          "frame": 127,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56577649
+        },
+        {
+          "actorLocation": [
+            1.7849977,
+            0.17578824,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81040955,
+            -0.00678348,
+            0.58581156,
+            -0.00391362
+          ],
+          "actorStepMeters": 4.709e-05,
+          "frame": 128,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56582297
+        },
+        {
+          "actorLocation": [
+            1.7849977,
+            0.17583522,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81040847,
+            -0.00689161,
+            0.58581096,
+            -0.00401463
+          ],
+          "actorStepMeters": 4.698e-05,
+          "frame": 129,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56586941
+        },
+        {
+          "actorLocation": [
+            1.7849977,
+            0.1758821,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81040752,
+            -0.00699952,
+            0.58581036,
+            -0.0041154
+          ],
+          "actorStepMeters": 4.688e-05,
+          "frame": 130,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56591572
+        },
+        {
+          "actorLocation": [
+            1.78499758,
+            0.17592888,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81040639,
+            -0.0071072,
+            0.58580989,
+            -0.00421593
+          ],
+          "actorStepMeters": 4.677e-05,
+          "frame": 131,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56596187
+        },
+        {
+          "actorLocation": [
+            1.78499758,
+            0.17597555,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81040537,
+            -0.00721466,
+            0.58580923,
+            -0.00431622
+          ],
+          "actorStepMeters": 4.667e-05,
+          "frame": 132,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56600793
+        },
+        {
+          "actorLocation": [
+            1.78499758,
+            0.17602211,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.8104043,
+            -0.0073219,
+            0.58580869,
+            -0.00441627
+          ],
+          "actorStepMeters": 4.657e-05,
+          "frame": 133,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.803768,
+          "spherePanelGapMeters": 0.56605394
+        },
+        {
+          "actorLocation": [
+            1.78499746,
+            0.17606857,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81040323,
+            -0.00742891,
+            0.58580798,
+            -0.00451608
+          ],
+          "actorStepMeters": 4.646e-05,
+          "frame": 134,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.803768,
+          "spherePanelGapMeters": 0.56609983
+        },
+        {
+          "actorLocation": [
+            1.78499746,
+            0.17611493,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81040215,
+            -0.0075357,
+            0.58580738,
+            -0.00461565
+          ],
+          "actorStepMeters": 4.636e-05,
+          "frame": 135,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.803768,
+          "spherePanelGapMeters": 0.56614563
+        },
+        {
+          "actorLocation": [
+            1.78499746,
+            0.1761612,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81040114,
+            -0.00764226,
+            0.58580667,
+            -0.00471498
+          ],
+          "actorStepMeters": 4.627e-05,
+          "frame": 136,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.803768,
+          "spherePanelGapMeters": 0.56619135
+        },
+        {
+          "actorLocation": [
+            1.78499734,
+            0.17620735,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81039995,
+            -0.00774861,
+            0.58580607,
+            -0.00481408
+          ],
+          "actorStepMeters": 4.615e-05,
+          "frame": 137,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.803768,
+          "spherePanelGapMeters": 0.56623682
+        },
+        {
+          "actorLocation": [
+            1.78499734,
+            0.17625341,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81039882,
+            -0.00785473,
+            0.58580542,
+            -0.00491293
+          ],
+          "actorStepMeters": 4.606e-05,
+          "frame": 138,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.803768,
+          "spherePanelGapMeters": 0.56628229
+        },
+        {
+          "actorLocation": [
+            1.78499734,
+            0.17629936,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81039768,
+            -0.00796063,
+            0.5858047,
+            -0.00501155
+          ],
+          "actorStepMeters": 4.596e-05,
+          "frame": 139,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.803768,
+          "spherePanelGapMeters": 0.56632771
+        },
+        {
+          "actorLocation": [
+            1.78499722,
+            0.17634521,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81039649,
+            -0.00806631,
+            0.58580399,
+            -0.00510994
+          ],
+          "actorStepMeters": 4.585e-05,
+          "frame": 140,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56637301
+        },
+        {
+          "actorLocation": [
+            1.78499722,
+            0.17639096,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81039524,
+            -0.00817178,
+            0.58580339,
+            -0.00520809
+          ],
+          "actorStepMeters": 4.575e-05,
+          "frame": 141,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56641818
+        },
+        {
+          "actorLocation": [
+            1.78499711,
+            0.17643662,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81039411,
+            -0.00827702,
+            0.58580267,
+            -0.005306
+          ],
+          "actorStepMeters": 4.566e-05,
+          "frame": 142,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80377484,
+          "spherePanelGapMeters": 0.56646327
+        },
+        {
+          "actorLocation": [
+            1.78499711,
+            0.17648217,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81039298,
+            -0.00838204,
+            0.58580184,
+            -0.00540368
+          ],
+          "actorStepMeters": 4.555e-05,
+          "frame": 143,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80375434,
+          "spherePanelGapMeters": 0.56650827
+        },
+        {
+          "actorLocation": [
+            1.78499711,
+            0.17652762,
+            0.16
+          ],
+          "actorQuaternion": [
+            0.81039172,
+            -0.00848685,
+            0.58580112,
+            -0.00550113
+          ],
+          "actorStepMeters": 4.545e-05,
+          "frame": 144,
+          "rollingArcStepMeters": 0.0,
+          "rollingSlipRatio": 1.0,
+          "shutterAngleDegrees": 98.80375434,
+          "spherePanelGapMeters": 0.56655315
+        }
+      ],
+      "settledWindowStartFrame": 77,
+      "source": "BLENDER_BULLET_EVALUATED_WORLD_TRANSFORMS"
+    },
+    "resultHash": "505c95fbe1f48340415d53579a25ada82e7224fb3d4cd85156af5ec06894ffe3",
+    "review": {
+      "contactClipFrameRangeInclusive": [
+        40,
+        87
+      ],
+      "stillFrames": [
+        34,
+        54,
+        81
+      ]
+    },
+    "sceneId": "RC3-D1-SIGNAL-GATE-GRAPH",
+    "sceneSpecFileSha256": "2dd74b3de696571255443c689affbd6d72b348065ddef4e96053e0519a4cba8f",
+    "sceneSpecHash": "0d03778492f9abb61b14b39255732a6b2bc444e9ab6d7d85ef5dfdc9c93f98f3",
+    "schemaVersion": "bfs.physicsActionResult.v0.1",
+    "semanticRoster": {
+      "actor": "ACTION_INITIATOR",
+      "lights": [
+        "ACTION_STATIC_KEY",
+        "ACTION_STATIC_FILL"
+      ],
+      "targets": [
+        "ACTION_HINGED_RESPONDER"
+      ]
+    },
+    "status": "PASS_EXECUTED",
+    "topology": "HINGE_LIGHT"
+  },
+  "schemaVersion": "bfs.rc3PhysicsActionDevelopmentBuild.v0.1",
+  "status": "PASS"
+}
