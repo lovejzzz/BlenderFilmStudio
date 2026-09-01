@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6FluidConsequenceFeasibilityC1.v0.2",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_02_ROOT_CREATION",
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-fluid-consequence-feasibility.v0.1.json",
+    "specHash": "3ab53a6e03e4164b9fd13594260fcee943b5037b90a067e67e36f12f0bdb8991"
+  },
+  "retainedAttempt01": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-01",
+    "failureHash": "ce053fbcf0b828f55e5be83f29fb138dcd9d1c3a8306cbd4194da2ac79d5f8af",
+    "failureAuditFileSha256": "7bd38b8220e9114ac62ea87068546e5927de79229315eb2e3515991eaf1568e5",
+    "failureAuditHash": "864aa40aad30c38f54c71a26898ed84e8d209ef88b8068a08556f1b195ecb7df",
+    "result": "FAIL_BEFORE_PHYSICAL_SCENE_MUTATION"
+  },
+  "corrections": [
+    {
+      "id": "C1_WORLD",
+      "scope": "After the exact empty factory reset, create one explicit World datablock, bind it to scene.world, then set the frozen world color.",
+      "physicalOrVisualThresholdChange": false
+    },
+    {
+      "id": "C1_STAGE_ARTIFACTS",
+      "scope": "After each Blender process, require the exact success sentinel, absence of a Python traceback and presence of the exact stage artifacts before advancing, even when Blender returns exit code zero.",
+      "physicalOrVisualThresholdChange": false
+    }
+  ],
+  "correctedTools": [
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-scene-c1.py",
+      "sha256": "f22467d228b440f67f54e866c6b14d62e61d02068429c565bf3b9637afa7d9f9"
+    },
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-feasibility-c1.py",
+      "sha256": "21a7f80ef03e3f0d1f474a002891e0af31e376e1f3c0835792610fdd9b81f976"
+    }
+  ],
+  "baseToolBindings": [
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-scene.py",
+      "sha256": "1385897455a451bbc7a012c3acf8e53a819fb121974fa8100ac9b1257bbc07d8"
+    },
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-feasibility.py",
+      "sha256": "c5a4283634ab9c263f6724349f9a9c55c53f0ad8d419a1508696f5f364a2a505"
+    }
+  ],
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-feasibility-attempt-02",
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-02"
+  },
+  "inheritedWithoutChange": [
+    "causal question and selected physical degree of freedom",
+    "public product and accepted binary identity",
+    "scene scale, topology, Bullet and Mantaflow configuration",
+    "all machine and direct visual thresholds",
+    "all process and resource ceilings",
+    "all stop rules, forbidden authorities and claim ceiling"
+  ],
+  "allowed": [
+    "one attempt-02 execution in the exact fresh roots with the two frozen C1 corrections",
+    "the same maximum two Blender starts, one Bullet bake, one fluid data bake, one fluid mesh bake, one save, 51 renders and one ffmpeg process"
+  ],
+  "forbidden": [
+    "modifying, deleting or repairing attempt-01",
+    "any correction beyond the explicit World creation and stage-artifact enforcement",
+    "product source mutation, native build, network call or engine remote write",
+    "authored contact, spill, final cup pose or final fluid mesh",
+    "threshold weakening or claim expansion"
+  ],
+  "specHash": "30f13c4604692e591025142ec4fad1fe2eed47d89c9e54da19e36773419a5797"
+}

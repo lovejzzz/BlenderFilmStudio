@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceFeasibilityFailureAudit.v0.1",
+  "status": "PASS_AUDIT_OF_RETAINED_FAILURE",
+  "checks": {
+    "baseContractBound": true,
+    "admissionSelfHashValid": true,
+    "failureSelfHashValid": true,
+    "processAndLogHashesValid": true,
+    "firstPythonExceptionIdentified": true,
+    "blenderZeroExitFalsePositiveIdentified": true,
+    "noSceneArtifactCreated": true,
+    "noBulletOrFluidBakeStarted": true,
+    "noSaveRenderOrVideoStarted": true,
+    "networkAndRemoteWritesZero": true
+  },
+  "checkCount": 10,
+  "passCount": 10,
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-fluid-consequence-feasibility.v0.1.json",
+    "specHash": "3ab53a6e03e4164b9fd13594260fcee943b5037b90a067e67e36f12f0bdb8991"
+  },
+  "evidenceBindings": {
+    "admissionFileSha256": "b430baacf2ff50f98153f2f42ad3e75701a9aaeba654aff7f2418b2ed097540b",
+    "failureFileSha256": "9afddf7c330383538908f20e3e2c648ab2c39833b9e29e662304aa363fad1e2c",
+    "failureHash": "ce053fbcf0b828f55e5be83f29fb138dcd9d1c3a8306cbd4194da2ac79d5f8af",
+    "buildProcessFileSha256": "de5761d61aea3bb7b84118f8013bb3d675f2df5afefa51f73e24c06d72591864",
+    "buildStderrSha256": "3cf2030642a96a77ab9963213c3fd7fc3386a14f45da96ccebef0c14430fe6fa",
+    "reopenProcessFileSha256": "8ffe1d14397a61a9d7635ad9f3463de8a7fe479dc80387b90e797a57dc0cfdf5",
+    "reopenStdoutSha256": "2f55545b01cd410f7ac5dfb35aec38bf91bf6b3bb8bdd14f6790a7893a604d0f"
+  },
+  "rootCause": {
+    "firstFailure": "bpy.ops.wm.read_factory_settings(use_empty=True) left scene.world as None; assigning scene.world.color raised AttributeError before physical scene construction.",
+    "runnerFailure": "Blender reported the Python traceback on stderr but returned process exit code 0; the host runner trusted only the exit code and advanced to a reopen whose .blend input did not exist.",
+    "physicalMutationReached": false
+  },
+  "counts": {
+    "nativeBuilds": 0,
+    "physicalSceneBuilds": 0,
+    "bulletBakes": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renders": 0,
+    "ffmpegProcesses": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "requiredCorrection": [
+    "create and bind an explicit World immediately after the empty factory reset",
+    "require each nominally successful Blender stage to produce its exact expected artifacts before advancing"
+  ],
+  "auditHash": "864aa40aad30c38f54c71a26898ed84e8d209ef88b8068a08556f1b195ecb7df"
+}
