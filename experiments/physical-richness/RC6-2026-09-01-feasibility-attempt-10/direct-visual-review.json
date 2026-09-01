@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceF6DirectVisualReview.v0.1",
+  "status": "REJECT",
+  "machineReceiptHash": "3db275d09f01d39cfc3c6bc28d6299b71f99f90853e9fd77f25613d3d5035bcb",
+  "resultHash": "b47369764734650226ca5e3c3103660c66d804093b6ac23a5b51467a57d0e8eb",
+  "framesReviewed": 48,
+  "fullClipReviewed": true,
+  "representativeFramesReviewed": [1, 8, 12, 16, 24, 32, 40, 48],
+  "findings": {
+    "ballMotionSolverOwned": true,
+    "cupMotionSolverOwned": true,
+    "contactVisible": true,
+    "continuousImpactAndTipReadable": true,
+    "cupStaysOnSet": true,
+    "preImpactContainmentVisuallyPasses": true,
+    "posedOutcomeDetected": false,
+    "liquidConsequenceSolverOwned": true,
+    "liquidHasCoherentVolume": false,
+    "liquidSurfaceReadsAsWater": false,
+    "liquidBecomesFragmentedThinBands": true,
+    "sceneReadyForProductization": false
+  },
+  "measuredBasis": {
+    "contactFrame": 8,
+    "derivedSpillFrame": 9,
+    "frame12CupTiltDegrees": 50.72066259,
+    "frame16CupTiltDegrees": 90.00792692,
+    "impactWindowPeakTiltDegrees": 90.22475478,
+    "initialOutsideCupFraction": 0.0,
+    "preContactMaximumOutsideCupFraction": 0.0,
+    "maximumOutsideCupFraction": 1.0,
+    "maximumFloorSpreadMeters": 1.54072984
+  },
+  "diagnostic": {
+    "domainLargestDimensionMeters": 2.1,
+    "resolutionMax": 128,
+    "approximateBaseVoxelMeters": 0.01640625,
+    "initialLiquidDiameterMeters": 0.11,
+    "initialLiquidDiameterBaseVoxels": 6.7047619,
+    "cupWallThicknessMeters": 0.01,
+    "cupWallThicknessBaseVoxels": 0.60952381,
+    "meshScale": 2,
+    "meshParticleRadius": 1.0,
+    "rnaDefaultMeshParticleRadius": 2.0,
+    "interpretation": "The obstacle shell fixed pre-contact leakage, but the liquid column and cup wall remain under-resolved at the base grid while the reduced meshing radius exposes disconnected particles. The dark low-transmission material makes the fragmentation more obvious."
+  },
+  "decision": "Retain attempt-10 as a machine PASS but direct-visual REJECT. Preserve the exact accepted Bullet chain. A new preregistered attempt may increase base liquid resolution, restore a volume-preserving particle/mesh radius, enable water-scale viscosity, and use a clearer liquid material without weakening any causal, containment, on-set, resource, or full-clip-review threshold.",
+  "reviewHash": "972e29aa140c3356992500c3d967eceb4e737ecd63dbc0e570b2884515a7b66c"
+}
