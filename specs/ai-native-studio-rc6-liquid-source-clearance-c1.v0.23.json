@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "bfs.rc6LiquidSourceClearanceC1Spec.v0.23",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-SOURCE-CLEARANCE-C1-2026-09-01-ATTEMPT-23",
+  "purpose": "Repeat the unchanged source-clearance matrix after correcting only measurement order: verify frozen source identity at the retained pose before translating the unchanged mesh.",
+  "toolFreezeParent": "e8a36ebcf2d11a3856c810d54803b0f457a9e6d4",
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-source-clearance-c1-attempt-23",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-source-clearance-c1-attempt-23"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "engineSourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "fluidImplementationSha256": "63a7a3e1affe7809ea935e184dea992754655796a9631e0eadb2060d72dfa20f",
+    "fluidRnaSha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4",
+    "cupOriginWorldZMeters": 0.22,
+    "cupInnerFloorLocalZMeters": -0.16,
+    "cupInnerFloorWorldZMeters": 0.06,
+    "retainedSourceBottomWorldZMeters": 0.075,
+    "retainedSourceBottomClearanceMeters": 0.015,
+    "cupEffectorSurfaceDistanceCells": 1.5,
+    "deleteInObstacle": false
+  },
+  "retainedEvidence": {
+    "attempt21Matrix": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-mesh-reconstruction-attempt-21/matrix.json",
+      "sha256": "bef2bfe6a83c81d8b7d5a11be5a3d73758d75b4e659652aba33910a9e6d83e94"
+    },
+    "attempt21Audit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-mesh-reconstruction-attempt-21/independent-audit.json",
+      "sha256": "1a5a295602cc47f176e045002c64623aa421091526da460a427026ea7233d8d9"
+    },
+    "attempt22Failure": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-attempt-22/failure.json",
+      "sha256": "955177c94c999fadac6006bc24d6f38fc149b85ba652722564ff61ce2338d9a6"
+    },
+    "attempt22FailureAudit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-attempt-22/independent-failure-audit.json",
+      "sha256": "fd29ef329668eded1f2ddb02c8a5215605ca84f6a1577083406af5eb1c1627e0"
+    }
+  },
+  "matrix": {
+    "fixed": {
+      "frameStart": 1,
+      "frameEnd": 7,
+      "preContactOnly": true,
+      "resolutionMax": 96,
+      "particleNumber": 2,
+      "particleRadius": 1.6,
+      "meshScale": 2,
+      "meshParticleRadius": 4.5,
+      "simulationMethod": "APIC",
+      "timestepsMin": 1,
+      "timestepsMax": 4,
+      "cflCondition": 2.0,
+      "waterViscosityBase": 1.0,
+      "waterViscosityExponent": 6,
+      "cupEffectorSubframes": 0,
+      "domainCenterMeters": [0.32, 0.0, 0.25],
+      "domainDimensionsMeters": [0.36, 0.36, 0.5],
+      "baseVoxelMeters": 0.0052083333,
+      "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006],
+      "flowVolumeDensityObserved": 0.0,
+      "flowSurfaceDistanceCells": 0.0
+    },
+    "cells": [
+      {"cellId": "clearance-20mm", "sourceBottomClearanceMeters": 0.020, "sourceBottomClearanceVoxels": 3.84, "sourceCenterWorldZMeters": 0.15},
+      {"cellId": "clearance-25mm", "sourceBottomClearanceMeters": 0.025, "sourceBottomClearanceVoxels": 4.8, "sourceCenterWorldZMeters": 0.155},
+      {"cellId": "clearance-30mm", "sourceBottomClearanceMeters": 0.030, "sourceBottomClearanceVoxels": 5.76, "sourceCenterWorldZMeters": 0.16},
+      {"cellId": "clearance-35mm", "sourceBottomClearanceMeters": 0.035, "sourceBottomClearanceVoxels": 6.72, "sourceCenterWorldZMeters": 0.165}
+    ],
+    "selectionRule": "valid signed nesting, then minimum absolute source-volume error, then minimum temporal drift, then lower source-bottom clearance",
+    "exactCacheFilesPerCell": 21,
+    "exactCacheFramesPerStage": [1, 2, 3, 4, 5, 6, 7]
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.0104166667,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "resourceCeilings": {
+    "blenderStarts": 4,
+    "fluidDataBakes": 4,
+    "fluidMeshBakes": 4,
+    "blendSaves": 4,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "correction": {
+    "attempt22FailureAuditHash": "e2aee2d31d76b5b6953ccaaf80d7b02de4a0b1adc22a063ba02b25571d56345f",
+    "frozenPoseWorldVolumeCubicMeters": 0.0013283283766940559,
+    "movedPoseWorldVolumeCubicMeters": 0.0013283282353109553,
+    "translationInvariantLinearVolumeCubicMeters": 0.0013283282518288175,
+    "onlySemanticChange": "perform unchanged frozen source identity check before source translation"
+  },
+  "sourceFinding": "Attempt-22 stopped before fluid bake because full-world signed-volume integration changed by about 1.41e-10 cubic meters after a pure translation, exceeding the unchanged 1e-10 identity tolerance. C1 does not weaken the tolerance or change the volume baseline. It validates the retained source volume and dimensions at the retained pose, then applies and asserts the requested clearance before baking.",
+  "stopRule": "Stop on process, identity, source-volume, source-placement, topology, cache-roster, persistence or resource failure. Every cell must retain exactly config, data and mesh files for frames 1 through 7 and no other Mantaflow cache files. Do not delete, ignore or size-filter below-floor positive components. The unchanged two-sided 5 percent source and temporal bounds, one-percent containment bound, one-positive-body signed topology, manifold, zero-render, zero-network and zero-engine-write gates remain fail closed.",
+  "claimCeiling": "C1 correction of measurement order followed by the same four seven-frame zero-render static source-clearance controls. A passing candidate would establish the next geometry basis but still requires final-resolution static confirmation before slow-tip, impact, lighting or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-source-clearance-scene-c1.py": "7e20565d326ab6691889a7fb22ff244ea8b825ddb08539cf38f1f6729cf45beb",
+    "scripts/run-rc6-liquid-source-clearance-matrix-c1.py": "3dbfca23fb8368b763f78470bab2a78471d512e28e11b6b301f73f6b890ce026",
+    "scripts/audit-rc6-liquid-source-clearance-matrix-c1.py": "84470ac39b2fe9d18601051a8dc1011796352582e2e8875dfc6922ec1dd9fe61"
+  },
+  "specHash": "13c0001962a367f78c739a855e18be3f631adc6c6cb54479854eccb96ef9d881"
+}
