@@ -8,12 +8,13 @@ from pathlib import Path
 
 
 RESEARCH = Path(__file__).resolve().parents[1]
-WORK = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-03")
-EVIDENCE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-03"
+WORK = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-04")
+EVIDENCE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-04"
 RETAINED_FAILURE_01 = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-01/failure-receipt.json"
 RETAINED_FAILURE_02 = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-02/failure-receipt.json"
-EXPECTED_WORK = "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-03"
-EXPECTED_EVIDENCE = "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-03"
+RETAINED_FAILURE_03 = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-03/failure-receipt.json"
+EXPECTED_WORK = "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-04"
+EXPECTED_EVIDENCE = "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-04"
 
 
 def sha(path):
@@ -66,6 +67,7 @@ def main():
         "exactRoots": str(WORK.resolve()) == EXPECTED_WORK and str(EVIDENCE.resolve()) == EXPECTED_EVIDENCE,
         "retainedAttempt01Failure": RETAINED_FAILURE_01.is_file() and json.loads(RETAINED_FAILURE_01.read_text(encoding="utf-8"))["status"] == "FAIL_CANDIDATE_MODULE_NOT_LOADED",
         "retainedAttempt02Failure": RETAINED_FAILURE_02.is_file() and json.loads(RETAINED_FAILURE_02.read_text(encoding="utf-8"))["status"] == "FAIL_NEGATIVE_CONTROL_AND_DIRECT_VISUAL_REVIEW",
+        "retainedAttempt03Failure": RETAINED_FAILURE_03.is_file() and json.loads(RETAINED_FAILURE_03.read_text(encoding="utf-8"))["status"] == "FAIL_DIRECT_VISUAL_REVIEW_GLASS_DITHER",
         "receiptSelfHash": receipt["receiptHash"] == self_hash(receipt, "receiptHash"),
         "receiptPass": receipt["status"].startswith("PASS") and all(receipt["checks"].values()),
         "fiveBoundedProcesses": len(processes) == 5 and [row["index"] for row in processes] == [1, 2, 3, 4, 5] and all(row["exitCode"] == 0 for row in processes),
