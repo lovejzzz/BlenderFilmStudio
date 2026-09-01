@@ -1,0 +1,65 @@
+{
+  "$schema": "bfs.physicalLightTransferSpec.v0.1",
+  "schemaVersion": "bfs.physicalLightTransferSpec.v0.1",
+  "projectId": "RC2-THE-SIGNAL-GATE",
+  "timeline": {"frameStart": 1, "frameEnd": 144, "fps": 24},
+  "world": {"gravityMetersPerSecondSquared": [0.0, 0.0, -9.81], "unitScaleMeters": 1.0},
+  "rollingActor": {
+    "archetype": "GROOVED_CERAMIC_SPHERE",
+    "radiusMeters": 0.16,
+    "massKg": 0.62,
+    "friction": 0.72,
+    "restitution": 0.18,
+    "startAlongRampMeters": 0.34,
+    "pathOffsetFromHingeMeters": 0.62,
+    "poseSourceAfterRelease": "BLENDER_BULLET_RIGID_BODY"
+  },
+  "ramp": {
+    "factory": "METRIC_WEDGE_WITH_SIDE_RAILS",
+    "lengthMeters": 2.6,
+    "widthMeters": 1.05,
+    "riseMeters": 0.6,
+    "deckThicknessMeters": 0.08,
+    "friction": 0.76
+  },
+  "lightGate": {
+    "factory": "HINGED_OCCLUDER_IN_ARCHITECTURAL_APERTURE",
+    "apertureWidthMeters": 0.92,
+    "apertureHeightMeters": 1.02,
+    "shutterThicknessMeters": 0.055,
+    "shutterMassKg": 1.15,
+    "hingeAxis": "WORLD_Z",
+    "hingeLowerDegrees": -3.0,
+    "hingeUpperDegrees": 108.0,
+    "linearDamping": 0.08,
+    "angularDamping": 0.22,
+    "poseSourceAfterContact": "BLENDER_BULLET_RIGID_BODY_AND_HINGE_CONSTRAINT"
+  },
+  "illumination": {
+    "source": "STATIC_AREA_LIGHT_BEHIND_PHYSICAL_OCCLUDER",
+    "powerWatts": 1050.0,
+    "colorLinearRgb": [1.0, 0.42, 0.16],
+    "animatedPowerChannels": 0,
+    "receiver": "MATTE_RELIEF_SIGNAL_WALL",
+    "changeSource": "SIMULATED_OCCLUDER_GEOMETRY_ONLY"
+  },
+  "cinematography": {
+    "shotStrategy": "SEMANTIC_CAUSE_CONTACT_REVEAL",
+    "motionBlurStrategy": "MEASURED_PROJECTED_MEDIAN_MOTION",
+    "motionBlurPosition": "CENTER",
+    "reviewResolution": [960, 540],
+    "contactClipFrameCount": 48
+  },
+  "forbidden": {
+    "authoredActorTransformAfterRelease": true,
+    "authoredShutterTransformAfterContact": true,
+    "manualContactFrame": true,
+    "animatedLightPowerOrColor": true,
+    "fakeEmissionReveal": true,
+    "postprocessLightBeam": true,
+    "postprocessMotionBlur": true,
+    "projectIdOrFixtureHashBranchInProductCode": true,
+    "arbitraryPythonShellNetworkOrFilesystemAuthority": true
+  },
+  "physicalLightSpecHash": "ceb47e803e2b5e5740953c4eb1e96619b3ecaab60bd7c574299d340283513e03"
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc2PhysicalLightTransferPreregistration.v0.1",
+  "experimentId": "RC2-PHYSICAL-FILM-DIRECTION-TRANSFER",
+  "status": "PREREGISTERED_BEFORE_RC2_PRODUCT_OR_SCENE_MUTATION",
+  "projectTitle": "The Signal Gate",
+  "purpose": "Test an unseen simple transfer where Blender physics owns both the rolling contact outcome and the hinged light-gate pose, while the visible illumination change is caused by that simulated occluder geometry rather than hand placement or light animation.",
+  "acceptedLearningBaseline": {
+    "rc1ProductCommit": "0e84ef3b6f79521b4f21a9d12a180dfd9713aab4",
+    "rc1ProductModuleSha256": "babf705beb1648393e5de3af4714e2cf56f39fbbd2eb31d28497ed2e8148a953",
+    "rc1MachineReceiptHash": "df95501d05af1f78449f617bf359bc4e42a9767d817abf713f536e6eabd216ad",
+    "rc1AuditHash": "e1e7c24061c84f69d52e673b836bd3838839bf8cd95e68779a5be593a975195c",
+    "rc1AcceptanceHash": "01cd0b6143c5710bc3c2dc569933bd2bdefe724965cc28d52360b87711009e25",
+    "physicalFilmDirectionSkillSha256": "5c79ad53e478a5d02c6183ee396d792d4ed514eedec5172832c94473be12c6d3"
+  },
+  "fixture": {
+    "uri": "specs/fixtures/physical-light/RC2_F1.rolling-sphere-hinged-shutter.physical-light-spec.v0.1.json",
+    "sha256": "2efea2e822ce2971b40a277cb25ce9f69273284c3a30bfb76dbc680cd5eee0cf",
+    "physicalLightSpecHash": "ceb47e803e2b5e5740953c4eb1e96619b3ecaab60bd7c574299d340283513e03"
+  },
+  "narrative": {
+    "cause": "a visibly rotating heavy sphere accelerates down a metric ramp under gravity",
+    "contact": "the sphere contacts the shutter away from its hinge and transfers momentum",
+    "effect": "the Bullet-owned hinged shutter swings open",
+    "reveal": "a static warm source illuminates a relief signal only through the physically opened aperture"
+  },
+  "authorityBoundary": {
+    "authoredInitialConditionsAllowed": ["metric geometry", "initial actor pose", "gravity", "mass", "friction", "restitution", "hinge limits", "static light placement and power", "semantic camera intent"],
+    "solverOwnedOutcomesRequired": ["sphere trajectory and rotation after frame 1", "contact frame", "shutter angle after contact", "peak opening", "rebound or settling", "final actor and shutter poses"],
+    "geometryOwnedIlluminationRequired": true,
+    "animatedLightChannelsRequired": 0,
+    "postReleaseActorTransformKeyframesRequired": 0,
+    "postContactShutterTransformKeyframesRequired": 0
+  },
+  "productScope": {
+    "authorizedPaths": ["scripts/modules/film_studio_physical_light.py", "scripts/startup/bl_operators/film_studio_workspace.py"],
+    "maximumChangedPaths": 2,
+    "maximumAdditions": 1000,
+    "maximumDeletions": 220,
+    "declarativeSpecOnly": true,
+    "projectIdOrFixtureHashBranchesForbidden": true,
+    "arbitraryPythonShellNetworkOrFilesystemAuthorityForbidden": true,
+    "pc8Pc9AndRc1RegressionRequired": true
+  },
+  "machineAcceptance": {
+    "activeRigidBodyCountMinimum": 2,
+    "hingeConstraintCountExact": 1,
+    "actorTravelMetersMinimum": 1.5,
+    "medianRollingSlipRatioMaximum": 0.3,
+    "derivedContactRequired": true,
+    "firstShutterResponseAfterContactMaximumFrames": 2,
+    "peakShutterOpenDegreesRange": [35.0, 105.0],
+    "shutterDirectionReversalOrSettledWindowRequired": true,
+    "actorTransformKeyframesAfterRelease": 0,
+    "shutterTransformKeyframesAfterContact": 0,
+    "lightPowerAndColorKeyframes": 0,
+    "lightPowerConstantExact": true,
+    "receiverLuminanceIncreaseRatioMinimum": 2.0,
+    "closedShutterCounterfactualLuminanceRatioMaximum": 0.55,
+    "measuredNativeMotionBlurRequired": true,
+    "saveReopenActualPhysicsMaximumDeltaMeters": 1e-6,
+    "saveReopenActualShutterAngleMaximumDeltaDegrees": 0.001,
+    "reviewStillCount": 3,
+    "contactClipFrameCount": 48
+  },
+  "directVisualQuestions": [
+    "Does the sphere visibly roll under gravity rather than translate like a sliding prop?",
+    "Is the sphere-to-shutter contact continuous and spatially believable without a visible gap or deep penetration?",
+    "Does the shutter visibly pivot about its modeled hinge and continue with physical inertia rather than jumping to an authored pose?",
+    "Does the warm illumination visibly grow because the physical aperture opens, while the lamp itself remains static?",
+    "Does the before/contact/reveal sequence communicate one clear cause-and-effect story without explanatory text?",
+    "Do the ramp, rails, aperture frame, hinge hardware, shutter ribs and relief receiver read as one intentionally designed place rather than loose primitives?",
+    "Do the cameras show sphere rotation, contact direction, hinge pivot and revealed signal without hiding weak physics?",
+    "Does native measured motion blur add speed while leaving the contact and moving shutter readable?",
+    "Does the final state look physically supported and earned rather than arranged?"
+  ],
+  "visualVerdictRule": "PASS only if all nine answers are YES on the three bound stills and full 48-frame clip.",
+  "developmentRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-development",
+  "formalRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01",
+    "evidence": "experiments/physical-light-transfer/RC2-2026-09-01-attempt-01",
+    "freshBeforeMutation": true,
+    "immutableAfterFirstWrite": true
+  },
+  "resourceCeilings": {
+    "minimumFreeReserveGiB": 100,
+    "projectedWritesGiB": 8,
+    "workspaceBytes": 53687091200,
+    "evidenceBytes": 536870912,
+    "cleanNativeBuilds": 1,
+    "productStarts": 3,
+    "sceneMutatingExecutions": 1,
+    "blendSaves": 1,
+    "reopens": 1,
+    "reviewStillRenders": 3,
+    "contactClipFrameRenders": 48
+  },
+  "currentAdmissionObservation": {
+    "observedFreeGiB": 130,
+    "genericF0PreflightRequiredFreeGiB": 160,
+    "genericF0PreflightStatus": "BLOCKED",
+    "effect": "preregistration and accepted-binary development may proceed, but no RC2 native source build may start until a read-only admission passes"
+  },
+  "forbiddenCounts": {"networkCallsDuringFormalExecution": 0, "engineRemoteWritesDuringValidation": 0, "forcePushes": 0, "tags": 0, "releases": 0, "binaryDistribution": 0, "signing": 0, "notarization": 0},
+  "stopRule": "Retain and stop on any authored post-release actor pose, authored post-contact shutter pose, animated lamp, fake reveal, missing Bullet roll/contact/hinge response, weak luminance causality, regression, save/reopen mismatch, resource overrun or direct visual NO. Do not repair a formal result by moving the actor, shutter, lamp, camera or final pose after observing it.",
+  "claimCeiling": "A PASS would establish one simple rolling-body/hinged-occluder physical-light transfer and a reusable causal film lesson. It would not establish general mechanical simulation, fluid/deformable physics, photorealism, character acting, sound, broad autonomous filmmaking or finished-film quality.",
+  "specHash": "fcd2f024bbee8a1a8e29c74f7f4717bd91175ee27201e429a42bb6e0828d8dce"
+}
