@@ -6597,3 +6597,15 @@ Fresh attempt-01 runner `0eff3b11…`与independent 16/16 machine audit `be0e136
 Date: 2026-08-31 · Type: HUMAN-RESPONSE TOOL FREEZE · Review responses / Blender starts / renders: 0 / 0 / 0
 
 在任何PC.3 owner answer出现前，strict recorder与independent auditor冻结于spec self hash `1846f9a2…`。四问只接受原样uppercase `YES`/`NO`；全YES为PASS，任一NO为FAIL，lowercase、未注册token、missing/extra fields全部拒绝。Static negative/mapping tests 23/23 PASS。Recorder只可在唯一fresh root写`human-review.json`，auditor独立重算mapping并重验machine receipt/audit/manifest、A/B videos与contact sheet后才可写final roster。Formal human root在freeze时absent；model-authored answers为0。
+
+## J-557 · Screenshot-led PC.3 visual rejection and PC.4 preregistration
+
+Date: 2026-08-31 · Type: MODEL VISUAL DIAGNOSIS + PREREGISTRATION · Read-only Blender starts / formal renders / saves: 1 / 0 / 0
+
+Owner明确把active goal扩展为“用你自己的截图加上你的视觉判断去改进”。直接查看PC.3 A/B sheet及13个时序代表帧后，model visual verdict拒绝B作为足够质量跃迁：cyan/coral light与three-shot progression保留，但dominant sphere head、box torso、cylindrical limbs仍exact；PC.1附件读作decorative add-ons，side screen读作unfinished noise，动作仍主要依赖camera/part motion，wide被observation aperture/ribs过度遮挡。Read-only Blender inventory确认legacy torso dimensions 0.7×0.44×0.6、helmet约0.54×0.48×0.56及39个legacy hero/detail objects。PC.4 prereg `09ba0c5b…`要求替换主轮廓、功能结构与五阶段表演；PC.3 owner verdict继续pending且不得代填。
+
+## J-558 · PC.4 hero redesign tool freeze
+
+Date: 2026-08-31 · Type: TOOL FREEZE · Formal PC.4 starts / renders / saves: 0 / 0 / 0
+
+Exact 53-part hero-shell builder、zero-render reopen auditor与fresh-root runner冻结于self hash `61ff2d8c…`。Builder隐藏39个legacy hero/detail meshes与9个foreground aperture objects，保留全部camera/light objects，添加anticipation、weight transfer、contact/brace、reaction、reflection/settle五phase performance，只render frames 48/144/240并save one derivative。Python/Node static checks PASS；fresh roots absent。Full 288-frame successor在三张截图直接通过视觉复核前禁止。

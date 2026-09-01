@@ -502,7 +502,14 @@ from A, and median RGB MAD is 0.019747. Receipt/audit/manifest self hashes are
 The four owner A/B questions are now open; the model must not answer them. The
 strict response recorder and independent auditor are frozen before any answer
 at self hash `1846f9a2…`; their 23/23 static tests pass and the unique formal
-human-review root remains absent.
+human-review root remains absent. The owner then explicitly expanded the active
+goal to require screenshot-led model visual judgment. Direct inspection rejected
+PC.3 B as an insufficient visual upgrade: it preserves the strong lighting and
+shot language but still reads as a sphere/box/cylinder hero with attached detail
+and weak performance. PC.4 is now preregistered at `09ba0c5b…` and its exact
+53-part hero-shell, five-phase performance, three-frame builder/auditor/runner
+are frozen at `61ff2d8c…` before mutation. PC.3 human evidence remains pending
+and must not be fabricated; PC.4 is a separate model-guided corrective iteration.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
