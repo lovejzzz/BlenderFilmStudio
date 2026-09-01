@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc9PhysicalArchetypesPreregistration.v0.1",
+  "experimentId": "PC9-PHYSICAL-ARCHETYPES-AND-CONTACT-REALISM",
+  "status": "PREREGISTERED_BEFORE_PRODUCT_SOURCE_MUTATION",
+  "purpose": "Teach the Film Studio product to generate recognizable metric-scale rigid-body archetypes whose visible fill state deterministically controls mass and center of mass, while Blender/Bullet retains exclusive authority over every post-release and final pose.",
+  "acceptedBaseline": {
+    "productCommit": "9d5a66869528b66216b977c01312cdc849f28fad",
+    "productModuleSha256": "009544bd57445b679cc81636d3f18d8bcd492201b2a14a3bc1daa7f40ac484fb",
+    "pc8EvidenceRoot": "experiments/measured-shutter/PC8-2026-09-01-attempt-01",
+    "pc8ReceiptHash": "801b2c83d031c210d3e2eb3073aee4e3ad49dbe3889b276e6439bf74c22b7d58",
+    "pc8AuditHash": "8faff835f653d0bffca847c0a1339e3a474c65d6e950b20a931bc4abf893ae85",
+    "pc8DirectReviewHash": "e4fb55862a939ec7ab86c4205064c5c5e6ef97c6fcfba0226dfc1d3f38c56f39",
+    "pc8AcceptanceHash": "48ab5ec28bd46ce0d361e2e6691f58fa44280faaefe8a8ebecc73d69e797ff69",
+    "pc8PublicationReceiptHash": "4fdfb00e7222cefc0d840b9b31a18effd53f04b6f237f005884e12dbe61178f5"
+  },
+  "fixture": {
+    "uri": "specs/fixtures/causal-studio/PC9_F1.metric-basketball-three-filled-bottles.scene-spec.v0.5.json",
+    "sha256": "cba6f6a8ac3e126dcbf3f3c403598c47864c4a920aeb5398c3dbf4bb2b0d7995",
+    "sceneSpecHash": "51018f80dbba439fae0c774c515c610e2d72636fbec6eb84df64d933a1efe958",
+    "physicalVariationBasisHash": "27190ce3916dfc246d7543a38e2d5b84d269a9fa0f37087988cfe80114e5435f"
+  },
+  "curriculumCorrection": {
+    "retainedPc5Strength": "procedural lathed bottle silhouette with readable base, body, shoulder, neck, cap and label",
+    "retainedPc5Limitation": "the accepted lesson used an approximately 0.84 m ball diameter, 1.44 m bottles and manually chosen identical target masses, so it did not establish metric physical archetypes",
+    "retainedPc8Strength": "evaluated Bullet motion selects the event and derives native shutter without final-pose authority",
+    "pc9Change": "return to three recognizable bottles at real-world scale and derive each rigid-body mass and object-origin center of mass from the same visible fill fraction"
+  },
+  "physicalContract": {
+    "units": {"length": "meter", "mass": "kilogram", "capacity": "liter", "density": "kilogram_per_liter"},
+    "actor": {"kind": "basketball", "radiusMeters": 0.12, "massKg": 0.624, "collisionShape": "SPHERE"},
+    "targets": {
+      "kind": "filled capped bottle",
+      "count": 3,
+      "heightMeters": 0.28,
+      "bodyRadiusMeters": 0.034,
+      "collisionShape": "CONVEX_HULL",
+      "fillFractions": [0.15, 0.55, 0.9],
+      "derivedMassesKgExact": [0.10685, 0.30645, 0.4811],
+      "derivedCenterOfMassHeightsMetersExact": [0.05469894, 0.06743313, 0.0964538],
+      "massFormula": "containerMassKg + nominalCapacityLiters * liquidDensityKgPerLiter * fillFraction",
+      "centerOfMassFormula": "mass-weighted container COM and visible liquid-column COM",
+      "visibleAndPhysicalFillMustShareOneInput": true,
+      "manualPerTargetMassOrCenterOfMassForbidden": true,
+      "liquidSimulationClaim": false
+    },
+    "solver": {"engine": "BLENDER_BULLET_RIGID_BODY", "substepsPerFrameMinimum": 10, "solverIterationsMinimum": 40, "collisionMarginsMetricAndExplicit": true},
+    "finalPoseSource": "BLENDER_BULLET_RIGID_BODY"
+  },
+  "productScope": {
+    "authorizedPaths": ["scripts/modules/film_studio_causal.py"],
+    "maximumChangedPaths": 1,
+    "maximumAdditions": 600,
+    "maximumDeletions": 240,
+    "requiredBackwardCompatibility": ["bfs.causalSceneSpec.v0.1", "bfs.causalSceneSpec.v0.2", "bfs.causalSceneSpec.v0.4"],
+    "requiredNewVersion": "bfs.causalSceneSpec.v0.5",
+    "requiredNewFactory": "FILLED_LATHED_BOTTLE",
+    "fixtureOrHashBranchesForbidden": true,
+    "arbitraryPythonShellNetworkOrFilesystemAuthorityForbidden": true
+  },
+  "machineAcceptance": {
+    "schemaAndNegativeControls": "all frozen v0.1-v0.4 controls plus new v0.5 mass, COM, profile, collision and authority attacks must pass before mutation",
+    "initialPenetrationMaximumMeters": 0.0005,
+    "allThreeTargetsMustRespond": true,
+    "impactActiveTargetCountMinimum": 3,
+    "targetTiltDegreesAtFinalMinimumEach": 25.0,
+    "targetsTiltedAtLeast60DegreesMinimumCount": 2,
+    "derivedMassesAndCentersOfMassExact": true,
+    "visibleFillFractionsExact": true,
+    "recognizableBottleDetailObjectsMinimumEach": 4,
+    "distinctVisibleFillLevelsMinimum": 3,
+    "collisionHullMustUseTheVisibleBottleBodyMesh": true,
+    "postReleaseActorPoseKeyframes": 0,
+    "targetPoseKeyframes": 0,
+    "reopenPhysicsMassCenterOfMassAndShutterExact": true,
+    "impactClipFrameCount": 24,
+    "nativeMeasuredMotionBlurRequired": true,
+    "compositorOrPostprocessBlur": false
+  },
+  "directVisualQuestions": [
+    "At first glance, do the actor and all three targets read specifically as one basketball and three capped bottles rather than a sphere and generic blocks?",
+    "Do ball-to-bottle proportions look plausible at real-world metric scale?",
+    "Are three distinct liquid fill levels visible and consistent with the recorded low, medium and high fill inputs?",
+    "Does the contact sequence propagate continuously through Bullet rather than showing a simultaneous arranged lean or final-pose jump?",
+    "Does the measured blurred impact add speed while retaining ball seams, bottle silhouettes, caps, labels and contact direction?",
+    "Does the aftermath contain solver-discovered separation, support and differing angles rather than a neat placed composition?",
+    "Do material response, contact shadows and surface detail make the physical archetypes more credible than the PC8 abstract wooden targets?"
+  ],
+  "visualVerdictRule": "PASS only if all seven questions are YES on bound formal stills and the complete bound clip; photoreal film quality remains a separately reported claim ceiling",
+  "development": {
+    "root": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC9-development",
+    "allowed": "local product branch, repeated zero-network scene runs and screenshot review before product commit",
+    "formalClaim": false
+  },
+  "formalRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC9-2026-09-01-attempt-01",
+    "evidence": "experiments/physical-archetypes/PC9-2026-09-01-attempt-01",
+    "freshBeforeFormalMutation": true,
+    "immutableAfterFirstWrite": true
+  },
+  "resourceCeilings": {
+    "minimumFreeDiskGiB": 100,
+    "workspaceBytes": 53687091200,
+    "evidenceBytes": 335544320,
+    "cleanNativeBuilds": 1,
+    "productStarts": 3,
+    "sceneMutatingExecutions": 1,
+    "sharpImpactControlRenders": 1,
+    "productReviewStillRenders": 3,
+    "impactClipFrameRenders": 24,
+    "blendSaves": 1,
+    "reopens": 1
+  },
+  "forbiddenCounts": {
+    "networkCallsDuringFormalExecution": 0,
+    "engineRemoteWritesDuringValidation": 0,
+    "forcePushes": 0,
+    "tags": 0,
+    "releases": 0,
+    "binaryDistribution": 0,
+    "signing": 0,
+    "notarization": 0,
+    "externalAssetDownloads": 0,
+    "finalPoseAuthoring": 0
+  },
+  "stopRule": "Retain and stop on any schema escape, derived mass/COM mismatch, initial penetration, missing target response, final-pose key, reopen mismatch, collision/visible-body mismatch, formal resource overrun or direct visual NO. Do not weaken thresholds or hand-place a better final image.",
+  "claimCeiling": "A PASS establishes one product-integrated metric basketball/filled-bottle physical-archetype lesson. It does not establish liquid slosh simulation, deformation, photorealism, broad asset generalization or robot-capstone quality.",
+  "specHash": "d95c9c4ab4bb2987cd3d205c5a7dcc5caac83937c3f5efaa9918809babf7f528"
+}

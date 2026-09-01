@@ -643,6 +643,19 @@ The accepted PC8 source was then published by one ordinary non-force
 fast-forward from `c7eece67…` to `9d5a6686…`; public `main` and the raw causal
 module match the validated source exactly. No tag, release, binary, LFS,
 signing or notarization operation occurred.
+PC9 is now preregistered before product mutation. Its v0.5 fixture hash is
+`51018f80…`; the preregistration hash is `d95c9c4a…`. It returns to one
+basketball and three bottles, but replaces the old oversized PC5 scene with
+metric dimensions: 0.12 m ball radius, 0.624 kg ball mass, 0.28 m bottle height
+and three visible fill fractions. The same fill inputs must derive exact target
+masses `0.10685/0.30645/0.48110 kg` and COM heights
+`0.05469894/0.06743313/0.09645380 m`; manual per-target mass/COM and final-pose
+authority are forbidden. `CONVEX_HULL` must use the visible lathed bottle body,
+measured shutter remains active, and direct review must answer seven frozen
+recognizability/scale/fill/contact questions YES. This does not claim liquid
+sloshing or photorealism. The next action is a one-path product implementation
+and zero-network development replay; thresholds may not be weakened after the
+result is seen.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
