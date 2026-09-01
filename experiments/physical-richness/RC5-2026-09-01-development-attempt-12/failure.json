@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "SAVE_REOPEN_AFTER_SECONDARY_CAMERA_SEARCH",
+  "researchCommit": "2981ee054035ecffa05068d0d2cb3faf4bf8369b",
+  "candidateModuleSha256": "36878cc7438eb80c1e5edb8298f7c0c0b55dea16bdff641f148ea5ac60526edf",
+  "runnerSha256": "97fb104ad147b049eb82060a33125883059bc63741d90281c811b42e669f62ef",
+  "fixtureSpecHash": "5c907afe455c5f2e2ad8b949626eb2891d5a3da4d0a63521a2fba05dadf6fc2e",
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-12",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-12",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "evidence": {
+    "buildFileSha256": "41e33c3ec13c98094b65355a231ffcbe7dcdd85e0505037f78f522804dfedf9b",
+    "buildStatus": "PASS_20_OF_20",
+    "reopenFileSha256": "cb9d9af2bcbd4abd5b6e3f11dd8f30a58b60539a78106b04793312d17367ed1f",
+    "reopenStatus": "FAIL_3_OF_7",
+    "regressionNegativeFileSha256": "42d8c9b415aafdbe25033a6ff60832d85cbbd0416aecec18c4537da6a69325d1",
+    "regressionStatus": "PASS",
+    "contactSelectedAzimuthDegrees": 135,
+    "contactMinimumSecondaryCenterSeparationNormalized": 0.15123805,
+    "effectSelectedAzimuthDegrees": 135,
+    "effectMinimumSecondaryCenterSeparationNormalized": 0.08939817
+  },
+  "reopenDeltas": {
+    "maximumActorLocationDeltaMeters": 75.01565826235316,
+    "maximumTargetTiltDeltaDegrees": 1.000170170905728,
+    "maximumCapLocationDeltaMeters": 0.009119559192060795,
+    "maximumCapAngularDeltaDegrees": 8.584154432456785
+  },
+  "rootCause": {
+    "classification": "CAMERA_SEARCH_INVALIDATED_RIGID_BODY_CACHE",
+    "description": "The bounded camera search created eight camera objects and deleted seven losers for both contact and effect roles between physics measurement and bake. Those scene collection mutations invalidated Blender's rigid-body evaluation cache; the subsequent saved bake no longer reproduced the pre-camera-search samples.",
+    "cameraPolicyFailed": false,
+    "physicalProjectionChanged": false
+  },
+  "correctionBoundary": "Evaluate all eight directions by moving and refitting one persistent camera object per role, store the best camera matrix, and restore it after scoring. Do not create/delete candidate objects or change directions, scores, physics, fixtures or thresholds.",
+  "counts": {
+    "productStarts": 3,
+    "rc5SceneBuilds": 1,
+    "blendSaves": 1,
+    "reopens": 1,
+    "regressionSceneExecutions": 3,
+    "negativeControls": 12,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "7a0fe0d32812ec7fd5d3fc51cc1235fcddb9ce1741566fdb18ce118cf988f634"
+}
