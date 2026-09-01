@@ -92,6 +92,15 @@ def preserve_parent(child, parent):
     child.matrix_world = matrix
 
 
+def action_fcurves(obj):
+    action = obj.animation_data.action if obj.animation_data and obj.animation_data.action else None
+    if action is None:
+        return []
+    if hasattr(action, "fcurves"):
+        return list(action.fcurves)
+    return [fcurve for layer in action.layers for strip in layer.strips for channelbag in strip.channelbags for fcurve in channelbag.fcurves]
+
+
 def add_rigid_body(obj, kind, shape, mass, friction, restitution, linear_damping, angular_damping):
     bpy.context.view_layer.objects.active = obj
     obj.select_set(True)
@@ -120,7 +129,8 @@ def create_ball(collection, mats):
     smooth_object(ball)
     ball["semantic_role"] = "dynamic_actor"
     ball["asset_method"] = "procedural_uv_sphere_with_great_circle_channels"
-    ball["initial_linear_velocity"] = [9.6, 0.0, 0.0]
+    ball["launch_mode"] = "KINEMATIC_TO_DYNAMIC_RIGID_BODY_RELEASE"
+    ball["release_frame"] = 27
     collection.objects.link(ball) if ball.name not in collection.objects else None
     seam_specs = [
         ("SEAM_Equator", (0.0, 0.0, 0.0)),
@@ -137,8 +147,20 @@ def create_ball(collection, mats):
         seam["semantic_role"] = "modeling_detail"
         preserve_parent(seam, ball)
         seams.append(seam)
-    add_rigid_body(ball, "ACTIVE", "SPHERE", 2.8, 0.58, 0.32, 0.035, 0.055)
-    ball.rigid_body.linear_velocity = Vector(ball["initial_linear_velocity"])
+    rigid = add_rigid_body(ball, "ACTIVE", "SPHERE", 2.8, 0.58, 0.32, 0.035, 0.055)
+    rigid.kinematic = True
+    for frame, x, spin in ((1, -3.20, 0.0), (18, -3.20, 0.0), (26, -1.05, -6.0)):
+        ball.location = (x, 0.0, 0.43)
+        ball.rotation_euler = (0.0, spin, 0.0)
+        ball.keyframe_insert(data_path="location", frame=frame)
+        ball.keyframe_insert(data_path="rotation_euler", frame=frame)
+    rigid.kinematic = True
+    ball.keyframe_insert(data_path="rigid_body.kinematic", frame=26)
+    rigid.kinematic = False
+    ball.keyframe_insert(data_path="rigid_body.kinematic", frame=27)
+    for fcurve in action_fcurves(ball):
+        for point in fcurve.keyframe_points:
+            point.interpolation = "LINEAR"
     return ball, seams, radius
 
 
@@ -307,6 +329,7 @@ def setup_scene():
     scene.render.image_settings.color_depth = "8"
     scene.render.fps = 24
     scene.render.use_file_extension = True
+    scene.world = bpy.data.worlds.new("WORLD_CausalStudio")
     scene.world.color = (0.012, 0.015, 0.025)
     scene.gravity = (0.0, 0.0, -9.81)
     try:
@@ -379,11 +402,6 @@ def reset_physics(scene, ball, bottles):
             cache.frame_end = 120
         except Exception:
             pass
-    ball.rigid_body.linear_velocity = Vector(ball["initial_linear_velocity"])
-    ball.rigid_body.angular_velocity = Vector((0.0, 9.0, 0.0))
-    for bottle in bottles:
-        bottle.rigid_body.linear_velocity = Vector((0.0, 0.0, 0.0))
-        bottle.rigid_body.angular_velocity = Vector((0.0, 0.0, 0.0))
     bpy.context.view_layer.update()
 
 
@@ -456,6 +474,13 @@ def render_reviews(scene, cameras, physics, evidence_root):
 
 
 def asset_inventory(ball, bottles, seams, details, cameras, lights, floor, backdrop):
+    authored_frames = {}
+    for obj in [ball, *bottles]:
+        frames = []
+        if obj.animation_data and obj.animation_data.action:
+            frames = sorted({int(round(point.co.x)) for curve in action_fcurves(obj) for point in curve.keyframe_points})
+        authored_frames[obj.name] = frames
+    release_frame = int(ball["release_frame"])
     return {
         "semanticObjects": {
             "dynamic_actor": [ball.name],
@@ -473,7 +498,12 @@ def asset_inventory(ball, bottles, seams, details, cameras, lights, floor, backd
         },
         "externalImages": [image.filepath for image in bpy.data.images if image.source == "FILE" and image.filepath],
         "externalLibraries": [library.filepath for library in bpy.data.libraries],
-        "dynamicFinalPoseKeyframes": {obj.name: bool(obj.animation_data and obj.animation_data.action) for obj in [ball, *bottles]},
+        "authoredKeyframeFrames": authored_frames,
+        "dynamicFinalPoseKeyframes": {
+            ball.name: any(frame > release_frame for frame in authored_frames[ball.name]),
+            **{obj.name: len(authored_frames[obj.name]) > 0 for obj in bottles},
+        },
+        "launch": {"mode": ball["launch_mode"], "releaseFrame": release_frame, "postReleasePoseKeyframes": 0},
         "rigidBodies": {obj.name: {"type": obj.rigid_body.type, "shape": obj.rigid_body.collision_shape, "mass": obj.rigid_body.mass} for obj in [ball, *bottles, floor]},
     }
 
@@ -513,7 +543,6 @@ def main():
         scene, ball, bottles, cameras, lights, floor, backdrop, seams, details, ball_radius = setup_scene()
         clearances = initial_clearance(ball, bottles, ball_radius)
         scene.frame_set(1)
-        ball.rigid_body.linear_velocity = Vector(ball["initial_linear_velocity"])
         bpy.ops.wm.save_as_mainfile(filepath=str(blend_path), check_existing=False)
         physics = simulate(scene, ball, bottles)
         reviews = render_reviews(scene, cameras, physics, evidence_root)

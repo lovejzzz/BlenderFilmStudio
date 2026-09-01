@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioCausalStudioToolFreezeC3.v0.4",
+  "experimentId": "PC5-CAUSAL-STUDIO",
+  "status": "FROZEN_C3_BEFORE_ATTEMPT04_SCENE_MUTATION",
+  "context": {
+    "uri": "specs/ai-native-studio-causal-studio-execution-context-c3.v0.4.json",
+    "sha256": "225078a60ed60111985436898bdc7d899f5cc11f70d6ad921f47a94bb7d6fdf1",
+    "contextHash": "ea9e2bf2e3a2f8d94f39ddb50da7226843f7434460b056a1e55a53e51c960e58"
+  },
+  "retainedC2Freeze": {
+    "uri": "specs/ai-native-studio-causal-studio-tool-freeze-c2.v0.3.json",
+    "sha256": "51859b643b8c610eca5a6dadb71549d746b22c96b02356e35da45c38dc2ad2cf",
+    "freezeHash": "6242c135dd6d4c2fa989bf793243c209b4110cc5a42757c37cde45d3a9ba219c"
+  },
+  "tools": [
+    {"uri": "scripts/build-causal-studio.py", "sha256": "dfbe58a23ab9d86c298919e0fade67e44eaf570a901d185743e49009b07d1540"},
+    {"uri": "scripts/run-causal-studio.mjs", "sha256": "6bcc0606e0fb78bb5d55f0b5dd06615a9e1ea8a0999b2b3595cb240640391882"},
+    {"uri": "scripts/audit-causal-studio.mjs", "sha256": "05b594536fcca6b79c513ea1a571648d448d0bef996a74d5b76d913459f9aab7"}
+  ],
+  "hostProbe": {
+    "worldAfterUseEmpty": null,
+    "rigidBodyWorldPropertiesObserved": ["substeps_per_frame", "solver_iterations", "point_cache"],
+    "rigidBodyObjectWritableVelocityPropertiesObserved": [],
+    "kinematicKeyframeInsert": "PASS",
+    "layeredActionFcurveRead": "PASS"
+  },
+  "physicsGuarantee": {
+    "ball": "active rigid body, kinematic only through frame 26, dynamic from frame 27",
+    "targets": "three active rigid bodies with zero animation keyframes",
+    "postReleaseBallPoseKeyframes": 0,
+    "targetPoseKeyframes": 0,
+    "allCollisionAndFinalPoseAfterRelease": "BLENDER_BULLET_RIGID_BODY"
+  },
+  "staticChecks": {"pythonCompile": "PASS", "runnerNodeSyntax": "PASS", "auditorNodeSyntax": "PASS"},
+  "entrypoints": {"run": ["node", "scripts/run-causal-studio.mjs"], "audit": ["node", "scripts/audit-causal-studio.mjs"]},
+  "freezeHash": "e6df36a8621fa7bda0b2f4e2709b85bd0219e3f58793364f8407432a871fa4d9"
+}

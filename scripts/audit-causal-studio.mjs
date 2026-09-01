@@ -6,8 +6,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const specUri = 'specs/ai-native-studio-causal-studio-preregistration.v0.1.json';
-const contextUri = 'specs/ai-native-studio-causal-studio-execution-context-c2.v0.3.json';
-const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze-c2.v0.3.json';
+const contextUri = 'specs/ai-native-studio-causal-studio-execution-context-c3.v0.4.json';
+const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze-c3.v0.4.json';
 function canonical(value) { if (value === null || typeof value !== 'object') return JSON.stringify(value); if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`; return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonical(value[key])}`).join(',')}}`; }
 function shaBytes(value) { return createHash('sha256').update(value).digest('hex'); }
 function shaFile(path) { return shaBytes(readFileSync(path)); }
@@ -41,7 +41,7 @@ gate('A05_BINARY_IDENTITY', shaFile(spec.engine.path) === spec.engine.sha256, sp
 gate('A06_PROCESS_BOUND', processes.length === 2 && processes.every(row => row.exitCode === 0 && row.timedOut === false), processes.map(row => ({ mode: row.mode, exitCode: row.exitCode })));
 gate('A07_RENDER_BOUND', receipt.operations.renderCalls === 3 && build.reviews.length === 3 && build.reviews.every(row => existsSync(join(evidenceRoot, row.uri)) && shaFile(join(evidenceRoot, row.uri)) === row.sha256), build.reviews);
 gate('A08_PROCEDURAL_ASSETS', build.inventory.externalImages.length === 0 && build.inventory.externalLibraries.length === 0 && build.inventory.proceduralModeling.ballChannelCount >= 3 && build.inventory.proceduralModeling.bottleCount === 3 && build.inventory.proceduralModeling.bottleDetailObjectCount >= 9, build.inventory.proceduralModeling);
-gate('A09_RIGID_BODY_CAUSALITY', Object.values(build.inventory.dynamicFinalPoseKeyframes).every(value => value === false) && Object.entries(build.inventory.rigidBodies).filter(([name]) => name.startsWith('ACTOR_') || name.startsWith('TARGET_')).every(([, row]) => row.type === 'ACTIVE'), build.inventory.dynamicFinalPoseKeyframes);
+gate('A09_RIGID_BODY_CAUSALITY', Object.values(build.inventory.dynamicFinalPoseKeyframes).every(value => value === false) && build.inventory.launch.mode === 'KINEMATIC_TO_DYNAMIC_RIGID_BODY_RELEASE' && build.inventory.launch.postReleasePoseKeyframes === 0 && Object.entries(build.inventory.rigidBodies).filter(([name]) => name.startsWith('ACTOR_') || name.startsWith('TARGET_')).every(([, row]) => row.type === 'ACTIVE'), { finalPoseKeyframes: build.inventory.dynamicFinalPoseKeyframes, launch: build.inventory.launch });
 const minClearance = Math.min(...build.initialClearances.map(row => Number(row.meters)));
 gate('A10_INITIAL_NO_PENETRATION', minClearance >= -spec.causalAcceptance.initialPenetrationMaximumMeters, minClearance);
 const contact = Number(build.physics.firstTargetContactFrame);
