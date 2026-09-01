@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "INSPECTION_RESULT_ASSEMBLY_BEFORE_SCENE_MUTATION",
+  "researchCommit": "08ee99db6415a68c3990cb08f52ab7a479d4b4dd",
+  "candidateModuleSha256": "f99700c6119b95e6e3ddcea2d716a2c380865662cb64e55083fcc6806919ad71",
+  "runnerSha256": "a3bb5dc547dbba8dbdf94c9be427d8171b81a9a1302c58374e0d6a1062bed1a5",
+  "fixture": {
+    "uri": "specs/fixtures/physics-action/RC5_B1.basketball-three-bottles-breakaway-cap.physics-action-spec.v0.4.json",
+    "fileSha256": "f937a4598b808e7a9d7ce198270960f2e1f5261d9a9616270bb48047c95f98b6",
+    "physicsActionSpecHash": "804c2758710756894295400a38f82a5d51cd7a59214f2a32cfda489bfe8dd0cb"
+  },
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-02",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-02",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "error": {
+    "type": "NameError",
+    "symbol": "contract_version",
+    "function": "inspect_physics_action",
+    "message": "name 'contract_version' is not defined"
+  },
+  "rootCause": "The contract version was computed in _inspection but referenced from the separate inspect_physics_action scope while assembling the v0.4-only inspection fields.",
+  "correctionBoundary": "Compute the contract version from the already validated document schema inside inspect_physics_action. Do not change the fixture, target derivation, physical variation basis, constraint, thresholds, process ceilings or review questions.",
+  "counts": {
+    "productStarts": 1,
+    "inspectionAttempts": 1,
+    "sceneMutations": 0,
+    "blendSaves": 0,
+    "reopens": 0,
+    "regressionSceneExecutions": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "aaceade9d54c3442ec5d9bc370ffc937f46a0828f57b947a8d410d050b7ca052"
+}
