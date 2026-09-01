@@ -74,7 +74,7 @@ def protected_state(scene, frames):
 
 args = parse_args()
 context = json.loads(args.context.read_text(encoding="utf-8"))
-if not valid_self(context, "contextHash") or context["experimentId"] != "PC4-VX1":
+if not valid_self(context, "contextHash") or context["schemaVersion"] != "bfs.visualImprovementExecutionContextC1.v0.2" or context["experimentId"] != "PC4-VX1":
     raise RuntimeError("CONTEXT")
 build_path = args.evidence_root / "build.json"
 build = json.loads(build_path.read_text(encoding="utf-8"))

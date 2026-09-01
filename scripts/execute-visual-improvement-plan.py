@@ -240,10 +240,13 @@ def apply_visibility(scene, operation, shots):
             obj.keyframe_insert(data_path="hide_render", frame=shot["frameEnd"] + 1)
         action = obj.animation_data.action if obj.animation_data else None
         if action:
-            for curve in action.fcurves:
-                if curve.data_path == "hide_render":
-                    for point in curve.keyframe_points:
-                        point.interpolation = "CONSTANT"
+            for layer in action.layers:
+                for strip in layer.strips:
+                    for channelbag in strip.channelbags:
+                        for curve in channelbag.fcurves:
+                            if curve.data_path == "hide_render":
+                                for point in curve.keyframe_points:
+                                    point.interpolation = "CONSTANT"
         scene.frame_set(shot["reviewFrame"])
         if not obj.hide_render:
             raise RuntimeError("VISIBILITY_REVIEW_FRAME")
@@ -387,7 +390,7 @@ def render_reviews(scene, context, evidence_root):
 
 args = parse_args()
 context = json.loads(args.context.read_text(encoding="utf-8"))
-if not valid_self(context, "contextHash") or context["experimentId"] != "PC4-VX1":
+if not valid_self(context, "contextHash") or context["schemaVersion"] != "bfs.visualImprovementExecutionContextC1.v0.2" or context["experimentId"] != "PC4-VX1":
     raise RuntimeError("CONTEXT")
 plan_path = Path(context["plan"]["uri"])
 packet_path = Path(context["packet"]["uri"])

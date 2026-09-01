@@ -4,7 +4,8 @@ import test from 'node:test';
 import { canonicalJson, sha256 } from '../scripts/lib/scene-spec.mjs';
 
 const preregPath = 'specs/ai-native-studio-visual-plan-typed-execution-preregistration.v0.1.json';
-const contextPath = 'specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context.v0.1.json';
+const correctionPath = 'specs/ai-native-studio-visual-plan-typed-execution-preregistration-c1.v0.2.json';
+const contextPath = 'specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context-c1.v0.2.json';
 const planPath = 'experiments/visual-understanding-loop/PC4-VU1-2026-08-31-attempt-03/visual-improvement-plan.json';
 const packetPath = 'specs/fixtures/visual-review/PC4_ATTEMPT03.packet.json';
 const executorPath = 'scripts/execute-visual-improvement-plan.py';
@@ -13,10 +14,12 @@ const runnerPath = 'scripts/run-visual-plan-typed-execution.mjs';
 const auditorPath = 'scripts/audit-visual-plan-typed-execution.mjs';
 
 const preregBytes = await readFile(preregPath);
+const correctionBytes = await readFile(correctionPath);
 const contextBytes = await readFile(contextPath);
 const planBytes = await readFile(planPath);
 const packetBytes = await readFile(packetPath);
 const prereg = JSON.parse(preregBytes);
+const correction = JSON.parse(correctionBytes);
 const context = JSON.parse(contextBytes);
 const plan = JSON.parse(planBytes);
 const packet = JSON.parse(packetBytes);
@@ -37,6 +40,7 @@ async function absent(path) {
 
 test('preregistration and execution context self hashes are exact', () => {
   assert.equal(prereg.specHash, selfHash(prereg, 'specHash'));
+  assert.equal(correction.specHash, selfHash(correction, 'specHash'));
   assert.equal(context.contextHash, selfHash(context, 'contextHash'));
 });
 

@@ -2,8 +2,8 @@ import { readFile, writeFile, lstat, readdir } from 'node:fs/promises';
 import { resolve, isAbsolute } from 'node:path';
 import { canonicalize, canonicalJson, repositoryRoot, sha256 } from './lib/scene-spec.mjs';
 
-const FREEZE_URI = 'specs/ai-native-studio-visual-plan-typed-execution-tool-freeze.v0.1.json';
-const CONTEXT_URI = 'specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context.v0.1.json';
+const FREEZE_URI = 'specs/ai-native-studio-visual-plan-typed-execution-tool-freeze-c1.v0.2.json';
+const CONTEXT_URI = 'specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context-c1.v0.2.json';
 
 function requireCondition(condition, message) {
   if (!condition) throw new Error(message);
