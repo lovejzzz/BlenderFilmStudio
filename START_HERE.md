@@ -520,7 +520,16 @@ importantly, direct screenshot review rejects the product result: actual chamber
 ring/column occlusion remains, spherical shoulder/elbow volumes dominate medium,
 and the close helmet still lacks sufficient layered structure. Attempt-03 is a
 retained visual `FAIL` at failure self hash `e3de738f…`; the next iteration must
-change those visible design causes, not merely repair the auditor.
+change those visible design causes, not merely repair the auditor. The workflow
+has therefore been promoted from one-off scene patches to the reusable PC4-VU1
+visual-understanding loop. Its strict VisualReviewPacket, VisualAssessment and
+VisualImprovementPlan contracts compile screenshot evidence into six bounded
+semantic operations while preserving accepted lighting/camera strengths and
+carrying no Python, shell, network or arbitrary-filesystem authority. Formal
+attempt-03 passes 19/19 contract tests and an independent 20/20 audit; plan hash
+is `674bc082…`, receipt/audit self hashes are `b72a6354…` / `eb853d06…`.
+PC4-VU1 proves the understanding-to-plan boundary, not a new visual result. The
+active next step is a typed executor that consumes this plan before new screenshots.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

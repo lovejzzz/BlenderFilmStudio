@@ -6639,3 +6639,21 @@ C2 base-hash wrapper绑定两个已观测enum：`sRGB - Display→sRGB`与long A
 Date: 2026-08-31 · Type: RETAINED MODEL-VISUAL REJECTION · Blender starts / renders / saves / review PNGs: 1 / 3 / 1 / 3
 
 C2 builder完成53-part shell、five phases与frames 48/144/240；Python build self `13505429…` valid，runner因Node/Python number spelling在reopen前停止。Direct original-resolution screenshot review independently rejects product result：wide仍被actual chamber ring+column横竖遮挡；medium由primitive spherical shoulder/elbow与tight crop主导；close helmet虽优于pure sphere但仍是simple shell+circular pod，缺少face segmentation与mid-scale joint/panel structure。Failure/manifest self `e3de738f…` / `33f9b6db…`。Counts 157 objects/145 meshes/36,992 polys不能override visual FAIL。Next iteration必须改变visible causes并reframe，不能只修auditor。
+
+## J-564 · PC4-VU1 reusable visual-understanding architecture
+
+Date: 2026-08-31 · Type: ARCHITECTURE PIVOT + PREREGISTRATION · Blender starts / renders / scene mutations: 0 / 0 / 0
+
+Owner指出逐作品写一次性修改脚本不可扩展，要求“教会软件如何做出好的电影”。PC4-VU1因此冻结三层边界：VisualReviewPacket绑定frames/shots/entities/strengths；vision teacher只输出region+entity+category+confidence+treatment；deterministic compiler只从semantic catalog生成VisualImprovementPlan。Model不得输出Python/shell/network/path/Blender operator。PC.4三张截图成为第一套teaching seed，不是scene-specific executor。
+
+## J-565 · PC4-VU1 attempts 01/02 retained harness failures
+
+Date: 2026-08-31 · Type: RETAINED TOOL FAILURES · Blender starts / renders / scene mutations: 0 / 0 / 0
+
+Attempt-01在任何root/write前因fresh parent directory不存在而ENOENT；C1只改recursive parent creation。Attempt-02通过dual compile与19/19 tests并写plan/receipt，但independent auditor把TAP log当JSON读取，在audit write前停止；retained plan/receipt/TAP hashes `382ef191…` / `c2a6004c…` / `2221a920…`。C2只改raw TAP reader，attempt-02保持不变。
+
+## J-566 · PC4-VU1 attempt-03 accepted PASS
+
+Date: 2026-08-31 · Type: ACCEPTED UNDERSTANDING-TO-PLAN CAPABILITY · Blender starts / renders / scene mutations / network: 0 / 0 / 0 / 0
+
+Formal attempt-03 dual compile canonical-exact，19/19 contract tests与independent 20/20 audit PASS。Plan `674bc082…`把visual evidence编译为6个bounded operations：wide occluder clearance、medium/close reframing、face segmentation、layered mechanical joints、mid-scale surface hierarchy；另有2个strength preservations保护lighting与camera language。Receipt/audit self `b72a6354…` / `eb853d06…`。这证明teacher assessment→auditable plan，不证明automatic vision generalization或typed Blender executor；下一步必须由typed executor消费plan再render截图。

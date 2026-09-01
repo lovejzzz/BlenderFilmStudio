@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "PC.4",
+  "activeGate": "PC.4-TYPED-EXECUTOR",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -1000,7 +1000,7 @@
     }
   },
   "postPb7ImprovementProgram": {
-    "status": "PC0_PC1_PC2_PASS_PC3_MACHINE_PASS_HUMAN_PENDING_PC4_ATTEMPTS01_02_HARNESS_FAIL_ATTEMPT03_VISUAL_FAIL_ITERATION_REQUIRED",
+    "status": "PC0_PC1_PC2_PASS_PC3_MACHINE_PASS_HUMAN_PENDING_PC4_VISUAL_FAIL_VU1_ATTEMPT03_PASS_TYPED_EXECUTOR_NEXT",
     "program": "POST-PB7-MODELING-ACTION-QUALITY",
     "spec": "specs/ai-native-studio-post-pb7-improvement-program.v0.1.json",
     "specHash": "b1743a2d4cdaa8fec6c9cbe8308c8a409a2fe01a8b3ba795c725b49974cddc33",
@@ -1012,7 +1012,7 @@
       "improvementPriorities": ["modeling detail", "action complexity"]
     },
     "gateOrder": ["PC.0", "PC.1", "PC.2", "PC.3", "PC.4"],
-    "activeGate": "PC.4",
+    "activeGate": "PC.4-TYPED-EXECUTOR",
     "pc0": {
       "status": "PASS",
       "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-02",
@@ -1263,6 +1263,40 @@
       "performancePhases": 5,
       "reviewFrames": [48, 144, 240],
       "fullSequenceRenderAllowedBeforeVisualPass": false
+    },
+    "visualUnderstandingLoop": {
+      "status": "PASS_TYPED_EXECUTOR_PENDING",
+      "experimentId": "PC4-VU1",
+      "preregistration": "specs/ai-native-studio-visual-understanding-loop-preregistration.v0.1.json",
+      "preregistrationFileSha256": "bdfa0b43cb93a93ded17cb25be66825e0b669590ee52b388f54a38e770ebe73a",
+      "toolFreeze": "specs/ai-native-studio-visual-understanding-tool-freeze-c2.v0.3.json",
+      "toolFreezeHash": "8141eff7b73532aa4239d39351081e00a5b0a74f13fe008ca47cecf26cbf973d",
+      "acceptedEvidenceRoot": "experiments/visual-understanding-loop/PC4-VU1-2026-08-31-attempt-03",
+      "retainedAttempt01": {"status": "FAIL_BEFORE_ROOT_CREATION", "rootAbsent": true, "immutable": true},
+      "retainedAttempt02": {"status": "PLAN_AND_RECEIPT_PASS_AUDITOR_HARNESS_FAIL", "evidenceRoot": "experiments/visual-understanding-loop/PC4-VU1-2026-08-31-attempt-02", "planFileSha256": "382ef19149fc2cbe092e71d5988f4cf2e65615663cb6abbf59f7b155de8e4825", "receiptFileSha256": "c2a6004c4be7f25aecc831ebcc10aa9af07dae28391a74ebfac1a1f86c44b9ef", "auditAbsent": true, "immutable": true},
+      "acceptedAttempt03": {
+        "status": "PASS",
+        "planFileSha256": "382ef19149fc2cbe092e71d5988f4cf2e65615663cb6abbf59f7b155de8e4825",
+        "planHash": "674bc0820eb1856539cc310e628bb69b32ee6ae8b88d7d4662d9deff27d7ac00",
+        "receiptFileSha256": "eb57725492ea6c2b7a1c99a4c250f326466108a6ed5b7f02e49707a2735b5a9e",
+        "receiptHash": "b72a63548fa0d10d3b8630b74927bc3eea47186ab5c8a576312e11bcbc2b58c6",
+        "auditFileSha256": "13461c54ddced95fdfe5f94861c5738f338ac225946b84ccc0a22f4a47c9b725",
+        "auditHash": "eb853d067d43c0cd02843d679215de9a19d48536471ccfb7e69c7b162b84718f",
+        "auditChecks": "20/20 PASS",
+        "manifestHash": "476dd17ef4c411f21e1490758f13b0d4363d9247a9a2e5ad2eb98bbab5b8558e",
+        "contractTests": "19/19 PASS",
+        "semanticOperations": 6,
+        "strengthPreservations": 2,
+        "rerenderFrames": 3,
+        "blenderStarts": 0,
+        "renders": 0,
+        "sceneMutations": 0,
+        "networkCalls": 0,
+        "immutable": true
+      },
+      "proves": "structured screenshot evidence can be compiled deterministically into an authority-limited improvement plan",
+      "doesNotProve": ["automatic frame selection", "vision generalization to unseen projects", "typed Blender execution", "visual improvement after execution"],
+      "next": "implement a typed executor for the frozen semantic operation catalog and rerender the three bound frames"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1638,8 +1672,8 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PC4_SCREENSHOT_LED_HERO_REDESIGN",
-    "result": "PC.4 attempt-03 is retained visual FAIL after direct screenshot review; create a versioned successor that removes actual chamber ring/column occlusion, replaces spherical joints, layers the helmet/face and reframes medium/close before new screenshots",
+    "gate": "PC4_TYPED_VISUAL_IMPROVEMENT_EXECUTOR",
+    "result": "PC4-VU1 understanding-to-plan attempt-03 passes 19/19 tests and independent 20/20 audit; implement a typed executor that consumes plan 674bc082… and rerender the three bound frames without project-specific proposal code",
     "acceptedPb6Evidence": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
     "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
     "audit": "15/15 PASS independent 288-frame/camera/video/attack audit",
@@ -1653,6 +1687,7 @@
       "retain the preregistered modeling-detail and action-complexity floors before any new source or render mutation",
       "retain PC.0 attempt-01 failure and accepted attempt-02 evidence/work roots immutable",
       "bind the PC.1 modeling increment to at least 12 semantic detail components, 3 new hero material regions and 2 visibly improved protected views",
+      "retain PC4-VU1 attempts 01/02 and accepted attempt-03 evidence immutable while the typed executor consumes only the frozen semantic catalog",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]
   }
