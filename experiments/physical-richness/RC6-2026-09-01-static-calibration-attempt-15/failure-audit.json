@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "bfs.rc6LiquidStaticCalibrationCellRecordFailureAudit.v0.1",
+  "status": "PASS",
+  "failureHash": "98b4f6ce7ee8b1f5a6ccd497f158f5262a95035c0a215e561de33bfb996aface",
+  "failureFileSha256": "bc18ab8648aef04354b7501f8ecd048580ebe5f95b226f370f3015de6f83f5c7",
+  "processHash": "54517fd358b24ae660d3e1522efefc56d93988b0226eff385b52789bb9045097",
+  "processFileSha256": "a11035e1e6973d8d56fae90ea4e13b7a2a7eb10aa2105820e759f8cb9be8065c",
+  "stderrSha256": "6c319638cc52b0d2ac4837595ac03d5a7702e3145ba6b1c56e62e332744e5034",
+  "checks": {
+    "oneBlenderStartObserved": true,
+    "oneDataBakeCompleted": true,
+    "oneMeshBakeCompleted": true,
+    "sevenDataFramesPresent": true,
+    "sevenMeshFramesPresent": true,
+    "failureBeforeResultWrite": true,
+    "remainingThreeCellsNotStarted": true,
+    "zeroRenders": true,
+    "zeroNetworkCalls": true,
+    "zeroEngineRemoteWrites": true,
+    "retainedAttempt13Unchanged": true
+  },
+  "hostReceiptDefect": "failure.json reports blenderStartsCompleted=0 because the host appends a process only after run_cell returns. The independently present self-hashed process receipt and seven data/mesh frames prove one Blender start and one completed cell bake.",
+  "rootCause": "The scene tool used the JSON literal true inside executable Python when constructing configuration.preContactOnly. The bake itself completed in 19.424768 seconds, then Python raised NameError before result.json was written.",
+  "correctionBoundary": "Create a versioned scene wrapper that changes exactly the executable token preContactOnly: true to preContactOnly: True. Route the unchanged four-cell matrix to fresh attempt-16 roots and bind this retained failure. Also correct only the failure-path completed-process count so future audit receipts do not undercount a failed Blender start. Do not change any physical parameter, matrix cell, selection rule, resource ceiling or stop rule.",
+  "auditHash": "6c82ec8531a2fbc2a75df15b39544b2d3c62de4c560f38afe733e8279851a3ad"
+}
