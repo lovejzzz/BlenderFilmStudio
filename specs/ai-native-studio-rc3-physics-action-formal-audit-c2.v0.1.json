@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc3PhysicsActionFormalAuditCorrection.v0.1",
+  "status": "FROZEN_BEFORE_CORRECTION_AUDIT_ROOT_CREATION",
+  "formalEvidence": {
+    "uri": "experiments/physics-native-action/RC3-2026-09-01-attempt-01",
+    "receiptFileSha256": "017fe1930d8d85e489d4cc0a1d9a4183646afbae6f5dd3aedee8920e92b70f91",
+    "receiptHash": "c50e703b3469b3bda8324fe7e96f981dbb084da12f7eaea869f0d0fa0719eebe",
+    "renderFileSha256": "4e085fa57c5c415e3b862a82d1d8109914095766b487d955e189c3d98c82e543",
+    "immutable": true,
+    "rerunAllowed": false
+  },
+  "retainedAuditorFailure": {
+    "toolUri": "scripts/audit-rc3-physics-action-formal.py",
+    "toolSha256": "540225c5884ca546947f6437bc3134ee84dc8961b33fd91065913e074b96d81b",
+    "failureClass": "AUDITOR_INHERITED_LIMIT_LOOKUP_KEY_ERROR",
+    "exception": "KeyError: 'resourceCeilings'",
+    "cause": "The frozen auditor looked for inherited resourceCeilings in correction v0.2 instead of its frozen v0.1 base.",
+    "productFailure": false,
+    "formalRunFailure": false
+  },
+  "correction": {
+    "scope": "Read resourceCeilings from frozen v0.1 while retaining v0.2 fixture correction; write only to a fresh audit root.",
+    "visualRule": "Because formal still PNGs and one contact-sheet PNG were not byte-identical, bind a fresh direct inspection of the formal six stills, two contact sheets and both complete clips. Do not reuse the prior review solely by hash.",
+    "thresholdChanges": 0,
+    "productSourceChanges": 0,
+    "formalReruns": 0,
+    "blenderStarts": 0,
+    "renderCalls": 0
+  },
+  "auditRoot": {
+    "uri": "experiments/physics-native-action/RC3-2026-09-01-formal-audit-c2",
+    "fresh": true
+  },
+  "tools": [
+    {
+      "uri": "scripts/audit-rc3-physics-action-formal-c2.py",
+      "sha256": "aba4216bb4fa358552b785d03f389059dc929d1f47b11a5ee7729e1c68122470"
+    }
+  ],
+  "freezeHash": "b8812bb769069242dcd9f75afea8cea9f59c2eb237808b254ce06bfb8cda1d42"
+}
