@@ -6889,3 +6889,14 @@ All outcome authority remains zero and both blends reopen below nanometric
 recorded tolerances. Candidate product commit `5f595fe3…` contains exactly the
 two preregistered paths. Publication remains blocked on direct visual review
 and clean-native formal validation.
+
+## J-594 · RC3 direct visual packet frozen
+
+Date: 2026-09-01 · Type: VISUAL TOOL FREEZE · Product starts / renders: 0 / 0
+
+The visual adapter binds both exact attempt-03 blend hashes and candidate
+commit `5f595fe3…`. One product start may render three cause/contact/effect stills
+and a complete 48-frame contact-camera clip for each solved scene, followed by
+two MP4 encodes and two contact sheets. Scene mutations, blend saves and network
+calls remain zero. Any direct visual NO blocks formal tool freeze and may not be
+repaired by moving bodies, event frames or final poses.
