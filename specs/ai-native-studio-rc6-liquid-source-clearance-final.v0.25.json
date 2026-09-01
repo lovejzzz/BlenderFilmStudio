@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "bfs.rc6LiquidSourceClearanceFinalSpec.v0.25",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-SOURCE-CLEARANCE-FINAL-2026-09-01-ATTEMPT-25",
+  "purpose": "Confirm the accepted 35 mm source-bottom clearance with the same static physics at resolution 192 before slow solver-owned tip.",
+  "toolFreezeParent": "e55803c205d89ea9a97d2fcef6445bdd3ccf45dc",
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-source-clearance-final-attempt-25",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-source-clearance-final-attempt-25"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "engineSourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6"
+  },
+  "retainedStaticControl": {
+    "closure": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-c2-closure-attempt-24/closure.json",
+      "sha256": "ce2e43a47e7a0d92593ded274aad5bd32eb866910863c8eb5f2e96401afaa94d"
+    },
+    "independentAudit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-c2-closure-attempt-24/independent-audit.json",
+      "sha256": "8593b455940bf0dc1a622d9888b2aea5852b51b89caf15880675ba86168d9605"
+    }
+  },
+  "configuration": {
+    "baseVoxelMeters": 0.0026041667,
+    "cflCondition": 2.0,
+    "cupEffectorSubframes": 0,
+    "domainCenterMeters": [0.32, 0.0, 0.25],
+    "domainDimensionsMeters": [0.36, 0.36, 0.5],
+    "flowSurfaceDistanceCells": 0.0,
+    "flowVolumeDensityObserved": 0.0,
+    "frameEnd": 7,
+    "frameStart": 1,
+    "meshParticleRadius": 4.5,
+    "meshScale": 2,
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "preContactOnly": true,
+    "resolutionMax": 192,
+    "simulationMethod": "APIC",
+    "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006],
+    "timestepsMax": 4,
+    "timestepsMin": 1,
+    "waterViscosityBase": 1.0,
+    "waterViscosityExponent": 6
+  },
+  "measurementBinding": {
+    "requestedClearanceMeters": 0.035,
+    "requestedClearanceVoxels": 13.44,
+    "maximumAbsoluteClearanceErrorMeters": 1e-08,
+    "maximumAbsoluteClearanceErrorVoxels": 4e-06
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.0104166667,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "cacheContract": {
+    "exactFiles": 21,
+    "frames": [1, 2, 3, 4, 5, 6, 7],
+    "stages": ["config", "data", "mesh"]
+  },
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "blendSaves": 1,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 4294967296,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 4294967296,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Run exactly one resolution-192, seven-frame, zero-render static bake. Stop on process, identity, requested-versus-measured placement, source-volume, signed-topology, containment, manifold, exact 21-file cache roster, persistence or resource failure. Do not proceed to slow-tip in this attempt.",
+  "claimCeiling": "One seven-frame resolution-192 static confirmation of the accepted 35 mm source clearance. PASS_FINAL_STATIC may unlock only slow solver-owned tip; it does not prove impact, lighting, render or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-source-clearance-final-scene.py": "7f94664ad01911146efaa6aa3417f3273d612c1cb09e28559e1f4feed54d6194",
+    "scripts/run-rc6-liquid-source-clearance-final.py": "d849d0e4161349e1269e6ee02aae30a0e168f5c07b25ca36959c5d52d9dee427",
+    "scripts/audit-rc6-liquid-source-clearance-final.py": "bf15046148dc688f8c379fcc7aa4d877a0e6516e34c19f10d20b88c008e4979d"
+  },
+  "specHash": "312395b2d8bbf965bb04518dcd837daf33cb467cf8594a022da311d2d69001ac"
+}
