@@ -93,7 +93,7 @@ def main():
         raise RuntimeError("free-space reserve")
     allowed = ["scripts/modules/film_studio_physical_look.py", "scripts/modules/film_studio_physics_action.py"]
     status_rows = run_capture(["git", "status", "--porcelain=v1", "--", "scripts/modules"], PRODUCT).splitlines()
-    changed = [row[3:] for row in status_rows]
+    changed = [row.split()[-1] for row in status_rows]
     if sorted(changed) != allowed:
         raise RuntimeError(f"product path scope mismatch: {changed}")
     tracked_numstat = run_capture(["git", "diff", "--numstat", BASE, "--", "scripts/modules/film_studio_physics_action.py"], PRODUCT).splitlines()
