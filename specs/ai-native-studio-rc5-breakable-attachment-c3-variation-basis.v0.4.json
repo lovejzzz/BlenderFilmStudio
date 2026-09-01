@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc5BreakableAttachmentC3.v0.4",
+  "status": "CORRECTED_BEFORE_ATTEMPT_02_ROOT_CREATION_OR_PRODUCT_START",
+  "c2Contract": "specs/ai-native-studio-rc5-breakable-attachment-c2-derived-target.v0.3.json",
+  "c2CorrectionHash": "59fd479a6d9d9b8d3df3f4b65fcb79a82fe43c7c45a0d7eb8c14e66268de97f2",
+  "c2Fixture": "specs/fixtures/physics-action/RC5_B1.basketball-three-bottles-breakaway-cap.physics-action-spec.v0.3.json",
+  "c2FixtureFileSha256": "7ae9ffc11541dcfe92d1f9e66a8f923aaba6d9d8f79d59ec8c8b9dff66a8410a",
+  "c2SpecHash": "3c269bc31341efb4c9f78fabcebb64bcc94042623dd4fee545e2829d3573e295",
+  "c2Execution": {
+    "productStarts": 0,
+    "sceneBuilds": 0,
+    "renders": 0,
+    "workspaceRootCreated": false,
+    "evidenceRootCreated": false
+  },
+  "staticFinding": "The existing bottle factory derives bounded position, yaw, friction and restitution variation from physicsActionSpecHash. The C2 schema-only hash change would therefore resample physical initial conditions while claiming to correct only semantic target selection.",
+  "correction": {
+    "fixture": "specs/fixtures/physics-action/RC5_B1.basketball-three-bottles-breakaway-cap.physics-action-spec.v0.4.json",
+    "fixtureFileSha256": "f937a4598b808e7a9d7ce198270960f2e1f5261d9a9616270bb48047c95f98b6",
+    "specHash": "804c2758710756894295400a38f82a5d51cd7a59214f2a32cfda489bfe8dd0cb",
+    "addedTopLevelField": "physicalVariationBasisSpecHash",
+    "physicalVariationBasisSpecHash": "bac28a88028ffaed0b09685059e63c1f4cf23c2ad1b2a79901f54e699d4b1e34",
+    "basisSource": "retained attempt-01 v0.2 fixture physicsActionSpecHash",
+    "allowedInfluence": [
+      "bounded position jitter",
+      "bounded yaw jitter",
+      "bounded friction jitter",
+      "bounded restitution jitter"
+    ],
+    "forbiddenInfluence": [
+      "attachment target selection",
+      "breaking threshold",
+      "break frame",
+      "detached pose",
+      "detachment velocity",
+      "camera coordinates"
+    ]
+  },
+  "unchangedFromC2": {
+    "targetMemberPolicy": "MINIMUM_DISTANCE_TO_INITIATOR_RELEASE_RAY",
+    "basketballAndBottleMetricInputs": true,
+    "capMassKg": 0.012,
+    "breakingImpulseThreshold": 0.02,
+    "constraintSolverIterations": 80,
+    "machineAcceptance": true,
+    "directVisualQuestions": true,
+    "authorityBoundary": true,
+    "processAndResourceCeilings": true,
+    "claimCeiling": true,
+    "stopRule": true
+  },
+  "attempt02": {
+    "workspaceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-02",
+    "evidenceRoot": "experiments/physical-richness/RC5-2026-09-01-development-attempt-02",
+    "rootsMustBeFresh": true
+  },
+  "correctionHash": "b182337c4824614a343f0b0da2eb3ca7525db5f9dbf75bedec8952a53cc773d8"
+}
