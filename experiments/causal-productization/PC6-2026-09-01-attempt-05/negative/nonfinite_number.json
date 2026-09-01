@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.causalSceneSpec.v0.1",
+  "sceneId": "PC5-G1-DOMINO-FOUR",
+  "title": "Blue ball knocks down four wooden domino blocks",
+  "timeline": {
+    "fps": 24,
+    "frameStart": 1,
+    "frameEnd": 120,
+    "releaseFrame": 27
+  },
+  "dynamicActor": {
+    "semanticRole": "dynamic_actor",
+    "factory": "GROOVED_SPHERE",
+    "count": 1,
+    "radius": NaN,
+    "initialPosition": [
+      -3.2,
+      0.0,
+      0.39
+    ],
+    "launchWaypoints": [
+      {
+        "frame": 1,
+        "position": [
+          -3.2,
+          0.0,
+          0.39
+        ],
+        "rotationY": 0.0
+      },
+      {
+        "frame": 18,
+        "position": [
+          -3.2,
+          0.0,
+          0.39
+        ],
+        "rotationY": 0.0
+      },
+      {
+        "frame": 26,
+        "position": [
+          -1.0,
+          0.0,
+          0.39
+        ],
+        "rotationY": -6.0
+      }
+    ],
+    "rigidBody": {
+      "mass": 2.6,
+      "collisionShape": "SPHERE",
+      "friction": 0.58,
+      "restitution": 0.28,
+      "linearDamping": 0.04,
+      "angularDamping": 0.06
+    },
+    "material": {
+      "baseColor": [
+        0.025,
+        0.18,
+        0.62
+      ],
+      "roughness": 0.42,
+      "proceduralGrain": true,
+      "channelCount": 3
+    }
+  },
+  "targetGroup": {
+    "semanticRole": "target_group",
+    "factory": "BEVELED_DOMINO_BLOCK",
+    "count": 4,
+    "dimensions": [
+      0.34,
+      0.24,
+      1.2
+    ],
+    "initialPositions": [
+      [
+        0.0,
+        0.0,
+        0.61
+      ],
+      [
+        0.52,
+        -0.27,
+        0.61
+      ],
+      [
+        0.52,
+        0.27,
+        0.61
+      ],
+      [
+        1.02,
+        0.0,
+        0.61
+      ]
+    ],
+    "rigidBody": {
+      "mass": 0.32,
+      "collisionShape": "BOX",
+      "friction": 0.66,
+      "restitution": 0.08,
+      "linearDamping": 0.11,
+      "angularDamping": 0.22
+    },
+    "modeling": {
+      "bevelWidth": 0.055,
+      "bevelSegments": 4,
+      "insetFacePanel": true,
+      "edgeBand": true
+    },
+    "palette": [
+      [
+        0.52,
+        0.19,
+        0.055
+      ],
+      [
+        0.68,
+        0.34,
+        0.075
+      ],
+      [
+        0.38,
+        0.11,
+        0.035
+      ],
+      [
+        0.76,
+        0.49,
+        0.16
+      ]
+    ]
+  },
+  "studio": {
+    "ground": {
+      "semanticRole": "ground",
+      "size": 20.0,
+      "friction": 0.72
+    },
+    "backdrop": {
+      "semanticRole": "studio_environment",
+      "factory": "SIMPLE_WALL",
+      "participatesInPhysics": false
+    },
+    "lights": [
+      {
+        "semanticRole": "key_light",
+        "kind": "AREA",
+        "energy": 1250,
+        "color": [
+          1.0,
+          0.68,
+          0.43
+        ]
+      },
+      {
+        "semanticRole": "fill_light",
+        "kind": "AREA",
+        "energy": 720,
+        "color": [
+          0.38,
+          0.58,
+          1.0
+        ]
+      },
+      {
+        "semanticRole": "rim_light",
+        "kind": "AREA",
+        "energy": 1050,
+        "color": [
+          0.55,
+          0.72,
+          1.0
+        ]
+      }
+    ]
+  },
+  "shots": [
+    {
+      "shotId": "SETUP",
+      "selection": "last frame before first target response",
+      "lensMm": 58,
+      "directionClass": "FRONT_LEFT_HIGH",
+      "targetOccupancy": 0.58
+    },
+    {
+      "shotId": "IMPACT",
+      "selection": "first target response frame",
+      "lensMm": 66,
+      "directionClass": "FRONT_LEFT_LOW",
+      "targetOccupancy": 0.72
+    },
+    {
+      "shotId": "AFTERMATH",
+      "selection": "frameEnd",
+      "lensMm": 56,
+      "directionClass": "FRONT_RIGHT_HIGH",
+      "targetOccupancy": 0.6
+    }
+  ],
+  "acceptance": {
+    "initialPenetrationMaximumMeters": 0.001,
+    "actorForwardTravelBeforeFirstResponseMinimumMeters": 2.0,
+    "firstTargetResponseFrameWindowInclusive": [
+      20,
+      72
+    ],
+    "targetTiltDegreesAtFinalMinimumEach": 55.0,
+    "finiteTransformRequired": true,
+    "reopenResponseFramesExact": true,
+    "reopenFinalTiltToleranceDegrees": 0.01,
+    "postReleaseActorPoseKeyframes": 0,
+    "targetPoseKeyframes": 0,
+    "reviewOccupancyRange": [
+      0.45,
+      0.82
+    ],
+    "reviewNegativeSpaceMarginMinimum": 0.04
+  },
+  "forbidden": {
+    "acceptedBottleFactory": true,
+    "acceptedBottleFinalCoordinates": true,
+    "projectSpecificCameraCoordinates": true,
+    "externalModelsOrTextures": true,
+    "manualTargetOrFinalPoseAnimation": true
+  },
+  "sceneSpecHash": "727f04b669abbe77f29c05902ab20364898d4e921d83e788b89bab877817ae1a"
+}

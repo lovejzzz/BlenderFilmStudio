@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc6CausalContractProductizationC5Preregistration.v0.6",
+  "experimentId": "PC6-CAUSAL-CONTRACT-PRODUCTIZATION-C5-AUDIT-ONLY",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT06_AUDIT_ROOT_MUTATION",
+  "retainedProductAttempt05": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC6-2026-09-01-attempt-05",
+    "evidence": "experiments/causal-productization/PC6-2026-09-01-attempt-05",
+    "productStatus": "PASS",
+    "productReceiptSha256": "6ac7a4f3a14d6e89d05470cb20ab480602f64fbc8b2cdd1c5ba2d9e2d4c1b4fe",
+    "productReceiptHash": "dc0ecc5fb20a60028ecfa94024da460bd37e053d3fd011eb09661a7ab47da638",
+    "c4ReceiptSha256": "34ed027e0935e63b7cc73a723317f185df63ab15d49560cfe46474a6562c1a4a",
+    "c4ReceiptHash": "5161f7d0b97f47d1f7c63b7858f2cb00de608f76eac1e053cf6302153c97ec40",
+    "buildSha256": "6552e6d7f67c2d047259e45846b3b580e3d6676f245d4d3478ffe7ea0674889b",
+    "reopenSha256": "8d425aaefdf0c18b17978ad41a5755d7ccec3af457c54b9d2586bca63993c40e",
+    "negativeControlsSha256": "d090240a0ebcc5f209305b6cbb9cb89c8878f23a4fd3b64bc676d60035dfb4e2",
+    "binarySha256": "b43b0dcefca9229a6d5b8ffa2b9acd99473af3aadafb8bc7716055bfa10b524a",
+    "auditFailureFileSha256": "d85846fae00d80fe3ddb2940353115405b372c1836cb852b7927f88e1b53e699",
+    "auditFailureHash": "0283a2f9babd8a4fb2e282cc8af2aa2bd5a6e0864fc47a94b3006fb4cccbde32",
+    "immutableDuringAttempt06": true
+  },
+  "onlyCorrection": {
+    "description": "Replace the invalid lookup of a nonexistent numeric reopen tolerance with the frozen boolean reopenExact requirement plus exact zero observed tilt deltas.",
+    "oldExpression": "max(finalTiltDeltaDegrees) <= prereg.positiveValidation.reopenFinalTiltToleranceDegrees",
+    "newExpression": "prereg.positiveValidation.reopenExact is true AND every finalTiltDeltaDegrees value equals 0.0",
+    "thresholdRelaxation": false,
+    "productEvidenceWrites": 0,
+    "productSourceChanges": 0,
+    "nativeBuilds": 0,
+    "productStarts": 0,
+    "sceneMutatingExecutions": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "attempt06AuditRoot": {
+    "evidence": "experiments/causal-productization/PC6-2026-09-01-attempt-06",
+    "freshBeforeCorrection": true
+  },
+  "requiredOutcome": {
+    "correctedBaseAuditChecks": 21,
+    "retainedProductReceiptStatus": "PASS",
+    "finalPoseSource": "BLENDER_BULLET_RIGID_BODY",
+    "targetPoseKeyframes": 0,
+    "postReleaseActorPoseKeyframes": 0,
+    "reviewImages": 3,
+    "additionalProductStarts": 0
+  },
+  "specHash": "571a5c37c9acf07ea6c7fb17cde5b1d96fc9e334727a8e08d949aa3f5e9f8b91"
+}
