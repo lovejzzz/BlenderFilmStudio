@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "bfs.pc9PhysicalArchetypesDevelopmentCounterexample.v0.2",
+  "status": "RETAINED_DEVELOPMENT_VISUAL_FAILURE_NOT_FORMAL",
+  "sourceBaseline": "9d5a66869528b66216b977c01312cdc849f28fad",
+  "uncommittedProductModuleSha256": "150a907c42d4c3bfb4af3f51f62b4bdee4e536780b3ce104518e88bd528a55d3",
+  "fixture": {
+    "uri": "specs/fixtures/causal-studio/PC9_F1.metric-basketball-three-filled-bottles.scene-spec.v0.6.json",
+    "sha256": "15cdefa87d79270676fbfbc9b947d1226c2ce33a4660078342280b0650bcbb3e",
+    "sceneSpecHash": "2bf661e043799e176d65f318f242c1d480dff54c769ee36a4ebe12c4759428c4",
+    "physicalVariationBasisHash": "bab95249e9f83f017a498b19ddf73a05c34dfebccd7c04038c93c46db9ee988c"
+  },
+  "externalRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC9-development/run-02",
+  "externalArtifacts": {
+    "probeSha256": "2aeaf329360917c4b058df1cee134cf44b0bb62664b3be6383728edfdc9cc8e8",
+    "blendSha256": "bcb4a8a04ffdeb77ad8fc9a532c4bb7b2b696300ef9776aad7e45f0107884d55",
+    "setupSha256": "6e609ad4d670a882a956b7c13d9f37c0e3cbee2e3f006fc525fa1038d78aa228",
+    "sharpImpactSha256": "550cb3b6dea44a8465d3f389083bebd169a6d88f3414d170c3759ecf17deb188",
+    "measuredImpactSha256": "6399a71a733f0dae29a818e23899af9851e569f04aae05d80051d40b71e88b7e",
+    "aftermathSha256": "655d0ab92b99a84217f9866139cac8ca4f33d562c53a842f942c61c68b3b1a5c"
+  },
+  "observed": {
+    "targetResponseFrames": [29, 29, 28],
+    "finalTiltDegrees": [90.00786281, 90.00847078, 90.00001205],
+    "impactFrame": 34,
+    "impactActiveTargetCount": 3,
+    "impactAggregateAngularStepDegrees": 30.73265068,
+    "aftermathFrame": 45,
+    "medianPixelsPerFrame": 9.81652043,
+    "computedShutterFrames": 0.5,
+    "targetPoseKeyframes": 0,
+    "postReleaseActorPoseKeyframes": 0
+  },
+  "passedFrozenMachineRequirements": true,
+  "failedFrozenDirectVisualQuestions": [
+    "Are three distinct liquid fill levels visible and consistent with the recorded low, medium and high fill inputs?"
+  ],
+  "cause": "The C1 mass-ordered propagation solved the retained physics counterexample, but the opaque alpha-1 Principled shell hides the internal cylinders; the three colored labels can be mistaken for the intended low, medium and high liquid states.",
+  "formalRootMutation": false,
+  "cleanNativeBuilds": 0,
+  "formalProductStarts": 0,
+  "networkCalls": 0,
+  "engineRemoteWrites": 0,
+  "disposition": "retain run-02; preregister a generic optical material correction that exposes the exact fill-derived internal column without changing any physical input, threshold, pose or camera",
+  "receiptHash": "47fe6f69a9c3ff4195fea53b347998994ea96759e98fad54a42c034aba4f5c3c"
+}

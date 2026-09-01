@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc9PhysicalArchetypesC2Preregistration.v0.3",
+  "experimentId": "PC9-PHYSICAL-ARCHETYPES-AND-CONTACT-REALISM-C2",
+  "status": "CORRECTED_AFTER_RETAINED_DEVELOPMENT_VISUAL_COUNTEREXAMPLE_BEFORE_FURTHER_PRODUCT_MUTATION",
+  "parent": {
+    "uri": "specs/ai-native-studio-pc9-physical-archetypes-c1-preregistration.v0.2.json",
+    "sha256": "4a3ac0d2256237453a1252769800dd740425ae2312e543bcf237d5c13b45c99f",
+    "specHash": "5f51492871f9d9fd66b4f8cbe38d4a43e9cfd34567ead6f312b12562ceb9e8b8"
+  },
+  "counterexample": {
+    "receipt": "experiments/physical-archetypes/PC9-development-counterexample-2026-09-01-run-02/receipt.json",
+    "receiptHash": "47fe6f69a9c3ff4195fea53b347998994ea96759e98fad54a42c034aba4f5c3c",
+    "allFrozenMachineRequirementsPassed": true,
+    "failedDirectVisualQuestionOrdinal": 3,
+    "formalRootMutation": false,
+    "productCommitCreated": false
+  },
+  "correction": {
+    "fixtureUnchanged": "specs/fixtures/causal-studio/PC9_F1.metric-basketball-three-filled-bottles.scene-spec.v0.6.json",
+    "genericOpticalRule": "render the bottle shell with a native Glass BSDF and the exact fill-derived internal cylinder as an opaque colored liquid column with a readable top surface",
+    "alphaDitherForbidden": true,
+    "externalFillGaugeOrLabelEncodingForbidden": true,
+    "liquidSurfaceHeightSource": "physicalArchetype.interiorBaseHeightMeters + physicalArchetype.liquidBodyHeightMeters * fillFraction",
+    "allowedProductLeafChanges": [
+      "_bottle_shell_material native shader construction",
+      "generic liquid column surface readability"
+    ],
+    "finalPoseAuthorityAdded": false
+  },
+  "unchanged": {
+    "fixtureBytes": true,
+    "metricDimensions": true,
+    "fillFractions": true,
+    "derivedMassesKgExact": true,
+    "derivedCenterOfMassHeightsMetersExact": true,
+    "initialPositionsAndDeterministicVariation": true,
+    "launchWaypointsAndMomentum": true,
+    "allMachineThresholds": true,
+    "allSevenDirectVisualQuestions": true,
+    "camerasAndFraming": true,
+    "resourceAndOperationCeilings": true,
+    "formalRoots": true,
+    "authorizedProductPath": "scripts/modules/film_studio_causal.py"
+  },
+  "stopRule": "If the exact three fill levels remain unreadable, alpha stipple appears, any machine result regresses or any other frozen direct visual question is NO, retain and stop. Do not substitute labels or gauges for liquid, weaken thresholds, move a camera or author a final pose.",
+  "specHash": "60de8cad85151d887cc674653ed55906883a05395564e6aa7180bd1adfea9229"
+}

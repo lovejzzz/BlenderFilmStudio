@@ -665,6 +665,16 @@ denials. Corrected v0.6 fixture `2bf661e0…` places the highest derived mass on
 the direct line of action and lighter targets on propagation branches; the
 generic shell rule uses native transmission with alpha 1.0. Run-01 receipt hash
 is `ecaebabb…`. No product commit or formal root existed at correction time.
+Development run-02 closes the C1 physics failure: all three response frames are
+28/29 and all three final tilts are approximately 90 degrees, with zero target
+or post-release actor pose keys. It is retained because direct visual question
+3 is still NO—the opaque shell hides the exact 15/55/90% internal liquid
+columns and colored labels can be mistaken for fill. Its receipt hash is
+`47fe6f69…`. C2 `60de8cad…` changes no fixture, physical input, threshold,
+camera or pose. It preregisters a generic native-glass shell plus readable
+fill-derived internal column, while forbidding alpha dither, external fill
+gauges and label-based fill encoding. The next action is the C2 development
+replay; formal roots and product commit still do not exist.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
