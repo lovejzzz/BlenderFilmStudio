@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceF7C1SceneCompositionFailureAudit.v0.1",
+  "status": "PASS",
+  "failureHash": "f10ae365a0cd3ea313f5dace8cfa408f289655c6e8e040e418034f5b4505f094",
+  "failureFileSha256": "98371e55ea9327ec9509c20f021f782139856e68f067b5f88cc1a0e2200ba2ae",
+  "stderrSha256": "0768ee8aa8f59b4d465630020f01981f4581feeeb8160c2fe05ff10a565543fc",
+  "processHash": "dbf3adf260f82574c4773f577792030cf2d15e5bdbd34e498d784327c3e1e9ed",
+  "checks": {
+    "oneBlenderStart": true,
+    "failureBeforeSceneBuild": true,
+    "workRootBytesZero": true,
+    "bulletBakeNotRun": true,
+    "fluidBakeNotRun": true,
+    "renderNotRun": true,
+    "networkNotUsed": true,
+    "physicalContractRemainsUntested": true
+  },
+  "rootCause": "The F7 quality-metric replacements were inserted beside the early F6 liquid-source correction. They executed before the later F4 pre-contact replacement created the exact target required by the impact-window metric, so fail-closed composition stopped with a non-unique target error.",
+  "correctionBoundary": "A versioned scene-adapter correction may move the unchanged F6/F7 replacement block after the final F4 pre-contact receipt tuple. No physical parameter, visual setting, threshold, resource ceiling or metric definition may change. Use fresh attempt-13 roots.",
+  "auditHash": "6a917aa931eb1ddb8b09657ac6b1ac35defec81029dedf63e63d16654685aa6c"
+}
