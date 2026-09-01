@@ -720,6 +720,13 @@ frames 28/29 and settle near 90 degrees with zero target or post-release actor
 pose keys. The accepted claim is a metric rigid-body archetype lesson, not
 liquid slosh, deformation or advertising-grade photorealism. The validated
 source commit is `b8f65c8a…`; ordinary fast-forward publication is next.
+Publication is now complete: `lovejzzz/film-engine/main` advanced by ordinary
+fast-forward from `9d5a668a…` to validated `b8f65c8a…`. Git remote, GitHub API
+and public raw module checks all agree; raw module SHA is `b45c86d3…` and the
+publication receipt hash is `b2b8e254…`. No force, tag, release, binary, LFS,
+signing or notarization operation occurred. PC9 is closed; the next curriculum
+step may apply these generalized physical rules to the retained robot capstone
+as a holdout, without hand-placing outcomes.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
