@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioCausalStudioToolFreezeC1.v0.2",
+  "experimentId": "PC5-CAUSAL-STUDIO",
+  "status": "FROZEN_C1_BEFORE_ATTEMPT02_SCENE_MUTATION",
+  "context": {
+    "uri": "specs/ai-native-studio-causal-studio-execution-context-c1.v0.2.json",
+    "sha256": "3f82b56cbde0049eba3707bf7c4ceb229b37dd04c324a70ffe052bfaa673569c",
+    "contextHash": "4b9ab05a8dd98f8c5847453d8869ef00fed77f53328f3fcd2982ca0260775f71"
+  },
+  "retainedBaseFreeze": {
+    "uri": "specs/ai-native-studio-causal-studio-tool-freeze.v0.1.json",
+    "sha256": "f7732440a8a11f97aef77c196f32739e07e71997e9c97eaeb8ddb5b30799d24f",
+    "freezeHash": "9b97344288cb97eaa26692b017b5d2996dd13c7655dc77087eb6d95400b731da"
+  },
+  "tools": [
+    {"uri": "scripts/build-causal-studio.py", "sha256": "6c967f1fe915a8af6237d9b52eb02792564ec0199b0240bb8aaf3a3804cb5860"},
+    {"uri": "scripts/run-causal-studio.mjs", "sha256": "71804b2154f24f668588d6a76b044b371a2d00ef346d88eb1c867bd247b734cb"},
+    {"uri": "scripts/audit-causal-studio.mjs", "sha256": "6abb9e49e6a3e3907ab040c58e4b2794a0bd73ad145d3d23c2bda01167b1f5db"}
+  ],
+  "exactCorrectionAssertions": {
+    "baseSceneParametersUnchanged": true,
+    "basePhysicsThresholdsUnchanged": true,
+    "baseVisualQuestionsUnchanged": true,
+    "pythonIntegralFloatCanonicalization": true,
+    "semanticBlenderSuccessGate": ["exitCodeZero", "expectedArtifactExists", "successMarkerPresent", "pythonTracebackAbsent"]
+  },
+  "staticChecks": {
+    "pythonCompile": "PASS",
+    "runnerNodeSyntax": "PASS",
+    "auditorNodeSyntax": "PASS"
+  },
+  "entrypoints": {
+    "run": ["node", "scripts/run-causal-studio.mjs"],
+    "audit": ["node", "scripts/audit-causal-studio.mjs"]
+  },
+  "freezeHash": "9433987b0272cefaa23de06b922c3f5ef603305bd20c5d9e8d4b804bd946151e"
+}

@@ -6,7 +6,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const specUri = 'specs/ai-native-studio-causal-studio-preregistration.v0.1.json';
-const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze.v0.1.json';
+const contextUri = 'specs/ai-native-studio-causal-studio-execution-context-c1.v0.2.json';
+const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze-c1.v0.2.json';
 function canonical(value) { if (value === null || typeof value !== 'object') return JSON.stringify(value); if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`; return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonical(value[key])}`).join(',')}}`; }
 function shaBytes(value) { return createHash('sha256').update(value).digest('hex'); }
 function shaFile(path) { return shaBytes(readFileSync(path)); }
@@ -16,11 +17,13 @@ function dirBytes(path) { const stat = statSync(path); if (!stat.isDirectory()) 
 function load(path) { return JSON.parse(readFileSync(path, 'utf8')); }
 
 const specPath = resolve(root, specUri);
+const contextPath = resolve(root, contextUri);
 const freezePath = resolve(root, freezeUri);
 const spec = load(specPath);
+const context = load(contextPath);
 const freeze = load(freezePath);
-const evidenceRoot = resolve(root, spec.roots.evidence);
-const workRoot = resolve(spec.roots.work);
+const evidenceRoot = resolve(root, context.roots.evidence);
+const workRoot = resolve(context.roots.work);
 if (!existsSync(evidenceRoot)) throw new Error('EVIDENCE_ROOT');
 const build = load(join(evidenceRoot, 'build.json'));
 const reopen = load(join(evidenceRoot, 'reopen.json'));
@@ -31,8 +34,8 @@ const checks = [];
 function gate(id, pass, observation = null) { checks.push({ id, pass: Boolean(pass), observation }); }
 
 gate('A01_SPEC_SELF_HASH', validSelf(spec, 'specHash'), spec.specHash);
-gate('A02_FREEZE_SELF_HASH', validSelf(freeze, 'freezeHash'), freeze.freezeHash);
-gate('A03_TOOL_BINDINGS', freeze.preregistration.sha256 === shaFile(specPath) && freeze.preregistration.specHash === spec.specHash && freeze.tools.every(row => shaFile(resolve(root, row.uri)) === row.sha256));
+gate('A02_CONTEXT_AND_FREEZE_SELF_HASH', validSelf(context, 'contextHash') && validSelf(freeze, 'freezeHash'), { contextHash: context.contextHash, freezeHash: freeze.freezeHash });
+gate('A03_TOOL_BINDINGS', context.base.sha256 === shaFile(specPath) && context.base.specHash === spec.specHash && freeze.context.sha256 === shaFile(contextPath) && freeze.context.contextHash === context.contextHash && freeze.tools.every(row => shaFile(resolve(root, row.uri)) === row.sha256));
 gate('A04_OUTPUT_SELF_HASHES', validSelf(build, 'buildHash') && validSelf(reopen, 'reopenHash') && validSelf(receipt, 'receiptHash') && validSelf(manifest, 'manifestHash') && processes.every(row => validSelf(row, 'processHash')));
 gate('A05_BINARY_IDENTITY', shaFile(spec.engine.path) === spec.engine.sha256, spec.engine.sha256);
 gate('A06_PROCESS_BOUND', processes.length === 2 && processes.every(row => row.exitCode === 0 && row.timedOut === false), processes.map(row => ({ mode: row.mode, exitCode: row.exitCode })));
@@ -63,7 +66,7 @@ const body = {
   checkPassed: passed,
   checkTotal: checks.length,
   checks,
-  bindings: { preregistration: { uri: specUri, sha256: shaFile(specPath), specHash: spec.specHash }, toolFreeze: { uri: freezeUri, sha256: shaFile(freezePath), freezeHash: freeze.freezeHash }, receipt: { uri: `${spec.roots.evidence}/receipt.json`, sha256: shaFile(join(evidenceRoot, 'receipt.json')), receiptHash: receipt.receiptHash } },
+  bindings: { preregistration: { uri: specUri, sha256: shaFile(specPath), specHash: spec.specHash }, context: { uri: contextUri, sha256: shaFile(contextPath), contextHash: context.contextHash }, toolFreeze: { uri: freezeUri, sha256: shaFile(freezePath), freezeHash: freeze.freezeHash }, receipt: { uri: `${context.roots.evidence}/receipt.json`, sha256: shaFile(join(evidenceRoot, 'receipt.json')), receiptHash: receipt.receiptHash } },
 };
 const audit = { ...body, auditHash: selfHash(body, 'auditHash') };
 writeFileSync(join(evidenceRoot, 'independent-audit.json'), `${JSON.stringify(audit, null, 2)}\n`);

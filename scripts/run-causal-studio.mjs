@@ -7,9 +7,11 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const specUri = 'specs/ai-native-studio-causal-studio-preregistration.v0.1.json';
-const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze.v0.1.json';
+const contextUri = 'specs/ai-native-studio-causal-studio-execution-context-c1.v0.2.json';
+const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze-c1.v0.2.json';
 const scriptUri = 'scripts/build-causal-studio.py';
 const specPath = resolve(root, specUri);
+const contextPath = resolve(root, contextUri);
 const freezePath = resolve(root, freezeUri);
 const scriptPath = resolve(root, scriptUri);
 
@@ -42,14 +44,17 @@ function manifest(path, excluded = new Set()) {
 }
 
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
+const context = JSON.parse(readFileSync(contextPath, 'utf8'));
 const freeze = JSON.parse(readFileSync(freezePath, 'utf8'));
 if (!validSelf(spec, 'specHash') || spec.status !== 'PREREGISTERED_BEFORE_ATTEMPT01_SCENE_MUTATION') throw new Error('SPEC');
-if (!validSelf(freeze, 'freezeHash') || freeze.status !== 'FROZEN_BEFORE_ATTEMPT01_SCENE_MUTATION') throw new Error('FREEZE');
-if (freeze.preregistration.specHash !== spec.specHash || freeze.preregistration.sha256 !== shaFile(specPath)) throw new Error('FREEZE_SPEC_BINDING');
+if (!validSelf(context, 'contextHash') || context.status !== 'PREREGISTERED_C1_BEFORE_ATTEMPT02_SCENE_MUTATION') throw new Error('CONTEXT');
+if (!validSelf(freeze, 'freezeHash') || freeze.status !== 'FROZEN_C1_BEFORE_ATTEMPT02_SCENE_MUTATION') throw new Error('FREEZE');
+if (context.base.specHash !== spec.specHash || context.base.sha256 !== shaFile(specPath)) throw new Error('CONTEXT_SPEC_BINDING');
+if (freeze.context.contextHash !== context.contextHash || freeze.context.sha256 !== shaFile(contextPath)) throw new Error('FREEZE_CONTEXT_BINDING');
 if (freeze.tools.some(row => shaFile(resolve(root, row.uri)) !== row.sha256)) throw new Error('TOOL_HASH');
 
-const workRoot = resolve(spec.roots.work);
-const evidenceRoot = resolve(root, spec.roots.evidence);
+const workRoot = resolve(context.roots.work);
+const evidenceRoot = resolve(root, context.roots.evidence);
 if (existsSync(workRoot) || existsSync(evidenceRoot)) throw new Error('FRESH_ROOTS_REQUIRED');
 if (shaFile(spec.engine.path) !== spec.engine.sha256) throw new Error('BINARY_HASH');
 const disk = spawnSync('df', ['-Pk', root], { encoding: 'utf8' });
@@ -75,8 +80,8 @@ const env = {
 function runBlender(index, mode) {
   const blendPath = join(workRoot, 'PC5_CAUSAL_STUDIO.blend');
   const blenderArgv = mode === 'build'
-    ? ['--background', '--factory-startup', '--python', scriptPath, '--', '--mode', mode, '--spec', specPath, '--work', workRoot, '--evidence', evidenceRoot]
-    : ['--background', '--factory-startup', blendPath, '--python', scriptPath, '--', '--mode', mode, '--spec', specPath, '--work', workRoot, '--evidence', evidenceRoot];
+    ? ['--background', '--factory-startup', '--python', scriptPath, '--', '--mode', mode, '--spec', specPath, '--context', contextPath, '--work', workRoot, '--evidence', evidenceRoot]
+    : ['--background', '--factory-startup', blendPath, '--python', scriptPath, '--', '--mode', mode, '--spec', specPath, '--context', contextPath, '--work', workRoot, '--evidence', evidenceRoot];
   const started = Date.now();
   const result = spawnSync('/usr/bin/caffeinate', ['-dimsu', spec.engine.path, ...blenderArgv], { cwd: root, env, encoding: 'buffer', timeout: 600000, maxBuffer: 64 * 1024 * 1024 });
   const wallSeconds = (Date.now() - started) / 1000;
@@ -100,10 +105,13 @@ function runBlender(index, mode) {
     signal: result.signal,
     timedOut: result.error?.code === 'ETIMEDOUT',
     wallSeconds,
-    stdout: { uri: `${spec.roots.evidence}/logs/${prefix}.stdout.log`, sha256: shaBytes(stdout), bytes: stdout.length },
-    stderr: { uri: `${spec.roots.evidence}/logs/${prefix}.stderr.log`, sha256: shaBytes(stderr), bytes: stderr.length },
+    stdout: { uri: `${context.roots.evidence}/logs/${prefix}.stdout.log`, sha256: shaBytes(stdout), bytes: stdout.length },
+    stderr: { uri: `${context.roots.evidence}/logs/${prefix}.stderr.log`, sha256: shaBytes(stderr), bytes: stderr.length },
   }, 'processHash');
-  if (result.status !== 0) throw Object.assign(new Error(`BLENDER_${mode.toUpperCase()}_${result.status}`), { process });
+  const expectedArtifact = join(evidenceRoot, mode === 'build' ? 'build.json' : 'reopen.json');
+  const successMarker = mode === 'build' ? 'BFS_CAUSAL_STUDIO_BUILD COMPLETE' : 'BFS_CAUSAL_STUDIO_REOPEN COMPLETE';
+  const semanticSuccess = result.status === 0 && existsSync(expectedArtifact) && stdout.toString('utf8').includes(successMarker) && !stderr.toString('utf8').includes('Traceback (most recent call last)');
+  if (!semanticSuccess) throw Object.assign(new Error(`BLENDER_${mode.toUpperCase()}_SEMANTIC_FAILURE_${result.status}`), { process });
   return process;
 }
 
@@ -119,9 +127,10 @@ try {
     schemaVersion: 'bfs.causalStudioReceipt.v0.1',
     status: 'EXECUTION_COMPLETE_PENDING_INDEPENDENT_AUDIT_AND_DIRECT_REVIEW',
     preregistration: { uri: specUri, sha256: shaFile(specPath), specHash: spec.specHash },
+    context: { uri: contextUri, sha256: shaFile(contextPath), contextHash: context.contextHash },
     toolFreeze: { uri: freezeUri, sha256: shaFile(freezePath), freezeHash: freeze.freezeHash },
-    build: { uri: `${spec.roots.evidence}/build.json`, sha256: shaFile(buildPath), buildHash: build.buildHash },
-    reopen: { uri: `${spec.roots.evidence}/reopen.json`, sha256: shaFile(reopenPath), reopenHash: reopen.reopenHash },
+    build: { uri: `${context.roots.evidence}/build.json`, sha256: shaFile(buildPath), buildHash: build.buildHash },
+    reopen: { uri: `${context.roots.evidence}/reopen.json`, sha256: shaFile(reopenPath), reopenHash: reopen.reopenHash },
     processes: processes.map(row => ({ mode: row.mode, processHash: row.processHash })),
     operations: { blenderStarts: 2, renderCalls: build.reviews.length, retainedReviewPngs: build.reviews.length, networkCalls: 0, externalAssetDownloads: 0, engineMutations: 0, engineRemoteWrites: 0 },
     resources: { freeBytesBefore: freeKiB * 1024, workBytes, evidenceBytesBeforeReceipt: evidenceBytes, workCeiling: spec.resourceCeilings.workRootBytes, evidenceCeiling: spec.resourceCeilings.evidenceRootBytes },

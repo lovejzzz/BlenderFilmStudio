@@ -11,8 +11,18 @@ import bpy
 from mathutils import Vector
 
 
+def js_number_normalize(value):
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    if isinstance(value, list):
+        return [js_number_normalize(row) for row in value]
+    if isinstance(value, dict):
+        return {key: js_number_normalize(row) for key, row in value.items()}
+    return value
+
+
 def canonical(value):
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return json.dumps(js_number_normalize(value), ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
 def self_hash(value, field):
@@ -472,6 +482,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["build", "reopen"], required=True)
     parser.add_argument("--spec", required=True)
+    parser.add_argument("--context", required=True)
     parser.add_argument("--work", required=True)
     parser.add_argument("--evidence", required=True)
     return parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
@@ -480,15 +491,21 @@ def parse_args():
 def main():
     args = parse_args()
     spec_path = Path(args.spec).resolve()
+    context_path = Path(args.context).resolve()
     work_root = Path(args.work).resolve()
     evidence_root = Path(args.evidence).resolve()
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
+    context = json.loads(context_path.read_text(encoding="utf-8"))
     if spec["specHash"] != self_hash(spec, "specHash"):
         raise RuntimeError("SPEC_SELF_HASH")
-    if Path(spec["roots"]["work"]).resolve() != work_root:
+    if context["contextHash"] != self_hash(context, "contextHash"):
+        raise RuntimeError("CONTEXT_SELF_HASH")
+    if context["base"]["specHash"] != spec["specHash"] or context["base"]["sha256"] != sha256_file(spec_path):
+        raise RuntimeError("CONTEXT_BASE_BINDING")
+    if Path(context["roots"]["work"]).resolve() != work_root:
         raise RuntimeError("WORK_ROOT_BINDING")
     repository_root = spec_path.parent.parent
-    if (repository_root / spec["roots"]["evidence"]).resolve() != evidence_root:
+    if (repository_root / context["roots"]["evidence"]).resolve() != evidence_root:
         raise RuntimeError("EVIDENCE_ROOT_BINDING")
     blend_path = work_root / "PC5_CAUSAL_STUDIO.blend"
 
@@ -505,6 +522,7 @@ def main():
             "schemaVersion": "bfs.causalStudioBuild.v0.1",
             "status": "COMPLETE",
             "specHash": spec["specHash"],
+            "contextHash": context["contextHash"],
             "blender": {"version": bpy.app.version_string, "binary": bpy.app.binary_path},
             "scene": {"name": scene.name, "frameStart": scene.frame_start, "frameEnd": scene.frame_end, "fps": scene.render.fps, "physicsEngine": "BLENDER_BULLET_RIGID_BODY"},
             "blend": {"path": str(blend_path), "sha256": sha256_file(blend_path), "bytes": blend_path.stat().st_size},
@@ -525,6 +543,7 @@ def main():
             "schemaVersion": "bfs.causalStudioReopen.v0.1",
             "status": "COMPLETE",
             "specHash": spec["specHash"],
+            "contextHash": context["contextHash"],
             "sourceBlend": {"path": str(blend_path), "sha256": sha256_file(blend_path)},
             "physics": physics,
         }, "reopenHash")

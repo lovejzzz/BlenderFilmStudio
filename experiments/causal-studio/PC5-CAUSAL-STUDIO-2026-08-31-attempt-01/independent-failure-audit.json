@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "bfs.causalStudioIndependentFailureAudit.v0.1",
+  "status": "PASS_RETAINED_HARNESS_FAILURE",
+  "attemptVerdict": "FAIL",
+  "failedStage": "BUILD_CONTRACT_VALIDATION",
+  "rootCause": "Python canonical JSON preserved integral float spelling such as 60.0 while the frozen cross-language specHash used JavaScript number spelling 60; Blender reported the exception on stderr but returned process exit 0, and the runner lacked an artifact/success-marker gate before starting reopen.",
+  "checks": [
+    {"id": "F01_SPEC_AND_TOOL_FREEZE_PREEXISTED", "pass": true},
+    {"id": "F02_EXACT_FRESH_ROOTS_CREATED", "pass": true},
+    {"id": "F03_BUILD_PROCESS_RECORDED", "pass": true, "processHash": "11403a5781d8942042e8b23a8e4dbf85dbb662473642f2306930f92c1d46b3f1"},
+    {"id": "F04_BUILD_STDERR_EXACT_EXCEPTION", "pass": true, "sha256": "f02bbfd99e3ef6ee53cac9e50586a81b35b98323ae4d8cae92284180799731e8"},
+    {"id": "F05_NO_BUILD_ARTIFACT_CREATED", "pass": true},
+    {"id": "F06_NO_BLEND_CREATED", "pass": true},
+    {"id": "F07_NO_RENDER_CREATED", "pass": true},
+    {"id": "F08_REOPEN_MISSING_FILE_FAILURE_RECORDED", "pass": true, "processHash": "1d17a61401be69fa0a051995caa446916baedb42e3c6bb341b34ccb78dab34d0"},
+    {"id": "F09_TWO_STARTS_WITHIN_CEILING", "pass": true},
+    {"id": "F10_WORK_ROOT_EMPTY", "pass": true},
+    {"id": "F11_ZERO_NETWORK_ENGINE_MUTATION_AND_REMOTE_WRITE", "pass": true},
+    {"id": "F12_FAILURE_RECEIPT_SELF_HASH_VALID", "pass": true, "failureHash": "acf42ca01a8704514bcccf8d46430ec3a2f792136dcc7dbf64f6e22d2d6058d8"},
+    {"id": "F13_ATTEMPT_RETAINED_NOT_REPAIRED", "pass": true}
+  ],
+  "checkPassed": 13,
+  "checkTotal": 13,
+  "bindings": {
+    "failure": {"uri": "experiments/causal-studio/PC5-CAUSAL-STUDIO-2026-08-31-attempt-01/failure.json", "sha256": "cf0ba79c3f5c8afbe15d481fa67c0a25421316dd92a58a75834e5b3c776cbba3", "failureHash": "acf42ca01a8704514bcccf8d46430ec3a2f792136dcc7dbf64f6e22d2d6058d8"},
+    "buildProcess": {"sha256": "284d83442b5515595617d7e9c2d7b3ac86c4abd6acb46f020b6d1c033cfc3e46", "processHash": "11403a5781d8942042e8b23a8e4dbf85dbb662473642f2306930f92c1d46b3f1"},
+    "reopenProcess": {"sha256": "e8ec3b13b6bbf86c29608ff5b986ecfa2c7bdc27533c41ef6c0fb650299b80af", "processHash": "1d17a61401be69fa0a051995caa446916baedb42e3c6bb341b34ccb78dab34d0"}
+  },
+  "auditHash": "4533464036ff2111a887a3f79d093991d0423e555caf304b76b0572b01c4c0cb"
+}
