@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc6CausalContractProductizationC3ToolFreeze.v0.4",
+  "experimentId": "PC6-CAUSAL-CONTRACT-PRODUCTIZATION-C3",
+  "status": "FROZEN_BEFORE_ATTEMPT04_ROOT_OR_BUILD_MUTATION",
+  "c3Preregistration": "specs/ai-native-studio-pc6-causal-contract-productization-c3-preregistration.v0.4.json",
+  "c3PreregistrationSha256": "e145b41cfb289a8a22f0196a0fe8f84d09aaeea260a6f9e63df0633289f8ad11",
+  "c3PreregistrationHash": "83ead8a52cf3bf77527beab2331810dfdb000aaf9916c23bf1cff39d282a32c8",
+  "tools": [
+    {
+      "uri": "scripts/run-pc6-causal-productization-c3.py",
+      "sha256": "a673497486a87c23f5257844ae46fdf43e2a4dcf7de0b8d21efd10da6f26c7e4",
+      "role": "retained attempt binder, local clone and explicit LIBDIR runner adapter"
+    },
+    {
+      "uri": "scripts/audit-pc6-causal-productization-c3.py",
+      "sha256": "d8a525422b854ad72a5d158ddb56633a5fae5c9aa843f40beeda74f59bd75657",
+      "role": "retained failure, explicit LIBDIR and base machine audit binder"
+    },
+    {
+      "uri": "scripts/run-pc6-causal-productization.py",
+      "sha256": "1f7560257f0d0dd8816b1015f6226557255afe7d3c4f973b8b761570084df761",
+      "role": "frozen base build and validation runner"
+    },
+    {
+      "uri": "scripts/audit-pc6-causal-productization.py",
+      "sha256": "3feb4cab4dd8af393a17609399dc50609d05fff3a1e204c1cb483f684e42b360",
+      "role": "frozen base independent auditor"
+    },
+    {
+      "uri": "scripts/run-pc6-causal-product.py",
+      "sha256": "02035b048c5ae397fb7e259f52e369356d9a2e9d123932943387592786472a94",
+      "role": "unchanged built-product helper"
+    }
+  ],
+  "correction": {
+    "buildArgumentAdditions": [
+      "BUILD_CMAKE_ARGS=-DLIBDIR=/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01/source/lib/macos_arm64"
+    ],
+    "gitlinkMutations": 0,
+    "dependencySymlinks": 0,
+    "productSourceChanges": 0,
+    "thresholdChanges": 0,
+    "networkCalls": 0,
+    "dependencyWrites": 0
+  },
+  "entrypoints": {
+    "run": ["python3", "scripts/run-pc6-causal-productization-c3.py"],
+    "audit": ["python3", "scripts/audit-pc6-causal-productization-c3.py"]
+  },
+  "freezeHash": "b8b802e75ef7238da521f1fa0ede0c29d2a8f6776b11fb281e6b152500195481"
+}
