@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc9PhysicalArchetypesC3EvidenceCorrection.v0.5",
+  "status": "FROZEN_FACTUAL_CORRECTION_BEFORE_C3_PRODUCT_MUTATION",
+  "supersededNarrativeOnly": {
+    "counterexampleReceipt": "experiments/physical-archetypes/PC9-development-counterexample-2026-09-01-run-03/receipt.json",
+    "receiptHash": "d667254a70352f6f8f5ad22d76c5f77a159a3f612fdbb4c2ac441e78bada6406",
+    "c3Contract": "specs/ai-native-studio-pc9-physical-archetypes-c3-preregistration.v0.4.json",
+    "specHash": "fda477ffad479ea3ab4072299c8c19c421f317243619ba3967ac4e0a78a79b35"
+  },
+  "correction": {
+    "incorrectText": "neither scene ray tracing nor per-material refraction was enabled",
+    "correctText": "scene.eevee.use_raytracing was already enabled for schema v0.5; per-material screen/raytrace refraction was not enabled",
+    "boundUncommittedProductModuleSha256": "5dd29256e813f34b273b807c218bd68f88f6f732c6a0d0ffe4d169de9eec0b75",
+    "observedExistingCode": "the v0.5 execute path assigns scene.eevee.use_raytracing = True before creating studio materials",
+    "allowedC3ProductDelta": "enable native use_screen_refraction and use_raytrace_refraction on the generic Glass BSDF bottle-shell material only"
+  },
+  "unchanged": {
+    "run03VisualFailure": true,
+    "run03MachinePass": true,
+    "fixture": true,
+    "allPhysicalInputsAndThresholds": true,
+    "allSevenDirectVisualQuestions": true,
+    "formalRoots": true,
+    "finalPoseAuthorityAdded": false
+  },
+  "stopRule": "Retain C3 if per-material native refraction does not reveal all three exact fill levels or regresses any frozen requirement.",
+  "specHash": "f5341a5fd7843897251b2b18cc084d97a5f06240517de664407765c05580f501"
+}

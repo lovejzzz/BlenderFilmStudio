@@ -683,6 +683,11 @@ actually observed on the accepted binary—native EEVEE ray tracing plus
 per-material screen/raytrace refraction—for the generic filled-bottle factory.
 It does not authorize alpha tricks, cutaways, gauges, label encoding, camera
 changes or final poses. The next action is the C3 development replay.
+C3 E1 `f5341a5f…` corrects one evidence sentence before that replay: the
+bound run-03 module already enabled scene-level EEVEE ray tracing; only the two
+per-material screen/raytrace refraction flags were absent. Historical files
+remain unchanged. The allowed product delta is narrowed to those material
+flags only.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
