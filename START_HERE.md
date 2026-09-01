@@ -620,6 +620,12 @@ v0.1/v0.3 unchanged and freezes corrected v0.4 fixture `3d97a1b8…`.
 later presentation fields. It can influence only the already bounded initial
 variation and cannot author final conditions. PC8 may proceed only after a
 development replay reproduces every accepted PC7 initial/physics value exactly.
+That replay is now exact. The one-path product candidate is frozen at
+`9d5a6686…` (120 additions / 16 deletions) with module SHA `009544bd…`.
+It reproduces all PC7 initial and physics records, leaves v0.2 motion blur off,
+and derives `19.61656045 px/frame` median motion → `0.30586402 frame` native
+shutter with `4e-8 px` target error. Tool freeze self is `94b0635a…`; formal
+attempt-01 roots remain fresh and are the next action.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

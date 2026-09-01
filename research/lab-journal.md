@@ -6785,3 +6785,11 @@ Date: 2026-09-01 · Type: RETAINED DESIGN COUNTEREXAMPLE + CORRECTED PREREGISTRA
 The first development execution correctly computed a 0.30849733-frame native shutter, but it also changed all five initial variation records and downstream final physics. Cause: v0.3 cinematography changed the whole SceneSpec self hash, while deterministic variation used that self hash as its basis. This violates the exact PC7 primary-physics control and invalidates v0.1 before formal work.
 
 C1 spec self `8110fdbb…` retains v0.1/v0.3 unchanged and freezes v0.4 fixture `3d97a1b8…`. The only semantic correction is `deterministicVariation.basisSceneSpecHash=b1bcabc7…`, so presentation-only extensions cannot resample physical initial conditions. This basis remains limited to bounded pre-solve variation and grants no final-condition authority. Development must reproduce all accepted PC7 initial conditions and physics exactly before tool freeze.
+
+## J-586 · PC8 corrected one-path source and formal tools frozen
+
+Date: 2026-09-01 · Type: PRODUCT SOURCE + TOOL FREEZE · Development starts / A-B renders / formal-root writes: 3 / 4 / 0
+
+Product commit `9d5a6686…` changes only `film_studio_causal.py` by 120 additions / 16 deletions. It retires invalid v0.3, validates v0.4 basis identity, measures actor+five-target projected origins between impact-1 and impact, reduces by median, derives bounded shutter and enables native Blender transform blur. It contains no PC7/PC8/fixture/hash branch and no target keyframe insertion.
+
+Corrected development replay reproduces every PC7 initial target record and complete physics record exactly, while v0.2 remains cinematography-absent with motion blur disabled. v0.4 measures 19.61656045 px/frame and computes 0.30586402-frame CENTER shutter with 4e-8 px target error. Direct A/B sees real directional speed without losing five bodies, panels, bands or collision direction. Sixteen negative controls passed in development. Formal helper/runner/auditor freeze self is `94b0635a…`; attempt-01 remains fresh.
