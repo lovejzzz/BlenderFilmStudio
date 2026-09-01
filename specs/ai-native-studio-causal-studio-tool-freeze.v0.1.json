@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioCausalStudioToolFreeze.v0.1",
+  "experimentId": "PC5-CAUSAL-STUDIO",
+  "status": "FROZEN_BEFORE_ATTEMPT01_SCENE_MUTATION",
+  "preregistration": {
+    "uri": "specs/ai-native-studio-causal-studio-preregistration.v0.1.json",
+    "sha256": "dacb3328daf5b1b68e7cabd2a6fb161705d7be3b6d598a1ce7b6a7edb5065e30",
+    "specHash": "dd90142126584d23207009c1c352bd52bf76fe9b0af25afaf8b7c1919a7bfec5"
+  },
+  "tools": [
+    {
+      "uri": "scripts/build-causal-studio.py",
+      "sha256": "e44e209eadd73bbad6bd984ac1ba5077e30865a9d46486c1bbc8f4538e3aad9e",
+      "role": "Create procedural assets, configure Bullet rigid bodies, simulate, render three review frames and recompute after reopen"
+    },
+    {
+      "uri": "scripts/run-causal-studio.mjs",
+      "sha256": "d09dcf8bf2c9df4bdb8543566637b605121f67c7a5344bc97de587da2aa262db",
+      "role": "Fail-closed fresh-root runner, process/logger, resource counter and receipt writer"
+    },
+    {
+      "uri": "scripts/audit-causal-studio.mjs",
+      "sha256": "4c8d35ae16a39ce3ef570f8925194234853a1b816bc5cca9b01a06cc8aaf22b3",
+      "role": "Independent machine audit that does not import the Blender builder"
+    }
+  ],
+  "physicsEnforcement": {
+    "solver": "BLENDER_BULLET_RIGID_BODY",
+    "dynamicRigidBodies": ["dynamic_actor", "three target_group members"],
+    "passiveRigidBodies": ["ground"],
+    "authoredFinalPoseKeyframesAllowed": 0,
+    "reopenRecomputationRequired": true,
+    "reopenResponseFramesTolerance": "exact",
+    "reopenFinalTiltToleranceDegrees": 0.01
+  },
+  "staticChecks": {
+    "pythonCompile": "PASS",
+    "runnerNodeSyntax": "PASS",
+    "auditorNodeSyntax": "PASS",
+    "whitespace": "PASS",
+    "toolCount": 3
+  },
+  "entrypoints": {
+    "run": ["node", "scripts/run-causal-studio.mjs"],
+    "audit": ["node", "scripts/audit-causal-studio.mjs"]
+  },
+  "freezeHash": "9b97344288cb97eaa26692b017b5d2996dd13c7655dc77087eb6d95400b731da"
+}
