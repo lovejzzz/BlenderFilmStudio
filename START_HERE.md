@@ -581,7 +581,11 @@ PC7 is preregistered at `86de8cc8…` with a frozen five-domino v0.2 fixture:
 impact is selected by evaluated propagated angular motion, aftermath by an
 eight-frame settle rule, and bounded SHA-256-derived initial-condition variation
 is allowed while all authored final conditions remain forbidden. Formal roots
-remain fresh pending the one-path product implementation.
+remain fresh. The one-path implementation is now frozen at product commit
+`c7eece67…` (116 additions / 15 deletions); a pre-formal smoke reproduced the
+v0.1 four-target result exactly and selected frames 38/86 for the new impact /
+aftermath. Tool freeze self hash is `66824099…`; the next action is the fresh
+native build and 27-render formal product run.
 The validated source commit was subsequently published to
 `lovejzzz/film-engine/main` by one ordinary non-force fast-forward from
 `aa4fff39…` to `5f3b981a…`; a public raw-file check matched the local causal

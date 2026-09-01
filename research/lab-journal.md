@@ -6747,3 +6747,11 @@ After research acceptance commit `598b5540`, exact product commit `5f3b981a…` 
 Date: 2026-09-01 · Type: PREREGISTRATION + UNSEEN V0.2 FIXTURE · Product mutations / formal starts / renders: 0 / 0 / 0
 
 PC7 spec self `86de8cc8…` freezes a five-domino fixture `b1bcabc7…` before the one-path product change. New authority is limited to SHA-256-derived bounded initial position/yaw/friction/restitution variation and evaluated motion measurement. IMPACT must lexicographically maximize active target count, aggregate tilt step and earliest frame, remain at least one frame after first response, and show at least two active targets; AFTERMATH must use the first post-response eight-frame window below 0.15° aggregate step or frameEnd. Formal review adds a 24-frame clip. Targets and post-release actor remain zero-pose-keyframe; any manual final-state repair fails.
+
+## J-581 · PC7 one-path implementation and formal tools frozen
+
+Date: 2026-09-01 · Type: PRODUCT SOURCE + TOOL FREEZE · Pre-formal starts / renders / formal-root writes: 4 / 3 / 0
+
+Product commit `c7eece67…` changes only `film_studio_causal.py` by 116 additions / 15 deletions. It supports v0.1 unchanged, validates v0.2 deterministic variation and selection semantics, derives five initial-condition channels from SHA-256, records per-frame evaluated tilt steps, selects propagated impact lexicographically, and finds the first eight-frame angular settle window. Source contains no PC7/fixture/project branch and no target keyframe insertion. Pre-formal v0.1 execution reproduced exact 28/31/31/30 responses, prior final tilts and 26/28/120 frames. Frozen v0.2 smoke produced responses 28/29/29/30/31, selected impact 38 with five active targets / 30.55164633° aggregate step, selected aftermath 86, and final tilts 62.32°–90.00°. The three smoke stills visually show real simultaneous propagation and nonuniform resting support but are not formal evidence.
+
+Formal helper/runner/auditor hashes are bound by tool freeze `66824099…`. Attempt-01 remains fresh and is fixed at one clean native build, 12 authority attacks, three product starts, 3 review stills, 24 impact frames, one save/reopen, independent recomputation of SHA variation and both motion selectors, and zero network/engine writes.
