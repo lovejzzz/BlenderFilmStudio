@@ -1,0 +1,72 @@
+{
+  "documentType": "BFS_VISUAL_ASSESSMENT",
+  "assessmentVersion": "0.2.0",
+  "assessmentId": "PC4_VX1_ATTEMPT03_TEACHER_02",
+  "packetUri": "specs/fixtures/visual-review/PC4_VX1_ATTEMPT03.packet.v0.2.json",
+  "packetSha256": "c74df022ef573c905847520c8ef897320082fd9c967191f22e8bbe03632ba815",
+  "executionBaseline": {
+    "sceneSha256": "339de0032c8598ba5811bc06668ecdf7924e3c49434c8824094508adccc9d940",
+    "policy": "REBUILD_FROM_BOUND_ACCEPTED_BASELINE"
+  },
+  "reviewer": {"kind": "VISION_MODEL_TEACHER", "version": "GPT5_SCREENSHOT_REVIEW_2026_08_31"},
+  "issues": [
+    {
+      "issueId": "ISSUE_WIDE_SILHOUETTE_STILL_OCCLUDED",
+      "category": "COMPOSITION", "severity": "BLOCKER", "confidence": 0.99,
+      "observation": "A near black foreground structural form still divides the right center of the wide image and breaks the hero action silhouette.",
+      "desiredOutcome": "Retain environmental depth while keeping unintended foreground occlusion below the rubric ratio across the hero silhouette.",
+      "evidence": [{"frameId": "VX1_F0048", "region": {"x": 0.55, "y": 0.0, "width": 0.25, "height": 1.0}}],
+      "entityRefs": ["B62_CHAMBER_RING_2_4", "B62_COLUMN_03", "PC4_CHEST_CARAPACE", "PC4_HELMET_SHELL"],
+      "failureMechanisms": ["SILHOUETTE_OCCLUSION"],
+      "treatment": "RESOLVE_SILHOUETTE_OCCLUSION"
+    },
+    {
+      "issueId": "ISSUE_MEDIUM_DETAIL_DENSITY_COLLAPSE",
+      "category": "MODELING", "severity": "BLOCKER", "confidence": 0.99,
+      "observation": "Large same scale rectangular overlays occupy most of the medium subject and read as floating clutter rather than integrated structure.",
+      "desiredOutcome": "Use sparse contour following relief with bounded coverage and distinct primary secondary and tertiary scale bands.",
+      "evidence": [{"frameId": "VX1_F0144", "region": {"x": 0.05, "y": 0.04, "width": 0.9, "height": 0.92}}],
+      "entityRefs": ["PC4_CHEST_CARAPACE", "PC4_HELMET_SHELL", "PC4_SHOULDER_SHELL_L", "PC4_SHOULDER_SHELL_R", "PC4_TORSO_HULL"],
+      "failureMechanisms": ["DETAIL_DENSITY_EXCESS", "FLOATING_DETAIL", "UNIFORM_DETAIL_SCALE"],
+      "treatment": "ENFORCE_DETAIL_DENSITY"
+    },
+    {
+      "issueId": "ISSUE_MEDIUM_NEGATIVE_SPACE_COLLAPSE",
+      "category": "COMPOSITION", "severity": "HIGH", "confidence": 0.98,
+      "observation": "The medium shot remains overfilled and the subject has no useful margin for reading the contact action.",
+      "desiredOutcome": "Fit the bound subject group to a measured occupancy interval with at least the rubric negative space margin.",
+      "evidence": [{"frameId": "VX1_F0144", "region": {"x": 0.0, "y": 0.0, "width": 1.0, "height": 1.0}}],
+      "entityRefs": ["PC4_CHEST_CARAPACE", "PC4_HELMET_SHELL", "PC4_SHOULDER_SHELL_L", "PC4_SHOULDER_SHELL_R"],
+      "failureMechanisms": ["NEGATIVE_SPACE_COLLAPSE", "SUBJECT_OVERFILL"],
+      "treatment": "FIT_SUBJECT_WITH_NEGATIVE_SPACE"
+    },
+    {
+      "issueId": "ISSUE_CLOSE_FACIAL_LANDMARK_AMBIGUITY",
+      "category": "MODELING", "severity": "HIGH", "confidence": 0.98,
+      "observation": "The close image contains more plates but still lacks a dominant eye line and an ordered brow cheek jaw hierarchy.",
+      "desiredOutcome": "Create a shallow contour following faceplate hierarchy whose eye line reads first and whose brow cheek and jaw read at descending scales.",
+      "evidence": [{"frameId": "VX1_F0240", "region": {"x": 0.18, "y": 0.04, "width": 0.64, "height": 0.88}}],
+      "entityRefs": ["PC4_CHIN_GUARD", "PC4_FACEPLATE", "PC4_HELMET_SHELL", "PC4_VISOR_FRAME", "PC4_VISOR_LENS"],
+      "failureMechanisms": ["FACIAL_LANDMARK_AMBIGUITY", "FLOATING_DETAIL", "UNIFORM_DETAIL_SCALE"],
+      "treatment": "ESTABLISH_FACIAL_HIERARCHY"
+    },
+    {
+      "issueId": "ISSUE_MEDIUM_JOINT_FORM_LANGUAGE",
+      "category": "MODELING", "severity": "HIGH", "confidence": 0.95,
+      "observation": "The attempted joint layers use box overlays and do not establish a mechanical core shell gap relationship.",
+      "desiredOutcome": "Build concentric contour aligned joint layers with visible gaps and three separated scale bands.",
+      "evidence": [{"frameId": "VX1_F0144", "region": {"x": 0.06, "y": 0.1, "width": 0.88, "height": 0.8}}],
+      "entityRefs": ["PC4_ELBOW_L", "PC4_ELBOW_R", "PC4_SHOULDER_CAP_L", "PC4_SHOULDER_CAP_R", "PC4_SHOULDER_SHELL_L", "PC4_SHOULDER_SHELL_R"],
+      "failureMechanisms": ["FLOATING_DETAIL", "PRIMITIVE_FORM_LANGUAGE", "UNIFORM_DETAIL_SCALE"],
+      "treatment": "BUILD_CONTOUR_JOINT_HIERARCHY"
+    }
+  ],
+  "strengthConfirmations": [
+    {"strengthId": "STRENGTH_LIGHTING_DEPTH", "evidenceFrameIds": ["VX1_F0048", "VX1_F0144", "VX1_F0240"]},
+    {"strengthId": "STRENGTH_CAMERA_LANGUAGE", "evidenceFrameIds": ["VX1_F0048", "VX1_F0144", "VX1_F0240"]}
+  ],
+  "lesson": {
+    "rootCause": "The first executor treated minimum part and layer counts as quality and lacked screen space occupancy contour relief and density constraints.",
+    "antiPatterns": ["PART_COUNT_AS_QUALITY", "UNIFORM_SCALE_DETAIL", "FLOATING_RECTANGULAR_OVERLAYS", "FIXED_PERCENT_LENS_CHANGE_WITHOUT_FIT", "NAMED_PROJECT_SPECIAL_CASE"]
+  }
+}

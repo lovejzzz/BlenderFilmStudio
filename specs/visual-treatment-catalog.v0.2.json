@@ -1,0 +1,48 @@
+{
+  "documentType": "BFS_VISUAL_TREATMENT_CATALOG",
+  "catalogVersion": "0.2.0",
+  "rubricUri": "specs/visual-film-language-rubric.v0.2.json",
+  "rules": [
+    "Treatments encode observable relationships and never executable instructions.",
+    "Every numeric parameter is a cross-project visual constraint, not a named-object placement.",
+    "An executor must measure or fail closed; part counts alone cannot satisfy a treatment.",
+    "The baseline scene may differ from the rejected observed scene only when both hashes are bound."
+  ],
+  "treatments": [
+    {
+      "id": "RESOLVE_SILHOUETTE_OCCLUSION",
+      "categories": ["COMPOSITION"],
+      "operationType": "RESOLVE_SCREENSPACE_OCCLUSION",
+      "preset": "HIDE_NEAREST_NONSTORY_OCCLUDER",
+      "parameters": {"maximumOcclusionRatio": 0.08, "minimumNegativeSpaceMargin": null, "targetOccupancyMin": null, "targetOccupancyMax": null, "maximumReliefDepthRatio": null, "maximumDetailCoverageRatio": null, "requiredScaleBands": null, "maximumSameScalePeers": null, "requiredFacialZones": []}
+    },
+    {
+      "id": "FIT_SUBJECT_WITH_NEGATIVE_SPACE",
+      "categories": ["COMPOSITION"],
+      "operationType": "APPLY_FRAMING_CONSTRAINT",
+      "preset": "FIT_BOUND_SUBJECT_WITH_MARGIN",
+      "parameters": {"maximumOcclusionRatio": null, "minimumNegativeSpaceMargin": 0.08, "targetOccupancyMin": 0.48, "targetOccupancyMax": 0.78, "maximumReliefDepthRatio": null, "maximumDetailCoverageRatio": null, "requiredScaleBands": null, "maximumSameScalePeers": null, "requiredFacialZones": []}
+    },
+    {
+      "id": "BUILD_CONTOUR_JOINT_HIERARCHY",
+      "categories": ["MODELING"],
+      "operationType": "REPLACE_FORM_WITH_CONTOUR_ASSEMBLY",
+      "preset": "CONCENTRIC_CORE_SHELL_GAP",
+      "parameters": {"maximumOcclusionRatio": null, "minimumNegativeSpaceMargin": null, "targetOccupancyMin": null, "targetOccupancyMax": null, "maximumReliefDepthRatio": 0.12, "maximumDetailCoverageRatio": 0.18, "requiredScaleBands": 3, "maximumSameScalePeers": 3, "requiredFacialZones": []}
+    },
+    {
+      "id": "ESTABLISH_FACIAL_HIERARCHY",
+      "categories": ["MODELING"],
+      "operationType": "ADD_CONTOUR_DETAIL_SYSTEM",
+      "preset": "LANDMARK_DRIVEN_FACEPLATE",
+      "parameters": {"maximumOcclusionRatio": null, "minimumNegativeSpaceMargin": null, "targetOccupancyMin": null, "targetOccupancyMax": null, "maximumReliefDepthRatio": 0.05, "maximumDetailCoverageRatio": 0.22, "requiredScaleBands": 3, "maximumSameScalePeers": 2, "requiredFacialZones": ["EYE_LINE", "BROW", "CHEEK", "JAW"]}
+    },
+    {
+      "id": "ENFORCE_DETAIL_DENSITY",
+      "categories": ["MODELING", "MATERIAL"],
+      "operationType": "ADD_CONTOUR_DETAIL_SYSTEM",
+      "preset": "SPARSE_HIERARCHICAL_PANELING",
+      "parameters": {"maximumOcclusionRatio": null, "minimumNegativeSpaceMargin": null, "targetOccupancyMin": null, "targetOccupancyMax": null, "maximumReliefDepthRatio": 0.035, "maximumDetailCoverageRatio": 0.12, "requiredScaleBands": 3, "maximumSameScalePeers": 3, "requiredFacialZones": []}
+    }
+  ]
+}

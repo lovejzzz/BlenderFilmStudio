@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BFS VisualAssessment v0.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentType", "assessmentVersion", "assessmentId", "packetUri", "packetSha256", "executionBaseline", "reviewer", "issues", "strengthConfirmations", "lesson"],
+  "properties": {
+    "documentType": {"const": "BFS_VISUAL_ASSESSMENT"},
+    "assessmentVersion": {"const": "0.2.0"},
+    "assessmentId": {"$ref": "#/$defs/id"},
+    "packetUri": {"$ref": "#/$defs/repositoryUri"},
+    "packetSha256": {"$ref": "#/$defs/sha256"},
+    "executionBaseline": {
+      "type": "object", "additionalProperties": false, "required": ["sceneSha256", "policy"],
+      "properties": {"sceneSha256": {"$ref": "#/$defs/sha256"}, "policy": {"const": "REBUILD_FROM_BOUND_ACCEPTED_BASELINE"}}
+    },
+    "reviewer": {
+      "type": "object", "additionalProperties": false, "required": ["kind", "version"],
+      "properties": {"kind": {"enum": ["VISION_MODEL_TEACHER", "VISION_MODEL_CANDIDATE", "HUMAN_REVIEWER"]}, "version": {"type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[A-Za-z0-9_.:-]+$"}}
+    },
+    "issues": {
+      "type": "array", "minItems": 1, "maxItems": 128,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["issueId", "category", "severity", "confidence", "observation", "desiredOutcome", "evidence", "entityRefs", "failureMechanisms", "treatment"],
+        "properties": {
+          "issueId": {"$ref": "#/$defs/id"},
+          "category": {"enum": ["COMPOSITION", "MODELING", "MATERIAL", "ANIMATION", "LIGHTING", "CONTINUITY"]},
+          "severity": {"enum": ["BLOCKER", "HIGH", "MEDIUM", "LOW"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "observation": {"type": "string", "minLength": 8, "maxLength": 500},
+          "desiredOutcome": {"type": "string", "minLength": 8, "maxLength": 500},
+          "evidence": {"type": "array", "minItems": 1, "maxItems": 12, "items": {"type": "object", "additionalProperties": false, "required": ["frameId", "region"], "properties": {"frameId": {"$ref": "#/$defs/id"}, "region": {"type": "object", "additionalProperties": false, "required": ["x", "y", "width", "height"], "properties": {"x": {"type": "number", "minimum": 0, "maximum": 1}, "y": {"type": "number", "minimum": 0, "maximum": 1}, "width": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}, "height": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}}}}}},
+          "entityRefs": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+          "failureMechanisms": {"type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": {"enum": ["SILHOUETTE_OCCLUSION", "NEGATIVE_SPACE_COLLAPSE", "SUBJECT_OVERFILL", "FLOATING_DETAIL", "UNIFORM_DETAIL_SCALE", "DETAIL_DENSITY_EXCESS", "FACIAL_LANDMARK_AMBIGUITY", "PRIMITIVE_FORM_LANGUAGE"]}},
+          "treatment": {"enum": ["RESOLVE_SILHOUETTE_OCCLUSION", "FIT_SUBJECT_WITH_NEGATIVE_SPACE", "BUILD_CONTOUR_JOINT_HIERARCHY", "ESTABLISH_FACIAL_HIERARCHY", "ENFORCE_DETAIL_DENSITY"]}
+        }
+      }
+    },
+    "strengthConfirmations": {"type": "array", "minItems": 1, "maxItems": 32, "items": {"type": "object", "additionalProperties": false, "required": ["strengthId", "evidenceFrameIds"], "properties": {"strengthId": {"$ref": "#/$defs/id"}, "evidenceFrameIds": {"type": "array", "minItems": 1, "maxItems": 24, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}}}},
+    "lesson": {"type": "object", "additionalProperties": false, "required": ["rootCause", "antiPatterns"], "properties": {"rootCause": {"type": "string", "minLength": 8, "maxLength": 600}, "antiPatterns": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"enum": ["PART_COUNT_AS_QUALITY", "UNIFORM_SCALE_DETAIL", "FLOATING_RECTANGULAR_OVERLAYS", "FIXED_PERCENT_LENS_CHANGE_WITHOUT_FIT", "NAMED_PROJECT_SPECIAL_CASE"]}}}}
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 96, "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "repositoryUri": {"type": "string", "minLength": 1, "maxLength": 512, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9_./ -]+$"}
+  }
+}

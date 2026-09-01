@@ -1,0 +1,56 @@
+{
+  "documentType": "BFS_VISUAL_FILM_LANGUAGE_RUBRIC",
+  "rubricVersion": "0.2.0",
+  "purpose": "Convert screenshot judgment into project-independent screen-space and form-hierarchy constraints.",
+  "rules": [
+    {
+      "id": "SILHOUETTE_OCCLUSION",
+      "principle": "A non-story foreground object must not divide the primary subject silhouette.",
+      "metric": "maximumOcclusionRatio",
+      "default": 0.08
+    },
+    {
+      "id": "NEGATIVE_SPACE_MARGIN",
+      "principle": "A readable subject needs a minimum frame margin and room for the action vector.",
+      "metric": "minimumNegativeSpaceMargin",
+      "default": 0.08
+    },
+    {
+      "id": "SUBJECT_OCCUPANCY",
+      "principle": "Shot scale is an interval, not a fixed lens percentage.",
+      "metric": "targetOccupancyRange",
+      "default": [0.48, 0.78]
+    },
+    {
+      "id": "CONTOUR_ADHERENCE",
+      "principle": "Added modeling detail must read as part of the parent form instead of a floating block.",
+      "metric": "maximumReliefDepthRatio",
+      "default": 0.06
+    },
+    {
+      "id": "DETAIL_DENSITY",
+      "principle": "More parts are not more quality; added detail has a screen-space coverage budget.",
+      "metric": "maximumDetailCoverageRatio",
+      "default": 0.18
+    },
+    {
+      "id": "SCALE_HIERARCHY",
+      "principle": "Primary, secondary, and tertiary forms must occupy visibly different scale bands.",
+      "metric": "requiredScaleBands",
+      "default": 3
+    },
+    {
+      "id": "FACIAL_READABILITY",
+      "principle": "A face is a landmark hierarchy, not a count of plates.",
+      "metric": "requiredFacialZones",
+      "default": ["EYE_LINE", "BROW", "CHEEK", "JAW"]
+    }
+  ],
+  "antiPatterns": [
+    "PART_COUNT_AS_QUALITY",
+    "UNIFORM_SCALE_DETAIL",
+    "FLOATING_RECTANGULAR_OVERLAYS",
+    "FIXED_PERCENT_LENS_CHANGE_WITHOUT_FIT",
+    "NAMED_PROJECT_SPECIAL_CASE"
+  ]
+}
