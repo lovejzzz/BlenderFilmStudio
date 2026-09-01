@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "bfs.rc6LiquidMeshReconstructionSpec.v0.21",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-MESH-RECONSTRUCTION-2026-09-01-ATTEMPT-21",
+  "purpose": "Calibrate reconstructed liquid surface volume separately from the accepted relative simulation-conservation candidate, while enforcing the exact on-disk cache frame roster before any moving-container solve.",
+  "toolFreezeParent": "23f480f173e96e93745962e8b635f96612e8c4ec",
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-reconstruction-attempt-21",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-mesh-reconstruction-attempt-21"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "engineSourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "fluidImplementationSha256": "63a7a3e1affe7809ea935e184dea992754655796a9631e0eadb2060d72dfa20f",
+    "fluidRnaSha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4"
+  },
+  "retainedEvidence": {
+    "attempt20Matrix": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-particle-conservation-attempt-20/matrix.json",
+      "sha256": "728da8ee578f9882debefa6b20632202ef72ff93aedc4de0dbf800187b56c7fc"
+    },
+    "attempt20Audit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-particle-conservation-attempt-20/independent-audit.json",
+      "sha256": "9883767424dc5cf20ab2eae4bdcea7f513e4f60fd9d88512641ad236445196c3"
+    }
+  },
+  "matrix": {
+    "fixed": {
+      "frameStart": 1,
+      "frameEnd": 7,
+      "preContactOnly": true,
+      "resolutionMax": 96,
+      "particleNumber": 2,
+      "particleRadius": 1.6,
+      "meshScale": 2,
+      "simulationMethod": "APIC",
+      "timestepsMin": 1,
+      "timestepsMax": 4,
+      "cflCondition": 2.0,
+      "waterViscosityBase": 1.0,
+      "waterViscosityExponent": 6,
+      "cupEffectorSubframes": 0,
+      "domainCenterMeters": [0.32, 0.0, 0.25],
+      "domainDimensionsMeters": [0.36, 0.36, 0.5],
+      "baseVoxelMeters": 0.0052083333,
+      "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006],
+      "flowVolumeDensityObserved": 0.0,
+      "flowSurfaceDistanceCells": 0.0
+    },
+    "cells": [
+      {"cellId": "mesh-radius-4p0", "meshParticleRadius": 4.0},
+      {"cellId": "mesh-radius-4p5", "meshParticleRadius": 4.5},
+      {"cellId": "mesh-radius-4p75", "meshParticleRadius": 4.75},
+      {"cellId": "mesh-radius-5p0", "meshParticleRadius": 5.0}
+    ],
+    "selectionRule": "valid signed nesting, then minimum absolute source-volume error, then minimum temporal drift, then lower mesh reconstruction radius",
+    "exactCacheFilesPerCell": 21,
+    "exactCacheFramesPerStage": [1, 2, 3, 4, 5, 6, 7]
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.0104166667,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "resourceCeilings": {
+    "blenderStarts": 4,
+    "fluidDataBakes": 4,
+    "fluidMeshBakes": 4,
+    "blendSaves": 4,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "sourceFinding": "Attempt-20 fixed mesh_particle_radius at 3.0 and found simulation particle_radius 1.6 to have the lowest seven-frame temporal drift at 6.497 percent, still above the frozen 5 percent threshold, while reconstructed volume remained about 31 percent below the frozen source. Blender documents simulation particle_radius for leak or gain correction separately from mesh_particle_radius for reconstructed surface size. This matrix holds the former at 1.6 and varies only the latter.",
+  "stopRule": "Stop on process, identity, topology, cache-roster, persistence or resource failure. Every cell must retain exactly config, data and mesh files for frames 1 through 7 and no other Mantaflow cache files. A nested negative shell may subtract from one enclosing positive water surface; more than one positive component, non-nesting, excessive centroid separation, non-manifold geometry, render media, network or engine writes fail closed.",
+  "claimCeiling": "Four seven-frame zero-render static controls varying only mesh reconstruction radius with simulation particle radius fixed at 1.6. Even a passing reconstructed-volume candidate still requires a final-resolution static confirmation before slow-tip, impact, lighting or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-mesh-reconstruction-scene.py": "9fc5601cd8c7f91622280119a93eecea98450256bacd4c737018953508e34d6e",
+    "scripts/run-rc6-liquid-mesh-reconstruction-matrix.py": "2444b803ec0af20e873beb185cfc3e425cf175a5713516fe00efc06b7b4bc761",
+    "scripts/audit-rc6-liquid-mesh-reconstruction-matrix.py": "5f63b1ebed01fb985dced6a376ee28add0bdb321c58ad374a18ef36c68ca1035"
+  },
+  "specHash": "effc048e2f1a9613bd5ac09bdcfda8d98854ea55675b2831326cf983b59ca528"
+}
