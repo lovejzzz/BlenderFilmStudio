@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "bfs.rc6LiquidLocalStaticSpec.v0.19",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-LOCAL-STATIC-2026-09-01-ATTEMPT-19",
+  "purpose": "Test whether a cup-local Mantaflow domain can conserve the exact current source mesh through seven pre-contact frames before any slow-tip or impact run.",
+  "toolFreezeParent": "35eb8b29955180fea70bfce0690c6dfe3ea9fee6",
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-local-static-attempt-19",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-local-static-attempt-19"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "sourceGeometryCorrectionPath": "research/2026-09-01-rc6-liquid-calibration-findings-c1-v0.2.zh-CN.md",
+    "sourceGeometryCorrectionSha256": "b57348d37b19241d453cb2234194313fcecd121c4ff22452e3e7aba6385ecf25"
+  },
+  "retainedEvidence": {
+    "attempt17Receipt": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-static-confirmation-attempt-17/receipt.json",
+      "sha256": "3fbc96b0faa8af2e47a3eaacf5cf04a28935e1063d25fa8ba84650f5adc341d5"
+    },
+    "attempt17Audit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-static-confirmation-attempt-17/independent-audit.json",
+      "sha256": "2c0e1432abc9fd084ce2e1dd00036275a21d17989752538014eb408223be9c75"
+    },
+    "attempt18Invalidation": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-component-diagnostic-attempt-18/invalidation.json",
+      "sha256": "9303bbbceb7623591a39318997a8bbf6c3029e50bae08a5a00ba3661719669d9"
+    },
+    "attempt18FailureAudit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-component-diagnostic-attempt-18/failure-audit.json",
+      "sha256": "a07dda36ce2e4a6eb5607a34b171c4b940f9acc311968f9f0dff8e0a94e7984e"
+    }
+  },
+  "matrix": {
+    "fixed": {
+      "frameStart": 1,
+      "frameEnd": 7,
+      "preContactOnly": true,
+      "resolutionMax": 96,
+      "particleNumber": 2,
+      "meshScale": 2,
+      "meshParticleRadius": 2.0,
+      "simulationMethod": "APIC",
+      "timestepsMin": 1,
+      "timestepsMax": 4,
+      "cflCondition": 2.0,
+      "waterViscosityBase": 1.0,
+      "waterViscosityExponent": 6,
+      "cupEffectorSubframes": 0,
+      "domainCenterMeters": [0.32, 0.0, 0.25],
+      "domainDimensionsMeters": [0.36, 0.36, 0.5],
+      "baseVoxelMeters": 0.0052083333,
+      "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006]
+    },
+    "cells": [
+      {"cellId": "radius-1p0", "particleRadius": 1.0},
+      {"cellId": "radius-1p1", "particleRadius": 1.1},
+      {"cellId": "radius-1p2", "particleRadius": 1.2},
+      {"cellId": "radius-1p3", "particleRadius": 1.3}
+    ],
+    "selectionRule": "closed mesh, then minimum absolute source-volume error, then minimum temporal drift, then minimum component count, then maximum largest-component fraction, then lower particle radius"
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumConnectedComponentCount": 1,
+    "minimumLargestComponentFraction": 0.95,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "resourceCeilings": {
+    "blenderStarts": 4,
+    "fluidDataBakes": 4,
+    "fluidMeshBakes": 4,
+    "blendSaves": 4,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on any nonzero process, traceback, identity mismatch, missing cell result or baked-state blend, resource breach, render media, network call or engine remote write. A relative matrix winner does not unlock slow-tip unless all frozen scientific thresholds pass.",
+  "claimCeiling": "Four seven-frame, zero-render, cup-local static controls at resolution 96. PASS_STATIC_CONTROL is required but not sufficient for slow-tip, impact, lighting or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-local-static-scene.py": "d44f1a446090908ede2d53773dcb8ab5a4745f728768bddfecbfc7db4be912f4",
+    "scripts/run-rc6-liquid-local-static-matrix.py": "d4f6e52197fce178114c818fbff4003fe3e1b66440de39a23c15a7990b287d66",
+    "scripts/audit-rc6-liquid-local-static-matrix.py": "0f3fc5bb3d37050356c624e502e6eb3674600c89634d34d67899f18c76f28991"
+  },
+  "specHash": "4b4881596e38821ada966067b86ee21eea4a404be77de000c986bbce94c065b8"
+}
