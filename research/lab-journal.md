@@ -6621,3 +6621,15 @@ Attempt-01完成53-part derivative save并写first temporary EXR后，在isolate
 Date: 2026-08-31 · Type: TOOL CORRECTION FREEZE · Formal attempt-02 starts / renders / saves: 0 / 0 / 0
 
 C1 base-hash wrapper只将`output_scene.display_settings.display_device = "sRGB - Display"`替换为`"sRGB"`，tool-freeze self `f5b013f8…`。53-part geometry、39+9 hides、materials、five-phase animation、camera/light、frames、EXR adapter、resources与visual rejection thresholds全部不变；attempt-01 failure/manifest exact绑定；fresh attempt-02 roots absent。
+
+## J-561 · PC.4 attempt-02 retained view-transform failure
+
+Date: 2026-08-31 · Type: RETAINED REVIEW-ADAPTER FAILURE · Blender starts / renders / saves / review PNGs: 1 / 1 / 1 / 0
+
+C1 display device correction succeeded，attempt-02 then stopped at next enum: long `ACES 2.0 - SDR 100 nits (Rec.709)` unavailable，admitted binary exposes `ACES 2.0`。Failure/manifest self hashes `1354bd20…` / `97062a03…`；derived/EXR hashes `e94a01ce…` / `ce29e55b…`。Source unchanged，zero PNG，attempt-02 immutable。
+
+## J-562 · PC.4 C2 admitted color-enum freeze
+
+Date: 2026-08-31 · Type: TOOL CORRECTION FREEZE · Formal attempt-03 starts / renders / saves: 0 / 0 / 0
+
+C2 base-hash wrapper绑定两个已观测enum：`sRGB - Display→sRGB`与long ACES name→`ACES 2.0`，self `11c21f10…`。Product geometry/animation/render/visual boundaries不变；attempts 01/02 exact绑定；fresh attempt-03 roots absent。
