@@ -656,6 +656,15 @@ recognizability/scale/fill/contact questions YES. This does not claim liquid
 sloshing or photorealism. The next action is a one-path product implementation
 and zero-network development replay; thresholds may not be weakened after the
 result is seen.
+PC9 development run-01 is retained as a pre-formal counterexample. All three
+bottles responded and the two lighter bottles settled near 90°, but the 0.4811
+kg high-fill bottle on a rear split path recovered to 0°; alpha-dithered shell
+transparency also made the fill appearance noisy. C1 `5f514928…` preserves all
+thresholds, dimensions, masses, COM values, launch momentum and final-pose
+denials. Corrected v0.6 fixture `2bf661e0…` places the highest derived mass on
+the direct line of action and lighter targets on propagation branches; the
+generic shell rule uses native transmission with alpha 1.0. Run-01 receipt hash
+is `ecaebabb…`. No product commit or formal root existed at correction time.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
