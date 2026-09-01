@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BFS VisualReviewPacket v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentType", "packetVersion", "project", "scene", "frames", "entities", "strengths", "reviewPolicy"],
+  "properties": {
+    "documentType": {"const": "BFS_VISUAL_REVIEW_PACKET"},
+    "packetVersion": {"const": "0.1.0"},
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectId", "iterationId"],
+      "properties": {
+        "projectId": {"$ref": "#/$defs/id"},
+        "iterationId": {"$ref": "#/$defs/id"}
+      }
+    },
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sceneId", "sha256", "buildReceipt"],
+      "properties": {
+        "sceneId": {"$ref": "#/$defs/id"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "buildReceipt": {"$ref": "#/$defs/fileIdentity"}
+      }
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["frameId", "shotId", "frame", "cameraId", "beauty", "auxiliaryPasses", "visibleEntityIds"],
+        "properties": {
+          "frameId": {"$ref": "#/$defs/id"},
+          "shotId": {"$ref": "#/$defs/id"},
+          "frame": {"type": "integer", "minimum": 0, "maximum": 10000000},
+          "cameraId": {"$ref": "#/$defs/id"},
+          "beauty": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["uri", "sha256", "width", "height"],
+            "properties": {
+              "uri": {"$ref": "#/$defs/repositoryUri"},
+              "sha256": {"$ref": "#/$defs/sha256"},
+              "width": {"type": "integer", "minimum": 16, "maximum": 32768},
+              "height": {"type": "integer", "minimum": 16, "maximum": 32768}
+            }
+          },
+          "auxiliaryPasses": {
+            "type": "array",
+            "maxItems": 6,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["passType", "uri", "sha256"],
+              "properties": {
+                "passType": {"enum": ["OBJECT_ID", "CRYPTOMATTE", "DEPTH", "NORMAL", "MOTION"]},
+                "uri": {"$ref": "#/$defs/repositoryUri"},
+                "sha256": {"$ref": "#/$defs/sha256"}
+              }
+            }
+          },
+          "visibleEntityIds": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 512,
+            "uniqueItems": true,
+            "items": {"$ref": "#/$defs/id"}
+          }
+        }
+      }
+    },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2048,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["entityId", "kind", "system", "semanticRole"],
+        "properties": {
+          "entityId": {"$ref": "#/$defs/id"},
+          "kind": {"enum": ["OBJECT", "COLLECTION", "CAMERA", "LIGHT", "RIG", "MATERIAL", "EVENT"]},
+          "system": {"type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[A-Za-z0-9_. -]+$"},
+          "semanticRole": {"type": "string", "minLength": 1, "maxLength": 120, "pattern": "^[A-Za-z0-9_. -]+$"}
+        }
+      }
+    },
+    "strengths": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["strengthId", "category", "statement", "evidenceFrameIds"],
+        "properties": {
+          "strengthId": {"$ref": "#/$defs/id"},
+          "category": {"enum": ["LIGHTING", "CAMERA_LANGUAGE", "COLOR", "ATMOSPHERE"]},
+          "statement": {"type": "string", "minLength": 1, "maxLength": 240},
+          "evidenceFrameIds": {"type": "array", "minItems": 1, "maxItems": 24, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+        }
+      }
+    },
+    "reviewPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rubricVersion", "confidenceFloor", "requireRegionEvidence", "requireKnownEntities"],
+      "properties": {
+        "rubricVersion": {"const": "BFS_VISUAL_RUBRIC_0_1"},
+        "confidenceFloor": {"type": "number", "minimum": 0.5, "maximum": 0.95},
+        "requireRegionEvidence": {"const": true},
+        "requireKnownEntities": {"const": true}
+      }
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 96, "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "repositoryUri": {"type": "string", "minLength": 1, "maxLength": 512, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9_./ -]+$"},
+    "fileIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["uri", "sha256"],
+      "properties": {
+        "uri": {"$ref": "#/$defs/repositoryUri"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

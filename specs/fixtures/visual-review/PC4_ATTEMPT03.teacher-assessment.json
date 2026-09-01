@@ -1,0 +1,102 @@
+{
+  "documentType": "BFS_VISUAL_ASSESSMENT",
+  "assessmentVersion": "0.1.0",
+  "assessmentId": "PC4_ATTEMPT03_TEACHER_01",
+  "packetUri": "specs/fixtures/visual-review/PC4_ATTEMPT03.packet.json",
+  "packetSha256": "6dfc745612633f85876999a53817d9ff0d3ed7d61f367d1398b9bcb541ede2dc",
+  "reviewer": {
+    "kind": "VISION_MODEL_TEACHER",
+    "version": "GPT5_SCREENSHOT_REVIEW_2026_08_31"
+  },
+  "issues": [
+    {
+      "issueId": "ISSUE_WIDE_FOREGROUND_OCCLUSION",
+      "category": "COMPOSITION",
+      "severity": "BLOCKER",
+      "confidence": 0.99,
+      "observation": "A chamber ring crosses the horizontal center while a foreground column blocks the left side of the hero.",
+      "desiredOutcome": "Keep the environment depth but give the hero an uninterrupted readable silhouette in the wide view.",
+      "evidence": [
+        {"frameId": "PC4_F0048", "region": {"x": 0.0, "y": 0.25, "width": 1.0, "height": 0.55}}
+      ],
+      "entityRefs": ["B62_CHAMBER_RING_2_4", "B62_COLUMN_03"],
+      "treatment": "CLEAR_FOREGROUND_OCCLUSION"
+    },
+    {
+      "issueId": "ISSUE_MEDIUM_PRIMITIVE_JOINTS",
+      "category": "MODELING",
+      "severity": "HIGH",
+      "confidence": 0.96,
+      "observation": "Large spherical shoulder and elbow forms dominate the medium view and read as simple primitives rather than engineered joints.",
+      "desiredOutcome": "Show layered load bearing joints with separate armor shells mechanical cores and connection gaps.",
+      "evidence": [
+        {"frameId": "PC4_F0144", "region": {"x": 0.06, "y": 0.15, "width": 0.88, "height": 0.76}}
+      ],
+      "entityRefs": ["PC4_ELBOW_L", "PC4_ELBOW_R", "PC4_SHOULDER_CAP_L", "PC4_SHOULDER_CAP_R", "PC4_SHOULDER_SHELL_L", "PC4_SHOULDER_SHELL_R"],
+      "treatment": "REPLACE_PRIMITIVE_JOINT_WITH_LAYERED_ASSEMBLY"
+    },
+    {
+      "issueId": "ISSUE_MEDIUM_SUBJECT_CROP",
+      "category": "COMPOSITION",
+      "severity": "HIGH",
+      "confidence": 0.93,
+      "observation": "The medium camera is so tight that shoulders and elbows crowd the frame and obscure the action relationship.",
+      "desiredOutcome": "Retain intimacy while restoring negative space around the upper body and the contact action.",
+      "evidence": [
+        {"frameId": "PC4_F0144", "region": {"x": 0.0, "y": 0.0, "width": 1.0, "height": 1.0}}
+      ],
+      "entityRefs": ["PC4_CHEST_CARAPACE", "PC4_HELMET_SHELL", "PC4_SHOULDER_SHELL_L", "PC4_SHOULDER_SHELL_R"],
+      "treatment": "REFRAME_FOR_SUBJECT_READABILITY"
+    },
+    {
+      "issueId": "ISSUE_CLOSE_FACE_STRUCTURE",
+      "category": "MODELING",
+      "severity": "HIGH",
+      "confidence": 0.97,
+      "observation": "The close view improves on a sphere but the helmet remains one large shell with circular side pods and too little facial segmentation.",
+      "desiredOutcome": "Create a readable brow visor cheek jaw and side mechanism hierarchy without losing the established silhouette.",
+      "evidence": [
+        {"frameId": "PC4_F0240", "region": {"x": 0.22, "y": 0.05, "width": 0.58, "height": 0.82}}
+      ],
+      "entityRefs": ["PC4_CHIN_GUARD", "PC4_FACEPLATE", "PC4_HELMET_SHELL", "PC4_SIDE_POD_L", "PC4_SIDE_POD_R", "PC4_VISOR_FRAME", "PC4_VISOR_LENS"],
+      "treatment": "ADD_FACIAL_SEGMENTATION"
+    },
+    {
+      "issueId": "ISSUE_SURFACE_DETAIL_HIERARCHY",
+      "category": "MODELING",
+      "severity": "MEDIUM",
+      "confidence": 0.91,
+      "observation": "The hero has many counted parts but broad torso and helmet surfaces still lack convincing mid scale panel structure.",
+      "desiredOutcome": "Add sparse functional panel breaks overlaps vents and fastener groupings at a readable middle scale.",
+      "evidence": [
+        {"frameId": "PC4_F0144", "region": {"x": 0.25, "y": 0.18, "width": 0.5, "height": 0.7}},
+        {"frameId": "PC4_F0240", "region": {"x": 0.22, "y": 0.04, "width": 0.58, "height": 0.86}}
+      ],
+      "entityRefs": ["PC4_CHEST_CARAPACE", "PC4_HELMET_SHELL", "PC4_TORSO_HULL"],
+      "treatment": "ADD_MID_SCALE_SURFACE_HIERARCHY"
+    },
+    {
+      "issueId": "ISSUE_CLOSE_SUBJECT_CROP",
+      "category": "COMPOSITION",
+      "severity": "MEDIUM",
+      "confidence": 0.88,
+      "observation": "The close view leaves little breathing room around the helmet and amplifies the simple side pod silhouette.",
+      "desiredOutcome": "Keep the close emotional scale while allowing the complete head silhouette and facial layers to read.",
+      "evidence": [
+        {"frameId": "PC4_F0240", "region": {"x": 0.08, "y": 0.0, "width": 0.84, "height": 1.0}}
+      ],
+      "entityRefs": ["PC4_HELMET_SHELL", "PC4_SIDE_POD_L", "PC4_SIDE_POD_R"],
+      "treatment": "REFRAME_FOR_SUBJECT_READABILITY"
+    }
+  ],
+  "strengthConfirmations": [
+    {
+      "strengthId": "STRENGTH_LIGHTING_DEPTH",
+      "evidenceFrameIds": ["PC4_F0048", "PC4_F0144", "PC4_F0240"]
+    },
+    {
+      "strengthId": "STRENGTH_CAMERA_LANGUAGE",
+      "evidenceFrameIds": ["PC4_F0048", "PC4_F0144", "PC4_F0240"]
+    }
+  ]
+}

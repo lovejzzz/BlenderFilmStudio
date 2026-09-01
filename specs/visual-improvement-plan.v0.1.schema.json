@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BFS VisualImprovementPlan v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["documentType", "planVersion", "projectId", "iterationId", "source", "decision", "priorities", "operations", "deferredIssues", "preservations", "rerenderSet", "authority", "planHash"],
+  "properties": {
+    "documentType": {"const": "BFS_VISUAL_IMPROVEMENT_PLAN"},
+    "planVersion": {"const": "0.1.0"},
+    "projectId": {"$ref": "#/$defs/id"},
+    "iterationId": {"$ref": "#/$defs/id"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["packetUri", "packetSha256", "assessmentUri", "assessmentSha256", "sceneSha256"],
+      "properties": {
+        "packetUri": {"$ref": "#/$defs/repositoryUri"},
+        "packetSha256": {"$ref": "#/$defs/sha256"},
+        "assessmentUri": {"$ref": "#/$defs/repositoryUri"},
+        "assessmentSha256": {"$ref": "#/$defs/sha256"},
+        "sceneSha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "decision": {"enum": ["COMPILED", "NEEDS_MORE_EVIDENCE"]},
+    "priorities": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rank", "issueId", "severity", "category", "confidence"],
+        "properties": {
+          "rank": {"type": "integer", "minimum": 1, "maximum": 128},
+          "issueId": {"$ref": "#/$defs/id"},
+          "severity": {"enum": ["BLOCKER", "HIGH", "MEDIUM", "LOW"]},
+          "category": {"enum": ["COMPOSITION", "MODELING", "MATERIAL", "ANIMATION", "LIGHTING", "CONTINUITY"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "operations": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["operationId", "issueId", "operationType", "targetEntityIds", "shotIds", "preset", "parameters", "invariants", "evidenceFrameIds"],
+        "properties": {
+          "operationId": {"$ref": "#/$defs/id"},
+          "issueId": {"$ref": "#/$defs/id"},
+          "operationType": {"enum": ["SET_SHOT_VISIBILITY", "APPLY_FRAMING_PRESET", "REPLACE_FORM_WITH_ASSEMBLY", "ADD_DETAIL_SYSTEM", "APPLY_PERFORMANCE_PRESET"]},
+          "targetEntityIds": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+          "shotIds": {"type": "array", "minItems": 1, "maxItems": 24, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+          "preset": {"enum": ["HIDE_CONFIRMED_FOREGROUND_OCCLUDER", "READABLE_SUBJECT_FRAMING", "LAYERED_MECHANICAL_JOINT", "MID_SCALE_PANEL_HIERARCHY", "FACIAL_SEGMENTATION", "ANTICIPATION_CONTACT_REACTION_SETTLE"]},
+          "parameters": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["visible", "minimumLayers", "maximumLensChangePercent", "minimumReadableBeats"],
+            "properties": {
+              "visible": {"type": ["boolean", "null"]},
+              "minimumLayers": {"type": ["integer", "null"], "minimum": 2, "maximum": 8},
+              "maximumLensChangePercent": {"type": ["number", "null"], "minimum": 0, "maximum": 20},
+              "minimumReadableBeats": {"type": ["integer", "null"], "minimum": 3, "maximum": 8}
+            }
+          },
+          "invariants": {"type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true, "items": {"enum": ["PRESERVE_SCENE_IDENTITY", "PRESERVE_ANIMATION_ANCHORS", "PRESERVE_ACCEPTED_LIGHTING", "PRESERVE_CAMERA_LANGUAGE", "NO_NEW_EXTERNAL_ASSET", "NO_EXECUTABLE_AUTHORITY"]}},
+          "evidenceFrameIds": {"type": "array", "minItems": 1, "maxItems": 24, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+        }
+      }
+    },
+    "deferredIssues": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["issueId", "reason"],
+        "properties": {
+          "issueId": {"$ref": "#/$defs/id"},
+          "reason": {"const": "CONFIDENCE_BELOW_PACKET_FLOOR"}
+        }
+      }
+    },
+    "preservations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["strengthId", "category", "evidenceFrameIds", "rule"],
+        "properties": {
+          "strengthId": {"$ref": "#/$defs/id"},
+          "category": {"enum": ["LIGHTING", "CAMERA_LANGUAGE", "COLOR", "ATMOSPHERE"]},
+          "evidenceFrameIds": {"type": "array", "minItems": 1, "maxItems": 24, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+          "rule": {"enum": ["PRESERVE_ACCEPTED_LIGHTING", "PRESERVE_ACCEPTED_CAMERA_LANGUAGE", "PRESERVE_ACCEPTED_COLOR", "PRESERVE_ACCEPTED_ATMOSPHERE"]}
+        }
+      }
+    },
+    "rerenderSet": {"type": "array", "maxItems": 24, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["semanticCatalogOnly", "allowsPython", "allowsShell", "allowsNetwork", "allowsArbitraryFilesystem", "requiresTypedExecutor"],
+      "properties": {
+        "semanticCatalogOnly": {"const": true},
+        "allowsPython": {"const": false},
+        "allowsShell": {"const": false},
+        "allowsNetwork": {"const": false},
+        "allowsArbitraryFilesystem": {"const": false},
+        "requiresTypedExecutor": {"const": true}
+      }
+    },
+    "planHash": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 96, "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]*$"},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "repositoryUri": {"type": "string", "minLength": 1, "maxLength": 512, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9_./ -]+$"}
+  }
+}
