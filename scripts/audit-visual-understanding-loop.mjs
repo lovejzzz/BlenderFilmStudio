@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import Ajv2020 from 'ajv/dist/2020.js';
 import { canonicalize, canonicalJson, repositoryRoot, sha256 } from './lib/scene-spec.mjs';
 
-const freezeUri = 'specs/ai-native-studio-visual-understanding-tool-freeze.v0.1.json';
+const freezeUri = 'specs/ai-native-studio-visual-understanding-tool-freeze-c1.v0.2.json';
 
 function requireCondition(condition, message) {
   if (!condition) throw new Error(message);
@@ -65,7 +65,7 @@ const expectedPresets = new Set([
   'MID_SCALE_PANEL_HIERARCHY',
 ]);
 const checks = [
-  ['A01_FREEZE_SCHEMA', freeze.value.schemaVersion === 'bfs.visualUnderstandingToolFreeze.v0.1'],
+  ['A01_FREEZE_SCHEMA', freeze.value.schemaVersion === 'bfs.visualUnderstandingToolFreezeC1.v0.2'],
   ['A01B_FREEZE_SELF_HASH', freeze.value.freezeHash === selfHash(freeze.value, 'freezeHash')],
   ['A02_RECEIPT_SCHEMA', receipt.value.schemaVersion === 'bfs.visualUnderstandingLoopReceipt.v0.1' && receipt.value.experimentId === 'PC4-VU1'],
   ['A03_RECEIPT_SELF_HASH', receipt.value.receiptHash === selfHash(receipt.value, 'receiptHash')],

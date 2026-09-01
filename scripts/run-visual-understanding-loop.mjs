@@ -12,7 +12,7 @@ import {
 import { canonicalize, canonicalJson, repositoryRoot, sha256 } from './lib/scene-spec.mjs';
 
 const execFileAsync = promisify(execFile);
-const freezeUri = 'specs/ai-native-studio-visual-understanding-tool-freeze.v0.1.json';
+const freezeUri = 'specs/ai-native-studio-visual-understanding-tool-freeze-c1.v0.2.json';
 
 function requireCondition(condition, message) {
   if (!condition) throw new Error(message);
@@ -37,7 +37,7 @@ async function verifyFreeze() {
   const freezePath = resolveRepositoryUri(freezeUri);
   const freezeBytes = await readFile(freezePath);
   const freeze = JSON.parse(freezeBytes);
-  requireCondition(freeze.schemaVersion === 'bfs.visualUnderstandingToolFreeze.v0.1', 'tool freeze schema mismatch');
+  requireCondition(freeze.schemaVersion === 'bfs.visualUnderstandingToolFreezeC1.v0.2', 'tool freeze schema mismatch');
   requireCondition(freeze.freezeHash === selfHash(freeze, 'freezeHash'), 'tool freeze self hash mismatch');
   for (const input of freeze.inputs) {
     requireCondition(await sha256File(resolveRepositoryUri(input.uri)) === input.sha256, `frozen input drift ${input.uri}`);
@@ -79,7 +79,7 @@ const testRun = await execFileAsync(process.execPath, ['--test', 'tests/visual-r
 });
 requireCondition(testRun.stderr === '' && testRun.stdout.includes('# pass 19') && testRun.stdout.includes('# fail 0'), 'contract tests did not pass 19/19');
 
-await mkdir(resolve(outputRoot, 'logs'), { recursive: false });
+await mkdir(resolve(outputRoot, 'logs'), { recursive: true });
 await writeFile(resolve(outputRoot, 'visual-improvement-plan.json'), firstBytes, { flag: 'wx' });
 await writeFile(resolve(outputRoot, 'logs/contract-tests.tap'), testRun.stdout, { flag: 'wx' });
 

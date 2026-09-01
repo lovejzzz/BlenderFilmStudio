@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "bfs.visualUnderstandingToolFreezeC1.v0.2",
+  "experimentId": "PC4-VU1",
+  "status": "FROZEN_C1_FOR_ONE_FORMAL_TEACHING_SEED_RUN",
+  "preregistration": {
+    "uri": "specs/ai-native-studio-visual-understanding-loop-preregistration.v0.1.json",
+    "sha256": "bdfa0b43cb93a93ded17cb25be66825e0b669590ee52b388f54a38e770ebe73a",
+    "commit": "057c7227123c1de0796596b663146dcd146e770c"
+  },
+  "correction": {
+    "uri": "research/2026-08-31-ai-native-studio-visual-understanding-loop-c1.md",
+    "sha256": "8e8bca46d5efd0dc147992ed1673cc01d3331f8fb0ed406e9dc2699e349ca053",
+    "retainedAttempt01RootAbsent": true,
+    "onlySemanticChange": "mkdir logs with recursive parent creation"
+  },
+  "priorFreeze": {
+    "uri": "specs/ai-native-studio-visual-understanding-tool-freeze.v0.1.json",
+    "sha256": "ccbac05320fea1ad8eb48276e8cd8929bca88ae7a595fd8abd87e4dca0f35a44"
+  },
+  "runtime": {
+    "node": "v22.22.3",
+    "ajv": "8.20.0"
+  },
+  "inputs": [
+    {"uri": "specs/ai-native-studio-visual-understanding-loop-preregistration.v0.1.json", "sha256": "bdfa0b43cb93a93ded17cb25be66825e0b669590ee52b388f54a38e770ebe73a"},
+    {"uri": "research/2026-08-31-ai-native-studio-visual-understanding-loop-c1.md", "sha256": "8e8bca46d5efd0dc147992ed1673cc01d3331f8fb0ed406e9dc2699e349ca053"},
+    {"uri": "specs/ai-native-studio-visual-understanding-tool-freeze.v0.1.json", "sha256": "ccbac05320fea1ad8eb48276e8cd8929bca88ae7a595fd8abd87e4dca0f35a44"},
+    {"uri": "specs/visual-review-packet.v0.1.schema.json", "sha256": "621bfa0598be8f51046fbb876720770493973050862efaa02ebb91ef19710ffd"},
+    {"uri": "specs/visual-assessment.v0.1.schema.json", "sha256": "5d0d354463a4c035622d6d3fedf6819ca90666e783703294d76bd619ca88af93"},
+    {"uri": "specs/visual-improvement-plan.v0.1.schema.json", "sha256": "fe0cc73c06e72451978d2c259629ea4fbfcbfc064cdfce29db45d1adbe544d63"},
+    {"uri": "specs/visual-treatment-catalog.v0.1.json", "sha256": "b1845abf48fa7dd51fa4e9eba3a18685cfd539ee0056546a724c624de446fe33"},
+    {"uri": "specs/fixtures/visual-review/PC4_ATTEMPT03.packet.json", "sha256": "6dfc745612633f85876999a53817d9ff0d3ed7d61f367d1398b9bcb541ede2dc"},
+    {"uri": "specs/fixtures/visual-review/PC4_ATTEMPT03.teacher-assessment.json", "sha256": "3f8652181af16c90469242fa2741de4652106249412ab1184d3cba603e439fac"},
+    {"uri": "scripts/lib/scene-spec.mjs", "sha256": "778607884f2481037bf11ed442b053e3fc72187d12b9f2731363822e21ae588c"},
+    {"uri": "scripts/lib/visual-review-improvement.mjs", "sha256": "fc565bc5682e79ff2a18dfc5950ca5277de6277518c6b18ef65f7a791dcf9a23"},
+    {"uri": "scripts/compile-visual-improvement-plan.mjs", "sha256": "3479afe34c2012f3551e79b7066e348bd26f6baf38687c7d99c41c5c0e0c1541"},
+    {"uri": "scripts/run-visual-understanding-loop.mjs", "sha256": "36f01aebee5a8dd8d0c3e835c6fdd8b132430f9cfde51f99e22082bf0b3cf770"},
+    {"uri": "scripts/audit-visual-understanding-loop.mjs", "sha256": "e457653c6bf78088be33dc7b811d01937ac4185c6fba0fc574d4c589a88af27d"},
+    {"uri": "tests/visual-review-improvement.test.mjs", "sha256": "8b86832d7b39a11a8d8329714b3b1846bddce32a4aa899fdcee7f68ec02bc441"},
+    {"uri": "package.json", "sha256": "0ae6fd22f6832e578686dcf8bd31fbe4f9383fc7b3d5d5e008fb6f076859f4b7"},
+    {"uri": "package-lock.json", "sha256": "87ce244a6fb89db2b856b4d1dedd8924f911b37147254aa6870005aeae732e4d"}
+  ],
+  "formalRun": {
+    "packet": "specs/fixtures/visual-review/PC4_ATTEMPT03.packet.json",
+    "assessment": "specs/fixtures/visual-review/PC4_ATTEMPT03.teacher-assessment.json",
+    "root": "experiments/visual-understanding-loop/PC4-VU1-2026-08-31-attempt-02",
+    "maximums": {
+      "nodeRunnerProcesses": 1,
+      "nodeTestProcesses": 1,
+      "blenderStarts": 0,
+      "renders": 0,
+      "sceneMutations": 0,
+      "networkCalls": 0,
+      "modelCallsDuringCompilerExecution": 0,
+      "shellOrPythonFromAssessment": 0
+    }
+  },
+  "expected": {
+    "contractTestsPassed": 19,
+    "contractTestsFailed": 0,
+    "planDecision": "COMPILED",
+    "operations": 6,
+    "preservations": 2,
+    "rerenderFrames": 3,
+    "independentAuditChecks": 20
+  },
+  "freezeHash": "e0b2b01f3845e536050ff7f7cea2c5898c6585f07a19c7dedf2a73d31d13340c"
+}
