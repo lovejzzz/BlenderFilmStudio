@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6FluidConsequenceF7.v0.11",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_11_ROOT_CREATION",
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-fluid-consequence-f6.v0.10.json",
+    "specHash": "be8a6452ceb5eadcbd444c43750aaa0709f002b1104bfacb5b29046749fcb04b"
+  },
+  "retainedF6VisualRejection": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-10",
+    "machineReceiptHash": "3db275d09f01d39cfc3c6bc28d6299b71f99f90853e9fd77f25613d3d5035bcb",
+    "directVisualReviewHash": "972e29aa140c3356992500c3d967eceb4e737ecd63dbc0e570b2884515a7b66c",
+    "directVisualReviewFileSha256": "febee0281e84afa0d7fdb268097291e2d4f29b3b523a57073cb65d83a5887565",
+    "failureAuditHash": "67f623404e9c4e683e64b86d24d1e3cf4cc2625f898999273d209a2df9c724a4",
+    "failureAuditFileSha256": "6bde325e66c11d8b8f58d67648afe99b43df3f8489e9a6112edf8c0e5d07498e"
+  },
+  "corrections": {
+    "cupEffectorSubframes": 4,
+    "resolutionMax": 192,
+    "timestepsMin": 2,
+    "timestepsMax": 8,
+    "cflCondition": 1.0,
+    "particleNumber": 3,
+    "particleRadius": 1.5,
+    "meshParticleRadius": 2.0,
+    "waterViscosity": {
+      "enabled": true,
+      "base": 1.0,
+      "exponent": 6
+    }
+  },
+  "newMachineQualityGates": {
+    "impactWindow": "derived contact frame through contact plus 8 frames",
+    "minimumVolumeRetentionFraction": 0.4,
+    "minimumLargestConnectedComponentFraction": 0.5,
+    "metrics": [
+      "connected component count",
+      "largest connected component fraction",
+      "closed mesh volume",
+      "mesh surface area",
+      "surface-area-to-volume ratio"
+    ]
+  },
+  "unchanged": [
+    "exact P02 Bullet cause",
+    "CYLINDER collision proxy",
+    "liquid source dimensions",
+    "domain dimensions",
+    "cup and floor effector surface distance 1.5",
+    "5 percent initial and pre-contact containment gates",
+    "impact-window cup-response and on-set gates",
+    "post-contact spill and spread gates",
+    "48-frame render roster and full-clip direct visual review",
+    "offline and resource limits"
+  ],
+  "knownVisualDebt": {
+    "lighting": "The current broad key, similar wall/table values and weak rim separation look flat. Do not mix this correction into F7; if liquid physics passes, preregister a separate lighting-and-camera layer iteration."
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-scene-f7.py",
+      "sha256": "7d8a13ed3c157f33f1e9cd427d1818a7728312aefa32a745523e889c124c8b9c"
+    },
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-feasibility-f7.py",
+      "sha256": "97359990db2cb68aabdece6de1ece6008431ae700fd213118930b0b7610d2833"
+    }
+  ],
+  "freshRoots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-feasibility-attempt-11",
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-11"
+  },
+  "stopRule": "Run once in the exact fresh roots. Retain any machine failure. Require all inherited gates, both new liquid-quality gates, reopen verification and full 48-frame direct visual review before acceptance.",
+  "specHash": "05ca242e2db82ceb02d60818c8ca3c4735de77eaeff0aea78b1ac064b27b0bc3"
+}
