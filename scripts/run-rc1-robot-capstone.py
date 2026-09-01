@@ -12,8 +12,8 @@ from pathlib import Path
 
 
 RESEARCH = Path(__file__).resolve().parents[1]
-WORKSPACE = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-2026-09-01-attempt-01")
-EVIDENCE = RESEARCH / "experiments/robot-capstone/RC1-2026-09-01-attempt-01"
+WORKSPACE = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-2026-09-01-attempt-02")
+EVIDENCE = RESEARCH / "experiments/robot-capstone/RC1-2026-09-01-attempt-02"
 PRODUCT_SOURCE = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-development/source")
 PRODUCT_COMMIT = "0e84ef3b6f79521b4f21a9d12a180dfd9713aab4"
 PRODUCT_PARENT = "b8f65c8a6935dcbe4f47a4d070e1a971dc21563b"
@@ -130,6 +130,14 @@ def main():
 
     build_argv = ["/usr/bin/make", "-s", f"BUILD_DIR={build}", f"BUILD_CMAKE_ARGS=-DLIBDIR={DEPENDENCIES}", "-j", "12", "release"]
     processes.append(command(4, "clean-native-build", build_argv, cwd=source, env=env))
+    built_bundle = build / "bin/Blender.app"
+    product_bundle = build / "bin/Film Studio Engine F0.app"
+    if not built_bundle.is_dir() or product_bundle.exists():
+        raise RuntimeError("C3 bundle rename precondition failed")
+    built_bundle.rename(product_bundle)
+    rename_receipt = {"schemaVersion": "bfs.rc1BundleRename.v0.1", "status": "PASS", "source": str(built_bundle), "destination": str(product_bundle), "sourceAbsentAfter": not built_bundle.exists(), "destinationPresentAfter": product_bundle.is_dir(), "retainedAttempt01FailureHash": "8adebb9bfdcfbe81d1991ac42cff1401a5d85a3a3f5c7ed6809870288b3d0e01"}
+    rename_receipt["renameHash"] = self_hash(rename_receipt, "renameHash")
+    write(EVIDENCE / "bundle-rename.json", rename_receipt)
     binary = build / "bin/Film Studio Engine F0.app/Contents/MacOS/Blender"
     module_root = build / "bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules"
     if not binary.is_file() or not (module_root / "film_studio_physical_performance.py").is_file():
@@ -160,6 +168,8 @@ def main():
         "status": "PASS_PENDING_DIRECT_VISUAL_AND_INDEPENDENT_AUDIT",
         "productCommit": PRODUCT_COMMIT,
         "productParent": PRODUCT_PARENT,
+        "correctionHash": "44408a780b686f847ea2d46486a4fcd2256ff70a066e3697d22bac1d820487e2",
+        "retainedAttempt01FailureHash": "8adebb9bfdcfbe81d1991ac42cff1401a5d85a3a3f5c7ed6809870288b3d0e01",
         "sourceBlendSha256": SOURCE_BLEND_SHA256,
         "performanceSpecHash": json.loads((RESEARCH / SPEC_URI).read_text(encoding="utf-8"))["performanceSpecHash"],
         "binary": {"path": str(binary), "sha256": sha256_file(binary), "bytes": binary.stat().st_size},

@@ -9,8 +9,8 @@ from pathlib import Path
 
 
 RESEARCH = Path(__file__).resolve().parents[1]
-WORKSPACE = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-2026-09-01-attempt-01")
-EVIDENCE = RESEARCH / "experiments/robot-capstone/RC1-2026-09-01-attempt-01"
+WORKSPACE = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-2026-09-01-attempt-02")
+EVIDENCE = RESEARCH / "experiments/robot-capstone/RC1-2026-09-01-attempt-02"
 PRODUCT_COMMIT = "0e84ef3b6f79521b4f21a9d12a180dfd9713aab4"
 PRODUCT_PARENT = "b8f65c8a6935dcbe4f47a4d070e1a971dc21563b"
 AUTHORIZED_PATHS = {"scripts/modules/film_studio_physical_performance.py", "scripts/startup/bl_operators/film_studio_workspace.py"}
@@ -66,6 +66,7 @@ def main():
     compatibility = load("backward-compatibility.json")
     review = load("direct-visual-review.json")
     clip_video = load("clip-video.json")
+    rename = load("bundle-rename.json")
     source = WORKSPACE / "source"
     binary = Path(receipt["binary"]["path"])
     installed_module = Path(receipt["installedModule"]["path"])
@@ -85,6 +86,8 @@ def main():
 
     checks = {
         "receiptPendingReviewAudit": receipt["status"] == "PASS_PENDING_DIRECT_VISUAL_AND_INDEPENDENT_AUDIT",
+        "c3CorrectionBound": receipt["correctionHash"] == "44408a780b686f847ea2d46486a4fcd2256ff70a066e3697d22bac1d820487e2" and receipt["retainedAttempt01FailureHash"] == "8adebb9bfdcfbe81d1991ac42cff1401a5d85a3a3f5c7ed6809870288b3d0e01",
+        "bundleRenameExact": rename["status"] == "PASS" and rename["sourceAbsentAfter"] is True and rename["destinationPresentAfter"] is True,
         "productCommitExact": output(["git", "rev-parse", "HEAD"], source) == PRODUCT_COMMIT,
         "productSourceClean": output(["git", "status", "--porcelain"], source) == "",
         "sourceScopeExact": changed_paths == AUTHORIZED_PATHS,

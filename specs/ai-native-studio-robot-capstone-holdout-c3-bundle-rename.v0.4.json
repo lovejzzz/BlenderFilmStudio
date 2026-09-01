@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRobotCapstoneHoldoutCorrection.v0.4",
+  "correctionId": "RC1-C3-FRESH-ATTEMPT-02-POST-BUILD-BUNDLE-RENAME",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_02_ROOT_CREATION",
+  "purpose": "Correct the formal harness path assumption without changing the frozen product commit, fixture, physics, cinematography, thresholds or counts.",
+  "frozenProduct": {
+    "commit": "0e84ef3b6f79521b4f21a9d12a180dfd9713aab4",
+    "parent": "b8f65c8a6935dcbe4f47a4d070e1a971dc21563b",
+    "sourceMutationAllowed": false
+  },
+  "frozenFixture": {
+    "uri": "specs/fixtures/robot-holdout/RC1.guardian-spring-control.performance-spec.v0.2.json",
+    "sha256": "f78d1708df7386926696519b826955fdb1e59bd738292e5ac0277fce000fcb04",
+    "performanceSpecHash": "d658ff86005fff5b41b0f6911f7bd8679e46f7d60cbcf303263c98300f698076"
+  },
+  "retainedAttempt01": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-2026-09-01-attempt-01",
+    "evidence": "experiments/robot-capstone/RC1-2026-09-01-attempt-01",
+    "failureFileSha256": "858c3894fbde4a0231b730acad6a97e89a933914cbf63b2ff6c01bac05e46b65",
+    "failureHash": "8adebb9bfdcfbe81d1991ac42cff1401a5d85a3a3f5c7ed6809870288b3d0e01",
+    "buildProcessHash": "46673af62d0525af81895ca9a934c01f0a6ff5b14d0d483925bd0593e69cf3c9",
+    "cleanBuilds": 1,
+    "productStarts": 0,
+    "mustRemainUnchanged": true
+  },
+  "attempt02": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-2026-09-01-attempt-02",
+    "evidence": "experiments/robot-capstone/RC1-2026-09-01-attempt-02",
+    "freshBeforeFirstWrite": true,
+    "immutableAfterRun": true
+  },
+  "onlyAllowedToolCorrection": {
+    "before": "The runner resolves Film Studio Engine F0.app immediately after make release even though Blender's build system emits Blender.app.",
+    "after": "After a successful build in the fresh attempt-02 build root, atomically rename that root's Blender.app to Film Studio Engine F0.app when and only when the source exists and the destination does not, then resolve the same binary and installed module paths as PC9.",
+    "acceptedPrecedent": "scripts/run-pc9-physical-archetypes.py lines 136-137",
+    "otherExecutionChangesAllowed": false
+  },
+  "frozenProductTool": {
+    "path": "scripts/run-rc1-robot-capstone-product.py",
+    "sha256": "709b3088609d4f45fdb5e82246943180c4ecf6157346b7d610b183b68b863dfe"
+  },
+  "frozenAcceptance": "All machine thresholds, nine direct visual questions, resource ceilings, process counts and forbidden counters remain exactly those of the RC1 v0.1 preregistration plus C1 and C2.",
+  "resourceCeilings": {
+    "minimumFreeReserveGiB": 100,
+    "projectedWritesGiB": 8,
+    "workspaceBytes": 53687091200,
+    "evidenceBytes": 536870912,
+    "additionalCleanNativeBuilds": 1,
+    "productStarts": 3,
+    "sceneMutatingExecutions": 1,
+    "blendSaves": 1,
+    "reopens": 1,
+    "reviewStillRenders": 3,
+    "contactClipFrameRenders": 48
+  },
+  "stopRule": "Retain attempt-02 and stop on any product source difference, fixture difference, missing or ambiguous bundle pair, build or product-process failure, regression, threshold failure, reopen mismatch, resource overrun or direct visual NO.",
+  "claimCeiling": "A PASS remains one hybrid authored-intention/Bullet-response robot holdout and does not establish broad autonomous filmmaking or advertising-grade photorealism.",
+  "correctionHash": "44408a780b686f847ea2d46486a4fcd2256ff70a066e3697d22bac1d820487e2"
+}
