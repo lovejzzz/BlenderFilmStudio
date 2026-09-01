@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "bfs.visualUnderstandingLoopPreregistration.v0.1",
+  "experimentId": "PC4-VU1",
+  "title": "Reusable visual review to bounded improvement plan",
+  "status": "PREREGISTERED_BEFORE_IMPLEMENTATION_OR_EXECUTION",
+  "problem": "Screenshot-led corrections are currently authored as one-off Blender patches. The product needs a reusable visual interpretation layer that can bind pixel evidence to scene entities and compile model observations into deterministic, auditable, authority-limited improvement plans.",
+  "architecture": {
+    "modelRole": "Produce a strict VisualAssessment from a VisualReviewPacket; it may diagnose and recommend semantic treatments but may not emit or execute Python, shell commands, arbitrary paths, Blender operators or raw scene mutations.",
+    "deterministicRole": "Validate every identity and reference, reject unsupported authority, prioritize issues, map semantic treatments through a frozen allowlist and emit a canonical VisualImprovementPlan with a self hash.",
+    "executorRole": "A later separately tested adapter may translate approved plan operations into typed SceneSpec or BuildPlan changes. PC4-VU1 performs zero scene mutation.",
+    "learningRole": "Accepted and rejected VisualAssessment fixtures are versioned teaching examples. Future model revisions are evaluated against the same contract and holdouts rather than receiving project-specific scripts."
+  },
+  "documents": [
+    "BFS_VISUAL_REVIEW_PACKET",
+    "BFS_VISUAL_ASSESSMENT",
+    "BFS_VISUAL_IMPROVEMENT_PLAN"
+  ],
+  "frozenFixture": {
+    "projectId": "AI_NATIVE_STUDIO_REAL_PROJECT_01",
+    "sceneId": "PC4_HERO_REDESIGN_ATTEMPT_03",
+    "sceneSha256": "339de0032c8598ba5811bc06668ecdf7924e3c49434c8824094508adccc9d940",
+    "frames": [
+      {
+        "shotId": "SHOT_WIDE_APPROACH",
+        "frame": 48,
+        "uri": "experiments/ai-native-studio-post-pb7/PC.4-2026-08-31-mac-m2max-attempt-03/derived/frame-0048.png",
+        "sha256": "9c6005c0bed7e29e173a635440e2e5998089e5cc5d7e6123e3d2683a1bad6bdd"
+      },
+      {
+        "shotId": "SHOT_MEDIUM_CONTACT",
+        "frame": 144,
+        "uri": "experiments/ai-native-studio-post-pb7/PC.4-2026-08-31-mac-m2max-attempt-03/derived/frame-0144.png",
+        "sha256": "4e8ff06ec1f22f2236851570ede593c9a47630997bf70f22f5862acec0473274"
+      },
+      {
+        "shotId": "SHOT_CLOSE_REACTION",
+        "frame": 240,
+        "uri": "experiments/ai-native-studio-post-pb7/PC.4-2026-08-31-mac-m2max-attempt-03/derived/frame-0240.png",
+        "sha256": "01fcd44d8554c64a8df77004058c886f50e2ad88a9e676896dd703a8ef472a74"
+      }
+    ],
+    "retainedFailureUri": "experiments/ai-native-studio-post-pb7/PC.4-2026-08-31-mac-m2max-attempt-03/failure.json",
+    "retainedFailureSha256": "b2b1feca6b91c8444fbd2599ef970f3cf0f4565b1cb10abe3e9c78c28f7c4eab"
+  },
+  "requiredIssueCategories": [
+    "COMPOSITION",
+    "MODELING",
+    "MATERIAL",
+    "ANIMATION",
+    "LIGHTING",
+    "CONTINUITY"
+  ],
+  "allowedTreatments": [
+    "CLEAR_FOREGROUND_OCCLUSION",
+    "REFRAME_FOR_SUBJECT_READABILITY",
+    "REPLACE_PRIMITIVE_JOINT_WITH_LAYERED_ASSEMBLY",
+    "ADD_MID_SCALE_SURFACE_HIERARCHY",
+    "ADD_FACIAL_SEGMENTATION",
+    "EXPAND_PERFORMANCE_BEATS",
+    "PRESERVE_ACCEPTED_LIGHTING",
+    "PRESERVE_ACCEPTED_CAMERA_LANGUAGE"
+  ],
+  "acceptance": {
+    "schemaStrictness": "All three document schemas reject unknown properties and non-finite or out-of-range numeric values.",
+    "identityBinding": "Every frame URI and SHA-256 is verified; every assessment frame, shot and entity reference must exist in the packet.",
+    "evidenceBinding": "Every actionable issue binds at least one exact frame and normalized image region; no whole-project assertion is accepted without visible evidence.",
+    "authorityBoundary": "No document field can carry source code, shell commands, Blender operators, network requests or arbitrary filesystem paths. Output operations are selected only from the frozen semantic treatment catalog.",
+    "determinism": "Two independent compilations of the same canonical packet and assessment produce canonical-exact plan bytes and the same planHash.",
+    "priorityPolicy": "Blocking composition issues precede modeling, animation and polish; confidence below 0.65 is routed to NEEDS_MORE_EVIDENCE and emits no mutation operation.",
+    "strengthPreservation": "The plan explicitly preserves accepted lighting and camera-language strengths while allowing shot-specific reframing.",
+    "negativeControlsMinimum": 12,
+    "fixtureOutcome": "The PC.4 attempt-03 fixture compiles to a plan that clears the named foreground occluders, replaces primitive joint readings, adds head/face structure, reframes the medium and close views and protects lighting/camera strengths.",
+    "executionCounts": {
+      "blenderStarts": 0,
+      "renders": 0,
+      "sceneMutations": 0,
+      "networkCalls": 0,
+      "modelCallsDuringCompilerExecution": 0,
+      "shellOrPythonFromAssessment": 0
+    }
+  },
+  "stopRules": [
+    "Stop before plan emission if a referenced frame hash, shot, entity, category or treatment is unknown.",
+    "Stop before plan emission if assessment data attempts to carry executable or free-form mutation authority.",
+    "Retain a failing evidence root; never weaken a schema or threshold to convert failure into pass.",
+    "Do not translate the plan into Blender changes until the visual understanding compiler and independent negatives pass."
+  ],
+  "nonClaims": [
+    "PC4-VU1 does not prove that a vision model is always aesthetically correct.",
+    "PC4-VU1 does not mutate a .blend file or prove the later executor.",
+    "The first labeled fixture is a teaching seed, not a statistically representative dataset.",
+    "Human taste and final editorial approval remain explicit product inputs."
+  ]
+}
