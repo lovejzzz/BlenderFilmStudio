@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "bfs.rc5DirectVisualReview.v0.1",
+  "status": "FAIL",
+  "reviewer": "Codex direct visual inspection",
+  "reviewMethod": "Inspected all 48 frames through four 12-frame contact sheets, then inspected the three full-resolution key stills and full-resolution frames 20, 22, 24, 26, 28, 30 and 32 around the derived detachment event.",
+  "machineEvidence": {
+    "buildFileSha256": "1a7a17b8dff323cb4ef672fa93c180f89155c1bb2ab9887fb5b1cdad36cd8a1c",
+    "reopenFileSha256": "4f167191ac248213bb0e5d56048c88363258a51c6f9086af03c80f64165946ff",
+    "regressionNegativeFileSha256": "42d8c9b415aafdbe25033a6ff60832d85cbbd0416aecec18c4537da6a69325d1",
+    "renderFileSha256": "66f8d65ce4bb3fa8a8c752fe102f9f85a2c4b4cdee50c487583b4c619ef6719e",
+    "machineStatus": "PASS"
+  },
+  "visualArtifacts": {
+    "causeStillSha256": "55103b32dafbf29ca85d05b01d1663f4d71bead320420618ab5d6bd77a55f92e",
+    "contactStillSha256": "d42b8a48f43f7d4bbf873f16c7021e8993a6ab6e065a0005cf712f9f7f944e82",
+    "effectStillSha256": "34846020c28a1e1ecce7f89a20a1f257a8d7453fa16a5850dc4b8c26b9bb26a7",
+    "contactSheetSha256": [
+      "63ca99e29fbfb907363de3a6fa648e5ebb6fbb61df7818662e13374ea289f467",
+      "70276d2877a76167bcff5e38ed06a0389ac07b9cdc0e82f599d3082eda681473",
+      "0f964ec388e0f1755de0c1c93dea2f4f8d21922b339dece94b235e7f4601734e",
+      "ca63fbe77ace900bd44e431ab33270f11280666052c844ba4b1ad0e679be837a"
+    ],
+    "contactClipSha256": "9616e37361db17269ba3961fbf44491e3c99290a435424cb8cf78baf42877bb9",
+    "framesInspected": 48
+  },
+  "questions": [
+    {
+      "id": 1,
+      "verdict": "YES",
+      "question": "Does the cause frame show a recognizable basketball, three readable bottles and an attached cap before impact?",
+      "observation": "The wide cause shot clearly establishes one worn basketball, three differently filled and labeled bottles, the court, scale cues and attached caps."
+    },
+    {
+      "id": 2,
+      "verdict": "YES",
+      "question": "Is the basketball-to-bottle contact continuous without an obvious gap or penetration?",
+      "observation": "The fixed-camera sequence closes continuously into contact; silhouette overlap reads as foreground occlusion during impact rather than a teleport or visible gap."
+    },
+    {
+      "id": 3,
+      "verdict": "YES",
+      "question": "Does the cap remain visibly attached before the measured primary contact?",
+      "observation": "All bottle tops read as capped before frame 16 and no secondary object appears early."
+    },
+    {
+      "id": 4,
+      "verdict": "NO",
+      "question": "Does cap separation begin only after the collision and remain causally readable?",
+      "observation": "Machine evidence derives separation at frame 24, but the fixed contact camera places the cap behind the ball and bottle cluster, so the separation is not visually readable."
+    },
+    {
+      "id": 5,
+      "verdict": "NO",
+      "question": "Does the cap follow one continuous trajectory without teleporting or a hand-authored-looking jump?",
+      "observation": "The cap trajectory is solver-continuous in measurements but is occluded for the decisive frames; visual continuity cannot be verified from the rendered clip."
+    },
+    {
+      "id": 6,
+      "verdict": "NO",
+      "question": "Does the detached object still read at bottle-cap scale with recognizable cap material and shape?",
+      "observation": "The detached cap never becomes a clearly identifiable silver crimped cap in the reviewed frames or effect still."
+    },
+    {
+      "id": 7,
+      "verdict": "YES",
+      "question": "Do at least two bottles respond continuously while their final poses remain visibly unstaged?",
+      "observation": "All three bottles respond through distinct tilts and rolls; two fall in different directions and one remains upright without symmetry or posed final alignment."
+    },
+    {
+      "id": 8,
+      "verdict": "NO",
+      "question": "Does the secondary response add physical richness without becoming an explosive or chaotic effect?",
+      "observation": "The primary collision is controlled, but the secondary response adds almost no perceptible richness because it is hidden."
+    },
+    {
+      "id": 9,
+      "verdict": "NO",
+      "question": "Does the derived effect shot include the response bottles and detached cap with useful occupancy?",
+      "observation": "The settled effect shot frames the bottles well, but the detached cap is not identifiable or given useful screen separation."
+    },
+    {
+      "id": 10,
+      "verdict": "YES",
+      "question": "Do the court lighting, enclosure, material readability and shot progression still feel filmic without fake debris, particles or camera shake?",
+      "observation": "Warm court light, cool fill, floor reflections and stable framing remain coherent and no decorative effect substitutes for physics."
+    }
+  ],
+  "yesCount": 5,
+  "noCount": 5,
+  "failureReason": "The physical event passes every machine check, but the secondary event is camera-occluded and therefore not communicable as film.",
+  "requiredCorrection": "Derive the contact and effect camera directions from secondary-body screen-space readability, testing bounded generic azimuth candidates and choosing the one with the greatest cap-to-primary projected separation. Do not move any physical object or change simulation.",
+  "reviewHash": "05a239e7291f2b061b4e8fda1bbfaad4d5d61ca906a91961c0db4763cacb3eff"
+}
