@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceF3FailureAudit.v0.1",
+  "status": "PASS",
+  "failureHash": "704aeed01dfa35cd2182ab9925752cbb6bd349eb1febf57cbf2df7bedccd80d5",
+  "failureFileSha256": "32c47bf0ec8ee5f2ccce63d0373eed1b4b89134632afe3f3b2a1763d3e7b3886",
+  "buildFileSha256": "72512d3cf8cac814e98b76c9965280619abff2ad446350ce765eeaeaee565b14",
+  "framesReviewed": 48,
+  "observed": {
+    "contactFrame": 11,
+    "peakCupTiltDegrees": 0.20367177,
+    "impactWindowPeakTiltDegrees": 0.03426402,
+    "cupMaximumX": 1.43650723,
+    "initialOutsideCupFraction": 0.09435484,
+    "derivedSpillFrame": 1,
+    "visualPreContactLeak": true,
+    "visualCupRemainsUpright": true,
+    "visualLiquidBecomesFragmentedFloorStrips": true
+  },
+  "rootCauses": [
+    "The final scene used CONVEX_HULL for the open-tumbler mesh while the accepted calibration used CYLINDER; the collision proxy was not exact-match.",
+    "Initial containment was checked only at frame 1, allowing visible leakage before the derived contact frame.",
+    "The 0.07 m source plus surface reconstruction exceeded the 0.09 m inner radius at frame 1."
+  ],
+  "decision": "Retain attempt-07 as FAIL. F4 may use the exact calibrated CYLINDER collision shape, reduce the liquid source without weakening the 5 percent threshold, and require every pre-contact frame to pass containment.",
+  "auditHash": "46e9ce6a1f6fd34ba97b82a166e6f18d48d35cfad2a3c8317d31af3ffb936cf1"
+}
