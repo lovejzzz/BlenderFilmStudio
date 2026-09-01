@@ -8,10 +8,11 @@ from pathlib import Path
 
 
 RESEARCH = Path(__file__).resolve().parents[1]
-WORK = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-01")
-EVIDENCE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-01"
-EXPECTED_WORK = "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-01"
-EXPECTED_EVIDENCE = "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-01"
+WORK = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-02")
+EVIDENCE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-02"
+RETAINED_FAILURE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-01/failure-receipt.json"
+EXPECTED_WORK = "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-02"
+EXPECTED_EVIDENCE = "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-02"
 
 
 def sha(path):
@@ -62,6 +63,7 @@ def main():
     unexpected_media = [str(path.relative_to(WORK)) for path in WORK.rglob("*") if path.is_file() and path.suffix.lower() in {".png", ".jpg", ".jpeg", ".exr", ".mov", ".mp4"}]
     checks = {
         "exactRoots": str(WORK.resolve()) == EXPECTED_WORK and str(EVIDENCE.resolve()) == EXPECTED_EVIDENCE,
+        "retainedAttempt01Failure": RETAINED_FAILURE.is_file() and json.loads(RETAINED_FAILURE.read_text(encoding="utf-8"))["status"] == "FAIL_CANDIDATE_MODULE_NOT_LOADED",
         "receiptSelfHash": receipt["receiptHash"] == self_hash(receipt, "receiptHash"),
         "receiptPass": receipt["status"].startswith("PASS") and all(receipt["checks"].values()),
         "fiveBoundedProcesses": len(processes) == 5 and [row["index"] for row in processes] == [1, 2, 3, 4, 5] and all(row["exitCode"] == 0 for row in processes),

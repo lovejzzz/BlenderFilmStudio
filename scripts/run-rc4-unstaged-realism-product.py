@@ -35,7 +35,12 @@ parser.add_argument("--module-root", type=Path, required=True)
 args = parser.parse_args(sys.argv[sys.argv.index("--") + 1:])
 
 sys.path.insert(0, str(args.module_root.resolve(strict=True)))
+sys.modules.pop("film_studio_physics_action", None)
+sys.modules.pop("film_studio_physical_look", None)
 import film_studio_physics_action as action
+
+if Path(action.__file__).resolve() != args.module_root.resolve(strict=True) / "film_studio_physics_action.py":
+    raise RuntimeError("candidate physics-action module was not loaded from the frozen module root")
 
 repository = args.repository_root.resolve(strict=True)
 evidence = args.evidence_root.resolve(strict=True)
