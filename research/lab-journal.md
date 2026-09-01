@@ -6735,3 +6735,9 @@ Product commit `5f3b981a…` adds exactly three paths / 702 additions: a strict 
 The first independent audit stopped on a nonexistent numeric tolerance field and is retained at failure self `0283a2f9…`; it started no Blender process. C5 changed only that invalid expression to the frozen `reopenExact=true` requirement plus exact observed 0.0° deltas. Fresh audit-only attempt-06 passed base 21/21 and correction 11/11 with audit hashes `85692e01…` / `74f2cf79…`. Four targets responded at 28/31/31/30, all final tilts were about 90°, all target and post-release actor pose-key counts were zero, and save/reopen deltas were exactly zero.
 
 Direct original-resolution review accepts the product capability but rejects a film-quality claim. Cause, contact, result, grounding and evaluated-result reframing are readable; however frame 28 captures first contact rather than strong propagation, all four bodies settle nearly horizontal, and the stills lack motion blur, deformation and secondary motion. Review/acceptance self hashes are `162b187a…` / `cd334acd…`. PC7 must teach evaluated-motion shot timing and bounded physical richness without ever repairing the outcome with final-pose keys; PC4 robot remains a later capstone.
+
+## J-579 · PC6 validated product source published by ordinary fast-forward
+
+Date: 2026-09-01 · Type: PUBLIC SOURCE FAST-FORWARD · Updated refs / force / tags / releases / binaries / LFS uploads: 1 / 0 / 0 / 0 / 0 / 0
+
+After research acceptance commit `598b5540`, exact product commit `5f3b981a…` was pushed from parent `aa4fff39…` to public `lovejzzz/film-engine/main` by a normal fast-forward. A non-browser GitHub API query returned exact main OID `5f3b981a…`; the public raw `film_studio_causal.py` and local source both hashed to `13c0ede9…`. No force, other ref, tag, release, binary, LFS, signing or notarization operation occurred.

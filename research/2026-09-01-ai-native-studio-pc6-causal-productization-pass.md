@@ -25,6 +25,11 @@ PC6 的结论分成两个互不混淆的层次。
 - 最终 acceptance self hash：
   `cd334acd197029308a2d42f6159acfd05f0c465e2e115e2e8e21b8e2a20e3777`。
 
+验证完成后，`5f3b981a…` 已从 `aa4fff39…` 普通快进发布到 public
+`lovejzzz/film-engine/main`。公网 raw module 与本地 SHA-256 都是
+`13c0ede91cbc5bfc11c0d47a2859069c7905f6df959c79f62bd67b108ff8f560`；
+没有 force、tag、release、binary、LFS、签名或公证操作。
+
 PC7 的唯一正确方向是继续使用真实求解结果：从 evaluated motion 选择传播最强的
 撞击时刻，对初始间距、朝向、摩擦和回弹加入可复现的受控微差，并加入受限的二次
 物理与快门表现。任何为了好看而直接写入倒地姿态的做法仍然禁止。

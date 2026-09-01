@@ -577,6 +577,11 @@ motion. PC6 therefore passes product capability, not filmic realism. The active
 PC7 checkpoint must improve evaluated motion timing and physical richness while
 keeping final target/post-release transforms exclusively solver-owned; the PC4
 robot remains a later capstone holdout.
+The validated source commit was subsequently published to
+`lovejzzz/film-engine/main` by one ordinary non-force fast-forward from
+`aa4fff39…` to `5f3b981a…`; a public raw-file check matched the local causal
+module exactly. No tag, release, binary, LFS, signing or notarization operation
+occurred.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
