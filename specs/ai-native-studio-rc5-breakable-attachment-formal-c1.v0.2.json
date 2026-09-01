@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc5BreakableAttachmentFormalC1.v0.2",
+  "status": "PREREGISTERED_BEFORE_C1_AUDIT_EXECUTION",
+  "baseFormalContract": {
+    "uri": "specs/ai-native-studio-rc5-breakable-attachment-formal.v0.1.json",
+    "specHash": "679a761c82a9209198fc8c7b5beeed48f263ae2c0cafd3d51c6ee3c2c7ee13e1"
+  },
+  "retainedBaseAuditFailure": {
+    "uri": "experiments/physical-richness/RC5-2026-09-01-attempt-01/formal-audit.json",
+    "fileSha256": "c5b3a7f6a44d04a7c78b811a247f49f4996d7e8732808ccd03f57332e61c10c7",
+    "auditHash": "5c65ef1d6adaf6a6eab02d269f5ca8ff471a053fe83a2f6e0bde17f262b98f61",
+    "result": "26_OF_27_FAIL",
+    "onlyFalseCheck": "workMediaAndResources"
+  },
+  "diagnosis": {
+    "cause": "The base auditor searched the entire clean source/build workspace for PNG, JPG, EXR, MOV and MP4 files, so immutable Blender source test fixtures and installed application resources were misclassified as scene render leakage.",
+    "correctScope": "Only the formal scene runtime root is a forbidden render-artifact location; expected source fixtures and application resources remain covered by the source/work manifests and resource ceiling.",
+    "runtime": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/runtime"
+  },
+  "frozenInputs": {
+    "receiptFileSha256": "35cdee8e63fc6015a1ff852b9109953247c4a6f9754a877deea2ad52cf84d6de",
+    "formalVisualReviewFileSha256": "0016113279134379e5b8b83076a50c15b64323916f4c1a76b5ce043d00d4238d",
+    "baseEvidenceManifestSha256": "bd419b740cafcbc9dfd62107bad52a7b571a2d32b73aa4493a36086ef57b0cac",
+    "baseWorkManifestSha256": "aef9297dfcc61c1f0288f088e4edfe9f5005ac89e593a31c5149234e00d381ef"
+  },
+  "correctedAuditor": {
+    "uri": "scripts/audit-rc5-breakable-attachment-formal-c1.py",
+    "sha256": "518c4ae8b3db4a879325a53c7ad4d5c2a96a1600fc9cc7ab3d97d2b221b053b0"
+  },
+  "allowed": [
+    "one read-only C1 audit of the retained formal root",
+    "one new formal-audit-c1.json output",
+    "enumeration of expected source media and forbidden runtime media",
+    "recalculation of work, evidence and reserve resource checks"
+  ],
+  "forbidden": [
+    "modifying or deleting any retained base formal artifact, manifest, receipt or audit",
+    "source clone, checkout, build, Blender start, physics execution, save, render or ffmpeg process",
+    "threshold, fixture, candidate, physical result or visual verdict mutation",
+    "network call, engine remote write, force push, tag, release, signing, notarization or distribution"
+  ],
+  "acceptance": {
+    "retainedBaseHasExactlyOneFalseCheck": true,
+    "runtimeMediaCount": 0,
+    "workAndEvidenceCeilingsUnchanged": true,
+    "combinedAcceptance": "BASE_26_PASS_PLUS_C1_CORRECTED_RESOURCE_SCOPE_PASS",
+    "formalResultMayBeAcceptedOnlyIfC1AllChecksPass": true
+  },
+  "specHash": "da2350031024e27d185401af5537a4d1a8bc39cc8fe7fb34428f5b14cef32563"
+}
