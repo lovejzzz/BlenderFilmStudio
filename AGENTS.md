@@ -30,6 +30,24 @@ exact authorization sentence was supplied.
 
 ## Current operating goal
 
+The current public product baseline is RC5 commit
+`8e18c82548f8716c415e6e1b69fdbbdeef1f1900` on
+`lovejzzz/film-engine/main`. RC5 adds one native Blender Bullet breakable fixed
+constraint to the basketball/three-bottle project while preserving zero typed
+break frames, detached poses, detachment velocities and post-release outcome
+poses. Formal evidence is
+`experiments/physical-richness/RC5-2026-09-01-attempt-01`: machine receipt
+12/12, fresh visual review 10/10, retained base audit 26/27 plus frozen C1
+scope correction 10/10. The base audit failure remains immutable; C1 found zero
+render media in the scene runtime. Publication receipt is
+`experiments/physical-richness/RC5-publication-2026-09-01-attempt-01/receipt.json`.
+Do not call this fracture, deformation or fluid simulation. Preserve RC4/D1/H1
+as exact regressions. The next gate is RC6 curriculum design; select exactly
+one measurable physical degree of freedom before product or scene mutation.
+The latest host preflight is below the conservative 160 GiB new-build threshold,
+so design/evidence work may continue but another clean native build must wait
+for a fresh passing admission.
+
 `F0-SOURCE-FEASIBILITY` is complete: F0.1 through F0.7 all closed as `PASS`
 on the admitted M2 Max host. The measured result supports advancing the direct
 official-Blender thin fork into a product prototype; it does not prove public

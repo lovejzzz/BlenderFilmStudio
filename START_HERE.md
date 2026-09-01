@@ -872,8 +872,8 @@ liquid slosh, deformation, breakage, sound, cross-platform behavior,
 distribution or arbitrary photoreal filmmaking. The next curriculum gate must
 add a new physical degree of freedom such as deformation, fracture or audible
 contact while preserving RC4 as an exact no-pose baseline.
-RC5 breakable-attachment is formally accepted and not yet published. The
-product candidate is one-path commit `8e18c825…` on top of
+RC5 breakable-attachment is formally accepted and published. The one-path
+product commit `8e18c825…` is on top of
 public RC4 `db662438…`. It adds one native Bullet breakable fixed constraint,
 derives the attached bottle from the basketball release ray, and rejects typed
 break frames, detached poses and detachment velocities. The accepted B1 run
@@ -895,9 +895,14 @@ starts. Its result hash is development-exact `6bc858c6…`; machine receipt is
 mistook 3,829 immutable Blender source media fixtures for runtime render
 leakage. Frozen C1 changed only that audit scope, found zero media in the scene
 runtime and passed 10/10 with self hash `bca91646…`. Formal evidence is
-`experiments/physical-richness/RC5-2026-09-01-attempt-01`. No engine remote
-write has occurred. The next action is one ordinary fast-forward publication
-of exact candidate `8e18c825…`, followed by public OID and raw-byte verification.
+`experiments/physical-richness/RC5-2026-09-01-attempt-01`. One ordinary
+fast-forward advanced public `lovejzzz/film-engine/main` from `db662438…` to
+exact `8e18c825…`; Git ref, GitHub API, tree OID and raw module bytes agree.
+There were zero tags, releases, LFS uploads or binary distribution. Publication
+receipt self hash is `815c4cc5…`. The next curriculum gate is RC6 design and
+must choose one measurable physical degree of freedom before mutation. The
+post-build host check is 156 GiB against the conservative 160 GiB clean-build
+threshold, so no further native build may begin until a fresh admission passes.
 
 ## Public routes
 

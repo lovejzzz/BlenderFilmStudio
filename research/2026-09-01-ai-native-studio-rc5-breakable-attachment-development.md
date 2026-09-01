@@ -3,8 +3,8 @@
 ## Result
 
 RC5 development is `PASS_DEVELOPMENT_ACCEPTED`; the later formal clean-build
-attempt is also accepted. The candidate has not yet been published to
-`lovejzzz/film-engine`.
+attempt is also accepted. Exact commit `8e18c825…` is now public on
+`lovejzzz/film-engine/main`.
 
 The accepted candidate is product commit
 `8e18c82548f8716c415e6e1b69fdbbdeef1f1900`, whose only changed path is
@@ -79,6 +79,8 @@ No source, build, Blender, physics, render, visual, threshold or resource action
 was rerun for C1.
 
 Formal evidence is
-`experiments/physical-richness/RC5-2026-09-01-attempt-01`. The exact candidate
-may now proceed to an ordinary fast-forward publication; it is not public at
-the time of this record.
+`experiments/physical-richness/RC5-2026-09-01-attempt-01`. One ordinary
+fast-forward published exact commit `8e18c825…` from public parent `db662438…`.
+Git ref, GitHub API, tree OID and raw source hash agree; no tag, Release, LFS or
+binary was uploaded. Publication evidence is
+`experiments/physical-richness/RC5-publication-2026-09-01-attempt-01`.
