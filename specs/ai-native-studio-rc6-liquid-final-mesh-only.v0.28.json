@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "bfs.rc6LiquidFinalMeshOnlySpec.v0.28",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-FINAL-MESH-ONLY-2026-09-01-ATTEMPT-28",
+  "purpose": "Calibrate resolution-192 liquid surface reconstruction from four independent copies of the accepted immutable data cache without recomputing fluid data.",
+  "toolFreezeParent": "9b8461962caf845676e40d36b31dd257358139c2",
+  "roots": {
+    "retainedWork": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-source-clearance-final-c2-attempt-27",
+    "retainedEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-source-clearance-final-c2-attempt-27",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-final-mesh-only-attempt-28",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-final-mesh-only-attempt-28"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "retainedBakedStateSha256": "f8fc240aafbab017e719ba5cd534cc80d68d74f27cb634bf413747e446294d3d",
+    "retainedWorkManifestFileSha256": "7211ca55d177f9d927dbb32a42436973ae36498f128f541e108a3729bb1e082f",
+    "retainedWorkManifestHash": "1261eebd9d8ee924c4a7100be14a13339507ba30d2884c25e033eb69b5036c3f",
+    "retainedDataManifestHash": "9504742bf4ce94a7fd1d849f883038ad8d64e087b69d8768610cdb653d9a1de2",
+    "retainedReceiptFileSha256": "645c6151cfef6581965efeec0d5ed2f8f46feb4a728e117ef43b9a28838591b2",
+    "retainedAuditFileSha256": "8f5071e70c8f135a09050cc8d0589861a43ccfef00101b8199a1b1d57e59967a",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "engineSourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6"
+  },
+  "fixedConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 7,
+    "resolutionMax": 192,
+    "baseVoxelMeters": 0.0026041667,
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "meshScale": 2,
+    "sourceBottomClearanceMeters": 0.0350000039,
+    "sourceBottomClearanceVoxels": 13.44000149,
+    "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006]
+  },
+  "cells": [
+    {"cellId": "mesh-radius-8p0", "meshParticleRadius": 8.0, "resolution96PhysicalEquivalent": 4.0},
+    {"cellId": "mesh-radius-9p0", "meshParticleRadius": 9.0, "resolution96PhysicalEquivalent": 4.5},
+    {"cellId": "mesh-radius-9p5", "meshParticleRadius": 9.5, "resolution96PhysicalEquivalent": 4.75},
+    {"cellId": "mesh-radius-10p0", "meshParticleRadius": 10.0, "resolution96PhysicalEquivalent": 5.0}
+  ],
+  "selectionRule": "among cells passing unchanged source-volume, temporal-drift, containment, manifold and signed-topology thresholds, minimum absolute source-volume error, then minimum temporal drift, then lower mesh particle radius",
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.0104166667,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "copyAndCacheContract": {
+    "candidateCopies": 4,
+    "retainedMounts": 0,
+    "dataFilesPerCandidate": 14,
+    "meshFilesPerCandidate": 7,
+    "dataHashesMustRemainExact": true,
+    "retainedWorkManifestMustRemainExact": true,
+    "freeMeshOnlyOnCopies": true
+  },
+  "resourceCeilings": {
+    "blenderStarts": 4,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 4,
+    "blendSaves": 4,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 536870912,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 536870912,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on retained manifest drift, copied blend/data mismatch, symlink, process, exact argv, data mutation, cache roster, result identity, source-volume, signed-topology, containment, manifold, render-media or resource failure. Never mount, free or write the retained cache. Recompute zero fluid-data frames.",
+  "claimCeiling": "Four copied-data, seven-frame, resolution-192 mesh-only reconstructions. PASS_FINAL_STATIC may unlock only slow solver-owned tip; it does not prove tip, impact, lighting, render or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-final-mesh-only-scene.py": "2e68cb021c860066a1ec24d301fc3684fdee7c94b13077744b68bf6f6bdd4a0c",
+    "scripts/run-rc6-liquid-final-mesh-only-matrix.py": "62bef5b16268b1870cbf2eebde32463fd7f2295a9f8a1c8fef6f4271a7d63df6",
+    "scripts/audit-rc6-liquid-final-mesh-only-matrix.py": "f8eba28d1f0c9bdc60c6f19943333cade6b6e02853400518cbe1b1d018b1068d"
+  },
+  "specHash": "1a1addc49fea4dc1d14bb9f90968261e3984ca52d4f1fb2a40b65cef38d3e57b"
+}
