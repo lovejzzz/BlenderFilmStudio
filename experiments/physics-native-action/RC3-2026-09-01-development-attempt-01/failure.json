@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "bfs.rc3PhysicsActionDevelopmentFailure.v0.1",
+  "status": "FAIL_RETAINED",
+  "reason": "FIXTURE_SELF_HASH_CANONICALIZATION_AND_RUNNER_ARTIFACT_DETECTION",
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC3-development-attempt-01",
+    "evidence": "experiments/physics-native-action/RC3-2026-09-01-development-attempt-01",
+    "immutable": true
+  },
+  "observed": {
+    "d1BuildProcessExitCode": 0,
+    "d1BuildPythonException": "SELF_HASH_MISMATCH",
+    "d1BuildArtifactCreated": false,
+    "d1ReopenProcessExitCode": 1,
+    "d1ReopenFailure": "MISSING_BLEND_FILE",
+    "h1Starts": 0,
+    "negativeControlStarts": 0
+  },
+  "cause": {
+    "fixtureHash": "RC3 fixtures were hashed with ordinary Python JSON numeric spelling instead of the existing product JavaScript canonical-number contract.",
+    "runner": "Blender returned process exit 0 after the uncaught build-script exception, and the frozen runner checked only the process code before attempting reopen instead of requiring the declared build JSON and blend artifacts."
+  },
+  "counts": {
+    "acceptedBinaryStarts": 2,
+    "sceneMutatingExecutions": 0,
+    "blendSaves": 0,
+    "reopens": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "processes": [
+    {"index": 1, "name": "d1-build", "processHash": "f89ee6b136c553c0f849fdda6a743a18f70e5293e18de7593675d63a48ee44b8"},
+    {"index": 2, "name": "d1-reopen", "processHash": "196d8380555423f8607c4711e1ae7867384a8d95ef07b76cef58a467eda7c04b"}
+  ],
+  "productBytesChangedAfterFreeze": false,
+  "correction": "Use versioned JavaScript-canonical self hashes for both fixtures and a C2 runner in fresh attempt-02 roots that requires each declared artifact immediately after its producing process.",
+  "failureHash": "14ddf0aed3664daa4a72c186ce7b397372b8ee625fd404f07eab000ba2d892b6"
+}

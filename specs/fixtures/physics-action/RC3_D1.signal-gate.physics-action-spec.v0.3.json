@@ -1,0 +1,62 @@
+{
+  "$schema": "bfs.physicsActionSpec.v0.1",
+  "schemaVersion": "bfs.physicsActionSpec.v0.1",
+  "projectId": "RC3-D1-SIGNAL-GATE-GRAPH",
+  "timeline": {"frameStart": 1, "frameEnd": 144, "fps": 24},
+  "world": {"gravityMetersPerSecondSquared": [0.0, 0.0, -9.81], "unitScaleMeters": 1.0},
+  "nodes": [
+    {
+      "id": "rolling_actor",
+      "semanticRole": "initiator",
+      "factory": "GROOVED_CERAMIC_SPHERE",
+      "parameters": {"radiusMeters": 0.16, "materialPreset": "GLAZED_CERAMIC_TEAL"},
+      "initialCondition": {"location": [-2.37357276, 0.169, 0.67938984], "rotationDegrees": [0.0, 0.0, 0.0], "releaseFrame": 1},
+      "rigidBody": {"type": "ACTIVE", "massKg": 0.62, "collisionShape": "SPHERE", "friction": 0.72, "restitution": 0.18, "linearDamping": 0.04, "angularDamping": 0.08}
+    },
+    {
+      "id": "ramp",
+      "semanticRole": "motion_path",
+      "factory": "METRIC_WEDGE_WITH_SIDE_RAILS",
+      "parameters": {"lengthMeters": 2.6, "widthMeters": 1.05, "riseMeters": 0.6, "deckThicknessMeters": 0.08, "materialPreset": "DARK_ARCHITECTURAL_METAL"},
+      "initialCondition": {"location": [-1.45, 0.0, 0.0], "rotationDegrees": [0.0, 0.0, 0.0]},
+      "rigidBody": {"type": "PASSIVE", "collisionShape": "MESH", "friction": 0.76, "restitution": 0.0}
+    },
+    {
+      "id": "light_gate",
+      "semanticRole": "physical_responder",
+      "factory": "HINGED_OCCLUDER_IN_ARCHITECTURAL_APERTURE",
+      "parameters": {"apertureWidthMeters": 0.92, "apertureHeightMeters": 1.02, "shutterThicknessMeters": 0.055, "materialPreset": "RIBBED_BLACKENED_METAL"},
+      "initialCondition": {"location": [0.91, 0.0, 0.55], "rotationDegrees": [0.0, 0.0, 0.0], "releaseFrame": 1},
+      "rigidBody": {"type": "ACTIVE", "massKg": 1.15, "collisionShape": "BOX", "friction": 0.58, "restitution": 0.08, "linearDamping": 0.08, "angularDamping": 0.22}
+    },
+    {
+      "id": "signal_receiver",
+      "semanticRole": "revealed_subject",
+      "factory": "MATTE_RELIEF_SIGNAL_WALL",
+      "parameters": {"widthMeters": 1.36, "heightMeters": 1.2, "materialPreset": "MATTE_BLUE_GRAPHITE"},
+      "initialCondition": {"location": [-0.34, -0.22, 0.018], "rotationDegrees": [0.0, 0.0, 0.0]},
+      "rigidBody": {"type": "PASSIVE", "collisionShape": "BOX", "friction": 0.6, "restitution": 0.0}
+    },
+    {
+      "id": "reveal_light",
+      "semanticRole": "static_light_source",
+      "factory": "STATIC_AREA_LIGHT",
+      "parameters": {"powerWatts": 1050.0, "colorLinearRgb": [1.0, 0.42, 0.16], "sizeMeters": 0.52},
+      "initialCondition": {"location": [2.3, 0.08, 1.8], "rotationDegrees": [0.0, 0.0, 0.0]}
+    }
+  ],
+  "relations": [
+    {"id": "rolling_path", "type": "ROLLS_ON", "source": "rolling_actor", "target": "ramp"},
+    {"id": "primary_impact", "type": "COLLIDES_WITH", "source": "rolling_actor", "target": "light_gate", "contactToleranceMeters": 0.002},
+    {"id": "gate_hinge", "type": "HINGED_TO_WORLD", "source": "light_gate", "axis": "WORLD_Z", "limitsDegrees": [-3.0, 108.0], "solverIterations": 120, "passiveStopOffsetFromUpperLimitDegrees": 5.0},
+    {"id": "light_occlusion", "type": "OCCLUDES_LIGHT_TO", "source": "light_gate", "target": "signal_receiver", "via": "reveal_light"}
+  ],
+  "beats": [
+    {"id": "cause", "deriveFrom": "BEFORE_RELATION_EVENT", "relation": "primary_impact", "offsetFrames": -18},
+    {"id": "contact", "deriveFrom": "FIRST_CONTACT", "relation": "primary_impact"},
+    {"id": "effect", "deriveFrom": "PEAK_ANGULAR_RESPONSE", "node": "light_gate", "afterBeat": "contact"}
+  ],
+  "cinematography": {"policy": "SEMANTIC_CAUSE_CONTACT_EFFECT", "reviewResolution": [960, 540], "clipFrameCount": 48, "motionBlur": {"source": "MEASURED_PROJECTED_MEDIAN_MOTION", "targetBlurPixels": 6.0, "position": "CENTER"}},
+  "forbidden": {"authoredTransformAfterRelease": true, "authoredContactFrame": true, "authoredResponseFrame": true, "authoredFinalPose": true, "animatedLightPowerOrColor": true, "postprocessMotionBlur": true, "projectOrFixtureBranchInProductCode": true, "arbitraryPythonShellNetworkOrFilesystemAuthority": true},
+  "physicsActionSpecHash": "0d03778492f9abb61b14b39255732a6b2bc444e9ab6d7d85ef5dfdc9c93f98f3"
+}

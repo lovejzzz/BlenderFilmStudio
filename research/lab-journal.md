@@ -6850,3 +6850,16 @@ D1/H1 project IDs, titles or fixture hashes. Two versioned tools bind exact
 module/operator bytes, accepted RC2 binary, C1 fixture, unchanged H1, fresh
 roots and five zero-render starts: D1 build/reopen, H1 build/reopen and sixteen
 negative controls.
+
+## J-591 · RC3 development attempt-01 retained before scene mutation
+
+Date: 2026-09-01 · Type: RETAINED TOOL/FIXTURE FAILURE + C2 · Binary starts / scene mutations / renders: 2 / 0 / 0
+
+The product rejected D1 with `SELF_HASH_MISMATCH` because the new fixtures used
+ordinary Python JSON numeric spelling rather than the product's established
+JavaScript-canonical spelling. Blender returned process exit 0 despite that
+uncaught script exception, exposing a second runner defect: it advanced without
+requiring the promised build JSON and blend. Attempt-01 stopped at the missing
+reopen input; H1 and negative starts remained zero. C2 changes only both fixture
+self hashes, fresh roots and immediate artifact-existence gates. Product bytes,
+physics, thresholds and authority remain exact.
