@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "bfs.directVisualReview.v0.1",
+  "experimentId": "PC4-VX1",
+  "iterationId": "PC4_VX1_ATTEMPT03",
+  "reviewer": {
+    "kind": "VISION_MODEL_TEACHER",
+    "version": "GPT5_SCREENSHOT_REVIEW_2026_08_31"
+  },
+  "evidence": [
+    {
+      "frame": 48,
+      "uri": "experiments/visual-execution-loop/PC4-VX1-2026-08-31-attempt-03/review/frame-0048.png",
+      "sha256": "7fa663917c67c5237a1e10669344cea48a77e5289451b219bd7923a87f38acac"
+    },
+    {
+      "frame": 144,
+      "uri": "experiments/visual-execution-loop/PC4-VX1-2026-08-31-attempt-03/review/frame-0144.png",
+      "sha256": "eda952a7156f366d47a77e69f8560bb66528f162004c7247c2020c79f4200ebb"
+    },
+    {
+      "frame": 240,
+      "uri": "experiments/visual-execution-loop/PC4-VX1-2026-08-31-attempt-03/review/frame-0240.png",
+      "sha256": "797b1dc65033f284dd4054240d93c31e6a24a1b0c680ac4e5064a41762190d70"
+    }
+  ],
+  "criteria": [
+    {
+      "id": "WIDE_SILHOUETTE_READABILITY",
+      "status": "FAIL",
+      "observation": "A near black foreground column still cuts through the right center of the wide frame and separates the hero from the action space."
+    },
+    {
+      "id": "MEDIUM_NEGATIVE_SPACE_AND_ACTION_READABILITY",
+      "status": "FAIL",
+      "observation": "Large rectangular overlays fill the medium frame, eliminate negative space, and read as an unordered pile instead of a designed mechanical assembly."
+    },
+    {
+      "id": "CLOSE_FACIAL_HIERARCHY_AND_EXPRESSION",
+      "status": "FAIL",
+      "observation": "The close frame has more layers but the visor, eyes, brow, cheek, and jaw do not form a clear facial hierarchy or readable emotional beat."
+    },
+    {
+      "id": "MID_SCALE_DETAIL_INTEGRATION",
+      "status": "FAIL",
+      "observation": "Added parts project far from the underlying contour and compete at the same scale, increasing clutter rather than creating primary, secondary, and tertiary form hierarchy."
+    },
+    {
+      "id": "LIGHTING_DEPTH_PRESERVATION",
+      "status": "PASS",
+      "observation": "The cyan and coral lighting relationship and chamber depth remain visually coherent."
+    }
+  ],
+  "diagnosis": {
+    "rootCause": "The first typed executor optimized semantic part counts and minimum layers without screen space constraints for silhouette, negative space, contour adherence, or detail density.",
+    "learningRequirements": [
+      "SCREEN_SPACE_OCCLUSION_RATIO",
+      "SUBJECT_NEGATIVE_SPACE_MARGIN",
+      "FACIAL_FEATURE_HIERARCHY",
+      "CONTOUR_FOLLOWING_RELIEF",
+      "DETAIL_DENSITY_CAP",
+      "PRIMARY_SECONDARY_TERTIARY_SCALE_SEPARATION"
+    ],
+    "prohibitedShortcut": "Do not special case this project or manually place named parts."
+  },
+  "verdict": "VISUAL_FAIL_LEARNING_SIGNAL",
+  "machineStatus": "PASS_25_OF_25",
+  "nextAction": "EXTEND_GENERIC_VISUAL_RUBRIC_AND_TYPED_TREATMENTS_BEFORE_NEXT_EXECUTION",
+  "reviewHash": "fef2a147426d617c6e12b9ddcb46dd2d7e391fbb38a111a3281a7e0cb7e628f7"
+}
