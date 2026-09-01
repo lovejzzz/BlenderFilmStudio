@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRobotCapstoneHoldoutCorrection.v0.3",
+  "experimentId": "RC1-ROBOT-CAPSTONE-PHYSICAL-PERFORMANCE-HOLDOUT",
+  "status": "PREREGISTERED_C2_AFTER_DEVELOPMENT_COUNTEREXAMPLE_BEFORE_PRODUCT_COMMIT_OR_FORMAL_ROOT",
+  "base": {
+    "preregistration": "specs/ai-native-studio-robot-capstone-holdout-preregistration.v0.1.json",
+    "preregistrationFileSha256": "5acdc84c4be9a01242db2b1c802732a552529bbb20420b8fc0004d1dfcc33ca1",
+    "preregistrationHash": "ecc705455015f3b51dd539e6d8b88b115ced090cc2c2b84fef556b47dc4ff0c6",
+    "c1Correction": "specs/ai-native-studio-robot-capstone-holdout-c1-semantic-roles.v0.2.json",
+    "c1CorrectionFileSha256": "5a7ab64c354686b7efff5f991620419f991ab93497c61008b0b028e2e189d4e4",
+    "c1CorrectionHash": "09d8b53f4743f34cc17dfa5867cb486048585ed5a2869947cebaa7e03b582ac9",
+    "fixture": "specs/fixtures/robot-holdout/RC1.guardian-spring-control.performance-spec.v0.2.json",
+    "fixtureFileSha256": "f78d1708df7386926696519b826955fdb1e59bd738292e5ac0277fce000fcb04",
+    "performanceSpecHash": "d658ff86005fff5b41b0f6911f7bd8679e46f7d60cbcf303263c98300f698076"
+  },
+  "developmentCounterexample": {
+    "formalRootCreated": false,
+    "productCommitCreated": false,
+    "sceneSaved": false,
+    "closestInwardApproachFrame": 179,
+    "observedPrecontactBulletEquilibriumOffsetMeters": 0.01233727,
+    "observedRawPeakDisplacementMeters": 0.045,
+    "observedRawPeakFrame": 176,
+    "observedRawSettledOffsetMeters": 0.01233727,
+    "cause": "The v0.1 acceptance language conflated the evaluated closest-approach sample used to place the support-surface anchor with the earlier solver contact onset, and measured spring settling from the authored object origin instead of the evaluated precontact Bullet equilibrium."
+  },
+  "correctedMeasurementSemantics": {
+    "anchorFrame": "closest evaluated effector-to-support sample with inward normal velocity inside the frozen search window",
+    "contactFrame": "first Bullet-evaluated mechanism displacement at least 0.0005 m from the precontact equilibrium",
+    "precontactEquilibrium": "median Bullet-evaluated plunger axis coordinate across eight consecutive frames ending at least sixteen frames before the anchor frame",
+    "plungerDisplacement": "absolute signed-axis delta from that precontact equilibrium",
+    "settledResidual": "absolute signed-axis delta from the same precontact equilibrium",
+    "firstResponseDelay": "first response frame minus solver-derived contact frame",
+    "impactPresentationFrame": "Bullet-evaluated peak relative displacement frame",
+    "motionBlurMeasurementFrame": "impact presentation frame selected from the Bullet response, not a manual frame"
+  },
+  "unchanged": {
+    "fixtureBytes": true,
+    "sourceScene": true,
+    "contactSearchWindow": true,
+    "anchorStrategy": true,
+    "mechanismFactory": true,
+    "travelMeters": 0.045,
+    "movingMassKg": 0.18,
+    "stiffnessNewtonPerMeter": 140,
+    "dampingNewtonSecondPerMeter": 3.2,
+    "peakRelativeDisplacementRangeMeters": [0.025, 0.05],
+    "firstResponseAfterContactMaximumFrames": 2,
+    "settledResidualMaximumMeters": 0.002,
+    "settledConsecutiveFrames": 8,
+    "postContactMechanismPoseKeyframes": 0,
+    "machineVisualThresholds": true,
+    "directVisualQuestions": true,
+    "productPathAndLineCeilings": true,
+    "resourceCeilings": true,
+    "finalPoseAuthority": "BLENDER_BULLET_RIGID_BODY_AND_CONSTRAINT"
+  },
+  "claimCeiling": "This correction defines honest solver-relative measurements; it does not claim the revised development run or formal RC1 result passes.",
+  "correctionHash": "b102863fddaa3b51a86d47bb5ed554e47c1888fd19780a235c1347023efd73c8"
+}

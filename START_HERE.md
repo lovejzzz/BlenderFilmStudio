@@ -744,7 +744,15 @@ must satisfy them. RC1-C1 freezes v0.2 fixture hash `d658ff86…`: four environm
 roles and five face-landmark roles are now declarative fixture data only. No
 physical parameter, threshold, direct-review question, source scene, product
 path, final-pose rule or resource ceiling changed. No RC1 product/source/scene
-mutation exists yet.
+mutation existed at C1 freeze. The first unsaved development execution then
+exposed a measurement-definition failure, not a missing Bullet response: the
+finite collider begins response before the closest support-anchor sample, and
+the Generic Spring establishes a stable precontact equilibrium 12.33727 mm from
+the authored object origin. C2 hash `b102863f…` therefore separates anchor
+frame, solver-derived contact onset and precontact equilibrium. It preserves the
+exact 25–50 mm peak, reversal, two-frame response, 2 mm/eight-frame settle,
+visual and zero-final-pose thresholds. No formal root, saved RC1 scene or
+product commit exists yet.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
