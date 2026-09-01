@@ -727,6 +727,18 @@ publication receipt hash is `b2b8e254…`. No force, tag, release, binary, LFS,
 signing or notarization operation occurred. PC9 is closed; the next curriculum
 step may apply these generalized physical rules to the retained robot capstone
 as a holdout, without hand-placing outcomes.
+RC1 is now preregistered before robot product or scene mutation at spec hash
+`ecc70545…`; its declarative performance fixture hash is `19deab68…`. Read-only
+inventory found 183 objects, one 18-bone rig, 32 guardian action curves and a
+working right-hand IK constraint, but zero rigid bodies and zero rigid-body
+constraints. RC1 therefore separates authored intention from physical result:
+the existing armature may drive a kinematic hand collider, while a generic
+spring control derived from the evaluated hand trajectory must compress,
+reverse, settle and choose its final pose through Blender Bullet. The contract
+also closes the prior visual false pass with bidirectional medium occupancy,
+environment-layer preservation and close facial-landmark visibility. Product
+code may consume declarative object bindings but may not branch on robot names,
+performance ID or fixture hash. No RC1 product/source/scene mutation exists yet.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
