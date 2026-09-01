@@ -2,8 +2,9 @@
 
 ## Result
 
-RC5 development is `PASS_DEVELOPMENT_ACCEPTED`. It is not a formal clean-build
-acceptance and has not been published to `lovejzzz/film-engine`.
+RC5 development is `PASS_DEVELOPMENT_ACCEPTED`; the later formal clean-build
+attempt is also accepted. The candidate has not yet been published to
+`lovejzzz/film-engine`.
 
 The accepted candidate is product commit
 `8e18c82548f8716c415e6e1b69fdbbdeef1f1900`, whose only changed path is
@@ -59,8 +60,25 @@ fracture mechanics, deformation, liquid slosh, sound, arbitrary scene quality,
 cross-platform support, production readiness, signing, notarization or public
 distribution.
 
-The next action is to freeze a formal contract against the exact candidate,
-perform a fresh clean native arm64 build, rerun the physical result, reopen,
-RC4/D1/H1 regressions, negative controls, renders, direct visual review and an
-independent audit. Only a formal pass may proceed to an ordinary fast-forward
-publication.
+## Formal result
+
+Formal attempt-01 is accepted. One local-only clone and clean native arm64
+build produced binary SHA-256
+`ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2`.
+Four offline product starts reproduced exact result hash `6bc858c6…`, 20/20 B1
+checks, 7/7 reopen, RC4/D1/H1 regressions, 12/12 negative controls, three stills
+and 48 clip frames. Fresh formal direct review passed 10/10.
+
+The base independent audit is retained at 26/27 `FAIL`: it searched the full
+source/build workspace for media and therefore counted 3,829 immutable Blender
+source fixtures and application resources as scene render leakage. Frozen C1
+changed only that scope to the formal scene `runtime`, found zero leaked media,
+and passed 10/10. Its audit self hash is
+`bca9164656f30757ad646aa2c629230c051c923edc2df375ed7377ea73f533f0`.
+No source, build, Blender, physics, render, visual, threshold or resource action
+was rerun for C1.
+
+Formal evidence is
+`experiments/physical-richness/RC5-2026-09-01-attempt-01`. The exact candidate
+may now proceed to an ordinary fast-forward publication; it is not public at
+the time of this record.

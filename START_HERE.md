@@ -872,8 +872,8 @@ liquid slosh, deformation, breakage, sound, cross-platform behavior,
 distribution or arbitrary photoreal filmmaking. The next curriculum gate must
 add a new physical degree of freedom such as deformation, fracture or audible
 contact while preserving RC4 as an exact no-pose baseline.
-RC5 breakable-attachment development is accepted locally and not yet formal or
-published. The product candidate is one-path commit `8e18c825…` on top of
+RC5 breakable-attachment is formally accepted and not yet published. The
+product candidate is one-path commit `8e18c825…` on top of
 public RC4 `db662438…`. It adds one native Bullet breakable fixed constraint,
 derives the attached bottle from the basketball release ray, and rejects typed
 break frames, detached poses and detachment velocities. The accepted B1 run
@@ -887,9 +887,17 @@ failure. The lesson is not fracture mechanics: it is transferable physical
 secondary-event direction, molded-glass contact ovality and a cache-safe
 derived camera. Accepted development evidence is
 `experiments/physical-richness/RC5-2026-09-01-development-attempt-13` with
-receipt/audit self hashes `396fc68a…` / `b7020a9b…`. No engine remote write has
-occurred. A fresh host check observed 161 GiB free; the next action is a frozen
-formal protocol and fresh clean native build before any ordinary publication.
+receipt/audit self hashes `396fc68a…` / `b7020a9b…`. Formal attempt-01 then used
+one local-only clone, one clean native arm64 build and four offline product
+starts. Its result hash is development-exact `6bc858c6…`; machine receipt is
+12/12, fresh direct review is 10/10, and the new binary SHA-256 is
+`ad08b541…`. The base independent audit is retained at 26/27 `FAIL` because it
+mistook 3,829 immutable Blender source media fixtures for runtime render
+leakage. Frozen C1 changed only that audit scope, found zero media in the scene
+runtime and passed 10/10 with self hash `bca91646…`. Formal evidence is
+`experiments/physical-richness/RC5-2026-09-01-attempt-01`. No engine remote
+write has occurred. The next action is one ordinary fast-forward publication
+of exact candidate `8e18c825…`, followed by public OID and raw-byte verification.
 
 ## Public routes
 
