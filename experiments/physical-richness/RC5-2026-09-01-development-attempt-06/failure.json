@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "RC5_CANDIDATE_EXTENDED_SETTLE_OBSERVATION",
+  "researchCommit": "4b890566d79c4942126b7ebc1acedb556975180d",
+  "candidateModuleSha256": "afe3330e98fe7df8781f77c38cbba4e5f3f609a1b7c29dc38aa4fd1e7d70e5a6",
+  "runnerSha256": "a3bb5dc547dbba8dbdf94c9be427d8171b81a9a1302c58374e0d6a1062bed1a5",
+  "fixtureSpecHash": "7281e7c9101b31ce09269ea96db50f27d0c548d4d938a78fe9b17ec1d4289f57",
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-06",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-06",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "error": {
+    "type": "PhysicsActionError",
+    "reason": "PHYSICS_SETTLE",
+    "message": "no derived ten-frame group settle window; best frames 346-355 angular 0.00597214 translation 0.00323596"
+  },
+  "diagnostic": {
+    "bestWindowFramesInclusive": [346, 355],
+    "maximumAggregateAngularStepDegrees": 0.00597214,
+    "maximumTargetTranslationStepMeters": 0.00323596,
+    "angularThresholdDegrees": 0.25,
+    "translationThresholdMeters": 0.0015,
+    "angularPredicatePassed": true,
+    "translationPredicatePassed": false,
+    "translationThresholdRatio": 2.15730667,
+    "measuredTranslationDecayRatioFromAttempt05": 0.81221644,
+    "measuredIntervalFrames": 139,
+    "extrapolatedAdditionalFramesToThreshold": 513,
+    "interpretation": "Unforced rolling/sliding is decaying continuously but the 15-second horizon remains too short."
+  },
+  "correctionBoundary": "One final bounded horizon extension to frame 1080 may observe natural damping. No deactivation, force, damping, friction, settle threshold or authored outcome change is allowed. If the same predicate still fails, stop horizon extensions and treat the physical model as insufficient.",
+  "counts": {
+    "productStarts": 1,
+    "physicsSimulations": 1,
+    "sceneMutations": 1,
+    "blendSaves": 0,
+    "reopens": 0,
+    "regressionSceneExecutions": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "7519f5a2c66da5cc1bb7188be4d5bf84082a301803ccb47bdd4a352a133b4555"
+}
