@@ -57,6 +57,8 @@ def build():
     result = action.execute_physics_action(repository, args.scene_spec_uri, inspection["inspectionToken"], bpy.context.scene)
     physics = result["physics"]
     attachment = physics["breakableAttachment"]
+    contact_readability = result["cinematography"]["contact"]["secondaryReadability"]
+    effect_readability = result["cinematography"]["effect"]["secondaryReadability"]
     contact = physics["contactFrame"]
     checks = {
         "v04Contract": inspection["contractVersion"] == "bfs.filmStudioPhysicsAction.v0.3" and result["schemaVersion"] == "bfs.physicsActionResult.v0.3",
@@ -65,6 +67,9 @@ def build():
         "constraintConfiguration": attachment["constraintType"] == "FIXED" and attachment["breakingEnabled"] is True and attachment["breakingImpulseThreshold"] == 0.02 and attachment["solverIterations"] == 80 and attachment["attachedBodyCollisionsDisabled"] is True,
         "derivedAttachmentTarget": attachment["attachmentTargetDerivation"]["policy"] == "MINIMUM_DISTANCE_TO_INITIATOR_RELEASE_RAY" and attachment["attachmentTargetDerivation"]["source"] == "METRIC_INITIAL_CONDITIONS_BEFORE_SCENE_MUTATION" and attachment["attachmentTargetDerivation"]["physicalVariationBasisSpecHash"] == "bac28a88028ffaed0b09685059e63c1f4cf23c2ad1b2a79901f54e699d4b1e34" and attachment["attachmentTarget"] == f"CAUSAL_TARGET_{attachment['attachmentTargetDerivation']['selectedMemberIndex'] + 1:03d}",
         "moldedGlassContactGeometry": result["mechanism"]["contactGeometry"]["preset"] == "MOLDED_HOUSEHOLD_GLASS_WITH_CONTACT_OVALITY" and result["mechanism"]["contactGeometry"]["radialAmplitudeMeters"] == 0.00045 and result["mechanism"]["contactGeometry"]["harmonicLobes"] == 2 and result["mechanism"]["contactGeometry"]["visibleMeshIsCollisionHullSource"] is True and result["mechanism"]["contactGeometry"]["solverSleep"] is False,
+        "frozenPhysicalProjection": action._sha256(action._canonical(result["physics"]).encode()) == "97b0fefaa1f7046eb3ec79ae849c965f3552b18cc8412bd7a027e0bf652c872e" and action._sha256(action._canonical(result["authority"]).encode()) == "799f6997c5bcb61ec42f2c8a06dd1e58d946095efa0efae7f32a8061de11de16" and action._sha256(action._canonical(result["mechanism"]).encode()) == "e46fe996baa4ea181426fbe70345f2a3ebbf44c855c917b8381ca38e548b5be0" and action._sha256(action._canonical(result["physicalArchetypes"]).encode()) == "3c610d0b6e66a3d8fb1b345bd4de7348cb06e879f1e931b2c2c4785a9f0339ff",
+        "secondaryCameraReadability": all(row["source"] == "BOUNDED_PROJECTED_SECONDARY_READABILITY" and row["candidateCount"] == 8 and row["allSemanticCentersInFrame"] is True and row["minimumSecondaryCenterSeparationNormalized"] >= 0.06 and row["losingCandidateCameraObjectsRetained"] == 0 for row in (contact_readability, effect_readability)),
+        "causeCameraUnchanged": action._sha256(action._canonical(result["cinematography"]["cause"]).encode()) == "5270b4dc376bebad5e40c1ed05f380324a96431af18fd1b8d321d22aaeea498d",
         "solverAuthority": result["authority"]["postReleaseTransformKeyframes"] == result["authority"]["authoredOutcomeFields"] == result["authority"]["authoredContactResponsePeakOrFinalFrames"] == result["authority"]["authoredBreakFrames"] == result["authority"]["authoredDetachedPoses"] == result["authority"]["authoredDetachmentVelocities"] == 0,
         "staticLights": result["authority"]["lightAnimationChannels"] == 0,
         "bottleResponse": physics["respondingTargetCount"] >= 2,
