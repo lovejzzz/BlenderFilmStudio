@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc6CausalContractProductizationToolFreeze.v0.1",
+  "experimentId": "PC6-CAUSAL-CONTRACT-PRODUCTIZATION",
+  "status": "FROZEN_BEFORE_ATTEMPT01_BUILD_OR_PRODUCT_SCENE_MUTATION",
+  "preregistration": {
+    "uri": "specs/ai-native-studio-pc6-causal-contract-productization-preregistration.v0.1.json",
+    "sha256": "9fce70d3fbdca3aa6564650507845b97607e10a35f4f68d5cd0e4ec6002706ba",
+    "specHash": "be358fc3e130e71079f2493d9c07405674b6a645fb3583c2f17e2f678695292a"
+  },
+  "productSource": {
+    "baseline": "aa4fff39ca5d5c4030dec2b8d0d4f576138787ad",
+    "head": "5f3b981a6d84fd49d2eaafe35645456bf4d669e5",
+    "branch": "codex/pc6-causal-contract",
+    "paths": [
+      {
+        "uri": "scripts/modules/film_studio_causal.py",
+        "sha256": "13c0ede91cbc5bfc11c0d47a2859069c7905f6df959c79f62bd67b108ff8f560"
+      },
+      {
+        "uri": "scripts/startup/bl_operators/film_studio_workspace.py",
+        "sha256": "9d77176959b44bc22c012770d645622b1d58a19f5ffe32511f889c7fac5269e5"
+      },
+      {
+        "uri": "scripts/startup/bl_ui/space_topbar.py",
+        "sha256": "45ea0f3778cbfdd85873575be86f7e5bd5cbe5a983402394be77c50e98a266bd"
+      }
+    ],
+    "changedPaths": 3,
+    "additions": 702,
+    "deletions": 0
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-pc6-causal-product.py",
+      "sha256": "02035b048c5ae397fb7e259f52e369356d9a2e9d123932943387592786472a94",
+      "role": "built-product negative, execute, render, save and reopen helper"
+    },
+    {
+      "uri": "scripts/run-pc6-causal-productization.py",
+      "sha256": "1f7560257f0d0dd8816b1015f6226557255afe7d3c4f973b8b761570084df761",
+      "role": "clean native build, isolated product process and receipt runner"
+    },
+    {
+      "uri": "scripts/audit-pc6-causal-productization.py",
+      "sha256": "3feb4cab4dd8af393a17609399dc50609d05fff3a1e204c1cb483f684e42b360",
+      "role": "independent source, process, physics, framing, reopen and safety auditor"
+    }
+  ],
+  "preBuildChecks": {
+    "productSourceCommittedAndClean": true,
+    "pythonSyntax": "PASS",
+    "readOnlyBuiltProductContractInspection": "PASS",
+    "readOnlyInspectionSceneMutations": 0,
+    "formalBuildRootAbsent": true,
+    "formalEvidenceRootAbsent": true,
+    "freeDiskGiB": 162,
+    "minimumFreeDiskGiB": 100
+  },
+  "entrypoints": {
+    "run": ["python3", "scripts/run-pc6-causal-productization.py"],
+    "audit": ["python3", "scripts/audit-pc6-causal-productization.py"]
+  },
+  "freezeHash": "837bcc7233ff1002e8f9784798c4e2e166cc5c6a89a380c7705e1fd980ba5339"
+}
