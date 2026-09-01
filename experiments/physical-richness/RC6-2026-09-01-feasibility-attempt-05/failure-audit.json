@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceF1FailureAudit.v0.1",
+  "status": "PASS",
+  "retainedRoot": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-05",
+  "failureHash": "41353299a7f70dfbea2e2ed1896272b2cac84e8142e0edbe70dc2cca185677d0",
+  "buildFileSha256": "b63340357480f078911bc0a2bca72072ebd0e342550cb6fffe3e6bb34d8dbd4a",
+  "observed": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "renderCalls": 51,
+    "framesReviewed": 48,
+    "contactFrame": 48,
+    "peakCupTiltDegrees": 0.0,
+    "ballFrame2To48TravelMeters": 0.00003702,
+    "initialOutsideCupFraction": 0.78333333,
+    "maximumOutsideCupFraction": 0.99799035,
+    "maximumFloorSpreadMeters": 1.14931667,
+    "visualVerdict": "REJECT: stationary ball, no cup response, liquid already outside at frame 1, coarse ice-like surface and missing attached ball grooves",
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "checks": {
+    "rootIsRetained": true,
+    "failureSelfHashValid": true,
+    "buildReceiptPresentAndBound": true,
+    "all48FramesReviewed": true,
+    "bulletNonContactConfirmed": true,
+    "preImpactLeakConfirmed": true,
+    "visualRejectionMatchesMetrics": true,
+    "noThresholdWasWeakened": true,
+    "noNetworkOrEngineWrite": true,
+    "nextHypothesisRequiresFreshRoot": true
+  },
+  "passCount": 10,
+  "checkCount": 10,
+  "reusableRule": "A fluid consequence shot must first prove a resolvable container and pre-impact containment. An impactor must receive momentum from an explicit physical actuator or force mechanism, not from an assumed API velocity handoff. Review the full clip for modeling and transform failures before productization.",
+  "auditHash": "1e4c39965b3f25f313e2bb4b8b4c892745f30d59467463bf7df8e48158d32a07"
+}

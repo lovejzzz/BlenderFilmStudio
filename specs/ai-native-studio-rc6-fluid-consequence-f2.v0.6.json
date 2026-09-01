@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6FluidConsequenceF2.v0.6",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_06_ROOT_CREATION",
+  "supersedesHypothesis": "F1_KINEMATIC_VELOCITY_HANDOFF_AND_SUBVOXEL_TUMBLER",
+  "retainedF1Failure": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-05",
+    "failureHash": "41353299a7f70dfbea2e2ed1896272b2cac84e8142e0edbe70dc2cca185677d0",
+    "failureAuditHash": "1e4c39965b3f25f313e2bb4b8b4c892745f30d59467463bf7df8e48158d32a07",
+    "failureAuditFileSha256": "2ee61761764e5d803246ce5eb0e7f130b2fc30cef815a7db6ce529395819604d"
+  },
+  "hypothesis": "A visible kinematic striker can transfer momentum to an otherwise unanimated active basketball through Bullet, tip a solver-resolvable open tumbler, and only then cause initially contained Mantaflow liquid to leave the opening and spread on the floor.",
+  "causalAuthority": {
+    "authored": ["striker waypoints at frames 1, 4, 5 and 7", "initial object geometry and physical parameters", "static cameras and lights"],
+    "solverOwned": ["ball motion", "contact frame", "tumbler translation and rotation", "spill frame", "liquid mesh and spread"],
+    "prohibited": ["ball motion keys", "tumbler outcome keys", "authored spill timing", "authored final liquid mesh", "decorative impact particles", "camera shake as impact substitute"]
+  },
+  "modelingAndResolution": {
+    "ballRadiusMeters": 0.12,
+    "tumblerOuterRadiusMeters": 0.17,
+    "tumblerWallThicknessMeters": 0.05,
+    "liquidRadiusMeters": 0.10,
+    "domainWidthMeters": 1.70,
+    "resolutionMax": 72,
+    "approximateMaximumVoxelSizeMeters": 0.02361112,
+    "minimumWallVoxels": 2.11764606
+  },
+  "acceptanceAdditions": {
+    "initialOutsideCupFractionMaximum": 0.05,
+    "ballHasNoAnimationData": true,
+    "visiblePhysicalStriker": true,
+    "reviewEveryClipFrame": true
+  },
+  "inheritedAcceptance": {
+    "contactFrameBefore": 20,
+    "peakCupTiltDegreesMinimum": 45.0,
+    "liquidMeshVertexCountMinimum": 100,
+    "spillAtOrAfterContact": true,
+    "maximumOutsideCupFractionMinimum": 0.15,
+    "maximumFloorSpreadMetersMinimum": 0.12,
+    "durationFrames": 48,
+    "renderCalls": 51
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-fluid-consequence-scene-f2.py", "sha256": "a634f15df35a207e5f418a95952f7e3d9fba1371140a0e0442251c639d119546"},
+    {"uri": "scripts/run-rc6-fluid-consequence-feasibility-f2.py", "sha256": "d52e1d3d4e932364224b98dde8bd5715472de2faa27cc141fd58cc6d0df6a2c3"}
+  ],
+  "freshRoots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-feasibility-attempt-06",
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-06"
+  },
+  "limits": {
+    "nativeBuilds": 0,
+    "blenderStartsMaximum": 2,
+    "bulletBakesMaximum": 1,
+    "fluidDataBakesMaximum": 1,
+    "fluidMeshBakesMaximum": 1,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytesMaximum": 2147483648,
+    "evidenceBytesMaximum": 134217728
+  },
+  "claimCeiling": "One bounded visible-striker Bullet-to-Mantaflow feasibility scene with pre-impact containment; one-way liquid consequence only, not two-way fluid coupling, production fluid quality or arbitrary scenes.",
+  "stopRule": "Run once in the exact fresh roots. Retain any failure without repair or retry in place.",
+  "specHash": "48b3e4cf05f728799b2e1547c0051dc2eed021c8e6054d529261c9013b0e43eb"
+}
