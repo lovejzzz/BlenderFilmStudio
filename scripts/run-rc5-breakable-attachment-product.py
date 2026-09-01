@@ -153,6 +153,7 @@ def regress_negative():
         ("D1", "specs/fixtures/physics-action/RC3_D1.signal-gate.physics-action-spec.v0.3.json", None),
         ("H1", "specs/fixtures/physics-action/RC3_H1.ball-three-bottles.physics-action-spec.v0.2.json", None),
     ):
+        bpy.ops.wm.read_factory_settings(use_empty=True)
         inspection = action.inspect_physics_action(repository, uri)
         result = action.execute_physics_action(repository, uri, inspection["inspectionToken"], bpy.context.scene)
         checks = {
