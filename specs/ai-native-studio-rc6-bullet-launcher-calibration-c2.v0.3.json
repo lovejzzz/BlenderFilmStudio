@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6BulletLauncherCalibrationC2.v0.3",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_03_ROOT_CREATION",
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-bullet-launcher-calibration-c1.v0.2.json",
+    "specHash": "50521885439331942930513ead35f3f9746ebe3b477e64b711521fb303faa53b"
+  },
+  "retainedAttempt02": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-bullet-launcher-calibration-attempt-02",
+    "resultHash": "e9eee2b4cd36eef4dfe3e8af777d75ccc358e1edcce293abf905bf6d7ea3a49a",
+    "failureAuditHash": "952272b2fb72210dbf257153217d53dfce2e0865dd535ed24a3c21e2119d83d9",
+    "failureAuditFileSha256": "237f02a12de5172ede1a645d25f1483fd649baae921fabad3c8c18b26c86f989"
+  },
+  "hypothesis": "A physically separated 0.22 m-high lane placing the ball center at z=0.34 m can hit a 0.44 m tall, 0.15 m radius tumbler above its center of mass and produce Bullet-owned tipping without airborne or off-set motion.",
+  "changes": {
+    "laneTopMeters": 0.22,
+    "ballCenterZMeters": 0.34,
+    "tumblerHeightMeters": 0.44,
+    "tumblerRadiusMeters": 0.15,
+    "tumblerCenterZMeters": 0.22,
+    "laneCupHorizontalClearanceMeters": 0.15,
+    "contactRadiusSumMeters": 0.27,
+    "maximumCupZMeters": 0.55
+  },
+  "unchanged": ["six striker variants", "mass and friction matrix", "geometric-gap contact", "45 degree impact-window tilt", "on-set x/y/min-z gates", "zero render/save/network"],
+  "tool": {"uri": "scripts/run-rc6-bullet-launcher-calibration-c2.py", "sha256": "0c59474cda39585415032255f73984e321b4d66bf7b992cc810be779ab30174e"},
+  "freshEvidenceRoot": "experiments/physical-richness/RC6-2026-09-01-bullet-launcher-calibration-attempt-03",
+  "stopRule": "Run the exact six variants once in the exact fresh root. Retain failure if none passes all eight gates.",
+  "specHash": "947e5e9d31c33aef8d0a240afd42f37cad8ab159779b89e54e2a1565767069c1"
+}
