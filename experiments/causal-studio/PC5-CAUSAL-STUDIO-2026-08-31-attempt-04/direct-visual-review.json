@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "bfs.causalStudioDirectVisualReview.v0.1",
+  "status": "FAIL",
+  "machineAudit": {
+    "status": "FAIL",
+    "checkPassed": 19,
+    "checkTotal": 20,
+    "failedCheck": "A04_OUTPUT_SELF_HASHES",
+    "auditHash": "4540d099f4d68e2973753293aff1b31f4f32ce64f717af2717e7cdb7adef7344"
+  },
+  "physicsObservation": {
+    "firstTargetResponseFrame": 28,
+    "responseFrames": {"TARGET_Bottle_1": 28, "TARGET_Bottle_2": 29, "TARGET_Bottle_3": 29},
+    "finalTiltDegrees": {"TARGET_Bottle_1": 89.63002868, "TARGET_Bottle_2": 89.63690223, "TARGET_Bottle_3": 89.75108348},
+    "reopenExact": true,
+    "interpretation": "The physical causal result is strong, but the overall attempt remains failed because evidence hashing and visual framing are independent gates."
+  },
+  "frames": [
+    {"shotId": "SETUP", "uri": "review/setup-frame-0026.png", "sha256": "0beb1a44d007ee408559153be9a7fd978df2d7ea6bd25a4687e154a0e4f66d17"},
+    {"shotId": "IMPACT", "uri": "review/impact-frame-0028.png", "sha256": "9c5ca7c0e4c9bc0b6f50c855f05f81d07ead17de73c0adf61f2b2e026c46255f"},
+    {"shotId": "AFTERMATH", "uri": "review/aftermath-frame-0120.png", "sha256": "cf8f06b524af36a5154175998ee7bb9f00f163e339ae99c8ec5245ff20e86e95"}
+  ],
+  "answers": [
+    {"questionId": "V01_MODELS_BEYOND_PLACEHOLDERS", "answer": "YES", "observation": "The orange ball has readable dark channels and procedural grain; bottles read as a family with base, body, shoulder, neck, cap and label bands."},
+    {"questionId": "V02_IMPACT_CAUSALITY_LEGIBLE", "answer": "YES", "observation": "The close frame immediately communicates ball-to-first-bottle contact, although it does not yet show much target reaction."},
+    {"questionId": "V03_ALL_THREE_SEPARATELY_READABLE_SETUP_AND_AFTERMATH", "answer": "NO", "observation": "Setup reads all three; aftermath misses every bottle and retains only a clipped sliver of the ball at frame right."},
+    {"questionId": "V04_CHANGING_CONTACT_SHADOWS_CREATE_WEIGHT", "answer": "NO", "observation": "Setup and impact shadows are strong, but aftermath contains no narrative object from which to judge settling weight."},
+    {"questionId": "V05_EXPOSURE_COLOR_PRESERVE_MATERIAL", "answer": "YES", "observation": "Warm key, cool fill and controlled highlights keep rubber, bottle bodies and label bands distinct."},
+    {"questionId": "V06_THREE_SHOTS_DISTINCTLY_COMMUNICATE_SETUP_IMPACT_RESULT", "answer": "NO", "observation": "Setup and impact work; the result shot is empty because its fixed aim ignored simulated displacement."}
+  ],
+  "additionalFindings": [
+    "A black cyclorama wedge intrudes at the upper-right of SETUP.",
+    "Fixed world-space camera targets are invalid for post-physics review frames.",
+    "The generic correction is evaluated-frame narrative bounds plus measured screen occupancy, not an attempt-specific aftermath coordinate."
+  ],
+  "visualVerdict": "FAIL",
+  "overallVerdict": "FAIL_RETAIN_AND_CORRECT",
+  "reviewHash": "f67f7ca9c0bfeae3723e2770ea1e696dc30debe3f85a9cf3575bf0330a6e03ca"
+}

@@ -6,8 +6,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const specUri = 'specs/ai-native-studio-causal-studio-preregistration.v0.1.json';
-const contextUri = 'specs/ai-native-studio-causal-studio-execution-context-c3.v0.4.json';
-const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze-c3.v0.4.json';
+const contextUri = 'specs/ai-native-studio-causal-studio-execution-context-c4.v0.5.json';
+const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze-c4.v0.5.json';
 function canonical(value) { if (value === null || typeof value !== 'object') return JSON.stringify(value); if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`; return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonical(value[key])}`).join(',')}}`; }
 function shaBytes(value) { return createHash('sha256').update(value).digest('hex'); }
 function shaFile(path) { return shaBytes(readFileSync(path)); }
@@ -55,6 +55,7 @@ gate('A17_SEMANTIC_ROSTER', build.inventory.semanticObjects.dynamic_actor.length
 gate('A18_RESOURCE_CEILINGS', dirBytes(workRoot) <= spec.resourceCeilings.workRootBytes && dirBytes(evidenceRoot) <= spec.resourceCeilings.evidenceRootBytes, { workBytes: dirBytes(workRoot), evidenceBytes: dirBytes(evidenceRoot) });
 gate('A19_FORBIDDEN_COUNTS', receipt.operations.networkCalls === 0 && receipt.operations.externalAssetDownloads === 0 && receipt.operations.engineMutations === 0 && receipt.operations.engineRemoteWrites === 0, receipt.operations);
 gate('A20_SCREENSHOT_SEQUENCE', build.reviews.map(row => row.shotId).join(',') === 'SETUP,IMPACT,AFTERMATH' && build.reviews[0].frame < build.reviews[1].frame && build.reviews[1].frame < build.reviews[2].frame, build.reviews.map(row => ({ shotId: row.shotId, frame: row.frame })));
+gate('A21_EVALUATED_DYNAMIC_FRAMING', build.reviews.every(row => row.framing.dynamicEvaluatedBounds === true && Number(row.framing.afterOccupancy) >= 0.45 && Number(row.framing.afterOccupancy) <= 0.82 && Number(row.framing.negativeSpaceMargin) >= 0.04), build.reviews.map(row => ({ shotId: row.shotId, framing: row.framing })));
 
 const passed = checks.filter(row => row.pass).length;
 const body = {

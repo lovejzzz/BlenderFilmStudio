@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioCausalStudioToolFreezeC4.v0.5",
+  "experimentId": "PC5-CAUSAL-STUDIO",
+  "status": "FROZEN_C4_BEFORE_ATTEMPT05_SCENE_MUTATION",
+  "context": {
+    "uri": "specs/ai-native-studio-causal-studio-execution-context-c4.v0.5.json",
+    "sha256": "626c0e11ab7fe6fa792e67a5937aaf1d4811e7ab3b2db3b28cddcda504f535db",
+    "contextHash": "d281eaeffa00277a7d34e7a4f9291c609460447a14a61dc538b0398235f0227b"
+  },
+  "retainedC3Freeze": {
+    "uri": "specs/ai-native-studio-causal-studio-tool-freeze-c3.v0.4.json",
+    "sha256": "eb5ad6aca990b9839611db06fba8509ed138a4cf98818f8cd38f1dc8d3edc286",
+    "freezeHash": "e6df36a8621fa7bda0b2f4e2709b85bd0219e3f58793364f8407432a871fa4d9"
+  },
+  "tools": [
+    {"uri": "scripts/build-causal-studio.py", "sha256": "33ac640cad3fc8165ffad19700897267f0847d025c9441d8b7730cec561ecf90"},
+    {"uri": "scripts/run-causal-studio.mjs", "sha256": "433620df23a8ca91057af61f9e74afc2c07761c170fcc93e595c89b64ae8cbda"},
+    {"uri": "scripts/audit-causal-studio.mjs", "sha256": "f6ff37acf294232df8269960674b54d0db5307f045a9baee5341bdb538574d66"}
+  ],
+  "visualGeneralization": {
+    "cameraInput": "evaluated world bounds of semantic narrative objects at the selected review frame",
+    "cameraOutput": ["world center", "camera distance", "screen occupancy", "negative-space margin"],
+    "attemptSpecificFinalCoordinates": 0,
+    "occupancyRange": [0.45, 0.82],
+    "minimumNegativeSpaceMargin": 0.04,
+    "directScreenshotReviewStillRequired": true
+  },
+  "evidenceCorrection": {
+    "pythonOutputFloatEncoding": "deterministic decimal string before canonical self-hash",
+    "auditorNumericComparison": "explicit Number conversion",
+    "physicsThresholdChange": false
+  },
+  "staticChecks": {"pythonCompile": "PASS", "runnerNodeSyntax": "PASS", "auditorNodeSyntax": "PASS"},
+  "entrypoints": {"run": ["node", "scripts/run-causal-studio.mjs"], "audit": ["node", "scripts/audit-causal-studio.mjs"]},
+  "freezeHash": "9db6f29560d208e8adab772f70fcfafcd4f5165afed2fae546dcc27223371404"
+}

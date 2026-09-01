@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 import bpy
+from bpy_extras.object_utils import world_to_camera_view
 from mathutils import Vector
 
 
@@ -31,7 +32,17 @@ def self_hash(value, field):
 
 
 def write_record(path, body, field):
-    value = dict(body)
+    def normalize(row):
+        if isinstance(row, float):
+            if not math.isfinite(row):
+                raise RuntimeError("NON_FINITE_RECORD_NUMBER")
+            return "0" if row == 0.0 else format(row, ".12g")
+        if isinstance(row, list):
+            return [normalize(value) for value in row]
+        if isinstance(row, dict):
+            return {key: normalize(value) for key, value in row.items()}
+        return row
+    value = normalize(dict(body))
     value[field] = self_hash(value, field)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
@@ -262,24 +273,14 @@ def create_floor_and_backdrop(mats):
     floor["semantic_role"] = "ground"
     add_rigid_body(floor, "PASSIVE", "BOX", 1.0, 0.72, 0.08, 0.0, 0.0)
 
-    x0, x1 = -9.0, 9.0
-    profile = [(2.9, 0.015), (3.7, 0.20), (4.35, 0.95), (4.60, 2.0), (4.60, 6.5)]
-    vertices = [(x, y, z) for x in (x0, x1) for y, z in profile]
-    faces = []
-    count = len(profile)
-    for index in range(count - 1):
-        faces.append((index, index + 1, count + index + 1, count + index))
-    mesh = bpy.data.meshes.new("ENV_Cyclorama_MESH")
-    mesh.from_pydata(vertices, [], faces)
-    mesh.update()
-    backdrop = bpy.data.objects.new("ENV_Cyclorama", mesh)
-    bpy.context.collection.objects.link(backdrop)
+    bpy.ops.mesh.primitive_cube_add(location=(0.0, 5.1, 3.25), scale=(10.0, 0.10, 3.25))
+    backdrop = bpy.context.object
+    backdrop.name = "ENV_StudioBackdrop"
     backdrop.data.materials.append(mats["backdrop"])
     backdrop["semantic_role"] = "studio_environment"
-    bevel = backdrop.modifiers.new("Cyclorama_Soften", "BEVEL")
-    bevel.width = 0.18
-    bevel.segments = 8
-    smooth_object(backdrop)
+    bevel = backdrop.modifiers.new("Backdrop_Edge_Soften", "BEVEL")
+    bevel.width = 0.10
+    bevel.segments = 4
     return floor, backdrop
 
 
@@ -453,7 +454,74 @@ def initial_clearance(ball, bottles, ball_radius):
     return clearances
 
 
-def render_reviews(scene, cameras, physics, evidence_root):
+def projected_bounds(scene, camera, objects):
+    points = []
+    for obj in objects:
+        if obj.type != "MESH":
+            continue
+        evaluated = obj.evaluated_get(bpy.context.evaluated_depsgraph_get())
+        points.extend([world_to_camera_view(scene, camera, evaluated.matrix_world @ Vector(corner)) for corner in evaluated.bound_box])
+    visible = [point for point in points if point.z > 0.0]
+    if not visible:
+        raise RuntimeError("NO_VISIBLE_NARRATIVE_BOUNDS")
+    return {"x0": min(point.x for point in visible), "x1": max(point.x for point in visible), "y0": min(point.y for point in visible), "y1": max(point.y for point in visible)}
+
+
+def world_bounds(objects):
+    points = []
+    depsgraph = bpy.context.evaluated_depsgraph_get()
+    for obj in objects:
+        if obj.type != "MESH":
+            continue
+        evaluated = obj.evaluated_get(depsgraph)
+        points.extend([evaluated.matrix_world @ Vector(corner) for corner in evaluated.bound_box])
+    minimum = Vector((min(point.x for point in points), min(point.y for point in points), min(point.z for point in points)))
+    maximum = Vector((max(point.x for point in points), max(point.y for point in points), max(point.z for point in points)))
+    return minimum, maximum
+
+
+def fit_evaluated_narrative_bounds(scene, camera, objects, desired_occupancy):
+    minimum, maximum = world_bounds(objects)
+    center = (minimum + maximum) / 2.0
+    forward = camera.matrix_world.to_quaternion() @ Vector((0.0, 0.0, -1.0))
+    forward.normalize()
+    radius = max(0.25, (maximum - minimum).length / 2.0)
+    distance = max(2.0, radius * 3.0)
+    for _ in range(6):
+        camera.location = center - forward * distance
+        point_camera(camera, center)
+        bpy.context.view_layer.update()
+        rect = projected_bounds(scene, camera, objects)
+        observed = max(rect["x1"] - rect["x0"], rect["y1"] - rect["y0"])
+        distance *= max(0.55, min(1.8, observed / desired_occupancy))
+    camera.location = center - forward * distance
+    point_camera(camera, center)
+    bpy.context.view_layer.update()
+    rect = projected_bounds(scene, camera, objects)
+    observed = max(rect["x1"] - rect["x0"], rect["y1"] - rect["y0"])
+    margin = min(rect["x0"], rect["y0"], 1.0 - rect["x1"], 1.0 - rect["y1"])
+    if observed > 0.82 or margin < 0.04:
+        expansion = max(observed / 0.76, 0.04 / max(margin, 0.005))
+        distance *= min(2.5, max(1.0, expansion))
+        camera.location = center - forward * distance
+        point_camera(camera, center)
+        bpy.context.view_layer.update()
+        rect = projected_bounds(scene, camera, objects)
+        observed = max(rect["x1"] - rect["x0"], rect["y1"] - rect["y0"])
+        margin = min(rect["x0"], rect["y0"], 1.0 - rect["x1"], 1.0 - rect["y1"])
+    return {
+        "dynamicEvaluatedBounds": True,
+        "worldMinimum": [round(value, 8) for value in minimum],
+        "worldMaximum": [round(value, 8) for value in maximum],
+        "worldCenter": [round(value, 8) for value in center],
+        "cameraLocation": [round(value, 8) for value in camera.location],
+        "targetOccupancy": desired_occupancy,
+        "afterOccupancy": round(observed, 8),
+        "negativeSpaceMargin": round(margin, 8),
+    }
+
+
+def render_reviews(scene, cameras, physics, evidence_root, narrative_objects):
     first = physics["firstTargetContactFrame"]
     if first is None:
         frames = {"SETUP": 1, "IMPACT": 60, "AFTERMATH": 120}
@@ -462,14 +530,16 @@ def render_reviews(scene, cameras, physics, evidence_root):
     review_root = evidence_root / "review"
     review_root.mkdir(parents=True, exist_ok=True)
     results = []
+    occupancies = {"SETUP": 0.58, "IMPACT": 0.72, "AFTERMATH": 0.60}
     for shot_id in ("SETUP", "IMPACT", "AFTERMATH"):
         frame = frames[shot_id]
         scene.frame_set(frame)
         scene.camera = cameras[shot_id]
+        framing = fit_evaluated_narrative_bounds(scene, cameras[shot_id], narrative_objects, occupancies[shot_id])
         path = review_root / f"{shot_id.lower()}-frame-{frame:04d}.png"
         scene.render.filepath = str(path)
         bpy.ops.render.render(write_still=True)
-        results.append({"shotId": shot_id, "frame": frame, "camera": cameras[shot_id].name, "uri": f"review/{path.name}", "sha256": sha256_file(path), "bytes": path.stat().st_size})
+        results.append({"shotId": shot_id, "frame": frame, "camera": cameras[shot_id].name, "framing": framing, "uri": f"review/{path.name}", "sha256": sha256_file(path), "bytes": path.stat().st_size})
     return results
 
 
@@ -545,7 +615,7 @@ def main():
         scene.frame_set(1)
         bpy.ops.wm.save_as_mainfile(filepath=str(blend_path), check_existing=False)
         physics = simulate(scene, ball, bottles)
-        reviews = render_reviews(scene, cameras, physics, evidence_root)
+        reviews = render_reviews(scene, cameras, physics, evidence_root, [ball, *bottles, *seams, *details])
         inventory = asset_inventory(ball, bottles, seams, details, cameras, lights, floor, backdrop)
         build = write_record(evidence_root / "build.json", {
             "schemaVersion": "bfs.causalStudioBuild.v0.1",

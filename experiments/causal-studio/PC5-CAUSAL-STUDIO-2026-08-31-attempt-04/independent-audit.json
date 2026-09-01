@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "bfs.causalStudioIndependentAudit.v0.1",
+  "status": "FAIL",
+  "machineVerdict": "FAIL",
+  "visualVerdict": "PENDING_DIRECT_SCREENSHOT_REVIEW",
+  "overallVerdict": "PENDING_DIRECT_SCREENSHOT_REVIEW",
+  "checkPassed": 19,
+  "checkTotal": 20,
+  "checks": [
+    {
+      "id": "A01_SPEC_SELF_HASH",
+      "pass": true,
+      "observation": "dd90142126584d23207009c1c352bd52bf76fe9b0af25afaf8b7c1919a7bfec5"
+    },
+    {
+      "id": "A02_CONTEXT_AND_FREEZE_SELF_HASH",
+      "pass": true,
+      "observation": {
+        "contextHash": "ea9e2bf2e3a2f8d94f39ddb50da7226843f7434460b056a1e55a53e51c960e58",
+        "freezeHash": "e6df36a8621fa7bda0b2f4e2709b85bd0219e3f58793364f8407432a871fa4d9"
+      }
+    },
+    {
+      "id": "A03_TOOL_BINDINGS",
+      "pass": true,
+      "observation": null
+    },
+    {
+      "id": "A04_OUTPUT_SELF_HASHES",
+      "pass": false,
+      "observation": null
+    },
+    {
+      "id": "A05_BINARY_IDENTITY",
+      "pass": true,
+      "observation": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6"
+    },
+    {
+      "id": "A06_PROCESS_BOUND",
+      "pass": true,
+      "observation": [
+        {
+          "mode": "build",
+          "exitCode": 0
+        },
+        {
+          "mode": "reopen",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "id": "A07_RENDER_BOUND",
+      "pass": true,
+      "observation": [
+        {
+          "bytes": 614923,
+          "camera": "CAM_Setup",
+          "frame": 26,
+          "sha256": "0beb1a44d007ee408559153be9a7fd978df2d7ea6bd25a4687e154a0e4f66d17",
+          "shotId": "SETUP",
+          "uri": "review/setup-frame-0026.png"
+        },
+        {
+          "bytes": 704637,
+          "camera": "CAM_Impact",
+          "frame": 28,
+          "sha256": "9c5ca7c0e4c9bc0b6f50c855f05f81d07ead17de73c0adf61f2b2e026c46255f",
+          "shotId": "IMPACT",
+          "uri": "review/impact-frame-0028.png"
+        },
+        {
+          "bytes": 521668,
+          "camera": "CAM_Aftermath",
+          "frame": 120,
+          "sha256": "cf8f06b524af36a5154175998ee7bb9f00f163e339ae99c8ec5245ff20e86e95",
+          "shotId": "AFTERMATH",
+          "uri": "review/aftermath-frame-0120.png"
+        }
+      ]
+    },
+    {
+      "id": "A08_PROCEDURAL_ASSETS",
+      "pass": true,
+      "observation": {
+        "ballChannelCount": 3,
+        "bottleCount": 3,
+        "bottleDetailObjectCount": 9,
+        "bottleProfileStages": [
+          "base",
+          "body",
+          "shoulder",
+          "neck",
+          "cap",
+          "label"
+        ]
+      }
+    },
+    {
+      "id": "A09_RIGID_BODY_CAUSALITY",
+      "pass": true,
+      "observation": {
+        "finalPoseKeyframes": {
+          "ACTOR_SportsBall": false,
+          "TARGET_Bottle_1": false,
+          "TARGET_Bottle_2": false,
+          "TARGET_Bottle_3": false
+        },
+        "launch": {
+          "mode": "KINEMATIC_TO_DYNAMIC_RIGID_BODY_RELEASE",
+          "postReleasePoseKeyframes": 0,
+          "releaseFrame": 27
+        }
+      }
+    },
+    {
+      "id": "A10_INITIAL_NO_PENETRATION",
+      "pass": true,
+      "observation": 0.12400001
+    },
+    {
+      "id": "A11_CONTACT_WINDOW",
+      "pass": true,
+      "observation": 28
+    },
+    {
+      "id": "A12_FORWARD_TRAVEL",
+      "pass": true,
+      "observation": 2.65686291
+    },
+    {
+      "id": "A13_ALL_THREE_KNOCKED_DOWN",
+      "pass": true,
+      "observation": {
+        "TARGET_Bottle_1": 89.63002868,
+        "TARGET_Bottle_2": 89.63690223,
+        "TARGET_Bottle_3": 89.75108348
+      }
+    },
+    {
+      "id": "A14_FINITE_TRANSFORMS",
+      "pass": true,
+      "observation": null
+    },
+    {
+      "id": "A15_REOPEN_CAUSAL_ORDER",
+      "pass": true,
+      "observation": {
+        "build": {
+          "TARGET_Bottle_1": 28,
+          "TARGET_Bottle_2": 29,
+          "TARGET_Bottle_3": 29
+        },
+        "reopen": {
+          "TARGET_Bottle_1": 28,
+          "TARGET_Bottle_2": 29,
+          "TARGET_Bottle_3": 29
+        }
+      }
+    },
+    {
+      "id": "A16_REOPEN_FINAL_TILTS",
+      "pass": true,
+      "observation": {
+        "build": {
+          "TARGET_Bottle_1": 89.63002868,
+          "TARGET_Bottle_2": 89.63690223,
+          "TARGET_Bottle_3": 89.75108348
+        },
+        "reopen": {
+          "TARGET_Bottle_1": 89.63002868,
+          "TARGET_Bottle_2": 89.63690223,
+          "TARGET_Bottle_3": 89.75108348
+        }
+      }
+    },
+    {
+      "id": "A17_SEMANTIC_ROSTER",
+      "pass": true,
+      "observation": {
+        "camera": [
+          "CAM_Setup",
+          "CAM_Impact",
+          "CAM_Aftermath"
+        ],
+        "dynamic_actor": [
+          "ACTOR_SportsBall"
+        ],
+        "ground": [
+          "GROUND_StudioFloor"
+        ],
+        "lights": [
+          "LIGHT_Key",
+          "LIGHT_Fill",
+          "LIGHT_Rim"
+        ],
+        "studio_environment": [
+          "ENV_Cyclorama"
+        ],
+        "target_group": [
+          "TARGET_Bottle_1",
+          "TARGET_Bottle_2",
+          "TARGET_Bottle_3"
+        ]
+      }
+    },
+    {
+      "id": "A18_RESOURCE_CEILINGS",
+      "pass": true,
+      "observation": {
+        "workBytes": 223137,
+        "evidenceBytes": 2059244
+      }
+    },
+    {
+      "id": "A19_FORBIDDEN_COUNTS",
+      "pass": true,
+      "observation": {
+        "blenderStarts": 2,
+        "renderCalls": 3,
+        "retainedReviewPngs": 3,
+        "networkCalls": 0,
+        "externalAssetDownloads": 0,
+        "engineMutations": 0,
+        "engineRemoteWrites": 0
+      }
+    },
+    {
+      "id": "A20_SCREENSHOT_SEQUENCE",
+      "pass": true,
+      "observation": [
+        {
+          "shotId": "SETUP",
+          "frame": 26
+        },
+        {
+          "shotId": "IMPACT",
+          "frame": 28
+        },
+        {
+          "shotId": "AFTERMATH",
+          "frame": 120
+        }
+      ]
+    }
+  ],
+  "bindings": {
+    "preregistration": {
+      "uri": "specs/ai-native-studio-causal-studio-preregistration.v0.1.json",
+      "sha256": "dacb3328daf5b1b68e7cabd2a6fb161705d7be3b6d598a1ce7b6a7edb5065e30",
+      "specHash": "dd90142126584d23207009c1c352bd52bf76fe9b0af25afaf8b7c1919a7bfec5"
+    },
+    "context": {
+      "uri": "specs/ai-native-studio-causal-studio-execution-context-c3.v0.4.json",
+      "sha256": "225078a60ed60111985436898bdc7d899f5cc11f70d6ad921f47a94bb7d6fdf1",
+      "contextHash": "ea9e2bf2e3a2f8d94f39ddb50da7226843f7434460b056a1e55a53e51c960e58"
+    },
+    "toolFreeze": {
+      "uri": "specs/ai-native-studio-causal-studio-tool-freeze-c3.v0.4.json",
+      "sha256": "eb5ad6aca990b9839611db06fba8509ed138a4cf98818f8cd38f1dc8d3edc286",
+      "freezeHash": "e6df36a8621fa7bda0b2f4e2709b85bd0219e3f58793364f8407432a871fa4d9"
+    },
+    "receipt": {
+      "uri": "experiments/causal-studio/PC5-CAUSAL-STUDIO-2026-08-31-attempt-04/receipt.json",
+      "sha256": "7e683f923c46cf7140be1c08c3a4f14623bcc0ec12286e171ce1b37a146c310d",
+      "receiptHash": "f4061864fbb2a5912140d18d1998617e5812cfab6992410481bc7ec42e0b1ad6"
+    }
+  },
+  "auditHash": "4540d099f4d68e2973753293aff1b31f4f32ce64f717af2717e7cdb7adef7344"
+}
