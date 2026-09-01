@@ -577,15 +577,22 @@ motion. PC6 therefore passes product capability, not filmic realism. The active
 PC7 checkpoint must improve evaluated motion timing and physical richness while
 keeping final target/post-release transforms exclusively solver-owned; the PC4
 robot remains a later capstone holdout.
-PC7 is preregistered at `86de8cc8…` with a frozen five-domino v0.2 fixture:
-impact is selected by evaluated propagated angular motion, aftermath by an
-eight-frame settle rule, and bounded SHA-256-derived initial-condition variation
-is allowed while all authored final conditions remain forbidden. Formal roots
-remain fresh. The one-path implementation is now frozen at product commit
-`c7eece67…` (116 additions / 15 deletions); a pre-formal smoke reproduced the
-v0.1 four-target result exactly and selected frames 38/86 for the new impact /
-aftermath. Tool freeze self hash is `66824099…`; the next action is the fresh
-native build and 27-render formal product run.
+PC7 is now accepted. Its frozen five-domino v0.2 fixture selects impact from
+evaluated propagated angular motion, selects aftermath with an eight-frame
+settle rule, and permits only bounded SHA-256-derived initial-condition
+variation. The one-path product commit `c7eece67…` (116 additions / 15
+deletions) passed a clean native build, 12 authority attacks, three product
+starts, three still renders, a bound 24-frame impact clip and exact save/reopen.
+Independent audit passed `27/27`; receipt/audit/direct-review/acceptance self
+hashes are `403e2c91…` / `91789976…` / `c1654213…` / `39ebb081…`. All five
+targets respond at frames 28/29/29/30/31. Frame 38 is the measured motion peak
+with all five targets active and `30.55164633°` aggregate angular step; frame 86
+is the first accepted settled window. Final target and post-release actor pose
+keys remain zero, while solver-owned final tilts vary from 62.32° to 90.00°.
+Direct inspection accepts visible continuous propagation and an unstaged
+aftermath, but not photoreal film quality. PC8 must preserve this exact primary
+Bullet solve while adding shutter-visible motion, contact and bounded secondary
+physical realism; effects may not conceal weak motion or author final poses.
 The validated source commit was subsequently published to
 `lovejzzz/film-engine/main` by one ordinary non-force fast-forward from
 `aa4fff39…` to `5f3b981a…`; a public raw-file check matched the local causal

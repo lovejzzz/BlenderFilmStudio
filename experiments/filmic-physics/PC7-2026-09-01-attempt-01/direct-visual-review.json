@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "bfs.pc7FilmicPhysicsDirectVisualReview.v0.1",
+  "status": "PASS_FILMIC_PHYSICS_SCOPE_WITH_REALISM_GAPS",
+  "reviewMethod": "DIRECT_ORIGINAL_RESOLUTION_INSPECTION_OF_THREE_BOUND_STILLS_AND_SIX_FRAME_CONTACT_SHEET_FROM_ALL_TWENTY_FOUR_BOUND_CLIP_FRAMES",
+  "machineAudit": {
+    "status": "PASS",
+    "checkPassed": 27,
+    "checkTotal": 27,
+    "auditFileSha256": "75aef98eca02217d5d805be8ce322c80c78b4b9393c6451eb9eb1b65510014a2",
+    "auditHash": "917899768f5fcf39b57f1c6e5af2ad5f21bbc259b15aad03475b92eacacaee38",
+    "receiptHash": "403e2c912a63b29a38449977319de186c190590d903c5ca3b42e04da65916b26"
+  },
+  "physicsObservation": {
+    "physicsSolver": "BLENDER_BULLET_RIGID_BODY",
+    "responseFrames": {
+      "CAUSAL_TARGET_001": 28,
+      "CAUSAL_TARGET_002": 29,
+      "CAUSAL_TARGET_003": 29,
+      "CAUSAL_TARGET_004": 30,
+      "CAUSAL_TARGET_005": 31
+    },
+    "finalTiltDegrees": {
+      "CAUSAL_TARGET_001": 89.99999945,
+      "CAUSAL_TARGET_002": 90.00001103,
+      "CAUSAL_TARGET_003": 62.68717712,
+      "CAUSAL_TARGET_004": 62.31751162,
+      "CAUSAL_TARGET_005": 89.99997493
+    },
+    "impactFrame": 38,
+    "impactActiveTargetCount": 5,
+    "impactAggregateAngularStepDegrees": 30.55164633,
+    "aftermathFrame": 86,
+    "targetPoseKeyframes": 0,
+    "actorPoseKeyframesAfterRelease": 0,
+    "reopenExact": true
+  },
+  "frames": [
+    {
+      "shotId": "SETUP",
+      "frame": 27,
+      "uri": "review/setup-frame-0027.png",
+      "sha256": "b40d50caa2c4db25a757a48c9b02c15d2586b29a7e37055143ffcc424463c105",
+      "occupancy": 0.58000012,
+      "negativeSpaceMargin": 0.18634705
+    },
+    {
+      "shotId": "IMPACT",
+      "frame": 38,
+      "uri": "review/impact-frame-0038.png",
+      "sha256": "5507ff20a05a7397d46a61d4004269b9c9a88ef192aed45ef28f787ec31efc08",
+      "occupancy": 0.71999998,
+      "negativeSpaceMargin": 0.09896491
+    },
+    {
+      "shotId": "AFTERMATH",
+      "frame": 86,
+      "uri": "review/aftermath-frame-0086.png",
+      "sha256": "e291fcf530d2d84c3164cc5f7e3903a3fd862426bd1fc10c921b1313258149a3",
+      "occupancy": 0.60000023,
+      "negativeSpaceMargin": 0.18736392
+    }
+  ],
+  "clip": {
+    "uri": "review/impact-motion.mp4",
+    "sha256": "331c5e9311ba9fdee15b2475b37c8aaa05a4b10215b4a3cb487fd8e27150e740",
+    "frameStart": 32,
+    "frameEnd": 55,
+    "frameCount": 24,
+    "fps": 24,
+    "width": 960,
+    "height": 540,
+    "directInspectionSampling": [32, 36, 40, 44, 48, 52]
+  },
+  "answers": [
+    {
+      "questionId": "V01_FINAL_STATE_IS_SOLVER_OWNED_NOT_POSED",
+      "answer": "YES_MACHINE_BOUND",
+      "observation": "Image inspection cannot establish authority by itself, but the bound build and independent audit show zero target keys, zero actor pose keys after release, Blender/Bullet final-pose ownership and exact reopen."
+    },
+    {
+      "questionId": "V02_PROPAGATED_IMPACT_IS_VISIBLE",
+      "answer": "YES",
+      "observation": "The selected impact frame shows all five targets simultaneously moving at visibly distinct angles. It is a propagated collision moment rather than the earlier first-contact frame."
+    },
+    {
+      "questionId": "V03_CONTINUOUS_MOTION_READS_AS_CAUSAL",
+      "answer": "YES",
+      "observation": "The sampled sequence progresses continuously from initial contact through increasing lean to collapse. The wave travels along the row without a pose jump or discontinuous final-state substitution."
+    },
+    {
+      "questionId": "V04_AFTERMATH_LOOKS_UNSTAGED",
+      "answer": "YES_WITH_STYLIZATION_LIMIT",
+      "observation": "The five targets do not share one uniform horizontal pose. Two retain approximately 62-degree tilts and the result includes solver-produced support, overlap and scatter that read as discovered rather than arranged."
+    },
+    {
+      "questionId": "V05_CAMERA_FOLLOWS_EVALUATED_PHYSICAL_STATE",
+      "answer": "YES",
+      "observation": "Setup, propagated impact and settled aftermath use separate evaluated semantic bounds; all bodies remain readable while composition responds to the physical state."
+    },
+    {
+      "questionId": "V06_RESULT_REACHES_PHOTOREAL_FILM_QUALITY",
+      "answer": "NO",
+      "observation": "The primary motion is credible, but the scene remains a polished stylized demonstration. It lacks shutter-visible motion blur, compliant contact response, secondary physical layers, environmental detail, surface wear and sound."
+    }
+  ],
+  "comparisonToPC6": {
+    "impactTiming": "IMPROVED_FROM_FIRST_RESPONSE_FRAME_28_TO_PROPAGATED_MOTION_PEAK_FRAME_38",
+    "activeTargetsAtImpact": "IMPROVED_TO_ALL_FIVE",
+    "aftermathUniformity": "IMPROVED_FROM_NEARLY_ALL_HORIZONTAL_TO_THREE_HORIZONTAL_AND_TWO_SUPPORTED_APPROXIMATELY_62_DEGREES",
+    "continuousMotionEvidence": "IMPROVED_FROM_THREE_STILLS_ONLY_TO_BOUND_TWENTY_FOUR_FRAME_CLIP",
+    "finalPoseAuthority": "UNCHANGED_SOLVER_ONLY"
+  },
+  "softwareLessons": [
+    "Treat the physics timeline as measured data: select cinematic moments from evaluated multi-body motion, not from an authored frame number or first contact alone.",
+    "Permit reproducible variation only in bounded initial conditions such as position, yaw, friction and restitution; never use variation as authority over final transforms.",
+    "Require both state provenance and visual review: screenshots judge legibility, while keyframe and reopen receipts prove that an attractive result was not posed.",
+    "Preserve primary collision truth before adding secondary effects. Motion blur, compliant contact, debris, dust or sound may enrich the event but must not conceal a weak rigid-body solve.",
+    "Use a simple causal curriculum as the training ground, then return these generic rules to the robot capstone as an unseen holdout."
+  ],
+  "limitations": [
+    "The accepted scope covers rigid-body propagation and deterministic initial-condition richness for one five-target fixture, not broad scene generalization.",
+    "The ball currently functions as a clean causal actor but does not yet show realistic rolling texture motion, impact compression or audible contact.",
+    "Photoreal materials, motion blur, deformation, particles, dust, sound and a complex character scene remain outside this acceptance."
+  ],
+  "visualVerdict": "PASS_PHYSICAL_PROPAGATION_AND_UNSTAGED_AFTERMATH_NOT_PHOTOREAL_FILM_QUALITY",
+  "overallVerdict": "PASS_PC7_FILMIC_PHYSICS_SCOPE_WITH_NEXT_REALISM_LAYER_REQUIRED",
+  "reviewHash": "c1654213b29eeec82c022358cd91f25e496a875b954642278e15ae0e48d09744"
+}
