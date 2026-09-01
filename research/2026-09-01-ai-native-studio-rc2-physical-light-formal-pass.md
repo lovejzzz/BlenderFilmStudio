@@ -24,10 +24,14 @@ The fixed 1050 W light produces an actual/closed receiver luminance ratio of
 
 The formal binary SHA-256 is
 `9e24e64976e5747a415bff3633907c1612871b6220917621fbadebfa04005efb`.
-The validated product commit is
-`636f42f28f781f3e858fd5b6bf641910a549c91b`; it is not yet public. The next
-atomic action is an ordinary fast-forward of `lovejzzz/film-engine/main`, with
-no force, tag, release, LFS upload, binary distribution, signing or notarization.
+The validated product commit
+`636f42f28f781f3e858fd5b6bf641910a549c91b` was published to
+`lovejzzz/film-engine/main` by one ordinary fast-forward from `0e84ef3b...`.
+Git, the GitHub API and both public raw source paths independently returned the
+exact new OID and validated source hashes. No force, other public ref, tag,
+release, LFS upload, binary distribution, signing or notarization occurred.
+The publication receipt is retained outside the sealed formal root at
+`experiments/physical-light-transfer/RC2-publication-2026-09-01-attempt-01/receipt.json`.
 
 The accepted claim remains narrow: one clean-native, deliberately simple
 physical-light transfer on this M2 Max. It does not establish photoreal assets,

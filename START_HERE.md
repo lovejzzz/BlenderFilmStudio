@@ -807,9 +807,13 @@ animation channels. Save/reopen deltas remain below `3.73e-9` m and `4.31e-9`°.
 Independent audit is 40/40 `PASS`; direct review is 9/9 `YES`; the 117-file root
 manifest is `feb6b6ea18550ec5b9f8737ed77097d932f57133c96469c07930db2f3910505a`.
 Accepted evidence is
-`experiments/physical-light-transfer/RC2-2026-09-01-attempt-01`. The validated
-product commit `636f42f2…` is local and unpublished; ordinary fast-forward
-publication is the active next action.
+`experiments/physical-light-transfer/RC2-2026-09-01-attempt-01`. Validated
+product commit `636f42f2…` is now public on `lovejzzz/film-engine/main` after
+one ordinary fast-forward from `0e84ef3b…`; Git, the GitHub API and both raw
+source routes verified the exact OID and bytes. The next program step is to
+generalize this learned method into a physics-native action grammar: software
+must derive motion from initial conditions, Bullet bodies, collisions and
+constraints, and reject authored target/final poses.
 
 ## Public routes
 

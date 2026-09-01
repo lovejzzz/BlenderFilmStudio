@@ -6793,3 +6793,22 @@ Date: 2026-09-01 · Type: PRODUCT SOURCE + TOOL FREEZE · Development starts / A
 Product commit `9d5a6686…` changes only `film_studio_causal.py` by 120 additions / 16 deletions. It retires invalid v0.3, validates v0.4 basis identity, measures actor+five-target projected origins between impact-1 and impact, reduces by median, derives bounded shutter and enables native Blender transform blur. It contains no PC7/PC8/fixture/hash branch and no target keyframe insertion.
 
 Corrected development replay reproduces every PC7 initial target record and complete physics record exactly, while v0.2 remains cinematography-absent with motion blur disabled. v0.4 measures 19.61656045 px/frame and computes 0.30586402-frame CENTER shutter with 4e-8 px target error. Direct A/B sees real directional speed without losing five bodies, panels, bands or collision direction. Sixteen negative controls passed in development. Formal helper/runner/auditor freeze self is `94b0635a…`; attempt-01 remains fresh.
+## J-587 · RC2 validated product source published by ordinary fast-forward
+
+Date: 2026-09-01 · Type: PRODUCT PUBLICATION · Public pushes / force pushes / tags / releases / binary uploads: 1 / 0 / 0 / 0 / 0
+
+After research acceptance commit `4dfa844c`, exact product commit `636f42f2…`
+was published from `0e84ef3b…` to `lovejzzz/film-engine/main` by a normal
+fast-forward. Git, the GitHub API and both public raw paths verify the exact
+new OID and source hashes `669da32a…` / `58353ccd…`. The first push command
+resolved `origin` to the retained local PC9 source mirror and created only its
+local `main` ref at the same validated OID; this is disclosed in the separate
+publication receipt and changed no product bytes or public state. No force,
+other public ref, tag, release, LFS, binary distribution, signing or
+notarization operation occurred.
+
+The method is now a product invariant: author initial conditions and intent,
+let Blender Bullet own post-release transforms, let light respond through
+physical geometry, and reject target/final-pose keyframes. RC3 will generalize
+that invariant into reusable software rather than another project-specific
+scene patch.
