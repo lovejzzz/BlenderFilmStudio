@@ -789,12 +789,16 @@ Accepted development evidence is
 `experiments/physical-light-transfer/RC2-2026-09-01-development-attempt-02`;
 attempt-01 is a retained sealing-harness failure.
 
-This is not yet the formal RC2 pass. The read-only host screen reports 130 GiB
-free against its conservative 160 GiB clean-build admission, so no new native
-build may begin. The active next gate is a safe, specifically confirmed disk
-cleanup of at least 30 GiB followed by the preregistered clean native build and
-formal replay. Do not delete retained experiment roots merely to satisfy the
-gate.
+This is not yet the formal RC2 pass. The first exact cleanup attempt released
+31.77 GB but left the host at a rounded 159 GiB and is retained as
+`FAIL_CLEANUP_INSUFFICIENT`. A second exact cleanup removed one regenerable
+6.0 GiB Claude VM bundle; its wrapper misclassified the valid status spelling
+and is also retained as a harness failure. Read-only C2 attempt-03 binds both
+receipts and passes with 165 GiB free against the conservative 160 GiB
+threshold, zero failures and zero additional mutations. No retained experiment
+root, source tree, personal document or recording was deleted. RC2 formal roots
+remain absent; the active next gate is formal runner/auditor freeze followed by
+the single preregistered clean native build.
 
 ## Public routes
 
