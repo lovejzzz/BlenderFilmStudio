@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6BulletLauncherCalibration.v0.1",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_01_ROOT_CREATION",
+  "bindsRejectedF2": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-06",
+    "machineReceiptHash": "4c643939fa00dad904802d23378d5946041ec1b4135a76787c2d33bb2e117612",
+    "directVisualReviewHash": "dfb95d46eaf327f630b72e54b4c38bff718e556d93dea1681270ed9659980020",
+    "directVisualReviewFileSha256": "0b8c57825ad7f219c0d309521664cc4645571dd50404c781b58e4629f913dc41"
+  },
+  "purpose": "Calibrate only the Bullet cause before another Mantaflow bake: a visible striker moves an unanimated ball on a physical raised lane so impact occurs above the tumbler center; select only a variant that tips within the eight-frame impact window while staying on set.",
+  "tool": {
+    "uri": "scripts/run-rc6-bullet-launcher-calibration.py",
+    "sha256": "26aea9a40e521b8c2c58f7ffbe047ef03f5b4ebc0be50a887e28564c31bb7154"
+  },
+  "freshEvidenceRoot": "experiments/physical-richness/RC6-2026-09-01-bullet-launcher-calibration-attempt-01",
+  "frozenVariants": [
+    {"id": "P01", "driveEndFrame": 5, "cupMass": 0.34, "cupFriction": 0.65},
+    {"id": "P02", "driveEndFrame": 6, "cupMass": 0.34, "cupFriction": 0.75},
+    {"id": "P03", "driveEndFrame": 7, "cupMass": 0.34, "cupFriction": 0.85},
+    {"id": "P04", "driveEndFrame": 6, "cupMass": 0.50, "cupFriction": 0.85},
+    {"id": "P05", "driveEndFrame": 7, "cupMass": 0.25, "cupFriction": 0.85},
+    {"id": "P06", "driveEndFrame": 8, "cupMass": 0.25, "cupFriction": 0.95}
+  ],
+  "perVariantAcceptance": {
+    "contactFrameMaximum": 12,
+    "impactWindowFramesAfterContact": 8,
+    "impactWindowPeakTiltDegreesMinimum": 45.0,
+    "maximumAbsoluteCupXMeters": 1.40,
+    "minimumCupZMeters": 0.08,
+    "ballAnimationData": null,
+    "strikerIsSoleAuthoredActuator": true
+  },
+  "limits": {
+    "blenderStarts": 1,
+    "bulletBakes": 6,
+    "renders": 0,
+    "saves": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "evidenceBytesMaximum": 8388608
+  },
+  "stopRule": "Run the exact six variants once in the fresh evidence root. Retain failure if no variant passes; do not change thresholds after observation.",
+  "specHash": "8872d32e6a7b22ef800db846008fbddc80a6a7a9a207d0959c96c385b5c6116d"
+}
