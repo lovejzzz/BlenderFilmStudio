@@ -41,3 +41,8 @@ impact 同时 active 的目标达到五个，证据从三张 still 扩展到绑�
 运动模糊和接触压缩；目标与地面缺少更细的接触响应；没有受限的二次物理、环境细节、
 磨损和声音。下一门 PC8 只能在保留本次 primary Bullet solve 的前提下增加快门、接触
 与二次物理真实感，不能用尘土、碎片、摇镜或材质掩盖主碰撞，更不能手工修最终姿态。
+
+研究验收提交 `429ff88b` 公开后，产品提交 `c7eece67…` 已由父提交
+`5f3b981a…` 普通快进到 public `lovejzzz/film-engine/main`。公网 main OID 精确，
+raw module 与本地 SHA-256 同为 `df34a9a…`；没有 force、tag、release、binary、
+LFS、签名或公证操作。发布收据 self 为 `a53f2016…`。

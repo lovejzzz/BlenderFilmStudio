@@ -6763,3 +6763,9 @@ Date: 2026-09-01 · Type: ACCEPTED PRIMARY PHYSICS + DIRECT STILL/CLIP REVIEW ·
 Fresh attempt-01 completed the frozen clean native build and all 12 authority negative controls. Five targets responded at frames 28/29/29/30/31. The generic evaluated-motion selector chose frame 38, where all five targets were active and aggregate angular step was 30.55164633°; the independent settle rule selected frame 86. Final tilts were 90.00°/90.00°/62.69°/62.32°/90.00°. Targets have zero pose keys, the actor has zero pose keys after release, save/reopen tilt deltas are all 0.0° and selection provenance reopens exactly.
 
 Independent audit passed 27/27 with self `91789976…`; receipt self is `403e2c91…`. Direct original-resolution inspection of all three stills and a six-frame contact sheet sampled from the bound 24-frame clip accepts continuous propagated collision and a nonuniform, solver-discovered aftermath. It rejects a photoreal claim because shutter-visible blur, compliant contact, secondary physics, environmental detail and sound remain absent. Direct review/acceptance self hashes are `c1654213…` / `39ebb081…`. PC8 must preserve this primary Bullet solve and may only add realism layers that do not author final poses or conceal weaker motion.
+
+## J-583 · PC7 validated product source published by ordinary fast-forward
+
+Date: 2026-09-01 · Type: PUBLIC SOURCE FAST-FORWARD · Updated refs / force / tags / releases / binaries / LFS uploads: 1 / 0 / 0 / 0 / 0 / 0
+
+After research acceptance commit `429ff88b`, exact product commit `c7eece67…` was pushed from parent `5f3b981a…` to public `lovejzzz/film-engine/main` by a normal fast-forward. A non-browser remote query returned exact main OID `c7eece67…`; the public raw causal module and local source both hashed to `df34a9a…`. No force, other ref, tag, release, binary, LFS, signing or notarization operation occurred. Publication receipt self is `a53f2016…`.

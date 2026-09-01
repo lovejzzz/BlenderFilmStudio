@@ -598,6 +598,11 @@ The validated source commit was subsequently published to
 `aa4fff39…` to `5f3b981a…`; a public raw-file check matched the local causal
 module exactly. No tag, release, binary, LFS, signing or notarization operation
 occurred.
+The accepted PC7 increment was then published by a second ordinary non-force
+fast-forward from `5f3b981a…` to `c7eece67…`. Public `main` and the raw causal
+module match the validated source exactly; publication receipt self hash is
+`a53f2016…`. Again, no tag, release, binary, LFS, signing or notarization
+operation occurred.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
