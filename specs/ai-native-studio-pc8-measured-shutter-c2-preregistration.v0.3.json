@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc8MeasuredShutterC2Preregistration.v0.3",
+  "experimentId": "PC8-MEASURED-SHUTTER-REALISM-C2",
+  "status": "CORRECTED_HOST_SELF_HASH_VERIFIER_BEFORE_FORMAL_ROOT_MUTATION",
+  "parent": {
+    "uri": "specs/ai-native-studio-pc8-measured-shutter-c1-preregistration.v0.2.json",
+    "sha256": "ddc677171a4bad7f2eb9fdc95e9335b19241f812ec4eeb8e8f1babc32a38cee6",
+    "specHash": "8110fdbb9263fd7c62eb1997b43b6fe92d768bdbae04ddc5aae23f89de74b6ab",
+    "status": "REMAINS_THE_SEMANTIC_PREREGISTRATION"
+  },
+  "retainedToolFailure": {
+    "entrypoint": ["python3", "scripts/run-pc8-measured-shutter.py"],
+    "error": "RuntimeError('PC8 frozen contract differs')",
+    "pythonCanonicalHash": "db3b7ccb9bdbe40dd28202a53e54557db34a64b49a3ea136ef628bd47fb817b8",
+    "javascriptCanonicalHash": "8110fdbb9263fd7c62eb1997b43b6fe92d768bdbae04ddc5aae23f89de74b6ab",
+    "boundaryValue": "0.000001",
+    "cause": "Python json.dumps emits 1e-06 while JSON.stringify emits 0.000001 at the JavaScript fixed-notation boundary",
+    "workspaceRootCreated": false,
+    "evidenceRootCreated": false,
+    "nativeBuilds": 0,
+    "productStarts": 0
+  },
+  "correction": {
+    "scope": "host-side preregistration self-hash verification only",
+    "canonicalNumberRule": "the same JavaScript JSON.stringify finite-number thresholds already implemented by blender/compile_scene.py",
+    "runner": {
+      "uri": "scripts/run-pc8-measured-shutter-c2.py",
+      "sha256": "e7cadd20bec9ab55d4497e449ad56c36dc23df65280b898d8d1a1859159c856d"
+    },
+    "auditor": {
+      "uri": "scripts/audit-pc8-measured-shutter-c2.py",
+      "sha256": "2c31877e280fdbcda1a77b020166b7f6f045d4a1040787b9e869937b8abf43d2"
+    }
+  },
+  "unchanged": {
+    "productSourceCommit": "9d5a66869528b66216b977c01312cdc849f28fad",
+    "productSourceSha256": "009544bd57445b679cc81636d3f18d8bcd492201b2a14a3bc1daa7f40ac484fb",
+    "fixtureSha256": "b9cd894fa56b5f082e4140da88c490e5e694955a069898c8178d8d76dab2ab3c",
+    "fixtureSceneSpecHash": "3d97a1b8ea69e18c1b8eebc2808c75313b0aea62f128f61abce2c13c0bc5a9ab",
+    "physicsAndCinematographyContract": true,
+    "acceptanceThresholds": true,
+    "operationAndResourceCeilings": true,
+    "formalRoots": true
+  },
+  "formalRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC8-2026-09-01-attempt-01",
+    "evidence": "experiments/measured-shutter/PC8-2026-09-01-attempt-01",
+    "freshBeforeCorrectedFormalMutation": true
+  },
+  "stopRule": "If either formal root exists before C2 execution, or any semantic/product/fixture/threshold binding differs, stop without mutation.",
+  "specHash": "b2ef2f4ab3b6270b996ff61702cab9c0b8325196c6515af224bf4f79ecdfe64e"
+}
