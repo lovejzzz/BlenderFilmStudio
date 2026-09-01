@@ -513,7 +513,14 @@ and must not be fabricated; PC.4 is a separate model-guided corrective iteration
 PC.4 attempt-01 retained the complete derivative plus first EXR but failed before
 any review PNG because the binary exposes display device `sRGB`, not the frozen
 `sRGB - Display`. C1 changes that one literal only and is frozen at `f5b013f8…`
-against fresh attempt-02 roots.
+against fresh attempt-02 roots. C2 then bound the admitted `ACES 2.0` name and
+attempt-03 produced all three screenshots. Its Python build self hash is valid,
+but the runner stopped on Node/Python number spelling before reopen. More
+importantly, direct screenshot review rejects the product result: actual chamber
+ring/column occlusion remains, spherical shoulder/elbow volumes dominate medium,
+and the close helmet still lacks sufficient layered structure. Attempt-03 is a
+retained visual `FAIL` at failure self hash `e3de738f…`; the next iteration must
+change those visible design causes, not merely repair the auditor.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

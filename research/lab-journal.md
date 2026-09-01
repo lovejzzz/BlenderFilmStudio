@@ -6633,3 +6633,9 @@ C1 display device correction succeeded，attempt-02 then stopped at next enum: l
 Date: 2026-08-31 · Type: TOOL CORRECTION FREEZE · Formal attempt-03 starts / renders / saves: 0 / 0 / 0
 
 C2 base-hash wrapper绑定两个已观测enum：`sRGB - Display→sRGB`与long ACES name→`ACES 2.0`，self `11c21f10…`。Product geometry/animation/render/visual boundaries不变；attempts 01/02 exact绑定；fresh attempt-03 roots absent。
+
+## J-563 · PC.4 attempt-03 direct screenshot visual FAIL
+
+Date: 2026-08-31 · Type: RETAINED MODEL-VISUAL REJECTION · Blender starts / renders / saves / review PNGs: 1 / 3 / 1 / 3
+
+C2 builder完成53-part shell、five phases与frames 48/144/240；Python build self `13505429…` valid，runner因Node/Python number spelling在reopen前停止。Direct original-resolution screenshot review independently rejects product result：wide仍被actual chamber ring+column横竖遮挡；medium由primitive spherical shoulder/elbow与tight crop主导；close helmet虽优于pure sphere但仍是simple shell+circular pod，缺少face segmentation与mid-scale joint/panel structure。Failure/manifest self `e3de738f…` / `33f9b6db…`。Counts 157 objects/145 meshes/36,992 polys不能override visual FAIL。Next iteration必须改变visible causes并reframe，不能只修auditor。
