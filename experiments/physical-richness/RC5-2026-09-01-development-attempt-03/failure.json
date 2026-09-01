@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "RC5_CANDIDATE_DERIVED_SETTLE_WINDOW",
+  "researchCommit": "338bf07d2d5c5b2268acd358fa54a55f0aefd36a",
+  "candidateModuleSha256": "d656da5212625b1d28e0ebf6af7d4abff80c074df4514b2de1947dbd17266870",
+  "runnerSha256": "a3bb5dc547dbba8dbdf94c9be427d8171b81a9a1302c58374e0d6a1062bed1a5",
+  "binarySha256": "ae686bce6a2a50833db74d74c76d46a4667a96872fe06853668c89367a7961c4",
+  "fixture": {
+    "uri": "specs/fixtures/physics-action/RC5_B1.basketball-three-bottles-breakaway-cap.physics-action-spec.v0.4.json",
+    "fileSha256": "f937a4598b808e7a9d7ce198270960f2e1f5261d9a9616270bb48047c95f98b6",
+    "physicsActionSpecHash": "804c2758710756894295400a38f82a5d51cd7a59214f2a32cfda489bfe8dd0cb"
+  },
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-03",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-03",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "error": {
+    "type": "PhysicsActionError",
+    "reason": "PHYSICS_SETTLE",
+    "message": "no derived ten-frame group settle window"
+  },
+  "rootCause": {
+    "classification": "SEMANTIC_MEASUREMENT_SCOPE",
+    "description": "The effect beat names the filled_glass_bottles group, but the evaluator overwrote that group's maximumTargetTranslationStepMeters, activeTargetCount and aggregateAngularStepDegrees with the independent breakaway cap's continuing motion. A released secondary body therefore prevented the primary bottle group from satisfying its unchanged ten-frame settle predicate.",
+    "staticEvidence": [
+      "The row is initialized from targets only.",
+      "The secondary branch then adds cap translation and angular steps to the target-group aggregate fields.",
+      "The settled loop consumes those contaminated aggregate fields although the beat node is filled_glass_bottles."
+    ],
+    "notPhysicalParameterFailure": true,
+    "notThresholdFailure": true
+  },
+  "correctionBoundary": "Keep cap motion in its dedicated cap metrics and machine checks, but do not fold it into the named primary bottle group's settle/peak aggregates. Do not change the fixture, simulation duration, damping, break threshold, settle threshold or any authored transform authority.",
+  "counts": {
+    "productStarts": 1,
+    "physicsSimulations": 1,
+    "sceneMutations": 1,
+    "blendSaves": 0,
+    "reopens": 0,
+    "regressionSceneExecutions": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "3880236201fc1f9e7d7c13e87fdad0bc8bcfc9f52a177f52a0530ec288dce5be"
+}
