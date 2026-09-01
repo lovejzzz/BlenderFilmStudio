@@ -1,0 +1,286 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.causalSceneSpec.v0.4",
+  "sceneId": "PC8-F1-MEASURED-SHUTTER-FILMIC-PHYSICS",
+  "title": "Measured shutter preserves a five-domino Bullet collision",
+  "timeline": {
+    "fps": 24,
+    "frameStart": 1,
+    "frameEnd": 144,
+    "releaseFrame": 27
+  },
+  "dynamicActor": {
+    "semanticRole": "dynamic_actor",
+    "factory": "GROOVED_SPHERE",
+    "count": 1,
+    "radius": 0.38,
+    "initialPosition": [
+      -3.2,
+      0.0,
+      0.39
+    ],
+    "launchWaypoints": [
+      {
+        "frame": 1,
+        "position": [
+          -3.2,
+          0.0,
+          0.39
+        ],
+        "rotationY": 0.0
+      },
+      {
+        "frame": 18,
+        "position": [
+          -3.2,
+          0.0,
+          0.39
+        ],
+        "rotationY": 0.0
+      },
+      {
+        "frame": 26,
+        "position": [
+          -1.0,
+          0.0,
+          0.39
+        ],
+        "rotationY": -6.0
+      }
+    ],
+    "rigidBody": {
+      "mass": 2.6,
+      "collisionShape": "SPHERE",
+      "friction": 0.58,
+      "restitution": 0.28,
+      "linearDamping": 0.04,
+      "angularDamping": 0.06
+    },
+    "material": {
+      "baseColor": [
+        0.025,
+        0.18,
+        0.62
+      ],
+      "roughness": 0.42,
+      "proceduralGrain": true,
+      "channelCount": 3
+    }
+  },
+  "targetGroup": {
+    "semanticRole": "target_group",
+    "factory": "BEVELED_DOMINO_BLOCK",
+    "count": 5,
+    "dimensions": [
+      0.34,
+      0.24,
+      1.2
+    ],
+    "initialPositions": [
+      [
+        0.0,
+        0.0,
+        0.61
+      ],
+      [
+        0.46,
+        0.02,
+        0.61
+      ],
+      [
+        0.92,
+        -0.02,
+        0.61
+      ],
+      [
+        1.38,
+        0.015,
+        0.61
+      ],
+      [
+        1.84,
+        -0.015,
+        0.61
+      ]
+    ],
+    "deterministicVariation": {
+      "seed": 7021,
+      "basisSceneSpecHash": "b1bcabc70da6ec0b32d00d21a54cc56bf38dc4d485ee3136e32bece8b2e19978",
+      "positionJitterMetersMaximum": 0.018,
+      "yawJitterDegreesMaximum": 1.8,
+      "frictionJitterMaximum": 0.035,
+      "restitutionJitterMaximum": 0.02
+    },
+    "rigidBody": {
+      "mass": 0.32,
+      "collisionShape": "BOX",
+      "friction": 0.62,
+      "restitution": 0.1,
+      "linearDamping": 0.1,
+      "angularDamping": 0.18
+    },
+    "modeling": {
+      "bevelWidth": 0.055,
+      "bevelSegments": 4,
+      "insetFacePanel": true,
+      "edgeBand": true
+    },
+    "palette": [
+      [
+        0.44,
+        0.15,
+        0.045
+      ],
+      [
+        0.58,
+        0.27,
+        0.065
+      ],
+      [
+        0.34,
+        0.09,
+        0.028
+      ],
+      [
+        0.68,
+        0.4,
+        0.12
+      ],
+      [
+        0.48,
+        0.2,
+        0.052
+      ]
+    ]
+  },
+  "studio": {
+    "ground": {
+      "semanticRole": "ground",
+      "size": 20.0,
+      "friction": 0.72
+    },
+    "backdrop": {
+      "semanticRole": "studio_environment",
+      "factory": "SIMPLE_WALL",
+      "participatesInPhysics": false
+    },
+    "lights": [
+      {
+        "semanticRole": "key_light",
+        "kind": "AREA",
+        "energy": 1250,
+        "color": [
+          1.0,
+          0.68,
+          0.43
+        ]
+      },
+      {
+        "semanticRole": "fill_light",
+        "kind": "AREA",
+        "energy": 720,
+        "color": [
+          0.38,
+          0.58,
+          1.0
+        ]
+      },
+      {
+        "semanticRole": "rim_light",
+        "kind": "AREA",
+        "energy": 1050,
+        "color": [
+          0.55,
+          0.72,
+          1.0
+        ]
+      }
+    ]
+  },
+  "cinematography": {
+    "motionBlur": {
+      "strategy": "MEASURED_PROJECTED_MEDIAN_MOTION",
+      "semanticRoles": [
+        "dynamic_actor",
+        "target_group"
+      ],
+      "measurementResolution": [
+        960,
+        540
+      ],
+      "targetBlurPixels": 6.0,
+      "minimumShutterFrames": 0.2,
+      "maximumShutterFrames": 0.5,
+      "position": "CENTER"
+    }
+  },
+  "shots": [
+    {
+      "shotId": "SETUP",
+      "selection": "last frame before first target response",
+      "lensMm": 58,
+      "directionClass": "FRONT_LEFT_HIGH",
+      "targetOccupancy": 0.58
+    },
+    {
+      "shotId": "IMPACT",
+      "selection": "peak propagated angular motion frame",
+      "lensMm": 66,
+      "directionClass": "FRONT_LEFT_LOW",
+      "targetOccupancy": 0.72
+    },
+    {
+      "shotId": "AFTERMATH",
+      "selection": "first settled frame after all targets respond",
+      "lensMm": 56,
+      "directionClass": "FRONT_RIGHT_HIGH",
+      "targetOccupancy": 0.6
+    }
+  ],
+  "acceptance": {
+    "initialPenetrationMaximumMeters": 0.001,
+    "actorForwardTravelBeforeFirstResponseMinimumMeters": 2.0,
+    "firstTargetResponseFrameWindowInclusive": [
+      20,
+      72
+    ],
+    "targetTiltDegreesAtFinalMinimumEach": 50.0,
+    "finiteTransformRequired": true,
+    "reopenResponseFramesExact": true,
+    "reopenFinalTiltToleranceDegrees": 0.01,
+    "postReleaseActorPoseKeyframes": 0,
+    "targetPoseKeyframes": 1,
+    "reviewOccupancyRange": [
+      0.45,
+      0.82
+    ],
+    "reviewNegativeSpaceMarginMinimum": 0.04,
+    "impactActiveTargetCountMinimum": 2,
+    "impactFrameAfterFirstResponseMinimum": 1,
+    "settleAngularStepDegreesMaximum": 0.15,
+    "settleConsecutiveFrames": 8,
+    "deterministicVariationRequired": true,
+    "impactClipFrameCount": 24,
+    "measuredMedianMotionPixelsPerFrameRange": [
+      16.0,
+      24.0
+    ],
+    "computedShutterFramesRange": [
+      0.25,
+      0.38
+    ],
+    "computedBlurTargetErrorPixelsMaximum": 1e-06,
+    "blurredImpactMustDifferFromSharpControl": true
+  },
+  "forbidden": {
+    "acceptedBottleFactory": true,
+    "acceptedBottleFinalCoordinates": true,
+    "projectSpecificCameraCoordinates": true,
+    "externalModelsOrTextures": true,
+    "manualTargetOrFinalPoseAnimation": true,
+    "manualShutterValue": true,
+    "compositorOrPostprocessBlur": true,
+    "effectCoverForWeakerPrimaryPhysics": true
+  },
+  "sceneSpecHash": "6da342829f4a07e1af1726a7661b323d1970daeb0a3925ce8e0efc22151bce5d"
+}

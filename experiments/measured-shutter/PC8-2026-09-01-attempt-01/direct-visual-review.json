@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "bfs.pc8MeasuredShutterDirectVisualReview.v0.1",
+  "status": "PASS_MEASURED_MOTION_BLUR_SCOPE_WITH_ASSET_REALISM_GAPS",
+  "reviewMethod": "DIRECT_ORIGINAL_RESOLUTION_INSPECTION_OF_SETUP_SHARP_IMPACT_MEASURED_IMPACT_AND_AFTERMATH_STILLS_PLUS_SIX_FRAME_CONTACT_SHEET_FROM_THE_BOUND_TWENTY_FOUR_FRAME_CLIP",
+  "machineAudit": {
+    "status": "PASS",
+    "checkPassed": 27,
+    "checkTotal": 27,
+    "auditFileSha256": "c498e789c58b06b4493973816dd2b93b93c3b116481f85ddbf9c073b48b09807",
+    "auditHash": "8faff835f653d0bffca847c0a1339e3a474c65d6e950b20a931bc4abf893ae85",
+    "receiptHash": "801b2c83d031c210d3e2eb3073aee4e3ad49dbe3889b276e6439bf74c22b7d58"
+  },
+  "physicsObservation": {
+    "physicsSolver": "BLENDER_BULLET_RIGID_BODY",
+    "primaryPhysicsExactToPc7": true,
+    "responseFrames": [28, 29, 29, 30, 31],
+    "finalTiltDegrees": [89.99999945, 90.00001103, 62.68717712, 62.31751162, 89.99997493],
+    "impactFrame": 38,
+    "aftermathFrame": 86,
+    "targetPoseKeyframes": 0,
+    "actorPoseKeyframesAfterRelease": 0,
+    "reopenExact": true
+  },
+  "measuredShutter": {
+    "strategy": "MEASURED_PROJECTED_MEDIAN_MOTION",
+    "source": "EVALUATED_SEMANTIC_PROJECTED_ORIGIN_MOTION",
+    "measurementFrames": [37, 38],
+    "semanticObjectCount": 6,
+    "objectPixelsPerFrame": {
+      "CAUSAL_ACTOR_001": 16.2518359,
+      "CAUSAL_TARGET_001": 21.45851336,
+      "CAUSAL_TARGET_002": 17.33175835,
+      "CAUSAL_TARGET_003": 18.85500748,
+      "CAUSAL_TARGET_004": 21.02799699,
+      "CAUSAL_TARGET_005": 20.37811342
+    },
+    "medianPixelsPerFrame": 19.61656045,
+    "targetBlurPixels": 6.0,
+    "computedShutterFrames": 0.30586402,
+    "achievedMedianBlurPixels": 6.00000004,
+    "targetErrorPixels": 0.00000004,
+    "nativeTransformMotionBlur": true,
+    "compositorOrPostprocessBlur": false
+  },
+  "frames": [
+    {
+      "shotId": "SETUP",
+      "frame": 27,
+      "uri": "review/setup-measured-frame-0027.png",
+      "sha256": "96bad24001a19026f3d68e333325c0e2e095a1958765dc38f2eeb9dd3457a381"
+    },
+    {
+      "shotId": "IMPACT_SHARP_CONTROL",
+      "frame": 38,
+      "uri": "review/impact-sharp-control-frame-0038.png",
+      "sha256": "012ff7da8dd73352490d2cfffa10000f0080fb0b51ccbc4d58c85855623c18bf"
+    },
+    {
+      "shotId": "IMPACT_MEASURED",
+      "frame": 38,
+      "uri": "review/impact-measured-frame-0038.png",
+      "sha256": "de48fcecafc3df326ebe35a124e21f4869cb4d8d9df9ebda49cd409899e76e9c"
+    },
+    {
+      "shotId": "AFTERMATH",
+      "frame": 86,
+      "uri": "review/aftermath-measured-frame-0086.png",
+      "sha256": "1a2460a922145aeddf9925f5b849fff85bc949a7e9ad6d291beda308a5011b"
+    }
+  ],
+  "clip": {
+    "uri": "review/impact-motion-measured.mp4",
+    "sha256": "aa33017c3ab9a94034bf15060731fc3d150b5a8eba7d17092d3397793e0195de",
+    "clipHash": "3d47340cc5e49acea236821994e84c5fc895d5ecde759f807a56154e32dc545f",
+    "frameStart": 32,
+    "frameEnd": 55,
+    "frameCount": 24,
+    "fps": 24,
+    "directInspectionSampling": [32, 36, 40, 44, 48, 52]
+  },
+  "answers": [
+    {
+      "questionId": "V01_FINAL_STATES_ARE_SOLVER_OWNED_NOT_POSED",
+      "answer": "YES_MACHINE_BOUND",
+      "observation": "The bound build and independent audit show Blender/Bullet ownership, zero target pose keys, zero actor pose keys after release and exact reopen. Visual inspection is consistent with that provenance."
+    },
+    {
+      "questionId": "V02_SHARP_TO_MEASURED_BLUR_ADDS_SPEED_WITHOUT_HIDING_CAUSAL_READABILITY",
+      "answer": "YES",
+      "observation": "Compared at the same frame and camera, the measured image has clearly softer directional edges and a stronger sense of speed while the ball seams, five target bodies, face panels, black bands and collision direction remain readable."
+    },
+    {
+      "questionId": "V03_CONTINUOUS_SEQUENCE_AVOIDS_PLACED_POSE_FEEL",
+      "answer": "YES",
+      "observation": "The sampled clip advances continuously from contact through a spreading lean and collapse. No object teleports into an aftermath pose and the five bodies separate into different solver-produced angles."
+    },
+    {
+      "questionId": "V04_SHUTTER_IS_DERIVED_FROM_SCENE_MOTION_NOT_MANUAL_TASTE",
+      "answer": "YES_MACHINE_BOUND",
+      "observation": "Six semantic bodies were measured in screen space at frames 37 to 38; their median 19.61656045 pixels per frame produced a 0.30586402-frame shutter for the frozen six-pixel target. Manual shutter and post-process blur authority are rejected."
+    },
+    {
+      "questionId": "V05_ACCEPTED_PRIMARY_PHYSICS_WAS_NOT_CHANGED_TO_IMPROVE_THE_IMAGE",
+      "answer": "YES_MACHINE_BOUND",
+      "observation": "Initial conditions and the complete primary physics record are exact to PC7. The presentation layer did not resample or retune the Bullet solve."
+    },
+    {
+      "questionId": "V06_RESULT_REACHES_PHOTOREAL_FILM_QUALITY",
+      "answer": "NO",
+      "observation": "Motion reads more cinematically, but the targets still look like polished abstract wooden blocks rather than recognizable weighted bottles. The environment is too clean, the contact chain is unusually orderly, and there is no deformation, dust, sound or surface history."
+    }
+  ],
+  "softwareLessons": [
+    "Measure presentation from evaluated physics: derive shutter from projected semantic motion at the selected physical event instead of assigning one aesthetic shutter to every project.",
+    "Use a robust aggregate such as the semantic-object median so one unusually fast fragment or a nearly static background object cannot dominate exposure.",
+    "Keep physical variation identity independent from later presentation-only fields; adding cinematography must never silently resample initial conditions.",
+    "Reject manual shutter and post-process blur authority when a measured native transform-blur strategy is selected.",
+    "Bind a same-frame sharp/blurred A/B and direct visual review to the numeric receipt because a mathematically exact blur can still obscure story information.",
+    "Advance realism next through recognizable physical archetypes, scale-aware mass and collision geometry, material response and secondary contact layers while preserving the exact no-final-pose rule."
+  ],
+  "limitations": [
+    "The accepted scope generalizes measured shutter across semantic rigid bodies but is validated on one six-body fixture.",
+    "The target geometry and materials remain stylized and do not yet communicate bottle wall thickness, cap, liquid or plausible household mass distribution.",
+    "No compliant deformation, micro-bounce calibration, dust, floor marks, sound or environment wear is included.",
+    "The five-target row remains a deliberately simple curriculum and is not evidence that the software can yet solve the robot capstone."
+  ],
+  "visualVerdict": "PASS_DATA_DRIVEN_NATIVE_MOTION_BLUR_AND_UNSTAGED_CAUSALITY_NOT_PHOTOREAL_ASSET_QUALITY",
+  "overallVerdict": "PASS_PC8_MEASURED_SHUTTER_SCOPE_WITH_PHYSICAL_ASSET_REALISM_REQUIRED_NEXT",
+  "reviewHash": "e4fb55862a939ec7ab86c4205064c5c5e6ef97c6fcfba0226dfc1d3f38c56f39"
+}

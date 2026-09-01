@@ -624,8 +624,21 @@ That replay is now exact. The one-path product candidate is frozen at
 `9d5a6686…` (120 additions / 16 deletions) with module SHA `009544bd…`.
 It reproduces all PC7 initial and physics records, leaves v0.2 motion blur off,
 and derives `19.61656045 px/frame` median motion → `0.30586402 frame` native
-shutter with `4e-8 px` target error. Tool freeze self is `94b0635a…`; formal
-attempt-01 roots remain fresh and are the next action.
+shutter with `4e-8 px` target error. The first frozen runner stopped before
+root creation because Python serialized the C1 boundary value `0.000001` as
+`1e-06`; C2 corrected only that host self-hash verifier and retained the v0.1
+tools unchanged. Its correction/freeze hashes are `b2ef2f4a…` / `ec5d9ce8…`.
+Fresh formal attempt-01 then passed one clean native build, 16 authority
+attacks, three product starts, one sharp control, three product stills, a
+24-frame clip and exact reopen. Receipt/audit/direct-review/acceptance hashes
+are `801b2c83…` / `8faff835…` / `e4fb5586…` / `48ab5ec2…`; independent audit
+is `27/27 PASS`. The complete PC7 Bullet record remains exact, target/final
+pose authority remains zero, and the measured native blur adds readable speed
+without hiding the causal chain. Direct review still rejects photoreal quality:
+the abstract wooden targets, clean environment and orderly contact expose asset
+and physical-archetype limits. PC9 must teach recognizable basketball/bottle
+construction, scale-aware mass/collision geometry and richer contact response
+without authoring any final pose. The PC4 robot remains the later capstone.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
