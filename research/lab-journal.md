@@ -6741,3 +6741,9 @@ Direct original-resolution review accepts the product capability but rejects a f
 Date: 2026-09-01 · Type: PUBLIC SOURCE FAST-FORWARD · Updated refs / force / tags / releases / binaries / LFS uploads: 1 / 0 / 0 / 0 / 0 / 0
 
 After research acceptance commit `598b5540`, exact product commit `5f3b981a…` was pushed from parent `aa4fff39…` to public `lovejzzz/film-engine/main` by a normal fast-forward. A non-browser GitHub API query returned exact main OID `5f3b981a…`; the public raw `film_studio_causal.py` and local source both hashed to `13c0ede9…`. No force, other ref, tag, release, binary, LFS, signing or notarization operation occurred.
+
+## J-580 · PC7 filmic physics lesson frozen before implementation
+
+Date: 2026-09-01 · Type: PREREGISTRATION + UNSEEN V0.2 FIXTURE · Product mutations / formal starts / renders: 0 / 0 / 0
+
+PC7 spec self `86de8cc8…` freezes a five-domino fixture `b1bcabc7…` before the one-path product change. New authority is limited to SHA-256-derived bounded initial position/yaw/friction/restitution variation and evaluated motion measurement. IMPACT must lexicographically maximize active target count, aggregate tilt step and earliest frame, remain at least one frame after first response, and show at least two active targets; AFTERMATH must use the first post-response eight-frame window below 0.15° aggregate step or frameEnd. Formal review adds a 24-frame clip. Targets and post-release actor remain zero-pose-keyframe; any manual final-state repair fails.

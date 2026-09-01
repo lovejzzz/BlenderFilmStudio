@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc7FilmicPhysicsPreregistration.v0.1",
+  "experimentId": "PC7-FILMIC-PHYSICS-REALISM",
+  "status": "PREREGISTERED_BEFORE_PC7_PRODUCT_SOURCE_OR_FORMAL_ROOT_MUTATION",
+  "motivation": "PC6 proves solver-owned physical causality in the product, but direct review found that first response is a weak cinematic impact moment and the uniform final poses still read as a toy demonstration.",
+  "productBaseline": {
+    "repository": "lovejzzz/film-engine",
+    "main": "5f3b981a6d84fd49d2eaafe35645456bf4d669e5",
+    "validatedBinarySha256": "b43b0dcefca9229a6d5b8ffa2b9acd99473af3aadafb8bc7716055bfa10b524a",
+    "pc6AcceptanceHash": "cd334acd197029308a2d42f6159acfd05f0c465e2e115e2e8e21b8e2a20e3777"
+  },
+  "frozenFixture": {
+    "uri": "specs/fixtures/causal-studio/PC7_F1.five-domino-filmic-physics.scene-spec.v0.2.json",
+    "sha256": "0623be74d9700084e5def97b10ff95f40f9a58db0b86f967d4ebdfc0c15553eb",
+    "sceneSpecHash": "b1bcabc70da6ec0b32d00d21a54cc56bf38dc4d485ee3136e32bece8b2e19978",
+    "frozenBeforeProductImplementation": true,
+    "targetCount": 5,
+    "targetFactory": "BEVELED_DOMINO_BLOCK"
+  },
+  "authorizedProductIncrement": {
+    "paths": ["scripts/modules/film_studio_causal.py"],
+    "maximumAdditions": 320,
+    "maximumDeletions": 80,
+    "allowedCapabilities": [
+      "backward-compatible CausalSceneSpec v0.2 validation",
+      "hash-derived bounded initial-condition variation",
+      "evaluated per-frame target angular-motion measurements",
+      "peak propagated-motion impact selection",
+      "evaluated settled-frame aftermath selection",
+      "persisted selection and initial-condition provenance"
+    ],
+    "forbiddenCapabilities": [
+      "target or final-pose animation",
+      "post-release actor pose animation",
+      "project, scene or object-name branches",
+      "final-coordinate lookup",
+      "Python, shell, network or arbitrary-filesystem authority from the scene spec",
+      "manual repair of an unattractive solver result"
+    ]
+  },
+  "motionSelectionRules": {
+    "perFrameAngularStep": "absolute change in evaluated world-up tilt degrees for each target from the preceding frame",
+    "activeTargetThresholdDegrees": 0.25,
+    "impactRule": "lexicographically maximize active target count, then aggregate angular step degrees, then choose the earliest frame",
+    "impactMustFollowFirstResponseByFrames": 1,
+    "aftermathRule": "first frame after all target responses followed by eight consecutive frames whose aggregate angular step is at most 0.15 degrees; otherwise frameEnd",
+    "selectionConsumesFinalCoordinates": false
+  },
+  "deterministicVariationRules": {
+    "source": "SHA-256 of sceneSpecHash, integer seed, target index and channel",
+    "channels": ["position-x", "position-y", "yaw", "friction", "restitution"],
+    "boundsComeOnlyFromFixture": true,
+    "mayAuthorInitialConditions": true,
+    "mayAuthorFinalConditions": false,
+    "mustPersistDerivedValues": true
+  },
+  "positiveValidation": {
+    "negativeControls": 12,
+    "cleanNativeArm64Builds": 1,
+    "productStarts": 3,
+    "sceneMutatingExecutions": 1,
+    "blendSaves": 1,
+    "reopens": 1,
+    "reviewStillRenders": 3,
+    "impactClipFrameRenders": 24,
+    "impactClipFps": 24,
+    "impactActiveTargetCountMinimum": 2,
+    "impactFrameAfterFirstResponseMinimum": 1,
+    "allFiveTargetsRespond": true,
+    "allFiveFinalTiltDegreesMinimumEach": 50,
+    "targetPoseKeyframes": 0,
+    "postReleaseActorPoseKeyframes": 0,
+    "reopenExact": true,
+    "directOriginalResolutionStillAndClipReviewRequired": true
+  },
+  "visualRejectionRules": [
+    "reject if impact frame shows contact but no visible downstream propagation",
+    "reject if the 24-frame clip does not make cause, propagation and consequence temporally legible",
+    "reject if any apparent improvement comes from authored final poses",
+    "do not claim photorealism from material polish without improved physical motion"
+  ],
+  "formalRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC7-2026-09-01-attempt-01",
+    "evidence": "experiments/filmic-physics/PC7-2026-09-01-attempt-01",
+    "freshBeforeFormalMutation": true
+  },
+  "resourceCeilings": {
+    "minimumFreeDiskGiBBeforeBuild": 100,
+    "workspaceBytes": 53687091200,
+    "evidenceBytes": 268435456,
+    "maximumBuildSeconds": 2400,
+    "maximumProductProcessSecondsEach": 480
+  },
+  "forbiddenOperations": {
+    "networkCalls": 0,
+    "engineRemoteWritesBeforeAcceptance": 0,
+    "forcePushes": 0,
+    "tags": 0,
+    "releases": 0,
+    "binaryDistribution": 0,
+    "signing": 0,
+    "notarization": 0
+  },
+  "stopRule": "Retain every failure without weakening motion, pose-ownership, visual or resource thresholds. Publish product source only after machine and direct visual acceptance.",
+  "specHash": "86de8cc8079858fdf88c1987c9646784238ddc19aee4a0f7a06eb8097ff2bb97"
+}

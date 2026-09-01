@@ -577,6 +577,11 @@ motion. PC6 therefore passes product capability, not filmic realism. The active
 PC7 checkpoint must improve evaluated motion timing and physical richness while
 keeping final target/post-release transforms exclusively solver-owned; the PC4
 robot remains a later capstone holdout.
+PC7 is preregistered at `86de8cc8…` with a frozen five-domino v0.2 fixture:
+impact is selected by evaluated propagated angular motion, aftermath by an
+eight-frame settle rule, and bounded SHA-256-derived initial-condition variation
+is allowed while all authored final conditions remain forbidden. Formal roots
+remain fresh pending the one-path product implementation.
 The validated source commit was subsequently published to
 `lovejzzz/film-engine/main` by one ordinary non-force fast-forward from
 `aa4fff39…` to `5f3b981a…`; a public raw-file check matched the local causal
