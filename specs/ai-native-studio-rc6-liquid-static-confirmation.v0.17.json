@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "bfs.rc6LiquidStaticConfirmationSpec.v0.17",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-STATIC-CONFIRMATION-2026-09-01-ATTEMPT-17",
+  "purpose": "Confirm the relative radius-1.3 candidate at resolution 192 before any slow-tip or impact run.",
+  "retainedMatrix": {
+    "evidenceRoot": "experiments/physical-richness/RC6-2026-09-01-static-calibration-attempt-16",
+    "matrixHash": "b2b3a5d7582360b596dfa6e5bac3151162cfa8426a197abc229ea07be65696eb",
+    "independentAuditHash": "639c0167dc439eed1eec368691b2db079522376317ed3cd820635951b84d2c53"
+  },
+  "configuration": {
+    "frameStart": 1,
+    "frameEnd": 7,
+    "preContactOnly": true,
+    "resolutionMax": 192,
+    "particleNumber": 2,
+    "particleRadius": 1.3,
+    "meshScale": 2,
+    "meshParticleRadius": 2.0,
+    "simulationMethod": "APIC",
+    "timestepsMin": 1,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "waterViscosityBase": 1.0,
+    "waterViscosityExponent": 6,
+    "renderCalls": 0
+  },
+  "acceptance": {
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumAbsoluteAnalyticalVolumeErrorFraction": 0.05,
+    "maximumConnectedComponentCount": 2,
+    "minimumLargestComponentFraction": 0.9,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Record PASS_STATIC_CONTROL or FAIL_STATIC_CONTROL after one zero-render seven-frame bake. Do not proceed to slow-tip or impact in this attempt.",
+  "tools": {
+    "scripts/run-rc6-liquid-static-confirmation-scene.py": "4d5c23e05a2e9b5370810f493a18c99308bcc60e257b4501a5cd371f63add1d8",
+    "scripts/run-rc6-liquid-static-confirmation.py": "efd74a9d2aa5a45307c69db776cac4028bca70d2ef1dd4eccfbfb46c8142c7d5"
+  },
+  "specHash": "aeb5accaf88cf31219bcaf8b5160fcd76a4b6d88fa99cea5ff06bda6ae12b270"
+}
