@@ -6609,3 +6609,15 @@ Owner明确把active goal扩展为“用你自己的截图加上你的视觉判�
 Date: 2026-08-31 · Type: TOOL FREEZE · Formal PC.4 starts / renders / saves: 0 / 0 / 0
 
 Exact 53-part hero-shell builder、zero-render reopen auditor与fresh-root runner冻结于self hash `61ff2d8c…`。Builder隐藏39个legacy hero/detail meshes与9个foreground aperture objects，保留全部camera/light objects，添加anticipation、weight transfer、contact/brace、reaction、reflection/settle五phase performance，只render frames 48/144/240并save one derivative。Python/Node static checks PASS；fresh roots absent。Full 288-frame successor在三张截图直接通过视觉复核前禁止。
+
+## J-559 · PC.4 attempt-01 retained display-device failure
+
+Date: 2026-08-31 · Type: RETAINED REVIEW-ADAPTER FAILURE · Blender starts / renders / saves / review PNGs: 1 / 1 / 1 / 0
+
+Attempt-01完成53-part derivative save并写first temporary EXR后，在isolated PNG output scene设置display device时报错：frozen `sRGB - Display`不在admitted binary enum，实际值为`sRGB`。Failure/manifest self hashes `0bba6bce…` / `fed1156f…`；derived blend与retained EXR hashes `a4319025…` / `5ec02848…`。Source unchanged，未进入auditor，未产生review PNG。Attempt-01 immutable。
+
+## J-560 · PC.4 C1 single-literal display correction freeze
+
+Date: 2026-08-31 · Type: TOOL CORRECTION FREEZE · Formal attempt-02 starts / renders / saves: 0 / 0 / 0
+
+C1 base-hash wrapper只将`output_scene.display_settings.display_device = "sRGB - Display"`替换为`"sRGB"`，tool-freeze self `f5b013f8…`。53-part geometry、39+9 hides、materials、five-phase animation、camera/light、frames、EXR adapter、resources与visual rejection thresholds全部不变；attempt-01 failure/manifest exact绑定；fresh attempt-02 roots absent。

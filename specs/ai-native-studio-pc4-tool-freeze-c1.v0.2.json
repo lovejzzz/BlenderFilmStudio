@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.pc4ToolFreezeC1.v0.2",
+  "status": "FROZEN_C1_BEFORE_PC4_ATTEMPT_02",
+  "gate": "PC.4",
+  "correction": {
+    "failure": "attempt-01 saved the derivative and rendered the first temporary EXR, then stopped because the isolated PNG output scene requested unavailable display device sRGB - Display",
+    "exactChange": "Replace only output_scene.display_settings.display_device = sRGB - Display with sRGB before executing the exact frozen base builder.",
+    "unchanged": ["source", "binary", "53-part hero geometry", "39 legacy hides", "9 occluder hides", "materials", "five-phase animation", "cameras", "lights", "frames", "EXR adapter", "visual thresholds", "operations", "resources"]
+  },
+  "preregistration": {"uri": "specs/ai-native-studio-pc4-hero-redesign-preregistration.v0.1.json", "sha256": "7f06e12dbca5ffae60a2f516a680b1d0f3df6e0966182428dc08eccebccedac1", "specHash": "09ba0c5b7de327db25c948365c97fe14c8b20e7fe09eada86683e92a20de28b3"},
+  "retainedAttempt01": {
+    "failure": {"uri": "experiments/ai-native-studio-post-pb7/PC.4-2026-08-31-mac-m2max-attempt-01/failure.json", "sha256": "4104c2d31e2bed2594012e65a09c668d244d2a5010eac835568143256d30cc67", "selfField": "failureHash", "selfHash": "0bba6bce647c06181c2a8ed49f100a3c079acf7ca7a53cbe4aec9d38525c4378"},
+    "manifest": {"uri": "experiments/ai-native-studio-post-pb7/PC.4-2026-08-31-mac-m2max-attempt-01/root-manifest.json", "sha256": "30ce70e5edf3167ed95d683d88b1fafb07959e86d58e8ba39633cccbfdfe166b", "selfField": "manifestHash", "selfHash": "fed1156f850de134f092e7899416712043827d4a357a979fe4d834fd04012561"}
+  },
+  "tools": [
+    {"uri": "scripts/build-ai-native-studio-pc4.py", "sha256": "ee9760273f7a00e843956d7bf693e6101544b3465d1ae5967a417e5b3849fda4", "role": "immutable base builder"},
+    {"uri": "scripts/build-ai-native-studio-pc4-c1.py", "sha256": "f425b7efd7088d674ef04128a5691eed4b34343e0449e209f66f8c56fddb1b74", "role": "single-literal display-device correction wrapper"},
+    {"uri": "scripts/audit-ai-native-studio-pc4.py", "sha256": "789484be06ca0a3aea90db23a27ceaa3071304d665ee2eb4595ed9e17ac57be6", "role": "unchanged reopen auditor"},
+    {"uri": "scripts/run-ai-native-studio-pc4-c1.mjs", "sha256": "b79a86514f5ecdf227979c895dd64ea40d564af1a8d0beb672e47d0999bd5f73", "role": "fresh attempt-02 runner"}
+  ],
+  "formalRoots": {"evidence": "experiments/ai-native-studio-post-pb7/PC.4-2026-08-31-mac-m2max-attempt-02", "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC.4-2026-08-31-mac-m2max-attempt-02", "bothAbsentAtFreeze": true},
+  "frozenExecution": {"BlenderStarts": 2, "renderCalls": 3, "derivedSceneSaves": 1, "sourceSceneSaves": 0, "networkCalls": 0, "modelCallsDuringExecution": 0, "mouseInteractions": 0, "reviewFrames": [48, 144, 240], "fullSequenceRenderAllowed": false},
+  "staticChecks": {"pythonCompile": "PASS", "nodeSyntax": "PASS", "baseBuilderHashExact": true, "singlePatchSiteExact": true},
+  "stopRules": ["Retain attempt-01 unchanged.", "Stop on any base builder, retained evidence, source, binary, preregistration or tool drift.", "Retain attempt-02 without overwrite on machine or visual rejection.", "Do not render a full successor sequence before direct screenshot acceptance."],
+  "specHash": "f5b013f8b4a4d5a085ccdd0f07b0a7aef0726e1695e01c27899d54a235b353df"
+}

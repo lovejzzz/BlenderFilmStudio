@@ -510,6 +510,10 @@ and weak performance. PC.4 is now preregistered at `09ba0c5b…` and its exact
 53-part hero-shell, five-phase performance, three-frame builder/auditor/runner
 are frozen at `61ff2d8c…` before mutation. PC.3 human evidence remains pending
 and must not be fabricated; PC.4 is a separate model-guided corrective iteration.
+PC.4 attempt-01 retained the complete derivative plus first EXR but failed before
+any review PNG because the binary exposes display device `sRGB`, not the frozen
+`sRGB - Display`. C1 changes that one literal only and is frozen at `f5b013f8…`
+against fresh attempt-02 roots.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
