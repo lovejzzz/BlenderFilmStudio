@@ -3,8 +3,8 @@ import { mkdir, readFile, writeFile, lstat, statfs, readdir } from 'node:fs/prom
 import { resolve, relative, isAbsolute } from 'node:path';
 import { canonicalize, canonicalJson, repositoryRoot, sha256 } from './lib/scene-spec.mjs';
 
-const FREEZE_URI = 'specs/ai-native-studio-visual-plan-typed-execution-tool-freeze-c1.v0.2.json';
-const CONTEXT_URI = 'specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context-c1.v0.2.json';
+const FREEZE_URI = 'specs/ai-native-studio-visual-plan-typed-execution-tool-freeze-c2.v0.3.json';
+const CONTEXT_URI = 'specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context-c2.v0.3.json';
 const EXECUTOR_URI = 'scripts/execute-visual-improvement-plan.py';
 const REOPEN_URI = 'scripts/audit-visual-improvement-plan-reopen.py';
 
@@ -114,11 +114,11 @@ async function retainFailure(evidenceRoot, workRoot, stage, error, runs) {
 const contextPath = safeRepositoryPath(CONTEXT_URI);
 const contextBytes = await readFile(contextPath);
 const context = JSON.parse(contextBytes);
-requireCondition(context.schemaVersion === 'bfs.visualImprovementExecutionContextC1.v0.2' && context.contextHash === selfHash(context, 'contextHash'), 'context self hash');
+requireCondition(context.schemaVersion === 'bfs.visualImprovementExecutionContextC2.v0.3' && context.contextHash === selfHash(context, 'contextHash'), 'context self hash');
 const freezePath = safeRepositoryPath(FREEZE_URI);
 const freezeBytes = await readFile(freezePath);
 const freeze = JSON.parse(freezeBytes);
-requireCondition(freeze.schemaVersion === 'bfs.visualPlanTypedExecutionToolFreezeC1.v0.2' && freeze.freezeHash === selfHash(freeze, 'freezeHash'), 'freeze self hash');
+requireCondition(freeze.schemaVersion === 'bfs.visualPlanTypedExecutionToolFreezeC2.v0.3' && freeze.freezeHash === selfHash(freeze, 'freezeHash'), 'freeze self hash');
 for (const input of freeze.inputs) requireCondition(await sha256File(safeRepositoryPath(input.uri)) === input.sha256, `frozen input drift ${input.uri}`);
 
 const binary = context.binary.path;

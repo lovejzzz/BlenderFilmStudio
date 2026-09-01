@@ -10,6 +10,8 @@ import sys
 from pathlib import Path
 
 import bpy
+import numpy as np
+import OpenImageIO as oiio
 from mathutils import Matrix, Vector
 
 
@@ -365,32 +367,86 @@ def apply_surface(scene, operation, shots, collection, materials, created):
     return effects
 
 
+def decode_combined(path):
+    image = oiio.ImageInput.open(str(path))
+    if image is None:
+        raise RuntimeError("EXR_OPEN")
+    try:
+        candidates = []
+        subimage = 0
+        while image.seek_subimage(subimage, 0):
+            spec = image.spec()
+            names = list(spec.channelnames)
+            positions = {name: index for index, name in enumerate(names)}
+            for name in names:
+                if not name.endswith(".R"):
+                    continue
+                prefix = name[:-2]
+                wanted = [f"{prefix}.{channel}" for channel in "RGBA"]
+                if prefix.split(".")[-1] == "Combined" and all(channel in positions for channel in wanted):
+                    candidates.append((subimage, spec.width, spec.height, spec.nchannels, [positions[channel] for channel in wanted]))
+            subimage += 1
+        if len(candidates) != 1:
+            raise RuntimeError(f"COMBINED_COUNT_{len(candidates)}")
+        subimage, width, height, channels, indices = candidates[0]
+        pixels = np.asarray(image.read_image(subimage, 0, 0, channels, oiio.FLOAT), dtype=np.float32).reshape(height, width, channels)
+        return np.ascontiguousarray(pixels[..., indices], dtype=np.float32)
+    finally:
+        image.close()
+
+
+def save_png(path, rgba):
+    output_scene = bpy.data.scenes.new("BFS_TYPED_ISOLATED_PNG_OUTPUT")
+    output_scene.display_settings.display_device = "sRGB"
+    output_scene.view_settings.view_transform = "ACES 2.0"
+    output_scene.view_settings.look = "None"
+    output_scene.render.image_settings.file_format = "PNG"
+    output_scene.render.image_settings.color_mode = "RGBA"
+    output_scene.render.image_settings.color_depth = "8"
+    image = bpy.data.images.new("BFS_TYPED_REVIEW_FRAME", width=rgba.shape[1], height=rgba.shape[0], alpha=True, float_buffer=True)
+    try:
+        image.colorspace_settings.name = "ACEScg"
+        image.pixels.foreach_set(np.ascontiguousarray(np.flipud(rgba), dtype=np.float32).reshape(-1))
+        image.update()
+        image.save_render(filepath=str(path), scene=output_scene)
+    finally:
+        bpy.data.images.remove(image)
+        bpy.data.scenes.remove(output_scene)
+
+
 def render_reviews(scene, context, evidence_root):
     outputs = []
     scene.render.resolution_x = int(context["render"]["width"])
     scene.render.resolution_y = int(context["render"]["height"])
     scene.render.resolution_percentage = 100
-    scene.render.image_settings.file_format = "PNG"
-    scene.render.image_settings.color_mode = "RGBA"
-    scene.render.image_settings.color_depth = "8"
     scene.render.use_file_extension = True
+    scratch = evidence_root / "typed-review.exr"
     for shot in context["shots"]:
         scene.frame_set(shot["reviewFrame"])
         scene.camera = bpy.data.objects[shot["cameraId"]]
         output = evidence_root / "review" / f"frame-{shot['reviewFrame']:04d}.png"
         if output.exists():
             raise RuntimeError("REVIEW_OUTPUT_EXISTS")
-        scene.render.filepath = str(output)
+        if scratch.exists():
+            raise RuntimeError("SCRATCH_EXISTS")
+        scene.render.filepath = str(scratch)
         result = bpy.ops.render.render(write_still=True)
-        if "FINISHED" not in result or not output.is_file():
+        if "FINISHED" not in result or not scratch.is_file():
             raise RuntimeError("REVIEW_RENDER")
+        rgba = decode_combined(scratch)
+        if rgba.shape != (context["render"]["height"], context["render"]["width"], 4) or not np.isfinite(rgba).all():
+            raise RuntimeError("REVIEW_PIXELS")
+        save_png(output, rgba)
+        scratch.unlink()
+        if not output.is_file() or scratch.exists():
+            raise RuntimeError("REVIEW_ADAPTER")
         outputs.append({"frame": shot["reviewFrame"], "shotId": shot["shotId"], "camera": shot["cameraId"], "uri": str(output), "sha256": sha256_file(output), "bytes": output.stat().st_size})
     return outputs
 
 
 args = parse_args()
 context = json.loads(args.context.read_text(encoding="utf-8"))
-if not valid_self(context, "contextHash") or context["schemaVersion"] != "bfs.visualImprovementExecutionContextC1.v0.2" or context["experimentId"] != "PC4-VX1":
+if not valid_self(context, "contextHash") or context["schemaVersion"] != "bfs.visualImprovementExecutionContextC2.v0.3" or context["experimentId"] != "PC4-VX1":
     raise RuntimeError("CONTEXT")
 plan_path = Path(context["plan"]["uri"])
 packet_path = Path(context["packet"]["uri"])

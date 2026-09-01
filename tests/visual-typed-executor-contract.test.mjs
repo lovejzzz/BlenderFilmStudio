@@ -4,8 +4,8 @@ import test from 'node:test';
 import { canonicalJson, sha256 } from '../scripts/lib/scene-spec.mjs';
 
 const preregPath = 'specs/ai-native-studio-visual-plan-typed-execution-preregistration.v0.1.json';
-const correctionPath = 'specs/ai-native-studio-visual-plan-typed-execution-preregistration-c1.v0.2.json';
-const contextPath = 'specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context-c1.v0.2.json';
+const correctionPath = 'specs/ai-native-studio-visual-plan-typed-execution-preregistration-c2.v0.3.json';
+const contextPath = 'specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context-c2.v0.3.json';
 const planPath = 'experiments/visual-understanding-loop/PC4-VU1-2026-08-31-attempt-03/visual-improvement-plan.json';
 const packetPath = 'specs/fixtures/visual-review/PC4_ATTEMPT03.packet.json';
 const executorPath = 'scripts/execute-visual-improvement-plan.py';
