@@ -6,6 +6,7 @@ import argparse
 import copy
 import importlib
 import json
+import struct
 import sys
 from pathlib import Path
 
@@ -138,21 +139,34 @@ def reopen(module, root, fixture_uri, evidence):
     targets = [bpy.data.objects[name] for name in saved["semanticRoster"]["targets"]]
     physics = module._simulate(scene, actor, targets, document)
     measured = module._configure_measured_shutter(scene, bpy.data.objects["CAUSAL_CAM_IMPACT"], [actor, *targets], physics["motionSelection"]["impactFrame"], document)
-    masses = [round(target.rigid_body.mass, 8) for target in targets]
+    expected_masses = document["acceptance"]["derivedMassesKgExact"]
+    canonical_masses = [target["film_studio_mass_kg"] for target in targets]
+    solver_masses = [target.rigid_body.mass for target in targets]
+    expected_solver_masses = [struct.unpack("f", struct.pack("f", value))[0] for value in expected_masses]
     centers = [round(target["film_studio_center_of_mass_height_m"], 8) for target in targets]
     glass = [bpy.data.materials[f"MAT_CausalBottleShell_{index:02d}"] for index in range(1, 4)]
     checks = {
         "physicsExact": physics == saved["physics"],
         "motionBlurExact": measured == saved["cinematography"]["motionBlur"],
         "physicalArchetypesExact": saved["physicalArchetypes"]["targets"] == saved["initialConditions"]["targets"],
-        "massesExact": masses == document["acceptance"]["derivedMassesKgExact"],
+        "canonicalMassesExact": canonical_masses == expected_masses,
+        "solverFloat32MassesExact": solver_masses == expected_solver_masses,
         "centersOfMassExact": centers == document["acceptance"]["derivedCenterOfMassHeightsMetersExact"],
         "screenRefractionExact": all(material.use_screen_refraction for material in glass),
         "raytraceRefractionExact": all(material.use_raytrace_refraction for material in glass),
         "targetPoseAuthorityZero": saved["provenance"]["targetPoseKeyframes"] == 0,
         "postReleaseActorPoseAuthorityZero": saved["provenance"]["postReleaseActorPoseKeyframes"] == 0,
     }
-    result = {"schemaVersion": "bfs.pc9DevelopmentReopen.v0.1", "status": "PASS" if all(checks.values()) else "FAIL", "checks": checks, "massesKg": masses, "centerOfMassHeightsMeters": centers, "networkCalls": 0}
+    result = {
+        "schemaVersion": "bfs.pc9DevelopmentReopen.v0.2",
+        "status": "PASS" if all(checks.values()) else "FAIL",
+        "checks": checks,
+        "canonicalMassesKg": canonical_masses,
+        "solverFloat32MassesKg": solver_masses,
+        "expectedSolverFloat32MassesKg": expected_solver_masses,
+        "centerOfMassHeightsMeters": centers,
+        "networkCalls": 0,
+    }
     write(evidence / "reopen.json", result)
     if result["status"] != "PASS":
         raise RuntimeError("PC9 reopen failed")

@@ -696,6 +696,14 @@ that perturbed camera fitting. C4 `dbe75ef1…` preregisters one restoration:
 v0.1/v0.2/v0.4 retain historical `radius + 0.002`, while v0.5 alone uses the
 metric radius-scaled seam. The 29 authority attacks already pass. Exact PC8
 cinematography must pass after the fix.
+C4 replay now reproduces accepted PC8 physics, initial conditions,
+cinematography and pose provenance exactly. The first PC9 reopen verifier then
+exposed Blender's float32 `rigid_body.mass` storage (`0.30645` appears as
+`0.30645001`) while the canonical product value, COM, physics and shutter were
+exact. C5 `e8b37483…` freezes dual exact checks: canonical decimal values in
+the result/custom property and independently computed IEEE-754 float32 values
+in Blender's solver field, with no tolerance. Development run-08 passes all ten
+reopen checks plus exact PC8 compatibility.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

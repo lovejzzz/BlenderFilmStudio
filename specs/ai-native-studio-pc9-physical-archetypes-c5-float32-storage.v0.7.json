@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc9PhysicalArchetypesC5Float32Storage.v0.7",
+  "status": "PREREGISTERED_AFTER_RETAINED_REOPEN_VERIFIER_COUNTEREXAMPLE_BEFORE_VERIFIER_FIX",
+  "parent": {
+    "uri": "specs/ai-native-studio-pc9-physical-archetypes-c4-compatibility-correction.v0.6.json",
+    "sha256": "f912da0b9e878df9f3d3f88aefec67b79e03b022db375a4f735a8831fc765879",
+    "specHash": "dbe75ef1569d380dd2f07198657e19d7d1c040473622d75a83a399ac7dfaae97"
+  },
+  "boundProductModuleAfterC4Sha256": "b45c86d301b509898d05a897f38599d80ca20285c54919eb003719d4439ff6f2",
+  "counterexample": {
+    "root": "experiments/physical-archetypes/PC9-development-validation-2026-09-01-run-07",
+    "compatibility": {"sha256": "45e32cae62fd96c2c05fefeff4d1e323b34d17cdf38aa6be7241fe3453b45636", "status": "PASS"},
+    "reopen": {"sha256": "8ebc5c7a9b097d9f7d9fd5c8353f9e5f2b038860ab984cfc979940255fc7b2a7", "status": "FAIL"},
+    "contractMassesKg": [0.10685, 0.30645, 0.4811],
+    "reopenedBlenderRigidBodyMassesKg": [0.10685, 0.30645001, 0.48109999],
+    "physicsExact": true,
+    "motionBlurExact": true,
+    "centersOfMassExact": true,
+    "storedPhysicalArchetypesExact": true
+  },
+  "storageContract": {
+    "canonicalDerivedMasses": "exact decimal values in result.physicalArchetypes, result.initialConditions and object film_studio_mass_kg custom properties",
+    "solverAppliedMasses": "exact IEEE-754 float32 conversion of each canonical derived mass as stored by Blender rigid_body.mass",
+    "reopenRequirement": "both representations must be exact against their independently computed expected representation; no tolerance comparison",
+    "thresholdWeakening": false
+  },
+  "authorizedChange": {
+    "path": "scripts/check-pc9-physical-archetypes-development.py",
+    "productSourceChange": false,
+    "rule": "replace decimal-equality comparison against Blender float storage with exact custom-property comparison plus exact independently computed float32 comparison"
+  },
+  "stopRule": "Retain if any canonical mass custom property differs, any Blender rigid-body mass differs from exact float32 conversion, or physics, COM, shutter, refraction or pose authority differs after reopen.",
+  "specHash": "e8b3748327be41d510fbee0b1feb4011c77bf835a780879dda7086be4fec5ffd"
+}

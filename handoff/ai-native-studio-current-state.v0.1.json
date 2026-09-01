@@ -1619,7 +1619,7 @@
       "next": "PC9 must teach recognizable basketball and bottle physical archetypes, scale-aware mass/collision geometry and richer contact response without authoring final poses"
     },
     "physicalArchetypes": {
-      "status": "C4_PREREGISTERED_AFTER_RETAINED_BACKWARD_COMPATIBILITY_COUNTEREXAMPLE_BEFORE_PRODUCT_FIX",
+      "status": "C5_DEVELOPMENT_COMPATIBILITY_AND_REOPEN_PASS_BEFORE_PRODUCT_COMMIT",
       "experimentId": "PC9-PHYSICAL-ARCHETYPES-AND-CONTACT-REALISM",
       "preregistration": "specs/ai-native-studio-pc9-physical-archetypes-preregistration.v0.1.json",
       "preregistrationFileSha256": "c24c417af2e6dadb0baa94163c7ac2f3e78327ea6cb4e3d55d06e698d47694b4",
@@ -1720,7 +1720,7 @@
         "developmentCompatibilityCounterexample": "experiments/physical-archetypes/PC9-development-validation-2026-09-01-run-05/backward-compatibility.json",
         "acceptedBaselineControl": "experiments/physical-archetypes/PC9-development-validation-2026-09-01-run-06/backward-compatibility.json"
       },
-      "activeCorrection": {
+      "c4Correction": {
         "contract": "specs/ai-native-studio-pc9-physical-archetypes-c4-compatibility-correction.v0.6.json",
         "contractFileSha256": "f912da0b9e878df9f3d3f88aefec67b79e03b022db375a4f735a8831fc765879",
         "contractHash": "dbe75ef1569d380dd2f07198657e19d7d1c040473622d75a83a399ac7dfaae97",
@@ -1729,6 +1729,27 @@
         "authorizedFix": "restore historical radius + 0.002 actor-seam major radius for v0.1/v0.2/v0.4; keep metric scaling only for v0.5",
         "thresholdsWeakened": false,
         "finalPoseAuthorityAdded": false
+      },
+      "activeCorrection": {
+        "contract": "specs/ai-native-studio-pc9-physical-archetypes-c5-float32-storage.v0.7.json",
+        "contractFileSha256": "61261bd473e0d37930b003a30f89cf2196168a4e00c3810e52e526fe3fd454f9",
+        "contractHash": "e8b3748327be41d510fbee0b1feb4011c77bf835a780879dda7086be4fec5ffd",
+        "researchDocument": "research/2026-09-01-ai-native-studio-pc9-c5-float32-storage.md",
+        "researchDocumentFileSha256": "011aa1cb1b483b025cabb5ab7be869fb40d9ee51a6a2bb3fb96d3429a8440a54",
+        "productSourceChange": false,
+        "storageContract": "canonical derived mass exact plus exact independently computed Blender float32 solver mass"
+      },
+      "acceptedDevelopmentValidation": {
+        "root": "experiments/physical-archetypes/PC9-development-validation-2026-09-01-run-08",
+        "reopenSha256": "c33a63b38968eecb42f58a8e19480d759edfe31f796be887c42d660ef1adef8d",
+        "backwardCompatibilitySha256": "45e32cae62fd96c2c05fefeff4d1e323b34d17cdf38aa6be7241fe3453b45636",
+        "directVisualReview": "experiments/physical-archetypes/PC9-development-validation-2026-09-01-run-08/direct-visual-review.json",
+        "directVisualReviewFileSha256": "7826c8a1dbe055e2e2eab96efe1d96560cf6337f580742f1ef43b7f096e550d5",
+        "directVisualReviewHash": "e09c50a52e08d1b7e08f47122060c957bdea7063de6602a0f5a4c641fa5e18f0",
+        "directVisualAnswersYes": 7,
+        "reopenStatus": "PASS",
+        "reopenCheckCount": 10,
+        "pc8ExactCompatibility": true
       },
       "productBaseline": "9d5a66869528b66216b977c01312cdc849f28fad",
       "authorizedProductPaths": ["scripts/modules/film_studio_causal.py"],
@@ -1752,7 +1773,7 @@
       "formalEvidenceRoot": "experiments/physical-archetypes/PC9-2026-09-01-attempt-01",
       "formalRootsExist": false,
       "claimCeiling": "one metric basketball/filled-bottle physical-archetype lesson; no liquid slosh, deformation, photorealism, broad asset generalization or robot-capstone claim",
-      "next": "apply the one-expression C4 compatibility restoration, require exact PC8 v0.4 replay, then run PC9 reopen and all-seven-question review before any product commit or formal tool freeze"
+      "next": "record the seven-question development visual review, commit the one-path product change if all are YES, then freeze formal PC9 tools and perform the single clean native build"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
