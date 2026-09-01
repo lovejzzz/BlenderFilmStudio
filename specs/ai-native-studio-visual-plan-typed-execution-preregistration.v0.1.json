@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "bfs.visualPlanTypedExecutionPreregistration.v0.1",
+  "experimentId": "PC4-VX1",
+  "status": "PREREGISTERED_BEFORE_DERIVATIVE_MUTATION",
+  "title": "Typed semantic VisualImprovementPlan executor on the real PC.4 project",
+  "purpose": "Prove that the reusable visual plan can drive a trusted bounded Blender adapter without project-specific proposal code, then rerender the three evidence-bound views for model visual A/B review.",
+  "context": {
+    "uri": "specs/fixtures/visual-review/PC4_ATTEMPT03.execution-context.v0.1.json",
+    "sha256": "a2bf2874ef80d7ae58eda0060f76d39bb65878ae11a6f2db97784e8ecb1b6be0",
+    "contextHash": "15a0d23a324367f0016e27f9cf3f804cc28f6a914b29923956f8c16637b869ee"
+  },
+  "inputPlan": {
+    "uri": "experiments/visual-understanding-loop/PC4-VU1-2026-08-31-attempt-03/visual-improvement-plan.json",
+    "sha256": "382ef19149fc2cbe092e71d5988f4cf2e65615663cb6abbf59f7b155de8e4825",
+    "planHash": "674bc0820eb1856539cc310e628bb69b32ee6ae8b88d7d4662d9deff27d7ac00",
+    "requiredDecision": "COMPILED",
+    "exactOperationCount": 6
+  },
+  "typedAdapters": [
+    {
+      "operationType": "SET_SHOT_VISIBILITY",
+      "preset": "HIDE_CONFIRMED_FOREGROUND_OCCLUDER",
+      "semantics": "Keyframe hide_render CONSTANT for every plan target across only the bound shot range, retaining its prior state immediately outside the shot."
+    },
+    {
+      "operationType": "APPLY_FRAMING_PRESET",
+      "preset": "READABLE_SUBJECT_FRAMING",
+      "semantics": "Use the packet camera bound to the operation shot and widen its lens by a deterministic 12 percent, below the plan maximum of 15 percent; camera transforms are unchanged."
+    },
+    {
+      "operationType": "REPLACE_FORM_WITH_ASSEMBLY",
+      "preset": "LAYERED_MECHANICAL_JOINT",
+      "semantics": "Within the plan target set, select mesh targets with at least 400 polygons as primitive primary forms, reduce each primary form to a mechanical core and derive at least three armor/core/ring layers from its evaluated bounding box and transform."
+    },
+    {
+      "operationType": "ADD_DETAIL_SYSTEM",
+      "preset": "FACIAL_SEGMENTATION",
+      "semantics": "Choose the maximum-volume plan target as the anchor and derive at least seven brow, cheek, jaw and crest layers from its camera-facing bounding box; no object name is used for geometric placement."
+    },
+    {
+      "operationType": "ADD_DETAIL_SYSTEM",
+      "preset": "MID_SCALE_PANEL_HIERARCHY",
+      "semantics": "For each plan target, derive at least three sparse camera-facing panel or vent layers from its evaluated bounding box; no external asset is introduced."
+    }
+  ],
+  "authority": {
+    "planMayProvidePython": false,
+    "planMayProvideShell": false,
+    "planMayProvideBlenderOperators": false,
+    "planMayProvideFilesystemPaths": false,
+    "networkAllowed": false,
+    "externalAssetsAllowed": false,
+    "trustedVersionedExecutorOnly": true
+  },
+  "acceptance": {
+    "exactPlanOperationsConsumed": 6,
+    "unknownOperationOrPresetRejected": true,
+    "minimumJointPrimaryForms": 4,
+    "minimumJointLayersPerPrimary": 3,
+    "minimumFacialSegmentationParts": 7,
+    "minimumSurfaceHierarchyParts": 9,
+    "minimumTotalNewTypedParts": 28,
+    "wideOccluderTargetsHiddenAtFrame48": 2,
+    "wideOccluderTargetsRetainPriorStateOutsideShot": true,
+    "framingCameraCount": 2,
+    "maximumAbsoluteLensChangePercent": 15,
+    "cameraTransformsExact": true,
+    "lightTransformsEnergyColorExact": true,
+    "sourceSha256BeforeAfterExact": true,
+    "derivedBlendDifferentFromSource": true,
+    "derivedSceneSaves": 1,
+    "blenderStarts": 2,
+    "renderCalls": 3,
+    "reviewPngs": 3,
+    "retainedExr": 0,
+    "reopenAuditRequired": true,
+    "directModelVisualReviewRequired": true,
+    "fullSequenceRenderBeforeVisualPass": false
+  },
+  "resourceCeilings": {
+    "minimumFreeDiskBytesBeforeStart": 107374182400,
+    "workRootBytes": 1073741824,
+    "evidenceRootBytes": 67108864,
+    "wallSeconds": 900,
+    "peakRssBytesPerProcess": 4294967296
+  },
+  "stopRules": [
+    "Stop before Blender if context, plan, packet, source or binary identity differs.",
+    "Stop before save if any plan target or shot camera is missing, an operation is unknown, an adapter exceeds its plan parameter, or a protected light/camera transform changes.",
+    "Stop after the three review PNGs until direct visual inspection; do not render a full sequence on machine counts alone.",
+    "A visually worse or still-insufficient result is a valid FAIL and must be retained."
+  ],
+  "nonClaims": [
+    "PC4-VX1 does not prove every future plan treatment or asset style.",
+    "Procedural typed geometry is not equivalent to a production character artist.",
+    "Machine geometry counts cannot override direct screenshot visual review.",
+    "PC.3 human review remains pending and separate."
+  ],
+  "specHash": "2dc76134c49524dfe527cdecec88aa2944c6f980fa927e4a83710bdcb4d98d7e"
+}
