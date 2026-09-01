@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "bfs.rc3PhysicsActionDevelopmentFailure.v0.2",
+  "status": "FAIL_RETAINED_AFTER_TWO_PHYSICS_SOLVES",
+  "reason": "NEGATIVE_CONTROL_NONFINITE_PREHASH_EXCEPTION",
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC3-development-attempt-02",
+    "evidence": "experiments/physics-native-action/RC3-2026-09-01-development-attempt-02",
+    "immutable": true
+  },
+  "passedBeforeStop": {
+    "d1BuildAndReopen": true,
+    "h1BuildAndReopen": true,
+    "d1ContactFrame": 52,
+    "d1PeakShutterOpenDegrees": 98.80388412,
+    "d1MaximumReopenActorDeltaMeters": 3.259629011154175e-9,
+    "h1ContactFrame": 16,
+    "h1RespondingBottleCount": 3,
+    "h1FinalTiltDegrees": [90.00001985, 90.0000038, 0.0],
+    "h1MaximumReopenActorDeltaMeters": 7.679882693323606e-9,
+    "h1MaximumReopenTargetTiltDeltaDegrees": 4.991377977603406e-9,
+    "allPostReleaseTransformKeys": 0,
+    "allAuthoredOutcomeFields": 0,
+    "allLightAnimationChannels": 0
+  },
+  "failure": {
+    "negativeCasesCompleted": 15,
+    "negativeCaseThatRaisedBeforeRecording": "nonfinite",
+    "productBehavior": "The shared canonicalizer correctly rejected Infinity before a self hash could be produced.",
+    "toolDefect": "The negative-control helper attempted to self-hash the invalid in-memory value before invoking the validator and did not catch the canonicalizer exception."
+  },
+  "counts": {"acceptedBinaryStarts": 5, "sceneMutatingExecutions": 2, "blendSaves": 2, "reopens": 2, "negativeControlStarts": 1, "renders": 0, "networkCalls": 0, "engineRemoteWrites": 0},
+  "processHashes": ["b5c4b2e61d06d8eb7e33036fcc590d6074fdc1042c8082a614beb6e8292469ca", "619b3688c17ea20fa0e66655e0df8928e79f32cc0b1eac8eabaa9f55f59", "79addc49f8b2e428b53748a22fe59a4cd0ce2a3f735efddfe1abf2c905e536e2", "8fff241b52446c3cd8692a47409071987478b632c9f8d648f74aaf9f1c42466c", "72cb56932f1f017a80c09c7af3d72adda998d55fa46dd78369457e6ba6d1f7c3"],
+  "productBytesChangedAfterAttempt01": false,
+  "correction": "Use a versioned product-side test tool that invokes the finite-number validator directly for the synthetic Infinity case, retain all product and fixture bytes, and replay in fresh attempt-03 roots.",
+  "failureHash": "4e067da8e7fca8a3320b0cec7fc0f721fd86a7f06aa532cae83ef157606f152f"
+}

@@ -6863,3 +6863,16 @@ requiring the promised build JSON and blend. Attempt-01 stopped at the missing
 reopen input; H1 and negative starts remained zero. C2 changes only both fixture
 self hashes, fresh roots and immediate artifact-existence gates. Product bytes,
 physics, thresholds and authority remain exact.
+
+## J-592 · RC3 attempt-02 proves both solves; negative helper failure retained
+
+Date: 2026-09-01 · Type: RETAINED TEST-HARNESS FAILURE + C3 · Binary starts / scene mutations / renders: 5 / 2 / 0
+
+D1 and H1 both built, saved and reopened. D1 contact/response is frame 52 and
+peak gate angle 98.80388412°. H1 contact is frame 16; all three bottles respond,
+two finish near 90° and one finishes upright, preserving a solver-owned
+non-choreographed outcome. Maximum reopen deltas remain below `8e-9` m and
+`5e-9`°. The final negative helper then tried to hash Infinity before
+validation; the canonicalizer correctly raised but the case was not recorded.
+C3 changes only that synthetic test call and replays unchanged product/fixtures
+in fresh roots.

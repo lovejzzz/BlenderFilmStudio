@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+  File "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/scripts/run-rc3-physics-action-product.py", line 148, in <module>
+    {"build": build, "reopen": reopen, "negative": negative}[args.action]()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/scripts/run-rc3-physics-action-product.py", line 140, in negative
+    reject("nonfinite", lambda v: v["nodes"][0]["rigidBody"].update({"massKg": float("inf")}), "SPEC_SCHEMA")
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/scripts/run-rc3-physics-action-product.py", line 117, in reject
+    value["physicsActionSpecHash"] = action._self_hash(value, "physicsActionSpecHash")
+                                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-development/source/scripts/modules/film_studio_physics_action.py", line 79, in _self_hash
+    return _sha256(_canonical(body).encode("utf-8"))
+                   ~~~~~~~~~~^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-development/source/scripts/modules/film_studio_physics_action.py", line 69, in _canonical
+    return film_studio_contract.javascript_canonical_json(value)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 80, in javascript_canonical_json
+    return "{" + ",".join(
+                 ~~~~~~~~^
+        f"{javascript_canonical_json(key)}:{javascript_canonical_json(value[key])}"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        for key in sorted(value)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ) + "}"
+    ^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 81, in <genexpr>
+    f"{javascript_canonical_json(key)}:{javascript_canonical_json(value[key])}"
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 78, in javascript_canonical_json
+    return "[" + ",".join(javascript_canonical_json(item) for item in value) + "]"
+                 ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 78, in <genexpr>
+    return "[" + ",".join(javascript_canonical_json(item) for item in value) + "]"
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 80, in javascript_canonical_json
+    return "{" + ",".join(
+                 ~~~~~~~~^
+        f"{javascript_canonical_json(key)}:{javascript_canonical_json(value[key])}"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        for key in sorted(value)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ) + "}"
+    ^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 81, in <genexpr>
+    f"{javascript_canonical_json(key)}:{javascript_canonical_json(value[key])}"
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 80, in javascript_canonical_json
+    return "{" + ",".join(
+                 ~~~~~~~~^
+        f"{javascript_canonical_json(key)}:{javascript_canonical_json(value[key])}"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        for key in sorted(value)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ) + "}"
+    ^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 81, in <genexpr>
+    f"{javascript_canonical_json(key)}:{javascript_canonical_json(value[key])}"
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 76, in javascript_canonical_json
+    return javascript_number(value)
+  File "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC2-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/scripts/modules/film_studio_contract.py", line 43, in javascript_number
+    raise ContractError("NONFINITE_NUMBER", "JSON contains a non-finite number")
+film_studio_contract.ContractError: JSON contains a non-finite number
