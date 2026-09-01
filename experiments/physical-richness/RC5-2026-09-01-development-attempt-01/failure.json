@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "RC5_CANDIDATE_MACHINE_ACCEPTANCE",
+  "researchCommit": "036be8b276d0d720b5f1fea2a89df0d9135f1050",
+  "productBaseCommit": "db662438edfef0a1979d8227c8b58cf8620e2b74",
+  "candidateModuleSha256": "dc9074be43ca4a5cd9bd432bdaf875912bb4e50f1702bcee84de91d9e096e3f6",
+  "runnerSha256": "51fadf897af6e35dab53d57a762e3b29593c8851ee599cfa5c0bf7249aa301de",
+  "binarySha256": "ae686bce6a2a50833db74d74c76d46a4667a96872fe06853668c89367a7961c4",
+  "fixture": {
+    "uri": "specs/fixtures/physics-action/RC5_B1.basketball-three-bottles-breakaway-cap.physics-action-spec.v0.2.json",
+    "fileSha256": "a0b00cb15d66db88a85a9918701baae08734023d76edc1871901d780524169c5",
+    "physicsActionSpecHash": "bac28a88028ffaed0b09685059e63c1f4cf23c2ad1b2a79901f54e699d4b1e34"
+  },
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-01",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-01",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "buildEvidence": {
+    "file": "B1-build.json",
+    "fileSha256": "fffdd07ec44691e6ea47fa5e6d4b1b597560ef0c3a5609bb27eba0be90e82e5e",
+    "resultHash": "6e398b474ec8aa1e2fe2a160ab6cb8d80ef25bbfe8d5e055fa5c304d5eba0484",
+    "blendSha256": "e6d435e0f6a4193207d8522ecbbbee18ab7e297c51a701cf7cfbc68901e85715",
+    "machineChecks": "12/15 PASS",
+    "failedChecks": [
+      "continuousCapMotion",
+      "derivedDetachmentWindow",
+      "detachedSeparation"
+    ]
+  },
+  "observations": {
+    "contactFrame": 16,
+    "configuredAttachmentTarget": "CAUSAL_TARGET_001",
+    "maximumPrecontactAttachmentSeparationMeters": 0.00000004,
+    "maximumAttachmentSeparationMeters": 0.00002009,
+    "detachmentFrame": null,
+    "bottleFinalTiltDegrees": {
+      "CAUSAL_TARGET_001": 0.0,
+      "CAUSAL_TARGET_002": 89.99999992,
+      "CAUSAL_TARGET_003": 89.99999124
+    },
+    "initialPathPerpendicularDistancesMetersByZeroBasedMember": [
+      0.16702923,
+      0.0100688,
+      0.15291409
+    ]
+  },
+  "rootCause": "The fixture described a direct-hit cap but selected target member 0 by array index. Initial metric trajectory geometry identifies member 1 as the unique closest member to the initiator release ray. The break threshold and solver behaved consistently; the semantic target binding was wrong.",
+  "correctionBoundary": "Do not lower the break threshold, type member 1, add a break frame or author a detached pose. Replace the index with one generic initial-condition policy that derives the attachment target from the initiator release ray before simulation.",
+  "counts": {
+    "productStarts": 1,
+    "rc5SceneBuilds": 1,
+    "blendSaves": 1,
+    "reopens": 0,
+    "regressionSceneExecutions": 0,
+    "renderCalls": 0,
+    "ffmpegProcesses": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "4c506f68431e71f05db0c4fe1dfe218a693707f7d764342c2697c5275784462b"
+}

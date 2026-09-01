@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc5BreakableAttachmentC2.v0.3",
+  "status": "CORRECTED_AFTER_RETAINED_ATTEMPT_01_BEFORE_ATTEMPT_02_ROOT_CREATION",
+  "baseContract": "specs/ai-native-studio-rc5-breakable-attachment-preregistration.v0.1.json",
+  "baseSpecHash": "78157d4124bd3fa4aafd5a6e8bae8fa4ba12fd0a11f9491668c4005fc59039ae",
+  "c1Contract": "specs/ai-native-studio-rc5-breakable-attachment-c1-process-counts.v0.2.json",
+  "c1CorrectionHash": "4f9f9d96bd74f62ef50e04b4eaf6c1a7535db1e5e53a79a94ce5625091c75ce6",
+  "retainedAttempt01": {
+    "evidenceRoot": "experiments/physical-richness/RC5-2026-09-01-development-attempt-01",
+    "workspaceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-01",
+    "failureFileSha256": "76f1f42950e905aa0bde347e504c95b3f0eed6fbf84f54464d6fb812ac2d7a5e",
+    "failureHash": "4c506f68431e71f05db0c4fe1dfe218a693707f7d764342c2697c5275784462b",
+    "machineChecks": "12/15 PASS",
+    "maximumAttachmentSeparationMeters": 0.00002009,
+    "immutable": true
+  },
+  "rootCause": {
+    "description": "The fixture called the cap direct-hit but bound it to array member 0. The metric initiator release ray passes within 0.0100688 m of member 1 and 0.16702923/0.15291409 m of members 0/2.",
+    "classification": "SEMANTIC_TARGET_BINDING",
+    "notThresholdFailure": true,
+    "notSolverFailure": true
+  },
+  "correction": {
+    "oldFixture": "specs/fixtures/physics-action/RC5_B1.basketball-three-bottles-breakaway-cap.physics-action-spec.v0.2.json",
+    "oldFixtureFileSha256": "a0b00cb15d66db88a85a9918701baae08734023d76edc1871901d780524169c5",
+    "oldSpecHash": "bac28a88028ffaed0b09685059e63c1f4cf23c2ad1b2a79901f54e699d4b1e34",
+    "newFixture": "specs/fixtures/physics-action/RC5_B1.basketball-three-bottles-breakaway-cap.physics-action-spec.v0.3.json",
+    "newFixtureFileSha256": "7ae9ffc11541dcfe92d1f9e66a8f923aaba6d9d8f79d59ec8c8b9dff66a8410a",
+    "newSpecHash": "3c269bc31341efb4c9f78fabcebb64bcc94042623dd4fee545e2829d3573e295",
+    "removedInput": {
+      "jsonPath": "/nodes/2/parameters/targetMemberIndex",
+      "value": 0
+    },
+    "addedInput": {
+      "jsonPath": "/nodes/2/parameters/targetMemberPolicy",
+      "value": "MINIMUM_DISTANCE_TO_INITIATOR_RELEASE_RAY"
+    },
+    "derivation": "Select the target member with minimum perpendicular distance from its metric initial center to the initiator's forward release ray; require a unique minimum and positive forward projection before scene mutation.",
+    "typedObservedMemberIndexAllowed": false,
+    "projectObjectNameOrFixtureHashBranchingAllowed": false
+  },
+  "unchanged": {
+    "basketballInitialCondition": true,
+    "bottleInitialBasePositions": true,
+    "bottleMassFillFrictionAndRestitutionDerivations": true,
+    "capMassKg": 0.012,
+    "breakingImpulseThreshold": 0.02,
+    "constraintSolverIterations": 80,
+    "constraintCollisionPolicy": true,
+    "machineAcceptance": true,
+    "directVisualQuestions": true,
+    "authorityBoundary": true,
+    "resourceCeilings": true,
+    "claimCeiling": true,
+    "stopRule": true
+  },
+  "attempt02": {
+    "workspaceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-02",
+    "evidenceRoot": "experiments/physical-richness/RC5-2026-09-01-development-attempt-02",
+    "rootsMustBeFresh": true,
+    "sameProcessAndResourceCeilingsAsC1": true
+  },
+  "correctionHash": "59fd479a6d9d9b8d3df3f4b65fcb79a82fe43c7c45a0d7eb8c14e66268de97f2"
+}

@@ -1,0 +1,269 @@
+{
+  "$schema": "bfs.physicsActionSpec.v0.3",
+  "schemaVersion": "bfs.physicsActionSpec.v0.3",
+  "projectId": "RC5-B1-BASKETBALL-THREE-BOTTLES-BREAKAWAY-CAP",
+  "timeline": {
+    "frameStart": 1,
+    "frameEnd": 216,
+    "fps": 24
+  },
+  "world": {
+    "gravityMetersPerSecondSquared": [
+      0.0,
+      0.0,
+      -9.81
+    ],
+    "unitScaleMeters": 1.0
+  },
+  "nodes": [
+    {
+      "id": "worn_basketball",
+      "semanticRole": "initiator",
+      "factory": "GROOVED_BASKETBALL",
+      "parameters": {
+        "radiusMeters": 0.119,
+        "materialPreset": "WORN_GAME_BASKETBALL"
+      },
+      "initialCondition": {
+        "location": [
+          -2.15,
+          -0.04,
+          0.119
+        ],
+        "rotationDegrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "releaseFrame": 12,
+        "preReleaseVelocityMetersPerSecond": [
+          4.25,
+          0.08,
+          0.0
+        ]
+      },
+      "rigidBody": {
+        "type": "ACTIVE",
+        "massKg": 0.625,
+        "collisionShape": "SPHERE",
+        "friction": 0.68,
+        "restitution": 0.68,
+        "linearDamping": 0.05,
+        "angularDamping": 0.09
+      }
+    },
+    {
+      "id": "filled_glass_bottles",
+      "semanticRole": "response_group",
+      "factory": "FILLED_LATHED_BOTTLE_ARRAY",
+      "parameters": {
+        "count": 3,
+        "heightMeters": 0.31,
+        "bodyRadiusMeters": 0.047,
+        "fillFractions": [
+          0.46,
+          0.77,
+          0.63
+        ],
+        "materialPreset": "HOUSEHOLD_GLASS_WITH_VISIBLE_FILL_AND_VARIATION",
+        "initialBasePositions": [
+          [
+            0.0,
+            -0.16,
+            0.0
+          ],
+          [
+            0.16,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.16,
+            0.0
+          ]
+        ]
+      },
+      "initialCondition": {
+        "location": [
+          0.35,
+          0.0,
+          0.0
+        ],
+        "rotationDegrees": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "releaseFrame": 1
+      },
+      "rigidBody": {
+        "type": "ACTIVE",
+        "massDerivation": "GLASS_PLUS_FILL_VOLUME_DENSITY",
+        "collisionShape": "CONVEX_HULL",
+        "friction": 0.44,
+        "restitution": 0.11,
+        "linearDamping": 0.09,
+        "angularDamping": 0.14
+      }
+    },
+    {
+      "id": "breakaway_cap",
+      "semanticRole": "secondary_response",
+      "factory": "BREAKAWAY_BOTTLE_CAP",
+      "parameters": {
+        "targetMemberPolicy": "MINIMUM_DISTANCE_TO_INITIATOR_RELEASE_RAY",
+        "materialPreset": "CRIMPED_ALUMINUM_CAP"
+      },
+      "initialCondition": {
+        "deriveFromTargetGeometry": true
+      },
+      "rigidBody": {
+        "type": "ACTIVE",
+        "massKg": 0.012,
+        "collisionShape": "CYLINDER",
+        "friction": 0.38,
+        "restitution": 0.18,
+        "linearDamping": 0.08,
+        "angularDamping": 0.12
+      }
+    },
+    {
+      "id": "court_floor",
+      "semanticRole": "support_surface",
+      "factory": "BEVELED_GROUND_PLANE",
+      "parameters": {
+        "widthMeters": 5.8,
+        "depthMeters": 3.6,
+        "thicknessMeters": 0.08,
+        "materialPreset": "AGED_MAPLE_COURT_WITH_SCALE_CUES"
+      },
+      "initialCondition": {
+        "location": [
+          -0.45,
+          0.0,
+          -0.04
+        ],
+        "rotationDegrees": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "rigidBody": {
+        "type": "PASSIVE",
+        "collisionShape": "BOX",
+        "friction": 0.61,
+        "restitution": 0.06
+      }
+    },
+    {
+      "id": "window_key",
+      "semanticRole": "static_light_source",
+      "factory": "STATIC_AREA_LIGHT",
+      "parameters": {
+        "powerWatts": 820.0,
+        "colorLinearRgb": [
+          1.0,
+          0.72,
+          0.5
+        ],
+        "sizeMeters": 1.8
+      },
+      "initialCondition": {
+        "location": [
+          -0.7,
+          -2.2,
+          2.7
+        ],
+        "rotationDegrees": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ],
+  "relations": [
+    {
+      "id": "floor_support_actor",
+      "type": "RESTS_ON",
+      "source": "worn_basketball",
+      "target": "court_floor"
+    },
+    {
+      "id": "floor_support_targets",
+      "type": "RESTS_ON",
+      "source": "filled_glass_bottles",
+      "target": "court_floor"
+    },
+    {
+      "id": "primary_impact",
+      "type": "COLLIDES_WITH",
+      "source": "worn_basketball",
+      "target": "filled_glass_bottles",
+      "contactToleranceMeters": 0.002
+    },
+    {
+      "id": "group_response",
+      "type": "PROPAGATES_RESPONSE_WITHIN",
+      "source": "filled_glass_bottles",
+      "minimumResponders": 2
+    },
+    {
+      "id": "cap_attachment",
+      "type": "BREAKABLE_FIXED_TO",
+      "source": "breakaway_cap",
+      "target": "filled_glass_bottles",
+      "breakingImpulseThreshold": 0.02,
+      "solverIterations": 80,
+      "disableCollisions": true
+    }
+  ],
+  "beats": [
+    {
+      "id": "cause",
+      "deriveFrom": "BEFORE_RELATION_EVENT",
+      "relation": "primary_impact",
+      "offsetFrames": -12
+    },
+    {
+      "id": "contact",
+      "deriveFrom": "FIRST_CONTACT",
+      "relation": "primary_impact"
+    },
+    {
+      "id": "effect",
+      "deriveFrom": "SETTLED_GROUP_RESPONSE",
+      "node": "filled_glass_bottles",
+      "afterBeat": "contact"
+    }
+  ],
+  "cinematography": {
+    "policy": "SEMANTIC_CAUSE_CONTACT_EFFECT",
+    "reviewResolution": [
+      1280,
+      720
+    ],
+    "clipFrameCount": 48,
+    "motionBlur": {
+      "source": "MEASURED_PROJECTED_MEDIAN_MOTION",
+      "targetBlurPixels": 6.0,
+      "position": "CENTER"
+    }
+  },
+  "forbidden": {
+    "authoredTransformAfterRelease": true,
+    "authoredContactFrame": true,
+    "authoredResponseFrame": true,
+    "authoredFinalPose": true,
+    "authoredBreakFrame": true,
+    "authoredDetachedPose": true,
+    "authoredDetachmentVelocity": true,
+    "animatedLightPowerOrColor": true,
+    "postprocessMotionBlur": true,
+    "projectOrFixtureBranchInProductCode": true,
+    "arbitraryPythonShellNetworkOrFilesystemAuthority": true
+  },
+  "physicsActionSpecHash": "3c269bc31341efb4c9f78fabcebb64bcc94042623dd4fee545e2829d3573e295"
+}
