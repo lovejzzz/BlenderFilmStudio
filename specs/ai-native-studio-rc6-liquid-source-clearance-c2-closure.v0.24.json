@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "bfs.rc6LiquidSourceClearanceC2ClosureSpec.v0.24",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-SOURCE-CLEARANCE-C2-CLOSURE-2026-09-01-ATTEMPT-24",
+  "purpose": "Close retained C1 attempt-23 without launching Blender or recomputing physics by separating requested source clearance from Blender-measured placement and independently rebinding every retained process, result, cache and baked state.",
+  "toolFreezeParent": "7b225e454ed26ba1fadb6023c3029d739b8faac5",
+  "roots": {
+    "retainedWork": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-source-clearance-c1-attempt-23",
+    "retainedEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-source-clearance-c1-attempt-23",
+    "closureEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-source-clearance-c2-closure-attempt-24"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "engineSourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6"
+  },
+  "retainedAttempt": {
+    "researchCommit": "7b225e454ed26ba1fadb6023c3029d739b8faac5",
+    "failureFileSha256": "49094b34427636176272f4f68209362e15a23f27a84ee526aeca6339f91d1e16",
+    "failureHash": "cde94bec575d201077cadb7a540f5a158c3a38ee72da400996563300dc57a5a4",
+    "status": "FAIL_EXECUTION",
+    "message": "clearance-20mm: configuration mismatch",
+    "completedBlenderStarts": 4,
+    "completedFluidDataBakes": 4,
+    "completedFluidMeshBakes": 4
+  },
+  "measurementBinding": {
+    "semantic": "requested clearance is the command value; measured clearance is reconstructed from Blender single-precision scene coordinates",
+    "maximumAbsoluteClearanceErrorMeters": 1e-08,
+    "maximumAbsoluteClearanceErrorVoxels": 2e-06,
+    "scientificThresholdChange": false
+  },
+  "matrix": {
+    "fixed": {
+      "baseVoxelMeters": 0.0052083333,
+      "cflCondition": 2.0,
+      "cupEffectorSubframes": 0,
+      "domainCenterMeters": [0.32, 0.0, 0.25],
+      "domainDimensionsMeters": [0.36, 0.36, 0.5],
+      "flowSurfaceDistanceCells": 0.0,
+      "flowVolumeDensityObserved": 0.0,
+      "frameEnd": 7,
+      "frameStart": 1,
+      "meshParticleRadius": 4.5,
+      "meshScale": 2,
+      "particleNumber": 2,
+      "particleRadius": 1.6,
+      "preContactOnly": true,
+      "resolutionMax": 96,
+      "simulationMethod": "APIC",
+      "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006],
+      "timestepsMax": 4,
+      "timestepsMin": 1,
+      "waterViscosityBase": 1.0,
+      "waterViscosityExponent": 6
+    },
+    "cells": [
+      {"cellId": "clearance-20mm", "requestedClearanceMeters": 0.02, "requestedClearanceVoxels": 3.84},
+      {"cellId": "clearance-25mm", "requestedClearanceMeters": 0.025, "requestedClearanceVoxels": 4.8},
+      {"cellId": "clearance-30mm", "requestedClearanceMeters": 0.03, "requestedClearanceVoxels": 5.76},
+      {"cellId": "clearance-35mm", "requestedClearanceMeters": 0.035, "requestedClearanceVoxels": 6.72}
+    ],
+    "selectionRule": "among cells passing unchanged signed-topology and scientific thresholds, minimum absolute source-volume error, then minimum temporal drift, then lower measured source-bottom clearance",
+    "exactCacheFilesPerCell": 21,
+    "exactCacheFramesPerStage": [1, 2, 3, 4, 5, 6, 7]
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.0104166667,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "resourceCeilings": {
+    "retainedWorkBytes": 67108864,
+    "retainedEvidenceBytes": 1048576,
+    "closureEvidenceBytes": 16777216,
+    "minimumFreeBytesAfter": 107374182400,
+    "newBlenderStarts": 0,
+    "newPhysicsBakes": 0,
+    "newRenderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "stopRule": "Stop on any retained identity, process, argv, log, result, seven-frame sample, exact 21-file cache roster, baked-state, signed-topology, source-volume, placement-roundoff, resource, render-media or symlink mismatch. Do not launch Blender, rebake, rerender, mutate retained roots or weaken any scientific threshold.",
+  "claimCeiling": "Zero-recompute closure of the retained four-cell seven-frame resolution-96 static source-clearance control. PASS_STATIC_CONTROL may unlock only final-resolution static confirmation; it does not prove slow-tip, impact, lighting, final render or finished-film quality.",
+  "tools": {
+    "scripts/close-rc6-liquid-source-clearance-c2.py": "d0b6daa0f8f83db0ac2c80ddb0fd26a2267fc1d9ad7fbbda7280a8ecdc9de9fd",
+    "scripts/audit-rc6-liquid-source-clearance-c2.py": "3255b7ebb03f6616515c38494452f4aefb462ddb58b6738cab259bf207627b6b"
+  },
+  "specHash": "2865869b173b24578ffe670fc61fa12620416ebc8a3b50623cbd5364b580431c"
+}
