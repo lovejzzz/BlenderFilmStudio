@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "bfs.rc6LiquidStaticComponentDiagnosticInvalidation.v0.1",
+  "status": "INVALIDATED",
+  "reportedReceiptHash": "3af1f582ae7a12bbcddae6d9132a9a64ca08e463cc8d6a079a9373a5e3f515fa",
+  "reportedReportHash": "ef9dd9b6272696da7ba6653c5ce4b1b0827a9b0b49f057338a7ed732aa7ffe49",
+  "defects": {
+    "retainedLiquidMeshNotLoaded": true,
+    "evaluatedObjectWasOriginalDomainBox": true,
+    "reportedVertexCount": 8,
+    "reportedPolygonCount": 6,
+    "reportedVolumeCubicMeters": 3.5999999841,
+    "expectedDomainBoxVolumeCubicMeters": 3.6,
+    "retainedAttempt17CacheCleared": true,
+    "attempt17DataFramesBefore": 7,
+    "attempt17MeshFramesBefore": 7,
+    "attempt17DataFramesAfter": 0,
+    "attempt17MeshFramesAfter": 0
+  },
+  "retainedImpact": {
+    "attempt17ResearchEvidenceIntact": true,
+    "attempt17ReceiptAndIndependentAuditIntact": true,
+    "attempt17GeneratedWorkCacheRecoverableOnlyByFreshRebake": true,
+    "attempt17WorkBytesBefore": 1808669,
+    "attempt17WorkBytesAfter": 0
+  },
+  "rootCause": "The inspector opened the original source blend, which had no persisted baked-state binding for attempt-17, then pointed its MODULAR cache setting directly at the retained cache. Blender evaluated the original domain cube instead of the liquid mesh and cleared the mounted retained cache during the process lifecycle.",
+  "decision": "The diagnostic and its PASS receipt are scientifically invalid and must never support a geometry conclusion. Do not rebuild inside attempt-17. Any replacement must rebake into a fresh root, save a baked-state blend there, make a complete fresh diagnostic copy of the cache, and inspect only the copy.",
+  "invalidationHash": "325f58d18852865193d557325dde64ff9b0ea56601c3ba037b5599718150e89f"
+}
