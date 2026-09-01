@@ -6826,3 +6826,15 @@ H1 changes to a basketball and three filled bottles with no constraint or light
 reveal. The same source bytes must execute both without project/hash/title
 branching, while all post-release transforms and narrative frames remain
 solver-derived.
+
+## J-589 · RC3 D1 static coordinate error retained and corrected before source work
+
+Date: 2026-09-01 · Type: RETAINED PREREGISTRATION FAILURE + C1 · Product mutations / Blender starts / renders: 0 / 0 / 0
+
+D1 v0.1 incorrectly treated the accepted `0.62 m` hinge-relative path offset
+as world `Y=0.62`; the 0.92 m aperture half-width is only 0.46 m, making the
+frozen contact graph incoherent before accounting for sphere radius. C1 keeps
+v0.1 immutable and changes only the actor, ramp and gate initial locations to
+the accepted RC2 metric derivation. H1 and every grammar, authority, threshold,
+resource and claim field remain unchanged. No observed solve was repaired by
+moving an outcome.

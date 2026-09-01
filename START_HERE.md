@@ -823,6 +823,13 @@ same compiler bytes must run a Signal Gate topology and a structurally distinct
 basketball/three-filled-bottle topology. Contact, response, camera beats and all
 post-release poses remain derived; input outcome fields are rejected.
 
+The first RC3 D1 fixture is retained as a preregistration failure: it confused
+a hinge-relative path offset with world Y and placed the ball center outside
+the aperture. C1 was frozen with zero product mutations and zero Blender starts;
+it changes only the actor, ramp and gate initial locations to the accepted RC2
+metric derivation. H1 and every authority, acceptance and resource rule remain
+unchanged. The active contract is RC3 preregistration v0.2.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>
