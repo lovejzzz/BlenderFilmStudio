@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc5BreakableAttachmentPreregistration.v0.1",
+  "status": "PREREGISTERED_BEFORE_PRODUCT_MUTATION",
+  "experimentId": "RC5-PHYSICAL-RICHNESS-BREAKABLE-ATTACHMENT",
+  "physicalQuestion": "Can a basketball impact make one bottle cap detach through a Blender Bullet breakable fixed constraint while every post-release body transform, the break response, the shot frames and the final poses remain solver-owned?",
+  "baseline": {
+    "publicRepository": "https://github.com/lovejzzz/film-engine",
+    "publicMainCommit": "db662438edfef0a1979d8227c8b58cf8620e2b74",
+    "acceptedRc4Evidence": "experiments/unstaged-physical-realism/RC4-2026-09-01-attempt-01",
+    "acceptedRc4ResultHash": "016ccd803ef9aecc0bce6e0dd91d98472b7a6b6304e1c083e236058e39dc5925",
+    "acceptedRc4BinarySha256": "ae686bce6a2a50833db74d74c76d46a4667a96872fe06853668c89367a7961c4",
+    "acceptedRc4AuditHash": "addf528f6058b73985b4228c4b38bad69deef9e63b97add46177d52c746b14c7",
+    "acceptedRc4DirectVisualReviewSha256": "fb46087428262544ee15df45172f9c32383a92a54c1ae9292ad948e860556434"
+  },
+  "fixture": {
+    "uri": "specs/fixtures/physics-action/RC5_B1.basketball-three-bottles-breakaway-cap.physics-action-spec.v0.2.json",
+    "fileSha256": "a0b00cb15d66db88a85a9918701baae08734023d76edc1871901d780524169c5",
+    "physicsActionSpecHash": "bac28a88028ffaed0b09685059e63c1f4cf23c2ad1b2a79901f54e699d4b1e34",
+    "schemaVersion": "bfs.physicsActionSpec.v0.2",
+    "newFactory": "BREAKAWAY_BOTTLE_CAP",
+    "newRelation": "BREAKABLE_FIXED_TO"
+  },
+  "productBoundary": {
+    "maximumChangedPaths": 1,
+    "allowedChangedPaths": [
+      "scripts/modules/film_studio_physics_action.py"
+    ],
+    "v01BackwardCompatibilityRequired": true,
+    "projectIdFixtureHashOrObjectNameBranchingAllowed": false,
+    "proposalOriginatedPythonShellNetworkOrArbitraryFilesystemAuthority": false,
+    "outcomePoseOrEventInputFieldsAllowed": 0,
+    "manualBreakFrameAllowed": false,
+    "manualDetachedPoseAllowed": false,
+    "manualDetachmentVelocityAllowed": false
+  },
+  "physicalMechanism": {
+    "primarySolver": "BLENDER_BULLET",
+    "activeRigidBodyCountExact": 5,
+    "breakableFixedConstraintCountExact": 1,
+    "attachmentTargetMemberIndex": 0,
+    "capMassKg": 0.012,
+    "breakingImpulseThreshold": 0.02,
+    "constraintSolverIterations": 80,
+    "constraintDisablesAttachedBodyCollision": true,
+    "breakSource": "BULLET_CONSTRAINT_IMPULSE_ONLY",
+    "postReleaseTransformKeyframesMaximum": 0,
+    "authoredBreakResponseOrFinalFramesMaximum": 0,
+    "animatedLightChannelsMaximum": 0
+  },
+  "machineAcceptance": {
+    "rc4FixtureResultHashExact": "016ccd803ef9aecc0bce6e0dd91d98472b7a6b6304e1c083e236058e39dc5925",
+    "d1AndH1RegressionPass": true,
+    "respondingBottleCountMinimum": 2,
+    "capAttachedThroughFrameRelativeToContact": -1,
+    "capDetachmentEarliestRelativeToContact": 0,
+    "capDetachmentLatestRelativeToContact": 12,
+    "minimumDetachedSeparationMeters": 0.035,
+    "maximumDetachedSeparationMeters": 1.2,
+    "minimumCapAngularResponseDegrees": 15.0,
+    "maximumCapFloorPenetrationMeters": 0.005,
+    "settledWindowFrameCountExact": 10,
+    "saveReopenMaximumTransformDeltaMeters": 0.0000001,
+    "negativeControlsMinimum": 12,
+    "negativeControlsMustRejectBeforeSceneMutation": true,
+    "stillCountExact": 3,
+    "fixedContactClipFrameCountExact": 48,
+    "allClipFramesMustBeInspected": true
+  },
+  "directVisualQuestions": [
+    "Does the cause frame show a recognizable basketball, three readable bottles and an attached cap before impact?",
+    "Is the basketball-to-bottle contact continuous without an obvious gap or penetration?",
+    "Does the cap remain visibly attached before the measured primary contact?",
+    "Does cap separation begin only after the collision and remain causally readable?",
+    "Does the cap follow one continuous trajectory without teleporting or a hand-authored-looking jump?",
+    "Does the detached object still read at bottle-cap scale with recognizable cap material and shape?",
+    "Do at least two bottles respond continuously while their final poses remain visibly unstaged?",
+    "Does the secondary response add physical richness without becoming an explosive or chaotic effect?",
+    "Does the derived effect shot include the response bottles and detached cap with useful occupancy?",
+    "Do the court lighting, enclosure, material readability and shot progression still feel filmic without fake debris, particles or camera shake?"
+  ],
+  "developmentRun": {
+    "workspaceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-01",
+    "evidenceRoot": "experiments/physical-richness/RC5-2026-09-01-development-attempt-01",
+    "rootsMustBeFresh": true,
+    "acceptedRc4BinaryMayBeReused": true,
+    "cleanNativeBuildsMaximum": 0,
+    "productStartsMaximum": 4,
+    "sceneBuildsMaximum": 1,
+    "blendSavesMaximum": 1,
+    "reopensMaximum": 1,
+    "renderCallsMaximum": 51,
+    "ffmpegProcessesMaximum": 1,
+    "networkCallsMaximum": 0,
+    "engineRemoteWritesMaximum": 0,
+    "workspaceBytesMaximum": 8589934592,
+    "evidenceBytesMaximum": 1073741824,
+    "minimumFreeReserveBytes": 107374182400
+  },
+  "formalRunBoundary": {
+    "formalToolsMayFreezeOnlyAfterDevelopmentMachineAndDirectVisualPass": true,
+    "freshNativeBuildRequired": true,
+    "minimumFreeBeforeNativeBuildBytes": 171798691840,
+    "currentReadOnlyPreflightStatus": "BLOCKED_AT_157_GIB",
+    "formalRootCreationAllowedBeforeFreshAdmission": false,
+    "publicationAllowedOnlyAfterCleanBuildMachineDirectVisualAndIndependentAuditPass": true
+  },
+  "forbiddenSubstitutions": [
+    "manual kinematic or transform key at a break frame",
+    "typed detachment time, detached pose, landing pose or detachment velocity",
+    "particles, debris sprites, dust, camera shake or sound used as evidence of breakage",
+    "postprocess blur used to conceal discontinuity",
+    "fracture, deformation, liquid-slosh or material-failure claim from this cap-attachment experiment",
+    "weaker RC4 primary collision, solver ownership, exact reopen or visual thresholds",
+    "threshold weakening after inspecting the result"
+  ],
+  "claimCeiling": "One Blender Bullet breakable fixed-attachment lesson on the accepted M2 Max product. It does not prove fracture mechanics, material failure, deformation, liquid slosh, sound, cross-platform support, production readiness or arbitrary photoreal filmmaking.",
+  "stopRule": "Retain the attempt as FAIL if the cap does not remain attached before contact, does not detach within the frozen post-contact window, teleports, fails to settle, violates any authority or regression check, or receives any direct visual NO. Correct only a reusable schema, factory, constraint, measurement, persistence or camera rule in a versioned contract; never hand-place the observed break or final pose.",
+  "specHash": "78157d4124bd3fa4aafd5a6e8bae8fa4ba12fd0a11f9491668c4005fc59039ae"
+}
