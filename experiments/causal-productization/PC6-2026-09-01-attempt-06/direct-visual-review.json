@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "bfs.pc6CausalProductizationDirectVisualReview.v0.1",
+  "status": "PASS_SCOPE_WITH_FILMIC_GAPS",
+  "reviewMethod": "DIRECT_ORIGINAL_RESOLUTION_INSPECTION_OF_ALL_THREE_BOUND_IMAGES",
+  "machineAudit": {
+    "status": "PASS",
+    "baseCheckPassed": 21,
+    "baseCheckTotal": 21,
+    "baseAuditFileSha256": "f5d39e25c70565ef2b03c21d4698857bb54672236bf7cbd72d1698cd2ae61f84",
+    "baseAuditHash": "85692e01fea5f3113be6a5a4dd8ea1465c93dc8556953031dfc09a284b8343bb",
+    "correctionCheckPassed": 11,
+    "correctionCheckTotal": 11,
+    "correctionAuditFileSha256": "b42d7300d6fd228975446bbee6bbc99e36a41fffd91080090a48823b35e483e5",
+    "correctionAuditHash": "74f2cf792babe94d6c773e982bdc16bf544c850dc62e85920c883a01f6dac243"
+  },
+  "physicsObservation": {
+    "firstTargetResponseFrame": 28,
+    "responseFrames": {
+      "CAUSAL_TARGET_001": 28,
+      "CAUSAL_TARGET_002": 31,
+      "CAUSAL_TARGET_003": 31,
+      "CAUSAL_TARGET_004": 30
+    },
+    "finalTiltDegrees": {
+      "CAUSAL_TARGET_001": "89.99999797",
+      "CAUSAL_TARGET_002": "90.00000288",
+      "CAUSAL_TARGET_003": "90.00000848",
+      "CAUSAL_TARGET_004": "90.00001145"
+    },
+    "ballTravelBeforeFirstResponseMeters": "2.72948992",
+    "reopenExact": true,
+    "finalPoseAuthoredKeyframes": 0,
+    "physicsSolver": "BLENDER_BULLET_RIGID_BODY"
+  },
+  "frames": [
+    {
+      "shotId": "SETUP",
+      "frame": 26,
+      "uri": "../PC6-2026-09-01-attempt-05/review/setup-frame-0026.png",
+      "sha256": "58b36f1c15b2378b648f9a0f554b68b41f1eda5bcbb19abdbd9bb7e0024a6af8",
+      "occupancy": "0.58000004",
+      "negativeSpaceMargin": "0.20478678"
+    },
+    {
+      "shotId": "IMPACT",
+      "frame": 28,
+      "uri": "../PC6-2026-09-01-attempt-05/review/impact-frame-0028.png",
+      "sha256": "0f17119b60ce00ae59cd14c6a59f928755ae0c88bdb9e1b9547c49d1b00f79e7",
+      "occupancy": "0.71999998",
+      "negativeSpaceMargin": "0.11855380"
+    },
+    {
+      "shotId": "AFTERMATH",
+      "frame": 120,
+      "uri": "../PC6-2026-09-01-attempt-05/review/aftermath-frame-0120.png",
+      "sha256": "bd8e9f1bbdfd14f2a890d360bc1c5b6f166e4f582a8c66cc31a86b01ec0a979e",
+      "occupancy": "0.60000008",
+      "negativeSpaceMargin": "0.17694283"
+    }
+  ],
+  "answers": [
+    {
+      "questionId": "V01_FINAL_STATE_IS_PHYSICS_OWNED_NOT_POSED",
+      "answer": "YES_MACHINE_BOUND",
+      "observation": "The screenshots alone cannot prove provenance, but the bound product receipts show zero target pose keys, zero actor pose keys after release, Blender/Bullet as the final-pose source and exact save/reopen deltas of 0.0 degrees."
+    },
+    {
+      "questionId": "V02_CAUSE_AND_CONTACT_ARE_LEGIBLE",
+      "answer": "YES",
+      "observation": "The blue sphere, leading target and downstream row share a clear screen-space contact path; the tighter impact framing makes the initiating collision unambiguous."
+    },
+    {
+      "questionId": "V03_PHYSICAL_CONSEQUENCE_IS_LEGIBLE",
+      "answer": "YES",
+      "observation": "The aftermath visibly differs from setup and preserves four separately readable resting bodies, grounded by their changed contact shadows."
+    },
+    {
+      "questionId": "V04_CAMERA_RESPONDS_TO_EVALUATED_RESULT",
+      "answer": "YES",
+      "observation": "The aftermath camera reframes the solver-dispersed bodies rather than holding the setup composition; bound framing records identify evaluated semantic world bounds as the source."
+    },
+    {
+      "questionId": "V05_IMPACT_PROPAGATION_IS_FILMICALLY_LEGIBLE",
+      "answer": "PARTIAL",
+      "observation": "Frame 28 shows contact but almost no visible downstream angular response; it is a valid first-response receipt, not the strongest cinematic propagation moment."
+    },
+    {
+      "questionId": "V06_RESULT_LOOKS_PHOTOREAL_AND_UNSTAGED",
+      "answer": "NO",
+      "observation": "The real solver result still reads as a polished toy demonstration: all four targets settle nearly exactly horizontal, and the stills lack motion blur, contact deformation, surface wear, secondary debris and other dynamic cues."
+    }
+  ],
+  "softwareLessons": [
+    "Keep final transforms exclusively solver-owned; never repair an unattractive result by authoring target pose keys.",
+    "Choose the cinematic impact frame from evaluated motion, such as peak aggregate target angular velocity or mid-propagation target count, rather than equating first response with the best image.",
+    "Introduce deterministic, bounded initial-condition variation in spacing, yaw, friction and restitution so Bullet produces less uniformly flat aftermaths without sacrificing reproducibility.",
+    "Add allowlisted physical secondary-motion layers and shutter-aware motion blur; do not use dust, chips or camera shake to conceal weak primary collision behavior.",
+    "Separate causal correctness acceptance from filmic realism acceptance; this run closes the former only."
+  ],
+  "limitations": [
+    "This proves one allowlisted declarative product workflow and one four-target fixture, not broad autonomous filmmaking.",
+    "The three stills demonstrate readable setup, contact and result but do not establish convincing continuous motion timing.",
+    "The visual style remains stylized and manufactured; photoreal material response, deformation, secondary motion and sound remain unproven."
+  ],
+  "visualVerdict": "PASS_CAUSAL_PRODUCT_CAPABILITY_NOT_FILMIC_REALISM",
+  "overallVerdict": "PASS_PC6_PRODUCTIZATION_WITH_REQUIRED_PC7_REALISM_FOLLOWUP",
+  "reviewHash": "162b187ac14d54aae19ef6083ce7e5b0a789d1cdae0d1d1dc90490f891ff5174"
+}

@@ -563,9 +563,20 @@ attempt-01 passed independent machine audit `23/23` and direct screenshot review
 `d7c3bd83…`. All four targets responded at frames 28/31/31/30 and settled at
 56.97°/90.00°/90.00°/90.00° with zero target or final-pose keyframes; reopen was
 exact. This proves one controlled unseen transfer, not broad general filmmaking.
-The active PC6 checkpoint is productization: move the restricted declarative
-factory contract, Bullet-only final-pose provenance and evaluated-result camera
-fitting into the actual product before returning to the PC4 robot capstone.
+PC6 has now productized that lesson in source commit `5f3b981a…`: the actual
+Film Studio top bar exposes inspect/build actions backed by a strict
+CausalSceneSpec allowlist. A clean native build then rejected all nine authority
+attacks, built the frozen four-domino scene through Blender/Bullet, rendered
+three evaluated-result views and reopened with exact response frames and 0.0°
+tilt deltas. The corrected independent audits passed `21/21` and `11/11`;
+acceptance self hash is `cd334acd…`. Direct inspection deliberately separates
+capability from quality: the physical result is solver-owned, never posed, but
+the first-response impact still is not the strongest propagation frame and the
+manufactured-toy result lacks motion blur, contact deformation and secondary
+motion. PC6 therefore passes product capability, not filmic realism. The active
+PC7 checkpoint must improve evaluated motion timing and physical richness while
+keeping final target/post-release transforms exclusively solver-owned; the PC4
+robot remains a later capstone holdout.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
