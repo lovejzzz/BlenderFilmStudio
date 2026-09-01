@@ -872,9 +872,24 @@ liquid slosh, deformation, breakage, sound, cross-platform behavior,
 distribution or arbitrary photoreal filmmaking. The next curriculum gate must
 add a new physical degree of freedom such as deformation, fracture or audible
 contact while preserving RC4 as an exact no-pose baseline.
-The latest read-only host check observes 157 GiB free against the conservative
-160 GiB fresh-build threshold, so RC5 may be designed and preregistered but no
-new native build may start until a fresh admission passes.
+RC5 breakable-attachment development is accepted locally and not yet formal or
+published. The product candidate is one-path commit `8e18c825…` on top of
+public RC4 `db662438…`. It adds one native Bullet breakable fixed constraint,
+derives the attached bottle from the basketball release ray, and rejects typed
+break frames, detached poses and detachment velocities. The accepted B1 run
+measured contact at frame 16, cap detachment at frame 24, three responding
+bottles and a solver-owned settled group at frames 132–141. Save/reopen passed
+7/7 below `1e-8`; RC4/D1/H1 remained exact; twelve authority negatives passed;
+the 3-still plus 48-frame review passed direct visual judgment 10/10 and an
+independent development audit 27/27. Attempts 01–12 remain retained failures,
+including the attempt-11 machine pass / visual fail and attempt-12 camera-cache
+failure. The lesson is not fracture mechanics: it is transferable physical
+secondary-event direction, molded-glass contact ovality and a cache-safe
+derived camera. Accepted development evidence is
+`experiments/physical-richness/RC5-2026-09-01-development-attempt-13` with
+receipt/audit self hashes `396fc68a…` / `b7020a9b…`. No engine remote write has
+occurred. A fresh host check observed 161 GiB free; the next action is a frozen
+formal protocol and fresh clean native build before any ordinary publication.
 
 ## Public routes
 
