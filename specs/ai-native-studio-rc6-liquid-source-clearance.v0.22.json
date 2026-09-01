@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "bfs.rc6LiquidSourceClearanceSpec.v0.22",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-SOURCE-CLEARANCE-2026-09-01-ATTEMPT-22",
+  "purpose": "Test whether persistent below-floor liquid components are caused by insufficient source-to-effector clearance, without changing source volume, solver conservation, surface reconstruction or acceptance thresholds.",
+  "toolFreezeParent": "b05ec538939803ac8f509ca9d6198c2f274282af",
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-source-clearance-attempt-22",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-source-clearance-attempt-22"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "engineSourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "fluidImplementationSha256": "63a7a3e1affe7809ea935e184dea992754655796a9631e0eadb2060d72dfa20f",
+    "fluidRnaSha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4",
+    "cupOriginWorldZMeters": 0.22,
+    "cupInnerFloorLocalZMeters": -0.16,
+    "cupInnerFloorWorldZMeters": 0.06,
+    "retainedSourceBottomWorldZMeters": 0.075,
+    "retainedSourceBottomClearanceMeters": 0.015,
+    "cupEffectorSurfaceDistanceCells": 1.5,
+    "deleteInObstacle": false
+  },
+  "retainedEvidence": {
+    "attempt21Matrix": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-mesh-reconstruction-attempt-21/matrix.json",
+      "sha256": "bef2bfe6a83c81d8b7d5a11be5a3d73758d75b4e659652aba33910a9e6d83e94"
+    },
+    "attempt21Audit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-mesh-reconstruction-attempt-21/independent-audit.json",
+      "sha256": "1a5a295602cc47f176e045002c64623aa421091526da460a427026ea7233d8d9"
+    }
+  },
+  "matrix": {
+    "fixed": {
+      "frameStart": 1,
+      "frameEnd": 7,
+      "preContactOnly": true,
+      "resolutionMax": 96,
+      "particleNumber": 2,
+      "particleRadius": 1.6,
+      "meshScale": 2,
+      "meshParticleRadius": 4.5,
+      "simulationMethod": "APIC",
+      "timestepsMin": 1,
+      "timestepsMax": 4,
+      "cflCondition": 2.0,
+      "waterViscosityBase": 1.0,
+      "waterViscosityExponent": 6,
+      "cupEffectorSubframes": 0,
+      "domainCenterMeters": [0.32, 0.0, 0.25],
+      "domainDimensionsMeters": [0.36, 0.36, 0.5],
+      "baseVoxelMeters": 0.0052083333,
+      "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006],
+      "flowVolumeDensityObserved": 0.0,
+      "flowSurfaceDistanceCells": 0.0
+    },
+    "cells": [
+      {"cellId": "clearance-20mm", "sourceBottomClearanceMeters": 0.020, "sourceBottomClearanceVoxels": 3.84, "sourceCenterWorldZMeters": 0.15},
+      {"cellId": "clearance-25mm", "sourceBottomClearanceMeters": 0.025, "sourceBottomClearanceVoxels": 4.8, "sourceCenterWorldZMeters": 0.155},
+      {"cellId": "clearance-30mm", "sourceBottomClearanceMeters": 0.030, "sourceBottomClearanceVoxels": 5.76, "sourceCenterWorldZMeters": 0.16},
+      {"cellId": "clearance-35mm", "sourceBottomClearanceMeters": 0.035, "sourceBottomClearanceVoxels": 6.72, "sourceCenterWorldZMeters": 0.165}
+    ],
+    "selectionRule": "valid signed nesting, then minimum absolute source-volume error, then minimum temporal drift, then lower source-bottom clearance",
+    "exactCacheFilesPerCell": 21,
+    "exactCacheFramesPerStage": [1, 2, 3, 4, 5, 6, 7]
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.0104166667,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "resourceCeilings": {
+    "blenderStarts": 4,
+    "fluidDataBakes": 4,
+    "fluidMeshBakes": 4,
+    "blendSaves": 4,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "sourceFinding": "Attempt-21's persistent positive components appeared from frame 2 onward at invariant positions and volumes. Their world-Z bounds, approximately 0.0068 to 0.0404 meters, were entirely below the measured cup inner floor at 0.060 meters. The retained source bottom had only 15 mm or 2.88 base voxels of clearance while the cup effector surface distance occupied another 1.5 cells. This matrix raises the unchanged-volume source through four preregistered clearances and keeps delete_in_obstacle false so penetration remains observable.",
+  "stopRule": "Stop on process, identity, source-volume, source-placement, topology, cache-roster, persistence or resource failure. Every cell must retain exactly config, data and mesh files for frames 1 through 7 and no other Mantaflow cache files. Do not delete, ignore or size-filter below-floor positive components. The unchanged two-sided 5 percent source and temporal bounds, one-percent containment bound, one-positive-body signed topology, manifold, zero-render, zero-network and zero-engine-write gates remain fail closed.",
+  "claimCeiling": "Four seven-frame zero-render static controls varying only source-bottom clearance with simulation particle radius 1.6 and mesh reconstruction radius 4.5. A passing candidate would establish the next geometry basis but still requires final-resolution static confirmation before slow-tip, impact, lighting or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-source-clearance-scene.py": "8dff215bcbbc5a1507f4de93689378159e00526d1f822d85b90a9f2f5f3babc1",
+    "scripts/run-rc6-liquid-source-clearance-matrix.py": "ae0004cb01007b535f27f347d96ced03574e0ba0da5f9c7be128ded83041378c",
+    "scripts/audit-rc6-liquid-source-clearance-matrix.py": "23ec516e68cb397c2c43986da8cc1359b051a103fa76754f16497a17397fd9fa"
+  },
+  "specHash": "c8eaf3df545c7cb3a5f2bbb35b59a6f202f49368f562b8d71dd7f57f7eaba381"
+}
