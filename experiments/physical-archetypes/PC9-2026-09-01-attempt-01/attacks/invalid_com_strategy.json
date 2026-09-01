@@ -1,0 +1,375 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "acceptance": {
+    "actorForwardTravelBeforeFirstResponseMinimumMeters": 0.55,
+    "blurredImpactMustDifferFromSharpControl": true,
+    "collisionShapeMustMatchVisibleBottleHull": true,
+    "computedBlurTargetErrorPixelsMaximum": 1e-06,
+    "computedShutterFramesRange": [
+      0.08,
+      0.5
+    ],
+    "derivedCenterOfMassHeightsMetersExact": [
+      0.05469894,
+      0.06743313,
+      0.0964538
+    ],
+    "derivedMassesKgExact": [
+      0.10685,
+      0.30645,
+      0.4811
+    ],
+    "deterministicVariationRequired": true,
+    "distinctVisibleFillLevelsMinimum": 3,
+    "finiteTransformRequired": true,
+    "firstTargetResponseFrameWindowInclusive": [
+      24,
+      72
+    ],
+    "impactActiveTargetCountMinimum": 3,
+    "impactClipFrameCount": 24,
+    "impactFrameAfterFirstResponseMinimum": 2,
+    "initialPenetrationMaximumMeters": 0.0005,
+    "measuredMedianMotionPixelsPerFrameRange": [
+      8,
+      80
+    ],
+    "metricScaleRequired": true,
+    "postReleaseActorPoseKeyframes": 0,
+    "recognizableBottleDetailObjectsMinimumEach": 4,
+    "reopenFinalTiltToleranceDegrees": 1e-06,
+    "reopenResponseFramesExact": true,
+    "reviewNegativeSpaceMarginMinimum": 0.06,
+    "reviewOccupancyRange": [
+      0.46,
+      0.8
+    ],
+    "settleAngularStepDegreesMaximum": 0.15,
+    "settleConsecutiveFrames": 8,
+    "targetPoseKeyframes": 0,
+    "targetTiltDegreesAtFinalMinimumEach": 25,
+    "targetsTiltedAtLeast60DegreesMinimumCount": 2
+  },
+  "cinematography": {
+    "motionBlur": {
+      "maximumShutterFrames": 0.5,
+      "measurementResolution": [
+        960,
+        540
+      ],
+      "minimumShutterFrames": 0.08,
+      "position": "CENTER",
+      "semanticRoles": [
+        "dynamic_actor",
+        "target_group"
+      ],
+      "strategy": "MEASURED_PROJECTED_MEDIAN_MOTION",
+      "targetBlurPixels": 5
+    }
+  },
+  "dynamicActor": {
+    "count": 1,
+    "factory": "GROOVED_SPHERE",
+    "initialPosition": [
+      -1.05,
+      0,
+      0.12
+    ],
+    "launchWaypoints": [
+      {
+        "frame": 1,
+        "position": [
+          -1.05,
+          0,
+          0.12
+        ],
+        "rotationY": 0
+      },
+      {
+        "frame": 18,
+        "position": [
+          -1.05,
+          0,
+          0.12
+        ],
+        "rotationY": 0
+      },
+      {
+        "frame": 26,
+        "position": [
+          -0.31,
+          0,
+          0.12
+        ],
+        "rotationY": -6.16666667
+      }
+    ],
+    "material": {
+      "baseColor": [
+        0.72,
+        0.16,
+        0.035
+      ],
+      "channelCount": 3,
+      "proceduralGrain": true,
+      "roughness": 0.48
+    },
+    "radius": 0.12,
+    "rigidBody": {
+      "angularDamping": 0.04,
+      "collisionMarginMeters": 0.0007,
+      "collisionShape": "SPHERE",
+      "friction": 0.65,
+      "linearDamping": 0.025,
+      "mass": 0.624,
+      "restitution": 0.55
+    },
+    "semanticRole": "dynamic_actor"
+  },
+  "forbidden": {
+    "acceptedBottleFinalCoordinates": true,
+    "compositorOrPostprocessBlur": true,
+    "decorativeCollisionProxyThatDiffersFromVisibleBottle": true,
+    "effectCoverForWeakerPrimaryPhysics": true,
+    "externalModelsOrTextures": true,
+    "liquidSimulationClaim": true,
+    "manualPerTargetMassOrCenterOfMass": true,
+    "manualShutterValue": true,
+    "manualTargetOrFinalPoseAnimation": true,
+    "nonMetricScaleSubstitution": true,
+    "projectSpecificCameraCoordinates": true
+  },
+  "sceneId": "PC9-F1-METRIC-BASKETBALL-THREE-FILLED-BOTTLES",
+  "sceneSpecHash": "e8e66cf9d34a5bf1dd3ba823d08d76a65aec2492084fecf1e244c7d4b1123fac",
+  "schemaVersion": "bfs.causalSceneSpec.v0.5",
+  "shots": [
+    {
+      "directionClass": "FRONT_LEFT_HIGH",
+      "lensMm": 58,
+      "selection": "last frame before first target response",
+      "shotId": "SETUP",
+      "targetOccupancy": 0.58
+    },
+    {
+      "directionClass": "FRONT_LEFT_LOW",
+      "lensMm": 68,
+      "selection": "peak propagated angular motion frame",
+      "shotId": "IMPACT",
+      "targetOccupancy": 0.72
+    },
+    {
+      "directionClass": "FRONT_RIGHT_HIGH",
+      "lensMm": 54,
+      "selection": "first settled frame after all targets respond",
+      "shotId": "AFTERMATH",
+      "targetOccupancy": 0.62
+    }
+  ],
+  "studio": {
+    "backdrop": {
+      "factory": "SIMPLE_WALL",
+      "participatesInPhysics": false
+    },
+    "ground": {
+      "friction": 0.62,
+      "size": 6
+    },
+    "lights": [
+      {
+        "color": [
+          1,
+          0.72,
+          0.52
+        ],
+        "energy": 1050,
+        "kind": "AREA",
+        "semanticRole": "key_light"
+      },
+      {
+        "color": [
+          0.42,
+          0.62,
+          1
+        ],
+        "energy": 560,
+        "kind": "AREA",
+        "semanticRole": "fill_light"
+      },
+      {
+        "color": [
+          0.62,
+          0.78,
+          1
+        ],
+        "energy": 820,
+        "kind": "AREA",
+        "semanticRole": "rim_light"
+      }
+    ]
+  },
+  "targetGroup": {
+    "bodyPalette": [
+      [
+        0.76,
+        0.9,
+        0.94
+      ],
+      [
+        0.9,
+        0.82,
+        0.62
+      ],
+      [
+        0.78,
+        0.9,
+        0.72
+      ]
+    ],
+    "count": 3,
+    "deterministicVariation": {
+      "basisSceneSpecHash": "bab95249e9f83f017a498b19ddf73a05c34dfebccd7c04038c93c46db9ee988c",
+      "frictionJitterMaximum": 0.02,
+      "positionJitterMetersMaximum": 0.003,
+      "restitutionJitterMaximum": 0.015,
+      "seed": 90210,
+      "yawJitterDegreesMaximum": 2
+    },
+    "factory": "FILLED_LATHED_BOTTLE",
+    "initialBasePositions": [
+      [
+        0.095,
+        -0.055,
+        0
+      ],
+      [
+        0.095,
+        0.055,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "labelPalette": [
+      [
+        0.92,
+        0.38,
+        0.06
+      ],
+      [
+        0.03,
+        0.42,
+        0.68
+      ],
+      [
+        0.68,
+        0.12,
+        0.28
+      ]
+    ],
+    "liquidPalette": [
+      [
+        0.15,
+        0.52,
+        0.78
+      ],
+      [
+        0.92,
+        0.56,
+        0.08
+      ],
+      [
+        0.22,
+        0.62,
+        0.31
+      ]
+    ],
+    "modeling": {
+      "capHeightMeters": 0.018,
+      "capRadiusMeters": 0.016,
+      "capRidgeCount": 24,
+      "labelHeightRatio": 0.25,
+      "profileMeters": [
+        [
+          0.03,
+          0
+        ],
+        [
+          0.034,
+          0.008
+        ],
+        [
+          0.034,
+          0.175
+        ],
+        [
+          0.033,
+          0.205
+        ],
+        [
+          0.025,
+          0.225
+        ],
+        [
+          0.015,
+          0.245
+        ],
+        [
+          0.0145,
+          0.272
+        ],
+        [
+          0.015,
+          0.28
+        ]
+      ],
+      "profileSegments": 64,
+      "requiredReadableStages": [
+        "base",
+        "body",
+        "shoulder",
+        "neck",
+        "cap",
+        "label",
+        "liquid_fill"
+      ],
+      "wallThicknessMeters": 0.0012
+    },
+    "physicalArchetype": {
+      "bodyRadiusMeters": 0.034,
+      "centerOfMassStrategy": "MANUAL",
+      "containerCenterOfMassHeightRatio": 0.48,
+      "containerMassKg": 0.032,
+      "fillFractions": [
+        0.15,
+        0.55,
+        0.9
+      ],
+      "heightMeters": 0.28,
+      "interiorBaseHeightMeters": 0.006,
+      "liquidBodyHeightMeters": 0.195,
+      "liquidDensityKgPerLiter": 0.998,
+      "massStrategy": "CONTAINER_PLUS_LIQUID_FROM_FILL",
+      "neckRadiusMeters": 0.0145,
+      "nominalCapacityLiters": 0.5
+    },
+    "rigidBody": {
+      "angularDamping": 0.12,
+      "collisionMarginMeters": 0.0007,
+      "collisionShape": "CONVEX_HULL",
+      "friction": 0.38,
+      "linearDamping": 0.04,
+      "restitution": 0.08
+    },
+    "semanticRole": "target_group"
+  },
+  "timeline": {
+    "fps": 24,
+    "frameEnd": 140,
+    "frameStart": 1,
+    "releaseFrame": 27
+  },
+  "title": "Metric basketball impacts three filled bottles with mass-ordered propagation"
+}

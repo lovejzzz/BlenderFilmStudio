@@ -710,6 +710,16 @@ root mutation at freeze hash `e9cd86dd…` and file SHA `e4caf317…`, binding t
 complete v0.1–v0.8 contract chain, corrected v0.6 fixture, product commit
 `b8f65c8a…`, four formal tools and exact module SHA `b45c86d3…`. The single
 clean native formal attempt is the next action.
+PC9 formal attempt-01 is now accepted. One clean arm64 build completed in
+603.09 s; all 29 authority attacks, exact PC8 compatibility, metric
+mass/COM/fill/hull checks, three product processes, 24-frame native-blur clip
+and exact save/reopen passed. Receipt/audit/direct-review/acceptance hashes are
+`96e64534…` / `a20cc945…` / `5c7158b1…` / `85d6789b…`; independent audit is
+`27/27 PASS` and direct visual review is `7/7 YES`. All bottles respond at
+frames 28/29 and settle near 90 degrees with zero target or post-release actor
+pose keys. The accepted claim is a metric rigid-body archetype lesson, not
+liquid slosh, deformation or advertising-grade photorealism. The validated
+source commit is `b8f65c8a…`; ordinary fast-forward publication is next.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
