@@ -542,6 +542,24 @@ lower bound. The active next step is a versioned correction that first closes
 that false-positive and then teaches pixel-visible occlusion and target-view
 landmark visibility; do not hand-place another project-specific patch.
 
+The owner then identified a more fundamental curriculum problem: the robot
+mixes modeling, performance, occlusion, lighting and cinematography so tightly
+that failures are difficult to attribute. PC4 is retained as the future
+capstone/holdout, not discarded. The active curriculum moved to
+`PC5-CAUSAL-STUDIO`: one procedural sports ball, three procedural bottles and
+an actual Blender/Bullet rigid-body collision told as SETUP / IMPACT /
+AFTERMATH. Attempts 01–03 are retained pre-scene harness/API failures. Attempt-04
+proved exact reopen-reproducible physics (responses 28/29/29; all final tilts
+about 89.6°) but remained machine 19/20 and direct visual `FAIL`: fixed-space
+AFTERMATH missed every bottle. C4 taught evaluated-frame semantic bounds,
+measured occupancy/margin and cross-language numeric evidence. Fresh attempt-05
+is the accepted controlled lesson: independent machine audit `21/21 PASS`, six
+of six direct screenshot questions `YES`, receipt/audit/review self hashes
+`9b72e2df…` / `33a9567c…` / `542874f0…`. This proves one controlled causal film,
+not general filmmaking. The active next checkpoint is an unseen shape/count
+variation using the same semantic physics/framing loop before returning to the
+robot; no PC4 object names or final coordinates may enter that variation.
+
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
 

@@ -6681,3 +6681,33 @@ Executor通过packet semanticRole识别hero/foreground/face/joint，使用screen
 Date: 2026-08-31 · Type: RETAINED VISUAL FAIL + AUDIT COUNTEREXAMPLE · Blender starts / renders / saves: 2 / 3 / 1
 
 Machine runner与27/27 audit先报告PASS。Direct frames证明局部学习有效：wide hero silhouette不再被black column切断，medium人物与contact action恢复可读，sparse panels/concentric joints优于floating blocks。但world-bbox overlap过度隐藏atmosphere/floor/aperture；medium occupancy `0.35712820`低于plan minimum `0.48`；close仍由coral side pod主导，face zones数据存在但target view不可读。Direct review self `ae7a8c31…`将machine A14标为false positive：只检查maximum/margin，遗漏minimum。Attempt-01 manifest `88fdaf54…` immutable。Next correction必须bidirectional occupancy、recenter、pixel-visible occlusion与view-visible landmarks。
+
+## J-571 · Robot demoted to capstone; PC5 causal curriculum preregistered
+
+Date: 2026-08-31 · Type: CURRICULUM PIVOT + PREREGISTRATION · Formal starts / renders: 0 / 0
+
+Owner指出robot变量过多且没有单一绝对对错，建议用球撞三瓶覆盖建模、物理与光影。PC4保留为future capstone/holdout。PC5冻结程序化运动球、三只lathed bottles、Blender/Bullet真实刚体、SETUP/IMPACT/AFTERMATH三镜头、三瓶最终各≥60°、reopen causal order、三张960×540截图及独立machine/direct-visual verdict。不得用target/final-pose keyframes、外部模型/纹理或PC4特殊分支。
+
+## J-572 · PC5 attempts 01–03 retained pre-scene harness/API failures
+
+Date: 2026-08-31 · Type: RETAINED FAILURES · Blender starts / renders / `.blend` writes: 4 / 0 / 0
+
+Attempt-01在Python/Node integral-float self-hash与Blender exit-0 semantic gate上失败；C1加入success marker/artifact/traceback gate。Attempt-02被host enum `BLENDER_EEVEE_NEXT`拒绝，C2只改为observed `BLENDER_EEVEE`。Attempt-03在`use_empty=True`后的null World停止。三个work roots均为空、network/engine mutation/remote write均零；独立失败审计13/13、13/13、12/12。Read-only host probe同时确认RigidBodyObject无writable velocity API、支持kinematic keyframe与layered Action。
+
+## J-573 · PC5 C3 actual Bullet launch and attempt-04 visual rejection
+
+Date: 2026-08-31 · Type: PHYSICS SUCCESS + RETAINED MACHINE/VISUAL FAIL · Blender starts / renders / saves: 2 / 3 / 1
+
+C3用frame≤26 kinematic launch表达球初始条件，frame27切dynamic；之后ball pose keyframes=0，三个targets全程keyframes=0。Attempt-04两次Bullet求解exact：target response 28/29/29，final tilts 89.6300°/89.6369°/89.7511°。Machine 19/20仅败于Python/Node non-integral float spelling。Direct review仍FAIL：fixed-space AFTERMATH错过全部动态目标，SETUP cyclorama有black wedge；证明物理pass不能替代电影构图。
+
+## J-574 · Evaluated-frame semantic composition lesson
+
+Date: 2026-08-31 · Type: GENERAL VISUAL RULE FREEZE · Formal attempt-05 starts / renders: 0 / 0
+
+C4不读取final coordinates：每个review frame先求值physics，再从dynamic_actor+target_group+modeling_details的world bounds计算center、camera distance、occupancy与negative-space margin，同时保留shot direction/lens。Backdrop换成不参与物理的simple studio wall。Python records在self-hash前把float写为deterministic decimal strings，Node显式转Number审门槛。PC5 models、rigid bodies、launch、lights、review frames与60° thresholds不变。
+
+## J-575 · PC5 attempt-05 controlled causal film PASS
+
+Date: 2026-09-01 · Type: ACCEPTED MACHINE + DIRECT VISUAL PASS · Blender starts / renders / saves: 2 / 3 / 1
+
+Fresh attempt-05 independent machine audit 21/21 PASS；receipt/audit self `9b72e2df…` / `33a9567c…`。Setup/impact/aftermath occupancies 0.58/0.72/0.60，margins 0.205/0.126/0.171。Direct original-resolution screenshot review六问全YES，review self `542874f0…`：模型层级、碰撞因果、三瓶前后可读性、接触阴影重量、曝光材质与三镜头功能均通过。限制仍明确：这是controlled curriculum，不是广告级成片；下一步必须用unseen shape/count variation证明迁移，再回PC4 robot capstone。

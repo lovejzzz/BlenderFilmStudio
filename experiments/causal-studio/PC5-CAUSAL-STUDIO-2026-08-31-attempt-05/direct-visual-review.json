@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "bfs.causalStudioDirectVisualReview.v0.2",
+  "status": "PASS",
+  "machineAudit": {
+    "status": "PASS",
+    "checkPassed": 21,
+    "checkTotal": 21,
+    "auditFileSha256": "ca0e63c4930437e0315d4d984b026dec25948452523b5b06cd367dcae3928ff1",
+    "auditHash": "33a9567c6dd64e361b02e13e749f9cc1889cabe4b220307a14a13c07ccb08970"
+  },
+  "physicsObservation": {
+    "firstTargetResponseFrame": 28,
+    "responseFrames": {"TARGET_Bottle_1": 28, "TARGET_Bottle_2": 29, "TARGET_Bottle_3": 29},
+    "finalTiltDegrees": {"TARGET_Bottle_1": "89.63002868", "TARGET_Bottle_2": "89.63690223", "TARGET_Bottle_3": "89.75108348"},
+    "ballTravelBeforeFirstResponseMeters": "2.65686291",
+    "reopenExact": true,
+    "finalPoseAuthoredKeyframes": 0
+  },
+  "frames": [
+    {"shotId": "SETUP", "frame": 26, "uri": "review/setup-frame-0026.png", "sha256": "4bbe9a09ddd1a16af0020534ff54126c54d240cf53e1b385d05375de053a0bd5", "occupancy": "0.57999994", "negativeSpaceMargin": "0.20526588"},
+    {"shotId": "IMPACT", "frame": 28, "uri": "review/impact-frame-0028.png", "sha256": "f03560f6d8887636d35c94782601245c700df8a03ca404b68f7a3f48de9b38b2", "occupancy": "0.71999997", "negativeSpaceMargin": "0.1256671"},
+    {"shotId": "AFTERMATH", "frame": 120, "uri": "review/aftermath-frame-0120.png", "sha256": "cf30b6a15893b6fc32688365caab0658d8a448527424929edc588dd294604201", "occupancy": "0.59999987", "negativeSpaceMargin": "0.17087576"}
+  ],
+  "answers": [
+    {"questionId": "V01_MODELS_BEYOND_PLACEHOLDERS", "answer": "YES", "observation": "The ball has procedural grain and three readable channels; each bottle has a distinct base, body, shoulder, neck, cap and label band."},
+    {"questionId": "V02_IMPACT_CAUSALITY_LEGIBLE", "answer": "YES", "observation": "The tighter impact frame makes ball-to-front-bottle contact immediately legible while retaining the two downstream targets."},
+    {"questionId": "V03_ALL_THREE_SEPARATELY_READABLE_SETUP_AND_AFTERMATH", "answer": "YES", "observation": "All three bottles are separately readable before impact and after settling, with distinct fall directions and non-overlapping silhouettes."},
+    {"questionId": "V04_CHANGING_CONTACT_SHADOWS_CREATE_WEIGHT", "answer": "YES", "observation": "Soft contact shadows under the setup, compressed contact region and long settled shadows make gravity and rest state visible."},
+    {"questionId": "V05_EXPOSURE_COLOR_PRESERVE_MATERIAL", "answer": "YES", "observation": "Warm key and cool fill retain rubber grain, glossy bottle highlights, label colors and dark caps without clipping the subjects."},
+    {"questionId": "V06_THREE_SHOTS_DISTINCTLY_COMMUNICATE_SETUP_IMPACT_RESULT", "answer": "YES", "observation": "The three images now function as establish, contact and consequence rather than repeated fixed-space views."}
+  ],
+  "limitations": [
+    "This is a controlled curriculum film, not an advertisement-quality final: bottle geometry remains intentionally simple.",
+    "The exact contact still has no motion blur, deformation, secondary particles or sound; those are later lessons, not hidden acceptance criteria.",
+    "One accepted scene does not prove generalization; an unseen shape/count variation is required before returning to the robot capstone."
+  ],
+  "visualVerdict": "PASS",
+  "overallVerdict": "PASS_CONTROLLED_CAUSAL_FILM_LESSON",
+  "reviewHash": "542874f0c5a98a3ceeec8033afc01f5e9aa8f777d2bf21f42f1cc2a74f8240fa"
+}
