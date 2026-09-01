@@ -1,0 +1,4455 @@
+{
+  "blend": {
+    "bytes": 349642,
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-02/runtime/RC4_R1_UNSTAGED_PHYSICAL_REALISM.blend",
+    "sha256": "e83469e8a5eef4020aa925641adc7f07a4001582a649ae3fb0ba6208b3081381"
+  },
+  "counts": {
+    "blendSaves": 1,
+    "networkCalls": 0,
+    "renders": 0,
+    "sceneMutations": 1
+  },
+  "inspection": {
+    "actorFactory": "GROOVED_BASKETBALL",
+    "cameraFitSource": "MEASURED_CAUSE_CONTACT_EFFECT_SEMANTIC_BOUNDS",
+    "collisionShapes": [
+      "SPHERE",
+      "CONVEX_HULL"
+    ],
+    "compiledGraph": {
+      "beats": [
+        {
+          "deriveFrom": "BEFORE_RELATION_EVENT",
+          "id": "cause",
+          "offsetFrames": -12,
+          "relation": "primary_impact"
+        },
+        {
+          "deriveFrom": "FIRST_CONTACT",
+          "id": "contact",
+          "relation": "primary_impact"
+        },
+        {
+          "afterBeat": "contact",
+          "deriveFrom": "SETTLED_GROUP_RESPONSE",
+          "id": "effect",
+          "node": "filled_glass_bottles"
+        }
+      ],
+      "nodes": [
+        {
+          "factory": "GROOVED_BASKETBALL",
+          "id": "worn_basketball",
+          "role": "initiator"
+        },
+        {
+          "factory": "FILLED_LATHED_BOTTLE_ARRAY",
+          "id": "filled_glass_bottles",
+          "role": "response_group"
+        },
+        {
+          "factory": "BEVELED_GROUND_PLANE",
+          "id": "court_floor",
+          "role": "support_surface"
+        },
+        {
+          "factory": "STATIC_AREA_LIGHT",
+          "id": "window_key",
+          "role": "static_light_source"
+        }
+      ],
+      "relations": [
+        {
+          "id": "floor_support_actor",
+          "source": "worn_basketball",
+          "target": "court_floor",
+          "type": "RESTS_ON"
+        },
+        {
+          "id": "floor_support_targets",
+          "source": "filled_glass_bottles",
+          "target": "court_floor",
+          "type": "RESTS_ON"
+        },
+        {
+          "contactToleranceMeters": 0.002,
+          "id": "primary_impact",
+          "source": "worn_basketball",
+          "target": "filled_glass_bottles",
+          "type": "COLLIDES_WITH"
+        },
+        {
+          "id": "group_response",
+          "minimumResponders": 2,
+          "source": "filled_glass_bottles",
+          "type": "PROPAGATES_RESPONSE_WITHIN"
+        }
+      ]
+    },
+    "compiledGraphHash": "9ccdd943bd004a33280bf4077837cefab7c7a1280bad898330320febd1584c76",
+    "fileSha256": "2b480824c11e05872a8444a01b34bfcc7d34eabe645b43536aad1cd20944cf1d",
+    "finalPoseSource": "BLENDER_BULLET_EVALUATED_ACTION_GRAPH",
+    "inspectionToken": "e0b68740fe2c1c67e9af1b1689f2c785e9778e9d78ade4403e6e4c2b640d2003",
+    "sceneId": "RC4-R1-UNSTAGED-BASKETBALL-THREE-GLASS-BOTTLES",
+    "sceneSpecHash": "c7c864308834f266bd674b0f46e450cea9e2b6519a8054dd37dd9722af3012fe",
+    "status": "APPROVED_READY",
+    "targetCount": 3,
+    "targetFactory": "FILLED_LATHED_BOTTLE_ARRAY"
+  },
+  "result": {
+    "authority": {
+      "arbitraryExecutableAuthority": 0,
+      "authoredContactResponsePeakOrFinalFrames": 0,
+      "authoredOutcomeFields": 0,
+      "cameraFrameSource": "MEASURED_PHYSICS_BEATS",
+      "finalPoseSource": "BLENDER_BULLET_EVALUATED_ACTION_GRAPH",
+      "lightAnimationChannels": 0,
+      "networkCalls": 0,
+      "postReleaseTransformKeyframes": 0
+    },
+    "cinematography": {
+      "cause": {
+        "camera": "ACTION_CAM_CAUSE",
+        "cameraLocation": [
+          -3.49902725,
+          -2.26303935,
+          1.53404236
+        ],
+        "frame": 4,
+        "negativeSpaceMargin": 0.15531643,
+        "occupancy": 0.58000003,
+        "source": "EVALUATED_FRAME_SEMANTIC_WORLD_BOUNDS_AND_LANDMARKS"
+      },
+      "contact": {
+        "camera": "ACTION_CAM_CONTACT",
+        "cameraLocation": [
+          -0.37761575,
+          -1.02711797,
+          0.41904441
+        ],
+        "frame": 18,
+        "negativeSpaceMargin": 0.07708207,
+        "occupancy": 0.70000008,
+        "source": "EVALUATED_FRAME_SEMANTIC_WORLD_BOUNDS_AND_LANDMARKS"
+      },
+      "effect": {
+        "camera": "ACTION_CAM_EFFECT",
+        "cameraLocation": [
+          -2.05326319,
+          -0.57500768,
+          1.90214443
+        ],
+        "frame": 95,
+        "negativeSpaceMargin": 0.12323145,
+        "occupancy": 0.63999971,
+        "source": "EVALUATED_FRAME_SEMANTIC_WORLD_BOUNDS_AND_LANDMARKS"
+      },
+      "motionBlur": {
+        "achievedMedianBlurPixels": 6.00000005,
+        "compositorOrPostprocessBlur": false,
+        "computedShutterFrames": 0.19632215,
+        "measurementFrame": 18,
+        "medianMovingPixelsPerFrame": 30.56201275,
+        "nativeTransformMotionBlur": true,
+        "objectPixelsPerFrame": {
+          "CAUSAL_ACTOR_001": 44.63415531,
+          "CAUSAL_TARGET_001": 16.48987018,
+          "CAUSAL_TARGET_002": 48.78312049,
+          "CAUSAL_TARGET_003": 11.00988012
+        },
+        "position": "CENTER",
+        "source": "BULLET_EVALUATED_PROJECTED_MOTION",
+        "targetBlurPixels": 6.0
+      }
+    },
+    "compiledGraph": {
+      "beats": [
+        {
+          "deriveFrom": "BEFORE_RELATION_EVENT",
+          "id": "cause",
+          "offsetFrames": -12,
+          "relation": "primary_impact"
+        },
+        {
+          "deriveFrom": "FIRST_CONTACT",
+          "id": "contact",
+          "relation": "primary_impact"
+        },
+        {
+          "afterBeat": "contact",
+          "deriveFrom": "SETTLED_GROUP_RESPONSE",
+          "id": "effect",
+          "node": "filled_glass_bottles"
+        }
+      ],
+      "nodes": [
+        {
+          "factory": "GROOVED_BASKETBALL",
+          "id": "worn_basketball",
+          "role": "initiator"
+        },
+        {
+          "factory": "FILLED_LATHED_BOTTLE_ARRAY",
+          "id": "filled_glass_bottles",
+          "role": "response_group"
+        },
+        {
+          "factory": "BEVELED_GROUND_PLANE",
+          "id": "court_floor",
+          "role": "support_surface"
+        },
+        {
+          "factory": "STATIC_AREA_LIGHT",
+          "id": "window_key",
+          "role": "static_light_source"
+        }
+      ],
+      "relations": [
+        {
+          "id": "floor_support_actor",
+          "source": "worn_basketball",
+          "target": "court_floor",
+          "type": "RESTS_ON"
+        },
+        {
+          "id": "floor_support_targets",
+          "source": "filled_glass_bottles",
+          "target": "court_floor",
+          "type": "RESTS_ON"
+        },
+        {
+          "contactToleranceMeters": 0.002,
+          "id": "primary_impact",
+          "source": "worn_basketball",
+          "target": "filled_glass_bottles",
+          "type": "COLLIDES_WITH"
+        },
+        {
+          "id": "group_response",
+          "minimumResponders": 2,
+          "source": "filled_glass_bottles",
+          "type": "PROPAGATES_RESPONSE_WITHIN"
+        }
+      ]
+    },
+    "compiledGraphHash": "9ccdd943bd004a33280bf4077837cefab7c7a1280bad898330320febd1584c76",
+    "contractVersion": "bfs.filmStudioPhysicsAction.v0.1",
+    "mechanism": {
+      "activeRigidBodyCount": 4,
+      "factoryIds": [
+        "GROOVED_BASKETBALL",
+        "FILLED_LATHED_BOTTLE_ARRAY",
+        "BEVELED_GROUND_PLANE",
+        "STATIC_AREA_LIGHT"
+      ],
+      "nodeCount": 4,
+      "relationCount": 4,
+      "rigidBodyConstraintCount": 0
+    },
+    "physicalArchetypes": [
+      {
+        "basePosition": [
+          0.34901528,
+          -0.16024231,
+          0.0
+        ],
+        "collisionMarginMeters": 0.0007,
+        "collisionShape": "CONVEX_HULL",
+        "derivedCenterOfMassHeightMeters": 0.06673756,
+        "derivedMassKg": 0.336402,
+        "detailObjectCount": 4,
+        "fillFraction": 0.46,
+        "friction": 0.43896398,
+        "liquidCenterOfMassHeightMeters": 0.05628732,
+        "restitution": 0.11288522,
+        "target": "CAUSAL_TARGET_001",
+        "visibleBodyIsCollisionHullSource": true,
+        "visibleLiquidSurfaceHeightMeters": 0.10594064,
+        "yawDegrees": -3.82788565
+      },
+      {
+        "basePosition": [
+          0.51299095,
+          0.00503143,
+          0.0
+        ],
+        "collisionMarginMeters": 0.0007,
+        "collisionShape": "CONVEX_HULL",
+        "derivedCenterOfMassHeightMeters": 0.09392409,
+        "derivedMassKg": 0.537499,
+        "detailObjectCount": 4,
+        "fillFraction": 0.77,
+        "friction": 0.45748229,
+        "liquidCenterOfMassHeightMeters": 0.08974934,
+        "restitution": 0.11298056,
+        "target": "CAUSAL_TARGET_002",
+        "visibleBodyIsCollisionHullSource": true,
+        "visibleLiquidSurfaceHeightMeters": 0.17286468,
+        "yawDegrees": -3.67820495
+      },
+      {
+        "basePosition": [
+          0.35233816,
+          0.157903,
+          0.0
+        ],
+        "collisionMarginMeters": 0.0007,
+        "collisionShape": "CONVEX_HULL",
+        "derivedCenterOfMassHeightMeters": 0.08094661,
+        "derivedMassKg": 0.446681,
+        "detailObjectCount": 4,
+        "fillFraction": 0.63,
+        "friction": 0.44484275,
+        "liquidCenterOfMassHeightMeters": 0.07463746,
+        "restitution": 0.09919842,
+        "target": "CAUSAL_TARGET_003",
+        "visibleBodyIsCollisionHullSource": true,
+        "visibleLiquidSurfaceHeightMeters": 0.14264092,
+        "yawDegrees": -1.85461975
+      }
+    ],
+    "physicalLook": {
+      "basketball": {
+        "externalAssets": 0,
+        "preset": "WORN_GAME_BASKETBALL",
+        "proceduralPebbleScale": 185.0
+      },
+      "bottles": {
+        "externalAssets": 0,
+        "preset": "HOUSEHOLD_GLASS_WITH_VISIBLE_FILL_AND_VARIATION",
+        "records": [
+          {
+            "addedVisualDetailCount": 5,
+            "collisionHullSource": "CAUSAL_TARGET_001",
+            "readableStageCount": 10,
+            "target": "CAUSAL_TARGET_001",
+            "visibleLiquidSurfaceHeightMeters": 0.10594064,
+            "visualChildrenHaveRigidBody": false,
+            "wallThicknessMeters": 0.0014
+          },
+          {
+            "addedVisualDetailCount": 5,
+            "collisionHullSource": "CAUSAL_TARGET_002",
+            "readableStageCount": 10,
+            "target": "CAUSAL_TARGET_002",
+            "visibleLiquidSurfaceHeightMeters": 0.17286468,
+            "visualChildrenHaveRigidBody": false,
+            "wallThicknessMeters": 0.0014
+          },
+          {
+            "addedVisualDetailCount": 5,
+            "collisionHullSource": "CAUSAL_TARGET_003",
+            "readableStageCount": 10,
+            "target": "CAUSAL_TARGET_003",
+            "visibleLiquidSurfaceHeightMeters": 0.14264092,
+            "visualChildrenHaveRigidBody": false,
+            "wallThicknessMeters": 0.0014
+          }
+        ]
+      },
+      "environment": {
+        "externalAssets": 0,
+        "preset": "AGED_MAPLE_COURT_WITH_SCALE_CUES",
+        "scaleCueCount": 22
+      }
+    },
+    "physics": {
+      "actorTravelMeters": 20.50878358,
+      "contactFrame": 16,
+      "continuousActorMotionThroughContact": true,
+      "finalTiltDegrees": {
+        "CAUSAL_TARGET_001": 0.0,
+        "CAUSAL_TARGET_002": 89.99995277,
+        "CAUSAL_TARGET_003": 90.00000204
+      },
+      "firstResponseDelayFrames": 0,
+      "firstResponseFrame": 16,
+      "peakActiveTargetCount": 3,
+      "peakAggregateAngularStepDegrees": 31.90506724,
+      "peakGroupResponseFrame": 20,
+      "respondingTargetCount": 3,
+      "samples": [
+        {
+          "actorLocation": [
+            -2.1500001,
+            -0.04,
+            0.119
+          ],
+          "actorStepMeters": 0,
+          "frame": 1,
+          "maximumTargetTranslationStepMeters": 0,
+          "minimumContactGapMeters": 2.33645223,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0,
+            "CAUSAL_TARGET_002": 0,
+            "CAUSAL_TARGET_003": 0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -1.97291672,
+            -0.03666667,
+            0.119
+          ],
+          "actorStepMeters": 0.17711474,
+          "frame": 2,
+          "maximumTargetTranslationStepMeters": 0.00069196,
+          "minimumContactGapMeters": 2.1597861,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -1.79583347,
+            -0.03333333,
+            0.119
+          ],
+          "actorStepMeters": 0.17711463,
+          "frame": 3,
+          "maximumTargetTranslationStepMeters": 7.97e-06,
+          "minimumContactGapMeters": 1.9832148,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -1.6187501,
+            -0.03,
+            0.119
+          ],
+          "actorStepMeters": 0.17711474,
+          "frame": 4,
+          "maximumTargetTranslationStepMeters": 4.05e-06,
+          "minimumContactGapMeters": 1.80673722,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -1.44166684,
+            -0.02666667,
+            0.119
+          ],
+          "actorStepMeters": 0.17711463,
+          "frame": 5,
+          "maximumTargetTranslationStepMeters": 5.6e-07,
+          "minimumContactGapMeters": 1.63039028,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -1.26458347,
+            -0.02333333,
+            0.119
+          ],
+          "actorStepMeters": 0.17711474,
+          "frame": 6,
+          "maximumTargetTranslationStepMeters": 3e-08,
+          "minimumContactGapMeters": 1.45421015,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -1.0875001,
+            -0.02,
+            0.119
+          ],
+          "actorStepMeters": 0.17711474,
+          "frame": 7,
+          "maximumTargetTranslationStepMeters": 8.7e-07,
+          "minimumContactGapMeters": 1.27825839,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -0.91041684,
+            -0.01666667,
+            0.119
+          ],
+          "actorStepMeters": 0.17711463,
+          "frame": 8,
+          "maximumTargetTranslationStepMeters": 4.18e-06,
+          "minimumContactGapMeters": 1.10263466,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -0.73333347,
+            -0.01333333,
+            0.119
+          ],
+          "actorStepMeters": 0.17711474,
+          "frame": 9,
+          "maximumTargetTranslationStepMeters": 1e-06,
+          "minimumContactGapMeters": 0.92748594,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -0.55625021,
+            -0.01,
+            0.119
+          ],
+          "actorStepMeters": 0.17711463,
+          "frame": 10,
+          "maximumTargetTranslationStepMeters": 1.93e-06,
+          "minimumContactGapMeters": 0.753094,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -0.37916684,
+            -0.00666667,
+            0.119
+          ],
+          "actorStepMeters": 0.17711474,
+          "frame": 11,
+          "maximumTargetTranslationStepMeters": 3e-07,
+          "minimumContactGapMeters": 0.57998365,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -0.2059886,
+            -0.00337197,
+            0.119
+          ],
+          "actorStepMeters": 0.17320958,
+          "frame": 12,
+          "maximumTargetTranslationStepMeters": 6e-08,
+          "minimumContactGapMeters": 0.41304708,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            -0.04023716,
+            -0.00015079,
+            0.119
+          ],
+          "actorStepMeters": 0.16578274,
+          "frame": 13,
+          "maximumTargetTranslationStepMeters": 1e-08,
+          "minimumContactGapMeters": 0.25803489,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            0.11810332,
+            0.00299697,
+            0.119
+          ],
+          "actorStepMeters": 0.15837177,
+          "frame": 14,
+          "maximumTargetTranslationStepMeters": 1.71e-06,
+          "minimumContactGapMeters": 0.11729685,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            0.26904866,
+            0.0060714,
+            0.119
+          ],
+          "actorStepMeters": 0.15097664,
+          "frame": 15,
+          "maximumTargetTranslationStepMeters": 2.1e-07,
+          "minimumContactGapMeters": 0.01116152,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 0.0
+          }
+        },
+        {
+          "actorLocation": [
+            0.37047729,
+            -0.00070253,
+            0.119
+          ],
+          "actorStepMeters": 0.10165457,
+          "frame": 16,
+          "maximumTargetTranslationStepMeters": 0.02849864,
+          "minimumContactGapMeters": 0.00065092,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 4.04195928,
+            "CAUSAL_TARGET_002": 6.46235163,
+            "CAUSAL_TARGET_003": 6.95561726
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.04195928,
+            "CAUSAL_TARGET_002": 6.46235163,
+            "CAUSAL_TARGET_003": 6.95561726
+          }
+        },
+        {
+          "actorLocation": [
+            0.42372715,
+            -0.00610667,
+            0.11902393
+          ],
+          "actorStepMeters": 0.05352339,
+          "frame": 17,
+          "maximumTargetTranslationStepMeters": 0.06099723,
+          "minimumContactGapMeters": 0.0083737,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 4.47834342,
+            "CAUSAL_TARGET_002": 15.91704065,
+            "CAUSAL_TARGET_003": 6.78904707
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 8.5203027,
+            "CAUSAL_TARGET_002": 22.37939227,
+            "CAUSAL_TARGET_003": 13.74466433
+          }
+        },
+        {
+          "actorLocation": [
+            0.46588549,
+            -0.01146272,
+            0.119
+          ],
+          "actorStepMeters": 0.04249721,
+          "frame": 18,
+          "maximumTargetTranslationStepMeters": 0.06270758,
+          "minimumContactGapMeters": 0.02959759,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.24751674,
+            "CAUSAL_TARGET_002": 15.26984936,
+            "CAUSAL_TARGET_003": 7.07404532
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 11.76781944,
+            "CAUSAL_TARGET_002": 37.64924163,
+            "CAUSAL_TARGET_003": 20.81870965
+          }
+        },
+        {
+          "actorLocation": [
+            0.50023651,
+            -0.01626587,
+            0.119
+          ],
+          "actorStepMeters": 0.0346852,
+          "frame": 19,
+          "maximumTargetTranslationStepMeters": 0.06219101,
+          "minimumContactGapMeters": 0.05442031,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.48501508,
+            "CAUSAL_TARGET_002": 17.14412754,
+            "CAUSAL_TARGET_003": 8.51257699
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 14.25283451,
+            "CAUSAL_TARGET_002": 54.79336918,
+            "CAUSAL_TARGET_003": 29.33128664
+          }
+        },
+        {
+          "actorLocation": [
+            0.52788031,
+            -0.02036058,
+            0.119
+          ],
+          "actorStepMeters": 0.02794542,
+          "frame": 20,
+          "maximumTargetTranslationStepMeters": 0.06238358,
+          "minimumContactGapMeters": 0.06457619,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.68277465,
+            "CAUSAL_TARGET_002": 20.60647756,
+            "CAUSAL_TARGET_003": 9.61581503
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 15.93560916,
+            "CAUSAL_TARGET_002": 75.39984673,
+            "CAUSAL_TARGET_003": 38.94710167
+          }
+        },
+        {
+          "actorLocation": [
+            0.55388975,
+            -0.02428011,
+            0.119
+          ],
+          "actorStepMeters": 0.02630311,
+          "frame": 21,
+          "maximumTargetTranslationStepMeters": 0.05656774,
+          "minimumContactGapMeters": 0.07467078,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.26760483,
+            "CAUSAL_TARGET_002": 14.99415303,
+            "CAUSAL_TARGET_003": 10.58033447
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 16.203214,
+            "CAUSAL_TARGET_002": 90.39399977,
+            "CAUSAL_TARGET_003": 49.52743614
+          }
+        },
+        {
+          "actorLocation": [
+            0.57983035,
+            -0.02818927,
+            0.119
+          ],
+          "actorStepMeters": 0.02623349,
+          "frame": 22,
+          "maximumTargetTranslationStepMeters": 0.0429927,
+          "minimumContactGapMeters": 0.08553286,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.12589874,
+            "CAUSAL_TARGET_002": 0.3870636,
+            "CAUSAL_TARGET_003": 12.51371871
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 15.07731526,
+            "CAUSAL_TARGET_002": 90.00693617,
+            "CAUSAL_TARGET_003": 62.04115485
+          }
+        },
+        {
+          "actorLocation": [
+            0.60570234,
+            -0.03208809,
+            0.119
+          ],
+          "actorStepMeters": 0.02616411,
+          "frame": 23,
+          "maximumTargetTranslationStepMeters": 0.03792493,
+          "minimumContactGapMeters": 0.09728122,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.61799442,
+            "CAUSAL_TARGET_002": 0.01358616,
+            "CAUSAL_TARGET_003": 15.21622794
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 12.45932084,
+            "CAUSAL_TARGET_002": 89.99335001,
+            "CAUSAL_TARGET_003": 77.25738279
+          }
+        },
+        {
+          "actorLocation": [
+            0.63150591,
+            -0.03597659,
+            0.119
+          ],
+          "actorStepMeters": 0.02609491,
+          "frame": 24,
+          "maximumTargetTranslationStepMeters": 0.03302918,
+          "minimumContactGapMeters": 0.10999166,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 4.31981847,
+            "CAUSAL_TARGET_002": 0.00186245,
+            "CAUSAL_TARGET_003": 12.7677264
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 8.13950236,
+            "CAUSAL_TARGET_002": 89.99521246,
+            "CAUSAL_TARGET_003": 90.02510919
+          }
+        },
+        {
+          "actorLocation": [
+            0.65724117,
+            -0.0398548,
+            0.119
+          ],
+          "actorStepMeters": 0.02602583,
+          "frame": 25,
+          "maximumTargetTranslationStepMeters": 0.02815258,
+          "minimumContactGapMeters": 0.12389928,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 6.39365024,
+            "CAUSAL_TARGET_002": 0.01021696,
+            "CAUSAL_TARGET_003": 0.03550758
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.74585212,
+            "CAUSAL_TARGET_002": 90.00542942,
+            "CAUSAL_TARGET_003": 89.98960161
+          }
+        },
+        {
+          "actorLocation": [
+            0.68290836,
+            -0.04372276,
+            0.119
+          ],
+          "actorStepMeters": 0.025957,
+          "frame": 26,
+          "maximumTargetTranslationStepMeters": 0.02331601,
+          "minimumContactGapMeters": 0.14053566,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.36643053,
+            "CAUSAL_TARGET_002": 0.01086748,
+            "CAUSAL_TARGET_003": 0.00218851
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 5.11228265,
+            "CAUSAL_TARGET_002": 89.99456194,
+            "CAUSAL_TARGET_003": 89.9874131
+          }
+        },
+        {
+          "actorLocation": [
+            0.7085076,
+            -0.04758047,
+            0.119
+          ],
+          "actorStepMeters": 0.02588828,
+          "frame": 27,
+          "maximumTargetTranslationStepMeters": 0.01849238,
+          "minimumContactGapMeters": 0.1576904,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 4.41708698,
+            "CAUSAL_TARGET_002": 0.0038324,
+            "CAUSAL_TARGET_003": 0.02324907
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 9.52936964,
+            "CAUSAL_TARGET_002": 89.99839434,
+            "CAUSAL_TARGET_003": 90.01066216
+          }
+        },
+        {
+          "actorLocation": [
+            0.73403913,
+            -0.05142799,
+            0.119
+          ],
+          "actorStepMeters": 0.02581981,
+          "frame": 28,
+          "maximumTargetTranslationStepMeters": 0.01368489,
+          "minimumContactGapMeters": 0.14763752,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.45010686,
+            "CAUSAL_TARGET_002": 0.01147471,
+            "CAUSAL_TARGET_003": 0.01888218
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 11.97947649,
+            "CAUSAL_TARGET_002": 90.00986905,
+            "CAUSAL_TARGET_003": 89.99177999
+          }
+        },
+        {
+          "actorLocation": [
+            0.75950313,
+            -0.05526532,
+            0.119
+          ],
+          "actorStepMeters": 0.02575151,
+          "frame": 29,
+          "maximumTargetTranslationStepMeters": 0.0099272,
+          "minimumContactGapMeters": 0.13336943,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.67347471,
+            "CAUSAL_TARGET_002": 0.00335686,
+            "CAUSAL_TARGET_003": 0.01508371
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 12.65295121,
+            "CAUSAL_TARGET_002": 90.01322592,
+            "CAUSAL_TARGET_003": 90.0068637
+          }
+        },
+        {
+          "actorLocation": [
+            0.78489971,
+            -0.0590925,
+            0.119
+          ],
+          "actorStepMeters": 0.02568334,
+          "frame": 30,
+          "maximumTargetTranslationStepMeters": 0.00985955,
+          "minimumContactGapMeters": 0.11508327,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.97055266,
+            "CAUSAL_TARGET_002": 0.01317392,
+            "CAUSAL_TARGET_003": 0.01236984
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 11.68239854,
+            "CAUSAL_TARGET_002": 90.00005199,
+            "CAUSAL_TARGET_003": 89.99449386
+          }
+        },
+        {
+          "actorLocation": [
+            0.81022912,
+            -0.06290955,
+            0.119
+          ],
+          "actorStepMeters": 0.0256154,
+          "frame": 31,
+          "maximumTargetTranslationStepMeters": 0.0097996,
+          "minimumContactGapMeters": 0.09411394,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.73881822,
+            "CAUSAL_TARGET_002": 0.00122349,
+            "CAUSAL_TARGET_003": 0.00865541
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 8.94358032,
+            "CAUSAL_TARGET_002": 89.9988285,
+            "CAUSAL_TARGET_003": 90.00314926
+          }
+        },
+        {
+          "actorLocation": [
+            0.83549154,
+            -0.06671651,
+            0.119
+          ],
+          "actorStepMeters": 0.02554765,
+          "frame": 32,
+          "maximumTargetTranslationStepMeters": 0.00971905,
+          "minimumContactGapMeters": 0.07377756,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 4.73010698,
+            "CAUSAL_TARGET_002": 0.00117359,
+            "CAUSAL_TARGET_003": 0.00457215
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.21347334,
+            "CAUSAL_TARGET_002": 90.00000209,
+            "CAUSAL_TARGET_003": 89.99857711
+          }
+        },
+        {
+          "actorLocation": [
+            0.86068708,
+            -0.07051339,
+            0.119
+          ],
+          "actorStepMeters": 0.02548002,
+          "frame": 33,
+          "maximumTargetTranslationStepMeters": 0.0096733,
+          "minimumContactGapMeters": 0.05455695,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.80805363,
+            "CAUSAL_TARGET_002": 1.01e-06,
+            "CAUSAL_TARGET_003": 0.00134347
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 2.40541971,
+            "CAUSAL_TARGET_002": 90.0000031,
+            "CAUSAL_TARGET_003": 89.99992059
+          }
+        },
+        {
+          "actorLocation": [
+            0.87895399,
+            -0.07877401,
+            0.119
+          ],
+          "actorStepMeters": 0.0200479,
+          "frame": 34,
+          "maximumTargetTranslationStepMeters": 0.00959481,
+          "minimumContactGapMeters": 0.05080595,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 4.78999136,
+            "CAUSAL_TARGET_002": 0.00327474,
+            "CAUSAL_TARGET_003": 0.00042632
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 7.19541107,
+            "CAUSAL_TARGET_002": 89.99672836,
+            "CAUSAL_TARGET_003": 90.00034691
+          }
+        },
+        {
+          "actorLocation": [
+            0.89599621,
+            -0.08829093,
+            0.119
+          ],
+          "actorStepMeters": 0.01951945,
+          "frame": 35,
+          "maximumTargetTranslationStepMeters": 0.00954448,
+          "minimumContactGapMeters": 0.04724728,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.63900239,
+            "CAUSAL_TARGET_002": 0.00536692,
+            "CAUSAL_TARGET_003": 0.00026017
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 9.83441346,
+            "CAUSAL_TARGET_002": 90.00209528,
+            "CAUSAL_TARGET_003": 90.00008674
+          }
+        },
+        {
+          "actorLocation": [
+            0.91299337,
+            -0.09778266,
+            0.119
+          ],
+          "actorStepMeters": 0.01946783,
+          "frame": 36,
+          "maximumTargetTranslationStepMeters": 0.00947265,
+          "minimumContactGapMeters": 0.04285472,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.74517633,
+            "CAUSAL_TARGET_002": 0.00207155,
+            "CAUSAL_TARGET_003": 1.137e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 10.57958979,
+            "CAUSAL_TARGET_002": 90.00002373,
+            "CAUSAL_TARGET_003": 90.00007537
+          }
+        },
+        {
+          "actorLocation": [
+            0.92994553,
+            -0.10724927,
+            0.119
+          ],
+          "actorStepMeters": 0.01941629,
+          "frame": 37,
+          "maximumTargetTranslationStepMeters": 0.00941828,
+          "minimumContactGapMeters": 0.0403519,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.10526984,
+            "CAUSAL_TARGET_002": 2.121e-05,
+            "CAUSAL_TARGET_003": 0.00059059
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 9.47431995,
+            "CAUSAL_TARGET_002": 90.00000251,
+            "CAUSAL_TARGET_003": 90.00066596
+          }
+        },
+        {
+          "actorLocation": [
+            0.9468528,
+            -0.11669085,
+            0.119
+          ],
+          "actorStepMeters": 0.0193649,
+          "frame": 38,
+          "maximumTargetTranslationStepMeters": 0.00937668,
+          "minimumContactGapMeters": 0.03992179,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.04030972,
+            "CAUSAL_TARGET_002": 7.112e-05,
+            "CAUSAL_TARGET_003": 0.00041133
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 6.43401023,
+            "CAUSAL_TARGET_002": 89.99993139,
+            "CAUSAL_TARGET_003": 90.00025463
+          }
+        },
+        {
+          "actorLocation": [
+            0.96371537,
+            -0.12610744,
+            0.119
+          ],
+          "actorStepMeters": 0.01931369,
+          "frame": 39,
+          "maximumTargetTranslationStepMeters": 0.00934292,
+          "minimumContactGapMeters": 0.04153986,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 5.13767309,
+            "CAUSAL_TARGET_002": 7.112e-05,
+            "CAUSAL_TARGET_003": 0.00046847
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.29633715,
+            "CAUSAL_TARGET_002": 90.00000251,
+            "CAUSAL_TARGET_003": 90.0007231
+          }
+        },
+        {
+          "actorLocation": [
+            0.9805333,
+            -0.13549912,
+            0.119
+          ],
+          "actorStepMeters": 0.01926256,
+          "frame": 40,
+          "maximumTargetTranslationStepMeters": 0.00929394,
+          "minimumContactGapMeters": 0.04515083,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.30377136,
+            "CAUSAL_TARGET_002": 1.96e-06,
+            "CAUSAL_TARGET_003": 5.577e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.6001085,
+            "CAUSAL_TARGET_002": 90.00000448,
+            "CAUSAL_TARGET_003": 90.00066733
+          }
+        },
+        {
+          "actorLocation": [
+            0.99730676,
+            -0.14486594,
+            0.119
+          ],
+          "actorStepMeters": 0.01921162,
+          "frame": 41,
+          "maximumTargetTranslationStepMeters": 0.00923161,
+          "minimumContactGapMeters": 0.05063631,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.46885084,
+            "CAUSAL_TARGET_002": 2.96e-06,
+            "CAUSAL_TARGET_003": 0.00013802
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 8.06895934,
+            "CAUSAL_TARGET_002": 90.00000152,
+            "CAUSAL_TARGET_003": 90.00080535
+          }
+        },
+        {
+          "actorLocation": [
+            1.01403582,
+            -0.15420799,
+            0.119
+          ],
+          "actorStepMeters": 0.01916077,
+          "frame": 42,
+          "maximumTargetTranslationStepMeters": 0.00916297,
+          "minimumContactGapMeters": 0.05787758,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.40766326,
+            "CAUSAL_TARGET_002": 6.5e-07,
+            "CAUSAL_TARGET_003": 7.81e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 9.47662261,
+            "CAUSAL_TARGET_002": 90.00000087,
+            "CAUSAL_TARGET_003": 90.00088346
+          }
+        },
+        {
+          "actorLocation": [
+            1.03072071,
+            -0.16352531,
+            0.119
+          ],
+          "actorStepMeters": 0.01911016,
+          "frame": 43,
+          "maximumTargetTranslationStepMeters": 0.00910765,
+          "minimumContactGapMeters": 0.06667049,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.5312631,
+            "CAUSAL_TARGET_002": 4.85e-06,
+            "CAUSAL_TARGET_003": 0.00060026
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 8.94535951,
+            "CAUSAL_TARGET_002": 90.00000572,
+            "CAUSAL_TARGET_003": 90.0002832
+          }
+        },
+        {
+          "actorLocation": [
+            1.04736137,
+            -0.17281799,
+            0.119
+          ],
+          "actorStepMeters": 0.01905953,
+          "frame": 44,
+          "maximumTargetTranslationStepMeters": 0.00906646,
+          "minimumContactGapMeters": 0.07682654,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.50811964,
+            "CAUSAL_TARGET_002": 1.24e-06,
+            "CAUSAL_TARGET_003": 0.00241093
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 6.43723987,
+            "CAUSAL_TARGET_002": 90.00000448,
+            "CAUSAL_TARGET_003": 89.99787227
+          }
+        },
+        {
+          "actorLocation": [
+            1.06395793,
+            -0.18208608,
+            0.119
+          ],
+          "actorStepMeters": 0.01900903,
+          "frame": 45,
+          "maximumTargetTranslationStepMeters": 0.00903017,
+          "minimumContactGapMeters": 0.08819561,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 4.65675755,
+            "CAUSAL_TARGET_002": 2.9e-07,
+            "CAUSAL_TARGET_003": 0.00176805
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.78048232,
+            "CAUSAL_TARGET_002": 90.00000477,
+            "CAUSAL_TARGET_003": 89.99610422
+          }
+        },
+        {
+          "actorLocation": [
+            1.08051074,
+            -0.19132964,
+            0.119
+          ],
+          "actorStepMeters": 0.01895887,
+          "frame": 46,
+          "maximumTargetTranslationStepMeters": 0.00899394,
+          "minimumContactGapMeters": 0.10056153,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.02753548,
+            "CAUSAL_TARGET_002": 5.17e-06,
+            "CAUSAL_TARGET_003": 0.00641126
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 3.8080178,
+            "CAUSAL_TARGET_002": 89.9999996,
+            "CAUSAL_TARGET_003": 90.00251548
+          }
+        },
+        {
+          "actorLocation": [
+            1.09701967,
+            -0.20054875,
+            0.119
+          ],
+          "actorStepMeters": 0.01890865,
+          "frame": 47,
+          "maximumTargetTranslationStepMeters": 0.00894144,
+          "minimumContactGapMeters": 0.11383923,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.25795127,
+            "CAUSAL_TARGET_002": 2.34e-06,
+            "CAUSAL_TARGET_003": 0.0061856
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 7.06596907,
+            "CAUSAL_TARGET_002": 90.00000194,
+            "CAUSAL_TARGET_003": 89.99632988
+          }
+        },
+        {
+          "actorLocation": [
+            1.11348486,
+            -0.20974348,
+            0.119
+          ],
+          "actorStepMeters": 0.01885857,
+          "frame": 48,
+          "maximumTargetTranslationStepMeters": 0.00890312,
+          "minimumContactGapMeters": 0.12785206,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.11865942,
+            "CAUSAL_TARGET_002": 1.026e-05,
+            "CAUSAL_TARGET_003": 0.00955486
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 8.18462849,
+            "CAUSAL_TARGET_002": 90.0000122,
+            "CAUSAL_TARGET_003": 90.00588474
+          }
+        },
+        {
+          "actorLocation": [
+            1.12990654,
+            -0.21891387,
+            0.119
+          ],
+          "actorStepMeters": 0.0188087,
+          "frame": 49,
+          "maximumTargetTranslationStepMeters": 0.0088557,
+          "minimumContactGapMeters": 0.14253674,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.92439804,
+            "CAUSAL_TARGET_002": 0.00310682,
+            "CAUSAL_TARGET_003": 0.00124355
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 7.26023044,
+            "CAUSAL_TARGET_002": 89.99690538,
+            "CAUSAL_TARGET_003": 90.00712829
+          }
+        },
+        {
+          "actorLocation": [
+            1.14628482,
+            -0.22805999,
+            0.119
+          ],
+          "actorStepMeters": 0.01875899,
+          "frame": 50,
+          "maximumTargetTranslationStepMeters": 0.00880031,
+          "minimumContactGapMeters": 0.15768159,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.03093669,
+            "CAUSAL_TARGET_002": 0.00309828,
+            "CAUSAL_TARGET_003": 0.00540481
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.22929376,
+            "CAUSAL_TARGET_002": 90.00000366,
+            "CAUSAL_TARGET_003": 90.0125331
+          }
+        },
+        {
+          "actorLocation": [
+            1.16261971,
+            -0.23718193,
+            0.119
+          ],
+          "actorStepMeters": 0.01870931,
+          "frame": 51,
+          "maximumTargetTranslationStepMeters": 0.00876163,
+          "minimumContactGapMeters": 0.17333342,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.18324411,
+            "CAUSAL_TARGET_002": 0.00409161,
+            "CAUSAL_TARGET_003": 0.02788493
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.04604965,
+            "CAUSAL_TARGET_002": 90.00409527,
+            "CAUSAL_TARGET_003": 89.98464817
+          }
+        },
+        {
+          "actorLocation": [
+            1.17891145,
+            -0.24627972,
+            0.119
+          ],
+          "actorStepMeters": 0.01865986,
+          "frame": 52,
+          "maximumTargetTranslationStepMeters": 0.00873629,
+          "minimumContactGapMeters": 0.18932979,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.99533894,
+            "CAUSAL_TARGET_002": 0.00409527,
+            "CAUSAL_TARGET_003": 0.01516228
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 5.04138859,
+            "CAUSAL_TARGET_002": 90.0,
+            "CAUSAL_TARGET_003": 89.99981045
+          }
+        },
+        {
+          "actorLocation": [
+            1.19516003,
+            -0.25535345,
+            0.119
+          ],
+          "actorStepMeters": 0.01861046,
+          "frame": 53,
+          "maximumTargetTranslationStepMeters": 0.00868659,
+          "minimumContactGapMeters": 0.20569639,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.75012089,
+            "CAUSAL_TARGET_002": 1.8e-07,
+            "CAUSAL_TARGET_003": 0.00051771
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 6.79150948,
+            "CAUSAL_TARGET_002": 90.00000018,
+            "CAUSAL_TARGET_003": 89.99929274
+          }
+        },
+        {
+          "actorLocation": [
+            1.21136558,
+            -0.26440316,
+            0.119
+          ],
+          "actorStepMeters": 0.01856117,
+          "frame": 54,
+          "maximumTargetTranslationStepMeters": 0.00865611,
+          "minimumContactGapMeters": 0.22234052,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.40383642,
+            "CAUSAL_TARGET_002": 1.17e-06,
+            "CAUSAL_TARGET_003": 0.00265932
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 6.38767306,
+            "CAUSAL_TARGET_002": 90.00000134,
+            "CAUSAL_TARGET_003": 89.99663342
+          }
+        },
+        {
+          "actorLocation": [
+            1.22752833,
+            -0.27342895,
+            0.119
+          ],
+          "actorStepMeters": 0.01851214,
+          "frame": 55,
+          "maximumTargetTranslationStepMeters": 0.00858872,
+          "minimumContactGapMeters": 0.23925202,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.58361679,
+            "CAUSAL_TARGET_002": 0.00400501,
+            "CAUSAL_TARGET_003": 0.00600912
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 3.80405627,
+            "CAUSAL_TARGET_002": 90.00400635,
+            "CAUSAL_TARGET_003": 90.00264254
+          }
+        },
+        {
+          "actorLocation": [
+            1.24364829,
+            -0.28243083,
+            0.119
+          ],
+          "actorStepMeters": 0.01846312,
+          "frame": 56,
+          "maximumTargetTranslationStepMeters": 0.00851112,
+          "minimumContactGapMeters": 0.25631828,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.76306969,
+            "CAUSAL_TARGET_002": 0.0040047,
+            "CAUSAL_TARGET_003": 0.00433508
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.04098659,
+            "CAUSAL_TARGET_002": 90.00000165,
+            "CAUSAL_TARGET_003": 90.00697762
+          }
+        },
+        {
+          "actorLocation": [
+            1.25972557,
+            -0.2914089,
+            0.119
+          ],
+          "actorStepMeters": 0.01841425,
+          "frame": 57,
+          "maximumTargetTranslationStepMeters": 0.00842994,
+          "minimumContactGapMeters": 0.27358117,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.60020066,
+            "CAUSAL_TARGET_002": 1.63e-06,
+            "CAUSAL_TARGET_003": 0.00831165
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.64118725,
+            "CAUSAL_TARGET_002": 90.00000002,
+            "CAUSAL_TARGET_003": 90.01528927
+          }
+        },
+        {
+          "actorLocation": [
+            1.27576029,
+            -0.30036321,
+            0.119
+          ],
+          "actorStepMeters": 0.01836551,
+          "frame": 58,
+          "maximumTargetTranslationStepMeters": 0.00838429,
+          "minimumContactGapMeters": 0.29097572,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.32528528,
+            "CAUSAL_TARGET_002": 8e-08,
+            "CAUSAL_TARGET_003": 0.01535839
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 5.96647253,
+            "CAUSAL_TARGET_002": 90.0000001,
+            "CAUSAL_TARGET_003": 89.99993088
+          }
+        },
+        {
+          "actorLocation": [
+            1.2917527,
+            -0.30929384,
+            0.119
+          ],
+          "actorStepMeters": 0.01831701,
+          "frame": 59,
+          "maximumTargetTranslationStepMeters": 0.00834678,
+          "minimumContactGapMeters": 0.30850318,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.89381825,
+            "CAUSAL_TARGET_002": 8.5e-07,
+            "CAUSAL_TARGET_003": 0.00104627
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 5.07265429,
+            "CAUSAL_TARGET_002": 89.99999925,
+            "CAUSAL_TARGET_003": 89.99888461
+          }
+        },
+        {
+          "actorLocation": [
+            1.30770266,
+            -0.31820086,
+            0.119
+          ],
+          "actorStepMeters": 0.01826845,
+          "frame": 60,
+          "maximumTargetTranslationStepMeters": 0.00829135,
+          "minimumContactGapMeters": 0.32614745,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 3.15479969,
+            "CAUSAL_TARGET_002": 4.9e-07,
+            "CAUSAL_TARGET_003": 0.00139462
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.9178546,
+            "CAUSAL_TARGET_002": 89.99999876,
+            "CAUSAL_TARGET_003": 89.99748999
+          }
+        },
+        {
+          "actorLocation": [
+            1.32361054,
+            -0.32708427,
+            0.119
+          ],
+          "actorStepMeters": 0.0182202,
+          "frame": 61,
+          "maximumTargetTranslationStepMeters": 0.00824453,
+          "minimumContactGapMeters": 0.34387479,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.68883908,
+            "CAUSAL_TARGET_002": 3.33e-06,
+            "CAUSAL_TARGET_003": 0.00575774
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 2.60669368,
+            "CAUSAL_TARGET_002": 89.99999543,
+            "CAUSAL_TARGET_003": 89.99173225
+          }
+        },
+        {
+          "actorLocation": [
+            1.33947623,
+            -0.33594421,
+            0.119
+          ],
+          "actorStepMeters": 0.01817191,
+          "frame": 62,
+          "maximumTargetTranslationStepMeters": 0.00818011,
+          "minimumContactGapMeters": 0.36170852,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.30705051,
+            "CAUSAL_TARGET_002": 1.507e-05,
+            "CAUSAL_TARGET_003": 0.00824737
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.91374419,
+            "CAUSAL_TARGET_002": 90.0000105,
+            "CAUSAL_TARGET_003": 89.99997962
+          }
+        },
+        {
+          "actorLocation": [
+            1.35530007,
+            -0.34478071,
+            0.119
+          ],
+          "actorStepMeters": 0.01812396,
+          "frame": 63,
+          "maximumTargetTranslationStepMeters": 0.00811952,
+          "minimumContactGapMeters": 0.37959094,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.01317931,
+            "CAUSAL_TARGET_002": 1.064e-05,
+            "CAUSAL_TARGET_003": 0.00207596
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.9269235,
+            "CAUSAL_TARGET_002": 89.99999986,
+            "CAUSAL_TARGET_003": 89.99790366
+          }
+        },
+        {
+          "actorLocation": [
+            1.37108195,
+            -0.3535938,
+            0.119
+          ],
+          "actorStepMeters": 0.0180759,
+          "frame": 64,
+          "maximumTargetTranslationStepMeters": 0.00808525,
+          "minimumContactGapMeters": 0.3975134,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.26811201,
+            "CAUSAL_TARGET_002": 5.61e-06,
+            "CAUSAL_TARGET_003": 0.00778547
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 2.65881149,
+            "CAUSAL_TARGET_002": 90.00000547,
+            "CAUSAL_TARGET_003": 90.00568913
+          }
+        },
+        {
+          "actorLocation": [
+            1.3868221,
+            -0.3623836,
+            0.119
+          ],
+          "actorStepMeters": 0.01802812,
+          "frame": 65,
+          "maximumTargetTranslationStepMeters": 0.00804082,
+          "minimumContactGapMeters": 0.4154424,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.02902299,
+            "CAUSAL_TARGET_002": 3.62e-06,
+            "CAUSAL_TARGET_003": 0.00533663
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.6297885,
+            "CAUSAL_TARGET_002": 90.00000185,
+            "CAUSAL_TARGET_003": 90.01102576
+          }
+        },
+        {
+          "actorLocation": [
+            1.40252054,
+            -0.37115014,
+            0.119
+          ],
+          "actorStepMeters": 0.01798035,
+          "frame": 66,
+          "maximumTargetTranslationStepMeters": 0.00798413,
+          "minimumContactGapMeters": 0.43344806,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.54581881,
+            "CAUSAL_TARGET_002": 6.05e-06,
+            "CAUSAL_TARGET_003": 0.01067211
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.1756073,
+            "CAUSAL_TARGET_002": 90.0000079,
+            "CAUSAL_TARGET_003": 90.00035365
+          }
+        },
+        {
+          "actorLocation": [
+            1.41817749,
+            -0.37989348,
+            0.119
+          ],
+          "actorStepMeters": 0.01793282,
+          "frame": 67,
+          "maximumTargetTranslationStepMeters": 0.00796518,
+          "minimumContactGapMeters": 0.45141861,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.21438286,
+            "CAUSAL_TARGET_002": 1.69e-06,
+            "CAUSAL_TARGET_003": 0.00227315
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 4.38999017,
+            "CAUSAL_TARGET_002": 90.00000621,
+            "CAUSAL_TARGET_003": 90.00262679
+          }
+        },
+        {
+          "actorLocation": [
+            1.43379307,
+            -0.38861367,
+            0.119
+          ],
+          "actorStepMeters": 0.01788542,
+          "frame": 68,
+          "maximumTargetTranslationStepMeters": 0.00792467,
+          "minimumContactGapMeters": 0.46948144,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.11057419,
+            "CAUSAL_TARGET_002": 5.348e-05,
+            "CAUSAL_TARGET_003": 0.00571328
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 2.27941598,
+            "CAUSAL_TARGET_002": 89.99995273,
+            "CAUSAL_TARGET_003": 90.00834008
+          }
+        },
+        {
+          "actorLocation": [
+            1.44936728,
+            -0.39731082,
+            0.119
+          ],
+          "actorStepMeters": 0.01783807,
+          "frame": 69,
+          "maximumTargetTranslationStepMeters": 0.0078848,
+          "minimumContactGapMeters": 0.48748506,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.69578948,
+            "CAUSAL_TARGET_002": 5.247e-05,
+            "CAUSAL_TARGET_003": 0.00802489
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.58362649,
+            "CAUSAL_TARGET_002": 90.00000521,
+            "CAUSAL_TARGET_003": 90.00031518
+          }
+        },
+        {
+          "actorLocation": [
+            1.46490026,
+            -0.40598494,
+            0.119
+          ],
+          "actorStepMeters": 0.01779082,
+          "frame": 70,
+          "maximumTargetTranslationStepMeters": 0.00787841,
+          "minimumContactGapMeters": 0.50557127,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.83178338,
+            "CAUSAL_TARGET_002": 3.888e-05,
+            "CAUSAL_TARGET_003": 0.00365998
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 3.41540987,
+            "CAUSAL_TARGET_002": 89.99996633,
+            "CAUSAL_TARGET_003": 89.9966552
+          }
+        },
+        {
+          "actorLocation": [
+            1.48039222,
+            -0.41463611,
+            0.119
+          ],
+          "actorStepMeters": 0.01774383,
+          "frame": 71,
+          "maximumTargetTranslationStepMeters": 0.00788947,
+          "minimumContactGapMeters": 0.52356701,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.56474206,
+            "CAUSAL_TARGET_002": 3.612e-05,
+            "CAUSAL_TARGET_003": 0.00296287
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 2.85066781,
+            "CAUSAL_TARGET_002": 90.00000245,
+            "CAUSAL_TARGET_003": 89.99369233
+          }
+        },
+        {
+          "actorLocation": [
+            1.49584305,
+            -0.42326438,
+            0.119
+          ],
+          "actorStepMeters": 0.01769677,
+          "frame": 72,
+          "maximumTargetTranslationStepMeters": 0.00525648,
+          "minimumContactGapMeters": 0.54009248,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.53046223,
+            "CAUSAL_TARGET_002": 0.00047944,
+            "CAUSAL_TARGET_003": 0.00669626
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.32020558,
+            "CAUSAL_TARGET_002": 89.99952301,
+            "CAUSAL_TARGET_003": 90.00038859
+          }
+        },
+        {
+          "actorLocation": [
+            1.51125312,
+            -0.43186986,
+            0.119
+          ],
+          "actorStepMeters": 0.01765005,
+          "frame": 73,
+          "maximumTargetTranslationStepMeters": 0.00329267,
+          "minimumContactGapMeters": 0.5558077,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.15697028,
+            "CAUSAL_TARGET_002": 0.00047895,
+            "CAUSAL_TARGET_003": 0.00039005
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 2.47717585,
+            "CAUSAL_TARGET_002": 90.00000196,
+            "CAUSAL_TARGET_003": 89.99999854
+          }
+        },
+        {
+          "actorLocation": [
+            1.52662241,
+            -0.44045255,
+            0.119
+          ],
+          "actorStepMeters": 0.01760334,
+          "frame": 74,
+          "maximumTargetTranslationStepMeters": 0.00034885,
+          "minimumContactGapMeters": 0.57223817,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.12698889,
+            "CAUSAL_TARGET_002": 4.42e-06,
+            "CAUSAL_TARGET_003": 2.862e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 2.35018696,
+            "CAUSAL_TARGET_002": 89.99999755,
+            "CAUSAL_TARGET_003": 90.00002716
+          }
+        },
+        {
+          "actorLocation": [
+            1.54195106,
+            -0.44901252,
+            0.119
+          ],
+          "actorStepMeters": 0.01755678,
+          "frame": 75,
+          "maximumTargetTranslationStepMeters": 0.00310743,
+          "minimumContactGapMeters": 0.58867702,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 2.04499951,
+            "CAUSAL_TARGET_002": 4.9e-06,
+            "CAUSAL_TARGET_003": 2.351e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.30518745,
+            "CAUSAL_TARGET_002": 89.99999264,
+            "CAUSAL_TARGET_003": 90.00000365
+          }
+        },
+        {
+          "actorLocation": [
+            1.55723906,
+            -0.45754984,
+            0.119
+          ],
+          "actorStepMeters": 0.01751024,
+          "frame": 76,
+          "maximumTargetTranslationStepMeters": 0.00245809,
+          "minimumContactGapMeters": 0.60506785,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 1.59431334,
+            "CAUSAL_TARGET_002": 3e-08,
+            "CAUSAL_TARGET_003": 2.054e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.89950079,
+            "CAUSAL_TARGET_002": 89.99999267,
+            "CAUSAL_TARGET_003": 90.00002419
+          }
+        },
+        {
+          "actorLocation": [
+            1.57248664,
+            -0.4660646,
+            0.119
+          ],
+          "actorStepMeters": 0.01746396,
+          "frame": 77,
+          "maximumTargetTranslationStepMeters": 0.00101762,
+          "minimumContactGapMeters": 0.62150905,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.80553682,
+            "CAUSAL_TARGET_002": 1.84e-06,
+            "CAUSAL_TARGET_003": 5.48e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.09396397,
+            "CAUSAL_TARGET_002": 89.99999083,
+            "CAUSAL_TARGET_003": 90.00001871
+          }
+        },
+        {
+          "actorLocation": [
+            1.58769393,
+            -0.4745568,
+            0.119
+          ],
+          "actorStepMeters": 0.01741778,
+          "frame": 78,
+          "maximumTargetTranslationStepMeters": 0.00255536,
+          "minimumContactGapMeters": 0.63798194,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.12375805,
+            "CAUSAL_TARGET_002": 1.486e-05,
+            "CAUSAL_TARGET_003": 1.15e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.21772202,
+            "CAUSAL_TARGET_002": 90.0000057,
+            "CAUSAL_TARGET_003": 90.00001986
+          }
+        },
+        {
+          "actorLocation": [
+            1.60286093,
+            -0.48302656,
+            0.119
+          ],
+          "actorStepMeters": 0.01737166,
+          "frame": 79,
+          "maximumTargetTranslationStepMeters": 0.00036298,
+          "minimumContactGapMeters": 0.65448991,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.06327807,
+            "CAUSAL_TARGET_002": 4.19e-06,
+            "CAUSAL_TARGET_003": 1.241e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.28100009,
+            "CAUSAL_TARGET_002": 90.0000015,
+            "CAUSAL_TARGET_003": 90.00000744
+          }
+        },
+        {
+          "actorLocation": [
+            1.61798787,
+            -0.49147388,
+            0.119
+          ],
+          "actorStepMeters": 0.01732575,
+          "frame": 80,
+          "maximumTargetTranslationStepMeters": 0.00222906,
+          "minimumContactGapMeters": 0.67101545,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.47184967,
+            "CAUSAL_TARGET_002": 3.2e-07,
+            "CAUSAL_TARGET_003": 2.02e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.80915042,
+            "CAUSAL_TARGET_002": 90.00000183,
+            "CAUSAL_TARGET_003": 90.00000946
+          }
+        },
+        {
+          "actorLocation": [
+            1.63307476,
+            -0.49989888,
+            0.119
+          ],
+          "actorStepMeters": 0.0172799,
+          "frame": 81,
+          "maximumTargetTranslationStepMeters": 0.00079634,
+          "minimumContactGapMeters": 0.68759007,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.42802143,
+            "CAUSAL_TARGET_002": 4.2e-07,
+            "CAUSAL_TARGET_003": 8.03e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 1.23717184,
+            "CAUSAL_TARGET_002": 90.00000225,
+            "CAUSAL_TARGET_003": 90.00000143
+          }
+        },
+        {
+          "actorLocation": [
+            1.64812171,
+            -0.50830156,
+            0.119
+          ],
+          "actorStepMeters": 0.01723415,
+          "frame": 82,
+          "maximumTargetTranslationStepMeters": 0.00193975,
+          "minimumContactGapMeters": 0.70418915,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.67311261,
+            "CAUSAL_TARGET_002": 0.0001222,
+            "CAUSAL_TARGET_003": 5.5e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.56405923,
+            "CAUSAL_TARGET_002": 89.99988004,
+            "CAUSAL_TARGET_003": 90.00000198
+          }
+        },
+        {
+          "actorLocation": [
+            1.66312885,
+            -0.51668203,
+            0.119
+          ],
+          "actorStepMeters": 0.01718856,
+          "frame": 83,
+          "maximumTargetTranslationStepMeters": 0.00066932,
+          "minimumContactGapMeters": 0.72044517,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.32064274,
+            "CAUSAL_TARGET_002": 0.00012366,
+            "CAUSAL_TARGET_003": 1.04e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.88470197,
+            "CAUSAL_TARGET_002": 90.00000371,
+            "CAUSAL_TARGET_003": 90.00000302
+          }
+        },
+        {
+          "actorLocation": [
+            1.67809629,
+            -0.52504033,
+            0.119
+          ],
+          "actorStepMeters": 0.01714309,
+          "frame": 84,
+          "maximumTargetTranslationStepMeters": 0.00159062,
+          "minimumContactGapMeters": 0.73652849,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.21530631,
+            "CAUSAL_TARGET_002": 5.731e-05,
+            "CAUSAL_TARGET_003": 4.64e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.66939567,
+            "CAUSAL_TARGET_002": 89.99994639,
+            "CAUSAL_TARGET_003": 89.99999837
+          }
+        },
+        {
+          "actorLocation": [
+            1.69302404,
+            -0.53337651,
+            0.119
+          ],
+          "actorStepMeters": 0.01709765,
+          "frame": 85,
+          "maximumTargetTranslationStepMeters": 0.00042816,
+          "minimumContactGapMeters": 0.7529053,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.38546537,
+            "CAUSAL_TARGET_002": 5.196e-05,
+            "CAUSAL_TARGET_003": 9.15e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.2839303,
+            "CAUSAL_TARGET_002": 89.99999836,
+            "CAUSAL_TARGET_003": 90.00000753
+          }
+        },
+        {
+          "actorLocation": [
+            1.70791245,
+            -0.54169065,
+            0.119
+          ],
+          "actorStepMeters": 0.01705255,
+          "frame": 86,
+          "maximumTargetTranslationStepMeters": 0.00081541,
+          "minimumContactGapMeters": 0.76934874,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.08616406,
+            "CAUSAL_TARGET_002": 4.7e-07,
+            "CAUSAL_TARGET_003": 6.3e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.37009435,
+            "CAUSAL_TARGET_002": 89.99999788,
+            "CAUSAL_TARGET_003": 90.00000123
+          }
+        },
+        {
+          "actorLocation": [
+            1.72276139,
+            -0.54998273,
+            0.119
+          ],
+          "actorStepMeters": 0.01700735,
+          "frame": 87,
+          "maximumTargetTranslationStepMeters": 0.00068483,
+          "minimumContactGapMeters": 0.78546432,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.18034872,
+            "CAUSAL_TARGET_002": 0.00035144,
+            "CAUSAL_TARGET_003": 1.749e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.18974564,
+            "CAUSAL_TARGET_002": 89.99964644,
+            "CAUSAL_TARGET_003": 90.00001871
+          }
+        },
+        {
+          "actorLocation": [
+            1.737571,
+            -0.55825293,
+            0.119
+          ],
+          "actorStepMeters": 0.01696233,
+          "frame": 88,
+          "maximumTargetTranslationStepMeters": 0.00032816,
+          "minimumContactGapMeters": 0.80172962,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.16176918,
+            "CAUSAL_TARGET_002": 0.00035009,
+            "CAUSAL_TARGET_003": 6.4e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.02797646,
+            "CAUSAL_TARGET_002": 89.99999653,
+            "CAUSAL_TARGET_003": 90.00001232
+          }
+        },
+        {
+          "actorLocation": [
+            1.75234151,
+            -0.5665012,
+            0.119
+          ],
+          "actorStepMeters": 0.0169175,
+          "frame": 89,
+          "maximumTargetTranslationStepMeters": 0.00013519,
+          "minimumContactGapMeters": 0.81805662,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.02797646,
+            "CAUSAL_TARGET_002": 3.23e-06,
+            "CAUSAL_TARGET_003": 2.006e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999933,
+            "CAUSAL_TARGET_003": 89.99999226
+          }
+        },
+        {
+          "actorLocation": [
+            1.76707292,
+            -0.57472771,
+            0.119
+          ],
+          "actorStepMeters": 0.01687276,
+          "frame": 90,
+          "maximumTargetTranslationStepMeters": 0.00015833,
+          "minimumContactGapMeters": 0.83415976,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.386e-05,
+            "CAUSAL_TARGET_003": 2e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99994944,
+            "CAUSAL_TARGET_003": 89.99999206
+          }
+        },
+        {
+          "actorLocation": [
+            1.78176534,
+            -0.58293241,
+            0.119
+          ],
+          "actorStepMeters": 0.01682809,
+          "frame": 91,
+          "maximumTargetTranslationStepMeters": 0.00012604,
+          "minimumContactGapMeters": 0.8504397,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.481e-05,
+            "CAUSAL_TARGET_003": 3.398e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999425,
+            "CAUSAL_TARGET_003": 90.00002604
+          }
+        },
+        {
+          "actorLocation": [
+            1.79641891,
+            -0.59111542,
+            0.119
+          ],
+          "actorStepMeters": 0.01678358,
+          "frame": 92,
+          "maximumTargetTranslationStepMeters": 6.176e-05,
+          "minimumContactGapMeters": 0.86656727,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.002e-05,
+            "CAUSAL_TARGET_003": 1.77e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99998424,
+            "CAUSAL_TARGET_003": 90.00000834
+          }
+        },
+        {
+          "actorLocation": [
+            1.81103361,
+            -0.59927678,
+            0.119
+          ],
+          "actorStepMeters": 0.0167391,
+          "frame": 93,
+          "maximumTargetTranslationStepMeters": 1.274e-05,
+          "minimumContactGapMeters": 0.88272236,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.00013579,
+            "CAUSAL_TARGET_003": 8.85e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99984844,
+            "CAUSAL_TARGET_003": 89.99999949
+          }
+        },
+        {
+          "actorLocation": [
+            1.8256098,
+            -0.60741651,
+            0.119
+          ],
+          "actorStepMeters": 0.01669493,
+          "frame": 94,
+          "maximumTargetTranslationStepMeters": 3.42e-06,
+          "minimumContactGapMeters": 0.89884502,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 8.802e-05,
+            "CAUSAL_TARGET_003": 1.079e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99993646,
+            "CAUSAL_TARGET_003": 89.99998871
+          }
+        },
+        {
+          "actorLocation": [
+            1.84014726,
+            -0.61553478,
+            0.119
+          ],
+          "actorStepMeters": 0.01665064,
+          "frame": 95,
+          "maximumTargetTranslationStepMeters": 1.82e-06,
+          "minimumContactGapMeters": 0.91494218,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.502e-05,
+            "CAUSAL_TARGET_003": 2.065e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997148,
+            "CAUSAL_TARGET_003": 90.00000936
+          }
+        },
+        {
+          "actorLocation": [
+            1.85464633,
+            -0.62363148,
+            0.119
+          ],
+          "actorStepMeters": 0.01660661,
+          "frame": 96,
+          "maximumTargetTranslationStepMeters": 1.09e-06,
+          "minimumContactGapMeters": 0.93101199,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.32e-05,
+            "CAUSAL_TARGET_003": 2e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99993828,
+            "CAUSAL_TARGET_003": 90.00000915
+          }
+        },
+        {
+          "actorLocation": [
+            1.86910713,
+            -0.63170683,
+            0.119
+          ],
+          "actorStepMeters": 0.01656279,
+          "frame": 97,
+          "maximumTargetTranslationStepMeters": 2.2e-06,
+          "minimumContactGapMeters": 0.94705341,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.943e-05,
+            "CAUSAL_TARGET_003": 4.98e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999877,
+            "CAUSAL_TARGET_003": 90.00000417
+          }
+        },
+        {
+          "actorLocation": [
+            1.88352954,
+            -0.63976079,
+            0.119
+          ],
+          "actorStepMeters": 0.01651885,
+          "frame": 98,
+          "maximumTargetTranslationStepMeters": 2.43e-06,
+          "minimumContactGapMeters": 0.96307067,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 9.46e-06,
+            "CAUSAL_TARGET_003": 1.588e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997825,
+            "CAUSAL_TARGET_003": 89.99998829
+          }
+        },
+        {
+          "actorLocation": [
+            1.89791381,
+            -0.64779341,
+            0.119
+          ],
+          "actorStepMeters": 0.01647514,
+          "frame": 99,
+          "maximumTargetTranslationStepMeters": 2.03e-06,
+          "minimumContactGapMeters": 0.97905786,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.726e-05,
+            "CAUSAL_TARGET_003": 1.078e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999551,
+            "CAUSAL_TARGET_003": 89.99999908
+          }
+        },
+        {
+          "actorLocation": [
+            1.91226006,
+            -0.65580481,
+            0.119
+          ],
+          "actorStepMeters": 0.01643159,
+          "frame": 100,
+          "maximumTargetTranslationStepMeters": 6.8e-07,
+          "minimumContactGapMeters": 0.99501627,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.85e-06,
+            "CAUSAL_TARGET_003": 7.02e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999736,
+            "CAUSAL_TARGET_003": 89.99999206
+          }
+        },
+        {
+          "actorLocation": [
+            1.92656839,
+            -0.66379499,
+            0.119
+          ],
+          "actorStepMeters": 0.01638815,
+          "frame": 101,
+          "maximumTargetTranslationStepMeters": 1.7e-06,
+          "minimumContactGapMeters": 1.01094571,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 6.58e-06,
+            "CAUSAL_TARGET_003": 3.795e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999078,
+            "CAUSAL_TARGET_003": 90.00003001
+          }
+        },
+        {
+          "actorLocation": [
+            1.94083881,
+            -0.67176408,
+            0.119
+          ],
+          "actorStepMeters": 0.01634476,
+          "frame": 102,
+          "maximumTargetTranslationStepMeters": 1.02e-06,
+          "minimumContactGapMeters": 1.02684528,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.98e-06,
+            "CAUSAL_TARGET_003": 3.968e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999376,
+            "CAUSAL_TARGET_003": 89.99999033
+          }
+        },
+        {
+          "actorLocation": [
+            1.95507145,
+            -0.67971206,
+            0.119
+          ],
+          "actorStepMeters": 0.01630148,
+          "frame": 103,
+          "maximumTargetTranslationStepMeters": 9.1e-07,
+          "minimumContactGapMeters": 1.04271449,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.67e-06,
+            "CAUSAL_TARGET_003": 1.017e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999643,
+            "CAUSAL_TARGET_003": 90.0000005
+          }
+        },
+        {
+          "actorLocation": [
+            1.96926653,
+            -0.687639,
+            0.119
+          ],
+          "actorStepMeters": 0.01625844,
+          "frame": 104,
+          "maximumTargetTranslationStepMeters": 1.1e-06,
+          "minimumContactGapMeters": 1.05855315,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.98e-06,
+            "CAUSAL_TARGET_003": 2.85e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999941,
+            "CAUSAL_TARGET_003": 90.00000335
+          }
+        },
+        {
+          "actorLocation": [
+            1.98342395,
+            -0.69554496,
+            0.119
+          ],
+          "actorStepMeters": 0.01621532,
+          "frame": 105,
+          "maximumTargetTranslationStepMeters": 2.55e-06,
+          "minimumContactGapMeters": 1.07436073,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 6.58e-06,
+            "CAUSAL_TARGET_003": 7.73e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999283,
+            "CAUSAL_TARGET_003": 90.00001108
+          }
+        },
+        {
+          "actorLocation": [
+            1.99754393,
+            -0.70343,
+            0.119
+          ],
+          "actorStepMeters": 0.01617244,
+          "frame": 106,
+          "maximumTargetTranslationStepMeters": 3.3e-06,
+          "minimumContactGapMeters": 1.0901368,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.08e-06,
+            "CAUSAL_TARGET_003": 1.607e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99998975,
+            "CAUSAL_TARGET_003": 89.99999502
+          }
+        },
+        {
+          "actorLocation": [
+            2.01162648,
+            -0.71129423,
+            0.119
+          ],
+          "actorStepMeters": 0.01612961,
+          "frame": 107,
+          "maximumTargetTranslationStepMeters": 1.46e-06,
+          "minimumContactGapMeters": 1.10588097,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.449e-05,
+            "CAUSAL_TARGET_003": 2.108e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000424,
+            "CAUSAL_TARGET_003": 90.00001609
+          }
+        },
+        {
+          "actorLocation": [
+            2.02567196,
+            -0.71913761,
+            0.119
+          ],
+          "actorStepMeters": 0.01608707,
+          "frame": 108,
+          "maximumTargetTranslationStepMeters": 1e-07,
+          "minimumContactGapMeters": 1.12159321,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 9.66e-06,
+            "CAUSAL_TARGET_003": 1.19e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999458,
+            "CAUSAL_TARGET_003": 90.00000419
+          }
+        },
+        {
+          "actorLocation": [
+            2.03968024,
+            -0.72696024,
+            0.119
+          ],
+          "actorStepMeters": 0.01604449,
+          "frame": 109,
+          "maximumTargetTranslationStepMeters": 2.63e-06,
+          "minimumContactGapMeters": 1.13727289,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.75e-06,
+            "CAUSAL_TARGET_003": 7.72e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999283,
+            "CAUSAL_TARGET_003": 90.00001191
+          }
+        },
+        {
+          "actorLocation": [
+            2.05365133,
+            -0.73476213,
+            0.119
+          ],
+          "actorStepMeters": 0.0160019,
+          "frame": 110,
+          "maximumTargetTranslationStepMeters": 3.09e-06,
+          "minimumContactGapMeters": 1.15291962,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.73e-06,
+            "CAUSAL_TARGET_003": 2.578e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999756,
+            "CAUSAL_TARGET_003": 89.99998612
+          }
+        },
+        {
+          "actorLocation": [
+            2.06758547,
+            -0.74254346,
+            0.119
+          ],
+          "actorStepMeters": 0.01595961,
+          "frame": 111,
+          "maximumTargetTranslationStepMeters": 5.62e-06,
+          "minimumContactGapMeters": 1.16853344,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.05e-06,
+            "CAUSAL_TARGET_003": 3.992e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999551,
+            "CAUSAL_TARGET_003": 90.00002604
+          }
+        },
+        {
+          "actorLocation": [
+            2.08148289,
+            -0.75030416,
+            0.119
+          ],
+          "actorStepMeters": 0.0159175,
+          "frame": 112,
+          "maximumTargetTranslationStepMeters": 1.48e-06,
+          "minimumContactGapMeters": 1.18411425,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.2e-07,
+            "CAUSAL_TARGET_003": 3.51e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999479,
+            "CAUSAL_TARGET_003": 89.99999094
+          }
+        },
+        {
+          "actorLocation": [
+            2.09534335,
+            -0.7580443,
+            0.119
+          ],
+          "actorStepMeters": 0.01587521,
+          "frame": 113,
+          "maximumTargetTranslationStepMeters": 7.3e-07,
+          "minimumContactGapMeters": 1.19966129,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 9.2e-07,
+            "CAUSAL_TARGET_003": 2.96e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999386,
+            "CAUSAL_TARGET_003": 89.9999939
+          }
+        },
+        {
+          "actorLocation": [
+            2.10916734,
+            -0.765764,
+            0.119
+          ],
+          "actorStepMeters": 0.01583339,
+          "frame": 114,
+          "maximumTargetTranslationStepMeters": 6.56e-06,
+          "minimumContactGapMeters": 1.21517478,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.33e-06,
+            "CAUSAL_TARGET_003": 3.87e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999253,
+            "CAUSAL_TARGET_003": 89.99999776
+          }
+        },
+        {
+          "actorLocation": [
+            2.12295461,
+            -0.77346331,
+            0.119
+          ],
+          "actorStepMeters": 0.0157914,
+          "frame": 115,
+          "maximumTargetTranslationStepMeters": 6.67e-06,
+          "minimumContactGapMeters": 1.23065534,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.809e-05,
+            "CAUSAL_TARGET_003": 3.76e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997444,
+            "CAUSAL_TARGET_003": 90.00000152
+          }
+        },
+        {
+          "actorLocation": [
+            2.1367054,
+            -0.78114218,
+            0.119
+          ],
+          "actorStepMeters": 0.01574958,
+          "frame": 116,
+          "maximumTargetTranslationStepMeters": 6.6e-06,
+          "minimumContactGapMeters": 1.24610173,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.696e-05,
+            "CAUSAL_TARGET_003": 6.51e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999914,
+            "CAUSAL_TARGET_003": 89.99999501
+          }
+        },
+        {
+          "actorLocation": [
+            2.15041971,
+            -0.78880078,
+            0.119
+          ],
+          "actorStepMeters": 0.01570785,
+          "frame": 117,
+          "maximumTargetTranslationStepMeters": 6.6e-06,
+          "minimumContactGapMeters": 1.26151409,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.973e-05,
+            "CAUSAL_TARGET_003": 2.03e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997167,
+            "CAUSAL_TARGET_003": 89.99999704
+          }
+        },
+        {
+          "actorLocation": [
+            2.16409802,
+            -0.79643905,
+            0.119
+          ],
+          "actorStepMeters": 0.01566651,
+          "frame": 118,
+          "maximumTargetTranslationStepMeters": 6.54e-06,
+          "minimumContactGapMeters": 1.27689123,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.295e-05,
+            "CAUSAL_TARGET_003": 2.14e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99995872,
+            "CAUSAL_TARGET_003": 89.99999491
+          }
+        },
+        {
+          "actorLocation": [
+            2.17773986,
+            -0.80405718,
+            0.119
+          ],
+          "actorStepMeters": 0.01562484,
+          "frame": 119,
+          "maximumTargetTranslationStepMeters": 6.54e-06,
+          "minimumContactGapMeters": 1.2922326,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.851e-05,
+            "CAUSAL_TARGET_003": 9.46e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997723,
+            "CAUSAL_TARGET_003": 90.00000437
+          }
+        },
+        {
+          "actorLocation": [
+            2.19134593,
+            -0.8116551,
+            0.119
+          ],
+          "actorStepMeters": 0.01558376,
+          "frame": 120,
+          "maximumTargetTranslationStepMeters": 6.59e-06,
+          "minimumContactGapMeters": 1.30753937,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.643e-05,
+            "CAUSAL_TARGET_003": 8.24e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999366,
+            "CAUSAL_TARGET_003": 89.99999613
+          }
+        },
+        {
+          "actorLocation": [
+            2.20491576,
+            -0.819233,
+            0.119
+          ],
+          "actorStepMeters": 0.01554236,
+          "frame": 121,
+          "maximumTargetTranslationStepMeters": 6.54e-06,
+          "minimumContactGapMeters": 1.32281214,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 9.76e-06,
+            "CAUSAL_TARGET_003": 5.1e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000342,
+            "CAUSAL_TARGET_003": 89.99999562
+          }
+        },
+        {
+          "actorLocation": [
+            2.21844959,
+            -0.82679075,
+            0.119
+          ],
+          "actorStepMeters": 0.0155011,
+          "frame": 122,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.33804993,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.93e-06,
+            "CAUSAL_TARGET_003": 5.49e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999849,
+            "CAUSAL_TARGET_003": 89.99999013
+          }
+        },
+        {
+          "actorLocation": [
+            2.2319479,
+            -0.83432859,
+            0.119
+          ],
+          "actorStepMeters": 0.01546038,
+          "frame": 123,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.35325295,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.91e-06,
+            "CAUSAL_TARGET_003": 5.3e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999058,
+            "CAUSAL_TARGET_003": 89.99999543
+          }
+        },
+        {
+          "actorLocation": [
+            2.2454102,
+            -0.84184647,
+            0.119
+          ],
+          "actorStepMeters": 0.01541921,
+          "frame": 124,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.36842068,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 8.01e-06,
+            "CAUSAL_TARGET_003": 9.16e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999859,
+            "CAUSAL_TARGET_003": 90.00000459
+          }
+        },
+        {
+          "actorLocation": [
+            2.25883722,
+            -0.84934443,
+            0.119
+          ],
+          "actorStepMeters": 0.0153787,
+          "frame": 125,
+          "maximumTargetTranslationStepMeters": 6.48e-06,
+          "minimumContactGapMeters": 1.3835535,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.73e-06,
+            "CAUSAL_TARGET_003": 1.047e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999386,
+            "CAUSAL_TARGET_003": 89.99999412
+          }
+        },
+        {
+          "actorLocation": [
+            2.27222848,
+            -0.85682255,
+            0.119
+          ],
+          "actorStepMeters": 0.0153378,
+          "frame": 126,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.39865075,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 5.65e-06,
+            "CAUSAL_TARGET_003": 2.25e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999951,
+            "CAUSAL_TARGET_003": 89.99999637
+          }
+        },
+        {
+          "actorLocation": [
+            2.28558421,
+            -0.86428088,
+            0.119
+          ],
+          "actorStepMeters": 0.01529713,
+          "frame": 127,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.41371264,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 6.99e-06,
+            "CAUSAL_TARGET_003": 2.25e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999253,
+            "CAUSAL_TARGET_003": 89.99999862
+          }
+        },
+        {
+          "actorLocation": [
+            2.2989049,
+            -0.87171948,
+            0.119
+          ],
+          "actorStepMeters": 0.01525691,
+          "frame": 128,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.42873941,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.19e-06,
+            "CAUSAL_TARGET_003": 4.18e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999972,
+            "CAUSAL_TARGET_003": 90.0000028
+          }
+        },
+        {
+          "actorLocation": [
+            2.31219006,
+            -0.87913841,
+            0.119
+          ],
+          "actorStepMeters": 0.01521631,
+          "frame": 129,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.4437305,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 6.822e-05,
+            "CAUSAL_TARGET_003": 6.6e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999315,
+            "CAUSAL_TARGET_003": 89.9999962
+          }
+        },
+        {
+          "actorLocation": [
+            2.32544017,
+            -0.88653773,
+            0.119
+          ],
+          "actorStepMeters": 0.01517615,
+          "frame": 130,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.45868471,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.089e-05,
+            "CAUSAL_TARGET_003": 6.12e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99994239,
+            "CAUSAL_TARGET_003": 90.00000232
+          }
+        },
+        {
+          "actorLocation": [
+            2.33865547,
+            -0.89391744,
+            0.119
+          ],
+          "actorStepMeters": 0.01513619,
+          "frame": 131,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.47360481,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.997e-05,
+            "CAUSAL_TARGET_003": 4.66e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99998235,
+            "CAUSAL_TARGET_003": 89.99999766
+          }
+        },
+        {
+          "actorLocation": [
+            2.35183549,
+            -0.90127766,
+            0.119
+          ],
+          "actorStepMeters": 0.01509588,
+          "frame": 132,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.48849031,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.048e-05,
+            "CAUSAL_TARGET_003": 6.12e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997187,
+            "CAUSAL_TARGET_003": 90.00000378
+          }
+        },
+        {
+          "actorLocation": [
+            2.3649807,
+            -0.90861833,
+            0.119
+          ],
+          "actorStepMeters": 0.01505596,
+          "frame": 133,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.50334026,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.26e-06,
+            "CAUSAL_TARGET_003": 1.351e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997413,
+            "CAUSAL_TARGET_003": 89.99999027
+          }
+        },
+        {
+          "actorLocation": [
+            2.3780911,
+            -0.91593969,
+            0.119
+          ],
+          "actorStepMeters": 0.01501615,
+          "frame": 134,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.51815349,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 6.13e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997413,
+            "CAUSAL_TARGET_003": 89.9999964
+          }
+        },
+        {
+          "actorLocation": [
+            2.39116693,
+            -0.92324162,
+            0.119
+          ],
+          "actorStepMeters": 0.0149765,
+          "frame": 135,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.53293273,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.47e-06,
+            "CAUSAL_TARGET_003": 2.72e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997166,
+            "CAUSAL_TARGET_003": 89.99999368
+          }
+        },
+        {
+          "actorLocation": [
+            2.40420818,
+            -0.93052423,
+            0.119
+          ],
+          "actorStepMeters": 0.0149369,
+          "frame": 136,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.54767346,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.079e-05,
+            "CAUSAL_TARGET_003": 2.72e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99998246,
+            "CAUSAL_TARGET_003": 89.99999096
+          }
+        },
+        {
+          "actorLocation": [
+            2.41721487,
+            -0.93778753,
+            0.119
+          ],
+          "actorStepMeters": 0.0148973,
+          "frame": 137,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.5623802,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.716e-05,
+            "CAUSAL_TARGET_003": 8.07e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999653,
+            "CAUSAL_TARGET_003": 89.99999902
+          }
+        },
+        {
+          "actorLocation": [
+            2.43018723,
+            -0.94503164,
+            0.119
+          ],
+          "actorStepMeters": 0.01485796,
+          "frame": 138,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.57705252,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.829e-05,
+            "CAUSAL_TARGET_003": 8.07e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99998359,
+            "CAUSAL_TARGET_003": 90.00000709
+          }
+        },
+        {
+          "actorLocation": [
+            2.44312501,
+            -0.95225662,
+            0.119
+          ],
+          "actorStepMeters": 0.01481845,
+          "frame": 139,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.59168818,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 5.75e-06,
+            "CAUSAL_TARGET_003": 1.157e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99998934,
+            "CAUSAL_TARGET_003": 89.99999552
+          }
+        },
+        {
+          "actorLocation": [
+            2.45605969,
+            -0.95943707,
+            0.11879394
+          ],
+          "actorStepMeters": 0.01479552,
+          "frame": 140,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.60628813,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.397e-05,
+            "CAUSAL_TARGET_003": 7.8e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99991537,
+            "CAUSAL_TARGET_003": 89.99999474
+          }
+        },
+        {
+          "actorLocation": [
+            2.46960616,
+            -0.9664194,
+            0.11721974
+          ],
+          "actorStepMeters": 0.01532115,
+          "frame": 141,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.62119932,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.65e-05,
+            "CAUSAL_TARGET_003": 1.001e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99994187,
+            "CAUSAL_TARGET_003": 90.00000475
+          }
+        },
+        {
+          "actorLocation": [
+            2.48486257,
+            -0.97313619,
+            0.11351911
+          ],
+          "actorStepMeters": 0.01707536,
+          "frame": 142,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.63723008,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.596e-05,
+            "CAUSAL_TARGET_003": 1.35e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997784,
+            "CAUSAL_TARGET_003": 89.99999125
+          }
+        },
+        {
+          "actorLocation": [
+            2.50275874,
+            -0.97950542,
+            0.10629013
+          ],
+          "actorStepMeters": 0.02032482,
+          "frame": 143,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.65504848,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.963e-05,
+            "CAUSAL_TARGET_003": 1.16e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99995821,
+            "CAUSAL_TARGET_003": 89.99999241
+          }
+        },
+        {
+          "actorLocation": [
+            2.52358437,
+            -0.9853918,
+            0.09301671
+          ],
+          "actorStepMeters": 0.02538779,
+          "frame": 144,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.67480043,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.189e-05,
+            "CAUSAL_TARGET_003": 1.001e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99998009,
+            "CAUSAL_TARGET_003": 90.00000242
+          }
+        },
+        {
+          "actorLocation": [
+            2.54637241,
+            -0.99077499,
+            0.06919527
+          ],
+          "actorStepMeters": 0.03340262,
+          "frame": 145,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.69580695,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.095e-05,
+            "CAUSAL_TARGET_003": 1.156e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000105,
+            "CAUSAL_TARGET_003": 89.99999086
+          }
+        },
+        {
+          "actorLocation": [
+            2.56943822,
+            -0.9960717,
+            0.02920757
+          ],
+          "actorStepMeters": 0.04646614,
+          "frame": 146,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.71743023,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.75e-06,
+            "CAUSAL_TARGET_003": 1.16e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999993,
+            "CAUSAL_TARGET_003": 89.99999202
+          }
+        },
+        {
+          "actorLocation": [
+            2.59245443,
+            -1.0013572,
+            -0.02770873
+          ],
+          "actorStepMeters": 0.06162101,
+          "frame": 147,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.74048873,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.71e-06,
+            "CAUSAL_TARGET_003": 7.7e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999916,
+            "CAUSAL_TARGET_003": 89.99999125
+          }
+        },
+        {
+          "actorLocation": [
+            2.61542177,
+            -1.00663137,
+            -0.1015175
+          ],
+          "actorStepMeters": 0.07747935,
+          "frame": 148,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.76642312,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.62e-06,
+            "CAUSAL_TARGET_003": 1.17e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999622,
+            "CAUSAL_TARGET_003": 89.99999242
+          }
+        },
+        {
+          "actorLocation": [
+            2.63834,
+            -1.01189423,
+            -0.19218266
+          ],
+          "actorStepMeters": 0.0936649,
+          "frame": 149,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.79701924,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 9.2e-07,
+            "CAUSAL_TARGET_003": 1.17e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999529,
+            "CAUSAL_TARGET_003": 89.99999358
+          }
+        },
+        {
+          "actorLocation": [
+            2.66120911,
+            -1.01714587,
+            -0.29966825
+          ],
+          "actorStepMeters": 0.11001695,
+          "frame": 150,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 1.83434846,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.62e-06,
+            "CAUSAL_TARGET_003": 1.002e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999067,
+            "CAUSAL_TARGET_003": 90.0000036
+          }
+        },
+        {
+          "actorLocation": [
+            2.68402958,
+            -1.02238643,
+            -0.4239383
+          ],
+          "actorStepMeters": 0.12645665,
+          "frame": 151,
+          "maximumTargetTranslationStepMeters": 6.47e-06,
+          "minimumContactGapMeters": 1.88068402,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 5.96e-06,
+            "CAUSAL_TARGET_003": 1.17e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999663,
+            "CAUSAL_TARGET_003": 90.00000477
+          }
+        },
+        {
+          "actorLocation": [
+            2.70680141,
+            -1.02761567,
+            -0.56495708
+          ],
+          "actorStepMeters": 0.14294124,
+          "frame": 152,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 1.93839255,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.986e-05,
+            "CAUSAL_TARGET_003": 9.61e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99995677,
+            "CAUSAL_TARGET_003": 89.99999516
+          }
+        },
+        {
+          "actorLocation": [
+            2.72952437,
+            -1.03283381,
+            -0.72268867
+          ],
+          "actorStepMeters": 0.15944534,
+          "frame": 153,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 2.00981249,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.171e-05,
+            "CAUSAL_TARGET_003": 3.11e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99996848,
+            "CAUSAL_TARGET_003": 89.99999827
+          }
+        },
+        {
+          "actorLocation": [
+            2.75219917,
+            -1.03804076,
+            -0.89709759
+          ],
+          "actorStepMeters": 0.17595376,
+          "frame": 154,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 2.09713093,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 9.04e-06,
+            "CAUSAL_TARGET_003": 3.11e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99995944,
+            "CAUSAL_TARGET_003": 90.00000138
+          }
+        },
+        {
+          "actorLocation": [
+            2.77482533,
+            -1.04323661,
+            -1.08814812
+          ],
+          "actorStepMeters": 0.19245583,
+          "frame": 155,
+          "maximumTargetTranslationStepMeters": 6.53e-06,
+          "minimumContactGapMeters": 2.20224928,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.277e-05,
+            "CAUSAL_TARGET_003": 9.61e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99992667,
+            "CAUSAL_TARGET_003": 89.99999177
+          }
+        },
+        {
+          "actorLocation": [
+            2.7974031,
+            -1.04842138,
+            -1.29580462
+          ],
+          "actorStepMeters": 0.20894463,
+          "frame": 156,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 2.32672358,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 6.164e-05,
+            "CAUSAL_TARGET_003": 3.11e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99998831,
+            "CAUSAL_TARGET_003": 89.99999488
+          }
+        },
+        {
+          "actorLocation": [
+            2.81993294,
+            -1.05359507,
+            -1.52003193
+          ],
+          "actorStepMeters": 0.22541572,
+          "frame": 157,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 2.47171524,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 5.65e-06,
+            "CAUSAL_TARGET_003": 1.18e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999396,
+            "CAUSAL_TARGET_003": 89.99999606
+          }
+        },
+        {
+          "actorLocation": [
+            2.84241438,
+            -1.05875766,
+            -1.7607944
+          ],
+          "actorStepMeters": 0.24186491,
+          "frame": 158,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 2.63799165,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 9.04e-06,
+            "CAUSAL_TARGET_003": 5.74e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.000003,
+            "CAUSAL_TARGET_003": 89.99999033
+          }
+        },
+        {
+          "actorLocation": [
+            2.8648479,
+            -1.06390929,
+            -2.01805687
+          ],
+          "actorStepMeters": 0.25829011,
+          "frame": 159,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 2.825971,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.058e-05,
+            "CAUSAL_TARGET_003": 3.12e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999242,
+            "CAUSAL_TARGET_003": 89.99999344
+          }
+        },
+        {
+          "actorLocation": [
+            2.88723373,
+            -1.06904995,
+            -2.29178405
+          ],
+          "actorStepMeters": 0.27468914,
+          "frame": 160,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 3.03578109,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.8e-06,
+            "CAUSAL_TARGET_003": 3.12e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999622,
+            "CAUSAL_TARGET_003": 89.99999656
+          }
+        },
+        {
+          "actorLocation": [
+            2.90957165,
+            -1.07417953,
+            -2.58194089
+          ],
+          "actorStepMeters": 0.29106063,
+          "frame": 161,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 3.2673299,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.13e-06,
+            "CAUSAL_TARGET_003": 5.05e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999509,
+            "CAUSAL_TARGET_003": 90.00000162
+          }
+        },
+        {
+          "actorLocation": [
+            2.93186188,
+            -1.07929826,
+            -2.88849211
+          ],
+          "actorStepMeters": 0.30740317,
+          "frame": 162,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 3.52037184,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 8.12e-06,
+            "CAUSAL_TARGET_003": 7.66e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000321,
+            "CAUSAL_TARGET_003": 89.99999396
+          }
+        },
+        {
+          "actorLocation": [
+            2.95410442,
+            -1.08440602,
+            -3.21140289
+          ],
+          "actorStepMeters": 0.32371623,
+          "frame": 163,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 3.79456456,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 8.73e-06,
+            "CAUSAL_TARGET_003": 3.12e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999447,
+            "CAUSAL_TARGET_003": 89.99999708
+          }
+        },
+        {
+          "actorLocation": [
+            2.97629952,
+            -1.08950293,
+            -3.5506382
+          ],
+          "actorStepMeters": 0.33999882,
+          "frame": 164,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 4.08951349,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.2e-07,
+            "CAUSAL_TARGET_003": 3.79e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999519,
+            "CAUSAL_TARGET_003": 89.99999329
+          }
+        },
+        {
+          "actorLocation": [
+            2.99844742,
+            -1.09458888,
+            -3.90616345
+          ],
+          "actorStepMeters": 0.35625076,
+          "frame": 165,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 4.40480463,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 9.2e-07,
+            "CAUSAL_TARGET_003": 1.391e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999612,
+            "CAUSAL_TARGET_003": 90.0000072
+          }
+        },
+        {
+          "actorLocation": [
+            3.02054787,
+            -1.09966397,
+            -4.27794361
+          ],
+          "actorStepMeters": 0.37247104,
+          "frame": 166,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 4.74002614,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.57e-06,
+            "CAUSAL_TARGET_003": 1.457e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999355,
+            "CAUSAL_TARGET_003": 89.99999263
+          }
+        },
+        {
+          "actorLocation": [
+            3.04260111,
+            -1.10472834,
+            -4.66594362
+          ],
+          "actorStepMeters": 0.38865923,
+          "frame": 167,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 5.09478213,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.85e-06,
+            "CAUSAL_TARGET_003": 3.13e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999954,
+            "CAUSAL_TARGET_003": 89.99999576
+          }
+        },
+        {
+          "actorLocation": [
+            3.06460714,
+            -1.10978174,
+            -5.07012939
+          ],
+          "actorStepMeters": 0.40481594,
+          "frame": 168,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 5.46870208,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.88e-06,
+            "CAUSAL_TARGET_003": 3.78e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999827,
+            "CAUSAL_TARGET_003": 89.99999198
+          }
+        },
+        {
+          "actorLocation": [
+            3.08656645,
+            -1.11482441,
+            -5.49046659
+          ],
+          "actorStepMeters": 0.42094062,
+          "frame": 169,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 5.86144367,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.88e-06,
+            "CAUSAL_TARGET_003": 5.07e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999954,
+            "CAUSAL_TARGET_003": 89.99999704
+          }
+        },
+        {
+          "actorLocation": [
+            3.10847878,
+            -1.11985636,
+            -5.92691994
+          ],
+          "actorStepMeters": 0.43703203,
+          "frame": 170,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 6.27269285,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.05e-06,
+            "CAUSAL_TARGET_003": 7e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999745,
+            "CAUSAL_TARGET_003": 90.00000405
+          }
+        },
+        {
+          "actorLocation": [
+            3.13034439,
+            -1.12487757,
+            -6.37945604
+          ],
+          "actorStepMeters": 0.45309187,
+          "frame": 171,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 6.70216539,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 0.0,
+            "CAUSAL_TARGET_003": 1.456e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999745,
+            "CAUSAL_TARGET_003": 89.99998949
+          }
+        },
+        {
+          "actorLocation": [
+            3.15216327,
+            -1.12988806,
+            -6.84803963
+          ],
+          "actorStepMeters": 0.46911805,
+          "frame": 172,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 7.14960307,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 5.75e-06,
+            "CAUSAL_TARGET_003": 7.01e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000321,
+            "CAUSAL_TARGET_003": 89.99999649
+          }
+        },
+        {
+          "actorLocation": [
+            3.17393541,
+            -1.13488781,
+            -7.33263683
+          ],
+          "actorStepMeters": 0.48511181,
+          "frame": 173,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 7.61477331,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.71e-06,
+            "CAUSAL_TARGET_003": 3.78e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999955,
+            "CAUSAL_TARGET_003": 89.99999272
+          }
+        },
+        {
+          "actorLocation": [
+            3.19566131,
+            -1.13987684,
+            -7.83321333
+          ],
+          "actorStepMeters": 0.50107258,
+          "frame": 174,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 8.09746577,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.2e-07,
+            "CAUSAL_TARGET_003": 5.08e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999478,
+            "CAUSAL_TARGET_003": 89.9999978
+          }
+        },
+        {
+          "actorLocation": [
+            3.21734071,
+            -1.14485526,
+            -8.34973526
+          ],
+          "actorStepMeters": 0.51700065,
+          "frame": 175,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 8.59749045,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 7.6e-06,
+            "CAUSAL_TARGET_003": 1.84e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000238,
+            "CAUSAL_TARGET_003": 89.99999596
+          }
+        },
+        {
+          "actorLocation": [
+            3.23897386,
+            -1.14982307,
+            -8.88216782
+          ],
+          "actorStepMeters": 0.53289502,
+          "frame": 176,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 9.11467424,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.01e-06,
+            "CAUSAL_TARGET_003": 1.84e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999838,
+            "CAUSAL_TARGET_003": 89.99999412
+          }
+        },
+        {
+          "actorLocation": [
+            3.26056075,
+            -1.15478027,
+            -9.4304781
+          ],
+          "actorStepMeters": 0.54875744,
+          "frame": 177,
+          "maximumTargetTranslationStepMeters": 6.51e-06,
+          "minimumContactGapMeters": 9.648862,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 8.12e-06,
+            "CAUSAL_TARGET_003": 7.02e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000649,
+            "CAUSAL_TARGET_003": 90.00000114
+          }
+        },
+        {
+          "actorLocation": [
+            3.28210163,
+            -1.15972698,
+            -9.99463177
+          ],
+          "actorStepMeters": 0.56458644,
+          "frame": 178,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 10.19991133,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.171e-05,
+            "CAUSAL_TARGET_003": 3.77e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999478,
+            "CAUSAL_TARGET_003": 89.99999737
+          }
+        },
+        {
+          "actorLocation": [
+            3.3035965,
+            -1.16466296,
+            -10.57459545
+          ],
+          "actorStepMeters": 0.58038285,
+          "frame": 179,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 10.767692,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.7e-06,
+            "CAUSAL_TARGET_003": 1.83e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999848,
+            "CAUSAL_TARGET_003": 89.99999554
+          }
+        },
+        {
+          "actorLocation": [
+            3.32504559,
+            -1.16958857,
+            -11.17033386
+          ],
+          "actorStepMeters": 0.59614477,
+          "frame": 180,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 11.35208345,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.9e-06,
+            "CAUSAL_TARGET_003": 1.83e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999458,
+            "CAUSAL_TARGET_003": 89.99999371
+          }
+        },
+        {
+          "actorLocation": [
+            3.3464489,
+            -1.17450356,
+            -11.78181553
+          ],
+          "actorStepMeters": 0.61187588,
+          "frame": 181,
+          "maximumTargetTranslationStepMeters": 6.52e-06,
+          "minimumContactGapMeters": 11.95297859,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.67e-06,
+            "CAUSAL_TARGET_003": 1.089e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999919,
+            "CAUSAL_TARGET_003": 90.0000046
+          }
+        },
+        {
+          "actorLocation": [
+            3.3678062,
+            -1.17940807,
+            -12.40900517
+          ],
+          "actorStepMeters": 0.62757233,
+          "frame": 182,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 12.57027354,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.9e-06,
+            "CAUSAL_TARGET_003": 1.83e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999581,
+            "CAUSAL_TARGET_003": 90.00000278
+          }
+        },
+        {
+          "actorLocation": [
+            3.38911819,
+            -1.18430209,
+            -13.05186939
+          ],
+          "actorStepMeters": 0.64323601,
+          "frame": 183,
+          "maximumTargetTranslationStepMeters": 6.51e-06,
+          "minimumContactGapMeters": 13.20387465,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.23e-06,
+            "CAUSAL_TARGET_003": 1.82e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999458,
+            "CAUSAL_TARGET_003": 90.00000096
+          }
+        },
+        {
+          "actorLocation": [
+            3.41038465,
+            -1.18918562,
+            -13.71037579
+          ],
+          "actorStepMeters": 0.65886781,
+          "frame": 184,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 13.85369606,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.13e-06,
+            "CAUSAL_TARGET_003": 1.1e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999571,
+            "CAUSAL_TARGET_003": 90.00000107
+          }
+        },
+        {
+          "actorLocation": [
+            3.43160558,
+            -1.1940589,
+            -14.38449001
+          ],
+          "actorStepMeters": 0.67446576,
+          "frame": 185,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 14.51965412,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 2.1e-07,
+            "CAUSAL_TARGET_003": 1.82e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999591,
+            "CAUSAL_TARGET_003": 89.99999925
+          }
+        },
+        {
+          "actorLocation": [
+            3.4527812,
+            -1.19892156,
+            -15.0741787
+          ],
+          "actorStepMeters": 0.69003082,
+          "frame": 186,
+          "maximumTargetTranslationStepMeters": 6.51e-06,
+          "minimumContactGapMeters": 15.20167177,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.08e-06,
+            "CAUSAL_TARGET_003": 1.82e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99999283,
+            "CAUSAL_TARGET_003": 89.99999743
+          }
+        },
+        {
+          "actorLocation": [
+            3.47391176,
+            -1.20377398,
+            -15.77940941
+          ],
+          "actorStepMeters": 0.7055639,
+          "frame": 187,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 15.89967782,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.161e-05,
+            "CAUSAL_TARGET_003": 1.2e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000444,
+            "CAUSAL_TARGET_003": 89.99999755
+          }
+        },
+        {
+          "actorLocation": [
+            3.49499726,
+            -1.20861602,
+            -16.50014877
+          ],
+          "actorStepMeters": 0.72106397,
+          "frame": 188,
+          "maximumTargetTranslationStepMeters": 6.51e-06,
+          "minimumContactGapMeters": 16.61360423,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 3.7e-06,
+            "CAUSAL_TARGET_003": 1.2e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 90.00000074,
+            "CAUSAL_TARGET_003": 89.99999767
+          }
+        },
+        {
+          "actorLocation": [
+            3.51603746,
+            -1.21344769,
+            -17.23636246
+          ],
+          "actorStepMeters": 0.73653014,
+          "frame": 189,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 17.3433831,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 6.677e-05,
+            "CAUSAL_TARGET_003": 1.2e-07
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99993397,
+            "CAUSAL_TARGET_003": 89.99999779
+          }
+        },
+        {
+          "actorLocation": [
+            3.53703308,
+            -1.21826911,
+            -17.98801804
+          ],
+          "actorStepMeters": 0.75196421,
+          "frame": 190,
+          "maximumTargetTranslationStepMeters": 6.51e-06,
+          "minimumContactGapMeters": 18.08895452,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.006e-05,
+            "CAUSAL_TARGET_003": 2.06e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99997403,
+            "CAUSAL_TARGET_003": 89.99999985
+          }
+        },
+        {
+          "actorLocation": [
+            3.55798364,
+            -1.22308016,
+            -18.75508308
+          ],
+          "actorStepMeters": 0.76736619,
+          "frame": 191,
+          "maximumTargetTranslationStepMeters": 6.46e-06,
+          "minimumContactGapMeters": 18.85025881,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 1.643e-05,
+            "CAUSAL_TARGET_003": 8.73e-06
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.9999576,
+            "CAUSAL_TARGET_003": 89.99999112
+          }
+        },
+        {
+          "actorLocation": [
+            3.57888937,
+            -1.22788095,
+            -19.53752518
+          ],
+          "actorStepMeters": 0.78273606,
+          "frame": 192,
+          "maximumTargetTranslationStepMeters": 6.51e-06,
+          "minimumContactGapMeters": 19.62724075,
+          "targetAngularStepDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 4.83e-06,
+            "CAUSAL_TARGET_003": 1.091e-05
+          },
+          "targetTiltDegrees": {
+            "CAUSAL_TARGET_001": 0.0,
+            "CAUSAL_TARGET_002": 89.99995277,
+            "CAUSAL_TARGET_003": 90.00000204
+          }
+        }
+      ],
+      "settledGroupFrame": 95,
+      "settledMaximumAggregateAngularStepDegrees": 0.18071765,
+      "settledMaximumTargetTranslationStepMeters": 0.00081541,
+      "settledWindowFrameCount": 10,
+      "settledWindowStartFrame": 86,
+      "source": "BLENDER_BULLET_EVALUATED_WORLD_TRANSFORMS",
+      "targetResponseFrames": {
+        "CAUSAL_TARGET_001": 16,
+        "CAUSAL_TARGET_002": 16,
+        "CAUSAL_TARGET_003": 16
+      }
+    },
+    "resultHash": "e74d612ef214a3b7b5e7612810b639583ad6735fdd1e3cca688f9619bc192240",
+    "review": {
+      "contactClipFrameRangeInclusive": [
+        4,
+        51
+      ],
+      "resolution": [
+        1280,
+        720
+      ],
+      "stillFrames": [
+        4,
+        18,
+        95
+      ]
+    },
+    "sceneId": "RC4-R1-UNSTAGED-BASKETBALL-THREE-GLASS-BOTTLES",
+    "sceneSpecFileSha256": "2b480824c11e05872a8444a01b34bfcc7d34eabe645b43536aad1cd20944cf1d",
+    "sceneSpecHash": "c7c864308834f266bd674b0f46e450cea9e2b6519a8054dd37dd9722af3012fe",
+    "schemaVersion": "bfs.physicsActionResult.v0.1",
+    "semanticRoster": {
+      "actor": "CAUSAL_ACTOR_001",
+      "lights": [
+        "ACTION_STATIC_KEY",
+        "ACTION_STATIC_FILL"
+      ],
+      "targets": [
+        "CAUSAL_TARGET_001",
+        "CAUSAL_TARGET_002",
+        "CAUSAL_TARGET_003"
+      ]
+    },
+    "status": "PASS_EXECUTED",
+    "topology": "GROUP_RESPONSE"
+  },
+  "schemaVersion": "bfs.rc4UnstagedRealismBuild.v0.1",
+  "status": "PASS"
+}

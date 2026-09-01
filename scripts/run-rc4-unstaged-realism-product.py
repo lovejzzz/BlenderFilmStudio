@@ -149,7 +149,7 @@ def negative():
     reject("invalid-review-resolution", lambda value: value["cinematography"].update({"reviewResolution": [1920, 1080]}), "SPEC_SCHEMA")
     reject("unbounded-variation", lambda value: value["nodes"][1]["parameters"].update({"positionJitterMetersMaximum": 1}), "SPEC_SCHEMA")
     d1 = json.loads((repository / "specs/fixtures/physics-action/RC3_D1.signal-gate.physics-action-spec.v0.3.json").read_text(encoding="utf-8"))
-    reject("settled-beat-without-response-group", lambda value: value["beats"][2].update({"deriveFrom": "SETTLED_GROUP_RESPONSE", "node": "gate", "afterBeat": "contact"}), "BEAT_DEPENDENCY", d1)
+    reject("settled-beat-without-response-group", lambda value: value["beats"].__setitem__(2, {"id": "effect", "deriveFrom": "SETTLED_GROUP_RESPONSE", "node": "light_gate", "afterBeat": "contact"}), "BEAT_DEPENDENCY", d1)
     output = {"schemaVersion": "bfs.rc4NegativeControls.v0.1", "status": "PASS" if all(row["passed"] for row in cases) else "FAIL", "caseCount": len(cases), "passCount": sum(row["passed"] for row in cases), "cases": cases, "counts": {"sceneMutations": 0, "blendSaves": 0, "renders": 0, "networkCalls": 0}}
     write(evidence / "negative-controls.json", output)
     if output["status"] != "PASS":
@@ -182,10 +182,13 @@ def render():
         row = render_one(scene, scene.objects[shot["camera"]], shot["frame"], still_root / f"{role}-frame-{shot['frame']:04d}.png")
         row["role"] = role
         stills.append(row)
+    removed_markers = [{"name": marker.name, "frame": marker.frame, "camera": None if marker.camera is None else marker.camera.name} for marker in scene.timeline_markers]
+    for marker in list(scene.timeline_markers):
+        scene.timeline_markers.remove(marker)
     start, end = result["review"]["contactClipFrameRangeInclusive"]
     camera = scene.objects[result["cinematography"]["contact"]["camera"]]
     frames = [render_one(scene, camera, frame, clip_root / f"frame-{frame:04d}.png") for frame in range(start, end + 1)]
-    output = {"schemaVersion": "bfs.rc4VisualRender.v0.1", "status": "PASS_RENDER_COMPLETE", "resultHash": result["resultHash"], "resolution": [width, height], "stills": stills, "clip": {"startFrame": start, "endFrame": end, "frameCount": len(frames), "camera": camera.name, "frames": frames}, "counts": {"sceneMutations": 0, "blendSaves": 0, "reviewStills": len(stills), "clipFrames": len(frames), "networkCalls": 0}}
+    output = {"schemaVersion": "bfs.rc4VisualRender.v0.1", "status": "PASS_RENDER_COMPLETE", "resultHash": result["resultHash"], "resolution": [width, height], "stills": stills, "clip": {"startFrame": start, "endFrame": end, "frameCount": len(frames), "camera": camera.name, "cameraPolicy": "FIXED_CONTACT_CAMERA_WITH_TIMELINE_MARKERS_REMOVED_AFTER_STILLS", "removedTimelineMarkers": removed_markers, "frames": frames}, "counts": {"sceneMutations": 0, "reviewConfigurationMutations": len(removed_markers), "blendSaves": 0, "reviewStills": len(stills), "clipFrames": len(frames), "networkCalls": 0}}
     write(evidence / "render.json", output)
 
 

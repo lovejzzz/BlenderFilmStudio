@@ -11,8 +11,8 @@ from pathlib import Path
 
 
 RESEARCH = Path(__file__).resolve().parents[1]
-WORK = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-02")
-EVIDENCE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-02"
+WORK = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-03")
+EVIDENCE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-03"
 PRODUCT = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-development/source")
 BINARY = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC3-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender")
 TOOL = RESEARCH / "scripts/run-rc4-unstaged-realism-product.py"
@@ -86,7 +86,7 @@ def command(index, name, argv):
 
 def main():
     if WORK.exists() or EVIDENCE.exists():
-        raise RuntimeError("RC4 attempt-02 development roots are not fresh")
+        raise RuntimeError("RC4 attempt-03 development roots are not fresh")
     if not BINARY.is_file() or sha(BINARY) != BINARY_SHA:
         raise RuntimeError("accepted binary mismatch")
     if shutil.disk_usage(WORK.parent).free < MINIMUM_FREE:
@@ -147,6 +147,7 @@ def main():
         "d1H1Regressions": regressions["status"] == "PASS",
         "negativeControls": negative["status"] == "PASS" and negative["passCount"] == negative["caseCount"],
         "reviewRendersExact": render["status"] == "PASS_RENDER_COMPLETE" and len(render["stills"]) == 3 and render["clip"]["frameCount"] == 48,
+        "fixedContactClipCamera": render["clip"]["cameraPolicy"] == "FIXED_CONTACT_CAMERA_WITH_TIMELINE_MARKERS_REMOVED_AFTER_STILLS" and len(render["clip"]["removedTimelineMarkers"]) == 3,
         "productPatchScope": sorted(changed) == allowed and additions <= 1400 and deletions <= 180,
         "boundedCounts": sum(row["counts"]["sceneMutations"] for row in (build, regressions)) == 3 and build["counts"]["blendSaves"] == 1,
     }
