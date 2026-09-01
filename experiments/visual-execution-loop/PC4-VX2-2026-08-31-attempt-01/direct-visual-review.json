@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "bfs.directVisualReview.v0.2",
+  "experimentId": "PC4-VX2",
+  "reviewer": {"kind": "VISION_MODEL_TEACHER", "version": "GPT5_SCREENSHOT_REVIEW_2026_08_31"},
+  "evidence": [
+    {"frame": 48, "uri": "experiments/visual-execution-loop/PC4-VX2-2026-08-31-attempt-01/review/frame-0048.png", "sha256": "57fdd311ed21d8d160fc80c7fe569685526d661ab66364bd38e0c844582f5dc7"},
+    {"frame": 144, "uri": "experiments/visual-execution-loop/PC4-VX2-2026-08-31-attempt-01/review/frame-0144.png", "sha256": "e0884f962e0c8688b7f9aad86eec0a392211b043fed270d9ee0246b8ce41e36b"},
+    {"frame": 240, "uri": "experiments/visual-execution-loop/PC4-VX2-2026-08-31-attempt-01/review/frame-0240.png", "sha256": "1e1cbeb9cd74757abd05c895fabf9c0731c74befaae296bee093b2ecec9e955e"}
+  ],
+  "criteria": [
+    {"id": "WIDE_SILHOUETTE", "status": "PASS", "observation": "The black column no longer divides the hero silhouette."},
+    {"id": "WIDE_ENVIRONMENT_PRESERVATION", "status": "FAIL", "observation": "Bounding-box occlusion classified the atmosphere floor and aperture as blockers and removed too much environmental depth."},
+    {"id": "MEDIUM_ACTION_READABILITY", "status": "PASS", "observation": "The hero and contact action are readable and the same-scale rectangular clutter is gone."},
+    {"id": "MEDIUM_SHOT_SCALE", "status": "FAIL", "observation": "Measured occupancy is 0.35712820, below the bound minimum 0.48; the medium shot drifted toward a long shot."},
+    {"id": "CLOSE_FACIAL_READABILITY", "status": "FAIL", "observation": "A large coral side pod dominates the close view while the bound eye line brow cheek and jaw additions are not visibly organized in the target image."},
+    {"id": "FORM_HIERARCHY", "status": "PARTIAL_PASS", "observation": "Sparse panels and concentric joint details integrate better than attempt-03 overlays, but the close view still does not prove view-relative landmark readability."}
+  ],
+  "machineAuditCorrection": {
+    "status": "FALSE_POSITIVE_FOUND_BY_DIRECT_REVIEW",
+    "check": "A14_MEASURED_FRAMING",
+    "error": "The executor and independent audit enforced only occupancy maximum and margin, not occupancy minimum.",
+    "observedOccupancy": 0.3571282,
+    "requiredMinimum": 0.48
+  },
+  "learningRequirements": [
+    "BIDIRECTIONAL_OCCUPANCY_INTERVAL",
+    "SCREENSPACE_RECENTER_BEFORE_LENS_FIT",
+    "PIXEL_VISIBLE_OCCLUSION_NOT_WORLD_BBOX_OVERLAP",
+    "PRESERVE_STORY_ENVIRONMENT_LAYERS",
+    "TARGET_VIEW_LANDMARK_VISIBILITY",
+    "CLOSE_SHOT_FACE_ORIENTATION_AND_PERFORMANCE"
+  ],
+  "verdict": "VISUAL_FAIL_WITH_LOCAL_IMPROVEMENTS",
+  "nextAction": "RETAIN_ATTEMPT_AND_CORRECT_MACHINE_FALSE_PASS_BEFORE_NEXT_VISUAL_PLAN",
+  "reviewHash": "ae7a8c3132c5e7ad9c5a3de393f3974d3dfd3574e5a10ee445b5507416b0b61a"
+}
