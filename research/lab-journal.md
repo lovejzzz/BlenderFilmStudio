@@ -6657,3 +6657,27 @@ Attempt-01在任何root/write前因fresh parent directory不存在而ENOENT；C1
 Date: 2026-08-31 · Type: ACCEPTED UNDERSTANDING-TO-PLAN CAPABILITY · Blender starts / renders / scene mutations / network: 0 / 0 / 0 / 0
 
 Formal attempt-03 dual compile canonical-exact，19/19 contract tests与independent 20/20 audit PASS。Plan `674bc082…`把visual evidence编译为6个bounded operations：wide occluder clearance、medium/close reframing、face segmentation、layered mechanical joints、mid-scale surface hierarchy；另有2个strength preservations保护lighting与camera language。Receipt/audit self `b72a6354…` / `eb853d06…`。这证明teacher assessment→auditable plan，不证明automatic vision generalization或typed Blender executor；下一步必须由typed executor消费plan再render截图。
+
+## J-567 · PC4-VX1 v0.1 typed executor visual rejection
+
+Date: 2026-08-31 · Type: RETAINED MACHINE-PASS VISUAL-FAIL · Blender starts / renders / saves: 2 / 3 / 1
+
+Exact six-operation plan被generic typed executor消费并通过25/25 machine audit，但direct screenshots拒绝结果：wide仍有pillar，medium被28个同尺度矩形部件填满，close没有可读face hierarchy。Visual review self `fef2a147…`。反例证明part/layer counts不是quality；source/camera/light exact与zero network仍保留。失败转为film-language learning signal，不写named-object coordinate patch。
+
+## J-568 · Visual Film Language v0.2 plan capability
+
+Date: 2026-08-31 · Type: GENERIC VISUAL-RUBRIC PROMOTION · Blender starts / renders / mutations: 0 / 0 / 0
+
+新rubric/catalog把screenshot判断结构化为occlusion ratio、negative-space margin、occupancy interval、contour relief、detail coverage、three scale bands与`EYE_LINE→BROW→CHEEK→JAW`。Rejected observed scene与clean execution baseline分别绑定。Five-operation plan `3cd91cd7…` canonical deterministic，8/8 tests与12/12 second-pass audit PASS；compiler/catalog无PC4、B62或project ID分支，plan无Python/shell/network/filesystem authority。
+
+## J-569 · PC4-VX2 relation-constrained executor
+
+Date: 2026-08-31 · Type: TYPED EXECUTOR PROMOTION · Formal starts / renders / saves: 0 / 0 / 0
+
+Executor通过packet semanticRole识别hero/foreground/face/joint，使用screen projection而非fixed lens percent，并对relief/coverage/peer/scale band与four face zones fail closed。10/10 static tests PASS；trusted geometry无exact project/object/collection special cases。Tools frozen before fresh attempt-01 roots。
+
+## J-570 · PC4-VX2 attempt-01 local improvement and machine false positive
+
+Date: 2026-08-31 · Type: RETAINED VISUAL FAIL + AUDIT COUNTEREXAMPLE · Blender starts / renders / saves: 2 / 3 / 1
+
+Machine runner与27/27 audit先报告PASS。Direct frames证明局部学习有效：wide hero silhouette不再被black column切断，medium人物与contact action恢复可读，sparse panels/concentric joints优于floating blocks。但world-bbox overlap过度隐藏atmosphere/floor/aperture；medium occupancy `0.35712820`低于plan minimum `0.48`；close仍由coral side pod主导，face zones数据存在但target view不可读。Direct review self `ae7a8c31…`将machine A14标为false positive：只检查maximum/margin，遗漏minimum。Attempt-01 manifest `88fdaf54…` immutable。Next correction必须bidirectional occupancy、recenter、pixel-visible occlusion与view-visible landmarks。

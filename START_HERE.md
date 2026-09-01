@@ -529,7 +529,18 @@ carrying no Python, shell, network or arbitrary-filesystem authority. Formal
 attempt-03 passes 19/19 contract tests and an independent 20/20 audit; plan hash
 is `674bc082…`, receipt/audit self hashes are `b72a6354…` / `eb853d06…`.
 PC4-VU1 proves the understanding-to-plan boundary, not a new visual result. The
-active next step is a typed executor that consumes this plan before new screenshots.
+first typed executor has now been run and directly rejected: it consumed all six
+operations and passed its machine audit, but part-count and layer floors produced
+floating rectangular clutter. Visual Film Language v0.2 replaces those floors
+with screen-space occlusion, negative-space, occupancy, contour-relief, detail-
+density, scale-band and facial-landmark constraints. Its 5-operation plan passes
+8/8 tests and a 12/12 audit. PC4-VX2 attempt-01 shows real local improvement in
+wide/medium readability, but is retained `FAIL`: direct review found environment
+over-removal, medium occupancy `0.35712820 < 0.48`, and an unreadable close face.
+It also exposed a machine false positive because audit A14 omitted the occupancy
+lower bound. The active next step is a versioned correction that first closes
+that false-positive and then teaches pixel-visible occlusion and target-view
+landmark visibility; do not hand-place another project-specific patch.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

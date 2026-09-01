@@ -1265,7 +1265,7 @@
       "fullSequenceRenderAllowedBeforeVisualPass": false
     },
     "visualUnderstandingLoop": {
-      "status": "PASS_TYPED_EXECUTOR_PENDING",
+    "status": "PASS_PLAN_COMPILER_TYPED_EXECUTOR_LEARNING_ACTIVE",
       "experimentId": "PC4-VU1",
       "preregistration": "specs/ai-native-studio-visual-understanding-loop-preregistration.v0.1.json",
       "preregistrationFileSha256": "bdfa0b43cb93a93ded17cb25be66825e0b669590ee52b388f54a38e770ebe73a",
@@ -1296,7 +1296,27 @@
       },
       "proves": "structured screenshot evidence can be compiled deterministically into an authority-limited improvement plan",
       "doesNotProve": ["automatic frame selection", "vision generalization to unseen projects", "typed Blender execution", "visual improvement after execution"],
-      "next": "implement a typed executor for the frozen semantic operation catalog and rerender the three bound frames"
+    "next": "correct the retained PC4-VX2 attempt-01 machine false positive, then add pixel-visible occlusion and target-view facial-landmark visibility without project-specific branches",
+    "typedExecutionLearning": {
+      "v01Result": "MACHINE_PASS_VISUAL_FAIL",
+      "v01EvidenceRoot": "experiments/visual-execution-loop/PC4-VX1-2026-08-31-attempt-03",
+      "v01VisualReviewHash": "fef2a147426d617c6e12b9ddcb46dd2d7e391fbb38a111a3281a7e0cb7e628f7",
+      "v02PlanEvidenceRoot": "experiments/visual-film-language-loop/PC4-VFL2-2026-08-31-attempt-01",
+      "v02PlanHash": "3cd91cd7e742c559048ee7ccd3532f030ffc02cfa6ada7d5cd304091867d0d96",
+      "v02PlanTests": "8/8 PASS",
+      "v02PlanAudit": "12/12 PASS",
+      "v02ExecutorAttempt01": {
+        "status": "MACHINE_FALSE_POSITIVE_VISUAL_FAIL_WITH_LOCAL_IMPROVEMENTS",
+        "evidenceRoot": "experiments/visual-execution-loop/PC4-VX2-2026-08-31-attempt-01",
+        "buildHash": "7421300701103491c922cc4bee5ba80be1c474e84c221e85a88f990ba9fdc864",
+        "machineAuditHash": "0137edf03e17d73fb3e00a591500e4b50750af6db7405a6d32d3c8487cbcd4c2",
+        "directVisualReviewHash": "ae7a8c3132c5e7ad9c5a3de393f3974d3dfd3574e5a10ee445b5507416b0b61a",
+        "manifestHash": "88fdaf54761d0d7a9ae174ac6575b23e78d605d78eccb8a4af8fa8b03818522d",
+        "localImprovements": ["wide hero silhouette", "medium action readability", "sparse contour detail"],
+        "rejections": ["environment layers over-hidden", "medium occupancy 0.35712820 below 0.48", "close facial landmarks not visible"],
+        "immutable": true
+      }
+    }
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1672,8 +1692,8 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PC4_TYPED_VISUAL_IMPROVEMENT_EXECUTOR",
-    "result": "PC4-VU1 understanding-to-plan attempt-03 passes 19/19 tests and independent 20/20 audit; implement a typed executor that consumes plan 674bc082… and rerender the three bound frames without project-specific proposal code",
+    "gate": "PC4_FILM_LANGUAGE_EXECUTOR_CORRECTION",
+    "result": "Retain PC4-VX2 attempt-01: wide/medium improve locally, but direct review finds over-hidden environment, occupancy 0.35712820 below the 0.48 plan floor, and unreadable close facial landmarks; close the A14 lower-bound false positive before a new visual plan",
     "acceptedPb6Evidence": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
     "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
     "audit": "15/15 PASS independent 288-frame/camera/video/attack audit",
@@ -1688,6 +1708,8 @@
       "retain PC.0 attempt-01 failure and accepted attempt-02 evidence/work roots immutable",
       "bind the PC.1 modeling increment to at least 12 semantic detail components, 3 new hero material regions and 2 visibly improved protected views",
       "retain PC4-VU1 attempts 01/02 and accepted attempt-03 evidence immutable while the typed executor consumes only the frozen semantic catalog",
+      "retain PC4-VX1 attempts 01-03 and PC4-VX2 attempt-01 immutable; never reinterpret machine pass as visual pass",
+      "bind future framing audits to both occupancy bounds and keep direct screenshot judgment separate",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]
   }
