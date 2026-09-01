@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc6CausalContractProductizationC1ToolFreeze.v0.2",
+  "experimentId": "PC6-CAUSAL-CONTRACT-PRODUCTIZATION-C1",
+  "status": "FROZEN_BEFORE_ATTEMPT02_ROOT_OR_BUILD_MUTATION",
+  "c1Preregistration": "specs/ai-native-studio-pc6-causal-contract-productization-c1-preregistration.v0.2.json",
+  "c1PreregistrationSha256": "88b1741f8b4a721b60aadb049631abe50364a47f2c6f5b135f61037a9188881a",
+  "c1PreregistrationHash": "1dcc8c18bbc688b6e0edf1248aa08907afc4823038b56993ae91d70ae9e38aea",
+  "baseToolFreeze": {
+    "uri": "specs/ai-native-studio-pc6-causal-contract-productization-tool-freeze.v0.1.json",
+    "sha256": "452943cb11fb9337b153cfae361d7e13ab73a2ab042532adb6b0c0e712f594d4",
+    "freezeHash": "837bcc7233ff1002e8f9784798c4e2e166cc5c6a89a380c7705e1fd980ba5339"
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-pc6-causal-productization-c1.py",
+      "sha256": "935a1f2f63f07728818d4090ee6a0c932fc62596db05a336f74de50ca18cfdf8",
+      "role": "fresh local clone, exact dependency symlink correction and base runner adapter"
+    },
+    {
+      "uri": "scripts/audit-pc6-causal-productization-c1.py",
+      "sha256": "5e639b0e0ee3b15d601420ac96ffa4bac7ba41628a1cbcab00066ca2c96daabc",
+      "role": "retained failure, correction and base machine audit binder"
+    },
+    {
+      "uri": "scripts/run-pc6-causal-productization.py",
+      "sha256": "1f7560257f0d0dd8816b1015f6226557255afe7d3c4f973b8b761570084df761",
+      "role": "frozen base clean build and validation runner"
+    },
+    {
+      "uri": "scripts/audit-pc6-causal-productization.py",
+      "sha256": "3feb4cab4dd8af393a17609399dc50609d05fff3a1e204c1cb483f684e42b360",
+      "role": "frozen base independent auditor"
+    },
+    {
+      "uri": "scripts/run-pc6-causal-product.py",
+      "sha256": "02035b048c5ae397fb7e259f52e369356d9a2e9d123932943387592786472a94",
+      "role": "unchanged frozen built-product helper"
+    }
+  ],
+  "correction": {
+    "attempt01Mutation": 0,
+    "attempt02LocalClones": 1,
+    "attempt02DependencySymlinks": 1,
+    "dependencyNetworkCalls": 0,
+    "dependencyWrites": 0,
+    "productSourceChanges": 0,
+    "thresholdChanges": 0
+  },
+  "entrypoints": {
+    "run": ["python3", "scripts/run-pc6-causal-productization-c1.py"],
+    "audit": ["python3", "scripts/audit-pc6-causal-productization-c1.py"]
+  },
+  "freezeHash": "a0f9082c386ecf8618ef6714ec99c724e3e0a35ffe9c84fe09675681b16fc0a5"
+}
