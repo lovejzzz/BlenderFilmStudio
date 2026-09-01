@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "bfs.rc6LiquidParticleConservationSpec.v0.20",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-PARTICLE-CONSERVATION-2026-09-01-ATTEMPT-20",
+  "purpose": "Separate simulation particle-radius conservation from mesh reconstruction after signed-component diagnostics proved that two nested surfaces are not two disjoint water bodies.",
+  "toolFreezeParent": "e4c46fe5b3c6b02271e4d4ccba7f00a1f24603e0",
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-particle-conservation-attempt-20",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-particle-conservation-attempt-20"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "engineSourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "fluidImplementationSha256": "63a7a3e1affe7809ea935e184dea992754655796a9631e0eadb2060d72dfa20f",
+    "fluidRnaSha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4"
+  },
+  "retainedEvidence": {
+    "attempt19Matrix": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-local-static-attempt-19/matrix.json",
+      "sha256": "ddaba89324c23ced27a4903df1cf525d36076c6d2d853fdc010b5f53c3d3a3b7"
+    },
+    "attempt19Audit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-local-static-attempt-19/independent-audit.json",
+      "sha256": "f07bd5cbd9f499d01c9c781494c493b40d225cc6678f7a247ddc3ae787541259"
+    }
+  },
+  "matrix": {
+    "fixed": {
+      "frameStart": 1,
+      "frameEnd": 7,
+      "preContactOnly": true,
+      "resolutionMax": 96,
+      "particleNumber": 2,
+      "meshScale": 2,
+      "meshParticleRadius": 3.0,
+      "simulationMethod": "APIC",
+      "timestepsMin": 1,
+      "timestepsMax": 4,
+      "cflCondition": 2.0,
+      "waterViscosityBase": 1.0,
+      "waterViscosityExponent": 6,
+      "cupEffectorSubframes": 0,
+      "domainCenterMeters": [0.32, 0.0, 0.25],
+      "domainDimensionsMeters": [0.36, 0.36, 0.5],
+      "baseVoxelMeters": 0.0052083333,
+      "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006],
+      "flowVolumeDensityObserved": 0.0,
+      "flowSurfaceDistanceCells": 0.0
+    },
+    "cells": [
+      {"cellId": "sim-radius-1p0", "particleRadius": 1.0},
+      {"cellId": "sim-radius-1p3", "particleRadius": 1.3},
+      {"cellId": "sim-radius-1p6", "particleRadius": 1.6},
+      {"cellId": "sim-radius-2p0", "particleRadius": 2.0}
+    ],
+    "selectionRule": "valid signed nesting, then minimum absolute source-volume error, then minimum temporal drift, then lower simulation particle radius"
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.0104166667,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "resourceCeilings": {
+    "blenderStarts": 4,
+    "fluidDataBakes": 4,
+    "fluidMeshBakes": 4,
+    "blendSaves": 4,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "sourceFinding": "The bound Blender fluid.cc applies volume_density only when is_gas_flow; liquid geometry uses the signed distance map. The bound RNA setter resets liquid surface_distance to 0.0 by default. This matrix therefore leaves volume_density observed at 0.0, restores zero source expansion and varies only the simulation particle-radius factor documented for leak/gain correction.",
+  "stopRule": "Stop on process, identity, topology, persistence or resource failure. A nested negative shell may subtract from one enclosing positive water surface; more than one positive component, non-nesting, excessive centroid separation, non-manifold geometry, render media, network or engine writes fail closed.",
+  "claimCeiling": "Four seven-frame zero-render static controls varying only simulation particle radius with mesh reconstruction radius fixed at 3.0. A pass is required but not sufficient for slow-tip, impact, lighting or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-component-diagnostic-scene.py": "581752d5407f4688a3298badffdbe3099782bcee7d865b2de50f9f4f89d68142",
+    "scripts/run-rc6-liquid-particle-conservation-matrix.py": "06141b8484821c0ea08bf48d1c0a5ca2c424acd5ed72a0acc7c79b90d2c07661",
+    "scripts/audit-rc6-liquid-particle-conservation-matrix.py": "d0ce4b86604661e28c5c3a7a3236f5ed726da4d228aff8fe3c9a0152bb5e51f1"
+  },
+  "specHash": "cd9d27492df5c4a8c38e83f87f9781b5bb9a93ad161fa5a9d2cd0c0df6b6aa53"
+}
