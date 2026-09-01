@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6FluidConsequenceF3.v0.7",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_07_ROOT_CREATION",
+  "acceptedBulletCalibration": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-bullet-launcher-calibration-attempt-03",
+    "resultHash": "5ef20157c7e944150a76d33d8424084c0ab10ba2510f237f57d653376d7cc81e",
+    "selectedVariant": "P02",
+    "acceptanceAuditHash": "8f631593a485f04eeb8fe425c071852d4f7b7721de480c7ad486f865457d3a33",
+    "acceptanceAuditFileSha256": "bee9a42708a47ffd2161ccf818146ef1c9fa0112a7de0ac90a917afea9a93ab0"
+  },
+  "hypothesis": "The calibrated P02 high-contact Bullet cause can tip the open tumbler within eight frames while staying on set; a smaller initially contained liquid volume in a larger, higher-resolution Mantaflow domain can then produce a bounded post-contact spill without domain-shaped pooling.",
+  "frozenCause": {
+    "strikerDriveEndFrame": 6,
+    "ballCenterZ": 0.34,
+    "laneTopZ": 0.22,
+    "tumblerOuterRadius": 0.15,
+    "tumblerHeight": 0.44,
+    "tumblerMass": 0.34,
+    "tumblerFriction": 0.75
+  },
+  "fluidCorrections": {
+    "liquidRadius": 0.07,
+    "liquidDepth": 0.16,
+    "domainDimensions": [2.5, 1.6, 0.9],
+    "resolutionMax": 96,
+    "meshParticleRadius": 1.2,
+    "spreadOrigin": [0.32, 0.0]
+  },
+  "acceptance": {
+    "contactFrameMaximum": 19,
+    "impactWindowPeakTiltDegreesMinimum": 45.0,
+    "cupMaximumAbsoluteX": 1.40,
+    "cupMaximumAbsoluteY": 0.25,
+    "cupMinimumZ": 0.08,
+    "cupMaximumZ": 0.55,
+    "initialOutsideCupFractionMaximum": 0.05,
+    "spillAtOrAfterContact": true,
+    "outsideCupFractionMinimum": 0.15,
+    "worldSpaceSpreadMetersMinimum": 0.12,
+    "directReviewAll48Frames": true
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-fluid-consequence-scene-f3.py", "sha256": "0d7c8603e555d2affeff4e08492630ba4a79244251823676c3c5305a2e9703d8"},
+    {"uri": "scripts/run-rc6-fluid-consequence-feasibility-f3.py", "sha256": "2a7051d10e3bec615095ce0246a626bab324b8c46bdc9e5a78011e2a09c32dbe"}
+  ],
+  "freshRoots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-feasibility-attempt-07",
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-07"
+  },
+  "limits": {"nativeBuilds": 0, "blenderStartsMaximum": 2, "bulletBakes": 1, "fluidDataBakes": 1, "fluidMeshBakes": 1, "renderCalls": 51, "networkCalls": 0, "engineRemoteWrites": 0, "workBytesMaximum": 2147483648, "evidenceBytesMaximum": 134217728},
+  "claimCeiling": "One bounded calibrated Bullet-to-Mantaflow scene; one-way liquid consequence only, not two-way coupling, production fluid quality or arbitrary-scene generality.",
+  "stopRule": "Run once in the exact fresh roots. Retain any machine or direct-visual failure without repair in place.",
+  "specHash": "8bbf39c804acf500019c3d4ab5c9f67003db03eb0c613ad8172309f80af6df95"
+}
