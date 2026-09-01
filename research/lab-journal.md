@@ -6769,3 +6769,11 @@ Independent audit passed 27/27 with self `91789976…`; receipt self is `403e2c9
 Date: 2026-09-01 · Type: PUBLIC SOURCE FAST-FORWARD · Updated refs / force / tags / releases / binaries / LFS uploads: 1 / 0 / 0 / 0 / 0 / 0
 
 After research acceptance commit `429ff88b`, exact product commit `c7eece67…` was pushed from parent `5f3b981a…` to public `lovejzzz/film-engine/main` by a normal fast-forward. A non-browser remote query returned exact main OID `c7eece67…`; the public raw causal module and local source both hashed to `df34a9a…`. No force, other ref, tag, release, binary, LFS, signing or notarization operation occurred. Publication receipt self is `a53f2016…`.
+
+## J-584 · PC8 measured shutter preregistered
+
+Date: 2026-09-01 · Type: DISCLOSED DEVELOPMENT A/B + PREREGISTRATION · Product mutations / formal starts / formal renders: 0 / 0 / 0
+
+A read-only exploratory A/B on the accepted PC7 blend confirmed native Eevee transform blur responds to the cached Bullet motion. Frame 37→38 projected actor/target origin speeds were 16.25–21.46 px/frame. Direct inspection judged a 0.5-frame shutter too heavy and an approximately 0.3-frame shutter suitable for retaining panels, bands and collision direction; this is disclosed threshold-development input, not formal evidence.
+
+PC8 spec self `834ff258…` freezes v0.3 fixture `690c35c3…`: product measures actor+target projected displacement through the fitted impact camera, takes the median and computes clamp(6 px / median px-per-frame, 0.2, 0.5). Formal acceptance range is 0.25–0.38 frame. Every PC7 initial condition, response, final tilt, impact/aftermath selection and zero-pose-key count remains exact. Manual shutter lookup, compositor/postprocess blur, weaker primary physics, effect cover and final-pose authoring fail closed. Formal roots remain absent.

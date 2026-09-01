@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc8MeasuredShutterPreregistration.v0.1",
+  "experimentId": "PC8-MEASURED-SHUTTER-REALISM",
+  "status": "PREREGISTERED_BEFORE_PC8_PRODUCT_SOURCE_OR_FORMAL_ROOT_MUTATION",
+  "motivation": "PC7 proves visible continuous Bullet propagation and a nonuniform solver-owned aftermath, but direct review still reads the impact as a sharp stylized demonstration without shutter-visible speed.",
+  "productBaseline": {
+    "repository": "lovejzzz/film-engine",
+    "main": "c7eece67bff64cbff2de4c6e1aee3248afbca600",
+    "validatedBinarySha256": "b1d80c33d0f79579958667369a0bc09b368e453092d72e1680d3bfe11ff99580",
+    "pc7ReceiptHash": "403e2c912a63b29a38449977319de186c190590d903c5ca3b42e04da65916b26",
+    "pc7AuditHash": "917899768f5fcf39b57f1c6e5af2ad5f21bbc259b15aad03475b92eacacaee38",
+    "pc7AcceptanceHash": "39ebb081600694e15e11331eaad683e85d6fc63d192d46d58994b68a6ef61b8f"
+  },
+  "disclosedDevelopmentObservation": {
+    "formalClaim": false,
+    "source": "read-only use of the accepted PC7 blend outside all formal roots",
+    "impactFrame": 38,
+    "blurOffAndHalfFrameBlurDiffered": true,
+    "halfFrameVisualJudgment": "TOO_HEAVY",
+    "measuredPixelsPerFrame37To38": {
+      "actor": 16.251835902644913,
+      "targets": [21.458513359826746, 17.331758349995916, 18.855007480710313, 21.027996992196933, 20.37811341677174]
+    },
+    "selectedTargetBlurPixels": 6.0,
+    "approximateExpectedShutterFrames": 0.3,
+    "visualReason": "visible speed while retaining target panels, seams and contact legibility"
+  },
+  "frozenFixture": {
+    "uri": "specs/fixtures/causal-studio/PC8_F1.measured-shutter-filmic-physics.scene-spec.v0.3.json",
+    "sha256": "2854c1eb6dd5b2ae42bf011dfba38a65cfa9d602e63980c4b6fa57c67c506fcc",
+    "sceneSpecHash": "690c35c344c5685da385ea82026678e2372d297a8e461adc68d017dbdd386b41",
+    "frozenBeforeProductImplementation": true,
+    "targetCount": 5,
+    "targetFactory": "BEVELED_DOMINO_BLOCK"
+  },
+  "authorizedProductIncrement": {
+    "paths": ["scripts/modules/film_studio_causal.py"],
+    "maximumAdditions": 260,
+    "maximumDeletions": 100,
+    "allowedCapabilities": [
+      "backward-compatible CausalSceneSpec v0.3 validation",
+      "evaluated impact-frame projected semantic motion measurement",
+      "median semantic pixels-per-frame reduction",
+      "bounded target-pixel-derived shutter calculation",
+      "native Blender transform motion-blur configuration",
+      "persisted measurement and shutter provenance"
+    ],
+    "forbiddenCapabilities": [
+      "target or final-pose animation",
+      "post-release actor pose animation",
+      "primary rigid-body parameter changes",
+      "project, scene or object-name branches",
+      "manual fixture-specific shutter lookup",
+      "compositor, vector or postprocess blur",
+      "Python, shell, network or arbitrary-filesystem authority from the scene spec",
+      "effects that conceal weaker primary collision behavior"
+    ]
+  },
+  "measuredShutterRule": {
+    "measurementFrame": "evaluated motion-selected IMPACT frame",
+    "measurementInterval": "preceding whole frame to IMPACT frame",
+    "objects": "dynamic_actor plus all target_group objects",
+    "projection": "evaluated object origins through the fitted IMPACT camera at the fixture measurement resolution",
+    "reduction": "median Euclidean projected displacement in pixels per frame",
+    "unclampedShutter": "targetBlurPixels divided by medianPixelsPerFrame",
+    "clamp": "fixture minimumShutterFrames through maximumShutterFrames",
+    "nativeSetting": "scene.render.use_motion_blur=true with motion_blur_shutter=computed value and CENTER position",
+    "finalPoseInputs": false
+  },
+  "primaryPhysicsNonRegression": {
+    "source": "accepted PC7 attempt-01 build and independent audit",
+    "responseFramesExact": [28, 29, 29, 30, 31],
+    "finalTiltDegreesExact": [89.99999945, 90.00001103, 62.68717712, 62.31751162, 89.99997493],
+    "impactFrameExact": 38,
+    "impactActiveTargetCountExact": 5,
+    "impactAggregateAngularStepDegreesExact": 30.55164633,
+    "aftermathFrameExact": 86,
+    "initialConditionsExact": true,
+    "targetPoseKeyframes": 0,
+    "postReleaseActorPoseKeyframes": 0,
+    "reopenExact": true
+  },
+  "positiveValidation": {
+    "negativeControlsMinimum": 15,
+    "cleanNativeArm64Builds": 1,
+    "productStarts": 3,
+    "sceneMutatingExecutions": 1,
+    "blendSaves": 1,
+    "reopens": 1,
+    "sharpImpactControlRenders": 1,
+    "productReviewStillRenders": 3,
+    "impactClipFrameRenders": 24,
+    "impactClipFps": 24,
+    "motionBlurNative": true,
+    "measuredMedianMotionPixelsPerFrameRange": [16.0, 24.0],
+    "computedShutterFramesRange": [0.25, 0.38],
+    "computedBlurTargetErrorPixelsMaximum": 0.000001,
+    "sharpAndBlurredImpactFileHashesMustDiffer": true,
+    "directOriginalResolutionABStillAndClipReviewRequired": true
+  },
+  "visualRejectionRules": [
+    "reject if the blurred impact is visually indistinguishable from the sharp control",
+    "reject if blur erases target panels, black bands, body count or contact direction",
+    "reject if the clip no longer makes propagation order legible",
+    "reject if any physics receipt differs from accepted PC7",
+    "do not claim photorealism from motion blur alone"
+  ],
+  "formalRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC8-2026-09-01-attempt-01",
+    "evidence": "experiments/measured-shutter/PC8-2026-09-01-attempt-01",
+    "freshBeforeFormalMutation": true
+  },
+  "resourceCeilings": {
+    "minimumFreeDiskGiBBeforeBuild": 100,
+    "workspaceBytes": 53687091200,
+    "evidenceBytes": 335544320,
+    "maximumBuildSeconds": 2400,
+    "maximumProductProcessSecondsEach": 600
+  },
+  "forbiddenOperations": {
+    "networkCalls": 0,
+    "engineRemoteWritesBeforeAcceptance": 0,
+    "forcePushes": 0,
+    "tags": 0,
+    "releases": 0,
+    "binaryDistribution": 0,
+    "signing": 0,
+    "notarization": 0
+  },
+  "stopRule": "Retain every failure without weakening the exact PC7 physics baseline, measured-shutter ranges, pose-ownership, direct-visual or resource thresholds. Publish product source only after machine and direct visual acceptance.",
+  "specHash": "834ff258fdddc362ae6e4c9aa590295eb09818b5b9ec1a95354b08d893d0c6f0"
+}

@@ -603,6 +603,15 @@ fast-forward from `5f3b981a…` to `c7eece67…`. Public `main` and the raw caus
 module match the validated source exactly; publication receipt self hash is
 `a53f2016…`. Again, no tag, release, binary, LFS, signing or notarization
 operation occurred.
+PC8 measured shutter is preregistered at `834ff258…` with v0.3 fixture
+`690c35c3…`. It must preserve every accepted PC7 initial condition, response,
+motion-selection and final-tilt value. The only new product authority is to
+measure actor/target projected displacement through the fitted IMPACT camera,
+reduce it to median pixels per frame, and compute a bounded native Blender
+shutter for a declared 6 px target. A sharp/blurred A/B, three product stills
+and the 24-frame clip require direct inspection. Manual shutter lookup,
+compositor/postprocess blur, weaker primary physics and final-pose authoring are
+forbidden.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
