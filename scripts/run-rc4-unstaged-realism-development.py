@@ -11,8 +11,8 @@ from pathlib import Path
 
 
 RESEARCH = Path(__file__).resolve().parents[1]
-WORK = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-04")
-EVIDENCE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-04"
+WORK = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC4-development-attempt-05")
+EVIDENCE = RESEARCH / "experiments/unstaged-physical-realism/RC4-2026-09-01-development-attempt-05"
 PRODUCT = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC1-development/source")
 BINARY = Path("/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC3-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender")
 TOOL = RESEARCH / "scripts/run-rc4-unstaged-realism-product.py"
@@ -86,7 +86,7 @@ def command(index, name, argv):
 
 def main():
     if WORK.exists() or EVIDENCE.exists():
-        raise RuntimeError("RC4 attempt-04 development roots are not fresh")
+        raise RuntimeError("RC4 attempt-05 development roots are not fresh")
     if not BINARY.is_file() or sha(BINARY) != BINARY_SHA:
         raise RuntimeError("accepted binary mismatch")
     if shutil.disk_usage(WORK.parent).free < MINIMUM_FREE:
