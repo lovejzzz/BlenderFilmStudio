@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc8MeasuredShutterC1Preregistration.v0.2",
+  "experimentId": "PC8-MEASURED-SHUTTER-REALISM-C1",
+  "status": "CORRECTED_PREREGISTRATION_BEFORE_PRODUCT_COMMIT_OR_FORMAL_ROOT_MUTATION",
+  "parent": {
+    "uri": "specs/ai-native-studio-pc8-measured-shutter-preregistration.v0.1.json",
+    "sha256": "ebc868d9b6650ac2805fe468b4669b1423db7f6f77e3aafa9ff598a9184eab5a",
+    "specHash": "834ff258fdddc362ae6e4c9aa590295eb09818b5b9ec1a95354b08d893d0c6f0",
+    "status": "INVALIDATED_BY_DISCLOSED_DEVELOPMENT_COUNTEREXAMPLE"
+  },
+  "counterexample": {
+    "formalRootMutation": false,
+    "productCommitCreated": false,
+    "cause": "v0.3 changed the document self hash while deterministic initial variation still used the document self hash as its random basis",
+    "observedInitialConditionsDifferedFromPc7": true,
+    "observedPrimaryPhysicsDifferedFromPc7": true,
+    "violatedFrozenRequirement": "primaryPhysicsNonRegression initialConditionsExact and all downstream exact physics values",
+    "disposition": "retain v0.1 and v0.3 fixture unchanged; supersede them before any formal attempt"
+  },
+  "correctedFixture": {
+    "uri": "specs/fixtures/causal-studio/PC8_F1.measured-shutter-filmic-physics.scene-spec.v0.4.json",
+    "sha256": "b9cd894fa56b5f082e4140da88c490e5e694955a069898c8178d8d76dab2ab3c",
+    "sceneSpecHash": "3d97a1b8ea69e18c1b8eebc2808c75313b0aea62f128f61abce2c13c0bc5a9ab",
+    "schemaVersion": "bfs.causalSceneSpec.v0.4",
+    "onlySemanticCorrection": "deterministicVariation gains basisSceneSpecHash bound to the accepted PC7 fixture hash"
+  },
+  "variationIdentityRule": {
+    "basisSceneSpecHash": "b1bcabc70da6ec0b32d00d21a54cc56bf38dc4d485ee3136e32bece8b2e19978",
+    "derivation": "SHA-256 of basisSceneSpecHash, seed, target index and channel",
+    "reason": "presentation-only schema extensions must not silently resample physical initial conditions",
+    "basisMustBePersisted": true,
+    "basisMayAuthorFinalConditions": false
+  },
+  "unchangedBindings": {
+    "productBaseline": "c7eece67bff64cbff2de4c6e1aee3248afbca600",
+    "pc7ReceiptHash": "403e2c912a63b29a38449977319de186c190590d903c5ca3b42e04da65916b26",
+    "pc7AuditHash": "917899768f5fcf39b57f1c6e5af2ad5f21bbc259b15aad03475b92eacacaee38",
+    "pc7AcceptanceHash": "39ebb081600694e15e11331eaad683e85d6fc63d192d46d58994b68a6ef61b8f",
+    "authorizedProductPaths": ["scripts/modules/film_studio_causal.py"],
+    "maximumAdditions": 280,
+    "maximumDeletions": 110,
+    "targetBlurPixels": 6.0,
+    "computedShutterFramesRange": [0.25, 0.38],
+    "primaryPhysicsExact": true,
+    "directABStillAndClipReviewRequired": true,
+    "targetPoseKeyframes": 0,
+    "postReleaseActorPoseKeyframes": 0
+  },
+  "formalRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC8-2026-09-01-attempt-01",
+    "evidence": "experiments/measured-shutter/PC8-2026-09-01-attempt-01",
+    "freshBeforeFormalMutation": true
+  },
+  "stopRule": "If v0.4 does not reproduce every accepted PC7 initial condition and physics value exactly, retain the result and stop. Do not weaken the exact baseline or begin formal attempt-01.",
+  "specHash": "8110fdbb9263fd7c62eb1997b43b6fe92d768bdbae04ddc5aae23f89de74b6ab"
+}

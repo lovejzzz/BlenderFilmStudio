@@ -6777,3 +6777,11 @@ Date: 2026-09-01 · Type: DISCLOSED DEVELOPMENT A/B + PREREGISTRATION · Product
 A read-only exploratory A/B on the accepted PC7 blend confirmed native Eevee transform blur responds to the cached Bullet motion. Frame 37→38 projected actor/target origin speeds were 16.25–21.46 px/frame. Direct inspection judged a 0.5-frame shutter too heavy and an approximately 0.3-frame shutter suitable for retaining panels, bands and collision direction; this is disclosed threshold-development input, not formal evidence.
 
 PC8 spec self `834ff258…` freezes v0.3 fixture `690c35c3…`: product measures actor+target projected displacement through the fitted impact camera, takes the median and computes clamp(6 px / median px-per-frame, 0.2, 0.5). Formal acceptance range is 0.25–0.38 frame. Every PC7 initial condition, response, final tilt, impact/aftermath selection and zero-pose-key count remains exact. Manual shutter lookup, compositor/postprocess blur, weaker primary physics, effect cover and final-pose authoring fail closed. Formal roots remain absent.
+
+## J-585 · PC8 v0.1 invalidated; C1 separates physics variation identity
+
+Date: 2026-09-01 · Type: RETAINED DESIGN COUNTEREXAMPLE + CORRECTED PREREGISTRATION · Product commits / formal starts / formal-root writes: 0 / 0 / 0
+
+The first development execution correctly computed a 0.30849733-frame native shutter, but it also changed all five initial variation records and downstream final physics. Cause: v0.3 cinematography changed the whole SceneSpec self hash, while deterministic variation used that self hash as its basis. This violates the exact PC7 primary-physics control and invalidates v0.1 before formal work.
+
+C1 spec self `8110fdbb…` retains v0.1/v0.3 unchanged and freezes v0.4 fixture `3d97a1b8…`. The only semantic correction is `deterministicVariation.basisSceneSpecHash=b1bcabc7…`, so presentation-only extensions cannot resample physical initial conditions. This basis remains limited to bounded pre-solve variation and grants no final-condition authority. Development must reproduce all accepted PC7 initial conditions and physics exactly before tool freeze.

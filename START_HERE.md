@@ -612,6 +612,14 @@ shutter for a declared 6 px target. A sharp/blurred A/B, three product stills
 and the 24-frame clip require direct inspection. Manual shutter lookup,
 compositor/postprocess blur, weaker primary physics and final-pose authoring are
 forbidden.
+Development then invalidated that first design before any formal root existed:
+adding cinematography changed the document self hash and therefore silently
+resampled the hash-derived physical initial conditions. C1 `8110fdbb…` retains
+v0.1/v0.3 unchanged and freezes corrected v0.4 fixture `3d97a1b8…`.
+`basisSceneSpecHash=b1bcabc7…` now separates physical variation identity from
+later presentation fields. It can influence only the already bounded initial
+variation and cannot author final conditions. PC8 may proceed only after a
+development replay reproduces every accepted PC7 initial/physics value exactly.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
