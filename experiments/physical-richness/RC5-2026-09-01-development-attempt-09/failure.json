@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "MULTI_FIXTURE_REGRESSION_ISOLATION",
+  "researchCommit": "4069a8d2725cad2ed76a257a53b98024dbff1738",
+  "candidateModuleSha256": "2dccda423f4eb783c69e36616d84104985c3e05ca4e0cd209e4e70ce1b77e6d6",
+  "runnerSha256": "b2cc700deee2933960f57c0096dac56f8635687dbfc7173d54682de4ef5c05d4",
+  "fixtureSpecHash": "5c907afe455c5f2e2ad8b949626eb2891d5a3da4d0a63521a2fba05dadf6fc2e",
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-09",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-09",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "acceptedWithinFailedAttempt": {
+    "build": {
+      "fileSha256": "f4811e316bd4ad61efb32d3bc855a0a73d33d196c59a61e3d98c2fc37c176346",
+      "status": "PASS",
+      "checks": "17/17"
+    },
+    "reopen": {
+      "fileSha256": "4f167191ac248213bb0e5d56048c88363258a51c6f9086af03c80f64165946ff",
+      "status": "PASS",
+      "checks": "7/7",
+      "maximumActorLocationDeltaMeters": 7.450580596923828e-9,
+      "maximumTargetTiltDeltaDegrees": 4.9939359314521425e-9,
+      "maximumCapLocationDeltaMeters": 7.273861836555092e-9,
+      "maximumCapAngularDeltaDegrees": 4.987640522813308e-9
+    }
+  },
+  "error": {
+    "type": "PhysicalLightError",
+    "fixture": "D1",
+    "message": "no derived sphere-to-shutter response; minimum gap 2.19218001 m at frame 2; maximum angle 180.00000501 deg at frame 2"
+  },
+  "rootCause": {
+    "classification": "REGRESSION_PROCESS_SCENE_ISOLATION",
+    "description": "The regression runner executes RC4, D1 and H1 sequentially in one process. Product scene clearing removes objects but does not restore a fresh global Blender data/rigid-body-world state between fixtures. D1 therefore began after an RC4 execution rather than from factory-empty state.",
+    "productPhysicsChangeRequired": false
+  },
+  "correctionBoundary": "Inside the regression loop only, restore factory-empty Blender state before each fixture execution. Keep one product process, three regression executions and all product code, fixtures, hashes and thresholds unchanged.",
+  "counts": {
+    "productStarts": 3,
+    "rc5SceneBuilds": 1,
+    "blendSaves": 1,
+    "reopens": 1,
+    "regressionSceneExecutionsStarted": 2,
+    "negativeControls": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "204fec2b865b0a1a476a64c462834f35785219fd04eb7a795790224937a2ba50"
+}
