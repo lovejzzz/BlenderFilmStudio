@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6FluidConsequenceFeasibilityC2.v0.3",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_03_ROOT_CREATION",
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-fluid-consequence-feasibility-c1.v0.2.json",
+    "specHash": "30f13c4604692e591025142ec4fad1fe2eed47d89c9e54da19e36773419a5797"
+  },
+  "retainedAttempt02": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-02",
+    "failureHash": "8ab6ca09145e408b18fb33221ba71d21adf656974305036598a5ba4716eb41d7",
+    "failureAuditHash": "263e10cf8a8362056456b02f66dceec8dbfbd2d641b181abf3975ceed0f6b467",
+    "result": "FAIL_BEFORE_ANY_SOLVER_BAKE"
+  },
+  "correction": {
+    "id": "C2_INITIAL_VELOCITY_API_COMPATIBILITY",
+    "scope": "Replace only the unavailable RigidBodyObject direct velocity fields with a two-frame linear kinematic launch and release to Bullet on frame 3. The two waypoints encode the same frozen 5.2 m/s, 0.03 m/s and 16.0/0.4 rad/s initial condition at 24 fps.",
+    "authoredInitialConditionOnly": true,
+    "authoredContactFrame": false,
+    "authoredCupOutcome": false,
+    "authoredSpillOutcome": false,
+    "physicalOrVisualThresholdChange": false
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-scene-c2.py",
+      "sha256": "3fdbaaeb6827d93c65f3722cb3a19c883b730f0b5841cb659bafc5ecd1e20d90"
+    },
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-feasibility-c2.py",
+      "sha256": "f8af3143b14cb26e7ea736626e371db67d47b85eb2d0387c939f21d4faa60f26"
+    }
+  ],
+  "freshRoots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-feasibility-attempt-03",
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-03"
+  },
+  "inheritedWithoutChange": [
+    "accepted RC5 binary identity",
+    "Bullet and Mantaflow solver settings",
+    "48-frame duration",
+    "all semantic and visual thresholds",
+    "render roster",
+    "resource ceilings",
+    "claim ceiling",
+    "offline and no-engine-write constraints"
+  ],
+  "stopRule": "Run once in the exact fresh roots. Retain any failure without repair or retry in place.",
+  "specHash": "59521f09f820182d824a9390cfd9da1bf121d0b3fd6248f23d6c82617a24451e"
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceFeasibilityC1FailureAudit.v0.1",
+  "status": "PASS",
+  "retainedRoot": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-02",
+  "failureHash": "8ab6ca09145e408b18fb33221ba71d21adf656974305036598a5ba4716eb41d7",
+  "observed": {
+    "blenderStarts": 1,
+    "processExitCode": 0,
+    "pythonTracebackDetected": true,
+    "failedExpression": "ball.rigid_body.linear_velocity",
+    "error": "AttributeError: 'RigidBodyObject' object has no attribute 'linear_velocity'",
+    "buildReceiptWritten": false,
+    "blendWritten": false,
+    "bulletBakeStarted": false,
+    "fluidBakeStarted": false,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "checks": {
+    "rootIsRetained": true,
+    "failureSelfHashValid": true,
+    "processReceiptPresent": true,
+    "stdoutAndStderrBound": true,
+    "c1StageEnforcementCaughtExitZeroTraceback": true,
+    "failurePrecededAnySolverBake": true,
+    "failurePrecededAnyRender": true,
+    "noNetwork": true,
+    "noEngineWrite": true,
+    "correctionMustUseFreshRoot": true
+  },
+  "passCount": 10,
+  "checkCount": 10,
+  "conclusion": "Attempt-02 is a retained API-compatibility failure. C1 correctly refused to advance despite Blender returning exit code zero. A correction may replace only the unsupported initial-velocity assignment with the already validated kinematic-to-dynamic launch pattern; collision, tipping and spill outcomes remain solver-owned.",
+  "auditHash": "263e10cf8a8362056456b02f66dceec8dbfbd2d641b181abf3975ceed0f6b467"
+}
