@@ -688,6 +688,14 @@ bound run-03 module already enabled scene-level EEVEE ray tracing; only the two
 per-material screen/raytrace refraction flags were absent. Historical files
 remain unchanged. The allowed product delta is narrowed to those material
 flags only.
+The first backward-compatibility replay then found a small but nonzero PC8
+measured-shutter drift while PC8 Bullet physics, initial conditions and pose
+provenance remained exact. The same harness reproduces the accepted module
+exactly, isolating the cause to a 0.0002 m old-schema actor-seam radius change
+that perturbed camera fitting. C4 `dbe75ef1…` preregisters one restoration:
+v0.1/v0.2/v0.4 retain historical `radius + 0.002`, while v0.5 alone uses the
+metric radius-scaled seam. The 29 authority attacks already pass. Exact PC8
+cinematography must pass after the fix.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

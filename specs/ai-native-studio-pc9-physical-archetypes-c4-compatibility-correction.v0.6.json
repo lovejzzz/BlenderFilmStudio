@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc9PhysicalArchetypesC4CompatibilityCorrection.v0.6",
+  "status": "PREREGISTERED_AFTER_RETAINED_COMPATIBILITY_COUNTEREXAMPLE_BEFORE_PRODUCT_FIX",
+  "parent": {
+    "uri": "specs/ai-native-studio-pc9-physical-archetypes-c3-e1-evidence-correction.v0.5.json",
+    "sha256": "6d29e02de246eae31cf8afa8d33dfeb10d20eb44ddd01cad5c78a5c561555b51",
+    "specHash": "f5341a5fd7843897251b2b18cc084d97a5f06240517de664407765c05580f501"
+  },
+  "boundUncommittedProductModuleSha256": "d71dbf91e2f0c0b1f13bcda3a3e691eb5892ebb1b6fee66c2c1cafca9ad35cce",
+  "counterexample": {
+    "developmentModuleComparison": {
+      "uri": "experiments/physical-archetypes/PC9-development-validation-2026-09-01-run-05/backward-compatibility.json",
+      "sha256": "aca3f36891667eda13188dab8d7dfd9e0a38cdbbf35fce7411561864355588a8",
+      "v1Inspect": true,
+      "v2Inspect": true,
+      "v4Inspect": true,
+      "v4PhysicsExact": true,
+      "v4InitialConditionsExact": true,
+      "v4PoseAuthorityExact": true,
+      "v4MotionBlurExact": false
+    },
+    "acceptedBaselineControl": {
+      "uri": "experiments/physical-archetypes/PC9-development-validation-2026-09-01-run-06/backward-compatibility.json",
+      "sha256": "6b51faae881dfc8b91ff942cf53c8f9e64db2b955e5bc873cb0654b33f55dbe6",
+      "status": "PASS",
+      "provesComparisonHarnessCanReproduceAcceptedPC8Exactly": true
+    },
+    "observedMedianPixelsPerFrame": 19.61668521,
+    "acceptedMedianPixelsPerFrame": 19.61656045,
+    "observedShutterFrames": 0.30586207,
+    "acceptedShutterFrames": 0.30586402
+  },
+  "rootCause": "The new actor-seam scale branch preserved the old minor radius at 0.009 m but changed the old schema major radius offset from exactly 0.002 m to 0.0018 m. Narrative camera fitting includes actor detail geometry, so this changed the fitted camera enough to alter projected motion while leaving Bullet exact.",
+  "authorizedFix": {
+    "path": "scripts/modules/film_studio_causal.py",
+    "rule": "preserve radius + 0.002 exactly for schemas v0.1/v0.2/v0.4 and use radius-scaled seam geometry only for schema v0.5",
+    "maximumChangedLogicalExpression": 1,
+    "fixtureOrHashBranch": false,
+    "physicalOrFinalPoseChange": false
+  },
+  "unchanged": {
+    "pc9Fixture": true,
+    "pc9Physics": true,
+    "c3MaterialRefraction": true,
+    "allThresholds": true,
+    "allSevenDirectVisualQuestions": true,
+    "formalRoots": true
+  },
+  "stopRule": "Require the development module to reproduce accepted PC8 v0.4 physics, initial conditions, cinematography and pose provenance exactly after the one-expression restoration. Retain any further mismatch.",
+  "specHash": "dbe75ef1569d380dd2f07198657e19d7d1c040473622d75a83a399ac7dfaae97"
+}
