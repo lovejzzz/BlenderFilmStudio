@@ -229,6 +229,14 @@ not rewritten; new adapters must bind the standing charter explicitly.
   feedback preserves the strengths (lighting/camera) and identifies the next
   improvement priorities (modeling detail/action complexity). The validated two-commit increment was
   published to `lovejzzz/film-engine/main` by one ordinary non-force fast-forward.
+- **RC4 solver-owned realism PASS and published:** the current public product
+  head is `db662438…`. A clean native build proved a metric basketball/three-
+  filled-bottle Bullet collision, exact derived contact and settled-response
+  cinematography, zero post-release pose authority, exact save/reopen, 12/12
+  machine checks, 10/10 direct visual review and a 20/20 independent audit.
+  This closes the earlier RC3 visual/formal gap and productizes a reusable
+  procedural physical look; it does not prove fluid, fracture, deformation,
+  sound or arbitrary photoreal filmmaking.
 - **Closed gates:** `F0.1 PASS`, `F0.2 PASS`, `F0.3 PASS`, `F0.4 PASS`, `F0.5 PASS`,
   `F0.6 PASS` and `F0.7 PASS`. Two clean official builds reported Blender
   5.2.0 and the pinned source hash. The bundles are semantically identical but
@@ -830,14 +838,43 @@ it changes only the actor, ramp and gate initial locations to the accepted RC2
 metric derivation. H1 and every authority, acceptance and resource rule remain
 unchanged. The active contract is RC3 preregistration v0.2.
 
-RC3 C3 attempt-03 now passes the zero-render machine development stage. D1
+RC3 C3 attempt-03 passed the zero-render machine development stage. D1
 contact/response is frame 52 with a 98.80388412° gate peak; H1 contact/response
 is frame 16 and all three bottles respond, but only two finish near 90° while
 one finishes upright. That asymmetry is retained as a solver result, not
 corrected into choreography. Both saves reopen below `8e-9` m, sixteen negative
-controls pass, and independent audit is 21/21. Candidate product commit is
-`5f595fe3…`; it is not public. Direct still/clip review is the active gate, then
-a clean native build is required before any publication.
+controls pass, and independent audit is 21/21. Candidate product commit
+`5f595fe3…` became the sole parent of the RC4 accepted increment.
+
+RC4 unstaged physical realism is now accepted and published. The two-path
+product commit `db662438…` adds one reusable procedural physical-look module
+and teaches the restricted action grammar to derive exact contact and settled
+response shots from Bullet evaluation. One clean native arm64 build, five
+offline product starts, D1/H1 regressions, negative controls, exact save/reopen,
+three stills and a 48-frame contact clip passed machine checks `12/12`, fresh
+direct review `10/10`, and independent audit `20/20`. The basketball and three
+differently filled glass bottles use metric rigid bodies; all post-release
+transforms, response frames and final poses remain solver-owned. The settled
+shot fits the response group, not the distant initiator, and the unsaved review
+render neutralizes timeline camera markers so they cannot silently replace the
+declared shot camera. Formal receipt/audit hashes are `18116093…` / `addf528f…`.
+Public `lovejzzz/film-engine/main` is exactly `db662438…` after one ordinary
+fast-forward from `5f595fe3…`; public Git, GitHub API and raw source bytes agree.
+The publication receipt is
+`experiments/unstaged-physical-realism/RC4-publication-2026-09-01-attempt-01/receipt.json`
+with self hash `bce3c1d5…`. One retained local mirror named `origin` was also
+advanced by ordinary fast-forward before the separately named `public` remote;
+that sequencing is disclosed in the receipt and involved no force or history
+rewrite. The reusable `physical-film-direction` skill now records the observed
+camera-marker, response-framing and stable-Eevee-glass lessons. The claim
+ceiling remains one M2 Max procedural Eevee/Bullet lesson—not optical glass,
+liquid slosh, deformation, breakage, sound, cross-platform behavior,
+distribution or arbitrary photoreal filmmaking. The next curriculum gate must
+add a new physical degree of freedom such as deformation, fracture or audible
+contact while preserving RC4 as an exact no-pose baseline.
+The latest read-only host check observes 157 GiB free against the conservative
+160 GiB fresh-build threshold, so RC5 may be designed and preregistered but no
+new native build may start until a fresh admission passes.
 
 ## Public routes
 
