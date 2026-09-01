@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceF7C2FailureAudit.v0.1",
+  "status": "PASS",
+  "machineStatus": "FAIL",
+  "failureHash": "795d159dea48c15f04bf0d7536fd243ff93ab494c906234663d8bca6fddeeefc",
+  "failureFileSha256": "ae5b66baa4320ebe3002ae16f6f6e220f377bab84d3d5a4bcdca0247dabcc678",
+  "resultHash": "c27381e081baf986223340ad158548fcfaccef0199d17503b8fb0494f8301696",
+  "buildFileSha256": "3be5691107461bb341099b73814b2a1280fd5cb20742cacd71fe484dd00d5fbf",
+  "processHash": "732884eb0d25914f6059dd5a9a863aa5f2fc68dba12bfd821222fafc1d2cfd48",
+  "processFileSha256": "e2274a72d7ab98126c323ef8d271c87faac1c31b85d8182d35e51293d3e71103",
+  "stdoutSha256": "73e76fd279a537a1e698aec4a5fe7001823837fed1b0d3631e0d2ed4edb89fb8",
+  "stderrSha256": "d6648a711dd96002e51936f1295d2f42cae283f33316a2a557f934f4548cb3fc",
+  "directVisualReviewHash": "fe4f2ca6f3b9ab0db46db8e94c7a6cd2271e5713d694a9d16ac9ca18858ffae8",
+  "directVisualReviewFileSha256": "76b0cc1450a73916c3d46e860c12db0f4bcc0c27c3cb9154aaa8371982baec58",
+  "framesReviewed": 48,
+  "checks": {
+    "oneBlenderStart": true,
+    "fullDataBakeCompleted": true,
+    "fullMeshBakeCompleted": true,
+    "allFortyEightFramesRendered": true,
+    "allFortyEightFramesDirectlyReviewed": true,
+    "bulletCauseRemainsAccepted": true,
+    "noAuthoredOutcomeAuthority": true,
+    "networkNotUsed": true,
+    "engineRemoteNotWritten": true,
+    "failedQualityGatePreserved": true,
+    "oneSidedVolumeMetricDefectIdentified": true
+  },
+  "acceptedCause": {
+    "contactFrame": 8,
+    "impactWindowPeakTiltDegrees": 90.22475478,
+    "cupStaysOnSet": true,
+    "preContactContainmentPass": true,
+    "solverOwnedMotion": true,
+    "posedOutcomeDetected": false
+  },
+  "rejectedFluid": {
+    "solverOwned": true,
+    "derivedSpillFrame": 8,
+    "impactWindowMinimumLargestComponentFraction": 0.25274725,
+    "maximumConnectedComponentCount": 1015,
+    "maximumToInitialVolumeRatio": 19.11678595,
+    "coherentVolume": false,
+    "readsAsWater": false,
+    "observedSurface": "hundreds of persistent disconnected reflective fragments rather than a connected body of water"
+  },
+  "rootCause": "F7 coupled several expensive changes and set particle_radius to 1.5 while leaving moving-cup effector subframes at 4. The result both fragmented and inflated. The frozen machine volume check was one-sided, so it detected loss but could not reject a 19.12x gain.",
+  "correctionBoundary": "Do not rerun the same full-quality configuration. In a fresh versioned contract, first execute static-container and slow-tip controls, add upper and lower volume-drift gates, derive effector subframes from measured Bullet displacement and voxel size, scan particle_radius only at 1.0/1.1/1.2/1.3, and require the control matrix to pass before one final-impact bake. Preserve attempt-13 roots unchanged.",
+  "auditHash": "d7db73b2166b503aea3ebb7e1bc234b4ca6f72889f2ceceba66cb74bf88c367e"
+}
