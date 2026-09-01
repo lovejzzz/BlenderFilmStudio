@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceFeasibilityC2FailureAudit.v0.1",
+  "status": "PASS",
+  "retainedRoot": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-03",
+  "failureHash": "d46ba72592e97d650a2ad5380c88c40747d3607d1fb9f012f898952d5dd8cf48",
+  "observed": {
+    "blenderStarts": 1,
+    "processExitCode": 0,
+    "pythonTracebackDetected": true,
+    "failedExpression": "action_fcurves(ball)",
+    "error": "NameError: name 'action_fcurves' is not defined",
+    "launchKeyframesCreatedBeforeFailure": true,
+    "buildReceiptWritten": false,
+    "blendWritten": false,
+    "bulletBakeStarted": false,
+    "fluidBakeStarted": false,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "checks": {
+    "rootIsRetained": true,
+    "failureSelfHashValid": true,
+    "processReceiptPresent": true,
+    "stdoutAndStderrBound": true,
+    "stageEnforcementCaughtExitZeroTraceback": true,
+    "failurePrecededAnySolverBake": true,
+    "failurePrecededAnyRender": true,
+    "noNetwork": true,
+    "noEngineWrite": true,
+    "correctionMustUseFreshRoot": true
+  },
+  "passCount": 10,
+  "checkCount": 10,
+  "conclusion": "Attempt-03 retained the correct solver-owned launch authority boundary but referenced an unbound interpolation helper before any bake. C3 may inline only the Blender-version-compatible action-curve traversal needed to make the two launch keyframes linear.",
+  "auditHash": "c71c10f318928dee1ee784e590dcc2f7a7307bddfb437868942b309ab877af8c"
+}

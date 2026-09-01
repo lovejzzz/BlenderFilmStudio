@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6FluidConsequenceFeasibilityC3.v0.4",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_04_ROOT_CREATION",
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-fluid-consequence-feasibility-c2.v0.3.json",
+    "specHash": "59521f09f820182d824a9390cfd9da1bf121d0b3fd6248f23d6c82617a24451e"
+  },
+  "retainedAttempt03": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-03",
+    "failureHash": "d46ba72592e97d650a2ad5380c88c40747d3607d1fb9f012f898952d5dd8cf48",
+    "failureAuditHash": "c71c10f318928dee1ee784e590dcc2f7a7307bddfb437868942b309ab877af8c",
+    "failureAuditFileSha256": "23d015facd1bfafd51780dacb855598b3256004d3934466a2f5d3a9612377b4b",
+    "result": "FAIL_BEFORE_ANY_SOLVER_BAKE"
+  },
+  "correction": {
+    "id": "C3_INLINE_ACTION_CURVES",
+    "scope": "Inline only the Blender-version-compatible traversal of launch action F-curves so the two initial-condition keyframes use linear interpolation.",
+    "physicalOrVisualThresholdChange": false,
+    "launchValuesChanged": false,
+    "solverSettingsChanged": false,
+    "outcomeAuthorityChanged": false
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-fluid-consequence-scene-c3.py", "sha256": "bcdbe42f2fdfa88a28469dc694f4568c859d2b42f451f9534ac4caccf12f2581"},
+    {"uri": "scripts/run-rc6-fluid-consequence-feasibility-c3.py", "sha256": "6ac233931b6753ba9daac31b943b2d1c516c8d4e35409be21b206bb962759059"}
+  ],
+  "freshRoots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-feasibility-attempt-04",
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-04"
+  },
+  "inheritedWithoutChange": [
+    "accepted RC5 binary identity",
+    "launch values and release frame",
+    "Bullet and Mantaflow solver settings",
+    "all semantic and visual thresholds",
+    "48-frame render roster",
+    "resource ceilings and claim ceiling",
+    "offline and no-engine-write constraints"
+  ],
+  "stopRule": "Run once in the exact fresh roots. Retain any failure without repair or retry in place.",
+  "specHash": "91ee02755d877c069411e4eae1e2753d46d7b03e819e4bb8a18c02da9a65fe46"
+}
