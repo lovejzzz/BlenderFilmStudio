@@ -738,7 +738,13 @@ reverse, settle and choose its final pose through Blender Bullet. The contract
 also closes the prior visual false pass with bidirectional medium occupancy,
 environment-layer preservation and close facial-landmark visibility. Product
 code may consume declarative object bindings but may not branch on robot names,
-performance ID or fixture hash. No RC1 product/source/scene mutation exists yet.
+performance ID or fixture hash. Read-only inventory then showed that v0.1 named
+the visual thresholds but not the retained environment and face objects that
+must satisfy them. RC1-C1 freezes v0.2 fixture hash `d658ff86…`: four environment
+roles and five face-landmark roles are now declarative fixture data only. No
+physical parameter, threshold, direct-review question, source scene, product
+path, final-pose rule or resource ceiling changed. No RC1 product/source/scene
+mutation exists yet.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

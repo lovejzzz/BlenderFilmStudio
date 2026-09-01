@@ -1,0 +1,85 @@
+{
+  "$schema": "bfs.physicalPerformanceSpec.v0.2",
+  "schemaVersion": "bfs.physicalPerformanceSpec.v0.2",
+  "performanceId": "RC1-GUARDIAN-SPRING-CONTROL-HOLDOUT",
+  "sourceScene": {
+    "sha256": "e4dec4948f24f843effe29806fed7f8000f9e06ff5f8a7bc2d7a4b998fce1875",
+    "frameStart": 1,
+    "frameEnd": 288,
+    "fps": 24
+  },
+  "semanticBindings": {
+    "intentionalActorArmature": "RIG_B62_GUARDIAN",
+    "intentionalContactEffector": "HAND_R_SOCKET",
+    "visibleHandBody": "B62_HAND_R",
+    "supportSurface": "B62_CONSOLE_SURFACE",
+    "existingControlCandidate": "PC4_CONSOLE_CONTROL_0",
+    "faceplate": "PC4_FACEPLATE",
+    "eyeLine": "B62_EYE_SLIT",
+    "wideCamera": "CAM_WIDE_APPROACH",
+    "mediumCamera": "CAM_MEDIUM_CONTACT",
+    "closeCamera": "CAM_CLOSE_MOTION_TERMINAL",
+    "environmentLayers": [
+      {"role": "floor", "object": "B62_FLOOR"},
+      {"role": "chamber_depth", "object": "B62_CHAMBER_RING_2_4"},
+      {"role": "observation_aperture", "object": "B62_OBSERVATION_APERTURE"},
+      {"role": "atmosphere", "object": "B62_ATMOSPHERE"}
+    ],
+    "facialLandmarks": [
+      {"role": "brow", "object": "FL_OP_004_ISSUE_CLOSE_FACIAL_LANDMARK_AMBIGUITY_00_BROW"},
+      {"role": "eye_line", "object": "FL_OP_004_ISSUE_CLOSE_FACIAL_LANDMARK_AMBIGUITY_01_EYE_LINE"},
+      {"role": "cheek_left", "object": "FL_OP_004_ISSUE_CLOSE_FACIAL_LANDMARK_AMBIGUITY_02_CHEEK"},
+      {"role": "cheek_right", "object": "FL_OP_004_ISSUE_CLOSE_FACIAL_LANDMARK_AMBIGUITY_03_CHEEK"},
+      {"role": "jaw", "object": "FL_OP_004_ISSUE_CLOSE_FACIAL_LANDMARK_AMBIGUITY_04_JAW"}
+    ]
+  },
+  "intentionalMotion": {
+    "source": "EXISTING_ARMATURE_ACTION",
+    "action": "B62_GUARDIAN_PERFORMANCE",
+    "contactSearchWindowInclusive": [96, 192],
+    "allowedAuthoredChannels": [
+      "actor object transform",
+      "pelvis/chest/head rotation",
+      "upper-arm/thigh/shin rotation",
+      "right-hand IK influence and target"
+    ],
+    "authoredMechanismPoseChannels": 0
+  },
+  "physicalMechanism": {
+    "factory": "SPRING_PLUNGER_FROM_EVALUATED_CONTACT_TRAJECTORY",
+    "anchorStrategy": "PROJECT_CLOSEST_EFFECTOR_SAMPLE_ONTO_SUPPORT_SURFACE",
+    "contactColliderStrategy": "KINEMATIC_CAPSULE_FROM_EVALUATED_HAND_BODY",
+    "plungerCollisionShape": "CONVEX_HULL",
+    "constraintType": "GENERIC_SPRING",
+    "travelAxis": "SUPPORT_SURFACE_LOCAL_NORMAL",
+    "travelMeters": 0.045,
+    "movingMassKg": 0.18,
+    "stiffnessNewtonPerMeter": 140.0,
+    "dampingNewtonSecondPerMeter": 3.2,
+    "collisionMarginMeters": 0.0007,
+    "substepsPerFrameMinimum": 10,
+    "solverIterationsMinimum": 40,
+    "postContactPoseSource": "BLENDER_BULLET_RIGID_BODY_AND_CONSTRAINT"
+  },
+  "cinematography": {
+    "framingSource": "EVALUATED_FRAME_SEMANTIC_WORLD_BOUNDS_AND_LANDMARKS",
+    "motionBlurStrategy": "MEASURED_PROJECTED_MEDIAN_MOTION",
+    "motionBlurPosition": "CENTER",
+    "mediumOccupancyRange": [0.48, 0.72],
+    "wideEnvironmentLayersMinimum": 3,
+    "closeFacialLandmarks": ["eye_line", "brow", "cheek_left", "cheek_right", "jaw"],
+    "closeFacialLandmarksVisibleMinimum": 4
+  },
+  "forbidden": {
+    "projectSpecificBranchInProductCode": true,
+    "fixtureHashBranchInProductCode": true,
+    "authoredPlungerOrMechanismFinalPose": true,
+    "postContactMechanismPoseKeyframes": true,
+    "manualContactFrame": true,
+    "manualShutter": true,
+    "postprocessMotionBlur": true,
+    "environmentLayerDeletionToFixOcclusion": true,
+    "arbitraryPythonShellNetworkOrFilesystemAuthority": true
+  },
+  "performanceSpecHash": "d658ff86005fff5b41b0f6911f7bd8679e46f7d60cbcf303263c98300f698076"
+}
