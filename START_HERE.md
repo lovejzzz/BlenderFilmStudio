@@ -757,6 +757,27 @@ product commit exists yet.
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
 
+RC1 formal C3 attempt-02 is now accepted and published. One clean native arm64
+build and three product starts produced a solver-owned spring-contact robot
+performance, a saved/reopened workspace, three formal stills and a 48-frame
+contact clip. The mechanism has zero final-pose keys; contact is frame 175,
+peak response is 45.65408 mm at frame 178, reversal is frame 179, and the
+settled residual is at most 1.73156 mm from frame 189. Reopened actual physics
+transforms differ by at most `4.9419513342696675e-9` m. Direct visual review is
+`9/9 YES`; independent audit is `37/37 PASS`. The accepted evidence root is
+`experiments/robot-capstone/RC1-2026-09-01-attempt-02`; attempt-01 remains an
+immutable bundle-name harness failure.
+
+Validated product commit `0e84ef3b…` was published to
+`lovejzzz/film-engine/main` by ordinary fast-forward. The reusable method is
+also captured in the validated local `physical-film-direction` Codex skill.
+This proves one hybrid authored-intention/solver-response holdout, not
+photoreal modeling, nuanced full-body acting or finished-film quality. The
+active next gate is RC2 preregistration: an unseen, deliberately simple rolling
+rigid body must physically open a hinged light shutter, and the visible light
+change must come from simulated geometry rather than authored final poses or
+animated light intensity.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>
