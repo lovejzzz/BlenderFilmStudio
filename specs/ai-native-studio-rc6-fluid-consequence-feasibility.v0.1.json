@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6FluidConsequenceFeasibility.v0.1",
+  "status": "PREREGISTERED_BEFORE_EXPERIMENT_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "325e8ad29372d8ae3d402aa0b8928e111310cf62",
+  "causalQuestion": "Can a Blender Bullet-evaluated basketball impact tip a half-filled open glass tumbler and thereby cause a Blender Mantaflow liquid volume to leave the opening and spread on the court, with no authored contact frame, spill frame, final cup pose or final fluid mesh?",
+  "selectedPhysicalDegreeOfFreedom": "MANTA_FLOW_LIQUID_CONSEQUENCE_FROM_BULLET_OWNED_CONTAINER_MOTION",
+  "selectionReason": "RC5 already proves rigid contact and one breakable attachment. The largest visible remaining physical falsehood is static liquid. A bounded Bullet-to-Mantaflow consequence directly tests that missing physics instead of adding decorative debris, camera shake, particles or another rigid accessory.",
+  "baseline": {
+    "publicProductCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
+    "formalBinary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "formalBinarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "buildOptionsObserved": {
+      "bullet": true,
+      "fluid": true
+    }
+  },
+  "scope": {
+    "phase": "RESEARCH_FEASIBILITY_ONLY",
+    "productSourceMutation": false,
+    "nativeBuild": false,
+    "scene": "one metric basketball, one half-filled open glass tumbler, one court support, one bounded liquid domain",
+    "coupling": "Bullet container motion is evaluated first and baked; Mantaflow samples the moving container as an effector. Fluid does not feed forces back into Bullet."
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-feasibility-attempt-01",
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-01"
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-feasibility.py",
+      "sha256": "c5a4283634ab9c263f6724349f9a9c55c53f0ad8d419a1508696f5f364a2a505"
+    },
+    {
+      "uri": "scripts/run-rc6-fluid-consequence-scene.py",
+      "sha256": "1385897455a451bbc7a012c3acf8e53a819fb121974fa8100ac9b1257bbc07d8"
+    }
+  ],
+  "processCeilings": {
+    "blenderStarts": 2,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "blendSaves": 1,
+    "reopens": 1,
+    "stillRenders": 3,
+    "clipFrameRenders": 48,
+    "ffmpegProcesses": 1,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "physicsConfiguration": {
+    "timelineFramesInclusive": [1, 48],
+    "fps": 24,
+    "bulletSubstepsPerFrame": 20,
+    "bulletSolverIterations": 80,
+    "fluidDomainType": "LIQUID",
+    "fluidMethod": "APIC",
+    "fluidResolutionMax": 48,
+    "fluidMeshScale": 2,
+    "initialFlowBehavior": "GEOMETRY",
+    "authoredInflowAnimation": false
+  },
+  "machineAcceptance": {
+    "nativeBulletAndFluidBuildOptions": true,
+    "derivedContactBeforeFrame": 20,
+    "minimumPeakCupTiltDegrees": 45.0,
+    "minimumLiquidMeshVertexCount": 100,
+    "derivedSpillNotBeforeDerivedContact": true,
+    "minimumOutsideCupFraction": 0.15,
+    "minimumFloorSpreadMeters": 0.12,
+    "cupOutcomeKeys": 0,
+    "fluidOutcomeKeys": 0,
+    "authoredContactFrames": 0,
+    "authoredSpillFrames": 0,
+    "authoredFinalFluidMeshes": 0,
+    "saveReopenCupLocationDeltaMetersMaximum": 0.000001,
+    "saveReopenCupTiltDeltaDegreesMaximum": 0.001,
+    "saveReopenFluidEffectFrameVertexCountExact": true,
+    "saveReopenFluidEffectFrameBoundsExact": true
+  },
+  "visualAcceptance": [
+    "the wide frame clearly establishes ball, open container, liquid and travel direction",
+    "contact is continuous without a visible gap or teleport",
+    "the container tips continuously from the impact rather than from pose animation",
+    "liquid remains visibly inside the container before impact",
+    "liquid visibly crosses the opening only after the physical response begins",
+    "the spill develops continuously across the full clip rather than appearing as a replacement mesh",
+    "the effect frame shows a readable container, opening and floor spread relationship",
+    "the liquid reads as a coherent volume rather than decorative particles",
+    "lighting and camera preserve contact and fluid silhouette without concealing failures",
+    "the result is honestly readable as one-way Bullet-to-Mantaflow coupling, not two-way fluid dynamics"
+  ],
+  "resourceCeilings": {
+    "minimumFreeBeforeBytes": 128849018880,
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 6442450944,
+    "workspaceBytes": 8589934592,
+    "evidenceBytes": 1073741824
+  },
+  "stopRules": [
+    "stop and retain the attempt if either frozen root already exists",
+    "stop before scene creation if binary identity or resource admission fails",
+    "stop after the first failed Blender process; do not rerun inside the same root",
+    "do not weaken physics, persistence, visual or resource thresholds after observing the result",
+    "a machine pass remains pending until every rendered clip frame is directly inspected"
+  ],
+  "forbidden": [
+    "film-engine source, commit, ref, tag or release mutation",
+    "native source build",
+    "authored contact frame, spill frame, cup final pose or fluid final mesh",
+    "animated inflow timed to the impact",
+    "particles, compositor blur, camera shake or sound used as a substitute for missing liquid motion",
+    "network call, signing, notarization, DMG or binary distribution"
+  ],
+  "claimCeiling": "A PASS would establish one bounded M2 Max Bullet-to-Mantaflow liquid consequence with one-way coupling and a wide-mouth tumbler. It would not establish two-way fluid/rigid coupling, narrow-neck bottle flow, liquid volume conservation at production tolerance, production render quality, arbitrary scenes or cross-platform support.",
+  "specHash": "3ab53a6e03e4164b9fd13594260fcee943b5037b90a067e67e36f12f0bdb8991"
+}
