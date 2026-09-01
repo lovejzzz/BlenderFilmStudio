@@ -789,16 +789,27 @@ Accepted development evidence is
 `experiments/physical-light-transfer/RC2-2026-09-01-development-attempt-02`;
 attempt-01 is a retained sealing-harness failure.
 
-This is not yet the formal RC2 pass. The first exact cleanup attempt released
+The first exact cleanup attempt released
 31.77 GB but left the host at a rounded 159 GiB and is retained as
 `FAIL_CLEANUP_INSUFFICIENT`. A second exact cleanup removed one regenerable
 6.0 GiB Claude VM bundle; its wrapper misclassified the valid status spelling
 and is also retained as a harness failure. Read-only C2 attempt-03 binds both
 receipts and passes with 165 GiB free against the conservative 160 GiB
 threshold, zero failures and zero additional mutations. No retained experiment
-root, source tree, personal document or recording was deleted. RC2 formal roots
-remain absent; the active next gate is formal runner/auditor freeze followed by
-the single preregistered clean native build.
+root, source tree, personal document or recording was deleted.
+
+RC2 formal attempt-01 is now accepted. One local-only clone, one clean native
+arm64 build and three offline product starts reproduced the development result:
+contact/response at frame 51, 4.1908872 m actor travel, `1.48e-6` median rolling
+slip, 98.80388412° peak gate opening, settled window from frame 76, 2.663735624×
+actual/closed receiver luminance, zero actor/shutter pose keys and zero light
+animation channels. Save/reopen deltas remain below `3.73e-9` m and `4.31e-9`°.
+Independent audit is 40/40 `PASS`; direct review is 9/9 `YES`; the 117-file root
+manifest is `feb6b6ea18550ec5b9f8737ed77097d932f57133c96469c07930db2f3910505a`.
+Accepted evidence is
+`experiments/physical-light-transfer/RC2-2026-09-01-attempt-01`. The validated
+product commit `636f42f2…` is local and unpublished; ordinary fast-forward
+publication is the active next action.
 
 ## Public routes
 
