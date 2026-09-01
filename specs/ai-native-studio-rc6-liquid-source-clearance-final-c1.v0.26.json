@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "bfs.rc6LiquidSourceClearanceFinalC1Spec.v0.26",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-SOURCE-CLEARANCE-FINAL-C1-2026-09-01-ATTEMPT-26",
+  "purpose": "Repeat the resolution-192 35 mm static confirmation after correcting only the scene-wrapper transformation level, with fresh roots and unchanged physics and thresholds.",
+  "toolFreezeParent": "1fa8024b2b80cd6ad525f6fe496a5f0ca0c33792",
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-source-clearance-final-c1-attempt-26",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-source-clearance-final-c1-attempt-26"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "engineSourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6"
+  },
+  "retainedStaticControl": {
+    "closure": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-c2-closure-attempt-24/closure.json",
+      "sha256": "ce2e43a47e7a0d92593ded274aad5bd32eb866910863c8eb5f2e96401afaa94d"
+    },
+    "independentAudit": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-c2-closure-attempt-24/independent-audit.json",
+      "sha256": "8593b455940bf0dc1a622d9888b2aea5852b51b89caf15880675ba86168d9605"
+    },
+    "attempt25Failure": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-final-attempt-25/failure.json",
+      "sha256": "d85cbac565266c3ab974174e69b09fa71122183620e88c0debe35c98e1f1dd30"
+    }
+  },
+  "configuration": {
+    "baseVoxelMeters": 0.0026041667,
+    "cflCondition": 2.0,
+    "cupEffectorSubframes": 0,
+    "domainCenterMeters": [0.32, 0.0, 0.25],
+    "domainDimensionsMeters": [0.36, 0.36, 0.5],
+    "flowSurfaceDistanceCells": 0.0,
+    "flowVolumeDensityObserved": 0.0,
+    "frameEnd": 7,
+    "frameStart": 1,
+    "meshParticleRadius": 4.5,
+    "meshScale": 2,
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "preContactOnly": true,
+    "resolutionMax": 192,
+    "simulationMethod": "APIC",
+    "sourceDimensionsMeters": [0.1099999994, 0.1099999994, 0.1400000006],
+    "timestepsMax": 4,
+    "timestepsMin": 1,
+    "waterViscosityBase": 1.0,
+    "waterViscosityExponent": 6
+  },
+  "measurementBinding": {
+    "requestedClearanceMeters": 0.035,
+    "requestedClearanceVoxels": 13.44,
+    "maximumAbsoluteClearanceErrorMeters": 1e-08,
+    "maximumAbsoluteClearanceErrorVoxels": 4e-06
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.0104166667,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.01,
+    "maximumNonManifoldEdgeCount": 0
+  },
+  "cacheContract": {
+    "exactFiles": 21,
+    "frames": [1, 2, 3, 4, 5, 6, 7],
+    "stages": ["config", "data", "mesh"]
+  },
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "blendSaves": 1,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 4294967296,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 4294967296,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "correction": {
+    "attempt25FailureHash": "59fffc2be0c0e50b7747bbcbaa0240b2bf198df3996483602ad0ba98c124e53b",
+    "attempt25ProcessHash": "06bdd8030c24febb0afd3bbe644a18c8291df88409c4b0e06bb13c8c9fc15c36",
+    "attempt25FluidDataBakes": 0,
+    "attempt25FluidMeshBakes": 0,
+    "onlySemanticChange": "apply resolution, base-voxel, cell-roster and schema replacements to the fully assembled runtime scene source immediately before exec"
+  },
+  "stopRule": "Run exactly one resolution-192, seven-frame, zero-render static bake. Stop on process, identity, requested-versus-measured placement, source-volume, signed-topology, containment, manifold, exact 21-file cache roster, persistence or resource failure. Do not proceed to slow-tip in this attempt.",
+  "claimCeiling": "One seven-frame resolution-192 static confirmation of the accepted 35 mm source clearance. PASS_FINAL_STATIC may unlock only slow solver-owned tip; it does not prove impact, lighting, render or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-source-clearance-final-scene-c1.py": "06013b584c1ddf4c549ea0bafc3e360dd55f69d6ff5a44e5216a71328c125ac2",
+    "scripts/run-rc6-liquid-source-clearance-final-c1.py": "e0e63b22097e0695da1f4e6e4d8e1df851fadd0e0e6620ae01d42db244634593",
+    "scripts/audit-rc6-liquid-source-clearance-final-c1.py": "16d5448cfe6602320cbb7891a4a183632671d4ddacff4ef8a6dc9615101a1b08"
+  },
+  "specHash": "56b410a1cee94bb5026167a596288617edbfc0344d99a4c13cea5ca260c83a96"
+}
