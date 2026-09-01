@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioPc6CausalContractProductizationC2ToolFreeze.v0.3",
+  "experimentId": "PC6-CAUSAL-CONTRACT-PRODUCTIZATION-C2",
+  "status": "FROZEN_BEFORE_ATTEMPT03_ROOT_OR_BUILD_MUTATION",
+  "c2Preregistration": "specs/ai-native-studio-pc6-causal-contract-productization-c2-preregistration.v0.3.json",
+  "c2PreregistrationSha256": "2b03914aa680aceaa5b7f8e31279789beaf086674bd496f1925051998b2a3b8f",
+  "c2PreregistrationHash": "1ba368b396a228ad5c93c735cd51145319b64788fd5ca43dd1beae639a619778",
+  "baseC1ToolFreeze": {
+    "uri": "specs/ai-native-studio-pc6-causal-contract-productization-c1-tool-freeze.v0.2.json",
+    "sha256": "750285ed539e0c020b71aecd3f8f70dc0c1a9e9f5a9a841fb0a8125366881c5c",
+    "freezeHash": "a0f9082c386ecf8618ef6714ec99c724e3e0a35ffe9c84fe09675681b16fc0a5"
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-pc6-causal-productization-c2.py",
+      "sha256": "5415d0410665735fc69a7c0e8307dfd94ba5071c497d0863bbf3d1b2b34dc030",
+      "role": "attempt-02 binder and empty-directory-only C2 runner adapter"
+    },
+    {
+      "uri": "scripts/audit-pc6-causal-productization-c2.py",
+      "sha256": "c36b789c59ae22ef6cdfde41ed9159561495ba961effddb79eef7c0e15a4f994",
+      "role": "attempt-02, correction and base machine audit binder"
+    },
+    {
+      "uri": "scripts/run-pc6-causal-productization-c1.py",
+      "sha256": "935a1f2f63f07728818d4090ee6a0c932fc62596db05a336f74de50ca18cfdf8",
+      "role": "frozen C1 local-clone and dependency-link runner"
+    },
+    {
+      "uri": "scripts/run-pc6-causal-productization.py",
+      "sha256": "1f7560257f0d0dd8816b1015f6226557255afe7d3c4f973b8b761570084df761",
+      "role": "frozen base build and validation runner"
+    },
+    {
+      "uri": "scripts/audit-pc6-causal-productization.py",
+      "sha256": "3feb4cab4dd8af393a17609399dc50609d05fff3a1e204c1cb483f684e42b360",
+      "role": "frozen base independent auditor"
+    },
+    {
+      "uri": "scripts/run-pc6-causal-product.py",
+      "sha256": "02035b048c5ae397fb7e259f52e369356d9a2e9d123932943387592786472a94",
+      "role": "unchanged built-product helper"
+    }
+  ],
+  "correction": {
+    "verifiedEmptyDirectoryRemovals": 1,
+    "dependencySymlinks": 1,
+    "productSourceChanges": 0,
+    "thresholdChanges": 0,
+    "networkCalls": 0,
+    "dependencyWrites": 0,
+    "retainedAttemptMutations": 0
+  },
+  "entrypoints": {
+    "run": ["python3", "scripts/run-pc6-causal-productization-c2.py"],
+    "audit": ["python3", "scripts/audit-pc6-causal-productization-c2.py"]
+  },
+  "freezeHash": "b944bcca4d3dc3bb8dd597ef83dcccd12ff5e9854a6909cdd12019cc142b735e"
+}
