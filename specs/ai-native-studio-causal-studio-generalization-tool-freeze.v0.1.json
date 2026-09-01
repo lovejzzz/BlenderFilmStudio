@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioCausalStudioGeneralizationToolFreeze.v0.1",
+  "experimentId": "PC5-G1",
+  "status": "FROZEN_BEFORE_PC5_G1_ATTEMPT01_MUTATION",
+  "preregistration": {
+    "uri": "specs/ai-native-studio-causal-studio-generalization-preregistration.v0.1.json",
+    "sha256": "e0512d5674bbc6174b4e25c798e9303908a9f4ebfbcde34ff589febed69f1096",
+    "specHash": "a5024f3f5e38435b289f141e1be4b8c76b5a96933aaedfb75bef09e88998c8c1"
+  },
+  "sceneSpec": {
+    "uri": "specs/fixtures/causal-studio/PC5_G1.domino-four.scene-spec.v0.1.json",
+    "sha256": "ed910734c4003e4cf138c62b2ccedc95cc51ca74f068bce960df7d4ed3c339ae",
+    "sceneSpecHash": "727f04b669abbe77f29c05902ab20364898d4e921d83e788b89bab877817ae1a"
+  },
+  "tools": [
+    {"uri": "scripts/build-causal-scene-spec.py", "sha256": "c296049c803dc31e7ada475f7c15011dc81cdef3566ef7212c90326698a5d97c", "role": "declarative allowlisted scene builder and Blender/Bullet executor"},
+    {"uri": "scripts/run-causal-studio-generalization.mjs", "sha256": "29425041df4afff46428c30b4093e0d05f3632347ffd207bc882492a8d22b96c", "role": "fresh-root process runner, resource counter and receipt writer"},
+    {"uri": "scripts/audit-causal-studio-generalization.mjs", "sha256": "afa51075b42590597c2d4f172e998d87e24b086046795109f5fe186d17445070", "role": "independent holdout machine auditor"},
+    {"uri": "scripts/build-causal-studio.py", "sha256": "33ac640cad3fc8165ffad19700897267f0847d025c9441d8b7730cec561ecf90", "role": "accepted low-level rendering, physics receipt and evaluated-frame framing dependency"}
+  ],
+  "staticChecks": {
+    "pythonCompile": "PASS",
+    "runnerNodeSyntax": "PASS",
+    "auditorNodeSyntax": "PASS",
+    "genericToolContainsAcceptedBottleObjectName": false,
+    "genericToolContainsAcceptedFinalCoordinates": false,
+    "formalAttempt01RootsAbsent": true
+  },
+  "authorityModel": {
+    "sceneSpecExecutableAuthority": 0,
+    "allowlistedFactories": ["GROOVED_SPHERE", "BEVELED_DOMINO_BLOCK", "SIMPLE_WALL", "AREA_LIGHT", "CAMERA_FROM_DIRECTION_CLASS"],
+    "targetCardinalityReadFromSpec": true,
+    "physicsParametersReadFromSpec": true,
+    "acceptanceReadFromSpec": true,
+    "shotIntentReadFromSpec": true
+  },
+  "physicsGuarantee": {
+    "postReleaseActorPoseKeyframes": 0,
+    "targetPoseKeyframes": 0,
+    "targets": 4,
+    "targetFactory": "BEVELED_DOMINO_BLOCK",
+    "targetCollisionShape": "BOX",
+    "finalPoseSource": "BLENDER_BULLET_RIGID_BODY"
+  },
+  "entrypoints": {
+    "run": ["node", "scripts/run-causal-studio-generalization.mjs"],
+    "audit": ["node", "scripts/audit-causal-studio-generalization.mjs"]
+  },
+  "freezeHash": "4f61302c472d3b6233db0cd7ef02b0b25945702cfb519cfcef6cfa7b39a3e6ee"
+}
