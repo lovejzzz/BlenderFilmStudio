@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "bfs.causalStudioGeneralizationDirectVisualReview.v0.1",
+  "status": "PASS",
+  "machineAudit": {
+    "status": "PASS",
+    "checkPassed": 23,
+    "checkTotal": 23,
+    "auditFileSha256": "f7d951342f30fd463c1fc0ee2616aceb4d864907b7aa147c4feb4e6f836b24b3",
+    "auditHash": "e0ab4244ab1fa248ce3d903e0680f1e69c9a5ad81a34442f8aec75615986c508"
+  },
+  "physicsObservation": {
+    "firstTargetResponseFrame": 28,
+    "responseFrames": {
+      "TARGET_001": 28,
+      "TARGET_002": 31,
+      "TARGET_003": 31,
+      "TARGET_004": 30
+    },
+    "finalTiltDegrees": {
+      "TARGET_001": "56.96938412",
+      "TARGET_002": "89.99999758",
+      "TARGET_003": "89.99999677",
+      "TARGET_004": "90.00000601"
+    },
+    "ballTravelBeforeFirstResponseMeters": "2.72951588",
+    "reopenExact": true,
+    "finalPoseAuthoredKeyframes": 0,
+    "physicsSolver": "BLENDER_BULLET_RIGID_BODY"
+  },
+  "frames": [
+    {
+      "shotId": "SETUP",
+      "frame": 26,
+      "uri": "review/setup-frame-0026.png",
+      "sha256": "427478068e9ca290a3f7c9a0b7a90dd5922ab91a2b41f1c3abd45145e9b342b0",
+      "occupancy": "0.57999995",
+      "negativeSpaceMargin": "0.20493934"
+    },
+    {
+      "shotId": "IMPACT",
+      "frame": 28,
+      "uri": "review/impact-frame-0028.png",
+      "sha256": "8ec41f7d67c9b6c0b3cb355214810091736fd907ba74d249bfdd0d865d7e4d92",
+      "occupancy": "0.71999996",
+      "negativeSpaceMargin": "0.12006272"
+    },
+    {
+      "shotId": "AFTERMATH",
+      "frame": 120,
+      "uri": "review/aftermath-frame-0120.png",
+      "sha256": "7236b1cbec03ac8616bccbef4c2aec96efae3fa09cf9ecd9c19a23c5b2f2e40a",
+      "occupancy": "0.59999996",
+      "negativeSpaceMargin": "0.18372911"
+    }
+  ],
+  "answers": [
+    {
+      "questionId": "V01_MODELS_BEYOND_PLACEHOLDERS",
+      "answer": "YES",
+      "observation": "The unseen target factory produces beveled blocks with inset face panels, edge bands and procedural wood grain; the blue actor has rubber grain and three modeled channels."
+    },
+    {
+      "questionId": "V02_IMPACT_CAUSALITY_LEGIBLE",
+      "answer": "YES",
+      "observation": "The low, tighter impact frame makes contact between the sphere and the leading block unambiguous while retaining all downstream targets."
+    },
+    {
+      "questionId": "V03_ALL_FOUR_SEPARATELY_READABLE_SETUP_AND_AFTERMATH",
+      "answer": "YES",
+      "observation": "Four distinct upright blocks are visible in setup; after settling, their four bodies remain readable through separated left, right, central leaning and rear silhouettes."
+    },
+    {
+      "questionId": "V04_CHANGING_CONTACT_SHADOWS_CREATE_WEIGHT",
+      "answer": "YES",
+      "observation": "Soft grounded shadows in setup, compressed contact at impact and separated resting shadows in the aftermath make the gravity-driven state change visible."
+    },
+    {
+      "questionId": "V05_EXPOSURE_COLOR_PRESERVE_MATERIAL",
+      "answer": "YES",
+      "observation": "Warm target colors and the cool blue sphere remain differentiated; highlights retain rubber grain, wood grain, bevels and panel edges without subject clipping."
+    },
+    {
+      "questionId": "V06_THREE_SHOTS_DISTINCTLY_COMMUNICATE_SETUP_IMPACT_RESULT",
+      "answer": "YES",
+      "observation": "The three evaluated-frame camera fits read as establish, contact and consequence, and the aftermath reframes the solver's dispersed result instead of preserving the original composition."
+    }
+  ],
+  "limitations": [
+    "The objects retain a stylized manufactured-toy look; this is a causal curriculum film, not photoreal product footage.",
+    "The exact impact still has no motion blur, elastic deformation, chips, dust or sound; those are later realism lessons rather than hidden acceptance criteria.",
+    "One frozen unseen change in target shape, collision primitive and count proves one controlled transfer only, not general autonomous filmmaking."
+  ],
+  "visualVerdict": "PASS",
+  "overallVerdict": "PASS_SINGLE_UNSEEN_SHAPE_COUNT_TRANSFER",
+  "reviewHash": "d7c3bd83836383a78d7dc5d4bc859e3837c9ee344dc9263b62770043d63921e9"
+}

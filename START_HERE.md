@@ -555,10 +555,17 @@ AFTERMATH missed every bottle. C4 taught evaluated-frame semantic bounds,
 measured occupancy/margin and cross-language numeric evidence. Fresh attempt-05
 is the accepted controlled lesson: independent machine audit `21/21 PASS`, six
 of six direct screenshot questions `YES`, receipt/audit/review self hashes
-`9b72e2df…` / `33a9567c…` / `542874f0…`. This proves one controlled causal film,
-not general filmmaking. The active next checkpoint is an unseen shape/count
-variation using the same semantic physics/framing loop before returning to the
-robot; no PC4 object names or final coordinates may enter that variation.
+`9b72e2df…` / `33a9567c…` / `542874f0…`. The holdout was frozen before the
+generic executor existed, then changed the target factory/count/collision shape
+to four beveled wooden domino blocks with BOX collisions. Fresh PC5-G1
+attempt-01 passed independent machine audit `23/23` and direct screenshot review
+`6/6`; its receipt/audit/review hashes are `82374709…` / `e0ab4244…` /
+`d7c3bd83…`. All four targets responded at frames 28/31/31/30 and settled at
+56.97°/90.00°/90.00°/90.00° with zero target or final-pose keyframes; reopen was
+exact. This proves one controlled unseen transfer, not broad general filmmaking.
+The active PC6 checkpoint is productization: move the restricted declarative
+factory contract, Bullet-only final-pose provenance and evaluated-result camera
+fitting into the actual product before returning to the PC4 robot capstone.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

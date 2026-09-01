@@ -6717,3 +6717,11 @@ Fresh attempt-05 independent machine audit 21/21 PASS；receipt/audit self `9b72
 Date: 2026-09-01 · Type: GENERALIZATION PREREGISTRATION · Formal starts / renders / mutations: 0 / 0 / 0
 
 在重构generic executor前，PC5-G1 holdout SceneSpec `727f04b…`已冻结：actor仍为grooved sphere，但target从3个lathed bottles换为4个beveled wooden domino blocks，collision从CONVEX_HULL换BOX，final tilt threshold为每块≥55°。Executor必须从spec读取factory/cardinality/physics/acceptance/shot intent，仅可调用allowlisted factories；spec无executable authority。Camera仍只能用evaluated semantic bounds，不得消费attempt-05 bottle final coordinates。Generalization prereg self `a5024f3f…`；fresh attempt-01 roots absent。
+
+## J-577 · PC5-G1 frozen unseen Bullet transfer PASS
+
+Date: 2026-09-01 · Type: ACCEPTED GENERALIZATION + DIRECT VISUAL PASS · Blender starts / renders / saves: 2 / 3 / 1
+
+Holdout与generic executor已按先后顺序分别冻结；tool freeze self为`4f61302c…`。Fresh attempt-01从声明式SceneSpec读取4个target、BOX collision、质量/摩擦/阻尼、launch和三镜头意图；spec没有Python、shell、network或任意filesystem authority。Blender/Bullet真实求解得到response frames 28/31/31/30，final tilts 56.9694°/90.0000°/90.0000°/90.0000°，targets与post-release final pose keyframes均为0，reopen exact。Independent machine audit为23/23 PASS，receipt/audit self为`82374709…` / `e0ab4244…`。
+
+Direct original-resolution review六问全YES，review self `d7c3bd83…`：四个unseen beveled wood blocks、球-首块接触、四个settled silhouettes、变化的contact shadows、材质曝光与setup/impact/aftermath叙事均可读。限制明确：当前仍是stylized manufactured-toy look，缺motion blur、形变、碎屑与声音；单次shape/count/collision迁移不证明广泛自治。PC6 active gate转为CausalSceneSpec产品化：把restricted factories、Bullet-only final-pose provenance与evaluated-result shot fitting带入产品contract，再回PC4 robot capstone；不得为每个作品继续写project-specific final poses。

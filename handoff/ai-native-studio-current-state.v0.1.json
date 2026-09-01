@@ -1,10 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schemaVersion": "0.1.0",
-  "snapshotDate": "2026-08-31",
+  "snapshotDate": "2026-09-01",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_POST_PB7_PC0_PASS_STANDING_AUTONOMY_ACTIVE",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_PC5_GENERALIZATION_PASS_STANDING_AUTONOMY_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "PC5-CAUSAL-STUDIO-GENERALIZATION",
+  "activeGate": "PC6-CAUSAL-CONTRACT-PRODUCTIZATION",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -1000,7 +1000,7 @@
     }
   },
   "postPb7ImprovementProgram": {
-    "status": "PC0_PC1_PC2_PASS_PC3_MACHINE_PASS_HUMAN_PENDING_PC4_RETAINED_CAPSTONE_PC5_CAUSAL_STUDIO_PASS_GENERALIZATION_NEXT",
+    "status": "PC0_PC1_PC2_PASS_PC3_MACHINE_PASS_HUMAN_PENDING_PC4_RETAINED_CAPSTONE_PC5_CAUSAL_STUDIO_AND_UNSEEN_GENERALIZATION_PASS_PC6_PRODUCTIZATION_NEXT",
     "program": "POST-PB7-MODELING-ACTION-QUALITY",
     "spec": "specs/ai-native-studio-post-pb7-improvement-program.v0.1.json",
     "specHash": "b1743a2d4cdaa8fec6c9cbe8308c8a409a2fe01a8b3ba795c725b49974cddc33",
@@ -1011,8 +1011,8 @@
       "protectedStrengths": ["lighting", "camera language and shot progression"],
       "improvementPriorities": ["modeling detail", "action complexity"]
     },
-    "gateOrder": ["PC.0", "PC.1", "PC.2", "PC.3", "PC.4", "PC5-CAUSAL-STUDIO", "PC5-GENERALIZATION"],
-    "activeGate": "PC5-CAUSAL-STUDIO-GENERALIZATION",
+    "gateOrder": ["PC.0", "PC.1", "PC.2", "PC.3", "PC.4", "PC5-CAUSAL-STUDIO", "PC5-GENERALIZATION", "PC6-CAUSAL-CONTRACT-PRODUCTIZATION"],
+    "activeGate": "PC6-CAUSAL-CONTRACT-PRODUCTIZATION",
     "pc0": {
       "status": "PASS",
       "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-02",
@@ -1319,7 +1319,7 @@
     }
     },
     "causalStudio": {
-      "status": "PASS_CONTROLLED_CAUSAL_FILM_LESSON_GENERALIZATION_REQUIRED",
+      "status": "PASS_CONTROLLED_CAUSAL_FILM_LESSON_AND_SINGLE_UNSEEN_SHAPE_COUNT_TRANSFER",
       "experimentId": "PC5-CAUSAL-STUDIO",
       "preregistration": "specs/ai-native-studio-causal-studio-preregistration.v0.1.json",
       "preregistrationFileSha256": "dacb3328daf5b1b68e7cabd2a6fb161705d7be3b6d598a1ce7b6a7edb5065e30",
@@ -1351,8 +1351,8 @@
         "evaluatedFrameFraming": true,
         "immutable": true
       },
-      "proves": ["procedural modeling beyond primitives", "real Bullet causal collision", "reopen-reproducible response order and final tilt", "evaluated-frame semantic camera fitting", "separate machine and direct visual verdicts"],
-      "doesNotProve": ["unseen scene generalization", "advertisement-quality modeling", "motion blur/deformation/secondary effects", "robot capstone improvement"],
+      "proves": ["procedural modeling beyond primitives", "real Bullet causal collision", "reopen-reproducible response order and final tilt", "evaluated-frame semantic camera fitting", "separate machine and direct visual verdicts", "one frozen unseen transfer from three convex-hull bottles to four box-collision domino blocks"],
+      "doesNotProve": ["broad scene generalization", "advertisement-quality modeling", "motion blur/deformation/secondary effects", "robot capstone improvement", "product-integrated causal authoring"],
       "generalizationPreregistration": {
         "status": "FROZEN_BEFORE_GENERIC_EXECUTOR_OR_ATTEMPT01_MUTATION",
         "uri": "specs/ai-native-studio-causal-studio-generalization-preregistration.v0.1.json",
@@ -1364,9 +1364,33 @@
         "targetFactory": "BEVELED_DOMINO_BLOCK",
         "targetCount": 4,
         "acceptedBottleFinalCoordinatesAllowed": false,
-        "freshAttempt01RootsAbsent": true
+        "freshAttempt01RootsAbsent": false
       },
-      "next": "freeze and run one unseen shape/count variation through the same causal and evaluated-frame framing contract before resuming PC4"
+      "generalizationToolFreeze": {
+        "uri": "specs/ai-native-studio-causal-studio-generalization-tool-freeze.v0.1.json",
+        "sha256": "8ad04c2f540269b9557b88b82ef973cd21fd8e9b1a73f80209f39ba02638a226",
+        "freezeHash": "4f61302c472d3b6233db0cd7ef02b0b25945702cfb519cfcef6cfa7b39a3e6ee"
+      },
+      "acceptedGeneralizationAttempt01": {
+        "status": "PASS_SINGLE_UNSEEN_SHAPE_COUNT_TRANSFER",
+        "evidenceRoot": "experiments/causal-studio-generalization/PC5-G1-2026-09-01-attempt-01",
+        "workRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC5-G1-2026-09-01-attempt-01",
+        "machineAudit": "23/23 PASS",
+        "auditFileSha256": "f7d951342f30fd463c1fc0ee2616aceb4d864907b7aa147c4feb4e6f836b24b3",
+        "auditHash": "e0ab4244ab1fa248ce3d903e0680f1e69c9a5ad81a34442f8aec75615986c508",
+        "receiptHash": "823747091cd0b4779de49050370213ccbf40e5b914f71d3ac15d7de159eabdea",
+        "manifestHash": "2e1a5c5b2ccb3d23cef074758fb0f3c37b49a688b8ce21548523eeadcab8d1c3",
+        "directReview": "6/6 YES",
+        "directReviewFileSha256": "d38b6857c1b3c7525410b2bdf278e5467f5825d10f0806a652d950fde080b9c1",
+        "directReviewHash": "d7c3bd83836383a78d7dc5d4bc859e3837c9ee344dc9263b62770043d63921e9",
+        "responseFrames": [28, 31, 31, 30],
+        "finalTiltDegrees": [56.96938412, 89.99999758, 89.99999677, 90.00000601],
+        "finalPoseKeyframes": 0,
+        "physicsSolver": "BLENDER_BULLET_RIGID_BODY",
+        "reopenExact": true,
+        "immutable": true
+      },
+      "next": "integrate the restricted declarative CausalSceneSpec, Bullet-only final-pose provenance and evaluated-result shot fitting into the product contract before returning to the PC4 robot capstone"
     }
   },
   "gateOrder": ["F0.1", "F0.2", "F0.3", "F0.4", "F0.5", "F0.6", "F0.7"],
@@ -1742,8 +1766,8 @@
     "Do not stage unrelated owner changes"
   ],
   "nextExpectedCheckpoint": {
-    "gate": "PC5_CAUSAL_STUDIO_UNSEEN_VARIATION",
-    "result": "PC5 controlled ball-to-three-bottle lesson is machine 21/21 and direct visual 6/6 PASS; prove the same semantic physics and evaluated-frame composition on an unseen shape/count variation before returning to the retained PC4 robot capstone",
+    "gate": "PC6_CAUSAL_CONTRACT_PRODUCTIZATION",
+    "result": "PC5 controlled bottles and frozen unseen four-domino transfer both pass machine and direct visual review; move the reusable declarative factory, Bullet causality and evaluated-result cinematography rules into the product contract before returning to the retained PC4 robot capstone",
     "acceptedPb6Evidence": "experiments/ai-native-studio-phase-b/PB.6-2026-08-31-mac-m2max-attempt-01",
     "receiptHash": "f8e1cc9d6467fd15f8c2d777584257ffa61c7f958f2b0f28c5e13c0ca826bcb1",
     "audit": "15/15 PASS independent 288-frame/camera/video/attack audit",
@@ -1760,7 +1784,8 @@
       "retain PC4-VU1 attempts 01/02 and accepted attempt-03 evidence immutable while the typed executor consumes only the frozen semantic catalog",
       "retain PC4-VX1 attempts 01-03 and PC4-VX2 attempt-01 immutable; never reinterpret machine pass as visual pass",
       "bind future framing audits to both occupancy bounds and keep direct screenshot judgment separate",
-      "retain PC5 attempts 01-04 and accepted attempt-05 immutable; do not reuse the accepted bottle final coordinates in the unseen variation",
+      "retain PC5 attempts 01-04, accepted attempt-05 and PC5-G1 attempt-01 immutable; never convert one unseen transfer into a broad autonomy claim",
+      "productize only the restricted declarative factory/physics/framing contract; do not grant SceneSpec Python, shell, network or arbitrary-filesystem authority",
       "require real Blender/Bullet dynamics after initial-condition release and reject all target/final-pose keyframes",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
     ]
