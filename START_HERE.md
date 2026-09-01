@@ -639,6 +639,10 @@ the abstract wooden targets, clean environment and orderly contact expose asset
 and physical-archetype limits. PC9 must teach recognizable basketball/bottle
 construction, scale-aware mass/collision geometry and richer contact response
 without authoring any final pose. The PC4 robot remains the later capstone.
+The accepted PC8 source was then published by one ordinary non-force
+fast-forward from `c7eece67…` to `9d5a6686…`; public `main` and the raw causal
+module match the validated source exactly. No tag, release, binary, LFS,
+signing or notarization operation occurred.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

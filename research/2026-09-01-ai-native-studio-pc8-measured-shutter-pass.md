@@ -65,3 +65,7 @@ PC7 的初始条件和完整 primary physics 逐值不变：response frames 仍�
 ## 下一步
 
 PC9 将把简单课程变成真正可辨认的篮球撞三瓶：由软件依据语义原型生成瓶身、瓶肩、瓶颈、瓶盖/标签和匹配碰撞轮廓，并以尺度感知的质量、摩擦、恢复系数及受限初始差异交给 Bullet。验收仍要求零目标最终姿态 key、连续 clip、重新打开 exact 和直接截图判断。PC4 机器人继续作为后续未见过的 capstone，不在课程阶段手工修片。
+
+## 产品源码发布
+
+验收后的单父提交由 `c7eece67…` 普通 fast-forward 到 `9d5a6686…`，只更新 `lovejzzz/film-engine` 的 `refs/heads/main`。公开 raw 模块 SHA-256 与正式构建绑定的 `009544bd…` 完全一致。第一次命令因 zsh 对未加花括号变量后的冒号解析而在本地拒绝，远端未变；随后只修正 refspec 拼写并成功。force、其他 ref、tag、release、LFS、二进制、签名与公证计数均为 0。
