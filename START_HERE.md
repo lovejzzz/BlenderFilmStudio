@@ -772,11 +772,29 @@ Validated product commit `0e84ef3b…` was published to
 `lovejzzz/film-engine/main` by ordinary fast-forward. The reusable method is
 also captured in the validated local `physical-film-direction` Codex skill.
 This proves one hybrid authored-intention/solver-response holdout, not
-photoreal modeling, nuanced full-body acting or finished-film quality. The
-active next gate is RC2 preregistration: an unseen, deliberately simple rolling
-rigid body must physically open a hinged light shutter, and the visible light
-change must come from simulated geometry rather than authored final poses or
-animated light intensity.
+photoreal modeling, nuanced full-body acting or finished-film quality.
+
+RC2 is now preregistered and has an accepted-binary development pass. “The
+Signal Gate” uses a grooved ceramic sphere rolling under gravity to strike a
+Bullet hinge shutter; a passive collision stop holds the gate at 98.80388412°
+with zero actor/shutter pose keys, while a constant 1050 W area light reveals
+the receiver only through the simulated opening. Contact and response both
+occur at frame 51, actor travel is 4.1908872 m, median rolling slip is
+`1.48e-6`, the actual/closed receiver luminance ratio is 2.66373562, and all
+19 frozen machine checks plus 9/9 direct visual questions pass. Reopened
+physics differs by at most `3.725290298461914e-9` m and
+`4.300723333017231e-9`°. The software's real inspect/execute route passes,
+negative controls fail closed, and the exact RC1 result hash remains unchanged.
+Accepted development evidence is
+`experiments/physical-light-transfer/RC2-2026-09-01-development-attempt-02`;
+attempt-01 is a retained sealing-harness failure.
+
+This is not yet the formal RC2 pass. The read-only host screen reports 130 GiB
+free against its conservative 160 GiB clean-build admission, so no new native
+build may begin. The active next gate is a safe, specifically confirmed disk
+cleanup of at least 30 GiB followed by the preregistered clean native build and
+formal replay. Do not delete retained experiment roots merely to satisfy the
+gate.
 
 ## Public routes
 
