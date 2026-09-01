@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import Ajv2020 from 'ajv/dist/2020.js';
 import { canonicalize, canonicalJson, repositoryRoot, sha256 } from './lib/scene-spec.mjs';
 
-const freezeUri = 'specs/ai-native-studio-visual-understanding-tool-freeze-c1.v0.2.json';
+const freezeUri = 'specs/ai-native-studio-visual-understanding-tool-freeze-c2.v0.3.json';
 
 function requireCondition(condition, message) {
   if (!condition) throw new Error(message);
@@ -16,12 +16,12 @@ function safeUri(uri) {
   return absolute;
 }
 
-async function readBound(uri) {
+async function readBound(uri, parseJson = true) {
   const path = safeUri(uri);
   const stat = await lstat(path);
   requireCondition(stat.isFile() && !stat.isSymbolicLink(), `not regular ${uri}`);
   const bytes = await readFile(path);
-  return { uri, path, bytes, sha256: sha256(bytes), value: JSON.parse(bytes) };
+  return { uri, path, bytes, sha256: sha256(bytes), value: parseJson ? JSON.parse(bytes) : null };
 }
 
 function selfHash(value, key) {
@@ -47,7 +47,7 @@ const [freeze, receipt, plan, tests, planSchema, packet, assessment] = await Pro
   readBound(freezeUri),
   readBound(`${rootUri}/receipt.json`),
   readBound(`${rootUri}/visual-improvement-plan.json`),
-  readBound(`${rootUri}/logs/contract-tests.tap`),
+  readBound(`${rootUri}/logs/contract-tests.tap`, false),
   readBound('specs/visual-improvement-plan.v0.1.schema.json'),
   readBound('specs/fixtures/visual-review/PC4_ATTEMPT03.packet.json'),
   readBound('specs/fixtures/visual-review/PC4_ATTEMPT03.teacher-assessment.json'),
@@ -65,7 +65,7 @@ const expectedPresets = new Set([
   'MID_SCALE_PANEL_HIERARCHY',
 ]);
 const checks = [
-  ['A01_FREEZE_SCHEMA', freeze.value.schemaVersion === 'bfs.visualUnderstandingToolFreezeC1.v0.2'],
+  ['A01_FREEZE_SCHEMA', freeze.value.schemaVersion === 'bfs.visualUnderstandingToolFreezeC2.v0.3'],
   ['A01B_FREEZE_SELF_HASH', freeze.value.freezeHash === selfHash(freeze.value, 'freezeHash')],
   ['A02_RECEIPT_SCHEMA', receipt.value.schemaVersion === 'bfs.visualUnderstandingLoopReceipt.v0.1' && receipt.value.experimentId === 'PC4-VU1'],
   ['A03_RECEIPT_SELF_HASH', receipt.value.receiptHash === selfHash(receipt.value, 'receiptHash')],
