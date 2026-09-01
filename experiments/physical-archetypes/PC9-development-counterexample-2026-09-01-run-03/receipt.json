@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "bfs.pc9PhysicalArchetypesDevelopmentCounterexample.v0.3",
+  "status": "RETAINED_DEVELOPMENT_VISUAL_FAILURE_NOT_FORMAL",
+  "sourceBaseline": "9d5a66869528b66216b977c01312cdc849f28fad",
+  "uncommittedProductModuleSha256": "5dd29256e813f34b273b807c218bd68f88f6f732c6a0d0ffe4d169de9eec0b75",
+  "fixture": {
+    "uri": "specs/fixtures/causal-studio/PC9_F1.metric-basketball-three-filled-bottles.scene-spec.v0.6.json",
+    "sha256": "15cdefa87d79270676fbfbc9b947d1226c2ce33a4660078342280b0650bcbb3e",
+    "sceneSpecHash": "2bf661e043799e176d65f318f242c1d480dff54c769ee36a4ebe12c4759428c4"
+  },
+  "externalRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC9-development/run-03",
+  "externalArtifacts": {
+    "probeSha256": "a36fabf0e0e889f7d1c338769269111e652e7df4a0a3a9661f8c011f7fa17e38",
+    "blendSha256": "c6d9343ea0b2e263832a9608d475b766f817fb0b01ba3cecc41d5f9b546b3d1d",
+    "setupSha256": "d1de99ab9510c948676173a81349588d4704bd3dd3fafd6f6cf89593e1604190",
+    "sharpImpactSha256": "b13472dab9ffd5d12cbbdf8c29f3d6d16fc1387da389d3d66510c4aa9a6c3f4c",
+    "measuredImpactSha256": "fb6307e2bc0aaf0c47a2479c5dc70bef0adc96fcc178428091a31234c61b457f",
+    "aftermathSha256": "0edd63b7e3c7a78e789dcbe3df7595e24733caaf9140db3a184b1334f8a588f9"
+  },
+  "observed": {
+    "targetResponseFrames": [29, 29, 28],
+    "finalTiltDegrees": [90.00786281, 90.00847078, 90.00001205],
+    "impactFrame": 34,
+    "impactActiveTargetCount": 3,
+    "medianPixelsPerFrame": 9.81652043,
+    "computedShutterFrames": 0.5,
+    "targetPoseKeyframes": 0,
+    "postReleaseActorPoseKeyframes": 0
+  },
+  "passedFrozenMachineRequirements": true,
+  "failedFrozenDirectVisualQuestions": [
+    "Are three distinct liquid fill levels visible and consistent with the recorded low, medium and high fill inputs?",
+    "Do material response, contact shadows and surface detail make the physical archetypes more credible than the PC8 abstract wooden targets?"
+  ],
+  "cause": "A Glass BSDF alone is rendered as nearly opaque dark glass by the native EEVEE path because neither scene ray tracing nor per-material refraction was enabled. The exact internal columns remain hidden.",
+  "formalRootMutation": false,
+  "cleanNativeBuilds": 0,
+  "formalProductStarts": 0,
+  "networkCalls": 0,
+  "engineRemoteWrites": 0,
+  "disposition": "retain run-03; preregister native EEVEE ray tracing and per-material refraction before changing product source again",
+  "receiptHash": "d667254a70352f6f8f5ad22d76c5f77a159a3f612fdbb4c2ac441e78bada6406"
+}

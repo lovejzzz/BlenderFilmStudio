@@ -675,6 +675,14 @@ camera or pose. It preregisters a generic native-glass shell plus readable
 fill-derived internal column, while forbidding alpha dither, external fill
 gauges and label-based fill encoding. The next action is the C2 development
 replay; formal roots and product commit still do not exist.
+Development run-03 then falsified the assumption that a Glass BSDF alone is
+sufficient in the accepted EEVEE path: the bottles became nearly opaque dark
+glass and still hid the fill. Physics remained exact. The retained receipt hash
+is `d667254a…`. C3 `fda477ff…` preregisters the engine capability that was
+actually observed on the accepted binary—native EEVEE ray tracing plus
+per-material screen/raytrace refraction—for the generic filled-bottle factory.
+It does not authorize alpha tricks, cutaways, gauges, label encoding, camera
+changes or final poses. The next action is the C3 development replay.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.
