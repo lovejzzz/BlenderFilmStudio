@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "RESULT_CANONICAL_SERIALIZATION_AFTER_SIMULATION_AND_BAKE",
+  "researchCommit": "9c2f3b22",
+  "candidateModuleSha256": "254536b86518b0a16beca050818af0e4e06d9ae41fcd1f09f2b6063ee352719b",
+  "runnerSha256": "b2cc700deee2933960f57c0096dac56f8635687dbfc7173d54682de4ef5c05d4",
+  "fixtureSpecHash": "5c907afe455c5f2e2ad8b949626eb2891d5a3da4d0a63521a2fba05dadf6fc2e",
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-08",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-08",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "error": {
+    "type": "ContractError",
+    "reason": "UNSUPPORTED_JSON_TYPE",
+    "message": "tuple",
+    "field": "mechanism.contactGeometry.memberPhaseDegrees"
+  },
+  "observations": {
+    "physicsSettleExceptionRaised": false,
+    "simulationReachedResultAssembly": true,
+    "fullBakeReachedFrame": 1080,
+    "runnerMachineChecksReached": false,
+    "blendSaved": false
+  },
+  "rootCause": "The new geometry evidence used Python tuples for member/phase pairs, while the frozen canonical JSON writer accepts JSON arrays only.",
+  "correctionBoundary": "Change only the tuple constructor to a list constructor in the contact-geometry evidence. Do not change geometry, simulation, thresholds, fixture, result fields or acceptance.",
+  "counts": {
+    "productStarts": 1,
+    "physicsSimulations": 1,
+    "physicsBakes": 1,
+    "sceneMutations": 1,
+    "blendSaves": 0,
+    "reopens": 0,
+    "regressionSceneExecutions": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "7ab723887d31746af99991989d8f8c41181238dce6f87efdf3b3639376ace8ba"
+}
