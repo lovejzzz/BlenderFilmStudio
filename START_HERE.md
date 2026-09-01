@@ -815,6 +815,14 @@ generalize this learned method into a physics-native action grammar: software
 must derive motion from initial conditions, Bullet bodies, collisions and
 constraints, and reject authored target/final poses.
 
+RC3 is now preregistered before product or scene mutation. It replaces
+project-shaped executors with one restricted graph whose nodes are approved
+asset factories plus physical initial conditions, and whose relations are
+rolling, support, collision, hinge, occlusion and response propagation. The
+same compiler bytes must run a Signal Gate topology and a structurally distinct
+basketball/three-filled-bottle topology. Contact, response, camera beats and all
+post-release poses remain derived; input outcome fields are rejected.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>

@@ -6812,3 +6812,17 @@ let Blender Bullet own post-release transforms, let light respond through
 physical geometry, and reject target/final-pose keyframes. RC3 will generalize
 that invariant into reusable software rather than another project-specific
 scene patch.
+
+## J-588 · RC3 physics-native action grammar preregistered
+
+Date: 2026-09-01 · Type: PREREGISTRATION · Product mutations / Blender starts / renders: 0 / 0 / 0
+
+RC2 and PC9 use real Bullet results but still route through separate project-
+shaped executors. RC3 freezes one restricted graph language whose nodes carry
+asset factories plus physical initial conditions and whose relations carry
+rolling, support, collision, hinge, occlusion and response propagation. Input
+outcome poses/frames are structurally forbidden. D1 retains the gate topology;
+H1 changes to a basketball and three filled bottles with no constraint or light
+reveal. The same source bytes must execute both without project/hash/title
+branching, while all post-release transforms and narrative frames remain
+solver-derived.

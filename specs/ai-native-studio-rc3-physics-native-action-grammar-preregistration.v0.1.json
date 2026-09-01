@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc3PhysicsNativeActionGrammarPreregistration.v0.1",
+  "experimentId": "RC3-PHYSICS-NATIVE-ACTION-GRAMMAR",
+  "status": "PREREGISTERED_BEFORE_RC3_PRODUCT_SOURCE_OR_SCENE_MUTATION",
+  "purpose": "Replace project-specific physical scene executors with one restricted declarative physics-action graph whose nodes describe approved asset factories and initial conditions, whose relations describe physical causality, and whose observed beats and final poses are derived from Blender Bullet rather than authored outcomes.",
+  "authority": {
+    "contract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "contractSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "ordinaryValidatedFastForwardPublicationAllowed": true,
+    "forceReleaseSigningNotarizationCostOrDestructiveActionAllowed": false
+  },
+  "frozenBaseline": {
+    "researchParentCommit": "756b9946d8023b57e10eed671065e986d32cb36c",
+    "productCommit": "636f42f28f781f3e858fd5b6bf641910a549c91b",
+    "rc2FormalEvidenceRoot": "experiments/physical-light-transfer/RC2-2026-09-01-attempt-01",
+    "rc2MachineReceiptHash": "85fe1ec33de3fa34dcc3e0e67412f1e6231feaed3755ea16054cfb3d2443bb7e",
+    "rc2AuditHash": "4e61abe6cda3e2caccf87c51785cefed23aeaacf0d631345b9075cfd20c0396c",
+    "rc2DirectVisualReviewHash": "38cca8d8e963ab58ddff0ff241c7d567c0f5a29a80ab8d28ad560fbfc60ec6c3",
+    "rc2PublicationHash": "487787034c95b2f4cc8a062884808408ba9767a734507707264b23d7d585de09",
+    "acceptedBinarySha256": "9e24e64976e5747a415bff3633907c1612871b6220917621fbadebfa04005efb"
+  },
+  "frozenFixtures": {
+    "disclosedDevelopment": {
+      "uri": "specs/fixtures/physics-action/RC3_D1.signal-gate.physics-action-spec.v0.1.json",
+      "fileSha256": "6e7e4c5a37cb2cf0bb3f7b90ee56a2583b75e09aeec825971d2f3f25b375ed7a",
+      "specHash": "bb083c09eb26849be625a919364ca5c6637e1fb32e4383b47d747236aff46e20",
+      "topology": "rolling active sphere + passive ramp + active hinged occluder + passive receiver + static occluded light"
+    },
+    "transferHoldout": {
+      "uri": "specs/fixtures/physics-action/RC3_H1.ball-three-bottles.physics-action-spec.v0.1.json",
+      "fileSha256": "83f5169074399be71505f796df6fcc6a516c1059c4d709843c1793268da339cb",
+      "specHash": "167e91a2f8371427cff231733d7ebb941f10760a8b70e8aa57ef72f58c9c89d4",
+      "topology": "released active basketball + three active filled bottles + passive floor + static light; no constraint and no light reveal"
+    }
+  },
+  "grammar": {
+    "schemaVersion": "bfs.physicsActionSpec.v0.1",
+    "topLevelKeysExact": ["$schema", "schemaVersion", "projectId", "timeline", "world", "nodes", "relations", "beats", "cinematography", "forbidden", "physicsActionSpecHash"],
+    "nodeAuthority": "approved factory identifier + metric parameters + initial condition + rigid-body properties only",
+    "relationTypes": ["ROLLS_ON", "RESTS_ON", "COLLIDES_WITH", "HINGED_TO_WORLD", "OCCLUDES_LIGHT_TO", "PROPAGATES_RESPONSE_WITHIN"],
+    "beatDerivations": ["BEFORE_RELATION_EVENT", "FIRST_CONTACT", "PEAK_ANGULAR_RESPONSE", "PEAK_GROUP_RESPONSE"],
+    "outcomeFieldsAllowed": [],
+    "unknownFieldsReject": true,
+    "rootContainedJsonOnly": true,
+    "inspectBeforeExecuteTokenRequired": true,
+    "projectIdFixtureHashOrTitleBranchesForbidden": true,
+    "arbitraryPythonShellNetworkOrFilesystemAuthorityForbidden": true
+  },
+  "productScope": {
+    "authorizedPaths": ["scripts/modules/film_studio_physics_action.py", "scripts/startup/bl_operators/film_studio_workspace.py"],
+    "maximumChangedPaths": 2,
+    "maximumAdditions": 1400,
+    "maximumDeletions": 120,
+    "singleGenericCompilerRequired": true,
+    "sameProductBytesForBothFixturesRequired": true,
+    "existingCausalPhysicalLightAndPhysicalPerformanceRoutesMustRemainAvailable": true,
+    "pc9Rc1Rc2RegressionRequired": true
+  },
+  "solverOwnership": {
+    "allActiveBodiesUseBlenderRigidBody": true,
+    "allDeclaredConstraintsUseBlenderRigidBodyConstraint": true,
+    "postReleaseTransformKeyframes": 0,
+    "postContactOrResponseTargetPoseKeyframes": 0,
+    "authoredContactResponsePeakOrFinalFrames": 0,
+    "animatedLightPowerOrColorChannels": 0,
+    "simulationBakeRequiredBeforeSave": true,
+    "evaluatedPhysicsTransformsMustRoundTrip": true,
+    "cameraFramesMustDeriveFromMeasuredPhysics": true,
+    "nativeMotionBlurMustDeriveFromMeasuredProjectedMotion": true
+  },
+  "machineAcceptance": {
+    "fixturesExecutedBySameCompiler": 2,
+    "developmentActiveRigidBodiesMinimum": 2,
+    "developmentHingeConstraintsExact": 1,
+    "developmentDerivedContactAndAngularResponseRequired": true,
+    "developmentReceiverActualToClosedLuminanceRatioMinimum": 2.0,
+    "holdoutActiveRigidBodiesExact": 4,
+    "holdoutConstraintsExact": 0,
+    "holdoutDerivedContactRequired": true,
+    "holdoutMinimumRespondingBottles": 2,
+    "holdoutFirstResponseAfterContactMaximumFrames": 2,
+    "holdoutContinuousActorMotionThroughContactRequired": true,
+    "allDynamicPostReleasePoseKeyframesExact": 0,
+    "allOutcomeFrameFieldsInInputExact": 0,
+    "saveReopenMaximumLocationDeltaMeters": 0.000001,
+    "saveReopenMaximumRotationDeltaDegrees": 0.001,
+    "negativeCasesMinimum": 16,
+    "reviewStillsPerFixture": 3,
+    "reviewClipFramesPerFixture": 48
+  },
+  "negativeControls": [
+    "unknown top-level or nested field",
+    "unknown factory",
+    "duplicate node id",
+    "relation references missing node",
+    "cycle in derived beat dependencies",
+    "finalPosition finalRotation finalPose targetPose or targetFrame field anywhere",
+    "authored contact or response frame",
+    "active body without mass",
+    "passive body with release velocity",
+    "constraint on a non-rigid node",
+    "hinge with reversed or excessive limits",
+    "light animation",
+    "postprocess blur",
+    "project or fixture identity in product branching",
+    "path outside repository root",
+    "inspection token mismatch"
+  ],
+  "directVisualQuestions": [
+    "Does each moving object visibly obey gravity, inertia, collision and support rather than jumping or gliding into a pose?",
+    "Is the primary contact continuous and spatially believable without a visible gap or deep interpenetration?",
+    "Does the effect begin only after the measured cause/contact and remain mechanically legible?",
+    "Do rotations, rebounds, toppling and settling retain small physical imperfections instead of synchronized choreography?",
+    "Do cause/contact/effect cameras reveal rather than conceal the decisive physics?",
+    "Does measured native motion blur communicate speed without hiding contact quality?",
+    "Does the signal-gate light change come only from solved occluder geometry while the source remains static?",
+    "Do at least two bottles in the holdout respond through actual contact while untouched objects are free to remain standing?",
+    "Do detailed sphere, bottle, gate and environment assets remain recognizable at the action distance?",
+    "Does each final state look supported and earned by the simulated path rather than arranged for the camera?"
+  ],
+  "visualVerdictRule": "PASS only if all ten questions are YES after direct inspection of both three-still sequences and both complete 48-frame clips.",
+  "developmentRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC3-development-attempt-01",
+    "evidence": "experiments/physics-native-action/RC3-2026-09-01-development-attempt-01",
+    "freshBeforeFirstWrite": true,
+    "acceptedBinaryDevelopmentOnly": true
+  },
+  "formalRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC3-2026-09-01-attempt-01",
+    "evidence": "experiments/physics-native-action/RC3-2026-09-01-attempt-01",
+    "freshBeforeFirstWrite": true,
+    "immutableAfterFirstWrite": true
+  },
+  "resourceCeilings": {
+    "minimumFreeReserveGiB": 100,
+    "projectedWritesGiB": 8,
+    "minimumFreeBeforeNativeBuildGiB": 160,
+    "developmentProductStarts": 6,
+    "formalCleanNativeBuilds": 1,
+    "formalProductStarts": 6,
+    "sceneMutatingExecutionsPerPhase": 2,
+    "blendSavesPerPhase": 2,
+    "reopensPerPhase": 2,
+    "reviewStillRendersPerPhase": 6,
+    "reviewClipFrameRendersPerPhase": 96,
+    "workspaceBytes": 64424509440,
+    "evidenceBytes": 1073741824
+  },
+  "forbiddenCounts": {"networkCallsDuringExecution": 0, "engineRemoteWritesDuringValidation": 0, "forcePushes": 0, "tags": 0, "releases": 0, "binaryDistribution": 0, "lfsUploads": 0, "signing": 0, "notarization": 0},
+  "stopRule": "Retain and stop on any project/fixture branch, any authored post-release or outcome pose/frame, any fake light or postprocess motion effect, any non-Bullet active response, missing contact continuity, fewer than two holdout bottle responses, regression, save/reopen mismatch, direct visual NO, or resource overrun. A failed mechanism may be corrected only through a versioned spec/tool/source change in a fresh attempt, never by moving the final pose after observing it.",
+  "claimCeiling": "A PASS would establish one restricted reusable action-graph compiler across two distinct rigid-body mechanisms on this M2 Max. It would not establish arbitrary assets or constraints, deformables, fluids, nuanced character acting, photorealism, sound, cross-platform behavior, production readiness or broad autonomous filmmaking.",
+  "specHash": "85e6aae4bc4604d9823c896e98a2e01ebee879fe050ec32a8cf870dcb3200ce2"
+}
