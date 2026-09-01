@@ -6,8 +6,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const specUri = 'specs/ai-native-studio-causal-studio-preregistration.v0.1.json';
-const contextUri = 'specs/ai-native-studio-causal-studio-execution-context-c1.v0.2.json';
-const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze-c1.v0.2.json';
+const contextUri = 'specs/ai-native-studio-causal-studio-execution-context-c2.v0.3.json';
+const freezeUri = 'specs/ai-native-studio-causal-studio-tool-freeze-c2.v0.3.json';
 function canonical(value) { if (value === null || typeof value !== 'object') return JSON.stringify(value); if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`; return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonical(value[key])}`).join(',')}}`; }
 function shaBytes(value) { return createHash('sha256').update(value).digest('hex'); }
 function shaFile(path) { return shaBytes(readFileSync(path)); }

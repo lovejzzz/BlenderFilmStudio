@@ -297,7 +297,7 @@ def setup_scene():
     scene.name = "PC5_CAUSAL_STUDIO"
     scene.frame_start = 1
     scene.frame_end = 120
-    scene.render.engine = "BLENDER_EEVEE_NEXT"
+    scene.render.engine = "BLENDER_EEVEE"
     scene.render.resolution_x = 960
     scene.render.resolution_y = 540
     scene.render.resolution_percentage = 100
