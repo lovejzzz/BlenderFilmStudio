@@ -6838,3 +6838,15 @@ v0.1 immutable and changes only the actor, ramp and gate initial locations to
 the accepted RC2 metric derivation. H1 and every grammar, authority, threshold,
 resource and claim field remain unchanged. No observed solve was repaired by
 moving an outcome.
+
+## J-590 · RC3 accepted-binary development tools frozen
+
+Date: 2026-09-01 · Type: DEVELOPMENT TOOL FREEZE · Blender starts / scene mutations / renders: 0 / 0 / 0
+
+The new generic product module is 857 lines and the existing workspace route
+changes by 24 additions / 5 deletions, within the two-path preregistered scope.
+Static Python compilation passes and the product source contains none of the
+D1/H1 project IDs, titles or fixture hashes. Two versioned tools bind exact
+module/operator bytes, accepted RC2 binary, C1 fixture, unchanged H1, fresh
+roots and five zero-render starts: D1 build/reopen, H1 build/reopen and sixteen
+negative controls.
