@@ -704,6 +704,12 @@ exact. C5 `e8b37483…` freezes dual exact checks: canonical decimal values in
 the result/custom property and independently computed IEEE-754 float32 values
 in Blender's solver field, with no tolerance. Development run-08 passes all ten
 reopen checks plus exact PC8 compatibility.
+C6 `6cba0cc3…` records the actual C1 file SHA after a C2 parent-binding typo
+was found; no historical file was edited. Formal tools are now frozen before
+root mutation at freeze hash `e9cd86dd…` and file SHA `e4caf317…`, binding the
+complete v0.1–v0.8 contract chain, corrected v0.6 fixture, product commit
+`b8f65c8a…`, four formal tools and exact module SHA `b45c86d3…`. The single
+clean native formal attempt is the next action.
 
 No Developer ID, notarization or unsigned-DMG distribution is implied by PB.6.
 Any change to the frozen charter requires a new version, not an in-place edit.

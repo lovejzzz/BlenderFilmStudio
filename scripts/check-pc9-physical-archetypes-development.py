@@ -21,7 +21,7 @@ PC8_BUILD = "experiments/measured-shutter/PC8-2026-09-01-attempt-01/build.json"
 
 def arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--action", choices=("negative", "compat", "reopen"), required=True)
+    parser.add_argument("--action", choices=("negative", "compat", "validate", "reopen"), required=True)
     parser.add_argument("--module-root", type=Path, required=True)
     parser.add_argument("--repository-root", type=Path, required=True)
     parser.add_argument("--scene-spec-uri", required=True)
@@ -180,6 +180,9 @@ causal = load_module(args.module_root)
 if args.action == "negative":
     negative(causal, repository, args.scene_spec_uri, evidence_root)
 elif args.action == "compat":
+    compat(causal, repository, evidence_root)
+elif args.action == "validate":
+    negative(causal, repository, args.scene_spec_uri, evidence_root)
     compat(causal, repository, evidence_root)
 else:
     reopen(causal, repository, args.scene_spec_uri, evidence_root)
