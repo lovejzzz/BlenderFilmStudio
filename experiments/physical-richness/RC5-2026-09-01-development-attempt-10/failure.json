@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "REGRESSION_FACTORY_WORLD_ISOLATION",
+  "researchCommit": "df13a259f8de573affa56737f393136b140259f3",
+  "candidateModuleSha256": "2dccda423f4eb783c69e36616d84104985c3e05ca4e0cd209e4e70ce1b77e6d6",
+  "runnerSha256": "35ccddee201c70687607a53ee3153d81617613049abeb1b2adb3e42c3eac0a64",
+  "fixtureSpecHash": "5c907afe455c5f2e2ad8b949626eb2891d5a3da4d0a63521a2fba05dadf6fc2e",
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-10",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-10",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "acceptedWithinFailedAttempt": {
+    "buildFileSha256": "4b7e898c8322e7ac512abb7f459a40f01fedd8bf7800f556e3a8cd957f267153",
+    "buildChecks": "17/17 PASS",
+    "reopenFileSha256": "4f167191ac248213bb0e5d56048c88363258a51c6f9086af03c80f64165946ff",
+    "reopenChecks": "7/7 PASS"
+  },
+  "error": {
+    "type": "AttributeError",
+    "fixture": "RC4",
+    "message": "'NoneType' object has no attribute 'color'",
+    "location": "_setup_scene scene.world.color"
+  },
+  "rootCause": "The C12 factory reset used use_empty=True, which correctly cleared cross-fixture state but also created a scene with no World. Product setup requires the standard factory World before its own object-level clearing.",
+  "correctionBoundary": "Change only use_empty=True to use_empty=False in the runner. Product clearing must still remove factory objects, and every regression remains isolated in one process.",
+  "counts": {
+    "productStarts": 3,
+    "rc5SceneBuilds": 1,
+    "blendSaves": 1,
+    "reopens": 1,
+    "regressionFixtureAttempts": 1,
+    "regressionPhysicsExecutions": 0,
+    "negativeControls": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "a68c14192fa932bd60eb57cf8b5909c48e6b40cd537e62f15949f0d06c515572"
+}
