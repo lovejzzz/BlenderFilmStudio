@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "bfs.rc6LiquidStaticCalibrationPreflightFailure.v0.1",
+  "status": "FAIL",
+  "stage": "SPEC_SELF_HASH_PREFLIGHT",
+  "errorType": "RuntimeError",
+  "message": "static calibration spec self-hash mismatch",
+  "declaredSpecHash": "5a47b1dd36d5ee8e7eb19945be15fbcefdc2355fe208ac722285bf808fcd8762",
+  "pythonCanonicalSpecHash": "006b7bbacb13fa8c9d913d9cf6f89a5016caf931be0d8d898c4aaf511254dde5",
+  "rootObservationBeforeRetainedRecord": {
+    "workRoot": "ABSENT",
+    "runnerCreatedEvidenceRoot": "ABSENT"
+  },
+  "counts": {
+    "blenderStarts": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "rootCause": "The v0.14 spec self-hash was calculated with JavaScript JSON number serialization, which serializes 1.0 as 1. Python json.dumps preserves 1.0, so the frozen Python runner correctly rejected the mismatch before creating roots.",
+  "failureHash": "08d5b6a492edb5832faeef82ae982c14c0313d6df9703244e2728bfdfbdc3243"
+}

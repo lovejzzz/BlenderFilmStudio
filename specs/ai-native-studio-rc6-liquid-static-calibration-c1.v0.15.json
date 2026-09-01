@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "bfs.rc6LiquidStaticCalibrationSpecC1.v0.15",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-STATIC-CALIBRATION-2026-09-01-ATTEMPT-15",
+  "correction": "Relative to v0.14, derive and bind the spec self-hash with the Python canonical serializer used by the frozen runner, bind the retained attempt-14 preflight failure, and route unchanged physical cells to fresh attempt-15 roots.",
+  "retainedPreflightFailure": {
+    "evidenceRoot": "experiments/physical-richness/RC6-2026-09-01-static-calibration-attempt-14",
+    "failureHash": "08d5b6a492edb5832faeef82ae982c14c0313d6df9703244e2728bfdfbdc3243",
+    "failureAuditHash": "91322613651b493d7c88ea813bf7ccdeb76ad288a43ef2b8d6ba44a402398b4d",
+    "failureAuditFileSha256": "80fc52daeb18cd0f6159acc31fe3c7ff2a099b9b26fab5a346fc97244755d1da"
+  },
+  "retainedFluidFailure": {
+    "evidenceRoot": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-13",
+    "failureHash": "795d159dea48c15f04bf0d7536fd243ff93ab494c906234663d8bca6fddeeefc",
+    "failureAuditHash": "d7db73b2166b503aea3ebb7e1bc234b4ca6f72889f2ceceba66cb74bf88c367e",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644"
+  },
+  "matrix": {
+    "fixed": {
+      "frameStart": 1,
+      "frameEnd": 7,
+      "preContactOnly": true,
+      "resolutionMax": 96,
+      "particleNumber": 2,
+      "meshScale": 2,
+      "meshParticleRadius": 2.0,
+      "simulationMethod": "APIC",
+      "timestepsMin": 1,
+      "timestepsMax": 4,
+      "cflCondition": 2.0,
+      "waterViscosityBase": 1.0,
+      "waterViscosityExponent": 6,
+      "renderCalls": 0
+    },
+    "cells": [
+      {"cellId": "radius-1p0", "particleRadius": 1.0},
+      {"cellId": "radius-1p1", "particleRadius": 1.1},
+      {"cellId": "radius-1p2", "particleRadius": 1.2},
+      {"cellId": "radius-1p3", "particleRadius": 1.3}
+    ],
+    "selectionRule": "closed mesh, then minimum absolute volume drift, then minimum component count, then maximum largest-component fraction, then lower particle radius"
+  },
+  "resourceCeilings": {
+    "blenderStarts": 4,
+    "fluidDataBakes": 4,
+    "fluidMeshBakes": 4,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop immediately on any process error, traceback, missing self-hashed result, non-closed initial mesh, resource breach, render call, network call or engine remote write. Do not proceed to slow-tip or impact calibration in this attempt.",
+  "claimCeiling": "Relative pre-contact static-container calibration at resolution 96 through frame 7. It selects a particle-radius candidate only; it does not prove slow-tip, impact, full-resolution or visual fluid quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-static-calibration-matrix-c1.py": "72fc94dd9ca11b732cc592f006e3ddbc2e0c1253ec6e3fe8d9e25301864729a7",
+    "scripts/run-rc6-liquid-static-calibration-scene.py": "4ee27ef3e381bbc6275d18044f97194a825b3d935f0b2bc604f09232d26ced48"
+  },
+  "specHash": "bfa87363137fec9f9d3fc01562e88693dd86947124ccc4d967d2ae1c3eb3130d"
+}

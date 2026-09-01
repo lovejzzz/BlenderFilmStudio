@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "bfs.rc6LiquidStaticCalibrationPreflightFailureAudit.v0.1",
+  "status": "PASS",
+  "failureHash": "08d5b6a492edb5832faeef82ae982c14c0313d6df9703244e2728bfdfbdc3243",
+  "failureFileSha256": "6ed3d3928475b8928cc21ea4420dad958775951f719baaec734d719bb37d64f2",
+  "checks": {
+    "failureBeforeRootCreation": true,
+    "workRootAbsent": true,
+    "runnerEvidenceRootAbsentBeforeRetainedRecord": true,
+    "zeroBlenderStarts": true,
+    "zeroFluidBakes": true,
+    "zeroRenders": true,
+    "zeroNetworkCalls": true,
+    "zeroEngineRemoteWrites": true,
+    "canonicalizationDefectExact": true
+  },
+  "rootCause": "v0.14 used a JavaScript-derived spec hash while the runner validates Python canonical JSON. The numeric fields containing 1.0 produce different byte strings under the two serializers.",
+  "correctionBoundary": "Create v0.15 and fresh attempt-15 roots. Change only the spec-hash derivation/binding and route the unchanged matrix through a versioned wrapper that binds this retained failure. Do not change any physical parameter, matrix cell, selection rule, resource ceiling or stop rule.",
+  "auditHash": "91322613651b493d7c88ea813bf7ccdeb76ad288a43ef2b8d6ba44a402398b4d"
+}
