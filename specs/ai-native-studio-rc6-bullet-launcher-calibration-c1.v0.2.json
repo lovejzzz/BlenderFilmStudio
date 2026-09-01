@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6BulletLauncherCalibrationC1.v0.2",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_02_ROOT_CREATION",
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-bullet-launcher-calibration.v0.1.json",
+    "specHash": "8872d32e6a7b22ef800db846008fbddc80a6a7a9a207d0959c96c385b5c6116d"
+  },
+  "retainedAttempt01": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-bullet-launcher-calibration-attempt-01",
+    "selfReportedResultHash": "98444c2e2fa7eb57a6a2a329f5002e429d163479eaed45bdd8826b1455d6f14e",
+    "independentAuditHash": "06faee3e570c65c70830483032a9d6b2b7a3b81082c71be95d750c88fabfbe91",
+    "independentAuditFileSha256": "727590e1dfc5ade5a240b9a566db22447fe08e484ffb07bd67e2b735ef8dc82c",
+    "accepted": false
+  },
+  "corrections": [
+    "Move the raised lane end from x=0.15 overlap territory to x=0.02, leaving 0.13 m before the tumbler's left bound.",
+    "Define contact only by ball-to-cup geometric gap <= 0.01 m; tilt alone cannot declare contact.",
+    "Require maximum cup z <= 0.45 m and maximum absolute y <= 0.25 m in addition to the frozen on-set x and minimum z gates."
+  ],
+  "unchanged": ["six variant roster", "striker paths", "masses", "frictions", "45 degree impact-window threshold", "one Blender start", "six Bullet bakes", "zero renders and saves", "offline constraints"],
+  "tool": {
+    "uri": "scripts/run-rc6-bullet-launcher-calibration-c1.py",
+    "sha256": "c06ea50b256d34a277d4e794491018323b35f007b70884d59d3488d0fe96235b"
+  },
+  "freshEvidenceRoot": "experiments/physical-richness/RC6-2026-09-01-bullet-launcher-calibration-attempt-02",
+  "stopRule": "Run once in the exact fresh root. Retain failure if no exact variant passes all eight gates.",
+  "specHash": "50521885439331942930513ead35f3f9746ebe3b477e64b711521fb303faa53b"
+}
