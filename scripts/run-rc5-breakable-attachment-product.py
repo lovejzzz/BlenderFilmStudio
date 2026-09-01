@@ -59,10 +59,11 @@ def build():
     attachment = physics["breakableAttachment"]
     contact = physics["contactFrame"]
     checks = {
-        "v02Contract": inspection["contractVersion"] == "bfs.filmStudioPhysicsAction.v0.2" and result["schemaVersion"] == "bfs.physicsActionResult.v0.2",
+        "v04Contract": inspection["contractVersion"] == "bfs.filmStudioPhysicsAction.v0.3" and result["schemaVersion"] == "bfs.physicsActionResult.v0.3",
         "activeBodies": result["mechanism"]["activeRigidBodyCount"] == 5,
         "breakableConstraint": result["mechanism"]["rigidBodyConstraintCount"] == result["mechanism"]["breakableFixedConstraintCount"] == 1,
         "constraintConfiguration": attachment["constraintType"] == "FIXED" and attachment["breakingEnabled"] is True and attachment["breakingImpulseThreshold"] == 0.02 and attachment["solverIterations"] == 80 and attachment["attachedBodyCollisionsDisabled"] is True,
+        "derivedAttachmentTarget": attachment["attachmentTargetDerivation"]["policy"] == "MINIMUM_DISTANCE_TO_INITIATOR_RELEASE_RAY" and attachment["attachmentTargetDerivation"]["source"] == "METRIC_INITIAL_CONDITIONS_BEFORE_SCENE_MUTATION" and attachment["attachmentTargetDerivation"]["physicalVariationBasisSpecHash"] == "bac28a88028ffaed0b09685059e63c1f4cf23c2ad1b2a79901f54e699d4b1e34" and attachment["attachmentTarget"] == f"CAUSAL_TARGET_{attachment['attachmentTargetDerivation']['selectedMemberIndex'] + 1:03d}",
         "solverAuthority": result["authority"]["postReleaseTransformKeyframes"] == result["authority"]["authoredOutcomeFields"] == result["authority"]["authoredContactResponsePeakOrFinalFrames"] == result["authority"]["authoredBreakFrames"] == result["authority"]["authoredDetachedPoses"] == result["authority"]["authoredDetachmentVelocities"] == 0,
         "staticLights": result["authority"]["lightAnimationChannels"] == 0,
         "bottleResponse": physics["respondingTargetCount"] >= 2,
@@ -183,9 +184,9 @@ def regress_negative():
     reject("unsupported-relation", lambda value: value["relations"][4].update({"type": "EXPLODES_AT"}), "UNSUPPORTED_RELATION")
     reject("collisions-enabled", lambda value: value["relations"][4].update({"disableCollisions": False}), "SPEC_SCHEMA")
     reject("zero-break-threshold", lambda value: value["relations"][4].update({"breakingImpulseThreshold": 0}), "SPEC_SCHEMA")
-    reject("target-index-outside-array", lambda value: value["nodes"][2]["parameters"].update({"targetMemberIndex": 7}), "SPEC_SCHEMA")
+    reject("unsupported-target-policy", lambda value: value["nodes"][2]["parameters"].update({"targetMemberPolicy": "OBSERVED_MEMBER_INDEX"}), "SPEC_SCHEMA")
     reject("unsupported-cap-material", lambda value: value["nodes"][2]["parameters"].update({"materialPreset": "MAGIC_CAP"}), "SPEC_SCHEMA")
-    reject("v01-schema-with-breakable-cap", lambda value: value.update({"$schema": "bfs.physicsActionSpec.v0.1", "schemaVersion": "bfs.physicsActionSpec.v0.1"}), "UNSUPPORTED_FACTORY")
+    reject("v01-schema-with-breakable-cap", lambda value: (value.pop("physicalVariationBasisSpecHash"), value.update({"$schema": "bfs.physicsActionSpec.v0.1", "schemaVersion": "bfs.physicsActionSpec.v0.1"})), "UNSUPPORTED_FACTORY")
 
     checks = {
         "threeRegressionExecutions": len(regressions) == 3,
