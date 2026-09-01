@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioCausalStudioPreregistration.v0.1",
+  "experimentId": "PC5-CAUSAL-STUDIO",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT01_SCENE_MUTATION",
+  "purpose": "Teach and test a general causal film loop on a controlled procedural rigid-body scene before returning to the robot capstone.",
+  "researchDocument": {
+    "uri": "research/2026-08-31-ai-native-studio-causal-studio-preregistration-v0.1.zh-CN.md",
+    "sha256": "1b8e3748a84490694c065a13061b0b0b7adb3c77111e32c0a0b37e47ba40ab03"
+  },
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "status": "ACTIVE_STANDING_AUTHORITY"
+  },
+  "engine": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.6-2026-08-31-mac-m2max-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "sha256": "8a380289625a2941b2a57b4905a079ffc838aed59c27f7d3ed6f49f3e7e824e6",
+    "architecture": "arm64"
+  },
+  "lesson": {
+    "sceneFamily": "procedural ball impacts three procedural bottles in a minimal studio",
+    "copyrightedOrBrandedExternalAssets": 0,
+    "capstoneHoldout": "PC4 robot",
+    "forbiddenSpecialCases": ["PC4 object names", "robot coordinates", "robot geometry", "project-id branches"],
+    "semanticRoles": ["dynamic_actor", "target_group", "ground", "studio_environment", "camera", "key_light", "fill_light", "rim_light"]
+  },
+  "scene": {
+    "frameRate": 24,
+    "frameStart": 1,
+    "frameEnd": 120,
+    "physicsEngine": "BLENDER_BULLET_RIGID_BODY",
+    "assets": {
+      "dynamicActor": {"count": 1, "kind": "procedural grooved orange sports ball", "manualFinalPoseKeyframes": 0},
+      "targets": {"count": 3, "kind": "procedural lathed bottle", "requiredReadableBands": ["base", "body", "shoulder", "neck", "cap", "label"]},
+      "externalModels": 0,
+      "externalTextures": 0
+    },
+    "requiredLights": ["key", "fill", "rim"],
+    "requiredShots": ["SETUP", "IMPACT", "AFTERMATH"]
+  },
+  "causalAcceptance": {
+    "initialPenetrationMaximumMeters": 0.001,
+    "ballForwardTravelBeforeFirstTargetContactMinimumMeters": 2.0,
+    "firstTargetContactFrameWindowInclusive": [20, 72],
+    "targetTiltDegreesAtFinalMinimumEach": 60.0,
+    "finiteTransformRequiredForAllDynamicObjects": true,
+    "targetCountExact": 3,
+    "contactOrderReproducibleOnReopen": true,
+    "finalPoseMayNotBeAuthoredByKeyframe": true
+  },
+  "review": {
+    "width": 960,
+    "height": 540,
+    "format": "PNG",
+    "frames": [
+      {"shotId": "SETUP", "selection": "last frame before first target contact"},
+      {"shotId": "IMPACT", "selection": "first target contact frame"},
+      {"shotId": "AFTERMATH", "selection": "frame 120"}
+    ],
+    "directQuestions": [
+      "Do ball seams and bottle base/body/shoulder/neck/cap/label make the models read beyond placeholder primitives?",
+      "Does IMPACT make the causal action legible at first glance?",
+      "Are all three bottles separately readable in SETUP and AFTERMATH?",
+      "Do changing contact shadows give the moving objects weight?",
+      "Are exposure, contrast and color controlled enough to preserve material response?",
+      "Do the three shots distinctly communicate setup, impact and result?"
+    ],
+    "machinePassCannotSubstituteForDirectVisualPass": true
+  },
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC5-CAUSAL-STUDIO-2026-08-31-attempt-01",
+    "evidence": "experiments/causal-studio/PC5-CAUSAL-STUDIO-2026-08-31-attempt-01",
+    "freshRequired": true,
+    "immutableAfterFirstWrite": true
+  },
+  "resourceCeilings": {
+    "minimumFreeDiskGiBBeforeStart": 100,
+    "workRootBytes": 536870912,
+    "evidenceRootBytes": 67108864,
+    "blenderStarts": 3,
+    "singleFrameRenderCalls": 6,
+    "retainedReviewPngs": 3
+  },
+  "forbidden": {
+    "networkCalls": 0,
+    "engineSourceMutations": 0,
+    "engineRemoteWrites": 0,
+    "externalAssetDownloads": 0,
+    "paidServices": 0,
+    "releases": 0,
+    "signing": 0,
+    "notarization": 0,
+    "dmgCreationOrDistribution": 0
+  },
+  "verdictRule": {
+    "machine": "PASS only if every causal, provenance, resource and safety check passes",
+    "visual": "PASS only after direct inspection answers all six frozen questions YES",
+    "overall": "PASS only when both machine and visual verdicts PASS; otherwise retain the exact failure"
+  },
+  "specHash": "dd90142126584d23207009c1c352bd52bf76fe9b0af25afaf8b7c1919a7bfec5"
+}
