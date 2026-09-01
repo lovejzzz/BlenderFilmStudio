@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceF7HostPrecheckFailure.v0.1",
+  "status": "FAIL",
+  "stage": "HOST_PRECHECK_BEFORE_ROOT_CREATION",
+  "contractSpecHash": "05ca242e2db82ceb02d60818c8ca3c4735de77eaeff0aea78b1ac064b27b0bc3",
+  "hostTool": {
+    "uri": "scripts/run-rc6-fluid-consequence-feasibility-f7.py",
+    "sha256": "97359990db2cb68aabdece6de1ece6008431ae700fd213118930b0b7610d2833"
+  },
+  "command": "/usr/bin/caffeinate -dimsu python3 scripts/run-rc6-fluid-consequence-feasibility-f7.py",
+  "error": "RuntimeError: RC6 F7 host routing target count mismatch",
+  "observed": {
+    "workRootCreatedByRunner": false,
+    "evidenceRootCreatedByRunner": false,
+    "blenderStarts": 0,
+    "bulletBakes": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "networkCalls": 0
+  },
+  "rootCause": "The adapter performed overlapping source replacements sequentially. Rebinding the retained attempt-09 audit path to attempt-10 introduced a second occurrence of the later attempt-10 fresh-root target, so the fail-closed count check rejected the tool.",
+  "correctionBoundary": "A versioned host-only correction may validate all replacement counts against the unmodified source before applying any replacements. It must use attempt-12 fresh roots and make zero physical, visual, threshold, resource or scene-tool changes.",
+  "failureHash": "a5442b2280755a5e6bbddbe00a1e733eda0250c0def0f0bd9f513499b6a2a64e"
+}
