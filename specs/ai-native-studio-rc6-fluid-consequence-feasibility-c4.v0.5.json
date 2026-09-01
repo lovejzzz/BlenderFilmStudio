@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6FluidConsequenceFeasibilityC4.v0.5",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_05_ROOT_CREATION",
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-fluid-consequence-feasibility-c3.v0.4.json",
+    "specHash": "91ee02755d877c069411e4eae1e2753d46d7b03e819e4bb8a18c02da9a65fe46"
+  },
+  "retainedAttempt04": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-04",
+    "failureHash": "41b27762b2ce5eefacf607d4e1c5940ec52bf3755ebffdef6e867cf39120801c",
+    "failureAuditHash": "ac0cade0f0d578315e67dfe75bdbcbabadf43930524f59f2f6731ba1344fde27",
+    "failureAuditFileSha256": "50c0d1bdcaa501971fc23c266339c9125d519299a54d487860bfa1467e96768b",
+    "result": "FAIL_BEFORE_ANY_SOLVER_BAKE"
+  },
+  "correction": {
+    "id": "C4_LIQUID_MESH_CACHE_ENCODING",
+    "scope": "Change only cache_mesh_format from OPENVDB to the accepted binary's runtime-valid liquid surface mesh format BOBJECT. Keep cache_data_format OPENVDB.",
+    "physicalOrVisualThresholdChange": false,
+    "solverSettingsChanged": false,
+    "outcomeAuthorityChanged": false
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-fluid-consequence-scene-c4.py", "sha256": "0fe42b982bc03093fee668431a6190075392d424705e66b0e0f34210f1ee8ed0"},
+    {"uri": "scripts/run-rc6-fluid-consequence-feasibility-c4.py", "sha256": "8303a90ac33076b78b40c73b3a1b0f99434b5ca369b920ccb837166b381e5665"}
+  ],
+  "freshRoots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-feasibility-attempt-05",
+    "evidence": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-05"
+  },
+  "inheritedWithoutChange": [
+    "accepted RC5 binary identity",
+    "launch values and release frame",
+    "all Bullet and Mantaflow solver parameters",
+    "all semantic and visual thresholds",
+    "48-frame render roster",
+    "resource ceilings and claim ceiling",
+    "offline and no-engine-write constraints"
+  ],
+  "stopRule": "Run once in the exact fresh roots. Retain any failure without repair or retry in place.",
+  "specHash": "e0560209f43ec42e50310618e792822699c021073120516599b2e783a19f1848"
+}

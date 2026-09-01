@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "bfs.rc6FluidConsequenceFeasibilityC3FailureAudit.v0.1",
+  "status": "PASS",
+  "retainedRoot": "experiments/physical-richness/RC6-2026-09-01-feasibility-attempt-04",
+  "failureHash": "41b27762b2ce5eefacf607d4e1c5940ec52bf3755ebffdef6e867cf39120801c",
+  "observed": {
+    "blenderStarts": 1,
+    "processExitCode": 0,
+    "pythonTracebackDetected": true,
+    "failedAssignment": "settings.cache_mesh_format = 'OPENVDB'",
+    "error": "TypeError: enum OPENVDB not found in runtime-valid liquid mesh formats ('BOBJECT', 'OBJECT')",
+    "ephemeralCapabilityQuery": {
+      "cacheDataFormat": "OPENVDB",
+      "cacheMeshFormat": "BOBJECT",
+      "allOtherFrozenFluidSettersAccepted": true,
+      "saves": 0,
+      "bakes": 0
+    },
+    "buildReceiptWritten": false,
+    "blendWritten": false,
+    "bulletBakeStarted": false,
+    "fluidBakeStarted": false,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "checks": {
+    "rootIsRetained": true,
+    "failureSelfHashValid": true,
+    "processReceiptPresent": true,
+    "stdoutAndStderrBound": true,
+    "stageEnforcementCaughtExitZeroTraceback": true,
+    "runtimeInstanceFormatObserved": true,
+    "allOtherFluidSettersAccepted": true,
+    "failurePrecededAnyBakeOrRender": true,
+    "noNetworkOrEngineWrite": true,
+    "correctionMustUseFreshRoot": true
+  },
+  "passCount": 10,
+  "checkCount": 10,
+  "conclusion": "Attempt-04 reached fluid-domain configuration and failed on the runtime liquid mesh cache encoding. C4 may change only cache_mesh_format from OPENVDB to BOBJECT; data stays OPENVDB and every solver or acceptance parameter stays frozen.",
+  "auditHash": "ac0cade0f0d578315e67dfe75bdbcbabadf43930524f59f2f6731ba1344fde27"
+}
