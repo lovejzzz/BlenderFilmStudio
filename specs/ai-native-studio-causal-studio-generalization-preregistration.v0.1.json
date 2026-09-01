@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "bfs.aiNativeStudioCausalStudioGeneralizationPreregistration.v0.1",
+  "experimentId": "PC5-G1",
+  "status": "PREREGISTERED_BEFORE_GENERIC_EXECUTOR_OR_ATTEMPT01_MUTATION",
+  "purpose": "Test whether the accepted causal physics and evaluated-frame composition loop transfers to an unseen target shape and cardinality through a declarative CausalSceneSpec.",
+  "researchDocument": {
+    "uri": "research/2026-09-01-ai-native-studio-causal-studio-generalization-preregistration.md",
+    "sha256": "576b66dd262635eae56609841a5891fdddb0c02b44b73648f010ffe248e8440b"
+  },
+  "acceptedLesson": {
+    "evidenceRoot": "experiments/causal-studio/PC5-CAUSAL-STUDIO-2026-08-31-attempt-05",
+    "machineAuditFileSha256": "ca0e63c4930437e0315d4d984b026dec25948452523b5b06cd367dcae3928ff1",
+    "machineAuditHash": "33a9567c6dd64e361b02e13e749f9cc1889cabe4b220307a14a13c07ccb08970",
+    "directReviewFileSha256": "aaa6dd9c88b9b23b257abca1847de873dd0c6b9cbe8bd755adc2bef595881b9e",
+    "directReviewHash": "542874f0c5a98a3ceeec8033afc01f5e9aa8f777d2bf21f42f1cc2a74f8240fa",
+    "machineVerdict": "PASS_21_OF_21",
+    "visualVerdict": "PASS_6_OF_6",
+    "immutable": true
+  },
+  "holdoutSceneSpec": {
+    "uri": "specs/fixtures/causal-studio/PC5_G1.domino-four.scene-spec.v0.1.json",
+    "sha256": "ed910734c4003e4cf138c62b2ccedc95cc51ca74f068bce960df7d4ed3c339ae",
+    "sceneSpecHash": "727f04b669abbe77f29c05902ab20364898d4e921d83e788b89bab877817ae1a",
+    "frozenBeforeGenericExecutor": true
+  },
+  "generalizationDelta": {
+    "acceptedTargetFactory": "LATHED_BOTTLE",
+    "holdoutTargetFactory": "BEVELED_DOMINO_BLOCK",
+    "acceptedTargetCount": 3,
+    "holdoutTargetCount": 4,
+    "acceptedTargetCollisionShape": "CONVEX_HULL",
+    "holdoutTargetCollisionShape": "BOX",
+    "acceptedFinalCoordinatesMayBeConsumed": false,
+    "sharedSemanticRoles": ["dynamic_actor", "target_group", "ground", "studio_environment", "camera", "key_light", "fill_light", "rim_light"]
+  },
+  "genericExecutorContract": {
+    "input": "CausalSceneSpec only",
+    "allowedFactories": ["GROOVED_SPHERE", "BEVELED_DOMINO_BLOCK", "SIMPLE_WALL", "AREA_LIGHT", "CAMERA_FROM_DIRECTION_CLASS"],
+    "specOriginatedExecutableAuthority": 0,
+    "readsTargetCountFromSpec": true,
+    "readsPhysicsParametersFromSpec": true,
+    "readsAcceptanceFromSpec": true,
+    "readsShotIntentFromSpec": true,
+    "evaluatedFrameSemanticBoundsRequired": true,
+    "attemptSpecificFinalCoordinatesForbidden": true
+  },
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/PC5-G1-2026-09-01-attempt-01",
+    "evidence": "experiments/causal-studio-generalization/PC5-G1-2026-09-01-attempt-01",
+    "freshRequired": true,
+    "immutableAfterFirstWrite": true
+  },
+  "resourceCeilings": {
+    "minimumFreeDiskGiB": 100,
+    "workRootBytes": 536870912,
+    "evidenceRootBytes": 67108864,
+    "blenderStarts": 3,
+    "singleFrameRenderCalls": 6,
+    "retainedReviewPngs": 3
+  },
+  "forbidden": {
+    "networkCalls": 0,
+    "externalModelsOrTextures": 0,
+    "targetPoseKeyframes": 0,
+    "postReleaseActorPoseKeyframes": 0,
+    "engineSourceMutations": 0,
+    "engineRemoteWrites": 0,
+    "releases": 0,
+    "signingNotarizationOrDmg": 0
+  },
+  "verdictRule": {
+    "machine": "Every holdout SceneSpec acceptance, provenance, resource and safety gate passes",
+    "visual": "All six direct screenshot questions are YES",
+    "overall": "Both machine and visual PASS; otherwise retain exact failure and version the smallest correction",
+    "claimCeiling": "One unseen shape/count transfer only; not general autonomous filmmaking"
+  },
+  "specHash": "a5024f3f5e38435b289f141e1be4b8c76b5a96933aaedfb75bef09e88998c8c1"
+}

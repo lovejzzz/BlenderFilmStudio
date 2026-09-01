@@ -6711,3 +6711,9 @@ C4不读取final coordinates：每个review frame先求值physics，再从dynami
 Date: 2026-09-01 · Type: ACCEPTED MACHINE + DIRECT VISUAL PASS · Blender starts / renders / saves: 2 / 3 / 1
 
 Fresh attempt-05 independent machine audit 21/21 PASS；receipt/audit self `9b72e2df…` / `33a9567c…`。Setup/impact/aftermath occupancies 0.58/0.72/0.60，margins 0.205/0.126/0.171。Direct original-resolution screenshot review六问全YES，review self `542874f0…`：模型层级、碰撞因果、三瓶前后可读性、接触阴影重量、曝光材质与三镜头功能均通过。限制仍明确：这是controlled curriculum，不是广告级成片；下一步必须用unseen shape/count variation证明迁移，再回PC4 robot capstone。
+
+## J-576 · PC5-G1 unseen shape/count holdout frozen before generic executor
+
+Date: 2026-09-01 · Type: GENERALIZATION PREREGISTRATION · Formal starts / renders / mutations: 0 / 0 / 0
+
+在重构generic executor前，PC5-G1 holdout SceneSpec `727f04b…`已冻结：actor仍为grooved sphere，但target从3个lathed bottles换为4个beveled wooden domino blocks，collision从CONVEX_HULL换BOX，final tilt threshold为每块≥55°。Executor必须从spec读取factory/cardinality/physics/acceptance/shot intent，仅可调用allowlisted factories；spec无executable authority。Camera仍只能用evaluated semantic bounds，不得消费attempt-05 bottle final coordinates。Generalization prereg self `a5024f3f…`；fresh attempt-01 roots absent。
