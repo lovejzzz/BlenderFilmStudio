@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "bfs.rc5BreakableAttachmentFailure.v0.1",
+  "status": "FAIL",
+  "failedStage": "RC5_CANDIDATE_QUANTITATIVE_SETTLE_DIAGNOSTIC",
+  "researchCommit": "0b2913881cecc9e73aee76dbe9209a5e925218f3",
+  "candidateModuleSha256": "afe3330e98fe7df8781f77c38cbba4e5f3f609a1b7c29dc38aa4fd1e7d70e5a6",
+  "runnerSha256": "a3bb5dc547dbba8dbdf94c9be427d8171b81a9a1302c58374e0d6a1062bed1a5",
+  "fixtureSpecHash": "804c2758710756894295400a38f82a5d51cd7a59214f2a32cfda489bfe8dd0cb",
+  "roots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-development-attempt-05",
+    "evidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-05",
+    "retainedImmutableAfterThisReceipt": true
+  },
+  "error": {
+    "type": "PhysicsActionError",
+    "reason": "PHYSICS_SETTLE",
+    "message": "no derived ten-frame group settle window; best frames 207-216 angular 0.01104969 translation 0.00398412"
+  },
+  "diagnostic": {
+    "bestWindowFramesInclusive": [207, 216],
+    "maximumAggregateAngularStepDegrees": 0.01104969,
+    "maximumTargetTranslationStepMeters": 0.00398412,
+    "angularThresholdDegrees": 0.25,
+    "translationThresholdMeters": 0.0015,
+    "angularPredicatePassed": true,
+    "translationPredicatePassed": false,
+    "translationThresholdRatio": 2.65608,
+    "interpretation": "The primary bottle group is rotationally settled but still physically sliding at the frozen observation horizon. It must not be labeled settled at frame 216."
+  },
+  "correctionBoundary": "Extend only the zero-render simulation observation horizon in a new fixture version while preserving all metric initial conditions, physical parameters, variation basis and settle thresholds. No authored outcome frame is allowed.",
+  "counts": {
+    "productStarts": 1,
+    "physicsSimulations": 1,
+    "sceneMutations": 1,
+    "blendSaves": 0,
+    "reopens": 0,
+    "regressionSceneExecutions": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "failureHash": "d6569f30b69eb38116ef869aeddfdbcf2372a55e407e82f061caa7e0fc3133fb"
+}
