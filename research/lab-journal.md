@@ -7187,3 +7187,15 @@ and `particle_maximum`, whose bound defaults are 8/16. Because the defect grows
 during motion, attempt-67 will keep initial number 2 and change only the ongoing
 minimum 8→12, the single midpoint below the unchanged maximum 16. Mesh,
 particle radius 1.8, timesteps and every physical threshold remain exact.
+
+## J-617 · Higher per-cell minimum changes Data bytes but not the liquid Mesh
+
+Date: 2026-09-02 · Type: PHYSICAL GATE FAILURE · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+Attempt-67 changed only continuing particle minimum 8→12 and passed its 16/16
+independent audit. All 24 Data VDB files changed, but all 24 Mesh files,
+fluid-frame measurements, Bullet samples and non-time metrics were exact with
+attempt-65. Temporal loss remained 17.050045% and source error 22.099910%,
+while Data time rose 4.81% to 278.27 seconds. Internal particle-cache change is
+not sufficient evidence of a visible or physical improvement. Close particle-
+density tuning and inspect the fractional-obstacle separation path next.

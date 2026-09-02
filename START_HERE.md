@@ -1053,7 +1053,15 @@ per-step `adjustNumber` uses default minimum/maximum 8/16. Attempt-67 is now
 preregistered to change only the continuing minimum 8→12, keeping maximum 16
 and all attempt-65 physics exact. Its spec is
 `specs/ai-native-studio-rc6-moving-liquid-particle-minimum.v0.78.json`, self
-hash `1a803825…`; both roots remain absent. Do not render or begin real impact.
+hash `1a803825…`. Attempt-67 is now a retained physical `FAIL` with a 16/16
+independent audit. Raising the ongoing minimum 8→12 changed all 24 Data VDBs
+but left all 24 Mesh files and every non-time physical metric exact with
+attempt-65; temporal loss stayed 17.050045% while Data cost rose 4.81%.
+Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-minimum-attempt-67`;
+receipt/audit self hashes are `22e0ad0c…` / `6a35f1ac…`. Particle-density
+tuning is closed. Inspect fractional-obstacle separation next; do not render or
+begin real impact.
 
 ## Public routes
 
