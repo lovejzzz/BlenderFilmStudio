@@ -974,9 +974,19 @@ invalidates raw FLIP count as an exact mass proxy; it does not locate the defect
 in Data or Mesh. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-diagnostic-attempt-57`;
 receipt/audit self hashes are `9db62ed9…` / `c0cb6268…`. Next perform zero-bake
-capability discovery, then read a fresh immutable Data-cache copy and measure a
-solver-native liquid level-set/occupancy volume over all 24 frames. Do not tune
-simulation or Mesh, begin real impact or render before that measurement.
+capability discovery, then read a fresh immutable Data-cache copy.
+
+Attempt-58 completed that copied-cache analysis with zero Blender/bake work and
+a 19/19 independent audit. The Data VDBs have particle/velocity grids but no
+persisted liquid level set. Particle occupied-voxel support fell 1,227→874
+(`−28.77%`) and tracked Mesh volume across all 24 frames at Pearson `0.98427`,
+while ALIVE count correlated `−0.95368`. Occupancy is not exact mass, but a pure
+Mesh reconstruction explanation is inadequate. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-occupancy-attempt-58`;
+receipt/audit self hashes are `33ec1fcf…` / `f2d76906…`. The next physical gate
+may change exactly one variable: reduce cup-effector `surface_distance` from
+2.5 to 2.0 cells, keeping trajectory, APIC, particles, Mesh, subframes and every
+scientific threshold unchanged. Do not render or begin real impact.
 
 ## Public routes
 

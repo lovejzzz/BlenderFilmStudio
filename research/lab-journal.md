@@ -7057,3 +7057,16 @@ volume on the same physics had fallen `34.23%`. Mantaflow reseeding therefore
 invalidates raw particle count as an exact mass proxy. The next diagnostic must
 measure solver-native Data level-set/occupancy volume from an immutable cache
 copy before any simulation or Mesh parameter changes.
+
+## J-607 · RC6 copied Data support shrinks in lockstep with Mesh
+
+Date: 2026-09-02 · Type: DIAGNOSTIC PASS · Engine-Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+Attempt-58 copied the exact 48-file Data cache and independently passed 19/19.
+The VDB roster has particles/velocity grids but no persisted liquid level set.
+Particle occupied-voxel support fell from 1,227 to 874 (`−28.77%`) and tracked
+the retained Mesh volume with Pearson `r=0.98427`, while raw ALIVE count moved
+oppositely (`r=-0.95368`). Occupancy is not exact mass, but a pure Mesh-radius
+explanation is now inadequate. The next one-variable physical test should reduce
+only moving-cup `surface_distance` from 2.5 to 2.0 cells while preserving all
+other attempt-56 settings and thresholds.

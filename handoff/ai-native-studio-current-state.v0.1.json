@@ -4,7 +4,7 @@
   "snapshotDate": "2026-09-02",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_PC6_CAUSAL_PRODUCTIZATION_PASS_PC7_FILMIC_PHYSICS_PASS_PC8_MEASURED_SHUTTER_PASS_PC9_PHYSICAL_ARCHETYPES_PASS_RC1_ROBOT_CAPSTONE_PASS_PUBLISHED_RC2_PHYSICAL_LIGHT_TRANSFER_PASS_PUBLISHED_RC3_ACTION_GRAMMAR_PASS_RC4_UNSTAGED_PHYSICAL_REALISM_PASS_PUBLISHED_RC5_BREAKABLE_ATTACHMENT_PASS_PUBLISHED_RC6_FINAL_STATIC_LIQUID_PASS_SLOW_TIP_PASS_MOVING_LIQUID_PREVIEW_FAIL_PARTICLE_COUNT_DIAGNOSTIC_PASS_DATA_VOLUME_DIAGNOSTIC_NEXT_STANDING_AUTONOMY_ACTIVE",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_PC6_CAUSAL_PRODUCTIZATION_PASS_PC7_FILMIC_PHYSICS_PASS_PC8_MEASURED_SHUTTER_PASS_PC9_PHYSICAL_ARCHETYPES_PASS_RC1_ROBOT_CAPSTONE_PASS_PUBLISHED_RC2_PHYSICAL_LIGHT_TRANSFER_PASS_PUBLISHED_RC3_ACTION_GRAMMAR_PASS_RC4_UNSTAGED_PHYSICAL_REALISM_PASS_PUBLISHED_RC5_BREAKABLE_ATTACHMENT_PASS_PUBLISHED_RC6_FINAL_STATIC_LIQUID_PASS_SLOW_TIP_PASS_MOVING_LIQUID_PREVIEW_FAIL_PARTICLE_AND_OCCUPANCY_DIAGNOSTICS_PASS_EFFECTOR_DISTANCE_TEST_NEXT_STANDING_AUTONOMY_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "RC6-MOVING-LIQUID-DATA-VOLUME-DIAGNOSTIC",
+  "activeGate": "RC6-MOVING-LIQUID-EFFECTOR-DISTANCE",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -1028,7 +1028,7 @@
       "improvementPriorities": ["modeling detail", "action complexity"]
     },
     "gateOrder": ["PC.0", "PC.1", "PC.2", "PC.3", "PC.4", "PC5-CAUSAL-STUDIO", "PC5-GENERALIZATION", "PC6-CAUSAL-CONTRACT-PRODUCTIZATION", "PC7-FILMIC-PHYSICS-REALISM", "PC8-MEASURED-SHUTTER-REALISM", "PC9-PHYSICAL-ARCHETYPES-AND-CONTACT-REALISM", "RC1-ROBOT-CAPSTONE-PHYSICAL-PERFORMANCE-HOLDOUT", "RC2-PHYSICAL-FILM-DIRECTION-TRANSFER", "RC3-PHYSICS-NATIVE-ACTION-GRAMMAR", "RC4-UNSTAGED-PHYSICAL-REALISM", "RC5-PHYSICAL-RICHNESS-CURRICULUM"],
-    "activeGate": "RC6-MOVING-LIQUID-DATA-VOLUME-DIAGNOSTIC",
+    "activeGate": "RC6-MOVING-LIQUID-EFFECTOR-DISTANCE",
     "pc0": {
       "status": "PASS",
       "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-02",
@@ -2507,7 +2507,7 @@
     "Do not stage unrelated owner changes"
   ],
   "rc6CurrentCheckpoint": {
-    "status": "FINAL_STATIC_LIQUID_PASS_SLOW_TIP_PASS_MOVING_LIQUID_PREVIEW_FAIL_PARTICLE_COUNT_DIAGNOSTIC_PASS_DATA_VOLUME_DIAGNOSTIC_NEXT",
+    "status": "FINAL_STATIC_LIQUID_PASS_SLOW_TIP_PASS_MOVING_LIQUID_PREVIEW_FAIL_PARTICLE_AND_OCCUPANCY_DIAGNOSTICS_PASS_EFFECTOR_DISTANCE_TEST_NEXT",
     "checkpointCommit": "39dfb4d94ca709ccf502b9eb6935b8c7bca2b9ff",
     "acceptedBinarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
     "acceptedStaticLiquid": {
@@ -2640,29 +2640,49 @@
       "interpretation": "raw FLIP count increased while bound Mesh volume decreased; Mantaflow reseeding makes count an invalid exact mass proxy",
       "claimCeiling": "Data-only particle-roster diagnosis; no exact Data mass, corrected moving liquid, impact, render or film-quality claim"
     },
+    "movingLiquidDataOccupancyAttempt58": {
+      "status": "PASS_DIAGNOSTIC",
+      "classification": "DATA_SPATIAL_SUPPORT_SHRINKS_WITH_MESH",
+      "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-occupancy-attempt-58",
+      "resultHash": "f254bca2e485f037e2351d1b5248e8fec74f8d47d8179876734ae51b04c48ee9",
+      "receiptHash": "33ec1fcf37562e7e12fef700044ed0f72fe99bc64152ccba9b33a5ed8b6ebff3",
+      "audit": "19/19 PASS",
+      "auditHash": "f2d7690679a1aeb31e70a095f3b66e741d1d17b3386bc8559bf89f92acba3194",
+      "initialParticleOccupiedVoxelCount": 1227,
+      "finalParticleOccupiedVoxelCount": 874,
+      "finalParticleOccupancyTemporalDriftFraction": -0.2876935615321923,
+      "occupancyMeshPearsonCorrelation": 0.9842704533705157,
+      "occupancyAliveCountPearsonCorrelation": -0.9536809624235958,
+      "counts": {"enginePythonStarts": 2, "blenderStarts": 0, "fluidDataBakes": 0, "fluidMeshBakes": 0, "renders": 0},
+      "interpretation": "occupied sparse-voxel support is not exact mass, but its strong same-direction Mesh correlation rejects a pure surface-only explanation",
+      "claimCeiling": "copied-cache occupancy diagnosis only; no exact mass or moving-liquid correction claim"
+    },
     "next": {
-      "gate": "RC6-MOVING-LIQUID-DATA-VOLUME-DIAGNOSTIC",
-      "status": "ZERO_BAKE_CAPABILITY_DISCOVERY_THEN_PREREGISTER_READ_ONLY_DATA_CACHE_ANALYSIS",
+      "gate": "RC6-MOVING-LIQUID-EFFECTOR-DISTANCE",
+      "status": "PREREGISTER_ONE_VARIABLE_2P0_CELL_FULL_24_FRAME_PREVIEW",
       "mustUseExactSlowTrajectory": "C5F96",
       "mustUseAcceptedStaticGeometry": "RC6 final static-liquid attempt-46",
       "tier": "PREVIEW",
       "resolutionMaximum": 96,
-      "initialStrategy": "inspect available OpenVDB/Blender Data-grid readers without baking, then measure solver-native liquid level-set or occupancy volume on a fresh immutable attempt-57 cache copy",
+      "initialStrategy": "reduce only cup-effector surface_distance from 2.5 to 2.0 cells and rerun exact 24-frame Data+Mesh moving-liquid gate",
       "mustMeasure": [
-        "available VDB grid names, types, transforms and voxel size without mutation",
-        "solver-native liquid level-set or occupancy volume at every retained frame",
-        "source-relative and temporal Data-volume drift",
-        "exact copied-cache manifest before and after analysis",
-        "zero bake, save, render, network and retained-root writes"
+        "unchanged exact C5F96 trajectory and one-subframe moving-effector sampling",
+        "source-relative and temporal Mesh volume on every frame",
+        "signed topology, manifold state and positive-body count",
+        "radial, below-floor and above-rim containment",
+        "exact 72-file cache interval and Data/Mesh cost"
       ],
       "renderAllowedBeforeMovingLiquidPass": false,
       "realImpactAllowedBeforeMovingLiquidPass": false
     }
   },
   "nextExpectedCheckpoint": {
-    "gate": "RC6-MOVING-LIQUID-DATA-VOLUME-DIAGNOSTIC",
-    "result": "attempt-57 particle diagnosis passed but raw count is not mass: ALIVE roster grew 30.25% while attempt-56 Mesh volume fell 34.23%; measure solver-native Data volume next",
-    "checkpointCommit": "da86fd67",
+    "gate": "RC6-MOVING-LIQUID-EFFECTOR-DISTANCE",
+    "result": "attempt-58 occupancy diagnosis passed: support shrank 28.77% and tracked Mesh at r=0.98427; preregister one 2.0-cell effector-distance test",
+    "checkpointCommit": "78468c34",
+    "attempt58Evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-occupancy-attempt-58",
+    "attempt58ReceiptHash": "33ec1fcf37562e7e12fef700044ed0f72fe99bc64152ccba9b33a5ed8b6ebff3",
+    "attempt58AuditHash": "f2d7690679a1aeb31e70a095f3b66e741d1d17b3386bc8559bf89f92acba3194",
     "attempt57Evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-diagnostic-attempt-57",
     "attempt57ReceiptHash": "9db62ed9b08595c30113d907e05d0576633a9e92a39b139b637910ffe07c7893",
     "attempt57AuditHash": "c0cb626823c75a6fd81461c9a4c6868ebfcbe35a2a688947f6e068afd4ca5667",
@@ -2699,7 +2719,8 @@
       "retain accepted static-liquid attempt-46, slow-tip attempts 47-55 and both attempt-55 audits immutable",
       "retain attempt-56 workspace, cache, result, logs, failure receipt and 23/23 audit immutable",
       "retain attempt-57 workspace, Data cache, result, receipt and 18/18 audit immutable",
-      "perform zero-bake capability discovery before preregistering one read-only Data-cache volume diagnostic",
+      "retain attempt-58 copied cache, result, receipt and 19/19 audit immutable",
+      "preregister one 24-frame Preview test changing only cup-effector surface_distance from 2.5 to 2.0 cells",
       "reuse exact C5F96 solver trajectory and accepted static-liquid geometry without pose keys",
       "freeze cache interval, volume, topology, containment, manifold and resource thresholds before baking",
       "do not begin real impact until the moving-liquid gate passes",
