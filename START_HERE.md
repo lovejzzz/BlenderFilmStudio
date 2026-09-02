@@ -1288,6 +1288,11 @@ exactly. Next freeze one audit-only C2 using the derived `2e-8` centroid replay
 tolerance, with no Blender/bake/root mutation. Do not render or test another
 radius. See
 `research/2026-09-02-rc6-real-impact-liquid-particle-radius-c20-c1-attempt-94-result.md`.
+C2 then stopped before creating attempt-95 because its frozen parent OID was
+transcribed incorrectly (`ec81581799…` versus actual `ec81581796…`). No retained
+byte or process was touched. Preserve this harness failure; next freeze C3 with
+only the exact parent/version/fresh-root correction. The expanded audit logic,
+centroid/volume tolerances and every physical boundary must remain unchanged.
 
 ## Public routes
 

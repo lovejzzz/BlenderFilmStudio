@@ -119,6 +119,11 @@ and replay from eight-decimal samples differ by `1.0177e-8`, just above `1e-8`;
 all27 physical booleans recompute exactly. Next create one audit-only C2 with a
 derived fixed `2e-8` centroid replay tolerance, keeping `1e-8` for volume ratios,
 and no Blender/root mutation. Do not rerun, render or test another radius.
+C2 stopped before attempt-95 root creation because the frozen parent OID was
+mis-transcribed (`ec81581799…` versus exact `ec81581796…`). All operation and
+retained-write counts are zero. Preserve the failure and create only a versioned
+C3 parent/version/fresh-root correction; the expanded audit logic, tolerances,
+physical checks, retained hashes, claim and zero-Blender ceilings stay exact C2.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

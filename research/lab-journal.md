@@ -7748,3 +7748,18 @@ at `1e-8`, and perform zero Blender/bake/root mutation. The evidence teaches tha
 Blender's signed radius guidance is context-dependent under high-speed impact;
 the product must reject a complete-metric regression instead of applying the
 generic sign rule blindly.
+
+## J-663 · C2 stops before root on one parent-OID transcription
+
+Date: 2026-09-02 · Type: RETAINED HARNESS FAILURE · Evidence roots / Blender / bakes / renders / retained writes: 0 / 0 / 0 / 0 / 0
+
+The frozen C2 audit-only tool stopped at its outer freeze check before creating
+attempt-95. Its spec recorded parent `ec81581799…`; Git reports exact parent
+`ec81581796ff708b146b8de8919cdd39b9d2ca3b`. No retained evidence was read by
+the expanded auditor, and no Blender or mutation occurred. C20 remains physical
+FAIL23/27 with its original20/21 audit.
+
+C3 may correct only this exact parent plus versioned tool/spec/preregistration
+and fresh-root names. The generated audit logic, `2e-8` centroid replay,
+`1e-8` volume replay, all physical checks, retained hashes, claim and zero-
+Blender ceilings must be byte-equivalent after normalizing those names.
