@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6RealImpactCupMarginC6.v0.88",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_77_ROOT_CREATION",
+  "researchParentBeforePreregistration": "85610c9650d8bd1eb84bf188de0c7523e64c3054",
+  "authority": {"uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json", "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0"},
+  "physicalQuestion": "Does replacing only the exact cup's implicit 40 mm Bullet cylinder margin with the product's explicit 2 mm causal-physics margin make the I09 solver-owned impact congruent with the visible floor/domain and reduce derived surface sampling while preserving real ball contact and at least 45 degrees of free-cup tilt?",
+  "selectedPhysicalDegreeOfFreedom": "CUP_BULLET_COLLISION_MARGIN_ONLY",
+  "sourceFinding": {
+    "sceneBuilderSetsMargin": false,
+    "savedSourceUseMargin": false,
+    "savedSourceMarginMeters": 0.04,
+    "boundBlenderRule": "RBO_GET_MARGIN returns 0.04f for CYLINDER when use_margin is false",
+    "existingProductPresetUseMargin": true,
+    "existingProductPresetMarginMeters": 0.002,
+    "scaleContext": "40 mm is 26.67 percent of the 150 mm cup radius and 4.27 Preview-96 voxels; 2 mm is 1.33 percent and 0.21 voxel"
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "trajectory": "I09 driveEndFrame 9",
+    "attempt75ResultHash": "d18f4eb023efa09db18a91429f7203578cff854b0bd72407607355a4bb3d2041",
+    "attempt76AuditHash": "1939967b2f7dc4936a8cae388d2c78b8d7982a48e3d22299dfaa011c1761bd9e"
+  },
+  "baselineEvidenceFiles": [
+    {"uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-bullet-midpoint-c4-attempt-75/cells/I09/result.json", "sha256": "d84360b22b1241ac14ec2694af07f541bf93ff638af910cdee6d2533824196cb"},
+    {"uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-bullet-midpoint-c4-attempt-75/receipt.json", "sha256": "8f6c6597e312be5eab68eb6928f125194ae95f88127055ef8a1237427b96afc4"},
+    {"uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-bullet-midpoint-audit-c5-attempt-76/corrected-independent-audit.json", "sha256": "fc00b4dc50f2b03e65c4186bf88440299321434dd531345161d3fabbde942d7a"},
+    {"uri": "scripts/run-rc6-fluid-consequence-scene.py", "sha256": "1385897455a451bbc7a012c3acf8e53a819fb121974fa8100ac9b1257bbc07d8"},
+    {"uri": "scripts/build-causal-studio.py", "sha256": "33ac640cad3fc8165ffad19700897267f0847d025c9441d8b7730cec561ecf90"},
+    {"uri": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-30-mac-m2max-attempt-01/source/source/blender/blenkernel/BKE_rigidbody.h", "sha256": "c35446861b7769f76b21fb0cfbb3e1eea4bf5f1115016c07244e9a6820936e5e"},
+    {"uri": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-30-mac-m2max-attempt-01/source/source/blender/blenkernel/intern/rigidbody.cc", "sha256": "83493dfe758dba0dca943becdef8c1fc5eb7d50bb1c5eb82a693fe2d65a66234"},
+    {"uri": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-30-mac-m2max-attempt-01/source/source/blender/makesrna/intern/rna_rigidbody.cc", "sha256": "bc05c35d33e1180f1212a153ca18a25d058245e1497f6d7fa9c15d39710300a0"}
+  ],
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-real-impact-cup-margin-c6-attempt-77",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-real-impact-cup-margin-c6-attempt-77"
+  },
+  "cells": [{"id": "M02", "driveEndFrame": 9, "cupUseMargin": true, "cupCollisionMarginMeters": 0.002}],
+  "frozenConfiguration": {
+    "timelineFramesInclusive": [1, 48], "fps": 24,
+    "strikerStartX": -1.1, "strikerDriveEndX": -0.64, "strikerDriveDistanceMeters": 0.46,
+    "strikerHoldFrames": 1, "strikerReturnEndOffsetFrames": 3,
+    "cupMassKilograms": 0.34, "cupFriction": 0.75, "ballMassKilograms": 0.62, "ballFriction": 0.48,
+    "bulletSubstepsPerFrame": 20, "bulletSolverIterations": 80,
+    "previewResolution": 96, "acceptedDomainCenterMeters": [0.45, 0.0, 0.26],
+    "acceptedDomainDimensionsMeters": [0.9, 0.5, 0.58], "baseVoxelMeters": 0.009375,
+    "sourceCupUseMargin": false, "sourceCupCollisionMarginMeters": 0.04,
+    "cupUseMargin": true, "cupCollisionMarginMeters": 0.002,
+    "cupCollisionRadiusMeters": 0.15, "cupCollisionHalfHeightMeters": 0.22, "ballCollisionRadiusMeters": 0.12
+  },
+  "machineAcceptance": {
+    "initialBallCupSeparationMinimumMeters": 0.01, "latestDerivedContactFrame": 36,
+    "minimumPeakCupTiltDegreesByFrame48": 45.0, "responseMustFollowDerivedContact": true,
+    "minimumCupWorldSurfaceZ": -0.005, "acceptedDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 8, "cupAnimationChannels": 0, "ballAnimationChannels": 0,
+    "onlyAuthoredRigidActuator": "PHYS_VISIBLE_STRIKER",
+    "selectionRule": "M02 passes only if every unchanged physical check plus the exact margin check passes"
+  },
+  "processCeilings": {"blenderStarts": 1, "bulletBakes": 1, "fluidDataBakes": 0, "fluidMeshBakes": 0, "renders": 0, "blendSaves": 0, "nativeBuilds": 0, "networkCalls": 0, "engineRemoteWrites": 0},
+  "resourceCeilings": {"minimumReserveBytes": 107374182400, "projectedWriteBytes": 134217728, "maximumWorkspaceBytes": 134217728, "maximumEvidenceBytes": 33554432},
+  "tools": [
+    {"uri": "scripts/run-rc6-real-impact-cup-margin-c6-scene.py", "sha256": "9fa06814f56eaf366584e8223bc992b00e02a2de7317d076b78395d43127a171"},
+    {"uri": "scripts/run-rc6-real-impact-cup-margin-c6.py", "sha256": "4b02c07ed0f36b663195253a34e4c07c59bcacedd21a181389be16feae2c0647"},
+    {"uri": "scripts/audit-rc6-real-impact-cup-margin-c6.py", "sha256": "497d74fe2e3ef29b17fceb6c7284f741296ddd9570c614e024f5addb9e3e5a90"}
+  ],
+  "stopRule": "Run M02 exactly once in the unique fresh attempt-77 roots. Retain PASS or FAIL. Do not change any other body margin, speed, mass, friction, threshold or domain; do not run liquid, save or render. A PASS only freezes a collision-congruent Bullet trajectory for a separate tier/domain decision.",
+  "claimCeiling": "One explicit cup-margin Bullet test on exact I09. No liquid, spill, persistence, rendering, cinematography or film-quality claim.",
+  "specHash": "d8de94acff1e8d829d3aaf8c69485ceb23c2480366f08540b00eb5f38cd106ee"
+}

@@ -7397,3 +7397,14 @@ speed tuning: the next action is read-only inspection of the cup's Bullet
 collision margin and visible/collision geometry, because the tipped cup's
 visible surface reaches 16.57 mm below the floor and its fall—not striker
 speed—sets the 96.84 mm maximum frame step.
+
+## J-634 · The cup carries a 40 mm implicit Bullet margin
+
+Date: 2026-09-02 · Type: BOUND SOURCE INSPECTION / PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+RC6's rigid-body helper never sets margin. Bound Blender initializes 40 mm and
+`RBO_GET_MARGIN` uses it for CYLINDER when custom margin is off. That is 26.67%
+of the 150 mm cup radius and 4.27 Preview voxels; the product's reusable causal
+physics helper instead uses an explicit 2 mm. Attempt-77 preserves exact I09
+and changes only the cup margin from implicit 40 mm to explicit 2 mm. The same
+floor, domain, 45° and eight-subframe gates remain; no liquid or render runs.
