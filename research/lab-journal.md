@@ -6913,3 +6913,16 @@ the torque required by the 45° slow-tip gate. No threshold changed and no cell
 was selected. C1 must isolate moving-container physics with a preregistered
 low-speed direct-contact actuator above the cup center of mass while leaving the
 cup unanimated and Bullet-owned.
+
+## J-596 · RC6 direct slow contact slides the free cup instead of tipping it
+
+Date: 2026-09-02 · Type: PHYSICAL SCREEN FAILURE · Blender starts / Bullet bakes / fluid bakes / renders: 4 / 4 / 0 / 0
+
+C1 attempt-48 completed with an 18/18 independent audit. Sampling actual cup
+mesh vertices corrected the earlier rotated-bound-box floor false signal: the
+minimum real surface z stayed between about -0.69 and -1.22 mm. The upper-half
+kinematic actuator contacted at frames 10/12/14/16 and required only 3/2/2/2
+moving-effector subframes, but the unconstrained cup translated instead of
+tipping; peak tilt was only 0.99°–1.77°. C2 must introduce a measured-gap
+passive toe stop to create a physical pivot while preserving zero cup keys and
+the unchanged 45° gate.
