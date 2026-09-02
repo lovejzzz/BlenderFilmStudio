@@ -1336,6 +1336,14 @@ velocity/Mesh/particle transition rather than advancing it. Next perform one
 read-only bound-source inspection and select a distinct Data-layer degree of
 freedom; do not scan another radius or render. See
 `research/2026-09-02-rc6-real-impact-particle-radius-data-comparison-c21-accepted.md`.
+C22 read-only source inspection closes further radius scanning and selects one
+distinct Data-layer hypothesis on exact C18: `particle_maximum 16→12`, the
+midpoint above unchanged minimum8. Bound `adjustNumber` deletes excess
+particles only away from the radius-protected surface, so this is explicitly
+falsifiable and may have no effect. C23 must change only that value, preserve
+radius1.8 and every other C18 input/gate, retain all results and remain
+zero-render. Do not test another maximum/minimum. See
+`research/2026-09-02-rc6-real-impact-particle-maximum-c22-source-inspection.md`.
 
 ## Public routes
 

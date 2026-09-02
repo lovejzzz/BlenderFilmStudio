@@ -7831,3 +7831,14 @@ retained attempt-99 root and passes18/18. Audit/receipt hashes are `b9ee75c2…`
 `90cae654…`. The accepted C21 comparison shows identical velocity/Mesh/particle
 onsets24/24/25 but much larger C20 amplitudes. This closes further radius scans;
 the next move is read-only source inspection for one distinct Data-layer degree.
+
+## J-669 · Source selects one non-surface particle ceiling
+
+Date: 2026-09-02 · Type: READ-ONLY SOURCE-LED DESIGN · Mutation counts: 0
+
+Bound `adjustNumber` kills per-cell particles above `particle_maximum` only
+outside its radius-derived protected surface region; later it reseeds below the
+minimum. After C21 closed the radius scalar, C22 returns to exact C18 radius1.8
+and selects only maximum16→12, the midpoint above unchanged minimum8. This may
+reduce amplification or may do nothing when samples are surface-protected. C23
+must retain either result, change no other input and render nothing.

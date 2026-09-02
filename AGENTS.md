@@ -160,6 +160,12 @@ radii cross velocity/Mesh/particle at24/24/25, while radius1.6 amplifies all
 three maxima. Do not scan a second radius. Next inspect the bound particle-
 adjustment source read-only and select exactly one distinct Data-layer degree
 before any mutation; rendering remains forbidden.
+C22 source inspection selects exactly one next value on the better C18
+baseline: `particle_maximum 16→12`, while radius stays1.8 and minimum stays8.
+Mantaflow deletes over-maximum particles only away from the protected surface,
+so the hypothesis may pass, regress or have no effect. C23 must preserve all
+other C18 settings, exact R40 and27 gates, run once and remain zero-render. Do
+not stack radius1.6 or scan another maximum/minimum.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
