@@ -904,6 +904,37 @@ must choose one measurable physical degree of freedom before mutation. The
 post-build host check is 156 GiB against the conservative 160 GiB clean-build
 threshold, so no further native build may begin until a fresh admission passes.
 
+RC6 is now past static-liquid calibration and paused at a safe restart
+boundary. The accepted final static mesh is
+`experiments/physical-richness/RC6-2026-09-02-final-effector-mesh-c3-attempt-46`:
+the cross-process cache adoption and mesh-only reconstruction passed with
+receipt `0363fcda…` and independent audit `a332e8a5…`. Mesh bake time was
+82.72 seconds; source-volume error was 4.15%, drift was 2.31%, and the final
+mesh had zero outside-domain vertices and zero non-manifold edges. This closes
+only the frozen static-liquid control, not moving liquid or film quality.
+
+The moving-effector path is intentionally still Bullet-only. Attempts 47–50
+are immutable, independently audited `FAIL_BULLET_SCREEN` results: slowing the
+indirect ball chain removed torque; direct contact slid the cup; a passive toe
+stop tipped but launched or rebounded the cup; and the explicit hinge finally
+proved the correct planar geometry but exposed a stale-frame pivot derivation
+and an unlimited free fall to 90 degrees. Attempt-50 is retained at
+`experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c3-attempt-50`;
+receipt/audit self hashes are `8b422857…` / `5bf296d3…` and its independent
+audit is 18/18 PASS.
+
+After restart, first run the ordinary cold-start reads and host preflight, then
+preregister C4 in fresh attempt-51 roots. C4 may change only the diagnosed
+harness/mechanism details: free the retained rigid cache and evaluate frame 1
+before deriving the hinge-local pivot; use cup angular damping `0.8`; use a
+physical hinge limit of `-60°/+5°`; and screen drive-end frames
+28/32/36/40. It must preserve the 45-degree response gate, four-frame response
+span, exact surface sampling, -5 mm floor tolerance, one-voxel domain margin,
+at most ten derived effector subframes, zero cup/ball pose keys, and zero fluid,
+render or save work. Add a stronger peak-tilt-at-most-65-degree stop check. Do
+not begin moving Mantaflow or visual rendering until this Bullet-only gate
+passes. The last fully pushed research commit at this boundary is `ce0fffca`.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>
