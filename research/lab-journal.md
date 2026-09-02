@@ -7122,3 +7122,16 @@ independent audit. Subframes-2 Data support fell 1,335→970 (`-27.34%`),
 the same direction and the current curves correlated at `r=0.96060`.
 Effector-subframe tuning is therefore closed before Mesh as well as after it.
 Next return to subframes 1 and change only solver minimum timesteps 1→2.
+
+## J-612 · Two minimum solver steps improve volume modestly but still fail
+
+Date: 2026-09-02 · Type: PHYSICAL GATE FAILURE · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+Attempt-63 changed only fluid `timesteps_min` from 1 to 2 on the better
+2.0-cell/subframes-1 baseline and passed its 16/16 independent audit. Temporal
+Mesh loss improved from 23.03% to 21.70%, source error improved from 24.00% to
+22.97%, and Data cost rose 7.63% to 270.74 seconds. The unchanged 15% temporal
+gate still failed; all topology, containment and exact-motion checks passed.
+Do not try timesteps 3 or change CFL/max steps. Next compare the immutable Data
+cache with the one-timestep baseline before selecting simulation particle
+radius as a different variable.

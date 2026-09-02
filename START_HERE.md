@@ -1012,10 +1012,14 @@ percentage points worse than subframes-1; Mesh was 0.81 points worse and the
 current curves correlated at `r=0.96060`. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-subframes-data-comparison-attempt-62`;
 receipt/audit self hashes are `97663618…` / `a847bffe…`. Effector-subframe
-tuning is closed. Attempt-63 is now preregistered to return to the better
-subframes-1, 2.0-cell baseline and change only solver minimum timesteps 1→2;
-its fresh roots remain absent. Run only that frozen attempt. Do not render or
-begin real impact.
+tuning is closed. Attempt-63 then changed only solver minimum timesteps 1→2
+and remains a physical `FAIL`, independently audited 16/16. Temporal loss
+improved from 23.03% to 21.70%, source error from 24.00% to 22.97%, and Data
+cost rose 7.63%; every other check passed. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-solver-timesteps-attempt-63`;
+receipt/audit self hashes are `d2ae5e4e…` / `26d9a50f…`. Do not try timesteps 3
+or change CFL/max steps. Next preregister a zero-bake Data comparison before
+selecting simulation particle radius. Do not render or begin real impact.
 
 ## Public routes
 
