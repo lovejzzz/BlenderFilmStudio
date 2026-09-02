@@ -952,10 +952,17 @@ float32 domain dimensions literally with decimal JSON. C5-C4 changed only that
 representation comparison to `1e-6` per axis and passed 18/18 without starting
 Blender; audit self hash is `791f7a13…`. The accepted evidence root is
 `experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55`.
-This closes only the solver-owned slow rigid trajectory. Next preregister a
-bounded Preview moving-liquid gate using exact C5F96 motion and the accepted
-static-liquid geometry/settings. Do not begin real impact or visual rendering
-until moving liquid passes.
+This closes only the solver-owned slow rigid trajectory.
+
+The bounded moving-liquid Preview gate is now preregistered, but not executed,
+at `specs/ai-native-studio-rc6-moving-liquid-preview.v0.66.json`, self hash
+`d90ac6df…`, in commit `9a4dc7f9…`. Both unique attempt-56 roots remain absent.
+The one allowed run will combine exact C5F96 Bullet motion with the accepted
+static-liquid geometry over frames 1–24 at Preview resolution 96, with one Data
+bake, one Mesh bake and zero render/save/network work. Resume by running only
+`scripts/run-rc6-moving-liquid-preview.py` from a clean checkout. Retain PASS,
+scientific FAIL or harness failure exactly; do not begin real impact or visual
+rendering until moving liquid passes.
 
 ## Public routes
 
