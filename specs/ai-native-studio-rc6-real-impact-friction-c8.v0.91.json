@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6RealImpactFrictionC8.v0.91",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_80_ROOT_CREATION",
+  "researchParentBeforePreregistration": "9cb868046c2f33b43d5bba7dfa5b58715b6f4e0d",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0"
+  },
+  "physicalQuestion": "On the corrected 2 mm I09 baseline, does changing only cup friction from 0.75 to 0.80 move Bullet's cup-floor product friction from below to above the source-derived simple tipping-versus-sliding boundary and thereby produce at least 45 degrees of solver-owned tilt without failing floor, domain or eight-subframe limits?",
+  "selectedPhysicalDegreeOfFreedom": "CUP_FRICTION_ONLY",
+  "sourceDerivation": {
+    "bulletSource": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-30-mac-m2max-attempt-01/source/extern/bullet2/src/BulletCollision/CollisionDispatch/btManifoldResult.cpp",
+    "bulletSourceSha256": "f0b4befa582d55b70213e4ced9cc687dda49d1a98de817af38f1f1f2b1e9d0c3",
+    "combinationRule": "body0 friction multiplied by body1 friction",
+    "cupBaseRadiusMeters": 0.15,
+    "impactHeightAboveFloorMeters": 0.34,
+    "simpleTippingBoundaryCombinedFriction": 0.4411764705882352,
+    "sourceCupFriction": 0.75,
+    "floorFriction": 0.58,
+    "sourceCombinedFriction": 0.435,
+    "selectedCupFriction": 0.8,
+    "selectedCombinedFriction": 0.464,
+    "selectionReason": "0.80 is a modest 6.67 percent cup-friction increase and places the exact Bullet product 5.17 percent above the simple geometric boundary; it is not a scan."
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "trajectory": "attempt-77 M02 driveEndFrame 9 with explicit 2 mm margin",
+    "attempt77ResultHash": "ffa510b862bb8970226a75732d36f4eb91df1002536be49c26484c53c97c5a94",
+    "attempt77AuditHash": "5ae5347692b811f588426558054afc768442574576d8845b9a839187e01dd576",
+    "speedClosureAttempt79ResultHash": "142c582e8d881b8cda29643d140c06567565b1b86db211d6c6939dbf05674493",
+    "speedClosureAttempt79AuditHash": "2af15f9dfdabd0e086e48e9417da011d0980dd159e65aebf6e11ffeb2f81e4ad"
+  },
+  "baselineEvidenceFiles": [
+    {
+      "uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-cup-margin-c6-attempt-77/cells/M02/result.json",
+      "sha256": "66fb186be0afa62779089453b3c9e831559cdea5220e9f2199a6459334de4660"
+    },
+    {
+      "uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-cup-margin-c6-attempt-77/independent-audit.json",
+      "sha256": "023b46ea356c0c46f2859a565e896fb1c32369fc05c394df4ca0a5257b45e45b"
+    },
+    {
+      "uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-corrected-impulse-c7-c1-attempt-79/cells/S08/result.json",
+      "sha256": "03634268413340c9bb5bb658ea49b91c3caa8b125a6eff65c20d4dd7cea660f7"
+    },
+    {
+      "uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-corrected-impulse-c7-c1-attempt-79/independent-audit.json",
+      "sha256": "65d90a85edc18aaa001bd0d8968a689d3bcae998c364ef1489b921684f1d9edf"
+    },
+    {
+      "uri": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-30-mac-m2max-attempt-01/source/extern/bullet2/src/BulletCollision/CollisionDispatch/btManifoldResult.cpp",
+      "sha256": "f0b4befa582d55b70213e4ced9cc687dda49d1a98de817af38f1f1f2b1e9d0c3"
+    }
+  ],
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-real-impact-friction-c8-attempt-80",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-real-impact-friction-c8-attempt-80"
+  },
+  "cells": [
+    {
+      "id": "F80",
+      "driveEndFrame": 9,
+      "sourceCupFriction": 0.75,
+      "cupFriction": 0.8,
+      "floorFriction": 0.58,
+      "combinedFloorFriction": 0.464,
+      "cupUseMargin": true,
+      "cupCollisionMarginMeters": 0.002
+    }
+  ],
+  "frozenConfiguration": {
+    "timelineFramesInclusive": [1, 48],
+    "fps": 24,
+    "strikerStartX": -1.1,
+    "strikerDriveEndX": -0.64,
+    "strikerDriveDistanceMeters": 0.46,
+    "strikerHoldFrames": 1,
+    "strikerReturnEndOffsetFrames": 3,
+    "cupMassKilograms": 0.34,
+    "sourceCupFriction": 0.75,
+    "cupFriction": 0.8,
+    "floorFriction": 0.58,
+    "combinedFloorFriction": 0.464,
+    "ballMassKilograms": 0.62,
+    "ballFriction": 0.48,
+    "bulletSubstepsPerFrame": 20,
+    "bulletSolverIterations": 80,
+    "previewResolution": 96,
+    "acceptedDomainCenterMeters": [0.45, 0.0, 0.26],
+    "acceptedDomainDimensionsMeters": [0.9, 0.5, 0.58],
+    "baseVoxelMeters": 0.009375,
+    "sourceCupUseMargin": false,
+    "sourceCupCollisionMarginMeters": 0.04,
+    "cupUseMargin": true,
+    "cupCollisionMarginMeters": 0.002,
+    "cupCollisionRadiusMeters": 0.15,
+    "cupCollisionHalfHeightMeters": 0.22,
+    "ballCollisionRadiusMeters": 0.12
+  },
+  "machineAcceptance": {
+    "initialBallCupSeparationMinimumMeters": 0.01,
+    "latestDerivedContactFrame": 36,
+    "minimumPeakCupTiltDegreesByFrame48": 45.0,
+    "responseMustFollowDerivedContact": true,
+    "minimumCupWorldSurfaceZ": -0.005,
+    "acceptedDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 8,
+    "cupAnimationChannels": 0,
+    "ballAnimationChannels": 0,
+    "onlyAuthoredRigidActuator": "PHYS_VISIBLE_STRIKER",
+    "selectionRule": "F80 passes only if every unchanged physical check plus exact margin/friction checks passes"
+  },
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 134217728,
+    "maximumWorkspaceBytes": 134217728,
+    "maximumEvidenceBytes": 33554432
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-real-impact-friction-c8-scene.py",
+      "sha256": "ca97d9f7096933cb6aef8ea30d440c507ff0f4958b04c46abb778a1afa4e19e2"
+    },
+    {
+      "uri": "scripts/run-rc6-real-impact-friction-c8.py",
+      "sha256": "ec085380c5bbc13aa0b24d277d0b0a9586426a4f6bd3da928b6c70e3be5e3a5d"
+    },
+    {
+      "uri": "scripts/audit-rc6-real-impact-friction-c8.py",
+      "sha256": "f8737ec80a2e868f8daad611edad8164475c1072f475b570fe3dc552d992dc5c"
+    }
+  ],
+  "stopRule": "Run F80 exactly once in the unique fresh attempt-80 roots. Retain PASS or FAIL. Do not change drive timing, contact height, geometry, any margin, mass, other friction, threshold or domain; do not run liquid, save or render. A PASS only freezes one collision-congruent Bullet trajectory for a separate liquid gate.",
+  "claimCeiling": "One source-derived cup-friction Bullet test on the exact corrected I09 scene. No liquid, spill, persistence, rendering, cinematography or film-quality claim.",
+  "specHash": "0d6cc9b3d7ed1f7eba2d780658960fb66cc5d31ceae20872f80e972ee7f81c3c"
+}

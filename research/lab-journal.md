@@ -7453,3 +7453,15 @@ Preview subframes rise four→five. Speed tuning is closed. Bound Bullet source
 multiplies cup/floor friction: 0.75×0.58=0.435, slightly below the simple
 0.15/0.34=0.441 tipping-versus-sliding boundary. The next one-variable gate
 should return to I09 and test one modest cup-friction value above that boundary.
+
+## J-639 · Select friction from the solver's exact combination rule
+
+Date: 2026-09-02 · Type: SOURCE-LED PREREGISTRATION · Blender starts / Bullet bakes / liquid bakes / renders: 0 / 0 / 0 / 0
+
+Bound Bullet source multiplies contact friction. The exact cup/floor pair is
+0.75×0.58=0.435, just below the simple 0.15/0.34=0.441 tip-before-slide
+boundary. C8 returns to the lower-motion I09 baseline and changes only cup
+friction to 0.80, producing 0.464 combined friction. The 6.67% cup change is a
+single source-derived value, not a scan; all margin, speed, geometry, mass,
+domain and acceptance fields remain exact. One Bullet-only run may pass or
+fail; no liquid follows a failure.
