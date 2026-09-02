@@ -1368,6 +1368,15 @@ C23 physical result regressed, close particle maximum/minimum tuning. Next
 perform one read-only C25 bound-source inspection and select exactly one
 different Data-layer degree before any new bake. Rendering remains forbidden.
 See `research/2026-09-02-rc6-real-impact-particle-maximum-data-comparison-c24-c1-accepted.md`.
+C25 read-only source inspection selects exactly one next physical change on
+exact C18: enable `use_diffusion` while leaving Blender's bundled Water-preset
+base/exponent `1/6` and surface tension0 unchanged. Bound Mantaflow therefore
+applies `1e-6` low-viscosity velocity diffusion before pressure and particle
+adjustment, with zero surface-tension force. Surface tension, initial sampling,
+FLIP and deletion-based controls are rejected as confounded or poorly targeted.
+C26 must change only that flag, preserve APIC, every accepted/closed input and
+all27 gates, run once in fresh bounded roots and remain zero-render. See
+`research/2026-09-02-rc6-real-impact-water-diffusion-c25-source-inspection.md`.
 
 ## Public routes
 

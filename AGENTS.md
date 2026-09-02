@@ -188,6 +188,16 @@ remain24/25, Mesh onset delays24→25 and maximum velocity expansion improves
 close maximum/minimum tuning. Next perform one read-only C25 bound-source
 inspection and select exactly one different Data degree before any bake; no
 render is allowed.
+C25 source inspection now selects one exact C26 change on C18:
+`use_diffusion false→true`, while keeping Blender's bundled Water-preset
+`viscosity_base=1`, `viscosity_exponent=6` and `surface_tension=0` unchanged.
+Bound Mantaflow applies that `1e-6` low-viscosity diffusion to the velocity grid
+before pressure and particle adjustment. Surface tension is rejected here
+because it requires the same allocation flag plus a second nonzero value;
+particle initial sampling, FLIP, hard particle deletion and all closed scalars
+are also rejected. C26 must preserve every other C18 input and all27 physical
+gates, run once in fresh bounded roots and remain zero-render. See
+`research/2026-09-02-rc6-real-impact-water-diffusion-c25-source-inspection.md`.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
