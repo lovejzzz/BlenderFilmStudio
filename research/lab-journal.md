@@ -7521,3 +7521,12 @@ ramp rise did not reduce the fall peak, so ramp-height tuning is closed. By the
 first70° frame36, however, cumulative maximum motion is72.10 mm/eight
 subframes. Next verify that exact event window and a same-size shifted domain
 using retained samples only; do not change C10 or start Blender.
+
+## J-645 · Separate the liquid-relevance window from landing
+
+Date: 2026-09-02 · Type: AUDIT-ONLY PREREGISTRATION · Blender starts / Bullet bakes / liquid bakes / renders: 0 / 0 / 0 / 0
+
+C11 freezes frame1 through the first retained 70° cup sample, recomputes
+contact, surface motion and swept bounds, and tests a same-size domain shifted
+to x=0.57 with one voxel margin. It cannot change C10's full-window FAIL or
+claim liquid completion. A PASS only admits a future bounded Preview bake.
