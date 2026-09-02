@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "bfs.rc6LiquidFlipParticleDetailSpec.v0.39",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-FLIP-PARTICLE-DETAIL-2026-09-01-ATTEMPT-37",
+  "purpose": "Localize every active cached FLIP particle outside the accepted one-voxel cup-interior envelope, bind its Blender particle state and velocity, and classify whether it lies inside the modeled cup solid or outside the cup entirely.",
+  "toolFreezeParent": "7a2e9c89d7304b25a7e3e912b477583f00b74cde",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "scope": "One fresh, local-only, zero-bake, zero-save, zero-render Blender diagnostic on a complete copied cache; ordinary research commit and non-force push are allowed.",
+    "specificConfirmationRequired": false
+  },
+  "roots": {
+    "sourceWork": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-concavity-attempt-31",
+    "sourceEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-mesh-concavity-attempt-31",
+    "sourceCandidate": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-concavity-attempt-31/concavity-upper-3p50",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-flip-particle-detail-attempt-37",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-attempt-37"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceWorkManifestFileSha256": "39c47904ac2f31e6e0e92bdef38231a8248b51c1a8fc0442d0cbfaf0db2db05d",
+    "sourceWorkManifestHash": "8adcb0d87c750a8eaadc3420d9583cc532e2f434f2401e89e1b9898a76b3c349",
+    "sourceCandidateManifestHash": "f1357fc0b6383d1b5dd689c80dbce2f89e9c625b8dab00f5db2eb464e444abd8",
+    "sourceAuditFileSha256": "699ca9002878473f7fd1bb740c2270a252d2edb8a02da7cb9d398d65bf9b78f5",
+    "sourceAuditHash": "c6e3ef33a680d760e7afc1d305e3451ce8ef013429174f76a6756156378bcbf8",
+    "sourceResultHash": "7ecb421221edbb3dc367e347b9038381ab4043077833d0443c76c34f8203d6da"
+  },
+  "priorParticleAxis": {
+    "resultPath": "experiments/physical-richness/RC6-2026-09-01-flip-particle-axis-c1-attempt-34/cells/axis-control/result.json",
+    "resultFileSha256": "07fcb23e6e65718ff8b6a7865979f7e3d8dbe0bc2356d6da6065e08ba95350ee",
+    "resultHash": "c772c650166ca447684bf97c117ac0cc77f07b0cfe95b56071cfa88e745dfd5b",
+    "auditPath": "experiments/physical-richness/RC6-2026-09-01-flip-particle-axis-c1-attempt-34/independent-audit.json",
+    "auditFileSha256": "a52088864aa8fc6f11541942af3fd295ae757ee838c5142773731927f6acced3",
+    "auditHash": "bfd71c7b18e30cdfea8d5a2b7196da27a72d445dd104ea0b744da2d10322ed56",
+    "checks": "27/27 PASS",
+    "finding": "Exactly nine active FLIP particles exceed the one-voxel floor envelope at frames 4-7; the peak frame-7 fraction is 9/107825 while the reconstructed mesh previously exposed 7814/101808 below-floor vertices."
+  },
+  "sourceCodeBinding": {
+    "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/source/source/blender/blenkernel/intern/particle_system.cc",
+    "fileSha256": "71e072159096d7de7f26c460d6f0da17ad5eb32337f312d3610501243bbef040",
+    "commit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
+    "observedRule": "particles_fluid_step excludes PARTICLE_TYPE_DELETE records and exposes remaining Mantaflow FLIP particles as PARS_ALIVE."
+  },
+  "frozenCandidate": {
+    "cellId": "concavity-upper-3p50",
+    "frameStart": 1,
+    "frameEnd": 7,
+    "resolutionMax": 192,
+    "particleRadius": 1.6,
+    "particleNumber": 2,
+    "meshParticleRadius": 9.0,
+    "cupEffectorSurfaceDistance": 1.5,
+    "cacheType": "MODULAR",
+    "expectedCacheFiles": 21
+  },
+  "measurement": {
+    "particleExposure": "Require the retained coherent true/one roster, reuse exactly one evaluated particle system with display_percentage=100, and do not save.",
+    "coordinateConvention": "Blender Particle.location world-space converted by cup.matrix_world.inverted",
+    "cupInnerRadiusMeters": 0.09,
+    "cupOuterRadiusMeters": 0.15,
+    "cupInteriorBottomLocalZMeters": -0.16,
+    "cupOuterBottomLocalZMeters": -0.22,
+    "cupInteriorTopLocalZMeters": 0.22,
+    "baseVoxelMeters": 0.0026041667,
+    "requiredPerOutlierFields": [
+      "displayIndex",
+      "aliveState",
+      "birthTime",
+      "dieTime",
+      "lifetime",
+      "size",
+      "locationWorld",
+      "locationCupLocal",
+      "radialCupLocalMeters",
+      "velocityRna",
+      "speedRna",
+      "radialOutsideOneVoxel",
+      "belowFloorOneVoxel",
+      "aboveRimOneVoxel",
+      "interiorFloorPenetrationMeters",
+      "oneVoxelEnvelopePenetrationMeters",
+      "physicalRegion",
+      "detailHash"
+    ],
+    "physicalRegions": {
+      "INSIDE_CUP_SOLID_FLOOR": "Within outer radius and between modeled outer bottom and inner floor.",
+      "BELOW_CUP_OUTER_BOTTOM": "Below the modeled cup exterior bottom.",
+      "INSIDE_CUP_SOLID_WALL": "Between inner and outer radii within the modeled cup height.",
+      "OUTSIDE_MODELED_CUP_SOLID": "Outside the modeled solid classifications above."
+    },
+    "interpretationRule": {
+      "activeInsideSolidFloor": "The fluid solver has penetrated the cup collision thickness; prioritize time-step/CFL/collision correction before any surface-only tuning.",
+      "activeBelowOuterBottom": "The fluid solver has escaped the complete cup collider; treat as a stronger collision failure.",
+      "noActiveOutlier": "The prior aggregate is not reproduced; stop and retain the discrepancy rather than claiming a correction."
+    }
+  },
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 67108864,
+    "evidenceBytes": 16777216,
+    "projectedWriteBytes": 83886080,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on non-fresh roots, prior attempt-34 drift, source-code drift, source or copied-candidate manifest drift, symlink, cache-root or baked-flag mismatch, frozen setting mismatch, unexpected initial roster, absent or empty evaluated FLIP particles, aggregate/detail mismatch, process/log/result failure, any bake/save/render/network/remote-write count, banned media or resource failure. Never open a retained root directly and never save the in-memory particle exposure.",
+  "claimCeiling": "One zero-bake, zero-save, seven-frame localization of already measured active FLIP outliers in a complete fresh copy of the resolution-192 static control. It proves particle state, coordinates and modeled-cup region only; it does not prove cause, a physical correction, slow tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/inspect-rc6-liquid-flip-particle-detail-scene.py": "9c875b08d8eceacc0c95477f73e1ca40fcf3d1038904afd8bf1864bfc9a2d895",
+    "scripts/run-rc6-liquid-flip-particle-detail.py": "2668684a24a7a5b329397b1830819e5730b1a16e00f1d8921acb63ba5a3992ed",
+    "scripts/audit-rc6-liquid-flip-particle-detail.py": "6e2b12c26c4bcf5d3c76771545117f86c34d5c37f08a46ccb1341e8dce38380f"
+  },
+  "specHash": "c1a0c2dfb3aff91660a500b0b01d34b5a212da464d857666bfd2a2e2347df7b7"
+}
