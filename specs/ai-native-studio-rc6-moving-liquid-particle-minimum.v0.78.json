@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidParticleMinimum.v0.78",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_67_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "3153748690c8a87fd945222d94d8ccd222daf96b",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded single-variable Blender fluid validation under standing owner autonomy"
+  },
+  "question": "Does increasing continuing minimum particles per cell from 8 to 12 reduce moving-liquid volume drift below the frozen gates on exact attempt-65 physics?",
+  "rationale": {
+    "attempt65": "simulation radius 1.8 produced the strongest Mesh result at 17.05 percent temporal loss",
+    "attempt66": "occupied support worsened while Mesh improved, so occupancy is not mass and radius tuning is closed",
+    "sourceFinding": "particle_number controls initial level-set sampling, while every liquid step calls adjustNumber with particle_minimum and particle_maximum",
+    "singleDegreeOfFreedom": "fluid domain particle_min only",
+    "selectionRule": "12 is the single midpoint between the exact default minimum 8 and unchanged maximum 16; no scan"
+  },
+  "implementation": {
+    "sourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "rnaFluidSha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4",
+    "dnaFluidTypesSha256": "356a47d3c8d1c0800ef72fa55bb2d1b1bde8112014cb8f625868276c8aeceead",
+    "liquidScriptSha256": "b526a55e9ba35d5ba41ef53dc5d027e9e13831a32a2862c424752b616a10392b",
+    "initialSamplingExpression": "sampleLevelsetWithParticles(... discretization=particleNumber ...)",
+    "continuingReseedingExpression": "adjustNumber(... minParticles=minParticles, maxParticles=maxParticles ...)",
+    "boundDefaults": {"particleNumber": 2, "particleMinimum": 8, "particleMaximum": 16},
+    "rnaRange": {"particleMinimum": [0, 1000], "particleMaximum": [0, 1000]},
+    "cacheInvalidation": "particle_min and particle_max both call rna_Fluid_datacache_reset"
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "retainedStaticCacheManifestHash": "53bc19e1532b64ea8c37b0cc5fa52347c72c73023728d3705d45c063d5b7c265",
+    "trajectory": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55/cells/C5F96/result.json",
+    "trajectoryFileSha256": "00193b1a1258814f5a0a5b7a2308686f9f7daa0826f554af62c55e7de38fb261",
+    "attempt56ResultFileSha256": "6aafa7107ac45f0911c5e0775514350cf10645a2358e0497d6c6f6517231f659",
+    "attempt57AuditFileSha256": "bacbd61bbfc001fa4fab255713b875b0039f55a77a188060f774ba0bbd3c389a",
+    "attempt58AuditFileSha256": "65133bdb220737da1139a8c23469fa8c6d4a104c82021fc0cc17277f86409bb6",
+    "attempt65ResultFileSha256": "6fc1ea1bf39a2ba3f804f91e60c2273e31fc3ea6bd460b9f93cc586b7ba562ef",
+    "attempt65AuditFileSha256": "948253210d84b0423c72acd903f68e04f99b0f24379ebcdcc3d4f2f32e574c13",
+    "attempt66AuditFileSha256": "eba99ea2df27c4230a366830b3bca5254f174737308b6b729f94103f4cfbf191"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-particle-minimum-attempt-67",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-minimum-attempt-67"
+  },
+  "frozenConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "resolutionMax": 96,
+    "domainCenterMeters": [0.45, 0.0, 0.26],
+    "domainDimensionsMeters": [0.9, 0.5, 0.58],
+    "trajectoryCellId": "C5F96",
+    "simulationMethod": "APIC",
+    "particleNumber": 2,
+    "particleMinimum": 12,
+    "particleMaximum": 16,
+    "particleRadius": 1.8,
+    "meshParticleRadius": 2.5,
+    "meshScale": 2,
+    "meshConcaveLower": 0.4,
+    "meshConcaveUpper": 3.5,
+    "meshSmoothenPos": 1,
+    "meshSmoothenNeg": 1,
+    "cupEffectorSurfaceDistanceCells": 2.0,
+    "cupEffectorSubframes": 1,
+    "timestepsMin": 2,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "deleteInObstacle": false
+  },
+  "onlyChangeFromAttempt65": {
+    "path": "fluid domain FluidDomainSettings.particle_minimum via RNA particle_min",
+    "before": 8,
+    "after": 12
+  },
+  "machineAcceptanceUnchangedFromAttempt65": {
+    "maximumTrajectoryLocationDeltaMeters": 0.00001,
+    "maximumTrajectoryRotationDeltaDegrees": 0.0001,
+    "minimumFrame24CupTiltDegrees": 14.0,
+    "maximumHingePivotDriftMeters": 0.005,
+    "exactCacheFiles": 72,
+    "liquidMeshRequiredEveryFrame": true,
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.25,
+    "maximumAbsoluteTemporalVolumeDriftFraction": 0.15,
+    "positiveLiquidBodyCountEveryFrame": 1,
+    "maximumNonManifoldEdgeCount": 0,
+    "minimumLargestComponentFraction": 0.5,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.05,
+    "maximumBelowFloorFraction": 0.01,
+    "minimumLiquidCentroidShiftCupLocalMeters": 0.002,
+    "zeroCupBallPusherPoseKeys": true,
+    "retainedStaticCacheByteExact": true
+  },
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 2147483648,
+    "maximumWorkspaceBytes": 2147483648,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-moving-liquid-particle-minimum-scene.py", "sha256": "a6d56c0abe22b92f1ece3bb51a86782b59fdb55e2527ec59808f7fb19dd35011"},
+    {"uri": "scripts/run-rc6-moving-liquid-particle-minimum.py", "sha256": "ba3d60fdb362a447affa11f57dba6989243608eb9b77415b25d794ac8bf5dcc8"},
+    {"uri": "scripts/audit-rc6-moving-liquid-particle-minimum.py", "sha256": "ac486ec379a4166f018be657c4abf17275f3eff81c177e6a1a6f28abfb599ba8"}
+  ],
+  "stopRule": "Run exactly once in attempt-67 roots and retain PASS, physical FAIL or harness failure. Never add a second particle_min value, change particle_max or particle_number, change radius/timesteps/CFL/subframes/surface_distance/Mesh/thresholds, begin impact or render.",
+  "claimCeiling": "One 24-frame Preview-96 single-variable continuing particle-density result. It cannot establish final resolution, full tip, spill, impact, persistence, rendered appearance or film quality.",
+  "specHash": "1a8038250c164468aac9a506e16804fda1526d1b2208eda1605a78725b6a9f84"
+}

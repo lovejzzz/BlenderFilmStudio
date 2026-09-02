@@ -7175,3 +7175,15 @@ baseline correlate only `r=0.47650`. Occupied VDB support is therefore not a
 mass measure and cannot explain the radius response alone. Close radius tuning;
 next inspect and preregister a distinct simulation-density variable rather than
 inflating the Mesh surface.
+
+## J-616 · Ongoing reseeding, not initial sampling, is the next density test
+
+Date: 2026-09-02 · Type: BOUND SOURCE INSPECTION · Blender starts / bakes / renders: 0 / 0 / 0
+
+At exact engine source `4061e12b…`, RNA says `particle_number` raises initial
+particle sampling and maps it to `sampleLevelsetWithParticles(discretization)`.
+Every later liquid step instead calls `adjustNumber` with `particle_minimum`
+and `particle_maximum`, whose bound defaults are 8/16. Because the defect grows
+during motion, attempt-67 will keep initial number 2 and change only the ongoing
+minimum 8→12, the single midpoint below the unchanged maximum 16. Mesh,
+particle radius 1.8, timesteps and every physical threshold remain exact.

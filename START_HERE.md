@@ -1047,8 +1047,13 @@ Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-radius-data-comparison-attempt-66`;
 receipt/audit self hashes are `04b70991…` / `aed82a88…`. Occupied support is
 not mass, particle-radius tuning is closed, and the next design must examine a
-distinct simulation-density variable rather than Mesh inflation. Do not render
-or begin real impact.
+distinct simulation-density variable rather than Mesh inflation. Bound source
+inspection found that `particle_number` controls only initial sampling, while
+per-step `adjustNumber` uses default minimum/maximum 8/16. Attempt-67 is now
+preregistered to change only the continuing minimum 8→12, keeping maximum 16
+and all attempt-65 physics exact. Its spec is
+`specs/ai-native-studio-rc6-moving-liquid-particle-minimum.v0.78.json`, self
+hash `1a803825…`; both roots remain absent. Do not render or begin real impact.
 
 ## Public routes
 
