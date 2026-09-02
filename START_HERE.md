@@ -1353,6 +1353,13 @@ Close this scalar. Next preregister one zero-Blender copied-cache C24 comparison
 of C23 versus C18 Data/Mesh onset and amplitude before choosing another physical
 degree of freedom. Rendering remains forbidden. See
 `research/2026-09-02-rc6-real-impact-liquid-particle-maximum-c23-attempt-101-result.md`.
+C24 attempt-102 copied all108 C23 cache files and measured all36 frames but is a
+retained harness FAIL7/8: its only false check expected the stale verdict token
+`PARTICLE_RADIUS_C23` rather than actual `PARTICLE_MAXIMUM_C23`. No Blender,
+bake, render, network or retained-root write occurred. C1 may correct exactly
+that analyzer string and use fresh attempt-103 roots while keeping every
+measurement/classification rule unchanged. See
+`research/2026-09-02-rc6-real-impact-particle-maximum-data-comparison-c24-attempt-102-retained-failure.md`.
 
 ## Public routes
 

@@ -174,6 +174,12 @@ changed only37→36, components worsened37→38 and cup intrusion rose
 0.749%→0.994%. Close this scalar. Next preregister one zero-Blender C24 copied-
 cache C23-versus-C18 onset/amplitude comparison; no new physical value or render
 may precede it.
+C24 attempt-102 copied all108 C23 cache files and measured all36 frames, then
+stopped as a retained harness FAIL7/8 because the adapted analyzer expected the
+old verdict token `PARTICLE_RADIUS_C23` instead of actual
+`PARTICLE_MAXIMUM_C23`. No Blender/bake/render/network/retained write occurred.
+C24 C1 may correct only that expected token, bind attempt-102 unchanged and use
+fresh attempt-103 roots; classification logic and thresholds remain frozen.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
