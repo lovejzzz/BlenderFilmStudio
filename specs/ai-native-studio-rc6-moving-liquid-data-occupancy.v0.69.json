@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidDataOccupancy.v0.69",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_58_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "5131279adb2b129d8e5e6e39130e50634087847a",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded read-only cache-copy analysis under standing owner autonomy"
+  },
+  "question": "Across all 24 frames, does the particles-grid occupied-voxel support shrink in the same direction and with strong correlation to the retained Mesh-volume loss, despite growing ALIVE particle count?",
+  "capabilityDiscoveryDisclosure": {
+    "performedBeforePreregistration": true,
+    "operations": "read-only runtime/module identity, frame-1 and frame-24 VDB metadata probes on retained cache; zero copies, roots, Blender starts, bakes or writes",
+    "gridRoster": ["particles PointDataGrid", "velocity Vec3SGrid"],
+    "absentGrids": ["phi", "liquid", "flags"],
+    "frame1ParticleOccupiedVoxelCount": 1227,
+    "frame24ParticleOccupiedVoxelCount": 874,
+    "interpretation": "the formal run measures and binds the complete 24-frame relation; it is not a blinded endpoint discovery"
+  },
+  "runtime": {
+    "enginePython": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/bin/python3.13",
+    "enginePythonVersion": "3.13.13",
+    "enginePythonSha256": "986943968d1908932b002bd96245885145ac87a71ce5f105cf467cc285a2f594",
+    "openVdbModule": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/lib/python3.13/site-packages/openvdb.cpython-313-darwin.so",
+    "openVdbModuleSha256": "d9e505e2ec7d0f4c0b98a4b0c1f7d08d9ee1e65c0115bec77a2a2016c34d2849",
+    "openVdbLibrary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/lib/libopenvdb.dylib",
+    "openVdbLibrarySha256": "43963a772b9582eae35d3db0388971ebcd5bdb52381814a9a5c392cbac6c890f",
+    "openVdbLibraryVersion": [13, 0, 0],
+    "openVdbFileFormatVersion": 225
+  },
+  "baseline": {
+    "attempt57CacheRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-data-diagnostic-attempt-57/mantaflow-cache",
+    "attempt57CacheManifestHash": "b3e8e149301d7d3ea48b10ba5cf5deee9da42b96c09a717192a3d90a062160b5",
+    "attempt57CacheFiles": 48,
+    "attempt57CacheBytes": 4741825,
+    "attempt57ResultFileSha256": "bf0a6545c105d184dfc1e7c1b8eb8fb6958c1164bfdd18d2a04d51b7ce71ffcf",
+    "attempt57ResultHash": "fa82f7dc69d363f898f7249a8565b3909ea87434336f70b180865eb737caca12",
+    "attempt56ResultFileSha256": "6aafa7107ac45f0911c5e0775514350cf10645a2358e0497d6c6f6517231f659",
+    "attempt56ResultHash": "4969ee48c700fd86e452f1df536918b0c5c2ae868c77f39b4c3e37bc548f1a99",
+    "sourceVolumeCubicMeters": 0.0013283283766941
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-data-occupancy-attempt-58",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-occupancy-attempt-58"
+  },
+  "measurement": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "allFramesInclusive": true,
+    "requiredGridNames": ["particles", "velocity"],
+    "requiredGridTypes": ["PointDataGrid", "Vec3SGrid"],
+    "requiredBaseResolution": [96, 53, 62],
+    "requiredVoxelSizeMeters": 0.009375,
+    "particleOccupancyProxy": "particles.file_voxel_count * file_voxel_size^3",
+    "velocitySupportProxy": "velocity.file_voxel_count * file_voxel_size^3",
+    "crossComparisons": ["attempt-56 Mesh volume", "attempt-57 ALIVE particle count"]
+  },
+  "classificationRules": {
+    "dataSpatialSupportShrinksWithMesh": "final occupancy drift < -0.15, final Mesh drift < -0.15 and occupancy/Mesh Pearson correlation >= 0.8",
+    "dataOccupancyStableSurfaceSuspected": "maximum absolute occupancy drift <= 0.15 while final Mesh drift magnitude > 0.15",
+    "otherwise": "DATA_MESH_RELATION_DIVERGENT_INCONCLUSIVE",
+    "claimLimit": "occupied sparse voxel support is not exact mass, signed level-set volume or proof of causation"
+  },
+  "processCeilings": {
+    "systemRunnerStarts": 1,
+    "enginePythonStartsIncludingAudit": 2,
+    "cacheCopies": 1,
+    "blenderStarts": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "networkCalls": 0,
+    "retainedRootWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 67108864,
+    "maximumWorkspaceBytes": 67108864,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/analyze-rc6-moving-liquid-data-occupancy.py",
+      "sha256": "0795c0b0b5dcf0a962a799c4c1cb2599a9a65c609d874f6632a971a43bc29488"
+    },
+    {
+      "uri": "scripts/run-rc6-moving-liquid-data-occupancy.py",
+      "sha256": "18ad78d2a247c1d0aaa95e9c4bbcaf89859e06b57d3b12532ffa7d959dc003b5"
+    },
+    {
+      "uri": "scripts/audit-rc6-moving-liquid-data-occupancy.py",
+      "sha256": "ab5ff7cdb9fcc23ed42238bd347a6531f27afbfa5e69ad77196325fec515ac4f"
+    }
+  ],
+  "executionOrder": [
+    "commit this spec and exact tools while roots are absent",
+    "run system runner once to copy the immutable cache and invoke the engine Python analyzer",
+    "run the frozen auditor once with the same exact engine Python",
+    "retain result, classification and both roots without tuning"
+  ],
+  "stopRule": "Retain every outcome. Never read the source cache through Blender, never write it, never substitute activeVoxelCount for file_voxel_count on metadata-only PointDataGrid objects, and never treat occupancy as exact mass.",
+  "claimCeiling": "Read-only copied-cache spatial-support diagnosis only; no exact Data mass, physical correction, moving-liquid PASS, impact, render or film-quality claim.",
+  "specHash": "1d873f2f6148507570385ac7d440dc523783f5e7f126d0d61e50c0682f5c6f3a"
+}
