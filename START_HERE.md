@@ -1006,7 +1006,8 @@ error worsened from 24.00% to 24.80%, and Data cost rose 14.63%; every other
 physical check still passed. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-subframes-attempt-61`;
 receipt/audit self hashes are `57e3ade8…` / `ebf39452…`. Do not try subframes 3.
-Next preregister one zero-bake copied-cache Data comparison before selecting
+Attempt-62 is now preregistered as one zero-bake copied-cache Data comparison;
+its fresh roots remain absent. Run that exact diagnostic before selecting
 solver minimum timesteps as a different physical variable. Do not render or
 begin real impact.
 
