@@ -7293,3 +7293,15 @@ derives fluid-effector subframes from every cup mesh vertex divided by the
 `0.009375 m` voxel. The ceiling is eight subframes. Three isolated Blender
 starts and three Bullet bakes are allowed; liquid, render and save counts stay
 zero. Roots remain absent until the six-path preregistration commit is frozen.
+
+## J-625 · Numeric spelling stopped the screen before physics
+
+Date: 2026-09-02 · Type: RETAINED PRE-ROOT TOOL FAILURE / C1 PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+The v0.82 runner rejected its spec self hash before root creation because
+JavaScript canonicalization serialized `0.0` as `0`, while the frozen Python
+runner retained `0.0`. Stored `f7530aaa…` and Python `bb78abb8…` therefore
+differ. Attempt-71 roots remain absent and all execution counts are zero. C1
+changes no physical or resource setting: it uses versioned adapters, a Python-
+canonical v0.83 identity and fresh attempt-72 roots. I08/I10/I12 and every
+machine threshold remain exact.
