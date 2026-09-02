@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6SlowTipBulletScreenC3.v0.58",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_50_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "f318df7b0681db0502aec573347f229482065e12",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe reversible validation-only Blender work under standing owner autonomy"
+  },
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-slow-tip-bullet-screen-c2.v0.57.json",
+    "specHash": "02b41b1c42df5e58a1f6907a91959853b969ecc7cee70d32909c41149bcfa58c"
+  },
+  "retainedAttempt49": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c2-attempt-49",
+    "verdict": "FAIL_BULLET_SCREEN",
+    "receiptHash": "11f6791636bd6f57ebf616a566066511de989ec03c1f5712c6375501cb65d155",
+    "receiptFileSha256": "fe335ed6b0db1f19f30ecf8ad5fe2b9b4cb085c69f7447918dfdf6fe4b54882a",
+    "auditHash": "e82f09858352c81f47f333af4dfd302f08cb2d41abcb3c4f8cc534a9c204f92b",
+    "auditFileSha256": "7a99f1abe453405076fbb84ff11ca40c25a7f6210d553a0e51c5e432ff827fdb",
+    "immutable": true
+  },
+  "physicalQuestion": "Can an explicit two-body Blender Bullet hinge at the cup's measured lower-right tangent constrain the unchanged slow upper-cup contact to one physical rotational degree of freedom, producing a continuous at-least-45-degree tip without domain escape, floor penetration, excessive surface displacement or authored cup motion?",
+  "correction": {
+    "remove": "collision-only toe stop from the C2 in-memory fixture",
+    "add": {
+      "constraintName": "PHYS_SLOW_TIP_HINGE",
+      "constraintType": "HINGE",
+      "object1": "PHYS_OPEN_TUMBLER",
+      "object2": "PHYS_SLOW_TIP_HINGE_ANCHOR",
+      "anchorRigidBodyType": "PASSIVE",
+      "pivotWorldMeters": [0.47, 0.0, 0.0],
+      "axisWorld": [0.0, -1.0, 0.0],
+      "anchorLocationMeters": [0.47, 0.0, -0.08],
+      "disableCollisionsBetweenConstrainedBodies": true,
+      "maximumPivotDriftMeters": 0.005
+    },
+    "sourceDerivation": "pivot x is cup center 0.32 m plus measured outer radius 0.15 m; pivot z is measured outer bottom at world z 0; constraint local Z is rotated onto world negative Y",
+    "unchanged": [
+      "accepted source and binary",
+      "four drive durations, direct actuator path and static ball",
+      "exact evaluated cup mesh-vertex measurement",
+      "45 degree response, four-frame response span, -5 mm floor, one-voxel domain and ten-subframe limits",
+      "zero cup and ball animation",
+      "all zero-fluid, zero-render, zero-save and zero-network ceilings"
+    ]
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-slow-tip-bullet-screen-c3-attempt-50",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c3-attempt-50"
+  },
+  "cells": [
+    {"id": "C3D16", "driveEndFrame": 16},
+    {"id": "C3D20", "driveEndFrame": 20},
+    {"id": "C3D24", "driveEndFrame": 24},
+    {"id": "C3D28", "driveEndFrame": 28}
+  ],
+  "machineAcceptance": {
+    "contactByFrameMaximum": 50,
+    "minimumPeakCupTiltDegrees": 45.0,
+    "minimumFiveToFortyFiveDegreeSpanFrames": 4,
+    "minimumCupSurfaceWorldZ": -0.005,
+    "candidateDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 10,
+    "hingeIdentityAndAxisExact": true,
+    "maximumHingePivotDriftMeters": 0.005,
+    "cupAnimationChannels": 0,
+    "ballAnimationChannels": 0,
+    "selectionRule": "select the greatest driveEndFrame among cells passing every frozen check"
+  },
+  "processCeilings": {
+    "blenderStarts": 4,
+    "bulletBakes": 4,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 268435456,
+    "maximumWorkspaceBytes": 268435456,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c3-scene.py",
+      "sha256": "7cde8be34cc8253037ff99a815ae65d0cfa30d843c00c2cbf3d752b91a53211a"
+    },
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c3.py",
+      "sha256": "75a11f75b75fccb61fd51e46e78994f7a2533157896a0fe3f34831d621733ba8"
+    },
+    {
+      "uri": "scripts/audit-rc6-slow-tip-bullet-screen-c3.py",
+      "sha256": "d7ac11217580e409a4b5404343bb5fa234416a4352c15de37996d04e6f99edad"
+    }
+  ],
+  "stopRule": "Run the exact four hinged cells once in unique attempt-50 roots. Retain failure. Do not move the hinge, add a motor or angular key, change the actuator or thresholds, run fluid, render, save, build or add a candidate after observing results.",
+  "claimCeiling": "One Bullet-only explicit-hinge slow-tip screen. A PASS selects a causal rigid trajectory and derived effector sampling for a separate moving-liquid gate; it does not prove liquid, persistence, impact or visual quality.",
+  "specHash": "be7457e73bbbf6c3ed368a052a80af8f41fcfd5e4c91e2eef80fab54d554b2d7"
+}
