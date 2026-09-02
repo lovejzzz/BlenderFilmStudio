@@ -992,10 +992,17 @@ containment and all other 16 checks passed; Data/Mesh took 251.55/2.89 seconds.
 Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-distance-attempt-59`;
 receipt/audit self hashes are `62316a54…` / `95b7f021…`. Do not try a second
-effector-distance value. Attempt-60 is now preregistered as one zero-bake,
-zero-Blender copied-cache occupancy comparison; its fresh roots remain absent.
-Run that exact diagnostic before selecting a different physical degree of
-freedom. Do not render or begin real impact.
+effector-distance value. Attempt-60 then passed its zero-bake copied-cache
+diagnosis with an independent 19/19 audit. At 2.0 cells, particle occupied-
+voxel support fell 1,335→979 (`-26.67%`), only 2.10 percentage points better
+than the 2.5-cell baseline, and still correlated with Mesh at `r=0.95525`.
+Data crossed the 15% loss line by frame 12 at only 6.84° tilt, before Mesh did.
+Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-distance-data-occupancy-attempt-60`;
+receipt/audit self hashes are `fcae7479…` / `b4b55584…`. The next physical gate
+may change exactly one different variable: moving-effector subframes 1→2 while
+retaining 2.0-cell distance and every other setting/threshold. Do not render or
+begin real impact.
 
 ## Public routes
 

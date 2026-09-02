@@ -7084,3 +7084,17 @@ zero containment failures and the exact 72-file cache. Data/Mesh took
 251.55/2.89 seconds. The useful but incomplete response means no second
 effector-distance value may be tried; next compare the new immutable Data-cache
 occupancy with attempts 58/56 in one zero-bake copied-cache diagnostic.
+
+## J-609 · Two-cell response is present in Data but support still shrinks first
+
+Date: 2026-09-02 · Type: DIAGNOSTIC PASS · Engine-Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+Attempt-60 copied the exact attempt-59 cache and passed an independent 19/19
+audit. At 2.0 cells, particle occupied-voxel support fell 1,335→979
+(`-26.67%`), only 2.10 percentage points better than the 2.5-cell baseline,
+while Mesh temporal loss improved 11.20 points. Current occupancy and Mesh
+remain correlated at `r=0.95525`. Data crossed the 15% boundary by frame 12 at
+only 6.84° cup tilt, four frames before Mesh. The residual defect is therefore
+in or before Data, not a Mesh-only problem. The next single variable may be
+effector temporal subframes 1→2; every other physical and threshold field must
+stay exact.
