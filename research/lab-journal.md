@@ -7637,3 +7637,16 @@ Blender RNA defines CFL as maximum velocity per cell; Mantaflow scales adaptive
 only CFL2→1 on C14 while preserving min/max steps2/8, R40, geometry, Mesh and
 all27 gates. A failure closes this single value; it does not authorize a second
 CFL, another maximum-step value, surface tuning or render.
+
+## J-655 · Lower CFL cleans the obstacle boundary but destabilizes the liquid
+
+Date: 2026-09-02 · Type: RETAINED PHYSICAL FAILURE · Blender starts / Bullet bakes / liquid Data bakes / liquid Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+C16 attempt-88 changes only CFL2→1 on C14 and passes its independent audit
+20/20, but remains physical FAIL22/27. Maximum cup intrusion improves from
+2.45% to0.69%; meanwhile reconstructed volume worsens from3.357× to15.114×
+source, positive bodies50→219 and components52→221, with conservation already
+failing at frame24. More adaptive updates are therefore not monotonic stability
+control in this moving-obstacle APIC case. Close CFL tuning and compare the
+immutable C16/C14 Data support on one fresh zero-bake cache copy before another
+physical variable is selected.

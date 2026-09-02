@@ -63,9 +63,15 @@ C14 cup intrusion begins at frame31, velocity support crosses25% at frame34,
 Mesh/conservation/positive-body gates fail at frame35, and particle support plus
 component count fail at frame36. Particle/Mesh correlation is0.99915, but Mesh
 crosses the frozen expansion line one frame before particle support, so do not
-rewrite this as same-frame causality. Bound source selects exactly one C16 test:
-`cfl_condition`2→1 with maximum steps8 and every other input/gate frozen. No
-second CFL, further max-step value, Mesh tuning or render is permitted first.
+rewrite this as same-frame causality. C16 then changed only
+`cfl_condition`2→1 with maximum steps8 and every other input/gate frozen. It is
+a retained physical `FAIL` with an independent 20/20 audit. Cup intrusion
+improved from2.45% to0.69%, but volume expansion worsened from3.357× to15.114×
+source, positive bodies50→219 and components52→221; conservation fails from
+frame24. CFL tuning is closed. Next preregister one zero-Blender copied-cache
+C16-versus-C14 Data/Mesh comparison before selecting a distinct physical
+variable. No second CFL, further max-step value, Mesh tuning or render is
+permitted first.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

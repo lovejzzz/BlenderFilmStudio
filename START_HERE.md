@@ -1227,6 +1227,16 @@ before particle support. Saved terminal `dt` is not a complete solver-step
 history. Bound source selects one C16 variable: CFL2→1 with min/max steps2/8
 and every other C14 input and all27 thresholds frozen. Do not test a second CFL,
 raise max steps again, tune Mesh or render before this single run is retained.
+C16 attempt-88 is now an immutable physical `FAIL` with an independent 20/20
+audit. The one CFL2→1 change improved maximum cup-solid intrusion from2.45% to
+0.69%, but destabilized liquid much earlier: source and temporal volume fail at
+frame24, peak reconstructed volume reaches15.114× source, positive bodies reach
+219 and connected components221. C14's corresponding peaks were3.357×,50 and52.
+The exact R40 Bullet path and all domain/ramp/floor/manifold/provenance checks
+remain valid; no render or save occurred. CFL tuning is closed. Next preregister
+one zero-Blender copied-cache C17 comparison of immutable C16 and C14 Data/Mesh
+curves. Do not select another physical variable, run a second CFL, raise maximum
+steps, tune Mesh or render before that comparison is retained.
 
 ## Public routes
 
