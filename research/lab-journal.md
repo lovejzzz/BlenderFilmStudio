@@ -7809,3 +7809,15 @@ This closes only evidence replay. Simulation particle radius1.6 remains a
 physical FAIL23/27 and must not be rendered. Before another physical choice,
 C21 must compare copied C20/C18 Data and Mesh caches to separate transition
 onset from maximum severity with zero Blender work.
+
+## J-667 · Smaller radius amplifies the same impact transition
+
+Date: 2026-09-02 · Type: DIAGNOSTIC RESULT / RETAINED AUDIT HARNESS FAILURE · Engine Python / Blender / bakes / renders: 2 / 0 / 0 / 0
+
+C21 attempt-99 copied all108 C20 files and independently reopened every frame.
+C18 and C20 share velocity/Mesh/particle expansion onset at24/24/25. C20 raises
+maximum expansion from173.84%/51.54%/32.38% to769.48%/567.15%/373.11%, so the
+frozen result is same-onset/more-severe. The audit passes22/23; only the C19
+receipt self hash in the C21 spec has a wrong suffix, while its file hash and
+all other bindings pass. Retain attempt-99 and close that one leaf in a fresh
+audit-only C1 root before selecting another physical degree.

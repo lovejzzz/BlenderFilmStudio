@@ -146,6 +146,14 @@ FAIL23/27: radius1.6 sharply worsened conservation and fragmentation despite
 improving cup intrusion. Next preregister one zero-Blender copied-cache C21
 C20-versus-C18 onset/amplitude comparison. No new physical value or render may
 precede it.
+C21 attempt-99 then copied all108 C20 cache files and measured all36 frames.
+Radius1.6 has the same velocity/Mesh/particle onset as C18 radius1.8 at
+frames24/24/25 but amplifies their maxima from173.84%/51.54%/32.38% to
+769.48%/567.15%/373.11%. Retain the result as same-onset/more-severe. Its
+independent audit is22/23 solely because one C19 receipt self hash was
+transcribed incorrectly; every measurement and other evidence check passed.
+Preserve attempt-99. C21 C1 may correct only that spec leaf and perform a fresh
+audit-only closure; no analyzer, cache copy, Blender, parameter change or render.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

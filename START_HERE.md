@@ -1319,6 +1319,15 @@ FAIL23/27, not accepted liquid. Next preregister one zero-Blender copied-cache
 C21 comparison of C20 versus C18 Data/Mesh onset and amplitude. Do not mutate a
 physical value or render first. See
 `research/2026-09-02-rc6-real-impact-liquid-particle-radius-c20-c5-audit-accepted.md`.
+C21 attempt-99 copied all108 C20 cache files and measured all36 frames. Its
+result classifies radius1.6 as `C20_SAME_ONSET_MORE_SEVERE_THAN_C18`: C20 and
+C18 both cross velocity/Mesh/particle support at frames24/24/25, but maximum
+velocity/particle/Mesh expansion rises from173.84%/32.38%/51.54% to
+769.48%/373.11%/567.15%. The independent audit is retained22/23 solely because
+`baseline.c19ReceiptHash` was transcribed with the wrong suffix; all other
+checks pass. Preserve attempt-99. Next freeze one audit-only C1 correcting only
+that JSON leaf in a fresh root, with zero analyzer/cache-copy/Blender work. See
+`research/2026-09-02-rc6-real-impact-particle-radius-data-comparison-c21-attempt-99-retained-failure.md`.
 
 ## Public routes
 
