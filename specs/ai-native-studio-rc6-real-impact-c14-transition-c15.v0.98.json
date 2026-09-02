@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6RealImpactC14TransitionC15.v0.98",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_87_ROOTS",
+  "question": "After timesteps_max 4 to 8 delayed the gross C12 failure, does retained C14 Data support expand with Mesh only after cup-solid intrusion has already crossed its frozen one-percent gate?",
+  "authority": {
+    "source": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
+    "charterSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "scope": "one zero-Blender, zero-bake, copied-cache read-only diagnostic in fresh bounded roots"
+  },
+  "researchParentBeforePreregistration": "75564d1fffd2dcc109a811e96ce6b67e976f6777",
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-real-impact-c14-transition-c15-attempt-87",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-real-impact-c14-transition-c15-attempt-87"
+  },
+  "baseline": {
+    "attempt86CacheRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-real-impact-liquid-timestep-max-c14-attempt-86/mantaflow-cache",
+    "attempt86CacheFiles": 108,
+    "attempt86CacheBytes": 18032601,
+    "attempt86CacheManifestHash": "35dcc8adf58490e3b7735bb82227f17a3f78fd3da135ea442e02728a83ee2f93",
+    "attempt86ResultFileSha256": "20a8a9969d95128c8d9307bb5041fc97149ff4469f50320c5ed0bd901624b383",
+    "attempt86ResultHash": "5dbc4e416466567365e101d64f8c68b4d28323364f385a19cc9e451d115cabbf",
+    "attempt86ReceiptFileSha256": "0fbf7667afa765db95610cd48d3fe3ddc2d1adfa0b9ed73709fa8155132835cd",
+    "attempt86ReceiptHash": "c8d56e2b3ea85cc6a3c1bfdff304ef37d95546e5d056dd06f8b25a305409e5fc",
+    "attempt86AuditFileSha256": "3d430caa9a29f95f4da54107d28118a8607c28495dfc31e80368259f5c9af69b",
+    "attempt86AuditHash": "3c3dd1d592833811b4e5d24130492011ed9852d4c3480113d9acf0eb27047bbb",
+    "c13ResultFileSha256": "10c8a42238aae8fbec0c1ab2fb1224551f23b460495a5a59e31de9e3b106fd84",
+    "c13ResultHash": "64bee342cee49afac6726413615f3726437ac587801c0bae22f0c1e0422ce542",
+    "c13ReceiptFileSha256": "9e82eed13d53a7b97cf6f3ee41a41558a0640092b0033e9b3d58b48a06da1f91",
+    "c13ReceiptHash": "4920de2dec0d0fd2a81b393bfee0179083c5685076ab723724c781f9aa8b29c2",
+    "c13AuditFileSha256": "be99c50d058307526083468bda30d4b041f2559a1ed77796ec31395b89b2b15d",
+    "c13AuditHash": "ab91f5076ef643c130913d4d00f2a57e3885ae78f65e41df965d8d7ed0d2489c",
+    "c14SpecFileSha256": "c32e732585dc89e9a295b166dbdba4509833ceccd7760e4b0fb2a031c1885a58"
+  },
+  "runtime": {
+    "enginePython": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/bin/python3.13",
+    "enginePythonVersion": "3.13.13",
+    "enginePythonSha256": "986943968d1908932b002bd96245885145ac87a71ce5f105cf467cc285a2f594",
+    "openVdbModuleSha256": "d9e505e2ec7d0f4c0b98a4b0c1f7d08d9ee1e65c0115bec77a2a2016c34d2849",
+    "openVdbLibrarySha256": "43963a772b9582eae35d3db0388971ebcd5bdb52381814a9a5c392cbac6c890f",
+    "openVdbLibraryVersion": [13, 0, 0],
+    "openVdbFileFormatVersion": 225
+  },
+  "measurement": {
+    "frameStart": 1,
+    "frameEnd": 36,
+    "comparisonFrameStart": 20,
+    "coherentBaselineFrame": 22,
+    "frameLengthSeconds": 0.10416666666666667,
+    "timestepsMax": 8,
+    "requiredGridNames": ["particles", "velocity"],
+    "requiredGridTypes": ["PointDataGrid", "Vec3SGrid"],
+    "requiredBaseResolution": [96, 53, 62],
+    "requiredVoxelSizeMeters": 0.009375,
+    "voxelToleranceMeters": 1e-8,
+    "savedConfigFields": ["terminal substep float at byte offset 20", "time_total float at byte offset 196"],
+    "terminalSubstepClaimBoundary": "the saved dt is the terminal substep for a frame and cannot be treated as the number or complete roster of solver steps"
+  },
+  "classificationRules": {
+    "expansionThresholdFraction": 0.25,
+    "minimumStrongCorrelation": 0.9,
+    "cupIntrusionThresholdFraction": 0.01,
+    "sourceVolumeErrorThresholdFraction": 0.25,
+    "temporalDriftThresholdFraction": 0.15,
+    "maximumPositiveBodies": 16,
+    "maximumConnectedComponents": 32,
+    "cupIntrusionPrecedesLaterDataMeshExpansion": "first >1% cup-solid intrusion is earlier than first >25% Data expansion, Data expansion is at or before Mesh expansion, and Data/Mesh correlation is at least 0.9",
+    "dataMeshExpansionWithoutPriorCupIntrusion": "Data expands at or before Mesh with correlation at least 0.9 but cup intrusion does not precede it",
+    "dataSupportStableMeshSuspected": "Mesh expands above 25% while Data support does not",
+    "otherwise": "TRANSITION_ORDER_INCONCLUSIVE"
+  },
+  "frozenInputs": {
+    "trajectory": "exact retained R40 Bullet solve",
+    "fluid": "exact retained C14 Data and Mesh cache with timesteps_max=8",
+    "thresholds": "all 27 C14 physical gates remain unchanged",
+    "retainedRoots": "attempt-84, attempt-85 and attempt-86 remain immutable"
+  },
+  "processCeilings": {
+    "enginePythonStartsIncludingAudit": 2,
+    "blenderStarts": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "networkCalls": 0,
+    "retainedRootWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 134217728,
+    "maximumWorkspaceBytes": 134217728,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/analyze-rc6-real-impact-c14-transition-c15.py", "sha256": "b7560b82055aea2e6c063f0c2bb4d613119be7bacf29e451c05cc53402a5b903"},
+    {"uri": "scripts/run-rc6-real-impact-c14-transition-c15.py", "sha256": "c1ddc49988918964c0a0be0b1d289559e1c5f0ed2553c0f29b292a6c15b3394f"},
+    {"uri": "scripts/audit-rc6-real-impact-c14-transition-c15.py", "sha256": "a2e9f2ded3cd4d753764df645b74884b07e0c0ec1a807a14d31651f0d38d1dd8"}
+  ],
+  "claimCeiling": "C15 may order retained C14 Data support, Mesh expansion, physical-threshold failures and saved terminal-substep metadata. It cannot measure exact liquid mass, reconstruct the complete adaptive-step roster, prove a specific solver mechanism, repair C14 or authorize rendering.",
+  "stopRule": "Run exactly once in fresh attempt-87 roots. Copy the complete 108-file C14 cache before reading it. Never open retained caches in Blender, bake, render, save, mutate retained roots, change a physical setting or select a repair before this diagnosis and its independent audit are frozen.",
+  "specHash": "818fde2fcf7b01c37146659c83011c78a298ef49c6013e8b15448fbe0a2840f4"
+}
