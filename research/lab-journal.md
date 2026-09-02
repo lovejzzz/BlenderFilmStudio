@@ -7030,3 +7030,18 @@ passes 18/18 without rerunning Blender. Attempt-55 therefore accepts C5F96:
 surface motion, one required effector subframe and 0.0058 mm hinge drift. The
 next gate may introduce moving Mantaflow on this exact trajectory, beginning at
 a bounded Preview tier; real impact and rendering remain later gates.
+
+## J-605 · RC6 moving liquid is contained and coherent but loses one-third volume
+
+Date: 2026-09-02 · Type: PHYSICAL GATE FAILURE · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+Attempt-56 completed the exact 24-frame C5F96 Preview-96 run in 282.82 seconds:
+277.86 seconds Data and 2.88 seconds Mesh. The cup trajectory was exact, the
+liquid moved 35.84 mm in cup coordinates, and all frames remained one positive,
+manifold, fully contained liquid body. Reconstructed volume nevertheless fell
+36.82% below the frozen source and drifted 34.23% from frame 1, so only 15/17
+physical checks passed. Blender returned exit zero despite the scene's frozen
+Python threshold exception; C1 preserved that harness mismatch without
+misclassifying the scientific failure and independently passed 23/23. Next
+diagnose Data/FLIP particles separately from Mesh reconstruction on the same
+physics before changing any parameter.

@@ -4,7 +4,7 @@
   "snapshotDate": "2026-09-02",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_PC6_CAUSAL_PRODUCTIZATION_PASS_PC7_FILMIC_PHYSICS_PASS_PC8_MEASURED_SHUTTER_PASS_PC9_PHYSICAL_ARCHETYPES_PASS_RC1_ROBOT_CAPSTONE_PASS_PUBLISHED_RC2_PHYSICAL_LIGHT_TRANSFER_PASS_PUBLISHED_RC3_ACTION_GRAMMAR_PASS_RC4_UNSTAGED_PHYSICAL_REALISM_PASS_PUBLISHED_RC5_BREAKABLE_ATTACHMENT_PASS_PUBLISHED_RC6_FINAL_STATIC_LIQUID_PASS_SLOW_TIP_PASS_MOVING_LIQUID_PREVIEW_NEXT_STANDING_AUTONOMY_ACTIVE",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_PC6_CAUSAL_PRODUCTIZATION_PASS_PC7_FILMIC_PHYSICS_PASS_PC8_MEASURED_SHUTTER_PASS_PC9_PHYSICAL_ARCHETYPES_PASS_RC1_ROBOT_CAPSTONE_PASS_PUBLISHED_RC2_PHYSICAL_LIGHT_TRANSFER_PASS_PUBLISHED_RC3_ACTION_GRAMMAR_PASS_RC4_UNSTAGED_PHYSICAL_REALISM_PASS_PUBLISHED_RC5_BREAKABLE_ATTACHMENT_PASS_PUBLISHED_RC6_FINAL_STATIC_LIQUID_PASS_SLOW_TIP_PASS_MOVING_LIQUID_PREVIEW_FAIL_DATA_DIAGNOSTIC_NEXT_STANDING_AUTONOMY_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "RC6-MOVING-LIQUID-PREVIEW",
+  "activeGate": "RC6-MOVING-LIQUID-DATA-DIAGNOSTIC",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -1028,7 +1028,7 @@
       "improvementPriorities": ["modeling detail", "action complexity"]
     },
     "gateOrder": ["PC.0", "PC.1", "PC.2", "PC.3", "PC.4", "PC5-CAUSAL-STUDIO", "PC5-GENERALIZATION", "PC6-CAUSAL-CONTRACT-PRODUCTIZATION", "PC7-FILMIC-PHYSICS-REALISM", "PC8-MEASURED-SHUTTER-REALISM", "PC9-PHYSICAL-ARCHETYPES-AND-CONTACT-REALISM", "RC1-ROBOT-CAPSTONE-PHYSICAL-PERFORMANCE-HOLDOUT", "RC2-PHYSICAL-FILM-DIRECTION-TRANSFER", "RC3-PHYSICS-NATIVE-ACTION-GRAMMAR", "RC4-UNSTAGED-PHYSICAL-REALISM", "RC5-PHYSICAL-RICHNESS-CURRICULUM"],
-    "activeGate": "RC6-MOVING-LIQUID-PREVIEW",
+    "activeGate": "RC6-MOVING-LIQUID-DATA-DIAGNOSTIC",
     "pc0": {
       "status": "PASS",
       "evidenceRoot": "experiments/ai-native-studio-post-pb7/PC.0-2026-08-31-mac-m2max-attempt-02",
@@ -2507,7 +2507,7 @@
     "Do not stage unrelated owner changes"
   ],
   "rc6CurrentCheckpoint": {
-    "status": "FINAL_STATIC_LIQUID_PASS_SLOW_TIP_PASS_MOVING_LIQUID_PREVIEW_NEXT",
+    "status": "FINAL_STATIC_LIQUID_PASS_SLOW_TIP_PASS_MOVING_LIQUID_PREVIEW_FAIL_DATA_DIAGNOSTIC_NEXT",
     "checkpointCommit": "39dfb4d94ca709ccf502b9eb6935b8c7bca2b9ff",
     "acceptedBinarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
     "acceptedStaticLiquid": {
@@ -2604,21 +2604,33 @@
       },
       "claimCeiling": "one solver-owned slow rigid trajectory only; no moving-liquid, impact, persistence, render or visual-quality claim"
     },
-    "next": {
-      "gate": "RC6-MOVING-LIQUID-PREVIEW",
-      "status": "PREREGISTERED_ATTEMPT_56_ROOTS_ABSENT_READY_FOR_ONE_FORMAL_RUN",
-      "preregistrationCommit": "9a4dc7f95ec13631405a24a828fcf47f594956b6",
-      "spec": "specs/ai-native-studio-rc6-moving-liquid-preview.v0.66.json",
-      "specHash": "d90ac6dfc6487b7d7616878091c7638a179c277ac9e5bac30bf57eb9ece3b3d9",
-      "runner": "scripts/run-rc6-moving-liquid-preview.py",
-      "workspaceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-preview-attempt-56",
+    "movingLiquidPreviewAttempt56": {
+      "status": "FAIL_MOVING_LIQUID_PREVIEW_WITH_RETAINED_BLENDER_EXIT_ZERO_HARNESS_MISMATCH",
       "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-preview-attempt-56",
-      "rootsAbsentAtPreregistration": true,
+      "resultHash": "4969ee48c700fd86e452f1df536918b0c5c2ae868c77f39b4c3e37bc548f1a99",
+      "failureReceiptHash": "2c2f547a0236cfae6403a7984c8555895bc64b82ec66ab93b6124a968e3716ff",
+      "failureAudit": "23/23 PASS",
+      "failureAuditHash": "556d44f8ea2129914e2c70446e4521425feb88fb6dd0de7e4c4e9c2058a303a5",
+      "physicalChecks": "15/17",
+      "failedChecks": ["sourceRelativeVolumeWithin25Percent", "temporalVolumeDriftWithin15Percent"],
+      "maximumAbsoluteSourceVolumeErrorFraction": 0.3682069022054074,
+      "maximumAbsoluteTemporalVolumeDriftFraction": 0.3422762779345705,
+      "maximumLiquidCentroidShiftCupLocalMeters": 0.03583837651120234,
+      "fluidDataBakeSeconds": 277.8596954999957,
+      "fluidMeshBakeSeconds": 2.8808950830134563,
+      "topologyContainmentResult": "one positive manifold body, zero radial/below-floor/above-rim violations on all 24 frames",
+      "blenderExitCode": 0,
+      "blenderThresholdExceptionObserved": true,
+      "claimCeiling": "retained Preview-96 moving-liquid scientific failure only; no moving-liquid PASS, impact, render or film-quality claim"
+    },
+    "next": {
+      "gate": "RC6-MOVING-LIQUID-DATA-DIAGNOSTIC",
+      "status": "PREREGISTER_FRESH_DATA_ONLY_FLIP_PARTICLE_DIAGNOSTIC",
       "mustUseExactSlowTrajectory": "C5F96",
       "mustUseAcceptedStaticGeometry": "RC6 final static-liquid attempt-46",
       "tier": "PREVIEW",
       "resolutionMaximum": 96,
-      "initialStrategy": "one bounded short Data+Mesh moving-liquid validation before any real-impact or render work",
+      "initialStrategy": "repeat unchanged attempt-56 physics in one fresh Data-only instrumented run; expose all FLIP particles on frames 1-24 and separate simulation behavior from Mesh reconstruction before tuning",
       "mustMeasure": [
         "source-relative volume at every retained frame",
         "temporal volume drift",
@@ -2632,12 +2644,14 @@
     }
   },
   "nextExpectedCheckpoint": {
-    "gate": "RC6-MOVING-LIQUID-PREVIEW",
-    "result": "RC6 moving-liquid Preview attempt-56 is preregistered and unconsumed; execute the one frozen run from a clean checkout",
-    "checkpointCommit": "9a4dc7f95ec13631405a24a828fcf47f594956b6",
+    "gate": "RC6-MOVING-LIQUID-DATA-DIAGNOSTIC",
+    "result": "attempt-56 retained FAIL: topology/containment/motion passed while source-relative and temporal Mesh volume failed; diagnose FLIP particles before changing a parameter",
+    "checkpointCommit": "78d9b65f",
     "movingLiquidPreviewSpec": "specs/ai-native-studio-rc6-moving-liquid-preview.v0.66.json",
     "movingLiquidPreviewSpecHash": "d90ac6dfc6487b7d7616878091c7638a179c277ac9e5bac30bf57eb9ece3b3d9",
-    "attempt56RootsAbsent": true,
+    "attempt56RootsAbsent": false,
+    "attempt56FailureReceiptHash": "2c2f547a0236cfae6403a7984c8555895bc64b82ec66ab93b6124a968e3716ff",
+    "attempt56FailureAuditHash": "556d44f8ea2129914e2c70446e4521425feb88fb6dd0de7e4c4e9c2058a303a5",
     "slowTipEvidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55",
     "slowTipReceiptHash": "903b1d0aaf4a5bdd72c59ec9ece3e7199f50e1382c677df8d71b2120bae11e68",
     "slowTipCorrectedAuditHash": "791f7a135436029ff0a09dead17661287eea4035b49b3f554cd4e806924a649b",
@@ -2664,7 +2678,8 @@
     "repeatedOwnerAuthorizationRequired": false,
     "requiredArtifacts": [
       "retain accepted static-liquid attempt-46, slow-tip attempts 47-55 and both attempt-55 audits immutable",
-      "execute only the preregistered v0.66 attempt-56 Preview gate from a clean checkout; do not create a replacement root before observing its retained result",
+      "retain attempt-56 workspace, cache, result, logs, failure receipt and 23/23 audit immutable",
+      "preregister one fresh Data-only FLIP-particle diagnostic before creating its roots",
       "reuse exact C5F96 solver trajectory and accepted static-liquid geometry without pose keys",
       "freeze cache interval, volume, topology, containment, manifold and resource thresholds before baking",
       "do not begin real impact until the moving-liquid gate passes",

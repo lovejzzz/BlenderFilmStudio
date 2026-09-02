@@ -954,15 +954,19 @@ Blender; audit self hash is `791f7a13…`. The accepted evidence root is
 `experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55`.
 This closes only the solver-owned slow rigid trajectory.
 
-The bounded moving-liquid Preview gate is now preregistered, but not executed,
-at `specs/ai-native-studio-rc6-moving-liquid-preview.v0.66.json`, self hash
-`d90ac6df…`, in commit `9a4dc7f9…`. Both unique attempt-56 roots remain absent.
-The one allowed run will combine exact C5F96 Bullet motion with the accepted
-static-liquid geometry over frames 1–24 at Preview resolution 96, with one Data
-bake, one Mesh bake and zero render/save/network work. Resume by running only
-`scripts/run-rc6-moving-liquid-preview.py` from a clean checkout. Retain PASS,
-scientific FAIL or harness failure exactly; do not begin real impact or visual
-rendering until moving liquid passes.
+The bounded moving-liquid Preview attempt-56 is now a retained scientific
+`FAIL`, independently closed 23/23. The exact 24-frame C5F96 trajectory,
+one-positive-body topology, manifold state, full cup containment and 35.84 mm
+cup-local liquid motion all passed. Data/Mesh took 277.86/2.88 seconds. Volume
+did not pass: frame 24 was 36.82% below the frozen source and 34.23% below frame
+1, yielding 15/17 physical checks. Blender also returned exit zero despite the
+scene's threshold exception; C1 records this as a harness mismatch without
+changing the physical verdict. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-preview-attempt-56`;
+failure/audit self hashes are `2c2f547a…` / `556d44f8…`. Next preregister one
+fresh Data-only diagnostic on unchanged physics to expose all FLIP particles
+across frames 1–24 and distinguish simulation loss from surface reconstruction
+loss. Do not tune Mesh, begin real impact or render before that diagnosis.
 
 ## Public routes
 
