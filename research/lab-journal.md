@@ -6939,3 +6939,16 @@ required subframes outside the domain. D20/D24/D28 peaked at only
 not a stable planar pivot. C3 must replace it with an explicit Bullet hinge at a
 geometry-derived axis while keeping the cup unanimated and all response,
 surface, domain and sampling thresholds unchanged.
+
+## J-598 · RC6 hinge works; stale-frame pivot audit and free fall retain failure
+
+Date: 2026-09-02 · Type: PHYSICAL SCREEN FAILURE · Blender starts / Bullet bakes / fluid bakes / renders: 4 / 4 / 0 / 0
+
+C3 attempt-50 passed an 18/18 independent audit. All four explicit-hinge cells
+crossed 45° and the sideways cup center exactly matched rotation about the
+frozen lower-right pivot. The 355.92 mm pivot-drift failure was derived from the
+source blend's retained frame-15 evaluation before cache reset, not the solve.
+The unlimited hinge then free-fell to 90°, causing 123–170 mm maximum one-frame
+surface motion and 14–19 required subframes. C4 must derive the pivot after
+frame-1 cache reset, add a -60°/+5° physical hinge limit and cup angular damping
+0.8, and test slower 28/32/36/40-frame drives without any pose or motor keys.
