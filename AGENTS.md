@@ -209,6 +209,13 @@ Next freeze one zero-Blender C1 audit-only normalization proving that sole
 difference and both attempt-104 roots unchanged, then require a copied-cache
 C27 comparison. Do not rerun C26, scan viscosity/surface tension or render. See
 `research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-attempt-104-result.md`.
+C26 C1 then stopped before creating attempt-105 because its adapter changed the
+process receipt path but left two inherited C18 stdout/stderr paths. It used one
+system-Python start and zero Blender/root/retained writes. Preserve the frozen
+C1 and absent attempt-105. C2 may change exactly those two log-path literals,
+bind the retained failure and use fresh attempt-106; the comma normalization,
+physical result and every other check remain unchanged. See
+`research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-c1-pre-root-failure.md`.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

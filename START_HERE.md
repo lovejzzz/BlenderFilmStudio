@@ -1388,6 +1388,13 @@ both roots. Next freeze one zero-Blender C1 audit-only normalization, then run
 one copied-cache C27 comparison before selecting another Data property. Do not
 rerun C26, scan viscosity/surface tension or render. See
 `research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-attempt-104-result.md`.
+C26 C1 then stopped before attempt-105 root creation because its adapter changed
+the retained process receipt name but not the two inherited C18 log names. One
+system-Python start occurred; Blender, root creation and retained writes were
+zero. Preserve C1 and the absent root. C2 may correct exactly those two paths
+and use fresh attempt-106 while keeping the comma normalization and every other
+check exact. See
+`research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-c1-pre-root-failure.md`.
 
 ## Public routes
 
