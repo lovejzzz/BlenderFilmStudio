@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6SlowTipBulletScreenC4.v0.59",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_51_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "8511eb086a0d69fd133f6ab0cbf87cc499d4bd31",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe reversible validation-only Blender work under standing owner autonomy"
+  },
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-slow-tip-bullet-screen-c3.v0.58.json",
+    "specHash": "be7457e73bbbf6c3ed368a052a80af8f41fcfd5e4c91e2eef80fab54d554b2d7"
+  },
+  "retainedAttempt50": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c3-attempt-50",
+    "verdict": "FAIL_BULLET_SCREEN",
+    "receiptHash": "8b422857c326c11170b19f4169a40f2af94f9388faf667915fe80a4ddb6ac412",
+    "receiptFileSha256": "6fd57b7a6ea4236862baaa8317b7965118954240550c5482cd22b6a2d01e1782",
+    "audit": "18/18 PASS",
+    "auditHash": "5bf296d356c0e14a55c7be659b391af3908ef3a8011d57e8a0378212da3cad3a",
+    "auditFileSha256": "6816e954e33867efd7b2b7902109f83d48d6e21aa101c792e30533b6152e5f52",
+    "immutable": true
+  },
+  "physicalQuestion": "Can the geometry-proven explicit Blender Bullet hinge, when derived after a frame-1 cache reset and given a physical -60/+5 degree stop plus 0.8 cup angular damping, produce a continuous 45-65 degree slow tip with at least a four-frame rise, no domain escape, no floor penetration, at most ten derived effector subframes and zero authored cup motion?",
+  "correction": {
+    "harnessOrder": "free the retained rigid cache, evaluate frame 1 and update the view layer before deriving hinge_pivot_cup_local",
+    "physicalMechanism": {
+      "constraintName": "PHYS_SLOW_TIP_HINGE",
+      "constraintType": "HINGE",
+      "object1": "PHYS_OPEN_TUMBLER",
+      "object2": "PHYS_SLOW_TIP_HINGE_ANCHOR",
+      "pivotWorldMeters": [0.47, 0.0, 0.0],
+      "axisWorld": [0.0, -1.0, 0.0],
+      "angularLimitsDegrees": [-60.0, 5.0],
+      "cupAngularDamping": 0.8,
+      "maximumPivotDriftMeters": 0.005,
+      "maximumPeakCupTiltDegrees": 65.0
+    },
+    "driveEndFrames": [28, 32, 36, 40],
+    "unchanged": [
+      "accepted source and binary",
+      "geometry-derived pivot, axis, passive anchor and direct actuator path",
+      "exact evaluated cup mesh-vertex measurement",
+      "45 degree minimum response, four-frame response span, -5 mm floor, one-voxel domain and ten-subframe limits",
+      "zero cup and ball animation",
+      "all zero-fluid, zero-render, zero-save and zero-network ceilings"
+    ]
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-slow-tip-bullet-screen-c4-attempt-51",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c4-attempt-51"
+  },
+  "cells": [
+    {"id": "C4D28", "driveEndFrame": 28},
+    {"id": "C4D32", "driveEndFrame": 32},
+    {"id": "C4D36", "driveEndFrame": 36},
+    {"id": "C4D40", "driveEndFrame": 40}
+  ],
+  "machineAcceptance": {
+    "contactByFrameMaximum": 50,
+    "minimumPeakCupTiltDegrees": 45.0,
+    "maximumPeakCupTiltDegrees": 65.0,
+    "minimumFiveToFortyFiveDegreeSpanFrames": 4,
+    "minimumCupSurfaceWorldZ": -0.005,
+    "candidateDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 10,
+    "hingeIdentityAxisLimitsAndDampingExact": true,
+    "maximumHingePivotDriftMeters": 0.005,
+    "cupAnimationChannels": 0,
+    "ballAnimationChannels": 0,
+    "selectionRule": "select the greatest driveEndFrame among cells passing every frozen check"
+  },
+  "processCeilings": {
+    "blenderStarts": 4,
+    "bulletBakes": 4,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 268435456,
+    "maximumWorkspaceBytes": 268435456,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c4-scene.py",
+      "sha256": "a5d0ceb7e6d64f51c059ba95d91d41c67accc209daa08f9a68c4374984cd3276"
+    },
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c4.py",
+      "sha256": "6aeb99ef7a140f0ff15e2c0d5cbd43913ca4db629471a013033d2819d5500b5f"
+    },
+    {
+      "uri": "scripts/audit-rc6-slow-tip-bullet-screen-c4.py",
+      "sha256": "2aa73a2120a797843a13006f91167a6577a1408e6ace21914839f527c967fd01"
+    }
+  ],
+  "stopRule": "Run the exact four C4 cells once in unique attempt-51 roots. Retain failure. Do not move the hinge, alter limits or damping, add a motor or angular key, change the actuator or thresholds, run fluid, render, save, build or add a candidate after observing results.",
+  "claimCeiling": "One Bullet-only physically stopped and damped slow-tip screen. A PASS selects a causal rigid trajectory and derived effector sampling for a separate moving-liquid gate; it does not prove liquid, persistence, impact or visual quality.",
+  "specHash": "5914961ce8567b1c00d2418eec0fa57915c2794968494c7c06d7544eada89d46"
+}
