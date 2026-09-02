@@ -180,6 +180,14 @@ old verdict token `PARTICLE_RADIUS_C23` instead of actual
 `PARTICLE_MAXIMUM_C23`. No Blender/bake/render/network/retained write occurred.
 C24 C1 may correct only that expected token, bind attempt-102 unchanged and use
 fresh attempt-103 roots; classification logic and thresholds remain frozen.
+C24 C1 attempt-103 corrects exactly that verdict token and passes producer8/8
+plus independent audit24/24. The response is mixed: velocity/particle onsets
+remain24/25, Mesh onset delays24→25 and maximum velocity expansion improves
+173.84%→122.54%, but particle expansion worsens32.38%→55.14% and Mesh
+51.54%→69.31%. The complete C23 physical regression controls the decision:
+close maximum/minimum tuning. Next perform one read-only C25 bound-source
+inspection and select exactly one different Data degree before any bake; no
+render is allowed.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

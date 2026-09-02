@@ -1360,6 +1360,14 @@ bake, render, network or retained-root write occurred. C1 may correct exactly
 that analyzer string and use fresh attempt-103 roots while keeping every
 measurement/classification rule unchanged. See
 `research/2026-09-02-rc6-real-impact-particle-maximum-data-comparison-c24-attempt-102-retained-failure.md`.
+C24 C1 attempt-103 corrects exactly the stale verdict token and passes8/8 plus
+independent24/24. The classification is mixed: velocity/particle onsets stay
+24/25, Mesh delays24→25 and velocity peak improves173.84%→122.54%, while
+particle peak worsens32.38%→55.14% and Mesh51.54%→69.31%. Because the complete
+C23 physical result regressed, close particle maximum/minimum tuning. Next
+perform one read-only C25 bound-source inspection and select exactly one
+different Data-layer degree before any new bake. Rendering remains forbidden.
+See `research/2026-09-02-rc6-real-impact-particle-maximum-data-comparison-c24-c1-accepted.md`.
 
 ## Public routes
 
