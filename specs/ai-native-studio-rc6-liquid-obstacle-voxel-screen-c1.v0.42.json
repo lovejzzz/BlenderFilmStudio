@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "bfs.rc6LiquidObstacleVoxelScreenC1Spec.v0.42",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-OBSTACLE-VOXEL-SCREEN-C1-2026-09-02-ATTEMPT-40",
+  "purpose": "Repeat the unchanged three-cell obstacle level-set screen after moving only the FLIP display-system existence assertion from before the Data bake to after the Data bake.",
+  "toolFreezeParent": "5282de7fb103cc217e01bfa2658a352f9d9c15a8",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "scope": "Three fresh local-only seven-frame Data bakes at Preview/Review resolution; zero Mesh bake, save, render, network or engine remote write; ordinary research commit and non-force push are allowed.",
+    "specificConfirmationRequired": false
+  },
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-obstacle-voxel-screen-c1-attempt-40",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-c1-attempt-40"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "sourceBottomClearanceMeters": 0.035,
+    "engineSourceCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900"
+  },
+  "baseContract": {
+    "path": "specs/ai-native-studio-rc6-liquid-obstacle-voxel-screen.v0.41.json",
+    "fileSha256": "cf5a32224548ffc1ae7bbeba12ab46f7548acb531b6195fae58faea9e83946f4",
+    "specHash": "2b75314992dbbfd082c24c55e33e7ac8bed6b02b5b7e64c12e0f3c162eef5302"
+  },
+  "retainedFailure": {
+    "path": "experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-attempt-39/failure.json",
+    "fileSha256": "8d5d96a5558b8fad4467758cd2548ee886fc68485ac88a9c1957ef2bc0203bef",
+    "failureHash": "288bb8d507fe399c8d732e79160549c716fcb2d40ada694fc88eba0557df8f27",
+    "status": "FAIL_PREBAKE",
+    "fluidDataBakes": 0,
+    "completedCells": 0
+  },
+  "correction": {
+    "changedAssertion": "Require one exported evaluated FLIP particle system only after Data bake rather than immediately after enabling use_flip_particles on the unbaked source.",
+    "allowedInitialRosters": [
+      {"initialUseFlipParticles": false, "initialParticleSystemCount": 0},
+      {"initialUseFlipParticles": false, "initialParticleSystemCount": 1},
+      {"initialUseFlipParticles": true, "initialParticleSystemCount": 1}
+    ],
+    "requiredPostBakeParticleSystemCount": 1,
+    "unchangedPhysicsAndInterpretation": true
+  },
+  "frozenCommonConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 7,
+    "domainCenterMeters": [0.32, 0.0, 0.25],
+    "domainDimensionsMeters": [0.36, 0.36, 0.5],
+    "sourceDimensionsMeters": [0.11, 0.11, 0.14],
+    "sourceBottomClearanceMeters": 0.035,
+    "simulationMethod": "APIC",
+    "useAdaptiveTimesteps": true,
+    "timestepsMin": 1,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "useMesh": false,
+    "useFlipParticles": true,
+    "displayPercentage": 100,
+    "useFractions": true,
+    "deleteInObstacle": false,
+    "waterViscosityBase": 1.0,
+    "waterViscosityExponent": 6,
+    "flowSurfaceDistanceCells": 0.0,
+    "cupEffectorIsPlanar": false,
+    "cupEffectorEnabled": true,
+    "cupEffectorSubframes": 0
+  },
+  "cells": [
+    {"cellId": "preview-baseline", "resolutionMax": 96, "cupEffectorSurfaceDistanceCells": 1.5},
+    {"cellId": "preview-effector-plus1", "resolutionMax": 96, "cupEffectorSurfaceDistanceCells": 2.5},
+    {"cellId": "review-baseline", "resolutionMax": 128, "cupEffectorSurfaceDistanceCells": 1.5}
+  ],
+  "interpretationTable": [
+    {"condition": "preview baseline has outliers and preview +1-cell effector has zero", "verdict": "PASS_SURFACE_DISTANCE_SIGNAL", "nextCell": "review-effector-plus1"},
+    {"condition": "preview baseline and review baseline outlier counts differ without the surface-distance condition above", "verdict": "PASS_RESOLUTION_SIGNAL", "nextCell": "review-effector-plus1 when Review has outliers; otherwise final-resolution-baseline-reproduction"},
+    {"condition": "all three cells have zero one-cell-envelope outliers", "verdict": "INCONCLUSIVE_LOWER_TIERS_CONTAINED", "nextCell": "paired Final-resolution baseline/+1-cell effector diagnostic"},
+    {"condition": "outliers persist without either signal", "verdict": "FAIL_OBSTACLE_VOXEL_SCREEN_NO_CORRECTION", "nextCell": "cup topology, normals, Is Planar and applied-transform audit"}
+  ],
+  "resourceCeilings": {
+    "blenderStarts": 3,
+    "fluidDataBakes": 3,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 6442450944,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 6442450944,
+    "minimumFreeBytesBefore": 137438953472,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on non-fresh roots, retained attempt-39 drift, dirty research worktree, input drift, source geometry or placement drift, cell/configuration mismatch, missing post-bake evaluated particles, aggregate/detail mismatch, cache roster other than exact 14 config/Data files per cell, process/log/result failure, any Mesh bake/save/render/network/remote-write count, symlink, banned media or resource failure. Do not enable Delete in Obstacle, do not vary CFL/timesteps and do not proceed to slow tip in this attempt.",
+  "claimCeiling": "One C1-corrected three-cell Data-only Preview/Review screen for obstacle-level-set and resolution signals in the static cup. It can select the next diagnostic cell only; it does not prove a Final-resolution correction, reconstructed-surface quality, slow tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-obstacle-voxel-screen-scene-c1.py": "a7585f8c4f017ecdd4fd93756ba94213f63a5ec006a75d2425cfbf5ece458d91",
+    "scripts/run-rc6-liquid-obstacle-voxel-screen-c1.py": "9cc5de04ffb008a7fa238d00f4a85dbde1c0f238c27b1b0e5eaa4ff275b5ba13",
+    "scripts/audit-rc6-liquid-obstacle-voxel-screen-c1.py": "4968a45afcef3deed784025882466c68eedaf37277236a4ddfb0a3c9b3457b4f"
+  },
+  "specHash": "f7b2ea2ae0f152c6d0b336c76522e40bf6b706d41e6651a9e47d2f8b90bad20a"
+}
