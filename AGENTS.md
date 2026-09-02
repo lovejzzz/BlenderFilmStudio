@@ -129,6 +129,15 @@ audit output because separate `exec` globals/locals hid `source_volume` from a
 generator expression. Blender and retained-write counts remain zero. Preserve
 attempt-96; C4 may only use one shared exec environment and a fresh root, with
 the expanded audit, tolerances, checks, hashes and claims unchanged.
+C4 attempt-97 fixed that namespace and proves the `2e-8` centroid replay is
+sufficient; all27 physical booleans recompute exactly. Its audit is retained
+FAIL23/25 only because the audit-only redirect used the fresh root in the
+historical attempt-94 argv expectation and replayed the old pre-audit manifest
+without excluding three later audit outputs. No Blender or retained write
+occurred. Preserve attempt-97. C5 may change exactly those two historical-view
+reconstructions, retain the shared exec environment and use fresh attempt-98.
+All tolerances, physical gates, retained bytes/hashes, claims and ceilings stay
+unchanged. Do not render or test another particle radius.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

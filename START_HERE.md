@@ -1299,6 +1299,16 @@ creating attempt-96 admission because separate Python globals/locals hid
 Retain attempt-96; C4 may change only the `exec` call to one shared environment
 dictionary and use a new root. Audit bytes, tolerances and physical gates stay
 unchanged.
+C4 attempt-97 successfully corrected that namespace and now passes centroid
+replay at the frozen `2e-8` tolerance; all27 physical booleans recompute exactly.
+Its audit is retained at23/25 because the audit-only adapter reconstructed two
+historical views incorrectly: it substituted the fresh C4 root into attempt-94's
+expected Blender argv, and it replayed the pre-audit manifest without excluding
+the later audit plus its two log files. No Blender, bake, render or retained-root
+write occurred. Next freeze audit-only C5 with exactly those two corrections and
+a fresh attempt-98 root. Preserve all tolerances, physical data/checks, claims
+and zero-Blender ceilings; do not render or test another radius. See
+`research/2026-09-02-rc6-real-impact-liquid-particle-radius-c20-c4-retained-view-failure.md`.
 
 ## Public routes
 

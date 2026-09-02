@@ -7778,3 +7778,19 @@ Attempt-96 is retained. C4 may change only the outer execution call to populate
 one shared environment and use it for globals and locals, plus versioned names
 and a fresh root. Expanded audit bytes, tolerances, checks, hashes, claims and
 zero-Blender ceilings remain unchanged.
+
+## J-665 · C4 closes centroid replay and exposes two historical-view defects
+
+Date: 2026-09-02 · Type: RETAINED AUDIT-ONLY HARNESS FAILURE · System Python / Blender / bakes / renders / retained writes: 1 / 0 / 0 / 0 / 0
+
+C4 attempt-97 uses one shared Python execution namespace. It independently
+recomputes the centroid delta as `1.0177317821824516e-8 m`, passes the frozen
+`2e-8 m` replay tolerance, and reproduces all27 physical booleans. The retained
+physical result remains FAIL23/27.
+
+The audit is23/25 because two audit-only historical views are wrong. First, its
+expected process argv substitutes the fresh audit root for the retained
+attempt-94 evidence path. Second, it replays a pre-audit manifest over the
+completed root without excluding the later independent audit and its two logs.
+Attempt-97 is immutable and contains no Blender work. C5 may correct only those
+two views in fresh attempt-98, with all scientific checks and limits unchanged.

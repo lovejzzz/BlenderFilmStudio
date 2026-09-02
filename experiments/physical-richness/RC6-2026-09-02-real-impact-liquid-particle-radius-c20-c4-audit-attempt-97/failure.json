@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "bfs.rc6RealImpactLiquidParticleRadiusC20C4Failure.v0.1",
+  "status": "FAIL_AUDIT_HISTORICAL_VIEW_RECONSTRUCTION",
+  "executionCommit": "0f4904fc5f8b91fa7bb70fcd7e920371077c01c2",
+  "auditHash": "aab76793a25219fdee7c9f37d6723a8349227ce7f13449aa761427db6248ac8c",
+  "auditFileSha256": "95a6ac5517dc3a96c8843c0a4e79cf5e286975e7672307c1c3b41ad8300af922",
+  "passCount": 23,
+  "checkCount": 25,
+  "failedChecks": [
+    "processSelfHashArgvAndLogs",
+    "rootManifestsExact"
+  ],
+  "metricsRecomputed": true,
+  "centroidReplayAbsoluteDeltaMeters": 1.0177317821824516e-08,
+  "centroidReplayToleranceMeters": 2e-08,
+  "physicalStatus": "FAIL",
+  "physicalPassCount": 23,
+  "physicalCheckCount": 27,
+  "causes": {
+    "processSelfHashArgvAndLogs": "audit-only redirection substituted the fresh C4 evidence root into the historical attempt-94 Blender argv expectation; the retained argv correctly names the retained attempt-94 evidence root",
+    "rootManifestsExact": "the retained pre-audit manifest was captured before independent-audit.json and its two audit log files existed; replay over the completed retained root must exclude those later audit outputs as well as the manifest itself"
+  },
+  "filesBeforeFailure": [
+    "admission.json",
+    "audit.json"
+  ],
+  "counts": {
+    "systemPythonStarts": 1,
+    "blenderStarts": 0,
+    "bulletBakes": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "retainedRootWrites": 0
+  },
+  "scientificVerdict": "C20_RETAINED_PHYSICAL_FAIL_23_OF_27",
+  "correctionBoundary": "C5 may correct only the two historical-view reconstructions: use RETAINED_EVIDENCE in the expected retained process argv and exclude the later independent audit plus its stdout/stderr logs when replaying the retained pre-audit manifest. Preserve the shared exec environment, all tolerances, checks, physical data, roots, hashes, claims and zero-Blender ceilings."
+}
