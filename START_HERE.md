@@ -1036,7 +1036,10 @@ all topology/containment/motion checks passed. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-radius-attempt-65`;
 receipt/audit self hashes are `f3a741cc…` / `a5b23c9f…`. Do not scan another
 radius. Next perform one zero-bake copied-Data comparison against attempt-63/64
-before selecting a different simulation property. Do not render or begin real
+before selecting a different simulation property. That attempt-66 comparison
+is now preregistered at
+`specs/ai-native-studio-rc6-moving-liquid-particle-radius-data-comparison.v0.77.json`,
+self hash `f719e46b…`; both fresh roots remain absent. Do not render or begin real
 impact.
 
 ## Public routes

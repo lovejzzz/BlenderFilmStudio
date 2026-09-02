@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidParticleRadiusDataComparison.v0.77",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_66_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "92f1090ebfdd4a893f8e56a03641182cca9f0c4d",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded read-only cache-copy analysis under standing owner autonomy"
+  },
+  "question": "Is the particle_radius 1.6-to-1.8 Mesh improvement already present in particle occupied-voxel Data support before Mesh reconstruction?",
+  "baseline": {
+    "attempt65CacheRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-particle-radius-attempt-65/mantaflow-cache",
+    "attempt65CacheManifestHash": "6a6d7d522f51210fa067eaefbee63d09f5e505ac75e83bc1def47c691d4b723a",
+    "attempt65CacheFiles": 72,
+    "attempt65CacheBytes": 9079158,
+    "attempt65ResultFileSha256": "6fc1ea1bf39a2ba3f804f91e60c2273e31fc3ea6bd460b9f93cc586b7ba562ef",
+    "attempt65ResultHash": "687a2796f7b79878648419cd8efa943e667c83b2039bb9e6f9cc04d018a01d52",
+    "attempt65AuditFileSha256": "948253210d84b0423c72acd903f68e04f99b0f24379ebcdcc3d4f2f32e574c13",
+    "attempt65AuditHash": "a5b23c9fab6d5bf53f1b1a6302aa4c1155d6c7aa7215b630617ca2c83030ae41",
+    "attempt64ResultFileSha256": "3e899cae8259f26459277abf0f56c4a747246ffce94af11691eb5feea917a448",
+    "attempt64ResultHash": "dcaa7470889c74e7e389c1fd74a145395d40897630fb95f7357c8a1069fe60d0",
+    "attempt64AuditFileSha256": "21199ddab6e0fb804b34a6a5177e81031844dfd2c261d4c30b5f087fa45964a4",
+    "attempt64AuditHash": "4fa13dbb622c3dce692e555a87589fa96e0431f0bb74a64dd460d6b615a75533"
+  },
+  "runtime": {
+    "enginePython": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/bin/python3.13",
+    "enginePythonVersion": "3.13.13",
+    "enginePythonSha256": "986943968d1908932b002bd96245885145ac87a71ce5f105cf467cc285a2f594",
+    "openVdbModule": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/lib/python3.13/site-packages/openvdb.cpython-313-darwin.so",
+    "openVdbModuleSha256": "d9e505e2ec7d0f4c0b98a4b0c1f7d08d9ee1e65c0115bec77a2a2016c34d2849",
+    "openVdbLibrary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/lib/libopenvdb.dylib",
+    "openVdbLibrarySha256": "43963a772b9582eae35d3db0388971ebcd5bdb52381814a9a5c392cbac6c890f",
+    "openVdbLibraryVersion": [13, 0, 0],
+    "openVdbFileFormatVersion": 225
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-particle-radius-data-comparison-attempt-66",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-radius-data-comparison-attempt-66"
+  },
+  "measurement": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "currentLabel": "particle-radius-1p8",
+    "baselineLabel": "particle-radius-1p6",
+    "requiredSurfaceDistanceCells": 2.0,
+    "requiredCurrentSubframes": 1,
+    "requiredCurrentTimestepsMin": 2,
+    "requiredCurrentParticleRadius": 1.8,
+    "requiredBaselineParticleRadius": 1.6,
+    "requiredGridNames": ["particles", "velocity"],
+    "requiredGridTypes": ["PointDataGrid", "Vec3SGrid"],
+    "requiredBaseResolution": [96, 53, 62],
+    "requiredVoxelSizeMeters": 0.009375,
+    "particleOccupancyProxy": "particles.file_voxel_count * file_voxel_size^3"
+  },
+  "classificationRules": {
+    "dataShrinkPersists": "current final occupancy drift < -0.15, current final Mesh drift < -0.15 and current occupancy/Mesh Pearson correlation >= 0.8",
+    "dataSupportStableSurfaceSuspected": "maximum absolute current occupancy drift <= 0.15 while current final Mesh drift magnitude > 0.15",
+    "otherwise": "DATA_MESH_RELATION_INCONCLUSIVE",
+    "claimLimit": "occupied sparse voxels are not exact mass or a signed liquid level-set volume"
+  },
+  "processCeilings": {
+    "systemRunnerStarts": 1,
+    "enginePythonStartsIncludingAudit": 2,
+    "cacheCopies": 1,
+    "blenderStarts": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "networkCalls": 0,
+    "retainedRootWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 67108864,
+    "maximumWorkspaceBytes": 67108864,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/analyze-rc6-moving-liquid-data-comparison.py", "sha256": "5a5066ef012f6275a5c94d2171ccb2c1125e460f4a58fa04616697184e8b389f"},
+    {"uri": "scripts/run-rc6-moving-liquid-particle-radius-data-comparison.py", "sha256": "2f605f8fa06d72446eb5007e3a15895ac9f46b3f4510fcd94cec1e12741f632d"},
+    {"uri": "scripts/audit-rc6-moving-liquid-particle-radius-data-comparison.py", "sha256": "4caac8aace4f8a3636fcda55f171ce9556dd95f1cceacd3ef2b06ea3057babc9"}
+  ],
+  "executionOrder": [
+    "commit this spec and exact binding adapters while both attempt-66 roots are absent",
+    "copy the immutable attempt-65 cache once",
+    "run the reusable analyzer and independent auditor with exact engine Python",
+    "retain every result without a second particle-radius value"
+  ],
+  "stopRule": "Never read or write the retained cache through Blender, never add another particle_radius value, never tune Mesh, never call occupied voxels exact mass, and retain every result.",
+  "claimCeiling": "Read-only copied-cache Data comparison only; no exact mass, moving-liquid correction, impact, render or film-quality claim.",
+  "specHash": "f719e46b1f08a4db0f6e426e5e8ee2e3752bdc88969ad733e7a254096b9dd0dd"
+}
