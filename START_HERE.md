@@ -1077,7 +1077,14 @@ distance. Compare the immutable Data cache before another distinct variable;
 do not render or begin real impact. Attempt-69 is now preregistered as that
 zero-bake comparison at
 `specs/ai-native-studio-rc6-moving-liquid-fractions-distance-data-comparison.v0.80.json`,
-self hash `8e5da68c…`; both roots remain absent.
+self hash `8e5da68c…`. Attempt-69 is now `PASS_DIAGNOSTIC` with a 19/19
+independent audit. Lower fractional distance improved final occupied-support
+loss from 28.91% to 23.58% (5.33 points), while Mesh improved 1.61 points;
+baseline-relative changes correlate at `r=0.86588`. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-fractions-distance-data-comparison-attempt-69`;
+receipt/audit self hashes are `09483a37…` / `0da61c54…`. The response begins
+in Data. Fractional distance stays closed; inspect particle band width before
+another run. Do not render or begin real impact.
 
 ## Public routes
 

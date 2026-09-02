@@ -7223,3 +7223,15 @@ zero and topology stayed one positive manifold body. It still missed the fixed
 15% temporal gate by 0.44 points; Data cost rose 8.13% to 287.09 seconds. Close
 fractional-distance tuning and compare its immutable Data support before
 choosing a different simulation property.
+
+## J-620 · Fractional-distance improvement begins in Data support
+
+Date: 2026-09-02 · Type: DIAGNOSTIC PASS · Engine-Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+Attempt-69 copied the exact attempt-68 cache and passed its 19/19 independent
+audit. Distance 0.25 improved final occupied-support loss from 28.91% to 23.58%
+(5.33 points) while Mesh improved 1.61 points. Current Data/Mesh curves
+correlate at `r=0.92964`; their changes versus baseline correlate at
+`r=0.86588`. The clean near-pass is therefore a genuine Data-layer response,
+not surface inflation. Close distance tuning and inspect the per-step particle
+band width as the next distinct property.
