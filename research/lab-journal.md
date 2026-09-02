@@ -6968,3 +6968,15 @@ domain upper one-voxel margin also missed by only 1–2 mm. C5 must replace the
 penetrating contact driver with a bounded Bullet hinge motor and may add only
 the measured 20 mm domain-height correction; no cup pose key or fluid run is
 admitted before that separate screen passes.
+
+## J-600 · RC6 motor screen attempt-52 retained after post-bake harness NameError
+
+Date: 2026-09-02 · Type: HARNESS FAILURE · Blender starts / Bullet bakes / fluid bakes / renders: 1 / 1 / 0 / 0
+
+C5 attempt-52 passed admission and completed the full 120-frame C5F48 Bullet
+bake. Measurement then stopped before any cell result because the scene wrapper
+removed the pusher/cup `separation` calculation but left the inherited contact
+conditional referencing that name. The three later cells were skipped and no
+physical verdict exists. C5-C1 is limited to defining that obsolete value as
+`math.inf`; all motor, hinge, velocity, impulse, damping, domain, threshold and
+resource fields remain byte-exact.
