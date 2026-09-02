@@ -7330,3 +7330,14 @@ and 10 and selects only midpoint 9 as the next physical question. The retained
 audit is 22/23 solely because decimal domain constants were compared exactly to
 Blender float32 values; all other evidence checks pass. Run a bounded audit-only
 C3 before preregistering I09; never alter or rerun attempt-73.
+
+## J-628 · C3 isolates representation from the physical failure
+
+Date: 2026-09-02 · Type: AUDIT-ONLY PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+C3 freezes the entire 18-file attempt-73 root at manifest hash `8390c039…`
+and changes only its false float32 configuration comparison to absolute
+tolerance `1e-6`. The retained receipt, cell results, 22 passing audit checks
+and physical `FAIL` remain exact. The fresh attempt-74 root may contain only the
+corrected audit and manifest. After that closure, test only drive-end 9; C3
+itself grants no new Bullet or liquid execution.
