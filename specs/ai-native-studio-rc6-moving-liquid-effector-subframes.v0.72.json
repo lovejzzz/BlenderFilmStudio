@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidEffectorSubframes.v0.72",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_61_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "5356eff25322061a9f935ef0a914a10441873d4e",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded single-variable Blender fluid validation under standing owner autonomy"
+  },
+  "question": "Does changing only the moving cup effector's temporal subframes from 1 to 2 bring both Data-support and reconstructed Mesh temporal loss within the frozen 15-percent moving-liquid gate?",
+  "rationale": {
+    "attempt59": "2.0-cell distance passed source-relative volume but retained 23.03 percent temporal Mesh loss",
+    "attempt60": "Data occupied-voxel support crossed 15 percent loss at frame 12 before Mesh and finished 26.67 percent low with occupancy/Mesh correlation 0.95525",
+    "officialSemantics": "fluid effector subframes add intermediate samples for moving obstacles",
+    "singleDegreeOfFreedom": "cup effector subframes only"
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "retainedStaticCacheManifestHash": "53bc19e1532b64ea8c37b0cc5fa52347c72c73023728d3705d45c063d5b7c265",
+    "trajectory": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55/cells/C5F96/result.json",
+    "trajectoryFileSha256": "00193b1a1258814f5a0a5b7a2308686f9f7daa0826f554af62c55e7de38fb261",
+    "attempt56ResultFileSha256": "6aafa7107ac45f0911c5e0775514350cf10645a2358e0497d6c6f6517231f659",
+    "attempt57AuditFileSha256": "bacbd61bbfc001fa4fab255713b875b0039f55a77a188060f774ba0bbd3c389a",
+    "attempt58AuditFileSha256": "65133bdb220737da1139a8c23469fa8c6d4a104c82021fc0cc17277f86409bb6",
+    "attempt59ResultFileSha256": "f860dc539d0f63e39fae718059a428d5ea000c999a780be53c57e981c42aaf0f",
+    "attempt59AuditFileSha256": "141ee5ea1a978d4115efc873873cc0e9ab07262b242116b4d217f8d7772071d8",
+    "attempt60AuditFileSha256": "a77f7e9ea0be637bb21490717b9cebfadd50ed8794c789e25bb7834038af7edc"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-effector-subframes-attempt-61",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-subframes-attempt-61"
+  },
+  "frozenConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "resolutionMax": 96,
+    "domainCenterMeters": [0.45, 0.0, 0.26],
+    "domainDimensionsMeters": [0.9, 0.5, 0.58],
+    "trajectoryCellId": "C5F96",
+    "simulationMethod": "APIC",
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "meshParticleRadius": 2.5,
+    "meshScale": 2,
+    "meshConcaveLower": 0.4,
+    "meshConcaveUpper": 3.5,
+    "meshSmoothenPos": 1,
+    "meshSmoothenNeg": 1,
+    "cupEffectorSurfaceDistanceCells": 2.0,
+    "cupEffectorSubframes": 2,
+    "timestepsMin": 1,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "deleteInObstacle": false
+  },
+  "onlyChangeFromAttempt59": {
+    "path": "cup FluidEffectorSettings.subframes",
+    "before": 1,
+    "after": 2
+  },
+  "machineAcceptanceUnchangedFromAttempt59": {
+    "maximumTrajectoryLocationDeltaMeters": 0.00001,
+    "maximumTrajectoryRotationDeltaDegrees": 0.0001,
+    "minimumFrame24CupTiltDegrees": 14.0,
+    "maximumHingePivotDriftMeters": 0.005,
+    "exactCacheFiles": 72,
+    "liquidMeshRequiredEveryFrame": true,
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.25,
+    "maximumAbsoluteTemporalVolumeDriftFraction": 0.15,
+    "positiveLiquidBodyCountEveryFrame": 1,
+    "maximumNonManifoldEdgeCount": 0,
+    "minimumLargestComponentFraction": 0.5,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.05,
+    "maximumBelowFloorFraction": 0.01,
+    "minimumLiquidCentroidShiftCupLocalMeters": 0.002,
+    "zeroCupBallPusherPoseKeys": true,
+    "retainedStaticCacheByteExact": true
+  },
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 2147483648,
+    "maximumWorkspaceBytes": 2147483648,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-moving-liquid-effector-subframes-scene.py", "sha256": "ca24167d8056084a33507cc109a2c9db1560b38a094586e8116f6cc759fc2fb0"},
+    {"uri": "scripts/run-rc6-moving-liquid-effector-subframes.py", "sha256": "14aebb40b7d42c14ef5568125a8506470482f9a2e815265e25a11ae386aaf14b"},
+    {"uri": "scripts/audit-rc6-moving-liquid-effector-subframes.py", "sha256": "f55dd32ec0e22f15f91459105702afb88444bc3684bfceb99f37b44523252979"}
+  ],
+  "stopRule": "Run exactly once in attempt-61 roots and retain PASS, physical FAIL or harness failure. Never change surface_distance from 2.0, add another subframe value after observing this result, lower scientific thresholds, tune Mesh, begin impact or render.",
+  "claimCeiling": "One 24-frame Preview-96 single-variable effector-subframes result. It cannot establish final resolution, full tip, spill, impact, persistence, rendered appearance or film quality.",
+  "specHash": "7f020fe99aa8ec308c21dca71077bc8db3bc148653b6e4d5db196b12b33c7312"
+}

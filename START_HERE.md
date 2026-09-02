@@ -999,10 +999,11 @@ than the 2.5-cell baseline, and still correlated with Mesh at `r=0.95525`.
 Data crossed the 15% loss line by frame 12 at only 6.84° tilt, before Mesh did.
 Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-distance-data-occupancy-attempt-60`;
-receipt/audit self hashes are `fcae7479…` / `b4b55584…`. The next physical gate
-may change exactly one different variable: moving-effector subframes 1→2 while
-retaining 2.0-cell distance and every other setting/threshold. Do not render or
-begin real impact.
+receipt/audit self hashes are `fcae7479…` / `b4b55584…`. Attempt-61 is now
+preregistered to change exactly one different variable: moving-effector
+subframes 1→2 while retaining 2.0-cell distance and every other setting and
+threshold. Its fresh roots remain absent. Run only that frozen attempt; do not
+render or begin real impact.
 
 ## Public routes
 
