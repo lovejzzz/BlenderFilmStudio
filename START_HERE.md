@@ -984,9 +984,12 @@ while ALIVE count correlated `−0.95368`. Occupancy is not exact mass, but a pu
 Mesh reconstruction explanation is inadequate. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-occupancy-attempt-58`;
 receipt/audit self hashes are `33ec1fcf…` / `f2d76906…`. The next physical gate
-may change exactly one variable: reduce cup-effector `surface_distance` from
-2.5 to 2.0 cells, keeping trajectory, APIC, particles, Mesh, subframes and every
-scientific threshold unchanged. Do not render or begin real impact.
+is now preregistered as attempt-59 and changes exactly one variable:
+cup-effector `surface_distance` from 2.5 to 2.0 cells, keeping trajectory, APIC,
+particles, Mesh, subframes and every scientific threshold unchanged. Its
+protocol checkpoint is `f13f8be7…`; its fresh work/evidence roots remain absent
+and the experiment has not run. Resume by executing only that frozen attempt
+with `caffeinate`. Do not render or begin real impact.
 
 ## Public routes
 
