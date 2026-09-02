@@ -1025,9 +1025,12 @@ from 27.42% to 26.99%; the current Data/Mesh curves correlate at `r=0.97958`,
 but per-frame improvements do not. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-timesteps-data-comparison-attempt-64`;
 receipt/audit self hashes are `72e83b26…` / `4fa13dbb…`. Timestep tuning is
-closed. Preserve the modestly better two-step result as the next baseline and
-preregister exactly one simulation-particle-radius change. Do not render or
-begin real impact.
+closed. Attempt-65 is now preregistered with one change on the modestly better
+two-step baseline: simulation `particle_radius` 1.6→1.8, the single midpoint of
+the previously measured static 1.6–2.0 interval. Its spec is
+`specs/ai-native-studio-rc6-moving-liquid-particle-radius.v0.76.json`, self hash
+`f1dacdd8…`; both fresh roots remain absent. No scan, Mesh change, render or
+real impact is allowed before this exact run is retained.
 
 ## Public routes
 
