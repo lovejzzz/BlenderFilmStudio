@@ -1395,6 +1395,15 @@ zero. Preserve C1 and the absent root. C2 may correct exactly those two paths
 and use fresh attempt-106 while keeping the comma normalization and every other
 check exact. See
 `research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-c1-pre-root-failure.md`.
+C26 C2 attempt-106 then corrected exactly those two inherited log paths and
+passes its independent audit20/20. It binds the absent C1 root, exact retained
+attempt-104 manifests and all27 physical booleans while using one system-Python
+start and zero Blender/bake/render/save/network/retained writes. C26 therefore
+closes as an audited physical FAIL23/27: diffusion delayed visible spill but
+worsened conservation. Next preregister one zero-Blender copied-cache C27
+C26-versus-C18 Data/Mesh comparison before selecting another physical variable.
+Do not rerun C26, scan viscosity/surface tension or render. See
+`research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-c2-audit-accepted.md`.
 
 ## Public routes
 
