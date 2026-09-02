@@ -7352,3 +7352,13 @@ C3 passed 13/13 and proved the retained attempt-73 manifest stayed exact at
 and the physical FAIL remain unchanged. This closes the harness and authorizes
 no liquid work. The next separately preregistered physical run may contain only
 midpoint I09.
+
+## J-630 · Only the bracket midpoint is admissible
+
+Date: 2026-09-02 · Type: PHYSICAL PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+With I08 too fast and I10 too weak, C4 freezes only I09 (`driveEndFrame=9`).
+The exact accepted scene, 48-frame window, contact/tilt ordering, floor/domain
+limits, eight-subframe ceiling and zero outcome keys remain unchanged. One
+Blender start and one Bullet bake are allowed; liquid/render/save counts stay
+zero. There is no second candidate or threshold adjustment after observation.
