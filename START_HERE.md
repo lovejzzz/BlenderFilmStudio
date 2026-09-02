@@ -1061,7 +1061,12 @@ Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-minimum-attempt-67`;
 receipt/audit self hashes are `22e0ad0c…` / `6a35f1ac…`. Particle-density
 tuning is closed. Inspect fractional-obstacle separation next; do not render or
-begin real impact.
+begin real impact. Bound source confirms default `fractions_distance=0.5` is
+the per-step `pushOutofObs` separation threshold. Attempt-68 is now
+preregistered to return to attempt-65 and change only 0.5→0.25; every
+containment and topology gate stays exact. Its spec is
+`specs/ai-native-studio-rc6-moving-liquid-fractions-distance.v0.79.json`, self
+hash `1f9e6125…`; both formal roots remain absent.
 
 ## Public routes
 

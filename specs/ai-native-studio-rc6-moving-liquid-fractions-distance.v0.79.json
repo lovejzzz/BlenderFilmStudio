@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidFractionsDistance.v0.79",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_68_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "088ef5fd2bd6b8c6535311a0e80e5b89ad9409bd",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded single-variable Blender fluid validation under standing owner autonomy"
+  },
+  "question": "Does reducing positive fractional-obstacle separation from 0.5 to 0.25 close the remaining moving-liquid volume gap without allowing cup intrusion?",
+  "rationale": {
+    "attempt65": "particle radius 1.8 produced the strongest Mesh result at 17.05 percent temporal loss with zero containment violations",
+    "attempt67": "higher continuing particle minimum changed Data bytes but left all Mesh geometry exact, closing particle-density tuning",
+    "sourceFinding": "positive fractions_distance is the per-step pushOutofObs threshold; higher values keep fluid farther from obstacles and lower values allow it closer",
+    "singleDegreeOfFreedom": "fluid domain fractions_distance only",
+    "selectionRule": "0.25 is the single midpoint from default 0.5 toward zero; no scan"
+  },
+  "implementation": {
+    "sourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "rnaFluidSha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4",
+    "dnaFluidTypesSha256": "356a47d3c8d1c0800ef72fa55bb2d1b1bde8112014cb8f625868276c8aeceead",
+    "liquidScriptSha256": "b526a55e9ba35d5ba41ef53dc5d027e9e13831a32a2862c424752b616a10392b",
+    "boundDefaultFractionsDistance": 0.5,
+    "rnaRange": [-5.0, 5.0],
+    "runtimeExpression": "pushOutofObs(... thresh=fracDistance) when fractions enabled and distance > 0",
+    "cacheInvalidation": "fractions_distance calls rna_Fluid_datacache_reset"
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "retainedStaticCacheManifestHash": "53bc19e1532b64ea8c37b0cc5fa52347c72c73023728d3705d45c063d5b7c265",
+    "trajectory": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55/cells/C5F96/result.json",
+    "trajectoryFileSha256": "00193b1a1258814f5a0a5b7a2308686f9f7daa0826f554af62c55e7de38fb261",
+    "attempt56ResultFileSha256": "6aafa7107ac45f0911c5e0775514350cf10645a2358e0497d6c6f6517231f659",
+    "attempt57AuditFileSha256": "bacbd61bbfc001fa4fab255713b875b0039f55a77a188060f774ba0bbd3c389a",
+    "attempt58AuditFileSha256": "65133bdb220737da1139a8c23469fa8c6d4a104c82021fc0cc17277f86409bb6",
+    "attempt65ResultFileSha256": "6fc1ea1bf39a2ba3f804f91e60c2273e31fc3ea6bd460b9f93cc586b7ba562ef",
+    "attempt65AuditFileSha256": "948253210d84b0423c72acd903f68e04f99b0f24379ebcdcc3d4f2f32e574c13",
+    "attempt66AuditFileSha256": "eba99ea2df27c4230a366830b3bca5254f174737308b6b729f94103f4cfbf191",
+    "attempt67AuditFileSha256": "5e5057afbd663867772067056cd6337c0b963aaf3ba85cf496b1553ddfa34d14"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-fractions-distance-attempt-68",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-fractions-distance-attempt-68"
+  },
+  "frozenConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "resolutionMax": 96,
+    "domainCenterMeters": [0.45, 0.0, 0.26],
+    "domainDimensionsMeters": [0.9, 0.5, 0.58],
+    "trajectoryCellId": "C5F96",
+    "simulationMethod": "APIC",
+    "particleNumber": 2,
+    "particleMinimum": 8,
+    "particleMaximum": 16,
+    "particleRadius": 1.8,
+    "meshParticleRadius": 2.5,
+    "meshScale": 2,
+    "meshConcaveLower": 0.4,
+    "meshConcaveUpper": 3.5,
+    "meshSmoothenPos": 1,
+    "meshSmoothenNeg": 1,
+    "useFractions": true,
+    "fractionsThreshold": 0.05,
+    "fractionsDistance": 0.25,
+    "cupEffectorSurfaceDistanceCells": 2.0,
+    "cupEffectorSubframes": 1,
+    "timestepsMin": 2,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "deleteInObstacle": false
+  },
+  "onlyChangeFromAttempt65": {
+    "path": "fluid domain FluidDomainSettings.fractions_distance",
+    "before": 0.5,
+    "after": 0.25
+  },
+  "machineAcceptanceUnchangedFromAttempt65": {
+    "maximumTrajectoryLocationDeltaMeters": 0.00001,
+    "maximumTrajectoryRotationDeltaDegrees": 0.0001,
+    "minimumFrame24CupTiltDegrees": 14.0,
+    "maximumHingePivotDriftMeters": 0.005,
+    "exactCacheFiles": 72,
+    "liquidMeshRequiredEveryFrame": true,
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.25,
+    "maximumAbsoluteTemporalVolumeDriftFraction": 0.15,
+    "positiveLiquidBodyCountEveryFrame": 1,
+    "maximumNonManifoldEdgeCount": 0,
+    "minimumLargestComponentFraction": 0.5,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.05,
+    "maximumBelowFloorFraction": 0.01,
+    "minimumLiquidCentroidShiftCupLocalMeters": 0.002,
+    "zeroCupBallPusherPoseKeys": true,
+    "retainedStaticCacheByteExact": true
+  },
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 2147483648,
+    "maximumWorkspaceBytes": 2147483648,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-moving-liquid-fractions-distance-scene.py", "sha256": "2ffd5dc7a28cd71ed5db8fb735bb39e67a561d6b1a3d7e53a8a2aecb7554b9f8"},
+    {"uri": "scripts/run-rc6-moving-liquid-fractions-distance.py", "sha256": "5842f8f0cff475fbd3fd697b0f7dfd819ac6a823d759e8401cd5878e9f6bf482"},
+    {"uri": "scripts/audit-rc6-moving-liquid-fractions-distance.py", "sha256": "651a99578842971314564e7186085294b4cd65e2c8e2c3705e0e9917fb171091"}
+  ],
+  "stopRule": "Run exactly once in attempt-68 roots and retain PASS, physical FAIL or harness failure. Never add a second fractions_distance value, change fractions_threshold, particles/radius/timesteps/CFL/subframes/surface_distance/Mesh/thresholds, begin impact or render.",
+  "claimCeiling": "One 24-frame Preview-96 single-variable fractional-obstacle-distance result. It cannot establish final resolution, full tip, spill, impact, persistence, rendered appearance or film quality.",
+  "specHash": "1f9e61258235c54250fd71222efe87a3ea200e01f9a512225c1e21193e74ed4c"
+}

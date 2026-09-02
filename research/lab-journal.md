@@ -7199,3 +7199,15 @@ attempt-65. Temporal loss remained 17.050045% and source error 22.099910%,
 while Data time rose 4.81% to 278.27 seconds. Internal particle-cache change is
 not sufficient evidence of a visible or physical improvement. Close particle-
 density tuning and inspect the fractional-obstacle separation path next.
+
+## J-618 · Fractional obstacle separation is the next source-led variable
+
+Date: 2026-09-02 · Type: BOUND SOURCE INSPECTION · Blender starts / bakes / renders: 0 / 0 / 0
+
+Exact source shows positive `fractions_distance` is passed to
+`pushOutofObs` on each fractional-obstacle liquid step. RNA states that higher
+values hold fluid farther from obstacles; the bound default is 0.5. Because
+attempt-65 has zero cup escape but still loses 17.05% Mesh volume, attempt-68
+returns to it and changes only distance 0.5→0.25, the single midpoint toward
+zero. The unchanged containment and topology gates will reject any apparent
+volume obtained by obstacle penetration.
