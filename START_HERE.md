@@ -1142,8 +1142,9 @@ cost (96.84→34.66 mm/frame; 11→4 subframes), but the same I09 impact now til
 only 2.67°. The old 90° response was therefore collision-scale artifact.
 Preserve 2 mm as the corrected baseline and redesign a solver-owned contact
 moment/impulse; do not restore 40 mm, author a cup outcome or start liquid.
-For a Codex restart, continue from
-`research/2026-09-02-codex-restart-checkpoint-after-rc6-attempt-77.md`.
+The attempt-77 restart note is historical. For a current Codex restart,
+continue from
+`research/2026-09-02-codex-restart-checkpoint-after-rc6-attempt-83.md`.
 C7 stopped before root creation due only to incorrect wrapper occurrence
 counts. C7-C1 attempt-79 then tested the exact faster S08 impulse under the 2 mm
 margin and passed its 23/23 audit, but tilt rose only 2.67→3.19° while surface
