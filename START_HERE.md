@@ -1414,6 +1414,16 @@ tension. Next perform one read-only bound-source/configuration inspection and
 select exactly one distinct Data-layer degree of freedom on the better C18
 baseline before any new bake or render. See
 `research/2026-09-02-rc6-real-impact-water-diffusion-data-comparison-c27-result.md`.
+C28 then completed the required read-only bound-source/configuration inspection
+with zero Blender or mutation operations. It selects exactly one next change on
+exact C18: `particle_band_width 4.0 -> 3.0`. Mantaflow supplies this value to
+continuing particle preservation/reseeding, so the one-cell narrower band is a
+direct test of late support growth and may also expose worse loss. The earlier
+slow-tip PASS required the opposite `3.0 -> 4.0` change, so C29 tests regime
+sensitivity rather than declaring a universal product default. Next freeze and
+run C29 once in fresh bounded roots, preserving all27 gates and zero render; do
+not scan a second value or clean-build. See
+`research/2026-09-02-rc6-real-impact-particle-band-width-c28-source-inspection.md`.
 
 ## Public routes
 
