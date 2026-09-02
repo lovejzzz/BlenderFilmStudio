@@ -7235,3 +7235,18 @@ correlate at `r=0.92964`; their changes versus baseline correlate at
 `r=0.86588`. The clean near-pass is therefore a genuine Data-layer response,
 not surface inflation. Close distance tuning and inspect the per-step particle
 band width as the next distinct property.
+
+## J-621 · Particle resampling band width is the next bounded variable
+
+Date: 2026-09-02 · Type: BOUND SOURCE INSPECTION / PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+Bound DNA defaults `particle_band_width` to 3.0. RNA states that increasing it
+creates a thicker particle band with more particles, and the generated liquid
+step passes it only to the ongoing `adjustNumber` resampling call. Attempt-68
+misses the temporal Mesh-volume gate by only 0.443274 percentage points, while
+attempt-69 confirms the preceding improvement starts in Data support.
+Attempt-70 therefore preserves the exact attempt-68 trajectory, obstacle,
+particle-radius, density, solver, Mesh and threshold state and changes only the
+band width 3.0→4.0. This is one base-grid-cell increase and the only allowed
+value; the fresh work/evidence roots remain absent until the frozen tools and
+spec are committed.

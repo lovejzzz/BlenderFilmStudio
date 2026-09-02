@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidParticleBandWidth.v0.81",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_70_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "132380ca5be2578e9dbe4be294975acedde6b7c1",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded single-variable Blender fluid validation under standing owner autonomy"
+  },
+  "question": "Does increasing the particle resampling narrow band from 3.0 to 4.0 close the remaining 0.443274-point moving-liquid temporal-volume gap without changing trajectory, topology or containment?",
+  "rationale": {
+    "attempt68": "fractions distance 0.25 produced a clean near-pass at 15.443274 percent temporal Mesh loss with zero containment violations",
+    "attempt69": "copied Data support improved in the same direction before Mesh, justifying one distinct Data-layer property",
+    "sourceFinding": "particle_band_width is supplied to each adjustNumber call; higher values create a thicker particle band with more particles",
+    "singleDegreeOfFreedom": "fluid domain particle_band_width only",
+    "selectionRule": "4.0 is exactly one base-grid cell above the bound 3.0 default; no scan and no second value"
+  },
+  "implementation": {
+    "sourceCommit": "4061e12bd45a2bec83e68d0cf49abbf56d4738f6",
+    "rnaFluidSha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4",
+    "dnaFluidTypesSha256": "356a47d3c8d1c0800ef72fa55bb2d1b1bde8112014cb8f625868276c8aeceead",
+    "liquidScriptSha256": "b526a55e9ba35d5ba41ef53dc5d027e9e13831a32a2862c424752b616a10392b",
+    "boundDefaultParticleBandWidth": 3.0,
+    "rnaRange": [0.0, 1000.0],
+    "runtimeExpression": "adjustNumber(... narrowBand=adjustedNarrowBandWidth) on every liquid step",
+    "cacheInvalidation": "particle_band_width calls rna_Fluid_datacache_reset"
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "retainedStaticCacheManifestHash": "53bc19e1532b64ea8c37b0cc5fa52347c72c73023728d3705d45c063d5b7c265",
+    "trajectory": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55/cells/C5F96/result.json",
+    "trajectoryFileSha256": "00193b1a1258814f5a0a5b7a2308686f9f7daa0826f554af62c55e7de38fb261",
+    "attempt56ResultFileSha256": "6aafa7107ac45f0911c5e0775514350cf10645a2358e0497d6c6f6517231f659",
+    "attempt57AuditFileSha256": "bacbd61bbfc001fa4fab255713b875b0039f55a77a188060f774ba0bbd3c389a",
+    "attempt58AuditFileSha256": "65133bdb220737da1139a8c23469fa8c6d4a104c82021fc0cc17277f86409bb6",
+    "attempt68ResultFileSha256": "8eab4d9729baf77957f845ff7cf2af379d02a5d1ff0c681ae83b7adfc4f02aca",
+    "attempt68AuditFileSha256": "d1274482ce9b29145e7b3f7ca9bf4b1d256dcef29eca6cad07d99b746453eac9",
+    "attempt69AuditFileSha256": "03416cfa37d5c86120550f4ce3d3fa1e919ff6f1a9aa5b41e0bbd781cb3a67ff"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-particle-band-width-attempt-70",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-band-width-attempt-70"
+  },
+  "frozenConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "resolutionMax": 96,
+    "domainCenterMeters": [0.45, 0.0, 0.26],
+    "domainDimensionsMeters": [0.9, 0.5, 0.58],
+    "trajectoryCellId": "C5F96",
+    "simulationMethod": "APIC",
+    "particleNumber": 2,
+    "particleMinimum": 8,
+    "particleMaximum": 16,
+    "particleRadius": 1.8,
+    "particleBandWidth": 4.0,
+    "meshParticleRadius": 2.5,
+    "meshScale": 2,
+    "meshConcaveLower": 0.4,
+    "meshConcaveUpper": 3.5,
+    "meshSmoothenPos": 1,
+    "meshSmoothenNeg": 1,
+    "useFractions": true,
+    "fractionsThreshold": 0.05,
+    "fractionsDistance": 0.25,
+    "cupEffectorSurfaceDistanceCells": 2.0,
+    "cupEffectorSubframes": 1,
+    "timestepsMin": 2,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "deleteInObstacle": false
+  },
+  "onlyChangeFromAttempt68": {
+    "path": "fluid domain FluidDomainSettings.particle_band_width",
+    "before": 3.0,
+    "after": 4.0
+  },
+  "machineAcceptanceUnchangedFromAttempt68": {
+    "maximumTrajectoryLocationDeltaMeters": 0.00001,
+    "maximumTrajectoryRotationDeltaDegrees": 0.0001,
+    "minimumFrame24CupTiltDegrees": 14.0,
+    "maximumHingePivotDriftMeters": 0.005,
+    "exactCacheFiles": 72,
+    "liquidMeshRequiredEveryFrame": true,
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.25,
+    "maximumAbsoluteTemporalVolumeDriftFraction": 0.15,
+    "positiveLiquidBodyCountEveryFrame": 1,
+    "maximumNonManifoldEdgeCount": 0,
+    "minimumLargestComponentFraction": 0.5,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.05,
+    "maximumBelowFloorFraction": 0.01,
+    "minimumLiquidCentroidShiftCupLocalMeters": 0.002,
+    "zeroCupBallPusherPoseKeys": true,
+    "retainedStaticCacheByteExact": true
+  },
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 2147483648,
+    "maximumWorkspaceBytes": 2147483648,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-moving-liquid-particle-band-width-scene.py", "sha256": "9403db3900eef2a2889bb0854d0741e8c9bbf455347479547082f94d4b481dbf"},
+    {"uri": "scripts/run-rc6-moving-liquid-particle-band-width.py", "sha256": "e2c3cd1443366919ea37b594fe9196960fca09df734e905a8b1320195af8152b"},
+    {"uri": "scripts/audit-rc6-moving-liquid-particle-band-width.py", "sha256": "329b1388b5b21ec4f79a96928ea343e338690a8ecd966ff5d2724f7aa6e7dfe9"}
+  ],
+  "stopRule": "Run exactly once in attempt-70 roots and retain PASS, physical FAIL or harness failure. Never add a second particle_band_width value, change fractions/radius/density/timesteps/CFL/subframes/surface_distance/Mesh/thresholds, begin impact or render.",
+  "claimCeiling": "One 24-frame Preview-96 single-variable particle-band-width result. It cannot establish final resolution, full tip, spill, impact, persistence, rendered appearance or film quality.",
+  "specHash": "df1e8515e070de1f710a0660f5909adabaab2d310b58a542d66ed9dd480e23b8"
+}
