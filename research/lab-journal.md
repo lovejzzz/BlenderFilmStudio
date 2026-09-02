@@ -6992,3 +6992,16 @@ performed its own two-occurrence replacement only after compilation. Both
 attempt-53 roots remain absent, so this is neither a Bullet result nor authority
 to rerun the frozen tool. C5-C2 may correct only the outer occurrence count and
 route the unchanged physical protocol to fresh attempt-54 roots.
+
+## J-602 · RC6 motorized C5F48 passes; aggregate marker binding retains attempt-54
+
+Date: 2026-09-02 · Type: HARNESS FAILURE WITH PASSING PHYSICAL CELL · Blender starts / Bullet bakes / fluid bakes / renders: 1 / 1 / 0 / 0
+
+C5-C2 corrected the outer routing and completed C5F48. The paired HINGE/MOTOR
+mechanism passed all 13 physical checks: 60.003° peak, 31-frame 5→45° span,
+11.87 mm maximum one-frame surface motion, two required fluid subframes,
+0.012 mm hinge drift, valid floor contact and valid domain margin. The runner
+then expected a C5-C2 log marker even though the unchanged scene tool correctly
+emitted its frozen C5 marker. The independent failure audit passes 16/16. C5-C3
+must change only that runner marker expectation and preserve every observed
+physical input and threshold in fresh roots.
