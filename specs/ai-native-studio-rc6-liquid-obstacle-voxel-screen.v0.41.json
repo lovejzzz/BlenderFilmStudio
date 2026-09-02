@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "bfs.rc6LiquidObstacleVoxelScreenSpec.v0.41",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-OBSTACLE-VOXEL-SCREEN-2026-09-02-ATTEMPT-39",
+  "purpose": "Determine whether the retained static cup-floor particle cluster is controlled by obstacle level-set surface distance or by resolution-dependent voxel classification before changing CFL or reconstructing a surface.",
+  "toolFreezeParent": "a6e0dd04dc9e23ff5f8ef4695af330ec5c233045",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "scope": "Three fresh local-only seven-frame Data bakes at Preview/Review resolution; zero Mesh bake, save, render, network or engine remote write; ordinary research commit and non-force push are allowed.",
+    "specificConfirmationRequired": false
+  },
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-obstacle-voxel-screen-attempt-39",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-attempt-39"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "sourceBottomClearanceMeters": 0.035,
+    "engineSourceCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900"
+  },
+  "priorParticleFinding": {
+    "resultPath": "experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-attempt-37/cells/axis-control/result.json",
+    "resultFileSha256": "93b4a12a9e797463635b5b98a247fabbeffd9b74b602dd90ccfb8144538fd569",
+    "resultHash": "e3e52359bfc4d2191b162384b9b5890e547416defc1ead4c0fdd025f708f3794",
+    "auditPath": "experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-audit-c1-attempt-38/independent-audit-c1.json",
+    "auditFileSha256": "5e16d4701c9e3d3721ae580e019757ad60fa3650b09cc68546f17e9c0abe3b1b",
+    "auditHash": "840b8b91e9af9b9c36775297314900214c4c9313c34947294e2d48f358b160cf",
+    "finding": "Nine ALIVE particles appeared on frames 4-7 at nine stable coordinates, reported zero RNA speed and lay 13.96487-20.23688 mm inside the modeled solid floor while remaining above the outer bottom."
+  },
+  "sourceCodeBindings": [
+    {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/source/intern/mantaflow/intern/strings/liquid_script.h",
+      "fileSha256": "b526a55e9ba35d5ba41ef53dc5d027e9e13831a32a2862c424752b616a10392b",
+      "observedRule": "Liquid particle advancement and resampling use the obstacle phiObs field to push particles out and exclude obstacle cells."
+    },
+    {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/source/source/blender/blenkernel/intern/fluid.cc",
+      "fileSha256": "63a7a3e1affe7809ea935e184dea992754655796a9631e0eadb2060d72dfa20f",
+      "observedRule": "Obstacle meshes are sampled into a signed-distance field and effector surface_distance expands that field in domain-grid units."
+    },
+    {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/source/source/blender/blenkernel/intern/particle_system.cc",
+      "fileSha256": "71e072159096d7de7f26c460d6f0da17ad5eb32337f312d3610501243bbef040",
+      "observedRule": "The RNA particle array is rebuilt from Mantaflow positions and velocities, excludes DELETE particles and marks the remaining display particles ALIVE; RNA indices are not cross-frame identities."
+    }
+  ],
+  "frozenCommonConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 7,
+    "domainCenterMeters": [0.32, 0.0, 0.25],
+    "domainDimensionsMeters": [0.36, 0.36, 0.5],
+    "sourceDimensionsMeters": [0.11, 0.11, 0.14],
+    "sourceBottomClearanceMeters": 0.035,
+    "simulationMethod": "APIC",
+    "useAdaptiveTimesteps": true,
+    "timestepsMin": 1,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "useMesh": false,
+    "useFlipParticles": true,
+    "displayPercentage": 100,
+    "useFractions": true,
+    "deleteInObstacle": false,
+    "waterViscosityBase": 1.0,
+    "waterViscosityExponent": 6,
+    "flowSurfaceDistanceCells": 0.0,
+    "cupEffectorIsPlanar": false,
+    "cupEffectorEnabled": true,
+    "cupEffectorSubframes": 0
+  },
+  "cells": [
+    {
+      "cellId": "preview-baseline",
+      "resolutionMax": 96,
+      "cupEffectorSurfaceDistanceCells": 1.5
+    },
+    {
+      "cellId": "preview-effector-plus1",
+      "resolutionMax": 96,
+      "cupEffectorSurfaceDistanceCells": 2.5
+    },
+    {
+      "cellId": "review-baseline",
+      "resolutionMax": 128,
+      "cupEffectorSurfaceDistanceCells": 1.5
+    }
+  ],
+  "measurement": {
+    "particleCoordinateConvention": "Blender Particle.location world-space converted by cup.matrix_world.inverted",
+    "cupInnerRadiusMeters": 0.09,
+    "cupOuterRadiusMeters": 0.15,
+    "cupInteriorBottomLocalZMeters": -0.16,
+    "cupOuterBottomLocalZMeters": -0.22,
+    "cupInteriorTopLocalZMeters": 0.22,
+    "acceptedContainmentMargin": "one current cell at the measured resolution",
+    "identityRule": "Compare rounded coordinates, speed and physical region; never treat RNA display index as a stable particle identity.",
+    "cacheContract": "Exactly one config and one Data VDB for each frame 1-7 in each fresh cell; no Mesh files."
+  },
+  "interpretationTable": [
+    {
+      "condition": "preview baseline has outliers and preview +1-cell effector has zero",
+      "verdict": "PASS_SURFACE_DISTANCE_SIGNAL",
+      "nextCell": "review-effector-plus1"
+    },
+    {
+      "condition": "preview baseline and review baseline outlier counts differ without the surface-distance condition above",
+      "verdict": "PASS_RESOLUTION_SIGNAL",
+      "nextCell": "review-effector-plus1 when Review has outliers; otherwise final-resolution-baseline-reproduction"
+    },
+    {
+      "condition": "all three cells have zero one-cell-envelope outliers",
+      "verdict": "INCONCLUSIVE_LOWER_TIERS_CONTAINED",
+      "nextCell": "paired Final-resolution baseline/+1-cell effector diagnostic"
+    },
+    {
+      "condition": "outliers persist without either signal",
+      "verdict": "FAIL_OBSTACLE_VOXEL_SCREEN_NO_CORRECTION",
+      "nextCell": "cup topology, normals, Is Planar and applied-transform audit"
+    }
+  ],
+  "resourceCeilings": {
+    "blenderStarts": 3,
+    "fluidDataBakes": 3,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 6442450944,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 6442450944,
+    "minimumFreeBytesBefore": 137438953472,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on non-fresh roots, dirty research worktree, input/source-code drift, source geometry or placement drift, cell/configuration mismatch, missing evaluated particles, aggregate/detail mismatch, cache roster other than exact 14 config/Data files per cell, process/log/result failure, any Mesh bake/save/render/network/remote-write count, symlink, banned media or resource failure. Do not enable Delete in Obstacle, do not vary CFL/timesteps and do not proceed to slow tip in this attempt.",
+  "claimCeiling": "One three-cell Data-only Preview/Review screen for obstacle-level-set and resolution signals in the static cup. It can select the next diagnostic cell only; it does not prove a Final-resolution correction, reconstructed-surface quality, slow tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-obstacle-voxel-screen-scene.py": "27f00928b1f21dfa8f1d97aaf632431d0f2594b93eff0ac646b983a4f0bdaffe",
+    "scripts/run-rc6-liquid-obstacle-voxel-screen.py": "9c6921716b903307282d69c020ac7d9cefb82d611226362abfcd367d5bf175f5",
+    "scripts/audit-rc6-liquid-obstacle-voxel-screen.py": "24ccdf95edf4a2fe4eb2b9face1f6075bd3039262f52f983e419b9b3cd28d622"
+  },
+  "specHash": "2b75314992dbbfd082c24c55e33e7ac8bed6b02b5b7e64c12e0f3c162eef5302"
+}
