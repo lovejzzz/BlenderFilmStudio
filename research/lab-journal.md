@@ -7376,3 +7376,13 @@ The 22/23 audit's only false check is the `0.0093749998` float32 base voxel
 against a `1e-10` decimal comparison; all other evidence checks pass. Run an
 audit-only correction, then inspect collision-margin congruence before changing
 physics or the simulation domain.
+
+## J-632 · C5 closes I09 representation without reopening speed tuning
+
+Date: 2026-09-02 · Type: AUDIT-ONLY PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+C5 freezes the 10-file attempt-75 root at manifest `6a9261f1…` and applies
+`1e-6` only to Blender float32 configuration values, including the base voxel.
+The I09 physical FAIL, 22 already-passing checks and every byte remain exact.
+The next question after audit closure is collision-margin/visible-geometry
+congruence, not another striker speed.
