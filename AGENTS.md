@@ -102,6 +102,14 @@ final amplitude and keeping cup intrusion below1%. Teach both onset and
 amplitude; peak improvement alone is insufficient. Next inspect bound particle-
 adjustment source and preregister one distinct Data-layer variable. Do not scan
 another threshold, rebake, tune Mesh or render before that source-led choice.
+C20 source inspection selected only simulation `particle_radius`1.8→1.6 on C18.
+Its frozen attempt-93 started at `a1dfc659…` and was deliberately interrupted
+for an owner-requested Codex restart after 11 partial Data frames; Mesh never
+started, no render occurred and no matching process remains. It has no scientific
+verdict. Retain attempt-93 unchanged and never resume or measure it. On restart,
+run host preflight and freeze a versioned C20 C1 restart adapter changing only
+fresh roots to attempt-94 while preserving the exact radius, all C18 inputs,
+27 gates and resource ceilings; commit before root creation, then execute once.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

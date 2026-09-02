@@ -1265,6 +1265,17 @@ threshold makes expansion begin earlier but limits its amplitude and keeps cup
 intrusion below1%; it does not remove the instability. Next inspect bound
 particle-adjustment source and freeze one distinct Data-layer degree of freedom.
 Do not scan another threshold, rebake, tune Mesh or render first.
+C20 source inspection then selected exactly one signed-error Data-layer change:
+simulation `particle_radius`1.8→1.6 on C18, because Blender documents decreasing
+the value for volume gain. Attempt-93 started from frozen commit `a1dfc659…` but
+was intentionally stopped after about two minutes for an owner-requested Codex
+restart. It retained 11 partial Data frames, no Mesh, no render and no scientific
+verdict; no runner, `caffeinate` or Blender process remains. Never resume, repair
+or measure attempt-93. After restart and host preflight, freeze a versioned C20
+C1 adapter that changes only the fresh roots to attempt-94 while preserving the
+same radius, every C18 input, all27 gates and all ceilings. Commit it before root
+creation, then run once. See
+`research/2026-09-02-rc6-real-impact-liquid-particle-radius-c20-attempt-93-restart-interruption.md`.
 
 ## Public routes
 

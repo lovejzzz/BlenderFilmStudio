@@ -7707,3 +7707,22 @@ Mesh correlation is0.97738. The one-frame Mesh lead preserves the strict
 particle/velocity/Mesh expansion to32.38%/173.84%/51.54% and keeps intrusion
 below1%, but it does not delay instability. Future decisions must compare onset
 and amplitude, not only peak improvement.
+
+## J-661 · C20 is cleanly stopped for Codex restart
+
+Date: 2026-09-02 · Type: OPERATIONAL INTERRUPTION / NO SCIENTIFIC VERDICT · Blender starts / completed Data bakes / Mesh bakes / renders: 1 / 0 / 0 / 0
+
+Bound Blender/Mantaflow source selected one signed-error correction on C18:
+simulation particle radius1.8→1.6 while preserving every other input and all27
+gates. Frozen attempt-93 started from commit `a1dfc659…`, then the owner asked
+to restart Codex about two minutes later. The foreground runner received SIGINT
+and exited130; an immediate check found no remaining runner, `caffeinate` or
+Blender process. The retained root contains the exact source copy, 11 partial
+Data VDBs and11 config files (23 files, 3,579,112 bytes). Data did not complete,
+Mesh never started, and no render/save/build/network/engine write occurred.
+
+This root has no result, receipt, audit or scientific verdict and must never be
+resumed, repaired or used as measurement input. After restart and normal host
+preflight, freeze a versioned C20 C1 adapter changing only fresh roots to
+attempt-94 while preserving radius1.6, the exact C18 baseline, all27 checks and
+all ceilings. Commit before root creation, then execute once under `caffeinate`.
