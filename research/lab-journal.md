@@ -6952,3 +6952,19 @@ The unlimited hinge then free-fell to 90°, causing 123–170 mm maximum one-fra
 surface motion and 14–19 required subframes. C4 must derive the pivot after
 frame-1 cache reset, add a -60°/+5° physical hinge limit and cup angular damping
 0.8, and test slower 28/32/36/40-frame drives without any pose or motor keys.
+
+## J-599 · RC6 physical stop passes; penetrating kinematic drive retains C4 failure
+
+Date: 2026-09-02 · Type: PHYSICAL SCREEN FAILURE · Blender starts / Bullet bakes / fluid bakes / renders: 4 / 4 / 0 / 0
+
+C4 attempt-51 passed an 18/18 independent audit. Frame-1 pivot derivation,
+0.8 angular damping and the -60°/+5° hinge stop all worked: four cells stopped
+near 60.003°, pivot drift stayed within 3.47 mm, floor penetration stayed below
+1.16 mm and the 5→45° passage took 9–13 frames. The remaining actuator was
+not slow in the physically relevant sense. Its prescribed kinematic path drove
+the visible surface as much as 57.85 mm into the rotating cup before a single
+126.96–142.80 mm surface jump, requiring 14–16 Preview subframes. The current
+domain upper one-voxel margin also missed by only 1–2 mm. C5 must replace the
+penetrating contact driver with a bounded Bullet hinge motor and may add only
+the measured 20 mm domain-height correction; no cup pose key or fluid run is
+admitted before that separate screen passes.
