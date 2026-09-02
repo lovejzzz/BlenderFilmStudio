@@ -7579,3 +7579,15 @@ over frames20–36. C13 freezes one complete fresh copy of all108 cache files an
 an independent all36-frame comparison. It distinguishes a same-frame Data
 support expansion from a Mesh-only reconstruction failure without Blender,
 baking, rendering or changing physics.
+
+## J-650 · Data and Mesh expand together at frame 23
+
+Date: 2026-09-02 · Type: ZERO-BAKE DIAGNOSTIC PASS · Engine Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+C13 attempt-85 passes independent audit22/22. On one complete fresh cache
+copy, both Data particle support and retained Mesh first exceed the25% expansion
+gate at frame23. Relative to frame22, particle support rises91.31%, velocity
+support330.47% and Mesh volume138.29%; particle support and Mesh correlate
+at0.97597 over frames20–36. This rejects a Mesh-only cause without treating
+occupied voxels as exact mass. Next inspect source/configuration read-only and
+select one high-speed Data-layer variable before another bake.

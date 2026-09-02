@@ -1198,6 +1198,15 @@ be rendered. Next preregister one zero-bake copied-cache Data-versus-Mesh
 diagnostic over frames20–36. Never mount the retained attempt-84 cache directly
 in Blender and do not start another impact bake until the first failing layer is
 identified.
+C13 zero-bake attempt-85 now passes its independent audit 22/22. A complete
+fresh copy of all108 cache files shows particle occupied support and retained
+Mesh volume first expand together at frame23. From frame22→23 particle support
+rises91.31%, velocity support330.47% and Mesh volume138.29%; particle support
+and Mesh correlate at0.97597 over frames20–36. This rejects a Mesh-only cause
+but does not make occupied voxels an exact mass measure or identify the precise
+solver mechanism. Next inspect the bound Mantaflow source and exact C12
+configuration read-only, then preregister exactly one high-speed Data-layer
+degree of freedom. Do not tune surface reconstruction, bake or render first.
 
 ## Public routes
 

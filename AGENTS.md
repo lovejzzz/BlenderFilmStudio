@@ -45,11 +45,12 @@ Do not call this fracture, deformation or fluid simulation. Preserve RC4/D1/H1
 as exact regressions. RC6 C12 attempt-84 is retained `FAIL` with an independent
 20/20 audit: the exact R40 Bullet path and obstacle/domain checks passed, but
 the liquid destabilized at frame23, reaching about16.385× source volume, 239
-positive bodies and243 connected components. Do not render, rerun or repair
-that root. The next gate is a preregistered zero-bake copied-cache Data-versus-
-Mesh diagnostic over frames20–36; select exactly one measurable physical degree
-of freedom only after locating whether the first failure is in Data support or
-Mesh reconstruction.
+positive bodies and243 connected components. C13 attempt-85 then passed a
+zero-bake copied-cache audit22/22: Data particle support and Mesh both first
+expand at frame23 and correlate at0.97597, rejecting a Mesh-only explanation.
+Do not render, rerun or repair either root and do not tune surface reconstruction.
+The next gate is read-only source/configuration inspection followed by exactly
+one preregistered high-speed Data-layer degree of freedom.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
