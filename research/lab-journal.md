@@ -7362,3 +7362,17 @@ The exact accepted scene, 48-frame window, contact/tilt ordering, floor/domain
 limits, eight-subframe ceiling and zero outcome keys remain unchanged. One
 Blender start and one Bullet bake are allowed; liquid/render/save counts stay
 zero. There is no second candidate or threshold adjustment after observation.
+
+## J-631 · Once the free cup tips, speed tuning no longer controls its fall
+
+Date: 2026-09-02 · Type: RETAINED PHYSICAL FAILURE · Blender starts / Bullet bakes / liquid bakes / renders: 1 / 1 / 0 / 0
+
+I09 contacted at frame 19, crossed 45° at 33 and reached 90.00°, yet its maximum
+cup-surface step was 96.84 mm—effectively the same as I08—and still required 11
+Preview subframes. It also swept outside the accepted domain and 16.57 mm below
+the floor plane. The tipping threshold is discontinuous: once crossed, free
+gravity/landing motion dominates the sampling cost. Close striker-speed tuning.
+The 22/23 audit's only false check is the `0.0093749998` float32 base voxel
+against a `1e-10` decimal comparison; all other evidence checks pass. Run an
+audit-only correction, then inspect collision-margin congruence before changing
+physics or the simulation domain.

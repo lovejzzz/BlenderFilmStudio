@@ -1121,6 +1121,15 @@ proves the retained attempt-73 root manifest stayed exact at `8390c039…`.
 The physical verdict remains FAIL. The next admissible physical gate is one
 fresh Bullet-only `driveEndFrame=9` run with every other v0.84 field and
 threshold unchanged; no liquid or render may begin first.
+C4 attempt-75 tested only I09. It is a retained physical FAIL: contact frame 19,
+45° frame 33 and 90.00° peak, but 96.84 mm maximum cup-surface motion still
+requires 11 Preview subframes; the cup also exits the accepted domain and its
+visible mesh reaches 16.57 mm below the floor. This matches I08 after tipping,
+so striker-speed tuning is closed. The first audit is 22/23 only because the
+float32 base voxel `0.0093749998` missed an overly strict `1e-10` decimal
+comparison. Next close that audit without Blender, then inspect the exact cup
+Bullet collision margin versus visible geometry before choosing a new physical
+or DRAFT-domain degree of freedom. Do not rerun I09 or start liquid.
 
 ## Public routes
 
