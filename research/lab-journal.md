@@ -7821,3 +7821,13 @@ frozen result is same-onset/more-severe. The audit passes22/23; only the C19
 receipt self hash in the C21 spec has a wrong suffix, while its file hash and
 all other bindings pass. Retain attempt-99 and close that one leaf in a fresh
 audit-only C1 root before selecting another physical degree.
+
+## J-668 · C21 closes as same-onset amplification
+
+Date: 2026-09-02 · Type: AUDIT-ONLY CLOSURE / DIAGNOSTIC ACCEPTED · System Python / analyzer / cache copies / Blender: 1 / 0 / 0 / 0
+
+C1 attempt-100 corrects only the C19 receipt self-hash leaf, binds the complete
+retained attempt-99 root and passes18/18. Audit/receipt hashes are `b9ee75c2…` /
+`90cae654…`. The accepted C21 comparison shows identical velocity/Mesh/particle
+onsets24/24/25 but much larger C20 amplitudes. This closes further radius scans;
+the next move is read-only source inspection for one distinct Data-layer degree.

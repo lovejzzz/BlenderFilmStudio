@@ -1328,6 +1328,14 @@ velocity/particle/Mesh expansion rises from173.84%/32.38%/51.54% to
 checks pass. Preserve attempt-99. Next freeze one audit-only C1 correcting only
 that JSON leaf in a fresh root, with zero analyzer/cache-copy/Blender work. See
 `research/2026-09-02-rc6-real-impact-particle-radius-data-comparison-c21-attempt-99-retained-failure.md`.
+C21 C1 attempt-100 corrects only that receipt-hash leaf and passes18/18 while
+proving attempt-99 unchanged. Audit/receipt hashes are `b9ee75c2…` /
+`90cae654…`; analyzer/cache-copy/Blender/bake/render/retained writes are zero.
+C21 is accepted by composition: radius1.6 amplifies the same frames24/24/25
+velocity/Mesh/particle transition rather than advancing it. Next perform one
+read-only bound-source inspection and select a distinct Data-layer degree of
+freedom; do not scan another radius or render. See
+`research/2026-09-02-rc6-real-impact-particle-radius-data-comparison-c21-accepted.md`.
 
 ## Public routes
 

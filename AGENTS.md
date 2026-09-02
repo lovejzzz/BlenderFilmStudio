@@ -154,6 +154,12 @@ independent audit is22/23 solely because one C19 receipt self hash was
 transcribed incorrectly; every measurement and other evidence check passed.
 Preserve attempt-99. C21 C1 may correct only that spec leaf and perform a fresh
 audit-only closure; no analyzer, cache copy, Blender, parameter change or render.
+C21 C1 attempt-100 now passes18/18 and closes that sole hash defect with
+attempt-99 unchanged. The accepted diagnostic is same-onset/more-severe: both
+radii cross velocity/Mesh/particle at24/24/25, while radius1.6 amplifies all
+three maxima. Do not scan a second radius. Next inspect the bound particle-
+adjustment source read-only and select exactly one distinct Data-layer degree
+before any mutation; rendering remains forbidden.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
