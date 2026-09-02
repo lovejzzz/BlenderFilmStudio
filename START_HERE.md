@@ -1169,6 +1169,15 @@ accepted domain. The moment-arm mechanism is correct but 60 mm is too strong.
 Do not expand the domain or start liquid. Next test only a 40 mm rise on the
 same 0.30 m passive ramp, placing predicted contact at the frozen 0.38 m
 minimum; preserve every other field.
+C10 reduced only rise to 40 mm and passed its independent audit 23/23. Contact
+z=0.38175 m, response frame21, first45 frame32 and peak90.15° all pass, but the
+frame38 near-landing peak is99.39 mm/11 subframes and the full sweep exits the
+domain. Ramp-height tuning is closed: R40/R60 fall dynamics are non-monotonic.
+The retained R40 samples reach first70° at frame36 with cumulative surface
+motion72.10 mm/eight subframes; a same-size domain centered x=0.57 can contain
+that initial event sweep. Next run an audit-only event-window/domain-placement
+gate with zero Blender. Do not claim the liquid is already finished or start a
+fluid bake before that audit passes.
 
 ## Public routes
 

@@ -2970,14 +2970,26 @@
       "failures": "surface step93.48 mm requires10 subframes; swept max x1.0163 leaves domain",
       "interpretation": "passive contact moment is correct but 60 mm rise is too strong"
     },
+    "realImpactPassiveRampC10Attempt82": {
+      "status": "RETAINED_PHYSICAL_FAIL_AUDIT_23_OF_23_PASS_CAUSAL_TIP_VALIDATED",
+      "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-real-impact-passive-ramp-c10-attempt-82",
+      "resultHash": "9deeebd3669203df9e62c728e679335dc43de0722d67add508588b1c1aa2842d",
+      "receiptHash": "289eebcbb57ac9aedb4d1fa1e8e996424b51614e30dfa510ff22f2be37dfc19b",
+      "auditHash": "8b6b1812c93289c81884b01814b19e5c1e3ff5067d8d2970e7497166e2b0dec3",
+      "singleChange": "passive ramp rise 60 to40 mm on fixed0.30 m run",
+      "passes": "contact z0.38175, contact19, response21, first45 frame32, peak90.15, floor PASS",
+      "failures": "frame38 surface99.39 mm requires11 subframes; full swept max x1.00394 leaves domain",
+      "eventWindowObservation": "through first70 frame36 cumulative surface72.10 mm requires8 subframes; same-size domain center x0.57 can contain sweep",
+      "interpretation": "ramp height tuning closed; audit semantic fluid-relevance window separately"
+    },
     "next": {
       "gate": "RC6-REAL-IMPACT-BULLET-TRAJECTORY",
-      "status": "PASSIVE_MOMENT_ARM_VALIDATED_ONE_40MM_RISE_NEXT",
+      "status": "CAUSAL_TIP_VALIDATED_EVENT_WINDOW_AUDIT_ONLY_NEXT",
       "mustBindAcceptedMovingLiquid": "attempt-70 particle radius 1.8, particle band width 4.0, fractions distance 0.25 and all accepted geometry/Mesh settings",
-      "initialStrategy": "preserve I09, 2 mm margin, cup friction 0.75 and 0.30 m passive ramp run; reduce only ramp rise 60 to 40 mm so predicted unkeyed-ball contact center is the frozen 0.38 m minimum",
+      "initialStrategy": "recompute retained R40 contact-through-first70 event window and same-size x0.57 domain containment with zero Blender; preserve full-window FAIL and make no liquid-completion claim",
       "readOnlyInventory": "retained P02 contacts at frame 8 and reaches about 90 degrees by frame 15 but translates the cup roughly 7.5-10 cm per frame; P03/P05 contact at frame 13 and P06 at frame 17, showing the old contact-by-frame-12 gate was not a liquid-fidelity criterion",
       "restartCheckpoint": "research/2026-09-02-codex-restart-checkpoint-after-rc6-attempt-77.md",
-      "executionStatus": "R60_PHYSICAL_FAIL_AUDIT_23_OF_23_PASS_ZERO_LIQUID_RENDER_SAVE_NETWORK_MECHANISM_VALIDATED",
+      "executionStatus": "R40_PHYSICAL_FAIL_AUDIT_23_OF_23_PASS_ZERO_LIQUID_RENDER_SAVE_NETWORK_CAUSAL_TIP_VALIDATED",
       "mustMeasure": [
         "derived ball-to-cup contact frame and continuous pre/post-contact transforms",
         "solver-owned cup tilt and floor/spill opportunity window",
@@ -3007,6 +3019,8 @@
     "attempt80AuditHash": "c1d2568426c007e50cc1193c45b762279a6366b9e7e096fc32d85b42331284ba",
     "attempt81ReceiptHash": "3482e47c925986afc69967c65bdc531805214f8d45b55dcf9f3f8d54eaeba6ca",
     "attempt81AuditHash": "954136d8cd8dc4ced2e14d701ba6100bfc845267fcdb49bbb73263091d7ccb1b",
+    "attempt82ReceiptHash": "289eebcbb57ac9aedb4d1fa1e8e996424b51614e30dfa510ff22f2be37dfc19b",
+    "attempt82AuditHash": "8b6b1812c93289c81884b01814b19e5c1e3ff5067d8d2970e7497166e2b0dec3",
     "restartCheckpoint": "research/2026-09-02-codex-restart-checkpoint-after-rc6-attempt-77.md",
     "attempt70Preregistration": "research/2026-09-02-rc6-moving-liquid-particle-band-width-preregistration.md",
     "attempt70SourceInspection": "research/2026-09-02-rc6-moving-liquid-particle-band-width-source-inspection.md",

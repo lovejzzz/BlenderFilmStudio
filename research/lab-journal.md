@@ -7509,3 +7509,15 @@ tip that is too fast and leaves the domain. C10 holds the 0.30 m passive run
 and every I09 physical field fixed, changing only rise 60→40 mm. The 7.59°
 ramp predicts ball-center z=0.38, exactly the frozen minimum raised-contact
 gate. One Bullet-only run may pass or fail; no liquid follows a failure.
+
+## J-644 · Landing peak closes ramp-height interpolation
+
+Date: 2026-09-02 · Type: PHYSICAL FAILURE / EVENT-WINDOW HYPOTHESIS · Blender starts / Bullet bakes / liquid bakes / renders: 1 / 1 / 0 / 0
+
+C10 passed independent audit 23/23 and achieved contact z=381.75 mm, response
+frame 21, first45 frame 32 and peak90.15°. It remains FAIL: frame38 landing
+motion reaches99.39 mm/11 subframes and full sweep exits the domain. Reducing
+ramp rise did not reduce the fall peak, so ramp-height tuning is closed. By the
+first70° frame36, however, cumulative maximum motion is72.10 mm/eight
+subframes. Next verify that exact event window and a same-size shifted domain
+using retained samples only; do not change C10 or start Blender.
