@@ -7476,3 +7476,14 @@ friction 0.75→0.80 crossed the source-derived combined-friction estimate
 only 2.67°→2.98°. The static inequality selected a useful test but did not
 predict the transient solve. Close friction tuning. Preserve I09, 2 mm margin
 and cup friction 0.75; next inspect one passive ramp/contact-height mechanism.
+
+## J-641 · Raise contact with passive geometry, never a ball key
+
+Date: 2026-09-02 · Type: CAUSAL GEOMETRY PREREGISTRATION · Blender starts / Bullet bakes / liquid bakes / renders: 0 / 0 / 0 / 0
+
+The exact horizontal lane gives ball-center z=0.34, 100 mm below the 0.44 m
+cup rim. C9 freezes one passive convex wedge: x=-0.26→0.04, surface
+z=0.22→0.28, run/rise 0.30/0.06 m and angle 11.31°. It can lift the unkeyed
+ball center toward z=0.40 before contact. I09 speed, 0.75 cup friction, 2 mm
+margin and all thresholds remain exact. The ramp and Bullet must own the path;
+no liquid starts unless the one run passes.
