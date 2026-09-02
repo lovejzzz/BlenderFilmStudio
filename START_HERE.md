@@ -1246,6 +1246,16 @@ as necessary explanations for the early C16 regression. CFL tuning is closed.
 Next return to C14 CFL2 and preregister one source-led fractional-obstacle
 threshold change0.05→0.10. Preserve every other C14 input and all27 gates; do
 not test another threshold, stack C16, tune Mesh or render.
+C18 attempt-90 changed only `fractions_threshold`0.05→0.10 on exact C14 and is
+an immutable physical FAIL23/27. It improves cup intrusion2.453988%→0.748564%
+and passes that gate; source-relative error improves235.70%→47.22%, temporal
+drift204.31%→33.45%, positive bodies50→37 and components52→37. Conservation,
+drift and the two bounded-topology checks still fail, so this is not accepted
+liquid and it must not be rendered. The original audit's sole 19/20 defect was
+an exact claim-string naming mismatch; C1 attempt-91 closes only that harness
+defect at19/19 while proving both attempt-90 roots immutable. Next preregister
+one zero-Blender copied-cache C19 comparison of C18 versus C14 Data/Mesh onset.
+Do not select another physical variable, rebake, tune Mesh or render first.
 
 ## Public routes
 

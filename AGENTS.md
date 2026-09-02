@@ -81,8 +81,16 @@ correlation0.99750 and no >1% cup intrusion. This closes a Mesh-only or prior-
 intrusion explanation for the C16 regression without identifying exact mass or
 one solver operation. Return to C14 CFL2. Bound source selects exactly one C18
 collision-layer value: `fractions_threshold`0.05→0.10, the first RNA UI step.
-Preregister it with every other C14 input and all27 gates frozen. Do not stack
-C16, test another threshold, tune Mesh or render.
+C18 attempt-90 changed only that value and is now an immutable physical `FAIL`
+with 23/27 checks. Against C14, maximum cup intrusion improves2.453988%→
+0.748564% and passes; source-relative error improves235.70%→47.22%, temporal
+drift204.31%→33.45%, positive bodies50→37 and components52→37. Those last four
+conservation/topology checks still fail, so do not render or call the liquid
+accepted. Its original audit is retained19/20 for one claim-string naming
+mismatch; C1 attempt-91 proves the immutable roots unchanged and closes only
+that mismatch at19/19. Next preregister one zero-Blender copied-cache C19
+C18-versus-C14 Data/Mesh comparison before selecting another physical variable.
+Do not rebake, test another threshold, tune Mesh or render first.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

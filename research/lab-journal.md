@@ -7671,3 +7671,26 @@ RNA says a higher value tags a boundary cell as obstacle more readily and
 reduces boundary smoothing. C18 returns to C14 CFL2 and selects only the first
 UI step0.05→0.10. It does not stack the regressed C16 CFL and changes no other
 physics, Mesh or acceptance threshold.
+
+## J-658 · Fractional-obstacle threshold materially improves impact but does not pass
+
+Date: 2026-09-02 · Type: RETAINED PHYSICAL FAILURE · Blender starts / Bullet bakes / liquid Data bakes / liquid Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+C18 attempt-90 changes only `fractions_threshold`0.05→0.10 on C14 and passes
+23/27 physical checks. Cup intrusion improves2.453988%→0.748564%; source error
+235.70%→47.22%; temporal drift204.31%→33.45%; positive bodies50→37 and
+components52→37. Conservation, temporal drift and the two bounded-topology
+checks still fail. Data/Mesh cost1404.51/4.54 seconds. This is a strong
+collision-layer response, not accepted liquid or authority to render.
+
+## J-659 · C18 claim wording closes without touching physics
+
+Date: 2026-09-02 · Type: AUDIT-ONLY CLOSURE · System Python starts / Blender starts / bakes / renders: 1 / 0 / 0 / 0
+
+The original C18 audit passed19/20 and failed only because two exact claim
+strings named the same parameter/baseline differently. C1 attempt-91 binds both
+strings and their two exact substitutions, verifies all109 work files and11
+evidence files before and after, and passes19/19. Audit hash is
+`2b1d988bf7aa2582b4ee02fdbeb74a4cf0e5e5077f7cdf7f42ca2a160d5625e8`.
+The physical verdict remains FAIL. Compare immutable C18 and C14 Data/Mesh
+transitions before selecting another physical setting.
