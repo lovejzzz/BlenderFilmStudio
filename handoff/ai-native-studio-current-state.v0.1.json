@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "RC6-REAL-IMPACT-C14-TRANSITION-ANALYSIS",
+  "activeGate": "RC6-REAL-IMPACT-C16-CFL-PREREGISTRATION",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -3041,14 +3041,28 @@
       "counts": "one Blender start, one Bullet bake, one Data bake, one Mesh bake; zero render/save/build/network/engine writes",
       "claimBoundary": "retained physical failure; timestep ceiling is one major contributor, not a complete repair or renderable liquid result"
     },
+    "realImpactC14TransitionC15Attempt87": {
+      "status": "PASS_DIAGNOSTIC_AUDIT_22_OF_22_CLASSIFICATION_INCONCLUSIVE",
+      "classification": "TRANSITION_ORDER_INCONCLUSIVE",
+      "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-real-impact-c14-transition-c15-attempt-87",
+      "workspaceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-real-impact-c14-transition-c15-attempt-87",
+      "executionCommit": "fed17d463d048f3d3a0438fd0db4b660b88e5d59",
+      "resultHash": "f1940fd7246ae859b53234635b0114d4aadff47f42e963c5c51b3b193c9f9b61",
+      "receiptHash": "371614c5117a8bd74297249755d8974f667b1ffaedb84b98a87beccb1b6bf974",
+      "auditHash": "826beb9fba4e80f7a1c1cb581c77e686f5dea02fb80322f393cf72ad6949173a",
+      "onset": "cup intrusion31; velocity-support expansion34; Mesh/source/temporal/positive-body failure35; particle-support and component failure36",
+      "correlations": "particle-Mesh0.99914717; velocity-Mesh0.98725241 over frames20-36",
+      "terminalSubstepBoundary": "saved terminal dt is not a count or complete adaptive-step roster",
+      "counts": "two engine-Python starts including audit; zero Blender/bake/render/save/network/retained writes"
+    },
     "next": {
-      "gate": "RC6-REAL-IMPACT-C14-TRANSITION-ANALYSIS",
-      "status": "C14_RETAINED_FAIL_READ_ONLY_ANALYSIS_NEXT",
+      "gate": "RC6-REAL-IMPACT-C16-CFL-PREREGISTRATION",
+      "status": "C15_PASS_INCONCLUSIVE_SOURCE_LED_SINGLE_CFL_TEST_NEXT",
       "mustBindAcceptedMovingLiquid": "attempt-70 particle radius 1.8, particle band width 4.0, fractions distance 0.25 and all accepted geometry/Mesh settings",
-      "initialStrategy": "inspect attempt-86 per-frame Data/Mesh and cup intrusion onset read-only, compare with C12, then preregister exactly one further Data/collision variable while preserving R40 trajectory, geometry, domain, source, resolution, Mesh and thresholds",
+      "initialStrategy": "preregister exactly one C16 change cfl_condition 2.0 to 1.0 on C14 while preserving timesteps2/8, R40 trajectory, geometry, domain, source, resolution, Mesh and all27 thresholds",
       "readOnlyInventory": "retained P02 contacts at frame 8 and reaches about 90 degrees by frame 15 but translates the cup roughly 7.5-10 cm per frame; P03/P05 contact at frame 13 and P06 at frame 17, showing the old contact-by-frame-12 gate was not a liquid-fidelity criterion",
-      "restartCheckpoint": "research/2026-09-02-rc6-c14-restart-checkpoint.md",
-      "executionStatus": "C14_FAIL_PHYSICAL_INDEPENDENT_AUDIT_PASS_20_OF_20",
+      "restartCheckpoint": "research/2026-09-02-rc6-real-impact-c14-transition-c15-attempt-87-result.md",
+      "executionStatus": "C15_PASS_DIAGNOSTIC_AUDIT_22_OF_22_CLASSIFICATION_INCONCLUSIVE",
       "mustMeasure": [
         "derived ball-to-cup contact frame and continuous pre/post-contact transforms",
         "solver-owned cup tilt and floor/spill opportunity window",
@@ -3061,8 +3075,12 @@
     }
   },
   "nextExpectedCheckpoint": {
-    "gate": "RC6-REAL-IMPACT-C14-TRANSITION-ANALYSIS",
-    "result": "attempt-86 proves timesteps_max 4 to 8 is a major but incomplete repair; inspect its per-frame Data/Mesh and cup-intrusion onset read-only before selecting one further Data/collision variable",
+    "gate": "RC6-REAL-IMPACT-C16-CFL-PREREGISTRATION",
+    "result": "attempt-87 validly orders the residual transition but remains strict-classification inconclusive; freeze one CFL2-to-1 test with maximum steps8 and all other C14 inputs/gates exact",
+    "attempt87Evidence": "experiments/physical-richness/RC6-2026-09-02-real-impact-c14-transition-c15-attempt-87",
+    "attempt87ResultHash": "f1940fd7246ae859b53234635b0114d4aadff47f42e963c5c51b3b193c9f9b61",
+    "attempt87ReceiptHash": "371614c5117a8bd74297249755d8974f667b1ffaedb84b98a87beccb1b6bf974",
+    "attempt87AuditHash": "826beb9fba4e80f7a1c1cb581c77e686f5dea02fb80322f393cf72ad6949173a",
     "attempt86Evidence": "experiments/physical-richness/RC6-2026-09-02-real-impact-liquid-timestep-max-c14-attempt-86",
     "attempt86ResultHash": "5dbc4e416466567365e101d64f8c68b4d28323364f385a19cc9e451d115cabbf",
     "attempt86ReceiptHash": "c8d56e2b3ea85cc6a3c1bfdff304ef37d95546e5d056dd06f8b25a305409e5fc",
@@ -3093,7 +3111,7 @@
     "attempt82ReceiptHash": "289eebcbb57ac9aedb4d1fa1e8e996424b51614e30dfa510ff22f2be37dfc19b",
     "attempt82AuditHash": "8b6b1812c93289c81884b01814b19e5c1e3ff5067d8d2970e7497166e2b0dec3",
     "attempt83AuditHash": "96a159ccbcb418df15eeba0af1e54c4bd8ba98c326824b8b319fcc0e0f427891",
-    "restartCheckpoint": "research/2026-09-02-rc6-c14-restart-checkpoint.md",
+    "restartCheckpoint": "research/2026-09-02-rc6-real-impact-c14-transition-c15-attempt-87-result.md",
     "attempt70Preregistration": "research/2026-09-02-rc6-moving-liquid-particle-band-width-preregistration.md",
     "attempt70SourceInspection": "research/2026-09-02-rc6-moving-liquid-particle-band-width-source-inspection.md",
     "attempt70Spec": "specs/ai-native-studio-rc6-moving-liquid-particle-band-width.v0.81.json",
@@ -3217,7 +3235,7 @@
     "publicationReceiptHash": "815c4cc5dacefa9d117573fd369fbfefbad02448a78322973a51de60c4d1da0c",
     "publicMainOid": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
     "currentHostPreflight": {
-      "observedAt": "2026-09-02T11:32:51.247Z",
+      "observedAt": "2026-09-02T11:37:56.250Z",
       "status": "F0_HOST_PREFLIGHT_BLOCKED",
       "freeGiB": 155,
       "requiredFreeGiB": 160,

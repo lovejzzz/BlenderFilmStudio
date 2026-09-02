@@ -57,6 +57,15 @@ sole cause. Conservation, temporal drift, bounded topology and 2.45% cup-solid
 intrusion still fail. Do not rerun, repair or render attempt-86. Next inspect its
 fresh per-frame transition read-only and preregister one further Data/collision
 variable without changing Mesh reconstruction or thresholds.
+C15 attempt-87 now passes its zero-Blender independent audit 22/22 while its
+strict scientific classification remains `TRANSITION_ORDER_INCONCLUSIVE`.
+C14 cup intrusion begins at frame31, velocity support crosses25% at frame34,
+Mesh/conservation/positive-body gates fail at frame35, and particle support plus
+component count fail at frame36. Particle/Mesh correlation is0.99915, but Mesh
+crosses the frozen expansion line one frame before particle support, so do not
+rewrite this as same-frame causality. Bound source selects exactly one C16 test:
+`cfl_condition`2→1 with maximum steps8 and every other input/gate frozen. No
+second CFL, further max-step value, Mesh tuning or render is permitted first.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

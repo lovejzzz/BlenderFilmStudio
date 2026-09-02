@@ -1217,6 +1217,16 @@ intrusion still fail; there was no render or save. Resume with read-only
 per-frame analysis of attempt-86 and select one further Data/collision variable.
 Never rerun, repair or render this root, tune Mesh reconstruction or weaken the
 27 frozen gates.
+C15 attempt-87 now passes its independent zero-Blender audit 22/22. It copied
+all108 C14 cache files and found cup-solid intrusion first at frame31, velocity
+support expansion at frame34, Mesh/source/temporal/positive-body failures at
+frame35, and particle-support plus component failure at frame36. Particle
+support and Mesh correlate at0.99915, but the strict classifier remains
+`TRANSITION_ORDER_INCONCLUSIVE` because Mesh crosses the25% line one frame
+before particle support. Saved terminal `dt` is not a complete solver-step
+history. Bound source selects one C16 variable: CFL2→1 with min/max steps2/8
+and every other C14 input and all27 thresholds frozen. Do not test a second CFL,
+raise max steps again, tune Mesh or render before this single run is retained.
 
 ## Public routes
 

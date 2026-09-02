@@ -7615,3 +7615,25 @@ domain, ramp and floor remain valid. Five gates still fail: conservation,
 temporal drift, body/component bounds and2.45% cup intrusion. The next move is
 read-only transition analysis and one further preregistered Data/collision
 variable—not a rerun, render, Mesh tweak or threshold relaxation.
+
+## J-653 · C14 residual transition is ordered but not overclaimed
+
+Date: 2026-09-02 · Type: PASS DIAGNOSTIC / INCONCLUSIVE CLASSIFICATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+C15 attempt-87 copied all108 retained C14 cache files and passed independent
+audit22/22. Cup-solid intrusion begins frame31, velocity support crosses25% at
+frame34, Mesh/source/temporal/positive-body gates fail frame35, and particle
+support plus components fail frame36. Particle/Mesh correlation is0.99915, but
+the classifier remains `TRANSITION_ORDER_INCONCLUSIVE` because Mesh crosses the
+frozen expansion line one frame before particle support. Saved terminal `dt`
+cannot be treated as a full adaptive-step roster.
+
+## J-654 · Source selects one CFL test
+
+Date: 2026-09-02 · Type: SOURCE-LED DESIGN · Mutation counts: 0
+
+Blender RNA defines CFL as maximum velocity per cell; Mantaflow scales adaptive
+`dt` with CFL before clamping it to the configured step bounds. C16 will change
+only CFL2→1 on C14 while preserving min/max steps2/8, R40, geometry, Mesh and
+all27 gates. A failure closes this single value; it does not authorize a second
+CFL, another maximum-step value, surface tuning or render.
