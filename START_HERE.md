@@ -1404,6 +1404,16 @@ worsened conservation. Next preregister one zero-Blender copied-cache C27
 C26-versus-C18 Data/Mesh comparison before selecting another physical variable.
 Do not rerun C26, scan viscosity/surface tension or render. See
 `research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-c2-audit-accepted.md`.
+C27 attempt-107 then copied all108 immutable C26 cache files and passed its
+independent audit23/23 with classification `MIXED_ONSET_AMPLITUDE_RESPONSE`.
+Diffusion delayed velocity/Mesh/particle +25% expansion from frames24/24/25 to
+34/34/36, but volume had already fallen17.10% at frame21 and final expansion
+worsened from173.84%/51.54%/32.38% to201.67%/95.00%/75.69%. Thus later spill
+is not greater stability. Close diffusion and do not scan viscosity or surface
+tension. Next perform one read-only bound-source/configuration inspection and
+select exactly one distinct Data-layer degree of freedom on the better C18
+baseline before any new bake or render. See
+`research/2026-09-02-rc6-real-impact-water-diffusion-data-comparison-c27-result.md`.
 
 ## Public routes
 
