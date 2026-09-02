@@ -1029,8 +1029,15 @@ closed. Attempt-65 is now preregistered with one change on the modestly better
 two-step baseline: simulation `particle_radius` 1.6→1.8, the single midpoint of
 the previously measured static 1.6–2.0 interval. Its spec is
 `specs/ai-native-studio-rc6-moving-liquid-particle-radius.v0.76.json`, self hash
-`f1dacdd8…`; both fresh roots remain absent. No scan, Mesh change, render or
-real impact is allowed before this exact run is retained.
+`f1dacdd8…`. The exact run is now a retained physical `FAIL` with a 16/16
+independent audit: temporal Mesh loss improved strongly from 21.70% to 17.05%,
+source error improved from 22.97% to 22.10%, Data time was 265.50 seconds and
+all topology/containment/motion checks passed. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-radius-attempt-65`;
+receipt/audit self hashes are `f3a741cc…` / `a5b23c9f…`. Do not scan another
+radius. Next perform one zero-bake copied-Data comparison against attempt-63/64
+before selecting a different simulation property. Do not render or begin real
+impact.
 
 ## Public routes
 

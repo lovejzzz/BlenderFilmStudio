@@ -7149,3 +7149,16 @@ Data/Mesh curves correlate at `r=0.97958`, but their per-frame improvements do
 not (`r=-0.21839`). Close timestep tuning. Preserve two steps as the modestly
 better current baseline and test exactly one different simulation property,
 particle radius, without changing motion, Mesh or thresholds.
+
+## J-614 · Simulation radius 1.8 nearly closes moving-liquid conservation
+
+Date: 2026-09-02 · Type: PHYSICAL GATE FAILURE · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+Attempt-65 changed only simulation `particle_radius` 1.6→1.8 on the two-step,
+2.0-cell, one-subframe baseline and passed its independent 16/16 audit.
+Temporal Mesh loss improved 21.70%→17.05%, source error improved
+22.97%→22.10%, and Data time slightly decreased to 265.50 seconds. The
+unchanged 15% temporal gate still failed; all other 16 checks passed, including
+exact C5F96 motion, one positive manifold body and zero cup escape. No second
+radius value is allowed. Next compare the immutable Data cache with attempt-63
+before selecting a different simulation property.
