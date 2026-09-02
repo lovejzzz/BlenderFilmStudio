@@ -7111,3 +7111,14 @@ temporal conservation again failed. Data time rose 14.63% from 251.55 to
 remained intact. Do not try subframes 3. Next run one zero-bake copied-cache
 comparison against attempt-59 before selecting solver minimum timesteps as a
 different physical variable.
+
+## J-611 · Two-subframe non-improvement is present before Mesh
+
+Date: 2026-09-02 · Type: DIAGNOSTIC PASS · Engine-Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+Attempt-62 applied the reusable copied-VDB comparator and passed its 19/19
+independent audit. Subframes-2 Data support fell 1,335→970 (`-27.34%`),
+0.67 percentage points worse than subframes-1; Mesh was 0.81 points worse in
+the same direction and the current curves correlated at `r=0.96060`.
+Effector-subframe tuning is therefore closed before Mesh as well as after it.
+Next return to subframes 1 and change only solver minimum timesteps 1→2.

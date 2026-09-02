@@ -1006,10 +1006,14 @@ error worsened from 24.00% to 24.80%, and Data cost rose 14.63%; every other
 physical check still passed. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-subframes-attempt-61`;
 receipt/audit self hashes are `57e3ade8…` / `ebf39452…`. Do not try subframes 3.
-Attempt-62 is now preregistered as one zero-bake copied-cache Data comparison;
-its fresh roots remain absent. Run that exact diagnostic before selecting
-solver minimum timesteps as a different physical variable. Do not render or
-begin real impact.
+Attempt-62 then passed its reusable copied-cache comparison with an independent
+19/19 audit. Subframes-2 Data support fell 1,335→970 (`-27.34%`), 0.67
+percentage points worse than subframes-1; Mesh was 0.81 points worse and the
+current curves correlated at `r=0.96060`. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-subframes-data-comparison-attempt-62`;
+receipt/audit self hashes are `97663618…` / `a847bffe…`. Effector-subframe
+tuning is closed. Next return to the better subframes-1, 2.0-cell baseline and
+change only solver minimum timesteps 1→2. Do not render or begin real impact.
 
 ## Public routes
 
