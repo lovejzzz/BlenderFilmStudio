@@ -1276,6 +1276,18 @@ C1 adapter that changes only the fresh roots to attempt-94 while preserving the
 same radius, every C18 input, all27 gates and all ceilings. Commit it before root
 creation, then run once. See
 `research/2026-09-02-rc6-real-impact-liquid-particle-radius-c20-attempt-93-restart-interruption.md`.
+C20 C1 attempt-94 has now completed from frozen commit `a23b853d…`. Its physical
+result is an immutable FAIL23/27: source error worsened47.217%→652.777%, temporal
+drift33.451%→569.274%, positive bodies37→121 and components37→122, although cup
+intrusion improved0.749%→0.286%. Conservation fails at frame24, bodies at25 and
+components at27. All36 Data/Mesh frames, exact R40 motion and zero-render/write
+boundaries passed. The independent audit is20/21 solely because the unrounded
+centroid metric differs from replay over eight-decimal sample coordinates by
+`1.0177e-8`, just over its `1e-8` tolerance; all27 physical checks recompute
+exactly. Next freeze one audit-only C2 using the derived `2e-8` centroid replay
+tolerance, with no Blender/bake/root mutation. Do not render or test another
+radius. See
+`research/2026-09-02-rc6-real-impact-liquid-particle-radius-c20-c1-attempt-94-result.md`.
 
 ## Public routes
 

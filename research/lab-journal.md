@@ -7726,3 +7726,25 @@ resumed, repaired or used as measurement input. After restart and normal host
 preflight, freeze a versioned C20 C1 adapter changing only fresh roots to
 attempt-94 while preserving radius1.6, the exact C18 baseline, all27 checks and
 all ceilings. Commit before root creation, then execute once under `caffeinate`.
+
+## J-662 · Smaller impact particle radius is a strong physical regression
+
+Date: 2026-09-02 · Type: RETAINED PHYSICAL FAILURE / AUDIT PRECISION DEFECT · Blender starts / Bullet / Data / Mesh / renders: 1 / 1 / 1 / 1 / 0
+
+C20 C1 attempt-94 completed all36 Preview-96 Data and Mesh frames after the
+restart adapter verified attempt-93 unchanged. Changing only simulation particle
+radius1.8→1.6 worsened maximum source error47.217%→652.777%, temporal drift
+33.451%→569.274%, positive bodies37→121 and components37→122. Conservation
+fails at frame24, bodies at25 and components at27. Cup intrusion improves
+0.749%→0.286%, and exact R40, spill, domain, floor, ramp, manifold, authority and
+zero-write gates remain true. Physical verdict is FAIL23/27; no render is legal.
+
+The independent audit recomputes all27 physical checks exactly and passes20/21
+evidence checks. Only centroid metric replay fails: producer unrounded value and
+replay from eight-decimal sample coordinates differ `1.017731782e-8`, just above
+`1e-8`. Three-axis rounding bounds distance error below `sqrt(3)e-8`; C2 may
+therefore change only that replay tolerance to fixed `2e-8`, leave volume replay
+at `1e-8`, and perform zero Blender/bake/root mutation. The evidence teaches that
+Blender's signed radius guidance is context-dependent under high-speed impact;
+the product must reject a complete-metric regression instead of applying the
+generic sign rule blindly.

@@ -110,6 +110,15 @@ verdict. Retain attempt-93 unchanged and never resume or measure it. On restart,
 run host preflight and freeze a versioned C20 C1 restart adapter changing only
 fresh roots to attempt-94 while preserving the exact radius, all C18 inputs,
 27 gates and resource ceilings; commit before root creation, then execute once.
+C20 C1 attempt-94 completed and is a physical FAIL23/27. Versus C18, source
+error worsened47.217%→652.777%, temporal drift33.451%→569.274%, positive bodies
+37→121 and components37→122; cup intrusion improved0.749%→0.286%. All36 cache
+frames and exact R40 motion passed, with zero render/save/build/network/engine
+writes. Its independent audit is20/21 only because the unrounded centroid metric
+and replay from eight-decimal samples differ by `1.0177e-8`, just above `1e-8`;
+all27 physical booleans recompute exactly. Next create one audit-only C2 with a
+derived fixed `2e-8` centroid replay tolerance, keeping `1e-8` for volume ratios,
+and no Blender/root mutation. Do not rerun, render or test another radius.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
