@@ -7211,3 +7211,15 @@ attempt-65 has zero cup escape but still loses 17.05% Mesh volume, attempt-68
 returns to it and changes only distance 0.5→0.25, the single midpoint toward
 zero. The unchanged containment and topology gates will reject any apparent
 volume obtained by obstacle penetration.
+
+## J-619 · Lower fractional separation reaches a clean 0.44-point near-pass
+
+Date: 2026-09-02 · Type: PHYSICAL GATE FAILURE · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+Attempt-68 changed only `fractions_distance` 0.5→0.25 and passed its 16/16
+independent audit. Temporal Mesh loss improved 17.05%→15.44% and source
+error 22.10%→18.81%, while radial, floor and rim violations all remained
+zero and topology stayed one positive manifold body. It still missed the fixed
+15% temporal gate by 0.44 points; Data cost rose 8.13% to 287.09 seconds. Close
+fractional-distance tuning and compare its immutable Data support before
+choosing a different simulation property.

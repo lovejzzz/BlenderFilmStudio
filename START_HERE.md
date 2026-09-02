@@ -1066,7 +1066,15 @@ the per-step `pushOutofObs` separation threshold. Attempt-68 is now
 preregistered to return to attempt-65 and change only 0.5→0.25; every
 containment and topology gate stays exact. Its spec is
 `specs/ai-native-studio-rc6-moving-liquid-fractions-distance.v0.79.json`, self
-hash `1f9e6125…`; both formal roots remain absent.
+hash `1f9e6125…`. Attempt-68 is now a retained physical `FAIL` with a 16/16
+independent audit: temporal loss improved 17.05%→15.44% and source error
+22.10%→18.81%, with zero radial/floor/rim intrusion and valid one-body
+manifold topology. It misses the frozen temporal gate by only 0.44 points;
+Data cost rose 8.13%. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-fractions-distance-attempt-68`;
+receipt/audit self hashes are `6037c9cc…` / `8716e960…`. Do not try a second
+distance. Compare the immutable Data cache before another distinct variable;
+do not render or begin real impact.
 
 ## Public routes
 
