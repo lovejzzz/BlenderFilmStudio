@@ -1152,6 +1152,14 @@ subframes. Close striker-speed tuning. Bound Bullet source multiplies the exact
 cup/floor frictions to 0.435, just below the simple 0.441 tipping/sliding
 boundary for this geometry. Next preregister one modest friction value on the
 lower-motion I09 baseline; do not change contact height, speed or start liquid.
+C8 tested only cup friction 0.80, moving Bullet's exact cup-floor product from
+0.435 to 0.464. Its independent audit passes 23/23, floor/domain/subframe gates
+stay healthy, and origin travel improves slightly, but peak tilt rises only
+2.67→2.98°. Close friction tuning: the simple static boundary selected the
+test but did not predict the transient solve. Preserve I09, 2 mm cup margin and
+the original 0.75 friction. Next inspect and preregister one real passive ramp
+that raises the solver-owned ball contact point; never key vertical ball motion
+or start liquid before the Bullet trajectory passes.
 
 ## Public routes
 

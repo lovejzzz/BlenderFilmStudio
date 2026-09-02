@@ -7465,3 +7465,14 @@ friction to 0.80, producing 0.464 combined friction. The 6.67% cup change is a
 single source-derived value, not a scan; all margin, speed, geometry, mass,
 domain and acceptance fields remain exact. One Bullet-only run may pass or
 fail; no liquid follows a failure.
+
+## J-640 · Analytic friction boundary does not create Bullet tip
+
+Date: 2026-09-02 · Type: PHYSICAL FAILURE / REUSABLE RULE · Blender starts / Bullet bakes / liquid bakes / renders: 1 / 1 / 0 / 0
+
+C8 passed its independent audit 23/23 but failed physically. Raising only cup
+friction 0.75→0.80 crossed the source-derived combined-friction estimate
+0.435→0.464 and reduced origin travel 30.42→29.64 mm/frame, yet peak tilt moved
+only 2.67°→2.98°. The static inequality selected a useful test but did not
+predict the transient solve. Close friction tuning. Preserve I09, 2 mm margin
+and cup friction 0.75; next inspect one passive ramp/contact-height mechanism.

@@ -2949,14 +2949,24 @@
       "interpretation": "14 percent more impulse mainly increases translation; close striker-speed tuning",
       "sourceLedNextCause": "Bullet combined floor friction 0.75*0.58=0.435 is slightly below simple r/h=0.15/0.34=0.441 tipping boundary"
     },
+    "realImpactFrictionC8Attempt80": {
+      "status": "RETAINED_PHYSICAL_FAIL_AUDIT_23_OF_23_PASS",
+      "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-real-impact-friction-c8-attempt-80",
+      "resultHash": "4b3ce9e35c8135ad002e86a001ba334441dac66eb9ecee3845d769fbbd952855",
+      "receiptHash": "a5129454bd7023cadc17f8c868ebb7d61b7be73f03ff10454ef54cff62b08f12",
+      "auditHash": "c1d2568426c007e50cc1193c45b762279a6366b9e7e096fc32d85b42331284ba",
+      "singleChange": "cup friction 0.75 to 0.80, combined cup-floor friction 0.435 to 0.464",
+      "metrics": "contact 19, peak tilt 2.98 degrees, origin step 29.64 mm, surface step 36.46 mm, four subframes, floor/domain PASS",
+      "interpretation": "friction slightly reduces slide but does not create useful angular response; close coefficient tuning"
+    },
     "next": {
       "gate": "RC6-REAL-IMPACT-BULLET-TRAJECTORY",
-      "status": "CORRECTED_IMPULSE_CLOSED_ONE_FRICTION_VALUE_NEXT",
+      "status": "IMPULSE_AND_FRICTION_CLOSED_PASSIVE_MOMENT_ARM_NEXT",
       "mustBindAcceptedMovingLiquid": "attempt-70 particle radius 1.8, particle band width 4.0, fractions distance 0.25 and all accepted geometry/Mesh settings",
-      "initialStrategy": "return to lower-motion I09 with explicit 2 mm cup margin and test one source-derived cup friction value above the 0.441 combined tipping boundary; preserve every other field",
+      "initialStrategy": "preserve lower-motion I09, explicit 2 mm margin and source cup friction 0.75; inspect exact lane/ball/cup geometry and test one passive ramp that raises contact height without vertical ball keys",
       "readOnlyInventory": "retained P02 contacts at frame 8 and reaches about 90 degrees by frame 15 but translates the cup roughly 7.5-10 cm per frame; P03/P05 contact at frame 13 and P06 at frame 17, showing the old contact-by-frame-12 gate was not a liquid-fidelity criterion",
       "restartCheckpoint": "research/2026-09-02-codex-restart-checkpoint-after-rc6-attempt-77.md",
-      "executionStatus": "S08_PHYSICAL_FAIL_AUDIT_23_OF_23_PASS_ZERO_LIQUID_RENDER_SAVE_NETWORK",
+      "executionStatus": "F80_PHYSICAL_FAIL_AUDIT_23_OF_23_PASS_ZERO_LIQUID_RENDER_SAVE_NETWORK",
       "mustMeasure": [
         "derived ball-to-cup contact frame and continuous pre/post-contact transforms",
         "solver-owned cup tilt and floor/spill opportunity window",
@@ -2982,6 +2992,8 @@
     "attempt77AuditHash": "5ae5347692b811f588426558054afc768442574576d8845b9a839187e01dd576",
     "attempt79ReceiptHash": "3f749fd62f47cce3f6671c36de3cb6f01a58662100dfe0b8f1767694a9bb7769",
     "attempt79AuditHash": "2af15f9dfdabd0e086e48e9417da011d0980dd159e65aebf6e11ffeb2f81e4ad",
+    "attempt80ReceiptHash": "a5129454bd7023cadc17f8c868ebb7d61b7be73f03ff10454ef54cff62b08f12",
+    "attempt80AuditHash": "c1d2568426c007e50cc1193c45b762279a6366b9e7e096fc32d85b42331284ba",
     "restartCheckpoint": "research/2026-09-02-codex-restart-checkpoint-after-rc6-attempt-77.md",
     "attempt70Preregistration": "research/2026-09-02-rc6-moving-liquid-particle-band-width-preregistration.md",
     "attempt70SourceInspection": "research/2026-09-02-rc6-moving-liquid-particle-band-width-source-inspection.md",
