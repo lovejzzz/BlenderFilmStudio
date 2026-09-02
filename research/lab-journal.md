@@ -7070,3 +7070,17 @@ oppositely (`r=-0.95368`). Occupancy is not exact mass, but a pure Mesh-radius
 explanation is now inadequate. The next one-variable physical test should reduce
 only moving-cup `surface_distance` from 2.5 to 2.0 cells while preserving all
 other attempt-56 settings and thresholds.
+
+## J-608 · Lower obstacle thickness improves moving volume but does not conserve it
+
+Date: 2026-09-02 · Type: PHYSICAL GATE FAILURE · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+Attempt-59 changed only cup-effector `surface_distance` from 2.5 to 2.0 cells
+and passed its 16/16 independent audit. Maximum source-volume error improved
+from 36.82% to 24.00% and now passes, while temporal loss improved from 34.23%
+to 23.03% but still exceeds the frozen 15% ceiling. All other 16 physical
+checks passed, including exact C5F96 motion, one positive manifold liquid body,
+zero containment failures and the exact 72-file cache. Data/Mesh took
+251.55/2.89 seconds. The useful but incomplete response means no second
+effector-distance value may be tried; next compare the new immutable Data-cache
+occupancy with attempts 58/56 in one zero-bake copied-cache diagnostic.

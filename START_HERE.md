@@ -983,13 +983,18 @@ persisted liquid level set. Particle occupied-voxel support fell 1,227→874
 while ALIVE count correlated `−0.95368`. Occupancy is not exact mass, but a pure
 Mesh reconstruction explanation is inadequate. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-occupancy-attempt-58`;
-receipt/audit self hashes are `33ec1fcf…` / `f2d76906…`. The next physical gate
-is now preregistered as attempt-59 and changes exactly one variable:
-cup-effector `surface_distance` from 2.5 to 2.0 cells, keeping trajectory, APIC,
-particles, Mesh, subframes and every scientific threshold unchanged. Its
-protocol checkpoint is `f13f8be7…`; its fresh work/evidence roots remain absent
-and the experiment has not run. Resume by executing only that frozen attempt
-with `caffeinate`. Do not render or begin real impact.
+receipt/audit self hashes are `33ec1fcf…` / `f2d76906…`. Attempt-59 then changed
+only cup-effector `surface_distance` from 2.5 to 2.0 cells. It remains a physical
+`FAIL`, independently audited 16/16: maximum source error improved from 36.82%
+to 24.00% and passed, but temporal loss improved only from 34.23% to 23.03% and
+still missed the frozen 15% ceiling. Exact motion, one positive manifold body,
+containment and all other 16 checks passed; Data/Mesh took 251.55/2.89 seconds.
+Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-distance-attempt-59`;
+receipt/audit self hashes are `62316a54…` / `95b7f021…`. Do not try a second
+effector-distance value. Next preregister one zero-bake copied-cache occupancy
+comparison before selecting a different physical degree of freedom. Do not
+render or begin real impact.
 
 ## Public routes
 
