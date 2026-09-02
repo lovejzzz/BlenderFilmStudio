@@ -7441,3 +7441,15 @@ adapted C6 replacement targets twice although each appears once. C7-C1 versions
 the tools, corrects only those static cardinalities and moves to fresh
 attempt-79 roots. The S08 impulse, explicit 2 mm cup margin, physical thresholds
 and all resource/process ceilings remain unchanged.
+
+## J-638 · More corrected-scale impulse mostly makes the cup slide
+
+Date: 2026-09-02 · Type: PHYSICAL FAILURE / SOURCE-LED NEXT CAUSE · Blender starts / Bullet bakes / liquid bakes / renders: 1 / 1 / 0 / 0
+
+C7-C1 attempt-79 passes its independent audit 23/23 but fails physically. The
+14% faster S08 actuator advances contact two frames yet raises tilt only
+2.67°→3.19° while surface travel rises 34.66→40.83 mm/frame and required
+Preview subframes rise four→five. Speed tuning is closed. Bound Bullet source
+multiplies cup/floor friction: 0.75×0.58=0.435, slightly below the simple
+0.15/0.34=0.441 tipping-versus-sliding boundary. The next one-variable gate
+should return to I09 and test one modest cup-friction value above that boundary.

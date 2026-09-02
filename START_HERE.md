@@ -1144,6 +1144,14 @@ Preserve 2 mm as the corrected baseline and redesign a solver-owned contact
 moment/impulse; do not restore 40 mm, author a cup outcome or start liquid.
 For a Codex restart, continue from
 `research/2026-09-02-codex-restart-checkpoint-after-rc6-attempt-77.md`.
+C7 stopped before root creation due only to incorrect wrapper occurrence
+counts. C7-C1 attempt-79 then tested the exact faster S08 impulse under the 2 mm
+margin and passed its 23/23 audit, but tilt rose only 2.67→3.19° while surface
+motion rose 34.66→40.83 mm/frame and the derived requirement rose four→five
+subframes. Close striker-speed tuning. Bound Bullet source multiplies the exact
+cup/floor frictions to 0.435, just below the simple 0.441 tipping/sliding
+boundary for this geometry. Next preregister one modest friction value on the
+lower-motion I09 baseline; do not change contact height, speed or start liquid.
 
 ## Public routes
 
