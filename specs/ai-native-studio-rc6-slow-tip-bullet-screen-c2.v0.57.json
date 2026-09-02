@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6SlowTipBulletScreenC2.v0.57",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_49_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "e78b38fb590ea0769959848324aae7613212ea37",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe reversible validation-only Blender work under standing owner autonomy"
+  },
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-slow-tip-bullet-screen-c1.v0.56.json",
+    "specHash": "611bae4f8346d5b40f4cd42d6571a17520754e2d0cd540b4bb2378fed16e7f30"
+  },
+  "retainedAttempt48": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c1-attempt-48",
+    "verdict": "FAIL_BULLET_SCREEN",
+    "receiptHash": "1dcc09d1e995f1a369b1e803379172e4dde08f1ebbf8c1998149c4b48b55b234",
+    "receiptFileSha256": "07c5d68028b5518102b7d762fac8390846c7a3803774ec20cc3cd76c73baa564",
+    "auditHash": "1d7b4187e501111dc29a8e4b5164eb8dd6750d1a7d6412c86917fc8511832e45",
+    "auditFileSha256": "8804d048d4f344f5567d9ac13622816d08d87495dd3ac093e099cef3b402f65b",
+    "immutable": true
+  },
+  "physicalQuestion": "Does a real passive low toe stop convert the frozen slow upper-cup direct contact into a continuous Bullet-owned 45-degree tip, with a positive initial stop gap, measured stop contact before 45 degrees, exact cup-surface floor/domain bounds and no more than ten derived moving-effector subframes?",
+  "correction": {
+    "addedBody": {
+      "name": "PHYS_SLOW_TIP_TOE_STOP",
+      "rigidBodyType": "PASSIVE",
+      "collisionShape": "BOX",
+      "locationMeters": [0.485, 0.0, 0.02],
+      "dimensionsMeters": [0.02, 0.38, 0.04],
+      "friction": 0.9,
+      "restitution": 0.02,
+      "expectedInitialCupSurfaceGapMeters": [0.004, 0.006]
+    },
+    "purpose": "block lower-cup translation at a physical contact surface so the unchanged slow upper-cup actuator produces a tipping moment",
+    "unchanged": [
+      "accepted source and binary",
+      "four C1 drive durations and direct actuator path",
+      "exact evaluated cup mesh-vertex measurement",
+      "45 degree response, four-frame response span, -5 mm floor, one-voxel domain and ten-subframe limits",
+      "zero cup and ball animation",
+      "all zero-fluid, zero-render, zero-save and zero-network ceilings"
+    ]
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-slow-tip-bullet-screen-c2-attempt-49",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c2-attempt-49"
+  },
+  "cells": [
+    {"id": "C2D16", "driveEndFrame": 16},
+    {"id": "C2D20", "driveEndFrame": 20},
+    {"id": "C2D24", "driveEndFrame": 24},
+    {"id": "C2D28", "driveEndFrame": 28}
+  ],
+  "machineAcceptance": {
+    "contactByFrameMaximum": 50,
+    "minimumPeakCupTiltDegrees": 45.0,
+    "minimumFiveToFortyFiveDegreeSpanFrames": 4,
+    "minimumCupSurfaceWorldZ": -0.005,
+    "candidateDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 10,
+    "toeStopInitialClearanceMeters": [0.004, 0.006],
+    "passiveToeStopContactNoLaterThanFortyFiveDegreeFrame": true,
+    "cupAnimationChannels": 0,
+    "ballAnimationChannels": 0,
+    "selectionRule": "select the greatest driveEndFrame among cells passing every frozen check"
+  },
+  "processCeilings": {
+    "blenderStarts": 4,
+    "bulletBakes": 4,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 268435456,
+    "maximumWorkspaceBytes": 268435456,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c2-scene.py",
+      "sha256": "9f271ed103c7a470b548e8b613c88d2daa0ea1b88ca95ffc7e5a9b61643a53f9"
+    },
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c2.py",
+      "sha256": "e63a39a54e33337d93dd32ba19c92e3208ebee90334b01bd4dc5688c14510788"
+    },
+    {
+      "uri": "scripts/audit-rc6-slow-tip-bullet-screen-c2.py",
+      "sha256": "b730888b02b0b8c4adbc020f45feb149c5d2785fa65c8f1b29f6fbe02f3ba9e2"
+    }
+  ],
+  "stopRule": "Run the exact four passive-stop cells once in unique attempt-49 roots. Retain failure. Do not move or resize the stop, change the actuator, weaken thresholds, run fluid, render, save, build or add another candidate after observing results.",
+  "claimCeiling": "One Bullet-only passive-pivot slow-tip screen. A PASS selects a causal rigid trajectory and derived effector sampling for a separate moving-liquid gate; it does not prove liquid, persistence, impact or visual quality.",
+  "specHash": "02b41b1c42df5e58a1f6907a91959853b969ecc7cee70d32909c41149bcfa58c"
+}
