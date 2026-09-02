@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "bfs.rc6LiquidObstacleVoxelScreenC2Spec.v0.43",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-OBSTACLE-VOXEL-SCREEN-C2-2026-09-02-ATTEMPT-41",
+  "purpose": "Execute the unchanged three-cell screen after preserving the measured coherent true/one source FLIP roster instead of reassigning true and triggering Blender's toggle-style particle-system callback.",
+  "toolFreezeParent": "73f45b9a44c36e4b2b7632a8408dbbbb537b3cb7",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "scope": "Three fresh local-only seven-frame Data bakes at Preview/Review resolution; zero Mesh bake, save, render, network or engine remote write; ordinary research commit and non-force push are allowed.",
+    "specificConfirmationRequired": false
+  },
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-obstacle-voxel-screen-c2-attempt-41",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-c2-attempt-41"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "sourceBottomClearanceMeters": 0.035,
+    "engineSourceCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900"
+  },
+  "baseContract": {
+    "path": "specs/ai-native-studio-rc6-liquid-obstacle-voxel-screen.v0.41.json",
+    "fileSha256": "cf5a32224548ffc1ae7bbeba12ab46f7548acb531b6195fae58faea9e83946f4",
+    "specHash": "2b75314992dbbfd082c24c55e33e7ac8bed6b02b5b7e64c12e0f3c162eef5302"
+  },
+  "retainedFailures": [
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-attempt-39/failure.json",
+      "fileSha256": "8d5d96a5558b8fad4467758cd2548ee886fc68485ac88a9c1957ef2bc0203bef",
+      "failureHash": "288bb8d507fe399c8d732e79160549c716fcb2d40ada694fc88eba0557df8f27",
+      "status": "FAIL_PREBAKE",
+      "fluidDataBakes": 0
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-c1-attempt-40/failure.json",
+      "fileSha256": "77a9052ed9f416407ccb99e24a2b135cb34526be29149d9ce1a3c4e00ee4545f",
+      "failureHash": "e5abc7dc233294709ed47891cd47a805325243d590307725d9dceef3a3cb686d",
+      "status": "FAIL_POSTBAKE",
+      "fluidDataBakes": 1
+    }
+  ],
+  "correction": {
+    "measuredSourceRoster": {"initialUseFlipParticles": true, "initialParticleSystemCount": 1},
+    "sourceCallbackFinding": "Assigning use_flip_particles invokes rna_Fluid_flip_parts_update. When a FLIP system already exists, the callback deletes it and clears the particle-type bit; an unchanged-looking true assignment is therefore not idempotent.",
+    "changedBehavior": "Require the exact true/one roster and preserve it without assigning use_flip_particles before the unchanged Data bake.",
+    "requiredPreBakeParticleSystemCount": 1,
+    "requiredEvaluatedParticleSystemCountEachFrame": 1,
+    "unchangedPhysicsAndInterpretation": true
+  },
+  "frozenCommonConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 7,
+    "domainCenterMeters": [0.32, 0.0, 0.25],
+    "domainDimensionsMeters": [0.36, 0.36, 0.5],
+    "sourceDimensionsMeters": [0.11, 0.11, 0.14],
+    "sourceBottomClearanceMeters": 0.035,
+    "simulationMethod": "APIC",
+    "useAdaptiveTimesteps": true,
+    "timestepsMin": 1,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "useMesh": false,
+    "useFlipParticles": true,
+    "displayPercentage": 100,
+    "useFractions": true,
+    "deleteInObstacle": false,
+    "waterViscosityBase": 1.0,
+    "waterViscosityExponent": 6,
+    "flowSurfaceDistanceCells": 0.0,
+    "cupEffectorIsPlanar": false,
+    "cupEffectorEnabled": true,
+    "cupEffectorSubframes": 0
+  },
+  "cells": [
+    {"cellId": "preview-baseline", "resolutionMax": 96, "cupEffectorSurfaceDistanceCells": 1.5},
+    {"cellId": "preview-effector-plus1", "resolutionMax": 96, "cupEffectorSurfaceDistanceCells": 2.5},
+    {"cellId": "review-baseline", "resolutionMax": 128, "cupEffectorSurfaceDistanceCells": 1.5}
+  ],
+  "interpretationTable": [
+    {"condition": "preview baseline has outliers and preview +1-cell effector has zero", "verdict": "PASS_SURFACE_DISTANCE_SIGNAL", "nextCell": "review-effector-plus1"},
+    {"condition": "preview baseline and review baseline outlier counts differ without the surface-distance condition above", "verdict": "PASS_RESOLUTION_SIGNAL", "nextCell": "review-effector-plus1 when Review has outliers; otherwise final-resolution-baseline-reproduction"},
+    {"condition": "all three cells have zero one-cell-envelope outliers", "verdict": "INCONCLUSIVE_LOWER_TIERS_CONTAINED", "nextCell": "paired Final-resolution baseline/+1-cell effector diagnostic"},
+    {"condition": "outliers persist without either signal", "verdict": "FAIL_OBSTACLE_VOXEL_SCREEN_NO_CORRECTION", "nextCell": "cup topology, normals, Is Planar and applied-transform audit"}
+  ],
+  "resourceCeilings": {
+    "blenderStarts": 3,
+    "fluidDataBakes": 3,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 6442450944,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 6442450944,
+    "minimumFreeBytesBefore": 137438953472,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on non-fresh roots, retained failure drift, dirty research worktree, input drift, any initial roster other than exact true/one, source geometry or placement drift, cell/configuration mismatch, missing evaluated particles, aggregate/detail mismatch, cache roster other than exact 14 config/Data files per cell, process/log/result failure, any Mesh bake/save/render/network/remote-write count, symlink, banned media or resource failure. Do not assign use_flip_particles, enable Delete in Obstacle, vary CFL/timesteps or proceed to slow tip in this attempt.",
+  "claimCeiling": "One C2-corrected three-cell Data-only Preview/Review screen for obstacle-level-set and resolution signals in the static cup. It can select the next diagnostic cell only; it does not prove a Final-resolution correction, reconstructed-surface quality, slow tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-obstacle-voxel-screen-scene-c2.py": "b1ddcde5dff586030c9fe2eb361c6b45a8e82fb694a476f0391276d1a70ee2ab",
+    "scripts/run-rc6-liquid-obstacle-voxel-screen-c2.py": "c68421b8006cab21d328549312a68091301d971a9406b7c330b97b3887e84118",
+    "scripts/audit-rc6-liquid-obstacle-voxel-screen-c2.py": "5d83281c549e44e502d7da742145601b71726f6c71c873dc124fbb6475645abc"
+  },
+  "specHash": "66c96c878e50c96c6a308818e234bc2ab782dbaf108f6c718bd6d48e9bba920b"
+}
