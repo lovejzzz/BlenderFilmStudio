@@ -7794,3 +7794,18 @@ attempt-94 evidence path. Second, it replays a pre-audit manifest over the
 completed root without excluding the later independent audit and its two logs.
 Attempt-97 is immutable and contains no Blender work. C5 may correct only those
 two views in fresh attempt-98, with all scientific checks and limits unchanged.
+
+## J-666 · C5 closes C20 audit without changing its physical failure
+
+Date: 2026-09-02 · Type: AUDIT-ONLY PASS · System Python / Blender / bakes / renders / retained writes: 1 / 0 / 0 / 0 / 0
+
+C5 attempt-98 corrects exactly the two preregistered historical views and passes
+26/26. Attempt-94's real evidence path now appears in its expected argv, and the
+pre-audit manifest replay excludes the three outputs created later. Attempts94
+and97 remain exact. The centroid delta is `1.017731782e-8 m`, all27 physical
+booleans recompute, and audit/receipt hashes are `12bcab9e…` / `6d8b5f2d…`.
+
+This closes only evidence replay. Simulation particle radius1.6 remains a
+physical FAIL23/27 and must not be rendered. Before another physical choice,
+C21 must compare copied C20/C18 Data and Mesh caches to separate transition
+onset from maximum severity with zero Blender work.

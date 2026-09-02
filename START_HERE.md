@@ -1309,6 +1309,16 @@ write occurred. Next freeze audit-only C5 with exactly those two corrections and
 a fresh attempt-98 root. Preserve all tolerances, physical data/checks, claims
 and zero-Blender ceilings; do not render or test another radius. See
 `research/2026-09-02-rc6-real-impact-liquid-particle-radius-c20-c4-retained-view-failure.md`.
+C5 attempt-98 applies exactly those two historical-view corrections and passes
+26/26. It independently binds attempts94/97, process argv/logs, both root
+manifests, all27 physical booleans and the `1.017731782e-8 < 2e-8 m` centroid
+replay. Audit self hash is `12bcab9e…`; receipt self hash is `6d8b5f2d…`.
+The run used one system-Python start and zero Blender/bake/render/save/build/
+network/engine/retained writes. C20 is therefore closed as an audited physical
+FAIL23/27, not accepted liquid. Next preregister one zero-Blender copied-cache
+C21 comparison of C20 versus C18 Data/Mesh onset and amplitude. Do not mutate a
+physical value or render first. See
+`research/2026-09-02-rc6-real-impact-liquid-particle-radius-c20-c5-audit-accepted.md`.
 
 ## Public routes
 

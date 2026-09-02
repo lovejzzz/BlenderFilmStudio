@@ -138,6 +138,14 @@ occurred. Preserve attempt-97. C5 may change exactly those two historical-view
 reconstructions, retain the shared exec environment and use fresh attempt-98.
 All tolerances, physical gates, retained bytes/hashes, claims and ceilings stay
 unchanged. Do not render or test another particle radius.
+C5 attempt-98 now closes those exact two views at PASS26/26. It binds both
+retained roots, process argv/logs, manifests and all27 independently recomputed
+physical booleans with zero Blender or retained writes. Audit hash is
+`12bcab9e…`; receipt hash is `6d8b5f2d…`. The physical result remains
+FAIL23/27: radius1.6 sharply worsened conservation and fragmentation despite
+improving cup intrusion. Next preregister one zero-Blender copied-cache C21
+C20-versus-C18 onset/amplitude comparison. No new physical value or render may
+precede it.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
