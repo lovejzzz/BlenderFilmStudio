@@ -1256,6 +1256,15 @@ an exact claim-string naming mismatch; C1 attempt-91 closes only that harness
 defect at19/19 while proving both attempt-90 roots immutable. Next preregister
 one zero-Blender copied-cache C19 comparison of C18 versus C14 Data/Mesh onset.
 Do not select another physical variable, rebake, tune Mesh or render first.
+C19 attempt-92 copied all108 immutable C18 cache files and passed independent
+audit22/22 with zero Blender/bake/render/save/network work. The strict result is
+`TRANSITION_ORDER_INCONCLUSIVE`: Mesh crosses25% at frame24 and particle
+support at frame25, while velocity support is already+62.45% at frame24 and
+particle/Mesh correlation is0.97738. C14 crossed Mesh/Data at35/36. Thus the
+threshold makes expansion begin earlier but limits its amplitude and keeps cup
+intrusion below1%; it does not remove the instability. Next inspect bound
+particle-adjustment source and freeze one distinct Data-layer degree of freedom.
+Do not scan another threshold, rebake, tune Mesh or render first.
 
 ## Public routes
 

@@ -91,6 +91,17 @@ mismatch; C1 attempt-91 proves the immutable roots unchanged and closes only
 that mismatch at19/19. Next preregister one zero-Blender copied-cache C19
 C18-versus-C14 Data/Mesh comparison before selecting another physical variable.
 Do not rebake, test another threshold, tune Mesh or render first.
+C19 attempt-92 then copied all108 immutable C18 cache files and passed its
+independent audit22/22 with zero Blender/bake/render/save/network operations.
+Its strict classification remains `TRANSITION_ORDER_INCONCLUSIVE`: C18 Mesh
+crosses25% at frame24 and particle support at frame25, so do not claim same-
+frame Data causality. Velocity support is already+62.45% at frame24 and the
+particle/Mesh correlation is0.97738. Compared with C14, threshold0.10 moves
+Mesh/Data expansion onset earlier from35/36 to24/25 while strongly reducing
+final amplitude and keeping cup intrusion below1%. Teach both onset and
+amplitude; peak improvement alone is insufficient. Next inspect bound particle-
+adjustment source and preregister one distinct Data-layer variable. Do not scan
+another threshold, rebake, tune Mesh or render before that source-led choice.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

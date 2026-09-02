@@ -7694,3 +7694,16 @@ evidence files before and after, and passes19/19. Audit hash is
 `2b1d988bf7aa2582b4ee02fdbeb74a4cf0e5e5077f7cdf7f42ca2a160d5625e8`.
 The physical verdict remains FAIL. Compare immutable C18 and C14 Data/Mesh
 transitions before selecting another physical setting.
+
+## J-660 · Threshold improvement reduces severity, not onset
+
+Date: 2026-09-02 · Type: ZERO-BAKE DIAGNOSTIC PASS / INCONCLUSIVE CLASSIFICATION · Engine Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+C19 attempt-92 copies all108 immutable C18 cache files and passes independent
+audit22/22. Mesh exceeds25% at frame24 and particle support at frame25, versus
+C14 frames35/36; velocity support is already+62.45% at frame24 and particle/
+Mesh correlation is0.97738. The one-frame Mesh lead preserves the strict
+`TRANSITION_ORDER_INCONCLUSIVE` classification. Threshold0.10 reduces maximum
+particle/velocity/Mesh expansion to32.38%/173.84%/51.54% and keeps intrusion
+below1%, but it does not delay instability. Future decisions must compare onset
+and amplitude, not only peak improvement.
