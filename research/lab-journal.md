@@ -6926,3 +6926,16 @@ moving-effector subframes, but the unconstrained cup translated instead of
 tipping; peak tilt was only 0.99°–1.77°. C2 must introduce a measured-gap
 passive toe stop to create a physical pivot while preserving zero cup keys and
 the unchanged 45° gate.
+
+## J-597 · RC6 passive toe stop tips but does not provide a stable slow pivot
+
+Date: 2026-09-02 · Type: PHYSICAL SCREEN FAILURE · Blender starts / Bullet bakes / fluid bakes / renders: 4 / 4 / 0 / 0
+
+C2 attempt-49 passed an 18/18 independent audit. All cells began with a measured
+5.00003 mm stop gap and made stop contact. D16 crossed 45° but launched into a
+95.54° response, 299.48 mm maximum one-frame surface displacement and 32
+required subframes outside the domain. D20/D24/D28 peaked at only
+44.85°/44.99°/44.57° and rebounded. The collision-only stop creates torque but
+not a stable planar pivot. C3 must replace it with an explicit Bullet hinge at a
+geometry-derived axis while keeping the cup unanimated and all response,
+surface, domain and sampling thresholds unchanged.
