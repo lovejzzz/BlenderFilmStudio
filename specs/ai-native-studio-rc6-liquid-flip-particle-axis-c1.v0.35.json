@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "bfs.rc6LiquidFlipParticleAxisC1Spec.v0.35",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-FLIP-PARTICLE-AXIS-C1-2026-09-01-ATTEMPT-34",
+  "purpose": "Repeat the cached FLIP-particle axis diagnosis in fresh roots after correcting only attempt-33's false assumption that an initially disabled FLIP display implies an empty particle-system roster.",
+  "toolFreezeParent": "a085f3894ec62e6553b00717e7ce0731838ba821",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "scope": "One fresh, local-only, zero-bake, zero-save, zero-render Blender diagnostic on a complete copied cache; ordinary research commit and non-force push are allowed.",
+    "specificConfirmationRequired": false
+  },
+  "roots": {
+    "sourceWork": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-concavity-attempt-31",
+    "sourceEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-mesh-concavity-attempt-31",
+    "sourceCandidate": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-concavity-attempt-31/concavity-upper-3p50",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-flip-particle-axis-c1-attempt-34",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-flip-particle-axis-c1-attempt-34"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceWorkManifestFileSha256": "39c47904ac2f31e6e0e92bdef38231a8248b51c1a8fc0442d0cbfaf0db2db05d",
+    "sourceWorkManifestHash": "8adcb0d87c750a8eaadc3420d9583cc532e2f434f2401e89e1b9898a76b3c349",
+    "sourceCandidateManifestHash": "f1357fc0b6383d1b5dd689c80dbce2f89e9c625b8dab00f5db2eb464e444abd8",
+    "sourceAuditFileSha256": "699ca9002878473f7fd1bb740c2270a252d2edb8a02da7cb9d398d65bf9b78f5",
+    "sourceAuditHash": "c6e3ef33a680d760e7afc1d305e3451ce8ef013429174f76a6756156378bcbf8",
+    "sourceResultHash": "7ecb421221edbb3dc367e347b9038381ab4043077833d0443c76c34f8203d6da"
+  },
+  "priorAxisDiagnosis": {
+    "path": "experiments/physical-richness/RC6-2026-09-01-containment-axis-attempt-32/independent-audit-c1.json",
+    "fileSha256": "3aa30ee02184964cb8d547d1f77bff9774346aaae0b52861e5b03cb06b60c056",
+    "auditHash": "5a05c6d671c7105d82dfcfdfef2ae1ff8d85a1b89ec4d826f42aa78e53ad6929",
+    "checks": "26/26 PASS",
+    "surfaceDiagnosis": "At peak frame 7, all 7,814 outside-union mesh vertices were below-floor; radial and above-rim counts were zero."
+  },
+  "priorHarnessFailure": {
+    "path": "experiments/physical-richness/RC6-2026-09-01-flip-particle-axis-attempt-33/failure.json",
+    "fileSha256": "91e0b3e2253d8cbdc300ccffbdf82e16cba2c22d55167d1bcd59385f9382620a",
+    "failureHash": "c0ef39af1d4182f95be8bd8bf666cd2219be9269d0fc82f95a8faa58ccf8de36",
+    "status": "FAIL_PREMEASUREMENT",
+    "measuredParticleFrames": 0,
+    "correction": "Observe the initial use_flip_particles value and particle-system count independently. Accept only the three coherent initial rosters false/0, false/1 or true/1; expose or reuse exactly one system in memory, record the action, and continue without saving."
+  },
+  "frozenCandidate": {
+    "cellId": "concavity-upper-3p50",
+    "frameStart": 1,
+    "frameEnd": 7,
+    "resolutionMax": 192,
+    "particleRadius": 1.6,
+    "particleNumber": 2,
+    "meshParticleRadius": 9.0,
+    "cupEffectorSurfaceDistance": 1.5,
+    "cacheType": "MODULAR",
+    "expectedCacheFiles": 21
+  },
+  "measurement": {
+    "particleExposure": "Observe the coherent initial roster; if disabled, set use_flip_particles=true only in process memory; require exactly one final evaluated particle system and display_percentage=100; do not save.",
+    "allowedInitialRosters": [
+      {
+        "initialUseFlipParticles": false,
+        "initialParticleSystemCount": 0,
+        "exposureAction": "ENABLED_IN_MEMORY_AND_CREATED_SYSTEM"
+      },
+      {
+        "initialUseFlipParticles": false,
+        "initialParticleSystemCount": 1,
+        "exposureAction": "ENABLED_IN_MEMORY_WITH_EXISTING_SYSTEM"
+      },
+      {
+        "initialUseFlipParticles": true,
+        "initialParticleSystemCount": 1,
+        "exposureAction": "REUSED_EXISTING_ENABLED_SYSTEM"
+      }
+    ],
+    "coordinateConvention": "Blender Particle.location world-space converted by cup.matrix_world.inverted",
+    "cupInnerRadiusMeters": 0.09,
+    "cupInteriorBottomLocalZMeters": -0.16,
+    "cupInteriorTopLocalZMeters": 0.22,
+    "baseVoxelMeters": 0.0026041667,
+    "classifications": {
+      "aggregate": "cup interior expanded by one base voxel on radial, floor and rim limits, matching the previous surface metric",
+      "strictInterior": "raw measured cup interior with zero margin"
+    },
+    "interpretationRule": {
+      "aggregateBelowFloorPositive": "cached FLIP particles exceed the same one-voxel floor envelope; proceed to collision/effector diagnosis",
+      "aggregateZeroStrictPositive": "particles remain within one voxel of the physical interior while the reconstructed surface exceeds that envelope; treat the accepted-margin surface failure as reconstruction expansion and do not change collision physics",
+      "aggregateAndStrictZero": "particles are inside the raw cup interior; the measured surface failure is entirely reconstruction-side"
+    }
+  },
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 67108864,
+    "evidenceBytes": 16777216,
+    "projectedWriteBytes": 83886080,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on non-fresh roots, retained attempt-33 failure drift, source or copied-candidate manifest drift, symlink, cache-root or baked-flag mismatch, frozen setting mismatch, incoherent initial roster, absent or empty evaluated FLIP particles, process/log/result failure, any bake/save/render/network/remote-write count, banned media or resource failure. Never open either retained root directly and never save the in-memory particle exposure.",
+  "claimCeiling": "One C1-corrected, zero-bake, zero-save, seven-frame cached-FLIP-particle per-axis diagnosis on a complete fresh copy of the failed resolution-192 static control. It distinguishes particle positions from reconstructed surface positions only; it does not prove a physical fix, slow tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/inspect-rc6-liquid-flip-particle-axis-scene-c1.py": "680db70478079f4cf087497c65e2501e398a06fb89457777ec9b36935e63d05a",
+    "scripts/run-rc6-liquid-flip-particle-axis-diagnostic-c1.py": "968d2cb8681754f9b3874f4b42bcda31afb77d0fe9a5461f5d2443bf0d20cdd6",
+    "scripts/audit-rc6-liquid-flip-particle-axis-diagnostic-c1.py": "3651230fd4d64907146d95cb4b291a810d8973cb44be60258d8798bcd9ec5e02"
+  },
+  "specHash": "d2ee447078e8f4cb6daa75975436066484aa5995e6d7414812d9ef9c91155a9a"
+}
