@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidEffectorDistance.v0.70",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_59_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "29be81317a9bebc5de19ec240ad24d8aad2f899d",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded single-variable Blender fluid validation under standing owner autonomy"
+  },
+  "question": "Does reducing only the moving cup's implicit effector thickness from 2.5 to 2.0 cells preserve containment while bringing the exact 24-frame Preview Mesh within the frozen volume gates?",
+  "rationale": {
+    "officialSemantics": "surface_distance expands the fluid effector in grid cells and therefore reduces effective interior space",
+    "attempt56": "2.5 cells kept every Mesh vertex contained but lost 34.23 percent temporal Mesh volume",
+    "attempt57": "ALIVE count grew 30.25 percent with zero particle escape, invalidating count as mass",
+    "attempt58": "particle occupied-voxel support shrank 28.77 percent and correlated with Mesh at 0.98427",
+    "singleDegreeOfFreedom": "cup effector surface_distance only"
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "retainedStaticCacheManifestHash": "53bc19e1532b64ea8c37b0cc5fa52347c72c73023728d3705d45c063d5b7c265",
+    "trajectory": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55/cells/C5F96/result.json",
+    "trajectoryFileSha256": "00193b1a1258814f5a0a5b7a2308686f9f7daa0826f554af62c55e7de38fb261",
+    "attempt56ResultFileSha256": "6aafa7107ac45f0911c5e0775514350cf10645a2358e0497d6c6f6517231f659",
+    "attempt57AuditFileSha256": "bacbd61bbfc001fa4fab255713b875b0039f55a77a188060f774ba0bbd3c389a",
+    "attempt58AuditFileSha256": "65133bdb220737da1139a8c23469fa8c6d4a104c82021fc0cc17277f86409bb6"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-effector-distance-attempt-59",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-distance-attempt-59"
+  },
+  "frozenConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "resolutionMax": 96,
+    "domainCenterMeters": [0.45, 0.0, 0.26],
+    "domainDimensionsMeters": [0.9, 0.5, 0.58],
+    "trajectoryCellId": "C5F96",
+    "simulationMethod": "APIC",
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "meshParticleRadius": 2.5,
+    "meshScale": 2,
+    "meshConcaveLower": 0.4,
+    "meshConcaveUpper": 3.5,
+    "meshSmoothenPos": 1,
+    "meshSmoothenNeg": 1,
+    "cupEffectorSurfaceDistanceCells": 2.0,
+    "cupEffectorSubframes": 1,
+    "timestepsMin": 1,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "deleteInObstacle": false
+  },
+  "onlyChangeFromAttempt56": {
+    "path": "cup FluidEffectorSettings.surface_distance",
+    "before": 2.5,
+    "after": 2.0
+  },
+  "machineAcceptanceUnchangedFromAttempt56": {
+    "maximumTrajectoryLocationDeltaMeters": 0.00001,
+    "maximumTrajectoryRotationDeltaDegrees": 0.0001,
+    "minimumFrame24CupTiltDegrees": 14.0,
+    "maximumHingePivotDriftMeters": 0.005,
+    "exactCacheFiles": 72,
+    "liquidMeshRequiredEveryFrame": true,
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.25,
+    "maximumAbsoluteTemporalVolumeDriftFraction": 0.15,
+    "positiveLiquidBodyCountEveryFrame": 1,
+    "maximumNonManifoldEdgeCount": 0,
+    "minimumLargestComponentFraction": 0.5,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.05,
+    "maximumBelowFloorFraction": 0.01,
+    "minimumLiquidCentroidShiftCupLocalMeters": 0.002,
+    "zeroCupBallPusherPoseKeys": true,
+    "retainedStaticCacheByteExact": true
+  },
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 2147483648,
+    "maximumWorkspaceBytes": 2147483648,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-moving-liquid-effector-distance-scene.py", "sha256": "cd4b47ea28ca96f37f2989afe9bd9930ae39b4cf4d5a3990bdb8b52244f89f7f"},
+    {"uri": "scripts/run-rc6-moving-liquid-effector-distance.py", "sha256": "5237861edf167e647e3543bb1c3176be5d70dc52eb850497835a584348782d5e"},
+    {"uri": "scripts/audit-rc6-moving-liquid-effector-distance.py", "sha256": "d97cbf62a45517fe8e1e3c90a1abad6f87d09bae1445d42db716118b83a2200f"}
+  ],
+  "stopRule": "Run exactly once in attempt-59 roots and retain PASS, physical FAIL or harness failure. Never lower the scientific thresholds, add a second cell after observing this result, tune Mesh, begin impact or render.",
+  "claimCeiling": "One 24-frame Preview-96 single-variable effector-distance result. It cannot establish final resolution, full tip, spill, impact, persistence, rendered appearance or film quality.",
+  "specHash": "a29553aece86198e27adb1e3f9d980491e6cb6800ab83b1b370ffaeae6b41d2f"
+}
