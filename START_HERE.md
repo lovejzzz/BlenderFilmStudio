@@ -938,15 +938,24 @@ physical result was written. It used one Blender start and one Bullet bake,
 with zero fluid, render, save or network work. Failure self hash is
 `df357639…`. Do not infer anything about motor physics from this harness error.
 
-After restart, first run the ordinary cold-start reads and host preflight. C5-C1
-is already preregistered and pushed at commit `3dd9e448b1b7f9d757bf9f2ab7d2b948d36c7482`;
-its spec is `specs/ai-native-studio-rc6-slow-tip-bullet-screen-c5-c1.v0.61.json`
-with self hash `56c8b074…`. Fresh attempt-53 work/evidence roots are still absent.
-Run that exact frozen four-cell protocol once. The correction only inserts an
-inert `separation = math.inf` sentinel after the completed bake; all motor,
-hinge, response, surface, domain, subframe and authority gates remain unchanged.
-Do not begin moving Mantaflow or visual rendering until the Bullet-only gate
-passes.
+The slow-tip Bullet gate is now accepted by composition. C5-C1 attempt-53 is a
+retained pre-root wrapper-count failure. C5-C2 attempt-54 completed one passing
+C5F48 cell but retained an aggregate marker-binding failure, independently
+audited 16/16. C5-C3 attempt-55 then completed all four unchanged cells and
+produced a `PASS_BULLET_SCREEN` receipt selecting the slowest cell, C5F96. Its
+15.15789474°/s motor reached 60.0024°, took 63 frames from 5→45°, moved the cup
+surface at most 5.87031 mm per frame, required one derived effector subframe
+and held hinge-pivot drift to 0.00581 mm. Receipt self hash is `903b1d0a…`.
+
+The C5-C3 base audit is retained at 17/18 solely because it compared Blender's
+float32 domain dimensions literally with decimal JSON. C5-C4 changed only that
+representation comparison to `1e-6` per axis and passed 18/18 without starting
+Blender; audit self hash is `791f7a13…`. The accepted evidence root is
+`experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55`.
+This closes only the solver-owned slow rigid trajectory. Next preregister a
+bounded Preview moving-liquid gate using exact C5F96 motion and the accepted
+static-liquid geometry/settings. Do not begin real impact or visual rendering
+until moving liquid passes.
 
 ## Public routes
 

@@ -7018,3 +7018,15 @@ because it compared Blender float32 domain dimensions literally with decimal
 JSON values; all other checks passed. C5-C4 must be audit-only, preserve the
 base audit and physics, and use only the already validated `1e-6` representation
 tolerance for the three domain axes.
+
+## J-604 · RC6 slow-tip Bullet trajectory accepted by audit-only composition
+
+Date: 2026-09-02 · Type: PHYSICAL GATE PASS · Blender starts / Bullet bakes / fluid bakes / renders: 4 / 4 / 0 / 0
+
+C5-C4 changed only the base auditor's literal float32 domain-dimension equality
+to a per-axis `1e-6` representation tolerance. The corrected independent audit
+passes 18/18 without rerunning Blender. Attempt-55 therefore accepts C5F96:
+15.158°/s target, 60.002° peak, 63-frame 5→45° span, 5.87 mm maximum one-frame
+surface motion, one required effector subframe and 0.0058 mm hinge drift. The
+next gate may introduce moving Mantaflow on this exact trajectory, beginning at
+a bounded Preview tier; real impact and rendering remain later gates.
