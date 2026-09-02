@@ -7763,3 +7763,18 @@ C3 may correct only this exact parent plus versioned tool/spec/preregistration
 and fresh-root names. The generated audit logic, `2e-8` centroid replay,
 `1e-8` volume replay, all physical checks, retained hashes, claim and zero-
 Blender ceilings must be byte-equivalent after normalizing those names.
+
+## J-664 · C3 exposes one generated-audit namespace defect
+
+Date: 2026-09-02 · Type: RETAINED HARNESS FAILURE · System Python / Blender / bakes / renders / retained writes: 1 / 0 / 0 / 0 / 0
+
+C3 fixed the exact parent OID, verified the retained attempt-94 manifest and
+created attempt-96 admission. The generated audit was then executed with
+separate globals/locals dictionaries; a generator expression could not resolve
+top-level `source_volume` and raised `NameError` before audit output. This is a
+Python execution-environment defect, not a physical or metric result.
+
+Attempt-96 is retained. C4 may change only the outer execution call to populate
+one shared environment and use it for globals and locals, plus versioned names
+and a fresh root. Expanded audit bytes, tolerances, checks, hashes, claims and
+zero-Blender ceilings remain unchanged.

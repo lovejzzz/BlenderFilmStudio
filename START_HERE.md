@@ -1293,6 +1293,12 @@ transcribed incorrectly (`ec81581799…` versus actual `ec81581796…`). No reta
 byte or process was touched. Preserve this harness failure; next freeze C3 with
 only the exact parent/version/fresh-root correction. The expanded audit logic,
 centroid/volume tolerances and every physical boundary must remain unchanged.
+C3 corrected that OID and verified the retained manifest, then stopped after
+creating attempt-96 admission because separate Python globals/locals hid
+`source_volume` from a generator expression. No audit or Blender work occurred.
+Retain attempt-96; C4 may change only the `exec` call to one shared environment
+dictionary and use a new root. Audit bytes, tolerances and physical gates stay
+unchanged.
 
 ## Public routes
 

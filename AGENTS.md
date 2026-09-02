@@ -124,6 +124,11 @@ mis-transcribed (`ec81581799…` versus exact `ec81581796…`). All operation an
 retained-write counts are zero. Preserve the failure and create only a versioned
 C3 parent/version/fresh-root correction; the expanded audit logic, tolerances,
 physical checks, retained hashes, claim and zero-Blender ceilings stay exact C2.
+C3 corrected the parent and created attempt-96 admission, then failed before
+audit output because separate `exec` globals/locals hid `source_volume` from a
+generator expression. Blender and retained-write counts remain zero. Preserve
+attempt-96; C4 may only use one shared exec environment and a fresh root, with
+the expanded audit, tolerances, checks, hashes and claims unchanged.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
