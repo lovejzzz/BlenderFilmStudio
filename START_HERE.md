@@ -1435,6 +1435,18 @@ or establish a global setting. Next freeze one zero-Blender C30 copied-cache
 C29-versus-C18 Data/Mesh comparison before selecting any new physical value.
 Do not rerun C29, scan band width or render. See
 `research/2026-09-02-rc6-real-impact-liquid-particle-band-width-c29-attempt-108-result.md`.
+C30 attempt-109 then copied all108 immutable C29 cache files and passed its
+diagnostic8/8 plus independent audit23/23 without starting Blender. Particle
+occupied support crossed -15% at frame26 and Mesh followed at frame31, with a
+strong `r=0.96134` relationship; velocity support never crossed the loss line
+and was essentially unrelated to Mesh (`r=-0.07580`). This confirms that the
+cleaner width3 result carries Data-layer particle-support loss before visible
+Mesh loss. Close band-width scalar tuning: width4 remains useful for slow-tip,
+while width3 suppresses impact fragmentation by losing support. Neither is a
+universal default, and occupied support is not exact mass. After restart, C31
+is one zero-Blender read-only event-regime policy/feature design that freezes
+an independent holdout before any adaptive product mutation or new bake. See
+`research/2026-09-02-rc6-real-impact-particle-band-width-data-comparison-c30-result.md`.
 
 ## Public routes
 
