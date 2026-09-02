@@ -1178,6 +1178,14 @@ motion72.10 mm/eight subframes; a same-size domain centered x=0.57 can contain
 that initial event sweep. Next run an audit-only event-window/domain-placement
 gate with zero Blender. Do not claim the liquid is already finished or start a
 fluid bake before that audit passes.
+C11 audit-only attempt-83 now passes 16/16 with the retained R40 root unchanged.
+The derived frame1→first70° frame36 window contains contact19 and the causal
+tip, needs exactly eight Preview-96 effector subframes, and fits with one voxel
+margin in the unchanged 0.90×0.50×0.58 m domain translated to x=0.57. This
+only admits a future liquid Preview; it neither repairs C10's full48 FAIL nor
+claims all liquid has spilled. Next build one integrated same-solve R40
+Bullet+APIC Preview using the accepted attempt-70 liquid settings. Do not reuse
+the old hinge/motor slow-tip rig, replay cup poses, render or start Final-192.
 
 ## Public routes
 

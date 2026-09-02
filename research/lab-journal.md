@@ -7530,3 +7530,13 @@ C11 freezes frame1 through the first retained 70° cup sample, recomputes
 contact, surface motion and swept bounds, and tests a same-size domain shifted
 to x=0.57 with one voxel margin. It cannot change C10's full-window FAIL or
 claim liquid completion. A PASS only admits a future bounded Preview bake.
+
+## J-646 · Event-window audit passes without changing the failure
+
+Date: 2026-09-02 · Type: AUDIT-ONLY PASS · Blender starts / Bullet bakes / liquid bakes / renders: 0 / 0 / 0 / 0
+
+C11 passes16/16 and leaves attempt-82 byte-exact. Frame1→first70° frame36
+preserves derived contact19, caps cumulative surface travel at72.10 mm/eight
+Preview subframes, and fits with one voxel margin in the same-size domain moved
+to x=0.57. This admits one integrated impact-liquid Preview only; it does not
+claim spill completion or repair the retained full48 FAIL.
