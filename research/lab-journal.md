@@ -7386,3 +7386,14 @@ C5 freezes the 10-file attempt-75 root at manifest `6a9261f1…` and applies
 The I09 physical FAIL, 22 already-passing checks and every byte remain exact.
 The next question after audit closure is collision-margin/visible-geometry
 congruence, not another striker speed.
+
+## J-633 · I09 audit closes; inspect collision congruence next
+
+Date: 2026-09-02 · Type: AUDIT PASS · Blender starts / bakes / renders: 0 / 0 / 0
+
+C5 passed 13/13 with immutable attempt-75 manifest `6a9261f1…` before and
+after. The I09 physical FAIL and all measured motion remain exact. This closes
+speed tuning: the next action is read-only inspection of the cup's Bullet
+collision margin and visible/collision geometry, because the tipped cup's
+visible surface reaches 16.57 mm below the floor and its fall—not striker
+speed—sets the 96.84 mm maximum frame step.

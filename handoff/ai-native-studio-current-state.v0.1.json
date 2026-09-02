@@ -2919,14 +2919,22 @@
       "interpretation": "after the free cup crosses its tipping threshold, falling and landing dominate maximum motion; further striker-speed tuning is closed",
       "auditDefect": "baseVoxelMeters float32 representation was still compared at 1e-10 while every other check passed"
     },
+    "realImpactMidpointAuditC5Attempt76": {
+      "status": "PASS_AUDIT_ONLY_13_OF_13",
+      "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-real-impact-bullet-midpoint-audit-c5-attempt-76",
+      "auditHash": "1939967b2f7dc4936a8cae388d2c78b8d7982a48e3d22299dfaa011c1761bd9e",
+      "retainedRootManifestBeforeAfter": "6a9261f161eaaf0435ad9b5c8b36dbf34fc3ca24e00c9c843a3039a27fd04476",
+      "physicalVerdictUnchanged": "FAIL_REAL_IMPACT_BULLET_TRAJECTORY",
+      "next": "inspect cup collision margin and visible/collision congruence"
+    },
     "next": {
       "gate": "RC6-REAL-IMPACT-BULLET-TRAJECTORY",
-      "status": "ATTEMPT_75_RETAINED_FAIL_AUDIT_ONLY_CLOSURE_NEXT",
+      "status": "ATTEMPT_75_AUDIT_CLOSED_COLLISION_CONGRUENCE_INSPECTION_NEXT",
       "mustBindAcceptedMovingLiquid": "attempt-70 particle radius 1.8, particle band width 4.0, fractions distance 0.25 and all accepted geometry/Mesh settings",
-      "initialStrategy": "close attempt-75's sole float32 base-voxel audit mismatch without Blender, then inspect cup Bullet collision margin and visible/collision congruence before selecting a new degree of freedom",
+      "initialStrategy": "inspect cup Bullet collision margin and visible/collision congruence read-only; use that cause to select exactly one new physical or tier/domain degree of freedom",
       "readOnlyInventory": "retained P02 contacts at frame 8 and reaches about 90 degrees by frame 15 but translates the cup roughly 7.5-10 cm per frame; P03/P05 contact at frame 13 and P06 at frame 17, showing the old contact-by-frame-12 gate was not a liquid-fidelity criterion",
       "restartCheckpoint": "research/2026-09-02-rc6-real-impact-trajectory-restart-checkpoint.md",
-      "executionStatus": "I09_PHYSICAL_FAIL_AUDIT_22_OF_23_ZERO_LIQUID_RENDER_SAVE_NETWORK",
+      "executionStatus": "I09_PHYSICAL_FAIL_C5_AUDIT_13_OF_13_PASS_ZERO_LIQUID_RENDER_SAVE_NETWORK",
       "mustMeasure": [
         "derived ball-to-cup contact frame and continuous pre/post-contact transforms",
         "solver-owned cup tilt and floor/spill opportunity window",
@@ -2947,6 +2955,7 @@
     "attempt74AuditHash": "a7a4461b8d0773f32a8380a39daabcc646d3a1b165b40e2d35dc4117125da862",
     "attempt75ReceiptHash": "767e23e54f0fe177a3ea198c088ec6859eb1bdaff830e6b721f4319e8a256f52",
     "attempt75AuditHash": "4ea0cc6bd5281768b78760a41f2b9065137fbd9b9293355c9a0ff424bb39f800",
+    "attempt76AuditHash": "1939967b2f7dc4936a8cae388d2c78b8d7982a48e3d22299dfaa011c1761bd9e",
     "restartCheckpoint": "research/2026-09-02-rc6-real-impact-trajectory-restart-checkpoint.md",
     "attempt70Preregistration": "research/2026-09-02-rc6-moving-liquid-particle-band-width-preregistration.md",
     "attempt70SourceInspection": "research/2026-09-02-rc6-moving-liquid-particle-band-width-source-inspection.md",

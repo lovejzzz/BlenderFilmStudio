@@ -1130,6 +1130,11 @@ float32 base voxel `0.0093749998` missed an overly strict `1e-10` decimal
 comparison. Next close that audit without Blender, then inspect the exact cup
 Bullet collision margin versus visible geometry before choosing a new physical
 or DRAFT-domain degree of freedom. Do not rerun I09 or start liquid.
+Audit-only C5 attempt-76 passes 13/13 with self hash `1939967b…` and proves
+attempt-75 remained byte-exact at manifest `6a9261f1…`. Striker-speed tuning is
+closed. Next inspect the exact cup Bullet collision margin and visible/collision
+congruence read-only; do not change physics or expand the fluid domain until
+that cause is bound.
 
 ## Public routes
 
