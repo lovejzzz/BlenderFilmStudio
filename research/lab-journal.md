@@ -6980,3 +6980,15 @@ conditional referencing that name. The three later cells were skipped and no
 physical verdict exists. C5-C1 is limited to defining that obsolete value as
 `math.inf`; all motor, hinge, velocity, impulse, damping, domain, threshold and
 resource fields remain byte-exact.
+
+## J-601 · RC6 C5-C1 stopped before roots on an outer-wrapper count mismatch
+
+Date: 2026-09-02 · Type: PRE-ROOT TOOL FAILURE · Blender starts / Bullet bakes / fluid bakes / renders: 0 / 0 / 0 / 0
+
+The exact frozen attempt-53 command failed before root creation because the
+C5-C1 outer wrapper expected the C5 wrapper's attempt-52 destination string
+twice, while that wrapper text contains it once. The nested C5 layer would have
+performed its own two-occurrence replacement only after compilation. Both
+attempt-53 roots remain absent, so this is neither a Bullet result nor authority
+to rerun the frozen tool. C5-C2 may correct only the outer occurrence count and
+route the unchanged physical protocol to fresh attempt-54 roots.
