@@ -1085,6 +1085,18 @@ baseline-relative changes correlate at `r=0.86588`. Evidence is
 receipt/audit self hashes are `09483a37…` / `0da61c54…`. The response begins
 in Data. Fractional distance stays closed; inspect particle band width before
 another run. Do not render or begin real impact.
+Bound source then selected exactly one new value: particle resampling band width
+3.0→4.0. Attempt-70 is `PASS_MOVING_LIQUID_PREVIEW` with all 17 physical checks
+and a 16/16 independent audit. Temporal Mesh drift improved 15.44%→6.90%,
+source-relative error 18.81%→10.44%, and all 24 frames retained one positive
+manifold liquid body with zero radial/floor/rim violations. Data/Mesh took
+273.76/2.96 seconds; the exact cache roster is 72 and the retained Final static
+cache remained byte-exact. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-band-width-attempt-70`;
+receipt/audit self hashes are `a1a4218b…` / `cf814e45…`. The slow moving-liquid
+Preview gate is closed. Next design and Bullet-screen the real basketball
+impact trajectory with zero liquid bake; do not choose an impact by eye or
+start a costly impact-fluid bake before that trajectory is frozen.
 
 ## Public routes
 

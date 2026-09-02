@@ -7250,3 +7250,19 @@ particle-radius, density, solver, Mesh and threshold state and changes only the
 band width 3.0→4.0. This is one base-grid-cell increase and the only allowed
 value; the fresh work/evidence roots remain absent until the frozen tools and
 spec are committed.
+
+## J-622 · One-cell thicker particle band closes the moving-liquid Preview gate
+
+Date: 2026-09-02 · Type: PHYSICAL GATE PASS · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+Attempt-70 changed only `particle_band_width` 3.0→4.0 on exact attempt-68 and
+passed all 17 physical checks plus the 16/16 independent audit. Temporal Mesh
+drift improved 15.443274%→6.901662%, source-relative error improved
+18.811981%→10.442088%, and the smallest largest-component fraction improved
+68.65%→80.85%. All 24 frames remained one positive, manifold liquid body with
+zero radial, floor or rim violations; exact C5F96 motion and zero outcome pose
+authority remained intact. Data/Mesh cost was 273.76/2.96 seconds, lower than
+attempt-68 despite the thicker band. This closes the Preview slow-moving-liquid
+gate. The next step is a zero-liquid-bake basketball-impact trajectory design
+and Bullet screen; do not carry an arbitrary authored impact or immediately
+spend on a full fluid bake.
