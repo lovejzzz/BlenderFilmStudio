@@ -6900,3 +6900,16 @@ and a complete 48-frame contact-camera clip for each solved scene, followed by
 two MP4 encodes and two contact sheets. Scene mutations, blend saves and network
 calls remain zero. Any direct visual NO blocks formal tool freeze and may not be
 repaired by moving bodies, event frames or final poses.
+
+## J-595 · RC6 slow indirect ball cause retained as a valid physical failure
+
+Date: 2026-09-02 · Type: PHYSICAL SCREEN FAILURE · Blender starts / Bullet bakes / fluid bakes / renders: 4 / 4 / 0 / 0
+
+Attempt-47 completed in 3.41 seconds and its independent audit passed 18/18.
+The four slowed striker-to-ball causes contacted the cup at frames 26/35/44/52
+and required only 5/5/4/4 derived moving-effector subframes, but peak cup tilt
+was only 10.14°/14.67°/9.29°/7.25°. Slowing the final indirect impact removed
+the torque required by the 45° slow-tip gate. No threshold changed and no cell
+was selected. C1 must isolate moving-container physics with a preregistered
+low-speed direct-contact actuator above the cup center of mass while leaving the
+cup unanimated and Bullet-owned.
