@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "bfs.rc6LiquidObstacleVoxelScreenC1Failure.v0.1",
+  "status": "FAIL_POSTBAKE",
+  "failureCode": "UNCHANGED_TRUE_FLIP_ASSIGNMENT_TOGGLED_EXISTING_SYSTEM_OFF",
+  "failureMessage": "The source opened with use_flip_particles=true and one FLIP particle system. Reassigning true invoked Blender's toggle-style rna_Fluid_flip_parts_update callback, which saw the existing system and deleted it. The Data bake completed exactly, but the post-bake display roster was therefore zero.",
+  "researchCommit": "66de688babbb18e1cd9df40ea0d57da168db40ce",
+  "admissionHash": "8d9571b3e2257023e322530f0e6cd0b2359154c813ab7558356b604d73ad8b16",
+  "processHash": "551c7746d070a1bc4807ff91702bae4a3f1ebddec074e517c6b649934d7f11e7",
+  "stdoutSha256": "e6459576d6b21dd511c8dc39d1d2cfc9804ec359a1b466758aaa3628ca067d4f",
+  "stderrSha256": "afd6685f621e82a808c93e9b12fd01c6da7e5250bd4c144927ca1e882cfcd629",
+  "observations": {
+    "freshSourceUseFlipParticles": true,
+    "freshSourceParticleSystemCount": 1,
+    "dataBakeComplete": true,
+    "dataBakeReportedSeconds": 87.65,
+    "cacheFiles": 14,
+    "cacheStages": ["config", "data"],
+    "cacheFrames": [1, 2, 3, 4, 5, 6, 7],
+    "postBakeParticleSystemCount": 0
+  },
+  "counts": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "completedCells": 0
+  },
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-obstacle-voxel-screen-c1-attempt-40",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-c1-attempt-40"
+  },
+  "resources": {
+    "freeBytesBefore": 165804290048,
+    "freeBytesAfterFailure": 165815209984,
+    "workBytesApproximate": 3633152
+  },
+  "retention": {
+    "overwriteAllowed": false,
+    "rerunInSameRootsAllowed": false,
+    "physicsInterpretationAllowed": false
+  },
+  "correction": "In fresh C2 roots, accept only the measured coherent true/one initial roster and do not assign use_flip_particles when it is already true. Preserve the existing display system through the unchanged Data bake, then require one evaluated system. Keep all cells, physics, thresholds and counts unchanged.",
+  "failureHash": "e5abc7dc233294709ed47891cd47a805325243d590307725d9dceef3a3cb686d"
+}
