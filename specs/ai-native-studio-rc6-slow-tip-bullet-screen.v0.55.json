@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6SlowTipBulletScreen.v0.55",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_47_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "a451b02105204a771246feda0094459a797fe649",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe reversible validation-only Blender work under standing owner autonomy"
+  },
+  "physicalQuestion": "Which of four frozen slow kinematic-striker drives is the slowest that still causes the unanimated Bullet basketball to contact and tip the unanimated Bullet tumbler at least 45 degrees while the complete cup sweep fits a bounded Preview liquid domain and its measured maximum surface displacement requires no more than ten moving-effector subframes?",
+  "selectedPhysicalDegreeOfFreedom": "SLOW_BULLET_OWNED_TUMBLER_TIP_BEFORE_MOVING_MANTAFLOW",
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "acceptedFinalStaticEvidence": "experiments/physical-richness/RC6-2026-09-02-final-effector-mesh-c3-attempt-46",
+    "acceptedFinalStaticReceiptHash": "0363fcda866ba76c6c28e2e8d810d9f405982775ddba72d08740f584808413be",
+    "acceptedFinalStaticReceiptFileSha256": "08cf5c29be80e19451a056084edd4e3b0005cfa5ab4b99f9038d2228c714e566",
+    "acceptedFinalStaticAuditHash": "a332e8a5d11de4c12ab05052e02353cb687d0b81a05005d8e826ed8f8e3f10bd",
+    "acceptedFinalStaticAuditFileSha256": "8b8715a9cfcbf2df92faa492b17a80fbf7455c95a2ce6c9cd5487984370428dd"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-slow-tip-bullet-screen-attempt-47",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-attempt-47"
+  },
+  "cells": [
+    {"id": "D12", "driveEndFrame": 12},
+    {"id": "D16", "driveEndFrame": 16},
+    {"id": "D20", "driveEndFrame": 20},
+    {"id": "D24", "driveEndFrame": 24}
+  ],
+  "frozenConfiguration": {
+    "timelineFramesInclusive": [1, 64],
+    "fps": 24,
+    "strikerStartX": -1.1,
+    "strikerDriveEndX": -0.64,
+    "strikerDriveDistanceMeters": 0.46,
+    "strikerHoldFrames": 1,
+    "strikerRetractFrames": 4,
+    "bulletSubstepsPerFrame": 20,
+    "bulletSolverIterations": 80,
+    "candidatePreviewResolution": 96,
+    "candidateDomainCenterMeters": [0.4, 0.0, 0.26],
+    "candidateDomainDimensionsMeters": [0.8, 0.5, 0.56],
+    "candidateBaseVoxelMeters": 0.0083333333,
+    "ballCupContactRadiusSumMeters": 0.27
+  },
+  "machineAcceptance": {
+    "exactAcceptedSource": true,
+    "bulletOnlyNoFluidModifiers": true,
+    "contactByFrameMaximum": 50,
+    "minimumPeakCupTiltDegrees": 45.0,
+    "minimumFiveToFortyFiveDegreeSpanFrames": 4,
+    "minimumCupWorldBoundsZ": -0.005,
+    "candidateDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 10,
+    "cupAnimationChannels": 0,
+    "ballAnimationChannels": 0,
+    "onlyAuthoredActuator": "PHYS_VISIBLE_STRIKER",
+    "selectionRule": "select the greatest driveEndFrame among cells passing every frozen check"
+  },
+  "processCeilings": {
+    "blenderStarts": 4,
+    "bulletBakes": 4,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 268435456,
+    "maximumWorkspaceBytes": 268435456,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-scene.py",
+      "sha256": "8147ed5ed091554a2c2f876ee0b19a1a4bd75346b11a654a3481622c83bed780"
+    },
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen.py",
+      "sha256": "1e238d2662c7df828b16d7d6c61ff1baac90cf2e44c617ab56da90ec996de8ec"
+    },
+    {
+      "uri": "scripts/audit-rc6-slow-tip-bullet-screen.py",
+      "sha256": "1cda47e2d4f8df1bfbc15d2075044a721afb9b0995c58f388cbe7d9c39c71679"
+    }
+  ],
+  "stopRule": "Run each frozen cell exactly once in the unique fresh roots. Retain any failure. Do not run Mantaflow, save a blend, render, tune thresholds or add a fifth candidate after observing results. A passing Bullet screen only selects the causal trajectory and derived subframe count for a separately preregistered slow-tip liquid gate.",
+  "claimCeiling": "The slowest passing Bullet-only cause among four frozen candidates and its measured moving-effector subframe requirement. It does not prove moving liquid correctness, cache persistence, reconstructed surface quality, real impact behavior, lighting, camera or finished-film quality.",
+  "specHash": "ace1fde21e6aaed0966b2e2e051df14970a23af1e3f36741079cae3114dfcbbf"
+}
