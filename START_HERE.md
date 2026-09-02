@@ -1424,6 +1424,17 @@ sensitivity rather than declaring a universal product default. Next freeze and
 run C29 once in fresh bounded roots, preserving all27 gates and zero render; do
 not scan a second value or clean-build. See
 `research/2026-09-02-rc6-real-impact-particle-band-width-c28-source-inspection.md`.
+C29 attempt-108 then ran that exact one-cell change and passed its independent
+audit20/20 while the physical result improved to FAIL25/27. Width3 suppressed
+the width4 fragmentation/gain mode: positive bodies and connected components
+both improved37→10, source error improved47.22%→41.56% and all intrusion stayed
+zero. It instead produced monotonic loss: frame1 began3.99% below source and
+frame36 ended41.56% below, for39.13% temporal drift. Thus the narrower band is
+cleaner but not conservative; it does not replace the accepted slow-tip width4
+or establish a global setting. Next freeze one zero-Blender C30 copied-cache
+C29-versus-C18 Data/Mesh comparison before selecting any new physical value.
+Do not rerun C29, scan band width or render. See
+`research/2026-09-02-rc6-real-impact-liquid-particle-band-width-c29-attempt-108-result.md`.
 
 ## Public routes
 
