@@ -1074,7 +1074,10 @@ Data cost rose 8.13%. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-fractions-distance-attempt-68`;
 receipt/audit self hashes are `6037c9cc…` / `8716e960…`. Do not try a second
 distance. Compare the immutable Data cache before another distinct variable;
-do not render or begin real impact.
+do not render or begin real impact. Attempt-69 is now preregistered as that
+zero-bake comparison at
+`specs/ai-native-studio-rc6-moving-liquid-fractions-distance-data-comparison.v0.80.json`,
+self hash `8e5da68c…`; both roots remain absent.
 
 ## Public routes
 

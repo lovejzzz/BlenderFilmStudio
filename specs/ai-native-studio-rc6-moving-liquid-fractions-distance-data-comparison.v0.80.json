@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidFractionsDistanceDataComparison.v0.80",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_69_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "3e44fe43d8dbcefd3bfde23bd3c70fd2f92b9f16",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded read-only cache-copy analysis under standing owner autonomy"
+  },
+  "question": "Is the fractions_distance 0.5-to-0.25 near-pass improvement already present in occupied-voxel Data support before Mesh reconstruction?",
+  "baseline": {
+    "attempt68CacheRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-fractions-distance-attempt-68/mantaflow-cache",
+    "attempt68CacheManifestHash": "3dc6041d3b29453588b95ebbf32c3ba064b027132f22510421694c577e93bd35",
+    "attempt68CacheFiles": 72,
+    "attempt68CacheBytes": 9068100,
+    "attempt68ResultFileSha256": "8eab4d9729baf77957f845ff7cf2af379d02a5d1ff0c681ae83b7adfc4f02aca",
+    "attempt68ResultHash": "f12dd9168e0bc646c84ea5ea4faaa9b50c718db051a27686660261cfcf8a3dc1",
+    "attempt68AuditFileSha256": "d1274482ce9b29145e7b3f7ca9bf4b1d256dcef29eca6cad07d99b746453eac9",
+    "attempt68AuditHash": "8716e9601f8d8576cc062e2502c90f4b0a1ac1e30c05b9c626a3abf1e13d6115",
+    "attempt66ResultFileSha256": "9a5c60e8288dc1ffc6f8d5f60ba93b63a6c4b476fc718d1f4c00962cf24388aa",
+    "attempt66ResultHash": "832155637cb263fbff93f46f3e258329c0576b2a65f4062e28ca997d4fde7af5",
+    "attempt66AuditFileSha256": "eba99ea2df27c4230a366830b3bca5254f174737308b6b729f94103f4cfbf191",
+    "attempt66AuditHash": "aed82a88ddef0e6fddcf010d990c1511357f759712f0888bfa46acad2a927c0a"
+  },
+  "runtime": {
+    "enginePython": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/bin/python3.13",
+    "enginePythonVersion": "3.13.13",
+    "enginePythonSha256": "986943968d1908932b002bd96245885145ac87a71ce5f105cf467cc285a2f594",
+    "openVdbModule": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/lib/python3.13/site-packages/openvdb.cpython-313-darwin.so",
+    "openVdbModuleSha256": "d9e505e2ec7d0f4c0b98a4b0c1f7d08d9ee1e65c0115bec77a2a2016c34d2849",
+    "openVdbLibrary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/lib/libopenvdb.dylib",
+    "openVdbLibrarySha256": "43963a772b9582eae35d3db0388971ebcd5bdb52381814a9a5c392cbac6c890f",
+    "openVdbLibraryVersion": [13, 0, 0],
+    "openVdbFileFormatVersion": 225
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-fractions-distance-data-comparison-attempt-69",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-fractions-distance-data-comparison-attempt-69"
+  },
+  "measurement": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "currentLabel": "fractions-distance-0p25",
+    "baselineLabel": "fractions-distance-0p5",
+    "requiredSurfaceDistanceCells": 2.0,
+    "requiredCurrentSubframes": 1,
+    "requiredCurrentTimestepsMin": 2,
+    "requiredCurrentParticleRadius": 1.8,
+    "requiredCurrentFractionsDistance": 0.25,
+    "requiredBaselineFractionsDistance": 0.5,
+    "requiredGridNames": ["particles", "velocity"],
+    "requiredGridTypes": ["PointDataGrid", "Vec3SGrid"],
+    "requiredBaseResolution": [96, 53, 62],
+    "requiredVoxelSizeMeters": 0.009375,
+    "particleOccupancyProxy": "particles.file_voxel_count * file_voxel_size^3"
+  },
+  "classificationRules": {
+    "dataShrinkPersists": "current final occupancy drift < -0.15, current final Mesh drift < -0.15 and current occupancy/Mesh Pearson correlation >= 0.8",
+    "dataSupportStableSurfaceSuspected": "maximum absolute current occupancy drift <= 0.15 while current final Mesh drift magnitude > 0.15",
+    "otherwise": "DATA_MESH_RELATION_INCONCLUSIVE",
+    "claimLimit": "occupied sparse voxels are not exact mass or a signed liquid level-set volume"
+  },
+  "processCeilings": {
+    "systemRunnerStarts": 1,
+    "enginePythonStartsIncludingAudit": 2,
+    "cacheCopies": 1,
+    "blenderStarts": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "networkCalls": 0,
+    "retainedRootWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 67108864,
+    "maximumWorkspaceBytes": 67108864,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/analyze-rc6-moving-liquid-data-comparison.py", "sha256": "5a5066ef012f6275a5c94d2171ccb2c1125e460f4a58fa04616697184e8b389f"},
+    {"uri": "scripts/run-rc6-moving-liquid-fractions-distance-data-comparison.py", "sha256": "d9dcc23dc2b6f9f4763e10e62acda873e89735aebb3ff1b2ab99ff0b6b6211d0"},
+    {"uri": "scripts/audit-rc6-moving-liquid-fractions-distance-data-comparison.py", "sha256": "ecb1ed8fabc528e2f482f04b9b0087fd357473dd45a9cfbe7b5c8d02f2a910dc"}
+  ],
+  "executionOrder": [
+    "commit this spec and exact binding adapters while both attempt-69 roots are absent",
+    "copy the immutable attempt-68 cache once",
+    "run the reusable analyzer and independent auditor with exact engine Python",
+    "retain every result without a second fractional-distance value"
+  ],
+  "stopRule": "Never read or write the retained cache through Blender, never add another fractions_distance value, never tune Mesh, never call occupied voxels exact mass, and retain every result.",
+  "claimCeiling": "Read-only copied-cache Data comparison only; no exact mass, moving-liquid correction, impact, render or film-quality claim.",
+  "specHash": "8e5da68c1a45abba42f09c84f7aadcf69b40a6d1c40285d5a881df31fca8bbdb"
+}
