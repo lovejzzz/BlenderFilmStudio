@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidDataDiagnostic.v0.68",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_57_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "02e613339b68cc2357c8bab965612a4f637510e4",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded validation-only Blender fluid diagnostic under standing owner autonomy"
+  },
+  "question": "On exact attempt-56 physics, does the full ALIVE FLIP-particle roster drift or escape enough to explain the retained 34.23% Mesh-volume drift, or is surface reconstruction the first suspect?",
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "trajectory": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55/cells/C5F96/result.json",
+    "trajectoryFileSha256": "00193b1a1258814f5a0a5b7a2308686f9f7daa0826f554af62c55e7de38fb261"
+  },
+  "retainedAttempt56": {
+    "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-preview-attempt-56",
+    "workspaceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-preview-attempt-56",
+    "resultHash": "4969ee48c700fd86e452f1df536918b0c5c2ae868c77f39b4c3e37bc548f1a99",
+    "resultFileSha256": "6aafa7107ac45f0911c5e0775514350cf10645a2358e0497d6c6f6517231f659",
+    "failureReceiptHash": "2c2f547a0236cfae6403a7984c8555895bc64b82ec66ab93b6124a968e3716ff",
+    "failureReceiptFileSha256": "097ff5566dbe5c78ef81ed08f57255022420b7fe5c25f3281eb238084f04031f",
+    "failureAuditHash": "556d44f8ea2129914e2c70446e4521425feb88fb6dd0de7e4c4e9c2058a303a5",
+    "failureAuditFileSha256": "9e27500938f52b4498d26c3176d890cc06e0e3ffbf2f9ee409559e2b4929289d",
+    "workManifestHash": "f5b33360f9ff71f97387e77c1974905e2143ffe856353c29287b67c29b2a5155",
+    "observedMeshVolumeDriftFraction": 0.3422762779345705,
+    "observedSourceVolumeErrorFraction": 0.3682069022054074
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-data-diagnostic-attempt-57",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-diagnostic-attempt-57"
+  },
+  "frozenPhysics": {
+    "identicalToAttempt56": true,
+    "frameStart": 1,
+    "frameEnd": 24,
+    "resolutionMax": 96,
+    "domainCenterMeters": [0.45, 0.0, 0.26],
+    "domainDimensionsMeters": [0.9, 0.5, 0.58],
+    "simulationMethod": "APIC",
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "cupEffectorSurfaceDistanceCells": 2.5,
+    "cupEffectorSubframes": 1,
+    "trajectoryCellId": "C5F96",
+    "motorTargetDegreesPerSecond": 15.15789474,
+    "meshEnabled": false,
+    "flipDisplayPercentage": 100
+  },
+  "classificationRules": {
+    "particleContainmentFailure": "maximum one-voxel particle exterior fraction > 0.01",
+    "particleCountDriftSignal": "otherwise, maximum absolute ALIVE count drift relative to frame 1 > 0.15",
+    "surfaceReconstructionSuspected": "otherwise, particle containment and ALIVE count proxy are stable while retained attempt-56 Mesh volume failed",
+    "particleCountClaim": "constant-per-particle mass proxy only, not exact geometric liquid volume"
+  },
+  "requiredMeasurementsEveryFrame": [
+    "total and ALIVE particle count plus all alive-state counts",
+    "ALIVE count ratio/drift and constant-mass particle-volume proxy",
+    "cup-local centroid and bounds",
+    "radial, below-floor, above-rim and union one-voxel containment",
+    "maximum and mean RNA particle speed",
+    "exact evaluated cup transform against C5F96"
+  ],
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 2147483648,
+    "maximumWorkspaceBytes": 2147483648,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-moving-liquid-data-diagnostic-scene.py",
+      "sha256": "df990504acf9ea928b4bd56425725b2fd66dc88a96ee4e9877d7b79f9b5cc19b"
+    },
+    {
+      "uri": "scripts/run-rc6-moving-liquid-data-diagnostic.py",
+      "sha256": "26b94647a5fb6c96b6bb1183098529f6129bec4ac755aa1ca4cec27f96585be3"
+    },
+    {
+      "uri": "scripts/audit-rc6-moving-liquid-data-diagnostic.py",
+      "sha256": "7157e7f0814bcee1c77a90f4f814e4b86fe75fe35dddd3da4f6178570f291f5c"
+    }
+  ],
+  "stopRule": "Run exactly once in attempt-57 roots. Retain any classification or harness failure. Do not change attempt-56 physics, tune Mesh, begin impact or render after observing the result.",
+  "claimCeiling": "Data-only diagnostic attribution. It cannot establish exact particle mass, a corrected moving liquid, full tip, spill, impact, persistence, render appearance or film quality.",
+  "specHash": "fd85d52cfc11ba39bca7ca1af872bb3658dc05e59ae532a1ba15320a269c2863"
+}
