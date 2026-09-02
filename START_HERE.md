@@ -1039,8 +1039,16 @@ radius. Next perform one zero-bake copied-Data comparison against attempt-63/64
 before selecting a different simulation property. That attempt-66 comparison
 is now preregistered at
 `specs/ai-native-studio-rc6-moving-liquid-particle-radius-data-comparison.v0.77.json`,
-self hash `f719e46b…`; both fresh roots remain absent. Do not render or begin real
-impact.
+self hash `f719e46b…`. Attempt-66 is now `PASS_DIAGNOSTIC` with a 19/19
+independent audit: radius-1.8 occupied support fell 28.91%, 2.82 points worse
+than radius 1.6, even though Mesh improved 4.65 points. Current Data/Mesh curves
+correlate at `r=0.95531`, but baseline-relative changes only at `r=0.47650`.
+Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-radius-data-comparison-attempt-66`;
+receipt/audit self hashes are `04b70991…` / `aed82a88…`. Occupied support is
+not mass, particle-radius tuning is closed, and the next design must examine a
+distinct simulation-density variable rather than Mesh inflation. Do not render
+or begin real impact.
 
 ## Public routes
 

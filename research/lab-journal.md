@@ -7162,3 +7162,16 @@ unchanged 15% temporal gate still failed; all other 16 checks passed, including
 exact C5F96 motion, one positive manifold body and zero cup escape. No second
 radius value is allowed. Next compare the immutable Data cache with attempt-63
 before selecting a different simulation property.
+
+## J-615 · Particle-radius Mesh improvement is not occupied-support retention
+
+Date: 2026-09-02 · Type: DIAGNOSTIC PASS · Engine-Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+Attempt-66 copied the exact attempt-65 cache and passed its independent 19/19
+audit. Particle-radius 1.8 Data support fell 1,235→878 (`-28.91%`), 2.82
+percentage points worse than radius 1.6, while Mesh temporal loss had improved
+4.65 points. Current curves correlate at `r=0.95531`, but their changes versus
+baseline correlate only `r=0.47650`. Occupied VDB support is therefore not a
+mass measure and cannot explain the radius response alone. Close radius tuning;
+next inspect and preregister a distinct simulation-density variable rather than
+inflating the Mesh surface.
