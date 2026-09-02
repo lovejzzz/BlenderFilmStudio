@@ -7280,3 +7280,16 @@ screen changing only striker `driveEndFrame`, measure actual cup-surface
 displacement and derive required effector subframes over a 48-frame window.
 Candidate values 8/10/12 remain unfrozen design inputs. Attempt-71 has not
 started and no root exists.
+
+## J-624 · Real impact is now a speed-and-sampling question
+
+Date: 2026-09-02 · Type: PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+Attempt-71 freezes one exact-scene Bullet-only screen with striker
+`driveEndFrame` 8/10/12 as its sole physical variable. It rejects the old
+contact-by-frame-12 bias and instead reserves twelve response frames, requires
+45° by frame 48, keeps the exact cup inside the accepted Preview-96 domain and
+derives fluid-effector subframes from every cup mesh vertex divided by the
+`0.009375 m` voxel. The ceiling is eight subframes. Three isolated Blender
+starts and three Bullet bakes are allowed; liquid, render and save counts stay
+zero. Roots remain absent until the six-path preregistration commit is frozen.
