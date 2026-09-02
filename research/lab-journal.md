@@ -7499,3 +7499,13 @@ mm/frame requires ten Preview subframes and the cup exits the accepted domain.
 The contact-moment mechanism is validated but its amplitude is not. Keep the
 0.30 m passive run and select only a 40 mm rise next; that predicts the frozen
 minimum 380 mm contact center without changing speed, friction or domain.
+
+## J-643 · Reduce ramp rise to the minimum raised-contact value
+
+Date: 2026-09-02 · Type: BRACKETED CAUSAL PREREGISTRATION · Blender starts / Bullet bakes / liquid bakes / renders: 0 / 0 / 0 / 0
+
+No-ramp and 60 mm-rise evidence bracket weak 2.67° response versus a real 90°
+tip that is too fast and leaves the domain. C10 holds the 0.30 m passive run
+and every I09 physical field fixed, changing only rise 60→40 mm. The 7.59°
+ramp predicts ball-center z=0.38, exactly the frozen minimum raised-contact
+gate. One Bullet-only run may pass or fail; no liquid follows a failure.
