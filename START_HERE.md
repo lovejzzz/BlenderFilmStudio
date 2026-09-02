@@ -999,11 +999,16 @@ than the 2.5-cell baseline, and still correlated with Mesh at `r=0.95525`.
 Data crossed the 15% loss line by frame 12 at only 6.84° tilt, before Mesh did.
 Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-distance-data-occupancy-attempt-60`;
-receipt/audit self hashes are `fcae7479…` / `b4b55584…`. Attempt-61 is now
-preregistered to change exactly one different variable: moving-effector
-subframes 1→2 while retaining 2.0-cell distance and every other setting and
-threshold. Its fresh roots remain absent. Run only that frozen attempt; do not
-render or begin real impact.
+receipt/audit self hashes are `fcae7479…` / `b4b55584…`. Attempt-61 then changed
+only moving-effector subframes 1→2 and remains a physical `FAIL`, independently
+audited 16/16. Temporal loss slightly worsened from 23.03% to 23.84%, source
+error worsened from 24.00% to 24.80%, and Data cost rose 14.63%; every other
+physical check still passed. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-subframes-attempt-61`;
+receipt/audit self hashes are `57e3ade8…` / `ebf39452…`. Do not try subframes 3.
+Next preregister one zero-bake copied-cache Data comparison before selecting
+solver minimum timesteps as a different physical variable. Do not render or
+begin real impact.
 
 ## Public routes
 

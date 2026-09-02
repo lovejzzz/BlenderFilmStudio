@@ -7098,3 +7098,16 @@ only 6.84° cup tilt, four frames before Mesh. The residual defect is therefore
 in or before Data, not a Mesh-only problem. The next single variable may be
 effector temporal subframes 1→2; every other physical and threshold field must
 stay exact.
+
+## J-610 · Extra effector sample costs more and slightly worsens conservation
+
+Date: 2026-09-02 · Type: PHYSICAL GATE FAILURE · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+Attempt-61 changed only moving-cup effector subframes from 1 to 2 and passed
+its 16/16 independent audit. Temporal Mesh loss worsened from 23.03% to 23.84%
+and source error from 24.00% to 24.80%; source still passed its 25% gate, but
+temporal conservation again failed. Data time rose 14.63% from 251.55 to
+288.35 seconds. Exact solver motion, coherent topology and full containment
+remained intact. Do not try subframes 3. Next run one zero-bake copied-cache
+comparison against attempt-59 before selecting solver minimum timesteps as a
+different physical variable.
