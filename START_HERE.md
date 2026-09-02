@@ -1142,6 +1142,8 @@ cost (96.84→34.66 mm/frame; 11→4 subframes), but the same I09 impact now til
 only 2.67°. The old 90° response was therefore collision-scale artifact.
 Preserve 2 mm as the corrected baseline and redesign a solver-owned contact
 moment/impulse; do not restore 40 mm, author a cup outcome or start liquid.
+For a Codex restart, continue from
+`research/2026-09-02-codex-restart-checkpoint-after-rc6-attempt-77.md`.
 
 ## Public routes
 
