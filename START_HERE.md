@@ -1377,6 +1377,17 @@ FLIP and deletion-based controls are rejected as confounded or poorly targeted.
 C26 must change only that flag, preserve APIC, every accepted/closed input and
 all27 gates, run once in fresh bounded roots and remain zero-render. See
 `research/2026-09-02-rc6-real-impact-water-diffusion-c25-source-inspection.md`.
+C26 attempt-104 is now an immutable physical FAIL23/27. Enabling only the
+bundled Water diffusion worsened source error47.22%→84.51%, temporal drift
+33.45%→67.28%, bodies37→38 and components37→38. Temporal failure advanced to
+frame21 even though significant spill delayed to frame34, so a less splashy
+appearance is not conservation. The original independent audit is19/20 solely
+because producer `exact C18, while` and frozen spec `exact C18 while` differ by
+one comma; its other19 checks and all27 physical recomputations pass. Preserve
+both roots. Next freeze one zero-Blender C1 audit-only normalization, then run
+one copied-cache C27 comparison before selecting another Data property. Do not
+rerun C26, scan viscosity/surface tension or render. See
+`research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-attempt-104-result.md`.
 
 ## Public routes
 

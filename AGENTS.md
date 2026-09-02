@@ -198,6 +198,17 @@ particle initial sampling, FLIP, hard particle deletion and all closed scalars
 are also rejected. C26 must preserve every other C18 input and all27 physical
 gates, run once in fresh bounded roots and remain zero-render. See
 `research/2026-09-02-rc6-real-impact-water-diffusion-c25-source-inspection.md`.
+C26 attempt-104 completed all36 Data/Mesh frames and is an immutable physical
+FAIL23/27. Water-preset diffusion worsened source error47.22%→84.51%, temporal
+drift33.45%→67.28%, bodies37→38 and components37→38; temporal failure advanced
+frame25→21 while significant spill delayed24→34. Close diffusion; later-looking
+spill is not conservation. The original independent audit is retained19/20
+solely because producer `exact C18, while` differs from frozen spec
+`exact C18 while` by one comma; all physical/process/cache/resource checks pass.
+Next freeze one zero-Blender C1 audit-only normalization proving that sole
+difference and both attempt-104 roots unchanged, then require a copied-cache
+C27 comparison. Do not rerun C26, scan viscosity/surface tension or render. See
+`research/2026-09-02-rc6-real-impact-liquid-water-diffusion-c26-attempt-104-result.md`.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
