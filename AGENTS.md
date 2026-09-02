@@ -166,6 +166,14 @@ Mantaflow deletes over-maximum particles only away from the protected surface,
 so the hypothesis may pass, regress or have no effect. C23 must preserve all
 other C18 settings, exact R40 and27 gates, run once and remain zero-render. Do
 not stack radius1.6 or scan another maximum/minimum.
+C23 attempt-101 completed all36 Data/Mesh frames and is an independently audited
+physical FAIL23/27. Lowering `particle_maximum 16→12` worsened source error
+47.22%→79.78%, temporal drift33.45%→62.87%, advanced both conservation
+failures frame25→24 and positive-body failure frame36→25, while maximum bodies
+changed only37→36, components worsened37→38 and cup intrusion rose
+0.749%→0.994%. Close this scalar. Next preregister one zero-Blender C24 copied-
+cache C23-versus-C18 onset/amplitude comparison; no new physical value or render
+may precede it.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

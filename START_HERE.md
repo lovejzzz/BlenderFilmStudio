@@ -1344,6 +1344,15 @@ falsifiable and may have no effect. C23 must change only that value, preserve
 radius1.8 and every other C18 input/gate, retain all results and remain
 zero-render. Do not test another maximum/minimum. See
 `research/2026-09-02-rc6-real-impact-particle-maximum-c22-source-inspection.md`.
+C23 attempt-101 is a retained physical FAIL23/27 with an independent20/20 audit.
+The single `particle_maximum 16→12` change worsened source error
+47.22%→79.78%, temporal drift33.45%→62.87%, moved conservation failure
+frame25→24 and positive-body failure frame36→25, while maximum bodies changed
+only37→36, components worsened37→38 and cup intrusion rose0.749%→0.994%.
+Close this scalar. Next preregister one zero-Blender copied-cache C24 comparison
+of C23 versus C18 Data/Mesh onset and amplitude before choosing another physical
+degree of freedom. Rendering remains forbidden. See
+`research/2026-09-02-rc6-real-impact-liquid-particle-maximum-c23-attempt-101-result.md`.
 
 ## Public routes
 
