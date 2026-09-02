@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6SlowTipBulletScreenC1.v0.56",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_48_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "8a7c64d6378f743ab3d0b877cbe4025976403be8",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe reversible validation-only Blender work under standing owner autonomy"
+  },
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-slow-tip-bullet-screen.v0.55.json",
+    "specHash": "ace1fde21e6aaed0966b2e2e051df14970a23af1e3f36741079cae3114dfcbbf"
+  },
+  "retainedAttempt47": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-attempt-47",
+    "verdict": "FAIL_BULLET_SCREEN",
+    "receiptHash": "ef2987187a59b25bcff494e78445a911c962d6a871020fd5fb6b0a3b88de5a64",
+    "receiptFileSha256": "a66f4f3ac9a6d77ce537b3150f1fff4aa22122d33ce58aba5d933e7db740c80a",
+    "auditHash": "d195987858e1ec0c41edbe02d1b0464d9c06e4fac72a7974dc9e04a0e363f8e3",
+    "auditFileSha256": "c9ad1f6bba0c55c25354a36964464e87cc26c5d10b6c2b794aabf6b2bf01f3ac",
+    "immutable": true
+  },
+  "physicalQuestion": "Can a dedicated slow kinematic contact body push the upper half of the unanimated tumbler directly so Bullet owns a continuous at-least-45-degree tip, while exact evaluated cup-surface samples remain on the floor, inside a bounded Preview domain and below ten derived moving-effector subframes?",
+  "corrections": {
+    "causalFixture": "replace the too-weak slow striker-to-ball-to-cup chain with the same visible kinematic striker contacting the cup above its center of mass; the ball remains unanimated and is made static for this isolated control",
+    "surfaceMeasurement": "replace transformed object-bound-box corners with every evaluated cup mesh vertex for surface displacement, swept bounds, floor and domain tests",
+    "unchangedThresholds": [
+      "contact by frame 50",
+      "minimum 45 degree Bullet-owned response",
+      "minimum four frames from 5 to 45 degrees",
+      "minimum real cup-surface z -0.005 m",
+      "one Preview voxel domain margin",
+      "maximum ten derived effector subframes",
+      "zero cup and ball animation channels"
+    ]
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-slow-tip-bullet-screen-c1-attempt-48",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c1-attempt-48"
+  },
+  "cells": [
+    {"id": "C1D16", "driveEndFrame": 16},
+    {"id": "C1D20", "driveEndFrame": 20},
+    {"id": "C1D24", "driveEndFrame": 24},
+    {"id": "C1D28", "driveEndFrame": 28}
+  ],
+  "frozenConfiguration": {
+    "timelineFramesInclusive": [1, 64],
+    "fps": 24,
+    "strikerStartMeters": [-0.05, 0.0, 0.34],
+    "strikerDriveEndMeters": [0.24, 0.0, 0.34],
+    "strikerDriveDistanceMeters": 0.29,
+    "strikerDimensionsMeters": [0.1, 0.3, 0.24],
+    "bulletSubstepsPerFrame": 20,
+    "bulletSolverIterations": 80,
+    "candidatePreviewResolution": 96,
+    "candidateDomainCenterMeters": [0.45, 0.0, 0.26],
+    "candidateDomainDimensionsMeters": [0.9, 0.5, 0.56],
+    "candidateBaseVoxelMeters": 0.009375,
+    "surfaceSampler": "all cup mesh vertices transformed by the evaluated world matrix at every frame"
+  },
+  "machineAcceptance": {
+    "exactAcceptedSource": true,
+    "bulletOnlyNoFluidModifiers": true,
+    "contactByFrameMaximum": 50,
+    "minimumPeakCupTiltDegrees": 45.0,
+    "minimumFiveToFortyFiveDegreeSpanFrames": 4,
+    "minimumCupSurfaceWorldZ": -0.005,
+    "candidateDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 10,
+    "cupAnimationChannels": 0,
+    "ballAnimationChannels": 0,
+    "onlyAuthoredActuator": "PHYS_VISIBLE_STRIKER",
+    "selectionRule": "select the greatest driveEndFrame among cells passing every frozen check"
+  },
+  "processCeilings": {
+    "blenderStarts": 4,
+    "bulletBakes": 4,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 268435456,
+    "maximumWorkspaceBytes": 268435456,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c1-scene.py",
+      "sha256": "98534fa00da70d999c58af4037b7223daf1cf4db9805288816ac57b1e76d5d48"
+    },
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c1.py",
+      "sha256": "03c37d7310797a6c5915e8c9c03fc2149609236d73de0269d24c43b537d96380"
+    },
+    {
+      "uri": "scripts/audit-rc6-slow-tip-bullet-screen-c1.py",
+      "sha256": "ffd6b2de4ab376a1f594a760e3fd6ac3f1960c606a311b4d8af86b531c811b28"
+    }
+  ],
+  "stopRule": "Run the four exact C1 cells once in unique fresh attempt-48 roots. Retain failure. Do not run Mantaflow, render, save a blend, change the 45-degree/floor/domain/subframe thresholds or add a candidate after observing results.",
+  "claimCeiling": "One corrected Bullet-only direct-contact slow-tip screen with exact cup-surface motion measurements. A PASS selects a trajectory for a separately preregistered moving-liquid gate only; it does not prove liquid, persistence, render or film quality.",
+  "specHash": "611bae4f8346d5b40f4cd42d6571a17520754e2d0cd540b4bb2378fed16e7f30"
+}
