@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "bfs.rc6LiquidContainmentAxisSpec.v0.32",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-CONTAINMENT-AXIS-2026-09-01-ATTEMPT-32",
+  "purpose": "Classify the frozen radius-9.0 static liquid containment failure into radial-wall, below-floor and above-rim causes without baking, saving or mutating the retained candidate.",
+  "toolFreezeParent": "66a29aa40db5088dbf491a7904b430286ecbfe92",
+  "roots": {
+    "sourceWork": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-concavity-attempt-31",
+    "sourceEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-mesh-concavity-attempt-31",
+    "sourceCandidate": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-concavity-attempt-31/concavity-upper-3p50",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-containment-axis-attempt-32",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-containment-axis-attempt-32"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceWorkManifestFileSha256": "39c47904ac2f31e6e0e92bdef38231a8248b51c1a8fc0442d0cbfaf0db2db05d",
+    "sourceWorkManifestHash": "8adcb0d87c750a8eaadc3420d9583cc532e2f434f2401e89e1b9898a76b3c349",
+    "sourceCandidateManifestHash": "f1357fc0b6383d1b5dd689c80dbce2f89e9c625b8dab00f5db2eb464e444abd8",
+    "sourceAuditFileSha256": "699ca9002878473f7fd1bb740c2270a252d2edb8a02da7cb9d398d65bf9b78f5",
+    "sourceAuditHash": "c6e3ef33a680d760e7afc1d305e3451ce8ef013429174f76a6756156378bcbf8",
+    "sourceAuditChecks": "21/21",
+    "sourceResultHash": "7ecb421221edbb3dc367e347b9038381ab4043077833d0443c76c34f8203d6da"
+  },
+  "frozenCandidate": {
+    "cellId": "concavity-upper-3p50",
+    "frameStart": 1,
+    "frameEnd": 7,
+    "resolutionMax": 192,
+    "particleRadius": 1.6,
+    "meshParticleRadius": 9.0,
+    "meshConcaveLower": 0.4,
+    "meshConcaveUpper": 3.5,
+    "meshSmoothenPos": 1,
+    "meshSmoothenNeg": 1,
+    "maximumOutsideUnionFraction": 0.07675232
+  },
+  "measurement": {
+    "baseVoxelMeters": 0.0026041667,
+    "cupInnerRadiusMeters": 0.09,
+    "cupInteriorBottomLocalZMeters": -0.16,
+    "cupInteriorTopLocalZMeters": 0.22,
+    "radialLimitMeters": 0.0926041667,
+    "bottomLimitLocalZMeters": -0.1626041667,
+    "topLimitLocalZMeters": 0.2226041667,
+    "axes": ["radial", "belowFloor", "aboveRim"],
+    "exclusiveCombinations": ["inside", "radialOnly", "belowOnly", "aboveOnly", "radialAndBelow", "radialAndAbove", "belowAndAbove", "allThree"],
+    "componentBinding": "Every axis count is repeated per connected signed-volume component."
+  },
+  "diagnosticRule": "At the frame with maximum outside-union fraction, report all three axis counts and the largest count as dominantAxis. Dominance explains the measured vertex classification only; it does not by itself distinguish particles from reconstructed isosurface.",
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 67108864,
+    "evidenceBytes": 16777216,
+    "projectedWriteBytes": 83886080,
+    "minimumFreeBytesBefore": 128849018880,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on non-fresh roots, source or copied-candidate manifest drift, symlink, cache-root or baked-flag mismatch, frozen setting mismatch, process/log/result failure, any bake/save/render/network/remote-write count, banned media or resource failure. Never open the retained candidate directly in Blender and never modify either source or copied cache.",
+  "claimCeiling": "One zero-bake, zero-save, seven-frame per-axis vertex-containment diagnosis on a complete fresh copy of the failed resolution-192 control. It does not prove particle positions, obstacle penetration, a physical fix, tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/inspect-rc6-liquid-containment-axis-scene.py": "409f6669f186b769a27dc076983a97ccade1930742b0c7dbb4a4720dab982b21",
+    "scripts/run-rc6-liquid-containment-axis-diagnostic.py": "572139cb52b7833c37df21aeacc2de0eb0536313e93f1731f754ce1004df4ced",
+    "scripts/audit-rc6-liquid-containment-axis-diagnostic.py": "4ba9db968898102e99bf7726ca9576d924b41ac4572d07056db067697733ffcd"
+  },
+  "specHash": "489a5cf7824674315f38ad2f36fca7ac47e574d7c0ca55d995e96f004256aa30"
+}
