@@ -7316,3 +7316,17 @@ the spec's hand-expanded `7fdd49332e40…` was not Git's actual
 zero. C2 uses the actual `e871f3c2…` parent of its future six-path commit,
 versioned adapters and fresh attempt-73 roots. All I08/I10/I12 physical inputs,
 acceptance thresholds and resource ceilings remain byte-equivalent to C1.
+
+## J-627 · Real impact has a narrow nonlinear speed boundary
+
+Date: 2026-09-02 · Type: RETAINED PHYSICAL FAILURE · Blender starts / Bullet bakes / liquid bakes / renders: 3 / 3 / 0 / 0
+
+Attempt-73 completed I08/I10/I12 on the exact accepted scene. I08 contacted at
+17, reached 90.15°, but moved the cup surface 96.84 mm/frame, requiring 11
+subframes and leaving the accepted domain. I10/I12 contacted at 21/25 and cut
+motion to 42.26/37.22 mm (5/4 subframes), but peaked at only 9.97°/10.14°.
+No cell passed. This brackets a nonlinear tipping boundary between drive end 8
+and 10 and selects only midpoint 9 as the next physical question. The retained
+audit is 22/23 solely because decimal domain constants were compared exactly to
+Blender float32 values; all other evidence checks pass. Run a bounded audit-only
+C3 before preregistering I09; never alter or rerun attempt-73.

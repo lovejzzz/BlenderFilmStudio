@@ -1105,6 +1105,17 @@ voxel. After restart, preregister a Bullet-only 48-frame speed screen that
 changes only striker `driveEndFrame`; values 8/10/12 are candidates, not yet a
 frozen experiment. Measure cup-surface displacement and derive effector
 subframes before any liquid bake. No attempt-71 root or Blender start exists.
+The initial v0.82 and C1 v0.83 runners are retained pre-root failures with zero
+Blender starts: JavaScript/Python `0.0` canonicalization first differed, then a
+short OID was expanded to the wrong full parent. C2 attempt-73 completed the
+three exact Bullet cells with no liquid or render. It is a physical `FAIL`:
+I08 tips to 90.15° but needs 11 subframes and leaves the domain; I10/I12 need
+only 5/4 subframes but peak near 10°. The tipping boundary is therefore between
+drive-end 8 and 10. Its first independent audit is retained at 22/23 solely
+because float32 domain values were compared with exact decimal equality. Next
+run an audit-only C3 with `1e-6` representation tolerance on the immutable root,
+then preregister only midpoint `driveEndFrame=9`; do not rerun attempt-73 or
+start liquid.
 
 ## Public routes
 
