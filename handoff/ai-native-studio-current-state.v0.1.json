@@ -2927,14 +2927,25 @@
       "physicalVerdictUnchanged": "FAIL_REAL_IMPACT_BULLET_TRAJECTORY",
       "next": "inspect cup collision margin and visible/collision congruence"
     },
+    "realImpactCupMarginAttempt77": {
+      "status": "RETAINED_PHYSICAL_FAIL_AUDIT_23_OF_23_PASS",
+      "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-real-impact-cup-margin-c6-attempt-77",
+      "resultHash": "ffa510b862bb8970226a75732d36f4eb91df1002536be49c26484c53c97c5a94",
+      "receiptHash": "e04832b11c9c3d030f2c8bb908d4da9e45fc094266355b223aa52b798ab77816",
+      "auditHash": "5ae5347692b811f588426558054afc768442574576d8845b9a839187e01dd576",
+      "singleChange": "cup Bullet cylinder margin implicit 40 mm to explicit 2 mm",
+      "improvements": "floor penetration 16.57 to 0.15 mm, surface step 96.84 to 34.66 mm, subframes 11 to 4, domain containment PASS",
+      "failure": "peak tilt 90.00 to 2.67 degrees",
+      "interpretation": "old dramatic tip depended on scale-incongruent collision envelope; retain 2 mm and redesign cause"
+    },
     "next": {
       "gate": "RC6-REAL-IMPACT-BULLET-TRAJECTORY",
-      "status": "ATTEMPT_75_AUDIT_CLOSED_COLLISION_CONGRUENCE_INSPECTION_NEXT",
+      "status": "COLLISION_CONGRUENCE_CORRECTED_CAUSE_REDESIGN_NEXT",
       "mustBindAcceptedMovingLiquid": "attempt-70 particle radius 1.8, particle band width 4.0, fractions distance 0.25 and all accepted geometry/Mesh settings",
-      "initialStrategy": "inspect cup Bullet collision margin and visible/collision congruence read-only; use that cause to select exactly one new physical or tier/domain degree of freedom",
+      "initialStrategy": "preserve explicit 2 mm cup margin and inspect exact collision/contact geometry to select one solver-owned moment-arm or impulse change; never restore the 40 mm artifact",
       "readOnlyInventory": "retained P02 contacts at frame 8 and reaches about 90 degrees by frame 15 but translates the cup roughly 7.5-10 cm per frame; P03/P05 contact at frame 13 and P06 at frame 17, showing the old contact-by-frame-12 gate was not a liquid-fidelity criterion",
       "restartCheckpoint": "research/2026-09-02-rc6-real-impact-trajectory-restart-checkpoint.md",
-      "executionStatus": "I09_PHYSICAL_FAIL_C5_AUDIT_13_OF_13_PASS_ZERO_LIQUID_RENDER_SAVE_NETWORK",
+      "executionStatus": "M02_PHYSICAL_FAIL_AUDIT_23_OF_23_PASS_ZERO_LIQUID_RENDER_SAVE_NETWORK",
       "mustMeasure": [
         "derived ball-to-cup contact frame and continuous pre/post-contact transforms",
         "solver-owned cup tilt and floor/spill opportunity window",
@@ -2956,6 +2967,8 @@
     "attempt75ReceiptHash": "767e23e54f0fe177a3ea198c088ec6859eb1bdaff830e6b721f4319e8a256f52",
     "attempt75AuditHash": "4ea0cc6bd5281768b78760a41f2b9065137fbd9b9293355c9a0ff424bb39f800",
     "attempt76AuditHash": "1939967b2f7dc4936a8cae388d2c78b8d7982a48e3d22299dfaa011c1761bd9e",
+    "attempt77ReceiptHash": "e04832b11c9c3d030f2c8bb908d4da9e45fc094266355b223aa52b798ab77816",
+    "attempt77AuditHash": "5ae5347692b811f588426558054afc768442574576d8845b9a839187e01dd576",
     "restartCheckpoint": "research/2026-09-02-rc6-real-impact-trajectory-restart-checkpoint.md",
     "attempt70Preregistration": "research/2026-09-02-rc6-moving-liquid-particle-band-width-preregistration.md",
     "attempt70SourceInspection": "research/2026-09-02-rc6-moving-liquid-particle-band-width-source-inspection.md",

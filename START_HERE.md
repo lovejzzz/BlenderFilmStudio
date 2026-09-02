@@ -1135,6 +1135,13 @@ attempt-75 remained byte-exact at manifest `6a9261f1…`. Striker-speed tuning i
 closed. Next inspect the exact cup Bullet collision margin and visible/collision
 congruence read-only; do not change physics or expand the fluid domain until
 that cause is bound.
+C6 attempt-77 changed only the cup's implicit 40 mm Bullet margin to the
+product's explicit 2 mm preset and passed an independent 23/23 audit. It fixed
+visible floor penetration (16.57→0.15 mm), domain containment and sampling
+cost (96.84→34.66 mm/frame; 11→4 subframes), but the same I09 impact now tilts
+only 2.67°. The old 90° response was therefore collision-scale artifact.
+Preserve 2 mm as the corrected baseline and redesign a solver-owned contact
+moment/impulse; do not restore 40 mm, author a cup outcome or start liquid.
 
 ## Public routes
 

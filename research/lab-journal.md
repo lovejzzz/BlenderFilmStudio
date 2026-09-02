@@ -7408,3 +7408,15 @@ of the 150 mm cup radius and 4.27 Preview voxels; the product's reusable causal
 physics helper instead uses an explicit 2 mm. Attempt-77 preserves exact I09
 and changes only the cup margin from implicit 40 mm to explicit 2 mm. The same
 floor, domain, 45° and eight-subframe gates remain; no liquid or render runs.
+
+## J-635 · Congruent collision removes the dramatic but false tip
+
+Date: 2026-09-02 · Type: PHYSICAL FAILURE / REUSABLE RULE · Blender starts / Bullet bakes / liquid bakes / renders: 1 / 1 / 0 / 0
+
+Attempt-77 changed only the cup margin from implicit 40 mm to explicit 2 mm and
+passed its 23/23 independent audit. Floor penetration improved 16.57→0.15 mm,
+surface motion 96.84→34.66 mm and derived subframes 11→4; the exact cup stayed
+in-domain. But peak tilt collapsed 90.00°→2.67°. The previous apparent success
+was collision-scale artifact, not a causal trajectory worth preserving. Keep
+the 2 mm congruent baseline and redesign contact moment/impulse without outcome
+keys; never restore the oversized margin for drama.
