@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "bfs.rc6LiquidContainmentAxisAuditCorrectionSpec.v0.33",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-CONTAINMENT-AXIS-2026-09-01-ATTEMPT-32-AUDIT-C1",
+  "purpose": "Re-audit the immutable attempt-32 execution without another Blender start after correcting only the expected float32 cup-radius histogram and the already-frozen effector surface distance.",
+  "toolFreezeParent": "84f3652f03e5228c0e8e8e2e00dcd0016028baf1",
+  "roots": {
+    "sourceWork": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-concavity-attempt-31",
+    "sourceEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-mesh-concavity-attempt-31",
+    "sourceCandidate": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-mesh-concavity-attempt-31/concavity-upper-3p50",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-01-containment-axis-attempt-32",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-containment-axis-attempt-32"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceWorkManifestFileSha256": "39c47904ac2f31e6e0e92bdef38231a8248b51c1a8fc0442d0cbfaf0db2db05d",
+    "sourceWorkManifestHash": "8adcb0d87c750a8eaadc3420d9583cc532e2f434f2401e89e1b9898a76b3c349",
+    "sourceCandidateManifestHash": "f1357fc0b6383d1b5dd689c80dbce2f89e9c625b8dab00f5db2eb464e444abd8",
+    "sourceAuditFileSha256": "699ca9002878473f7fd1bb740c2270a252d2edb8a02da7cb9d398d65bf9b78f5",
+    "sourceAuditHash": "c6e3ef33a680d760e7afc1d305e3451ce8ef013429174f76a6756156378bcbf8"
+  },
+  "auditCorrection": {
+    "parentCommit": "84f3652f03e5228c0e8e8e2e00dcd0016028baf1",
+    "baseAuditPath": "experiments/physical-richness/RC6-2026-09-01-containment-axis-attempt-32/independent-audit.json",
+    "baseAuditFileSha256": "88132a84b98de517039aeae4c85175823da16c099377eb197bf4584d506eba5e",
+    "baseAuditHash": "12dbf3888c40f6125ea71f2d2bc24783cffe94771ab3d08a8e67f06c68986eba",
+    "baseAuditStatus": "FAIL 23/24",
+    "onlyFailedCheck": "configurationExact",
+    "corrections": [
+      "Bind the measured float32 outer-radius histogram as 8 vertices at 0.14999999, 52 at 0.15000000 and 4 at 0.15000001 on each outer ring.",
+      "Bind cup effector surface_distance=1.5, which was frozen by the F6 source adapter and is recorded in the immutable blend."
+    ],
+    "blenderReruns": 0,
+    "resultChanges": 0,
+    "receiptChanges": 0,
+    "scientificThresholdChanges": 0
+  },
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 67108864,
+    "evidenceBytes": 16777216,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "claimCeiling": "One zero-bake, zero-save, seven-frame per-axis vertex-containment diagnosis on a complete fresh copy of the failed resolution-192 control, plus an audit-only expected-configuration correction. It does not prove particle positions, obstacle penetration, a physical fix, tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/inspect-rc6-liquid-containment-axis-scene.py": "409f6669f186b769a27dc076983a97ccade1930742b0c7dbb4a4720dab982b21",
+    "scripts/run-rc6-liquid-containment-axis-diagnostic.py": "572139cb52b7833c37df21aeacc2de0eb0536313e93f1731f754ce1004df4ced",
+    "scripts/audit-rc6-liquid-containment-axis-diagnostic-c1.py": "35d8e211d44dca5aef27e4fb9238c1a02e523e1db545b80fcd663cea402ed7c2"
+  },
+  "specHash": "ea9e9d72227a8945319c7529247dea53639042f38e41152ef7733bdb88d8ff2a"
+}
