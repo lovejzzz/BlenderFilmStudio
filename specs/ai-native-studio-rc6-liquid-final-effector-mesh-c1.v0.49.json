@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "bfs.rc6LiquidFinalEffectorMeshC1Spec.v0.49",
+  "status": "PREREGISTERED_BEFORE_C1_PROCESS",
+  "experimentId": "RC6-LIQUID-FINAL-EFFECTOR-MESH-C1-2026-09-02-ATTEMPT-45",
+  "purpose": "Correct only the missing persisted baked-Data state exposed by retained attempt-44, then prove cross-process Mesh-only reconstruction from byte-exact copied Data.",
+  "preregistrationParentResearchCommit": "6a1719593319388f699817e1d935430d2f4d48bb",
+  "retainedFailure": {
+    "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-final-effector-mesh-attempt-44",
+    "evidenceRootManifestHash": "ee25a750b8f047d7344a5c0c6548acd23b496e7c45e0490fd84c37b040473a35",
+    "workRootManifestHash": "92a11306b195baaea647551868949459e07bd083462fa7532c3abae8f09c35ca",
+    "processHash": "cd45f418c7f783534e84da1a6e953a7a65f8af8984d79b062a7f94f4e4c7d797",
+    "stderrFileSha256": "9ee8397a4d2cc13070096289882394e85d1c8af5742a503cfc7edfb4f29821bc",
+    "classification": "FAIL_PREMESH_CACHE_STATE",
+    "finding": "The exact copied Data roster was admitted, but an ordinary source blend retained has_cache_baked_data=false and Blender removed the copied cache at process teardown before any Mesh bake."
+  },
+  "sourceBasis": {
+    "rnaPath": "source/blender/makesrna/intern/rna_fluid.cc",
+    "rnaFinding": "has_cache_baked_data maps directly to the FLUID_DOMAIN_BAKED_DATA bit in FluidDomainSettings.cache_flag and is writable through RNA.",
+    "editorPath": "source/blender/editors/physics/physics_fluid.cc",
+    "editorFinding": "A successful bake_data end job sets the same FLUID_DOMAIN_BAKED_DATA bit; this correction adopts an already verified complete cache without invoking bake_data."
+  },
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "allowed": "Two fresh local-only Blender processes: one exact-state cache adoption and save, then one reopen, Mesh bake and save; zero Data bake/render/network/engine remote write.",
+    "specificConfirmationRequired": false
+  },
+  "roots": {
+    "retainedWork": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-data-attempt-42",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c1-attempt-45",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-02-final-effector-mesh-c1-attempt-45"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "retainedDataManifestHash": "8d809e9602083bf07bdd856a73abb1a969f154847dec124179095049f5aa2c17",
+    "retainedWorkManifestFileSha256": "967d074d6abb9c83287f9c29c76ca7238999134921de15d1b092284c913ece52",
+    "retainedWorkManifestHash": "10b36a7c93684e3a6cbf6637971ead184b3961e3f6ec39c49766d2b4019fbf8c",
+    "retainedReceiptHash": "55121a99aa6066eaa625586a77aeb241d727415090c89b02882bd2defb602d8a",
+    "retainedAuditHash": "80693f16740ba776635305892924b34d84c35d1f3316b9f8ac0351e742f68158"
+  },
+  "processes": [
+    {
+      "index": 1,
+      "role": "ADOPT_VERIFIED_DATA_STATE",
+      "inputBlend": "source-state.blend",
+      "actions": "Reconstruct exact attempt-42 scene state before cache binding; verify exact 14-file Data manifest; require initial has_cache_baked_data=false; set only has_cache_baked_data=true; verify readback and unchanged Data; save data-adopted-state.blend with relative cache path."
+    },
+    {
+      "index": 2,
+      "role": "MESH_ONLY_REOPEN",
+      "inputBlend": "data-adopted-state.blend",
+      "actions": "Require persisted has_cache_baked_data=true and exact scene/Data identities; bake Mesh once with radius 9.0 and upper concavity 3.5; verify unchanged Data and exact seven Mesh files; measure and save mesh-reconstructed-state.blend."
+    }
+  ],
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.005,
+    "maximumNonManifoldEdgeCount": 0,
+    "requiredPositiveWaterBodiesPerFrame": 1,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.01,
+    "exactDataFilesBeforeAndAfter": 14,
+    "exactMeshFilesAfter": 7
+  },
+  "resourceCeilings": {
+    "blenderStarts": 2,
+    "cacheStateAdoptions": 1,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 1,
+    "blendSaves": 2,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeBytesBefore": 137438953472,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on retained failure/input/Data drift, non-fresh roots, dirty research tree, scene-state mismatch, initial baked-Data flag unexpectedly true, unwritable or unpersisted adopted flag, any Data byte change, missing reopened adopted state, any Data bake, more than one adoption/Mesh bake or two saves/starts, cache roster mismatch, scientific threshold failure, symlink, banned media or resource failure. Preserve attempt-44 and do not repeat Data or tune a surface variable.",
+  "claimCeiling": "One C1 cross-process cache-state adoption plus Mesh-only reconstruction from accepted Final Data. A PASS proves exact cache reuse and static seven-frame surface thresholds only; it does not prove general cache import safety, slow tip, impact, lighting, camera or finished-film quality.",
+  "specHash": "c819019fab3051751e7d9bc3e5275c53ca07e554e3641726a587f02e5c94aa31"
+}
