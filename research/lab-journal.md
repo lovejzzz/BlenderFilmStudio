@@ -7305,3 +7305,14 @@ differ. Attempt-71 roots remain absent and all execution counts are zero. C1
 changes no physical or resource setting: it uses versioned adapters, a Python-
 canonical v0.83 identity and fresh attempt-72 roots. I08/I10/I12 and every
 machine threshold remain exact.
+
+## J-626 · A transcribed parent OID stopped C1 before physics
+
+Date: 2026-09-02 · Type: RETAINED PRE-ROOT TOOL FAILURE / C2 PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+C1 passed Python-canonical spec identity but rejected its Git parent binding:
+the spec's hand-expanded `7fdd49332e40…` was not Git's actual
+`7fdd49330a36…`. Attempt-72 roots remain absent and all physics counts remain
+zero. C2 uses the actual `e871f3c2…` parent of its future six-path commit,
+versioned adapters and fresh attempt-73 roots. All I08/I10/I12 physical inputs,
+acceptance thresholds and resource ceilings remain byte-equivalent to C1.
