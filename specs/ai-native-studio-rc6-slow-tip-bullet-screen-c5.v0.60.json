@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6SlowTipBulletScreenC5.v0.60",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_52_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "c376605fb556d30a370190ca0bab97c9e5b83976",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe reversible validation-only Blender work under standing owner autonomy"
+  },
+  "baseContract": {
+    "uri": "specs/ai-native-studio-rc6-slow-tip-bullet-screen-c4.v0.59.json",
+    "specHash": "5914961ce8567b1c00d2418eec0fa57915c2794968494c7c06d7544eada89d46"
+  },
+  "retainedAttempt51": {
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c4-attempt-51",
+    "verdict": "FAIL_BULLET_SCREEN",
+    "receiptHash": "729a1a65de486794e934da48394310f31c480f3b45c7265b59c5a68066c3b7b4",
+    "receiptFileSha256": "4f52051549d65ad4c7a99847f09826126089eed40ebf78a8c553f3f2260c07b4",
+    "audit": "18/18 PASS",
+    "auditHash": "5dc0e42a1534c4003e4ef887bcdfeb09567d44c04630e0a85c0e26cfcb6f30c8",
+    "auditFileSha256": "85fc404f225415541ce158915f7d6af2dec091a545706eb674776056bd241e47",
+    "immutable": true
+  },
+  "motorImplementationEvidence": {
+    "sourceIdentity": "retained exact Blender source used for PB.1 validation",
+    "rnaSource": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-30-mac-m2max-attempt-01/source/source/blender/makesrna/intern/rna_rigidbody.cc",
+    "rnaSourceSha256": "bc05c35d33e1180f1212a153ca18a25d058245e1497f6d7fa9c15d39710300a0",
+    "bulletBridgeSource": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PhaseB-workspace/PB.1-2026-08-30-mac-m2max-attempt-01/source/intern/rigidbody/rb_bullet_api.cpp",
+    "bulletBridgeSourceSha256": "0ec30f8b95053361540bd2bf8951f49d549bf6831187f87c2984813e416b7e90",
+    "observedSemantics": [
+      "angular motor setters affect the Bullet object only for a MOTOR constraint",
+      "the MOTOR bridge unlocks all six axes and drives rotational axis zero, the constraint local X axis",
+      "a separate HINGE constraint is therefore required to own the pivot, single degree of freedom and angular limits"
+    ]
+  },
+  "physicalQuestion": "Can a separate axis-aligned Blender Bullet MOTOR constraint supply bounded angular velocity and maximum impulse through the geometry-proven HINGE, producing a solver-owned 45-65 degree slow tip without the retained kinematic-pusher penetration, excessive surface displacement, domain escape or authored cup motion?",
+  "correction": {
+    "remove": "all pusher animation and pusher contact with the cup; the retained pusher remains inert and hidden at its distant start position",
+    "keep": {
+      "hingePivotWorldMeters": [0.47, 0.0, 0.0],
+      "hingeAxisWorld": [0.0, -1.0, 0.0],
+      "hingeAngularLimitsDegrees": [-60.0, 5.0],
+      "cupAngularDamping": 0.8,
+      "maximumPivotDriftMeters": 0.005
+    },
+    "add": {
+      "constraintName": "PHYS_SLOW_TIP_MOTOR",
+      "constraintType": "MOTOR",
+      "motorLocalAxis": "X",
+      "motorAxisWorld": [0.0, -1.0, 0.0],
+      "motorAngularMaximumImpulse": 1.0,
+      "motorActuationFrame": 1,
+      "targetVelocityFormulaDegreesPerSecond": "60 * 24 / (driveEndFrame - 1)",
+      "frameEnd": 120
+    },
+    "domainCorrection": {
+      "oldDimensionsMeters": [0.9, 0.5, 0.56],
+      "newDimensionsMeters": [0.9, 0.5, 0.58],
+      "changedAxis": "Z",
+      "addedHeightMeters": 0.02,
+      "oneVoxelMarginRuleUnchanged": true,
+      "previewResolutionUnchanged": 96,
+      "baseVoxelMetersUnchanged": 0.009375
+    },
+    "unchanged": [
+      "accepted source and binary",
+      "frame-1 cache-reset and pivot-derivation order",
+      "exact evaluated cup mesh-vertex measurement",
+      "45 degree minimum response, four-frame response span, -5 mm floor and ten-subframe limits",
+      "physical 65 degree maximum-stop gate",
+      "zero cup and ball animation",
+      "all zero-fluid, zero-render, zero-save and zero-network ceilings"
+    ]
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-slow-tip-bullet-screen-c5-attempt-52",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-attempt-52"
+  },
+  "cells": [
+    {"id": "C5F48", "driveEndFrame": 48, "motorTargetDegreesPerSecond": 30.63829787},
+    {"id": "C5F60", "driveEndFrame": 60, "motorTargetDegreesPerSecond": 24.40677966},
+    {"id": "C5F72", "driveEndFrame": 72, "motorTargetDegreesPerSecond": 20.28169014},
+    {"id": "C5F96", "driveEndFrame": 96, "motorTargetDegreesPerSecond": 15.15789474}
+  ],
+  "machineAcceptance": {
+    "motorActuationFrame": 1,
+    "minimumPeakCupTiltDegrees": 45.0,
+    "maximumPeakCupTiltDegrees": 65.0,
+    "minimumFiveToFortyFiveDegreeSpanFrames": 4,
+    "minimumCupSurfaceWorldZ": -0.005,
+    "candidateDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 10,
+    "hingeAndMotorIdentityAxesLimitsDampingVelocityAndImpulseExact": true,
+    "maximumHingePivotDriftMeters": 0.005,
+    "cupAnimationChannels": 0,
+    "ballAnimationChannels": 0,
+    "pusherAnimationChannels": 0,
+    "selectionRule": "select the greatest driveEndFrame, therefore the slowest angular target, among cells passing every frozen check"
+  },
+  "processCeilings": {
+    "blenderStarts": 4,
+    "bulletBakes": 4,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 268435456,
+    "maximumWorkspaceBytes": 268435456,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c5-scene.py",
+      "sha256": "270e163dcd9b596bde4cacb3b5e520410b692fd613eb97dc590d3a49e19ebda2"
+    },
+    {
+      "uri": "scripts/run-rc6-slow-tip-bullet-screen-c5.py",
+      "sha256": "7c1f5d919dca2e74211278b4c6378fea42bfe50785dd0139423fa264bad0438d"
+    },
+    {
+      "uri": "scripts/audit-rc6-slow-tip-bullet-screen-c5.py",
+      "sha256": "36dda7c8d45f23d1b46ca001b19471640463007998faa02c37bc89d55402ae2c"
+    }
+  ],
+  "stopRule": "Run the exact four C5 cells once in unique attempt-52 roots. Retain failure. Do not alter the 1.0 maximum impulse, axis, limits, damping, domain or thresholds, restore pusher contact, add a cup key, run fluid, render, save, build or add a candidate after observing results.",
+  "claimCeiling": "One Bullet-only hinge-constrained and impulse-bounded motorized slow-tip test rig. A PASS selects a causal rigid trajectory and derived effector sampling for a separate moving-liquid gate; it does not prove liquid, collision impact, persistence or visual quality.",
+  "specHash": "151be37c6db7436db8d0ce7f6808181006efa99a7a28e1c8b42dd88c6ef8e295"
+}
