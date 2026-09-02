@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidSolverTimesteps.v0.74",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_63_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "6b17a6d17a8c817cbde295d16916c2928d36842e",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded single-variable Blender fluid validation under standing owner autonomy"
+  },
+  "question": "Does forcing at least two fluid solver timesteps per frame preserve moving-liquid Data support and reconstructed volume within the frozen gates on the better attempt-59 obstacle baseline?",
+  "rationale": {
+    "attempt59": "surface distance 2.0 and subframes 1 is the best current Mesh result at 23.03 percent temporal loss",
+    "attempt60": "Data support on that baseline falls 26.67 percent and crosses the gate before Mesh",
+    "attempt61And62": "effector subframes 2 costs 14.63 percent more and slightly worsens both Data and Mesh",
+    "solverSemantics": "timesteps_min sets the minimum number of fluid simulation steps per frame",
+    "singleDegreeOfFreedom": "fluid domain timesteps_min only"
+  },
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "retainedStaticCacheManifestHash": "53bc19e1532b64ea8c37b0cc5fa52347c72c73023728d3705d45c063d5b7c265",
+    "trajectory": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55/cells/C5F96/result.json",
+    "trajectoryFileSha256": "00193b1a1258814f5a0a5b7a2308686f9f7daa0826f554af62c55e7de38fb261",
+    "attempt56ResultFileSha256": "6aafa7107ac45f0911c5e0775514350cf10645a2358e0497d6c6f6517231f659",
+    "attempt57AuditFileSha256": "bacbd61bbfc001fa4fab255713b875b0039f55a77a188060f774ba0bbd3c389a",
+    "attempt58AuditFileSha256": "65133bdb220737da1139a8c23469fa8c6d4a104c82021fc0cc17277f86409bb6",
+    "attempt59ResultFileSha256": "f860dc539d0f63e39fae718059a428d5ea000c999a780be53c57e981c42aaf0f",
+    "attempt59AuditFileSha256": "141ee5ea1a978d4115efc873873cc0e9ab07262b242116b4d217f8d7772071d8",
+    "attempt60AuditFileSha256": "a77f7e9ea0be637bb21490717b9cebfadd50ed8794c789e25bb7834038af7edc",
+    "attempt61AuditFileSha256": "287e5747b90fd4e2e1d4b9f9398034afb449a52f2172ba74c4a7d8e336c0729e",
+    "attempt62AuditFileSha256": "9443360241aef390a687de89c0139a615e440f70153d3e34b0e3395fac7e2197"
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-solver-timesteps-attempt-63",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-solver-timesteps-attempt-63"
+  },
+  "frozenConfiguration": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "resolutionMax": 96,
+    "domainCenterMeters": [0.45, 0.0, 0.26],
+    "domainDimensionsMeters": [0.9, 0.5, 0.58],
+    "trajectoryCellId": "C5F96",
+    "simulationMethod": "APIC",
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "meshParticleRadius": 2.5,
+    "meshScale": 2,
+    "meshConcaveLower": 0.4,
+    "meshConcaveUpper": 3.5,
+    "meshSmoothenPos": 1,
+    "meshSmoothenNeg": 1,
+    "cupEffectorSurfaceDistanceCells": 2.0,
+    "cupEffectorSubframes": 1,
+    "timestepsMin": 2,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "deleteInObstacle": false
+  },
+  "onlyChangeFromAttempt59": {
+    "path": "fluid domain FluidDomainSettings.timesteps_min",
+    "before": 1,
+    "after": 2
+  },
+  "machineAcceptanceUnchangedFromAttempt59": {
+    "maximumTrajectoryLocationDeltaMeters": 0.00001,
+    "maximumTrajectoryRotationDeltaDegrees": 0.0001,
+    "minimumFrame24CupTiltDegrees": 14.0,
+    "maximumHingePivotDriftMeters": 0.005,
+    "exactCacheFiles": 72,
+    "liquidMeshRequiredEveryFrame": true,
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.25,
+    "maximumAbsoluteTemporalVolumeDriftFraction": 0.15,
+    "positiveLiquidBodyCountEveryFrame": 1,
+    "maximumNonManifoldEdgeCount": 0,
+    "minimumLargestComponentFraction": 0.5,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.05,
+    "maximumBelowFloorFraction": 0.01,
+    "minimumLiquidCentroidShiftCupLocalMeters": 0.002,
+    "zeroCupBallPusherPoseKeys": true,
+    "retainedStaticCacheByteExact": true
+  },
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 1,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 2147483648,
+    "maximumWorkspaceBytes": 2147483648,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {"uri": "scripts/run-rc6-moving-liquid-solver-timesteps-scene.py", "sha256": "1636531406e75b00daec2f816a177f1315d2f94cf4f58cd7db0f25cf0b3e022e"},
+    {"uri": "scripts/run-rc6-moving-liquid-solver-timesteps.py", "sha256": "ec3dd353be9af81e04454b1d507e46ab9ca43a3870c1d61b72cbf29e4157fe21"},
+    {"uri": "scripts/audit-rc6-moving-liquid-solver-timesteps.py", "sha256": "f3fc1860d7de2d37b81f1adbbd9245b269db4046cba2cdf5ecd5ec8f218a41fe"}
+  ],
+  "stopRule": "Run exactly once in attempt-63 roots and retain PASS, physical FAIL or harness failure. Never change timesteps_max or CFL, add another timesteps_min value after observing this result, change subframes from 1, change surface_distance from 2.0, lower thresholds, tune Mesh, begin impact or render.",
+  "claimCeiling": "One 24-frame Preview-96 single-variable minimum-solver-timesteps result. It cannot establish final resolution, full tip, spill, impact, persistence, rendered appearance or film quality.",
+  "specHash": "f94b944cb1b85b5d1e456ebb674681ee189cefb306d25108471aa10454f4472a"
+}

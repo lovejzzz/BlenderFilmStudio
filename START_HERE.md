@@ -1012,8 +1012,10 @@ percentage points worse than subframes-1; Mesh was 0.81 points worse and the
 current curves correlated at `r=0.96060`. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-subframes-data-comparison-attempt-62`;
 receipt/audit self hashes are `97663618…` / `a847bffe…`. Effector-subframe
-tuning is closed. Next return to the better subframes-1, 2.0-cell baseline and
-change only solver minimum timesteps 1→2. Do not render or begin real impact.
+tuning is closed. Attempt-63 is now preregistered to return to the better
+subframes-1, 2.0-cell baseline and change only solver minimum timesteps 1→2;
+its fresh roots remain absent. Run only that frozen attempt. Do not render or
+begin real impact.
 
 ## Public routes
 
