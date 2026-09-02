@@ -1018,9 +1018,16 @@ improved from 23.03% to 21.70%, source error from 24.00% to 22.97%, and Data
 cost rose 7.63%; every other check passed. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-solver-timesteps-attempt-63`;
 receipt/audit self hashes are `d2ae5e4e…` / `26d9a50f…`. Do not try timesteps 3
-or change CFL/max steps. Attempt-64 is now preregistered as one zero-bake Data
-comparison; its fresh roots remain absent. Run that exact diagnostic before
-selecting simulation particle radius. Do not render or begin real impact.
+or change CFL/max steps. Attempt-64 then copied the exact Data cache and passed
+its independent 19/19 audit with zero Blender or bake work. Two steps reduced
+final occupied-voxel support loss only from 26.67% to 26.09% and worst loss only
+from 27.42% to 26.99%; the current Data/Mesh curves correlate at `r=0.97958`,
+but per-frame improvements do not. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-timesteps-data-comparison-attempt-64`;
+receipt/audit self hashes are `72e83b26…` / `4fa13dbb…`. Timestep tuning is
+closed. Preserve the modestly better two-step result as the next baseline and
+preregister exactly one simulation-particle-radius change. Do not render or
+begin real impact.
 
 ## Public routes
 

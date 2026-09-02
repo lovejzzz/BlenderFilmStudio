@@ -7135,3 +7135,17 @@ gate still failed; all topology, containment and exact-motion checks passed.
 Do not try timesteps 3 or change CFL/max steps. Next compare the immutable Data
 cache with the one-timestep baseline before selecting simulation particle
 radius as a different variable.
+
+## J-613 · Timestep improvement exists in Data but is too small to continue
+
+Date: 2026-09-02 · Type: DIAGNOSTIC PASS · Engine-Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+Attempt-64 copied the exact attempt-63 cache and passed its independent 19/19
+audit. With two minimum solver steps, occupied Data support fell 1,330→983
+(`-26.09%`) versus `-26.67%` with one step: only 0.58 percentage points better
+at the last frame. Worst-frame loss improved about 0.42 points, while Mesh
+improved 1.33 points and Data time had already risen 7.63%. The current
+Data/Mesh curves correlate at `r=0.97958`, but their per-frame improvements do
+not (`r=-0.21839`). Close timestep tuning. Preserve two steps as the modestly
+better current baseline and test exactly one different simulation property,
+particle radius, without changing motion, Mesh or thresholds.
