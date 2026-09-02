@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "bfs.rc6LiquidFinalEffectorMeshC3Spec.v0.53",
+  "status": "PREREGISTERED_CORRECTION",
+  "experimentId": "RC6-LIQUID-FINAL-EFFECTOR-MESH-C3-2026-09-02-ATTEMPT-46",
+  "purpose": "Correct only Data materialization order after retained attempt-45 proved that reset-triggering scene reconstruction deletes a pre-populated copied cache.",
+  "preregistrationParentResearchCommit": "570d00f4a4f382e16b2e3882dcb16710ddf0312a",
+  "retainedFailure": {
+    "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-final-effector-mesh-c1-attempt-45",
+    "evidenceRootManifestHash": "939499efed78782ea3facdf7486ef3b87a461a5faaca551696969fc2e956c656",
+    "workRootManifestHash": "a6770491e6a29d9738a1d33c6cb5561a525da02da895b53cd7f8aa0b46202aeb",
+    "processHash": "260305d15c7a260fc49c6c924ca9d624b3e21758233e8d0fc053c35487b74be5",
+    "classification": "FAIL_PREADOPTION_DATA_RESET"
+  },
+  "onlyAllowedCorrection": {
+    "before": "The exact copied Data occupied the final cache directory while reset-triggering scene properties were reconstructed and the directory was rebound.",
+    "after": "Keep exact Data in a separately verified staging directory; reconstruct all scene properties and bind an empty final cache directory first; then copy the 14 files into the final directory, verify exact manifest, set has_cache_baked_data=true and save.",
+    "unchanged": "Binary, source blend, physical settings, Data bytes, Mesh settings, two starts, one adoption, zero Data bakes, one Mesh bake, two saves, thresholds and resource limits."
+  },
+  "roots": {
+    "retainedWork": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-data-attempt-42",
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-02-final-effector-mesh-c3-attempt-46"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "retainedDataManifestHash": "8d809e9602083bf07bdd856a73abb1a969f154847dec124179095049f5aa2c17",
+    "retainedWorkManifestHash": "10b36a7c93684e3a6cbf6637971ead184b3961e3f6ec39c49766d2b4019fbf8c",
+    "retainedReceiptHash": "55121a99aa6066eaa625586a77aeb241d727415090c89b02882bd2defb602d8a",
+    "retainedAuditHash": "80693f16740ba776635305892924b34d84c35d1f3316b9f8ac0351e742f68158"
+  },
+  "acceptanceThresholds": {
+    "maximumAbsoluteSourceVolumeErrorFraction": 0.05,
+    "maximumAbsoluteTemporalDriftFraction": 0.05,
+    "maximumOutsideCupInteriorPlusOneVoxelFraction": 0.005,
+    "maximumNonManifoldEdgeCount": 0,
+    "requiredPositiveWaterBodiesPerFrame": 1,
+    "maximumNegativeNestedShellCount": 1,
+    "maximumNestedCentroidSeparationMeters": 0.01,
+    "exactDataFilesBeforeAndAfter": 14,
+    "exactMeshFilesAfter": 7
+  },
+  "resourceCeilings": {
+    "blenderStarts": 2,
+    "cacheStateAdoptions": 1,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 1,
+    "blendSaves": 2,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 2147483648,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 2147483648,
+    "minimumFreeBytesBefore": 137438953472,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Use unique fresh attempt-46 roots once; stop on staged/final/retained Data drift, a non-empty final cache before materialization, unwritable or unpersisted baked state, any Data bake, process/roster/scientific/resource/symlink/media failure, or any change beyond materialization order.",
+  "claimCeiling": "One C3 cross-process cache materialization and Mesh-only reconstruction from accepted Final Data. A PASS proves exact reuse and static seven-frame thresholds only; it does not prove general cache import safety, slow tip, impact, lighting, camera or finished-film quality.",
+  "specHash": "23d371f3b57415067224fe53ccab25836f353cf053ddb980c25f1078624b8a55"
+}
