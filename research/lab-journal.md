@@ -7591,3 +7591,15 @@ support330.47% and Mesh volume138.29%; particle support and Mesh correlate
 at0.97597 over frames20–36. This rejects a Mesh-only cause without treating
 occupied voxels as exact mass. Next inspect source/configuration read-only and
 select one high-speed Data-layer variable before another bake.
+
+## J-651 · Match the fluid step ceiling to the derived impact sampling
+
+Date: 2026-09-02 · Type: SOURCE-LED PHYSICAL PREREGISTRATION · Blender starts / bakes / renders: 0 / 0 / 0
+
+Bound source sets adaptive `timestepMin = frameLength / timestepsMax`; C12 has
+eight derived effector samples but allows only four fluid steps. Peak cup
+surface travel is7.69 voxels/frame, while retained config dt stays near one
+quarter frame from the first Data failure onward. C14 changes only
+`timesteps_max`4→8, preserving CFL2, minimum2, APIC, every geometry and all27
+physical gates. It tests one source-led high-speed stability hypothesis, not a
+surface repair or threshold search.
