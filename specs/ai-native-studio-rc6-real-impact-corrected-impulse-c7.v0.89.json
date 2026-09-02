@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6RealImpactCorrectedImpulseC7.v0.89",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_78_ROOT_CREATION",
+  "researchParentBeforePreregistration": "2edbf1392f8c0f73411d3cfb9d844f5457a8c961",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0"
+  },
+  "physicalQuestion": "With the cup's visible and Bullet scales corrected by the retained explicit 2 mm margin, does changing only the striker drive-end frame from 9 to 8 provide enough additional solver-owned impulse to tip the free cup by at least 45 degrees while retaining floor/domain containment and a maximum eight-subframe Preview-96 requirement?",
+  "selectedPhysicalDegreeOfFreedom": "STRIKER_DRIVE_END_FRAME_ONLY_UNDER_CORRECTED_MARGIN",
+  "reasonForOneValue": "Attempt-77 established the corrected 2 mm collision baseline at drive-end 9. Drive-end 8 is the nearest already bounded impulse neighbor and raises mean drive speed by about 14 percent without changing contact height, geometry, mass, friction, domain or acceptance thresholds.",
+  "baseline": {
+    "binary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/MacOS/Blender",
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlend": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-mesh-c3-attempt-46/final-effector-mesh-c3/source-state.blend",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "correctedTrajectory": "M02 driveEndFrame 9 with explicit 2 mm cup margin",
+    "attempt77ResultHash": "ffa510b862bb8970226a75732d36f4eb91df1002536be49c26484c53c97c5a94",
+    "attempt77ReceiptHash": "e04832b11c9c3d030f2c8bb908d4da9e45fc094266355b223aa52b798ab77816",
+    "attempt77AuditHash": "5ae5347692b811f588426558054afc768442574576d8845b9a839187e01dd576"
+  },
+  "baselineEvidenceFiles": [
+    {
+      "uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-cup-margin-c6-attempt-77/cells/M02/result.json",
+      "sha256": "66fb186be0afa62779089453b3c9e831559cdea5220e9f2199a6459334de4660"
+    },
+    {
+      "uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-cup-margin-c6-attempt-77/receipt.json",
+      "sha256": "27ad15b1c1519f101b120c73f72d7c77fa622e5747ed57a40a73ad4f9103b9ab"
+    },
+    {
+      "uri": "experiments/physical-richness/RC6-2026-09-02-real-impact-cup-margin-c6-attempt-77/independent-audit.json",
+      "sha256": "023b46ea356c0c46f2859a565e896fb1c32369fc05c394df4ca0a5257b45e45b"
+    }
+  ],
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-real-impact-corrected-impulse-c7-attempt-78",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-real-impact-corrected-impulse-c7-attempt-78"
+  },
+  "cells": [
+    {
+      "id": "S08",
+      "driveEndFrame": 8,
+      "cupUseMargin": true,
+      "cupCollisionMarginMeters": 0.002
+    }
+  ],
+  "frozenConfiguration": {
+    "timelineFramesInclusive": [1, 48],
+    "fps": 24,
+    "strikerStartX": -1.1,
+    "strikerDriveEndX": -0.64,
+    "strikerDriveDistanceMeters": 0.46,
+    "strikerHoldFrames": 1,
+    "strikerReturnEndOffsetFrames": 3,
+    "cupMassKilograms": 0.34,
+    "cupFriction": 0.75,
+    "ballMassKilograms": 0.62,
+    "ballFriction": 0.48,
+    "bulletSubstepsPerFrame": 20,
+    "bulletSolverIterations": 80,
+    "previewResolution": 96,
+    "acceptedDomainCenterMeters": [0.45, 0.0, 0.26],
+    "acceptedDomainDimensionsMeters": [0.9, 0.5, 0.58],
+    "baseVoxelMeters": 0.009375,
+    "sourceCupUseMargin": false,
+    "sourceCupCollisionMarginMeters": 0.04,
+    "cupUseMargin": true,
+    "cupCollisionMarginMeters": 0.002,
+    "cupCollisionRadiusMeters": 0.15,
+    "cupCollisionHalfHeightMeters": 0.22,
+    "ballCollisionRadiusMeters": 0.12
+  },
+  "machineAcceptance": {
+    "initialBallCupSeparationMinimumMeters": 0.01,
+    "latestDerivedContactFrame": 36,
+    "minimumPeakCupTiltDegreesByFrame48": 45.0,
+    "responseMustFollowDerivedContact": true,
+    "minimumCupWorldSurfaceZ": -0.005,
+    "acceptedDomainOneVoxelMarginRequired": true,
+    "maximumDerivedEffectorSubframes": 8,
+    "cupAnimationChannels": 0,
+    "ballAnimationChannels": 0,
+    "onlyAuthoredRigidActuator": "PHYS_VISIBLE_STRIKER",
+    "selectionRule": "S08 passes only if every unchanged corrected-margin physical check passes"
+  },
+  "processCeilings": {
+    "blenderStarts": 1,
+    "bulletBakes": 1,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 134217728,
+    "maximumWorkspaceBytes": 134217728,
+    "maximumEvidenceBytes": 33554432
+  },
+  "tools": [
+    {
+      "uri": "scripts/run-rc6-real-impact-corrected-impulse-c7-scene.py",
+      "sha256": "5cec54233691bf516023cfec8aead8c66c48ac1bb4fe3afdd22eeddf55cf1c35"
+    },
+    {
+      "uri": "scripts/run-rc6-real-impact-corrected-impulse-c7.py",
+      "sha256": "e37da7e1a12d0a62281210a3feec0b4e1fbbb0f54e0bc342d238c228518f0767"
+    },
+    {
+      "uri": "scripts/audit-rc6-real-impact-corrected-impulse-c7.py",
+      "sha256": "7076e8d0a90689d0aea1a17b3e48d5653fcc51c1a15a6bf4f78778e3d1577e03"
+    }
+  ],
+  "stopRule": "Run S08 exactly once in the unique fresh attempt-78 roots. Retain PASS or FAIL. Do not change contact height, geometry, any margin, mass, friction, threshold or domain; do not run liquid, save or render. A PASS only freezes one collision-congruent Bullet trajectory for a separate liquid gate.",
+  "claimCeiling": "One faster corrected-margin Bullet impact test on the exact accepted scene. No liquid, spill, persistence, rendering, cinematography or film-quality claim.",
+  "specHash": "f2ea00b43efd05dd08a3bb3c5d185e48239bb150c50d0eb045f66a86f85270dd"
+}

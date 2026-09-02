@@ -7420,3 +7420,14 @@ in-domain. But peak tilt collapsed 90.00°→2.67°. The previous apparent succe
 was collision-scale artifact, not a causal trajectory worth preserving. Keep
 the 2 mm congruent baseline and redesign contact moment/impulse without outcome
 keys; never restore the oversized margin for drama.
+
+## J-636 · Corrected-margin impulse selected before execution
+
+Date: 2026-09-02 · Type: PREREGISTRATION · Blender starts / Bullet bakes / liquid bakes / renders: 0 / 0 / 0 / 0
+
+Attempt-77 establishes explicit 2 mm as the only admissible cup collision
+margin but reaches only 2.67° under I09. C7 selects exactly one new physical
+value: the nearest previously bounded I08 drive timing, now evaluated under the
+corrected margin. It raises mean actuator speed about 14% while preserving
+contact height, geometry, mass, friction, domain and every acceptance threshold.
+One fresh Bullet-only run may pass or fail; no liquid follows a failure.
