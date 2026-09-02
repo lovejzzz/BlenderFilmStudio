@@ -1018,7 +1018,8 @@ improved from 23.03% to 21.70%, source error from 24.00% to 22.97%, and Data
 cost rose 7.63%; every other check passed. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-solver-timesteps-attempt-63`;
 receipt/audit self hashes are `d2ae5e4e…` / `26d9a50f…`. Do not try timesteps 3
-or change CFL/max steps. Next preregister a zero-bake Data comparison before
+or change CFL/max steps. Attempt-64 is now preregistered as one zero-bake Data
+comparison; its fresh roots remain absent. Run that exact diagnostic before
 selecting simulation particle radius. Do not render or begin real impact.
 
 ## Public routes
