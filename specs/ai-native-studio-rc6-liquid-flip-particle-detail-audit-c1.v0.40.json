@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "bfs.rc6LiquidFlipParticleDetailAuditC1Spec.v0.40",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-FLIP-PARTICLE-DETAIL-AUDIT-C1-2026-09-01-ATTEMPT-38",
+  "purpose": "Correct only attempt-37's independent recomputation of penetrations derived from an eight-decimal reported coordinate; retain the original Blender result and every exact evidence binding without rerunning Blender.",
+  "toolFreezeParent": "d61e822c6b5d1a7aeb01e2d798e5a255146f75f4",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "scope": "One local audit-only correction in a fresh evidence root; zero Blender starts, zero bake, zero save, zero render, zero engine remote write.",
+    "specificConfirmationRequired": false
+  },
+  "retainedAttempt": {
+    "root": "experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-attempt-37",
+    "resultFileSha256": "93b4a12a9e797463635b5b98a247fabbeffd9b74b602dd90ccfb8144538fd569",
+    "resultHash": "e3e52359bfc4d2191b162384b9b5890e547416defc1ead4c0fdd025f708f3794",
+    "receiptFileSha256": "b9133660a525b09210ef8e70a11fc687c2735b0c1f16cf5d0d30aa16748dfbd8",
+    "receiptHash": "5c32c481138382fef4864ec539436f8c090bfdf2f2a4f5675fd25054ffac11b2",
+    "failedAuditFileSha256": "0161a3695f4dfca8f5512b4c08be56ab86dc1dcda41f9bec060444f3be1f0e41",
+    "failedAuditHash": "7667372e092c968930ac5a32385e72a335ec13682c1df3a2299a97bceb7fcf60",
+    "failedChecks": "26/27",
+    "onlyFalseCheck": "activeOutlierDetailsRecomputed"
+  },
+  "priorParticleAxisSpec": {
+    "path": "specs/ai-native-studio-rc6-liquid-flip-particle-detail.v0.39.json",
+    "fileSha256": "f844537942ab5d666675360059054aafc9505ac18f0c8dbcc74edbf1b90bc217",
+    "specHash": "c1a0c2dfb3aff91660a500b0b01d34b5a212da464d857666bfd2a2e2347df7b7"
+  },
+  "roots": {
+    "retainedEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-attempt-37",
+    "freshAuditEvidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-audit-c1-attempt-38"
+  },
+  "correction": {
+    "changedCheck": "activeOutlierDetailsRecomputed",
+    "reportedCoordinateDecimalPlaces": 8,
+    "reportedDerivedValueDecimalPlaces": 8,
+    "derivedPenetrationAbsoluteToleranceMeters": 0.00000001,
+    "reason": "The scene computed penetration from the unrounded coordinate and rounded the derived value once. An auditor starting from the separately rounded coordinate can legitimately differ by one unit in the last reported decimal after the second rounding.",
+    "unchangedRequirements": [
+      "Every detail self hash exact",
+      "Every categorical state and physical region exact",
+      "Every axis classification exact",
+      "All prior 26 successful checks retained",
+      "Prior aggregate particle diagnosis byte-exact",
+      "Blender source binding exact",
+      "Retained attempt immutable"
+    ],
+    "blenderReruns": 0
+  },
+  "expectedFinding": {
+    "observations": 36,
+    "uniqueActiveOutlierPositions": 9,
+    "framesWithOutliers": [4, 5, 6, 7],
+    "outlierCountsByFrame": [0, 0, 0, 9, 9, 9, 9],
+    "physicalRegions": ["INSIDE_CUP_SOLID_FLOOR"],
+    "reportedSpeeds": [0.0]
+  },
+  "resourceCeilings": {
+    "blenderStarts": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "evidenceBytes": 1048576
+  },
+  "stopRule": "Stop on non-fresh C1 root, dirty research worktree, retained attempt drift, any additional false prior check, result/receipt/source/spec drift, detail-hash/category/axis/region mismatch, derived penetration difference greater than exactly 0.00000001 m, retained-root mutation, or uncommitted tool/spec bytes. Never rerun Blender and never overwrite attempt-37.",
+  "claimCeiling": "One audit-only correction of attempt-37's eight-decimal derived-penetration recomputation. A PASS validates the reported active particle coordinates and modeled-cup regions; it does not prove collision cause, a physical correction, slow tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/audit-rc6-liquid-flip-particle-detail-c1.py": "470eddf0c8525d985bb99fb30325541749943a38663d750631d8cb326144ce55"
+  },
+  "specHash": "0819a54714fb6789f947a6020a1ab341d66ff47a7e73a9191a9abb1149e61ea8"
+}
