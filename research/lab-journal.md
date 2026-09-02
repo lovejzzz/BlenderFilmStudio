@@ -7045,3 +7045,15 @@ Python threshold exception; C1 preserved that harness mismatch without
 misclassifying the scientific failure and independently passed 23/23. Next
 diagnose Data/FLIP particles separately from Mesh reconstruction on the same
 physics before changing any parameter.
+
+## J-606 · RC6 Data diagnosis invalidates raw FLIP count as a mass proxy
+
+Date: 2026-09-02 · Type: DIAGNOSTIC PASS · Blender starts / Bullet bakes / Data bakes / Mesh bakes / renders: 1 / 1 / 1 / 0 / 0
+
+Attempt-57 repeated the exact 24-frame attempt-56 physics and passed its 18/18
+independent audit. All exposed FLIP particles stayed inside the cup envelope,
+but the ALIVE roster grew from 8,105 to 10,557 (`+30.25%`) while the prior Mesh
+volume on the same physics had fallen `34.23%`. Mantaflow reseeding therefore
+invalidates raw particle count as an exact mass proxy. The next diagnostic must
+measure solver-native Data level-set/occupancy volume from an immutable cache
+copy before any simulation or Mesh parameter changes.

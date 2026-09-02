@@ -964,9 +964,19 @@ scene's threshold exception; C1 records this as a harness mismatch without
 changing the physical verdict. Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-preview-attempt-56`;
 failure/audit self hashes are `2c2f547a…` / `556d44f8…`. Next preregister one
-fresh Data-only diagnostic on unchanged physics to expose all FLIP particles
-across frames 1–24 and distinguish simulation loss from surface reconstruction
-loss. Do not tune Mesh, begin real impact or render before that diagnosis.
+fresh Data-only diagnostic on unchanged physics to expose all FLIP particles.
+
+That attempt-57 diagnostic is now `PASS_DIAGNOSTIC`, independently audited
+18/18. Data took 297.41 seconds and produced the exact 48-file roster. Every
+particle stayed inside the cup envelope, but the ALIVE roster grew from 8,105 to
+10,557 (`+30.25%`) while attempt-56 Mesh volume had fallen `34.23%`. This
+invalidates raw FLIP count as an exact mass proxy; it does not locate the defect
+in Data or Mesh. Evidence is
+`experiments/physical-richness/RC6-2026-09-02-moving-liquid-data-diagnostic-attempt-57`;
+receipt/audit self hashes are `9db62ed9…` / `c0cb6268…`. Next perform zero-bake
+capability discovery, then read a fresh immutable Data-cache copy and measure a
+solver-native liquid level-set/occupancy volume over all 24 frames. Do not tune
+simulation or Mesh, begin real impact or render before that measurement.
 
 ## Public routes
 
