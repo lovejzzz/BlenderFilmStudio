@@ -72,6 +72,17 @@ frame24. CFL tuning is closed. Next preregister one zero-Blender copied-cache
 C16-versus-C14 Data/Mesh comparison before selecting a distinct physical
 variable. No second CFL, further max-step value, Mesh tuning or render is
 permitted first.
+C17 attempt-89 then copied the complete C16 cache and passed an independent
+22/22 audit with classification
+`DATA_MESH_EXPANSION_WITHOUT_PRIOR_CUP_INTRUSION`. Relative to coherent frame22,
+C16 particle support, velocity support and Mesh cross their comparison lines
+together at frame24 (`+25.78%`, `+181.64%`, `+44.10%`), with particle/Mesh
+correlation0.99750 and no >1% cup intrusion. This closes a Mesh-only or prior-
+intrusion explanation for the C16 regression without identifying exact mass or
+one solver operation. Return to C14 CFL2. Bound source selects exactly one C18
+collision-layer value: `fractions_threshold`0.05→0.10, the first RNA UI step.
+Preregister it with every other C14 input and all27 gates frozen. Do not stack
+C16, test another threshold, tune Mesh or render.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

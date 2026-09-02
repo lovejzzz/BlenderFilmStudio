@@ -7650,3 +7650,24 @@ failing at frame24. More adaptive updates are therefore not monotonic stability
 control in this moving-obstacle APIC case. Close CFL tuning and compare the
 immutable C16/C14 Data support on one fresh zero-bake cache copy before another
 physical variable is selected.
+
+## J-656 · C16 expansion begins in Data without prior cup intrusion
+
+Date: 2026-09-02 · Type: ZERO-BAKE DIAGNOSTIC PASS · Engine Python starts / Blender starts / bakes / renders: 2 / 0 / 0 / 0
+
+C17 attempt-89 copies all108 immutable C16 cache files and passes independent
+audit22/22. Particle support, velocity support and Mesh rise25.78%,181.64% and
+44.10% from frame22 to24; particle and Mesh cross together and correlate at
+0.99750. No frame exceeds1% cup intrusion. This rejects prior intrusion and a
+Mesh-only cause for C16's early failure, while preserving the exact-mass and
+specific-operation claim boundaries.
+
+## J-657 · Source selects one fractional-obstacle threshold test
+
+Date: 2026-09-02 · Type: SOURCE-LED DESIGN · Mutation counts: 0
+
+The bound source passes `fractions_threshold` into `updateFractions`; Blender's
+RNA says a higher value tags a boundary cell as obstacle more readily and
+reduces boundary smoothing. C18 returns to C14 CFL2 and selects only the first
+UI step0.05→0.10. It does not stack the regressed C16 CFL and changes no other
+physics, Mesh or acceptance threshold.

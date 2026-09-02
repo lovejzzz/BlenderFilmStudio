@@ -1237,6 +1237,15 @@ remain valid; no render or save occurred. CFL tuning is closed. Next preregister
 one zero-Blender copied-cache C17 comparison of immutable C16 and C14 Data/Mesh
 curves. Do not select another physical variable, run a second CFL, raise maximum
 steps, tune Mesh or render before that comparison is retained.
+C17 attempt-89 now passes its independent audit22/22 and classifies C16 as
+`DATA_MESH_EXPANSION_WITHOUT_PRIOR_CUP_INTRUSION`. Against frame22, particle
+support rises25.78%, velocity support181.64% and Mesh44.10% at frame24; Data and
+Mesh first cross together, correlate at0.99750, and no frame crosses the1% cup-
+intrusion line. This rejects both prior intrusion and Mesh-only reconstruction
+as necessary explanations for the early C16 regression. CFL tuning is closed.
+Next return to C14 CFL2 and preregister one source-led fractional-obstacle
+threshold change0.05→0.10. Preserve every other C14 input and all27 gates; do
+not test another threshold, stack C16, tune Mesh or render.
 
 ## Public routes
 
