@@ -7567,3 +7567,15 @@ This localizes the failure after impact but does not yet distinguish Data
 inflation from Mesh reconstruction. Retain both roots immutable; next use a
 fresh complete cache copy for a zero-bake Data-versus-Mesh diagnostic before
 changing any physical parameter or rendering.
+
+## J-649 · Locate the impact failure layer before another bake
+
+Date: 2026-09-02 · Type: ZERO-BAKE DIAGNOSTIC PREREGISTRATION · Blender starts / Bullet bakes / liquid Data bakes / liquid Mesh bakes / renders: 0 / 0 / 0 / 0 / 0
+
+Read-only OpenVDB discovery shows C12 particle occupied support jumps
+1,554→2,973 voxels from frame22→23 while velocity support jumps
+17,829→76,749; particle support and retained Mesh volume correlate about0.976
+over frames20–36. C13 freezes one complete fresh copy of all108 cache files and
+an independent all36-frame comparison. It distinguishes a same-frame Data
+support expansion from a Mesh-only reconstruction failure without Blender,
+baking, rendering or changing physics.
