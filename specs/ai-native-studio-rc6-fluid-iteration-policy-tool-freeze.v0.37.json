@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "bfs.rc6FluidIterationPolicyToolFreeze.v0.37",
+  "status": "FROZEN",
+  "experimentId": "RC6-FLUID-ITERATION-POLICY-2026-09-01-ATTEMPT-35",
+  "purpose": "Freeze one independently auditable, zero-Blender validation of the one-path product fluid iteration policy candidate.",
+  "toolFreezeParent": "e06cce55c51d848f8e6ffe387c40273603b07f38",
+  "preregistration": {
+    "path": "specs/ai-native-studio-rc6-fluid-iteration-policy.v0.36.json",
+    "fileSha256": "c55d3774892ad983a977ee9b4cbfc6c33ea7616a6438bb678de00bd65579ca33",
+    "specHash": "e5f130b9342893eb8e310a92196c3e8e53a8de7ab04381b5658e8341f4a59fff"
+  },
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "validationOnly": true,
+    "filmEngineRemoteWrite": false
+  },
+  "roots": {
+    "source": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-fluid-pipeline-development/source",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-01-fluid-policy-attempt-35"
+  },
+  "productCandidate": {
+    "parentCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
+    "commit": "554539ed7db4de6b98358c6bdfd67943f4284cab",
+    "path": "scripts/modules/film_studio_fluid_pipeline.py",
+    "moduleSha256": "46fe9163d45335971bbd9b5a8062013a34ae324011d8026667da117012c9b93a",
+    "changedPathsExact": 1,
+    "additions": 315,
+    "bpyImports": 0
+  },
+  "positiveCases": [
+    "initial DRAFT derives resolution 64 and DATA then MESH",
+    "initial PREVIEW derives resolution 96 and DATA then MESH",
+    "verified PREVIEW plan seals a self-hashed cache state",
+    "physics change invalidates Data and Mesh",
+    "surface-only change reuses exact Data and rebuilds Mesh",
+    "visual-only change reuses exact Data and Mesh",
+    "exact state reuses all caches",
+    "initial REVIEW derives resolution 128",
+    "exact REVIEW receipt admits resolution-192 FINAL and forces new Data plus Mesh"
+  ],
+  "negativeCases": {
+    "N01_UNKNOWN_TIER": "UNKNOWN_TIER",
+    "N02_RESOLUTION_OVERRIDE": "CALLER_AUTHORITY",
+    "N03_FRAME_CEILING": "TIER_FRAME_CEILING",
+    "N04_NONFINITE": "NONFINITE_NUMBER",
+    "N05_MISSING_DATA_CACHE": "SPEC_SCHEMA",
+    "N06_MISSING_MESH_CACHE": "SPEC_SCHEMA",
+    "N07_FINAL_WITHOUT_REVIEW": "FINAL_WITHOUT_REVIEW",
+    "N08_FORGED_REVIEW_HASH": "STALE_REVIEW_RECEIPT",
+    "N09_PHYSICS_AFTER_REVIEW": "PHYSICS_CHANGED_AFTER_REVIEW",
+    "N10_SURFACE_AFTER_REVIEW": "SURFACE_CHANGED_AFTER_REVIEW",
+    "N11_FRAME_AFTER_REVIEW": "FRAME_WINDOW_CHANGED_AFTER_REVIEW",
+    "N12_CALLER_CACHE_DECISION": "CALLER_AUTHORITY",
+    "N13_UNEXPECTED_REVIEW": "UNEXPECTED_REVIEW_RECEIPT",
+    "N14_SEAL_NON_REVIEW": "REVIEW_TIER",
+    "N15_CORRUPT_PLAN": "PLAN_HASH"
+  },
+  "resourceCeilings": {
+    "positiveCasesMinimum": 8,
+    "negativeCasesMinimum": 11,
+    "blenderStarts": 0,
+    "builds": 0,
+    "bakes": 0,
+    "renders": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "evidenceBytes": 4194304
+  },
+  "stopRule": "Run the validator once in the exact fresh evidence root. Stop on source or tool drift, dirty source/research tree, more than one product path, any positive/negative mismatch, Blender/build/bake/render/network/remote-write count, or evidence ceiling breach. Retain failures and never repair attempt-35 in place.",
+  "claimCeiling": "A PASS proves the one-path pure product module derives the four liquid tiers, typed cache invalidation and exact REVIEW-to-FINAL admission on the frozen source. It does not prove Blender integration, runtime speedup, corrected liquid physics, slow-tip behavior, impact, visual quality, cross-host performance or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-fluid-iteration-policy.py": "5c5ee81ba42832feae1b6eaf864df19b30927a79fc370c5b550f0c5374c780e6",
+    "scripts/audit-rc6-fluid-iteration-policy.py": "e50a23e403cacccf0c01a6a3d8a1e4c8f061af28424c87700e19bfdc7721eb16"
+  },
+  "specHash": "c08bc60b4679795bc1cec37b57bb495ddc5ea88be61fbc333b7c1d0c12201403"
+}
