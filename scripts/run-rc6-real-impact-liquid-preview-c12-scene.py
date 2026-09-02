@@ -187,6 +187,8 @@ ramp_exact = (
     and ramp.rigid_body.type == "PASSIVE"
     and ramp.rigid_body.collision_shape == "CONVEX_HULL"
     and abs(ramp.rigid_body.friction - 0.55) <= 1e-6
+    and abs(ramp.rigid_body.restitution - 0.08) <= 1e-6
+    and ramp.rigid_body.use_margin
     and abs(ramp.rigid_body.collision_margin - 0.002) <= 1e-6
     and len(ramp.data.vertices) == 8
     and len(ramp.data.polygons) == 6
@@ -289,9 +291,11 @@ for row in fluid_samples:
 
 initial_centroid = Vector(fluid_samples[0]["centroidCupLocalMeters"])
 maximum_centroid_shift = max((Vector(row["centroidCupLocalMeters"]) - initial_centroid).length for row in fluid_samples)
-precontact_maximum_exterior = max(row["outsideCupInteriorPlusOneVoxelFraction"] for row in fluid_samples if row["frame"] < contact_frame)
-first_significant_spill_frame = next((row["frame"] for row in fluid_samples if row["frame"] > contact_frame and row["outsideCupInteriorPlusOneVoxelFraction"] >= SIGNIFICANT_SPILL_FRACTION), None)
-postcontact_maximum_exterior = max(row["outsideCupInteriorPlusOneVoxelFraction"] for row in fluid_samples if row["frame"] > contact_frame)
+precontact_rows = [row for row in fluid_samples if contact_frame is not None and row["frame"] < contact_frame]
+postcontact_rows = [row for row in fluid_samples if contact_frame is not None and row["frame"] > contact_frame]
+precontact_maximum_exterior = max((row["outsideCupInteriorPlusOneVoxelFraction"] for row in precontact_rows), default=1.0)
+first_significant_spill_frame = next((row["frame"] for row in postcontact_rows if row["outsideCupInteriorPlusOneVoxelFraction"] >= SIGNIFICANT_SPILL_FRACTION), None)
+postcontact_maximum_exterior = max((row["outsideCupInteriorPlusOneVoxelFraction"] for row in postcontact_rows), default=0.0)
 final_exterior_fraction = fluid_samples[-1]["outsideCupInteriorPlusOneVoxelFraction"]
 
 expected_cache_files = sorted(
@@ -348,6 +352,8 @@ checks = {
     "singleInitialGeometryFlow": flow.flow_behavior == "GEOMETRY" and not source.animation_data,
     "previewTierExact": (
         settings.resolution_max == 96 and settings.cache_frame_start == 1 and settings.cache_frame_end == 36
+        and all(abs(float(DOMAIN_CENTER[index]) - expected) <= 1e-6 for index, expected in enumerate((0.57, 0.0, 0.26)))
+        and all(abs(float(DOMAIN_DIMENSIONS[index]) - expected) <= 1e-6 for index, expected in enumerate((0.9, 0.5, 0.58)))
         and settings.simulation_method == "APIC" and settings.timesteps_min == 2 and settings.timesteps_max == 4
         and abs(settings.cfl_condition - 2.0) <= 1e-6 and settings.particle_number == 2
         and settings.particle_min == 8 and settings.particle_max == 16
@@ -368,9 +374,9 @@ result = {
         "baseVoxelMeters": BASE_VOXEL_METERS,
         "trajectoryCellId": "R40", "driveEndFrame": 9,
         "bulletSubstepsPerFrame": 20, "bulletSolverIterations": 80,
-        "cupCollisionMarginMeters": float(cup.rigid_body.collision_margin),
+        "cupUseMargin": bool(cup.rigid_body.use_margin), "cupCollisionMarginMeters": float(cup.rigid_body.collision_margin),
         "cupFriction": float(cup.rigid_body.friction),
-        "rampRunMeters": 0.30, "rampRiseMeters": 0.04,
+        "rampRunMeters": 0.30, "rampRiseMeters": 0.04, "rampWidthMeters": 0.40,
         "rampSurfaceStartZ": 0.22, "rampSurfaceEndZ": 0.26,
         "simulationMethod": settings.simulation_method,
         "particleNumber": int(settings.particle_number), "particleMinimum": int(settings.particle_min),
@@ -383,6 +389,7 @@ result = {
         "cupEffectorSubframes": int(effector.subframes), "staticSupportEffectorSurfaceDistanceCells": 2.0,
         "staticSupportEffectorSubframes": 0, "timestepsMin": int(settings.timesteps_min),
         "timestepsMax": int(settings.timesteps_max), "cflCondition": float(settings.cfl_condition),
+        "useFractions": bool(settings.use_fractions), "deleteInObstacle": bool(settings.delete_in_obstacle),
         "sourceMeshVolumeCubicMeters": source_volume, "significantSpillFraction": SIGNIFICANT_SPILL_FRACTION,
     },
     "provenance": {
@@ -393,6 +400,35 @@ result = {
         "sourceCupUseMargin": source_cup_use_margin,
         "sourceCupCollisionMarginMeters": source_cup_collision_margin,
         "floorAndRampStaticFluidEffectorsExact": support_effectors_exact,
+        "ramp": {
+            "animationCurveCount": len(action_curves(ramp)),
+            "rigidBodyType": ramp.rigid_body.type,
+            "collisionShape": ramp.rigid_body.collision_shape,
+            "friction": float(ramp.rigid_body.friction),
+            "restitution": float(ramp.rigid_body.restitution),
+            "useMargin": bool(ramp.rigid_body.use_margin),
+            "collisionMarginMeters": float(ramp.rigid_body.collision_margin),
+            "vertexCount": len(ramp.data.vertices),
+            "polygonCount": len(ramp.data.polygons),
+        },
+        "staticSupportEffectors": [
+            {
+                "role": "floor", "fluidType": floor_modifier.fluid_type,
+                "rigidBodyType": floor.rigid_body.type,
+                "surfaceDistanceCells": float(floor_effector.surface_distance),
+                "usePlaneInit": bool(floor_effector.use_plane_init),
+                "useEffector": bool(floor_effector.use_effector), "subframes": int(floor_effector.subframes),
+            },
+            {
+                "role": "ramp", "fluidType": ramp_fluid.fluid_type,
+                "rigidBodyType": ramp.rigid_body.type,
+                "surfaceDistanceCells": float(ramp_effector.surface_distance),
+                "usePlaneInit": bool(ramp_effector.use_plane_init),
+                "useEffector": bool(ramp_effector.use_effector), "subframes": int(ramp_effector.subframes),
+            },
+        ],
+        "sourceFlowBehavior": flow.flow_behavior,
+        "sourceAnimationCurveCount": len(action_curves(source)),
     },
     "metrics": {
         "derivedContactFrame": contact_frame, "derivedFirstSeventyDegreeFrame": first_seventy_frame,
@@ -424,7 +460,7 @@ result = {
     "fluidSamples": fluid_samples,
     "cache": {"root": str(cache_root), "fileCount": len(actual_cache_files), "files": actual_cache_files},
     "checks": checks, "checkCount": len(checks), "passCount": sum(checks.values()),
-    "counts": {"blenderStarts": 1, "bulletBakes": 1, "fluidDataBakes": 1, "fluidMeshBakes": 1, "renders": 0, "blendSaves": 0, "networkCalls": 0, "engineRemoteWrites": 0},
+    "counts": {"blenderStarts": 1, "bulletBakes": 1, "fluidDataBakes": 1, "fluidMeshBakes": 1, "renders": 0, "blendSaves": 0, "nativeBuilds": 0, "networkCalls": 0, "engineSourceEdits": 0, "engineRemoteWrites": 0},
     "claimCeiling": "One 36-frame Preview-96 same-solve R40 basketball-impact/APIC spill result with explicit floor/ramp effectors; no full landing, persistence, final resolution, render, film quality, deformation or generalized liquid claim.",
 }
 result["resultHash"] = self_hash(result, "resultHash")

@@ -7540,3 +7540,16 @@ preserves derived contact19, caps cumulative surface travel at72.10 mm/eight
 Preview subframes, and fits with one voxel margin in the same-size domain moved
 to x=0.57. This admits one integrated impact-liquid Preview only; it does not
 claim spill completion or repair the retained full48 FAIL.
+
+## J-647 · Integrate real Bullet impact with accepted moving liquid
+
+Date: 2026-09-02 · Type: PHYSICAL INTEGRATION PREREGISTRATION · Blender starts / Bullet bakes / liquid Data bakes / liquid Mesh bakes / renders: 0 / 0 / 0 / 0 / 0
+
+C12 freezes one same-process frame1–36 integration: recreate exact R40 from its
+striker, unkeyed ball, explicit 2 mm-margin cup and passive 40 mm-rise ramp;
+then bake the accepted attempt-70 Preview-96 APIC liquid with exactly eight
+derived cup-effector subframes. The floor and ramp become explicit static fluid
+effectors. New gates require a post-contact 5% spill, 25 mm cup-local liquid
+motion, conservation, manifold/bounded topology, no deep cup/ramp/floor
+intrusion and zero one-voxel-inset domain escape. One attempt may pass or fail;
+there is no render, save, native build, network call or engine mutation.
