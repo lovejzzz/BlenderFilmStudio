@@ -992,9 +992,10 @@ containment and all other 16 checks passed; Data/Mesh took 251.55/2.89 seconds.
 Evidence is
 `experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-distance-attempt-59`;
 receipt/audit self hashes are `62316a54…` / `95b7f021…`. Do not try a second
-effector-distance value. Next preregister one zero-bake copied-cache occupancy
-comparison before selecting a different physical degree of freedom. Do not
-render or begin real impact.
+effector-distance value. Attempt-60 is now preregistered as one zero-bake,
+zero-Blender copied-cache occupancy comparison; its fresh roots remain absent.
+Run that exact diagnostic before selecting a different physical degree of
+freedom. Do not render or begin real impact.
 
 ## Public routes
 

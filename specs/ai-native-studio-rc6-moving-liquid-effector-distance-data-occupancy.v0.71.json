@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6MovingLiquidEffectorDistanceDataOccupancy.v0.71",
+  "status": "PREREGISTERED_BEFORE_ATTEMPT_60_ROOT_CREATION",
+  "researchCommitBeforePreregistration": "91ea9b2cf9167eb905cc72ecb5b47687e13b2511",
+  "authority": {
+    "uri": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "classification": "safe bounded read-only cache-copy analysis under standing owner autonomy"
+  },
+  "question": "Did the useful 2.0-cell effector-distance response improve particle occupied-voxel support before Mesh reconstruction, and does Data support still shrink beyond the 15-percent moving-liquid ceiling?",
+  "baseline": {
+    "attempt59CacheRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-effector-distance-attempt-59/mantaflow-cache",
+    "attempt59CacheManifestHash": "b443ee1c9e3899b311f51490d400e722c2818fc91d3fda8b16bbf409a08d43db",
+    "attempt59CacheFiles": 72,
+    "attempt59CacheBytes": 7986262,
+    "attempt59ResultFileSha256": "f860dc539d0f63e39fae718059a428d5ea000c999a780be53c57e981c42aaf0f",
+    "attempt59ResultHash": "ccb16ddd6e36c50ce4009e9a36afb3b249a6d9ff2715521129142588a3b3f2cb",
+    "attempt59AuditFileSha256": "141ee5ea1a978d4115efc873873cc0e9ab07262b242116b4d217f8d7772071d8",
+    "attempt59AuditHash": "95b7f021bf66cf6decb08ea141d0014ef3d9cd184ab8ea9221019162421b7ae1",
+    "attempt58ResultFileSha256": "696c13f022f6f3f809d595908550d4971ca8b0eac86809aa17f3236b9b695f4b",
+    "attempt58ResultHash": "f254bca2e485f037e2351d1b5248e8fec74f8d47d8179876734ae51b04c48ee9",
+    "attempt58FinalOccupancyDriftFraction": -0.2876935615321923,
+    "attempt56FinalMeshDriftFraction": -0.3422762779345705,
+    "attempt59FinalMeshDriftFraction": -0.23026356
+  },
+  "runtime": {
+    "enginePython": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/bin/python3.13",
+    "enginePythonVersion": "3.13.13",
+    "enginePythonSha256": "986943968d1908932b002bd96245885145ac87a71ce5f105cf467cc285a2f594",
+    "openVdbModule": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/5.2/python/lib/python3.13/site-packages/openvdb.cpython-313-darwin.so",
+    "openVdbModuleSha256": "d9e505e2ec7d0f4c0b98a4b0c1f7d08d9ee1e65c0115bec77a2a2016c34d2849",
+    "openVdbLibrary": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/build/bin/Film Studio Engine F0.app/Contents/Resources/lib/libopenvdb.dylib",
+    "openVdbLibrarySha256": "43963a772b9582eae35d3db0388971ebcd5bdb52381814a9a5c392cbac6c890f",
+    "openVdbLibraryVersion": [13, 0, 0],
+    "openVdbFileFormatVersion": 225
+  },
+  "freshRoots": {
+    "workspace": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-moving-liquid-effector-distance-data-occupancy-attempt-60",
+    "evidence": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-effector-distance-data-occupancy-attempt-60"
+  },
+  "measurement": {
+    "frameStart": 1,
+    "frameEnd": 24,
+    "requiredGridNames": ["particles", "velocity"],
+    "requiredGridTypes": ["PointDataGrid", "Vec3SGrid"],
+    "requiredBaseResolution": [96, 53, 62],
+    "requiredVoxelSizeMeters": 0.009375,
+    "particleOccupancyProxy": "particles.file_voxel_count * file_voxel_size^3",
+    "comparisons": [
+      "attempt-59 2.0-cell occupancy versus attempt-59 Mesh volume",
+      "attempt-59 occupancy drift versus attempt-58 2.5-cell occupancy drift",
+      "attempt-59 Mesh drift versus attempt-56 2.5-cell Mesh drift",
+      "per-frame occupancy-improvement versus Mesh-improvement correlation"
+    ]
+  },
+  "classificationRules": {
+    "dataShrinkPersists": "attempt-59 final occupancy drift < -0.15, final Mesh drift < -0.15 and occupancy/Mesh Pearson correlation >= 0.8",
+    "dataSupportStableSurfaceSuspected": "maximum absolute attempt-59 occupancy drift <= 0.15 while final Mesh drift magnitude > 0.15",
+    "otherwise": "DATA_MESH_RELATION_INCONCLUSIVE",
+    "claimLimit": "occupied sparse voxels are not exact mass or a signed liquid level-set volume"
+  },
+  "processCeilings": {
+    "systemRunnerStarts": 1,
+    "enginePythonStartsIncludingAudit": 2,
+    "cacheCopies": 1,
+    "blenderStarts": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "networkCalls": 0,
+    "retainedRootWrites": 0
+  },
+  "resourceCeilings": {
+    "minimumReserveBytes": 107374182400,
+    "projectedWriteBytes": 67108864,
+    "maximumWorkspaceBytes": 67108864,
+    "maximumEvidenceBytes": 67108864
+  },
+  "tools": [
+    {
+      "uri": "scripts/analyze-rc6-moving-liquid-effector-distance-occupancy.py",
+      "sha256": "3b0ea02f8a5dc0512536e78d2aa86a40f178056aa5e91afd43cd9fb2e6817e90"
+    },
+    {
+      "uri": "scripts/run-rc6-moving-liquid-effector-distance-occupancy.py",
+      "sha256": "94b5f55eaaadb0942672d9589115240de33c1b222db0b4626754968f4154e0b0"
+    },
+    {
+      "uri": "scripts/audit-rc6-moving-liquid-effector-distance-occupancy.py",
+      "sha256": "648b03804eaaecb971f219d069d6f4ec6a799d7327d1740feeb680b70741e7cf"
+    }
+  ],
+  "executionOrder": [
+    "commit this spec and exact tools while both attempt-60 roots are absent",
+    "run the system runner once to copy the immutable attempt-59 cache",
+    "invoke the analyzer and independent auditor with the exact engine Python",
+    "retain the result and both roots without further effector-distance tuning"
+  ],
+  "stopRule": "Retain every outcome. Never read or write the source cache through Blender, never add another surface_distance value, never substitute activeVoxelCount for metadata file_voxel_count and never call occupancy exact mass.",
+  "claimCeiling": "Read-only copied-cache spatial-support comparison only; no exact Data mass, moving-liquid correction, impact, render or film-quality claim.",
+  "specHash": "c27dd7bfe02da1c80ca21dab40fc0d4e804d6aa1268eb6e9e487cac0fd8c95b2"
+}
