@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "bfs.rc6LiquidFinalEffectorDataSpec.v0.44",
+  "status": "FROZEN",
+  "experimentId": "RC6-LIQUID-FINAL-EFFECTOR-DATA-2026-09-02-ATTEMPT-42",
+  "purpose": "Test exactly one Final-resolution obstacle-level-set correction by comparing a fresh surface_distance=2.5 Data bake with the immutable accepted surface_distance=1.5 baseline, without repeating the baseline or reconstructing Mesh.",
+  "toolFreezeParent": "c60d408e04fdec89ddfcd6b367b8cfe14dee8234",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "scope": "One fresh local-only seven-frame resolution-192 Data bake with cup effector surface_distance=2.5; zero Mesh bake, save, render, network or engine remote write; ordinary research commit and non-force push are allowed.",
+    "specificConfirmationRequired": false
+  },
+  "roots": {
+    "work": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-2026-09-02-final-effector-data-attempt-42",
+    "evidence": "/Users/mengyingli/Documents/ChatGPT/MyBlenderFilmStudio/experiments/physical-richness/RC6-2026-09-02-final-effector-data-attempt-42"
+  },
+  "inputs": {
+    "binarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
+    "sourceBlendSha256": "9ac79c9c3c0d13273ac20804a3af99884f9465534800c3d9ca2ae8121499e644",
+    "sourceMeshVolumeCubicMeters": 0.0013283283766941,
+    "sourceBottomClearanceMeters": 0.035,
+    "engineSourceCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900"
+  },
+  "retainedBaseline": {
+    "resolutionMax": 192,
+    "cupEffectorSurfaceDistanceCells": 1.5,
+    "resultPath": "experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-attempt-37/cells/axis-control/result.json",
+    "resultFileSha256": "93b4a12a9e797463635b5b98a247fabbeffd9b74b602dd90ccfb8144538fd569",
+    "resultHash": "e3e52359bfc4d2191b162384b9b5890e547416defc1ead4c0fdd025f708f3794",
+    "auditPath": "experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-audit-c1-attempt-38/independent-audit-c1.json",
+    "auditFileSha256": "5e16d4701c9e3d3721ae580e019757ad60fa3650b09cc68546f17e9c0abe3b1b",
+    "auditHash": "840b8b91e9af9b9c36775297314900214c4c9313c34947294e2d48f358b160cf",
+    "maximumOneVoxelOutlierCount": 9,
+    "outlierFrames": [4, 5, 6, 7],
+    "physicalRegion": "INSIDE_CUP_SOLID_FLOOR"
+  },
+  "lowerTierScreen": {
+    "receiptPath": "experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-c2-attempt-41/receipt.json",
+    "receiptFileSha256": "12397d6da4879073614ea9f3d680166ec046ddc1025ccf183ebac9644b412331",
+    "receiptHash": "1ea60739c3684cebbc6de68c9ac4e9d98119a37116df5d106657869b9ad64eac",
+    "auditPath": "experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-c2-attempt-41/independent-audit.json",
+    "auditFileSha256": "142fedc2b53237a9f92a610f126b383ab66ebaab5ad384cbb38427601ffbd002",
+    "auditHash": "12b147b5466d92755eb2f609a361ed4ab2b3684c3d9a31c5758b492d96266e8d",
+    "status": "INCONCLUSIVE_LOWER_TIERS_CONTAINED",
+    "finding": "Resolution 96 at 1.5/2.5 cells and resolution 128 at 1.5 cells all had zero strict or one-cell-envelope particle outliers."
+  },
+  "configuration": {
+    "cellId": "final-effector-plus1",
+    "frameStart": 1,
+    "frameEnd": 7,
+    "resolutionMax": 192,
+    "baseVoxelMeters": 0.0026041667,
+    "domainCenterMeters": [0.32, 0.0, 0.25],
+    "domainDimensionsMeters": [0.36, 0.36, 0.5],
+    "sourceDimensionsMeters": [0.11, 0.11, 0.14],
+    "sourceBottomClearanceMeters": 0.035,
+    "simulationMethod": "APIC",
+    "useAdaptiveTimesteps": true,
+    "timestepsMin": 1,
+    "timestepsMax": 4,
+    "cflCondition": 2.0,
+    "particleNumber": 2,
+    "particleRadius": 1.6,
+    "useMesh": false,
+    "useFlipParticles": true,
+    "initialUseFlipParticles": true,
+    "initialParticleSystemCount": 1,
+    "displayPercentage": 100,
+    "useFractions": true,
+    "deleteInObstacle": false,
+    "waterViscosityBase": 1.0,
+    "waterViscosityExponent": 6,
+    "flowSurfaceDistanceCells": 0.0,
+    "cupEffectorSurfaceDistanceCells": 2.5,
+    "cupEffectorIsPlanar": false,
+    "cupEffectorEnabled": true,
+    "cupEffectorSubframes": 0
+  },
+  "acceptance": {
+    "baselineMaximumOneVoxelOutlierCount": 9,
+    "candidateMaximumOneVoxelOutlierCount": 0,
+    "candidateMaximumOneVoxelOutlierFraction": 0.0,
+    "candidateOutlierFrames": [],
+    "nextGateOnPass": "mesh-only reconstruction confirmation from this immutable Data cache",
+    "nextGateOnFailure": "cup topology, normals, Is Planar and applied-transform audit"
+  },
+  "cacheContract": {
+    "exactFiles": 14,
+    "frames": [1, 2, 3, 4, 5, 6, 7],
+    "stages": ["config", "data"]
+  },
+  "resourceCeilings": {
+    "blenderStarts": 1,
+    "fluidDataBakes": 1,
+    "fluidMeshBakes": 0,
+    "blendSaves": 0,
+    "renderCalls": 0,
+    "networkCalls": 0,
+    "engineRemoteWrites": 0,
+    "workBytes": 4294967296,
+    "evidenceBytes": 67108864,
+    "projectedWriteBytes": 4294967296,
+    "minimumFreeBytesBefore": 137438953472,
+    "minimumFreeBytesAfter": 107374182400
+  },
+  "stopRule": "Stop on non-fresh roots, dirty worktree, retained baseline/lower-screen drift, input drift, source roster/geometry/placement drift, configuration mismatch, missing evaluated particles, aggregate/detail mismatch, cache roster other than exact 14 config/Data files, process/log/result failure, any Mesh bake/save/render/network/remote-write count, symlink, banned media or resource failure. Do not repeat the baseline, assign use_flip_particles, enable Delete in Obstacle, vary any other physics value or proceed to slow tip in this attempt.",
+  "claimCeiling": "One Data-only resolution-192 causal comparison of cup effector surface_distance 1.5 versus 2.5 cells. A pass proves elimination of the measured active particle outliers only; it does not prove reconstructed-surface quality, volume/topology, slow tip, impact, render or finished-film quality.",
+  "tools": {
+    "scripts/run-rc6-liquid-final-effector-data-scene.py": "47297161866f85451587d49d2a0f659a0f64e1eddc51c9b2176313766a1171d8",
+    "scripts/run-rc6-liquid-final-effector-data.py": "05dc0f7550b2f84456e6e3ff89edb01284ec73ecf546b8588efa2dacb1607574",
+    "scripts/audit-rc6-liquid-final-effector-data.py": "22a9c4b4310a673bd6626d385f367d9132fbc3c56812b422dd83c1c8972a4842"
+  },
+  "specHash": "cfa4746d99bcda08865f31876eea06249ec228265c46a34db66362600fd3e95d"
+}
