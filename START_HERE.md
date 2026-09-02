@@ -1187,6 +1187,17 @@ only admits a future liquid Preview; it neither repairs C10's full48 FAIL nor
 claims all liquid has spilled. Next build one integrated same-solve R40
 Bullet+APIC Preview using the accepted attempt-70 liquid settings. Do not reuse
 the old hinge/motor slow-tip rig, replay cup poses, render or start Final-192.
+C12 integrated attempt-84 is now an immutable physical `FAIL` with an independent
+20/20 audit. The same-solve R40 Bullet path remained exact, spill began after
+contact and the domain/ramp/floor gates passed, but the liquid destabilized at
+frame23: peak reconstructed volume reached about16.385× source, positive liquid
+bodies reached239 and connected components reached243. Twenty-two of27 physical
+checks passed; the five failures are conservation, temporal drift and bounded
+topology/coherence. This is not a trajectory or obstacle failure and it must not
+be rendered. Next preregister one zero-bake copied-cache Data-versus-Mesh
+diagnostic over frames20–36. Never mount the retained attempt-84 cache directly
+in Blender and do not start another impact bake until the first failing layer is
+identified.
 
 ## Public routes
 

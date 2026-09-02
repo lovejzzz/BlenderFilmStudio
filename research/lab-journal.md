@@ -7553,3 +7553,17 @@ effectors. New gates require a post-contact 5% spill, 25 mm cup-local liquid
 motion, conservation, manifold/bounded topology, no deep cup/ramp/floor
 intrusion and zero one-voxel-inset domain escape. One attempt may pass or fail;
 there is no render, save, native build, network call or engine mutation.
+
+## J-648 · Real impact exposes a delayed liquid stability failure
+
+Date: 2026-09-02 · Type: RETAINED PHYSICAL FAILURE · Blender starts / Bullet bakes / liquid Data bakes / liquid Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+C12 attempt-84 passes independent audit20/20 and 22/27 physical checks. The
+same-solve R40 trajectory remains exact, contact is frame19, spill starts20,
+and domain/ramp/floor/manifold checks pass. Frames1–22 remain coherent; at
+frame23 volume jumps to0.0034768 m³ and topology splits to129 components.
+Peak volume reaches16.385× source, with239 positive bodies and243 components.
+This localizes the failure after impact but does not yet distinguish Data
+inflation from Mesh reconstruction. Retain both roots immutable; next use a
+fresh complete cache copy for a zero-bake Data-versus-Mesh diagnostic before
+changing any physical parameter or rendering.

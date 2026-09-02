@@ -42,8 +42,14 @@ scope correction 10/10. The base audit failure remains immutable; C1 found zero
 render media in the scene runtime. Publication receipt is
 `experiments/physical-richness/RC5-publication-2026-09-01-attempt-01/receipt.json`.
 Do not call this fracture, deformation or fluid simulation. Preserve RC4/D1/H1
-as exact regressions. The next gate is RC6 curriculum design; select exactly
-one measurable physical degree of freedom before product or scene mutation.
+as exact regressions. RC6 C12 attempt-84 is retained `FAIL` with an independent
+20/20 audit: the exact R40 Bullet path and obstacle/domain checks passed, but
+the liquid destabilized at frame23, reaching about16.385× source volume, 239
+positive bodies and243 connected components. Do not render, rerun or repair
+that root. The next gate is a preregistered zero-bake copied-cache Data-versus-
+Mesh diagnostic over frames20–36; select exactly one measurable physical degree
+of freedom only after locating whether the first failure is in Data support or
+Mesh reconstruction.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.
