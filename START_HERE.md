@@ -1207,6 +1207,16 @@ but does not make occupied voxels an exact mass measure or identify the precise
 solver mechanism. Next inspect the bound Mantaflow source and exact C12
 configuration read-only, then preregister exactly one high-speed Data-layer
 degree of freedom. Do not tune surface reconstruction, bake or render first.
+C14 attempt-86 is now an immutable physical `FAIL` with an independent 20/20
+audit. Increasing only liquid `timesteps_max` from4 to8 cut the catastrophic
+peak from about16.385× source to3.357×, positive bodies from239 to50 and
+connected components from243 to52, while preserving the exact R40 Bullet path.
+It therefore identifies the timestep ceiling as a major contributor, not a
+complete repair. Conservation, temporal drift, bounded topology and cup-solid
+intrusion still fail; there was no render or save. Resume with read-only
+per-frame analysis of attempt-86 and select one further Data/collision variable.
+Never rerun, repair or render this root, tune Mesh reconstruction or weaken the
+27 frozen gates.
 
 ## Public routes
 

@@ -49,8 +49,14 @@ positive bodies and243 connected components. C13 attempt-85 then passed a
 zero-bake copied-cache audit22/22: Data particle support and Mesh both first
 expand at frame23 and correlate at0.97597, rejecting a Mesh-only explanation.
 Do not render, rerun or repair either root and do not tune surface reconstruction.
-The next gate is read-only source/configuration inspection followed by exactly
-one preregistered high-speed Data-layer degree of freedom.
+Source inspection selected exactly one Data-layer change: `timesteps_max` 4→8.
+C14 attempt-86 is retained `FAIL` with independent audit 20/20. It reduced peak
+volume from about 16.385× source to 3.357×, positive bodies 239→50 and connected
+components 243→52, proving the step ceiling was a major contributor but not the
+sole cause. Conservation, temporal drift, bounded topology and 2.45% cup-solid
+intrusion still fail. Do not rerun, repair or render attempt-86. Next inspect its
+fresh per-frame transition read-only and preregister one further Data/collision
+variable without changing Mesh reconstruction or thresholds.
 The latest host preflight is below the conservative 160 GiB new-build threshold,
 so design/evidence work may continue but another clean native build must wait
 for a fresh passing admission.

@@ -7603,3 +7603,15 @@ quarter frame from the first Data failure onward. C14 changes only
 `timesteps_max`4→8, preserving CFL2, minimum2, APIC, every geometry and all27
 physical gates. It tests one source-led high-speed stability hypothesis, not a
 surface repair or threshold search.
+
+## J-652 · More fluid steps suppress most of the explosion, but not enough
+
+Date: 2026-09-02 · Type: RETAINED PHYSICAL FAILURE · Blender starts / Bullet bakes / liquid Data bakes / liquid Mesh bakes / renders: 1 / 1 / 1 / 1 / 0
+
+C14 attempt-86 passes independent audit20/20 but remains a physical FAIL.
+Changing only `timesteps_max`4→8 reduces peak volume from about16.385× source
+to3.357×, positive bodies239→50 and components243→52. The exact R40 motion,
+domain, ramp and floor remain valid. Five gates still fail: conservation,
+temporal drift, body/component bounds and2.45% cup intrusion. The next move is
+read-only transition analysis and one further preregistered Data/collision
+variable—not a rerun, render, Mesh tweak or threshold relaxation.
