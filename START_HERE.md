@@ -1097,6 +1097,14 @@ receipt/audit self hashes are `a1a4218b…` / `cf814e45…`. The slow moving-liq
 Preview gate is closed. Next design and Bullet-screen the real basketball
 impact trajectory with zero liquid bake; do not choose an impact by eye or
 start a costly impact-fluid bake before that trajectory is frozen.
+The restart checkpoint is
+`research/2026-09-02-rc6-real-impact-trajectory-restart-checkpoint.md`.
+Read-only inventory shows the old P02 motion translates the cup roughly
+7.5-10 cm per frame around impact, many times the Preview-96 `0.009375 m`
+voxel. After restart, preregister a Bullet-only 48-frame speed screen that
+changes only striker `driveEndFrame`; values 8/10/12 are candidates, not yet a
+frozen experiment. Measure cup-surface displacement and derive effector
+subframes before any liquid bake. No attempt-71 root or Blender start exists.
 
 ## Public routes
 

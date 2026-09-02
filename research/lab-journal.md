@@ -7266,3 +7266,17 @@ attempt-68 despite the thicker band. This closes the Preview slow-moving-liquid
 gate. The next step is a zero-liquid-bake basketball-impact trajectory design
 and Bullet screen; do not carry an arbitrary authored impact or immediately
 spend on a full fluid bake.
+
+## J-623 · Restart checkpoint freezes the next question, not an impact answer
+
+Date: 2026-09-02 · Type: READ-ONLY INVENTORY / RESTART HANDOFF · Blender starts / bakes / renders: 0 / 0 / 0
+
+The retained P02 launcher contacts at frame 8 and tips the cup to about 90
+degrees by frame 15, but its roughly 7.5-10 cm cup translation per frame is many
+times the Preview-96 `0.009375 m` voxel. Slower retained candidates contact at
+frames 13-17; the old contact-by-frame-12 rejection therefore does not select a
+fluid-friendly motion. After restart, preregister a zero-liquid, Bullet-only
+screen changing only striker `driveEndFrame`, measure actual cup-surface
+displacement and derive required effector subframes over a 48-frame window.
+Candidate values 8/10/12 remain unfrozen design inputs. Attempt-71 has not
+started and no root exists.
