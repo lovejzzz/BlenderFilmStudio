@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "bfs.rc6FluidObservationEscalationSpec.v0.45",
+  "status": "PREREGISTERED_BEFORE_PRODUCT_MUTATION",
+  "experimentId": "RC6-FLUID-OBSERVATION-ESCALATION-2026-09-02",
+  "purpose": "Teach Film Studio that a contained result at a cheaper liquid tier cannot clear an accepted defect observed at a more discriminating tier, and make it select the smallest same-tier single-variable probe instead of silently passing.",
+  "preregistrationParentResearchCommit": "161b9c3c19299a08d121075aa3c06751b6db8872",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "allowed": [
+      "modify only scripts/modules/film_studio_fluid_pipeline.py on the retained product branch",
+      "run pure system-Python validation and independent audit without Blender",
+      "publish research evidence and an ordinary fast-forward product commit after PASS"
+    ],
+    "forbidden": [
+      "Blender start, bake, render, build or scene mutation",
+      "any second product path",
+      "force push, tag, release, binary distribution or paid service"
+    ]
+  },
+  "productBaseline": {
+    "repository": "lovejzzz/film-engine",
+    "branch": "codex/rc6-fluid-pipeline",
+    "commit": "554539ed7db4de6b98358c6bdfd67943f4284cab",
+    "implementationPath": "scripts/modules/film_studio_fluid_pipeline.py",
+    "maximumProductPathsChanged": 1
+  },
+  "measuredMotivation": {
+    "acceptedFinalDefect": {
+      "tier": "FINAL",
+      "resolutionMax": 192,
+      "path": "experiments/physical-richness/RC6-2026-09-01-flip-particle-detail-attempt-37/cells/axis-control/result.json",
+      "fileSha256": "93b4a12a9e797463635b5b98a247fabbeffd9b74b602dd90ccfb8144538fd569",
+      "resultHash": "e3e52359bfc4d2191b162384b9b5890e547416defc1ead4c0fdd025f708f3794",
+      "maximumOneVoxelOutlierCount": 9,
+      "physicalRegion": "INSIDE_CUP_SOLID_FLOOR"
+    },
+    "acceptedLowerTierScreen": {
+      "tiers": ["PREVIEW", "REVIEW"],
+      "resolutions": [96, 128],
+      "path": "experiments/physical-richness/RC6-2026-09-02-obstacle-voxel-screen-c2-attempt-41/receipt.json",
+      "fileSha256": "12397d6da4879073614ea9f3d680166ec046ddc1025ccf183ebac9644b412331",
+      "receiptHash": "1ea60739c3684cebbc6de68c9ac4e9d98119a37116df5d106657869b9ad64eac",
+      "status": "INCONCLUSIVE_LOWER_TIERS_CONTAINED",
+      "maximumOneVoxelOutlierCount": 0
+    }
+  },
+  "productContract": {
+    "function": "evaluate_observation_escalation",
+    "inputAuthority": "The product supplies exact self-hashed accepted-defect and candidate-observation receipts; a proposal cannot supply a verdict, next tier or action.",
+    "tierOrder": ["DRAFT", "PREVIEW", "REVIEW", "FINAL"],
+    "requiredBindings": [
+      "same non-resolution physics identity hash",
+      "same metric identifier and threshold semantics",
+      "accepted defect self hash",
+      "candidate observation self hash",
+      "exact changed-parameter roster"
+    ],
+    "decisionRules": [
+      {
+        "condition": "candidate tier is cheaper than the accepted defect tier and candidate is contained",
+        "status": "INCONCLUSIVE_LOWER_TIER_CONTAINED",
+        "nextAction": "RUN_SAME_TIER_SINGLE_VARIABLE_PROBE",
+        "nextTier": "accepted defect tier",
+        "clearsAcceptedDefect": false
+      },
+      {
+        "condition": "candidate tier equals the accepted defect tier, candidate is contained and exactly one parameter changed",
+        "status": "CANDIDATE_SAME_TIER_SIGNAL",
+        "nextAction": "VERIFY_NEXT_DEPENDENT_STAGE",
+        "clearsAcceptedDefect": false
+      },
+      {
+        "condition": "candidate still exceeds the defect threshold at the same tier",
+        "status": "DEFECT_REPRODUCED",
+        "nextAction": "AUDIT_CAUSAL_INPUTS",
+        "clearsAcceptedDefect": false
+      }
+    ]
+  },
+  "requiredNegativeTests": [
+    "unknown tier",
+    "resolution not equal to product-owned tier resolution",
+    "unknown input field",
+    "forged receipt self hash",
+    "physics identity mismatch",
+    "metric mismatch",
+    "threshold mismatch",
+    "candidate tier above accepted defect tier",
+    "zero changed parameters",
+    "more than one changed parameter",
+    "caller-supplied verdict, next action or clears-defect field",
+    "non-finite metric value"
+  ],
+  "acceptance": {
+    "positiveCasesMinimum": 3,
+    "negativeCasesMinimum": 12,
+    "allOutputsSelfHashed": true,
+    "acceptedDefectNeverClearedByThisFunction": true,
+    "changedParametersExact": 1,
+    "noBpyImport": true,
+    "blenderStarts": 0,
+    "builds": 0,
+    "bakes": 0,
+    "renders": 0,
+    "networkCallsDuringValidation": 0
+  },
+  "stopRule": "Stop before product mutation if the research parent, product commit, branch, module path or bound evidence differs. Stop during implementation on a second changed product path, any Blender/build/bake/render/network process, any caller-authored decision field, any accepted-defect-clearing output, an input not bound to exact physics/metric/threshold identity, a non-finite value, a changed-parameter roster other than exactly one, or a failing positive/negative case.",
+  "claimCeiling": "A PASS proves one pure decision function prevents a cheaper liquid tier from clearing an accepted higher-tier defect and selects the smallest same-tier single-variable probe. It does not prove the present Final correction, reconstructed surface, slow tip, impact, render, runtime speedup or finished-film quality.",
+  "specHash": "6ba26302e78faf639b1ff721094ee1208a8e27cbad8a88b24e02e144036e85df"
+}
