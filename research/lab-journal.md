@@ -7341,3 +7341,14 @@ tolerance `1e-6`. The retained receipt, cell results, 22 passing audit checks
 and physical `FAIL` remain exact. The fresh attempt-74 root may contain only the
 corrected audit and manifest. After that closure, test only drive-end 9; C3
 itself grants no new Bullet or liquid execution.
+
+## J-629 · Attempt-73 is now cleanly audited without changing its failure
+
+Date: 2026-09-02 · Type: AUDIT PASS · Blender starts / bakes / renders: 0 / 0 / 0
+
+C3 passed 13/13 and proved the retained attempt-73 manifest stayed exact at
+`8390c039…` before and after. The float32 domain values are within the frozen
+`1e-6` representation tolerance; all original hashes, metrics, logs, processes
+and the physical FAIL remain unchanged. This closes the harness and authorizes
+no liquid work. The next separately preregistered physical run may contain only
+midpoint I09.

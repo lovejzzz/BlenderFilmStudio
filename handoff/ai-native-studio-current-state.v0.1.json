@@ -2901,14 +2901,22 @@
       "auditDefect": "sole false check compares Blender float32 domain vectors exactly with decimal constants; every other independent evidence check passes",
       "nextPhysicalValueAfterAuditClosure": "driveEndFrame 9 only"
     },
+    "realImpactAuditC3Attempt74": {
+      "status": "PASS_AUDIT_ONLY_13_OF_13",
+      "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-real-impact-bullet-speed-screen-audit-c3-attempt-74",
+      "auditHash": "a7a4461b8d0773f32a8380a39daabcc646d3a1b165b40e2d35dc4117125da862",
+      "retainedRootManifestBeforeAfter": "8390c039afc9e8a57fe8c62ae1cff76f29e713bac34bd5b08f9e4c28b463fe4a",
+      "counts": "zero Blender, Bullet, liquid, render, save and network",
+      "physicalVerdictUnchanged": "FAIL_REAL_IMPACT_BULLET_TRAJECTORY"
+    },
     "next": {
       "gate": "RC6-REAL-IMPACT-BULLET-TRAJECTORY",
-      "status": "ATTEMPT_73_RETAINED_FAIL_C3_AUDIT_ONLY_CORRECTION_NEXT",
+      "status": "ATTEMPT_73_AUDIT_CLOSED_I09_PREREGISTRATION_NEXT",
       "mustBindAcceptedMovingLiquid": "attempt-70 particle radius 1.8, particle band width 4.0, fractions distance 0.25 and all accepted geometry/Mesh settings",
-      "initialStrategy": "audit immutable attempt-73 with bounded float32 representation tolerance, then preregister only driveEndFrame 9 because 8 is too fast and 10 is too weak",
+      "initialStrategy": "preregister only driveEndFrame 9 because 8 is too fast and 10 is too weak; retain every other v0.84 physical and resource field unchanged",
       "readOnlyInventory": "retained P02 contacts at frame 8 and reaches about 90 degrees by frame 15 but translates the cup roughly 7.5-10 cm per frame; P03/P05 contact at frame 13 and P06 at frame 17, showing the old contact-by-frame-12 gate was not a liquid-fidelity criterion",
       "restartCheckpoint": "research/2026-09-02-rc6-real-impact-trajectory-restart-checkpoint.md",
-      "executionStatus": "THREE_BULLET_BAKES_COMPLETE_PHYSICAL_FAIL_ZERO_LIQUID_RENDER_SAVE_NETWORK",
+      "executionStatus": "THREE_BULLET_BAKES_PHYSICAL_FAIL_C3_AUDIT_13_OF_13_PASS_ZERO_LIQUID_RENDER_SAVE_NETWORK",
       "mustMeasure": [
         "derived ball-to-cup contact frame and continuous pre/post-contact transforms",
         "solver-owned cup tilt and floor/spill opportunity window",
@@ -2926,6 +2934,7 @@
     "attempt73Evidence": "experiments/physical-richness/RC6-2026-09-02-real-impact-bullet-speed-screen-c2-attempt-73",
     "attempt73ReceiptHash": "daa640822837594e64f8e0bd23da6601a3a8127e5879665fa70e6ecdae2443d1",
     "attempt73AuditHash": "4a8a42f3b18f3f001edeafa242b173c422b4222e73e7936580c7108dc83c9e02",
+    "attempt74AuditHash": "a7a4461b8d0773f32a8380a39daabcc646d3a1b165b40e2d35dc4117125da862",
     "restartCheckpoint": "research/2026-09-02-rc6-real-impact-trajectory-restart-checkpoint.md",
     "attempt70Preregistration": "research/2026-09-02-rc6-moving-liquid-particle-band-width-preregistration.md",
     "attempt70SourceInspection": "research/2026-09-02-rc6-moving-liquid-particle-band-width-source-inspection.md",

@@ -1116,6 +1116,11 @@ because float32 domain values were compared with exact decimal equality. Next
 run an audit-only C3 with `1e-6` representation tolerance on the immutable root,
 then preregister only midpoint `driveEndFrame=9`; do not rerun attempt-73 or
 start liquid.
+Audit-only C3 attempt-74 now passes 13/13 with self hash `a7a4461b…` and
+proves the retained attempt-73 root manifest stayed exact at `8390c039…`.
+The physical verdict remains FAIL. The next admissible physical gate is one
+fresh Bullet-only `driveEndFrame=9` run with every other v0.84 field and
+threshold unchanged; no liquid or render may begin first.
 
 ## Public routes
 
