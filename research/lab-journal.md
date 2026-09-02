@@ -7487,3 +7487,15 @@ z=0.22→0.28, run/rise 0.30/0.06 m and angle 11.31°. It can lift the unkeyed
 ball center toward z=0.40 before contact. I09 speed, 0.75 cup friction, 2 mm
 margin and all thresholds remain exact. The ramp and Bullet must own the path;
 no liquid starts unless the one run passes.
+
+## J-642 · Passive ramp proves the moment-arm mechanism
+
+Date: 2026-09-02 · Type: PHYSICAL NEAR-PASS / REUSABLE RULE · Blender starts / Bullet bakes / liquid bakes / renders: 1 / 1 / 0 / 0
+
+C9's 60 mm passive rise lifted the unkeyed ball center to 400.16 mm at contact
+frame 20. Cup response began frame 21, crossed 45° at 33 and peaked 90.03°.
+The independent audit passes 23/23. It remains a physical FAIL because 93.48
+mm/frame requires ten Preview subframes and the cup exits the accepted domain.
+The contact-moment mechanism is validated but its amplitude is not. Keep the
+0.30 m passive run and select only a 40 mm rise next; that predicts the frozen
+minimum 380 mm contact center without changing speed, friction or domain.

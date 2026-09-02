@@ -1160,6 +1160,15 @@ test but did not predict the transient solve. Preserve I09, 2 mm cup margin and
 the original 0.75 friction. Next inspect and preregister one real passive ramp
 that raises the solver-owned ball contact point; never key vertical ball motion
 or start liquid before the Bullet trajectory passes.
+C9 then added one real passive 0.30 m run / 0.06 m rise wedge while preserving
+I09, friction 0.75 and the 2 mm margin. With zero ball animation it raised ball
+contact to z=0.40016 m, response began the next frame, crossed 45° at frame 33
+and reached 90.03°; the audit passes 23/23. The physical verdict is still FAIL
+because 93.48 mm/frame requires ten subframes and swept x=1.016 m leaves the
+accepted domain. The moment-arm mechanism is correct but 60 mm is too strong.
+Do not expand the domain or start liquid. Next test only a 40 mm rise on the
+same 0.30 m passive ramp, placing predicted contact at the frozen 0.38 m
+minimum; preserve every other field.
 
 ## Public routes
 
