@@ -923,17 +923,30 @@ and an unlimited free fall to 90 degrees. Attempt-50 is retained at
 receipt/audit self hashes are `8b422857…` / `5bf296d3…` and its independent
 audit is 18/18 PASS.
 
-After restart, first run the ordinary cold-start reads and host preflight, then
-preregister C4 in fresh attempt-51 roots. C4 may change only the diagnosed
-harness/mechanism details: free the retained rigid cache and evaluate frame 1
-before deriving the hinge-local pivot; use cup angular damping `0.8`; use a
-physical hinge limit of `-60°/+5°`; and screen drive-end frames
-28/32/36/40. It must preserve the 45-degree response gate, four-frame response
-span, exact surface sampling, -5 mm floor tolerance, one-voxel domain margin,
-at most ten derived effector subframes, zero cup/ball pose keys, and zero fluid,
-render or save work. Add a stronger peak-tilt-at-most-65-degree stop check. Do
-not begin moving Mantaflow or visual rendering until this Bullet-only gate
-passes. The last fully pushed research commit at this boundary is `ce0fffca`.
+C4 attempt-51 is also a retained `FAIL_BULLET_SCREEN`, independently audited
+18/18. Its bounded hinge stopped all four cells near 60 degrees with only
+2.54–3.47 mm pivot drift, but the kinematic pusher penetrated the visible cup
+surface by as much as 57.85 mm and produced a 126.96–142.80 mm per-frame
+surface displacement, requiring 14–16 subframes. The domain margin also missed
+by only 1–2 mm. Receipt/audit self hashes are `729a1a65…` / `5dc0e42a…`.
+
+C5 replaced that penetrating pusher with a separate impulse-bounded Bullet
+MOTOR paired with the existing HINGE. Attempt-52 is retained as a harness-only
+`FAIL_EXECUTION`: the first 120-frame Bullet bake completed, but an obsolete
+post-bake conditional referenced the removed `separation` variable before any
+physical result was written. It used one Blender start and one Bullet bake,
+with zero fluid, render, save or network work. Failure self hash is
+`df357639…`. Do not infer anything about motor physics from this harness error.
+
+After restart, first run the ordinary cold-start reads and host preflight. C5-C1
+is already preregistered and pushed at commit `3dd9e448b1b7f9d757bf9f2ab7d2b948d36c7482`;
+its spec is `specs/ai-native-studio-rc6-slow-tip-bullet-screen-c5-c1.v0.61.json`
+with self hash `56c8b074…`. Fresh attempt-53 work/evidence roots are still absent.
+Run that exact frozen four-cell protocol once. The correction only inserts an
+inert `separation = math.inf` sentinel after the completed bake; all motor,
+hinge, response, surface, domain, subframe and authority gates remain unchanged.
+Do not begin moving Mantaflow or visual rendering until the Bullet-only gate
+passes.
 
 ## Public routes
 

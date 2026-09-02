@@ -4,7 +4,7 @@
   "snapshotDate": "2026-09-02",
   "project": "BlenderFilmStudio",
   "activeProgram": "AI Native Film Studio",
-  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_PC6_CAUSAL_PRODUCTIZATION_PASS_PC7_FILMIC_PHYSICS_PASS_PC8_MEASURED_SHUTTER_PASS_PC9_PHYSICAL_ARCHETYPES_PASS_RC1_ROBOT_CAPSTONE_PASS_PUBLISHED_RC2_PHYSICAL_LIGHT_TRANSFER_PASS_PUBLISHED_RC3_ACTION_GRAMMAR_PASS_RC4_UNSTAGED_PHYSICAL_REALISM_PASS_PUBLISHED_RC5_BREAKABLE_ATTACHMENT_PASS_PUBLISHED_RC6_FINAL_STATIC_LIQUID_PASS_SLOW_TIP_C3_RETAINED_C4_NEXT_STANDING_AUTONOMY_ACTIVE",
+  "status": "F0_COMPLETE_REPOSITORY_PUBLICATION_C1_PASS_PB1_THROUGH_PB7_PASS_PC6_CAUSAL_PRODUCTIZATION_PASS_PC7_FILMIC_PHYSICS_PASS_PC8_MEASURED_SHUTTER_PASS_PC9_PHYSICAL_ARCHETYPES_PASS_RC1_ROBOT_CAPSTONE_PASS_PUBLISHED_RC2_PHYSICAL_LIGHT_TRANSFER_PASS_PUBLISHED_RC3_ACTION_GRAMMAR_PASS_RC4_UNSTAGED_PHYSICAL_REALISM_PASS_PUBLISHED_RC5_BREAKABLE_ATTACHMENT_PASS_PUBLISHED_RC6_FINAL_STATIC_LIQUID_PASS_SLOW_TIP_C4_RETAINED_C5_HARNESS_FAIL_C5_C1_ATTEMPT53_FROZEN_NOT_RUN_STANDING_AUTONOMY_ACTIVE",
   "decision": {
     "id": "ADR-001",
     "selectedHypothesis": "Direct thin fork of official Blender source with an independent product identity",
@@ -47,7 +47,7 @@
     "verifiedAt": "2026-08-29",
     "sourceCheckoutMustRemainOutsideThisRepository": true
   },
-  "activeGate": "RC6-SLOW-TIP-BULLET-SCREEN-C4",
+  "activeGate": "RC6-SLOW-TIP-BULLET-SCREEN-C5-C1",
   "postF0Charter": {
     "status": "HISTORICAL_PREREGISTRATION_SUPERSEDED_BY_STANDING_AUTONOMY_FOR_VERSIONED_PHASE_B_WORK",
     "preregistrationCommit": "6a38ca3bdd93219ec6dcd001fa72143df7d80a10",
@@ -2507,8 +2507,8 @@
     "Do not stage unrelated owner changes"
   ],
   "rc6CurrentCheckpoint": {
-    "status": "FINAL_STATIC_LIQUID_PASS_SLOW_TIP_C3_RETAINED_C4_NEXT",
-    "c3EvidenceCommit": "ce0fffca58bdc40055834862a0e4b12b8d5b16c2",
+    "status": "FINAL_STATIC_LIQUID_PASS_SLOW_TIP_C4_RETAINED_C5_HARNESS_FAIL_C5_C1_ATTEMPT53_FROZEN_NOT_RUN",
+    "checkpointCommit": "3dd9e448b1b7f9d757bf9f2ab7d2b948d36c7482",
     "acceptedBinarySha256": "ad08b54132b75325a12580f705fdefc205dd4444a36f2491e4d8a200e1091ef2",
     "acceptedStaticLiquid": {
       "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-final-effector-mesh-c3-attempt-46",
@@ -2555,26 +2555,48 @@
         "receiptHash": "8b422857c326c11170b19f4169a40f2af94f9388faf667915fe80a4ddb6ac412",
         "audit": "18/18 PASS",
         "auditHash": "5bf296d356c0e14a55c7be659b391af3908ef3a8011d57e8a0378212da3cad3a"
+      },
+      {
+        "attempt": 51,
+        "mechanism": "bounded Bullet hinge with direct kinematic pusher",
+        "failure": "all cells stopped near 60 degrees, but pusher penetration caused 126.96-142.80 mm per-frame surface displacement and 14-16 derived subframes; domain margin missed by 1-2 mm",
+        "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c4-attempt-51",
+        "receiptHash": "729a1a65de486794e934da48394310f31c480f3b45c7265b59c5a68066c3b7b4",
+        "audit": "18/18 PASS",
+        "auditHash": "5dc0e42a1534c4003e4ef887bcdfeb09567d44c04630e0a85c0e26cfcb6f30c8"
+      },
+      {
+        "attempt": 52,
+        "mechanism": "separate impulse-bounded Bullet MOTOR paired with retained HINGE",
+        "failure": "harness-only NameError after the first completed 120-frame Bullet bake; no physical result written",
+        "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-attempt-52",
+        "failureHash": "df357639308ed9e92372a541ad1087c9835a3cbe2b17ce19ec37d4d4ff5cda06",
+        "failureFileSha256": "368745fcdc9b0e785cd8e9e3875c25b237058410b78dcfed8c70575518a57fc2",
+        "blenderStarts": 1,
+        "bulletBakes": 1,
+        "physicalResultWritten": false
       }
     ],
     "next": {
-      "gate": "RC6-SLOW-TIP-BULLET-SCREEN-C4",
-      "attempt": 51,
-      "mustPreregisterBeforeRootCreation": true,
+      "gate": "RC6-SLOW-TIP-BULLET-SCREEN-C5-C1",
+      "attempt": 53,
+      "preregistered": true,
+      "preregistrationCommit": "3dd9e448b1b7f9d757bf9f2ab7d2b948d36c7482",
+      "spec": "specs/ai-native-studio-rc6-slow-tip-bullet-screen-c5-c1.v0.61.json",
+      "specHash": "56c8b0740c267fe95d2bb4fe0bba63ceaba3e45d82e448176d28feca777564c5",
+      "rootsAbsentAtCheckpoint": true,
       "onlyCorrections": [
-        "free retained rigid cache and evaluate frame 1 before deriving the hinge-local pivot",
-        "set cup angular damping to 0.8",
-        "set physical hinge angular limits to -60 and +5 degrees",
-        "screen drive-end frames 28, 32, 36 and 40",
-        "strengthen the mechanical-stop gate with peak cup tilt at most 65 degrees"
+        "insert separation = math.inf after hinge_pivot_drift assignment so the obsolete inherited separation conditional remains unreachable"
       ],
       "unchangedGates": [
-        "peak cup tilt at least 45 degrees",
-        "response within 4 frames",
+        "same four C5 motor target velocities and drive-end frames 48, 60, 72 and 96",
+        "HINGE and MOTOR identities, axes, limits, damping, target velocity and maximum impulse",
+        "peak cup tilt between 45 and 65 degrees",
+        "five-to-forty-five-degree span at least 4 frames",
         "minimum surface z at least -0.005 m",
         "one-voxel moving-effector domain margin",
         "required effector subframes at most 10",
-        "zero cup and ball pose keys",
+        "zero cup, ball and pusher pose keys",
         "zero fluid bakes, renders and blend saves"
       ],
       "movingMantaflowAllowedBeforePass": false,
@@ -2582,8 +2604,12 @@
     }
   },
   "nextExpectedCheckpoint": {
-    "gate": "RC6-SLOW-TIP-BULLET-SCREEN-C4",
-    "result": "RC6 final static liquid is accepted; slow-tip attempts 47-50 are retained audited failures; C4 attempt-51 is the next preregistered Bullet-only correction",
+    "gate": "RC6-SLOW-TIP-BULLET-SCREEN-C5-C1",
+    "result": "RC6 final static liquid is accepted; attempts 47-51 are retained audited Bullet-screen failures; C5 attempt-52 is a retained harness-only failure; C5-C1 attempt-53 is frozen and not run",
+    "checkpointCommit": "3dd9e448b1b7f9d757bf9f2ab7d2b948d36c7482",
+    "attempt53Spec": "specs/ai-native-studio-rc6-slow-tip-bullet-screen-c5-c1.v0.61.json",
+    "attempt53SpecHash": "56c8b0740c267fe95d2bb4fe0bba63ceaba3e45d82e448176d28feca777564c5",
+    "attempt53RootsAbsent": true,
     "acceptedRc5DevelopmentEvidence": "experiments/physical-richness/RC5-2026-09-01-development-attempt-13",
     "receiptHash": "396fc68af41870908e51d82f01ce6741228efad97d1179faabf60fe1fa07cf2d",
     "formalEvidence": "experiments/physical-richness/RC5-2026-09-01-attempt-01",
@@ -2606,12 +2632,11 @@
     "authoritySource": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json#/ownerAuthority",
     "repeatedOwnerAuthorizationRequired": false,
     "requiredArtifacts": [
-      "retain accepted RC6 final static-liquid attempt-46 and slow-tip attempts 47-50 immutable",
-      "preregister fresh C4 attempt-51 before creating its work or evidence roots",
-      "reset the rigid cache and evaluate frame 1 before deriving the hinge-local pivot",
-      "use physical damping and hinge limits without adding cup or ball pose keys",
-      "keep the surface, domain, response and derived-subframe thresholds unchanged, while adding a 65-degree maximum-stop gate",
-      "do not begin moving Mantaflow until the Bullet-only C4 gate passes",
+      "retain accepted RC6 final static-liquid attempt-46 and slow-tip attempts 47-52 immutable",
+      "run exact frozen C5-C1 attempt-53 once after cold-start reads and host preflight",
+      "do not alter the four motor cells, paired HINGE/MOTOR mechanism, thresholds or resource ceilings",
+      "retain attempt-53 whether PASS, FAIL or harness failure and independently audit it",
+      "do not begin moving Mantaflow until the Bullet-only C5-C1 gate passes",
       "do not render or visually tune lighting until the moving-liquid physical gate passes",
       "continue to deny proposal-originated Python, shell, network and arbitrary-filesystem authority",
       "preserve specific-confirmation boundaries for cost, destructive operations, force-push, public binary release, signing and notarization"
