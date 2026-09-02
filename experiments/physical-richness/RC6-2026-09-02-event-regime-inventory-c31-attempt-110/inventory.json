@@ -1,0 +1,207 @@
+{
+  "cases": [
+    {
+      "baseVoxelMeters": 0.009375,
+      "derivedEffectorSubframes": 1,
+      "failedChecks": [],
+      "maximumPositiveBodies": 1,
+      "maximumSurfaceTravelMeters": 0.0058703,
+      "mechanism": "HINGE_AND_MOTOR",
+      "observedPhysicalStatus": "PASS",
+      "productPreviewWindowAdmitted": true,
+      "role": "slowResult",
+      "samplingBand": "SUBVOXEL_PER_FRAME",
+      "sourceVolumeError": 0.10442088,
+      "surfaceTravelVoxelsPerFrame": 0.6261653333333334,
+      "temporalVolumeDrift": 0.06901662,
+      "window": [
+        1,
+        24
+      ]
+    },
+    {
+      "baseVoxelMeters": 0.009375,
+      "derivedEffectorSubframes": 8,
+      "failedChecks": [
+        "connectedComponentsBounded",
+        "positiveLiquidBodiesBounded",
+        "sourceRelativeVolumeWithin25Percent",
+        "temporalVolumeDriftWithin15Percent"
+      ],
+      "maximumPositiveBodies": 37,
+      "maximumSurfaceTravelMeters": 0.07210387178205792,
+      "mechanism": "FREE_BODY_EXTERNAL_COLLISION",
+      "observedPhysicalStatus": "FAIL",
+      "productPreviewWindowAdmitted": false,
+      "role": "impactBaseline",
+      "samplingBand": "MULTIVOXEL_PER_FRAME",
+      "sourceVolumeError": 0.47217227,
+      "surfaceTravelVoxelsPerFrame": 7.691079656752845,
+      "temporalVolumeDrift": 0.33451408,
+      "window": [
+        1,
+        36
+      ]
+    },
+    {
+      "baseVoxelMeters": 0.009375,
+      "derivedEffectorSubframes": 8,
+      "failedChecks": [
+        "sourceRelativeVolumeWithin25Percent",
+        "temporalVolumeDriftWithin15Percent"
+      ],
+      "maximumPositiveBodies": 10,
+      "maximumSurfaceTravelMeters": 0.07210387178205792,
+      "mechanism": "FREE_BODY_EXTERNAL_COLLISION",
+      "observedPhysicalStatus": "FAIL",
+      "productPreviewWindowAdmitted": false,
+      "role": "impactResult",
+      "samplingBand": "MULTIVOXEL_PER_FRAME",
+      "sourceVolumeError": 0.41560821,
+      "surfaceTravelVoxelsPerFrame": 7.691079656752845,
+      "temporalVolumeDrift": 0.3913077,
+      "window": [
+        1,
+        36
+      ]
+    }
+  ],
+  "checkCount": 10,
+  "checks": {
+    "c30SupportsParticleAndMeshLoss": true,
+    "crossRegimeComparisonIsConfounded": true,
+    "holdoutUnexecutedAndFrozen": true,
+    "neitherImpactCandidatePasses": true,
+    "noRecipeAutoSelection": true,
+    "researchWindowIsNotProductTierAdmission": true,
+    "retainedAuditsPass": true,
+    "samplingBandsSeparateObservedCases": true,
+    "samplingFormulaMatchesActualSettings": true,
+    "slowHasAcceptedPhysicalEvidence": true
+  },
+  "claimCeiling": "One read-only evidence/source inventory and frozen non-executable regime/holdout design. It proves neither a physical recipe, predictive generalization, product integration, actual cache speedup, completed holdout, exact mass nor film quality.",
+  "crossRegimeConfigurationDifferences": {
+    "cupEffectorSubframes": {
+      "impact": 8,
+      "slow": 1
+    },
+    "domainCenterMeters": {
+      "impact": [
+        0.57,
+        0,
+        0.26
+      ],
+      "slow": [
+        0.45,
+        0.0,
+        0.26
+      ]
+    },
+    "fractionsThreshold": {
+      "impact": 0.1,
+      "slow": 0.05
+    },
+    "frameEnd": {
+      "impact": 36,
+      "slow": 24
+    },
+    "particleBandWidth": {
+      "impact": 3,
+      "slow": 4.0
+    },
+    "timestepsMax": {
+      "impact": 8,
+      "slow": 4
+    },
+    "trajectoryCellId": {
+      "impact": "R40",
+      "slow": "C5F96"
+    }
+  },
+  "inputs": [
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-slow-tip-bullet-screen-c5-c3-attempt-55/cells/C5F96/result.json",
+      "role": "slowTrajectory",
+      "sha256": "00193b1a1258814f5a0a5b7a2308686f9f7daa0826f554af62c55e7de38fb261"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-band-width-attempt-70/result.json",
+      "role": "slowResult",
+      "sha256": "1ee56f3f986f4f7ae3759f0956cb5cc9af0eb2e5fc2ebf95ddcb290f09ed6e18"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-moving-liquid-particle-band-width-attempt-70/independent-audit.json",
+      "role": "slowAudit",
+      "sha256": "40f381942a50a49fdf0f816ed397d2d99190afb17990faeed43b48b4a2646db4"
+    },
+    {
+      "path": "specs/ai-native-studio-rc6-moving-liquid-particle-band-width.v0.81.json",
+      "role": "slowSpec",
+      "sha256": "ced086359c9a2a6ac6dde20fa24787c0a36b3c1e468cb4996961d607dcabcef2"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-real-impact-liquid-fractions-threshold-c18-attempt-90/result.json",
+      "role": "impactBaseline",
+      "sha256": "eecd00e01bef7417a48a781e7be95e1fb51f9513360944c43bfe078c533cd661"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-real-impact-liquid-fractions-threshold-c18-audit-c1-attempt-91/audit.json",
+      "role": "impactBaselineAudit",
+      "sha256": "3b1a5b0f38b3f1e178e914b8501229a31cf1501edb029d1e858f2ece69bb1f35"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-real-impact-liquid-particle-band-width-c29-attempt-108/result.json",
+      "role": "impactResult",
+      "sha256": "022c4187f02cddfffe0ce06bb88f36e169f2deead2450a8e9cfabacc9649f3c4"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-real-impact-liquid-particle-band-width-c29-attempt-108/independent-audit.json",
+      "role": "impactAudit",
+      "sha256": "2d1328c02e1b7d63dde4cdd744078cd45b14cf90fbce9884ad56f4f3d300b5cc"
+    },
+    {
+      "path": "specs/ai-native-studio-rc6-real-impact-liquid-particle-band-width-c29.v1.19.json",
+      "role": "impactSpec",
+      "sha256": "ee2e54e5887a4f2bd55985216e2aa1850169beb4264e0454d1d44661958571ae"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-real-impact-particle-band-width-data-comparison-c30-attempt-109/result.json",
+      "role": "comparison",
+      "sha256": "f4647dc34b44aa32134b496335d3022912dd395c22436dea524e97bb9d5d84b4"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-real-impact-particle-band-width-data-comparison-c30-attempt-109/independent-audit.json",
+      "role": "comparisonAudit",
+      "sha256": "2d3e2c8a6d85a3627333263ee9984d17994236c9781d831d1816770e1a274cc4"
+    },
+    {
+      "path": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC6-fluid-pipeline-development/source/scripts/modules/film_studio_fluid_pipeline.py",
+      "role": "productModule",
+      "sha256": "05c0c1cbe094732d3d93074e5ea3aa2e3bdde230e2b9f4ba05c6c9db4781580b"
+    }
+  ],
+  "inventoryHash": "b429737d2642f4939aa3cbcec3c917ec41e56987214d38bca522990a95c662cd",
+  "passCount": 10,
+  "productQualityTiers": {
+    "DRAFT": {
+      "maximumFrameCount": 12,
+      "resolutionMax": 64
+    },
+    "FINAL": {
+      "maximumFrameCount": 240,
+      "resolutionMax": 192
+    },
+    "PREVIEW": {
+      "maximumFrameCount": 24,
+      "resolutionMax": 96
+    },
+    "REVIEW": {
+      "maximumFrameCount": 48,
+      "resolutionMax": 128
+    }
+  },
+  "researchExecutionCommit": "86d5b0e2ea1c5b1effb1b0e211c7f694f1b25579",
+  "schemaVersion": "bfs.rc6C31Inventory.v1.0",
+  "specFileSha256": "f7dae13ab4e95fa1620384690d0a2be37856abea40feef3729b139ccd74bbd1a",
+  "status": "PASS_DESIGN_INVENTORY"
+}

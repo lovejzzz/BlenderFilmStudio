@@ -1447,6 +1447,20 @@ universal default, and occupied support is not exact mass. After restart, C31
 is one zero-Blender read-only event-regime policy/feature design that freezes
 an independent holdout before any adaptive product mutation or new bake. See
 `research/2026-09-02-rc6-real-impact-particle-band-width-data-comparison-c30-result.md`.
+C31 attempt-110 now passes inventory10/10 and independent20/20 without Blender
+or product mutation. Its exact-window surface travel is0.626165 voxels/frame
+for accepted slow-tip versus7.691080 for both failed impact candidates. This
+is sampling context, not a speed-to-bandwidth recipe: solver settings and
+windows also differ, and no impact candidate passes all physical checks. The
+actual local product policy still caps PREVIEW at24 frames; the36-frame impact
+is research-only until a versioned product adapter is validated. C31 freezes
+a non-executable regime/evidence-vector contract and a future rectangular-vessel
+linear-motion holdout, whose physical result remains UNKNOWN and execution
+count remains zero. Do not replace the primary R40 impact project with that
+holdout. Next C32 is read-only bound-source investigation of solver-native
+liquid-volume observability (including resumable cache), before any separately
+preregistered unchanged-physics diagnostic. Do not scan another scalar or
+render. See `research/2026-09-02-rc6-event-regime-inventory-c31-result.md`.
 
 ## Public routes
 
