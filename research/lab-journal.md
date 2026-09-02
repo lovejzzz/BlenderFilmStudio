@@ -7005,3 +7005,16 @@ then expected a C5-C2 log marker even though the unchanged scene tool correctly
 emitted its frozen C5 marker. The independent failure audit passes 16/16. C5-C3
 must change only that runner marker expectation and preserve every observed
 physical input and threshold in fresh roots.
+
+## J-603 · RC6 full motor screen passes physically; float32 audit equality retains base failure
+
+Date: 2026-09-02 · Type: BASE AUDIT FAILURE WITH COMPLETE PHYSICAL PASS · Blender starts / Bullet bakes / fluid bakes / renders: 4 / 4 / 0 / 0
+
+C5-C3 completed all four unchanged cells and selected slowest passing C5F96.
+It reached 60.002°, took 63 frames from 5→45°, moved the surface at most
+5.87 mm per frame, required one derived subframe and held hinge drift to
+0.0058 mm. The receipt is `PASS_BULLET_SCREEN`. The independent audit is 17/18
+because it compared Blender float32 domain dimensions literally with decimal
+JSON values; all other checks passed. C5-C4 must be audit-only, preserve the
+base audit and physics, and use only the already validated `1e-6` representation
+tolerance for the three domain axes.
