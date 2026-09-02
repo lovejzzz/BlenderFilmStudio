@@ -7431,3 +7431,13 @@ value: the nearest previously bounded I08 drive timing, now evaluated under the
 corrected margin. It raises mean actuator speed about 14% while preserving
 contact height, geometry, mass, friction, domain and every acceptance threshold.
 One fresh Bullet-only run may pass or fail; no liquid follows a failure.
+
+## J-637 · Correct adapter cardinality before physical execution
+
+Date: 2026-09-02 · Type: HARNESS FAILURE / C1 PREREGISTRATION · Blender starts / Bullet bakes / liquid bakes / renders: 0 / 0 / 0 / 0
+
+C7 stopped before root creation because its wrapper expected four already
+adapted C6 replacement targets twice although each appears once. C7-C1 versions
+the tools, corrects only those static cardinalities and moves to fresh
+attempt-79 roots. The S08 impulse, explicit 2 mm cup margin, physical thresholds
+and all resource/process ceilings remain unchanged.
