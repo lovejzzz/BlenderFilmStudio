@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "bfs.rc6FluidIterationPolicySpec.v0.36",
+  "status": "PREREGISTERED_BEFORE_PRODUCT_PATH_CREATION",
+  "experimentId": "RC6-FLUID-ITERATION-POLICY-2026-09-01",
+  "purpose": "Teach Film Studio to separate interactive liquid iteration from final-resolution confirmation, derive cache invalidation from typed state differences, and reject an unreviewed resolution-192 solve.",
+  "preregistrationParent": "dc658acaba59ebfc68c4ed7da8418f313575a964",
+  "authority": {
+    "standingContract": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "standingContractFileSha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "allowed": [
+      "one new pure-Python product module under scripts/modules",
+      "one fresh sparse local-only source clone rooted outside the research repository",
+      "static and system-Python contract tests with no Blender start",
+      "research evidence, ordinary commits and non-force pushes after validation"
+    ],
+    "notYetAllowedByThisGate": [
+      "native build while host free space is below the 160 GiB build admission",
+      "Blender start, bake, render or scene mutation",
+      "film-engine remote write before an independently audited product candidate exists"
+    ]
+  },
+  "productBaseline": {
+    "repository": "lovejzzz/film-engine",
+    "commit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
+    "implementationPath": "scripts/modules/film_studio_fluid_pipeline.py",
+    "maximumProductPathsChanged": 1
+  },
+  "measuredMotivation": {
+    "resolution96SevenFrameControl": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-c1-attempt-23/cells/clearance-35mm/result.json",
+      "fileSha256": "2cc09ec59c0f21042d2cd4873096b376802d6b18de2c01addc3c1706edc78a17",
+      "resultHash": "67a743acfc06d387abccedbdb8886b2b4fb0f0f60fb79a44552470511fda8e14",
+      "resolutionMax": 96,
+      "wallSeconds": 95.015728
+    },
+    "resolution192SevenFrameControl": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-source-clearance-final-c2-attempt-27/receipt.json",
+      "fileSha256": "645c6151cfef6581965efeec0d5ed2f8f46feb4a728e117ef43b9a28838591b2",
+      "receiptHash": "f9b4278e8d1727990db24431ead30517b31e28304e0d4ef2fa56b172b01ec057",
+      "resolutionMax": 192,
+      "wallSeconds": 1453.275196,
+      "dataBakeSecondsFromBoundLog": 1431.64,
+      "meshBakeSecondsFromBoundLog": 15.03,
+      "dataShareOfTotal": 0.9851128,
+      "observedSlowdownVersus96": 15.29510142
+    },
+    "resolution192MeshOnlyMatrix": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-final-mesh-only-c2-attempt-30/matrix.json",
+      "fileSha256": "59ae97dca53360a4419bcca0d10b3953923fce22165bf9fa9ca83e2e3266e612",
+      "matrixHash": "24bdb0e6af362973e1ecb878e02139f359f2a751683c624c3cdeb7d5f8322600",
+      "radius9SevenFrameMeshOnlySeconds": 81.553158
+    },
+    "particleSurfaceAmplification": {
+      "path": "experiments/physical-richness/RC6-2026-09-01-flip-particle-axis-c1-attempt-34/independent-audit.json",
+      "fileSha256": "a52088864aa8fc6f11541942af3fd295ae757ee838c5142773731927f6acced3",
+      "auditHash": "bfd71c7b18e30cdfea8d5a2b7196da27a72d445dd104ea0b744da2d10322ed56",
+      "checks": "27/27 PASS"
+    },
+    "claim": "These timings establish the need for tiering and cache reuse on this M2 Max; they are not cross-host performance promises. Resolution 64 and 128 timings remain unmeasured."
+  },
+  "qualityTiers": {
+    "DRAFT": {
+      "resolutionMax": 64,
+      "maximumFrameCount": 12,
+      "purpose": "scene wiring, collision proxies and gross motion direction",
+      "mayAuthorizeFinal": false
+    },
+    "PREVIEW": {
+      "resolutionMax": 96,
+      "maximumFrameCount": 24,
+      "purpose": "routine physics decisions, containment and volume trends",
+      "mayAuthorizeFinal": false
+    },
+    "REVIEW": {
+      "resolutionMax": 128,
+      "maximumFrameCount": 48,
+      "purpose": "candidate confirmation before final cost",
+      "mayAuthorizeFinal": true
+    },
+    "FINAL": {
+      "resolutionMax": 192,
+      "maximumFrameCount": 240,
+      "purpose": "one frozen scientific or finished-shot confirmation",
+      "requiresExactReviewReceipt": true
+    }
+  },
+  "typedSnapshot": {
+    "schemaVersion": "bfs.fluidStateSnapshot.v0.1",
+    "exactTopLevelKeys": [
+      "schemaVersion",
+      "physics",
+      "surface",
+      "visual"
+    ],
+    "physicsIncludes": [
+      "quality-derived resolution",
+      "frame window and fps",
+      "domain metric bounds and transform",
+      "time scale, CFL and timestep bounds",
+      "simulation method, particle radius/count and viscosity",
+      "flow geometry/settings and effector collision geometry/settings"
+    ],
+    "surfaceIncludes": [
+      "mesh scale and generator",
+      "mesh particle radius",
+      "positive/negative smoothing",
+      "concavity bounds"
+    ],
+    "visualIncludes": [
+      "material, lighting, camera and render-review settings"
+    ],
+    "integrityRule": "The product, not a proposal, constructs the snapshot from observed Blender state. Canonical hashes are derived independently for physics, surface and visual groups."
+  },
+  "cacheDecisionTable": [
+    {
+      "condition": "no prior state or physics hash changed",
+      "decision": "BAKE_DATA_THEN_MESH",
+      "reuse": []
+    },
+    {
+      "condition": "physics hash exact, surface hash changed, exact bound Data cache present",
+      "decision": "REUSE_DATA_BAKE_MESH",
+      "reuse": [
+        "DATA"
+      ]
+    },
+    {
+      "condition": "physics and surface hashes exact, visual hash changed, exact bound Data and Mesh caches present",
+      "decision": "REUSE_DATA_AND_MESH_VISUAL_ONLY",
+      "reuse": [
+        "DATA",
+        "MESH"
+      ]
+    },
+    {
+      "condition": "all three hashes exact with exact cache bindings",
+      "decision": "REUSE_ALL",
+      "reuse": [
+        "DATA",
+        "MESH"
+      ]
+    }
+  ],
+  "finalAdmission": {
+    "requiredReviewStatus": "PASS_REVIEW",
+    "requiredReviewTier": "REVIEW",
+    "bindings": [
+      "physics identity excluding quality-derived resolution",
+      "surface hash",
+      "frame window",
+      "review receipt self hash"
+    ],
+    "rule": "FINAL changes resolution and therefore always creates a new Data cache. It may start only when the non-resolution physical identity, surface and frame window match an exact self-hashed REVIEW receipt.",
+    "rejections": [
+      "FINAL_WITHOUT_REVIEW",
+      "STALE_REVIEW_RECEIPT",
+      "PHYSICS_CHANGED_AFTER_REVIEW",
+      "SURFACE_CHANGED_AFTER_REVIEW",
+      "FRAME_WINDOW_CHANGED_AFTER_REVIEW"
+    ]
+  },
+  "requiredNegativeTests": [
+    "unknown tier",
+    "resolution override",
+    "frame-count ceiling exceeded",
+    "non-finite snapshot number",
+    "surface-only reuse with missing or stale Data cache hash",
+    "visual-only reuse with missing or stale Mesh cache hash",
+    "FINAL without review receipt",
+    "FINAL with forged self hash",
+    "FINAL after non-resolution physics change",
+    "FINAL after surface change",
+    "proposal-supplied cache decision or signature"
+  ],
+  "acceptance": {
+    "exactQualityTiers": 4,
+    "positiveCasesMinimum": 8,
+    "negativeCasesMinimum": 11,
+    "unknownInputFieldsRejected": true,
+    "allPlansSelfHashed": true,
+    "noBpyImport": true,
+    "blenderStarts": 0,
+    "builds": 0,
+    "bakes": 0,
+    "renders": 0,
+    "networkCallsDuringValidation": 0
+  },
+  "stopRule": "Stop before product mutation if the baseline, evidence bytes, parent or fresh sparse root differ. During implementation stop on a second product path, any Blender/build/bake/render/network process, non-finite acceptance, caller-authored resolution/cache decision/signature, a failing positive or negative case, or an unclean source tree outside the one allowed path. Retain failures and correct only in a new version.",
+  "claimCeiling": "A PASS proves one pure product policy can derive liquid quality tiers, cache invalidation and final admission from typed state on the frozen baseline. It does not prove Blender integration, actual bake acceleration, corrected liquid physics, slow-tip behavior, impact, visual quality, cross-host performance or finished-film quality.",
+  "specHash": "e5f130b9342893eb8e310a92196c3e8e53a8de7ab04381b5658e8341f4a59fff"
+}
