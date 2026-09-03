@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "bfs.aiNativeStudioRc6NativePhiOperationOrderC35.v1.28",
+  "status": "PREREGISTERED_READ_ONLY_BEFORE_ATTEMPT117",
+  "researchParent": "1205e0e520c039a5c06cc3ce70642c9297e06528",
+  "authority": "standing-autonomy; zero-Blender read-only source/evidence audit",
+  "sourceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/source",
+  "sourceCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
+  "sourceFiles": [
+    {"path": "intern/mantaflow/intern/strings/liquid_script.h", "sha256": "b526a55e9ba35d5ba41ef53dc5d027e9e13831a32a2862c424752b616a10392b"},
+    {"path": "extern/mantaflow/preprocessed/plugin/flip.cpp", "sha256": "83bc8bb4f4af7bbbeee88c3760c32dae687c80c1e2d1f7eb64a1169fa69dc332"},
+    {"path": "source/blender/makesrna/intern/rna_fluid.cc", "sha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4"}
+  ],
+  "sourceFacts": [
+    {"id": "fixedCellBands", "path": "intern/mantaflow/intern/strings/liquid_script.h", "lines": [15, 24], "contains": ["narrowBandWidth_s$ID$         = 3", "combineBandWidth_s$ID$        = narrowBandWidth_s$ID$ - 1", "adjustedNarrowBandWidth_s$ID$ = $PARTICLE_BAND_WIDTH$"]},
+    {"id": "particleObstaclePreviousOrder", "path": "intern/mantaflow/intern/strings/liquid_script.h", "lines": [241, 264], "contains": ["pp_s$ID$.advectInGrid", "pushOutofObs(parts=pp_s$ID$", "phiTmp_s$ID$.copyFrom(phi_s$ID$)", "grid=phi_s$ID$, order=1"]},
+    {"id": "particlePhiCurrentPhiOrder", "path": "intern/mantaflow/intern/strings/liquid_script.h", "lines": [266, 279], "contains": ["unionParticleLevelset(parts=pp_s$ID$", "phi_s$ID$.addConst(1.)", "phi_s$ID$.join(phiParts_s$ID$)", "updateFromLevelset(phi_s$ID$)"]},
+    {"id": "pressureBeforeResampling", "path": "intern/mantaflow/intern/strings/liquid_script.h", "lines": [316, 337], "contains": ["solvePressure(", "adjustNumber(parts=pp_s$ID$", "apicMapMACGridToParts", "flipVelocityUpdate"]},
+    {"id": "cellRadiusFactor", "path": "extern/mantaflow/preprocessed/plugin/flip.cpp", "lines": [519, 540], "contains": ["calculateRadiusFactor", "sqrt(3.)", "SURFACE_LS"]},
+    {"id": "resamplingKillRules", "path": "extern/mantaflow/preprocessed/plugin/flip.cpp", "lines": [544, 575], "contains": ["!tmp.isInBounds", "phiv > 0", "phiv < -narrowBand", "num > maxParticles"]},
+    {"id": "resamplingSeedRules", "path": "extern/mantaflow/preprocessed/plugin/flip.cpp", "lines": [578, 604], "contains": ["skip cells near surface", "phi(i, j, k) < -narrowBand", "exclude", "cnt < minParticles", "insertBufferedParticles"]},
+    {"id": "apicDeclaredStable", "path": "source/blender/makesrna/intern/rna_fluid.cc", "lines": [1465, 1476], "contains": ["FLUID_DOMAIN_METHOD_APIC", "more energetic and stable behavior"]},
+    {"id": "particleSamplingProperties", "path": "source/blender/makesrna/intern/rna_fluid.cc", "lines": [1835, 1854], "contains": ["flip_ratio", "particle_randomness", "particle_number", "higher value results in more particles"]}
+  ],
+  "inputs": [
+    {"path": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json", "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0"},
+    {"path": "experiments/physical-richness/RC6-2026-09-03-native-phi-c34-c1-attempt-116/diagnostic-result.json", "sha256": "a9280128c6a9264af470dfec0f61527487e0f1c8a3a5f29dbd48ead86b8695f7"},
+    {"path": "experiments/physical-richness/RC6-2026-09-02-real-impact-liquid-particle-band-width-c29-attempt-108/result.json", "sha256": "022c4187f02cddfffe0ce06bb88f36e169f2deead2450a8e9cfabacc9649f3c4"},
+    {"path": "experiments/physical-richness/RC6-2026-09-02-real-impact-particle-band-width-data-comparison-c30-attempt-109/result.json", "sha256": "f4647dc34b44aa32134b496335d3022912dd395c22436dea524e97bb9d5d84b4"},
+    {"path": "specs/ai-native-studio-rc6-fluid-iteration-policy.v0.36.json", "sha256": "c55d3774892ad983a977ee9b4cbfc6c33ea7616a6438bb678de00bd65579ca33"},
+    {"path": "research/2026-09-03-rc6-native-phi-c34-result.md", "sha256": "2e342f91815fe6ad84ebca4e8f0c09db203baa4638e190d8d5c0872207654f1a"},
+    {"path": "research/2026-09-03-rc6-native-phi-c34-c2-metric-context-correction.md", "sha256": "d04c4f25425b0bb117765725a0c170bb77a458950d9b36d7f93a2bb7945b5287"},
+    {"path": "research/2026-09-03-rc6-native-phi-operation-order-c35-preregistration.md", "sha256": "1ba6c480e81684cc141db6112a287121cadb80cc4eeb955180f3dca9c45237f5"}
+  ],
+  "c34Result": "experiments/physical-richness/RC6-2026-09-03-native-phi-c34-c1-attempt-116/diagnostic-result.json",
+  "c29Result": "experiments/physical-richness/RC6-2026-09-02-real-impact-liquid-particle-band-width-c29-attempt-108/result.json",
+  "c30Result": "experiments/physical-richness/RC6-2026-09-02-real-impact-particle-band-width-data-comparison-c30-attempt-109/result.json",
+  "policySpec": "specs/ai-native-studio-rc6-fluid-iteration-policy.v0.36.json",
+  "expectedMetrics": {
+    "phiFrame36Drift": -0.27196804647785033,
+    "particlePhiFrame36Drift": -0.30319535221495997,
+    "meshFrame36Drift": -0.39130769572167523,
+    "particleCountFrame36Drift": -0.7203309173438759,
+    "particleOccupiedSupportFrame36Drift": -0.5600322320709106,
+    "phiFirst15PercentLossFrame": 31,
+    "particlePhiFirst15PercentLossFrame": 20,
+    "meshFirst15PercentLossFrame": 25,
+    "phiMeshCorrelation": 0.8989779089298234,
+    "phiOccupiedSupportCorrelation": 0.8096348009724715
+  },
+  "selection": {
+    "gate": "C36_DATA_ONLY_RESOLUTION_CONVERGENCE",
+    "singleChange": "resolution_max 96 to 128",
+    "reason": "native occupancy is numerical and fixed-cell levelset/particle support changes world scale with resolution; test convergence before another physical scalar",
+    "notARecipe": true,
+    "meshAndRender": "FORBIDDEN"
+  },
+  "evidence": "experiments/physical-richness/RC6-2026-09-03-native-phi-operation-order-c35-attempt-117",
+  "minimumReserveBytes": 107374182400,
+  "maximumEvidenceBytes": 1048576,
+  "expectedChecks": 22,
+  "counts": {"systemPythonStarts": 1, "blenderStarts": 0, "bakes": 0, "renders": 0, "cacheCopies": 0, "engineBuilds": 0, "engineEdits": 0, "network": 0, "retainedWrites": 0},
+  "claimCeiling": "Read-only operation-order and numerical-resolution selection only; not exact mass, same-frame Data/Mesh causality, one responsible solver operation, repaired physics, admitted product execution, Mesh, render or film quality.",
+  "stopRule": "Create one fresh evidence root only after commit. If any source, metric, order or policy binding fails, retain failure and do not select C36. No Blender/cache mutation/network.",
+  "auditorSha256": "9ffdc7522f77845583cd8d3e1acd1f8e4fb9ad74a2df4f46fcd9675833694845",
+  "specFileSha256": "514f2ea08ebc155b83dd28002cc356c0f022191365ffeb67583e090f7f316d95"
+}
