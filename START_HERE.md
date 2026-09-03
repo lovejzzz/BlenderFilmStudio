@@ -1462,6 +1462,18 @@ liquid-volume observability (including resumable cache), before any separately
 preregistered unchanged-physics diagnostic. Do not scan another scalar or
 render. See `research/2026-09-02-rc6-event-regime-inventory-c31-result.md`.
 
+C32 attempt-111 now closes as `PASS_SOURCE_BINDING_ONLY`, 26/26 mechanical
+checks of eleven exact RC5 source files and retained evidence. Native `phi`,
+`phi_particles` and `phi_previous` are available through resumable Data export,
+but that switch also changes import and Mesh inputs: passivity is unproven.
+Do not equate VDB active counts or native level-set occupancy with exact mass.
+Next C33 starts with separately frozen reader readiness, then a Data-only
+unchanged-physics diagnostic only after actual cache policy/precision and strong
+common particle/velocity comparison are established. No Mesh bake, render,
+pause/resume, source edit or clean build. The impact physical FAIL remains;
+the earlier RC5 contact clip is viewable but is not a new liquid demo. See
+`research/2026-09-02-rc6-native-conservation-observability-c32-result.md`.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>

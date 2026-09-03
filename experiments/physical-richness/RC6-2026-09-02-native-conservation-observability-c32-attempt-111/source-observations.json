@@ -1,0 +1,329 @@
+{
+  "conclusions": {
+    "exactMass": "NOT_MEASURED",
+    "existingCachePath": "SOURCE_SUPPORTED_NOT_RUNTIME_VALIDATED",
+    "impactPhysics": "RETAINED_FAIL",
+    "nextBake": "SEPARATE_PREREGISTRATION_REQUIRED",
+    "passiveMeasurement": "UNPROVEN"
+  },
+  "excerpts": [
+    {
+      "contains": [
+        "\"cache_resumable\"",
+        "FLUID_DOMAIN_USE_RESUMABLE_CACHE",
+        "\"rna_Fluid_datacache_reset\""
+      ],
+      "excerpt": "  prop = RNA_def_property(srna, \"cache_resumable\", PROP_BOOLEAN, PROP_NONE);\n  RNA_def_property_boolean_sdna(prop, nullptr, \"flags\", FLUID_DOMAIN_USE_RESUMABLE_CACHE);\n  RNA_def_property_ui_text(\n      prop,\n      \"Resumable\",\n      \"Additional data will be saved so that the bake jobs can be resumed after pausing. Because \"\n      \"more data will be written to disk it is recommended to avoid enabling this option when \"\n      \"baking at high resolutions.\");\n  RNA_def_property_clear_flag(prop, PROP_ANIMATABLE);\n  RNA_def_property_update(prop, NC_OBJECT | ND_MODIFIER, \"rna_Fluid_datacache_reset\");",
+      "excerptSha256": "3b45cd912c080b60c3d5b96669bdcd1c37b45b41b97b0c4db4b22be9c33ad3e0",
+      "id": "rnaCacheInvalidation",
+      "lines": [
+        2380,
+        2389
+      ],
+      "path": "source/blender/makesrna/intern/rna_fluid.cc"
+    },
+    {
+      "contains": [
+        "liquid_data_dict_final",
+        "'pVel' : pVel_pp$ID$, 'pp' : pp_s$ID$",
+        "'phiParts' : phiParts_s$ID$, 'phi' : phi_s$ID$, 'phiTmp' : phiTmp_s$ID$"
+      ],
+      "excerpt": "    \"\\n\\\nmantaMsg('Liquid alloc')\\n\\\nphiParts_s$ID$   = s$ID$.create(LevelsetGrid, name='$NAME_PHIPARTS$')\\n\\\nphi_s$ID$        = s$ID$.create(LevelsetGrid, name='$NAME_PHI$')\\n\\\nphiTmp_s$ID$     = s$ID$.create(LevelsetGrid, name='$NAME_PHITMP$')\\n\\\nvelOld_s$ID$     = s$ID$.create(MACGrid, name='$NAME_VELOLD$')\\n\\\nvelParts_s$ID$   = s$ID$.create(MACGrid, name='$NAME_VELPARTS$')\\n\\\nmapWeights_s$ID$ = s$ID$.create(MACGrid, name='$NAME_MAPWEIGHTS$')\\n\\\nfractions_s$ID$  = None # allocated dynamically\\n\\\ncurvature_s$ID$  = None\\n\\\n\\n\\\npp_s$ID$         = s$ID$.create(BasicParticleSystem, name='$NAME_PARTS$')\\n\\\npVel_pp$ID$      = pp_s$ID$.create(PdataVec3, name='$NAME_PARTSVELOCITY$')\\n\\\n\\n\\\npCx_pp$ID$       = None\\n\\\npCy_pp$ID$       = None\\n\\\npCz_pp$ID$       = None\\n\\\nif using_apic_s$ID$:\\n\\\n    pCx_pp$ID$   = pp_s$ID$.create(PdataVec3)\\n\\\n    pCy_pp$ID$   = pp_s$ID$.create(PdataVec3)\\n\\\n    pCz_pp$ID$   = pp_s$ID$.create(PdataVec3)\\n\\\n\\n\\\n# Acceleration data for particle nbs\\n\\\npindex_s$ID$     = s$ID$.create(ParticleIndexSystem, name='$NAME_PINDEX$')\\n\\\ngpi_s$ID$        = s$ID$.create(IntGrid, name='$NAME_GPI$')\\n\\\n\\n\\\n# Keep track of important objects in dict to load them later on\\n\\\nliquid_data_dict_final_s$ID$ = { 'pVel' : pVel_pp$ID$, 'pp' : pp_s$ID$ }\\n\\\nliquid_data_dict_resume_s$ID$ = { 'phiParts' : phiParts_s$ID$, 'phi' : phi_s$ID$, 'phiTmp' : phiTmp_s$ID$ }\\n\";",
+      "excerptSha256": "7b8756520a1dc51365e0fd3ff09ee0fcaee5cfb25d0035e391a8d7c68b43b8ab",
+      "id": "liquidCacheRosters",
+      "lines": [
+        68,
+        96
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "fluid_data_dict_final",
+        "'vel' : vel_s$ID$",
+        "'flags' : flags_s$ID$"
+      ],
+      "excerpt": "\\n\\\n# Keep track of important objects in dict to load them later on\\n\\\nfluid_data_dict_final_s$ID$  = { 'vel' : vel_s$ID$ }\\n\\\nfluid_data_dict_resume_s$ID$ = { 'phiObs' : phiObs_s$ID$, 'phiIn' : phiIn_s$ID$, 'phiOut' : phiOut_s$ID$, 'flags' : flags_s$ID$, 'velTmp' : velTmp_s$ID$ }\\n\";\n",
+      "excerptSha256": "1ecfb13152c8658b559aaccddb80707898a814b61cc4ada80ba8e2e34dc594ae",
+      "id": "commonCacheRosters",
+      "lines": [
+        284,
+        288
+      ],
+      "path": "intern/mantaflow/intern/strings/fluid_script.h"
+    },
+    {
+      "contains": [
+        "\"phi_particles\"",
+        "\"phi\"",
+        "\"phi_previous\""
+      ],
+      "excerpt": "#define FLUID_NAME_PHIPARTS \"phi_particles\" /* == OpenVDB grid attribute name. */\n#define FLUID_NAME_PHI \"phi\"                /* == OpenVDB grid attribute name. */\n#define FLUID_NAME_PHITMP \"phi_previous\"    /* == OpenVDB grid attribute name. */",
+      "excerptSha256": "1be413fddd03f2a1a416426edb75f2c489dfc7ea931185c9d3f164a7b248576c",
+      "id": "vdbFieldNames",
+      "lines": [
+        343,
+        345
+      ],
+      "path": "source/blender/makesdna/DNA_fluid_types.h"
+    },
+    {
+      "contains": [
+        "def liquid_load_data_",
+        "def liquid_save_data_",
+        "if resumable else"
+      ],
+      "excerpt": "def liquid_load_data_$ID$(path, framenr, file_format, resumable):\\n\\\n    mantaMsg('Liquid load data')\\n\\\n    dict = { **fluid_data_dict_final_s$ID$, **fluid_data_dict_resume_s$ID$, **liquid_data_dict_final_s$ID$, **liquid_data_dict_resume_s$ID$ } if resumable else { **fluid_data_dict_final_s$ID$, **liquid_data_dict_final_s$ID$ }\\n\\\n    fluid_file_import_s$ID$(dict=dict, path=path, framenr=framenr, file_format=file_format, file_name=file_data_s$ID$)\\n\\\n    \\n\\\n    copyVec3ToReal(source=vel_s$ID$, targetX=x_vel_s$ID$, targetY=y_vel_s$ID$, targetZ=z_vel_s$ID$)\\n\";\n\nconst std::string liquid_load_mesh =\n    \"\\n\\\ndef liquid_load_mesh_$ID$(path, framenr, file_format):\\n\\\n    mantaMsg('Liquid load mesh')\\n\\\n    dict = liquid_mesh_dict_s$ID$\\n\\\n    fluid_file_import_s$ID$(dict=dict, path=path, framenr=framenr, file_format=file_format, file_name=file_mesh_s$ID$)\\n\\\n\\n\\\ndef liquid_load_meshvel_$ID$(path, framenr, file_format):\\n\\\n    mantaMsg('Liquid load meshvel')\\n\\\n    dict = liquid_meshvel_dict_s$ID$\\n\\\n    fluid_file_import_s$ID$(dict=dict, path=path, framenr=framenr, file_format=file_format, file_name=file_meshvel_s$ID$)\\n\";\n\nconst std::string liquid_load_particles =\n    \"\\n\\\ndef liquid_load_particles_$ID$(path, framenr, file_format, resumable):\\n\\\n    mantaMsg('Liquid load particles')\\n\\\n    dict = { **liquid_particles_dict_final_s$ID$, **liquid_particles_dict_resume_s$ID$ } if resumable else { **liquid_particles_dict_final_s$ID$ }\\n\\\n    fluid_file_import_s$ID$(dict=dict, path=path, framenr=framenr, file_format=file_format, file_name=file_particles_s$ID$)\\n\";\n\n//////////////////////////////////////////////////////////////////////\n// EXPORT\n//////////////////////////////////////////////////////////////////////\n\nconst std::string liquid_save_data =\n    \"\\n\\\ndef liquid_save_data_$ID$(path, framenr, file_format, resumable):\\n\\\n    mantaMsg('Liquid save data')\\n\\\n    dict = { **fluid_data_dict_final_s$ID$, **fluid_data_dict_resume_s$ID$, **liquid_data_dict_final_s$ID$, **liquid_data_dict_resume_s$ID$ } if resumable else { **fluid_data_dict_final_s$ID$, **liquid_data_dict_final_s$ID$ }\\n\\\n    if not withMPSave or isWindows:\\n\\\n        fluid_file_export_s$ID$(dict=dict, path=path, framenr=framenr, file_format=file_format, file_name=file_data_s$ID$)\\n\\\n    else:\\n\\\n        fluid_cache_multiprocessing_start_$ID$(function=fluid_file_export_s$ID$, file_name=file_data_s$ID$, framenr=framenr, format_data=file_format, path_data=path, dict=dict, do_join=False)\\n\";\n",
+      "excerptSha256": "d1778c25b695093a16db4727cf17292fc108e109ef1f3fecd254476a4697a964",
+      "id": "loadAndSaveUseResumable",
+      "lines": [
+        424,
+        463
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "if (!hasData(fmd, framenr))",
+        "return false;",
+        "liquid_load_data_"
+      ],
+      "excerpt": "bool MANTA::readData(FluidModifierData *fmd, int framenr, bool resumable)\n{\n  if (with_debug) {\n    cout << \"MANTA::readData()\" << endl;\n  }\n\n  if (!mUsingSmoke && !mUsingLiquid) {\n    return false;\n  }\n\n  ostringstream ss;\n  vector<string> pythonCommands;\n  FluidDomainSettings *fds = fmd->domain;\n  bool result = true;\n\n  string directory = getDirectory(fmd, FLUID_DOMAIN_DIR_DATA);\n  string volume_format = getCacheFileEnding(fds->cache_data_format);\n  string resumable_cache = (!resumable) ? \"False\" : \"True\";\n\n  /* Sanity check: Are cache files present? */\n  if (!hasData(fmd, framenr)) {\n    return false;\n  }\n\n  if (mUsingSmoke) {\n    ss.str(\"\");\n    ss << \"smoke_load_data_\" << mCurrentID << \"('\" << escapePath(directory) << \"', \" << framenr\n       << \", '\" << volume_format << \"', \" << resumable_cache << \")\";\n    pythonCommands.push_back(ss.str());\n    result &= runPythonString(pythonCommands);\n    return (mSmokeFromFile = result);\n  }\n  if (mUsingLiquid) {\n    ss.str(\"\");\n    ss << \"liquid_load_data_\" << mCurrentID << \"('\" << escapePath(directory) << \"', \" << framenr\n       << \", '\" << volume_format << \"', \" << resumable_cache << \")\";\n    pythonCommands.push_back(ss.str());\n    result &= runPythonString(pythonCommands);\n    return (mFlipFromFile = result);\n  }\n  return result;\n}",
+      "excerptSha256": "e67fe5760211c63ec5d8ec0574a4511c26ad043754e9cce40619d076003cfe0c",
+      "id": "noCacheReturnsBeforeImport",
+      "lines": [
+        1359,
+        1400
+      ],
+      "path": "intern/mantaflow/intern/MANTA_main.cpp"
+    },
+    {
+      "contains": [
+        "!baking_mesh",
+        "read_all = !read_partial && with_resumable_cache",
+        "manta_read_data"
+      ],
+      "excerpt": "    else {\n      if (data_frame != scene_framenr) {\n        has_config = manta_read_config(fds->fluid, fmd, data_frame);\n      }\n\n      read_partial = !baking_data && !baking_particles && !baking_mesh && next_data &&\n                     !grid_display;\n      read_all = !read_partial && with_resumable_cache;\n      has_data = manta_read_data(fds->fluid, fmd, data_frame, read_all);\n    }",
+      "excerptSha256": "8e0c9f1d12685ec798e3ffdddff1ff8948899a6194b16a143b9e3fb76d97ab2c",
+      "id": "meshBakeReadsExtendedData",
+      "lines": [
+        3954,
+        3963
+      ],
+      "path": "source/blender/blenkernel/intern/fluid.cc"
+    },
+    {
+      "contains": [
+        "phi_sm$ID$.copyFrom(phi_s$ID$)",
+        "source=phi_s$ID$",
+        "phi_sm$ID$.join(phiParts_sm$ID$)"
+      ],
+      "excerpt": "    \"\\n\\\ndef liquid_step_mesh_$ID$():\\n\\\n    mantaMsg('Liquid step mesh')\\n\\\n    \\n\\\n    # no upres: just use the loaded grids\\n\\\n    if upres_sm$ID$ <= 1:\\n\\\n        phi_sm$ID$.copyFrom(phi_s$ID$)\\n\\\n    \\n\\\n    # with upres: recreate grids\\n\\\n    else:\\n\\\n        interpolateGrid(target=phi_sm$ID$, source=phi_s$ID$)\\n\\\n    \\n\\\n    # create surface\\n\\\n    pp_sm$ID$.readParticles(pp_s$ID$)\\n\\\n    gridParticleIndex(parts=pp_sm$ID$, flags=flags_sm$ID$, indexSys=pindex_sm$ID$, index=gpi_sm$ID$)\\n\\\n    \\n\\\n    if using_final_mesh_s$ID$:\\n\\\n        mantaMsg('Liquid using improved particle levelset')\\n\\\n        improvedParticleLevelset(pp_sm$ID$, pindex_sm$ID$, flags_sm$ID$, gpi_sm$ID$, phiParts_sm$ID$, meshRadiusFactor_s$ID$, smoothenPos_s$ID$, smoothenNeg_s$ID$, concaveLower_s$ID$, concaveUpper_s$ID$)\\n\\\n    else:\\n\\\n        mantaMsg('Liquid using union particle levelset')\\n\\\n        unionParticleLevelset(pp_sm$ID$, pindex_sm$ID$, flags_sm$ID$, gpi_sm$ID$, phiParts_sm$ID$, meshRadiusFactor_s$ID$)\\n\\\n    \\n\\\n    phi_sm$ID$.addConst(1.) # shrink slightly\\n\\\n    phi_sm$ID$.join(phiParts_sm$ID$)\\n\\\n    extrapolateLsSimple(phi=phi_sm$ID$, distance=narrowBandWidth_s$ID$+2, inside=True)\\n\\\n    extrapolateLsSimple(phi=phi_sm$ID$, distance=3)\\n\\\n    phi_sm$ID$.setBoundNeumann(0) # make sure no particles are placed at outer boundary\\n\\\n    \\n\\\n    # Vert vel vector needs to pull data from vel grid with correct dim\\n\\\n    if using_speedvectors_s$ID$:\\n\\\n        interpolateMACGrid(target=vel_sm$ID$, source=vel_s$ID$)\\n\\\n        mVel_mesh$ID$.setSource(grid=vel_sm$ID$, isMAC=True)\\n\\",
+      "excerptSha256": "03aa5cce8fc9f437894c53b1c6e13fa1923253a3272e0ce8f0b9e120c6018193",
+      "id": "meshConsumesPhi",
+      "lines": [
+        340,
+        372
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "if not s$ID$.timePerFrame:",
+        "phiTmp_s$ID$.copyFrom(phi_s$ID$)"
+      ],
+      "excerpt": "    \\n\\\n    # save original states for later (used during mesh / secondary particle creation)\\n\\\n    # but only save the state at the beginning of an adaptive frame\\n\\\n    if not s$ID$.timePerFrame:\\n\\\n        phiTmp_s$ID$.copyFrom(phi_s$ID$)\\n\\\n        velTmp_s$ID$.copyFrom(vel_s$ID$)\\n\\\n    \\n\\\n    mantaMsg('Advecting phi')\\n\\",
+      "excerptSha256": "58a4eef267493f640a177329e522ef6176db15b28e17cbd257958d1d5e1cf734",
+      "id": "previousPhiIsStartOfAdaptiveFrame",
+      "lines": [
+        254,
+        261
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "grid=phi_s$ID$, order=1",
+        "phi_s$ID$.addConst(1.)",
+        "phi_s$ID$.join(phiParts_s$ID$)"
+      ],
+      "excerpt": "    mantaMsg('Advecting phi')\\n\\\n    advectSemiLagrange(flags=flags_s$ID$, vel=vel_s$ID$, grid=phi_s$ID$, order=1) # first order is usually enough\\n\\\n    mantaMsg('Advecting velocity')\\n\\\n    advectSemiLagrange(flags=flags_s$ID$, vel=vel_s$ID$, grid=vel_s$ID$, order=2)\\n\\\n    \\n\\\n    # create level set of particles\\n\\\n    gridParticleIndex(parts=pp_s$ID$, flags=flags_s$ID$, indexSys=pindex_s$ID$, index=gpi_s$ID$)\\n\\\n    unionParticleLevelset(parts=pp_s$ID$, indexSys=pindex_s$ID$, flags=flags_s$ID$, index=gpi_s$ID$, phi=phiParts_s$ID$, radiusFactor=radiusFactor_s$ID$)\\n\\\n    \\n\\\n    # combine level set of particles with grid level set\\n\\\n    phi_s$ID$.addConst(1.) # shrink slightly\\n\\\n    phi_s$ID$.join(phiParts_s$ID$)\\n\\\n    extrapolateLsSimple(phi=phi_s$ID$, distance=narrowBandWidth_s$ID$+2, inside=True)\\n\\\n    extrapolateLsSimple(phi=phi_s$ID$, distance=3)\\n\\\n    phi_s$ID$.setBoundNeumann(0) # make sure no particles are placed at outer boundary\\n\\\n    \\n\\\n    if not domainClosed_s$ID$ or using_outflow_s$ID$:\\n\\\n        resetOutflow(flags=flags_s$ID$, phi=phi_s$ID$, parts=pp_s$ID$, index=gpi_s$ID$, indexSys=pindex_s$ID$)\\n\\",
+      "excerptSha256": "53123f9b60662cba176defaa72de994a6a2351799379ae3332835baa483b94dc",
+      "id": "currentPhiAdvectsShrinksAndJoins",
+      "lines": [
+        261,
+        278
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "skip_subframes=True",
+        "(timePerFrame_s$ID$ + dt0_s$ID$) < frameLength_s$ID$",
+        "meta=True",
+        "except Exception as e:"
+      ],
+      "excerpt": "\nconst std::string fluid_file_export =\n    \"\\n\\\ndef fluid_file_export_s$ID$(framenr, file_format, path, dict, file_name=None, mode_override=True, skip_subframes=True, clipGrid=None):\\n\\\n    if skip_subframes and ((timePerFrame_s$ID$ + dt0_s$ID$) < frameLength_s$ID$):\\n\\\n        return\\n\\\n    mantaMsg('Fluid file export, frame: ' + str(framenr))\\n\\\n    try:\\n\\\n        framenr = fluid_cache_get_framenr_formatted_$ID$(framenr)\\n\\\n        if not os.path.exists(path):\\n\\\n            os.makedirs(path)\\n\\\n        \\n\\\n        # New cache: Try to save the data to a single file\\n\\\n        saveCombined = 0\\n\\\n        if file_name is not None:\\n\\\n            file = os.path.join(path, file_name + '_' + framenr + file_format)\\n\\\n            if not os.path.isfile(file) or mode_override:\\n\\\n                if file_format == '.vdb':\\n\\\n                    saveCombined = save(name=file, objects=list(dict.values()), worldSize=domainSize_s$ID$, skipDeletedParts=True, compression=vdbCompression_s$ID$, precision=vdbPrecision_s$ID$, clip=vdbClip_s$ID$, clipGrid=clipGrid, meta=True)\\n\\\n                elif file_format == '.bobj.gz' or file_format == '.obj':\\n\\\n                    for name, object in dict.items():\\n\\\n                        if not os.path.isfile(file) or mode_override:\\n\\\n                            saveCombined = object.save(file)\\n\\\n        \\n\\\n        # Old cache: Try to save the data to separate files, i.e. per object with the object based save() function\\n\\\n        if not saveCombined:\\n\\\n            for name, object in dict.items():\\n\\\n                file = os.path.join(path, name + '_' + framenr + file_format)\\n\\\n                if not os.path.isfile(file) or mode_override: object.save(file)\\n\\\n    \\n\\\n    except Exception as e:\\n\\\n        mantaMsg('Exception in Python fluid file export: ' + str(e))\\n\\\n        pass # Just skip file save errors for now\\n\";\n\nconst std::string fluid_save_guiding =",
+      "excerptSha256": "f9f1f3f150eb0d7325d9770c212b52061fbb28db1555f7f70288dc5624c44d90",
+      "id": "exportSkipsSubframesAndSwallowsErrors",
+      "lines": [
+        682,
+        716
+      ],
+      "path": "intern/mantaflow/intern/strings/fluid_script.h"
+    },
+    {
+      "contains": [
+        "createLinearTransform(voxelSize)",
+        "setSaveFloatAsHalf",
+        "GridType::create(ValueT(0))",
+        "(from->saveSparse()) ? ValueT(clip) : ValueT(0)",
+        "copyFromDense"
+      ],
+      "excerpt": "template<class GridType>\nstatic void setGridOptions(typename GridType::Ptr grid,\n                           string name,\n                           openvdb::GridClass cls,\n                           float voxelSize,\n                           int precision)\n{\n  grid->setTransform(openvdb::math::Transform::createLinearTransform(voxelSize));\n  grid->setGridClass(cls);\n  grid->setName(name);\n  grid->setSaveFloatAsHalf(precision == PRECISION_MINI || precision == PRECISION_HALF);\n}\n\ntemplate<class T, class GridType>\ntypename GridType::Ptr exportVDB(Grid<T> *from, float clip, openvdb::FloatGrid::Ptr clipGrid)\n{\n  using ValueT = typename GridType::ValueType;\n  typename GridType::Ptr to = GridType::create(ValueT(0));\n\n  // Copy data from grid by creating a vdb dense structure and then copying that into a vdb grid\n  // This is the fastest way to copy data for both dense and sparse grids -> if (true)\n  if (true) {\n    ValueT *data = (ValueT *)from->getData();\n    openvdb::math::CoordBBox bbox(\n        openvdb::Coord(0),\n        openvdb::Coord(from->getSizeX() - 1, from->getSizeY() - 1, from->getSizeZ() - 1));\n    openvdb::tools::Dense<ValueT, openvdb::tools::MemoryLayout::LayoutXYZ> dense(bbox, data);\n\n    // Use clip value, or (when not exporting in sparse mode) clear it in order to copy all values\n    // of dense grid\n    ValueT tmpClip = (from->saveSparse()) ? ValueT(clip) : ValueT(0);\n    // Copy from dense to sparse grid structure considering clip value\n    openvdb::tools::copyFromDense(dense, *to, tmpClip);\n\n    // If present, use clip grid to trim down current vdb grid even more\n    if (from->saveSparse() && clipGrid && !clipGrid->empty()) {\n      to = openvdb::tools::clip(*to, *clipGrid);\n    }",
+      "excerptSha256": "eac977e182736dbf58d853c3d88424d64b9a51c0e50ee5cde978337c93d8d84e",
+      "id": "vdbZeroBackgroundAndPrecision",
+      "lines": [
+        198,
+        235
+      ],
+      "path": "extern/mantaflow/preprocessed/fileio/iovdb.cpp"
+    },
+    {
+      "contains": [
+        "const Real voxelSize = worldSize * dx",
+        "exportVDB<Real, openvdb::FloatGrid>",
+        "META_BASE_RES",
+        "META_VOXEL_SIZE"
+      ],
+      "excerpt": "  for (std::vector<PbClass *>::iterator iter = objects->begin(); iter != objects->end(); ++iter) {\n    openvdb::GridClass gClass = openvdb::GRID_UNKNOWN;\n    openvdb::GridBase::Ptr vdbGrid;\n\n    PbClass *object = dynamic_cast<PbClass *>(*iter);\n    const Real dx = object->getParent()->getDx();\n    const Real voxelSize = worldSize * dx;\n    const string objectName = object->getName();\n\n    if (GridBase *mantaGrid = dynamic_cast<GridBase *>(*iter)) {\n\n      if (mantaGrid->getType() & GridBase::TypeInt) {\n        debMsg(\"Writing int grid '\" << mantaGrid->getName() << \"' to vdb file \" << filename, 1);\n        Grid<int> *mantaIntGrid = (Grid<int> *)mantaGrid;\n        if (clipGrid && mantaIntGrid->saveSparse()) {\n          assertMsg(clipGrid->getSize() == mantaGrid->getSize(),\n                    \"writeObjectsVDB: Clip grid and exported grid must have the same size \"\n                        << clipGrid->getSize() << \" vs \" << mantaGrid->getSize());\n        }\n        vdbGrid = exportVDB<int, openvdb::Int32Grid>(mantaIntGrid, clip, vdbClipGrid);\n        gridsVDB.push_back(vdbGrid);\n      }\n      else if (mantaGrid->getType() & GridBase::TypeReal) {\n        debMsg(\"Writing real grid '\" << mantaGrid->getName() << \"' to vdb file \" << filename, 1);\n        gClass = (mantaGrid->getType() & GridBase::TypeLevelset) ? openvdb::GRID_LEVEL_SET :\n                                                                   openvdb::GRID_FOG_VOLUME;\n        Grid<Real> *mantaRealGrid = (Grid<Real> *)mantaGrid;\n        // Only supply clip grid if real grid is not equal to the clip grid\n        openvdb::FloatGrid::Ptr tmpClipGrid = (mantaRealGrid == clipGrid) ? nullptr : vdbClipGrid;\n        if (clipGrid && mantaRealGrid->saveSparse()) {\n          assertMsg(clipGrid->getSize() == mantaGrid->getSize(),\n                    \"writeObjectsVDB: Clip grid and exported grid must have the same size \"\n                        << clipGrid->getSize() << \" vs \" << mantaGrid->getSize());\n        }\n        vdbGrid = exportVDB<Real, openvdb::FloatGrid>(mantaRealGrid, clip, tmpClipGrid);\n        gridsVDB.push_back(vdbGrid);\n      }\n      else if (mantaGrid->getType() & GridBase::TypeVec3) {\n        debMsg(\"Writing vec3 grid '\" << mantaGrid->getName() << \"' to vdb file \" << filename, 1);\n        gClass = (mantaGrid->getType() & GridBase::TypeMAC) ? openvdb::GRID_STAGGERED :\n                                                              openvdb::GRID_UNKNOWN;\n        Grid<Vec3> *mantaVec3Grid = (Grid<Vec3> *)mantaGrid;\n        if (clipGrid && mantaVec3Grid->saveSparse()) {\n          assertMsg(clipGrid->getSize() == mantaGrid->getSize(),\n                    \"writeObjectsVDB: Clip grid and exported grid must have the same size \"\n                        << clipGrid->getSize() << \" vs \" << mantaGrid->getSize());\n        }\n        vdbGrid = exportVDB<Vec3, openvdb::Vec3SGrid>(mantaVec3Grid, clip, vdbClipGrid);\n        gridsVDB.push_back(vdbGrid);\n      }\n      else {\n        errMsg(\"writeObjectsVDB: unknown grid type\");\n        return 0;\n      }\n    }\n    else if (BasicParticleSystem *mantaPP = dynamic_cast<BasicParticleSystem *>(*iter)) {\n      debMsg(\"Writing particle system '\" << mantaPP->getName()\n                                         << \"' (and buffered pData) to vdb file \" << filename,\n             1);\n      vdbGrid = exportVDB(mantaPP, pdbBuffer, skipDeletedParts, voxelSize, precision);\n      gridsVDB.push_back(vdbGrid);\n      pdbBuffer.clear();\n    }\n    // Particle data will only be saved if there is a particle system too.\n    else if (ParticleDataBase *mantaPPImpl = dynamic_cast<ParticleDataBase *>(*iter)) {\n      debMsg(\"Buffering particle data '\" << mantaPPImpl->getName() << \"' to vdb file \" << filename,\n             1);\n      pdbBuffer.push_back(mantaPPImpl);\n    }\n    else {\n      errMsg(\"writeObjectsVDB: Unsupported Python object. Cannot write to .vdb file \" << filename);\n      return 0;\n    }\n\n    // Set additional grid attributes, e.g. name, grid class, compression level, etc.\n    if (vdbGrid) {\n      setGridOptions<openvdb::GridBase>(vdbGrid, objectName, gClass, voxelSize, precision);\n\n      // Optional metadata: Save additional simulation information per vdb object\n      if (meta) {\n        const Vec3i size = object->getParent()->getGridSize();\n        // The (dense) resolution of this grid\n        vdbGrid->insertMeta(META_BASE_RES,\n                            openvdb::Vec3IMetadata(openvdb::Vec3i(size.x, size.y, size.z)));\n        // Length of one voxel side\n        vdbGrid->insertMeta(META_VOXEL_SIZE, openvdb::FloatMetadata(voxelSize));\n      }",
+      "excerptSha256": "036f308f1e9b4592bdfcef93dc5ddb4c72efafd6a5a5b623bacefcf1ee5a7afe",
+      "id": "vdbScalarCopyAndMetricMetadata",
+      "lines": [
+        435,
+        521
+      ],
+      "path": "extern/mantaflow/preprocessed/fileio/iovdb.cpp"
+    },
+    {
+      "contains": [
+        "bool sparse = false"
+      ],
+      "excerpt": "\ntemplate<class T> class Grid : public GridBase {\n public:\n  //! init new grid, values are set to zero\n  Grid(FluidSolver *parent, bool show = true, bool sparse = false);\n  static int _W_10(PyObject *_self, PyObject *_linargs, PyObject *_kwds)\n  {",
+      "excerptSha256": "db29ca954f300bbf8b9c79ad788143c44d40a81ab8e7e055b8f600d4cb4101c3",
+      "id": "gridDefaultIsNotSparse",
+      "lines": [
+        400,
+        406
+      ],
+      "path": "extern/mantaflow/preprocessed/grid.h"
+    },
+    {
+      "contains": [
+        "Grid<Real>(parent, show)",
+        "TypeLevelset | TypeReal"
+      ],
+      "excerpt": "LevelsetGrid::LevelsetGrid(FluidSolver *parent, bool show) : Grid<Real>(parent, show)\n{\n  mType = (GridType)(TypeLevelset | TypeReal);\n}\n\nLevelsetGrid::LevelsetGrid(FluidSolver *parent, Real *data, bool show)\n    : Grid<Real>(parent, data, show)\n{\n  mType = (GridType)(TypeLevelset | TypeReal);\n}",
+      "excerptSha256": "242c3128c78b4033a9d4e78e57607f08e7dde601476d780ca45571a1ddc2dcea",
+      "id": "levelsetUsesDefaultGrid",
+      "lines": [
+        374,
+        383
+      ],
+      "path": "extern/mantaflow/preprocessed/levelset.cpp"
+    },
+    {
+      "contains": [
+        "clipping = 1e-6f",
+        "VDB_PRECISION_HALF_FLOAT"
+      ],
+      "excerpt": "  eFluidDomain_OpenVDBCompression openvdb_compression = VDB_COMPRESSION_BLOSC;\n  float clipping = 1e-6f;\n  eFluidDomain_OpenVDBDepth openvdb_data_depth = VDB_PRECISION_HALF_FLOAT;",
+      "excerptSha256": "e2e167d8867ee798be5b8f64859c1a0ceace769d1c4a90f1d1479278954618bc",
+      "id": "defaultVdbPrecisionHalf",
+      "lines": [
+        772,
+        774
+      ],
+      "path": "source/blender/makesdna/DNA_fluid_types.h"
+    },
+    {
+      "contains": [
+        "phi_s$ID$.subtract(o=phiObsIn_s$ID$)",
+        "liquid_step_$ID$()"
+      ],
+      "excerpt": "    \\n\\\n    if using_outflow_s$ID$:\\n\\\n        phiOutIn_s$ID$.join(phiOutSIn_s$ID$) # Join static outflow map\\n\\\n        phiOut_s$ID$.join(phiOutIn_s$ID$)\\n\\\n    \\n\\\n    if using_fractions_s$ID$:\\n\\\n        updateFractions(flags=flags_s$ID$, phiObs=phiObs_s$ID$, fractions=fractions_s$ID$, boundaryWidth=boundaryWidth_s$ID$, fracThreshold=fracThreshold_s$ID$)\\n\\\n    setObstacleFlags(flags=flags_s$ID$, phiObs=phiObs_s$ID$, phiOut=phiOut_s$ID$, fractions=fractions_s$ID$, phiIn=phiIn_s$ID$)\\n\\\n    \\n\\\n    if using_obstacle_s$ID$:\\n\\\n        # TODO(sebbas): Enable flags check again, currently produces unstable particle behavior\\n\\\n        phi_s$ID$.subtract(o=phiObsIn_s$ID$) #, flags=flags_s$ID$, subtractType=FlagObstacle)\\n\\\n    \\n\\\n    # add initial velocity: set invel as source grid to ensure const vels in inflow region, sampling makes use of this\\n\\\n    if using_invel_s$ID$:\\n\\\n        extrapolateVec3Simple(vel=invelC_s$ID$, phi=phiIn_s$ID$, distance=6, inside=True)\\n\\\n        # Using cell centered invels, a false isMAC flag ensures correct interpolation\\n\\\n        pVel_pp$ID$.setSource(grid=invelC_s$ID$, isMAC=False)\\n\\\n    # reset pvel grid source before sampling new particles - ensures that new particles are initialized with 0 velocity\\n\\\n    else:\\n\\\n        pVel_pp$ID$.setSource(grid=None, isMAC=False)\\n\\\n    \\n\\\n    pp_s$ID$.maxParticles = maxSysParticles_s$ID$ # remember, 0 means no particle cap\\n\\\n    sampleLevelsetWithParticles(phi=phiIn_s$ID$, flags=flags_s$ID$, parts=pp_s$ID$, discretization=particleNumber_s$ID$, randomness=randomness_s$ID$)\\n\\\n    flags_s$ID$.updateFromLevelset(phi_s$ID$)\\n\\\n    \\n\\\n    mantaMsg('Liquid step / s$ID$.frame: ' + str(s$ID$.frame))\\n\\\n    liquid_step_$ID$()\\n\\\n    \\n\\\n    s$ID$.step()\\n\\\n    \\n\\\n    fluid_post_step_$ID$()\\n\";\n\nconst std::string liquid_step =",
+      "excerptSha256": "6bcf5d406918024391a2abdcba9cbeb1c350f61266fd3aa0a82958934b47023c",
+      "id": "obstacleSubtractionPrecedesLiquidStep",
+      "lines": [
+        208,
+        241
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "if (phiv > 0)",
+        "phiv < -narrowBand",
+        "phi(i, j, k) < -narrowBand"
+      ],
+      "excerpt": "    if (parts.isActive(idx)) {\n      Vec3i p = toVec3iFloor(parts.getPos(idx));\n      if (!tmp.isInBounds(p)) {\n        parts.kill(idx);  // out of domain, remove\n        continue;\n      }\n\n      Real phiv = phi.getInterpolated(parts.getPos(idx));\n      if (phiv > 0) {\n        parts.kill(idx);\n        continue;\n      }\n      if (narrowBand > 0. && phiv < -narrowBand) {\n        parts.kill(idx);\n        continue;\n      }\n\n      bool atSurface = false;\n      if (phiv > SURFACE_LS)\n        atSurface = true;\n      int num = tmp(p);\n\n      // dont delete particles in non fluid cells here, the particles are \"always right\"\n      if (num > maxParticles && (!atSurface)) {\n        parts.kill(idx);\n      }\n      else {\n        tmp(p) = num + 1;\n      }\n    }\n  }\n\n  // seed new particles\n  RandomStream rand(parts.getSeed());\n  FOR_IJK(tmp)\n  {\n    int cnt = tmp(i, j, k);\n\n    // skip cells near surface\n    if (phi(i, j, k) > SURFACE_LS)\n      continue;\n    if (narrowBand > 0. && phi(i, j, k) < -narrowBand) {\n      continue;\n    }\n    if (exclude && ((*exclude)(i, j, k) < 0.)) {",
+      "excerptSha256": "ad62f40c83219623b512acf0406924cc827405a8634b17bb8a7b93b1587e93c8",
+      "id": "resamplingUsesSignedPhi",
+      "lines": [
+        546,
+        590
+      ],
+      "path": "extern/mantaflow/preprocessed/plugin/flip.cpp"
+    }
+  ],
+  "observationHash": "28eb5274c4251e9c4a7c70876c2af2464b3b49241100b26e1100dc3cecfbddc1",
+  "researchExecutionCommit": "05f0d61f2a4cb1f1bf331c22109f5ebaa99bd46f",
+  "schemaVersion": "bfs.rc6C32SourceObservation.v1.0",
+  "sourceCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
+  "sourceFiles": [
+    {
+      "path": "source/blender/makesrna/intern/rna_fluid.cc",
+      "sha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4"
+    },
+    {
+      "path": "source/blender/makesdna/DNA_fluid_types.h",
+      "sha256": "356a47d3c8d1c0800ef72fa55bb2d1b1bde8112014cb8f625868276c8aeceead"
+    },
+    {
+      "path": "source/blender/blenkernel/intern/fluid.cc",
+      "sha256": "63a7a3e1affe7809ea935e184dea992754655796a9631e0eadb2060d72dfa20f"
+    },
+    {
+      "path": "intern/mantaflow/intern/MANTA_main.cpp",
+      "sha256": "aa06317e5038ddaa376d8807db705ec4ffc45b56c660c1e2eefa42b8b82618ff"
+    },
+    {
+      "path": "intern/mantaflow/intern/strings/liquid_script.h",
+      "sha256": "b526a55e9ba35d5ba41ef53dc5d027e9e13831a32a2862c424752b616a10392b"
+    },
+    {
+      "path": "intern/mantaflow/intern/strings/fluid_script.h",
+      "sha256": "b8c1fce0ba31e506e01c1133f267175511216608c1fde1f32bdd81db126e16d8"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/fileio/iovdb.cpp",
+      "sha256": "26b490291cf0cb86e57260929591249ec65bad861acadeb523ffff708e6b4139"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/grid.h",
+      "sha256": "c69027bfbece845f6e1569fd53b7e3df22aa22c7c7279732a3e6b5162578ea0b"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/grid.cpp",
+      "sha256": "31771f1c60b104abe68415c6cfb1e6cc5e717a5b088a7a2edab3a162c2826751"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/levelset.cpp",
+      "sha256": "ea0af88f3a2b45bfec48706ed82bc07b33359bbb891349e47da2275f348bb3fb"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/plugin/flip.cpp",
+      "sha256": "83bc8bb4f4af7bbbeee88c3760c32dae687c80c1e2d1f7eb64a1169fa69dc332"
+    }
+  ]
+}

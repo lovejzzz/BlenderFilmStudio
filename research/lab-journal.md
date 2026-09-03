@@ -7842,3 +7842,17 @@ minimum. After C21 closed the radius scalar, C22 returns to exact C18 radius1.8
 and selects only maximum16→12, the midpoint above unchanged minimum8. This may
 reduce amplification or may do nothing when samples are surface-protected. C23
 must retain either result, change no other input and render nothing.
+
+## J-670 · Native liquid observations need an intervention check
+
+Date: 2026-09-02 · Type: READ-ONLY SOURCE RESULT · Blender / bakes / renders / engine edits: 0 / 0 / 0 / 0
+
+After retained C29 physical FAIL25/27, C30 particle/Mesh support-loss evidence
+and C31 event-regime inventory, C32 attempt-111 passes26/26 source-binding
+checks. RC5 can export native liquid level sets through resumable Data, but
+the same option changes cache import and Mesh inputs. This is a feasible
+observation path, not proof of measurement passivity or exact mass. Next C33
+must freeze reader readiness and a strong common particle/velocity comparison
+before a bounded Data-only diagnostic; no Mesh/render or scalar scan. The
+existing RC5 rigid-body demo remains viewable, while no new impact-liquid
+demo is claimed. See the C32 result and source-inspection documents.
