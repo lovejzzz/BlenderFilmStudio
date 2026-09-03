@@ -1,0 +1,382 @@
+{
+  "schemaVersion": "bfs.rc6NativeConservationObservability.v1.22",
+  "status": "PREREGISTERED_READ_ONLY_SOURCE_AUDIT",
+  "researchParent": "c7337c38e9de8f2e86c789b3d6bef9761ff33340",
+  "authority": {
+    "path": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+    "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0",
+    "scope": "read-only source/evidence inspection; bounded research evidence and ordinary publication only"
+  },
+  "question": "Can the existing RC5 binary expose native liquid support without mistaking particle occupancy for mass or changing the physics through a cache-loading confound?",
+  "sourceRoot": "/Users/mengyingli/Documents/ChatGPT/BlenderFilmStudio-PostPB7-workspace/RC5-2026-09-01-attempt-01/source",
+  "sourceCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
+  "sourceFiles": [
+    {
+      "path": "source/blender/makesrna/intern/rna_fluid.cc",
+      "sha256": "a2ca40cda63b5a6ab77a78d8ee14d039abbf0577f82c7f1904879fac777643d4"
+    },
+    {
+      "path": "source/blender/makesdna/DNA_fluid_types.h",
+      "sha256": "356a47d3c8d1c0800ef72fa55bb2d1b1bde8112014cb8f625868276c8aeceead"
+    },
+    {
+      "path": "source/blender/blenkernel/intern/fluid.cc",
+      "sha256": "63a7a3e1affe7809ea935e184dea992754655796a9631e0eadb2060d72dfa20f"
+    },
+    {
+      "path": "intern/mantaflow/intern/MANTA_main.cpp",
+      "sha256": "aa06317e5038ddaa376d8807db705ec4ffc45b56c660c1e2eefa42b8b82618ff"
+    },
+    {
+      "path": "intern/mantaflow/intern/strings/liquid_script.h",
+      "sha256": "b526a55e9ba35d5ba41ef53dc5d027e9e13831a32a2862c424752b616a10392b"
+    },
+    {
+      "path": "intern/mantaflow/intern/strings/fluid_script.h",
+      "sha256": "b8c1fce0ba31e506e01c1133f267175511216608c1fde1f32bdd81db126e16d8"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/fileio/iovdb.cpp",
+      "sha256": "26b490291cf0cb86e57260929591249ec65bad861acadeb523ffff708e6b4139"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/grid.h",
+      "sha256": "c69027bfbece845f6e1569fd53b7e3df22aa22c7c7279732a3e6b5162578ea0b"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/grid.cpp",
+      "sha256": "31771f1c60b104abe68415c6cfb1e6cc5e717a5b088a7a2edab3a162c2826751"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/levelset.cpp",
+      "sha256": "ea0af88f3a2b45bfec48706ed82bc07b33359bbb891349e47da2275f348bb3fb"
+    },
+    {
+      "path": "extern/mantaflow/preprocessed/plugin/flip.cpp",
+      "sha256": "83bc8bb4f4af7bbbeee88c3760c32dae687c80c1e2d1f7eb64a1169fa69dc332"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "specs/ai-native-studio-standing-autonomy-charter.v1.0.json",
+      "sha256": "6d86917bf41133ee3de52fe73fd931a5cf84ef85758c6f0f6b0a56a016b99ed0"
+    },
+    {
+      "path": "research/2026-09-02-rc6-event-regime-inventory-c31-result.md",
+      "sha256": "5138c57382ab4b46b791d7b4797fad7c6b5c4b899afa78deb95185e70c47cb23"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-event-regime-inventory-c31-attempt-110/independent-audit.json",
+      "sha256": "173d0bb882da6ce7cde23d5e1dc141245b73dbe79a8990889725023d9a785036"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-real-impact-particle-band-width-data-comparison-c30-attempt-109/result.json",
+      "sha256": "f4647dc34b44aa32134b496335d3022912dd395c22436dea524e97bb9d5d84b4"
+    },
+    {
+      "path": "experiments/physical-richness/RC6-2026-09-02-real-impact-liquid-particle-band-width-c29-attempt-108/result.json",
+      "sha256": "022c4187f02cddfffe0ce06bb88f36e169f2deead2450a8e9cfabacc9649f3c4"
+    },
+    {
+      "path": "research/2026-09-02-rc6-native-conservation-observability-c32-source-inspection.md",
+      "sha256": "22061fd46584026c070c92696f0e9fcd11021bb66c5f8b0f7b1b784019526e7c"
+    }
+  ],
+  "auditor": "scripts/audit-rc6-native-conservation-observability-c32.py",
+  "auditorSha256": "32797ff01e9fa0e6b57599935e453e0ed2877ef68d4b8184bbb192a41375580a",
+  "evidenceRoot": "experiments/physical-richness/RC6-2026-09-02-native-conservation-observability-c32-attempt-111",
+  "workspaceRoot": null,
+  "maximumEvidenceBytes": 1048576,
+  "minimumReserveBytes": 107374182400,
+  "sourceFacts": [
+    {
+      "id": "rnaCacheInvalidation",
+      "path": "source/blender/makesrna/intern/rna_fluid.cc",
+      "lines": [
+        2380,
+        2389
+      ],
+      "contains": [
+        "\"cache_resumable\"",
+        "FLUID_DOMAIN_USE_RESUMABLE_CACHE",
+        "\"rna_Fluid_datacache_reset\""
+      ]
+    },
+    {
+      "id": "liquidCacheRosters",
+      "path": "intern/mantaflow/intern/strings/liquid_script.h",
+      "lines": [
+        68,
+        96
+      ],
+      "contains": [
+        "liquid_data_dict_final",
+        "'pVel' : pVel_pp$ID$, 'pp' : pp_s$ID$",
+        "'phiParts' : phiParts_s$ID$, 'phi' : phi_s$ID$, 'phiTmp' : phiTmp_s$ID$"
+      ]
+    },
+    {
+      "id": "commonCacheRosters",
+      "path": "intern/mantaflow/intern/strings/fluid_script.h",
+      "lines": [
+        284,
+        288
+      ],
+      "contains": [
+        "fluid_data_dict_final",
+        "'vel' : vel_s$ID$",
+        "'flags' : flags_s$ID$"
+      ]
+    },
+    {
+      "id": "vdbFieldNames",
+      "path": "source/blender/makesdna/DNA_fluid_types.h",
+      "lines": [
+        343,
+        345
+      ],
+      "contains": [
+        "\"phi_particles\"",
+        "\"phi\"",
+        "\"phi_previous\""
+      ]
+    },
+    {
+      "id": "loadAndSaveUseResumable",
+      "path": "intern/mantaflow/intern/strings/liquid_script.h",
+      "lines": [
+        424,
+        463
+      ],
+      "contains": [
+        "def liquid_load_data_",
+        "def liquid_save_data_",
+        "if resumable else"
+      ]
+    },
+    {
+      "id": "noCacheReturnsBeforeImport",
+      "path": "intern/mantaflow/intern/MANTA_main.cpp",
+      "lines": [
+        1359,
+        1400
+      ],
+      "contains": [
+        "if (!hasData(fmd, framenr))",
+        "return false;",
+        "liquid_load_data_"
+      ]
+    },
+    {
+      "id": "meshBakeReadsExtendedData",
+      "path": "source/blender/blenkernel/intern/fluid.cc",
+      "lines": [
+        3954,
+        3963
+      ],
+      "contains": [
+        "!baking_mesh",
+        "read_all = !read_partial && with_resumable_cache",
+        "manta_read_data"
+      ]
+    },
+    {
+      "id": "meshConsumesPhi",
+      "path": "intern/mantaflow/intern/strings/liquid_script.h",
+      "lines": [
+        340,
+        372
+      ],
+      "contains": [
+        "phi_sm$ID$.copyFrom(phi_s$ID$)",
+        "source=phi_s$ID$",
+        "phi_sm$ID$.join(phiParts_sm$ID$)"
+      ]
+    },
+    {
+      "id": "previousPhiIsStartOfAdaptiveFrame",
+      "path": "intern/mantaflow/intern/strings/liquid_script.h",
+      "lines": [
+        254,
+        261
+      ],
+      "contains": [
+        "if not s$ID$.timePerFrame:",
+        "phiTmp_s$ID$.copyFrom(phi_s$ID$)"
+      ]
+    },
+    {
+      "id": "currentPhiAdvectsShrinksAndJoins",
+      "path": "intern/mantaflow/intern/strings/liquid_script.h",
+      "lines": [
+        261,
+        278
+      ],
+      "contains": [
+        "grid=phi_s$ID$, order=1",
+        "phi_s$ID$.addConst(1.)",
+        "phi_s$ID$.join(phiParts_s$ID$)"
+      ]
+    },
+    {
+      "id": "exportSkipsSubframesAndSwallowsErrors",
+      "path": "intern/mantaflow/intern/strings/fluid_script.h",
+      "lines": [
+        682,
+        716
+      ],
+      "contains": [
+        "skip_subframes=True",
+        "(timePerFrame_s$ID$ + dt0_s$ID$) < frameLength_s$ID$",
+        "meta=True",
+        "except Exception as e:"
+      ]
+    },
+    {
+      "id": "vdbZeroBackgroundAndPrecision",
+      "path": "extern/mantaflow/preprocessed/fileio/iovdb.cpp",
+      "lines": [
+        198,
+        235
+      ],
+      "contains": [
+        "createLinearTransform(voxelSize)",
+        "setSaveFloatAsHalf",
+        "GridType::create(ValueT(0))",
+        "(from->saveSparse()) ? ValueT(clip) : ValueT(0)",
+        "copyFromDense"
+      ]
+    },
+    {
+      "id": "vdbScalarCopyAndMetricMetadata",
+      "path": "extern/mantaflow/preprocessed/fileio/iovdb.cpp",
+      "lines": [
+        435,
+        521
+      ],
+      "contains": [
+        "const Real voxelSize = worldSize * dx",
+        "exportVDB<Real, openvdb::FloatGrid>",
+        "META_BASE_RES",
+        "META_VOXEL_SIZE"
+      ]
+    },
+    {
+      "id": "gridDefaultIsNotSparse",
+      "path": "extern/mantaflow/preprocessed/grid.h",
+      "lines": [
+        400,
+        406
+      ],
+      "contains": [
+        "bool sparse = false"
+      ]
+    },
+    {
+      "id": "levelsetUsesDefaultGrid",
+      "path": "extern/mantaflow/preprocessed/levelset.cpp",
+      "lines": [
+        374,
+        383
+      ],
+      "contains": [
+        "Grid<Real>(parent, show)",
+        "TypeLevelset | TypeReal"
+      ]
+    },
+    {
+      "id": "defaultVdbPrecisionHalf",
+      "path": "source/blender/makesdna/DNA_fluid_types.h",
+      "lines": [
+        772,
+        774
+      ],
+      "contains": [
+        "clipping = 1e-6f",
+        "VDB_PRECISION_HALF_FLOAT"
+      ]
+    },
+    {
+      "id": "obstacleSubtractionPrecedesLiquidStep",
+      "path": "intern/mantaflow/intern/strings/liquid_script.h",
+      "lines": [
+        208,
+        241
+      ],
+      "contains": [
+        "phi_s$ID$.subtract(o=phiObsIn_s$ID$)",
+        "liquid_step_$ID$()"
+      ]
+    },
+    {
+      "id": "resamplingUsesSignedPhi",
+      "path": "extern/mantaflow/preprocessed/plugin/flip.cpp",
+      "lines": [
+        546,
+        590
+      ],
+      "contains": [
+        "if (phiv > 0)",
+        "phiv < -narrowBand",
+        "phi(i, j, k) < -narrowBand"
+      ]
+    }
+  ],
+  "expectedChecks": 26,
+  "operationCounts": {
+    "systemPythonAuditStarts": 1,
+    "blenderStarts": 0,
+    "bulletBakes": 0,
+    "fluidDataBakes": 0,
+    "fluidMeshBakes": 0,
+    "renders": 0,
+    "blendSaves": 0,
+    "nativeBuilds": 0,
+    "cacheCopies": 0,
+    "cacheMounts": 0,
+    "networkCallsDuringAudit": 0,
+    "productSourceEdits": 0,
+    "engineRemoteWrites": 0,
+    "retainedRootWrites": 0
+  },
+  "conclusions": {
+    "existingCachePath": "SOURCE_SUPPORTED_NOT_RUNTIME_VALIDATED",
+    "passiveMeasurement": "UNPROVEN",
+    "exactMass": "NOT_MEASURED",
+    "impactPhysics": "RETAINED_FAIL",
+    "nextBake": "SEPARATE_PREREGISTRATION_REQUIRED"
+  },
+  "nextGate": {
+    "id": "RC6-C33-DATA-ONLY-NATIVE-FIELD-DIAGNOSTIC",
+    "status": "DESIGN_DIRECTION_ONLY_NOT_FROZEN",
+    "baseline": "exact C29 R40 1-36 APIC Preview96 bandwidth3 physical configuration; actual cache policy and precision must be established before freezing the operational delta",
+    "mustPassBeforeBake": [
+      "reader access to finite scalar phi and common particle/velocity values",
+      "synthetic negative controls and unit/precision/background/tile handling",
+      "frozen common-field equivalence comparison; occupancy counts alone insufficient",
+      "fresh host admission, exact roots, resources and one-run stop rule"
+    ],
+    "forbidden": [
+      "Mesh bake",
+      "render",
+      "source edit",
+      "native build",
+      "retained-cache mount",
+      "pause or resume",
+      "another scalar scan",
+      "physical PASS based on diagnostic alone"
+    ]
+  },
+  "executionOrder": [
+    "freeze source-inspection document, spec and audit tool in one commit while attempt111 root absent",
+    "one audit process rechecks source/retained bytes and writes exclusive fresh evidence",
+    "publish result and handoff; never rerun or repair evidence in place"
+  ],
+  "negativeControls": [
+    "empty source cannot match anchor",
+    "corrupted anchor rejected",
+    "manual conclusions cannot claim passive equivalence, exact mass, physical success or executable next gate"
+  ],
+  "stopRule": "Abort before evidence creation on identity, dirty worktree, absent reserve or occupied root; retain any source-check failure without repairing a frozen artifact. No engine process, cache operation, new physics trial or network inside audit.",
+  "claimCeiling": "Mechanical binding of manual source analysis only, not a second human review, runtime native-volume observation, cache passivity proof, physical repair, product integration, speedup or film-quality result."
+}
