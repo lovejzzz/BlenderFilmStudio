@@ -30,15 +30,18 @@ exact authorization sentence was supplied.
 
 ## Current operating goal
 
-Latest RC6 checkpoint (2026-09-02): C32 native-conservation observability is
-`PASS_SOURCE_BINDING_ONLY` 26/26 at attempt-111. C29 impact liquid remains
-physical FAIL25/27; C30/C31 are diagnostic/design results, not a recipe. Read
-`research/2026-09-02-rc6-native-conservation-observability-c32-result.md` next.
-C33 must first freeze reader readiness, then a bounded Data-only diagnostic.
-Resumable export exposes native phi but also changes cache loading/Mesh inputs;
-do not claim passivity or exact mass, bake Mesh, render, scan another scalar,
-mount retained caches, or begin a clean build. Older next-step paragraphs below
-are historical; START_HERE and the current machine snapshot govern resumption.
+Latest RC6 checkpoint (2026-09-03): C33 native-cache reader readiness is
+`PASS_READER_READINESS` 28/28 at C2 attempt-114. Attempts112/113 are retained
+pre-root ordering and real-codec failures. Read
+`research/2026-09-03-rc6-native-reader-c33-readiness-result.md` next. Actual
+C29 particle records fall13,659→3,820, but the old cache has no phi and this is
+not exact mass. C29 impact liquid remains physical FAIL25/27; C30/C31/C32/C33
+are diagnostic/design results, not a recipe. Next freeze one C34 exact-C29
+uninterrupted Data-only resumable-export diagnostic, requiring native phi and
+strong common-field passivity. Do not bake Mesh, render, scan another scalar,
+mount retained caches, claim passivity/mass, or begin a clean engine build.
+Older next-step paragraphs below are historical; START_HERE and the current
+machine snapshot govern resumption.
 
 The current public product baseline is RC5 commit
 `8e18c82548f8716c415e6e1b69fdbbdeef1f1900` on

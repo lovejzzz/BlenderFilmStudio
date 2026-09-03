@@ -7856,3 +7856,16 @@ must freeze reader readiness and a strong common particle/velocity comparison
 before a bounded Data-only diagnostic; no Mesh/render or scalar scan. The
 existing RC5 rigid-body demo remains viewable, while no new impact-liquid
 demo is claimed. See the C32 result and source-inspection documents.
+
+## J-671 · Decode particle meaning before generating native phi
+
+Date: 2026-09-03 · Type: READER READINESS / PRODUCT DIAGNOSTIC TOOL · Blender / bakes / renders: 0 / 0 / 0
+
+C33 attempt-112 rejected a header-list ordering mismatch before roots. C1
+attempt-113 built the reader and passed synthetic tests but rejected real
+Mantaflow's unregistered truncated codec. C2 adds the exact producer codec
+registrations plus a same-format known-value test and passes28/28. All36 copied
+C29 frames decode with independent velocity-hash agreement; particle records
+fall13,659→3,820. Old cache has no native phi, so exact mass remains open. Next
+C34 is one separately frozen uninterrupted Data-only resumable-export test,
+not Mesh/render or another parameter scan.

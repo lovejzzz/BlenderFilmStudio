@@ -1474,6 +1474,18 @@ pause/resume, source edit or clean build. The impact physical FAIL remains;
 the earlier RC5 contact clip is viewable but is not a new liquid demo. See
 `research/2026-09-02-rc6-native-conservation-observability-c32-result.md`.
 
+C33 reader readiness now closes `PASS_READER_READINESS` with an independent
+28/28 audit. The trusted helper detects particle-position/velocity/flag and
+finite phi changes, rejects malformed inputs, and independently matches all36
+copied C29 velocity grids. Actual old C29 files contain only particles and
+velocity, use truncated half-storage attributes, and show the decoded particle
+roster falling13,659→3,820 (-72.03%); this is not exact mass because no phi is
+present. Attempts112/113 remain retained admission/codec failures. Next C34
+may freeze one fresh uninterrupted exact-C29 Data-only bake with resumable
+export, then require both native-phi measurement and common-field passivity;
+no Mesh/render or physical PASS claim. See
+`research/2026-09-03-rc6-native-reader-c33-readiness-result.md`.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>
