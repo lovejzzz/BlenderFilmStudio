@@ -7896,3 +7896,15 @@ same-step resampling, saved particle count follows it, and FLIP ratio is unused
 by APIC. Because core support widths are cell-scaled, the next isolated
 question is REVIEW resolution128 versus Preview96 Data-only convergence—not
 another physical scalar, Mesh or render.
+
+## J-674 · C36 retained partial interruption for Codex upgrade
+
+Date: 2026-09-03 · Type: OWNER-REQUESTED INTERRUPTION / NO VERDICT · Blender / Data / Mesh / render: 1 partial / 1 partial / 0 / 0
+
+C36 was frozen before execution, then the owner requested a Codex upgrade while
+the REVIEW128 Data-only process was running. The process was interrupted after
+15 partial Data/config frames; no matching process remains. Attempt-118 has no
+scientific verdict and must not be resumed, measured or repaired. It contains
+zero Mesh and render media. On restart, host preflight precedes a versioned C36
+C1 adapter changing only fresh roots to attempt-119; all scientific and resource
+controls remain frozen.

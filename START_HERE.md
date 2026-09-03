@@ -1504,6 +1504,15 @@ versus-Preview96 resolution-convergence Data test before another physical
 scalar; no Mesh, render or physical PASS claim. See
 `research/2026-09-03-rc6-native-phi-c34-result.md`.
 
+C36 was frozen at commit `7a617d2b...`, but attempt-118 was intentionally
+interrupted for an owner-requested Codex upgrade after 15 partial Data/config
+frames. It has no scientific verdict and produced zero Mesh or render media.
+Preserve both partial roots unchanged and never resume or measure them. Restart
+with host preflight and a versioned C36 C1 adapter changing only the fresh roots
+to attempt-119; retain every frozen question, input, threshold, auditor,
+resource ceiling and prohibition. See
+`research/2026-09-03-rc6-native-phi-resolution-c36-attempt118-restart-interruption.md`.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>

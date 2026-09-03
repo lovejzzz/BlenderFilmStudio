@@ -30,7 +30,16 @@ exact authorization sentence was supplied.
 
 ## Current operating goal
 
-Latest RC6 checkpoint (2026-09-03): C34 closes as
+Latest RC6 checkpoint (2026-09-03): C36 was frozen at commit `7a617d2b...`,
+then attempt-118 was interrupted at the owner's request for a Codex upgrade
+after 15 partial Data/config frames. It has no scientific verdict, zero Mesh or
+render media, and no matching process remains. Preserve both attempt-118 roots
+unchanged; never resume or measure them. On restart, run host preflight and
+freeze a C36 C1 adapter changing only fresh roots to attempt-119, with the exact
+REVIEW128 question, inputs, thresholds, auditor, ceilings and prohibitions
+unchanged. Read
+`research/2026-09-03-rc6-native-phi-resolution-c36-attempt118-restart-interruption.md`
+first. C34 closes as
 `PASS_NATIVE_EXPORT_STRONG_COMMON_FIELD_EQUIVALENCE` after C1 attempt-116
 passes22/22 against retained attempt-115. Read
 `research/2026-09-03-rc6-native-phi-c34-result.md` next. All36 decoded C29
@@ -41,8 +50,7 @@ C35 then passes source/order audit22/22 and selects only one REVIEW128-versus-
 Preview96 Data-only resolution-convergence test. This rejects a purely Mesh-
 only account while preserving inconclusive transition order, numerical-
 occupancy—not mass—and no solver-cause claim. C29 impact remains physical
-FAIL25/27; C30–C35 are diagnostics/design, not a recipe. C36 must be frozen
-before one exact-R40 resolution-only Data run. Do not bake Mesh, render, scan a
+FAIL25/27; C30–C35 are diagnostics/design, not a recipe. Do not bake Mesh, render, scan a
 physical scalar, mount retained caches, claim mass/physical PASS, or begin a
 clean engine build.
 Older next-step paragraphs below are historical; START_HERE and the current
