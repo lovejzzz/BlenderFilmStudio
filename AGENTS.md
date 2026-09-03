@@ -35,14 +35,16 @@ Latest RC6 checkpoint (2026-09-03): C34 closes as
 passes22/22 against retained attempt-115. Read
 `research/2026-09-03-rc6-native-phi-c34-result.md` next. All36 decoded C29
 particle/velocity common fields are exact under uninterrupted resumable Data;
-current native phi falls27.20% and first crosses15% loss at frame31, the same
-frame as retained Mesh. This rejects a Mesh-only explanation but is numerical
-occupancy, not exact mass or one solver-cause identification. C29 impact liquid
-remains physical FAIL25/27; C30–C34 are diagnostics/design, not a recipe. C35
-must first be read-only bound-source operation-order inspection and may select
-only one distinct Data intervention if evidence is sufficient. Do not bake
-Mesh, render, scan band width/another scalar, mount retained caches, claim mass
-or physical PASS, or begin a clean engine build.
+current native phi falls27.20%. C2 corrects the onset context: frame-1-relative
+phi/Mesh cross15% loss at31/25; the old Mesh frame31 used a frame22 baseline.
+C35 then passes source/order audit22/22 and selects only one REVIEW128-versus-
+Preview96 Data-only resolution-convergence test. This rejects a purely Mesh-
+only account while preserving inconclusive transition order, numerical-
+occupancy—not mass—and no solver-cause claim. C29 impact remains physical
+FAIL25/27; C30–C35 are diagnostics/design, not a recipe. C36 must be frozen
+before one exact-R40 resolution-only Data run. Do not bake Mesh, render, scan a
+physical scalar, mount retained caches, claim mass/physical PASS, or begin a
+clean engine build.
 Older next-step paragraphs below are historical; START_HERE and the current
 machine snapshot govern resumption.
 

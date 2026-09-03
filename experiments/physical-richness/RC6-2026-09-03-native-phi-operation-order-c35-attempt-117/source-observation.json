@@ -1,0 +1,188 @@
+{
+  "claimCeiling": "Read-only operation-order and numerical-resolution selection only; not exact mass, same-frame Data/Mesh causality, one responsible solver operation, repaired physics, admitted product execution, Mesh, render or film quality.",
+  "excerpts": [
+    {
+      "contains": [
+        "narrowBandWidth_s$ID$         = 3",
+        "combineBandWidth_s$ID$        = narrowBandWidth_s$ID$ - 1",
+        "adjustedNarrowBandWidth_s$ID$ = $PARTICLE_BAND_WIDTH$"
+      ],
+      "excerpt": "const std::string liquid_variables =\n    \"\\n\\\nmantaMsg('Liquid variables')\\n\\\nnarrowBandWidth_s$ID$         = 3\\n\\\ncombineBandWidth_s$ID$        = narrowBandWidth_s$ID$ - 1\\n\\\nadjustedNarrowBandWidth_s$ID$ = $PARTICLE_BAND_WIDTH$ # only used in adjustNumber to control band width\\n\\\nparticleNumber_s$ID$   = $PARTICLE_NUMBER$\\n\\\nminParticles_s$ID$     = $PARTICLE_MINIMUM$\\n\\\nmaxParticles_s$ID$     = $PARTICLE_MAXIMUM$\\n\\\nradiusFactor_s$ID$     = $PARTICLE_RADIUS$\\n\\",
+      "excerptSha256": "93359d9cde1e979c910b9fd1e671c35d767ccc17675d84bbbbee5c998fa37298",
+      "id": "fixedCellBands",
+      "lines": [
+        15,
+        24
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "pp_s$ID$.advectInGrid",
+        "pushOutofObs(parts=pp_s$ID$",
+        "phiTmp_s$ID$.copyFrom(phi_s$ID$)",
+        "grid=phi_s$ID$, order=1"
+      ],
+      "excerpt": "const std::string liquid_step =\n    \"\\n\\\ndef liquid_step_$ID$():\\n\\\n    mantaMsg('Liquid step')\\n\\\n    \\n\\\n    mantaMsg('Advecting particles')\\n\\\n    pp_s$ID$.advectInGrid(flags=flags_s$ID$, vel=vel_s$ID$, integrationMode=IntRK4, deleteInObstacle=deleteInObstacle_s$ID$, stopInObstacle=False, skipNew=True)\\n\\\n    \\n\\\n    mantaMsg('Pushing particles out of obstacles')\\n\\\n    if using_obstacle_s$ID$ and using_fractions_s$ID$ and fracDistance_s$ID$ > 0:\\n\\\n        # Optional: Increase distance between fluid and obstacles (only obstacles, not borders)\\n\\\n        pushOutofObs(parts=pp_s$ID$, flags=flags_s$ID$, phiObs=phiObsIn_s$ID$, thresh=fracDistance_s$ID$)\\n\\\n    pushOutofObs(parts=pp_s$ID$, flags=flags_s$ID$, phiObs=phiObs_s$ID$)\\n\\\n    \\n\\\n    # save original states for later (used during mesh / secondary particle creation)\\n\\\n    # but only save the state at the beginning of an adaptive frame\\n\\\n    if not s$ID$.timePerFrame:\\n\\\n        phiTmp_s$ID$.copyFrom(phi_s$ID$)\\n\\\n        velTmp_s$ID$.copyFrom(vel_s$ID$)\\n\\\n    \\n\\\n    mantaMsg('Advecting phi')\\n\\\n    advectSemiLagrange(flags=flags_s$ID$, vel=vel_s$ID$, grid=phi_s$ID$, order=1) # first order is usually enough\\n\\\n    mantaMsg('Advecting velocity')\\n\\\n    advectSemiLagrange(flags=flags_s$ID$, vel=vel_s$ID$, grid=vel_s$ID$, order=2)\\n\\",
+      "excerptSha256": "f3edc9d2569614b2d134bcd8ff124f9bae4603233b7fc4210e8656d709e9e899",
+      "id": "particleObstaclePreviousOrder",
+      "lines": [
+        241,
+        264
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "unionParticleLevelset(parts=pp_s$ID$",
+        "phi_s$ID$.addConst(1.)",
+        "phi_s$ID$.join(phiParts_s$ID$)",
+        "updateFromLevelset(phi_s$ID$)"
+      ],
+      "excerpt": "    # create level set of particles\\n\\\n    gridParticleIndex(parts=pp_s$ID$, flags=flags_s$ID$, indexSys=pindex_s$ID$, index=gpi_s$ID$)\\n\\\n    unionParticleLevelset(parts=pp_s$ID$, indexSys=pindex_s$ID$, flags=flags_s$ID$, index=gpi_s$ID$, phi=phiParts_s$ID$, radiusFactor=radiusFactor_s$ID$)\\n\\\n    \\n\\\n    # combine level set of particles with grid level set\\n\\\n    phi_s$ID$.addConst(1.) # shrink slightly\\n\\\n    phi_s$ID$.join(phiParts_s$ID$)\\n\\\n    extrapolateLsSimple(phi=phi_s$ID$, distance=narrowBandWidth_s$ID$+2, inside=True)\\n\\\n    extrapolateLsSimple(phi=phi_s$ID$, distance=3)\\n\\\n    phi_s$ID$.setBoundNeumann(0) # make sure no particles are placed at outer boundary\\n\\\n    \\n\\\n    if not domainClosed_s$ID$ or using_outflow_s$ID$:\\n\\\n        resetOutflow(flags=flags_s$ID$, phi=phi_s$ID$, parts=pp_s$ID$, index=gpi_s$ID$, indexSys=pindex_s$ID$)\\n\\\n    flags_s$ID$.updateFromLevelset(phi_s$ID$)\\n\\",
+      "excerptSha256": "031ad34f37460647b7edf8596b87929bc4efb6a4eea07d3652cec60dbb7f2295",
+      "id": "particlePhiCurrentPhiOrder",
+      "lines": [
+        266,
+        279
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "solvePressure(",
+        "adjustNumber(parts=pp_s$ID$",
+        "apicMapMACGridToParts",
+        "flipVelocityUpdate"
+      ],
+      "excerpt": "    setWallBcs(flags=flags_s$ID$, vel=vel_s$ID$, obvel=None if using_fractions_s$ID$ else obvel_s$ID$, phiObs=phiObs_s$ID$, fractions=fractions_s$ID$)\\n\\\n    if using_guiding_s$ID$:\\n\\\n        mantaMsg('Guiding and pressure')\\n\\\n        PD_fluid_guiding(vel=vel_s$ID$, velT=velT_s$ID$, flags=flags_s$ID$, phi=phi_s$ID$, curv=curvature_s$ID$, surfTens=surfaceTension_s$ID$, fractions=fractions_s$ID$, weight=weightGuide_s$ID$, blurRadius=beta_sg$ID$, pressure=pressure_s$ID$, tau=tau_sg$ID$, sigma=sigma_sg$ID$, theta=theta_sg$ID$, zeroPressureFixing=domainClosed_s$ID$)\\n\\\n    else:\\n\\\n        mantaMsg('Pressure')\\n\\\n        solvePressure(flags=flags_s$ID$, vel=vel_s$ID$, pressure=pressure_s$ID$, curv=curvature_s$ID$, surfTens=surfaceTension_s$ID$, fractions=fractions_s$ID$, obvel=obvel_s$ID$ if using_fractions_s$ID$ else None, zeroPressureFixing=domainClosed_s$ID$)\\n\\\n    \\n\\\n    extrapolateMACSimple(flags=flags_s$ID$, vel=vel_s$ID$, distance=4, intoObs=True if using_fractions_s$ID$ else False)\\n\\\n    setWallBcs(flags=flags_s$ID$, vel=vel_s$ID$, obvel=None if using_fractions_s$ID$ else obvel_s$ID$, phiObs=phiObs_s$ID$, fractions=fractions_s$ID$)\\n\\\n    \\n\\\n    if not using_fractions_s$ID$:\\n\\\n        extrapolateMACSimple(flags=flags_s$ID$, vel=vel_s$ID$)\\n\\\n    \\n\\\n    # set source grids for resampling, used in adjustNumber!\\n\\\n    pVel_pp$ID$.setSource(grid=vel_s$ID$, isMAC=True)\\n\\\n    adjustNumber(parts=pp_s$ID$, vel=vel_s$ID$, flags=flags_s$ID$, minParticles=minParticles_s$ID$, maxParticles=maxParticles_s$ID$, phi=phi_s$ID$, exclude=phiObs_s$ID$, radiusFactor=radiusFactor_s$ID$, narrowBand=adjustedNarrowBandWidth_s$ID$)\\n\\\n    \\n\\\n    if using_apic_s$ID$:\\n\\\n        apicMapMACGridToParts(partVel=pVel_pp$ID$, cpx=pCx_pp$ID$, cpy=pCy_pp$ID$, cpz=pCz_pp$ID$, parts=pp_s$ID$, vel=vel_s$ID$, flags=flags_s$ID$)\\n\\\n    else:\\n\\\n        flipVelocityUpdate(vel=vel_s$ID$, velOld=velOld_s$ID$, flags=flags_s$ID$, parts=pp_s$ID$, partVel=pVel_pp$ID$, flipRatio=flipRatio_s$ID$)\\n\";",
+      "excerptSha256": "1d4ae1402502edb5a8b92cc5451c79449b22845deb29ff4540751bca86700bf8",
+      "id": "pressureBeforeResampling",
+      "lines": [
+        316,
+        337
+      ],
+      "path": "intern/mantaflow/intern/strings/liquid_script.h"
+    },
+    {
+      "contains": [
+        "calculateRadiusFactor",
+        "sqrt(3.)",
+        "SURFACE_LS"
+      ],
+      "excerpt": "//! helper to calculate particle radius factor to cover the diagonal of a cell in 2d/3d\ninline Real calculateRadiusFactor(const Grid<Real> &grid, Real factor)\n{\n  return (grid.is3D() ? sqrt(3.) : sqrt(2.)) *\n         (factor + .01);  // note, a 1% safety factor is added here\n}\n\n//! re-sample particles based on an input levelset\n// optionally skip seeding new particles in \"exclude\" SDF\n\nvoid adjustNumber(BasicParticleSystem &parts,\n                  const MACGrid &vel,\n                  const FlagGrid &flags,\n                  int minParticles,\n                  int maxParticles,\n                  const LevelsetGrid &phi,\n                  Real radiusFactor = 1.,\n                  Real narrowBand = -1.,\n                  const Grid<Real> *exclude = nullptr)\n{\n  // which levelset to use as threshold\n  const Real SURFACE_LS = -1.0 * calculateRadiusFactor(phi, radiusFactor);",
+      "excerptSha256": "e608ad1a3ec2bbb547e873b9bb1fe25e70d4dc62443993cf35760b93a3974dde",
+      "id": "cellRadiusFactor",
+      "lines": [
+        519,
+        540
+      ],
+      "path": "extern/mantaflow/preprocessed/plugin/flip.cpp"
+    },
+    {
+      "contains": [
+        "!tmp.isInBounds",
+        "phiv > 0",
+        "phiv < -narrowBand",
+        "num > maxParticles"
+      ],
+      "excerpt": "  // count particles in cells, and delete excess particles\n  for (IndexInt idx = 0; idx < (int)parts.size(); idx++) {\n    if (parts.isActive(idx)) {\n      Vec3i p = toVec3iFloor(parts.getPos(idx));\n      if (!tmp.isInBounds(p)) {\n        parts.kill(idx);  // out of domain, remove\n        continue;\n      }\n\n      Real phiv = phi.getInterpolated(parts.getPos(idx));\n      if (phiv > 0) {\n        parts.kill(idx);\n        continue;\n      }\n      if (narrowBand > 0. && phiv < -narrowBand) {\n        parts.kill(idx);\n        continue;\n      }\n\n      bool atSurface = false;\n      if (phiv > SURFACE_LS)\n        atSurface = true;\n      int num = tmp(p);\n\n      // dont delete particles in non fluid cells here, the particles are \"always right\"\n      if (num > maxParticles && (!atSurface)) {\n        parts.kill(idx);\n      }\n      else {\n        tmp(p) = num + 1;\n      }\n    }",
+      "excerptSha256": "fae28982afa383ae28ebb76a7ebcc4d72cd745bc4d111bbc2c45446c4c49bcd2",
+      "id": "resamplingKillRules",
+      "lines": [
+        544,
+        575
+      ],
+      "path": "extern/mantaflow/preprocessed/plugin/flip.cpp"
+    },
+    {
+      "contains": [
+        "skip cells near surface",
+        "phi(i, j, k) < -narrowBand",
+        "exclude",
+        "cnt < minParticles",
+        "insertBufferedParticles"
+      ],
+      "excerpt": "  // seed new particles\n  RandomStream rand(parts.getSeed());\n  FOR_IJK(tmp)\n  {\n    int cnt = tmp(i, j, k);\n\n    // skip cells near surface\n    if (phi(i, j, k) > SURFACE_LS)\n      continue;\n    if (narrowBand > 0. && phi(i, j, k) < -narrowBand) {\n      continue;\n    }\n    if (exclude && ((*exclude)(i, j, k) < 0.)) {\n      continue;\n    }\n\n    if (flags.isFluid(i, j, k) && cnt < minParticles) {\n      for (int m = cnt; m < minParticles; m++) {\n        Vec3 pos = Vec3(i, j, k) + rand.getVec3();\n        // Vec3 pos (i + 0.5, j + 0.5, k + 0.5); // cell center\n        parts.addBuffered(pos);\n      }\n    }\n  }\n\n  parts.doCompress();\n  parts.insertBufferedParticles();",
+      "excerptSha256": "6cffc1680208662bf91c9c3b0053ebe3a609e4cf85cb97837f71aa04ed34a942",
+      "id": "resamplingSeedRules",
+      "lines": [
+        578,
+        604
+      ],
+      "path": "extern/mantaflow/preprocessed/plugin/flip.cpp"
+    },
+    {
+      "contains": [
+        "FLUID_DOMAIN_METHOD_APIC",
+        "more energetic and stable behavior"
+      ],
+      "excerpt": "  static const EnumPropertyItem simulation_methods[] = {\n      {FLUID_DOMAIN_METHOD_FLIP,\n       \"FLIP\",\n       0,\n       \"FLIP\",\n       \"Use FLIP as the simulation method (more splashy behavior)\"},\n      {FLUID_DOMAIN_METHOD_APIC,\n       \"APIC\",\n       0,\n       \"APIC\",\n       \"Use APIC as the simulation method (more energetic and stable behavior)\"},\n      {0, nullptr, 0, nullptr, nullptr},",
+      "excerptSha256": "6fbd1d8415b948e4be57bac0255c0e5f04c5ca1ca5e201beed671b9aceefc025",
+      "id": "apicDeclaredStable",
+      "lines": [
+        1465,
+        1476
+      ],
+      "path": "source/blender/makesrna/intern/rna_fluid.cc"
+    },
+    {
+      "contains": [
+        "flip_ratio",
+        "particle_randomness",
+        "particle_number",
+        "higher value results in more particles"
+      ],
+      "excerpt": "  prop = RNA_def_property(srna, \"flip_ratio\", PROP_FLOAT, PROP_NONE);\n  RNA_def_property_range(prop, 0.0, 1.0);\n  RNA_def_property_ui_text(\n      prop,\n      \"FLIP Ratio\",\n      \"PIC/FLIP Ratio. A value of 1.0 will result in a completely FLIP based simulation. Use a \"\n      \"lower value for simulations which should produce smaller splashes.\");\n  RNA_def_property_update(prop, NC_OBJECT | ND_MODIFIER, \"rna_Fluid_datacache_reset\");\n\n  prop = RNA_def_property(srna, \"particle_randomness\", PROP_FLOAT, PROP_NONE);\n  RNA_def_property_range(prop, 0.0, 10.0);\n  RNA_def_property_ui_text(prop, \"Randomness\", \"Randomness factor for particle sampling\");\n  RNA_def_property_update(prop, NC_OBJECT | ND_MODIFIER, \"rna_Fluid_datacache_reset\");\n\n  prop = RNA_def_property(srna, \"particle_number\", PROP_INT, PROP_NONE);\n  RNA_def_property_range(prop, 1, 5);\n  RNA_def_property_ui_text(\n      prop, \"Number\", \"Particle number factor (higher value results in more particles)\");\n  RNA_def_property_translation_context(prop, BLT_I18NCONTEXT_AMOUNT);\n  RNA_def_property_update(prop, NC_OBJECT | ND_MODIFIER, \"rna_Fluid_datacache_reset\");",
+      "excerptSha256": "33414a777519e2320f53dfb4913c0c35ead84a83e59db5c34ceed92b7a108f0d",
+      "id": "particleSamplingProperties",
+      "lines": [
+        1835,
+        1854
+      ],
+      "path": "source/blender/makesrna/intern/rna_fluid.cc"
+    }
+  ],
+  "interpretation": {
+    "currentPhi": "advected, shrunk and joined with pre-resampling particle phi within each substep",
+    "particlePhi": "built before adjustNumber in the same substep",
+    "previousPhi": "beginning-of-adaptive-frame copy; not current or necessarily prior saved terminal phi",
+    "savedParticles": "post-adjustNumber and post-APIC update; count is not same-stage mass"
+  },
+  "metrics": {
+    "meshFirst15PercentLossFrame": 25,
+    "meshFrame36Drift": -0.39130769572167523,
+    "particleCountFrame36Drift": -0.7203309173438759,
+    "particleOccupiedSupportFrame36Drift": -0.5600322320709106,
+    "particlePhiFirst15PercentLossFrame": 20,
+    "particlePhiFrame36Drift": -0.30319535221495997,
+    "phiFirst15PercentLossFrame": 31,
+    "phiFrame36Drift": -0.27196804647785033,
+    "phiMeshCorrelation": 0.8989779089298234,
+    "phiOccupiedSupportCorrelation": 0.8096348009724715
+  },
+  "observationHash": "08c1ae2b10d3aaeef083e0d55469bb3a790bb9f68bb3c560ba7c1dab804090e4",
+  "operationOrder": [
+    "pp_s$ID$.advectInGrid",
+    "pushOutofObs(parts=pp_s$ID$",
+    "phiTmp_s$ID$.copyFrom",
+    "advectSemiLagrange(flags=flags_s$ID$, vel=vel_s$ID$, grid=phi_s$ID$",
+    "unionParticleLevelset(parts=pp_s$ID$",
+    "phi_s$ID$.addConst(1.)",
+    "phi_s$ID$.join(phiParts_s$ID$)",
+    "solvePressure(",
+    "adjustNumber(parts=pp_s$ID$",
+    "apicMapMACGridToParts("
+  ],
+  "researchExecutionCommit": "887f7bdeb1cdec80dfbfb51b35444e554408e2cd",
+  "schemaVersion": "bfs.rc6NativePhiOperationOrderC35.v1",
+  "selection": {
+    "gate": "C36_DATA_ONLY_RESOLUTION_CONVERGENCE",
+    "meshAndRender": "FORBIDDEN",
+    "notARecipe": true,
+    "reason": "native occupancy is numerical and fixed-cell levelset/particle support changes world scale with resolution; test convergence before another physical scalar",
+    "singleChange": "resolution_max 96 to 128"
+  },
+  "sourceCommit": "8e18c82548f8716c415e6e1b69fdbbdeef1f1900",
+  "status": "PASS_SOURCE_ORDER_SELECT_REVIEW128_DATA_ONLY"
+}

@@ -7883,3 +7883,16 @@ interpreter and passes22/22 with zero Blender, bake, cache copy or retained
 write. The result rejects a Mesh-only account but is numerical occupancy, not
 exact mass or one solver-cause identification. C35 is read-only source/order
 inspection before any further physical intervention or render.
+
+## J-673 · Source order selects a resolution-convergence test
+
+Date: 2026-09-03 · Type: READ-ONLY SOURCE/EVIDENCE PASS · Blender / bakes / renders / mutations: 0 / 0 / 0 / 0
+
+C35 first corrects the loss-line context: frame-1-relative phi/Mesh crossings
+are31/25, not the same frame. Its 22/22 audit then binds particle advection,
+obstacle push, previous-phi copy, phi advection/particle union, pressure,
+resampling and APIC update in exact order. Current and particle phi precede
+same-step resampling, saved particle count follows it, and FLIP ratio is unused
+by APIC. Because core support widths are cell-scaled, the next isolated
+question is REVIEW resolution128 versus Preview96 Data-only convergence—not
+another physical scalar, Mesh or render.
