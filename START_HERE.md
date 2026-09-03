@@ -1486,6 +1486,21 @@ export, then require both native-phi measurement and common-field passivity;
 no Mesh/render or physical PASS claim. See
 `research/2026-09-03-rc6-native-reader-c33-readiness-result.md`.
 
+C34 then repeated exact C29 with only uninterrupted resumable Data export. Its
+36-frame particle positions, particle velocities/flags and dense velocity
+grids are decoded-exact against C29, so this observation path closes
+`PASS_NATIVE_EXPORT_STRONG_COMMON_FIELD_EQUIVALENCE` for this exact same-host
+Data lifecycle. Current native phi numerical occupancy falls27.20% and first
+crosses15% loss at frame31, matching retained Mesh's first loss frame; particle
+phi falls30.32%. This rejects a Mesh-only explanation but is not exact mass or
+one solver operation. Attempt-115 remains an immutable audit-interpreter
+failure; C1 attempt-116 uses the exact bundled OpenVDB Python and passes22/22
+with zero Blender/bake/cache-copy/retained-write work. C29 remains physical
+FAIL25/27. Next C35 is read-only bound-source operation-order inspection before
+one distinct Data intervention may be selected; no new bake, Mesh, render,
+band-width scan or physical PASS claim. See
+`research/2026-09-03-rc6-native-phi-c34-result.md`.
+
 ## Public routes
 
 - Research home: <https://lovejzzz.github.io/BlenderFilmStudio/>

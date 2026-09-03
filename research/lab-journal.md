@@ -7869,3 +7869,17 @@ C29 frames decode with independent velocity-hash agreement; particle records
 fall13,659→3,820. Old cache has no native phi, so exact mass remains open. Next
 C34 is one separately frozen uninterrupted Data-only resumable-export test,
 not Mesh/render or another parameter scan.
+
+## J-672 · Native Data confirms loss before surface reconstruction
+
+Date: 2026-09-03 · Type: DATA-ONLY DIAGNOSTIC / AUDIT-ONLY CLOSURE · Blender / Data / Mesh / render: 1 / 1 / 0 / 0
+
+C34 attempt-115 repeated exact C29 with only uninterrupted resumable export.
+All36 decoded particle and velocity common fields are exact; current native phi
+falls27.20% and particle phi30.32%, while current phi first crosses15% loss at
+frame31 with Mesh. The original root remains a harness failure because its
+auditor chose a Python without OpenVDB. C1 attempt-116 changed only that
+interpreter and passes22/22 with zero Blender, bake, cache copy or retained
+write. The result rejects a Mesh-only account but is numerical occupancy, not
+exact mass or one solver-cause identification. C35 is read-only source/order
+inspection before any further physical intervention or render.

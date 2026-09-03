@@ -30,16 +30,19 @@ exact authorization sentence was supplied.
 
 ## Current operating goal
 
-Latest RC6 checkpoint (2026-09-03): C33 native-cache reader readiness is
-`PASS_READER_READINESS` 28/28 at C2 attempt-114. Attempts112/113 are retained
-pre-root ordering and real-codec failures. Read
-`research/2026-09-03-rc6-native-reader-c33-readiness-result.md` next. Actual
-C29 particle records fall13,659→3,820, but the old cache has no phi and this is
-not exact mass. C29 impact liquid remains physical FAIL25/27; C30/C31/C32/C33
-are diagnostic/design results, not a recipe. Next freeze one C34 exact-C29
-uninterrupted Data-only resumable-export diagnostic, requiring native phi and
-strong common-field passivity. Do not bake Mesh, render, scan another scalar,
-mount retained caches, claim passivity/mass, or begin a clean engine build.
+Latest RC6 checkpoint (2026-09-03): C34 closes as
+`PASS_NATIVE_EXPORT_STRONG_COMMON_FIELD_EQUIVALENCE` after C1 attempt-116
+passes22/22 against retained attempt-115. Read
+`research/2026-09-03-rc6-native-phi-c34-result.md` next. All36 decoded C29
+particle/velocity common fields are exact under uninterrupted resumable Data;
+current native phi falls27.20% and first crosses15% loss at frame31, the same
+frame as retained Mesh. This rejects a Mesh-only explanation but is numerical
+occupancy, not exact mass or one solver-cause identification. C29 impact liquid
+remains physical FAIL25/27; C30–C34 are diagnostics/design, not a recipe. C35
+must first be read-only bound-source operation-order inspection and may select
+only one distinct Data intervention if evidence is sufficient. Do not bake
+Mesh, render, scan band width/another scalar, mount retained caches, claim mass
+or physical PASS, or begin a clean engine build.
 Older next-step paragraphs below are historical; START_HERE and the current
 machine snapshot govern resumption.
 
