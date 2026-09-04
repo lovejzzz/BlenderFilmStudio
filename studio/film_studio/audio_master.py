@@ -14,8 +14,9 @@ def measured_filter(ffmpeg, wav, output):
               'offset': 'target_offset'}
     if not all(math.isfinite(float(values[key])) for key in fields.values()):
         raise ValueError('Soundtrack cannot be normalized: non-finite measurement')
-    filt = 'loudnorm=I=-20:TP=-2:LRA=7:linear=true:' + ':'.join(
-        f'{key}={values[value]}' for key, value in fields.items())
+    gain_db = min(-20 - float(values['input_i']), -2 - float(values['input_tp']))
+    filt = f'volume={gain_db:.6f}dB'
     (output / 'audio-normalization.json').write_text(json.dumps(
-        {'argv': argv, 'measurement': values, 'filter': filt}, indent=2))
+        {'argv': argv, 'measurement': values, 'filter': filt,
+         'method': 'measured constant gain, preserving original dynamics'}, indent=2))
     return filt
