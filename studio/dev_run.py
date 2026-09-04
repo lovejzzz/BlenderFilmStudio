@@ -31,7 +31,7 @@ if a.action!='build' and not input_blend:raise SystemExit('This action requires 
 if a.frames:
     copied_frames=wd/'input_frames';shutil.copytree(a.frames,copied_frames);job['frames']=str(copied_frames)
 jobpath=wd/'job.json';jobpath.write_text(json.dumps(job,indent=2))
-resources=binary.parents[1]/'Resources'/'5.2';env=os.environ.copy();env['HOME']=str(wd/'home');env['OCIO']=str(resources/'datafiles/colormanagement/config.ocio')
+resources=binary.parents[1]/'Resources'/'5.2';env=os.environ.copy();env['PF_MEDIA_PYTHON']=str(Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3');env['HOME']=str(wd/'home');env['OCIO']=str(resources/'datafiles/colormanagement/config.ocio')
 for k in ['CONFIG','SCRIPTS','DATAFILES','EXTENSIONS']:
     dest=wd/('user_'+k.lower());dest.mkdir();env['BLENDER_USER_'+k]=str(dest)
 Path(env['HOME']).mkdir()

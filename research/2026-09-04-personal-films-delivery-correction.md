@@ -1,0 +1,5 @@
+# Delivery smoke correction and UI outcome
+
+0019 retains an encoding failure because this host's FFmpeg lacks drawtext. All144 input frame hashes and original sound generation completed; no final movie exists. Candidate0020 uses the already installed local Pillow runtime to draw a transparent original title PNG and FFmpeg's verified overlay filter. Explicit PF_MEDIA_PYTHON survives isolated HOME. No package install, new service or charge. Same copied preview and same audio/encoding targets; zero new renders.
+
+0018 native UI directly passes readable four-shot selection, switching to the meter camera, a visible closer revision, Undo revision, and saving a new separate r0003 blend. It is closed after saving; original input remains unchanged. Add explicit current-frame reevaluation after a camera edit so the viewport immediately shows the correct dolly position at the current timeline frame rather than temporarily retaining the last keyed position. This does not change frame-rendered animation, which already sets each source frame explicitly.

@@ -31,10 +31,16 @@ def encode(sc,frames,output):
     audio=sound.soundtrack(doc,p,wav,responses(sc));ffmpeg=shutil.which('ffmpeg') or '/opt/homebrew/bin/ffmpeg'
     # Finish with gentle fades, maintaining native 24 fps and scope composition.
     dur=len(p['frames'])/24
-    title=output/'title.txt';title.write_text(' '.join(doc['title'].upper()))
-    color='0xe6dfcd' if doc['sound']['style']=='tape' else '0x262a2a'
-    title_filter=f"drawtext=fontfile=/System/Library/Fonts/Supplemental/Arial.ttf:textfile='{title}':expansion=none:fontsize={round(p['width']*.015)}:fontcolor={color}:x=w*.05:y=h*.075:enable='between(t,0.8,3.1)'"
-    argv=[ffmpeg,'-nostdin','-n','-framerate','24','-i',str(frames/'frame-%05d.png'),'-i',str(wav),'-vf',title_filter+f',fade=t=in:st=0:d=0.4,fade=t=out:st={dur-.8}:d=0.8','-c:v','libx264','-preset','slow','-crf','17','-pix_fmt','yuv420p','-af','loudnorm=I=-20:TP=-2:LRA=7','-c:a','aac','-b:a','256k','-movflags','+faststart','-shortest',str(movie)]
+    title=output/'title.png';height=round(p['width']/2.35/2)*2
+    color='#e6dfcd' if doc['sound']['style']=='tape' else '#262a2a'
+    python=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3'
+    # Isolated Blender workers receive the explicit host runtime from their job environment.
+    import os
+    python=Path(os.environ.get('PF_MEDIA_PYTHON',str(python)))
+    if not python.is_file():raise core.StudioError('Local Pillow media runtime is unavailable; set PF_MEDIA_PYTHON')
+    subprocess.run([str(python),str(Path(__file__).parents[1]/'title_card.py'),json.dumps({'width':p['width'],'height':height,'title':doc['title'],'color':color,'output':str(title)})],check=True,timeout=30)
+    filters=f"[0:v][2:v]overlay=0:0:enable='between(t,0.8,3.1)',fade=t=in:st=0:d=0.4,fade=t=out:st={dur-.8}:d=0.8[v]"
+    argv=[ffmpeg,'-nostdin','-n','-framerate','24','-i',str(frames/'frame-%05d.png'),'-i',str(wav),'-loop','1','-framerate','24','-i',str(title),'-filter_complex',filters,'-map','[v]','-map','1:a','-frames:v',str(len(p['frames'])),'-c:v','libx264','-preset','slow','-crf','17','-pix_fmt','yuv420p','-af','loudnorm=I=-20:TP=-2:LRA=7','-ar','48000','-c:a','aac','-b:a','256k','-movflags','+faststart','-shortest',str(movie)]
     with (output/'encode.stdout.log').open('x') as out,(output/'encode.stderr.log').open('x') as err:subprocess.run(argv,stdout=out,stderr=err,check=True,timeout=300)
     probe=subprocess.check_output([shutil.which('ffprobe') or '/opt/homebrew/bin/ffprobe','-v','error','-count_frames','-show_streams','-show_format','-of','json',str(movie)],text=True)
     data=json.loads(probe);video=next(s for s in data['streams'] if s['codec_type']=='video')

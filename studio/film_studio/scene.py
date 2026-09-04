@@ -76,6 +76,7 @@ def update_camera(scene,shot):
     obj.data.animation_data_clear()
     for f,dist in [(start,shot['distance']),(end,shot['distance']*(1-shot['travel']))]:
         obj.data.dof.focus_distance=max(.05,dist+shot['focus_offset']);obj.data.keyframe_insert('dof.focus_distance',frame=f)
+    scene.frame_set(scene.frame_current)
     return obj
 
 
