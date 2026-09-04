@@ -181,6 +181,23 @@ class PF_PT_director(bpy.types.Panel):
         lay.label(text='Space: playback · N: hide this panel')
 
 CLASSES=[PF_OT_select,PF_OT_coverage,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_preview,PF_OT_movie,PF_OT_resume,PF_OT_render_folder,PF_PT_director]
+def configure_workspace():
+    sc=bpy.context.scene
+    if not sc or 'pf_document' not in sc:return
+    doc=scene.load_document(sc)
+    if sc.pf_shot not in {s['id'] for s in doc['shots']}:sc.pf_shot=doc['shots'][0]['id']
+    # Use the established native editing surface, without legacy research fixtures.
+    if hasattr(sc,'film_studio'):sc.film_studio.expert_mode=True
+    for screen in bpy.data.screens:
+        for area in screen.areas:
+            if area.type=='VIEW_3D':
+                space=area.spaces.active;space.show_region_ui=True;space.region_3d.view_perspective='CAMERA';space.region_3d.view_camera_zoom=24;space.overlay.show_overlays=False
+                space.shading.type='MATERIAL';space.shading.use_scene_world=True;space.shading.use_scene_lights=True
+
+@bpy.app.handlers.persistent
+def on_load(_):
+    configure_workspace()
+
 def register():
     for c in CLASSES:bpy.utils.register_class(c)
     bpy.types.Scene.pf_shot=EnumProperty(name='Shot',items=shot_items)
@@ -189,15 +206,12 @@ def register():
     bpy.types.Scene.pf_pending_input=StringProperty(default='')
     bpy.types.Scene.pf_status=StringProperty(default='')
     bpy.app.timers.register(poll,persistent=True)
-    if 'pf_document' in bpy.context.scene:bpy.context.scene.pf_shot=scene.load_document(bpy.context.scene)['shots'][0]['id']
-    for screen in bpy.data.screens:
-        for area in screen.areas:
-            if area.type=='VIEW_3D':
-                space=area.spaces.active;space.show_region_ui=True;space.region_3d.view_perspective='CAMERA';space.region_3d.view_camera_zoom=24;space.overlay.show_overlays=False
-                space.shading.type='MATERIAL';space.shading.use_scene_world=True;space.shading.use_scene_lights=True
+    bpy.app.handlers.load_post.append(on_load)
+    configure_workspace()
 
 def unregister():
     if bpy.app.timers.is_registered(poll):bpy.app.timers.unregister(poll)
+    if on_load in bpy.app.handlers.load_post:bpy.app.handlers.load_post.remove(on_load)
     for c in reversed(CLASSES):bpy.utils.unregister_class(c)
     for name in ['pf_shot','pf_note','pf_pending','pf_pending_input','pf_status']:
         if hasattr(bpy.types.Scene,name):delattr(bpy.types.Scene,name)
