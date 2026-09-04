@@ -30,6 +30,9 @@ try:
     elif job['action']=='exercise':
         from film_studio.verification import exercise
         result=exercise(bpy.context.scene,out)
+    elif job['action']=='encode':
+        from film_studio.delivery import encode
+        result=encode(bpy.context.scene,job['frames'],out/'delivery')
     elif job['action']=='resume_test':
         from film_studio.rendering import render,sha
         sc=bpy.context.scene;root=out/'frames'
