@@ -27,7 +27,14 @@ def exercise(sc,out):
     from . import ui
     ui.register();sc.pf_shot='S02';original_cameras={o.name for o in sc.objects if o.type=='CAMERA'}
     outcome=bpy.ops.pf.coverage()
-    if outcome!={'FINISHED'} or len(scene.load_document(sc)['shots'])!=len(original['shots'])+1 or world_state(sc)!=before:raise AssertionError('New coverage changed world or failed')
+    after=world_state(sc)
+    differences=[]
+    for frame,objects in before['poses'].items():
+        for name,mat in objects.items():
+            other=after['poses'][frame][name]
+            if mat!=other:differences.append({'frame':frame,'object':name,'before':mat,'after':other})
+    (Path(out)/'coverage-diagnostic.json').write_text(json.dumps({'operator':list(outcome),'shotCount':len(scene.load_document(sc)['shots']),'geometryEqual':before['geometry']==after['geometry'],'pointCacheBaked':bool(sc.rigidbody_world and sc.rigidbody_world.point_cache.is_baked),'poseDifferences':differences},indent=2))
+    if outcome!={'FINISHED'} or len(scene.load_document(sc)['shots'])!=len(original['shots'])+1 or after!=before:raise AssertionError('New coverage changed world or failed')
     scene.undo(sc)
     if {o.name for o in sc.objects if o.type=='CAMERA'}!=original_cameras or world_state(sc)!=before:raise AssertionError('Coverage undo left a changed scene')
     if sc.camera is None:raise AssertionError('Undo left no active camera')

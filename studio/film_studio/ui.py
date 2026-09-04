@@ -161,7 +161,7 @@ class PF_PT_director(bpy.types.Panel):
         lay=self.layout;sc=context.scene
         if 'pf_document' not in sc:
             lay.label(text='Open one of your film projects.',icon='FILE_FOLDER');lay.operator('wm.open_mainfile',text='Open film…');return
-        doc=scene.load_document(sc);lay.label(text=doc['title'],icon='SEQUENCE');lay.label(text=f"Revision {doc['revision']} · {sum(s['duration'] for s in doc['shots'])/24:.0f} seconds")
+        doc=scene.load_document(sc);lay.operator('wm.open_mainfile',text='Open another film…',icon='FILE_FOLDER');lay.label(text=doc['title'],icon='SEQUENCE');lay.label(text=f"Revision {doc['revision']} · {sum(s['duration'] for s in doc['shots'])/24:.0f} seconds")
         box=lay.box();box.label(text='Shots');box.prop(sc,'pf_shot',text='');box.operator('pf.select_shot',icon='CAMERA_DATA');box.operator('pf.coverage',icon='ADD')
         row=box.row(align=True)
         for label,note in [('Closer','closer'),('Wider','wider')]:op=row.operator('pf.quick',text=label);op.note=note
