@@ -53,3 +53,18 @@ def exercise(sc,out):
     results.append({'newCoverageAndUndo':True});ui.unregister()
     bpy.context.preferences.filepaths.file_preview_type='NONE';bpy.ops.wm.save_as_mainfile(filepath=str(Path(out)/'project.blend'),check_existing=False)
     return {'checks':results,'undoRestoresSemantics':True,'nativeUIRegisters':True,'world':before,'document':scene.load_document(sc),'pointCacheBaked':bool(sc.rigidbody_world and sc.rigidbody_world.point_cache.is_baked)}
+
+
+def verify_cache(sc,reference):
+    from mathutils import Vector
+    data=json.loads(Path(reference).read_text());objects={o.name:o for o in sc.objects if o.get('pf_solver_role')};max_position=0;max_rotation=0
+    # A coprime permutation exercises large forward/backward jumps, not only playback.
+    records=data['frames'];order=[(i*137)%len(records) for i in range(len(records))]
+    for index in order:
+        record=records[index];scene.set_frame(sc,record['frame']);dg=bpy.context.evaluated_depsgraph_get()
+        for name,o in objects.items():
+            mat=o.evaluated_get(dg).matrix_world;q=mat.to_quaternion();pos=mat.translation
+            max_position=max(max_position,max(abs(pos[i]-record['positions'][name][i]) for i in range(3)))
+            expected=record['rotations'][name];same=max(abs(q[i]-expected[i]) for i in range(4));neg=max(abs(q[i]+expected[i]) for i in range(4));max_rotation=max(max_rotation,min(same,neg))
+    if max_position>1e-6 or max_rotation>1e-6:raise AssertionError(f'Original cached motion differs: position {max_position}, quaternion {max_rotation}')
+    return {'frames':len(records),'bodies':len(objects),'randomAccessOrder':'i*137 modulo frame count','maxPositionErrorMeters':max_position,'maxQuaternionComponentError':max_rotation,'tolerance':1e-6,'pointCacheBaked':sc.rigidbody_world.point_cache.is_baked}

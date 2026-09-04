@@ -2,7 +2,7 @@
 import argparse,hashlib,json,os,shutil,subprocess,time
 from pathlib import Path
 REPO=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--project',default='last-signal.film.json');p.add_argument('--blend');p.add_argument('--action',choices=['build','editorial','inspect','exercise','render','resume_test','ui','encode'],default='build');p.add_argument('--maximum-new-frames',type=int,default=0);p.add_argument('--frames');p.add_argument('--shots');p.add_argument('--stills',default='S01,S02,S03,S04');p.add_argument('--width',type=int,default=1280);p.add_argument('--samples',type=int,default=48)
+p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--project',default='last-signal.film.json');p.add_argument('--blend');p.add_argument('--action',choices=['build','editorial','inspect','exercise','render','resume_test','ui','encode','verify_cache'],default='build');p.add_argument('--maximum-new-frames',type=int,default=0);p.add_argument('--reference');p.add_argument('--frames');p.add_argument('--shots');p.add_argument('--stills',default='S01,S02,S03,S04');p.add_argument('--width',type=int,default=1280);p.add_argument('--samples',type=int,default=48)
 a=p.parse_args()
 if not a.name.replace('-','').isalnum():raise SystemExit('Invalid candidate name')
 contract=REPO/'specs/ai-native-studio-personal-films-program.v0.1.json';limits=json.loads(contract.read_text())['developmentAdmission']
@@ -30,6 +30,8 @@ if a.blend:
 if a.action!='build' and not input_blend:raise SystemExit('This action requires --blend')
 if a.frames:
     copied_frames=wd/'input_frames';shutil.copytree(a.frames,copied_frames);job['frames']=str(copied_frames)
+if a.reference:
+    reference=wd/'reference.json';shutil.copy2(a.reference,reference);job['reference']=str(reference)
 jobpath=wd/'job.json';jobpath.write_text(json.dumps(job,indent=2))
 resources=binary.parents[1]/'Resources'/'5.2';env=os.environ.copy();env['PF_MEDIA_PYTHON']=str(Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3');env['HOME']=str(wd/'home');env['OCIO']=str(resources/'datafiles/colormanagement/config.ocio')
 for k in ['CONFIG','SCRIPTS','DATAFILES','EXTENSIONS']:

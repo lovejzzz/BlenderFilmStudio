@@ -27,6 +27,9 @@ try:
     elif job['action']=='inspect':
         from film_studio.verification import world_state
         result={'world':world_state(bpy.context.scene),'document':scene.load_document(bpy.context.scene)}
+    elif job['action']=='verify_cache':
+        from film_studio.verification import verify_cache
+        result=verify_cache(bpy.context.scene,job['reference'])
     elif job['action']=='exercise':
         from film_studio.verification import exercise
         result=exercise(bpy.context.scene,out)
