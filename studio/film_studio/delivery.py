@@ -39,7 +39,7 @@ def encode(sc,frames,output):
     python=Path(os.environ.get('PF_MEDIA_PYTHON',str(python)))
     if not python.is_file():raise core.StudioError('Local Pillow media runtime is unavailable; set PF_MEDIA_PYTHON')
     subprocess.run([str(python),str(Path(__file__).parents[1]/'title_card.py'),json.dumps({'width':p['width'],'height':height,'title':doc['title'],'color':color,'output':str(title)})],check=True,timeout=30)
-    filters=f"[0:v][2:v]overlay=0:0:enable='between(t,0.8,3.1)',fade=t=in:st=0:d=0.4,fade=t=out:st={dur-.8}:d=0.8[v]"
+    filters=f"[2:v]fade=t=in:st=0.6:d=0.5:alpha=1,fade=t=out:st=2.6:d=0.5:alpha=1[title];[0:v][title]overlay=0:0,fade=t=in:st=0:d=0.4,fade=t=out:st={dur-.8}:d=0.8[v]"
     argv=[ffmpeg,'-nostdin','-n','-framerate','24','-i',str(frames/'frame-%05d.png'),'-i',str(wav),'-loop','1','-framerate','24','-i',str(title),'-filter_complex',filters,'-map','[v]','-map','1:a','-frames:v',str(len(p['frames'])),'-c:v','libx264','-preset','slow','-crf','17','-pix_fmt','yuv420p','-af','loudnorm=I=-20:TP=-2:LRA=7','-ar','48000','-c:a','aac','-b:a','256k','-movflags','+faststart','-shortest',str(movie)]
     with (output/'encode.stdout.log').open('x') as out,(output/'encode.stderr.log').open('x') as err:subprocess.run(argv,stdout=out,stderr=err,check=True,timeout=300)
     probe=subprocess.check_output([shutil.which('ffprobe') or '/opt/homebrew/bin/ffprobe','-v','error','-count_frames','-show_streams','-show_format','-of','json',str(movie)],text=True)
