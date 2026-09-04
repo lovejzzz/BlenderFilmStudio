@@ -32,7 +32,7 @@ def render(sc,root,width=1920,samples=96,shot_ids=None,maximum_new_frames=None):
             for partial in [target,receipt]:
                 if partial.exists():os.replace(partial,retained/partial.name)
         if maximum_new_frames is not None and created>=maximum_new_frames:break
-        sc.camera=bpy.data.objects['PF_CAMERA_'+spec['shot']];sc.frame_set(spec['sourceFrame'])
+        sc.camera=bpy.data.objects['PF_CAMERA_'+spec['shot']];scene.set_frame(sc,spec['sourceFrame'])
         temporary=root/(stem+'.partial.png');sc.render.filepath=str(temporary)
         if temporary.exists():
             retained=root/'interrupted'/uuid.uuid4().hex;retained.mkdir(parents=True);os.replace(temporary,retained/temporary.name)

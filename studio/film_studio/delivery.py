@@ -7,7 +7,7 @@ from . import core,scene,rendering,sound
 def responses(sc):
     targets=[o for o in sc.objects if o.get('pf_solver_role')=='target'];found={};initial={}
     for f in range(1,scene.load_document(sc)['simulation_end']+1):
-        sc.frame_set(f);dg=bpy.context.evaluated_depsgraph_get()
+        scene.set_frame(sc,f);dg=bpy.context.evaluated_depsgraph_get()
         for o in targets:
             q=o.evaluated_get(dg).matrix_world.to_quaternion()
             if f==1:initial[o.name]=q

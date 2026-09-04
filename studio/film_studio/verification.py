@@ -29,6 +29,12 @@ def exercise(sc,out):
     for _ in range(3):scene.undo(sc)
     restored=copy.deepcopy(scene.load_document(sc));restored['revision']=original['revision']
     if restored!=original or world_state(sc)!=before:raise AssertionError('Undo did not restore original semantics')
+    for sweep in range(12):
+        repeated=world_state(sc)
+        if repeated!=before:
+            (Path(out)/f'jump-sweep-{sweep}.json').write_text(json.dumps(difference(before,repeated),indent=2))
+            raise AssertionError('Random-access solved-state sweep differs')
+    results.append({'randomAccessSweeps':12,'allExact':True})
     # Register the actual native surface in a worker to catch Blender RNA errors.
     from . import ui
     ui.register();sc.pf_shot='S02';original_cameras={o.name for o in sc.objects if o.type=='CAMERA'}

@@ -1,0 +1,5 @@
+# Kinematic cache random-access finding and fix hypothesis
+
+0028 captures a material mismatch: only KINETIC_BALL at source150 returns its initial pose (-1.27,0,1.402) instead of cached(0.2129014,-0.0004454,1.1199999); geometry remains exact and pointCacheBaked remains true. This is not harmless rounding and no tolerance is changed. The check jumps from source73 (before authored release84) to150. An animated kinematic flag can reach the cache consumer in a different evaluation order on such a jump; the precise native scheduling cause is an inference.
+
+Add a shared set_frame evaluator that visits the authored release frame and the following frame, refreshing the dependency graph before requesting any later cached frame. For earlier frames it visits frame1 first. It never authors a solved transform or alters physical parameters. Use it consistently for camera refresh, semantic reads, rendering and audio event reads. Candidate0029 runs the unchanged exact world/geometry checks, adds12 repeated random-access sweeps and coverage/undo. No new bake, threshold relaxation or render. If it fails, retain it and continue diagnosis rather than accepting changed physics.

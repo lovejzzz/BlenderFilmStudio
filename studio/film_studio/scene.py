@@ -11,6 +11,24 @@ from mathutils import Vector
 from . import core, assets, physics
 
 
+def set_frame(sc,frame):
+    """Visit authored dynamic-release boundaries before random-access cache reads.
+
+    Animated kinematic flags can otherwise be evaluated after the rigid-body
+    cache consumer on a large timeline jump. No solved transforms are authored.
+    """
+    if sc.rigidbody_world and 'pf_document' in sc:
+        doc=load_document(sc)
+        releases=[int(a['params'].get('release',36)) for a in doc['assets'] if a['factory']=='kinetic_run']
+        for release in releases:
+            if frame>release:
+                sc.frame_set(release);bpy.context.view_layer.update()
+                sc.frame_set(release+1);bpy.context.view_layer.update()
+            else:
+                sc.frame_set(1);bpy.context.view_layer.update()
+    sc.frame_set(frame);bpy.context.view_layer.update()
+
+
 def store_document(scene,doc):
     scene['pf_document']=core.canonical(doc);scene['pf_revision']=doc['revision'];scene['pf_document_hash']=core.digest(doc)
 
@@ -77,7 +95,7 @@ def update_camera(scene,shot):
     obj.data.animation_data_clear()
     for f,dist in [(start,shot['distance']),(end,shot['distance']*(1-shot['travel']))]:
         obj.data.dof.focus_distance=max(.05,dist+shot['focus_offset']);obj.data.keyframe_insert('dof.focus_distance',frame=f)
-    scene.frame_set(scene.frame_current)
+    set_frame(scene,scene.frame_current)
     return obj
 
 
@@ -109,7 +127,7 @@ def build(doc,output):
     scene['pf_history']='[]';scene['pf_project_directory']=str(Path(output).parent)
     for shot in doc['shots']:update_camera(scene,shot)
     scene.camera=bpy.data.objects['PF_CAMERA_'+doc['shots'][0]['id']]
-    configure_render(scene);update_look(scene,doc);scene.frame_set(shot_range(scene,doc['shots'][0])[0])
+    configure_render(scene);update_look(scene,doc);set_frame(scene,shot_range(scene,doc['shots'][0])[0])
     bpy.context.preferences.filepaths.file_preview_type='NONE'
     bpy.ops.wm.save_as_mainfile(filepath=str(output),check_existing=False)
     return {'documentHash':core.digest(doc),'protectedWorld':core.protected_world(doc),'events':events,'physics':physical,'objects':len(scene.objects),'materials':len(bpy.data.materials),'colorManagement':{'view':scene.view_settings.view_transform,'display':scene.display_settings.display_device}}
@@ -157,7 +175,7 @@ def undo(scene):
 
 def select_shot(scene,index):
     doc=load_document(scene);shot=doc['shots'][index];start,end=shot_range(scene,shot)
-    scene.camera=bpy.data.objects['PF_CAMERA_'+shot['id']];scene.frame_preview_start=start;scene.frame_preview_end=end;scene.use_preview_range=True;scene.frame_set(start)
+    scene.camera=bpy.data.objects['PF_CAMERA_'+shot['id']];scene.frame_preview_start=start;scene.frame_preview_end=end;scene.use_preview_range=True;set_frame(scene,start)
     for screen in bpy.data.screens:
         for area in screen.areas:
             if area.type=='VIEW_3D':area.spaces.active.region_3d.view_perspective='CAMERA'
@@ -167,6 +185,6 @@ def select_shot(scene,index):
 def semantic_state(scene,frames=None):
     doc=load_document(scene);states={}
     for frame in (frames or [1,doc['simulation_end']//2,doc['simulation_end']]):
-        scene.frame_set(frame);dg=bpy.context.evaluated_depsgraph_get()
+        set_frame(scene,frame);dg=bpy.context.evaluated_depsgraph_get()
         states[str(frame)]={o.name:[round(x,7) for row in o.evaluated_get(dg).matrix_world for x in row] for o in scene.objects if o.type in {'MESH','CAMERA','LIGHT'}}
     return {'document':doc,'events':json.loads(scene['pf_events']),'states':states,'worldHash':core.protected_world(doc)}

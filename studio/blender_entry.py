@@ -53,7 +53,7 @@ try:
         result['renders']=[]
         for sid in job['stills']:
             idx=next(i for i,s in enumerate(doc['shots']) if s['id']==sid)
-            shot=scene.select_shot(sc,idx);start,end=scene.shot_range(sc,shot);frame=(start+end)//2;sc.frame_set(frame)
+            shot=scene.select_shot(sc,idx);start,end=scene.shot_range(sc,shot);frame=(start+end)//2;scene.set_frame(sc,frame)
             target=out/(sid+'.png')
             if target.exists():raise RuntimeError('Output already exists')
             sc.render.filepath=str(target);bpy.ops.render.render(write_still=True)
