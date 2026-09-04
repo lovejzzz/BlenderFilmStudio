@@ -32,8 +32,10 @@ def poll():
             count=len(list((root/'output/frames').glob('frame-*.json')))
             set_status(f'Rendering movie · {count} frames finished')
     try:
-        ok,value=_mailbox.get_nowait();_busy=False
-        if ok:bpy.context.scene.pf_pending=core.canonical(value);set_status(value['reason'])
+        ok,value,expected_hash=_mailbox.get_nowait();_busy=False
+        if 'pf_document' not in bpy.context.scene or core.digest(scene.load_document(bpy.context.scene))!=expected_hash:
+            bpy.context.scene.pf_pending='';set_status('The project changed while the director was working. Ask again for this version.');return .3
+        if ok:bpy.context.scene.pf_pending=core.canonical(value);bpy.context.scene.pf_pending_input=expected_hash;set_status(value['reason'])
         else:set_status(str(value))
         for screen in bpy.data.screens:
             for area in screen.areas:area.tag_redraw()
@@ -76,14 +78,15 @@ class PF_OT_direct(bpy.types.Operator):
         _busy=True;context.scene.pf_pending='';set_status('Director is considering the shot…')
         root=workspace()/'director-jobs'/uuid.uuid4().hex
         def work():
-            try:_mailbox.put((True,director.propose(doc,note,shot,root)))
-            except Exception as e:_mailbox.put((False,str(e)))
+            try:_mailbox.put((True,director.propose(doc,note,shot,root),core.digest(doc)))
+            except Exception as e:_mailbox.put((False,str(e),core.digest(doc)))
         threading.Thread(target=work,daemon=True).start();return {'FINISHED'}
 
 class PF_OT_apply(bpy.types.Operator):
     bl_idname='pf.apply';bl_label='Apply proposed change'
     def execute(self,context):
         try:
+            if context.scene.pf_pending_input!=core.digest(scene.load_document(context.scene)):raise core.StudioError('This proposal belongs to another project version. Ask the director again.')
             proposal=json.loads(context.scene.pf_pending);scene.revise(context.scene,proposal);context.scene.pf_pending='';set_status('Applied · compare the shot, or Undo revision');return {'FINISHED'}
         except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
 
@@ -183,6 +186,7 @@ def register():
     bpy.types.Scene.pf_shot=EnumProperty(name='Shot',items=shot_items)
     bpy.types.Scene.pf_note=StringProperty(name='Director note',default='',maxlen=2000)
     bpy.types.Scene.pf_pending=StringProperty(default='')
+    bpy.types.Scene.pf_pending_input=StringProperty(default='')
     bpy.types.Scene.pf_status=StringProperty(default='')
     bpy.app.timers.register(poll,persistent=True)
     if 'pf_document' in bpy.context.scene:bpy.context.scene.pf_shot=scene.load_document(bpy.context.scene)['shots'][0]['id']
@@ -195,5 +199,5 @@ def register():
 def unregister():
     if bpy.app.timers.is_registered(poll):bpy.app.timers.unregister(poll)
     for c in reversed(CLASSES):bpy.utils.unregister_class(c)
-    for name in ['pf_shot','pf_note','pf_pending','pf_status']:
+    for name in ['pf_shot','pf_note','pf_pending','pf_pending_input','pf_status']:
         if hasattr(bpy.types.Scene,name):delattr(bpy.types.Scene,name)

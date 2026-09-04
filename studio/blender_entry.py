@@ -27,6 +27,19 @@ try:
     elif job['action']=='inspect':
         from film_studio.verification import world_state
         result={'world':world_state(bpy.context.scene),'document':scene.load_document(bpy.context.scene)}
+    elif job['action']=='ui_scope':
+        import copy
+        from film_studio import ui
+        sc=bpy.context.scene;ui.register();original=scene.load_document(sc);proposal=core.quick_proposal(original,'closer','S01');expected=core.digest(original)
+        other=copy.deepcopy(original);other['id']='AnotherFilm';other['title']='Another film at the same revision';scene.store_document(sc,other)
+        sc.pf_pending='';ui._mailbox.put((True,proposal,expected));ui.poll()
+        if sc.pf_pending or scene.load_document(sc)!=other:raise AssertionError('Cross-project async proposal was installed')
+        sc.pf_pending=core.canonical(proposal);sc.pf_pending_input=expected
+        try:bpy.ops.pf.apply()
+        except RuntimeError:pass
+        else:raise AssertionError('Cross-project apply did not reject')
+        if scene.load_document(sc)!=other:raise AssertionError('Rejected proposal modified the project')
+        result={'asyncCrossProjectRejected':True,'sameRevisionCrossProjectApplyRejected':True,'projectUnchanged':True};ui.unregister()
     elif job['action']=='verify_cache':
         from film_studio.verification import verify_cache
         result=verify_cache(bpy.context.scene,job['reference'])
