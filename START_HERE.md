@@ -1,11 +1,11 @@
 # BlenderFilmStudio — new machine cold start
 
-> **Personal studio checkpoint:** both final movie renders are now running under
-> `specs/ai-native-studio-personal-films-final.v0.1.json`. Product code and two
-> input blends are frozen; read the latest `personalFilmsProgram` snapshot and
-> `research/2026-09-04-personal-films-final-production-admission.md`. Inspect
-> existing processes/logs before any continuation. Do not duplicate runs or
-> call the goal complete until both movies, sound and editable delivery pass.
+> **Personal studio delivered:** local version0.1.4 and two finished editable
+> microfilms are in `output/personal-film-studio/`. Read
+> `research/2026-09-04-personal-films-delivery-result.md` and the latest
+> `personalFilmsProgram` snapshot. Both formal renders completed; do not restart
+> or mutate their retained roots. Final native-player verification was blocked
+> by the locked Mac; complete decoding and direct frame review passed.
 
 > **Active owner goal (2026-09-04):** deliver a usable personal film studio and
 > two distinct finished cinematic films. Read
