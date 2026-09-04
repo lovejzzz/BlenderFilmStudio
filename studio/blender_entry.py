@@ -11,7 +11,15 @@ try:
     if job['action']=='build':
         doc=core.validate(json.loads(Path(job['project']).read_text()))
         result=scene.build(doc,out/'project.blend')
-    elif job['action']=='inspect':result=scene.semantic_state(bpy.context.scene)
+    elif job['action']=='inspect':
+        from film_studio.verification import world_state
+        result={'world':world_state(bpy.context.scene),'document':scene.load_document(bpy.context.scene)}
+    elif job['action']=='exercise':
+        from film_studio.verification import exercise
+        result=exercise(bpy.context.scene,out)
+    elif job['action']=='render':
+        from film_studio.rendering import render
+        result=render(bpy.context.scene,out/'frames',job.get('width',640),job.get('samples',16),job.get('shots'),job.get('maximum_new_frames'))
     if job.get('stills'):
         sc=bpy.context.scene;doc=scene.load_document(sc)
         scene.configure_render(sc,job.get('width',1280),job.get('samples',48));scene.update_look(sc,doc)
