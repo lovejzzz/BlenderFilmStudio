@@ -6,10 +6,13 @@ from bpy.props import StringProperty,EnumProperty,IntProperty
 from . import core,scene,director
 
 _mailbox=queue.Queue();_busy=False;_render_job=None
+_shot_cache={}
 
 def shot_items(self,context):
     if not context or 'pf_document' not in context.scene:return [('NONE','Open a film','')]
-    return [(s['id'],s['id']+' · '+s['label'],'') for s in scene.load_document(context.scene)['shots']]
+    doc=scene.load_document(context.scene);key=core.digest(doc)
+    if key not in _shot_cache:_shot_cache[key]=[(s['id'],s['id']+' · '+s['label'],'') for s in doc['shots']]
+    return _shot_cache[key]
 
 def workspace():
     path=Path.home()/'Movies'/'Personal Film Studio';path.mkdir(parents=True,exist_ok=True);return path
@@ -173,9 +176,12 @@ def register():
     bpy.types.Scene.pf_pending=StringProperty(default='')
     bpy.types.Scene.pf_status=StringProperty(default='')
     bpy.app.timers.register(poll,persistent=True)
+    if 'pf_document' in bpy.context.scene:bpy.context.scene.pf_shot=scene.load_document(bpy.context.scene)['shots'][0]['id']
     for screen in bpy.data.screens:
         for area in screen.areas:
-            if area.type=='VIEW_3D':area.spaces.active.show_region_ui=True;area.spaces.active.region_3d.view_perspective='CAMERA'
+            if area.type=='VIEW_3D':
+                space=area.spaces.active;space.show_region_ui=True;space.region_3d.view_perspective='CAMERA';space.region_3d.view_camera_zoom=24;space.overlay.show_overlays=False
+                space.shading.type='MATERIAL';space.shading.use_scene_world=True;space.shading.use_scene_lights=True
 
 def unregister():
     if bpy.app.timers.is_registered(poll):bpy.app.timers.unregister(poll)
