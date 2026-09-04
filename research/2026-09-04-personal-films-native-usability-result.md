@@ -1,0 +1,9 @@
+# Delivered native studio usability result
+
+Product0.1.2 passes the bounded local launch/AI-apply/save/reopen check. Both packaged `.command` launchers opened the intended exact project. The real Chinese request 「保持焦距，让这个镜头更靠近一点。」 returned `camera_distance=4.0` for S01, preserving42mm. The existing ChatGPT-authenticated Codex call completed in5.85seconds, with no tool events or API billing. The reviewed proposal applied visibly and produced revision2.
+
+Save wrote a unique `.blend` and typed document in the user's Movies/Personal Film Studio folder. A fresh native process opened that exact saved file and displayed revision2 with the closer composition. The supplied revision1 project hashes remain exact. Little Gravity's S03 selection visibly showed the baked ball/chain response at source145; switching between the two films preserved registered controls and, after the0.1.2 correction, restored camera/material/sidebar presentation.
+
+The original reopen presentation failure remains recorded separately. One file-chooser action selected the previous filename in a different folder and produced a harmless file-not-found error; choosing the exact saved filename then succeeded. Both native sessions closed normally. Blender reported small unfreed-allocation messages on exit (0.038MiB/0.114MiB); these are retained in stdout and are not presented as absent. Native recovery wrote the app's ordinary temporary `quit.blend`; no formal/evidence input was overwritten.
+
+Evidence: `experiments/personal-films/PF-DELIVERY-2026-09-04-attempt-01/usability.json`, launch records, stdout/stderr and bounded director receipts. Direct native screenshots are in the current task. Delivery continuation used exactly2GUI starts, zero renders/bakes/builds and one existing-account director call. The two formal background movie workers remained untouched and their finished-media review is still pending.
