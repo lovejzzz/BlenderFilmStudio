@@ -25,6 +25,14 @@ def configure_render(scene,width=1280,samples=48,engine='CYCLES'):
         scene.cycles.samples=samples;scene.cycles.use_denoising=True;scene.cycles.use_adaptive_sampling=True;scene.cycles.adaptive_threshold=.025
         scene.cycles.max_bounces=8;scene.cycles.diffuse_bounces=3;scene.cycles.glossy_bounces=4;scene.cycles.transmission_bounces=6
         scene.render.use_persistent_data=True
+        prefs=bpy.context.preferences.addons['cycles'].preferences
+        try:
+            prefs.compute_device_type='METAL';prefs.get_devices()
+            devices=[d for d in prefs.devices if d.type=='METAL']
+            if devices:
+                for d in prefs.devices:d.use=d.type=='METAL'
+                scene.cycles.device='GPU'
+        except (TypeError,RuntimeError):pass
     scene.render.use_file_extension=True;scene.render.film_transparent=False
     if hasattr(scene.render,'use_motion_blur'):scene.render.use_motion_blur=True;scene.render.motion_blur_shutter=.35
     scene.render.use_compositing=False
