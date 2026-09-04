@@ -14,7 +14,7 @@ def world_state(sc):
 def exercise(sc,out):
     before=world_state(sc);original=copy.deepcopy(scene.load_document(sc));results=[]
     for note in ['closer','warmer','later cut']:
-        d=scene.load_document(sc);p=core.quick_proposal(d,note,'S02');scene.revise(sc,p)
+        d=scene.load_document(sc);p=core.quick_proposal(d,note,'S04' if note=='later cut' else 'S02');scene.revise(sc,p)
         if world_state(sc)!=before:raise AssertionError('Actual mesh state changed after '+note)
         results.append({'note':note,'worldPreserved':True})
     try:scene.revise(sc,p)

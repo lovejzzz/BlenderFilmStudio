@@ -44,13 +44,20 @@ def configure_render(scene,width=1280,samples=48,engine='CYCLES'):
     scene.view_settings.exposure=0;scene.view_settings.gamma=1
 
 
-def shot_range(scene,shot):
-    events=json.loads(scene.get('pf_events','{"start":1}'))
-    if shot['anchor'] not in events:raise core.StudioError('This world has no measured '+shot['anchor']+' event')
-    start=events[shot['anchor']]+shot['offset'];end=start+shot['duration']-1
-    doc=load_document(scene)
-    if start<1 or end>doc['simulation_end']:raise core.StudioError(f'{shot["id"]} exceeds simulated frame range ({start}-{end})')
-    return start,end
+def ranges(doc,events):
+    result={};last=0
+    for shot in doc['shots']:
+        anchor=last+1 if shot['anchor']=='previous' else events.get(shot['anchor'])
+        if anchor is None:raise core.StudioError('Missing event: '+shot['anchor'])
+        start=anchor+shot['offset'];end=start+shot['duration']-1
+        if start<1 or end>doc['simulation_end']:raise core.StudioError(shot['id']+' exceeds simulated frame range')
+        if start<=last:raise core.StudioError(shot['id']+' replays an earlier moment; move the cut or shorten the preceding shot')
+        result[shot['id']]=(start,end);last=end
+    return result
+
+
+def shot_range(sc,shot):
+    return ranges(load_document(sc),json.loads(sc['pf_events']))[shot['id']]
 
 
 def update_camera(scene,shot):
@@ -109,10 +116,7 @@ def build(doc,output):
 def revise(scene,proposal):
     doc=load_document(scene);new=core.apply_patch(doc,proposal)
     # Validate all ranges before changing Blender state.
-    events=json.loads(scene['pf_events'])
-    for s in new['shots']:
-        start=events[s['anchor']]+s['offset']
-        if start<1 or start+s['duration']-1>new['simulation_end']:raise core.StudioError('Revision exceeds source timeline')
+    ranges(new,json.loads(scene['pf_events']))
     history=json.loads(scene.get('pf_history','[]'));history.append(doc);history=history[-24:]
     store_document(scene,new)
     if proposal['operation'] in {'warmth','exposure'}:update_look(scene,new)

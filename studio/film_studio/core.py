@@ -115,7 +115,7 @@ def validate(doc):
         if s["id"] in shot_ids or s["target"] not in {a["id"] for a in doc["assets"]}:
             raise StudioError("Invalid shot target or duplicate ID")
         shot_ids.add(s["id"])
-        if s["anchor"] not in {"start","contact","peak","settled"}:
+        if s["anchor"] not in {"start","contact","peak","settled","previous"}:
             raise StudioError("Unknown event anchor")
         if not isinstance(s["label"],str) or len(s["label"])>100:raise StudioError("Invalid shot label")
         vector(s["aim_offset"],3,-10,10,"aim offset")

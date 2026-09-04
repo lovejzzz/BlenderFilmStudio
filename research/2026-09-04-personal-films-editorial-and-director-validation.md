@@ -1,0 +1,7 @@
+# Editorial continuity and director validation
+
+PF2 candidates0009/0010 pass three actual-world changes, stale rejection, three undos and separate-process save/reopen with exact mesh/pose/document equality. Original baked positions versus reloaded positions differ at most5e-8 m due to declared decimal rounding. Native UI registration also passes.
+
+Candidate0008's actual settled event is208 rather than177+48, making the old S04 settled+16 start224 replay17 frames after S03 ends240. Add the general previous-shot-end anchor and reject overlapping source ranges. Set S04 to previous+0, so its exact start is241. Candidate0011 imports only revised editorial data into a copied0008 blend; it does not rebake the accepted physical motion. Candidate0012 tests a1-frame render prefix followed by2 new frames, exact first-frame reuse and mismatched-profile rejection. Reserve3 preview frames, zero stills for that test.
+
+Three local AI Director calls are admitted in fresh `director-01` through `director-03` subroots of the existing development work root: a closer intimate lens instruction, a warmer global-look instruction and unsupported liquid creation (must reject). Maximum180 seconds each, existing ChatGPT authentication only, no API credentials, no new charges; model tool activity rejects the output. Each retains prompt, schema, event log, proposal and receipt. The model is a product inference dependency, not a development subagent.
