@@ -8,7 +8,7 @@ def measured_filter(ffmpeg, wav, output):
             'loudnorm=I=-20:TP=-2:LRA=7:print_format=json', '-f', 'null', '-']
     result = subprocess.run(argv, capture_output=True, text=True, check=True, timeout=120)
     (output / 'audio-measurement.log').write_text(result.stderr)
-    values = json.loads(result.stderr[result.stderr.rfind('{'):])
+    values, _ = json.JSONDecoder().raw_decode(result.stderr[result.stderr.rfind('{'):])
     fields = {'measured_I': 'input_i', 'measured_TP': 'input_tp',
               'measured_LRA': 'input_lra', 'measured_thresh': 'input_thresh',
               'offset': 'target_offset'}
