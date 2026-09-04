@@ -1,0 +1,27 @@
+{
+  "schema": "personal-film/1", "id": "last-signal", "title": "The Last Signal", "revision": 1,
+  "fps": 24, "simulation_end": 600,
+  "world": {"color": [0.10,0.16,0.24], "strength": 0.10, "exposure": 0, "warmth": 0},
+  "assets": [
+    {"id":"room","factory":"room","position":[0,0.8,0],"rotation":[0,0,0],"scale":1,"params":{"dimensions":[7,6,4.3],"material":"teal"}},
+    {"id":"desk","factory":"table","position":[0,0,0.80],"rotation":[0,0,0],"scale":1,"params":{"dimensions":[2.8,1.45,0.08],"material":"walnut"}},
+    {"id":"recorder","factory":"reel_transport","position":[0,0.10,0.862],"rotation":[0,0,-5],"scale":1,"params":{}},
+    {"id":"lamp","factory":"desk_lamp","position":[-1.03,0.28,0.84],"rotation":[0,0,10],"scale":1,"params":{}},
+    {"id":"log","factory":"papers","position":[0.76,-0.35,0.842],"rotation":[0,0,-12],"scale":1,"params":{}},
+    {"id":"window","factory":"window","position":[1.2,2.7,0.85],"rotation":[0,0,0],"scale":1,"params":{"dimensions":[2.4,0.12,2.1]}},
+    {"id":"city","factory":"city","position":[0,2.0,0.35],"rotation":[0,0,0],"scale":1,"params":{"seed":24}}
+  ],
+  "lights": [
+    {"id":"practical","type":"AREA","position":[-0.76,0.25,1.39],"target":[-0.15,0,0.9],"color":[1,0.52,0.22],"power":42,"size":0.28,"role":"practical"},
+    {"id":"warm_key","type":"AREA","position":[-1.9,-0.45,2.2],"target":[0,0,1.25],"color":[1,0.59,0.32],"power":190,"size":1.25,"role":"key"},
+    {"id":"window_blue","type":"AREA","position":[1.35,2.1,2.35],"target":[0,0,1.2],"color":[0.20,0.43,1],"power":300,"size":1.5,"role":"rim"},
+    {"id":"face_fill","type":"AREA","position":[0.6,-2.4,1.8],"target":[0,0,1.2],"color":[0.32,0.53,0.72],"power":28,"size":2,"role":"fill"}
+  ],
+  "shots": [
+    {"id":"S01","label":"Night watch / approach","target":"recorder","aim_offset":[-0.10,0,0.38],"anchor":"start","offset":0,"duration":108,"lens":42,"distance":3.2,"azimuth":25,"elevation":13,"travel":0.08,"fstop":3.5,"focus_offset":0},
+    {"id":"S02","label":"The carrier / moving reels","target":"recorder","aim_offset":[-0.20,-0.21,0.66],"anchor":"start","offset":108,"duration":108,"lens":70,"distance":1.30,"azimuth":-25,"elevation":9,"travel":0.07,"fstop":4,"focus_offset":0},
+    {"id":"S03","label":"A voice without words / meter","target":"recorder","aim_offset":[0.07,-0.19,0.215],"anchor":"start","offset":216,"duration":108,"lens":85,"distance":0.82,"azimuth":20,"elevation":6,"travel":0.05,"fstop":5.6,"focus_offset":0},
+    {"id":"S04","label":"Someone is listening / resolve","target":"recorder","aim_offset":[0.02,-0.03,0.45],"anchor":"start","offset":324,"duration":108,"lens":58,"distance":2.2,"azimuth":-13,"elevation":7,"travel":-0.06,"fstop":3.2,"focus_offset":0}
+  ],
+  "sound":{"style":"tape","gain":0.65}
+}
