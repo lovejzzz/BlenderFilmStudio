@@ -2,7 +2,7 @@
 import argparse,hashlib,json,os,shutil,subprocess,time
 from pathlib import Path
 REPO=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--project',default='last-signal.film.json');p.add_argument('--blend');p.add_argument('--action',choices=['build','editorial','inspect','exercise','render','resume_test'],default='build');p.add_argument('--maximum-new-frames',type=int,default=0);p.add_argument('--stills',default='S01,S02,S03,S04');p.add_argument('--width',type=int,default=1280);p.add_argument('--samples',type=int,default=48)
+p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--project',default='last-signal.film.json');p.add_argument('--blend');p.add_argument('--action',choices=['build','editorial','inspect','exercise','render','resume_test'],default='build');p.add_argument('--maximum-new-frames',type=int,default=0);p.add_argument('--shots');p.add_argument('--stills',default='S01,S02,S03,S04');p.add_argument('--width',type=int,default=1280);p.add_argument('--samples',type=int,default=48)
 a=p.parse_args()
 if not a.name.replace('-','').isalnum():raise SystemExit('Invalid candidate name')
 contract=REPO/'specs/ai-native-studio-personal-films-program.v0.1.json';limits=json.loads(contract.read_text())['developmentAdmission']
@@ -22,7 +22,7 @@ wd.mkdir(parents=True);ed.mkdir(parents=True)
 code=wd/'code';shutil.copytree(REPO/'studio',code,ignore=shutil.ignore_patterns('__pycache__'))
 project=code/'projects'/Path(a.project).name
 if not project.exists():raise SystemExit('Project must be in studio/projects')
-job={'action':a.action,'project':str(project),'output':str(wd/'output'),'stills':stills,'width':a.width,'samples':a.samples,'maximum_new_frames':a.maximum_new_frames}
+job={'action':a.action,'project':str(project),'output':str(wd/'output'),'stills':stills,'width':a.width,'samples':a.samples,'maximum_new_frames':a.maximum_new_frames,'shots':a.shots.split(',') if a.shots else None}
 if a.maximum_new_frames<0 or sum(json.loads(f.read_text())['job'].get('maximum_new_frames',0) for f in priors)+a.maximum_new_frames>limits['maximumPreviewFrames']:raise SystemExit('Preview frame ceiling reached')
 input_blend=None
 if a.blend:
