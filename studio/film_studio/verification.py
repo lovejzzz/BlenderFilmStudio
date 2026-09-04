@@ -30,6 +30,7 @@ def exercise(sc,out):
     if outcome!={'FINISHED'} or len(scene.load_document(sc)['shots'])!=len(original['shots'])+1 or world_state(sc)!=before:raise AssertionError('New coverage changed world or failed')
     scene.undo(sc)
     if {o.name for o in sc.objects if o.type=='CAMERA'}!=original_cameras or world_state(sc)!=before:raise AssertionError('Coverage undo left a changed scene')
+    if sc.camera is None:raise AssertionError('Undo left no active camera')
     results.append({'newCoverageAndUndo':True});ui.unregister()
     bpy.context.preferences.filepaths.file_preview_type='NONE';bpy.ops.wm.save_as_mainfile(filepath=str(Path(out)/'project.blend'),check_existing=False)
     return {'checks':results,'undoRestoresSemantics':True,'nativeUIRegisters':True,'world':before,'document':scene.load_document(sc),'pointCacheBaked':bool(sc.rigidbody_world and sc.rigidbody_world.point_cache.is_baked)}

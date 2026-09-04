@@ -151,6 +151,7 @@ def undo(scene):
         if obj.type=='CAMERA' and obj.get('pf_shot') and obj['pf_shot'] not in desired:bpy.data.objects.remove(obj,do_unlink=True)
     for shot in old['shots']:update_camera(scene,shot)
     if hasattr(scene,'pf_shot') and scene.pf_shot not in desired:scene.pf_shot=old['shots'][0]['id']
+    if scene.camera is None or scene.camera.get('pf_shot') not in desired:scene.camera=bpy.data.objects['PF_CAMERA_'+old['shots'][0]['id']]
     update_look(scene,old);return old
 
 
