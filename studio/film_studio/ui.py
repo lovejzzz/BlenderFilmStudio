@@ -48,6 +48,15 @@ class PF_OT_select(bpy.types.Operator):
             scene.select_shot(context.scene,i);set_status('Shot ready · Space to play');return {'FINISHED'}
         except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
 
+class PF_OT_coverage(bpy.types.Operator):
+    bl_idname='pf.coverage';bl_label='Add coverage shot';bl_description='Split this shot into two camera angles while preserving its duration and world'
+    def execute(self,context):
+        try:
+            fresh=scene.add_coverage(context.scene,context.scene.pf_shot);context.scene.pf_shot=fresh['id']
+            doc=scene.load_document(context.scene);scene.select_shot(context.scene,next(i for i,s in enumerate(doc['shots']) if s['id']==fresh['id']))
+            set_status('New camera angle ready · direct it, or Undo revision');return {'FINISHED'}
+        except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
+
 class PF_OT_quick(bpy.types.Operator):
     bl_idname='pf.quick';bl_label='Quick adjustment'
     note:StringProperty()
@@ -153,7 +162,7 @@ class PF_PT_director(bpy.types.Panel):
         if 'pf_document' not in sc:
             lay.label(text='Open one of your film projects.',icon='FILE_FOLDER');lay.operator('wm.open_mainfile',text='Open film…');return
         doc=scene.load_document(sc);lay.label(text=doc['title'],icon='SEQUENCE');lay.label(text=f"Revision {doc['revision']} · {sum(s['duration'] for s in doc['shots'])/24:.0f} seconds")
-        box=lay.box();box.label(text='Shots');box.prop(sc,'pf_shot',text='');box.operator('pf.select_shot',icon='CAMERA_DATA')
+        box=lay.box();box.label(text='Shots');box.prop(sc,'pf_shot',text='');box.operator('pf.select_shot',icon='CAMERA_DATA');box.operator('pf.coverage',icon='ADD')
         row=box.row(align=True)
         for label,note in [('Closer','closer'),('Wider','wider')]:op=row.operator('pf.quick',text=label);op.note=note
         row=box.row(align=True)
@@ -168,7 +177,7 @@ class PF_PT_director(bpy.types.Panel):
         lay.operator('pf.undo',icon='LOOP_BACK');lay.separator();lay.operator('pf.preview',icon='RENDER_STILL');lay.operator('pf.save_version',icon='FILE_TICK');lay.operator('pf.movie',icon='RENDER_ANIMATION');lay.operator('pf.resume_movie',icon='FILE_REFRESH');lay.operator('pf.render_folder',icon='FILE_FOLDER')
         lay.label(text='Space: playback · N: hide this panel')
 
-CLASSES=[PF_OT_select,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_preview,PF_OT_movie,PF_OT_resume,PF_OT_render_folder,PF_PT_director]
+CLASSES=[PF_OT_select,PF_OT_coverage,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_preview,PF_OT_movie,PF_OT_resume,PF_OT_render_folder,PF_PT_director]
 def register():
     for c in CLASSES:bpy.utils.register_class(c)
     bpy.types.Scene.pf_shot=EnumProperty(name='Shot',items=shot_items)

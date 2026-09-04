@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import copy
 import math
 from pathlib import Path
 import bpy
@@ -126,12 +127,30 @@ def revise(scene,proposal):
     return {'revision':new['revision'],'before':core.digest(doc),'after':core.digest(new),'worldPreserved':core.protected_world(doc)==core.protected_world(new)}
 
 
+def add_coverage(sc,shot_id):
+    doc=load_document(sc);new=copy.deepcopy(doc);index=next(i for i,s in enumerate(new['shots']) if s['id']==shot_id);original=new['shots'][index]
+    if len(new['shots'])>=12 or original['duration']<48:raise core.StudioError('Coverage needs a shot of at least two seconds and fewer than twelve shots')
+    used={s['id'] for s in new['shots']};number=1
+    while f'S{number:02}' in used:number+=1
+    fresh=copy.deepcopy(original);fresh['id']=f'S{number:02}';fresh['label']='New coverage · '+original['label'];fresh['label']=fresh['label'][:100]
+    first=original['duration']//2;fresh['duration']=original['duration']-first;original['duration']=first
+    fresh['anchor']='previous';fresh['offset']=0;fresh['azimuth']=min(360,fresh['azimuth']+20)
+    new['shots'].insert(index+1,fresh);new['revision']+=1;core.validate(new);ranges(new,json.loads(sc['pf_events']))
+    history=json.loads(sc.get('pf_history','[]'));history.append(doc);sc['pf_history']=core.canonical(history[-24:]);store_document(sc,new)
+    for shot in new['shots']:update_camera(sc,shot)
+    return fresh
+
+
 def undo(scene):
     history=json.loads(scene.get('pf_history','[]'))
     if not history:raise core.StudioError('No studio revision to undo')
     old=history.pop();current=load_document(scene);old['revision']=current['revision']+1
     store_document(scene,old);scene['pf_history']=core.canonical(history)
+    desired={s['id'] for s in old['shots']}
+    for obj in list(scene.objects):
+        if obj.type=='CAMERA' and obj.get('pf_shot') and obj['pf_shot'] not in desired:bpy.data.objects.remove(obj,do_unlink=True)
     for shot in old['shots']:update_camera(scene,shot)
+    if hasattr(scene,'pf_shot') and scene.pf_shot not in desired:scene.pf_shot=old['shots'][0]['id']
     update_look(scene,old);return old
 
 
