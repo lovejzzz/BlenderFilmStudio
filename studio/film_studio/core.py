@@ -62,6 +62,7 @@ def validate(doc):
     number(doc["world"]["strength"], 0, 2, "world strength")
     number(doc["world"]["exposure"], -4, 4, "exposure")
     number(doc["world"]["warmth"], -1, 1, "warmth")
+    if type(doc["revision"]) is not int or type(doc["simulation_end"]) is not int:raise StudioError("Revision and simulation frames must be integers")
     ids=set()
     if not isinstance(doc["assets"], list) or not 1 <= len(doc["assets"]) <= 80:
         raise StudioError("Expected 1-80 assets")
@@ -76,15 +77,25 @@ def validate(doc):
         number(a["scale"], .05, 20, "scale")
         if not isinstance(a["params"], dict):
             raise StudioError("Invalid asset parameters")
-        allowed={"material", "dimensions", "text", "size", "color", "count", "spacing", "release", "speed", "amplitude", "seed"}
+        allowed={"material", "dimensions", "text", "size", "color", "count", "spacing", "release", "speed", "amplitude", "seed", "opening"}
         if set(a["params"]) - allowed:
             raise StudioError("Unknown or executable asset parameter")
         for k,v in a["params"].items():
-            if k == "dimensions": vector(v,3,.001,30,k)
+            if k == "opening": vector(v,4,-30,30,k)
+            elif k == "dimensions": vector(v,3,.001,30,k)
             elif k == "color": vector(v,3,0,1,k)
             elif k in {"text","material"}:
                 if not isinstance(v,str) or len(v)>500:raise StudioError("Invalid text parameter")
             else:number(v,0,1200,k)
+        if 'count' in a['params'] and (type(a['params']['count']) is not int or not 2<=a['params']['count']<=24):raise StudioError('Count must be 2-24')
+        if a['factory']=='kinetic_run':
+            if a['scale']!=1 or a['rotation']!=[0,0,0]:raise StudioError('Kinetic assets require unit scale and zero rotation')
+            if 'size' in a['params']:number(a['params']['size'],.05,.25,'ball radius')
+            if 'spacing' in a['params']:number(a['params']['spacing'],.08,.3,'spacing')
+        if 'opening' in a['params']:
+            cx,w,sill,h=a['params']['opening'];dims=a['params'].get('dimensions',[8,7,4.5])
+            if w<=0 or sill<=0 or h<=0 or abs(cx)+w/2>=dims[0]/2 or sill+h>=dims[2]:raise StudioError('Opening must fit inside wall')
+    if sum(a['factory']=='kinetic_run' for a in doc['assets'])>1:raise StudioError('One kinetic assembly per project')
     if not isinstance(doc["lights"],list) or not 1 <= len(doc["lights"]) <= 16:
         raise StudioError("Expected 1-16 lights")
     for l in doc["lights"]:

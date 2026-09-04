@@ -200,10 +200,15 @@ def table(root,p,m,end):
 def room(root,p,m,end):
     width,depth,height=p.get('dimensions',[8,7,4.5]);wall=m[p.get('material','teal')]
     box('Floor',(0,0,-.055),(width,depth,.1),m['oak'] if p.get('material')=='teal' else m['stone'],root,.002)
-    box('Back wall',(0,depth/2,height/2),(width,.15,height),wall,root,.01)
+    if 'opening' in p:
+        cx,w,sill,h=p['opening'];left=cx-w/2;right=cx+w/2
+        for name,x,z,ww,hh in [('Left wall',(-width/2+left)/2,height/2,left+width/2,height),('Right wall',(right+width/2)/2,height/2,width/2-right,height),('Window sill wall',cx,sill/2,w,sill),('Window lintel',cx,(sill+h+height)/2,w,height-sill-h)]:
+            box(name,(x,depth/2,z),(ww,.15,hh),wall,root,.008)
+    else:box('Back wall',(0,depth/2,height/2),(width,.15,height),wall,root,.01)
     box('Side wall',(-width/2,0,height/2),(.15,depth,height),wall,root,.01)
     box('Skirting',(0,depth/2-.1,.10),(width,.03,.20),m['black'],root,.004)
-    for x in range(-3,4):box('Wall panel stile',(x*.85,depth/2-.085,height/2),(.025,.025,height-.3),wall,root,.002)
+    if 'opening' not in p:
+        for x in range(-3,4):box('Wall panel stile',(x*.85,depth/2-.085,height/2),(.025,.025,height-.3),wall,root,.002)
     for i in range(22):box('Floor plank seam',(-width/2+i*width/22,0,-.0005),(.002,depth,.001),m['black'],root,0)
 
 
@@ -262,11 +267,16 @@ def plant(root,p,m,end):
 
 
 def arch(root,p,m,end):
-    radius=1.4
-    for i in range(31):
-        a=math.pi*i/30;pos=(radius*math.cos(a),0,1.65+radius*math.sin(a))
-        o=box('Arch voussoir',pos,(.15,.32,.18),m['plaster'],root,.002);o.rotation_euler[1]=math.pi/2-a
-    for x in [-radius,radius]:box('Arch pier',(x,0,.825),(.18,.32,1.65),m['plaster'],root,.006)
+    radius=1.4;verts=[];faces=[];n=64
+    for i in range(n+1):
+        a=math.pi*i/n
+        for y,r in [(-.16,radius-.1),(-.16,radius+.1),(.16,radius-.1),(.16,radius+.1)]:verts.append((r*math.cos(a),y,1.65+r*math.sin(a)))
+    for i in range(n):
+        a=i*4;b=a+4
+        faces.extend([(a,b,b+1,a+1),(a+2,a+3,b+3,b+2),(a,a+2,b+2,b),(a+1,b+1,b+3,a+3)])
+    faces.extend([(0,1,3,2),(n*4,n*4+2,n*4+3,n*4+1)])
+    me=bpy.data.meshes.new('Continuous arch');me.from_pydata(verts,[],faces);me.update();o=bpy.data.objects.new('Stone arch',me);bpy.context.scene.collection.objects.link(o);tag(o,root,m['plaster'])
+    for x in [-radius,radius]:box('Arch pier',(x,0,.825),(.2,.32,1.65),m['plaster'],root,.003)
 
 
 def curtain(root,p,m,end):
