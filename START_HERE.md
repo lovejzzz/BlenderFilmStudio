@@ -1,5 +1,15 @@
 # BlenderFilmStudio — new machine cold start
 
+> **Active owner goal (2026-09-04):** deliver a usable personal film studio and
+> two distinct finished cinematic films. Read
+> `research/2026-09-04-personal-films-program-preregistration.md` and
+> `specs/ai-native-studio-personal-films-program.v0.1.json` before product work.
+> RC6 is paused unchanged; attempt118 must not be resumed or measured. Its
+> eventual restart still requires the exact attempt119 C1 adapter. The new
+> program uses the existing RC5 binary with separately loaded Python modules,
+> bounded fresh roots and non-liquid scenes. No clean build or public binary
+> distribution is admitted. Older next-step paragraphs below are historical.
+
 > **Current decision:** F0.1 through F0.7 passed on the admitted M2 Max host.
 > F0.4 attempts 01 and 02 remain retained `FAIL` results. Attempt-01 proved
 > canonical-exact B01/B02 BuildPlans and all four negative controls, then found
