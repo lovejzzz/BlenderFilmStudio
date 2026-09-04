@@ -1,16 +1,21 @@
 """Isolated worker. Every invocation receives one immutable job document."""
-import sys,json,traceback
+import sys,json,traceback,uuid
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).parent))
 import bpy
 from film_studio import core,scene
 job=json.loads(Path(sys.argv[sys.argv.index('--')+1]).read_text())
 out=Path(job['output']);out.mkdir(exist_ok=True)
+invocation=uuid.uuid4().hex;history=out/'invocations';history.mkdir(exist_ok=True)
 try:
     result={}
     if job['action']=='build':
         doc=core.validate(json.loads(Path(job['project']).read_text()))
         result=scene.build(doc,out/'project.blend')
+    elif job['action']=='ui':
+        import film_studio
+        film_studio.register();scene.select_shot(bpy.context.scene,0)
+        result={'nativeStartup':'READY_FOR_VISUAL_REVIEW'}
     elif job['action']=='editorial':
         sc=bpy.context.scene;old=scene.load_document(sc);new=core.validate(json.loads(Path(job['project']).read_text()))
         if core.protected_world(old)!=core.protected_world(new):raise core.StudioError('Editorial import changed world inputs')
@@ -28,13 +33,14 @@ try:
     elif job['action']=='resume_test':
         from film_studio.rendering import render,sha
         sc=bpy.context.scene;root=out/'frames'
+        root.mkdir();(root/'frame-00001.partial.png').write_bytes(b'interrupted-incomplete-image')
         first=render(sc,root,640,16,['S01'],1);h=sha(root/'frame-00001.png')
         second=render(sc,root,640,16,['S01'],2)
         if first['created']!=1 or second['created']!=2 or second['reused']!=1 or sha(root/'frame-00001.png')!=h:raise AssertionError('Resume prefix failed')
         try:render(sc,root,800,16,['S01'],0)
         except core.StudioError:pass
         else:raise AssertionError('Mismatched profile accepted')
-        result={'first':first,'second':second,'completedFrameUnchanged':True,'mismatchedProfileRejected':True}
+        result={'first':first,'second':second,'completedFrameUnchanged':True,'mismatchedProfileRejected':True,'interruptedPartialRetained':any((root/'interrupted').rglob('*.png'))}
     elif job['action']=='render':
         from film_studio.rendering import render
         result=render(bpy.context.scene,out/'frames',job.get('width',640),job.get('samples',16),job.get('shots'),job.get('maximum_new_frames'))
@@ -53,7 +59,9 @@ try:
         from film_studio.delivery import encode
         result['delivery']=encode(bpy.context.scene,out/'frames',out/'delivery')
     result['status']='PASS'
+    (history/(invocation+'.json')).write_text(json.dumps(result,indent=2))
     (out/'result.json').write_text(json.dumps(result,indent=2))
 except Exception:
+    (history/(invocation+'.failure.txt')).write_text(traceback.format_exc())
     (out/'failure.txt').write_text(traceback.format_exc())
     traceback.print_exc();sys.exit(2)

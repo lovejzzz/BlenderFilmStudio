@@ -2,7 +2,7 @@
 import argparse,hashlib,json,os,shutil,subprocess,time
 from pathlib import Path
 REPO=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--project',default='last-signal.film.json');p.add_argument('--blend');p.add_argument('--action',choices=['build','editorial','inspect','exercise','render','resume_test'],default='build');p.add_argument('--maximum-new-frames',type=int,default=0);p.add_argument('--shots');p.add_argument('--stills',default='S01,S02,S03,S04');p.add_argument('--width',type=int,default=1280);p.add_argument('--samples',type=int,default=48)
+p=argparse.ArgumentParser();p.add_argument('name');p.add_argument('--project',default='last-signal.film.json');p.add_argument('--blend');p.add_argument('--action',choices=['build','editorial','inspect','exercise','render','resume_test','ui'],default='build');p.add_argument('--maximum-new-frames',type=int,default=0);p.add_argument('--shots');p.add_argument('--stills',default='S01,S02,S03,S04');p.add_argument('--width',type=int,default=1280);p.add_argument('--samples',type=int,default=48)
 a=p.parse_args()
 if not a.name.replace('-','').isalnum():raise SystemExit('Invalid candidate name')
 contract=REPO/'specs/ai-native-studio-personal-films-program.v0.1.json';limits=json.loads(contract.read_text())['developmentAdmission']
@@ -33,7 +33,7 @@ resources=binary.parents[1]/'Resources'/'5.2';env=os.environ.copy();env['HOME']=
 for k in ['CONFIG','SCRIPTS','DATAFILES','EXTENSIONS']:
     dest=wd/('user_'+k.lower());dest.mkdir();env['BLENDER_USER_'+k]=str(dest)
 Path(env['HOME']).mkdir()
-argv=[str(binary),'--background','--factory-startup','--disable-autoexec','--python-exit-code','2']+([str(input_blend)] if input_blend else [])+['--python',str(code/'blender_entry.py'),'--',str(jobpath)]
+argv=[str(binary)]+([] if a.action=='ui' else ['--background'])+['--factory-startup','--disable-autoexec','--python-exit-code','2']+([str(input_blend)] if input_blend else [])+['--python',str(code/'blender_entry.py'),'--',str(jobpath)]
 admission={'candidate':a.name,'time':time.time(),'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,text=True).strip(),'contractSha256':sha(contract),'binarySha256':sha(binary),'job':job,'argv':argv,'inputs':{str(f.relative_to(wd)):sha(f) for f in code.rglob('*') if f.is_file()}}
 (ed/'admission.json').write_text(json.dumps(admission,indent=2))
 start=time.monotonic();status='FAILED'

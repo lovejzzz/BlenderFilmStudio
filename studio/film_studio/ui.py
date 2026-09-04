@@ -119,6 +119,22 @@ class PF_OT_movie(bpy.types.Operator):
             set_status('Rendering in the background · you can keep directing');return {'FINISHED'}
         except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
 
+class PF_OT_resume(bpy.types.Operator):
+    bl_idname='pf.resume_movie';bl_label='Resume last movie'
+    @classmethod
+    def poll(cls,context):return _render_job is None and bool(context.scene.get('pf_last_render'))
+    def execute(self,context):
+        global _render_job
+        try:
+            root=Path(context.scene['pf_last_render']);snapshot=root/'project.blend';path=root/'job.json'
+            if not snapshot.is_file() or not path.is_file():raise core.StudioError('Last render snapshot is unavailable')
+            env=os.environ.copy()
+            for key in ['CONFIG','SCRIPTS','DATAFILES','EXTENSIONS']:env['BLENDER_USER_'+key]=str(root/('user_'+key.lower()))
+            attempt=uuid.uuid4().hex[:8];log=(root/f'resume-{attempt}.stdout.log').open('x');err=(root/f'resume-{attempt}.stderr.log').open('x')
+            argv=[bpy.app.binary_path,'--background','--factory-startup','--disable-autoexec','--python-exit-code','2',str(snapshot),'--python',str(Path(__file__).parents[1]/'blender_entry.py'),'--',str(path)]
+            proc=subprocess.Popen(argv,env=env,stdout=log,stderr=err);_render_job=(proc,root,time.monotonic(),log,err);return {'FINISHED'}
+        except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
+
 class PF_OT_render_folder(bpy.types.Operator):
     bl_idname='pf.render_folder';bl_label='Open movie folder'
     def execute(self,context):
@@ -146,10 +162,10 @@ class PF_PT_director(bpy.types.Panel):
         if sc.pf_status:
             import textwrap
             for line in textwrap.wrap(sc.pf_status,38):box.label(text=line)
-        lay.operator('pf.undo',icon='LOOP_BACK');lay.separator();lay.operator('pf.preview',icon='RENDER_STILL');lay.operator('pf.save_version',icon='FILE_TICK');lay.operator('pf.movie',icon='RENDER_ANIMATION');lay.operator('pf.render_folder',icon='FILE_FOLDER')
+        lay.operator('pf.undo',icon='LOOP_BACK');lay.separator();lay.operator('pf.preview',icon='RENDER_STILL');lay.operator('pf.save_version',icon='FILE_TICK');lay.operator('pf.movie',icon='RENDER_ANIMATION');lay.operator('pf.resume_movie',icon='FILE_REFRESH');lay.operator('pf.render_folder',icon='FILE_FOLDER')
         lay.label(text='Space: playback · N: hide this panel')
 
-CLASSES=[PF_OT_select,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_preview,PF_OT_movie,PF_OT_render_folder,PF_PT_director]
+CLASSES=[PF_OT_select,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_preview,PF_OT_movie,PF_OT_resume,PF_OT_render_folder,PF_PT_director]
 def register():
     for c in CLASSES:bpy.utils.register_class(c)
     bpy.types.Scene.pf_shot=EnumProperty(name='Shot',items=shot_items)

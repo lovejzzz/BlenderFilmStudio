@@ -22,6 +22,11 @@ def encode(sc,frames,output):
         image=frames/f"frame-{frame['index']:05d}.png";receipt=image.with_suffix('.json')
         if not image.exists() or not receipt.exists() or json.loads(receipt.read_text())['sha256']!=rendering.sha(image):raise core.StudioError('Incomplete or altered movie frame')
     wav=output/'soundtrack.wav';movie=output/(doc['id']+'.mp4')
+    existing=output/'delivery.json'
+    if existing.exists():
+        receipt=json.loads(existing.read_text())
+        if receipt.get('planHash')==core.digest(p) and movie.exists() and receipt['sha256']==rendering.sha(movie):return receipt
+        raise core.StudioError('Completed delivery changed; choose a fresh output folder')
     if wav.exists() or movie.exists():raise core.StudioError('Delivery exists; choose a fresh output folder')
     audio=sound.soundtrack(doc,p,wav,responses(sc));ffmpeg=shutil.which('ffmpeg') or '/opt/homebrew/bin/ffmpeg'
     # Finish with gentle fades, maintaining native 24 fps and scope composition.
@@ -34,5 +39,5 @@ def encode(sc,frames,output):
     probe=subprocess.check_output([shutil.which('ffprobe') or '/opt/homebrew/bin/ffprobe','-v','error','-count_frames','-show_streams','-show_format','-of','json',str(movie)],text=True)
     data=json.loads(probe);video=next(s for s in data['streams'] if s['codec_type']=='video')
     if int(video['nb_read_frames'])!=len(p['frames']) or int(video['width'])!=p['width']:raise core.StudioError('Encoded frame count or width differs')
-    receipt={'movie':str(movie),'sha256':rendering.sha(movie),'sound':audio,'ffprobe':data,'argv':argv}
+    receipt={'planHash':core.digest(p),'movie':str(movie),'sha256':rendering.sha(movie),'sound':audio,'ffprobe':data,'argv':argv}
     (output/'delivery.json').write_text(json.dumps(receipt,indent=2));return receipt

@@ -1,5 +1,5 @@
 """Addressable shot renders with exact snapshot/profile binding and frame resume."""
-import hashlib,json,time,os
+import hashlib,json,time,os,uuid
 from pathlib import Path
 import bpy
 from . import core,scene
@@ -27,11 +27,15 @@ def render(sc,root,width=1920,samples=96,shot_ids=None,maximum_new_frames=None):
             r=json.loads(receipt.read_text())
             if r.get('sha256')!=sha(target) or r.get('frame')!=spec:raise core.StudioError('Completed frame changed: '+stem)
             reused+=1;continue
-        if target.exists() or receipt.exists():raise core.StudioError('Incomplete frame pair retained: '+stem+'; choose a fresh render folder')
+        if target.exists() or receipt.exists():
+            retained=root/'interrupted'/uuid.uuid4().hex;retained.mkdir(parents=True)
+            for partial in [target,receipt]:
+                if partial.exists():os.replace(partial,retained/partial.name)
         if maximum_new_frames is not None and created>=maximum_new_frames:break
         sc.camera=bpy.data.objects['PF_CAMERA_'+spec['shot']];sc.frame_set(spec['sourceFrame'])
         temporary=root/(stem+'.partial.png');sc.render.filepath=str(temporary)
-        if temporary.exists():raise core.StudioError('Interrupted partial frame retained: '+stem)
+        if temporary.exists():
+            retained=root/'interrupted'/uuid.uuid4().hex;retained.mkdir(parents=True);os.replace(temporary,retained/temporary.name)
         start=time.monotonic();bpy.ops.render.render(write_still=True);os.replace(temporary,target)
         with receipt.open('x') as f:json.dump({'frame':spec,'sha256':sha(target),'seconds':time.monotonic()-start},f)
         created+=1
