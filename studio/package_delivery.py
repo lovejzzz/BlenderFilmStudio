@@ -1,5 +1,5 @@
 """Copy reviewed local movie masters into the prepared personal-studio package."""
-import hashlib,json,shutil,subprocess
+import argparse,hashlib,json,shutil,subprocess
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -7,6 +7,9 @@ contract=json.loads((ROOT/'specs/ai-native-studio-personal-films-final.v0.1.json
 work=Path(contract['workRoot'])
 review=work.parent/'PF-FINAL-review-2026-09-04-attempt-01'
 output=ROOT/'output/personal-film-studio'
+p=argparse.ArgumentParser();p.add_argument('selection');a=p.parse_args()
+selection=json.loads(Path(a.selection).read_text())
+assert set(selection)==set(contract['films'])
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def read(p):return json.loads(p.read_text())
 
@@ -14,9 +17,20 @@ if shutil.disk_usage(output).free<100*2**30:raise SystemExit('Delivery reserve i
 if sha(Path(contract['binary']))!=contract['binarySha256']:raise SystemExit('Local engine identity changed')
 films={}
 for name,expected in contract['films'].items():
-    source=work/name;audited=read(review/name/'audit.json');visual=read(review/name/'direct-review.json')
+    source=work/name;reviewed=Path(selection[name]['review'])
+    audited=read(reviewed/'audit.json');visual=read(reviewed/'direct-review.json')
     production=read(ROOT/contract['evidenceRoot']/name/'receipt.json')
-    delivery=read(source/'output/delivery/delivery.json');movie=Path(delivery['movie'])
+    delivery=read(Path(selection[name]['delivery'])/'delivery.json');movie=Path(delivery['movie'])
+    if 'correction' in delivery:
+        c=delivery['correction'];original=source/'output/delivery/delivery.json'
+        assert Path(c['sourceDelivery'])==original
+        assert all(sha(Path(path))==digest for path,digest in c['sourceHashes'].items())
+        def video_hash(path):
+            return subprocess.check_output(['/opt/homebrew/bin/ffmpeg','-v','error','-i',str(path),
+                '-map','0:v:0','-c','copy','-f','hash','-hash','sha256','-'],text=True,timeout=120).strip()
+        assert video_hash(movie)==video_hash(Path(read(original)['movie']))==c['videoStreamHash']==c['sourceVideoStreamHash']
+    else:
+        assert delivery==read(source/'output/delivery/delivery.json')
     assert production['status']=='RENDERED_PENDING_FINAL_REVIEW' and production['frames']==expected['frames']
     assert audited['passed'] and audited['frameCount']==expected['frames']
     assert visual['status']=='ACCEPTED_FOR_PERSONAL_DEMO_DELIVERY'
@@ -29,15 +43,15 @@ for name,expected in contract['films'].items():
         'movieSha256':delivery['sha256'],'project':f'projects/{name}.blend','projectSha256':expected['sha256'],
         'frames':expected['frames'],'seconds':expected['seconds'],'width':contract['width'],'height':contract['height'],
         'fps':contract['fps'],'samples':contract['samples'],'audioMetrics':audited['audioMetrics'],
-        'productionSeconds':production['seconds'],'technicalReview':str(review/name/'audit.json'),
-        'directReview':str(review/name/'direct-review.json')}
+        'productionSeconds':production['seconds'],'technicalReview':str(reviewed/'audit.json'),
+        'directReview':str(reviewed/'direct-review.json'),'audioCorrection':delivery.get('correction')}
 
 for name,record in films.items():
     destination=output/record['movie'];shutil.copyfile(record['sourceMovie'],destination)
     assert sha(destination)==record['movieSha256']
 
 manifest={'status':'DELIVERED_LOCAL_PERSONAL_STUDIO_AND_TWO_REVIEWED_MICROFILMS',
-    'productVersion':'0.1.3','productCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+    'productVersion':'0.1.4','productCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
     'formalPipelineCommit':'2c54543b','engine':contract['binary'],'engineSha256':contract['binarySha256'],
     'films':films,'files':{},'scope':'Local editable starter worlds, bounded AI camera/look direction and complete movie delivery using the existing engine.',
     'audioReviewLimit':'Complete decoding, measured loudness/true peak and cue synchronization were reviewed. This tool session has no audio perception; subjective listening is not claimed.'}
