@@ -148,7 +148,7 @@ def reel_transport(root,p,m,end):
         reel=empty('Transport reel',root,(x,-.205,.64))
         cylinder('Tape pack',(0,0,0),.187,.026,m['tape'],reel,(math.pi/2,0,0),96)
         # Concentric tape edges catch small specular highlights.
-        for k in range(7):torus('Tape winding',(0,-.015,0),.078+k*.017,.0008,m['tape'],reel,(math.pi/2,0,0))
+        for k in range(92):torus('Tape winding',(0,-.0135,0),.078+k*.00118,.00016,m['tape'],reel,(math.pi/2,0,0))
         torus('Reel rim',(0,-.023,0),.207,.005,m['silver'],reel,(math.pi/2,0,0))
         torus('Inner machined ring',(0,-.026,0),.075,.009,m['silver'],reel,(math.pi/2,0,0))
         cylinder('Reel hub',(0,-.027,0),.038,.021,m['black'],reel,(math.pi/2,0,0))
@@ -156,7 +156,7 @@ def reel_transport(root,p,m,end):
         for a in [0,2*math.pi/3,4*math.pi/3]:
             spoke=box('Reel spoke',(.138*math.sin(a),-.024,.138*math.cos(a)),(.036,.012,.127),m['silver'],reel,.009);spoke.rotation_euler[1]=a
             cylinder('Hub fastener',(.053*math.sin(a),-.039,.053*math.cos(a)),.004,.005,m['black'],reel,(math.pi/2,0,0),24)
-        key_rotation(reel,1,[(1,0),(36,0),(end-48,18*math.pi),(end,18.25*math.pi)])
+        key_rotation(reel,1,[(1,0),(36,0),(end-60,18*math.pi),(end-36,18.12*math.pi),(end,18.12*math.pi)])
     # The transport path remains taut across the guides and head.
     curve('Magnetic tape',[(-.435,-.21,.53),(-.34,-.21,.35),(-.16,-.21,.30),(.16,-.21,.30),(.34,-.21,.35),(.435,-.21,.53)],.0032,m['tape'],root)
     for x,z in [(-.34,.35),(.34,.35),(-.16,.30),(.16,.30)]:

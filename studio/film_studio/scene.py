@@ -94,6 +94,7 @@ def build(doc,output):
         if spec['type']=='AREA':data.shape='DISK';data.size=spec['size']
         elif spec['type']=='SPOT':data.spot_size=math.radians(70);data.spot_blend=.45;data.shadow_soft_size=spec['size']
         else:data.shadow_soft_size=spec['size']
+    scene['pf_diagnostic_directory']=str(Path(output).parent)
     bpy.context.view_layer.update();events,physical=physics.bake_and_measure(scene,doc['simulation_end'])
     scene['pf_events']=core.canonical(events);store_document(scene,doc)
     scene['pf_history']='[]';scene['pf_project_directory']=str(Path(output).parent)

@@ -1,6 +1,8 @@
 """Native Bullet kinetic asset and independently inspectable event measurements."""
 
 import math
+import json
+from pathlib import Path
 import bpy
 from mathutils import Vector
 from .assets import box, sphere, text, tag
@@ -67,6 +69,9 @@ def bake_and_measure(scene,end):
         else:quiet=0
         records.append({'frame':f,'positions':{k:[round(c,8) for c in v[0]] for k,v in now.items()},'rotations':{k:[round(c,8) for c in v[1]] for k,v in now.items()},'angularStepDegrees':round(speed,7)})
         previous=now
+    diagnostic={'contact':contact,'responses':responses,'settled':settled,'frames':records}
+    diagnostic_root=scene.get('pf_diagnostic_directory')
+    if diagnostic_root:(Path(diagnostic_root)/'physics-measurements.json').write_text(json.dumps(diagnostic))
     if contact is None or len(responses)<max(2,len(targets)-1) or settled is None:
         raise RuntimeError(f'Kinetic motion incomplete: contact={contact}, responses={responses}, settled={settled}')
     events={'start':1,'contact':contact,'peak':peak[1],'settled':settled}
