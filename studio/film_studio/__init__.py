@@ -1,6 +1,6 @@
 """Personal Film Studio: versioned projects and a native Blender workbench."""
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 
 def register():

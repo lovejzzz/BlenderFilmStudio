@@ -2,9 +2,9 @@
 import argparse,hashlib,json,math,subprocess,statistics,re
 from pathlib import Path
 from PIL import Image,ImageStat,ImageChops,ImageDraw
-p=argparse.ArgumentParser();p.add_argument('work');p.add_argument('output');a=p.parse_args();work=Path(a.work);out=Path(a.output);out.mkdir(parents=True,exist_ok=False)
+p=argparse.ArgumentParser();p.add_argument('work');p.add_argument('output');p.add_argument('--delivery');a=p.parse_args();work=Path(a.work);out=Path(a.output);out.mkdir(parents=True,exist_ok=False)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
-frames=work/'output/frames';plan=json.loads((frames/'render-plan.json').read_text());delivery=json.loads((work/'output/delivery/delivery.json').read_text());movie=Path(delivery['movie']);checks={};metrics=[];previous=None;prevshot=None
+frames=work/'output/frames';plan=json.loads((frames/'render-plan.json').read_text());delivery=json.loads(((Path(a.delivery) if a.delivery else work/'output/delivery')/'delivery.json').read_text());movie=Path(delivery['movie']);checks={};metrics=[];previous=None;prevshot=None
 checks['movie_hash']=sha(movie)==delivery['sha256'];checks['exact_png_count']=len(list(frames.glob('frame-*.png')))==len(plan['frames'])
 checks['snapshot_hash']=sha(work/'project.blend')==plan['blendSha256'];checks['all_frame_hashes']=True;checks['all_dimensions']=True;checks['no_blank_frames']=True;checks['chronological_source']=True
 last=0
