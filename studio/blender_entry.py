@@ -49,6 +49,9 @@ try:
             if target.exists():raise RuntimeError('Output already exists')
             sc.render.filepath=str(target);bpy.ops.render.render(write_still=True)
             result['renders'].append({'shot':sid,'frame':frame,'path':str(target)})
+    if job.get('encode'):
+        from film_studio.delivery import encode
+        result['delivery']=encode(bpy.context.scene,out/'frames',out/'delivery')
     result['status']='PASS'
     (out/'result.json').write_text(json.dumps(result,indent=2))
 except Exception:

@@ -1,11 +1,11 @@
 """Native director workspace. Blender changes stay on its main thread."""
-import json,threading,queue,uuid
+import json,threading,queue,uuid,subprocess,os,time,shutil
 from pathlib import Path
 import bpy
 from bpy.props import StringProperty,EnumProperty,IntProperty
 from . import core,scene,director
 
-_mailbox=queue.Queue();_busy=False
+_mailbox=queue.Queue();_busy=False;_render_job=None
 
 def shot_items(self,context):
     if not context or 'pf_document' not in context.scene:return [('NONE','Open a film','')]
@@ -17,7 +17,17 @@ def workspace():
 def set_status(text):bpy.context.scene.pf_status=text
 
 def poll():
-    global _busy
+    global _busy,_render_job
+    if _render_job:
+        proc,root,started,log,err=_render_job;done=proc.poll()
+        if time.monotonic()-started>7200 and done is None:proc.terminate();set_status('Render reached its two-hour limit; completed frames are retained')
+        if done is not None:
+            log.close();err.close();_render_job=None
+            if done==0:set_status('Movie ready in '+str(root/'output/delivery'))
+            else:set_status('Render stopped. Completed frames and job logs are retained.')
+        else:
+            count=len(list((root/'output/frames').glob('frame-*.json')))
+            set_status(f'Rendering movie · {count} frames finished')
     try:
         ok,value=_mailbox.get_nowait();_busy=False
         if ok:bpy.context.scene.pf_pending=core.canonical(value);set_status(value['reason'])
@@ -87,6 +97,36 @@ class PF_OT_preview(bpy.types.Operator):
         scene.configure_render(context.scene,1280,48);scene.update_look(context.scene,scene.load_document(context.scene))
         bpy.ops.render.render('INVOKE_DEFAULT');return {'FINISHED'}
 
+class PF_OT_movie(bpy.types.Operator):
+    bl_idname='pf.movie';bl_label='Render finished movie';bl_description='Render all shots at 1920 pixels with original sound'
+    @classmethod
+    def poll(cls,context):return _render_job is None and 'pf_document' in context.scene
+    def execute(self,context):
+        global _render_job
+        try:
+            if shutil.disk_usage(workspace()).free<12*2**30:raise core.StudioError('Keep at least 12 GB free for the movie')
+            root=workspace()/'renders'/uuid.uuid4().hex;root.mkdir(parents=True)
+            snapshot=root/'project.blend';bpy.context.preferences.filepaths.file_preview_type='NONE'
+            bpy.ops.wm.save_as_mainfile(filepath=str(snapshot),copy=True,check_existing=False)
+            job={'action':'render','output':str(root/'output'),'stills':[],'width':1920,'samples':96,'maximum_new_frames':1200,'encode':True}
+            path=root/'job.json';path.write_text(json.dumps(job))
+            env=os.environ.copy()
+            for key in ['CONFIG','SCRIPTS','DATAFILES','EXTENSIONS']:
+                d=root/('user_'+key.lower());d.mkdir();env['BLENDER_USER_'+key]=str(d)
+            log=(root/'stdout.log').open('x');err=(root/'stderr.log').open('x')
+            argv=[bpy.app.binary_path,'--background','--factory-startup','--disable-autoexec','--python-exit-code','2',str(snapshot),'--python',str(Path(__file__).parents[1]/'blender_entry.py'),'--',str(path)]
+            proc=subprocess.Popen(argv,env=env,stdout=log,stderr=err);_render_job=(proc,root,time.monotonic(),log,err);context.scene['pf_last_render']=str(root)
+            set_status('Rendering in the background · you can keep directing');return {'FINISHED'}
+        except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
+
+class PF_OT_render_folder(bpy.types.Operator):
+    bl_idname='pf.render_folder';bl_label='Open movie folder'
+    def execute(self,context):
+        root=context.scene.get('pf_last_render')
+        if root:subprocess.Popen(['/usr/bin/open',root])
+        else:self.report({'INFO'},'Render a movie first')
+        return {'FINISHED'}
+
 class PF_PT_director(bpy.types.Panel):
     bl_label='Personal Film Studio';bl_idname='PF_PT_director';bl_space_type='VIEW_3D';bl_region_type='UI';bl_category='Film Studio'
     def draw(self,context):
@@ -106,10 +146,10 @@ class PF_PT_director(bpy.types.Panel):
         if sc.pf_status:
             import textwrap
             for line in textwrap.wrap(sc.pf_status,38):box.label(text=line)
-        lay.operator('pf.undo',icon='LOOP_BACK');lay.separator();lay.operator('pf.preview',icon='RENDER_STILL');lay.operator('pf.save_version',icon='FILE_TICK')
+        lay.operator('pf.undo',icon='LOOP_BACK');lay.separator();lay.operator('pf.preview',icon='RENDER_STILL');lay.operator('pf.save_version',icon='FILE_TICK');lay.operator('pf.movie',icon='RENDER_ANIMATION');lay.operator('pf.render_folder',icon='FILE_FOLDER')
         lay.label(text='Space: playback · N: hide this panel')
 
-CLASSES=[PF_OT_select,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_preview,PF_PT_director]
+CLASSES=[PF_OT_select,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_preview,PF_OT_movie,PF_OT_render_folder,PF_PT_director]
 def register():
     for c in CLASSES:bpy.utils.register_class(c)
     bpy.types.Scene.pf_shot=EnumProperty(name='Shot',items=shot_items)
