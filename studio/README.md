@@ -8,6 +8,8 @@ Double-click **Open Film Studio.command** for *The Last Signal*, or **Open Littl
 
 On first launch, complete Blender's default quick setup. In the right side of the viewport, click the vertical **Film Studio** tab. Press **N** if the sidebar is hidden. The viewport is an interactive material preview; **Render this frame** shows the final Cycles look.
 
+Choose **New film from this…** to name and save your own film using the current scene and shots. It starts an independent project and revision history. Chinese and English titles are supported. A Chinese walkthrough is in `QUICKSTART.zh-CN.md`.
+
 1. Select a shot and click **Go to shot**. Space plays its source range.
 2. Use **Closer**, **Wider**, **Warmer**, or **Cooler** for immediate changes.
 3. Write a director note, click **Ask AI Director**, review its proposal, then **Apply proposed change**. This uses your existing ChatGPT-authenticated Codex CLI. It does not use API billing. Examples: “Keep the lens, but move us a little closer”; “Give the whole film a warmer late-night feeling.”

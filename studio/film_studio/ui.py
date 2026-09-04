@@ -106,6 +106,26 @@ class PF_OT_save(bpy.types.Operator):
             filename.with_suffix('.film.json').write_text(json.dumps(doc,indent=2));set_status('Saved '+filename.name);return {'FINISHED'}
         except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
 
+class PF_OT_new_film(bpy.types.Operator):
+    bl_idname='pf.new_film';bl_label='New film from this…';bl_description='Create and save a separately named film using this scene and its shots'
+    title:StringProperty(name='Film title',default='My film',maxlen=60)
+    def invoke(self,context,event):return context.window_manager.invoke_props_dialog(self,width=360)
+    def execute(self,context):
+        sc=context.scene;old=scene.load_document(sc);old_name=sc.name;history=sc.get('pf_history','[]')
+        ui_state={k:getattr(sc,k) for k in ['pf_note','pf_pending','pf_pending_input','pf_status']};render_root=sc.get('pf_last_render')
+        try:
+            fresh=core.fork_document(old,self.title,'film-'+uuid.uuid4().hex[:12])
+            scene.store_document(sc,fresh);sc.name=fresh['title'];sc['pf_history']='[]'
+            for k in ui_state:setattr(sc,k,'')
+            if 'pf_last_render' in sc:del sc['pf_last_render']
+            if bpy.ops.pf.save_version()!={'FINISHED'}:raise core.StudioError('Could not save the new film; the current project was restored')
+            set_status('Created '+fresh['title']+' · ready to direct');return {'FINISHED'}
+        except Exception as e:
+            scene.store_document(sc,old);sc.name=old_name;sc['pf_history']=history
+            for k,v in ui_state.items():setattr(sc,k,v)
+            if render_root is not None:sc['pf_last_render']=render_root
+            self.report({'ERROR'},str(e));return {'CANCELLED'}
+
 class PF_OT_preview(bpy.types.Operator):
     bl_idname='pf.preview';bl_label='Render this frame'
     def execute(self,context):
@@ -164,7 +184,7 @@ class PF_PT_director(bpy.types.Panel):
         lay=self.layout;sc=context.scene
         if 'pf_document' not in sc:
             lay.label(text='Open one of your film projects.',icon='FILE_FOLDER');lay.operator('wm.open_mainfile',text='Open film…');return
-        doc=scene.load_document(sc);lay.operator('wm.open_mainfile',text='Open another film…',icon='FILE_FOLDER');lay.label(text=doc['title'],icon='SEQUENCE');lay.label(text=f"Revision {doc['revision']} · {sum(s['duration'] for s in doc['shots'])/24:.0f} seconds")
+        doc=scene.load_document(sc);lay.operator('wm.open_mainfile',text='Open another film…',icon='FILE_FOLDER');lay.operator('pf.new_film',icon='DUPLICATE');lay.label(text=doc['title'],icon='SEQUENCE');lay.label(text=f"Revision {doc['revision']} · {sum(s['duration'] for s in doc['shots'])/24:.0f} seconds")
         box=lay.box();box.label(text='Shots');box.prop(sc,'pf_shot',text='');box.operator('pf.select_shot',icon='CAMERA_DATA');box.operator('pf.coverage',icon='ADD')
         row=box.row(align=True)
         for label,note in [('Closer','closer'),('Wider','wider')]:op=row.operator('pf.quick',text=label);op.note=note
@@ -180,7 +200,7 @@ class PF_PT_director(bpy.types.Panel):
         lay.operator('pf.undo',icon='LOOP_BACK');lay.separator();lay.operator('pf.preview',icon='RENDER_STILL');lay.operator('pf.save_version',icon='FILE_TICK');lay.operator('pf.movie',icon='RENDER_ANIMATION');lay.operator('pf.resume_movie',icon='FILE_REFRESH');lay.operator('pf.render_folder',icon='FILE_FOLDER')
         lay.label(text='Space: playback · N: hide this panel')
 
-CLASSES=[PF_OT_select,PF_OT_coverage,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_preview,PF_OT_movie,PF_OT_resume,PF_OT_render_folder,PF_PT_director]
+CLASSES=[PF_OT_select,PF_OT_coverage,PF_OT_quick,PF_OT_direct,PF_OT_apply,PF_OT_undo,PF_OT_save,PF_OT_new_film,PF_OT_preview,PF_OT_movie,PF_OT_resume,PF_OT_render_folder,PF_PT_director]
 def configure_workspace():
     sc=bpy.context.scene
     if not sc or 'pf_document' not in sc:return

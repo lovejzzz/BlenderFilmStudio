@@ -15,6 +15,14 @@ class Contracts(unittest.TestCase):
  def test_stale(self):
   p=core.quick_proposal(self.doc,'closer','S01');doc=core.apply_patch(self.doc,p)
   with self.assertRaises(core.StudioError):core.apply_patch(doc,p)
+ def test_new_film_is_independent(self):
+  before=core.digest(self.doc);fresh=core.fork_document(self.doc,'我的第一部短片','film_new')
+  self.assertEqual(core.protected_world(fresh),core.protected_world(self.doc));self.assertEqual(fresh['revision'],1)
+  self.assertNotEqual(core.digest(fresh),before);fresh['shots'][0]['distance']=3
+  self.assertEqual(core.digest(self.doc),before)
+  for title in ['', '   ', 'x'*61]:
+   with self.assertRaises(core.StudioError):core.fork_document(self.doc,title,'film_new')
+  with self.assertRaises(core.StudioError):core.fork_document(self.doc,'New film',self.doc['id'])
  def test_reject_bad_docs(self):
   attacks=[]
   for key,val in [('script','import os'),('path','../../bad')]:

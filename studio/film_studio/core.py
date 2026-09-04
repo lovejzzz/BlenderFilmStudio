@@ -154,6 +154,14 @@ def protected_world(doc):
     return digest({"assets":doc["assets"],"simulation_end":doc["simulation_end"],"fps":doc["fps"]})
 
 
+def fork_document(doc, title, new_id):
+    validate(doc);identifier(new_id)
+    if new_id==doc['id']:raise StudioError('A new film needs a fresh project identity')
+    if not isinstance(title,str) or not title.strip() or len(title.strip())>60:raise StudioError('Give the film a title of 1–60 characters')
+    fresh=copy.deepcopy(doc);fresh.update(id=new_id,title=title.strip(),revision=1)
+    return validate(fresh)
+
+
 def quick_proposal(doc, text, shot_id):
     """Small disclosed convenience grammar; general language uses the AI adapter."""
     s=next((s for s in doc["shots"] if s["id"]==shot_id),None)
