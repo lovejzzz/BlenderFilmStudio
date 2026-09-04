@@ -1,0 +1,13 @@
+# Personal studio delivery and review admission
+
+The owner requests a usable personal studio and two finished cinematic demos. Standing authority remains active. The two final workers admitted at `2c54543b` continue unchanged; this phase does not restart, rebake or modify their inputs, code or output roots.
+
+Development candidate0031 passes both actual registered-UI cross-project proposal checks with the project unchanged. It used zero model calls and zero renders. There are31 numbered development starts plus the disclosed accidental older-F0 GUI start, consuming the original32-start development ceiling. No further start is admitted under that old counter.
+
+This bounded delivery continuation admits at most two additional native GUI starts, using the same exact RC5 binary, solely to verify the delivered launch paths and editable copies. Opening both delivered projects, shot selection, one bounded camera revision and a unique version save are in scope. No new render, bake, build or paid call is admitted. A GUI session is closed after inspection; it must not interfere with the two background final workers. Maximum GUI wall time is20minutes per session.
+
+Prepare `output/personal-film-studio/` with exact copies of the two final input blends, their typed documents, local launch commands and a bilingual practical guide. Final movies may be copied there only after their formal receipts and independent technical/visual reviews are available. The source blends, formal movie masters and failed evidence remain unchanged. Delivery copies have recorded hashes. This is a local source-and-project delivery using an existing runtime, not a public binary release.
+
+After a film finishes, run `studio/review/audit_delivery.py` against that completed film into a fresh sibling review root named `PF-FINAL-review-2026-09-04-attempt-01/<film>`. Check all frame receipts, movie dimensions/count/duration, chronological source time, audio streams and loudness. Directly inspect contact sheets covering every final frame, selected full-resolution shots, cut boundaries and encoded titles/fades; play each movie in the native player. Numerical audio inspection must not be described as subjective listening. Any visual rejection remains recorded and requires a fresh versioned correction rather than overwriting the master.
+
+The additional review/delivery storage ceiling is2GiB total, with100GiB minimum free reserve. It admits zero external uploads, no binary copying/distribution and no retained-root writes. The renderer's existing8GiB/7200-second ceilings remain unchanged. Commit the admission before creating delivery/review roots or launching the GUI continuation.
