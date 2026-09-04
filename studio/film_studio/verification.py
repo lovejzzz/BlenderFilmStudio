@@ -11,11 +11,17 @@ def world_state(sc):
     geometry={o.name:core.digest([[round(v.co.x,8),round(v.co.y,8),round(v.co.z,8)] for v in o.data.vertices]) for o in sc.objects if o.type=='MESH'}
     return {'poses':poses,'geometry':geometry}
 
+def difference(before,after):
+    return [{'frame':f,'object':name,'index':i,'before':v,'after':after['poses'][f][name][i],'delta':after['poses'][f][name][i]-v} for f,objects in before['poses'].items() for name,mat in objects.items() for i,v in enumerate(mat) if v!=after['poses'][f][name][i]]
+
+
 def exercise(sc,out):
     before=world_state(sc);original=copy.deepcopy(scene.load_document(sc));results=[]
     for note in ['closer','warmer','later cut']:
         d=scene.load_document(sc);p=core.quick_proposal(d,note,'S04' if note=='later cut' else 'S02');scene.revise(sc,p)
-        if world_state(sc)!=before:raise AssertionError('Actual mesh state changed after '+note)
+        after=world_state(sc)
+        (Path(out)/('revision-'+note.replace(' ','-')+'.json')).write_text(json.dumps({'geometryEqual':after['geometry']==before['geometry'],'differences':difference(before,after),'pointCacheBaked':bool(sc.rigidbody_world and sc.rigidbody_world.point_cache.is_baked)},indent=2))
+        if after!=before:raise AssertionError('Actual mesh state changed after '+note)
         results.append({'note':note,'worldPreserved':True})
     try:scene.revise(sc,p)
     except core.StudioError:results.append({'staleRejected':True})
