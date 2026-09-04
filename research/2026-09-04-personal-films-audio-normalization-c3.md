@@ -1,0 +1,5 @@
+# Audio C3 preserves score dynamics with measured constant gain
+
+Retain C2: the measured loudnorm second pass still selected dynamic processing because input LRA18.80 exceeds its requested7, and the encoded result overshot to-17.0LUFS/-1.9dBTP. C2 is a technical audio FAIL; its video packet hash remains exact. Do not alter either retained correction.
+
+Select one deterministic amplitude operation on the original WAV: gain dB = min(-20 - measured input integrated LUFS, -2 - measured input true peak). For Little Gravity this is min(12.19,12.66)=12.19dB. This preserves the score's timing and dynamic range while targeting-20LUFS with a-2dBTP ceiling; no compressor or dynamic loudnorm second pass. The unchanged independent encoded thresholds remain-22..-18LUFS and peak<=-1dBFS. C3 uses fresh PF-AUDIO-C3-2026-09-04-attempt-01 roots, same video packet-copy proof, limits, source hashes and zero-Blender authority. The first-pass analysis remains useful and its complete JSON is retained. Apply the same reusable measured-gain method to future product exports.
