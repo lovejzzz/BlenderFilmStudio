@@ -26,7 +26,8 @@ def kinetic_run(root,p,m,end):
     ramp=bpy.data.objects.new('KINETIC_RAMP',mesh);bpy.context.scene.collection.objects.link(ramp);tag(ramp,root,m['brass']);rigid(ramp,False,'CONVEX_HULL')
     for y in [-.184,.184]:
         rail=box('Ramp edge',(-.9,y,.188),(1.14,.015,.016),m['brass'],root,.003);rail.rotation_euler[1]=math.atan(.305/1.1)
-    ball=sphere('KINETIC_BALL',(-1.27,0,.357),.075,m['chrome'],root);rigid(ball,True,'SPHERE',.45);ball['pf_solver_role']='initiator'
+    radius=p.get('size',.16)
+    ball=sphere('KINETIC_BALL',(-1.27,0,.282+radius),radius,m['chrome'],root);rigid(ball,True,'SPHERE',.45);ball['pf_solver_role']='initiator'
     ball.rigid_body.kinematic=True;ball.keyframe_insert('rigid_body.kinematic',frame=1);ball.keyframe_insert('rigid_body.kinematic',frame=release-1)
     ball.rigid_body.kinematic=False;ball.keyframe_insert('rigid_body.kinematic',frame=release)
     for i in range(count):
@@ -56,7 +57,8 @@ def bake_and_measure(scene,end):
             angle=math.degrees(initial[o.name][1].rotation_difference(now[o.name][1]).angle)
             if angle>1 and o.name not in responses:responses[o.name]=f
         first=targets[0];fp=now[first.name][0];bp=now[ball.name][0]
-        if contact is None and bp.x+.076 >= fp.x-.029 and abs(bp.y-fp.y)<.18 and bp.z-.075<fp.z+.146:
+        radius=ball.dimensions.x/2
+        if contact is None and bp.x+radius+.001 >= fp.x-.029 and abs(bp.y-fp.y)<.18 and bp.z-radius<fp.z+.146:
             contact=f
         speed=0;travel=0
         if previous:
